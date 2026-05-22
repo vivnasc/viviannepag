@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Vivianne dos Santos",
+    "description": "Vivo entre o silêncio e o movimento. Os caminhos: Infonte, SyncHim, Escola dos Véus, Sete Véus, Sete Ecos e Loranne.",
+    "ogTitle": "Vivianne dos Santos",
+    "ogDescription": "Escritora, criadora, em formação em psicologia transpessoal, psicologia e espiritualidade, e constelação familiar sistémica. Vivo entre o silêncio e o movimento, e ajudo-te a voltar a ti."
+  },
+  "lang": {
+    "ariaLabel": "idioma"
+  },
+  "hero": {
+    "nome": "Vivianne dos Santos",
+    "sub": "escritora e terapeuta sistémica em formação",
+    "tese": "Vivo entre o silêncio e o movimento. O meu trabalho parte de uma só ideia: por baixo do que te aperta, no amor ou na vida, há sempre um nó que vem de trás.",
+    "teseDestaque": "Eu ajudo-te a vê-lo, e a voltar a ti."
+  },
+  "respira": "Não vens encontrar respostas. Vens reencontrar a tua.",
+  "mundos": {
+    "eyebrow": "os caminhos",
+    "lead": "Escolhe por onde precisas de entrar",
+    "infonte": {
+      "badge": "clareza, foco, acção",
+      "titulo": "Infonte",
+      "texto": "Para a mulher que tem potencial a mais e clareza a menos. Um percurso para limpar a mente, bastar-se, e tornar sonhos em acções."
+    },
+    "synchim": {
+      "badge": "o amor que dessincronizou",
+      "titulo": "SyncHim",
+      "texto": "Os casais não morrem por falta de amor, morrem por dessincronia. Um diagnóstico para veres o nó que te tira o amor."
+    },
+    "escola": {
+      "badge": "a escola",
+      "titulo": "Escola dos Véus",
+      "texto": "Os cursos de transformação, onde se atravessa cada véu que nos separa de quem somos."
+    },
+    "livro": {
+      "badge": "o livro",
+      "titulo": "Sete Véus",
+      "texto": "Os 7 Véus do Despertar. O livro, e o caminho que ele abre."
+    },
+    "ecos": {
+      "badge": "o universo",
+      "titulo": "Sete Ecos",
+      "texto": "A app do universo. Prática, leitura, e a comunidade que se forma à volta dele."
+    },
+    "loranne": {
+      "badge": "música, presença",
+      "titulo": "Loranne",
+      "texto": "Música para o silêncio interior. Meditação, presença, e o som de voltar a casa."
+    }
+  },
+  "sobre": {
+    "eyebrow": "quem sou",
+    "p1": "Sou autora de Os 7 Véus do Despertar e criadora do universo Sete Ecos. Estudo os sistemas que nos formam, aquilo que herdamos sem escolher e que molda o que nos deixamos ter, no amor, no trabalho, na vida.",
+    "p2": "Estou em formação em três pós-graduações que se cruzam: psicologia transpessoal, psicologia e espiritualidade, e terapia da constelação familiar sistémica. Não são três caminhos. É uma só pergunta vista de três lugares: o que nos forma, o que nos liga, o que nos liberta.",
+    "p3": "Não venho ensinar o que tenho. Venho mostrar o caminho até te bastares. Porque o que se basta, atrai.",
+    "assina": "Vivianne"
+  },
+  "newsletter": {
+    "eyebrow": "fica perto",
+    "lead": "Se aqui te tocou alguma coisa, deixa um email. Mando uma carta de vez em quando, quando há algo verdadeiro para dizer.",
+    "placeholder": "o teu email",
+    "botao": "deixar",
+    "ok": "Obrigada. Quando houver, escrevo.",
+    "jaEstas": "Já estás comigo. Obrigada.",
+    "erro": "Algo correu mal. Tenta de novo?"
+  },
+  "footer": {
+    "copyright": "Vivianne dos Santos",
+    "ligacao": "Sete Ecos"
+  }
+}
