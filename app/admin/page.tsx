@@ -123,6 +123,13 @@ export default function AdminPage() {
           <h1 className="font-serif font-light text-creme text-3xl">escritos</h1>
         </div>
         <div className="flex gap-3 items-center">
+          <Link
+            href="/admin/imagens"
+            className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase no-underline"
+            title="Galeria com drop-em-slot por escrito"
+          >
+            galeria
+          </Link>
           <button
             onClick={migrar}
             disabled={migrando}
