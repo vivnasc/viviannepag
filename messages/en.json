@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Vivianne dos Santos",
+    "description": "I live between silence and motion. The paths: Infonte, SyncHim, Escola dos Véus, Sete Véus, Sete Ecos, and Loranne.",
+    "ogTitle": "Vivianne dos Santos",
+    "ogDescription": "Writer, creator, in training in transpersonal psychology, psychology and spirituality, and systemic family constellation therapy. I live between silence and motion, and I help you come back to yourself."
+  },
+  "lang": {
+    "ariaLabel": "language"
+  },
+  "hero": {
+    "nome": "Vivianne dos Santos",
+    "sub": "writer and systemic therapist in training",
+    "tese": "I live between silence and motion. My work begins from a single idea: beneath whatever tightens in you, in love or in life, there is always a knot that comes from before.",
+    "teseDestaque": "I help you see it, and come back to yourself."
+  },
+  "respira": "You don't come here to find answers. You come to rediscover your own.",
+  "mundos": {
+    "eyebrow": "the paths",
+    "lead": "Choose where you need to enter",
+    "infonte": {
+      "badge": "clarity, focus, action",
+      "titulo": "Infonte",
+      "texto": "For the woman with too much potential and too little clarity. A path to clear the mind, to be enough on her own, and to turn dreams into action."
+    },
+    "synchim": {
+      "badge": "the love that fell out of sync",
+      "titulo": "SyncHim",
+      "texto": "Couples don't die from lack of love. They die from being out of sync. A diagnosis to see the knot that's pulling love away from you."
+    },
+    "escola": {
+      "badge": "the school",
+      "titulo": "Escola dos Véus",
+      "texto": "The courses of transformation, where you cross each veil that separates you from who you are."
+    },
+    "livro": {
+      "badge": "the book",
+      "titulo": "Sete Véus",
+      "texto": "The 7 Veils of Awakening. The book, and the path it opens."
+    },
+    "ecos": {
+      "badge": "the universe",
+      "titulo": "Sete Ecos",
+      "texto": "The app of the universe. Practice, reading, and the community that forms around it."
+    },
+    "loranne": {
+      "badge": "music, presence",
+      "titulo": "Loranne",
+      "texto": "Music for inner silence. Meditation, presence, and the sound of coming home."
+    }
+  },
+  "sobre": {
+    "eyebrow": "who i am",
+    "p1": "I'm the author of The 7 Veils of Awakening and creator of the Sete Ecos universe. I study the systems that shape us, what we inherit without choosing, and what it allows us to have, in love, in work, in life.",
+    "p2": "I'm in training in three postgraduate paths that intersect: transpersonal psychology, psychology and spirituality, and systemic family constellation therapy. They are not three paths. They are one question seen from three places: what shapes us, what binds us, what frees us.",
+    "p3": "I don't come to teach what I have. I come to show the path until you are enough on your own. Because what is enough, attracts.",
+    "assina": "Vivianne"
+  },
+  "newsletter": {
+    "eyebrow": "stay close",
+    "lead": "If something here touched you, leave an email. I send a letter now and then, when there is something true to say.",
+    "placeholder": "your email",
+    "botao": "leave",
+    "ok": "Thank you. When there is, I'll write.",
+    "jaEstas": "You're already with me. Thank you.",
+    "erro": "Something went wrong. Try again?"
+  },
+  "footer": {
+    "copyright": "Vivianne dos Santos",
+    "ligacao": "Sete Ecos"
+  }
+}
