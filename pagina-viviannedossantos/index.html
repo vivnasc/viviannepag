@@ -44,10 +44,10 @@
   /* HERO */
   header{padding:80px 0 60px;text-align:center}
   .retrato{
-    width:170px;height:170px;border-radius:50%;margin:0 auto 32px;
-    object-fit:cover;object-position:50% 18%;display:block;
-    border:2px solid var(--ocre);
-    box-shadow:0 0 0 9px rgba(184,132,61,0.12);
+    width:220px;aspect-ratio:644/1280;border-radius:28px;margin:0 auto 32px;
+    object-fit:cover;display:block;
+    border:1px solid var(--ocre);
+    box-shadow:0 0 0 6px rgba(184,132,61,0.10),0 20px 60px -20px rgba(0,0,0,0.6);
   }
   .sobre-foto{object-position:50% 22%}
   .gota-assina{width:44px;height:44px;margin:20px auto 0;display:block;opacity:0.9}
@@ -86,34 +86,36 @@
   .mundos{display:flex;flex-direction:column;gap:20px}
   .mundo{
     display:block;text-decoration:none;color:inherit;
-    border:1px solid rgba(184,132,61,0.28);
+    border:1px solid rgba(184,132,61,0.45);
     border-radius:18px;padding:30px 30px;
-    background:linear-gradient(160deg,rgba(58,40,24,0.6),rgba(42,28,18,0.3));
+    background:linear-gradient(160deg,rgba(58,40,24,0.85),rgba(42,28,18,0.55));
     transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
     position:relative;overflow:hidden;
   }
-  .mundo:hover{transform:translateY(-4px);border-color:var(--ocre);
-    background:linear-gradient(160deg,rgba(58,40,24,0.9),rgba(42,28,18,0.5))}
+  .mundo:hover{transform:translateY(-4px);border-color:var(--ambar);
+    background:linear-gradient(160deg,rgba(72,52,32,0.95),rgba(50,34,22,0.7))}
   .mundo .badge{
-    font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;
-    color:var(--ocre);margin-bottom:12px;display:block;
+    font-size:0.74rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:500;
+    color:var(--ambar);margin-bottom:12px;display:block;
   }
   .mundo h3{
     font-family:var(--serif);font-weight:400;font-size:1.7rem;
     color:var(--creme);margin-bottom:8px;letter-spacing:-0.01em;
   }
-  .mundo p{color:var(--creme-2);font-size:0.98rem;max-width:90%}
+  .mundo p{color:var(--creme);opacity:0.85;font-size:0.98rem;max-width:90%}
   .mundo .seta{
     position:absolute;right:28px;top:50%;transform:translateY(-50%);
     color:var(--ocre);font-size:1.4rem;transition:transform .4s;opacity:0.7;
   }
   .mundo:hover .seta{transform:translateY(-50%) translateX(6px);opacity:1}
-  .mundo.synchim{border-color:rgba(139,34,53,0.35)}
-  .mundo.synchim .badge,.mundo.synchim .seta{color:var(--bordeaux)}
-  .mundo.synchim:hover{border-color:var(--bordeaux)}
-  .mundo.veus{border-color:rgba(90,74,106,0.4)}
-  .mundo.veus .badge,.mundo.veus .seta{color:var(--violeta)}
-  .mundo.veus:hover{border-color:var(--violeta)}
+  .mundo.synchim{border-color:rgba(217,90,110,0.5)}
+  .mundo.synchim .badge{color:#E08496}
+  .mundo.synchim .seta{color:#E08496}
+  .mundo.synchim:hover{border-color:#E08496}
+  .mundo.veus{border-color:rgba(167,139,250,0.5)}
+  .mundo.veus .badge{color:#C9B6FA}
+  .mundo.veus .seta{color:#C9B6FA}
+  .mundo.veus:hover{border-color:#C9B6FA}
 
   /* SOBRE */
   .sobre{max-width:680px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center;text-align:left}
@@ -134,22 +136,43 @@
   .social a{color:var(--creme-2);text-decoration:none;font-size:0.9rem;letter-spacing:0.04em;transition:color .3s;display:inline-flex;align-items:center;gap:7px}
   .social a:hover{color:var(--ambar)}
   .social a svg{width:16px;height:16px;flex-shrink:0}
-  .social a img{width:18px;height:18px;flex-shrink:0;border-radius:4px}
 
   /* reveal, só ativa com JS (.js no body); sem JS tudo fica visível */
   .js .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
   .js .rv.in{opacity:1;transform:none}
+
+  /* LANG TOGGLE */
+  .lang{
+    position:fixed;top:18px;right:20px;z-index:10;
+    display:flex;font-size:0.72rem;letter-spacing:0.18em;
+    font-family:var(--sans);font-weight:400;
+  }
+  .lang button{
+    background:transparent;border:1px solid rgba(184,132,61,0.35);
+    color:var(--creme-2);padding:6px 11px;cursor:pointer;
+    font-family:inherit;font-size:inherit;letter-spacing:inherit;
+    text-transform:uppercase;transition:all .25s;
+  }
+  .lang button:first-child{border-radius:14px 0 0 14px;border-right:0}
+  .lang button:last-child{border-radius:0 14px 14px 0}
+  .lang button.on{background:var(--ocre);color:var(--terra);border-color:var(--ocre)}
+  .lang button:hover:not(.on){color:var(--creme);border-color:var(--ocre)}
 </style>
 </head>
 <body>
 <div class="grain"></div>
+
+<nav class="lang" aria-label="language">
+  <button type="button" data-lang="pt">PT</button>
+  <button type="button" data-lang="en">EN</button>
+</nav>
 
 <div class="wrap">
 
   <header>
     <img class="retrato" src="vivianne-1.jpg" alt="Vivianne dos Santos">
     <h1>Vivianne dos Santos</h1>
-    <p class="sub">escritora, criadora, terapeuta sistémica em formação</p>
+    <p class="sub" data-pt="escritora, criadora, terapeuta sistémica em formação" data-en="writer, creator, systemic therapist in training">escritora, criadora, terapeuta sistémica em formação</p>
     <svg class="gota-assina" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g fill="none" stroke="#EBAE4A" stroke-width="9" stroke-linecap="round">
         <path d="M150 120 C150 270 188 345 244 378"/>
@@ -160,7 +183,7 @@
       <circle cx="256" cy="246" r="18" fill="#F4C56A"/>
       <path d="M168 392 C200 366 224 414 256 392 C288 370 312 414 344 392" fill="none" stroke="#F4C56A" stroke-width="12" stroke-linecap="round"/>
     </svg>
-    <p class="tese rv">
+    <p class="tese rv" data-pt="Vivo entre o silêncio e o movimento. O meu trabalho parte de uma só ideia: por baixo do que te aperta, no amor ou na vida, há sempre um nó que vem de trás. <strong>Eu ajudo-te a vê-lo, e a voltar a ti.</strong>" data-en="I live between silence and motion. My work begins from a single idea: beneath whatever tightens in you — in love, in life — there is always a knot that comes from before. <strong>I help you see it, and come back to yourself.</strong>">
       Vivo entre o silêncio e o movimento. O meu trabalho parte de uma só ideia:
       por baixo do que te aperta, no amor ou na vida, há sempre um nó que vem de trás.
       <strong>Eu ajudo-te a vê-lo, e a voltar a ti.</strong>
@@ -169,50 +192,50 @@
 
   <div class="veu"></div>
 
-  <p class="eyebrow rv">os caminhos</p>
-  <h2 class="lead rv">Escolhe por onde precisas de entrar</h2>
+  <p class="eyebrow rv" data-pt="os caminhos" data-en="the paths">os caminhos</p>
+  <h2 class="lead rv" data-pt="Escolhe por onde precisas de entrar" data-en="Choose where you need to enter">Escolhe por onde precisas de entrar</h2>
 
   <div class="mundos">
 
     <a class="mundo rv" href="https://infonte.viviannedossantos.com">
-      <span class="badge">clareza, foco, acção</span>
+      <span class="badge" data-pt="clareza, foco, acção" data-en="clarity, focus, action">clareza, foco, acção</span>
       <h3>Infonte</h3>
-      <p>Para a mulher que tem potencial a mais e clareza a menos. Um percurso para limpar a mente, bastar-se, e tornar sonhos em acções.</p>
+      <p data-pt="Para a mulher que tem potencial a mais e clareza a menos. Um percurso para limpar a mente, bastar-se, e tornar sonhos em acções." data-en="For the woman with too much potential and too little clarity. A path to clear the mind, to be enough on her own, and to turn dreams into action.">Para a mulher que tem potencial a mais e clareza a menos. Um percurso para limpar a mente, bastar-se, e tornar sonhos em acções.</p>
       <span class="seta">&rarr;</span>
     </a>
 
     <a class="mundo synchim rv" href="https://synchim.viviannedossantos.com">
-      <span class="badge">o amor que dessincronizou</span>
+      <span class="badge" data-pt="o amor que dessincronizou" data-en="the love that fell out of sync">o amor que dessincronizou</span>
       <h3>SyncHim</h3>
-      <p>Os casais não morrem por falta de amor, morrem por dessincronia. Um diagnóstico para veres o nó que te tira o amor.</p>
+      <p data-pt="Os casais não morrem por falta de amor, morrem por dessincronia. Um diagnóstico para veres o nó que te tira o amor." data-en="Couples don't die from lack of love. They die from being out of sync. A diagnosis to see the knot that's pulling love away from you.">Os casais não morrem por falta de amor, morrem por dessincronia. Um diagnóstico para veres o nó que te tira o amor.</p>
       <span class="seta">&rarr;</span>
     </a>
 
-    <a class="mundo veus rv" href="https://escoladosveus.com">
-      <span class="badge">a escola</span>
+    <a class="mundo veus rv" href="https://escoladosveus.space">
+      <span class="badge" data-pt="a escola" data-en="the school">a escola</span>
       <h3>Escola dos Véus</h3>
-      <p>Os cursos de transformação, onde se atravessa cada véu que nos separa de quem somos.</p>
+      <p data-pt="Os cursos de transformação, onde se atravessa cada véu que nos separa de quem somos." data-en="The courses of transformation, where you cross each veil that separates you from who you are.">Os cursos de transformação, onde se atravessa cada véu que nos separa de quem somos.</p>
       <span class="seta">&rarr;</span>
     </a>
 
     <a class="mundo rv" href="https://seteveus.space">
-      <span class="badge">o livro</span>
+      <span class="badge" data-pt="o livro" data-en="the book">o livro</span>
       <h3>Sete Véus</h3>
-      <p>Os 7 Véus do Despertar &mdash; o livro, e o caminho que ele abre.</p>
+      <p data-pt="Os 7 Véus do Despertar &mdash; o livro, e o caminho que ele abre." data-en="The 7 Veils of Awakening &mdash; the book, and the path it opens.">Os 7 Véus do Despertar &mdash; o livro, e o caminho que ele abre.</p>
       <span class="seta">&rarr;</span>
     </a>
 
     <a class="mundo rv" href="https://app.seteecos.com">
-      <span class="badge">o universo</span>
+      <span class="badge" data-pt="o universo" data-en="the universe">o universo</span>
       <h3>Sete Ecos</h3>
-      <p>A app do universo. Prática, leitura, e a comunidade que se forma à volta dele.</p>
+      <p data-pt="A app do universo. Prática, leitura, e a comunidade que se forma à volta dele." data-en="The app of the universe. Practice, reading, and the community that forms around it.">A app do universo. Prática, leitura, e a comunidade que se forma à volta dele.</p>
       <span class="seta">&rarr;</span>
     </a>
 
     <a class="mundo rv" href="https://music.seteveus.space">
-      <span class="badge">música, presença</span>
+      <span class="badge" data-pt="música, presença" data-en="music, presence">música, presença</span>
       <h3>Loranne</h3>
-      <p>Música para o silêncio interior. Meditação, presença, e o som de voltar a casa.</p>
+      <p data-pt="Música para o silêncio interior. Meditação, presença, e o som de voltar a casa." data-en="Music for inner silence. Meditation, presence, and the sound of coming home.">Música para o silêncio interior. Meditação, presença, e o som de voltar a casa.</p>
       <span class="seta">&rarr;</span>
     </a>
 
@@ -223,13 +246,13 @@
   <div class="sobre rv">
     <img class="sobre-foto" src="vivianne-2.jpg" alt="Vivianne dos Santos">
     <div class="sobre-txt">
-      <p class="eyebrow">quem sou</p>
-      <p>
+      <p class="eyebrow" data-pt="quem sou" data-en="who i am">quem sou</p>
+      <p data-pt="Sou autora de Os 7 Véus do Despertar e criadora do universo Sete Ecos. Estudo os sistemas que nos formam, aquilo que herdamos sem escolher e que molda o que nos deixamos ter, no amor, no trabalho, na vida." data-en="I'm the author of The 7 Veils of Awakening and creator of the Sete Ecos universe. I study the systems that shape us — what we inherit without choosing, and what it allows us to have, in love, in work, in life.">
         Sou autora de Os 7 Véus do Despertar e criadora do universo Sete Ecos.
         Estudo os sistemas que nos formam, aquilo que herdamos sem escolher e que molda
         o que nos deixamos ter, no amor, no trabalho, na vida.
       </p>
-      <p>
+      <p data-pt="Não venho ensinar o que tenho. Venho mostrar o caminho até te bastares. Porque o que se basta, atrai." data-en="I don't come to teach what I have. I come to show the path until you are enough on your own. Because what is enough, attracts.">
         Não venho ensinar o que tenho. Venho mostrar o caminho até te bastares.
         Porque o que se basta, atrai.
       </p>
@@ -254,11 +277,11 @@
         @synchim.app
       </a>
       <a href="https://instagram.com/escola_dos_veus">
-        <img src="escola-veus-icon.png" alt="">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><g transform="translate(256,256)" fill="none" stroke="#C9B6FA" stroke-width="22" stroke-linecap="round"><ellipse cx="0" cy="-108" rx="34" ry="86"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(51.4)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(102.8)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(154.3)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(205.7)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(257.1)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(308.6)"/></g><circle cx="256" cy="256" r="20" fill="#C9B6FA"/></svg>
         @escola_dos_veus
       </a>
       <a href="https://instagram.com/loranne_music">
-        <img src="loranne-icon.png" alt="">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><g transform="translate(256,256)" fill="none" stroke="#EBAE4A" stroke-width="22" stroke-linecap="round"><path d="M0 -30 C 60 -90 130 -100 160 -50"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(51.4)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(102.8)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(154.3)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(205.7)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(257.1)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(308.6)"/></g><circle cx="256" cy="256" r="14" fill="#F4C56A"/></svg>
         @loranne_music
       </a>
     </div>
@@ -270,6 +293,28 @@
 <script>
   document.body.classList.add('js');
   document.getElementById('ano').textContent=new Date().getFullYear();
+
+  // Language toggle (PT/EN)
+  const LANG_KEY='vds.lang';
+  function setLang(l){
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-pt],[data-en]').forEach(el=>{
+      const v=el.getAttribute('data-'+l);
+      if(v!==null) el.innerHTML=v;
+    });
+    document.querySelectorAll('.lang button').forEach(b=>{
+      b.classList.toggle('on',b.dataset.lang===l);
+      b.setAttribute('aria-pressed',b.dataset.lang===l);
+    });
+    try{localStorage.setItem(LANG_KEY,l)}catch(e){}
+  }
+  let stored=null;try{stored=localStorage.getItem(LANG_KEY)}catch(e){}
+  const initial=stored||((navigator.language||'').toLowerCase().startsWith('pt')?'pt':'en');
+  setLang(initial);
+  document.querySelectorAll('.lang button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.12});
   document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});
   setTimeout(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>el.classList.add('in')),2500);
