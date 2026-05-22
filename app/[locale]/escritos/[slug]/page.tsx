@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
+import { TopNav } from '@/components/TopNav';
 import {
   getEscrito,
   listAllSlugs,
@@ -62,6 +63,7 @@ export default async function EscritoPage({
 
   return (
     <>
+      <TopNav />
       <LangToggle />
       <main className="relative z-[2] max-w-[680px] mx-auto px-7 pt-20 pb-24">
         <nav className="mb-12">

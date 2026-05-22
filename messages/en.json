@@ -8,6 +8,11 @@
   "lang": {
     "ariaLabel": "language"
   },
+  "nav": {
+    "ariaLabel": "navigation",
+    "inicio": "home",
+    "escritos": "writings"
+  },
   "hero": {
     "nome": "Vivianne dos Santos",
     "sub": "writer and systemic therapist in training",

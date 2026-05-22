@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
+import { TopNav } from '@/components/TopNav';
 import { listEscritos, formatarData, type Locale } from '@/lib/escritos';
 import { GotaMini } from '@/components/icons/GotaAssina';
 import type { Metadata } from 'next';
@@ -39,6 +40,7 @@ export default async function EscritosPage({
 
   return (
     <>
+      <TopNav />
       <LangToggle />
       <main className="relative z-[2] max-w-wrap mx-auto px-7 pt-24 pb-20">
         <header className="text-center mb-16">

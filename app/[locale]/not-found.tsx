@@ -1,10 +1,15 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { GotaMini } from '@/components/icons/GotaAssina';
+import { TopNav } from '@/components/TopNav';
+import { LangToggle } from '@/components/LangToggle';
 
 export default function NotFound() {
   const t = useTranslations('notFound');
   return (
+    <>
+    <TopNav />
+    <LangToggle />
     <main className="relative z-[2] max-w-wrap mx-auto px-7 min-h-[80vh] flex flex-col items-center justify-center text-center">
       <p className="text-[0.78rem] tracking-[0.32em] uppercase text-ocre mb-5">
         {t('eyebrow')}
@@ -23,5 +28,6 @@ export default function NotFound() {
         {t('voltar')}
       </Link>
     </main>
+    </>
   );
 }

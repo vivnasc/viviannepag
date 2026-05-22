@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
+import { TopNav } from '@/components/TopNav';
 import { Hero } from '@/components/home/Hero';
 import { Respira } from '@/components/home/Respira';
 import { Mundos } from '@/components/home/Mundos';
@@ -19,6 +20,7 @@ export default async function HomePage({
 
   return (
     <>
+      <TopNav />
       <LangToggle />
       <div className="relative z-[2] max-w-wrap mx-auto px-7">
         <Hero />
