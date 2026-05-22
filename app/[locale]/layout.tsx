@@ -43,6 +43,14 @@ export async function generateMetadata({
     metadataBase: new URL(url),
     title: t('title'),
     description: t('description'),
+    alternates: {
+      canonical: locale === 'en' ? `${url}/en` : `${url}/`,
+      languages: {
+        pt: `${url}/`,
+        en: `${url}/en`,
+        'x-default': `${url}/`,
+      },
+    },
     openGraph: {
       type: 'website',
       siteName: 'Vivianne dos Santos',

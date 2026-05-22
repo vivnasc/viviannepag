@@ -4,8 +4,10 @@ import { Hero } from '@/components/home/Hero';
 import { Respira } from '@/components/home/Respira';
 import { Mundos } from '@/components/home/Mundos';
 import { Sobre } from '@/components/home/Sobre';
+import { EscritosRecentes } from '@/components/home/EscritosRecentes';
 import { Newsletter } from '@/components/home/Newsletter';
 import { Footer } from '@/components/home/Footer';
+import type { Locale } from '@/lib/escritos';
 
 export default async function HomePage({
   params,
@@ -24,6 +26,8 @@ export default async function HomePage({
         <Mundos />
         <div className="veu my-16" />
         <Sobre />
+        <div className="veu my-16" />
+        <EscritosRecentes locale={locale as Locale} />
         <div className="veu my-16" />
         <Newsletter />
         <div className="veu my-16" />
