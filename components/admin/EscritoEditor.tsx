@@ -26,6 +26,7 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
   const [mensagem, setMensagem] = useState<string | null>(null);
   const [dragAtivo, setDragAtivo] = useState(false);
   const [aGerar, setAGerar] = useState<null | 'esboco' | 'titulo' | 'resumo' | 'continuar'>(null);
+  const [aGerarCapa, setAGerarCapa] = useState(false);
   const [promptIA, setPromptIA] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -78,6 +79,28 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
     setDragAtivo(false);
     const file = e.dataTransfer.files?.[0];
     if (file) upload(file);
+  }
+
+  async function gerarCapa() {
+    if (!escrito.slug) {
+      setMensagem('Preciso de um slug para saber qual prompt usar.');
+      return;
+    }
+    setAGerarCapa(true);
+    setMensagem('A gerar capa (15–40 segundos)…');
+    const res = await fetch('/api/admin/gerar-capa', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id: escrito.id, slug: escrito.slug }),
+    });
+    const json = await res.json();
+    setAGerarCapa(false);
+    if (res.ok) {
+      set('capa', json.url);
+      setMensagem('Capa gerada.');
+    } else {
+      setMensagem(`Erro: ${json.erro}${json.detalhe ? ' · ' + json.detalhe.slice(0, 200) : ''}`);
+    }
   }
 
   async function gerar(modo: 'esboco' | 'titulo' | 'resumo' | 'continuar') {
@@ -171,6 +194,17 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
         </Field>
 
         <Field label="capa">
+          <div className="flex gap-2 mb-2 flex-wrap">
+            <button
+              type="button"
+              onClick={gerarCapa}
+              disabled={aGerarCapa || !escrito.slug}
+              className={btnSec}
+              title="Gera com OpenAI gpt-image-1 usando o prompt mapeado pelo slug em lib/prompts-capa.ts"
+            >
+              {aGerarCapa ? 'a gerar…' : '✶ gerar capa (OpenAI)'}
+            </button>
+          </div>
           <div
             onDragOver={(e) => { e.preventDefault(); setDragAtivo(true); }}
             onDragLeave={() => setDragAtivo(false)}
