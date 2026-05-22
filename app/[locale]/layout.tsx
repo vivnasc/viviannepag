@@ -43,6 +43,14 @@ export async function generateMetadata({
     metadataBase: new URL(url),
     title: t('title'),
     description: t('description'),
+    alternates: {
+      canonical: locale === 'en' ? `${url}/en` : `${url}/`,
+      languages: {
+        pt: `${url}/`,
+        en: `${url}/en`,
+        'x-default': `${url}/`,
+      },
+    },
     openGraph: {
       type: 'website',
       siteName: 'Vivianne dos Santos',
@@ -88,6 +96,35 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as 'pt' | 'en')) notFound();
   setRequestLocale(locale);
   const messages = await getMessages();
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com';
+
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Vivianne dos Santos',
+      url,
+      image: `${url}/vivianne-2.jpg`,
+      jobTitle:
+        locale === 'pt'
+          ? 'Escritora e terapeuta sistémica em formação'
+          : 'Writer and systemic therapist in training',
+      sameAs: [
+        'https://instagram.com/vivianne.dos.santos',
+        'https://instagram.com/infonte.app',
+        'https://instagram.com/synchim.app',
+        'https://instagram.com/escola_dos_veus',
+        'https://instagram.com/loranne_music',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Vivianne dos Santos',
+      url,
+      inLanguage: locale === 'pt' ? 'pt-PT' : 'en',
+    },
+  ];
 
   return (
     <html lang={locale} className={`${fraunces.variable} ${outfit.variable}`}>
@@ -96,6 +133,10 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.12});document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){el.classList.add('in')})},2500);})();`,

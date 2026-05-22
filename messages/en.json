@@ -63,7 +63,24 @@
     "botao": "leave",
     "ok": "Thank you. When there is, I'll write.",
     "jaEstas": "You're already with me. Thank you.",
-    "erro": "Something went wrong. Try again?"
+    "erro": "Something went wrong. Try again?",
+    "emBreve": "coming soon"
+  },
+  "escritos": {
+    "eyebrow": "writings",
+    "lead": "Short pieces to read slowly.",
+    "verTodos": "see all writings",
+    "voltar": "back to writings",
+    "todosTitulo": "Writings",
+    "todosSub": "Texts I leave here, when there is something to say.",
+    "vazio": "No writings published yet.",
+    "noticeEn": "Available in Portuguese."
+  },
+  "notFound": {
+    "eyebrow": "this page doesn't exist",
+    "titulo": "You stepped off the path",
+    "lead": "The address you wrote leads nowhere — at least, nowhere here.",
+    "voltar": "back to the beginning"
   },
   "footer": {
     "copyright": "Vivianne dos Santos",

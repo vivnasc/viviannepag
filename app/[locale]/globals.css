@@ -22,4 +22,47 @@
   .rv { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
   .rv.in { opacity: 1; transform: none; }
   .no-js .rv { opacity: 1; transform: none; }
+
+  .escrito-prose {
+    @apply text-creme-2;
+    font-family: theme('fontFamily.serif');
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.85;
+  }
+  .escrito-prose > * + * { margin-top: 1.4em; }
+  .escrito-prose h2 {
+    @apply text-creme font-serif font-light text-ocre;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    margin-top: 2.6em;
+    margin-bottom: 0.2em;
+  }
+  .escrito-prose h3 {
+    @apply text-creme font-serif font-light;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin-top: 2em;
+    margin-bottom: 0.3em;
+  }
+  .escrito-prose strong { @apply text-ambar font-normal; }
+  .escrito-prose em { @apply italic text-creme; }
+  .escrito-prose a {
+    @apply text-ocre no-underline border-b border-ocre/40;
+    transition: color .25s, border-color .25s;
+  }
+  .escrito-prose a:hover { @apply text-ambar border-ambar; }
+  .escrito-prose blockquote {
+    @apply border-l-2 border-ocre/40 pl-5 italic text-creme/90;
+    margin-left: 0;
+  }
+  .escrito-prose ul, .escrito-prose ol { padding-left: 1.4em; }
+  .escrito-prose li + li { margin-top: 0.4em; }
+  .escrito-prose hr {
+    @apply border-0 h-px opacity-40 my-12;
+    background: linear-gradient(90deg, transparent, #B8843D, transparent);
+    max-width: 280px;
+    margin-left: auto; margin-right: auto;
+  }
 }
