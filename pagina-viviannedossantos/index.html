@@ -158,6 +158,51 @@
   .social a:hover{color:var(--ambar)}
   .social a svg{width:16px;height:16px;flex-shrink:0}
 
+  /* RESPIRA (entre hero e cartões) */
+  .respira-bloco{text-align:center;margin:46px auto 56px;max-width:520px}
+  .respira{
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    color:var(--ambar);font-size:clamp(1.15rem,3.4vw,1.4rem);
+    line-height:1.4;letter-spacing:0.005em;
+  }
+  .gota-respira{width:26px;height:26px;margin:18px auto 0;display:block;opacity:0.6}
+
+  /* NEWSLETTER */
+  .newsletter{max-width:540px;margin:0 auto;text-align:center}
+  .newsletter .eyebrow{text-align:center;margin-bottom:14px}
+  .news-lead{
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    color:var(--creme);font-size:clamp(1.05rem,3vw,1.22rem);
+    line-height:1.55;margin:0 auto 28px;max-width:480px;
+  }
+  .news-form{display:flex;max-width:420px;margin:0 auto}
+  .news-form input{
+    flex:1;background:transparent;border:1px solid rgba(184,132,61,0.45);
+    border-radius:14px 0 0 14px;padding:14px 18px;color:var(--creme);
+    font-family:var(--sans);font-size:1rem;font-weight:300;
+    border-right:none;outline:none;transition:border-color .25s;min-width:0;
+  }
+  .news-form input::placeholder{color:rgba(242,232,220,0.4);font-style:italic}
+  .news-form input:focus{border-color:var(--ambar)}
+  .news-form button{
+    background:var(--ocre);color:var(--terra);
+    border:1px solid var(--ocre);border-radius:0 14px 14px 0;
+    padding:14px 22px;cursor:pointer;
+    font-family:var(--sans);font-size:0.92rem;font-weight:500;
+    letter-spacing:0.04em;text-transform:lowercase;
+    transition:background .25s;
+  }
+  .news-form button:hover{background:var(--ambar)}
+  .news-ok{
+    color:var(--ambar);font-family:var(--serif);font-style:italic;
+    font-size:1.1rem;margin-top:6px;
+  }
+  @media(max-width:460px){
+    .news-form{flex-direction:column;gap:10px}
+    .news-form input{border-radius:14px;border-right:1px solid rgba(184,132,61,0.45)}
+    .news-form button{border-radius:14px}
+  }
+
   /* reveal, só ativa com JS (.js no body); sem JS tudo fica visível */
   .js .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
   .js .rv.in{opacity:1;transform:none}
@@ -211,7 +256,17 @@
     </p>
   </header>
 
-  <div class="veu"></div>
+  <div class="respira-bloco rv">
+    <p class="respira" data-pt="Não vens encontrar respostas. Vens reencontrar a tua." data-en="You don't come here to find answers. You come to rediscover your own.">Não vens encontrar respostas. Vens reencontrar a tua.</p>
+    <svg class="gota-respira" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="#EBAE4A" stroke-width="22" stroke-linecap="round">
+        <path d="M170 130 C170 270 200 340 248 374"/>
+        <path d="M342 130 C342 270 312 340 264 374"/>
+      </g>
+      <circle cx="256" cy="244" r="22" fill="#F4C56A"/>
+      <path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke="#F4C56A" stroke-width="16" stroke-linecap="round"/>
+    </svg>
+  </div>
 
   <p class="eyebrow rv" data-pt="os caminhos" data-en="the paths">os caminhos</p>
   <h2 class="lead rv" data-pt="Escolhe por onde precisas de entrar" data-en="Choose where you need to enter">Escolhe por onde precisas de entrar</h2>
@@ -283,6 +338,19 @@
 
   <div class="veu"></div>
 
+  <section class="newsletter rv">
+    <p class="eyebrow" data-pt="fica perto" data-en="stay close">fica perto</p>
+    <p class="news-lead" data-pt="Se aqui te tocou alguma coisa, deixa um email. Mando uma carta de vez em quando — quando há algo verdadeiro para dizer." data-en="If something here touched you, leave an email. I send a letter now and then — when there is something true to say.">Se aqui te tocou alguma coisa, deixa um email. Mando uma carta de vez em quando — quando há algo verdadeiro para dizer.</p>
+    <!-- TODO: troca action por: https://formspree.io/f/<TEU_ID>  ou  https://api.convertkit.com/v3/forms/<ID>/subscribe -->
+    <form class="news-form" id="newsForm" action="REPLACE_WITH_FORM_ENDPOINT" method="POST">
+      <input type="email" name="email" required autocomplete="email" placeholder="o teu email" data-pt-ph="o teu email" data-en-ph="your email">
+      <button type="submit" data-pt="deixar" data-en="leave">deixar</button>
+    </form>
+    <p class="news-ok" data-pt="Obrigada. Quando houver, escrevo." data-en="Thank you. When there is, I'll write." hidden>Obrigada. Quando houver, escrevo.</p>
+  </section>
+
+  <div class="veu"></div>
+
   <footer>
     <div class="social">
       <a href="https://instagram.com/vivianne.dos.santos">
@@ -323,6 +391,10 @@
       const v=el.getAttribute('data-'+l);
       if(v!==null) el.innerHTML=v;
     });
+    document.querySelectorAll('[data-pt-ph],[data-en-ph]').forEach(el=>{
+      const v=el.getAttribute('data-'+l+'-ph');
+      if(v!==null) el.placeholder=v;
+    });
     document.querySelectorAll('.lang button').forEach(b=>{
       b.classList.toggle('on',b.dataset.lang===l);
       b.setAttribute('aria-pressed',b.dataset.lang===l);
@@ -335,6 +407,26 @@
   document.querySelectorAll('.lang button').forEach(b=>{
     b.addEventListener('click',()=>setLang(b.dataset.lang));
   });
+
+  // Newsletter submit
+  const newsForm=document.getElementById('newsForm');
+  if(newsForm){
+    newsForm.addEventListener('submit',async(e)=>{
+      e.preventDefault();
+      const ok=document.querySelector('.news-ok');
+      const action=newsForm.getAttribute('action');
+      try{
+        if(action && !action.includes('REPLACE')){
+          await fetch(action,{
+            method:'POST',body:new FormData(newsForm),
+            headers:{'Accept':'application/json'}
+          });
+        }
+      }catch(err){}
+      newsForm.hidden=true;
+      if(ok) ok.hidden=false;
+    });
+  }
 
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.12});
   document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});
