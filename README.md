@@ -13,7 +13,7 @@ i18n/                 routing, request config (next-intl)
 messages/             pt.json, en.json
 public/               imagens, favicons
 scripts/              utilitários (export subscritores, etc)
-pagina-viviannedossantos/  versão HTML antiga, fica como backup até validação
+legacy/pagina-html/       versão HTML antiga, mantida como referência histórica
 ```
 
 ## Desenvolver
