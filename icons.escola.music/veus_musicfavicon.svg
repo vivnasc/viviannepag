@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a1025"/>
+      <stop offset="100%" stop-color="#080510"/>
+    </radialGradient>
+    <linearGradient id="s1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C9A96E"/>
+      <stop offset="40%" stop-color="#D4B87A"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="s2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#C9A96E"/>
+    </linearGradient>
+    <linearGradient id="s3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="s4" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#DFC08A" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#6D28D9" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feComposite in="SourceGraphic" in2="b" operator="over"/>
+    </filter>
+    <filter id="innerGlow">
+      <feGaussianBlur stdDeviation="15" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="96"/>
+  
+  <!-- Ambient glow at center -->
+  <circle cx="256" cy="256" r="100" fill="#8B5CF6" opacity="0.08" filter="url(#innerGlow)"/>
+  
+  <!-- Spiral vortex - 7 arms for 7 véus -->
+  <g transform="translate(256,256)" filter="url(#glow)">
+    
+    <!-- Arm 1 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s1)" opacity="0.95"/>
+    
+    <!-- Arm 2 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s2)" opacity="0.85" transform="rotate(51.4)"/>
+    
+    <!-- Arm 3 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s1)" opacity="0.75" transform="rotate(102.8)"/>
+    
+    <!-- Arm 4 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s2)" opacity="0.65" transform="rotate(154.3)"/>
+    
+    <!-- Arm 5 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s3)" opacity="0.55" transform="rotate(205.7)"/>
+    
+    <!-- Arm 6 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s4)" opacity="0.45" transform="rotate(257.1)"/>
+    
+    <!-- Arm 7 -->
+    <path d="M0,-8 C40,-80 120,-150 180,-165 C160,-120 100,-60 30,0 C100,-30 170,-80 200,-130 C180,-70 120,10 40,50 C-10,70 -20,40 0,-8Z"
+          fill="url(#s3)" opacity="0.35" transform="rotate(308.6)"/>
+    
+    <!-- Center core -->
+    <circle cx="0" cy="0" r="22" fill="#C9A96E" opacity="0.9"/>
+    <circle cx="0" cy="0" r="14" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+</svg>

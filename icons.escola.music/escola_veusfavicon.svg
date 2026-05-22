@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#18122B"/>
+      <stop offset="100%" stop-color="#0A0715"/>
+    </radialGradient>
+    <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C9A96E"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="p2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#D4B87A"/>
+    </linearGradient>
+    <linearGradient id="p3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#C9A96E" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="p4" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#DFC08A" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#6D28D9" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feComposite in="SourceGraphic" in2="b" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="96"/>
+
+  <!-- 7 petals — scaled up, high opacity for visibility at small sizes -->
+  <g transform="translate(256,256) scale(1.4)" filter="url(#glow)">
+
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(0)" fill="url(#p1)" opacity="1"/>
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(51.4)" fill="url(#p2)" opacity="0.95"/>
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(102.8)" fill="url(#p1)" opacity="0.90"/>
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(154.3)" fill="url(#p3)" opacity="0.85"/>
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(205.7)" fill="url(#p2)" opacity="0.80"/>
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(257.1)" fill="url(#p4)" opacity="0.75"/>
+    <ellipse cx="0" cy="-100" rx="48" ry="102" transform="rotate(308.6)" fill="url(#p3)" opacity="0.70"/>
+
+    <!-- Inner ring -->
+    <circle cx="0" cy="0" r="38" fill="none" stroke="#C9A96E" stroke-width="4" opacity="0.8"/>
+    <circle cx="0" cy="0" r="28" fill="#C9A96E" opacity="0.4"/>
+
+    <!-- Center core — brighter -->
+    <circle cx="0" cy="0" r="20" fill="#C9A96E" opacity="0.95"/>
+    <circle cx="0" cy="0" r="12" fill="#FFFFFF" opacity="0.8"/>
+    <circle cx="0" cy="0" r="5" fill="#FFFFFF" opacity="0.95"/>
+  </g>
+</svg>
