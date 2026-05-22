@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivianne dos Santos</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<meta name="theme-color" content="#2A1C12">
+<meta name="description" content="Vivianne dos Santos, escritora, criadora e terapeuta sistémica em formação. Os mundos Infonte, SyncHim, Escola dos Véus e Loranne.">
+<!-- FOTOS A INSERIR: vivianne-1.jpg = foto de autoria, rosto centrado (recomendo a foto 4, camisa ocre). vivianne-2.jpg = foto de contexto (recomendo a foto 7, do escritório). Favicons: copiar de vivianne-icon/favicons/ para esta pasta. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terra:#2A1C12;
+    --terra-2:#3A2818;
+    --creme:#F2E8DC;
+    --creme-2:#E5D5C3;
+    --ocre:#B8843D;
+    --ambar:#EBAE4A;
+    --bordeaux:#8B2235;
+    --violeta:#5A4A6A;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Outfit',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--terra);
+    color:var(--creme);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  .grain{
+    position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 28px}
+
+  /* HERO */
+  header{padding:80px 0 60px;text-align:center}
+  .retrato{
+    width:170px;height:170px;border-radius:50%;margin:0 auto 32px;
+    object-fit:cover;display:block;
+    border:2px solid var(--ocre);
+    box-shadow:0 0 0 9px rgba(184,132,61,0.12);
+  }
+  .gota-assina{width:44px;height:44px;margin:20px auto 0;display:block;opacity:0.9}
+  h1{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(2.6rem,8vw,4.4rem);
+    letter-spacing:-0.01em;line-height:1.05;color:var(--creme);
+  }
+  .sub{
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    color:var(--ocre);font-size:clamp(1.05rem,3.4vw,1.35rem);
+    margin-top:18px;
+  }
+  .tese{
+    max-width:540px;margin:46px auto 0;
+    font-size:1.08rem;color:var(--creme-2);
+  }
+  .tese strong{color:var(--ambar);font-weight:400}
+
+  /* SEPARADOR */
+  .veu{height:1px;background:linear-gradient(90deg,transparent,var(--ocre),transparent);
+    margin:64px auto;max-width:280px;opacity:0.5}
+
+  /* SECTION TITLE */
+  .eyebrow{
+    text-align:center;font-size:0.78rem;letter-spacing:0.32em;
+    text-transform:uppercase;color:var(--ocre);margin-bottom:10px;
+  }
+  .lead{
+    text-align:center;font-family:var(--serif);font-weight:300;
+    font-size:clamp(1.5rem,5vw,2.1rem);color:var(--creme);
+    margin-bottom:50px;line-height:1.25;
+  }
+
+  /* MUNDOS */
+  .mundos{display:flex;flex-direction:column;gap:20px}
+  .mundo{
+    display:block;text-decoration:none;color:inherit;
+    border:1px solid rgba(184,132,61,0.28);
+    border-radius:18px;padding:30px 30px;
+    background:linear-gradient(160deg,rgba(58,40,24,0.6),rgba(42,28,18,0.3));
+    transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
+    position:relative;overflow:hidden;
+  }
+  .mundo:hover{transform:translateY(-4px);border-color:var(--ocre);
+    background:linear-gradient(160deg,rgba(58,40,24,0.9),rgba(42,28,18,0.5))}
+  .mundo .badge{
+    font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--ocre);margin-bottom:12px;display:block;
+  }
+  .mundo h3{
+    font-family:var(--serif);font-weight:400;font-size:1.7rem;
+    color:var(--creme);margin-bottom:8px;letter-spacing:-0.01em;
+  }
+  .mundo p{color:var(--creme-2);font-size:0.98rem;max-width:90%}
+  .mundo .seta{
+    position:absolute;right:28px;top:50%;transform:translateY(-50%);
+    color:var(--ocre);font-size:1.4rem;transition:transform .4s;opacity:0.7;
+  }
+  .mundo:hover .seta{transform:translateY(-50%) translateX(6px);opacity:1}
+  .mundo.synchim{border-color:rgba(139,34,53,0.35)}
+  .mundo.synchim .badge,.mundo.synchim .seta{color:var(--bordeaux)}
+  .mundo.synchim:hover{border-color:var(--bordeaux)}
+  .mundo.veus{border-color:rgba(90,74,106,0.4)}
+  .mundo.veus .badge,.mundo.veus .seta{color:var(--violeta)}
+  .mundo.veus:hover{border-color:var(--violeta)}
+
+  /* SOBRE */
+  .sobre{max-width:680px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center;text-align:left}
+  .sobre-foto{width:200px;height:260px;object-fit:cover;border-radius:14px;border:1px solid rgba(184,132,61,0.3)}
+  .sobre-txt .eyebrow{text-align:left}
+  .sobre p{color:var(--creme-2);margin-bottom:16px;font-size:1.02rem}
+  .sobre .assina{font-family:var(--serif);font-style:italic;color:var(--ocre);margin-top:4px}
+  @media(max-width:560px){
+    .sobre{grid-template-columns:1fr;text-align:center;gap:26px}
+    .sobre-foto{width:170px;height:220px;margin:0 auto}
+    .sobre-txt .eyebrow{text-align:center}
+  }
+
+  /* FOOTER */
+  footer{text-align:center;padding:70px 0 50px;color:rgba(242,232,220,0.5);font-size:0.85rem}
+  footer a{color:var(--ocre);text-decoration:none}
+  .social{display:flex;gap:22px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+  .social a{color:var(--creme-2);text-decoration:none;font-size:0.9rem;letter-spacing:0.04em;transition:color .3s;display:inline-flex;align-items:center;gap:7px}
+  .social a:hover{color:var(--ambar)}
+  .social a svg{width:16px;height:16px;flex-shrink:0}
+
+  /* reveal, só ativa com JS (.js no body); sem JS tudo fica visível */
+  .js .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+  .js .rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="wrap">
+
+  <header>
+    <img class="retrato" src="vivianne-1.jpg" alt="Vivianne dos Santos">
+    <h1>Vivianne dos Santos</h1>
+    <p class="sub">escritora, criadora, terapeuta sistémica em formação</p>
+    <svg class="gota-assina" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="#EBAE4A" stroke-width="9" stroke-linecap="round">
+        <path d="M150 120 C150 270 188 345 244 378"/>
+        <path d="M362 120 C362 270 324 345 268 378"/>
+        <path d="M206 116 C206 250 224 335 250 366" opacity="0.5"/>
+        <path d="M306 116 C306 250 288 335 262 366" opacity="0.5"/>
+      </g>
+      <circle cx="256" cy="246" r="18" fill="#F4C56A"/>
+      <path d="M168 392 C200 366 224 414 256 392 C288 370 312 414 344 392" fill="none" stroke="#F4C56A" stroke-width="12" stroke-linecap="round"/>
+    </svg>
+    <p class="tese rv">
+      Vivo entre o silêncio e o movimento. O meu trabalho parte de uma só ideia:
+      por baixo do que te aperta, no amor ou na vida, há sempre um nó que vem de trás.
+      <strong>Eu ajudo-te a vê-lo, e a voltar a ti.</strong>
+    </p>
+  </header>
+
+  <div class="veu"></div>
+
+  <p class="eyebrow rv">os caminhos</p>
+  <h2 class="lead rv">Escolhe por onde precisas de entrar</h2>
+
+  <div class="mundos">
+
+    <a class="mundo rv" href="https://infonte.app">
+      <span class="badge">clareza, foco, acção</span>
+      <h3>Infonte</h3>
+      <p>Para a mulher que tem potencial a mais e clareza a menos. Um percurso para limpar a mente, bastar-se, e tornar sonhos em acções.</p>
+      <span class="seta">&rarr;</span>
+    </a>
+
+    <a class="mundo synchim rv" href="https://synchim.app">
+      <span class="badge">o amor que dessincronizou</span>
+      <h3>SyncHim</h3>
+      <p>Os casais não morrem por falta de amor, morrem por dessincronia. Um diagnóstico para veres o nó que te tira o amor.</p>
+      <span class="seta">&rarr;</span>
+    </a>
+
+    <a class="mundo veus rv" href="https://escoladosveus.com">
+      <span class="badge">a escola</span>
+      <h3>Escola dos Véus</h3>
+      <p>Os cursos de transformação, onde se atravessa cada véu que nos separa de quem somos.</p>
+      <span class="seta">&rarr;</span>
+    </a>
+
+    <a class="mundo rv" href="https://music.seteveus.space">
+      <span class="badge">música, presença</span>
+      <h3>Loranne</h3>
+      <p>Música para o silêncio interior. Meditação, presença, e o som de voltar a casa.</p>
+      <span class="seta">&rarr;</span>
+    </a>
+
+  </div>
+
+  <div class="veu"></div>
+
+  <div class="sobre rv">
+    <img class="sobre-foto" src="vivianne-2.jpg" alt="Vivianne dos Santos">
+    <div class="sobre-txt">
+      <p class="eyebrow">quem sou</p>
+      <p>
+        Sou autora de Os 7 Véus do Despertar e criadora do universo Sete Ecos.
+        Estudo os sistemas que nos formam, aquilo que herdamos sem escolher e que molda
+        o que nos deixamos ter, no amor, no trabalho, na vida.
+      </p>
+      <p>
+        Não venho ensinar o que tenho. Venho mostrar o caminho até te bastares.
+        Porque o que se basta, atrai.
+      </p>
+      <p class="assina">Vivianne</p>
+    </div>
+  </div>
+
+  <div class="veu"></div>
+
+  <footer>
+    <div class="social">
+      <a href="https://instagram.com/vivianne.dos.santos">@vivianne.dos.santos</a>
+      <a href="https://instagram.com/infonte.app">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 116 C198 218 166 282 166 334 A90 90 0 0 0 346 334 C346 282 314 218 256 116 Z" fill="none" stroke="#EBAE4A" stroke-width="22" stroke-linejoin="round"/><circle cx="256" cy="338" r="34" fill="#F4C56A"/></svg>
+        @infonte.app
+      </a>
+      <a href="https://instagram.com/synchim.app">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><g transform="translate(256,256)"><rect x="-150" y="-150" width="300" height="300" fill="none" stroke="#B8843D" stroke-width="22"/><rect x="-150" y="-150" width="300" height="300" transform="rotate(45)" fill="none" stroke="#B8843D" stroke-width="22"/><circle r="46" fill="#8B2235"/></g></svg>
+        @synchim.app
+      </a>
+      <a href="https://instagram.com/escola_dos_veus">@escola_dos_veus</a>
+      <a href="https://instagram.com/loranne_music">@loranne_music</a>
+    </div>
+    <p>&copy; <span id="ano"></span> Vivianne dos Santos &middot; <a href="https://seteecos.com">Sete Ecos</a></p>
+  </footer>
+
+</div>
+
+<script>
+  document.body.classList.add('js');
+  document.getElementById('ano').textContent=new Date().getFullYear();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.12});
+  document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});
+  setTimeout(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>el.classList.add('in')),2500);
+</script>
+</body>
+</html>
