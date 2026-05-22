@@ -63,7 +63,24 @@
     "botao": "deixar",
     "ok": "Obrigada. Quando houver, escrevo.",
     "jaEstas": "Já estás comigo. Obrigada.",
-    "erro": "Algo correu mal. Tenta de novo?"
+    "erro": "Algo correu mal. Tenta de novo?",
+    "emBreve": "em breve"
+  },
+  "escritos": {
+    "eyebrow": "escritos",
+    "lead": "Pequenos textos para ler devagar.",
+    "verTodos": "ver todos os escritos",
+    "voltar": "voltar aos escritos",
+    "todosTitulo": "Escritos",
+    "todosSub": "Textos que vou deixando aqui, quando há algo a dizer.",
+    "vazio": "Ainda não há escritos publicados.",
+    "noticeEn": "Disponível em português."
+  },
+  "notFound": {
+    "eyebrow": "esta página não existe",
+    "titulo": "Saíste do caminho",
+    "lead": "O endereço que escreveste não conduz a nada — pelo menos, a nada que aqui esteja.",
+    "voltar": "voltar ao início"
   },
   "footer": {
     "copyright": "Vivianne dos Santos",
