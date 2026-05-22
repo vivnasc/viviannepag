@@ -64,6 +64,15 @@ async function readEscritoFile(slug: string, locale: Locale) {
 }
 
 export async function listEscritos(locale: Locale): Promise<EscritoMeta[]> {
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const { dbListEscritos } = await import('@/lib/escritos-db');
+    const fromDb = await dbListEscritos(locale);
+    if (fromDb && fromDb.length > 0) return fromDb;
+  }
+  return listEscritosFs(locale);
+}
+
+async function listEscritosFs(locale: Locale): Promise<EscritoMeta[]> {
   const files = await listFiles();
   const slugs = new Set<string>();
   for (const f of files) {
@@ -101,6 +110,15 @@ export async function listEscritos(locale: Locale): Promise<EscritoMeta[]> {
 }
 
 export async function getEscrito(slug: string, locale: Locale): Promise<Escrito | null> {
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const { dbGetEscrito } = await import('@/lib/escritos-db');
+    const fromDb = await dbGetEscrito(slug, locale);
+    if (fromDb) return fromDb;
+  }
+  return getEscritoFs(slug, locale);
+}
+
+async function getEscritoFs(slug: string, locale: Locale): Promise<Escrito | null> {
   let parsed = await readEscritoFile(slug, locale);
   let isFallback = false;
   if (!parsed && locale === 'en') {
@@ -126,6 +144,15 @@ export async function getEscrito(slug: string, locale: Locale): Promise<Escrito 
 }
 
 export async function listAllSlugs(): Promise<string[]> {
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const { dbListAllSlugs } = await import('@/lib/escritos-db');
+    const fromDb = await dbListAllSlugs();
+    if (fromDb && fromDb.length > 0) return fromDb;
+  }
+  return listAllSlugsFs();
+}
+
+async function listAllSlugsFs(): Promise<string[]> {
   const files = await listFiles();
   const slugs = new Set<string>();
   for (const f of files) {
