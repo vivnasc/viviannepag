@@ -60,6 +60,60 @@ oil painting, single hand gently parting a thin translucent curtain of golden li
 
 ---
 
+## a-lealdade-invisivel-que-te-tira-o-que-queres
+> Uma figura a caminhar para a frente com um fio dourado que se prolonga atrás, para silhuetas indistintas em sombra.
+
+```
+oil painting, single figure walking forward with a thin golden thread trailing back into deep shadow toward indistinct ancestral silhouettes, deep ochre and amber tones, subtle invisible pull, baroque chiaroscuro lighting, fine art, museum quality --ar 3:2 --v 6
+```
+
+---
+
+## o-corpo-sabe-primeiro
+> Mãos pousadas sobre o abdómen vestido, escuta interior.
+
+```
+oil painting, close-up of two hands resting gently on a clothed abdomen, warm ochre fabric draped, soft amber side lighting, sense of inward listening and embodied presence, intimate dutch master atmosphere, fine art, archival --ar 3:2 --v 6
+```
+
+---
+
+## a-mulher-que-tu-tens-medo-de-ser
+> Mulher em sombra diante de um espelho alto onde só o reflexo está iluminado.
+
+```
+oil painting, woman standing before a tall antique mirror in a dim room, her own figure in deep shadow while the mirrored reflection is illuminated by warm amber light, sense of confrontation and recognition, deep ochre tones, baroque atmosphere, fine art --ar 3:2 --v 6
+```
+
+---
+
+## o-que-tu-herdaste-sem-dizer-sim
+> Vários fios dourados a descer e a convergir numa mão aberta.
+
+```
+oil painting, several thin golden threads descending from above and gathering into a single open palm, dark warm background, sense of inheritance and quiet weight, deep ochre and amber tones, baroque still life, fine art --ar 3:2 --v 6
+```
+
+---
+
+## a-respiracao-que-tu-deixas-a-meio
+> Respiração visível como vapor quente a sair de lábios entreabertos.
+
+```
+oil painting, soft breath visible as faint warm vapor leaving slightly parted lips, dark warm background, intimate macro detail, sense of return to body, golden side lighting, deep ochre tones, fine art, baroque --ar 3:2 --v 6
+```
+
+---
+
+## o-que-tu-nao-te-deixas-querer
+> Porta de madeira fechada com luz dourada a escapar pela fresta inferior.
+
+```
+oil painting, closed weathered wooden door with warm golden light spilling through the gap at the floor, dark surroundings, sense of suppressed desire and the room beyond, deep ochre and bordeaux tones, hammershoi-style restraint, fine art --ar 3:2 --v 6
+```
+
+---
+
 ## Variantes para refinar
 Se algum resultado vier demasiado saturado: adicionar `muted palette, low saturation, earthy tones`.
 Se vier demasiado moderno: adicionar `17th century painting, oil on linen, aged varnish, museum archival photograph`.
