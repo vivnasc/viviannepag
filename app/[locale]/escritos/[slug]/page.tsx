@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
@@ -60,13 +61,16 @@ export default async function EscritoPage({
   const t = await getTranslations('escritos');
   const escrito = await getEscrito(slug, locale as Locale);
   if (!escrito) notFound();
+  const tematicaLabel = escrito.tematica
+    ? t(`tematicas.${escrito.tematica}` as 'tematicas.o-no')
+    : null;
 
   return (
     <>
       <TopNav />
       <LangToggle />
-      <main className="relative z-[2] max-w-[680px] mx-auto px-7 pt-20 pb-24">
-        <nav className="mb-12">
+      <main className="relative z-[2] max-w-[760px] mx-auto px-7 pt-20 pb-24">
+        <nav className="mb-10">
           <Link
             href={locale === 'en' ? '/en/escritos' : '/escritos'}
             className="text-ocre/80 no-underline text-[0.82rem] tracking-[0.08em] hover:text-ambar transition-colors"
@@ -75,8 +79,32 @@ export default async function EscritoPage({
           </Link>
         </nav>
 
-        <header className="mb-12 text-center">
-          <p className="text-[0.72rem] tracking-[0.28em] uppercase text-ocre/70 mb-5">
+        {escrito.capa && (
+          <div className="mb-12 -mx-2 sm:mx-0">
+            <Image
+              src={escrito.capa}
+              alt={escrito.titulo}
+              width={1600}
+              height={1067}
+              priority
+              unoptimized={escrito.capa.endsWith('.svg')}
+              className="w-full h-auto rounded-[16px] border border-ocre/25 object-cover"
+              style={{
+                boxShadow:
+                  '0 0 0 4px rgba(184,132,61,0.08), 0 30px 60px -30px rgba(0,0,0,0.6)',
+                aspectRatio: '3 / 2',
+              }}
+            />
+          </div>
+        )}
+
+        <header className="mb-14 text-center max-w-[600px] mx-auto">
+          {tematicaLabel && (
+            <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre/80 mb-4">
+              · {tematicaLabel} ·
+            </p>
+          )}
+          <p className="text-[0.72rem] tracking-[0.28em] uppercase text-ocre/60 mb-5">
             {formatarData(escrito.data, locale as Locale)}
           </p>
           <h1 className="font-serif font-light text-creme text-[clamp(2rem,5.5vw,3rem)] leading-[1.1] tracking-[-0.01em] mb-6">
@@ -93,10 +121,13 @@ export default async function EscritoPage({
           <GotaMini className="w-[28px] h-[28px] mx-auto mt-8 opacity-50 block" />
         </header>
 
-        <article
-          className="escrito-prose"
-          dangerouslySetInnerHTML={{ __html: escrito.conteudoHtml }}
-        />
+        <div className="max-w-[640px] mx-auto">
+
+          <article
+            className="escrito-prose"
+            dangerouslySetInnerHTML={{ __html: escrito.conteudoHtml }}
+          />
+        </div>
 
         <div className="text-center mt-20">
           <Link

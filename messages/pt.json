@@ -79,7 +79,12 @@
     "todosTitulo": "Escritos",
     "todosSub": "Textos que vou deixando aqui, quando há algo a dizer.",
     "vazio": "Ainda não há escritos publicados.",
-    "noticeEn": "Disponível em português."
+    "noticeEn": "Disponível em português.",
+    "tematicas": {
+      "o-no": "o nó",
+      "presenca": "presença",
+      "veu": "véu"
+    }
   },
   "notFound": {
     "eyebrow": "esta página não existe",

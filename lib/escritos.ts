@@ -1,4 +1,4 @@
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, access } from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
@@ -11,6 +11,7 @@ export type EscritoMeta = {
   resumo: string;
   data: string;
   tematica?: string;
+  capa?: string;
   publicado: boolean;
   locale: Locale;
   isFallback: boolean;
@@ -21,6 +22,18 @@ export type Escrito = EscritoMeta & {
 };
 
 const ESCRITOS_DIR = path.join(process.cwd(), 'content', 'escritos');
+const PLACEHOLDER_CAPA = '/escritos/_placeholder.svg';
+
+async function resolverCapa(capaRel?: string): Promise<string | undefined> {
+  if (!capaRel) return PLACEHOLDER_CAPA;
+  const fsPath = path.join(process.cwd(), 'public', capaRel.replace(/^\//, ''));
+  try {
+    await access(fsPath);
+    return capaRel;
+  } catch {
+    return PLACEHOLDER_CAPA;
+  }
+}
 
 async function listFiles(): Promise<string[]> {
   try {
@@ -32,6 +45,7 @@ async function listFiles(): Promise<string[]> {
 
 function parseFileName(file: string): { slug: string; locale: Locale } | null {
   if (!file.endsWith('.mdx')) return null;
+  if (file.startsWith('__') || file.startsWith('.')) return null;
   const base = file.replace(/\.mdx$/, '');
   const enMatch = base.match(/^(.+)\.en$/);
   if (enMatch) return { slug: enMatch[1], locale: 'en' };
@@ -75,6 +89,7 @@ export async function listEscritos(locale: Locale): Promise<EscritoMeta[]> {
       resumo: String(fm.resumo ?? ''),
       data: String(fm.data ?? ''),
       tematica: fm.tematica ? String(fm.tematica) : undefined,
+      capa: await resolverCapa(fm.capa ? String(fm.capa) : undefined),
       publicado: fm.publicado !== false,
       locale,
       isFallback,
@@ -102,6 +117,7 @@ export async function getEscrito(slug: string, locale: Locale): Promise<Escrito 
     resumo: String(fm.resumo ?? ''),
     data: String(fm.data ?? ''),
     tematica: fm.tematica ? String(fm.tematica) : undefined,
+    capa: await resolverCapa(fm.capa ? String(fm.capa) : undefined),
     publicado: true,
     locale,
     isFallback,
