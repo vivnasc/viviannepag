@@ -79,7 +79,12 @@
     "todosTitulo": "Writings",
     "todosSub": "Texts I leave here, when there is something to say.",
     "vazio": "No writings published yet.",
-    "noticeEn": "Available in Portuguese."
+    "noticeEn": "Available in Portuguese.",
+    "tematicas": {
+      "o-no": "the knot",
+      "presenca": "presence",
+      "veu": "the veil"
+    }
   },
   "notFound": {
     "eyebrow": "this page doesn't exist",

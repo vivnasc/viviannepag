@@ -65,13 +65,19 @@ export default async function EscritosPage({
             {escritos.map((e) => {
               const href =
                 locale === 'en' ? `/en/escritos/${e.slug}` : `/escritos/${e.slug}`;
+              const tematicaLabel = e.tematica
+                ? t(`tematicas.${e.tematica}` as 'tematicas.o-no')
+                : null;
               return (
                 <li key={e.slug} className="border-b border-ocre/15 pb-12 last:border-b-0">
                   <Link href={href} className="block group no-underline">
-                    <p className="text-[0.72rem] tracking-[0.24em] uppercase text-ocre/70 mb-3">
-                      {formatarData(e.data, locale as Locale)}
+                    <p className="text-[0.72rem] tracking-[0.24em] uppercase text-ocre/70 mb-3 flex items-center gap-3 flex-wrap">
+                      {tematicaLabel && (
+                        <span className="text-ocre">· {tematicaLabel} ·</span>
+                      )}
+                      <span>{formatarData(e.data, locale as Locale)}</span>
                       {e.isFallback && locale === 'en' && (
-                        <span className="ml-3 normal-case tracking-normal italic font-serif text-ocre/60 text-[0.78rem]">
+                        <span className="normal-case tracking-normal italic font-serif text-ocre/60 text-[0.78rem]">
                           · {t('noticeEn')}
                         </span>
                       )}

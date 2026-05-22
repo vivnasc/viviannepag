@@ -20,11 +20,17 @@ export async function EscritosRecentes({ locale }: { locale: Locale }) {
         {escritos.map((e) => {
           const href =
             locale === 'en' ? `/en/escritos/${e.slug}` : `/escritos/${e.slug}`;
+          const tematicaLabel = e.tematica
+            ? t(`tematicas.${e.tematica}` as 'tematicas.o-no')
+            : null;
           return (
             <li key={e.slug}>
               <Link href={href} className="block group no-underline">
-                <p className="text-[0.7rem] tracking-[0.24em] uppercase text-ocre/70 mb-2">
-                  {formatarData(e.data, locale)}
+                <p className="text-[0.7rem] tracking-[0.24em] uppercase text-ocre/70 mb-2 flex items-center gap-3 flex-wrap">
+                  {tematicaLabel && (
+                    <span className="text-ocre">· {tematicaLabel} ·</span>
+                  )}
+                  <span>{formatarData(e.data, locale)}</span>
                 </p>
                 <h3 className="font-serif font-light text-creme text-[clamp(1.3rem,3.4vw,1.65rem)] leading-[1.2] mb-2 group-hover:text-ambar transition-colors">
                   {e.titulo}
