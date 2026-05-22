@@ -44,10 +44,10 @@
   /* HERO */
   header{padding:80px 0 60px;text-align:center}
   .retrato{
-    width:170px;height:170px;border-radius:50%;margin:0 auto 32px;
-    object-fit:cover;object-position:50% 18%;display:block;
-    border:2px solid var(--ocre);
-    box-shadow:0 0 0 9px rgba(184,132,61,0.12);
+    width:220px;aspect-ratio:644/1280;border-radius:28px;margin:0 auto 32px;
+    object-fit:cover;display:block;
+    border:1px solid var(--ocre);
+    box-shadow:0 0 0 6px rgba(184,132,61,0.10),0 20px 60px -20px rgba(0,0,0,0.6);
   }
   .sobre-foto{object-position:50% 22%}
   .gota-assina{width:44px;height:44px;margin:20px auto 0;display:block;opacity:0.9}
@@ -86,34 +86,36 @@
   .mundos{display:flex;flex-direction:column;gap:20px}
   .mundo{
     display:block;text-decoration:none;color:inherit;
-    border:1px solid rgba(184,132,61,0.28);
+    border:1px solid rgba(184,132,61,0.45);
     border-radius:18px;padding:30px 30px;
-    background:linear-gradient(160deg,rgba(58,40,24,0.6),rgba(42,28,18,0.3));
+    background:linear-gradient(160deg,rgba(58,40,24,0.85),rgba(42,28,18,0.55));
     transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
     position:relative;overflow:hidden;
   }
-  .mundo:hover{transform:translateY(-4px);border-color:var(--ocre);
-    background:linear-gradient(160deg,rgba(58,40,24,0.9),rgba(42,28,18,0.5))}
+  .mundo:hover{transform:translateY(-4px);border-color:var(--ambar);
+    background:linear-gradient(160deg,rgba(72,52,32,0.95),rgba(50,34,22,0.7))}
   .mundo .badge{
-    font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;
-    color:var(--ocre);margin-bottom:12px;display:block;
+    font-size:0.74rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:500;
+    color:var(--ambar);margin-bottom:12px;display:block;
   }
   .mundo h3{
     font-family:var(--serif);font-weight:400;font-size:1.7rem;
     color:var(--creme);margin-bottom:8px;letter-spacing:-0.01em;
   }
-  .mundo p{color:var(--creme-2);font-size:0.98rem;max-width:90%}
+  .mundo p{color:var(--creme);opacity:0.85;font-size:0.98rem;max-width:90%}
   .mundo .seta{
     position:absolute;right:28px;top:50%;transform:translateY(-50%);
     color:var(--ocre);font-size:1.4rem;transition:transform .4s;opacity:0.7;
   }
   .mundo:hover .seta{transform:translateY(-50%) translateX(6px);opacity:1}
-  .mundo.synchim{border-color:rgba(139,34,53,0.35)}
-  .mundo.synchim .badge,.mundo.synchim .seta{color:var(--bordeaux)}
-  .mundo.synchim:hover{border-color:var(--bordeaux)}
-  .mundo.veus{border-color:rgba(90,74,106,0.4)}
-  .mundo.veus .badge,.mundo.veus .seta{color:var(--violeta)}
-  .mundo.veus:hover{border-color:var(--violeta)}
+  .mundo.synchim{border-color:rgba(217,90,110,0.5)}
+  .mundo.synchim .badge{color:#E08496}
+  .mundo.synchim .seta{color:#E08496}
+  .mundo.synchim:hover{border-color:#E08496}
+  .mundo.veus{border-color:rgba(167,139,250,0.5)}
+  .mundo.veus .badge{color:#C9B6FA}
+  .mundo.veus .seta{color:#C9B6FA}
+  .mundo.veus:hover{border-color:#C9B6FA}
 
   /* SOBRE */
   .sobre{max-width:680px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center;text-align:left}
@@ -134,7 +136,6 @@
   .social a{color:var(--creme-2);text-decoration:none;font-size:0.9rem;letter-spacing:0.04em;transition:color .3s;display:inline-flex;align-items:center;gap:7px}
   .social a:hover{color:var(--ambar)}
   .social a svg{width:16px;height:16px;flex-shrink:0}
-  .social a img{width:18px;height:18px;flex-shrink:0;border-radius:4px}
 
   /* reveal, só ativa com JS (.js no body); sem JS tudo fica visível */
   .js .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
@@ -188,7 +189,7 @@
       <span class="seta">&rarr;</span>
     </a>
 
-    <a class="mundo veus rv" href="https://escoladosveus.com">
+    <a class="mundo veus rv" href="https://escoladosveus.space">
       <span class="badge">a escola</span>
       <h3>Escola dos Véus</h3>
       <p>Os cursos de transformação, onde se atravessa cada véu que nos separa de quem somos.</p>
@@ -254,11 +255,11 @@
         @synchim.app
       </a>
       <a href="https://instagram.com/escola_dos_veus">
-        <img src="escola-veus-icon.png" alt="">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><g transform="translate(256,256)" fill="none" stroke="#C9B6FA" stroke-width="22" stroke-linecap="round"><ellipse cx="0" cy="-108" rx="34" ry="86"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(51.4)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(102.8)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(154.3)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(205.7)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(257.1)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(308.6)"/></g><circle cx="256" cy="256" r="20" fill="#C9B6FA"/></svg>
         @escola_dos_veus
       </a>
       <a href="https://instagram.com/loranne_music">
-        <img src="loranne-icon.png" alt="">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><g transform="translate(256,256)" fill="none" stroke="#EBAE4A" stroke-width="22" stroke-linecap="round"><path d="M0 -30 C 60 -90 130 -100 160 -50"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(51.4)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(102.8)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(154.3)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(205.7)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(257.1)"/><path d="M0 -30 C 60 -90 130 -100 160 -50" transform="rotate(308.6)"/></g><circle cx="256" cy="256" r="14" fill="#F4C56A"/></svg>
         @loranne_music
       </a>
     </div>
