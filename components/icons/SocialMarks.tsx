@@ -19,6 +19,25 @@ export function VivianneMark() {
   );
 }
 
+export function FreeMeMark() {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden className={cls}>
+      <g transform="translate(256,256)" fill="none" stroke="#8B2235" strokeWidth="20" strokeLinecap="round">
+        <path d="M0 -140 C-80 -60 -80 80 0 140" />
+        <path d="M0 -140 C80 -60 80 80 0 140" />
+      </g>
+      <circle cx="256" cy="256" r="18" fill="#8B2235" />
+      <path
+        d="M220 210 C230 240 256 260 256 260 C256 260 282 240 292 210"
+        fill="none"
+        stroke="#EBAE4A"
+        strokeWidth="14"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function InfonteMark() {
   return (
     <svg viewBox="0 0 512 512" aria-hidden className={cls}>

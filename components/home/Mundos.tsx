@@ -1,14 +1,15 @@
 import { useTranslations } from 'next-intl';
 
-type MundoKey = 'infonte' | 'synchim' | 'escola' | 'livro' | 'ecos' | 'loranne';
+type MundoKey = 'freeme' | 'infonte' | 'synchim' | 'escola' | 'livro' | 'ecos' | 'loranne';
 
 type Mundo = {
   key: MundoKey;
   href: string;
-  accent: 'ocre' | 'rosa' | 'lila';
+  accent: 'ocre' | 'rosa' | 'lila' | 'bordeaux';
 };
 
 const mundos: Mundo[] = [
+  { key: 'freeme', href: 'https://freeme.viviannedossantos.com', accent: 'bordeaux' },
   { key: 'infonte', href: 'https://infonte.viviannedossantos.com', accent: 'ocre' },
   { key: 'synchim', href: 'https://synchim.viviannedossantos.com', accent: 'rosa' },
   { key: 'escola', href: 'https://escoladosveus.space', accent: 'lila' },
@@ -21,18 +22,21 @@ const accentBorder = {
   ocre: 'border-ocre/45 hover:border-ambar',
   rosa: 'border-rosa/50 hover:border-rosa',
   lila: 'border-lila/50 hover:border-lila',
+  bordeaux: 'border-bordeaux/50 hover:border-bordeaux',
 } as const;
 
 const accentBadge = {
   ocre: 'text-ambar',
   rosa: 'text-rosa',
   lila: 'text-lila',
+  bordeaux: 'text-bordeaux',
 } as const;
 
 const accentSeta = {
   ocre: 'text-ocre',
   rosa: 'text-rosa',
   lila: 'text-lila',
+  bordeaux: 'text-bordeaux',
 } as const;
 
 export function Mundos() {

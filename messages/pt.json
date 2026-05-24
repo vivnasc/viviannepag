@@ -23,6 +23,11 @@
   "mundos": {
     "eyebrow": "os caminhos",
     "lead": "Escolhe por onde precisas de entrar",
+    "freeme": {
+      "badge": "a travessia da mãe",
+      "titulo": "FreeMe",
+      "texto": "Toda a gente fala da criança ferida. Ninguém fala da culpa que tu carregas, em silêncio, por achares que falhaste com ele. Uma travessia terapêutica guiada para pousares o que não era teu para carregar."
+    },
     "infonte": {
       "badge": "clareza, foco, acção",
       "titulo": "Infonte",
