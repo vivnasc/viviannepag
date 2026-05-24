@@ -22,17 +22,13 @@ export function VivianneMark() {
 export function FreeMeMark() {
   return (
     <svg viewBox="0 0 512 512" aria-hidden className={cls}>
-      <g transform="translate(256,256)" fill="none" stroke="#8B2235" strokeWidth="20" strokeLinecap="round">
-        <path d="M0 -140 C-80 -60 -80 80 0 140" />
-        <path d="M0 -140 C80 -60 80 80 0 140" />
-      </g>
-      <circle cx="256" cy="256" r="18" fill="#8B2235" />
       <path
-        d="M220 210 C230 240 256 260 256 260 C256 260 282 240 292 210"
+        d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425"
         fill="none"
-        stroke="#EBAE4A"
-        strokeWidth="14"
+        stroke="#9A5A43"
+        strokeWidth="22"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
