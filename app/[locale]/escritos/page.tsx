@@ -38,8 +38,27 @@ export default async function EscritosPage({
   const t = await getTranslations('escritos');
   const escritos = await listEscritos(locale as Locale);
 
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com';
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Vivianne dos Santos', item: url },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t('todosTitulo'),
+        item: `${url}${locale === 'en' ? '/en' : ''}/escritos`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       <TopNav />
       <LangToggle />
       <main className="relative z-[2] max-w-wrap mx-auto px-7 pt-24 pb-20">

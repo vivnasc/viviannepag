@@ -39,10 +39,16 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
   const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com';
+  const verification: Record<string, string> = {};
+  if (process.env.GOOGLE_SITE_VERIFICATION) {
+    verification.google = process.env.GOOGLE_SITE_VERIFICATION;
+  }
+
   return {
     metadataBase: new URL(url),
     title: t('title'),
     description: t('description'),
+    verification,
     alternates: {
       canonical: locale === 'en' ? `${url}/en` : `${url}/`,
       languages: {
@@ -111,6 +117,7 @@ export default async function LocaleLayout({
           : 'Writer and systemic therapist in training',
       sameAs: [
         'https://instagram.com/vivianne.dos.santos',
+        'https://instagram.com/freeme_app',
         'https://instagram.com/infonte.app',
         'https://instagram.com/synchim.app',
         'https://instagram.com/escola_dos_veus',
@@ -126,8 +133,22 @@ export default async function LocaleLayout({
     },
   ];
 
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang={locale} className={`${fraunces.variable} ${outfit.variable}`}>
+      <head>
+        {gaId && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');`,
+              }}
+            />
+          </>
+        )}
+      </head>
       <body>
         <div className="grain" />
         <NextIntlClientProvider locale={locale} messages={messages}>

@@ -64,9 +64,28 @@ export default async function EscritoPage({
   const tematicaLabel = escrito.tematica
     ? t(`tematicas.${escrito.tematica}` as 'tematicas.o-no')
     : null;
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com';
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: escrito.titulo,
+    description: escrito.resumo,
+    datePublished: escrito.data,
+    author: { '@type': 'Person', name: 'Vivianne dos Santos', url },
+    publisher: { '@type': 'Person', name: 'Vivianne dos Santos', url },
+    mainEntityOfPage: `${url}${locale === 'en' ? '/en' : ''}/escritos/${slug}`,
+    inLanguage: escrito.isFallback ? 'pt-PT' : locale === 'pt' ? 'pt-PT' : 'en',
+    ...(escrito.capa && !escrito.capa.endsWith('.svg')
+      ? { image: escrito.capa.startsWith('http') ? escrito.capa : `${url}${escrito.capa}` }
+      : {}),
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <TopNav />
       <LangToggle />
       <main className="relative z-[2] max-w-[760px] mx-auto px-7 pt-20 pb-24">
