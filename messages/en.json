@@ -23,6 +23,11 @@
   "mundos": {
     "eyebrow": "the paths",
     "lead": "Choose where you need to enter",
+    "freeme": {
+      "badge": "the mother's crossing",
+      "titulo": "FreeMe",
+      "texto": "Everyone talks about the wounded child. No one talks about the guilt you carry, in silence, for thinking you failed him. A guided therapeutic crossing to put down what was never yours to carry."
+    },
     "infonte": {
       "badge": "clarity, focus, action",
       "titulo": "Infonte",
