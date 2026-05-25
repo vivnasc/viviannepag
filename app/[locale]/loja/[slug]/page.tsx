@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
+import { BotaoCompra } from '@/components/BotaoCompra';
 import { getSupabase } from '@/lib/supabase';
 import { marked } from 'marked';
 import type { Metadata } from 'next';
@@ -126,16 +127,14 @@ export default async function ProdutoPage({
               )}
             </div>
 
-            {p.checkout_url && (
-              <a
-                href={p.checkout_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-ambar text-terra font-sans text-[0.95rem] font-medium tracking-[0.04em] rounded-[14px] px-8 py-4 hover:bg-ocre transition-colors no-underline mb-10"
-              >
-                {isPt ? 'Começar a travessia' : 'Start the journey'}
-              </a>
-            )}
+            <div className="mb-10">
+              <BotaoCompra
+                slug={slug}
+                locale={locale}
+                label={isPt ? 'Começar a travessia' : 'Start the journey'}
+                checkoutUrl={p.checkout_url}
+              />
+            </div>
 
             {descHtml && (
               <article
