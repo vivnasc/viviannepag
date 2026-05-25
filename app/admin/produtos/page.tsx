@@ -13,6 +13,7 @@ type Produto = {
   preco_original: string | null;
   capa: string | null;
   checkout_url: string | null;
+  ficheiro_path: string | null;
   badge: string | null;
   destaque: boolean;
   publicado: boolean;
@@ -21,7 +22,7 @@ type Produto = {
 
 const vazio: Omit<Produto, 'id'> = {
   slug: '', titulo: '', subtitulo: '', descricao: '', preco: '',
-  preco_original: null, capa: null, checkout_url: null, badge: null,
+  preco_original: null, capa: null, checkout_url: null, ficheiro_path: null, badge: null,
   destaque: false, publicado: false, ordem: 0,
 };
 
@@ -111,6 +112,21 @@ export default function ProdutosAdmin() {
                 </div>
               ) : <p className="text-creme-2/60 italic text-sm text-center">arrasta a capa do produto</p>}
             </div>
+          </div>
+          <div>
+            <label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">ficheiro do produto (PDF, ebook)</label>
+            <div className="flex gap-3 items-center">
+              <input value={edit.ficheiro_path??''} onChange={e => setEdit({...edit, ficheiro_path: e.target.value||null})} className={`${inp} flex-1`} placeholder="path no Supabase Storage (ex: produtos/guia-do-no.pdf)" />
+              <input type="file" accept=".pdf,.epub,.zip" onChange={async e => {
+                const f = e.target.files?.[0]; if (!f) return;
+                const fd = new FormData(); fd.append('file', f); fd.append('slug', edit.slug||'produto');
+                const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+                const json = await res.json();
+                if (res.ok) { setEdit({...edit, ficheiro_path: json.path}); setMsg('Ficheiro carregado.'); }
+                else setMsg(`Upload: ${json.erro}`);
+              }} className="text-creme-2 text-sm" />
+            </div>
+            {edit.ficheiro_path && <p className="text-ambar/70 text-xs mt-1">Path: {edit.ficheiro_path}</p>}
           </div>
           <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">descrição (markdown)</label><textarea value={edit.descricao} onChange={e => setEdit({...edit, descricao: e.target.value})} rows={14} className={`${inp} font-mono text-[0.92rem]`} /></div>
           <div className="grid grid-cols-2 gap-5">

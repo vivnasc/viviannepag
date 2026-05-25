@@ -7,7 +7,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   const { id } = await params;
   const body = await req.json();
   const allowed: Record<string, unknown> = {};
-  for (const key of ['slug', 'titulo', 'subtitulo', 'descricao', 'preco', 'preco_original', 'capa', 'checkout_url', 'badge', 'destaque', 'publicado', 'ordem']) {
+  for (const key of ['slug', 'titulo', 'subtitulo', 'descricao', 'preco', 'preco_original', 'capa', 'checkout_url', 'ficheiro_path', 'badge', 'destaque', 'publicado', 'ordem']) {
     if (key in body) allowed[key] = body[key];
   }
   allowed.updated_at = new Date().toISOString();

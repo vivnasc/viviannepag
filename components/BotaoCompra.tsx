@@ -17,11 +17,24 @@ export function BotaoCompra({
   checkoutUrl?: string | null;
 }) {
   const [pago, setPago] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const isPt = locale === 'pt';
 
   const precoNum = parseFloat(preco.replace(/[^0-9.,]/g, '').replace(',', '.'));
+
+  async function obterDownload() {
+    const res = await fetch('/api/download', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    });
+    const json = await res.json();
+    if (res.ok && json.url) {
+      setDownloadUrl(json.url);
+    }
+  }
 
   if (checkoutUrl) {
     return (
@@ -50,11 +63,27 @@ export function BotaoCompra({
         <p className="text-ambar font-serif text-[1.2rem] mb-2">
           {isPt ? 'Obrigada!' : 'Thank you!'}
         </p>
-        <p className="text-creme-2 text-sm">
+        <p className="text-creme-2 text-sm mb-5">
           {isPt
-            ? 'Pagamento confirmado. Vais receber um email com o acesso ao teu conteúdo.'
-            : 'Payment confirmed. You will receive an email with access to your content.'}
+            ? 'Pagamento confirmado.'
+            : 'Payment confirmed.'}
         </p>
+        {downloadUrl ? (
+          <a
+            href={downloadUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-ambar text-terra font-sans text-[0.92rem] font-medium tracking-[0.04em] rounded-[14px] px-6 py-3 hover:bg-ocre transition-colors no-underline"
+          >
+            {isPt ? 'Descarregar' : 'Download'}
+          </a>
+        ) : (
+          <p className="text-creme-2/60 text-sm italic">
+            {isPt
+              ? 'Vais receber um email com o acesso ao teu conteúdo.'
+              : 'You will receive an email with access to your content.'}
+          </p>
+        )}
       </div>
     );
   }
@@ -96,6 +125,7 @@ export function BotaoCompra({
               await actions.order.capture();
             }
             setPago(true);
+            obterDownload();
           }}
           onError={() => {
             setErro(isPt ? 'Algo correu mal. Tenta de novo.' : 'Something went wrong. Try again.');

@@ -24,6 +24,7 @@ export async function POST(req: Request) {
     preco_original: body.preco_original || null,
     capa: body.capa || null,
     checkout_url: body.checkout_url || null,
+    ficheiro_path: body.ficheiro_path || null,
     badge: body.badge || null,
     destaque: !!body.destaque,
     publicado: !!body.publicado,
