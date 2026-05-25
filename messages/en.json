@@ -11,7 +11,8 @@
   "nav": {
     "ariaLabel": "navigation",
     "inicio": "home",
-    "escritos": "writings"
+    "escritos": "writings",
+    "loja": "shop"
   },
   "hero": {
     "nome": "Vivianne dos Santos",
