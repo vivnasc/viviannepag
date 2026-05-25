@@ -25,8 +25,10 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
   const [salvando, setSalvando] = useState(false);
   const [mensagem, setMensagem] = useState<string | null>(null);
   const [dragAtivo, setDragAtivo] = useState(false);
-  const [aGerar, setAGerar] = useState<null | 'esboco' | 'titulo' | 'resumo' | 'continuar'>(null);
+  const [aGerar, setAGerar] = useState<null | 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'prompt-imagem'>(null);
   const [promptIA, setPromptIA] = useState('');
+  const [estiloMJ, setEstiloMJ] = useState('');
+  const [promptMJ, setPromptMJ] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
 
   function set<K extends keyof Escrito>(k: K, v: Escrito[K]) {
@@ -80,7 +82,7 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
     if (file) upload(file);
   }
 
-  async function gerar(modo: 'esboco' | 'titulo' | 'resumo' | 'continuar') {
+  async function gerar(modo: 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'prompt-imagem') {
     setAGerar(modo);
     setMensagem(null);
     const payload: Record<string, string> = { modo };
@@ -88,6 +90,9 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
       payload.prompt = promptIA || escrito.titulo;
       payload.titulo = escrito.titulo;
       payload.tematica = escrito.tematica ?? '';
+    } else if (modo === 'prompt-imagem') {
+      payload.prompt = estiloMJ || '';
+      payload.contexto = escrito.conteudo || escrito.titulo;
     } else {
       payload.contexto = escrito.conteudo;
     }
@@ -108,6 +113,10 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
       set('resumo', json.texto.trim());
     } else if (modo === 'continuar') {
       set('conteudo', (escrito.conteudo || '') + '\n\n' + json.texto);
+    } else if (modo === 'expandir') {
+      set('conteudo', json.texto);
+    } else if (modo === 'prompt-imagem') {
+      setPromptMJ(json.texto.trim());
     } else {
       set('conteudo', json.texto);
     }
@@ -197,6 +206,28 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
               <p className="text-creme-2/60 italic text-sm text-center">arrasta uma imagem para aqui ou clica para escolher</p>
             )}
           </div>
+          <div className="mt-3 flex gap-2 flex-wrap items-end">
+            <input
+              placeholder="estilo (ex: fotografia minimalista, digital art, watercolor…)"
+              value={estiloMJ}
+              onChange={(e) => setEstiloMJ(e.target.value)}
+              className={`${inputCls} flex-1 min-w-[200px] text-sm`}
+            />
+            <button
+              type="button"
+              onClick={() => gerar('prompt-imagem')}
+              disabled={aGerar !== null || (!escrito.conteudo && !escrito.titulo)}
+              className={btnSec}
+            >
+              {aGerar === 'prompt-imagem' ? 'a gerar…' : '✶ gerar prompt MJ'}
+            </button>
+          </div>
+          {promptMJ && (
+            <div className="mt-3 bg-terra-2/40 rounded-[10px] p-3 border border-ocre/20">
+              <p className="text-[0.68rem] tracking-[0.16em] uppercase text-ocre/70 mb-2">prompt midjourney (copiar):</p>
+              <p className="text-creme text-sm font-mono leading-relaxed select-all">{promptMJ}</p>
+            </div>
+          )}
         </Field>
 
         <Field label="conteúdo (markdown)">
@@ -215,6 +246,9 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
             </button>
             <button onClick={() => gerar('continuar')} disabled={aGerar !== null || !escrito.conteudo} className={btnSec}>
               {aGerar === 'continuar' ? '…' : '✶ continuar'}
+            </button>
+            <button onClick={() => gerar('expandir')} disabled={aGerar !== null || !escrito.conteudo} className={btnSec}>
+              {aGerar === 'expandir' ? '…' : '✶ expandir'}
             </button>
           </div>
           <textarea

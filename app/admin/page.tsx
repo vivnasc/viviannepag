@@ -22,6 +22,8 @@ export default function AdminPage() {
   const [escritos, setEscritos] = useState<Escrito[]>([]);
   const [migrando, setMigrando] = useState(false);
   const [mensagem, setMensagem] = useState<string | null>(null);
+  const [sugerindo, setSugerindo] = useState(false);
+  const [sugestoes, setSugestoes] = useState<string | null>(null);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -73,6 +75,24 @@ export default function AdminPage() {
       carregar();
     } else {
       setMensagem(`Erro: ${json.erro}`);
+    }
+  }
+
+  async function sugerirTemas() {
+    setSugerindo(true);
+    setSugestoes(null);
+    const resumo = escritos.map((e) => `[${e.tematica ?? '?'}] "${e.titulo}"`).join('\n');
+    const res = await fetch('/api/admin/gerar', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ modo: 'sugerir-temas', escritosExistentes: resumo }),
+    });
+    const json = await res.json();
+    setSugerindo(false);
+    if (res.ok) {
+      setSugestoes(json.texto);
+    } else {
+      setSugestoes(`Erro: ${json.erro}`);
     }
   }
 
@@ -153,6 +173,57 @@ export default function AdminPage() {
       {mensagem && (
         <p className="text-ambar text-sm mb-6 font-serif italic">{mensagem}</p>
       )}
+
+      {escritos.length > 0 && (() => {
+        const porTematica: Record<string, number> = {};
+        const semCapa: string[] = [];
+        let publicados = 0;
+        let rascunhos = 0;
+        for (const e of escritos) {
+          const t = e.tematica ?? 'sem-tematica';
+          porTematica[t] = (porTematica[t] ?? 0) + 1;
+          if (!e.publicado) rascunhos++; else publicados++;
+          if (!(e as Record<string, unknown>).capa) semCapa.push(e.titulo);
+        }
+        return (
+          <div className="mb-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="border border-ocre/20 rounded-[14px] p-4 text-center">
+              <p className="text-ambar text-2xl font-serif">{escritos.length}</p>
+              <p className="text-[0.7rem] tracking-[0.14em] uppercase text-creme-2/70">total</p>
+            </div>
+            <div className="border border-ocre/20 rounded-[14px] p-4 text-center">
+              <p className="text-ambar text-2xl font-serif">{publicados}</p>
+              <p className="text-[0.7rem] tracking-[0.14em] uppercase text-creme-2/70">publicados</p>
+            </div>
+            <div className="border border-ocre/20 rounded-[14px] p-4 text-center">
+              <p className="text-ambar text-2xl font-serif">{rascunhos}</p>
+              <p className="text-[0.7rem] tracking-[0.14em] uppercase text-creme-2/70">rascunhos</p>
+            </div>
+            <div className="border border-ocre/20 rounded-[14px] p-4 text-center">
+              <p className="text-ambar text-2xl font-serif">{semCapa.length}</p>
+              <p className="text-[0.7rem] tracking-[0.14em] uppercase text-creme-2/70">sem capa</p>
+            </div>
+            {Object.entries(porTematica).sort().map(([t, n]) => (
+              <div key={t} className="border border-ocre/15 rounded-[12px] p-3 text-center">
+                <p className="text-creme text-lg font-serif">{n}</p>
+                <p className="text-[0.66rem] tracking-[0.14em] uppercase text-ocre/70">{t}</p>
+              </div>
+            ))}
+            <div className="col-span-full mt-2">
+              <button
+                onClick={sugerirTemas}
+                disabled={sugerindo}
+                className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
+              >
+                {sugerindo ? 'Claude a pensar…' : '✶ sugerir próximos temas'}
+              </button>
+              {sugestoes && (
+                <pre className="mt-4 bg-terra-2/40 rounded-[12px] p-4 border border-ocre/15 text-creme-2 text-sm whitespace-pre-wrap font-sans leading-relaxed">{sugestoes}</pre>
+              )}
+            </div>
+          </div>
+        );
+      })()}
 
       {escritos.length === 0 ? (
         <p className="text-creme-2/70 italic font-serif">Sem escritos. Clica em "importar .mdx" para carregar os existentes, ou cria um novo.</p>
