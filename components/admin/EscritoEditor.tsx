@@ -25,7 +25,8 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
   const [salvando, setSalvando] = useState(false);
   const [mensagem, setMensagem] = useState<string | null>(null);
   const [dragAtivo, setDragAtivo] = useState(false);
-  const [aGerar, setAGerar] = useState<null | 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'prompt-imagem'>(null);
+  const [aGerar, setAGerar] = useState<null | 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'prompt-imagem' | 'legenda-social' | 'traduzir-en'>(null);
+  const [legendaSocial, setLegendaSocial] = useState('');
   const [promptIA, setPromptIA] = useState('');
   const [estiloMJ, setEstiloMJ] = useState('');
   const [promptMJ, setPromptMJ] = useState('');
@@ -82,7 +83,63 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
     if (file) upload(file);
   }
 
-  async function gerar(modo: 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'prompt-imagem') {
+  async function traduzirEN() {
+    if (!escrito.conteudo || !escrito.slug) return;
+    setAGerar('traduzir-en');
+    setMensagem('A traduzir para EN…');
+    const res = await fetch('/api/admin/gerar', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        modo: 'traduzir-en',
+        titulo: escrito.titulo,
+        prompt: escrito.resumo,
+        contexto: escrito.conteudo,
+      }),
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      setAGerar(null);
+      setMensagem(`Erro: ${json.erro}`);
+      return;
+    }
+    const texto = json.texto as string;
+    const titleMatch = texto.match(/^TITLE:\s*(.+)/m);
+    const summaryMatch = texto.match(/^SUMMARY:\s*(.+)/m);
+    const bodyStart = texto.indexOf('\n\n', texto.indexOf('SUMMARY:'));
+    const enTitulo = titleMatch?.[1]?.trim() ?? escrito.titulo;
+    const enResumo = summaryMatch?.[1]?.trim() ?? escrito.resumo;
+    const enConteudo = bodyStart > 0 ? texto.slice(bodyStart).trim() : texto;
+
+    const saveRes = await fetch('/api/admin/escritos', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        slug: escrito.slug,
+        locale: 'en',
+        titulo: enTitulo,
+        resumo: enResumo,
+        conteudo: enConteudo,
+        tematica: escrito.tematica,
+        capa: escrito.capa,
+        data: escrito.data,
+        publicado: escrito.publicado,
+      }),
+    });
+    setAGerar(null);
+    if (saveRes.ok) {
+      setMensagem('Versão EN criada e guardada.');
+    } else {
+      const sj = await saveRes.json();
+      if (sj.erro === 'slug-duplicado') {
+        setMensagem('Versão EN já existe para este slug. Edita-a na lista.');
+      } else {
+        setMensagem(`Traduzido mas falhou a guardar: ${sj.erro}`);
+      }
+    }
+  }
+
+  async function gerar(modo: 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'prompt-imagem' | 'legenda-social') {
     setAGerar(modo);
     setMensagem(null);
     const payload: Record<string, string> = { modo };
@@ -93,6 +150,8 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
     } else if (modo === 'prompt-imagem') {
       payload.prompt = estiloMJ || '';
       payload.contexto = escrito.conteudo || escrito.titulo;
+    } else if (modo === 'legenda-social') {
+      payload.contexto = `Título: ${escrito.titulo}\nResumo: ${escrito.resumo}\n\n${escrito.conteudo}`;
     } else {
       payload.contexto = escrito.conteudo;
     }
@@ -117,6 +176,8 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
       set('conteudo', json.texto);
     } else if (modo === 'prompt-imagem') {
       setPromptMJ(json.texto.trim());
+    } else if (modo === 'legenda-social') {
+      setLegendaSocial(json.texto);
     } else {
       set('conteudo', json.texto);
     }
@@ -258,6 +319,34 @@ export function EscritoEditor({ inicial, modo }: { inicial: Escrito; modo: 'novo
             className={`${inputCls} font-mono text-[0.92rem] leading-[1.7]`}
             placeholder="# corpo do texto em markdown..."
           />
+        </Field>
+
+        {escrito.locale === 'pt' && (
+          <Field label="versão inglesa">
+            <button
+              type="button"
+              onClick={traduzirEN}
+              disabled={aGerar !== null || !escrito.conteudo || !escrito.slug}
+              className={btnSec}
+            >
+              {aGerar === 'traduzir-en' ? 'a traduzir…' : '✶ traduzir para EN e guardar'}
+            </button>
+            <p className="text-creme-2/50 text-[0.75rem] mt-2">Claude traduz título + resumo + texto e cria um novo escrito com locale EN e o mesmo slug. Se já existir, não sobrescreve.</p>
+          </Field>
+        )}
+
+        <Field label="redes sociais">
+          <button
+            type="button"
+            onClick={() => gerar('legenda-social')}
+            disabled={aGerar !== null || !escrito.conteudo}
+            className={`${btnSec} mb-3`}
+          >
+            {aGerar === 'legenda-social' ? 'a gerar…' : '✶ gerar legendas (Instagram · TikTok · Stories)'}
+          </button>
+          {legendaSocial && (
+            <pre className="bg-terra-2/40 rounded-[12px] p-4 border border-ocre/15 text-creme-2 text-sm whitespace-pre-wrap font-sans leading-relaxed select-all">{legendaSocial}</pre>
+          )}
         </Field>
 
         <Field label="publicar">

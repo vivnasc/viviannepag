@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
+import { PartilhaEscrito } from '@/components/home/PartilhaEscrito';
 import {
   getEscrito,
   listAllSlugs,
@@ -148,7 +149,14 @@ export default async function EscritoPage({
           />
         </div>
 
-        <div className="text-center mt-20">
+        <PartilhaEscrito
+          url={`${url}${locale === 'en' ? '/en' : ''}/escritos/${slug}`}
+          titulo={escrito.titulo}
+          resumo={escrito.resumo}
+          locale={locale}
+        />
+
+        <div className="text-center mt-10">
           <Link
             href={locale === 'en' ? '/en/escritos' : '/escritos'}
             className="text-ocre no-underline border-b border-ocre/40 hover:border-ambar hover:text-ambar transition-colors text-[0.9rem] tracking-[0.04em] pb-0.5"

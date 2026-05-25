@@ -3,23 +3,9 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 
-export type Locale = 'pt' | 'en';
-
-export type EscritoMeta = {
-  slug: string;
-  titulo: string;
-  resumo: string;
-  data: string;
-  tematica?: string;
-  capa?: string;
-  publicado: boolean;
-  locale: Locale;
-  isFallback: boolean;
-};
-
-export type Escrito = EscritoMeta & {
-  conteudoHtml: string;
-};
+export type { Locale, EscritoMeta, Escrito } from './escritos-shared';
+export { formatarData } from './escritos-shared';
+import type { Locale, EscritoMeta, Escrito } from './escritos-shared';
 
 const ESCRITOS_DIR = path.join(process.cwd(), 'content', 'escritos');
 const PLACEHOLDER_CAPA = '/escritos/_placeholder.svg';
@@ -160,15 +146,4 @@ async function listAllSlugsFs(): Promise<string[]> {
     if (parsed) slugs.add(parsed.slug);
   }
   return Array.from(slugs);
-}
-
-export function formatarData(iso: string, locale: Locale): string {
-  if (!iso) return '';
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
 }

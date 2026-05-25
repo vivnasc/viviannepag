@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     prompt?: string;
     titulo?: string;
     tematica?: string;
-    modo?: 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'sugerir-temas' | 'prompt-imagem';
+    modo?: 'esboco' | 'titulo' | 'resumo' | 'continuar' | 'expandir' | 'sugerir-temas' | 'traduzir-en' | 'legenda-social' | 'prompt-imagem';
     contexto?: string;
     escritosExistentes?: string;
   };
@@ -39,6 +39,23 @@ export async function POST(req: Request) {
       break;
     case 'sugerir-temas':
       userPrompt = `Estes são os escritos já publicados pela Vivianne, organizados por temática:\n\n${body.escritosExistentes}\n\nCom base nisto, sugere 6 novos temas para escritos (2 por temática: o-no, presenca, veu). Para cada:\n- Título (5–9 palavras, poético mas concreto)\n- Temática (o-no / presenca / veu)\n- Resumo (1 frase, até 25 palavras)\n- Porquê este tema (1 frase justificando o gap)\n\nFormato: lista numerada, campos separados por " | ".`;
+      break;
+    case 'traduzir-en':
+      userPrompt = `Traduz este texto de português para inglês. Mantém a mesma voz (directa, 2ª pessoa "you"), o mesmo ritmo, as mesmas quebras de parágrafo, os mesmos ## sub-cabeçalhos, e o mesmo markdown (incluindo **negrito** e *itálico*). Não adaptes culturalmente — traduz fielmente mas com fluência natural em inglês.\n\nTítulo: ${body.titulo}\nResumo: ${body.prompt}\n\nTexto:\n${body.contexto}\n\nDevolve APENAS no formato:\nTITLE: ...\nSUMMARY: ...\n\n[corpo traduzido]`;
+      break;
+    case 'legenda-social':
+      userPrompt = `Lê este texto e cria conteúdo para redes sociais da Vivianne dos Santos. Devolve EXACTAMENTE neste formato:
+
+INSTAGRAM:
+[Legenda para Instagram: 3-5 frases na voz dela, com hook forte na primeira frase, emoji mínimo (max 1-2), termina com call-to-action para ler o texto completo no link da bio. Inclui 5-8 hashtags relevantes.]
+
+TIKTOK:
+[Hook de 3 segundos para abrir vídeo (pergunta provocadora ou afirmação forte). Depois 2-3 bullet points do texto para o teleprompter. Termina com CTA.]
+
+STORIES:
+[3 frames de story: frame 1 = hook visual (frase curta impactante), frame 2 = insight do texto, frame 3 = CTA com swipe up/link]
+
+Texto:\n${body.contexto}`;
       break;
     case 'prompt-imagem':
       userPrompt = `Lê este texto e cria um prompt para o Midjourney que capture a essência visual do texto. O prompt deve funcionar directamente no Midjourney (em inglês). Termina com --ar 3:2 --v 6.\n\nSe o utilizador indicou um estilo preferido, respeita-o. Caso contrário, escolhe algo contemplativo e atmosférico que combine com o tom do texto.\n\n${body.contexto ? `Estilo preferido: ${body.prompt || 'livre'}\n\nTexto:\n${body.contexto}` : `Tema: ${body.prompt}`}\n\nResponde APENAS com o prompt, sem explicações.`;
