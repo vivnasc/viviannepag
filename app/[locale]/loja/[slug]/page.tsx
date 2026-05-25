@@ -131,7 +131,8 @@ export default async function ProdutoPage({
               <BotaoCompra
                 slug={slug}
                 locale={locale}
-                label={isPt ? 'Começar a travessia' : 'Start the journey'}
+                titulo={p.titulo}
+                preco={p.preco}
                 checkoutUrl={p.checkout_url}
               />
             </div>
