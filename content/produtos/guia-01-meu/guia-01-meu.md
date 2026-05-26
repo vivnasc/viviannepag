@@ -221,4 +221,4 @@ E lembra-te: não és egoísta por quereres ser leve. Não és má filha, má m�
 
 *Este guia é um material de autoconhecimento baseado em princípios das constelações familiares sistémicas e na experiência clínica e pessoal da autora. Não constitui diagnóstico, terapia ou aconselhamento psicológico. Se sentes que precisas de apoio profissional, procura um psicólogo ou psicoterapeuta qualificado.*
 
-*© Vivianne dos Santos · [viviannedossantos.com](https://viviannedossantos.com)*
+*© 2026 Vivianne dos Santos · [viviannedossantos.com](https://viviannedossantos.com)*

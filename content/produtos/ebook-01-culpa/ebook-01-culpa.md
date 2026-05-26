@@ -547,7 +547,7 @@ São 7 bloqueios. A culpa é o primeiro (é por isso que este ebook existe, é a
 
 O ebook deu-te o mapa. O FreeMe é a viagem.
 
-Se sentes que é o momento, estou lá. Em **freeme.viviannedossantos.com**.
+Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
 E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já está plantada. E quando estiveres pronta, o caminho estará à tua espera.
 

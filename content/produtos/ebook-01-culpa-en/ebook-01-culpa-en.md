@@ -547,7 +547,7 @@ There are 7 blocks. Guilt is the first (that's why this ebook exists, it's the g
 
 The ebook gave you the map. FreeMe is the journey.
 
-If you feel this is the moment, I'm there. At **freeme.viviannedossantos.com**.
+If you feel this is the moment, I'm there. At **[freeme.viviannedossantos.com](https://freeme.viviannedossantos.com)**.
 
 And if this isn't the moment, that's okay. What you've read here is already yours. The seed is already planted. And when you're ready, the path will be waiting for you.
 

@@ -200,4 +200,4 @@ E isso é suficiente.
 
 *Este guia é um material de autoconhecimento e não substitui acompanhamento profissional. Se sentes dificuldades persistentes na relação com o teu filho ou sintomas de sofrimento emocional significativo, procura um profissional de saúde mental.*
 
-*© Vivianne dos Santos · viviannedossantos.com*
+*© 2026 Vivianne dos Santos · viviannedossantos.com*

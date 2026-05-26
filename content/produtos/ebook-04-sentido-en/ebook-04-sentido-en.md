@@ -345,7 +345,7 @@ You can understand that meaning is built and not know where to begin. You can re
 
 This is not failure. This is being human. And it is, truly, one of the most profound ways to honor this path: recognizing that it asks more than your mind, alone, can offer.
 
-My writing, my texts (the pieces I share on the site, the words I leave there for whoever needs them), are a thread in that crossing. They are pieces of my own path that I offer so they might illuminate a stretch of yours. If these pages made sense to you, there is more. There are texts born from a place similar to this one, with the same honesty, with the same refusal to give easy answers. They are at viviannedossantos.com, waiting for you, without rush.
+My writing, my texts (the pieces I share on the site, the words I leave there for whoever needs them), are a thread in that crossing. They are pieces of my own path that I offer so they might illuminate a stretch of yours. If these pages made sense to you, there is more. There are texts born from a place similar to this one, with the same honesty, with the same refusal to give easy answers. They are at [viviannedossantos.com](https://viviannedossantos.com), waiting for you, without rush.
 
 And there is a space I created for those who feel that understanding was important, but who want to go deeper. The Escola dos Véus is that space. Not a course. Not a personal development program with promises and schedules. It's a place of deep exploration, where the questions this book raised can be lived, not just read. Where meaning isn't discussed in the abstract, but touched with the hands of the soul. Where transcendence, presence, connection, and contribution cease to be concepts and become experience.
 
@@ -371,6 +371,6 @@ With all my tenderness,
 ---
 
 *© 2026 Vivianne dos Santos. All rights reserved.*
-*viviannedossantos.com*
+*[viviannedossantos.com](https://viviannedossantos.com)*
 
 *This material is intended exclusively for self-knowledge and personal reflection. It does not constitute therapeutic, psychological, or medical advice, nor does it replace the support of qualified professionals. The principles of the psychology of meaning and Transpersonal Psychology presented here are used as a tool for reflection, not as clinical intervention. If you feel you need professional support, seek a psychologist, psychotherapist, or other mental health professional. Taking care of yourself is the first step.*

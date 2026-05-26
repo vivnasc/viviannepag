@@ -445,7 +445,7 @@ Não vou dizer-te que o FreeMe vai resolver tudo. Não vai. Porque a vida não f
 
 No FreeMe, trabalhas com os princípios que explorámos nestas páginas, mas de uma forma vivida, não apenas lida. É lá que a compreensão se torna movimento. É lá que o mapa se torna caminho. É lá que aquilo que viste pode, finalmente, transformar-se.
 
-Se sentes que é a altura, o FreeMe está à tua espera em freeme.viviannedossantos.com.
+Se sentes que é a altura, o FreeMe está à tua espera em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
 Se não sentes, está tudo bem. Guarda este livro. Relê-o quando precisares. Deixa que as ideias assentem. Às vezes, a semente precisa de tempo antes de germinar.
 
@@ -461,7 +461,7 @@ Vivianne
 ---
 
 *© 2026 Vivianne dos Santos. Todos os direitos reservados.*
-*viviannedossantos.com*
-*freeme.viviannedossantos.com*
+*[viviannedossantos.com](https://viviannedossantos.com)*
+*[freeme.viviannedossantos.com](https://freeme.viviannedossantos.com)*
 
 *Este material destina-se exclusivamente a fins de autoconhecimento e reflexão pessoal. Não constitui aconselhamento terapêutico, psicológico ou médico, nem substitui o acompanhamento de profissionais qualificados. Os princípios da Constelação Familiar Sistémica aqui apresentados são utilizados como ferramenta de reflexão, não como sessão clínica. Se sentes que precisas de apoio profissional, procura um psicólogo, psicoterapeuta ou outro profissional de saúde mental. Cuidar de ti é o primeiro passo.*
