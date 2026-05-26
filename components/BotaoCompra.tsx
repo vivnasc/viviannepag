@@ -101,9 +101,7 @@ export function BotaoCompra({
           {isPt ? 'Pagamento confirmado.' : 'Payment confirmed.'}
         </p>
         <p className="text-creme-2/70 text-xs mb-5">
-          {isPt
-            ? `Compra registada para ${email}`
-            : `Purchase registered for ${email}`}
+          {email}
         </p>
         <a
           href={downloadUrl || `/produtos/${slug}.pdf`}
