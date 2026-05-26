@@ -353,6 +353,12 @@ Isto não é perdão forçado. Não te estou a pedir para perdoar. O perdão, qu
 
 Quando vês assim, algo muda. Não muda tudo. Não muda de repente. Mas muda o suficiente para que o próximo passo seja possível.
 
+Quero ser honesta contigo sobre uma coisa. Há uma parte deste caminho que pode ser dolorosa. Quando começas a ver os teus pais como seres humanos, completos, imperfeitos, com a sua própria dor, algo dentro de ti pode sentir-se desamparado. Porque a criança dentro de ti ainda queria pais perfeitos. Ainda queria uma mãe que soubesse sempre o que fazer. Ainda queria um pai que nunca falhasse. E abrir mão dessa fantasia (porque é uma fantasia, por mais real que pareça) é um pequeno luto. É deixar ir a esperança de que o passado podia ter sido diferente. É aceitar que foi o que foi.
+
+E nessa aceitação, paradoxalmente, nasce a liberdade.
+
+Porque enquanto esperares que o passado mude, ficas presa a ele. Enquanto quiseres que a tua mãe seja quem não foi, continuas a olhar para trás. Enquanto culpares, continuas ligada. Mas quando aceitas (não com resignação, mas com compreensão profunda), algo se solta. E podes, finalmente, olhar para diante.
+
 E o próximo passo é aprender a honrar sem repetir.
 
 Porque há uma diferença enorme entre olhar para trás com compreensão e continuar a viver os mesmos padrões. Podes amar os teus pais e viver de forma diferente. Podes pertencer à tua família e ser livre. Podes honrar quem veio antes de ti sem carregar o peso que era deles.
@@ -393,7 +399,13 @@ Tomar o teu lugar não é egoísmo. É ordem. E quando estás no teu lugar, curi
 
 Dos pais para os filhos. De quem veio primeiro para quem veio depois. Tu recebes dos teus pais (a vida, pelo menos, e talvez muito mais). E dás aos teus filhos, ou ao mundo, ou à vida. O fluxo é para diante, não para trás. Quando tentas dar aos teus pais o que eles deviam ter recebido dos pais deles, inverte-se o rio. E o rio invertido causa inundações.
 
-Eu sei que estes princípios podem parecer simples quando escritos assim. E são, na sua essência. Mas vivê-los é outra história. Porque entre compreender um mapa e percorrer o território há uma distância enorme. O mapa mostra-te onde estás e para onde podes ir. Mas o caminho, esse, precisa de ser percorrido com os pés no chão, um passo de cada vez.
+Eu sei que, neste momento, talvez estejas a pensar: "Sim, mas como é que eu faço isso na prática? Como é que eu devolvo o que não é meu? Como é que eu tomo o meu lugar quando passei a vida inteira fora dele?"
+
+Estas são as perguntas certas. E quero ser honesta contigo: não é algo que se faça com uma lista de instruções. Não é um exercício de cinco passos. Não é algo que se resolva com afirmações positivas ao espelho, por mais bem-intencionadas que sejam.
+
+A diferença entre compreender um mapa e percorrer o território é enorme. O mapa mostra-te onde estás e para onde podes ir. Mas o caminho, esse, precisa de ser percorrido com os pés no chão, um passo de cada vez. Precisa de um espaço seguro. Precisa de orientação. Precisa de alguém que já conhece o terreno e pode caminhar contigo sem te empurrar, mas sem te deixar sozinha.
+
+Porque há movimentos internos que não se fazem com a mente. Fazem-se com o corpo. Fazem-se com a alma (se me permites a palavra). Fazem-se naquele espaço entre o que sabes e o que sentes, onde a verdade nem sempre cabe em palavras.
 
 E há caminhos que precisam de companhia.
 
@@ -416,6 +428,8 @@ Foi para isso que criei o FreeMe.
 Não como um curso. Não como mais um programa de desenvolvimento pessoal cheio de promessas. Mas como uma travessia. Um espaço onde as mulheres que viram o que tu acabaste de ver podem dar o passo seguinte. Com orientação. Com cuidado. Com respeito pelo ritmo de cada uma.
 
 Não vou dizer-te que o FreeMe vai resolver tudo. Não vai. Porque a vida não funciona assim, e eu recuso-me a prometer o que não posso garantir. O que posso dizer-te é que foi construído com o mesmo respeito que coloquei nestas páginas. Com base nos mesmos princípios. Com a mesma convicção de que tu não estás partida, estás emaranhada. E que o emaranhado se desata, não com força, mas com compreensão, com presença e com o apoio certo.
+
+No FreeMe, trabalhas com os princípios que explorámos nestas páginas, mas de uma forma vivida, não apenas lida. É lá que a compreensão se torna movimento. É lá que o mapa se torna caminho. É lá que aquilo que viste pode, finalmente, transformar-se.
 
 Se sentes que é a altura, o FreeMe está à tua espera em freeme.viviannedossantos.com.
 
