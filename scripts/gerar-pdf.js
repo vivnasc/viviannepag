@@ -81,21 +81,23 @@ const PRODUTOS = {
 
 function getVSvg(color, size = 60) {
   return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-    <g fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round">
       <path d="M150 120 C150 270 188 345 244 378"/>
       <path d="M362 120 C362 270 324 345 268 378"/>
     </g>
     <circle cx="256" cy="246" r="14" fill="${color}"/>
+    <path d="M168 400 C200 374 224 422 256 400 C288 378 312 422 344 400" fill="none" stroke="${color}" stroke-width="12" stroke-linecap="round"/>
   </svg>`;
 }
 
 function getVSvgBig(color, size = 280) {
   return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-    <g fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M80 80 C80 290 162 412 256 458"/>
-      <path d="M432 80 C432 290 350 412 256 458"/>
+    <g fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round">
+      <path d="M150 120 C150 270 188 345 244 378"/>
+      <path d="M362 120 C362 270 324 345 268 378"/>
     </g>
-    <circle cx="256" cy="284" r="24" fill="${color}"/>
+    <circle cx="256" cy="246" r="18" fill="${color}"/>
+    <path d="M168 400 C200 374 224 422 256 400 C288 378 312 422 344 400" fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round"/>
   </svg>`;
 }
 
