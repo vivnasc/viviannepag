@@ -117,9 +117,12 @@ export default async function LojaPage({
           <p className="text-center text-creme-2/70 italic font-serif">
             {isPt ? 'Em breve.' : 'Coming soon.'}
           </p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-            {produtos.map((p) => {
+        ) : (() => {
+          const ebooks = produtos.filter(p => p.badge?.toLowerCase().includes('ebook'));
+          const guias = produtos.filter(p => p.badge?.toLowerCase().includes('guia') || (!p.badge?.toLowerCase().includes('ebook')));
+          const filteredGuias = guias.filter(g => !ebooks.some(e => e.id === g.id));
+
+          const renderCard = (p: Produto) => {
               const href = `${locale === 'en' ? '/en' : ''}/loja/${p.slug}`;
               return (
                 <Link key={p.id} href={href} className="group block no-underline">
@@ -165,9 +168,46 @@ export default async function LojaPage({
                   </div>
                 </Link>
               );
-            })}
-          </div>
-        )}
+          };
+
+          return (
+            <>
+              {/* EBOOKS */}
+              <section className="mb-16">
+                <div className="flex items-center gap-4 mb-8">
+                  <h2 className="font-serif font-light text-creme text-[1.6rem]">
+                    {isPt ? 'Ebooks' : 'Ebooks'}
+                  </h2>
+                  <div className="flex-1 h-px bg-ocre/15" />
+                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
+                    {ebooks.length} {isPt ? 'títulos' : 'titles'}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                  {ebooks.map(renderCard)}
+                </div>
+              </section>
+
+              {/* GUIAS */}
+              {filteredGuias.length > 0 && (
+                <section>
+                  <div className="flex items-center gap-4 mb-8">
+                    <h2 className="font-serif font-light text-creme text-[1.6rem]">
+                      {isPt ? 'Guias práticos' : 'Practical Guides'}
+                    </h2>
+                    <div className="flex-1 h-px bg-ocre/15" />
+                    <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
+                      {filteredGuias.length} {isPt ? 'títulos' : 'titles'}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                    {filteredGuias.map(renderCard)}
+                  </div>
+                </section>
+              )}
+            </>
+          );
+        })()}
       </main>
     </>
   );
