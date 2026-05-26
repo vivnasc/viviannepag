@@ -101,6 +101,30 @@ const PRODUTOS = {
     tipo: 'ebook',
     disclaimer: 'This ebook is a self-knowledge and understanding resource. It does not replace therapeutic support or family constellation sessions. If you feel that the patterns you recognize cause you persistent suffering, please seek professional help. Seeing is the first step. Taking care of yourself is the second.',
   },
+  'ebook-03-quemes': {
+    paleta: 'escola',
+    badge: 'EBOOK · ESCOLA DOS VÉUS',
+    tipo: 'ebook',
+    disclaimer: 'Este ebook é um material de autoconhecimento e reflexão. Não substitui acompanhamento terapêutico ou psicológico. Se sentes que perdeste o sentido de quem és de forma persistente, ou se atravessas uma crise de identidade profunda, procura apoio profissional. Descobrir-te é um caminho, não um destino.',
+  },
+  'ebook-03-quemes-en': {
+    paleta: 'escola',
+    badge: 'EBOOK · ESCOLA DOS VÉUS',
+    tipo: 'ebook',
+    disclaimer: 'This ebook is a self-knowledge and reflection resource. It does not replace therapeutic or psychological support. If you feel you have persistently lost your sense of self, or are going through a deep identity crisis, please seek professional help. Discovering yourself is a path, not a destination.',
+  },
+  'ebook-04-sentido': {
+    paleta: 'autora',
+    badge: 'EBOOK · VIVIANNE DOS SANTOS',
+    tipo: 'ebook',
+    disclaimer: 'Este ebook é um material de autoconhecimento e reflexão existencial. Não substitui acompanhamento terapêutico. Se sentes um vazio persistente, perda de sentido ou sintomas depressivos, procura apoio profissional. Procurar sentido é humano. Pedir ajuda também.',
+  },
+  'ebook-04-sentido-en': {
+    paleta: 'autora',
+    badge: 'EBOOK · VIVIANNE DOS SANTOS',
+    tipo: 'ebook',
+    disclaimer: 'This ebook is a self-knowledge and existential reflection resource. It does not replace therapeutic support. If you experience persistent emptiness, loss of meaning, or depressive symptoms, please seek professional help. Seeking meaning is human. Asking for help is too.',
+  },
 };
 
 function getVSvg(color, size = 60) {
@@ -160,7 +184,7 @@ function buildHtml(titulo, subtitulo, bodyHtml, C, config) {
     background:
       radial-gradient(ellipse at 70% 20%, ${C.barroClaro}40 0%, transparent 60%),
       radial-gradient(ellipse at 20% 80%, ${C.salvia}20 0%, transparent 50%),
-      linear-gradient(170deg, #5A3D2E 0%, ${C.barro} 40%, #1D130B 100%);
+      linear-gradient(170deg, ${C.barroClaro}90 0%, ${C.barro} 40%, #0D0A08 100%);
   }
   .capa-espiral-grande {
     position: absolute; top: 8%; right: -5%; opacity: 0.08;
@@ -291,8 +315,8 @@ function buildCapaHtml(titulo, subtitulo, C, config) {
     background:
       radial-gradient(ellipse at 65% 15%, ${C.barroClaro}50 0%, transparent 55%),
       radial-gradient(ellipse at 25% 85%, ${C.salvia}25 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, #5A3D2E80 0%, transparent 70%),
-      linear-gradient(175deg, #5A3D2E 0%, ${C.barro} 35%, #1D130B 100%);
+      radial-gradient(ellipse at 50% 50%, ${C.barroClaro}80 0%, transparent 70%),
+      linear-gradient(175deg, ${C.barroClaro}90 0%, ${C.barro} 35%, #0D0A08 100%);
   }
   .spiral-bg { position: absolute; top: 6%; right: -8%; opacity: 0.07; }
   .spiral-bg svg { width: 900px; height: 900px; }
