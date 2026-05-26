@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 
 type Produto = {
@@ -32,7 +32,43 @@ export default function ProdutosAdmin() {
   const [salvando, setSalvando] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [dragAtivo, setDragAtivo] = useState(false);
+  const [legendaModal, setLegendaModal] = useState<Produto | null>(null);
+  const [legendas, setLegendas] = useState<{ig: string; fb: string; tw: string; hashtags: string} | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const HASHTAGS_VIVIANNE = '#viviannedossantos #autoconhecimento #constelacaofamiliar #psicologiatranspessoal #maternidadeconsciente #desenvolvimentopessoal #curacaoemocional #mulheresqueinspiram #crescimentopessoal #despertaremocional #terapiaholisticaonline #ebookdigital #vidacomproposito #saudementalimporta #lealdadesinvisiveis';
+  const HASHTAGS_FREEME = '#freeme #culpadamae #maternidade #limites #constelacaofamiliar #maesreais';
+  const HASHTAGS_INFONTE = '#infonte #substituicao #sonhosherdados #clareza #proposito #exaustaosemchegada';
+  const HASHTAGS_SYNCHIM = '#synchim #relacaodecasal #casal #amor #constelacaofamiliar #nodocasal';
+  const HASHTAGS_ESCOLA = '#escoladosveus #identidade #sentido #transpessoal #autoconhecimentoprofundo';
+
+  function gerarLegendas(p: Produto) {
+    const url = `https://viviannedossantos.com/loja/${p.slug}`;
+    const isEbook = p.badge?.toLowerCase().includes('ebook');
+    const tipo = isEbook ? 'ebook' : 'guia';
+    const isInfonte = p.slug.includes('sonho') || p.slug.includes('voz') || p.slug.includes('mente') || p.slug.includes('teu');
+    const isSynchim = p.slug.includes('casal') || p.slug.includes('perguntas');
+    const isEscola = p.slug.includes('quemes') || p.slug.includes('sentido') || p.slug.includes('escuro') || p.slug.includes('presenca');
+
+    let tags = HASHTAGS_VIVIANNE;
+    if (isInfonte) tags = HASHTAGS_INFONTE + ' ' + HASHTAGS_VIVIANNE;
+    else if (isSynchim) tags = HASHTAGS_SYNCHIM + ' ' + HASHTAGS_VIVIANNE;
+    else if (isEscola) tags = HASHTAGS_ESCOLA + ' ' + HASHTAGS_VIVIANNE;
+    else tags = HASHTAGS_FREEME + ' ' + HASHTAGS_VIVIANNE;
+
+    const ig = `${p.subtitulo}\n\nNovo ${tipo}: "${p.titulo}"\nPor Vivianne dos Santos\n\n${p.preco} (valor real: ${p.preco_original || '€29'})\nLink na bio ou em viviannedossantos.com/loja\n\n.\n.\n.\n${tags}`;
+    const fb = `"${p.titulo}"\n${p.subtitulo}\n\nNovo ${tipo} de Vivianne dos Santos.\n${p.preco} · Download imediato em PDF.\n\n${url}`;
+    const tw = `"${p.titulo}" — ${p.subtitulo}\n\n${p.preco} · PDF imediato\n${url}\n\n${isInfonte ? '#infonte' : '#freeme'} #autoconhecimento #ebook`;
+
+    setLegendas({ ig, fb, tw, hashtags: tags });
+    setLegendaModal(p);
+  }
+
+  async function copiarTexto(texto: string) {
+    await navigator.clipboard.writeText(texto);
+    setMsg('Copiado!');
+    setTimeout(() => setMsg(null), 1500);
+  }
 
   async function carregar() {
     const res = await fetch('/api/admin/produtos');
@@ -166,10 +202,65 @@ export default function ProdutosAdmin() {
                 <h3 className="font-serif text-creme text-[1.05rem]">{p.titulo}</h3>
                 <p className="text-creme-2/60 text-[0.78rem]">{p.slug} · {p.preco} · {p.publicado ? 'publicado' : 'rascunho'}</p>
               </div>
+              <button onClick={() => gerarLegendas(p)} className="text-salvia text-[0.78rem] hover:text-ambar">legendas</button>
+              <button onClick={() => { const u = `https://viviannedossantos.com/loja/${p.slug}`; navigator.clipboard.writeText(u); setMsg('Link copiado!'); setTimeout(() => setMsg(null), 1500); }} className="text-creme-2/60 text-[0.78rem] hover:text-ambar">link</button>
               <button onClick={() => setEdit(p)} className="text-ocre text-[0.8rem] hover:text-ambar">editar</button>
               <button onClick={() => apagar(p)} className="text-rosa/60 text-[0.78rem] hover:text-rosa">apagar</button>
             </div>
           ))}
+        </div>
+      )}
+      {legendaModal && legendas && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setLegendaModal(null)}>
+          <div className="bg-terra rounded-[18px] border border-ocre/30 max-w-[700px] w-full max-h-[90vh] overflow-y-auto p-7" onClick={e => e.stopPropagation()}>
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <p className="text-[0.7rem] tracking-[0.18em] uppercase text-ocre/80 mb-1">legendas social</p>
+                <h3 className="font-serif text-creme text-xl">{legendaModal.titulo}</h3>
+              </div>
+              <button onClick={() => setLegendaModal(null)} className="text-creme-2/60 hover:text-creme text-xl">×</button>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-[0.72rem] tracking-[0.14em] uppercase text-rosa font-medium">Instagram</p>
+                  <button onClick={() => copiarTexto(legendas.ig)} className="text-ocre text-[0.75rem] hover:text-ambar">copiar</button>
+                </div>
+                <pre className="bg-terra-2/60 rounded-[12px] p-4 text-creme-2/90 text-[0.82rem] leading-[1.6] whitespace-pre-wrap font-sans overflow-x-auto">{legendas.ig}</pre>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-[0.72rem] tracking-[0.14em] uppercase text-ocre font-medium">Facebook</p>
+                  <button onClick={() => copiarTexto(legendas.fb)} className="text-ocre text-[0.75rem] hover:text-ambar">copiar</button>
+                </div>
+                <pre className="bg-terra-2/60 rounded-[12px] p-4 text-creme-2/90 text-[0.82rem] leading-[1.6] whitespace-pre-wrap font-sans overflow-x-auto">{legendas.fb}</pre>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-[0.72rem] tracking-[0.14em] uppercase text-creme-2/80 font-medium">X / Twitter</p>
+                  <button onClick={() => copiarTexto(legendas.tw)} className="text-ocre text-[0.75rem] hover:text-ambar">copiar</button>
+                </div>
+                <pre className="bg-terra-2/60 rounded-[12px] p-4 text-creme-2/90 text-[0.82rem] leading-[1.6] whitespace-pre-wrap font-sans overflow-x-auto">{legendas.tw}</pre>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-[0.72rem] tracking-[0.14em] uppercase text-ambar font-medium">Hashtags</p>
+                  <button onClick={() => copiarTexto(legendas.hashtags)} className="text-ocre text-[0.75rem] hover:text-ambar">copiar</button>
+                </div>
+                <pre className="bg-terra-2/60 rounded-[12px] p-4 text-ambar/80 text-[0.78rem] leading-[1.8] whitespace-pre-wrap font-sans overflow-x-auto">{legendas.hashtags}</pre>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <a href={`https://wa.me/?text=${encodeURIComponent(legendas.fb)}`} target="_blank" rel="noopener noreferrer" className="flex-1 text-center py-2.5 rounded-[12px] border border-ocre/30 text-creme-2 text-[0.8rem] hover:border-ambar no-underline">WhatsApp</a>
+                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(legendas.tw)}`} target="_blank" rel="noopener noreferrer" className="flex-1 text-center py-2.5 rounded-[12px] border border-ocre/30 text-creme-2 text-[0.8rem] hover:border-ambar no-underline">X</a>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://viviannedossantos.com/loja/${legendaModal.slug}`)}`} target="_blank" rel="noopener noreferrer" className="flex-1 text-center py-2.5 rounded-[12px] border border-ocre/30 text-creme-2 text-[0.8rem] hover:border-ambar no-underline">Facebook</a>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </main>

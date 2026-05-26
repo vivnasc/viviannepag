@@ -6,6 +6,7 @@ import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { BotaoCompra } from '@/components/BotaoCompra';
 import { GotaMini } from '@/components/icons/GotaAssina';
+import { PartilhaProduto } from '@/components/PartilhaProduto';
 import { getSupabase } from '@/lib/supabase';
 import { marked } from 'marked';
 import type { Metadata } from 'next';
@@ -209,6 +210,15 @@ export default async function ProdutoPage({
               titulo={p.titulo}
               preco={p.preco}
               checkoutUrl={p.checkout_url}
+            />
+          </div>
+
+          <div className="mt-10">
+            <PartilhaProduto
+              url={`https://viviannedossantos.com${locale === 'en' ? '/en' : ''}/loja/${slug}`}
+              titulo={p.titulo}
+              subtitulo={p.subtitulo}
+              locale={locale}
             />
           </div>
 
