@@ -52,6 +52,16 @@ export function BotaoCompra({
     });
   }
 
+  async function enviarEmail() {
+    try {
+      await fetch('/api/email-compra', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), slug, titulo }),
+      });
+    } catch {}
+  }
+
   async function obterDownload() {
     try {
       const res = await fetch('/api/download', {
@@ -62,7 +72,7 @@ export function BotaoCompra({
       const json = await res.json();
       if (res.ok && json.url) { setDownloadUrl(json.url); return; }
     } catch {}
-    setDownloadUrl(`/produtos/${slug}.pdf`);
+    setDownloadUrl(null);
   }
 
   if (checkoutUrl) {
@@ -103,14 +113,14 @@ export function BotaoCompra({
         <p className="text-creme-2/70 text-xs mb-5">
           {email}
         </p>
-        <a
-          href={downloadUrl || `/produtos/${slug}.pdf`}
+        {downloadUrl ? <a
+          href={downloadUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-ambar text-terra font-sans text-[0.92rem] font-medium tracking-[0.04em] rounded-[14px] px-6 py-3 hover:bg-ocre transition-colors no-underline"
         >
           {isPt ? 'Descarregar agora' : 'Download now'}
-        </a>
+        </a> : <p className="text-creme-2/70 text-sm italic">{isPt ? 'Vais receber o link de download no teu email.' : 'You will receive the download link in your email.'}</p>}
         <p className="mt-4 text-creme-2/50 text-xs">
           {isPt ? 'Problema com o download?' : 'Problem with the download?'}
           {' '}
@@ -187,6 +197,7 @@ export function BotaoCompra({
               await registarCompra(orderId);
               setPago(true);
               obterDownload();
+              enviarEmail();
             }}
             onError={(err) => {
               console.error('PayPal error:', err);
