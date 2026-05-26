@@ -1,0 +1,384 @@
+const fs = require('fs');
+const path = require('path');
+const puppeteer = require('puppeteer');
+const matter = require('gray-matter');
+const { marked } = require('marked');
+
+const PALETAS = {
+  freeme: {
+    barro: '#8C4A36',
+    barroClaro: '#9A5A43',
+    areia: '#F3E4D6',
+    creme: '#F1E8DD',
+    salvia: '#7D8A6A',
+    texto: '#3D2B1F',
+    textoSuave: '#6B5548',
+  },
+  synchim: {
+    barro: '#5A1A2A',
+    barroClaro: '#7A2E40',
+    areia: '#F3E4D6',
+    creme: '#F5EDE6',
+    salvia: '#8B6B75',
+    texto: '#2E1118',
+    textoSuave: '#6B4A55',
+  },
+  infonte: {
+    barro: '#B8843D',
+    barroClaro: '#EBAE4A',
+    areia: '#F5ECD4',
+    creme: '#F8F2E6',
+    salvia: '#8A7B5A',
+    texto: '#3A2D1A',
+    textoSuave: '#6B5D3D',
+  },
+  escola: {
+    barro: '#1A1A2E',
+    barroClaro: '#5A4A6A',
+    areia: '#E8DFD0',
+    creme: '#F0E8DC',
+    salvia: '#7A6A50',
+    texto: '#1A1A2E',
+    textoSuave: '#4A3A5A',
+  },
+  autora: {
+    barro: '#2A1C12',
+    barroClaro: '#B8843D',
+    areia: '#F2E8DC',
+    creme: '#F5F0E8',
+    salvia: '#8A7B5A',
+    texto: '#2A1C12',
+    textoSuave: '#6B5D3D',
+  },
+};
+
+const PRODUTOS = {
+  'ebook-01-culpa': {
+    paleta: 'freeme',
+    badge: 'EBOOK · FREEME',
+    tipo: 'ebook',
+    disclaimer: 'Este ebook é um material de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico. Se sentes que a tua culpa te paralisa de forma persistente, se sentes sintomas de depressão, ansiedade intensa, ou se passas por uma crise, procura apoio profissional. Não há vergonha nenhuma nisso. Há coragem.',
+  },
+  'guia-01-meu': {
+    paleta: 'freeme',
+    badge: 'GUIA · FREEME',
+    tipo: 'guia',
+    disclaimer: 'Este guia é um material de autoconhecimento. Não substitui acompanhamento terapêutico. Se sentes que carregas peso emocional que te paralisa, procura apoio profissional. Cuidar de ti é um ato de coragem.',
+  },
+  'guia-02-frases': {
+    paleta: 'freeme',
+    badge: 'GUIA · FREEME',
+    tipo: 'guia',
+    disclaimer: 'Este guia é um material de autoconhecimento sobre limites e maternidade. Não substitui acompanhamento terapêutico. Se sentes que a culpa te impede de funcionar no dia a dia, procura apoio profissional.',
+  },
+  'ebook-02-herdaste': {
+    paleta: 'freeme',
+    badge: 'EBOOK · FREEME',
+    tipo: 'ebook',
+    disclaimer: 'Este ebook é um material de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico nem sessões de constelação familiar. Se sentes que os padrões que reconheces te causam sofrimento persistente, procura apoio profissional. Ver é o primeiro passo. Cuidar de ti é o segundo.',
+  },
+};
+
+function getSpiralSvg(color, size = 60) {
+  return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
+    <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+function buildHtml(titulo, subtitulo, bodyHtml, C, config) {
+  const spiralSvg = getSpiralSvg(C.barroClaro, 60);
+  const spiralBig = getSpiralSvg(C.areia, 280).replace('stroke-width="14"', 'stroke-width="10"');
+
+  return `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500&display=swap');
+
+  @page { size: A5; margin: 22mm 18mm 25mm 18mm; }
+  @page:first { margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    font-size: 11pt;
+    line-height: 1.85;
+    color: ${C.texto};
+    background: ${C.creme};
+  }
+
+  .capa {
+    page-break-after: always;
+    width: 100vw; height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    text-align: left;
+    background: ${C.barro};
+    position: relative; overflow: hidden;
+  }
+  .capa-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 20%, ${C.barroClaro}40 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, ${C.salvia}20 0%, transparent 50%),
+      linear-gradient(170deg, #5A3D2E 0%, ${C.barro} 40%, #1D130B 100%);
+  }
+  .capa-espiral-grande {
+    position: absolute; top: 8%; right: -5%; opacity: 0.08;
+  }
+  .capa-conteudo {
+    position: relative; z-index: 1;
+    padding: 12mm 10mm 14mm 10mm;
+    background: linear-gradient(to top, rgba(29,19,11,0.85) 0%, transparent 100%);
+  }
+  .capa-espiral { margin-bottom: 6mm; opacity: 0.7; }
+  .capa-titulo {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: 30pt; line-height: 1.1; color: ${C.areia};
+    letter-spacing: -0.015em; margin-bottom: 4mm;
+  }
+  .capa-subtitulo {
+    font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+    font-size: 10.5pt; line-height: 1.45; color: ${C.areia}cc;
+    max-width: 90%; margin-bottom: 10mm;
+  }
+  .capa-linha { width: 30mm; height: 0.5pt; background: ${C.salvia}; margin-bottom: 5mm; opacity: 0.6; }
+  .capa-autora {
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: 8.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: ${C.salvia};
+  }
+
+  .disclaimer-page {
+    page-break-after: always;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 60vh; padding: 20mm;
+  }
+  .disclaimer-box {
+    border: 1pt solid ${C.salvia}50;
+    border-radius: 3mm; padding: 8mm 10mm; max-width: 100%;
+  }
+  .disclaimer-box p {
+    font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+    font-size: 9.5pt; line-height: 1.7; color: ${C.textoSuave}; text-align: center;
+  }
+
+  .corpo h2 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: 18pt; line-height: 1.2; color: ${C.barro};
+    margin-bottom: 5mm; page-break-before: always; page-break-after: avoid;
+    letter-spacing: -0.005em; padding-top: 8mm;
+  }
+  .corpo h3 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: 13pt; line-height: 1.3; color: ${C.barroClaro};
+    margin-top: 8mm; margin-bottom: 3mm; page-break-after: avoid;
+  }
+  .corpo p { margin-bottom: 4mm; text-align: justify; hyphens: auto; orphans: 3; widows: 3; }
+  .corpo strong { font-weight: 400; color: ${C.barro}; }
+  .corpo em { font-style: italic; color: ${C.texto}; }
+  .corpo blockquote {
+    border-left: 2.5pt solid ${C.salvia}60;
+    padding-left: 5mm; margin: 5mm 0;
+    font-style: italic; color: ${C.textoSuave};
+  }
+  .corpo hr {
+    border: none; height: 0.5pt;
+    background: linear-gradient(90deg, transparent, ${C.barroClaro}50, transparent);
+    margin: 10mm auto; max-width: 40mm;
+  }
+  .corpo ul, .corpo ol { padding-left: 6mm; margin-bottom: 4mm; }
+  .corpo li { margin-bottom: 2mm; }
+
+  .final {
+    page-break-before: always;
+    text-align: center; padding-top: 25mm;
+  }
+  .final-espiral { margin-bottom: 6mm; opacity: 0.7; }
+  .final p { font-size: 9pt; color: ${C.textoSuave}; line-height: 1.6; margin-bottom: 3mm; }
+  .final a { color: ${C.barro}; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="capa-bg"></div>
+  <div class="capa-espiral-grande">${spiralBig}</div>
+  <div class="capa-conteudo">
+    <div class="capa-espiral">${spiralSvg}</div>
+    <h1 class="capa-titulo">${titulo}</h1>
+    <p class="capa-subtitulo">${subtitulo}</p>
+    <div class="capa-linha"></div>
+    <p class="capa-autora">Vivianne dos Santos</p>
+  </div>
+</div>
+
+<div class="disclaimer-page">
+  <div class="disclaimer-box">
+    <p>${config.disclaimer}</p>
+  </div>
+</div>
+
+<div class="corpo">
+${bodyHtml}
+</div>
+
+<div class="final">
+  <div class="final-espiral">${spiralSvg}</div>
+  <p>© 2025 Vivianne dos Santos</p>
+  <p><a href="https://viviannedossantos.com">viviannedossantos.com</a></p>
+  <p><a href="https://freeme.viviannedossantos.com">freeme.viviannedossantos.com</a></p>
+</div>
+
+</body>
+</html>`;
+}
+
+function buildCapaHtml(titulo, subtitulo, C, config) {
+  const spiral = getSpiralSvg(C.areia, 220).replace('stroke-width="14"', 'stroke-width="10"');
+  const spiralSmall = getSpiralSvg(C.barroClaro, 48);
+
+  return `<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Outfit:wght@400&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width: 1400px; height: 1873px;
+    position: relative; overflow: hidden;
+    background: ${C.barro}; font-family: 'Fraunces', serif;
+  }
+  .bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 65% 15%, ${C.barroClaro}50 0%, transparent 55%),
+      radial-gradient(ellipse at 25% 85%, ${C.salvia}25 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, #5A3D2E80 0%, transparent 70%),
+      linear-gradient(175deg, #5A3D2E 0%, ${C.barro} 35%, #1D130B 100%);
+  }
+  .spiral-bg { position: absolute; top: 6%; right: -8%; opacity: 0.07; }
+  .spiral-bg svg { width: 900px; height: 900px; }
+  .content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 80px 90px 100px;
+    background: linear-gradient(to top, rgba(20,13,8,0.92) 0%, rgba(20,13,8,0.6) 50%, transparent 100%);
+  }
+  .small-spiral { margin-bottom: 30px; opacity: 0.75; }
+  h1 {
+    font-weight: 300; font-size: 72px; line-height: 1.08;
+    color: ${C.areia}; letter-spacing: -0.02em;
+    margin-bottom: 24px; max-width: 95%;
+  }
+  .sub {
+    font-weight: 300; font-style: italic;
+    font-size: 26px; line-height: 1.45;
+    color: ${C.areia}bb; max-width: 88%; margin-bottom: 50px;
+  }
+  .line { width: 120px; height: 2px; background: ${C.salvia}; margin-bottom: 28px; opacity: 0.55; }
+  .author {
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: 20px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: ${C.salvia};
+  }
+  .badge {
+    position: absolute; top: 60px; left: 90px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: ${C.salvia};
+    border: 1.5px solid ${C.salvia}60;
+    border-radius: 30px; padding: 10px 24px; opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="spiral-bg">${spiral.replace('width="220" height="220"', 'width="900" height="900"')}</div>
+  <div class="badge">${config.badge}</div>
+  <div class="content">
+    <div class="small-spiral">${spiralSmall}</div>
+    <h1>${titulo}</h1>
+    <p class="sub">${subtitulo}</p>
+    <div class="line"></div>
+    <p class="author">Vivianne dos Santos</p>
+  </div>
+</body></html>`;
+}
+
+async function main() {
+  const slug = process.argv[2];
+  if (!slug || !PRODUTOS[slug]) {
+    console.log('Uso: node gerar-pdf.js <slug>');
+    console.log('Slugs:', Object.keys(PRODUTOS).join(', '));
+    process.exit(1);
+  }
+
+  const config = PRODUTOS[slug];
+  const C = PALETAS[config.paleta];
+  const mdPath = path.join(__dirname, '..', 'content', 'produtos', slug, `${slug}.md`);
+  const pdfPath = path.join(__dirname, '..', 'public', 'produtos', `${slug}.pdf`);
+  const capaPath = path.join(__dirname, '..', 'public', 'produtos', `${slug}-capa.png`);
+
+  if (!fs.existsSync(mdPath)) {
+    console.error(`Ficheiro nao encontrado: ${mdPath}`);
+    process.exit(1);
+  }
+
+  const raw = fs.readFileSync(mdPath, 'utf8');
+  const { content } = matter(raw);
+  const lines = content.split('\n');
+  let titulo = '', subtitulo = '', bodyStartIdx = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!titulo && line.startsWith('# ')) {
+      titulo = line.replace('# ', '').trim();
+    } else if (titulo && !subtitulo && line.startsWith('**') && line.endsWith('**')) {
+      subtitulo = line.replace(/\*\*/g, '').trim();
+    } else if (titulo && line.startsWith('## ')) {
+      bodyStartIdx = i;
+      break;
+    }
+  }
+
+  if (!titulo) { console.error('Titulo nao encontrado'); process.exit(1); }
+  const bodyMd = lines.slice(bodyStartIdx).join('\n');
+  const bodyHtml = await marked.parse(bodyMd);
+
+  fs.mkdirSync(path.dirname(pdfPath), { recursive: true });
+
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+
+  // PDF
+  const pdfPage = await browser.newPage();
+  const pdfHtml = buildHtml(titulo, subtitulo, bodyHtml, C, config);
+  await pdfPage.setContent(pdfHtml, { waitUntil: 'networkidle0', timeout: 30000 });
+  await pdfPage.pdf({
+    path: pdfPath,
+    format: 'A5',
+    printBackground: true,
+    margin: { top: '22mm', right: '18mm', bottom: '25mm', left: '18mm' },
+    displayHeaderFooter: true,
+    headerTemplate: '<div></div>',
+    footerTemplate: `<div style="width:100%;text-align:center;font-family:Outfit,sans-serif;font-size:7pt;color:${C.textoSuave}80;"><span class="pageNumber"></span></div>`,
+  });
+  const pdfStats = fs.statSync(pdfPath);
+  console.log(`PDF: ${pdfPath} (${(pdfStats.size / 1024).toFixed(0)} KB)`);
+
+  // Capa (1400x1873 para Kobo)
+  const capaPage = await browser.newPage();
+  await capaPage.setViewport({ width: 1400, height: 1873 });
+  const capaHtml = buildCapaHtml(titulo, subtitulo, C, config);
+  await capaPage.setContent(capaHtml, { waitUntil: 'networkidle0', timeout: 20000 });
+  await capaPage.screenshot({ path: capaPath, type: 'png', fullPage: false });
+  const capaStats = fs.statSync(capaPath);
+  console.log(`Capa: ${capaPath} (${(capaStats.size / 1024).toFixed(0)} KB, 1400x1873)`);
+
+  await browser.close();
+  console.log(`\nConcluido: ${slug}`);
+}
+
+main().catch(console.error);
