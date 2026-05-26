@@ -56,9 +56,9 @@ export default function ProdutosAdmin() {
     else if (isEscola) tags = HASHTAGS_ESCOLA + ' ' + HASHTAGS_VIVIANNE;
     else tags = HASHTAGS_FREEME + ' ' + HASHTAGS_VIVIANNE;
 
-    const ig = `${p.subtitulo}\n\nNovo ${tipo}: "${p.titulo}"\nPor Vivianne dos Santos\n\n${p.preco} (valor real: ${p.preco_original || '€29'})\nLink na bio ou em viviannedossantos.com/loja\n\n.\n.\n.\n${tags}`;
-    const fb = `"${p.titulo}"\n${p.subtitulo}\n\nNovo ${tipo} de Vivianne dos Santos.\n${p.preco} · Download imediato em PDF.\n\n${url}`;
-    const tw = `"${p.titulo}" — ${p.subtitulo}\n\n${p.preco} · PDF imediato\n${url}\n\n${isInfonte ? '#infonte' : '#freeme'} #autoconhecimento #ebook`;
+    const ig = `${p.subtitulo}\n\nNovo ${tipo}: "${p.titulo}"\nPor Vivianne dos Santos\n\nLink na bio ou em viviannedossantos.com/loja\n\n.\n.\n.\n${tags}`;
+    const fb = `"${p.titulo}"\n${p.subtitulo}\n\nNovo ${tipo} de Vivianne dos Santos.\n\n${url}`;
+    const tw = `"${p.titulo}" — ${p.subtitulo}\n\n${url}\n\n${isInfonte ? '#infonte' : '#freeme'} #autoconhecimento #ebook`;
 
     setLegendas({ ig, fb, tw, hashtags: tags });
     setLegendaModal(p);
