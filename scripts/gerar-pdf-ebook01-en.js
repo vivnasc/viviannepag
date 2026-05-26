@@ -41,8 +41,24 @@ async function main() {
   const bodyMd = lines.slice(bodyStartIdx).join('\n');
   const bodyHtml = await marked.parse(bodyMd);
 
-  const spiralSvg = `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
-    <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="${COLORS.barroClaro}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  const gotaSvg = `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+    <g fill="none" stroke="${COLORS.barroClaro}" stroke-width="12" stroke-linecap="round">
+      <path d="M170 130 C170 270 200 340 248 374"/>
+      <path d="M342 130 C342 270 312 340 264 374"/>
+    </g>
+    <circle cx="256" cy="244" r="16" fill="${COLORS.barroClaro}"/>
+    <path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke="${COLORS.barroClaro}" stroke-width="12" stroke-linecap="round"/>
+  </svg>`;
+
+  const gotaGrande = `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="280" height="280">
+    <g fill="none" stroke="${COLORS.areia}" stroke-width="8" stroke-linecap="round" opacity="0.12">
+      <path d="M150 120 C150 270 188 345 244 378"/>
+      <path d="M362 120 C362 270 324 345 268 378"/>
+      <path d="M206 116 C206 250 224 335 250 366" opacity="0.5"/>
+      <path d="M306 116 C306 250 288 335 262 366" opacity="0.5"/>
+    </g>
+    <circle cx="256" cy="246" r="14" fill="${COLORS.areia}" opacity="0.08"/>
+    <path d="M168 392 C200 366 224 414 256 392 C288 370 312 414 344 392" fill="none" stroke="${COLORS.areia}" stroke-width="10" stroke-linecap="round" opacity="0.08"/>
   </svg>`;
 
   const html = `<!DOCTYPE html>
@@ -93,11 +109,10 @@ async function main() {
       radial-gradient(ellipse at 20% 80%, ${COLORS.salvia}20 0%, transparent 50%),
       linear-gradient(170deg, #5A3D2E 0%, ${COLORS.barro} 40%, #1D130B 100%);
   }
-  .capa-espiral-grande {
+  .capa-gota-grande {
     position: absolute;
     top: 8%;
-    right: -5%;
-    opacity: 0.08;
+    right: -2%;
   }
   .capa-conteudo {
     position: relative;
@@ -105,7 +120,7 @@ async function main() {
     padding: 12mm 10mm 14mm 10mm;
     background: linear-gradient(to top, rgba(29,19,11,0.85) 0%, transparent 100%);
   }
-  .capa-espiral { margin-bottom: 6mm; opacity: 0.7; }
+  .capa-gota { margin-bottom: 6mm; opacity: 0.7; }
   .capa-titulo {
     font-family: 'Fraunces', serif;
     font-weight: 300;
@@ -231,7 +246,7 @@ async function main() {
     text-align: center;
     padding-top: 25mm;
   }
-  .final-espiral { margin-bottom: 6mm; opacity: 0.7; }
+  .final-gota { margin-bottom: 6mm; opacity: 0.7; }
   .final p {
     font-size: 9pt;
     color: ${COLORS.textoSuave};
@@ -249,13 +264,9 @@ async function main() {
 <!-- CAPA -->
 <div class="capa">
   <div class="capa-bg"></div>
-  <div class="capa-espiral-grande">
-    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="280" height="280">
-      <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="${COLORS.areia}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
+  <div class="capa-gota-grande">${gotaGrande}</div>
   <div class="capa-conteudo">
-    <div class="capa-espiral">${spiralSvg}</div>
+    <div class="capa-gota">${gotaSvg}</div>
     <h1 class="capa-titulo">${titulo}</h1>
     <p class="capa-subtitulo">${subtitulo}</p>
     <div class="capa-linha"></div>
@@ -266,7 +277,7 @@ async function main() {
 <!-- DISCLAIMER -->
 <div class="disclaimer-page">
   <div class="disclaimer-box">
-    <p>This ebook is a self-knowledge and understanding resource. It does not replace therapeutic support. If you feel that your guilt is persistently paralysing you, if you experience symptoms of depression, intense anxiety, or if you are going through a crisis, please seek professional help. There is no shame in that. There is courage.</p>
+    <p>This ebook is a self-knowledge and understanding resource e compreensão. It does not replace therapeutic support. If you feel that your guilt is persistently paralysing you, if you experience symptoms of depression, intense anxiety, or if you are going through a crisis, please seek professional help. There is no shame in that. There is courage.</p>
   </div>
 </div>
 
@@ -277,7 +288,7 @@ ${bodyHtml}
 
 <!-- PAGINA FINAL -->
 <div class="final">
-  <div class="final-espiral">${spiralSvg}</div>
+  <div class="final-gota">${gotaSvg}</div>
   <p>© 2025 Vivianne dos Santos</p>
   <p><a href="https://viviannedossantos.com">viviannedossantos.com</a></p>
   <p><a href="https://freeme.viviannedossantos.com">freeme.viviannedossantos.com</a></p>
