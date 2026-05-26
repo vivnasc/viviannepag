@@ -79,15 +79,29 @@ const PRODUTOS = {
   },
 };
 
-function getSpiralSvg(color, size = 60) {
+function getVSvg(color, size = 60) {
   return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-    <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M150 120 C150 270 188 345 244 378"/>
+      <path d="M362 120 C362 270 324 345 268 378"/>
+    </g>
+    <circle cx="256" cy="246" r="14" fill="${color}"/>
+  </svg>`;
+}
+
+function getVSvgBig(color, size = 280) {
+  return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
+    <g fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M80 80 C80 290 162 412 256 458"/>
+      <path d="M432 80 C432 290 350 412 256 458"/>
+    </g>
+    <circle cx="256" cy="284" r="24" fill="${color}"/>
   </svg>`;
 }
 
 function buildHtml(titulo, subtitulo, bodyHtml, C, config) {
-  const spiralSvg = getSpiralSvg(C.barroClaro, 60);
-  const spiralBig = getSpiralSvg(C.areia, 280).replace('stroke-width="14"', 'stroke-width="10"');
+  const spiralSvg = getVSvg(C.barroClaro, 60);
+  const spiralBig = getVSvgBig(C.areia, 280);
 
   return `<!DOCTYPE html>
 <html lang="pt">
@@ -235,8 +249,8 @@ ${bodyHtml}
 }
 
 function buildCapaHtml(titulo, subtitulo, C, config) {
-  const spiral = getSpiralSvg(C.areia, 220).replace('stroke-width="14"', 'stroke-width="10"');
-  const spiralSmall = getSpiralSvg(C.barroClaro, 48);
+  const spiral = getVSvgBig(C.areia, 220);
+  const spiralSmall = getVSvg(C.barroClaro, 48);
 
   return `<!DOCTYPE html>
 <html><head><meta charset="UTF-8">
@@ -293,7 +307,7 @@ function buildCapaHtml(titulo, subtitulo, C, config) {
 </head>
 <body>
   <div class="bg"></div>
-  <div class="spiral-bg">${spiral.replace('width="220" height="220"', 'width="900" height="900"')}</div>
+  <div class="spiral-bg">${getVSvgBig(C.areia, 900)}</div>
   <div class="badge">${config.badge}</div>
   <div class="content">
     <div class="small-spiral">${spiralSmall}</div>

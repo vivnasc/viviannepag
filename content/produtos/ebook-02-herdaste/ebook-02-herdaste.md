@@ -41,6 +41,8 @@ A forma era diferente. A ferida era a mesma.
 
 Este é o paradoxo que ninguém nos explica. Não basta querer ser diferente. Não basta prometer. Não basta lutar contra o padrão. Porque a luta contra o padrão ainda é uma relação com o padrão. É ainda uma forma de estar presa a ele. Enquanto defines a tua vida em oposição à da tua mãe ("eu nunca vou fazer isso, eu nunca vou ser assim"), a tua mãe continua no centro de todas as tuas decisões. Continuas a dançar com ela, só que agora de costas.
 
+E não é só em momentos de stress que isto acontece. É nos pequenos gestos. Na forma como arrumo a cozinha (exatamente como a minha mãe arrumava a dela). Na forma como suspiro antes de falar com os meus filhos sobre algo sério (o mesmo suspiro que a minha mãe dava). Nas palavras que escolho quando estou a tentar convencê-los de alguma coisa. Por vezes, a herança é tão sutil que nem a reconhecemos como herança. Achamos que é "o nosso jeito". Mas é o jeito delas, a viver através de nós.
+
 E aqui começa algo que talvez mude a forma como olhas para ti mesma.
 
 Porque o que aconteceu contigo (e com a Marta, e com tantas de nós) não é um defeito. Não é fraqueza. Não é falta de vontade. É algo que a psicologia sistémica chama de lealdade invisível. É uma força que atua abaixo da consciência, abaixo das promessas, abaixo da vontade. Uma força que te liga ao teu sistema familiar de maneiras que nunca escolheste, mas que moldam as tuas escolhas todos os dias.
@@ -248,6 +250,18 @@ Quando olhámos para a história da sua família, encontrámos isto: a avó da A
 A Ana não sabia desta história. Mas vivia-a. Todos os dias, o seu corpo reagia como se a catástrofe estivesse ao virar da esquina. Não porque a Ana fosse pessimista ou ansiosa "por natureza". Mas porque estava a ser leal a uma avó cujo mundo desabou quando menos esperava.
 
 Quantas de nós vivemos assim? Quantas de nós temos medo de que as coisas boas acabem, sem perceber que esse medo pode não ser nosso?
+
+**A relação entre oposição e repetição.**
+
+Há algo que quero que fique muito claro, porque é talvez a ideia mais importante deste livro. E é contraintuitiva, o que significa que a tua primeira reação pode ser resistir a ela. Mas peço-te que a deixes entrar.
+
+A oposição é uma forma de ligação. Quando constróis a tua vida inteira em reação ao que os teus pais fizeram, não estás livre. Estás em modo espelho. Tudo o que fazes é determinado pelo que eles fizeram, só que ao contrário. A tua mãe era rígida, tu és permissiva. O teu pai era ausente, tu és hipervigilante. A tua avó nunca falava das emoções, tu não paras de falar delas. Parece liberdade, mas é a mesma prisão vista do outro lado.
+
+A verdadeira liberdade não é o oposto do padrão. É um lugar completamente novo. Um lugar que não se define pelo que os teus pais fizeram nem pelo contrário. Um lugar que nasce da integração: vejo o que aconteceu, compreendo porque aconteceu, agradeço a vida que me foi dada, e faço as minhas escolhas a partir de mim, não a partir da reação ao que veio antes.
+
+Mas chegar a esse lugar exige algo que a maioria de nós não sabe fazer sozinha. Exige ver o que está por trás do padrão. Exige sentir o que foi evitado. Exige incluir o que foi excluído. E isso é um trabalho profundo, que vai além da compreensão intelectual.
+
+Por agora, o que te peço é apenas isto: na próxima vez que te ouçamos a dizer "eu nunca serei como...", párares. Não para te culpares. Não para desistires. Mas para te perguntares: "De quem estou a fugir? E será que fugir me está realmente a libertar?"
 
 **Porque repetir não é falhar.**
 
