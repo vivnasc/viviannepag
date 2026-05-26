@@ -65,7 +65,7 @@ export default function AdminPage() {
   }
 
   async function migrar() {
-    if (!confirm('Importar todos os .mdx para a base de dados? Vai fazer upsert (atualiza se ja existir).')) return;
+    if (!confirm('Importar novos .mdx para a base de dados? Só adiciona escritos que ainda não existem. Nunca mexe nos que já lá estão.')) return;
     setMigrando(true);
     setMensagem(null);
     const res = await fetch('/api/admin/migrar', { method: 'POST' });
