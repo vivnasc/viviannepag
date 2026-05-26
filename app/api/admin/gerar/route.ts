@@ -58,7 +58,18 @@ STORIES:
 Texto:\n${body.contexto}`;
       break;
     case 'prompt-imagem':
-      userPrompt = `Lê este texto e cria um prompt para o Midjourney que capture a essência visual do texto. O prompt deve funcionar directamente no Midjourney (em inglês). Termina com --ar 3:2 --v 6.\n\nSe o utilizador indicou um estilo preferido, respeita-o. Caso contrário, escolhe algo contemplativo e atmosférico que combine com o tom do texto.\n\n${body.contexto ? `Estilo preferido: ${body.prompt || 'livre'}\n\nTexto:\n${body.contexto}` : `Tema: ${body.prompt}`}\n\nResponde APENAS com o prompt, sem explicações.`;
+      userPrompt = `Cria um prompt para o Midjourney baseado neste texto. O prompt deve funcionar directamente no Midjourney (em inglês). Termina com --ar 3:2 --v 6.
+
+REGRAS OBRIGATÓRIAS DE VARIEDADE:
+- PROIBIDO repetir estes elementos que já foram usados noutras capas: mulheres de costas, mãos, portas, janelas, cortinas, cadeiras, espelhos, fios dourados, velas, silhuetas femininas, pôr-do-sol.
+- Cada imagem deve ser RADICALMENTE diferente das anteriores.
+- Pensa em categorias visuais variadas: paisagens abstractas, texturas macro (areia, água, pedra, tecido), natureza (raízes, sementes, flores fechadas/abertas, nevoeiro, mar), objectos simbólicos (ampulhetas, bússolas, chaves, livros abertos, pássaros), composições geométricas, luz e sombra sem figuras humanas, fotografia aérea, still life inesperado.
+- Escolhe UM conceito visual forte e concreto que capture a EMOÇÃO central do texto, não uma ilustração literal do que o texto diz.
+- Varia o estilo: pode ser fotografia editorial, arte digital, aguarela, colagem, macro photography, drone shot, double exposure, cyanotype, mixed media.
+
+${body.prompt ? `Estilo pedido pela autora: ${body.prompt}\n\n` : ''}Texto:\n${body.contexto || body.titulo || 'sem contexto'}
+
+Responde APENAS com o prompt, sem explicações.`;
       break;
     case 'esboco':
     default:
