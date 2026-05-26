@@ -125,6 +125,30 @@ const PRODUTOS = {
     tipo: 'ebook',
     disclaimer: 'This ebook is a self-knowledge and existential reflection resource. It does not replace therapeutic support. If you experience persistent emptiness, loss of meaning, or depressive symptoms, please seek professional help. Seeking meaning is human. Asking for help is too.',
   },
+  'guia-03-presenca': {
+    paleta: 'autora',
+    badge: 'GUIA · LORANNE',
+    tipo: 'guia',
+    disclaimer: 'Este guia é um material de autoconhecimento e bem-estar. Não substitui acompanhamento terapêutico. Se sentes desconexão emocional persistente ou sintomas de esgotamento, procura apoio profissional.',
+  },
+  'guia-04-mente': {
+    paleta: 'infonte',
+    badge: 'GUIA · INFONTE',
+    tipo: 'guia',
+    disclaimer: 'Este guia é um material de autoconhecimento. Não substitui acompanhamento terapêutico. Se sentes que os teus pensamentos te dominam de forma persistente, procura apoio profissional.',
+  },
+  'guia-05-luto': {
+    paleta: 'autora',
+    badge: 'GUIA · VIVIANNE DOS SANTOS',
+    tipo: 'guia',
+    disclaimer: 'Este guia aborda perdas e luto. Não substitui acompanhamento terapêutico. Se sentes que a tua dor é maior do que consegues suportar, procura apoio profissional.',
+  },
+  'guia-06-perguntas': {
+    paleta: 'synchim',
+    badge: 'GUIA · SYNCHIM',
+    tipo: 'guia',
+    disclaimer: 'Este guia é um material de autoconhecimento sobre relações. Não substitui terapia de casal. Se a tua relação envolve violência, procura ajuda especializada.',
+  },
   'ebook-05-escuro': {
     paleta: 'escola',
     badge: 'EBOOK · ESCOLA DOS VÉUS',
