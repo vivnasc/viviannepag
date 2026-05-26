@@ -157,6 +157,9 @@ const PRODUTOS = {
     tipo: 'guia',
     disclaimer: 'Este guia é um material de autoconhecimento sobre relações. Não substitui terapia de casal. Se a tua relação envolve violência, procura ajuda especializada.',
   },
+  'ebook-07-sonho': { paleta: 'infonte', badge: 'EBOOK · INFONTE', tipo: 'ebook', disclaimer: 'Este ebook é um material de autoconhecimento. Não substitui acompanhamento terapêutico. Se sentes exaustão persistente ou sinais de burnout, procura apoio profissional.' },
+  'ebook-08-voz': { paleta: 'infonte', badge: 'EBOOK · INFONTE', tipo: 'ebook', disclaimer: 'Este ebook é um material de autoconhecimento. Não substitui acompanhamento terapêutico. Se sentes que perdeste a tua voz de forma persistente, procura apoio profissional.' },
+  'guia-07-teu': { paleta: 'infonte', badge: 'GUIA · INFONTE', tipo: 'guia', disclaimer: 'Este guia é um material de autoconhecimento. Não substitui acompanhamento terapêutico.' },
   'ebook-05-escuro': {
     paleta: 'escola',
     badge: 'EBOOK · ESCOLA DOS VÉUS',
