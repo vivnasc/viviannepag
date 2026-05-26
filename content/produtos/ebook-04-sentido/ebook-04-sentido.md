@@ -345,7 +345,7 @@ Podes entender que o sentido se constrói e não saber por onde começar. Podes 
 
 Isto não é falhar. É ser humana. E é, na verdade, uma das formas mais profundas de honrar este caminho: reconhecer que ele pede mais do que a tua mente, sozinha, pode oferecer.
 
-A minha escrita, os meus textos (os escritos que partilho no site, as palavras que lá deixo para quem precisar), são um fio nessa travessia. São pedaços do meu próprio caminho que ofereço para que talvez iluminem um trecho do teu. Se te fizeram sentido estas páginas, há mais. Há textos que nascem de um lugar parecido com este, com a mesma honestidade, com a mesma recusa de dar respostas fáceis. Estão em viviannedossantos.com, à tua espera, sem pressa.
+A minha escrita, os meus textos (os escritos que partilho no site, as palavras que lá deixo para quem precisar), são um fio nessa travessia. São pedaços do meu próprio caminho que ofereço para que talvez iluminem um trecho do teu. Se te fizeram sentido estas páginas, há mais. Há textos que nascem de um lugar parecido com este, com a mesma honestidade, com a mesma recusa de dar respostas fáceis. Estão em [viviannedossantos.com](https://viviannedossantos.com), à tua espera, sem pressa.
 
 E há um espaço que criei para quem sente que a compreensão foi importante, mas que quer ir mais fundo. A Escola dos Véus é esse espaço. Não é um curso. Não é um programa de desenvolvimento pessoal com promessas e cronogramas. É um lugar de exploração profunda, onde as perguntas que este livro levantou podem ser vividas, não apenas lidas. Onde o sentido não se discute em abstrato, mas se toca com as mãos da alma. Onde a transcendência, a presença, a ligação e a contribuição deixam de ser conceitos e se tornam experiência.
 
@@ -371,6 +371,6 @@ Com toda a minha ternura,
 ---
 
 *© 2026 Vivianne dos Santos. Todos os direitos reservados.*
-*viviannedossantos.com*
+*[viviannedossantos.com](https://viviannedossantos.com)*
 
 *Este material destina-se exclusivamente a fins de autoconhecimento e reflexão pessoal. Não constitui aconselhamento terapêutico, psicológico ou médico, nem substitui o acompanhamento de profissionais qualificados. Os princípios da psicologia do sentido e da psicologia transpessoal aqui apresentados são utilizados como ferramenta de reflexão, não como intervenção clínica. Se sentes que precisas de apoio profissional, procura um psicólogo, psicoterapeuta ou outro profissional de saúde mental. Cuidar de ti é o primeiro passo.*

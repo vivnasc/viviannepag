@@ -445,7 +445,7 @@ I am not going to tell you that FreeMe will solve everything. It won't. Because 
 
 In FreeMe, you work with the principles we explored in these pages, but in a lived way, not merely a read one. It is there that understanding becomes movement. It is there that the map becomes a path. It is there that what you have seen can, finally, be transformed.
 
-If you feel the time is right, FreeMe is waiting for you at freeme.viviannedossantos.com.
+If you feel the time is right, FreeMe is waiting for you at [freeme.[viviannedossantos.com](https://viviannedossantos.com)](https://freeme.[viviannedossantos.com](https://viviannedossantos.com)).
 
 If you don't feel it, that is perfectly fine. Keep this book. Reread it when you need to. Let the ideas settle. Sometimes the seed needs time before it sprouts.
 
@@ -461,7 +461,7 @@ Vivianne
 ---
 
 *© 2026 Vivianne dos Santos. All rights reserved.*
-*viviannedossantos.com*
-*freeme.viviannedossantos.com*
+*[viviannedossantos.com](https://viviannedossantos.com)*
+*[freeme.[viviannedossantos.com](https://viviannedossantos.com)](https://freeme.[viviannedossantos.com](https://viviannedossantos.com))*
 
 *This material is intended exclusively for self-knowledge and personal reflection. It does not constitute therapeutic, psychological, or medical advice, nor does it replace the support of qualified professionals. The principles of Systemic Family Constellation presented here are used as a tool for reflection, not as a clinical session. If you feel you need professional support, please seek a psychologist, psychotherapist, or other mental health professional. Taking care of yourself is the first step.*

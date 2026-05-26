@@ -221,4 +221,4 @@ And remember: you are not selfish for wanting to feel light. You are not a bad d
 
 *This guide is a self-knowledge resource based on the principles of systemic Family Constellation and on the clinical and personal experience of the author. It does not constitute diagnosis, therapy, or psychological counseling. If you feel you need professional support, please seek a qualified psychologist or psychotherapist.*
 
-*© Vivianne dos Santos · [viviannedossantos.com](https://viviannedossantos.com)*
+*© 2026 Vivianne dos Santos · [viviannedossantos.com](https://viviannedossantos.com)*

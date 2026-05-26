@@ -200,4 +200,4 @@ And that is enough.
 
 *This guide is a self-awareness resource and does not replace professional support. If you experience persistent difficulties in your relationship with your child or significant emotional distress, please seek a mental health professional.*
 
-*© Vivianne dos Santos · viviannedossantos.com*
+*© 2026 Vivianne dos Santos · viviannedossantos.com*
