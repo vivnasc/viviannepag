@@ -11,6 +11,7 @@ type Props = {
 
 export function PartilhaProduto({ url, titulo, subtitulo, locale }: Props) {
   const [copiado, setCopiado] = useState(false);
+  const [copiadoLegenda, setCopiadoLegenda] = useState(false);
   const isPt = locale === 'pt';
 
   const textoPartilha = `${titulo}\n${subtitulo}\n\n${url}`;
@@ -18,10 +19,20 @@ export function PartilhaProduto({ url, titulo, subtitulo, locale }: Props) {
   const urlEncode = encodeURIComponent(url);
   const tituloEncode = encodeURIComponent(titulo);
 
+  const legendaInsta = `${subtitulo}\n\n"${titulo}"\nPor Vivianne dos Santos\n\nLink na bio\nviviannedossantos.com/loja\n\n.\n.\n.\n#viviannedossantos #autoconhecimento #ebook #constelacaofamiliar #psicologiatranspessoal #desenvolvimentopessoal #mulheresqueinspiram #ebookdigital #vidacomproposito #saudementalimporta`;
+
+  const legendaTiktok = `${subtitulo}\n\n"${titulo}" por Vivianne dos Santos\n\nLink na bio\n\n#viviannedossantos #autoconhecimento #ebook #fyp #foryou #healingtiktok #booktok #constelacaofamiliar`;
+
   async function copiar() {
     await navigator.clipboard.writeText(url);
     setCopiado(true);
     setTimeout(() => setCopiado(false), 2000);
+  }
+
+  async function copiarLegenda(texto: string) {
+    await navigator.clipboard.writeText(texto);
+    setCopiadoLegenda(true);
+    setTimeout(() => setCopiadoLegenda(false), 2000);
   }
 
   return (
@@ -30,6 +41,18 @@ export function PartilhaProduto({ url, titulo, subtitulo, locale }: Props) {
         {isPt ? 'partilhar' : 'share'}
       </p>
       <div className="flex gap-2.5 flex-wrap justify-center">
+        <button
+          onClick={() => copiarLegenda(legendaInsta)}
+          className="px-3.5 py-1.5 rounded-full border border-rosa/40 text-creme-2/80 text-[0.75rem] hover:border-rosa hover:text-rosa transition-colors"
+        >
+          {copiadoLegenda ? (isPt ? 'legenda copiada!' : 'caption copied!') : 'Instagram'}
+        </button>
+        <button
+          onClick={() => copiarLegenda(legendaTiktok)}
+          className="px-3.5 py-1.5 rounded-full border border-ocre/25 text-creme-2/80 text-[0.75rem] hover:border-ambar hover:text-ambar transition-colors"
+        >
+          TikTok
+        </button>
         <a
           href={`https://wa.me/?text=${textoEncode}`}
           target="_blank"
@@ -37,14 +60,6 @@ export function PartilhaProduto({ url, titulo, subtitulo, locale }: Props) {
           className="px-3.5 py-1.5 rounded-full border border-ocre/25 text-creme-2/80 text-[0.75rem] hover:border-ambar hover:text-ambar transition-colors no-underline"
         >
           WhatsApp
-        </a>
-        <a
-          href={`https://twitter.com/intent/tweet?text=${tituloEncode}&url=${urlEncode}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-3.5 py-1.5 rounded-full border border-ocre/25 text-creme-2/80 text-[0.75rem] hover:border-ambar hover:text-ambar transition-colors no-underline"
-        >
-          X
         </a>
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${urlEncode}`}
@@ -55,20 +70,12 @@ export function PartilhaProduto({ url, titulo, subtitulo, locale }: Props) {
           Facebook
         </a>
         <a
-          href={`https://www.linkedin.com/sharing/share-offsite/?url=${urlEncode}`}
+          href={`https://twitter.com/intent/tweet?text=${tituloEncode}&url=${urlEncode}`}
           target="_blank"
           rel="noopener noreferrer"
           className="px-3.5 py-1.5 rounded-full border border-ocre/25 text-creme-2/80 text-[0.75rem] hover:border-ambar hover:text-ambar transition-colors no-underline"
         >
-          LinkedIn
-        </a>
-        <a
-          href={`https://pinterest.com/pin/create/button/?url=${urlEncode}&description=${tituloEncode}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-3.5 py-1.5 rounded-full border border-ocre/25 text-creme-2/80 text-[0.75rem] hover:border-ambar hover:text-ambar transition-colors no-underline"
-        >
-          Pinterest
+          X
         </a>
         <button
           onClick={copiar}
@@ -77,6 +84,11 @@ export function PartilhaProduto({ url, titulo, subtitulo, locale }: Props) {
           {copiado ? (isPt ? 'copiado!' : 'copied!') : (isPt ? 'copiar link' : 'copy link')}
         </button>
       </div>
+      <p className="text-[0.6rem] text-creme-2/35 text-center">
+        {isPt
+          ? 'Instagram/TikTok: copia a legenda com hashtags e cola no story ou post.'
+          : 'Instagram/TikTok: copy the caption with hashtags, paste in story or post.'}
+      </p>
     </div>
   );
 }
