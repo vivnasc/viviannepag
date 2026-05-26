@@ -24,21 +24,21 @@ async function main() {
   const lines = content.split('\n');
   let titulo = '';
   let subtitulo = '';
-  let bodyLines = [];
-  let foundTitle = false;
+  let bodyStartIdx = -1;
 
-  for (const line of lines) {
-    if (!foundTitle && line.startsWith('# ')) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!titulo && line.startsWith('# ')) {
       titulo = line.replace('# ', '').trim();
-      foundTitle = true;
-    } else if (foundTitle && !subtitulo && line.startsWith('**') && line.endsWith('**')) {
+    } else if (titulo && !subtitulo && line.startsWith('**') && line.endsWith('**')) {
       subtitulo = line.replace(/\*\*/g, '').trim();
-    } else if (foundTitle) {
-      bodyLines.push(line);
+    } else if (titulo && line.startsWith('## ')) {
+      bodyStartIdx = i;
+      break;
     }
   }
 
-  const bodyMd = bodyLines.join('\n');
+  const bodyMd = lines.slice(bodyStartIdx).join('\n');
   const bodyHtml = await marked.parse(bodyMd);
 
   const spiralSvg = `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
@@ -163,10 +163,11 @@ async function main() {
     font-size: 18pt;
     line-height: 1.2;
     color: ${COLORS.barro};
-    margin-top: 14mm;
     margin-bottom: 5mm;
+    page-break-before: always;
     page-break-after: avoid;
     letter-spacing: -0.005em;
+    padding-top: 8mm;
   }
   .corpo h3 {
     font-family: 'Fraunces', serif;
