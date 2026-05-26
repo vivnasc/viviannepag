@@ -56,6 +56,9 @@ async function main() {
     size: A5;
     margin: 22mm 18mm 25mm 18mm;
   }
+  @page:first {
+    margin: 0;
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -71,63 +74,71 @@ async function main() {
   /* CAPA */
   .capa {
     page-break-after: always;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(170deg, ${COLORS.areia} 0%, ${COLORS.creme} 40%, ${COLORS.areia} 100%);
-    padding: 30mm 15mm;
+    justify-content: flex-end;
+    text-align: left;
+    background: ${COLORS.barro};
+    padding: 0;
     position: relative;
+    overflow: hidden;
   }
-  .capa::before {
-    content: '';
+  .capa-bg {
     position: absolute;
-    top: 12mm;
-    left: 12mm;
-    right: 12mm;
-    bottom: 12mm;
-    border: 1.5pt solid ${COLORS.barroClaro}40;
-    border-radius: 4mm;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 20%, ${COLORS.barroClaro}40 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, ${COLORS.salvia}20 0%, transparent 50%),
+      linear-gradient(170deg, #5A3D2E 0%, ${COLORS.barro} 40%, #1D130B 100%);
   }
-  .capa-espiral { margin-bottom: 8mm; opacity: 0.85; }
+  .capa-espiral-grande {
+    position: absolute;
+    top: 8%;
+    right: -5%;
+    opacity: 0.08;
+  }
+  .capa-conteudo {
+    position: relative;
+    z-index: 1;
+    padding: 12mm 10mm 14mm 10mm;
+    background: linear-gradient(to top, rgba(29,19,11,0.85) 0%, transparent 100%);
+  }
+  .capa-espiral { margin-bottom: 6mm; opacity: 0.7; }
   .capa-titulo {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-size: 28pt;
-    line-height: 1.15;
-    color: ${COLORS.barro};
-    letter-spacing: -0.01em;
-    margin-bottom: 5mm;
-    max-width: 85%;
+    font-size: 30pt;
+    line-height: 1.1;
+    color: ${COLORS.areia};
+    letter-spacing: -0.015em;
+    margin-bottom: 4mm;
   }
   .capa-subtitulo {
     font-family: 'Fraunces', serif;
     font-weight: 300;
     font-style: italic;
-    font-size: 11pt;
-    line-height: 1.5;
-    color: ${COLORS.textoSuave};
-    max-width: 80%;
-    margin-bottom: 12mm;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: ${COLORS.areia}cc;
+    max-width: 90%;
+    margin-bottom: 10mm;
+  }
+  .capa-linha {
+    width: 30mm;
+    height: 0.5pt;
+    background: ${COLORS.salvia};
+    margin-bottom: 5mm;
+    opacity: 0.6;
   }
   .capa-autora {
     font-family: 'Outfit', sans-serif;
     font-weight: 400;
-    font-size: 9pt;
-    letter-spacing: 0.15em;
+    font-size: 8.5pt;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: ${COLORS.salvia};
-  }
-  .capa-formacao {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: 8pt;
-    color: ${COLORS.textoSuave};
-    margin-top: 3mm;
-    max-width: 75%;
   }
 
   /* DISCLAIMER */
@@ -237,11 +248,19 @@ async function main() {
 
 <!-- CAPA -->
 <div class="capa">
-  <div class="capa-espiral">${spiralSvg}</div>
-  <h1 class="capa-titulo">${titulo}</h1>
-  <p class="capa-subtitulo">${subtitulo}</p>
-  <p class="capa-autora">Vivianne dos Santos</p>
-  <p class="capa-formacao">Escritora, mãe de três, em formação avançada em Psicologia Transpessoal, Psicologia e Espiritualidade, e Terapia da Constelação Familiar Sistémica</p>
+  <div class="capa-bg"></div>
+  <div class="capa-espiral-grande">
+    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="280" height="280">
+      <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="${COLORS.areia}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="capa-conteudo">
+    <div class="capa-espiral">${spiralSvg}</div>
+    <h1 class="capa-titulo">${titulo}</h1>
+    <p class="capa-subtitulo">${subtitulo}</p>
+    <div class="capa-linha"></div>
+    <p class="capa-autora">Vivianne dos Santos</p>
+  </div>
 </div>
 
 <!-- DISCLAIMER -->
