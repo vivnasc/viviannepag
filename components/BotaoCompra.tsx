@@ -1,7 +1,14 @@
 'use client';
 
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useState } from 'react';
+
+function PayPalLoader({ isPt }: { isPt: boolean }) {
+  const [{ isPending, isRejected }] = usePayPalScriptReducer();
+  if (isPending) return <p className="text-creme-2/60 text-sm italic text-center py-4">A carregar PayPal...</p>;
+  if (isRejected) return <p className="text-rosa text-sm italic text-center py-4">{isPt ? 'Erro ao carregar PayPal. Verifica a ligacao.' : 'Error loading PayPal. Check your connection.'}</p>;
+  return null;
+}
 
 export function BotaoCompra({
   slug,
@@ -139,28 +146,30 @@ export function BotaoCompra({
       </div>
 
       {emailValido ? (
-        <PayPalScriptProvider
-          options={{
-            clientId,
-            currency: 'EUR',
-            intent: 'capture',
-          }}
-        >
-          <PayPalButtons
-            style={{
-              layout: 'vertical',
-              color: 'gold',
-              shape: 'pill',
-              label: 'pay',
-              height: 50,
+        <div>
+          <PayPalScriptProvider
+            options={{
+              clientId: clientId!,
+              currency: 'EUR',
+              intent: 'capture',
             }}
-            createOrder={(_data, actions) => {
-              return actions.order.create({
-                intent: 'CAPTURE',
-                purchase_units: [
-                  {
-                    description: titulo,
-                    amount: {
+          >
+            <PayPalLoader isPt={isPt} />
+            <PayPalButtons
+              style={{
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'pill',
+                label: 'pay',
+                height: 50,
+              }}
+              createOrder={(_data, actions) => {
+                return actions.order.create({
+                  intent: 'CAPTURE',
+                  purchase_units: [
+                    {
+                      description: titulo,
+                      amount: {
                       currency_code: 'EUR',
                       value: precoNum.toFixed(2),
                     },
@@ -179,11 +188,21 @@ export function BotaoCompra({
               setPago(true);
               obterDownload();
             }}
-            onError={() => {
+            onError={(err) => {
+              console.error('PayPal error:', err);
               setErro(isPt ? 'Algo correu mal. Tenta de novo.' : 'Something went wrong. Try again.');
             }}
           />
-        </PayPalScriptProvider>
+          </PayPalScriptProvider>
+          <a
+            href={`https://www.paypal.com/paypalme/viviannedossantos/${precoNum}EUR`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-4 text-center text-ocre/60 text-[0.75rem] hover:text-ambar transition-colors no-underline"
+          >
+            {isPt ? 'Problema com o botao? Paga directamente via PayPal.me' : 'Button not working? Pay directly via PayPal.me'}
+          </a>
+        </div>
       ) : (
         <div className="border border-ocre/20 rounded-[14px] p-4 text-center">
           <p className="text-creme-2/50 text-sm italic font-serif">
