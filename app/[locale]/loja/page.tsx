@@ -205,6 +205,54 @@ export default async function LojaPage({
                   </div>
                 </section>
               )}
+
+              {/* TRAVESSIAS */}
+              <section className="mt-16">
+                <div className="flex items-center gap-4 mb-8">
+                  <h2 className="font-serif font-light text-creme text-[1.6rem]">
+                    {isPt ? 'Travessias' : 'Crossings'}
+                  </h2>
+                  <div className="flex-1 h-px bg-ocre/15" />
+                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
+                    {isPt ? 'programas guiados' : 'guided programs'}
+                  </span>
+                </div>
+                <p className="text-creme-2/70 text-[0.92rem] leading-[1.6] mb-8 max-w-[600px]">
+                  {isPt
+                    ? 'Os ebooks e guias dão-te o mapa. As travessias são o caminho, com acompanhamento.'
+                    : 'The ebooks and guides give you the map. The crossings are the path, with guidance.'}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {[
+                    { key: 'freeme', href: 'https://freeme.viviannedossantos.com', badge: isPt ? 'a travessia da mãe' : 'the mother\'s crossing', titulo: 'FreeMe', texto: isPt ? 'Pousa o que não era teu para carregar. Uma travessia terapêutica guiada para mães que vivem com culpa, lealdades invisíveis e o peso de gerações.' : 'Put down what was never yours to carry. A guided therapeutic crossing for mothers living with guilt, invisible loyalties, and generational weight.', accent: 'border-bordeaux/40 hover:border-bordeaux' },
+                    { key: 'infonte', href: 'https://infonte.viviannedossantos.com', badge: isPt ? 'a fonte interior' : 'the inner source', titulo: 'Infonte', texto: isPt ? 'Distingue o que realmente procuras. Para a mulher que faz demais, tem talento a mais e clareza a menos. Pára de perseguir o que não é teu.' : 'Distinguish what you truly seek. For the woman who does too much, has too much talent and too little clarity. Stop chasing what isn\'t yours.', accent: 'border-ocre/40 hover:border-ambar' },
+                    { key: 'synchim', href: 'https://synchim.viviannedossantos.com', badge: isPt ? 'o amor que dessincronizou' : 'the love that fell out of sync', titulo: 'SyncHim', texto: isPt ? 'Vê o nó invisível do casal. Para casais que repetem a mesma discussão e querem ir para além da superfície.' : 'See the invisible knot in the couple. For couples who keep repeating the same argument and want to go beyond the surface.', accent: 'border-rosa/40 hover:border-rosa' },
+                    { key: 'escola', href: 'https://escoladosveus.space', badge: isPt ? 'a escola' : 'the school', titulo: 'Escola dos Véus', texto: isPt ? 'Os cursos de transformação. Atravessa cada véu que te separa de quem és.' : 'The courses of transformation. Cross each veil that separates you from who you are.', accent: 'border-lila/40 hover:border-lila' },
+                  ].map(t => (
+                    <a
+                      key={t.key}
+                      href={t.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group block no-underline rounded-[18px] border ${t.accent} p-6 transition-all hover:-translate-y-0.5`}
+                      style={{ background: 'linear-gradient(160deg, rgba(58,40,24,0.7), rgba(42,28,18,0.4))' }}
+                    >
+                      <span className="block text-[0.68rem] tracking-[0.2em] uppercase text-ocre/70 mb-2">
+                        {t.badge}
+                      </span>
+                      <h3 className="font-serif font-normal text-creme text-[1.4rem] mb-2 group-hover:text-ambar transition-colors">
+                        {t.titulo}
+                      </h3>
+                      <p className="text-creme-2/70 text-[0.85rem] leading-[1.55]">
+                        {t.texto}
+                      </p>
+                      <span className="block mt-4 text-ocre/60 text-[0.78rem] group-hover:text-ambar transition-colors">
+                        {isPt ? 'saber mais →' : 'learn more →'}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
             </>
           );
         })()}
