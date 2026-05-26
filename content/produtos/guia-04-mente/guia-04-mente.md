@@ -69,7 +69,9 @@ Aqui está o método. É simples. Podes fazê-lo em dez minutos. Ou em cinco. Po
 
 Pega num papel (ou abre as notas do telemóvel) e despeja. Escreve tudo o que está na tua mente. Sem ordem. Sem lógica. Sem filtrar. Sem julgar. Tudo. "Tenho de ligar ao médico." "Estou preocupada com a escola do miúdo." "Não me sinto bem com o meu corpo." "Preciso de comprar detergente." "A minha mãe disse uma coisa que me magoou." "Tenho medo de não conseguir." "A reunião de amanhã." "O dinheiro." "A roupa para lavar." "A culpa." "O cansaço." Tudo.
 
-Não te preocupes com a qualidade do que escreves. Não te preocupes se parece ridículo. Não te preocupes se são trinta coisas ou três. O objetivo é tirar de dentro e pôr para fora. A mente funciona melhor quando o conteúdo está externalizado. É como esvaziar uma gaveta para a poder arrumar: primeiro deitas tudo na cama, depois organizas.
+Não te preocupes com a qualidade do que escreves. Não te preocupes se parece ridículo. Não te preocupes se são trinta coisas ou três. O objetivo é tirar de dentro e pôr para fora. Pensa nisto como esvaziar uma mala de viagem que tens carregado o dia inteiro: enquanto está às costas, não sabes bem o que lá está, só sentes o peso. Quando abres e tiras tudo, vês: ah, é isto. E de repente o peso tem forma, tem nome, e é muito mais manejável do que parecia.
+
+A mente funciona melhor quando o conteúdo está externalizado. É como esvaziar uma gaveta para a poder arrumar: primeiro deitas tudo na cama, depois organizas.
 
 Podes usar uma variante se preferires: em vez de escrever, fala. Pega no telemóvel, liga a gravação de áudio, e fala durante três minutos sem parar. Diz tudo o que te vem à cabeça. Não ouças depois (não é para isso). O ato de verbalizar já é o despejo. O som da tua própria voz a dizer em voz alta o que a tua mente repete em silêncio tem um efeito surpreendente: torna-se real. E quando é real, deixa de ser um fantasma. Podes olhar para ele. Podes decidir o que fazer com ele.
 
@@ -83,7 +85,7 @@ Agora olha para o que escreveste. E separa em três categorias:
 
 **Aceitar:** coisas que não podes mudar agora. O que a tua mãe disse. O tempo que faz. A incerteza sobre o futuro. A imperfeição do teu corpo. Estas coisas não são para resolver. São para reconhecer. "Isto dói. Não posso mudá-lo agora. E está tudo bem que doa." Dizer isto a ti mesma, com ternura, é o gesto mais poderoso que podes praticar.
 
-**Lixo:** coisas que não são nem ação nem aceitação. São pensamentos reciclados, preocupações fictícias, cenários inventados, autocrítica sem base. "E se o avião cai?" (não vais viajar). "Toda a gente acha que sou incompetente" (não acham). "Nunca vou conseguir" (conseguiste até aqui). Estes vão para o lixo. Literalmente. Risca-os. Ou imagina-os a serem arrastados para o caixote do lixo virtual. Não merecem o teu espaço mental. Não pagam renda.
+**Lixo:** coisas que não são nem ação nem aceitação. São pensamentos reciclados, preocupações fictícias, cenários inventados, autocrítica sem base. "E se o avião cai?" (não vais viajar). "Toda a gente acha que sou incompetente" (não acham). "Nunca vou conseguir" (conseguiste até aqui). Estes vão para o lixo. Podes até criar uma coluna no papel com o título "LIXO MENTAL" em letras grandes. Há algo satisfatório em categorizar um pensamento que te atormentou o dia inteiro como "lixo". Tira-lhe o poder. Devolve-te o controlo. Literalmente. Risca-os. Ou imagina-os a serem arrastados para o caixote do lixo virtual. Não merecem o teu espaço mental. Não pagam renda.
 
 A separação é o momento mais libertador. Porque quando olhas para a lista e percebes que metade dos teus pensamentos são lixo (preocupações infundadas, cenários que nunca vão acontecer, autocrítica exagerada), algo abranda. A mente percebe: eu estava a gastar energia com ilusões. E quando a energia deixa de ir para o lixo, sobra para o que importa.
 
