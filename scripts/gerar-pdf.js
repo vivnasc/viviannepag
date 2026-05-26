@@ -77,27 +77,49 @@ const PRODUTOS = {
     tipo: 'ebook',
     disclaimer: 'Este ebook é um material de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico nem sessões de constelação familiar. Se sentes que os padrões que reconheces te causam sofrimento persistente, procura apoio profissional. Ver é o primeiro passo. Cuidar de ti é o segundo.',
   },
+  'ebook-01-culpa-en': {
+    paleta: 'freeme',
+    badge: 'EBOOK · FREEME',
+    tipo: 'ebook',
+    disclaimer: 'This ebook is a self-knowledge and understanding resource. It does not replace therapeutic support. If you feel that guilt persistently paralyzes you, if you experience symptoms of depression, intense anxiety, or a crisis, please seek professional help. There is no shame in that. There is courage.',
+  },
+  'guia-01-meu-en': {
+    paleta: 'freeme',
+    badge: 'GUIDE · FREEME',
+    tipo: 'guia',
+    disclaimer: 'This guide is a self-knowledge resource. It does not replace therapeutic support. If you feel that emotional weight is paralyzing you, please seek professional help. Taking care of yourself is an act of courage.',
+  },
+  'guia-02-frases-en': {
+    paleta: 'freeme',
+    badge: 'GUIDE · FREEME',
+    tipo: 'guia',
+    disclaimer: 'This guide is a self-knowledge resource about boundaries and motherhood. It does not replace therapeutic support. If you feel that guilt prevents you from functioning day to day, please seek professional help.',
+  },
+  'ebook-02-herdaste-en': {
+    paleta: 'freeme',
+    badge: 'EBOOK · FREEME',
+    tipo: 'ebook',
+    disclaimer: 'This ebook is a self-knowledge and understanding resource. It does not replace therapeutic support or family constellation sessions. If you feel that the patterns you recognize cause you persistent suffering, please seek professional help. Seeing is the first step. Taking care of yourself is the second.',
+  },
 };
 
 function getVSvg(color, size = 60) {
   return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-    <g fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round">
+    <g fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
       <path d="M150 120 C150 270 188 345 244 378"/>
       <path d="M362 120 C362 270 324 345 268 378"/>
     </g>
     <circle cx="256" cy="246" r="14" fill="${color}"/>
-    <path d="M168 400 C200 374 224 422 256 400 C288 378 312 422 344 400" fill="none" stroke="${color}" stroke-width="12" stroke-linecap="round"/>
   </svg>`;
 }
 
 function getVSvgBig(color, size = 280) {
   return `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-    <g fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round">
+    <g fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
       <path d="M150 120 C150 270 188 345 244 378"/>
       <path d="M362 120 C362 270 324 345 268 378"/>
     </g>
     <circle cx="256" cy="246" r="18" fill="${color}"/>
-    <path d="M168 400 C200 374 224 422 256 400 C288 378 312 422 344 400" fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round"/>
   </svg>`;
 }
 
