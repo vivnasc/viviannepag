@@ -562,4 +562,4 @@ With all my tenderness,
 
 *This material is for self-awareness and understanding. It does not replace therapeutic or psychological support. In situations of trauma, depression, severe anxiety, or crisis, seek the support of a mental health professional. Taking care of yourself is not weakness. It is the most courageous act you can do for the people you love.*
 
-*© 2025 Vivianne dos Santos · viviannedossantos.com*
+*© 2026 Vivianne dos Santos · viviannedossantos.com*

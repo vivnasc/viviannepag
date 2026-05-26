@@ -562,4 +562,4 @@ Com toda a minha ternura,
 
 *Este material é de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico ou psicológico. Em situações de trauma, depressão, ansiedade severa, ou crise, procura apoio de um profissional de saúde mental. Cuidar de ti não é fraqueza. É o acto mais corajoso que podes fazer pelas pessoas que amas.*
 
-*© 2025 Vivianne dos Santos · viviannedossantos.com*
+*© 2026 Vivianne dos Santos · viviannedossantos.com*

@@ -287,7 +287,7 @@ ${bodyHtml}
 
 <div class="final">
   <div class="final-espiral">${spiralSvg}</div>
-  <p>© 2025 Vivianne dos Santos</p>
+  <p>© 2026 Vivianne dos Santos</p>
   <p><a href="https://viviannedossantos.com">viviannedossantos.com</a></p>
   <p><a href="https://freeme.viviannedossantos.com">freeme.viviannedossantos.com</a></p>
 </div>
