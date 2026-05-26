@@ -111,6 +111,13 @@ export function BotaoCompra({
         >
           {isPt ? 'Descarregar agora' : 'Download now'}
         </a>
+        <p className="mt-4 text-creme-2/50 text-xs">
+          {isPt ? 'Problema com o download?' : 'Problem with the download?'}
+          {' '}
+          <a href="https://wa.me/258849999999" target="_blank" rel="noopener noreferrer" className="text-ocre hover:text-ambar no-underline">
+            {isPt ? 'Contacta-me no WhatsApp' : 'Contact me on WhatsApp'}
+          </a>
+        </p>
       </div>
     );
   }

@@ -26,6 +26,7 @@ const socials: Social[] = [
 export function Footer() {
   const t = useTranslations('footer');
   const ano = new Date().getFullYear();
+  const whatsappNum = '258849999999'; // TODO: meter o numero real
   return (
     <footer className="text-center pt-[70px] pb-[50px] text-creme/50 text-[0.85rem]">
       <div className="flex gap-[22px] justify-center mb-6 flex-wrap">
@@ -39,6 +40,16 @@ export function Footer() {
             {s.handle}
           </a>
         ))}
+      </div>
+      <div className="mb-6">
+        <a
+          href={`https://wa.me/${whatsappNum}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-ocre/30 text-creme-2 text-[0.85rem] hover:border-ambar hover:text-ambar transition-colors no-underline"
+        >
+          WhatsApp
+        </a>
       </div>
       <p>
         © <span>{ano}</span> {t('copyright')} ·{' '}
