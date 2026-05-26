@@ -125,6 +125,18 @@ const PRODUTOS = {
     tipo: 'ebook',
     disclaimer: 'This ebook is a self-knowledge and existential reflection resource. It does not replace therapeutic support. If you experience persistent emptiness, loss of meaning, or depressive symptoms, please seek professional help. Seeking meaning is human. Asking for help is too.',
   },
+  'ebook-05-escuro': {
+    paleta: 'escola',
+    badge: 'EBOOK · ESCOLA DOS VÉUS',
+    tipo: 'ebook',
+    disclaimer: 'Este ebook aborda temas sensíveis. NÃO substitui acompanhamento terapêutico. Se estás em sofrimento agudo ou tens pensamentos sobre desistir da vida, procura ajuda imediata. Em Portugal: SNS 24 (808 24 24 24). Pedir ajuda é o ato mais corajoso que podes praticar.',
+  },
+  'ebook-06-no-casal': {
+    paleta: 'synchim',
+    badge: 'EBOOK · SYNCHIM',
+    tipo: 'ebook',
+    disclaimer: 'Este ebook é um material de autoconhecimento sobre relações de casal. Não substitui acompanhamento terapêutico ou terapia de casal. Se a tua relação envolve violência física ou psicológica, procura ajuda profissional imediata.',
+  },
 };
 
 function getVSvg(color, size = 60) {
