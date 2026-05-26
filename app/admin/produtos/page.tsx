@@ -127,8 +127,8 @@ export default function ProdutosAdmin() {
           </div>
           <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">subtítulo</label><input value={edit.subtitulo} onChange={e => setEdit({...edit, subtitulo: e.target.value})} className={inp} /></div>
           <div className="grid grid-cols-2 gap-5">
-            <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">preço</label><input value={edit.preco} onChange={e => setEdit({...edit, preco: e.target.value})} className={inp} placeholder="€29" /></div>
-            <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">preço original (riscado)</label><input value={edit.preco_original??''} onChange={e => setEdit({...edit, preco_original: e.target.value||null})} className={inp} placeholder="€49" /></div>
+            <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">preço</label><input value={edit.preco} onChange={e => setEdit({...edit, preco: e.target.value})} className={inp} placeholder="$7" /></div>
+            <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">preço original (riscado)</label><input value={edit.preco_original??''} onChange={e => setEdit({...edit, preco_original: e.target.value||null})} className={inp} placeholder="$29" /></div>
           </div>
           <div><label className="block text-[0.72rem] tracking-[0.18em] uppercase text-ocre/80 mb-2">URL de checkout</label><input value={edit.checkout_url??''} onChange={e => setEdit({...edit, checkout_url: e.target.value||null})} className={inp} placeholder="https://hotmart.com/..." /></div>
           <div>

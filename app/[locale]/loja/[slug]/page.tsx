@@ -24,32 +24,45 @@ type Produto = {
   badge: string | null;
 };
 
-const DESCRICOES: Record<string, string> = {
-  'ebook-01-culpa': '**Ebook · ~50 páginas · PDF imediato**\n\nUm ebook para mães que vivem com culpa. Mostra-te de onde vem, porque não prova que falhaste, e o que te impede de ver.\n\n**Capítulos:** A coisa que sentes e nunca disseste · Ninguém fala da culpa da mãe · Sentir culpa não te torna má mãe · O que a culpa te faz fazer · De onde vem a tua culpa · Culpa não é responsabilidade · Há um caminho de volta · A travessia\n\n> *Tu sabes do que estou a falar. Aquela sensação que aparece quando te deitas e a casa finalmente está em silêncio.*',
-  'ebook-02-herdaste': '**Ebook · 8 capítulos · PDF imediato**\n\nPorque repetes o que juraste nunca repetir? As lealdades invisíveis e as ordens do amor.\n\n> *Abres a boca e sai aquela frase. Com aquele tom. É a voz da tua mãe.*',
-  'ebook-07-sonho': '**Ebook · 8 capítulos · PDF imediato**\n\nFizeste tudo certo e continuas perdida. O mecanismo da substituição.\n\n> *Tu fizeste tudo certo. Estudaste. Trabalhaste. E conseguiste coisas. Mas não sentes.*',
-  'ebook-08-voz': '**Ebook · 7 capítulos · PDF imediato**\n\nMedes-te por uma régua que nunca escolheste.\n\n> *Há uma régua na tua vida. Mede tudo o que fazes. E nunca é suficiente.*',
+type FallbackItem = { titulo: string; titulo_en: string; subtitulo: string; subtitulo_en: string; descricao: string; descricao_en: string; preco: string; preco_original: string; capa: string; badge: string };
+
+const CATALOGO: Record<string, FallbackItem> = {
+  'ebook-01-culpa': { titulo: 'A culpa não é boa conselheira', titulo_en: 'Guilt Is Not a Good Advisor', subtitulo: 'Porque te sentes sempre em falta com os teus filhos.', subtitulo_en: 'Why you always feel like you\'re falling short with your kids.', descricao: '**Ebook · ~50 páginas · PDF imediato**\n\n**Capítulos:** A coisa que sentes e nunca disseste · Ninguém fala da culpa da mãe · Sentir culpa não te torna má mãe · O que a culpa te faz fazer · De onde vem a tua culpa · Culpa não é responsabilidade · Há um caminho de volta · A travessia\n\n> *Tu sabes do que estou a falar. Aquela sensação que aparece quando te deitas e a casa finalmente está em silêncio.*', descricao_en: '**Ebook · ~50 pages · Immediate PDF**\n\n**Chapters:** The thing you feel and never said · Nobody talks about mother\'s guilt · Feeling guilt doesn\'t make you a bad mother · What guilt makes you do · Where your guilt comes from · Guilt is not responsibility · There is a way back · The crossing\n\n> *You know what I\'m talking about. That feeling that shows up when you lie down and the house is finally quiet.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-01-culpa-capa.png', badge: 'ebook' },
+  'ebook-02-herdaste': { titulo: 'O que herdaste sem saber', titulo_en: 'What You Inherited Without Knowing', subtitulo: 'As lealdades invisíveis: porque repetes o que juraste nunca repetir.', subtitulo_en: 'Invisible loyalties: why you repeat what you swore you\'d never repeat.', descricao: '**Ebook · 8 capítulos · PDF imediato**\n\n> *Abres a boca e sai aquela frase. Com aquele tom. É a voz da tua mãe.*', descricao_en: '**Ebook · 8 chapters · Immediate PDF**\n\n> *You open your mouth and that phrase comes out. With that tone. It\'s your mother\'s voice.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-02-herdaste-capa.png', badge: 'ebook' },
+  'guia-01-meu': { titulo: 'O que é meu, o que não é meu', titulo_en: 'What Is Mine, What Is Not Mine', subtitulo: 'Um exercício para parares de carregar o que nunca foi teu.', subtitulo_en: 'An exercise to stop carrying what was never yours.', descricao: '**Guia prático · PDF imediato**\n\nExercício de duas colunas: o que é teu vs. o que carregas por outros.', descricao_en: '**Practical guide · Immediate PDF**\n\nTwo-column exercise: what is yours vs. what you carry for others.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-01-meu-capa.png', badge: 'guia' },
+  'guia-02-frases': { titulo: '7 frases para dizer não sem culpa', titulo_en: '7 Phrases to Say No Without Guilt', subtitulo: 'Limites com amor e firmeza.', subtitulo_en: 'Boundaries with love and firmness.', descricao: '**Guia prático · PDF imediato**\n\n7 frases prontas para quando o teu filho testa os limites.', descricao_en: '**Practical guide · Immediate PDF**\n\n7 ready-to-use phrases for when your child tests boundaries.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-02-frases-capa.png', badge: 'guia' },
+  'ebook-03-quemes': { titulo: 'Quem és para além do que fazes', titulo_en: 'Who You Are Beyond What You Do', subtitulo: 'A diferença entre identidade e papéis.', subtitulo_en: 'The difference between identity and roles.', descricao: '**Ebook · 7 capítulos · PDF imediato**\n\n> *Houve um momento em que deixaste de saber quem és.*', descricao_en: '**Ebook · 7 chapters · Immediate PDF**\n\n> *There was a moment when you stopped knowing who you are.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-03-quemes-capa.png', badge: 'ebook' },
+  'ebook-04-sentido': { titulo: 'O sentido que procuras', titulo_en: 'The Meaning You Are Looking For', subtitulo: 'Porque o sucesso não preenche.', subtitulo_en: 'Why success doesn\'t fill the void.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\nTens tudo e sentes que falta.', descricao_en: '**Ebook · 6 chapters · Immediate PDF**\n\nYou have everything and still feel something is missing.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-04-sentido-capa.png', badge: 'ebook' },
+  'ebook-05-escuro': { titulo: 'Atravessar o escuro', titulo_en: 'Crossing the Dark', subtitulo: 'As crises como passagem.', subtitulo_en: 'Crises as passage.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\n> *Há um lugar para onde ninguém quer ir.*', descricao_en: '**Ebook · 6 chapters · Immediate PDF**\n\n> *There is a place nobody wants to go.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-05-escuro-capa.png', badge: 'ebook' },
+  'ebook-06-no-casal': { titulo: 'O nó invisível do casal', titulo_en: 'The Invisible Knot in the Couple', subtitulo: 'O que está por baixo das discussões.', subtitulo_en: 'What lies beneath the arguments that keep repeating.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\n> *Tu sabes qual é. A mesma discussão, sempre.*', descricao_en: '**Ebook · 6 chapters · Immediate PDF**\n\n> *You know which one. The same argument, always.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-06-no-casal-capa.png', badge: 'ebook' },
+  'ebook-07-sonho': { titulo: 'Nem todo o sonho que carregas nasceu em ti', titulo_en: 'Not Every Dream You Carry Was Born in You', subtitulo: 'Porque alcanças e continuas a sentir que falta.', subtitulo_en: 'Why you achieve what you wanted and still feel something is missing.', descricao: '**Ebook · 8 capítulos · PDF imediato**\n\n> *Tu fizeste tudo certo. Estudaste. Trabalhaste. E conseguiste coisas. Mas não sentes.*', descricao_en: '**Ebook · 8 chapters · Immediate PDF**\n\n> *You did everything right. You studied. You worked. And you achieved things. But you don\'t feel.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-07-sonho-capa.png', badge: 'ebook · novo' },
+  'ebook-08-voz': { titulo: 'De quem é esta voz?', titulo_en: 'Whose Voice Is This?', subtitulo: 'Quem decidiu o que conta como sucesso?', subtitulo_en: 'Who decided what counts as success in your life?', descricao: '**Ebook · 7 capítulos · PDF imediato**\n\n> *Há uma régua na tua vida. Mede tudo o que fazes. E nunca é suficiente.*', descricao_en: '**Ebook · 7 chapters · Immediate PDF**\n\n> *There is a ruler in your life. It measures everything you do. And it is never enough.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-08-voz-capa.png', badge: 'ebook · novo' },
+  'guia-03-presenca': { titulo: 'Práticas de presença para o dia a dia', titulo_en: 'Presence Practices for Everyday Life', subtitulo: 'Pequenas pausas que te trazem de volta.', subtitulo_en: 'Small pauses that bring you back to yourself.', descricao: '**Guia · PDF imediato**\n\n7 micro-práticas de presença.', descricao_en: '**Guide · Immediate PDF**\n\n7 micro-practices of presence.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-03-presenca-capa.png', badge: 'guia' },
+  'guia-04-mente': { titulo: 'Esvaziar a mente em 3 passos', titulo_en: 'Empty Your Mind in 3 Steps', subtitulo: 'Parar a roda de pensamentos.', subtitulo_en: 'Stop the thought wheel and return to focus.', descricao: '**Guia · PDF imediato**\n\nDespejar, separar, escolher.', descricao_en: '**Guide · Immediate PDF**\n\nDump, separate, choose.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-04-mente-capa.png', badge: 'guia' },
+  'guia-05-luto': { titulo: 'Ritual para o luto que ninguém vê', titulo_en: 'A Ritual for the Grief Nobody Sees', subtitulo: 'Para as perdas sem funeral.', subtitulo_en: 'For the losses that had no funeral.', descricao: '**Guia · PDF imediato**\n\nNomear, honrar, largar.', descricao_en: '**Guide · Immediate PDF**\n\nName, honor, release.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-05-luto-capa.png', badge: 'guia' },
+  'guia-06-perguntas': { titulo: 'As 5 perguntas antes de uma discussão', titulo_en: '5 Questions Before an Argument', subtitulo: 'Antes de reagir.', subtitulo_en: 'What to ask yourself before reacting.', descricao: '**Guia · PDF imediato**\n\n5 perguntas para o espaço entre estímulo e reação.', descricao_en: '**Guide · Immediate PDF**\n\n5 questions for the space between stimulus and reaction.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-06-perguntas-capa.png', badge: 'guia' },
+  'guia-07-teu': { titulo: 'O que é mesmo teu', titulo_en: 'What Is Truly Yours', subtitulo: 'Separar o que persegues por herança.', subtitulo_en: 'Separating what you pursue for yourself from inheritance.', descricao: '**Guia · PDF imediato**\n\nVerdade, herança, comparação, compensação.', descricao_en: '**Guide · Immediate PDF**\n\nTruth, inheritance, comparison, compensation.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-07-teu-capa.png', badge: 'guia · novo' },
 };
 
-const FALLBACK: Record<string, Produto> = {
-  'ebook-01-culpa': { id: '1', slug: 'ebook-01-culpa', titulo: 'A culpa não é boa conselheira', subtitulo: 'Porque te sentes sempre em falta com os teus filhos.', descricao: DESCRICOES['ebook-01-culpa'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-01-culpa-capa.png', checkout_url: null, badge: 'ebook' },
-  'ebook-02-herdaste': { id: '2', slug: 'ebook-02-herdaste', titulo: 'O que herdaste sem saber', subtitulo: 'As lealdades invisíveis: porque repetes o que juraste nunca repetir.', descricao: DESCRICOES['ebook-02-herdaste'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-02-herdaste-capa.png', checkout_url: null, badge: 'ebook' },
-  'guia-01-meu': { id: '3', slug: 'guia-01-meu', titulo: 'O que é meu, o que não é meu', subtitulo: 'Um exercício para parares de carregar o que nunca foi teu.', descricao: '**Guia prático · PDF imediato**\n\nExercício de duas colunas: o que é teu vs. o que carregas por outros.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-01-meu-capa.png', checkout_url: null, badge: 'guia' },
-  'guia-02-frases': { id: '4', slug: 'guia-02-frases', titulo: '7 frases para dizer não sem culpa', subtitulo: 'Limites com amor e firmeza.', descricao: '**Guia prático · PDF imediato**\n\n7 frases prontas para quando o teu filho testa os limites.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-02-frases-capa.png', checkout_url: null, badge: 'guia' },
-  'ebook-03-quemes': { id: '5', slug: 'ebook-03-quemes', titulo: 'Quem és para além do que fazes', subtitulo: 'A diferença entre identidade e papéis.', descricao: '**Ebook · 7 capítulos · PDF imediato**\n\n> *Houve um momento em que deixaste de saber quem és.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-03-quemes-capa.png', checkout_url: null, badge: 'ebook' },
-  'ebook-04-sentido': { id: '6', slug: 'ebook-04-sentido', titulo: 'O sentido que procuras', subtitulo: 'Porque o sucesso não preenche.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\nTens tudo e sentes que falta. O vazio existencial.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-04-sentido-capa.png', checkout_url: null, badge: 'ebook' },
-  'ebook-05-escuro': { id: '7', slug: 'ebook-05-escuro', titulo: 'Atravessar o escuro', subtitulo: 'As crises como passagem.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\n> *Há um lugar para onde ninguém quer ir.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-05-escuro-capa.png', checkout_url: null, badge: 'ebook' },
-  'ebook-06-no-casal': { id: '8', slug: 'ebook-06-no-casal', titulo: 'O nó invisível do casal', subtitulo: 'O que está por baixo das discussões.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\n> *Tu sabes qual é. A mesma discussão, sempre.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-06-no-casal-capa.png', checkout_url: null, badge: 'ebook' },
-  'ebook-07-sonho': { id: '9', slug: 'ebook-07-sonho', titulo: 'Nem todo o sonho que carregas nasceu em ti', subtitulo: 'Porque alcanças e continuas a sentir que falta.', descricao: DESCRICOES['ebook-07-sonho'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-07-sonho-capa.png', checkout_url: null, badge: 'ebook · novo' },
-  'ebook-08-voz': { id: '10', slug: 'ebook-08-voz', titulo: 'De quem é esta voz?', subtitulo: 'Quem decidiu o que conta como sucesso?', descricao: DESCRICOES['ebook-08-voz'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-08-voz-capa.png', checkout_url: null, badge: 'ebook · novo' },
-  'guia-03-presenca': { id: '11', slug: 'guia-03-presenca', titulo: 'Práticas de presença para o dia a dia', subtitulo: 'Pequenas pausas que te trazem de volta a ti.', descricao: '**Guia · PDF imediato**\n\n7 micro-práticas de presença.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-03-presenca-capa.png', checkout_url: null, badge: 'guia' },
-  'guia-04-mente': { id: '12', slug: 'guia-04-mente', titulo: 'Esvaziar a mente em 3 passos', subtitulo: 'Parar a roda de pensamentos.', descricao: '**Guia · PDF imediato**\n\nDespejar, separar, escolher.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-04-mente-capa.png', checkout_url: null, badge: 'guia' },
-  'guia-05-luto': { id: '13', slug: 'guia-05-luto', titulo: 'Ritual para o luto que ninguém vê', subtitulo: 'Para as perdas sem funeral.', descricao: '**Guia · PDF imediato**\n\nNomear, honrar, largar.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-05-luto-capa.png', checkout_url: null, badge: 'guia' },
-  'guia-06-perguntas': { id: '14', slug: 'guia-06-perguntas', titulo: 'As 5 perguntas antes de uma discussão', subtitulo: 'Antes de reagir.', descricao: '**Guia · PDF imediato**\n\n5 perguntas para o espaço entre estímulo e reação.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-06-perguntas-capa.png', checkout_url: null, badge: 'guia' },
-  'guia-07-teu': { id: '15', slug: 'guia-07-teu', titulo: 'O que é mesmo teu', subtitulo: 'Separar o que persegues por ti do que persegues por herança.', descricao: '**Guia · PDF imediato**\n\nVerdade, herança, comparação, compensação.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-07-teu-capa.png', checkout_url: null, badge: 'guia · novo' },
-};
+function getFallback(slug: string, locale: string): Produto | null {
+  const c = CATALOGO[slug];
+  if (!c) return null;
+  const isEn = locale === 'en';
+  return {
+    id: slug,
+    slug,
+    titulo: isEn ? c.titulo_en : c.titulo,
+    subtitulo: isEn ? c.subtitulo_en : c.subtitulo,
+    descricao: isEn ? c.descricao_en : c.descricao,
+    preco: c.preco,
+    preco_original: c.preco_original,
+    capa: c.capa,
+    checkout_url: null,
+    badge: c.badge,
+  };
+}
 
-async function getProduto(slug: string): Promise<Produto | null> {
+async function getProduto(slug: string, locale: string): Promise<Produto | null> {
   try {
     const supabase = getSupabase();
     const { data } = await supabase
@@ -58,9 +71,9 @@ async function getProduto(slug: string): Promise<Produto | null> {
       .eq('slug', slug)
       .eq('publicado', true)
       .single();
-    return (data as Produto | null) ?? FALLBACK[slug] ?? null;
+    return (data as Produto | null) ?? getFallback(slug, locale);
   } catch {
-    return FALLBACK[slug] ?? null;
+    return getFallback(slug, locale);
   }
 }
 
@@ -70,7 +83,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const p = await getProduto(slug);
+  const p = await getProduto(slug, locale);
   if (!p) return {};
   const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com';
   const path = `${locale === 'en' ? '/en' : ''}/loja/${slug}`;
@@ -95,7 +108,7 @@ export default async function ProdutoPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const p = await getProduto(slug);
+  const p = await getProduto(slug, locale);
   if (!p) notFound();
   const isPt = locale === 'pt';
   const descHtml = p.descricao ? await marked.parse(p.descricao, { async: true }) : '';
