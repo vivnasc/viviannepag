@@ -53,13 +53,16 @@ export function BotaoCompra({
   }
 
   async function obterDownload() {
-    const res = await fetch('/api/download', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ slug }),
-    });
-    const json = await res.json();
-    if (res.ok && json.url) setDownloadUrl(json.url);
+    try {
+      const res = await fetch('/api/download', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      });
+      const json = await res.json();
+      if (res.ok && json.url) { setDownloadUrl(json.url); return; }
+    } catch {}
+    setDownloadUrl(`/produtos/${slug}.pdf`);
   }
 
   if (checkoutUrl) {
@@ -99,25 +102,17 @@ export function BotaoCompra({
         </p>
         <p className="text-creme-2/70 text-xs mb-5">
           {isPt
-            ? `Confirmação enviada para ${email}`
-            : `Confirmation sent to ${email}`}
+            ? `Compra registada para ${email}`
+            : `Purchase registered for ${email}`}
         </p>
-        {downloadUrl ? (
-          <a
-            href={downloadUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-ambar text-terra font-sans text-[0.92rem] font-medium tracking-[0.04em] rounded-[14px] px-6 py-3 hover:bg-ocre transition-colors no-underline"
-          >
-            {isPt ? 'Descarregar agora' : 'Download now'}
-          </a>
-        ) : (
-          <p className="text-creme-2/60 text-sm italic">
-            {isPt
-              ? 'Vais receber um email com o acesso ao teu conteúdo.'
-              : 'You will receive an email with access to your content.'}
-          </p>
-        )}
+        <a
+          href={downloadUrl || `/produtos/${slug}.pdf`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-ambar text-terra font-sans text-[0.92rem] font-medium tracking-[0.04em] rounded-[14px] px-6 py-3 hover:bg-ocre transition-colors no-underline"
+        >
+          {isPt ? 'Descarregar agora' : 'Download now'}
+        </a>
       </div>
     );
   }
