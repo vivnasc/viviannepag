@@ -353,7 +353,7 @@ E se há uma parte de ti que quer não apenas compreender, mas também criar, se
 
 Não te estou a dizer que precisas de ir a qualquer lado para te encontrares. O que leste aqui já é teu. A semente já está plantada. E há mulheres que leem estas páginas e a partir delas iniciam o seu próprio caminho, ao seu ritmo, com os seus recursos.
 
-Mas se sentes que é o momento de ir mais fundo, se sentes que sozinha não chegas onde queres chegar, se sentes que o que leste te abriu uma porta e queres atravessá-la com alguém ao lado, então a Escola dos Véus está à tua espera. Em **viviannedossantos.com**.
+Mas se sentes que é o momento de ir mais fundo, se sentes que sozinha não chegas onde queres chegar, se sentes que o que leste te abriu uma porta e queres atravessá-la com alguém ao lado, então a Escola dos Véus está à tua espera em [escoladosveus.space](https://escoladosveus.space). E o Infonte em [infonte.viviannedossantos.com](https://infonte.viviannedossantos.com).
 
 Antes de te despedires destas páginas, quero pedir-te uma coisa. Uma coisa pequena. Quero que, hoje, em algum momento do dia, te faças uma pergunta. Não a pergunta "o que tenho de fazer?", essa já a fazes centenas de vezes. Mas esta: "O que é que eu quero, de verdade, neste momento?"
 
@@ -370,4 +370,4 @@ Com toda a minha ternura,
 
 *Este material é de autoconhecimento e reflexão pessoal. Não substitui acompanhamento terapêutico ou psicológico. Em situações de sofrimento persistente, vazio emocional intenso, depressão, ansiedade severa, ou crise, procura apoio de um profissional de saúde mental qualificado. Olhar para ti é o primeiro ato de coragem. Pedir ajuda é outro.*
 
-*© 2025 Vivianne dos Santos · viviannedossantos.com*
+*© 2026 Vivianne dos Santos · viviannedossantos.com*

@@ -370,7 +370,7 @@ Com toda a minha ternura,
 
 ---
 
-*© 2025 Vivianne dos Santos. Todos os direitos reservados.*
+*© 2026 Vivianne dos Santos. Todos os direitos reservados.*
 *viviannedossantos.com*
 
 *Este material destina-se exclusivamente a fins de autoconhecimento e reflexão pessoal. Não constitui aconselhamento terapêutico, psicológico ou médico, nem substitui o acompanhamento de profissionais qualificados. Os princípios da psicologia do sentido e da psicologia transpessoal aqui apresentados são utilizados como ferramenta de reflexão, não como intervenção clínica. Se sentes que precisas de apoio profissional, procura um psicólogo, psicoterapeuta ou outro profissional de saúde mental. Cuidar de ti é o primeiro passo.*

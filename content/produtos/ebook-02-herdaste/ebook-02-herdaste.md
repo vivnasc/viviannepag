@@ -460,7 +460,7 @@ Vivianne
 
 ---
 
-*© 2025 Vivianne dos Santos. Todos os direitos reservados.*
+*© 2026 Vivianne dos Santos. Todos os direitos reservados.*
 *viviannedossantos.com*
 *freeme.viviannedossantos.com*
 
