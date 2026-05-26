@@ -266,7 +266,7 @@ async function main() {
 <!-- DISCLAIMER -->
 <div class="disclaimer-page">
   <div class="disclaimer-box">
-    <p>Este ebook é um material de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico. Se sentes que a tua culpa te paralisa de forma persistente, se sentes sintomas de depressão, ansiedade intensa, ou se passas por uma crise, procura apoio profissional. Não há vergonha nenhuma nisso. Há coragem.</p>
+    <p>This ebook is a self-knowledge and understanding resource. It does not replace therapeutic support. If you feel that your guilt is persistently paralysing you, if you experience symptoms of depression, intense anxiety, or if you are going through a crisis, please seek professional help. There is no shame in that. There is courage.</p>
   </div>
 </div>
 
