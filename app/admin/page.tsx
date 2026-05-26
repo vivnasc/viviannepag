@@ -24,6 +24,7 @@ export default function AdminPage() {
   const [mensagem, setMensagem] = useState<string | null>(null);
   const [sugerindo, setSugerindo] = useState(false);
   const [sugestoes, setSugestoes] = useState<string | null>(null);
+  const [traduzindo, setTraduzindo] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -72,6 +73,21 @@ export default function AdminPage() {
     setMigrando(false);
     if (res.ok) {
       setMensagem(`Importados: ${json.importados.length}. Ignorados: ${json.ignorados.length}.`);
+      carregar();
+    } else {
+      setMensagem(`Erro: ${json.erro}`);
+    }
+  }
+
+  async function traduzirTodos() {
+    if (!confirm('Traduzir todos os escritos PT que não têm versão EN? Usa a Claude API (pode demorar 2-3 minutos).')) return;
+    setTraduzindo(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/traduzir-todos', { method: 'POST' });
+    const json = await res.json();
+    setTraduzindo(false);
+    if (res.ok) {
+      setMensagem(`Traduzidos: ${json.traduzidos}/${json.total}.${json.erros ? ' Erros: ' + json.erros.join(', ') : ''}`);
       carregar();
     } else {
       setMensagem(`Erro: ${json.erro}`);
@@ -161,6 +177,13 @@ export default function AdminPage() {
           >
             galeria
           </Link>
+          <button
+            onClick={traduzirTodos}
+            disabled={traduzindo}
+            className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
+          >
+            {traduzindo ? 'a traduzir…' : 'traduzir todos EN'}
+          </button>
           <button
             onClick={migrar}
             disabled={migrando}
