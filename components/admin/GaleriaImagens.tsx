@@ -76,26 +76,30 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
       f.type.startsWith('image/')
     );
     if (files.length === 0) return;
-    if (files.length !== ptItems.length) {
-      const ok = confirm(
-        `Tens ${files.length} imagens e ${ptItems.length} escritos PT. Vou atribuir por ordem (mais recente primeiro). Continuar?`
-      );
-      if (!ok) return;
-    }
     setBulkProcessando(true);
-    setBulkMsg(`A processar ${files.length} imagens…`);
-    let ok = 0;
-    let erros = 0;
-    const sorted = [...ptItems];
-    for (let i = 0; i < files.length && i < sorted.length; i++) {
-      const erro = await uploadEAplicar(files[i], sorted[i]);
-      if (erro) erros++;
-      else ok++;
-      setBulkMsg(`${ok + erros}/${files.length} processadas…`);
-    }
+    setBulkMsg(`Claude a identificar ${files.length} imagens…`);
+
+    const fd = new FormData();
+    for (const f of files) fd.append('files', f);
+
+    const res = await fetch('/api/admin/match-imagens', { method: 'POST', body: fd });
+    const json = await res.json();
     setBulkProcessando(false);
-    setBulkMsg(
-      `Concluído: ${ok} carregadas${erros > 0 ? `, ${erros} erros` : ''}. Cada imagem aplicada a PT + EN.`
+
+    if (!res.ok) {
+      setBulkMsg(`Erro: ${json.erro ?? 'falhou'}${json.detalhe ? ' — ' + json.detalhe.slice(0, 200) : ''}`);
+      return;
+    }
+
+    setBulkMsg(`Concluído: ${json.sucesso}/${json.total} imagens atribuídas automaticamente (PT + EN).${json.erros?.length ? ' Erros: ' + json.erros.map((e: { ficheiro: string; erro?: string }) => e.ficheiro).join(', ') : ''}`);
+
+    setItems((s) =>
+      s.map((item) => {
+        const match = json.resultados?.find(
+          (r: { slug: string; ok: boolean }) => r.slug === item.slug && r.ok
+        );
+        return match ? { ...item, capa: '(atualizada)' } : item;
+      })
     );
   }
 
@@ -139,9 +143,9 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
               Arrasta todas as imagens para aqui de uma vez
             </p>
             <p className="text-creme-2/60 text-[0.82rem]">
-              {ptItems.length} escritos PT por ordem (mais recente primeiro). Cada
-              imagem é aplicada automaticamente à versão PT e EN do mesmo
-              escrito.
+              Claude analisa cada imagem e atribui automaticamente ao escrito
+              certo (pelo conteúdo visual). Aplica a PT + EN. Não precisas de
+              renomear nem ordenar.
             </p>
           </div>
         )}
