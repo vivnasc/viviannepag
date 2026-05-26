@@ -26,7 +26,7 @@ const socials: Social[] = [
 export function Footer() {
   const t = useTranslations('footer');
   const ano = new Date().getFullYear();
-  const whatsappNum = '258849999999'; // TODO: meter o numero real
+  const whatsappNum = '258845243875'; // TODO: meter o numero real
   return (
     <footer className="text-center pt-[70px] pb-[50px] text-creme/50 text-[0.85rem]">
       <div className="flex gap-[22px] justify-center mb-6 flex-wrap">
