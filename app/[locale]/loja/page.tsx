@@ -19,6 +19,24 @@ type Produto = {
   destaque: boolean;
 };
 
+const PRODUTOS_STATIC: Produto[] = [
+  { id: '1', slug: 'ebook-01-culpa', titulo: 'A culpa não é boa conselheira', subtitulo: 'Porque te sentes sempre em falta com os teus filhos, e o que essa culpa te está a impedir de fazer.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-01-culpa-capa.png', badge: 'ebook', destaque: true },
+  { id: '2', slug: 'ebook-02-herdaste', titulo: 'O que herdaste sem saber', subtitulo: 'As lealdades invisíveis: porque repetes o que juraste nunca repetir.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-02-herdaste-capa.png', badge: 'ebook', destaque: true },
+  { id: '3', slug: 'guia-01-meu', titulo: 'O que é meu, o que não é meu', subtitulo: 'Um exercício para parares de carregar o que nunca foi teu.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-01-meu-capa.png', badge: 'guia', destaque: false },
+  { id: '4', slug: 'guia-02-frases', titulo: '7 frases para dizer não sem culpa', subtitulo: 'Como pôr limites ao teu filho com amor e firmeza.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-02-frases-capa.png', badge: 'guia', destaque: false },
+  { id: '5', slug: 'ebook-03-quemes', titulo: 'Quem és para além do que fazes', subtitulo: 'A diferença entre a tua identidade e os teus papéis.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-03-quemes-capa.png', badge: 'ebook', destaque: false },
+  { id: '6', slug: 'ebook-04-sentido', titulo: 'O sentido que procuras', subtitulo: 'Porque o sucesso não preenche, e o que fazer com o vazio que fica.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-04-sentido-capa.png', badge: 'ebook', destaque: false },
+  { id: '7', slug: 'ebook-05-escuro', titulo: 'Atravessar o escuro', subtitulo: 'As crises não são só doença. Às vezes são passagem.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-05-escuro-capa.png', badge: 'ebook', destaque: false },
+  { id: '8', slug: 'ebook-06-no-casal', titulo: 'O nó invisível do casal', subtitulo: 'O que está por baixo das discussões que se repetem sempre.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-06-no-casal-capa.png', badge: 'ebook', destaque: false },
+  { id: '9', slug: 'ebook-07-sonho', titulo: 'Nem todo o sonho que carregas nasceu em ti', subtitulo: 'Porque alcanças o que querias e continuas a sentir que falta.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-07-sonho-capa.png', badge: 'ebook · novo', destaque: true },
+  { id: '10', slug: 'ebook-08-voz', titulo: 'De quem é esta voz?', subtitulo: 'Quem decidiu, na tua vida, o que conta como sucesso?', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-08-voz-capa.png', badge: 'ebook · novo', destaque: true },
+  { id: '11', slug: 'guia-03-presenca', titulo: 'Práticas de presença para o dia a dia', subtitulo: 'Pequenas pausas que te trazem de volta a ti.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-03-presenca-capa.png', badge: 'guia', destaque: false },
+  { id: '12', slug: 'guia-04-mente', titulo: 'Esvaziar a mente em 3 passos', subtitulo: 'Um método rápido para parar a roda de pensamentos.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-04-mente-capa.png', badge: 'guia', destaque: false },
+  { id: '13', slug: 'guia-05-luto', titulo: 'Ritual para o luto que ninguém vê', subtitulo: 'Para as perdas que não tiveram funeral.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-05-luto-capa.png', badge: 'guia', destaque: false },
+  { id: '14', slug: 'guia-06-perguntas', titulo: 'As 5 perguntas antes de uma discussão', subtitulo: 'O que te perguntar antes de reagir.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-06-perguntas-capa.png', badge: 'guia', destaque: false },
+  { id: '15', slug: 'guia-07-teu', titulo: 'O que é mesmo teu', subtitulo: 'Separar o que persegues por ti do que persegues por herança.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-07-teu-capa.png', badge: 'guia · novo', destaque: false },
+];
+
 async function listarProdutos(): Promise<Produto[]> {
   try {
     const supabase = getSupabase();
@@ -27,9 +45,10 @@ async function listarProdutos(): Promise<Produto[]> {
       .select('id, slug, titulo, subtitulo, preco, preco_original, capa, badge, destaque')
       .eq('publicado', true)
       .order('ordem', { ascending: true });
-    return (data as Produto[]) ?? [];
+    const list = (data as Produto[]) ?? [];
+    return list.length > 0 ? list : PRODUTOS_STATIC;
   } catch {
-    return [];
+    return PRODUTOS_STATIC;
   }
 }
 

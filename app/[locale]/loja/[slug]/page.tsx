@@ -24,6 +24,31 @@ type Produto = {
   badge: string | null;
 };
 
+const DESCRICOES: Record<string, string> = {
+  'ebook-01-culpa': '**Ebook · ~50 páginas · PDF imediato**\n\nUm ebook para mães que vivem com culpa. Mostra-te de onde vem, porque não prova que falhaste, e o que te impede de ver.\n\n**Capítulos:** A coisa que sentes e nunca disseste · Ninguém fala da culpa da mãe · Sentir culpa não te torna má mãe · O que a culpa te faz fazer · De onde vem a tua culpa · Culpa não é responsabilidade · Há um caminho de volta · A travessia\n\n> *Tu sabes do que estou a falar. Aquela sensação que aparece quando te deitas e a casa finalmente está em silêncio.*',
+  'ebook-02-herdaste': '**Ebook · 8 capítulos · PDF imediato**\n\nPorque repetes o que juraste nunca repetir? As lealdades invisíveis e as ordens do amor.\n\n> *Abres a boca e sai aquela frase. Com aquele tom. É a voz da tua mãe.*',
+  'ebook-07-sonho': '**Ebook · 8 capítulos · PDF imediato**\n\nFizeste tudo certo e continuas perdida. O mecanismo da substituição.\n\n> *Tu fizeste tudo certo. Estudaste. Trabalhaste. E conseguiste coisas. Mas não sentes.*',
+  'ebook-08-voz': '**Ebook · 7 capítulos · PDF imediato**\n\nMedes-te por uma régua que nunca escolheste.\n\n> *Há uma régua na tua vida. Mede tudo o que fazes. E nunca é suficiente.*',
+};
+
+const FALLBACK: Record<string, Produto> = {
+  'ebook-01-culpa': { id: '1', slug: 'ebook-01-culpa', titulo: 'A culpa não é boa conselheira', subtitulo: 'Porque te sentes sempre em falta com os teus filhos.', descricao: DESCRICOES['ebook-01-culpa'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-01-culpa-capa.png', checkout_url: null, badge: 'ebook' },
+  'ebook-02-herdaste': { id: '2', slug: 'ebook-02-herdaste', titulo: 'O que herdaste sem saber', subtitulo: 'As lealdades invisíveis: porque repetes o que juraste nunca repetir.', descricao: DESCRICOES['ebook-02-herdaste'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-02-herdaste-capa.png', checkout_url: null, badge: 'ebook' },
+  'guia-01-meu': { id: '3', slug: 'guia-01-meu', titulo: 'O que é meu, o que não é meu', subtitulo: 'Um exercício para parares de carregar o que nunca foi teu.', descricao: '**Guia prático · PDF imediato**\n\nExercício de duas colunas: o que é teu vs. o que carregas por outros.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-01-meu-capa.png', checkout_url: null, badge: 'guia' },
+  'guia-02-frases': { id: '4', slug: 'guia-02-frases', titulo: '7 frases para dizer não sem culpa', subtitulo: 'Limites com amor e firmeza.', descricao: '**Guia prático · PDF imediato**\n\n7 frases prontas para quando o teu filho testa os limites.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-02-frases-capa.png', checkout_url: null, badge: 'guia' },
+  'ebook-03-quemes': { id: '5', slug: 'ebook-03-quemes', titulo: 'Quem és para além do que fazes', subtitulo: 'A diferença entre identidade e papéis.', descricao: '**Ebook · 7 capítulos · PDF imediato**\n\n> *Houve um momento em que deixaste de saber quem és.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-03-quemes-capa.png', checkout_url: null, badge: 'ebook' },
+  'ebook-04-sentido': { id: '6', slug: 'ebook-04-sentido', titulo: 'O sentido que procuras', subtitulo: 'Porque o sucesso não preenche.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\nTens tudo e sentes que falta. O vazio existencial.', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-04-sentido-capa.png', checkout_url: null, badge: 'ebook' },
+  'ebook-05-escuro': { id: '7', slug: 'ebook-05-escuro', titulo: 'Atravessar o escuro', subtitulo: 'As crises como passagem.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\n> *Há um lugar para onde ninguém quer ir.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-05-escuro-capa.png', checkout_url: null, badge: 'ebook' },
+  'ebook-06-no-casal': { id: '8', slug: 'ebook-06-no-casal', titulo: 'O nó invisível do casal', subtitulo: 'O que está por baixo das discussões.', descricao: '**Ebook · 6 capítulos · PDF imediato**\n\n> *Tu sabes qual é. A mesma discussão, sempre.*', preco: '$7', preco_original: '$29', capa: '/produtos/ebook-06-no-casal-capa.png', checkout_url: null, badge: 'ebook' },
+  'ebook-07-sonho': { id: '9', slug: 'ebook-07-sonho', titulo: 'Nem todo o sonho que carregas nasceu em ti', subtitulo: 'Porque alcanças e continuas a sentir que falta.', descricao: DESCRICOES['ebook-07-sonho'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-07-sonho-capa.png', checkout_url: null, badge: 'ebook · novo' },
+  'ebook-08-voz': { id: '10', slug: 'ebook-08-voz', titulo: 'De quem é esta voz?', subtitulo: 'Quem decidiu o que conta como sucesso?', descricao: DESCRICOES['ebook-08-voz'], preco: '$7', preco_original: '$29', capa: '/produtos/ebook-08-voz-capa.png', checkout_url: null, badge: 'ebook · novo' },
+  'guia-03-presenca': { id: '11', slug: 'guia-03-presenca', titulo: 'Práticas de presença para o dia a dia', subtitulo: 'Pequenas pausas que te trazem de volta a ti.', descricao: '**Guia · PDF imediato**\n\n7 micro-práticas de presença.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-03-presenca-capa.png', checkout_url: null, badge: 'guia' },
+  'guia-04-mente': { id: '12', slug: 'guia-04-mente', titulo: 'Esvaziar a mente em 3 passos', subtitulo: 'Parar a roda de pensamentos.', descricao: '**Guia · PDF imediato**\n\nDespejar, separar, escolher.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-04-mente-capa.png', checkout_url: null, badge: 'guia' },
+  'guia-05-luto': { id: '13', slug: 'guia-05-luto', titulo: 'Ritual para o luto que ninguém vê', subtitulo: 'Para as perdas sem funeral.', descricao: '**Guia · PDF imediato**\n\nNomear, honrar, largar.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-05-luto-capa.png', checkout_url: null, badge: 'guia' },
+  'guia-06-perguntas': { id: '14', slug: 'guia-06-perguntas', titulo: 'As 5 perguntas antes de uma discussão', subtitulo: 'Antes de reagir.', descricao: '**Guia · PDF imediato**\n\n5 perguntas para o espaço entre estímulo e reação.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-06-perguntas-capa.png', checkout_url: null, badge: 'guia' },
+  'guia-07-teu': { id: '15', slug: 'guia-07-teu', titulo: 'O que é mesmo teu', subtitulo: 'Separar o que persegues por ti do que persegues por herança.', descricao: '**Guia · PDF imediato**\n\nVerdade, herança, comparação, compensação.', preco: '$5', preco_original: '$15', capa: '/produtos/guia-07-teu-capa.png', checkout_url: null, badge: 'guia · novo' },
+};
+
 async function getProduto(slug: string): Promise<Produto | null> {
   try {
     const supabase = getSupabase();
@@ -33,9 +58,9 @@ async function getProduto(slug: string): Promise<Produto | null> {
       .eq('slug', slug)
       .eq('publicado', true)
       .single();
-    return data as Produto | null;
+    return (data as Produto | null) ?? FALLBACK[slug] ?? null;
   } catch {
-    return null;
+    return FALLBACK[slug] ?? null;
   }
 }
 
