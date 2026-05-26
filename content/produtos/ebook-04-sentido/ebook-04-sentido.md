@@ -237,6 +237,8 @@ Mas preciso de ser honesta contigo sobre uma coisa: compreender isto intelectual
 
 Não te digo isto para te desanimar. Digo-te para te preparar. Porque o caminho do sentido é real, mas não é instantâneo. É uma construção que pede paciência, presença e, muitas vezes, companhia.
 
+E quero dizer-te mais uma coisa antes de avançarmos: não há um sentido certo. Não há uma resposta universal. O sentido da tua vida não é o sentido da minha, nem o da tua vizinha, nem o da mulher que admiras nas redes sociais. É teu. Nasce da tua história, das tuas feridas, dos teus amores, das tuas perdas, dos teus dons. É feito da matéria-prima da tua vida. E por isso, ninguém to pode dar. Mas alguém te pode ajudar a vê-lo. E é isso que espero fazer: não dar-te respostas, mas iluminar o terreno onde as tuas respostas já estão a germinar, mesmo que ainda não as vejas.
+
 Vamos, no próximo capítulo, explorar cada uma destas fontes com mais detalhe. Não como teoria, mas como paisagem. Para que possas reconhecer-te nelas e, quem sabe, começar a sentir onde o teu próprio sentido quer nascer.
 
 ---
