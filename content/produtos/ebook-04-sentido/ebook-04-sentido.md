@@ -115,6 +115,12 @@ Quero contar-te uma coisa que li há muitos anos e que nunca mais esqueci. Um es
 
 Repara: nenhum destes arrependimentos é sobre conquista. Todos são sobre sentido. Sobre autenticidade. Sobre presença. Sobre ligação.
 
+E há algo particularmente revelador neste estudo: as pessoas que olhavam para trás com mais serenidade não eram as que tinham tido mais sucesso. Eram as que sentiam que a sua vida tinha feito sentido. Que tinham amado bem, que tinham contribuído para algo, que tinham sido verdadeiras. Algumas tinham tido vidas simples. Algumas tinham passado por perdas enormes. Mas sentiam que o que tinham vivido tinha importado. Não para o mundo. Para elas.
+
+Essa é a diferença. O sucesso precisa de plateia. O sentido não. Podes sentir que a tua vida tem sentido às três da manhã, sozinha, a amamentar um bebé que ninguém vai aplaudir. Podes sentir sentido ao ouvir uma amiga que não vai publicar a tua generosidade nas redes. Podes sentir sentido ao tomar uma decisão difícil que ninguém vai compreender, mas que sabes ser verdadeira. O sentido não precisa de ser visto. Precisa de ser sentido.
+
+E é por isso que o sucesso não preenche. Porque o sucesso vive do olhar dos outros. E o que te falta não é o olhar dos outros. É o teu próprio olhar para dentro.
+
 A promessa do sucesso não é apenas incumprida. É incumprível. Porque o sucesso pertence ao mundo das formas, dos resultados, do mensurável. E o que te falta não é mensurável. O que te falta é invisível, interior, e pertence a uma dimensão da experiência que a nossa cultura quase não tem linguagem para descrever.
 
 Há uma ironia profunda nisto tudo: a própria busca de sentido pode ser colonizada pela lógica do sucesso. Quando alguém te diz "tens de encontrar o teu propósito" como se fosse mais um objetivo, mais uma meta, mais uma coisa para acrescentar à lista, está a aplicar a mesma lógica do sucesso ao território do sentido. E não funciona. Porque o sentido não se conquista. Não se atinge. Não se pode riscar numa lista. Não podes "otimizar" o sentido como otimizas uma rotina matinal ou uma estratégia de carreira. O sentido escapa a essa linguagem. Pertence a outra gramática, mais antiga, mais lenta, mais silenciosa.
@@ -160,6 +166,10 @@ E depois há um terceiro momento, talvez o mais paradoxal de todos: o vazio que 
 Este terceiro momento é o mais silenciado, porque é o mais difícil de justificar. Como é que te queixas de ter conseguido? Como é que dizes que o sonho realizado te deixou vazia? Parece absurdo. Parece ingratidão. Parece loucura.
 
 Não é nenhuma dessas coisas. É a natureza do vazio existencial: ele não responde a circunstâncias. Responde a sentido. E podes ter as melhores circunstâncias do mundo e estar vazia de sentido. Assim como podes ter circunstâncias terríveis e ter um sentido tão forte que te sustenta mesmo no meio da tempestade. Frankl viu isto nos campos de concentração: as pessoas que tinham uma razão para viver, um sentido (fosse o amor por alguém, fosse um trabalho por terminar, fosse uma fé), sobreviviam. As que não tinham desistiam. Não por fraqueza. Porque sem sentido, a vida não se sustenta.
+
+E aqui está algo que merece ser dito com cuidado: o vazio existencial pode parecer-se com depressão, e às vezes coexiste com ela, mas não é a mesma coisa. A depressão é uma condição clínica que precisa de tratamento. O vazio existencial é uma condição humana que precisa de atenção. Se sentes que estás deprimida, que perdeste a capacidade de sentir prazer, que não consegues levantar-te, que pensas em desistir, por favor, procura ajuda profissional. Não há vergonha nisso, há coragem. Mas se o que sentes é mais parecido com um zumbido de fundo, uma sensação persistente de que algo falta sem saberes o quê, de que a vida corre mas não canta, então é possível que estejas a ouvir a voz do sentido a pedir-te atenção.
+
+E essa voz não se cala com mais trabalho, com mais compras, com mais distração. Essa voz cala-se apenas de duas formas: ou a anestesias (e há quem o faça a vida inteira, pagando o preço da desconexão), ou a ouves. E ouvir é o que estamos a fazer aqui, juntas, neste livro.
 
 Agora, quero fazer uma pausa e falar contigo diretamente.
 
@@ -312,6 +322,10 @@ Isto não é positivismo tóxico. Não estou a dizer-te para ignorar os problema
 Porque o sentido mais profundo talvez não esteja nas grandes realizações, nas conquistas, nos feitos. Talvez esteja no gesto mais simples: estar aqui. Inteiramente. Com o que há. Com o que é. Sem fugir. Sem adicionar. Sem subtrair.
 
 Apenas estar.
+
+Há uma mulher que conheço que me disse uma vez: "Passei anos a procurar o sentido da minha vida como quem procura as chaves. Olhava em todo o lado. Virava tudo do avesso. Ficava cada vez mais frustrada. Até que um dia parei. E percebi que as chaves estavam no meu bolso. Sempre estiveram. Eu é que estava tão ocupada a procurar que não parava para as sentir." Ela não encontrou o sentido num grande momento de revelação. Encontrou-o numa manhã de quarta-feira, a beber chá na cozinha, a ouvir os pássaros, sem fazer nada. Encontrou-o na presença. E a partir daí, o sentido não desapareceu, porque não dependia de circunstâncias. Dependia de atenção.
+
+Estas quatro fontes (ligação, contribuição, transcendência e presença) não são compartimentos separados. Entrelaçam-se, alimentam-se mutuamente. Uma mãe que está verdadeiramente presente com o seu filho (presença) sente a profundidade da ligação (conexão), percebe que está a contribuir para a formação de um ser humano (contribuição), e por vezes, nesse momento simples, toca algo que vai para além de ambos (transcendência). As fontes não são destinos separados. São rios que deságuam no mesmo mar.
 
 E nesse estar, algo se acalma. Algo que procurava sem saber o quê encontra, sem saber o quê. E o vazio, que parecia infinito, revela-se como o espaço onde a vida pode, finalmente, respirar.
 

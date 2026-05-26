@@ -39,6 +39,14 @@ E não é culpa tua. Toda a gente faz isto. A sociedade inteira nos ensina a faz
 
 E depois crescemos e tornamo-nos funções ambulantes. Mães que funcionam, profissionais que funcionam, esposas que funcionam. Tudo funciona. Menos nós.
 
+O mais cruel é que este desaparecimento é aplaudido. A mulher que se anula pelos filhos é "dedicada". A que abre mão de tudo pelo casamento é "generosa". A que trabalha até à exaustão é "lutadora". A sociedade recompensa-te precisamente por desapareceres. E quando finalmente percebes o que aconteceu, quando olhas para dentro e encontras silêncio onde devia haver uma pessoa, sentes-te ingrata. Porque tens tudo. Tens a casa, os filhos, o emprego, a rotina. O que te falta, afinal? Tu. Faltas tu.
+
+E há uma coisa que ninguém te diz: este vazio não é uma fase. Não passa com férias. Não se resolve com um hobbie novo, nem com uma mudança de corte de cabelo, nem com mais um projeto. Não é tédio. É perda de contacto. É como se tivesses ido morar para tão longe de ti mesma que já não te ouves quando chamas.
+
+Há mulheres que chegam aos quarenta, aos cinquenta, e percebem que viveram décadas sem se consultar. Sem se perguntar "isto é o que eu quero?". Sem se ouvir. Sem se escolher. Viveram para dentro das expectativas de outros, fizeram o que era esperado, cumpriram o guião que ninguém escreveu mas toda a gente conhece, e quando finalmente param e olham para dentro, encontram uma estranha. Alguém que não reconhecem. Alguém que não sabem como tratar.
+
+Se isto é o que sentes, quero que saibas: a estranha és tu. E ela não está zangada. Está cansada de esperar. Está pronta para ser vista. E o primeiro passo é este que estás a dar agora: perguntar quem és para além do que fazes.
+
 Por dentro, algo se apaga. Não de um dia para o outro. É gradual. Primeiro perdes os pequenos gostos. Deixas de ouvir a música que ouvias. Deixas de ler o que lias. Deixas de procurar o que te dava prazer, porque "agora não é altura". Depois perdes as opiniões. Quando alguém te pergunta o que preferes, dizes "tanto faz", não por indiferença, mas porque genuinamente já não sabes. Depois perdes o fio. Olhas para trás e já não te lembras como eras antes de ser isto tudo. E se te lembras, parece uma pessoa que viveu noutra vida, numa história que já não te pertence.
 
 Quero dizer-te uma coisa, e quero que a guardes enquanto lês o resto deste livro: a mulher que eras antes de te perderes não desapareceu. Não morreu. Não foi embora. Está lá. Debaixo dos papéis, debaixo das funções, debaixo do cansaço. Está à espera. Não de resgate. De reconhecimento.
