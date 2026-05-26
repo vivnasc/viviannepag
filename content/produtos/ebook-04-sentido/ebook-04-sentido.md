@@ -91,6 +91,8 @@ E tu, a cada conquista que não preenchia, fazias a coisa lógica: procuravas a 
 
 E cansa. Cansa muito. Porque a promessa dizia que havia uma linha de chegada. Um ponto em que poderias parar e dizer: "Já está. Consegui. Agora posso descansar." Mas a linha não existe. Ou melhor: a linha existe, mas quando a cruzas, há outra atrás dela. E outra. E outra.
 
+E o mais perverso disto tudo é que não podes parar. Porque se páras, a culpa aparece. "Se eu não estou a trabalhar para alguma coisa, o que é que estou a fazer?" A cultura do progresso não nos permite simplesmente estar. Tens de estar a ir para algum lado. Tens de ter um objetivo, uma meta, um plano de cinco anos. E se não tens, algo está errado contigo. A ausência de ambição é tratada quase como um problema clínico. "O que é que queres da vida?" perguntam-te, e a resposta honesta, "não sei, talvez só queira que isto faça sentido", não serve. Não é mensurável. Não cabe num quadro de metas. Não se pode pôr num currículo.
+
 Quero ser clara: não estou a dizer que o sucesso é mau. Não estou a dizer que trabalhar, conquistar, construir é errado. Estou a dizer que o sucesso é uma ferramenta, não um destino. É uma coisa que fazes, não uma coisa que te preenche. E a confusão entre as duas é a raiz de imenso sofrimento silencioso.
 
 Porque quando acreditas que o sucesso te deveria preencher e ele não preenche, só há duas conclusões possíveis: ou há algo errado com o sucesso, ou há algo errado contigo. E como toda a gente à tua volta parece estar satisfeita com os seus sucessos (ou pelo menos finge estar), a conclusão a que chegas é a segunda: o problema sou eu.
@@ -115,7 +117,7 @@ Repara: nenhum destes arrependimentos é sobre conquista. Todos são sobre senti
 
 A promessa do sucesso não é apenas incumprida. É incumprível. Porque o sucesso pertence ao mundo das formas, dos resultados, do mensurável. E o que te falta não é mensurável. O que te falta é invisível, interior, e pertence a uma dimensão da experiência que a nossa cultura quase não tem linguagem para descrever.
 
-Quando alguém te diz "tens de encontrar o teu propósito" como se fosse mais um objetivo, mais uma meta, mais uma coisa para acrescentar à lista, está a aplicar a mesma lógica do sucesso ao território do sentido. E não funciona. Porque o sentido não se conquista. Não se atinge. Não se pode riscar numa lista.
+Há uma ironia profunda nisto tudo: a própria busca de sentido pode ser colonizada pela lógica do sucesso. Quando alguém te diz "tens de encontrar o teu propósito" como se fosse mais um objetivo, mais uma meta, mais uma coisa para acrescentar à lista, está a aplicar a mesma lógica do sucesso ao território do sentido. E não funciona. Porque o sentido não se conquista. Não se atinge. Não se pode riscar numa lista. Não podes "otimizar" o sentido como otimizas uma rotina matinal ou uma estratégia de carreira. O sentido escapa a essa linguagem. Pertence a outra gramática, mais antiga, mais lenta, mais silenciosa.
 
 O sentido vive-se. Ou não.
 
@@ -194,6 +196,12 @@ E aqui é onde a maioria das pessoas se perde. Porque vivemos num modo automáti
 A construção do sentido pede uma coisa que a nossa cultura desvaloriza profundamente: lentidão. Pede que pares. Que observes. Que sintas. Que perguntes. Pede que deixes de fazer durante o tempo suficiente para perceber porque é que fazes o que fazes.
 
 Isto não é preguiça. Isto não é luxo. Isto é a coisa mais essencial que podes fazer por ti mesma. Porque uma vida sem sentido, por mais produtiva que seja, é uma vida que se esvazia por dentro. E um dia percebes que construíste tudo por fora e nada por dentro. E esse dia dói.
+
+Há uma mulher que vou chamar de Sofia. Sofia tem trinta e oito anos e dirige um departamento numa empresa de tecnologia. É competente, reconhecida, bem paga. Os colegas admiram-na. A chefia confia nela. O currículo é impecável. E Sofia, todos os domingos à noite, sente um aperto no estômago que não é nervosismo pelo trabalho. É algo mais fundo. É a perceção, que ela tenta afastar mas que regressa sempre, de que se o seu departamento desaparecesse amanhã, nada de verdadeiramente importante mudaria no mundo.
+
+Sofia não precisa de mudar de emprego. Precisa de encontrar, dentro do que faz ou fora dele, algo que a ligue a uma razão mais funda. Algo que responda, mesmo que parcialmente, à pergunta: "Para que é que isto serve, para além do lucro, para além dos indicadores, para além da eficiência?"
+
+Esse algo é o sentido. E não se encontra numa mudança de carreira espetacular, nem numa epifania mística. Encontra-se, quase sempre, na forma como olhas para o que já existe e escolhes dar-lhe significado. Na forma como decides, conscientemente, investir a tua energia naquilo que te importa. Na forma como, um gesto de cada vez, vais tecendo uma vida que se sustenta por dentro, mesmo quando por fora parece igual.
 
 Quero partilhar contigo quatro fontes de sentido. Não são receitas. Não são passos. São territórios. Lugares onde o sentido tende a nascer, a enraizar-se, a crescer. Chamo-lhes fontes porque é isso que são: nascentes de onde brota algo que alimenta a vida por dentro.
 

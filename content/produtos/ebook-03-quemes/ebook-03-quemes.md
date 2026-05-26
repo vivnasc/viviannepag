@@ -95,6 +95,10 @@ E essa mudança muda tudo.
 
 Porque quando o papel é algo que fazes, podes fazê-lo mal num dia sem que isso signifique que tu és má. Podes tirar o papel no final do dia como quem tira uma roupa, e por baixo, continuar inteira. Podes perder um papel sem te perderes a ti.
 
+E há uma coisa que é particularmente cruel nesta dinâmica: quando desempenhas muitos papéis ao mesmo tempo, os papéis entram em conflito. A mãe quer ficar em casa com o filho doente. A profissional precisa de ir à reunião. A esposa quer estar disponível para o marido. A filha precisa de visitar a mãe. E tu, no meio de todos estes papéis que puxam em direções opostas, partes-te. Não literalmente. Mas emocionalmente. Sentes-te dividida, fragmentada, como se fossem várias pessoas dentro de uma só, e nenhuma delas está inteira.
+
+E o mais perverso é que, como não distingues o papel da identidade, cada conflito entre papéis sente-se como um conflito dentro de ti. Não é a mãe e a profissional que estão em conflito. És tu que estás em conflito contigo mesma. Pelo menos é assim que sentes. E esse conflito permanente, essa sensação de que nunca estás inteira em lado nenhum, é uma das maiores fontes de sofrimento para as mulheres que conheço.
+
 Neste momento, talvez estejas a perguntar: "Está bem, entendo a teoria. Mas quem sou eu, afinal, por baixo dos papéis?" E se essa pergunta te causa desconforto, está tudo bem. É normal. Quando passas anos a não visitar um quarto, quando finalmente abres a porta, não esperes encontrar tudo arrumado. Há pó. Há escuridão. Há coisas esquecidas. Mas o quarto existe. E é teu.
 
 Antes de irmos mais fundo, preciso de te falar sobre algo que a psicologia transpessoal nos convida a considerar: a possibilidade de que exista um "eu" para além de todos os papéis, para além do ego, para além da história pessoal. Um "eu" que não precisa de se provar, de se justificar, nem de desempenhar nada para existir.
