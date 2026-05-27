@@ -367,7 +367,7 @@ function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
         slide={slides[slideAtual]}
         mundo={conteudo.mundo}
         slideKey={`dia-${conteudo.dia}-slide-${slideAtual}`}
-        defaultLayout={slides[slideAtual].fundoClaro ? 'claro' : slides[slideAtual].tipo === 'cta' ? 'cta' : 'statement'}
+        defaultLayout={slides[slideAtual].fundoClaro ? 'claro' : slides[slideAtual].tipo === 'cta' ? 'cta' : slides[slideAtual].tipo === 'capa' ? 'foto-fundo' : 'statement'}
       />
 
       {/* Slide navigation */}

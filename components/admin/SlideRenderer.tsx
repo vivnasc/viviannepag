@@ -4,12 +4,14 @@ import { useState, useRef, useCallback, useEffect, type DragEvent } from 'react'
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { PALETAS } from '@/lib/estudio-conteudo';
 
-export type Layout = 'statement' | 'foto-topo' | 'foto-lado' | 'claro' | 'cta';
+export type Layout = 'foto-fundo' | 'foto-topo' | 'foto-baixo' | 'foto-lado' | 'statement' | 'claro' | 'cta';
 
 const LAYOUT_LABELS: Record<Layout, string> = {
-  statement: 'Statement',
+  'foto-fundo': 'Foto Fundo',
   'foto-topo': 'Foto Topo',
+  'foto-baixo': 'Foto Baixo',
   'foto-lado': 'Foto Lado',
+  statement: 'Statement',
   claro: 'Claro',
   cta: 'CTA',
 };
@@ -293,42 +295,47 @@ function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, ch
   );
 }
 
-// ─── LAYOUT: Statement ──────────────────────────────────
+// ─── LAYOUT: Foto Fundo (full background photo + scrim) ─
 
-function LayoutStatement({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
+function LayoutFotoFundo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
-  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-statement`);
+  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-fundo`);
 
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }}>
       {imageUrl ? (
         <>
           <img src={imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover z-[0]" />
-          <div className="absolute inset-0 z-[1]" style={{ background: `linear-gradient(180deg, transparent 10%, ${p.bg2}aa 45%, ${p.bg2}ee 65%, ${p.bg2} 100%)` }} />
-          <button
-            onClick={clearImage}
-            className="absolute top-2 right-2 z-[10] w-5 h-5 rounded-full bg-black/50 text-white text-[8px] flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
-          >
-            &times;
-          </button>
+          <div className="absolute inset-0 z-[1]" style={{ background: `linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0.82) 100%)` }} />
+          <button onClick={clearImage} className="absolute top-2 right-2 z-[10] w-5 h-5 rounded-full bg-black/50 text-white text-[8px] flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">&times;</button>
         </>
       ) : (
-        <>
+        <DropZone slideKey={`${slideKey}-foto-fundo`} imageUrl={null} onImage={setImage} onClear={clearImage} height="100%" notaVisual={slide.notaVisual}>
           <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />
-          <div className="absolute top-0 left-0 right-0 h-[45%] z-[3]">
-            <DropZone
-              slideKey={`${slideKey}-statement`}
-              imageUrl={null}
-              onImage={setImage}
-              onClear={clearImage}
-              height="100%"
-              notaVisual={slide.notaVisual}
-            />
-          </div>
-        </>
+        </DropZone>
       )}
       <GrainOverlay />
+      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
+        <BrandTop mundo={mundo} />
+        <div className="flex-1" />
+        <p className="font-sans text-[22px] leading-[1.22] font-normal mb-3">
+          {renderBoldText(slide.texto, slide.bold, p.destaque, '#ffffff')}
+        </p>
+        <BrandBottom />
+        {slide.tipo === 'capa' && <SwipeCTA color="#ffffff" />}
+      </div>
+    </div>
+  );
+}
 
+// ─── LAYOUT: Statement (text-only, no photo) ────────────
+
+function LayoutStatement({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
+  const p = PALETAS[mundo];
+  return (
+    <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }}>
+      <GrainOverlay />
+      <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />
       <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
         <BrandTop mundo={mundo} />
         <div className="flex-1" />
@@ -374,6 +381,39 @@ function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
           <BrandBottom />
           {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── LAYOUT: Foto Baixo (text top, photo bottom) ────────
+
+function LayoutFotoBaixo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
+  const p = PALETAS[mundo];
+  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-baixo`);
+
+  return (
+    <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: p.bg2 }}>
+      <GrainOverlay />
+      <div className="relative z-[5] flex flex-col px-5 pt-4 pb-2" style={{ height: '55%' }}>
+        <BrandTop mundo={mundo} />
+        <div className="flex-1 flex items-end">
+          <p className="font-sans text-[20px] leading-[1.22] font-normal mb-1">
+            {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
+          </p>
+        </div>
+        <BrandBottom />
+      </div>
+      <div className="relative" style={{ height: '45%' }}>
+        <div className="absolute top-0 left-0 right-0 h-10 z-[3]" style={{ background: `linear-gradient(to top, transparent, ${p.bg2})` }} />
+        <DropZone
+          slideKey={`${slideKey}-foto-baixo`}
+          imageUrl={imageUrl}
+          onImage={setImage}
+          onClear={clearImage}
+          height="100%"
+          notaVisual={slide.notaVisual}
+        />
       </div>
     </div>
   );
@@ -492,9 +532,11 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
 
 function SlideRender({ slide, mundo, layout, slideKey }: { slide: Slide; mundo: Mundo; layout: Layout; slideKey: string }) {
   switch (layout) {
-    case 'statement': return <LayoutStatement slide={slide} mundo={mundo} slideKey={slideKey} />;
+    case 'foto-fundo': return <LayoutFotoFundo slide={slide} mundo={mundo} slideKey={slideKey} />;
     case 'foto-topo': return <LayoutFotoTopo slide={slide} mundo={mundo} slideKey={slideKey} />;
+    case 'foto-baixo': return <LayoutFotoBaixo slide={slide} mundo={mundo} slideKey={slideKey} />;
     case 'foto-lado': return <LayoutFotoLado slide={slide} mundo={mundo} slideKey={slideKey} />;
+    case 'statement': return <LayoutStatement slide={slide} mundo={mundo} />;
     case 'claro': return <LayoutClaro slide={slide} mundo={mundo} />;
     case 'cta': return <LayoutCTA slide={slide} mundo={mundo} />;
   }
@@ -522,7 +564,7 @@ export function SlideLayoutGrid({ slide, mundo, slideKey }: { slide: Slide; mund
 export function SlideWithLayout({ slide, mundo, defaultLayout, slideKey }: {
   slide: Slide; mundo: Mundo; defaultLayout?: Layout; slideKey: string;
 }) {
-  const [layout, setLayout] = useState<Layout>(defaultLayout ?? (slide.fundoClaro ? 'claro' : slide.tipo === 'cta' ? 'cta' : 'statement'));
+  const [layout, setLayout] = useState<Layout>(defaultLayout ?? (slide.fundoClaro ? 'claro' : slide.tipo === 'cta' ? 'cta' : slide.tipo === 'capa' ? 'foto-fundo' : 'statement'));
   const slideRef = useRef<HTMLDivElement>(null);
   const [exportando, setExportando] = useState(false);
 
