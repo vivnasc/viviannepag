@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #111; padding: 28px; font-family: 'Outfit', sans-serif; }
+h2 { color: #F2E8DC88; font-family: 'Fraunces', serif; font-weight: 300; font-size: 16px; margin: 28px 0 14px; letter-spacing: 0.05em; }
+h2:first-child { margin-top: 0; }
+.row { display: flex; gap: 14px; flex-wrap: wrap; }
+.slide { width: 280px; height: 350px; border-radius: 14px; overflow: hidden; position: relative; flex-shrink: 0; }
+.grain { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 128px; }
+.vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; box-shadow: inset 0 0 80px 20px rgba(0,0,0,0.3); }
+.content { position: relative; z-index: 5; display: flex; flex-direction: column; height: 100%; padding: 16px 20px 12px; }
+.brand-top { display: flex; align-items: center; gap: 5px; }
+.brand-top span { font-family: 'Fraunces', serif; font-style: italic; font-size: 9px; opacity: 0.6; }
+.brand-bottom { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+.brand-bottom span { font-size: 6px; letter-spacing: 0.1em; opacity: 0.35; }
+.swipe { display: flex; align-items: center; gap: 5px; margin-top: 5px; }
+.swipe span { font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.35; }
+.dots { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 3px; z-index: 8; }
+.dot { width: 4px; height: 4px; border-radius: 50%; }
+.text-huge { font-family: 'Outfit', sans-serif; font-size: 21px; line-height: 1.22; font-weight: 400; }
+.text-huge b { font-weight: 800; }
+.label { font-size: 9px; color: #F2E8DC44; text-align: center; margin-top: 5px; letter-spacing: 0.12em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<h2>5 mundos · mesma estrutura · cores por produto</h2>
+<div class="row">
+
+<!-- FREEME -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#8C4A36dd,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top"><svg viewBox="0 0 512 512" width="16" height="16"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg><span style="color:#F2E8DC">FreeMe</span></div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Tu sabes do que estou a falar. Aquela culpa que aparece quando a casa está em silêncio. E <b style="color:#EBAE4A">ninguém te disse de onde vem</b>.</p>
+    <div class="brand-bottom"><svg viewBox="0 0 512 512" width="10" height="10"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg><span style="color:#F2E8DC">viviannedossantos</span></div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#EBAE4A"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">FreeMe · barro + dourado</p>
+</div>
+
+<!-- INFONTE -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#B8843Ddd,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top"><svg viewBox="0 0 512 512" width="16" height="16"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg><span style="color:#F2E8DC">Infonte</span></div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Tu fizeste tudo certo. Estudaste. Trabalhaste. E <b style="color:#EBAE4A">continuas perdida</b>. Tens <b style="color:#EBAE4A">talento a mais e clareza a menos</b>.</p>
+    <div class="brand-bottom"><svg viewBox="0 0 512 512" width="10" height="10"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg><span style="color:#F2E8DC">viviannedossantos</span></div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#EBAE4A"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">Infonte · âmbar + dourado</p>
+</div>
+
+<!-- SYNCHIM -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#5A1A2Add,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top"><svg viewBox="0 0 512 512" width="16" height="16"><g fill="none" stroke="#E08496" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#E08496"/></svg><span style="color:#F2E8DC">SyncHim</span></div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">A mesma discussão. <b style="color:#E08496">Sempre</b>. Os mesmos gatilhos. As mesmas palavras. <b style="color:#E08496">Nenhum dos dois quer isto</b>.</p>
+    <div class="brand-bottom"><svg viewBox="0 0 512 512" width="10" height="10"><g fill="none" stroke="#E08496" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#E08496"/></svg><span style="color:#F2E8DC">viviannedossantos</span></div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#E08496"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">SyncHim · bordeaux + rosa</p>
+</div>
+
+<!-- ESCOLA -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#1A1A2Edd,#0F0F1A)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top"><svg viewBox="0 0 512 512" width="16" height="16"><g fill="none" stroke="#C9B6FA" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#C9B6FA"/></svg><span style="color:#F2E8DC">Escola dos Véus</span></div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Houve um momento em que <b style="color:#C9B6FA">deixaste de saber quem és</b>. Defines-te pela função. <b style="color:#C9B6FA">Não por ti</b>.</p>
+    <div class="brand-bottom"><svg viewBox="0 0 512 512" width="10" height="10"><g fill="none" stroke="#C9B6FA" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#C9B6FA"/></svg><span style="color:#F2E8DC">viviannedossantos</span></div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#C9B6FA"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">Escola · navy + lavanda</p>
+</div>
+
+<!-- AUTORA -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#3A2818dd,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top"><svg viewBox="0 0 512 512" width="16" height="16"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg><span style="color:#F2E8DC">Vivianne dos Santos</span></div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Tens tudo e sentes que falta. É uma terça-feira. Porque <b style="color:#EBAE4A">o vazio não escolhe datas especiais</b> para aparecer.</p>
+    <div class="brand-bottom"><svg viewBox="0 0 512 512" width="10" height="10"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg><span style="color:#F2E8DC">viviannedossantos</span></div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#EBAE4A"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">Autora · terra + dourado</p>
+</div>
+
+</div>
+</body>
+</html>
