@@ -149,22 +149,39 @@ function PaperTexture() {
   );
 }
 
-function BrandTop({ mundo, light }: { mundo: string; light?: boolean }) {
-  const c = light ? '#2A1C12' : '#F2E8DC';
-  const name = mundo === 'autora' ? 'Vivianne' : PALETAS[mundo as Mundo]?.nome ?? 'Vivianne';
+function GotaIcon({ size = 20, color = '#EBAE4A' }: { size?: number; color?: string }) {
   return (
-    <p className="text-[9px] font-serif italic" style={{ color: c, opacity: 0.55 }}>
-      {name}
-    </p>
+    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
+      <g fill="none" stroke={color} strokeWidth="52" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M100 90 C100 280 172 405 256 450" />
+        <path d="M412 90 C412 280 340 405 256 450" />
+      </g>
+      <circle cx="256" cy="270" r="38" fill={color} />
+    </svg>
   );
 }
 
-function BrandBottom({ light }: { light?: boolean }) {
+function BrandTop({ mundo, light, accent }: { mundo: string; light?: boolean; accent?: string }) {
   const c = light ? '#2A1C12' : '#F2E8DC';
+  const iconColor = accent ?? (light ? '#8C4A36' : '#EBAE4A');
+  const name = mundo === 'autora' ? 'Vivianne dos Santos' : PALETAS[mundo as Mundo]?.nome ?? 'Vivianne';
   return (
-    <div className="flex items-center gap-1">
-      <span className="text-[7px]" style={{ color: c, opacity: 0.3 }}>&copy;</span>
-      <span className="text-[6px] tracking-[0.12em]" style={{ color: c, opacity: 0.3 }}>
+    <div className="flex items-center gap-[5px]">
+      <GotaIcon size={16} color={iconColor} />
+      <span className="text-[8px] font-serif italic" style={{ color: c, opacity: 0.6 }}>
+        {name}
+      </span>
+    </div>
+  );
+}
+
+function BrandBottom({ light, accent }: { light?: boolean; accent?: string }) {
+  const c = light ? '#2A1C12' : '#F2E8DC';
+  const iconColor = accent ?? (light ? '#8C4A36' : '#EBAE4A');
+  return (
+    <div className="flex items-center gap-[4px] mt-1">
+      <GotaIcon size={10} color={iconColor} />
+      <span className="text-[6px] tracking-[0.1em]" style={{ color: c, opacity: 0.35 }}>
         viviannedossantos
       </span>
     </div>
@@ -410,7 +427,7 @@ function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
       <PaperTexture />
       <GrainOverlay />
       <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
-        <BrandTop mundo={mundo} light />
+        <BrandTop mundo={mundo} light accent={accent} />
         <div className="flex-1 flex flex-col justify-end">
           {slide.titulo && (
             <p className="text-[7px] tracking-[0.3em] uppercase mb-3 font-medium" style={{ color: accent, opacity: 0.5 }}>
@@ -426,7 +443,7 @@ function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
             </p>
           )}
         </div>
-        <BrandBottom light />
+        <BrandBottom light accent={accent} />
       </div>
     </div>
   );
@@ -443,7 +460,7 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
       <PaperTexture />
       <GrainOverlay />
       <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
-        <BrandTop mundo={mundo} light />
+        <BrandTop mundo={mundo} light accent={accent} />
         <div className="flex-1 flex flex-col justify-end">
           <p className="font-sans text-[19px] leading-[1.25] font-normal mb-3">
             {renderBoldText(slide.texto, slide.bold, accent, textColor)}
@@ -465,7 +482,7 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
             </span>
           </div>
         </div>
-        <BrandBottom light />
+        <BrandBottom light accent={accent} />
       </div>
     </div>
   );

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #111; display: flex; flex-wrap: wrap; gap: 24px; padding: 32px; font-family: 'Outfit', sans-serif; }
+
+.slide {
+  width: 360px;
+  height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.slide .grain {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 128px;
+}
+
+.slide .paper {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='result' lighting-color='%23fff' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 256px;
+}
+
+.slide .vignette {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  box-shadow: inset 0 0 80px 20px rgba(0,0,0,0.3);
+}
+
+.slide .content {
+  position: relative; z-index: 5; display: flex; flex-direction: column;
+  height: 100%; padding: 20px 24px 16px;
+}
+
+.brand-top {
+  display: flex; align-items: center; gap: 5px; margin-bottom: auto;
+}
+.brand-top svg { flex-shrink: 0; }
+.brand-top span { font-family: 'Fraunces', serif; font-style: italic; font-size: 10px; opacity: 0.6; }
+
+.brand-bottom {
+  display: flex; align-items: center; gap: 4px; margin-top: 8px;
+}
+.brand-bottom svg { flex-shrink: 0; }
+.brand-bottom span { font-size: 7px; letter-spacing: 0.1em; opacity: 0.35; }
+
+.swipe {
+  display: flex; align-items: center; gap: 6px; margin-top: 8px;
+}
+.swipe span { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.35; }
+.swipe .arrow { font-size: 11px; opacity: 0.35; }
+
+.dots {
+  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 3px; z-index: 8;
+}
+.dots .dot { width: 5px; height: 5px; border-radius: 50%; }
+
+.text-huge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  line-height: 1.22;
+  font-weight: 400;
+}
+.text-huge b {
+  font-weight: 800;
+}
+
+.label { font-size: 11px; color: #F2E8DC88; text-align: center; margin-top: 8px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* Gota SVG inline */
+.gota-icon { display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- ═══ SLIDE 1: STATEMENT (escuro, texto enorme) ═══ -->
+<div>
+<div class="slide" style="background: linear-gradient(175deg, #8C4A36dd, #2A1C12);">
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="18" height="18"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg>
+      <span style="color:#F2E8DC">FreeMe</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC; margin-bottom:12px;">
+      Tu sabes do que estou a falar. Aquela culpa que aparece quando a casa está em silêncio. E <b style="color:#EBAE4A">ninguém te disse</b> <b style="color:#EBAE4A">de onde vem</b>.
+    </p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="11" height="11"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC">
+      <span>Desliza para o lado</span>
+      <span class="arrow">→</span>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="background:#EBAE4A"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+  </div>
+</div>
+<p class="label">Statement · FreeMe · Dia 1</p>
+</div>
+
+<!-- ═══ SLIDE 2: FOTO-TOPO (foto placeholder + texto) ═══ -->
+<div>
+<div class="slide" style="background: #2A1C12;">
+  <div style="position:absolute;top:0;left:0;right:0;height:42%;background:linear-gradient(160deg,#8C4A36,#5a3020);display:flex;align-items:center;justify-content:center;">
+    <span style="color:#F2E8DC30;font-size:9px;letter-spacing:0.15em;text-transform:uppercase">imagem MJ aqui</span>
+  </div>
+  <div style="position:absolute;top:38%;left:0;right:0;height:40px;z-index:3;background:linear-gradient(to bottom,transparent,#2A1C12)"></div>
+  <div class="grain"></div>
+  <div class="content">
+    <div class="brand-top" style="position:relative;z-index:6">
+      <svg viewBox="0 0 512 512" width="18" height="18"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg>
+      <span style="color:#F2E8DC">FreeMe</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC; font-size:24px; margin-bottom:8px;">
+      A culpa que sentes <b style="color:#EBAE4A">não nasceu contigo</b>. <b style="color:#EBAE4A">Herdaste-a</b>. E carrega-la como se fosse tua.
+    </p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="11" height="11"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#EBAE4A"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+  </div>
+</div>
+<p class="label">Foto-Topo · FreeMe · Dia 1 Slide 2</p>
+</div>
+
+<!-- ═══ SLIDE 3: CONTEUDO (escuro, texto grande) ═══ -->
+<div>
+<div class="slide" style="background: linear-gradient(175deg, #2A1C12ee, #2A1C12);">
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="18" height="18"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg>
+      <span style="color:#F2E8DC">FreeMe</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC; font-size:24px; margin-bottom:12px;">
+      Na constelação familiar chamamos-lhe <b style="color:#EBAE4A">lealdade invisível</b>. Tu conheces-lhe outro nome: "<b style="color:#EBAE4A">sou uma má mãe</b>."
+    </p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="11" height="11"><g fill="none" stroke="#EBAE4A" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#EBAE4A"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#EBAE4A"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+  </div>
+</div>
+<p class="label">Conteudo · FreeMe · Dia 1 Slide 4</p>
+</div>
+
+<!-- ═══ SLIDE 4: CLARO (fundo papel, texto escuro) ═══ -->
+<div>
+<div class="slide" style="background: #f5f0e8;">
+  <div class="paper"></div>
+  <div class="grain"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="18" height="18"><g fill="none" stroke="#8C4A36" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#8C4A36"/></svg>
+      <span style="color:#1a1410">FreeMe</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#1a1410; font-size:24px; margin-bottom:8px;">
+      Escrevi sobre isto. 40 páginas. Para a mulher que precisa de ouvir que <b style="color:#8C4A36">a culpa tem origem</b>. <b style="color:#8C4A36">€7</b>.
+    </p>
+    <p style="font-family:'Fraunces',serif;font-style:italic;font-size:9px;color:#8C4A36;opacity:0.6;margin-bottom:4px;">A culpa não é boa conselheira</p>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+      <div style="width:28px;height:28px;border-radius:50%;background:#8C4A3612;border:1px solid #8C4A3620;display:flex;align-items:center;justify-content:center;color:#8C4A36;font-size:12px;">→</div>
+      <span style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:#1a1410;opacity:0.3;">link na bio</span>
+    </div>
+    <div class="brand-bottom" style="margin-top:10px;">
+      <svg viewBox="0 0 512 512" width="11" height="11"><g fill="none" stroke="#8C4A36" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#8C4A36"/></svg>
+      <span style="color:#1a1410">viviannedossantos</span>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="background:#1a141030"></div>
+    <div class="dot" style="background:#1a141030"></div>
+    <div class="dot" style="background:#1a141030"></div>
+    <div class="dot" style="background:#1a141030"></div>
+    <div class="dot" style="background:#1a141030"></div>
+    <div class="dot" style="background:#1a141030"></div>
+    <div class="dot" style="background:#8C4A36"></div>
+  </div>
+</div>
+<p class="label">CTA Claro · FreeMe · Dia 1 Slide 7</p>
+</div>
+
+<!-- ═══ SLIDE 5: SYNCHIM (bordeaux) ═══ -->
+<div>
+<div class="slide" style="background: linear-gradient(175deg, #5A1A2Add, #2A1C12);">
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="18" height="18"><g fill="none" stroke="#E08496" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#E08496"/></svg>
+      <span style="color:#F2E8DC">SyncHim</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC; margin-bottom:12px;">
+      A mesma discussão. <b style="color:#E08496">Sempre</b>. Os mesmos gatilhos. As mesmas palavras. <b style="color:#E08496">Nenhum dos dois quer isto</b>.
+    </p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="11" height="11"><g fill="none" stroke="#E08496" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#E08496"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC">
+      <span>Desliza para o lado</span>
+      <span class="arrow">→</span>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="background:#E08496"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+  </div>
+</div>
+<p class="label">Statement · SyncHim · Dia 22</p>
+</div>
+
+<!-- ═══ SLIDE 6: ESCOLA (navy) ═══ -->
+<div>
+<div class="slide" style="background: linear-gradient(175deg, #1A1A2Edd, #0F0F1A);">
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="18" height="18"><g fill="none" stroke="#C9B6FA" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#C9B6FA"/></svg>
+      <span style="color:#F2E8DC">Escola dos Véus</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC; margin-bottom:12px;">
+      O escuro <b style="color:#C9B6FA">não é o fim</b>. Parece o fim. <b style="color:#C9B6FA">Mas não é</b>. Há um lugar para onde ninguém quer ir.
+    </p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="11" height="11"><g fill="none" stroke="#C9B6FA" stroke-width="52" stroke-linecap="round"><path d="M100 90 C100 280 172 405 256 450"/><path d="M412 90 C412 280 340 405 256 450"/></g><circle cx="256" cy="270" r="38" fill="#C9B6FA"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot" style="background:#C9B6FA"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+    <div class="dot" style="background:#F2E8DC30"></div>
+  </div>
+</div>
+<p class="label">Statement · Escola · Dia 27</p>
+</div>
+
+</body>
+</html>
