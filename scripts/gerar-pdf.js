@@ -474,7 +474,7 @@ async function main() {
     printBackground: true,
     margin: { top: '22mm', right: '18mm', bottom: '25mm', left: '18mm' },
     displayHeaderFooter: true,
-    headerTemplate: '<div></div>',
+    headerTemplate: `<div style="width:100%;text-align:center;font-family:Outfit,sans-serif;font-size:7pt;color:#C0392B;padding-top:5mm;">USO PESSOAL · PROIBIDA A REDISTRIBUIÇÃO · viviannedossantos.com</div>`,
     footerTemplate: `<div style="width:100%;text-align:center;font-family:Outfit,sans-serif;font-size:7pt;color:${C.textoSuave}80;"><span class="pageNumber"></span></div>`,
   });
   const pdfStats = fs.statSync(pdfPath);
