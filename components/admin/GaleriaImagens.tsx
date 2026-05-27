@@ -77,35 +77,48 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
     );
     if (files.length === 0) return;
     setBulkProcessando(true);
-    setBulkMsg(`0/${files.length} processadas…`);
 
     const BATCH = 4;
-    let totalOk = 0;
-    let totalErro = 0;
+    let done = 0;
+    let ok = 0;
+    let fail = 0;
+    const detalhes: string[] = [];
 
     for (let i = 0; i < files.length; i += BATCH) {
       const batch = files.slice(i, i + BATCH);
+      setBulkMsg(`Lote ${Math.floor(i / BATCH) + 1}/${Math.ceil(files.length / BATCH)}: a enviar ${batch.length} imagens ao Claude...`);
+
       const fd = new FormData();
       for (const f of batch) fd.append('files', f);
 
       try {
         const res = await fetch('/api/admin/match-imagens', { method: 'POST', body: fd });
-        const json = await res.json();
         if (res.ok) {
-          totalOk += json.sucesso ?? 0;
-          totalErro += json.erros?.length ?? 0;
+          const json = await res.json();
+          const batchOk = json.sucesso ?? 0;
+          const batchFail = (json.erros?.length ?? 0);
+          ok += batchOk;
+          fail += batchFail;
+          for (const r of json.resultados ?? []) {
+            detalhes.push(`${r.ok ? '✓' : '✗'} ${r.ficheiro} → ${r.slug}`);
+          }
         } else {
-          totalErro += batch.length;
+          const errJson = await res.json().catch(() => ({ erro: res.statusText }));
+          fail += batch.length;
+          detalhes.push(`✗ Lote falhou: ${errJson.erro ?? res.status}`);
         }
-      } catch {
-        totalErro += batch.length;
+      } catch (err) {
+        fail += batch.length;
+        detalhes.push(`✗ Lote falhou: ${err instanceof Error ? err.message : 'erro de rede'}`);
       }
-      setBulkMsg(`${totalOk + totalErro}/${files.length} processadas…`);
+
+      done += batch.length;
+      setBulkMsg(`${done}/${files.length} processadas (${ok} ok, ${fail} erros)\n\n${detalhes.join('\n')}`);
     }
 
     setBulkProcessando(false);
-    setBulkMsg(`Concluído: ${totalOk} atribuídas, ${totalErro} erros. PT + EN actualizados.`);
-    window.location.reload();
+    setBulkMsg(`CONCLUÍDO: ${ok} atribuídas, ${fail} erros.\n\n${detalhes.join('\n')}\n\nA recarregar...`);
+    setTimeout(() => window.location.reload(), 2000);
   }
 
   return (
@@ -139,9 +152,9 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
         }`}
       >
         {bulkProcessando ? (
-          <p className="text-ambar font-serif italic">{bulkMsg}</p>
+          <pre className="text-ambar font-sans text-sm whitespace-pre-wrap text-left">{bulkMsg}</pre>
         ) : bulkMsg ? (
-          <p className="text-ambar text-sm font-serif italic">{bulkMsg}</p>
+          <pre className="text-ambar font-sans text-sm whitespace-pre-wrap text-left">{bulkMsg}</pre>
         ) : (
           <div>
             <p className="text-creme font-serif text-[1.05rem] mb-2">
