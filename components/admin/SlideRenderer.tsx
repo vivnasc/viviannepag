@@ -151,25 +151,67 @@ function PaperTexture() {
   );
 }
 
-function GotaIcon({ size = 20, color = '#EBAE4A' }: { size?: number; color?: string }) {
-  return (
-    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
-      <g fill="none" stroke={color} strokeWidth="52" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M100 90 C100 280 172 405 256 450" />
-        <path d="M412 90 C412 280 340 405 256 450" />
-      </g>
-      <circle cx="256" cy="270" r="38" fill={color} />
-    </svg>
-  );
+function MundoIcon({ mundo, size = 16 }: { mundo: string; size?: number }) {
+  const s = `width:${size}px;height:${size}px;flex-shrink:0`;
+  switch (mundo) {
+    case 'freeme':
+      return (
+        <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
+          <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="#9A5A43" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case 'infonte':
+      return (
+        <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
+          <path d="M256 116 C198 218 166 282 166 334 A90 90 0 0 0 346 334 C346 282 314 218 256 116 Z" fill="none" stroke="#EBAE4A" strokeWidth="28" strokeLinejoin="round" />
+          <circle cx="256" cy="338" r="34" fill="#F4C56A" />
+        </svg>
+      );
+    case 'synchim':
+      return (
+        <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
+          <g transform="translate(256,256)">
+            <rect x="-150" y="-150" width="300" height="300" fill="none" stroke="#E08496" strokeWidth="28" />
+            <rect x="-150" y="-150" width="300" height="300" transform="rotate(45)" fill="none" stroke="#E08496" strokeWidth="28" />
+            <circle r="46" fill="#8B2235" />
+          </g>
+        </svg>
+      );
+    case 'escola':
+      return (
+        <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
+          <g transform="translate(256,256)" fill="none" stroke="#C9B6FA" strokeWidth="28" strokeLinecap="round">
+            <ellipse cx="0" cy="-108" rx="34" ry="86" />
+            <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(51.4)" />
+            <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(102.8)" />
+            <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(154.3)" />
+            <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(205.7)" />
+            <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(257.1)" />
+            <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(308.6)" />
+          </g>
+          <circle cx="256" cy="256" r="20" fill="#C9B6FA" />
+        </svg>
+      );
+    default: // autora
+      return (
+        <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
+          <g fill="none" stroke="#EBAE4A" strokeWidth="28" strokeLinecap="round">
+            <path d="M170 130 C170 270 200 340 248 374" />
+            <path d="M342 130 C342 270 312 340 264 374" />
+          </g>
+          <circle cx="256" cy="244" r="22" fill="#F4C56A" />
+          <path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke="#F4C56A" strokeWidth="18" strokeLinecap="round" />
+        </svg>
+      );
+  }
 }
 
-function BrandTop({ mundo, light, accent }: { mundo: string; light?: boolean; accent?: string }) {
+function BrandTop({ mundo, light }: { mundo: string; light?: boolean }) {
   const c = light ? '#2A1C12' : '#F2E8DC';
-  const iconColor = accent ?? (light ? '#8C4A36' : '#EBAE4A');
   const name = mundo === 'autora' ? 'Vivianne dos Santos' : PALETAS[mundo as Mundo]?.nome ?? 'Vivianne';
   return (
     <div className="flex items-center gap-[5px]">
-      <GotaIcon size={16} color={iconColor} />
+      <MundoIcon mundo={mundo} size={18} />
       <span className="text-[8px] font-serif italic" style={{ color: c, opacity: 0.6 }}>
         {name}
       </span>
@@ -177,12 +219,11 @@ function BrandTop({ mundo, light, accent }: { mundo: string; light?: boolean; ac
   );
 }
 
-function BrandBottom({ light, accent }: { light?: boolean; accent?: string }) {
+function BrandBottom({ mundo, light }: { mundo: string; light?: boolean }) {
   const c = light ? '#2A1C12' : '#F2E8DC';
-  const iconColor = accent ?? (light ? '#8C4A36' : '#EBAE4A');
   return (
     <div className="flex items-center gap-[4px] mt-1">
-      <GotaIcon size={10} color={iconColor} />
+      <MundoIcon mundo={mundo} size={10} />
       <span className="text-[6px] tracking-[0.1em]" style={{ color: c, opacity: 0.35 }}>
         viviannedossantos
       </span>
@@ -321,7 +362,7 @@ function LayoutFotoFundo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mund
         <p className="font-sans text-[22px] leading-[1.22] font-normal mb-3">
           {renderBoldText(slide.texto, slide.bold, p.destaque, '#ffffff')}
         </p>
-        <BrandBottom />
+        <BrandBottom mundo={mundo} />
         {slide.tipo === 'capa' && <SwipeCTA color="#ffffff" />}
       </div>
     </div>
@@ -342,7 +383,7 @@ function LayoutStatement({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
         <p className="font-sans text-[22px] leading-[1.22] font-normal mb-3">
           {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
         </p>
-        <BrandBottom />
+        <BrandBottom mundo={mundo} />
         {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
       </div>
     </div>
@@ -378,7 +419,7 @@ function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
           </p>
         </div>
         <div className="flex items-center justify-between mt-2">
-          <BrandBottom />
+          <BrandBottom mundo={mundo} />
           {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
         </div>
       </div>
@@ -402,7 +443,7 @@ function LayoutFotoBaixo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mund
             {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
           </p>
         </div>
-        <BrandBottom />
+        <BrandBottom mundo={mundo} />
       </div>
       <div className="relative" style={{ height: '45%' }}>
         <div className="absolute top-0 left-0 right-0 h-10 z-[3]" style={{ background: `linear-gradient(to top, transparent, ${p.bg2})` }} />
@@ -448,7 +489,7 @@ function LayoutFotoLado({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
           </p>
         </div>
         <div className="flex items-center justify-between mt-2">
-          <BrandBottom />
+          <BrandBottom mundo={mundo} />
           {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
         </div>
       </div>
@@ -467,7 +508,7 @@ function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
       <PaperTexture />
       <GrainOverlay />
       <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
-        <BrandTop mundo={mundo} light accent={accent} />
+        <BrandTop mundo={mundo} light />
         <div className="flex-1 flex flex-col justify-end">
           {slide.titulo && (
             <p className="text-[7px] tracking-[0.3em] uppercase mb-3 font-medium" style={{ color: accent, opacity: 0.5 }}>
@@ -483,7 +524,7 @@ function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
             </p>
           )}
         </div>
-        <BrandBottom light accent={accent} />
+        <BrandBottom mundo={mundo} light />
       </div>
     </div>
   );
@@ -500,7 +541,7 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
       <PaperTexture />
       <GrainOverlay />
       <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
-        <BrandTop mundo={mundo} light accent={accent} />
+        <BrandTop mundo={mundo} light />
         <div className="flex-1 flex flex-col justify-end">
           <p className="font-sans text-[19px] leading-[1.25] font-normal mb-3">
             {renderBoldText(slide.texto, slide.bold, accent, textColor)}
@@ -522,7 +563,7 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
             </span>
           </div>
         </div>
-        <BrandBottom light accent={accent} />
+        <BrandBottom mundo={mundo} light />
       </div>
     </div>
   );
