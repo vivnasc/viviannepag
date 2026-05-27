@@ -27,6 +27,7 @@ export default function AdminPage() {
   const [traduzindo, setTraduzindo] = useState(false);
   const [corrigindoDatas, setCorrigindoDatas] = useState(false);
   const [carregandoCapas, setCarregandoCapas] = useState(false);
+  const [ligandoCapas, setLigandoCapas] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -79,6 +80,16 @@ export default function AdminPage() {
     } else {
       setMensagem(`Erro: ${json.erro}`);
     }
+  }
+
+  async function ligarCapas() {
+    setLigandoCapas(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/ligar-capas', { method: 'POST' });
+    const json = await res.json();
+    setLigandoCapas(false);
+    setMensagem(res.ok ? `${json.ligados}/${json.total} capas ligadas.\n${(json.detalhes ?? []).join('\n')}` : `Erro: ${json.erro}`);
+    carregar();
   }
 
   async function carregarCapas() {
@@ -186,6 +197,13 @@ export default function AdminPage() {
           <h1 className="font-serif font-light text-creme text-3xl">escritos</h1>
         </div>
         <div className="flex gap-3 items-center">
+          <button
+            onClick={ligarCapas}
+            disabled={ligandoCapas}
+            className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ambar disabled:opacity-70"
+          >
+            {ligandoCapas ? 'a ligar…' : 'ligar capas ao storage'}
+          </button>
           <button
             onClick={carregarCapas}
             disabled={carregandoCapas}
