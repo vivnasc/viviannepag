@@ -1,4 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
+
+export const revalidate = 60;
 import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { Hero } from '@/components/home/Hero';

@@ -1,4 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+
+export const revalidate = 60;
 import Link from 'next/link';
 import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
