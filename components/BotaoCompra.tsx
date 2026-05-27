@@ -90,14 +90,9 @@ export function BotaoCompra({
 
   if (!clientId || !precoNum) {
     return (
-      <div className="text-sm">
-        <p className="text-creme-2/60 italic font-serif">
-          {isPt ? 'Pagamento em configuração.' : 'Payment being configured.'}
-        </p>
-        <p className="text-rosa/50 text-xs mt-2">
-          PayPal ID: {clientId ? 'sim' : 'NAO'} | Preco: {preco} = {precoNum || 'ERRO'}
-        </p>
-      </div>
+      <p className="text-creme-2/60 italic font-serif text-sm">
+        {isPt ? 'Pagamento em configuração.' : 'Payment being configured.'}
+      </p>
     );
   }
 
