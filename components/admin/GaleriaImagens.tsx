@@ -69,105 +69,95 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
     }));
   }
 
-  async function comprimirImagem(file: File): Promise<File> {
-    return new Promise((resolve) => {
-      const img = new window.Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const MAX = 600;
-        let w = img.width;
-        let h = img.height;
-        if (w > MAX || h > MAX) {
-          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
-          else { w = Math.round(w * MAX / h); h = MAX; }
-        }
-        canvas.width = w;
-        canvas.height = h;
-        canvas.getContext('2d')!.drawImage(img, 0, 0, w, h);
-        canvas.toBlob((blob) => {
-          resolve(new File([blob!], file.name, { type: 'image/jpeg' }));
-        }, 'image/jpeg', 0.7);
-      };
-      img.src = URL.createObjectURL(file);
-    });
+  function matchPorNome(fileName: string, escritos: Item[]): Item | null {
+    const words = fileName
+      .toLowerCase()
+      .replace(/[_\-\.]/g, ' ')
+      .replace(/\.(jpg|jpeg|png|webp|gif|mp4|mov)$/i, '')
+      .split(/\s+/)
+      .filter((w) => w.length > 3);
+
+    let best: Item | null = null;
+    let bestScore = 0;
+
+    for (const e of escritos) {
+      const target = `${e.titulo} ${e.slug} ${e.tematica ?? ''}`.toLowerCase();
+      let score = 0;
+      for (const w of words) {
+        if (target.includes(w)) score += w.length;
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        best = e;
+      }
+    }
+
+    return bestScore >= 4 ? best : null;
   }
 
   async function onBulkDrop(e: React.DragEvent) {
     e.preventDefault();
     setBulkDrag(false);
     const files = Array.from(e.dataTransfer.files).filter((f) =>
-      f.type.startsWith('image/')
+      f.type.startsWith('image/') || f.type.startsWith('video/')
     );
     if (files.length === 0) return;
     setBulkProcessando(true);
 
-    const BATCH = 4;
-    let done = 0;
-    let ok = 0;
-    let fail = 0;
+    const disponiveis = [...ptItems];
     const detalhes: string[] = [];
+    let ok = 0;
+    let noMatch = 0;
 
-    for (let i = 0; i < files.length; i += BATCH) {
-      const batch = files.slice(i, i + BATCH);
-      setBulkMsg(`Lote ${Math.floor(i / BATCH) + 1}/${Math.ceil(files.length / BATCH)}: a enviar ${batch.length} imagens ao Claude...`);
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      setBulkMsg(`${i + 1}/${files.length}: ${f.name}...`);
+
+      const matched = matchPorNome(f.name, disponiveis);
+      if (!matched) {
+        noMatch++;
+        detalhes.push(`? ${f.name} → sem match (arrasta manualmente para o card)`);
+        continue;
+      }
+
+      const idx = disponiveis.findIndex((x) => x.id === matched.id);
+      if (idx >= 0) disponiveis.splice(idx, 1);
 
       const fd = new FormData();
-      for (const f of batch) {
-        const compressed = await comprimirImagem(f);
-        fd.append('files', compressed);
-      }
+      fd.append('file', f);
+      fd.append('slug', matched.slug);
 
       try {
-        const res = await fetch('/api/admin/match-imagens', { method: 'POST', body: fd });
-        if (res.ok) {
-          const json = await res.json();
-          for (const r of json.resultados ?? []) {
-            if (r.ok && r.slug) {
-              const originalFile = batch.find((f) => f.name === r.ficheiro);
-              if (originalFile) {
-                const upFd = new FormData();
-                upFd.append('file', originalFile);
-                upFd.append('slug', r.slug);
-                const upRes = await fetch('/api/admin/upload', { method: 'POST', body: upFd });
-                if (upRes.ok) {
-                  const upJson = await upRes.json();
-                  const allVersions = items.filter((x) => x.slug === r.slug);
-                  for (const v of allVersions) {
-                    await fetch(`/api/admin/escritos/${v.id}`, {
-                      method: 'PUT',
-                      headers: { 'content-type': 'application/json' },
-                      body: JSON.stringify({ capa: upJson.url }),
-                    });
-                  }
-                  ok++;
-                  detalhes.push(`✓ ${r.ficheiro} → ${r.slug}`);
-                } else {
-                  fail++;
-                  detalhes.push(`✗ ${r.ficheiro} → ${r.slug} (upload falhou)`);
-                }
-              }
-            } else {
-              fail++;
-              detalhes.push(`✗ ${r.ficheiro} → ${r.slug ?? '?'} (${r.erro ?? 'match falhou'})`);
-            }
+        const upRes = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+        if (upRes.ok) {
+          const upJson = await upRes.json();
+          const allVersions = items.filter((x) => x.slug === matched.slug);
+          for (const v of allVersions) {
+            await fetch(`/api/admin/escritos/${v.id}`, {
+              method: 'PUT',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ capa: upJson.url }),
+            });
           }
+          ok++;
+          detalhes.push(`✓ ${f.name} → ${matched.slug}`);
         } else {
-          const errJson = await res.json().catch(() => ({ erro: res.statusText }));
-          fail += batch.length;
-          detalhes.push(`✗ Lote falhou: ${errJson.erro ?? res.status}`);
+          detalhes.push(`✗ ${f.name} → upload falhou`);
         }
-      } catch (err) {
-        fail += batch.length;
-        detalhes.push(`✗ Lote falhou: ${err instanceof Error ? err.message : 'erro de rede'}`);
+      } catch {
+        detalhes.push(`✗ ${f.name} → erro de rede`);
       }
 
-      done += batch.length;
-      setBulkMsg(`${done}/${files.length} processadas (${ok} ok, ${fail} erros)\n\n${detalhes.join('\n')}`);
+      setBulkMsg(`${ok}/${files.length} atribuídas\n\n${detalhes.join('\n')}`);
     }
 
     setBulkProcessando(false);
-    setBulkMsg(`CONCLUÍDO: ${ok} atribuídas, ${fail} erros.\n\n${detalhes.join('\n')}\n\nA recarregar...`);
-    setTimeout(() => window.location.reload(), 2000);
+    if (noMatch > 0) {
+      setBulkMsg(`${ok} atribuídas, ${noMatch} sem match automático.\nOs sem match: arrasta para o card certo abaixo.\n\n${detalhes.join('\n')}`);
+    } else {
+      setBulkMsg(`CONCLUÍDO: ${ok}/${files.length} atribuídas.\n\n${detalhes.join('\n')}\n\nA recarregar...`);
+      setTimeout(() => window.location.reload(), 2000);
+    }
   }
 
   return (
@@ -207,12 +197,11 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
         ) : (
           <div>
             <p className="text-creme font-serif text-[1.05rem] mb-2">
-              Arrasta todas as imagens para aqui de uma vez
+              Arrasta tudo para aqui (imagens, vídeos, o que tiveres)
             </p>
             <p className="text-creme-2/60 text-[0.82rem]">
-              Claude analisa cada imagem e atribui automaticamente ao escrito
-              certo (pelo conteúdo visual). Aplica a PT + EN. Não precisas de
-              renomear nem ordenar.
+              Match automático pelo nome do ficheiro. Sem API, sem espera.
+              Os que não encontrar match, arrastas para o card abaixo.
             </p>
           </div>
         )}
