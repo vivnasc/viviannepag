@@ -77,30 +77,35 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
     );
     if (files.length === 0) return;
     setBulkProcessando(true);
-    setBulkMsg(`Claude a identificar ${files.length} imagens…`);
+    setBulkMsg(`0/${files.length} processadas…`);
 
-    const fd = new FormData();
-    for (const f of files) fd.append('files', f);
+    const BATCH = 4;
+    let totalOk = 0;
+    let totalErro = 0;
 
-    const res = await fetch('/api/admin/match-imagens', { method: 'POST', body: fd });
-    const json = await res.json();
-    setBulkProcessando(false);
+    for (let i = 0; i < files.length; i += BATCH) {
+      const batch = files.slice(i, i + BATCH);
+      const fd = new FormData();
+      for (const f of batch) fd.append('files', f);
 
-    if (!res.ok) {
-      setBulkMsg(`Erro: ${json.erro ?? 'falhou'}${json.detalhe ? ' — ' + json.detalhe.slice(0, 200) : ''}`);
-      return;
+      try {
+        const res = await fetch('/api/admin/match-imagens', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (res.ok) {
+          totalOk += json.sucesso ?? 0;
+          totalErro += json.erros?.length ?? 0;
+        } else {
+          totalErro += batch.length;
+        }
+      } catch {
+        totalErro += batch.length;
+      }
+      setBulkMsg(`${totalOk + totalErro}/${files.length} processadas…`);
     }
 
-    setBulkMsg(`Concluído: ${json.sucesso}/${json.total} imagens atribuídas automaticamente (PT + EN).${json.erros?.length ? ' Erros: ' + json.erros.map((e: { ficheiro: string; erro?: string }) => e.ficheiro).join(', ') : ''}`);
-
-    setItems((s) =>
-      s.map((item) => {
-        const match = json.resultados?.find(
-          (r: { slug: string; ok: boolean }) => r.slug === item.slug && r.ok
-        );
-        return match ? { ...item, capa: '(atualizada)' } : item;
-      })
-    );
+    setBulkProcessando(false);
+    setBulkMsg(`Concluído: ${totalOk} atribuídas, ${totalErro} erros. PT + EN actualizados.`);
+    window.location.reload();
   }
 
   return (
