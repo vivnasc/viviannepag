@@ -25,6 +25,7 @@ export default function AdminPage() {
   const [sugerindo, setSugerindo] = useState(false);
   const [sugestoes, setSugestoes] = useState<string | null>(null);
   const [traduzindo, setTraduzindo] = useState(false);
+  const [corrigindoDatas, setCorrigindoDatas] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -77,6 +78,16 @@ export default function AdminPage() {
     } else {
       setMensagem(`Erro: ${json.erro}`);
     }
+  }
+
+  async function corrigirDatas() {
+    setCorrigindoDatas(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/corrigir-datas', { method: 'POST' });
+    const json = await res.json();
+    setCorrigindoDatas(false);
+    setMensagem(res.ok ? `${json.corrigidos} datas corrigidas.` : `Erro: ${json.erro}`);
+    carregar();
   }
 
   async function traduzirTodos() {
@@ -177,6 +188,13 @@ export default function AdminPage() {
           >
             galeria
           </Link>
+          <button
+            onClick={corrigirDatas}
+            disabled={corrigindoDatas}
+            className="text-rosa border border-rosa/40 hover:border-rosa rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
+          >
+            {corrigindoDatas ? 'a corrigir…' : 'corrigir datas'}
+          </button>
           <button
             onClick={traduzirTodos}
             disabled={traduzindo}
