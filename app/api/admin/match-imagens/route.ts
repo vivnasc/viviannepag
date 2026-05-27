@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
-const BUCKET = 'escritos';
 const BATCH_SIZE = 4;
 
 export const maxDuration = 300;
@@ -115,40 +114,16 @@ export async function POST(req: Request) {
     }
   }
 
-  const resultados: Array<{ ficheiro: string; slug: string; ok: boolean; erro?: string }> = [];
-
-  for (const m of allMatches) {
+  const resultados = allMatches.map((m) => {
     const img = imagensAll[m.imagem];
-    if (!img) continue;
     const escrito = escritos.find((e) => e.slug === m.slug);
-    if (!escrito) {
-      resultados.push({ ficheiro: img.nome, slug: m.slug, ok: false, erro: 'slug desconhecido' });
-      continue;
-    }
-
-    const buf = Buffer.from(img.data, 'base64');
-    const ext = img.mediaType.split('/')[1]?.replace(/[^a-z0-9]/g, '') || 'png';
-    const storagePath = `${escrito.slug}/capa-${Date.now()}-${m.imagem}.${ext}`;
-
-    const { error: upErr } = await supabase.storage
-      .from(BUCKET)
-      .upload(storagePath, buf, { contentType: img.mediaType, upsert: false });
-
-    if (upErr) {
-      resultados.push({ ficheiro: img.nome, slug: m.slug, ok: false, erro: upErr.message });
-      continue;
-    }
-
-    const { data: pub } = supabase.storage.from(BUCKET).getPublicUrl(storagePath);
-    const capaUrl = pub.publicUrl;
-
-    const { data: allVersions } = await supabase.from('escritos').select('id').eq('slug', escrito.slug);
-    for (const v of allVersions ?? []) {
-      await supabase.from('escritos').update({ capa: capaUrl, updated_at: new Date().toISOString() }).eq('id', v.id);
-    }
-
-    resultados.push({ ficheiro: img.nome, slug: m.slug, ok: true });
-  }
+    return {
+      ficheiro: img?.nome ?? `imagem-${m.imagem}`,
+      slug: m.slug,
+      ok: !!escrito,
+      erro: escrito ? undefined : 'slug desconhecido',
+    };
+  });
 
   const ok = resultados.filter((r) => r.ok).length;
   return NextResponse.json({ ok: true, total: resultados.length, sucesso: ok, erros: resultados.filter((r) => !r.ok), resultados });

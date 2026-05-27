@@ -69,6 +69,29 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
     }));
   }
 
+  async function comprimirImagem(file: File): Promise<File> {
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX = 600;
+        let w = img.width;
+        let h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+          else { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d')!.drawImage(img, 0, 0, w, h);
+        canvas.toBlob((blob) => {
+          resolve(new File([blob!], file.name, { type: 'image/jpeg' }));
+        }, 'image/jpeg', 0.7);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
   async function onBulkDrop(e: React.DragEvent) {
     e.preventDefault();
     setBulkDrag(false);
@@ -89,18 +112,44 @@ export function GaleriaImagens({ escritos }: { escritos: Item[] }) {
       setBulkMsg(`Lote ${Math.floor(i / BATCH) + 1}/${Math.ceil(files.length / BATCH)}: a enviar ${batch.length} imagens ao Claude...`);
 
       const fd = new FormData();
-      for (const f of batch) fd.append('files', f);
+      for (const f of batch) {
+        const compressed = await comprimirImagem(f);
+        fd.append('files', compressed);
+      }
 
       try {
         const res = await fetch('/api/admin/match-imagens', { method: 'POST', body: fd });
         if (res.ok) {
           const json = await res.json();
-          const batchOk = json.sucesso ?? 0;
-          const batchFail = (json.erros?.length ?? 0);
-          ok += batchOk;
-          fail += batchFail;
           for (const r of json.resultados ?? []) {
-            detalhes.push(`${r.ok ? '✓' : '✗'} ${r.ficheiro} → ${r.slug}`);
+            if (r.ok && r.slug) {
+              const originalFile = batch.find((f) => f.name === r.ficheiro);
+              if (originalFile) {
+                const upFd = new FormData();
+                upFd.append('file', originalFile);
+                upFd.append('slug', r.slug);
+                const upRes = await fetch('/api/admin/upload', { method: 'POST', body: upFd });
+                if (upRes.ok) {
+                  const upJson = await upRes.json();
+                  const allVersions = items.filter((x) => x.slug === r.slug);
+                  for (const v of allVersions) {
+                    await fetch(`/api/admin/escritos/${v.id}`, {
+                      method: 'PUT',
+                      headers: { 'content-type': 'application/json' },
+                      body: JSON.stringify({ capa: upJson.url }),
+                    });
+                  }
+                  ok++;
+                  detalhes.push(`✓ ${r.ficheiro} → ${r.slug}`);
+                } else {
+                  fail++;
+                  detalhes.push(`✗ ${r.ficheiro} → ${r.slug} (upload falhou)`);
+                }
+              }
+            } else {
+              fail++;
+              detalhes.push(`✗ ${r.ficheiro} → ${r.slug ?? '?'} (${r.erro ?? 'match falhou'})`);
+            }
           }
         } else {
           const errJson = await res.json().catch(() => ({ erro: res.statusText }));
