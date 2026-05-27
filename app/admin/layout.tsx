@@ -28,6 +28,7 @@ const NAV = [
   { href: '/admin/produtos', label: 'produtos' },
   { href: '/admin/compras', label: 'compras' },
   { href: '/admin/imagens', label: 'galeria' },
+  { href: '/admin/estudio', label: 'estúdio' },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
