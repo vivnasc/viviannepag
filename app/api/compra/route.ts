@@ -2,17 +2,23 @@ import { NextResponse } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const VIVIANNE_EMAIL = 'ola@viviannedossantos.com';
+const VIVIANNE_EMAILS = ['ola@viviannedossantos.com', 'viv.saraiva@gmail.com'];
 
 async function enviarEmail(to: string, subject: string, html: string) {
-  if (!RESEND_KEY) return;
+  if (!RESEND_KEY) { console.error('RESEND_API_KEY em falta'); return; }
   try {
-    await fetch('https://api.resend.com/emails', {
+    const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RESEND_KEY}` },
       body: JSON.stringify({ from: 'Vivianne dos Santos <ola@viviannedossantos.com>', to, subject, html }),
     });
-  } catch {}
+    if (!res.ok) {
+      const err = await res.text();
+      console.error(`Resend erro (${to}):`, err);
+    }
+  } catch (e) {
+    console.error(`Resend catch (${to}):`, e);
+  }
 }
 
 export async function POST(req: Request) {
@@ -33,6 +39,8 @@ export async function POST(req: Request) {
   const preco = body.preco ?? '';
   const orderId = body.paypal_order_id ?? '';
 
+  const licenca = `VS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase.from('compras').insert({
     email,
@@ -40,6 +48,7 @@ export async function POST(req: Request) {
     produto_titulo: titulo,
     preco,
     paypal_order_id: orderId || null,
+    licenca,
   }).select().single();
 
   if (error) {
@@ -47,7 +56,6 @@ export async function POST(req: Request) {
   }
 
   // Email ao cliente (recibo + licenca)
-  const licenca = `VS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
   await enviarEmail(email, `O teu acesso: "${titulo}"`, `
 <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#3D2B1F;padding:40px 20px">
   <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#9A5A43;text-align:center">VIVIANNE DOS SANTOS</p>
@@ -76,8 +84,9 @@ export async function POST(req: Request) {
   <p style="font-size:11px;color:#9A5A43;text-align:center">Este email serve como recibo e licenca da tua compra. Guarda-o.</p>
 </div>`);
 
-  // Notificacao a Vivianne
-  await enviarEmail(VIVIANNE_EMAIL, `Nova compra: "${titulo}"`, `
+  // Notificacao a Vivianne (ambos emails)
+  for (const dest of VIVIANNE_EMAILS) {
+    await enviarEmail(dest, `Nova compra: "${titulo}"`, `
 <div style="font-family:sans-serif;padding:20px;color:#333">
   <h2 style="color:#8C4A36">Nova compra!</h2>
   <table style="border-collapse:collapse;width:100%">
@@ -89,6 +98,7 @@ export async function POST(req: Request) {
   </table>
   <p style="margin-top:20px"><a href="https://viviannedossantos.com/admin/compras">Ver no admin</a></p>
 </div>`);
+  }
 
   return NextResponse.json({ ok: true, compra: data });
 }
