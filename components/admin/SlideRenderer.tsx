@@ -149,30 +149,49 @@ function PaperTexture() {
   );
 }
 
-function BrandMark({ light }: { light?: boolean }) {
+function BrandTop({ mundo, light }: { mundo: string; light?: boolean }) {
+  const c = light ? '#2A1C12' : '#F2E8DC';
+  const name = mundo === 'autora' ? 'Vivianne' : PALETAS[mundo as Mundo]?.nome ?? 'Vivianne';
+  return (
+    <p className="text-[9px] font-serif italic" style={{ color: c, opacity: 0.55 }}>
+      {name}
+    </p>
+  );
+}
+
+function BrandBottom({ light }: { light?: boolean }) {
   const c = light ? '#2A1C12' : '#F2E8DC';
   return (
-    <div className="flex flex-col items-center gap-0.5">
-      <div
-        className="w-[18px] h-[18px] rounded-full flex items-center justify-center text-[7px] font-bold tracking-wider"
-        style={{ background: c + '12', color: c, border: `1px solid ${c}18` }}
-      >
-        V
-      </div>
-      <span className="text-[5px] tracking-[0.3em] uppercase" style={{ color: c, opacity: 0.4 }}>
-        vivianne dos santos
+    <div className="flex items-center gap-1">
+      <span className="text-[7px]" style={{ color: c, opacity: 0.3 }}>&copy;</span>
+      <span className="text-[6px] tracking-[0.12em]" style={{ color: c, opacity: 0.3 }}>
+        viviannedossantos
       </span>
+    </div>
+  );
+}
+
+function SlideDots({ total, current, color }: { total: number; current: number; color: string }) {
+  return (
+    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-[3px] z-[8]">
+      {Array.from({ length: total }).map((_, i) => (
+        <div
+          key={i}
+          className="w-[4px] h-[4px] rounded-full"
+          style={{ background: i === current ? color : color + '30' }}
+        />
+      ))}
     </div>
   );
 }
 
 function SwipeCTA({ color }: { color: string }) {
   return (
-    <div className="flex items-center gap-1.5 mt-auto pt-3">
-      <span className="text-[7px] tracking-[0.2em] uppercase" style={{ color, opacity: 0.4 }}>
+    <div className="flex items-center gap-1.5 mt-auto pt-2">
+      <span className="text-[7px] tracking-[0.2em] uppercase" style={{ color, opacity: 0.35 }}>
         Desliza para o lado
       </span>
-      <span className="text-[9px]" style={{ color, opacity: 0.4 }}>&rarr;</span>
+      <span className="text-[9px]" style={{ color, opacity: 0.35 }}>&rarr;</span>
     </div>
   );
 }
@@ -265,45 +284,43 @@ function LayoutStatement({ slide, mundo, slideKey }: { slide: Slide; mundo: Mund
 
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }}>
-      {imageUrl && (
+      {imageUrl ? (
         <>
           <img src={imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover z-[0]" />
-          <div className="absolute inset-0 z-[1]" style={{ background: `linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.7) 100%)` }} />
+          <div className="absolute inset-0 z-[1]" style={{ background: `linear-gradient(180deg, transparent 10%, ${p.bg2}aa 45%, ${p.bg2}ee 65%, ${p.bg2} 100%)` }} />
+          <button
+            onClick={clearImage}
+            className="absolute top-2 right-2 z-[10] w-5 h-5 rounded-full bg-black/50 text-white text-[8px] flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+          >
+            &times;
+          </button>
+        </>
+      ) : (
+        <>
+          <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />
+          <div className="absolute top-0 left-0 right-0 h-[45%] z-[3]">
+            <DropZone
+              slideKey={`${slideKey}-statement`}
+              imageUrl={null}
+              onImage={setImage}
+              onClear={clearImage}
+              height="100%"
+              notaVisual={slide.notaVisual}
+            />
+          </div>
         </>
       )}
       <GrainOverlay />
-      {!imageUrl && <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />}
 
-      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-5 pb-4">
-        <BrandMark />
-        <div className="flex-1 flex flex-col justify-end pb-6">
-          <p className="font-sans text-[15px] leading-[1.28] font-normal">
-            {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
-          </p>
-        </div>
+      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
+        <BrandTop mundo={mundo} />
+        <div className="flex-1" />
+        <p className="font-sans text-[22px] leading-[1.22] font-normal mb-3">
+          {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
+        </p>
+        <BrandBottom />
         {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
       </div>
-
-      {!imageUrl && (
-        <div className="absolute top-8 right-2 z-[8]">
-          <DropZone
-            slideKey={`${slideKey}-statement`}
-            imageUrl={null}
-            onImage={setImage}
-            onClear={clearImage}
-            height="24px"
-            notaVisual={slide.notaVisual}
-          />
-        </div>
-      )}
-      {imageUrl && (
-        <button
-          onClick={clearImage}
-          className="absolute top-2 right-2 z-[10] w-5 h-5 rounded-full bg-black/50 text-white text-[8px] flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
-        >
-          &times;
-        </button>
-      )}
     </div>
   );
 }
@@ -316,25 +333,28 @@ function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
 
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: p.bg2 }}>
+      <div className="absolute top-0 left-0 right-0 z-[6] px-4 pt-3">
+        <BrandTop mundo={mundo} />
+      </div>
       <DropZone
         slideKey={`${slideKey}-foto-topo`}
         imageUrl={imageUrl}
         onImage={setImage}
         onClear={clearImage}
-        height="45%"
+        height="42%"
         notaVisual={slide.notaVisual}
       >
-        <div className="absolute bottom-0 left-0 right-0 h-8 z-[3]" style={{ background: `linear-gradient(to bottom, transparent, ${p.bg2})` }} />
+        <div className="absolute bottom-0 left-0 right-0 h-10 z-[3]" style={{ background: `linear-gradient(to bottom, transparent, ${p.bg2})` }} />
       </DropZone>
       <GrainOverlay />
-      <div className="relative z-[5] flex flex-col flex-1 px-5 pb-4 pt-2">
-        <div className="flex-1 flex items-center">
-          <p className="font-sans text-[13px] leading-[1.32] font-normal">
+      <div className="relative z-[5] flex flex-col flex-1 px-5 pb-3 pt-1">
+        <div className="flex-1 flex items-end">
+          <p className="font-sans text-[20px] leading-[1.22] font-normal">
             {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
           </p>
         </div>
-        <div className="flex items-center justify-between">
-          <BrandMark />
+        <div className="flex items-center justify-between mt-2">
+          <BrandBottom />
           {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
         </div>
       </div>
@@ -359,18 +379,21 @@ function LayoutFotoLado({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
           height="100%"
           notaVisual={slide.notaVisual}
         >
-          <div className="absolute top-0 right-0 bottom-0 w-6 z-[3]" style={{ background: `linear-gradient(to right, transparent, ${p.bg2})` }} />
+          <div className="absolute top-0 right-0 bottom-0 w-8 z-[3]" style={{ background: `linear-gradient(to right, transparent, ${p.bg2})` }} />
         </DropZone>
       </div>
       <GrainOverlay />
-      <div className="relative z-[5] flex flex-col flex-1 px-4 py-5">
-        <BrandMark />
-        <div className="flex-1 flex items-center">
-          <p className="font-sans text-[12px] leading-[1.35] font-normal">
+      <div className="relative z-[5] flex flex-col flex-1 px-4 pt-4 pb-3">
+        <BrandTop mundo={mundo} />
+        <div className="flex-1 flex items-end">
+          <p className="font-sans text-[17px] leading-[1.25] font-normal">
             {renderBoldText(slide.texto, slide.bold, p.destaque, p.texto)}
           </p>
         </div>
-        {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
+        <div className="flex items-center justify-between mt-2">
+          <BrandBottom />
+          {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
+        </div>
       </div>
     </div>
   );
@@ -386,24 +409,24 @@ function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: '#f5f0e8' }}>
       <PaperTexture />
       <GrainOverlay />
-      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-5 pb-4">
-        <BrandMark light />
-        <div className="flex-1 flex flex-col justify-center">
+      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
+        <BrandTop mundo={mundo} light />
+        <div className="flex-1 flex flex-col justify-end">
           {slide.titulo && (
-            <p className="text-[7px] tracking-[0.3em] uppercase mb-3 font-medium" style={{ color: accent, opacity: 0.6 }}>
+            <p className="text-[7px] tracking-[0.3em] uppercase mb-3 font-medium" style={{ color: accent, opacity: 0.5 }}>
               {slide.titulo}
             </p>
           )}
-          <p className="font-sans text-[14px] leading-[1.32] font-normal">
+          <p className="font-sans text-[21px] leading-[1.22] font-normal mb-3">
             {renderBoldText(slide.texto, slide.bold, accent, textColor)}
           </p>
           {slide.destaque && (
-            <p className="text-[7px] italic font-serif mt-4" style={{ color: accent, opacity: 0.6 }}>
+            <p className="text-[7px] italic font-serif mt-1" style={{ color: accent, opacity: 0.5 }}>
               {slide.destaque}
             </p>
           )}
         </div>
-        {slide.tipo === 'capa' && <SwipeCTA color={textColor} />}
+        <BrandBottom light />
       </div>
     </div>
   );
@@ -419,30 +442,30 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: '#f5f0e8' }}>
       <PaperTexture />
       <GrainOverlay />
-      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-5 pb-4">
-        <BrandMark light />
-        <div className="flex-1 flex flex-col justify-center">
-          <p className="font-sans text-[13px] leading-[1.35] font-normal mb-4">
+      <div className="relative z-[5] flex flex-col flex-1 px-5 pt-4 pb-3">
+        <BrandTop mundo={mundo} light />
+        <div className="flex-1 flex flex-col justify-end">
+          <p className="font-sans text-[19px] leading-[1.25] font-normal mb-3">
             {renderBoldText(slide.texto, slide.bold, accent, textColor)}
           </p>
           {slide.destaque && (
-            <p className="text-[8px] italic font-serif" style={{ color: accent, opacity: 0.7 }}>
+            <p className="text-[8px] italic font-serif mb-2" style={{ color: accent, opacity: 0.6 }}>
               {slide.destaque}
             </p>
           )}
-          <div className="mt-5 flex items-center gap-2">
+          <div className="flex items-center gap-2 mt-2">
             <div
               className="w-6 h-6 rounded-full flex items-center justify-center text-[10px]"
-              style={{ background: accent + '15', color: accent, border: `1px solid ${accent}25` }}
+              style={{ background: accent + '12', color: accent, border: `1px solid ${accent}20` }}
             >
               &rarr;
             </div>
-            <span className="text-[7px] tracking-[0.15em] uppercase" style={{ color: textColor, opacity: 0.35 }}>
+            <span className="text-[7px] tracking-[0.15em] uppercase" style={{ color: textColor, opacity: 0.3 }}>
               link na bio
             </span>
           </div>
         </div>
-        <BrandMark light />
+        <BrandBottom light />
       </div>
     </div>
   );
