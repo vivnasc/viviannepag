@@ -46,24 +46,34 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: error.message }, { status: 500 });
   }
 
-  // Email ao cliente (recibo)
+  // Email ao cliente (recibo + licenca)
+  const licenca = `VS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
   await enviarEmail(email, `O teu acesso: "${titulo}"`, `
 <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#3D2B1F;padding:40px 20px">
   <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#9A5A43;text-align:center">VIVIANNE DOS SANTOS</p>
   <h1 style="font-size:24px;font-weight:normal;text-align:center;margin:20px 0;color:#3D2B1F">Obrigada pela tua compra.</h1>
   <p style="font-size:16px;line-height:1.7;text-align:center;color:#6B5548">Compraste <strong>"${titulo}"</strong></p>
-  <p style="font-size:14px;text-align:center;color:#9A5A43;margin:10px 0 30px">Valor: ${preco} | Ref: ${orderId || 'N/A'}</p>
+  <div style="background:#F3E4D6;border-radius:12px;padding:20px;margin:20px 0;text-align:center">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9A5A43;margin-bottom:8px">LICENCA DE USO PESSOAL</p>
+    <p style="font-size:18px;font-family:monospace;color:#3D2B1F;font-weight:bold;letter-spacing:2px">${licenca}</p>
+    <p style="font-size:12px;color:#9A5A43;margin-top:8px">Registado para: ${email}</p>
+  </div>
+  <p style="font-size:12px;text-align:center;color:#9A5A43;margin-bottom:20px">Valor: ${preco} | Ref PayPal: ${orderId || 'N/A'} | Data: ${new Date().toLocaleDateString('pt-PT')}</p>
   <div style="text-align:center;margin-bottom:30px">
     <a href="https://viviannedossantos.com/loja/${body.produto_slug}" style="display:inline-block;background:#EBAE4A;color:#2A1C12;text-decoration:none;padding:14px 36px;border-radius:12px;font-size:16px">
       Aceder ao produto
     </a>
   </div>
+  <p style="font-size:13px;color:#6B5548;text-align:center;line-height:1.6;margin-bottom:20px">
+    Este material e de uso pessoal e intransmissivel. A partilha ou redistribuicao nao e autorizada.
+  </p>
   <p style="font-size:13px;color:#9A5A43;text-align:center">
-    Problema? <a href="https://wa.me/258845243875" style="color:#9A5A43">WhatsApp</a> |
-    <a href="https://viviannedossantos.com" style="color:#9A5A43">viviannedossantos.com</a>
+    Contacto: <a href="mailto:ola@viviannedossantos.com" style="color:#8C4A36">ola@viviannedossantos.com</a> |
+    <a href="https://wa.me/258845243875" style="color:#8C4A36">WhatsApp</a> |
+    <a href="https://viviannedossantos.com" style="color:#8C4A36">viviannedossantos.com</a>
   </p>
   <hr style="border:none;border-top:1px solid #F3E4D6;margin:30px 0" />
-  <p style="font-size:11px;color:#9A5A43;text-align:center">Este email serve como recibo da tua compra. Guarda-o.</p>
+  <p style="font-size:11px;color:#9A5A43;text-align:center">Este email serve como recibo e licenca da tua compra. Guarda-o.</p>
 </div>`);
 
   // Notificacao a Vivianne

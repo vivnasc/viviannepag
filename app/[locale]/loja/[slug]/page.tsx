@@ -260,7 +260,14 @@ export default async function ProdutoPage({
             />
           </div>
 
-          <p className="text-[0.72rem] text-creme-2/40 mt-8">
+          <p className="text-[0.78rem] text-creme-2/50 mt-8">
+            {isPt ? 'Questoes?' : 'Questions?'}{' '}
+            <a href="mailto:ola@viviannedossantos.com" className="text-ocre hover:text-ambar no-underline">ola@viviannedossantos.com</a>
+            {' '}{isPt ? 'ou' : 'or'}{' '}
+            <a href="https://wa.me/258845243875" className="text-ocre hover:text-ambar no-underline">WhatsApp</a>
+          </p>
+
+          <p className="text-[0.72rem] text-creme-2/40 mt-4">
             {isPt
               ? '© 2026 Vivianne dos Santos · viviannedossantos.com'
               : '© 2026 Vivianne dos Santos · viviannedossantos.com'}
