@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect, type DragEvent } from 'react';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { PALETAS } from '@/lib/estudio-conteudo';
 
@@ -13,6 +13,77 @@ const LAYOUT_LABELS: Record<Layout, string> = {
   claro: 'Claro',
   cta: 'CTA',
 };
+
+// ─── IndexedDB image store ──────────────────────────────
+
+const DB_NAME = 'estudio-imagens';
+const DB_STORE = 'slides';
+const DB_VERSION = 1;
+
+function openDB(): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = () => {
+      req.result.createObjectStore(DB_STORE);
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function saveImage(key: string, dataUrl: string) {
+  const db = await openDB();
+  return new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).put(dataUrl, key);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function loadImage(key: string): Promise<string | null> {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readonly');
+    const req = tx.objectStore(DB_STORE).get(key);
+    req.onsuccess = () => resolve((req.result as string) ?? null);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function deleteImage(key: string) {
+  const db = await openDB();
+  return new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).delete(key);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+// ─── Hook: use stored image ─────────────────────────────
+
+function useSlideImage(slideKey: string) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadImage(slideKey).then(setImageUrl).catch(() => {});
+  }, [slideKey]);
+
+  const setImage = useCallback(async (dataUrl: string) => {
+    await saveImage(slideKey, dataUrl);
+    setImageUrl(dataUrl);
+  }, [slideKey]);
+
+  const clearImage = useCallback(async () => {
+    await deleteImage(slideKey);
+    setImageUrl(null);
+  }, [slideKey]);
+
+  return { imageUrl, setImage, clearImage };
+}
+
+// ─── Helpers ────────────────────────────────────────────
 
 function renderBoldText(text: string, boldWords: string[] | undefined, accentColor: string, baseColor: string) {
   if (!boldWords || boldWords.length === 0) return <span style={{ color: baseColor }}>{text}</span>;
@@ -95,23 +166,6 @@ function BrandMark({ light }: { light?: boolean }) {
   );
 }
 
-function FotoPlaceholder({ notaVisual, height }: { notaVisual?: string; height: string }) {
-  return (
-    <div
-      className="w-full bg-terra-2/30 flex items-center justify-center overflow-hidden relative"
-      style={{ height }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-terra-2/20 to-terra/40" />
-      <div className="relative z-10 text-center px-4">
-        <p className="text-[8px] tracking-[0.15em] uppercase text-ocre/40 mb-1">foto MJ</p>
-        {notaVisual && (
-          <p className="text-[6px] text-creme-2/30 italic leading-tight max-w-[180px]">{notaVisual}</p>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function SwipeCTA({ color }: { color: string }) {
   return (
     <div className="flex items-center gap-1.5 mt-auto pt-3">
@@ -123,14 +177,103 @@ function SwipeCTA({ color }: { color: string }) {
   );
 }
 
-// ─── LAYOUT: Statement (text-only, dark bg, huge text) ──────
+// ─── Drop zone for images ───────────────────────────────
 
-function LayoutStatement({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
+function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, children }: {
+  slideKey: string;
+  imageUrl: string | null;
+  onImage: (dataUrl: string) => void;
+  onClear: () => void;
+  height: string;
+  notaVisual?: string;
+  children?: React.ReactNode;
+}) {
+  const [dragging, setDragging] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function handleFile(file: File) {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === 'string') onImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function onDrop(e: DragEvent) {
+    e.preventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  }
+
+  function onDragOver(e: DragEvent) {
+    e.preventDefault();
+    setDragging(true);
+  }
+
+  return (
+    <div
+      className="w-full relative overflow-hidden group"
+      style={{ height }}
+      onDrop={onDrop}
+      onDragOver={onDragOver}
+      onDragLeave={() => setDragging(false)}
+    >
+      {imageUrl ? (
+        <>
+          <img src={imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          {children}
+          <button
+            onClick={(e) => { e.stopPropagation(); onClear(); }}
+            className="absolute top-1 right-1 z-[10] w-4 h-4 rounded-full bg-black/60 text-white text-[7px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            &times;
+          </button>
+        </>
+      ) : (
+        <>
+          <div className={`absolute inset-0 flex flex-col items-center justify-center transition-colors ${dragging ? 'bg-ambar/15' : 'bg-terra-2/30'}`}>
+            <div className="absolute inset-0 bg-gradient-to-b from-terra-2/20 to-terra/40" />
+            <div className="relative z-10 text-center px-3 cursor-pointer" onClick={() => inputRef.current?.click()}>
+              <p className={`text-[8px] tracking-[0.15em] uppercase mb-0.5 ${dragging ? 'text-ambar' : 'text-ocre/40'}`}>
+                {dragging ? 'larga aqui' : 'arrasta foto'}
+              </p>
+              {notaVisual && !dragging && (
+                <p className="text-[5px] text-creme-2/25 italic leading-tight max-w-[140px]">{notaVisual}</p>
+              )}
+            </div>
+          </div>
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─── LAYOUT: Statement ──────────────────────────────────
+
+function LayoutStatement({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
+  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-statement`);
+
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }}>
+      {imageUrl && (
+        <>
+          <img src={imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover z-[0]" />
+          <div className="absolute inset-0 z-[1]" style={{ background: `linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.7) 100%)` }} />
+        </>
+      )}
       <GrainOverlay />
-      <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />
+      {!imageUrl && <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />}
+
       <div className="relative z-[5] flex flex-col flex-1 px-5 pt-5 pb-4">
         <BrandMark />
         <div className="flex-1 flex flex-col justify-end pb-6">
@@ -140,18 +283,49 @@ function LayoutStatement({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
         </div>
         {slide.tipo === 'capa' && <SwipeCTA color={p.texto} />}
       </div>
+
+      {!imageUrl && (
+        <div className="absolute top-8 right-2 z-[8]">
+          <DropZone
+            slideKey={`${slideKey}-statement`}
+            imageUrl={null}
+            onImage={setImage}
+            onClear={clearImage}
+            height="24px"
+            notaVisual={slide.notaVisual}
+          />
+        </div>
+      )}
+      {imageUrl && (
+        <button
+          onClick={clearImage}
+          className="absolute top-2 right-2 z-[10] w-5 h-5 rounded-full bg-black/50 text-white text-[8px] flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+        >
+          &times;
+        </button>
+      )}
     </div>
   );
 }
 
-// ─── LAYOUT: Foto Topo (photo top half, text bottom) ──────
+// ─── LAYOUT: Foto Topo ──────────────────────────────────
 
-function LayoutFotoTopo({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
+function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
+  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-topo`);
+
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: p.bg2 }}>
-      <FotoPlaceholder notaVisual={slide.notaVisual} height="45%" />
-      <div className="absolute top-[42%] left-0 right-0 h-8 z-[3]" style={{ background: `linear-gradient(to bottom, transparent, ${p.bg2})` }} />
+      <DropZone
+        slideKey={`${slideKey}-foto-topo`}
+        imageUrl={imageUrl}
+        onImage={setImage}
+        onClear={clearImage}
+        height="45%"
+        notaVisual={slide.notaVisual}
+      >
+        <div className="absolute bottom-0 left-0 right-0 h-8 z-[3]" style={{ background: `linear-gradient(to bottom, transparent, ${p.bg2})` }} />
+      </DropZone>
       <GrainOverlay />
       <div className="relative z-[5] flex flex-col flex-1 px-5 pb-4 pt-2">
         <div className="flex-1 flex items-center">
@@ -168,15 +342,25 @@ function LayoutFotoTopo({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
   );
 }
 
-// ─── LAYOUT: Foto Lado (photo left, text right — split) ──────
+// ─── LAYOUT: Foto Lado ──────────────────────────────────
 
-function LayoutFotoLado({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
+function LayoutFotoLado({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
+  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-lado`);
+
   return (
     <div className="w-full h-full relative overflow-hidden flex" style={{ background: p.bg2 }}>
       <div className="w-[40%] h-full relative shrink-0">
-        <FotoPlaceholder notaVisual={slide.notaVisual} height="100%" />
-        <div className="absolute top-0 right-0 bottom-0 w-6 z-[3]" style={{ background: `linear-gradient(to right, transparent, ${p.bg2})` }} />
+        <DropZone
+          slideKey={`${slideKey}-foto-lado`}
+          imageUrl={imageUrl}
+          onImage={setImage}
+          onClear={clearImage}
+          height="100%"
+          notaVisual={slide.notaVisual}
+        >
+          <div className="absolute top-0 right-0 bottom-0 w-6 z-[3]" style={{ background: `linear-gradient(to right, transparent, ${p.bg2})` }} />
+        </DropZone>
       </div>
       <GrainOverlay />
       <div className="relative z-[5] flex flex-col flex-1 px-4 py-5">
@@ -192,7 +376,7 @@ function LayoutFotoLado({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
   );
 }
 
-// ─── LAYOUT: Claro (light background, dark text, paper texture) ──────
+// ─── LAYOUT: Claro ──────────────────────────────────────
 
 function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
   const p = PALETAS[mundo];
@@ -225,7 +409,7 @@ function LayoutClaro({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
   );
 }
 
-// ─── LAYOUT: CTA (light bg, arrow, link na bio) ──────
+// ─── LAYOUT: CTA ────────────────────────────────────────
 
 function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
   const p = PALETAS[mundo];
@@ -264,27 +448,27 @@ function LayoutCTA({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
   );
 }
 
-// ─── Main renderer ──────
+// ─── Main renderer ──────────────────────────────────────
 
-function SlideRender({ slide, mundo, layout }: { slide: Slide; mundo: Mundo; layout: Layout }) {
+function SlideRender({ slide, mundo, layout, slideKey }: { slide: Slide; mundo: Mundo; layout: Layout; slideKey: string }) {
   switch (layout) {
-    case 'statement': return <LayoutStatement slide={slide} mundo={mundo} />;
-    case 'foto-topo': return <LayoutFotoTopo slide={slide} mundo={mundo} />;
-    case 'foto-lado': return <LayoutFotoLado slide={slide} mundo={mundo} />;
+    case 'statement': return <LayoutStatement slide={slide} mundo={mundo} slideKey={slideKey} />;
+    case 'foto-topo': return <LayoutFotoTopo slide={slide} mundo={mundo} slideKey={slideKey} />;
+    case 'foto-lado': return <LayoutFotoLado slide={slide} mundo={mundo} slideKey={slideKey} />;
     case 'claro': return <LayoutClaro slide={slide} mundo={mundo} />;
     case 'cta': return <LayoutCTA slide={slide} mundo={mundo} />;
   }
 }
 
-// ─── Exportable wrapper with all 5 layouts ──────
+// ─── Grid with all 5 layouts ────────────────────────────
 
-export function SlideLayoutGrid({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
+export function SlideLayoutGrid({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   return (
     <div className="grid grid-cols-5 gap-2">
       {(Object.keys(LAYOUT_LABELS) as Layout[]).map(layout => (
         <div key={layout} className="flex flex-col items-center gap-1">
           <div className="rounded-[8px] overflow-hidden border border-ocre/15 hover:border-ambar/40 transition-colors cursor-pointer" style={{ width: 140, aspectRatio: '4/5' }}>
-            <SlideRender slide={slide} mundo={mundo} layout={layout} />
+            <SlideRender slide={slide} mundo={mundo} layout={layout} slideKey={slideKey} />
           </div>
           <span className="text-[0.5rem] text-creme-2/40 tracking-[0.1em] uppercase">{LAYOUT_LABELS[layout]}</span>
         </div>
@@ -293,10 +477,10 @@ export function SlideLayoutGrid({ slide, mundo }: { slide: Slide; mundo: Mundo }
   );
 }
 
-// ─── Single slide with layout selector and export ──────
+// ─── Single slide with layout selector + export ─────────
 
-export function SlideWithLayout({ slide, mundo, defaultLayout }: {
-  slide: Slide; mundo: Mundo; defaultLayout?: Layout;
+export function SlideWithLayout({ slide, mundo, defaultLayout, slideKey }: {
+  slide: Slide; mundo: Mundo; defaultLayout?: Layout; slideKey: string;
 }) {
   const [layout, setLayout] = useState<Layout>(defaultLayout ?? (slide.fundoClaro ? 'claro' : slide.tipo === 'cta' ? 'cta' : 'statement'));
   const slideRef = useRef<HTMLDivElement>(null);
@@ -315,13 +499,13 @@ export function SlideWithLayout({ slide, mundo, defaultLayout }: {
       });
       const a = document.createElement('a');
       a.href = dataUrl;
-      a.download = `slide-${layout}.png`;
+      a.download = `slide-${slideKey}-${layout}.png`;
       a.click();
     } catch (e) {
       console.error('Export error:', e);
     }
     setExportando(false);
-  }, [layout]);
+  }, [layout, slideKey]);
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -330,7 +514,7 @@ export function SlideWithLayout({ slide, mundo, defaultLayout }: {
         className="rounded-[12px] overflow-hidden border-2 border-ocre/20"
         style={{ width: 280, aspectRatio: '4/5' }}
       >
-        <SlideRender slide={slide} mundo={mundo} layout={layout} />
+        <SlideRender slide={slide} mundo={mundo} layout={layout} slideKey={slideKey} />
       </div>
 
       <div className="flex items-center gap-1.5 flex-wrap justify-center">
