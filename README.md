@@ -54,3 +54,4 @@ Artigos: aprofundam o diagnóstico, param antes da solução. A solução vive n
 3. Escritos: lista, filtro por temática, página de artigo, bloco-ponte para produto.
 4. Primeiro artigo publicado (`o-no`).
 5. PWA (manifest + service worker), deploy final na Vercel.
+trigger deploy
