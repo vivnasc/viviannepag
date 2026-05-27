@@ -9,6 +9,7 @@ import {
   type Slide,
   type Mundo,
 } from '@/lib/estudio-conteudo';
+import { SlideWithLayout, SlideLayoutGrid } from '@/components/admin/SlideRenderer';
 import {
   gerarCaptionInstagram,
   gerarCaptionTikTok,
@@ -351,47 +352,24 @@ function ReelPreview({ conteudo }: { conteudo: ConteudoDia }) {
   );
 }
 
-// ─── Carousel with export ───────────────────────────────
+// ─── Carousel with multi-layout + export ────────────────
 
 function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
   const [slideAtual, setSlideAtual] = useState(0);
-  const slideRef = useRef<HTMLDivElement>(null);
-  const [exportando, setExportando] = useState(false);
+  const [showGrid, setShowGrid] = useState(false);
   const slides = conteudo.slides ?? [];
   const total = slides.length;
 
-  const exportarPNG = useCallback(async () => {
-    if (!slideRef.current) return;
-    setExportando(true);
-    try {
-      const { toPng } = await import('html-to-image');
-      const dataUrl = await toPng(slideRef.current, {
-        width: 1080,
-        height: 1080,
-        pixelRatio: 2,
-        backgroundColor: '#111',
-      });
-      const a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = `dia-${conteudo.dia}-slide-${slideAtual + 1}.png`;
-      a.click();
-    } catch (e) {
-      console.error('Export error:', e);
-    }
-    setExportando(false);
-  }, [conteudo.dia, slideAtual]);
-
   return (
     <div className="flex flex-col items-center gap-4">
-      <PhoneFrame>
-        <ExportableSlide
-          slide={slides[slideAtual]}
-          mundo={conteudo.mundo}
-          index={slideAtual}
-          total={total}
-          slideRef={slideRef}
-        />
-      </PhoneFrame>
+      {/* Main slide with layout selector */}
+      <SlideWithLayout
+        slide={slides[slideAtual]}
+        mundo={conteudo.mundo}
+        defaultLayout={slides[slideAtual].fundoClaro ? 'claro' : slides[slideAtual].tipo === 'cta' ? 'cta' : 'statement'}
+      />
+
+      {/* Slide navigation */}
       <div className="flex items-center gap-3">
         <button
           onClick={() => setSlideAtual(Math.max(0, slideAtual - 1))}
@@ -411,13 +389,21 @@ function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
           &rarr;
         </button>
         <button
-          onClick={exportarPNG}
-          disabled={exportando}
-          className="ml-2 text-[0.65rem] px-3 py-1.5 rounded-full border border-ambar/30 text-ambar/80 hover:border-ambar hover:text-ambar disabled:opacity-40 transition-colors"
+          onClick={() => setShowGrid(!showGrid)}
+          className={`ml-2 text-[0.6rem] px-2.5 py-1 rounded-md border transition-colors ${
+            showGrid ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/50 hover:text-creme-2/70'
+          }`}
         >
-          {exportando ? 'a exportar...' : 'PNG'}
+          5 layouts
         </button>
       </div>
+
+      {/* All 5 layouts grid */}
+      {showGrid && (
+        <div className="mt-2 p-3 rounded-[12px] border border-ocre/15 bg-terra-2/20">
+          <SlideLayoutGrid slide={slides[slideAtual]} mundo={conteudo.mundo} />
+        </div>
+      )}
     </div>
   );
 }
@@ -460,6 +446,109 @@ function CaptionsPanel({ conteudo }: { conteudo: ConteudoDia }) {
           <CopyButton text={captions[tab]} label="copiar caption" />
           <CopyButton text={conteudo.hashtags.join(' ')} label="copiar hashtags" />
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── MJ Prompt Generator ────────────────────────────────
+
+function PromptMJPanel({ conteudo, slideIdx }: { conteudo: ConteudoDia; slideIdx?: number }) {
+  const [prompts, setPrompts] = useState<Record<number, string>>({});
+  const [gerando, setGerando] = useState<number | null>(null);
+  const [ar, setAr] = useState('4:5');
+
+  const slides = conteudo.slides ?? [];
+  const slidesComFundo = slideIdx !== undefined
+    ? [{ slide: slides[slideIdx], idx: slideIdx }]
+    : slides.map((s, i) => ({ slide: s, idx: i })).filter(s => s.slide.tipo === 'capa' || s.slide.tipo === 'citacao' || s.slide.notaVisual);
+
+  async function gerar(slide: Slide, idx: number) {
+    setGerando(idx);
+    try {
+      const res = await fetch('/api/admin/estudio/gerar-prompt-mj', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          texto: slide.texto,
+          mundo: conteudo.mundo,
+          tipo: slide.tipo,
+          notaVisual: slide.notaVisual,
+          titulo: conteudo.titulo,
+          aspectRatio: ar,
+        }),
+      });
+      const json = await res.json();
+      if (json.prompt) {
+        setPrompts(prev => ({ ...prev, [idx]: json.prompt }));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    setGerando(null);
+  }
+
+  async function gerarTodos() {
+    for (const { slide, idx } of slidesComFundo) {
+      await gerar(slide, idx);
+    }
+  }
+
+  if (slidesComFundo.length === 0) return null;
+
+  return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ocre/70">Prompts Midjourney</p>
+        <div className="flex-1" />
+        <select
+          value={ar}
+          onChange={e => setAr(e.target.value)}
+          className="bg-transparent border border-ocre/25 rounded-md px-2 py-1 text-[0.65rem] text-creme-2/70 outline-none"
+        >
+          <option value="4:5">4:5 (IG post)</option>
+          <option value="9:16">9:16 (story/reel)</option>
+          <option value="1:1">1:1 (quadrado)</option>
+        </select>
+        <button
+          onClick={gerarTodos}
+          disabled={gerando !== null}
+          className="text-[0.65rem] px-3 py-1.5 rounded-md border border-lila/40 text-lila hover:bg-lila/10 disabled:opacity-40 transition-colors"
+        >
+          {gerando !== null ? 'a gerar...' : `gerar ${slidesComFundo.length === 1 ? 'prompt' : 'todos'}`}
+        </button>
+      </div>
+
+      <div className="space-y-2">
+        {slidesComFundo.map(({ slide, idx }) => (
+          <div key={idx} className="bg-terra-2/40 rounded-[10px] border border-ocre/10 p-3">
+            <div className="flex items-center justify-between mb-1.5">
+              <p className="text-[0.55rem] tracking-[0.15em] uppercase text-ocre/50">
+                Slide {idx + 1} &middot; {slide.tipo}
+              </p>
+              <div className="flex gap-2">
+                {!prompts[idx] && (
+                  <button
+                    onClick={() => gerar(slide, idx)}
+                    disabled={gerando !== null}
+                    className="text-[0.6rem] px-2 py-0.5 rounded border border-ocre/25 text-ocre/70 hover:text-ambar hover:border-ambar disabled:opacity-40 transition-colors"
+                  >
+                    {gerando === idx ? 'a gerar...' : 'gerar MJ'}
+                  </button>
+                )}
+                {prompts[idx] && <CopyButton text={prompts[idx]} label="copiar prompt" />}
+              </div>
+            </div>
+            {slide.notaVisual && (
+              <p className="text-creme-2/50 text-[0.7rem] italic mb-1.5">{slide.notaVisual}</p>
+            )}
+            {prompts[idx] && (
+              <p className="text-creme-2/80 text-[0.75rem] leading-relaxed font-mono bg-terra-2/50 rounded-md p-2 mt-1.5">
+                {prompts[idx]}
+              </p>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -554,6 +643,9 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
 
             {/* Captions panel */}
             <CaptionsPanel conteudo={conteudo} />
+
+            {/* MJ Prompts */}
+            {temSlides && <PromptMJPanel conteudo={conteudo} />}
 
             {/* Script completo (reels) */}
             {temReel && conteudo.reelScript && (
