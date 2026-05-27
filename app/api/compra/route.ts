@@ -42,17 +42,17 @@ export async function POST(req: Request) {
   const licenca = `VS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
 
   const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase.from('compras').insert({
+  const { error } = await supabase.from('compras').insert({
     email,
     produto_slug: body.produto_slug,
     produto_titulo: titulo,
     preco,
     paypal_order_id: orderId || null,
     licenca,
-  }).select().single();
+  });
 
   if (error) {
-    return NextResponse.json({ erro: error.message }, { status: 500 });
+    console.error('Compra insert erro:', error.message);
   }
 
   // Email ao cliente (recibo + licenca)
