@@ -100,5 +100,5 @@ export async function POST(req: Request) {
 </div>`);
   }
 
-  return NextResponse.json({ ok: true, compra: data });
+  return NextResponse.json({ ok: true });
 }
