@@ -10,6 +10,7 @@ type Compra = {
   produto_titulo: string;
   preco: string;
   paypal_order_id: string | null;
+  licenca: string | null;
   created_at: string;
 };
 
@@ -38,26 +39,34 @@ export default function ComprasPage() {
       {compras.length === 0 ? (
         <p className="text-creme-2/70 italic font-serif">Sem compras ainda.</p>
       ) : (
-        <table className="w-full text-left">
-          <thead>
-            <tr className="text-[0.7rem] tracking-[0.18em] uppercase text-ocre/70 border-b border-ocre/20">
-              <th className="py-3">email</th>
-              <th className="py-3">produto</th>
-              <th className="py-3">preço</th>
-              <th className="py-3">data</th>
-            </tr>
-          </thead>
-          <tbody>
-            {compras.map((c) => (
-              <tr key={c.id} className="border-b border-ocre/10">
-                <td className="py-3 text-creme text-[0.9rem]">{c.email}</td>
-                <td className="py-3 text-creme-2/80 text-[0.85rem]">{c.produto_titulo || c.produto_slug}</td>
-                <td className="py-3 text-ambar text-[0.85rem]">{c.preco}</td>
-                <td className="py-3 text-creme-2/60 text-[0.8rem]">{new Date(c.created_at).toLocaleDateString('pt-PT')}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="grid gap-4">
+          {compras.map((c) => (
+            <div key={c.id} className="border border-ocre/15 rounded-[14px] p-5 hover:bg-terra-2/30 transition-colors">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="text-creme font-serif text-[1.05rem]">{c.produto_titulo || c.produto_slug}</p>
+                  <p className="text-creme-2/70 text-[0.82rem] mt-1">{c.email}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-ambar font-serif text-[1.1rem]">{c.preco}</p>
+                  <p className="text-creme-2/50 text-[0.75rem]">{new Date(c.created_at).toLocaleDateString('pt-PT')}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 mt-3 flex-wrap">
+                {c.licenca && (
+                  <span className="text-[0.72rem] font-mono text-ocre bg-terra-2/60 px-3 py-1 rounded-md">
+                    {c.licenca}
+                  </span>
+                )}
+                {c.paypal_order_id && (
+                  <span className="text-[0.68rem] text-creme-2/40">
+                    PayPal: {c.paypal_order_id}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </main>
   );
