@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const VIVIANNE_EMAILS = ['ola@viviannedossantos.com', 'viv.saraiva@gmail.com'];
+const VIVIANNE_EMAILS = ['ola@viviannedossantos.com'];
 
 async function enviarEmail(to: string, subject: string, html: string) {
   if (!RESEND_KEY) { console.error('RESEND_API_KEY em falta'); return; }
@@ -10,7 +10,7 @@ async function enviarEmail(to: string, subject: string, html: string) {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RESEND_KEY}` },
-      body: JSON.stringify({ from: 'Vivianne dos Santos <ola@viviannedossantos.com>', to, subject, html }),
+      body: JSON.stringify({ from: 'Vivianne dos Santos <loja@viviannedossantos.com>', to, subject, html }),
     });
     if (!res.ok) {
       const err = await res.text();
