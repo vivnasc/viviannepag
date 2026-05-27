@@ -15,6 +15,9 @@ export type Slide = {
   titulo?: string;
   texto: string;
   destaque?: string;
+  bold?: string[];
+  notaVisual?: string;
+  fundoClaro?: boolean;
 };
 
 export type ReelScript = {
@@ -76,13 +79,13 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     produtoRelacionado: 'ebook-01-culpa',
     horario: '08:30',
     slides: [
-      { tipo: 'capa', texto: 'A culpa que ninguém\nte disse que era herdada', destaque: 'herdada' },
-      { tipo: 'conteudo', titulo: 'Tu conheces esta sensação', texto: 'Deitas-te e a casa finalmente está em silêncio.\nMas em vez de descansar, começas a contar:\no que não fizeste, o que disseste a mais,\no que devias ter sido e não foste.' },
-      { tipo: 'conteudo', titulo: 'A culpa não nasceu contigo', texto: 'A tua mãe sentiu-a.\nA mãe da tua mãe sentiu-a.\nPassou de geração em geração\ncomo uma mala que ninguém abriu\nmas todas carregam.' },
-      { tipo: 'conteudo', titulo: 'O que a culpa te faz', texto: '→ Compensas a mais\n→ Dizes sim quando querias dizer não\n→ Colocas-te sempre em último\n→ Ficas em alerta permanente\n→ Sentes que nunca é suficiente' },
-      { tipo: 'conteudo', titulo: 'Culpa ≠ Responsabilidade', texto: 'A culpa paralisa.\nA responsabilidade move.\n\nA culpa diz "és má mãe".\nA responsabilidade diz\n"o que posso fazer diferente?"' },
-      { tipo: 'citacao', texto: '"Ninguém diz.\nE por isso tu achas\nque és a única."', destaque: 'a única' },
-      { tipo: 'cta', texto: 'Isto é o que exploro no ebook\n"A culpa não é boa conselheira"\n\n€7 · PDF imediato\nLink na bio', destaque: 'viviannedossantos.com/loja' },
+      { tipo: 'capa', texto: 'Investigadores estudaram mães com culpa durante 15 anos. O que descobriram muda tudo.', bold: ['15 anos', 'muda tudo'], notaVisual: 'Close-up portrait of a warm middle-aged woman looking at camera with gentle knowing expression, warm afternoon light, shallow depth of field, editorial portrait style' },
+      { tipo: 'conteudo', texto: 'A culpa que sentes quando te deitas e a casa está em silêncio não nasceu contigo.', bold: ['não nasceu contigo'], notaVisual: 'Dark moody bedroom scene at night, single lamp light, unmade bed, contemplative atmosphere' },
+      { tipo: 'conteudo', texto: 'A tua mãe sentiu-a. A mãe da tua mãe sentiu-a. Passou de geração em geração. E ninguém te avisou.', bold: ['geração em geração', 'ninguém te avisou'], notaVisual: 'Old family photo album open on wooden table, sepia tones, soft light' },
+      { tipo: 'conteudo', texto: 'A ciência chama-lhe lealdade invisível. Tu chamas-lhe "sou uma má mãe."', bold: ['lealdade invisível', 'má mãe'], notaVisual: 'Woman hands holding coffee cup, seen from above, kitchen table, morning light' },
+      { tipo: 'conteudo', texto: 'Compensas a mais. Dizes sim quando o corpo grita não. Colocas-te sempre em último. E achas que és a única.', bold: ['a única'] },
+      { tipo: 'conteudo', texto: 'Não és. E a culpa não é tua. A constelação familiar prova isso.', bold: ['não é tua', 'prova isso'] },
+      { tipo: 'cta', texto: 'Escrevi tudo neste ebook. 40 páginas. €7. PDF imediato.', bold: ['€7', 'PDF imediato'], destaque: 'A culpa não é boa conselheira', fundoClaro: true },
     ],
   },
   {
@@ -133,11 +136,11 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     produtoRelacionado: 'guia-01-meu',
     horario: '08:30',
     slides: [
-      { tipo: 'capa', texto: '3 sinais de que a culpa\nestá a decidir por ti', destaque: 'a culpa' },
-      { tipo: 'conteudo', titulo: 'Sinal 1', texto: 'Dizes SIM\nquando o teu corpo\ngrita NÃO\n\nE depois sentes raiva\nde ti mesma\npor não ter dito a verdade.' },
-      { tipo: 'conteudo', titulo: 'Sinal 2', texto: 'Compensas a mais.\n\nPresente a mais.\nDisponível a mais.\nPerfeita a mais.\n\nPorque "o suficiente"\nnunca é suficiente.' },
-      { tipo: 'conteudo', titulo: 'Sinal 3', texto: 'Quando algo corre bem,\nprocuras o que correu mal.\n\nA culpa não te deixa\nficar no bom.\nPuxa-te sempre de volta\npara o que "devias ter feito".' },
-      { tipo: 'cta', texto: 'No guia "O que é meu, o que não é meu"\nensino um exercício simples\npara separar o que é teu do que carregas.\n\n€5 · Link na bio' },
+      { tipo: 'capa', texto: 'Se fazes 2 destas 3 coisas, a culpa está a decidir por ti. E tu nem percebes.', bold: ['2 destas 3', 'nem percebes'], notaVisual: 'Woman sitting on couch with hands on face, soft warm light, emotional but not dramatic, editorial style' },
+      { tipo: 'conteudo', titulo: '1.', texto: 'Dizes SIM quando o teu corpo grita NÃO. E depois odeias-te por isso.', bold: ['SIM', 'NÃO', 'odeias-te'] },
+      { tipo: 'conteudo', titulo: '2.', texto: 'Compensas. Presente a mais. Disponível a mais. Perfeita a mais. Porque "suficiente" nunca é suficiente.', bold: ['a mais', 'nunca é suficiente'] },
+      { tipo: 'conteudo', titulo: '3.', texto: 'Quando algo corre bem, procuras o que correu mal. A culpa não te deixa ficar no bom.', bold: ['correu mal', 'ficar no bom'] },
+      { tipo: 'cta', texto: 'Há um exercício de 10 minutos que separa o que é teu do que carregas. Está no guia. €5.', bold: ['10 minutos', '€5'], destaque: 'O que é meu, o que não é meu', fundoClaro: true },
     ],
   },
   {
@@ -172,12 +175,12 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     produtoRelacionado: 'guia-01-meu',
     horario: '08:30',
     slides: [
-      { tipo: 'capa', texto: 'O que é meu,\no que não é meu', destaque: 'não é meu' },
-      { tipo: 'conteudo', titulo: 'Tu carregas coisas que não são tuas', texto: 'A tristeza da tua mãe.\nA frustração do teu pai.\nO sonho que a tua avó não viveu.\n\nCarregas sem saber.\nE sofres sem perceber porquê.' },
-      { tipo: 'conteudo', titulo: 'O exercício das duas colunas', texto: 'Numa folha, divide ao meio:\n\nLado esquerdo: O QUE É MEU\n(os meus sentimentos, as minhas escolhas)\n\nLado direito: O QUE NÃO É MEU\n(dores herdadas, expectativas de outros)' },
-      { tipo: 'conteudo', titulo: 'Uma frase para cada item', texto: 'Para o que é teu:\n"Isto é meu. Cuido disto."\n\nPara o que não é teu:\n"Isto não é meu.\nDevolvo com amor."' },
-      { tipo: 'citacao', texto: '"Não precisas de largar o amor.\nPrecisas de largar o peso."' },
-      { tipo: 'cta', texto: 'O guia completo com exercício guiado\nestá disponível por €5\n\nLink na bio' },
+      { tipo: 'capa', texto: 'Há um exercício de 10 minutos que te mostra o que carregas sem ser teu. Funciona em qualquer idade.', bold: ['10 minutos', 'sem ser teu', 'qualquer idade'], notaVisual: 'Warm close-up of woman hands writing in journal on wooden table, soft light, contemplative mood' },
+      { tipo: 'conteudo', texto: 'Carregas a tristeza da tua mãe. A frustração do teu pai. O sonho que a tua avó não viveu. Sem saber.', bold: ['Sem saber'] },
+      { tipo: 'conteudo', texto: 'Uma folha. Dois lados. Lado esquerdo: o que é MEU. Lado direito: o que NÃO É MEU.', bold: ['MEU', 'NÃO É MEU'] },
+      { tipo: 'conteudo', texto: 'Para o que é teu: "Cuido disto." Para o que não é teu: "Devolvo com amor."', bold: ['Cuido disto', 'Devolvo com amor'] },
+      { tipo: 'citacao', texto: 'Não precisas de largar o amor. Precisas de largar o peso.', bold: ['o peso'] },
+      { tipo: 'cta', texto: 'Guia completo com exercício passo a passo. €5. PDF imediato.', bold: ['€5', 'PDF imediato'], destaque: 'O que é meu, o que não é meu', fundoClaro: true },
     ],
   },
   {
@@ -191,11 +194,11 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     produtoRelacionado: 'ebook-01-culpa',
     horario: '10:00',
     slides: [
-      { tipo: 'capa', texto: 'Para a mãe que carrega\no que nunca foi seu', destaque: 'nunca foi seu' },
-      { tipo: 'conteudo', titulo: 'A culpa não é boa conselheira', texto: 'EBOOK · €7\n\nA culpa materna:\nde onde vem,\no que te impede de fazer,\ne como começar a largar.' },
-      { tipo: 'conteudo', titulo: 'O que é meu, o que não é meu', texto: 'GUIA · €5\n\nUm exercício para separar\na tua responsabilidade\ndo que carregas pelos outros.' },
-      { tipo: 'conteudo', titulo: '7 frases para dizer não sem culpa', texto: 'GUIA · €5\n\nFrases prontas\npara pôr limites\nquando a culpa aperta.' },
-      { tipo: 'cta', texto: 'Todos disponíveis\nem PDF imediato\n\nviviannedossantos.com/loja', destaque: 'Link na bio' },
+      { tipo: 'capa', texto: 'Tu carregas 3 coisas que não são tuas. E cada uma tem solução.', bold: ['3 coisas', 'não são tuas', 'solução'], notaVisual: 'Warm portrait of woman from behind looking at sunset horizon, golden hour, editorial style' },
+      { tipo: 'conteudo', texto: 'A CULPA. 40 páginas sobre de onde vem e como largar. Ebook. €7.', bold: ['A CULPA', '€7'], destaque: 'A culpa não é boa conselheira' },
+      { tipo: 'conteudo', texto: 'O PESO. Exercício para separar o que é teu do que herdaste. Guia. €5.', bold: ['O PESO', '€5'], destaque: 'O que é meu, o que não é meu' },
+      { tipo: 'conteudo', texto: 'OS LIMITES. 7 frases prontas para dizer não sem culpa. Guia. €5.', bold: ['OS LIMITES', '€5'], destaque: '7 frases para dizer não sem culpa' },
+      { tipo: 'cta', texto: 'Tudo em PDF imediato. Começa por onde te dói.', bold: ['PDF imediato', 'onde te dói'], destaque: 'viviannedossantos.com/loja', fundoClaro: true },
     ],
   },
 
@@ -211,13 +214,13 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     produtoRelacionado: 'ebook-02-herdaste',
     horario: '08:30',
     slides: [
-      { tipo: 'capa', texto: 'Porque repetes o que juraste\nnunca repetir', destaque: 'nunca repetir' },
-      { tipo: 'conteudo', titulo: 'A frase mais dita', texto: '"Nunca serei como a minha mãe."\n\nÉ talvez a frase mais dita,\nmais sentida, e mais traída\nna história das mulheres.' },
-      { tipo: 'conteudo', titulo: 'As lealdades invisíveis', texto: 'Na constelação familiar\nchamamos-lhes lealdades invisíveis.\n\nSão pactos silenciosos com a tua família:\nrepetir o sofrimento deles\npara não os trair.' },
-      { tipo: 'conteudo', titulo: 'Como se manifesta', texto: '→ Sabotagem quando começa a correr bem\n→ Sentir que não mereces mais do que tiveram\n→ Repetir relações com a mesma dinâmica\n→ Escolher sempre o difícil\n→ Sentir culpa quando estás feliz' },
-      { tipo: 'conteudo', titulo: 'O primeiro passo', texto: 'Não é lutar contra.\nNão é "quebrar o ciclo" com força.\n\nÉ ver. Reconhecer.\nDizer: "vejo o que carrego.\nE devolvendo com amor,\nescolho o meu caminho."' },
-      { tipo: 'citacao', texto: '"Abres a boca e sai aquela frase.\nCom aquele tom.\nÉ a voz da tua mãe."' },
-      { tipo: 'cta', texto: 'Ebook "O que herdaste sem saber"\n€7 · PDF imediato\n\nLink na bio' },
+      { tipo: 'capa', texto: '"Nunca serei como a minha mãe." É a frase mais dita, mais sentida, e mais traída na história das mulheres.', bold: ['mais traída', 'história das mulheres'], notaVisual: 'Two women of different generations, mother and daughter, looking away from each other, warm tones, emotional editorial portrait' },
+      { tipo: 'conteudo', texto: 'Abres a boca e sai aquela frase. Com aquele tom. E percebes: é a voz da tua mãe.', bold: ['a voz da tua mãe'] },
+      { tipo: 'conteudo', texto: 'A constelação familiar chama-lhe lealdade invisível. Um pacto silencioso: repetir o sofrimento deles para não os trair.', bold: ['lealdade invisível', 'não os trair'] },
+      { tipo: 'conteudo', texto: 'Sabotagem quando corre bem. Sentir que não mereces mais do que tiveram. Escolher sempre o difícil. Culpa quando estás feliz.', bold: ['não mereces', 'Culpa quando estás feliz'] },
+      { tipo: 'conteudo', texto: 'Não se quebra com força. Quebra-se quando se vê. "Vejo o que carrego. E devolvo com amor."', bold: ['quando se vê', 'devolvo com amor'] },
+      { tipo: 'citacao', texto: 'O que herdaste não te define. Mas enquanto não o vires, vai decidir por ti.', bold: ['não te define', 'decidir por ti'] },
+      { tipo: 'cta', texto: 'Ebook com tudo o que a constelação familiar revela sobre heranças invisíveis. €7. PDF imediato.', bold: ['€7', 'PDF imediato'], destaque: 'O que herdaste sem saber', fundoClaro: true },
     ],
   },
   {

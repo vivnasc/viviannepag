@@ -45,12 +45,50 @@ function CopyButton({ text, label }: { text: string; label: string }) {
   );
 }
 
-// ─── Slide rendering (inspired by Escola pipeline's visual system) ──────
+// ─── Slide rendering (Modo Caverna-level impact) ──────
+
+function renderBoldText(text: string, boldWords: string[] | undefined, accentColor: string, baseColor: string) {
+  if (!boldWords || boldWords.length === 0) return <span style={{ color: baseColor }}>{text}</span>;
+
+  const parts: { text: string; isBold: boolean }[] = [];
+  let remaining = text;
+
+  while (remaining.length > 0) {
+    let earliest = -1;
+    let earliestWord = '';
+    for (const word of boldWords) {
+      const idx = remaining.indexOf(word);
+      if (idx !== -1 && (earliest === -1 || idx < earliest)) {
+        earliest = idx;
+        earliestWord = word;
+      }
+    }
+    if (earliest === -1) {
+      parts.push({ text: remaining, isBold: false });
+      break;
+    }
+    if (earliest > 0) parts.push({ text: remaining.substring(0, earliest), isBold: false });
+    parts.push({ text: earliestWord, isBold: true });
+    remaining = remaining.substring(earliest + earliestWord.length);
+  }
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.isBold ? (
+          <strong key={i} style={{ color: accentColor, fontWeight: 800 }}>{part.text}</strong>
+        ) : (
+          <span key={i} style={{ color: baseColor }}>{part.text}</span>
+        )
+      )}
+    </>
+  );
+}
 
 function GrainOverlay() {
   return (
     <div
-      className="absolute inset-0 pointer-events-none z-[2] opacity-[0.04]"
+      className="absolute inset-0 pointer-events-none z-[2] opacity-[0.06]"
       style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
         backgroundRepeat: 'repeat',
@@ -60,25 +98,44 @@ function GrainOverlay() {
   );
 }
 
-function GlowEffect({ color }: { color: string }) {
+function PaperTexture() {
   return (
     <div
-      className="absolute inset-0 pointer-events-none z-[1]"
+      className="absolute inset-0 pointer-events-none z-[1] opacity-[0.15]"
       style={{
-        background: `radial-gradient(ellipse 60% 50% at 50% 45%, ${color}18, transparent 70%)`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='result' lighting-color='%23fff' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E")`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '256px 256px',
       }}
     />
   );
 }
 
-function VignetteOverlay() {
+function BrandWatermark({ light }: { light?: boolean }) {
   return (
-    <div
-      className="absolute inset-0 pointer-events-none z-[3]"
-      style={{
-        boxShadow: 'inset 0 0 60px 10px rgba(0,0,0,0.25)',
-      }}
-    />
+    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[7] flex flex-col items-center gap-0.5">
+      <div
+        className="w-5 h-5 rounded-full flex items-center justify-center text-[0.4rem] font-bold"
+        style={{
+          background: light ? 'rgba(42,28,18,0.12)' : 'rgba(242,232,220,0.1)',
+          color: light ? '#2A1C12' : '#F2E8DC',
+          border: `1px solid ${light ? 'rgba(42,28,18,0.15)' : 'rgba(242,232,220,0.12)'}`,
+        }}
+      >
+        V
+      </div>
+    </div>
+  );
+}
+
+function SwipeCTA({ color }: { color: string }) {
+  return (
+    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-[7] flex items-center gap-2">
+      <span className="text-[0.55rem] tracking-[0.2em] uppercase" style={{ color, opacity: 0.5 }}>
+        Desliza para o lado
+      </span>
+      <span className="text-[0.7rem]" style={{ color, opacity: 0.5 }}>&rarr;</span>
+    </div>
   );
 }
 
@@ -104,124 +161,129 @@ function ExportableSlide({ slide, mundo, index, total, slideRef }: {
   const isCapa = slide.tipo === 'capa';
   const isCitacao = slide.tipo === 'citacao';
   const isCta = slide.tipo === 'cta';
+  const isLight = slide.fundoClaro ?? false;
 
-  const bgStyle = isCapa
-    ? { background: `linear-gradient(160deg, ${p.bg}, ${p.bg2})` }
+  const textColor = isLight ? '#1a1410' : p.texto;
+  const accentColor = isLight ? p.bg : p.destaque;
+
+  const bgStyle = isLight
+    ? { background: '#f5f0e8' }
+    : isCapa
+    ? { background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }
     : isCitacao
-    ? { background: `linear-gradient(160deg, ${p.bg2}, ${p.bg})` }
-    : isCta
-    ? { background: `linear-gradient(160deg, ${p.bg}, ${p.destaque}15)` }
-    : { background: p.bg2 };
+    ? { background: `linear-gradient(175deg, ${p.bg2}, ${p.bg}cc)` }
+    : { background: `linear-gradient(175deg, ${p.bg2}ee, ${p.bg2})` };
 
   return (
     <div
       ref={slideRef}
-      className="w-full h-full flex flex-col justify-center items-center px-8 py-12 text-center relative overflow-hidden"
+      className="w-full h-full flex flex-col relative overflow-hidden"
       style={bgStyle}
     >
       <GrainOverlay />
-      <GlowEffect color={p.destaque} />
-      <VignetteOverlay />
+      {isLight && <PaperTexture />}
+      {!isLight && (
+        <div
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.35)' }}
+        />
+      )}
 
-      <div className="relative z-[5] flex flex-col items-center justify-center w-full h-full">
+      <BrandWatermark light={isLight} />
+
+      {/* Main content area — text fills most of the slide */}
+      <div className="relative z-[5] flex flex-col justify-end flex-1 px-6 pb-12 pt-14">
+
         {isCapa && (
           <>
-            <p className="text-[0.58rem] tracking-[0.35em] uppercase mb-8" style={{ color: p.destaque, opacity: 0.6 }}>
-              vivianne dos santos
-            </p>
-            <h2
-              className="font-serif font-light text-[1.4rem] leading-[1.12] mb-6 whitespace-pre-line"
-              style={{ color: p.texto }}
+            {slide.notaVisual && (
+              <div className="absolute inset-0 z-[-1] flex items-center justify-center">
+                <div
+                  className="w-full h-full opacity-20"
+                  style={{
+                    background: `radial-gradient(ellipse 80% 60% at 65% 35%, ${p.bg}88, transparent)`,
+                  }}
+                />
+              </div>
+            )}
+            <p
+              className="font-sans text-[1.28rem] leading-[1.28] font-normal mb-4"
+              style={{ color: textColor }}
             >
-              {slide.destaque
-                ? slide.texto.split(slide.destaque).map((part, i, arr) => (
-                    <span key={i}>
-                      {part}
-                      {i < arr.length - 1 && <em className="italic" style={{ color: p.destaque }}>{slide.destaque}</em>}
-                    </span>
-                  ))
-                : slide.texto}
-            </h2>
-            <div className="w-12 h-px mt-4" style={{ background: p.destaque, opacity: 0.3 }} />
-            <p className="text-[0.5rem] tracking-[0.25em] uppercase mt-6" style={{ color: p.texto, opacity: 0.3 }}>
-              desliza
+              {renderBoldText(slide.texto, slide.bold, accentColor, textColor)}
             </p>
+            <SwipeCTA color={textColor} />
           </>
         )}
 
         {slide.tipo === 'conteudo' && (
-          <div className="w-full text-left">
+          <div className="flex flex-col justify-center flex-1">
             {slide.titulo && (
               <p
-                className="text-[0.6rem] tracking-[0.3em] uppercase mb-5"
-                style={{ color: p.destaque, opacity: 0.7 }}
+                className="text-[0.7rem] tracking-[0.25em] uppercase mb-4 font-medium"
+                style={{ color: accentColor, opacity: 0.8 }}
               >
                 {slide.titulo}
               </p>
             )}
             <p
-              className="font-serif text-[0.92rem] leading-[1.6] whitespace-pre-line"
-              style={{ color: p.texto, opacity: 0.9 }}
+              className="font-sans text-[1.12rem] leading-[1.35] font-normal"
+              style={{ color: textColor }}
             >
-              {slide.texto}
+              {renderBoldText(slide.texto, slide.bold, accentColor, textColor)}
             </p>
           </div>
         )}
 
         {isCitacao && (
-          <>
-            <div
-              className="text-5xl mb-5 font-serif"
-              style={{ color: p.destaque, opacity: 0.2, lineHeight: 1 }}
-            >
-              &ldquo;
-            </div>
+          <div className="flex flex-col justify-center items-center flex-1 text-center px-2">
             <p
-              className="font-serif italic text-[1.08rem] leading-[1.5] whitespace-pre-line mb-6 max-w-[90%]"
-              style={{ color: p.texto }}
+              className="font-serif italic text-[1.2rem] leading-[1.4] font-light"
+              style={{ color: textColor }}
             >
-              {slide.texto.replace(/^"|"$/g, '')}
+              {renderBoldText(slide.texto.replace(/^"|"$/g, ''), slide.bold, accentColor, textColor)}
             </p>
             {slide.destaque && (
-              <p className="text-[0.6rem] tracking-[0.18em] mt-2" style={{ color: p.destaque, opacity: 0.5 }}>
+              <p className="text-[0.55rem] tracking-[0.2em] mt-6" style={{ color: accentColor, opacity: 0.5 }}>
                 {slide.destaque}
               </p>
             )}
-          </>
+          </div>
         )}
 
         {isCta && (
-          <>
-            <div
-              className="w-10 h-10 rounded-full mb-7 flex items-center justify-center"
-              style={{ background: p.destaque + '18', border: `1px solid ${p.destaque}30` }}
-            >
-              <span className="text-base" style={{ color: p.destaque }}>&#8599;</span>
-            </div>
+          <div className="flex flex-col justify-center flex-1">
             <p
-              className="font-serif text-[0.88rem] leading-[1.6] whitespace-pre-line mb-6"
-              style={{ color: p.texto, opacity: 0.9 }}
+              className="font-sans text-[1.1rem] leading-[1.35] font-normal mb-5"
+              style={{ color: textColor }}
             >
-              {slide.texto}
+              {renderBoldText(slide.texto, slide.bold, accentColor, textColor)}
             </p>
             {slide.destaque && (
               <p
-                className="text-[0.68rem] tracking-[0.15em] mt-3 px-5 py-2.5 rounded-full"
-                style={{ background: p.destaque + '15', color: p.destaque, border: `1px solid ${p.destaque}25` }}
+                className="text-[0.62rem] italic font-serif mt-2"
+                style={{ color: accentColor, opacity: 0.7 }}
               >
                 {slide.destaque}
               </p>
             )}
-          </>
+            <div className="mt-5 flex items-center gap-2">
+              <span className="text-[1rem]" style={{ color: accentColor }}>&rarr;</span>
+              <span className="text-[0.6rem] tracking-[0.15em] uppercase" style={{ color: textColor, opacity: 0.4 }}>
+                link na bio
+              </span>
+            </div>
+          </div>
         )}
       </div>
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-[6]">
+      {/* Slide dots */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-[6]">
         {Array.from({ length: total }).map((_, i) => (
           <div
             key={i}
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: i === index ? p.destaque : p.texto + '25' }}
+            className="w-[5px] h-[5px] rounded-full"
+            style={{ background: i === index ? accentColor : (textColor + '25') }}
           />
         ))}
       </div>
