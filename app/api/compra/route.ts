@@ -10,7 +10,7 @@ async function enviarEmail(to: string, subject: string, html: string) {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RESEND_KEY}` },
-      body: JSON.stringify({ from: 'Vivianne dos Santos <loja@viviannedossantos.com>', to, subject, html }),
+      body: JSON.stringify({ from: 'Vivianne dos Santos <noreply@viviannedossantos.com>', to, subject, html }),
     });
     if (!res.ok) {
       const err = await res.text();
