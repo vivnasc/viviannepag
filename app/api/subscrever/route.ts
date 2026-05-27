@@ -41,7 +41,7 @@ export async function POST(req: Request) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RESEND_KEY}` },
         body: JSON.stringify({
-          from: 'Vivianne dos Santos <ola@viviannedossantos.com>',
+          from: 'Vivianne dos Santos <loja@viviannedossantos.com>',
           to: email,
           subject: isEn ? 'Thank you for staying close.' : 'Obrigada por ficares perto.',
           html: `

@@ -3,7 +3,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const BUCKET = 'escritos';
-const FROM = 'Vivianne dos Santos <ola@viviannedossantos.com>';
+const FROM = 'Vivianne dos Santos <loja@viviannedossantos.com>';
 
 export async function POST(req: Request) {
   const body = (await req.json()) as {

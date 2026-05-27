@@ -31,9 +31,6 @@ export default function ComprasPage() {
           <h1 className="font-serif font-light text-creme text-3xl">compras</h1>
           <p className="text-creme-2/60 text-sm mt-1">{compras.length} {compras.length === 1 ? 'compra' : 'compras'}</p>
         </div>
-        <Link href="/admin" className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] lowercase no-underline">
-          ← voltar
-        </Link>
       </header>
 
       {compras.length === 0 ? (
