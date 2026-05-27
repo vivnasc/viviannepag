@@ -22,13 +22,20 @@ const DB_NAME = 'estudio-imagens';
 const DB_STORE = 'slides';
 const DB_VERSION = 1;
 
+let cachedDB: IDBDatabase | null = null;
+
 function openDB(): Promise<IDBDatabase> {
+  if (cachedDB) return Promise.resolve(cachedDB);
   return new Promise((resolve, reject) => {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
     req.onupgradeneeded = () => {
       req.result.createObjectStore(DB_STORE);
     };
-    req.onsuccess = () => resolve(req.result);
+    req.onsuccess = () => {
+      cachedDB = req.result;
+      cachedDB.onclose = () => { cachedDB = null; };
+      resolve(cachedDB);
+    };
     req.onerror = () => reject(req.error);
   });
 }
@@ -88,7 +95,8 @@ function useSlideImage(slideKey: string) {
 // ─── Helpers ────────────────────────────────────────────
 
 function renderBoldText(text: string, boldWords: string[] | undefined, accentColor: string, baseColor: string) {
-  if (!boldWords || boldWords.length === 0) return <span style={{ color: baseColor }}>{text}</span>;
+  const words = boldWords?.filter(w => w.length > 0);
+  if (!words || words.length === 0) return <span style={{ color: baseColor }}>{text}</span>;
 
   const parts: { text: string; isBold: boolean }[] = [];
   let remaining = text;
@@ -96,7 +104,7 @@ function renderBoldText(text: string, boldWords: string[] | undefined, accentCol
   while (remaining.length > 0) {
     let earliest = -1;
     let earliestWord = '';
-    for (const word of boldWords) {
+    for (const word of words) {
       const idx = remaining.indexOf(word);
       if (idx !== -1 && (earliest === -1 || idx < earliest)) {
         earliest = idx;
@@ -151,36 +159,43 @@ function PaperTexture() {
   );
 }
 
-function MundoIcon({ mundo, size = 16 }: { mundo: string; size?: number }) {
-  const s = `width:${size}px;height:${size}px;flex-shrink:0`;
+function MundoIcon({ mundo, size = 16, light }: { mundo: string; size?: number; light?: boolean }) {
   switch (mundo) {
-    case 'freeme':
+    case 'freeme': {
+      const c = light ? '#6B3A28' : '#9A5A43';
       return (
         <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
-          <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="#9A5A43" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke={c} strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
-    case 'infonte':
+    }
+    case 'infonte': {
+      const c = light ? '#8C6A20' : '#EBAE4A';
+      const c2 = light ? '#9A7525' : '#F4C56A';
       return (
         <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
-          <path d="M256 116 C198 218 166 282 166 334 A90 90 0 0 0 346 334 C346 282 314 218 256 116 Z" fill="none" stroke="#EBAE4A" strokeWidth="28" strokeLinejoin="round" />
-          <circle cx="256" cy="338" r="34" fill="#F4C56A" />
+          <path d="M256 116 C198 218 166 282 166 334 A90 90 0 0 0 346 334 C346 282 314 218 256 116 Z" fill="none" stroke={c} strokeWidth="28" strokeLinejoin="round" />
+          <circle cx="256" cy="338" r="34" fill={c2} />
         </svg>
       );
-    case 'synchim':
+    }
+    case 'synchim': {
+      const c = light ? '#8B2235' : '#E08496';
       return (
         <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
           <g transform="translate(256,256)">
-            <rect x="-150" y="-150" width="300" height="300" fill="none" stroke="#E08496" strokeWidth="28" />
-            <rect x="-150" y="-150" width="300" height="300" transform="rotate(45)" fill="none" stroke="#E08496" strokeWidth="28" />
+            <rect x="-150" y="-150" width="300" height="300" fill="none" stroke={c} strokeWidth="28" />
+            <rect x="-150" y="-150" width="300" height="300" transform="rotate(45)" fill="none" stroke={c} strokeWidth="28" />
             <circle r="46" fill="#8B2235" />
           </g>
         </svg>
       );
-    case 'escola':
+    }
+    case 'escola': {
+      const c = light ? '#7A5FB8' : '#C9B6FA';
       return (
         <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
-          <g transform="translate(256,256)" fill="none" stroke="#C9B6FA" strokeWidth="28" strokeLinecap="round">
+          <g transform="translate(256,256)" fill="none" stroke={c} strokeWidth="28" strokeLinecap="round">
             <ellipse cx="0" cy="-108" rx="34" ry="86" />
             <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(51.4)" />
             <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(102.8)" />
@@ -189,20 +204,24 @@ function MundoIcon({ mundo, size = 16 }: { mundo: string; size?: number }) {
             <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(257.1)" />
             <ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(308.6)" />
           </g>
-          <circle cx="256" cy="256" r="20" fill="#C9B6FA" />
+          <circle cx="256" cy="256" r="20" fill={c} />
         </svg>
       );
-    default: // autora
+    }
+    default: {
+      const c = light ? '#8C6A20' : '#EBAE4A';
+      const c2 = light ? '#9A7525' : '#F4C56A';
       return (
         <svg viewBox="0 0 512 512" style={{ width: size, height: size, flexShrink: 0 }}>
-          <g fill="none" stroke="#EBAE4A" strokeWidth="28" strokeLinecap="round">
+          <g fill="none" stroke={c} strokeWidth="28" strokeLinecap="round">
             <path d="M170 130 C170 270 200 340 248 374" />
             <path d="M342 130 C342 270 312 340 264 374" />
           </g>
-          <circle cx="256" cy="244" r="22" fill="#F4C56A" />
-          <path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke="#F4C56A" strokeWidth="18" strokeLinecap="round" />
+          <circle cx="256" cy="244" r="22" fill={c2} />
+          <path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke={c2} strokeWidth="18" strokeLinecap="round" />
         </svg>
       );
+    }
   }
 }
 
@@ -211,7 +230,7 @@ function BrandTop({ mundo, light }: { mundo: string; light?: boolean }) {
   const name = mundo === 'autora' ? 'Vivianne dos Santos' : PALETAS[mundo as Mundo]?.nome ?? 'Vivianne';
   return (
     <div className="flex items-center gap-[5px]">
-      <MundoIcon mundo={mundo} size={18} />
+      <MundoIcon mundo={mundo} size={18} light={light} />
       <span className="text-[8px] font-serif italic" style={{ color: c, opacity: 0.6 }}>
         {name}
       </span>
@@ -223,7 +242,7 @@ function BrandBottom({ mundo, light }: { mundo: string; light?: boolean }) {
   const c = light ? '#2A1C12' : '#F2E8DC';
   return (
     <div className="flex items-center gap-[4px] mt-1">
-      <MundoIcon mundo={mundo} size={10} />
+      <MundoIcon mundo={mundo} size={10} light={light} />
       <span className="text-[6px] tracking-[0.1em]" style={{ color: c, opacity: 0.35 }}>
         viviannedossantos
       </span>
@@ -587,7 +606,7 @@ function SlideRender({ slide, mundo, layout, slideKey }: { slide: Slide; mundo: 
 
 export function SlideLayoutGrid({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-7 gap-2">
       {(Object.keys(LAYOUT_LABELS) as Layout[]).map(layout => (
         <div key={layout} className="flex flex-col items-center gap-1">
           <div className="rounded-[8px] overflow-hidden border border-ocre/15 hover:border-ambar/40 transition-colors cursor-pointer" style={{ width: 140, aspectRatio: '4/5' }}>

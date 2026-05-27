@@ -46,45 +46,7 @@ function CopyButton({ text, label }: { text: string; label: string }) {
   );
 }
 
-// ─── Slide rendering (Modo Caverna-level impact) ──────
-
-function renderBoldText(text: string, boldWords: string[] | undefined, accentColor: string, baseColor: string) {
-  if (!boldWords || boldWords.length === 0) return <span style={{ color: baseColor }}>{text}</span>;
-
-  const parts: { text: string; isBold: boolean }[] = [];
-  let remaining = text;
-
-  while (remaining.length > 0) {
-    let earliest = -1;
-    let earliestWord = '';
-    for (const word of boldWords) {
-      const idx = remaining.indexOf(word);
-      if (idx !== -1 && (earliest === -1 || idx < earliest)) {
-        earliest = idx;
-        earliestWord = word;
-      }
-    }
-    if (earliest === -1) {
-      parts.push({ text: remaining, isBold: false });
-      break;
-    }
-    if (earliest > 0) parts.push({ text: remaining.substring(0, earliest), isBold: false });
-    parts.push({ text: earliestWord, isBold: true });
-    remaining = remaining.substring(earliest + earliestWord.length);
-  }
-
-  return (
-    <>
-      {parts.map((part, i) =>
-        part.isBold ? (
-          <strong key={i} style={{ color: accentColor, fontWeight: 800 }}>{part.text}</strong>
-        ) : (
-          <span key={i} style={{ color: baseColor }}>{part.text}</span>
-        )
-      )}
-    </>
-  );
-}
+// ─── Shared helpers (used by ReelPreview) ──────
 
 function GrainOverlay() {
   return (
@@ -99,47 +61,6 @@ function GrainOverlay() {
   );
 }
 
-function PaperTexture() {
-  return (
-    <div
-      className="absolute inset-0 pointer-events-none z-[1] opacity-[0.15]"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='result' lighting-color='%23fff' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E")`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '256px 256px',
-      }}
-    />
-  );
-}
-
-function BrandWatermark({ light }: { light?: boolean }) {
-  return (
-    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[7] flex flex-col items-center gap-0.5">
-      <div
-        className="w-5 h-5 rounded-full flex items-center justify-center text-[0.4rem] font-bold"
-        style={{
-          background: light ? 'rgba(42,28,18,0.12)' : 'rgba(242,232,220,0.1)',
-          color: light ? '#2A1C12' : '#F2E8DC',
-          border: `1px solid ${light ? 'rgba(42,28,18,0.15)' : 'rgba(242,232,220,0.12)'}`,
-        }}
-      >
-        V
-      </div>
-    </div>
-  );
-}
-
-function SwipeCTA({ color }: { color: string }) {
-  return (
-    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-[7] flex items-center gap-2">
-      <span className="text-[0.55rem] tracking-[0.2em] uppercase" style={{ color, opacity: 0.5 }}>
-        Desliza para o lado
-      </span>
-      <span className="text-[0.7rem]" style={{ color, opacity: 0.5 }}>&rarr;</span>
-    </div>
-  );
-}
-
 function PhoneFrame({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`relative mx-auto ${className}`} style={{ width: 320, maxWidth: '100%' }}>
@@ -150,144 +71,6 @@ function PhoneFrame({ children, className = '' }: { children: React.ReactNode; c
         {children}
       </div>
       <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-[5px] rounded-full bg-creme-2/15" />
-    </div>
-  );
-}
-
-function ExportableSlide({ slide, mundo, index, total, slideRef }: {
-  slide: Slide; mundo: Mundo; index: number; total: number;
-  slideRef?: React.RefObject<HTMLDivElement | null>;
-}) {
-  const p = PALETAS[mundo];
-  const isCapa = slide.tipo === 'capa';
-  const isCitacao = slide.tipo === 'citacao';
-  const isCta = slide.tipo === 'cta';
-  const isLight = slide.fundoClaro ?? false;
-
-  const textColor = isLight ? '#1a1410' : p.texto;
-  const accentColor = isLight ? p.bg : p.destaque;
-
-  const bgStyle = isLight
-    ? { background: '#f5f0e8' }
-    : isCapa
-    ? { background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }
-    : isCitacao
-    ? { background: `linear-gradient(175deg, ${p.bg2}, ${p.bg}cc)` }
-    : { background: `linear-gradient(175deg, ${p.bg2}ee, ${p.bg2})` };
-
-  return (
-    <div
-      ref={slideRef}
-      className="w-full h-full flex flex-col relative overflow-hidden"
-      style={bgStyle}
-    >
-      <GrainOverlay />
-      {isLight && <PaperTexture />}
-      {!isLight && (
-        <div
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.35)' }}
-        />
-      )}
-
-      <BrandWatermark light={isLight} />
-
-      {/* Main content area — text fills most of the slide */}
-      <div className="relative z-[5] flex flex-col justify-end flex-1 px-6 pb-12 pt-14">
-
-        {isCapa && (
-          <>
-            {slide.notaVisual && (
-              <div className="absolute inset-0 z-[-1] flex items-center justify-center">
-                <div
-                  className="w-full h-full opacity-20"
-                  style={{
-                    background: `radial-gradient(ellipse 80% 60% at 65% 35%, ${p.bg}88, transparent)`,
-                  }}
-                />
-              </div>
-            )}
-            <p
-              className="font-sans text-[1.28rem] leading-[1.28] font-normal mb-4"
-              style={{ color: textColor }}
-            >
-              {renderBoldText(slide.texto, slide.bold, accentColor, textColor)}
-            </p>
-            <SwipeCTA color={textColor} />
-          </>
-        )}
-
-        {slide.tipo === 'conteudo' && (
-          <div className="flex flex-col justify-center flex-1">
-            {slide.titulo && (
-              <p
-                className="text-[0.7rem] tracking-[0.25em] uppercase mb-4 font-medium"
-                style={{ color: accentColor, opacity: 0.8 }}
-              >
-                {slide.titulo}
-              </p>
-            )}
-            <p
-              className="font-sans text-[1.12rem] leading-[1.35] font-normal"
-              style={{ color: textColor }}
-            >
-              {renderBoldText(slide.texto, slide.bold, accentColor, textColor)}
-            </p>
-          </div>
-        )}
-
-        {isCitacao && (
-          <div className="flex flex-col justify-center items-center flex-1 text-center px-2">
-            <p
-              className="font-serif italic text-[1.2rem] leading-[1.4] font-light"
-              style={{ color: textColor }}
-            >
-              {renderBoldText(slide.texto.replace(/^"|"$/g, ''), slide.bold, accentColor, textColor)}
-            </p>
-            {slide.destaque && (
-              <p className="text-[0.55rem] tracking-[0.2em] mt-6" style={{ color: accentColor, opacity: 0.5 }}>
-                {slide.destaque}
-              </p>
-            )}
-          </div>
-        )}
-
-        {isCta && (
-          <div className="flex flex-col justify-center flex-1">
-            <p
-              className="font-sans text-[1.1rem] leading-[1.35] font-normal mb-5"
-              style={{ color: textColor }}
-            >
-              {renderBoldText(slide.texto, slide.bold, accentColor, textColor)}
-            </p>
-            {slide.destaque && (
-              <p
-                className="text-[0.62rem] italic font-serif mt-2"
-                style={{ color: accentColor, opacity: 0.7 }}
-              >
-                {slide.destaque}
-              </p>
-            )}
-            <div className="mt-5 flex items-center gap-2">
-              <span className="text-[1rem]" style={{ color: accentColor }}>&rarr;</span>
-              <span className="text-[0.6rem] tracking-[0.15em] uppercase" style={{ color: textColor, opacity: 0.4 }}>
-                link na bio
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Slide dots */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-[6]">
-        {Array.from({ length: total }).map((_, i) => (
-          <div
-            key={i}
-            className="w-[5px] h-[5px] rounded-full"
-            style={{ background: i === index ? accentColor : (textColor + '25') }}
-          />
-        ))}
-      </div>
     </div>
   );
 }
@@ -395,11 +178,11 @@ function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
             showGrid ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/50 hover:text-creme-2/70'
           }`}
         >
-          5 layouts
+          7 layouts
         </button>
       </div>
 
-      {/* All 5 layouts grid */}
+      {/* All 7 layouts grid */}
       {showGrid && (
         <div className="mt-2 p-3 rounded-[12px] border border-ocre/15 bg-terra-2/20">
           <SlideLayoutGrid slide={slides[slideAtual]} mundo={conteudo.mundo} slideKey={`dia-${conteudo.dia}-slide-${slideAtual}`} />

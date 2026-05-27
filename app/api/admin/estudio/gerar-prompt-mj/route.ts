@@ -48,6 +48,10 @@ export async function POST(req: Request) {
     aspectRatio?: string;
   };
 
+  if (!body.texto || !body.mundo || !body.tipo) {
+    return NextResponse.json({ erro: 'campos-obrigatorios', detalhe: 'texto, mundo e tipo sao obrigatorios' }, { status: 400 });
+  }
+
   const ar = body.aspectRatio ?? (body.tipo === 'capa' ? '4:5' : '1:1');
 
   const userPrompt = `Generate a Midjourney prompt for a social media slide background.
@@ -88,8 +92,7 @@ Return ONLY the prompt.`;
   });
 
   if (!res.ok) {
-    const text = await res.text();
-    return NextResponse.json({ erro: 'anthropic', detalhe: text }, { status: 500 });
+    return NextResponse.json({ erro: 'anthropic', detalhe: `Anthropic API ${res.status}` }, { status: 500 });
   }
 
   const json = await res.json();
