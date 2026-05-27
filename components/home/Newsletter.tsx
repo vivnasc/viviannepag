@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 type Estado = 'idle' | 'pending' | 'ok' | 'jaEstas' | 'erro';
 
 export function Newsletter() {
   const t = useTranslations('newsletter');
+  const locale = useLocale();
   const [estado, setEstado] = useState<Estado>('idle');
   const [email, setEmail] = useState('');
   const [honeypot, setHoneypot] = useState('');
@@ -19,7 +20,7 @@ export function Newsletter() {
       const res = await fetch('/api/subscrever', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, origem: 'site', website: honeypot }),
+        body: JSON.stringify({ email, origem: 'site', website: honeypot, locale }),
       });
       if (res.status === 200) setEstado('ok');
       else if (res.status === 409) setEstado('jaEstas');
