@@ -27,16 +27,15 @@ export async function POST(req: Request) {
     .from('subscribers')
     .insert({ email, source: origem });
 
-  if (error) {
-    if (error.code === '23505') {
-      return NextResponse.json({ erro: 'ja-subscrito' }, { status: 409 });
-    }
+  const jaExistia = error?.code === '23505';
+
+  if (error && !jaExistia) {
     return NextResponse.json({ erro: 'servidor' }, { status: 500 });
   }
 
-  if (RESEND_KEY) {
+  if (!jaExistia && RESEND_KEY) {
     try {
-      await fetch('https://api.resend.com/emails', {
+      const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RESEND_KEY}` },
         body: JSON.stringify({
@@ -59,7 +58,13 @@ export async function POST(req: Request) {
 </div>`,
         }),
       });
-    } catch {}
+      if (!resendRes.ok) {
+        const err = await resendRes.text();
+        console.error('Resend newsletter erro:', err);
+      }
+    } catch (e) {
+      console.error('Resend newsletter catch:', e);
+    }
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
