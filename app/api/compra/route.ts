@@ -100,5 +100,5 @@ export async function POST(req: Request) {
 </div>`);
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, licenca });
 }

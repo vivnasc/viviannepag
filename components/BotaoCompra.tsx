@@ -24,6 +24,7 @@ export function BotaoCompra({
   checkoutUrl?: string | null;
 }) {
   const [email, setEmail] = useState('');
+  const [licenca, setLicenca] = useState<string | null>(null);
   const [emailValido, setEmailValido] = useState(false);
   const [pago, setPago] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
@@ -39,7 +40,7 @@ export function BotaoCompra({
   }
 
   async function registarCompra(orderId?: string) {
-    await fetch('/api/compra', {
+    const res = await fetch('/api/compra', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
@@ -50,6 +51,10 @@ export function BotaoCompra({
         paypal_order_id: orderId,
       }),
     });
+    try {
+      const json = await res.json();
+      if (json.licenca) setLicenca(json.licenca);
+    } catch {}
   }
 
   async function enviarEmail() {
@@ -105,9 +110,17 @@ export function BotaoCompra({
         <p className="text-creme-2 text-sm mb-2">
           {isPt ? 'Pagamento confirmado.' : 'Payment confirmed.'}
         </p>
-        <p className="text-creme-2/70 text-xs mb-5">
+        <p className="text-creme-2/70 text-xs mb-3">
           {email}
         </p>
+        {licenca && (
+          <div className="bg-terra-2/60 rounded-[10px] px-4 py-3 mb-5">
+            <p className="text-[0.65rem] tracking-[0.15em] uppercase text-ocre/60 mb-1">
+              {isPt ? 'licenca de uso pessoal' : 'personal use license'}
+            </p>
+            <p className="font-mono text-ambar text-[0.9rem] tracking-[0.1em]">{licenca}</p>
+          </div>
+        )}
         {downloadUrl ? <a
           href={downloadUrl}
           target="_blank"
