@@ -77,7 +77,7 @@ export function BotaoCompra({
       const json = await res.json();
       if (res.ok && json.url) { setDownloadUrl(json.url); return; }
     } catch {}
-    setDownloadUrl(`/api/download-directo?slug=${slug}`);
+    setDownloadUrl(`/api/download-directo?slug=${slug}&email=${encodeURIComponent(email.trim().toLowerCase())}`);
   }
 
   if (checkoutUrl) {
