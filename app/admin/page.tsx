@@ -26,6 +26,7 @@ export default function AdminPage() {
   const [sugestoes, setSugestoes] = useState<string | null>(null);
   const [traduzindo, setTraduzindo] = useState(false);
   const [corrigindoDatas, setCorrigindoDatas] = useState(false);
+  const [carregandoCapas, setCarregandoCapas] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -75,6 +76,21 @@ export default function AdminPage() {
     if (res.ok) {
       setMensagem(`Importados: ${json.importados.length}. Ignorados: ${json.ignorados.length}.`);
       carregar();
+    } else {
+      setMensagem(`Erro: ${json.erro}`);
+    }
+  }
+
+  async function carregarCapas() {
+    if (!confirm('Carregar capas do repo (ESCRITOS-CAPAS/) para os escritos? Atribui automaticamente pelo nome do ficheiro.')) return;
+    setCarregandoCapas(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/carregar-capas', { method: 'POST' });
+    const json = await res.json();
+    setCarregandoCapas(false);
+    if (res.ok) {
+      const falhouTxt = json.falhou?.length ? `\nFalharam: ${json.falhou.map((f: {ficheiro: string; erro?: string}) => `${f.ficheiro} (${f.erro})`).join(', ')}` : '';
+      setMensagem(`${json.sucesso}/${json.total} capas carregadas.${falhouTxt}`);
     } else {
       setMensagem(`Erro: ${json.erro}`);
     }
@@ -170,6 +186,13 @@ export default function AdminPage() {
           <h1 className="font-serif font-light text-creme text-3xl">escritos</h1>
         </div>
         <div className="flex gap-3 items-center">
+          <button
+            onClick={carregarCapas}
+            disabled={carregandoCapas}
+            className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ocre disabled:opacity-70"
+          >
+            {carregandoCapas ? 'a carregar capas…' : 'carregar capas do repo'}
+          </button>
           <button
             onClick={corrigirDatas}
             disabled={corrigindoDatas}
