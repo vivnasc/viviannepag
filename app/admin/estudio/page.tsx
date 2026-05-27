@@ -366,6 +366,7 @@ function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
       <SlideWithLayout
         slide={slides[slideAtual]}
         mundo={conteudo.mundo}
+        slideKey={`dia-${conteudo.dia}-slide-${slideAtual}`}
         defaultLayout={slides[slideAtual].fundoClaro ? 'claro' : slides[slideAtual].tipo === 'cta' ? 'cta' : 'statement'}
       />
 
@@ -401,7 +402,7 @@ function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
       {/* All 5 layouts grid */}
       {showGrid && (
         <div className="mt-2 p-3 rounded-[12px] border border-ocre/15 bg-terra-2/20">
-          <SlideLayoutGrid slide={slides[slideAtual]} mundo={conteudo.mundo} />
+          <SlideLayoutGrid slide={slides[slideAtual]} mundo={conteudo.mundo} slideKey={`dia-${conteudo.dia}-slide-${slideAtual}`} />
         </div>
       )}
     </div>
