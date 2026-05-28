@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
-const BUCKET = 'escritos';
+const BUCKET = 'capas';
 
 export async function POST() {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });

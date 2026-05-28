@@ -29,7 +29,7 @@ export default function AdminPage() {
   const [carregandoCapas, setCarregandoCapas] = useState(false);
   const [ligandoCapas, setLigandoCapas] = useState(false);
   const [diagnosticando, setDiagnosticando] = useState(false);
-  const [tornandoPublico, setTornandoPublico] = useState(false);
+  const [separando, setSeparando] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -118,13 +118,15 @@ export default function AdminPage() {
     setMensagem(JSON.stringify(json, null, 2));
   }
 
-  async function tornarBucketPublico() {
-    setTornandoPublico(true);
+  async function separarCapasPublicas() {
+    if (!confirm('Cria bucket público "capas" e copia para lá todas as imagens de capa do bucket "escritos" (que se mantém privado para os ebooks).')) return;
+    setSeparando(true);
     setMensagem(null);
-    const res = await fetch('/api/admin/tornar-bucket-publico', { method: 'POST' });
+    const res = await fetch('/api/admin/separar-capas-publicas', { method: 'POST' });
     const json = await res.json();
-    setTornandoPublico(false);
-    setMensagem(res.ok ? `OK: ${json.accao}` : `Erro: ${json.erro} ${json.detalhe ?? ''}`);
+    setSeparando(false);
+    setMensagem(JSON.stringify(json, null, 2));
+    carregar();
   }
 
   async function corrigirDatas() {
@@ -218,11 +220,11 @@ export default function AdminPage() {
         </div>
         <div className="flex gap-3 items-center">
           <button
-            onClick={tornarBucketPublico}
-            disabled={tornandoPublico}
+            onClick={separarCapasPublicas}
+            disabled={separando}
             className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ocre disabled:opacity-70"
           >
-            {tornandoPublico ? 'a tornar…' : 'tornar bucket público'}
+            {separando ? 'a separar…' : 'separar capas para bucket público'}
           </button>
           <button
             onClick={diagnosticar}

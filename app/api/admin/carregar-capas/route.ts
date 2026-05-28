@@ -5,7 +5,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const CAPAS_DIR = path.join(process.cwd(), 'ESCRITOS-CAPAS');
-const BUCKET = 'escritos';
+const BUCKET = 'capas';
 
 const MAPA: Record<string, string> = {
   'sealed_glass_bottle': 'o-dia-em-que-deixaste-de-te-explicar',
