@@ -184,21 +184,28 @@ async function gerarImagemReplicate(prompt: string, aspectRatio: string, token: 
   return output;
 }
 
-async function guardarNoSupabase(imageUrl: string, slideKey: string): Promise<string> {
+async function guardarNoSupabase(imageUrl: string, slideKey: string, mundo: string): Promise<string> {
   const supabase = getSupabaseAdmin();
   const bucket = 'viviannepag-assets';
 
-  await supabase.storage.createBucket(bucket, { public: true }).catch(() => {});
+  // Check exists first (race-safe)
+  const { data: existing } = await supabase.storage.getBucket(bucket);
+  if (!existing) {
+    const { error } = await supabase.storage.createBucket(bucket, { public: true });
+    if (error && !error.message.includes('already exists') && !error.message.includes('duplicate')) {
+      throw new Error(`createBucket: ${error.message}`);
+    }
+  }
 
   const imgRes = await fetch(imageUrl);
   if (!imgRes.ok) throw new Error(`Download imagem ${imgRes.status}`);
   const blob = await imgRes.blob();
   const buffer = Buffer.from(await blob.arrayBuffer());
 
-  // Path: estudio/dia-N/slide-IDX-TIPO-TS.jpg
+  // Path: estudio/{mundo}/dia-N/slide-IDX-LAYOUT-TS.jpg
   const diaMatch = slideKey.match(/^dia-(\d+)-slide-(\d+)-(.+)$/);
   const path = diaMatch
-    ? `estudio/dia-${diaMatch[1]}/slide-${diaMatch[2]}-${diaMatch[3]}-${Date.now()}.jpg`
+    ? `estudio/${mundo}/dia-${diaMatch[1]}/slide-${diaMatch[2]}-${diaMatch[3]}-${Date.now()}.jpg`
     : `estudio/outros/${slideKey}-${Date.now()}.jpg`;
 
   const { error } = await supabase.storage.from(bucket).upload(path, buffer, {
@@ -273,7 +280,7 @@ export async function POST(req: Request) {
     let finalUrl = replicateUrl;
     if (!body.semSupabase) {
       try {
-        finalUrl = await guardarNoSupabase(replicateUrl, body.slideKey);
+        finalUrl = await guardarNoSupabase(replicateUrl, body.slideKey, body.mundo);
       } catch (e) {
         console.error('Supabase upload failed, returning Replicate URL:', e);
       }
