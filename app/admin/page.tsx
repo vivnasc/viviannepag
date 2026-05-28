@@ -30,6 +30,7 @@ export default function AdminPage() {
   const [ligandoCapas, setLigandoCapas] = useState(false);
   const [diagnosticando, setDiagnosticando] = useState(false);
   const [separando, setSeparando] = useState(false);
+  const [removendoTravessoes, setRemovendoTravessoes] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -116,6 +117,16 @@ export default function AdminPage() {
     const json = await res.json();
     setDiagnosticando(false);
     setMensagem(JSON.stringify(json, null, 2));
+  }
+
+  async function removerTravessoes() {
+    setRemovendoTravessoes(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/remover-travessoes', { method: 'POST' });
+    const json = await res.json();
+    setRemovendoTravessoes(false);
+    setMensagem(res.ok ? `${json.alterados}/${json.total} escritos limpos.\n${(json.detalhes ?? []).join('\n')}` : `Erro: ${json.erro}`);
+    carregar();
   }
 
   async function separarCapasPublicas() {
@@ -219,12 +230,25 @@ export default function AdminPage() {
           <h1 className="font-serif font-light text-creme text-3xl">escritos</h1>
         </div>
         <div className="flex gap-3 items-center">
+          <Link
+            href="/admin/capas"
+            className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ocre no-underline inline-block"
+          >
+            auditoria de capas
+          </Link>
+          <button
+            onClick={removerTravessoes}
+            disabled={removendoTravessoes}
+            className="border border-ocre/45 text-creme-2 rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:border-ambar hover:text-ambar disabled:opacity-70"
+          >
+            {removendoTravessoes ? 'a limpar…' : 'remover travessões'}
+          </button>
           <button
             onClick={separarCapasPublicas}
             disabled={separando}
-            className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ocre disabled:opacity-70"
+            className="border border-ocre/45 text-creme-2 rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:border-ambar hover:text-ambar disabled:opacity-70"
           >
-            {separando ? 'a separar…' : 'separar capas para bucket público'}
+            {separando ? 'a separar…' : 'separar capas (re-correr)'}
           </button>
           <button
             onClick={diagnosticar}
