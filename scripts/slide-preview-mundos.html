@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #111; padding: 28px; font-family: 'Outfit', sans-serif; }
+h2 { color: #F2E8DC88; font-family: 'Fraunces', serif; font-weight: 300; font-size: 16px; margin: 0 0 14px; letter-spacing: 0.05em; }
+.row { display: flex; gap: 14px; flex-wrap: wrap; }
+.slide { width: 280px; height: 350px; border-radius: 14px; overflow: hidden; position: relative; flex-shrink: 0; }
+.grain { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 128px; }
+.vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; box-shadow: inset 0 0 80px 20px rgba(0,0,0,0.3); }
+.content { position: relative; z-index: 5; display: flex; flex-direction: column; height: 100%; padding: 16px 20px 12px; }
+.brand-top { display: flex; align-items: center; gap: 5px; }
+.brand-top span { font-family: 'Fraunces', serif; font-style: italic; font-size: 9px; opacity: 0.6; }
+.brand-bottom { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+.brand-bottom span { font-size: 6px; letter-spacing: 0.1em; opacity: 0.35; }
+.swipe { display: flex; align-items: center; gap: 5px; margin-top: 5px; }
+.swipe span { font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.35; }
+.dots { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 3px; z-index: 8; }
+.dot { width: 4px; height: 4px; border-radius: 50%; }
+.text-huge { font-family: 'Outfit', sans-serif; font-size: 21px; line-height: 1.22; font-weight: 400; }
+.text-huge b { font-weight: 800; }
+.label { font-size: 9px; color: #F2E8DC44; text-align: center; margin-top: 5px; letter-spacing: 0.12em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<h2>Icons especificos por produto · 5 mundos</h2>
+<div class="row">
+
+<!-- FREEME: spiral -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#8C4A36dd,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="20" height="20"><path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="#F2E8DC" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></svg>
+      <span style="color:#F2E8DC">FreeMe</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Tu sabes do que estou a falar. Aquela culpa que aparece quando a casa está em silêncio. E <b style="color:#EBAE4A">ninguém te disse de onde vem</b>.</p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="10" height="10"><path d="M256 256 C256 210 220 180 180 180 C130 180 100 220 100 270 C100 340 150 390 220 390 C320 390 380 320 380 220 C380 130 310 70 220 70 C120 70 50 150 50 250 C50 380 150 470 290 470 C345 470 385 455 425 425" fill="none" stroke="#EBAE4A" stroke-width="28" stroke-linecap="round" opacity="0.5"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#EBAE4A"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">FreeMe · espiral</p>
+</div>
+
+<!-- INFONTE: gota -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#B8843Ddd,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="20" height="20"><path d="M256 116 C198 218 166 282 166 334 A90 90 0 0 0 346 334 C346 282 314 218 256 116 Z" fill="none" stroke="#EBAE4A" stroke-width="28" stroke-linejoin="round" opacity="0.8"/><circle cx="256" cy="338" r="28" fill="#F4C56A" opacity="0.8"/></svg>
+      <span style="color:#F2E8DC">Infonte</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Tu fizeste tudo certo. Estudaste. Trabalhaste. E <b style="color:#EBAE4A">continuas perdida</b>. Tens <b style="color:#EBAE4A">talento a mais e clareza a menos</b>.</p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="10" height="10"><path d="M256 116 C198 218 166 282 166 334 A90 90 0 0 0 346 334 C346 282 314 218 256 116 Z" fill="none" stroke="#EBAE4A" stroke-width="28" opacity="0.5"/><circle cx="256" cy="338" r="28" fill="#F4C56A" opacity="0.5"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#EBAE4A"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">Infonte · gota</p>
+</div>
+
+<!-- SYNCHIM: quadrados -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#5A1A2Add,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="20" height="20"><g transform="translate(256,256)"><rect x="-150" y="-150" width="300" height="300" fill="none" stroke="#E08496" stroke-width="28" opacity="0.7"/><rect x="-150" y="-150" width="300" height="300" transform="rotate(45)" fill="none" stroke="#E08496" stroke-width="28" opacity="0.7"/><circle r="40" fill="#8B2235" opacity="0.8"/></g></svg>
+      <span style="color:#F2E8DC">SyncHim</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">A mesma discussão. <b style="color:#E08496">Sempre</b>. Os mesmos gatilhos. As mesmas palavras. <b style="color:#E08496">Nenhum dos dois quer isto</b>.</p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="10" height="10"><g transform="translate(256,256)"><rect x="-150" y="-150" width="300" height="300" fill="none" stroke="#E08496" stroke-width="28" opacity="0.5"/><rect x="-150" y="-150" width="300" height="300" transform="rotate(45)" fill="none" stroke="#E08496" stroke-width="28" opacity="0.5"/><circle r="40" fill="#8B2235" opacity="0.5"/></g></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#E08496"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">SyncHim · quadrados</p>
+</div>
+
+<!-- ESCOLA: mandala 7 veus -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#1A1A2Edd,#0F0F1A)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="20" height="20"><g transform="translate(256,256)" fill="none" stroke="#C9B6FA" stroke-width="28" stroke-linecap="round" opacity="0.7"><ellipse cx="0" cy="-108" rx="34" ry="86"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(51.4)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(102.8)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(154.3)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(205.7)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(257.1)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(308.6)"/></g><circle cx="256" cy="256" r="16" fill="#C9B6FA" opacity="0.7"/></svg>
+      <span style="color:#F2E8DC">Escola dos Véus</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Houve um momento em que <b style="color:#C9B6FA">deixaste de saber quem és</b>. Defines-te pela função. <b style="color:#C9B6FA">Não por ti</b>.</p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="10" height="10"><g transform="translate(256,256)" fill="none" stroke="#C9B6FA" stroke-width="28" stroke-linecap="round" opacity="0.5"><ellipse cx="0" cy="-108" rx="34" ry="86"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(51.4)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(102.8)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(154.3)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(205.7)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(257.1)"/><ellipse cx="0" cy="-108" rx="34" ry="86" transform="rotate(308.6)"/></g><circle cx="256" cy="256" r="16" fill="#C9B6FA" opacity="0.5"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#C9B6FA"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">Escola · mandala 7 veus</p>
+</div>
+
+<!-- AUTORA: gota V -->
+<div>
+<div class="slide" style="background:linear-gradient(175deg,#3A2818dd,#2A1C12)">
+  <div class="grain"></div><div class="vignette"></div>
+  <div class="content">
+    <div class="brand-top">
+      <svg viewBox="0 0 512 512" width="20" height="20"><g fill="none" stroke="#EBAE4A" stroke-width="28" stroke-linecap="round" opacity="0.7"><path d="M170 130 C170 270 200 340 248 374"/><path d="M342 130 C342 270 312 340 264 374"/></g><circle cx="256" cy="244" r="18" fill="#F4C56A" opacity="0.7"/><path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke="#F4C56A" stroke-width="18" stroke-linecap="round" opacity="0.5"/></svg>
+      <span style="color:#F2E8DC">Vivianne dos Santos</span>
+    </div>
+    <div style="flex:1"></div>
+    <p class="text-huge" style="color:#F2E8DC">Tens tudo e sentes que falta. É uma terça-feira. Porque <b style="color:#EBAE4A">o vazio não escolhe datas especiais</b> para aparecer.</p>
+    <div class="brand-bottom">
+      <svg viewBox="0 0 512 512" width="10" height="10"><g fill="none" stroke="#EBAE4A" stroke-width="28" stroke-linecap="round" opacity="0.5"><path d="M170 130 C170 270 200 340 248 374"/><path d="M342 130 C342 270 312 340 264 374"/></g><circle cx="256" cy="244" r="18" fill="#F4C56A" opacity="0.5"/></svg>
+      <span style="color:#F2E8DC">viviannedossantos</span>
+    </div>
+    <div class="swipe" style="color:#F2E8DC"><span>Desliza</span><span>→</span></div>
+  </div>
+  <div class="dots"><div class="dot" style="background:#EBAE4A"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div><div class="dot" style="background:#F2E8DC30"></div></div>
+</div>
+<p class="label">Autora · gota V</p>
+</div>
+
+</div>
+</body>
+</html>
