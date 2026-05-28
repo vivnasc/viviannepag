@@ -344,6 +344,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
   const [estado, setEstado] = useState<Record<number, 'pendente' | 'a-gerar' | 'feito' | 'erro'>>({});
   const [erros, setErros] = useState<Record<number, string>>({});
   const [batchAtivo, setBatchAtivo] = useState(false);
+  const [modelo, setModelo] = useState<'flux-1.1-pro' | 'flux-1.1-pro-ultra'>('flux-1.1-pro');
 
   const slides = conteudo.slides ?? [];
   const slidesGeraveis = slides
@@ -366,6 +367,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
           notaVisual: slide.notaVisual,
           titulo: conteudo.titulo,
           aspectRatio: '4:5',
+          modelo,
         }),
       });
       const json = await res.json();
@@ -400,9 +402,10 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
     }
   }
 
-  async function gerarTodos() {
+  async function gerarBatch(limite?: number) {
     setBatchAtivo(true);
-    for (const { slide, idx } of slidesGeraveis) {
+    const items = limite ? slidesGeraveis.slice(0, limite) : slidesGeraveis;
+    for (const { slide, idx } of items) {
       await gerarUm(slide, idx);
     }
     setBatchAtivo(false);
@@ -412,25 +415,44 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
 
   const totalFeitos = Object.values(estado).filter(s => s === 'feito').length;
   const algumAGerar = Object.values(estado).some(s => s === 'a-gerar') || batchAtivo;
+  const custoPorImagem = modelo === 'flux-1.1-pro-ultra' ? 0.06 : 0.04;
+  const custoTotal = (slidesGeraveis.length * custoPorImagem).toFixed(2);
 
   return (
     <div>
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
         <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ambar">&#10024; Gerar Imagens Auto</p>
         <div className="flex-1" />
         <span className="text-[0.6rem] text-creme-2/40">
           {totalFeitos}/{slidesGeraveis.length}
         </span>
+        <select
+          value={modelo}
+          onChange={e => setModelo(e.target.value as 'flux-1.1-pro' | 'flux-1.1-pro-ultra')}
+          disabled={algumAGerar}
+          className="bg-transparent border border-ocre/25 rounded-md px-2 py-1 text-[0.62rem] text-creme-2/70 outline-none"
+        >
+          <option value="flux-1.1-pro">Flux Pro · $0.04</option>
+          <option value="flux-1.1-pro-ultra">Flux Pro Ultra · $0.06</option>
+        </select>
         <button
-          onClick={gerarTodos}
+          onClick={() => gerarBatch(3)}
+          disabled={algumAGerar}
+          className="text-[0.65rem] px-3 py-1.5 rounded-md border border-lila/50 text-lila bg-lila/10 hover:bg-lila/20 disabled:opacity-40 transition-colors"
+          title="Gera 3 imagens primeiro para validar qualidade"
+        >
+          testar 3
+        </button>
+        <button
+          onClick={() => gerarBatch()}
           disabled={algumAGerar}
           className="text-[0.65rem] px-3 py-1.5 rounded-md border border-ambar/50 text-ambar bg-ambar/10 hover:bg-ambar/20 disabled:opacity-40 transition-colors"
         >
-          {algumAGerar ? 'a gerar...' : 'gerar todas'}
+          {algumAGerar ? 'a gerar...' : `gerar todas (~$${custoTotal})`}
         </button>
       </div>
       <p className="text-[0.7rem] text-creme-2/50 italic mb-3">
-        Claude gera prompt &rarr; Replicate cria imagem &rarr; guarda no slide. Recarrega para ver no preview.
+        Claude gera prompt &rarr; Replicate cria imagem &rarr; guarda no slide. Comeca por &quot;testar 3&quot; para validar qualidade antes de gerar tudo.
       </p>
       <div className="space-y-1.5">
         {slidesGeraveis.map(({ slide, idx }) => {
