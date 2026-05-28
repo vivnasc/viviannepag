@@ -41,7 +41,7 @@ function CardEscrito({
               width={1600}
               height={1067}
               priority
-              unoptimized={e.capa.endsWith('.svg')}
+              unoptimized
               className="w-full aspect-[3/2] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
           )}
@@ -76,7 +76,7 @@ function CardEscrito({
             alt={e.titulo}
             width={800}
             height={533}
-            unoptimized={e.capa.endsWith('.svg')}
+            unoptimized
             className="w-full aspect-[3/2] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         )}

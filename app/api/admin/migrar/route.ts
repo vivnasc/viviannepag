@@ -4,6 +4,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { limparEscrito } from '@/lib/escritos-sanitize';
 
 const ESCRITOS_DIR = path.join(process.cwd(), 'content', 'escritos');
 
@@ -57,7 +58,7 @@ export async function POST() {
         ? fm.data.toISOString().slice(0, 10)
         : String(fm.data ?? new Date().toISOString().slice(0, 10));
 
-    const row = {
+    const row = limparEscrito({
       slug,
       locale,
       titulo: String(fm.titulo ?? slug),
@@ -67,7 +68,7 @@ export async function POST() {
       capa: fm.capa ? String(fm.capa) : null,
       data: dataIso,
       publicado: fm.publicado !== false,
-    };
+    });
 
     const { error } = await supabase.from('escritos').insert(row);
 

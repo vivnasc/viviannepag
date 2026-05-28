@@ -142,7 +142,7 @@ export default async function ProdutoPage({
                     fill
                     priority
                     className="object-cover"
-                    unoptimized={p.capa.endsWith('.svg') || p.capa.endsWith('.png')}
+                    unoptimized
                   />
                   {p.badge && (
                     <span className="absolute top-4 left-4 bg-ambar text-terra text-[0.65rem] tracking-[0.14em] uppercase font-medium px-3 py-1.5 rounded-full">

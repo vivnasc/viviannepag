@@ -25,9 +25,7 @@ export default function AdminPage() {
   const [sugerindo, setSugerindo] = useState(false);
   const [sugestoes, setSugestoes] = useState<string | null>(null);
   const [traduzindo, setTraduzindo] = useState(false);
-  const [corrigindoDatas, setCorrigindoDatas] = useState(false);
   const [carregandoCapas, setCarregandoCapas] = useState(false);
-  const [ligandoCapas, setLigandoCapas] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -82,38 +80,16 @@ export default function AdminPage() {
     }
   }
 
-  async function ligarCapas() {
-    setLigandoCapas(true);
-    setMensagem(null);
-    const res = await fetch('/api/admin/ligar-capas', { method: 'POST' });
-    const json = await res.json();
-    setLigandoCapas(false);
-    setMensagem(res.ok ? `${json.ligados}/${json.total} capas ligadas.\n${(json.detalhes ?? []).join('\n')}` : `Erro: ${json.erro}`);
-    carregar();
-  }
-
-  async function carregarCapas() {
-    if (!confirm('Carregar capas do repo (ESCRITOS-CAPAS/) para os escritos? Atribui automaticamente pelo nome do ficheiro.')) return;
+  async function refazerCapas() {
+    if (!confirm('Re-fazer todas as capas a partir dos ficheiros do repo (ESCRITOS-CAPAS/). Aplica o mapa correcto, sobrescreve o que estiver mal.')) return;
     setCarregandoCapas(true);
     setMensagem(null);
-    const res = await fetch('/api/admin/carregar-capas', { method: 'POST' });
+    const res = await fetch('/api/admin/refazer-capas', { method: 'POST' });
     const json = await res.json();
     setCarregandoCapas(false);
-    if (res.ok) {
-      const falhouTxt = json.falhou?.length ? `\nFalharam: ${json.falhou.map((f: {ficheiro: string; erro?: string}) => `${f.ficheiro} (${f.erro})`).join(', ')}` : '';
-      setMensagem(`${json.sucesso}/${json.total} capas carregadas.${falhouTxt}`);
-    } else {
-      setMensagem(`Erro: ${json.erro}`);
-    }
-  }
-
-  async function corrigirDatas() {
-    setCorrigindoDatas(true);
-    setMensagem(null);
-    const res = await fetch('/api/admin/corrigir-datas', { method: 'POST' });
-    const json = await res.json();
-    setCorrigindoDatas(false);
-    setMensagem(res.ok ? `${json.corrigidos} datas corrigidas.` : `Erro: ${json.erro}`);
+    setMensagem(res.ok
+      ? `${json.atribuidos}/${json.totalEsperado} capas atribuídas.${json.semCapa?.length ? '\nSem capa: ' + json.semCapa.join(', ') : ''}`
+      : `Erro: ${json.erro}`);
     carregar();
   }
 
@@ -196,35 +172,13 @@ export default function AdminPage() {
           <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre mb-2">admin</p>
           <h1 className="font-serif font-light text-creme text-3xl">escritos</h1>
         </div>
-        <div className="flex gap-3 items-center">
-          <button
-            onClick={ligarCapas}
-            disabled={ligandoCapas}
-            className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ambar disabled:opacity-70"
+        <div className="flex gap-3 items-center flex-wrap">
+          <Link
+            href="/admin/novo"
+            className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ambar transition-colors no-underline"
           >
-            {ligandoCapas ? 'a ligar…' : 'ligar capas ao storage'}
-          </button>
-          <button
-            onClick={carregarCapas}
-            disabled={carregandoCapas}
-            className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ocre disabled:opacity-70"
-          >
-            {carregandoCapas ? 'a carregar capas…' : 'carregar capas do repo'}
-          </button>
-          <button
-            onClick={corrigirDatas}
-            disabled={corrigindoDatas}
-            className="text-rosa border border-rosa/40 hover:border-rosa rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
-          >
-            {corrigindoDatas ? 'a corrigir…' : 'corrigir datas'}
-          </button>
-          <button
-            onClick={traduzirTodos}
-            disabled={traduzindo}
-            className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
-          >
-            {traduzindo ? 'a traduzir…' : 'traduzir todos EN'}
-          </button>
+            + novo escrito
+          </Link>
           <button
             onClick={migrar}
             disabled={migrando}
@@ -233,12 +187,25 @@ export default function AdminPage() {
           >
             {migrando ? 'a importar…' : 'importar .mdx'}
           </button>
-          <Link
-            href="/admin/novo"
-            className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ambar transition-colors no-underline"
+          <button
+            onClick={traduzirTodos}
+            disabled={traduzindo}
+            className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
           >
-            + novo escrito
-          </Link>
+            {traduzindo ? 'a traduzir…' : 'traduzir EN'}
+          </button>
+          <details className="relative">
+            <summary className="text-creme-2/50 text-[0.75rem] cursor-pointer hover:text-creme list-none">mais</summary>
+            <div className="absolute right-0 mt-2 bg-terra border border-ocre/30 rounded-[10px] p-2 flex flex-col gap-1 min-w-[200px] z-10">
+              <button
+                onClick={refazerCapas}
+                disabled={carregandoCapas}
+                className="text-left text-creme-2 text-[0.78rem] px-3 py-1.5 rounded hover:bg-ocre/15 disabled:opacity-50"
+              >
+                {carregandoCapas ? 'a refazer…' : 'refazer capas do repo'}
+              </button>
+            </div>
+          </details>
           <button onClick={logout} className="text-creme-2/60 text-[0.75rem] hover:text-creme">
             sair
           </button>
@@ -246,7 +213,7 @@ export default function AdminPage() {
       </header>
 
       {mensagem && (
-        <p className="text-ambar text-sm mb-6 font-serif italic">{mensagem}</p>
+        <pre className="text-ambar text-xs mb-6 font-mono whitespace-pre-wrap break-all bg-terra/40 border border-ocre/25 rounded-[10px] p-4 max-h-[50vh] overflow-auto">{mensagem}</pre>
       )}
 
       {escritos.length > 0 && (() => {

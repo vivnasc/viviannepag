@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { limparEscrito } from '@/lib/escritos-sanitize';
 
 export const maxDuration = 300;
 
@@ -72,7 +73,7 @@ export async function POST() {
       const enResumo = summaryMatch?.[1]?.trim() ?? escrito.resumo;
       const enConteudo = bodyStart > 0 ? texto.slice(bodyStart).trim() : texto;
 
-      const { error } = await supabase.from('escritos').insert({
+      const { error } = await supabase.from('escritos').insert(limparEscrito({
         slug: escrito.slug,
         locale: 'en',
         titulo: enTitulo,
@@ -82,7 +83,7 @@ export async function POST() {
         capa: escrito.capa,
         data: escrito.data,
         publicado: escrito.publicado,
-      });
+      }));
 
       if (error) {
         erros.push(`${escrito.slug}: DB ${error.message}`);

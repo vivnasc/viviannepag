@@ -107,7 +107,7 @@ export default async function EscritoPage({
               width={1600}
               height={1067}
               priority
-              unoptimized={escrito.capa.endsWith('.svg')}
+              unoptimized
               className="w-full h-auto rounded-[16px] border border-ocre/25 object-cover"
               style={{
                 boxShadow:
