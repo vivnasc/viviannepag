@@ -341,8 +341,9 @@ function PromptMJPanel({ conteudo, slideIdx }: { conteudo: ConteudoDia; slideIdx
 // ─── Gerador Automatico de Imagens (Claude + Replicate) ──
 
 function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
-  const [estado, setEstado] = useState<Record<number, 'pendente' | 'a-gerar' | 'feito' | 'erro'>>({});
+  const [estado, setEstado] = useState<Record<number, 'pendente' | 'a-gerar' | 'feito' | 'skip' | 'erro'>>({});
   const [erros, setErros] = useState<Record<number, string>>({});
+  const [justificacoes, setJustificacoes] = useState<Record<number, string>>({});
   const [batchAtivo, setBatchAtivo] = useState(false);
   const [modelo, setModelo] = useState<'flux-1.1-pro' | 'flux-1.1-pro-ultra'>('flux-1.1-pro');
 
@@ -351,7 +352,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
     .map((s, i) => ({ slide: s, idx: i }))
     .filter(({ slide }) => slide.tipo === 'capa' || slide.tipo === 'conteudo' || slide.tipo === 'citacao');
 
-  async function gerarUm(slide: Slide, idx: number) {
+  async function gerarUm(slide: Slide, idx: number, forcarImagem = false) {
     setEstado(prev => ({ ...prev, [idx]: 'a-gerar' }));
     setErros(prev => { const n = { ...prev }; delete n[idx]; return n; });
     try {
@@ -368,10 +369,24 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
           titulo: conteudo.titulo,
           aspectRatio: '4:5',
           modelo,
+          forcarImagem,
         }),
       });
       const json = await res.json();
-      if (!res.ok || !json.imageUrl) throw new Error(json.detalhe ?? json.erro ?? 'falha');
+      if (!res.ok) throw new Error(json.detalhe ?? json.erro ?? 'falha');
+
+      if (json.skip) {
+        if (json.justificacao) {
+          setJustificacoes(prev => ({ ...prev, [idx]: json.justificacao }));
+        }
+        setEstado(prev => ({ ...prev, [idx]: 'skip' }));
+        return;
+      }
+
+      if (!json.imageUrl) throw new Error('sem imagem');
+      if (json.justificacao) {
+        setJustificacoes(prev => ({ ...prev, [idx]: json.justificacao }));
+      }
 
       const imgRes = await fetch(json.imageUrl);
       const blob = await imgRes.blob();
@@ -457,27 +472,34 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
       <div className="space-y-1.5">
         {slidesGeraveis.map(({ slide, idx }) => {
           const s = estado[idx] ?? 'pendente';
+          const just = justificacoes[idx];
           return (
-            <div key={idx} className="flex items-center gap-2 bg-terra-2/30 rounded-[8px] border border-ocre/10 px-3 py-2">
-              <span className="text-[0.6rem] text-ocre/50 w-12">Slide {idx + 1}</span>
-              <span className="text-[0.7rem] text-creme-2/70 flex-1 truncate">
-                {slide.texto.substring(0, 60)}...
-              </span>
-              <span className={`text-[0.6rem] px-2 py-0.5 rounded-full ${
-                s === 'feito' ? 'bg-ambar/20 text-ambar' :
-                s === 'a-gerar' ? 'bg-lila/15 text-lila animate-pulse' :
-                s === 'erro' ? 'bg-rosa/15 text-rosa' :
-                'bg-ocre/10 text-ocre/60'
-              }`}>
-                {s === 'feito' ? '✓ feito' : s === 'a-gerar' ? 'a gerar' : s === 'erro' ? 'erro' : 'pendente'}
-              </span>
-              <button
-                onClick={() => gerarUm(slide, idx)}
-                disabled={algumAGerar}
-                className="text-[0.6rem] px-2 py-0.5 rounded border border-ocre/25 text-ocre/70 hover:text-ambar hover:border-ambar disabled:opacity-40 transition-colors"
-              >
-                {s === 'a-gerar' ? '...' : s === 'feito' ? 'refazer' : 'gerar'}
-              </button>
+            <div key={idx} className="bg-terra-2/30 rounded-[8px] border border-ocre/10 px-3 py-2">
+              <div className="flex items-center gap-2">
+                <span className="text-[0.6rem] text-ocre/50 w-12">Slide {idx + 1}</span>
+                <span className="text-[0.7rem] text-creme-2/70 flex-1 truncate">
+                  {slide.texto.substring(0, 60)}...
+                </span>
+                <span className={`text-[0.6rem] px-2 py-0.5 rounded-full ${
+                  s === 'feito' ? 'bg-ambar/20 text-ambar' :
+                  s === 'a-gerar' ? 'bg-lila/15 text-lila animate-pulse' :
+                  s === 'skip' ? 'bg-creme-2/15 text-creme-2/60' :
+                  s === 'erro' ? 'bg-rosa/15 text-rosa' :
+                  'bg-ocre/10 text-ocre/60'
+                }`}>
+                  {s === 'feito' ? '✓ feito' : s === 'a-gerar' ? 'a gerar' : s === 'skip' ? 'só texto' : s === 'erro' ? 'erro' : 'pendente'}
+                </span>
+                <button
+                  onClick={() => gerarUm(slide, idx, s === 'skip')}
+                  disabled={algumAGerar}
+                  className="text-[0.6rem] px-2 py-0.5 rounded border border-ocre/25 text-ocre/70 hover:text-ambar hover:border-ambar disabled:opacity-40 transition-colors"
+                >
+                  {s === 'a-gerar' ? '...' : s === 'feito' ? 'refazer' : s === 'skip' ? 'forçar' : 'gerar'}
+                </button>
+              </div>
+              {just && (
+                <p className="text-[0.6rem] text-creme-2/40 italic mt-1 pl-14">{just}</p>
+              )}
             </div>
           );
         })}
