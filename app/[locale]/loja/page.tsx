@@ -134,7 +134,7 @@ export default async function LojaPage({
                           alt={p.titulo}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                          unoptimized={p.capa.endsWith('.svg')}
+                          unoptimized
                         />
                         {p.badge && (
                           <span className="absolute top-4 left-4 bg-ambar text-terra text-[0.68rem] tracking-[0.12em] uppercase font-medium px-3 py-1.5 rounded-full">
