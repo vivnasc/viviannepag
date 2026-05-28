@@ -186,7 +186,7 @@ async function gerarImagemReplicate(prompt: string, aspectRatio: string, token: 
 
 async function guardarNoSupabase(imageUrl: string, slideKey: string): Promise<string> {
   const supabase = getSupabaseAdmin();
-  const bucket = 'estudio-imagens';
+  const bucket = process.env.SUPABASE_BUCKET_ESTUDIO ?? 'viviannepag-estudio';
 
   await supabase.storage.createBucket(bucket, { public: true }).catch(() => {});
 
@@ -195,7 +195,13 @@ async function guardarNoSupabase(imageUrl: string, slideKey: string): Promise<st
   const blob = await imgRes.blob();
   const buffer = Buffer.from(await blob.arrayBuffer());
 
-  const path = `${slideKey}-${Date.now()}.jpg`;
+  // Path organizado: dia-N/slide-IDX-TIPO-TS.jpg
+  // ex: dia-1/slide-0-foto-fundo-1719834012345.jpg
+  const diaMatch = slideKey.match(/^dia-(\d+)-slide-(\d+)-(.+)$/);
+  const path = diaMatch
+    ? `dia-${diaMatch[1]}/slide-${diaMatch[2]}-${diaMatch[3]}-${Date.now()}.jpg`
+    : `outros/${slideKey}-${Date.now()}.jpg`;
+
   const { error } = await supabase.storage.from(bucket).upload(path, buffer, {
     contentType: 'image/jpeg',
     upsert: true,
