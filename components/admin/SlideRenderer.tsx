@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect, type DragEvent } from 'react';
+import { useState, useRef, useCallback, type DragEvent } from 'react';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { PALETAS } from '@/lib/estudio-conteudo';
+import { useSlideImage } from '@/lib/estudio-imagens-db';
 
 export type Layout = 'foto-fundo' | 'foto-topo' | 'foto-baixo' | 'foto-lado' | 'statement' | 'claro' | 'cta';
 
@@ -15,82 +16,6 @@ const LAYOUT_LABELS: Record<Layout, string> = {
   claro: 'Claro',
   cta: 'CTA',
 };
-
-// ─── IndexedDB image store ──────────────────────────────
-
-const DB_NAME = 'estudio-imagens';
-const DB_STORE = 'slides';
-const DB_VERSION = 1;
-
-let cachedDB: IDBDatabase | null = null;
-
-function openDB(): Promise<IDBDatabase> {
-  if (cachedDB) return Promise.resolve(cachedDB);
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = () => {
-      req.result.createObjectStore(DB_STORE);
-    };
-    req.onsuccess = () => {
-      cachedDB = req.result;
-      cachedDB.onclose = () => { cachedDB = null; };
-      resolve(cachedDB);
-    };
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function saveImage(key: string, dataUrl: string) {
-  const db = await openDB();
-  return new Promise<void>((resolve, reject) => {
-    const tx = db.transaction(DB_STORE, 'readwrite');
-    tx.objectStore(DB_STORE).put(dataUrl, key);
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
-}
-
-async function loadImage(key: string): Promise<string | null> {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(DB_STORE, 'readonly');
-    const req = tx.objectStore(DB_STORE).get(key);
-    req.onsuccess = () => resolve((req.result as string) ?? null);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function deleteImage(key: string) {
-  const db = await openDB();
-  return new Promise<void>((resolve, reject) => {
-    const tx = db.transaction(DB_STORE, 'readwrite');
-    tx.objectStore(DB_STORE).delete(key);
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
-}
-
-// ─── Hook: use stored image ─────────────────────────────
-
-function useSlideImage(slideKey: string) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    loadImage(slideKey).then(setImageUrl).catch(() => {});
-  }, [slideKey]);
-
-  const setImage = useCallback(async (dataUrl: string) => {
-    await saveImage(slideKey, dataUrl);
-    setImageUrl(dataUrl);
-  }, [slideKey]);
-
-  const clearImage = useCallback(async () => {
-    await deleteImage(slideKey);
-    setImageUrl(null);
-  }, [slideKey]);
-
-  return { imageUrl, setImage, clearImage };
-}
 
 // ─── Helpers ────────────────────────────────────────────
 
