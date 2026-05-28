@@ -55,3 +55,4 @@ Artigos: aprofundam o diagnóstico, param antes da solução. A solução vive n
 4. Primeiro artigo publicado (`o-no`).
 5. PWA (manifest + service worker), deploy final na Vercel.
 trigger deploy
+Thu May 28 04:22:12 UTC 2026
