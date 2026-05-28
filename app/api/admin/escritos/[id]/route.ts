@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { limparEscrito } from '@/lib/escritos-sanitize';
 
 export async function PUT(
   req: Request,
@@ -26,6 +27,8 @@ export async function PUT(
   ]) {
     if (key in body) allowed[key] = body[key];
   }
+  const limpo = limparEscrito(allowed as { titulo?: unknown; resumo?: unknown; conteudo?: unknown });
+  Object.assign(allowed, limpo);
   allowed.updated_at = new Date().toISOString();
 
   const supabase = getSupabaseAdmin();

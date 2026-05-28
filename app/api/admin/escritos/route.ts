@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { limparEscrito } from '@/lib/escritos-sanitize';
 
 export async function GET() {
   if (!(await isAdmin())) {
@@ -38,21 +39,18 @@ export async function POST(req: Request) {
   }
 
   const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase
-    .from('escritos')
-    .insert({
-      slug: body.slug,
-      locale: body.locale ?? 'pt',
-      titulo: body.titulo,
-      resumo: body.resumo ?? '',
-      conteudo: body.conteudo ?? '',
-      tematica: body.tematica || null,
-      capa: body.capa || null,
-      data: body.data ?? new Date().toISOString().slice(0, 10),
-      publicado: !!body.publicado,
-    })
-    .select()
-    .single();
+  const row = limparEscrito({
+    slug: body.slug,
+    locale: body.locale ?? 'pt',
+    titulo: body.titulo,
+    resumo: body.resumo ?? '',
+    conteudo: body.conteudo ?? '',
+    tematica: body.tematica || null,
+    capa: body.capa || null,
+    data: body.data ?? new Date().toISOString().slice(0, 10),
+    publicado: !!body.publicado,
+  });
+  const { data, error } = await supabase.from('escritos').insert(row).select().single();
 
   if (error) {
     if (error.code === '23505') {

@@ -25,9 +25,7 @@ export default function AdminPage() {
   const [sugerindo, setSugerindo] = useState(false);
   const [sugestoes, setSugestoes] = useState<string | null>(null);
   const [traduzindo, setTraduzindo] = useState(false);
-  const [corrigindoDatas, setCorrigindoDatas] = useState(false);
   const [carregandoCapas, setCarregandoCapas] = useState(false);
-  const [removendoTravessoes, setRemovendoTravessoes] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -92,26 +90,6 @@ export default function AdminPage() {
     setMensagem(res.ok
       ? `${json.atribuidos}/${json.totalEsperado} capas atribuídas.${json.semCapa?.length ? '\nSem capa: ' + json.semCapa.join(', ') : ''}`
       : `Erro: ${json.erro}`);
-    carregar();
-  }
-
-  async function removerTravessoes() {
-    setRemovendoTravessoes(true);
-    setMensagem(null);
-    const res = await fetch('/api/admin/remover-travessoes', { method: 'POST' });
-    const json = await res.json();
-    setRemovendoTravessoes(false);
-    setMensagem(res.ok ? `${json.alterados}/${json.total} escritos limpos.\n${(json.detalhes ?? []).join('\n')}` : `Erro: ${json.erro}`);
-    carregar();
-  }
-
-  async function corrigirDatas() {
-    setCorrigindoDatas(true);
-    setMensagem(null);
-    const res = await fetch('/api/admin/corrigir-datas', { method: 'POST' });
-    const json = await res.json();
-    setCorrigindoDatas(false);
-    setMensagem(res.ok ? `${json.corrigidos} datas corrigidas.` : `Erro: ${json.erro}`);
     carregar();
   }
 
@@ -216,29 +194,15 @@ export default function AdminPage() {
           >
             {traduzindo ? 'a traduzir…' : 'traduzir EN'}
           </button>
-          <button
-            onClick={refazerCapas}
-            disabled={carregandoCapas}
-            className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase disabled:opacity-70"
-          >
-            {carregandoCapas ? 'a refazer…' : 'refazer capas'}
-          </button>
           <details className="relative">
             <summary className="text-creme-2/50 text-[0.75rem] cursor-pointer hover:text-creme list-none">mais</summary>
-            <div className="absolute right-0 mt-2 bg-terra border border-ocre/30 rounded-[10px] p-2 flex flex-col gap-1 min-w-[180px] z-10">
+            <div className="absolute right-0 mt-2 bg-terra border border-ocre/30 rounded-[10px] p-2 flex flex-col gap-1 min-w-[200px] z-10">
               <button
-                onClick={removerTravessoes}
-                disabled={removendoTravessoes}
+                onClick={refazerCapas}
+                disabled={carregandoCapas}
                 className="text-left text-creme-2 text-[0.78rem] px-3 py-1.5 rounded hover:bg-ocre/15 disabled:opacity-50"
               >
-                {removendoTravessoes ? 'a limpar…' : 'remover travessões'}
-              </button>
-              <button
-                onClick={corrigirDatas}
-                disabled={corrigindoDatas}
-                className="text-left text-creme-2 text-[0.78rem] px-3 py-1.5 rounded hover:bg-ocre/15 disabled:opacity-50"
-              >
-                {corrigindoDatas ? 'a corrigir…' : 'corrigir datas'}
+                {carregandoCapas ? 'a refazer…' : 'refazer capas do repo'}
               </button>
             </div>
           </details>
