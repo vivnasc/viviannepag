@@ -338,6 +338,135 @@ function PromptMJPanel({ conteudo, slideIdx }: { conteudo: ConteudoDia; slideIdx
   );
 }
 
+// ─── Gerador Automatico de Imagens (Claude + Replicate) ──
+
+function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
+  const [estado, setEstado] = useState<Record<number, 'pendente' | 'a-gerar' | 'feito' | 'erro'>>({});
+  const [erros, setErros] = useState<Record<number, string>>({});
+  const [batchAtivo, setBatchAtivo] = useState(false);
+
+  const slides = conteudo.slides ?? [];
+  const slidesGeraveis = slides
+    .map((s, i) => ({ slide: s, idx: i }))
+    .filter(({ slide }) => slide.tipo === 'capa' || slide.tipo === 'conteudo' || slide.tipo === 'citacao');
+
+  async function gerarUm(slide: Slide, idx: number) {
+    setEstado(prev => ({ ...prev, [idx]: 'a-gerar' }));
+    setErros(prev => { const n = { ...prev }; delete n[idx]; return n; });
+    try {
+      const slideKey = `dia-${conteudo.dia}-slide-${idx}-foto-fundo`;
+      const res = await fetch('/api/admin/estudio/gerar-imagem', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          slideKey,
+          texto: slide.texto,
+          mundo: conteudo.mundo,
+          tipo: slide.tipo,
+          notaVisual: slide.notaVisual,
+          titulo: conteudo.titulo,
+          aspectRatio: '4:5',
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.imageUrl) throw new Error(json.detalhe ?? json.erro ?? 'falha');
+
+      const imgRes = await fetch(json.imageUrl);
+      const blob = await imgRes.blob();
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+
+      const idb = await new Promise<IDBDatabase>((resolve, reject) => {
+        const req = indexedDB.open('estudio-imagens', 1);
+        req.onupgradeneeded = () => req.result.createObjectStore('slides');
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+      const tx = idb.transaction('slides', 'readwrite');
+      tx.objectStore('slides').put(dataUrl, slideKey);
+      await new Promise<void>((resolve, reject) => {
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+
+      setEstado(prev => ({ ...prev, [idx]: 'feito' }));
+    } catch (e) {
+      setErros(prev => ({ ...prev, [idx]: e instanceof Error ? e.message : 'erro' }));
+      setEstado(prev => ({ ...prev, [idx]: 'erro' }));
+    }
+  }
+
+  async function gerarTodos() {
+    setBatchAtivo(true);
+    for (const { slide, idx } of slidesGeraveis) {
+      await gerarUm(slide, idx);
+    }
+    setBatchAtivo(false);
+  }
+
+  if (slidesGeraveis.length === 0) return null;
+
+  const totalFeitos = Object.values(estado).filter(s => s === 'feito').length;
+  const algumAGerar = Object.values(estado).some(s => s === 'a-gerar') || batchAtivo;
+
+  return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ambar">&#10024; Gerar Imagens Auto</p>
+        <div className="flex-1" />
+        <span className="text-[0.6rem] text-creme-2/40">
+          {totalFeitos}/{slidesGeraveis.length}
+        </span>
+        <button
+          onClick={gerarTodos}
+          disabled={algumAGerar}
+          className="text-[0.65rem] px-3 py-1.5 rounded-md border border-ambar/50 text-ambar bg-ambar/10 hover:bg-ambar/20 disabled:opacity-40 transition-colors"
+        >
+          {algumAGerar ? 'a gerar...' : 'gerar todas'}
+        </button>
+      </div>
+      <p className="text-[0.7rem] text-creme-2/50 italic mb-3">
+        Claude gera prompt &rarr; Replicate cria imagem &rarr; guarda no slide. Recarrega para ver no preview.
+      </p>
+      <div className="space-y-1.5">
+        {slidesGeraveis.map(({ slide, idx }) => {
+          const s = estado[idx] ?? 'pendente';
+          return (
+            <div key={idx} className="flex items-center gap-2 bg-terra-2/30 rounded-[8px] border border-ocre/10 px-3 py-2">
+              <span className="text-[0.6rem] text-ocre/50 w-12">Slide {idx + 1}</span>
+              <span className="text-[0.7rem] text-creme-2/70 flex-1 truncate">
+                {slide.texto.substring(0, 60)}...
+              </span>
+              <span className={`text-[0.6rem] px-2 py-0.5 rounded-full ${
+                s === 'feito' ? 'bg-ambar/20 text-ambar' :
+                s === 'a-gerar' ? 'bg-lila/15 text-lila animate-pulse' :
+                s === 'erro' ? 'bg-rosa/15 text-rosa' :
+                'bg-ocre/10 text-ocre/60'
+              }`}>
+                {s === 'feito' ? '✓ feito' : s === 'a-gerar' ? 'a gerar' : s === 'erro' ? 'erro' : 'pendente'}
+              </span>
+              <button
+                onClick={() => gerarUm(slide, idx)}
+                disabled={algumAGerar}
+                className="text-[0.6rem] px-2 py-0.5 rounded border border-ocre/25 text-ocre/70 hover:text-ambar hover:border-ambar disabled:opacity-40 transition-colors"
+              >
+                {s === 'a-gerar' ? '...' : s === 'feito' ? 'refazer' : 'gerar'}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+      {Object.entries(erros).map(([idx, msg]) => (
+        <p key={idx} className="text-[0.65rem] text-rosa mt-1">Slide {Number(idx) + 1}: {msg}</p>
+      ))}
+    </div>
+  );
+}
+
 // ─── Detail modal (major upgrade) ──────────────────────
 
 function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFechar: () => void }) {
@@ -429,6 +558,7 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
             <CaptionsPanel conteudo={conteudo} />
 
             {/* MJ Prompts */}
+            {temSlides && <GeradorImagensPanel conteudo={conteudo} />}
             {temSlides && <PromptMJPanel conteudo={conteudo} />}
 
             {/* Script completo (reels) */}

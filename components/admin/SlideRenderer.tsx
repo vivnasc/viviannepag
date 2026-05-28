@@ -277,16 +277,58 @@ function SwipeCTA({ color }: { color: string }) {
 
 // ─── Drop zone for images ───────────────────────────────
 
-function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, children }: {
+type SlideContext = {
+  texto: string;
+  tipo: string;
+  mundo: string;
+  notaVisual?: string;
+  titulo?: string;
+  aspectRatio?: string;
+};
+
+async function gerarImagemAutomatica(slideKey: string, ctx: SlideContext): Promise<string> {
+  const res = await fetch('/api/admin/estudio/gerar-imagem', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      slideKey,
+      texto: ctx.texto,
+      mundo: ctx.mundo,
+      tipo: ctx.tipo,
+      notaVisual: ctx.notaVisual,
+      titulo: ctx.titulo,
+      aspectRatio: ctx.aspectRatio,
+    }),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.detalhe ?? json.erro ?? 'falha');
+  return json.imageUrl as string;
+}
+
+async function urlToDataUrl(url: string): Promise<string> {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, slideContext, children }: {
   slideKey: string;
   imageUrl: string | null;
   onImage: (dataUrl: string) => void;
   onClear: () => void;
   height: string;
   notaVisual?: string;
+  slideContext?: SlideContext;
   children?: React.ReactNode;
 }) {
   const [dragging, setDragging] = useState(false);
+  const [gerando, setGerando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleFile(file: File) {
@@ -308,6 +350,20 @@ function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, ch
   function onDragOver(e: DragEvent) {
     e.preventDefault();
     setDragging(true);
+  }
+
+  async function handleGerar() {
+    if (!slideContext || gerando) return;
+    setErro(null);
+    setGerando(true);
+    try {
+      const url = await gerarImagemAutomatica(slideKey, slideContext);
+      const dataUrl = await urlToDataUrl(url);
+      onImage(dataUrl);
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : 'erro');
+    }
+    setGerando(false);
   }
 
   return (
@@ -333,12 +389,29 @@ function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, ch
         <>
           <div className={`absolute inset-0 flex flex-col items-center justify-center transition-colors ${dragging ? 'bg-ambar/15' : 'bg-terra-2/30'}`}>
             <div className="absolute inset-0 bg-gradient-to-b from-terra-2/20 to-terra/40" />
-            <div className="relative z-10 text-center px-3 cursor-pointer" onClick={() => inputRef.current?.click()}>
-              <p className={`text-[8px] tracking-[0.15em] uppercase mb-0.5 ${dragging ? 'text-ambar' : 'text-ocre/40'}`}>
-                {dragging ? 'larga aqui' : 'arrasta foto'}
-              </p>
-              {notaVisual && !dragging && (
-                <p className="text-[5px] text-creme-2/25 italic leading-tight max-w-[140px]">{notaVisual}</p>
+            <div className="relative z-10 text-center px-3">
+              {gerando ? (
+                <p className="text-[8px] tracking-[0.15em] uppercase text-ambar animate-pulse">a gerar imagem...</p>
+              ) : (
+                <>
+                  <p className={`text-[8px] tracking-[0.15em] uppercase mb-1 cursor-pointer ${dragging ? 'text-ambar' : 'text-ocre/40'}`} onClick={() => inputRef.current?.click()}>
+                    {dragging ? 'larga aqui' : 'arrasta foto'}
+                  </p>
+                  {slideContext && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleGerar(); }}
+                      className="text-[7px] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar/80 hover:bg-ambar/15 transition-colors mb-1"
+                    >
+                      &#10024; gerar auto
+                    </button>
+                  )}
+                  {notaVisual && !dragging && (
+                    <p className="text-[5px] text-creme-2/25 italic leading-tight max-w-[140px] mt-1">{notaVisual}</p>
+                  )}
+                  {erro && (
+                    <p className="text-[6px] text-rosa mt-1">{erro}</p>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -370,7 +443,7 @@ function LayoutFotoFundo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mund
           <button onClick={clearImage} className="absolute top-2 right-2 z-[10] w-5 h-5 rounded-full bg-black/50 text-white text-[8px] flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">&times;</button>
         </>
       ) : (
-        <DropZone slideKey={`${slideKey}-foto-fundo`} imageUrl={null} onImage={setImage} onClear={clearImage} height="100%" notaVisual={slide.notaVisual}>
+        <DropZone slideKey={`${slideKey}-foto-fundo`} imageUrl={null} onImage={setImage} onClear={clearImage} height="100%" notaVisual={slide.notaVisual} slideContext={{ texto: slide.texto, tipo: slide.tipo, mundo, notaVisual: slide.notaVisual, titulo: slide.titulo, aspectRatio: '4:5' }}>
           <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.3)' }} />
         </DropZone>
       )}
@@ -427,6 +500,7 @@ function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
         onClear={clearImage}
         height="42%"
         notaVisual={slide.notaVisual}
+        slideContext={{ texto: slide.texto, tipo: slide.tipo, mundo, notaVisual: slide.notaVisual, titulo: slide.titulo, aspectRatio: '4:5' }}
       >
         <div className="absolute bottom-0 left-0 right-0 h-10 z-[3]" style={{ background: `linear-gradient(to bottom, transparent, ${p.bg2})` }} />
       </DropZone>
@@ -473,6 +547,7 @@ function LayoutFotoBaixo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mund
           onClear={clearImage}
           height="100%"
           notaVisual={slide.notaVisual}
+          slideContext={{ texto: slide.texto, tipo: slide.tipo, mundo, notaVisual: slide.notaVisual, titulo: slide.titulo, aspectRatio: '4:5' }}
         />
       </div>
     </div>
@@ -495,6 +570,7 @@ function LayoutFotoLado({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
           onClear={clearImage}
           height="100%"
           notaVisual={slide.notaVisual}
+          slideContext={{ texto: slide.texto, tipo: slide.tipo, mundo, notaVisual: slide.notaVisual, titulo: slide.titulo, aspectRatio: '4:5' }}
         >
           <div className="absolute top-0 right-0 bottom-0 w-8 z-[3]" style={{ background: `linear-gradient(to right, transparent, ${p.bg2})` }} />
         </DropZone>
