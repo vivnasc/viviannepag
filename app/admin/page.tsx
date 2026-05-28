@@ -28,6 +28,8 @@ export default function AdminPage() {
   const [corrigindoDatas, setCorrigindoDatas] = useState(false);
   const [carregandoCapas, setCarregandoCapas] = useState(false);
   const [ligandoCapas, setLigandoCapas] = useState(false);
+  const [diagnosticando, setDiagnosticando] = useState(false);
+  const [tornandoPublico, setTornandoPublico] = useState(false);
 
   async function carregar() {
     const res = await fetch('/api/admin/escritos');
@@ -105,6 +107,24 @@ export default function AdminPage() {
     } else {
       setMensagem(`Erro: ${json.erro}`);
     }
+  }
+
+  async function diagnosticar() {
+    setDiagnosticando(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/diagnostico-capas');
+    const json = await res.json();
+    setDiagnosticando(false);
+    setMensagem(JSON.stringify(json, null, 2));
+  }
+
+  async function tornarBucketPublico() {
+    setTornandoPublico(true);
+    setMensagem(null);
+    const res = await fetch('/api/admin/tornar-bucket-publico', { method: 'POST' });
+    const json = await res.json();
+    setTornandoPublico(false);
+    setMensagem(res.ok ? `OK: ${json.accao}` : `Erro: ${json.erro} ${json.detalhe ?? ''}`);
   }
 
   async function corrigirDatas() {
@@ -198,6 +218,20 @@ export default function AdminPage() {
         </div>
         <div className="flex gap-3 items-center">
           <button
+            onClick={tornarBucketPublico}
+            disabled={tornandoPublico}
+            className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ocre disabled:opacity-70"
+          >
+            {tornandoPublico ? 'a tornar…' : 'tornar bucket público'}
+          </button>
+          <button
+            onClick={diagnosticar}
+            disabled={diagnosticando}
+            className="border border-ocre/45 text-creme-2 rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:border-ambar hover:text-ambar disabled:opacity-70"
+          >
+            {diagnosticando ? 'a diagnosticar…' : 'diagnóstico capas'}
+          </button>
+          <button
             onClick={ligarCapas}
             disabled={ligandoCapas}
             className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] tracking-[0.04em] lowercase hover:bg-ambar disabled:opacity-70"
@@ -246,7 +280,7 @@ export default function AdminPage() {
       </header>
 
       {mensagem && (
-        <p className="text-ambar text-sm mb-6 font-serif italic">{mensagem}</p>
+        <pre className="text-ambar text-xs mb-6 font-mono whitespace-pre-wrap break-all bg-terra/40 border border-ocre/25 rounded-[10px] p-4 max-h-[50vh] overflow-auto">{mensagem}</pre>
       )}
 
       {escritos.length > 0 && (() => {
