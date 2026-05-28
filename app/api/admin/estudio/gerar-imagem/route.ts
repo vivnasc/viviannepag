@@ -74,10 +74,19 @@ type ReplicatePrediction = {
   error?: string;
 };
 
-async function gerarImagemReplicate(prompt: string, aspectRatio: string, token: string): Promise<string> {
+type Modelo = 'flux-1.1-pro' | 'flux-1.1-pro-ultra';
+
+const MODELO_URLS: Record<Modelo, string> = {
+  'flux-1.1-pro': 'https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions',
+  'flux-1.1-pro-ultra': 'https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro-ultra/predictions',
+};
+
+async function gerarImagemReplicate(prompt: string, aspectRatio: string, token: string, modelo: Modelo = 'flux-1.1-pro'): Promise<string> {
   const fullPrompt = `${prompt}\n\n${STYLE_BASE}`;
 
-  const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
+  const isUltra = modelo === 'flux-1.1-pro-ultra';
+
+  const createRes = await fetch(MODELO_URLS[modelo], {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -85,7 +94,13 @@ async function gerarImagemReplicate(prompt: string, aspectRatio: string, token: 
       'Prefer': 'wait=60',
     },
     body: JSON.stringify({
-      input: {
+      input: isUltra ? {
+        prompt: fullPrompt,
+        aspect_ratio: aspectRatio,
+        output_format: 'jpg',
+        safety_tolerance: 5,
+        raw: false,
+      } : {
         prompt: fullPrompt,
         aspect_ratio: aspectRatio,
         output_format: 'jpg',
@@ -165,6 +180,7 @@ export async function POST(req: Request) {
     slideKey: string;
     promptCustom?: string;
     semSupabase?: boolean;
+    modelo?: Modelo;
   };
 
   if (!body.texto || !body.mundo || !body.tipo || !body.slideKey) {
@@ -175,7 +191,7 @@ export async function POST(req: Request) {
 
   try {
     const prompt = body.promptCustom ?? await gerarPrompt(body, anthropicKey);
-    const replicateUrl = await gerarImagemReplicate(prompt, ar, replicateToken);
+    const replicateUrl = await gerarImagemReplicate(prompt, ar, replicateToken, body.modelo ?? 'flux-1.1-pro');
 
     let finalUrl = replicateUrl;
     if (!body.semSupabase) {
