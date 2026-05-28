@@ -434,7 +434,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
   async function gerarBatch(limite?: number) {
     setBatchAtivo(true);
     const items = (limite ? slidesGeraveis.slice(0, limite) : slidesGeraveis)
-      .filter(({ idx }) => estado[idx] !== 'feito');
+      .filter(({ idx }) => estado[idx] !== 'feito' && estado[idx] !== 'skip' && estado[idx] !== 'a-gerar');
     for (const { slide, idx } of items) {
       await gerarUm(slide, idx);
     }
