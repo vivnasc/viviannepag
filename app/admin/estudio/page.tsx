@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import {
   CALENDARIO_30_DIAS,
   PALETAS,
@@ -10,6 +10,7 @@ import {
   type Mundo,
 } from '@/lib/estudio-conteudo';
 import { SlideWithLayout, SlideLayoutGrid } from '@/components/admin/SlideRenderer';
+import { saveImage } from '@/lib/estudio-imagens-db';
 import {
   gerarCaptionInstagram,
   gerarCaptionTikTok,
@@ -352,6 +353,30 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
     .map((s, i) => ({ slide: s, idx: i }))
     .filter(({ slide }) => slide.tipo === 'capa' || slide.tipo === 'conteudo' || slide.tipo === 'citacao');
 
+  // Rehydrate state from Supabase bucket on mount: any image already in bucket = 'feito'
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/admin/estudio/listar-imagens-dia?mundo=${conteudo.mundo}&dia=${conteudo.dia}`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (cancelled || !Array.isArray(json.images)) return;
+        const map: Record<number, 'feito'> = {};
+        for (const img of json.images as Array<{ slideIdx: number }>) {
+          map[img.slideIdx] = 'feito';
+        }
+        // user actions in prev win over rehydration
+        setEstado(prev => {
+          const merged: typeof prev = { ...map };
+          for (const [k, v] of Object.entries(prev)) merged[Number(k)] = v;
+          return merged;
+        });
+      } catch {}
+    })();
+    return () => { cancelled = true; };
+  }, [conteudo.mundo, conteudo.dia]);
+
   async function gerarUm(slide: Slide, idx: number, forcarImagem = false) {
     setEstado(prev => ({ ...prev, [idx]: 'a-gerar' }));
     setErros(prev => { const n = { ...prev }; delete n[idx]; return n; });
@@ -397,18 +422,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
         reader.readAsDataURL(blob);
       });
 
-      const idb = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open('estudio-imagens', 1);
-        req.onupgradeneeded = () => req.result.createObjectStore('slides');
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      });
-      const tx = idb.transaction('slides', 'readwrite');
-      tx.objectStore('slides').put(dataUrl, slideKey);
-      await new Promise<void>((resolve, reject) => {
-        tx.oncomplete = () => resolve();
-        tx.onerror = () => reject(tx.error);
-      });
+      await saveImage(slideKey, dataUrl);
 
       setEstado(prev => ({ ...prev, [idx]: 'feito' }));
     } catch (e) {
@@ -419,19 +433,23 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
 
   async function gerarBatch(limite?: number) {
     setBatchAtivo(true);
-    const items = limite ? slidesGeraveis.slice(0, limite) : slidesGeraveis;
+    const items = (limite ? slidesGeraveis.slice(0, limite) : slidesGeraveis)
+      .filter(({ idx }) => estado[idx] !== 'feito');
     for (const { slide, idx } of items) {
       await gerarUm(slide, idx);
     }
     setBatchAtivo(false);
   }
 
+
   if (slidesGeraveis.length === 0) return null;
 
   const totalFeitos = Object.values(estado).filter(s => s === 'feito').length;
   const algumAGerar = Object.values(estado).some(s => s === 'a-gerar') || batchAtivo;
   const custoPorImagem = modelo === 'flux-1.1-pro-ultra' ? 0.06 : 0.04;
-  const custoTotal = (slidesGeraveis.length * custoPorImagem).toFixed(2);
+  const slidesPendentes = slidesGeraveis.filter(({ idx }) => estado[idx] !== 'feito' && estado[idx] !== 'skip').length;
+  const custoTotal = (slidesPendentes * custoPorImagem).toFixed(2);
+  const tempoEstimado = Math.ceil((slidesPendentes * 30) / 60);
 
   return (
     <div>
@@ -450,6 +468,11 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
           <option value="flux-1.1-pro">Flux Pro · $0.04</option>
           <option value="flux-1.1-pro-ultra">Flux Pro Ultra · $0.06</option>
         </select>
+        {slidesPendentes > 0 && (
+          <p className="text-[0.6rem] text-creme-2/40 mr-2">
+            {slidesPendentes} pendentes &middot; ~${custoTotal} &middot; ~{tempoEstimado} min
+          </p>
+        )}
         <button
           onClick={() => gerarBatch(3)}
           disabled={algumAGerar}
@@ -761,6 +784,71 @@ function SlidesFilmstrip({ conteudo, onClickSlide }: { conteudo: ConteudoDia; on
   );
 }
 
+// ─── Diagnostico panel ──────────────────────────────────
+
+type DiagProvider = 'claude' | 'replicate' | 'supabase';
+type DiagResult = { ok: boolean; latencyMs?: number; raw?: unknown; testing: boolean; lastClick?: number };
+
+function DiagnosticoPanel() {
+  const [resultados, setResultados] = useState<Record<DiagProvider, DiagResult>>({
+    claude: { ok: false, testing: false },
+    replicate: { ok: false, testing: false },
+    supabase: { ok: false, testing: false },
+  });
+
+  async function testar(provider: DiagProvider) {
+    const last = resultados[provider].lastClick;
+    if (last && Date.now() - last < 5000) return; // debounce 5s
+    setResultados(prev => ({ ...prev, [provider]: { ...prev[provider], testing: true, lastClick: Date.now() } }));
+    try {
+      const res = await fetch(`/api/admin/test-${provider}`);
+      const json = await res.json();
+      setResultados(prev => ({ ...prev, [provider]: { ok: !!json.ok, latencyMs: json.latencyMs, raw: json, testing: false, lastClick: Date.now() } }));
+    } catch (e) {
+      setResultados(prev => ({ ...prev, [provider]: { ok: false, raw: { erro: String(e) }, testing: false, lastClick: Date.now() } }));
+    }
+  }
+
+  return (
+    <section className="border border-ocre/15 rounded-[14px] p-4 mb-6 bg-terra-2/20">
+      <div className="flex items-center gap-2 mb-3">
+        <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ocre/70">Diagnostico</p>
+        <p className="text-[0.6rem] text-creme-2/40 ml-2">Testa as ligacoes antes de gerar</p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {(['claude', 'replicate', 'supabase'] as const).map(p => {
+          const r = resultados[p];
+          const dotColor = r.testing ? 'bg-lila animate-pulse' : r.ok ? 'bg-ambar' : r.raw ? 'bg-rosa' : 'bg-creme-2/20';
+          return (
+            <div key={p} className="border border-ocre/10 rounded-[10px] p-3">
+              <div className="flex items-center gap-2 mb-2">
+                <div className={`w-2 h-2 rounded-full ${dotColor}`} />
+                <p className="text-[0.78rem] text-creme">{p}</p>
+                {r.latencyMs && <span className="text-[0.6rem] text-creme-2/40 ml-auto">{r.latencyMs}ms</span>}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => testar(p)}
+                  disabled={r.testing}
+                  className="text-[0.62rem] px-2.5 py-1 rounded-md border border-ocre/30 text-ocre/80 hover:border-ambar hover:text-ambar disabled:opacity-40 transition-colors"
+                >
+                  {r.testing ? '...' : 'testar'}
+                </button>
+                {r.raw != null && (
+                  <CopyButton text={JSON.stringify(r.raw, null, 2)} label="copiar JSON" />
+                )}
+              </div>
+              {!r.ok && r.raw != null && typeof (r.raw as { erro?: string }).erro === 'string' && (
+                <p className="text-[0.6rem] text-rosa mt-1.5">{(r.raw as { erro: string }).erro}</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 // ─── Main page ──────────────────────────────────────────
 
 type Vista = 'calendario' | 'lista' | 'tipos';
@@ -815,6 +903,8 @@ export default function EstudioPage() {
           Calendario de 30 dias &middot; Instagram + TikTok &middot; Carrosseis, Reels e Citacoes
         </p>
       </header>
+
+      <DiagnosticoPanel />
 
       {/* Export bar */}
       <div className="flex items-center gap-3 mb-8 flex-wrap p-4 rounded-[14px] border border-ocre/15 bg-terra-2/20">
