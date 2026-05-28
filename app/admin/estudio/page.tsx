@@ -11,6 +11,7 @@ import {
 } from '@/lib/estudio-conteudo';
 import { SlideWithLayout, SlideLayoutGrid } from '@/components/admin/SlideRenderer';
 import { saveImage } from '@/lib/estudio-imagens-db';
+import { Pill, ProgressBar, EstimateCard, Btn } from '@/components/admin/EstudioKit';
 import {
   gerarCaptionInstagram,
   gerarCaptionTikTok,
@@ -456,9 +457,6 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
       <div className="flex items-center gap-2 mb-3 flex-wrap">
         <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ambar">&#10024; Gerar Imagens Auto</p>
         <div className="flex-1" />
-        <span className="text-[0.6rem] text-creme-2/40">
-          {totalFeitos}/{slidesGeraveis.length}
-        </span>
         <select
           value={modelo}
           onChange={e => setModelo(e.target.value as 'flux-1.1-pro' | 'flux-1.1-pro-ultra')}
@@ -468,30 +466,53 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
           <option value="flux-1.1-pro">Flux Pro · $0.04</option>
           <option value="flux-1.1-pro-ultra">Flux Pro Ultra · $0.06</option>
         </select>
-        {slidesPendentes > 0 && (
-          <p className="text-[0.6rem] text-creme-2/40 mr-2">
-            {slidesPendentes} pendentes &middot; ~${custoTotal} &middot; ~{tempoEstimado} min
-          </p>
-        )}
-        <button
+      </div>
+
+      {slidesPendentes > 0 && (
+        <EstimateCard
+          items={slidesGeraveis.length}
+          assets={slidesPendentes}
+          custoUsd={custoTotal}
+          minutos={tempoEstimado}
+          nota="Comeca por 'testar 3' para validar qualidade antes de gerar tudo."
+        />
+      )}
+
+      {algumAGerar && (
+        <div className="mb-3">
+          <ProgressBar
+            current={totalFeitos}
+            total={slidesGeraveis.length}
+            label="A gerar imagens (Claude + Replicate)"
+            variant="ouro-folha"
+            subLabel={`${slidesPendentes} pendentes`}
+          />
+        </div>
+      )}
+
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <Btn
+          variant="default"
+          size="md"
           onClick={() => gerarBatch(3)}
           disabled={algumAGerar}
-          className="text-[0.65rem] px-3 py-1.5 rounded-md border border-lila/50 text-lila bg-lila/10 hover:bg-lila/20 disabled:opacity-40 transition-colors"
           title="Gera 3 imagens primeiro para validar qualidade"
         >
           testar 3
-        </button>
-        <button
+        </Btn>
+        <Btn
+          variant="primary"
+          size="md"
           onClick={() => gerarBatch()}
-          disabled={algumAGerar}
-          className="text-[0.65rem] px-3 py-1.5 rounded-md border border-ambar/50 text-ambar bg-ambar/10 hover:bg-ambar/20 disabled:opacity-40 transition-colors"
+          disabled={algumAGerar || slidesPendentes === 0}
         >
-          {algumAGerar ? 'a gerar...' : `gerar todas (~$${custoTotal})`}
-        </button>
+          {algumAGerar ? 'a gerar...' : slidesPendentes === 0 ? 'tudo feito ✓' : `gerar todas (~$${custoTotal})`}
+        </Btn>
+        <div className="flex-1" />
+        <span className="text-[0.6rem] text-creme-2/40">
+          {totalFeitos}/{slidesGeraveis.length} feito
+        </span>
       </div>
-      <p className="text-[0.7rem] text-creme-2/50 italic mb-3">
-        Claude gera prompt &rarr; Replicate cria imagem &rarr; guarda no slide. Comeca por &quot;testar 3&quot; para validar qualidade antes de gerar tudo.
-      </p>
       <div className="space-y-1.5">
         {slidesGeraveis.map(({ slide, idx }) => {
           const s = estado[idx] ?? 'pendente';
@@ -503,22 +524,25 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
                 <span className="text-[0.7rem] text-creme-2/70 flex-1 truncate">
                   {slide.texto.substring(0, 60)}...
                 </span>
-                <span className={`text-[0.6rem] px-2 py-0.5 rounded-full ${
-                  s === 'feito' ? 'bg-ambar/20 text-ambar' :
-                  s === 'a-gerar' ? 'bg-lila/15 text-lila animate-pulse' :
-                  s === 'skip' ? 'bg-creme-2/15 text-creme-2/60' :
-                  s === 'erro' ? 'bg-rosa/15 text-rosa' :
-                  'bg-ocre/10 text-ocre/60'
-                }`}>
+                <Pill
+                  variant={
+                    s === 'feito' ? 'feito' :
+                    s === 'a-gerar' ? 'em-curso' :
+                    s === 'skip' ? 'skip' :
+                    s === 'erro' ? 'erro' :
+                    'pendente'
+                  }
+                >
                   {s === 'feito' ? '✓ feito' : s === 'a-gerar' ? 'a gerar' : s === 'skip' ? 'só texto' : s === 'erro' ? 'erro' : 'pendente'}
-                </span>
-                <button
+                </Pill>
+                <Btn
+                  variant="default"
+                  size="sm"
                   onClick={() => gerarUm(slide, idx, s === 'skip')}
                   disabled={algumAGerar}
-                  className="text-[0.6rem] px-2 py-0.5 rounded border border-ocre/25 text-ocre/70 hover:text-ambar hover:border-ambar disabled:opacity-40 transition-colors"
                 >
                   {s === 'a-gerar' ? '...' : s === 'feito' ? 'refazer' : s === 'skip' ? 'forçar' : 'gerar'}
-                </button>
+                </Btn>
               </div>
               {just && (
                 <p className="text-[0.6rem] text-creme-2/40 italic mt-1 pl-14">{just}</p>
@@ -1260,6 +1284,29 @@ export default function EstudioPage() {
         >
           Todas as Captions
         </button>
+      </div>
+
+      {/* Limpeza local (apos testes) */}
+      <div className="flex items-center gap-3 mb-10 flex-wrap p-3 rounded-[12px] border border-ocre/10 bg-terra-2/10">
+        <p className="text-[0.6rem] tracking-[0.15em] uppercase text-creme-2/40 mr-1">Limpeza local:</p>
+        <Btn
+          variant="ghost"
+          size="sm"
+          onClick={async () => {
+            if (!confirm('Apagar todas as imagens em cache local (IndexedDB)? As imagens no Supabase ficam.')) return;
+            try {
+              indexedDB.deleteDatabase('estudio-imagens');
+              alert('Cache local apagada. Recarrega a pagina.');
+            } catch (e) {
+              alert('Erro: ' + e);
+            }
+          }}
+        >
+          apagar cache IndexedDB
+        </Btn>
+        <span className="text-[0.6rem] text-creme-2/30 italic">
+          util apos testes — limpa apenas o browser, nao o Supabase
+        </span>
       </div>
 
       {/* ═══ MANUAL (colapsivel, opcional) ═══ */}
