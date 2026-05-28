@@ -621,17 +621,42 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
               </div>
             )}
 
-            {/* Captions panel */}
+            {/* ─── 1. Imagens (so para slides) ─── */}
+            {temSlides && (
+              <>
+                <div className="flex items-center gap-2 -mb-2">
+                  <span className="w-5 h-5 rounded-full bg-ambar/15 border border-ambar/30 flex items-center justify-center text-ambar text-[0.65rem] font-serif">1</span>
+                  <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Gerar imagens</p>
+                </div>
+                <GeradorImagensPanel conteudo={conteudo} />
+              </>
+            )}
+
+            {/* ─── 2. Captions ─── */}
+            <div className="flex items-center gap-2 -mb-2">
+              <span className="w-5 h-5 rounded-full bg-ambar/15 border border-ambar/30 flex items-center justify-center text-ambar text-[0.65rem] font-serif">{temSlides ? 2 : 1}</span>
+              <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Captions</p>
+            </div>
             <CaptionsPanel conteudo={conteudo} />
 
-            {/* MJ Prompts */}
-            {temSlides && <GeradorImagensPanel conteudo={conteudo} />}
-            {temSlides && <PromptMJPanel conteudo={conteudo} />}
+            {/* ─── 3. Prompts MJ (manual, opcional) ─── */}
+            {temSlides && (
+              <>
+                <div className="flex items-center gap-2 -mb-2">
+                  <span className="w-5 h-5 rounded-full bg-ambar/15 border border-ambar/30 flex items-center justify-center text-ambar text-[0.65rem] font-serif">3</span>
+                  <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Prompts Midjourney (manual)</p>
+                </div>
+                <PromptMJPanel conteudo={conteudo} />
+              </>
+            )}
 
             {/* Script completo (reels) */}
             {temReel && conteudo.reelScript && (
               <div>
-                <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ocre/70 mb-3">Script Completo</p>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-5 h-5 rounded-full bg-ambar/15 border border-ambar/30 flex items-center justify-center text-ambar text-[0.65rem] font-serif">1</span>
+                  <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Script reel</p>
+                </div>
                 <div className="bg-terra-2/40 rounded-[12px] p-4 border border-ocre/15 space-y-3">
                   <div>
                     <p className="text-[0.55rem] tracking-[0.15em] uppercase text-ambar/60 mb-1">Gancho (3s)</p>
@@ -669,7 +694,10 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
             {/* Textos dos slides */}
             {temSlides && conteudo.slides && (
               <div>
-                <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ocre/70 mb-3">Textos dos Slides</p>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-5 h-5 rounded-full bg-creme-2/10 border border-creme-2/20 flex items-center justify-center text-creme-2/60 text-[0.65rem] font-serif">i</span>
+                  <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Textos dos slides (referencia)</p>
+                </div>
                 <div className="space-y-2">
                   {conteudo.slides.map((s, i) => (
                     <div key={i} className="bg-terra-2/40 rounded-[10px] p-3 border border-ocre/10 group">
@@ -689,7 +717,8 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
             {/* Hashtags */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ocre/70">Hashtags</p>
+                <span className="w-5 h-5 rounded-full bg-creme-2/10 border border-creme-2/20 flex items-center justify-center text-creme-2/60 text-[0.65rem] font-serif">i</span>
+                <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Hashtags</p>
                 <CopyButton text={conteudo.hashtags.join(' ')} label="copiar" />
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -854,6 +883,58 @@ function DiagnosticoPanel() {
 type Vista = 'calendario' | 'lista' | 'tipos';
 type FiltroMundo = Mundo | 'todos';
 
+// ─── Phase header (visual divider with number) ──────────
+
+function PhaseHeader({ num, titulo, descricao, status, action }: {
+  num: number;
+  titulo: string;
+  descricao?: string;
+  status?: 'pendente' | 'em-curso' | 'completo';
+  action?: React.ReactNode;
+}) {
+  const statusColor = status === 'completo' ? 'text-ambar' : status === 'em-curso' ? 'text-lila' : 'text-creme-2/40';
+  const statusLabel = status === 'completo' ? '✓ completo' : status === 'em-curso' ? 'em curso' : '';
+  return (
+    <div className="flex items-center gap-3 mb-4 mt-10 first:mt-0">
+      <div className="w-8 h-8 rounded-full border border-ambar/40 bg-ambar/8 flex items-center justify-center shrink-0">
+        <span className="font-serif text-ambar text-[0.95rem]">{num}</span>
+      </div>
+      <div className="flex-1 min-w-0">
+        <h2 className="font-serif font-light text-creme text-[1.15rem] leading-tight">
+          {titulo}
+        </h2>
+        {descricao && <p className="text-creme-2/50 text-[0.72rem] mt-0.5">{descricao}</p>}
+      </div>
+      {status && statusLabel && (
+        <span className={`text-[0.62rem] tracking-[0.12em] uppercase ${statusColor}`}>
+          {statusLabel}
+        </span>
+      )}
+      {action}
+    </div>
+  );
+}
+
+function Collapsible({ title, defaultOpen = false, children }: {
+  title: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="border border-ocre/15 rounded-[14px] mb-4 overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-5 py-3 hover:bg-terra-2/20 transition-colors"
+      >
+        <span className="text-[0.78rem] text-creme-2/80 tracking-[0.04em]">{title}</span>
+        <span className="text-creme-2/50 text-sm">{open ? '−' : '+'}</span>
+      </button>
+      {open && <div className="px-5 pb-5 pt-1">{children}</div>}
+    </div>
+  );
+}
+
 export default function EstudioPage() {
   const [selecionado, setSelecionado] = useState<ConteudoDia | null>(null);
   const [vista, setVista] = useState<Vista>('calendario');
@@ -904,55 +985,23 @@ export default function EstudioPage() {
         </p>
       </header>
 
+      {/* ═══ FASE 1: DIAGNOSTICO ═══ */}
+      <PhaseHeader
+        num={1}
+        titulo="Diagnostico"
+        descricao="Testa as ligacoes antes de produzir. Faz isto uma vez por sessao."
+      />
       <DiagnosticoPanel />
 
-      {/* Export bar */}
-      <div className="flex items-center gap-3 mb-8 flex-wrap p-4 rounded-[14px] border border-ocre/15 bg-terra-2/20">
-        <p className="text-[0.65rem] tracking-[0.2em] uppercase text-ocre/60 mr-1">Exportar:</p>
-        <div className="flex items-center gap-2">
-          <label className="text-[0.68rem] text-creme-2/50">Data inicio:</label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={e => setStartDate(e.target.value)}
-            className="bg-transparent border border-ocre/30 rounded-[8px] px-2 py-1 text-[0.72rem] text-creme outline-none focus:border-ambar"
-          />
-        </div>
-        <button
-          onClick={() => {
-            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate);
-            downloadFile(csv, `metricool-30dias-${startDate}.csv`, 'text/csv');
-          }}
-          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ambar/40 text-ambar hover:bg-ambar/10 transition-colors"
-        >
-          CSV Metricool
-        </button>
-        <button
-          onClick={() => {
-            const txt = gerarResumoTexto(CALENDARIO_30_DIAS);
-            downloadFile(txt, `calendario-30dias-${startDate}.txt`);
-          }}
-          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ocre/30 text-creme-2/70 hover:border-ambar hover:text-ambar transition-colors"
-        >
-          Resumo TXT
-        </button>
-        <button
-          onClick={() => {
-            const captions = CALENDARIO_30_DIAS.map(c => {
-              const ig = gerarCaptionInstagram(c);
-              const tt = gerarCaptionTikTok(c);
-              return `${'='.repeat(50)}\nDIA ${c.dia}: ${c.titulo}\n${'='.repeat(50)}\n\n--- INSTAGRAM ---\n${ig}\n\n--- TIKTOK ---\n${tt}\n`;
-            }).join('\n\n');
-            downloadFile(captions, `captions-30dias.txt`);
-          }}
-          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ocre/30 text-creme-2/70 hover:border-ambar hover:text-ambar transition-colors"
-        >
-          Todas as Captions
-        </button>
-      </div>
+      {/* ═══ FASE 2: PLANEAR ═══ */}
+      <PhaseHeader
+        num={2}
+        titulo="Planear"
+        descricao="Visao geral do calendario. Filtra por mundo e vista."
+      />
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
         {[
           { val: estatisticas.total, label: 'conteudos' },
           { val: estatisticas.carrosseis, label: 'carrosseis' },
@@ -1010,6 +1059,13 @@ export default function EstudioPage() {
           </button>
         ))}
       </div>
+
+      {/* ═══ FASE 3: PRODUZIR ═══ */}
+      <PhaseHeader
+        num={3}
+        titulo="Produzir"
+        descricao="Clica num dia para abrir o detalhe e gerar imagens, captions e exportar."
+      />
 
       {/* CALENDAR VIEW */}
       {vista === 'calendario' && (
@@ -1157,9 +1213,65 @@ export default function EstudioPage() {
         </div>
       )}
 
-      {/* Strategy section */}
-      <section className="mt-16 border border-ocre/15 rounded-[18px] p-6">
-        <h2 className="font-serif font-light text-creme text-xl mb-4">Estrategia de Conteudo</h2>
+      {/* ═══ FASE 4: EXPORTAR ═══ */}
+      <PhaseHeader
+        num={4}
+        titulo="Exportar"
+        descricao="Quando o conteudo estiver pronto, exporta CSV para o Metricool e captions."
+      />
+      <div className="flex items-center gap-3 mb-10 flex-wrap p-4 rounded-[14px] border border-ocre/15 bg-terra-2/20">
+        <div className="flex items-center gap-2">
+          <label className="text-[0.68rem] text-creme-2/50">Data inicio:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={e => setStartDate(e.target.value)}
+            className="bg-transparent border border-ocre/30 rounded-[8px] px-2 py-1 text-[0.72rem] text-creme outline-none focus:border-ambar"
+          />
+        </div>
+        <button
+          onClick={() => {
+            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate);
+            downloadFile(csv, `metricool-30dias-${startDate}.csv`, 'text/csv');
+          }}
+          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ambar/40 text-ambar hover:bg-ambar/10 transition-colors"
+        >
+          CSV Metricool
+        </button>
+        <button
+          onClick={() => {
+            const txt = gerarResumoTexto(CALENDARIO_30_DIAS);
+            downloadFile(txt, `calendario-30dias-${startDate}.txt`);
+          }}
+          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ocre/30 text-creme-2/70 hover:border-ambar hover:text-ambar transition-colors"
+        >
+          Resumo TXT
+        </button>
+        <button
+          onClick={() => {
+            const captions = CALENDARIO_30_DIAS.map(c => {
+              const ig = gerarCaptionInstagram(c);
+              const tt = gerarCaptionTikTok(c);
+              return `${'='.repeat(50)}\nDIA ${c.dia}: ${c.titulo}\n${'='.repeat(50)}\n\n--- INSTAGRAM ---\n${ig}\n\n--- TIKTOK ---\n${tt}\n`;
+            }).join('\n\n');
+            downloadFile(captions, `captions-30dias.txt`);
+          }}
+          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ocre/30 text-creme-2/70 hover:border-ambar hover:text-ambar transition-colors"
+        >
+          Todas as Captions
+        </button>
+      </div>
+
+      {/* ═══ MANUAL (colapsivel, opcional) ═══ */}
+      <PhaseHeader
+        num={5}
+        titulo="Manual"
+        descricao="Referencias, estrategia e paletas. So precisas de consultar uma vez."
+      />
+
+      <Collapsible title="Estrategia de Conteudo">
+      <section className="border-0">
+        <h2 className="font-serif font-light text-creme text-xl mb-4 hidden">Estrategia de Conteudo</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[0.85rem] text-creme-2/80 leading-relaxed">
           <div>
             <h3 className="text-ambar text-[0.7rem] tracking-[0.2em] uppercase mb-2">Ritmo Semanal</h3>
@@ -1208,10 +1320,11 @@ export default function EstudioPage() {
           </div>
         </div>
       </section>
+      </Collapsible>
 
-      {/* Competition references */}
-      <section className="mt-8 border border-ocre/15 rounded-[18px] p-6">
-        <h2 className="font-serif font-light text-creme text-xl mb-4">Referencias e Competicao</h2>
+      <Collapsible title="Referencias e Competicao">
+      <section className="border-0">
+        <h2 className="font-serif font-light text-creme text-xl mb-4 hidden">Referencias e Competicao</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-[0.85rem] text-creme-2/80 leading-relaxed">
           <div>
             <h3 className="text-ambar text-[0.7rem] tracking-[0.2em] uppercase mb-2">O que funciona no nicho</h3>
@@ -1245,6 +1358,7 @@ export default function EstudioPage() {
           </div>
         </div>
       </section>
+      </Collapsible>
 
       {/* Detail modal */}
       {selecionado && (
