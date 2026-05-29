@@ -70,7 +70,17 @@ async function main() {
     process.exit(1);
   }
 
-  const tarefas = manifest.tarefas;
+  let tarefas = manifest.tarefas;
+
+  // Filtro de dias opcional (DIAS_FILTER="1" ou "1,2,3")
+  const diasFilter = process.env.DIAS_FILTER;
+  if (diasFilter && diasFilter.trim()) {
+    const diasAllowed = diasFilter.split(',').map(d => Number(d.trim())).filter(d => !isNaN(d));
+    if (diasAllowed.length > 0) {
+      tarefas = tarefas.filter(t => diasAllowed.includes(t.dia));
+      console.log(`[filtro] dias: ${diasAllowed.join(',')} -> ${tarefas.length} tarefas`);
+    }
+  }
   console.log(`[manifest] ${tarefas.length} slides para processar`);
 
   const result = {
