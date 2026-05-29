@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useState } from 'react';
 import { SlideRender, type SlideLayout } from '@/components/admin/SlideRenderer';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { CALENDARIO_30_DIAS } from '@/lib/estudio-conteudo';
@@ -108,15 +108,15 @@ export default function RenderSlidePage() {
     );
   }
 
-  // Render at preview size (270x337.5) with zoom: 4 → effectively 1080x1350
-  // zoom afecta layout calculations (h-full resolve correctamente)
-  // transform: scale apenas pintava, h-full ficava 0 -> conteudo so no topo
+  // Render at preview size (270x338) directamente. Puppeteer captura
+  // com deviceScaleFactor 4 -> screenshot 1080x1352 alta qualidade.
+  // Bypass total de zoom/scale (que causavam h-full=0 ou black bottom).
   return (
     <div
       id="slide-root"
       style={{
-        width: 1080,
-        height: 1350,
+        width: 270,
+        height: 338,
         position: 'fixed',
         top: 0,
         left: 0,
@@ -124,20 +124,12 @@ export default function RenderSlidePage() {
         overflow: 'hidden',
       }}
     >
-      <div
-        style={{
-          width: 270,
-          height: 338,
-          zoom: 4,
-        } as CSSProperties}
-      >
-        <SlideRender
-          slide={data.slide}
-          mundo={data.mundo}
-          layout={data.layout}
-          slideKey={data.slideKey}
-        />
-      </div>
+      <SlideRender
+        slide={data.slide}
+        mundo={data.mundo}
+        layout={data.layout}
+        slideKey={data.slideKey}
+      />
     </div>
   );
 }
