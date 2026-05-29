@@ -152,12 +152,11 @@ function MundoIcon({ mundo, size = 16, light }: { mundo: string; size?: number; 
 
 function BrandTop({ mundo, light }: { mundo: string; light?: boolean }) {
   const c = light ? '#2A1C12' : '#F2E8DC';
-  const name = mundo === 'autora' ? 'Vivianne dos Santos' : PALETAS[mundo as Mundo]?.nome ?? 'Vivianne';
   return (
     <div className="flex items-center gap-[5px]">
       <MundoIcon mundo={mundo} size={18} light={light} />
       <span className="text-[8px] font-serif italic" style={{ color: c, opacity: 0.6 }}>
-        {name}
+        Vivianne dos Santos
       </span>
     </div>
   );
