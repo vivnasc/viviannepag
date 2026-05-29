@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import {
   CALENDARIO_30_DIAS,
   PALETAS,
@@ -1521,12 +1522,20 @@ export default function EstudioPage() {
   return (
     <main className="max-w-[1200px] mx-auto px-7 py-12">
       {/* Header */}
-      <header className="mb-10">
-        <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre mb-2">admin</p>
-        <h1 className="font-serif font-light text-creme text-3xl mb-2">Estudio de Conteudo</h1>
-        <p className="text-creme-2/60 text-[0.88rem]">
-          Calendario de 30 dias &middot; Instagram + TikTok &middot; Carrosseis, Reels e Citacoes
-        </p>
+      <header className="mb-10 flex items-start gap-4 flex-wrap">
+        <div className="flex-1 min-w-0">
+          <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre mb-2">admin</p>
+          <h1 className="font-serif font-light text-creme text-3xl mb-2">Estudio de Conteudo</h1>
+          <p className="text-creme-2/60 text-[0.88rem]">
+            Calendario de 30 dias &middot; Instagram + TikTok &middot; Carrosseis, Reels e Citacoes
+          </p>
+        </div>
+        <Link
+          href="/admin/estudio/biblioteca"
+          className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ambar/50 text-ambar bg-ambar/10 hover:bg-ambar/20 no-underline transition-colors"
+        >
+          📚 Ver Biblioteca
+        </Link>
       </header>
 
       {/* ═══ FASE 1: DIAGNOSTICO ═══ */}

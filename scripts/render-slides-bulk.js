@@ -1,20 +1,12 @@
 #!/usr/bin/env node
 /**
- * Render todos os slides do calendario de 30 dias usando Puppeteer.
- * Navega para SITE_URL/render-slide?dia=N&idx=I&layout=... e screenshot.
- * Upload PNGs para Supabase. Cria ZIP final.
- *
- * Env vars necessarias:
- *  SITE_URL — URL publica do site (ex: https://viviannepag.vercel.app)
- *  SUPABASE_URL
- *  SUPABASE_SERVICE_ROLE_KEY
- *  JOB_ID — id unico do job (timestamp)
+ * Render todos os slides do calendario.
+ * Resiliente: skipa slides ja feitos, reporta progresso por slide,
+ * tracking de falhas individuais.
  */
 
 const { createClient } = require('@supabase/supabase-js');
 const puppeteer = require('puppeteer');
-const path = require('node:path');
-const fs = require('node:fs/promises');
 
 const SITE_URL = process.env.SITE_URL;
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -24,7 +16,7 @@ const BUCKET = 'viviannepag-assets';
 const RENDER_FOLDER = `renders/${JOB_ID}`;
 
 if (!SITE_URL || !SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  console.error('Missing env vars: SITE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY');
+  console.error('Missing env: SITE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY');
   process.exit(1);
 }
 
@@ -33,57 +25,86 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
 });
 
 async function getManifest() {
-  // Carregar do source code o calendario (compilado pelo Next, mas em CI carregamos do TS)
-  // Para simplicidade: o workflow descarrega um manifest JSON gerado pelo endpoint
-  const manifestUrl = `${SITE_URL}/api/admin/estudio/render-manifest?jobId=${JOB_ID}`;
-  const res = await fetch(manifestUrl);
-  if (!res.ok) throw new Error(`manifest ${res.status}`);
+  const res = await fetch(`${SITE_URL}/api/admin/estudio/render-manifest?jobId=${JOB_ID}`);
+  if (!res.ok) throw new Error(`manifest ${res.status}: ${await res.text()}`);
   return res.json();
 }
 
-async function uploadResult(status, data = {}) {
-  const result = {
-    jobId: JOB_ID,
-    status,
-    timestamp: new Date().toISOString(),
-    ...data,
-  };
+let lastResultWrite = 0;
+async function writeResult(result, force = false) {
+  // Throttle: max 1 write/2s salvo se force=true
+  const now = Date.now();
+  if (!force && now - lastResultWrite < 2000) return;
+  lastResultWrite = now;
+
   const json = JSON.stringify(result, null, 2);
-  await supabase.storage
-    .from(BUCKET)
-    .upload(`${RENDER_FOLDER}/result.json`, Buffer.from(json), {
+  try {
+    await supabase.storage.from(BUCKET).upload(`${RENDER_FOLDER}/result.json`, Buffer.from(json), {
       contentType: 'application/json',
       upsert: true,
     });
-  console.log('[result]', status, JSON.stringify(data));
+  } catch (e) {
+    console.warn('result.json write failed:', e.message);
+  }
+}
+
+async function ficheiroExiste(filePath) {
+  const dirPath = filePath.substring(0, filePath.lastIndexOf('/'));
+  const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+  try {
+    const { data } = await supabase.storage.from(BUCKET).list(dirPath, { limit: 100 });
+    return data?.some(f => f.name === fileName) ?? false;
+  } catch {
+    return false;
+  }
 }
 
 async function main() {
   console.log(`[start] job=${JOB_ID} site=${SITE_URL}`);
-  await uploadResult('a-renderizar', { progress: 0, total: 0 });
 
   let manifest;
   try {
     manifest = await getManifest();
   } catch (e) {
-    await uploadResult('erro', { erro: `manifest: ${e.message}` });
+    await writeResult({ jobId: JOB_ID, status: 'erro', erro: `manifest: ${e.message}` }, true);
     process.exit(1);
   }
 
   const tarefas = manifest.tarefas;
-  console.log(`[manifest] ${tarefas.length} slides para renderizar`);
-  await uploadResult('a-renderizar', { progress: 0, total: tarefas.length });
+  console.log(`[manifest] ${tarefas.length} slides para processar`);
+
+  const result = {
+    jobId: JOB_ID,
+    status: 'a-renderizar',
+    progress: 0,
+    total: tarefas.length,
+    uploaded: [],
+    skipped: [],
+    failed: [],
+    iniciadoEm: new Date().toISOString(),
+  };
+  await writeResult(result, true);
 
   const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--font-render-hinting=none'],
   });
 
-  const uploaded = [];
-  let feitos = 0;
-
   for (const tarefa of tarefas) {
     const { dia, idx, layout, tipo, imageUrl } = tarefa;
+    const filename = `dia-${String(dia).padStart(2, '0')}/slide-${String(idx + 1).padStart(2, '0')}-${tipo}.png`;
+    const filePath = `${RENDER_FOLDER}/${filename}`;
+
+    // Idempotencia: skip se ficheiro ja existe
+    if (await ficheiroExiste(filePath)) {
+      const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
+      result.skipped.push({ dia, idx, tipo, filename, url: urlData.publicUrl });
+      result.progress++;
+      console.log(`[skip] ${filename} (ja existe)`);
+      await writeResult(result);
+      continue;
+    }
+
     const url = new URL(`${SITE_URL}/render-slide`);
     url.searchParams.set('dia', String(dia));
     url.searchParams.set('idx', String(idx));
@@ -95,9 +116,7 @@ async function main() {
 
     try {
       await page.goto(url.toString(), { waitUntil: 'networkidle0', timeout: 30000 });
-      // Aguardar fontes
       await page.evaluate(() => document.fonts.ready);
-      // Margem extra para gradientes/grain
       await new Promise(r => setTimeout(r, 800));
 
       const buffer = await page.screenshot({
@@ -105,74 +124,85 @@ async function main() {
         clip: { x: 0, y: 0, width: 1080, height: 1350 },
       });
 
-      const filename = `dia-${String(dia).padStart(2, '0')}/slide-${String(idx + 1).padStart(2, '0')}-${tipo}.png`;
-      const filePath = `${RENDER_FOLDER}/${filename}`;
-
       const { error: upErr } = await supabase.storage
         .from(BUCKET)
         .upload(filePath, buffer, { contentType: 'image/png', upsert: true });
-      if (upErr) throw new Error(upErr.message);
+      if (upErr) throw new Error(`upload: ${upErr.message}`);
 
       const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
-      uploaded.push({ dia, idx, tipo, layout, filename, url: urlData.publicUrl });
-      console.log(`[ok] dia-${dia} slide-${idx + 1} ${tipo}`);
+      result.uploaded.push({ dia, idx, tipo, filename, url: urlData.publicUrl });
+      console.log(`[ok] ${filename}`);
     } catch (e) {
-      console.error(`[erro] dia-${dia} slide-${idx + 1}:`, e.message);
+      result.failed.push({ dia, idx, tipo, filename, erro: e.message });
+      console.error(`[erro] ${filename}: ${e.message}`);
     } finally {
       await page.close();
     }
 
-    feitos++;
-    if (feitos % 5 === 0 || feitos === tarefas.length) {
-      await uploadResult('a-renderizar', { progress: feitos, total: tarefas.length, uploaded: uploaded.length });
-    }
+    result.progress++;
+    await writeResult(result); // every slide (throttled to 2s)
   }
 
   await browser.close();
 
-  // ZIP
+  // ZIP de tudo (uploaded + skipped)
   console.log('[zip] a empacotar...');
-  const JSZip = require('jszip');
-  const zip = new JSZip();
+  result.status = 'a-empacotar';
+  await writeResult(result, true);
 
-  // Descarregar cada PNG e adicionar ao ZIP
-  for (const u of uploaded) {
-    const r = await fetch(u.url);
-    const buf = Buffer.from(await r.arrayBuffer());
-    zip.file(u.filename, buf);
+  const todosFicheiros = [...result.uploaded, ...result.skipped];
+  let zipUrl = null;
+  try {
+    const JSZip = require('jszip');
+    const zip = new JSZip();
+    for (const u of todosFicheiros) {
+      try {
+        const r = await fetch(u.url);
+        const buf = Buffer.from(await r.arrayBuffer());
+        zip.file(u.filename, buf);
+      } catch (e) {
+        console.warn(`zip skip ${u.filename}: ${e.message}`);
+      }
+    }
+    zip.file('manifest.json', JSON.stringify({
+      jobId: JOB_ID,
+      geradoEm: new Date().toISOString(),
+      total: todosFicheiros.length,
+      failed: result.failed.length,
+      files: todosFicheiros.map(u => u.filename),
+    }, null, 2));
+
+    const zipBuffer = await zip.generateAsync({
+      type: 'nodebuffer',
+      compression: 'DEFLATE',
+      compressionOptions: { level: 6 },
+    });
+    const zipPath = `${RENDER_FOLDER}/viviannepag-${JOB_ID}.zip`;
+    const { error: zipErr } = await supabase.storage.from(BUCKET).upload(zipPath, zipBuffer, {
+      contentType: 'application/zip',
+      upsert: true,
+    });
+    if (zipErr) throw new Error(zipErr.message);
+    zipUrl = supabase.storage.from(BUCKET).getPublicUrl(zipPath).data.publicUrl;
+    console.log(`[done] zip: ${zipUrl}`);
+  } catch (e) {
+    console.error('[zip-fail]', e.message);
+    result.zipErro = e.message;
   }
 
-  // Adicionar manifest no ZIP
-  zip.file('manifest.json', JSON.stringify({
-    jobId: JOB_ID,
-    geradoEm: new Date().toISOString(),
-    total: uploaded.length,
-    files: uploaded.map(u => u.filename),
-  }, null, 2));
-
-  const zipBuffer = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 6 } });
-  const zipPath = `${RENDER_FOLDER}/viviannepag-${JOB_ID}.zip`;
-  const { error: zipErr } = await supabase.storage
-    .from(BUCKET)
-    .upload(zipPath, zipBuffer, { contentType: 'application/zip', upsert: true });
-  if (zipErr) {
-    await uploadResult('erro', { erro: `zip upload: ${zipErr.message}` });
-    process.exit(1);
-  }
-
-  const { data: zipUrlData } = supabase.storage.from(BUCKET).getPublicUrl(zipPath);
-  console.log(`[done] zip: ${zipUrlData.publicUrl}`);
-
-  await uploadResult('feito', {
-    progress: uploaded.length,
-    total: tarefas.length,
-    zipUrl: zipUrlData.publicUrl,
-    images: uploaded,
-  });
+  result.status = result.failed.length > 0 ? 'feito-com-falhas' : 'feito';
+  result.zipUrl = zipUrl;
+  result.terminadoEm = new Date().toISOString();
+  await writeResult(result, true);
 }
 
 main().catch(async (e) => {
-  console.error(e);
-  await uploadResult('erro', { erro: e.message });
+  console.error('[fatal]', e);
+  await writeResult({
+    jobId: JOB_ID,
+    status: 'erro',
+    erro: e.message,
+    terminadoEm: new Date().toISOString(),
+  }, true);
   process.exit(1);
 });
