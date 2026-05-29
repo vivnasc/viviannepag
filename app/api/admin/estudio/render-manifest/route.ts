@@ -41,7 +41,7 @@ export async function GET(req: Request) {
             return { name: f.name, url: urlData.publicUrl, slideIdx: Number(m[1]) };
           })
           .filter((x): x is { name: string; url: string; slideIdx: number } => x !== null)
-          .sort((a, b) => a.name.localeCompare(b.name));
+          .sort((a, b) => b.name.localeCompare(a.name));  // DESC: mais recente primeiro
       }
     } catch {}
 
