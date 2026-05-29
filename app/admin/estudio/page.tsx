@@ -575,29 +575,57 @@ function BulkRenderPanel() {
           const layout = defaultLayoutFor(slide);
           const slideKey = `dia-${conteudo.dia}-slide-${i}`;
 
-          // Cria container temporario 1080x1350
+          // Renderiza VISIVEL (visibility:hidden mantem layout mas oculto)
+          // off-screen com left:-9999px causa renders pretos em html-to-image
           const wrapper = document.createElement('div');
           wrapper.style.position = 'fixed';
-          wrapper.style.left = '-9999px';
+          wrapper.style.left = '0';
           wrapper.style.top = '0';
+          wrapper.style.zIndex = '-1';
+          wrapper.style.visibility = 'hidden';
+          wrapper.style.pointerEvents = 'none';
           wrapper.style.width = '1080px';
           wrapper.style.height = '1350px';
-          wrapper.style.background = '#000';
-          root.appendChild(wrapper);
+          wrapper.style.background = '#111';
+          document.body.appendChild(wrapper);
 
           const reactRoot = createRoot(wrapper);
-          await new Promise<void>((resolve) => {
-            reactRoot.render(
-              <SlideRender
-                slide={slide}
-                mundo={conteudo.mundo}
-                layout={layout}
-                slideKey={slideKey}
-              />
-            );
-            // Esperar render + carregamento de imagem
-            setTimeout(resolve, 800);
-          });
+          reactRoot.render(
+            <SlideRender
+              slide={slide}
+              mundo={conteudo.mundo}
+              layout={layout}
+              slideKey={slideKey}
+            />
+          );
+
+          // Aguardar React 18 flush + paint
+          await new Promise(r => setTimeout(r, 200));
+          await new Promise<void>(r => requestAnimationFrame(() => requestAnimationFrame(() => r())));
+
+          // Aguardar fontes web (Fraunces, Outfit)
+          if (document.fonts?.ready) {
+            try { await document.fonts.ready; } catch {}
+          }
+
+          // Aguardar imagens carregarem
+          const imgs = Array.from(wrapper.querySelectorAll('img'));
+          await Promise.all(imgs.map(img => {
+            if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
+            return new Promise<void>((resolve) => {
+              const done = () => resolve();
+              img.addEventListener('load', done, { once: true });
+              img.addEventListener('error', done, { once: true });
+              // Timeout de 5s por imagem (se Supabase estiver lento)
+              setTimeout(done, 5000);
+            });
+          }));
+
+          // Pequena espera final para garantir paint dos backgrounds + grain
+          await new Promise(r => setTimeout(r, 300));
+
+          // Tornar visivel JUST para o capture (html-to-image precisa de elemento renderizavel)
+          wrapper.style.visibility = 'visible';
 
           try {
             const dataUrl = await toPng(wrapper, {
@@ -606,6 +634,7 @@ function BulkRenderPanel() {
               pixelRatio: 1,
               backgroundColor: '#111',
               cacheBust: true,
+              skipFonts: false,
             });
             const base64 = dataUrl.split(',')[1];
             const filename = `slide-${String(i + 1).padStart(2, '0')}-${slide.tipo}.png`;
@@ -615,7 +644,7 @@ function BulkRenderPanel() {
           }
 
           reactRoot.unmount();
-          root.removeChild(wrapper);
+          document.body.removeChild(wrapper);
 
           setProgress(prev => ({ feito: prev.feito + 1, total: prev.total }));
         }
