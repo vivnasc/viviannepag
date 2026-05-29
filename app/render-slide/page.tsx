@@ -42,7 +42,7 @@ export default function RenderSlidePage() {
 
       const slide = conteudo.slides[idx];
       const layout = layoutOverride ?? defaultLayoutFor(slide);
-      const slideKey = `dia-${dia}-slide-${idx}-${layout}`;
+      const slideKey = `dia-${dia}-slide-${idx}`;
 
       // CRITICO: Carregar imagem PARA IndexedDB ANTES de setData
       // Senao a layout faz mount sem imagem e nunca actualiza
@@ -58,8 +58,7 @@ export default function RenderSlidePage() {
               reader.readAsDataURL(blob);
             });
             const { saveImage } = await import('@/lib/estudio-imagens-db');
-            // useSlideImage usa slideKey-{layout} no layout. slideKey ja inclui layout, entao precisa do duplo
-            await saveImage(`${slideKey}-${layout}`, dataUrl);
+            await saveImage(slideKey, dataUrl);
           } else {
             console.warn(`imageUrl ${res.status}`);
           }

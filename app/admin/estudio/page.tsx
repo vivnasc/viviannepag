@@ -369,7 +369,7 @@ function BulkProducaoPanel() {
   const totalFeitas = Object.values(statusDias).reduce((acc, s) => acc + s.feito, 0);
 
   async function gerarUmSlide(conteudo: ConteudoDia, slide: Slide, slideIdx: number): Promise<'feito' | 'skip' | 'erro'> {
-    const slideKey = `dia-${conteudo.dia}-slide-${slideIdx}-foto-fundo`;
+    const slideKey = `dia-${conteudo.dia}-slide-${slideIdx}`;
     const res = await fetch('/api/admin/estudio/gerar-imagem', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -918,7 +918,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
         // Necessario quando se muda de dispositivo (e.g. iPad sem IndexedDB local)
         for (const img of imgs) {
           if (cancelled) return;
-          const idbKey = `dia-${conteudo.dia}-slide-${img.slideIdx}-foto-fundo`;
+          const idbKey = `dia-${conteudo.dia}-slide-${img.slideIdx}`;
           try {
             const existing = await loadImage(idbKey);
             if (existing) continue; // ja tem, skip
@@ -946,7 +946,7 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
     setEstado(prev => ({ ...prev, [idx]: 'a-gerar' }));
     setErros(prev => { const n = { ...prev }; delete n[idx]; return n; });
     try {
-      const slideKey = `dia-${conteudo.dia}-slide-${idx}-foto-fundo`;
+      const slideKey = `dia-${conteudo.dia}-slide-${idx}`;
       const res = await fetch('/api/admin/estudio/gerar-imagem', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },

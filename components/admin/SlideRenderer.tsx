@@ -356,7 +356,7 @@ function DropZone({ slideKey, imageUrl, onImage, onClear, height, notaVisual, sl
 
 function LayoutFotoFundo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
-  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-fundo`);
+  const { imageUrl, setImage, clearImage } = useSlideImage(slideKey);
 
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: `linear-gradient(175deg, ${p.bg}dd, ${p.bg2})` }}>
@@ -410,7 +410,7 @@ function LayoutStatement({ slide, mundo }: { slide: Slide; mundo: Mundo }) {
 
 function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
-  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-topo`);
+  const { imageUrl, setImage, clearImage } = useSlideImage(slideKey);
 
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: p.bg2 }}>
@@ -448,7 +448,7 @@ function LayoutFotoTopo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo
 
 function LayoutFotoBaixo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
-  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-baixo`);
+  const { imageUrl, setImage, clearImage } = useSlideImage(slideKey);
 
   return (
     <div className="w-full h-full relative overflow-hidden flex flex-col" style={{ background: p.bg2 }}>
@@ -482,7 +482,7 @@ function LayoutFotoBaixo({ slide, mundo, slideKey }: { slide: Slide; mundo: Mund
 
 function LayoutFotoLado({ slide, mundo, slideKey }: { slide: Slide; mundo: Mundo; slideKey: string }) {
   const p = PALETAS[mundo];
-  const { imageUrl, setImage, clearImage } = useSlideImage(`${slideKey}-foto-lado`);
+  const { imageUrl, setImage, clearImage } = useSlideImage(slideKey);
 
   return (
     <div className="w-full h-full relative overflow-hidden flex" style={{ background: p.bg2 }}>
