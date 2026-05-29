@@ -9,7 +9,7 @@ import {
   type Slide,
   type Mundo,
 } from '@/lib/estudio-conteudo';
-import { SlideWithLayout, SlideLayoutGrid } from '@/components/admin/SlideRenderer';
+import { SlideWithLayout, SlideLayoutGrid, SlideRender, type SlideLayout } from '@/components/admin/SlideRenderer';
 import { saveImage } from '@/lib/estudio-imagens-db';
 import { Pill, ProgressBar, EstimateCard, Btn, Card } from '@/components/admin/EstudioKit';
 import {
@@ -527,6 +527,153 @@ function BulkProducaoPanel() {
           })}
         </div>
       )}
+    </Card>
+  );
+}
+
+// ─── Bulk Render PNG (renderiza todos os slides como PNGs num ZIP) ──
+
+function BulkRenderPanel() {
+  const [ativo, setAtivo] = useState(false);
+  const [progress, setProgress] = useState({ feito: 0, total: 0 });
+  const [diaActual, setDiaActual] = useState<number | null>(null);
+  const [erro, setErro] = useState<string | null>(null);
+  const offscreenRef = useRef<HTMLDivElement>(null);
+
+  const diasComSlides = CALENDARIO_30_DIAS.filter(c => c.slides && c.slides.length > 0);
+  const totalSlides = diasComSlides.reduce((acc, c) => acc + (c.slides ?? []).length, 0);
+
+  function defaultLayoutFor(slide: Slide): SlideLayout {
+    if (slide.fundoClaro) return 'claro';
+    if (slide.tipo === 'cta') return 'cta';
+    if (slide.tipo === 'capa') return 'foto-fundo';
+    return 'statement';
+  }
+
+  async function renderTodos() {
+    setAtivo(true);
+    setErro(null);
+    setProgress({ feito: 0, total: totalSlides });
+
+    try {
+      const { default: JSZip } = await import('jszip');
+      const { toPng } = await import('html-to-image');
+      const zip = new JSZip();
+      const root = offscreenRef.current;
+      if (!root) throw new Error('Container nao encontrado');
+
+      const { createRoot } = await import('react-dom/client');
+
+      for (const conteudo of diasComSlides) {
+        setDiaActual(conteudo.dia);
+        const diaFolder = zip.folder(`dia-${String(conteudo.dia).padStart(2, '0')}`);
+        if (!diaFolder) continue;
+
+        const slides = conteudo.slides ?? [];
+        for (let i = 0; i < slides.length; i++) {
+          const slide = slides[i];
+          const layout = defaultLayoutFor(slide);
+          const slideKey = `dia-${conteudo.dia}-slide-${i}`;
+
+          // Cria container temporario 1080x1350
+          const wrapper = document.createElement('div');
+          wrapper.style.position = 'fixed';
+          wrapper.style.left = '-9999px';
+          wrapper.style.top = '0';
+          wrapper.style.width = '1080px';
+          wrapper.style.height = '1350px';
+          wrapper.style.background = '#000';
+          root.appendChild(wrapper);
+
+          const reactRoot = createRoot(wrapper);
+          await new Promise<void>((resolve) => {
+            reactRoot.render(
+              <SlideRender
+                slide={slide}
+                mundo={conteudo.mundo}
+                layout={layout}
+                slideKey={slideKey}
+              />
+            );
+            // Esperar render + carregamento de imagem
+            setTimeout(resolve, 800);
+          });
+
+          try {
+            const dataUrl = await toPng(wrapper, {
+              width: 1080,
+              height: 1350,
+              pixelRatio: 1,
+              backgroundColor: '#111',
+              cacheBust: true,
+            });
+            const base64 = dataUrl.split(',')[1];
+            const filename = `slide-${String(i + 1).padStart(2, '0')}-${slide.tipo}.png`;
+            diaFolder.file(filename, base64, { base64: true });
+          } catch (e) {
+            console.error(`Erro slide ${i + 1} dia ${conteudo.dia}:`, e);
+          }
+
+          reactRoot.unmount();
+          root.removeChild(wrapper);
+
+          setProgress(prev => ({ feito: prev.feito + 1, total: prev.total }));
+        }
+      }
+
+      setDiaActual(null);
+      const blob = await zip.generateAsync({ type: 'blob' }, (meta) => {
+        // Pode adicionar progresso de compressao se quiseres
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `viviannepag-30dias-${new Date().toISOString().split('T')[0]}.zip`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : 'erro desconhecido');
+    }
+
+    setAtivo(false);
+  }
+
+  return (
+    <Card elevado className="mb-8">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
+        <p className="text-[0.7rem] tracking-[0.2em] uppercase text-ambar">&#127906; Render final PNG (ZIP)</p>
+        <div className="flex-1" />
+        <span className="text-[0.65rem] text-creme-2/60">
+          {totalSlides} slides &middot; 1080&times;1350
+        </span>
+      </div>
+
+      <p className="text-[0.7rem] text-creme-2/50 italic mb-3">
+        Renderiza todos os slides finais (com imagem + texto + marca) e descarrega um ZIP organizado por dia.
+        Requer que as imagens ja tenham sido geradas (FASE 3).
+      </p>
+
+      {ativo && (
+        <div className="space-y-2 mb-3">
+          <ProgressBar
+            current={progress.feito}
+            total={progress.total}
+            label={`A renderizar PNGs ${diaActual ? `(dia ${diaActual})` : ''}`}
+            variant="ouro-folha"
+          />
+        </div>
+      )}
+
+      {erro && (
+        <p className="text-[0.7rem] text-rosa mb-2">Erro: {erro}</p>
+      )}
+
+      <Btn variant="primary" size="md" onClick={renderTodos} disabled={ativo}>
+        {ativo ? 'a renderizar...' : 'render todos PNG'}
+      </Btn>
+
+      {/* container off-screen para render */}
+      <div ref={offscreenRef} aria-hidden style={{ position: 'fixed', left: '-9999px', top: '0' }} />
     </Card>
   );
 }
@@ -1432,8 +1579,11 @@ export default function EstudioPage() {
       <PhaseHeader
         num={4}
         titulo="Exportar"
-        descricao="Quando o conteudo estiver pronto, exporta CSV para o Metricool e captions."
+        descricao="Renderiza PNGs finais, exporta CSV para o Metricool e captions."
       />
+
+      <BulkRenderPanel />
+
       <div className="flex items-center gap-3 mb-10 flex-wrap p-4 rounded-[14px] border border-ocre/15 bg-terra-2/20">
         <div className="flex items-center gap-2">
           <label className="text-[0.68rem] text-creme-2/50">Data inicio:</label>
