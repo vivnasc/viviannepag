@@ -542,13 +542,40 @@ function BulkRenderGitHubActionsPanel() {
     total?: number;
     zipUrl?: string;
     erro?: string;
+    uploaded?: number;
+    skipped?: number;
+    failed?: number;
   } | null>(null);
   const [disparando, setDisparando] = useState(false);
   const [workflowUrl, setWorkflowUrl] = useState<string | null>(null);
+  const [latestJob, setLatestJob] = useState<{
+    jobId: string;
+    status: string;
+    uploaded?: number;
+    skipped?: number;
+    failed?: number;
+    total?: number;
+    zipUrl?: string;
+    terminadoEm?: string;
+  } | null>(null);
+
+  // Auto-detectar ultimo job ao montar
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch('/api/admin/estudio/biblioteca');
+        const json = await res.json();
+        const jobs = json.jobs ?? [];
+        if (jobs.length > 0) {
+          setLatestJob(jobs[0]);
+        }
+      } catch {}
+    })();
+  }, []);
 
   // Poll status
   useEffect(() => {
-    if (!jobId || status?.status === 'feito' || status?.status === 'erro') return;
+    if (!jobId || status?.status === 'feito' || status?.status === 'feito-com-falhas' || status?.status === 'erro') return;
     const intv = setInterval(async () => {
       try {
         const res = await fetch(`/api/admin/estudio/render-status?jobId=${jobId}`);
@@ -568,13 +595,15 @@ function BulkRenderGitHubActionsPanel() {
       setJobId(json.jobId);
       setWorkflowUrl(json.workflowRunUrl);
       setStatus({ status: 'a-iniciar' });
+      setLatestJob(null);
     } catch (e) {
       setStatus({ status: 'erro', erro: e instanceof Error ? e.message : 'erro' });
     }
     setDisparando(false);
   }
 
-  const emCurso = jobId && status?.status !== 'feito' && status?.status !== 'erro';
+  const emCurso = jobId && status?.status !== 'feito' && status?.status !== 'feito-com-falhas' && status?.status !== 'erro';
+  const feitoOk = status?.status === 'feito' || status?.status === 'feito-com-falhas';
 
   return (
     <Card elevado className="mb-8">
@@ -593,24 +622,68 @@ function BulkRenderGitHubActionsPanel() {
         Le imagens ja geradas no Supabase, produz PNG 1080x1350, gera ZIP final.
       </p>
 
+      {/* Ultimo render: detectado automaticamente ao abrir */}
+      {latestJob && !jobId && (
+        <div className="mb-3 p-3 rounded-[10px] bg-ambar/8 border border-ambar/25">
+          <p className="text-[0.75rem] text-creme mb-1">
+            <span className="text-ambar">&#10003; Ultimo render:</span> <span className="font-mono text-[0.7rem]">{latestJob.jobId}</span>
+          </p>
+          <div className="flex items-center gap-3 mb-2 text-[0.7rem] text-creme-2/70">
+            <span>Status: <span className="text-ambar">{latestJob.status}</span></span>
+            {latestJob.uploaded != null && <span>{latestJob.uploaded} novos</span>}
+            {latestJob.skipped != null && latestJob.skipped > 0 && <span>{latestJob.skipped} reusados</span>}
+            {latestJob.failed != null && latestJob.failed > 0 && <span className="text-rosa">{latestJob.failed} falharam</span>}
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <Link
+              href="/admin/estudio/biblioteca"
+              className="text-[0.7rem] px-3 py-1.5 rounded-[10px] border border-ambar/50 text-ambar bg-ambar/15 hover:bg-ambar/25 no-underline"
+            >
+              📚 Ver renders na Biblioteca
+            </Link>
+            {latestJob.zipUrl && (
+              <a
+                href={latestJob.zipUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[0.7rem] px-3 py-1.5 rounded-[10px] border border-ocre/30 text-creme-2/80 hover:border-ambar hover:text-ambar no-underline"
+              >
+                ⬇ Descarregar ZIP
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
       {emCurso && status && (
         <div className="space-y-2 mb-3">
           <ProgressBar
             current={status.progress ?? 0}
             total={status.total ?? 100}
-            label={`Status: ${status.status} ${status.progress != null && status.total ? `(${status.progress}/${status.total})` : ''}`}
+            label={`Status: ${status.status}`}
             variant="ouro-folha"
+            subLabel={`${status.uploaded ?? 0} novos · ${status.skipped ?? 0} reusados · ${status.failed ?? 0} falharam`}
           />
-          <p className="text-[0.65rem] text-creme-2/40">A correr no GitHub Actions. Atualiza a cada 5s.</p>
+          <p className="text-[0.65rem] text-creme-2/40">A correr no GitHub Actions. Actualiza a cada 5s.</p>
         </div>
       )}
 
-      {status?.status === 'feito' && status.zipUrl && (
+      {feitoOk && (
         <div className="mb-3 p-3 rounded-[10px] bg-ambar/10 border border-ambar/30">
           <p className="text-[0.78rem] text-ambar mb-2">&#10003; Render completo</p>
-          <Btn variant="primary" size="md" onClick={() => window.open(status.zipUrl, '_blank')}>
-            Descarregar ZIP final
-          </Btn>
+          <div className="flex gap-2 flex-wrap">
+            <Link
+              href="/admin/estudio/biblioteca"
+              className="text-[0.78rem] px-4 py-2 rounded-[10px] border border-ambar/50 text-ambar bg-ambar/15 hover:bg-ambar/25 no-underline"
+            >
+              📚 Ver renders na Biblioteca
+            </Link>
+            {status?.zipUrl && (
+              <Btn variant="default" size="md" onClick={() => window.open(status.zipUrl, '_blank')}>
+                Descarregar ZIP
+              </Btn>
+            )}
+          </div>
         </div>
       )}
 
@@ -1618,6 +1691,14 @@ export default function EstudioPage() {
         num={3}
         titulo="Produzir"
         descricao="Gera imagens em massa (bulk) ou clica num dia para detalhe individual."
+        action={
+          <Link
+            href="/admin/estudio/biblioteca"
+            className="text-[0.7rem] px-3 py-1.5 rounded-md border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline"
+          >
+            📚 Biblioteca
+          </Link>
+        }
       />
 
       <BulkProducaoPanel />
@@ -1773,6 +1854,14 @@ export default function EstudioPage() {
         num={4}
         titulo="Exportar"
         descricao="Renderiza PNGs finais, exporta CSV para o Metricool e captions."
+        action={
+          <Link
+            href="/admin/estudio/biblioteca"
+            className="text-[0.7rem] px-3 py-1.5 rounded-md border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline"
+          >
+            📚 Biblioteca
+          </Link>
+        }
       />
 
       <BulkRenderGitHubActionsPanel />
