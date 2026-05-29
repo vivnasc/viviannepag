@@ -70,10 +70,25 @@ export default function RenderSlidePage() {
 
       setData({ slide, mundo: conteudo.mundo, layout, slideKey });
 
-      // Sinal para Puppeteer: aguardar pequeno tempo para garantir paint
-      setTimeout(() => {
+      // Aguardar img element existir + carregar (SyncHim #3 advice)
+      // Depois sinaliza para Puppeteer
+      setTimeout(async () => {
+        try {
+          const img = document.querySelector('#slide-root img') as HTMLImageElement | null;
+          if (img && !img.complete) {
+            await new Promise<void>((resolve) => {
+              const done = () => resolve();
+              img.addEventListener('load', done, { once: true });
+              img.addEventListener('error', done, { once: true });
+              setTimeout(done, 5000); // safety
+            });
+          }
+        } catch {}
+        // Paint frame + extra margem
+        await new Promise(r => requestAnimationFrame(() => r(undefined)));
+        await new Promise(r => setTimeout(r, 500));
         document.body.setAttribute('data-slide-ready', 'true');
-      }, 500);
+      }, 100);
     })();
   }, []);
 
