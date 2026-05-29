@@ -531,7 +531,100 @@ function BulkProducaoPanel() {
   );
 }
 
-// ─── Bulk Render PNG (renderiza todos os slides como PNGs num ZIP) ──
+// ─── Render via GitHub Actions (Puppeteer server-side) ──
+
+function BulkRenderGitHubActionsPanel() {
+  const [jobId, setJobId] = useState<string | null>(null);
+  const [status, setStatus] = useState<{
+    status?: string;
+    progress?: number;
+    total?: number;
+    zipUrl?: string;
+    erro?: string;
+  } | null>(null);
+  const [disparando, setDisparando] = useState(false);
+  const [workflowUrl, setWorkflowUrl] = useState<string | null>(null);
+
+  // Poll status
+  useEffect(() => {
+    if (!jobId || status?.status === 'feito' || status?.status === 'erro') return;
+    const intv = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/admin/estudio/render-status?jobId=${jobId}`);
+        const json = await res.json();
+        setStatus(json);
+      } catch {}
+    }, 5000);
+    return () => clearInterval(intv);
+  }, [jobId, status?.status]);
+
+  async function disparar() {
+    setDisparando(true);
+    try {
+      const res = await fetch('/api/admin/estudio/render-dispatch', { method: 'POST' });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.detalhe ?? json.erro ?? 'falha');
+      setJobId(json.jobId);
+      setWorkflowUrl(json.workflowRunUrl);
+      setStatus({ status: 'a-iniciar' });
+    } catch (e) {
+      setStatus({ status: 'erro', erro: e instanceof Error ? e.message : 'erro' });
+    }
+    setDisparando(false);
+  }
+
+  const emCurso = jobId && status?.status !== 'feito' && status?.status !== 'erro';
+
+  return (
+    <Card elevado className="mb-8">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
+        <p className="text-[0.7rem] tracking-[0.2em] uppercase text-ambar">&#9881; Render via GitHub Actions (server-side)</p>
+        <div className="flex-1" />
+        {workflowUrl && (
+          <a href={workflowUrl} target="_blank" rel="noreferrer" className="text-[0.65rem] text-ocre/70 hover:text-ambar underline">
+            ver workflow
+          </a>
+        )}
+      </div>
+
+      <p className="text-[0.72rem] text-creme-2/60 italic mb-3">
+        Renderiza todos os slides com Puppeteer no GitHub Actions (~5-10 min para 88 slides).
+        Le imagens ja geradas no Supabase, produz PNG 1080x1350, gera ZIP final.
+      </p>
+
+      {emCurso && status && (
+        <div className="space-y-2 mb-3">
+          <ProgressBar
+            current={status.progress ?? 0}
+            total={status.total ?? 100}
+            label={`Status: ${status.status} ${status.progress != null && status.total ? `(${status.progress}/${status.total})` : ''}`}
+            variant="ouro-folha"
+          />
+          <p className="text-[0.65rem] text-creme-2/40">A correr no GitHub Actions. Atualiza a cada 5s.</p>
+        </div>
+      )}
+
+      {status?.status === 'feito' && status.zipUrl && (
+        <div className="mb-3 p-3 rounded-[10px] bg-ambar/10 border border-ambar/30">
+          <p className="text-[0.78rem] text-ambar mb-2">&#10003; Render completo</p>
+          <Btn variant="primary" size="md" onClick={() => window.open(status.zipUrl, '_blank')}>
+            Descarregar ZIP final
+          </Btn>
+        </div>
+      )}
+
+      {status?.status === 'erro' && (
+        <p className="text-[0.7rem] text-rosa mb-2">Erro: {status.erro}</p>
+      )}
+
+      <Btn variant="primary" size="md" onClick={disparar} disabled={disparando || !!emCurso}>
+        {disparando ? 'a disparar...' : emCurso ? 'em curso...' : 'Render todos (~10 min)'}
+      </Btn>
+    </Card>
+  );
+}
+
+// ─── Bulk Render PNG (client-side fallback) ──────────
 
 function BulkRenderPanel() {
   const [ativo, setAtivo] = useState(false);
@@ -1673,6 +1766,7 @@ export default function EstudioPage() {
         descricao="Renderiza PNGs finais, exporta CSV para o Metricool e captions."
       />
 
+      <BulkRenderGitHubActionsPanel />
       <BulkRenderPanel />
 
       <div className="flex items-center gap-3 mb-10 flex-wrap p-4 rounded-[14px] border border-ocre/15 bg-terra-2/20">
