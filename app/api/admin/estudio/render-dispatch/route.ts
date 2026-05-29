@@ -5,8 +5,9 @@ export const runtime = 'nodejs';
 export const maxDuration = 30;
 
 // POST — dispara o workflow GitHub Actions de render bulk
+// Body opcional: { dias: "1" } ou { dias: "1,2,3" } ou {} para todos
 
-export async function POST() {
+export async function POST(req: Request) {
   if (!(await isAdmin())) {
     return NextResponse.json({ erro: 'auth' }, { status: 401 });
   }
@@ -20,10 +21,18 @@ export async function POST() {
     return NextResponse.json({ erro: 'sem-github-token' }, { status: 500 });
   }
 
-  const jobId = `render-${Date.now()}`;
+  let dias = '';
+  try {
+    const body = await req.json();
+    dias = typeof body?.dias === 'string' ? body.dias : '';
+  } catch {}
+
+  const jobId = `render-${dias ? `d${dias.replace(/,/g, '-')}-` : ''}${Date.now()}`;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://viviannepag.vercel.app';
 
-  // workflow_dispatch
+  const inputs: Record<string, string> = { jobId, siteUrl };
+  if (dias) inputs.dias = dias;
+
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/actions/workflows/render-slides.yml/dispatches`,
     {
@@ -34,13 +43,7 @@ export async function POST() {
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        ref,
-        inputs: {
-          jobId,
-          siteUrl,
-        },
-      }),
+      body: JSON.stringify({ ref, inputs }),
     }
   );
 
@@ -56,6 +59,7 @@ export async function POST() {
     ok: true,
     jobId,
     siteUrl,
+    dias,
     workflowRunUrl: `https://github.com/${owner}/${repo}/actions/workflows/render-slides.yml`,
   });
 }

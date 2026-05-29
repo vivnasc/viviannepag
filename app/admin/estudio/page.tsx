@@ -586,10 +586,14 @@ function BulkRenderGitHubActionsPanel() {
     return () => clearInterval(intv);
   }, [jobId, status?.status]);
 
-  async function disparar() {
+  async function disparar(dias?: string) {
     setDisparando(true);
     try {
-      const res = await fetch('/api/admin/estudio/render-dispatch', { method: 'POST' });
+      const res = await fetch('/api/admin/estudio/render-dispatch', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(dias ? { dias } : {}),
+      });
       const json = await res.json();
       if (!res.ok) throw new Error(json.detalhe ?? json.erro ?? 'falha');
       setJobId(json.jobId);
@@ -691,9 +695,14 @@ function BulkRenderGitHubActionsPanel() {
         <p className="text-[0.7rem] text-rosa mb-2">Erro: {status.erro}</p>
       )}
 
-      <Btn variant="primary" size="md" onClick={disparar} disabled={disparando || !!emCurso}>
-        {disparando ? 'a disparar...' : emCurso ? 'em curso...' : 'Render todos (~10 min)'}
-      </Btn>
+      <div className="flex items-center gap-2 flex-wrap">
+        <Btn variant="default" size="md" onClick={() => disparar('1')} disabled={disparando || !!emCurso}>
+          {disparando ? 'a disparar...' : 'Testar so dia 1 (~1 min)'}
+        </Btn>
+        <Btn variant="primary" size="md" onClick={() => disparar()} disabled={disparando || !!emCurso}>
+          {disparando ? 'a disparar...' : emCurso ? 'em curso...' : 'Render todos (~10 min)'}
+        </Btn>
+      </div>
     </Card>
   );
 }

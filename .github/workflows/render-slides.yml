@@ -11,6 +11,11 @@ on:
         description: 'URL publica do site (ex: https://viviannepag.vercel.app)'
         required: true
         type: string
+      dias:
+        description: 'Filtro de dias (ex: "1" ou "1,2,3"). Vazio = todos'
+        required: false
+        type: string
+        default: ''
 
 jobs:
   render:
@@ -46,6 +51,7 @@ jobs:
         env:
           SITE_URL: ${{ github.event.inputs.siteUrl }}
           JOB_ID: ${{ github.event.inputs.jobId }}
+          DIAS_FILTER: ${{ github.event.inputs.dias }}
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/render-slides-bulk.js
