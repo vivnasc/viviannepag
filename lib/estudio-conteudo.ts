@@ -41,6 +41,7 @@ export type ConteudoDia = {
   reelScript?: ReelScript;
   horario: string;
   notas?: string;
+  musicaSugerida?: string;
 };
 
 export const PALETAS: Record<Mundo, { bg: string; bg2: string; texto: string; destaque: string; nome: string }> = {
@@ -121,6 +122,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#citacao', '#frasesdodia'],
     produtoRelacionado: 'ebook-01-culpa',
     horario: '18:00',
+    musicaSugerida: 'Piano contemplativo (Ólafur Arnalds · Re:member, ou similar). Trending no IG: search "soft piano emotional"',
     slides: [
       { tipo: 'citacao', texto: '"Ninguém diz.\nE por isso tu achas\nque és a única."', destaque: 'A culpa não é boa conselheira' },
     ],
@@ -255,6 +257,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Citação do escrito "A lealdade invisível que te tira o que queres".',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#citacao'],
     horario: '18:00',
+    musicaSugerida: 'Cinematic ambient (Max Richter · On the Nature of Daylight). Trending no IG: "emotional cinematic"',
     slides: [
       { tipo: 'citacao', texto: '"Há partes de ti\nque escolhem ficar pequenas\npara não trair\nquem te formou."', destaque: 'Vivianne dos Santos' },
     ],
@@ -392,6 +395,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#citacao'],
     produtoRelacionado: 'ebook-07-sonho',
     horario: '18:00',
+    musicaSugerida: 'Slow piano melancólico (Joep Beving · Solipsism). Trending no IG: "introspective piano"',
     slides: [
       { tipo: 'citacao', texto: '"Tens talento a mais\ne clareza a menos.\nE odeias-te por isso."', destaque: 'Nem todo o sonho que carregas nasceu em ti' },
     ],
@@ -526,6 +530,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#citacao', '#resiliencia'],
     produtoRelacionado: 'ebook-05-escuro',
     horario: '18:00',
+    musicaSugerida: 'Ambient cinematic emotional (Nils Frahm · Says). Trending no IG: "deep emotional"',
     slides: [
       { tipo: 'citacao', texto: '"O escuro não é o fim.\nParece o fim.\nMas não é."', destaque: 'Atravessar o escuro' },
     ],

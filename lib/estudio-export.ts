@@ -113,6 +113,17 @@ export function gerarMetricoolCSV(conteudos: ConteudoDia[], startDate: string): 
     const captionIG = gerarCaptionInstagram(c);
     const captionTT = gerarCaptionTikTok(c);
 
+    // Musica: prioriza reelScript.musica, depois musicaSugerida (citacao)
+    const musica = c.reelScript?.musica ?? c.musicaSugerida ?? '';
+    const ehReel = c.tipo.startsWith('reel');
+    const ehCitacao = c.tipo === 'citacao-visual';
+    const podeTerMusica = ehReel || ehCitacao;
+
+    // Para IG, adicionar musica ao first comment se aplicavel
+    const firstCommentIG = podeTerMusica && musica
+      ? `♪ Música sugerida: ${musica}\n\n${c.hashtags.join(' ')}`
+      : c.hashtags.join(' ');
+
     if (c.plataforma === 'instagram' || c.plataforma === 'ambas') {
       const row = [
         'FALSE',
@@ -122,7 +133,7 @@ export function gerarMetricoolCSV(conteudos: ConteudoDia[], startDate: string): 
         csvEscape(captionIG),
         '', '', '', '', '',
         '', '',
-        '', csvEscape(c.hashtags.join(' ')), '',
+        '', csvEscape(firstCommentIG), '',
         'TRUE', 'FALSE',
         '', '', '', '', '', '', '', '',
       ];
@@ -130,6 +141,9 @@ export function gerarMetricoolCSV(conteudos: ConteudoDia[], startDate: string): 
     }
 
     if (c.plataforma === 'tiktok' || c.plataforma === 'ambas') {
+      // TikTok: Auto Music = TRUE para reels e citacoes (Metricool escolhe trending)
+      const autoMusic = podeTerMusica ? 'TRUE' : 'FALSE';
+
       const row = [
         'FALSE',
         'TikTok',
@@ -142,7 +156,7 @@ export function gerarMetricoolCSV(conteudos: ConteudoDia[], startDate: string): 
         '', '',
         'PUBLIC', 'TRUE', 'TRUE',
         'TRUE', 'FALSE', 'FALSE',
-        'FALSE', 'FALSE',
+        'FALSE', autoMusic,
       ];
       lines.push(row.join(','));
     }
