@@ -1051,6 +1051,24 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
               </div>
             )}
 
+            {/* Musica sugerida (citacao-visual ou reels) */}
+            {(conteudo.musicaSugerida || conteudo.reelScript?.musica) && (
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-5 h-5 rounded-full bg-rosa/15 border border-rosa/30 flex items-center justify-center text-rosa text-[0.65rem]">&#9835;</span>
+                  <p className="text-[0.65rem] tracking-[0.2em] uppercase text-creme-2/60">Musica sugerida (Metricool/Instagram)</p>
+                </div>
+                <div className="bg-terra-2/40 rounded-[12px] p-4 border border-rosa/15">
+                  <p className="text-creme text-[0.82rem] leading-relaxed mb-2">
+                    {conteudo.musicaSugerida ?? conteudo.reelScript?.musica}
+                  </p>
+                  <p className="text-creme-2/50 text-[0.68rem] italic">
+                    TikTok Auto Music sera activado automaticamente no CSV. Para Instagram Reels, adiciona no Metricool ao agendar (procura por &quot;trending&quot; com este vibe).
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Textos dos slides */}
             {temSlides && conteudo.slides && (
               <div>
