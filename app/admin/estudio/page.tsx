@@ -11,7 +11,7 @@ import {
 } from '@/lib/estudio-conteudo';
 import { SlideWithLayout, SlideLayoutGrid } from '@/components/admin/SlideRenderer';
 import { saveImage } from '@/lib/estudio-imagens-db';
-import { Pill, ProgressBar, EstimateCard, Btn } from '@/components/admin/EstudioKit';
+import { Pill, ProgressBar, EstimateCard, Btn, Card } from '@/components/admin/EstudioKit';
 import {
   gerarCaptionInstagram,
   gerarCaptionTikTok,
@@ -341,6 +341,195 @@ function PromptMJPanel({ conteudo, slideIdx }: { conteudo: ConteudoDia; slideIdx
 }
 
 // ─── Gerador Automatico de Imagens (Claude + Replicate) ──
+
+// ─── Bulk Producao (gera N dias em sequencia) ──────────
+
+function BulkProducaoPanel() {
+  const [nDias, setNDias] = useState<3 | 7 | 15 | 30>(3);
+  const [modelo, setModelo] = useState<'flux-1.1-pro' | 'flux-1.1-pro-ultra'>('flux-1.1-pro');
+  const [ativo, setAtivo] = useState(false);
+  const [diaActual, setDiaActual] = useState<number | null>(null);
+  const [slideActual, setSlideActual] = useState<{ feito: number; total: number }>({ feito: 0, total: 0 });
+  const [statusDias, setStatusDias] = useState<Record<number, { feito: number; total: number; erro?: string }>>({});
+  const [resumirDe, setResumirDe] = useState<number | null>(null);
+
+  const diasParaProcessar = CALENDARIO_30_DIAS
+    .filter(c => c.slides && c.slides.length > 0)
+    .slice(0, nDias);
+
+  const totalImagens = diasParaProcessar.reduce((acc, dia) => {
+    return acc + (dia.slides ?? []).filter(s => s.tipo === 'capa' || s.tipo === 'conteudo' || s.tipo === 'citacao').length;
+  }, 0);
+
+  const custoPorImagem = modelo === 'flux-1.1-pro-ultra' ? 0.06 : 0.04;
+  const custoTotal = (totalImagens * custoPorImagem).toFixed(2);
+  const tempoMin = Math.ceil((totalImagens * 30) / 60);
+
+  const totalFeitas = Object.values(statusDias).reduce((acc, s) => acc + s.feito, 0);
+
+  async function gerarUmSlide(conteudo: ConteudoDia, slide: Slide, slideIdx: number): Promise<'feito' | 'skip' | 'erro'> {
+    const slideKey = `dia-${conteudo.dia}-slide-${slideIdx}-foto-fundo`;
+    const res = await fetch('/api/admin/estudio/gerar-imagem', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        slideKey,
+        texto: slide.texto,
+        mundo: conteudo.mundo,
+        tipo: slide.tipo,
+        notaVisual: slide.notaVisual,
+        titulo: conteudo.titulo,
+        aspectRatio: '4:5',
+        modelo,
+      }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.detalhe ?? json.erro ?? 'falha');
+    if (json.skip) return 'skip';
+    if (!json.imageUrl) return 'erro';
+
+    // Guardar em IndexedDB tambem
+    try {
+      const imgRes = await fetch(json.imageUrl);
+      const blob = await imgRes.blob();
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+      await saveImage(slideKey, dataUrl);
+    } catch {}
+
+    return 'feito';
+  }
+
+  async function arrancar(diaInicio = 0) {
+    setAtivo(true);
+    setResumirDe(null);
+
+    for (let i = diaInicio; i < diasParaProcessar.length; i++) {
+      const conteudo = diasParaProcessar[i];
+      const slides = (conteudo.slides ?? []).filter(s => s.tipo === 'capa' || s.tipo === 'conteudo' || s.tipo === 'citacao');
+      setDiaActual(conteudo.dia);
+      setSlideActual({ feito: 0, total: slides.length });
+
+      const slidesAll = conteudo.slides ?? [];
+      for (let j = 0; j < slidesAll.length; j++) {
+        const s = slidesAll[j];
+        if (s.tipo !== 'capa' && s.tipo !== 'conteudo' && s.tipo !== 'citacao') continue;
+        try {
+          await gerarUmSlide(conteudo, s, j);
+          setSlideActual(prev => ({ feito: prev.feito + 1, total: prev.total }));
+          setStatusDias(prev => ({
+            ...prev,
+            [conteudo.dia]: {
+              feito: (prev[conteudo.dia]?.feito ?? 0) + 1,
+              total: slides.length,
+            },
+          }));
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : 'erro';
+          setStatusDias(prev => ({ ...prev, [conteudo.dia]: { ...(prev[conteudo.dia] ?? { feito: 0, total: slides.length }), erro: msg } }));
+          setResumirDe(i);
+          setAtivo(false);
+          return;
+        }
+      }
+    }
+
+    setAtivo(false);
+    setDiaActual(null);
+  }
+
+  return (
+    <Card elevado className="mb-8">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
+        <p className="text-[0.7rem] tracking-[0.2em] uppercase text-ambar">&#127922; Producao em massa</p>
+        <div className="flex-1" />
+        <select
+          value={nDias}
+          onChange={e => setNDias(Number(e.target.value) as 3 | 7 | 15 | 30)}
+          disabled={ativo}
+          className="bg-transparent border border-ocre/25 rounded-md px-2 py-1 text-[0.7rem] text-creme-2/80 outline-none"
+        >
+          <option value="3">3 dias (teste)</option>
+          <option value="7">7 dias (1 semana)</option>
+          <option value="15">15 dias (2 semanas)</option>
+          <option value="30">30 dias (tudo)</option>
+        </select>
+        <select
+          value={modelo}
+          onChange={e => setModelo(e.target.value as 'flux-1.1-pro' | 'flux-1.1-pro-ultra')}
+          disabled={ativo}
+          className="bg-transparent border border-ocre/25 rounded-md px-2 py-1 text-[0.7rem] text-creme-2/80 outline-none"
+        >
+          <option value="flux-1.1-pro">Flux Pro $0.04</option>
+          <option value="flux-1.1-pro-ultra">Flux Pro Ultra $0.06</option>
+        </select>
+      </div>
+
+      <EstimateCard
+        items={diasParaProcessar.length}
+        assets={totalImagens}
+        custoUsd={custoTotal}
+        minutos={tempoMin}
+        nota={`Gera sequencialmente todas as imagens de ${diasParaProcessar.length} dias. Claude decide quais slides precisam de imagem (alguns ficam so com texto).`}
+      />
+
+      {ativo && (
+        <div className="space-y-2 mb-4">
+          <ProgressBar
+            current={totalFeitas}
+            total={totalImagens}
+            label={`Global: ${totalFeitas} de ${totalImagens} imagens`}
+            variant="ouro-folha"
+          />
+          {diaActual !== null && (
+            <ProgressBar
+              current={slideActual.feito}
+              total={slideActual.total}
+              label={`Dia ${diaActual}: slide ${slideActual.feito} de ${slideActual.total}`}
+              variant="ouro"
+            />
+          )}
+        </div>
+      )}
+
+      <div className="flex items-center gap-2 flex-wrap">
+        {resumirDe !== null ? (
+          <Btn variant="primary" size="md" onClick={() => arrancar(resumirDe)}>
+            Retomar do dia {diasParaProcessar[resumirDe]?.dia}
+          </Btn>
+        ) : (
+          <Btn variant="primary" size="md" onClick={() => arrancar(0)} disabled={ativo}>
+            {ativo ? 'a gerar...' : `Arrancar (~$${custoTotal})`}
+          </Btn>
+        )}
+        {Object.keys(statusDias).length > 0 && (
+          <span className="text-[0.65rem] text-creme-2/60">
+            Concluido: {Object.values(statusDias).filter(s => s.feito === s.total && !s.erro).length} / {diasParaProcessar.length} dias
+          </span>
+        )}
+      </div>
+
+      {Object.keys(statusDias).length > 0 && (
+        <div className="mt-4 grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-1.5">
+          {diasParaProcessar.map(dia => {
+            const st = statusDias[dia.dia];
+            const variant: 'pendente' | 'em-curso' | 'feito' | 'erro' =
+              !st ? 'pendente' : st.erro ? 'erro' : st.feito === st.total ? 'feito' : 'em-curso';
+            return (
+              <Pill key={dia.dia} variant={variant}>
+                D{dia.dia} {st ? `${st.feito}/${st.total}` : ''}
+              </Pill>
+            );
+          })}
+        </div>
+      )}
+    </Card>
+  );
+}
 
 function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
   const [estado, setEstado] = useState<Record<number, 'pendente' | 'a-gerar' | 'feito' | 'skip' | 'erro'>>({});
@@ -1088,8 +1277,10 @@ export default function EstudioPage() {
       <PhaseHeader
         num={3}
         titulo="Produzir"
-        descricao="Clica num dia para abrir o detalhe e gerar imagens, captions e exportar."
+        descricao="Gera imagens em massa (bulk) ou clica num dia para detalhe individual."
       />
+
+      <BulkProducaoPanel />
 
       {/* CALENDAR VIEW */}
       {vista === 'calendario' && (
