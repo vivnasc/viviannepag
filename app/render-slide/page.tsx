@@ -6,10 +6,10 @@ import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { CALENDARIO_30_DIAS } from '@/lib/estudio-conteudo';
 
 function defaultLayoutFor(slide: Slide): SlideLayout {
-  if (slide.fundoClaro) return 'claro';
+  // CTAs ficam em papel (sem imagem gerada). Restantes usam foto-fundo
+  // com as imagens geradas em FASE 3 (Producao em massa).
   if (slide.tipo === 'cta') return 'cta';
-  if (slide.tipo === 'capa') return 'foto-fundo';
-  return 'statement';
+  return 'foto-fundo';
 }
 
 export default function RenderSlidePage() {
