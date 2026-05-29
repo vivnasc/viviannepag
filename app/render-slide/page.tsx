@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { SlideRender, type SlideLayout } from '@/components/admin/SlideRenderer';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { CALENDARIO_30_DIAS } from '@/lib/estudio-conteudo';
@@ -113,9 +113,8 @@ export default function RenderSlidePage() {
         style={{
           width: 270,
           height: 338,
-          // @ts-expect-error: zoom is non-standard but supported in Chrome/Puppeteer
           zoom: 4,
-        }}
+        } as CSSProperties}
       >
         <SlideRender
           slide={data.slide}
