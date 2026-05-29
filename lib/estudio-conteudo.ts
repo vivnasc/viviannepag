@@ -78,7 +78,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre a origem da culpa materna. Baseado no Ebook 1.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#culpa', '#lealdadesinvisiveis'],
     produtoRelacionado: 'ebook-01-culpa',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Tu sabes do que estou a falar. Aquela culpa que aparece quando a casa finalmente está em silêncio. E ninguém te disse de onde vem.', bold: ['ninguém te disse', 'de onde vem'], notaVisual: 'Warm close-up portrait of a real woman, soft gaze, golden hour light, intimate editorial style, natural beauty' },
       { tipo: 'conteudo', texto: 'A culpa que sentes não nasceu contigo. Herdaste-a. E carrega-la como se fosse tua.', bold: ['não nasceu contigo', 'Herdaste-a'], notaVisual: 'Dark moody bedroom scene at night, single lamp light, unmade bed, contemplative atmosphere' },
@@ -98,7 +98,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Reel com gancho emocional sobre a culpa materna. Falar directamente para a câmara.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#reelsportugal', '#maternidadereal'],
     produtoRelacionado: 'ebook-01-culpa',
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Tu sabes do que estou a falar. Aquela sensação que aparece quando te deitas e a casa finalmente está em silêncio.',
       corpo: [
@@ -121,7 +121,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Citação visual do Ebook 1 sobre fundo barro.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#citacao', '#frasesdodia'],
     produtoRelacionado: 'ebook-01-culpa',
-    horario: '18:00',
+    horario: '14:00',
     musicaSugerida: 'Piano contemplativo (Ólafur Arnalds · Re:member, ou similar). Trending no IG: search "soft piano emotional"',
     slides: [
       { tipo: 'citacao', texto: '"Ninguém diz.\nE por isso tu achas\nque és a única."', destaque: 'A culpa não é boa conselheira' },
@@ -136,7 +136,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel prático: sinais de que a culpa comanda as tuas decisões. Do Guia 1.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#dicaspraticas', '#limitessaudaveis'],
     produtoRelacionado: 'guia-01-meu',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Reconheces-te nisto? 3 sinais de que a culpa está a tomar decisões por ti. E tu nem dás por isso.', bold: ['3 sinais', 'decisões por ti'], notaVisual: 'Thoughtful woman sitting on sofa, knees drawn up, soft warm blanket, golden hour window light, intimate' },
       { tipo: 'conteudo', titulo: '1.', texto: 'Dizes sim quando o teu corpo pede não. E depois ficas com raiva de ti mesma por não teres sido honesta.', bold: ['sim', 'não', 'raiva de ti mesma'] },
@@ -153,7 +153,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'Porque escrevo sobre culpa',
     descricao: 'Reel pessoal: o momento em que percebi que a culpa não era minha. Bastidores da escrita.',
     hashtags: [...HASHTAGS_BASE, '#bastidores', '#escritora', '#vidadeautora', '#vulnerabilidade'],
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Eu escrevi um livro sobre culpa. O momento mais difícil não foi escrever. Foi perceber que a culpa que eu carregava não era minha.',
       corpo: [
@@ -175,7 +175,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre o exercício de separação do Guia 1.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#limitesemocionais', '#pesoemocional'],
     produtoRelacionado: 'guia-01-meu',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Tu carregas coisas que não são tuas. E quando percebes quais são, o alívio é imediato.', bold: ['não são tuas', 'alívio é imediato'], notaVisual: 'Woman hands writing in leather journal on warm wooden table, soft morning light, contemplative' },
       { tipo: 'conteudo', texto: 'A tristeza da tua mãe. A frustração do teu pai. O sonho que a tua avó não viveu. Carregas tudo. Sem saber.', bold: ['Sem saber'] },
@@ -194,7 +194,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel resumo da semana com os produtos para mães.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#recursosterapeuticos', '#ebooksdigitais'],
     produtoRelacionado: 'ebook-01-culpa',
-    horario: '10:00',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Se esta semana te tocou, estes recursos foram escritos para ti. Começa por onde te dói.', bold: ['escritos para ti', 'onde te dói'], notaVisual: 'Soft golden light through window curtains, books and dried flowers on table, warm feminine space' },
       { tipo: 'conteudo', texto: 'A culpa. De onde vem. O que te faz. Como começas a largar. 40 páginas. Ebook.', bold: ['A culpa'], destaque: 'A culpa não é boa conselheira' },
@@ -214,7 +214,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre lealdades invisíveis. Baseado no Ebook 2.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#lealdadesinvisiveis', '#padroesfamiliares'],
     produtoRelacionado: 'ebook-02-herdaste',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: '"Nunca serei como a minha mãe." Já disseste isto? Eu também. E depois percebi porque é que não funciona.', bold: ['Eu também', 'não funciona'], notaVisual: 'Two women, mother and daughter, backs turned, warm light between them, emotional intimate editorial style' },
       { tipo: 'conteudo', texto: 'Abres a boca e sai aquela frase. Com aquele tom. E reconheces: é a voz dela dentro de ti.', bold: ['a voz dela dentro de ti'] },
@@ -234,7 +234,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Reel emocional sobre lealdades invisíveis.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#herancafamiliar', '#reelsportugal'],
     produtoRelacionado: 'ebook-02-herdaste',
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Abres a boca e sai aquela frase. Com aquele tom. E percebes: é a voz da tua mãe.',
       corpo: [
@@ -256,7 +256,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'Citação do escrito: lealdade invisível',
     descricao: 'Citação do escrito "A lealdade invisível que te tira o que queres".',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#citacao'],
-    horario: '18:00',
+    horario: '14:00',
     musicaSugerida: 'Cinematic ambient (Max Richter · On the Nature of Daylight). Trending no IG: "emotional cinematic"',
     slides: [
       { tipo: 'citacao', texto: '"Há partes de ti\nque escolhem ficar pequenas\npara não trair\nquem te formou."', destaque: 'Vivianne dos Santos' },
@@ -271,7 +271,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel prático com as frases do Guia 2.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_MAE, '#limites', '#dizernao', '#comunicacaonaoviolenta'],
     produtoRelacionado: 'guia-02-frases',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: '7 frases para dizer NÃO\nsem culpa', destaque: 'NÃO' },
       { tipo: 'conteudo', titulo: 'Frase 1', texto: '"Eu amo-te\ne a resposta é não."\n\nAmar e recusar\nnão são opostos.' },
@@ -290,7 +290,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Reel sobre perda de identidade. Baseado no Ebook 3.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#identidade', '#escoladosveus'],
     produtoRelacionado: 'ebook-03-quemes',
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Houve um momento em que deixaste de saber quem és. Talvez não consigas apontar para ele no calendário.',
       corpo: [
@@ -313,7 +313,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre identidade vs função. Ebook 3.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#identidade', '#papeis'],
     produtoRelacionado: 'ebook-03-quemes',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Tu não és\nos teus papéis', destaque: 'os teus papéis' },
       { tipo: 'conteudo', titulo: 'A armadilha', texto: 'Mãe. Profissional.\nFilha. Mulher. Amiga.\n\nSão funções.\nNão são identidade.\n\nMas quando vives dentro deles\nesqueces quem és fora.' },
@@ -331,7 +331,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'Resumo semana 2: herança e identidade',
     descricao: 'Carrossel resumo da semana 2.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#recursos'],
-    horario: '10:00',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'O que exploraste\nesta semana', destaque: 'esta semana' },
       { tipo: 'conteudo', titulo: 'Herança', texto: 'O que herdaste sem saber.\nAs lealdades invisíveis\nque te fazem repetir\no que juraste não repetir.\n\nEBOOK' },
@@ -351,7 +351,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre vazio existencial. Ebook 4.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#sentido', '#propósito', '#vazioexistencial'],
     produtoRelacionado: 'ebook-04-sentido',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Tens tudo\ne sentes que falta', destaque: 'que falta' },
       { tipo: 'conteudo', titulo: 'É uma terça-feira', texto: 'Um dia qualquer.\nPorque o vazio\nnão escolhe datas especiais\npara aparecer.\n\nChega quando menos esperas.\nNo meio do "correu tudo bem".' },
@@ -371,7 +371,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Reel sobre a mulher que alcança e não se preenche. Ebook 7.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#infonte', '#sonhos'],
     produtoRelacionado: 'ebook-07-sonho',
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Tu fizeste tudo certo. Estudaste. Trabalhaste. E continuas perdida.',
       corpo: [
@@ -394,7 +394,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Citação visual do Ebook 7.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#citacao'],
     produtoRelacionado: 'ebook-07-sonho',
-    horario: '18:00',
+    horario: '14:00',
     musicaSugerida: 'Slow piano melancólico (Joep Beving · Solipsism). Trending no IG: "introspective piano"',
     slides: [
       { tipo: 'citacao', texto: '"Tens talento a mais\ne clareza a menos.\nE odeias-te por isso."', destaque: 'Nem todo o sonho que carregas nasceu em ti' },
@@ -409,7 +409,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel prático do Guia 4.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_PRESENCA, '#mente', '#foco', '#ansiedade'],
     produtoRelacionado: 'guia-04-mente',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Esvaziar a mente\nem 3 passos', destaque: '3 passos' },
       { tipo: 'conteudo', titulo: 'Passo 1: Despejar', texto: 'Escreve tudo.\nSem filtro. Sem ordem.\nTudo o que está na cabeça\nvai para o papel.\n\n5 minutos. Sem parar.' },
@@ -426,7 +426,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'A minha rotina de escrita',
     descricao: 'Reel bastidores: como escrevo os ebooks. Humanizar e criar conexão.',
     hashtags: [...HASHTAGS_BASE, '#bastidores', '#escritora', '#rotinadeescrita'],
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Perguntam-me como escrevo. A verdade é: não tenho rotina bonita. Tenho necessidade.',
       corpo: [
@@ -448,7 +448,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre vozes internas. Ebook 8.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#autocritica', '#vozinterior'],
     produtoRelacionado: 'ebook-08-voz',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'De quem é a régua\nque mede a tua vida?', destaque: 'a régua' },
       { tipo: 'conteudo', titulo: 'A régua invisível', texto: 'Há uma régua na tua vida.\nMede tudo o que fazes.\nE nunca é suficiente.\n\nMas não foste tu que a criaste.' },
@@ -466,7 +466,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'Para quem faz demais e sente que falta',
     descricao: 'Carrossel CTA semana Infonte.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#infonte'],
-    horario: '10:00',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Para quem faz demais\ne sente que falta', destaque: 'que falta' },
       { tipo: 'conteudo', titulo: 'Sonhos', texto: '"Nem todo o sonho\nque carregas nasceu em ti"\n\nPorque alcanças e continuas\na sentir que falta.\n\nEBOOK' },
@@ -486,7 +486,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre dinâmica de casal. Ebook 6.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CASAL, '#conflitos'],
     produtoRelacionado: 'ebook-06-no-casal',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'A mesma discussão.\nSempre.', destaque: 'Sempre.' },
       { tipo: 'conteudo', titulo: 'Tu sabes qual é', texto: 'Os mesmos gatilhos.\nAs mesmas palavras.\nA mesma frustração.\n\nNenhum dos dois quer isto.\nMas é o que acontece.\nSempre.' },
@@ -506,7 +506,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Reel sobre as 5 perguntas antes de uma discussão. Guia 6.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CASAL, '#comunicacao', '#reelsportugal'],
     produtoRelacionado: 'guia-06-perguntas',
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Antes da próxima discussão com o teu parceiro, faz-te esta pergunta: "O que estou a sentir, de verdade?"',
       corpo: [
@@ -529,7 +529,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Citação visual do Ebook 5.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#citacao', '#resiliencia'],
     produtoRelacionado: 'ebook-05-escuro',
-    horario: '18:00',
+    horario: '14:00',
     musicaSugerida: 'Ambient cinematic emotional (Nils Frahm · Says). Trending no IG: "deep emotional"',
     slides: [
       { tipo: 'citacao', texto: '"O escuro não é o fim.\nParece o fim.\nMas não é."', destaque: 'Atravessar o escuro' },
@@ -544,7 +544,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel prático do Guia 3.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_PRESENCA, '#praticas', '#pausar'],
     produtoRelacionado: 'guia-03-presenca',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: '3 práticas de presença\npara hoje', destaque: 'para hoje' },
       { tipo: 'conteudo', titulo: 'Prática 1: A pausa dos 3 respiros', texto: 'Antes de começar qualquer coisa:\npára.\n\nTrês respirações longas.\nNão para "relaxar".\nPara chegar ao momento.' },
@@ -561,7 +561,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'O que estudo nas pós-graduações',
     descricao: 'Reel bastidores: as 3 pós-graduações e como ligam aos produtos.',
     hashtags: [...HASHTAGS_BASE, '#posgraduacao', '#formacao', '#psicologia', '#unyleya'],
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Estou a fazer 3 pós-graduações ao mesmo tempo. Em Psicologia Transpessoal, Psicologia e Espiritualidade, e Constelação Familiar Sistémica.',
       corpo: [
@@ -583,7 +583,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel educativo sobre crises de transformação. Ebook 5.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#crise', '#transformacao', '#noiteescura'],
     produtoRelacionado: 'ebook-05-escuro',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Atravessar o escuro:\ncrises como passagem', destaque: 'passagem' },
       { tipo: 'conteudo', titulo: 'O lugar onde ninguém quer ir', texto: 'Há um lugar para onde\nninguém quer ir.\nUm lugar que aparece\nquando a vida se parte.\n\nUma perda. Uma ruptura.\nUm colapso.' },
@@ -602,7 +602,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     descricao: 'Carrossel prático sobre luto simbólico. Guia 5.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#luto', '#perdas', '#ritual'],
     produtoRelacionado: 'guia-05-luto',
-    horario: '08:30',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'Ritual para o luto\nque ninguém vê', destaque: 'ninguém vê' },
       { tipo: 'conteudo', titulo: 'Há perdas sem funeral', texto: 'Um sonho que morreu.\nUma versão de ti que ficou para trás.\nUma fase que acabou.\nUma relação que mudou.\n\nSão perdas reais.\nMas ninguém envia flores.' },
@@ -621,7 +621,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: '"Se tivesse de escolher uma frase para cada livro"',
     descricao: 'Reel síntese: uma frase de cada ebook. Visão geral de toda a obra.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#livros', '#ebooks'],
-    horario: '12:00',
+    horario: '20:00',
     reelScript: {
       gancho: 'Se tivesse de escolher uma frase de cada livro que escrevi, seria isto:',
       corpo: [
@@ -647,7 +647,7 @@ export const CALENDARIO_30_DIAS: ConteudoDia[] = [
     titulo: 'O mapa completo: todos os livros e guias',
     descricao: 'Carrossel final: mapa visual de todos os produtos e como se ligam.',
     hashtags: [...HASHTAGS_BASE, ...HASHTAGS_CRESCIMENTO, '#recursosterapeuticos', '#loja'],
-    horario: '10:00',
+    horario: '11:30',
     slides: [
       { tipo: 'capa', texto: 'O mapa completo:\ntodos os livros e guias', destaque: 'o mapa completo' },
       { tipo: 'conteudo', titulo: 'Se carregas culpa', texto: '→ "A culpa não é boa conselheira"\n→ "O que é meu, o que não é meu"\n→ "7 frases para dizer não"\n\nPara a mãe que carrega.' },
