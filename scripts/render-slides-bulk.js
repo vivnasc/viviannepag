@@ -112,7 +112,9 @@ async function main() {
     if (imageUrl) url.searchParams.set('imageUrl', imageUrl);
 
     const page = await browser.newPage();
-    await page.setViewport({ width: 1080, height: 1350, deviceScaleFactor: 1 });
+    // Render no tamanho preview (270x338) com deviceScaleFactor 4 -> PNG 1080x1352
+    // Bypass de zoom/scale: pagina renderiza nativo, screenshot e captado em alta densidade
+    await page.setViewport({ width: 270, height: 338, deviceScaleFactor: 4 });
 
     try {
       await page.goto(url.toString(), { waitUntil: 'networkidle0', timeout: 45000 });
@@ -125,7 +127,7 @@ async function main() {
 
       const buffer = await page.screenshot({
         type: 'png',
-        clip: { x: 0, y: 0, width: 1080, height: 1350 },
+        clip: { x: 0, y: 0, width: 270, height: 338 },
       });
 
       const { error: upErr } = await supabase.storage
