@@ -115,9 +115,13 @@ async function main() {
     await page.setViewport({ width: 1080, height: 1350, deviceScaleFactor: 1 });
 
     try {
-      await page.goto(url.toString(), { waitUntil: 'networkidle0', timeout: 30000 });
+      await page.goto(url.toString(), { waitUntil: 'networkidle0', timeout: 45000 });
+      // Aguardar slide ready (sinal do page.tsx apos imagem carregada + setData)
+      await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+      // Aguardar fontes
       await page.evaluate(() => document.fonts.ready);
-      await new Promise(r => setTimeout(r, 800));
+      // Margem extra para gradientes/grain e imagem render
+      await new Promise(r => setTimeout(r, 1200));
 
       const buffer = await page.screenshot({
         type: 'png',
