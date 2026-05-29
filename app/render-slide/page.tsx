@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { SlideRender, type SlideLayout } from '@/components/admin/SlideRenderer';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { CALENDARIO_30_DIAS } from '@/lib/estudio-conteudo';
@@ -93,8 +93,9 @@ export default function RenderSlidePage() {
     );
   }
 
-  // Render at preview size (270x337.5) and scale 4x to match preview proportions
-  // ensures preview == render pixel-perfect
+  // Render at preview size (270x337.5) with zoom: 4 → effectively 1080x1350
+  // zoom afecta layout calculations (h-full resolve correctamente)
+  // transform: scale apenas pintava, h-full ficava 0 -> conteudo so no topo
   return (
     <div
       id="slide-root"
@@ -111,10 +112,9 @@ export default function RenderSlidePage() {
       <div
         style={{
           width: 270,
-          height: 337.5,
-          transform: 'scale(4)',
-          transformOrigin: 'top left',
-        }}
+          height: 338,
+          zoom: 4,
+        } as CSSProperties}
       >
         <SlideRender
           slide={data.slide}
