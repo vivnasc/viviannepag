@@ -30,7 +30,7 @@ export function gerarCaptionInstagram(c: ConteudoDia): string {
   }
 
   lines.push('');
-  lines.push(`— ${pal.nome === 'Vivianne' ? 'Vivianne dos Santos' : pal.nome + ' · Vivianne dos Santos'}`);
+  lines.push(`Vivianne dos Santos`);
   lines.push('');
   lines.push('Ebooks e guias em PDF imediato:');
   lines.push('viviannedossantos.com/loja');
@@ -78,7 +78,7 @@ export function gerarCaptionWhatsApp(c: ConteudoDia): string {
   }
 
   lines.push('');
-  lines.push(`_${pal.nome} · Vivianne dos Santos_`);
+  lines.push(`_Vivianne dos Santos_`);
 
   return lines.join('\n');
 }
@@ -152,7 +152,7 @@ export function gerarMetricoolCSV(conteudos: ConteudoDia[], startDate: string): 
 }
 
 export function gerarResumoTexto(conteudos: ConteudoDia[]): string {
-  const lines: string[] = ['CALENDARIO DE CONTEUDO — 30 DIAS', '='.repeat(50), ''];
+  const lines: string[] = ['CALENDARIO DE CONTEUDO · 30 DIAS', '='.repeat(50), ''];
 
   for (const c of conteudos) {
     const pal = PALETAS[c.mundo];
@@ -167,7 +167,7 @@ export function gerarResumoTexto(conteudos: ConteudoDia[]): string {
     if (c.slides) {
       lines.push(`Slides: ${c.slides.length}`);
       c.slides.forEach((s, i) => {
-        lines.push(`  [${i + 1}] ${s.tipo}${s.titulo ? ` — ${s.titulo}` : ''}`);
+        lines.push(`  [${i + 1}] ${s.tipo}${s.titulo ? ` · ${s.titulo}` : ''}`);
         lines.push(`      ${s.texto.replace(/\n/g, ' ').substring(0, 100)}...`);
       });
     }
