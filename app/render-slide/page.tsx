@@ -93,6 +93,8 @@ export default function RenderSlidePage() {
     );
   }
 
+  // Render at preview size (270x337.5) and scale 4x to match preview proportions
+  // ensures preview == render pixel-perfect
   return (
     <div
       id="slide-root"
@@ -106,12 +108,21 @@ export default function RenderSlidePage() {
         overflow: 'hidden',
       }}
     >
-      <SlideRender
-        slide={data.slide}
-        mundo={data.mundo}
-        layout={data.layout}
-        slideKey={data.slideKey}
-      />
+      <div
+        style={{
+          width: 270,
+          height: 337.5,
+          transform: 'scale(4)',
+          transformOrigin: 'top left',
+        }}
+      >
+        <SlideRender
+          slide={data.slide}
+          mundo={data.mundo}
+          layout={data.layout}
+          slideKey={data.slideKey}
+        />
+      </div>
     </div>
   );
 }
