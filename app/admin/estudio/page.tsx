@@ -11,7 +11,7 @@ import {
   type Mundo,
 } from '@/lib/estudio-conteudo';
 import { SlideWithLayout, SlideLayoutGrid, SlideRender, type SlideLayout } from '@/components/admin/SlideRenderer';
-import { saveImage } from '@/lib/estudio-imagens-db';
+import { saveImage, loadImage } from '@/lib/estudio-imagens-db';
 import { Pill, ProgressBar, EstimateCard, Btn, Card } from '@/components/admin/EstudioKit';
 import {
   gerarCaptionInstagram,
@@ -903,7 +903,8 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
         const json = await res.json();
         if (cancelled || !Array.isArray(json.images)) return;
         const map: Record<number, 'feito'> = {};
-        for (const img of json.images as Array<{ slideIdx: number }>) {
+        const imgs = json.images as Array<{ slideIdx: number; url: string }>;
+        for (const img of imgs) {
           map[img.slideIdx] = 'feito';
         }
         // user actions in prev win over rehydration
@@ -912,6 +913,30 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
           for (const [k, v] of Object.entries(prev)) merged[Number(k)] = v;
           return merged;
         });
+
+        // Tambem hidratar IndexedDB com as imagens (preview = render)
+        // Necessario quando se muda de dispositivo (e.g. iPad sem IndexedDB local)
+        for (const img of imgs) {
+          if (cancelled) return;
+          const idbKey = `dia-${conteudo.dia}-slide-${img.slideIdx}-foto-fundo`;
+          try {
+            const existing = await loadImage(idbKey);
+            if (existing) continue; // ja tem, skip
+            const imgRes = await fetch(img.url);
+            if (!imgRes.ok) continue;
+            const blob = await imgRes.blob();
+            const dataUrl = await new Promise<string>((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result as string);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            });
+            if (cancelled) return;
+            await saveImage(idbKey, dataUrl);
+          } catch (e) {
+            console.warn('rehydrate img', img.slideIdx, e);
+          }
+        }
       } catch {}
     })();
     return () => { cancelled = true; };
