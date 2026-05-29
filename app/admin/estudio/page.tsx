@@ -896,11 +896,27 @@ function GeradorImagensPanel({ conteudo }: { conteudo: ConteudoDia }) {
 
 // ─── Detail modal (major upgrade) ──────────────────────
 
-function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFechar: () => void }) {
+function DetalheConteudo({ conteudo, onFechar, onPrev, onNext, posicao }: {
+  conteudo: ConteudoDia;
+  onFechar: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
+  posicao?: { actual: number; total: number };
+}) {
   const p = PALETAS[conteudo.mundo];
   const tipo = TIPO_LABELS[conteudo.tipo];
   const temSlides = conteudo.slides && conteudo.slides.length > 0;
   const temReel = conteudo.reelScript;
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'ArrowLeft' && onPrev) onPrev();
+      if (e.key === 'ArrowRight' && onNext) onNext();
+      if (e.key === 'Escape') onFechar();
+    }
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [onPrev, onNext, onFechar]);
 
   return (
     <div
@@ -908,6 +924,26 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
       style={{ background: 'rgba(0,0,0,0.88)' }}
       onClick={(e) => e.target === e.currentTarget && onFechar()}
     >
+      {/* Setas de navegacao laterais (fixed para sempre visiveis) */}
+      {onPrev && (
+        <button
+          onClick={onPrev}
+          aria-label="Dia anterior"
+          className="fixed left-3 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full border border-ocre/30 bg-terra/80 backdrop-blur text-creme-2/70 text-base hover:border-ambar hover:text-ambar transition-colors flex items-center justify-center"
+        >
+          &larr;
+        </button>
+      )}
+      {onNext && (
+        <button
+          onClick={onNext}
+          aria-label="Dia seguinte"
+          className="fixed right-3 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full border border-ocre/30 bg-terra/80 backdrop-blur text-creme-2/70 text-base hover:border-ambar hover:text-ambar transition-colors flex items-center justify-center"
+        >
+          &rarr;
+        </button>
+      )}
+
       <div className="w-full max-w-[1100px] rounded-[20px] border border-ocre/20 overflow-hidden" style={{ background: '#1a1410' }}>
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-ocre/15">
@@ -920,12 +956,20 @@ function DetalheConteudo({ conteudo, onFechar }: { conteudo: ConteudoDia; onFech
               <h2 className="font-serif font-light text-creme text-lg">{conteudo.titulo}</h2>
             </div>
           </div>
-          <button
-            onClick={onFechar}
-            className="w-9 h-9 rounded-full border border-ocre/30 text-creme-2/70 text-sm hover:border-ambar hover:text-ambar transition-colors"
-          >
-            &#10005;
-          </button>
+          <div className="flex items-center gap-2">
+            {posicao && (
+              <span className="text-[0.65rem] text-creme-2/50 tracking-[0.1em]">
+                {posicao.actual} / {posicao.total}
+              </span>
+            )}
+            <button
+              onClick={onFechar}
+              className="w-9 h-9 rounded-full border border-ocre/30 text-creme-2/70 text-sm hover:border-ambar hover:text-ambar transition-colors"
+              aria-label="Fechar"
+            >
+              &#10005;
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
@@ -1768,7 +1812,24 @@ export default function EstudioPage() {
 
       {/* Detail modal */}
       {selecionado && (
-        <DetalheConteudo conteudo={selecionado} onFechar={() => setSelecionado(null)} />
+        <DetalheConteudo
+          conteudo={selecionado}
+          onFechar={() => setSelecionado(null)}
+          posicao={(() => {
+            const idx = conteudosFiltrados.findIndex(c => c.dia === selecionado.dia);
+            return { actual: idx + 1, total: conteudosFiltrados.length };
+          })()}
+          onPrev={(() => {
+            const idx = conteudosFiltrados.findIndex(c => c.dia === selecionado.dia);
+            if (idx <= 0) return undefined;
+            return () => setSelecionado(conteudosFiltrados[idx - 1]);
+          })()}
+          onNext={(() => {
+            const idx = conteudosFiltrados.findIndex(c => c.dia === selecionado.dia);
+            if (idx === -1 || idx >= conteudosFiltrados.length - 1) return undefined;
+            return () => setSelecionado(conteudosFiltrados[idx + 1]);
+          })()}
+        />
       )}
     </main>
   );
