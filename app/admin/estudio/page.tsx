@@ -153,7 +153,7 @@ function CarrosselNavigavel({ conteudo }: { conteudo: ConteudoDia }) {
         slide={slides[slideAtual]}
         mundo={conteudo.mundo}
         slideKey={`dia-${conteudo.dia}-slide-${slideAtual}`}
-        defaultLayout={slides[slideAtual].fundoClaro ? 'claro' : slides[slideAtual].tipo === 'cta' ? 'cta' : slides[slideAtual].tipo === 'capa' ? 'foto-fundo' : 'statement'}
+        defaultLayout={slides[slideAtual].tipo === 'cta' ? 'cta' : 'foto-fundo'}
       />
 
       {/* Slide navigation */}
@@ -720,10 +720,8 @@ function BulkRenderPanel() {
   const totalSlides = diasComSlides.reduce((acc, c) => acc + (c.slides ?? []).length, 0);
 
   function defaultLayoutFor(slide: Slide): SlideLayout {
-    if (slide.fundoClaro) return 'claro';
     if (slide.tipo === 'cta') return 'cta';
-    if (slide.tipo === 'capa') return 'foto-fundo';
-    return 'statement';
+    return 'foto-fundo';
   }
 
   async function renderTodos() {

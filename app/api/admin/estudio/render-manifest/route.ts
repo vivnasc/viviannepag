@@ -47,11 +47,8 @@ export async function GET(req: Request) {
 
     for (let i = 0; i < conteudo.slides.length; i++) {
       const slide = conteudo.slides[i];
-      const layout =
-        slide.fundoClaro ? 'claro' :
-        slide.tipo === 'cta' ? 'cta' :
-        slide.tipo === 'capa' ? 'foto-fundo' :
-        'statement';
+      // CTAs em papel, restantes em foto-fundo (usam imagens geradas)
+      const layout = slide.tipo === 'cta' ? 'cta' : 'foto-fundo';
 
       const imgMatch = imagensExistentes.find(img => img.slideIdx === i);
 
