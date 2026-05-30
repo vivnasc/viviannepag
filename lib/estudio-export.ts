@@ -84,7 +84,13 @@ export function gerarCaptionWhatsApp(c: ConteudoDia): string {
 }
 
 // Cabecalho oficial Metricool (template descarregado a 2026-05-29)
-const PINTEREST_BOARD = 'Vivianne dos Santos';
+const PINTEREST_BOARDS: Record<Mundo, string> = {
+  freeme: 'Culpa e Constelação Familiar',
+  infonte: 'Sentido e Identidade',
+  synchim: 'Relações e Casal',
+  escola: 'Psicologia Transpessoal',
+  autora: 'Ebooks Vivianne dos Santos',
+};
 const PINTEREST_LINK = 'https://viviannedossantos.com/loja';
 
 const CSV_HEADER = [
@@ -189,7 +195,7 @@ export function gerarMetricoolCSV(
         'Youtube': 'FALSE',
         'Threads': 'TRUE',
         'Bluesky': 'FALSE',
-        'Pinterest Board': podePinterest ? PINTEREST_BOARD : '',
+        'Pinterest Board': podePinterest ? PINTEREST_BOARDS[c.mundo] : '',
         'Pinterest Pin Title': podePinterest ? pinTitle : '',
         'Pinterest Pin Link': podePinterest ? PINTEREST_LINK : '',
         'Instagram Post Type': igPostType,
