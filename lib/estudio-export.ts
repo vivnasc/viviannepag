@@ -211,10 +211,12 @@ function buildRow(overrides: RowOverrides): string {
 }
 
 // imagensPorDia: dia -> array de URLs ordenado por slideIdx (carrosseis e citacoes)
+// videosReelsPorDia: dia -> URL do MP4 do reel (se ja foi renderizado pelo render-reels)
 export function gerarMetricoolCSV(
   conteudos: ConteudoDia[],
   startDate: string,
   imagensPorDia?: Map<number, string[]>,
+  videosReelsPorDia?: Map<number, string>,
 ): string {
   const lines: string[] = [CSV_HEADER.join(',')];
   const start = new Date(startDate + 'T00:00:00');
@@ -224,10 +226,10 @@ export function gerarMetricoolCSV(
     const ehCitacao = c.tipo === 'citacao-visual';
     const ehCarrossel = c.tipo.startsWith('carrossel');
     const urls = imagensPorDia?.get(c.dia) ?? [];
+    const videoReel = ehReel ? videosReelsPorDia?.get(c.dia) : undefined;
 
-    // Reels precisam de video filmado primeiro — entram manualmente depois.
-    // Carrosseis/citacoes sem PNG renderizado tambem nao podem ir (Metricool rejeita).
-    if (ehReel) continue;
+    // Skip se nao ha media: reel sem MP4, carrossel/citacao sem PNG.
+    if (ehReel && !videoReel) continue;
     if ((ehCarrossel || ehCitacao) && urls.length === 0) continue;
 
     const date = new Date(start);
@@ -236,13 +238,18 @@ export function gerarMetricoolCSV(
     const timeStr = c.horario.length === 5 ? `${c.horario}:00` : c.horario; // HH:MM:SS
 
     const podeTerMusica = ehCitacao;
-    const musica = c.musicaSugerida ?? '';
+    const musica = c.musicaSugerida ?? c.reelScript?.musica ?? '';
 
     const draft = 'FALSE';
 
-    // Picture Urls + Alt Texts (carrosseis e citacoes que tem PNG renderizado)
+    // Picture Urls + Alt Texts
+    // - Carrosseis/citacoes: 1..N URLs dos slides PNG
+    // - Reels: Picture Url 1 = MP4 (Metricool detecta pela extensao)
     const pictureCols: RowOverrides = {};
-    if ((ehCarrossel || ehCitacao) && urls.length > 0) {
+    if (ehReel && videoReel) {
+      pictureCols['Picture Url 1'] = videoReel;
+      pictureCols['Alt text picture 1'] = `${c.titulo} — reel video por Vivianne dos Santos`;
+    } else if ((ehCarrossel || ehCitacao) && urls.length > 0) {
       urls.slice(0, 10).forEach((u, i) => {
         pictureCols[`Picture Url ${i + 1}`] = u;
         const slide = c.slides?.[i];
