@@ -1910,9 +1910,37 @@ export default function EstudioPage() {
           />
         </div>
         <button
-          onClick={() => {
-            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate);
-            downloadFile(csv, `metricool-30dias-${startDate}.csv`, 'text/csv');
+          onClick={async () => {
+            // Buscar URLs dos renders do ultimo job (carrosseis e citacoes)
+            const imagensPorDia = new Map<number, string[]>();
+            try {
+              const res = await fetch('/api/admin/estudio/biblioteca');
+              if (res.ok) {
+                const data = await res.json();
+                const jobs: { jobId: string; iniciadoEm?: string }[] = data.jobs ?? [];
+                const renders: { jobId: string; dia: number; slideIdx: number; url: string }[] = data.rendersFinais ?? [];
+                // Job mais recente
+                const latestJobId = jobs[0]?.jobId;
+                if (latestJobId) {
+                  const porDia = new Map<number, { slideIdx: number; url: string }[]>();
+                  for (const r of renders) {
+                    if (r.jobId !== latestJobId) continue;
+                    const arr = porDia.get(r.dia) ?? [];
+                    arr.push({ slideIdx: r.slideIdx, url: r.url });
+                    porDia.set(r.dia, arr);
+                  }
+                  for (const [dia, arr] of porDia) {
+                    arr.sort((a, b) => a.slideIdx - b.slideIdx);
+                    imagensPorDia.set(dia, arr.map(x => x.url));
+                  }
+                }
+              }
+            } catch (e) {
+              console.warn('falhou buscar renders, csv vai sair sem Picture Urls', e);
+            }
+            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia);
+            // BOM UTF-8 para emojis/acentos no Metricool
+            downloadFile('﻿' + csv, `metricool-30dias-${startDate}.csv`, 'text/csv;charset=utf-8');
           }}
           className="text-[0.72rem] px-4 py-2 rounded-[10px] border border-ambar/40 text-ambar hover:bg-ambar/10 transition-colors"
         >
