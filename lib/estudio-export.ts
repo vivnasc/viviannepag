@@ -1,19 +1,66 @@
-import type { ConteudoDia, Mundo } from './estudio-conteudo';
+import type { ConteudoDia, Mundo, Slide } from './estudio-conteudo';
 import { PALETAS } from './estudio-conteudo';
 
-const HASHTAGS_IG = [
-  '#viviannedossantos', '#psicologiatranspessoal', '#constelacaofamiliar',
-  '#autoconhecimento', '#crescimentopessoal', '#terapia', '#maternidade',
-  '#ebooks', '#recursosterapeuticos',
+// ─── HASHTAGS SEO ─────────────────────────────────────────
+// Estrategia: branded + nicho alta intencao + medio volume + discovery + geo
+// IG aceita ate 30, optimo 20-25 mistura tiers. TT optimo 6-10 FYP-heavy.
+
+const HASHTAGS_BASE_IG = [
+  // Branded
+  '#viviannedossantos',
+  // Nicho alta intencao
+  '#psicologiatranspessoal', '#constelacaofamiliar', '#lealdadeinvisivel',
+  // Medio volume
+  '#psicologia', '#autoconhecimento', '#terapia', '#saudemental',
+  '#desenvolvimentopessoal', '#consciencia', '#psicoterapia',
+  // Discovery
+  '#amorproprio', '#reflexao', '#motivacaodiaria',
+  // Geo PT/BR (audiencia lusofona)
+  '#psicologiaportugal', '#psicologiabrasil',
 ];
 
-const HASHTAGS_TT = [
+const HASHTAGS_POR_MUNDO_IG: Record<Mundo, string[]> = {
+  freeme: ['#culpamaterna', '#maternidadereal', '#filhasdaculpa', '#maesemculpa', '#heranca'],
+  infonte: ['#sentidodavida', '#proposito', '#identidade', '#quemsou', '#vazioexistencial'],
+  synchim: ['#casalconsciente', '#relacoes', '#amorconsciente', '#vinculoseguro', '#sistemicas'],
+  escola: ['#psicologiajunguiana', '#bertheelinger', '#psicologiasistemica', '#self'],
+  autora: ['#ebookpsicologia', '#guiapsicologico', '#livrosdepsicologia', '#pdfimediato'],
+};
+
+const HASHTAGS_BASE_TT = [
   '#viviannedossantos', '#psicologia', '#autoconhecimento',
-  '#fyp', '#foryou', '#terapia',
+  '#fyp', '#foryou', '#parati', '#portugal', '#brasil',
 ];
+
+const HASHTAGS_POR_MUNDO_TT: Record<Mundo, string[]> = {
+  freeme: ['#culpa', '#maternidade'],
+  infonte: ['#proposito', '#sentido'],
+  synchim: ['#casal', '#relacionamento'],
+  escola: ['#psicologiatranspessoal', '#constelacaofamiliar'],
+  autora: ['#ebook'],
+};
+
+function montarHashtagsIG(c: ConteudoDia): string {
+  const set = new Set<string>();
+  // Tier 1: hashtags especificas do conteudo (mais relevante para o algoritmo)
+  c.hashtags.forEach(h => set.add(h));
+  // Tier 2: mundo
+  HASHTAGS_POR_MUNDO_IG[c.mundo].forEach(h => set.add(h));
+  // Tier 3: base (branded + nicho + medio + discovery + geo)
+  HASHTAGS_BASE_IG.forEach(h => set.add(h));
+  // Cap a 25 (zona segura IG, evita parecer spam)
+  return Array.from(set).slice(0, 25).join(' ');
+}
+
+function montarHashtagsTT(c: ConteudoDia): string {
+  const set = new Set<string>();
+  c.hashtags.slice(0, 3).forEach(h => set.add(h));
+  HASHTAGS_POR_MUNDO_TT[c.mundo].forEach(h => set.add(h));
+  HASHTAGS_BASE_TT.forEach(h => set.add(h));
+  return Array.from(set).slice(0, 10).join(' ');
+}
 
 export function gerarCaptionInstagram(c: ConteudoDia): string {
-  const pal = PALETAS[c.mundo];
   const lines: string[] = [];
 
   if (c.reelScript) {
@@ -30,12 +77,12 @@ export function gerarCaptionInstagram(c: ConteudoDia): string {
   }
 
   lines.push('');
-  lines.push(`Vivianne dos Santos`);
+  lines.push('Vivianne dos Santos');
   lines.push('');
   lines.push('Ebooks e guias em PDF imediato:');
   lines.push('viviannedossantos.com/loja');
   lines.push('');
-  lines.push([...c.hashtags.slice(0, 8), ...HASHTAGS_IG.slice(0, 5)].filter((v, i, a) => a.indexOf(v) === i).join(' '));
+  lines.push(montarHashtagsIG(c));
 
   return lines.join('\n');
 }
@@ -52,7 +99,7 @@ export function gerarCaptionTikTok(c: ConteudoDia): string {
   }
 
   lines.push('');
-  lines.push([...c.hashtags.slice(0, 5), ...HASHTAGS_TT].filter((v, i, a) => a.indexOf(v) === i).slice(0, 10).join(' '));
+  lines.push(montarHashtagsTT(c));
 
   return lines.join('\n');
 }
@@ -91,7 +138,36 @@ const PINTEREST_BOARDS: Record<Mundo, string> = {
   escola: 'Psicologia Transpessoal',
   autora: 'Ebooks Vivianne dos Santos',
 };
+
+// Keyword principal de cada mundo (entra no Pin Title e no Alt Text)
+const KEYWORD_POR_MUNDO: Record<Mundo, string> = {
+  freeme: 'Constelação Familiar',
+  infonte: 'Autoconhecimento',
+  synchim: 'Relações e Casal',
+  escola: 'Psicologia Transpessoal',
+  autora: 'Ebook Psicologia',
+};
+
 const PINTEREST_LINK = 'https://viviannedossantos.com/loja';
+
+// Pinterest e motor de busca: titulo deve casar com termos procurados.
+// Formato: "Titulo emocional | Keyword do mundo" (limite ~100 char).
+function gerarPinTitle(c: ConteudoDia): string {
+  const kw = KEYWORD_POR_MUNDO[c.mundo];
+  const titulo = c.titulo.replace(/\s+/g, ' ').trim();
+  const full = `${titulo} | ${kw}`;
+  if (full.length <= 100) return full;
+  // Se nao cabe, trunca o titulo mantendo a keyword
+  const maxTitulo = 100 - kw.length - 3 - 3; // " | " + "..."
+  return `${titulo.slice(0, maxTitulo)}... | ${kw}`;
+}
+
+// Alt text: snippet do slide + keyword (acessibilidade + SEO Pinterest)
+function gerarAltText(slide: Slide, mundo: Mundo): string {
+  const kw = KEYWORD_POR_MUNDO[mundo];
+  const snippet = slide.texto.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+  return `${snippet} · ${kw} · Vivianne dos Santos`;
+}
 
 const CSV_HEADER = [
   'Text', 'Date', 'Time', 'Draft',
@@ -159,25 +235,29 @@ export function gerarMetricoolCSV(
     // Reels nao tem media ainda (vais filmar) -> draft. Carrosseis e citacoes ja renderizados.
     const draft = ehReel ? 'TRUE' : 'FALSE';
 
-    // Picture Urls (apenas para carrosseis e citacoes que tem PNG renderizado)
+    // Picture Urls + Alt Texts (carrosseis e citacoes que tem PNG renderizado)
     const pictureCols: RowOverrides = {};
     if ((ehCarrossel || ehCitacao) && urls.length > 0) {
       urls.slice(0, 10).forEach((u, i) => {
         pictureCols[`Picture Url ${i + 1}`] = u;
+        const slide = c.slides?.[i];
+        if (slide) {
+          pictureCols[`Alt text picture ${i + 1}`] = gerarAltText(slide, c.mundo);
+        }
       });
     }
 
     if (c.plataforma === 'instagram' || c.plataforma === 'ambas') {
       const captionIG = gerarCaptionInstagram(c);
+      // First Comment so com musica (hashtags ja estao na caption para evitar stuffing)
       const firstCommentIG = podeTerMusica && musica
-        ? `Musica sugerida: ${musica}\n\n${c.hashtags.join(' ')}`
-        : c.hashtags.join(' ');
+        ? `🎵 Música sugerida: ${musica}`
+        : '';
 
       const igPostType = ehReel ? 'REEL' : 'POST';
 
       // Pinterest so para carrosseis e citacoes (tem imagem). Reels precisam video.
       const podePinterest = ehCarrossel || ehCitacao;
-      const pinTitle = c.titulo.length > 95 ? c.titulo.slice(0, 95) + '...' : c.titulo;
 
       lines.push(buildRow({
         ...pictureCols,
@@ -196,7 +276,7 @@ export function gerarMetricoolCSV(
         'Threads': 'TRUE',
         'Bluesky': 'FALSE',
         'Pinterest Board': podePinterest ? PINTEREST_BOARDS[c.mundo] : '',
-        'Pinterest Pin Title': podePinterest ? pinTitle : '',
+        'Pinterest Pin Title': podePinterest ? gerarPinTitle(c) : '',
         'Pinterest Pin Link': podePinterest ? PINTEREST_LINK : '',
         'Instagram Post Type': igPostType,
         'Instagram Show Reel On Feed': ehReel ? 'TRUE' : '',
