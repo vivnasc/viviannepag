@@ -118,6 +118,27 @@ export default function RenderizadosPage() {
     }
   }
 
+  async function dispararBulkReels() {
+    const totalReels = CALENDARIO_30_DIAS.filter(c => ehReel(c)).length;
+    const ok = confirm(`Gerar TODOS os ${totalReels} reels em bulk? ~20-30min no GitHub Actions. Reels ja com MP4 sao skipados (resume seguro).`);
+    if (!ok) return;
+    try {
+      const res = await fetch('/api/admin/estudio/render-reels-dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.ok) {
+        alert(`Erro: ${json.erro ?? res.status}`);
+        return;
+      }
+      alert(`Bulk disparado. jobId=${json.jobId}\nVer: ${json.workflowRunUrl}`);
+    } catch (e) {
+      alert(`Erro: ${String(e)}`);
+    }
+  }
+
   const contagem = useMemo(() => {
     let rendered = 0, parcial = 0, pendente = 0;
     for (const c of CALENDARIO_30_DIAS) {
@@ -180,6 +201,30 @@ export default function RenderizadosPage() {
         <Btn variant="default" size="md" onClick={carregar}>recarregar</Btn>
         <Link href="/admin/estudio" className="text-[0.7rem] text-ocre hover:text-ambar no-underline">&larr; voltar ao estudio</Link>
       </header>
+
+      {/* Painel reels: voz ElevenLabs + ffmpeg */}
+      <div className="mb-6 p-4 rounded-[12px] border border-ambar/25 bg-ambar/5 flex items-center gap-3 flex-wrap">
+        <div className="flex-1 min-w-[200px]">
+          <p className="text-[0.78rem] text-creme">🎬 reels (video sem filmagem)</p>
+          <p className="text-[0.68rem] text-creme-2/55 mt-0.5">
+            TTS ElevenLabs + foto MJ + legendas. Cache reusa MP3s entre runs.
+          </p>
+        </div>
+        <button
+          onClick={() => dispararReel(2)}
+          className="text-[0.74rem] px-4 py-2 rounded-[8px] border border-creme-2/30 text-creme hover:border-ambar transition-colors"
+          title="Gera apenas o reel do dia 2 — para testar a voz antes do bulk"
+        >
+          teste de voz (dia 2)
+        </button>
+        <button
+          onClick={dispararBulkReels}
+          className="text-[0.78rem] px-5 py-2 rounded-[8px] bg-ambar text-terra-2 font-medium hover:bg-ambar/90 transition-colors"
+          title="Gera todos os reels do calendario. Cache + skip-existing tornam reruns seguros."
+        >
+          🎬 gerar TODOS os reels
+        </button>
+      </div>
 
       {/* Filtros */}
       <div className="flex items-center gap-2 mb-8 flex-wrap">
