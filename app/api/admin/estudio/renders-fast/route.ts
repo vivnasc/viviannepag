@@ -42,7 +42,7 @@ export async function GET() {
   const { data: jobsList } = await supabase.storage.from(BUCKET).list('renders', { limit: 200 });
   const jobIds = (jobsList ?? [])
     .map(j => j.name)
-    .filter((n): n is string => !!n && (n.startsWith('render-') || n.startsWith('job-')));
+    .filter((n): n is string => !!n && (n.startsWith('render-') || n.startsWith('job-') || n.startsWith('reels-')));
 
   // Download em paralelo de todos os result.json
   const results = await Promise.allSettled(
