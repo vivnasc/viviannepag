@@ -48,6 +48,22 @@ jobs:
           npm install --no-save \
             @supabase/supabase-js
 
+      - name: Debug — quais secrets do ElevenLabs estao setados
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVEN_API_KEY: ${{ secrets.ELEVEN_API_KEY }}
+          ELEVENLABS_KEY: ${{ secrets.ELEVENLABS_KEY }}
+          ELEVEN_LABS_API_KEY: ${{ secrets.ELEVEN_LABS_API_KEY }}
+          XI_API_KEY: ${{ secrets.XI_API_KEY }}
+          ELEVEN_VOICE_ID: ${{ secrets.ELEVEN_VOICE_ID }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          VOICE_ID: ${{ secrets.VOICE_ID }}
+        run: |
+          for n in ELEVENLABS_API_KEY ELEVEN_API_KEY ELEVENLABS_KEY ELEVEN_LABS_API_KEY XI_API_KEY ELEVEN_VOICE_ID ELEVENLABS_VOICE_ID VOICE_ID; do
+            v="${!n}"
+            if [ -n "$v" ]; then echo "$n = SET (len=${#v})"; else echo "$n = empty"; fi
+          done
+
       - name: Render reels
         env:
           SITE_URL: ${{ github.event.inputs.siteUrl }}
@@ -57,5 +73,10 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVEN_API_KEY: ${{ secrets.ELEVEN_API_KEY }}
+          ELEVENLABS_KEY: ${{ secrets.ELEVENLABS_KEY }}
+          ELEVEN_LABS_API_KEY: ${{ secrets.ELEVEN_LABS_API_KEY }}
+          XI_API_KEY: ${{ secrets.XI_API_KEY }}
           ELEVEN_VOICE_ID: ${{ secrets.ELEVEN_VOICE_ID }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          VOICE_ID: ${{ secrets.VOICE_ID }}
         run: node scripts/render-reels.js
