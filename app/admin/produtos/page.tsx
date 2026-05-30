@@ -203,6 +203,30 @@ export default function ProdutosAdmin() {
                 <p className="text-creme-2/60 text-[0.78rem]">{p.slug} · {p.preco} · {p.publicado ? 'publicado' : 'rascunho'}</p>
               </div>
               <button onClick={() => gerarLegendas(p)} className="text-salvia text-[0.78rem] hover:text-ambar">legendas</button>
+              {(p.slug?.startsWith('ebook-') || p.slug?.startsWith('guia-')) && (
+                <button
+                  onClick={async () => {
+                    const mundo = prompt(`Mundo das imagens MJ para "${p.titulo}"?\n(freeme | infonte | synchim | escola | autora)`, 'freeme');
+                    if (!mundo) return;
+                    setMsg('A disparar render editorial...');
+                    const r = await fetch('/api/admin/produtos/render-ebook-dispatch', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ slug: p.slug, mundo }),
+                    });
+                    const j = await r.json();
+                    if (r.ok) {
+                      setMsg(`Render disparado. PDF em ~3min em: ${j.pdfUrl}`);
+                    } else {
+                      setMsg(`Erro: ${j.erro}`);
+                    }
+                  }}
+                  className="text-ambar text-[0.78rem] hover:text-ouro"
+                  title="Gera PDF editorial com imagens MJ"
+                >
+                  📖 PDF editorial
+                </button>
+              )}
               <button onClick={() => { const u = `https://viviannedossantos.com/loja/${p.slug}`; navigator.clipboard.writeText(u); setMsg('Link copiado!'); setTimeout(() => setMsg(null), 1500); }} className="text-creme-2/60 text-[0.78rem] hover:text-ambar">link</button>
               <button onClick={() => setEdit(p)} className="text-ocre text-[0.8rem] hover:text-ambar">editar</button>
               <button onClick={() => apagar(p)} className="text-rosa/60 text-[0.78rem] hover:text-rosa">apagar</button>
