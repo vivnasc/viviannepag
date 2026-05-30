@@ -1887,12 +1887,20 @@ export default function EstudioPage() {
         titulo="Exportar"
         descricao="Renderiza PNGs finais, exporta CSV para o Metricool e captions."
         action={
-          <Link
-            href="/admin/estudio/biblioteca"
-            className="text-[0.7rem] px-3 py-1.5 rounded-md border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline"
-          >
-            📚 Biblioteca
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/admin/estudio/renderizados"
+              className="text-[0.7rem] px-3 py-1.5 rounded-md border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline"
+            >
+              🖼 Renderizados
+            </Link>
+            <Link
+              href="/admin/estudio/biblioteca"
+              className="text-[0.7rem] px-3 py-1.5 rounded-md border border-ocre/30 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline"
+            >
+              📚 Biblioteca
+            </Link>
+          </div>
         }
       />
 

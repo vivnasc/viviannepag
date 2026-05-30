@@ -95,6 +95,9 @@ export default function BibliotecaPage() {
           </p>
         </div>
         <div className="flex-1" />
+        <Link href="/admin/estudio/renderizados" className="text-[0.7rem] px-3 py-1.5 rounded-md border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline">
+          🖼 Renderizados
+        </Link>
         <Link href="/admin/estudio" className="text-[0.7rem] text-ocre hover:text-ambar no-underline">
           &larr; voltar ao estudio
         </Link>
