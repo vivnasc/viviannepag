@@ -225,6 +225,29 @@ export default function ProdutosAdmin() {
             ↻ PDFs ({Object.keys(pdfs).length})
           </button>
           <Link href="/admin" className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] lowercase no-underline">← escritos</Link>
+          <button
+            onClick={async () => {
+              const total = produtos.filter(x => x.slug?.startsWith('ebook-') || x.slug?.startsWith('guia-')).length;
+              if (!confirm(`Renderizar TODOS os ${total} PDFs editoriais? Auto-deteta mundo por slug. ~30-45min no GitHub Actions, mas resume seguro (re-runs skipam o que ja existe).`)) return;
+              setMsg('A disparar bulk render editorial...');
+              const r = await fetch('/api/admin/produtos/render-ebook-dispatch', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ slug: 'ALL', mundo: 'auto' }),
+              });
+              const j = await r.json();
+              if (r.ok) {
+                setPolling(true);
+                setMsg(`Bulk disparado (${total} PDFs). 'ver PDF' aparece em cada card a medida que ficam prontos.`);
+              } else {
+                setMsg(`Erro: ${j.erro}`);
+              }
+            }}
+            className="bg-ouro text-terra-2 rounded-[12px] px-4 py-2 text-[0.8rem] font-medium hover:bg-ambar"
+            title="Auto-deteta mundo por slug, 1 GH Action processa todos"
+          >
+            📚 render TODOS
+          </button>
           <button onClick={async () => { setSalvando(true); setMsg('A popular 15 produtos...'); const r = await fetch('/api/admin/seed-produtos', { method: 'POST' }); const j = await r.json(); setSalvando(false); setMsg(r.ok ? `${j.total} produtos populados.` : `Erro: ${j.erro}`); carregar(); }} disabled={salvando} className="bg-bordeaux/80 text-creme rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-bordeaux disabled:opacity-70">seed 15 produtos</button>
           <button onClick={() => setEdit({ ...vazio })} className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-ambar">+ novo produto</button>
         </div>
