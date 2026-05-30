@@ -32,6 +32,8 @@ export default function ProdutosAdmin() {
   const [salvando, setSalvando] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [ultimoPdf, setUltimoPdf] = useState<{ slug: string; url: string; ts: number } | null>(null);
+  const [pdfs, setPdfs] = useState<Record<string, { url: string; updatedAt?: string }>>({});
+  const [polling, setPolling] = useState(false);
   const [dragAtivo, setDragAtivo] = useState(false);
   const [legendaModal, setLegendaModal] = useState<Produto | null>(null);
   const [legendas, setLegendas] = useState<{ig: string; fb: string; tw: string; hashtags: string} | null>(null);
@@ -78,7 +80,31 @@ export default function ProdutosAdmin() {
     setProdutos(json.produtos ?? []);
   }
 
-  useEffect(() => { carregar(); }, []);
+  async function carregarPdfs() {
+    try {
+      const res = await fetch(`/api/admin/produtos/pdfs-list?_=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) return;
+      const json = await res.json();
+      setPdfs(json.pdfs ?? {});
+    } catch {}
+  }
+
+  useEffect(() => { carregar(); carregarPdfs(); }, []);
+
+  // Apos disparar um render, re-fetch PDFs a cada 20s ate 10min
+  useEffect(() => {
+    if (!polling) return;
+    const start = Date.now();
+    const id = setInterval(() => {
+      if (Date.now() - start > 10 * 60 * 1000) {
+        setPolling(false);
+        clearInterval(id);
+        return;
+      }
+      carregarPdfs();
+    }, 20_000);
+    return () => clearInterval(id);
+  }, [polling]);
 
   async function salvar() {
     if (!edit || !edit.slug || !edit.titulo) { setMsg('Slug e título obrigatórios'); return; }
@@ -186,17 +212,18 @@ export default function ProdutosAdmin() {
           <h1 className="font-serif font-light text-creme text-3xl">produtos</h1>
         </div>
         <div className="flex gap-3 items-center flex-wrap">
-          {ultimoPdf && (
-            <a
-              href={`${ultimoPdf.url}?t=${ultimoPdf.ts}`}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase no-underline hover:bg-ouro transition-colors"
-              title={ultimoPdf.url}
-            >
-              📖 abrir PDF · {ultimoPdf.slug}
-            </a>
+          {polling && (
+            <span className="text-[0.7rem] text-ambar/80 px-2 py-1 rounded-[6px] border border-ambar/30 bg-ambar/5">
+              ⟳ a verificar PDFs
+            </span>
           )}
+          <button
+            onClick={carregarPdfs}
+            className="text-creme-2/70 text-[0.78rem] hover:text-ambar border border-ocre/30 rounded-[10px] px-3 py-2"
+            title={`${Object.keys(pdfs).length} PDFs em Supabase`}
+          >
+            ↻ PDFs ({Object.keys(pdfs).length})
+          </button>
           <Link href="/admin" className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] lowercase no-underline">← escritos</Link>
           <button onClick={async () => { setSalvando(true); setMsg('A popular 15 produtos...'); const r = await fetch('/api/admin/seed-produtos', { method: 'POST' }); const j = await r.json(); setSalvando(false); setMsg(r.ok ? `${j.total} produtos populados.` : `Erro: ${j.erro}`); carregar(); }} disabled={salvando} className="bg-bordeaux/80 text-creme rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-bordeaux disabled:opacity-70">seed 15 produtos</button>
           <button onClick={() => setEdit({ ...vazio })} className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-ambar">+ novo produto</button>
@@ -215,6 +242,17 @@ export default function ProdutosAdmin() {
                 <p className="text-creme-2/60 text-[0.78rem]">{p.slug} · {p.preco} · {p.publicado ? 'publicado' : 'rascunho'}</p>
               </div>
               <button onClick={() => gerarLegendas(p)} className="text-salvia text-[0.78rem] hover:text-ambar">legendas</button>
+              {pdfs[p.slug] && (
+                <a
+                  href={`${pdfs[p.slug].url}?t=${Date.now()}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-ouro text-[0.78rem] hover:underline no-underline"
+                  title={`Actualizado ${pdfs[p.slug].updatedAt ? new Date(pdfs[p.slug].updatedAt!).toLocaleString('pt-PT') : ''}`}
+                >
+                  ver PDF
+                </a>
+              )}
               {(p.slug?.startsWith('ebook-') || p.slug?.startsWith('guia-')) && (
                 <button
                   onClick={async () => {
@@ -229,7 +267,8 @@ export default function ProdutosAdmin() {
                     const j = await r.json();
                     if (r.ok) {
                       setUltimoPdf({ slug: p.slug, url: j.pdfUrl, ts: Date.now() });
-                      setMsg(`Render disparado. PDF pronto em ~3min — clica em "abrir PDF" no topo.`);
+                      setPolling(true);
+                      setMsg(`Render disparado para ${p.slug}. PDF pronto em ~3min. Link 'ver PDF' aparece sozinho.`);
                     } else {
                       setMsg(`Erro: ${j.erro}`);
                     }
