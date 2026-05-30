@@ -4,20 +4,25 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: 'Slug do ebook (ex: ebook-01-culpa)'
-        required: true
+        description: 'Slug do ebook (ex: ebook-01-culpa). Vazio ou ALL = todos.'
+        required: false
         type: string
-        default: 'ebook-01-culpa'
+        default: 'ALL'
+      slugs:
+        description: 'Lista de slugs separados por virgula (override do campo slug)'
+        required: false
+        type: string
+        default: ''
       mundo:
-        description: 'Mundo das imagens MJ (freeme, infonte, synchim, escola, autora)'
-        required: true
+        description: 'Mundo (freeme, infonte, synchim, escola, autora). Usa "auto" para auto-detectar por slug.'
+        required: false
         type: string
-        default: 'freeme'
+        default: 'auto'
 
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -45,9 +50,10 @@ jobs:
             gray-matter \
             marked
 
-      - name: Render ebook
+      - name: Render ebook(s)
         env:
           SLUG: ${{ github.event.inputs.slug }}
+          SLUGS: ${{ github.event.inputs.slugs }}
           MUNDO: ${{ github.event.inputs.mundo }}
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}

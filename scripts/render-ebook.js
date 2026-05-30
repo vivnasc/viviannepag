@@ -19,6 +19,7 @@ const puppeteer = require('puppeteer');
 const { createClient } = require('@supabase/supabase-js');
 
 const SLUG = process.env.SLUG || 'ebook-01-culpa';
+const SLUGS = (process.env.SLUGS ?? '').split(',').map(s => s.trim()).filter(Boolean);
 const MUNDO = process.env.MUNDO || 'freeme';
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -143,6 +144,24 @@ async function fetchImagensMundo(mundo) {
     dedup.push(im);
   }
   return dedup;
+}
+
+// Mapeia slug -> mundo automaticamente. Replica a logica do gerarLegendas
+// em /admin/produtos para consistencia. Default: freeme.
+function slugToMundo(slug) {
+  if (/sonho|voz|mente|teu/.test(slug)) return 'infonte';
+  if (/casal|perguntas/.test(slug)) return 'synchim';
+  if (/quemes|sentido|escuro|presenca/.test(slug)) return 'escola';
+  return 'freeme';
+}
+
+// Lista de todos os slugs de ebooks/guias PT. Permite bulk sem hard-coding.
+function listAllSlugs() {
+  const dir = path.join(__dirname, '..', 'content', 'produtos');
+  return fs.readdirSync(dir)
+    .filter(name => /^(ebook|guia)-\d+/.test(name) && !name.endsWith('-en'))
+    .filter(name => fs.existsSync(path.join(dir, name, `${name}.md`)))
+    .sort();
 }
 
 // Hash deterministico do slug → lane. Permite que produtos do mesmo mundo
@@ -746,20 +765,26 @@ ${chaptersHtml}
 
 // ─── main ───
 
-async function main() {
-  console.log(`[start] slug=${SLUG} mundo=${MUNDO}`);
+async function renderUm(slug, mundoOverride) {
+  const mundo = mundoOverride || slugToMundo(slug);
+  console.log(`\n── [slug=${slug} mundo=${mundo}] ──`);
 
-  const raw = fs.readFileSync(EBOOK_PATH, 'utf8');
+  const ebookPath = path.join(__dirname, '..', 'content', 'produtos', slug, `${slug}.md`);
+  if (!fs.existsSync(ebookPath)) {
+    throw new Error(`md nao encontrado: ${ebookPath}`);
+  }
+  const raw = fs.readFileSync(ebookPath, 'utf8');
   const ebook = parseEbook(raw);
-  console.log(`[parsed] ${ebook.chapters.length} capitulos`);
+  console.log(`  [parsed] ${ebook.chapters.length} capitulos`);
 
-  const imagens = await fetchImagensMundo(MUNDO);
-  console.log(`[imagens] ${imagens.length} fotos MJ disponiveis`);
+  const imagens = await fetchImagensMundo(mundo);
+  console.log(`  [imagens] ${imagens.length} fotos MJ em ${mundo}`);
 
-  const { capa, porCapitulo, lane } = distribuirImagens(imagens, ebook.chapters.length, SLUG);
-  console.log(`[lane ${lane}/8] capa: ${capa?.url ?? 'sem capa'}`);
+  const { capa, porCapitulo, lane } = distribuirImagens(imagens, ebook.chapters.length, slug);
+  console.log(`  [lane ${lane}/8] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
   const html = buildHtml(ebook, capa, porCapitulo);
+  const tmpPdf = path.join('/tmp', `${slug}.pdf`);
 
   const browser = await puppeteer.launch({
     headless: true,
@@ -768,9 +793,8 @@ async function main() {
   const page = await browser.newPage();
   await page.setContent(html, { waitUntil: 'networkidle0', timeout: 60000 });
   await page.evaluateHandle('document.fonts.ready');
-
   await page.pdf({
-    path: TMP_PDF,
+    path: tmpPdf,
     format: 'A5',
     printBackground: true,
     margin: { top: '0', right: '0', bottom: '0', left: '0' },
@@ -778,25 +802,13 @@ async function main() {
   });
   await browser.close();
 
-  const stats = fs.statSync(TMP_PDF);
-  console.log(`[pdf] ${(stats.size / 1024).toFixed(0)} KB`);
+  const pdfBuf = fs.readFileSync(tmpPdf);
+  console.log(`  [pdf] ${(pdfBuf.length / 1024).toFixed(0)} KB`);
 
-  const pdfBuf = fs.readFileSync(TMP_PDF);
-
-  // ─── ESTRATEGIA DE UPLOAD ────────────────────────────────────────
-  // Tentamos por ordem:
-  //   1. escritos (privado) com mime=application/pdf
-  //   2. escritos (privado) com mime=application/octet-stream (alguns buckets
-  //      tem allowed_mime_types restrito e isto passa por bruteforce)
-  //   3. viviannepag-assets/produtos (publico) — sempre funciona, perde-se
-  //      pequena privacidade (URL publica, mas com slug = obfuscation leve)
-  // /api/download-directo testa os 2 sitios em sequencia.
-  let ficheiroPath = `produtos/${SLUG}.pdf`;
+  // Cascata de upload
+  let ficheiroPath = `produtos/${slug}.pdf`;
   const { data: produto } = await supabase
-    .from('produtos')
-    .select('id, ficheiro_path')
-    .eq('slug', SLUG)
-    .maybeSingle();
+    .from('produtos').select('id, ficheiro_path').eq('slug', slug).maybeSingle();
   if (produto?.ficheiro_path) ficheiroPath = produto.ficheiro_path;
 
   async function tryUpload(bucket, p, mime) {
@@ -806,36 +818,63 @@ async function main() {
   }
 
   let destino = null;
-  for (const tentativa of [
+  for (const t of [
     { bucket: BUCKET_PRODUTOS, path: ficheiroPath, mime: 'application/pdf' },
     { bucket: BUCKET_PRODUTOS, path: ficheiroPath, mime: 'application/octet-stream' },
-    { bucket: BUCKET_ASSETS, path: `produtos/${SLUG}.pdf`, mime: 'application/pdf' },
+    { bucket: BUCKET_ASSETS, path: `produtos/${slug}.pdf`, mime: 'application/pdf' },
   ]) {
-    const err = await tryUpload(tentativa.bucket, tentativa.path, tentativa.mime);
-    if (!err) {
-      destino = tentativa;
-      console.log(`[entregavel] ${tentativa.bucket}/${tentativa.path} (mime=${tentativa.mime})`);
-      break;
-    }
-    console.log(`[skip] ${tentativa.bucket}: ${err}`);
+    const err = await tryUpload(t.bucket, t.path, t.mime);
+    if (!err) { destino = t; break; }
   }
   if (!destino) throw new Error('upload falhou em todos os buckets');
+  console.log(`  [entregavel] ${destino.bucket}/${destino.path}`);
 
-  // Se produto existe na DB e ficheiro_path estava vazio, regista
   if (produto && !produto.ficheiro_path && destino.bucket === BUCKET_PRODUTOS) {
     await supabase.from('produtos').update({ ficheiro_path: ficheiroPath }).eq('id', produto.id);
-    console.log(`[db] ficheiro_path = ${ficheiroPath}`);
   }
 
-  // Preview admin publico (sempre escreve aqui para o botao 'ver PDF' funcionar)
-  const previewKey = `produtos/${SLUG}.pdf`;
+  // Preview admin publico
   if (destino.bucket !== BUCKET_ASSETS) {
-    await supabase.storage.from(BUCKET_ASSETS).upload(previewKey, pdfBuf, {
+    await supabase.storage.from(BUCKET_ASSETS).upload(`produtos/${slug}.pdf`, pdfBuf, {
       contentType: 'application/pdf', upsert: true,
     });
   }
-  const previewUrl = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(previewKey).data.publicUrl;
-  console.log(`[preview] ${previewUrl}`);
+
+  // limpa tmp
+  try { fs.unlinkSync(tmpPdf); } catch {}
+
+  return { slug, mundo, lane, size: pdfBuf.length };
+}
+
+async function main() {
+  // Determina lista de slugs a renderizar
+  let slugs = [];
+  if (SLUGS.length > 0) slugs = SLUGS;
+  else if (SLUG && SLUG !== 'ALL') slugs = [SLUG];
+  else slugs = listAllSlugs();
+
+  // SLUG="ALL" ou SLUGS vazio + SLUG vazio = todos
+  if (SLUG === 'ALL' || slugs.length === 0) slugs = listAllSlugs();
+
+  console.log(`[start] ${slugs.length} produto(s): ${slugs.join(', ')}`);
+
+  const ok = [];
+  const erros = [];
+  for (const s of slugs) {
+    try {
+      const r = await renderUm(s, MUNDO !== 'auto' && slugs.length === 1 ? MUNDO : null);
+      ok.push(r);
+    } catch (e) {
+      console.error(`  [erro ${s}] ${e.message}`);
+      erros.push({ slug: s, erro: e.message });
+    }
+  }
+
+  console.log(`\n[done] ok=${ok.length} erros=${erros.length}`);
+  if (erros.length > 0) {
+    console.log('Erros:'); erros.forEach(e => console.log(`  ${e.slug}: ${e.erro}`));
+    process.exitCode = ok.length === 0 ? 1 : 0; // exit 1 so se TODOS falharem
+  }
 }
 
 main().catch(e => {

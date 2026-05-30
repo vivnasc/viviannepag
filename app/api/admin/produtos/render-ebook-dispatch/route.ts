@@ -19,12 +19,15 @@ export async function POST(req: Request) {
 
   if (!token) return NextResponse.json({ erro: 'sem-github-token' }, { status: 500 });
 
-  let slug = 'ebook-01-culpa';
-  let mundo = 'freeme';
+  let slug = 'ALL';
+  let slugs = '';
+  let mundo = 'auto';
   try {
     const body = await req.json();
     if (typeof body?.slug === 'string') slug = body.slug;
     if (typeof body?.mundo === 'string') mundo = body.mundo;
+    if (Array.isArray(body?.slugs)) slugs = body.slugs.filter((s: unknown) => typeof s === 'string').join(',');
+    else if (typeof body?.slugs === 'string') slugs = body.slugs;
   } catch {}
 
   const res = await fetch(
@@ -37,7 +40,7 @@ export async function POST(req: Request) {
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ref, inputs: { slug, mundo } }),
+      body: JSON.stringify({ ref, inputs: { slug, slugs, mundo } }),
     }
   );
 
@@ -49,14 +52,19 @@ export async function POST(req: Request) {
     );
   }
 
-  // URL onde o PDF vai aparecer
   const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '');
-  const pdfUrl = `${supabaseUrl}/storage/v1/object/public/viviannepag-assets/produtos/${slug}.pdf`;
+  const ehBulk = slug === 'ALL' || (slugs && slugs.includes(','));
+  const slugUnico = !ehBulk && slug !== 'ALL' ? slug : (slugs.split(',')[0] || slug);
+  const pdfUrl = ehBulk
+    ? null
+    : `${supabaseUrl}/storage/v1/object/public/viviannepag-assets/produtos/${slugUnico}.pdf`;
 
   return NextResponse.json({
     ok: true,
     slug,
+    slugs,
     mundo,
+    bulk: ehBulk,
     pdfUrl,
     workflowRunUrl: `https://github.com/${owner}/${repo}/actions/workflows/render-ebook.yml`,
   });
