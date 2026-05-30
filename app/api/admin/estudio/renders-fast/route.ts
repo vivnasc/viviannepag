@@ -4,6 +4,8 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const runtime = 'nodejs';
 export const maxDuration = 20;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const BUCKET = 'viviannepag-assets';
 
@@ -89,5 +91,7 @@ export async function GET() {
 
   jobs.sort((a, b) => (b.iniciadoEm ?? '').localeCompare(a.iniciadoEm ?? ''));
 
-  return NextResponse.json({ renders, jobs });
+  return NextResponse.json({ renders, jobs }, {
+    headers: { 'Cache-Control': 'no-store, max-age=0' },
+  });
 }

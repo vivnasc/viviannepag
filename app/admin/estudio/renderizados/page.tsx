@@ -46,19 +46,38 @@ export default function RenderizadosPage() {
   const [startDate, setStartDate] = useState(START_DATE_DEFAULT);
   const [preview, setPreview] = useState<string | null>(null);
 
-  async function carregar() {
-    setLoading(true);
+  const [polling, setPolling] = useState(false);
+
+  async function carregar(silent = false) {
+    if (!silent) setLoading(true);
     try {
-      const res = await fetch('/api/admin/estudio/renders-fast');
+      const res = await fetch(`/api/admin/estudio/renders-fast?_=${Date.now()}`, {
+        cache: 'no-store',
+      });
       const json = await res.json();
       setData({ rendersFinais: json.renders ?? [], jobs: json.jobs ?? [] });
     } catch (e) {
       console.error(e);
     }
-    setLoading(false);
+    if (!silent) setLoading(false);
   }
 
   useEffect(() => { carregar(); }, []);
+
+  // Quando ha um job de reel a correr, faz poll a cada 25s ate 12min.
+  useEffect(() => {
+    if (!polling) return;
+    const start = Date.now();
+    const id = setInterval(() => {
+      if (Date.now() - start > 12 * 60 * 1000) {
+        setPolling(false);
+        clearInterval(id);
+        return;
+      }
+      carregar(true);
+    }, 25_000);
+    return () => clearInterval(id);
+  }, [polling]);
 
   // Renders mais recentes por (dia, slideIdx): jobs ordenados desc, primeiro a aparecer ganha
   const rendersPorDia = useMemo(() => {
@@ -112,7 +131,8 @@ export default function RenderizadosPage() {
         alert(`Erro: ${json.erro ?? res.status}`);
         return;
       }
-      alert(`Disparado. jobId=${json.jobId}\nVer: ${json.workflowRunUrl}`);
+      setPolling(true);
+      alert(`Disparado. jobId=${json.jobId}\nVer: ${json.workflowRunUrl}\n\nA pagina vai-se actualizar sozinha quando o video estiver pronto (~3min).`);
     } catch (e) {
       alert(`Erro: ${String(e)}`);
     }
@@ -133,7 +153,8 @@ export default function RenderizadosPage() {
         alert(`Erro: ${json.erro ?? res.status}`);
         return;
       }
-      alert(`Bulk disparado. jobId=${json.jobId}\nVer: ${json.workflowRunUrl}`);
+      setPolling(true);
+      alert(`Bulk disparado. jobId=${json.jobId}\nVer: ${json.workflowRunUrl}\n\nA pagina vai-se actualizar sozinha. Demora ~20-30min.`);
     } catch (e) {
       alert(`Erro: ${String(e)}`);
     }
@@ -198,7 +219,12 @@ export default function RenderizadosPage() {
             className="bg-transparent border border-ocre/30 rounded-[8px] px-2 py-1 text-[0.7rem] text-creme outline-none focus:border-ambar"
           />
         </div>
-        <Btn variant="default" size="md" onClick={carregar}>recarregar</Btn>
+        {polling && (
+          <span className="text-[0.7rem] text-ambar/80 px-2 py-1 rounded-[6px] border border-ambar/30 bg-ambar/5">
+            ⟳ a verificar a cada 25s
+          </span>
+        )}
+        <Btn variant="default" size="md" onClick={() => carregar()}>recarregar</Btn>
         <Link href="/admin/estudio" className="text-[0.7rem] text-ocre hover:text-ambar no-underline">&larr; voltar ao estudio</Link>
       </header>
 
