@@ -6,7 +6,6 @@ import { CALENDARIO_30_DIAS, PALETAS, TIPO_LABELS } from '@/lib/estudio-conteudo
 import { Pill, Btn } from '@/components/admin/EstudioKit';
 
 type RenderFinal = {
-  path: string;
   url: string;
   jobId: string;
   dia: number;
@@ -49,9 +48,9 @@ export default function RenderizadosPage() {
   async function carregar() {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/estudio/biblioteca');
+      const res = await fetch('/api/admin/estudio/renders-fast');
       const json = await res.json();
-      setData({ rendersFinais: json.rendersFinais ?? [], jobs: json.jobs ?? [] });
+      setData({ rendersFinais: json.renders ?? [], jobs: json.jobs ?? [] });
     } catch (e) {
       console.error(e);
     }
