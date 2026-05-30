@@ -27,7 +27,10 @@ for (const [k, v] of Object.entries({ SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY })
   if (!v) { console.error(`Missing env: ${k}`); process.exit(1); }
 }
 
-const BUCKET = 'viviannepag-assets';
+// Imagens MJ vivem em viviannepag-assets (publico). PDFs entregaveis em
+// escritos (privado, lido pelo /api/download via signed URL).
+const BUCKET_ASSETS = 'viviannepag-assets';
+const BUCKET_PRODUTOS = 'escritos';
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
@@ -110,17 +113,17 @@ async function fetchImagensMundo(mundo) {
   // Lista todas as imagens em estudio/{mundo}/dia-*/
   const imagens = [];
   try {
-    const { data: dias } = await supabase.storage.from(BUCKET).list(`estudio/${mundo}`, { limit: 100 });
+    const { data: dias } = await supabase.storage.from(BUCKET_ASSETS).list(`estudio/${mundo}`, { limit: 100 });
     for (const d of dias ?? []) {
       if (!d.name?.startsWith('dia-')) continue;
       const dia = Number(d.name.replace('dia-', ''));
-      const { data: files } = await supabase.storage.from(BUCKET).list(`estudio/${mundo}/${d.name}`, { limit: 100 });
+      const { data: files } = await supabase.storage.from(BUCKET_ASSETS).list(`estudio/${mundo}/${d.name}`, { limit: 100 });
       for (const f of files ?? []) {
         if (!f.name?.endsWith('.jpg')) continue;
         const m = f.name.match(/^slide-(\d+)-(.+)-(\d{10,13})\.jpg$/);
         if (!m) continue;
         const path = `estudio/${mundo}/${d.name}/${f.name}`;
-        const url = supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+        const url = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(path).data.publicUrl;
         imagens.push({ dia, slideIdx: Number(m[1]), layout: m[2], ts: Number(m[3]), url });
       }
     }
@@ -142,21 +145,46 @@ async function fetchImagensMundo(mundo) {
   return dedup;
 }
 
-// Distribui imagens pelos capitulos: capa (primeira foto MJ marcante)
-// e 1 imagem por capitulo, evitando repetir.
-function distribuirImagens(imagens, nChapters) {
+// Hash deterministico do slug → lane. Permite que produtos do mesmo mundo
+// usem subsets diferentes de imagens (cada lane salta de stride em stride).
+function hashSlugLane(slug, totalLanes) {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return h % totalLanes;
+}
+
+// Distribui imagens pelos capitulos sem repetir entre produtos do mesmo mundo.
+// Estrategia: o slug determina uma 'lane' (offset inicial), e percorremos as
+// imagens com stride = LANE_COUNT. Dois produtos com lanes diferentes nunca
+// caem nas mesmas imagens.
+function distribuirImagens(imagens, nChapters, slug) {
   if (imagens.length === 0) return { capa: null, porCapitulo: [] };
-  // Capa: primeira imagem (capa do dia 1, mais emblematica)
-  const capa = imagens[0];
-  // Capitulos: imagens 1..N distribuidas uniformemente do resto
-  const resto = imagens.slice(1);
+
+  // 8 lanes = ate 8 produtos por mundo sem overlap, desde que haja >= 8*9 imgs.
+  // Com fallback elegante quando ha menos imagens (volta ao inicio).
+  const LANE_COUNT = 8;
+  const lane = hashSlugLane(slug, LANE_COUNT);
+
+  // Constroi sequencia desta lane: [lane, lane+8, lane+16, ...]
+  const minhaSeq = [];
+  for (let i = lane; i < imagens.length; i += LANE_COUNT) {
+    minhaSeq.push(imagens[i]);
+  }
+  // Se a lane resultou em <= nChapters imagens (mundo pequeno), preenche com o
+  // resto da pool por ordem.
+  if (minhaSeq.length < nChapters + 1) {
+    for (const im of imagens) {
+      if (!minhaSeq.includes(im)) minhaSeq.push(im);
+      if (minhaSeq.length >= nChapters + 1) break;
+    }
+  }
+
+  const capa = minhaSeq[0];
   const porCapitulo = [];
   for (let i = 0; i < nChapters; i++) {
-    if (resto.length === 0) { porCapitulo.push(null); continue; }
-    const idx = Math.floor(i * resto.length / nChapters);
-    porCapitulo.push(resto[idx]);
+    porCapitulo.push(minhaSeq[i + 1] ?? minhaSeq[i % minhaSeq.length]);
   }
-  return { capa, porCapitulo };
+  return { capa, porCapitulo, lane };
 }
 
 // ─── HTML builder ───
@@ -728,8 +756,8 @@ async function main() {
   const imagens = await fetchImagensMundo(MUNDO);
   console.log(`[imagens] ${imagens.length} fotos MJ disponiveis`);
 
-  const { capa, porCapitulo } = distribuirImagens(imagens, ebook.chapters.length);
-  console.log(`[capa] ${capa?.url ?? 'sem capa'}`);
+  const { capa, porCapitulo, lane } = distribuirImagens(imagens, ebook.chapters.length, SLUG);
+  console.log(`[lane ${lane}/8] capa: ${capa?.url ?? 'sem capa'}`);
 
   const html = buildHtml(ebook, capa, porCapitulo);
 
@@ -753,24 +781,37 @@ async function main() {
   const stats = fs.statSync(TMP_PDF);
   console.log(`[pdf] ${(stats.size / 1024).toFixed(0)} KB`);
 
-  // Upload Supabase
   const pdfBuf = fs.readFileSync(TMP_PDF);
-  const pKey = `produtos/${SLUG}.pdf`;
-  const { error } = await supabase.storage.from(BUCKET).upload(pKey, pdfBuf, {
-    contentType: 'application/pdf',
-    upsert: true,
-  });
-  if (error) throw new Error(`upload: ${error.message}`);
-  const publicUrl = supabase.storage.from(BUCKET).getPublicUrl(pKey).data.publicUrl;
-  console.log(`[upload] ${publicUrl}`);
 
-  // Tambem grava preview path com timestamp para ver historico
-  const previewKey = `produtos/_previews/${SLUG}-${Date.now()}.pdf`;
-  await supabase.storage.from(BUCKET).upload(previewKey, pdfBuf, {
-    contentType: 'application/pdf',
-    upsert: true,
+  // 1. BUCKET ENTREGAVEL AO CLIENTE (escritos, PRIVADO — signed URLs).
+  //    Le produtos.ficheiro_path da DB; default produtos/{slug}.pdf se vazio.
+  let ficheiroPath = `produtos/${SLUG}.pdf`;
+  const { data: produto } = await supabase
+    .from('produtos')
+    .select('id, ficheiro_path')
+    .eq('slug', SLUG)
+    .maybeSingle();
+  if (produto?.ficheiro_path) ficheiroPath = produto.ficheiro_path;
+
+  const { error: errPriv } = await supabase.storage
+    .from(BUCKET_PRODUTOS)
+    .upload(ficheiroPath, pdfBuf, { contentType: 'application/pdf', upsert: true });
+  if (errPriv) throw new Error(`upload ${BUCKET_PRODUTOS}: ${errPriv.message}`);
+  console.log(`[entregavel] ${BUCKET_PRODUTOS}/${ficheiroPath}`);
+
+  // Se produto existe na DB mas ficheiro_path estava vazio, regista o novo path
+  if (produto && !produto.ficheiro_path) {
+    await supabase.from('produtos').update({ ficheiro_path: ficheiroPath }).eq('id', produto.id);
+    console.log(`[db] ficheiro_path = ${ficheiroPath}`);
+  }
+
+  // 2. PREVIEW PUBLICO PARA ADMIN (viviannepag-assets, sem assinar)
+  const previewKey = `produtos/${SLUG}.pdf`;
+  await supabase.storage.from(BUCKET_ASSETS).upload(previewKey, pdfBuf, {
+    contentType: 'application/pdf', upsert: true,
   });
-  console.log(`[preview] ${supabase.storage.from(BUCKET).getPublicUrl(previewKey).data.publicUrl}`);
+  const previewUrl = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(previewKey).data.publicUrl;
+  console.log(`[preview] ${previewUrl}`);
 }
 
 main().catch(e => {
