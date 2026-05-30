@@ -31,6 +31,7 @@ export default function ProdutosAdmin() {
   const [edit, setEdit] = useState<(Produto | (Omit<Produto, 'id'> & { id?: undefined })) | null>(null);
   const [salvando, setSalvando] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [ultimoPdf, setUltimoPdf] = useState<{ slug: string; url: string; ts: number } | null>(null);
   const [dragAtivo, setDragAtivo] = useState(false);
   const [legendaModal, setLegendaModal] = useState<Produto | null>(null);
   const [legendas, setLegendas] = useState<{ig: string; fb: string; tw: string; hashtags: string} | null>(null);
@@ -185,6 +186,17 @@ export default function ProdutosAdmin() {
           <h1 className="font-serif font-light text-creme text-3xl">produtos</h1>
         </div>
         <div className="flex gap-3 items-center flex-wrap">
+          {ultimoPdf && (
+            <a
+              href={`${ultimoPdf.url}?t=${ultimoPdf.ts}`}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-ambar text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase no-underline hover:bg-ouro transition-colors"
+              title={ultimoPdf.url}
+            >
+              📖 abrir PDF · {ultimoPdf.slug}
+            </a>
+          )}
           <Link href="/admin" className="text-creme-2 border border-ocre/40 hover:border-ambar rounded-[12px] px-4 py-2 text-[0.8rem] lowercase no-underline">← escritos</Link>
           <button onClick={async () => { setSalvando(true); setMsg('A popular 15 produtos...'); const r = await fetch('/api/admin/seed-produtos', { method: 'POST' }); const j = await r.json(); setSalvando(false); setMsg(r.ok ? `${j.total} produtos populados.` : `Erro: ${j.erro}`); carregar(); }} disabled={salvando} className="bg-bordeaux/80 text-creme rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-bordeaux disabled:opacity-70">seed 15 produtos</button>
           <button onClick={() => setEdit({ ...vazio })} className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-ambar">+ novo produto</button>
@@ -216,7 +228,8 @@ export default function ProdutosAdmin() {
                     });
                     const j = await r.json();
                     if (r.ok) {
-                      setMsg(`Render disparado. PDF em ~3min em: ${j.pdfUrl}`);
+                      setUltimoPdf({ slug: p.slug, url: j.pdfUrl, ts: Date.now() });
+                      setMsg(`Render disparado. PDF pronto em ~3min — clica em "abrir PDF" no topo.`);
                     } else {
                       setMsg(`Erro: ${j.erro}`);
                     }
