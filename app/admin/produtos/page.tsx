@@ -276,6 +276,15 @@ export default function ProdutosAdmin() {
                   ver PDF
                 </a>
               )}
+              <a
+                href={`/api/download-directo?slug=${p.slug}&email=test@viviannedossantos.com`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-salvia text-[0.78rem] hover:text-ambar no-underline"
+                title="Bate no mesmo endpoint que o cliente bate pos-compra (com rodape de licenca)"
+              >
+                testar como cliente
+              </a>
               {(p.slug?.startsWith('ebook-') || p.slug?.startsWith('guia-')) && (
                 <button
                   onClick={async () => {
