@@ -22,8 +22,16 @@ const os = require('node:os');
 const SITE_URL = process.env.SITE_URL;
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const ELEVEN_API_KEY = process.env.ELEVENLABS_API_KEY || process.env.ELEVEN_API_KEY;
-const ELEVEN_VOICE_ID = process.env.ELEVEN_VOICE_ID;
+const ELEVEN_API_KEY =
+  process.env.ELEVENLABS_API_KEY ||
+  process.env.ELEVEN_API_KEY ||
+  process.env.ELEVENLABS_KEY ||
+  process.env.ELEVEN_LABS_API_KEY ||
+  process.env.XI_API_KEY;
+const ELEVEN_VOICE_ID =
+  process.env.ELEVEN_VOICE_ID ||
+  process.env.ELEVENLABS_VOICE_ID ||
+  process.env.VOICE_ID;
 const JOB_ID = process.env.JOB_ID || `reels-${Date.now()}`;
 const DIAS_FILTER = (process.env.DIAS_FILTER ?? '').trim();
 const BUCKET = 'viviannepag-assets';
