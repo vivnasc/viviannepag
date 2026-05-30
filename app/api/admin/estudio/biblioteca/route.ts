@@ -82,7 +82,7 @@ export async function GET() {
   try {
     const { data: jobsList } = await supabase.storage.from(BUCKET).list('renders', { limit: 100 });
     for (const j of jobsList ?? []) {
-      if (!j.name?.startsWith('render-') && !j.name?.startsWith('job-')) continue;
+      if (!j.name?.startsWith('render-') && !j.name?.startsWith('job-') && !j.name?.startsWith('reels-')) continue;
 
       // Le result.json se existe
       try {

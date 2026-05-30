@@ -1919,34 +1919,55 @@ export default function EstudioPage() {
         </div>
         <button
           onClick={async () => {
-            // Buscar URLs dos renders do ultimo job (carrosseis e citacoes)
+            // Buscar TODOS os renders (carrosseis PNG + reels MP4) e separar
             const imagensPorDia = new Map<number, string[]>();
+            const videosReelsPorDia = new Map<number, string>();
             try {
-              const res = await fetch('/api/admin/estudio/biblioteca');
+              const res = await fetch(`/api/admin/estudio/renders-fast?_=${Date.now()}`, { cache: 'no-store' });
               if (res.ok) {
                 const data = await res.json();
-                const jobs: { jobId: string; iniciadoEm?: string }[] = data.jobs ?? [];
-                const renders: { jobId: string; dia: number; slideIdx: number; url: string }[] = data.rendersFinais ?? [];
-                // Job mais recente
-                const latestJobId = jobs[0]?.jobId;
-                if (latestJobId) {
-                  const porDia = new Map<number, { slideIdx: number; url: string }[]>();
+                const renders: { jobId: string; dia: number; slideIdx: number; tipo: string; url: string }[] = data.renders ?? [];
+
+                // Reels: 1 MP4 por dia. Latest job ganha (jobId DESC pelo timestamp).
+                const reelJobsDesc = Array.from(new Set(
+                  renders.filter(r => r.tipo === 'reel-video').map(r => r.jobId)
+                )).sort().reverse();
+                const reelsVistos = new Set<number>();
+                for (const jobId of reelJobsDesc) {
                   for (const r of renders) {
-                    if (r.jobId !== latestJobId) continue;
-                    const arr = porDia.get(r.dia) ?? [];
+                    if (r.jobId !== jobId || r.tipo !== 'reel-video') continue;
+                    if (reelsVistos.has(r.dia)) continue;
+                    videosReelsPorDia.set(r.dia, r.url);
+                    reelsVistos.add(r.dia);
+                  }
+                }
+
+                // Carrosseis: agrupa por dia, ordena por slideIdx, latest job por dia ganha.
+                const slidesRenders = renders.filter(r => r.tipo !== 'reel-video');
+                const slidesJobsDesc = Array.from(new Set(slidesRenders.map(r => r.jobId))).sort().reverse();
+                const slidesPorDia = new Map<number, { slideIdx: number; url: string }[]>();
+                const slidesVistos = new Map<number, Set<number>>();
+                for (const jobId of slidesJobsDesc) {
+                  for (const r of slidesRenders) {
+                    if (r.jobId !== jobId) continue;
+                    const visto = slidesVistos.get(r.dia) ?? new Set<number>();
+                    if (visto.has(r.slideIdx)) continue;
+                    visto.add(r.slideIdx);
+                    slidesVistos.set(r.dia, visto);
+                    const arr = slidesPorDia.get(r.dia) ?? [];
                     arr.push({ slideIdx: r.slideIdx, url: r.url });
-                    porDia.set(r.dia, arr);
+                    slidesPorDia.set(r.dia, arr);
                   }
-                  for (const [dia, arr] of porDia) {
-                    arr.sort((a, b) => a.slideIdx - b.slideIdx);
-                    imagensPorDia.set(dia, arr.map(x => x.url));
-                  }
+                }
+                for (const [dia, arr] of slidesPorDia) {
+                  arr.sort((a, b) => a.slideIdx - b.slideIdx);
+                  imagensPorDia.set(dia, arr.map(x => x.url));
                 }
               }
             } catch (e) {
-              console.warn('falhou buscar renders, csv vai sair sem Picture Urls', e);
+              console.warn('falhou buscar renders, csv vai sair sem media', e);
             }
-            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia);
+            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia, videosReelsPorDia);
             // BOM UTF-8 para emojis/acentos no Metricool
             downloadFile('﻿' + csv, `metricool-30dias-${startDate}.csv`, 'text/csv;charset=utf-8');
           }}
