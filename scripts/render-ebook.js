@@ -783,8 +783,14 @@ async function main() {
 
   const pdfBuf = fs.readFileSync(TMP_PDF);
 
-  // 1. BUCKET ENTREGAVEL AO CLIENTE (escritos, PRIVADO — signed URLs).
-  //    Le produtos.ficheiro_path da DB; default produtos/{slug}.pdf se vazio.
+  // ─── ESTRATEGIA DE UPLOAD ────────────────────────────────────────
+  // Tentamos por ordem:
+  //   1. escritos (privado) com mime=application/pdf
+  //   2. escritos (privado) com mime=application/octet-stream (alguns buckets
+  //      tem allowed_mime_types restrito e isto passa por bruteforce)
+  //   3. viviannepag-assets/produtos (publico) — sempre funciona, perde-se
+  //      pequena privacidade (URL publica, mas com slug = obfuscation leve)
+  // /api/download-directo testa os 2 sitios em sequencia.
   let ficheiroPath = `produtos/${SLUG}.pdf`;
   const { data: produto } = await supabase
     .from('produtos')
@@ -793,23 +799,41 @@ async function main() {
     .maybeSingle();
   if (produto?.ficheiro_path) ficheiroPath = produto.ficheiro_path;
 
-  const { error: errPriv } = await supabase.storage
-    .from(BUCKET_PRODUTOS)
-    .upload(ficheiroPath, pdfBuf, { contentType: 'application/pdf', upsert: true });
-  if (errPriv) throw new Error(`upload ${BUCKET_PRODUTOS}: ${errPriv.message}`);
-  console.log(`[entregavel] ${BUCKET_PRODUTOS}/${ficheiroPath}`);
+  async function tryUpload(bucket, p, mime) {
+    const { error } = await supabase.storage
+      .from(bucket).upload(p, pdfBuf, { contentType: mime, upsert: true });
+    return error?.message ?? null;
+  }
 
-  // Se produto existe na DB mas ficheiro_path estava vazio, regista o novo path
-  if (produto && !produto.ficheiro_path) {
+  let destino = null;
+  for (const tentativa of [
+    { bucket: BUCKET_PRODUTOS, path: ficheiroPath, mime: 'application/pdf' },
+    { bucket: BUCKET_PRODUTOS, path: ficheiroPath, mime: 'application/octet-stream' },
+    { bucket: BUCKET_ASSETS, path: `produtos/${SLUG}.pdf`, mime: 'application/pdf' },
+  ]) {
+    const err = await tryUpload(tentativa.bucket, tentativa.path, tentativa.mime);
+    if (!err) {
+      destino = tentativa;
+      console.log(`[entregavel] ${tentativa.bucket}/${tentativa.path} (mime=${tentativa.mime})`);
+      break;
+    }
+    console.log(`[skip] ${tentativa.bucket}: ${err}`);
+  }
+  if (!destino) throw new Error('upload falhou em todos os buckets');
+
+  // Se produto existe na DB e ficheiro_path estava vazio, regista
+  if (produto && !produto.ficheiro_path && destino.bucket === BUCKET_PRODUTOS) {
     await supabase.from('produtos').update({ ficheiro_path: ficheiroPath }).eq('id', produto.id);
     console.log(`[db] ficheiro_path = ${ficheiroPath}`);
   }
 
-  // 2. PREVIEW PUBLICO PARA ADMIN (viviannepag-assets, sem assinar)
+  // Preview admin publico (sempre escreve aqui para o botao 'ver PDF' funcionar)
   const previewKey = `produtos/${SLUG}.pdf`;
-  await supabase.storage.from(BUCKET_ASSETS).upload(previewKey, pdfBuf, {
-    contentType: 'application/pdf', upsert: true,
-  });
+  if (destino.bucket !== BUCKET_ASSETS) {
+    await supabase.storage.from(BUCKET_ASSETS).upload(previewKey, pdfBuf, {
+      contentType: 'application/pdf', upsert: true,
+    });
+  }
   const previewUrl = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(previewKey).data.publicUrl;
   console.log(`[preview] ${previewUrl}`);
 }

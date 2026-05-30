@@ -7,12 +7,15 @@ export const runtime = 'nodejs';
 
 // Estrategia de fetch do PDF, por ordem de prioridade:
 // 1. Supabase bucket 'escritos' em produtos.ficheiro_path ou produtos/{slug}.pdf
-//    (e onde o render-ebook.js editorial publica)
-// 2. Disco local private-produtos/{slug}.pdf (fallback legacy)
+//    (e onde o render-ebook.js editorial publica primeiro, se o bucket aceitar)
+// 2. Supabase bucket 'viviannepag-assets' em produtos/{slug}.pdf (fallback
+//    do render-ebook quando escritos rejeita mime de PDF)
+// 3. Disco local private-produtos/{slug}.pdf (fallback legacy)
 async function fetchPdf(slug: string): Promise<Buffer | null> {
-  // 1. Supabase
+  const supabase = getSupabaseAdmin();
+
+  // 1. Escritos via ficheiro_path
   try {
-    const supabase = getSupabaseAdmin();
     let ficheiroPath = `produtos/${slug}.pdf`;
     const { data: produto } = await supabase
       .from('produtos').select('ficheiro_path').eq('slug', slug).maybeSingle();
@@ -24,7 +27,16 @@ async function fetchPdf(slug: string): Promise<Buffer | null> {
     }
   } catch {}
 
-  // 2. Disco
+  // 2. viviannepag-assets/produtos/{slug}.pdf
+  try {
+    const { data, error } = await supabase.storage
+      .from('viviannepag-assets').download(`produtos/${slug}.pdf`);
+    if (!error && data) {
+      return Buffer.from(await data.arrayBuffer());
+    }
+  } catch {}
+
+  // 3. Disco
   try {
     return await readFile(join(process.cwd(), 'private-produtos', `${slug}.pdf`));
   } catch {
