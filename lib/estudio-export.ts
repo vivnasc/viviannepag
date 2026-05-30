@@ -84,6 +84,9 @@ export function gerarCaptionWhatsApp(c: ConteudoDia): string {
 }
 
 // Cabecalho oficial Metricool (template descarregado a 2026-05-29)
+const PINTEREST_BOARD = 'Vivianne dos Santos';
+const PINTEREST_LINK = 'https://viviannedossantos.com/loja';
+
 const CSV_HEADER = [
   'Text', 'Date', 'Time', 'Draft',
   'Facebook', 'Twitter/X', 'LinkedIn', 'GBP', 'Instagram', 'Pinterest', 'TikTok', 'Youtube', 'Threads', 'Bluesky',
@@ -166,6 +169,10 @@ export function gerarMetricoolCSV(
 
       const igPostType = ehReel ? 'REEL' : 'POST';
 
+      // Pinterest so para carrosseis e citacoes (tem imagem). Reels precisam video.
+      const podePinterest = ehCarrossel || ehCitacao;
+      const pinTitle = c.titulo.length > 95 ? c.titulo.slice(0, 95) + '...' : c.titulo;
+
       lines.push(buildRow({
         ...pictureCols,
         'Text': captionIG,
@@ -177,11 +184,14 @@ export function gerarMetricoolCSV(
         'LinkedIn': 'FALSE',
         'GBP': 'FALSE',
         'Instagram': 'TRUE',
-        'Pinterest': 'FALSE',
+        'Pinterest': podePinterest ? 'TRUE' : 'FALSE',
         'TikTok': 'FALSE',
         'Youtube': 'FALSE',
         'Threads': 'TRUE',
         'Bluesky': 'FALSE',
+        'Pinterest Board': podePinterest ? PINTEREST_BOARD : '',
+        'Pinterest Pin Title': podePinterest ? pinTitle : '',
+        'Pinterest Pin Link': podePinterest ? PINTEREST_LINK : '',
         'Instagram Post Type': igPostType,
         'Instagram Show Reel On Feed': ehReel ? 'TRUE' : '',
         'Facebook Post Type': ehReel ? 'REEL' : 'POST',
