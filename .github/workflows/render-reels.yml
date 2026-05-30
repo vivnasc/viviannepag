@@ -1,0 +1,60 @@
+name: Render reels (TTS + FFmpeg)
+
+on:
+  workflow_dispatch:
+    inputs:
+      jobId:
+        description: 'ID unico do job'
+        required: true
+        type: string
+      siteUrl:
+        description: 'URL publica do site'
+        required: true
+        type: string
+      dias:
+        description: 'Filtro de dias (ex: "2" ou "2,5,9"). Vazio = todos os reels'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install ffmpeg + libass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libass9 fonts-liberation
+
+      - name: Download Fraunces font
+        run: |
+          mkdir -p scripts/fonts
+          curl -sSL -o scripts/fonts/Fraunces.ttf \
+            https://github.com/google/fonts/raw/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf
+          ls -la scripts/fonts/
+
+      - name: Install npm packages
+        run: |
+          npm install --no-save \
+            @supabase/supabase-js
+
+      - name: Render reels
+        env:
+          SITE_URL: ${{ github.event.inputs.siteUrl }}
+          JOB_ID: ${{ github.event.inputs.jobId }}
+          DIAS_FILTER: ${{ github.event.inputs.dias }}
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVEN_VOICE_ID: ${{ secrets.ELEVEN_VOICE_ID }}
+        run: node scripts/render-reels.js

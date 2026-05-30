@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { CALENDARIO_30_DIAS, PALETAS, TIPO_LABELS } from '@/lib/estudio-conteudo';
+import { ehReel } from '@/lib/estudio-reel';
 import { Pill, Btn } from '@/components/admin/EstudioKit';
 
 type RenderFinal = {
@@ -81,14 +82,40 @@ export default function RenderizadosPage() {
     return map;
   }, [data]);
 
+  function videoReelDe(dia: number): RenderFinal | undefined {
+    return (rendersPorDia.get(dia) ?? []).find(r => r.tipo === 'reel-video');
+  }
+
   function statusDe(dia: number): 'rendered' | 'parcial' | 'pendente' {
     const c = CALENDARIO_30_DIAS.find(x => x.dia === dia);
-    const total = c?.slides?.length ?? 0;
-    const renders = rendersPorDia.get(dia) ?? [];
+    if (!c) return 'pendente';
+    if (ehReel(c)) return videoReelDe(dia) ? 'rendered' : 'pendente';
+    const total = c.slides?.length ?? 0;
+    const renders = (rendersPorDia.get(dia) ?? []).filter(r => r.tipo !== 'reel-video');
     if (total === 0) return 'pendente';
     if (renders.length >= total) return 'rendered';
     if (renders.length > 0) return 'parcial';
     return 'pendente';
+  }
+
+  async function dispararReel(dia: number) {
+    const ok = confirm(`Gerar video do reel do dia ${dia}? Vai correr no GitHub Actions (~3-5min).`);
+    if (!ok) return;
+    try {
+      const res = await fetch('/api/admin/estudio/render-reels-dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dias: String(dia) }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.ok) {
+        alert(`Erro: ${json.erro ?? res.status}`);
+        return;
+      }
+      alert(`Disparado. jobId=${json.jobId}\nVer: ${json.workflowRunUrl}`);
+    } catch (e) {
+      alert(`Erro: ${String(e)}`);
+    }
   }
 
   const contagem = useMemo(() => {
@@ -189,9 +216,12 @@ export default function RenderizadosPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {dias.map(c => {
               const renders = rendersPorDia.get(c.dia) ?? [];
+              const ehReelDia = ehReel(c);
+              const videoReel = ehReelDia ? videoReelDe(c.dia) : undefined;
+              const slidesRenders = renders.filter(r => r.tipo !== 'reel-video');
               const total = c.slides?.length ?? 0;
               const status = statusDe(c.dia);
-              const capa = renders.find(r => r.slideIdx === 0) ?? renders[0];
+              const capa = slidesRenders.find(r => r.slideIdx === 0) ?? slidesRenders[0];
               const code = `VS-${String(c.dia).padStart(2, '0')}`;
               const dataPub = formatPubDate(c.dia, c.horario, startDate);
               const jobIdCapa = capa?.jobId;
@@ -204,21 +234,40 @@ export default function RenderizadosPage() {
                   key={c.dia}
                   className="rounded-[14px] overflow-hidden border border-ocre/15 bg-terra-2/15 flex flex-col"
                 >
-                  {/* Big preview (capa) */}
-                  <button
-                    onClick={() => capa && setPreview(capa.url)}
-                    disabled={!capa}
-                    className="aspect-[4/5] block w-full bg-black relative overflow-hidden disabled:cursor-default"
-                  >
-                    {capa?.url ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={capa.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-creme-2/30 text-[0.7rem]">
-                        sem render
-                      </div>
-                    )}
-                  </button>
+                  {/* Big preview (capa ou video) */}
+                  {ehReelDia ? (
+                    <div className="aspect-[9/16] block w-full bg-black relative overflow-hidden">
+                      {videoReel?.url ? (
+                        // eslint-disable-next-line jsx-a11y/media-has-caption
+                        <video
+                          src={videoReel.url}
+                          controls
+                          playsInline
+                          preload="metadata"
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-creme-2/30 text-[0.7rem]">
+                          sem video — clica em "gerar video"
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => capa && setPreview(capa.url)}
+                      disabled={!capa}
+                      className="aspect-[4/5] block w-full bg-black relative overflow-hidden disabled:cursor-default"
+                    >
+                      {capa?.url ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={capa.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-creme-2/30 text-[0.7rem]">
+                          sem render
+                        </div>
+                      )}
+                    </button>
+                  )}
 
                   {/* Footer */}
                   <div className="p-4 flex flex-col gap-3 flex-1">
@@ -236,11 +285,11 @@ export default function RenderizadosPage() {
                       </p>
                     </div>
 
-                    {/* Slide thumbs strip */}
-                    {total > 0 && (
+                    {/* Slide thumbs strip (so carrosseis) */}
+                    {!ehReelDia && total > 0 && (
                       <div className="flex gap-1 overflow-hidden">
                         {Array.from({ length: total }, (_, i) => {
-                          const r = renders.find(x => x.slideIdx === i);
+                          const r = slidesRenders.find(x => x.slideIdx === i);
                           return (
                             <button
                               key={i}
@@ -271,7 +320,15 @@ export default function RenderizadosPage() {
                       >
                         abrir editor
                       </Link>
-                      {zipUrl ? (
+                      {ehReelDia ? (
+                        <button
+                          onClick={() => dispararReel(c.dia)}
+                          className="text-[0.72rem] px-3 py-2 rounded-[8px] border border-ambar/40 text-ambar hover:bg-ambar/10 transition-colors"
+                          title="dispara o GitHub Action de TTS+FFmpeg para este reel"
+                        >
+                          🎬 {videoReel ? 're-gerar' : 'gerar video'}
+                        </button>
+                      ) : zipUrl ? (
                         <a
                           href={zipUrl}
                           target="_blank"
