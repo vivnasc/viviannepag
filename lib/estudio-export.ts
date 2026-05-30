@@ -172,7 +172,7 @@ export function gerarMetricoolCSV(
         'Date': dateStr,
         'Time': timeStr,
         'Draft': draft,
-        'Facebook': 'FALSE',
+        'Facebook': 'TRUE',
         'Twitter/X': 'FALSE',
         'LinkedIn': 'FALSE',
         'GBP': 'FALSE',
@@ -180,10 +180,11 @@ export function gerarMetricoolCSV(
         'Pinterest': 'FALSE',
         'TikTok': 'FALSE',
         'Youtube': 'FALSE',
-        'Threads': 'FALSE',
+        'Threads': 'TRUE',
         'Bluesky': 'FALSE',
         'Instagram Post Type': igPostType,
         'Instagram Show Reel On Feed': ehReel ? 'TRUE' : '',
+        'Facebook Post Type': ehReel ? 'REEL' : 'POST',
         'First Comment Text': firstCommentIG,
       }));
     }
