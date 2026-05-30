@@ -220,20 +220,25 @@ export function gerarMetricoolCSV(
   const start = new Date(startDate + 'T00:00:00');
 
   for (const c of conteudos) {
+    const ehReel = c.tipo.startsWith('reel');
+    const ehCitacao = c.tipo === 'citacao-visual';
+    const ehCarrossel = c.tipo.startsWith('carrossel');
+    const urls = imagensPorDia?.get(c.dia) ?? [];
+
+    // Reels precisam de video filmado primeiro — entram manualmente depois.
+    // Carrosseis/citacoes sem PNG renderizado tambem nao podem ir (Metricool rejeita).
+    if (ehReel) continue;
+    if ((ehCarrossel || ehCitacao) && urls.length === 0) continue;
+
     const date = new Date(start);
     date.setDate(date.getDate() + c.dia - 1);
     const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD
     const timeStr = c.horario.length === 5 ? `${c.horario}:00` : c.horario; // HH:MM:SS
 
-    const ehReel = c.tipo.startsWith('reel');
-    const ehCitacao = c.tipo === 'citacao-visual';
-    const ehCarrossel = c.tipo.startsWith('carrossel');
-    const podeTerMusica = ehReel || ehCitacao;
-    const musica = c.reelScript?.musica ?? c.musicaSugerida ?? '';
-    const urls = imagensPorDia?.get(c.dia) ?? [];
+    const podeTerMusica = ehCitacao;
+    const musica = c.musicaSugerida ?? '';
 
-    // Reels nao tem media ainda (vais filmar) -> draft. Carrosseis e citacoes ja renderizados.
-    const draft = ehReel ? 'TRUE' : 'FALSE';
+    const draft = 'FALSE';
 
     // Picture Urls + Alt Texts (carrosseis e citacoes que tem PNG renderizado)
     const pictureCols: RowOverrides = {};
