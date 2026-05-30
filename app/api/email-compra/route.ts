@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const BUCKET = 'escritos';
 const FROM = 'Vivianne dos Santos <noreply@viviannedossantos.com>';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://viviannedossantos.com';
 
 export async function POST(req: Request) {
   const body = (await req.json()) as {
@@ -20,24 +19,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'email-nao-configurado' }, { status: 500 });
   }
 
-  const supabase = getSupabaseAdmin();
-
-  let downloadUrl = `https://viviannedossantos.com/produtos/${body.slug}.pdf`;
-
-  try {
-    const { data: produto } = await supabase
-      .from('produtos')
-      .select('ficheiro_path')
-      .eq('slug', body.slug)
-      .single();
-
-    if (produto?.ficheiro_path) {
-      const { data } = await supabase.storage
-        .from(BUCKET)
-        .createSignedUrl(produto.ficheiro_path, 60 * 60 * 72);
-      if (data?.signedUrl) downloadUrl = data.signedUrl;
-    }
-  } catch {}
+  // /api/download-directo gere a cascata Supabase -> disco e marca licenca
+  // no rodape com o email do comprador.
+  const downloadUrl = `${SITE}/api/download-directo?slug=${encodeURIComponent(body.slug)}&email=${encodeURIComponent(body.email)}`;
 
   const titulo = body.titulo || body.slug;
 
@@ -58,7 +42,7 @@ export async function POST(req: Request) {
     </a>
   </div>
   <p style="font-size:13px;color:#9A5A43;text-align:center;margin-bottom:10px">
-    Este link expira em 72 horas. Se precisares de um novo, contacta-me.
+    Guarda este email — podes voltar a usar o link sempre que precisares.
   </p>
   <p style="font-size:13px;color:#9A5A43;text-align:center">
     <a href="https://wa.me/258845243875" style="color:#9A5A43">WhatsApp</a> ·
