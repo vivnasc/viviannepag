@@ -104,6 +104,52 @@ export function gerarCaptionTikTok(c: ConteudoDia): string {
   return lines.join('\n');
 }
 
+// Threads: limite duro 500 chars. Estrategia: hook curto + CTA + 3 hashtags top.
+// Target conservador: 480 chars para evitar erros de import.
+export function gerarCaptionThreads(c: ConteudoDia): string {
+  const THREADS_MAX = 480;
+  const hashtagsCurtas = c.hashtags.slice(0, 3).join(' ');
+  const sufixo = `\n\n— Vivianne dos Santos\nviviannedossantos.com/loja\n\n${hashtagsCurtas}`;
+  const espaco = THREADS_MAX - sufixo.length;
+
+  let corpo = '';
+  if (c.reelScript) {
+    corpo = c.reelScript.gancho.trim();
+    if (corpo.length + 2 < espaco) {
+      corpo += `\n\n${c.reelScript.cta.trim()}`;
+    }
+  } else if (c.slides && c.slides.length > 0) {
+    corpo = c.slides[0].texto.replace(/\n/g, ' ').trim();
+  }
+
+  if (corpo.length > espaco) {
+    corpo = corpo.slice(0, espaco - 1).replace(/\s+\S*$/, '') + '…';
+  }
+
+  return corpo + sufixo;
+}
+
+// Pinterest pin description: SEO-rich + CTA. Pinterest da preferencia a texto
+// descritivo com keywords. Max 500 chars.
+export function gerarPinterestDescription(c: ConteudoDia): string {
+  const PIN_MAX = 480;
+  const kw = KEYWORD_POR_MUNDO[c.mundo];
+  const hashtagsPin = HASHTAGS_POR_MUNDO_IG[c.mundo].slice(0, 4).join(' ');
+  const sufixo = `\n\n${kw} · PDF imediato em viviannedossantos.com/loja\n\n${hashtagsPin}`;
+  const espaco = PIN_MAX - sufixo.length;
+
+  let corpo = c.descricao || c.titulo;
+  if (c.slides?.[0]) {
+    const snippet = c.slides[0].texto.replace(/\n/g, ' ').trim();
+    if (snippet.length < espaco) corpo = snippet;
+  }
+  if (corpo.length > espaco) {
+    corpo = corpo.slice(0, espaco - 1).replace(/\s+\S*$/, '') + '…';
+  }
+
+  return corpo + sufixo;
+}
+
 export function gerarCaptionWhatsApp(c: ConteudoDia): string {
   const pal = PALETAS[c.mundo];
   const lines: string[] = [];
@@ -261,16 +307,14 @@ export function gerarMetricoolCSV(
 
     if (c.plataforma === 'instagram' || c.plataforma === 'ambas') {
       const captionIG = gerarCaptionInstagram(c);
-      // First Comment so com musica (hashtags ja estao na caption para evitar stuffing)
       const firstCommentIG = podeTerMusica && musica
         ? `🎵 Música sugerida: ${musica}`
         : '';
 
       const igPostType = ehReel ? 'REEL' : 'POST';
-
-      // Pinterest so para carrosseis e citacoes (tem imagem). Reels precisam video.
       const podePinterest = ehCarrossel || ehCitacao;
 
+      // ─── LINHA 1: Instagram + Facebook (caption longa + todos os pics) ───
       lines.push(buildRow({
         ...pictureCols,
         'Text': captionIG,
@@ -282,19 +326,73 @@ export function gerarMetricoolCSV(
         'LinkedIn': 'FALSE',
         'GBP': 'FALSE',
         'Instagram': 'TRUE',
-        'Pinterest': podePinterest ? 'TRUE' : 'FALSE',
+        'Pinterest': 'FALSE',
         'TikTok': 'FALSE',
         'Youtube': 'FALSE',
-        'Threads': 'TRUE',
+        'Threads': 'FALSE',
         'Bluesky': 'FALSE',
-        'Pinterest Board': podePinterest ? PINTEREST_BOARDS[c.mundo] : '',
-        'Pinterest Pin Title': podePinterest ? gerarPinTitle(c) : '',
-        'Pinterest Pin Link': podePinterest ? PINTEREST_LINK : '',
         'Instagram Post Type': igPostType,
         'Instagram Show Reel On Feed': ehReel ? 'TRUE' : '',
         'Facebook Post Type': ehReel ? 'REEL' : 'POST',
         'First Comment Text': firstCommentIG,
       }));
+
+      // ─── LINHA 2: Threads (caption curta ≤480, so cover image) ───
+      // Pic 1 = cover do carrossel/citacao OU MP4 do reel
+      const threadsCover: RowOverrides = {};
+      const coverUrl = pictureCols['Picture Url 1'];
+      if (coverUrl) {
+        threadsCover['Picture Url 1'] = coverUrl;
+        if (pictureCols['Alt text picture 1']) {
+          threadsCover['Alt text picture 1'] = pictureCols['Alt text picture 1'];
+        }
+      }
+      lines.push(buildRow({
+        ...threadsCover,
+        'Text': gerarCaptionThreads(c),
+        'Date': dateStr,
+        'Time': timeStr,
+        'Draft': draft,
+        'Facebook': 'FALSE',
+        'Twitter/X': 'FALSE',
+        'LinkedIn': 'FALSE',
+        'GBP': 'FALSE',
+        'Instagram': 'FALSE',
+        'Pinterest': 'FALSE',
+        'TikTok': 'FALSE',
+        'Youtube': 'FALSE',
+        'Threads': 'TRUE',
+        'Bluesky': 'FALSE',
+        'Threads Post Type': ehReel ? 'VIDEO' : 'POST',
+      }));
+
+      // ─── LINHA 3: Pinterest (so carrosseis/citacoes, 1 image only) ───
+      if (podePinterest && coverUrl) {
+        const pinPic: RowOverrides = {
+          'Picture Url 1': coverUrl,
+          'Alt text picture 1': pictureCols['Alt text picture 1'] ?? gerarPinTitle(c),
+        };
+        lines.push(buildRow({
+          ...pinPic,
+          'Text': gerarPinterestDescription(c),
+          'Date': dateStr,
+          'Time': timeStr,
+          'Draft': draft,
+          'Facebook': 'FALSE',
+          'Twitter/X': 'FALSE',
+          'LinkedIn': 'FALSE',
+          'GBP': 'FALSE',
+          'Instagram': 'FALSE',
+          'Pinterest': 'TRUE',
+          'TikTok': 'FALSE',
+          'Youtube': 'FALSE',
+          'Threads': 'FALSE',
+          'Bluesky': 'FALSE',
+          'Pinterest Board': PINTEREST_BOARDS[c.mundo],
+          'Pinterest Pin Title': gerarPinTitle(c),
+          'Pinterest Pin Link': PINTEREST_LINK,
+        }));
+      }
     }
 
     if (c.plataforma === 'tiktok' || c.plataforma === 'ambas') {
