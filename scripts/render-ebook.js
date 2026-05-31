@@ -791,8 +791,18 @@ async function renderUm(slug, mundoOverride) {
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--font-render-hinting=none'],
   });
   const page = await browser.newPage();
+  // A5 portrait em px @ 96dpi (559×794) com deviceScaleFactor 2 → screenshot 1118×1588
+  await page.setViewport({ width: 559, height: 794, deviceScaleFactor: 2 });
   await page.setContent(html, { waitUntil: 'networkidle0', timeout: 60000 });
   await page.evaluateHandle('document.fonts.ready');
+
+  // Screenshot da capa (1a pagina, .capa div ocupa 100vw×100vh)
+  const capaJpg = await page.screenshot({
+    type: 'jpeg',
+    quality: 88,
+    clip: { x: 0, y: 0, width: 559, height: 794 },
+  });
+
   await page.pdf({
     path: tmpPdf,
     format: 'A5',
@@ -803,12 +813,12 @@ async function renderUm(slug, mundoOverride) {
   await browser.close();
 
   const pdfBuf = fs.readFileSync(tmpPdf);
-  console.log(`  [pdf] ${(pdfBuf.length / 1024).toFixed(0)} KB`);
+  console.log(`  [pdf] ${(pdfBuf.length / 1024).toFixed(0)} KB · [capa] ${(capaJpg.length / 1024).toFixed(0)} KB`);
 
-  // Cascata de upload
+  // Cascata de upload PDF
   let ficheiroPath = `produtos/${slug}.pdf`;
   const { data: produto } = await supabase
-    .from('produtos').select('id, ficheiro_path').eq('slug', slug).maybeSingle();
+    .from('produtos').select('id, ficheiro_path, capa').eq('slug', slug).maybeSingle();
   if (produto?.ficheiro_path) ficheiroPath = produto.ficheiro_path;
 
   async function tryUpload(bucket, p, mime) {
@@ -840,10 +850,29 @@ async function renderUm(slug, mundoOverride) {
     });
   }
 
+  // Upload da capa (sempre publico — capas vao para a loja)
+  const capaKey = `produtos/capas/${slug}.jpg`;
+  const { error: errCapa } = await supabase.storage
+    .from(BUCKET_ASSETS).upload(capaKey, capaJpg, {
+      contentType: 'image/jpeg', upsert: true,
+    });
+  let capaUrl = null;
+  if (!errCapa) {
+    capaUrl = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(capaKey).data.publicUrl;
+    console.log(`  [capa-uploaded] ${capaKey}`);
+    // Actualiza produtos.capa na DB para a loja mostrar a capa editorial
+    if (produto) {
+      await supabase.from('produtos').update({ capa: capaUrl }).eq('id', produto.id);
+      console.log(`  [db] capa = ${capaUrl.slice(-60)}`);
+    }
+  } else {
+    console.warn(`  [capa-falhou] ${errCapa.message}`);
+  }
+
   // limpa tmp
   try { fs.unlinkSync(tmpPdf); } catch {}
 
-  return { slug, mundo, lane, size: pdfBuf.length };
+  return { slug, mundo, lane, size: pdfBuf.length, capaUrl };
 }
 
 async function main() {
