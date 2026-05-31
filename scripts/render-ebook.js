@@ -164,33 +164,29 @@ function listAllSlugs() {
     .sort();
 }
 
-// Hash deterministico do slug → lane. Permite que produtos do mesmo mundo
-// usem subsets diferentes de imagens (cada lane salta de stride em stride).
-function hashSlugLane(slug, totalLanes) {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-  return h % totalLanes;
+// Lane unica por slug dentro do mesmo mundo. Em vez de hash (que pode
+// colidir), assigna lane pela posicao alfabetica do slug entre todos os
+// slugs do mesmo mundo. Garante zero overlap.
+function laneDoSlug(slug, mundo) {
+  const all = listAllSlugs().filter(s => slugToMundo(s) === mundo).sort();
+  const idx = all.indexOf(slug);
+  return { lane: idx === -1 ? 0 : idx, total: Math.max(all.length, 1) };
 }
 
 // Distribui imagens pelos capitulos sem repetir entre produtos do mesmo mundo.
-// Estrategia: o slug determina uma 'lane' (offset inicial), e percorremos as
-// imagens com stride = LANE_COUNT. Dois produtos com lanes diferentes nunca
-// caem nas mesmas imagens.
-function distribuirImagens(imagens, nChapters, slug) {
-  if (imagens.length === 0) return { capa: null, porCapitulo: [] };
+// Stride = total de slugs do mundo. Cada slug pega imagens[lane], [lane+total],
+// [lane+2*total], ... — disjuntos por construcao.
+function distribuirImagens(imagens, nChapters, slug, mundo) {
+  if (imagens.length === 0) return { capa: null, porCapitulo: [], lane: 0, total: 0 };
 
-  // 8 lanes = ate 8 produtos por mundo sem overlap, desde que haja >= 8*9 imgs.
-  // Com fallback elegante quando ha menos imagens (volta ao inicio).
-  const LANE_COUNT = 8;
-  const lane = hashSlugLane(slug, LANE_COUNT);
+  const { lane, total } = laneDoSlug(slug, mundo);
+  const stride = total;
 
-  // Constroi sequencia desta lane: [lane, lane+8, lane+16, ...]
   const minhaSeq = [];
-  for (let i = lane; i < imagens.length; i += LANE_COUNT) {
+  for (let i = lane; i < imagens.length; i += stride) {
     minhaSeq.push(imagens[i]);
   }
-  // Se a lane resultou em <= nChapters imagens (mundo pequeno), preenche com o
-  // resto da pool por ordem.
+  // Fallback: se sobraram poucas imagens, completa com qualquer uma nao usada
   if (minhaSeq.length < nChapters + 1) {
     for (const im of imagens) {
       if (!minhaSeq.includes(im)) minhaSeq.push(im);
@@ -203,7 +199,7 @@ function distribuirImagens(imagens, nChapters, slug) {
   for (let i = 0; i < nChapters; i++) {
     porCapitulo.push(minhaSeq[i + 1] ?? minhaSeq[i % minhaSeq.length]);
   }
-  return { capa, porCapitulo, lane };
+  return { capa, porCapitulo, lane, total };
 }
 
 // ─── HTML builder ───
@@ -780,8 +776,8 @@ async function renderUm(slug, mundoOverride) {
   const imagens = await fetchImagensMundo(mundo);
   console.log(`  [imagens] ${imagens.length} fotos MJ em ${mundo}`);
 
-  const { capa, porCapitulo, lane } = distribuirImagens(imagens, ebook.chapters.length, slug);
-  console.log(`  [lane ${lane}/8] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
+  const { capa, porCapitulo, lane, total } = distribuirImagens(imagens, ebook.chapters.length, slug, mundo);
+  console.log(`  [lane ${lane}/${total}] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
   const html = buildHtml(ebook, capa, porCapitulo);
   const tmpPdf = path.join('/tmp', `${slug}.pdf`);
