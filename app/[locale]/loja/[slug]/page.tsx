@@ -8,6 +8,9 @@ import { BotaoCompra } from '@/components/BotaoCompra';
 import { GotaMini } from '@/components/icons/GotaAssina';
 import { PartilhaProduto } from '@/components/PartilhaProduto';
 import { getSupabase } from '@/lib/supabase';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import { marked } from 'marked';
 import type { Metadata } from 'next';
 
