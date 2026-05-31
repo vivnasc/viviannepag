@@ -858,12 +858,14 @@ async function renderUm(slug, mundoOverride) {
     });
   let capaUrl = null;
   if (!errCapa) {
-    capaUrl = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(capaKey).data.publicUrl;
+    const baseUrl = supabase.storage.from(BUCKET_ASSETS).getPublicUrl(capaKey).data.publicUrl;
+    // Cache-bust com timestamp — forca browsers a re-fetch quando regerar
+    capaUrl = `${baseUrl}?v=${Date.now()}`;
     console.log(`  [capa-uploaded] ${capaKey}`);
     // Actualiza produtos.capa na DB para a loja mostrar a capa editorial
     if (produto) {
       await supabase.from('produtos').update({ capa: capaUrl }).eq('id', produto.id);
-      console.log(`  [db] capa = ${capaUrl.slice(-60)}`);
+      console.log(`  [db] capa actualizada`);
     }
   } else {
     console.warn(`  [capa-falhou] ${errCapa.message}`);

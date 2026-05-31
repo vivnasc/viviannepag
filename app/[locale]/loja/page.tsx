@@ -7,6 +7,11 @@ import { getSupabase } from '@/lib/supabase';
 import { GotaMini } from '@/components/icons/GotaAssina';
 import type { Metadata } from 'next';
 
+// Forca dynamic — quando produtos.capa muda na DB (apos render-ebook),
+// a loja vai buscar SEMPRE a versao mais recente, sem cache estatica.
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 type Produto = {
   id: string;
   slug: string;
