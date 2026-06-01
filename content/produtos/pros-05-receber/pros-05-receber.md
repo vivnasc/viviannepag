@@ -178,6 +178,6 @@ Com toda a minha ternura,
 
 ---
 
-*Este material é de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico, psicológico ou médico. Se a incapacidade de receber e de te deixares cuidar te esgota, te isola, ou se por baixo do papel de cuidadora há feridas antigas em que mostrar necessidade te custou caro, isso merece o acompanhamento de um profissional. Deixares-te cuidar não é fraqueza, e procurar ajuda é, precisamente, o primeiro lugar onde podes treinar a receber. É a metade do amor que te falta, e a que mais mereces.*
+*Este material é de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico, psicológico ou médico. Se a incapacidade de receber e de te deixares cuidar te esgota, te isola, ou se por baixo do papel de cuidadora há feridas antigas em que mostrar necessidade te custou caro, isso merece o acompanhamento de um profissional. Deixares-te cuidar não é fraqueza, e procurar ajuda é, precisamente, o primeiro lugar onde podes treinar a receber. É a metade do amor que te falta, e a que mais mereces. Deixa-te, por uma vez, ser o lado que recebe. Também isso é amar, e também isso é teu.*
 
 *© 2026 Vivianne dos Santos · viviannedossantos.com*
