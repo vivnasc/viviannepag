@@ -29,6 +29,10 @@ export type Colecao = {
   abertura?: string;
   aberturaTitulo?: string;
   aberturaAssinatura?: string;
+  // Teaser 1-2 frases mostrado por defeito na loja. Foco: convite, nao
+  // explicacao. A abertura completa fica em 'ler completa' expansivel.
+  aberturaTeaser?: string;
+  aberturaTeaser_en?: string;
 };
 
 const ABERTURA_FREEME_MAE = `A pergunta desta coleção é uma só: o que estou a carregar que não é meu?
@@ -148,6 +152,8 @@ Porque já não estás naquele perigo. E talvez, pela primeira vez, possas volta
 export const ABERTURA_UNIVERSO = {
   titulo: 'Uma só pergunta, em sete roupas',
   subtitulo: 'Abertura do universo inteiro',
+  teaser: 'Sete coleções. Sete portas. A mesma travessia: voltares a ti.',
+  teaser_en: 'Seven collections. Seven doors. The same crossing: returning to yourself.',
   texto: `Se tens mais do que um destes livros na mão, talvez já tenhas reparado numa coisa estranha.
 
 Parecem falar de assuntos diferentes. Maternidade. Propósito. Dinheiro. Amor. Família. Sobrevivência. Trabalho. Mas, à medida que os lês, vai-se tornando claro que não são sete assuntos. São uma só pergunta, a vestir sete roupas.
@@ -194,6 +200,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_FREEME_MAE,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para a mãe que carrega o que nunca foi seu. Pousa o peso, e volta a ti — sem deixares de os amar.',
+    aberturaTeaser_en: 'For the mother who carries what was never hers. Put down the weight and return to yourself — without ceasing to love them.',
   },
   {
     id: 'infonte',
@@ -210,6 +218,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_INFONTE,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para quem persegue o que não é seu. Distingue o que é teu antes da próxima chegada.',
+    aberturaTeaser_en: 'For those chasing what isn\'t theirs. Distinguish what is yours before the next arrival.',
   },
   {
     id: 'amor',
@@ -226,6 +236,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_SYNCHIM,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para quem se perde quando ama. Vê o padrão que levas para dentro antes do amor sequer começar.',
+    aberturaTeaser_en: 'For those who lose themselves when they love. See the pattern you carry before love even begins.',
   },
   {
     id: 'forca',
@@ -241,6 +253,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_FORCA,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para quem aguentou tudo sozinha. Reconhece o que a tua armadura protegeu — e quando podes finalmente pousá-la.',
+    aberturaTeaser_en: 'For those who endured it all alone. Recognize what your armor protected — and when you can finally put it down.',
   },
   {
     id: 'prosperidade',
@@ -256,6 +270,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_PROSPERIDADE,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para quem trava antes de receber. Reconhece onde fechas a torneira do teu valor.',
+    aberturaTeaser_en: 'For those who hold back before receiving. Recognize where you close the tap of your worth.',
   },
   {
     id: 'pertenca',
@@ -271,6 +287,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_PERTENCA,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para quem segura todos para ninguém se afastar. Recupera o lugar que cedeste para caber.',
+    aberturaTeaser_en: 'For those who hold everyone so no one drifts away. Recover the place you gave up to fit in.',
   },
   {
     id: 'trabalho',
@@ -286,6 +304,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_TRABALHO,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
+    aberturaTeaser: 'Para quem confundiu o que faz com o que vale. Volta a existir sem ter de merecer.',
+    aberturaTeaser_en: 'For those who confused what they do with what they\'re worth. Return to existing without having to earn it.',
   },
 ];
 
