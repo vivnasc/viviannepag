@@ -111,7 +111,7 @@ export async function GET() {
         const diaNum = Number(d.name.replace('dia-', ''));
         const { data: files } = await supabase.storage.from(BUCKET).list(`renders/${j.name}/${d.name}`, { limit: 100 });
         for (const f of files ?? []) {
-          const m2 = f.name?.match(/^slide-(\d+)-(.+)\.png$/);
+          const m2 = f.name?.match(/^slide-(\d+)-(.+)\.(png|jpg|jpeg)$/);
           if (!m2) continue;
           const path = `renders/${j.name}/${d.name}/${f.name}`;
           const url = supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;

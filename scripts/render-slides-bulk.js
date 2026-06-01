@@ -102,7 +102,7 @@ async function main() {
 
   for (const tarefa of tarefas) {
     const { dia, idx, layout, tipo, imageUrl } = tarefa;
-    const filename = `dia-${String(dia).padStart(2, '0')}/slide-${String(idx + 1).padStart(2, '0')}-${tipo}.png`;
+    const filename = `dia-${String(dia).padStart(2, '0')}/slide-${String(idx + 1).padStart(2, '0')}-${tipo}.jpg`;
     const filePath = `${RENDER_FOLDER}/${filename}`;
 
     // Idempotencia: skip se ficheiro ja existe
@@ -136,13 +136,14 @@ async function main() {
       await new Promise(r => setTimeout(r, 1200));
 
       const buffer = await page.screenshot({
-        type: 'png',
+        type: 'jpeg',
+        quality: 92,
         clip: { x: 0, y: 0, width: 270, height: 338 },
       });
 
       const { error: upErr } = await supabase.storage
         .from(BUCKET)
-        .upload(filePath, buffer, { contentType: 'image/png', upsert: true });
+        .upload(filePath, buffer, { contentType: 'image/jpeg', upsert: true });
       if (upErr) throw new Error(`upload: ${upErr.message}`);
 
       const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
