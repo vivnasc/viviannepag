@@ -65,4 +65,28 @@
     max-width: 280px;
     margin-left: auto; margin-right: auto;
   }
+
+  /* leitura na aba editora: texto escuro sobre painel creme */
+  .prose-livro > * + * { margin-top: 1.3em; }
+  .prose-livro h3 {
+    @apply font-serif font-light;
+    color: #5C3D24;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin-top: 2em;
+    margin-bottom: 0.2em;
+  }
+  .prose-livro strong { color: #5C3D24; font-weight: 500; }
+  .prose-livro em { font-style: italic; }
+  .prose-livro a {
+    color: #B8843D;
+    border-bottom: 1px solid rgba(184,132,61,0.4);
+    text-decoration: none;
+  }
+  .prose-livro hr {
+    @apply border-0 h-px my-10;
+    background: linear-gradient(90deg, transparent, rgba(92,61,36,0.4), transparent);
+    max-width: 220px;
+    margin-left: auto; margin-right: auto;
+  }
 }
