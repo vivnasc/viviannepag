@@ -7,7 +7,7 @@
 
 ---
 
-*Antes de começar: este livro é sobre ti, a mãe, não sobre o teu filho. Não vem ensinar-te a educar uma criança no espetro, não traz técnicas, não sugere que a neurodivergência seja um defeito a corrigir ou uma falha a compensar. Vem olhar para o que tu carregas: a culpa, o medo, o controlo, a exaustão que ninguém vê. É um material de autoconhecimento e compreensão, e não substitui acompanhamento terapêutico nem o trabalho dos profissionais que acompanham o teu filho. Se reconheces em ti sinais de esgotamento profundo, de tristeza que não passa, de ansiedade que te tira o chão, procura, por favor, apoio. Não por estares doente. Porque mereces cuidado com a mesma seriedade com que cuidas dele.*
+*Este ebook é sobre ti, a mãe, não sobre o teu filho. Não vem ensinar-te a educar uma criança no espetro, não traz técnicas, não sugere que a neurodivergência seja um defeito a corrigir ou uma falha a compensar. Vem olhar para o que tu carregas: a culpa, o medo, o controlo, a exaustão que ninguém vê. É um material de autoconhecimento e compreensão, e não substitui acompanhamento terapêutico nem o trabalho dos profissionais que acompanham o teu filho. Se reconheces em ti sinais de esgotamento profundo, de tristeza que não passa, de ansiedade que te tira o chão, procura, por favor, apoio. Não por estares doente. Porque mereces cuidado com a mesma seriedade com que cuidas dele.*
 
 ---
 
