@@ -157,7 +157,7 @@ E quero que leves uma última distinção, porque ela protege tudo o resto. Solt
 
 Sabes, no fundo, a frase que segura este livro inteiro: posso ir mais longe sem deixar ninguém para trás.
 
-Ver isto foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a soltar, devagar, um travão de uma vida inteira, e a ousares, vez após vez, ir mais longe sem cortar o laço.
+Ver isto foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a soltar, devagar, um travão de uma vida inteira, e a ousares, vez após vez, ir mais longe sem cortar o laço. Não de uma vez, não sem medo. Mas um pouco mais longe de cada vez, até o teto do grupo deixar de ser o teu, e o teu único limite passar a ser, enfim, aquele que a vida te quiser dar.
 
 Foi para essa travessia que criei o **Prosperidade**.
 
