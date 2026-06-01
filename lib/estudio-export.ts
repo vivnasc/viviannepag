@@ -259,12 +259,15 @@ function buildRow(overrides: RowOverrides): string {
 // imagensPorDia: dia -> URLs PNG por slideIdx (usadas em IG/FB/Pinterest/Threads)
 // imagensJpgPorDia: dia -> URLs JPG por slideIdx (TikTok rejeita PNG, exige JPG)
 // videosReelsPorDia: dia -> URL do MP4 do reel
+// apenas: filtro de plataforma — 'tiktok' so emite linhas TikTok,
+//         'instagram' so emite linhas IG+FB+Threads+Pinterest, undefined emite todas
 export function gerarMetricoolCSV(
   conteudos: ConteudoDia[],
   startDate: string,
   imagensPorDia?: Map<number, string[]>,
   videosReelsPorDia?: Map<number, string>,
   imagensJpgPorDia?: Map<number, string[]>,
+  apenas?: 'tiktok' | 'instagram',
 ): string {
   const lines: string[] = [CSV_HEADER.join(',')];
   const start = new Date(startDate + 'T00:00:00');
@@ -307,7 +310,7 @@ export function gerarMetricoolCSV(
       });
     }
 
-    if (c.plataforma === 'instagram' || c.plataforma === 'ambas') {
+    if ((c.plataforma === 'instagram' || c.plataforma === 'ambas') && apenas !== 'tiktok') {
       const captionIG = gerarCaptionInstagram(c);
       const firstCommentIG = podeTerMusica && musica
         ? `🎵 Música sugerida: ${musica}`
@@ -397,7 +400,7 @@ export function gerarMetricoolCSV(
       }
     }
 
-    if (c.plataforma === 'tiktok' || c.plataforma === 'ambas') {
+    if ((c.plataforma === 'tiktok' || c.plataforma === 'ambas') && apenas !== 'instagram') {
       const captionTT = gerarCaptionTikTok(c);
 
       // TikTok exige image/jpeg ou image/webp — rejeita PNG.
