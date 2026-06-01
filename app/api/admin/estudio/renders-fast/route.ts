@@ -19,6 +19,7 @@ type RenderItem = {
   slideIdx: number;
   tipo: string;
   url: string;
+  urlJpg?: string;
 };
 
 type JobSummary = {
@@ -85,6 +86,7 @@ export async function GET() {
         slideIdx: f.idx,
         tipo: String(f.tipo ?? ''),
         url: String(f.url),
+        urlJpg: f.urlJpg ? String(f.urlJpg) : undefined,
       });
     }
   }
