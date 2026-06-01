@@ -256,13 +256,18 @@ function buildRow(overrides: RowOverrides): string {
   return CSV_HEADER.map(h => csvEscape(overrides[h] ?? '')).join(',');
 }
 
-// imagensPorDia: dia -> array de URLs ordenado por slideIdx (carrosseis e citacoes)
-// videosReelsPorDia: dia -> URL do MP4 do reel (se ja foi renderizado pelo render-reels)
+// imagensPorDia: dia -> URLs PNG por slideIdx (usadas em IG/FB/Pinterest/Threads)
+// imagensJpgPorDia: dia -> URLs JPG por slideIdx (TikTok rejeita PNG, exige JPG)
+// videosReelsPorDia: dia -> URL do MP4 do reel
+// apenas: filtro de plataforma — 'tiktok' so emite linhas TikTok,
+//         'instagram' so emite linhas IG+FB+Threads+Pinterest, undefined emite todas
 export function gerarMetricoolCSV(
   conteudos: ConteudoDia[],
   startDate: string,
   imagensPorDia?: Map<number, string[]>,
   videosReelsPorDia?: Map<number, string>,
+  imagensJpgPorDia?: Map<number, string[]>,
+  apenas?: 'tiktok' | 'instagram',
 ): string {
   const lines: string[] = [CSV_HEADER.join(',')];
   const start = new Date(startDate + 'T00:00:00');
@@ -305,7 +310,7 @@ export function gerarMetricoolCSV(
       });
     }
 
-    if (c.plataforma === 'instagram' || c.plataforma === 'ambas') {
+    if ((c.plataforma === 'instagram' || c.plataforma === 'ambas') && apenas !== 'tiktok') {
       const captionIG = gerarCaptionInstagram(c);
       const firstCommentIG = podeTerMusica && musica
         ? `🎵 Música sugerida: ${musica}`
@@ -395,11 +400,29 @@ export function gerarMetricoolCSV(
       }
     }
 
-    if (c.plataforma === 'tiktok' || c.plataforma === 'ambas') {
+    if ((c.plataforma === 'tiktok' || c.plataforma === 'ambas') && apenas !== 'instagram') {
       const captionTT = gerarCaptionTikTok(c);
 
+      // TikTok exige image/jpeg ou image/webp — rejeita PNG.
+      // Constroi pictureCols especifico do TikTok com URLs .jpg.
+      const urlsJpg = ehReel ? null : (imagensJpgPorDia?.get(c.dia) ?? null);
+      const pictureColsTT: RowOverrides = {};
+      if (ehReel && videoReel) {
+        pictureColsTT['Picture Url 1'] = videoReel;
+        pictureColsTT['Alt text picture 1'] = pictureCols['Alt text picture 1'] ?? '';
+      } else if ((ehCarrossel || ehCitacao) && urlsJpg && urlsJpg.length > 0) {
+        urlsJpg.slice(0, 10).forEach((u, i) => {
+          pictureColsTT[`Picture Url ${i + 1}`] = u;
+          const altKey = `Alt text picture ${i + 1}`;
+          if (pictureCols[altKey]) pictureColsTT[altKey] = pictureCols[altKey];
+        });
+      } else {
+        // Fallback: usa as URLs PNG (TikTok vai rejeitar se nao tiver JPG ainda)
+        Object.assign(pictureColsTT, pictureCols);
+      }
+
       lines.push(buildRow({
-        ...pictureCols,
+        ...pictureColsTT,
         'Text': captionTT,
         'Date': dateStr,
         'Time': timeStr,

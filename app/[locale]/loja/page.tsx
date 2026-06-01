@@ -5,6 +5,9 @@ import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { getSupabase } from '@/lib/supabase';
 import { GotaMini } from '@/components/icons/GotaAssina';
+import { COLECOES, COLECOES_ATIVAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
+import { LojaSidebar } from '@/components/loja/LojaSidebar';
+import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import type { Metadata } from 'next';
 
 // Forca dynamic — quando produtos.capa muda na DB (apos render-ebook),
@@ -102,7 +105,16 @@ export default async function LojaPage({
     <>
       <TopNav />
       <LangToggle />
-      <main className="relative z-[2] max-w-[1060px] mx-auto px-7 pt-24 pb-20">
+      <main className="relative z-[2] max-w-[1280px] mx-auto px-7 pt-24 pb-20 lg:flex lg:gap-10">
+        <LojaSidebar
+          locale={locale}
+          produtos={produtos.map(p => ({ slug: p.slug, titulo: p.titulo, subtitulo: p.subtitulo, badge: p.badge }))}
+          itens={COLECOES.map(c => {
+            const count = produtos.filter(p => slugToColecao(p.slug) === c.id).length;
+            return { id: c.id, romano: c.romano, nome: isPt ? c.nome : c.nome_en, count, ativo: c.estado !== 'em-breve' || count > 0 };
+          })}
+        />
+        <div className="flex-1 min-w-0">
         <header className="text-center mb-14">
           <p className="text-[0.78rem] tracking-[0.32em] uppercase text-ocre mb-4">
             {isPt ? 'recursos' : 'resources'}
@@ -123,9 +135,25 @@ export default async function LojaPage({
             {isPt ? 'Em breve.' : 'Coming soon.'}
           </p>
         ) : (() => {
-          const ebooks = produtos.filter(p => p.badge?.toLowerCase().includes('ebook'));
-          const guias = produtos.filter(p => p.badge?.toLowerCase().includes('guia') || (!p.badge?.toLowerCase().includes('ebook')));
-          const filteredGuias = guias.filter(g => !ebooks.some(e => e.id === g.id));
+          // Agrupa produtos por colecao
+          const porColecao = new Map<ColecaoId, typeof produtos>();
+          for (const p of produtos) {
+            const id = slugToColecao(p.slug);
+            const lista = porColecao.get(id) ?? [];
+            lista.push(p);
+            porColecao.set(id, lista);
+          }
+          // Dentro de cada colecao: ebooks primeiro, depois guias, ordenados por destaque + ordem
+          for (const [id, lista] of porColecao) {
+            lista.sort((a, b) => {
+              const aEb = a.badge?.toLowerCase().includes('ebook') ? 0 : 1;
+              const bEb = b.badge?.toLowerCase().includes('ebook') ? 0 : 1;
+              if (aEb !== bEb) return aEb - bEb;
+              if (a.destaque !== b.destaque) return a.destaque ? -1 : 1;
+              return a.slug.localeCompare(b.slug);
+            });
+            porColecao.set(id, lista);
+          }
 
           const renderCard = (p: Produto) => {
               const href = `${locale === 'en' ? '/en' : ''}/loja/${p.slug}`;
@@ -177,48 +205,56 @@ export default async function LojaPage({
 
           return (
             <>
-              {/* EBOOKS */}
-              <section className="mb-16">
-                <div className="flex items-center gap-4 mb-8">
-                  <h2 className="font-serif font-light text-creme text-[1.6rem]">
-                    {isPt ? 'Ebooks' : 'Ebooks'}
+              {/* ABERTURA DO UNIVERSO (teaser + ler completa) */}
+              {isPt && (
+                <section className="mb-14 text-center">
+                  <p className="text-[0.72rem] tracking-[0.32em] uppercase text-ouro/80 mb-3">
+                    {ABERTURA_UNIVERSO.subtitulo}
+                  </p>
+                  <h2 className="font-serif font-light text-creme text-[clamp(1.6rem,4vw,2.2rem)] leading-[1.18] mb-6">
+                    {ABERTURA_UNIVERSO.titulo}
                   </h2>
-                  <div className="flex-1 h-px bg-ocre/15" />
-                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
-                    {ebooks.length} {isPt ? 'títulos' : 'titles'}
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {ebooks.map(renderCard)}
-                </div>
-              </section>
-
-              {/* GUIAS */}
-              {filteredGuias.length > 0 && (
-                <section>
-                  <div className="flex items-center gap-4 mb-8">
-                    <h2 className="font-serif font-light text-creme text-[1.6rem]">
-                      {isPt ? 'Guias práticos' : 'Practical Guides'}
-                    </h2>
-                    <div className="flex-1 h-px bg-ocre/15" />
-                    <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
-                      {filteredGuias.length} {isPt ? 'títulos' : 'titles'}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                    {filteredGuias.map(renderCard)}
-                  </div>
+                  <AberturaExpandivel
+                    teaser={ABERTURA_UNIVERSO.teaser}
+                    texto={ABERTURA_UNIVERSO.texto}
+                    assinatura={ABERTURA_UNIVERSO.assinatura}
+                    align="center"
+                  />
+                  <div className="mt-8 mx-auto w-[60px] h-px bg-ouro/40" />
                 </section>
               )}
 
+              {/* NAV ANCORA DAS COLECOES */}
+              <nav className="mb-14 flex flex-wrap justify-center gap-2">
+                {COLECOES.map(c => {
+                  const count = porColecao.get(c.id)?.length ?? 0;
+                  const ativo = c.estado !== 'em-breve';
+                  return (
+                    <a
+                      key={c.id}
+                      href={`#colecao-${c.id}`}
+                      className={`text-[0.74rem] px-3 py-1.5 rounded-full border transition-colors no-underline ${
+                        ativo
+                          ? 'border-ocre/40 text-creme hover:border-ambar hover:text-ambar'
+                          : 'border-creme-2/25 text-creme-2/65'
+                      }`}
+                    >
+                      <span className="opacity-50 mr-1">{c.romano}</span>
+                      {isPt ? c.nome : c.nome_en}
+                      {count > 0 && <span className="ml-1.5 opacity-50">· {count}</span>}
+                    </a>
+                  );
+                })}
+              </nav>
+
               {/* TRAVESSIAS */}
-              <section className="mt-16">
+              <section className="mb-20">
                 <div className="flex items-center gap-4 mb-8">
                   <h2 className="font-serif font-light text-creme text-[1.6rem]">
                     {isPt ? 'Travessias' : 'Crossings'}
                   </h2>
-                  <div className="flex-1 h-px bg-ocre/15" />
-                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
+                  <div className="flex-1 h-px bg-ocre/25" />
+                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
                     {isPt ? 'programas guiados' : 'guided programs'}
                   </span>
                 </div>
@@ -248,19 +284,103 @@ export default async function LojaPage({
                       <h3 className="font-serif font-normal text-creme text-[1.4rem] mb-2 group-hover:text-ambar transition-colors">
                         {t.titulo}
                       </h3>
-                      <p className="text-creme-2/70 text-[0.85rem] leading-[1.55]">
+                      <p className="text-creme-2/85 text-[0.88rem] leading-[1.55]">
                         {t.texto}
                       </p>
-                      <span className="block mt-4 text-ocre/60 text-[0.78rem] group-hover:text-ambar transition-colors">
+                      <span className="block mt-4 text-ambar/90 text-[0.82rem] group-hover:text-ambar transition-colors">
                         {isPt ? 'saber mais →' : 'learn more →'}
                       </span>
                     </a>
                   ))}
                 </div>
               </section>
+
+              {/* BLOCO POR COLECAO ATIVA */}
+              {COLECOES_ATIVAS.map(c => {
+                const lista = porColecao.get(c.id) ?? [];
+                if (lista.length === 0) return null;
+                return (
+                  <section key={c.id} id={`colecao-${c.id}`} className="mb-20 scroll-mt-24">
+                    <div className="mb-8">
+                      <div className="flex items-baseline gap-3 mb-2">
+                        <span className="font-serif text-ocre text-[1.05rem]">{c.romano}</span>
+                        <h2 className="font-serif font-light text-creme text-[1.7rem]">
+                          {isPt ? c.nome : c.nome_en}
+                        </h2>
+                        <div className="flex-1 h-px bg-ocre/25 mx-2" />
+                        <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
+                          {lista.length} {isPt ? (lista.length === 1 ? 'título' : 'títulos') : (lista.length === 1 ? 'title' : 'titles')}
+                        </span>
+                      </div>
+                      <p className="text-creme-2/90 text-[0.95rem] leading-[1.6] max-w-[640px]">
+                        {isPt ? c.pitch : c.pitch_en}
+                      </p>
+                      <p className="text-ocre/85 text-[0.78rem] tracking-[0.05em] mt-2">
+                        {isPt ? c.feridas : c.feridas_en}
+                      </p>
+                    </div>
+
+                    {/* Abertura comum da colecao — teaser + ler completa */}
+                    {(c.aberturaTeaser || c.abertura) && isPt && (
+                      <div className="mb-9 rounded-[14px] border-l-2 border-ambar/40 pl-6 py-1">
+                        <AberturaExpandivel
+                          titulo={c.aberturaTitulo}
+                          teaser={c.aberturaTeaser}
+                          texto={c.abertura}
+                          assinatura={c.aberturaAssinatura}
+                        />
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                      {lista.map(renderCard)}
+                    </div>
+                    {c.travessia && (
+                      <p className="text-[0.82rem] text-creme-2/80 mt-6">
+                        {isPt ? 'Travessia desta coleção: ' : 'Crossing for this collection: '}
+                        <a href={c.travessia} target="_blank" rel="noopener noreferrer" className="text-ambar hover:underline font-medium">
+                          {c.nome} →
+                        </a>
+                      </p>
+                    )}
+                  </section>
+                );
+              })}
+
+              {/* COLECOES EM BREVE */}
+              {COLECOES_EM_BREVE.length > 0 && (
+                <section className="mb-20">
+                  <div className="flex items-center gap-4 mb-8">
+                    <h2 className="font-serif font-light text-creme text-[1.4rem]">
+                      {isPt ? 'Em breve' : 'Coming soon'}
+                    </h2>
+                    <div className="flex-1 h-px bg-ocre/15" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    {COLECOES_EM_BREVE.map(c => (
+                      <div
+                        key={c.id}
+                        id={`colecao-${c.id}`}
+                        className="rounded-[18px] border border-creme-2/30 p-5 scroll-mt-24"
+                      >
+                        <div className="flex items-baseline gap-2 mb-1.5">
+                          <span className="font-serif text-ocre/80 text-[0.95rem]">{c.romano}</span>
+                          <h3 className="font-serif text-creme/90 text-[1.18rem]">
+                            {isPt ? c.nome : c.nome_en}
+                          </h3>
+                        </div>
+                        <p className="text-creme-2/80 text-[0.88rem] leading-[1.55]">
+                          {isPt ? c.pitch : c.pitch_en}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </>
           );
         })()}
+        </div>
       </main>
     </>
   );
