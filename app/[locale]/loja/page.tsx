@@ -6,6 +6,8 @@ import { TopNav } from '@/components/TopNav';
 import { getSupabase } from '@/lib/supabase';
 import { GotaMini } from '@/components/icons/GotaAssina';
 import { COLECOES, COLECOES_ATIVAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
+import { LojaSidebar } from '@/components/loja/LojaSidebar';
+import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import type { Metadata } from 'next';
 
 // Forca dynamic — quando produtos.capa muda na DB (apos render-ebook),
@@ -103,7 +105,16 @@ export default async function LojaPage({
     <>
       <TopNav />
       <LangToggle />
-      <main className="relative z-[2] max-w-[1060px] mx-auto px-7 pt-24 pb-20">
+      <main className="relative z-[2] max-w-[1280px] mx-auto px-7 pt-24 pb-20 lg:flex lg:gap-10">
+        <LojaSidebar
+          locale={locale}
+          produtos={produtos.map(p => ({ slug: p.slug, titulo: p.titulo, subtitulo: p.subtitulo, badge: p.badge }))}
+          itens={COLECOES.map(c => {
+            const count = produtos.filter(p => slugToColecao(p.slug) === c.id).length;
+            return { id: c.id, romano: c.romano, nome: isPt ? c.nome : c.nome_en, count, ativo: c.estado !== 'em-breve' || count > 0 };
+          })}
+        />
+        <div className="flex-1 min-w-0">
         <header className="text-center mb-14">
           <p className="text-[0.78rem] tracking-[0.32em] uppercase text-ocre mb-4">
             {isPt ? 'recursos' : 'resources'}
@@ -194,24 +205,22 @@ export default async function LojaPage({
 
           return (
             <>
-              {/* ABERTURA DO UNIVERSO */}
+              {/* ABERTURA DO UNIVERSO (teaser + ler completa) */}
               {isPt && (
-                <section className="mb-16 max-w-[720px] mx-auto text-center">
+                <section className="mb-14 text-center">
                   <p className="text-[0.72rem] tracking-[0.32em] uppercase text-ouro/80 mb-3">
                     {ABERTURA_UNIVERSO.subtitulo}
                   </p>
-                  <h2 className="font-serif font-light text-creme text-[clamp(1.6rem,4vw,2.2rem)] leading-[1.18] mb-8">
+                  <h2 className="font-serif font-light text-creme text-[clamp(1.6rem,4vw,2.2rem)] leading-[1.18] mb-6">
                     {ABERTURA_UNIVERSO.titulo}
                   </h2>
-                  <div className="font-serif text-creme-2 text-[0.96rem] leading-[1.85] italic space-y-4 text-left">
-                    {ABERTURA_UNIVERSO.texto.split('\n\n').map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </div>
-                  <p className="font-serif italic text-ambar/80 text-[0.9rem] mt-6 text-left">
-                    {ABERTURA_UNIVERSO.assinatura}
-                  </p>
-                  <div className="mt-10 mx-auto w-[60px] h-px bg-ouro/40" />
+                  <AberturaExpandivel
+                    teaser={ABERTURA_UNIVERSO.teaser}
+                    texto={ABERTURA_UNIVERSO.texto}
+                    assinatura={ABERTURA_UNIVERSO.assinatura}
+                    align="center"
+                  />
+                  <div className="mt-8 mx-auto w-[60px] h-px bg-ouro/40" />
                 </section>
               )}
 
@@ -311,24 +320,15 @@ export default async function LojaPage({
                       </p>
                     </div>
 
-                    {/* Abertura comum da colecao (so quando existe) */}
-                    {c.abertura && isPt && (
-                      <div className="mb-10 max-w-[680px] mx-auto rounded-[18px] border-l-2 border-ambar/40 pl-7 pr-2 py-2">
-                        {c.aberturaTitulo && (
-                          <p className="text-[0.7rem] tracking-[0.28em] uppercase text-ocre/60 mb-4">
-                            {c.aberturaTitulo}
-                          </p>
-                        )}
-                        <div className="font-serif text-creme-2 text-[0.96rem] leading-[1.78] italic space-y-4">
-                          {c.abertura.split('\n\n').map((p, i) => (
-                            <p key={i}>{p}</p>
-                          ))}
-                        </div>
-                        {c.aberturaAssinatura && (
-                          <p className="font-serif italic text-ambar/80 text-[0.88rem] mt-5">
-                            {c.aberturaAssinatura}
-                          </p>
-                        )}
+                    {/* Abertura comum da colecao — teaser + ler completa */}
+                    {(c.aberturaTeaser || c.abertura) && isPt && (
+                      <div className="mb-9 rounded-[14px] border-l-2 border-ambar/40 pl-6 py-1">
+                        <AberturaExpandivel
+                          titulo={c.aberturaTitulo}
+                          teaser={c.aberturaTeaser}
+                          texto={c.abertura}
+                          assinatura={c.aberturaAssinatura}
+                        />
                       </div>
                     )}
 
@@ -380,6 +380,7 @@ export default async function LojaPage({
             </>
           );
         })()}
+        </div>
       </main>
     </>
   );
