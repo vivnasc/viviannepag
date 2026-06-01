@@ -250,6 +250,26 @@ export default function RenderizadosPage() {
         >
           🎬 gerar TODOS os reels
         </button>
+        <button
+          onClick={async () => {
+            if (!confirm('Converter PNGs existentes em JPEGs para que o TikTok aceite? ~3min, não toca nos PNGs (que IG/FB/Pinterest usam).')) return;
+            try {
+              const r = await fetch('/api/admin/estudio/convert-jpegs-dispatch', { method: 'POST' });
+              const j = await r.json();
+              if (!r.ok || !j.ok) {
+                alert(`Erro: ${j.erro ?? r.status}`);
+                return;
+              }
+              alert(`Conversão disparada (~3min).\nVer: ${j.workflowRunUrl}\nQuando terminar, re-exporta o CSV em /admin/estudio.`);
+            } catch (e) {
+              alert(`Erro: ${String(e)}`);
+            }
+          }}
+          className="text-[0.74rem] px-4 py-2 rounded-[8px] border border-creme-2/30 text-creme hover:border-ambar transition-colors"
+          title="Converte PNGs para JPEG ao lado. Sem re-render. Necessario para o TikTok aceitar."
+        >
+          ↻ JPEGs (TikTok)
+        </button>
       </div>
 
       {/* Filtros */}

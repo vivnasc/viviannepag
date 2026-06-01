@@ -1919,16 +1919,17 @@ export default function EstudioPage() {
         </div>
         <button
           onClick={async () => {
-            // Buscar TODOS os renders (carrosseis PNG + reels MP4) e separar
+            // Buscar TODOS os renders (carrosseis PNG/JPG + reels MP4) e separar.
+            // Cada dia tem urls (PNG, IG/FB/Pinterest) e urlsJpg (TikTok prefere JPEG).
             const imagensPorDia = new Map<number, string[]>();
+            const imagensJpgPorDia = new Map<number, string[]>();
             const videosReelsPorDia = new Map<number, string>();
             try {
               const res = await fetch(`/api/admin/estudio/renders-fast?_=${Date.now()}`, { cache: 'no-store' });
               if (res.ok) {
                 const data = await res.json();
-                const renders: { jobId: string; dia: number; slideIdx: number; tipo: string; url: string }[] = data.renders ?? [];
+                const renders: { jobId: string; dia: number; slideIdx: number; tipo: string; url: string; urlJpg?: string }[] = data.renders ?? [];
 
-                // Reels: 1 MP4 por dia. Latest job ganha (jobId DESC pelo timestamp).
                 const reelJobsDesc = Array.from(new Set(
                   renders.filter(r => r.tipo === 'reel-video').map(r => r.jobId)
                 )).sort().reverse();
@@ -1942,10 +1943,9 @@ export default function EstudioPage() {
                   }
                 }
 
-                // Carrosseis: agrupa por dia, ordena por slideIdx, latest job por dia ganha.
                 const slidesRenders = renders.filter(r => r.tipo !== 'reel-video');
                 const slidesJobsDesc = Array.from(new Set(slidesRenders.map(r => r.jobId))).sort().reverse();
-                const slidesPorDia = new Map<number, { slideIdx: number; url: string }[]>();
+                const slidesPorDia = new Map<number, { slideIdx: number; url: string; urlJpg?: string }[]>();
                 const slidesVistos = new Map<number, Set<number>>();
                 for (const jobId of slidesJobsDesc) {
                   for (const r of slidesRenders) {
@@ -1955,19 +1955,22 @@ export default function EstudioPage() {
                     visto.add(r.slideIdx);
                     slidesVistos.set(r.dia, visto);
                     const arr = slidesPorDia.get(r.dia) ?? [];
-                    arr.push({ slideIdx: r.slideIdx, url: r.url });
+                    arr.push({ slideIdx: r.slideIdx, url: r.url, urlJpg: r.urlJpg });
                     slidesPorDia.set(r.dia, arr);
                   }
                 }
                 for (const [dia, arr] of slidesPorDia) {
                   arr.sort((a, b) => a.slideIdx - b.slideIdx);
                   imagensPorDia.set(dia, arr.map(x => x.url));
+                  // Fallback: se nao houver urlJpg, troca extensao .png -> .jpg manualmente
+                  // (assume que o workflow convert-jpegs gerou siblings)
+                  imagensJpgPorDia.set(dia, arr.map(x => x.urlJpg ?? x.url.replace(/\.png(\?|$)/, '.jpg$1')));
                 }
               }
             } catch (e) {
               console.warn('falhou buscar renders, csv vai sair sem media', e);
             }
-            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia, videosReelsPorDia);
+            const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia, videosReelsPorDia, imagensJpgPorDia);
             // BOM UTF-8 para emojis/acentos no Metricool
             downloadFile('﻿' + csv, `metricool-30dias-${startDate}.csv`, 'text/csv;charset=utf-8');
           }}
