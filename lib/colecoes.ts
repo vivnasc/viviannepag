@@ -55,8 +55,8 @@ export const COLECOES: Colecao[] = [
   {
     id: 'amor',
     romano: 'IV',
-    nome: 'Amor',
-    nome_en: 'Love',
+    nome: 'SyncHim',
+    nome_en: 'SyncHim',
     pitch: 'As feridas da vinculação amorosa. Para casais e para quem ama demais ou de menos.',
     pitch_en: 'The wounds of romantic attachment. For couples and for those who love too much or too little.',
     feridas: 'nó do casal · perguntas antes da discussão · desaparecer no amor',
