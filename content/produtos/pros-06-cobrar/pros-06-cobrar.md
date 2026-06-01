@@ -153,6 +153,8 @@ Agora sabes que não consegues cobrar, e que isso não é falta de jeito para co
 
 E quero deixar-te com uma imagem, porque ela resume tudo. Durante anos foste como uma nascente de água puríssima que, por achar que a água era demasiado nobre para se vender, a deixava correr de graça para toda a gente, até ao dia em que, esgotada de dar sem nunca receber, começou a secar. E uma nascente seca não dá água a ninguém. A travessia que te proponho não é deixares de dar a tua água, nem de a achar preciosa. É reconheceres que precisamente por ser preciosa merece ser valorizada, e que receber em troca do que dás não suja a tua água, permite que ela continue a correr, fresca e abundante, durante uma vida inteira, em vez de secar à força de uma generosidade que te consumia. Cobrar o que vales não é trair a pureza do que fazes. É garantir que poderás continuar a fazê-lo.
 
+E há um efeito que talvez te surpreenda quando começares: ao cobrares com justiça, vais gostar mais do que fazes. Porque o ressentimento de te sentires mal paga contaminava o prazer do trabalho, e quando esse ressentimento se vai, o gosto regressa, mais limpo. Vais reparar que cuidas melhor, ensinas melhor, crias melhor, quando o fazes a partir de uma troca justa e não de um sacrifício. A justiça no cobrar não esfria a tua vocação, aquece-a, porque lhe tira o veneno do "dou tanto e recebo tão pouco". Cobrar bem é, no fim, também uma forma de cuidares do amor que tens pelo que fazes.
+
 Sabes, no fundo, a frase que segura este livro inteiro: o valor que entrego pode ser valorizado.
 
 Ver isto foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a cobrar, devagar, o que vales, e a ficar no teu preço, vez após vez, apesar do aperto.
