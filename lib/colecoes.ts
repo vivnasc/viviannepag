@@ -31,23 +31,134 @@ export type Colecao = {
   aberturaAssinatura?: string;
 };
 
-const ABERTURA_FREEME_MAE = `Não sei qual foi a dor que te trouxe até aqui.
+const ABERTURA_FREEME_MAE = `A pergunta desta coleção é uma só: o que estou a carregar que não é meu?
 
-Talvez seja a culpa que aparece à noite, quando a casa fica em silêncio e já não há nada para fazer a não ser ficares contigo. Talvez seja um filho que não larga a tua mão, ou um que largou e não voltou. Talvez seja o cansaço de seres duas pessoas ao mesmo tempo. O medo de um dia pesares a alguém. Ou uma frase que nunca disseste a ninguém, e que carregas há anos como se fosse uma prova contra ti.
+Não sei qual foi a dor que te trouxe até aqui. Talvez a culpa que aparece à noite. Um filho que não larga a tua mão, ou um que largou e não voltou. O cansaço de tentar salvar, de querer unir, de não conseguir dizer basta. Ou o medo de um dia pesares a alguém.
 
-Cada um destes livros nasceu de uma dor diferente. Mas todos contam a mesma travessia.
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
 
-Durante muito tempo acreditaste que amar era carregar. Que uma boa mãe segura tudo, resolve tudo, sustenta tudo, e nunca pesa, nunca falha, nunca precisa. Que o amor se mede pelo que se aguenta, pelo que se sacrifica, pelo que se dá até já não sobrar nada.
+Durante muito tempo acreditaste que amar era carregar. Que uma boa mãe segura tudo, resolve tudo, sustenta tudo, e nunca pesa, nunca falha, nunca precisa. Que o amor se mede pelo que se aguenta.
 
 Não se mede assim.
 
-Há um momento, em cada uma destas histórias, em que o amor deixa de ser fusão e começa a ser relação. Em que parar de carregar não é abandonar. Em que confiar, recuar, pôr um limite, deixar partir, honrar o que deste, ou deixares-te finalmente receber, não te tornam menos mãe. Tornam-te uma mãe inteira, ao lado de uma pessoa inteira.
+Há um momento, em cada uma destas histórias, em que o amor deixa de ser fusão e começa a ser relação. Em que parar de carregar não é abandonar. Unir não é fundir. Amar não é desaparecer dentro de quem se ama.
 
-Unir não é fundir. Amar não é desaparecer dentro de quem se ama.
+Estes livros não te vão ensinar a ser melhor mãe. Vão devolver-te a pergunta que ficou por baixo de tudo: o que é que tu andas a carregar que nunca foi teu para carregar?
 
-Este livro é uma porta. Há outras, para outras dores, e talvez reconheças nelas pessoas que amas, ou versões de ti em fases que ainda não chegaram. Não precisas de as atravessar todas. Precisas só de entrar por esta, a tua, e ficar o tempo que precisares de ficar.
+Não te prometo transformação ao virar a página. O que estas páginas te dão é compreensão, um nome, a certeza de que não estás sozinha nem a falhar. A travessia funda faz-se devagar, e às vezes com quem te acompanhe.
 
-Seja qual for a porta por onde entraste, é a mesma travessia que te espera do outro lado: voltares a ti, sem deixares de os amar.`;
+Mas ver já muda alguma coisa. Seja qual for a porta por onde entraste, a saída é a mesma: pousar o que não é teu, e voltar a ti, sem deixares de os amar.`;
+
+const ABERTURA_INFONTE = `A pergunta desta coleção é uma só: o que estou a perseguir que não é meu?
+
+Tu não és daquelas que param. Levantas-te cedo, resolves, entregas, alcanças. E mesmo assim, num lugar fundo, há uma voz que pergunta: quando é que isto vai ser suficiente?
+
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
+
+Talvez persigas uma meta que está sempre um pouco mais à frente. Talvez já tenhas chegado tantas vezes que perdeste a conta, e nenhuma chegada te deu o que prometia. Talvez te faças pequena para não incomodar, ou trave-te quando podias ter mais. Talvez a vida que segues nem tenha nascido em ti.
+
+Por baixo de tudo, ou persegues no futuro o que te faltou receber no passado, ou não te autorizas a ocupar aquilo que já és.
+
+Estes livros não te vão ensinar a alcançar mais depressa. Vão devolver-te uma pergunta que ninguém te deixou fazer: quem és tu antes de chegares?
+
+Não te prometo que saias diferente ao virar a página. O que estas páginas te dão é clareza, um nome para o cansaço que não passa com o descanso. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
+
+Mas ver já muda alguma coisa. E talvez, pela primeira vez, possas acreditar nisto: não precisas de chegar a lado nenhum para já seres suficiente. Só precisas de voltar.`;
+
+const ABERTURA_PROSPERIDADE = `A pergunta desta coleção é uma só: o que me impede de receber o que é meu?
+
+Esta coleção parece falar de dinheiro. Não fala. Fala das muitas formas como uma mulher impede o valor de circular na própria vida.
+
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
+
+Talvez dês sempre mais do que recebes, e te sintas em dívida quando alguém te dá algo. Talvez baixes o preço, ofereças, descontes, porque cobrar te aperta a garganta. Talvez travas quando podias ter mais, como se prosperar fosse trair quem teve menos. Talvez recebas um elogio e o devolvas antes de o sentir.
+
+Em todas, a ferida é a mesma: algures aprendeste que não tens autorização para receber valor. Que o teu lugar tem de ser pago. Que ter é tirar a alguém.
+
+Estes livros não te vão ensinar a faturar mais. Vão devolver-te uma pergunta que poucas se atrevem a fazer: e se eu tivesse direito a receber, sem pagar, sem culpa, sem pedir desculpa?
+
+Não te prometo abundância ao virar a página. O que estas páginas te dão é clareza sobre o sítio exato onde fechas a torneira. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
+
+Mas ver onde se trava já é meio caminho para deixar passar. O valor que é teu não se conquista. Só precisa que pares de o barrar, e voltes a deixar-te receber.`;
+
+const ABERTURA_SYNCHIM = `A pergunta desta coleção é uma só: o que me faz perder-me quando amo?
+
+Tu não és má a amar. Amas de mais, talvez. Ou amas o que foge, ou desapareces dentro de quem amas, ou esperas sentada que te escolham, ou confundes a tempestade com paixão. Mas má, não és.
+
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
+
+O problema não começou neste homem. Começou atrás, num amor de origem que te ensinou o que esperar, o que pedir, o que aguentar, o que valer. Aprendeste se o amor se persegue ou se recebe, se tens de te tornar útil para ficar, se baixar a guarda é perigo. E levas isso, sem saber, para dentro de cada relação.
+
+Estes livros não são sobre relacionamentos. São sobre a ferida que levas para dentro do amor antes de o amor sequer começar.
+
+Cada um mostra-te uma forma de fusão. Fundir-te com a ausência, com a utilidade, com o potencial dele, com o drama, com o outro até desapareceres. E a travessia, em todos, é a mesma: o amor deixar de ser fusão e voltar a ser relação. Dois que se veem, e não dois que se completam por falta.
+
+Não te prometo o amor certo ao virar a página. O que estas páginas te dão é o nome do teu padrão. Compreender essa ferida é a primeira metade. A outra metade faz-se a dois, e isso é onde a SyncHim entra.
+
+Mas primeiro, tu. Porque antes de o amor poder ser relação, tens de voltar a existir dentro dele.`;
+
+const ABERTURA_PERTENCA = `A pergunta desta coleção é uma só: qual é o meu lugar entre os outros?
+
+Olha para a tua vida e repara. És tu que seguras. Que fazes a ponte entre os que não se falam. Que nunca dás trabalho. Que ficas para o fim, que cedes o lugar, que organizas tudo para que ninguém se afaste.
+
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
+
+Algures, muito cedo, aprendeste como ter direito a um lugar entre as pessoas. Aprendeste se para pertencer tinhas de ser útil, de desaparecer, de segurar, de esperar a tua vez, de nunca incomodar. Algumas de vós ficaram responsáveis cedo demais, foram adultas antes de tempo, e dessa ferida nasceram quase todas as outras.
+
+Estes livros não te vão ensinar a cortar com a tua família nem a deixar de te importares. O contrário disso. Vão devolver-te o teu lugar, aquele que cedeste para caber, para servir, para não pesar.
+
+Não te prometo pertença ao virar a página. O que estas páginas te dão é a clareza de ver o lugar que ocupaste, e o que te custou ocupá-lo. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
+
+Mas reparar onde te apagaste já é começar a aparecer. E pertencer a sério só é possível quando há ali alguém inteiro, no seu lugar, para pertencer.`;
+
+const ABERTURA_FORCA = `A pergunta desta coleção é uma só: o que tive de me tornar para sobreviver?
+
+Toda a gente te acha forte. És tu que aguentas, que resolves, que não cais, que não pedes, que não incomodas. O que ninguém vê é o que essa força te custa, nem de onde veio.
+
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia. E estas são diferentes das outras deste universo, por isso preciso de te dizer uma coisa logo no início.
+
+Aqui não há propriamente um padrão errado a corrigir. Há uma adaptação que um dia te manteve viva. Tornaste-te impecável porque falhar custava. Deixaste de pedir porque ninguém vinha. Fizeste-te pequena porque ocupar espaço trazia consequências. Endureceste porque não houve ninguém forte por ti. Nada disto é defeito. Tudo isto foi inteligência de sobrevivência.
+
+Por isso, com estas feridas, às vezes compreender não chega. Algumas pedem apoio, tempo, e por vezes alguém preparado para te acompanhar de perto. Procurar esse apoio não é fraqueza. É a forma mais corajosa de força que existe.
+
+Estes livros vão mostrar-te o que a tua força protegeu, e o que continua a guardar muito depois de o perigo ter passado. Não te vão pedir que deixes de ser forte. Vão perguntar-te, com cuidado, se podes pousar a armadura quando estás em segurança.
+
+Porque já não estás naquele perigo. E talvez, pela primeira vez, possas voltar a viver para além dele.`;
+
+// Abertura mestra do universo inteiro (mostrada uma vez no topo da loja).
+// Origem: ebooks-plano/universo/ABERTURAS/00-ABERTURA-DO-UNIVERSO.md
+export const ABERTURA_UNIVERSO = {
+  titulo: 'Uma só pergunta, em sete roupas',
+  subtitulo: 'Abertura do universo inteiro',
+  texto: `Se tens mais do que um destes livros na mão, talvez já tenhas reparado numa coisa estranha.
+
+Parecem falar de assuntos diferentes. Maternidade. Propósito. Dinheiro. Amor. Família. Sobrevivência. Trabalho. Mas, à medida que os lês, vai-se tornando claro que não são sete assuntos. São uma só pergunta, a vestir sete roupas.
+
+No FreeMe ela pergunta: o que estou a carregar que não é meu?
+No Infonte: o que estou a perseguir que não é meu?
+Na Prosperidade: o que me impede de receber o que é meu?
+Na SyncHim: o que me faz perder-me quando amo?
+Na Pertença: qual é o meu lugar entre os outros?
+Na Força: o que tive de me tornar para sobreviver?
+No Trabalho: quem sou eu sem aquilo que faço?
+
+E todas, sem exceção, desembocam no mesmo sítio:
+
+Posso ocupar o meu lugar sem carregar, sem provar, sem salvar, sem perseguir e sem desaparecer?
+
+Estes livros não são sobre emoções. Repara nos seus títulos. A mãe que quis unir. A que ficou responsável cedo demais. A que paga para pertencer. A que ama a ausência. A que trabalha para merecer. Não são sentimentos. São papéis. Personagens interiores que uma pessoa habita durante vinte, trinta anos, sem nunca lhes ter dado um nome.
+
+E é isso que aqui te ofereço, antes de qualquer outra coisa: um nome. Porque no dia em que encontras o nome daquilo que vives há tanto tempo, acontece algo que muda tudo. Deixas de achar que és um defeito, e percebes que estás dentro de um padrão. E um padrão, ao contrário de um defeito, pode mudar.
+
+No fundo, isto não é uma coleção de livros. É um mapa das formas mais comuns de uma pessoa se afastar de si própria. Cada livro é um caminho de regresso.
+
+E há uma coisa que talvez só notes no fim, quando vires os verbos todos lado a lado. Devolver. Confiar. Recuar. Regressar. Ocupar. Receber. Pousar. Descansar. Distinguir. Escolher. Nenhum deles te manda conquistar mais. Nenhum te manda longe. Todos, sem exceção, te mandam voltar.
+
+Porque o lugar que procuras nunca esteve à frente. Esteve sempre aqui, à tua espera, por baixo de tudo o que carregaste, perseguiste, provaste e seguraste para não o sentires vazio.
+
+Escolhe a porta que for a tua. A travessia, em todas, é a mesma.`,
+  assinatura: 'Com toda a minha ternura, Vivianne',
+};
 
 export const COLECOES: Colecao[] = [
   {
@@ -78,6 +189,9 @@ export const COLECOES: Colecao[] = [
     estado: 'producao',
     cor: 'border-ocre/40 hover:border-ambar',
     travessia: 'https://infonte.viviannedossantos.com',
+    aberturaTitulo: 'A mesma travessia',
+    abertura: ABERTURA_INFONTE,
+    aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
   },
   {
     id: 'amor',
@@ -91,6 +205,9 @@ export const COLECOES: Colecao[] = [
     estado: 'producao',
     cor: 'border-rosa/40 hover:border-rosa',
     travessia: 'https://synchim.viviannedossantos.com',
+    aberturaTitulo: 'A mesma travessia',
+    abertura: ABERTURA_SYNCHIM,
+    aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
   },
   {
     id: 'forca',
@@ -103,6 +220,9 @@ export const COLECOES: Colecao[] = [
     feridas_en: 'crossing the dark · invisible grief · exhaustion · resting',
     estado: 'producao',
     cor: 'border-lila/40 hover:border-lila',
+    aberturaTitulo: 'A mesma travessia',
+    abertura: ABERTURA_FORCA,
+    aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
   },
   {
     id: 'prosperidade',
@@ -115,6 +235,9 @@ export const COLECOES: Colecao[] = [
     feridas_en: 'inherited scarcity · fear of receiving · paying to belong',
     estado: 'em-breve',
     cor: 'border-ouro/40 hover:border-ouro',
+    aberturaTitulo: 'A mesma travessia',
+    abertura: ABERTURA_PROSPERIDADE,
+    aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
   },
   {
     id: 'pertenca',
@@ -127,6 +250,9 @@ export const COLECOES: Colecao[] = [
     feridas_en: 'carrying family · never chosen · feeling outside',
     estado: 'em-breve',
     cor: 'border-salvia/40 hover:border-salvia',
+    aberturaTitulo: 'A mesma travessia',
+    abertura: ABERTURA_PERTENCA,
+    aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
   },
   {
     id: 'trabalho',

@@ -5,7 +5,7 @@ import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { getSupabase } from '@/lib/supabase';
 import { GotaMini } from '@/components/icons/GotaAssina';
-import { COLECOES, COLECOES_ATIVAS, COLECOES_EM_BREVE, slugToColecao, type ColecaoId } from '@/lib/colecoes';
+import { COLECOES, COLECOES_ATIVAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
 import type { Metadata } from 'next';
 
 // Forca dynamic — quando produtos.capa muda na DB (apos render-ebook),
@@ -194,6 +194,27 @@ export default async function LojaPage({
 
           return (
             <>
+              {/* ABERTURA DO UNIVERSO */}
+              {isPt && (
+                <section className="mb-16 max-w-[720px] mx-auto text-center">
+                  <p className="text-[0.72rem] tracking-[0.32em] uppercase text-ouro/80 mb-3">
+                    {ABERTURA_UNIVERSO.subtitulo}
+                  </p>
+                  <h2 className="font-serif font-light text-creme text-[clamp(1.6rem,4vw,2.2rem)] leading-[1.18] mb-8">
+                    {ABERTURA_UNIVERSO.titulo}
+                  </h2>
+                  <div className="font-serif text-creme-2 text-[0.96rem] leading-[1.85] italic space-y-4 text-left">
+                    {ABERTURA_UNIVERSO.texto.split('\n\n').map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </div>
+                  <p className="font-serif italic text-ambar/80 text-[0.9rem] mt-6 text-left">
+                    {ABERTURA_UNIVERSO.assinatura}
+                  </p>
+                  <div className="mt-10 mx-auto w-[60px] h-px bg-ouro/40" />
+                </section>
+              )}
+
               {/* NAV ANCORA DAS COLECOES */}
               <nav className="mb-14 flex flex-wrap justify-center gap-2">
                 {COLECOES.map(c => {
