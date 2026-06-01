@@ -51,8 +51,15 @@ export default function EditoraAdmin() {
                       </div>
                       <div className="text-right shrink-0">
                         <p className="text-ocre text-[0.8rem]">{l.capitulos.length} capítulos</p>
-                        <p className={`text-[0.78rem] mt-1 ${l.palavras >= 8000 ? 'text-salvia' : 'text-rosa/70'}`}>
+                        <p className="text-creme-2/60 text-[0.78rem] mt-1">
                           {l.palavras.toLocaleString('pt-PT')} palavras
+                        </p>
+                        <p className={`text-[0.74rem] mt-1 ${l.auditoria.erros ? 'text-rosa/80' : l.auditoria.avisos ? 'text-ambar/80' : 'text-salvia'}`}>
+                          {l.auditoria.erros
+                            ? `⚠ ${l.auditoria.erros} erro(s)`
+                            : l.auditoria.avisos
+                            ? `${l.auditoria.avisos} aviso(s)`
+                            : '✓ compliance'}
                         </p>
                       </div>
                     </div>

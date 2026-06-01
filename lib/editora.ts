@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { auditar, type Auditoria } from '@/lib/auditoria';
 
 // Lê os livros escritos (markdown) em content/produtos para a aba Editora do
 // admin. Só de leitura: serve para a Vivianne rever o que foi escrito.
@@ -18,6 +19,7 @@ export type Livro = {
   disclaimer: string;
   capitulos: Capitulo[];
   palavras: number;
+  auditoria: Auditoria;
 };
 
 const COLECOES: Record<string, { mundo: Livro['mundo']; colecao: string; ordem: number }> = {
@@ -96,6 +98,7 @@ function parse(raw: string, slug: string): Livro {
     disclaimer,
     capitulos,
     palavras: contarPalavras(raw),
+    auditoria: auditar(raw),
   };
 }
 

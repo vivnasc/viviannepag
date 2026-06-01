@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { lerLivro } from '@/lib/editora';
+import PublicarBotao from './PublicarBotao';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,14 +9,34 @@ export default async function LivroEditora({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const livro = lerLivro(slug);
   if (!livro) notFound();
+  const a = livro.auditoria;
 
   return (
     <main className="max-w-[960px] mx-auto px-7 py-10">
-      <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
+      <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <Link href="/admin/editora" className="text-ocre/80 text-[0.82rem] hover:text-ambar no-underline">← editora</Link>
         <p className="text-creme-2/40 text-[0.78rem]">
           {livro.colecao} · {livro.capitulos.length} capítulos · {livro.palavras.toLocaleString('pt-PT')} palavras
         </p>
+      </div>
+
+      {/* auditoria de compliance + publicar */}
+      <div className="flex items-start justify-between gap-6 flex-wrap mb-8 border border-ocre/15 rounded-[14px] p-5 bg-terra-2/30">
+        <div className="min-w-0">
+          <p className="text-[0.7rem] tracking-[0.22em] uppercase text-ocre mb-3">auditoria de regras</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {a.itens.map(it => (
+              <span key={it.label} className="inline-flex items-center gap-1.5 text-[0.78rem]" title={it.detalhe}>
+                <span className={it.estado === 'ok' ? 'text-salvia' : it.estado === 'aviso' ? 'text-ambar' : 'text-rosa'}>
+                  {it.estado === 'ok' ? '✓' : it.estado === 'aviso' ? '!' : '✕'}
+                </span>
+                <span className="text-creme-2/80">{it.label}</span>
+                <span className="text-creme-2/35">{it.detalhe}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+        <PublicarBotao slug={livro.slug} bloqueado={a.erros > 0} />
       </div>
 
       {/* painel de leitura em creme, fiel ao livro */}
