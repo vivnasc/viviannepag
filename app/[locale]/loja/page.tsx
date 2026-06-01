@@ -289,6 +289,28 @@ export default async function LojaPage({
                         {isPt ? c.feridas : c.feridas_en}
                       </p>
                     </div>
+
+                    {/* Abertura comum da colecao (so quando existe) */}
+                    {c.abertura && isPt && (
+                      <div className="mb-10 max-w-[680px] mx-auto rounded-[18px] border-l-2 border-ambar/40 pl-7 pr-2 py-2">
+                        {c.aberturaTitulo && (
+                          <p className="text-[0.7rem] tracking-[0.28em] uppercase text-ocre/60 mb-4">
+                            {c.aberturaTitulo}
+                          </p>
+                        )}
+                        <div className="font-serif text-creme-2 text-[0.96rem] leading-[1.78] italic space-y-4">
+                          {c.abertura.split('\n\n').map((p, i) => (
+                            <p key={i}>{p}</p>
+                          ))}
+                        </div>
+                        {c.aberturaAssinatura && (
+                          <p className="font-serif italic text-ambar/80 text-[0.88rem] mt-5">
+                            {c.aberturaAssinatura}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
                       {lista.map(renderCard)}
                     </div>
