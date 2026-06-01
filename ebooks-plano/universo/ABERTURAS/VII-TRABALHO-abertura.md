@@ -1,19 +1,23 @@
 # A mesma travessia
-### Abertura, Coleção VI, Força
+### Abertura, Coleção VII, Trabalho e Vocação
 
-A pergunta desta coleção é uma só: o que tive de me tornar para sobreviver?
+A pergunta desta coleção é uma só: quem sou eu sem aquilo que faço?
 
-Toda a gente te acha forte. És tu que aguentas, que resolves, que não cais, que não pedes, que não incomodas. O que ninguém vê é o que essa força te custa, nem de onde veio.
+Esta coleção parece falar do teu trabalho. Não fala. Fala de uma coisa que aprendeste muito antes do primeiro emprego: que o teu lugar no mundo se ganha. Que tens de provar, produzir, aguentar, ser útil, para teres direito a estar.
 
-Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia. E estas são diferentes das outras deste universo, por isso preciso de te dizer uma coisa logo no início.
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
 
-Aqui não há propriamente um padrão errado a corrigir. Há uma adaptação que um dia te manteve viva. Tornaste-te impecável porque falhar custava. Deixaste de pedir porque ninguém vinha. Fizeste-te pequena porque ocupar espaço trazia consequências. Endureceste porque não houve ninguém forte por ti. Nada disto é defeito. Tudo isto foi inteligência de sobrevivência.
+Talvez te tenhas tornado aquela sem quem nada anda. Talvez tenhas o lugar e não te sentes nele. Talvez carregues a empresa que criaste como se fosse o teu corpo. Talvez fujas quando o reconhecimento se aproxima, ou midas o teu valor pelo teu cansaço.
 
-Por isso, com estas feridas, às vezes compreender não chega. Algumas pedem apoio, tempo, e por vezes alguém preparado para te acompanhar de perto. Procurar esse apoio não é fraqueza. É a forma mais corajosa de força que existe.
+Por baixo de todas, a mesma ferida: o trabalho deixou de ser uma expressão de quem és e tornou-se a prova de que mereces existir.
 
-Estes livros vão mostrar-te o que a tua força protegeu, e o que continua a guardar muito depois de o perigo ter passado. Não te vão pedir que deixes de ser forte. Vão perguntar-te, com cuidado, se podes pousar a armadura quando estás em segurança.
+Estes livros não te vão ensinar a produzir mais, a liderar melhor, a gerir o tempo. Vão devolver-te uma pergunta que o desempenho te fez esquecer: tens valor mesmo quando não produzes, mesmo quando descansas, mesmo quando ninguém precisa de ti?
 
-Porque já não estás naquele perigo. E talvez, pela primeira vez, possas voltar a viver para além dele.
+Tens. Sempre tiveste. O teu valor não se conquista com trabalho nenhum, porque vem antes de tudo o que fazes.
+
+Não te prometo essa certeza ao virar a página. O que estas páginas te dão é ver onde confundiste o que fazes com o que vales. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
+
+Mas reparar nessa confusão já é o princípio de a desfazer. E talvez, pela primeira vez, possas pousar a prova e voltar a existir, sem a merecer.
 
 Com toda a minha ternura,
 Vivianne

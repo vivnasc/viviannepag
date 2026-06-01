@@ -1,21 +1,21 @@
 # A mesma travessia
-### Abertura, Coleção III, Prosperidade
+### Abertura, Coleção IV, SyncHim
 
-A pergunta desta coleção é uma só: o que me impede de receber o que é meu?
+A pergunta desta coleção é uma só: o que me faz perder-me quando amo?
 
-Esta coleção parece falar de dinheiro. Não fala. Fala das muitas formas como uma mulher impede o valor de circular na própria vida.
+Tu não és má a amar. Amas de mais, talvez. Ou amas o que foge, ou desapareces dentro de quem amas, ou esperas sentada que te escolham, ou confundes a tempestade com paixão. Mas má, não és.
 
 Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
 
-Talvez dês sempre mais do que recebes, e te sintas em dívida quando alguém te dá algo. Talvez baixes o preço, ofereças, descontes, porque cobrar te aperta a garganta. Talvez travas quando podias ter mais, como se prosperar fosse trair quem teve menos. Talvez recebas um elogio e o devolvas antes de o sentir.
+O problema não começou neste homem. Começou atrás, num amor de origem que te ensinou o que esperar, o que pedir, o que aguentar, o que valer. Aprendeste se o amor se persegue ou se recebe, se tens de te tornar útil para ficar, se baixar a guarda é perigo. E levas isso, sem saber, para dentro de cada relação.
 
-Em todas, a ferida é a mesma: algures aprendeste que não tens autorização para receber valor. Que o teu lugar tem de ser pago. Que ter é tirar a alguém.
+Estes livros não são sobre relacionamentos. São sobre a ferida que levas para dentro do amor antes de o amor sequer começar.
 
-Estes livros não te vão ensinar a faturar mais. Vão devolver-te uma pergunta que poucas se atrevem a fazer: e se eu tivesse direito a receber, sem pagar, sem culpa, sem pedir desculpa?
+Cada um mostra-te uma forma de fusão. Fundir-te com a ausência, com a utilidade, com o potencial dele, com o drama, com o outro até desapareceres. E a travessia, em todos, é a mesma: o amor deixar de ser fusão e voltar a ser relação. Dois que se veem, e não dois que se completam por falta.
 
-Não te prometo abundância ao virar a página. O que estas páginas te dão é clareza sobre o sítio exato onde fechas a torneira. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
+Não te prometo o amor certo ao virar a página. O que estas páginas te dão é o nome do teu padrão. Compreender essa ferida é a primeira metade. A outra metade faz-se a dois, e isso é onde a SyncHim entra.
 
-Mas ver onde se trava já é meio caminho para deixar passar. O valor que é teu não se conquista. Só precisa que pares de o barrar, e voltes a deixar-te receber.
+Mas primeiro, tu. Porque antes de o amor poder ser relação, tens de voltar a existir dentro dele.
 
 Com toda a minha ternura,
 Vivianne
