@@ -47,7 +47,7 @@ export function LojaSidebar({
       <div className="lg:sticky lg:top-24">
         {/* SEARCH */}
         <div className="mb-7">
-          <label className="text-[0.65rem] tracking-[0.22em] uppercase text-ocre/60 block mb-2">
+          <label className="text-[0.7rem] tracking-[0.22em] uppercase text-ocre block mb-2">
             {isPt ? 'procurar' : 'search'}
           </label>
           <input
@@ -55,28 +55,28 @@ export function LojaSidebar({
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder={isPt ? 'culpa, casal, ...' : 'guilt, couple, ...'}
-            className="w-full bg-transparent border border-ocre/30 focus:border-ambar outline-none rounded-[10px] px-3 py-2 text-[0.85rem] text-creme placeholder:text-creme-2/30 transition-colors"
+            className="w-full bg-transparent border border-ocre/50 focus:border-ambar outline-none rounded-[10px] px-3 py-2 text-[0.88rem] text-creme placeholder:text-creme-2/50 transition-colors"
           />
 
           {/* Resultados da pesquisa */}
           {query.trim() && (
-            <div className="mt-3 rounded-[10px] bg-terra-2/60 border border-ocre/15 max-h-[280px] overflow-y-auto">
+            <div className="mt-3 rounded-[10px] bg-terra-2/60 border border-ocre/25 max-h-[280px] overflow-y-auto">
               {resultados.length === 0 ? (
-                <p className="text-[0.78rem] text-creme-2/50 italic p-3">
+                <p className="text-[0.82rem] text-creme-2/70 italic p-3">
                   {isPt ? 'sem resultados' : 'no results'}
                 </p>
               ) : (
-                <ul className="divide-y divide-ocre/10">
+                <ul className="divide-y divide-ocre/15">
                   {resultados.map(p => (
                     <li key={p.slug}>
                       <a
                         href={`${prefix}/loja/${p.slug}`}
-                        className="block px-3 py-2.5 hover:bg-ocre/10 no-underline transition-colors"
+                        className="block px-3 py-2.5 hover:bg-ocre/15 no-underline transition-colors"
                       >
-                        <p className="font-serif text-creme text-[0.86rem] leading-tight line-clamp-1">
+                        <p className="font-serif text-creme text-[0.9rem] leading-tight line-clamp-1">
                           {p.titulo}
                         </p>
-                        <p className="text-[0.7rem] text-creme-2/55 mt-0.5 line-clamp-1">
+                        <p className="text-[0.74rem] text-creme-2/75 mt-0.5 line-clamp-1">
                           {p.subtitulo}
                         </p>
                       </a>
@@ -90,7 +90,7 @@ export function LojaSidebar({
 
         {/* NAV DAS COLECOES */}
         <div>
-          <p className="text-[0.65rem] tracking-[0.22em] uppercase text-ocre/60 mb-3">
+          <p className="text-[0.7rem] tracking-[0.22em] uppercase text-ocre mb-3">
             {isPt ? 'coleções' : 'collections'}
           </p>
           <ul className="space-y-1">
@@ -100,16 +100,16 @@ export function LojaSidebar({
                   href={`#colecao-${it.id}`}
                   className={`group flex items-baseline gap-2 px-2 py-1.5 rounded-[8px] no-underline transition-colors ${
                     it.ativo
-                      ? 'text-creme hover:text-ambar hover:bg-ocre/10'
-                      : 'text-creme-2/40 hover:text-creme-2/70'
+                      ? 'text-creme hover:text-ambar hover:bg-ocre/15'
+                      : 'text-creme-2/65 hover:text-creme-2/90'
                   }`}
                 >
-                  <span className="font-serif text-ocre/50 text-[0.78rem] w-[18px] shrink-0">
+                  <span className="font-serif text-ocre/80 text-[0.82rem] w-[18px] shrink-0">
                     {it.romano}
                   </span>
-                  <span className="text-[0.85rem] flex-1">{it.nome}</span>
+                  <span className="text-[0.88rem] flex-1">{it.nome}</span>
                   {it.count > 0 && (
-                    <span className="text-[0.68rem] text-ocre/50 tabular-nums">
+                    <span className="text-[0.74rem] text-ocre tabular-nums">
                       {it.count}
                     </span>
                   )}
@@ -123,7 +123,7 @@ export function LojaSidebar({
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="mt-7 text-[0.7rem] text-creme-2/40 hover:text-ambar block transition-colors no-underline"
+          className="mt-7 text-[0.75rem] text-creme-2/70 hover:text-ambar block transition-colors no-underline"
         >
           ↑ {isPt ? 'voltar ao topo' : 'back to top'}
         </a>
