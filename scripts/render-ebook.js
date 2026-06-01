@@ -146,14 +146,37 @@ async function fetchImagensMundo(mundo) {
   return dedup;
 }
 
-// Mapeia slug -> mundo automaticamente. Replica a logica do gerarLegendas
-// em /admin/produtos para consistencia. Default: freeme.
+// Mapeia slug -> mundo (logica original, ainda usada como hint inicial).
 function slugToMundo(slug) {
   if (/sonho|voz|mente|teu/.test(slug)) return 'infonte';
   if (/casal|perguntas/.test(slug)) return 'synchim';
   if (/quemes|sentido|escuro|presenca/.test(slug)) return 'escola';
   return 'freeme';
 }
+
+// Mapeia slug -> colecao (replica lib/colecoes.ts slugToColecao em JS).
+// Pool de imagens e organizado por colecao, nao por mundo de origem.
+function slugToColecao(slug) {
+  if (/^ebook-01-culpa|^ebook-02-herdaste|^guia-01-meu|^guia-02-frases/.test(slug)) return 'freeme-mae';
+  if (/^ebook-(09|10|11|12)|mae-que|mae-arrependida|mae-solo|mae-que-teme/.test(slug)) return 'freeme-mae';
+  if (/^ebook-03-quemes|^ebook-04-sentido|^ebook-07-sonho|^ebook-08-voz/.test(slug)) return 'infonte';
+  if (/^guia-03-presenca|^guia-04-mente|^guia-07-teu/.test(slug)) return 'infonte';
+  if (/^ebook-06-no-casal|^guia-06-perguntas/.test(slug)) return 'amor';
+  if (/^ebook-05-escuro|^guia-05-luto/.test(slug)) return 'forca';
+  return 'freeme-mae';
+}
+
+// Pool de imagens por colecao — puxa de varios mundos para max diversidade.
+// 'autora' tem muitas fotos versateis e entra em quase todas as colecoes.
+const MUNDOS_POR_COLECAO = {
+  'freeme-mae': ['freeme', 'autora'],         // ~95 imagens
+  'infonte':    ['infonte', 'escola', 'autora'], // ~95
+  'amor':       ['synchim', 'autora'],         // ~60
+  'forca':      ['escola', 'autora'],          // ~70
+  'prosperidade': ['infonte', 'autora'],       // ~75
+  'pertenca':   ['freeme', 'autora'],          // ~95
+  'trabalho':   ['infonte', 'escola'],         // ~45
+};
 
 // Lista de todos os slugs de ebooks/guias PT. Permite bulk sem hard-coding.
 function listAllSlugs() {
@@ -164,29 +187,45 @@ function listAllSlugs() {
     .sort();
 }
 
-// Lane unica por slug dentro do mesmo mundo. Em vez de hash (que pode
-// colidir), assigna lane pela posicao alfabetica do slug entre todos os
-// slugs do mesmo mundo. Garante zero overlap.
-function laneDoSlug(slug, mundo) {
-  const all = listAllSlugs().filter(s => slugToMundo(s) === mundo).sort();
+// Lane unica por slug DENTRO DA COLECAO (e nao dentro do mundo). Permite
+// diversidade entre produtos da mesma colecao usando o pool combinado.
+function laneDoSlug(slug) {
+  const colecao = slugToColecao(slug);
+  const all = listAllSlugs().filter(s => slugToColecao(s) === colecao).sort();
   const idx = all.indexOf(slug);
-  return { lane: idx === -1 ? 0 : idx, total: Math.max(all.length, 1) };
+  return { lane: idx === -1 ? 0 : idx, total: Math.max(all.length, 1), colecao };
 }
 
-// Distribui imagens pelos capitulos sem repetir entre produtos do mesmo mundo.
-// Stride = total de slugs do mundo. Cada slug pega imagens[lane], [lane+total],
+// Pool de imagens da colecao — combina varios mundos (ver MUNDOS_POR_COLECAO).
+async function fetchImagensColecao(colecao) {
+  const mundos = MUNDOS_POR_COLECAO[colecao] ?? ['freeme'];
+  const all = [];
+  for (const m of mundos) {
+    const imgs = await fetchImagensMundo(m);
+    all.push(...imgs);
+  }
+  // Shuffle deterministico por colecao para que diferentes colecoes nao apanhem
+  // sempre as mesmas imagens nas mesmas lanes (capa do ebook 1 freeme vs capa
+  // do ebook do mesmo lane numa colecao diferente).
+  const seed = colecao.split('').reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 0);
+  const seeded = all.map((im, i) => ({ im, k: ((i + 1) * 9301 + seed) % 233280 }));
+  seeded.sort((a, b) => a.k - b.k);
+  return seeded.map(s => s.im);
+}
+
+// Distribui imagens pelos capitulos sem repetir entre produtos da mesma colecao.
+// Stride = total de slugs da colecao. Cada slug pega imagens[lane], [lane+total],
 // [lane+2*total], ... — disjuntos por construcao.
-function distribuirImagens(imagens, nChapters, slug, mundo) {
+function distribuirImagens(imagens, nChapters, slug) {
   if (imagens.length === 0) return { capa: null, porCapitulo: [], lane: 0, total: 0 };
 
-  const { lane, total } = laneDoSlug(slug, mundo);
+  const { lane, total, colecao } = laneDoSlug(slug);
   const stride = total;
 
   const minhaSeq = [];
   for (let i = lane; i < imagens.length; i += stride) {
     minhaSeq.push(imagens[i]);
   }
-  // Fallback: se sobraram poucas imagens, completa com qualquer uma nao usada
   if (minhaSeq.length < nChapters + 1) {
     for (const im of imagens) {
       if (!minhaSeq.includes(im)) minhaSeq.push(im);
@@ -199,7 +238,7 @@ function distribuirImagens(imagens, nChapters, slug, mundo) {
   for (let i = 0; i < nChapters; i++) {
     porCapitulo.push(minhaSeq[i + 1] ?? minhaSeq[i % minhaSeq.length]);
   }
-  return { capa, porCapitulo, lane, total };
+  return { capa, porCapitulo, lane, total, colecao };
 }
 
 // ─── HTML builder ───
@@ -773,10 +812,12 @@ async function renderUm(slug, mundoOverride) {
   const ebook = parseEbook(raw);
   console.log(`  [parsed] ${ebook.chapters.length} capitulos`);
 
-  const imagens = await fetchImagensMundo(mundo);
-  console.log(`  [imagens] ${imagens.length} fotos MJ em ${mundo}`);
+  const colecao = slugToColecao(slug);
+  const mundosPool = MUNDOS_POR_COLECAO[colecao] ?? ['freeme'];
+  const imagens = await fetchImagensColecao(colecao);
+  console.log(`  [pool] colecao=${colecao} mundos=${mundosPool.join('+')} total=${imagens.length} fotos`);
 
-  const { capa, porCapitulo, lane, total } = distribuirImagens(imagens, ebook.chapters.length, slug, mundo);
+  const { capa, porCapitulo, lane, total } = distribuirImagens(imagens, ebook.chapters.length, slug);
   console.log(`  [lane ${lane}/${total}] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
   const html = buildHtml(ebook, capa, porCapitulo);
