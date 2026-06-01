@@ -157,6 +157,8 @@ Agora sabes reconhecer a diferença entre cumprir uma vida e escolhê-la. Sabes 
 
 E sabes, talvez, que a pergunta "esta vida é mesmo minha?", que tanto te inquietou, não era um sinal de ingratidão nem de loucura, era a tua própria vida a chamar por ti. Era a parte de ti que nunca teve espaço a bater à porta, a dizer "eu existo, e gostava de ser vivida". Muitas mulheres calam essa pergunta a vida inteira, com medo do que ela possa abrir, e morrem sem nunca terem vivido a sua própria vida, apenas cumprido a de outros. Tu fizeste a pergunta, deixaste-a entrar, leste este livro até ao fim. Isso já é o princípio da resposta, já é a tua vida a começar a reclamar o seu lugar. E essa coragem, a de perguntar de quem é a vida que se vive, é o primeiro passo, e o mais difícil, para a tornares, enfim, tua.
 
+E sabes que distinguir o que é teu do que herdaste não é um ato de frieza, é um ato de amor, por ti e pelos teus. Por ti, porque te devolve a tua própria vida. E pelos teus, porque só quando paras de carregar o que era deles podes amá-los livremente, sem o peso de uma renúncia, sem a conta silenciosa de uma vida não vivida. A separação que parece traição é, afinal, o que torna possível o amor mais limpo, o amor que não pesa, o amor de quem se pertence a si e por isso pode, finalmente, dar-se aos outros sem se perder.
+
 Sabes, no fundo, a frase que segura este livro inteiro: posso honrar-vos sem me tornar-vos.
 
 Ver de quem é a tua vida foi o primeiro passo. Mas há um segundo, e esse não se lê, faz-se: faz-se a devolver, devagar, o que não é teu, e a escolher, peça a peça, a vida que é.
@@ -166,6 +168,8 @@ Foi para essa travessia que criei o **Infonte**.
 O Infonte não é mais um guião a cumprir, nem mais uma vida que alguém te diz como viver. É, precisamente, o oposto: um espaço para distinguires o que é teu do que herdaste, para devolveres com amor o que não te pertence, e para escolheres, talvez pela primeira vez, a partir de ti. Não para rejeitares a tua origem, mas para a honrares de verdade, vivendo finalmente a tua própria vida, que é o maior fruto que a vida que recebeste podia dar.
 
 Lá, a pergunta "de quem é este sonho" deixa de ser uma inquietação confusa e torna-se uma bússola. O vazio do não saber deixa de assustar e começa a abrir espaço. E escolher deixa de ser uma ideia e torna-se um gesto, repetido, que constrói, devagar, uma vida que é, enfim, tua.
+
+Lá, a pergunta "de quem é este sonho" deixa de ser uma inquietação confusa e torna-se uma bússola que separa o teu do herdado. O vazio do não saber quem és sem a história herdada deixa de assustar e começa a abrir espaço para quem podes ser. E escolher deixa de ser uma ideia distante e torna-se um gesto, repetido, que constrói, devagar, uma vida que é, enfim, tua, escrita pela tua mão.
 
 Se sentes que é o momento, encontras o Infonte em [infonte.viviannedossantos.com](https://infonte.viviannedossantos.com).
 

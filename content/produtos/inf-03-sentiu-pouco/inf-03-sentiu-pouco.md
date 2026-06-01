@@ -177,6 +177,8 @@ O Infonte não é mais uma meta a alcançar, nem um método para conquistares me
 
 Lá, o vazio da chegada deixa de ser um abismo do qual se foge para a próxima meta, e torna-se uma porta para o que procuras de verdade. E reconhecer deixa de ser uma ideia e torna-se uma prática: a de honrar o que tens sem lhe pedir o impossível, e a de te dares a ti o que pedias ao mundo.
 
+Lá, o vazio da chegada deixa de ser um abismo do qual se foge para a próxima meta e torna-se uma porta para o que procuras de verdade. A insatisfação crónica deixa de ser um defeito a esconder e torna-se a mensageira que te aponta a fome real. E reconhecer deixa de ser uma ideia e torna-se uma prática diária, a de honrar o que tens sem lhe pedir o impossível, e a de te dares, enfim, a ti, o que pedias ao mundo.
+
 Se sentes que é o momento, encontras o Infonte em [infonte.viviannedossantos.com](https://infonte.viviannedossantos.com).
 
 E se ainda não é o momento, está tudo bem, e não há aqui nenhuma meta a cumprir. O que leste já é teu, e fica contigo, sereno, até ao dia em que decidires parar de pedir às chegadas o que só tu te podes dar.

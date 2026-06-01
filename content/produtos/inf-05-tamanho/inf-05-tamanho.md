@@ -155,6 +155,8 @@ Agora sabes que te fazes pequena por hábito, e que isso não é falta de tamanh
 
 E sabes, talvez, que o mundo precisa da tua grandeza, e não da tua pequenez. Vivemos rodeados de mulheres que se encolhem, que se diminuem, que não ocupam o seu lugar, e o mundo é mais pobre por isso, porque perde tudo o que elas teriam para dar se se permitissem ser inteiras. Cada mulher que ocupa o seu tamanho não tira nada a ninguém, acrescenta: acrescenta a sua luz, o seu talento, o seu contributo, e dá permissão a outras para fazerem o mesmo. A tua pequenez não torna o mundo melhor, não ajuda ninguém, só subtrai do mundo a pessoa que podias ser. A tua grandeza, ocupada com dignidade, é um presente, para ti e para todos. Não é por egoísmo que se cresce. É, no fundo, por generosidade: a generosidade de dar ao mundo tudo o que és, em vez de o privares disso por um medo que já não te serve.
 
+E sabes que ocupar o teu tamanho não é um ato isolado, é uma forma nova de estar no mundo, que se constrói dia a dia. Não há um momento em que cresces de uma vez e ficas grande para sempre. Há mil pequenos momentos em que escolhes não te encolher, em que ocupas o teu espaço, em que deixas a tua luz aparecer, e cada um deles, repetido, vai tornando o teu tamanho mais habitável e o mundo mais habituado a ti inteira. Começa pelo próximo. No próximo momento em que te apanhares a encolher, ocupa um pouco mais. É na soma desses pequenos atos de presença que uma vida contida se transforma, devagar, numa vida vivida por inteiro.
+
 Sabes, no fundo, a frase que segura este livro inteiro: posso ocupar o lugar que a vida me deu.
 
 Ver o teu medo do próprio tamanho foi o primeiro passo. Mas há um segundo, e esse não se lê, faz-se: faz-se a ocupar, devagar, gesto a gesto, o espaço que tens evitado, e a descobrir que o mundo te aguenta inteira.
@@ -164,6 +166,8 @@ Foi para essa travessia que criei o **Infonte**.
 O Infonte não é um lugar onde aprendes a ser maior do que és, nem a passar por cima de ninguém. É, precisamente, um espaço para deixares de ser menor do que és, para te libertares das lealdades que te mantêm pequena, e para ocupares, com dignidade e sem culpa, o lugar que a vida te deu. Não para abandonares a tua origem, mas para a honrares crescendo a partir dela, e pondo a tua grandeza, enfim, ao serviço de quem amas e do mundo.
 
 Lá, a pergunta "quem perco se crescer" deixa de ser uma ameaça e torna-se uma porta. O teu poder deixa de ser uma sombra que escondes e começa a ser uma luz que ocupas. E crescer deixa de parecer traição e revela-se o que é: a forma mais alta de honrares a vida que recebeste.
+
+Lá, a pergunta "quem perco se crescer" deixa de ser uma ameaça que te encolhe e torna-se uma porta que se abre. O teu poder deixa de ser uma sombra que escondes e começa a ser uma luz que ocupas, sem culpa. E crescer deixa de parecer traição e revela-se o que é: a forma mais alta de honrares a vida que recebeste e de a deixares dar todo o fruto que tem para dar.
 
 Se sentes que é o momento, encontras o Infonte em [infonte.viviannedossantos.com](https://infonte.viviannedossantos.com).
 
