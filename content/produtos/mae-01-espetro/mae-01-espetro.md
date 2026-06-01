@@ -223,17 +223,17 @@ Sabes, no fundo, a frase que segura este livro inteiro: posso amar-te sem carreg
 
 E talvez, lá no fundo, a frase mais difícil de todas comece finalmente a fazer sentido: posso descansar e continuar a ser tua mãe.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz a ler. Faz-se a atravessar.
+Ver o que carregavas foi o primeiro passo, e não é pequeno. Mas o que se vê tem ainda de se atravessar, e isso já não se faz a ler.
 
 Foi para essa travessia que criei o **FreeMe**.
 
 O FreeMe não é um curso, não é conteúdo para consumir, não é mais informação para acrescentar à que já tens a mais. É uma travessia guiada que fazes por dentro, ao teu ritmo, para pousares o que não era teu para carregar. E para uma mãe como tu, que carrega o que nenhuma lista de tarefas mostra, há um caminho pensado para a tua dor específica: a culpa que não tem origem, o medo do futuro, o controlo que nasce do amor, a exaustão de quem vive dez anos à frente. Não para te ensinar a cuidar dele, que isso já sabes melhor do que ninguém. Para te devolver a ti.
 
-Lá, as frases que aqui leste em silêncio dizem-se devagar, com espaço para o corpo as ouvir. O que aqui foi mapa, lá é caminho. Acompanhar deixa de ser uma ideia e torna-se uma prática. E confiar deixa de assustar e começa a aliviar.
+Lá, as frases que aqui leste em silêncio ganham voz e tempo, ditas devagar, com espaço para o corpo as receber. O que aqui foi um mapa, lá torna-se chão que se pisa. Acompanhar deixa de ser uma ideia e torna-se uma prática. E confiar deixa de assustar e começa a aliviar.
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já ficou plantada, e quando estiveres pronta, o caminho fica à tua espera.
+E se ainda não é o momento, não faz mal nenhum. O que leste fica contigo, como uma semente que espera a sua estação. Quando for tempo, o caminho continuará aqui.
 
 Mas antes de fechares estas páginas, peço-te uma coisa só. Hoje, faz um gesto pequeno por ti. Cinco minutos que sejam teus. Um copo de água bebido em paz. Um momento de não fazer nada, sem te desculpares por isso. E, se conseguires, diz por dentro, mesmo que ainda não acredites: o meu melhor é suficiente. Não tens de acreditar já. Basta dizeres. O corpo ouve. E com o tempo, começa a lembrar-se de que tu também és alguém. De que antes de seres mãe, és pessoa. E de que essa pessoa precisa de existir, para que a mãe possa ficar.
 

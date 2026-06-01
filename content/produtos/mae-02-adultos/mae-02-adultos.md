@@ -187,17 +187,17 @@ Sabes, no fundo, a frase que segura este livro inteiro: posso amar-te e deixar-t
 
 E talvez, lá no fundo, a frase mais difícil de todas comece finalmente a fazer sentido: posso voltar para a minha vida sem deixar de ser tua mãe.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz a ler. Faz-se a atravessar.
+Ler estas páginas foi começar a ver. Mas ver é só o início; o regresso a ti faz-se a viver, passo a passo, não a ler.
 
 Foi para essa travessia que criei o **FreeMe**.
 
-O FreeMe não é um curso, não é mais informação para acrescentar à que já tens. É uma travessia guiada que fazes por dentro, ao teu ritmo, para saíres de um posto que já não é teu e regressares a uma vida que ficou à tua espera. Para uma mãe como tu, que amou tanto que se esqueceu de si, há um caminho pensado para a tua dor: o luto do ninho vazio, o medo de quem és quando ninguém precisa de ti, a coragem de recuar sem abandonar, o regresso às perguntas que adiaste durante décadas. Não para deixares de ser mãe, que isso não deixarás nunca. Para voltares a ser, também, tu.
+O FreeMe não é um curso nem mais uma leitura para a pilha. É de outra natureza. É uma travessia guiada que fazes por dentro, ao teu ritmo, para saíres de um posto que já não é teu e regressares a uma vida que ficou à tua espera. Para uma mãe como tu, que amou tanto que se esqueceu de si, há um caminho pensado para a tua dor: o luto do ninho vazio, o medo de quem és quando ninguém precisa de ti, a coragem de recuar sem abandonar, o regresso às perguntas que adiaste durante décadas. Não para deixares de ser mãe, que isso não deixarás nunca. Para voltares a ser, também, tu.
 
-Lá, as frases que aqui leste em silêncio dizem-se devagar, com espaço para o corpo as ouvir. "A tua vida pertence-te." "Posso permanecer perto sem conduzir." "Posso voltar para a minha vida sem deixar de ser tua mãe." O que aqui foi mapa, lá é caminho. Recuar deixa de ser uma ideia e torna-se um movimento. E regressar deixa de assustar e começa a saber a casa.
+Lá, as frases que aqui te atravessaram em silêncio são ditas em voz alta, devagar, até o corpo as reconhecer como suas. "A tua vida pertence-te." "Posso permanecer perto sem conduzir." "Posso voltar para a minha vida sem deixar de ser tua mãe." O que aqui foi direção, lá torna-se caminho andado. Recuar deixa de ser uma ideia e torna-se um movimento. E regressar deixa de assustar e começa a saber a casa.
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já ficou plantada, e quando estiveres pronta, o caminho fica à tua espera.
+E se este não é o teu momento, está tudo certo assim. O que leste é teu para sempre, e o caminho de regresso não tem prazo: espera por ti o tempo que precisares.
 
 Mas antes de fechares estas páginas, peço-te uma coisa só. Hoje, faz uma pergunta a ti mesma, uma daquelas que adiaste há muito tempo. Não precisas de a responder. Só de a fazer, e de reparar no que ela mexe. Porque cada pergunta que voltas a fazer sobre ti é um passo de regresso. E o regresso, como qualquer viagem, começa com um único passo, dado hoje, por ti. Não tens de saber o caminho todo. Só de dar o primeiro passo, e depois o seguinte, e confiar que a vida, que ensinou tanto ao teu filho, ainda tem muito para te ensinar a ti.
 

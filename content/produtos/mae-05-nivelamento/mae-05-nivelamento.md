@@ -177,19 +177,19 @@ Sabes, no fundo, a frase onde este livro inteiro se chora: não preciso de vos t
 
 E talvez, lá no fundo, comece a fazer sentido a frase mais difícil de todas: posso alegrar-me com aquilo que construíste. Cada um, um de cada vez, por inteiro, sem culpa.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz a ler. Faz-se a atravessar.
+Compreender já abriu uma fresta. Mas as frestas não se atravessam a ler: atravessam-se a dar o primeiro passo do outro lado.
 
 Foi para essa travessia que criei o **FreeMe**.
 
-O FreeMe não é um curso, não é mais informação para acrescentar à que já tens. É uma travessia guiada que fazes por dentro, ao teu ritmo, para pousares o que carregas e deixares cada filho seguir o seu destino. Para uma mãe como tu, que amou tanto que quis manter tudo unido, há um caminho pensado para a tua dor: o medo da diferença, a culpa pela desigualdade, a dívida que distribuíste sem querer, e a coragem de abençoar em vez de nivelar. Não para deixares de amar os teus filhos, nem de os manter ligados, que isso é a tua intenção mais bonita. Para descobrires que a união mais forte é a que deixa cada um ser livre.
+O FreeMe não é informação para arrumar na cabeça. É um caminho para se percorrer com o corpo todo. É uma travessia guiada que fazes por dentro, ao teu ritmo, para pousares o que carregas e deixares cada filho seguir o seu destino. Para uma mãe como tu, que amou tanto que quis manter tudo unido, há um caminho pensado para a tua dor: o medo da diferença, a culpa pela desigualdade, a dívida que distribuíste sem querer, e a coragem de abençoar em vez de nivelar. Não para deixares de amar os teus filhos, nem de os manter ligados, que isso é a tua intenção mais bonita. Para descobrires que a união mais forte é a que deixa cada um ser livre.
 
 E quero dizer-te uma última coisa sobre o que esta travessia te devolve a ti, porque ela não é só para os teus filhos. Durante anos foste a guardiã do equilíbrio, a que media, a que ajustava, a que carregava a contabilidade emocional da família inteira. Quando pousas esse papel, quando deixas que cada vida siga o seu curso, recebes de volta uma coisa que tinhas perdido: a leveza de seres mãe sem seres gestora. Podes finalmente desfrutar de cada filho sem o peso de o ter de equilibrar com os outros. Podes ouvir a alegria de um sem te angustiares pela tristeza de outro no mesmo instante. Podes amar em paz, cada um por inteiro, sem a tensão permanente de manter a balança. E descobres que essa paz, que parecia impossível, sempre esteve à tua espera do outro lado do medo da diferença.
 
-Lá, as frases que aqui leste em silêncio dizem-se devagar, com espaço para o corpo as ouvir. "O teu sucesso não retira nada ao teu irmão." "A tua vida pertence-te." "Cada um ocupa o seu lugar." O que aqui foi mapa, lá é caminho. Abençoar deixa de ser uma ideia e torna-se um gesto. E a diferença deixa de assustar e começa a parecer apenas o que sempre foi: a vida, em cada um dos teus filhos, a tomar a sua própria forma.
+Lá, as frases que aqui leste em silêncio são ditas devagar, com espaço para o corpo as acolher. "O teu sucesso não retira nada ao teu irmão." "A tua vida pertence-te." "Cada um ocupa o seu lugar." O que aqui foi mapa, lá torna-se travessia viva. Abençoar deixa de ser uma ideia e torna-se um gesto. E a diferença deixa de assustar e começa a parecer apenas o que sempre foi: a vida, em cada um dos teus filhos, a tomar a sua própria forma.
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já ficou plantada, e quando estiveres pronta, o caminho fica à tua espera.
+E se não é agora, não faz mal. O que leste fica contigo, semente paciente, e o caminho aguarda, inteiro, a tua vez.
 
 E quero deixar-te com uma imagem que talvez te acompanhe. Pensa numa mãe pássaro com vários filhos no ninho. Chega o tempo de voarem, e cada um voa à sua maneira: um cedo, outro tarde, um alto, outro baixo, um para longe, outro fica por perto. A mãe não os obriga a voar todos à mesma altura, nem trava o que voa mais alto para esperar pelo que ainda hesita. Deixa cada um encontrar o seu céu. E continua a ser mãe de todos, do que foi longe e do que ficou perto, sem que a distância de um seja uma traição nem a hesitação do outro uma vergonha. Abençoar é isto: deixar cada filho encontrar o seu próprio céu, e alegrar-te com cada voo, mesmo os que te levam para longe, mesmo os que demoram, porque cada um é o voo certo para aquele filho.
 

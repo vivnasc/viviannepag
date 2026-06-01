@@ -173,17 +173,17 @@ Sabes, no fundo, a frase que segura este livro inteiro: posso amar-te mesmo quan
 
 E talvez, lá no fundo, comece a fazer sentido a frase mais funda de todas: o teu voo não é a minha perda.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz a ler. Faz-se a atravessar.
+Foi pela compreensão que chegaste aqui. Mas a compreensão é o limiar de uma porta; a passagem só se faz atravessando-a, e isso não se lê.
 
 Foi para essa travessia que criei o **FreeMe**.
 
-O FreeMe não é um curso, não é mais informação para acrescentar à que já tens. É uma travessia guiada que fazes por dentro, ao teu ritmo, para atravessares a passagem e renasceres do outro lado. Para uma mãe como tu, que cumpriu e ficou sozinha na margem, há um caminho pensado para a tua travessia: o luto sem funeral, a identidade que tem de morrer, a pergunta certa, o renascimento numa vida que volta a ser tua. Não para deixares de ser mãe, que isso não deixarás nunca. Para descobrires quem és quando a vida, enfim, te devolve a ti própria.
+O FreeMe não é mais nada para aprenderes. É um lugar para atravessares uma passagem. É uma travessia guiada que fazes por dentro, ao teu ritmo, para atravessares a passagem e renasceres do outro lado. Para uma mãe como tu, que cumpriu e ficou sozinha na margem, há um caminho pensado para a tua travessia: o luto sem funeral, a identidade que tem de morrer, a pergunta certa, o renascimento numa vida que volta a ser tua. Não para deixares de ser mãe, que isso não deixarás nunca. Para descobrires quem és quando a vida, enfim, te devolve a ti própria.
 
-Lá, as frases que aqui leste em silêncio dizem-se devagar, com espaço para o corpo as ouvir. "Cumpri o que era meu cumprir." "A tua partida é a prova de que dei o suficiente." "Já não sou necessária da mesma forma, e posso ser inteira na mesma." O que aqui foi mapa, lá é caminho. Aceitar deixa de ser uma ideia e torna-se um sim vivido. E o renascimento deixa de assustar e começa a parecer o que é: o início da tua segunda vida.
+Lá, as frases que aqui leste no silêncio são ditas devagar, com tempo para o corpo as deixar entrar. "Cumpri o que era meu cumprir." "A tua partida é a prova de que dei o suficiente." "Já não sou necessária da mesma forma, e posso ser inteira na mesma." O que aqui foi mapa, lá torna-se a travessia em si. Aceitar deixa de ser uma ideia e torna-se um sim vivido. E o renascimento deixa de assustar e começa a parecer o que é: o início da tua segunda vida.
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já ficou plantada, e quando estiveres pronta, o caminho fica à tua espera.
+E se este não é o momento, está tudo bem. O que leste fica contigo, e este caminho, como tu agora, sabe esperar o seu tempo.
 
 E quero deixar-te com uma verdade que talvez só se entenda de dentro desta travessia. A maternidade não foi um desvio da tua vida verdadeira, uma pausa entre quem eras antes e quem voltarás a ser. Foi uma das obras mais importantes que um ser humano pode fazer, e não foi em vão, e não acabou em nada, acabou em pessoas inteiras que andam pelo mundo a viver, a amar, a construir, por causa do que tu lhes deste. Isso fica. Não se perde com a partida deles. Está nelas, e estará nos filhos delas, e no que elas tocarem. Olhar para trás e ver não tempo perdido, mas uma obra cumprida, é uma forma de paz. E olhar para a frente e ver não um fim, mas uma vida que continua, agora mais tua, é uma forma de esperança. As duas, a paz com o que foi e a esperança no que vem, são o que te espera do outro lado deste silêncio.
 

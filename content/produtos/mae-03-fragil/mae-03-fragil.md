@@ -191,17 +191,17 @@ E talvez, lá no fundo, comecem a fazer sentido as duas frases mais difíceis de
 
 E talvez a maior surpresa de toda esta travessia seja esta: que sustentar em vez de salvar não é amar menos, é amar com mais confiança. O resgate, no fundo, contém uma desconfiança escondida na própria força do filho. Sustentar contém uma fé: a fé de que ele é, ou pode tornar-se, mais capaz do que o medo deixa ver. E os filhos sentem a diferença entre uma mãe que os ampara porque não acredita que eles aguentem, e uma mãe que os ampara enquanto eles aprendem a aguentar. A primeira, sem querer, confirma a fragilidade. A segunda convida a força. O mesmo gesto de amor, mas com uma mensagem oposta por baixo, e é a mensagem que fica, e que molda quem o teu filho acredita que é.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz a ler. Faz-se a atravessar.
+Compreender já mexeu alguma coisa em ti, e isso sente-se. Mas a compreensão é uma margem; a outra atravessa-se com o corpo, não com os olhos.
 
 Foi para essa travessia que criei o **FreeMe**.
 
-O FreeMe não é um curso, não é mais informação para acrescentar à que já tens. É uma travessia guiada que fazes por dentro, ao teu ritmo, para deixares de viver pela vida de outra pessoa e voltares a existir na tua. Para uma mãe como tu, que se gastou inteira a salvar, há um caminho pensado para a tua dor: o medo de largar, a culpa de cuidar de ti, a salvadora que se tornou identidade, a coragem de sustentar sem substituir, o reencontro com a mulher que existe por baixo da cuidadora. Não para deixares de amparar o teu filho, que isso é amor e mantém-se. Para descobrires que a força dele, e a tua vida, estavam à espera do espaço que só tu lhes podes abrir.
+O FreeMe não se lê nem se consome. Vive-se, por dentro, ao teu ritmo. É uma travessia guiada que fazes por dentro, ao teu ritmo, para deixares de viver pela vida de outra pessoa e voltares a existir na tua. Para uma mãe como tu, que se gastou inteira a salvar, há um caminho pensado para a tua dor: o medo de largar, a culpa de cuidar de ti, a salvadora que se tornou identidade, a coragem de sustentar sem substituir, o reencontro com a mulher que existe por baixo da cuidadora. Não para deixares de amparar o teu filho, que isso é amor e mantém-se. Para descobrires que a força dele, e a tua vida, estavam à espera do espaço que só tu lhes podes abrir.
 
-Lá, as frases que aqui leste em silêncio dizem-se devagar, com espaço para o corpo as ouvir. "Posso estar perto sem fazer por ti." "Confio na força que ainda não viste em ti." "Sou mais do que a pessoa que resolve." O que aqui foi mapa, lá é caminho. Sustentar deixa de ser uma ideia e torna-se um gesto. E existir deixa de assustar e começa a saber a regresso.
+Lá, as frases que aqui leste calada dizem-se devagar, com espaço para as sentires, não só para as entenderes. "Posso estar perto sem fazer por ti." "Confio na força que ainda não viste em ti." "Sou mais do que a pessoa que resolve." O que aqui foi mapa, lá passa a ser passo dado. Sustentar deixa de ser uma ideia e torna-se um gesto. E existir deixa de assustar e começa a saber a regresso.
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já ficou plantada, e quando estiveres pronta, o caminho fica à tua espera.
+E se ainda não é a tua hora, está bem assim. O que leste já te pertence, e fica plantado, à espera, para o dia em que te sentires pronta.
 
 E quero deixar-te com uma última imagem, porque ela resume tudo. Durante anos seguraste o teu filho como se segura uma coisa que pode cair, com as duas mãos, com força, sem nunca o pousar. E o teu braço, ao fim de tanto tempo nessa posição, ficou dorido, e o teu filho, ao fim de tanto tempo seguro assim, nunca aprendeu a estar de pé sozinho. Sustentar é descobrir que há outra forma de o segurar: com uma mão por baixo, leve, presente, que não impede que ele encontre o próprio equilíbrio, mas que está lá se ele oscilar. Não é largar. É segurar de outra maneira, uma maneira que deixa lugar à força dele e descanso ao teu braço. E nesse novo modo de segurar, os dois ganham: ele, a possibilidade de se aguentar; tu, a possibilidade de teres outra vez mãos livres para a tua própria vida.
 

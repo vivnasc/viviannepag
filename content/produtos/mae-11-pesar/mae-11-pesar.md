@@ -163,17 +163,17 @@ Sabes, no fundo, a frase que segura este livro inteiro: posso receber sem me tor
 
 E talvez, lá no fundo, comece a desfazer-se a ferida mais antiga, na frase mais funda de todas: continuo a ser digna de amor mesmo quando já não sou a que cuida.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz a ler. Faz-se a atravessar.
+Compreender já é muito, e nesta fase da vida é precioso. Mas a seguir ao compreender há um passo que não se lê, vive-se, deixando-se.
 
 Foi para essa travessia que criei o **FreeMe**.
 
-O FreeMe não é um curso, não é mais informação para acrescentar à que já tens. É uma travessia guiada que fazes por dentro, ao teu ritmo, para pousares a crença de que só vales quando dás e para te permitires, enfim, receber. Para uma mãe como tu, que passou a vida a não pesar e que agora teme tornar-se um fardo, há um caminho pensado para a tua ferida: o medo de pesar, a identidade da utilidade, a coragem de pedir, e a descoberta serena de que continuas digna de amor mesmo quando já não és a que cuida. Não para deixares de dar, que dar foi e é o teu amor. Para aprenderes que também tens direito a receber, e que receber, nesta fase, é uma das formas mais altas de amar e de te deixares amar.
+O FreeMe não é informação a mais para uma vida que já viveu tanto. É um espaço para, enfim, te deixares acompanhar. É uma travessia guiada que fazes por dentro, ao teu ritmo, para pousares a crença de que só vales quando dás e para te permitires, enfim, receber. Para uma mãe como tu, que passou a vida a não pesar e que agora teme tornar-se um fardo, há um caminho pensado para a tua ferida: o medo de pesar, a identidade da utilidade, a coragem de pedir, e a descoberta serena de que continuas digna de amor mesmo quando já não és a que cuida. Não para deixares de dar, que dar foi e é o teu amor. Para aprenderes que também tens direito a receber, e que receber, nesta fase, é uma das formas mais altas de amar e de te deixares amar.
 
-Lá, as frases que aqui leste em silêncio dizem-se devagar, com espaço para o corpo as ouvir. "A minha dignidade não depende da minha capacidade de dar." "Tenho direito a precisar." "Continuo a ser digna de amor mesmo quando já não sou a que cuida." O que aqui foi mapa, lá é caminho. Receber deixa de ser uma ideia e torna-se um gesto. E o medo de pesar começa, devagar, a dar lugar a uma paz nova: a de quem se permite, enfim, ser cuidada.
+Lá, as frases que aqui leste em silêncio são ditas devagar, com espaço e calma para o corpo as receber. "A minha dignidade não depende da minha capacidade de dar." "Tenho direito a precisar." "Continuo a ser digna de amor mesmo quando já não sou a que cuida." O que aqui foi mapa, lá torna-se caminho percorrido sem pressa. Receber deixa de ser uma ideia e torna-se um gesto. E o medo de pesar começa, devagar, a dar lugar a uma paz nova: a de quem se permite, enfim, ser cuidada.
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se não é o momento, está tudo bem. O que leste aqui já é teu. A semente já ficou plantada, e quando estiveres pronta, o caminho fica à tua espera.
+E se ainda não é o momento, está tudo bem, e há tempo. O que leste já é teu, e o caminho espera por ti, com a paciência que esta fase merece.
 
 E quero deixar-te com uma imagem para guardares, porque ela diz o que tantas palavras tentaram dizer. Imagina uma árvore antiga, daquelas que durante décadas deram sombra, fruto, abrigo a quem passava. Chega um tempo em que essa árvore já não dá tanto fruto, em que os ramos pesam, em que ela própria precisa de ser amparada, escorada, cuidada por quem antes abrigou. E ninguém olha para essa árvore e pensa que ela deixou de ter valor, que se tornou um peso, que devia envergonhar-se de já não dar como dava. Olha-se para ela com reverência, precisamente pelos anos que tem, pela sombra que deu, por tudo o que abrigou, e cuida-se dela com gratidão, como se cuida do que é precioso. Tu és essa árvore. Deste sombra e fruto e abrigo a vida inteira. E se agora precisas de ser amparada, isso não te tira o valor, ao contrário, é o reconhecimento de tudo o que deste, e o cuidado que recebes é a gratidão a tomar forma. Deixa que te amparem, como amparaste. É a ordem mais natural e mais bela do mundo.
 
