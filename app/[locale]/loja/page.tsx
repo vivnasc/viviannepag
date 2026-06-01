@@ -236,7 +236,7 @@ export default async function LojaPage({
                       className={`text-[0.74rem] px-3 py-1.5 rounded-full border transition-colors no-underline ${
                         ativo
                           ? 'border-ocre/40 text-creme hover:border-ambar hover:text-ambar'
-                          : 'border-creme-2/15 text-creme-2/40'
+                          : 'border-creme-2/25 text-creme-2/65'
                       }`}
                     >
                       <span className="opacity-50 mr-1">{c.romano}</span>
@@ -253,8 +253,8 @@ export default async function LojaPage({
                   <h2 className="font-serif font-light text-creme text-[1.6rem]">
                     {isPt ? 'Travessias' : 'Crossings'}
                   </h2>
-                  <div className="flex-1 h-px bg-ocre/15" />
-                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
+                  <div className="flex-1 h-px bg-ocre/25" />
+                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
                     {isPt ? 'programas guiados' : 'guided programs'}
                   </span>
                 </div>
@@ -284,10 +284,10 @@ export default async function LojaPage({
                       <h3 className="font-serif font-normal text-creme text-[1.4rem] mb-2 group-hover:text-ambar transition-colors">
                         {t.titulo}
                       </h3>
-                      <p className="text-creme-2/70 text-[0.85rem] leading-[1.55]">
+                      <p className="text-creme-2/85 text-[0.88rem] leading-[1.55]">
                         {t.texto}
                       </p>
-                      <span className="block mt-4 text-ocre/60 text-[0.78rem] group-hover:text-ambar transition-colors">
+                      <span className="block mt-4 text-ambar/90 text-[0.82rem] group-hover:text-ambar transition-colors">
                         {isPt ? 'saber mais →' : 'learn more →'}
                       </span>
                     </a>
@@ -303,19 +303,19 @@ export default async function LojaPage({
                   <section key={c.id} id={`colecao-${c.id}`} className="mb-20 scroll-mt-24">
                     <div className="mb-8">
                       <div className="flex items-baseline gap-3 mb-2">
-                        <span className="font-serif text-ocre/60 text-[1rem]">{c.romano}</span>
+                        <span className="font-serif text-ocre text-[1.05rem]">{c.romano}</span>
                         <h2 className="font-serif font-light text-creme text-[1.7rem]">
                           {isPt ? c.nome : c.nome_en}
                         </h2>
-                        <div className="flex-1 h-px bg-ocre/15 mx-2" />
-                        <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre/50">
+                        <div className="flex-1 h-px bg-ocre/25 mx-2" />
+                        <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
                           {lista.length} {isPt ? (lista.length === 1 ? 'título' : 'títulos') : (lista.length === 1 ? 'title' : 'titles')}
                         </span>
                       </div>
-                      <p className="text-creme-2/75 text-[0.95rem] leading-[1.6] max-w-[640px]">
+                      <p className="text-creme-2/90 text-[0.95rem] leading-[1.6] max-w-[640px]">
                         {isPt ? c.pitch : c.pitch_en}
                       </p>
-                      <p className="text-ocre/60 text-[0.74rem] tracking-[0.05em] mt-2">
+                      <p className="text-ocre/85 text-[0.78rem] tracking-[0.05em] mt-2">
                         {isPt ? c.feridas : c.feridas_en}
                       </p>
                     </div>
@@ -336,9 +336,9 @@ export default async function LojaPage({
                       {lista.map(renderCard)}
                     </div>
                     {c.travessia && (
-                      <p className="text-[0.78rem] text-ocre/60 mt-6">
+                      <p className="text-[0.82rem] text-creme-2/80 mt-6">
                         {isPt ? 'Travessia desta coleção: ' : 'Crossing for this collection: '}
-                        <a href={c.travessia} target="_blank" rel="noopener noreferrer" className="text-ambar hover:underline">
+                        <a href={c.travessia} target="_blank" rel="noopener noreferrer" className="text-ambar hover:underline font-medium">
                           {c.nome} →
                         </a>
                       </p>
@@ -361,15 +361,15 @@ export default async function LojaPage({
                       <div
                         key={c.id}
                         id={`colecao-${c.id}`}
-                        className="rounded-[18px] border border-creme-2/15 p-5 opacity-70 scroll-mt-24"
+                        className="rounded-[18px] border border-creme-2/30 p-5 scroll-mt-24"
                       >
                         <div className="flex items-baseline gap-2 mb-1.5">
-                          <span className="font-serif text-ocre/40 text-[0.92rem]">{c.romano}</span>
-                          <h3 className="font-serif text-creme text-[1.15rem]">
+                          <span className="font-serif text-ocre/80 text-[0.95rem]">{c.romano}</span>
+                          <h3 className="font-serif text-creme/90 text-[1.18rem]">
                             {isPt ? c.nome : c.nome_en}
                           </h3>
                         </div>
-                        <p className="text-creme-2/60 text-[0.85rem] leading-[1.55]">
+                        <p className="text-creme-2/80 text-[0.88rem] leading-[1.55]">
                           {isPt ? c.pitch : c.pitch_en}
                         </p>
                       </div>
