@@ -54,21 +54,39 @@ const PALETTES = {
     textoSuave: '#6B5548',
     ouro: '#EBAE4A',
   },
-  // Infonte: clareza e propósito. Azul-tinta (aurora antes do dia) + âmbar.
+  // Infonte: terra, ocre, sereno (marca Sete Ecos). Calmo, espaçado.
   infonte: {
-    barro: '#2E4057',
-    barroEscuro: '#1B2A3A',
-    barroClaro: '#4C6079',
-    areia: '#EAF1F5',
-    creme: '#F4F3EE',
-    cremeEscuro: '#E7E4DA',
-    salvia: '#7E8794',
-    texto: '#20272E',
-    textoSuave: '#54606B',
-    ouro: '#D7A24A',
+    barro: '#5C3D24',
+    barroEscuro: '#3A2A1C',
+    barroClaro: '#8A5E34',
+    areia: '#F2E8DC',
+    creme: '#F2E8DC',
+    cremeEscuro: '#E7DAC8',
+    salvia: '#6B6B47',
+    texto: '#2A2018',
+    textoSuave: '#6B5A48',
+    ouro: '#B8843D',
   },
 };
 const LABELS = { freeme: 'FreeMe', infonte: 'Infonte' };
+// Fontes por mundo (só os mundos que divergem do default Fraunces/Outfit).
+const FONTS = {
+  infonte: {
+    serif: "'EB Garamond'",
+    sans: "'Inter'",
+    importUrl: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap',
+  },
+};
+// Aplica as fontes do mundo ao HTML. Para freeme (sem entrada em FONTS) devolve
+// o HTML intacto, por isso o FreeMe fica byte-idêntico.
+function applyFonts(html, mundo) {
+  const f = FONTS[mundo];
+  if (!f) return html;
+  return html
+    .replace(/@import url\('https:\/\/fonts\.googleapis\.com[^']*'\);/, `@import url('${f.importUrl}');`)
+    .replace(/'Fraunces'/g, f.serif)
+    .replace(/'Outfit'/g, f.sans);
+}
 // Default mantém o comportamento antigo (barro) para qualquer referência solta.
 const COLORS = PALETTES.freeme;
 
@@ -800,7 +818,7 @@ async function renderUm(slug, mundoOverride) {
   const { capa, porCapitulo, lane, total } = distribuirImagens(imagens, ebook.chapters.length, slug, mundo);
   console.log(`  [lane ${lane}/${total}] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
-  const html = buildHtml(ebook, capa, porCapitulo, mundo);
+  const html = applyFonts(buildHtml(ebook, capa, porCapitulo, mundo), mundo);
   const tmpPdf = path.join('/tmp', `${slug}.pdf`);
 
   const browser = await puppeteer.launch({
