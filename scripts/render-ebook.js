@@ -39,18 +39,38 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
 const EBOOK_PATH = path.join(__dirname, '..', 'content', 'produtos', SLUG, `${SLUG}.md`);
 const TMP_PDF = path.join('/tmp', `${SLUG}.pdf`);
 
-const COLORS = {
-  barro: '#8C4A36',
-  barroEscuro: '#5A3D2E',
-  barroClaro: '#9A5A43',
-  areia: '#F3E4D6',
-  creme: '#F1E8DD',
-  cremeEscuro: '#E8DCC9',
-  salvia: '#7D8A6A',
-  texto: '#3D2B1F',
-  textoSuave: '#6B5548',
-  ouro: '#EBAE4A',
+// Paletas por mundo. As chaves mantêm-se iguais em todos os mundos (o CSS usa
+// ${COLORS.barro} etc.), por isso muda-se só de paleta, nunca o CSS editorial.
+const PALETTES = {
+  freeme: {
+    barro: '#8C4A36',
+    barroEscuro: '#5A3D2E',
+    barroClaro: '#9A5A43',
+    areia: '#F3E4D6',
+    creme: '#F1E8DD',
+    cremeEscuro: '#E8DCC9',
+    salvia: '#7D8A6A',
+    texto: '#3D2B1F',
+    textoSuave: '#6B5548',
+    ouro: '#EBAE4A',
+  },
+  // Infonte: clareza e propósito. Azul-tinta (aurora antes do dia) + âmbar.
+  infonte: {
+    barro: '#2E4057',
+    barroEscuro: '#1B2A3A',
+    barroClaro: '#4C6079',
+    areia: '#EAF1F5',
+    creme: '#F4F3EE',
+    cremeEscuro: '#E7E4DA',
+    salvia: '#7E8794',
+    texto: '#20272E',
+    textoSuave: '#54606B',
+    ouro: '#D7A24A',
+  },
 };
+const LABELS = { freeme: 'FreeMe', infonte: 'Infonte' };
+// Default mantém o comportamento antigo (barro) para qualquer referência solta.
+const COLORS = PALETTES.freeme;
 
 // ─── parsing do markdown em capitulos ───
 
@@ -149,7 +169,7 @@ async function fetchImagensMundo(mundo) {
 // Mapeia slug -> mundo automaticamente. Replica a logica do gerarLegendas
 // em /admin/produtos para consistencia. Default: freeme.
 function slugToMundo(slug) {
-  if (/sonho|voz|mente|teu/.test(slug)) return 'infonte';
+  if (/^inf-/.test(slug) || /sonho|voz|mente|teu/.test(slug)) return 'infonte';
   if (/casal|perguntas/.test(slug)) return 'synchim';
   if (/quemes|sentido|escuro|presenca/.test(slug)) return 'escola';
   return 'freeme';
@@ -204,7 +224,8 @@ function distribuirImagens(imagens, nChapters, slug, mundo) {
 
 // ─── HTML builder ───
 
-function buildHtml(ebook, capa, porCapitulo) {
+function buildHtml(ebook, capa, porCapitulo, mundo = 'freeme') {
+  const COLORS = PALETTES[mundo] || PALETTES.freeme;
   const chaptersHtml = ebook.chapters.map((ch, i) => {
     const img = porCapitulo[i];
     const bodyHtml = marked.parse(ch.md);
@@ -706,7 +727,7 @@ function buildHtml(ebook, capa, porCapitulo) {
     <h1 class="capa-titulo">${ebook.titulo}</h1>
     <p class="capa-subtitulo">${ebook.subtitulo}</p>
     <div class="capa-linha"></div>
-    <p class="capa-autora">Ebook · ${MUNDO === 'freeme' ? 'FreeMe' : MUNDO}</p>
+    <p class="capa-autora">Ebook · ${LABELS[mundo] || (MUNDO === 'freeme' ? 'FreeMe' : MUNDO)}</p>
   </div>
 </div>
 
@@ -779,7 +800,7 @@ async function renderUm(slug, mundoOverride) {
   const { capa, porCapitulo, lane, total } = distribuirImagens(imagens, ebook.chapters.length, slug, mundo);
   console.log(`  [lane ${lane}/${total}] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
-  const html = buildHtml(ebook, capa, porCapitulo);
+  const html = buildHtml(ebook, capa, porCapitulo, mundo);
   const tmpPdf = path.join('/tmp', `${slug}.pdf`);
 
   const browser = await puppeteer.launch({
