@@ -1,33 +1,23 @@
-# Uma só pergunta, em sete roupas
-### Abertura do universo inteiro
+# A mesma travessia
+### Abertura, Coleção I, FreeMe Mãe
 
-Se tens mais do que um destes livros na mão, talvez já tenhas reparado numa coisa estranha.
+A pergunta desta coleção é uma só: o que estou a carregar que não é meu?
 
-Parecem falar de assuntos diferentes. Maternidade. Propósito. Dinheiro. Amor. Família. Sobrevivência. Trabalho. Mas, à medida que os lês, vai-se tornando claro que não são sete assuntos. São uma só pergunta, a vestir sete roupas.
+Não sei qual foi a dor que te trouxe até aqui. Talvez a culpa que aparece à noite. Um filho que não larga a tua mão, ou um que largou e não voltou. O cansaço de tentar salvar, de querer unir, de não conseguir dizer basta. Ou o medo de um dia pesares a alguém.
 
-No FreeMe ela pergunta: o que estou a carregar que não é meu?
-No Infonte: o que estou a perseguir que não é meu?
-Na Prosperidade: o que me impede de receber o que é meu?
-Na SyncHim: o que me faz perder-me quando amo?
-Na Pertença: qual é o meu lugar entre os outros?
-Na Força: o que tive de me tornar para sobreviver?
-No Trabalho: quem sou eu sem aquilo que faço?
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
 
-E todas, sem exceção, desembocam no mesmo sítio:
+Durante muito tempo acreditaste que amar era carregar. Que uma boa mãe segura tudo, resolve tudo, sustenta tudo, e nunca pesa, nunca falha, nunca precisa. Que o amor se mede pelo que se aguenta.
 
-Posso ocupar o meu lugar sem carregar, sem provar, sem salvar, sem perseguir e sem desaparecer?
+Não se mede assim.
 
-Estes livros não são sobre emoções. Repara nos seus títulos. A mãe que quis unir. A que ficou responsável cedo demais. A que paga para pertencer. A que ama a ausência. A que trabalha para merecer. Não são sentimentos. São papéis. Personagens interiores que uma pessoa habita durante vinte, trinta anos, sem nunca lhes ter dado um nome.
+Há um momento, em cada uma destas histórias, em que o amor deixa de ser fusão e começa a ser relação. Em que parar de carregar não é abandonar. Unir não é fundir. Amar não é desaparecer dentro de quem se ama.
 
-E é isso que aqui te ofereço, antes de qualquer outra coisa: um nome. Porque no dia em que encontras o nome daquilo que vives há tanto tempo, acontece algo que muda tudo. Deixas de achar que és um defeito, e percebes que estás dentro de um padrão. E um padrão, ao contrário de um defeito, pode mudar.
+Estes livros não te vão ensinar a ser melhor mãe. Vão devolver-te a pergunta que ficou por baixo de tudo: o que é que tu andas a carregar que nunca foi teu para carregar?
 
-No fundo, isto não é uma coleção de livros. É um mapa das formas mais comuns de uma pessoa se afastar de si própria. Cada livro é um caminho de regresso.
+Não te prometo transformação ao virar a página. O que estas páginas te dão é compreensão, um nome, a certeza de que não estás sozinha nem a falhar. A travessia funda faz-se devagar, e às vezes com quem te acompanhe.
 
-E há uma coisa que talvez só notes no fim, quando vires os verbos todos lado a lado. Devolver. Confiar. Recuar. Regressar. Ocupar. Receber. Pousar. Descansar. Distinguir. Escolher. Nenhum deles te manda conquistar mais. Nenhum te manda longe. Todos, sem exceção, te mandam voltar.
-
-Porque o lugar que procuras nunca esteve à frente. Esteve sempre aqui, à tua espera, por baixo de tudo o que carregaste, perseguiste, provaste e seguraste para não o sentires vazio.
-
-Escolhe a porta que for a tua. A travessia, em todas, é a mesma.
+Mas ver já muda alguma coisa. Seja qual for a porta por onde entraste, a saída é a mesma: pousar o que não é teu, e voltar a ti, sem deixares de os amar.
 
 Com toda a minha ternura,
 Vivianne

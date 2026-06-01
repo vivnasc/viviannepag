@@ -1,19 +1,19 @@
 # A mesma travessia
-### Abertura, Coleção V, Pertença
+### Abertura, Coleção VI, Força
 
-A pergunta desta coleção é uma só: qual é o meu lugar entre os outros?
+A pergunta desta coleção é uma só: o que tive de me tornar para sobreviver?
 
-Olha para a tua vida e repara. És tu que seguras. Que fazes a ponte entre os que não se falam. Que nunca dás trabalho. Que ficas para o fim, que cedes o lugar, que organizas tudo para que ninguém se afaste.
+Toda a gente te acha forte. És tu que aguentas, que resolves, que não cais, que não pedes, que não incomodas. O que ninguém vê é o que essa força te custa, nem de onde veio.
 
-Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
+Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia. E estas são diferentes das outras deste universo, por isso preciso de te dizer uma coisa logo no início.
 
-Algures, muito cedo, aprendeste como ter direito a um lugar entre as pessoas. Aprendeste se para pertencer tinhas de ser útil, de desaparecer, de segurar, de esperar a tua vez, de nunca incomodar. Algumas de vós ficaram responsáveis cedo demais, foram adultas antes de tempo, e dessa ferida nasceram quase todas as outras.
+Aqui não há propriamente um padrão errado a corrigir. Há uma adaptação que um dia te manteve viva. Tornaste-te impecável porque falhar custava. Deixaste de pedir porque ninguém vinha. Fizeste-te pequena porque ocupar espaço trazia consequências. Endureceste porque não houve ninguém forte por ti. Nada disto é defeito. Tudo isto foi inteligência de sobrevivência.
 
-Estes livros não te vão ensinar a cortar com a tua família nem a deixar de te importares. O contrário disso. Vão devolver-te o teu lugar, aquele que cedeste para caber, para servir, para não pesar.
+Por isso, com estas feridas, às vezes compreender não chega. Algumas pedem apoio, tempo, e por vezes alguém preparado para te acompanhar de perto. Procurar esse apoio não é fraqueza. É a forma mais corajosa de força que existe.
 
-Não te prometo pertença ao virar a página. O que estas páginas te dão é a clareza de ver o lugar que ocupaste, e o que te custou ocupá-lo. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
+Estes livros vão mostrar-te o que a tua força protegeu, e o que continua a guardar muito depois de o perigo ter passado. Não te vão pedir que deixes de ser forte. Vão perguntar-te, com cuidado, se podes pousar a armadura quando estás em segurança.
 
-Mas reparar onde te apagaste já é começar a aparecer. E pertencer a sério só é possível quando há ali alguém inteiro, no seu lugar, para pertencer.
+Porque já não estás naquele perigo. E talvez, pela primeira vez, possas voltar a viver para além dele.
 
 Com toda a minha ternura,
 Vivianne

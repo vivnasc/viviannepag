@@ -1,21 +1,19 @@
 # A mesma travessia
-### Abertura, Coleção IV, SyncHim
+### Abertura, Coleção V, Pertença
 
-A pergunta desta coleção é uma só: o que me faz perder-me quando amo?
+A pergunta desta coleção é uma só: qual é o meu lugar entre os outros?
 
-Tu não és má a amar. Amas de mais, talvez. Ou amas o que foge, ou desapareces dentro de quem amas, ou esperas sentada que te escolham, ou confundes a tempestade com paixão. Mas má, não és.
+Olha para a tua vida e repara. És tu que seguras. Que fazes a ponte entre os que não se falam. Que nunca dás trabalho. Que ficas para o fim, que cedes o lugar, que organizas tudo para que ninguém se afaste.
 
 Cada livro nasceu de uma dor diferente. Mas todos contam a mesma travessia.
 
-O problema não começou neste homem. Começou atrás, num amor de origem que te ensinou o que esperar, o que pedir, o que aguentar, o que valer. Aprendeste se o amor se persegue ou se recebe, se tens de te tornar útil para ficar, se baixar a guarda é perigo. E levas isso, sem saber, para dentro de cada relação.
+Algures, muito cedo, aprendeste como ter direito a um lugar entre as pessoas. Aprendeste se para pertencer tinhas de ser útil, de desaparecer, de segurar, de esperar a tua vez, de nunca incomodar. Algumas de vós ficaram responsáveis cedo demais, foram adultas antes de tempo, e dessa ferida nasceram quase todas as outras.
 
-Estes livros não são sobre relacionamentos. São sobre a ferida que levas para dentro do amor antes de o amor sequer começar.
+Estes livros não te vão ensinar a cortar com a tua família nem a deixar de te importares. O contrário disso. Vão devolver-te o teu lugar, aquele que cedeste para caber, para servir, para não pesar.
 
-Cada um mostra-te uma forma de fusão. Fundir-te com a ausência, com a utilidade, com o potencial dele, com o drama, com o outro até desapareceres. E a travessia, em todos, é a mesma: o amor deixar de ser fusão e voltar a ser relação. Dois que se veem, e não dois que se completam por falta.
+Não te prometo pertença ao virar a página. O que estas páginas te dão é a clareza de ver o lugar que ocupaste, e o que te custou ocupá-lo. A travessia funda faz-se ao teu ritmo, e às vezes com quem te acompanhe.
 
-Não te prometo o amor certo ao virar a página. O que estas páginas te dão é o nome do teu padrão. Compreender essa ferida é a primeira metade. A outra metade faz-se a dois, e isso é onde a SyncHim entra.
-
-Mas primeiro, tu. Porque antes de o amor poder ser relação, tens de voltar a existir dentro dele.
+Mas reparar onde te apagaste já é começar a aparecer. E pertencer a sério só é possível quando há ali alguém inteiro, no seu lugar, para pertencer.
 
 Com toda a minha ternura,
 Vivianne
