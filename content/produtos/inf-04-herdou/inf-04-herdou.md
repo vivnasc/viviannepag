@@ -161,7 +161,7 @@ E sabes que distinguir o que é teu do que herdaste não é um ato de frieza, é
 
 Sabes, no fundo, a frase que segura este livro inteiro: posso honrar-vos sem me tornar-vos.
 
-Ver de quem é a tua vida foi o primeiro passo. Mas há um segundo, e esse não se lê, faz-se: faz-se a devolver, devagar, o que não é teu, e a escolher, peça a peça, a vida que é.
+Ver de quem é a tua vida foi o primeiro passo, e não é um passo pequeno. Mas há um segundo, e esse não se lê, faz-se: faz-se a devolver, devagar, com amor, o que não é teu, e a escolher, peça a peça, dia a dia, a vida que é verdadeiramente tua.
 
 Foi para essa travessia que criei o **Infonte**.
 
