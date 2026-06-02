@@ -477,6 +477,8 @@ E há um cuidado que quero deixar-te, sobre o tempo. Construir um centro que nun
 
 Sabes, no fundo, a frase que segura este livro. Posso permanecer comigo enquanto te amo.
 
+Regressar é também voltares a sentir o que sentes, e não o que ele sente. A teres um estado interior que é teu, que não desaba quando o dele desaba. Isso constrói-se devagar, reparando, ao longo do dia, no que tu sentes, separado do que ele sente, até voltares a ter um dentro que é só teu.
+
 Regressar foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a recuperar, devagar, o que cedeste. A reaparecer onde te tinhas apagado. E, se houver alguém ao teu lado, a aprender, a dois, a serem dois, e não um e meio.
 
 Quero deixar-te uma imagem, antes de fechar. És como um rio que, ao chegar ao mar, se entrega tão por inteiro que deixa de ser rio. Perde o nome, a margem, o curso. Dissolve-se na água salgada e desaparece.
