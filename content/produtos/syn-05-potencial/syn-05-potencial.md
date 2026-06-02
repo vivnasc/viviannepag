@@ -345,6 +345,8 @@ E quero que leves uma última coisa, sobre quem te vê. Se há quem aprenda a am
 
 A coisa mais libertadora que podes fazer por quem te vê não é continuares a acreditar no potencial de quem te magoa. É mostrares-lhes uma mulher que ama o real, que vê com os olhos abertos, que escolhe quem é, e não quem poderia ser. Às vezes uma mulher aprende a discernir, enfim, não só por si, mas para não passar a quem vem depois a mesma fé cega em quem não a merece.
 
+E quero deixar-te com uma esperança, não com um juízo. Largar o projeto não significa, necessariamente, deixá-lo. Significa veres com clareza, e a partir daí escolheres. Às vezes, ao largar a fantasia, descobres que o homem real é, afinal, bom, e que podes amá-lo melhor sem o fardo de o quereres outro. Outras vezes descobres que não é para ti, e libertas-te. Mas em ambos os casos, passas a viver no real, e o real, com tudo o que tem de imperfeito, é o único lugar onde o amor pode, de facto, acontecer.
+
 Sabes, no fundo, a frase que segura este livro. Posso amar quem és, não quem poderias ser.
 
 E quero que leves uma distinção que protege tudo. Discernir não é tornares-te incapaz de ver o bom, nem desconfiada de toda a gente, nem fechada ao amor. É o contrário: é veres melhor, com os olhos abertos, o bom e o mau, para poderes escolher com verdade. Continuas a poder amar profundamente. Apenas passas a amar uma pessoa, e não uma promessa. E isso, longe de te tirar o amor, devolve-to inteiro, porque só se ama de verdade quem se vê de verdade.
