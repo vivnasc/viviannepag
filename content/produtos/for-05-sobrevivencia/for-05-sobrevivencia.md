@@ -21,7 +21,7 @@ Talvez te sobressaltes com facilidade. Talvez durmas mal, em alerta. Talvez sint
 
 Quero dizer-te já, antes de tudo, e isto é o mais importante deste livro inteiro: o que sentes não é exagero, não é drama, não é feitio nervoso. Tem um nome. Chama-se viver em modo de sobrevivência. É o teu sistema nervoso preso num estado de alerta, como se o perigo ainda não tivesse passado, ainda que ele, no mundo lá fora, já tenha passado há muito.
 
-E isto não é uma fraqueza de carácter, nem uma falta de positividade, nem algo que se resolva a pensar positivo ou a esforçar-te por relaxar. É um fenómeno do corpo. Uma resposta do teu sistema nervoso, gravada por um tempo em que o perigo foi real, e que continua ligada, em alerta, mesmo agora que estás a salvo.
+E isto não é uma fraqueza de caráter, nem uma falta de positividade, nem algo que se resolva a pensar positivo ou a esforçar-te por relaxar. É um fenómeno do corpo. Uma resposta do teu sistema nervoso, gravada por um tempo em que o perigo foi real, e que continua ligada, em alerta, mesmo agora que estás a salvo.
 
 Por isso este livro é diferente de todos os outros. E quero ser-te muito clara, já, sem rodeios. Isto que vives não se cura só a compreender. A compreensão ajuda, e vamos fazê-la. Mas viver em modo de sobrevivência é uma resposta de trauma, e o trauma trata-se com apoio, com tempo, com o corpo, e por vezes com tratamento. Este livro acompanha-te a entender. Mas, mais do que qualquer outro, pede que procures, também, ajuda a sério.
 
