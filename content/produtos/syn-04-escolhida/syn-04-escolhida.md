@@ -279,6 +279,14 @@ Quero desfazer um receio que vai aparecer. Tornares-te sujeito não é tornares-
 
 E há uma libertação enorme em descobrires que sobrevives ao não. Que pedes, e te recusam, e não morres. Que desejas em voz alta, e nem sempre recebes, e continuas inteira. Cada não que sobrevives tira poder ao medo que te mantinha calada. E aos poucos, escolher deixa de ser aterrador, e passa a ser, simplesmente, viver.
 
+E quando te escolhes a ti, acontece uma coisa curiosa, quase paradoxal. Deixas de precisar, tão desesperadamente, de que os outros te escolham. E essa falta de desespero torna-te, sem que faças nada para isso, mais escolhível.
+
+Porque quem se oferece como quem mendiga um lugar, pesa, afasta. E quem já tem o seu lugar, que se escolheu a si, que tem a sua vida, oferece-se de outra maneira: por escolha, e não por carência. E isso atrai, porque ninguém se quer sentir o último recurso de alguém que só espera ser salva da sua própria espera.
+
+Repara na inversão. Esperaste a vida inteira ser escolhida, e foi essa espera, essa fome de seres escolhida, que te tornou menos escolhível. E no dia em que te escolheres, em que deixares de depender da escolha dos outros, descobrirás que passas a ser, também, mais desejada, não porque mudaste de aparência, mas porque mudaste de posição: de quem aguarda na fila para quem caminha pela sua vida.
+
+Mas que isto não se torne mais uma estratégia. Não te escolhas para seres escolhida. Escolhe-te porque a tua vida é tua, e merece ser vivida por ti, venha ou não venha a escolha de mais alguém. O resto, se vier, é acréscimo. O essencial é deixares de viver à espera, e começares a viver.
+
 ## 6. Decidir
 
 Há um verbo para esta travessia. Decidir.
