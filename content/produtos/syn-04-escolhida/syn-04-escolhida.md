@@ -119,6 +119,18 @@ Essa é a conta da espera. E é uma conta alta. Não é uma vida sem amor por n�
 
 E não é só no amor. É no trabalho, onde esperaste que reconhecessem o teu valor em vez de o afirmares, e viste subir quem o reclamou. É nos sonhos, que adiaste à espera de uma permissão, de um sinal, de um momento certo que nunca chegou. É na vida toda, vivida na posição de quem aguarda, enquanto os outros, os que escolhem, vão fazendo as suas.
 
+Quero mostrar-te o que o lugar de quem não decide te custa, em concreto, porque o preço é alto e quase nunca o contabilizas.
+
+Custa-te ficares com o que aparece, e não com o que queres. Quem espera ser escolhida não escolhe quem ama, escolhe entre quem a quer. E quem a quer e quem ela quereria raramente são as mesmas pessoas. Por isso acabas, tantas vezes, em relações que não escolheste, que só te escolheram, e vives com uma sensação surda de que esta não é bem a tua vida.
+
+Custa-te uma vida que sentes emprestada. Vives um guião que não foi teu, que te calhou, e por mais que o cumpras bem, há um fundo de estranheza, o de quem está a viver uma vida que aconteceu, e não uma que escolheu. Essa estranheza tem nome: é a marca de uma vida vivida na posição de objeto.
+
+Custa-te a autoestima, ainda que não vejas a ligação. Porque cada vez que esperas e não és escolhida, concluis, sem o decidir, que há algo em ti que não chega. E essa conclusão, repetida, vai-te convencendo de que vales menos, quando o que falhou não foi o teu valor, foi a tua passividade. Não és preterida por valeres pouco. És preterida por nunca te ofereceres a escolher, e por isso ficares sempre dependente de que escolham por ti.
+
+E custa-te o ressentimento. Porque uma parte de ti, lá no fundo, está zangada. Com os que escolhem, com os que avançam, com os que têm o que tu não ousaste ir buscar. E esse ressentimento, que não sabes para onde dirigir, é a raiva de quem espera contra um mundo que parece premiar quem decide. Mas o mundo não te trata mal. Tu é que ficaste à espera, enquanto os outros foram.
+
+Quero que vejas tudo isto não para te culpares mais, mas para sentires o tamanho do que a espera te tem custado. Porque é vendo o preço que se ganha a coragem de o deixar de pagar. E o preço da espera, somado ao longo de uma vida, é uma vida inteira que se viu acontecer, em vez de se ter vivido.
+
 ## 3. Escolher dá medo
 
 Vou dizer-te uma coisa que talvez te incomode. Tu não esperas por preguiça, nem por falta de vontade. Esperas porque escolher te dá medo.
