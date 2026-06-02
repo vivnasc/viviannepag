@@ -389,6 +389,8 @@ E quando dás por escolha, e não por terror, podes também não dar, sem pânic
 
 É isso, escolher-se. Não deixar de amar. Voltar a existir dentro do amor.
 
+E há uma diferença que protege tudo o resto. Escolheres-te não é deixares de dar, de cuidar, de estar. Isso é tua riqueza, e não a vais perder. É deixares de dar por terror, e passares a dar por escolha. De um lugar cheio, e não de um medo. E quando dás por escolha, podes também não dar, podes precisar, podes receber, sem que o teu lugar fique em risco. Continuas generosa. Apenas deixas de pagar, com a tua generosidade, uma renda que nunca devias ter de pagar.
+
 Quero acrescentar uma fronteira, porque é importante.
 
 Há uma diferença entre um homem que recebe o teu cuidado com gratidão e um que se aproveita dele. O primeiro, quando paras de fazer tudo, repara, agradece o que fazias, e começa também a dar. O segundo zanga-se, exige, faz-te sentir culpada por deixares de servir.
