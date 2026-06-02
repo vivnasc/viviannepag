@@ -59,7 +59,7 @@ E essa pessoa fez o que tinha de fazer. Deixou de se apoiar. Tornou-se autossufi
 
 Mas a adaptação não se desfez quando o tempo passou. Ficou. E hoje, em adulta, num mundo onde talvez houvesse apoio de confiança, continuas a recusá-lo, defendida de uma dor antiga, e privada de um amparo presente que nunca te deixas receber.
 
-Quero que vejas isto com clareza. A tua recusa de apoio não é orgulho, nem teimosia, nem incapacidade de carácter. É uma resposta inteligente a uma dor real. Não és desconfiada por feitio. És alguém que se apoiou e foi deixada cair, e que aprendeu, dessa dor, a não voltar a apoiar-se. E reconhecer isto é honrar a memória que te protege, e doer, ao mesmo tempo, por ela ter sido necessária.
+Quero que vejas isto com clareza. A tua recusa de apoio não é orgulho, nem teimosia, nem incapacidade de caráter. É uma resposta inteligente a uma dor real. Não és desconfiada por feitio. És alguém que se apoiou e foi deixada cair, e que aprendeu, dessa dor, a não voltar a apoiar-se. E reconhecer isto é honrar a memória que te protege, e doer, ao mesmo tempo, por ela ter sido necessária.
 
 ## 3. A desconfiança que protege e isola
 
