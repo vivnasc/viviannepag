@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
   const { slug } = (await req.json()) as { slug?: string };
-  if (!slug || !/^(mae|inf|pros)-\d+/.test(slug)) {
+  if (!slug || !/^(mae|inf|pros|syn|per|for|tra)-\d+/.test(slug)) {
     return NextResponse.json({ erro: 'slug-invalido' }, { status: 400 });
   }
 

@@ -10,7 +10,7 @@ const DIR = path.join(process.cwd(), 'content', 'produtos');
 export type Capitulo = { titulo: string; html: string; palavras: number };
 export type Livro = {
   slug: string;
-  mundo: 'freeme' | 'infonte' | 'prosperidade';
+  mundo: 'freeme' | 'infonte' | 'prosperidade' | 'synchim' | 'pertenca' | 'forca' | 'trabalho';
   colecao: string;
   titulo: string;
   subtitulo: string;
@@ -26,6 +26,10 @@ const COLECOES: Record<string, { mundo: Livro['mundo']; colecao: string; ordem: 
   mae: { mundo: 'freeme', colecao: 'I · FreeMe Mãe', ordem: 1 },
   inf: { mundo: 'infonte', colecao: 'II · Infonte', ordem: 2 },
   pros: { mundo: 'prosperidade', colecao: 'III · Prosperidade', ordem: 3 },
+  syn: { mundo: 'synchim', colecao: 'IV · SyncHim', ordem: 4 },
+  per: { mundo: 'pertenca', colecao: 'V · Pertença', ordem: 5 },
+  for: { mundo: 'forca', colecao: 'VI · Força', ordem: 6 },
+  tra: { mundo: 'trabalho', colecao: 'VII · Trabalho', ordem: 7 },
 };
 
 function esc(s: string): string {
@@ -112,7 +116,7 @@ export function listarLivros(): Livro[] {
     return [];
   }
   const livros = nomes
-    .filter(n => /^(mae|inf|pros)-\d+/.test(n) && !n.endsWith('-en'))
+    .filter(n => /^(mae|inf|pros|syn|per|for|tra)-\d+/.test(n) && !n.endsWith('-en'))
     .filter(n => fs.existsSync(path.join(DIR, n, `${n}.md`)))
     .map(slug => parse(fs.readFileSync(path.join(DIR, slug, `${slug}.md`), 'utf8'), slug))
     .sort((a, b) => {
@@ -126,6 +130,6 @@ export function listarLivros(): Livro[] {
 /** Um livro pelo slug, ou null se não existir. */
 export function lerLivro(slug: string): Livro | null {
   const f = path.join(DIR, slug, `${slug}.md`);
-  if (!/^(mae|inf|pros)-\d+/.test(slug) || !fs.existsSync(f)) return null;
+  if (!/^(mae|inf|pros|syn|per|for|tra)-\d+/.test(slug) || !fs.existsSync(f)) return null;
   return parse(fs.readFileSync(f, 'utf8'), slug);
 }
