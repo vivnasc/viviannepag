@@ -151,6 +151,14 @@ Quem se dissolve não dá de um centro cheio. Dá-se a si mesma, ao próprio cen
 
 A diferença não está na quantidade de amor. Está em haver, ou não, alguém ali, distinta, a amar. No amor inteiro, há duas pessoas. Na dissolução, há uma e o seu eco. E confundir as duas faz-te orgulhares-te de uma ferida, achando que a tua capacidade de desaparecer é a prova da tua grandeza no amor, quando é, na verdade, a marca de um centro que nunca chegaste a habitar.
 
+Há ainda uma coisa que talvez reconheças, e que é das mais subtis. Tu não és assim só no amor romântico. És assim com toda a gente forte que entra na tua vida.
+
+Com uma amiga dominante, tornas-te o que ela quer. Com uma chefe, dilui-te no que ela espera. Com a tua família, és quem cada um precisa que sejas. Adaptas-te, sempre, a quem tem mais centro do que tu, porque sem centro próprio, és absorvida por quem o tem.
+
+Repara nisto, porque mostra que o problema não é este homem, nem o amor. É a falta de um chão teu, firme, que não se dissolve em quem está à frente. E enquanto não construíres esse chão, vais continuar a desaparecer, em cada relação, em cada grupo, em cada lugar onde haja alguém mais forte para te absorver.
+
+A boa notícia é que, sendo a raiz a mesma, a cura também serve para tudo. Quando construíres um centro próprio, não te dissolves só menos no amor. Permaneces mais tu em toda a parte, com toda a gente, porque passas a ter, enfim, um lugar de onde não és arrastada.
+
 ## 3. Quem sou eu quando estou sozinha
 
 Vou deixar aqui uma pergunta. Sozinha. Não fujas dela depressa.
@@ -460,6 +468,8 @@ Quero deixar-te uma imagem.
 Mas há outra forma de o rio encontrar o mar. Encontrá-lo continuando rio até ao fim. Levar a sua água doce ao mar sem deixar de ser quem é no caminho. Misturar-se, sim, mas trazendo algo seu, uma corrente, um nome, uma vida.
 
 A travessia é essa. Não deixares de chegar ao amor. Mas chegares lá inteira, com o teu curso, o teu nome, o teu centro. Misturares-te sem desapareceres. Amares sem deixares de ser rio.
+
+E há um cuidado que quero deixar-te, sobre o tempo. Construir um centro que nunca existiu não se faz num dia, nem com um livro. Vais recair, vais voltar a dissolver-te, vais perder-te outra vez. Não é fracasso. É o velho hábito a ainda estar lá, enquanto o novo se constrói. O que muda, mesmo nas recaídas, é que agora vês. E ver, mesmo a meio da dissolução, é o princípio de poderes, um dia, regressar mais depressa. Sê paciente contigo, e onde precisares de mãos que te ajudem a erguer esse chão, aceita-as.
 
 Sabes, no fundo, a frase que segura este livro. Posso permanecer comigo enquanto te amo.
 
