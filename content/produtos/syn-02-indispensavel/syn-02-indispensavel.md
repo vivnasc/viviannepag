@@ -299,6 +299,16 @@ Quero que vejas isto sem culpa, e sem acusar quem te criou. Quem te precisou ced
 
 ## 5. Ser amada por ser, não por servir
 
+Quero desfazer a confusão que está no centro de tudo. Confundiste duas coisas que parecem iguais e são opostas: ser necessária e ser amada.
+
+Ser necessária é fazeres falta, é o outro precisar do que fazes. Ser amada é o outro querer-te a ti, faças ou não faças. A primeira depende da tua utilidade. A segunda não depende de nada que faças, depende só de seres.
+
+E tu construíste tudo sobre a primeira, porque a controlas. Podes tornar-te necessária com esforço. Ser amada não controlas, e isso assusta-te, porque te expõe à hipótese de não bastares.
+
+Mas repara no preço. Quem é mantida pela utilidade nunca tem a certeza do amor. Vives sempre com a dúvida: será que me quer, ou só precisa de mim? E essa dúvida não descansa, por mais indispensável que te tornes, porque a indispensabilidade garante que precisam de ti, nunca que te amam.
+
+Há uma pergunta que to revela. Se eu deixasse de fazer tudo isto, ele ficava? Se a resposta te apavora, é porque a relação assenta na necessidade, e não no amor. E enquanto não arriscares descobri-la, vais servir sem fim, sem nunca saber se eras tu, ou só o que fazes, que ele quer.
+
 Se confundiste ser precisa com ser amada, então há uma verdade nova à tua espera. Lê-a devagar.
 
 Podes ser amada por seres, não por servires.
