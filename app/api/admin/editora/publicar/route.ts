@@ -13,6 +13,11 @@ export const maxDuration = 60;
 
 function mundoDoSlug(slug: string): string {
   if (slug.startsWith('inf-')) return 'infonte';
+  if (slug.startsWith('pros-')) return 'prosperidade';
+  if (slug.startsWith('syn-')) return 'synchim';
+  if (slug.startsWith('per-')) return 'pertenca';
+  if (slug.startsWith('for-')) return 'forca';
+  if (slug.startsWith('tra-')) return 'trabalho';
   return 'freeme';
 }
 

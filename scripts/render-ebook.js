@@ -67,14 +67,112 @@ const PALETTES = {
     textoSuave: '#6B5A48',
     ouro: '#B8843D',
   },
+  // Prosperidade: valor a circular. Mel, ocre quente, ouro abundante mas com chão.
+  prosperidade: {
+    barro: '#A86A2E',
+    barroEscuro: '#6E4520',
+    barroClaro: '#C68A3E',
+    areia: '#F6EAD6',
+    creme: '#F6EDDD',
+    cremeEscuro: '#EBD9BE',
+    salvia: '#8A7A45',
+    texto: '#3A2A16',
+    textoSuave: '#6E5A3C',
+    ouro: '#D49A3A',
+  },
+  // SyncHim: vínculo amoroso. Rosa-madeira, terracota íntima, cobre. Estrela persa.
+  synchim: {
+    barro: '#9E4A45',
+    barroEscuro: '#6A2F2E',
+    barroClaro: '#B86A60',
+    areia: '#F5E7DF',
+    creme: '#F5E8E1',
+    cremeEscuro: '#ECD4C9',
+    salvia: '#9C6B5A',
+    texto: '#3A211E',
+    textoSuave: '#6E4A42',
+    ouro: '#C98A5E',
+  },
+  // Pertença: raiz, lugar, família. Oliveira, bronze morno, salva. Enraizado.
+  pertenca: {
+    barro: '#75663A',
+    barroEscuro: '#4C4326',
+    barroClaro: '#928047',
+    areia: '#F1ECDB',
+    creme: '#F2EDDD',
+    cremeEscuro: '#E2DAC2',
+    salvia: '#7C8A5E',
+    texto: '#322E1C',
+    textoSuave: '#5E5838',
+    ouro: '#B89A48',
+  },
+  // Força: sobrevivência e armadura que pousa. Castanho fundo, protetor, brasa segura.
+  forca: {
+    barro: '#6B4A3A',
+    barroEscuro: '#422E24',
+    barroClaro: '#8A6450',
+    areia: '#EFE6DB',
+    creme: '#F0E8DD',
+    cremeEscuro: '#DED2C4',
+    salvia: '#6E7763',
+    texto: '#2E2018',
+    textoSuave: '#5E4C40',
+    ouro: '#C58A4E',
+  },
+  // Trabalho: identidade e existir. Umbria, bronze sóbrio, ouro firme. Digno.
+  trabalho: {
+    barro: '#7A5230',
+    barroEscuro: '#4E351F',
+    barroClaro: '#9A6C40',
+    areia: '#F2EADC',
+    creme: '#F3EBDD',
+    cremeEscuro: '#E4D6BF',
+    salvia: '#74704C',
+    texto: '#312414',
+    textoSuave: '#665236',
+    ouro: '#C99A40',
+  },
 };
-const LABELS = { freeme: 'FreeMe', infonte: 'Infonte' };
+const LABELS = {
+  freeme: 'FreeMe', infonte: 'Infonte', prosperidade: 'Prosperidade',
+  synchim: 'SyncHim', pertenca: 'Pertença', forca: 'Força', trabalho: 'Trabalho',
+};
 // Fontes por mundo (só os mundos que divergem do default Fraunces/Outfit).
 const FONTS = {
   infonte: {
     serif: "'EB Garamond'",
     sans: "'Inter'",
     importUrl: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap',
+  },
+  // Prosperidade: serifa generosa e refinada.
+  prosperidade: {
+    serif: "'Cormorant Garamond'",
+    sans: "'Outfit'",
+    importUrl: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap',
+  },
+  // SyncHim: serifa íntima e literária.
+  synchim: {
+    serif: "'Lora'",
+    sans: "'Inter'",
+    importUrl: 'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap',
+  },
+  // Pertença: serifa humanista e enraizada.
+  pertenca: {
+    serif: "'Source Serif 4'",
+    sans: "'Outfit'",
+    importUrl: 'https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap',
+  },
+  // Força: serifa calma e sólida.
+  forca: {
+    serif: "'Newsreader'",
+    sans: "'Inter'",
+    importUrl: 'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap',
+  },
+  // Trabalho: serifa digna e profissional.
+  trabalho: {
+    serif: "'Spectral'",
+    sans: "'Inter'",
+    importUrl: 'https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap',
   },
 };
 // Aplica as fontes do mundo ao HTML. Para freeme (sem entrada em FONTS) devolve
@@ -186,6 +284,11 @@ async function fetchImagensMundo(mundo) {
 
 // Mapeia slug -> mundo (logica original, ainda usada como hint inicial).
 function slugToMundo(slug) {
+  if (/^pros-/.test(slug)) return 'prosperidade';
+  if (/^syn-/.test(slug)) return 'synchim';
+  if (/^per-/.test(slug)) return 'pertenca';
+  if (/^for-/.test(slug)) return 'forca';
+  if (/^tra-/.test(slug)) return 'trabalho';
   if (/^inf-/.test(slug) || /sonho|voz|mente|teu/.test(slug)) return 'infonte';
   if (/casal|perguntas/.test(slug)) return 'synchim';
   if (/quemes|sentido|escuro|presenca/.test(slug)) return 'escola';
