@@ -43,6 +43,10 @@ Este livro não te vai ensinar a amar menos, a guardar-te, a dares-te a meias. N
 
 Vim ajudar-te a fazer uma coisa muito mais difícil. A permaneceres contigo enquanto amas. A não te perderes no outro. A continuares a existir, tu, dentro da relação.
 
+Quero dizer-te, já, o que isto não é. Não é amares menos, nem te guardares, nem dares-te a meias por cálculo. Não vim ensinar-te a defenderes-te do amor, a fechares uma parte, a não te entregares. Isso seria não ter percebido nada. A tua capacidade de te entregares é bela. O problema não é entregares-te. É entregares a ti inteira, até não sobrar ninguém para ser amado.
+
+Há uma diferença, e ela é tudo. Entregares o teu coração, a tua presença, o teu amor, e continuares a existir. Ou entregares o teu próprio centro, a tua vontade, a tua identidade, e desapareceres. A primeira é amor. A segunda é desaparecimento, e tu, sem saber, fazes a segunda, e chamas-lhe a primeira.
+
 Adianto-te a direção, para leres em paz. Podes amar sem te abandonar. Podes ter um nós sem deixar de ter um eu. E o caminho não é amar menos. É regressares a ti.
 
 Talvez te reconheças em coisas pequenas.
