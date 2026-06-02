@@ -51,7 +51,7 @@ Em defenderes o homem que amas com frases sobre o que ele "é por dentro", "o qu
 
 Em sentires uma estranha desilusão quando um homem é, simplesmente, o que parece, sem mistério, sem promessa, sem nada por cumprir.
 
-São todos o mesmo. O amor pela promessa. A paixão pelo projeto, e não pela pessoa.
+São todos o mesmo. O amor pela promessa. A paixão pelo projeto, e não pela pessoa. A relação com um homem que vive, sobretudo, dentro da tua cabeça, enquanto o que está à tua frente espera, em vão, por ser visto e amado como é.
 
 Há uma coisa que talvez te custe ouvir, mas que liberta. A intensidade da tua paixão pelo potencial não é a prova de que é um grande amor. É, muitas vezes, a prova de que é uma grande fantasia. Porque a fantasia, ao contrário do amor real, não tem limites. O homem imaginado pode ser perfeito, porque tu o desenhas. O homem real tem defeitos, contornos, resistências. E por isso a paixão pelo imaginado arde mais forte do que o amor pelo real, não por ser mais profunda, mas por não ter realidade que a contrarie.
 
