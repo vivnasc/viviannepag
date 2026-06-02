@@ -19,7 +19,7 @@ Aquela sensação que aparece quando te deitas e a casa finalmente está em sil�
 
 Não vem com um aviso. Não vem com uma razão clara. Vem como um peso no peito, uma lista invisível de tudo o que fizeste mal, de tudo o que devias ter feito melhor, de tudo o que outra mãe faria de outra forma.
 
-Tu sabes exactamente como é. Mas nunca disseste a ninguém.
+Tu sabes exatamente como é. Mas nunca disseste a ninguém.
 
 Porque quem é que diz? Quem é que, no meio de uma conversa entre mães, levanta a mão e diz: "eu sinto que estou a falhar todos os dias"? Quem é que confessa, em voz alta, que há noites em que chora no duche porque acha que está a estragar os próprios filhos?
 
@@ -67,7 +67,7 @@ Isto não é um defeito teu. Isto é um mecanismo. E é disso que vamos falar.
 
 Não para te tirar a culpa com uma frase bonita. Não para te dizer que "está tudo bem" quando tu sabes que há coisas que precisam de mudar. Mas para te mostrar o que a culpa realmente é, de onde veio, e o que ela te está a impedir de fazer.
 
-Porque a culpa não te está a tornar melhor mãe. Está a fazer exactamente o contrário.
+Porque a culpa não te está a tornar melhor mãe. Está a fazer exatamente o contrário.
 
 E eu sei que, ao ler isto, uma parte de ti já está a dizer: "mas se eu não sentisse culpa, se calhar não me esforçava tanto." Essa é a grande mentira da culpa. Que sem ela, serias pior. Que sem ela, não te importarias. Que é ela que te mantém alerta, atenta, dedicada.
 
@@ -149,7 +149,7 @@ A culpa diz: "sou uma má mãe". O amor diz: "sou uma mãe que ama e que erra, c
 
 A culpa diz: "o meu filho vai ficar marcado por isto". O amor diz: "posso reparar, posso pedir desculpa, posso tentar amanhã outra vez."
 
-A diferença é subtil. Mas muda tudo. Porque quando ouves a culpa, paralisas. Quando ouves o amor, ages. E agir com amor, mesmo imperfeito, é exactamente o que os teus filhos precisam.
+A diferença é subtil. Mas muda tudo. Porque quando ouves a culpa, paralisas. Quando ouves o amor, ages. E agir com amor, mesmo imperfeito, é exatamente o que os teus filhos precisam.
 
 Eles não precisam de uma mãe perfeita. Precisam de uma mãe presente. E presente não é estar sempre disponível. Presente é estar de verdade quando estás. É olhares para eles e eles saberem que estão a ser vistos. Não avaliados. Vistos.
 
@@ -173,7 +173,7 @@ Tu estás a tentar. E isso, por si só, é mais do que muitas mães tiveram.
 
 Este é o capítulo mais importante deste ebook. Se vais ler só um, que seja este.
 
-A culpa não é só um sentimento. É um motor. Faz-te agir de formas que tu não escolherias se não estivesses debaixo do peso dela. E o mais perverso é que os comportamentos que a culpa te empurra a ter são exactamente os que te impedem de ser a mãe que queres ser.
+A culpa não é só um sentimento. É um motor. Faz-te agir de formas que tu não escolherias se não estivesses debaixo do peso dela. E o mais perverso é que os comportamentos que a culpa te empurra a ter são exatamente os que te impedem de ser a mãe que queres ser.
 
 Vou mostrar-te os mais comuns. Lê devagar. Vê se te reconheces.
 
@@ -203,13 +203,13 @@ Quando a culpa é crónica, entras em modo compensação permanente. Compras o b
 
 E o que lhe deves, na tua cabeça, é tudo o que achas que lhe falha: o teu tempo, a tua paciência, a tua calma, a tua presença constante. Como não consegues dar-lhe isso, dás-lhe coisas. E as coisas não preenchem. Nem a ele nem a ti.
 
-É o brinquedo novo que trazes na sexta porque durante a semana chegaste tarde todos os dias. É o "sim" a mais uma actividade extracurricular porque achas que ele merece tudo o que não tiveste. É o jantar especial que cozinhas às onze da noite porque no dia seguinte é o aniversário dele e a culpa diz que uma boa mãe faz o bolo em casa, não compra na pastelaria.
+É o brinquedo novo que trazes na sexta porque durante a semana chegaste tarde todos os dias. É o "sim" a mais uma atividade extracurricular porque achas que ele merece tudo o que não tiveste. É o jantar especial que cozinhas às onze da noite porque no dia seguinte é o aniversário dele e a culpa diz que uma boa mãe faz o bolo em casa, não compra na pastelaria.
 
 A compensação é esgotante. E traiçoeira. Porque parece amor. Parece dedicação. De fora, até parece que és uma mãe excepcional. Mas por dentro, sabes a verdade: não estás a dar por amor. Estás a pagar uma dívida que inventaste.
 
 E a dívida nunca fica saldada. Porque a culpa inventa juros novos todos os dias.
 
-Há mães que compensam com presença excessiva. Ficam o tempo todo a fazer actividades, a organizar programas, a preencher cada momento de silêncio com estímulos, porque um filho que se aborrece é um filho que está a ser negligenciado (na lógica da culpa). E o resultado é uma mãe que não tem cinco minutos para si e uma criança que não aprendeu a estar consigo mesma.
+Há mães que compensam com presença excessiva. Ficam o tempo todo a fazer atividades, a organizar programas, a preencher cada momento de silêncio com estímulos, porque um filho que se aborrece é um filho que está a ser negligenciado (na lógica da culpa). E o resultado é uma mãe que não tem cinco minutos para si e uma criança que não aprendeu a estar consigo mesma.
 
 A compensação nunca resolve. Adia. E enquanto adias, o que realmente precisa de atenção fica por baixo, a crescer no escuro.
 
@@ -279,7 +279,7 @@ Nunca ganhas essa comparação. Nunca. Porque a culpa é a juíza e o jogo está
 
 E o mais insidioso é que a comparação não se limita às outras mães. Comparas-te contigo mesma. Com a mãe que eras quando o primeiro nasceu, cheia de energia e de paciência. Com a mãe que imaginavas ser antes de teres filhos. Com a mãe que és aos sábados de manhã, descansada, paciente, doce, e que desaparece à quarta-feira às seis da tarde, quando já não consegues mais.
 
-"Eu consigo ser uma boa mãe quando estou bem. Então porque é que não estou sempre bem?" Essa pergunta é a armadilha perfeita da culpa. Porque transforma o teu cansaço em falha moral. Como se estar exausta fosse uma escolha. Como se estar no limite fosse uma falta de carácter.
+"Eu consigo ser uma boa mãe quando estou bem. Então porque é que não estou sempre bem?" Essa pergunta é a armadilha perfeita da culpa. Porque transforma o teu cansaço em falha moral. Como se estar exausta fosse uma escolha. Como se estar no limite fosse uma falta de caráter.
 
 ### Não te cuidas
 
@@ -321,7 +321,7 @@ Em muitas famílias, a culpa é uma herança. Passa de mãe para filha como pass
 
 Tu não aprendeste a sentir culpa quando o teu filho nasceu. Aprendeste muito antes. Aprendeste quando viste a tua mãe pedir desculpa por coisas que não eram culpa dela. Quando viste a tua avó sacrificar tudo por todos e nunca pedir nada para si. Quando ouviste, mesmo sem palavras: "uma boa mãe não descansa, não reclama, não falha."
 
-Aprendeste quando a tua mãe se levantava da mesa para servir toda a gente e comia de pé, na cozinha, o que sobrava. Quando ela dizia "eu não preciso de nada" com uma voz que dizia exactamente o contrário. Quando ela ficava doente e continuava a fazer tudo porque "quem é que faz se eu não fizer?"
+Aprendeste quando a tua mãe se levantava da mesa para servir toda a gente e comia de pé, na cozinha, o que sobrava. Quando ela dizia "eu não preciso de nada" com uma voz que dizia exatamente o contrário. Quando ela ficava doente e continuava a fazer tudo porque "quem é que faz se eu não fizer?"
 
 Tu não decidiste sentir culpa. Absorveste-a. O teu corpo aprendeu, muito antes da tua mente, que ser mãe é carregar. Que ser mulher é suportar. Que precisar é um luxo. Que descansar é egoísmo.
 
@@ -465,7 +465,7 @@ Chegaste até aqui. E se chegaste até aqui, é porque algo neste texto tocou no
 
 Quero que saibas que há um caminho de volta. Não um caminho para seres uma mãe perfeita (essa não existe e nunca existiu). Mas um caminho para te libertares do peso que não é teu. Para distinguires a culpa que te prende da responsabilidade que te ergue. Para olhares para os teus filhos sem a lente distorcida da insuficiência.
 
-Não é um caminho rápido. Não é um caminho fácil. Mas é um caminho real, feito por mulheres reais, que carregavam exactamente o que tu carregas e que, passo a passo, foram pousando.
+Não é um caminho rápido. Não é um caminho fácil. Mas é um caminho real, feito por mulheres reais, que carregavam exatamente o que tu carregas e que, passo a passo, foram pousando.
 
 Mulheres que achavam que nunca iam conseguir dizer "não" sem culpa, e que hoje dizem com calma e sem desabamento. Mulheres que viviam a compensar e que hoje conseguem estar presentes sem estarem a pagar uma dívida. Mulheres que gritavam e depois desabavam, e que hoje percebem o que está por trás do grito antes de ele chegar.
 
@@ -483,7 +483,7 @@ Muitas mães, por culpa, saem do seu lugar. Tornam-se amigas em vez de mães. To
 
 Voltar ao teu lugar é dizeres "não" sem te sentires em dívida. É permitires que o teu filho se frustre sem sentires que lhe estás a fazer mal. É ires jantar fora com uma amiga sem passares a noite a verificar o telefone. É seres a mãe, não a refém.
 
-E quando ocupas o teu lugar com firmeza e ternura, os teus filhos sentem-se mais seguros. Não menos amados. Mais seguros. Porque sabem que há ali alguém com chão, com margem, com certeza. E isso é exactamente o que precisam.
+E quando ocupas o teu lugar com firmeza e ternura, os teus filhos sentem-se mais seguros. Não menos amados. Mais seguros. Porque sabem que há ali alguém com chão, com margem, com certeza. E isso é exatamente o que precisam.
 
 ### Receber antes de dar
 
@@ -560,6 +560,6 @@ Com toda a minha ternura,
 
 ---
 
-*Este material é de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico ou psicológico. Em situações de trauma, depressão, ansiedade severa, ou crise, procura apoio de um profissional de saúde mental. Cuidar de ti não é fraqueza. É o acto mais corajoso que podes fazer pelas pessoas que amas.*
+*Este material é de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico ou psicológico. Em situações de trauma, depressão, ansiedade severa, ou crise, procura apoio de um profissional de saúde mental. Cuidar de ti não é fraqueza. É o ato mais corajoso que podes fazer pelas pessoas que amas.*
 
 *© 2026 Vivianne dos Santos · viviannedossantos.com*
