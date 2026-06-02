@@ -61,6 +61,10 @@ Em medir o teu lugar na relação pela quantidade de coisas que dependem de ti.
 
 São todos o mesmo. A utilidade como seguro contra o abandono. A necessidade fabricada para garantir que não te vão.
 
+E há uma exaustão particular nisto, que talvez já tomes por normal. A de quem nunca pode parar. Porque parar, para ti, não é descansar, é arriscar. É deixar de ser necessária por um momento, e nesse momento abrir-se o medo de que, sem a tua utilidade, te deixem. Por isso continuas, mesmo destruída, a fazer, a resolver, a antecipar, porque o descanso te custa mais do que o cansaço: o cansaço só te tira o corpo, o descanso ameaça o teu lugar.
+
+Repara, ainda, no que sentes quando alguém te elogia por seres incansável, por fazeres tanto, por seres essencial. Sentes orgulho, sim, mas também um peso, porque esse elogio confirma a armadilha: és amada pelo que fazes, e o dia em que não fizeres, temes, deixarás de o ser. O reconhecimento da tua utilidade não te acalma o medo, alimenta-o, porque te lembra que é à utilidade que se aplaude, e não a ti.
+
 Há um detalhe que talvez reconheças. Tu não sabes pedir.
 
 Dar, sabes de olhos fechados. Pedir, é-te quase impossível. Pedir ajuda, pedir atenção, pedir que cuidem de ti, fica-te preso na garganta.
@@ -76,6 +80,16 @@ Há outra coisa. Tu controlas, através da utilidade.
 Enquanto és tu a fazer tudo, és tu que mandas, que sabes, que tens o leme. Largar, deixar que ele faça, confiar que se safa sem ti, é perder o controlo. E perder o controlo, para quem teme o abandono, é aterrador.
 
 Por isso a tua entrega tem, por baixo, um punho fechado. Dás para prender. Serves para mandar. Tornas-te necessária para nunca ficares à mercê da decisão do outro de ficar ou partir.
+
+Há um pormenor que revela tudo, e quero que repares nele. O que sentes quando alguém de quem cuidas se torna capaz, autónomo, deixa de precisar de ti.
+
+Em vez de alegria pelo crescimento dele, aparece, muitas vezes, um aperto. Uma inquietação. Um vazio. "E agora, para que sirvo?" Como se a autonomia de quem amas fosse uma ameaça, e não uma boa notícia.
+
+Repara no que isto diz. Uma parte de ti, sem o querer, precisa que os outros precisem. Torce, sem saber, pela dependência deles, porque a dependência deles é a garantia do teu lugar. E isso não é maldade. É o medo do abandono a operar nos bastidores, a fazer-te querer manter perto, dependente, quem temes perder.
+
+Mas há aqui uma tristeza funda. Porque amar alguém é querê-lo inteiro, capaz, livre, mesmo que isso signifique que ele já não dependa de ti para viver. E a tua indispensabilidade, ao precisar que ele precise, entra em conflito com o amor que dizes ter, porque o amor quer o outro grande, e a tua ferida quer o outro dependente.
+
+Ver isto não é para te culpares. É para perceberes que a tua forma de amar tem, por baixo, um medo, e que esse medo te faz querer o oposto do que o amor quer. E que soltar a indispensabilidade é, no fundo, deixares-te amar de verdade, querendo o outro livre, e arriscando que ele te escolha por isso.
 
 ## 2. Necessária para não ser deixada
 
@@ -128,6 +142,28 @@ E há ainda a criança que se tornou indispensável aos próprios pais. Que cuid
 Se foste essa, aprendeste a tua identidade inteira no ser necessária. Foi assim que tiveste lugar na família. E levaste esse lugar, o de pilar, para dentro de cada amor, porque é o único que sabes ocupar.
 
 O problema é que o lugar de pilar não é um lugar de amante. O pilar sustenta a casa. Não é amado dentro dela. E tu, de pilar em pilar, sustentaste muitos amores sem nunca seres, em nenhum, simplesmente amada.
+
+Repara numa coisa que talvez nunca tenhas ligado a isto. Tu antecipas.
+
+Sabes o que o outro vai precisar antes de ele saber. Vês o problema a chegar e resolve-lo antes de ele bater à porta. Estás sempre um passo à frente, a preparar, a prever, a tratar.
+
+Parece cuidado. E há cuidado. Mas há também vigilância. A vigilância de quem não pode descansar, porque tem de continuar a ser necessária, e ser necessária exige estar sempre atenta ao que pode fazer falta.
+
+Essa antecipação esgota-te. Vives no futuro, nas necessidades que ainda não chegaram. Nunca no presente, contigo, em paz. Porque o presente, sem uma necessidade para resolver, deixa-te sem função, e sem função sentes que perdes o lugar.
+
+Há um pormenor que talvez reconheças. Tu sabes tudo sobre a vida dele. As palavras-passe, os horários, os compromissos, os medos, os remédios. E ele sabe pouco sobre a tua.
+
+Não é por acaso. Saberes tudo dá-te um lugar. Faz de ti a que gere, a que trata, a que não pode faltar. E manteres a tua vida invisível protege-te de seres tu a precisar, a depender, a expor-te.
+
+Construíste uma relação em que és a central de tudo, e tu própria és um mistério. Sabes tudo dele, e ele mal te conhece. E chamas a isso amor, quando é, no fundo, uma forma de te manteres no comando e fora do alcance ao mesmo tempo.
+
+Quero que repares no medo, porque ele explica tudo. O medo é o abandono. Algures, ficou gravado em ti que serias deixada. Que o amor se vai. Que quem fica, fica enquanto precisa.
+
+E a tua resposta a esse medo foi genial e trágica ao mesmo tempo. Se eu for imprescindível, não me podem deixar. Se tudo depender de mim, ficam, nem que seja pela dependência.
+
+Mas repara no que isto te condena. A seres mantida pela necessidade, e não pelo amor. A teres alguém preso a ti, e não entregue a ti. E uma parte tua sabe a diferença, e é por isso que, no meio de toda a tua utilidade, te sentes tão pouco amada.
+
+Porque ser mantida pela dependência não acalma o medo do abandono. Confirma-o. Diz-te, todos os dias, que se deixasses de ser útil, te deixariam. E por isso o medo nunca passa, por mais indispensável que te tornes, porque a indispensabilidade não cura o medo de não seres amada, alimenta-o.
 
 ## 3. Utilidade não é intimidade
 
@@ -183,6 +219,18 @@ Mas o buraco está lá. E sente-se nas raras vezes em que paras. Numa noite em q
 
 Toda a tua utilidade é, no fundo, uma fuga a esse buraco. E o buraco não se tapa com mais fazer. Só se cura quando descobres, enfim, que bastas. Que há ali pessoa. Que vales por existir, e não pelo que produzes.
 
+Quero mostrar-te o preço que a tua família, ou quem amas, paga pela tua indispensabilidade. Porque também eles pagam.
+
+Quando és a peça de que tudo depende, manténs os outros dependentes. Resolves o que eles aprenderiam a resolver. Tomas conta do que eles cuidariam. E, sem querer, impede-los de crescer, de se tornarem capazes, de ganharem o seu próprio chão.
+
+Há filhos que nunca aprendem a virar-se porque a mãe vira tudo por eles. Há companheiros que nunca amadurecem porque ela trata de tudo. A tua utilidade, que parece amor, torna pequenos os que amas, porque não lhes deixa espaço para serem grandes.
+
+E há um ressentimento que cresce, dos dois lados. Tu ressentes-te de carregares tudo. E eles, no fundo, ressentem-se de serem tratados como incapazes, de nunca lhes deixares espaço, de a tua ajuda vir sempre com a mensagem de que sem ti não se safam.
+
+Repara nisto, porque é difícil de ver. A tua indispensabilidade não é só um peso teu. É também uma forma, involuntária, de manteres os outros pequenos, para que continuem a precisar de ti. E uma parte deles sente isso, e sufoca, e afasta-se, e tu não percebes porquê.
+
+Largar a indispensabilidade não é só libertares-te a ti. É libertá-los a eles. É deixá-los crescer, ser capazes, ter o seu chão. É amá-los o suficiente para os deixares não precisar de ti, e descobrir, então, se ficam por te quererem, e não por dependerem.
+
 ## 4. Quem sou eu se ninguém precisar de mim
 
 Vou deixar aqui uma pergunta. Sozinha. Não fujas dela depressa indo resolver algo para alguém.
@@ -229,6 +277,26 @@ Não respondas já à pergunta de quem és se ninguém precisar de ti. Não se r
 
 Mas deixa-a aberta. Porque é nela que começa a tua liberdade. No dia em que descobrires que existe ali uma pessoa, debaixo de tudo o que fazes, com valor próprio, digna de ficar só por existir, deixas de precisar de te tornar indispensável. E aí, só aí, podes ser amada por ti.
 
+Há uma solidão muito particular na tua vida, e quero nomeá-la, porque talvez nunca lhe tenhas posto palavras.
+
+És a que cuida de toda a gente, e não tens quem cuide de ti. És o pilar de todos, e não te apoias em ninguém. Estás rodeada de pessoas que dependem de ti, e sentes-te, no meio delas, profundamente só.
+
+Porque ser precisada não é ser acompanhada. As pessoas vêm a ti pelo que resolves, não por quem és. Procuram-te quando precisam, não quando querem, simplesmente, estar contigo. E essa diferença, que talvez não nomeies, dói num lugar fundo.
+
+Repara: quando foi a última vez que alguém te perguntou como estavas, e esperou de verdade pela resposta? Que cuidou de ti sem tu teres de pedir, ou de colapsar primeiro? Para muitas mulheres como tu, a resposta é um silêncio, e nesse silêncio mora a solidão de quem dá tudo e recebe pouco.
+
+E há uma parte de ti que se ressente. Que está cansada de ser sempre a forte, a que trata, a que aguenta. Que gostaria, por uma vez, de ser ela a ser cuidada. Mas tu não dizes, porque dizer seria precisar, e precisar é o que não te permites.
+
+Quero mostrar-te de onde vem este lugar, porque vê-lo nascer ajuda a soltá-lo. Houve uma altura em que ser útil te garantiu o que ser tu não garantia.
+
+Talvez fosses a criança que recebia atenção quando ajudava, e que passava despercebida quando simplesmente era. Talvez tivesses uma mãe, ou um pai, que precisava de ti, que se apoiava em ti, que te fazia a sua confidente, a sua ajudante, a sua pequena cuidadora. E aprendeste que o teu lugar, naquela casa, era seres útil, e não seres criança.
+
+Uma criança assim aprende cedo a equação que ainda hoje te governa. Não sou amada por existir. Sou mantida por servir. E corre, a vida inteira, a servir, com medo de que, no instante em que parar, descubra que não havia amor, só necessidade.
+
+E essa criança nunca soube o que era ser amada sem ser útil. Nunca experimentou ser querida só por estar, sem fazer, sem dar, sem resolver. E por isso, em adulta, não acredita que isso seja possível, e continua a comprar, com utilidade, um amor que tem medo de não merecer de graça.
+
+Quero que vejas isto sem culpa, e sem acusar quem te criou. Quem te precisou cedo demais, na maioria das vezes, estava ele próprio em falta, sem dar conta, a apoiar-se na criança que tinha à mão. Não te quis roubar o direito de seres amada sem servir. Mas roubou-to, sem querer, e tu carrega-lo ainda.
+
 ## 5. Ser amada por ser, não por servir
 
 Se confundiste ser precisa com ser amada, então há uma verdade nova à tua espera. Lê-a devagar.
@@ -272,6 +340,14 @@ E é provável que repita. Que se esgote, um dia, como tu te esgotas. Que confun
 A coisa mais libertadora que podes fazer por quem te vê não é dar-lhe ainda mais. É mostrar-lhe uma mulher que se deixa amar sem se anular. Que dá e recebe. Que tem lugar sem o comprar.
 
 Às vezes uma mulher aprende a escolher-se, enfim, não só por si, mas para não passar a quem ama a mesma renda sem fim que ela pagou.
+
+Quero parar aqui um momento, porque há um ponto em que isto deixa de ser um padrão e passa a uma ferida que pede mais.
+
+Se o medo de seres deixada é tão grande que te leva a anular-te por inteiro, a desaparecer dentro do que fazes pelos outros, a perder-te de ti em nome de seres necessária. Se há um pânico de abandono que te tira o chão, que te faz aguentar relações que te diminuem, só para não ficares só. Se te esgotaste ao ponto de já não saberes quem és sem servir.
+
+Isto pode ser mais do que um padrão. Pode ser uma ferida de vínculo, um medo de abandono fundo, que merece o apoio de um profissional. Não é fraqueza procurá-lo. É o cuidado que mereces, e que talvez nunca te tenhas dado, por estares sempre ocupada a cuidar de todos menos de ti.
+
+E quero dizer-te uma coisa, com ternura. A relação de ajuda pode ser, para ti, o primeiro lugar onde experimentas ser cuidada sem teres de servir. Onde alguém se ocupa de ti, sem tu teres de o tornar dependente, sem tu teres de pagar com utilidade. É a cura, no próprio lugar da ferida: deixares-te, enfim, ser o lado que recebe.
 
 ## 6. Escolher-se
 
@@ -317,6 +393,22 @@ Quando alguém te agradece, te quer dar, te quer cuidar, repara no teu impulso. 
 
 Escolher-se é também aprender a receber. A deixar que cuidem de ti sem fugires logo para cuidar de volta. A ficares, por uma vez, do lado de quem é amado, e não só do de quem ama.
 
+Quero falar-te do que muda na relação quando começas a escolher-te.
+
+Ao início, vai estremecer. Porque a relação estava organizada à volta da tua indispensabilidade, e quando deixas de ser a peça de que tudo depende, o equilíbrio antigo abala-se. Isso assusta. Vais sentir que estás a estragar tudo.
+
+Não estás. Estás a dar à relação a hipótese de ser verdadeira. De assentar no amor, e não na dependência. De descobrir se há, por baixo da tua utilidade, um querer real, de ambos.
+
+E vais descobrir uma de duas coisas. Ou ele, libertado da dependência, te ama na mesma, e a relação respira, mais leve, mais igual. Ou ele afasta-se quando deixas de o servir, e isso, por mais que doa, mostra-te que não era a ti que ele queria, era ao que fazias. As duas hipóteses, por mais diferentes, valem mais do que a dúvida em que vivias.
+
+Quero prevenir-te de uma coisa. Quando começares a precisar, a pedir, a deixar de ser só a que dá, vais sentir-te egoísta. Uma culpa enorme, como se estivesses a falhar, a abandonar, a deixar de ser quem deves ser.
+
+Essa culpa é o velho padrão a defender-se. Para ti, dar sempre era a norma, e pedir parece transgressão. Mas precisar não é egoísmo. É humano. E uma relação onde só uma pessoa pode precisar não é amor, é um serviço, e tu mereces mais do que ser a prestadora de um serviço que confundes com ser amada.
+
+Há ainda uma coisa que vais ter de reaprender. A receber. Quando alguém te quer dar, cuidar, ajudar, repara no teu impulso. Desvias. Recusas. Corres a retribuir, para voltares à posição de quem dá. Porque receber põe-te no lugar exposto que evitas.
+
+Escolher-te inclui ficar, por uma vez, do lado de quem recebe. Deixar que cuidem de ti sem fugires logo para cuidar de volta. Aguentar o desconforto de não estares a dar nada, e descobrir que, mesmo assim, ficam. É aí, nesse receber suportado, que aprendes a verdade que mais te falta: que podes ser amada sem servir.
+
 ## 7. Escolhida sem ser imprescindível
 
 Há um destino para esta travessia. E cabe numa imagem. Ser escolhida sem seres imprescindível.
@@ -361,6 +453,20 @@ E cada vez que não fazes algo que farias por terror, e a relação não cai, ap
 
 São passos pequenos. Mas é assim que se desmonta uma vida de utilidade. Não de um golpe. Uma coisa não feita de cada vez, até o teu corpo aprender que continuas amada mesmo quando não serves.
 
+Quero falar-te de uma alegria que ainda não conheces, e que está do outro lado desta travessia.
+
+A alegria de seres cuidada. De adoeceres e deixares alguém tratar de ti, sem te levantares para tratar de tudo. De estares cansada e deixares alguém aliviar-te. De receberes, sem retribuíres logo, sem pagares, sem a pressa de equilibrar.
+
+Tu não conheces esta alegria, porque nunca te deixaste estar do lado de quem recebe. Foste sempre a que dá, a que cuida, a que segura. E há uma fome, em ti, que nunca se saciou: a de seres, por uma vez, tu, a segurada.
+
+Essa fome não é fraqueza. É humana. Todos precisamos de receber, de ser cuidados, de nos apoiarmos. E tu, que dás a toda a gente, mereces, também, receber. Não por teres servido o suficiente. Só por seres, como qualquer pessoa, alguém que também precisa.
+
+E há uma coisa que muda quando te deixas receber. As tuas relações tornam-se recíprocas, e não estradas de sentido único. As pessoas podem, enfim, dar-te, e isso aproxima, iguala, aprofunda. Deixas de ser a fonte que nunca se rega, e passas a estar num fluxo de dar e receber, onde também tu és enchida.
+
+Repara numa última coisa, sobre quem te vê. Se há crianças, ou pessoas mais novas, que aprendem a amar olhando para ti, repara no que lhes ensinas. Se te veem dar sempre e nunca receber, anular-te para seres necessária, comprar o amor com utilidade, aprendem que é assim que uma mulher ama. E é provável que repitam.
+
+A coisa mais libertadora que podes fazer por quem te vê não é dar-lhe ainda mais. É mostrar-lhe uma mulher que se deixa amar sem se anular. Que dá e recebe. Que tem lugar sem o pagar. Às vezes uma mulher aprende a escolher-se, enfim, não só por si, mas para não passar a quem ama a mesma renda sem fim que ela pagou.
+
 ## 8. A travessia
 
 Escrevi este livro por uma convicção simples. Compreender muda.
@@ -390,6 +496,10 @@ A travessia é deixares de ser a estrutura e passares a ser a habitante. Deixare
 Sabes, no fundo, a frase que segura este livro. Posso ser escolhida sem me tornar indispensável.
 
 Escolher-se foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a parar de servir, quando tudo em ti quer correr a tornar-se útil. A suportar o terror de não seres precisa. E, se houver alguém ao teu lado, a aprender, a dois, a serem livres e escolherem-se na mesma.
+
+Há um sinal simples para te guiares, no dia a dia. Repara, perante uma pessoa, no que te liga a ela. É o quanto ela precisa de ti? Ou é o quanto gostas de estar com ela, precise ou não?
+
+Quando reparares que te ligas pela necessidade do outro, desconfia. Não é amor, é a tua ferida a procurar um lugar garantido. E quando reparares que ficas com alguém que não depende de ti, que se safa sem ti, e que mesmo assim te quer, repara também: é aí, nesse querer sem dependência, que mora o amor que sempre quiseste e que tinhas medo de não merecer.
 
 É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
 
