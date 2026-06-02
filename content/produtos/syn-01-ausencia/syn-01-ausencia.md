@@ -505,6 +505,12 @@ Começas a notar o teu reflexo de fuga. Sempre que alguém se aproxima a sério,
 
 Começas a desconfiar da intensidade, em vez de confiares nela. Quando um homem te acende com a sua ausência, com o seu jogo, com o seu recuo, já não dizes "isto é paixão". Dizes "isto é o meu padrão a reconhecer um terreno conhecido". E pensas duas vezes.
 
+E começas a reparar em quem já lá esteve. Às vezes o amor presente não é um homem novo. É alguém que sempre esteve por perto, a quem nunca deste hipótese, porque te parecia certo de mais, calmo de mais, disponível de mais para ter o brilho que procuravas no que fugia.
+
+Olha outra vez para esses. Para os que ficaram, os que não jogaram, os que te quiseram sem te fazer sofrer, e que tu arquivaste como amigos, ou como pouco, ou como sem química. Talvez um deles fosse, todo este tempo, o amor que dizias procurar e que recusavas por não te fazer correr.
+
+Ver é também rever. Voltar a olhar, com olhos novos, o que descartaste com olhos velhos.
+
 Ver não é deixar de sentir. É deixar de confundir o que sentes.
 
 A intensidade que a ausência te dá é real. Mas não é amor. É a tua ferida a ser tocada, a criança a reviver a perseguição de origem. O amor verdadeiro tem outro sabor. Mais calmo. Menos urgente. Mais seguro.
