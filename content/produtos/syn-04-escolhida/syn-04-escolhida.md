@@ -419,6 +419,8 @@ E há uma alegria à espera, do outro lado. A alegria de quereres, e de o dizere
 
 É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
 
+E quero deixar-te uma distinção que protege tudo o resto. Decidir, escolher, desejar em voz alta, não é deixares de ser meiga, generosa, atenta aos outros. Não é tornares-te dura, ou egoísta, ou exigente. É, simplesmente, entrares também tu na tua própria vida, como sujeito, e não só como quem aguarda. Continuas a importar-te com os outros, a ceder quando faz sentido, a ser quem és. Apenas deixas de te pores, sistematicamente, em último, à espera de uma vez que nunca chega. A tua meiguice não desaparece. Ganha, enfim, uma coluna: a de uma pessoa que também quer, também escolhe, também conta.
+
 E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
 
 Esta semana, escolhe uma coisa, pequena que seja, e vai buscá-la. Não esperes que ta tragam. Diz o que queres, dá o primeiro passo, faz acontecer. Pode ser um convite que fazes, um desejo que afirmas, uma decisão que tomas sem esperar permissão. Repara no medo, na vertigem da responsabilidade, e fá-lo na mesma. Porque é nesse primeiro ato de escolha, por mais pequeno, que começas a sair da fila, e que descobres, enfim, que a tua vida sempre esteve à espera, não de quem te escolhesse, mas de que fosses tu a escolhê-la.
