@@ -75,6 +75,28 @@ Tu não negoceias, porque não trazes a tua parte para a mesa. Cedes tudo, à pa
 
 E ao não negociares, parece que não há conflito, que são tão compatíveis, que tudo corre bem. Mas não há paz. Há ausência tua. A paz de uma relação onde uma pessoa desapareceu não é paz. É silêncio.
 
+Quero mostrar-te como isto se vê no dia a dia, em coisas pequenas que talvez nunca tenhas ligado a uma perda de ti.
+
+Repara em quem decide. Onde vão jantar, o que veem, como passam o fim de semana, com quem saem. Se a resposta for, quase sempre, ele, repara. Não porque ele seja mandão. Mas porque tu deixaste de trazer vontade. Dizes "tanto faz", "o que quiseres", "decide tu", e com o tempo deixaste de ter, sequer, uma preferência.
+
+O "tanto faz" parece flexibilidade, parece amor fácil. Mas esconde uma mulher que já não sabe o que quer, porque desligou o canal que lho dizia.
+
+Repara nos teus gostos. Quais são teus, e quais adotaste dele? A música, os programas, os sabores, as opiniões. Numa partilha saudável, trocam-se mundos, e cada um fica maior. Em ti, só um mundo sobreviveu, o dele, e o teu evaporou-se sem que reparasses quando.
+
+Repara nas tuas emoções. Entras numa sala e a tua primeira leitura é como está ele. Se está bem, ficas bem. Se está mal, o teu dia desaba. O teu estado interior tornou-se um reflexo do dele, sem vida própria.
+
+Chamam a isto seres sensível, empática, dedicada. E há disso. Mas quando o teu estado depende inteiramente do estado do outro, não és só empática. Estás dissolvida. Não tens centro emocional próprio, só um espelho do dele.
+
+E repara nas tuas amigas, nos teus espaços, nas tuas coisas. Foste-os deixando cair, um a um, ao mergulhares na relação. A agenda dele organizou a tua. Os amigos dele passaram a ser os teus, e os teus ficaram para trás. E um dia procuras a tua vida, a que era só tua, e não a encontras, porque a foste cedendo, bocado a bocado, até não sobrar.
+
+Quero que repares numa última coisa, antes de irmos à origem. Há um pânico que talvez conheças, e que é o reverso da dissolução: o pânico de que ele se afaste.
+
+Quando alguém se dissolve no outro, perde o centro próprio, e por isso a sua estabilidade inteira passa a depender da presença do outro. Se ele se afasta, mesmo um pouco, mesmo por um dia, tu não sentes só saudade. Sentes uma espécie de desaparecimento de ti, como se, sem ele, deixasses de existir.
+
+Esse pânico não é amor a mais. É falta de centro. É o sinal de que puseste, no outro, o chão que devias ter em ti. E é por isso que te agarras, que controlas, que não suportas a distância: não por o amares tanto, mas por, sem ele, não te encontrares.
+
+Quando recuperas um centro próprio, esse pânico baixa. Não porque ames menos, mas porque já não dependes da presença dele para existires. Podes amá-lo, e senti-lo falta, sem desapareceres na ausência dele. E essa é, talvez, a maior prova de que regressaste a ti: já sentes saudade, mas já não desapareces.
+
 ## 2. Entregar-se ou dissolver-se
 
 Há uma confusão no centro de tudo. E quero desfazê-la com cuidado, porque é dela que vem a tua perda.
@@ -120,6 +142,14 @@ Há ainda uma forma mais subtil de desapareceres. Sentes as emoções dele antes
 Entras numa sala e a tua primeira leitura é como está ele. Se está bem, ficas bem. Se está mal, o teu dia desaba. O teu estado interior é um reflexo do dele, não tem vida própria.
 
 Chamam a isto ser empática, sensível, dedicada. E há disso. Mas quando o teu estado depende inteiramente do estado do outro, não és só empática. Estás dissolvida. Não tens centro emocional próprio, só um espelho do dele.
+
+Quero que repares numa coisa que distingue dissolver-se de amar muito, porque toda a gente te dirá que o teu problema é amares demais, e não é.
+
+Quem ama muito, e está inteira, dá imenso, e continua a ser ela. Tem vontade, opinião, vida, e partilha-as com generosidade. O muito que dá vem de um centro cheio, e por isso não a esvazia, enche-a.
+
+Quem se dissolve não dá de um centro cheio. Dá-se a si mesma, ao próprio centro, até não sobrar. E isso não é amar muito. É ter tão pouco centro que, ao encontrar alguém com centro firme, se dilui nele, como a água se dilui no copo.
+
+A diferença não está na quantidade de amor. Está em haver, ou não, alguém ali, distinta, a amar. No amor inteiro, há duas pessoas. Na dissolução, há uma e o seu eco. E confundir as duas faz-te orgulhares-te de uma ferida, achando que a tua capacidade de desaparecer é a prova da tua grandeza no amor, quando é, na verdade, a marca de um centro que nunca chegaste a habitar.
 
 ## 3. Quem sou eu quando estou sozinha
 
@@ -173,6 +203,32 @@ Não respondas já à pergunta de quem és sozinha. Não se responde de repente.
 
 Mas deixa-a aberta. Porque é nela que começa o teu regresso. No dia em que houver um tu firme, mesmo sem ninguém ao lado, deixas de precisar de te dissolver para amar. E aí, só aí, podes amar inteira.
 
+Quero ir mais fundo na origem, porque vê-la nascer ajuda a soltar.
+
+Há uma ordem nas famílias que vale a pena conheceres. Cada pessoa tem direito a um lugar próprio, a uma vontade própria, a um centro. Numa família saudável, uma criança pode discordar, ter gostos seus, ser diferente, e continuar a pertencer. Crescer não é trair. Diferenciar-se não é abandonar.
+
+Quando isso não é permitido, quando ter um centro próprio é vivido como deslealdade, como afronta, como perigo para o vínculo, a criança aprende a abdicar do centro para manter o laço.
+
+Talvez tenhas tido uma mãe que precisava que fosses uma extensão dela, que não suportava que tivesses vontade diferente da sua. Talvez tenhas crescido onde discordar trazia conflito, frieza, ou retirada de amor, e onde a paz se comprava apagando-te, concordando, dissolvendo a tua vontade na dos outros.
+
+Uma criança assim aprende uma equação terrível. Para ter o vínculo, desaparece. Para seres amada, não sejas demais. Para ficares, dilui-te. E ela escolhe, sempre, o vínculo, porque para uma criança o vínculo é vida. Abdica de si para não ficar só. E essa troca, feita cedo, torna-se o seu modo de amar para sempre.
+
+Se foi isto que aprendeste, repara: não escolheste mal os teus amores. Aplicaste, em todos, a única equação que conhecias. Para ter o amor, desaparece. E desapareceste, vez após vez, achando que era esse o preço do amor.
+
+Não era. Era o preço de um amor de origem que não te deixava existir. E esse preço, podes parar de o pagar a quem, hoje, talvez te quisesse precisamente inteira.
+
+Quero que vejas isto sem culpa, e sem necessariamente acusar quem te criou. Quem não te deixou ter um centro próprio, na maioria das vezes, não tinha, ele próprio, um. Repetiu o que viveu. Não te quis apagar. Mas apagou-te, sem querer, e tu carrega-lo ainda, na forma como desapareces em cada amor.
+
+Vou deixar-te uma pergunta, e peço-te que não fujas dela. Quem és tu quando estás sozinha?
+
+Para ti, esta pergunta talvez traga um branco. Porque não sabes bem quem és quando não estás com alguém. Sabes quem és com ele, adaptada, fundida. Mas tu, sozinha, sem ninguém a quem te moldar, quem és?
+
+Que gostos são teus, e não emprestados? Que opiniões formaste tu? O que te dá alegria, a ti, quando não há ninguém para quem essa alegria seja conveniente? Se estas perguntas trazem silêncio, não é porque sejas vazia. É porque o teu centro nunca foi cultivado, ou foi-o e depois cedido, vez após vez, a quem amaste.
+
+E é por isso que a solidão te aterroriza. Não é só falta de companhia. É que, sem alguém a quem te ligares, não há ali um tu firme, e sentes que desapareces. Por isso saltas de relação em relação, sem intervalo. Por isso aguentas relações más, só para não ficares só. Porque ficar só confronta-te com o branco de não saberes quem és.
+
+Mas esse branco não é a tua verdade. É o teu centro por construir. E construir-se um centro próprio começa, precisamente, no que mais temes: em ficares contigo, sozinha, o suficiente para descobrires que há ali alguém, à espera de ser, enfim, habitada.
+
 ## 4. O amor que apaga
 
 Chegamos ao ponto mais fundo. E quero que o leias devagar.
@@ -198,6 +254,14 @@ Uma criança assim aprende uma equação terrível. Eu, inteira, não sou amáve
 E hoje, em adulta, no amor, repete. Apaga-se. Dissolve-se. Cede o seu lugar. Porque aprendeu que o seu lugar, ocupado, afasta, e que só vazia, moldável, sem contornos, é que pode ser mantida perto.
 
 Mas repara nesta verdade dura e libertadora. O amor que te exige que desapareças não é amor. É outra coisa. E o amor a sério, esse, quer-te presente, com vontade, com centro, inteira. Não te quer apagada. Quer-te lá.
+
+Quero dizer-te o que está, no fundo, por baixo do teu desaparecimento. É uma crença, antiga e dolorosa. A de que tu, inteira, com a tua vontade, os teus gostos, o teu centro, és demais. Que para seres amada tens de te encolher, de te diluir, de não ocupar espaço a mais.
+
+Por isso, mal entras numa relação, começas a apagar-te. A ceder. A concordar. A desaparecer. Não porque o outro o exija, muitas vezes, mas porque aprendeste que é assim que se garante o amor: não incomodando, não divergindo, não sendo demasiado.
+
+Imagina o que é não poderes existir e amar ao mesmo tempo. Ter de escolher entre seres tu e seres amada. E escolheres sempre o amor, à custa de ti, até já não saberes quem és. É um preço altíssimo, e pagas-lo em cada relação, porque aprendeste, algures, que era esse o preço de seres querida.
+
+Mas repara nesta verdade dura e libertadora. O amor que te exige que desapareças não é amor. E o amor a sério, esse, quer-te presente, com vontade, com centro, inteira. Não te quer apagada. Quer-te lá. E o dia em que encontrares, ou construíres, um amor que te quer inteira, vais descobrir que não tinhas de desaparecer, nunca, e que o desaparecimento, longe de te tornar mais amável, te tornava, apenas, mais ausente.
 
 ## 5. Quando desaparecer é perigo
 
@@ -228,6 +292,26 @@ Aí, a compreensão não chega, e não é a prioridade. A prioridade é a tua pr
 Compreender de onde vem a tua tendência para desaparecer é precioso. Mas não trata uma dependência instalada, nem te protege de uma relação que te anula. Para isso, são precisas mãos mais próximas do que as minhas.
 
 Se te reconheces nestes sinais, este é o capítulo de que quero que te lembres. Procura apoio. Não é fraqueza. É o princípio do teu regresso a ti.
+
+Quero que vejas o que a tua dissolução faz, também, à relação, porque talvez te surpreenda.
+
+Tu dissolves-te a pensar que assim amas mais, que te entregas por inteiro, que dás tudo. Mas repara no que o outro recebe. Não recebe uma pessoa. Recebe um espelho. Alguém que concorda com tudo, que quer o que ele quer, que não traz divergência, nem vontade, nem contorno.
+
+E ao início isso parece harmonia, parece que são tão compatíveis. Mas não é compatibilidade. É a tua ausência. Não há duas pessoas a encontrar-se, há uma, ele, e o teu eco.
+
+E um amor com um eco, por mais cómodo que pareça, esvazia-se. Porque o outro, no fundo, quer alguém à frente. Alguém com vontade própria, com mundo, com vida. Não um reflexo de si. E ama-se mal um reflexo, por mais conveniente que seja.
+
+Há aqui um paradoxo cruel. Apagas-te para o segurar, e ao apagares-te fazes desaparecer precisamente a pessoa por quem ele se apaixonou. Ele apaixonou-se por ti, com os teus gostos, a tua vida, a tua maneira de ser. E tu, ao dissolveres-te nele, fazes desaparecer essa pessoa, e deixas, no lugar dela, um eco que ele não escolheu.
+
+E há ainda a tua parte. Ao desapareceres, perdes a capacidade de seres amada. Porque para te amarem, têm de te ver. E se tu não estás lá, se não há pessoa, só adaptação, então não há quem amar. O outro ama, quando muito, uma projeção de si em ti. Não a ti, que deixaste de estar presente para seres amada.
+
+A dissolução, que fazes em nome do amor, é precisamente o que impede o amor de te alcançar. Porque o amor precisa de alguém a quem chegar, e tu, de tanto te dissolveres, deixaste de estar lá para o receber.
+
+Quero parar aqui um momento, porque há um ponto em que isto deixa de ser um padrão e passa a uma ferida que pede mais do que compreensão.
+
+Se foste deixando cair tudo o que era teu, e hoje não tens vida nenhuma fora da relação. Sem amigas, sem atividades, sem rede, só ele. Se te isolaste, ou foste isolada, de tudo o que te lembrava quem eras antes. Se perdeste de tal forma a identidade que já não sabes o que sentes, o que queres, sem consultar o que ele sentiria. Se a ideia de ficares sozinha te traz um pânico físico, uma sensação de que sem ele não sobrevives.
+
+Isto pode ser uma dependência emocional séria, uma perda de identidade que pede ajuda a sério, de um profissional. E se a tua dissolução foi acompanhada de alguém que te afastou dos teus, que decide por ti, que não te deixa ter vida própria, isso pode ser uma relação de controlo, e a prioridade deixa de ser compreender, passa a ser a tua proteção. Procura ajuda, fala com alguém de confiança, com uma linha de apoio. Não estás louca, e não estás sozinha.
 
 ## 6. Amar sem me abandonar
 
@@ -271,6 +355,26 @@ Enquanto te dissolvias, não havia divergência, porque não havia duas pessoas.
 
 Mas a diferença não é o fim do amor. É o princípio do amor verdadeiro, o que se faz entre dois que não são iguais e que, mesmo assim, se escolhem. Um amor sem nenhuma diferença não é harmonia. É a prova de que uma das pessoas desapareceu.
 
+Quero prevenir-te de uma coisa, porque vai acontecer quando começares a reaparecer.
+
+Vais sentir-te egoísta. Cada vez que disseres o que queres, que recuperares um espaço teu, que discordares, vai subir uma culpa. "Estou a ser difícil. Estou a estragar a harmonia. Estou a pôr-me à frente."
+
+Essa culpa é a velha equação a defender-se. Para ti, ter centro sempre foi sinónimo de deslealdade, porque foi assim que to ensinaram. Mas existir não é egoísmo. É saúde. Uma mulher com centro não é egoísta. É uma pessoa. E uma relação precisa de duas pessoas, não de uma pessoa e um espelho.
+
+Vais sentir, também, medo. Medo de que, ao reapareceres, descubras que vocês, afinal, querem coisas diferentes. Enquanto te dissolvias, não havia divergência, porque não havia duas pessoas. Ao reapareceres, vão surgir diferenças que estavam tapadas pela tua ausência. E isso assusta, porque a diferença, no teu mapa, ameaça o vínculo.
+
+Mas a diferença não é o fim do amor. É o princípio do amor verdadeiro, o que se faz entre dois que não são iguais e que, mesmo assim, se escolhem. Um amor sem nenhuma diferença não é harmonia. É a prova de que uma das pessoas desapareceu.
+
+E quero dar-te um sinal para te guiares, porque a tua cabeça vai querer complicar. Numa relação saudável, sentes-te mais tu, não menos. O amor certo expande-te, não te encolhe. Faz crescer o teu centro, não dissolvê-lo. Se, com alguém, te sentes a desaparecer, a encolher, a perder-te, isso é informação. Não é a prova de que amas muito. É a prova de que estás a pagar o amor com a tua existência, e nenhum amor que vale a pena cobra esse preço.
+
+O despertar, quando vem, não chega como trovoada. Chega como um reencontro.
+
+É o dia em que voltas a fazer algo que era só teu. Que dizes uma opinião que é tua, e não a dele. Que passas um tempo no teu mundo, com as tuas, e sentes, com surpresa, que ainda existe ali uma pessoa, debaixo da diluição. Tu.
+
+E reparas que, longe de te afastar do amor, esse regresso a ti te devolve algo ao amor. Algo a oferecer. Alguém a ser amada. Porque uma relação só respira quando há dois, e ao reapareceres, devolves à relação a segunda pessoa que ela tinha perdido.
+
+É um instante pequeno, mas muda tudo. Porque desmente, com a força do que sentiste, a lei de que para amar tens de desaparecer. E a partir dele, ainda que o velho hábito volte a puxar-te para a dissolução, já sabes que existe outro caminho, e que ele não te tira o amor, devolve-te a ti dentro dele.
+
 ## 7. Regressar a si dentro do amor
 
 Há um verbo para esta travessia. Regressar.
@@ -309,6 +413,28 @@ Construir chão próprio não é afastares-te. É tornares-te alguém que pode a
 
 Não te vou dar um método. Seria mais uma forma de te dissolveres, agora numas regras. Mas deixo-te o princípio. Permanece contigo enquanto o amas. Não desapareças para caber. Traz-te inteira para a relação, e deixa que o amor seja entre duas pessoas, e não a diluição de uma na outra.
 
+Quero falar-te de uma coisa chamada chão próprio, porque é o oposto de te dissolveres.
+
+Ter chão próprio é teres uma vida que se sustenta em ti, e não no outro. Amigas tuas. Um trabalho, ou um projeto, que é teu. Interesses, sítios, pessoas, que existem independentemente da relação. Não para te defenderes do amor. Mas para que o amor seja uma escolha, e não uma dependência.
+
+Quem tem chão próprio ama por querer. Quem não tem ama por precisar, e o amor por necessidade nunca é livre. E quando tens chão próprio, a relação fica mais leve, não mais distante, porque deixas de pôr no outro o peso impossível de ser a tua vida inteira. Ele não tem de ser tudo. Tu já tens uma vida. Ele é o amor dentro dela, não o seu único conteúdo.
+
+E há uma libertação nisto também para ele. Ninguém aguenta, por muito tempo, ser a vida inteira de alguém. É um peso esmagador. Quando recuperas o teu chão, alivia-lo desse peso, e o amor de vocês respira.
+
+Quero deixar-te, ainda, uma alegria que está do outro lado. A alegria de seres amada inteira. De alguém te ver, a ti, com os teus gostos, a tua vida, a tua vontade, e ficar. De não desapareceres para seres querida, mas de seres querida por apareceres. De estares numa relação a dois, e não a uma e meia. Essa alegria é o teu direito, e está do outro lado do medo, no dia em que reapareceres, e descobrires que o amor verdadeiro não te queria apagada, queria-te lá.
+
+E repara no que ensinas, se há quem te veja amar. Se te veem desaparecer em cada relação, dissolver-te, perder-te, aprendem que é assim que se ama. A coisa mais libertadora que podes fazer por quem aprende olhando para ti é mostrar uma mulher que ama sem se apagar. Que permanece inteira dentro do amor. Que é, ela própria, a prova de que se pode amar e continuar a existir.
+
+Há um verbo para esta travessia, e é regressar. Regressar a ti, não fora do amor, mas dentro dele.
+
+Regressar começa por recuperares o que cedeste. Os teus gostos. As tuas amigas. Os teus sítios. As tuas atividades. Tudo o que foste deixando cair, uma a uma. Não contra ele. A favor de ti. Voltares a ter uma vida que é tua, para além da relação.
+
+Regressar é também voltares a ter opinião. A discordar, quando discordas. A querer o que queres, mesmo quando difere do que ele quer. A trazer, de volta, a pessoa que tinhas apagado para caber.
+
+Vai assustar-te. Vais temer que, ao voltares a ocupar o teu lugar, a relação estremeça. E talvez estremeça, ao início, porque uma relação habituada a um eco estranha a pessoa que aparece onde havia silêncio. Mas se a relação só aguentava o teu apagamento, então não era a ti que amava, e é melhor saber. E quase sempre acontece o contrário: o outro reencontra uma pessoa, e a relação ganha vida, profundidade, desejo, porque passa a haver dois.
+
+Não te vou dar um método, seria mais uma forma de te dissolveres, agora numas regras. Mas deixo-te o princípio. Permanece contigo enquanto o amas. Não desapareças para caber. Traz-te inteira para a relação, e deixa que o amor seja entre duas pessoas, e não a diluição de uma na outra. E onde precisares de ajuda para construir um centro que nunca foi cultivado, procura-a, porque ninguém ergue um chão próprio do nada, sozinha, de um dia para o outro.
+
 ## 8. A travessia
 
 Escrevi este livro por uma convicção simples. Compreender muda.
@@ -338,6 +464,12 @@ A travessia é essa. Não deixares de chegar ao amor. Mas chegares lá inteira, 
 Sabes, no fundo, a frase que segura este livro. Posso permanecer comigo enquanto te amo.
 
 Regressar foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a recuperar, devagar, o que cedeste. A reaparecer onde te tinhas apagado. E, se houver alguém ao teu lado, a aprender, a dois, a serem dois, e não um e meio.
+
+Quero deixar-te uma imagem, antes de fechar. És como um rio que, ao chegar ao mar, se entrega tão por inteiro que deixa de ser rio. Perde o nome, a margem, o curso. Dissolve-se na água salgada e desaparece.
+
+Mas há outra forma de o rio encontrar o mar. Encontrá-lo continuando rio até ao fim. Levar a sua água ao mar sem deixar de ser quem é no caminho. Misturar-se, sim, mas trazendo algo seu, uma corrente, um nome, uma vida.
+
+A travessia é essa. Não deixares de chegar ao amor. Mas chegares lá inteira, com o teu curso, o teu nome, o teu centro. Misturares-te sem desapareceres. Amares sem deixares de ser rio.
 
 É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
 
