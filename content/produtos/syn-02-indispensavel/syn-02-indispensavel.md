@@ -381,6 +381,8 @@ Mas é precisamente aí, nesse não-fazer suportado, que descobres a verdade. Se
 
 Porque uma relação que só se aguenta pela tua utilidade não é amor. É um emprego sem fim, mal pago, do qual nunca te podes despedir. E tu mereces mais do que um emprego. Mereces ser escolhida.
 
+Escolher-se começa por uma coisa pequena e difícil: perguntares-te o que tu queres. Não o que ele precisa, não o que farias por ele, mas o que tu, no meio de tudo, queres. Provavelmente vais ficar em branco, porque passaste a vida virada para as necessidades dos outros, e desligaste o canal que te dizia das tuas. Reabri-lo é o princípio. Voltares a contar, tu, na tua própria vida.
+
 Quero prevenir-te de uma coisa. Escolher-se não é deixar de dar.
 
 Vais continuar a dar, a cuidar, a estar presente, porque isso é tua natureza e é bonito. A diferença é a raiz. Antes, davas por terror, para não seres deixada. Depois, dás por escolha, porque te apetece, de um lugar cheio.
