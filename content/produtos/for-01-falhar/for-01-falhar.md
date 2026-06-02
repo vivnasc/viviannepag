@@ -101,9 +101,9 @@ Não respondas já à pergunta de quem és quando erras. Não se responde com a 
 
 Tenho de parar o livro aqui. Com toda a seriedade. Este é o capítulo mais importante, e é diferente de tudo o resto.
 
-Porque o que te trouxe aqui não é, na maioria das vezes, só um padrão de personalidade. É, muito provavelmente, uma resposta a algo que viveste. Uma adaptação ao perigo. E há uma diferença enorme entre uma ferida de carácter e uma resposta de trauma, e essa diferença muda o que precisas.
+Porque o que te trouxe aqui não é, na maioria das vezes, só um padrão de personalidade. É, muito provavelmente, uma resposta a algo que viveste. Uma adaptação ao perigo. E há uma diferença enorme entre uma ferida de caráter e uma resposta de trauma, e essa diferença muda o que precisas.
 
-Uma ferida de carácter trabalha-se por compreensão. Vês o padrão, entendes a origem, e isso, com o tempo, ajuda a mudá-lo.
+Uma ferida de caráter trabalha-se por compreensão. Vês o padrão, entendes a origem, e isso, com o tempo, ajuda a mudá-lo.
 
 Uma resposta de trauma é outra coisa. Não vive só na cabeça, vive no corpo. No sistema nervoso. Na forma como o teu organismo aprendeu a reagir ao perigo, a um nível que a compreensão, sozinha, não alcança. E uma resposta de trauma precisa de mais. Precisa de compreensão, sim, mas também de corpo, de tempo, de apoio, e por vezes de tratamento.
 
