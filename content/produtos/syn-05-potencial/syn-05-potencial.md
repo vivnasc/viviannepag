@@ -35,6 +35,10 @@ Este livro não te vai ensinar a transformar o homem que amas. Não vim dar-te f
 
 Vim mostrar-te outra coisa. Que amas o que imaginas, e não o que é. E que enquanto amas o imaginado, não vês o real, nem o que ele tem de bom, nem o que ele tem que te devia fazer fugir.
 
+Porque há aqui um perigo que o teu padrão esconde. A projeção é cega para a realidade. Vê o que quer ver. E uma mulher que ama por projeção pode ficar anos com um homem que lhe faz mal, sem o ver, porque está apaixonada por uma imagem que ela própria criou, e não pelo homem que a magoa. Os avisos que outra veria, tu não vês, porque a fantasia os tapa. As bandeiras vermelhas que fariam outra fugir, tu interpreta-las como o potencial a precisar do teu amor. E é assim que o amor pelo potencial te pode manter perto, durante anos, de quem te devia ter feito fugir ao primeiro sinal.
+
+Por isso este livro não é só sobre desilusões românticas. É sobre aprenderes a ver, com os olhos abertos, com quem estás, de verdade. Porque ver com clareza é o que te protege, e a fantasia, por mais bonita, é o que te expõe.
+
 Adianto-te a direção, para leres em paz. Podes amar quem ele é, não quem poderia ser. E para isso tens de fazer uma coisa difícil. Largar o projeto, e ver o homem que está mesmo ali, tal como é, hoje, sem a fantasia do que poderia tornar-se.
 
 Talvez te reconheças em coisas pequenas.
@@ -48,6 +52,24 @@ Em defenderes o homem que amas com frases sobre o que ele "é por dentro", "o qu
 Em sentires uma estranha desilusão quando um homem é, simplesmente, o que parece, sem mistério, sem promessa, sem nada por cumprir.
 
 São todos o mesmo. O amor pela promessa. A paixão pelo projeto, e não pela pessoa.
+
+Há uma coisa que talvez te custe ouvir, mas que liberta. A intensidade da tua paixão pelo potencial não é a prova de que é um grande amor. É, muitas vezes, a prova de que é uma grande fantasia. Porque a fantasia, ao contrário do amor real, não tem limites. O homem imaginado pode ser perfeito, porque tu o desenhas. O homem real tem defeitos, contornos, resistências. E por isso a paixão pelo imaginado arde mais forte do que o amor pelo real, não por ser mais profunda, mas por não ter realidade que a contrarie.
+
+Repara, então, que confundes a intensidade da projeção com a grandeza do amor. E corres atrás dessa intensidade, de homem em homem por cumprir, achando que procuras o grande amor, quando procuras, no fundo, uma tela onde projetar. E o amor real, quando aparece, calmo, com uma pessoa de carne e osso, com qualidades e limites, parece-te pouco, porque não tem o fogo da fantasia. Mas é o único que se pode viver, porque é o único que existe fora da tua imaginação.
+
+Quero que repares em quem te acende, porque o padrão tem uma forma muito reconhecível.
+
+Acende-te o homem incompleto. O que tem talento por usar, feridas por sarar, um potencial enorme e uma vida que não está à altura dele. O diamante por lapidar. O génio incompreendido. O homem bom preso atrás de problemas que tu, com o teu amor, vais ajudar a resolver.
+
+E arrefece-te o homem inteiro. O que já se realizou, que está bem consigo, que não precisa de ser salvo nem transformado. Esse parece-te, estranhamente, sem graça. Sem mistério. Aborrecido. Porque não há nele projeto, não há tela vazia onde projetes, não há promessa por cumprir.
+
+Repara no que isto revela. Tu não te apaixonas por homens realizados. Apaixonas-te por homens por realizar, porque é no espaço entre o que eles são e o que poderiam ser que a tua imaginação se instala e cria o homem que amas, que é, no fundo, teu.
+
+E por isso os teus amores começam quase sempre da mesma forma. Conheces alguém, vês nele um potencial enorme, e apaixonas-te depressa, intensamente, antes sequer de o conheceres. Porque não precisas de o conhecer. A projeção não precisa da pessoa real, só de uma tela onde se projetar. E quanto menos o conheces, melhor tela ele é, porque menos realidade há para contrariar a tua fantasia.
+
+Há ainda um pormenor que dói reconhecer. Muitas vezes, o potencial que vês é real. Ele tem mesmo talento, tem mesmo qualidades, poderia mesmo ser aquilo que vês. O problema não é que imagines coisas falsas. É que confundes o potencial com a pessoa. Confundes o que ele poderia ser com o que ele é. E vives com o que ele é, enquanto amas o que ele poderia ser, e entre os dois há uma distância que se chama sofrimento.
+
+E repara numa coisa sobre o tempo. Quanto mais tempo passa, mais a distância entre o homem imaginado e o homem real se torna evidente. Ao início, a fantasia tapa tudo. Depois, a realidade vai aparecendo, teimosa, e tu, em vez de a veres, esforças-te mais por o transformar, por o aproximar do homem que imaginaste. E quanto mais ele se recusa a tornar-se esse homem, mais tu insistes, porque largar a fantasia seria admitir que amavas alguém que não existe.
 
 ## 2. Amar pela projeção
 
@@ -66,6 +88,24 @@ Repara nisto, que é revelador. Os homens por quem mais te apaixonas são, muita
 E aqui está o que isto te custa. Tu nunca chegas a conhecer o homem real. Estás tão ocupada a amar o projetado que não vês o que está à frente. Não vês as qualidades reais dele, que talvez sejam diferentes das que imaginaste. E, mais perigoso, não vês os sinais reais, os defeitos, os avisos, que a fantasia tapa.
 
 Porque a projeção é cega para a realidade. Vê o que quer ver. E uma mulher que ama por projeção pode ficar anos com um homem que lhe faz mal, sem o ver, porque está apaixonada por uma imagem que ela própria criou, e não pelo homem que a magoa.
+
+Quero mostrar-te o custo desta forma de amar, porque é alto e pago dos dois lados.
+
+Do teu lado, vives numa desilusão sem fim. Porque o homem real nunca está à altura do imaginado, e tu vives a medir um contra o outro, e o real sai sempre a perder. Vives numa relação a três, entre ti, ele, e o homem que ele poderia ser, e o terceiro estraga tudo, porque torna o real, sempre, insuficiente.
+
+E vives à espera. À espera da transformação. À espera de que ele se torne quem tu vês. E essa espera consome anos, a tua juventude, a tua vida, à beira de uma metamorfose que não acontece, porque não depende de ti, e talvez não aconteça nunca.
+
+Do lado dele, há um custo que talvez não vejas. Viver com alguém que não te ama como és, mas como poderias ser, é viver constantemente em falta. Ele sente, mesmo sem o nomear, que não é suficiente, que estás à espera de outra versão dele, que o homem que ele é não te basta. E isso, com o tempo, fere, e cansa, e afasta.
+
+Há uma crueldade involuntária nisto. Apaixonares-te pelo potencial é, no fundo, uma forma de não amar a pessoa. É amar uma ideia, e usar a pessoa real como suporte dessa ideia. E a pessoa real, por baixo, sabe que não é ela que tu amas, e essa é uma solidão funda: ser amado por quem se poderia ser, e nunca por quem se é.
+
+E há uma armadilha que te prende. A fantasia protege-te. Enquanto amas o potencial, não tens de decidir sobre o real. Não tens de ver que talvez ele não te sirva, que talvez te faça mal, que talvez devesses ir embora. A esperança no potencial mantém-te ocupada a esperar, sem teres de olhar de frente a realidade, e de tomar a decisão difícil que ela talvez exigisse. Amar o potencial é, às vezes, uma forma de nunca teres de decidir nada.
+
+Quero que vejas como isto se distingue da mulher que ama através do cuidado, porque são primas, e não a mesma.
+
+A que ama através do cuidado salva pelo serviço: cuida, resolve, ampara, e ama por se tornar indispensável. Tu não. Tu amas através da projeção. Apaixonas-te pelo futuro dele, pelo que ele será, e não pela pessoa nem pelo cuidado. A tua moeda não é o serviço, é a fantasia. Vês um projeto, e amas o projeto.
+
+E há uma diferença importante nas consequências. A salvadora esgota-se a fazer. Tu esgotas-te a esperar. Ela dá-se em cuidado. Tu dás-te em fé, em paciência, em adiamento, à espera de uma metamorfose. Reconhecer qual das duas és ajuda-te a discernir o teu padrão, e a não o confundir com outro que se parece mas não é.
 
 ## 3. Quem é ele sem o meu projeto
 
@@ -93,6 +133,30 @@ Mas há uma verdade dura aqui. Não mudaste o adulto da tua infância. E não va
 
 Não respondas já à pergunta de quem ele é sem o teu projeto. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que conseguires olhar o homem real, sem a fantasia, vês, enfim, com quem estás. E só vendo com quem estás podes escolher, de verdade, se queres ficar.
 
+Volta atrás, à origem, porque ninguém aprende a amar o potencial sem razão.
+
+Muitas mulheres que amam o potencial cresceram a tentar mudar alguém. A salvar alguém. A esperar que alguém se tornasse o que prometia, e nunca se tornava.
+
+Talvez tenhas tido um pai com um potencial enorme e uma vida que não estava à altura. Um homem talentoso que bebia, ou que desistia, ou que se desperdiçava. E tu, criança, viste o que ele poderia ser, e amaste essa versão dele, e sonhaste, sem o saber, salvá-lo, fazer com que ele se tornasse o homem que tinhas a certeza de que existia lá dentro.
+
+Talvez tenhas tido uma mãe infeliz que poderia florescer se, um pai ausente que poderia estar presente se, uma família cheia de potencial não cumprido. E aprendeste a amar assim: a ver, em quem amas, não quem é, mas quem poderia ser, e a fazer da tua missão de amor a transformação dessa pessoa.
+
+Repara no que uma criança aprende num lugar destes. Aprende que amar é esperar que alguém mude. Que o amor verdadeiro vê o potencial e luta por ele. Que a sua tarefa, como quem ama, é transformar, salvar, fazer florescer. E grava-se nela a equação que ainda hoje a governa: amo-te pelo que poderias ser, e o meu amor vai fazer-te lá chegar.
+
+Mas há uma verdade dura que essa criança nunca aprendeu. Não mudaste o adulto da tua infância. Por mais que o amasses, por mais que visses o seu potencial, ele não se tornou o homem que tu via. Porque as pessoas não se transformam pelo amor de outra. Transformam-se, quando se transformam, por elas próprias, no seu tempo, e não porque alguém as ama o suficiente.
+
+E hoje, em adulta, repetes. Escolhes homens por cumprir, e dedicas-te a cumpri-los, revivendo a velha missão de salvar quem, em criança, não conseguiste mudar. É uma fidelidade comovente, e trágica: continuas a tentar, em cada homem, ganhar a batalha que perdeste na infância, a de transformar com amor quem só por si se poderia transformar.
+
+Quero que vejas isto sem culpa, e sem acusar quem te criou. Quem te ensinou a amar o potencial, na maioria das vezes, era ele próprio um potencial não cumprido, alguém que precisava de ser visto pelo que poderia ser, porque o que era doía demais. Não te quis condenar a amar fantasmas. Mas ensinou-te, sem querer, e tu carrega-lo ainda, em cada homem que amas pelo que poderia ser.
+
+Quero que repares numa coisa que mantém a fantasia viva apesar de toda a evidência: a recompensa intermitente.
+
+De vez em quando, ele mostra um vislumbre do homem que imaginas. Tem um gesto, um momento, um lampejo de quem poderia ser. E esse vislumbre, raro, reacende a tua esperança toda, e apaga meses de desilusão. "Estás a ver? Ele é capaz. Eu sabia."
+
+Esses vislumbres são o que te prende. Porque o amor que nunca dá nada, desistimos dele. Mas o amor que dá um lampejo de potencial de vez em quando, esse perseguimos para sempre, à espera do próximo. E tu vives desses lampejos, a interpretá-los como provas de que a transformação está a chegar, quando são, na verdade, apenas momentos, que voltam sempre à mesma realidade.
+
+Repara nisto, porque é importante. Não interpretes os lampejos como o homem real a emergir. Interpreta a constância como o homem real. O que ele é, na maioria dos dias, repetidamente, ao longo do tempo, é quem ele é. Os vislumbres são exceções, não a regra. E construir um amor sobre as exceções, à espera de que se tornem a regra, é construir sobre areia.
+
 ## 4. O homem imaginado e o homem real
 
 Chegamos ao ponto mais fundo. E quero que o leias devagar.
@@ -113,7 +177,29 @@ Deixa-me dizer-te uma verdade que vai custar. Apaixonares-te pelo potencial é u
 
 Há ainda outra coisa. A fantasia protege-te. Enquanto amas o potencial, não tens de decidir sobre o real. Não tens de ver que talvez ele não te sirva, que talvez te faça mal, que talvez devesses ir embora. A esperança no potencial mantém-te presa, ocupada a esperar, sem teres de olhar de frente a realidade e tomar a decisão difícil que ela talvez exigisse.
 
+Há uma pergunta que está por baixo de tudo, e quero deixar-ta, sozinha. Quem é ele, sem o teu projeto?
+
+Tira, por um momento, tudo o que imaginas que ele poderia ser. O talento que vais ajudar a florescer. As feridas que vais ajudar a sarar. O homem que ele se vai tornar com o teu amor. E olha só para o que ele é, hoje, tal como é.
+
+Custa, não custa? Porque sem o projeto, sem o potencial, sem o futuro que lhe desenhaste, talvez fique um homem que não é bem o que andavas a amar.
+
+E a sombra que aqui se esconde é a tua necessidade de o transformar. Tu não queres amá-lo como ele é. Queres transformá-lo no que ele poderia ser. E essa necessidade de transformação diz mais sobre ti do que sobre ele.
+
+Porque amar alguém pela sua transformação não é amá-lo. É amar o teu próprio poder de o mudar. É uma relação não com ele, mas com o projeto dele, em que tu és a artista e ele a obra por acabar. E há, nisso, uma necessidade tua de seres importante, indispensável, a que faz a diferença. Se ele se transformar graças a ti, então tu foste essencial, foste a que o salvou, a que viu o que mais ninguém via.
+
+Repara, então, que o teu amor pelo potencial dele alimenta uma necessidade tua de seres a transformadora. E enquanto essa necessidade não for vista, vais continuar a escolher homens por transformar, porque os homens já inteiros não te dão esse papel, não precisam de ser salvos, não te deixam ser a artista da obra alheia.
+
 ## 5. Ver sem fantasia
+
+Há uma verdade dura, e quero dizer-ta com cuidado. Há, na tua relação, dois homens. O imaginado e o real. E tu amas o primeiro, enquanto vives com o segundo.
+
+O homem imaginado é maravilhoso. Tem o potencial todo cumprido. Largou os defeitos, sarou as feridas, tornou-se o que tu viste que ele podia ser. Esse homem ama-lo profundamente.
+
+O homem real é outro. Tem os defeitos por largar, as feridas por sarar, o potencial por cumprir. É com esse que partilhas a vida. E esse, muitas vezes, magoa-te, desilude-te, não chega.
+
+E tu vives a tua vida amorosa nessa distância. Entre o homem que amas, que não existe, e o homem com quem vives, que não amas como ele é. É um lugar de sofrimento permanente, porque o real nunca está à altura do imaginado, e tu vives numa desilusão sem fim, à espera de que o real se torne o imaginado.
+
+Estás numa relação a três. Tu, ele, e o homem que ele poderia ser. E o terceiro, o imaginado, estraga a relação com o real, porque o real é sempre medido contra ele, e sai sempre a perder. Enquanto não despedires esse terceiro, a tua relação com o homem real nunca terá paz, porque haverá sempre, ao lado dele, um fantasma melhor.
 
 Se amas o imaginado, então há uma coisa que te falta fazer, e que muda tudo. Ver sem fantasia.
 
@@ -137,7 +223,27 @@ Por isso, a pergunta certa não é "qual é o potencial dele?". É "quem é ele 
 
 O despertar, quando vem, é um momento de lucidez quase fria. É o dia em que olhas para ele e vês, sem a névoa da fantasia, quem ele é. E ou descobres que o real, afinal, é bom, e podes amá-lo a sério, livre do projeto. Ou descobres que estavas a amar um homem que não existe, e que o real não é para ti. As duas hipóteses, por mais diferentes, têm algo em comum. São verdade. E a verdade, ainda que doa, liberta-te da relação a três.
 
+Quero parar um momento, porque há um ponto em que isto deixa de ser um padrão e passa a um sofrimento que pede mais.
+
+Se ficas presa, ano após ano, a um homem que não muda, à espera de uma transformação que te desgasta. Se a esperança no potencial dele te mantém numa relação que te faz mal, que te diminui, que te consome. Se vês a tua vida passar à espera de que ele se torne quem nunca será.
+
+Isto pode ser mais do que um padrão. Pode ser um desgaste que te adoece, uma esperança que te aprisiona, e merece o apoio de um profissional. Não é fraqueza procurá-lo. É começares a cuidar da pessoa real que mais precisa do teu cuidado, e que tens deixado de lado: tu.
+
+E quero dizer-te uma coisa, com firmeza. Se o homem real, por baixo do potencial, te magoa, te falta ao respeito, te trata mal, então a fantasia do que ele poderia ser está a manter-te perto de alguém que te faz dano. E aí, a compreensão não chega, e não é a prioridade. A prioridade é a tua proteção. Nenhum potencial, por maior que seja, justifica que fiques com quem te magoa, à espera de uma versão dele que talvez nunca exista.
+
+O despertar, quando vem, é um momento de lucidez quase fria. É o dia em que olhas para ele e vês, sem a névoa da fantasia, quem ele é. E ou descobres que o real, afinal, é bom, e podes amá-lo a sério, livre do projeto. Ou descobres que estavas a amar um homem que não existe, e que o real não é para ti. As duas hipóteses, por mais diferentes, têm algo em comum: são verdade. E a verdade, ainda que doa, liberta-te da relação a três em que vivias, entre ti, ele, e o homem que ele poderia ser.
+
 ## 6. Discernir
+
+Quero falar-te do que é ver sem fantasia, porque não é o que temes. Não é pessimismo, não é desistir de ninguém, não é deixar de ver o bom.
+
+Ver sem fantasia é ver o todo. O bom e o mau. As qualidades reais, que talvez não sejam as que imaginaste, mas que existem. E os defeitos reais, os limites, os avisos, que a fantasia tapava.
+
+É olhar para o homem e perguntar, com honestidade: quem é ele, pelo que faz, e não pelo que diz que vai fazer? Pelo que é, e não pelo que promete? Pelos seus atos de hoje, e não pelo seu potencial de amanhã?
+
+A pergunta certa não é "qual é o potencial dele?". É "quem é ele agora, e consigo amar e viver com quem ele é agora, mesmo que nunca mude?". Se a resposta for sim, ótimo, e qualquer mudança será um bónus. Se for não, então estás a apostar a tua vida numa transformação que não controlas, e isso, mais cedo ou mais tarde, custa caro.
+
+E há uma coisa importante, sobre o potencial das pessoas. Ele é real. As pessoas mudam, às vezes. Mas mudam por elas, no tempo delas, e não porque alguém as ama o suficiente. O teu amor não é o motor da transformação dele. Se ele mudar, será por ele. E se não mudar, nenhum amor teu o fará mudar. Ver isto liberta-te de uma missão impossível, a de transformar com amor quem só por si se pode transformar.
 
 Há um verbo para esta travessia. Discernir.
 
@@ -159,7 +265,27 @@ Discernir é trazer o amor do "quando" para o "agora". É perguntares: e se ele 
 
 Não te vou dar um método. Mas deixo-te o princípio. Acredita no que ele faz, não no que poderia fazer. Ama quem ele é, não quem poderia ser. E se o que ele é não te serve, não fiques à espera de quem ele poderia ser, porque essa espera pode durar a tua vida inteira.
 
+Há um verbo para esta travessia, e quero distingui-lo de outro, para não os confundires. Discernir.
+
+Discernir é separar. Separar quem ele é de quem tu imaginas que ele será. Separar o homem real do homem projetado. Separar, dentro do que sentes, o que vem da realidade dele e o que vem da tua projeção.
+
+É diferente de simplesmente ver. Ver é reconhecer o que está. Discernir é mais fino. É distinguir, dentro da tua paixão, quanto é por quem ele é, e quanto é pelo que imaginas que ele poderia ser.
+
+Porque a tua paixão mistura, num só sentimento, o homem real e o homem imaginado. E enquanto estiverem misturados, não consegues decidir nada, porque não sabes o que estás a amar. Discernir é desfazer essa mistura. É perguntares, perante o que sentes: isto que me prende a ele é por quem ele é, ou pelo que imagino que ele poderia ser? Estou a amar os atos dele, ou as minhas promessas sobre ele?
+
+Quando fazes esta separação, acontece algo clarificador. Vês quanto da tua paixão era projeção. E o que sobra, depois de tirada a fantasia, é a medida do amor real, pela pessoa real. Às vezes sobra muito, e é bom. Às vezes sobra pouco, e é doloroso, mas é honesto.
+
+E quero dar-te uma forma prática de discernir, sem fazer disto uma técnica. As pessoas mostram quem são pelo que fazem, repetidamente, ao longo do tempo. Não pelo que poderiam fazer. Não pelo que prometem. Pelo que fazem. Por isso, perante ele, pergunta-te: quem é ele, pelos atos, e não pelas promessas? Pelo que faz, e não pelo que diz que vai fazer? Acreditar no que ele faz, e não no que poderia fazer, é o coração de discernir.
+
 ## 7. Amar o real
+
+Quero que vejas a diferença entre transformar e acompanhar, porque ela muda tudo na forma como amas.
+
+Transformar é quereres mudar o outro, fazê-lo tornar-se quem tu vês, ser a artista da sua obra. Põe-te acima dele, como quem sabe o que ele devia ser. E é exaustivo, e é uma forma de não o amar, porque ama o que ele poderia ser, e não o que é.
+
+Acompanhar é outra coisa. É estares ao lado dele, na vida dele, sem te substituíres a ele, sem o quereres mudar. É amá-lo como é, e, se ele quiser mudar, por ele, apoiá-lo, mas sem fazeres da transformação dele a condição do teu amor. Acompanhar respeita. Transformar invade.
+
+E quero dizer-te uma coisa que talvez te custe. Se um homem precisa de ser transformado para ser amável, talvez não seja para ti. Não porque não tenha valor, mas porque tu mereces amar alguém que já te serve como é, e não alguém que só te serviria depois de uma metamorfose que talvez nunca venha. O amor não devia ser uma obra em construção permanente. Devia poder, ao menos, habitar-se já.
 
 Há um destino para esta travessia. E é amar o real.
 
@@ -178,6 +304,18 @@ Quero falar-te do que é amar alguém como é. Não é resignação, não é bai
 É veres a pessoa inteira, com qualidades e limites, e escolheres, com os olhos abertos, se queres essa pessoa, essa, e não outra que imaginas. É um amor que não exige transformação para acontecer. Que diz "és isto, e eu escolho-te assim", e não "serás aquilo, e por isso espero por ti".
 
 E há uma alegria nisto que a projeção nunca dá. A alegria de seres amada como és, e de amares como é. De não haver, na relação, um terceiro fantasiado a estragar tudo. De viver com uma pessoa, e não com um projeto. É menos arrebatador, talvez, do que a paixão pela promessa. Mas é real. E o real, ao contrário da fantasia, pode durar, porque não depende de um milagre que nunca chega.
+
+Quero mostrar-te o que muda quando largas o projeto e passas a amar o real, porque é bonito, e é o oposto da perda que temes.
+
+Liberta-lo a ele. Porque um homem que é amado pelo seu potencial vive em dívida permanente, sente que tem de se tornar outro para te merecer, e isso pesa. Quando o amas como é, ou o deixas ir, paras de o pressionar a ser o que não é, e ele pode, enfim, respirar, seja contigo, seja livre de ti.
+
+Libertas-te a ti. Porque deixas de viver na desilusão sem fim de medir o real contra o imaginado. Deixas de adiar a tua vida à espera de uma transformação. E enfrentas a verdade, que dói mas liberta, em vez da fantasia, que conforta mas prende.
+
+E, se o real for bom, libertas o amor verdadeiro. Porque só se pode amar a sério quem se vê a sério. Enquanto amavas a projeção, o teu amor não chegava à pessoa. Quando largas a projeção e o real ainda te prende, então sim, há amor, amor de verdade, por uma pessoa de verdade, e esse é fundo de uma forma que a paixão pela promessa nunca foi.
+
+Amar alguém como é não é resignação, não é baixar as expectativas, não é aceitar tudo. É veres a pessoa inteira, com qualidades e limites, e escolheres, com os olhos abertos, se queres essa pessoa, essa, e não outra que imaginas. É um amor que não exige transformação para acontecer. Que diz "és isto, e eu escolho-te assim", e não "serás aquilo, e por isso espero por ti".
+
+E há uma alegria nisto que a projeção nunca dá. A alegria de seres amada como és, e de amares como é. De não haver, na relação, um terceiro fantasiado a estragar tudo. De viveres com uma pessoa, e não com um projeto. É menos arrebatador, talvez, do que a paixão pela promessa. Mas é real. E o real, ao contrário da fantasia, pode durar, porque não depende de um milagre que nunca chega.
 
 ## 8. A travessia
 
@@ -203,11 +341,31 @@ Quero deixar-te uma imagem.
 
 A travessia é olhar para a ruína e ver a ruína. E então decidir, com lucidez: ou tens o que é preciso para a restaurar, e ela vale a restauração, e fá-la, com os olhos abertos. Ou é só uma ruína, e tu mereces uma casa onde se viva já, e sais. O que não podes é continuar a viver na ruína a amar a casa imaginada, porque essa, sozinha, nunca se ergue, e tu envelheces à espera dela, ao frio.
 
+E quero que leves uma última coisa, sobre quem te vê. Se há quem aprenda a amar olhando para ti, repara no que lhes mostras. Se te veem amar fantasmas, esperar transformações, gastar-te a salvar quem não muda, aprendem que é assim que se ama, sobretudo se forem raparigas, a quem o mundo já conta histórias de mulheres que salvam homens com o seu amor. E é provável que repitam, e que se gastem, como tu, à espera de um homem imaginado.
+
+A coisa mais libertadora que podes fazer por quem te vê não é continuares a acreditar no potencial de quem te magoa. É mostrares-lhes uma mulher que ama o real, que vê com os olhos abertos, que escolhe quem é, e não quem poderia ser. Às vezes uma mulher aprende a discernir, enfim, não só por si, mas para não passar a quem vem depois a mesma fé cega em quem não a merece.
+
 Sabes, no fundo, a frase que segura este livro. Posso amar quem és, não quem poderias ser.
+
+E quero que leves uma distinção que protege tudo. Discernir não é tornares-te incapaz de ver o bom, nem desconfiada de toda a gente, nem fechada ao amor. É o contrário: é veres melhor, com os olhos abertos, o bom e o mau, para poderes escolher com verdade. Continuas a poder amar profundamente. Apenas passas a amar uma pessoa, e não uma promessa. E isso, longe de te tirar o amor, devolve-to inteiro, porque só se ama de verdade quem se vê de verdade.
 
 Discernir foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a largar, devagar, o projeto, e a olhar o real de frente. E, se houver alguém ao teu lado, a aprender, a dois, a amarem-se como são, e não como poderiam ser.
 
+Quero dar-te um sinal concreto, para discernires no dia a dia, porque a tua cabeça vai querer continuar a amar a promessa. Repara na palavra "quando".
+
+"Quando ele largar isto." "Quando ele perceber o que vale." "Quando ele estiver pronto." "Quando ele mudar." Sempre que dás por ti a viver no "quando", a adiar a felicidade para uma versão futura dele, estás a amar o potencial, não a pessoa.
+
+O amor pela pessoa real vive no presente, no que é. O amor pelo potencial vive sempre no "quando", num futuro que talvez nunca chegue. E uma vida inteira no "quando" é uma vida adiada, à espera de um homem que se constrói só na tua imaginação.
+
+Discernir é trazer o amor do "quando" para o "agora". É fazeres-te a pergunta que muda tudo: e se ele nunca mudar? E se for sempre assim? Quero esta vida, com este homem, tal como ele é hoje? Essa pergunta, respondida com honestidade, dá-te a verdade que a fantasia te escondia. Se a resposta for sim, ótimo, e qualquer mudança será um bónus. Se for não, estás a apostar a tua vida numa transformação que não controlas.
+
+E há um cuidado importante, para não passares de um extremo ao outro. Discernir não é desistires de toda a gente, nem tornares-te cínica, nem deixares de ver o bom nas pessoas. As pessoas têm, de facto, potencial, e mudam, às vezes. O que discernir te pede é só uma coisa: que ames quem ele é, hoje, e não quem imaginas que será. Que a tua decisão de ficar, ou de partir, assente no homem real, e não no projetado. Porque amar o real, mesmo com os seus limites, é amor. Amar a fantasia, por mais bonita, é solidão a dois.
+
 É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
+
+O despertar, quando vem, não chega como uma dor, chega como uma lucidez quase fria, e até com alívio. É o dia em que olhas para ele e vês, sem a névoa, quem ele é. E ou descobres que o real, afinal, é bom, e que podes amá-lo a sério, livre do projeto, com mais paz do que tinhas na fantasia. Ou descobres que estavas a amar um homem que não existe, e que o real não é para ti, e que podes, enfim, parar de esperar.
+
+E em qualquer dos casos, há um descanso. O descanso de quem larga uma missão impossível, a de transformar com amor quem só por si se transforma. O descanso de quem deixa de medir o real contra um fantasma. O descanso de quem volta a viver no presente, com uma pessoa de carne e osso, em vez de no futuro, com uma promessa. É menos arrebatador do que a fantasia. Mas é paz, e a fantasia, por mais bonita, nunca foi paz, foi sempre espera.
 
 E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
 
