@@ -489,6 +489,8 @@ A travessia é essa. Não deixares de chegar ao amor. Mas chegares lá inteira, 
 
 É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
 
+E há uma última distinção que protege tudo. Regressar a ti não é tornares-te fria, fechada, ou egoísta no amor. Não é amares menos. É amares de um lugar inteiro, em vez de um lugar dissolvido. Continuas a dar-te, a entregar-te, a aproximar-te, tanto como antes, ou mais. Mas trazes, à relação, uma pessoa, e não um eco. E uma pessoa inteira ama melhor do que uma dissolvida, porque tem, de facto, alguém ali, presente, a amar. Regressar não te afasta do amor. Devolve-te a ele, enfim, como duas pessoas, e não como uma e a sua sombra.
+
 E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
 
 Esta semana, faz uma coisa que seja só tua. Que não tenha nada a ver com ele, com a relação, com agradar a alguém. Algo que tu, sozinha, gostas. E repara no que sentes. Talvez culpa, talvez estranheza, talvez um pânico de te separares. Fica com isso, e faz na mesma. Porque é nesse gesto só teu, mantido apesar do medo, que começa o teu regresso, e que descobres, enfim, que ainda existe ali alguém. Tu.
