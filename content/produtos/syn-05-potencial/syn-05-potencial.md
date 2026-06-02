@@ -279,6 +279,10 @@ E quero dar-te uma forma prática de discernir, sem fazer disto uma técnica. As
 
 ## 7. Amar o real
 
+Quero que vejas o que se ganha ao trocares a promessa pela pessoa, porque parece uma perda e é, no fundo, um ganho. Ao largares o homem imaginado, parece que perdes o grande amor. Mas o grande amor que perdes nunca existiu, era uma fantasia tua. O que ganhas é a possibilidade de um amor real, com alguém que existe, que te pode amar de volta, em carne e osso, e não como um projeto que tu sustentavas sozinha na tua cabeça.
+
+E ganhas paz. A paz de deixares de medir, de esperar, de te desiludir. A paz de viveres no presente, com o que é, em vez de no futuro, com o que poderia ser. A paz de quem larga uma obra interminável e descobre que pode, enfim, descansar no que tem, em vez de se esgotar a construir o que imagina.
+
 Quero que vejas a diferença entre transformar e acompanhar, porque ela muda tudo na forma como amas.
 
 Transformar é quereres mudar o outro, fazê-lo tornar-se quem tu vês, ser a artista da sua obra. Põe-te acima dele, como quem sabe o que ele devia ser. E é exaustivo, e é uma forma de não o amar, porque ama o que ele poderia ser, e não o que é.
