@@ -61,7 +61,7 @@ As duas coisas podem coexistir. Podes estar em crise e precisar de ajuda clínic
 
 Vem. Com cuidado. Ao teu ritmo. E se em qualquer momento sentires que isto é demasiado, para. Fecha o livro. Cuida de ti. Volta quando estiveres pronta. Não há pressa no escuro.
 
-Porque é exactamente isso que este livro te pede: que vás devagar. Que não te forces. Que respeites o teu estado. Não vou pedir-te que sejas forte. Já o és, mais do que sabes. Não vou pedir-te que tenhas esperança. A esperança virá quando puder. Por agora, basta que estejas aqui. A ler. A respirar. A dar-te a chance de ouvir outra perspetiva sobre o que estás a viver.
+Porque é exatamente isso que este livro te pede: que vás devagar. Que não te forces. Que respeites o teu estado. Não vou pedir-te que sejas forte. Já o és, mais do que sabes. Não vou pedir-te que tenhas esperança. A esperança virá quando puder. Por agora, basta que estejas aqui. A ler. A respirar. A dar-te a chance de ouvir outra perspetiva sobre o que estás a viver.
 
 E quero que saibas, antes de começarmos, que este livro foi escrito com um cuidado especial. Cada palavra foi pesada. Cada ideia foi verificada. Porque sei que quem está no escuro está vulnerável, e a vulnerabilidade merece proteção, não exploração. Não vou usar a tua dor para te vender promessas. Não vou embrulhá-la em linguagem bonita para que pareça mais palatável. Vou tratá-la com a seriedade que merece. E se, no final, sentires que estas páginas te acompanharam, mesmo que por um momento, mesmo que por um parágrafo, isso será mais do que suficiente.
 
@@ -71,7 +71,7 @@ E quero que saibas, antes de começarmos, que este livro foi escrito com um cuid
 
 Quando uma pessoa entra em crise, o mundo à sua volta tende a fazer uma coisa imediata: classificar. Diagnosticar. Pôr nome. "É depressão." "É burnout." "É ansiedade." "É uma crise de pânico." E esta classificação, por mais útil que seja (e é útil, em muitos casos é essencial), tem um efeito colateral: reduz a experiência a uma patologia. A uma coisa que está errada. A uma avaria que precisa de ser reparada.
 
-E em muitos casos, é exactamente isso que é. A depressão é real. A ansiedade clínica é real. O burnout é real. São condições que precisam de tratamento, de acompanhamento, muitas vezes de medicação. Não estou a pôr isto em causa. Não estou a sugerir que se substitua o médico pelo guru, o antidepressivo pela meditação, a terapia pela fé. Isso seria irresponsável e perigoso.
+E em muitos casos, é exatamente isso que é. A depressão é real. A ansiedade clínica é real. O burnout é real. São condições que precisam de tratamento, de acompanhamento, muitas vezes de medicação. Não estou a pôr isto em causa. Não estou a sugerir que se substitua o médico pelo guru, o antidepressivo pela meditação, a terapia pela fé. Isso seria irresponsável e perigoso.
 
 Mas quero abrir uma porta para outra leitura. Uma leitura que não substitui a primeira, que a complementa. Uma leitura que vem de uma tradição longa, presente em diferentes culturas e épocas, e que a psicologia transpessoal recuperou e trouxe para o campo científico: a possibilidade de que certas crises não são apenas avarias. São transformações.
 
@@ -121,7 +121,7 @@ Há culturas antigas que compreendiam isto. Que tinham rituais de passagem, espa
 
 Este livro não pode ser o ritual que a tua cultura te negou. Mas pode ser um reconhecimento: o que estás a viver merece respeito. Merece tempo. Merece cuidado. Merece ser tratado como o que é: uma passagem, não uma avaria.
 
-E há um aspecto das passagens que poucas pessoas mencionam: a solidão. Não a solidão de estar fisicamente sozinha (embora isso também aconteça). A solidão de sentir que ninguém compreende o que estás a viver. Que ninguém vê o que vês. Que estás num lugar tão fundo e tão estranho que as palavras que tens não servem para o descrever, e as palavras que os outros usam não chegam ao sítio onde estás.
+E há um aspeto das passagens que poucas pessoas mencionam: a solidão. Não a solidão de estar fisicamente sozinha (embora isso também aconteça). A solidão de sentir que ninguém compreende o que estás a viver. Que ninguém vê o que vês. Que estás num lugar tão fundo e tão estranho que as palavras que tens não servem para o descrever, e as palavras que os outros usam não chegam ao sítio onde estás.
 
 Essa solidão é talvez a parte mais dolorosa da passagem. Mais do que a dor em si. Porque a dor partilhada é suportável. A dor sozinha pode parecer insuportável. E no escuro, a tendência é isolarmo-nos, é escondermo-nos, é pôr uma máscara e dizer "estou bem" quando nos perguntam, porque é mais fácil do que tentar explicar algo para o qual não há palavras.
 

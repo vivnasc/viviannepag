@@ -176,18 +176,18 @@ Repara no que sentes ao olhar para a lista. Talvez espanto. Talvez alívio. Talv
 
 Agora faz uma coisa: imagina que tiras da lista tudo o que tem H, C ou P. Imagina que pousas no chão os objectivos herdados, os reflexos, as compensações. Imagina que te ficas apenas com os V. O que sobra?
 
-Talvez sobre pouco. Talvez sobre uma ou duas coisas. Talvez, por um instante, sintas pânico, porque a lista ficou quase vazia. E esse pânico é exactamente o ponto. Porque é ali, naquele espaço vazio, naquele "quase nada", que está o que é genuinamente teu. E "quase nada" que é teu vale mais do que uma lista inteira de coisas emprestadas.
+Talvez sobre pouco. Talvez sobre uma ou duas coisas. Talvez, por um instante, sintas pânico, porque a lista ficou quase vazia. E esse pânico é exatamente o ponto. Porque é ali, naquele espaço vazio, naquele "quase nada", que está o que é genuinamente teu. E "quase nada" que é teu vale mais do que uma lista inteira de coisas emprestadas.
 
-Não precisas de tomar nenhuma decisão agora. Não precisas de largar nada. Não precisas de mudar nada. O simples acto de ver, de separar, de nomear, já é o passo mais importante. A maioria das pessoas vive a vida inteira sem fazer esta pergunta. Tu estás a fazê-la. E isso já é muito.
+Não precisas de tomar nenhuma decisão agora. Não precisas de largar nada. Não precisas de mudar nada. O simples ato de ver, de separar, de nomear, já é o passo mais importante. A maioria das pessoas vive a vida inteira sem fazer esta pergunta. Tu estás a fazê-la. E isso já é muito.
 
-*Uma nota importante: se ao fazeres este exercício tocares em feridas muito profundas, em memórias de negligência, de abuso ou de trauma, não fiques sozinha com isso. Este guia é um ponto de partida, não é terapia. Procurar ajuda profissional é um acto de coragem, não de fraqueza.*
+*Uma nota importante: se ao fazeres este exercício tocares em feridas muito profundas, em memórias de negligência, de abuso ou de trauma, não fiques sozinha com isso. Este guia é um ponto de partida, não é terapia. Procurar ajuda profissional é um ato de coragem, não de fraqueza.*
 
 
 ## 4. O que fica quando largas o emprestado
 
 Se fizeste o exercício com honestidade, talvez estejas a olhar para a tua lista com uma mistura de clareza e de vertigem. Clareza porque, talvez pela primeira vez, consegues ver de onde vem o que persegues. Vertigem porque o que é genuinamente teu pode parecer pequeno. Simples. Quase insignificante, comparado com a lista enorme de metas que tinhas antes.
 
-E é exactamente aqui que a mente entra em pânico. Porque a mente foi treinada para medir a vida em quantidade. Em objectivos. Em conquistas. Em produção. E quando a lista encolhe, a mente grita: "E agora? Se não persigo tudo isto, quem sou eu? Se não estou a correr, o que faço? Se não tenho metas impressionantes, o que digo quando me perguntam o que faço da vida?"
+E é exatamente aqui que a mente entra em pânico. Porque a mente foi treinada para medir a vida em quantidade. Em objectivos. Em conquistas. Em produção. E quando a lista encolhe, a mente grita: "E agora? Se não persigo tudo isto, quem sou eu? Se não estou a correr, o que faço? Se não tenho metas impressionantes, o que digo quando me perguntam o que faço da vida?"
 
 Quero dizer-te uma coisa: essa voz não é a tua. Essa voz é o medo. O medo de não ser suficiente sem a armadura das conquistas. O medo de que, sem o currículo, sem os resultados, sem a lista, não sobre nada. Mas sobre. Sobras tu.
 
@@ -199,7 +199,7 @@ E há outra qualidade: a sustentação. O que é teu sustenta-te. Quando trabalh
 
 Não estou a dizer que tens de largar tudo o que é H, C ou P. Há objectivos herdados que, com o tempo, ganharam verdade própria. Há metas que começaram como comparação e que, ao serem questionadas, revelaram um desejo genuíno por baixo. Há compensações que, uma vez vistas, perdem a urgência mas mantêm o interesse. O exercício não é para eliminar. É para ver. E quando vês, a relação com o objectivo muda. Porque já não estás a ser levada. Estás a escolher.
 
-A diferença entre ser levada e escolher é a diferença entre uma vida cheia e uma vida tua. Podes ter exactamente as mesmas metas. Mas se as escolheres com consciência, a energia é outra. O corpo é outro. O resultado é outro. E, sobretudo, a sensação ao final do dia é outra.
+A diferença entre ser levada e escolher é a diferença entre uma vida cheia e uma vida tua. Podes ter exatamente as mesmas metas. Mas se as escolheres com consciência, a energia é outra. O corpo é outro. O resultado é outro. E, sobretudo, a sensação ao final do dia é outra.
 
 Fica com o que é teu. Mesmo que pareça pouco. Mesmo que pareça simples. Mesmo que a mente diga que não é suficiente. É. É mais do que suficiente. Porque é verdadeiro. E a verdade, por mais pequena que seja, preenche de uma forma que nenhuma lista de conquistas emprestadas jamais preencheu.
 

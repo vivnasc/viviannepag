@@ -29,7 +29,7 @@ Não a perguntas em voz alta. Talvez nunca a tenhas dito a ninguém. Mas ela est
 
 Talvez tenhas o emprego que querias. Ou pelo menos um emprego decente, que paga as contas, que te dá alguma autonomia. Talvez tenhas a casa, o carro, os filhos, o companheiro. Talvez tenhas conseguido coisas que a tua mãe nunca conseguiu. Talvez estejas, por qualquer medida exterior, numa posição que muita gente invejaria.
 
-E é exactamente por isso que não falas nisto.
+E é exatamente por isso que não falas nisto.
 
 Porque como é que explicas que tens tudo e sentes que falta alguma coisa? Como é que dizes a alguém, sem parecer ingrata, que a vida que construíste não te preenche? Que o diploma que penduraste na parede não te deu a satisfação que prometia? Que o aumento que recebeste te deu um mês de alívio e depois o vazio voltou, intacto, como se nunca tivesse saído?
 
@@ -161,7 +161,7 @@ Carl Jung escreveu sobre isto com uma clareza impressionante. Dizia que a primei
 
 Outro momento em que o vazio existencial aparece com força é depois de uma perda significativa. Não necessariamente uma morte, embora a morte seja das mais poderosas. Pode ser a perda de uma relação, de uma identidade profissional, de uma fase da vida. A mãe cujos filhos saíram de casa. A mulher que se divorciou depois de vinte anos. A pessoa que perdeu o emprego que definia quem era. Nestas perdas, o que se perde não é apenas a coisa ou a pessoa. Perde-se a estrutura de sentido que estava construída à volta dela. E quando a estrutura cai, o vazio fica exposto. Não é que o vazio tenha aparecido com a perda. Já lá estava. Mas havia coisas em cima dele que o tapavam. A perda retirou a cobertura.
 
-E depois há um terceiro momento, talvez o mais paradoxal de todos: o vazio que aparece depois de conseguires tudo. Depois de atingires o objetivo. Depois de cruzares a linha de chegada. É o momento em que os atletas falam de uma espécie de depressão pós-conquista. É o que muitas mulheres sentem depois de terem o bebé que tanto desejavam (para além do baby blues, que é hormonal, há um vazio mais fundo: "Consegui o que mais queria. Porque é que não me sinto completa?"). É o que sentes quando finalmente compras a casa, acabas o projeto, recebes a promoção, e depois de um breve momento de euforia, estás exactamente onde estavas antes.
+E depois há um terceiro momento, talvez o mais paradoxal de todos: o vazio que aparece depois de conseguires tudo. Depois de atingires o objetivo. Depois de cruzares a linha de chegada. É o momento em que os atletas falam de uma espécie de depressão pós-conquista. É o que muitas mulheres sentem depois de terem o bebé que tanto desejavam (para além do baby blues, que é hormonal, há um vazio mais fundo: "Consegui o que mais queria. Porque é que não me sinto completa?"). É o que sentes quando finalmente compras a casa, acabas o projeto, recebes a promoção, e depois de um breve momento de euforia, estás exatamente onde estavas antes.
 
 Este terceiro momento é o mais silenciado, porque é o mais difícil de justificar. Como é que te queixas de ter conseguido? Como é que dizes que o sonho realizado te deixou vazia? Parece absurdo. Parece ingratidão. Parece loucura.
 
@@ -231,7 +231,7 @@ A transcendência não é algo que se provoque. É algo que se permite. Que se a
 
 **Presença.** A quarta fonte é, talvez, a mais radical e a mais simples. A presença é estar aqui. Completamente. Não no passado, não no futuro, não na lista de tarefas, não na preocupação. Aqui. Agora. Com o que há. Com o que é.
 
-A presença não é uma técnica. É uma qualidade de atenção. É a capacidade de lavar a loiça e estar a lavar a loiça, não a resolver mentalmente os problemas de amanhã. É a capacidade de ouvir o teu filho e ouvi-lo de verdade, não com metade da mente noutro sítio. É a capacidade de sentir o chão debaixo dos pés, o ar a entrar nos pulmões, o calor do sol na pele, e reconhecer que este momento, este exactamente, é a tua vida. Não a preparação para a vida. A vida.
+A presença não é uma técnica. É uma qualidade de atenção. É a capacidade de lavar a loiça e estar a lavar a loiça, não a resolver mentalmente os problemas de amanhã. É a capacidade de ouvir o teu filho e ouvi-lo de verdade, não com metade da mente noutro sítio. É a capacidade de sentir o chão debaixo dos pés, o ar a entrar nos pulmões, o calor do sol na pele, e reconhecer que este momento, este exatamente, é a tua vida. Não a preparação para a vida. A vida.
 
 O sentido nasce quando estamos presentes o suficiente para o reconhecer. Porque o sentido não mora no futuro. Mora aqui. Sempre morou. Mas passamos tão depressa que não o vemos.
 

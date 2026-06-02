@@ -48,7 +48,7 @@ Porque quando respiras antes de reagir, o que acontece é fisiológico, não ape
 
 Há uma prática simples que pode ajudar a alargar esse espaço: quando sentires o impulso a subir, põe as duas mãos espalmadas sobre as coxas (se estiveres sentada) ou sobre o peito (se estiveres de pé). O contacto físico das mãos com o corpo dá um sinal ao sistema nervoso: estou aqui. Estou no meu corpo. Não preciso de reagir agora. É um gesto pequeno, quase invisível, que ninguém nota. Mas que muda o que acontece dentro de ti.
 
-Outra coisa que ajuda: dizer mentalmente "estou a sentir" antes de agir. "Estou a sentir raiva." "Estou a sentir medo." "Estou a sentir rejeição." O simples acto de nomear a emoção (como vimos no guia sobre esvaziar a mente) ativa o córtex pré-frontal e acalma a amígdala. É biologia, não misticismo. E funciona em segundos.
+Outra coisa que ajuda: dizer mentalmente "estou a sentir" antes de agir. "Estou a sentir raiva." "Estou a sentir medo." "Estou a sentir rejeição." O simples ato de nomear a emoção (como vimos no guia sobre esvaziar a mente) ativa o córtex pré-frontal e acalma a amígdala. É biologia, não misticismo. E funciona em segundos.
 
 Não estou a dizer que é fácil. A primeira vez que tentares parar no meio de uma onda de raiva ou de dor, o corpo vai protestar. Vai dizer: "Reage! Defende-te! Ele está a atacar-te!" Porque o corpo está treinado para reagir. Décadas de padrões não se desfazem com uma respiração. Mas podem começar a desfazer-se. Uma respiração de cada vez.
 

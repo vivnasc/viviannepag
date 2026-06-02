@@ -110,7 +110,7 @@ Pode ajudar escolher apenas uma prática e fazê-la durante uma semana. Não tod
 
 Outra coisa que ajuda: ligar as práticas a gatilhos que já existem. A respiração da manhã liga-se ao momento de acordar (gatilho: abrir os olhos). As mãos na água ligam-se a cada ida à casa de banho (gatilho: abrir a torneira). O gole do café liga-se ao ritual da manhã (gatilho: a primeira chávena). Quando ligas uma prática nova a um hábito que já tens, a probabilidade de te lembrares aumenta enormemente. Não dependes da memória. Dependes da rotina. E a rotina, que é normalmente a inimiga da presença, torna-se a tua aliada.
 
-E há um truque que aprendi com uma mãe que conheço: ela colou um pequeno ponto colorido no relógio do carro. Cada vez que olhava para a hora (o que acontecia muitas vezes ao dia), o ponto lembrava-a de respirar. Um segundo. Uma respiração. E o dia dela, que era exactamente tão cheio como antes, passou a ter dezenas de micro-momentos de presença espalhados pelo meio.
+E há um truque que aprendi com uma mãe que conheço: ela colou um pequeno ponto colorido no relógio do carro. Cada vez que olhava para a hora (o que acontecia muitas vezes ao dia), o ponto lembrava-a de respirar. Um segundo. Uma respiração. E o dia dela, que era exatamente tão cheio como antes, passou a ter dezenas de micro-momentos de presença espalhados pelo meio.
 
 E há algo surpreendente que muitas mulheres me relatam: quando praticam estas pausas regularmente, não ficam com menos tempo. Ficam com mais. Porque a presença traz eficiência. Quando estás inteiramente no que fazes, fazes mais depressa e melhor. A dispersão é que gasta tempo. A presença poupa-o.
 

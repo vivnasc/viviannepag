@@ -23,7 +23,7 @@ A mente humana produz, segundo estimativas da neurociência, entre 60.000 e 70.0
 
 Não é culpa tua. A mente evoluiu para proteger-te, não para te fazer feliz. O seu trabalho é antecipar perigos, resolver problemas, manter-te viva. E faz isso muito bem. O problema é que, no mundo moderno, onde os perigos raramente são leões que te perseguem e são mais frequentemente emails a que não respondeste, a mente não sabe parar. Trata cada preocupação como uma ameaça de vida. Cada tarefa por fazer como um perigo iminente. E gira, gira, gira, sem encontrar a saída, porque a saída não é resolver mais um problema. A saída é parar.
 
-E parar é exactamente o que a mente recusa fazer.
+E parar é exatamente o que a mente recusa fazer.
 
 Há uma imagem que uso muitas vezes: a mente é como uma máquina de lavar roupa em centrifugação. A roupa gira a velocidade máxima, tudo está misturado, tudo está em movimento, e tu não consegues ver o que lá está dentro. Não consegues tirar nenhuma peça sem desligar primeiro a máquina.
 
@@ -50,7 +50,7 @@ A ciência chama a isto "pensamento repetitivo negativo". E está associado a an
 
 E a ruminação tem um efeito particularmente perverso nas mulheres. Estudos mostram que as mulheres ruminam mais do que os homens. Não porque sejam mais fracas ou mais emocionais. Porque são mais socializadas para a responsabilidade relacional. Pensas nos teus filhos, no teu marido, nos teus pais, nas tuas amigas, nos teus colegas. Pensas no que eles sentem, no que precisam, no que poderiam precisar. Pensas neles antes de pensares em ti. E cada uma destas camadas de preocupação alimenta a roda.
 
-E há outra coisa: a culpa amplifica a ruminação. "Não devia ter dito aquilo." "Devia ter feito diferente." "E se o magoei?" A culpa é a gasolina da roda de pensamentos. E muitas mulheres vivem num ciclo de culpa e ruminação que se alimenta mutuamente: culpa gera pensamento, pensamento gera mais culpa, que gera mais pensamento. Quebrar este ciclo não se faz pensando. Faz-se agindo de forma diferente. E os três passos que te vou dar são exactamente isso: uma forma de agir quando a mente quer que fiques presa a pensar.
+E há outra coisa: a culpa amplifica a ruminação. "Não devia ter dito aquilo." "Devia ter feito diferente." "E se o magoei?" A culpa é a gasolina da roda de pensamentos. E muitas mulheres vivem num ciclo de culpa e ruminação que se alimenta mutuamente: culpa gera pensamento, pensamento gera mais culpa, que gera mais pensamento. Quebrar este ciclo não se faz pensando. Faz-se agindo de forma diferente. E os três passos que te vou dar são exatamente isso: uma forma de agir quando a mente quer que fiques presa a pensar.
 
 E há outro fenómeno que a ciência documenta: a "paralisia de análise". Quanto mais pensas num problema, mais opções vês, mais riscos identificas, mais incerteza sentes, e menos capaz te tornas de decidir. A mente, que supostamente deveria ajudar-te a resolver, torna-se o próprio obstáculo. Já te aconteceu pensares tanto sobre uma decisão que no final não decidiste nada? Que ficaste no mesmo sítio, mais exausta e mais confusa do que quando começaste? Isso é a paralisia de análise. É a mente a rodar em círculos, convencida de que mais uma volta vai resolver, quando na verdade mais uma volta apenas aperta o nó.
 
@@ -95,7 +95,7 @@ Agora que a mente está mais limpa, faz uma coisa: escolhe. Escolhe um pensament
 
 Há uma frase que gosto de repetir: "Tu não és os teus pensamentos. Tu és quem observa os pensamentos." Parece abstracto, mas experimenta: da próxima vez que um pensamento negativo aparecer, em vez de te fundires com ele, repara nele. "Olha, o pensamento de que não sou suficiente apareceu outra vez." Não lutas contra ele. Não lhe dás razão. Apenas notas. Como quem vê um carro a passar na rua. Não entras no carro. Apenas observas. E o carro passa. E tu ficas.
 
-A diferença entre ser pensada e pensar é exactamente esta: a escolha. Quando a mente te pensa, tu és passageira. Quando tu pensas, és condutora. E este exercício, feito regularmente (de manhã, antes de dormir, ou nos momentos de maior agitação), devolve-te o volante.
+A diferença entre ser pensada e pensar é exatamente esta: a escolha. Quando a mente te pensa, tu és passageira. Quando tu pensas, és condutora. E este exercício, feito regularmente (de manhã, antes de dormir, ou nos momentos de maior agitação), devolve-te o volante.
 
 Uma nota prática: este exercício funciona melhor quando é feito regularmente. Não como emergência (embora também funcione em emergência), mas como hábito. De manhã, ao acordar: despeja, separa, escolhe. Antes de dormir: despeja, separa, larga. Nos momentos de pico de ansiedade: despeja, separa, respira. Quantas mais vezes fizeres, mais natural se torna. E mais rápido fica. No início pode demorar dez minutos. Depois de alguma prática, cinco. Depois de muita prática, fazes mentalmente em dois minutos, enquanto esperas no trânsito.
 
@@ -106,7 +106,7 @@ E há algo que muitas mulheres descobrem quando fazem este exercício: os pensam
 
 ## 4. Ponte Infonte
 
-Se este exercício te ajudou, se sentiste que, ao esvaziar a mente, algo se abriu, quero dizer-te que há um espaço criado exactamente para isto: para o que acontece depois de esvaziar.
+Se este exercício te ajudou, se sentiste que, ao esvaziar a mente, algo se abriu, quero dizer-te que há um espaço criado exatamente para isto: para o que acontece depois de esvaziar.
 
 O **Infonte** é o espaço onde a mente vazia se encontra com a criatividade. Não criatividade no sentido de "arte bonita" ou "talento especial". Criatividade no sentido de criar a partir de ti mesma. De deixar que, do silêncio, surja algo. Uma palavra. Uma ideia. Uma imagem. Uma direção. O Infonte é a fonte interior, o manancial que só se revela quando o ruído pára.
 

@@ -375,7 +375,7 @@ Esses podem ser indícios de que a tua culpa tem raízes mais fundas do que a tu
 
 Não precisas de conhecer toda a história da tua família para sentir isto. Não precisas de saber os detalhes. Às vezes basta parares e perguntares: "esta culpa é minha ou é de quem veio antes de mim?" E o corpo responde. Nem sempre com palavras. Às vezes com um suspiro. Às vezes com lágrimas que parecem vir de um lugar mais antigo do que a tua própria memória. E esse é o sinal de que há algo por devolver.
 
-### A culpa como protecção
+### A culpa como proteção
 
 Há ainda outra camada. A culpa, por mais dolorosa que seja, protege-te de algo pior: a impotência.
 
@@ -393,7 +393,7 @@ Há mães que preferem carregar o peso da culpa durante anos a enfrentar, por um
 
 Mas esse amor, quando não tem consciência, prende. Prende-te a ti e prende os teus filhos. Porque uma mãe que não aceita a sua impotência torna-se controladora. Tenta prever tudo, evitar tudo, resolver tudo. E ao fazê-lo, tira aos filhos a oportunidade de aprenderem a lidar com a vida. Com as frustrações. Com as dores. Com o facto de que a vida, por mais amor que tenha, inclui sofrimento.
 
-Entender de onde vem a tua culpa não a apaga. Mas tira-lhe o poder absoluto. Quando percebes que a culpa não é prova de falha, que pode ser herança, que pode ser pressão social, que pode ser protecção, que pode nem sequer ser tua, algo muda. Não de um dia para o outro. Mas muda.
+Entender de onde vem a tua culpa não a apaga. Mas tira-lhe o poder absoluto. Quando percebes que a culpa não é prova de falha, que pode ser herança, que pode ser pressão social, que pode ser proteção, que pode nem sequer ser tua, algo muda. Não de um dia para o outro. Mas muda.
 
 A culpa deixa de ser uma verdade e passa a ser uma pergunta. E perguntas podem ser exploradas. Verdades absolutas, não.
 

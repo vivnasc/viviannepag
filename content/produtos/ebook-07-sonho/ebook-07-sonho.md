@@ -37,7 +37,7 @@ E o pior é a culpa. A culpa de não estar satisfeita. A culpa de ter "tudo" e q
 
 Eu conheço esta mulher. Conheço-a porque a vejo todos os dias no meu trabalho. E conheço-a porque a fui durante muitos anos. A mulher que faz demais. Que tem talento a mais e clareza a menos. Que é competente em tudo menos em saber o que quer de verdade. Que corre, e corre, e corre, e quando alguém lhe pergunta "para onde?", fica em branco.
 
-Há mulheres que chegam a mim com esta frase exacta: "Eu não sei o que me falta." E dizem-na com vergonha. Como se não saber fosse mais uma prova de que são insuficientes. Mas a verdade é que não saber é o sintoma mais honesto que podem ter. Porque o que falta não tem nome fácil. Não é o emprego, não é o dinheiro, não é a relação. O que falta é mais fundo: é a ligação entre o que fazes e quem és. A ligação entre a tua vida e a tua verdade. E essa ligação partiu-se há tanto tempo que já nem te lembras de como era.
+Há mulheres que chegam a mim com esta frase exata: "Eu não sei o que me falta." E dizem-na com vergonha. Como se não saber fosse mais uma prova de que são insuficientes. Mas a verdade é que não saber é o sintoma mais honesto que podem ter. Porque o que falta não tem nome fácil. Não é o emprego, não é o dinheiro, não é a relação. O que falta é mais fundo: é a ligação entre o que fazes e quem és. A ligação entre a tua vida e a tua verdade. E essa ligação partiu-se há tanto tempo que já nem te lembras de como era.
 
 E o mais estranho é que a mulher que vive assim não pára. Não desiste. Não se deita no sofá a ver séries (embora às vezes queira desesperadamente). Continua. Acorda, funciona, executa, entrega, resolve, repete. Com uma eficiência assustadora. E por fora, parece a mulher mais organizada do mundo. Por dentro, está a desmoronar-se. Não de forma dramática. De forma silenciosa. Como uma casa que por fora está impecável mas cujas fundações estão a ceder, lentamente, sem que ninguém veja.
 
@@ -55,7 +55,7 @@ E é sobre isso que este livro fala. Não sobre fazer mais. Não sobre fazer mel
 
 ## 2. Alcançar e sentir pouco
 
-Vou descrever-te uma cena. Se não for exactamente a tua, será parecida o suficiente para que a reconheças.
+Vou descrever-te uma cena. Se não for exatamente a tua, será parecida o suficiente para que a reconheças.
 
 Há meses que trabalhas para algo. Um projeto, uma meta, um objetivo. Deste tudo. Noites, fins de semana, energia que não tinhas. Sacrificaste coisas: tempo com os filhos, saúde, sono, lazer, presença. E finalmente acontece. O projeto é aprovado. O objetivo é atingido. O email chega. O resultado aparece.
 
@@ -219,7 +219,7 @@ Porque largar não é desistir. Largar é soltar o que não é teu para que as m
 
 E a tua voz pode dizer coisas que te surpreendem. Pode dizer: "Eu não quero esta carreira. Quero outra." Pode dizer: "Eu não preciso de provar nada a ninguém." Pode dizer: "O que eu realmente quero é mais simples, mais quieto, mais pequeno do que tudo o que construí." E essas revelações podem ser aterradoras. Porque desmontar o que construíste (ou pelo menos rever a relação que tens com o que construíste) dá medo. Dá medo porque a tua identidade estava ancorada nas conquistas. E sem as conquistas, quem és?
 
-Mas essa pergunta, "quem sou eu sem as conquistas?", é exactamente a pergunta certa. É a pergunta que o Infonte faz. Não para te tirar as conquistas. Para te devolver a ti. Para que as conquistas sejam expressão de quem és, não substituição do que te falta.
+Mas essa pergunta, "quem sou eu sem as conquistas?", é exatamente a pergunta certa. É a pergunta que o Infonte faz. Não para te tirar as conquistas. Para te devolver a ti. Para que as conquistas sejam expressão de quem és, não substituição do que te falta.
 
 O trabalho de largar não é simples. Não é uma decisão de uma tarde. É um processo. Um processo de devolver as ambições emprestadas, os sonhos herdados, as expectativas alheias. Um processo de olhar para a tua vida e perguntar, item por item: "Isto é meu? Quero isto por mim? Ou quero isto para provar algo, para compensar algo, para repetir algo?"
 
@@ -251,7 +251,7 @@ Esta pergunta é o ponto de partida do Infonte. Não como exercício intelectual
 
 Quero contar-te uma coisa sobre o que acontece quando fazes esta pergunta de verdade. Quando te sentas com ela, quando lhe dás espaço, quando não te apressas a responder. O que acontece, na maioria dos casos, é silêncio. A mente, habituada a produzir respostas instantâneas, fica desconcertada. "O que é mesmo meu?" E nada vem. Ou vem uma resposta que parece ridícula, pequena, insignificante. "Quero desenhar." "Quero caminhar." "Quero viver ao pé do mar." "Quero ter tempo." E a mente diz imediatamente: "Isso não conta. Isso não é um objetivo. Isso não se pode pôr num currículo."
 
-Mas é exactamente aí que está a tua verdade. Nas coisas que a mente descarta como "pequenas demais". Porque a tua verdade não precisa de ser grandiosa. Não precisa de ser impressionante. Não precisa de ser validada por ninguém. Precisa apenas de ser tua. Genuinamente tua. E quando é tua, quando nasce de ti e não da herança nem da comparação nem da compensação, há uma qualidade diferente na forma como a vives. Não a vives com pressa. Vive-la com presença. Não a persegues com desespero. Caminhas nela com calma. Não te esgota. Alimenta-te.
+Mas é exatamente aí que está a tua verdade. Nas coisas que a mente descarta como "pequenas demais". Porque a tua verdade não precisa de ser grandiosa. Não precisa de ser impressionante. Não precisa de ser validada por ninguém. Precisa apenas de ser tua. Genuinamente tua. E quando é tua, quando nasce de ti e não da herança nem da comparação nem da compensação, há uma qualidade diferente na forma como a vives. Não a vives com pressa. Vive-la com presença. Não a persegues com desespero. Caminhas nela com calma. Não te esgota. Alimenta-te.
 
 Talvez o que é teu seja mais simples do que pensavas. Talvez seja escrever, sem publicar. Talvez seja cuidar, sem cargo. Talvez seja criar, sem público. Talvez seja viver, sem provar. Talvez o que é teu não caiba no currículo. Talvez não tenha nome. Talvez não tenha aplausos. Mas quando o sentes, sabes. Porque o corpo acalma. A pressa pára. A esteira desliga. E tu, pela primeira vez em muito tempo, sentes que chegaste. Não a um destino. A ti.
 
