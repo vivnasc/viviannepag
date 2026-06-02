@@ -507,6 +507,8 @@ Mas repara. Numa casa em que és tudo, não há lugar para ti viveres. És a est
 
 A travessia é deixares de ser a estrutura e passares a ser a habitante. Deixares que a casa se aguente também sem ti, para poderes, enfim, viver lá dentro, descansar lá dentro, ser amada lá dentro. Não como o que segura tudo. Como alguém que é querido por estar.
 
+E quero que leves uma última coisa, sobre o medo que está debaixo de tudo. O medo de seres deixada não se cura tornando-te indispensável. Cura-se descobrindo que o teu valor não depende de fazeres falta. Que há quem te queira a ti, e não ao que fazes. E que, mesmo que alguém parta, tu ficas, inteira, contigo, porque o teu lugar no mundo nunca dependeu, afinal, de seres a peça de que tudo depende. Esse medo aprendeu-se, e o que se aprende pode, devagar, e talvez com ajuda, desaprender-se.
+
 Sabes, no fundo, a frase que segura este livro. Posso ser escolhida sem me tornar indispensável.
 
 Escolher-se foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a parar de servir, quando tudo em ti quer correr a tornar-se útil. A suportar o terror de não seres precisa. E, se houver alguém ao teu lado, a aprender, a dois, a serem livres e escolherem-se na mesma.
