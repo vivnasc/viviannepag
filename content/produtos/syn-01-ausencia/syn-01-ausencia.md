@@ -509,7 +509,7 @@ E começas a reparar em quem já lá esteve. Às vezes o amor presente não é u
 
 Olha outra vez para esses. Para os que ficaram, os que não jogaram, os que te quiseram sem te fazer sofrer, e que tu arquivaste como amigos, ou como pouco, ou como sem química. Talvez um deles fosse, todo este tempo, o amor que dizias procurar e que recusavas por não te fazer correr.
 
-Ver é também rever. Voltar a olhar, com olhos novos, o que descartaste com olhos velhos.
+Ver é também rever. Voltar a olhar, com olhos novos, o que descartaste com olhos velhos. Porque às vezes o amor que procuravas não estava à distância. Estava ao lado, à espera, há mais tempo do que imaginas.
 
 Ver não é deixar de sentir. É deixar de confundir o que sentes.
 
