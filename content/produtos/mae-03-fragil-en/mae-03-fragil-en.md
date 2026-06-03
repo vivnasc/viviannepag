@@ -181,7 +181,7 @@ These are the outlines. The map, not the journey. The journey is deeper, it's do
 
 ## 8. The crossing
 
-I wrote this book because I believe in something simple: understanding changes things. It doesn't change everything at once, and it doesn't take the pain away overnight. But it changes enough so that you can stop feeling trapped, defective, or alone in a crossing that so many devoted mothers make in silence.
+I wrote this book because I believe in something simple: understanding changes things. It doesn't loosen your hands all at once, nor make the fear of the fall disappear in a single night. But it changes enough so that you can stop feeling trapped, defective, or alone in a crossing that so many devoted mothers make in silence.
 
 Now you know how to distinguish supporting from replacing, and you know that replacing always springs from love and from the fear of the fall. You know how to ask the question that changes everything: does my help increase or decrease his strength? You know that your child's strength doesn't grow in your hands, it grows in his. You know, and this was the deepest, that you built yourself around being needed, and that you are much more than the person who solves. You know that to support is not to abandon, and that none of this applies to withdrawing support your child genuinely needs. And you know that to exist again is not selfishness, it's the other half of the path.
 
