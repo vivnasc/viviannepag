@@ -29,7 +29,7 @@ I want to tell you right now, before anything else, that this isn't only generos
 
 There's a silent loyalty. The loyalty of keeping everything united. And there's a fear, the fear of separation, that without you people will drift apart, will get lost, will stop belonging to one another. And it's that fear, more than the love, that sets you holding the web without rest, day after day, without ever being able to stop.
 
-This book won't teach you to abandon people, to stop caring, to cut the bonds. I've come to look at something else. At the weight of being the knot that holds everything. At the fear that, without you, it comes undone. And at a possibility you may never have considered: that the bonds, after all, don't depend on your hands alone, and that you can belong to the web without having to hold it whole.
+This book won't teach you to abandon people, to stop caring, to cut the bonds. I've come to follow a different thread entirely. At the weight of being the knot that holds everything. At the fear that, without you, it comes undone. And at a possibility you may never have considered: that the bonds, after all, don't depend on your hands alone, and that you can belong to the web without having to hold it whole.
 
 And let me tell you right away where these pages are going, so you can lower your shoulders as you read. Opening your hands isn't letting fall those you love. The bonds have a life of their own, and they don't depend on you alone to exist. And letting go isn't abandoning. It's trusting that relationships, like plants, have roots you don't see, and that they won't die just because you stopped watering them alone, day after day, exhausted.
 
@@ -37,7 +37,7 @@ I want you to tell apart, from the start, the thread held out of love from the t
 
 This book hasn't come to tell you that caring for relationships is wrong, nor that you have to become indifferent, distant, someone who lets the bonds fall. To bring together those we love, to care for the ties, is one of the most beautiful things there is. It comes to tell apart nurturing from carrying, gathering out of pleasure from holding out of fear, caring for the bonds from being the sole one responsible for their existence. And it comes to give you back a life that isn't only keeping others' lives united, and a place in the web that doesn't depend on your being the one to hold it whole.
 
-Perhaps you recognize yourself in small things.
+Perhaps you'll find your own thread running through small things.
 
 In always being the one to take the first step to gather people, and in feeling that, if you don't take it, no one will, that the gathering simply won't happen.
 
@@ -51,7 +51,7 @@ In organizing, reminding, gathering, and in feeling, at the same time, a muffled
 
 In not even being able to imagine a group, a family, in which you weren't the one taking care of everything, because taking care of the bonds has become so much yours that you no longer know how to belong any other way.
 
-They are all the same. The knot that holds the whole web. The person who keeps everyone connected, and who is afraid to let go.
+Every one of them is the same knot, tied the same way. The knot that holds the whole web. The person who keeps everyone connected, and who is afraid to let go.
 
 I want to point out to you the small gestures where this hides, the ones you make without noticing them, so much yours have they become. It's you who creates the group chat, who sets up the family lunch, who takes the first step after a falling-out between two people. You notice that a friend has gone quiet, and it's you who seeks them out, always, because if it isn't you, you know no one will. A date approaches, a Christmas, a birthday, and the weight of gathering everyone falls, naturally, on you, without anyone deciding it, because that's how it always was.
 
@@ -87,7 +87,7 @@ There's a very particular loyalty here, and I want to name it. It's the loyalty 
 
 And I want you to see the deep loneliness in this, which you may know well. It's the loneliness of being at the center of everything and, at the same time, alone. Surrounded by people, by bonds, by gatherings that you organize, and with no one to hold you, to remember you without being reminded, to seek you out without your being the one to seek. You built, around yourself, a web in which you're always the one who gives, who gathers, who cares, and so no one imagines that you, too, need to be gathered, remembered, cared for. And in the bad hours, you feel a loneliness you don't understand, without seeing that it was you, by becoming the knot, who left yourself with no one to be a knot for you.
 
-I want you to see this without guilt. The fragility that set you holding the web, most of the time, wasn't created to wound you. It was the circumstance of a scattered family, cold, or wounded. But it placed on you a weight, that of keeping everyone united, that should never have been yours alone, and that you carry still.
+Look at this knot without guilt at having tied it. The fragility that set you holding the web, most of the time, wasn't created to wound you. It was the circumstance of a scattered family, cold, or wounded. But it placed on you a weight, that of keeping everyone united, that should never have been yours alone, and that you carry still.
 
 And I want to show you in what part of you this reflex lives, because that's where it comes undone. The need to hold everything isn't only a habit, it's a way of feeling engraved deep, in a time when the unity of the family seemed to depend on you, and when separation was a real danger. So today you don't rationally decide to hold the web, you do it before thinking, automatically, and the anxiety rises whenever you feel a bond loosening, as if your own safety were at stake. And that is why it isn't enough to understand that others' relationships don't depend on you, in order to stop carrying them. The wound lives below reason, and it undoes itself slowly, with the repeated experience of letting go and seeing that the web doesn't fall, and often with help.
 
@@ -95,7 +95,7 @@ There's a sentence that perhaps sums up what you learned early. If I don't hold 
 
 ## 3. Keeping united as a mission
 
-There's something you need to see. Keeping people united has become, for you, more than a habit. It has become a mission. A responsibility you feel as yours, and yours alone, and which you cannot free yourself from.
+There's a thread here you've never let yourself follow to its end. Keeping people united has become, for you, more than a habit. It has become a mission. A responsibility you feel as yours, and yours alone, and which you cannot free yourself from.
 
 Notice how this mission occupies you. You're always attentive to who is drifting away, to who doesn't come to the gatherings, to who has stopped speaking to whom. And you feel it as a problem of yours, to be solved. As if it were your task to keep everyone close, to repair the bonds that loosen, to keep the web from coming undone. It's a radar that never switches off, always tuned to the state of everyone's bonds, and that occupies, in you, an enormous space, that could be your own life.
 
@@ -111,11 +111,11 @@ And there's something deeper. This mission has become your identity, and your wo
 
 And it costs you your health, too, because watching over and sustaining the bonds of a whole group is mental work that doesn't stop. Your head is always monitoring who has drifted away, what's left to organize, the bond that needs attention. It's a permanent, invisible vigilance, that consumes you from within, and that adds to everything else you carry. Many people who sustain the unity of everyone burn out, not from weakness, but because carrying, alone, the cohesion of a group is a weight no shoulder was made to bear without end.
 
-I want you to feel the weight of this. Imagine carrying, alone, the unity of a whole family. Feeling that everything depends on you, that without you it comes undone, that it's your responsibility to keep everyone close. And doing it without recognition, without rest, with no one to hold you. It's a weight of immense loneliness, the loneliness of someone who unites everyone and has no one to unite her. And you deserve, after holding so much, to let yourself, at last, be held.
+Let the full pull of those threads settle on your arms for a moment. Imagine carrying, alone, the unity of a whole family. Feeling that everything depends on you, that without you it comes undone, that it's your responsibility to keep everyone close. And doing it without recognition, without rest, with no one to hold you. It's a weight of immense loneliness, the loneliness of someone who unites everyone and has no one to unite her. And you deserve, after holding so much, to let yourself, at last, be held.
 
 ## 4. Who am I when I stop uniting
 
-I'm going to leave a question here. Alone. Don't run from it.
+I'm going to hang a question here, like a single loose thread. Alone. Don't run from it.
 
 Who are you, when you stop uniting everyone?
 
@@ -125,7 +125,7 @@ For you, this question pulls a thread you didn't want to pull. Because your iden
 
 And the shadow that hides here is the fear of separation. The terror that, without you holding it, people will drift apart, get lost, stop belonging to one another. And, deeper still, the fear that, without your function as knot, you too will get lost, drift away, stop belonging, because your place in the web was being the one who held it.
 
-Notice how this imprisons you. You can't let go, even exhausted, because letting go seems to you like risking the separation you most fear. You're bound to the post of knot, in permanent sentinel over everyone's bonds, because dropping the vigilance seems to you like letting everything come undone. And you live in an effort without end, holding a web that might hold up more than you think, if you, for once, dared to trust.
+See how the threads wrap around your own wrists. You can't let go, even exhausted, because letting go seems to you like risking the separation you most fear. You're bound to the post of knot, in permanent sentinel over everyone's bonds, because dropping the vigilance seems to you like letting everything come undone. And you live in an effort without end, holding a web that might hold up more than you think, if you, for once, dared to trust.
 
 And there's an enormous fragility in your importance as knot. Because a knot exists to hold the threads, not for itself. It's always in the service of the web, never of its own life. And you, from being the knot for so long, forgot that you too are a person, with a right to be cared for, to be sought out, to belong not for the function you serve, but for who you are. The knot doesn't live. It holds. And you, by becoming the knot, slowly lost your own life outside of keeping others' lives united.
 
@@ -133,7 +133,7 @@ And I want to look head-on at the terror this question wakes in you. What terrif
 
 I want to tell you something about the fear of separation, because it begins to disarm it, and because it's the heart of everything. Relationships don't depend on you alone. This is the idea that holds you with your arms raised, and it's, almost always, false. You believe you're the only thing between unity and scattering, that without you everything loosens. But that's the perception of the child who felt herself the only one holding a fragile family. The reality is otherwise. Relationships have a life of their own. People, even those who depend on your organizing, have bonds that don't depend on you alone. And very often, when you finally let go, you discover that the web doesn't come undone, that others pick up the threads, that the relationships hold up in ways you didn't control.
 
-Don't answer the question of who you are when you stop uniting just yet. But leave it open. Because that's where the door is. The day you discover that you have a place in the web not for the function you serve, but for who you are, you stop needing to hold everything in order to belong. And then, only then, can you begin to let go, without the terror that letting go will leave you out.
+Don't answer the question of who you are when you stop uniting just yet. But leave it open. Because that loose end is where the whole web begins to untie. The day you discover that you have a place in the web not for the function you serve, but for who you are, you stop needing to hold everything in order to belong. And then, only then, can you begin to let go, without the terror that letting go will leave you out.
 
 ## 5. The bonds don't depend on me alone
 
@@ -159,11 +159,11 @@ And I want you to think of the rest that's on the other side. There's, in you, a
 
 I want to stop here a moment, with care, because there's a point at which sustaining the unity of everyone stops being a trait and becomes a wound that asks for more. If this weight has exhausted you to the point of making you ill, if there's an anxiety that won't let go of you tied to keeping everything united, or a fear of separation that robs you of your peace, that deserves to be cared for with support. And if, underneath, there's a history of a family breaking apart, of instability, of losses, that still crosses through you today, then we're facing something that doesn't undo itself only by reading. Undoing a fear of separation engraved early rarely happens alone. It happens, very often, with hands that accompany you in relearning to trust that the bonds hold up without you.
 
-The awakening, when it comes, is a relief. It's the instant when you feel your fingers open a little and the thread doesn't fall. That relationships hold up, in part, without you. That you can let go of a thread, and it doesn't loosen, because it's held by more hands than yours. It's a small instant, but it changes everything, because it disproves the belief that without you everything comes undone.
+The awakening, when it comes, loosens something in your chest like a knot pulled free. It's the instant when you feel your fingers open a little and the thread doesn't fall. That relationships hold up, in part, without you. That you can let go of a thread, and it doesn't loosen, because it's held by more hands than yours. It's a small instant, but it changes everything, because it disproves the belief that without you everything comes undone.
 
 ## 6. Letting go of the threads
 
-There's a verb for this crossing. Letting go.
+There's one gesture the hands learn for this crossing. Letting go.
 
 Letting go of the threads. Not cutting them, not throwing them away, not abandoning people. Letting go. Stopping holding, alone and without rest, everyone's bonds. Opening your hands, slowly, and trusting that the web holds up without you holding it at every instant.
 
@@ -187,7 +187,7 @@ I want you to see what is let go, along with the threads. Let go is the weight o
 
 And I want to teach you to tolerate the anxiety that will rise when you let go, because that's where much of the crossing lies. When you leave a thread unheld, you'll feel an almost unbearable pressure to pick it up again, to organize, to gather, to repair. Learning to stay with that anxiety, without obeying it, is a muscle that's trained. At first, it will seem that something terrible will happen if you don't act. But, if you stay, you'll discover, slowly, that the separation you feared doesn't come, that the web holds up, that your not-acting didn't bring the catastrophe. And it's in that tolerance of the anxiety, repeated, that your body relearns that it can let go without everything coming undone.
 
-I won't give you a method. But I leave you the principle. Let go, slowly, of the threads. Let others hold their part. Trust that relationships hold up by more hands than yours. And discover, weight by weight, that the web didn't depend on you alone, and that you can, at last, belong to it without having to carry it whole.
+I won't hand you a step-by-step. But I leave you the single thread to follow. Let go, slowly, of the threads. Let others hold their part. Trust that relationships hold up by more hands than yours. And discover, weight by weight, that the web didn't depend on you alone, and that you can, at last, belong to it without having to carry it whole.
 
 ## 7. Letting go without losing the people
 
@@ -211,7 +211,7 @@ On the other side of lowered arms, there's a joy waiting for you. The joy of bel
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It won't make you, tomorrow, let go of a web you've held for a lifetime. But it changes enough for you to stop confusing your effort with love, and your exhaustion with belonging.
+It doesn't loosen every thread at once. It won't make you, tomorrow, let go of a web you've held for a lifetime. But it changes enough for you to stop confusing your effort with love, and your exhaustion with belonging.
 
 Now you know that you're the knot that holds the whole web, and that this isn't only generosity nor love, it's an old loyalty and fear, and a way, engraved early, of securing your place.
 
@@ -233,7 +233,7 @@ Imagine someone who holds, in both hands, dozens of threads, each one tied to a 
 
 The crossing is discovering that many of those threads are held, too, by other hands. That they don't depend on you alone. And that you can, slowly, lower your arms, let go of the threads, and see that the people who matter stay connected, by bonds that weren't only yours, and that you can, at last, rest your arms and belong to the web without having to hold it whole.
 
-I want you to know what to expect from this crossing, so that you don't live it as one more task to fulfill perfectly. It will be slow, and it will have setbacks. Days when you let go, when you trust, when you rest, and days when you go back to picking up all the threads, in a panic that something will loosen, as always. And the old voice will use each setback to tell you you see, without you everything comes undone. Don't believe it at first. The setbacks are part of it. No one lets go at once of a web they've held a whole life. It's let go little by little, one thread at a time, and each time you let go and the web holds up, a new piece of proof is laid, and it's from those proofs, added up, that the trust that the bonds don't depend on you alone, slowly, is built.
+I want you to know what to expect from this crossing, so that you don't live it as one more task to fulfill perfectly. It will be slow, and there will be days you knot the threads tight again. Days when you let go, when you trust, when you rest, and days when you go back to picking up all the threads, in a panic that something will loosen, as always. And the old voice will use each setback to tell you you see, without you everything comes undone. Don't tie yourself back to that voice the moment it speaks. The loosened threads you pick up again are part of the untying. No one lets go at once of a web they've held a whole life. It's let go little by little, one thread at a time, and each time you let go and the web holds up, a new piece of proof is laid, and it's from those proofs, added up, that the trust that the bonds don't depend on you alone, slowly, is built.
 
 And before I lower my voice, I leave you a simple sentence, of the kind you keep in your pocket. You deserve to be cared for, and not only to be the one who cares for the unity of everyone. You deserve to be sought out, remembered, gathered, and not only to be the one who seeks, remembers, gathers. The child who became the knot of a fragile family did something extraordinary, with an immense love, to keep united what threatened to break apart. There's nothing to reproach in her. But she deserved to have, too, someone to hold her, someone to attend to her as she attended to everyone. And today, as an adult, you can begin to seek out, and to let in, that care, discovering that your place in the web never truly depended on your being the one to hold it, and that you deserve to belong not for what you do for the bonds, but for who you are.
 

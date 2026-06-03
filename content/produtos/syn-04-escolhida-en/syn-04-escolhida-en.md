@@ -35,11 +35,11 @@ You learned to be chosen, not to choose. To be desired, not to desire. To be the
 
 This book will not teach you to seduce better, to position yourself better, to make yourself more choosable. That's more of the same, it's perfecting the waiting.
 
-I came to show you something else. That while you wait to be chosen, you hand your life over to the decisions of others. And that there's another place, the place of the one who decides, of the one who chooses, of the one who desires out loud, and that this place, however much it frightens you, is yours.
+I came to set a different mirror before the woman who waits to be chosen. That while you wait to be chosen, you hand your life over to the decisions of others. And that there's another place, the place of the one who decides, of the one who chooses, of the one who desires out loud, and that this place, however much it frightens you, is yours.
 
-I'll tell you the direction now, so you can read in peace. You can choose, not only wait. You can go from the one who waits to be taken out of the line to the one who decides where she's going. And what holds you in the waiting is not a lack of worth. It's fear. Fear of something we're going to look at head-on.
+Let me name the destination first, the way one names the person one loves before declaring it, so you can read in peace. You can choose, not only wait. You can go from the one who waits to be taken out of the line to the one who decides where she's going. And what holds you in the waiting is not a lack of worth. It's fear. Fear of something we're going to look at head-on.
 
-Maybe you'll recognize yourself in small things.
+Maybe your own face appears in these small loves.
 
 In liking someone and never taking the first step, waiting, sometimes for years, for it to be him.
 
@@ -49,7 +49,7 @@ In leaving important decisions of your life in the hands of others, and then liv
 
 In dreaming of a different life, and waiting for it to happen to you, instead of going to build it.
 
-They are all the same. The waiting. The place of the one who waits to be chosen, instead of choosing.
+Each scene wears the same dress. The waiting. The place of the one who waits to be chosen, instead of choosing.
 
 Notice something you may never have noticed: your relationship with the word "want." For many people, wanting is natural, it's the engine of life. For you, wanting out loud is almost unseemly. As if there were, in affirmed desire, something improper, too much, hardly worthy of a woman who learned to be chosen and not to choose.
 
@@ -169,7 +169,7 @@ And there's a third layer, deeper, which is the fear of discovering what you wan
 
 Notice how these three layers keep you still. The first makes you avoid deciding, so as not to carry the error. The second makes you avoid asking, so as not to hear the no. The third makes you avoid even knowing what you want, so as not to feel the lack. And between the three, you build an entire life of waiting, where you never decide, never ask, and barely know what you desire.
 
-Let me tell you where this usually comes from. Almost always from a place where desiring, as a child, was neither safe nor welcome.
+Let me trace where this hunger to be chosen was first learned. Almost always from a place where desiring, as a child, was neither safe nor welcome.
 
 Maybe you learned that wanting caused problems. That having a will of your own was selfishness, or defiance, or a nuisance. That the good child was the one who didn't ask, didn't want, didn't demand, and waited, patient, for what they wished to give her.
 
@@ -185,7 +185,7 @@ You grew up, it's possible, inside that idea. The idea that your role, in love, 
 
 And that idea, which seems just an old rule of courtship, was engraved deeper. It became your position in life. The position of the one who waits to be wanted, in every terrain, because wanting, herself, seems to her almost unseemly.
 
-Notice how this imprisons you. If you can only be chosen, then your destiny is always in the hands of those who choose. You stay waiting for the taste of others, hostage to their decision, with no power over who wants you nor when.
+Notice how this turns love into a cage. If you can only be chosen, then your destiny is always in the hands of those who choose. You stay waiting for the taste of others, hostage to their decision, with no power over who wants you nor when.
 
 And there's a particular sadness in this. The sadness of wanting someone, in silence, and watching time pass, waiting for a step he doesn't take, without daring to take it yourself. The sadness of losing possible loves, not because you didn't want them, but because you waited, patient, for them to guess what you never said.
 
@@ -193,7 +193,7 @@ And I want you to see that the waiting, however safe it seems, doesn't protect y
 
 ## 4. What would happen if it were I who chose
 
-I'll leave a question here. Alone. Don't run from it.
+I'll set one question on the table between us, like a name you've never let yourself say first. Alone. Don't run from it.
 
 What would happen if it were you who chose?
 
@@ -243,7 +243,7 @@ Imagine the difference, in a simple scene. At a party, the one who waits to be c
 
 And it's not only with men. It's with the whole of life. Instead of waiting for the opportunity, you go to get it. Instead of waiting for recognition, you affirm your worth. Instead of waiting for life to happen to you, you make choices that build it.
 
-I know this frightens you. To leave the waiting is to leave the innocence, it's to take on the responsibility you avoided. But there's a joy on the other side that you don't yet know. The joy of being an author. Of looking at your life and seeing, in it, your choices, and not only what befell you.
+I know the thought of being the one who chooses a love frightens you. To leave the waiting is to leave the innocence, it's to take on the responsibility you avoided. But there's a joy on the other side that you don't yet know. The joy of being an author. Of looking at your life and seeing, in it, your choices, and not only what befell you.
 
 I want to undo a fear that will appear. To become a subject is not to become aggressive, domineering, someone who tramples others to get what she wants. To desire actively is not to force. It's to affirm your wanting, with clarity, and to let the world, and the other, respond. You can choose a man, go after him, show your interest, and he may not respond. That's not failure. It's the life of the one who chooses. Whoever chooses risks the no. But whoever never chooses guarantees the no, because she never even gets to ask for the yes.
 
@@ -261,7 +261,7 @@ But let this not become one more strategy. Don't choose yourself in order to be 
 
 ## 6. Deciding
 
-There's a verb for this crossing. To decide.
+There's a single verb that moves a woman from chosen to choosing. To decide.
 
 Not to wait. To decide. To be the one who turns the helm, instead of waiting for the current to decide where you go.
 
@@ -281,13 +281,13 @@ I want to add a distinction that will save you a lot of confusion. To decide is 
 
 And there's a place where sovereignty is exercised more safely than in love: in the small daily decisions that don't frighten you so much. The restaurant. The film. How you spend your Sunday afternoon. These choices seem like nothing, but it's in them that the gesture of wanting is trained, without the weight of a whole life at stake. Whoever barely knows how to choose a dish will hardly know how to choose a love. So begin where it hurts less, and let the muscle gain strength before you ask it of the big things.
 
-I won't give you a method. It would be one more thing for you to wait to do well, and you're already an expert at turning everything into a test you're afraid of failing. I leave you only the beginning. Your life will not happen to you. Either you make it, or it isn't lived. And making it begins with a simple and terrifying act: deciding, you, what you want, and taking the first step to go and get it, instead of waiting, once more, for it to be brought to you.
+I won't hand you a set of steps for choosing a love. It would be one more thing for you to wait to do well, and you're already an expert at turning everything into a test you're afraid of failing. I leave you only the beginning. Your life will not happen to you. Either you make it, or it isn't lived. And making it begins with a simple and terrifying act: deciding, you, what you want, and taking the first step to go and get it, instead of waiting, once more, for it to be brought to you.
 
 I want to stop a moment, carefully, because there's a point at which the waiting stops being a pattern and becomes a suffering that asks for more.
 
 If the passivity left you in a life that weighs on you, and from which you can't act to get out. If there's a deep sadness, a sense of powerlessness over your own destiny, an emptiness of the one who feels that life happens to her and she doesn't live it. If you've been waiting so long, for a choice that doesn't come, that you've lost hope that anything will change.
 
-When the waiting reaches this point, it has stopped being only a trait of temperament. It may be a sadness that has thickened, a deep self-devaluation, and it deserves the support of a professional. It's not weakness to seek it. It's, itself, a first act of decision: deciding to take care of yourself, instead of waiting for someone to do it.
+When the waiting reaches this point, it has stopped being only a trait of temperament. It may be a sadness that has thickened, a deep self-devaluation, and it deserves the support of a professional. Reaching for that help is not weakness; it is the first time you choose yourself the way you longed for someone else to choose you. It is, itself, a first act of decision: deciding to take care of yourself, instead of waiting for someone to do it.
 
 And I want to tell you one thing about the helping relationship. It can be, for you, a place where you learn to desire again. Where someone asks you what you want, and truly waits for the answer. Where you relearn that your will counts, that you have the right to want, that you can be the subject of your own life. It's a training, in safety, of what the waiting took from you.
 
@@ -297,7 +297,7 @@ But there's an enormous liberation in that responsibility. Because to be the aut
 
 ## 7. Desiring out loud
 
-There's a destination for this crossing. And it fits in one image. Desiring out loud.
+There's a place this crossing leads the woman who once only waited to be chosen. And it gathers into a single image. Desiring out loud.
 
 Your whole life you desired in silence. You wanted, but you kept silent. You waited for them to guess, to come, to choose for you, so as never to have to say, out loud, I want this.
 
@@ -319,7 +319,7 @@ And I want you to notice a difference that changes everything in the way you say
 
 And there's a joy waiting, on the other side. The joy of wanting, and of saying it, and of sometimes receiving. Of being the author of your desires, and not only their silent guardian. Of living a life you chose, even with its no's, instead of a life you waited for, full of silences.
 
-That joy is your right. And it's on the other side of the fear, on the day you say, for the first time, out loud, and to yourself first of all, I want this, and you're the one who goes to get it.
+That joy belongs to you the way a love you chose belongs to you. And it's on the other side of the fear, on the day you say, for the first time, out loud, and to yourself first of all, I want this, and you're the one who goes to get it.
 
 I want to warn you about one thing, because it's going to appear. When you begin to desire out loud, you're going to feel exposed, almost shameless.
 
@@ -337,7 +337,7 @@ Each no you survive teaches you something precious. That you don't die from want
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, decide everything you waited for your whole life. But it changes enough for you to stop mistaking your waiting for patience, or for temperament, or for a lack of luck.
+It won't remake your whole love story overnight. It doesn't make you, tomorrow, decide everything you waited for your whole life. But it changes enough for you to stop mistaking your waiting for patience, or for temperament, or for a lack of luck.
 
 Now you know that you wait to be chosen, and that this isn't only in love, it's in everything.
 
@@ -349,7 +349,7 @@ You know what would happen if it were you who chose, or you know that this quest
 
 You know that you can go from object to subject. That the verb is to decide. And that desiring out loud, however much it frightens you, is what takes you out of the line and sets you walking.
 
-I want to leave you an image.
+Let me leave you with one picture to carry into your loves.
 
 You spent your life sitting at the side of the road, waiting for a ride. For someone to stop, to want you, to take you somewhere. And sometimes they stopped, and took you, and you went where they were going, because being taken was enough.
 
@@ -375,11 +375,11 @@ Because that's what you're going to discover: that the no, which you feared so m
 
 And there's a joy, on the far side of the waiting. The joy of wanting, and of saying it, and of sometimes receiving. The joy of living a life you chose, even with its no's, instead of a life you waited for, full of silences. The joy of being, at last, the subject, and not the object. The author, and not a character waiting to be chosen by someone else's script.
 
-That is the work of SyncHim. The book names. SyncHim crosses over. Each in her own time.
+That is the work of SyncHim. The book names. SyncHim crosses over. Each woman in the season her own heart is ready for.
 
 And there's a boundary I want to leave well drawn, so that nothing of what I said is read wrongly. To decide, to choose, to desire out loud, is not to stop being gentle, generous, attentive to others. It's not to become hard, or selfish, or demanding. It's, simply, to enter, you too, your own life, as a subject, and not only as the one who waits. You keep caring about others, giving in when it makes sense, being who you are. You just stop putting yourself, systematically, last, waiting for a turn that never comes. Your gentleness doesn't disappear. It gains, at last, a spine: the spine of a person who also wants, also chooses, also counts.
 
-And to close these pages, I ask you one thing only. A hard one, for you.
+And to close these pages, I ask you one thing only. Hard, for a woman who learned to wait to be chosen.
 
 This week, choose one thing, however small, and go and get it. Don't wait for it to be brought to you. Say what you want, take the first step, make it happen. It can be an invitation you make, a desire you affirm, a decision you take without waiting for permission. Notice the fear, the vertigo of the responsibility, and do it anyway. Because it's in that first act of choice, however small, that you begin to leave the line, and that you discover, at last, that your life was always waiting, not for someone to choose you, but for you to be the one to choose it.
 
