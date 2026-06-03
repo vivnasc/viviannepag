@@ -440,6 +440,33 @@ function distribuirImagens(imagens, nChapters, slug) {
   return { capa, porCapitulo, lane, total, colecao };
 }
 
+// ─── Alocacao GLOBAL de capas (sem repetir entre TODOS os produtos) ───
+// A Vivianne tem mil+ imagens no pool. Nao faz sentido repetir capas. Esta
+// funcao percorre os universos por ordem fixa e, para cada produto, escolhe a
+// PRIMEIRA imagem do pool tematico do seu universo que ainda nao foi usada como
+// capa por nenhum outro produto (Set global `usado`). Como os pools de varios
+// universos partilham mundos (ex. 'autora'), so o Set global garante capas
+// unicas em todo o catalogo. Deterministico: o mesmo render produz sempre o
+// mesmo mapa, por isso cada render por-slug chega ao mesmo resultado.
+const ORDEM_COLECOES = ['freeme-mae', 'infonte', 'amor', 'forca', 'prosperidade', 'pertenca', 'trabalho'];
+let _capasGlobais = null;
+async function alocarCapasGlobais() {
+  if (_capasGlobais) return _capasGlobais;
+  const usado = new Set();      // urls ja usadas como CAPA por algum produto
+  const capaPorSlug = {};
+  const todos = listAllSlugs();
+  for (const colecao of ORDEM_COLECOES) {
+    const pool = await fetchImagensColecao(colecao);
+    const slugs = todos.filter(s => slugToColecao(s) === colecao).sort();
+    for (const slug of slugs) {
+      const img = pool.find(im => !usado.has(im.url));
+      if (img) { usado.add(img.url); capaPorSlug[slug] = img; }
+    }
+  }
+  _capasGlobais = { capaPorSlug, usado };
+  return _capasGlobais;
+}
+
 // ─── HTML builder ───
 
 function buildHtml(ebook, capa, porCapitulo, mundo = 'freeme') {
@@ -1017,8 +1044,14 @@ async function renderUm(slug, mundoOverride) {
   const imagens = await fetchImagensColecao(colecao);
   console.log(`  [pool] colecao=${colecao} mundos=${mundosPool.join('+')} total=${imagens.length} fotos`);
 
-  const { capa, porCapitulo, lane, total } = distribuirImagens(imagens, ebook.chapters.length, slug);
-  console.log(`  [lane ${lane}/${total}] capa: ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
+  // Capa unica em todo o catalogo (nunca repete entre produtos).
+  const { capaPorSlug, usado: capasUsadas } = await alocarCapasGlobais();
+  // Capitulos: pool sem nenhuma das capas, para nem os interiores repetirem uma capa.
+  const imagensCapitulos = imagens.filter(im => !capasUsadas.has(im.url));
+  const dist = distribuirImagens(imagensCapitulos, ebook.chapters.length, slug);
+  const { porCapitulo, lane, total } = dist;
+  const capa = capaPorSlug[slug] ?? dist.capa ?? imagens[0] ?? null;
+  console.log(`  [lane ${lane}/${total}] capa unica (${capasUsadas.size} capas alocadas): ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
   const html = applyFonts(buildHtml(ebook, capa, porCapitulo, mundo), mundo);
   const tmpPdf = path.join('/tmp', `${slug}.pdf`);

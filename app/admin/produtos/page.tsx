@@ -53,6 +53,8 @@ export default function ProdutosAdmin() {
   const [dragAtivo, setDragAtivo] = useState(false);
   const [legendaModal, setLegendaModal] = useState<Produto | null>(null);
   const [legendas, setLegendas] = useState<{ig: string; fb: string; tw: string; hashtags: string} | null>(null);
+  const [abertos, setAbertos] = useState<Set<string>>(new Set()); // universos expandidos (recolhidos por defeito)
+  const toggleUniverso = (id: string) => setAbertos(prev => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n; });
   const fileRef = useRef<HTMLInputElement>(null);
 
   const HASHTAGS_VIVIANNE = '#viviannedossantos #autoconhecimento #constelacaofamiliar #psicologiatranspessoal #maternidadeconsciente #desenvolvimentopessoal #curacaoemocional #mulheresqueinspiram #crescimentopessoal #despertaremocional #terapiaholisticaonline #ebookdigital #vidacomproposito #saudementalimporta #lealdadesinvisiveis';
@@ -265,7 +267,7 @@ export default function ProdutosAdmin() {
             📚 render TODOS
           </button>
           {([
-            ['freeme-mae', 'FreeMe'], ['infonte', 'Infonte'], ['amor', 'Amor'],
+            ['freeme-mae', 'FreeMe'], ['infonte', 'Infonte'], ['amor', 'SyncHim'],
             ['forca', 'Força'], ['prosperidade', 'Prosperidade'], ['pertenca', 'Pertença'], ['trabalho', 'Trabalho'],
           ] as const).map(([col, label]) => (
             <button
@@ -364,20 +366,37 @@ export default function ProdutosAdmin() {
             <button onClick={() => apagar(p)} className="text-rosa/60 text-[0.78rem] hover:text-rosa">apagar</button>
           </div>
         );
+        const universosComProdutos = COLECOES.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0);
+        const todosAbertos = universosComProdutos.every(c => abertos.has(c.id));
         return (
-          <div className="space-y-12">
-            {COLECOES.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0).map(c => {
+          <div className="space-y-4">
+            <div className="flex justify-end -mt-4 mb-2">
+              <button
+                onClick={() => setAbertos(todosAbertos ? new Set() : new Set(universosComProdutos.map(c => c.id)))}
+                className="text-creme-2/60 text-[0.75rem] hover:text-ambar"
+              >
+                {todosAbertos ? 'recolher tudo' : 'expandir tudo'}
+              </button>
+            </div>
+            {universosComProdutos.map(c => {
               const lista = porColecao.get(c.id)!;
+              const aberto = abertos.has(c.id);
               return (
-                <section key={c.id}>
-                  <div className="flex items-baseline gap-3 mb-4 pb-2 border-b border-ocre/20">
+                <section key={c.id} className="border border-ocre/15 rounded-[14px] overflow-hidden">
+                  <button
+                    onClick={() => toggleUniverso(c.id)}
+                    className="w-full flex items-baseline gap-3 px-4 py-3.5 text-left hover:bg-terra-2/40 transition-colors"
+                  >
+                    <span className={`text-ocre/70 text-[0.8rem] transition-transform ${aberto ? 'rotate-90' : ''}`}>›</span>
                     <span className="text-ocre/60 text-[0.8rem] font-serif">{c.romano}</span>
-                    <h2 className="font-serif text-ambar text-[1.25rem]">{c.nome}</h2>
-                    <span className="text-creme-2/40 text-[0.72rem]">{lista.length} {lista.length === 1 ? 'título' : 'títulos'}</span>
-                  </div>
-                  <div className="grid gap-4">
-                    {lista.map(renderProduto)}
-                  </div>
+                    <h2 className="font-serif text-ambar text-[1.2rem]">{c.nome}</h2>
+                    <span className="text-creme-2/40 text-[0.72rem] ml-auto">{lista.length} {lista.length === 1 ? 'título' : 'títulos'}</span>
+                  </button>
+                  {aberto && (
+                    <div className="grid gap-4 p-4 pt-0">
+                      {lista.map(renderProduto)}
+                    </div>
+                  )}
                 </section>
               );
             })}
