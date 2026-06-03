@@ -27,7 +27,7 @@ Quero dizer-te já, antes de tudo, que isto não é só ambição, nem amor ao q
 
 Há uma fusão. A tua identidade fundiu-se com a tua criação. Tu não tens uma empresa, és a empresa. Não fizeste um projeto, és o projeto. E essa fusão, que parece dedicação total, é, no fundo, a perda da fronteira entre ti e o que crias, ao ponto de já não saberes existir separada dele.
 
-Este livro não é sobre gestão, nem sobre empreendedorismo, nem sobre como liderar melhor. Vim olhar para outra coisa, mais funda. Para a fusão entre ti e o que crias. Para o facto de teres posto toda a tua identidade naquilo que fazes, ao ponto de não saberes quem és sem ele. E para o que isso te custa, a ti, e até à própria criação que tanto carregas e que, sem o saberes, prendes ao não a deixares crescer sem ti.
+Este livro não é sobre gestão, nem sobre empreendedorismo, nem sobre como liderar melhor. Vim olhar para o que mora por baixo da obra que carregas. Para a fusão entre ti e o que crias. Para o facto de teres posto toda a tua identidade naquilo que fazes, ao ponto de não saberes quem és sem ele. E para o que isso te custa, a ti, e até à própria criação que tanto carregas e que, sem o saberes, prendes ao não a deixares crescer sem ti.
 
 E digo-te já para onde vai este livro, para que possas lê-lo sem o pé no travão. Podes manter-te uma pessoa inteira mesmo sem teres a mão em cada decisão da empresa. Podes amar o que crias, dedicares-te a ele, sem te fundires com ele, sem perderes a fronteira entre ti e a tua obra. E essa capacidade de soltar, de separar quem és daquilo que crias, não te tira o projeto. Devolve-te a ti.
 
@@ -35,7 +35,7 @@ Quero que percebas, desde já, a diferença entre amar o que crias e fundires-te
 
 Este livro não te vem pedir que ames menos a tua obra, nem que te dediques menos, nem que ela conte menos para ti. A tua criação pode continuar a ser uma das coisas mais importantes da tua vida. Vem pedir-te apenas que não seja a única, que não seja tu, que não carregue o peso impossível de ser a tua identidade inteira. Porque uma obra amada por uma pessoa inteira floresce mais do que uma obra carregada por uma pessoa que se perdeu nela.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos pequenos gestos do dia a dia da tua obra.
 
 Em não conseguires delegar nada, porque tudo é teu, tudo é pessoal, tudo passa por ti, como se cada detalhe fosse uma parte do teu próprio corpo.
 
@@ -69,23 +69,23 @@ Talvez aquilo que criaste seja o lugar onde finalmente te sentiste alguém. Onde
 
 Ou talvez a obra tenha sido a tua forma de fugir. De um vazio, de uma dor, de uma vida que noutras áreas não estava a correr, de perguntas sobre ti que não querias enfrentar. Mergulhar no trabalho é, para muita gente, uma forma socialmente aplaudida de não estar consigo, de encher todas as horas para não haver espaço para o que dói. E se foi também assim para ti, então soltar a obra assusta-te a dobrar: porque te confronta não só com a perda da identidade, mas com tudo aquilo de que a obra te andava a permitir fugir. E isso, embora doa olhar, é precisamente o que merece, enfim, ser cuidado, em vez de tapado com mais trabalho.
 
-Repara no que isto te faz. Confundes-te com o que crias. O sucesso da obra é o teu valor, o fracasso da obra é o teu fracasso pessoal. Cada problema do projeto é um problema teu, existencial, e não apenas profissional. Vives a obra como se fosse a tua própria pele, e por isso ela pesa em ti com um peso que nenhum projeto, por si, deveria ter.
+Repara no que esta fusão faz de ti. Confundes-te com o que crias. O sucesso da obra é o teu valor, o fracasso da obra é o teu fracasso pessoal. Cada problema do projeto é um problema teu, existencial, e não apenas profissional. Vives a obra como se fosse a tua própria pele, e por isso ela pesa em ti com um peso que nenhum projeto, por si, deveria ter.
 
 Talvez aquilo que criaste tenha nascido, também, de uma necessidade de teres controlo sobre algo, num mundo onde, noutras áreas, te sentiste impotente. A obra é o teu território, o lugar onde mandas, onde decides, onde as coisas dependem de ti. E há nisso uma segurança, a de quem, tendo-se sentido sem controlo noutras áreas da vida, encontrou na criação um espaço inteiramente seu. Mas essa mesma segurança torna-se prisão, porque soltar o controlo da obra reativa a impotência antiga, e por isso te agarras a cada detalhe, não só por amor, mas por medo de voltares a sentir que nada está nas tuas mãos.
 
-Quero que vejas isto sem culpa. A tua fusão com o que crias não é defeito, nem excesso de ego. É uma forma de existires que aprendeste, num tempo em que o teu valor parecia estar no que fazias, e não em quem eras. Não és obcecada por feitio. És alguém que pôs a sua existência na sua obra, porque foi ali que aprendeu a encontrar valor, e que por isso não se sabe separar dela.
+Quero que olhes para esta fusão sem culpa. A tua fusão com o que crias não é defeito, nem excesso de ego. É uma forma de existires que aprendeste, num tempo em que o teu valor parecia estar no que fazias, e não em quem eras. Não és obcecada por feitio. És alguém que pôs a sua existência na sua obra, porque foi ali que aprendeu a encontrar valor, e que por isso não se sabe separar dela.
 
 E quero mostrar-te em que camada de ti isto se inscreveu, porque é aí que está a dificuldade. A fusão não é só uma ideia, uma escolha consciente. É uma forma de te sentires que se gravou fundo. Por isso não basta perceberes, racionalmente, que tu não és a empresa, para deixares de o sentir. A fusão vive abaixo da razão, numa camada onde o teu valor e a tua obra estão tão entrelaçados que a tua razão não os consegue separar sozinha. É por isso que mesmo sabendo que devias descansar, soltar, delegar, não consegues: porque não é uma questão de saber, é uma questão de uma identidade que se confundiu, e que se desentrelaça devagar, com tempo, experiência e, muitas vezes, ajuda.
 
 ## 3. A fronteira que se perdeu
 
-Há uma coisa que precisas de ver. Entre ti e o que crias, perdeu-se a fronteira. E sem fronteira, não há saúde, nem para ti, nem para a obra.
+Há uma fronteira que precisas de ver. Entre ti e o que crias, perdeu-se a fronteira. E sem fronteira, não há saúde, nem para ti, nem para a obra.
 
 Repara no que uma fronteira saudável seria. Tu, de um lado, com a tua identidade, o teu valor, a tua vida. A obra, do outro, como algo que crias, amas, a que te dedicas, mas que não é tu. Ligadas, sim, mas distintas. Tu existirias mesmo que a obra falhasse. A obra teria vida própria, capaz de existir, em parte, sem ti.
 
 Mas em ti não há essa fronteira. Tu e a obra são a mesma coisa. E sem fronteira, tudo se confunde. O problema da obra é o teu problema existencial. O risco da obra é o risco da tua identidade. Não podes separar a tua paz da saúde do projeto, porque não há separação entre ti e ele.
 
-E há um custo enorme nisto. Custa-te a paz, porque nunca descansas, já que a obra nunca descansa, e tu és a obra. Custa-te a saúde, porque carregas, no corpo, o peso de tudo o que ao projeto diz respeito. Custa-te a vida, porque não tens vida fora dele, não tens identidade própria, não tens um tu que não dependa do que crias.
+E esta obra colada a ti tem um custo enorme. Custa-te a paz, porque nunca descansas, já que a obra nunca descansa, e tu és a obra. Custa-te a saúde, porque carregas, no corpo, o peso de tudo o que ao projeto diz respeito. Custa-te a vida, porque não tens vida fora dele, não tens identidade própria, não tens um tu que não dependa do que crias.
 
 E custa, paradoxalmente, à própria obra. Porque uma criação fundida com o seu criador, que depende dele para tudo, que não pode crescer sem ele, é uma criação frágil, limitada, presa. Não podes delegar, construir equipa, deixar a obra ganhar vida própria, porque isso seria separá-la de ti, e tu não te sabes separar. E assim a obra fica refém da tua fusão, incapaz de crescer para além de ti, tal como tu ficas refém dela.
 
@@ -101,11 +101,11 @@ Custa-te, também, partes de ti que ficaram por viver. Porque quando toda a tua 
 
 E há um custo de que quase ninguém fala, escondido por baixo dos números que parecem bons. Uma empresa fundida com quem a fundou tem um valor de fachada e uma fragilidade real, porque tudo o que a faz andar mora numa só cabeça, na tua. As decisões que não estão escritas em parte nenhuma, os contactos que só tu tens, o jeito de resolver as coisas que ninguém ao teu lado aprendeu, porque nunca lhes deste espaço para aprender. Se alguém olhasse a sério para o que construíste, veria uma obra que não sobrevive uma semana à tua ausência, e isso, que tu vives como prova de quanto és necessária, é, na verdade, a maior fraqueza de tudo o que ergueste. Uma criação que só existe enquanto estás colada a ela não está protegida pela tua presença. Está refém dela.
 
-Quero que sintas o peso disto. O peso de carregar uma obra como se fosse a tua própria existência. De nunca poder descansar dela, porque é de ti que não podes descansar. De não saber quem serias sem ela. É uma exaustão funda, e talvez já a tomes por dedicação, quando é, no fundo, a perda de ti naquilo que crias.
+Quero que sintas, nos ombros, o peso disto. O peso de carregar uma obra como se fosse a tua própria existência. De nunca poder descansar dela, porque é de ti que não podes descansar. De não saber quem serias sem ela. É uma exaustão funda, e talvez já a tomes por dedicação, quando é, no fundo, a perda de ti naquilo que crias.
 
 ## 4. Quem sou eu sem o que crio
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar à tua frente uma pergunta que a obra anda a tapar. Sozinha. Não fujas dela.
 
 Quem és tu sem o que crias? Se o projeto acabasse, se a empresa fechasse, se a obra deixasse de existir, quem ficaria?
 
@@ -117,9 +117,9 @@ Repara que a força desse abismo é a medida exata de quanto te fundiste. Para u
 
 E a sombra que aqui se esconde é o vazio de não teres identidade própria, separada do que crias. A sensação de que, sem a obra, não há ali pessoa, só um vazio. De que tu, sem o projeto, não existes, porque puseste toda a tua existência nele.
 
-Repara como isto te aprisiona. Não podes soltar a obra, mesmo que ela te esgote, porque soltá-la é confrontares-te com o vazio de quem és sem ela. Agarras-te a ela com toda a força, não só por amor ao que crias, mas por terror do que restaria de ti se a largasses. A fusão não é só dedicação. É também uma fuga à pergunta de quem serias, sem a obra a definir-te.
+Repara como esta fusão te aprisiona. Não podes soltar a obra, mesmo que ela te esgote, porque soltá-la é confrontares-te com o vazio de quem és sem ela. Agarras-te a ela com toda a força, não só por amor ao que crias, mas por terror do que restaria de ti se a largasses. A fusão não é só dedicação. É também uma fuga à pergunta de quem serias, sem a obra a definir-te.
 
-E há uma fragilidade enorme nisto. Porque uma identidade fundida com uma obra é uma identidade sempre em risco. Basta a obra falhar, mudar, acabar, e a tua identidade ameaça ruir com ela. Vives, por isso, com um medo de fundo, o de perderes a obra, porque perder a obra é perderes-te. E esse medo torna-te incapaz de arriscar, de mudar, de deixar a obra evoluir, porque qualquer ameaça a ela é uma ameaça à tua própria existência.
+E uma identidade colada a uma obra traz uma fragilidade enorme. Porque uma identidade fundida com uma obra é uma identidade sempre em risco. Basta a obra falhar, mudar, acabar, e a tua identidade ameaça ruir com ela. Vives, por isso, com um medo de fundo, o de perderes a obra, porque perder a obra é perderes-te. E esse medo torna-te incapaz de arriscar, de mudar, de deixar a obra evoluir, porque qualquer ameaça a ela é uma ameaça à tua própria existência.
 
 Quero dizer-te uma coisa sobre o terror que esta pergunta levanta, porque ela começa a desarmá-lo. O que te aterroriza não é, verdadeiramente, soltar a obra. É o vazio que imaginas encontrar por baixo dela, a sensação de que, sem o projeto, não há ali ninguém. Mas esse vazio é uma ilusão da fusão, não uma verdade sobre ti. Por baixo da obra não há um vazio, há uma pessoa, tu, com uma história, com gostos, com afetos, com partes que existiam antes da obra e que existirão depois dela. A fusão fez-te esquecer essa pessoa, mas não a apagou. Ela está lá, à espera de ser reencontrada, e reencontrá-la não é cair no vazio, é regressar a ti.
 
@@ -129,7 +129,7 @@ E há uma verdade sobre esse vazio que, mal a vês, o desfaz por dentro. Tu exis
 
 E quero que vejas como esta fusão te torna refém, também, do medo de acabar. Toda a obra, todo o projeto, tem um fim possível: pode falhar, pode mudar, pode chegar ao seu termo natural. Mas se tu és a obra, então o fim da obra é o teu fim, e por isso vives com um terror de fundo, o de que ela acabe, que te faz incapaz de aceitar mudanças, de fechar ciclos, de deixar morrer o que tem de morrer para nascer outra coisa. Agarras-te à obra como quem se agarra à própria vida, e essa rigidez, esse medo do fim, prejudica não só a tua paz, mas a própria capacidade da obra de evoluir.
 
-Não respondas já à pergunta de quem és sem o que crias. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que descobrires que existes para além da obra, que tens identidade própria, que não és apenas o que crias, deixas de te ter de fundir com ela para existires. E aí, só aí, podes soltar, sem te perderes.
+Não respondas já à pergunta de quem és sem o que crias. Mas deixa-a aberta. Porque é por essa pergunta que se sai de baixo da obra. No dia em que descobrires que existes para além da obra, que tens identidade própria, que não és apenas o que crias, deixas de te ter de fundir com ela para existires. E aí, só aí, podes soltar, sem te perderes.
 
 ## 5. Quando a fusão leva ao esgotamento
 
@@ -143,7 +143,7 @@ Se a tua cabeça nunca desliga do projeto, nem na cama, nem no duche, nem nos mo
 
 Estes podem ser sinais de esgotamento, e isso não se resolve a carregar mais, a segurar mais, a fundir-te ainda mais com a obra. Resolve-se a soltar, a separar, a descansar, e muitas vezes com apoio, de um profissional que te ajude a recuperar a fronteira entre ti e o que crias.
 
-E quero nomear a armadilha de quem se fundiu com a obra. É que parar, descansar, soltar, parece abandonar a obra, e abandonar a obra parece abandonar-te a ti. E por isso aguentas, para além do limite, fundida com o projeto, até que o corpo ou a mente cedem. Não esperes por esse ponto. Procurar ajuda não é admitir que não és capaz, é cuidares da pessoa de quem a obra mais depende, que és tu, e fazê-lo antes que o esgotamento decida por ti.
+E quero nomear a armadilha de quem se fundiu com a obra. É que parar, descansar, soltar, parece abandonar a obra, e abandonar a obra parece abandonar-te a ti. E por isso aguentas, para além do limite, fundida com o projeto, até que o corpo ou a mente cedem. Não aguentes a carregar a obra até esse ponto. Procurar ajuda não é admitir que não és capaz, é cuidares da pessoa de quem a obra mais depende, que és tu, e fazê-lo antes que o esgotamento decida por ti.
 
 E quero dizer-te uma verdade que custa, mas que liberta. Se caíres, a obra cai contigo. É precisamente por estar tudo fundido em ti que o teu esgotamento é também o maior risco do projeto. Tu, que carregas tudo para o proteger, és, no teu limite, a sua maior fragilidade, porque uma obra que depende inteiramente de uma pessoa esgotada está a um passo de ruir com ela. Cuidar de ti, recuperar a fronteira, não é traíres a obra. É, paradoxalmente, a forma mais responsável de a proteger, porque uma criadora inteira e descansada sustenta o que uma criadora fundida e exausta deixa cair.
 
@@ -157,7 +157,7 @@ Lê isto devagar. Para ti, soltar a obra, deixar de segurar tudo, parece desfaze
 
 E proponho-te o contrário. A tua inteireza não depende de segurares tudo. Pelo contrário. Enquanto estás fundida com a obra, não estás inteira, estás dispersa nela, perdida nela, sem fronteira própria. Continuar inteira é, precisamente, recuperar a fronteira, separares-te do que crias o suficiente para existires por ti, e não dispersa no projeto.
 
-Vou dizer-te de outra forma. Uma criadora saudável não é a que se funde com a obra. É a que ama a obra e permanece distinta dela. Que se dedica sem se perder. Que cria sem se confundir com a criação. Que pode soltar, delegar, descansar, porque a sua identidade não está toda ali, mas em si. E é essa criadora, inteira e separada, que pode criar com saúde, durante muito tempo, sem se esgotar.
+Deixa-me dizê-lo pelo lado de quem cria. Uma criadora saudável não é a que se funde com a obra. É a que ama a obra e permanece distinta dela. Que se dedica sem se perder. Que cria sem se confundir com a criação. Que pode soltar, delegar, descansar, porque a sua identidade não está toda ali, mas em si. E é essa criadora, inteira e separada, que pode criar com saúde, durante muito tempo, sem se esgotar.
 
 E repara: as criadoras que mais admiras, as que duram, as que criam obra após obra ao longo de uma vida inteira, não são as que se queimaram numa só criação. São as que souberam manter-se inteiras, que tiveram vida além do trabalho, que não puseram toda a sua existência num único projeto. A longevidade de uma criadora depende, precisamente, de não se fundir, porque quem se funde esgota-se e para, e quem se mantém distinta renova-se e continua. Soltar não é o oposto de criar muito. É a condição para criares ao longo do tempo, sem que uma obra te consuma antes de a próxima nascer.
 
@@ -167,7 +167,7 @@ Pensa nas obras que duram, que crescem, que se tornam maiores do que quem as cri
 
 Quero que vejas, também, que uma obra fundida com o criador transmite, sem querer, essa fusão a quem nela trabalha. As pessoas sentem que nada é delas, que tudo passa por ti, que não há espaço para serem donas de nada, e por isso não se entregam, não criam, não crescem, ficam à espera das tuas ordens. Ao soltares, ao deixares que sejam donas de partes da obra, dás-lhes o que a tua fusão lhes tirava: o espaço para se importarem como se fosse delas. E uma obra cuidada por muitos que a sentem sua é mais forte do que uma obra carregada por uma só que a sente toda dela.
 
-Quero falar-te do verbo desta travessia. Soltar. Soltar não é abandonar a obra. É deixares de a segurar com a vida, de te fundires com ela, de a carregar como se fosse a tua própria existência. É amá-la mantendo-te distinta dela. É confiar que ela pode existir, em parte, sem a tua mão em cada detalhe. É recuperares a fronteira entre quem és e o que crias.
+Quero dar-te o verbo que tira a obra dos teus ombros. Soltar. Soltar não é abandonar a obra. É deixares de a segurar com a vida, de te fundires com ela, de a carregar como se fosse a tua própria existência. É amá-la mantendo-te distinta dela. É confiar que ela pode existir, em parte, sem a tua mão em cada detalhe. É recuperares a fronteira entre quem és e o que crias.
 
 E soltar exige uma coisa que te custa: tolerar que a obra se faça sem ti, talvez de forma diferente da tua, e que esteja bem. Que delegues, e que os outros não façam exatamente como tu, mas que façam. Que a obra ganhe vida própria, e que isso, longe de te tirar a obra, a torne mais forte, e a ti mais livre. Soltar o controlo, para quem se fundiu com a obra, dá medo. Mas é a tirar as mãos do leme, e a ver que o barco não vira, que vais, devagar, voltando a ser tua.
 
@@ -181,7 +181,7 @@ E quero que vejas que recuperar a fronteira não te torna fria, nem distante, ne
 
 ## 7. Recuperar a fronteira
 
-Há um destino para esta travessia. Recuperares a fronteira entre ti e o que crias.
+Esta travessia leva a um lugar concreto. Recuperares a fronteira entre ti e o que crias.
 
 E quero pôr-te isto em concreto, no chão dos teus dias de trabalho.
 
@@ -217,7 +217,7 @@ Não te vou dar um método de gestão, porque este livro não é sobre empresas.
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, soltar uma obra com que te fundiste a vida inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com dedicação, e a tua obra com quem és.
+Não descola a obra de ti de uma só vez. Não te faz, amanhã, soltar uma obra com que te fundiste a vida inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com dedicação, e a tua obra com quem és.
 
 Agora sabes que carregas a empresa, o projeto, a obra, aos ombros, e que isso não é só ambição nem amor ao que fazes, é uma fusão entre ti e o que crias.
 

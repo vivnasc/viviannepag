@@ -13,7 +13,7 @@
 
 ## 1. Se não dói, não é amor
 
-Repara numa coisa, com honestidade.
+Para com a tempestade um instante, e olha para dentro com honestidade.
 
 Para ti, o amor calmo não sabe a amor.
 
@@ -23,13 +23,13 @@ E quando uma relação é uma tempestade, de altos e baixos, de brigas e reconci
 
 Confundes a intensidade com o amor. A adrenalina com a paixão. O caos com a profundidade do sentimento.
 
-Olha para as tuas histórias. As que recordas como os grandes amores foram, muitas vezes, as mais turbulentas. As que te fizeram chorar mais, sofrer mais, viver mais ao alto e ao fundo. E as relações calmas, boas, estáveis, essas talvez as recordes como aborrecidas, como "faltava paixão".
+Passa em revista os teus grandes amores, um a um, como quem revê tempestades. As que recordas como os grandes amores foram, muitas vezes, as mais turbulentas. As que te fizeram chorar mais, sofrer mais, viver mais ao alto e ao fundo. E as relações calmas, boas, estáveis, essas talvez as recordes como aborrecidas, como "faltava paixão".
 
 Repara nesta frase, que talvez já tenhas pensado. "Se não dói, não é a sério." Como se a dor fosse a medida do amor. Como se o sofrimento provasse a profundidade. Pensa em quantas vezes contaste uma relação difícil a uma amiga e, no meio da queixa, havia um brilho, um orgulho disfarçado, como quem diz "olha o tamanho do que eu vivo". E pensa em quantas vezes descreveste um homem bom com um encolher de ombros, "é querido, mas", como se o "é querido" fosse já, por si, uma desvantagem.
 
 Quero dizer-te já, antes de tudo, que isto não é seres dramática, ou exagerada, ou viciada em sofrimento por feitio. As pessoas talvez te digam que gostas de complicar, que procuras o drama, que não sabes estar bem. Não é isso. É teres aprendido, muito cedo, que amor e intensidade eram a mesma coisa. E hoje procuras a intensidade, convencida de que procuras amor, quando são coisas diferentes.
 
-Este livro tem um cuidado especial, e quero dizer-to já. Porque a confusão entre intensidade e amor pode levar-te a lugares perigosos. E há uma diferença, que vamos ter de traçar com toda a clareza, entre uma relação intensa e uma relação que te faz mal. A primeira, este livro acompanha. A segunda, este livro manda-te proteger. E é por isso que, mais do que em qualquer outro, vou ser-te muito direta sobre a fronteira, porque aqui a clareza não é só compreensão, é segurança.
+Este livro tem um cuidado especial, e quero dizer-to já. Porque a confusão entre intensidade e amor pode levar-te a lugares perigosos. E há uma diferença, que vamos ter de traçar com toda a clareza, entre uma relação intensa e uma relação que te faz mal. À primeira tempestade, este livro faz companhia. A segunda, este livro manda-te proteger. E é por isso que, mais do que em qualquer outro, vou ser-te muito direta sobre a fronteira, porque aqui a clareza não é só compreensão, é segurança.
 
 Adianto-te a direção. Podes distinguir amor de intensidade. E há uma diferença ainda maior, e mais importante, entre intensidade e dano. A paz, ao contrário do que aprendeste, não é falta de amor. É o chão onde o amor, finalmente, pode assentar.
 
@@ -51,7 +51,7 @@ Há ainda um sinal pequeno, e quotidiano, em que isto se vê. Repara no que sent
 
 ## 2. Amor igual a intensidade
 
-Volta atrás. Mais atrás do que qualquer namorado.
+Volta atrás. Para antes de todas as tempestades, antes de qualquer namorado.
 
 Aprendeste o que é amor no teu primeiro lar. E se hoje confundes amor com intensidade, é provável que o teu primeiro lar tenha sido intenso.
 
@@ -79,13 +79,13 @@ Quero ainda dizer-te uma coisa sobre a culpa, porque ela costuma aparecer aqui. 
 
 ## 3. A calma sabe a tédio
 
-Há uma coisa que precisas de ver. Para ti, a calma não é confortável. É quase intolerável.
+Há uma corrente funda que precisas de ver à luz. Para ti, a calma não é confortável. É quase intolerável.
 
 Quando uma relação está tranquila, sem drama, sem sobressaltos, sentes uma inquietação. Um tédio. Uma sensação de que algo está errado, de que falta vida, de que aquilo está a morrer.
 
 E às vezes, sem dar por isso, fazes alguma coisa para reacender a intensidade. Provocas uma briga. Crias um ciúme. Pões em causa a relação. Geras um drama. Não por mal, mas porque o teu sistema precisa da intensidade para se sentir vivo, e a calma deixa-o em abstinência.
 
-Repara nisto, porque é importante. O tédio que sentes na calma não é falta de amor. É o teu sistema nervoso a baixar de um estado de alerta a que estava habituado, e a sentir esse baixar como vazio.
+Fixa esta brasa, que vale ouro. O tédio que sentes na calma não é falta de amor. É o teu sistema nervoso a baixar de um estado de alerta a que estava habituado, e a sentir esse baixar como vazio.
 
 Quem viveu sempre em alta tensão sente-se estranho em baixa tensão. Não porque a baixa tensão seja má, mas porque é desconhecida. O corpo lê o que conhece como normal, e o que não conhece como errado. E tu não conheces a paz. Por isso a paz parece-te erro.
 
@@ -107,7 +107,7 @@ E quero que repares no contraste com as fases más, porque ele é revelador. Num
 
 ## 4. Quem sou eu na paz
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Largo aqui uma pergunta, sem rede. Sozinha. Não fujas dela.
 
 Quem és tu na paz?
 
@@ -127,7 +127,7 @@ Mas há aqui uma confusão funda. Confundiste intensidade com vida. E são coisa
 
 Há aqui uma pergunta ainda mais incómoda, e quero deixá-la também. Se um amor difícil te ocupa tanto, se te enche os pensamentos, as conversas com as amigas, as noites em claro, repara no que esse amor está a tapar. Muitas vezes, a intensidade de uma relação serve para não olhares para o resto: para o que a tua vida não tem, para os sonhos que adiaste, para um vazio teu, anterior a qualquer homem, que dói mais do que qualquer briga. O drama é cómodo, no fundo, porque dá-te uma dor com nome, uma dor lá fora, num "ele", e poupa-te à dor sem nome que mora cá dentro. Por isso, parte de aprenderes a tolerar a calma é aprenderes a encontrar, no silêncio dela, essa outra dor, e a tratá-la, em vez de a abafar com a tempestade do próximo amor.
 
-Não respondas já à pergunta de quem és na paz. Constrói-se, devagar, à medida que aprendes a tolerar o sossego sem o encheres de drama. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que souberes existir na calma, sem a sentires como vazio, deixas de precisar da tempestade para te sentires viva. E aí, só aí, podes deixar a paz ser amor, em vez de a confundires com a sua falta.
+Não respondas já à pergunta de quem és na paz. Constrói-se, devagar, à medida que aprendes a tolerar o sossego sem o encheres de drama. Mas deixa-a aberta. Porque é nela que está o porto. No dia em que souberes existir na calma, sem a sentires como vazio, deixas de precisar da tempestade para te sentires viva. E aí, só aí, podes deixar a paz ser amor, em vez de a confundires com a sua falta.
 
 Quero que vejas o que a montanha-russa te custa, porque é alto e quase nunca o contabilizas.
 
@@ -143,7 +143,7 @@ E custa-te uma vida inteira de sofrimento que confundes com profundidade. Achas 
 
 ## 5. Intensidade, amor e dano
 
-Tenho de parar o livro aqui. E este é o capítulo mais importante de todos. Lê-o devagar, e leva-o a sério, porque pode ser o que mais importa neste livro inteiro.
+Tenho de baixar a vela e parar o livro aqui. E este é o capítulo mais importante de todos. Lê-o devagar, e leva-o a sério, porque pode ser o que mais importa neste livro inteiro.
 
 Há três coisas que precisas de aprender a separar. Intensidade. Amor. E dano.
 
@@ -185,7 +185,7 @@ A calma que sentes num amor estável não é a prova de que falta paixão. Pode 
 
 Repara nesta inversão. Tu leste sempre a paz como ausência. Ausência de fogo, de drama, de amor. E proponho-te lê-la ao contrário. A paz não é o amor a faltar. É o amor a assentar. É o que acontece quando o amor para de ser uma luta e se torna um lar.
 
-Vou dizer-te isto de outra forma. A tempestade que confundes com paixão é, muitas vezes, ansiedade. É o teu sistema em alerta, sem saber se és querida, à espera do próximo abalo. Tu chamas a esse alerta amor, mas é medo. E a calma que confundes com tédio é, muitas vezes, segurança. É o teu sistema a poder descansar, porque sabe que és querida e que não vem tempestade. Tu chamas a essa segurança falta de amor, mas é o amor finalmente em paz.
+Deixa-me dizer-to por outras ondas. A tempestade que confundes com paixão é, muitas vezes, ansiedade. É o teu sistema em alerta, sem saber se és querida, à espera do próximo abalo. Tu chamas a esse alerta amor, mas é medo. E a calma que confundes com tédio é, muitas vezes, segurança. É o teu sistema a poder descansar, porque sabe que és querida e que não vem tempestade. Tu chamas a essa segurança falta de amor, mas é o amor finalmente em paz.
 
 Inverteste tudo. Chamaste amor ao medo, e falta de amor à segurança. E é por isso que correste sempre para o que te fazia mal e fugiste do que te fazia bem.
 
@@ -209,7 +209,7 @@ E quero deixar-te uma imagem do que é a calma de um amor bom, para que não a c
 
 ## 7. Distinguir
 
-Há um verbo para esta travessia. Distinguir.
+Há um verbo que serve de leme nesta travessia. Distinguir.
 
 Distinguir o amor da intensidade. E, acima de tudo, distinguir o amor do dano.
 
@@ -219,7 +219,7 @@ Quero dar-te formas concretas de distinguir.
 
 Pergunta-te, perante um homem, ou uma relação: com ele, eu sinto-me mais calma ou mais ansiosa? Mais segura ou mais em alerta? Melhor comigo, ou pior?
 
-O teu padrão ensinou-te a escolher o que te deixa ansiosa, e a chamar-lhe paixão. Inverte a leitura. Desconfia da relação que te deixa a tremer. E dá uma hipótese à que te deixa em paz, mesmo que, ao início, te pareça pouco intensa.
+O teu padrão treinou-te para correr atrás do que te deixa o estômago às voltas, e a chamar paixão a esse remoinho. Inverte a leitura. Desconfia da relação que te deixa a tremer. E dá uma hipótese à que te deixa em paz, mesmo que, ao início, te pareça pouco intensa.
 
 Pergunta-te também: esta intensidade é vida, ou é medo? As borboletas que sinto são alegria, ou é o nervoso de não saber se ele me quer? Porque há uma intensidade que é boa, a da alegria, do desejo, da descoberta. E há uma que é só ansiedade disfarçada, e essa, por mais que arda, não é amor.
 
@@ -245,7 +245,7 @@ E desconfia, ao contrário, do que te acende de imediato, com força, sem te con
 
 Escrevi este livro por uma convicção simples. Compreender muda. E, neste caso, compreender pode também proteger.
 
-Não muda tudo de uma vez. Não te faz, amanhã, apaixonar-te pela calma. Mas muda o suficiente para deixares de confiar cegamente numa atração que te tem levado para a tempestade.
+Não amansa o mar todo de uma vez. Não te faz, amanhã, apaixonar-te pela calma. Mas muda o suficiente para deixares de confiar cegamente numa atração que te tem levado para a tempestade.
 
 Agora sabes que confundes intensidade com amor, e adrenalina com paixão.
 
@@ -279,15 +279,15 @@ Repara, ainda, numa coisa que talvez te custe admitir. Quando uma relação est�
 
 Sabes, no fundo, qual é a frase que sustenta este livro do princípio ao fim. Posso distinguir amor de intensidade.
 
-Distinguir foi o primeiro passo. Mas há um segundo, e esse não se atravessa só a ler. Faz-se a tolerar, devagar, a calma, sem a encher de drama. A escolher a paz, mesmo quando o velho sistema chama pela tempestade. E, se houver alguém ao teu lado, alguém que te faça bem, a aprender, a dois, que o amor pode ser, enfim, um lugar seguro.
+Distinguir foi o primeiro passo. Mas há um segundo, e esse não se navega só a ler. Faz-se a tolerar, devagar, a calma, sem a encher de drama. A escolher a paz, mesmo quando o velho sistema chama pela tempestade. E, se houver alguém ao teu lado, alguém que te faça bem, a aprender, a dois, que o amor pode ser, enfim, um lugar seguro.
 
-É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
+É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada onda na sua hora.
 
 E quero que leves contigo uma última coisa, sobre quem te vê. Se há quem aprenda a amar olhando para ti, sobretudo filhas, repara no que lhes mostras. Se te veem viver na tempestade, voltar a quem te magoa, confundir o drama com a paixão, aprendem que o amor é assim, que se não dói não é a sério. E é provável que repitam, e que procurem, também, a montanha-russa, achando que procuram o amor. A calibração que recebeste de quem te criou, é assim que passa de geração em geração, sem ninguém a escolher, no clima das casas onde se cresce.
 
 A coisa mais libertadora que podes fazer por quem te vê não é dar-lhes mais um exemplo de paixão turbulenta. É mostrares-lhes uma mulher que escolheu a paz, que aprendeu que o amor pode ser um lugar seguro, que distingue a intensidade do cuidado. Às vezes uma mulher aprende a distinguir, enfim, não só por si, mas para não ensinar a quem ama a confundir, como ela confundiu, a dor com o amor. E há aqui uma dignidade rara: seres tu a quebrar, na tua linha, a língua do caos, para que quem vier depois cresça a falar, desde o início, a língua da segurança.
 
-E antes de fechares estas páginas, peço-te uma coisa só. E desta vez não é só um exercício. É um pedido do fundo do coração.
+E antes de aportares ao fim destas páginas, peço-te uma coisa só. E desta vez não é só um exercício. É um pedido do fundo do coração.
 
 Olha para a tua relação, ou para as tuas relações, e faz-te a pergunta que importa mais do que todas. Isto faz-me bem, ou faz-me mal? E se a resposta, honesta, for que te faz mal, que te magoa, que te diminui, que te assusta, então este livro tem só uma coisa a dizer-te, e di-la com todo o amor e toda a firmeza. Compreender porque te prende não é razão para ficares. Procura ajuda. Protege-te. Porque tu mereces um amor que seja casa, e não tempestade. E nenhuma intensidade, nenhuma, no mundo, vale a tua segurança.
 

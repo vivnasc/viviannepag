@@ -29,7 +29,7 @@ Quero dizer-te já, antes de tudo, que isto não é só boa educação, nem cons
 
 Há uma crença que se gravou em ti, muito cedo. A crença de que és mais amável quando desapareces. De que o teu lugar, o teu direito a ser querida, depende de não pesares, de não pedires, de não dares trabalho. De que precisar te torna um fardo, e que um fardo, mais cedo ou mais tarde, é posto de lado.
 
-Este livro não te vai ensinar a tornares-te exigente, a pesar de propósito, a sobrecarregar os outros. Vim olhar para outra coisa. Para o apagamento a que te habituaste. Para as necessidades que calas a vida inteira. Para o facto de, de tanto não dares trabalho, teres deixado de existir, até para ti.
+Este livro não te vai ensinar a tornares-te exigente, a pesar de propósito, a sobrecarregar os outros. Vim olhar para o canto onde te encostaste. Para o apagamento a que te habituaste. Para as necessidades que calas a vida inteira. Para o facto de, de tanto não dares trabalho, teres deixado de existir, até para ti.
 
 E digo-te já onde isto vai dar, para que possas ler sem o medo de levares um empurrão para pesares mais. Podes precisar sem incomodar. Podes pedir, ocupar espaço, ter necessidades, e continuar a ser querida, porque o amor verdadeiro não te quer apagada, quer-te presente, inteira, com as tuas necessidades e tudo. E o que te ensinou a desaparecer não foi o amor. Foi uma ferida, que vamos olhar.
 
@@ -37,7 +37,7 @@ Já agora, separa comigo o que se vê de fora do que se passa por dentro, porque
 
 Este livro não te vem dizer que tens de te tornar exigente, de pesar de propósito, de pôr as tuas necessidades acima das dos outros. Vem distinguir a consideração verdadeira do apagamento, o não pedir por não precisares do calar o que precisas por medo. E vem devolver-te o direito mais básico: o de teres necessidades, de as mostrares, de pedires que sejam atendidas, sem que isso te tire o lugar nem o amor. Porque o teu lugar nunca dependeu de te fazeres invisível. Mereces ser querida inteira, com tudo o que precisas.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças em gestos pequenos, dos que não dão nas vistas.
 
 Em afundares-te em silêncio, sem dizeres a ninguém, enquanto sorris por fora e garantes, a toda a gente, que está tudo bem, mesmo quando nada está.
 
@@ -99,23 +99,23 @@ Mas tu, de tanto te apagares, perdeste o contacto com as tuas próprias necessid
 
 E repara como isto se tornou tão profundo que afeta as tuas próprias escolhas. Quando te perguntam o que queres comer, onde queres ir, o que preferes, hesitas, dizes tanto faz, deixas que os outros decidam, não porque te seja indiferente, mas porque perdeste o acesso ao teu próprio querer. De tanto pores as preferências dos outros à frente das tuas, de tanto não quereres dar trabalho com a tua vontade, deixaste de saber o que queres. E há uma tristeza nisto: a de uma pessoa que serve o desejo de toda a gente e já não sabe qual é o seu, que se apagou tão bem que se apagou até de si mesma.
 
-E há um custo enorme nisto. Porque uma necessidade calada não deixa de existir. Continua lá, por satisfazer, a crescer, a pesar. Tu precisas, mas não pedes, e por isso não recebes, e a necessidade fica, fome por matar, vazio por encher. E acumula-se, ano após ano, num peso surdo de quem nunca recebeu o que, em silêncio, precisava.
+E uma necessidade calada cobra um preço que ninguém vê. Porque uma necessidade calada não deixa de existir. Continua lá, por satisfazer, a crescer, a pesar. Tu precisas, mas não pedes, e por isso não recebes, e a necessidade fica, fome por matar, vazio por encher. E acumula-se, ano após ano, num peso surdo de quem nunca recebeu o que, em silêncio, precisava.
 
 Repara na solidão particular disto. Tu estás sempre disponível para as necessidades dos outros, e nunca pedes nada para as tuas. És o ombro de toda a gente, e não tens ombro nenhum. E quando és tu a precisar, não há a quem recorrer, porque ninguém sabe que precisas, porque tu nunca dizes, porque te apagaste tão bem que toda a gente te vê como a que não precisa de nada.
 
-E há uma ironia dolorosa nisto. Tu, que estarias lá para qualquer pessoa que precisasse, que nunca acharias um fardo quem te pedisse ajuda, que cuidas de todos sem hesitar, és precisamente quem se recusa a si mesma o que oferece aos outros sem pensar. Achas natural que os outros precisem, e amparas-los sem os julgar. Mas a ti, esse mesmo direito está-te vedado. A ti, precisar é pesar. Negas-te o cuidado que darias a qualquer um, e aplicas-te uma dureza que nunca aplicarias a quem amas. Mereces de ti a mesma generosidade que dás aos outros, e essa é, talvez, a primeira coisa que esta travessia te vem ensinar: a cuidares de ti como cuidarias de alguém que amas.
+E há aqui uma ironia que dói, de tão torta. Tu, que estarias lá para qualquer pessoa que precisasse, que nunca acharias um fardo quem te pedisse ajuda, que cuidas de todos sem hesitar, és precisamente quem se recusa a si mesma o que oferece aos outros sem pensar. Achas natural que os outros precisem, e amparas-los sem os julgar. Mas a ti, esse mesmo direito está-te vedado. A ti, precisar é pesar. Negas-te o cuidado que darias a qualquer um, e aplicas-te uma dureza que nunca aplicarias a quem amas. Mereces de ti a mesma generosidade que dás aos outros, e essa é, talvez, a primeira coisa que esta travessia te vem ensinar: a cuidares de ti como cuidarias de alguém que amas.
 
 E há uma coisa ainda mais dolorosa. Ao não pedires nunca, ao não precisares nunca, privas as pessoas que te amam da possibilidade de cuidarem de ti. Elas gostariam, talvez, de te dar, de te ajudar, de te amparar. Mas tu não deixas. Apagas-te, resolves tudo sozinha, não dás trabalho, e assim ninguém te pode amar de volta, porque não lhes dás por onde. O teu apagamento, que parece consideração, é também uma porta fechada ao amor que te quereriam dar.
 
 E há um custo no corpo, também, que paga em silêncio o que tu calas. Porque uma pessoa que nunca pede, que nunca descansa, que nunca se ocupa de si, que adia sempre as suas próprias necessidades, vai-se gastando sem repor. Negligencias a saúde, o descanso, o cuidado, porque ocupar-te de ti te parece dar trabalho a ti mesma, e nem isso te permites. E o corpo cobra, mais cedo ou mais tarde, a conta de uma vida inteira a tratar das necessidades de todos menos das tuas. Muitas pessoas que nunca dão trabalho adoecem em silêncio, porque o seu apagamento se estendeu até ao ponto de não cuidarem, sequer, de si.
 
-Quero que sintas o peso disto. Imagina viver a vida inteira a calar o que precisas. A nunca pedir. A nunca receber, porque nunca pedes. A acumular necessidades não ditas até elas se tornarem um vazio fundo. É um lugar de uma solidão imensa, disfarçada de não dar trabalho, e talvez já a tomes por normal, de tão habituada estás a desaparecer.
+Quero que sintas o peso de tudo o que nunca pesou em voz alta. Imagina viver a vida inteira a calar o que precisas. A nunca pedir. A nunca receber, porque nunca pedes. A acumular necessidades não ditas até elas se tornarem um vazio fundo. É um lugar de uma solidão imensa, disfarçada de não dar trabalho, e talvez já a tomes por normal, de tão habituada estás a desaparecer.
 
 E há uma tristeza particular em perceber que, de tanto não pesares, te tornaste, de certa forma, invisível. As pessoas habituaram-se a que não precises de nada, e por isso não te oferecem nada, não reparam em ti, não se ocupam de ti. Não por maldade, mas porque ensinaste o mundo a ver-te como a que não precisa. E depois, nos momentos maus, sentes uma solidão que não compreendes, sem veres que foste tu, ao apagares-te tão bem, que te tornaste a pessoa de quem ninguém pensa em cuidar, porque ninguém imagina que tu, também, precisas.
 
 ## 4. Quem sou eu se precisar
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar aqui uma pergunta, e não a vou tirar do teu caminho. Sozinha. Não fujas dela.
 
 Quem és tu, se precisares? Se pedires? Se ocupares espaço, e deres, por uma vez, trabalho?
 
@@ -125,9 +125,9 @@ Para ti, esta pergunta toca num terror fundo. Porque a tua identidade inteira se
 
 E a sombra que aqui se esconde é o medo de seres um fardo. A crença, funda e antiga, de que as tuas necessidades são um incómodo, de que precisar te torna pesada, e de que uma pessoa pesada é, mais cedo ou mais tarde, posta de lado. Por isso te apagas. Não por não precisares, mas por teres medo de que precisar te custe o amor.
 
-Repara como isto te aprisiona. Não consegues pedir, mesmo quando te afundas, porque pedir parece arriscar o teu lugar. Não consegues precisar, mesmo quando precisas desesperadamente, porque precisar parece tornar-te um fardo. Vives a sufocar as tuas necessidades, a resolver tudo sozinha, mesmo quando isso te custa caro, porque o medo de pesares é maior do que a própria necessidade.
+Repara como esta crença te encolhe num canto cada vez mais pequeno. Não consegues pedir, mesmo quando te afundas, porque pedir parece arriscar o teu lugar. Não consegues precisar, mesmo quando precisas desesperadamente, porque precisar parece tornar-te um fardo. Vives a sufocar as tuas necessidades, a resolver tudo sozinha, mesmo quando isso te custa caro, porque o medo de pesares é maior do que a própria necessidade.
 
-E há uma fragilidade enorme nisto. Porque uma pessoa que não consegue pedir está sozinha perante tudo. Perante a doença, o cansaço, o desespero, a dor. Está sempre só, porque não pede, não recebe, não se deixa amparar. E há momentos na vida em que ninguém devia estar só, em que precisar dos outros não é fraqueza, é sobrevivência. E tu, nesses momentos, apagas-te ainda mais, sofres sozinha em silêncio, porque pedir te parece um luxo a que não tens direito.
+E há uma fragilidade que se esconde por baixo desta facilidade toda. Porque uma pessoa que não consegue pedir está sozinha perante tudo. Perante a doença, o cansaço, o desespero, a dor. Está sempre só, porque não pede, não recebe, não se deixa amparar. E há momentos na vida em que ninguém devia estar só, em que precisar dos outros não é fraqueza, é sobrevivência. E tu, nesses momentos, apagas-te ainda mais, sofres sozinha em silêncio, porque pedir te parece um luxo a que não tens direito.
 
 Há algo que precisas de saber sobre o terror que esta pergunta te abre debaixo dos pés. O que te aterroriza não é, verdadeiramente, precisar. É a rejeição que aprendeste que precisar trazia. Para o teu corpo, pedir e ser posta de lado são uma só coisa, fundidas num tempo em que a tua necessidade foi, de facto, recebida como peso. Mas são separáveis. Precisar, em si, não te torna um fardo, é apenas humano. A rejeição pertencia àquela casa sem espaço, àquele tempo, àquelas pessoas que não tinham como te acolher. Hoje, com quem é de confiança, precisar e ser rejeitada podem, enfim, deixar de andar juntas.
 
@@ -137,7 +137,7 @@ Deixa-me tocar neste medo por dentro, porque é assim que ele começa a perder f
 
 E quero que vejas a crueldade desta crença, que talvez não notes. Aquilo que aprendeste na tua casa, que precisar é pesar, continuas a fazê-lo a ti, hoje, sem que ninguém precise de o fazer. És tu, agora, quem te trata como um fardo, quem cala as tuas necessidades, quem te nega o cuidado, quem te diz, por dentro, que não tens direito a pesar. A voz que, em criança, te ensinou a desaparecer, tornou-se a tua própria voz, e repete-a contra ti, sem tréguas. Parar de te apagares é, no fundo, parares de continuar, contra ti, o que outros começaram: é deixares de seres tu a tratar-te como o incómodo que aprendeste a achar que eras.
 
-Não respondas já à pergunta de quem és se precisares. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que descobrires que precisar não te torna menos amável, mas mais humana, mais próxima, mais real, deixas de te ter de apagar para seres querida. E aí, só aí, podes começar a aparecer.
+Não respondas já à pergunta de quem és se precisares. Mas deixa-a aberta. Porque é por ela que se sai do canto. No dia em que descobrires que precisar não te torna menos amável, mas mais humana, mais próxima, mais real, deixas de te ter de apagar para seres querida. E aí, só aí, podes começar a aparecer.
 
 ## 5. Precisar não é incomodar
 
@@ -173,11 +173,11 @@ Mas é precisamente aí, nesse pedir suportado apesar da culpa, que está a tua 
 
 E há uma coisa que te quero deixar a pensar sobre os olhos que te observam, sobretudo se tens filhos. Porque o apagamento transmite-se, de geração em geração. Se eles te veem nunca pedir, nunca precisar, apagar-te para não pesar, aprendem que é assim que se deve ser, e arriscam tornar-se, também eles, os que se apagam para serem queridos. A coisa mais libertadora que podes ensinar a quem te vê não é o exemplo da que nunca dá trabalho. É o de uma pessoa que pede, que precisa, que se deixa cuidar, e que continua a ser amada. Às vezes uma pessoa aprende a pedir, enfim, não só por si, mas para dar a quem ama a permissão de existir inteiro, com necessidades e tudo.
 
-E quero que saibas o que esperar desta travessia, para que não a vivas como mais uma coisa a fazer na perfeição. Vai ser lenta, e vai ter recuos. Dias em que pedes, em que apareces, em que te deixas precisar, e dias em que voltas a apagar-te, a calar tudo, a não dar trabalho, como sempre. E a velha crença vai aproveitar cada recuo para te dizer estás a ver, é melhor não pesar. Não acredites nela. Os recuos fazem parte. Ninguém desfaz de uma vez um apagamento de uma vida inteira. Desfaz-se aos poucos, e cada vez que pedes e não és posta de lado, ficou uma prova nova, e é dessas provas, somadas, que a coragem de existires, devagar, se constrói.
+E quero que saibas o que esperar desta travessia, para que não a vivas como mais uma coisa a fazer na perfeição. Vai ser devagar, com avanços e voltas ao canto. Dias em que pedes, em que apareces, em que te deixas precisar, e dias em que voltas a apagar-te, a calar tudo, a não dar trabalho, como sempre. E a velha crença vai aproveitar cada recuo para te dizer estás a ver, é melhor não pesar. Não acredites nela. Os recuos fazem parte. Ninguém desfaz de uma vez um apagamento de uma vida inteira. Desfaz-se aos poucos, e cada vez que pedes e não és posta de lado, ficou uma prova nova, e é dessas provas, somadas, que a coragem de existires, devagar, se constrói.
 
 Começa por pequenas coisas. Um favor que farias sozinha, mas que pedes. Uma ajuda que dispensarias, mas que aceitas. Uma necessidade pequena, que normalmente calarias, e que, por uma vez, dizes em voz alta. E observa o que acontece. Quase de certeza, não a rejeição que temes, mas uma resposta, um cuidado, uma proximidade nova.
 
-E escolhe bem a quem pedes, nesta fase, porque importa. Não comeces pela pessoa que sempre te fez sentir um peso, pela que talvez confirme o teu medo. Começa por quem te quer bem de verdade, por quem terás quase a certeza de que vai responder de bom grado. Não é fazer batota. É escolher, para o teu primeiro pedido, o terreno onde ele tem mais hipóteses de correr bem, em vez de o atirar logo contra a parede que melhor confirma o teu medo. Há tempo, depois, para o resto. Primeiro, o corpo precisa de provas de que pedir pode correr bem, de que precisar não te tira o lugar.
+E escolhe bem a quem pedes, nesta fase, porque importa. Não comeces pela pessoa que sempre te fez sentir um peso, pela que talvez confirme o teu medo. Começa por quem te quer bem de verdade, por quem terás quase a certeza de que vai responder de bom grado. Não é fazer batota. É escolher, para o teu primeiro pedido, o terreno onde ele tem mais hipóteses de correr bem, em vez de o atirar logo contra a parede que melhor confirma o teu medo. Os cantos mais difíceis ficam para quando já tiveres provas. Primeiro, o corpo precisa de provas de que pedir pode correr bem, de que precisar não te tira o lugar.
 
 E prepara-te para sentir o medo na mesma, mesmo com a pessoa certa, mesmo num pedido pequeno. Vai subir a culpa, a vergonha, a vontade de retirar o pedido, de dizer que afinal não era preciso. Esse arrepio não quer dizer que erraste ao pedir. É a velha crença a disparar, a tratar este pedido pequeno como se fosse a imposição que aprendeste a temer. Não lhe obedeças. Deixa o pedido feito, deixa a ajuda chegar, e dá ao teu corpo a hipótese de descobrir que, desta vez, precisar não pesou, não afastou, não te custou nada do que temias.
 
@@ -191,11 +191,11 @@ E quero que vejas que receberes não te põe em dívida, como talvez temas. Há,
 
 E vai aparecer, a cada pedido, a velha voz, a que te diz que estás a pesar, a incomodar, a tornar-te um fardo. Foi gravada cedo, naquela casa sem espaço, e não emudece à primeira ordem. A tua tarefa não é fazê-la calar, é deixar de fazer o que ela manda. Ouvi-la dizer não peças, não peses, e responder-lhe, devagar, precisar não me torna um fardo, tenho direito a ser cuidada. E cada vez que pedes apesar dela, e não és posta de lado, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, mais terna, que sabe que a tua necessidade conta, tanto como a de qualquer pessoa.
 
-Não te vou dar um método. Mas deixo-te o princípio. Pede. Em pequenas coisas, primeiro. Deixa-te precisar, ocupar espaço, dar algum trabalho. E descobre, devagar, que o amor que temias perder ao pesares era, afinal, um amor que só te queria presente, e que o teu apagamento, por mais bem-intencionado, era uma forma de o manter sempre à distância.
+Não te trago um manual de como pedir. Mas deixo-te o princípio. Pede. Em pequenas coisas, primeiro. Deixa-te precisar, ocupar espaço, dar algum trabalho. E descobre, devagar, que o amor que temias perder ao pesares era, afinal, um amor que só te queria presente, e que o teu apagamento, por mais bem-intencionado, era uma forma de o manter sempre à distância.
 
 ## 7. Precisar sem incomodar
 
-Há um destino para esta travessia. E cabe na frase que a segura. Precisar sem incomodar.
+Esta travessia leva a um lugar, e esse lugar tem nome. Cabe numa frase, a mesma que te encosta ao peito quando o medo aperta. Precisar sem incomodar.
 
 Repara nas duas partes. Precisar. E sem incomodar.
 
@@ -215,13 +215,13 @@ E quero que vejas que mostrares as tuas necessidades te torna mais real, e não 
 
 Quero, antes disso, dizer-te uma coisa sobre o reaprenderes a sentir-te. Porque, para pedires o que precisas, tens primeiro de saber do que precisas, e isso, de tanto te apagares, talvez já não saibas. Começa, então, por uma pergunta simples, feita a ti, várias vezes ao dia: o que é que eu preciso, agora? Não para a responderes logo, talvez não saibas ao início, mas para voltares a abrir o canal que fechaste. Reparar no cansaço, na fome, na vontade, na mágoa, no que te apetece e no que não te apetece, é reaprender a língua das tuas necessidades, esquecida de tanto não a usares. E só conhecendo o que precisas é que podes, depois, começar a pedi-lo.
 
-Do outro lado deste medo, há uma alegria com o teu nome, à tua espera. A alegria de seres cuidada. De pedires, e receberes. De precisares, e não estares sozinha. De ocupares o teu espaço, de contares, de existires com as tuas necessidades e tudo. De descobrires que o amor não te queria apagada, queria-te presente, e que o teu lugar nunca dependeu de não pesares, dependeu de seres tu, inteira. Essa alegria é o teu direito, e está do outro lado do medo, no dia em que precisares, enfim, sem te apagares.
+Do outro lado deste medo, há uma alegria com o teu nome, à tua espera. A alegria de seres tu, por uma vez, a pessoa de quem se cuida. De pedires, e receberes. De precisares, e não estares sozinha. De ocupares o teu espaço, de contares, de existires com as tuas necessidades e tudo. De descobrires que o amor não te queria apagada, queria-te presente, e que o teu lugar nunca dependeu de não pesares, dependeu de seres tu, inteira. Essa alegria é o teu direito, e está do outro lado do medo, no dia em que precisares, enfim, sem te apagares.
 
 ## 8. A travessia
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, pedir tudo o que calaste a vida inteira. Mas muda o suficiente para deixares de confundir o teu apagamento com gentileza, e a tua invisibilidade com não dar trabalho.
+Não te tira do canto de um momento para o outro. Não te faz, amanhã, pedir tudo o que calaste a vida inteira. Mas muda o suficiente para deixares de confundir o teu apagamento com gentileza, e a tua invisibilidade com não dar trabalho.
 
 Agora sabes que nunca dás trabalho, e que isso não é só boa educação nem gentileza, é uma crença antiga de que és mais amável quando desapareces, e mais querida quando não pesas.
 
