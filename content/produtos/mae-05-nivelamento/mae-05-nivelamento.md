@@ -143,7 +143,7 @@ E agora preciso de reafirmar, com toda a clareza, a regra que segura este livro 
 
 ## 7. Cada um no seu lugar
 
-Se chegaste até aqui, já viste muito: o equilíbrio que pesa para baixo, o medo da diferença, a justiça que cria injustiça, a dívida que não é dele, a confusão entre unir e fundir. Agora quero mostrar-te, em linhas gerais, para onde se vai a partir daqui. Não o passo a passo, que não cabe num livro e não se faz sozinha. Mas o mapa, a direção.
+Se chegaste até aqui, já viste muito: o equilíbrio que pesa para baixo, o medo da diferença, a justiça que cria injustiça, a dívida que não é dele, a confusão entre unir e fundir. Agora quero mostrar-te para onde aponta a saída desta balança que tens segurado sozinha há tantos anos. Não te vou dar a contabilidade ao contrário, gesto a gesto, porque essa conta não se desfaz numa página nem se desfaz sem companhia. Mas posso mostrar-te a direção em que o peso pousa.
 
 E quero nomear uma resistência que talvez sintas aqui: o receio de que, ao deixar cada filho seguir o seu caminho, a família se desfaça, se disperse, deixe de ser uma família. É o medo original deste livro, e aparece outra vez, agora à porta da mudança. Mas repara no que aprendemos pelo caminho: não é a diferença que desfaz as famílias, é a obrigação que as desgasta. Soltar não é dispersar. Continuas a ser o centro afetivo, a casa para onde se volta, a mãe de todos. Só deixas de ser a gestora que mantém tudo equilibrado à força. E uma família que se reúne por amor, e não por dever, reúne-se melhor, dura mais, procura-se mais. O que temes perder ao soltar é precisamente o que o soltar protege.
 
@@ -165,7 +165,7 @@ Estes são os contornos. O mapa, não a viagem. A viagem é mais funda, faz-se d
 
 ## 8. A travessia
 
-Escrevi este livro porque acredito numa coisa simples: compreender muda. Não muda tudo de uma vez, e não tira a dor de um dia para o outro. Mas muda o suficiente para deixares de te sentir uma má mãe por uma coisa que sempre foi amor, e para começares a ver outra forma de amar que não pede a nenhum filho que seja menos do que é.
+Escrevi este livro porque acredito numa coisa simples: compreender muda. Não desfaz a balança toda numa tarde, nem solta de uma vez os nós que anos de equilíbrio apertaram. Mas muda o suficiente para deixares de te sentir uma má mãe por uma coisa que sempre foi amor, e para começares a ver outra forma de amar que não pede a nenhum filho que seja menos do que é.
 
 E quero que saibas que esta mudança não chega tarde demais, seja qual for a idade dos teus filhos, seja quanto for o tempo que esta forma de amar já durou. A bênção não tem prazo. Uma mãe pode, aos seus setenta, oitenta anos, olhar para um filho e dizer-lhe, finalmente, com o coração inteiro, que se alegra com a vida dele, que a vida dele é dele, que não precisa de pagar nada a ninguém. E essa frase, mesmo dita tarde, mesmo depois de décadas de nivelamento, chega ao filho e desfaz nós antigos. Nunca é demasiado tarde para deixar um filho livre. E há poucas heranças mais bonitas que uma mãe pode deixar do que esta: a de ter, enfim, abençoado cada um dos seus filhos a ser inteiramente quem é.
 
@@ -191,9 +191,9 @@ Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https:/
 
 E se não é agora, não faz mal. O que leste fica contigo, semente paciente, e o caminho aguarda, inteiro, a tua vez.
 
-E quero deixar-te com uma imagem que talvez te acompanhe. Pensa numa mãe pássaro com vários filhos no ninho. Chega o tempo de voarem, e cada um voa à sua maneira: um cedo, outro tarde, um alto, outro baixo, um para longe, outro fica por perto. A mãe não os obriga a voar todos à mesma altura, nem trava o que voa mais alto para esperar pelo que ainda hesita. Deixa cada um encontrar o seu céu. E continua a ser mãe de todos, do que foi longe e do que ficou perto, sem que a distância de um seja uma traição nem a hesitação do outro uma vergonha. Abençoar é isto: deixar cada filho encontrar o seu próprio céu, e alegrar-te com cada voo, mesmo os que te levam para longe, mesmo os que demoram, porque cada um é o voo certo para aquele filho.
+Volto, para fechar, ao ninho de onde os teus filhos um dia partiram. Pensa numa mãe pássaro com vários filhos no ninho. Chega o tempo de voarem, e cada um voa à sua maneira: um cedo, outro tarde, um alto, outro baixo, um para longe, outro fica por perto. A mãe não os obriga a voar todos à mesma altura, nem trava o que voa mais alto para esperar pelo que ainda hesita. Deixa cada um encontrar o seu céu. E continua a ser mãe de todos, do que foi longe e do que ficou perto, sem que a distância de um seja uma traição nem a hesitação do outro uma vergonha. Abençoar é isto: deixar cada filho encontrar o seu próprio céu, e alegrar-te com cada voo, mesmo os que te levam para longe, mesmo os que demoram, porque cada um é o voo certo para aquele filho.
 
-Mas antes de fechares estas páginas, peço-te uma coisa só. Hoje, pensa num dos teus filhos, e numa coisa boa que ele construiu, e deixa-te alegrar com ela, por inteiro, durante um minuto, sem deixar o pensamento correr para nenhum dos outros. Só essa alegria, inteira, por aquele filho. E repara no que mexe em ti. Porque é aí, nessa alegria que te permites ter sem compensação, que começa a bênção, e começa a liberdade dos teus filhos, e a tua.
+E antes de pousares de vez a balança, deixo-te um único gesto para hoje. Pensa num dos teus filhos, e numa coisa boa que ele construiu, e deixa-te alegrar com ela, por inteiro, durante um minuto, sem deixar o pensamento correr para nenhum dos outros. Só essa alegria, inteira, por aquele filho. E repara no que mexe em ti. Porque é aí, nessa alegria que te permites ter sem compensação, que começa a bênção, e começa a liberdade dos teus filhos, e a tua.
 
 Com toda a minha ternura,
 *Vivianne*
