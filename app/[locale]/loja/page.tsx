@@ -10,6 +10,7 @@ import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { FiltrosLoja } from '@/components/loja/FiltrosLoja';
+import { semTravessoes } from '@/lib/escritos-sanitize';
 import { PRODUTOS_EN } from '@/lib/produtos-en';
 import { PACKS } from '@/lib/packs';
 import type { Metadata } from 'next';
@@ -121,7 +122,12 @@ export default async function LojaPage({
   const { locale } = await params;
   const { tipo, ordenar } = await searchParams;
   setRequestLocale(locale);
-  const todosProdutos = await listarProdutos(locale);
+  // Regra de zero travessoes em todo o site: limpa titulo/subtitulo seja qual for a fonte.
+  const todosProdutos = (await listarProdutos(locale)).map((p) => ({
+    ...p,
+    titulo: semTravessoes(p.titulo),
+    subtitulo: semTravessoes(p.subtitulo),
+  }));
   // Filtro por tipo (ebook/guia) via badge. 'todos' ou ausente = sem filtro.
   const produtos = (tipo === 'ebook' || tipo === 'guia')
     ? todosProdutos.filter(p => p.badge?.toLowerCase().includes(tipo))

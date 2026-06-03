@@ -200,8 +200,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_FREEME_MAE,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
-    aberturaTeaser: 'Para a mãe que carrega o que nunca foi seu. Pousa o peso, e volta a ti — sem deixares de os amar.',
-    aberturaTeaser_en: 'For the mother who carries what was never hers. Put down the weight and return to yourself — without ceasing to love them.',
+    aberturaTeaser: 'Para a mãe que carrega o que nunca foi seu. Pousa o peso, e volta a ti, sem deixares de os amar.',
+    aberturaTeaser_en: 'For the mother who carries what was never hers. Put down the weight and return to yourself, without ceasing to love them.',
   },
   {
     id: 'infonte',
@@ -253,8 +253,8 @@ export const COLECOES: Colecao[] = [
     aberturaTitulo: 'A mesma travessia',
     abertura: ABERTURA_FORCA,
     aberturaAssinatura: 'Com toda a minha ternura, Vivianne',
-    aberturaTeaser: 'Para quem aguentou tudo sozinha. Reconhece o que a tua armadura protegeu — e quando podes finalmente pousá-la.',
-    aberturaTeaser_en: 'For those who endured it all alone. Recognize what your armor protected — and when you can finally put it down.',
+    aberturaTeaser: 'Para quem aguentou tudo sozinha. Reconhece o que a tua armadura protegeu, e quando podes finalmente pousá-la.',
+    aberturaTeaser_en: 'For those who endured it all alone. Recognize what your armor protected, and when you can finally put it down.',
   },
   {
     id: 'prosperidade',

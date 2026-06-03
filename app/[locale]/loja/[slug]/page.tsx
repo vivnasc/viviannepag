@@ -9,6 +9,7 @@ import { GotaMini } from '@/components/icons/GotaAssina';
 import { PartilhaProduto } from '@/components/PartilhaProduto';
 import { getSupabase } from '@/lib/supabase';
 import { packBySlug, isPackSlug, packIncluiProduto, PACKS } from '@/lib/packs';
+import { semTravessoes } from '@/lib/escritos-sanitize';
 import { slugToColecao } from '@/lib/colecoes';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { BarraCompraMobile } from '@/components/BarraCompraMobile';
@@ -184,6 +185,10 @@ export default async function ProdutoPage({
   setRequestLocale(locale);
   const p = await getProduto(slug, locale);
   if (!p) notFound();
+  // Regra de zero travessoes em todo o site, qualquer que seja a fonte (DB incluida).
+  p.titulo = semTravessoes(p.titulo);
+  p.subtitulo = semTravessoes(p.subtitulo);
+  p.descricao = semTravessoes(p.descricao);
   const isPt = locale === 'pt';
   const descHtml = p.descricao ? await marked.parse(p.descricao, { async: true }) : '';
   const isEbook = p.badge?.toLowerCase().includes('ebook');
@@ -293,8 +298,8 @@ export default async function ProdutoPage({
                 <p className="text-[0.78rem] text-ocre/70 mb-5">
                   {isPack
                     ? (isPt
-                        ? `Avulso daria ${p.preco_original}. Em pack, ${p.preco} — levas os ${conteudoPack.length} títulos.`
-                        : `Separately it would be ${p.preco_original}. As a bundle, ${p.preco} — you get all ${conteudoPack.length} titles.`)
+                        ? `Avulso daria ${p.preco_original}. Em pack, ${p.preco}, levas os ${conteudoPack.length} títulos.`
+                        : `Separately it would be ${p.preco_original}. As a bundle, ${p.preco}, you get all ${conteudoPack.length} titles.`)
                     : (isPt
                         ? `Valor real: ${p.preco_original}. Preço de lançamento.`
                         : `Real value: ${p.preco_original}. Launch price.`)}
@@ -343,8 +348,8 @@ export default async function ProdutoPage({
                   </span>
                   <span className="block text-creme-2/70 text-[0.74rem] mt-0.5">
                     {isPt
-                      ? `Leva o universo completo em vez de ${p.preco} avulso — poupa face a ${packDoUniverso.preco_original}. →`
-                      : `Get the whole world instead of ${p.preco} apiece — save vs ${packDoUniverso.preco_original}. →`}
+                      ? `Leva o universo completo em vez de ${p.preco} avulso, poupa face a ${packDoUniverso.preco_original}. →`
+                      : `Get the whole world instead of ${p.preco} apiece, save vs ${packDoUniverso.preco_original}. →`}
                   </span>
                 </a>
               )}
@@ -376,7 +381,7 @@ export default async function ProdutoPage({
           <div className="max-w-[1060px] mx-auto">
             <div className="flex items-center gap-4 mb-3">
               <h2 className="font-serif font-light text-creme text-[1.7rem]">
-                {isPt ? `O que levas — ${conteudoPack.length} títulos` : `What you get — ${conteudoPack.length} titles`}
+                {isPt ? `O que levas · ${conteudoPack.length} títulos` : `What you get · ${conteudoPack.length} titles`}
               </h2>
               <div className="flex-1 h-px bg-ocre/25" />
               <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
@@ -385,8 +390,8 @@ export default async function ProdutoPage({
             </div>
             <p className="text-creme-2/70 text-[0.95rem] leading-[1.6] mb-8 max-w-[640px]">
               {isPt
-                ? `Não é uma lista — é a coleção inteira, cada livro com a sua travessia. ${poupanca > 0 ? `Avulso seria ${p.preco_original}; aqui levas tudo por ${p.preco}.` : ''}`
-                : `Not a list — the whole collection, each book with its own crossing. ${poupanca > 0 ? `Separately it would be ${p.preco_original}; here you get it all for ${p.preco}.` : ''}`}
+                ? `Não é uma lista, é a coleção inteira, cada livro com a sua travessia. ${poupanca > 0 ? `Avulso seria ${p.preco_original}; aqui levas tudo por ${p.preco}.` : ''}`
+                : `Not a list, the whole collection, each book with its own crossing. ${poupanca > 0 ? `Separately it would be ${p.preco_original}; here you get it all for ${p.preco}.` : ''}`}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {conteudoPack.map((item) => (
@@ -431,8 +436,8 @@ export default async function ProdutoPage({
             <h2 className="font-serif font-light text-creme text-[1.5rem] mb-3">Vivianne dos Santos</h2>
             <p className="text-creme-2/85 text-[0.92rem] leading-[1.7] mb-2">
               {isPt
-                ? 'Escritora, mãe de três, em formação avançada em Psicologia Transpessoal, Psicologia e Espiritualidade, e Constelação Familiar Sistémica. Não escrevo de fora — escrevo de dentro da mesma travessia.'
-                : 'Writer, mother of three, in advanced training in Transpersonal Psychology, Psychology and Spirituality, and Systemic Family Constellation Therapy. I do not write from the outside — I write from inside the same crossing.'}
+                ? 'Escritora, mãe de três, em formação avançada em Psicologia Transpessoal, Psicologia e Espiritualidade, e Constelação Familiar Sistémica. Não escrevo de fora, escrevo de dentro da mesma travessia.'
+                : 'Writer, mother of three, in advanced training in Transpersonal Psychology, Psychology and Spirituality, and Systemic Family Constellation Therapy. I do not write from the outside, I write from inside the same crossing.'}
             </p>
             <p className="text-creme-2/70 text-[0.86rem] italic font-serif">
               {isPt
@@ -467,7 +472,7 @@ export default async function ProdutoPage({
           <div className="space-y-4 max-w-[640px] mx-auto">
             {(isPt
               ? [
-                  { q: 'E se não for para mim?', a: 'Tens garantia de 7 dias. Se sentires que não era para ti, escreves-me e devolvo o valor — sem complicações.' },
+                  { q: 'E se não for para mim?', a: 'Tens garantia de 7 dias. Se sentires que não era para ti, escreves-me e devolvo o valor, sem complicações.' },
                   { q: 'Como recebo o material?', a: 'Assim que o pagamento é confirmado, descarregas aqui mesmo e recebes também o link no teu email. Sem espera.' },
                   { q: 'Em que formato vem?', a: 'PDF, pensado para ler no telemóvel, no computador ou imprimir. Fica contigo para sempre.' },
                   { q: 'Preciso de criar conta?', a: 'Não. Só precisas do teu email para te enviarmos o acesso.' },
@@ -475,7 +480,7 @@ export default async function ProdutoPage({
                   { q: 'E se tiver algum problema com o download?', a: 'Falas comigo diretamente no WhatsApp e resolvo contigo.' },
                 ]
               : [
-                  { q: 'What if it is not for me?', a: 'You have a 7-day guarantee. If you feel it was not for you, message me and I refund you — no fuss.' },
+                  { q: 'What if it is not for me?', a: 'You have a 7-day guarantee. If you feel it was not for you, message me and I refund you, no fuss.' },
                   { q: 'How do I receive it?', a: 'As soon as payment is confirmed you download it right here and also get the link by email. No waiting.' },
                   { q: 'What format is it?', a: 'PDF, made to read on your phone, computer or to print. It is yours forever.' },
                   { q: 'Do I need an account?', a: 'No. You only need your email so we can send you access.' },

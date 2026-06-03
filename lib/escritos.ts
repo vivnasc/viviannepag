@@ -2,6 +2,7 @@ import { readFile, readdir, access } from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
+import { semTravessoes } from './escritos-sanitize';
 
 export type { Locale, EscritoMeta, Escrito } from './escritos-shared';
 export { formatarData } from './escritos-shared';
@@ -80,8 +81,8 @@ async function listEscritosFs(locale: Locale): Promise<EscritoMeta[]> {
     if (fm.publicado === false) continue;
     metas.push({
       slug,
-      titulo: String(fm.titulo ?? slug),
-      resumo: String(fm.resumo ?? ''),
+      titulo: semTravessoes(String(fm.titulo ?? slug)),
+      resumo: semTravessoes(String(fm.resumo ?? '')),
       data: String(fm.data ?? ''),
       tematica: fm.tematica ? String(fm.tematica) : undefined,
       capa: await resolverCapa(fm.capa ? String(fm.capa) : undefined),
@@ -114,11 +115,12 @@ async function getEscritoFs(slug: string, locale: Locale): Promise<Escrito | nul
   if (!parsed) return null;
   const fm = parsed.data as Record<string, unknown>;
   if (fm.publicado === false) return null;
-  const conteudoHtml = await marked.parse(parsed.content, { async: true });
+  // Regra de zero travessoes em todo o site: limpa antes de renderizar o MDX.
+  const conteudoHtml = await marked.parse(semTravessoes(parsed.content), { async: true });
   return {
     slug,
-    titulo: String(fm.titulo ?? slug),
-    resumo: String(fm.resumo ?? ''),
+    titulo: semTravessoes(String(fm.titulo ?? slug)),
+    resumo: semTravessoes(String(fm.resumo ?? '')),
     data: String(fm.data ?? ''),
     tematica: fm.tematica ? String(fm.tematica) : undefined,
     capa: await resolverCapa(fm.capa ? String(fm.capa) : undefined),

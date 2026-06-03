@@ -135,7 +135,7 @@ export default async function EscritoPage({
           </p>
           {escrito.isFallback && locale === 'en' && (
             <p className="mt-6 text-ocre/70 text-[0.8rem] tracking-[0.12em] italic font-serif">
-              — {t('noticeEn')} —
+              {t('noticeEn')}
             </p>
           )}
           <GotaMini className="w-[28px] h-[28px] mx-auto mt-8 opacity-50 block" />

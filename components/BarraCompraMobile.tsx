@@ -23,7 +23,7 @@ export function BarraCompraMobile({ item, precoOriginal }: { item: CartItem; pre
           dentro ? 'bg-ambar/20 text-ambar border border-ambar/50' : 'bg-ambar text-terra hover:bg-ocre'
         }`}
       >
-        {dentro ? (isPt ? 'No carrinho — ver →' : 'In cart — view →') : (isPt ? 'Adicionar ao carrinho' : 'Add to cart')}
+        {dentro ? (isPt ? 'No carrinho · ver →' : 'In cart · view →') : (isPt ? 'Adicionar ao carrinho' : 'Add to cart')}
       </button>
     </div>
   );
