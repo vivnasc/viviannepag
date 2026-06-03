@@ -336,6 +336,35 @@ function slugToColecao(slug) {
   return 'freeme-mae';
 }
 
+// Monta a linha de produto a partir dos metadados do markdown. Usado quando o
+// render encontra um livro que ainda nao existe na loja: cria-o publicado.
+// guia-* = guia €5; resto (ebook-*, mae/inf/pros/syn/per/for/tra-*) = ebook €7.
+const ORDEM_UNIVERSO = { mae: 1, inf: 2, pros: 3, syn: 4, per: 5, for: 6, tra: 7 };
+function metaProduto(slug, ebook, raw) {
+  const isGuia = /^guia-/.test(slug);
+  const palavras = raw.trim().split(/\s+/).length;
+  const indice = ebook.chapters
+    .map((c, i) => `${i + 1}. ${c.title.replace(/^\d+\.\s*/, '')}`)
+    .join('\n');
+  const descricao = isGuia
+    ? `**Guia prático · ${palavras.toLocaleString('pt-PT')} palavras · PDF imediato**\n\n${ebook.subtitulo}\n\nPor Vivianne dos Santos.`
+    : `**Ebook · ${palavras.toLocaleString('pt-PT')} palavras · ${ebook.chapters.length} capítulos · PDF imediato**\n\n${ebook.subtitulo}\n\n**O que vais encontrar:**\n${indice}\n\nPor Vivianne dos Santos.`;
+  const pre = slug.split('-')[0];
+  const num = Number(slug.split('-')[1]) || 0;
+  return {
+    slug,
+    titulo: ebook.titulo,
+    subtitulo: ebook.subtitulo,
+    descricao,
+    preco: isGuia ? '€5' : '€7',
+    preco_original: isGuia ? '€15' : '€29',
+    badge: isGuia ? 'guia' : 'ebook',
+    destaque: false,
+    publicado: true,
+    ordem: 100 + (ORDEM_UNIVERSO[pre] ?? 9) * 20 + num,
+  };
+}
+
 // Pool de imagens por colecao — puxa de varios mundos para max diversidade.
 // 'autora' tem muitas fotos versateis e entra em quase todas as colecoes.
 const MUNDOS_POR_COLECAO = {
@@ -1025,8 +1054,19 @@ async function renderUm(slug, mundoOverride) {
 
   // Cascata de upload PDF
   let ficheiroPath = `produtos/${slug}.pdf`;
-  const { data: produto } = await supabase
+  let { data: produto } = await supabase
     .from('produtos').select('id, ficheiro_path, capa').eq('slug', slug).maybeSingle();
+
+  // Se o produto ainda nao existe na loja, cria-o (publicado) a partir dos
+  // metadados do markdown. Assim, renderizar = registar: aparece no admin, na
+  // loja e no pack do universo, sem seed manual.
+  if (!produto) {
+    const { data: novo, error: errNovo } = await supabase
+      .from('produtos').insert(metaProduto(slug, ebook, raw)).select('id, ficheiro_path, capa').single();
+    if (errNovo) console.warn(`  [produto-insert-falhou] ${errNovo.message}`);
+    else { produto = novo; console.log(`  [produto-criado] ${slug} (publicado)`); }
+  }
+
   if (produto?.ficheiro_path) ficheiroPath = produto.ficheiro_path;
 
   async function tryUpload(bucket, p, mime) {

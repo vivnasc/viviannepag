@@ -5,7 +5,7 @@ import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { getSupabase } from '@/lib/supabase';
 import { GotaMini } from '@/components/icons/GotaAssina';
-import { COLECOES, COLECOES_ATIVAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
+import { COLECOES, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
 import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import { PACKS } from '@/lib/packs';
@@ -211,6 +211,12 @@ export default async function LojaPage({
               );
           };
 
+          // 'Em breve' = so colecoes sem produtos publicados (as que ja tem
+          // produtos passam a aparecer como bloco normal acima).
+          const emBreveSemProdutos = COLECOES_EM_BREVE.filter(
+            c => (porColecao.get(c.id)?.length ?? 0) === 0,
+          );
+
           return (
             <>
               {/* ABERTURA DO UNIVERSO (teaser + ler completa) */}
@@ -236,7 +242,7 @@ export default async function LojaPage({
               <nav className="mb-14 flex flex-wrap justify-center gap-2">
                 {COLECOES.map(c => {
                   const count = porColecao.get(c.id)?.length ?? 0;
-                  const ativo = c.estado !== 'em-breve';
+                  const ativo = c.estado !== 'em-breve' || count > 0;
                   return (
                     <a
                       key={c.id}
@@ -303,8 +309,10 @@ export default async function LojaPage({
                 </div>
               </section>
 
-              {/* BLOCO POR COLECAO ATIVA */}
-              {COLECOES_ATIVAS.map(c => {
+              {/* BLOCO POR COLECAO — qualquer universo com produtos publicados
+                  aparece (mesmo os marcados 'em-breve' em colecoes.ts). Assim,
+                  renderizar um universo basta para ele surgir na loja. */}
+              {COLECOES.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0).map(c => {
                 const lista = porColecao.get(c.id) ?? [];
                 if (lista.length === 0) return null;
                 return (
@@ -387,7 +395,7 @@ export default async function LojaPage({
               </section>
 
               {/* COLECOES EM BREVE */}
-              {COLECOES_EM_BREVE.length > 0 && (
+              {emBreveSemProdutos.length > 0 && (
                 <section className="mb-20">
                   <div className="flex items-center gap-4 mb-8">
                     <h2 className="font-serif font-light text-creme text-[1.4rem]">
@@ -396,7 +404,7 @@ export default async function LojaPage({
                     <div className="flex-1 h-px bg-ocre/15" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                    {COLECOES_EM_BREVE.map(c => (
+                    {emBreveSemProdutos.map(c => (
                       <div
                         key={c.id}
                         id={`colecao-${c.id}`}
