@@ -22,22 +22,26 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as {
     semana?: number;
     universo?: ColecaoId;
-    tema?: string;
+    palavra?: string;
+    subtitulo?: string;
     brief?: string;
-    veus?: string[];
     numDias?: number;
   };
 
   const seed = body.semana ? semanaSeed(body.semana) : undefined;
   const universo = (body.universo ?? seed?.universo) as ColecaoId | undefined;
-  const tema = body.tema ?? seed?.tema;
+  const palavra = body.palavra ?? seed?.palavra;
+  const subtitulo = body.subtitulo ?? seed?.subtitulo ?? '';
   const brief = body.brief ?? seed?.brief;
-  const veus = body.veus ?? seed?.veus ?? [];
-  if (!universo || !tema || !brief) {
-    return NextResponse.json({ erro: 'falta semana ou universo/tema/brief' }, { status: 400 });
+  const estacao = seed?.estacao ?? 'inverno';
+  const musica = seed?.musica ?? 'instrumental contemplativo (estilo Ancient Ground)';
+  const tema = seed?.tema ?? palavra;
+  if (!universo || !palavra || !brief) {
+    return NextResponse.json({ erro: 'falta semana ou universo/palavra/brief' }, { status: 400 });
   }
 
-  const numDias = body.numDias ?? 5;
+  const DIAS_SEMANA = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'];
+  const numDias = body.numDias ?? 7;
   const mundo = UNIVERSO_TO_MUNDO[universo];
   const col = getColecao(universo);
 
@@ -46,47 +50,54 @@ export async function POST(req: Request) {
   const relevantes = produtosRelevantes(catalogo, { universo, brief, n: 14 });
   const ecossistema = ecossistemaPrompt(relevantes);
 
-  const SYSTEM = `Es a estratega de conteudo da Vivianne dos Santos (psicologia transpessoal, constelacao familiar).
-REGRAS:
+  const SYSTEM = `Es a voz dos Carrosseis dos 7 Veus da Vivianne dos Santos (psicologia transpessoal, constelacao familiar). Conteudo contemplativo, partilhavel, que segue o ano (estacoes e datas).
+REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
+- Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". A palavra da semana lidera tudo.
 
 ${ecossistema}
 
 ${directivaImagem(universo)}
 
-Vais planear UMA SEMANA de ${numDias} dias de conteudo para Instagram/TikTok sobre o tema dado, no universo "${col.nome}" (${col.pitch}).
-Mistura formatos ao longo da semana: pelo menos 1 'carrossel-educativo', 1 'reel-gancho', 1 'citacao-visual', e 1 'carrossel-produto' (este ultimo com CTA mais directo).
+ESTRUTURA DA SEMANA (formato 7 Veus, ${numDias} dias, segunda a domingo):
+PALAVRA da semana: "${palavra}" · subtitulo: "${subtitulo}" · estacao: ${estacao} · musica instrumental: ${musica}.
+Cada dia e um carrossel curto e contemplativo que toca a PALAVRA por um angulo diferente. Slides por dia (4-6):
+- 'capa': a PALAVRA em destaque (texto = a palavra "${palavra}" em maiusculas; titulo = o subtitulo poetico).
+- 'conteudo' PROSA: reflexao em prosa curta (titulo do slide = "PROSA").
+- 'conteudo' POETICO: frase poetica e espacada (titulo = "POETICO").
+- 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRATICA").
+- 'citacao' "Sabias que...": uma micro-sabedoria (titulo = "Sabias que...").
+- 'cta': fecho GENEROSO — convida a um gesto interior. So quando o tema o pedir mesmo, aponta com leveza a UM produto do ecossistema como passo seguinte natural (nunca anuncio).
 
-COMBINA PRODUTOS — pensa a semana como uma JORNADA de loja, nao posts soltos:
-- Escolhe 2-3 produtos COMPLEMENTARES do ecossistema que se reforcam: tipicamente um ebook de ENTRADA (porta acessivel), um PACK que APROFUNDA, e (opcional) um COMPLEMENTO de outro universo que toque o mesmo nervo.
-- Distribui-os pela semana: dias educativos preparam o desejo; o dia 'carrossel-produto' apresenta a jornada ("comeca por X, aprofunda em Y") com naturalidade, nunca como anuncio.
-- Cada dia tem um produto principal (produtoRelacionado) e pode listar produtosRelacionados. Usa slugs/ids EXACTOS do ecossistema.
-- Difunde a loja com generosidade: o conteudo entrega valor a serio; o produto e o passo seguinte natural, nao a isca.
+COMBINA A LOJA COM ALMA:
+- O conteudo entrega valor a serio; o produto e o passo seguinte para quem quer aprofundar.
+- No MAXIMO 1-2 dias por semana mencionam produto, sempre no fecho. Os restantes sao puro valor.
+- Pensa a semana como jornada subtil: ebook de entrada -> pack que aprofunda. Usa slugs/links EXACTOS do ecossistema, nunca inventes.
 
-DEVOLVE APENAS JSON valido, sem texto a volta, neste formato exacto:
+DEVOLVE APENAS JSON valido, sem texto a volta:
 {
-  "jornada": { "entrada": "slug-ebook-de-entrada", "aprofundar": "slug-pack", "complemento": "slug-opcional", "fio": "1 frase que liga os 3 produtos pelo mesmo nervo emocional" },
+  "jornada": { "entrada": "slug", "aprofundar": "slug", "complemento": "slug-ou-vazio", "fio": "1 frase que liga os produtos pelo mesmo nervo" },
   "dias": [
     {
       "dia": 1,
-      "tipo": "carrossel-educativo | carrossel-dica | carrossel-produto | reel-gancho | reel-bastidores | citacao-visual",
+      "diaSemana": "segunda",
+      "tipo": "citacao-visual | carrossel-educativo | carrossel-dica | carrossel-produto | reel-gancho",
       "plataforma": "instagram | tiktok | ambas",
-      "titulo": "string",
-      "descricao": "1 frase do que e o conteudo",
+      "titulo": "o angulo do dia",
+      "descricao": "1 frase",
       "hashtags": ["#..."],
-      "produtoRelacionado": "slug-principal-exacto-do-ecossistema",
-      "produtosRelacionados": ["slug-1", "slug-2"],
+      "produtoRelacionado": "slug-ou-vazio",
       "horario": "11:30",
       "slides": [
-        { "tipo": "capa|conteudo|citacao|cta", "texto": "...", "bold": ["trechos a negrito"], "destaque": "so em citacao/cta", "notaVisual": "EN, descricao de imagem editorial sem pessoas/rostos/texto", "fundoClaro": true }
+        { "tipo": "capa|conteudo|citacao|cta", "titulo": "PROSA|POETICO|PRATICA|Sabias que...|subtitulo", "texto": "...", "destaque": "so citacao/cta", "notaVisual": "EN editorial boho contemplativo, SEM pessoas/rostos/texto", "fundoClaro": true }
       ],
-      "reelScript": { "gancho": "...", "corpo": ["...", "..."], "cta": "...", "musica": "...", "duracao": "30-45s" }
+      "reelScript": { "gancho": "...", "corpo": ["..."], "cta": "...", "musica": "${musica}", "duracao": "30-45s" }
     }
   ]
 }
-Notas: carrosseis tem 6-8 slides (capa + 4-6 conteudo + 1 cta). reels tem reelScript (sem slides). citacao-visual tem 1 slide tipo 'citacao'. Usa os "veus" como angulos dos dias: ${veus.join(', ')}.`;
+Notas: a maioria sao carrosseis contemplativos; inclui pelo menos 1 'reel-gancho' (com reelScript, sem slides). A capa de cada dia mantem a coesao da PALAVRA. A musica de cada dia = a musica da semana.`;
 
-  const userPrompt = `Tema da semana: "${tema}". Brief: ${brief}\nGera os ${numDias} dias agora.`;
+  const userPrompt = `Palavra da semana: "${palavra}" (${subtitulo}). Universo: ${col.nome}. Brief: ${brief}\nGera os ${numDias} dias (segunda a domingo) agora.`;
 
   let texto = '';
   try {
@@ -128,11 +139,12 @@ Notas: carrosseis tem 6-8 slides (capa + 4-6 conteudo + 1 cta). reels tem reelSc
     return {
       ...dia,
       dia: typeof dia.dia === 'number' ? dia.dia : i + 1,
+      diaSemana: typeof dia.diaSemana === 'string' ? dia.diaSemana : DIAS_SEMANA[i % 7],
       mundo,
       plataforma: dia.plataforma ?? 'ambas',
       horario: dia.horario ?? '11:30',
       hashtags: Array.isArray(dia.hashtags) ? dia.hashtags : [],
-      produtosRelacionados: Array.isArray(dia.produtosRelacionados) ? dia.produtosRelacionados : undefined,
+      musicaSugerida: dia.musicaSugerida ?? musica,
     };
   });
 
@@ -145,7 +157,7 @@ Notas: carrosseis tem 6-8 slides (capa + 4-6 conteudo + 1 cta). reels tem reelSc
   const { data, error } = await supabase
     .from('carousel_collections')
     .upsert(
-      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null, jornada: parsed.jornada ?? null } },
+      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null, palavra, subtitulo, estacao, musica, jornada: parsed.jornada ?? null } },
       { onConflict: 'slug' },
     )
     .select()

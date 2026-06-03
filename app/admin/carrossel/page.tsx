@@ -17,7 +17,7 @@ type Coleccao = {
   title: string;
   brief: string;
   dias: ConteudoDia[];
-  theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; jornada?: Jornada | null };
+  theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; palavra?: string; subtitulo?: string; estacao?: string; musica?: string; jornada?: Jornada | null };
   created_at: string;
 };
 
@@ -77,8 +77,9 @@ export default function CarrosselPage() {
             <button onClick={() => setSel(null)} className="text-[0.7rem] tracking-wide opacity-70 hover:opacity-100">← voltar à grelha</button>
             <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
           </div>
-          <h1 className="text-2xl font-semibold mb-1">{sel.title}</h1>
-          <p className="text-[0.8rem] opacity-70 mb-4">{getColecao(sel.theme.universo).nome} · {sel.brief}</p>
+          <h1 className="text-3xl font-serif tracking-[0.12em] mb-1">{sel.theme?.palavra ?? sel.title}</h1>
+          {sel.theme?.subtitulo && <p className="text-[0.9rem] italic opacity-80 mb-1">{sel.theme.subtitulo}</p>}
+          <p className="text-[0.72rem] opacity-55 mb-4">{getColecao(sel.theme.universo).nome} · {sel.theme?.estacao ?? ''} {sel.theme?.musica ? `· ♪ ${sel.theme.musica}` : ''}</p>
 
           {jornada && (jornada.entrada || jornada.fio) && (
             <Card className="mb-6 p-4">
@@ -155,12 +156,13 @@ export default function CarrosselPage() {
             return (
               <div key={w.semana} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: `linear-gradient(135deg, ${p.bg}22, ${p.bg2}55)` }}>
                 <div className="p-3.5">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-60">Semana {w.semana} · {w.mes}</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-60">Sem. {w.semana} · {w.mes} · {w.estacao}</span>
                     <span className="text-[0.6rem] px-1.5 py-0.5 rounded" style={{ background: p.destaque + '33', color: p.destaque }}>{getColecao(w.universo).nome}</span>
                   </div>
-                  <h3 className="text-[0.92rem] font-medium leading-snug mb-1">{w.tema}</h3>
-                  <p className="text-[0.68rem] opacity-60 leading-snug mb-3 line-clamp-2">{w.brief}</p>
+                  <h3 className="text-lg font-serif tracking-[0.12em] mb-1" style={{ color: p.destaque }}>{w.palavra}</h3>
+                  <p className="text-[0.7rem] italic opacity-75 leading-snug mb-2">{w.subtitulo}</p>
+                  <p className="text-[0.62rem] opacity-45 leading-snug mb-3">♪ {w.musica}</p>
                   <div className="flex items-center gap-2">
                     {col ? (
                       <>
