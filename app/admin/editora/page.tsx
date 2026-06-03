@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { listarLivros } from '@/lib/editora';
+import { JaLiToggle } from '@/components/admin/JaLiToggle';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,7 +23,7 @@ export default function EditoraAdmin() {
         <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre mb-2">admin</p>
         <h1 className="font-serif font-light text-creme text-3xl">editora</h1>
         <p className="text-creme-2/60 text-[0.85rem] mt-3 font-serif italic">
-          {livros.length} livros escritos · {totalPalavras.toLocaleString('pt-PT')} palavras · para reveres antes de publicar
+          {livros.length} livros · {totalPalavras.toLocaleString('pt-PT')} palavras · tudo publicado — marca o que já leste
         </p>
       </header>
 
@@ -38,23 +39,25 @@ export default function EditoraAdmin() {
               </div>
               <div className="grid gap-3">
                 {g.livros.map(l => (
-                  <Link
+                  <div
                     key={l.slug}
-                    href={`/admin/editora/${l.slug}`}
-                    className="block border border-ocre/15 rounded-[14px] p-5 hover:bg-terra-2/40 hover:border-ocre/30 transition-colors no-underline group"
+                    className="block border border-ocre/15 rounded-[14px] p-5 hover:border-ocre/30 transition-colors group"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <h3 className="font-serif text-creme text-[1.15rem] group-hover:text-ambar transition-colors">{l.titulo}</h3>
+                        <Link href={`/admin/editora/${l.slug}`} className="no-underline">
+                          <h3 className="font-serif text-creme text-[1.15rem] group-hover:text-ambar transition-colors">{l.titulo}</h3>
+                        </Link>
                         {l.subtitulo && <p className="text-creme-2/70 text-[0.85rem] mt-1 italic font-serif">{l.subtitulo}</p>}
                         <p className="text-creme-2/40 text-[0.72rem] mt-2">{l.slug}</p>
                       </div>
-                      <div className="text-right shrink-0">
-                        <p className="text-ocre text-[0.8rem]">{l.capitulos.length} capítulos</p>
-                        <p className="text-creme-2/60 text-[0.78rem] mt-1">
+                      <div className="flex flex-col items-end gap-1.5 shrink-0">
+                        <JaLiToggle slug={l.slug} />
+                        <p className="text-ocre text-[0.8rem] mt-1">{l.capitulos.length} capítulos</p>
+                        <p className="text-creme-2/60 text-[0.78rem]">
                           {l.palavras.toLocaleString('pt-PT')} palavras
                         </p>
-                        <p className={`text-[0.74rem] mt-1 ${l.auditoria.erros ? 'text-rosa/80' : l.auditoria.avisos ? 'text-ambar/80' : 'text-salvia'}`}>
+                        <p className={`text-[0.74rem] ${l.auditoria.erros ? 'text-rosa/80' : l.auditoria.avisos ? 'text-ambar/80' : 'text-salvia'}`}>
                           {l.auditoria.erros
                             ? `⚠ ${l.auditoria.erros} erro(s)`
                             : l.auditoria.avisos
@@ -63,7 +66,7 @@ export default function EditoraAdmin() {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             </section>
