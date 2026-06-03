@@ -17,7 +17,7 @@ Notice something you may say with pride, and that says more about you than you i
 
 You're the easy one. The one who asks for nothing. The one who needs nothing. The one who makes do with what there is, who doesn't create problems, who doesn't weigh, who doesn't bother. The one who is always available for others, and who never asks anything back for herself.
 
-You don't ask for help. You don't ask for attention. You don't ask anyone to take care of you, to notice you, to attend to your needs. You sort everything out alone, in silence, so as not to be any trouble to anyone whatsoever. And you even take pride in it, in being the one who manages, the one who doesn't need, the one who's never a nuisance.
+Help is the one thing you'll never let yourself reach for. You don't ask for attention. You don't ask anyone to take care of you, to notice you, to attend to your needs. You sort everything out alone, in silence, so as not to be any trouble to anyone whatsoever. And you even take pride in it, in being the one who manages, the one who doesn't need, the one who's never a nuisance.
 
 And when you need something, you swallow it. When you're unwell, you hide it. When something hurts you, you say everything's fine. Because saying that you need, that you're unwell, that something hurt you, would be giving trouble, would be weighing, would be bothering, and that, you don't do.
 
@@ -29,7 +29,7 @@ I want to tell you right now, before anything else, that this isn't just good ma
 
 There's a belief that was engraved in you, very early. The belief that you're more lovable when you disappear. That your place, your right to be loved, depends on not weighing, not asking, not giving trouble. That needing makes you a burden, and that a burden, sooner or later, is set aside.
 
-This book won't teach you to become demanding, to weigh on purpose, to overload others. I've come to look at something else. At the self-erasure you grew used to. At the needs you've been swallowing your whole life. At the fact that, from giving no trouble for so long, you've stopped existing, even to yourself.
+This book won't teach you to become demanding, to weigh on purpose, to overload others. What I've come to look at is the way you make yourself vanish. At the self-erasure you grew used to. At the needs you've been swallowing your whole life. At the fact that, from giving no trouble for so long, you've stopped existing, even to yourself.
 
 And I'll tell you right away where this leads, so you can read without the fear of being pushed into weighing more. You can need without bothering. You can ask, take up space, have needs, and still be loved, because true love doesn't want you erased, it wants you present, whole, with your needs and all. And what taught you to disappear was not love. It was a wound, which we're going to look at.
 
@@ -37,7 +37,7 @@ While we're at it, separate with me what's seen from the outside from what's hap
 
 This book hasn't come to tell you that you have to become demanding, to weigh on purpose, to put your needs above those of others. It comes to tell apart true consideration from self-erasure, the not asking because you don't need from the swallowing of what you need out of fear. And it comes to give you back the most basic right: that of having needs, of showing them, of asking for them to be met, without that taking away your place or your love. Because your place never depended on making yourself invisible. You deserve to be loved whole, with everything you need.
 
-Perhaps you recognize yourself in small things.
+Perhaps you find your own quiet self-erasure hidden inside small, daily gestures.
 
 In sinking in silence, without telling anyone, while you smile on the outside and assure everyone that everything's fine, even when nothing is.
 
@@ -51,7 +51,7 @@ In apologizing, time and again, for things that are no one's fault, as if your s
 
 In neglecting your health, your rest, your most basic needs, because you think attending to yourself would be giving trouble even to yourself.
 
-They are all the same. The self-erasure. The person who is never any trouble, not even to herself.
+Every one of them is the same gesture of vanishing. The self-erasure. The person who is never any trouble, not even to herself.
 
 See with me how this self-erasure works its way into the most ordinary hours of your day, in gestures you may already mistake for your temperament. You're ill, and instead of saying so, you drag yourself through everything anyway, so as not to worry anyone. You need something, and instead of asking for it, you wait for them to guess, and when they don't guess, you tell yourself it wasn't important. Someone asks how you are, and you answer fine, always, even when you're falling apart inside, because telling the truth would be giving trouble. You receive a request, and you accept, even when you're drowning, because refusing seems to weigh more than accepting.
 
@@ -99,7 +99,7 @@ But you, from erasing yourself for so long, lost contact with your own needs. Yo
 
 And notice how this became so deep that it affects your own choices. When they ask you what you want to eat, where you want to go, what you prefer, you hesitate, you say whatever, you let others decide, not because you're indifferent, but because you lost access to your own wanting. From putting others' preferences ahead of yours for so long, from not wanting to give trouble with your own wishes for so long, you stopped knowing what you want. And there's a sadness in this: that of a person who serves everyone's desire and no longer knows what hers is, who erased herself so well that she erased herself even from herself.
 
-And there's an enormous cost in this. Because a need that's swallowed doesn't cease to exist. It stays there, unmet, growing, weighing. You need, but you don't ask, and so you don't receive, and the need stays, a hunger to be fed, an emptiness to be filled. And it accumulates, year after year, into a muffled weight of someone who never received what, in silence, she needed.
+And every swallowed need leaves a bill behind, paid in silence. Because a need that's swallowed doesn't cease to exist. It stays there, unmet, growing, weighing. You need, but you don't ask, and so you don't receive, and the need stays, a hunger to be fed, an emptiness to be filled. And it accumulates, year after year, into a muffled weight of someone who never received what, in silence, she needed.
 
 Notice the particular loneliness of this. You're always available for others' needs, and you never ask anything for yours. You're everyone's shoulder, and you have no shoulder of your own. And when it's you who needs, there's no one to turn to, because no one knows that you need, because you never say, because you erased yourself so well that everyone sees you as the one who needs nothing.
 
@@ -109,13 +109,13 @@ And there's something even more painful. By never asking, by never needing, you 
 
 And there's a cost in the body, too, which pays in silence what you swallow. Because a person who never asks, who never rests, who never attends to herself, who always postpones her own needs, wears away without replenishing. You neglect your health, your rest, your care, because attending to yourself seems to you like giving trouble to yourself, and you don't even allow yourself that. And the body collects, sooner or later, the bill for a whole life of attending to everyone's needs except your own. Many people who are never any trouble fall ill in silence, because their self-erasure extended to the point of not even caring for themselves.
 
-I want you to feel the weight of this. Imagine living your whole life swallowing what you need. Never asking. Never receiving, because you never ask. Accumulating unspoken needs until they become a deep emptiness. It's a place of immense loneliness, disguised as giving no trouble, and perhaps you already take it for normal, so used are you to disappearing.
+Let the weight of a whole swallowed life settle on you for a moment. Imagine living your whole life swallowing what you need. Never asking. Never receiving, because you never ask. Accumulating unspoken needs until they become a deep emptiness. It's a place of immense loneliness, disguised as giving no trouble, and perhaps you already take it for normal, so used are you to disappearing.
 
 And there's a particular sadness in realizing that, from not weighing for so long, you became, in a way, invisible. People grew used to your needing nothing, and so they offer you nothing, they don't notice you, they don't attend to you. Not out of malice, but because you taught the world to see you as the one who needs nothing. And then, in the bad moments, you feel a loneliness you don't understand, without seeing that it was you, by erasing yourself so well, who became the person no one thinks to take care of, because no one imagines that you, too, need.
 
 ## 4. Who am I if I need
 
-I'm going to leave a question here. Alone. Don't run from it.
+Let me set one bare question down in front of you, the way you'd set down something you're afraid to hold. Alone. Don't run from it.
 
 Who are you, if you need? If you ask? If you take up space, and give, for once, trouble?
 
@@ -125,7 +125,7 @@ For you, this question touches a deep terror. Because your whole identity was bu
 
 And the shadow that hides here is the fear of being a burden. The belief, deep and old, that your needs are a nuisance, that needing makes you heavy, and that a heavy person is, sooner or later, set aside. That's why you erase yourself. Not because you don't need, but because you're afraid that needing will cost you love.
 
-Notice how this imprisons you. You can't ask, even when you're sinking, because asking seems to risk your place. You can't need, even when you need desperately, because needing seems to turn you into a burden. You live smothering your needs, sorting everything out alone, even when it costs you dearly, because the fear of weighing is greater than the need itself.
+Notice how this fear of weighing locks you in. You can't ask, even when you're sinking, because asking seems to risk your place. You can't need, even when you need desperately, because needing seems to turn you into a burden. You live smothering your needs, sorting everything out alone, even when it costs you dearly, because the fear of weighing is greater than the need itself.
 
 And there's an enormous fragility in this. Because a person who can't ask is alone in the face of everything. In the face of illness, of tiredness, of despair, of pain. She's always alone, because she doesn't ask, doesn't receive, doesn't let herself be supported. And there are moments in life when no one should be alone, when needing others isn't weakness, it's survival. And you, in those moments, erase yourself even more, you suffer alone in silence, because asking seems to you a luxury you have no right to.
 
@@ -137,7 +137,7 @@ Let me touch this fear from the inside, because that's how it begins to lose its
 
 And I want you to see the cruelty of this belief, which you may not notice. What you learned in your house, that needing is weighing, you keep doing to yourself, today, without anyone needing to do it. It's you, now, who treats yourself as a burden, who swallows your needs, who denies yourself care, who tells you, inside, that you have no right to weigh. The voice that, in childhood, taught you to disappear, became your own voice, and you repeat it against yourself, without respite. To stop erasing yourself is, deep down, to stop continuing, against yourself, what others began: it's to stop being the one who treats you as the nuisance you learned to think you were.
 
-Don't answer the question of who you are if you need just yet. But leave it open. Because that's where the door is. The day you discover that needing doesn't make you less lovable, but more human, more close, more real, you stop having to erase yourself in order to be loved. And then, only then, can you begin to appear.
+Don't answer the question of who you are if you need just yet. But leave it open. Because the way out of your invisibility opens exactly there. The day you discover that needing doesn't make you less lovable, but more human, more close, more real, you stop having to erase yourself in order to be loved. And then, only then, can you begin to appear.
 
 ## 5. Needing isn't bothering
 
@@ -173,7 +173,7 @@ But it's precisely there, in that asking endured despite the guilt, that your cu
 
 And there's something I want to leave you thinking about, regarding the eyes that watch you, especially if you have children. Because self-erasure is passed on, from generation to generation. If they see you never ask, never need, erase yourself so as not to weigh, they learn that this is how one should be, and they risk becoming, too, the ones who erase themselves in order to be loved. The most liberating thing you can teach whoever sees you is not the example of the one who is never any trouble. It's that of a person who asks, who needs, who lets herself be cared for, and who is still loved. Sometimes a person learns to ask, at last, not only for herself, but to give whoever she loves permission to exist whole, with needs and all.
 
-And I want you to know what to expect from this crossing, so that you don't live it as one more thing to do perfectly. It will be slow, and it will have setbacks. Days when you ask, when you appear, when you let yourself need, and days when you go back to erasing yourself, to swallowing everything, to giving no trouble, as always. And the old belief will use each setback to tell you you see, it's better not to weigh. Don't believe it. The setbacks are part of it. No one undoes at once a self-erasure of a whole life. It undoes itself little by little, and each time you ask and aren't set aside, a new piece of proof is laid, and it's from those proofs, added up, that the courage to exist, slowly, is built.
+And I want you to know what to expect from this crossing, so that you don't live it as one more thing to do perfectly. Learning to take up space comes slowly, and with days when you shrink back again. Days when you ask, when you appear, when you let yourself need, and days when you go back to erasing yourself, to swallowing everything, to giving no trouble, as always. And the old belief will use each setback to tell you you see, it's better not to weigh. Don't believe it. The slips back into hiding belong to this just as much as the steps forward. No one undoes at once a self-erasure of a whole life. It undoes itself little by little, and each time you ask and aren't set aside, a new piece of proof is laid, and it's from those proofs, added up, that the courage to exist, slowly, is built.
 
 Begin with small things. A favor you'd do alone, but that you ask for. A help you'd do without, but that you accept. A small need, that you'd normally swallow, and that, for once, you say out loud. And watch what happens. Almost certainly, not the rejection you fear, but a response, a care, a new closeness.
 
@@ -191,11 +191,11 @@ And I want you to see that receiving doesn't put you in debt, as you may fear. T
 
 And it will appear, with each request, the old voice, the one that tells you you're weighing, bothering, becoming a burden. It was engraved early, in that house with no room, and it doesn't go quiet at the first order. Your task isn't to silence it, it's to stop doing what it commands. To hear it say don't ask, don't weigh, and to answer it, slowly, needing doesn't make me a burden, I have a right to be cared for. And each time you ask despite it, and aren't set aside, you weaken the old voice, and strengthen a new one, more yours, more tender, that knows your need counts, as much as anyone's.
 
-I won't give you a method. But I leave you the principle. Ask. In small things, first. Let yourself need, take up space, give some trouble. And discover, slowly, that the love you feared losing by weighing was, after all, a love that only wanted you present, and that your self-erasure, however well-intentioned, was a way of keeping it always at a distance.
+I won't hand you a set of steps to follow perfectly. What I leave you, instead, is one quiet permission to stop disappearing. Ask. In small things, first. Let yourself need, take up space, give some trouble. And discover, slowly, that the love you feared losing by weighing was, after all, a love that only wanted you present, and that your self-erasure, however well-intentioned, was a way of keeping it always at a distance.
 
 ## 7. Needing without bothering
 
-There's a destination for this crossing. And it fits in the sentence that holds it. Needing without bothering.
+This whole crossing out of invisibility is walking toward one place. And it fits in the sentence that holds it. Needing without bothering.
 
 Notice the two parts. Needing. And without bothering.
 
@@ -215,13 +215,13 @@ And I want you to see that showing your needs makes you more real, and not less 
 
 I want, before that, to tell you something about relearning to feel yourself. Because, in order to ask for what you need, you first have to know what you need, and that, from erasing yourself for so long, you may no longer know. Begin, then, with a simple question, asked of yourself, several times a day: what do I need, now? Not to answer it right away, perhaps you don't know at first, but to reopen the channel you closed. To notice the tiredness, the hunger, the wish, the hurt, what you feel like and what you don't feel like, is to relearn the language of your needs, forgotten from not using it for so long. And only by knowing what you need can you, afterward, begin to ask for it.
 
-On the other side of this fear, there's a joy with your name on it, waiting for you. The joy of being cared for. Of asking, and receiving. Of needing, and not being alone. Of taking up your space, of telling, of existing with your needs and all. Of discovering that love didn't want you erased, it wanted you present, and that your place never depended on not weighing, it depended on being you, whole. That joy is your right, and it's on the other side of fear, on the day you need, at last, without erasing yourself.
+On the other side of this fear, there's a joy with your name on it, waiting for you. The joy of someone who stops disappearing and lets herself be tended. Of asking, and receiving. Of needing, and not being alone. Of taking up your space, of telling, of existing with your needs and all. Of discovering that love didn't want you erased, it wanted you present, and that your place never depended on not weighing, it depended on being you, whole. That joy is your right, and it's on the other side of fear, on the day you need, at last, without erasing yourself.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It won't make you, tomorrow, ask for everything you swallowed your whole life. But it changes enough for you to stop confusing your self-erasure with kindness, and your invisibility with giving no trouble.
+It won't undo a lifetime of vanishing in a single day. It won't make you, tomorrow, ask for everything you swallowed your whole life. But it changes enough for you to stop confusing your self-erasure with kindness, and your invisibility with giving no trouble.
 
 Now you know that you're never any trouble, and that this isn't just good manners nor kindness, it's an old belief that you're more lovable when you disappear, and more loved when you don't weigh.
 
