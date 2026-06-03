@@ -247,6 +247,17 @@ export default async function LojaPage({
               );
           };
 
+          // Capa do pack = capa real (foto MJ) de um produto do seu universo
+          // (destaque, senao o primeiro). Para 'all', um produto em destaque do
+          // catalogo. Evita as capas estaticas antigas/partidas do lib/packs.
+          const capaPack = (colecao: ColecaoId | 'all', fallback: string): string => {
+            const pool = colecao === 'all'
+              ? todosProdutos
+              : todosProdutos.filter(p => slugToColecao(p.slug) === colecao);
+            const escolhido = pool.find(p => p.destaque && p.capa) ?? pool.find(p => p.capa);
+            return escolhido?.capa ?? fallback;
+          };
+
           // 'Em breve' = so colecoes sem produtos publicados (as que ja tem
           // produtos passam a aparecer como bloco normal acima).
           const emBreveSemProdutos = COLECOES_EM_BREVE.filter(
@@ -345,6 +356,37 @@ export default async function LojaPage({
                 </div>
               </section>
 
+              {/* PACKS — COLECOES COMPLETAS (subido: melhor oferta, ve-se primeiro) */}
+              <section id="packs" className="mb-20 scroll-mt-24">
+                <div className="flex items-center gap-4 mb-3">
+                  <h2 className="font-serif font-light text-creme text-[1.7rem]">
+                    {isPt ? 'Coleções completas' : 'Complete collections'}
+                  </h2>
+                  <div className="flex-1 h-px bg-ocre/25" />
+                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
+                    {isPt ? 'poupa em pack' : 'save in a bundle'}
+                  </span>
+                </div>
+                <p className="text-creme-2/80 text-[0.95rem] leading-[1.6] mb-8 max-w-[640px]">
+                  {isPt
+                    ? 'Leva um universo inteiro num só acesso, por uma fração do valor avulso. Ou a biblioteca completa, os sete universos juntos.'
+                    : 'Take a whole world in one access, for a fraction of the individual price. Or the complete library, all seven worlds together.'}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                  {PACKS.map((pk) => renderCard({
+                    id: pk.slug,
+                    slug: pk.slug,
+                    titulo: isPt ? pk.titulo : pk.titulo_en,
+                    subtitulo: isPt ? pk.subtitulo : pk.subtitulo_en,
+                    preco: pk.preco,
+                    preco_original: pk.preco_original,
+                    capa: capaPack(pk.colecao, pk.capa),
+                    badge: pk.badge,
+                    destaque: pk.colecao === 'all',
+                  }))}
+                </div>
+              </section>
+
               {/* BLOCO POR COLECAO — qualquer universo com produtos publicados
                   aparece (mesmo os marcados 'em-breve' em colecoes.ts). Assim,
                   renderizar um universo basta para ele surgir na loja. */}
@@ -398,37 +440,6 @@ export default async function LojaPage({
                   </section>
                 );
               })}
-
-              {/* PACKS — COLECOES COMPLETAS */}
-              <section id="packs" className="mb-20 scroll-mt-24">
-                <div className="flex items-center gap-4 mb-3">
-                  <h2 className="font-serif font-light text-creme text-[1.7rem]">
-                    {isPt ? 'Coleções completas' : 'Complete collections'}
-                  </h2>
-                  <div className="flex-1 h-px bg-ocre/25" />
-                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
-                    {isPt ? 'poupa em pack' : 'save in a bundle'}
-                  </span>
-                </div>
-                <p className="text-creme-2/80 text-[0.95rem] leading-[1.6] mb-8 max-w-[640px]">
-                  {isPt
-                    ? 'Leva um universo inteiro num só acesso, por uma fração do valor avulso. Ou a biblioteca completa, os sete universos juntos.'
-                    : 'Take a whole world in one access, for a fraction of the individual price. Or the complete library, all seven worlds together.'}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {PACKS.map((pk) => renderCard({
-                    id: pk.slug,
-                    slug: pk.slug,
-                    titulo: isPt ? pk.titulo : pk.titulo_en,
-                    subtitulo: isPt ? pk.subtitulo : pk.subtitulo_en,
-                    preco: pk.preco,
-                    preco_original: pk.preco_original,
-                    capa: pk.capa,
-                    badge: pk.badge,
-                    destaque: pk.colecao === 'all',
-                  }))}
-                </div>
-              </section>
 
               {/* COLECOES EM BREVE */}
               {emBreveSemProdutos.length > 0 && (
