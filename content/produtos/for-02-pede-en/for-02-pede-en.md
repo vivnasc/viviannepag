@@ -15,7 +15,7 @@
 
 Notice something, honestly. You don't ask.
 
-You don't ask for help. You don't ask for support. You don't ask anyone to lend you a hand, to relieve you, to hold you up. You do everything alone, whatever it costs, even when you're sinking, even when there are people who would gladly help you, if you asked.
+You keep the request locked behind your teeth. You don't ask for support. You don't ask anyone to lend you a hand, to relieve you, to hold you up. You do everything alone, whatever it costs, even when you're sinking, even when there are people who would gladly help you, if you asked.
 
 Asking is almost impossible for you. It catches in your throat. You'd rather carry double alone than tell someone you need them. You'd rather exhaust yourself than admit you can't cope. You'd rather sink in silence than ask for help.
 
@@ -27,7 +27,7 @@ I want to tell you right away, before anything else, that this is not pride, nor
 
 You learned that asking is not safe. That when you asked, as a child, it wasn't worth it. No one came, or they came late, or they came demanding a price. And you drew from that a survival conclusion: I won't ask anymore, I'll do everything alone, because counting on someone only brings disappointment, or pain.
 
-This book is different. Because the silence in which you carry everything alone is not a flaw of method that comes undone with a piece of advice. It is a response to something you lived through. An adaptation to a time when asking, in fact, did not bring you what you needed. And that deserves more than understanding. So, page after page, I will repeat to you something that is hard to hear for someone who has always been enough on her own: understanding your brake may not be enough, and perhaps you need a hand prepared to disarm it with you.
+This book is different. Because the silence in which you carry everything alone is not a flaw of method that comes undone with a piece of advice. It is a response to something you lived through. An adaptation to a time when asking, in fact, did not bring you what you needed. And a closed throat asks for more than a reason to open it. So, page after page, I will repeat to you something that is hard to hear for someone who has always been enough on her own: understanding your brake may not be enough, and perhaps you need a hand prepared to disarm it with you.
 
 I'll leave you, before anything else, the margin within which I want you to read, so that you read without tightness. Needing does not diminish you. And you can ask before you are desperate, instead of waiting for the extreme. What taught you to never ask was a real wound, and that wound can, slowly, and perhaps with help, begin to heal.
 
@@ -35,7 +35,7 @@ Notice, right away, the distance between the woman others applaud and the woman 
 
 This book does not come to tell you that your strength is false, nor that you have to become dependent, fragile, hung on others. It comes to tell you that your strength would grow larger, and not smaller, if you added to it the capacity to ask. That a woman who knows how to do things alone and knows how to lean on others is more whole than one who only knows the first half. And that you deserve that wholeness, after a life of carrying, alone, what no one should carry alone.
 
-Perhaps you recognize yourself in small things.
+Perhaps your hand recognizes itself in small refusals.
 
 In carrying enormous weights alone, without telling anyone, while you assure everyone that everything is fine.
 
@@ -45,7 +45,7 @@ In asking only at the extreme, when you can't take any more, and even then with 
 
 In suspecting, deep down, that if you ask, no one will come, or they'll come reluctantly, or they'll demand a price later.
 
-They are all the same. The inability to ask. The old certainty that asking is not safe.
+They all trace back to one root. The inability to ask. The old certainty that asking is not safe.
 
 I want to show you where this brake on asking hides, in the small gestures you already confuse with the way you are. You notice you need help with a task, and instead of asking, you stay up late doing it alone, exhausted, instead of saying a simple sentence to someone who would gladly say it back. You fall ill, and instead of asking someone to take care of you, you drag yourself around taking care of everything anyway, because asking people to stop for you seems heavier than the illness itself. You have a problem that tightens your chest, and instead of sharing it, you smile and say everything's fine, and you keep it, alone, because showing that you need feels like a dangerous exposure.
 
@@ -75,7 +75,7 @@ And that little girl did the only thing that could save her. She became self-suf
 
 But the brake that spared you from disappointment as a child did not come loose when you grew up. It stayed. And today, as an adult, in a world where perhaps there are people who would truly help you, you continue not to ask, defended against an old disappointment, and deprived of a present support you never let yourself receive.
 
-I want you to see this clearly. Your inability to ask is not a defect. It is the most sensible maneuver a child found so as not to reach her hand out again to those who did not hold it. You are not proud. You are a survivor, who learned not to count on anyone because, when she counted, she was let fall. And recognizing this is not holding a grudge. It is honoring the child who learned to be enough on her own so as not to be disappointed again.
+I want you to see this with the throat unclenched. Your inability to ask is not a defect. It is the most sensible maneuver a child found so as not to reach her hand out again to those who did not hold it. You are not proud. You are a survivor, who learned not to count on anyone because, when she counted, she was let fall. And recognizing this is not holding a grudge. It is honoring the child who learned to be enough on her own so as not to be disappointed again.
 
 I want to add a root you may recognize, because it is among the most common in those who don't know how to ask. That of having been, as a child, the strong one of the house. The one who took care of everything, who solved things, who looked after others, perhaps her own parents, her younger siblings, when the adults couldn't cope. You grew up in the role of the one who supports, not the one who is supported. And you learned, early, that your function was to give, not to receive, that needing was not a right of yours, because there was always someone needing more, and you were the one who held things up, not the one who was held.
 
@@ -93,7 +93,7 @@ Notice the difference. A person with inner strength can do things alone when it 
 
 Your independence became an armor against disappointment. As long as you don't ask, you can't be let fall. As long as you need no one, you can't be disappointed by anyone. As long as you do everything alone, you don't expose yourself to the pain of asking and not receiving. Self-sufficiency protects you from that pain, but at the price of keeping you always alone.
 
-And there is an enormous cost in this. It costs you the body, which carries alone weights that should be shared, to the point of exhaustion. It costs you your health, because no one endures everything alone indefinitely, and you try. It costs you intimacy, because true closeness is born from letting ourselves need one another, and you never let yourself need anyone.
+And there is a toll the closed throat exacts in silence. It costs you the body, which carries alone weights that should be shared, to the point of exhaustion. It costs you your health, because no one endures everything alone indefinitely, and you try. It costs you intimacy, because true closeness is born from letting ourselves need one another, and you never let yourself need anyone.
 
 I want you to see the difference between healthy independence and yours. Healthy independence is one capacity more: I know how to do things by myself, and I also know how to ask, and I choose according to what makes sense. Yours is one capacity less: I only know how to do things by myself, asking is not available, and so I do everything alone even when it destroys me. The first is freedom, because it has both doors. The second is a locked door, even if it dresses as strength. And the work of this crossing is not to take away your independence, which is real and is yours. It is to unlock the other door, the one of asking, so that your strength stops being a prison and becomes a choice.
 
@@ -105,21 +105,21 @@ I want you to see, too, what this shell robs you of without your noticing: light
 
 And there is a painful irony in this way of being of yours. You, who would give everything for those you love, who would be there at any hour, who would never let anyone you care for fall, refuse yourself exactly what you offer others without hesitation. You find it natural that others need, and you support them without judging them. But yourself, you don't give that right. For you, needing is weakness, is weight, is danger. You apply to yourself a harshness you would never apply to those you love, and you deny yourself a care you would give anyone without a second thought. You deserve from yourself the same gentleness you give others, and that is, perhaps, the first thing this crossing comes to teach you.
 
-And there is a cost to those who love you. The people who care for you would like to be able to help you, hold you, give to you. And you don't let them. You do everything alone, refuse support, ask for nothing, and so you deprive those who love you of the possibility of loving you back. Your self-sufficiency, which you believe weighs on no one, is also a door you close to those who would want to support you.
+And there is a cost to those who love you. The people who care for you would like to be able to help you, hold you, give to you. And you keep your hand from ever reaching theirs. You do everything alone, refuse support, ask for nothing, and so you deprive those who love you of the possibility of loving you back. Your self-sufficiency, which you believe weighs on no one, is also a door you close to those who would want to support you.
 
 I want to go deeper into what this independence costs you, because the price is greater than it seems, and it is paid in silence.
 
-It costs you the body. Because the body was not made to carry everything alone, indefinitely, without setting it down. And yours carries: work, the house, the children, other people's problems, everything, without dividing, without delegating, without asking for relief. And the body exacts that toll, in tension, in tiredness that sleep does not cure, in aches, in illnesses, in the signs of someone enduring what she should not endure alone. You call it being capable. Your body calls it overload, and it warns you, in its own way, that it was not made for this.
+It costs you the body first of all. Because the body was not made to carry everything alone, indefinitely, without setting it down. And yours carries: work, the house, the children, other people's problems, everything, without dividing, without delegating, without asking for relief. And the body exacts that toll, in tension, in tiredness that sleep does not cure, in aches, in illnesses, in the signs of someone enduring what she should not endure alone. You call it being capable. Your body calls it overload, and it warns you, in its own way, that it was not made for this.
 
 It costs you intimacy. Because true closeness is not born only from giving. It is born also from letting yourself be seen needing, from setting yourself down in someone's hands, from letting yourself be held. Someone who only gives and never receives keeps, without meaning to, a distance: the other never reaches you whole, because there's a part of you, the one that needs, that you never show them. And so your relationships stay one-directional, you supporting, and no one supporting you, and that lack of reciprocity, even if you impose it, leaves you, in the end, more alone than surrounded.
 
-It costs you the possibility of being cared for. There is a care that only reaches those who let themselves need, and you close yourself to it. The people who love you would like to give to you, to relieve you, to do for you what you do for everyone. And you don't let them. You refuse, solve things alone, decline. And so you deprive yourself of one of the sweetest things in life, being supported by those who wish you well, and you deprive those who love you of the joy of being able to do it.
+It costs you the possibility of being cared for. There is a care that only reaches those who let themselves need, and you close yourself to it. The people who love you would like to give to you, to relieve you, to do for you what you do for everyone. And the closed throat refuses for you. You refuse, solve things alone, decline. And so you deprive yourself of one of the sweetest things in life, being supported by those who wish you well, and you deprive those who love you of the joy of being able to do it.
 
-I want you to feel the weight of this. The weight of carrying everything alone, always. Of never being able to set yourself down in anyone's hands. Of facing, alone, what no one should face alone. It is the tiredness of an entire life of being enough on her own, and perhaps you already take it for strength, when it is, at bottom, the loneliness of someone who learned that asking was not safe.
+I want you to feel, in the shoulders, what the unasked request weighs. The weight of carrying everything alone, always. Of never being able to set yourself down in anyone's hands. Of facing, alone, what no one should face alone. It is the tiredness of an entire life of being enough on her own, and perhaps you already take it for strength, when it is, at bottom, the loneliness of someone who learned that asking was not safe.
 
 ## 4. Who am I when I need someone
 
-I'll leave a question here. Alone. Don't run from it.
+I'll set a question down here, like a hand held out to you. Alone. Don't run from it.
 
 Who are you when you need someone? When you can't cope alone? When you have to ask, to lean, to depend, for a moment, on another?
 
@@ -129,7 +129,7 @@ For you, this question touches a fear that lives very deep, because it takes awa
 
 And the shadow hiding here is dependence. The place of someone who needs another, and who is therefore vulnerable, exposed, at the mercy of whether the other comes or doesn't come. That place terrifies you, because it was there that you were, one day, let fall. And you'd rather need no one than return to that place where disappointment left its mark on you.
 
-Notice how this imprisons you. You can't ask, even while sinking, because asking returns you to the vulnerable place of someone who depends. You can't lean, even exhausted, because leaning seems to risk the fall. You live carrying everything alone, at an enormous cost, because the terror of needing is greater than the very weight you carry.
+Notice how this locks the door from the inside. You can't ask, even while sinking, because asking returns you to the vulnerable place of someone who depends. You can't lean, even exhausted, because leaning seems to risk the fall. You live carrying everything alone, at an enormous cost, because the terror of needing is greater than the very weight you carry.
 
 And there is a cruelty hidden in this never asking of yours, that perhaps you have never seen head-on. What your past did to you, you now do to yourself. In that time, you were left to your own devices, with no one to ask, forced to be enough alone. And today, as an adult, you continue to leave yourself to your own devices, to refuse yourself the support that perhaps already existed, to force yourself to do everything alone as if there were still no one. The abandonment you suffered became an abandonment you practice, against yourself. And to stop practicing it, to let yourself, at last, be supported, is perhaps the most reparative gesture of this crossing: to stop continuing, alone, the abandonment that others began.
 
@@ -141,13 +141,13 @@ And notice how this belief makes you strangely fragile, despite all your apparen
 
 A person who knows how to ask builds, over a lifetime, a network. People she's grown used to turning to, and who've grown used to being there. And when life tightens, that network holds her. You did not build it, because you never asked, and so, in the hour of need, you find yourself suspended in the void, falling alone, not because no one would support you, but because you never let anyone learn how. The independence that seemed to you a fortress reveals itself, in the difficult hour, as a bottomless loneliness.
 
-Don't answer the question of who you are when you need just yet. A question like this isn't solved by thinking, and undoing what it touches asks, very often, for more than these pages can give you. But leave it open. Because that is where the door is. On the day your body learns that needing, today, with the right people, is safe, you stop having to be enough on your own. And there, only there, can you begin to lean.
+Don't answer the question of who you are when you need just yet. A question like this isn't solved by thinking, and undoing what it touches asks, very often, for more than these pages can give you. But leave it open. Because that is where the closed door waits to open. On the day your body learns that needing, today, with the right people, is safe, you stop having to be enough on your own. And there, only there, can you begin to lean.
 
 ## 5. Perhaps you need more than to understand
 
-I have to stop the book here. With all seriousness. Because what closes your throat at the moment of asking is rarely only a reserved temperament or a taste for doing things your own way. It is a response to something you lived through, and that changes what you need.
+I have to set the book down here and ask you to stay. With all seriousness. Because what closes your throat at the moment of asking is rarely only a reserved temperament or a taste for doing things your own way. It is a response to something you lived through, and that changes what you need.
 
-If you learned not to ask because, when you asked, you were let fall, ignored, or hurt, then your self-sufficiency is not just a habit. It is a trauma response. An adaptation to the pain of having needed and not been answered. And a trauma response does not come undone just by being understood. It lives in the tightness that rises to your throat before any word of request, in a nervous system that learned to treat the outstretched hand as a door to disappointment.
+If you learned not to ask because, when you asked, you were let fall, ignored, or hurt, then your self-sufficiency is not just a habit. It is the body bracing against an old danger. An adaptation to the pain of having needed and not been answered. And a trauma response does not come undone just by being understood. It lives in the tightness that rises to your throat before any word of request, in a nervous system that learned to treat the outstretched hand as a door to disappointment.
 
 I want to tell you, plainly, what may lie beneath this doing everything alone of yours. If there was, in your story, neglect, abandonment, a childhood in which you had to take care of yourself because no one took care of you, or relationships in which asking cost you dearly, then your difficulty in asking is a serious wound, and it deserves to be cared for with support.
 
@@ -159,7 +159,7 @@ Notice the irony, and let it help you. You, who most resist asking, are precisel
 
 And I want to take away a fear that, in you more than in anyone, tends to halt this step. It is not an exaggeration to seek help just because you can't ask. You don't have to be in collapse to deserve support. That is, in fact, the very logic of your wound speaking, telling you that only at the extreme is needing justified. To seek out support because you recognize, in yourself, a deep difficulty in asking, in leaning, in letting yourself be supported, is exactly the kind of early care, before despair, that this book invites you to learn. It would be, itself, a first request made in time, and not at the extreme. And it may be the most important one you ever make.
 
-There are two things here I need to separate for you, because what you go looking for depends on them. A difficulty of temperament yields to understanding: you see that you were always reserved, you understand where that comes from, and that, in time, loosens the knot a little. A trauma response does not yield like that. It is not only in the ideas you have about asking, it is in the reflex of refusal that fires before you think, in the body that armors itself at the slightest possibility of needing someone. And that one is not resolved by understanding. It asks for time, it asks for the body, it asks for a safe relationship where the nervous system relearns, slowly, that reaching out is no longer the danger it was. That, alone, is rarely achieved. It is done with accompaniment.
+There are two things here I need to separate for you, because what you go looking for depends on them. A difficulty of temperament yields to understanding: you see that you were always reserved, you understand where that comes from, and that, in time, loosens the knot a little. A trauma response does not yield like that. It is not only in the ideas you have about asking, it is in the reflex of refusal that fires before you think, in the body that armors itself at the slightest possibility of needing someone. And that one is not resolved by understanding. It asks for time, it asks for the body, it asks for a safe relationship where the nervous system relearns, slowly, that reaching out is no longer the danger it was. That hand, by yourself, is rarely the one that opens the throat. It opens with another hand alongside it.
 
 And this I tell you with all the firmness and all the warmth I am capable of, because I know how much it costs someone who never asked. If your difficulty in asking comes from neglect, from abandonment, from a childhood in which you needed and were not answered, this is not your fault, and it is not resolved by effort alone. You deserve the support of someone trained to work not only your understanding, but your body, your distrust, the old memory of having asked and no one having come. And seeking that support is not one more burden you place on yourself. It is the care that wound has, for so long, been asking for.
 
@@ -171,7 +171,7 @@ If you learned that asking is not safe, then there is a new truth waiting for yo
 
 Notice what you usually do. You don't ask until the extreme. You endure, alone, until you can't take any more, and only then, in despair, do you ask, at great cost. And by then, already exhausted, already at breaking point, the request comes out like a collapse, and it confirms, in your body, that asking is a thing of despair, of defeat, of the extreme.
 
-And I propose the opposite. Asking early. Before the extreme. Before the collapse. Asking when there's still room, when the weight is still manageable, when asking can be, simply, a sharing, and not an emergency rescue.
+And I want to turn that whole order around. Asking early. Before the extreme. Before the collapse. Asking when there's still room, when the weight is still manageable, when asking can be, simply, a sharing, and not an emergency rescue.
 
 Notice what despair does to you, and why asking only in despair harms you. When you wait until the extreme, you arrive at the request already without strength, already with bitterness over everything you carried alone, already seething with an old resentment that no one helps you, when, in truth, no one helps you because no one knew you needed them. And then the request comes out crooked: either too much, or with an accusation beneath it, or in a way that pushes people away instead of bringing them closer. And when the answer isn't the one you needed, you close yourself even more, and you tell yourself, once again, that asking doesn't pay off. But it wasn't asking that didn't pay off. It was your having waited until the point where almost nothing could pay off.
 
@@ -183,7 +183,7 @@ There is yet another reason to ask early, and it is practical. When you ask at t
 
 I want to name a resistance you will feel, so that you recognize it when it comes. You will tell yourself that it isn't worth bothering anyone over so little. That you can do it alone, that it's quicker, that you don't want to be a nuisance. That voice seems reasonable, but it is the armor speaking, keeping you from asking with the argument that asking is unnecessary. Notice that it always appears, even when you truly need it, even when you're at the edge of your limit. It is not an honest assessment of the situation. It is an old reflex, and the work is to ask despite it, not because it's right, but because it is by asking, against its advice, that you discover it was wrong.
 
-I want to be honest. This learning, if yours is a trauma wound, is best done with help, with someone to accompany you. But there are things you can begin to do. You can begin by asking for small things, of no importance, of those who are trustworthy. A minimal favor, a help you could do without, a hand you wouldn't really need. And observe what happens, in the person you asked and inside you.
+I want to be honest, the way one is honest with an outstretched hand. This learning, if yours is a trauma wound, is best done with help, with someone to accompany you. But there are things you can begin to do. You can begin by asking for small things, of no importance, of those who are trustworthy. A minimal favor, a help you could do without, a hand you wouldn't really need. And observe what happens, in the person you asked and inside you.
 
 Outside, with the right person, almost certainly, the help comes, gladly, with no price demanded. Inside, the discomfort will rise, the shame, the suspicion that something will go wrong. And to stay with that, to let the help arrive, is to give your body a new piece of evidence. That you asked, and you were answered. That asking, this time, with this person, did not bring the disappointment of before.
 
@@ -195,7 +195,7 @@ The turn, when it comes, feels almost like a shock in the body. It is the time y
 
 ## 7. Leaning without losing my strength
 
-There is a destination for this crossing. Learning to lean, without losing your strength.
+There is a far shore this crossing is moving toward. Learning to lean, without losing your strength.
 
 And I want to undo a fear, because it will appear. The fear that, if you begin to ask, to lean, to need, you'll lose the strength that defines you, become dependent, weak, at someone's mercy.
 
@@ -217,13 +217,13 @@ I want you to see, too, that leaning is not only receiving. It is a movement of 
 
 And there is a joy waiting on the other side, that perhaps you don't even remember wanting, so used are you to being enough on your own. The joy of not being alone. Of setting a weight down in someone's hands. Of being supported, held, helped. Of discovering that there are people who want to be there for you, and of letting yourself, at last, receive that care. That joy is your right, and it is on the other side of the fear, on the day you lean, for the first time, and discover that you didn't collapse, you were held.
 
-I won't leave you a recipe, and unlearning how to do everything alone is, very often, done with someone alongside. But I'll leave you the principle. Ask, in small things, before the extreme. Let yourself be supported by those who are trustworthy. And discover, slowly, and perhaps with hands to accompany you, that needing does not diminish you, that leaning does not take away your strength, and that you don't have to face, alone, everything life brings.
+I won't leave you a recipe, and unlearning how to do everything alone is, very often, done with someone alongside. But I'll leave you the gesture to practice. Ask, in small things, before the extreme. Let yourself be supported by those who are trustworthy. And discover, slowly, and perhaps with hands to accompany you, that needing does not diminish you, that leaning does not take away your strength, and that you don't have to face, alone, everything life brings.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things. But, with a throat that closes at the slightest possibility of asking, understanding can stop halfway, and to keep that from you would be to leave you, once again, solving everything alone.
 
-It doesn't change everything all at once. It does not make you, tomorrow, ask for what you never asked. But it changes enough so that you stop confusing your loneliness with strength, and your inability to ask with independence.
+It does not unclench the throat all at once. It does not make you, tomorrow, ask for what you never asked. But it changes enough so that you stop confusing your loneliness with strength, and your inability to ask with independence.
 
 Now you know that you never ask, and that this is not pride, it is a painful lesson.
 
@@ -239,21 +239,21 @@ You know that you can ask before you are desperate, and that the verb is to lean
 
 And you know, now, that needing never diminished you, that asking is neither defeat nor weight, and that true strength is not never needing anyone, it is being able to need, with the right people, without that taking the ground from under you. And that on the other side of this fear is a lighter life, in which you don't carry everything alone, and in which you let yourself, at last, be supported by those who wish you well.
 
-I want to leave you an image.
+I want to leave you with one picture to hold. 
 
 Imagine someone who, as a child, fell, and called out, and no one came. And who learned, that time, to get up alone, to tend her own wounds alone, to never call out again, because calling out brought no one. And who grew up this way, always getting up alone, never asking, even when, around her, there were already people who would come, if she called.
 
 The crossing is risking calling out again. In a small way, first. To those who are trustworthy. And discovering that, this time, with these people, someone comes. That one does not always fall alone. That the world, today, is not the one where you called and no one came. Relearning to call out is not easy, and sometimes it can only be done with a hand prepared to hold yours. But on the other side is the end of an entire life's loneliness.
 
-I want to tell you what awaits you on this path, so that you don't turn it, too, into one more test to win without asking anyone for help. There will be setbacks. Days when you ask, and days when you close yourself completely again, doing everything alone, as always. And your old voice will tell you it isn't worth it, that you've already seen that no one comes, that it's safer the way you always did it. Don't believe it at first. To close your throat again after having opened it is not the end of the road, it is the back and forth of someone walking it. An armor raised over an entire lifetime is not set down all at once. It comes undone back and forth, one request at a time, slowly, and each time you ask and are answered, even if you retreat afterward, a new piece of evidence stays in the body, and it is from that evidence, accumulated, that trust, slowly, is reborn.
+I want to tell you what awaits you on this path, so that you don't turn it, too, into one more test to win without asking anyone for help. There will be setbacks. Days when you ask, and days when you close yourself completely again, doing everything alone, as always. And your old voice will tell you it isn't worth it, that you've already seen that no one comes, that it's safer the way you always did it. Treat that voice as the old alarm, not the truth. To close your throat again after having opened it is not the end of the road, it is the back and forth of someone walking it. An armor raised over an entire lifetime is not set down all at once. It comes undone back and forth, one request at a time, slowly, and each time you ask and are answered, even if you retreat afterward, a new piece of evidence stays in the body, and it is from that evidence, accumulated, that trust, slowly, is reborn.
 
 And I want to tell you something, about those who watch you, if there are those who learn by looking at you, children, people close to you. If they see you always do everything alone, never ask, sink in silence instead of seeking a hand, they learn that this is how one ought to be, and it's likely they'll carry, too, the same inability to ask. The most freeing thing you can do for those who watch you is not to give them the example of the woman who endures everything alone. It is to show them a woman who asks, who lets herself be supported, who knows that needing diminishes no one. Sometimes a woman learns to ask, at last, not only for herself, but so as not to condemn those she loves to the same loneliness of someone who never knew how to do it.
 
 You know, deep down, the sentence that holds everything I have told you here. I can ask before I am desperate.
 
-Reading about asking was the first step. But there is a second, and that one no page does for you. It is made by asking, slowly, for small things. And, very often, it is made with help, with someone prepared to accompany you in learning that asking, today, can be safe. Because a wound of someone who was let fall deserves hands that know how to hold her, and asking for those hands is, perhaps, your first and most courageous request.
+Reading about asking was the first step. But there is a second step, and no page can reach out that hand for you. It is made by asking, slowly, for small things. And, very often, it is made with help, with someone prepared to accompany you in learning that asking, today, can be safe. Because a wound of someone who was let fall deserves hands that know how to hold her, and asking for those hands is, perhaps, your first and most courageous request.
 
-And I close with something simple, said to the girl who still lives inside you. You were not wrong. The girl who learned not to ask, to be enough on her own, to never call out again, did what she had to do to survive a place where asking brought no one. There is nothing to reproach in her. There is only one thing to say to her, slowly, time after time, until the body believes it: you are no longer there. Today there are people who come. You can call out again.
+And I close with something simple, said to the girl who still lives inside you. You were not wrong. The girl who learned not to ask, to be enough on her own, to never call out again, did what she had to do to survive a place where asking brought no one. There is no blame to lay at her outstretched hand. There is only one thing to say to her, slowly, time after time, until the body believes it: you are no longer there. Today there are people who come. You can call out again.
 
 And if there is a single thought you take from all of this, you who always were enough on your own, take this one. Needing others is not the opposite of being strong. It is what it means to be human, to be alive, to be in relationship. The most whole people you know are not the ones who never need anyone. They are the ones who know how to give and how to receive, the ones who carry their loved ones and let themselves be carried, the ones who understood that no one crosses life alone, and that asking, far from diminishing them, connects them to what is most human in being with others.
 

@@ -27,7 +27,7 @@ I want to tell you right away, before anything else, that this is not only dedic
 
 Because exhaustion proves nothing. You are no more deserving for draining yourself. You are not worth more for ending up destroyed. Tiredness is not the measure of your worth, nor of your merit, nor of your dedication. It is, only, tiredness, and taken to the extreme, it is illness. A medal that, instead of honoring you, gradually consumes you.
 
-This book is not about productivity, nor about time management, nor about how to work in a more sustainable way. I've come to look at something else, something deeper. At the equation that makes you confuse exhaustion with merit. At the reason why you need to drain yourself to feel that you deserve. And at the possibility of resting, at last, without guilt, without that taking from you the worth that, deep down, never depended on your tiredness.
+This book is not about productivity, nor about time management, nor about how to work in a more sustainable way. I've come to look beneath the tiredness, at what feeds it. At the equation that makes you confuse exhaustion with merit. At the reason why you need to drain yourself to feel that you deserve. And at the possibility of resting, at last, without guilt, without that taking from you the worth that, deep down, never depended on your tiredness.
 
 And I'll leave you the compass right away, so that you read without the tension of someone bracing for the blow. Your worth is not measured in exhaustion. You can rest without ceasing to be worth something. And that need to drain yourself in order to deserve comes from a wound we are going to look at, and which, if it has already taken you to the limit, also deserves the care of someone who knows how to walk alongside it.
 
@@ -35,7 +35,7 @@ There is a woman others see and a woman who drains herself within, and they do n
 
 This book hasn't come to ask you to work less, or to stop dedicating yourself, or to tell you that your devotion is worth nothing. Your dedication is real and it is beautiful. It has come to ask you to stop measuring it in suffering, to stop needing to drain yourself in order to feel worthy, and to discover that you can give your best and also rest, without rest taking from you the worth that effort, alone, never truly gave you.
 
-Maybe you recognize yourself in small things.
+Maybe you recognize the equation in the small habits of your days.
 
 In feeling guilt when you rest, as if you were doing something wrong, failing, being lazy, even when you are clearly exhausted and need to stop.
 
@@ -49,7 +49,7 @@ In not being able to stop, even drained, because stopping seems to you to stop d
 
 In feeling a strange unease on days of rest, as if something were wrong, instead of the relief that rest should bring.
 
-They are all the same thing. Exhaustion confused with merit. The draining of oneself in order to have a right to be worth something.
+They are all the same equation wearing different clothes. Exhaustion confused with merit. The draining of oneself in order to have a right to be worth something.
 
 I want to show you how this shows up day to day, in things you perhaps already take for normal. When they ask you how you are, you answer utterly exhausted, with a hint of pride in your voice, like someone showing off a medal. When you see someone rest, take time off, take time for herself, a judgment rises in you, an envy mixed with reproach, as if that person were doing something you don't allow yourself. And when, by chance, you have a light day, on which you didn't drain yourself, instead of savoring it, you feel uncomfortable, empty, as if you hadn't done enough to have a right to exist on that day.
 
@@ -65,7 +65,7 @@ Go back. Beneath the professional surface, there is a belief. I have to drain my
 
 Because your need to exhaust yourself doesn't arise only from the work. It arises from an older belief, that your worth has to be proven with effort, and the greater the effort, the greater the proof. Exhaustion is the extreme form of that proof: I gave so much that I destroyed myself, therefore, I deserve.
 
-Where does this belief come from? Almost always, from far away. From a time when your worth was not given, but had to be earned, and earned with effort, with sacrifice, with visible dedication. Maybe you learned, early on, that you were only valued when you strove to the limit, when you gave everything, when you sacrificed yourself. And that rest, idleness, time off, were suspect, signs of someone who doesn't deserve.
+Where does this belief come from? Almost always, from a childhood where rest was suspect. From a time when your worth was not given, but had to be earned, and earned with effort, with sacrifice, with visible dedication. Maybe you learned, early on, that you were only valued when you strove to the limit, when you gave everything, when you sacrificed yourself. And that rest, idleness, time off, were suspect, signs of someone who doesn't deserve.
 
 Maybe you come from a lineage where hard work was the supreme virtue, where whoever rested was frowned upon, where sweat was the measure of a person's worth. And you inherited that equation: worth is measured in effort, and the maximum effort, exhaustion, is the maximum proof of worth.
 
@@ -77,19 +77,19 @@ Notice what you learned, in any of these roots. That worth is proven in effort. 
 
 Maybe you grew up seeing, at home, love and approval arrive through effort. The child who helped, who sacrificed herself, who tired herself, was the good daughter, the one who made others proud; the one who rested, who played, who did nothing, was the lazy one, the one who disappointed. And you learned, early, the equation that governs you today: love is earned with effort, and rest pushes it away. That is why resting brings you not only guilt, it brings an old fear, that of, by stopping, ceasing to be worthy of the affection you felt only effort gave you.
 
-I want you to see this without guilt. Your confusion between exhaustion and merit is not a flaw, nor masochism. It is an inherited equation, learned in a time when your worth seemed to depend on your visible effort. You are not unable to rest by temperament. You are someone who learned that resting was not deserving, and who drains herself in order to have a right to be worth something.
+I want you to look at this without adding more guilt to the pile. Your confusion between exhaustion and merit is not a flaw, nor masochism. It is an inherited equation, learned in a time when your worth seemed to depend on your visible effort. You are not unable to rest by temperament. You are someone who learned that resting was not deserving, and who drains herself in order to have a right to be worth something.
 
 And I want you to see in what part of you this equation lives, because without that nothing comes undone. This equation is not only an idea in your head, that changes with an argument. It is a way of feeling yourself, carved deep, in which rest triggers guilt and exhaustion soothes. That is why it isn't enough to understand, rationally, that your worth doesn't depend on effort, to stop feeling the guilt when you stop. The guilt doesn't obey reason, because it isn't born from it, it is born from an old equation, that is undone slowly, with the repeated experience of resting and discovering that you didn't cease to be worth something, and very often with the help of someone who walks alongside you to disarm it.
 
 ## 3. The rest that feels like betrayal
 
-There is something you need to see. For you, resting is not resting. It is guilt. It is betrayal. It is failure.
+There is something hidden beneath your tiredness that you need to see. For you, resting is not resting. It is guilt. It is betrayal. It is failure.
 
 Notice what you feel when you stop. It is not relief. It is unease. A voice that says you should be doing something, that you are wasting time, that you don't deserve that rest, that you are lazy. And that voice won't let you go, and it ruins your rest, and it pushes you back to work, to exhaustion, to the only thing that gives you peace: draining yourself.
 
 And notice, with honesty, that often you don't even truly rest. You carry the work into the rest, in thought. You are on holiday but planning the return. You are with the family but brooding over what was left undone. Your body stops, but your mind doesn't, and so the rest doesn't restore, because there is no real rest where the head keeps working. It is like trying to charge a battery without turning off the device: it never fills. And that is why, however much you rest like this, you always wake up tired, because your rest is only a guarded pause, and not the repose of someone who, at last, switched off.
 
-And there is an enormous cost in this. Because a person who can't rest without guilt never truly rests. Your body never restores, your mind never stops, and you go on accumulating a tiredness that never resolves, because the rest that would resolve it is forbidden to you by guilt. You drain yourself without end, and the exhaustion worsens, because the only remedy, rest, you don't allow yourself to take.
+And the bill for this equation is enormous. Because a person who can't rest without guilt never truly rests. Your body never restores, your mind never stops, and you go on accumulating a tiredness that never resolves, because the rest that would resolve it is forbidden to you by guilt. You drain yourself without end, and the exhaustion worsens, because the only remedy, rest, you don't allow yourself to take.
 
 And there is a cost in your relationship with life. Because living is not only working. It is also resting, enjoying, being, playing, doing nothing. And you, by forbidding yourself rest, by only allowing yourself effort, live an amputated life, reduced to work, without the idleness, the pleasure, the time off, which are part of what makes a life full. You complete life as a task, and never live it as a delight.
 
@@ -105,11 +105,11 @@ I want you to see, still, that this equation robs you of the ability to feel hea
 
 And it costs you, too, the people you love, and you with them. Because the time that should be theirs, and yours, is swallowed by work, or by an exhaustion that no longer lets you be present. You are with them but destroyed, with no energy for the conversation, for the game, for the affection, because you spent everything deserving. And when, rarely, you stop, the guilt won't let you be whole even there. So your dedication, which looks like a virtue, gradually robs the moments that matter most, and those who love you always receive your leftovers, what is left after exhaustion has taken the best of you.
 
-I want you to feel the weight of this. The weight of never being able to rest in peace. Of carrying a guilt whenever you stop. Of draining yourself without end, because only exhaustion gives you the right to be worth something. It is a deep exhaustion, and perhaps you already take it for dedication, or for a work ethic, when it is, deep down, a wound that forbids you rest and pushes you toward burnout.
+I want you to feel the full weight you have been carrying as if it were a medal. The weight of never being able to rest in peace. Of carrying a guilt whenever you stop. Of draining yourself without end, because only exhaustion gives you the right to be worth something. It is a deep exhaustion, and perhaps you already take it for dedication, or for a work ethic, when it is, deep down, a wound that forbids you rest and pushes you toward burnout.
 
 ## 4. Who am I when I rest
 
-I'll leave a question here. On its own. Don't run from it.
+I'll set a question down here, the way you set down a load you can't carry any further. On its own. Don't run from it.
 
 Who are you when you rest? When you are not producing, striving, draining yourself? Who are you, simply stopped, doing nothing?
 
@@ -119,9 +119,9 @@ For you, this question touches a place that hurts, and that is why you run from 
 
 And the shadow that hides here is the belief that, without the effort, without the exhaustion, you have no worth. That to rest is not to deserve. That your right to be worth something depends on always giving, draining yourself, proving, and that the moment you stop, that right is suspended, and you cease to be worth something.
 
-Notice how this imprisons you. You can't rest, even destroyed, because resting suspends your worth. You drain yourself without end, because only exhaustion confirms it. You live bound to an equation that forbids you time off, because time off, in your world, is to stop deserving. And rest, which is a basic human need, becomes, for you, a transgression, a guilty luxury, a failure.
+Notice how that belief becomes the chain that keeps you draining yourself. You can't rest, even destroyed, because resting suspends your worth. You drain yourself without end, because only exhaustion confirms it. You live bound to an equation that forbids you time off, because time off, in your world, is to stop deserving. And rest, which is a basic human need, becomes, for you, a transgression, a guilty luxury, a failure.
 
-And there is an enormous fragility in this. Because a worth that depends on constant effort is a worth forever at risk, forever needing to be renewed with more exhaustion. You can never rest in that worth, because it depends on your continuing to drain yourself. You live, therefore, in a race without end, proving, each day, with more tiredness, a worth that is never guaranteed, because it rests on an exhaustion you have to repeat without stopping.
+And a worth bought with exhaustion is a worth built on sand. Because a worth that depends on constant effort is a worth forever at risk, forever needing to be renewed with more exhaustion. You can never rest in that worth, because it depends on your continuing to drain yourself. You live, therefore, in a race without end, proving, each day, with more tiredness, a worth that is never guaranteed, because it rests on an exhaustion you have to repeat without stopping.
 
 Compare with someone who has a worth that rests in herself. That person can work and stop, give and restore, without her sense of being worth something fluctuating with the amount of effort of each day. She is worth something when she produces and worth something when she rests, because the worth is not in the doing, it is in being. And so she lives with a peace you lack: that of not having to prove anything, at every hour, in order to keep deserving. It is that peace this crossing wants to give you back, not that of doing less, but that of ceasing to make your worth depend on how much you drain yourself.
 
@@ -129,11 +129,11 @@ I want to tell you something about this belief, because it begins to disarm itse
 
 And I want to tell you something about the fine panic this question awakens, that tightening that makes you immediately look for a task. What frightens you in rest is not rest itself, it is the emptiness it uncovers, the question about your worth that effort covered. While you drain yourself, you don't have to face that question, because exhaustion answers for you: I gave everything, therefore I am worth something. When you stop, the automatic answer disappears, and the bare question remains: am I worth something, even without giving anything? And it is from that question that you flee, by draining yourself, because facing it, without the crutch of effort, terrifies you. But it is precisely that question that needs a new answer, and the answer is yes, you are worth something, and rest is the place where, slowly, you can learn it.
 
-Don't answer the question of who you are when you rest just yet. But leave it open. Because it is there that the door lies. On the day you discover that you are worth something even when you rest, you stop having to drain yourself in order to deserve. And then, only then, can you rest, at last, without guilt.
+Don't answer the question of who you are when you rest just yet. But leave it open. Because it is in that bare question, and not in any effort, that the way out of the equation lies. On the day you discover that you are worth something even when you rest, you stop having to drain yourself in order to deserve. And then, only then, can you rest, at last, without guilt.
 
 ## 5. When the exhaustion is burnout
 
-I have to stop the book here. With all seriousness. Because there is a point at which exhaustion stops being a medal and becomes an illness, and it is vital for you to know how to recognize it.
+I have to halt this whole machine of merit for a moment. With all seriousness. Because there is a point at which exhaustion stops being a medal and becomes an illness, and it is vital for you to know how to recognize it.
 
 When one confuses exhaustion with merit, one drains oneself without end, without stopping, to the limit. And on the other side of that limit is burnout, a serious exhaustion, that the body and the mind exact, and that is not a medal, it is a wound.
 
@@ -159,19 +159,19 @@ If you confused exhaustion with merit, then there is a new truth waiting for you
 
 Read this slowly. For you, resting and being worth something are incompatible. You are only worth something when you strive, when you drain yourself. To rest is to suspend your worth. And I propose to you that you separate the two things. Your worth doesn't depend on your effort. You are worth something, whether you rest or not. Rest doesn't diminish you. It is only rest, a human need, a right, and not a transgression.
 
-Let me put it another way. Imagine two equally dedicated, equally competent people. One drains herself without stopping, and ends in burnout, unable to continue. The other works with dedication and rests, and so can keep going, in good health, for a long time. Which of the two is more valuable, in the long run? The second, by far. Because sustainable worth is not in draining yourself, it is in working and resting, at a pace that can be maintained. Exhaustion is not the peak of dedication. It is its collapse.
+Let me weigh it on a fairer scale than exhaustion. Imagine two equally dedicated, equally competent people. One drains herself without stopping, and ends in burnout, unable to continue. The other works with dedication and rests, and so can keep going, in good health, for a long time. Which of the two is more valuable, in the long run? The second, by far. Because sustainable worth is not in draining yourself, it is in working and resting, at a pace that can be maintained. Exhaustion is not the peak of dedication. It is its collapse.
 
 Think of this as you would think of an athlete. No real athlete trains until collapsing every day, without rest, because she knows that rest is part of the training, it is when the body rebuilds itself and becomes stronger. Whoever trained without resting would not be more dedicated, she would be more foolish, and she would injure herself quickly. Rest is not the opposite of performance, it is a condition of it. And the same goes for you: resting doesn't make you less dedicated, it makes you able to dedicate yourself for longer, better, without breaking yourself. Your equation confuses draining yourself with excellence, when true excellence always includes the rest that sustains it.
 
 And I want you to see that there is a hidden arrogance in your equation, that you perhaps haven't noticed: that of thinking you can bear what no human body bears without restoring. As if you were the exception, the one who can give without end, the one who doesn't need to rest like the others. But you are not the exception, nor is your body different from other bodies. Recognizing your limits is not weakness, it is truth, it is humility in the best sense: that of accepting that you are human, that you need to restore, that you are not a machine. And there is an enormous relief in being able, at last, to be only human, with everyone's limits, instead of demanding of yourself a superhuman endurance that no one has.
 
-And there is an enormous liberation in this. When resting stops taking your worth, you can, at last, rest without guilt. You can take time off, stop, do nothing, without the voice that tells you that you don't deserve it. You can take care of yourself, restore yourself, live beyond work. And, paradoxically, by resting, you work better, with more energy, more clarity, more pleasure, because a rested person performs more and better than an exhausted one.
+And the moment the equation breaks, what floods in is liberation. When resting stops taking your worth, you can, at last, rest without guilt. You can take time off, stop, do nothing, without the voice that tells you that you don't deserve it. You can take care of yourself, restore yourself, live beyond work. And, paradoxically, by resting, you work better, with more energy, more clarity, more pleasure, because a rested person performs more and better than an exhausted one.
 
 Notice this truth, which contradicts your equation: rest is not the enemy of good work, it is part of it. The clearest ideas come after a good night's sleep, not after a dawn of exhaustion. Creativity is born in repose, in the pause, in idleness, and not in draining yourself. Mistakes multiply when you are destroyed, and decrease when you are rested. So, by draining yourself in the name of dedication, you harm, after all, the very work to which you dedicate yourself. Resting doesn't rob you of the work. It gives you back to it better, and it is your exhaustion, and not your rest, that makes you perform less than you could.
 
 And I want you to see that measuring worth by exhaustion is a ruler not only cruel, but false. Because it doesn't reward the result, it rewards the suffering. By that ruler, whoever drained herself doing badly would be worth more than whoever, rested, did well with lightness. It is absurd, when you see it from the outside, but it is the ruler by which you assess yourself: not by what you do, but by how much it cost you. To change that ruler, and to begin measuring yourself by the worth of what you create and by the life you live, instead of by the tiredness you accumulate, is one of the most freeing changes of this crossing.
 
-I want to speak to you of the verb of this crossing. To rest. To rest is not laziness, nor failure, nor ceasing to deserve. It is taking care of yourself. It is restoring what work spends. It is living the part of life that is not work. It is giving your body, your mind, your being, the time off they need to stay whole. To rest is an act of health, and of dignity, and not a transgression to atone for with guilt.
+I want to give you the one verb that undoes the whole equation. To rest. To rest is not laziness, nor failure, nor ceasing to deserve. It is taking care of yourself. It is restoring what work spends. It is living the part of life that is not work. It is giving your body, your mind, your being, the time off they need to stay whole. To rest is an act of health, and of dignity, and not a transgression to atone for with guilt.
 
 And resting demands something that costs you: tolerating the guilt that rises when you stop, without obeying it. The voice that tells you that you don't deserve it, that you should be doing something, that you are lazy, will appear. And resting, for you, is staying in the rest despite that voice, letting it speak without following it, until it, slowly, loses force. Each time you rest despite the guilt, you teach yourself that you are worth something even resting.
 
@@ -181,11 +181,11 @@ And I want to give you a way to begin, that may help you. Don't try, at first, t
 
 And I want to give you a small sentence, to use in the exact instant the guilt rises and demands of you the bill of your effort. I don't have to pay for this. Repeat it when you sit down and the voice asks you what you did to deserve that couch. I don't have to pay for this. Rest is not a loan you took out and have to settle with tiredness. It is yours, from the start, with no debt at all. And there is a quiet liberation in discovering that you can stop without opening an account, without staying in debt, without the clock of merit running beneath your pause.
 
-The awakening, when it comes, is a relief. It is the day you rest, when you stop, when you do nothing, and instead of the usual guilt, you feel, for an instant, that it is fine. That you deserve that rest. That you didn't cease to be worth something for having stopped. It is a small instant, but it changes everything, because it disproves a lifetime's equation, and gives you back the right to the rest you always denied yourself.
+The day the equation first loosens its grip, you feel it as pure relief. It is the day you rest, when you stop, when you do nothing, and instead of the usual guilt, you feel, for an instant, that it is fine. That you deserve that rest. That you didn't cease to be worth something for having stopped. It is a small instant, but it changes everything, because it disproves a lifetime's equation, and gives you back the right to the rest you always denied yourself.
 
 ## 7. My worth is not measured in tiredness
 
-There is a destination for this crossing. To recognize that your worth is not measured in tiredness.
+There is a place this crossing is taking you, and it is not the next finish line. To recognize that your worth is not measured in tiredness.
 
 And I want to translate this for you into the gestures of an ordinary day, because that is where it is lived.
 
@@ -211,13 +211,13 @@ And I want to leave you with something, about who sees you, above all if there a
 
 And I want you to see that resting without guilt doesn't make you less dedicated, less serious, less good at what you do. Your dedication stays there, intact. What changes is that it stops coming from the fear of not deserving, and comes instead from enjoyment, from purpose, from choice. And what is done from enjoyment, and not from fear, is better, more creative, more sustainable, than what is wrenched out at the cost of exhaustion. Fear drains and impoverishes; enjoyment, fed by rest, sustains and flourishes. To stop draining yourself won't make you give less to the world. It will make what you give come from a more whole place, and last longer.
 
-I won't give you a method of energy management, because this book is not about productivity. But I leave you the principle. Your worth is not measured in tiredness. Rest, without guilt, as someone who takes care of herself. And discover, slowly, that you are worth something even resting, and that the exhaustion, which you took for a medal, was, after all, the path to burnout, and not the proof of your worth.
+I won't give you a method of energy management, because this book is not about productivity. But I leave you the equation that replaces the old one. Your worth is not measured in tiredness. Rest, without guilt, as someone who takes care of herself. And discover, slowly, that you are worth something even resting, and that the exhaustion, which you took for a medal, was, after all, the path to burnout, and not the proof of your worth.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, rest without guilt for the first time. But it changes enough for you to stop confusing your exhaustion with merit, and your draining yourself with dedication, and to begin to look at the guilt of resting as a wound, and not as a truth.
+It doesn't undo the equation in a single day. It doesn't make you, tomorrow, rest without guilt for the first time. But it changes enough for you to stop confusing your exhaustion with merit, and your draining yourself with dedication, and to begin to look at the guilt of resting as a wound, and not as a truth.
 
 Now you know that you confuse exhaustion with merit, and that this is not only a work ethic, it is an equation that destroys you slowly.
 
@@ -239,13 +239,13 @@ Imagine someone who believes she only deserves to eat if she has run a marathon 
 
 The crossing is to discover that you have a right to eat without running the marathon. That you deserve the basics, the rest, the care, for existing, and not for draining yourself. That your worth is not in the marathon, it is in you, and that you can stop running until you collapse, and rest, and eat, and live, without having to deserve it with your exhaustion.
 
-I want you to know what to expect from this crossing, so that you don't turn it into one more marathon to run to perfection, one more proof of merit to add to the list. There will be setbacks. Days when you rest without guilt, and days when you drain yourself again, feeling that you are only worth something if you destroy yourself, as always. And the old voice will use each setback to tell you you see, you need to drain yourself. Don't believe it. Setbacks are part of it. Nobody undoes all at once a lifetime's equation. It is undone little by little, and each time you rest and you don't cease to be worth something, a new proof is left, and it is from those proofs, added together, that the new truth, slowly, takes root.
+I want you to know what to expect from this crossing, so that you don't turn it into one more marathon to run to perfection, one more proof of merit to add to the list. There will be setbacks. Days when you rest without guilt, and days when you drain yourself again, feeling that you are only worth something if you destroy yourself, as always. And the old voice will use each setback to tell you you see, you need to drain yourself. Don't believe it. A setback is not the equation winning, it is the equation fading unevenly. Nobody undoes all at once a lifetime's equation. It is undone little by little, and each time you rest and you don't cease to be worth something, a new proof is left, and it is from those proofs, added together, that the new truth, slowly, takes root.
 
 And I want to leave you, before you set these pages down to rest, one last simple thing. You are worth something. Not for how much you strive, not for the tiredness with which you end, not for the exhaustion you accumulate. You are worth something for existing, for who you are, before and independent of any effort. The girl who learned that she had to tire herself in order to deserve learned a lie, even if told, perhaps, by those who loved her. And undoing that lie is not ceasing to dedicate yourself, it is dedicating yourself from enjoyment, and not from fear, and resting knowing that your worth was guaranteed from the start, without your having to pay for it with your exhaustion.
 
 You already recognize it, the sentence that holds this whole book together. I can rest without ceasing to be worth something. My worth was guaranteed from the start, and I don't have to pay for it with my exhaustion.
 
-Understanding was the first step. But there is a second, and that one is not done sitting and reading, it is done sitting and doing nothing. It is done by resting, slowly, despite the guilt. By measuring your day by something other than tiredness. And, if you have already reached burnout, it is done with help, with someone who walks alongside you as you recover, because installed exhaustion is deep, and one doesn't come out of it only by wanting to.
+Understanding was the first stretch of the crossing. But there is a second, and that one is not done sitting and reading, it is done sitting and doing nothing. It is done by resting, slowly, despite the guilt. By measuring your day by something other than tiredness. And, if you have already reached burnout, it is done with help, with someone who walks alongside you as you recover, because installed exhaustion is deep, and one doesn't come out of it only by wanting to.
 
 And if from all of this you keep a single line, the next time you are exhausted and calling it dedication, let it be this. Rest is not the prize for your worth, it is part of your dignity. You don't have to deserve it by draining yourself first, because it is not a reward, it is a human need, as basic as eating or sleeping, and you have a right to it simply for being a person. Life was not given to you to spend it proving that you deserve to be alive. It was given to you to live it, and living includes resting, without guilt, as someone who knows that she is already worth something, always, without having to pay for it with her exhaustion.
 
