@@ -157,7 +157,7 @@ O que este capítulo te pede, no fundo, é só isto: que vejas que dar espaço e
 
 ## 7. O caminho de volta a ti
 
-Se chegaste até aqui, já fizeste a parte mais difícil, que é ver. Viste o posto, viste a necessidade de seres precisa, viste a dinâmica que afasta, viste que foste tu quem ficou sem vida, viste a diferença entre recuar e abandonar. Agora quero mostrar-te, em linhas gerais, para onde se vai a partir daqui. Não o passo a passo, que não cabe num livro e não se faz sozinha. Mas o mapa. A direção do regresso.
+Se chegaste até aqui, já fizeste a parte mais difícil, que é ver. Viste o posto, viste a necessidade de seres precisa, viste a dinâmica que afasta, viste que foste tu quem ficou sem vida, viste a diferença entre recuar e abandonar. Falta o regresso, e antes de o caminhares quero pôr-te na mão a planta dele. Não os passos um a um, que se dão a viver e não a ler, e que cada mãe dá ao seu ritmo. Mas o desenho de onde fica a estrada, e para que lado dela se anda. A direção de casa.
 
 E é mesmo um regresso, é essa a palavra. Não vais para um sítio novo, vais de volta a ti, a uma vida que ficou à espera enquanto cuidavas da dele. O caminho começa por honrar o que foi. Os anos que deste à maternidade ativa não foram tempo perdido, não foram um desvio da tua vida verdadeira. Foram amor, foram trabalho, foram a obra mais importante que muitas mulheres fazem, e ficam, ficam no teu filho, na pessoa que ele é, no que ele leva para o mundo. Recuar não apaga nada disso. O que ensinaste fica com ele. Agora a vida ensina-lhe o resto, e isso não é uma falha tua, é a ordem natural das coisas.
 
@@ -179,7 +179,7 @@ Estes são os contornos. O mapa, não a viagem. A viagem é mais funda, faz-se d
 
 ## 8. A travessia
 
-Escrevi este livro porque acredito numa coisa simples: compreender muda. Não muda tudo de uma vez, e não tira a dor de um dia para o outro. Mas muda o suficiente para deixares de te sentir perdida, defeituosa, ou sozinha numa travessia que afinal milhões de mães fazem em silêncio.
+Escrevi este livro porque acredito numa coisa simples: compreender muda. Não devolve o filho pequeno a casa, nem enche num dia a mesa que ficou grande de mais. Mas muda o suficiente para deixares de te sentir perdida, defeituosa, ou sozinha numa travessia que afinal milhões de mães fazem em silêncio.
 
 Agora sabes que a preocupação que não envelhece não é um defeito teu, é um posto que ninguém te ensinou a deixar. Sabes distinguir o amor pelo teu filho da falta que ele faz, sem que uma coisa suje a outra. Sabes porque é que quanto mais te aproximas, mais ele recua. Sabes, e esta foi a mais difícil, que quem ficou sem vida foste tu, e que isso, sendo devastador, é também a porta. Sabes que recuar não é abandonar, e sabes, com clareza, que nada disto se aplica a um filho que ainda precisa de ti de verdade. E sabes que há um caminho de volta, e que ele se chama regressar.
 
@@ -191,7 +191,7 @@ Ler estas páginas foi começar a ver. Mas ver é só o início; o regresso a ti
 
 Foi para essa travessia que criei o **FreeMe**.
 
-O FreeMe não é um curso nem mais uma leitura para a pilha. É de outra natureza. É uma travessia guiada que fazes por dentro, ao teu ritmo, para saíres de um posto que já não é teu e regressares a uma vida que ficou à tua espera. Para uma mãe como tu, que amou tanto que se esqueceu de si, há um caminho pensado para a tua dor: o luto do ninho vazio, o medo de quem és quando ninguém precisa de ti, a coragem de recuar sem abandonar, o regresso às perguntas que adiaste durante décadas. Não para deixares de ser mãe, que isso não deixarás nunca. Para voltares a ser, também, tu.
+O FreeMe não é um curso nem mais uma leitura para a pilha. É de outra natureza. É uma travessia guiada que fazes por dentro, ao teu ritmo, para saíres de um posto que já não é teu e regressares a uma vida que ficou à tua espera. Para uma mãe como tu, que amou tanto que se esqueceu de si, há um caminho pensado para a tua dor: o luto do ninho vazio, o medo de quem és quando ninguém precisa de ti, a coragem de recuar sem abandonar, o regresso às perguntas que adiaste durante décadas. Não para saíres do banco do lado, que mãe serás sempre. Para voltares a ter um caminho teu, também, fora do carro dele.
 
 Lá, as frases que aqui te atravessaram em silêncio são ditas em voz alta, devagar, até o corpo as reconhecer como suas. "A tua vida pertence-te." "Posso permanecer perto sem conduzir." "Posso voltar para a minha vida sem deixar de ser tua mãe." O que aqui foi direção, lá torna-se caminho andado. Recuar deixa de ser uma ideia e torna-se um movimento. E regressar deixa de assustar e começa a saber a casa.
 
@@ -199,7 +199,7 @@ Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https:/
 
 E se este não é o teu momento, está tudo certo assim. O que leste é teu para sempre, e o caminho de regresso não tem prazo: espera por ti o tempo que precisares.
 
-Mas antes de fechares estas páginas, peço-te uma coisa só. Hoje, faz uma pergunta a ti mesma, uma daquelas que adiaste há muito tempo. Não precisas de a responder. Só de a fazer, e de reparar no que ela mexe. Porque cada pergunta que voltas a fazer sobre ti é um passo de regresso. E o regresso, como qualquer viagem, começa com um único passo, dado hoje, por ti. Não tens de saber o caminho todo. Só de dar o primeiro passo, e depois o seguinte, e confiar que a vida, que ensinou tanto ao teu filho, ainda tem muito para te ensinar a ti.
+E antes de pousares este livro e voltares à tua mesa, deixo-te um único gesto de regresso. Hoje, faz uma pergunta a ti mesma, uma daquelas que adiaste há muito tempo. Não precisas de a responder. Só de a fazer, e de reparar no que ela mexe. Porque cada pergunta que voltas a fazer sobre ti é um passo de regresso. E o regresso, como qualquer viagem, começa com um único passo, dado hoje, por ti. Não tens de saber o caminho todo. Só de dar o primeiro passo, e depois o seguinte, e confiar que a vida, que ensinou tanto ao teu filho, ainda tem muito para te ensinar a ti.
 
 Com toda a minha ternura,
 *Vivianne*

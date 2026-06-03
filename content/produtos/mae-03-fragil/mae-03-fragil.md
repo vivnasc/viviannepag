@@ -181,7 +181,7 @@ Estes são os contornos. O mapa, não a viagem. A viagem é mais funda, faz-se d
 
 ## 8. A travessia
 
-Escrevi este livro porque acredito numa coisa simples: compreender muda. Não muda tudo de uma vez, e não tira a dor de um dia para o outro. Mas muda o suficiente para deixares de te sentir presa, defeituosa, ou sozinha numa travessia que tantas mães dedicadas fazem em silêncio.
+Escrevi este livro porque acredito numa coisa simples: compreender muda. Não solta as tuas mãos de uma só vez, nem faz o medo da queda desaparecer numa noite. Mas muda o suficiente para deixares de te sentir presa, defeituosa, ou sozinha numa travessia que tantas mães dedicadas fazem em silêncio.
 
 Agora sabes distinguir sustentar de substituir, e sabes que substituir nasce sempre do amor e do medo da queda. Sabes fazer a pergunta que muda tudo: a minha ajuda aumenta ou diminui a força dele? Sabes que a força do teu filho não cresce nas tuas mãos, cresce nas dele. Sabes, e esta foi a mais funda, que te construíste em torno de ser precisa, e que és muito mais do que a pessoa que resolve. Sabes que sustentar não é abandonar, e que nada disto se aplica a retirar apoio de que o teu filho genuinamente precisa. E sabes que voltar a existir não é egoísmo, é a outra metade do caminho.
 
@@ -205,7 +205,7 @@ E se ainda não é a tua hora, está bem assim. O que leste já te pertence, e f
 
 E quero deixar-te com uma última imagem, porque ela resume tudo. Durante anos seguraste o teu filho como se segura uma coisa que pode cair, com as duas mãos, com força, sem nunca o pousar. E o teu braço, ao fim de tanto tempo nessa posição, ficou dorido, e o teu filho, ao fim de tanto tempo seguro assim, nunca aprendeu a estar de pé sozinho. Sustentar é descobrir que há outra forma de o segurar: com uma mão por baixo, leve, presente, que não impede que ele encontre o próprio equilíbrio, mas que está lá se ele oscilar. Não é largar. É segurar de outra maneira, uma maneira que deixa lugar à força dele e descanso ao teu braço. E nesse novo modo de segurar, os dois ganham: ele, a possibilidade de se aguentar; tu, a possibilidade de teres outra vez mãos livres para a tua própria vida.
 
-Mas antes de fechares estas páginas, peço-te uma coisa só. Hoje, repara num gesto, um só, que costumas fazer pelo teu filho e que talvez ele já conseguisse fazer sozinho. Não tens de mudar nada ainda. Só de reparar, e de sentir o que se mexe em ti quando imaginas deixar esse gesto nas mãos dele. Porque é aí, nesse pequeno desconforto que tu suportas, que começa a força dele, e começa também o teu regresso a ti.
+Mas antes de pousares este livro e o teu braço cansado, deixa-me pedir-te uma coisa só. Hoje, repara num gesto, um só, que costumas fazer pelo teu filho e que talvez ele já conseguisse fazer sozinho. Não tens de mudar nada ainda. Só de reparar, e de sentir o que se mexe em ti quando imaginas deixar esse gesto nas mãos dele. Porque é aí, nesse pequeno desconforto que tu suportas, que começa a força dele, e começa também o teu regresso a ti.
 
 Com toda a minha ternura,
 *Vivianne*
