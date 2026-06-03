@@ -20,6 +20,9 @@ const MUNDO = process.env.MUNDO || 'freeme';
 // COLECAO=freeme-mae|infonte|amor|forca|prosperidade|pertenca|trabalho
 // Filtra o bulk a um universo de cada vez (lotes mais leves). Ver npm run render:<universo>.
 const COLECAO = (process.env.COLECAO || '').trim();
+// RENDER_LANG=en gera os PDFs ingleses (le content/produtos/<slug>-en/, texto EN,
+// MESMA capa do produto PT, grava em produtos/<slug>-en.pdf, SEM tocar na DB).
+const RENDER_LANG = (process.env.RENDER_LANG || 'pt').toLowerCase();
 // DRY=1 lista os slugs do lote e sai (sem render, sem Supabase nem deps pesadas).
 const DRY = ['1', 'true', 'yes'].includes((process.env.DRY || '').toLowerCase());
 
@@ -218,14 +221,14 @@ function parseEbook(raw) {
       titulo = line.replace('# ', '').trim();
     } else if (titulo && !subtitulo && line.startsWith('**') && line.endsWith('**')) {
       subtitulo = line.replace(/\*\*/g, '').trim();
-    } else if (titulo && !autoria && line.startsWith('*Por ')) {
-      autoria = line.replace(/[*]/g, '').replace('Por ', '').trim();
+    } else if (titulo && !autoria && (line.startsWith('*Por ') || line.startsWith('*By '))) {
+      autoria = line.replace(/[*]/g, '').replace(/^(Por|By) /, '').trim();
     } else if (autoria && !bio && line.startsWith('*') && line.endsWith('*') && !line.startsWith('**')) {
       bio = line.replace(/^\*|\*$/g, '').trim();
     } else if (lines[i].startsWith('## ')) {
       bodyStartIdx = i;
       break;
-    } else if (line.startsWith('*Este ebook')) {
+    } else if (line.startsWith('*Este ebook') || line.startsWith('*Este guia') || line.startsWith('*This ebook') || line.startsWith('*This guide')) {
       disclaimer = line.replace(/^\*|\*$/g, '').trim();
     }
   }
@@ -469,7 +472,11 @@ async function alocarCapasGlobais() {
 
 // ─── HTML builder ───
 
-function buildHtml(ebook, capa, porCapitulo, mundo = 'freeme') {
+function buildHtml(ebook, capa, porCapitulo, mundo = 'freeme', lang = 'pt') {
+  const isEn = lang === 'en';
+  const L = isEn
+    ? { capitulo: 'Chapter', antes: 'Before you begin', conteudo: 'Contents', sumario: 'Contents', disclaimer: 'This ebook is a resource for self-awareness and understanding. It does not replace therapeutic support.' }
+    : { capitulo: 'Capítulo', antes: 'Antes de começar', conteudo: 'Conteúdo', sumario: 'Sumário', disclaimer: 'Este ebook é um material de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico.' };
   const COLORS = PALETTES[mundo] || PALETTES.freeme;
   const chaptersHtml = ebook.chapters.map((ch, i) => {
     const img = porCapitulo[i];
@@ -482,7 +489,7 @@ function buildHtml(ebook, capa, porCapitulo, mundo = 'freeme') {
         <div class="opener-overlay"></div>
         <div class="opener-num">${String(i + 1).padStart(2, '0')}</div>
         <div class="opener-titulo">
-          <div class="opener-cap-label">Capítulo</div>
+          <div class="opener-cap-label">${L.capitulo}</div>
           <h2>${ch.title.replace(/^\d+\.\s*/, '')}</h2>
         </div>
       </section>
@@ -993,15 +1000,15 @@ function buildHtml(ebook, capa, porCapitulo, mundo = 'freeme') {
 <!-- DISCLAIMER -->
 <div class="disclaimer-page">
   <div class="disclaimer-box">
-    <div class="disclaimer-label">Antes de começar</div>
-    <p class="disclaimer-text">${ebook.disclaimer || 'Este ebook é um material de autoconhecimento e compreensão. Não substitui acompanhamento terapêutico.'}</p>
+    <div class="disclaimer-label">${L.antes}</div>
+    <p class="disclaimer-text">${ebook.disclaimer || L.disclaimer}</p>
   </div>
 </div>
 
 <!-- SUMARIO -->
 <div class="sumario">
-  <div class="sumario-label">Conteúdo</div>
-  <h2>Sumário</h2>
+  <div class="sumario-label">${L.conteudo}</div>
+  <h2>${L.sumario}</h2>
   <ol>
     ${sumarioHtml}
   </ol>
@@ -1027,11 +1034,15 @@ ${chaptersHtml}
 
 // ─── main ───
 
-async function renderUm(slug, mundoOverride) {
+async function renderUm(slug, mundoOverride, lang = 'pt') {
+  const isEn = lang === 'en';
   const mundo = mundoOverride || slugToMundo(slug);
-  console.log(`\n── [slug=${slug} mundo=${mundo}] ──`);
+  console.log(`\n── [slug=${slug} mundo=${mundo} lang=${lang}] ──`);
 
-  const ebookPath = path.join(__dirname, '..', 'content', 'produtos', slug, `${slug}.md`);
+  // Em EN le content/produtos/<slug>-en/<slug>-en.md; capa e imagens vêm do
+  // slug BASE (mesma capa que o PT).
+  const mdSlug = isEn ? `${slug}-en` : slug;
+  const ebookPath = path.join(__dirname, '..', 'content', 'produtos', mdSlug, `${mdSlug}.md`);
   if (!fs.existsSync(ebookPath)) {
     throw new Error(`md nao encontrado: ${ebookPath}`);
   }
@@ -1053,8 +1064,8 @@ async function renderUm(slug, mundoOverride) {
   const capa = capaPorSlug[slug] ?? dist.capa ?? imagens[0] ?? null;
   console.log(`  [lane ${lane}/${total}] capa unica (${capasUsadas.size} capas alocadas): ${capa?.url ? '…' + capa.url.slice(-50) : 'sem capa'}`);
 
-  const html = applyFonts(buildHtml(ebook, capa, porCapitulo, mundo), mundo);
-  const tmpPdf = path.join('/tmp', `${slug}.pdf`);
+  const html = applyFonts(buildHtml(ebook, capa, porCapitulo, mundo, lang), mundo);
+  const tmpPdf = path.join('/tmp', `${mdSlug}.pdf`);
 
   const browser = await puppeteer.launch({
     headless: true,
@@ -1084,6 +1095,22 @@ async function renderUm(slug, mundoOverride) {
 
   const pdfBuf = fs.readFileSync(tmpPdf);
   console.log(`  [pdf] ${(pdfBuf.length / 1024).toFixed(0)} KB · [capa] ${(capaJpg.length / 1024).toFixed(0)} KB`);
+
+  // ── Modo EN: so grava o PDF ingles em produtos/<slug>-en.pdf nos dois buckets.
+  // NAO toca na DB (titulo/capa/ficheiro_path do produto sao os do PT). A capa
+  // do PDF e a mesma imagem do produto PT; so o texto muda.
+  if (isEn) {
+    const enKey = `produtos/${slug}-en.pdf`;
+    let okEn = false;
+    for (const bucket of [BUCKET_PRODUTOS, BUCKET_ASSETS]) {
+      const { error } = await supabase.storage.from(bucket).upload(enKey, pdfBuf, { contentType: 'application/pdf', upsert: true });
+      if (!error) { okEn = true; console.log(`  [entregavel-en] ${bucket}/${enKey}`); }
+      else console.warn(`  [en-upload ${bucket}] ${error.message}`);
+    }
+    try { fs.unlinkSync(tmpPdf); } catch {}
+    if (!okEn) throw new Error('upload EN falhou em todos os buckets');
+    return { slug, mundo, lane, size: pdfBuf.length, lang: 'en' };
+  }
 
   // Cascata de upload PDF
   let ficheiroPath = `produtos/${slug}.pdf`;
@@ -1184,13 +1211,13 @@ async function main() {
     return;
   }
 
-  console.log(`[start] ${slugs.length} produto(s): ${slugs.join(', ')}`);
+  console.log(`[start] ${slugs.length} produto(s) [lang=${RENDER_LANG}]: ${slugs.join(', ')}`);
 
   const ok = [];
   const erros = [];
   for (const s of slugs) {
     try {
-      const r = await renderUm(s, MUNDO !== 'auto' && slugs.length === 1 ? MUNDO : null);
+      const r = await renderUm(s, MUNDO !== 'auto' && slugs.length === 1 ? MUNDO : null, RENDER_LANG);
       ok.push(r);
     } catch (e) {
       console.error(`  [erro ${s}] ${e.message}`);

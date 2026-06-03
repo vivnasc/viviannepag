@@ -266,6 +266,23 @@ export default function ProdutosAdmin() {
           >
             📚 render TODOS
           </button>
+          <button
+            onClick={async () => {
+              if (!confirm('Renderizar TODOS os PDFs em INGLES? Le os markdowns -en, mesma capa do PT, grava <slug>-en.pdf sem tocar na loja PT. ~30-45min no GitHub Actions.')) return;
+              setMsg('A disparar bulk render EN...');
+              const r = await fetch('/api/admin/produtos/render-ebook-dispatch', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ slug: 'ALL', mundo: 'auto', lang: 'en' }),
+              });
+              const j = await r.json();
+              setMsg(r.ok ? 'Bulk EN disparado. Os PDFs ingleses ficam prontos em ~30-45min; a loja /en entrega-os automaticamente.' : `Erro: ${j.erro}`);
+            }}
+            className="bg-ouro/15 text-ambar border border-ouro/50 rounded-[12px] px-4 py-2 text-[0.8rem] font-semibold hover:bg-ouro hover:text-terra transition-colors"
+            title="Gera os PDFs ingleses (mesma capa), sem mexer na loja PT"
+          >
+            🇬🇧 render EN
+          </button>
           {([
             ['freeme-mae', 'FreeMe'], ['infonte', 'Infonte'], ['amor', 'SyncHim'],
             ['forca', 'Força'], ['prosperidade', 'Prosperidade'], ['pertenca', 'Pertença'], ['trabalho', 'Trabalho'],

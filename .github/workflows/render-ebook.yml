@@ -23,6 +23,11 @@ on:
         required: false
         type: string
         default: ''
+      lang:
+        description: 'Idioma: pt (gera <slug>.pdf + DB) ou en (gera <slug>-en.pdf, mesma capa, sem tocar na DB).'
+        required: false
+        type: string
+        default: 'pt'
 
 jobs:
   render:
@@ -61,6 +66,7 @@ jobs:
           SLUGS: ${{ github.event.inputs.slugs }}
           MUNDO: ${{ github.event.inputs.mundo }}
           COLECAO: ${{ github.event.inputs.colecao }}
+          RENDER_LANG: ${{ github.event.inputs.lang }}
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/render-ebook.js

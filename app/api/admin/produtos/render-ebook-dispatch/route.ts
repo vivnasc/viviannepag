@@ -23,11 +23,13 @@ export async function POST(req: Request) {
   let slugs = '';
   let mundo = 'auto';
   let colecao = '';
+  let lang = 'pt';
   try {
     const body = await req.json();
     if (typeof body?.slug === 'string') slug = body.slug;
     if (typeof body?.mundo === 'string') mundo = body.mundo;
     if (typeof body?.colecao === 'string') colecao = body.colecao;
+    if (body?.lang === 'en') lang = 'en';
     if (Array.isArray(body?.slugs)) slugs = body.slugs.filter((s: unknown) => typeof s === 'string').join(',');
     else if (typeof body?.slugs === 'string') slugs = body.slugs;
   } catch {}
@@ -42,7 +44,7 @@ export async function POST(req: Request) {
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ref, inputs: { slug, slugs, mundo, colecao } }),
+      body: JSON.stringify({ ref, inputs: { slug, slugs, mundo, colecao, lang } }),
     }
   );
 
