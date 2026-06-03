@@ -29,7 +29,7 @@ There is a difference between winning a place and feeling entitled to it. You wo
 
 Notice that this is one of the greatest injustices you live: you worked to get there, more than many, perhaps more than those who occupy the place without hesitation, and it is precisely you who doesn't enjoy it. Those who deserved it least sometimes occupy their place with complete ease, and you, who did so much, occupy it trembling. There is something profoundly unjust in this, and I want you to see it, because seeing the injustice is the beginning of correcting it: it is not right that the one who tried hardest should be the one who allows herself least to savor the arrival.
 
-This book is not about career, nor about professional confidence, nor about techniques to assert yourself. I've come to look at something else, something deeper. At the reason why, having won your place, you don't feel entitled to it. At the wound, existential and not professional, that makes you ask permission to occupy what is already yours.
+This book is not about career, nor about professional confidence, nor about techniques to assert yourself. I've pulled up a chair beside something quieter and deeper. At the reason why, having won your place, you don't feel entitled to it. At the wound, existential and not professional, that makes you ask permission to occupy what is already yours.
 
 And I'll tell you right now where this book is going, so that you can sit and read without staying on the edge of the page. You don't need to ask authorization to occupy what you have already won. The place is yours, you earned it, and you have the right to occupy it fully, without asking permission, without diminishing yourself, without waiting for someone to confirm that you can be there. And the sense of imposture, which shrinks you, comes from a wound we are going to look at, and which is not healed by winning even more.
 
@@ -37,7 +37,7 @@ Look carefully at the distance between the woman you see and the woman who is, i
 
 This book hasn't come to ask you to become arrogant, to boast, to diminish others in order to raise yourself. It asks you the opposite of arrogance and the opposite of erasure: to place yourself in your rightful place, neither above nor below what you are. Recognizing your real worth is not vanity, it is truth. And occupying your place fully doesn't turn you into a person you don't want to be. It makes you, at last, the whole woman who won that place and who deserves to inhabit it in peace.
 
-Maybe you recognize yourself in small things.
+Maybe you recognize yourself in the small ways you sit on the edge.
 
 In feeling that you don't deserve your role, your position, your recognition, even having won them through your own effort.
 
@@ -49,7 +49,7 @@ In attributing your successes to luck, to chance, to others, and never to your o
 
 In feeling that you are always one step away from being discovered, as if there were, hidden, a truth about your incapacity that nobody has seen yet, but which one day will surface.
 
-They are all the same thing. The chair won and not occupied. The sense of not having a right to a place that you did, in fact, earn.
+They are all the same chair, left half-occupied. The chair won and not occupied. The sense of not having a right to a place that you did, in fact, earn.
 
 I want to show you how this shows up day to day, in things you perhaps already take for humility. In a meeting, you have a clear idea, a right one, and before saying it you precede it with maybe I'm wrong, I don't know if this makes sense, it's just an idea, shrinking it in case you don't have a right to it. You receive praise, recognition, and instead of taking it in, you deflect it: it was luck, it was the team, anyone would have done it. An opportunity you deserve arises, a promotion, a project, and you don't put yourself forward, because a part of you thinks you're not enough, that it's for others more legitimate than you.
 
@@ -63,7 +63,7 @@ Go back. Beneath the professional surface, there is a question of legitimacy. Do
 
 And the answer that rises in you, before any argument, is no, this chair isn't really for me. However much you have won it, you don't feel legitimate. There is a difference between the place you have and the place you feel you deserve, and that difference is your suffering.
 
-Where does this lack of legitimacy come from? Almost always, from far away. From a time when your right to occupy space, to stand out, to have worth, was not confirmed, or was questioned, or was denied.
+Where does this lack of legitimacy come from? Almost always, from a room you sat in long before this one. From a time when your right to occupy space, to stand out, to have worth, was not confirmed, or was questioned, or was denied.
 
 Maybe you grew up where your merits were not recognized, or were minimized, or where standing out was frowned upon. And you learned not to feel entitled to recognition, to doubt your worth, to think that standing out was presumption.
 
@@ -73,11 +73,11 @@ Maybe you are the first, in your family, to reach where you reached. The first t
 
 But notice: being the first is not proof that you don't belong. It is proof of the opposite, that you had to be more, to do more, to open a path that no one had opened for you. You didn't arrive there by luck or by mistake, you arrived because you broke through a ceiling that others, before you, never even touched. Your strangeness in that world doesn't say that you don't deserve to be in it. It says you were a pioneer, and pioneers always feel strange, because they tread ground where no one of their origin has trodden. That is not imposture. It is courage, and it deserves to be recognized as such, above all by you.
 
-Notice what this does to you. You win the place, but you don't inhabit it. You have the role, but you feel like an outsider. And you live with a sense of imposture, that they will discover you shouldn't be there, that makes you occupy your position fearfully, asking permission, instead of occupying it with the right of someone who earned it.
+Notice how this keeps you hovering above the seat. You win the place, but you don't inhabit it. You have the role, but you feel like an outsider. And you live with a sense of imposture, that they will discover you shouldn't be there, that makes you occupy your position fearfully, asking permission, instead of occupying it with the right of someone who earned it.
 
 Maybe you grew up in a house where your worth was only recognized when it came accompanied by modesty, and where showing pride in what you did was seen as vanity, presumption, a flaw. Where you were taught that boasting was ugly, that you had to wait for others to recognize, never to claim. And you learned to hide your worth even from yourself, to devalue it by reflex, to fear that recognizing it would turn you into a person you shouldn't be. And you carried that lesson into work, where you continue unable to give yourself the credit you deserve, because giving it to yourself feels like a transgression.
 
-I want you to see this without guilt. Your lack of legitimacy is not a lack of merit, nor false modesty. It is an old wound, that of someone who learned, somewhere, that she had no right to occupy certain places, and who carries that message even after having won them. You are not an impostor. You are someone who was taught to doubt her right to be there, and who won the place but not the inner permission to occupy it.
+I want you to look at this without guilt, the way you would steady a chair before sitting. Your lack of legitimacy is not a lack of merit, nor false modesty. It is an old wound, that of someone who learned, somewhere, that she had no right to occupy certain places, and who carries that message even after having won them. You are not an impostor. You are someone who was taught to doubt her right to be there, and who won the place but not the inner permission to occupy it.
 
 And notice where this refusal to sit down truly lives, because it is there that it is treated. This doubt is not only in your head, in what you think about yourself. It is deeper, in a feeling that doesn't obey reason. You know, rationally, that you won your place, that you are competent, that you deserve it. And even so you don't feel it. Because legitimacy is not decided with arguments, it is felt, or it is not felt, and yours, marked by a time when your right to be there was denied, is not felt, however much your reason confirms it. That is why it isn't enough to list your merits to feel legitimate: the wound is not in the list, it is in a place older than words, and it heals slowly, with experience and, very often, with help.
 
@@ -107,11 +107,11 @@ It costs you, too, the joy of what you won. There were milestones in your life, 
 
 And notice that the impostor doesn't live only in your thoughts, she lives in your body, in the way you sit. Notice, in a meeting, the pose you strike without thinking. The shoulders that close inward. The hands that join in your lap, like someone apologizing for taking up space. The voice that rises at the end of sentences, turning a statement of yours into a request for approval. The seat you occupy only halfway, the body leaning toward the exit, like someone who is passing through and not there by right. Your body tells, without your noticing, the same story the impostor tells you inside: you don't belong here, get ready to leave. And the cruelest part is that others read that story in your body before they read your competence in your work, and they treat you, without malice, as the woman passing through that your posture announces, and not as the professional you in fact are.
 
-I want you to feel the weight of this. The weight of living as an impostor, in a place you won. Of never enjoying what you earned, because you feel you don't deserve it. Of living with the fear of being discovered, when there is nothing to discover. It is a deep exhaustion, and perhaps you already take it for humility, when it is, deep down, a wound that prevents you from occupying, in peace, what is yours. And you deserve, after so much work, to stop carrying it.
+I want you to feel how heavy this seat has become. The weight of living as an impostor, in a place you won. Of never enjoying what you earned, because you feel you don't deserve it. Of living with the fear of being discovered, when there is nothing to discover. It is a deep exhaustion, and perhaps you already take it for humility, when it is, deep down, a wound that prevents you from occupying, in peace, what is yours. And you deserve, after so much work, to stop carrying it.
 
 ## 4. Who am I if I occupy my place
 
-I'll leave a question here. On its own. Don't run from it.
+I'll set a question down on the empty chair across from you. On its own. Don't run from it.
 
 Who would you be if you occupied, fully, your place? If you sat in your chair with the right of someone who won it? If you stopped asking permission to be where you already are?
 
@@ -121,9 +121,9 @@ For you, this question touches a fear that lives right beneath the chair. Becaus
 
 And the shadow that hides here is the fear of fully asserting yourself. Of occupying your place with right, of recognizing your worth, of affirming yourself without asking permission. Because that confronts you with the imposture you fear, and with the fear that, by occupying the place, you would be exposed, judged, sent away.
 
-Notice how this imprisons you. You don't occupy your place, even having won it, because occupying it awakens the fear of imposture. You diminish yourself, you ask permission, you stay on the edge of the chair, not because you don't deserve it, but because you lack the inner permission to occupy what is yours. And you live, this way, always short of your place, always asking authorization to be where you already have the right to be.
+Notice how this keeps you pinned to the edge of the seat. You don't occupy your place, even having won it, because occupying it awakens the fear of imposture. You diminish yourself, you ask permission, you stay on the edge of the chair, not because you don't deserve it, but because you lack the inner permission to occupy what is yours. And you live, this way, always short of your place, always asking authorization to be where you already have the right to be.
 
-And there is an enormous fragility in this. Because a person who doesn't occupy her place, who diminishes herself, who asks permission, is treated, very often, as someone who doesn't deserve the place. The world, in part, treats us by the way we place ourselves. Whoever occupies her place with right is respected in it. Whoever occupies it asking permission invites, without meaning to, being questioned. Your lack of inner right becomes, at times, a lack of outer recognition, in a circle that confirms the imposture you feel.
+And there is a great wobble in this, like a chair resting on one leg. Because a person who doesn't occupy her place, who diminishes herself, who asks permission, is treated, very often, as someone who doesn't deserve the place. The world, in part, treats us by the way we place ourselves. Whoever occupies her place with right is respected in it. Whoever occupies it asking permission invites, without meaning to, being questioned. Your lack of inner right becomes, at times, a lack of outer recognition, in a circle that confirms the imposture you feel.
 
 Notice this circle, because it is important to break it. You diminish yourself because you feel like an impostor. Others, seeing you diminished, treat you as less. That treatment confirms the imposture to you, and you diminish yourself even more. It is a self-fulfilling prophecy: your doubt produces, in the world, exactly the signs that you then use as proof of the doubt. And the only way to break the circle is to enter it from another point: to occupy your place despite the doubt, and to discover that, when you place yourself with right, others treat you with the respect that your posture, now, invites. It is not manipulation. It is letting your real worth appear, instead of hiding it behind an apology.
 
@@ -133,7 +133,7 @@ There is something in this fear that comes undone the moment you name it. Sittin
 
 And I want you to see the irony of the impostor, which perhaps will relieve you. The people who suffer most from feeling like impostors are, almost always, the most competent and the most demanding of themselves. The true frauds, those who genuinely don't deserve the place, rarely doubt themselves, they occupy it without hesitation, convinced of their inflated worth. The fact that you doubt so much, that you are so afraid of not deserving, is, paradoxically, a sign that you do deserve: because only someone who takes her work seriously, who has high standards, who genuinely cares, questions herself this way. Your doubt doesn't prove that you are an impostor. It proves exactly the opposite.
 
-Don't answer the question of who you would be if you occupied your place just yet. But leave it open. Because it is there that the door lies. On the day you feel entitled to the place you won, you stop having to occupy it asking permission. And then, only then, can you sit, at last, in your chair, fully.
+Don't answer the question of who you would be if you occupied your place just yet. But leave it open. Because it is there that the seat waits to be claimed. On the day you feel entitled to the place you won, you stop having to occupy it asking permission. And then, only then, can you sit, at last, in your chair, fully.
 
 ## 5. When doubt becomes suffering
 
@@ -175,7 +175,7 @@ I want to give you a concrete gesture, a small one, to begin. The next time you 
 
 And I want you to distinguish two things that are, in your head, confused. One is the chair they gave you. The other is the chair you give yourself. The first you already have, someone offered it to you, with the role, the contract, the title on the door. But there are women who receive the chair from outside and never come to receive it from within, and so they live seated in a place that, in truth, they have not yet accepted. The second chair, the one you give yourself, is the one missing. It is the inner permission, the one that comes in no contract, the one no promotion brings, and which only you can sign. And as long as you limit yourself to occupying the chair they gave you without giving yourself the chair that is only yours, you will always feel on loan, a guest in a place that, on paper, has already been yours for years. The crossing of this book is, deep down, to stop waiting for someone to bring you the second chair, and to realize, slowly, that it was always in your own hands.
 
-I want to speak to you of the verb of this crossing. To occupy. To occupy your chair fully. To sit in it with the right of someone who won it. To give your opinion with the firmness of someone who belongs. To claim what you deserve without asking permission. To recognize your successes as yours, the fruit of your merit, and not of luck. To occupy your place, at last, as yours.
+I want to name the one verb that lowers you into this chair. To occupy. To occupy your chair fully. To sit in it with the right of someone who won it. To give your opinion with the firmness of someone who belongs. To claim what you deserve without asking permission. To recognize your successes as yours, the fruit of your merit, and not of luck. To occupy your place, at last, as yours.
 
 It will cost you. You will feel, each time you occupy more of your place, the old impostor, the fear of being discovered, the sense of presumption, the urge to diminish yourself again. And you will want to go back to the edge of the chair, to asking permission, to the safety of not exposing yourself.
 
@@ -189,7 +189,7 @@ The awakening, when it comes, is a new sense of belonging. It is the day you sit
 
 ## 7. To occupy what I won
 
-There is a destination for this crossing. To occupy, fully, what you won.
+This crossing ends with a body fully settled into its seat. To occupy, fully, what you won.
 
 And I want to show you, in gestures, what it is to be, in fact, seated in your chair.
 
@@ -203,7 +203,7 @@ It is, above all, sitting in your chair as someone who belongs. Not on the edge,
 
 I want to undo a fear, because it will appear. The fear that, by occupying your place, you will become arrogant, presumptuous, one of those who thinks too much of herself. There is an enormous distance between occupying your place and being arrogant. Arrogance is thinking oneself more than one is, occupying a place one doesn't deserve, diminishing others to raise oneself. Occupying your place is simply taking what is yours, without diminishing yourself or diminishing anyone. It is not thinking yourself superior. It is ceasing to think yourself inferior. And that, far from arrogance, is only justice toward yourself.
 
-And there is an enormous liberation in this. When you occupy your place fully, you stop spending energy hiding a fraud that doesn't exist, proving a worth you already have, justifying a presence that is already legitimate. That energy, freed, becomes available for what matters: for your work, for your life, for enjoying, at last, what you won. Occupying your place doesn't exhaust you. It frees you from the exhaustion of borrowing it.
+And there is an enormous lightness in this, the lightness of a body that finally rests its full weight on the chair. When you occupy your place fully, you stop spending energy hiding a fraud that doesn't exist, proving a worth you already have, justifying a presence that is already legitimate. That energy, freed, becomes available for what matters: for your work, for your life, for enjoying, at last, what you won. Occupying your place doesn't exhaust you. It frees you from the exhaustion of borrowing it.
 
 I want you to see, too, that occupying your place is, paradoxically, a service to others, and not only to yourself. When you diminish yourself, when you hide your worth, when you ask permission to be there, you deprive others of what you have to give. Your ideas go unsaid, your experience unshared, your leadership unexercised. And those who lose with that are not only you, they are the teams, the projects, the people who would benefit from your full contribution. When you refuse to occupy the chair, it is not only you who is left out, it is everything you had to bring to the table and that, out of fear, you leave unbrought. The world doesn't need one more woman shrunk into the corner of the chair. It needs, precisely, what you keep silent so as not to seem too much.
 
@@ -211,13 +211,13 @@ And I want you to see that there are those who learn to occupy their place by lo
 
 And I want you to see that occupying your place doesn't make you less competent, less careful, less dedicated. All of that stays there, intact. What changes is that it stops coming from the fear of being discovered, and comes instead from the security of someone who knows she deserves. And a professional who works from security is better, more creative, more courageous, than one who works from the terror of not being enough. Fear shrinks and paralyzes; legitimacy frees and expands. What you will do when you stop doubting your right to be there will be greater than everything you did trembling on the edge of the chair.
 
-I won't give you a method, because this book is not about techniques of assertion. But I leave you the principle. The place is yours. You won it. Occupy it, fully, without asking permission. And discover, slowly, that the permission you waited for from outside was yours to give, and that, by giving it, you sit, at last, in your chair, with the right of someone who always deserved to be there.
+I won't give you a method, because this book is not about techniques of assertion. But I leave you the one truth the chair rests on. The place is yours. You won it. Occupy it, fully, without asking permission. And discover, slowly, that the permission you waited for from outside was yours to give, and that, by giving it, you sit, at last, in your chair, with the right of someone who always deserved to be there.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, feel fully legitimate in a place you always occupied fearfully. But it changes enough for you to stop confusing your wound with humility, and your imposture with a truth.
+It doesn't seat you firmly all at once. It doesn't make you, tomorrow, feel fully legitimate in a place you always occupied fearfully. But it changes enough for you to stop confusing your wound with humility, and your imposture with a truth.
 
 Now you know that you won the place but don't occupy it, and that this is not a lack of competence, it is an old wound dressed as humility.
 
@@ -237,17 +237,17 @@ Imagine someone who won, with real merit, a seat at the table of an important ro
 
 The crossing is to sit down. To recognize that the chair is yours, that you won it, that you don't need permission to occupy it. And to discover that, by sitting down, nobody tells you to get up, because the place was always yours, and the only person who denied it to you was you.
 
-I want you to know what to expect from this crossing, so that you don't live it as one more thing in which you have to be perfect. There will be setbacks. Days when you occupy your place with firmness, and days when you go back to the edge of the chair, to asking permission, to diminishing yourself, as always. And the impostor will use each setback to tell you you see, you don't deserve it after all. Don't believe her. Setbacks are part of it. Nobody undoes all at once a lifetime of imposture. It is undone little by little, and each time you occupy your place and nothing bad happens, a new proof is left, and it is from those proofs, added together, that your inner legitimacy, slowly, is built.
+I want you to know what to expect from this crossing, so that you don't live it as one more thing in which you have to be perfect. There will be setbacks. Days when you occupy your place with firmness, and days when you go back to the edge of the chair, to asking permission, to diminishing yourself, as always. And the impostor will use each setback to tell you you see, you don't deserve it after all. Don't believe her. Slipping back to the edge of the seat is part of it. Nobody undoes all at once a lifetime of imposture. It is undone little by little, and each time you occupy your place and nothing bad happens, a new proof is left, and it is from those proofs, added together, that your inner legitimacy, slowly, is built.
 
 Before you rise from this reading, stay with one simple thing. You deserve your place. Not for occupying it perfectly, not for never doubting, not for being infallible. You deserve it because you won it, with your work, your competence, your story. The girl, or the young woman, who was taught to doubt her right to be there, was not wrong to doubt, she learned to doubt in a place that denied her legitimacy. But today, as an adult, the place is yours, you won it, and there is nothing left to prove to anyone. Only one thing is missing: that you give yourself the permission you always waited for from outside.
 
 There is a sentence that is the backrest of this whole chair, and you already know it. I don't need to ask permission to occupy what I have already won. The chair is mine, I earned it, and I have the right to sit in it fully.
 
-Understanding was the first step. The second is not read, it is done with the body. It is done by sitting down, slowly, in your chair. By occupying your place, without diminishing yourself, without asking permission. And there is a deeper work, with someone who walks alongside you, to undo the impostor and rebuild your sense of legitimacy, because it comes from far away, and rarely rebuilds itself alone.
+Understanding was only drawing the chair near. The second step is not read, it is done with the body. It is done by sitting down, slowly, in your chair. By occupying your place, without diminishing yourself, without asking permission. And there is a deeper work, with someone who walks alongside you, to undo the impostor and rebuild your sense of legitimacy, because it comes from far away, and rarely rebuilds itself alone.
 
 And if there is a single certainty that stays with you when you close the book, let it be this. The chair is yours. Not borrowed, not by mistake, not waiting to be claimed by someone more legitimate. Yours, won, deserved. And the only person in the world who still needs to be convinced of that is you. Others already know, that is why they gave you the place, that is why they count on you, that is why they treat you as the professional you are. Only you are left to convince, and that is the most important, and most just, work you can do: to give yourself, at last, the permission to occupy, in peace, what was always yours.
 
-And before you rise for good from this reading, I ask one gesture of you only. A hard one, for you.
+And before you rise for good from this reading, I ask one gesture of you only. A hard one to lower yourself into.
 
 This week, occupy your place in a moment when you usually ask permission. Give your opinion without prefacing it with apologies. Claim something you deserve. Recognize a success of yours as yours, without attributing it to luck. And notice the fear of the impostor, the sense of presumption, the urge to diminish yourself. And occupy your place anyway. Because it is in that occupying, endured in spite of the fear, that you begin to feel, at last, that the place is yours, and that you never needed anyone's permission to occupy what, with merit, you won.
 

@@ -27,7 +27,7 @@ I want to tell you right away, before anything else, that this is not pride. Peo
 
 Because you learned, somewhere, that counting on others ends in pain. You leaned, and the support gave way. You trusted, and you were betrayed. You needed, and you were left alone, in the moment when you most needed. And your body kept that pain, and decided, to protect you, not to lean on anyone again.
 
-This book is different. Because your refusal of support is not only a trait to correct. It is, very often, a trauma response. An adaptation to a time when counting on someone ended in pain. And that deserves more than understanding. So, throughout these pages, I will tell you that perhaps you need not only to understand yourself, but support, of the right kind.
+This book is different. Because your refusal of support is not only a trait to correct. It is, very often, a trauma response. An adaptation to a time when counting on someone ended in pain. And a fall like that asks for more than to be explained. So, throughout these pages, I will tell you that perhaps you need not only to understand yourself, but support, of the right kind.
 
 And I'll tell you now where this leads, so you read without arming yourself against the book the way you arm yourself against an outstretched hand. There is a firm bridge where you can set down your foot without losing any of the strength that brought you here. Accepting support does not make you weak, nor put you at someone's mercy, if it is the right support, from someone trustworthy. What taught you not to lean was a real pain, and that pain can, slowly, and perhaps with help, stop governing you.
 
@@ -35,7 +35,7 @@ I want you to distinguish, right away, the woman others see lean on no one from 
 
 This book does not come to tell you that you have to trust everyone, nor that your distrust is all wrong. There are people who don't deserve your trust, and you do well to guard it from them. It comes to tell you that your distrust, by refusing everyone alike, is also punishing those who would support you, and leaving you alone in the face of a life no one should cross alone. And it comes to propose to you not that you lower your guard blindly, but that you recover the discernment that lets you distinguish the firm bridges from the one that collapsed, and lean, at last, on those that hold.
 
-Perhaps you recognize yourself in small things.
+Perhaps you know yourself by the small bridges you refuse to cross.
 
 In refusing help even when you're sinking, saying that everything's fine.
 
@@ -45,7 +45,7 @@ In not being able to give yourself over to the support you accept, always stayin
 
 In preferring to do everything alone, whatever it costs, to risking counting on someone who can let you fall.
 
-They are all the same. The refusal of support. The memory that counting on someone ended in pain.
+They are all the same foot, kept off every bridge. The refusal of support. The memory that counting on someone ended in pain.
 
 I want to show you how the refusal of support disguises itself as habit, in gestures so much your own that you no longer even notice them. Someone tells you count on me, and you smile and thank them, but inside you've already decided you won't count, because counting is risking. You're in a difficult moment, and when they ask if you need anything, you say no, it's all handled, even when nothing is handled and you're sinking. You accept, at most, the smallest help, the one that doesn't put you in anyone's hands, the one you can withdraw at any moment, and you refuse the one that would require you to truly trust.
 
@@ -75,7 +75,7 @@ I want to pause, for a moment, on the pain there is in this origin, because it's
 
 But the foot you learned to take off any bridge did not come back down with time. It stayed suspended, forever. And today, as an adult, in a world where perhaps there is trustworthy support, you continue to refuse it, defended against an old pain, and deprived of a present comfort you never let yourself receive.
 
-I want you to see this clearly. Your refusal of support is not pride, nor stubbornness, nor an incapacity of character. It is an intelligent response to a real pain. You are not distrustful by temperament. You are someone who leaned and was let fall, and who learned, from that pain, not to lean again. And recognizing this is honoring the memory that protects you, and aching, at the same time, that it was necessary.
+I want you to see this as clearly as the river you learned to cross alone. Your refusal of support is not pride, nor stubbornness, nor an incapacity of character. It is an intelligent response to a real pain. You are not distrustful by temperament. You are someone who leaned and was let fall, and who learned, from that pain, not to lean again. And recognizing this is honoring the memory that protects you, and aching, at the same time, that it was necessary.
 
 I want you to see where the warning not to lean gets engraved, because that is what explains why wanting to trust is not enough. The lesson that every bridge falls does not live only in the memory you can recount. It lives in the body, in that recoil that grips your chest before you think, deeper than any word. When someone we leaned on lets us fall, above all early, the body engraves that moment as a warning of survival: leaning is dangerous. And that warning fires, afterward, on its own, whenever someone offers us support, before any thought, in a recoil, in a distrust, in an automatic no. So, today, your refusal does not pass through a decision. It happens before you decide, because it is your body protecting you from an old fall.
 
@@ -87,7 +87,7 @@ There is something about your distrust of support that you need to see. It prote
 
 Notice. Your distrust treats all support as suspect. Every outstretched hand as a possible trap. Every offering as a possible price. And by treating all support as dangerous, you refuse, indiscriminately, both the support that would betray you and the one that would truly comfort you. You close the door to everyone, by reflex, without distinguishing.
 
-And there is an enormous cost in this. It costs you facing life alone. Everything that is difficult, illness, loss, despair, the weight, you face it alone, because you lean on no one. And there are moments in life when no one should be alone, when accepting support is not weakness, it is what makes the unbearable bearable. And you, in those moments, refuse the comfort, and carry alone what no one should carry alone.
+And the toll for that closed door is enormous. It costs you facing life alone. Everything that is difficult, illness, loss, despair, the weight, you face it alone, because you lean on no one. And there are moments in life when no one should be alone, when accepting support is not weakness, it is what makes the unbearable bearable. And you, in those moments, refuse the comfort, and carry alone what no one should carry alone.
 
 It costs you intimacy. Because true closeness is born, in part, from letting ourselves be comforted by one another. From entrusting our weight to someone, and from holding someone's weight. Someone who leans on no one keeps everyone at a distance, in adversity, and so never knows the deep intimacy of someone who let herself, truly, be held.
 
@@ -101,11 +101,11 @@ And it costs you, too, the injustice you do to those who are trustworthy. Becaus
 
 I want you to see the difference between healthy prudence and your distrust. Healthy prudence evaluates each person by what they show, and opens itself to those who deserve trust. It has both doors: it distrusts those who give cause, it trusts those who deserve it. Yours doesn't. Yours closed both doors, it refuses everyone alike, by reflex, without evaluating. And a distrust that does not distinguish is not prudence, it is a shell, that protects you from those who would betray you at the price of isolating you from those who would comfort you. The work of this crossing is not to make you naive, it is to give you back the discernment that fear took from you.
 
-I want you to feel the weight of this. The weight of facing your whole life without being able to lean on anyone. Of carrying alone what was meant to be shared. Of refusing, time after time, the comfort that would do you good, out of fear of a pain that perhaps would not come. It is a deep tiredness, and perhaps you already take it for independence, when it is, at bottom, the loneliness of someone who was let fall and never again dared to lean.
+I want you to feel the weight you swim against. The weight of facing your whole life without being able to lean on anyone. Of carrying alone what was meant to be shared. Of refusing, time after time, the comfort that would do you good, out of fear of a pain that perhaps would not come. It is a deep tiredness, and perhaps you already take it for independence, when it is, at bottom, the loneliness of someone who was let fall and never again dared to lean.
 
 ## 4. Who am I if I lean
 
-I'll leave a question here. Alone. Don't run from it.
+I'll set a question down on the bank of this river. Alone. Don't run from it.
 
 Who are you if you lean on someone? If you accept help? If you stop, for a moment, facing everything alone?
 
@@ -115,7 +115,7 @@ For you, this question touches a memory of pain. Because leaning, in your past, 
 
 And the shadow hiding here is the memory of trust betrayed. The time you leaned, and the support gave way. That memory lives in you, in the body, and fires whenever someone offers you support, telling you: careful, you leaned once, and look how it ended. And you, so as not to relive the fall, refuse the support, even the one that would comfort you.
 
-Notice how this imprisons you. You can't lean, even while sinking, because leaning awakens the fear of the old fall. You live facing everything alone, at an enormous cost, because the fear of being let fall again is greater than the weight you carry alone. The memory of one betrayal governs your entire relationship with support, today, with people who perhaps would never betray you.
+Notice how this keeps you off every bridge. You can't lean, even while sinking, because leaning awakens the fear of the old fall. You live facing everything alone, at an enormous cost, because the fear of being let fall again is greater than the weight you carry alone. The memory of one betrayal governs your entire relationship with support, today, with people who perhaps would never betray you.
 
 And there is a sadness very much its own in someone who refuses comfort, and I want to say it out loud. It is that of knowing, deep down, that there are people who would want to comfort you, and of not being able to let them, however much you wish it. It isn't that you don't want to be held. You would want it, perhaps desperately. It's that your body won't let you, it fires the alarm, recoils, closes the door, even when your deepest part longs to enter through it. To live this way, desiring comfort and refusing it at the same time, is a silent form of suffering, and it deserves all tenderness, not the harshness of those who call you proud without knowing what it costs you.
 
@@ -129,13 +129,13 @@ I want to tell you something about this memory, because it begins to disarm itse
 
 And there is a hidden cruelty in refusing all support, that perhaps you've never seen this way. That person who let you fall did you harm once. But the memory of them, by governing your whole life, continues to do you harm every day, by depriving you of all the support you could have. It is as if the betrayal continued to happen, repeated, not by the person who committed it, but by the shell they left you. And freeing yourself from this is not only ceasing to suffer that fall. It is ceasing to continue, against yourself, the harm another person began, and that you, without meaning to, have prolonged for years by refusing everything.
 
-Don't answer the question of who you are if you lean just yet. It isn't decided with the head, it is felt in the body on the day it dares to set down its weight, and sometimes it needs more than a book to get there. But leave it open. Because that is where the door is. On the day your body learns that leaning, today, on those who are trustworthy, does not end in the fall of before, you stop having to face everything alone. And there, only there, can you begin to let yourself be comforted.
+Don't answer the question of who you are if you lean just yet. It isn't decided with the head, it is felt in the body on the day it dares to set down its weight, and sometimes it needs more than a book to get there. But leave it open. Because that is where the first plank of the bridge lies. On the day your body learns that leaning, today, on those who are trustworthy, does not end in the fall of before, you stop having to face everything alone. And there, only there, can you begin to let yourself be comforted.
 
 ## 5. Perhaps you need more than to understand
 
-I have to stop the book here. With all seriousness. Because your refusal of support is not, most of the time, only a personality trait. It is a memory of trauma, and that changes what you need.
+I have to halt the crossing here, on this bank. With all seriousness. Because your refusal of support is not, most of the time, only a personality trait. It is a memory of trauma, and that changes what you need.
 
-If you learned not to lean because you counted on someone and were let fall, betrayed, or made to pay, then your distrust is not pride. It is a trauma response. A scar of a trust that broke. And the fear of leaning is not undone simply by understanding where it comes from. It lives in the body, in that recoil that grips you when a hand reaches out, in the certainty engraved deep that every bridge ends up giving way.
+If you learned not to lean because you counted on someone and were let fall, betrayed, or made to pay, then your distrust is not pride. It is a trauma response, the body's recoil from a bridge that gave way beneath it. A scar of a trust that broke. And the fear of leaning is not undone simply by understanding where it comes from. It lives in the body, in that recoil that grips you when a hand reaches out, in the certainty engraved deep that every bridge ends up giving way.
 
 I want to name, plainly, what kind of fall may lie beneath your refusal. If there was, in your story, grave betrayal, abandonment in the moment of need, abuse of trust by those who should have cared for you, then your difficulty in receiving support is a serious wound, and it deserves to be cared for with specialized support.
 
@@ -143,7 +143,7 @@ And here I'll ask you to hear me with firmness and tenderness at the same time. 
 
 Because in a well-conducted helping relationship, you experience something new. You lean, and the support does not give way. You trust, and the trust is not betrayed. You depend, for a moment, and you are not made to pay, nor let fall. And your body learns, with that experience, repeated, safe, that there exists support one can, in fact, trust. It is the healing of the wound of this book, done in the very place of support.
 
-I want to separate two things for you, because that is what knowing which support to seek depends on. A distrust of temperament is worked through by understanding: you see the pattern of refusing help, you understand the origin, and that, in time, helps to change it. A fall engraved as trauma is something else. It does not live only in the head, it lives in the body, in the recoil that fires before thought, the moment someone reaches out a hand to you. And a wound like that needs more than understanding. It needs time, the body, a safe relationship where the system relearns, slowly, that leaning no longer ends in the fall of before. That, alone, is rarely achieved. It is done with accompaniment.
+I want to separate two things for you, because that is what knowing which support to seek depends on. A distrust of temperament is worked through by understanding: you see the pattern of refusing help, you understand the origin, and that, in time, helps to change it. A fall engraved as trauma is something else. It does not live only in the head, it lives in the body, in the recoil that fires before thought, the moment someone reaches out a hand to you. And a wound like that needs more than understanding. It needs time, the body, a safe relationship where the system relearns, slowly, that leaning no longer ends in the fall of before. That bridge is rarely rebuilt by one pair of hands. It is raised with someone on the other side, holding the rail while you step.
 
 And I want to take away the fear that, in this book more than in any other, will hold you back: the fear that seeking help is, itself, one more occasion to be let fall. I know that precisely this costs you, trusting a professional, leaning on someone you don't yet know. But notice: a good helping relationship does not ask you to trust blindly, from the start. It asks you only to take a first small step, and lets trust be built slowly, as that support proves, time after time, that it holds. You have every right to advance with caution, to evaluate, to trust gradually at your own pace. You don't have to throw yourself in. You only have to allow yourself to begin.
 
@@ -165,13 +165,13 @@ I want to distinguish, because it's important. There is dependence, in which one
 
 Notice that it is precisely your fear of dependence that pushes you toward the opposite extreme, isolation, and that neither of the extremes is healthy. At one end, total dependence, in which one hands everything over to another and loses the ground. At the other, total isolation, in which one entrusts no one the slightest weight. You live at the second end, thinking it is the safe place. But the healthy place is neither of the extremes, it is the middle: interdependence, in which one keeps one's own strength and accepts, and offers, support, according to what life asks. It is toward that middle that this crossing calls you, not toward the dependence you fear, but toward a balance in which trusting does not mean losing yourself.
 
-I want to be honest. If yours is a deep wound of a fall, agreeing with this is not enough to make you feel it. Your body will keep distrusting, fearing the fall, however much your head knows there is trustworthy support. So this path, very often, is made with help, with someone to accompany you in rebuilding, slowly, the trust that broke.
+I want to be honest with you, the way the river is honest about its current. If yours is a deep wound of a fall, agreeing with this is not enough to make you feel it. Your body will keep distrusting, fearing the fall, however much your head knows there is trustworthy support. So this path, very often, is made with help, with someone to accompany you in rebuilding, slowly, the trust that broke.
 
 But there are small steps you can take, with the foot still fearful. You can begin by accepting support in a small way, from those who, over time, showed themselves trustworthy. A small help. A comfort in a difficult moment. And observe what happens. Outside, with the right person, almost certainly, the support does not give way, does not demand a price, does not let you fall. Inside, the distrust, the fear of the fall, the desire to go back to doing things alone. And to stay with that, to let yourself lean, is to give your body a new piece of evidence. That you leaned, and didn't fall. That there was, this time, someone to hold you.
 
 Each time you lean, in a small way, and the bridge holds, you give your system a new piece of evidence. That leaning, today, does not end in the fall of back then. And it is with evidence, repeated, in the body, and not only with ideas, in the head, that the distrust, slowly, loosens. The shell is not undone by convincing yourself you can trust. It is undone by leaning, in a small way, on those who deserve it, and discovering that the bridge held, time after time, until the body believes it. It is slow work, of many small pieces of evidence, and so don't demand of yourself to trust all at once: the body learns at its own pace, and your task is only to give it, repeatedly, the experience of leaning and not falling.
 
-I want to warn you of what will happen inside you at the first hand you accept, so it doesn't frighten you. The first time you lean, even on a small thing, the distrust will likely rise strong, you'll feel an urgent desire to withdraw, to go back to doing things alone, to regret having accepted. You'll search, almost avidly, for the first sign that the support will fail, so as to be proved right, so as to be able to retreat. That is not a sign that you did wrong in accepting. It is your old system trying to avoid the fall, sabotaging the support before it can disappoint you. Don't obey it right away. Let the support happen, stay with the distrust without obeying it, and give your body the chance to discover that, this time, the bridge held.
+I want to warn you of what will happen inside you at the first hand you accept, so it doesn't frighten you. The first time you lean, even on a small thing, the distrust will likely rise strong, you'll feel an urgent desire to withdraw, to go back to doing things alone, to regret having accepted. You'll search, almost avidly, for the first sign that the support will fail, so as to be proved right, so as to be able to retreat. That is not a sign that you did wrong in accepting. It is your old system trying to avoid the fall, sabotaging the support before it can disappoint you. Don't pull your foot back from the bridge at once. Let the support happen, stay with the distrust without obeying it, and give your body the chance to discover that, this time, the bridge held.
 
 And I want you to choose well whom you lean on, in this phase, because it matters a great deal. Don't begin with the person who already failed you, with the one who would give you reason to distrust. Begin with whoever, over time, showed themselves trustworthy, with small consistent gestures, with a presence that did not fail. It is not naivety, it is the opposite: it is using your discernment to choose where your body has the best chance of learning the new truth. There is time, afterward, to risk more. First, the body needs evidence that leaning can go well.
 
@@ -179,7 +179,7 @@ The awakening, when it comes, is felt in the body before you think it. It is the
 
 ## 7. Letting myself be comforted
 
-There is a verb for this crossing. To lean.
+One verb carries you across this river. To lean.
 
 To lean. To let yourself be comforted. To accept support, in adversity, from those who are trustworthy. Not to face everything alone, but to share the weight, to rest, for a moment, in another's hands.
 
@@ -209,13 +209,13 @@ And there is a joy waiting on the other side, that perhaps you don't even rememb
 
 And I want to undo, further, a fear that will appear: the fear that, if you lean once, you'll become dependent, clinging, incapable of fending for yourself again. It won't happen. Your capacity to be enough on your own, which you built over an entire lifetime, does not disappear by accepting a hand now and then. It stays yours, whole, ready to fend for yourself whenever you need it. What changes is that enduring everything alone stops being your only path, your prison. Leaning does not replace your strength, it adds to it a choice. And a woman who knows how to fend for herself and knows how to lean on those who are trustworthy is freer, and stronger, than one who only knows the first half.
 
-I won't give you a recipe for trusting, and this crossing is, very often, made with hands that accompany you on the other side of the bridge. But I'll leave you the principle. Lean, in a small way, on those who are trustworthy. Let yourself be comforted, in adversity. And discover, slowly, and perhaps with hands to accompany you, that leaning does not take away your strength, and that you don't have to face, alone, everything life brings.
+I won't give you a recipe for trusting, and this crossing is, very often, made with hands that accompany you on the other side of the bridge. But I'll leave you the one plank that bears the rest. Lean, in a small way, on those who are trustworthy. Let yourself be comforted, in adversity. And discover, slowly, and perhaps with hands to accompany you, that leaning does not take away your strength, and that you don't have to face, alone, everything life brings.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things. But, with a fall engraved in the body, understanding may not be enough to let you set down your foot on a bridge, and to hide that from you would be to let you fall again.
 
-It doesn't change everything all at once. It does not make you, tomorrow, accept the support you refused your whole life. But it changes enough so that you stop confusing your refusal of support with strength, and your isolation with independence.
+It does not lay the whole bridge down in a single day. It does not make you, tomorrow, accept the support you refused your whole life. But it changes enough so that you stop confusing your refusal of support with strength, and your isolation with independence.
 
 Now you know that you don't know how to receive help, and that this is not pride, it is memory, the memory of a fall your body never forgot.
 
@@ -231,23 +231,23 @@ You know that you can lean without losing your strength, and that the verb is to
 
 And you know, now, that the discernment fear took from you can return, tuned: that you can learn to distinguish the firm bridges from the one that collapsed, and lean on those that hold, without letting an old betrayal close you, forever, to all the hands that would want to hold you.
 
-I want to leave you an image.
+I want to leave you standing before one last picture of water.
 
 Imagine someone who, crossing a river, leaned on a bridge, and the bridge collapsed, and that person fell, and was hurt. And who learned, that time, never again to trust any bridge, to always cross by swimming, alone, exhausted, against the current, even when, ahead, there were firm, solid bridges, that would have held her.
 
 The crossing is learning to distinguish the firm bridges from the one that collapsed. To trust that not all bridges fall. To put your foot, slowly, on a solid bridge, and to discover that it holds, that you don't fall, that you can cross supported, instead of swimming, alone, always. To put your foot on a bridge after the one that collapsed is not easy, and sometimes it's done with someone to hold your hand on the first step. But on the other side is the end of an entire life's solitary crossing.
 
-I want to tell you what you'll find along the way, so you don't cross this crossing swimming and alone, like everything else. There will be setbacks. Days when you lean, and days when you close the door to everything again, distrusting everyone, doing everything alone, as always. And your old voice will tell you that you've seen it, that one can't trust anyone, that it's safer the way you always did it. Don't believe it at first. To distrust again for a few days is not having failed the crossing, it is part of making it. No one rebuilds all at once a trust that broke. It is rebuilt little by little, one support at a time, and each time you lean and the bridge holds, even if you retreat afterward, a new piece of evidence stays in the body, and it is from that evidence, accumulated, that trust, slowly, is reborn.
+I want to tell you what you'll find along the way, so you don't cross this crossing swimming and alone, like everything else. There will be setbacks. Days when you lean, and days when you close the door to everything again, distrusting everyone, doing everything alone, as always. And your old voice will tell you that you've seen it, that one can't trust anyone, that it's safer the way you always did it. Don't take its word the moment it speaks. To distrust again for a few days is not having failed the crossing, it is part of making it. No one rebuilds all at once a trust that broke. It is rebuilt little by little, one support at a time, and each time you lean and the bridge holds, even if you retreat afterward, a new piece of evidence stays in the body, and it is from that evidence, accumulated, that trust, slowly, is reborn.
 
 And I want to speak to you of those who grow up watching you endure everything alone, if there are children, people close to you, who learn by looking at you. If they see you always refuse support, distrust everyone, face everything alone, they learn that this is how one ought to be, and it's likely they'll carry, too, the same distrust, the same loneliness. The most freeing thing you can do for those who watch you is not to give them the example of the woman who never needs anyone. It is to show them a woman who knows how to choose well whom to trust, and who lets herself, at last, be comforted by those who deserve it. Sometimes a woman learns to lean, at last, not only for herself, but so as not to condemn those she loves to the same distrust of someone who never again dared to count on anyone.
 
-And one last thing remains, simple, before I let you go. You were not wrong to distrust. The person who protected herself, after having been let fall, did what she had to do so as not to be hurt again. There is nothing to reproach in her. There is only one thing to say to her, slowly, time after time, until the body believes it: that bridge collapsed, but it is not all bridges. You can cross again, with care, and discover that there are people who hold you.
+And one last thing remains, simple, before I let you go. You were not wrong to distrust. The person who protected herself, after having been let fall, did what she had to do so as not to be hurt again. There is no blame to lay at her bank. There is only one thing to say to her, slowly, time after time, until the body believes it: that bridge collapsed, but it is not all bridges. You can cross again, with care, and discover that there are people who hold you.
 
 You know, deep down, what the firm bridge is that holds this whole book. I can lean without losing my strength. And you know that leaning, with discernment, on those who are trustworthy, is not repeating the fall, it is discovering, at last, that there are people who hold you.
 
 Recognizing that you don't know how to receive help was the first step. But there is a second, and that one is not crossed only by reading. It is crossed by setting down the foot, slowly, on bridges of trust. And, very often, it is made with help, with someone prepared to be, themselves, the first firm bridge on which you learn that support, today, may not fall. Because a wound of someone who was let fall deserves hands that know how to, this time, hold her.
 
-And if there is a single thought you take from these pages, let it be this. The person who let you fall does not have to be the last word on what support is. They showed you a bridge that collapsed, but they did not show you all bridges, and there are, in the world, firm bridges that they never let you know, because the fear they left you made you refuse them before you tried them. Giving yourself back the possibility of crossing them is not forgetting what you suffered. It is refusing to let the one who hurt you continue, today, to choose for you whom you can let in.
+And if a single plank of this book is to hold under your foot, let it be this one. The person who let you fall does not have to be the last word on what support is. They showed you a bridge that collapsed, but they did not show you all bridges, and there are, in the world, firm bridges that they never let you know, because the fear they left you made you refuse them before you tried them. Giving yourself back the possibility of crossing them is not forgetting what you suffered. It is refusing to let the one who hurt you continue, today, to choose for you whom you can let in.
 
 And before you close these pages, I ask you only one gesture, of the kind you usually refuse. Difficult, for you.
 
