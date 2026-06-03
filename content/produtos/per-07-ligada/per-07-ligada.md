@@ -29,7 +29,7 @@ Quero dizer-te já, antes de tudo, que isto não é só generosidade, nem amor �
 
 Há uma lealdade silenciosa. A de manter tudo unido. E há um medo, o medo da separação, de que sem ti as pessoas se afastem, se percam, deixem de pertencer umas às outras. E é esse medo, mais do que o amor, que te põe a segurar a rede sem descanso, dia após dia, sem nunca poderes parar.
 
-Este livro não te vai ensinar a abandonar as pessoas, a deixar de te importares, a cortar os laços. Vim olhar para outra coisa. Para o peso de seres o nó que segura tudo. Para o medo de que, sem ti, se desfaça. E para uma possibilidade que talvez nunca tenhas considerado: a de que os laços, afinal, não dependem só das tuas mãos, e que podes pertencer à rede sem teres de a segurar inteira.
+Este livro não te vai ensinar a abandonar as pessoas, a deixar de te importares, a cortar os laços. Vim olhar para o nó, e para as mãos que o seguram. Para o peso de seres o nó que segura tudo. Para o medo de que, sem ti, se desfaça. E para uma possibilidade que talvez nunca tenhas considerado: a de que os laços, afinal, não dependem só das tuas mãos, e que podes pertencer à rede sem teres de a segurar inteira.
 
 E digo-te já para onde vão estas páginas, para que possas pousar os ombros enquanto lês. Abrir as mãos não é deixar cair quem amas. Os laços têm vida própria, e não dependem só de ti para existirem. E soltar não é abandonar. É confiar que as relações, como as plantas, têm raízes que tu não vês, e que não vão morrer só porque deixaste de as regar sozinha, dia após dia, exausta.
 
@@ -37,7 +37,7 @@ Quero que distingas, desde já, o fio que se segura por amor do fio que se segur
 
 Este livro não te vem dizer que cuidar das relações é errado, nem que tens de te tornar indiferente, distante, alguém que deixa os laços cair. Juntar quem amamos, cuidar dos vínculos, é uma das coisas mais bonitas que há. Vem distinguir o nutrir do carregar, o juntar por gosto do segurar por medo, o cuidar dos laços do seres a única responsável pela existência deles. E vem devolver-te uma vida que não seja só manter a dos outros unida, e um lugar na rede que não dependa de seres tu a segurá-la inteira.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te vejas em pequenos fios do dia a dia.
 
 Em seres sempre tu a dar o primeiro passo para juntar as pessoas, e em sentires, se não o deres, que ninguém o dará, que o encontro simplesmente não acontecerá.
 
@@ -79,7 +79,7 @@ E essa criança torna-se a adulta que segura a rede. Que sente que, se largar, t
 
 E há, muitas vezes, por baixo desta missão, uma forma de garantir o próprio lugar. Porque uma criança numa família frágil, que sente que pode ser deixada de fora, descobre que, sendo a que une todos, a que é necessária à coesão, a que ninguém quer perder, garante um lugar que de outra forma lhe parecia incerto. Tornares-te o nó foi, talvez, não só uma forma de proteger a família, mas de proteger o teu próprio pertencimento: enquanto fores indispensável à união de todos, não te podem deixar de fora, porque sem ti tudo se desfaz. E por isso soltar assusta a dobrar, porque ameaça não só a coesão dos outros, mas o teu próprio lugar entre eles.
 
-Quero que vejas isto sem te julgares. Não há nada de calculista nisto. Foi uma criança a encontrar, com o que tinha, uma forma de pertencer a um lugar que lhe parecia frágil. Mas hoje, em adulta, vale a pena ver que talvez não precises de ser o nó para teres lugar, que o teu pertencimento pode assentar em quem és, e não na função que cumpres, e que essa é, no fundo, uma forma muito mais segura de pertencer, porque não te exige carregar a rede inteira para nela caberes.
+Quero que olhes para a criança que começou a juntar os fios sem te julgares. Não há nada de calculista nisto. Foi uma criança a encontrar, com o que tinha, uma forma de pertencer a um lugar que lhe parecia frágil. Mas hoje, em adulta, vale a pena ver que talvez não precises de ser o nó para teres lugar, que o teu pertencimento pode assentar em quem és, e não na função que cumpres, e que essa é, no fundo, uma forma muito mais segura de pertencer, porque não te exige carregar a rede inteira para nela caberes.
 
 Ou talvez te tenhas tornado o nó não numa família dispersa, mas numa família em conflito, onde havia ramos zangados, pessoas que não se falavam, mágoas antigas. E tu tornaste-te a que mantinha as pontes, a que falava com todos, a que não tomava partido para poder continuar a ligar os lados que se recusavam a ligar-se entre si. Cresceste a fazer a diplomacia de uma família dividida, e aprendeste que a tua função era impedir que as rachas se tornassem ruturas, segurando, sozinha, uma unidade que mais ninguém queria, ou conseguia, manter.
 
@@ -87,7 +87,7 @@ Há aqui uma lealdade muito particular, e quero nomeá-la. É a lealdade de quem
 
 E quero que vejas a solidão funda que há nisto, e que talvez conheças bem. É a solidão de estar no centro de tudo e, ao mesmo tempo, sozinha. Rodeada de gente, de laços, de encontros que tu organizas, e sem ninguém que te segure a ti, que se lembre de ti sem ser lembrado, que te procure sem seres tu a procurar. Construíste, à tua volta, uma rede em que és sempre quem dá, quem junta, quem cuida, e por isso ninguém imagina que tu, também, precisas de ser juntada, lembrada, cuidada. E nas horas más, sentes uma solidão que não compreendes, sem veres que foste tu, ao tornares-te o nó, que te deixaste sem ninguém que fosse nó para ti.
 
-Quero que vejas isto sem culpa. A fragilidade que te pôs a segurar a rede, na maioria das vezes, não foi criada para te ferir. Foi a circunstância de uma família dispersa, fria, ou ferida. Mas pôs sobre ti um peso, o de manter todos unidos, que nunca devia ter sido só teu, e que carregas ainda.
+Quero que olhes para estes fios sem culpa. A fragilidade que te pôs a segurar a rede, na maioria das vezes, não foi criada para te ferir. Foi a circunstância de uma família dispersa, fria, ou ferida. Mas pôs sobre ti um peso, o de manter todos unidos, que nunca devia ter sido só teu, e que carregas ainda.
 
 E quero mostrar-te em que parte de ti este reflexo mora, porque é aí que se desfaz. A necessidade de segurar tudo não é só um hábito, é uma forma de te sentires gravada fundo, num tempo em que a união da família parecia depender de ti, e em que a separação era um perigo real. Por isso, hoje, não decides racionalmente segurar a rede, fá-lo antes de pensar, em automático, e a ansiedade sobe sempre que sentes um laço a soltar-se, como se a tua própria segurança estivesse em jogo. E é por isso que não basta perceberes que as relações dos outros não dependem de ti, para deixares de as carregar. A ferida vive abaixo da razão, e desfaz-se devagar, com a experiência repetida de soltares e veres que a rede não cai, e muitas vezes com ajuda.
 
@@ -95,7 +95,7 @@ Há uma frase que talvez resuma o que aprendeste cedo. Se eu não segurar, ningu
 
 ## 3. Manter unido como missão
 
-Há uma coisa que precisas de ver. Manter as pessoas unidas tornou-se, para ti, mais do que um hábito. Tornou-se uma missão. Uma responsabilidade que sentes como tua, e só tua, e da qual não te consegues libertar.
+Há um fio que precisas de seguir até ao fim. Manter as pessoas unidas tornou-se, para ti, mais do que um hábito. Tornou-se uma missão. Uma responsabilidade que sentes como tua, e só tua, e da qual não te consegues libertar.
 
 Repara em como esta missão te ocupa. Estás sempre atenta a quem se está a afastar, a quem não vem aos encontros, a quem deixou de falar com quem. E sentes-lo como um problema teu, a resolver. Como se fosse tua a tarefa de manter todos próximos, de reparar os laços que se soltam, de impedir que a rede se desfaça. É um radar que nunca desliga, sempre ligado ao estado dos laços de toda a gente, e que ocupa, em ti, um espaço enorme, que poderia ser da tua própria vida.
 
@@ -111,21 +111,21 @@ E há uma coisa mais funda. Esta missão tornou-se a tua identidade, e o teu val
 
 E custa-te a saúde, também, porque vigiar e sustentar os laços de um grupo inteiro é um trabalho mental que não para. A tua cabeça está sempre a monitorizar quem anda afastado, o que falta organizar, o laço que precisa de atenção. É uma vigilância permanente, invisível, que te consome por dentro, e que se soma a tudo o resto que carregas. Muitas pessoas que sustentam a união de todos esgotam-se, não por fraqueza, mas porque carregar, sozinha, a coesão de um grupo é um peso que nenhum ombro foi feito para aguentar sem fim.
 
-Quero que sintas o peso disto. Imagina carregar, sozinha, a união de uma família inteira. Sentir que tudo depende de ti, que sem ti se desfaz, que é tua a responsabilidade de manter todos próximos. E fazê-lo sem reconhecimento, sem descanso, sem ninguém a segurar-te a ti. É um peso de uma solidão imensa, o de quem une todos e não tem quem a una. E mereces, depois de tanto segurar, deixar-te, enfim, ser segurada.
+Quero que sintas, nos braços, o peso de segurar tantos fios ao mesmo tempo. Imagina carregar, sozinha, a união de uma família inteira. Sentir que tudo depende de ti, que sem ti se desfaz, que é tua a responsabilidade de manter todos próximos. E fazê-lo sem reconhecimento, sem descanso, sem ninguém a segurar-te a ti. É um peso de uma solidão imensa, o de quem une todos e não tem quem a una. E mereces, depois de tanto segurar, deixar-te, enfim, ser segurada.
 
 ## 4. Quem sou eu quando deixo de unir
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pôr-te um fio na mão, e pedir que o segures só por um momento. Sozinha. Não fujas dele.
 
 Quem és tu, quando deixas de unir toda a gente?
 
-Fica com ela. Repara no que ela mexe.
+Fica com ela. Repara no fio que ela puxa, lá no fundo.
 
 Para ti, esta pergunta puxa um fio que não querias puxar. Porque a tua identidade colou-se à função de nó. Es a que mantém tudo unido, o coração do grupo, a que segura a rede. Tira-te isso, imagina-te a não organizar, a não juntar, a não segurar, e aparece um vazio. Então que valor tenho? Que lugar ocupo, se não for o de manter todos ligados?
 
 E a sombra que aqui se esconde é o medo da separação. O terror de que, sem ti a segurar, as pessoas se afastem, se percam, deixem de pertencer umas às outras. E, mais fundo ainda, o medo de que, sem a tua função de nó, também tu te percas, te afastes, deixes de pertencer, porque o teu lugar na rede era seres quem a segurava.
 
-Repara como isto te aprisiona. Não consegues largar, mesmo exausta, porque largar te parece arriscar a separação que mais temes. Estás presa ao posto de nó, em sentinela permanente sobre os laços de todos, porque soltar a vigilância te parece deixar tudo desfazer-se. E vives num esforço sem fim, a segurar uma rede que talvez se aguentasse mais do que pensas, se tu, por uma vez, te atrevesses a confiar.
+Repara como este fio te prende a ti também. Não consegues largar, mesmo exausta, porque largar te parece arriscar a separação que mais temes. Estás presa ao posto de nó, em sentinela permanente sobre os laços de todos, porque soltar a vigilância te parece deixar tudo desfazer-se. E vives num esforço sem fim, a segurar uma rede que talvez se aguentasse mais do que pensas, se tu, por uma vez, te atrevesses a confiar.
 
 E há uma fragilidade enorme na tua importância de nó. Porque um nó existe para segurar os fios, não para si. Está sempre ao serviço da rede, nunca da sua própria vida. E tu, de tanto seres o nó, esqueceste-te de que também és uma pessoa, com direito a ser cuidada, a ser procurada, a pertencer não pela função que serves, mas por quem és. O nó não vive. Segura. E tu, ao tornares-te o nó, foste perdendo, devagar, a tua própria vida fora de manter a dos outros unida.
 
@@ -133,7 +133,7 @@ E quero olhar de frente para o terror que esta pergunta acorda em ti. O que te a
 
 Quero dizer-te uma coisa sobre o medo da separação, porque ela começa a desarmá-lo, e porque é o coração de tudo. As relações não dependem só de ti. É esta a ideia que te mantém de braços erguidos, e ela é, quase sempre, falsa. Tu acreditas que és a única coisa entre a união e a dispersão, que sem ti tudo se solta. Mas isso é a perceção da criança que se sentiu a única a segurar uma família frágil. A realidade é outra. As relações têm vida própria. As pessoas, mesmo as que dependem da tua organização, têm laços que não dependem só de ti. E muitas vezes, quando finalmente soltas, descobres que a rede não se desfaz, que outros pegam nos fios, que as relações se aguentam de formas que tu não controlavas.
 
-Não respondas já à pergunta de quem és quando deixas de unir. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que descobrires que tens lugar na rede não pela função que serves, mas por quem és, deixas de precisar de segurar tudo para pertencer. E aí, só aí, podes começar a soltar, sem o terror de que soltar te deixe de fora.
+Não respondas já à pergunta de quem és quando deixas de unir. Mas deixa-a aberta. Porque é nesse fio que se desata o nó inteiro. No dia em que descobrires que tens lugar na rede não pela função que serves, mas por quem és, deixas de precisar de segurar tudo para pertencer. E aí, só aí, podes começar a soltar, sem o terror de que soltar te deixe de fora.
 
 ## 5. Os laços não dependem só de mim
 
@@ -143,7 +143,7 @@ Lê isto devagar, porque contraria a crença que te governa. Tu sentes-te a úni
 
 As relações entre as pessoas têm vida própria. Existem entre elas, e não só através de ti. Os laços de uma família, de um grupo de amigos, são feitos de muitas mãos, de muitas histórias, de muitos fios, e não dependem, todos, de ti os segurares. Tu carregas-los como se fosses a única, mas não és. És uma das mãos. Importante, talvez central, mas não a única.
 
-Quero mostrar-te uma distinção que liberta. Há uma diferença entre nutrir uma relação e ser o único responsável pela sua existência. Tu podes nutrir os laços, cuidar deles, alimentá-los, e isso é bonito. Mas não és tu, sozinha, que os manténs vivos. Eles vivem, em grande parte, por si, pela vontade das pessoas que os fazem, pelos vínculos que existem entre elas independentemente de ti.
+Quero separar dois fios que andam, em ti, atados num só. Há uma diferença entre nutrir uma relação e ser o único responsável pela sua existência. Tu podes nutrir os laços, cuidar deles, alimentá-los, e isso é bonito. Mas não és tu, sozinha, que os manténs vivos. Eles vivem, em grande parte, por si, pela vontade das pessoas que os fazem, pelos vínculos que existem entre elas independentemente de ti.
 
 E há aqui uma coisa importante de ver. Ao quereres segurar tudo, ao seres o único nó, impede, sem querer, que os outros se liguem diretamente uns aos outros. Eles ligam-se através de ti, e não entre si, porque tu és sempre o intermediário, o organizador, o que junta. E assim manténs uma rede que depende de ti, em vez de uma rede onde as pessoas têm laços próprios, diretos, que não precisam de ti no meio.
 
@@ -159,11 +159,11 @@ E quero que penses no descanso que está do outro lado. Há, em ti, uma vigilân
 
 Quero parar aqui um momento, com cuidado, porque há um ponto em que sustentar a união de todos deixa de ser um traço e passa a uma ferida que pede mais. Se este peso te esgotou ao ponto de te adoecer, se há uma ansiedade que não te larga ligada a manter tudo unido, ou um medo de separação que te tira o sossego, isso merece ser cuidado com acompanhamento. E se, por baixo, há uma história de uma família a partir-se, de instabilidade, de perdas, que ainda hoje te atravessa, então estamos perante algo que não se desfaz só a ler. Desfazer um medo de separação gravado cedo raramente se faz sozinha. Faz-se, muitas vezes, com mãos que te acompanhem a reaprender a confiar que os laços se aguentam sem ti.
 
-O despertar, quando vem, é um alívio. É o instante em que sentes os teus dedos abrirem-se um pouco e o fio não cair. Que as relações se aguentam, em parte, sem ti. Que podes largar um fio, e ele não se solta, porque está preso por mais mãos do que as tuas. É um instante pequeno, mas muda tudo, porque desmente a crença de que sem ti tudo se desfaz.
+O instante em que isto se abre, quando vem, é um alívio. É o momento em que sentes os teus dedos abrirem-se um pouco e o fio não cair. Que as relações se aguentam, em parte, sem ti. Que podes largar um fio, e ele não se solta, porque está preso por mais mãos do que as tuas. É um instante pequeno, mas muda tudo, porque desmente a crença de que sem ti tudo se desfaz.
 
 ## 6. Soltar os fios
 
-Há um verbo para esta travessia. Soltar.
+Há um verbo que abre as mãos que seguram a rede. Soltar.
 
 Soltar os fios. Não cortá-los, não atirá-los, não abandonar as pessoas. Soltar. Deixar de segurar, sozinha e sem descanso, todos os laços de todos. Abrir as mãos, devagar, e confiar que a rede se aguenta sem ti a segurá-la a cada instante.
 
@@ -187,17 +187,17 @@ Quero que vejas o que se solta, junto com os fios. Solta-se o peso de uma respon
 
 E quero ensinar-te a tolerar a ansiedade que vai subir quando soltas, porque é aí que está grande parte da travessia. Quando deixas um fio por segurar, vais sentir uma pressão quase insuportável de o pegar de novo, de organizar, de juntar, de reparar. Aprender a ficar com essa ansiedade, sem lhe obedecer, é um músculo que se treina. Ao início, vai parecer que algo terrível vai acontecer se não agires. Mas, se ficares, vais descobrir, devagar, que a separação que temias não vem, que a rede se aguenta, que o teu não-agir não trouxe a catástrofe. E é nessa tolerância da ansiedade, repetida, que o teu corpo reaprende que pode soltar sem que tudo se desfaça.
 
-Não te vou dar um método. Mas deixo-te o princípio. Solta, devagar, os fios. Deixa que os outros segurem a sua parte. Confia que as relações se aguentam por mais mãos do que as tuas. E descobre, peso a peso, que a rede não dependia só de ti, e que podes, enfim, pertencer a ela sem teres de a carregar inteira.
+Não te deixo uma receita de como soltar cada fio. Mas deixo-te o princípio. Solta, devagar, os fios. Deixa que os outros segurem a sua parte. Confia que as relações se aguentam por mais mãos do que as tuas. E descobre, peso a peso, que a rede não dependia só de ti, e que podes, enfim, pertencer a ela sem teres de a carregar inteira.
 
 ## 7. Soltar sem perder as pessoas
 
 Há um medo que te prende, e quero ir ao seu encontro, porque é o que te mantém o nó. O medo de que, se soltares, percas as pessoas. De que sem ti a segurar, os laços se desfaçam, e tu fiques sozinha, sem a rede que mantinhas.
 
-E quero desfazer esse medo com clareza. Soltar os fios não é perder as pessoas. São coisas diferentes.
+E quero desatar esse medo, fio a fio, à tua frente. Soltar os fios não é perder as pessoas. São coisas diferentes.
 
 Repara. Os laços que tu seguras com tanto esforço, se só existem porque tu os seguras, então não são laços verdadeiros, são uma rede artificial que tu mantens viva à força. E uma rede assim, mantida só pelo teu esforço, é, no fundo, frágil, porque depende inteiramente de ti. Soltar revela o que é real. As relações que se aguentam quando soltas eram verdadeiras. As que se desfazem quando largas talvez nunca tenham sido relações, mas só fios que tu segurava sozinha.
 
-Vou dizer-te de outra forma. Tu confundes a tua função de nó com o teu lugar na rede. Achas que, se deixares de ser o nó, perdes o teu lugar. Mas o teu lugar na rede não tem de ser o de nó. Pode ser o de uma pessoa, ligada às outras por laços próprios, querida por quem é, e não pela função que serve. Soltar a função de nó não te tira o lugar. Devolve-te um lugar melhor, o de pertencer por ti, e não por seres útil.
+Deixa-me puxar este fio por outro lado. Tu confundes a tua função de nó com o teu lugar na rede. Achas que, se deixares de ser o nó, perdes o teu lugar. Mas o teu lugar na rede não tem de ser o de nó. Pode ser o de uma pessoa, ligada às outras por laços próprios, querida por quem é, e não pela função que serve. Soltar a função de nó não te tira o lugar. Devolve-te um lugar melhor, o de pertencer por ti, e não por seres útil.
 
 Quero mostrar-te o que se abre quando soltas. Abre-se a possibilidade de seres procurada, e não só de procurares. De alguém se lembrar de ti, e não só de tu te lembrares de todos. De receberes a iniciativa, o cuidado, a ligação, e não só de os dares. Porque enquanto és tu a segurar tudo, os outros nunca precisam de o fazer, e tu nunca recebes o que dás. Quando soltas, abres espaço para que os outros também te procurem, e descobres, talvez, quem se lembra de ti quando não és tu a lembrar-te deles.
 
@@ -211,7 +211,7 @@ Do outro lado dos braços baixados, há uma alegria à tua espera. A alegria de 
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, soltar uma rede que seguras há uma vida. Mas muda o suficiente para deixares de confundir o teu esforço com amor, e a tua exaustão com pertença.
+Não desata, de um dia para o outro, o nó que ataste há uma vida. Não te faz, amanhã, soltar uma rede que seguras há tanto tempo. Mas muda o suficiente para deixares de confundir o teu esforço com amor, e a tua exaustão com pertença.
 
 Agora sabes que és o nó que segura a rede inteira, e que isso não é só generosidade nem amor, é uma lealdade e um medo antigos, e uma forma, gravada cedo, de garantires o teu lugar.
 
@@ -231,15 +231,15 @@ Deixo-te uma imagem, e quero que a leves contigo para fora destas páginas.
 
 Imagina alguém que segura, nas duas mãos, dezenas de fios, cada um ligado a uma pessoa, e que passa a vida com os braços erguidos, sem nunca os poder baixar, a segurar a rede inteira, com medo de que, se largar um fio, essa pessoa se perca. E que está exausta, os braços a tremer, sem nunca poder descansar, porque toda a rede, acredita, depende das suas mãos. E ninguém vê o esforço, porque de fora parece só uma teia bonita, e não uns braços a tremer de cansaço debaixo dela.
 
-A travessia é descobrires que muitos desses fios estão presos, também, por outras mãos. Que não dependem só de ti. E que podes, devagar, baixar os braços, soltar os fios, e ver que as pessoas que importam continuam ligadas, por laços que não eram só teus, e que tu podes, enfim, descansar os braços e pertencer à rede sem a teres de segurar inteira.
+A travessia é descobrires que muitos desses fios estão presos, também, por outras mãos. Que não dependem só de ti. E quando o vires, deixa que outras mãos peguem na sua parte, e podes, devagar, baixar os braços, soltar os fios, e ver que as pessoas que importam continuam ligadas, por laços que não eram só teus, e que tu podes, enfim, descansar os braços e pertencer à rede sem a teres de segurar inteira.
 
-Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma tarefa a cumprir na perfeição. Vai ser lenta, e vai ter recuos. Dias em que soltas, em que confias, em que descansas, e dias em que voltas a pegar em todos os fios, em pânico de que algo se solte, como sempre. E a velha voz vai aproveitar cada recuo para te dizer estás a ver, sem ti desfaz-se tudo. Não acredites nela à primeira. Os recuos fazem parte. Ninguém solta de uma vez uma rede que segurou a vida inteira. Solta-se aos poucos, um fio de cada vez, e cada vez que soltas e a rede se aguenta, ficou uma prova nova, e é dessas provas, somadas, que a confiança de que os laços não dependem só de ti, devagar, se constrói.
+Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma tarefa a cumprir na perfeição. Vais soltar fios e voltar a pegar neles, mais que uma vez. Dias em que soltas, em que confias, em que descansas, e dias em que voltas a pegar em todos os fios, em pânico de que algo se solte, como sempre. E a velha voz vai aproveitar cada recuo para te dizer estás a ver, sem ti desfaz-se tudo. Não lhe devolvas o fio à primeira vez que ela grita. Os recuos fazem parte. Ninguém solta de uma vez uma rede que segurou a vida inteira. Solta-se aos poucos, um fio de cada vez, e cada vez que soltas e a rede se aguenta, ficou uma prova nova, e é dessas provas, somadas, que a confiança de que os laços não dependem só de ti, devagar, se constrói.
 
-E antes de baixar a voz, deixo-te uma frase simples, das que se guardam no bolso. Tu mereces ser cuidada, e não só ser a que cuida da união de todos. Mereces ser procurada, lembrada, juntada, e não só ser a que procura, lembra, junta. A criança que se tornou o nó de uma família frágil fez algo extraordinário, com um amor imenso, para manter unido o que ameaçava partir-se. Não há nada a censurar nela. Mas ela merecia ter, também, quem a segurasse a ela, quem se ocupasse dela como ela se ocupava de todos. E hoje, em adulta, podes começar a procurar, e a deixar entrar, esse cuidado, descobrindo que o teu lugar na rede nunca dependeu, de verdade, de seres tu a segurá-la, e que mereces pertencer não pelo que fazes pelos laços, mas por quem és.
+E antes de baixar a voz, deixo-te uma frase simples, das que se guardam no bolso. Tu mereces ser cuidada, e não só ser a que cuida da união de todos. Mereces ser procurada, lembrada, juntada, e não só ser a que procura, lembra, junta. A criança que se tornou o nó de uma família frágil fez algo extraordinário, com um amor imenso, para manter unido o que ameaçava partir-se. Não há um único fio a censurar nela. Mas ela merecia ter, também, quem a segurasse a ela, quem se ocupasse dela como ela se ocupava de todos. E hoje, em adulta, podes começar a procurar, e a deixar entrar, esse cuidado, descobrindo que o teu lugar na rede nunca dependeu, de verdade, de seres tu a segurá-la, e que mereces pertencer não pelo que fazes pelos laços, mas por quem és.
 
 Por baixo de tudo o que leste, há uma frase que aguenta este livro inteiro, e que é tua para dizer. Posso soltar os fios sem perder as pessoas. O amor que importa não dependia só de eu o segurar.
 
-Ler isto foi começar a desapertar o primeiro nó. Mas o nó seguinte não se desaperta com os olhos, desaperta-se com os dedos. Faz-se a abrir, devagar, as mãos. A deixar que os outros peguem na sua parte. A confiar na vida própria das relações. E há um trabalho mais fundo, com quem te acompanhe, para desfazer um medo de separação que vem de longe, porque a confiança nas relações raramente se reconstrói sozinha.
+Ler isto foi começar a desapertar o primeiro nó. Mas o nó seguinte não se desaperta com os olhos, desaperta-se com os dedos. Faz-se a abrir, devagar, as mãos. A deixar que cada um segure o seu próprio fio. A confiar na vida própria das relações. E há um trabalho mais fundo, com quem te acompanhe, para desfazer um medo de separação que vem de longe, porque a confiança nas relações raramente se reconstrói sozinha.
 
 E se de tudo isto guardares um só fio, que seja este. O amor não depende só do teu esforço. Os laços que importam têm raízes que tu não vês, e não vão morrer só porque deixaste de os regar sozinha. Tu podes descansar, viver a tua vida, ser uma pessoa na rede e não o nó que a carrega, e as pessoas que te querem continuarão a querer-te, porque te querem a ti, e não à função que serves. Soltar os fios não é arriscar perder o amor. É descobrir, enfim, o amor que não dependia de ti o segurares, e que estava lá, à tua espera, por baixo de todo o teu cansaço de o sustentar.
 

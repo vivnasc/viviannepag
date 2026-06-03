@@ -13,7 +13,7 @@
 
 ## 1. Sempre pronta a defender-me
 
-Repara numa coisa, com honestidade.
+Baixa as defesas só o tempo de uma página, e olha-te com honestidade.
 
 Tu amas de guarda levantada.
 
@@ -21,7 +21,7 @@ Mesmo quando amas, há uma parte de ti que nunca relaxa. Que observa. Que avalia
 
 Não te entregas por inteiro. Guardas sempre uma parte de fora, uma saída, uma reserva. Como quem entra numa casa sem tirar o casaco, pronta para sair se for preciso.
 
-Olha para as tuas relações. Há sempre um ponto até onde deixas chegar, e não mais. Uma intimidade que permites, e uma que não. Uma parede, em algum lugar, que ninguém atravessa.
+Passa em revista as tuas relações, como quem inspeciona as muralhas. Há sempre um ponto até onde deixas chegar, e não mais. Uma intimidade que permites, e uma que não. Uma parede, em algum lugar, que ninguém atravessa.
 
 E controlas. Sem dar por isso. Testas o outro, para ver se é de confiança. Avalias os sinais, à procura da traição que tens a certeza de que vem. Manténs o leme, para nunca ficares à mercê de ninguém.
 
@@ -35,9 +35,9 @@ Este livro não te vai ensinar a baixar a guarda perante toda a gente, a confiar
 
 Vim mostrar-te outra coisa. Que a tua guarda, que te protege de seres magoada, te protege também de seres amada. Que a parede que não deixa entrar a dor não deixa entrar o amor. E que há uma forma de confiar que não é baixar a guarda toda perante qualquer um, mas abri-la, devagar, perante quem a merece.
 
-Adianto-te a direção, para leres em paz. Podes confiar sem te perder. Baixar a guarda não é ficares indefesa. É escolheres, com discernimento, deixar entrar quem mereceu entrar. E o que te mantém de armadura vestida não é força. É uma ferida antiga, que vamos olhar.
+Mostro-te já para onde aponta a ponte, para leres sem a guarda em riste. Podes confiar sem te perder. Baixar a guarda não é ficares indefesa. É escolheres, com discernimento, deixar entrar quem mereceu entrar. E o que te mantém de armadura vestida não é força. É uma ferida antiga, que vamos olhar.
 
-Talvez te reconheças em coisas pequenas.
+Talvez a tua armadura se denuncie em coisas pequenas.
 
 Em nunca mostrares a quem amas o quanto te importas, com medo de que isso te torne vulnerável.
 
@@ -73,7 +73,7 @@ E há um momento, em particular, em que a guarda se revela: logo a seguir a uma 
 
 ## 2. A guarda que aprendeste a não baixar
 
-Volta atrás. Mais atrás do que qualquer namorado.
+Volta atrás. Para antes do primeiro tijolo desta muralha, antes de qualquer namorado.
 
 A guarda não nasceu contigo. Foi construída. Tijolo a tijolo, num tempo em que baixá-la te custou caro.
 
@@ -133,7 +133,7 @@ Há um custo de que quase nunca se fala, e que quero nomear: o cansaço. Viver d
 
 E há um custo no corpo, que vale a pena ver. O corpo de quem vive em alerta não conhece descanso verdadeiro. Os ombros sobem, a mandíbula trava, a respiração faz-se curta. Aprendeste a estar tensa de uma forma tão antiga que já a confundes com o teu estado normal. Não te lembras de como é largar o peso todo, deixar o corpo afundar nos braços de alguém sem uma parte de ti a calcular. Esse abandono, esse soltar, é uma língua que esqueceste, ou que talvez nunca tenhas aprendido. E o teu corpo paga, em tensão, o preço de uma proteção que a tua mente decidiu há muito tempo.
 
-Repara também numa coisa subtil. A tua guarda, muitas vezes, produz exatamente o que mais temes. Temes ser traída, abandonada, magoada. E a tua desconfiança, a tua frieza, os teus testes, o teu controlo, cansam quem te ama, afastam-no, fazem-no desistir. E quando ele se vai, dizes que sabias que não podias confiar. Mas não foi a confiança que falhou. Foi a desconfiança que afastou. A profecia cumpriu-se porque tu, sem saber, a provocaste.
+Repara num efeito da armadura que se vê com dificuldade. A tua guarda, muitas vezes, produz exatamente o que mais temes. Temes ser traída, abandonada, magoada. E a tua desconfiança, a tua frieza, os teus testes, o teu controlo, cansam quem te ama, afastam-no, fazem-no desistir. E quando ele se vai, dizes que sabias que não podias confiar. Mas não foi a confiança que falhou. Foi a desconfiança que afastou. A profecia cumpriu-se porque tu, sem saber, a provocaste.
 
 É um mecanismo, e é importante vê-lo. Tu esperas a traição, e por isso defendes-te. A tua defesa magoa o outro, ou afasta-o. E o afastamento dele confirma, aos teus olhos, que tinhas razão em te defenderes. E assim a guarda alimenta-se a si própria: cria a distância que depois usa como prova de que a distância era necessária. É um círculo perfeito, e perfeitamente fechado, e o que ele tranca lá dentro és tu.
 
@@ -143,9 +143,9 @@ E repara como isto te rouba o presente. Mesmo nos dias bons, mesmo quando nada e
 
 ## 4. Quem sou eu sem a armadura
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Quero pousar-te aqui uma pergunta, como quem deixa uma chave em cima da mesa. Sozinha. Não fujas dela.
 
-Quem és tu sem a armadura?
+Quem serias tu se tirasses a armadura?
 
 Fica com ela. Repara no medo que ela traz, na vertigem de te imaginares sem a guarda que te define.
 
@@ -167,21 +167,21 @@ E repara numa coisa que talvez nunca tenhas pensado: por baixo da mulher que nã
 
 E há uma fragilidade escondida na tua força, que é preciso ver. Uma pessoa que não consegue confiar, que não consegue baixar a guarda, não é forte. É refém do medo. A verdadeira força não é a couraça. É a capacidade de te abrires, sabendo que podes ser magoada, e arriscares na mesma. A armadura não é coragem. É medo vestido de aço. E viver de armadura não é ser forte, é estar tão assustada que não te permites, nunca, ficar exposta. A coragem verdadeira é a da mulher que, tendo sido ferida, escolhe confiar de novo, em quem o merece, sabendo que não há garantias. Essa coragem, a tua guarda nunca te deixou ter.
 
-E quero dizer-te uma coisa que começa a desarmar o medo. Hoje, há quem te possa segurar. No tempo em que a armadura nasceu, baixar a guarda foi perigoso, e a tua defesa era justa. Mas hoje, na tua vida adulta, talvez já existam pessoas que te apanhariam se caísses, mãos firmes que não estavam lá quando eras criança. O perigo de te abrires e seres traída era real então. Pode já não ser real agora. E a única forma de descobrir é arriscares, devagar, com quem o merece, a baixar um pouco a muralha.
+E quero dizer-te uma coisa que começa a desarmar o medo. Hoje, do lado de fora da muralha, há braços que te apanhariam se caísses. No tempo em que a armadura nasceu, baixar a guarda foi perigoso, e a tua defesa era justa. Mas hoje, na tua vida adulta, talvez já existam pessoas que te apanhariam se caísses, mãos firmes que não estavam lá quando eras criança. O perigo de te abrires e seres traída era real no tempo em que ergueste o muro. Pode já não cercar a fortaleza de hoje. E a única forma de descobrir é arriscares, devagar, com quem o merece, a baixar um pouco a muralha.
 
 E há uma coisa que quero que vejas sobre o que a fragilidade faz às relações. Ao contrário do que temes, mostrar-te frágil não afasta as pessoas. Aproxima-as. As pessoas não se ligam à nossa força, ligam-se à nossa verdade, e a nossa verdade inclui a fragilidade. Pensa nas pessoas de quem mais gostas: não é a perfeição delas que te enternece, é o momento em que as viste tremer, hesitar, precisar. Foi aí que as amaste de verdade. Pois o mesmo se passa contigo. Quando te permites ser vulnerável diante de quem é de confiança, não te tornas menor aos olhos dessa pessoa. Tornas-te real, próxima, amável de uma forma nova. A couraça protege-te da exposição, mas priva-te da intimidade. E talvez chegue o dia em que descubras que valia a pena arriscar a exposição, porque do outro lado dela está precisamente o que mais te falta: seres amada inteira, e não só na metade forte.
 
-Não respondas já a esta pergunta. Não se responde de repente, e a resposta não se dá perante qualquer um. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que conheceres, e aceitares, a mulher frágil que escondeste, deixas de a ter de defender com aço. E aí, só aí, podes começar a deixar entrar quem a merece.
+Não respondas já a esta pergunta. Não se responde de repente, e a resposta não se dá perante qualquer um. Mas deixa-a aberta. Porque é nessa pergunta que está o portão por onde se sai da fortaleza. No dia em que conheceres, e aceitares, a mulher frágil que escondeste, deixas de a ter de defender com aço. E aí, só aí, podes começar a deixar entrar quem a merece.
 
 ## 5. Quando a guarda é mais do que padrão
 
-Tenho de parar o livro aqui. Com seriedade.
+Preciso de mandar parar a marcha do livro aqui. Com seriedade.
 
 Há uma diferença entre uma guarda defensiva e uma ferida que pede ajuda. E vale a pena saberes de que lado dela te encontras.
 
 Há o lado de que temos falado. Amas de armadura vestida, custa-te confiar, defendes-te do amor. Custa, mas tem caminho, e parte desse caminho é a compreensão que estas páginas te trazem.
 
-E há outro lado, mais sério. E quero nomeá-lo, sem rodeios.
+E há outro lado, mais sério. E quero chamá-lo pelo nome, sem o esconder atrás de muralha nenhuma.
 
 Se a tua desconfiança é tão grande que te impede de te ligares a fosse quem for, e te deixa profundamente só.
 
@@ -191,7 +191,7 @@ Se vigiar, controlar, desconfiar se tornou uma ansiedade que te consome, que te 
 
 Se já não distingues quem é de confiança de quem não é, e tratas toda a gente como ameaça, mesmo quem te ama e nunca te falhou.
 
-Isto pode ser mais do que um padrão a compreender. Pode ser o eco de um trauma, uma ferida de confiança que pede ajuda. E ajuda a sério, de um profissional.
+Isto pode ser mais do que um padrão a compreender. Pode ser o eco de um trauma, uma ferida de confiança que pede ajuda. E ajuda a sério, de quem está treinado para se aproximar da muralha sem a forçar: um profissional.
 
 As feridas de traição, de abuso, de abandono, gravam-se fundo, no corpo, e não se desfazem só a compreender. Precisam de ser cuidadas, com tempo, com alguém treinado para te segurar enquanto, devagar, voltas a aprender que o mundo, ou pelo menos uma parte dele, pode ser seguro.
 
@@ -219,7 +219,7 @@ Repara na diferença. A desconfiança trata toda a gente como ameaça, indiscrim
 
 Tu pensas que a tua desconfiança é discernimento. Não é. O discernimento vê quem é de confiança e abre-se a essa. A desconfiança não vê nada, fecha-se a todos por reflexo. É o oposto do discernimento, é uma cegueira defensiva que trata o homem bom e o homem perigoso exatamente da mesma maneira: do lado de fora da muralha.
 
-Vou dizer-te isto de outra forma. A guarda permanente não te torna mais segura. Torna-te menos capaz de ler quem tens à frente. Porque, ocupada a defender-te de todos, não distingues quem te magoaria de quem te amaria. E acabas por fechar a porta precisamente a quem te faria bem, com o mesmo aço com que a fechas a quem te faria mal.
+Deixa-me dizer-te o mesmo por outro ângulo da muralha. A guarda permanente não te torna mais segura. Torna-te menos capaz de ler quem tens à frente. Porque, ocupada a defender-te de todos, não distingues quem te magoaria de quem te amaria. E acabas por fechar a porta precisamente a quem te faria bem, com o mesmo aço com que a fechas a quem te faria mal.
 
 Quero mostrar-te como se reconhece, na prática, quem é de confiança, porque o discernimento não é um palpite, é uma leitura paciente. Repara não no que a pessoa promete, mas no que faz, ao longo do tempo. Quem é de confiança é coerente: o que diz num dia mantém-se no outro. Cumpre as coisas pequenas, e por isso podes acreditar nas grandes. Quando erra, reconhece, em vez de virar a culpa contra ti. Respeita um não teu sem castigo, sem birra, sem te fazer pagar por ele. Fica curioso pela tua fragilidade, e cuida dela, em vez de a usar. Estes não são sinais que se vejam num encontro. Vêem-se em meses, em pequenos testes que a vida faz sozinha. E aprenderes a lê-los é virares a tua vigilância, que sempre procurou ameaças, para começar a procurar, também, provas de segurança.
 
@@ -227,9 +227,9 @@ E quero prevenir-te de um erro comum. Vais querer testar antes de confiar. Vais 
 
 Vou mostrar-te como se baixa a guarda, na prática, porque não é de um golpe, nem perante toda a gente. Baixa-se devagar, em passos, e perante quem se mostrou, ao longo do tempo, digno de confiança. Não é um salto no escuro. É uma série de pequenos riscos, cada um um pouco maior do que o anterior, com alguém que, a cada passo, te prova que é seguro.
 
-Começa por algo pequeno. Mostrar uma fragilidade mínima a quem é de confiança. Dizer que algo te magoou, em vez de fingir indiferença. Pedir, quando precisas, em vez de aguentar sozinha. Deixar ver o quanto te importas, num gesto, em vez de o esconderes. E observar o que acontece.
+Começa por algo pequeno. Mostrar uma fragilidade mínima a quem é de confiança. Dizer que algo te magoou, em vez de fingir indiferença. Pedir, quando precisas, em vez de aguentar sozinha. Deixar ver o quanto te importas, num gesto, em vez de o esconderes. E vigiar, dessa vez, não a ameaça, mas a resposta que vem.
 
-Quase de certeza, com a pessoa certa, não a ferida que esperas, mas um acolhimento. Um cuidado. Uma proximidade nova. E cada vez que baixas a guarda, em pequeno, e não és magoada, dás ao teu corpo uma prova nova: que baixar a guarda, com esta pessoa, hoje, não traz a traição de antes. E é com provas, repetidas, que a muralha, devagar, se afrouxa.
+Quase de certeza, com a pessoa certa, não a ferida que esperas, mas um acolhimento. Um cuidado. Uma proximidade nova. E sente o que se passa do lado de dentro da couraça. Cada vez que baixas a guarda, em pequeno, e não és magoada, dás ao teu corpo uma prova nova: que baixar a guarda, com esta pessoa, hoje, não traz a traição de antes. E é com provas, repetidas, que a muralha, devagar, se afrouxa.
 
 Quero deixar-te uma distinção que vale ouro. Há diferença entre baixar a guarda e atirar a guarda fora. Baixar a guarda é um gesto reversível, gradual, que tu controlas: abres um pouco, vês o que vem, e decides se abres mais. Atirar a guarda fora é entregar tudo de uma vez, sem rede, e é isso que te aterroriza, e com razão. Ninguém de bom senso faria o segundo. Mas tu, no teu mapa de duas posições, confundes os dois, e por isso recusas até o primeiro. Quero que vejas que podes baixar um centímetro e voltar a subir, se for preciso. Que a abertura não é uma porta que, uma vez aberta, nunca mais se fecha. É um leme, que tu seguras. E é por o segurares que podes, enfim, ousar movê-lo.
 
@@ -237,7 +237,7 @@ E quero que vejas que a tua capacidade de ler as pessoas, que hoje usas para te 
 
 ## 7. Confiar sem me perder
 
-Há um destino para esta travessia. E cabe numa frase. Confiar sem me perder.
+Esta travessia tem um lugar de chegada, do outro lado da ponte. E cabe numa frase. Confiar sem me perder.
 
 Repara nas duas partes. Confiar. E sem me perder.
 
@@ -269,7 +269,7 @@ Quando confiar deixa de significar perder-te, deixa de ser tão aterrador. Porqu
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, baixar uma guarda de uma vida. Mas muda o suficiente para deixares de confundir a tua armadura com força, e o teu isolamento com segurança.
+Não deita a muralha abaixo de um dia para o outro. Não te faz, amanhã, baixar uma guarda de uma vida. Mas muda o suficiente para deixares de confundir a tua armadura com força, e o teu isolamento com segurança.
 
 Agora sabes que amas de guarda vestida, e que isso não é frieza, é proteção de uma ternura que escondes.
 
@@ -303,11 +303,11 @@ Sabes, no fundo, qual é a frase que sustenta tudo o que aqui escrevi. Posso con
 
 Confiar foi o primeiro passo. O segundo, esse, não se faz a ler. Faz-se a baixar, devagar, a ponte, perante quem a merece. A arriscar o risco. E, se houver alguém ao teu lado, a aprender, a dois, a construir a segurança que torna a armadura, enfim, desnecessária.
 
-É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
+É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma baixa a sua ponte ao seu ritmo.
 
 E deixo-te, para fechar, um pedido pequeno. Difícil, para ti.
 
-Esta semana, com alguém em quem, pelo que vês, podes confiar, mostra uma coisa pequena que costumas esconder. Uma fragilidade. Um medo. Um quanto te importas. Não tudo, não de uma vez, não perante qualquer um. Só um pouco, perante quem o merece. E repara no que acontece. Quase de certeza, não a ferida que esperavas, mas um toque, um acolhimento, uma proximidade nova. Porque é nesse pequeno baixar de guarda, com a pessoa certa, que começas a aprender, enfim, que confiar não te deixa indefesa. Deixa-te, finalmente, encontrada.
+Esta semana, com alguém em quem, pelo que vês, podes confiar, mostra uma coisa pequena que costumas esconder. Uma fragilidade. Um medo. Um quanto te importas. Não tudo, não de uma vez, não perante qualquer um. Só um pouco, perante quem o merece. E vigia, dessa vez, não a brecha na muralha, mas o que entra por ela. Quase de certeza, não a ferida que esperavas, mas um toque, um acolhimento, uma proximidade nova. Porque é nesse pequeno baixar de guarda, com a pessoa certa, que começas a aprender, enfim, que confiar não te deixa indefesa. Deixa-te, finalmente, encontrada.
 
 Com toda a minha ternura,
 *Vivianne*

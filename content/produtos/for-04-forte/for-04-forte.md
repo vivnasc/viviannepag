@@ -25,7 +25,7 @@ Quero dizer-te já, antes de tudo, que esta força não é, na origem, uma virtu
 
 Tornaste-te forte porque não houve ninguém forte por ti. Porque, num tempo em que precisavas de ser protegida, não havia proteção, e tu tiveste de te tornar a tua própria proteção. Fizeste-te a força que te faltou. Ergueste a couraça que ninguém ergueu por ti. E essa couraça, feita por necessidade, nunca mais saiu.
 
-Este livro é diferente. Porque a tua força não é só um traço a moderar. É, muitas vezes, uma armadura erguida sobre uma ferida. Uma resposta a um tempo em que não tiveste quem te segurasse, e em que aprendeste a segurar-te a ti, sozinha, custasse o que custasse. E isso merece mais do que compreensão. Por isso, ao longo destas páginas, vou dizer-te com franqueza que entender por que carregas a couraça talvez não baste para a poisares, e que uma armadura desta idade costuma pedir mãos que ajudem a desapertá-la.
+Este livro é diferente. Porque a tua força não é só um traço a moderar. É, muitas vezes, uma armadura erguida sobre uma ferida. Uma resposta a um tempo em que não tiveste quem te segurasse, e em que aprendeste a segurar-te a ti, sozinha, custasse o que custasse. E uma armadura assim merece mais do que ser compreendida. Por isso, ao longo destas páginas, vou dizer-te com franqueza que entender por que carregas a couraça talvez não baste para a poisares. Render uma armadura desta idade costuma pedir mãos que ajudem a desapertá-la.
 
 E digo-te já para onde caminhamos, para que possas baixar um pouco a guarda enquanto lês. Já não precisas de carregar a armadura o tempo todo. Descansar não te vai fazer desabar. A couraça protegeu-te quando não havia mais ninguém, mas hoje esmaga-te, e podes, devagar, e talvez com ajuda, aprender a poisá-la, ao menos por momentos, e a descobrir que não cais.
 
@@ -33,7 +33,7 @@ Quero que distingas, desde já, a couraça que se vê da mulher que vive por bai
 
 Este livro não te vem dizer que a tua força é má, ou que tens de te tornar frágil, dependente, incapaz. A tua força é real, é tua, e salvou-te. Vem dizer-te que ela ficaria maior, e não menor, se lhe acrescentasses a capacidade de descansar, de te apoiares, de seres frágil em segurança. Que uma mulher que sabe aguentar e sabe poisar é mais inteira do que uma que só sabe a primeira metade. E que tu mereces essa inteireza, e esse descanso, depois de uma vida inteira de sentinela.
 
-Talvez te reconheças em coisas pequenas.
+Talvez a couraça se denuncie em coisas pequenas, gestos miúdos de quem nunca pousa o escudo.
 
 Em não conseguires mostrar fraqueza a ninguém, em engolires sempre, em seres sempre a forte, mesmo quando estás a desfazer-te por dentro.
 
@@ -77,7 +77,7 @@ Quero que olhes para a tua couraça com clareza e com ternura, ao mesmo tempo. A
 
 Quero que pares, por um momento, na dor que há nesta origem, porque é fácil passar por ela depressa, como tu passas por tudo. Uma criança não devia ter de ser a sua própria proteção. Devia ter, sobre si, adultos fortes, que a segurassem, que fossem o abrigo, que carregassem o peso que é demasiado para ombros pequenos. E a ti faltou isso. Tiveste de ser, cedo demais, a força que devia ter vindo de fora. E há um luto nesta verdade, o luto de uma infância em que não pudeste ser pequena, frágil, cuidada, porque tinhas de ser grande, dura, a que aguenta. Esse luto merece ser sentido, não saltado, porque é dele que nasce a ternura por ti que esta travessia te quer devolver.
 
-Quero acrescentar uma raiz que talvez reconheças. Às vezes a couraça não nasce só da ausência de proteção, mas de teres aprendido que a tua fragilidade incomodava, ou era usada contra ti. Mostraste-te frágil, uma vez, e foste gozada, humilhada, ou a tua vulnerabilidade tornou-se uma arma nas mãos de alguém. E aprendeste, no corpo, que mostrar fraqueza era expor-te ao perigo, dar munição a quem a usaria contra ti. Endureceste, então, não só por falta de abrigo, mas para nunca mais dares a alguém o poder que a tua fragilidade, uma vez, lhe deu. E carregas, para hoje, a certeza de que ser vista frágil é entregar-te, desarmada, a quem te poderia ferir.
+Quero acrescentar outra origem desta couraça, que talvez reconheças. Às vezes a armadura não nasce só da ausência de proteção, mas de teres aprendido que a tua fragilidade incomodava, ou era usada contra ti. Mostraste-te frágil, uma vez, e foste gozada, humilhada, ou a tua vulnerabilidade tornou-se uma arma nas mãos de alguém. E aprendeste, no corpo, que mostrar fraqueza era expor-te ao perigo, dar munição a quem a usaria contra ti. Endureceste, então, não só por falta de abrigo, mas para nunca mais dares a alguém o poder que a tua fragilidade, uma vez, lhe deu. E carregas, para hoje, a certeza de que ser vista frágil é entregar-te, desarmada, a quem te poderia ferir.
 
 Em qualquer destas raízes, a lição é parecida: a fragilidade é perigosa, a força é a única segurança, e não há ninguém a quem confiar o peso. E é essa lição, gravada cedo, que te governa hoje, e que faz de cada momento de descanso, de cada baixar de guarda, uma ameaça que o teu corpo recusa, mesmo quando a tua razão sabe que já passou.
 
@@ -99,7 +99,7 @@ Custa-te o descanso. Porque descansar exige baixar a guarda, e baixar a guarda, 
 
 Repara nesta solidão. A de quem é sempre a forte, e nunca a segurada. Tu seguras toda a gente, e quem te segura a ti? És o apoio de todos, e em quem te apoias? E nos momentos em que mais precisarias de uma força maior do que a tua, descobres que não há, porque te habituaste a ser tu a única força, e ninguém sabe, sequer, que também tu poderias precisar de ser segurada.
 
-E há uma ironia dolorosa nisto. Tu, que segurarias qualquer pessoa que amasses, que estarias lá a qualquer hora, que nunca deixarias cair quem precisa de ti, não te dás a ti mesma esse mesmo cuidado. Achas natural que os outros precisem, que descansem, que se apoiem, e nunca os julgas por isso. Mas a ti, não. A ti, precisar é fraqueza, descansar é desleixo, apoiar-te é cair. Aplicas a ti uma dureza que nunca aplicarias a quem amas, e negas-te um cuidado que darias a qualquer um sem pensar. Mereces de ti a mesma ternura que dás aos outros, e essa é, talvez, a primeira coisa que esta travessia te vem ensinar.
+E há uma ironia dolorosa na tua couraça. Tu, que segurarias qualquer pessoa que amasses, que estarias lá a qualquer hora, que nunca deixarias cair quem precisa de ti, não te dás a ti mesma esse mesmo cuidado. Achas natural que os outros precisem, que descansem, que se apoiem, e nunca os julgas por isso. Mas a ti, não. A ti, precisar é fraqueza, descansar é desleixo, apoiar-te é cair. Aplicas a ti uma dureza que nunca aplicarias a quem amas, e negas-te um cuidado que darias a qualquer um sem pensar. Mereces de ti a mesma ternura que dás aos outros, e essa é, talvez, a primeira coisa que esta travessia te vem ensinar.
 
 E há um custo que paga quem te ama, que talvez não vejas. As pessoas que gostam de ti gostariam de poder cuidar de ti, segurar-te, ser fortes por ti, ao menos às vezes. E tu não deixas. Estás sempre tão inteira, tão de couraça, que ninguém te alcança, ninguém te pode dar nada, ninguém chega à parte de ti que precisaria de colo. E assim, sem quereres, privas quem te ama da possibilidade de te amar de volta, de retribuir o que sempre dás, de entrar na tua vida não só como alguém que se apoia em ti, mas como alguém que também te ampara. A tua couraça, que julgas não pesar a ninguém, fecha a porta a quem te quereria segurar.
 
@@ -107,21 +107,21 @@ Custa-te, também, a alegria. Porque a alegria, a verdadeira, exige um abandono,
 
 Quero que vejas a diferença entre a força sã e a tua. A força sã é uma capacidade a mais: sei aguentar quando é preciso, e sei poisar, ser frágil, apoiar-me, quando é seguro. Tem as duas portas. A tua não. A tua só sabe aguentar, e poisar não está, verdadeiramente, disponível, por mais exausta que estejas. E uma força que não se pode largar não é força, é uma prisão. O trabalho desta travessia não é tirar-te a tua força, que é real e é tua, e que te salvou. É destrancar a outra porta, a do descanso, para que a tua força deixe de ser uma armadura permanente e passe a ser uma escolha.
 
-Quero que sintas o cansaço disto. O cansaço de uma armadura que nunca sai. De uma vigilância que nunca para. De uma força que nunca pode falhar. É uma exaustão funda, de uma vida inteira de couraça vestida, e talvez já a tomes por normal, por seres assim, sem saberes que por baixo da couraça há uma pessoa exausta de a carregar.
+Quero que sintas o peso desta armadura nos ombros. O cansaço de uma couraça que nunca sai. De uma vigilância que nunca para. De uma força que nunca pode falhar. É uma exaustão funda, de uma vida inteira de couraça vestida, e talvez já a tomes por normal, por seres assim, sem saberes que por baixo da couraça há uma pessoa exausta de a carregar.
 
 ## 4. Quem sou eu sem a armadura
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou deixar uma pergunta no chão da fortaleza. Sozinha. Não fujas dela.
 
-Quem és tu sem a armadura? Sem a força permanente? Quando baixas a guarda, e te deixas, por um momento, frágil?
+Quem é a mulher que vive por baixo desta couraça? Sem a força permanente? Quando baixas a guarda, e te deixas, por um momento, frágil?
 
-Fica com ela. Repara no que ela mexe. Talvez um terror, talvez uma vertigem.
+Fica com ela. Repara no que se agita por baixo da couraça. Talvez um terror, talvez uma vertigem.
 
-Para ti, esta pergunta abre um alçapão de terror, porque a tua identidade inteira se ergueu sobre seres a forte. Tira-te isso, imagina-te sem a couraça, frágil, vulnerável, a precisar, e aparece um pânico. Então o que sou eu? Quem me protege, se eu baixar a guarda? E se desabar, e não houver ninguém para me segurar, como nunca houve?
+Para ti, esta pergunta abre um alçapão de terror, porque a tua identidade inteira se ergueu sobre seres a forte. Tira-te isso, imagina-te sem a couraça, frágil, vulnerável, a precisar, e aparece um pânico. Então o que resta de mim sem a couraça? Quem me protege, se eu baixar a guarda? E se desabar, e não houver ninguém para me segurar, como nunca houve?
 
 E a sombra que aqui se esconde é a fragilidade. A parte de ti que é suave, que precisa, que pode ser ferida, que pode não dar conta. Essa parte aterroriza-te, porque no teu passado a fragilidade não era acolhida, era exposta, perigosa. E armaste-te contra a tua própria fragilidade, como se ela fosse uma ameaça, quando é, no fundo, a parte de ti mais humana, e mais capaz de ser amada.
 
-Repara como isto te aprisiona. Não te podes permitir fragilidade, mesmo exausta, porque a fragilidade dispara o terror de não haver ninguém para te segurar. Vives a aguentar, a segurar, a ser forte, mesmo quando estás a desfazer-te, porque baixar a guarda parece arriscar a queda que sempre temeste, a de desabar e não haver ninguém por baixo.
+Repara como a couraça te mantém em cerco. Não te podes permitir fragilidade, mesmo exausta, porque a fragilidade dispara o terror de não haver ninguém para te segurar. Vives a aguentar, a segurar, a ser forte, mesmo quando estás a desfazer-te, porque baixar a guarda parece arriscar a queda que sempre temeste, a de desabar e não haver ninguém por baixo.
 
 E há uma tristeza particular debaixo da armadura, que quero nomear. É a de saberes, lá no fundo, que há em ti uma parte terna, suave, que precisava de colo, que nunca o teve, e que continua à espera. Às vezes, em momentos raros, sentes essa parte a querer aparecer, a pedir para ser cuidada, e empurra-la depressa para dentro, por reflexo, por terror, e voltas a vestir a couraça. Viver assim, a saber que há em ti uma menina que nunca foi segurada e a continuar a não a segurar, é uma forma silenciosa de luto, repetido todos os dias. E esta travessia é, no fundo, deixares, enfim, que essa parte apareça, e dares-lhe tu, agora, o colo que então faltou.
 
@@ -131,23 +131,23 @@ E quero que vejas a coragem que há, afinal, na fragilidade, ao contrário do qu
 
 E quero dizer-te uma coisa sobre o terror que esta pergunta levanta, porque nomeá-lo é o primeiro gesto de o desarmar. O que te aterroriza não é, verdadeiramente, descansar. É a queda que aprendeste que o descanso trazia, num tempo em que não havia ninguém por baixo. Para o teu corpo, baixar a guarda e desabar são uma só coisa, fundidas desde cedo. Mas são separáveis. Descansar, em si, não é cair. É apenas poisar o peso, confiar que há chão, deixar o corpo repor-se. A queda pertencia àquele tempo em que estavas sozinha. Hoje, talvez já não estejas, e descansar e desabar podem, enfim, deixar de andar juntos.
 
-Quero dizer-te outra coisa sobre este medo de cair, porque ela começa a render-lhe a guarda. Hoje, há quem te possa segurar. Esta é a verdade que o teu corpo, sentinela há tanto tempo, ainda não aprendeu. No tempo em que a couraça nasceu, não havia ninguém forte por ti, e a tua força era a única proteção. Mas hoje, na tua vida adulta, talvez já existam pessoas em quem te poderias apoiar, mãos que te segurariam se baixasses a guarda. O perigo de desabar sem ninguém por baixo era real então. Pode já não ser real agora.
+Quero dizer-te outra coisa sobre este medo de cair, porque ela começa a render-lhe a guarda. Hoje, há quem possa render-te a sentinela. Esta é a verdade que o teu corpo, em armas há tanto tempo, ainda não aprendeu. No tempo em que a couraça nasceu, não havia ninguém forte por ti, e a tua força era a única proteção. Mas hoje, na tua vida adulta, talvez já existam pessoas em quem te poderias apoiar, mãos que te segurariam se baixasses a guarda. O perigo de desabar sem ninguém por baixo era real quando ergueste a couraça. Hoje, com mãos por perto, pode já não ser.
 
 E há uma crueldade nesta couraça que talvez não vejas. Aquilo que o teu passado te negou, continuas a negar-lo a ti. Naquele tempo, não houve quem te segurasse, quem te desse colo, quem te dissesse descansa, eu fico de guarda. E hoje, em adulta, és tu quem se nega esse colo, quem não se deixa segurar, quem não se permite o descanso que ninguém te deu. A falta de fora tornou-se uma falta que praticas, contra ti. E parar de a praticar, deixares-te, enfim, ser cuidada, descansar, poisar, é talvez o gesto mais reparador desta travessia: o de te dares, agora, o abrigo que então te faltou, em vez de continuares, sozinha, a montar a guarda que ninguém veio render.
 
-Não te apresses a responder quem és sem a armadura, tu que respondes a tudo depressa. Essa resposta não se dá com a cabeça, e às vezes precisa de mais do que um livro. Mas deixa a pergunta aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que pode baixar a guarda, ao menos com alguns, sem desabar, deixas de precisar de carregar a couraça o tempo todo. E aí, só aí, podes começar a descansar.
+Não te apresses a responder quem és sem a armadura, tu que respondes a tudo depressa. Essa resposta não se dá com a cabeça, e às vezes precisa de mais do que um livro. Mas deixa a pergunta aberta. Porque é nela que está a fresta por onde a couraça começa a abrir-se. No dia em que o teu corpo aprender que pode baixar a guarda, ao menos com alguns, sem desabar, deixas de precisar de carregar a couraça o tempo todo. E aí, só aí, podes começar a descansar.
 
 ## 5. Talvez precises de mais do que compreender
 
-Tenho de parar o livro aqui. Com toda a seriedade. Porque a tua força não é, na maioria das vezes, só um traço de personalidade. É uma armadura erguida sobre uma ferida, e isso muda o que precisas.
+Tenho de mandar parar a guarda aqui, por um momento. Com toda a seriedade. Porque a tua força não é, na maioria das vezes, só um traço de personalidade. É uma armadura erguida sobre uma ferida, e isso muda o que precisas.
 
-Se te tornaste forte porque não houve ninguém forte por ti, porque cresceste sem proteção, em perigo, ou tiveste de te proteger sozinha, então a tua couraça não é só um hábito. É uma resposta de trauma. Uma adaptação à falta de segurança. E uma armadura erguida por trauma não se desaperta só por se compreender. Vive no corpo, no sistema nervoso permanentemente ativado, na hipervigilância que não para.
+Se te tornaste forte porque não houve ninguém forte por ti, porque cresceste sem proteção, em perigo, ou tiveste de te proteger sozinha, então a tua couraça não é só um hábito. É uma armadura forjada pelo trauma. Uma adaptação à falta de segurança. E uma armadura erguida por trauma não se desaperta só por se compreender. Vive no corpo, no sistema nervoso permanentemente ativado, na hipervigilância que não para.
 
-Quero nomear, sem rodeios, o que está por baixo da couraça. Aquela tensão constante, o corpo que nunca relaxa, a vigilância permanente, o alerta de fundo mesmo sem perigo, têm um nome. Chama-se hipervigilância. É o sistema nervoso preso num estado de alerta, gravado por um tempo em que o perigo era real e constante. E isso não é feitio. É uma resposta de trauma, e merece ser cuidada com apoio.
+Quero nomear, sem rodeios, o que está por baixo da couraça. Aquela tensão constante, o corpo que nunca relaxa, a vigilância permanente, o alerta de fundo mesmo sem perigo, têm um nome. Chama-se hipervigilância. É o sistema nervoso preso num estado de alerta, gravado por um tempo em que o perigo era real e constante. E isso não é feitio. É a sentinela do trauma a montar guarda, e merece ser cuidada com apoio.
 
 E quero dizer-te uma coisa com firmeza e carinho, do tamanho da tua força. Tu, que és a força de toda a gente, és precisamente quem mais tarde pede ajuda, ou nunca a pede, porque pedir ajuda parece baixar a guarda, mostrar fraqueza, desabar. Mas procurar apoio não é desabar. É o ato mais forte e mais lúcido de quem aguentou sozinha tempo demais. De um psicólogo, de um terapeuta, alguém preparado para trabalhar não só a tua compreensão, mas o teu corpo, o teu sistema nervoso, a hipervigilância gravada fundo.
 
-Quero separar-te duas couraças, porque importa para saberes o que a tua pede. Uma dureza de feitio desaperta-se por compreensão: vês o padrão, entendes a origem, e isso, com o tempo, ajuda a moderá-lo. Uma armadura de trauma é outra coisa. Não vive só na cabeça, vive no corpo, no sistema nervoso preso em alerta, na hipervigilância que não baixa a guarda só por se compreender. E uma armadura assim precisa de mais do que entender. Precisa de tempo, de corpo, de uma relação segura onde o sistema nervoso reaprenda, devagar, que já pode baixar a guarda. Isso, sozinha, raramente se alcança. Faz-se com acompanhamento.
+Quero separar-te duas couraças, porque importa para saberes o que a tua pede. Uma dureza de feitio desaperta-se por compreensão: vês o padrão, entendes a origem, e isso, com o tempo, ajuda a moderá-lo. Uma armadura de trauma é outra coisa. Não vive só na cabeça, vive no corpo, no sistema nervoso preso em alerta, na hipervigilância que não baixa a guarda só por se compreender. E uma armadura assim precisa de mais do que entender. Precisa de tempo, de corpo, de uma relação segura onde o sistema nervoso reaprenda, devagar, que já pode baixar a guarda. Render assim uma armadura, sozinha, raramente se consegue. Faz-se com acompanhamento.
 
 E há uma beleza nisto. Uma relação de ajuda pode ser, para ti, o primeiro posto onde alguém te rende a guarda em segurança, onde podes poisar a armadura sem que o portão fique indefeso. Onde és, finalmente, a segurada, e não só a que segura. Onde alguém é forte por ti, por um momento, e o teu corpo aprende, devagar, que pode descansar sem desabar, porque há, desta vez, mãos por baixo.
 
@@ -181,13 +181,13 @@ E não estranhes se, no início, descansar te cansar mais, em vez de menos. É c
 
 Quero avisar-te de uma coisa, para que não te apanhe de surpresa. Da primeira vez que baixares a guarda, mesmo só um pouco, é provável que o terror suba forte, que sintas uma vertigem, uma vontade urgente de te recompores, de voltar a vestir a couraça, de provar que afinal aguentas. Esse arranque não é sinal de que fizeste mal. É o teu sistema antigo a disparar, a tratar este pequeno descanso como se fosse o abandono de outrora. Não lhe obedeças logo. Fica, por um momento, sem a couraça, deixa-te ser segurada, e dá ao teu corpo a hipótese de descobrir que, desta vez, há chão por baixo.
 
-E quero que escolhas bem com quem começas, porque importa. Não baixes a guarda, de início, perante quem já te magoou, quem usou a tua fragilidade contra ti, quem te poderia confirmar o medo. Começa com quem já provou ser de confiança, com quem te quer bem, com quem terás quase a certeza de que te vai acolher. Não é fraqueza nem batota. É dar à tua sentinela as melhores condições para aprender a verdade nova, em vez de a atirar, logo de início, contra a velha ferida. Há tempo, depois, para o resto. Primeiro, o corpo precisa de provas de que poisar a couraça pode correr bem.
+E quero que escolhas bem com quem começas, porque importa. Não baixes a guarda, de início, perante quem já te magoou, quem usou a tua fragilidade contra ti, quem te poderia confirmar o medo. Começa com quem já provou ser de confiança, com quem te quer bem, com quem terás quase a certeza de que te vai acolher. Não é fraqueza nem batota. É dar à tua sentinela as melhores condições para aprender a verdade nova, em vez de a atirar, logo de início, contra a velha ferida. Aos postos mais expostos chegas depois, com a guarda já mais treinada. Primeiro, o corpo precisa de provas de que poisar a couraça pode correr bem.
 
 O despertar, quando vem, é uma sensação física de alívio profundo. É a vez em que baixas a guarda, em que descansas, em que te permites, por um momento, não ser forte, e em vez do desabamento que temias, sentes um descanso que não conhecias. O descanso de quem pode, enfim, poisar a armadura, e que descobre que não caiu, que se aguentou, que havia chão. É um instante pequeno, mas é enorme, porque é o teu corpo a aprender, talvez pela primeira vez, que pode descansar sem desabar.
 
 ## 7. Poisar a armadura
 
-Há um verbo para esta travessia. Descansar.
+Há um verbo que rende esta armadura. Descansar.
 
 Descansar a sério. Poisar a armadura, ao menos por momentos. Deixar de carregar a couraça o tempo todo. Dar ao teu corpo, à tua vigilância, à tua força, a folga que nunca tiveram.
 
@@ -217,7 +217,7 @@ Não te vou dar um manual de instruções, e esta rendição da guarda faz-se, m
 
 Escrevi este livro por uma convicção simples. Compreender muda. Mas, no caso de uma couraça desta idade, compreender pode não chegar, e dizer-to é a forma mais honesta de cuidar de quem aguentou tanto sozinha.
 
-Não muda tudo de uma vez. Não te faz, amanhã, desapertar uma armadura de uma vida inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com força, e a tua couraça com quem és.
+Compreender não desaperta a armadura toda num só gesto. Não te faz, amanhã, render uma couraça de uma vida inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com força, e a tua couraça com quem és.
 
 Agora sabes que te tornaste forte demais, e que essa força não foi uma escolha, foi uma necessidade, erguida quando não havia mais ninguém para o ser por ti.
 
@@ -247,7 +247,7 @@ E quero dizer-te uma última coisa, simples, para render a guarda destas página
 
 Sabes, no fundo, a frase que segura este livro de pé como tu seguraste tudo o resto. Já não preciso de carregar a armadura o tempo todo.
 
-Compreender foi o primeiro passo. Mas há um segundo, e esse não se faz só a ler. Faz-se a poisar, devagar, a armadura, peça a peça. E, muitas vezes, faz-se com ajuda, com alguém preparado para te render a guarda enquanto o teu corpo aprende que pode descansar sem desabar. Porque uma ferida de quem aguentou sozinha tempo demais merece mãos que a saibam, enfim, segurar, e procurá-las não é desabar. É cuidares, enfim, de quem nunca foi cuidada.
+Compreender foi a primeira peça da armadura a soltar-se. Mas há uma segunda, e essa não se solta só a ler. Solta-se a poisar, devagar, a couraça, peça a peça. E, muitas vezes, faz-se com ajuda, com alguém preparado para te render a guarda enquanto o teu corpo aprende que pode descansar sem desabar. Porque uma ferida de quem aguentou sozinha tempo demais merece mãos que a saibam, enfim, segurar, e procurá-las não é desabar. É cuidares, enfim, de quem nunca foi cuidada.
 
 E se um único pensamento sair contigo de dentro desta fortaleza, que seja este. Não tens de merecer o descanso aguentando primeiro tudo o que há para aguentar. O descanso não é um prémio que se ganha ao fim de uma força sem limite. É uma necessidade humana, um direito teu, hoje, agora, com tudo o que ainda há por fazer, simplesmente por seres humana e por já não estares naquele tempo em que não havia ninguém a render-te a guarda.
 
