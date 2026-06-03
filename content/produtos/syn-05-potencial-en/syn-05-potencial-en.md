@@ -71,6 +71,10 @@ There's also a detail that hurts to recognize. Often, the potential you see is r
 
 And notice something about time. The more time passes, the more the distance between the imagined man and the real man becomes evident. At first, the fantasy covers everything. Then, reality keeps appearing, stubborn, and you, instead of seeing it, try harder to transform him, to bring him closer to the man you imagined. And the more he refuses to become that man, the more you insist, because to let go of the fantasy would be to admit that you were loving someone who doesn't exist.
 
+There's a moment, at the beginning, that's worth looking at closely, because it's where everything is decided. It's the instant when he tells you the wound. The difficult childhood, the dream he abandoned, the previous relationship that hurt him, the thing he never managed to do. Another woman would hear a story. You hear an invitation. You feel, in that moment, that you've been entrusted with the key to a closed man, that you see what no one saw, and your heart runs at once to the place where you'll save him. But notice that he told you the wound, he didn't ask you to heal it. It was you who turned the confidence into a project. And it was there, before you knew him for real, that you fell in love, not with him, but with the mission you decided he was.
+
+And there's something that's part of this pattern that few women recognize in themselves: the haste. You don't fall in love slowly, as you get to know the person. You fall in love all at once, almost immediately, the moment you glimpse the potential. Because the fantasy doesn't need time to be built, it's already ready inside you, waiting for a man to settle into. When you say "I knew right away, at first sight," you're not talking about a deep connection, you're talking about the speed with which your desire to transform someone found, at last, a candidate. Love at first sight is, in your case, almost always projection at first sight.
+
 ## 2. Loving by projection
 
 There's a word for what you do. Projection.
@@ -81,13 +85,9 @@ Notice how it works. You meet a man. He gives you some signs, some clues, some g
 
 And then you fall in love with that drawing. Not with him. With what you projected onto him.
 
-That's why you fall in love so quickly, and so intensely, with men you barely know. Because you don't need to know them. Projection doesn't need the real person, only a canvas to project onto. And the less you know the man, the better a canvas he is, because there's less reality to counter your fantasy.
-
-Notice this, which is revealing. The men you fall in love with most are, often, the most incomplete, the most unfulfilled, the most full of unrealized potential. Because those give more room to projection. A whole man, realized, with no promise to fulfill, doesn't light you up, because there's no empty canvas in him to project onto.
+I want you to see how projection feeds on the smallest details. He says a more sensitive sentence, and you build on it a deep man. He tells you an old dream he abandoned, and you see in him an artist to be freed. He treats the waiter well, and you deduce a whole tenderness. You don't invent from nothing, that's what makes projection so convincing. You take a true thread and weave, around it, a man no one saw, because he exists only on the loom of your hope.
 
 And here's what this costs you. You never get to know the real man. You're so busy loving the projected one that you don't see the one in front of you. You don't see his real qualities, which may be different from the ones you imagined. And, more dangerous, you don't see the real signs, the flaws, the warnings, that the fantasy covers.
-
-Because projection is blind to reality. It sees what it wants to see. And a woman who loves by projection can stay for years with a man who harms her, without seeing it, because she's in love with an image she herself created, and not with the man who wounds her.
 
 I want to show you the cost of this way of loving, because it's high and paid on both sides.
 
@@ -97,7 +97,7 @@ And you live waiting. Waiting for the transformation. Waiting for him to become 
 
 On his side, there's a cost you may not see. To live with someone who doesn't love you as you are, but as you could be, is to live constantly falling short. He feels, even without naming it, that he isn't enough, that you're waiting for another version of him, that the man he is isn't enough for you. And that, with time, wounds, and tires, and pushes away.
 
-There's an involuntary cruelty in this. To fall in love with the potential is, deep down, a way of not loving the person. It's to love an idea, and to use the real person as a support for that idea. And the real person, underneath, knows that it isn't her you love, and that's a deep loneliness: to be loved for who one could be, and never for who one is.
+There's an involuntary cruelty in this. To fall in love with the potential is, deep down, a way of not loving the person. It's to love an idea, and to use the real person as a support for that idea. And the real person, underneath, knows that it isn't him you love, and that's a deep loneliness, to be loved for who one could be, and never for who one is.
 
 And there's a trap that binds you. The fantasy protects you. As long as you love the potential, you don't have to decide about the real one. You don't have to see that maybe he isn't right for you, that maybe he harms you, that maybe you should leave. Hope in the potential keeps you busy waiting, without having to look reality in the face, and to make the difficult decision it might demand. To love the potential is, sometimes, a way of never having to decide anything.
 
@@ -106,6 +106,12 @@ I want you to see how this is distinguished from the woman who loves through car
 The one who loves through caring saves through service: she cares, solves, supports, and loves by making herself indispensable. Not you. You love through projection. You fall in love with his future, with what he will be, and not with the person nor with the caring. Your currency isn't service, it's fantasy. You see a project, and you love the project.
 
 And there's an important difference in the consequences. The savior drains herself by doing. You drain yourself by waiting. She gives herself in caring. You give yourself in faith, in patience, in postponement, waiting for a metamorphosis. Recognizing which of the two you are helps you discern your pattern, and not to confuse it with another that looks alike but isn't.
+
+There's still a trait that distinguishes your way of loving from almost all the others. You fall in love with your back to the present. Other women look at the man they have in front of them and ask themselves whether they like him. You look at the man he will be years from now and you fall in love with that distant figure, like one who falls in love with a photograph that hasn't been taken yet. You live your love in the future tense, always conjugated in the "he will be," and so the present, with you, always remains unlived, always postponed to when he comes to be whom you promised he would be.
+
+I want to show you one more thing that projection does to you and that turns against you without your noticing. In drawing the perfect man, you also draw an impossible ruler. And that ruler doesn't measure only the man you have now, it measures all who come after. So, when a relationship ends and a new man appears, calm, present, real, he always seems too little to you, because he doesn't have the shine of the one you painted and who never existed. The fantasy doesn't only cost you the relationship you're living, it also costs you the ones you could live, because it leaves, in you, a standard of measure that no flesh-and-blood man can reach.
+
+And there's a detail that matters, about what you feel when he finally decides to change on his own. You'd expect to be happy. But many women of the potential feel, in that moment, a strange loss, almost a jealousy. Because if he transforms alone, without you, then you weren't the artist, you weren't the savior, you weren't the missing piece. And then it becomes clear that part of what you loved wasn't his transformation, it was your role in it. If you discover in yourself that discomfort when he grows without your help, listen to what it tells you: you were more in love with being needed than with his good.
 
 ## 3. Who is he without my project
 
@@ -125,14 +131,6 @@ Because to love someone for their transformation is not to love them. It's to lo
 
 Notice what's underneath this. Maybe a need to be important, indispensable, the one who makes the difference. If he transforms thanks to you, then you were essential, you were the one who saved him, the one who saw what no one else saw. Your love for his potential feeds a need of yours to be the transformer.
 
-And maybe there's something older still. Many women who love the potential grew up trying to change someone. A father who drank and who could be wonderful if he stopped. An unhappy mother who could flourish if. Someone, in childhood, full of unfulfilled potential, whom you, as a child, dreamed of saving with your love.
-
-If that's how it was, you learned to love that way. To fall in love with the potential of the one who doesn't fulfill himself, and to make it your mission to free him. And today, as an adult, you repeat it. You choose unfulfilled men, and you devote yourself to fulfilling them, reliving the old mission of saving the one whom, as a child, you couldn't change.
-
-But there's a hard truth here. You didn't change the adult of your childhood. And you're not going to change this man. Because people don't transform through another's love. They transform, when they transform, on their own. And to wait for your love to transform someone is to sign up for a life of waiting for a miracle that doesn't depend on you.
-
-Don't answer right away the question of who he is without your project. But leave it open. Because it's in it that the door is. The day you manage to look at the real man, without the fantasy, you see, at last, who you're with. And only by seeing who you're with can you choose, truly, whether you want to stay.
-
 Go back, to the origin, because no one learns to love the potential without a reason.
 
 Many women who love the potential grew up trying to change someone. To save someone. To wait for someone to become what he promised, and never became.
@@ -141,13 +139,15 @@ Maybe you had a father with an enormous potential and a life that wasn't up to i
 
 Maybe you had an unhappy mother who could flourish if, an absent father who could be present if, a family full of unfulfilled potential. And you learned to love that way: to see, in the one you love, not who he is, but who he could be, and to make the transformation of that person your mission of love.
 
-Notice what a child learns in a place like this. She learns that to love is to wait for someone to change. That true love sees the potential and fights for it. That her task, as the one who loves, is to transform, to save, to make flourish. And the equation that still governs her today is engraved in her: I love you for what you could be, and my love is going to get you there.
+Think about what a little girl absorbs in a home like this. She learns that to love is to wait for someone to change. That true love sees the potential and fights for it. That her task, as the one who loves, is to transform, to save, to make flourish. And the equation that still governs her today is engraved in her: I love you for what you could be, and my love is going to get you there.
 
-But there's a hard truth that child never learned. You didn't change the adult of your childhood. However much you loved him, however much you saw his potential, he didn't become the man you saw. Because people don't transform through another's love. They transform, when they transform, on their own, in their time, and not because someone loves them enough.
+There's also a hidden loyalty in this, which it's important to name. The child who loved an unfulfilled father didn't only learn a method. A promise was left unfinished in her. She left that home with an account to settle, the account of the transformation that never happened. And as an adult you'll look, without knowing it, for men who resemble that account, so you can finally close it. Each unrealized man you choose is a second chance to win an old battle. That's why you cling so hard. You're not only loving this man. You're trying to repair, through him, a flaw that was never yours to repair.
+
+But there's a hard truth here. You didn't change the adult of your childhood. And you're not going to change this man. Because people don't transform through another's love. They transform, when they transform, on their own, in their time, and not because someone loves them enough. And to wait for your love to transform someone is to sign up for a life of waiting for a miracle that doesn't depend on you.
 
 And today, as an adult, you repeat it. You choose unfulfilled men, and you devote yourself to fulfilling them, reliving the old mission of saving the one whom, as a child, you couldn't change. It's a moving, and tragic, fidelity: you keep trying, in each man, to win the battle you lost in childhood, the battle of transforming with love the one who could only transform himself.
 
-I want you to see this without guilt, and without accusing whoever raised you. Whoever taught you to love the potential, most of the time, was himself an unfulfilled potential, someone who needed to be seen for who he could be, because what he was hurt too much. He didn't mean to condemn you to loving phantoms. But he taught you, without meaning to, and you carry it still, in each man you love for what he could be.
+I want you to see this without judging yourself, and without pointing the finger at whoever raised you. Whoever taught you to love the potential, most of the time, was himself an unfulfilled potential, someone who needed to be seen for who he could be, because what he was hurt too much. He didn't mean to condemn you to loving phantoms. But he taught you, without meaning to, and you carry it still, in each man you love for what he could be.
 
 I want you to notice something that keeps the fantasy alive despite all the evidence: intermittent reward.
 
@@ -171,35 +171,17 @@ And you live your love life in that distance. Between the man you love, who does
 
 I want you to feel the weight of this. You're in a relationship of three. You, him, and the man he could be. And the third, the imagined one, ruins the relationship with the real one, because the real one is always measured against him, and always loses.
 
-And there's a cruelty in this, for him too. To live with someone who doesn't love you as you are, but as you could be, is to live constantly falling short. He feels, even without naming it, that he isn't enough, that you're waiting for another version of him, that the man he is isn't enough for you. And that, with time, wounds, and tires, and pushes away.
+I want to give you a concrete example of how the third sits at the table with you. He arrives late, tired, with no wish to talk. Another woman would see a tired man. You see, beside him, the attentive man he could be, and it's to that one that you compare the silent man you have in front of you. And he loses the comparison, always, because he's competing with a version of himself that has no tiredness, nor bad day, nor any limit. You live, thus, irritated with the real man for not being the imagined man, and he doesn't even know whom he's losing to, because the rival is invisible, and dwells inside you.
 
-Let me tell you a truth that's going to be hard. To fall in love with the potential is a way of not loving the person. It's to love an idea, and to use the real person as a support for that idea. And the real person, underneath, knows that it isn't her you love, and that's a deep loneliness, to be loved for who one could be, and never for who one is.
+I want to show you something else the imagined man does to you, and that few manage to see from the inside. He robs you of the present. Each good moment with the real man is at once stained by the question of how much better it would be if he were already whom you're going to help him become. You can't be with him on a simple afternoon, because your head is always on the future afternoon, the better one, the one that will come when he changes. And so you let real life pass, made of simple afternoons, waiting for the imagined life, made of perfect afternoons that never come.
 
-There's something else still. The fantasy protects you. As long as you love the potential, you don't have to decide about the real one. You don't have to see that maybe he isn't right for you, that maybe he harms you, that maybe you should leave. Hope in the potential keeps you bound, busy waiting, without having to look reality in the face and make the difficult decision it might demand.
+There's also a cruel effect on your own memory. When the relationship ends, you don't remember the real man, the one you lived with and suffered for. You remember the imagined man, what he could have been, and you mourn that loss, which is the loss of someone who never existed. That's why the grief of these relationships is so long and so strange. You're mourning a man you built, and because he was perfect, it seems to you that you lost the love of your life, when you lost, in truth, a fantasy that you yourself sustained.
 
-There's a question that's underneath everything, and I want to leave it to you, alone. Who is he, without your project?
+And there's a cruelty in this, for him too. He lives beside a woman who seems to love him very much and who, nonetheless, is never satisfied. He does almost everything right, and even so he feels he failed, without understanding at what. It's that he always fails by comparison with someone he can't beat. With time, either he gives up trying to please you, because nothing is enough, or he begins to doubt himself, to think that he is, in fact, insufficient, when the truth is that the ruler was never in him, it was always in your imagination.
 
-Take away, for a moment, everything you imagine he could be. The talent you're going to help flourish. The wounds you're going to help heal. The man he's going to become with your love. And look only at what he is, today, just as he is.
-
-It's hard, isn't it? Because without the project, without the potential, without the future you drew for him, there may be left a man who isn't quite what you'd been loving.
-
-And the shadow hidden here is your need to transform him. You don't want to love him as he is. You want to transform him into what he could be. And that need for transformation says more about you than about him.
-
-Because to love someone for their transformation is not to love them. It's to love your own power to change them. It's a relationship not with him, but with his project, in which you're the artist and he's the unfinished work. And there's, in that, a need of yours to be important, indispensable, the one who makes the difference. If he transforms thanks to you, then you were essential, you were the one who saved him, the one who saw what no one else saw.
-
-Notice, then, that your love for his potential feeds a need of yours to be the transformer. And as long as that need isn't seen, you're going to keep choosing men to transform, because the men who are already whole don't give you that role, don't need to be saved, don't let you be the artist of another's work.
+Let me tell you a truth that's going to be hard. To fall in love with the potential is a way of not loving the person who is there. You would say that you love him too much, and that's why you fight so hard for him. But to love someone too much for what he isn't yet is, deep down, to not love him, it's to love your hope. And hope, however tender, warms no one, because it doesn't lie down beside him, doesn't see him, doesn't touch him where he is. It always lives a step ahead, in the place where he hasn't yet arrived.
 
 ## 5. Seeing without fantasy
-
-There's a hard truth, and I want to tell it to you carefully. There are, in your relationship, two men. The imagined one and the real one. And you love the first, while you live with the second.
-
-The imagined man is wonderful. He has all the potential fulfilled. He dropped the flaws, healed the wounds, became what you saw he could be. That man you love deeply.
-
-The real man is another. He has the flaws yet to drop, the wounds yet to heal, the potential yet to fulfill. It's with that one that you share your life. And that one, often, wounds you, disappoints you, isn't enough.
-
-And you live your love life in that distance. Between the man you love, who doesn't exist, and the man you live with, whom you don't love as he is. It's a place of permanent suffering, because the real one is never up to the imagined one, and you live in an endless disappointment, waiting for the real one to become the imagined one.
-
-You're in a relationship of three. You, him, and the man he could be. And the third, the imagined one, ruins the relationship with the real one, because the real one is always measured against him, and always loses. Until you dismiss that third, your relationship with the real man will never have peace, because there will always be, beside him, a better phantom.
 
 If you love the imagined one, then there's something you've yet to do, and that changes everything. To see without fantasy.
 
@@ -208,6 +190,8 @@ To see the real man. Just as he is, today. Not as he could be, not as you'd like
 And I want to be clear about what this means, because it isn't pessimism, it isn't giving up on anyone, it isn't ceasing to see the good.
 
 To see without fantasy is to see the whole. The good and the bad. The real qualities, which may not be the ones you imagined, but which exist. And the real flaws, the limits, the warnings, that the fantasy covered.
+
+I want to give you an exercise in looking, because seeing without fantasy is something you train. For a week, write, at the end of the day, only what he did. Not what he said he was going to do. Not what you felt he meant. Not what he promised. Only the acts, plain, as a camera would record them. At the end of the week, read the list. That man of the list, the one of acts and not of intentions, is the man you live with. And it's from him, and not from the figure your imagination adds, that you need to decide.
 
 It's to look at the man and ask, honestly: who is he, by what he does, and not by what he says he's going to do? By what he is, and not by what he promises? By his acts of today, and not by his potential of tomorrow?
 
@@ -221,29 +205,17 @@ I want to tell you something important, about potential. People's potential is r
 
 That's why the right question isn't "what is his potential?" It's "who is he now, and can I love and live with who he is now, even if he never changes?" If the answer is yes, wonderful, and any change will be a bonus. If the answer is no, then you're betting your life on a transformation you don't control, and that, sooner or later, costs dearly.
 
-The awakening, when it comes, is a moment of almost cold lucidity. It's the day you look at him and see, without the fog of the fantasy, who he is. And either you discover that the real one, after all, is good, and you can love him for real, free of the project. Or you discover that you were loving a man who doesn't exist, and that the real one isn't for you. Both possibilities, however different, have something in common. They are truth. And the truth, even if it hurts, frees you from the relationship of three.
-
 I want to stop a moment, because there's a point at which this stops being a pattern and becomes a suffering that asks for more.
 
 If you stay bound, year after year, to a man who doesn't change, waiting for a transformation that wears you down. If hope in his potential keeps you in a relationship that harms you, that diminishes you, that consumes you. If you watch your life pass waiting for him to become whom he'll never be.
 
-This may be more than a pattern. It may be a wearing-down that sickens you, a hope that imprisons you, and it deserves the support of a professional. It's not weakness to seek it. It's to begin to care for the real person who most needs your care, and whom you've been setting aside: you.
+This isn't only a pattern of love. It may be a wearing-down that sickens you, a hope that imprisons you, and it deserves the support of a professional. It's not weakness to seek it. It's to begin to care for the real person who most needs your care, and whom you've been setting aside: you.
 
 And I want to tell you something, with firmness. If the real man, beneath the potential, wounds you, disrespects you, treats you badly, then the fantasy of what he could be is keeping you near someone who harms you. And there, understanding isn't enough, and it isn't the priority. The priority is your protection. No potential, however great, justifies your staying with the one who wounds you, waiting for a version of him that maybe will never exist.
 
 The awakening, when it comes, is a moment of almost cold lucidity. It's the day you look at him and see, without the fog of the fantasy, who he is. And either you discover that the real one, after all, is good, and you can love him for real, free of the project. Or you discover that you were loving a man who doesn't exist, and that the real one isn't for you. Both possibilities, however different, have something in common: they are truth. And the truth, even if it hurts, frees you from the relationship of three you were living in, between you, him, and the man he could be.
 
 ## 6. Discerning
-
-I want to tell you what it is to see without fantasy, because it isn't what you fear. It isn't pessimism, it isn't giving up on anyone, it isn't ceasing to see the good.
-
-To see without fantasy is to see the whole. The good and the bad. The real qualities, which may not be the ones you imagined, but which exist. And the real flaws, the limits, the warnings, that the fantasy covered.
-
-It's to look at the man and ask, honestly: who is he, by what he does, and not by what he says he's going to do? By what he is, and not by what he promises? By his acts of today, and not by his potential of tomorrow?
-
-The right question isn't "what is his potential?" It's "who is he now, and can I love and live with who he is now, even if he never changes?" If the answer is yes, wonderful, and any change will be a bonus. If it's no, then you're betting your life on a transformation you don't control, and that, sooner or later, costs dearly.
-
-And there's something important, about people's potential. It's real. People change, sometimes. But they change on their own, in their own time, and not because someone loves them enough. Your love is not the engine of his transformation. If he changes, it will be on his own. And if he doesn't change, no love of yours will make him change. To see this frees you from an impossible mission, the mission of transforming with love the one who can only transform himself.
 
 There's a verb for this crossing. To discern.
 
@@ -257,25 +229,21 @@ To discern is to undo that mixture. It's to ask, before what you feel: this that
 
 When you make this separation, something clarifying happens. You see how much of your passion was projection. And what's left, after the fantasy is taken away, is the measure of the real love, for the real person. Sometimes a lot is left, and it's good. Sometimes little is left, and it's painful, but it's honest.
 
-I want to give you a concrete sign to discern. Notice the word "when."
+I want to give you a fine test to tell one from the other, because the fantasy disguises itself well. Ask yourself what you feel when he fails to be better. When he relapses into the addiction, when he gives up on the project again, when he goes back to being what he always was. If you feel, above all, disappointment and anger, a fury of one who was defrauded, then what you love is the potential, and he has just denied you the fantasy. But if you feel, instead, tenderness and pity, without ceasing to see him clearly, then maybe you love the person, flaws and all. Disappointment is the signature of love for the promise. Lucid tenderness is the signature of love for the real.
+
+I want to give you another concrete sign to discern. Notice the word "when."
 
 "When he drops this." "When he realizes his worth." "When he's ready." "When he changes." Whenever you find yourself living in the "when," postponing happiness for a future version of him, you're loving the potential, not the person. Love for the real person lives in the present, in what is. Love for the potential always lives in the "when," in a future that maybe never comes.
 
 To discern is to bring the love from the "when" to the "now." It's to ask: and if he never changes? And if it's always like this? Do I want this life, with this man, just as he is today? That question, answered honestly, gives you the truth that the fantasy hid from you.
 
+There's also a trap of language worth watching, because your head defends the fantasy with words. Notice how many times, when you speak of him, you use the verb in the conditional. "He would," "he could," "he had everything to." Whenever you hear yourself defending him in the conditional, you're talking about a man who doesn't exist. Try, as an exercise, to describe him only in the present indicative, only with what he is and does, today. If the description shrinks, if the man suddenly becomes smaller, it's because a large part of him lived in the conditional, that is, in your imagination, and not in reality.
+
+I want to give you another sign that comes from others, and not from you, because sometimes you see better from outside than from inside. Notice how you speak of him to your friends. If, when you defend him, you find yourself always explaining the context, justifying, telling who he could be so that they understand him, pay attention. People who love the real talk about who the other is. Those who love the potential talk about who the other could be, and wear themselves out translating, for outsiders, a man only they see. If your friends, who care about you and know you, see a man you can't see, maybe it's they who are seeing without fantasy, and you who are seeing through it.
+
+And there's a hard question I want to leave you, to use when hope tightens its grip. Ask yourself how long you've been waiting for the same change. Not wishing for it, waiting for it. If the answer is in months, maybe. If it's in years, notice what that tells you. A transformation that doesn't happen in years isn't happening. It's only being postponed, promised, dreamed. And the time you've already waited is the most honest proof that this change doesn't depend on your waiting, however patient, however loving it may be.
+
 I won't give you a method. But I leave you the beginning. Believe in what he does, not in what he could do. Love who he is, not who he could be. And if what he is isn't right for you, don't stay waiting for who he could be, because that waiting can last your entire life.
-
-There's a verb for this crossing, and I want to distinguish it from another, so you don't confuse them. To discern.
-
-To discern is to separate. To separate who he is from who you imagine he'll be. To separate the real man from the projected man. To separate, within what you feel, what comes from his reality and what comes from your projection.
-
-It's different from simply seeing. To see is to recognize what is there. To discern is finer. It's to distinguish, within your passion, how much is for who he is, and how much is for what you imagine he could be.
-
-Because your passion mixes, in a single feeling, the real man and the imagined man. And as long as they're mixed, you can't decide anything, because you don't know what you're loving. To discern is to undo that mixture. It's to ask, before what you feel: this that binds me to him, is it for who he is, or for what I imagine he could be? Am I loving his acts, or my promises about him?
-
-When you make this separation, something clarifying happens. You see how much of your passion was projection. And what's left, after the fantasy is taken away, is the measure of the real love, for the real person. Sometimes a lot is left, and it's good. Sometimes little is left, and it's painful, but it's honest.
-
-And I want to give you a practical way to discern, without making this into a technique. People show who they are by what they do, repeatedly, over time. Not by what they could do. Not by what they promise. By what they do. So, before him, ask yourself: who is he, by the acts, and not by the promises? By what he does, and not by what he says he's going to do? To believe in what he does, and not in what he could do, is the heart of discerning.
 
 ## 7. Loving the real
 
@@ -290,6 +258,10 @@ To transform is to want to change the other, to make him become whom you see, to
 To accompany is something else. It's to be at his side, in his life, without substituting yourself for him, without wanting to change him. It's to love him as he is, and, if he wants to change, on his own, to support him, but without making his transformation the condition of your love. To accompany respects. To transform invades.
 
 And I want to tell you something that may be hard for you. If a man needs to be transformed in order to be lovable, maybe he isn't for you. Not because he has no worth, but because you deserve to love someone who is already right for you as he is, and not someone who would only be right for you after a metamorphosis that maybe never comes. Love shouldn't be a work in permanent construction. It should be able, at least, to be inhabited already.
+
+I want to add a distinction that frees many women from this pattern, about the difference between supporting and waiting. To support is to be at the side of a man who is, himself, already changing, and to whom you give strength for a path that is his and that he has already begun. To wait is to stand still at the edge of a man who doesn't move, sustaining, alone, the hope that should be his. In support, there are two in motion. In waiting, there's one living and the other waiting. And your pattern confuses them, because you call support what is, in truth, waiting, and you give it the pretty name of loyalty so as not to see that it's only postponement. Always ask yourself: am I supporting a path he's already walking, or waiting for a path he never began? The answer will tell you whether you're in a relationship or in a waiting room.
+
+And there's a simple truth, almost physical, about love for the real. It tires less. The fantasy seems light, but it's the heaviest thing there is, because it forces you to sustain, every day, a whole man who doesn't exist, with your own hope. Love for the real, that one, settles. You don't have to hold it up in the air. It's there, with the right weight of things that are true. And to rest in that weight, instead of draining yourself sustaining a phantom, is, perhaps, the first time love gives to you, instead of only taking from you.
 
 There's a destination for this crossing. And it's to love the real.
 
@@ -309,17 +281,9 @@ It's to see the whole person, with qualities and limits, and to choose, with ope
 
 And there's a joy in this that the projection never gives. The joy of being loved as you are, and of loving as he is. Of there not being, in the relationship, a fantasized third ruining everything. Of living with a person, and not with a project. It's less rapturous, perhaps, than the passion for the promise. But it's real. And the real, unlike the fantasy, can last, because it doesn't depend on a miracle that never comes.
 
-I want to show you what changes when you let go of the project and come to love the real, because it's beautiful, and it's the opposite of the loss you fear.
+I want to add something about what happens to you, inside, when you begin to love the real. A calm arises that you may never have known in your relationships. For the first time, you have no work to do on the other. You don't have to improve him, to pull him, to convince him of what he could be. You can simply be with him. And in that being, with no mission, no work to finish, you discover an intimacy that your haste to transform him never let you feel. Because you can't be close to someone you're always trying to change. The will to transform him is, itself, a distance.
 
-You free him. Because a man who is loved for his potential lives in permanent debt, he feels he has to become another in order to deserve you, and that weighs. When you love him as he is, or you let him go, you stop pressuring him to be what he isn't, and he can, at last, breathe, whether with you, or free of you.
-
-You free yourself. Because you stop living in the endless disappointment of measuring the real against the imagined. You stop postponing your life waiting for a transformation. And you face the truth, which hurts but frees, instead of the fantasy, which comforts but binds.
-
-And, if the real one is good, you free the true love. Because you can only love for real the one you see for real. While you loved the projection, your love didn't reach the person. When you let go of the projection and the real one still binds you, then yes, there's love, real love, for a real person, and that one is deep in a way that the passion for the promise never was.
-
-To love someone as he is isn't resignation, isn't lowering your expectations, isn't accepting everything. It's to see the whole person, with qualities and limits, and to choose, with open eyes, whether you want that person, that one, and not another that you imagine. It's a love that doesn't demand transformation in order to happen. That says "you are this, and I choose you so," and not "you'll be that, and so I wait for you."
-
-And there's a joy in this that the projection never gives. The joy of being loved as you are, and of loving as he is. Of there not being, in the relationship, a fantasized third ruining everything. Of living with a person, and not with a project. It's less rapturous, perhaps, than the passion for the promise. But it's real. And the real, unlike the fantasy, can last, because it doesn't depend on a miracle that never comes.
+And I want you to notice what this gives back to you, to you, and not only to the relationship. When you stop spending your love building an imagined man, love is left over, and time, and energy, for your own life, which had been forgotten in his project. Many women who love the potential never fulfilled their own, because they were busy fulfilling others'. To let go of his project is, often, the first time you look at your own, and discover that the unrealized person who most waited for you, all these years, was you.
 
 ## 8. The crossing
 
@@ -345,35 +309,27 @@ You're like someone who buys a house in ruins, in love with the house it could b
 
 The crossing is to look at the ruin and see the ruin. And then to decide, with lucidity: either you have what it takes to restore it, and it's worth the restoration, and you do it, with open eyes. Or it's only a ruin, and you deserve a house you can live in already, and you leave. What you can't do is keep living in the ruin loving the imagined house, because that one, on its own, never rises, and you grow old waiting for it, in the cold.
 
-And I want you to take one last thing, about the one who watches you. If there are those who learn to love by looking at you, notice what you show them. If they see you love phantoms, wait for transformations, wear yourself out saving the one who doesn't change, they learn that this is how you love, especially if they're girls, to whom the world already tells stories of women who save men with their love. And it's likely they'll repeat it, and that they'll wear themselves out, like you, waiting for an imagined man.
+And there's a part of the image I want to take further, because it's where your liberation lives. Notice that, in the house in ruins, the one who works is you. It's you who carry the bricks, who pay for the work, who tire yourself out, while the house doesn't lift a finger to rise. In a relationship like this it's the same. It's you who sustain, alone, the effort to make it what you imagine, and he, often, doesn't even know there's work going on. A real relationship isn't restored by the force of a single person. It's built by two, with two who want the same house. If it's only you who wants it, then it isn't a relationship, it's a worksite, and you're the only worker on a house that will always remain unfinished.
+
+And I want to leave you one last thing, about the one who learns to love by looking at you. If you have children, or nieces and nephews, or someone young who watches you, notice what you teach them without words. If they see you love phantoms, wait for transformations, wear yourself out saving the one who doesn't change, they learn that this is how you love, especially the girls, to whom the world already tells so many stories of women who save men with their love. And it's likely they'll repeat it, and that they'll wear themselves out, like you, waiting for an imagined man.
 
 The most liberating thing you can do for the one who watches you is not to keep believing in the potential of the one who wounds you. It's to show them a woman who loves the real, who sees with open eyes, who chooses who he is, and not who he could be. Sometimes a woman learns to discern, at last, not only for her own sake, but so as not to pass on to the one who comes after the same blind faith in the one who doesn't deserve her.
 
 And I want to leave you with a hope, not with a judgment. To let go of the project doesn't necessarily mean to leave him. It means to see with clarity, and from there to choose. Sometimes, in letting go of the fantasy, you discover that the real man is, after all, good, and that you can love him better without the burden of wanting him to be another. Other times you discover that he isn't for you, and you free yourself. But in both cases, you come to live in the real, and the real, with everything it has of imperfect, is the only place where love can, in fact, happen.
 
-You know, deep down, the sentence that holds this book. I can love who you are, not who you could be.
+At the heart of everything I've told you here is a simple sentence, which I want you to take with you. I can love who you are, not who you could be.
 
-And I want you to take a distinction that protects everything. To discern is not to become incapable of seeing the good, nor distrustful of everyone, nor closed to love. It's the opposite: it's to see better, with open eyes, the good and the bad, so that you can choose with truth. You can still love deeply. You just come to love a person, and not a promise. And that, far from taking love from you, gives it back to you whole, because you can only love for real the one you see for real.
+And I want you to take also a distinction that protects everything else. To discern is not to become incapable of seeing the good, nor distrustful of everyone, nor closed to love. It's the opposite: it's to see better, with open eyes, the good and the bad, so that you can choose with truth. You can still love deeply. You just come to love a person, and not a promise. And that, far from taking love from you, gives it back to you whole, because you can only love for real the one you see for real.
 
-To discern was the first step. But there's a second, and that one isn't done by reading. It's done by letting go, slowly, of the project, and by looking at the real one head-on. And, if there's someone at your side, by learning, together, to love each other as you are, and not as you could be.
-
-I want to give you a concrete sign, to discern day to day, because your head is going to want to keep loving the promise. Notice the word "when."
-
-"When he drops this." "When he realizes his worth." "When he's ready." "When he changes." Whenever you find yourself living in the "when," postponing happiness for a future version of him, you're loving the potential, not the person.
-
-Love for the real person lives in the present, in what is. Love for the potential always lives in the "when," in a future that maybe never comes. And an entire life in the "when" is a postponed life, waiting for a man who is built only in your imagination.
-
-To discern is to bring the love from the "when" to the "now." It's to ask yourself the question that changes everything: and if he never changes? And if it's always like this? Do I want this life, with this man, just as he is today? That question, answered honestly, gives you the truth that the fantasy hid from you. If the answer is yes, wonderful, and any change will be a bonus. If it's no, you're betting your life on a transformation you don't control.
-
-And there's an important care, so you don't go from one extreme to the other. To discern is not to give up on everyone, nor to become cynical, nor to cease seeing the good in people. People do, in fact, have potential, and they change, sometimes. What discerning asks of you is only one thing: that you love who he is, today, and not who you imagine he'll be. That your decision to stay, or to leave, rest on the real man, and not on the projected one. Because to love the real, even with its limits, is love. To love the fantasy, however beautiful, is loneliness for two.
+Understanding was the first step. There's a second, and that one isn't done by reading. It's done by letting go, slowly, of the project, and by looking at the real one head-on. And, if there's someone at your side who is worth it, by learning, together, to love each other as you are, and not as you could be.
 
 That is the work of SyncHim. The book names. SyncHim crosses over. Each in her own time.
 
-The awakening, when it comes, doesn't arrive like a pain, it arrives like an almost cold lucidity, and even with relief. It's the day you look at him and see, without the fog, who he is. And either you discover that the real one, after all, is good, and that you can love him for real, free of the project, with more peace than you had in the fantasy. Or you discover that you were loving a man who doesn't exist, and that the real one isn't for you, and that you can, at last, stop waiting.
+And I want to tell you, about the awakening, that it doesn't arrive like a pain, it arrives like an almost cold lucidity, and even with relief. It's the day you look at him and see, without the fog, who he is. And either you discover that the real one, after all, is good, and that you can love him for real, free of the project, with more peace than you had in the fantasy. Or you discover that you were loving a man who doesn't exist, and that the real one isn't for you, and that you can, at last, stop waiting.
 
 And in either case, there's a rest. The rest of the one who lets go of an impossible mission, the mission of transforming with love the one who transforms himself on his own. The rest of the one who stops measuring the real against a phantom. The rest of the one who goes back to living in the present, with a flesh-and-blood person, instead of in the future, with a promise. It's less rapturous than the fantasy. But it's peace, and the fantasy, however beautiful, was never peace, it was always waiting.
 
-And before you close these pages, I ask you one thing only. A hard one, for you.
+Before you close these pages, I leave you one request only. A hard one, for you.
 
 Think of the man you love, or of the last one you loved. And make a list, mental, of two columns. In one, who he is, by the acts, today. In the other, who you imagine he could be. And look at the distance between the two. Because it's in that distance that your suffering dwells. And to reduce that distance, by bringing the love from the column of the imagined to the column of the real, is the whole crossing. Either you love what's in the first column, or you're loving a fantasy. And you deserve more than to love a fantasy. You deserve to love, and to be loved, in flesh and blood.
 
