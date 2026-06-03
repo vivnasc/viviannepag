@@ -159,7 +159,7 @@ Sabes, no fundo, a frase que segura este livro inteiro: posso amar-te sem ter am
 
 E sabes, acima de tudo, a frase que este livro existe para te dar, e que é tua e do teu filho ao mesmo tempo: tu nunca foste o erro.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz só a ler. E aqui quero ser honesta sobre qual é, para ti.
+Compreender foi o primeiro passo. Mas saber separar o amor do lamento dentro da cabeça é uma coisa, e descolar, devagar, as duas folhas que secaram juntas dentro do peito é outra, e essa segunda não se faz só a ler. E aqui quero ser honesta sobre qual é, para ti.
 
 Se o que vives é o lamento lúcido, com a vergonha e o silêncio que o acompanham, criei uma travessia guiada, o **FreeMe**, que te pode acompanhar a pousar a vergonha, a distinguir o amor da perda, e a fazer as pazes com uma verdade que carregaste sozinha durante demasiado tempo. Encontra-la em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
@@ -171,7 +171,7 @@ Quero deixar-te com uma última coisa, e quero que a leves contigo acima de qual
 
 E quero dizer-te uma coisa sobre o futuro, porque o arrependimento olha sempre para trás, para a escolha que não voltarias a fazer, e há uma libertação em virar também o olhar para a frente. Não podes mudar o passado, não podes desfazer a escolha, não podes recuperar a vida que não viveste. Mas podes, a partir de hoje, viver a vida que tens com mais verdade e menos culpa, podes recuperar pedaços de ti que ficaram por viver, podes dar-te, enfim, algum espaço, alguma liberdade, alguma vida que seja tua. O arrependimento, quando deixa de ser uma tortura e passa a ser uma verdade integrada, pode até tornar-se um motor: o de cuidares melhor de ti daqui em diante, de não te perderes ainda mais, de recuperares a mulher que a maternidade soterrou. Não para deixares de ser mãe, mas para voltares a ser, também, tu. E essa, ao contrário do passado, é uma história que ainda podes escrever.
 
-Com toda a minha ternura, e sem nenhum juízo,
+Para ti, que amas e que também lamentaste, sem uma única ponta de juízo,
 *Vivianne*
 
 ---

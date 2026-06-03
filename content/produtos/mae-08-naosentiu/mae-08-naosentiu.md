@@ -59,7 +59,7 @@ E há aqui uma coisa que muda a perspetiva: o teu filho, sobretudo enquanto pequ
 
 Porque o amor não é só o que se sente. É também, e talvez sobretudo, o que se faz. Há um amor que é sentimento, a emoção quente, a onda, a ternura que aperta o peito. E há um amor que é ato, que é cuidado, que é presença, que é dedicação, que é estar e fazer e proteger, mesmo quando a emoção ainda não está lá. E o segundo não é um amor menor à espera do primeiro. É amor, inteiro, verdadeiro, e muitas vezes é por ele que se começa. O sentimento, esse, vem depois, muitas vezes, precisamente do ato. Ama-se a cuidar, e a cuidar, devagar, começa-se a sentir.
 
-Há uma imagem que pode ajudar-te a sentir isto. Pensa em duas pessoas que se conhecem e que vão, com o tempo, ficando amigas, ou apaixonando-se. O amor profundo entre elas não existe no primeiro instante, no primeiro aperto de mão. Constrói-se, encontro a encontro, no conhecer, no partilhar, no estar. E ninguém acha que houve falha por o amor não ter explodido no primeiro segundo, porque sabemos que, entre adultos, o amor leva tempo a crescer. Porque é que, com um bebé, haveria de ser diferente? Tu e o teu filho também se estão a conhecer. Ele é, no início, literalmente um desconhecido, um ser novo que nunca viste antes daquele dia. Que o amor por ele leve tempo a crescer, que se construa no conhecer-se mútuo dos dias e das noites, não é menos natural do que em qualquer outra relação humana. A diferença é que ninguém te disse que com um filho também era assim, e fez-te acreditar que devia ser instantâneo, e culpou-te por não o ser.
+Talvez ajude pensares numa coisa que conheces de outra parte da tua vida. Pensa em duas pessoas que se conhecem e que vão, com o tempo, ficando amigas, ou apaixonando-se. O amor profundo entre elas não existe no primeiro instante, no primeiro aperto de mão. Constrói-se, encontro a encontro, no conhecer, no partilhar, no estar. E ninguém acha que houve falha por o amor não ter explodido no primeiro segundo, porque sabemos que, entre adultos, o amor leva tempo a crescer. Porque é que, com um bebé, haveria de ser diferente? Tu e o teu filho também se estão a conhecer. Ele é, no início, literalmente um desconhecido, um ser novo que nunca viste antes daquele dia. Que o amor por ele leve tempo a crescer, que se construa no conhecer-se mútuo dos dias e das noites, não é menos natural do que em qualquer outra relação humana. A diferença é que ninguém te disse que com um filho também era assim, e fez-te acreditar que devia ser instantâneo, e culpou-te por não o ser.
 
 Quero que recebas isto com cuidado, porque pode aliviar uma vergonha de anos: se tens cuidado do teu filho, se te tens dedicado a ele, se te levantas por ele e o proteges e o atendes, então tu já estás a amá-lo, mesmo que a emoção ainda não tenha chegado, mesmo que ainda sintas distância, mesmo que olhes para ele e não sintas a onda. O teu amor não está ausente. Está a acontecer, todos os dias, na forma mais concreta e mais real que existe, a do cuidado. E o facto de te preocupares tanto com não sentires o suficiente é, ele próprio, uma prova de amor, porque a quem não amasse, isto seria simplesmente indiferente.
 
@@ -163,7 +163,7 @@ Sabes, no fundo, a frase que segura este livro inteiro: não preciso de sentir t
 
 E talvez, lá no fundo, comece a abrir-se a porta secreta deste livro: posso encontrar o meu filho antes de encontrar a mãe que imaginei ser.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo não se faz só a ler. E aqui, mais do que em quase todos os outros livros, quero ser muito honesta sobre qual é esse segundo passo para ti.
+Compreender foi o primeiro passo. Mas há outro, e esse já não acontece só nestas páginas, acontece no terreno onde a vergonha pousa e o vínculo se vai tecendo. E aqui, mais do que em quase todos os outros livros, quero ser muito honesta sobre qual é esse passo para ti.
 
 Se o que vives é a experiência comum de não sentir o esperado, com a vergonha e o luto que a acompanham, criei uma travessia guiada, o **FreeMe**, que te pode acompanhar a pousar a vergonha, a fazer o luto da mãe idealizada, e a permitir que o vínculo aconteça ao seu tempo. Encontra-lo em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
@@ -173,7 +173,7 @@ Quero deixar-te com uma cena que muitas mães me descrevem, e que talvez te dê 
 
 Seja qual for o teu caso, quero deixar-te com uma última coisa, e quero que a leves contigo acima de qualquer outra. Não sentires o que te prometeram não diz nada sobre o teu valor como mãe, nem sobre o teu amor. O amor de mãe tem muitas formas e muitos tempos, e o teu, seja qual for o seu ritmo, não é menos verdadeiro por não ter chegado como uma onda. E se o que carregas é mais pesado do que isso, se é sofrimento, então mereces, mais do que qualquer compreensão, ser cuidada, e há quem o saiba fazer, e procurá-lo é o gesto mais amoroso e mais corajoso que existe. Não estás sozinha. Nunca estiveste, por mais que o silêncio te tenha feito acreditar que sim.
 
-Com toda a minha ternura, e sem nenhum juízo,
+Com ternura, e sem um único juízo sobre o que sentes ou não sentes,
 *Vivianne*
 
 ---
