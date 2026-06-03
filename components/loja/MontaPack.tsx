@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useCart, precoNum } from '@/lib/cart';
 
 // 'Monta o teu pack': a pessoa escolhe os livros que quer (de um ou varios
-// universos) e leva-os em pack. Regra simples e igual aos packs nomeados:
-// cada livro custa PRECO_LIVRO, com um minimo de MIN livros e um teto (nunca
-// paga mais do que a biblioteca completa).
-const PRECO_LIVRO = 2.5;
+// universos) e leva-os em pack. Preco INTERMEDIO de proposito — desconto face
+// ao avulso (5-7€), mas acima dos packs prontos (2,5€/livro), para os packs
+// curados continuarem a ser o melhor negocio. Minimo MIN, teto na biblioteca.
+const PRECO_LIVRO = 4;
 const MIN = 3;
 const TETO = 99;
 
@@ -70,8 +70,8 @@ export function MontaPack({ universos, isPt }: { universos: Universo[]; isPt: bo
             <h2 className="font-serif font-light text-creme text-[1.5rem] leading-tight">{isPt ? 'Monta o teu pack' : 'Build your own pack'}</h2>
             <p className="text-creme-2/75 text-[0.9rem] mt-1 max-w-[560px]">
               {isPt
-                ? 'Escolhe só os temas que te interessam. Cada livro €2,5 em pack (mínimo 3).'
-                : 'Pick only the topics you want. Each book €2.5 in a pack (minimum 3).'}
+                ? 'Escolhe só os temas que te interessam — €4/livro (mínimo 3). Os packs prontos saem ainda mais em conta.'
+                : 'Pick only the topics you want — €4/book (minimum 3). The ready-made packs are even better value.'}
             </p>
           </div>
           <span className={`text-ouro text-2xl shrink-0 transition-transform ${aberto ? 'rotate-45' : ''}`}>+</span>
