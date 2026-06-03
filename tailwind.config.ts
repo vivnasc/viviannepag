@@ -18,6 +18,7 @@ const config: Config = {
         },
         ocre: '#B8843D',
         ambar: '#EBAE4A',
+        ouro: '#D49A3A',
         bordeaux: '#8B2235',
         violeta: '#5A4A6A',
         rosa: '#E08496',

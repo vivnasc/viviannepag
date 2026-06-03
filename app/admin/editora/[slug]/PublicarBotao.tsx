@@ -39,7 +39,7 @@ export default function PublicarBotao({ slug, bloqueado }: { slug: string; bloqu
       <button
         onClick={publicar}
         disabled={estado === 'a-publicar'}
-        className="bg-ouro text-terra-2 rounded-[12px] px-5 py-2 text-[0.82rem] font-medium hover:bg-ambar disabled:opacity-60"
+        className="bg-ouro text-terra rounded-[12px] px-5 py-2 text-[0.82rem] font-semibold hover:bg-ambar disabled:opacity-60"
         title="Cria o produto como rascunho e dispara o render editorial no GitHub Actions"
       >
         {estado === 'a-publicar' ? 'a publicar…' : '📖 publicar (rascunho + render)'}

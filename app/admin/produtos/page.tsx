@@ -243,7 +243,7 @@ export default function ProdutosAdmin() {
                 setMsg(`Erro: ${j.erro}`);
               }
             }}
-            className="bg-ouro text-terra-2 rounded-[12px] px-4 py-2 text-[0.8rem] font-medium hover:bg-ambar"
+            className="bg-ouro text-terra rounded-[12px] px-4 py-2 text-[0.8rem] font-semibold hover:bg-ambar"
             title="Auto-deteta mundo por slug, 1 GH Action processa todos"
           >
             📚 render TODOS
@@ -266,7 +266,7 @@ export default function ProdutosAdmin() {
                 if (r.ok) { setPolling(true); setMsg(`Universo ${label} disparado. 'ver PDF' aparece em cada card a medida que ficam prontos.`); }
                 else { setMsg(`Erro: ${j.erro}`); }
               }}
-              className="bg-ouro/70 text-terra-2 rounded-[12px] px-3 py-2 text-[0.72rem] font-medium hover:bg-ambar"
+              className="bg-ouro/15 text-ambar border border-ouro/50 rounded-[12px] px-3 py-2 text-[0.72rem] font-semibold hover:bg-ouro hover:text-terra transition-colors"
               title={`Render só ${label} (lote leve)`}
             >
               {label}
