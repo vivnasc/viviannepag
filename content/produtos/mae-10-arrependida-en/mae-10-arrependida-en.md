@@ -159,7 +159,7 @@ You know, deep down, the sentence that holds this whole book: I can love you wit
 
 And you know, above all, the sentence this book exists to give you, and that is yours and your child's at the same time: you never were the mistake.
 
-To understand was the first step. But there is a second, and the second is not done only by reading. And here I want to be honest about what it is, for you.
+To understand was the first step. But knowing how to separate the love from the lament inside your head is one thing, and peeling apart, slowly, the two sheets that dried together inside your chest is another, and that second one is not done only by reading. And here I want to be honest about what it is, for you.
 
 If what you're living is the lucid lament, with the shame and the silence that accompany it, I created a guided crossing, **FreeMe**, that can accompany you in setting down the shame, in distinguishing the love from the loss, and in making peace with a truth you carried alone for too long. You'll find it at [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
@@ -171,7 +171,7 @@ I want to leave you with one last thing, and I want you to take it with you abov
 
 And I want to tell you something about the future, because regret always looks backward, at the choice you wouldn't make again, and there is a liberation in turning your gaze also forward. You can't change the past, can't undo the choice, can't recover the life you didn't live. But you can, from today on, live the life you have with more truth and less guilt, you can recover pieces of yourself that were left unlived, you can give yourself, at last, some room, some freedom, some life that is yours. Regret, when it stops being a torture and becomes an integrated truth, can even become an engine: the engine of taking better care of yourself from here on, of not losing yourself any further, of recovering the woman that motherhood buried. Not to stop being a mother, but to go back to being, also, yourself. And that, unlike the past, is a story you can still write.
 
-With all my tenderness, and without any judgment,
+For you, who love and who also lamented, without a single trace of judgment,
 *Vivianne*
 
 ---
