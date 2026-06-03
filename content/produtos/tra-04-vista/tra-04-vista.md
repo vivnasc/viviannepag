@@ -17,7 +17,7 @@ Repara numa contradição que talvez vivas. Tu fazes um trabalho que merece ser 
 
 Não te mostras. Não te exposes. Evitas o palco, a câmara, o destaque, a visibilidade. Fazes o teu trabalho na sombra, e quando chega o momento de o mostrar, de te mostrares, recuas, encolhes-te, deixas que outros, muitas vezes menos capazes, ocupem a luz que poderia ser tua.
 
-E talvez nem te lembres de alguma vez ter sido diferente. De ter havido um tempo, talvez na infância, em que mostravas as tuas coisas com orgulho, em que cantavas, dançavas, falavas sem medo, em que a luz não te assustava. Esse tempo existiu, na maioria das pessoas, antes de algo o ter fechado. A criança que eras não nasceu com medo de ser vista, aprendeu-o. E o que se aprendeu pode, devagar, desaprender-se, porque por baixo do medo está, ainda, aquela parte de ti que sabia mostrar-se sem terror, e que espera apenas por segurança para voltar a aparecer.
+E talvez já nem te lembres de uma altura em que a luz não te queimava. De ter havido um tempo, talvez na infância, em que mostravas as tuas coisas com orgulho, em que cantavas, dançavas, falavas sem medo, em que estar à vista era apenas estar viva. Esse tempo existiu, na maioria das pessoas, antes de algo o ter fechado. A criança que eras não nasceu com medo de ser vista, aprendeu-o. E o que se aprendeu pode, devagar, desaprender-se, porque por baixo do medo está, ainda, aquela parte de ti que sabia mostrar-se sem terror, e que espera apenas por segurança para voltar a aparecer.
 
 Talvez tenhas algo para dizer, para criar, para partilhar, e que ficasse melhor no mundo do que escondido em ti. Mas o medo de ser vista é maior do que o desejo de mostrar. E assim guardas, escondes, adias, e o teu trabalho, a tua voz, o teu valor, ficam por mostrar, por medo de te exporeres.
 
@@ -29,9 +29,9 @@ Repara na contradição em que isto te deixa, porque ela é cruel. Por um lado, 
 
 Este livro não é sobre marketing pessoal, nem sobre como ganhar confiança em palco. Vim olhar para outra coisa, mais funda. Para o medo de seres vista. Para a razão pela qual te escondes de uma visibilidade que o teu trabalho merece. E para a possibilidade de te mostrares sem o terror que hoje te paralisa, e de deixares chegar ao mundo o que tens, enfim, para dar.
 
-E adianto-te a direção, para leres em paz. Podes ser vista sem te perderes. Mostrar o teu trabalho, a tua voz, o teu valor, não te tira nada, não te expõe ao perigo que temes. E o medo de ser vista, que te esconde, vem de uma ferida que vamos olhar, e que, se for intensa, merece também o apoio de quem saiba acompanhá-la.
+E deixo-te a direção logo à entrada, para que leias sem o aperto de quem teme o que vem. Podes ser vista sem te perderes. Mostrar o teu trabalho, a tua voz, o teu valor, não te tira nada, não te expõe ao perigo que temes. E o medo de ser vista, que te esconde, vem de uma ferida que vamos olhar, e que, se for intensa, merece também o apoio de quem saiba acompanhá-la.
 
-Quero que percebas, desde já, a diferença entre o que parece e o que é. O que parece, de fora, é uma mulher reservada, discreta, que prefere os bastidores. O que é, por dentro, é uma mulher que tem muito para mostrar e que se esconde por medo, não por preferência. Há uma diferença enorme entre escolheres a discrição porque é assim que te sentes bem, e esconderes-te porque ser vista te aterroriza. A primeira é um feitio, e é legítima. A segunda é uma prisão, ainda que se vista de modéstia. E é só da segunda que este livro te quer libertar.
+Quero que distingas, desde já, a mulher que os outros veem da mulher que se esconde por dentro. O que se vê, de fora, é uma mulher reservada, discreta, que prefere os bastidores. O que é, por dentro, é uma mulher que tem muito para mostrar e que se esconde por medo, não por preferência. Há uma diferença enorme entre escolheres a discrição porque é assim que te sentes bem, e esconderes-te porque ser vista te aterroriza. A primeira é um feitio, e é legítima. A segunda é uma prisão, ainda que se vista de modéstia. E é só da segunda que este livro te quer libertar.
 
 Este livro não te vem dizer que tens de te tornar extrovertida, que tens de adorar palcos, que tens de viver exposta. Não se trata de mudares quem és. Trata-se de te devolver uma escolha que o medo te tirou: a de poderes mostrar o teu trabalho quando o quiseres, de ocupares a luz quando ela for tua, de seres vista sem que um terror te obrigue a esconder. Quer sejas, por natureza, mais reservada ou mais expansiva, mereces que isso seja uma escolha tua, e não uma imposição do medo.
 
@@ -73,7 +73,7 @@ Talvez a humilhação tenha sido um momento marcante, daqueles que ficam: uma ve
 
 Quero que vejas isto sem culpa. O teu medo de ser vista não é fraqueza, nem falta de confiança que se resolva com umas dicas. É uma ferida, a de quem foi julgada, exposta, ou humilhada, ao mostrar-se, e que aprendeu a esconder-se para se proteger. Não és tímida por feitio. És alguém que aprendeu que ser vista doía, e que se esconde para não voltar a doer.
 
-E quero que vejas onde isto fica guardado, porque importa. Este medo não está só na tua cabeça, no que pensas. Está no corpo, numa reação que dispara antes do pensamento. Por isso não basta dizeres a ti mesma que não há perigo, que ninguém te vai gozar, que o teu trabalho é bom. O medo não obedece à razão, porque não nasce dela, nasce de uma memória de corpo, antiga, que trata a visibilidade como ameaça. E uma memória de corpo não se desfaz com argumentos, reaprende-se devagar, com experiências novas, em que o corpo descobre que se mostrou e não foi humilhado, vez após vez, até acreditar.
+E quero mostrar-te em que lugar do corpo este medo se aloja, porque é aí que se decide tudo. Este medo não está só na tua cabeça, no que pensas. Está no corpo, numa reação que dispara antes do pensamento. Por isso não basta dizeres a ti mesma que não há perigo, que ninguém te vai gozar, que o teu trabalho é bom. O medo não obedece à razão, porque não nasce dela, nasce de uma memória de corpo, antiga, que trata a visibilidade como ameaça. E uma memória de corpo não se desfaz com argumentos, reaprende-se devagar, com experiências novas, em que o corpo descobre que se mostrou e não foi humilhado, vez após vez, até acreditar.
 
 ## 3. Esconder-me custa-me a vida que poderia ter
 
@@ -109,7 +109,7 @@ Quem serias tu se te mostrasses? Se ocupasses a luz, em vez da sombra? Se deixas
 
 Fica com ela. Repara no que ela mexe. Talvez um terror, talvez um desejo logo abafado.
 
-Para ti, esta pergunta toca num medo fundo. Porque mostrares-te, expores-te, seres vista, desperta o terror antigo do julgamento, da humilhação, da exposição. Como se ser vista fosse arriscar o que te magoou antes: o gozo, a crítica, a vergonha de teres ousado mostrar-te.
+Para ti, esta pergunta acende logo o alarme antigo. Porque mostrares-te, expores-te, seres vista, desperta o terror antigo do julgamento, da humilhação, da exposição. Como se ser vista fosse arriscar o que te magoou antes: o gozo, a crítica, a vergonha de teres ousado mostrar-te.
 
 E a sombra que aqui se esconde é o medo de te exporeres e seres julgada. De que, ao mostrares-te, te vejam, e te critiquem, e descubram algo em ti que te faça merecer a vergonha que temes. O medo não é só de ser vista. É do que imaginas que verão, e do julgamento que imaginas que virá.
 
@@ -117,7 +117,7 @@ Repara como isto te aprisiona. Não te mostras, mesmo tendo valor, porque mostra
 
 E quero parar aqui um momento, com cuidado. Porque se o medo de ser vista é muito intenso, se te causa uma angústia que aperta, ataques de pânico, uma evitação que limita seriamente a tua vida, isto pode ser mais do que timidez. Pode ser ansiedade social, e isso tem nome, e tem ajuda. Não é feitio, não é fraqueza, não é algo que se resolva só a esforço. Um profissional pode ajudar-te, e procurá-lo não é exagero, é cuidar de algo que merece ser cuidado.
 
-Quero dizer-te uma coisa sobre este medo, porque ela começa a desarmá-lo. Ser vista, hoje, não traz, na maioria das vezes, o julgamento que temes. As pessoas estão demasiado ocupadas consigo para te julgarem como imaginas. E mesmo que alguém julgue, isso fala dele, não de ti, e não te tira o valor. O terror do julgamento é, em grande parte, uma projeção do que viveste, e não uma previsão do que acontecerá. O mundo, hoje, não é o lugar onde foste, um dia, exposta.
+Quero pôr à luz uma verdade que faz este medo começar a encolher. Ser vista, hoje, não traz, na maioria das vezes, o julgamento que temes. As pessoas estão demasiado ocupadas consigo para te julgarem como imaginas. E mesmo que alguém julgue, isso fala dele, não de ti, e não te tira o valor. O terror do julgamento é, em grande parte, uma projeção do que viveste, e não uma previsão do que acontecerá. O mundo, hoje, não é o lugar onde foste, um dia, exposta.
 
 E quero distinguir-te uma coisa que liberta. O que te assusta não é, de facto, seres vista. É seres julgada. Reparas? Se soubesses, com certeza, que ao mostrares-te serias acolhida, reconhecida, bem recebida, não terias medo nenhum de te mostrar. O medo não é da visibilidade em si, é do julgamento que imaginas que ela traz. E esse julgamento, na maioria das vezes, é muito maior na tua imaginação do que na realidade. As pessoas não olham para ti com a lupa cruel com que tu te imaginas observada. Olham distraídas, ocupadas consigo, e a maioria nem repara, e dos que reparam, a maioria não julga, e dos que julgam, o juízo fala mais deles do que de ti.
 
@@ -201,7 +201,7 @@ Quero também desfazer a confusão entre esconderes-te e seres humilde. A humild
 
 E há uma libertação enorme nisto. Quando te mostras, deixas de viver na frustração de quem tem algo para dar e o esconde. Deixas de ver outros ocupar a luz que poderia ser tua. Deixas de viver aquém de ti, na sombra. E começas a viver a vida que o teu valor merece, com o teu trabalho a chegar ao mundo, a tua voz a ser ouvida, o teu valor a ser visto.
 
-Vai custar-te, porque a velha voz, a que te manda esconder, está gravada fundo, e vai aparecer a cada vez que ousas mostrar-te, com o seu aviso de sempre. Vai dizer-te quem és tu para te exporeres, vão gozar-te, é melhor não arriscar. O trabalho não é silenciá-la de uma vez, é deixar de lhe obedecer. Ouvi-la dizer esconde-te, e responder-lhe, devagar, o que tenho merece ser visto, vou mostrar. E cada vez que te mostras apesar dela, e não és humilhada, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, que sabe que tens direito à luz.
+Vai custar-te, porque a velha voz, a que te manda esconder, está gravada fundo, e vai aparecer a cada vez que ousas mostrar-te, com o seu aviso de sempre. Vai dizer-te quem és tu para te exporeres, vão gozar-te, é melhor não arriscar. A tarefa não é calar essa voz num só gesto, é parares de fazer o que ela manda. Ouvi-la dizer esconde-te, e responder-lhe, devagar, o que tenho merece ser visto, vou mostrar. E cada vez que te mostras apesar dela, e não és humilhada, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, que sabe que tens direito à luz.
 
 E quero deixar-te uma coisa, sobre quem te vê, sobretudo se há filhas, ou pessoas mais novas que orientas. Se te veem esconder o teu valor, recusar a luz, viver aquém de ti por medo, aprendem que é assim que se deve fazer, e é provável que escondam, também, o que têm de melhor. Mas se te veem mostrar o teu trabalho com dignidade, ocupar a luz que mereces, arriscar ser vista, aprendem que podem fazer o mesmo. Às vezes uma mulher aprende a mostrar-se, enfim, não só por si, mas para dar a quem a vê a permissão de não se esconder.
 
@@ -229,7 +229,7 @@ Sabes que, se o medo for intenso, pode ser ansiedade social, e que isso tem nome
 
 Sabes que podes ser vista sem te perderes, e que o verbo é mostrar, o que tens para dar, por escolha tua, mantendo o leme nas tuas mãos.
 
-Quero deixar-te uma imagem, e quero que fiques com ela.
+Antes de fechar, quero pôr-te diante dos olhos uma cena, e pedir-te que não a largues.
 
 Imagina alguém com uma voz linda, rara, capaz de comover, que canta sozinha, escondida, num quarto fechado, com medo de que, se cantasse para alguém, a gozassem, como uma vez gozaram. E que passa a vida a cantar para as paredes, enquanto, lá fora, há quem precisasse de ouvir aquela voz, e quem a aplaudisse, se ela ousasse abrir a porta.
 

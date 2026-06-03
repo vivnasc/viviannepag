@@ -29,7 +29,7 @@ Há uma fusão. A tua identidade fundiu-se com a tua criação. Tu não tens uma
 
 Este livro não é sobre gestão, nem sobre empreendedorismo, nem sobre como liderar melhor. Vim olhar para outra coisa, mais funda. Para a fusão entre ti e o que crias. Para o facto de teres posto toda a tua identidade naquilo que fazes, ao ponto de não saberes quem és sem ele. E para o que isso te custa, a ti, e até à própria criação que tanto carregas e que, sem o saberes, prendes ao não a deixares crescer sem ti.
 
-E adianto-te a direção, para leres em paz. Podes continuar inteira sem segurares tudo. Podes amar o que crias, dedicares-te a ele, sem te fundires com ele, sem perderes a fronteira entre ti e a tua obra. E essa capacidade de soltar, de separar quem és daquilo que crias, não te tira o projeto. Devolve-te a ti.
+E digo-te já para onde vai este livro, para que possas lê-lo sem o pé no travão. Podes manter-te uma pessoa inteira mesmo sem teres a mão em cada decisão da empresa. Podes amar o que crias, dedicares-te a ele, sem te fundires com ele, sem perderes a fronteira entre ti e a tua obra. E essa capacidade de soltar, de separar quem és daquilo que crias, não te tira o projeto. Devolve-te a ti.
 
 Quero que percebas, desde já, a diferença entre amar o que crias e fundires-te com ele, porque são coisas diferentes, e este livro só te quer tirar a segunda. Amar a obra é dedicares-te a ela, importares-te, dares-lhe o teu melhor, e ao mesmo tempo manteres-te uma pessoa inteira, com vida própria, que existe quando se afasta dela. Fundires-te com a obra é deixares de existir fora dela, é a obra tornar-se a tua pele, o teu valor, a tua identidade toda. O amor sustenta-se, a fusão consome. E é possível, e desejável, amar profundamente o que crias sem te perderes nele, e é isso que estas páginas te vêm devolver.
 
@@ -47,7 +47,7 @@ Em teres medo, no fundo, de que sem o projeto não serias ninguém, não terias 
 
 Em sentires que falar mal da obra, ou ouvir uma crítica a ela, é falar mal de ti, como se não houvesse diferença entre julgar o que fazes e julgar quem és.
 
-São todos o mesmo. A fusão entre ti e o que crias. O carregar tudo aos ombros de quem não se sabe separar da própria obra.
+São todos a mesma raiz. A identidade que se colou ao que produz, ao ponto de não distinguir o que aconteceu à empresa do que aconteceu a quem a fundou. O carregar tudo aos ombros de quem não se sabe separar da própria obra.
 
 Quero mostrar-te como isto aparece no dia a dia, em coisas que talvez já tomes por entrega. Recebes uma crítica ao teu projeto, e não a sentes como uma crítica ao trabalho, sentes-la como um ataque a ti, doe-te como se tivessem dito que não prestas. Algo corre mal no negócio, e em vez de o veres como um problema a resolver, afundas-te, como se o problema fosse uma falha tua, pessoal, existencial. Alguém sugere uma forma diferente de fazer, e custa-te ouvir, porque mexer na obra é mexer em ti.
 
@@ -75,7 +75,7 @@ Talvez aquilo que criaste tenha nascido, também, de uma necessidade de teres co
 
 Quero que vejas isto sem culpa. A tua fusão com o que crias não é defeito, nem excesso de ego. É uma forma de existires que aprendeste, num tempo em que o teu valor parecia estar no que fazias, e não em quem eras. Não és obcecada por feitio. És alguém que pôs a sua existência na sua obra, porque foi ali que aprendeu a encontrar valor, e que por isso não se sabe separar dela.
 
-E quero que vejas onde isto fica guardado, porque importa. A fusão não é só uma ideia, uma escolha consciente. É uma forma de te sentires que se gravou fundo. Por isso não basta perceberes, racionalmente, que tu não és a empresa, para deixares de o sentir. A fusão vive abaixo da razão, numa camada onde o teu valor e a tua obra estão tão entrelaçados que a tua razão não os consegue separar sozinha. É por isso que mesmo sabendo que devias descansar, soltar, delegar, não consegues: porque não é uma questão de saber, é uma questão de uma identidade que se confundiu, e que se desentrelaça devagar, com tempo, experiência e, muitas vezes, ajuda.
+E quero mostrar-te em que camada de ti isto se inscreveu, porque é aí que está a dificuldade. A fusão não é só uma ideia, uma escolha consciente. É uma forma de te sentires que se gravou fundo. Por isso não basta perceberes, racionalmente, que tu não és a empresa, para deixares de o sentir. A fusão vive abaixo da razão, numa camada onde o teu valor e a tua obra estão tão entrelaçados que a tua razão não os consegue separar sozinha. É por isso que mesmo sabendo que devias descansar, soltar, delegar, não consegues: porque não é uma questão de saber, é uma questão de uma identidade que se confundiu, e que se desentrelaça devagar, com tempo, experiência e, muitas vezes, ajuda.
 
 ## 3. A fronteira que se perdeu
 
@@ -109,7 +109,7 @@ Quem és tu sem o que crias? Se o projeto acabasse, se a empresa fechasse, se a 
 
 Fica com ela. Repara no vazio, ou no terror, que ela abre.
 
-Para ti, esta pergunta toca num medo fundo. Porque a tua identidade inteira se fundiu com a tua criação. Tira-a, imagina-te sem ela, e aparece um abismo. Então quem sou eu? Que valor tenho, se não for o da obra? Que identidade me resta, se a minha estava toda ali?
+Para ti, que puseste o teu nome na porta e o teu sangue em cada ano da empresa, esta pergunta abre um alçapão. Porque a tua identidade inteira se fundiu com a tua criação. Tira-a, imagina-te sem ela, e aparece um abismo. Então quem sou eu? Que valor tenho, se não for o da obra? Que identidade me resta, se a minha estava toda ali?
 
 Repara que a força desse abismo é a medida exata de quanto te fundiste. Para uma pessoa com fronteira, a pergunta quem serias sem o teu trabalho tem resposta, ainda que custasse perder o projeto: continuaria a ser eu, com a minha vida, os meus afetos, a minha pessoa. Para ti, a pergunta abre o vazio, porque puseste tudo ali, e por isso a resposta parece ser nada. Mas esse nada não é verdade, é só o efeito de teres deixado tudo o resto atrofiar. Não há, de facto, um vazio por baixo da obra. Há uma vida inteira por reconstruir, partes de ti adormecidas, à espera de que voltes a elas.
 
@@ -123,7 +123,7 @@ Quero dizer-te uma coisa sobre o terror que esta pergunta levanta, porque ela co
 
 Repara, aliás, que tu existias antes desta obra. Houve uma versão de ti antes de a criares, com sonhos, interesses, relações, uma vida. Essa versão não era um vazio, era uma pessoa inteira. A obra não te criou, foi tu que a criaste, e por isso tu és anterior a ela, maior do que ela, capaz de existir sem ela, como já existias antes de ela ser. Lembrares-te de quem eras antes da obra é uma das formas de recuperar a certeza de que existes para além dela.
 
-Quero dizer-te uma coisa sobre este vazio, porque ela começa a transformá-lo. Tu existes para além do que crias. Esta é a verdade que a fusão esconde. Tu tens valor, identidade, existência, que não dependem da obra. Existias antes dela, e existirias depois dela. A obra é algo que crias, uma expressão de ti, mas não é tu. E descobrir o tu que existe para além da obra não é perder a obra. É recuperares-te a ti, que andavas perdida nela.
+E há uma verdade sobre esse vazio que, mal a vês, o desfaz por dentro. Tu existes para além do que crias. Esta é a verdade que a fusão esconde. Tu tens valor, identidade, existência, que não dependem da obra. Existias antes dela, e existirias depois dela. A obra é algo que crias, uma expressão de ti, mas não é tu. E descobrir o tu que existe para além da obra não é perder a obra. É recuperares-te a ti, que andavas perdida nela.
 
 E quero que vejas como esta fusão te torna refém, também, do medo de acabar. Toda a obra, todo o projeto, tem um fim possível: pode falhar, pode mudar, pode chegar ao seu termo natural. Mas se tu és a obra, então o fim da obra é o teu fim, e por isso vives com um terror de fundo, o de que ela acabe, que te faz incapaz de aceitar mudanças, de fechar ciclos, de deixar morrer o que tem de morrer para nascer outra coisa. Agarras-te à obra como quem se agarra à própria vida, e essa rigidez, esse medo do fim, prejudica não só a tua paz, mas a própria capacidade da obra de evoluir.
 
@@ -131,7 +131,7 @@ Não respondas já à pergunta de quem és sem o que crias. Mas deixa-a aberta. 
 
 ## 5. Quando a fusão leva ao esgotamento
 
-Tenho de parar o livro um momento, com seriedade. Porque há um ponto em que a fusão com a obra deixa de ser um padrão e passa a um esgotamento que pede cuidado.
+Preciso de baixar a voz aqui, e pedir-te toda a atenção. Porque há um ponto em que a fusão com a obra deixa de ser um padrão e passa a um esgotamento que pede cuidado.
 
 Se carregas tudo, sem soltar, sem desligar, há anos, há um custo que o corpo e a mente cobram. Se a tua paz depende inteiramente da obra, se cada problema dela te tira o sono, se vives numa ansiedade permanente ligada ao projeto, se não consegues descansar, nunca, porque não te consegues separar do que crias.
 
@@ -145,7 +145,7 @@ E quero nomear a armadilha de quem se fundiu com a obra. É que parar, descansar
 
 E quero dizer-te uma verdade que custa, mas que liberta. Se caíres, a obra cai contigo. É precisamente por estar tudo fundido em ti que o teu esgotamento é também o maior risco do projeto. Tu, que carregas tudo para o proteger, és, no teu limite, a sua maior fragilidade, porque uma obra que depende inteiramente de uma pessoa esgotada está a um passo de ruir com ela. Cuidar de ti, recuperar a fronteira, não é traíres a obra. É, paradoxalmente, a forma mais responsável de a proteger, porque uma criadora inteira e descansada sustenta o que uma criadora fundida e exausta deixa cair.
 
-Se reconheces, em ti, os sinais do esgotamento, este é o capítulo de que quero que te lembres. Para. Procura apoio. A tua obra não vale mais do que a tua saúde, do que a tua vida. E recuperar a fronteira entre ti e o que crias não é abandonar a obra. É a única forma de poderes, com saúde, continuar a criá-la.
+Se a empresa te trouxe ao limite e reconheces aqui os teus sinais, deixa que sejam estas as linhas que ficam contigo de todo o livro. Para. Procura apoio. A tua obra não vale mais do que a tua saúde, do que a tua vida. E recuperar a fronteira entre ti e o que crias não é abandonar a obra. É a única forma de poderes, com saúde, continuar a criá-la.
 
 ## 6. Continuar inteira sem segurar tudo
 
