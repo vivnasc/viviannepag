@@ -26,6 +26,7 @@ export function CartWidget() {
   const [processando, setProcessando] = useState(false);
   const [vista, setVista] = useState<'carrinho' | 'pago'>('carrinho');
   const [entregas, setEntregas] = useState<Entrega[]>([]);
+  const [packsPagos, setPacksPagos] = useState<{ slug: string; titulo: string }[]>([]);
   const [erro, setErro] = useState<string | null>(null);
 
   const upsells = useMemo(() => {
@@ -58,6 +59,10 @@ export function CartWidget() {
     const sufixoEn = isPt ? '' : '&lang=en';
     const lista = [...itens];
     const out: Entrega[] = [];
+    const packs: { slug: string; titulo: string }[] = [];
+    // URL same-origin (anexo) por ficheiro: descarrega de imediato sem abrir
+    // separador vazio (about:blank), seja produto avulso ou item de pack.
+    const linkDirecto = (s: string) => `/api/download-directo?slug=${s}&email=${encodeURIComponent(mail)}${sufixoEn}`;
     for (const it of lista) {
       try {
         await fetch('/api/compra', {
@@ -66,27 +71,22 @@ export function CartWidget() {
         });
       } catch {}
       if (it.slug.startsWith('pack-')) {
+        packs.push({ slug: it.slug, titulo: it.titulo });
         try {
           const r = await fetch('/api/download-pack', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, lang }) });
           const j = await r.json();
           if (r.ok && Array.isArray(j.ficheiros) && j.ficheiros.length) {
-            for (const f of j.ficheiros) out.push({ slug: f.slug, titulo: f.titulo, url: f.url ?? null });
+            for (const f of j.ficheiros) out.push({ slug: f.slug, titulo: f.titulo, url: f.url ? linkDirecto(f.slug) : null });
           } else { out.push({ slug: it.slug, titulo: it.titulo, url: null }); }
         } catch { out.push({ slug: it.slug, titulo: it.titulo, url: null }); }
       } else {
-        let url: string | null = null;
-        try {
-          const r = await fetch('/api/download', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, lang }) });
-          const j = await r.json();
-          if (r.ok && j.url) url = j.url;
-        } catch {}
-        if (!url) url = `/api/download-directo?slug=${it.slug}&email=${encodeURIComponent(mail)}${sufixoEn}`;
-        out.push({ slug: it.slug, titulo: it.titulo, url });
+        out.push({ slug: it.slug, titulo: it.titulo, url: linkDirecto(it.slug) });
       }
       try {
         await fetch('/api/email-compra', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: mail, slug: it.slug, titulo: it.titulo, lang }) });
       } catch {}
     }
+    setPacksPagos(packs);
     setEntregas(out);
     setProcessando(false);
     setVista('pago');
@@ -132,10 +132,26 @@ export function CartWidget() {
                     <p className="text-creme-2 text-sm">{isPt ? 'Pagamento confirmado. Os teus ficheiros estão abaixo e também vão para o teu email.' : 'Payment confirmed. Your files are below and were also sent to your email.'}</p>
                     <p className="text-creme-2/60 text-xs mt-2">{email}</p>
                   </div>
+                  {packsPagos.length > 0 && (
+                    <div className="flex flex-col gap-2 mb-3">
+                      {packsPagos.map((pk) => (
+                        <a
+                          key={pk.slug}
+                          href={`/api/download-zip?slug=${pk.slug}&email=${encodeURIComponent(email.trim().toLowerCase())}${isPt ? '' : '&lang=en'}`}
+                          download
+                          className="flex items-center justify-center gap-2 bg-ambar text-terra font-sans text-[0.88rem] font-semibold rounded-[12px] px-4 py-3 hover:bg-ocre transition-colors no-underline"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                          {isPt ? 'Descarregar tudo (ZIP)' : 'Download all (ZIP)'}
+                        </a>
+                      ))}
+                      <p className="text-creme-2/55 text-[0.75rem] text-center">{isPt ? 'ou ficheiro a ficheiro:' : 'or file by file:'}</p>
+                    </div>
+                  )}
                   <div className="flex flex-col gap-1.5">
                     {entregas.map((f) => (
                       f.url ? (
-                        <a key={f.slug} href={f.url} target="_blank" rel="noopener noreferrer" className="block bg-terra-2/50 hover:bg-ambar/20 rounded-[10px] px-4 py-2.5 text-creme-2 text-[0.85rem] no-underline transition-colors">↓ {f.titulo}</a>
+                        <a key={f.slug} href={f.url} download className="block bg-terra-2/50 hover:bg-ambar/20 rounded-[10px] px-4 py-2.5 text-creme-2 text-[0.85rem] no-underline transition-colors">↓ {f.titulo}</a>
                       ) : (
                         <span key={f.slug} className="block bg-terra-2/30 rounded-[10px] px-4 py-2.5 text-creme-2/50 text-[0.85rem] italic">{f.titulo} {isPt ? '(chega por email)' : '(coming by email)'}</span>
                       )

@@ -91,15 +91,7 @@ export function BotaoCompra({
       setDownloads([]);
       return;
     }
-    try {
-      const res = await fetch('/api/download', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ slug, lang }),
-      });
-      const json = await res.json();
-      if (res.ok && json.url) { setDownloadUrl(json.url); return; }
-    } catch {}
+    // Same-origin (anexo) para a descarga ser imediata, sem abrir separador vazio.
     setDownloadUrl(`/api/download-directo?slug=${slug}&email=${encodeURIComponent(email.trim().toLowerCase())}${sufixoEn}`);
   }
 
@@ -147,17 +139,24 @@ export function BotaoCompra({
         {pack ? (
           downloads && downloads.length ? (
             <div className="text-left">
+              <a
+                href={`/api/download-zip?slug=${slug}&email=${encodeURIComponent(email.trim().toLowerCase())}${sufixoEn}`}
+                download
+                className="flex items-center justify-center gap-2 bg-ambar text-terra font-sans text-[0.9rem] font-semibold rounded-[12px] px-5 py-3 mb-3 hover:bg-ocre transition-colors no-underline"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                {isPt ? 'Descarregar tudo (ZIP)' : 'Download all (ZIP)'}
+              </a>
               <p className="text-creme-2/70 text-xs mb-2 text-center">
-                {isPt ? `${downloads.length} ficheiros incluídos:` : `${downloads.length} files included:`}
+                {isPt ? `ou ficheiro a ficheiro — ${downloads.length} incluídos:` : `or file by file — ${downloads.length} included:`}
               </p>
               <div className="max-h-[220px] overflow-y-auto flex flex-col gap-1.5">
                 {downloads.map((f) => (
                   f.url ? (
                     <a
                       key={f.slug}
-                      href={f.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={`/api/download-directo?slug=${f.slug}&email=${encodeURIComponent(email.trim().toLowerCase())}${sufixoEn}`}
+                      download
                       className="block bg-terra-2/50 hover:bg-ambar/20 rounded-[8px] px-3 py-2 text-creme-2 text-[0.82rem] no-underline transition-colors"
                     >
                       ↓ {f.titulo}
@@ -175,8 +174,7 @@ export function BotaoCompra({
           )
         ) : downloadUrl ? <a
           href={downloadUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          download
           className="inline-block bg-ambar text-terra font-sans text-[0.92rem] font-medium tracking-[0.04em] rounded-[14px] px-6 py-3 hover:bg-ocre transition-colors no-underline"
         >
           {isPt ? 'Descarregar agora' : 'Download now'}
