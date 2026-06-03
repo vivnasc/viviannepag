@@ -25,11 +25,11 @@ I want to tell you right away, before anything else, that this is not vanity. It
 
 Because your perfection is an armor. You built it, without knowing it, to protect yourself from a real danger. You learned, somewhere, that failing came at a cost. A serious cost. And you made yourself flawless in order to be safe, because perfection was your way of avoiding a consequence that, one day, truly was dangerous.
 
-This book is different from others you may have read. Because what brought you here isn't only a pattern to understand. It is, very often, a response to something you lived through, an adaptation that kept you safe in a time when making a mistake had real consequences. And that deserves more than understanding. It deserves care. So, throughout these pages, I will tell you, plainly and without it being a failure, that perhaps you need not only to understand yourself, but to be supported.
+This book is different from others you may have read. Because what brought you here isn't only a pattern to understand. It is, very often, a response to something you lived through, an adaptation that kept you safe in a time when making a mistake had real consequences. And a wound born under that kind of danger deserves more than to be understood. It deserves care. So, throughout these pages, I will tell you, plainly and without it being a failure, that perhaps you need not only to understand yourself, but to be supported.
 
 And I'll tell you now where we are going, so you can read without your heart on edge. You can make a mistake and remain safe. You are no longer in the danger where a slip of yours cost dearly. The armor of perfection protected you back then, but today it tightens your chest at every typo, every delivery, every mirror, and you can, slowly, and perhaps with help, learn to set it down.
 
-Perhaps you recognize yourself in small things.
+Perhaps the armor reveals itself in small things, in slips so ordinary you never named them.
 
 In feeling a disproportionate anxiety in the face of the possibility of making a mistake, even a small one.
 
@@ -39,7 +39,7 @@ In experiencing a mistake, when it happens, not as a setback, but as a catastrop
 
 In being exhausted by a vigilance that never stops, the vigilance of someone who has to guarantee, at every instant, that she doesn't fail.
 
-They are all the same. Perfection as armor. The terror of making a mistake, which comes from a time when making a mistake cost dearly.
+They are all the same plate of the same armor. Perfection as armor. The terror of making a mistake, which comes from a time when making a mistake cost dearly.
 
 I want to show you how this perfection shows up in daily life, in things you may already take for who you are. You redo what was already fine, because it could be better, because it could have a hidden mistake you haven't yet seen. You delay handing things in, not out of laziness, but because while it isn't perfect, you don't let it go, and it's never perfect enough for your standard. You check, and you check again, and you check one more time, searching for the flaw you're certain is somewhere, lying in wait.
 
@@ -67,7 +67,7 @@ And that little girl did exactly what she had to do to come through unharmed. Sh
 
 But the armor did not come undone when the danger passed. It stayed. It became your way of being in the world. And today, as an adult, in a world where making a mistake no longer brings the consequence it once did, you continue to live as if it did. You remain flawless, vigilant, in panic in the face of failure, defended against a danger that no longer exists, but that your body continues to fear.
 
-I want you to see this clearly. Your perfection is not a defect of yours. It is an intelligent response to a real danger. You are not controlling by nature. You are a survivor, who learned to protect herself in the only way she could. And recognizing this is not excusing those who hurt you. It is honoring the child who found, in perfection, a way to be safe.
+I want you to see this as clearly as a notebook held up to the light, with no smudge to hide. Your perfection is not a defect of yours. It is an intelligent response to a real danger. You did not come into the world needing to check everything twice. You are a survivor, who learned to protect herself in the only way she could. And recognizing this is not excusing those who hurt you. It is honoring the child who found, in perfection, a way to be safe.
 
 I want to add a root you may recognize, because perfection is not always born from punishment. Sometimes it is born from conditional love. From a house where you were seen, praised, cherished, when you brought results, when you were the best, when you didn't fail. And where, without the results, without the excellence, you became invisible, or a disappointment. You learned, then, that love came through perfection, and that to fail was to risk losing love, not through punishment, but through the disappearance of affection.
 
@@ -81,7 +81,7 @@ It matters that you see where the terror of making a mistake came to be lodged, 
 
 That's why you so often tell yourself that it's absurd, that no one dies from a typo or from a less than perfect delivery, and even so the fear does not go down. It does not go down because it was not born from a reasoning. It was born from a memory the body keeps, ancient, that still treats each mistake as if it were the mistake that once brought the storm. And that memory is not dismantled by good arguments about proportion and common sense. It is relearned, slowly, by making mistakes in small ways and discovering, time after time, that this time no punishment came.
 
-I tell you this not to frighten you with the difficulty, but to lift off you one more burden of guilt: the guilt of not being able, simply by wishing it, to stop being afraid. It is not a lack of will. It is not weakness. It is the nature of a wound that lives in the body, and that therefore asks for a path that passes through the body, and often through hands that know how to accompany it, and not only through your good will to change.
+I tell you this not to frighten you with the difficulty, but to lift off you one more burden of guilt: the guilt of not being able, simply by wishing it, to stop being afraid. No amount of willing the alarm quiet will switch it off. It is not weakness. It is the nature of a wound that lives in the body, and that therefore asks for a path that passes through the body, and often through hands that know how to accompany it, and not only through your good will to change.
 
 ## 3. The armor of perfection
 
@@ -97,7 +97,7 @@ I want to show you something deeper. Perfection robs you of the possibility of b
 
 There is also a particular loneliness in this. The loneliness of someone who cannot share her mistakes, her doubts, her failures, with anyone. Of someone who must keep, always, the flawless facade, and who therefore carries alone everything she cannot show. Perfection is a solitary armor, because no one comes inside it, and you stay in there, alone, with only the weight of holding it up.
 
-I want you to feel the tiredness of this. The tiredness of an entire life of not being allowed to fail. The endless vigilance. The permanent panic. The impossibility of resting, of making a mistake, of being, simply, human. It is a deep exhaustion, and perhaps you already take it for normal, so used are you to living with your armor on.
+I want you to feel the tiredness of a guard who has never once been relieved of her post. The tiredness of an entire life of not being allowed to fail. The endless vigilance. The permanent panic. The impossibility of resting, of making a mistake, of being, simply, human. It is a deep exhaustion, and perhaps you already take it for normal, so used are you to living with your armor on.
 
 I want to go deeper into what perfection costs you, because the price is greater than it seems, and it is paid in silence.
 
@@ -121,7 +121,7 @@ Letting go of control a little is, therefore, part of this crossing. Not so you 
 
 ## 4. Who am I when I fail
 
-I'll leave a question here. Alone. Don't run from it.
+I'll set a single question down in the middle of the page, like a flaw you are not allowed to correct. Alone. Don't run from it.
 
 Who are you when you fail? When you aren't flawless? When you fail, simply, as any human being fails?
 
@@ -131,13 +131,13 @@ For you, this question touches the deepest fear, because your entire identity wa
 
 The shadow hiding here is your own human fallibility. The possibility of making a mistake, of not coping, of being, simply, human, with the flaws all humans have. That part of you, the one that can fail, terrifies you, because you associated failure with danger, and so you live fighting your own humanity, as if it were a threat lodged inside you.
 
-Notice how this imprisons you. You cannot allow yourself to be human. You cannot allow yourself the mistake, the doubt, the imperfection that everyone has. You demand of yourself a superhuman perfection, and punish yourself, with immense harshness, whenever you fall short of it. You have become, in the face of your own failure, the harshest judge there is, harsher than anyone who ever hurt you.
+Notice how this locks you inside the armor with no door out. You cannot allow yourself to be human. You cannot allow yourself the mistake, the doubt, the imperfection that everyone has. You demand of yourself a superhuman perfection, and punish yourself, with immense harshness, whenever you fall short of it. You have become, in the face of your own failure, the harshest judge there is, harsher than anyone who ever hurt you.
 
 And there is a cruelty in this that perhaps you don't see. You treat yourself the way that old danger treated you. You internalized the harshness, the judgment, the punishment in the face of failure, and you apply them to yourself, today, without anyone needing to. The danger from outside became a danger from within, and you continue to live under threat, now your own, your own armed guard against any slip of yours.
 
 I want to tell you something about this terror, because it is here that it begins to lose its force. Making a mistake does not make you unsafe, today. This is the truth your body has not yet learned. In the time when the armor was born, failing brought danger, and your terror was just, it was the only sensible response to that house. But today, in your adult life, a mistake is, most of the time, simply human. It does not bring the catastrophe your body anticipates. People make mistakes, and remain safe, loved, worthy. You can too. The danger of that time has passed, even though your nervous system keeps sounding the fire alarm at the smallest spark, as if the house were still burning.
 
-Don't answer the question of who you are when you fail just yet. It isn't answered with the head, and sometimes it needs more than a book. But leave it open. Because that is where the door is. On the day your body learns that failing is no longer dangerous, you stop needing the armor to be safe. And there, only there, can you begin to allow yourself to be human.
+Don't answer the question of who you are when you fail just yet. It isn't answered with the head, and sometimes it needs more than a book. But leave it open. Because that is the one crack in the armor through which freedom enters. On the day your body learns that failing is no longer dangerous, you stop needing the armor to be safe. And there, only there, can you begin to allow yourself to be human.
 
 And notice how this belief makes you strangely fragile, despite all your competence. Because if your worth depends on not failing, then any failure, however small, is a threat to your very worth. You cannot afford a single mistake, because a mistake, in your inner world, is not a detail, it's a crack in everything that holds you up. You live, therefore, always one mistake away from ceasing to have worth, and that fragility, hidden behind your apparent solidity, explains the permanent tension with which you live.
 
@@ -149,7 +149,7 @@ And there is another face of this same belief, which is what you do with the mis
 
 ## 5. Perhaps you need more than to understand
 
-I have to stop the book here. With all seriousness. This is the most important chapter, and it is different from everything else.
+I have to lay down my pen and stand still here, where the danger really lived. With all seriousness. This is the most important chapter, and it is different from everything else.
 
 Because what brought you here is not, most of the time, only a personality pattern. It is, very probably, a response to something you lived through. An adaptation to danger. And there is an enormous difference between a wound of character and a trauma response, and that difference changes what you need.
 
@@ -161,13 +161,13 @@ I want to name, plainly, what may lie beneath your panic about failing. If you g
 
 And I want to tell you this with all firmness, and with all tenderness, because it is precisely you, who cannot bear to fail, who finds it hardest to hear. This is not your fault, and it is not resolved by effort alone, nor only by understanding. If your terror of making a mistake is a trauma response, you deserve more than this book. You deserve the support of a professional, a psychologist, a therapist, someone trained to work not only your understanding, but your body, your nervous system, the memory of danger you carry.
 
-Seeking that help is not admitting that you failed. It is precisely the opposite. It is the most lucid and most courageous act you can have, that of caring for a wound that deserves to be cared for by trained hands. You, who can never fail, perhaps need, more than anyone, to learn that asking for help is not a failure, it is the wisest thing there is.
+Seeking that help is not admitting that you failed. It is the very reverse of a crack in the armor. It is the most lucid and most courageous act you can have, that of caring for a wound that deserves to be cared for by trained hands. You, who can never fail, perhaps need, more than anyone, to learn that asking for help is not a failure, it is the wisest thing there is.
 
 If you recognize, in your story, real danger, this is the chapter I want you to remember. Don't skip it, you who have the habit of jumping to the next level, to the next demand. The understanding of this book accompanies you. But there are wounds that ask for more than a well-done reading, and the terror of making a mistake, when it comes from a dangerous house, is perhaps one of them. Don't treat it as one more task to carry out perfectly. Treat it as a wound that deserves hands that know how to hold it.
 
 I want you to see how perfection keeps people at a distance, even though it seems the opposite. From the outside, your flawlessness commands respect, admiration. But it creates distance. Because someone who is always perfect is hard to reach, to know, to love up close. She does not show the fragility, the mistake, the doubt, the humanity that brings people closer. And people, faced with a facade without cracks, keep their distance, because there's no way in.
 
-And there is a particular loneliness in this. The loneliness of someone who cannot share her mistakes, her doubts, her fears, with anyone. Of someone who must keep, always, the appearance of someone who handles everything, and who therefore carries alone everything she cannot show. You are surrounded by people who admire you, and alone with the weight of holding up the image they admire. Perfection is a solitary armor, because no one comes inside it.
+And there is a particular loneliness sealed inside the armor. The loneliness of someone who cannot share her mistakes, her doubts, her fears, with anyone. Of someone who must keep, always, the appearance of someone who handles everything, and who therefore carries alone everything she cannot show. You are surrounded by people who admire you, and alone with the weight of holding up the image they admire. Perfection is a solitary armor, because no one comes inside it.
 
 I want to show you, too, what your perfection does to those who love you, or to those who work with you. They live with the measuring stick you apply to yourself, applied also to them, or at least felt. They feel that it's never good enough, that there's always something to improve, that mistakes are not tolerated. And that, even if you don't say it, weighs, because to live beside someone who doesn't allow herself to make mistakes is to live afraid of making mistakes too. Without meaning to, your armor makes the air around you tense, watched, demanding.
 
@@ -193,7 +193,7 @@ If your perfection is an armor against an old danger, then there is a new truth 
 
 Read this slowly, because your body does not yet believe it. For you, making a mistake and danger are the same thing, fused since childhood. And I propose to separate them. Today, in your adult life, making a mistake and danger no longer go together. You can fail, and nothing terrible happens. You can not be equal to the task, and remain safe, loved, worthy. The link between failure and danger, which was real in your past, is no longer real in your present.
 
-I want to be honest. This separation is not made simply by convincing yourself of it. If your response is a trauma one, your body will keep sounding the alarm in the face of failure, however much your head knows there's no danger. So this path, very often, is made with help, with someone to accompany you in teaching your nervous system, slowly, that the danger has passed. Needing that is not weakness. It is what this wound asks for.
+I want to be honest, the way the checking part of you wishes everyone would be. This separation is not made simply by convincing yourself of it. If your response is a trauma one, your body will keep sounding the alarm in the face of failure, however much your head knows there's no danger. So this path, very often, is made with help, with someone to accompany you in teaching your nervous system, slowly, that the danger has passed. Needing that is not weakness. It is what this wound asks for.
 
 But there is a path, and it does not pass through one more effort of will, it passes through giving your body new experiences that contradict, slowly, the old lesson. Your nervous system learned that failure equals danger in a concrete house, in concrete situations. It will unlearn in the same way: in concrete situations, small ones, in which failure stops bringing punishment. You don't argue with the body. You show it.
 
@@ -219,7 +219,7 @@ It will cost you, because the old voice, the one that points to the failure and 
 
 ## 7. Allowing myself to be human
 
-There is a verb for this crossing. Allow.
+There is one verb that takes off the armor, and it is the one your whole life was built against. Allow.
 
 To allow yourself to make mistakes. To allow yourself to be human. To allow yourself the fallibility everyone has, and that you forbade yourself in the name of safety.
 
@@ -235,7 +235,7 @@ But it is precisely there, in that allowing yourself the failure despite the ter
 
 I want to tell you something about perfection that may set you free. The perfection you seek does not exist, in any human being. Everyone makes mistakes, fails, falls short. Those who seem flawless either hide their failings, or you don't see them. By demanding of yourself a perfection no one has, you demand the impossible, and you condemn yourself to permanent failure, because the goal, being impossible, is never reached. To allow yourself to be human is, also, to surrender to the fact that perfection is not a real goal, it is an armor, and that setting it down is not giving up on being good, it is ceasing to demand of yourself what is not human.
 
-I won't give you a method, and this path, more than others, is often made with help. But I'll leave you the principle. Allow yourself to make mistakes. Treat your mistakes with the gentleness you would treat the mistakes of someone you love. And discover, slowly, and perhaps with hands to accompany you, that being human, fallible, imperfect, does not take away your safety, it gives you back the life that the armor of perfection was taking from you.
+I won't give you a method, and this path, more than others, is often made with help. A method would only be one more thing to perform flawlessly. So I leave you the principle instead. Allow yourself to make mistakes. Treat your mistakes with the gentleness you would treat the mistakes of someone you love. And discover, slowly, and perhaps with hands to accompany you, that being human, fallible, imperfect, does not take away your safety, it gives you back the life that the armor of perfection was taking from you.
 
 I want to speak to you of what opens up when making a mistake stops being danger, because it is a different life from the one you have.
 
@@ -245,7 +245,7 @@ The possibility of being loved as you are opens up. Because you stop hiding behi
 
 And above all, rest opens up. The rest of not having to be flawless at every instant. Of being able to lower your guard. Of living without the endless vigilance of someone who cannot fail. It is a rest you perhaps never knew, the rest of someone who sets down, at last, an armor she had been carrying since childhood, and discovers how light the body is without it.
 
-And I want you to see that allowing yourself to make mistakes does not make you less competent, less careful, less good at what you do. Your ability stays there, intact. What changes is that it stops coming from terror, and starts coming from enjoyment. You keep doing things well, but because you want to, and not because you're afraid. And what you do from enjoyment is, in the end, better, freer, more your own, than what you did from fear, because fear shrinks, and enjoyment expands.
+And I want you to see that allowing yourself to make mistakes does not make you less competent, less careful, less good at what you do. The competence the world admires in you does not fall away with the armor; it stays whole. What changes is that it stops coming from terror, and starts coming from enjoyment. You keep doing things well, but because you want to, and not because you're afraid. And what you do from enjoyment is, in the end, better, freer, more your own, than what you did from fear, because fear shrinks, and enjoyment expands.
 
 I want you to take one thing with you, about those who watch you, if there are those who learn by looking at you. If they see you live in perfection, in panic of mistakes, punishing yourself for each failure, they learn that this is how one ought to be, and it's likely they'll put on the same armor, and live the same terror. The most freeing thing you can do for those who watch you is not to give them the example of flawlessness. It is to show them a woman who makes mistakes, and treats herself with gentleness, and remains worthy. Sometimes a woman learns to allow herself to make mistakes, at last, not only for herself, but so as not to condemn those she loves to the same terror of failing.
 
@@ -269,7 +269,7 @@ You know that perhaps you need more than to understand, and that seeking help is
 
 You know that you can make a mistake and remain safe, and that the verb is to allow, to allow yourself to be human.
 
-I want to leave you an image.
+I want to leave you with one picture to carry past the last page.
 
 Imagine someone who lived through a war, and who learned to be always on alert, always in armor, always ready for danger, because lowering her guard, there, could cost her life. And the war ended, long ago, but she still goes about in armor, vigilant, in panic, because her body never knew the war was over.
 

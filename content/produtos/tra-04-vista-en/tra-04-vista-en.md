@@ -27,7 +27,7 @@ And there is, underneath, a question of legitimacy, and sometimes something deep
 
 Notice the contradiction this leaves you in, because it is cruel. On one hand, you desire to be seen, recognized, for your work to reach, for your voice to count. That desire is legitimate and it is healthy, we all want, deep down, to be seen at our best. On the other hand, that is exactly what terrifies you. And you live between these two forces, wanting and fearing, drawing closer and pulling back, in a conflict that exhausts and paralyzes you. It is not that you don't want the light. It is that you want it and fear it at the same time, and fear, being older and stronger, almost always wins, leaving the desire unfulfilled and the frustration growing.
 
-This book is not about personal marketing, nor about how to gain confidence on stage. I've come to look at something else, something deeper. At the fear of being seen. At the reason why you hide from a visibility your work deserves. And at the possibility of showing yourself without the terror that today paralyzes you, and of letting reach the world what you have, at last, to give.
+This book is not about personal marketing, nor about how to gain confidence on stage. I've come to stand where the light frightens you and to look at what keeps you in the shadow. At the fear of being seen. At the reason why you hide from a visibility your work deserves. And at the possibility of showing yourself without the terror that today paralyzes you, and of letting reach the world what you have, at last, to give.
 
 And I'll leave you the direction right at the entrance, so you can read without the tightness of someone who fears what is coming. You can be seen without losing yourself. Showing your work, your voice, your worth, doesn't take anything from you, doesn't expose you to the danger you fear. And the fear of being seen, which hides you, comes from a wound we are going to look at, and which, if it is intense, also deserves the support of someone who knows how to walk alongside it.
 
@@ -35,7 +35,7 @@ I want you to distinguish, from the start, the woman others see from the woman w
 
 This book hasn't come to tell you that you have to become extroverted, that you have to love stages, that you have to live exposed. It is not about changing who you are. It is about giving you back a choice that fear took from you: that of being able to show your work when you want to, of occupying the light when it is yours, of being seen without a terror forcing you to hide. Whether you are, by nature, more reserved or more expansive, you deserve for that to be a choice of yours, and not an imposition of fear.
 
-Maybe you recognize yourself in small things.
+Maybe you catch sight of yourself in the small ways you step back from the light.
 
 In having something valuable to show, and in hiding it, postponing it, keeping it, out of fear of exposing yourself, telling yourself that it isn't ready yet when, in truth, what holds you back is fear.
 
@@ -45,7 +45,7 @@ In letting others, less capable, occupy the visibility, the recognition, the sta
 
 In preferring anonymity, the shadow, the hidden work, even when it costs you opportunities, recognition, the life you could have, and even when, deep down, you wished to be seen.
 
-They are all the same thing. The fear of being seen. The hiding from a visibility your worth deserves.
+Underneath each one, the same shadow waits. The fear of being seen. The hiding from a visibility your worth deserves.
 
 I want to show you how this shows up day to day, in things you perhaps already take for temperament. The possibility arises of presenting your work, of speaking at an event, of showing yourself, and you find a thousand reasons to refuse, to pass it to someone else, to stay in the wings. You have something created, ready, good, and you postpone it, keep it, you say it isn't perfect yet, when the truth is that you are afraid to show it. You see an opportunity that would require exposing yourself, and you let it pass, with a relief mixed with a frustration you don't quite know how to name.
 
@@ -71,13 +71,13 @@ Notice what you learned. That being seen is dangerous, or shameful. That exposur
 
 Maybe the humiliation was a defining moment, the kind that stays: a time when you exposed yourself, when you showed something of yourself with pride or with enthusiasm, and you were cut down, mocked, ridiculed, in front of others. And the body kept that shame so deeply that, ever since, being seen and being humiliated got stuck together, and the mere possibility of showing yourself makes the body relive, in anticipation, that old shame. You don't, perhaps, consciously remember how much that marked you. But your fear remembers for you, and protects you, by hiding you, from a humiliation that has already passed.
 
-I want you to see this without guilt. Your fear of being seen is not weakness, nor a lack of confidence that is solved with a few tips. It is a wound, that of someone who was judged, exposed, or humiliated, on showing herself, and who learned to hide to protect herself. You are not shy by temperament. You are someone who learned that being seen hurt, and who hides so as not to hurt again.
+Look at this under a gentle light, without guilt. Your fear of being seen is not weakness, nor a lack of confidence that is solved with a few tips. It is a wound, that of someone who was judged, exposed, or humiliated, on showing herself, and who learned to hide to protect herself. You did not draw back from the light because that is your nature. You are someone who learned that being seen hurt, and who hides so as not to hurt again.
 
 And I want to show you in what place of the body this fear lodges, because it is there that everything is decided. This fear is not only in your head, in what you think. It is in the body, in a reaction that fires before thought. That is why it isn't enough to tell yourself that there is no danger, that nobody will mock you, that your work is good. The fear doesn't obey reason, because it isn't born from it, it is born from a body memory, an old one, that treats visibility as a threat. And a body memory isn't undone with arguments, it is relearned slowly, with new experiences, in which the body discovers that it showed itself and was not humiliated, time after time, until it believes it.
 
 ## 3. Hiding costs me the life I could have
 
-There is something you need to see. Hiding protects you from judgment, yes. But it costs you the life you could have.
+Let me bring one thing into the light, the one your hiding keeps in the dark. Hiding protects you from judgment, yes. But it costs you the life you could have.
 
 Notice the price. What isn't shown isn't known, isn't chosen, isn't recognized. By hiding your work, your voice, your worth, you pass by opportunities, recognition, impact, that would be yours if you showed yourself. Your avoided visibility is a closed door to everything that would require being seen.
 
@@ -101,11 +101,11 @@ And it costs you, perhaps, the most painful thing of all: watching others live w
 
 I want you to see, too, that hiding doesn't spare you, after all, from suffering. You traded the fear of being seen for the frustration of not being. You thought hiding protected you, but the hiding place has its own suffering: that of the life unlived, of the worth unshown, of the frustration of someone who knows she is capable and sees herself stopped. There is, after all, no option without pain. There is the pain of risking being seen, which passes and teaches, and the pain of hiding, which stays and corrodes. And between the two, perhaps it is worth choosing the one that, at least, takes you somewhere.
 
-I want you to feel the weight of this. The weight of having something to give and hiding it. Of living short of yourself, in the shadow, out of fear of the light. Of watching pass the life you could have, for not daring to be seen. It is a deep frustration, and perhaps you already take it for modesty, or for temperament, when it is, deep down, a wound that robs you of what you could be.
+Feel for a moment how heavy the shadow becomes. The weight of having something to give and hiding it. Of living short of yourself, in the shadow, out of fear of the light. Of watching pass the life you could have, for not daring to be seen. It is a deep frustration, and perhaps you already take it for modesty, or for temperament, when it is, deep down, a wound that robs you of what you could be.
 
 ## 4. Who am I if I show myself
 
-I'll leave a question here. On its own. Don't run from it.
+I'll set a question here, in plain view, where you can't look away from it. On its own. Don't run from it.
 
 Who would you be if you showed yourself? If you occupied the light, instead of the shadow? If you let the world see your work, your voice, your worth?
 
@@ -115,7 +115,7 @@ For you, this question lights up the old alarm at once. Because showing yourself
 
 And the shadow that hides here is the fear of exposing yourself and being judged. That, by showing yourself, they will see you, and criticize you, and discover something in you that makes you deserve the shame you fear. The fear is not only of being seen. It is of what you imagine they will see, and of the judgment you imagine will come.
 
-Notice how this imprisons you. You don't show yourself, even having worth, because showing yourself awakens the terror of judgment. You hide, you shrink, you leave the light to others, not because you don't deserve the light, but because you are afraid of what it brings. And you live, this way, short of yourself, in the shadow, bound to a fear that robs you of the life your worth would deserve.
+See how this keeps you behind the curtain. You don't show yourself, even having worth, because showing yourself awakens the terror of judgment. You hide, you shrink, you leave the light to others, not because you don't deserve the light, but because you are afraid of what it brings. And you live, this way, short of yourself, in the shadow, bound to a fear that robs you of the life your worth would deserve.
 
 And I want to stop here for a moment, with care. Because if the fear of being seen is very intense, if it causes you an anguish that tightens, panic attacks, an avoidance that seriously limits your life, this may be more than shyness. It may be social anxiety, and that has a name, and it has help. It is not temperament, it is not weakness, it is not something that is solved only by effort. A professional can help you, and seeking one is not an exaggeration, it is taking care of something that deserves to be cared for.
 
@@ -123,11 +123,11 @@ I want to bring to light a truth that makes this fear begin to shrink. Being see
 
 And I want to distinguish for you something that frees. What frightens you is not, in fact, being seen. It is being judged. Do you notice? If you knew, for certain, that on showing yourself you would be welcomed, recognized, well received, you would have no fear at all of showing yourself. The fear is not of visibility itself, it is of the judgment you imagine it brings. And that judgment, most of the time, is much greater in your imagination than in reality. People don't look at you with the cruel magnifying glass with which you imagine yourself observed. They look distracted, busy with themselves, and most don't even notice, and of those who notice, most don't judge, and of those who judge, the judgment speaks more of them than of you.
 
-Don't answer the question of who you would be if you showed yourself just yet. But leave it open. Because it is there that the door lies. On the day your fear of being seen stops governing you, you stop hiding from a light you deserve. And then, only then, can you show, at last, what you have to give.
+Don't answer the question of who you would be if you showed yourself just yet. But leave it open. Because that is the door out of the shadow. On the day your fear of being seen stops governing you, you stop hiding from a light you deserve. And then, only then, can you show, at last, what you have to give.
 
 ## 5. When the fear is social anxiety
 
-I have to stop the book here. With seriousness. Because there is a border between the fear of being seen and an anxiety that calls for help, and it is important for you to know which side you are on.
+I have to step out of the shadow of the book and speak plainly here. With seriousness. Because there is a border between the fear of being seen and an anxiety that calls for help, and it is important for you to know which side you are on.
 
 On one side, there is a dread of exposing yourself, a discomfort with visibility, a shyness that shrinks you. It hurts, but it has a path, and the path passes through understanding, and through risking, slowly, showing yourself.
 
@@ -151,13 +151,13 @@ If your fear of being seen hides you, then there is a new truth waiting for you.
 
 Read this slowly. For you, being seen seems to risk losing yourself, exposing yourself, being at the mercy of judgment. As if visibility took something from you, made you vulnerable in a dangerous way, undressed you before the gaze of others.
 
-And I propose the opposite to you. Being seen takes nothing from you, if it is by your choice, of what you choose to show. You can show your work, your voice, your worth, without exposing yourself entirely, without being at the mercy, without losing yourself. Being seen, in the sense that matters, is letting reach the world what you have to give, and that doesn't diminish you, it multiplies you.
+And I turn the light the other way for you. Being seen takes nothing from you, if it is by your choice, of what you choose to show. You can show your work, your voice, your worth, without exposing yourself entirely, without being at the mercy, without losing yourself. Being seen, in the sense that matters, is letting reach the world what you have to give, and that doesn't diminish you, it multiplies you.
 
 Notice the word I chose: multiplies you. Because what you hide stays trapped in you, limited to you, and what you show reaches many, repeats itself, echoes, lives beyond you. To show is not to spend yourself, it is to multiply yourself, it is to make your worth, instead of staying closed, spread and touch. Fear tells you that by showing yourself you expose yourself, you spend yourself, you risk losing. But the truth is the opposite: by showing yourself, what you have grows, reaches, stays, and you, far from losing yourself, find yourself enlarged in what you managed to share.
 
 And I want you to understand that control, here, is more in your hands than the fear lets you see. You choose what you show and what you keep, where you show yourself and to whom, when you go forward and when you pull back. To show yourself is not to hand yourself over, defenseless, to the gaze of everyone. It is to share, with intention, what you decide to share, always keeping the helm. And knowing this changes the experience: it is no longer a leap in the dark, at the mercy of judgment, it is a gesture of yours, controlled, in which you decide each step. The visibility you fear is the one you don't control; the one I propose to you is the one you steer.
 
-Let me put it another way. There is a difference between being seen and being exposed. To be exposed is to be at the mercy of the gaze of others, without control, undressed, vulnerable, as you perhaps were, one day. To be seen, by choice, is to show what you choose to show, your work, your worth, with the control of someone who decides what she shares. They are different things, and your fear confuses them. Exposure hurt you. But being seen, by choice, is something else, and it can be safe, and good.
+Let me hold it to a different light. There is a difference between being seen and being exposed. To be exposed is to be at the mercy of the gaze of others, without control, undressed, vulnerable, as you perhaps were, one day. To be seen, by choice, is to show what you choose to show, your work, your worth, with the control of someone who decides what she shares. They are different things, and your fear confuses them. Exposure hurt you. But being seen, by choice, is something else, and it can be safe, and good.
 
 Notice this distinction, because it gives you back the power. When you were humiliated, you didn't choose to expose yourself, or you exposed yourself trusting and were betrayed in that trust. You were without control, at the mercy. But showing your work today, by your decision, is the opposite of that: it is you who decides what, when, to whom, and how. You hold the reins. And that difference, between being exposed without control and showing yourself by choice, changes everything, because what terrifies you is the first, and what I propose to you is the second. You can be seen while keeping the helm in your hands, and that is not the danger you lived, it is a new way, yours, of showing yourself.
 
@@ -179,7 +179,7 @@ The awakening, when it comes, is a surprise. It is the time you show yourself, w
 
 ## 7. To show what I have to give
 
-There is a destination for this crossing. To show what you have to give.
+This crossing has a place it is leading you, out of the shadow and into the light. To show what you have to give.
 
 And I want to show you what this means, with care.
 
@@ -201,7 +201,7 @@ Think of who would benefit from what you hide. There are people, somewhere, who 
 
 I want also to undo the confusion between hiding and being humble. True humility doesn't hide worth, it recognizes it with simplicity and shares it with generosity. To hide what you have to give is not humility, it is fear disguised as virtue. And the world, which applauds discretion, helps you, without meaning to, keep the disguise, making you feel that hiding is a quality. It is not. It is a wound. And confusing it with humility only makes it harder to heal, because it makes you defend, as virtue, that which robs you of life.
 
-And there is an enormous liberation in this. When you show yourself, you stop living in the frustration of someone who has something to give and hides it. You stop seeing others occupy the light that could be yours. You stop living short of yourself, in the shadow. And you begin to live the life your worth deserves, with your work reaching the world, your voice being heard, your worth being seen.
+And stepping into the light frees something enormous in you. When you show yourself, you stop living in the frustration of someone who has something to give and hides it. You stop seeing others occupy the light that could be yours. You stop living short of yourself, in the shadow. And you begin to live the life your worth deserves, with your work reaching the world, your voice being heard, your worth being seen.
 
 It will cost you, because the old voice, the one that orders you to hide, is carved deep, and it will appear each time you dare to show yourself, with its usual warning. It will tell you who are you to expose yourself, they'll mock you, better not to risk it. The task is not to silence that voice in a single gesture, it is to stop doing what it orders. To hear it say hide, and to answer it, slowly, what I have deserves to be seen, I'll show it. And each time you show yourself despite it, and you are not humiliated, you weaken the old voice, and you strengthen a new one, more your own, which knows that you have a right to the light.
 
@@ -209,13 +209,13 @@ And I want to leave you with something, about who sees you, above all if there a
 
 And I want you to see what opens up when you stop hiding. Your work opens up, which had been kept, and you discover that it reaches people, that it touches, that it matters. Your voice opens up, which had been stifled, and you discover that it has weight, that it is heard, that it makes a difference. Opportunities open up that were closed to whoever doesn't show herself. And, above all, the coherence with yourself opens up: the joy of being, on the outside, the size you always were on the inside, of ceasing to betray yourself out of fear, of living, at last, up to what you have to give.
 
-I won't give you a method of exposure, because this book is not about techniques. And if your fear is serious anxiety, remember that the path passes through help. But I leave you the principle. What you have to give deserves to be seen. Show it, in small ways first, in safety, and discover, slowly, that being seen takes nothing from you, and that the world, and you, gain when you let reach what you have to offer.
+I won't give you a method of exposure, because this book is not about techniques. And if your fear is serious anxiety, remember that the path passes through help. But I leave you the one light to steer by. What you have to give deserves to be seen. Show it, in small ways first, in safety, and discover, slowly, that being seen takes nothing from you, and that the world, and you, gain when you let reach what you have to offer.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things. And, when the fear is intense, understanding opens the door to seeking the help that can treat it.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, lose a lifetime's fear. But it changes enough for you to stop confusing your hiding place with modesty, and your fear with temperament.
+The shadow doesn't lift all at once. It doesn't make you, tomorrow, lose a lifetime's fear. But it changes enough for you to stop confusing your hiding place with modesty, and your fear with temperament.
 
 Now you know that you hide from a visibility your worth deserves, and that this is not only shyness, it is a wound dressed, at times, as modesty.
 
@@ -237,7 +237,7 @@ Imagine someone with a beautiful voice, a rare one, capable of moving others, wh
 
 The crossing is to open the door. Slowly, in safety, and perhaps with someone who helps you do it. To sing, first, for one trusted person. Then for more. And to discover that your voice doesn't bring the mockery you feared, but the recognition you deserve, and that the world, after all, needed to hear it. Because what you have to give deserves to leave the closed room.
 
-I want you to know what to expect from this crossing, so that you don't live it as one more test. There will be setbacks. Days when you show yourself, and days when you go back to hiding completely, in panic, as always. And the old voice will use each setback to tell you you see, it's not for you. Don't believe it. Setbacks are part of it. Nobody undoes all at once a lifetime's fear. It is undone little by little, and each time you show yourself and nothing bad happens, a new proof is left, and it is from those proofs, added together, that the courage to be seen, slowly, is built.
+I want you to know what to expect from this crossing, so that you don't live it as one more test. There will be setbacks. Days when you show yourself, and days when you go back to hiding completely, in panic, as always. And the old voice will use each setback to tell you you see, it's not for you. Don't believe it. Slipping back into the shadow is part of the way out of it. Nobody undoes all at once a lifetime's fear. It is undone little by little, and each time you show yourself and nothing bad happens, a new proof is left, and it is from those proofs, added together, that the courage to be seen, slowly, is built.
 
 And there is one thing I want to leave said before everything else, without going around it. What you have to give is precious, and the world is poorer without it. The woman who hid, for having been humiliated one day, did what she could to protect herself, and that is worthy of tenderness. But her worth was never the problem, the problem was the humiliation that taught her to hide it. There is nothing to correct in what she has to give. There is only one thing to remind her, slowly, until she believes it: you are no longer in that place where showing yourself hurt, and what you keep deserves, at last, to reach the world.
 
