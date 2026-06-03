@@ -11,14 +11,14 @@ import { gerarCaptionInstagram, gerarMetricoolCSV } from '@/lib/estudio-export';
 import { TIPO_LABELS, PALETAS, type ConteudoDia, type Mundo } from '@/lib/estudio-conteudo';
 
 type Jornada = { entrada?: string; aprofundar?: string; complemento?: string; fio?: string };
-type VeuDia = ConteudoDia & { diaSemana?: string };
+type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string };
 type Coleccao = {
   id: string;
   slug: string;
   title: string;
   brief: string;
   dias: VeuDia[];
-  theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; palavra?: string; subtitulo?: string; estacao?: string; musica?: string; jornada?: Jornada | null };
+  theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; territorio?: string; estacao?: string; musica?: string; jornada?: Jornada | null };
   created_at: string;
 };
 
@@ -74,8 +74,8 @@ export default function CarrosselPage() {
             <button onClick={() => setSel(null)} className="text-[0.7rem] tracking-wide opacity-70 hover:opacity-100">← voltar à grelha</button>
             <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
           </div>
-          <h1 className="text-3xl font-serif tracking-[0.12em] mb-1">{sel.theme?.palavra ?? sel.title}</h1>
-          {sel.theme?.subtitulo && <p className="text-[0.9rem] italic opacity-80 mb-1">{sel.theme.subtitulo}</p>}
+          <p className="text-[0.6rem] uppercase tracking-[0.3em] opacity-50 mb-1">Território da semana</p>
+          <h1 className="text-2xl font-serif italic mb-2">{sel.theme?.territorio ?? sel.title}</h1>
           <p className="text-[0.72rem] opacity-55 mb-4">{getColecao(sel.theme.universo).nome} · {sel.theme?.estacao ?? ''} {sel.theme?.musica ? `· ♪ ${sel.theme.musica}` : ''}</p>
 
           {jornada && (jornada.entrada || jornada.fio) && (
@@ -95,12 +95,12 @@ export default function CarrosselPage() {
               const tl = TIPO_LABELS[dia.tipo];
               return (
                 <Card key={dia.dia} className="p-4">
-                  <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-2 mb-2">
                     <Pill variant="info">{dia.diaSemana ?? `Dia ${dia.dia}`}</Pill>
-                    <span className="text-[0.7rem] opacity-80">{tl?.emoji} {tl?.label}</span>
+                    {dia.palavra && <span className="font-serif tracking-[0.12em]" style={{ color: PALETAS[dia.mundo].destaque }}>{dia.palavra}</span>}
                     {dia.produtoRelacionado && <Pill variant="feito">→ {dia.produtoRelacionado}</Pill>}
                   </div>
-                  <h3 className="text-lg font-medium mb-3">{dia.titulo}</h3>
+                  {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-3">{dia.subtitulo}</p>}
 
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
@@ -109,9 +109,8 @@ export default function CarrosselPage() {
                           key={i}
                           slide={s}
                           mundo={dia.mundo}
-                          palavra={sel.theme?.palavra}
-                          subtitulo={sel.theme?.subtitulo}
-                          diaSemana={dia.diaSemana}
+                          palavra={dia.palavra}
+                          subtitulo={dia.subtitulo}
                         />
                       ))}
                     </div>
@@ -162,9 +161,10 @@ export default function CarrosselPage() {
                     <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-60">Sem. {w.semana} · {w.mes} · {w.estacao}</span>
                     <span className="text-[0.6rem] px-1.5 py-0.5 rounded" style={{ background: p.destaque + '33', color: p.destaque }}>{getColecao(w.universo).nome}</span>
                   </div>
-                  <h3 className="text-lg font-serif tracking-[0.12em] mb-1" style={{ color: p.destaque }}>{w.palavra}</h3>
-                  <p className="text-[0.7rem] italic opacity-75 leading-snug mb-2">{w.subtitulo}</p>
-                  <p className="text-[0.62rem] opacity-45 leading-snug mb-3">♪ {w.musica}</p>
+                  <p className="text-[0.55rem] uppercase tracking-[0.25em] opacity-45 mb-0.5">Território</p>
+                  <h3 className="text-base font-serif italic leading-snug mb-1" style={{ color: p.destaque }}>{w.tema}</h3>
+                  <p className="text-[0.7rem] italic opacity-70 leading-snug mb-2">{w.subtitulo}</p>
+                  <p className="text-[0.6rem] opacity-40 leading-snug mb-3">7 carrosséis · 6 slides · ♪ {w.musica}</p>
                   <div className="flex items-center gap-2">
                     {col ? (
                       <>

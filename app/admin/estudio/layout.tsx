@@ -7,6 +7,7 @@ const NAV = [
   { href: '/admin/estudio', label: 'Painel', desc: 'workflow 30 dias' },
   { href: '/admin/estudio/renderizados', label: 'Renderizados', desc: 'PNGs finais' },
   { href: '/admin/estudio/biblioteca', label: 'Biblioteca', desc: 'fontes + jobs' },
+  { href: '/admin/carrossel', label: 'Carrosséis 7 Véus', desc: 'tema semanal + loja' },
 ];
 
 export default function EstudioLayout({ children }: { children: React.ReactNode }) {

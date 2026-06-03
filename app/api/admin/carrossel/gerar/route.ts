@@ -22,22 +22,19 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as {
     semana?: number;
     universo?: ColecaoId;
-    palavra?: string;
-    subtitulo?: string;
+    tema?: string;
     brief?: string;
     numDias?: number;
   };
 
   const seed = body.semana ? semanaSeed(body.semana) : undefined;
   const universo = (body.universo ?? seed?.universo) as ColecaoId | undefined;
-  const palavra = body.palavra ?? seed?.palavra;
-  const subtitulo = body.subtitulo ?? seed?.subtitulo ?? '';
   const brief = body.brief ?? seed?.brief;
   const estacao = seed?.estacao ?? 'inverno';
   const musica = seed?.musica ?? 'instrumental contemplativo (estilo Ancient Ground)';
-  const tema = seed?.tema ?? palavra;
-  if (!universo || !palavra || !brief) {
-    return NextResponse.json({ erro: 'falta semana ou universo/palavra/brief' }, { status: 400 });
+  const tema = body.tema ?? seed?.tema ?? seed?.palavra;
+  if (!universo || !tema || !brief) {
+    return NextResponse.json({ erro: 'falta semana ou universo/tema/brief' }, { status: 400 });
   }
 
   const DIAS_SEMANA = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'];
@@ -50,30 +47,52 @@ export async function POST(req: Request) {
   const relevantes = produtosRelevantes(catalogo, { universo, brief, n: 14 });
   const ecossistema = ecossistemaPrompt(relevantes);
 
+  // Palavras-destaque JA usadas em qualquer coleccao — nunca repetir (regra
+  // dela: as palavras nao se repetem entre dias, semanas ou carrosseis).
+  const supabaseRead = getSupabaseAdmin();
+  const { data: existentes } = await supabaseRead.from('carousel_collections').select('dias');
+  const usadas = new Set<string>();
+  for (const c of existentes ?? []) {
+    for (const d of (Array.isArray(c.dias) ? c.dias : []) as Array<{ palavra?: unknown }>) {
+      if (typeof d?.palavra === 'string' && d.palavra.trim()) usadas.add(d.palavra.trim().toUpperCase());
+    }
+  }
+  const palavrasUsadas = Array.from(usadas);
+
   const SYSTEM = `Es a voz dos Carrosseis dos 7 Veus da Vivianne dos Santos (psicologia transpessoal, constelacao familiar). Conteudo contemplativo, partilhavel, que segue o ano (estacoes e datas).
 REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
-- Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". A palavra da semana lidera tudo.
+- Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
 - ACENTUACAO OBRIGATORIA: escreve em portugues europeu com TODOS os acentos correctos e completos (á, à, ã, â, ç, é, ê, í, ó, ô, õ, ú). A palavra-capa tambem acentuada (ex.: "GESTAÇÃO", nunca "GESTACAO"; "FÉ", nunca "FE"). Texto sem acentos e ERRADO.
 
 ${ecossistema}
 
 ${directivaImagem(universo)}
 
-ESTRUTURA DA SEMANA (formato 7 Veus, ${numDias} dias, segunda a domingo):
-PALAVRA da semana: "${palavra}" · subtitulo: "${subtitulo}" · estacao: ${estacao} · musica instrumental: ${musica}.
-Cada dia e um carrossel curto e contemplativo que toca a PALAVRA por um angulo diferente. Slides por dia (4-6):
-- 'capa': a PALAVRA em destaque (texto = a palavra "${palavra}" em maiusculas; titulo = o subtitulo poetico).
-- 'conteudo' PROSA: reflexao em prosa curta (titulo do slide = "PROSA").
-- 'conteudo' POETICO: frase poetica e espacada (titulo = "POETICO").
-- 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRATICA").
-- 'citacao' "Sabias que...": uma micro-sabedoria (titulo = "Sabias que...").
-- 'cta': fecho GENEROSO — convida a um gesto interior. So quando o tema o pedir mesmo, aponta com leveza a UM produto do ecossistema como passo seguinte natural (nunca anuncio).
+ESTRUTURA DA SEMANA (formato 7 Veus, ${numDias} dias = ${numDias} carrosseis):
+TERRITORIO da semana: "${tema}" — ${brief}. Universo: ${col.nome}. Estacao: ${estacao}. Musica instrumental: ${musica}.
+NAO ha palavra de semana: cada DIA e um carrossel proprio com a SUA palavra-destaque unica.
 
-COMBINA A LOJA COM ALMA:
-- O conteudo entrega valor a serio; o produto e o passo seguinte para quem quer aprofundar.
-- No MAXIMO 1-2 dias por semana mencionam produto, sempre no fecho. Os restantes sao puro valor.
-- Pensa a semana como jornada subtil: ebook de entrada -> pack que aprofunda. Usa slugs/links EXACTOS do ecossistema, nunca inventes.
+PALAVRA-DESTAQUE (a regra mais importante para ela):
+- Cada dia tem UMA palavra-destaque: 1 so palavra, substantivo forte, em MAIUSCULAS e ACENTUADA (ex.: TRAVESSIA, REPOUSO, MISTERIO->MISTÉRIO, RAIZ, FÉ), mais um subtitulo poetico curto em minusculas que a desdobra (ex.: "o escuro que ensina o que a luz nao alcanca").
+- As palavras NUNCA se repetem: nem entre os dias desta semana, nem com qualquer palavra ja usada antes.
+- PALAVRAS JA USADAS (PROIBIDAS, nunca repitas nenhuma): ${palavrasUsadas.join(', ') || '(nenhuma ainda)'}.
+- As palavras do dia orbitam o territorio da semana por angulos diferentes; cada uma fresca e unica.
+
+SLIDES DE CADA DIA (6 slides, nesta ordem):
+1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico). Fundo escuro/editorial.
+2) 'conteudo' PROSA: reflexao em prosa curta, intima (titulo = "PROSA"). Base clara.
+3) 'conteudo' POETICO: frase poetica espacada com quebras de linha (titulo = "POÉTICO"). Base clara.
+4) 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRÁTICA" ou "HÁBITO DA SEMANA"). Base clara.
+5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
+6) 'cta': fecho GENEROSO numa oferta (titulo = nome da oferta; texto = convite; destaque = tagline curta). Fundo escuro/editorial.
+
+CTA — roda entre estas ofertas conforme o tema (nunca anuncio, sempre convite):
+- "Espelho gratuito" — 7 perguntas, 2 minutos; nao para te diagnosticar, para te devolver a ti.
+- "Musica contemplativa" — para ficar contigo, sem pressa, so presenca.
+- "Comunidade" — mulheres que continuam, sem mascara, sem prova.
+- Um PRODUTO da loja (ebook/pack do ecossistema, slug/link exactos) — SO quando o tema o pede mesmo, como passo seguinte natural.
+No MAXIMO 1-2 dias da semana fecham num produto da loja; os restantes fecham em ofertas generosas/gratuitas.
 
 DEVOLVE APENAS JSON valido, sem texto a volta:
 {
@@ -82,23 +101,24 @@ DEVOLVE APENAS JSON valido, sem texto a volta:
     {
       "dia": 1,
       "diaSemana": "segunda",
-      "tipo": "citacao-visual | carrossel-educativo | carrossel-dica | carrossel-produto | reel-gancho",
-      "plataforma": "instagram | tiktok | ambas",
+      "palavra": "PALAVRA-DESTAQUE-UNICA-DO-DIA",
+      "subtitulo": "subtitulo poetico do dia (minusculas)",
+      "tipo": "citacao-visual",
+      "plataforma": "ambas",
       "titulo": "o angulo do dia",
       "descricao": "1 frase",
       "hashtags": ["#..."],
       "produtoRelacionado": "slug-ou-vazio",
       "horario": "11:30",
       "slides": [
-        { "tipo": "capa|conteudo|citacao|cta", "titulo": "PROSA|POETICO|PRATICA|Sabias que...|subtitulo", "texto": "...", "destaque": "so citacao/cta", "notaVisual": "EN editorial boho contemplativo, SEM pessoas/rostos/texto", "fundoClaro": true }
-      ],
-      "reelScript": { "gancho": "...", "corpo": ["..."], "cta": "...", "musica": "${musica}", "duracao": "30-45s" }
+        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|nome-da-oferta", "texto": "...", "destaque": "so cta: tagline curta", "notaVisual": "EN editorial boho contemplativo, SEM pessoas/rostos/texto" }
+      ]
     }
   ]
 }
-Notas: a maioria sao carrosseis contemplativos; inclui pelo menos 1 'reel-gancho' (com reelScript, sem slides). A capa de cada dia mantem a coesao da PALAVRA. A musica de cada dia = a musica da semana.`;
+Notas: 6 slides por dia. A palavra-destaque do dia aparece na capa e da coesao ao carrossel. Slides do meio (prosa/poetico/pratica) sao base clara; capa e cta sao fundo escuro.`;
 
-  const userPrompt = `Palavra da semana: "${palavra}" (${subtitulo}). Universo: ${col.nome}. Brief: ${brief}\nGera os ${numDias} dias (segunda a domingo) agora.`;
+  const userPrompt = `Territorio da semana: "${tema}" — ${brief}. Universo: ${col.nome}. Estacao: ${estacao}.\nGera ${numDias} dias (carrosseis), cada um com a sua palavra-destaque UNICA — nunca repetidas entre si nem com a lista de proibidas. Agora.`;
 
   let texto = '';
   try {
@@ -141,6 +161,8 @@ Notas: a maioria sao carrosseis contemplativos; inclui pelo menos 1 'reel-gancho
       ...dia,
       dia: typeof dia.dia === 'number' ? dia.dia : i + 1,
       diaSemana: typeof dia.diaSemana === 'string' ? dia.diaSemana : DIAS_SEMANA[i % 7],
+      palavra: typeof dia.palavra === 'string' ? (dia.palavra as string).toUpperCase() : undefined,
+      subtitulo: typeof dia.subtitulo === 'string' ? dia.subtitulo : undefined,
       mundo,
       plataforma: dia.plataforma ?? 'ambas',
       horario: dia.horario ?? '11:30',
@@ -158,7 +180,7 @@ Notas: a maioria sao carrosseis contemplativos; inclui pelo menos 1 'reel-gancho
   const { data, error } = await supabase
     .from('carousel_collections')
     .upsert(
-      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null, palavra, subtitulo, estacao, musica, jornada: parsed.jornada ?? null } },
+      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null, territorio: tema, estacao, musica, jornada: parsed.jornada ?? null } },
       { onConflict: 'slug' },
     )
     .select()
