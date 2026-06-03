@@ -25,7 +25,7 @@ I want to tell you right away, before anything else, that this is not only shyne
 
 Because you learned, somewhere, that existing brought consequences. That taking up space, being seen, standing out, in your home, was dangerous. And you made yourself small, not out of modesty, but to protect yourself. Shrinking yourself was your way of being safe, of not lighting the danger that existing, there, could bring.
 
-This book is different. Because what makes you shrink is not only a trait to correct. It is, very often, a response to something you lived through. An adaptation to a place where being seen was risky. And that deserves more than understanding. So, throughout these pages, I will repeat to you something that is hard for someone who learned not to weigh: understanding why you make yourself small may not be enough, and perhaps you need someone to help you take up, at last, your place.
+This book is different. Because what makes you shrink is not only a trait to correct. It is, very often, a response to something you lived through. An adaptation to a place where being seen was risky. And a wound that taught you to take up no space asks for more than understanding alone. So, throughout these pages, I will repeat to you something that is hard for someone who learned not to weigh: understanding why you make yourself small may not be enough, and perhaps you need someone to help you take up, at last, your place.
 
 And I'll give you the horizon now, so you can read without the old tightness of not knowing where this is going. You can take up space without that bringing danger. You are no longer in that house where existing was risky. Shrinking yourself protected you back then, but today it only erases you, and you can, slowly, and perhaps with help, learn to exist, at last, at your full size.
 
@@ -33,7 +33,7 @@ I want you to see, right away, the gulf between the woman others think they see 
 
 This book does not come to tell you that you have to become exuberant, talkative, the center of all attention. It is not about changing your temperament. It is about giving you back a choice that fear took from you: that of being able to be seen when you want, of taking up your place when it is yours, of existing at your full size without an alarm forcing you to shrink. Whether you are, by nature, quieter or more expansive, you deserve for that to be a choice of yours, and not an imposition of fear. And it is that freedom, and not a new temperament, that these pages come to offer you.
 
-Perhaps you recognize yourself in small things.
+Perhaps you find yourself in the smallest of gestures, the ones you barely notice taking up.
 
 In apologizing for things that are not your fault, as if your mere presence were, in itself, a bother.
 
@@ -43,7 +43,7 @@ In having difficulty giving your opinion, taking up your place, being seen, even
 
 In feeling a physical discomfort, almost an alarm, when you draw attention, when you're the center of attention, when you take up too much space.
 
-They are all the same. The making yourself small. The old fear of the consequence of existing. The certainty, engraved early, that your presence is, somehow, a bother you have to minimize.
+They all shrink down to one thing. The making yourself small. The old fear of the consequence of existing. The certainty, engraved early, that your presence is, somehow, a bother you have to minimize.
 
 I want to show you how the fear of bothering disguises itself as ordinary gestures, which you take for simply your way of being. In a meeting, you have an idea, and you keep quiet, because speaking would mean drawing attention, and drawing attention sets off a discomfort the idea isn't worth. Someone treats you badly, and instead of defending yourself, you shrink, you think maybe you overreacted, you apologize for something that was done to you. You enter a room, and you immediately look for the corner, the discreet spot, the place from which you won't be noticed. You receive a compliment, and instead of taking it in, you deflect it, minimize it, you're almost ashamed of it, because being seen, even for good, bothers you.
 
@@ -73,9 +73,9 @@ But the adaptation did not come undone when the danger passed. It stayed. And to
 
 I want you to see where this reflex of shrinking lives, because knowing where it lives explains why it isn't enough to want to stop having it. The fear of taking up space is not only in your memory, in what you remember. It is in your body, in a place deeper than words. When a girl learns, early, that being seen is dangerous, her body engraves that warning in the nervous system, below consciousness, in a register that does not erase simply by being understood. That's why, today, your shrinking in the face of visibility does not pass through a decision. It happens before you think, in a tightness, in a recoil, in a desire to disappear, because it is your body reacting, and not your reason choosing.
 
-That's why you so often tell yourself that it's absurd, that no one is going to harm you for taking up space, and even so the fear does not obey. It does not obey because it is not born from reasoning. It is born from a body memory, ancient, that continues to treat visibility as a threat to survival. And that memory, the one that makes your chest tighten when someone looks at you, does not yield to arguments. It is learned again, slowly, through new experiences, repeated, in which the body discovers, time after time, that this time it was seen and the danger did not come. I tell you this not to frighten you with the difficulty, but to lift off you the guilt of not being able, simply by wishing it, to stop being afraid. It is not a lack of will. It is the nature of a wound that lives in the body, and that therefore asks for a path that passes through the body, and often through hands that know how to accompany it.
+That's why you so often tell yourself that it's absurd, that no one is going to harm you for taking up space, and even so the fear does not obey. It does not obey because it is not born from reasoning. It is born from a body memory, ancient, that continues to treat visibility as a threat to survival. And that memory, the one that makes your chest tighten when someone looks at you, does not yield to arguments. It is learned again, slowly, through new experiences, repeated, in which the body discovers, time after time, that this time it was seen and the danger did not come. I tell you this not to frighten you with the difficulty, but to lift off you the guilt of not being able, simply by wishing it, to stop being afraid. The corner you keep returning to is not chosen by your will. It is the nature of a wound that lives in the body, and that therefore asks for a path that passes through the body, and often through hands that know how to accompany it.
 
-I want you to see this clearly. Your making yourself small is not a defect, nor a lack of confidence that can be resolved with a few self-esteem tips. It was the most intelligent way you found to not be a target, in a place where being noticed put you at risk. You are not shy by temperament. You are a survivor, who learned to disappear in order to be safe. And recognizing this is honoring the child who found, in smallness, a way to survive.
+I want you to see this without shrinking from it. Your making yourself small is not a defect, nor a lack of confidence that can be resolved with a few self-esteem tips. It was the most intelligent way you found to not be a target, in a place where being noticed put you at risk. The corner was never your nature, it was your shelter. You are a survivor, who learned to disappear in order to be safe. And recognizing this is honoring the child who found, in smallness, a way to survive.
 
 I want to add a root you may recognize, because smallness is not always born from physical danger. Sometimes it is born from having been eclipsed. From having grown up in the shadow of someone who took up all the space, a father, a mother, a sibling, whose presence left no room for yours. Where, for there to be peace, you had to erase yourself, not to compete for attention, not to shine so as not to offend someone who couldn't bear to be outshone. And you learned to make yourself small not because existing brought violence, but because it brought jealousy, resentment, the withdrawal of affection, from someone who needed always to be the greatest.
 
@@ -87,11 +87,11 @@ In any of these roots, the lesson is similar: your size is a problem, your prese
 
 ## 3. Shrinking myself no longer protects me
 
-There is something you need to see. The smallness that saved you, in the past, no longer protects you today. It only erases you.
+There is something about your smallness you have not yet let yourself see. The smallness that saved you, in the past, no longer protects you today. It only erases you.
 
 Notice. In the time of danger, shrinking made sense. It made you invisible to what could hurt you. It was a real, effective, intelligent protection. But today, in your adult life, in most situations, there is no longer that danger. And shrinking no longer protects you from anything. It only keeps you from living, from being seen, from taking up your place.
 
-And there is an enormous cost in this. It costs you your presence. Because to live shrunken is to live at half speed, without showing yourself, without asserting yourself, without letting the world see who you are. You pass through life like a shadow, present but not seen, there but almost absent, and everything you could be, show, give the world, stays contained, shrunken, unlived.
+And the space you refuse to take up is paid for at a steep price. It costs you your presence. Because to live shrunken is to live at half speed, without showing yourself, without asserting yourself, without letting the world see who you are. You pass through life like a shadow, present but not seen, there but almost absent, and everything you could be, show, give the world, stays contained, shrunken, unlived.
 
 It costs you opportunities. Because what is not seen is not chosen, not invited, not considered. By making yourself invisible, you pass beside things that would be yours if you showed yourself, if you took up your space, if you let yourself be seen. Your smallness doesn't only protect you from danger, it also deprives you of everything that would require being seen.
 
@@ -111,11 +111,11 @@ It costs you recognition. Because what is not shown is not recognized. You do, a
 
 It costs you the love you could receive whole. Because someone who hides is never loved completely, only for the part she lets be seen, which is small. People love what they know, and you don't make yourself known, you shrink, you hide your size, and so you end up with a love that never reaches all of you, because all of you you never show. And there is a deep sadness in this: being loved for a reduced version of yourself, and never knowing whether you would be loved whole, because whole you never risked being.
 
-I want you to feel the tiredness of this. The tiredness of the permanent vigilance of not bothering. The effort of always shrinking. The weight of apologizing for existing, day after day. It is a deep exhaustion, that of someone who can never, simply, take up her place in the world, and perhaps you already take it for normal, so used are you to disappearing.
+I want you to feel the weight of taking up so little. The tiredness of the permanent vigilance of not bothering. The effort of always shrinking. The weight of apologizing for existing, day after day. It is a deep exhaustion, that of someone who can never, simply, take up her place in the world, and perhaps you already take it for normal, so used are you to disappearing.
 
 ## 4. Who am I when I stop shrinking myself
 
-I'll leave a question here. Alone. Don't run from it.
+I'll set a question down here, in the open, where you cannot make it small. Alone. Don't run from it.
 
 Who are you when you stop shrinking yourself? When you take up your space? When you are seen, at your real size?
 
@@ -125,11 +125,11 @@ For you, this question touches a trapdoor, because beneath it lies the terror of
 
 And the shadow hiding here is visibility. Being seen. Taking up space. Existing at your size, in plain sight of everyone. That terrifies you, because it was by being seen that you were, one day, the target of danger. And you'd rather have invisibility, even if it erases you, than expose yourself again to being noticed, and perhaps, hurt.
 
-Notice how this imprisons you. You can't show yourself, assert yourself, stand out, even when you wish to, even when you would have every right, because being seen sets off the old alarm of danger. You live containing yourself, shrinking yourself, erasing yourself, not because you have nothing to show, but because you're afraid of what happens when you show yourself.
+Notice how this confines you to the corner. You can't show yourself, assert yourself, stand out, even when you wish to, even when you would have every right, because being seen sets off the old alarm of danger. You live containing yourself, shrinking yourself, erasing yourself, not because you have nothing to show, but because you're afraid of what happens when you show yourself.
 
 And there is a sadness only of someone who makes herself invisible, and I want to name it. It is that of knowing, deep down, that there is more in you than what you let be seen. That you have a voice, ideas, a light, a presence, that the world never came to know, because you hid it out of fear. And sometimes, in rare moments, you feel that larger person wanting to come out, asking to exist, and you push her back inside, by reflex, by terror. To live this way, knowing that you are more than you show and not letting yourself be it, is a silent form of mourning, the mourning of a life at your full size that you postpone every day, afraid to live it.
 
-And there is an enormous fragility in this. Because a person who cannot be seen cannot, truly, live. She cannot assert herself, take up her place, leave her mark on the world. She is always at half, always hidden, always smaller than she is. And all her potential, her voice, her presence, stays unused, compressed, waiting for a safety she does not allow herself.
+And making yourself this small leaves you strangely fragile. Because a person who cannot be seen cannot, truly, live. She cannot assert herself, take up her place, leave her mark on the world. She is always at half, always hidden, always smaller than she is. And all her potential, her voice, her presence, stays unused, compressed, waiting for a safety she does not allow herself.
 
 Notice how this invisibility, which you learned in order to protect yourself, also leaves you defenseless. Someone who erases herself does not assert herself, and someone who does not assert herself is more easily run over, ignored, passed over. You learned to disappear so as not to be a target, but your invisibility makes you, in another way, an easy target: the one who always gives way, who never complains, who accepts the worst place because she doesn't dare take another. And so the shrinking, which promised safety, ends up exposing you to a different kind of harm, that of being treated as if you counted for less, precisely because you make yourself count for less. To exist, to take up your place, to have a voice, is also a way of protecting yourself, healthier than disappearing.
 
@@ -141,13 +141,13 @@ And there is a hidden cruelty in making yourself small, that perhaps you have ne
 
 And notice how this belief makes you strangely absent from your own life. You are not the protagonist of anything, not even of your own story. You are always on the margin, watching, letting others take the stage that was also yours. The decisions, the places, the opportunities, pass beside you, and you let them pass, because to grab them would mean taking up space, and taking up space terrifies you. You live, this way, a smaller life than the one you would have, not from a lack of capacity, but from a fear that confines you to the shadow, and that robs you of the lead role in your own existence.
 
-Don't answer the question of who you are when you stop shrinking yourself just yet. It isn't deciphered by thinking, and there are those who can only live it with someone beside them holding their hand. But leave it open. Because that is where the door is. On the day your body learns that being seen, today, is no longer danger, you stop having to shrink yourself in order to be safe. And there, only there, can you begin to take up, at last, your space.
+Don't answer the question of who you are when you stop shrinking yourself just yet. It isn't deciphered by thinking, and there are those who can only live it with someone beside them holding their hand. But leave it open. Because that open question is the very space you are afraid to take up. On the day your body learns that being seen, today, is no longer danger, you stop having to shrink yourself in order to be safe. And there, only there, can you begin to take up, at last, your space.
 
 ## 5. Perhaps you need more than to understand
 
-I have to stop the book here. With all seriousness. Because what makes you shrink is not, most of the time, only shyness. It is, very probably, a response to something you lived through, and that changes what you need.
+I have to make this book go still, here, and take up your full attention. With all seriousness. Because what makes you shrink is not, most of the time, only shyness. It is, very probably, a response to something you lived through, and that changes what you need.
 
-If you learned to make yourself small because, in your home, existing brought real danger, then your shrinking is not a trait. It is a trauma response. An adaptation to the threat. And a trauma response is not treated only by understanding, nor by gaining confidence with a few techniques. It lives in the body, in the nervous system, in the alarm that goes off when you are seen.
+If you learned to make yourself small because, in your home, existing brought real danger, then your shrinking is not a trait. Your smallness is a trauma response. An adaptation to the threat. And a trauma response is not treated only by understanding, nor by gaining confidence with a few techniques. It lives in the body, in the nervous system, in the alarm that goes off when you are seen.
 
 I want to name, plainly, what may live beneath this habit of yours of disappearing. If there was, in your story, violence, abuse, unpredictability, an environment where drawing attention made you a target, then your making yourself small is a serious wound, and it deserves to be cared for with support.
 
@@ -157,7 +157,7 @@ Seeking that help does not expose you to the danger you fear. It is, on the cont
 
 And I want to tell you something with all firmness and all tenderness: if your shrinking comes from violence, from abuse, from a place where existing put you in real danger, this is not your fault, and it is not resolved by effort alone, nor by reading a book, however much it accompanies you. You deserve the support of someone trained to work not only your understanding, but your body, the alarm that goes off when you show yourself, the memory of danger you carry engraved deep. And seeking that support is not giving yourself an importance you don't deserve, nor bothering anyone with your pain. It is the most lucid care you can have for a wound you deserve, at last, to see heal.
 
-I want to separate two things for you, because knowing which is yours decides the path you need. A shyness of temperament is worked through by understanding: you see the pattern, you understand the origin, and that, in time, helps to change it. A fear of existing born of trauma is something else. It does not live only in the head, it lives in the body, in the nervous system, in the alarm that goes off, below consciousness, when you are seen. And a wound like that, of someone who had to disappear, asks for more than understanding. It needs time, the body, a safe relationship where the nervous system relearns, slowly, that existing is no longer the danger it was. That, alone, is rarely achieved. It is done with accompaniment.
+I want to separate two things for you, because knowing which is yours decides the path you need. A shyness of temperament is worked through by understanding: you see the pattern, you understand the origin, and that, in time, helps to change it. A fear of existing born of trauma is something else. It does not live only in the head, it lives in the body, in the nervous system, in the alarm that goes off, below consciousness, when you are seen. And a wound like that, of someone who had to disappear, asks for more than understanding. It needs time, the body, a safe relationship where the nervous system relearns, slowly, that existing is no longer the danger it was. Alone, in the corner where you learned to hide, that is rarely achieved. It is done with someone beside you, accompanying the slow taking up of your space.
 
 And there is a beauty kept in this, for someone who learned that being seen hurts, and I want you to see it. The helping relationship can be, for you, one of the first places where you experience being seen safely. Where you take up space, talk about yourself, are the center of someone's attention, and nothing bad happens. Where your presence does not bother, it is welcomed, it is expected. For someone who learned that being seen is danger, a space where being seen is safe, and even cared for, can be, in itself, deeply reparative, because it undoes, in practice, the old equation between existing and being at risk.
 
@@ -169,19 +169,19 @@ If your smallness is a defense against an old danger, then there is a new truth 
 
 Notice how you exist today. Apologizing. Not always with words, but with your whole posture. Shrunken, contained, justifying your presence, as if taking up space were something you have to apologize for, to explain, to make up for by not weighing.
 
-And I propose the opposite. Existing without justification. Taking up your space like someone who has a right to it, simply, without apologizing, without explaining yourself, without shrinking. As any person takes up their place in the world, by existing, and not by earning it or excusing it.
+And I propose the very thing your body learned to fear. Existing without justification. Taking up your space like someone who has a right to it, simply, without apologizing, without explaining yourself, without shrinking. As any person takes up their place in the world, by existing, and not by earning it or excusing it.
 
 Notice how other people, the ones who don't carry this wound, simply take up their place. They speak when they have something to say, they sit where they please, they ask for what they need, without ceremony, without apology, without alarm. It isn't arrogance, it's the normal thing: existing at your full size, without having to justify it. And that normal thing, which costs them nothing, seems to you a presumption, because your measuring stick is calibrated for invisibility. What you have to learn is not to be larger than others. It is only to allow yourself the same thing they allow themselves without thinking: existing, in plain sight, without asking forgiveness for it.
 
 Because you have a right to exist, to be seen, to take up space, exactly like any person. That right does not have to be earned, nor justified, nor compensated for. It is yours, for being. And an entire life apologizing for it comes from a time when, in fact, your existence was treated as a bother, but that was the error of that place, not a truth about your right to be here.
 
-I want to be honest. If yours is a trauma wound, this change is not made simply by convincing yourself of it. Your body will keep sounding the alarm when you take up space, however much your head knows there's no danger. So this path, very often, is made with help, with someone to accompany you in teaching your system, slowly, that being seen, today, is safe.
+I want to take up space with the truth, plainly. If yours is a trauma wound, this change is not made simply by convincing yourself of it. Your body will keep sounding the alarm when you take up space, however much your head knows there's no danger. So this path, very often, is made with help, with someone to accompany you in teaching your system, slowly, that being seen, today, is safe.
 
 But there are gestures of presence you can already risk, in a small way and with care. You can begin by taking up a little more space, in a small way. Giving your opinion, once. Letting pass, without your customary apology, something that wasn't your fault. Letting yourself be seen, in a small moment, instead of shrinking by reflex. And noticing what happens, outside and inside your chest.
 
 Outside, almost certainly, nothing of the danger you fear. Inside, the alarm, the desire to shrink again, to apologize, to disappear. And to stay with that, without shrinking, is to give your body a new piece of evidence. That you took up space, and remained safe. That being seen, this time, did not bring the danger of before.
 
-I want to warn you of a reaction, so you don't take it for a sign that you erred. The first time you take up more space, even in a small thing, the alarm will likely rise strong, out of proportion, as if you had done something serious. You will feel an almost physical desire to retreat, to apologize, to shrink again, to repair the presumption. That is not a sign that you erred. It is your old system going off, treating this small gesture as if it were the danger of long ago. Don't obey it right away. Leave the space taken up, stay with the discomfort, and give your body the chance to discover that, this time, no danger came.
+I want to warn you of a reaction, so you don't take it for a sign that you erred. The first time you take up more space, even in a small thing, the alarm will likely rise strong, out of proportion, as if you had done something serious. You will feel an almost physical desire to retreat, to apologize, to shrink again, to repair the presumption. That is not a sign that you erred. It is your old system going off, treating this small gesture as if it were the danger of long ago. Don't shrink back to obey it. Leave the space taken up, stay with the discomfort, and give your body the chance to discover that, this time, no danger came.
 
 And I want you to choose well where you begin, because it matters. Don't begin with the most hostile place, with the most dangerous person, with the situation that frightens you most. Begin where it's safe, with those who wish you well, in small gestures of presence that would hardly bring any bad reaction. It is not cheating. It is giving your body the best conditions to learn the new truth, instead of exposing it, right from the start, to the confirmation of the old fear. There is time, afterward, for the harder places. First, the body needs evidence that taking up space can go well.
 
@@ -195,7 +195,7 @@ I want you to see what opens up when existing stops being danger. Your voice ope
 
 ## 7. Taking up my space
 
-There is a verb for this crossing. To take up.
+There is one verb that names this whole crossing, and it is the very thing you learned not to do. To take up.
 
 To take up your space. Your place in the world. The space that is yours for existing, and that you grew used to ceding, to shrinking, to excusing.
 
@@ -221,13 +221,13 @@ And there is a joy waiting for you, on the other side of this fear of bothering.
 
 And I want to leave you a thought, to take from these pages. You do not have to deserve your place by being small, agreeable, invisible. Your place is not a prize you earn by taking up little. It is a right you have for existing, today, now, at your full size, with all your voice and all your presence, simply for being, and for being no longer in that place where existing cost dearly.
 
-I don't leave you a recipe for ceasing to shrink yourself, and this path is, very often, made with hands to accompany you. But I leave you the principle. Take up your space, in a small way, first. Let yourself be seen. Stop apologizing for existing. And discover, slowly, and perhaps with hands to accompany you, that existing, today, is no longer danger, and that you have a right to your place in the world, exactly like any person.
+I don't leave you a recipe for ceasing to shrink yourself, and this path is, very often, made with hands to accompany you. But I leave you the principle to take up. Take up your space, in a small way, first. Let yourself be seen. Stop apologizing for existing. And discover, slowly, and perhaps with hands to accompany you, that existing, today, is no longer danger, and that you have a right to your place in the world, exactly like any person.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things. But, for someone who learned to disappear, understanding can stay halfway, and to keep that from you would be to leave you alone again with your smallness.
 
-It doesn't change everything all at once. It does not make you, tomorrow, take up a space you ceded your whole life. But it changes enough so that you stop judging yourself for shyness, and begin to understand that your making yourself small is not a defect, it is a wound.
+It doesn't unfold a lifetime of smallness all at once. It does not make you, tomorrow, take up a space you ceded your whole life. But it changes enough so that you stop judging yourself for shyness, and begin to understand that your making yourself small is not a defect, it is a wound.
 
 Now you know that you make yourself small, and that this is not only shyness, it is a defense.
 
@@ -243,17 +243,17 @@ You know that you can exist without justifying yourself, and that the verb is to
 
 And you know, now, that your size was never the problem, that being seen is not a crime, and that you have a right to your place in the world exactly like any person, for existing, without having to earn it or excuse it. And that on the other side of this fear is a life at your full size, with your voice and your presence whole, waiting to be, at last, lived.
 
-I want to leave you an image.
+I want to leave you with an image to hold, one that takes up room in you.
 
 Imagine someone who grew up in a place where any movement could draw danger, and who learned to stay still, shrunken, in the corner, not to breathe loudly, to make herself invisible, because that was how she survived. And who grew up, and left that place, but stays still in the corner, not breathing loudly, because her body never knew it could already move.
 
 The crossing is your body learning that it can already take up space. That it can already move, speak loudly, be seen, exist at its full size. That the dangerous place is behind you, and that the world, today, does not attack you for existing. Relearning to move at your full size is not easy, and there are bodies that manage it only with someone beside them. But on the other side of smallness is a whole life, at your real size, waiting for you.
 
-I want you to know what to expect from this crossing, so you don't live it as one more test you have to be perfect at. There will be setbacks. Days when you take up your space, and days when you shrink yourself completely again, apologizing for existing, as always. And your old voice will tell you it isn't worth it, that being seen really is dangerous, that it's safer the way you always were, in the corner. Don't believe it at first. The times when you shrink again do not erase the road traveled, they are part of it. No one undoes all at once a smallness built over a whole lifetime. It is undone back and forth, one gesture of presence at a time, and each time you take up space and nothing bad happens, a new piece of evidence stays in the body, and it is from that evidence, accumulated, that safety, slowly, is reborn.
+I want you to know what to expect from this crossing, so you don't live it as one more test you have to be perfect at. There will be setbacks. Days when you take up your space, and days when you shrink yourself completely again, apologizing for existing, as always. And your old voice will tell you it isn't worth it, that being seen really is dangerous, that it's safer the way you always were, in the corner. Don't shrink back into believing it. The times when you shrink again do not erase the road traveled, they are part of it. No one undoes all at once a smallness built over a whole lifetime. It is undone back and forth, one gesture of presence at a time, and each time you take up space and nothing bad happens, a new piece of evidence stays in the body, and it is from that evidence, accumulated, that safety, slowly, is reborn.
 
 And I want to speak to you of those who watch you, if there are eyes that learn to exist by seeing you exist, children, people close to you. If they see you live erased, apologizing for existing, always ceding your place, they learn that this is how one ought to be, and it's likely they'll shrink too, that they'll live the same fear of taking up space. The most freeing thing you can do for those who watch you is not to give them the example of the discreet woman who never bothers anyone. It is to show them a woman who takes up her place, who lets herself be seen, who exists at her full size without apologizing. Sometimes a woman learns to take up her space, at last, not only for herself, but so as not to condemn those she loves to the same smallness.
 
-And there is one last thing, simple, that I need to leave you before I close. You were not too much. The girl who made herself small in order to survive did what she had to do, and she did it well. There was nothing wrong with her size, her light, her presence. The error was in the place that didn't know how to contain her, that told her to erase herself instead of celebrating her. There is nothing to correct in her. There is only one thing to say to her, slowly, time after time, until the body believes it: it has passed, you can exist now, your size was never the problem.
+And there is one last thing, simple, that I need to leave you before I close. You were not too much. The girl who made herself small in order to survive did what she had to do, and she did it well. There was nothing wrong with her size, her light, her presence. The error was in the place that didn't know how to contain her, that told her to erase herself instead of celebrating her. Her size was never too much to take up; there is nothing in her to make smaller. There is only one thing to say to her, slowly, time after time, until the body believes it: it has passed, you can exist now, your size was never the problem.
 
 You know, deep down, the sentence that holds up everything I have told you here. I can take up space without creating danger.
 

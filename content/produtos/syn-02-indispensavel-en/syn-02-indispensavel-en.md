@@ -41,7 +41,7 @@ This book will not teach you to give less in order to hold him. I didn't come to
 
 I came to show you something you may never have seen. That being needed is not being loved. And that you confused the two so long ago that you don't even notice anymore.
 
-I'll tell you the direction now, so you can read in peace. You can be chosen without making yourself indispensable. You can be loved for who you are, and not for what you do. And the fear that sets you to doing so much, the fear of being left, is not cured by doing more. It's cured another way.
+Let me set the destination down in front of you now, so you can read without bracing for it. You can be chosen without making yourself indispensable. You can be loved for who you are, and not for what you do. And the fear that sets you to doing so much, the fear of being left, is not cured by doing more. It's cured another way.
 
 I want you to notice a contradiction. You want, deeply, to be loved for who you are. You dream of someone who sees you, who wants you, not what you do.
 
@@ -51,7 +51,7 @@ You long to be seen, and you never let yourself be seen. You want to be loved fo
 
 That's why, even surrounded by those who need you, you feel alone. Because being needed is not being known. And you built your entire life on the first thing, leaving the second, the one you most wanted, unrealized.
 
-Maybe you'll recognize yourself in small things.
+Maybe you'll recognize yourself in the small, useful things.
 
 In feeling an unease when he doesn't need anything from you. In almost provoking a need, just to be useful again.
 
@@ -59,7 +59,7 @@ In not being able to bear that he solves it on his own, because if he can do it 
 
 In measuring your place in the relationship by the number of things that depend on you.
 
-They are all the same. Usefulness as insurance against abandonment. The manufactured need to guarantee that they won't leave you.
+They are all the same scaffolding. Usefulness as insurance against abandonment. The manufactured need to guarantee that they won't leave you.
 
 And there's a particular exhaustion in this, which you may already take for normal. The exhaustion of someone who can never stop. Because stopping, for you, isn't resting, it's risking. It's ceasing to be necessary for a moment, and in that moment the fear opens up that, without your usefulness, they'll leave you. So you continue, even destroyed, doing, solving, anticipating, because rest costs you more than the tiredness: tiredness only takes away your body, rest threatens your place.
 
@@ -93,7 +93,7 @@ Seeing this is not to blame yourself. It's to understand that your way of loving
 
 ## 2. Necessary so as not to be left
 
-Go back. Further back than any boyfriend.
+Go back. Back behind every relationship where you made yourself the pillar.
 
 The question underneath all of this is simple, and it's old. What do I have to do so that they won't leave me?
 
@@ -107,13 +107,13 @@ Maybe you grew up in a house where you had to relieve the adults. Help. Care. No
 
 Maybe you felt, early on, that love could go away. That it wasn't unconditional. That you had to hold it with your hands, by doing, giving, being needed.
 
-Notice what a child learns in a place like this.
+Notice what a child learns in a house where her place must be earned.
 
 She learns that existing is not enough to be loved. That she has to serve. That love is paid for with usefulness.
 
 She learns that being left is a real danger, and that the way to avoid it is to make herself necessary, to the point where they cannot do without her.
 
-And that child grows up. But the question remains. What do I have to do so that they won't leave me? And the answer she found as a little girl keeps governing her: I make myself indispensable.
+And that useful child grows up. But the question remains. What do I have to do so that they won't leave me? And the answer she found as a little girl keeps governing her: I make myself indispensable.
 
 That's why, when you love, you can't simply be. You have to do. To solve. To make yourself the pillar. Because stopping doing, for you, is risking being left.
 
@@ -125,9 +125,9 @@ And as an adult, in love, she does the same. She pays the rent. With usefulness,
 
 I want you to see this without guilt, and without accusing whoever raised you.
 
-Whoever didn't give you a secure place, most of the time, didn't have a secure place to give you. They gave what they had. They didn't mean to wound you.
+Whoever didn't give you a secure place, most of the time, didn't have a secure place to give you. They gave what they had. They never set out to teach you that your place had to be earned.
 
-But the truth is this. You learned that your place had to be earned. And today you keep earning it, every day, in love, with a tiredness that no longer ends.
+But here is what stayed with you. You learned that your place had to be earned. And today you keep earning it, every day, in love, with a tiredness that no longer ends.
 
 There's a figure you might recognize from your childhood. An adult who only saw you when you were useful to him.
 
@@ -167,7 +167,7 @@ Because being kept by dependency doesn't calm the fear of abandonment. It confir
 
 ## 3. Usefulness is not intimacy
 
-There's a confusion at the center of everything. And I want to undo it carefully.
+At the center of everything you do, there's one confusion holding the whole structure up. And I want to undo it carefully.
 
 You confused being needed with being loved. They are different things. Very different.
 
@@ -179,7 +179,7 @@ And here's the problem. You built the whole of love on the first thing, usefulne
 
 You replaced being loved with being needed. Because being needed you control, with effort. Being loved you don't control, it depends on being seen and wanted for who you are, and that frightens you.
 
-Notice what this costs you.
+Notice the price your usefulness charges you.
 
 A relationship built on usefulness never gives you the certainty of love. Because deep down you know, always, that he stays for your usefulness, not for you.
 
@@ -233,11 +233,11 @@ Letting go of indispensability isn't only freeing yourself. It's freeing them. I
 
 ## 4. Who am I if no one needs me
 
-I'll leave a question here. Alone. Don't run from it too quickly by going to solve something for someone.
+I'll set one question down here, like a chore you can't rush to finish. Alone. Don't run from it too quickly by going to solve something for someone.
 
 Who are you if no one needs you?
 
-Stay with it. Notice the emptiness it opens.
+Stay with it. Notice the emptiness it opens, the hollow left when there's nothing to solve.
 
 For you, this question may be one of the most terrifying there is. Because your entire identity was built on being needed.
 
@@ -273,9 +273,9 @@ If your worth is in what you do, then you're always one tiredness away from losi
 
 That's why you don't allow yourself to stop, not even sick. Because stopping isn't only resting. It's risking the place. And you live in an endless tension, the tension of someone who has to keep proving her usefulness in order to keep deserving the love.
 
-Don't answer right away the question of who you are if no one needs you. It isn't answered with the head.
+Don't answer right away the question of who you are if no one needs you. It isn't a problem to be solved with the head.
 
-But leave it open. Because it's in that question that your freedom begins. The day you discover that there's a person there, beneath everything you do, with her own worth, worthy of staying for simply by existing, you stop needing to make yourself indispensable. And then, only then, can you be loved for yourself.
+But leave it open. Because your freedom begins exactly where that question frightens you most. The day you discover that there's a person there, beneath everything you do, with her own worth, worthy of staying for simply by existing, you stop needing to make yourself indispensable. And then, only then, can you be loved for yourself.
 
 There's a very particular loneliness in your life, and I want to name it, because you may never have put words to it.
 
@@ -315,13 +315,13 @@ You can be loved for being, not for serving.
 
 There's a love that doesn't want you for your usefulness. That wants you. That would stay with you even if you did nothing, even if you solved nothing, even if, for once, you were the one who needed.
 
-I know this sounds strange. Your map says the opposite. Your map says that without usefulness there's no place, that love is paid for with service, that stopping doing is being left.
+I know this sounds strange to someone like you. The whole map you live by says the opposite. Your map says that without usefulness there's no place, that love is paid for with service, that stopping doing is being left.
 
 But your map was drawn by a child who had to earn her place. It was accurate then. It's not accurate everywhere, now.
 
 There is, in the world, love that gives itself for free. That doesn't ask for an invoice. That wants the person, not the function. Your map doesn't mark it, because it was made where it didn't exist. But it exists.
 
-Let me tell you this another way.
+Let me show you the same thing from the side where you do the loving.
 
 Think of someone you love deeply. A child, a friend, someone. Do you love that person for what they do for you? Or would you love them just the same if, suddenly, they could do nothing?
 
@@ -331,13 +331,13 @@ Now, if that's how your love works, why would the love of others for you be any 
 
 The answer is that you don't. That rule isn't a truth about love. It's an old sentence about you, learned in a place where, in fact, you had to serve in order to stay. And sentences, unlike truths, can be revoked.
 
-The awakening, when it comes, doesn't arrive like a thunderclap. It arrives like a relief.
+When the awakening comes, it won't announce itself loudly. It arrives like the moment you finally set down something heavy you'd been carrying for years.
 
 It's the day you do nothing special, when you're tired, when for once you neither solve nor anticipate anything, and he stays just the same. He's there. He wants you there. Without your having done anything for it.
 
 And you feel, for an instant, something you'd never felt. That maybe you can be loved even without serving. That maybe your place isn't rented. That maybe you don't have to pay the rent.
 
-It's a small instant. But it changes everything. Because it disproves, with the force of what you felt, a law you'd been carrying for decades.
+It's a small instant. But it changes everything. Because one lived moment of being kept without serving outweighs the whole rulebook you'd been obeying for decades.
 
 From there on, even if the old terror speaks again, you already know there's another path. That you can be wanted for who you are. And that this, far from being less secure than being needed, is the only love that truly rests.
 
@@ -355,13 +355,13 @@ I want to stop here a moment, because there's a point at which this stops being 
 
 If the fear of being left is so great that it leads you to erase yourself entirely, to disappear inside what you do for others, to lose yourself in the name of being necessary. If there's a panic of abandonment that pulls the ground out from under you, that makes you endure relationships that diminish you, just so as not to be alone. If you've drained yourself to the point of no longer knowing who you are without serving.
 
-This may be more than a pattern. It may be a wound of attachment, a deep fear of abandonment, that deserves the support of a professional. It's not weakness to seek it. It's the care you deserve, and that you may never have given yourself, because you were always busy caring for everyone except yourself.
+This may be more than a pattern. It may be a wound of attachment, a deep fear of abandonment, that deserves the support of a professional. Reaching for that help is not one more failure to handle things on your own. It's the care you deserve, and that you may never have given yourself, because you were always busy caring for everyone except yourself.
 
 And I want to tell you one thing, with tenderness. The helping relationship can be, for you, the first place where you experience being cared for without having to serve. Where someone occupies themselves with you, without your having to make them dependent, without your having to pay with usefulness. It's healing, in the very place of the wound: letting yourself, at last, be the side that receives.
 
 ## 6. Choosing yourself
 
-There's a verb for this crossing. And it's not to give less. It's to choose yourself.
+This crossing has a verb, and for once it isn't a verb of doing for someone else. And it's not to give less. It's to choose yourself.
 
 Choosing yourself is not becoming selfish, cold, ceasing to love. It's stopping erasing yourself in the name of the other. It's counting again, yourself, in your own life.
 
@@ -425,7 +425,7 @@ Endure that silence. Stay seated in it. Let him see you doing nothing, and disco
 
 ## 7. Chosen without being indispensable
 
-There's a destination for this crossing. And it fits in one image. To be chosen without being indispensable.
+This crossing has a place it's headed for. And it fits in one image, the only one you need to hold onto. To be chosen without being indispensable.
 
 Don't be confused. Indispensable and chosen seem like the same thing, and they're opposites.
 
@@ -451,7 +451,7 @@ And it frees the love between you. Because a love between two whole people, who 
 
 There's a joy waiting on the other side. The joy of being wanted without having to do anything to deserve it. Of resting in love, instead of holding it up. Of being, for once, cared for, and not only a caregiver.
 
-That joy is your right. As much yours as anyone's. And it's on the other side of the terror, on the day you risk ceasing to be indispensable in order to discover whether they choose you for yourself.
+That joy belongs to you too, not as wages for all you've done, but simply because you exist. As much yours as anyone's. And it's on the other side of the terror, on the day you risk ceasing to be indispensable in order to discover whether they choose you for yourself.
 
 I want to give you a way to begin, without making this into a technique.
 
@@ -469,7 +469,7 @@ They're small steps. But that's how a lifetime of usefulness is dismantled. Not 
 
 I want to tell you about a joy you don't yet know, and that's on the other side of this crossing.
 
-The joy of being cared for. Of falling ill and letting someone take care of you, without getting up to take care of everything. Of being tired and letting someone relieve you. Of receiving, without giving back right away, without paying, without the rush to balance things.
+The joy of being the one cared for, for once, instead of the one who does the caring. Of falling ill and letting someone take care of you, without getting up to take care of everything. Of being tired and, for once, letting someone else carry the weight instead of you. Of receiving, without giving back right away, without paying, without the rush to balance things.
 
 You don't know this joy, because you never let yourself be on the side of the one who receives. You were always the one who gives, who cares, who holds. And there's a hunger, in you, that was never satisfied: the hunger to be, for once, you, the one held.
 
@@ -485,7 +485,7 @@ And there's a new measure you'll learn to feel, with time. That of a relationshi
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, stop making yourself necessary. But it changes enough for you to stop mistaking your exhaustion for love.
+It won't undo a lifetime of usefulness in one stroke. It doesn't make you, tomorrow, stop making yourself necessary. But it changes enough for you to stop mistaking your exhaustion for love.
 
 Now you know that you make yourself indispensable, and that this isn't only generosity, it's insurance against abandonment.
 
@@ -499,7 +499,7 @@ You know that you can be loved for being, not for serving. And you know that the
 
 And you know that being chosen is different from being indispensable. That one is a prison and the other is freedom. And that only the second gives peace.
 
-I want to leave you an image.
+I want to hand you an image to keep, the way you keep everyone's belongings.
 
 You built, around those you love, a house in which you are the foundations, the walls, the roof, the heating, everything. A house that, without you, would fall. And you feel safe because, as long as it depends on you, they can't send you away from it.
 
@@ -509,17 +509,17 @@ The crossing is to stop being the structure and to become the inhabitant. To let
 
 And I want you to take one last thing, about the fear that's underneath everything. The fear of being left is not cured by making yourself indispensable. It's cured by discovering that your worth doesn't depend on being missed. That there are those who want you, and not what you do. And that, even if someone leaves, you stay, whole, with yourself, because your place in the world never depended, after all, on being the piece that everything depends on. That fear was learned, and what is learned can, slowly, and perhaps with help, be unlearned.
 
-You know, deep down, the sentence that holds this book. I can be chosen without making myself indispensable.
+You already carry, deep down, the one sentence this whole book is built around, the way you carry every load. I can be chosen without making myself indispensable.
 
-Choosing yourself was the first step. But there's a second, and that one isn't done by reading. It's done by stopping serving, when everything in you wants to run and make itself useful. By bearing the terror of not being needed. And, if there's someone at your side, by learning, together, to be free and choose each other just the same.
+Choosing yourself was the first step. But there's a second, and no amount of reading will do it for you. It's done by stopping serving, when everything in you wants to run and make itself useful. By bearing the terror of not being needed. And, if there's someone at your side, by learning, together, to be free and choose each other just the same.
 
 There's a simple sign to guide you, day to day. Notice, before a person, what binds you to them. Is it how much they need you? Or is it how much you like being with them, whether they need you or not?
 
 When you notice that you bind yourself through the other's need, distrust it. It's not love, it's your wound looking for a guaranteed place. And when you notice that you stay with someone who doesn't depend on you, who manages without you, and who wants you anyway, notice that too: it's there, in that wanting without dependency, that the love you always wanted and were afraid you didn't deserve dwells.
 
-That is the work of SyncHim. The book names. SyncHim crosses over. Each in her own time.
+That is the work of SyncHim. The book names. SyncHim crosses over. Each woman setting down her load at her own pace.
 
-And before you close these pages, I ask you one thing only. A hard one, for you.
+And before you close these pages, I ask you for one task, the only kind of asking you'll let yourself hear. A hard one, for someone who solves everything.
 
 This week, leave one thing unsolved that you'd normally solve for him. Not as punishment, not as a game. Only to see what happens, and what you feel. Notice the terror that rises, the urge to run and do it. And stay, a little longer, without doing it. Because it's there, in that borne not-doing, that you begin to discover whether they love you for yourself, and that you begin, at last, to return to yourself.
 

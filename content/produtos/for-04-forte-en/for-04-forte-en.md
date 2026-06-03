@@ -13,7 +13,7 @@
 
 ## 1. I am the strong one
 
-Notice the place you occupy, everywhere. You are the strong one. The one who endures everything. The one who is not shaken. The one who holds things up, solves, sustains, without ever giving way.
+Notice the place you occupy, everywhere. You are the one in armor. The one who endures everything. The one who is not shaken. The one who holds things up, solves, sustains, without ever giving way.
 
 People lean on you. They count on you. They know that, whatever happens, you endure. You are the rock, the pillar, the one who never falls. And there is a pride in that, but there is also an immense weight, and a loneliness no one sees, the loneliness of someone who holds everyone up and is held up by no one.
 
@@ -25,7 +25,7 @@ I want to tell you right away, before anything else, that this strength is not, 
 
 You became strong because there was no one strong for you. Because, in a time when you needed to be protected, there was no protection, and you had to become your own protection. You made yourself into the strength you lacked. You raised the armor no one raised for you. And that armor, made out of necessity, never came off again.
 
-This book is different. Because your strength is not only a trait to moderate. It is, very often, an armor raised over a wound. A response to a time when you had no one to hold you, and in which you learned to hold yourself, alone, whatever it cost. And that deserves more than understanding. So, throughout these pages, I will tell you frankly that understanding why you carry the armor may not be enough to set it down, and that an armor of this age usually asks for hands that help to unfasten it.
+This book is different. Because your strength is not only a trait to moderate. It is, very often, an armor raised over a wound. A response to a time when you had no one to hold you, and in which you learned to hold yourself, alone, whatever it cost. And an armor welded on that early deserves more than to be merely explained. So, throughout these pages, I will tell you frankly that understanding why you carry the armor may not be enough to set it down, and that an armor of this age usually asks for hands that help to unfasten it.
 
 And I'll tell you now where we are heading, so you can lower your guard a little while you read. You no longer need to carry the armor all the time. Resting will not make you collapse. The armor protected you when there was no one else, but today it crushes you, and you can, slowly, and perhaps with help, learn to set it down, at least for moments, and discover that you don't fall.
 
@@ -33,7 +33,7 @@ I want you to distinguish, right away, the armor that shows from the woman who l
 
 This book does not come to tell you that your strength is bad, or that you have to become fragile, dependent, incapable. Your strength is real, it is yours, and it saved you. It comes to tell you that it would grow larger, and not smaller, if you added to it the capacity to rest, to lean, to be fragile safely. That a woman who knows how to endure and knows how to set things down is more whole than one who only knows the first half. And that you deserve that wholeness, and that rest, after an entire life on sentry.
 
-Perhaps you recognize yourself in small things.
+Perhaps you find your own armor in small, daily gestures.
 
 In not being able to show weakness to anyone, in always swallowing, in being always the strong one, even when you're falling apart inside.
 
@@ -43,7 +43,7 @@ In not being able to rest, to relax, to lower your guard, because a part of you 
 
 In feeling a deep, old exhaustion, of someone who has carried an armor for so long that she no longer remembers what it is to be without it.
 
-They are all the same. The strength that is armor. The shell that was raised because there was no one strong for you.
+They are all one shell, plated the same way. The strength that is armor. The shell that was raised because there was no one strong for you.
 
 I want to show you how the armor appears in the small gestures of an ordinary day, in things you already confuse with your nature. Someone asks how you are, and you answer fine, always, even falling apart inside, because telling the truth would mean showing weakness. You feel yourself sinking, and instead of telling someone, you redouble the effort, endure more, smile more, so no one notices. You're ill, exhausted, at the limit, and you keep taking care of everything, holding everything up, because stopping seems impossible to you, as if the world depended on you not giving way.
 
@@ -77,7 +77,7 @@ I want you to look at your armor with clarity and with tenderness, at the same t
 
 I want you to pause, for a moment, on the pain there is in this origin, because it's easy to pass over it quickly, as you pass over everything. A child should not have to be her own protection. She should have, over her, strong adults, who held her, who were the shelter, who carried the weight that is too much for small shoulders. And that is what you lacked. You had to be, too early, the strength that should have come from outside. And there is a grief in this truth, the grief of a childhood in which you couldn't be small, fragile, cared for, because you had to be big, hard, the one who endures. That grief deserves to be felt, not skipped, because it is from it that is born the tenderness for yourself that this crossing wants to give you back.
 
-I want to add a root you may recognize. Sometimes the shell is born not only from the absence of protection, but from having learned that your fragility bothered, or was used against you. You showed yourself fragile, once, and you were mocked, humiliated, or your vulnerability became a weapon in someone's hands. And you learned, in your body, that showing weakness was exposing yourself to danger, giving ammunition to those who would use it against you. You hardened, then, not only from a lack of shelter, but so as never again to give anyone the power that your fragility, once, gave them. And you carry, into today, the certainty that being seen fragile is handing yourself over, disarmed, to those who could hurt you.
+I want to dig down to another root you may recognize. Sometimes the shell is born not only from the absence of protection, but from having learned that your fragility bothered, or was used against you. You showed yourself fragile, once, and you were mocked, humiliated, or your vulnerability became a weapon in someone's hands. And you learned, in your body, that showing weakness was exposing yourself to danger, giving ammunition to those who would use it against you. You hardened, then, not only from a lack of shelter, but so as never again to give anyone the power that your fragility, once, gave them. And you carry, into today, the certainty that being seen fragile is handing yourself over, disarmed, to those who could hurt you.
 
 In any of these roots, the lesson is similar: fragility is dangerous, strength is the only safety, and there is no one to entrust the weight to. And it is that lesson, engraved early, that governs you today, and that turns each moment of rest, each lowering of the guard, into a threat your body refuses, even when your reason knows it has passed.
 
@@ -89,7 +89,7 @@ Notice the difference. A person with inner strength can be strong when it's need
 
 And there is an enormous cost to living in armor, without ever being able to take it off.
 
-It costs you the body. Because a permanent shell is a permanent tension. Your muscles, your nervous system, your whole body, live in a state of alert, of readiness, of defense, never relaxing. And the body tires of a vigilance that does not stop. Many women who are too strong fall ill, not from weakness, but from the exhaustion of a body that could never rest.
+It exacts its toll on the body first. Because a permanent shell is a permanent tension. Your muscles, your nervous system, your whole body, live in a state of alert, of readiness, of defense, never relaxing. And the body tires of a vigilance that does not stop. Many women who are too strong fall ill, not from weakness, but from the exhaustion of a body that could never rest.
 
 Notice the signs, because perhaps you already take them for normal. The tension in the shoulders, in the jaw, that never lets go. The sleep that does not restore, light, guarded, of someone who sleeps with a part on watch. The background tiredness that no night cures, because it is not the tiredness of effort, it is the tiredness of alert. The aches that appear with no clear cause, the body that falls ill when, at last, you stop, as if only in illness did it allow itself the time off you never gave it. None of this is a weakness of your body. It is your body paying the toll of an armor it could never take off, warning you, in its own way, that it was not made to live in permanent war.
 
@@ -101,27 +101,27 @@ Notice this loneliness. The loneliness of someone who is always the strong one, 
 
 And there is a painful irony in this. You, who would hold anyone you loved, who would be there at any hour, who would never let anyone who needs you fall, do not give yourself that same care. You find it natural that others need, that they rest, that they lean, and you never judge them for it. But yourself, you don't. For you, needing is weakness, resting is carelessness, leaning is falling. You apply to yourself a harshness you would never apply to those you love, and you deny yourself a care you would give anyone without thinking. You deserve from yourself the same tenderness you give others, and that is, perhaps, the first thing this crossing comes to teach you.
 
-And there is a cost paid by those who love you, that perhaps you don't see. The people who care for you would like to be able to care for you, hold you, be strong for you, at least sometimes. And you don't let them. You're always so whole, so in armor, that no one reaches you, no one can give you anything, no one reaches the part of you that would need comfort. And so, without meaning to, you deprive those who love you of the possibility of loving you back, of returning what you always give, of entering your life not only as someone who leans on you, but as someone who also supports you. Your shell, which you believe weighs on no one, closes the door to those who would want to hold you.
+And there is a cost paid by those who love you, that perhaps you don't see. The people who care for you would like to be able to care for you, hold you, be strong for you, at least sometimes. And you keep the gate barred against them. You're always so whole, so in armor, that no one reaches you, no one can give you anything, no one reaches the part of you that would need comfort. And so, without meaning to, you deprive those who love you of the possibility of loving you back, of returning what you always give, of entering your life not only as someone who leans on you, but as someone who also supports you. Your shell, which you believe weighs on no one, closes the door to those who would want to hold you.
 
 It costs you, too, joy. Because joy, the true kind, requires an abandon, a letting go, a letting yourself be carried, and you don't let go, you don't let yourself be carried, you're always holding, controlling, watching. And so life is lived in survival mode, enduring, and rarely in enjoyment mode, in lightness, in pleasure. You fulfill, solve, endure, but when was the last time you truly had fun, that you laughed without reserve, that you gave yourself to a moment without a part of you on sentry? The shell doesn't only take away your rest. It takes away your capacity to live the good moments without watching over them.
 
 I want you to see the difference between healthy strength and yours. Healthy strength is one capacity more: I know how to endure when it's needed, and I know how to set things down, to be fragile, to lean, when it's safe. It has both doors. Yours doesn't. Yours only knows how to endure, and setting things down is not, truly, available, however exhausted you are. And a strength that cannot be set down is not strength, it is a prison. The work of this crossing is not to take away your strength, which is real and is yours, and which saved you. It is to unlock the other door, that of rest, so that your strength stops being a permanent armor and becomes a choice.
 
-I want you to feel the tiredness of this. The tiredness of an armor that never comes off. Of a vigilance that never stops. Of a strength that can never fail. It is a deep exhaustion, of an entire life in armor, and perhaps you already take it for normal, for being this way, without knowing that beneath the shell is a person exhausted from carrying it.
+I want you to feel, in the muscles, the weight of this. The tiredness of an armor that never comes off. Of a vigilance that never stops. Of a strength that can never fail. It is a deep exhaustion, of an entire life in armor, and perhaps you already take it for normal, for being this way, without knowing that beneath the shell is a person exhausted from carrying it.
 
 ## 4. Who am I without the armor
 
-I'll leave a question here. Alone. Don't run from it.
+I'll set one question down here, like a shield laid on the ground. Alone. Don't run from it.
 
-Who are you without the armor? Without the permanent strength? When you lower your guard, and let yourself, for a moment, be fragile?
+What is left of you once the plates come off? Without the permanent strength? When you lower your guard, and let yourself, for a moment, be fragile?
 
 Stay with it. Notice what it stirs. Perhaps a terror, perhaps a vertigo.
 
-For you, this question opens a trapdoor of terror, because your entire identity was built on being the strong one. Take that away, imagine yourself without the shell, fragile, vulnerable, needing, and a panic appears. Then what am I? Who protects me, if I lower my guard? And if I collapse, and there's no one to hold me, as there never was?
+For you, this question opens a trapdoor of terror, because your entire identity was built on being the strong one. Take that away, imagine yourself without the shell, fragile, vulnerable, needing, and a panic appears. Then what am I? Who keeps the gate, if I leave my post? And if I collapse, and there's no one to hold me, as there never was?
 
 And the shadow hiding here is fragility. The part of you that is gentle, that needs, that can be hurt, that can fail to cope. That part terrifies you, because in your past fragility was not welcomed, it was exposed, dangerous. And you armed yourself against your own fragility, as if it were a threat, when it is, at bottom, the most human part of you, and the most capable of being loved.
 
-Notice how this imprisons you. You cannot allow yourself fragility, even exhausted, because fragility sets off the terror that there's no one to hold you. You live enduring, holding, being strong, even when you're falling apart, because lowering your guard seems to risk the fall you always feared, that of collapsing with no one underneath.
+Notice how this shell keeps you locked in. You cannot allow yourself fragility, even exhausted, because fragility sets off the terror that there's no one to hold you. You live enduring, holding, being strong, even when you're falling apart, because lowering your guard seems to risk the fall you always feared, that of collapsing with no one underneath.
 
 And there is a particular sadness beneath the armor, that I want to name. It is that of knowing, deep down, that there is in you a tender, gentle part, that needed comfort, that never had it, and that is still waiting. Sometimes, in rare moments, you feel that part wanting to appear, asking to be cared for, and you push it quickly back inside, by reflex, by terror, and you put the shell back on. To live this way, knowing that there is in you a girl who was never held and continuing not to hold her, is a silent form of mourning, repeated every day. And this crossing is, at bottom, letting, at last, that part appear, and giving it yourself, now, the comfort that was lacking then.
 
@@ -131,23 +131,23 @@ And I want you to see the courage there is, after all, in fragility, contrary to
 
 And I want to tell you something about the terror this question raises, because naming it is the first gesture toward disarming it. What terrifies you is not, truly, resting. It is the fall you learned that rest brought, in a time when there was no one underneath. For your body, lowering the guard and collapsing are one and the same thing, fused since early on. But they are separable. Resting, in itself, is not falling. It is only setting down the weight, trusting that there is ground, letting the body restore itself. The fall belonged to that time when you were alone. Today, perhaps you no longer are, and resting and collapsing can, at last, stop going together.
 
-I want to tell you something else about this fear of falling, because it begins to relieve its guard. Today, there are people who can hold you. This is the truth your body, a sentinel for so long, has not yet learned. In the time when the shell was born, there was no one strong for you, and your strength was the only protection. But today, in your adult life, perhaps there are already people you could lean on, hands that would hold you if you lowered your guard. The danger of collapsing with no one underneath was real back then. It may no longer be real now.
+I want to tell you something else about this fear of falling, because it begins to relieve its guard. Today, there are people who can hold you. This is the truth your body, a sentinel for so long, has not yet learned. In the time when the shell was born, there was no one strong for you, and your strength was the only protection. But today, in your adult life, perhaps there are already people you could lean on, hands that would hold you if you lowered your guard. The danger of collapsing with no one underneath was real back then. The siege that justified the watch may already have lifted.
 
 And there is a cruelty in this shell that perhaps you don't see. What your past denied you, you continue to deny yourself. In that time, there was no one to hold you, to comfort you, to tell you rest, I'll keep guard. And today, as an adult, it is you who deny yourself that comfort, who don't let yourself be held, who don't allow yourself the rest no one gave you. The lack from outside became a lack you practice, against yourself. And to stop practicing it, to let yourself, at last, be cared for, rest, set yourself down, is perhaps the most reparative gesture of this crossing: to give yourself, now, the shelter that was lacking then, instead of continuing, alone, to stand the guard no one came to relieve.
 
-Don't rush to answer who you are without the armor, you who answer everything quickly. That answer is not given with the head, and sometimes it needs more than a book. But leave the question open. Because that is where the door is. On the day your body learns that it can lower its guard, at least with some, without collapsing, you stop needing to carry the shell all the time. And there, only there, can you begin to rest.
+Don't rush to answer who you are without the armor, you who answer everything quickly. That answer is not given with the head, and sometimes it needs more than a book. But leave the question standing, unanswered, like a gate left ajar. Because that ajar gate is the one opening in your fortress. On the day your body learns that it can lower its guard, at least with some, without collapsing, you stop needing to carry the shell all the time. And there, only there, can you begin to rest.
 
 ## 5. Perhaps you need more than to understand
 
-I have to stop the book here. With all seriousness. Because your strength is not, most of the time, only a personality trait. It is an armor raised over a wound, and that changes what you need.
+I have to call a halt to the march here. With all seriousness. Because your strength is not, most of the time, only a personality trait. It is an armor raised over a wound, and that changes what you need.
 
-If you became strong because there was no one strong for you, because you grew up without protection, in danger, or you had to protect yourself alone, then your shell is not just a habit. It is a trauma response. An adaptation to the lack of safety. And an armor raised by trauma is not unfastened simply by being understood. It lives in the body, in the permanently activated nervous system, in the hypervigilance that does not stop.
+If you became strong because there was no one strong for you, because you grew up without protection, in danger, or you had to protect yourself alone, then your shell is not just a habit. It is the armor a body forges when it has been left under siege. An adaptation to the lack of safety. And an armor raised by trauma is not unfastened simply by being understood. It lives in the body, in the permanently activated nervous system, in the hypervigilance that does not stop.
 
-I want to name, plainly, what lies beneath the shell. That constant tension, the body that never relaxes, the permanent vigilance, the background alert even without danger, have a name. It is called hypervigilance. It is the nervous system trapped in a state of alert, engraved by a time when danger was real and constant. And that is not temperament. It is a trauma response, and it deserves to be cared for with support.
+I want to name, plainly, what lies beneath the shell. That constant tension, the body that never relaxes, the permanent vigilance, the background alert even without danger, have a name. It is called hypervigilance. It is the nervous system trapped in a state of alert, engraved by a time when danger was real and constant. And that is not temperament. It is a sentinel wired by trauma to stay at his post, and it deserves to be cared for with support.
 
 And I want to tell you something with firmness and tenderness, the size of your strength. You, who are everyone's strength, are precisely the one who asks for help latest, or never asks, because asking for help seems to mean lowering your guard, showing weakness, collapsing. But seeking support is not collapsing. It is the strongest and most lucid act of someone who endured alone for too long. The support of a psychologist, of a therapist, someone prepared to work not only your understanding, but your body, your nervous system, the hypervigilance engraved deep.
 
-I want to separate two armors for you, because it matters for knowing what yours asks for. A hardness of temperament is unfastened by understanding: you see the pattern, you understand the origin, and that, in time, helps to moderate it. An armor of trauma is something else. It does not live only in the head, it lives in the body, in the nervous system trapped on alert, in the hypervigilance that does not lower its guard simply by being understood. And an armor like that needs more than understanding. It needs time, the body, a safe relationship where the nervous system relearns, slowly, that it can now lower its guard. That, alone, is rarely achieved. It is done with accompaniment.
+I want to separate two armors for you, because it matters for knowing what yours asks for. A hardness of temperament is unfastened by understanding: you see the pattern, you understand the origin, and that, in time, helps to moderate it. An armor of trauma is something else. It does not live only in the head, it lives in the body, in the nervous system trapped on alert, in the hypervigilance that does not lower its guard simply by being understood. And an armor like that needs more than understanding. It needs time, the body, a safe relationship where the nervous system relearns, slowly, that it can now lower its guard. A sentry rarely stands down by his own order alone. He stands down when someone trustworthy comes to relieve the watch.
 
 And there is a beauty in this. A helping relationship can be, for you, the first post where someone relieves your guard safely, where you can set down the armor without the gate being left defenseless. Where you are, finally, the one held, and not only the one who holds. Where someone is strong for you, for a moment, and your body learns, slowly, that it can rest without collapsing, because there are, this time, hands underneath.
 
@@ -169,7 +169,7 @@ Notice the confusion you live in, which is the core of this fear. You confuse th
 
 And I want you to understand why this is not resolved by willpower alone, you who have so much. It isn't because you don't try that you don't rest. It's because effort, here, works against you: the more you force yourself to relax, the more you activate the alert, because forcing is, itself, a form of vigilance. Rest is not conquered by force, one surrenders to it. And surrendering is precisely what costs you most, you who learned that surrendering your guard was dangerous. So this path is not made with more effort, it is made with more safety: as your body discovers that there is ground, it begins, on its own, to allow itself to let go, without your having to force it.
 
-I want to be honest. If your shell was born from trauma, this truth does not settle simply by convincing yourself of it by force, as you convince yourself of everything. Your body will keep on alert, will keep fearing the collapse, however much your head knows there's ground. So this path, very often, is made with help, with someone to accompany you in teaching your system, slowly, that it can rest safely.
+I want to be honest, the way one soldier owes another. If your shell was born from trauma, this truth does not settle simply by convincing yourself of it by force, as you convince yourself of everything. Your body will keep on alert, will keep fearing the collapse, however much your head knows there's ground. So this path, very often, is made with help, with someone to accompany you in teaching your system, slowly, that it can rest safely.
 
 But there are gestures you can begin to practice, with care. You can begin by lowering your guard in a small way, with those who are trustworthy. Showing a fragility. Admitting that you're tired. Ceasing, for a moment, to be the strong one. And noticing what happens, in the room around you and inside your chest.
 
@@ -179,7 +179,7 @@ Each time you set down the armor, in a small way, and don't collapse, you give y
 
 And don't be surprised if, at first, resting tires you more, instead of less. It's common. When you finally stop, after years on alert, the body, instead of relaxing right away, sometimes releases everything it held, and the accumulated tiredness comes, the falling ill, the endless desire to sleep. It is not a sign that setting down the armor is bad for you. It is a sign of how much you needed it, and that your body, at last authorized to set itself down, is doing the maintenance it postponed for a lifetime. Cross that tiredness with gentleness, without reproaching yourself for it, because on the other side is a repose you never knew.
 
-I want to warn you of one thing, so it doesn't catch you by surprise. The first time you lower your guard, even just a little, the terror will likely rise strong, you'll feel a vertigo, an urgent desire to pull yourself together, to put the shell back on, to prove that you do endure after all. That start is not a sign that you did wrong. It is your old system going off, treating this small rest as if it were the abandonment of long ago. Don't obey it right away. Stay, for a moment, without the shell, let yourself be held, and give your body the chance to discover that, this time, there is ground underneath.
+I want to warn you of one thing, so it doesn't catch you by surprise. The first time you lower your guard, even just a little, the terror will likely rise strong, you'll feel a vertigo, an urgent desire to pull yourself together, to put the shell back on, to prove that you do endure after all. That start is not a sign that you did wrong. It is your old system going off, treating this small rest as if it were the abandonment of long ago. Don't snap back to your post at its first order. Stay, for a moment, without the shell, let yourself be held, and give your body the chance to discover that, this time, there is ground underneath.
 
 And I want you to choose well with whom you begin, because it matters. Don't lower your guard, at first, before those who already hurt you, those who used your fragility against you, those who might confirm the fear. Begin with those who have already proven trustworthy, with those who wish you well, with those you can be almost certain will welcome you. It is neither weakness nor cheating. It is giving your sentinel the best conditions to learn the new truth, instead of throwing it, right from the start, against the old wound. There is time, afterward, for the rest. First, the body needs evidence that setting down the shell can go well.
 
@@ -187,7 +187,7 @@ The awakening, when it comes, is a physical sensation of deep relief. It is the 
 
 ## 7. Setting down the armor
 
-There is a verb for this crossing. To rest.
+There is a single command that disarms this whole fortress. To rest.
 
 To rest for real. To set down the armor, at least for moments. To stop carrying the shell all the time. To give your body, your vigilance, your strength, the time off they never had.
 
@@ -199,7 +199,7 @@ Setting down the armor, at least for moments, is letting yourself be fragile wit
 
 And I want to undo a fear, because it will appear: the fear that, if you set down the shell, you'll lose the strength that defines you, you'll become soft, incapable, someone who can no longer be relied on. It won't happen. Your strength does not live in the shell. It lives in you, in your real capacity, which has been proven over an entire lifetime. Setting down the armor takes away none of that capacity. It takes away only the obligation to exercise it at every second, without pause, to the point of exhaustion. You remain capable, strong, reliable. What changes is that you stop being so out of terror, and start being so out of choice, and what comes from choice is firmer, freer, more your own, than what came from the fear of falling.
 
-I want you to see, too, that resting is not selfishness, nor abandonment of your loved ones. It is precisely the opposite. An exhausted woman, in permanent alert, depleted from carrying everything, has less and less to give. Rest does not take you from others, it gives you back to them, more whole, more present, less at the limit. Caring for yourself, setting down the armor, letting yourself rest, is not taking care away from those you love. It is ensuring that there is still, in you, someone who can care, instead of an exhausted sentry who consumes herself until there's nothing left for anyone, not even for you.
+I want you to see, too, that resting is not selfishness, nor abandonment of your loved ones. A sentinel who never sleeps guards no one well. An exhausted woman, in permanent alert, depleted from carrying everything, has less and less to give. Rest does not take you from others, it gives you back to them, more whole, more present, less at the limit. Caring for yourself, setting down the armor, letting yourself rest, is not taking care away from those you love. It is ensuring that there is still, in you, someone who can care, instead of an exhausted sentry who consumes herself until there's nothing left for anyone, not even for you.
 
 It will cost you. You will feel, each time you lower your guard, the old terror of collapse, the hypervigilance pulling you back to alert, the desire to put the shell back on. And you will want to go back to being the strong one, enduring, holding, because the shell is what you know, and lowering it seems dangerous.
 
@@ -211,13 +211,13 @@ I want you to see what opens up when you stop carrying the shell at every instan
 
 And there is a joy waiting on the other side, that perhaps you don't even remember wanting, so used are you to being strong. The joy of resting. Of being fragile with those who love you, without falling apart. Of being held, and not only the one who holds. Of setting down, at last, a weight you've carried for a lifetime. That joy is your right, and it is on the other side of the fear, on the day you rest, for the first time for real, and discover that you didn't collapse, you were held, or you held yourself, with ground underneath.
 
-I won't give you a manual of instructions, and this relieving of the guard is, very often, made with help. But I'll leave you the principle. Set down the armor, in a small way, first, with those who are trustworthy. Let yourself be fragile, rest, lean. And discover, slowly, and perhaps with hands to accompany you, that you no longer need to be strong all the time, and that resting, today, does not make you collapse.
+I won't give you a manual of instructions, and this relieving of the guard is, very often, made with help. But I'll leave you the rule of engagement. Set down the armor, in a small way, first, with those who are trustworthy. Let yourself be fragile, rest, lean. And discover, slowly, and perhaps with hands to accompany you, that you no longer need to be strong all the time, and that resting, today, does not make you collapse.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things. But, in the case of an armor of this age, understanding may not be enough, and telling you so is the most honest way to care for someone who endured so much alone.
 
-It doesn't change everything all at once. It does not make you, tomorrow, unfasten an armor of a whole lifetime. But it changes enough so that you stop confusing your exhaustion with strength, and your shell with who you are.
+No fortress is dismantled in a single day. It does not make you, tomorrow, unfasten an armor of a whole lifetime. But it changes enough so that you stop confusing your exhaustion with strength, and your shell with who you are.
 
 Now you know that you became too strong, and that this strength was not a choice, it was a necessity, raised when there was no one else to be it for you.
 
@@ -233,7 +233,7 @@ You know that you can rest without collapsing, and that the verb is to rest, to 
 
 And you know, now, that your strength was never the problem, that it saved you, and that what you lack is not less strength, it is the permission to set it down every now and then, to be, also, the one held, to rest without that making you fall.
 
-I want to leave you an image.
+I want to leave you with a scene to keep watch over.
 
 Imagine a soldier who was left alone defending a fortress, without reinforcements, without anyone to relieve his guard, and who stayed there, in armor, on sentry, day and night, year after year, never able to sleep, because if he slept, no one guarded the gate. And the war ended, long ago, but the soldier remains on sentry, exhausted, because no one ever came to tell him he could rest.
 
@@ -247,7 +247,7 @@ And I want to tell you one last thing, simple, to relieve the guard of these pag
 
 You know, deep down, the sentence that holds this book up as you held everything else up. I no longer need to carry the armor all the time.
 
-Understanding was the first step. But there is a second, and that one is not made only by reading. It is made by setting down, slowly, the armor, piece by piece. And, very often, it is made with help, with someone prepared to relieve your guard while your body learns that it can rest without collapsing. Because a wound of someone who endured alone for too long deserves hands that know how to, at last, hold her, and seeking them is not collapsing. It is caring, at last, for someone who was never cared for.
+Understanding was the first watch relieved. But there is a second, and that one is not made only by reading. It is made by setting down, slowly, the armor, piece by piece. And, very often, it is made with help, with someone prepared to relieve your guard while your body learns that it can rest without collapsing. Because a wound of someone who endured alone for too long deserves hands that know how to, at last, hold her, and seeking them is not collapsing. It is caring, at last, for someone who was never cared for.
 
 And if there is a single thought you take with you from inside this fortress, let it be this. You do not have to deserve rest by enduring first everything there is to endure. Rest is not a prize you earn at the end of a limitless strength. It is a human need, a right of yours, today, now, with everything there still is to do, simply for being human and for being no longer in that time when there was no one to relieve your guard.
 
