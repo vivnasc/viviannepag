@@ -366,7 +366,10 @@ export default function ProdutosAdmin() {
             <button onClick={() => apagar(p)} className="text-rosa/60 text-[0.78rem] hover:text-rosa">apagar</button>
           </div>
         );
-        const universosComProdutos = COLECOES.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0);
+        const ROMANO = { I:1, II:2, III:3, IV:4, V:5, VI:6, VII:7 } as Record<string, number>;
+        const universosComProdutos = COLECOES
+          .filter(c => (porColecao.get(c.id)?.length ?? 0) > 0)
+          .sort((a, b) => (ROMANO[a.romano] ?? 99) - (ROMANO[b.romano] ?? 99));
         const todosAbertos = universosComProdutos.every(c => abertos.has(c.id));
         return (
           <div className="space-y-4">
