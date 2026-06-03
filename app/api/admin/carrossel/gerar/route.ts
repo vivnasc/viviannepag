@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { semanaSeed } from '@/lib/carrossel/calendario';
 import { getCatalogoProdutos, produtosRelevantes, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
+import { directivaImagem } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -51,11 +52,20 @@ ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
 
 ${ecossistema}
 
+${directivaImagem(universo)}
+
 Vais planear UMA SEMANA de ${numDias} dias de conteudo para Instagram/TikTok sobre o tema dado, no universo "${col.nome}" (${col.pitch}).
-Mistura formatos ao longo da semana: pelo menos 1 'carrossel-educativo', 1 'reel-gancho', 1 'citacao-visual', e 1 'carrossel-produto' (este ultimo com CTA mais directo a um produto).
+Mistura formatos ao longo da semana: pelo menos 1 'carrossel-educativo', 1 'reel-gancho', 1 'citacao-visual', e 1 'carrossel-produto' (este ultimo com CTA mais directo).
+
+COMBINA PRODUTOS — pensa a semana como uma JORNADA de loja, nao posts soltos:
+- Escolhe 2-3 produtos COMPLEMENTARES do ecossistema que se reforcam: tipicamente um ebook de ENTRADA (porta acessivel), um PACK que APROFUNDA, e (opcional) um COMPLEMENTO de outro universo que toque o mesmo nervo.
+- Distribui-os pela semana: dias educativos preparam o desejo; o dia 'carrossel-produto' apresenta a jornada ("comeca por X, aprofunda em Y") com naturalidade, nunca como anuncio.
+- Cada dia tem um produto principal (produtoRelacionado) e pode listar produtosRelacionados. Usa slugs/ids EXACTOS do ecossistema.
+- Difunde a loja com generosidade: o conteudo entrega valor a serio; o produto e o passo seguinte natural, nao a isca.
 
 DEVOLVE APENAS JSON valido, sem texto a volta, neste formato exacto:
 {
+  "jornada": { "entrada": "slug-ebook-de-entrada", "aprofundar": "slug-pack", "complemento": "slug-opcional", "fio": "1 frase que liga os 3 produtos pelo mesmo nervo emocional" },
   "dias": [
     {
       "dia": 1,
@@ -64,7 +74,8 @@ DEVOLVE APENAS JSON valido, sem texto a volta, neste formato exacto:
       "titulo": "string",
       "descricao": "1 frase do que e o conteudo",
       "hashtags": ["#..."],
-      "produtoRelacionado": "slug-ou-id-exacto-do-ecossistema",
+      "produtoRelacionado": "slug-principal-exacto-do-ecossistema",
+      "produtosRelacionados": ["slug-1", "slug-2"],
       "horario": "11:30",
       "slides": [
         { "tipo": "capa|conteudo|citacao|cta", "texto": "...", "bold": ["trechos a negrito"], "destaque": "so em citacao/cta", "notaVisual": "EN, descricao de imagem editorial sem pessoas/rostos/texto", "fundoClaro": true }
@@ -104,7 +115,7 @@ Notas: carrosseis tem 6-8 slides (capa + 4-6 conteudo + 1 cta). reels tem reelSc
   if (ini < 0 || fim <= ini) {
     return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
   }
-  let parsed: { dias?: unknown[] };
+  let parsed: { dias?: unknown[]; jornada?: unknown };
   try {
     parsed = JSON.parse(texto.slice(ini, fim + 1));
   } catch {
@@ -121,6 +132,7 @@ Notas: carrosseis tem 6-8 slides (capa + 4-6 conteudo + 1 cta). reels tem reelSc
       plataforma: dia.plataforma ?? 'ambas',
       horario: dia.horario ?? '11:30',
       hashtags: Array.isArray(dia.hashtags) ? dia.hashtags : [],
+      produtosRelacionados: Array.isArray(dia.produtosRelacionados) ? dia.produtosRelacionados : undefined,
     };
   });
 
@@ -133,7 +145,7 @@ Notas: carrosseis tem 6-8 slides (capa + 4-6 conteudo + 1 cta). reels tem reelSc
   const { data, error } = await supabase
     .from('carousel_collections')
     .upsert(
-      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null } },
+      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null, jornada: parsed.jornada ?? null } },
       { onConflict: 'slug' },
     )
     .select()
