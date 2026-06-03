@@ -29,7 +29,7 @@ I want to begin by telling you something that perhaps no one has told you. What 
 
 And I want to tell you too, with all care, that this book is going to be different from the others you may have read about motherhood. I'm not going to ask you to have more patience. I'm not going to ask you to understand your child better, to try harder, to love more perfectly. You've already done all of that, and a great deal, and for too long. What I'm going to do is the opposite: I'm going to help you see that there's a point, and you may have crossed it long ago, where understanding more stops being love and becomes a way of erasing yourself.
 
-There's something you need to hear before everything else, and it's the heart of this whole book: understanding someone does not oblige you to remain exposed to what they do. You can understand your child's pain, his story, his wounds, and at the same time decide that you do not accept being treated the way he treats you. The two things fit together. You don't have to choose between loving him and protecting yourself. And learning to hold both at the same time is, perhaps, the most important thing you can do, for yourself and, as strange as it may seem, also for him.
+There's something you need to hear before everything else, and it's the heart of this whole book: understanding someone does not oblige you to remain exposed to what they do. You can understand your child's pain, his story, his wounds, and at the same time decide that you do not accept being treated the way he treats you. The open heart and the closed door belong in the same hand. You don't have to choose between loving him and protecting yourself. And learning to hold both at the same time is, perhaps, the most important thing you can do, for yourself and, as strange as it may seem, also for him.
 
 I'm going to ask you one thing throughout these pages: that you read with tenderness for yourself. That, whenever the voice appears that says "but I'm the mother, I have to endure," you stop for a moment and ask yourself whether you would say that to a friend in your situation. Because you deserve the same care you would give her. And perhaps, by the end of this book, you'll begin to believe that setting a boundary with someone who hurts you is not ceasing to be a mother. It's the way to keep being one without losing yourself entirely along the way.
 
@@ -113,7 +113,7 @@ I'm going to let fall here the sentence that can break the chain that has held y
 
 To say enough is not to stop loving.
 
-Stay with this a moment. Feel what stirs.
+Let this sentence stand at the threshold of you, like a door you are finally allowed to close. Feel what stirs.
 
 Your whole life as a mother you believed the opposite. You believed that saying no, setting a boundary, refusing, drawing away, was the opposite of loving. That a mother who loves endures, welcomes, always forgives, is always available. And so, each time your body asked you to stop, to protect yourself, to say enough, your mind held you back with the same sentence: if you do that, you stop being a good mother. And you stayed. And you suffered. And the boundary, which was your salvation, stayed forbidden by a belief you never got to question.
 
@@ -197,7 +197,7 @@ And you know, perhaps for the first time, that your pain counts. That you are no
 
 You know, deep down, the sentence that holds this whole book together: I can love you and say enough.
 
-Understanding was the first step. But there's a second, and the second, in this book, is more than self-awareness. It's protection, and sometimes it's professional care, and it's a network around you.
+Naming what hurts you, and learning to say enough, was the first step across. But there's a second, and the second, in this book, is more than self-awareness. It's protection, and sometimes it's professional care, and it's a network around you.
 
 And I want you to carry with you the coexistence that runs through this whole book, because it's in it that your freedom lives. I see your pain, and I do not accept this way of treating me. Repeat it until it stops sounding like a contradiction and begins to sound like the truth. Because it was the impossibility of holding these two things at the same time that trapped you for years: you thought you had to choose between compassion and protection, between being a good mother and being a whole person. You don't. You can keep both, in the same hand, with the same love. And the day you manage to say both things, and to keep them, is the day you stop losing yourself and begin to be able to love without disappearing.
 
