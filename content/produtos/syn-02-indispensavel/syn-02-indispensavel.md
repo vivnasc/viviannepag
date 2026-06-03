@@ -107,13 +107,13 @@ Talvez tenhas crescido numa casa onde tinhas de aliviar os adultos. Ajudar. Cuid
 
 Talvez tenhas sentido, cedo, que o amor podia ir-se embora. Que não era incondicional. Que tinhas de o segurar com as tuas mãos, fazendo, dando, sendo precisa.
 
-Repara no que uma criança aprende num lugar destes.
+Numa casa onde o afeto se ganhava a fazer, uma criança aprende depressa a sua lição.
 
 Aprende que não basta existir para ser amada. Que tem de servir. Que o amor se paga com utilidade.
 
 Aprende que ser deixada é um perigo real, e que a forma de o evitar é tornar-se necessária, ao ponto de não poderem prescindir dela.
 
-E essa criança cresce. Mas a pergunta fica. O que tenho de fazer para que não me deixem? E a resposta que encontrou em pequena continua a governá-la: faço-me imprescindível.
+E essa criança cresce. Mas a pergunta fica, intacta, a roer por baixo de tudo. E a resposta que encontrou em pequena continua a governá-la: faço-me imprescindível.
 
 Por isso, quando amas, não consegues simplesmente estar. Tens de fazer. De resolver. De te tornares o pilar. Porque parar de fazer, para ti, é arriscar ser deixada.
 
@@ -207,7 +207,7 @@ Repara nisso. A falha dele sossega-te, porque confirma que ele precisa de ti. E 
 
 É um lugar triste para se amar. A desejar, no fundo, que o outro não cresça, para continuares a ser-lhe indispensável. E é o oposto do amor, que quer o outro inteiro, capaz, livre, mesmo que isso signifique que ele já não precise de nós para sobreviver.
 
-Repara num medo que talvez nunca tenhas ousado olhar de frente. No fundo, tu não acreditas que sejas suficiente só por seres. que talvez nunca tenhas ousado olhar de frente. No fundo, tu não acreditas que sejas suficiente só por seres.
+Repara num medo que talvez nunca tenhas ousado olhar de frente. No fundo, tu não acreditas que sejas suficiente só por seres.
 
 Achas que, se parasses de fazer, de dar, de resolver, não haveria ali nada que prendesse ninguém. Que a tua pessoa, despida da utilidade, é pouca. Insuficiente. Não bastante para se ficar por ela.
 
@@ -275,13 +275,13 @@ Por isso não te permites parar, nem doente. Porque parar não é só descansar.
 
 Não respondas já à pergunta de quem és se ninguém precisar de ti. Não se responde com a cabeça.
 
-Mas deixa-a aberta. Porque é nela que começa a tua liberdade. No dia em que descobrires que existe ali uma pessoa, debaixo de tudo o que fazes, com valor próprio, digna de ficar só por existir, deixas de precisar de te tornar indispensável. E aí, só aí, podes ser amada por ti.
+Mas deixa-a aberta. Porque é nessa pergunta sem resposta fácil que pousas, pela primeira vez, sem servires. No dia em que descobrires que existe ali uma pessoa, debaixo de tudo o que fazes, com valor próprio, digna de ficar só por existir, deixas de precisar de te tornar indispensável. E aí, só aí, podes ser amada por ti.
 
 Há uma solidão muito particular na tua vida, e quero nomeá-la, porque talvez nunca lhe tenhas posto palavras.
 
 És a que cuida de toda a gente, e não tens quem cuide de ti. És o pilar de todos, e não te apoias em ninguém. Estás rodeada de pessoas que dependem de ti, e sentes-te, no meio delas, profundamente só.
 
-Porque ser precisada não é ser acompanhada. As pessoas vêm a ti pelo que resolves, não por quem és. Procuram-te quando precisam, não quando querem, simplesmente, estar contigo. E essa diferença, que talvez não nomeies, dói num lugar fundo.
+Porque uma agenda cheia de quem te procura não é o mesmo que uma vida partilhada. As pessoas vêm a ti pelo que resolves, não por quem és. Procuram-te quando precisam, não quando querem, simplesmente, estar contigo. E essa diferença, que talvez não nomeies, dói num lugar fundo.
 
 Repara: quando foi a última vez que alguém te perguntou como estavas, e esperou de verdade pela resposta? Que cuidou de ti sem tu teres de pedir, ou de colapsar primeiro? Para muitas mulheres como tu, a resposta é um silêncio, e nesse silêncio mora a solidão de quem dá tudo e recebe pouco.
 
@@ -295,7 +295,7 @@ Uma criança assim aprende cedo a equação que ainda hoje te governa. Não sou 
 
 E essa criança nunca soube o que era ser amada sem ser útil. Nunca experimentou ser querida só por estar, sem fazer, sem dar, sem resolver. E por isso, em adulta, não acredita que isso seja possível, e continua a comprar, com utilidade, um amor que tem medo de não merecer de graça.
 
-Quero que vejas isto sem culpa, e sem acusar quem te criou. Quem te precisou cedo demais, na maioria das vezes, estava ele próprio em falta, sem dar conta, a apoiar-se na criança que tinha à mão. Não te quis roubar o direito de seres amada sem servir. Mas roubou-to, sem querer, e tu carrega-lo ainda.
+Olha para isto sem te acusares, e sem condenares quem te criou. Quem te precisou cedo demais, na maioria das vezes, estava ele próprio em falta, sem dar conta, a apoiar-se na criança que tinha à mão. Não te quis roubar o direito de seres amada sem servir. Mas roubou-to, sem querer, e tu carrega-lo ainda.
 
 ## 5. Ser amada por ser, não por servir
 
@@ -331,13 +331,13 @@ Ora, se é assim que o teu amor funciona, porque haveria o amor dos outros por t
 
 A resposta é que não tens. Essa regra não é uma verdade sobre o amor. É uma sentença antiga sobre ti, aprendida num lugar onde, de facto, tiveste de servir para ficar. E as sentenças, ao contrário das verdades, podem ser revogadas.
 
-O despertar, quando vem, não chega como uma trovoada. Chega como um alívio.
+A descoberta, quando vem, não chega num arroubo de certeza. Chega como o pousar de um peso que carregavas aos ombros sem dar conta. Chega como um alívio.
 
 É o dia em que não fazes nada de especial, em que estás cansada, em que por uma vez não resolves nem antecipas nada, e ele fica na mesma. Está ali. Quer-te ali. Sem que tenhas feito por isso.
 
 E sentes, por um instante, uma coisa que nunca tinhas sentido. Que talvez possas ser amada mesmo sem servir. Que talvez o teu lugar não seja alugado. Que talvez não tenhas de pagar a renda.
 
-É um instante pequeno. Mas muda tudo. Porque desmente, com a força do que sentiste, uma lei que carregavas há décadas.
+É um instante pequeno. Mas muda tudo. Porque, naquele segundo em que ele te quis sem que servisses, cai por terra a regra que governava o teu amor desde a infância: a de que sem utilidade não há lugar.
 
 A partir daí, ainda que o velho terror volte a falar, já sabes que há outro caminho. Que se pode ser querida por quem se é. E que isso, longe de ser menos seguro do que ser necessária, é o único amor que de verdade descansa.
 
@@ -355,7 +355,7 @@ Quero parar aqui um momento, porque há um ponto em que isto deixa de ser um pad
 
 Se o medo de seres deixada é tão grande que te leva a anular-te por inteiro, a desaparecer dentro do que fazes pelos outros, a perder-te de ti em nome de seres necessária. Se há um pânico de abandono que te tira o chão, que te faz aguentar relações que te diminuem, só para não ficares só. Se te esgotaste ao ponto de já não saberes quem és sem servir.
 
-Isto pode ser mais do que um padrão. Pode ser uma ferida de vínculo, um medo de abandono fundo, que merece o apoio de um profissional. Não é fraqueza procurá-lo. É o cuidado que mereces, e que talvez nunca te tenhas dado, por estares sempre ocupada a cuidar de todos menos de ti.
+Já não estamos no terreno de um hábito que se ajusta sozinho. Pode ser uma ferida de vínculo, um medo de abandono fundo, que merece o apoio de um profissional. Não é fraqueza procurá-lo. É o cuidado que mereces, e que talvez nunca te tenhas dado, por estares sempre ocupada a cuidar de todos menos de ti.
 
 E quero dizer-te uma coisa, com ternura. A relação de ajuda pode ser, para ti, o primeiro lugar onde experimentas ser cuidada sem teres de servir. Onde alguém se ocupa de ti, sem tu teres de o tornar dependente, sem tu teres de pagar com utilidade. É a cura, no próprio lugar da ferida: deixares-te, enfim, ser o lado que recebe.
 
@@ -381,7 +381,7 @@ Mas é precisamente aí, nesse não-fazer suportado, que descobres a verdade. Se
 
 Porque uma relação que só se aguenta pela tua utilidade não é amor. É um emprego sem fim, mal pago, do qual nunca te podes despedir. E tu mereces mais do que um emprego. Mereces ser escolhida.
 
-Escolher-se começa por uma coisa pequena e difícil: perguntares-te o que tu queres. Não o que ele precisa, não o que farias por ele, mas o que tu, no meio de tudo, queres. Provavelmente vais ficar em branco, porque passaste a vida virada para as necessidades dos outros, e desligaste o canal que te dizia das tuas. Reabri-lo é o princípio. Voltares a contar, tu, na tua própria vida.
+Escolher-se começa por uma coisa pequena e difícil: perguntares-te o que tu queres. Não o que ele precisa, não o que farias por ele, mas o que tu, no meio de tudo, queres. Provavelmente vais ficar em branco, porque passaste a vida virada para as necessidades dos outros, e desligaste o canal que te dizia das tuas. Reabri-lo é o princípio. É a tua voz a regressar a uma vida que andava toda virada para fora.
 
 Quero prevenir-te de uma coisa. Escolher-se não é deixar de dar.
 
@@ -391,7 +391,7 @@ E quando dás por escolha, e não por terror, podes também não dar, sem pânic
 
 É isso, escolher-se. Não deixar de amar. Voltar a existir dentro do amor.
 
-E há uma diferença que protege tudo o resto. Escolheres-te não é deixares de dar, de cuidar, de estar. Isso é tua riqueza, e não a vais perder. É deixares de dar por terror, e passares a dar por escolha. De um lugar cheio, e não de um medo. E quando dás por escolha, podes também não dar, podes precisar, podes receber, sem que o teu lugar fique em risco. Continuas generosa. Apenas deixas de pagar, com a tua generosidade, uma renda que nunca devias ter de pagar.
+E há uma diferença que protege tudo o resto. Escolheres-te não é deixares de dar, de cuidar, de estar. A tua capacidade de cuidar é das coisas mais bonitas que tens, e ninguém te pede que a deites fora. É deixares de dar por terror, e passares a dar por escolha. De um lugar cheio, e não de um medo. E quando dás por escolha, podes também não dar, podes precisar, podes receber, sem que o teu lugar fique em risco. Continuas generosa. Apenas deixas de pagar, com a tua generosidade, uma renda que nunca devias ter de pagar.
 
 Quero acrescentar uma fronteira, porque é importante.
 
@@ -419,9 +419,9 @@ Quero prevenir-te de uma coisa. Quando começares a precisar, a pedir, a deixar 
 
 Essa culpa é o velho padrão a defender-se. Para ti, dar sempre era a norma, e pedir parece transgressão. Mas precisar não é egoísmo. É humano. E uma relação onde só uma pessoa pode precisar não é amor, é um serviço, e tu mereces mais do que ser a prestadora de um serviço que confundes com ser amada.
 
-Há ainda uma coisa que vais ter de reaprender. A receber. Quando alguém te quer dar, cuidar, ajudar, repara no teu impulso. Desvias. Recusas. Corres a retribuir, para voltares à posição de quem dá. Porque receber põe-te no lugar exposto que evitas.
+Há ainda uma coisa que vais ter de reaprender, e é talvez a mais estranha. A não preencher os silêncios com tarefas. Repara em como, quando ele está simplesmente contigo, sem precisar de nada, te sobe uma comichão de te levantares, de arrumar, de oferecer um chá, de inventar uma utilidade qualquer. Esse silêncio sem função aterra-te, porque é nele que ficas só com a tua presença, despida do que fazes.
 
-Escolher-te inclui ficar, por uma vez, do lado de quem recebe. Deixar que cuidem de ti sem fugires logo para cuidar de volta. Aguentar o desconforto de não estares a dar nada, e descobrir que, mesmo assim, ficam. É aí, nesse receber suportado, que aprendes a verdade que mais te falta: que podes ser amada sem servir.
+Aguenta esse silêncio. Fica sentada nele. Deixa que ele te veja a não fazer nada, e descobre, com espanto, que continua ali, que te quer ali, sem que tenhas movido um dedo. É nesse nada partilhado, e não no muito que produzes, que mora a intimidade que sempre te faltou.
 
 ## 7. Escolhida sem ser imprescindível
 
@@ -449,7 +449,7 @@ Liberta-te a ti. Porque deixas de carregar a relação inteira aos ombros. Deixa
 
 E liberta o amor entre vocês. Porque um amor entre duas pessoas inteiras, que se escolhem livres, é fundo de uma forma que um amor entre uma que sustenta e outro que depende nunca pode ser.
 
-Há uma alegria à espera do outro lado. A alegria de seres querida sem teres de fazer nada para o merecer. De descansares no amor, em vez de o sustentares. De seres, por uma vez, cuidada, e não só cuidadora.
+Do lado de lá deste medo, espera-te uma coisa que nunca te deixaste ter. A alegria de seres querida sem teres de fazer nada para o merecer. De descansares no amor, em vez de o sustentares. De seres, por uma vez, cuidada, e não só cuidadora.
 
 Essa alegria é o teu direito. Tão teu como o de qualquer pessoa. E está do outro lado do terror, no dia em que arriscares deixar de ser imprescindível para descobrir se te escolhem por ti.
 
@@ -477,9 +477,9 @@ Essa fome não é fraqueza. É humana. Todos precisamos de receber, de ser cuida
 
 E há uma coisa que muda quando te deixas receber. As tuas relações tornam-se recíprocas, e não estradas de sentido único. As pessoas podem, enfim, dar-te, e isso aproxima, iguala, aprofunda. Deixas de ser a fonte que nunca se rega, e passas a estar num fluxo de dar e receber, onde também tu és enchida.
 
-Repara numa última coisa, sobre quem te vê. Se há crianças, ou pessoas mais novas, que aprendem a amar olhando para ti, repara no que lhes ensinas. Se te veem dar sempre e nunca receber, anular-te para seres necessária, comprar o amor com utilidade, aprendem que é assim que uma mulher ama. E é provável que repitam.
+Repara numa última coisa, sobre como o teu corpo se vai habituando a este novo lugar. Ao princípio, receber vai parecer-te quase um erro, uma dívida que se acumula. Vais querer registar tudo o que te dão, para o devolveres em dobro, depressa. Repara nesse impulso de contabilista do afeto, e larga-o. O amor não tem livro de contas. Ninguém te vai cobrar, no fim, o que recebeste e não pagaste com serviço.
 
-A coisa mais libertadora que podes fazer por quem te vê não é dar-lhe ainda mais. É mostrar-lhe uma mulher que se deixa amar sem se anular. Que dá e recebe. Que tem lugar sem o pagar. Às vezes uma mulher aprende a escolher-se, enfim, não só por si, mas para não passar a quem ama a mesma renda sem fim que ela pagou.
+E há uma medida nova que vais aprender a sentir, com o tempo. A de uma relação em que ninguém é credor nem devedor. Em que se dá sem fatura e se recebe sem culpa. Esse equilíbrio, que nunca conheceste, não se calcula. Sente-se, no descanso de quem, enfim, deixou de pesar cada gesto numa balança.
 
 ## 8. A travessia
 
@@ -489,13 +489,13 @@ Não muda tudo de uma vez. Não te faz, amanhã, parar de te fazer necessária. 
 
 Agora sabes que te tornas indispensável, e que isso não é só generosidade, é um seguro contra o abandono.
 
-Sabes que a pergunta por baixo é antiga. O que tenho de fazer para que não me deixem. E que a aprendeste num lugar onde o teu lugar não era seguro.
+Sabes que a pergunta por baixo é antiga, a de quem teme não ser ficada. E que a aprendeste num lugar onde o teu lugar não era seguro.
 
 Sabes que utilidade não é intimidade, e que ao te fazeres precisa escondeste a mulher que podia ser amada por ser.
 
 Sabes quem és quando ninguém precisa de ti, e que o terror que aí aparece é o medo de não teres valor próprio.
 
-Sabes que podes ser amada por seres, não por servires. E sabes que o verbo é escolher-se, voltar a existir dentro do amor.
+Sabes que há um amor que te quer a ti, e não à fatura dos teus cuidados. E sabes que o verbo é escolher-se, voltar a existir dentro do amor.
 
 E sabes que ser escolhida é diferente de ser imprescindível. Que uma é prisão e a outra é liberdade. E que só a segunda dá paz.
 
