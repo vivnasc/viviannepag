@@ -120,7 +120,7 @@ export function BotaoCompra({
     return (
       <div className="bg-ambar/10 border border-ambar/40 rounded-[14px] p-6 text-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/gratidao-sucesso.jpg" alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-full h-28 rounded-[12px] object-cover mb-3 border border-ambar/30" />
+        <img src="/gratidao-sucesso.png" alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-full h-28 rounded-[12px] object-cover mb-3 border border-ambar/30" />
         <p className="text-ambar font-serif text-[1.2rem] mb-2">
           {isPt ? 'Obrigada!' : 'Thank you!'}
         </p>
