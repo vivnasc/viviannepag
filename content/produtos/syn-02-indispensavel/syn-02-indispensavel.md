@@ -27,7 +27,7 @@ Tu chamas a isto amor. E há amor, sim. Mas há outra coisa por baixo, mais anti
 
 Há um cálculo silencioso. Se ele precisar muito de mim, não me deixa. Logo, vou fazer com que precise.
 
-Olha para as tuas relações. És sempre a que dá mais, a que faz mais, a que segura tudo. O pilar. A que não pode faltar.
+Percorre os teus amores um a um. És sempre a que dá mais, a que faz mais, a que segura tudo. O pilar. A que não pode faltar.
 
 E há um orgulho nisso. "Sem mim, aquilo desmoronava." Mas há também um cansaço enorme, e uma solidão que não percebes.
 
@@ -41,7 +41,7 @@ Este livro não te vai ensinar a dar menos para o prender. Não vim dar-te jogos
 
 Vim mostrar-te uma coisa que talvez nunca tenhas visto. Que ser necessária não é ser amada. E que te confundiste entre as duas há tanto tempo que já nem reparas.
 
-Adianto-te a direção, para leres em paz. Tu podes ser escolhida sem te tornares indispensável. Podes ser amada por quem és, e não pelo que fazes. E o medo que te põe a fazer tanto, o medo de seres deixada, não se cura fazendo mais. Cura-se de outra forma.
+Digo-te já onde isto chega, para poderes baixar os braços enquanto lês. Tu podes ser escolhida sem te tornares indispensável. Podes ser amada por quem és, e não pelo que fazes. E o medo que te põe a fazer tanto, o medo de seres deixada, não se cura fazendo mais. Cura-se de outra forma.
 
 Quero que repares numa contradição. Tu queres, profundamente, ser amada por quem és. Sonhas com alguém que te veja, que te queira a ti, não ao que fazes.
 
@@ -51,7 +51,7 @@ Desejas ser vista, e nunca te deixas ver. Queres ser amada por ti, e nunca paras
 
 É por isso que, mesmo rodeada de quem precisa de ti, te sentes só. Porque ser precisada não é ser conhecida. E tu construíste a tua vida toda sobre a primeira coisa, deixando a segunda, a que mais querias, por acontecer.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças em pormenores miúdos do teu dar.
 
 Em sentires uma inquietação quando ele não precisa de nada de ti. Em quase provocares uma necessidade, só para voltares a ser útil.
 
@@ -93,7 +93,7 @@ Ver isto não é para te culpares. É para perceberes que a tua forma de amar te
 
 ## 2. Necessária para não ser deixada
 
-Volta atrás. Mais atrás do que qualquer namorado.
+Volta atrás. Mais atrás do que qualquer homem que tenhas servido.
 
 A pergunta por baixo de tudo isto é simples, e é antiga. O que tenho de fazer para que não me deixem?
 
@@ -127,7 +127,7 @@ Quero que vejas isto sem culpa, e sem acusar quem te criou.
 
 Quem não te deu um lugar seguro, na maioria das vezes, não tinha um lugar seguro para te dar. Deu o que tinha. Não te quis ferir.
 
-Mas a verdade é esta. Aprendeste que o teu lugar tinha de ser ganho. E hoje continuas a ganhá-lo, todos os dias, no amor, com um cansaço que já não acaba.
+Mas o que ficou foi isto. Aprendeste que o teu lugar tinha de ser ganho. E hoje continuas a ganhá-lo, todos os dias, no amor, com um cansaço que já não acaba.
 
 Há uma figura que talvez reconheças na tua infância. Um adulto que só te via quando lhe eras útil.
 
@@ -167,7 +167,7 @@ Porque ser mantida pela dependência não acalma o medo do abandono. Confirma-o.
 
 ## 3. Utilidade não é intimidade
 
-Há uma confusão no centro de tudo. E quero desfazê-la com cuidado.
+No coração da tua maneira de amar há uma troca trocada. E quero desfazê-la com cuidado.
 
 Confundiste ser necessária com ser amada. São coisas diferentes. Muito diferentes.
 
@@ -179,7 +179,7 @@ E aqui está o problema. Tu construíste o amor todo sobre a primeira coisa, a u
 
 Substituíste ser amada por ser precisa. Porque ser precisa controlas tu, com esforço. Ser amada não controlas, depende de seres vista e querida por quem és, e isso assusta-te.
 
-Repara no que isto te custa.
+Repara no que esta troca te cobra.
 
 Uma relação construída na utilidade nunca te dá a certeza do amor. Porque no fundo sabes, sempre, que ele fica pela tua utilidade, não por ti.
 
@@ -233,11 +233,11 @@ Largar a indispensabilidade não é só libertares-te a ti. É libertá-los a el
 
 ## 4. Quem sou eu se ninguém precisar de mim
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela depressa indo resolver algo para alguém.
+Vou pousar aqui uma pergunta e deixá-la quieta. Sozinha. Não fujas dela depressa indo resolver algo para alguém.
 
 Quem és tu se ninguém precisar de ti?
 
-Fica com ela. Repara no vazio que ela abre.
+Fica com ela. Repara no vazio que se abre quando não há ninguém a precisar de ti.
 
 Para ti, esta pergunta talvez seja das mais aterradoras que há. Porque a tua identidade inteira se construiu sobre seres necessária.
 
@@ -273,7 +273,7 @@ Se o teu valor está no que fazes, então estás sempre a um cansaço de distân
 
 Por isso não te permites parar, nem doente. Porque parar não é só descansar. É arriscar o lugar. E vives numa tensão sem fim, a de quem tem de continuar a provar a sua utilidade para continuar a merecer o amor.
 
-Não respondas já à pergunta de quem és se ninguém precisar de ti. Não se responde com a cabeça.
+Não respondas já à pergunta de quem és se ninguém precisar de ti. Não se responde a resolver, como resolves tudo o resto.
 
 Mas deixa-a aberta. Porque é nessa pergunta sem resposta fácil que pousas, pela primeira vez, sem servires. No dia em que descobrires que existe ali uma pessoa, debaixo de tudo o que fazes, com valor próprio, digna de ficar só por existir, deixas de precisar de te tornar indispensável. E aí, só aí, podes ser amada por ti.
 
@@ -315,13 +315,13 @@ Podes ser amada por seres, não por servires.
 
 Há um amor que não te quer pela tua utilidade. Que te quer a ti. Que ficaria contigo mesmo que não fizesses nada, mesmo que não resolvesses nada, mesmo que, por uma vez, fosses tu a precisar.
 
-Sei que isto soa estranho. O teu mapa diz o contrário. O teu mapa diz que sem utilidade não há lugar, que o amor se paga com serviço, que parar de fazer é ser deixada.
+Sei que isto te soa a língua estrangeira. Tudo o que aprendeste sobre amar diz o contrário. Diz que sem utilidade não há lugar, que o amor se paga com serviço, que parar de fazer é ser deixada.
 
 Mas o teu mapa foi desenhado por uma criança que teve de ganhar o seu lugar. Era exato então. Não é exato em todo o lado, agora.
 
 Há, no mundo, amor que se dá de graça. Que não pede fatura. Que quer a pessoa, não a função. O teu mapa não o marca, porque foi feito onde ele não existia. Mas existe.
 
-Vou dizer-te isto de outra forma.
+Deixa-me virar isto ao contrário, do lado de quem ama em vez do de quem é amada.
 
 Pensa em alguém que tu amas profundamente. Um filho, uma amiga, alguém. Amas essa pessoa pelo que ela faz por ti? Ou amá-la-ias na mesma se ela, de repente, não pudesse fazer nada?
 
@@ -361,7 +361,7 @@ E quero dizer-te uma coisa, com ternura. A relação de ajuda pode ser, para ti,
 
 ## 6. Escolher-se
 
-Há um verbo para esta travessia. E não é dar menos. É escolher-se.
+Há um gesto que desfaz a indispensabilidade. E não é dar menos. É escolher-se.
 
 Escolheres-te não é tornares-te egoísta, fria, deixares de amar. É parares de te apagar em nome do outro. É voltares a contar, tu, na tua própria vida.
 
@@ -425,7 +425,7 @@ Aguenta esse silêncio. Fica sentada nele. Deixa que ele te veja a não fazer na
 
 ## 7. Escolhida sem ser imprescindível
 
-Há um destino para esta travessia. E cabe numa imagem. Ser escolhida sem seres imprescindível.
+Para onde tudo isto te leva cabe numa imagem. Ser escolhida sem seres imprescindível.
 
 Não te confundas. Imprescindível e escolhida parecem a mesma coisa, e são opostas.
 
@@ -451,7 +451,7 @@ E liberta o amor entre vocês. Porque um amor entre duas pessoas inteiras, que s
 
 Do lado de lá deste medo, espera-te uma coisa que nunca te deixaste ter. A alegria de seres querida sem teres de fazer nada para o merecer. De descansares no amor, em vez de o sustentares. De seres, por uma vez, cuidada, e não só cuidadora.
 
-Essa alegria é o teu direito. Tão teu como o de qualquer pessoa. E está do outro lado do terror, no dia em que arriscares deixar de ser imprescindível para descobrir se te escolhem por ti.
+Essa alegria pertence-te tanto a ti como a qualquer um a quem serves. Tão tua como o de qualquer pessoa. E está do outro lado do terror, no dia em que arriscares deixar de ser imprescindível para descobrir se te escolhem por ti.
 
 Quero dar-te uma forma de começar, sem fazer disto uma técnica.
 
@@ -469,7 +469,7 @@ São passos pequenos. Mas é assim que se desmonta uma vida de utilidade. Não d
 
 Quero falar-te de uma alegria que ainda não conheces, e que está do outro lado desta travessia.
 
-A alegria de seres cuidada. De adoeceres e deixares alguém tratar de ti, sem te levantares para tratar de tudo. De estares cansada e deixares alguém aliviar-te. De receberes, sem retribuíres logo, sem pagares, sem a pressa de equilibrar.
+A alegria de seres, por uma vez, tu a cuidada. De adoeceres e deixares alguém tratar de ti, sem te levantares para tratar de tudo. De pousares o peso de pilar e deixares que outra mão te segure por um bocado. De receberes, sem retribuíres logo, sem pagares, sem a pressa de equilibrar.
 
 Tu não conheces esta alegria, porque nunca te deixaste estar do lado de quem recebe. Foste sempre a que dá, a que cuida, a que segura. E há uma fome, em ti, que nunca se saciou: a de seres, por uma vez, tu, a segurada.
 
@@ -485,7 +485,7 @@ E há uma medida nova que vais aprender a sentir, com o tempo. A de uma relaçã
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, parar de te fazer necessária. Mas muda o suficiente para deixares de confundir a tua exaustão com amor.
+Não desmonta numa noite uma vida inteira de utilidade. Não te faz, amanhã, parar de te fazer necessária. Mas muda o suficiente para deixares de confundir a tua exaustão com amor.
 
 Agora sabes que te tornas indispensável, e que isso não é só generosidade, é um seguro contra o abandono.
 
@@ -517,7 +517,7 @@ Há um sinal simples para te guiares, no dia a dia. Repara, perante uma pessoa, 
 
 Quando reparares que te ligas pela necessidade do outro, desconfia. Não é amor, é a tua ferida a procurar um lugar garantido. E quando reparares que ficas com alguém que não depende de ti, que se safa sem ti, e que mesmo assim te quer, repara também: é aí, nesse querer sem dependência, que mora o amor que sempre quiseste e que tinhas medo de não merecer.
 
-É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
+É esse o trabalho da SyncHim. O livro nomeia a renda que pagas. A SyncHim ajuda-te a deixar de a pagar. Cada uma no seu passo.
 
 E antes de pousares este livro e correres a tratar do mundo, fica comigo só mais um pedido. Difícil, para ti.
 

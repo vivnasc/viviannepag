@@ -25,7 +25,7 @@ Quero dizer-te já, antes de tudo, que isto não é só timidez, nem feitio rese
 
 Porque aprendeste, algures, que existir trazia consequências. Que ocupar espaço, ser vista, dar nas vistas, na tua casa, era perigoso. E fizeste-te pequena, não por modéstia, mas para te protegeres. Encolher-te foi a tua forma de estar a salvo, de não acender o perigo que existir, ali, podia trazer.
 
-Este livro é diferente. Porque o que te encolhe não é só um traço a corrigir. É, muitas vezes, uma resposta a algo que viveste. Uma adaptação a um lugar onde ser vista era arriscado. E isso merece mais do que compreensão. Por isso, ao longo destas páginas, vou repetir-te uma coisa que custa a quem aprendeu a não pesar: entenderes por que te fazes pequena talvez não baste, e talvez precises de alguém que te ajude a ocupar, enfim, o teu lugar.
+Este livro é diferente. Porque o que te encolhe não é só um traço a corrigir. É, muitas vezes, uma resposta a algo que viveste. Uma adaptação a um lugar onde ser vista era arriscado. E uma ferida de quem teve de desaparecer pede mais do que ser compreendida. Por isso, ao longo destas páginas, vou repetir-te uma coisa que custa a quem aprendeu a não pesar: entenderes por que te fazes pequena talvez não baste, e talvez precises de alguém que te ajude a ocupar, enfim, o teu lugar.
 
 E deixo-te já o horizonte, para que possas ler sem o velho aperto de não saber onde isto vai dar. Podes ocupar espaço sem que isso traga perigo. Já não estás naquela casa onde existir era arriscado. Encolheres-te protegeu-te então, mas hoje só te apaga, e podes, devagar, e talvez com ajuda, aprender a existir, enfim, do teu tamanho.
 
@@ -33,7 +33,7 @@ Quero que vejas, desde já, o abismo entre a mulher que os outros julgam ver e a
 
 Este livro não te vem dizer que tens de te tornar exuberante, faladora, o centro de todas as atenções. Não se trata de mudares de feitio. Trata-se de te devolver uma escolha que o medo te tirou: a de poderes ser vista quando queres, de ocupares o teu lugar quando ele é teu, de existires do teu tamanho sem que um alarme te obrigue a encolher. Quer sejas, por natureza, mais quieta ou mais expansiva, mereces que isso seja uma escolha tua, e não uma imposição do medo. E é essa liberdade, e não um feitio novo, que estas páginas te vêm propor.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos gestos miúdos com que te encolhes todos os dias.
 
 Em pedires desculpa por coisas que não são tua culpa, como se a tua simples presença fosse, em si, um incómodo.
 
@@ -73,9 +73,9 @@ Mas a adaptação não se desfez quando o perigo passou. Ficou. E hoje, em adult
 
 Quero que vejas onde mora este reflexo de te encolheres, porque saberes onde ele vive explica por que não basta quereres deixar de o ter. O medo de ocupar espaço não está só na tua memória, naquilo de que te lembras. Está no teu corpo, num lugar mais fundo do que as palavras. Quando uma menina aprende, cedo, que ser vista é perigoso, o corpo dela grava esse aviso no sistema nervoso, abaixo da consciência, num registo que não se apaga só por se compreender. Por isso, hoje, o teu encolhimento perante a visibilidade não passa por uma decisão. Acontece antes de pensares, num aperto, num recuo, numa vontade de desaparecer, porque é o teu corpo a reagir, e não a tua razão a escolher.
 
-É por isso que tantas vezes te dizes que é absurdo, que ninguém te vai fazer mal por ocupares espaço, e mesmo assim o medo não obedece. Não obedece porque não nasce do raciocínio. Nasce de uma memória de corpo, antiga, que continua a tratar a visibilidade como uma ameaça à sobrevivência. E essa memória, a que faz o teu peito apertar quando alguém olha para ti, não cede a argumentos. Aprende-se de novo, devagar, com experiências novas, repetidas, em que o corpo descobre, vez após vez, que desta vez foi vista e não veio o perigo. Digo-te isto não para te assustar com a dificuldade, mas para te tirar de cima a culpa de não conseguires, só por quereres, deixar de temer. Não é falta de vontade. É a natureza de uma ferida que vive no corpo, e que por isso pede um caminho que passa pelo corpo, e muitas vezes por mãos que saibam acompanhá-lo.
+É por isso que tantas vezes te dizes que é absurdo, que ninguém te vai fazer mal por ocupares espaço, e mesmo assim o medo não obedece. Não obedece porque não nasce do raciocínio. Nasce de uma memória de corpo, antiga, que continua a tratar a visibilidade como uma ameaça à sobrevivência. E essa memória, a que faz o teu peito apertar quando alguém olha para ti, não cede a argumentos. Aprende-se de novo, devagar, com experiências novas, repetidas, em que o corpo descobre, vez após vez, que desta vez foi vista e não veio o perigo. Digo-te isto não para te assustar com a dificuldade, mas para te tirar de cima a culpa de não conseguires, só por quereres, deixar de temer. Não é por te faltar querer existir maior. É a natureza de uma ferida que vive no corpo, e que por isso pede um caminho que passa pelo corpo, e muitas vezes por mãos que saibam acompanhá-lo.
 
-Quero que vejas isto com clareza. O teu fazeres-te pequena não é um defeito, nem falta de confiança que se resolva com umas dicas de autoestima. Foi a forma mais inteligente que encontraste de não seres alvo, num lugar onde seres notada te punha em risco. Não és tímida por feitio. És uma sobrevivente, que aprendeu a desaparecer para estar a salvo. E reconhecer isto é honrar a criança que encontrou, na pequenez, uma forma de sobreviver.
+Quero que vejas o teu encolhimento com olhos limpos. O teu fazeres-te pequena não é um defeito, nem falta de confiança que se resolva com umas dicas de autoestima. Foi a forma mais inteligente que encontraste de não seres alvo, num lugar onde seres notada te punha em risco. A tua discrição não te nasceu no feitio. És uma sobrevivente, que aprendeu a desaparecer para estar a salvo. E reconhecer isto é honrar a criança que encontrou, na pequenez, uma forma de sobreviver.
 
 Quero acrescentar uma raiz que talvez reconheças, porque a pequenez nem sempre nasce do perigo físico. Às vezes nasce de teres sido eclipsada. De teres crescido à sombra de alguém que ocupava todo o espaço, um pai, uma mãe, um irmão, cuja presença não deixava lugar para a tua. Onde, para haver paz, tu tinhas de te apagar, de não competir pela atenção, de não brilhar para não ofender quem não suportava ser ofuscado. E aprendeste a fazer-te pequena não porque existir trouxesse violência, mas porque trazia ciúme, ressentimento, retirada de afeto, de quem precisava de ser sempre o maior.
 
@@ -87,11 +87,11 @@ Em qualquer destas raízes, a lição é parecida: o teu tamanho é um problema,
 
 ## 3. Encolher-me já não me protege
 
-Há uma coisa que precisas de ver. A pequenez que te salvou, no passado, hoje já não te protege. Só te apaga.
+Há uma coisa que precisas de ver, tu que aprendeste a não olhar para o teu próprio tamanho. A pequenez que te salvou, no passado, hoje já não te protege. Só te apaga.
 
 Repara. No tempo do perigo, encolheres-te fazia sentido. Tornava-te invisível ao que te poderia ferir. Era uma proteção real, eficaz, inteligente. Mas hoje, na tua vida adulta, na maioria das situações, já não há aquele perigo. E encolheres-te já não te protege de nada. Apenas te impede de viver, de seres vista, de ocupares o teu lugar.
 
-E há um custo enorme nisto. Custa-te a presença. Porque viver encolhida é viver a meio gás, sem te mostrares, sem te afirmares, sem deixares o mundo ver quem és. Passas pela vida como uma sombra, presente mas não vista, ali mas quase ausente, e tudo o que poderias ser, mostrar, dar ao mundo, fica contido, encolhido, por viver.
+E encolheres-te cobra um preço enorme. Custa-te a presença. Porque viver encolhida é viver a meio gás, sem te mostrares, sem te afirmares, sem deixares o mundo ver quem és. Passas pela vida como uma sombra, presente mas não vista, ali mas quase ausente, e tudo o que poderias ser, mostrar, dar ao mundo, fica contido, encolhido, por viver.
 
 Custa-te as oportunidades. Porque o que não se vê não se escolhe, não se convida, não se considera. Ao fazeres-te invisível, passas ao lado de coisas que seriam tuas se te mostrasses, se ocupasses o teu espaço, se te deixasses ver. A tua pequenez não te protege só do perigo, priva-te também de tudo o que exigiria seres vista.
 
@@ -111,25 +111,25 @@ Custa-te o reconhecimento. Porque o que não se mostra não se reconhece. Fazes,
 
 Custa-te o amor que poderias receber inteira. Porque quem se esconde nunca é amado por completo, só pela parte que se deixa ver, que é pequena. As pessoas amam o que conhecem, e tu não te dás a conhecer, encolhes-te, escondes o teu tamanho, e por isso ficas com um amor que nunca te alcança toda, porque toda nunca te mostras. E há uma tristeza funda nisto: a de seres amada por uma versão reduzida de ti, e de nunca saberes se serias amada inteira, porque inteira nunca te arriscaste a ser.
 
-Quero que sintas o cansaço disto. O cansaço da vigilância permanente de não incomodar. O esforço de te encolheres sempre. O peso de pedires desculpa por existir, dia após dia. É uma exaustão funda, a de quem nunca pode, simplesmente, ocupar o seu lugar no mundo, e talvez já a tomes por normal, de tão habituada estás a desaparecer.
+Quero que sintas a exaustão de te conteres sem parar. O cansaço da vigilância permanente de não incomodar. O esforço de te encolheres sempre. O peso de pedires desculpa por existir, dia após dia. É uma exaustão funda, a de quem nunca pode, simplesmente, ocupar o seu lugar no mundo, e talvez já a tomes por normal, de tão habituada estás a desaparecer.
 
 ## 4. Quem sou eu quando deixo de me encolher
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pôr aqui uma pergunta no meio da sala, onde não a possas contornar pelo canto. Sozinha. Não fujas dela.
 
 Quem és tu quando deixas de te encolher? Quando ocupas o teu espaço? Quando és vista, ao teu tamanho real?
 
-Fica com ela. Repara no que ela mexe. Talvez um terror.
+Fica com ela. Repara no aperto que ela acende no teu peito. Talvez um terror.
 
 Para ti, esta pergunta mexe num alçapão, porque por baixo dela está o terror de seres vista. Porque a tua identidade inteira se construiu sobre seres pequena, discreta, invisível. Es a que não incomoda, a que não dá nas vistas. Tira-te isso, imagina-te a ocupar espaço, a ser vista, a destacar-te, e aparece um pânico. Então fico exposta? Atraio o perigo? Torno-me alvo?
 
 E a sombra que aqui se esconde é a visibilidade. Ser vista. Ocupar espaço. Existir ao teu tamanho, à vista de todos. Isso aterroriza-te, porque foi ao ser vista que, um dia, foste alvo do perigo. E preferes a invisibilidade, ainda que te apague, a expores-te de novo a ser notada, e talvez, ferida.
 
-Repara como isto te aprisiona. Não te podes mostrar, afirmar, destacar, mesmo quando o desejas, mesmo quando terias todo o direito, porque ser vista dispara o alarme antigo do perigo. Vives a conter-te, a encolher-te, a apagar-te, não por não teres o que mostrar, mas por teres medo do que acontece quando te mostras.
+Repara como esta pequenez se fecha à tua volta como uma cela. Não te podes mostrar, afirmar, destacar, mesmo quando o desejas, mesmo quando terias todo o direito, porque ser vista dispara o alarme antigo do perigo. Vives a conter-te, a encolher-te, a apagar-te, não por não teres o que mostrar, mas por teres medo do que acontece quando te mostras.
 
 E há uma tristeza só de quem se faz invisível, e quero dar-lhe nome. É a de saberes, lá no fundo, que há mais em ti do que aquilo que deixas ver. Que tens uma voz, ideias, uma luz, uma presença, que o mundo nunca chegou a conhecer, porque tu a escondeste por medo. E às vezes, em momentos raros, sentes essa pessoa maior a querer sair, a pedir para existir, e voltas a empurrá-la para dentro, por reflexo, por terror. Viver assim, a saber que és mais do que mostras e a não te deixares ser, é uma forma silenciosa de luto, o luto de uma vida ao teu tamanho que adias todos os dias, com medo de a viver.
 
-E há uma fragilidade enorme nisto. Porque uma pessoa que não pode ser vista não pode, verdadeiramente, viver. Não pode afirmar-se, ocupar o seu lugar, deixar a sua marca no mundo. Está sempre a meio, sempre escondida, sempre menor do que é. E todo o seu potencial, a sua voz, a sua presença, fica por usar, comprimido, à espera de uma segurança que ela não se permite.
+E há uma fragilidade enorme em viveres assim apagada. Porque uma pessoa que não pode ser vista não pode, verdadeiramente, viver. Não pode afirmar-se, ocupar o seu lugar, deixar a sua marca no mundo. Está sempre a meio, sempre escondida, sempre menor do que é. E todo o seu potencial, a sua voz, a sua presença, fica por usar, comprimido, à espera de uma segurança que ela não se permite.
 
 Repara como esta invisibilidade, que aprendeste para te proteger, te deixa também sem defesa. Quem se apaga não se afirma, e quem não se afirma é mais facilmente atropelada, ignorada, passada para trás. Aprendeste a desaparecer para não seres alvo, mas a tua invisibilidade torna-te, de outra forma, um alvo fácil: a que cede sempre, a que não reclama, a que aceita o lugar pior porque não ousa ocupar outro. E assim o encolhimento, que prometia segurança, acaba por te expor a um tipo diferente de dano, o de quem é tratada como se contasse menos, precisamente porque se faz contar menos. Existir, ocupar o teu lugar, ter voz, é também uma forma de te protegeres, mais sã do que a de desapareceres.
 
@@ -141,13 +141,13 @@ E há uma crueldade escondida em fazeres-te pequena, que talvez nunca tenhas vis
 
 E repara como esta crença te torna estranhamente ausente da tua própria vida. Não és protagonista de nada, nem da tua história. Estás sempre na margem, a assistir, a deixar os outros ocuparem o palco que também era teu. As decisões, os lugares, as oportunidades, passam ao teu lado, e tu deixa-las passar, porque agarrá-las seria ocupar espaço, e ocupar espaço aterroriza-te. Vives, assim, uma vida menor do que a que terias, não por falta de capacidade, mas por um medo que te confina à sombra, e que te rouba o protagonismo da tua própria existência.
 
-Não respondas já à pergunta de quem és quando deixas de te encolher. Ela não se decifra a pensar, e há quem só a consiga viver com alguém ao lado a segurar-lhe a mão. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que ser vista, hoje, já não é perigo, deixas de te ter de encolher para estares segura. E aí, só aí, podes começar a ocupar, enfim, o teu espaço.
+Não respondas já à pergunta de quem és quando deixas de te encolher. Ela não se decifra a pensar, e há quem só a consiga viver com alguém ao lado a segurar-lhe a mão. Mas deixa-a aberta. Porque é nela que está a saída do canto onde te puseste. No dia em que o teu corpo aprender que ser vista, hoje, já não é perigo, deixas de te ter de encolher para estares segura. E aí, só aí, podes começar a ocupar, enfim, o teu espaço.
 
 ## 5. Talvez precises de mais do que compreender
 
-Tenho de parar o livro aqui. Com toda a seriedade. Porque o que te encolhe não é, na maioria das vezes, só timidez. É, muito provavelmente, uma resposta a algo que viveste, e isso muda o que precisas.
+Preciso de interromper aqui e ocupar, eu, espaço a sério, ainda que te custe a ouvir. Com toda a seriedade. Porque o que te encolhe não é, na maioria das vezes, só timidez. É, muito provavelmente, uma resposta a algo que viveste, e isso muda o que precisas.
 
-Se aprendeste a fazer-te pequena porque, na tua casa, existir trazia perigo real, então o teu encolhimento não é um traço. É uma resposta de trauma. Uma adaptação à ameaça. E uma resposta de trauma não se trata só a compreender, nem a ganhar confiança com umas técnicas. Vive no corpo, no sistema nervoso, no alarme que dispara quando és vista.
+Se aprendeste a fazer-te pequena porque, na tua casa, existir trazia perigo real, então o teu encolhimento não é um traço. É a resposta de um corpo que aprendeu a desaparecer perante a ameaça. Uma adaptação à ameaça. E uma resposta de trauma não se trata só a compreender, nem a ganhar confiança com umas técnicas. Vive no corpo, no sistema nervoso, no alarme que dispara quando és vista.
 
 Quero nomear, sem rodeios, o que pode viver por baixo deste teu hábito de desaparecer. Se houve, na tua história, violência, abuso, imprevisibilidade, um ambiente onde dar nas vistas te tornava alvo, então o teu fazeres-te pequena é uma ferida séria, e merece ser cuidada com apoio.
 
@@ -157,7 +157,7 @@ Procurar essa ajuda não te expõe ao perigo que temes. É, pelo contrário, o c
 
 E quero dizer-te uma coisa com toda a firmeza e todo o carinho: se o teu encolhimento vem de violência, de abuso, de um lugar onde existir te punha em perigo real, isto não é falha tua, e não se resolve só a esforço, nem a leres um livro, por mais que ele te acompanhe. Mereces o apoio de alguém preparado para trabalhar não só a tua compreensão, mas o teu corpo, o alarme que dispara quando te mostras, a memória de perigo que carregas gravada fundo. E procurar esse apoio não é dar-te uma importância que não mereces, nem incomodar com a tua dor. É o cuidado mais lúcido que podes ter por uma ferida que mereces, enfim, ver sarar.
 
-Quero separar-te duas coisas, porque saber qual é a tua decide o caminho que precisas. Uma timidez de feitio trabalha-se por compreensão: vês o padrão, entendes a origem, e isso, com o tempo, ajuda a mudá-lo. Um medo de existir nascido do trauma é outra coisa. Não vive só na cabeça, vive no corpo, no sistema nervoso, no alarme que dispara, abaixo da consciência, quando és vista. E uma ferida assim, a de quem teve de desaparecer, pede mais do que entender. Precisa de tempo, de corpo, de uma relação segura onde o sistema nervoso reaprenda, devagar, que existir já não é o perigo que foi. Isso, sozinha, raramente se alcança. Faz-se com acompanhamento.
+Quero separar-te duas coisas, porque saber qual é a tua decide o caminho que precisas. Uma timidez de feitio trabalha-se por compreensão: vês o padrão, entendes a origem, e isso, com o tempo, ajuda a mudá-lo. Um medo de existir nascido do trauma é outra coisa. Não vive só na cabeça, vive no corpo, no sistema nervoso, no alarme que dispara, abaixo da consciência, quando és vista. E uma ferida assim, a de quem teve de desaparecer, pede mais do que entender. Precisa de tempo, de corpo, de uma relação segura onde o sistema nervoso reaprenda, devagar, que existir já não é o perigo que foi. Esse reaprender, encolhida e sozinha no teu canto, quase nunca acontece. Faz-se com acompanhamento.
 
 E há uma beleza guardada nisto, para quem aprendeu que ser vista magoa, e quero que a vejas. A relação de ajuda pode ser, para ti, um dos primeiros lugares onde experimentas ser vista em segurança. Onde ocupas espaço, falas de ti, és o centro da atenção de alguém, e nada de mau acontece. Onde a tua presença não incomoda, é acolhida, é esperada. Para quem aprendeu que ser vista é perigo, um espaço onde ser vista é seguro, e até cuidado, pode ser, em si, profundamente reparador, porque desfaz, na prática, a equação antiga entre existir e estar em risco.
 
@@ -195,7 +195,7 @@ Quero que vejas o que se abre quando existir deixa de ser perigo. Abre-se a tua 
 
 ## 7. Ocupar o meu espaço
 
-Há um verbo para esta travessia. Ocupar.
+Há um verbo que resume tudo o que aprendeste a não fazer. Ocupar.
 
 Ocupar o teu espaço. O teu lugar no mundo. O espaço que é teu por existires, e que te habituaste a ceder, a encolher, a desculpar.
 
@@ -227,7 +227,7 @@ Não te deixo uma receita para deixares de te encolher, e este caminho faz-se, m
 
 Escrevi este livro por uma convicção simples. Compreender muda. Mas, para quem aprendeu a desaparecer, compreender pode ficar a meio, e calar-te isso seria deixar-te outra vez sozinha com a tua pequenez.
 
-Não muda tudo de uma vez. Não te faz, amanhã, ocupares um espaço que cedeste a vida inteira. Mas muda o suficiente para deixares de te julgar por timidez, e para começares a entender que o teu fazeres-te pequena não é um defeito, é uma ferida.
+Compreender não te endireita o corpo de uma vez. Não te faz, amanhã, ocupares um espaço que cedeste a vida inteira. Mas muda o suficiente para deixares de te julgar por timidez, e para começares a entender que o teu fazeres-te pequena não é um defeito, é uma ferida.
 
 Agora sabes que te fazes pequena, e que isso não é só timidez, é uma defesa.
 
@@ -249,11 +249,11 @@ Imagina alguém que cresceu num lugar onde qualquer movimento podia atrair o per
 
 A travessia é o teu corpo aprender que já podes ocupar espaço. Que já podes mover-te, falar alto, ser vista, existir ao teu tamanho. Que o lugar perigoso ficou para trás, e que o mundo, hoje, não te ataca por existires. Reaprender a mover-te ao teu tamanho não é fácil, e há corpos que só o conseguem com alguém ao lado. Mas do outro lado da pequenez está uma vida inteira, ao teu tamanho real, à tua espera.
 
-Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma prova em que tens de ser perfeita. Vai haver recuos. Dias em que ocupas o teu espaço, e dias em que voltas a encolher-te toda, a pedir desculpa por existir, como sempre. E a tua velha voz vai dizer-te que não vale a pena, que ser vista é mesmo perigoso, que é mais seguro como sempre estiveste, no canto. Não acredites nela à primeira. As vezes em que voltas a encolher-te não apagam o caminho andado, fazem parte dele. Ninguém larga de uma vez uma pequenez construída ao longo de uma vida inteira. Larga-se em vaivém, um gesto de presença de cada vez, e cada vez que ocupas espaço e nada de mau acontece, ficou uma prova nova no corpo, e é dessas provas, somadas, que a segurança, devagar, renasce.
+Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma prova em que tens de ser perfeita. Vai haver recuos. Dias em que ocupas o teu espaço, e dias em que voltas a encolher-te toda, a pedir desculpa por existir, como sempre. E a tua velha voz vai dizer-te que não vale a pena, que ser vista é mesmo perigoso, que é mais seguro como sempre estiveste, no canto. Não obedeças a essa voz que te manda recuar para a sombra. As vezes em que voltas a encolher-te não apagam o caminho andado, fazem parte dele. Ninguém larga de uma vez uma pequenez construída ao longo de uma vida inteira. Larga-se em vaivém, um gesto de presença de cada vez, e cada vez que ocupas espaço e nada de mau acontece, ficou uma prova nova no corpo, e é dessas provas, somadas, que a segurança, devagar, renasce.
 
 E quero falar-te de quem te observa, se há olhos que aprendem a existir vendo-te existir, filhos, pessoas próximas. Se te veem viver apagada, a pedir desculpa por existir, a ceder sempre o teu lugar, aprendem que é assim que se deve ser, e é provável que se encolham também, que vivam o mesmo medo de ocupar espaço. A coisa mais libertadora que podes fazer por quem te vê não é dar-lhes o exemplo da mulher discreta que nunca incomoda. É mostrares-lhes uma mulher que ocupa o seu lugar, que se deixa ver, que existe do seu tamanho sem pedir desculpa. Às vezes uma mulher aprende a ocupar o seu espaço, enfim, não só por si, mas para não condenar quem ama à mesma pequenez.
 
-E há uma última coisa, simples, que preciso de te deixar antes de fechar. Tu não eras demais. A menina que se fez pequena para sobreviver fez o que tinha de fazer, e fê-lo bem. Não havia nada de errado no seu tamanho, na sua luz, na sua presença. O erro era do lugar que não a soube conter, que a mandou apagar-se em vez de a celebrar. Não há nada a corrigir nela. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: já passou, já podes existir, o teu tamanho nunca foi o problema.
+E há uma última coisa, simples, que preciso de te deixar antes de fechar. Tu não eras demais. A menina que se fez pequena para sobreviver fez o que tinha de fazer, e fê-lo bem. Não havia nada de errado no seu tamanho, na sua luz, na sua presença. O erro era do lugar que não a soube conter, que a mandou apagar-se em vez de a celebrar. Não há tamanho nenhum a encolher nela. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: já passou, já podes existir, o teu tamanho nunca foi o problema.
 
 Sabes, lá no fundo, qual é a frase que sustenta tudo o que aqui te disse. Posso ocupar espaço sem criar perigo.
 
@@ -261,7 +261,7 @@ Entenderes-te foi o primeiro passo. Mas há um segundo, e esse não se cumpre a 
 
 E se uma só ideia ficar contigo depois de fechares o livro, que seja esta. O mundo não fica melhor com menos de ti. Fica melhor com a tua voz, a tua presença, o teu tamanho inteiro. Aquilo que aprendeste a esconder por ser perigoso é, muitas vezes, precisamente o que tens de mais valioso para dar. E ocupares o teu espaço não tira nada a ninguém: devolve ao mundo uma pessoa que ele andava a perder, escondida no canto, à espera de poder, enfim, existir.
 
-E antes de fechares o livro, deixo-te um pedido só. Sei que, para ti, é dos mais difíceis.
+E antes de fechares o livro, deixo-te um pedido só. Sei que, a quem aprendeu a não pedir nada nem ocupar nada, este custa quase tudo.
 
 Esta semana, ocupa um pouco mais de espaço, em algo pequeno. Dá a tua opinião sem a engolir. Quando algo correr mal sem ser por tua causa, segura o pedido de desculpa que te sobe automático. Deixa-te ser vista, num momento em que costumas desaparecer. E repara no alarme que sobe, no terror de seres notada, na vontade de te encolheres. E ocupa o teu espaço na mesma. Porque é nesse existir, suportado apesar do medo, que o teu corpo começa, devagar, a aprender que já podes ser vista, e que o lugar perigoso, afinal, ficou para trás.
 

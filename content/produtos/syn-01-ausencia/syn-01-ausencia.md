@@ -13,7 +13,7 @@
 
 ## 1. Só desejo o que me foge
 
-Repara numa coisa, com honestidade.
+Repara, sem te enganares, na forma como a ausência te chama.
 
 Aquele que te quer, que está, que responde, que fica, esfria-te. E aquele que demora a responder, que recua, que não se entrega, acende-te.
 
@@ -39,9 +39,9 @@ Este livro não te vai ensinar a apanhar o homem que foge. Não vim dar-te estra
 
 Vim mostrar-te outra coisa. Porque é que o jogo te atrai. Porque é que a ausência te sabe a amor, e a presença te sabe a perigo.
 
-E adianto-te a direção, para leres em paz. O amor que persegues não é o amor que queres. É o amor que aprendeste a perseguir, muito antes deste homem, muito antes de qualquer homem.
+E digo-te já para onde isto vai, para que leias sem a ansiedade da espera. O amor que persegues não é o amor que queres. É o amor que aprendeste a perseguir, muito antes deste homem, muito antes de qualquer homem.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos pequenos gestos da espera.
 
 Em ficares acordada a olhar para o telemóvel, à espera de uma mensagem que não chega, e em sentires, nessa espera, uma intensidade viva, quase doce.
 
@@ -73,7 +73,7 @@ Não acabou. Só parou de doer. E tu aprendeste a confundir o amor com a dor de 
 
 ## 2. O amor que aprendeste a perseguir
 
-Volta atrás. Mais atrás do que qualquer namorado.
+Volta atrás. Para muito antes de qualquer homem que tenhas perseguido.
 
 O teu primeiro amor não foi um homem. Foi quem te criou.
 
@@ -89,7 +89,7 @@ Talvez tivesses uma mãe que dava o seu amor às pingas, condicionado, imprevis�
 
 Ou talvez o amor estivesse sempre ocupado. Com um irmão doente, com uma dor dos adultos, com a sobrevivência. Presente na casa, indisponível para ti.
 
-Repara no que uma criança aprende num lugar destes.
+Repara no que uma criança aprende numa casa onde o amor anda sempre ocupado.
 
 Aprende que o amor não vem só porque ela existe. Vem quando ela o persegue, o merece, o conquista.
 
@@ -107,7 +107,7 @@ Um homem que foge, esse bate certo. Esse reacende a criança que aprendeu a amar
 
 É por isso que te apaixonas pelo indisponível. Não porque sejas atraída pelo sofrimento. Mas porque o indisponível reproduz o amor de origem, e o teu sistema confunde o familiar com o certo.
 
-Quero que vejas isto sem culpa. E sem acusar quem te criou.
+Quero que olhes para esta herança sem culpa. E sem acusar quem te criou.
 
 Quem te deu um amor indisponível, na maioria das vezes, deu o que tinha. Deu o amor que também a ele lhe deram assim. Não te quis ferir. Quis-te bem, da forma incompleta que sabia.
 
@@ -121,7 +121,7 @@ Se foste essa criança, aprendeste a estar do lado errado da ordem. Aprendeste a
 
 Por isso, no amor adulto, voltas a pôr-te a trabalhar. A merecer. A conquistar. Mesmo quando o amor te é oferecido de graça, tu não sabes recebê-lo de graça, e arranjas forma de o transformar em algo a merecer.
 
-Mas a verdade é esta. Aprendeste a amar onde o amor era difícil. E levaste essa lição para toda a parte.
+Mas a verdade, no fundo de tudo isto, é esta. Aprendeste a amar onde o amor era difícil. E levaste essa lição para toda a parte.
 
 Há uma coisa que vale a pena olhar com calma. As crianças não pedem o amor de que precisam. Adaptam-se ao amor que há.
 
@@ -275,11 +275,11 @@ O amor dado, esse, descansa. Não tens de o segurar, porque não está a fugir. 
 
 ## 4. Quem sou eu quando não persigo
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela depressa.
+Vou pousar aqui uma pergunta e deixá-la a sós contigo. Não fujas dela depressa.
 
 Quem és tu quando não estás a perseguir ninguém?
 
-Fica com ela. Repara no que ela abre.
+Fica com ela. Repara no silêncio que ela abre dentro de ti.
 
 Para ti, esta pergunta talvez traga um vazio. Porque a perseguição não é só uma coisa que fazes. Tornou-se quem és.
 
@@ -337,9 +337,9 @@ Por isso, largar a perseguição não é só largar um homem. É aceitar o encon
 
 Mas é aí, nesse encontro adiado, que está a tua vida. Não na próxima mensagem dele. Em ti, à tua espera, há tanto tempo, no silêncio que sempre encheste de ausência.
 
-Não respondas já à pergunta de quem és quando não persegues. Não se responde com a cabeça.
+Não respondas já à pergunta de quem és quando não persegues. Não é uma pergunta que se resolva a pensar.
 
-Mas deixa-a aberta. Porque é nela que começa a tua liberdade. No dia em que souberes existir sem perseguir ninguém, deixas de precisar da ausência para te sentires viva. E aí, só aí, podes começar a reconhecer o amor que está.
+Mas deixa-a aberta como uma porta. Porque é nela que começa a tua liberdade. No dia em que souberes existir sem perseguir ninguém, deixas de precisar da ausência para te sentires viva. E aí, só aí, podes começar a reconhecer o amor que está.
 
 Quero ficar mais um pouco neste vazio, porque é nele que tudo se decide.
 
@@ -373,13 +373,13 @@ Amar a ausência é, no fundo, uma forma de nunca te arriscares. Persegues o que
 
 ## 5. Quando perseguir deixa de ser padrão
 
-Tenho de parar o livro aqui. Com seriedade.
+Tenho de interromper aqui esta travessia. Com seriedade.
 
 Há uma fronteira entre um padrão e uma ferida que magoa a sério. E é importante saberes de que lado dela estás.
 
 De um lado, está o que temos falado. Acendes-te com a ausência, arrefeces com a presença, persegues o que foge. Dói, mas tem caminho, e o caminho é este livro.
 
-Do outro lado, está algo mais sério. E quero nomeá-lo, sem rodeios.
+Do outro lado dessa fronteira, está algo mais sério. E quero chamá-lo pelo nome, sem o disfarçar.
 
 Se o teu pensamento por um homem que não está se tornou uma obsessão que não consegues travar. Se passas horas, dias, a remoer, a vigiar, a esperar, e não consegues viver enquanto isso.
 
@@ -389,7 +389,7 @@ Se já voltaste, vezes sem conta, a quem te trata mal, não por amor, mas porque
 
 Se a tua vida inteira gira em torno de um vínculo que te consome, e tudo o resto, trabalho, amigas, ti própria, desapareceu.
 
-Isto já não é só um padrão a compreender. Pode ser ansiedade de vinculação, dependência emocional, uma obsessão relacional que pede ajuda. E ajuda a sério, de um profissional.
+Isto já não é só um padrão a compreender. Pode ser ansiedade de vinculação, dependência emocional, uma obsessão relacional que pede ajuda. E ajuda real, das mãos de um profissional.
 
 Quero ser clara, com firmeza e com carinho. Compreender de onde vem o teu padrão é precioso. Mas não trata uma dependência instalada.
 
@@ -397,7 +397,7 @@ Se te revês nestes sinais, este é o capítulo de que quero que te lembres. Nã
 
 Não é fraqueza. É a coisa mais lúcida que podes fazer.
 
-Porque há uma diferença entre amar a ausência e estar presa a ela ao ponto de te perderes. A primeira, este livro acompanha. A segunda pede mãos mais próximas do que as minhas.
+Porque há uma diferença entre amar a ausência e estar presa a ela ao ponto de te perderes. À primeira, estas páginas fazem companhia. A segunda pede mãos mais próximas do que as minhas.
 
 E procurares essas mãos não é desistir do amor. É começares a tratar-te com o cuidado que andas a dar, todo, a quem não fica.
 
@@ -423,13 +423,13 @@ O amor não tem de ser conquistado.
 
 Pode ser recebido. Pode estar disponível. Pode chegar sem que tenhas de o merecer, persegui-lo, ou arrancá-lo a quem não o quer dar.
 
-Sei que isto soa estranho. O teu mapa diz o contrário. O teu mapa diz que o amor fácil não vale, que o amor verdadeiro custa, que se não há perseguição não há paixão.
+Sei que isto soa estranho a quem só aprendeu a perseguir. O teu mapa do amor diz exatamente o contrário. O teu mapa diz que o amor fácil não vale, que o amor verdadeiro custa, que se não há perseguição não há paixão.
 
 Mas o teu mapa foi desenhado por uma criança, num lugar onde o amor era, de facto, indisponível. Era exato então. Não é exato agora.
 
 Hoje há, no mundo, amor disponível. Há homens que ficam, que respondem, que se entregam sem jogo. O teu mapa não os marca, porque foi feito num território onde eles não existiam. Mas eles existem. E reconhecer isso é redesenhar o mapa.
 
-Vou dizer-te isto de outra forma.
+Deixa-me dizer-te isto por outro caminho.
 
 Uma criança recém-nascida não persegue o amor da mãe. Recebe-o. Não faz nada para o merecer, não corre atrás, não conquista. O amor chega porque ela existe.
 
@@ -493,7 +493,7 @@ Até ao dia em que, sem esforço, o presente te atrai mais do que o ausente. Ess
 
 ## 7. Ver o amor que está
 
-Há um destino para esta travessia. E cabe numa palavra. Ver.
+Há um lugar de chegada para esta travessia. E cabe numa palavra. Ver.
 
 Não perseguir. Não conquistar. Ver. Reconhecer o amor que está, em vez de correr atrás do que foge.
 
@@ -531,11 +531,11 @@ Não é para te forçares a nada. É só para começares a perguntar. Porque enq
 
 Não é que o amor presente seja insípido. É que o teu paladar precisa de se reeducar. E reeduca-se ficando. Suportando a estranheza da presença até ela deixar de ser estranha.
 
-Não te vou dar um método. Seria mais uma forma de transformar isto numa tarefa, e o amor não é tarefa.
+Não te vou entregar um método a seguir. Seria mais uma forma de transformar isto numa conquista, e o amor não é tarefa a conquistar.
 
 E há um sinal concreto para te guiares, porque a tua cabeça vai querer complicar. Pergunta-te, perante um homem: com ele, eu sinto-me mais calma ou mais ansiosa?
 
-O teu padrão ensinou-te a escolher o que te deixa ansiosa, e a chamar-lhe paixão. Inverte. Da próxima vez, repara em quem te deixa calma, segura, em paz contigo. E desconfia, em vez de te entregares, de quem te deixa a tremer.
+A tua infância ensinou-te a correr para o que te deixa ansiosa, e a dar-lhe o nome de paixão. Inverte. Da próxima vez, repara em quem te deixa calma, segura, em paz contigo. E desconfia, em vez de te entregares, de quem te deixa a tremer.
 
 A ansiedade não é a medida do amor. Durante toda a tua vida foi a medida do perigo. E tu correste sempre para ela, achando que corrias para o amor.
 
@@ -563,7 +563,7 @@ Mas deixo-te o princípio, numa frase. O amor que está aqui também é amor. Ta
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, desejar o homem presente e largar o que foge. Mas muda o suficiente para deixares de te sentir louca, ou condenada, ou sem solução no amor.
+Não muda a ausência em presença da noite para o dia. Não te faz, amanhã, desejar o homem que fica e largar o que foge. Mas muda o suficiente para deixares de te sentir louca, ou condenada, ou sem solução no amor.
 
 Agora sabes que te acendes com a ausência e arrefeces com a presença, e que isso não é o teu tipo, é um padrão.
 
@@ -599,11 +599,11 @@ Ver devolve-te a escolha. Olhas o presente sem o reflexo de fugir, e o ausente s
 
 Pode até continuar a não ser este ou aquele. Mas pela primeira vez é uma escolha tua, e não a tua ferida a escolher por ti.
 
-Sabes, no fundo, a frase que segura este livro. Posso reconhecer o amor que está presente.
+Levas contigo, no fundo, a frase que segura tudo o que aqui se disse. Posso reconhecer o amor que está presente.
 
 Ver foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a ficar, quando tudo em ti quer fugir. A suportar a presença até ela deixar de assustar. E, se houver alguém ao teu lado, a aprender, a dois, a permanecer.
 
-É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
+É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada passo a seu tempo.
 
 Há uma última coisa que quero que saibas, sobre o tempo.
 
@@ -615,7 +615,7 @@ O que muda, mesmo nas recaídas, é que agora vês. Já não persegues no escuro
 
 Sê paciente contigo. Trata a tua ferida como tratarias uma amiga muito amada que aprendeu a amar num lugar difícil. Não com pressa, não com juízo. Com ternura, e com o tempo que for preciso.
 
-E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti, por ser tão calma.
+E antes de fechares estas páginas e voltares à tua estação, peço-te uma coisa só. Difícil, para ti, por ser tão calma.
 
 Da próxima vez que alguém presente se aproximar, e sentires o tédio, o alarme, a vontade de fugir, não fujas logo. Fica mais um pouco. Repara no medo. E pergunta-te, com honestidade, se aquilo que chamas falta de química não é, afinal, o susto de seres, pela primeira vez, verdadeiramente amada.
 

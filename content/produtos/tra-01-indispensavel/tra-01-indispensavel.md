@@ -27,7 +27,7 @@ Quero dizer-te já, antes de tudo, que isto não é só dedicação, ainda que s
 
 Há uma necessidade de te tornares indispensável. E essa necessidade não é sobre o trabalho. É sobre ti. Sobre o teu direito a ocupar aquele lugar. Tornaste-te imprescindível, sem o saberes, para justificares que mereces estar ali, para que ninguém possa questionar o teu lugar, porque sem ti tudo cai.
 
-Este livro não é sobre carreira. Não vim dar-te dicas de gestão, de produtividade, de liderança. Vim olhar para outra coisa, mais funda. Para a razão pela qual precisas de te tornar indispensável. Para a ferida, existencial e não profissional, que te faz acreditar que o teu lugar tem de ser justificado, pago, garantido, com a tua indispensabilidade.
+Este livro não é sobre carreira. Não vim dar-te dicas de gestão, de produtividade, de liderança. Vim olhar para o que está por baixo de toda essa correria. Para a razão pela qual precisas de te tornar indispensável. Para a ferida, existencial e não profissional, que te faz acreditar que o teu lugar tem de ser justificado, pago, garantido, com a tua indispensabilidade.
 
 E digo-te já para onde vamos, para que possas ler sem aflição. Podes ter valor sem fazeres falta. O teu lugar no trabalho, e no mundo, não precisa de ser comprado a peso de indispensabilidade. E essa fome de seres imprescindível, que te deixa sem fôlego, vem de uma ferida que vamos olhar com calma, e que não se sara acumulando ainda mais tarefas.
 
@@ -35,7 +35,7 @@ Antes de avançarmos, separa comigo o que se vê do que se passa. O que se vê, 
 
 Este livro não te vem dizer que trabalhes menos, ou que deixes de te importar, ou que a tua entrega não vale nada. A tua competência é real, o teu valor é real, e o gosto que tens pelo que fazes é uma coisa boa. Vem dizer-te que não precisas de pagar o teu lugar com a tua exaustão, que mereces estar ali sem teres de te tornar a peça de que tudo depende, e que há uma forma de trabalhares bem, e até melhor, sem te consumires a provar, sem fim, que fazes falta.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos gestos miúdos de quem segura tudo.
 
 Em não conseguires delegar, mesmo afogada em trabalho, porque achas que só tu fazes bem, e porque largar te parece arriscar o teu lugar.
 
@@ -67,11 +67,11 @@ Talvez sejas mulher num meio onde tiveste de provar duas vezes mais para teres m
 
 Repara no que aprendeste. Que o teu lugar não é dado, é merecido. Que para teres direito a estar tens de ser necessária. Que sem a tua indispensabilidade, ninguém garante que ficas. E essa crença gravou-se fundo, e governa-te, e faz-te acumular, centralizar, tornar-te imprescindível, num esforço sem fim de justificares um lugar que sentes que, de outra forma, não terias.
 
-Quero acrescentar uma raiz que talvez reconheças. Em muitas casas, o amor e a atenção vinham pela utilidade. Eras vista, elogiada, valorizada, quando ajudavas, quando rendias, quando fazias falta, e passavas despercebida quando, simplesmente, eras. Uma criança que aprende que é amada pelo que faz, e não por quem é, cresce a transformar-se numa máquina de ser útil, porque aprendeu que é assim, e só assim, que merece um lugar no afeto dos outros. E leva essa equação para o trabalho, onde se torna indispensável, não por ambição, mas porque, no fundo, continua a tentar merecer, pela utilidade, o lugar que nunca sentiu que lhe era dado de graça.
+Quero descer a uma raiz mais antiga que talvez reconheças. Em muitas casas, o amor e a atenção vinham pela utilidade. Eras vista, elogiada, valorizada, quando ajudavas, quando rendias, quando fazias falta, e passavas despercebida quando, simplesmente, eras. Uma criança que aprende que é amada pelo que faz, e não por quem é, cresce a transformar-se numa máquina de ser útil, porque aprendeu que é assim, e só assim, que merece um lugar no afeto dos outros. E leva essa equação para o trabalho, onde se torna indispensável, não por ambição, mas porque, no fundo, continua a tentar merecer, pela utilidade, o lugar que nunca sentiu que lhe era dado de graça.
 
 E há, às vezes, uma raiz ainda mais funda: a de teres sentido, cedo, que o teu lugar no mundo era condicional. Que tinhas de justificar a tua existência, de compensar o incómodo de estares, de pagar, de algum modo, o espaço que ocupavas. Talvez por teres sido uma criança que sentiu que dava trabalho, que pesava, que tinha de se fazer útil para ser tolerada. E essa sensação, de que existir tem de ser merecido, é o solo de onde brota a tua indispensabilidade adulta: continuas a pagar, com trabalho sem fim, um lugar que aprendeste que nunca foi, simplesmente, teu.
 
-Quero que vejas isto sem culpa. A tua necessidade de te tornares indispensável não é vaidade, nem controlo, nem incapacidade de confiar nos outros. É uma forma de garantires um lugar que, algures, aprendeste que tinha de ser pago. Não és controladora por feitio. És alguém que duvida do seu direito a estar, e que paga esse lugar com a única moeda que conhece: a de se tornar necessária.
+Quero que olhes para este padrão sem te julgares. A tua necessidade de te tornares indispensável não é vaidade, nem controlo, nem incapacidade de confiar nos outros. É uma forma de garantires um lugar que, algures, aprendeste que tinha de ser pago. Não centralizas tudo por feitio de mandona. És alguém que duvida do seu direito a estar, e que paga esse lugar com a única moeda que conhece: a de se tornar necessária.
 
 ## 3. Utilidade não é valor
 
@@ -87,7 +87,7 @@ Repara no que esta confusão te faz, no quotidiano. Não consegues simplesmente 
 
 E quero que vejas que esta confusão é, no fundo, uma tristeza, não um defeito. Porque revela que, algures, não te foi dado sentir que valias só por seres. Que tiveste de ganhar o teu lugar, em vez de o receber. Uma pessoa que sabe, no fundo, que vale por existir, não precisa de se tornar indispensável, descansa no seu valor. Tu não descansas porque nunca te deixaram descansar nele, e por isso o persegues sem fim, fazendo, provando, sendo necessária, na esperança de que um dia chegue, enfim, a sensação de que tens direito a estar. Essa sensação não vem do fazer mais. Vem de curar a ferida que te fez crer que tinhas de a merecer.
 
-E há um custo enorme nisto. Porque vives a tornar-te cada vez mais necessária, a acumular, a centralizar, a não delegar, e isso esgota-te. Carregas o trabalho de vários, recusas ajuda, não largas nada, porque largar é arriscar deixares de ser necessária, e deixares de ser necessária é, no teu mundo, deixares de ter valor.
+E isto cobra-te uma fatura pesada. Porque vives a tornar-te cada vez mais necessária, a acumular, a centralizar, a não delegar, e isso esgota-te. Carregas o trabalho de vários, recusas ajuda, não largas nada, porque largar é arriscar deixares de ser necessária, e deixares de ser necessária é, no teu mundo, deixares de ter valor.
 
 E há um custo para o teu trabalho, também. Porque uma pessoa que centraliza tudo, que não delega, que se torna o único ponto de que tudo depende, é, paradoxalmente, um problema para a organização. Cria dependência, gargalos, fragilidade. Uma equipa saudável não depende de uma só pessoa. E a tua indispensabilidade, que julgas ser o teu valor, é muitas vezes um obstáculo ao crescimento de todos, incluindo o teu, porque presa a seres necessária, não cresces para além disso.
 
@@ -103,11 +103,11 @@ E há um custo que se estende para além do trabalho, para a tua vida inteira. P
 
 E custa-te a possibilidade de seres amada por quem és, e não pelo que fazes. Porque, ao definires-te pela utilidade, nunca chegas a saber se serias querida sem ela. Tornas-te tão necessária que as pessoas se ligam a ti pelo que resolves, pelo que dás, pelo que seguras, e tu nunca descobres se ficariam se deixasses de o fazer. E há uma solidão funda nisto: a de quem é muito necessária e pouco conhecida, muito útil e raramente vista, rodeada de gente que depende dela e incerta de que alguém a queira para além daquilo que ela faz.
 
-Quero que sintas o peso disto. O peso de teres de ser sempre necessária. De nunca poderes parar. De carregares tudo, sozinha, para justificares um lugar que sentes frágil. É uma exaustão funda, e talvez já a tomes por dedicação, quando é, no fundo, o esforço sem fim de quem duvida do seu direito a estar, e que o paga tornando-se imprescindível.
+Quero que sintas, nos ombros, o que andas a carregar. O peso de teres de ser sempre necessária. De nunca poderes parar. De carregares tudo, sozinha, para justificares um lugar que sentes frágil. É uma exaustão funda, e talvez já a tomes por dedicação, quando é, no fundo, o esforço sem fim de quem duvida do seu direito a estar, e que o paga tornando-se imprescindível.
 
 ## 4. Quem sou eu se não for necessária
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar no teu colo uma pergunta de trabalho. Sozinha. Não fujas dela.
 
 Quem és tu, no trabalho, se não fores necessária? Se as coisas funcionarem sem ti? Se não fores a peça de que tudo depende?
 
@@ -117,9 +117,9 @@ Em ti, esta pergunta carrega numa ferida bem funda. Porque o teu valor, no traba
 
 E a sombra que aqui se esconde é a dúvida sobre o teu direito a estar. O medo de que, sem a indispensabilidade, o teu lugar se revele frágil, questionável, não merecido. De que só tens direito a estar enquanto fores necessária, e que sem isso serias dispensável, substituível, posta de lado.
 
-Repara como isto te aprisiona. Não podes delegar, porque delegar é tornar-te menos necessária. Não podes descansar, porque a tua ausência é arriscar o lugar. Não podes crescer para além do teu posto, porque o teu posto é o que te garante valor. Vives presa a uma indispensabilidade que te esgota, porque largá-la te confronta com a dúvida que ela tapa: a de que talvez não tenhas, de facto, direito ao teu lugar.
+Repara como esta crença te prende ao teu posto. Não podes delegar, porque delegar é tornar-te menos necessária. Não podes descansar, porque a tua ausência é arriscar o lugar. Não podes crescer para além do teu posto, porque o teu posto é o que te garante valor. Vives presa a uma indispensabilidade que te esgota, porque largá-la te confronta com a dúvida que ela tapa: a de que talvez não tenhas, de facto, direito ao teu lugar.
 
-E há uma fragilidade enorme nisto. Porque um valor que depende de seres necessária é um valor sempre em risco. Basta surgir outra pessoa capaz, basta a organização mudar, basta deixares de ser a única que sabe, e o teu valor, assente na indispensabilidade, ameaça ruir. Vives, por isso, numa tensão permanente, a de quem tem de continuar a ser necessária para continuar a valer, e que nunca pode descansar nesse valor, porque ele depende de uma utilidade que tem de renovar sem fim.
+E há uma fragilidade enorme em construíres-te assim. Porque um valor que depende de seres necessária é um valor sempre em risco. Basta surgir outra pessoa capaz, basta a organização mudar, basta deixares de ser a única que sabe, e o teu valor, assente na indispensabilidade, ameaça ruir. Vives, por isso, numa tensão permanente, a de quem tem de continuar a ser necessária para continuar a valer, e que nunca pode descansar nesse valor, porque ele depende de uma utilidade que tem de renovar sem fim.
 
 Olha de perto o terror que esta pergunta levanta, porque olhá-lo já o enfraquece. O que te aterroriza não é, verdadeiramente, deixares de ser necessária. É a dúvida que isso desperta: a de que talvez não tenhas direito ao teu lugar. Mas repara, essas duas coisas não são a mesma. Podes deixar de ser a peça de que tudo depende e continuar a ter todo o direito a estar ali, pela tua competência, pela tua história, por quem és. O teu direito ao lugar nunca dependeu, de verdade, da tua indispensabilidade. Foi a ferida que os colou, e separá-los é o princípio da tua libertação: descobrir que mereces estar, mesmo quando não fazes falta.
 
@@ -129,7 +129,7 @@ Há uma frase que, se a deixares entrar, desmonta este medo por dentro. O teu va
 
 E quero que repares numa coisa, sobre o que esta indispensabilidade te impede de ser. Há, em ti, provavelmente, uma profissional maior do que a que cabe no papel de peça central. Alguém que poderia liderar, criar, pensar em grande, formar outros, deixar uma marca que fosse além de resolver o dia a dia. Mas essa pessoa não cabe enquanto estás presa a ser necessária em tudo, ocupada a apagar fogos, a centralizar tarefas, a não largar nada. A indispensabilidade não só te esgota, encolhe-te: prende-te ao operacional, ao urgente, ao que só tu fazes, e rouba-te o espaço para te tornares aquilo que serias se não tivesses de provar, a cada dia, que fazes falta.
 
-Não respondas já à pergunta de quem és se não fores necessária. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que descobrires que tens valor mesmo sem seres imprescindível, deixas de te ter de esgotar a tornar-te necessária. E aí, só aí, podes começar a delegar, a descansar, a ocupar o teu lugar sem o teres de pagar com a tua exaustão.
+Não respondas já à pergunta de quem és se não fores necessária. Mas deixa-a aberta. Porque é nesse vazio que está a saída do posto. No dia em que descobrires que tens valor mesmo sem seres imprescindível, deixas de te ter de esgotar a tornar-te necessária. E aí, só aí, podes começar a delegar, a descansar, a ocupar o teu lugar sem o teres de pagar com a tua exaustão.
 
 ## 5. Quando a indispensabilidade leva ao esgotamento
 
@@ -147,27 +147,27 @@ E quero nomear a armadilha específica de quem se tornou indispensável. É que 
 
 Quero dizer-te, também, uma verdade dura sobre o lugar que tanto seguras. Por mais indispensável que te sintas, a organização sobreviveria à tua ausência. Não digo isto para te magoar, digo-o para te libertar. As empresas, os projetos, as equipas, reorganizam-se, encontram formas de continuar, porque foram feitas para isso. A única pessoa que não sobrevive ao ritmo que levas és tu. E há uma injustiça profunda em gastares a tua saúde, a tua vida, os teus anos, a sustentar algo que, no dia em que caíres, seguirá sem ti, talvez com uma palavra de pena e um substituto a caminho. Esse lugar não merece a tua exaustão. Tu mereces ser cuidada antes de o teu corpo te obrigar a parar.
 
-Não esperes por esse ponto. Se estes sinais do esgotamento são teus, deixa que seja este o capítulo que fica contigo. Para. Procura apoio. A tua indispensabilidade não vale mais do que a tua saúde, do que a tua vida. E procurar ajuda não é falhares com ninguém. É a coisa mais lúcida que podes fazer, por ti, e até pelo trabalho que tanto seguras, porque uma pessoa esgotada não sustenta nada, e cuidar de ti é a única forma de poderes, um dia, continuar.
+Não aguentes até o corpo ceder. Se estes sinais do esgotamento são teus, deixa que seja este o capítulo que fica contigo. Para. Procura apoio. A tua indispensabilidade não vale mais do que a tua saúde, do que a tua vida. E procurar ajuda não é falhares com ninguém. É a coisa mais lúcida que podes fazer, por ti, e até pelo trabalho que tanto seguras, porque uma pessoa esgotada não sustenta nada, e cuidar de ti é a única forma de poderes, um dia, continuar.
 
 ## 6. Ter valor sem ser necessária
 
 Se confundiste utilidade com valor, então há uma verdade nova à tua espera. Podes ter valor sem seres necessária.
 
-Lê isto devagar, porque contraria a tua crença mais funda. Para ti, o valor vem da indispensabilidade. Sem fazeres falta, não vales. E proponho-te separar as duas coisas. O teu valor, como profissional e como pessoa, não está em quanto os outros dependem de ti. Está na tua competência, na tua experiência, no que sabes, em quem és. E esse valor mantém-se, intacto, mesmo que delegues, mesmo que descanses, mesmo que as coisas funcionem sem ti.
+Lê isto devagar, porque contraria a tua crença mais funda. Para ti, o valor vem da indispensabilidade. Sem fazeres falta, não vales. E proponho-te despregar o valor da indispensabilidade. O teu valor, como profissional e como pessoa, não está em quanto os outros dependem de ti. Está na tua competência, na tua experiência, no que sabes, em quem és. E esse valor mantém-se, intacto, mesmo que delegues, mesmo que descanses, mesmo que as coisas funcionem sem ti.
 
-Vou dizer-te de outra forma. Imagina duas profissionais igualmente competentes. Uma centraliza tudo, não delega, torna-se a peça de que tudo depende, e esgota-se. A outra constrói uma equipa capaz, delega, e as coisas funcionam mesmo na sua ausência. Qual das duas é mais valiosa? A segunda, de longe. Porque o seu valor não está em criar dependência, está em criar capacidade. A indispensabilidade não é o auge do valor profissional. É, muitas vezes, o seu oposto.
+Deixa-me pôr a mesma verdade noutro exemplo. Imagina duas profissionais igualmente competentes. Uma centraliza tudo, não delega, torna-se a peça de que tudo depende, e esgota-se. A outra constrói uma equipa capaz, delega, e as coisas funcionam mesmo na sua ausência. Qual das duas é mais valiosa? A segunda, de longe. Porque o seu valor não está em criar dependência, está em criar capacidade. A indispensabilidade não é o auge do valor profissional. É, muitas vezes, o seu oposto.
 
 E quero que penses no que acontece, a prazo, a cada uma. A primeira fica presa: não pode crescer, porque não pode largar o que centralizou; não pode ser promovida, porque ninguém a substitui no que faz; adoece, mais cedo ou mais tarde, sob o peso de tudo. A segunda sobe: porque deixou as coisas a andar, está livre para tomar o próximo desafio; porque formou pessoas, é vista como alguém que faz crescer; porque não se esgotou, dura. A indispensabilidade, que parece proteger-te, é afinal o que te prende ao mesmo lugar, exausta, sem futuro. E a capacidade de te tornares dispensável naquilo que dominas é, paradoxalmente, o que te abre as portas para mais.
 
 Quero que sintas o peso desta troca que fazes sem dar conta. Trocas o teu crescimento pela segurança de fazeres falta. Trocas o teu descanso pela certeza de seres necessária. Trocas a tua vida lá fora pela posição de peça central. E nenhuma dessas trocas, quando as vês de fora, compensa. Porque o que ganhas, a indispensabilidade, é frágil e esgotante; e o que perdes, o crescimento, o descanso, a vida, é precioso e não volta. Vale a pena parar e perguntar: o que estou eu a sacrificar para continuar a ser necessária, e valerá mesmo a pena?
 
-E há uma libertação enorme nisto. Quando o teu valor deixa de depender de seres necessária, podes, enfim, delegar. Podes construir, à tua volta, pessoas capazes, em vez de as manteres dependentes de ti. Podes descansar, faltar, ir de férias, sem o terror de tudo desabar. Podes crescer para além do teu posto, porque já não precisas de te agarrar a ele para teres valor. A tua vida, e o teu trabalho, respiram.
+E há uma libertação enorme quando largas esse peso. Quando o teu valor deixa de depender de seres necessária, podes, enfim, delegar. Podes construir, à tua volta, pessoas capazes, em vez de as manteres dependentes de ti. Podes descansar, faltar, ir de férias, sem o terror de tudo desabar. Podes crescer para além do teu posto, porque já não precisas de te agarrar a ele para teres valor. A tua vida, e o teu trabalho, respiram.
 
 Quero mostrar-te, ainda, que a indispensabilidade engana até em termos de valor profissional. As pessoas que mais sobem, que mais crescem, que mais marcam, raramente são as que fazem tudo sozinhas. São as que sabem rodear-se, formar, confiar, multiplicar-se nos outros. Quem centraliza tudo fica preso a fazer, e quem delega liberta-se para pensar, para criar, para liderar. Ao agarrares-te a ser a única que sabe, não estás a proteger o teu valor, estás a limitá-lo, a mantê-lo pequeno, ocupado no operacional, sem espaço para crescer. A verdadeira marca de uma grande profissional não é que nada funcione sem ela. É que tanto funcione, e tão bem, graças ao que ela construiu, que possa funcionar mesmo na sua ausência.
 
 E quero desfazer-te um receio: o de que, se as coisas funcionarem sem ti, deixes de ser precisa, e te ponham de lado. É o contrário. Quem constrói equipas capazes, quem resolve problemas de forma que não voltam, quem deixa as coisas a andar, torna-se mais valiosa, não menos, porque demonstra uma capacidade rara: a de criar valor que dura para além da própria presença. Ninguém dispensa quem faz a organização melhor. Dispensa-se, com o tempo, quem cria gargalos, quem trava, quem mantém tudo dependente de si e por isso adoece e bloqueia. A indispensabilidade que julgas proteger-te é, a prazo, mais frágil do que a competência que liberta os outros.
 
-Quero falar-te do verbo desta travessia. Delegar. Delegar não é perder o teu lugar, nem o teu valor. É confiares a outros o que não tem de ser só teu. É construíres capacidade à tua volta, em vez de dependência. É libertares-te do peso de tudo, para poderes ocupar o teu lugar real, que é maior do que o de peça central de que tudo depende. É, no fundo, um ato de confiança: nos outros, que são capazes; e em ti, que vales mesmo quando não fazes tudo.
+Quero falar-te do verbo que tira o peso dos teus ombros. Delegar. Delegar não é perder o teu lugar, nem o teu valor. É confiares a outros o que não tem de ser só teu. É construíres capacidade à tua volta, em vez de dependência. É libertares-te do peso de tudo, para poderes ocupar o teu lugar real, que é maior do que o de peça central de que tudo depende. É, no fundo, um ato de confiança: nos outros, que são capazes; e em ti, que vales mesmo quando não fazes tudo.
 
 E delegar exige uma coisa que te custa: tolerar que os outros não façam exatamente como tu, e que esteja bem. Que as coisas se façam de forma diferente, talvez menos perfeita à tua medida, mas que se façam, e que a organização não dependa só de ti. Delegar é soltar o controlo, e soltar o controlo, para quem o usa como cinto de segurança do seu lugar, dá um medo enorme. Mas é exatamente no abrir dessa mão fechada que a tua liberdade começa.
 
@@ -175,13 +175,13 @@ Quero ser-te honesta sobre uma coisa, para que não te iludas: ao início, deleg
 
 E quero prevenir-te do que vais sentir quando delegares a sério. Vais sentir um vazio estranho, quase um desconforto, ao veres outra pessoa a fazer o que era teu, ao teres menos nas mãos, ao não seres tu o centro daquela tarefa. Esse vazio não é sinal de que perdeste o teu lugar. É o espaço que se abre quando largas o que te enchia e te esgotava, e que ainda não sabes com que preencher. Não corras a enchê-lo com mais trabalho, por reflexo. Deixa-o aberto, por uns tempos, e vais descobrir que nesse espaço cabe o descanso, o pensamento, o crescimento, e até a vida lá fora, que a indispensabilidade te andava a roubar.
 
-O despertar, quando vem, é um alívio. É o dia em que delegas algo, em que faltas, em que descansas, e descobres que as coisas funcionaram sem ti, e que, em vez do terror que esperavas, sentes alívio. Que o teu valor não ruiu por não seres necessária naquele momento. Que continuas a valer, mesmo quando não fazes falta. É um instante pequeno, mas muda tudo, porque desmente a crença de que sem a tua indispensabilidade não tens lugar.
+A descoberta, quando chega, sabe a fôlego recuperado. É o dia em que delegas algo, em que faltas, em que descansas, e descobres que as coisas funcionaram sem ti, e que, em vez do terror que esperavas, sentes alívio. Que o teu valor não ruiu por não seres necessária naquele momento. Que continuas a valer, mesmo quando não fazes falta. É um instante pequeno, mas muda tudo, porque desmente a crença de que sem a tua indispensabilidade não tens lugar.
 
 E quero que percebas que esse alívio não é só teu. Quando deixas de centralizar tudo, as pessoas à tua volta crescem. Os colegas que mantinhas dependentes ganham autonomia, confiança, competência. A equipa, que era frágil porque tudo passava por ti, torna-se mais forte, mais capaz, mais resiliente. Aquilo que julgavas ser generosidade, fazer tudo por todos, era, sem o saberes, um travão ao crescimento deles. E ao delegares, ao confiares, ao soltares, dás aos outros o que a tua indispensabilidade lhes tirava: o espaço para se tornarem, também eles, capazes. O melhor que podes fazer por uma equipa não é seres insubstituível. É torná-la capaz de prescindir de ti.
 
 ## 7. Delegar e ocupar o meu lugar real
 
-Há um destino para esta travessia. Deixares de te agarrar à indispensabilidade e ocupares o teu lugar real.
+Há um lugar para onde tudo isto caminha. Deixares de te agarrar à indispensabilidade e ocupares o teu lugar real.
 
 E quero mostrar-te a diferença entre os dois lugares. O lugar da indispensabilidade é frágil, esgotante, e é, no fundo, uma prisão. Tens de o renovar sem fim, sendo sempre necessária, nunca podendo parar. O teu lugar real é outro. É o lugar de quem tem valor por quem é e pelo que sabe, e que por isso pode delegar, descansar, crescer, sem arriscar a sua legitimidade.
 
@@ -201,7 +201,7 @@ Vai custar-te, porque a velha voz, a que te diz que sem seres necessária não v
 
 E quero deixar-te uma coisa, sobre quem te vê, sobretudo se há quem aprenda olhando para ti, filhos, pessoas mais novas que orientas. Se te veem viver presa ao trabalho, incapaz de parar, a medir o teu valor pelo quanto fazes falta, aprendem que é assim que se deve ser, e é provável que carreguem, também, a mesma exaustão, a mesma confusão entre utilidade e valor. A coisa mais libertadora que podes ensinar a quem te vê não é o exemplo de quem nunca para. É o de uma mulher que trabalha bem e também descansa, que tem valor e também tem limites, que sabe que merece o seu lugar sem o ter de pagar com a vida. Às vezes uma mulher aprende a soltar, enfim, não só por si, mas para não condenar quem ama ao mesmo esgotamento.
 
-E quero que vejas que ocupar o teu lugar real não te torna menos dedicada, menos competente, menos boa no que fazes. A tua capacidade fica lá, intacta. O que muda é que deixa de vir do medo de não mereceres estar, e passa a vir da segurança de quem sabe que merece. E uma profissional que trabalha a partir da segurança, e não do medo, é melhor, mais criativa, mais livre, do que uma que se esgota a provar o seu lugar. O medo encolhe, o valor reconhecido expande. E o que farás a partir de te saberes valiosa, sem o teres de provar a cada instante, será maior do que tudo o que fizeste a partir da dúvida.
+E quero que vejas que ocupar o teu lugar real não te torna menos dedicada, menos competente, menos boa no que fazes. A tua competência permanece toda lá, intacta. O que muda é que deixa de vir do medo de não mereceres estar, e passa a vir da segurança de quem sabe que merece. E uma profissional que trabalha a partir da segurança, e não do medo, é melhor, mais criativa, mais livre, do que uma que se esgota a provar o seu lugar. O medo encolhe, o valor reconhecido expande. E o que farás a partir de te saberes valiosa, sem o teres de provar a cada instante, será maior do que tudo o que fizeste a partir da dúvida.
 
 Não te vou dar um método de gestão, porque este livro não é sobre carreira. Mas deixo-te o princípio. Delega o que não tem de ser só teu. Constrói capacidade, não dependência. E descobre, devagar, que o teu valor não estava em seres a peça de que tudo depende, mas em quem és, e em o que sabes, e que isso, ao contrário da indispensabilidade, ninguém te pode tirar, e não te esgota a manter.
 
@@ -209,7 +209,7 @@ Não te vou dar um método de gestão, porque este livro não é sobre carreira.
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, largar uma indispensabilidade de uma carreira inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com dedicação, e a tua indispensabilidade com o teu valor.
+Não te liberta do posto num só dia. Não te faz, amanhã, largar uma indispensabilidade de uma carreira inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com dedicação, e a tua indispensabilidade com o teu valor.
 
 Agora sabes que te tornaste imprescindível, e que isso não é só dedicação, é uma forma de justificar o teu lugar, mistura de gosto verdadeiro com um medo antigo de não mereceres estar.
 
@@ -229,7 +229,7 @@ Imagina alguém que, para garantir que não a despedem, faz de propósito, sem d
 
 A travessia é descobrires que o teu lugar não tem de ser garantido assim. Que tens valor sem teres de tornar tudo dependente de ti. Que podes ensinar, delegar, construir capacidade, e ocupar o teu lugar não por seres a única que sabe, mas por seres boa no que fazes, e por mereceres estar ali. E que, livre da indispensabilidade, podes, enfim, faltar, descansar, crescer, sem que o chão te falte.
 
-Deixa-me preparar-te para o que vem, para que não transformes esta travessia em mais uma tarefa onde tens de ter nota máxima. Vai haver recuos. Dias em que delegas e descansas, e dias em que voltas a agarrar tudo, a centralizar, a não largar nada, em pânico de deixares de fazer falta. E a tua velha voz vai dizer-te que sem isso não vales, que tens de voltar a ser necessária. Não acredites nela à primeira. Os recuos fazem parte. Ninguém larga de uma vez uma forma de estar que sustentou uma carreira inteira. Larga-se aos poucos, e cada vez que delegas e o teu lugar não desaparece, ficou uma prova nova, e é dessas provas, somadas, que a confiança no teu valor real, devagar, se constrói.
+Deixa-me preparar-te para o que vem, para que não transformes esta travessia em mais uma tarefa onde tens de ter nota máxima. Vai haver recuos. Dias em que delegas e descansas, e dias em que voltas a agarrar tudo, a centralizar, a não largar nada, em pânico de deixares de fazer falta. E a tua velha voz vai dizer-te que sem isso não vales, que tens de voltar a ser necessária. Não corras logo a centralizar tudo outra vez. Os recuos fazem parte. Ninguém larga de uma vez uma forma de estar que sustentou uma carreira inteira. Larga-se aos poucos, e cada vez que delegas e o teu lugar não desaparece, ficou uma prova nova, e é dessas provas, somadas, que a confiança no teu valor real, devagar, se constrói.
 
 Resta-me uma última coisa, simples, antes de fechar a porta. Tu sempre tiveste valor. A mulher que se tornou indispensável para merecer o seu lugar fez o que aprendeu a fazer, e fê-lo com uma dedicação enorme, digna de respeito. Mas nunca precisou de o fazer para valer. Já valia, desde o princípio, por quem é, pelo que sabe, pela pessoa que é para além de tudo o que produz. Não há nada a corrigir na sua entrega. Há só uma coisa a lembrar-lhe, devagar, até acreditar: o teu lugar é teu, mereceste-lo, e não tens de o continuar a pagar para o poderes ocupar em paz.
 
@@ -239,7 +239,7 @@ Delegar foi o primeiro passo. O segundo, esse, não cabe nestas páginas nem se 
 
 Se de tudo isto guardares um só pensamento, guarda este. O teu valor não é o que produzes. É quem és. As pessoas mais valiosas que conheces não valem pela quantidade de coisas que dependem delas, valem pela pessoa que são, pela competência que têm, pela presença que trazem. E tu também. Tens direito a um lugar no teu trabalho, e no mundo, não por te tornares necessária, mas simplesmente por seres alguém de valor, que não precisa de o provar, sem fim, esgotando-se. Aprender a descansar nesse valor, em vez de o perseguir, é a verdadeira travessia, e mereces fazê-la.
 
-E antes de pousares este livro, deixo-te um único pedido. Sei que, para ti, é dos mais difíceis.
+E antes de pousares este livro, deixo-te um único pedido. Sei que, para quem segura tudo, largar uma só coisa custa mais do que parece.
 
 Esta semana, delega uma coisa que normalmente farias tu. Confia-a a alguém, e não a refaças, não a controles, não a recuperes. Deixa que se faça sem ti. E observa duas coisas. O que acontece, que quase de certeza não é o desastre que temes. E o que sentes, o medo de perderes o lugar, a dúvida sobre o teu valor, a vontade de voltares a ser necessária. Fica com isso, sem recuperar o controlo. Porque é nesse delegar, suportado apesar do medo, que começas a descobrir que o teu valor não dependia de seres indispensável, e que o teu lugar, afinal, sempre foi teu.
 
