@@ -1077,19 +1077,26 @@ async function renderUm(slug, mundoOverride, lang = 'pt') {
   await page.setContent(html, { waitUntil: 'networkidle0', timeout: 60000 });
   await page.evaluateHandle('document.fonts.ready');
 
-  // Screenshot da capa (1a pagina, .capa div ocupa 100vw×100vh)
-  const capaJpg = await page.screenshot({
-    type: 'jpeg',
-    quality: 88,
-    clip: { x: 0, y: 0, width: 559, height: 794 },
-  });
-
+  // 1) PDF primeiro — com a capa COMPLETA (titulo, subtitulo, marca).
   await page.pdf({
     path: tmpPdf,
     format: 'A5',
     printBackground: true,
     margin: { top: '0', right: '0', bottom: '0', left: '0' },
     displayHeaderFooter: false,
+  });
+
+  // 2) Capa para a LOJA: mesma foto tratada, mas SEM texto (o titulo/descricao
+  // ja aparecem no card; ter o texto na imagem era redundante). Sem texto, a
+  // capa fica igual em PT e EN. Esconde os elementos de texto e fotografa.
+  await page.evaluate(() => {
+    document.querySelectorAll('.capa-conteudo, .capa-marca').forEach((el) => { el.style.display = 'none'; });
+  });
+  await page.evaluateHandle('document.fonts.ready');
+  const capaJpg = await page.screenshot({
+    type: 'jpeg',
+    quality: 88,
+    clip: { x: 0, y: 0, width: 559, height: 794 },
   });
   await browser.close();
 
@@ -1107,13 +1114,8 @@ async function renderUm(slug, mundoOverride, lang = 'pt') {
       if (!error) { okEn = true; console.log(`  [entregavel-en] ${bucket}/${enKey}`); }
       else console.warn(`  [en-upload ${bucket}] ${error.message}`);
     }
-    // Capa EN: MESMA imagem, titulo em ingles (o screenshot foi feito do HTML EN).
-    // Guarda em produtos/capas/<slug>-en.jpg (publico) para a loja /en usar.
-    const capaEnKey = `produtos/capas/${slug}-en.jpg`;
-    const { error: eCapaEn } = await supabase.storage
-      .from(BUCKET_ASSETS).upload(capaEnKey, capaJpg, { contentType: 'image/jpeg', upsert: true });
-    if (!eCapaEn) console.log(`  [capa-en] ${capaEnKey}`);
-    else console.warn(`  [capa-en-falhou] ${eCapaEn.message}`);
+    // Capa: nao precisa de versao EN — a capa da loja e so a foto (sem texto),
+    // por isso e identica em PT e EN. O PDF ingles tem a sua capa com titulo EN.
     try { fs.unlinkSync(tmpPdf); } catch {}
     if (!okEn) throw new Error('upload EN falhou em todos os buckets');
     return { slug, mundo, lane, size: pdfBuf.length, lang: 'en' };

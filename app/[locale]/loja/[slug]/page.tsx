@@ -107,15 +107,13 @@ async function getPackConteudo(slug: string, locale: string): Promise<ItemPack[]
       .from('produtos')
       .select('slug, titulo, subtitulo, capa, badge')
       .eq('publicado', true);
-    const sb = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
     const isEn = locale === 'en';
     return ((data as ItemPack[] | null) ?? [])
       .filter((p) => packIncluiProduto(pk, p.slug))
       .map((p) => {
         if (!isEn) return p;
         const en = PRODUTOS_EN[p.slug];
-        const capaEn = sb ? `${sb}/storage/v1/object/public/viviannepag-assets/produtos/capas/${p.slug}-en.jpg` : p.capa;
-        return { slug: p.slug, titulo: en?.titulo ?? p.titulo, subtitulo: en?.subtitulo ?? p.subtitulo, capa: capaEn, badge: p.badge };
+        return { slug: p.slug, titulo: en?.titulo ?? p.titulo, subtitulo: en?.subtitulo ?? p.subtitulo, capa: p.capa, badge: p.badge };
       })
       .sort((a, b) => {
         const ae = a.badge?.toLowerCase().includes('ebook') ? 0 : 1;
@@ -140,15 +138,12 @@ async function getProduto(slug: string, locale: string): Promise<Produto | null>
       .single();
     const row = data as Produto | null;
     if (!row) return getFallback(slug, locale);
-    // A DB so guarda PT. Em EN, sobrepoe texto (titulo/subtitulo/descricao) e a
-    // capa (mesma foto, titulo ingles, gerada pelo render EN).
+    // A DB so guarda PT. Em EN, sobrepoe so o texto. A capa e a mesma (so foto).
     if (locale === 'en') {
-      const sb = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
-      const capaEn = sb ? `${sb}/storage/v1/object/public/viviannepag-assets/produtos/capas/${slug}-en.jpg` : row.capa;
       const en = PRODUTOS_EN[slug];
-      if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao, capa: capaEn };
+      if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao };
       const c = CATALOGO[slug];
-      if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en, capa: capaEn };
+      if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en };
     }
     return row;
   } catch {
