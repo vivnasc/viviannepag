@@ -37,7 +37,7 @@ I have come to show you something else. That your guard, which protects you from
 
 I'll tell you the direction, so you can read in peace. You can trust without losing yourself. Lowering your guard is not becoming defenseless. It is choosing, with discernment, to let in whoever has earned coming in. And what keeps you in your armor is not strength. It is an old wound, that we are going to look at.
 
-Perhaps you recognize yourself in small things.
+Perhaps your armor shows itself in small daily gestures.
 
 In never showing those you love how much you care, for fear that it would make you vulnerable.
 
@@ -47,7 +47,7 @@ In feeling that, if you really lowered your guard, if you gave yourself over ent
 
 In being in a relationship for years and the other still saying that he doesn't really know you, that there is always a part of you that is closed.
 
-They are all the same. The guard. The armor you never take off, not even for those you love.
+All of them are the same wall by another name. The guard. The armor you never take off, not even for those you love.
 
 I want you to notice something important, before we go on. Your guard is not malice, nor hardness of heart. It is the opposite. Only someone who has, deep inside, something very precious and very fragile to protect builds a wall of this size. The wall is the measure of the tenderness you keep. The higher the guard, the larger the heart it hides. And that is why this book has not come to ask you to become harder, nor more open to everyone. It has come to help you protect that heart another way: not with a wall that closes everything, but with a discernment that chooses to whom to open it.
 
@@ -73,7 +73,7 @@ And there is a moment, in particular, when the guard reveals itself: right after
 
 ## 2. The guard you learned not to lower
 
-Go back. Further back than any boyfriend.
+Go back. To the years before the first stone of this wall was laid, long before any boyfriend.
 
 The guard wasn't born with you. It was built. Brick by brick, in a time when lowering it cost you dearly.
 
@@ -145,13 +145,13 @@ And notice how this robs you of the present. Even on good days, even when nothin
 
 I am going to leave a question here. On its own. Don't run from it.
 
-Who are you without the armor?
+With the steel set down and the wall undone, who is the woman left standing there?
 
 Stay with it. Notice the fear it brings, the vertigo of imagining yourself without the guard that defines you.
 
-This question touches you in a deep place, because the armor isn't only something you wear. It became who you are.
+This question touches you in a deep place, because the armor isn't only something you wear. It fused, over the years, into the very shape of you.
 
-You are the strong one. The one who doesn't need. The one who isn't shaken. The independent one, the controlled one, the one no one hurts. And that identity, built on the guard, is your way of feeling safe in the world. Take away the armor, imagine yourself without the guard, shown, vulnerable, at someone's mercy, and a terror appears. So who am I? Who protects me, if I lower my guard? And if I collapse, and there is no one to hold me?
+You are the woman in armor, the unbreached one. The one who needs no one to hold her wall. The one who isn't shaken. The independent one, the controlled one, the one no one hurts. And that identity, built on the guard, is your way of feeling safe in the world. Take away the armor, imagine yourself without the guard, shown, vulnerable, at someone's mercy, and a terror appears. So who am I? What stands guard at the gate, if I lower the bridge myself? And if I collapse, and there is no one to hold me?
 
 The shadow that hides here is precisely what the armor covers. The fragile woman. The one who feels, who needs, who can be hurt. The vulnerable one, whom you hid so deep that you almost no longer recognize her.
 
@@ -167,15 +167,15 @@ And notice something you may never have thought of: beneath the woman who needs 
 
 And there is a fragility hidden in your strength, that must be seen. A person who can't trust, who can't lower her guard, isn't strong. She is hostage to fear. True strength isn't the shell. It is the capacity to open yourself, knowing you can be hurt, and to risk it just the same. The armor isn't courage. It is fear dressed in steel. And living in armor isn't being strong, it is being so frightened that you never, ever, allow yourself to be exposed. True courage is that of the woman who, having been wounded, chooses to trust again, in whoever deserves it, knowing there are no guarantees. That courage, your guard never let you have.
 
-And I want to tell you something that begins to disarm the fear. Today, there are those who can hold you. In the time when the armor was born, lowering your guard was dangerous, and your defense was just. But today, in your adult life, there may already be people who would catch you if you fell, firm hands that weren't there when you were a child. The danger of opening yourself and being betrayed was real then. It may no longer be real now. And the only way to find out is to risk, slowly, with whoever deserves it, lowering the wall a little.
+And I want to tell you something that begins to disarm the fear. Today, there are those who can hold you. In the time when the armor was born, lowering your guard was dangerous, and your defense was just. But today, in your adult life, there may already be people who would catch you if you fell, firm hands that weren't there when you were a child. The danger of lowering the bridge and being betrayed was real then. Outside today's gate, that enemy may no longer be standing. And the only way to find out is to risk, slowly, with whoever deserves it, lowering the wall a little.
 
 And there is something I want you to see about what fragility does to relationships. Contrary to what you fear, showing yourself fragile doesn't push people away. It draws them closer. People don't connect to our strength, they connect to our truth, and our truth includes fragility. Think of the people you most love: it isn't their perfection that moves you, it is the moment when you saw them tremble, hesitate, need. It was there that you truly loved them. Well, the same happens with you. When you allow yourself to be vulnerable before whoever is trustworthy, you don't become smaller in that person's eyes. You become real, close, lovable in a new way. The shell protects you from exposure, but it deprives you of intimacy. And perhaps the day will come when you discover that it was worth risking the exposure, because on the other side of it is precisely what you most lack: being loved whole, and not only in the strong half.
 
-Don't answer this question right away. It isn't answered all at once, and the answer isn't given before just anyone. But leave it open. Because it is in it that the door lies. The day you come to know, and accept, the fragile woman you hid, you stop having to defend her with steel. And then, only then, you can begin to let in whoever deserves her.
+Don't answer this question right away. It isn't answered all at once, and the answer isn't given before just anyone. But leave it open. Because that question is the very gate in your wall. The day you come to know, and accept, the fragile woman you hid, you stop having to defend her with steel. And then, only then, you can begin to let in whoever deserves her.
 
 ## 5. When the guard is more than a pattern
 
-I have to stop the book here. With seriousness.
+Here I must lower my voice and halt the book at the wall. With seriousness.
 
 There is a difference between a defensive guard and a wound that asks for help. And it is worth knowing which side of it you are on.
 
@@ -191,7 +191,7 @@ If watching, controlling, distrusting has become an anxiety that consumes you, t
 
 If you no longer distinguish who is trustworthy from who isn't, and treat everyone as a threat, even those who love you and never failed you.
 
-This may be more than a pattern to understand. It may be the echo of a trauma, a wound of trust that asks for help. And serious help, from a professional.
+This may be more than a pattern to understand. It may be the echo of a trauma, a wound of trust that asks for help. And serious help, from a trained professional who can stand watch with you while the wall comes down.
 
 Wounds of betrayal, of abuse, of abandonment, engrave themselves deep, in the body, and don't come undone only by understanding. They need to be cared for, with time, with someone trained to hold you while, slowly, you learn again that the world, or at least a part of it, can be safe.
 
@@ -237,7 +237,7 @@ And I want you to see that your capacity to read people, which today you use to 
 
 ## 7. To trust without losing myself
 
-There is a destination for this crossing. And it fits in a sentence. To trust without losing myself.
+Beyond the wall, this crossing has a destination. And it fits in a sentence. To trust without losing myself.
 
 Notice the two parts. To trust. And without losing myself.
 
@@ -269,7 +269,7 @@ When trusting stops meaning losing yourself, it stops being so terrifying. Becau
 
 I wrote this book out of one simple conviction. Understanding changes things.
 
-It doesn't change everything all at once. It doesn't make you, tomorrow, lower a lifetime's guard. But it changes enough so you can stop confusing your armor with strength, and your isolation with safety.
+It doesn't bring the whole wall down at once. It doesn't make you, tomorrow, lower a lifetime's guard. But it changes enough so you can stop confusing your armor with strength, and your isolation with safety.
 
 Now you know that you love with your guard on, and that this isn't coldness, it is the protection of a tenderness you hide.
 
@@ -283,7 +283,7 @@ You know how to distinguish the defensive guard from the wound that asks for hel
 
 And you know that to trust is not to be defenseless, that the verb is to trust without losing yourself, and that your ground, after all, is you.
 
-I want to leave you an image.
+Let me hand you an image of walls and a bridge.
 
 You live inside a castle with all the walls up, the bridge raised, the gates locked. Inside you are safe. No one comes in, no one hurts you. And also no one visits you, no one touches you, no one knows you. You are safe, and you are alone, and the two at the same time.
 

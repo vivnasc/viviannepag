@@ -29,7 +29,7 @@ There is, beneath this wandering, an uprooting. Not always geographical, even th
 
 And I want you to understand that the belonging we're speaking of is not only belonging to a spot on the map. It's something deeper: it's the sense of having a place in the world that is yours, of being received, of being part, of not being alone in the universe. That belonging, the most basic of all, should have been given to you early, in the arms of those who received you, in the home that took you in, in feeling that there was a place made for you. And if it was missing, what was left was this wandering, this search for a place that is, deep down, the search for that first welcome that wasn't there, or wasn't there enough.
 
-This book is not going to promise you a place where, finally, you'll fit perfectly. I have come to look at something else. At the root that you lack, and where it can, at last, be built. Which is perhaps not in a place out there, but in a ground that is built within you.
+This book is not going to promise you a place where, finally, you'll fit perfectly. I have come to look at the ground beneath the wandering instead. At the root that you lack, and where it can, at last, be built. Which is perhaps not in a place out there, but in a ground that is built within you.
 
 And I point you toward the direction now, like someone handing you a map before the journey, so you can read without distress. You can belong without finding yourself everywhere. The home you seek, from city to city, from group to group, perhaps does not exist out there, waiting to be found. Perhaps it is built within. You can be a home for yourself. And from that inner home, belong to the places outside in another way, without the hunger for them to be the ground that only you can give yourself.
 
@@ -37,7 +37,7 @@ I want you to separate, right away, your silhouette seen from outside from the p
 
 This book does not come to tell you that you have to stay in one place forever, nor that traveling, moving, exploring, is wrong. If your soul is one of movement, that is yours, and it is good. It comes to distinguish moving for pleasure from fleeing because you can't stay; exploring the world from a ground from drifting in search of a ground you never had. And it comes to show you that this ground, which you seek from place to place, is in no place waiting for you, it's yet to be built within you, and that, having it, you can move or stay, but always from home.
 
-Perhaps you recognize yourself in small things.
+Perhaps you find your face in a few small doorways like these.
 
 In always feeling a bit of an impostor in the groups you belong to, as though at any moment they were going to discover that you're not quite from there.
 
@@ -51,7 +51,7 @@ In hesitating when they ask you where you're from, because there is no place you
 
 In leaving, or thinking of leaving, the moment a place begins to become familiar, as though belonging, instead of calming you, activated the urge to flee.
 
-They are all the same thing. The wandering. The one who belongs, wholly, nowhere.
+They are all one same homelessness wearing different rooms. The wandering. The one who belongs, wholly, nowhere.
 
 I want to take you to the small gestures where the wandering hides without a name, the ones you already confuse with your own temperament. In a group where everyone seems at ease, sharing an intimacy that flows, you observe from outside, with the sense of being behind a pane of glass, present but not part. In a conversation where the others recall a shared past, a belonging they share, you feel a pang at not having, yourself, that place, that shared history, that ground. And when someone asks you where you're from, you hesitate, because the answer is never simple, because there is no place you feel, without a doubt, as yours.
 
@@ -85,7 +85,7 @@ And I want you to see how this sentence became a self-fulfilling prophecy. Becau
 
 Notice, too, that very often it's not you who is left out, it's you who put yourself out. You're in a group, and instead of entering, you stay observing, waiting for an invitation you already have, for a permission that is already yours, for a sign that you belong that will never come because belonging is not given, it's taken. You wait to be included, instead of including yourself. And you stay on the margin, not because they put you there, but because you wait, at the door, for a call that is yours to give to yourself. Entering, committing, acting like someone who already belongs, is very often what is missing, and what depends on no one but you.
 
-I want you to see this without guilt. The lack of root you inherited, most of the time, was not created to wound you. It was the circumstance of your family, of your history, of your unstable ground. But it left in you a wound, that of someone who never belonged, and that wound deserves to be seen, so it can, at last, begin to heal.
+I want you to look at this the way you'd look at a house you were born into, without blaming yourself for its empty rooms. The lack of root you inherited, most of the time, was not created to wound you. It was the circumstance of your family, of your history, of your unstable ground. But it left in you a wound, that of someone who never belonged, and that wound deserves to be seen, so it can, at last, begin to heal.
 
 And I want to show you on which floor of the house that you are this got locked away, because it matters. The sense of not belonging is not only an idea you have about yourself, it's a way of being etched deep, earlier than words. A baby, a small child, who was not received with a sense of belonging, who did not feel a safe ground supporting her, etches that lack in the body, in a place older than reason. That's why, today, you don't decide to feel on the outside, you feel on the outside before you think, automatically, even in places where, rationally, you know that you belong. And that's why it isn't enough to tell yourself that you belong, in order to feel it: the wound lives below reason, and the missing root is planted slowly, with experience, and often with help.
 
@@ -111,7 +111,7 @@ I want you to feel the injustice this does to you, without your seeing it. Each 
 
 I want you to feel the weariness of this endless search. The wandering of someone who never arrives. The hope that is reborn with each new place and dies with each disappointment. The weight of never being able to rest, because you're always on the way out, always looking for the spot that, this time, will be home. It's a weariness of a whole life spent searching outside for what can only be built within.
 
-And there is a particular loneliness in this. That of someone who is always passing through. Who doesn't put down deep roots, because a part of her is always ready to leave. Who has many places, and no home. Who knows many people, and few wholly, because truly belonging requires staying, committing, letting yourself put down roots, and you, afraid that it isn't the right spot, never stay long enough to put down root.
+And a loneliness all its own lives in this, the loneliness of someone forever in transit. That of someone who is always passing through. Who doesn't put down deep roots, because a part of her is always ready to leave. Who has many places, and no home. Who knows many people, and few wholly, because truly belonging requires staying, committing, letting yourself put down roots, and you, afraid that it isn't the right spot, never stay long enough to put down root.
 
 And there is a trap in this search, that I want you to see. Idealization. Because until you arrive at the perfect place, you can idealize it, imagine it, dream it without flaws. The place you don't yet have is always perfect, because it's imagined. And the place where you are is always imperfect, because it's real. So you live always comparing the real, with its inevitable flaws, with a flawless ideal that exists only in your head, and the real always loses. Not because it's bad, but because no real place can compete with an imagined ideal. And that unfair comparison is what makes you always leave, in search of the ideal, which, being ideal, you'll never find anywhere.
 
@@ -119,7 +119,7 @@ Notice, too, how your search feeds itself. Each disappointment confirms to you t
 
 ## 4. Who am I if I stop searching for a home
 
-I'm going to leave a question here. On its own. Don't run from it.
+I'm going to set a question down here, like a key on an empty table. On its own. Don't run from it.
 
 Who are you, if you stop searching for a place to belong?
 
@@ -141,7 +141,7 @@ I want to tell you something about this emptiness, that begins right away to cha
 
 And I want to tell you, clearly, that stopping the search is not giving up on belonging, it's changing direction: ceasing to search outward and beginning to build inward. The search, which seems to you the path to belonging, is, deep down, what keeps you from reaching it, because it keeps you always on the way out, always at the door, always on the way to the next. Stopping is not resigning yourself to never belonging. It's acknowledging that belonging is not at the end of an endless search, it's at the beginning of a building, that of a ground within you, which, once planted, allows you, at last, to belong to the world.
 
-Don't answer just yet the question of who you are if you stop searching. But leave it open. Because it is in it that the door lies. On the day there is, within you, a ground, a home, a root that you carry with you, you stop needing to search for it out there. And then, only then, can you belong to the places without the hunger for them to be the home that only you can give yourself.
+Don't answer just yet the question of who you are if you stop searching. But leave it open. Because that open question is the threshold you have been looking for from city to city. On the day there is, within you, a ground, a home, a root that you carry with you, you stop needing to search for it out there. And then, only then, can you belong to the places without the hunger for them to be the home that only you can give yourself.
 
 ## 5. Putting down roots without depending on the outside
 
@@ -171,7 +171,7 @@ The awakening, when it comes, is a strange and new sensation. It's the day you f
 
 ## 6. Being a home for myself
 
-There is a verb for this crossing. To put down roots.
+This crossing has a verb of its own, one that finally stays in the ground. To put down roots.
 
 And it's a particular putting-down-of-roots. Not in a place, but in you. To put down root within, in a ground that is yourself, and that you carry wherever you go.
 
@@ -191,11 +191,11 @@ It's going to cost you, because the old voice, the one that says you're not from
 
 And I want to speak to you about those who grow up at your side and take you for ground, especially if you have children. Because uprooting is passed on, from generation to generation, without anyone meaning it. A person who never had ground can, without realizing it, be unable to give ground to her children, passing on to them the same wandering, the same sense of not belonging. Building your inner root is not only for yourself, it's also so you can be, yourself, the firm ground your children need, the sense of belonging that you lacked. Sometimes a person puts down roots, at last, not only for herself, but to give those she loves the home she never had.
 
-I won't give you a method. But I leave you the principle. Stop searching, outside, for the home that you lack. Build it within. Cultivate a relationship with yourself in which you are, at last, your own home. And discover, slowly, that the belonging you searched for your whole life, from place to place, it was you who could give it to yourself, and that, having it, you can at last belong to the world without the hunger of someone who never had a ground.
+I won't hand you a map to follow. But I leave you the ground to build on. Stop searching, outside, for the home that you lack. Build it within. Cultivate a relationship with yourself in which you are, at last, your own home. And discover, slowly, that the belonging you searched for your whole life, from place to place, it was you who could give it to yourself, and that, having it, you can at last belong to the world without the hunger of someone who never had a ground.
 
 ## 7. Belonging without finding yourself everywhere
 
-There is a destination for this crossing. And it fits in the sentence that holds it up. To belong without finding yourself everywhere.
+This crossing does have an address, a place you can finally arrive at. And it fits in the sentence that holds it up. To belong without finding yourself everywhere.
 
 Notice the two parts. There is a verb, to belong. And there is a condition that falls away, that of each spot having to be the total home.
 
@@ -225,7 +225,7 @@ On the other side of the wandering, there is a joy with the light on, waiting fo
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything all at once. It doesn't make you, tomorrow, feel at home where you never felt it. But it changes enough for you to stop searching, outside, for a root that is only planted within.
+It doesn't settle the whole house in one night. It doesn't make you, tomorrow, feel at home where you never felt it. But it changes enough for you to stop searching, outside, for a root that is only planted within.
 
 Now you know that you feel on the outside everywhere, and that this is not a defect of yours, nor coldness, it's an old uprooting that you inherited, and not a truth about your worth.
 
@@ -259,7 +259,7 @@ Putting down roots was the first step. But there is a second, and that one isn't
 
 And if you take a single thought from here in your luggage, take this. There is nothing wrong with you. You are not a stranger to the world, condemned to never have a place. You are someone who lacked a ground, early, and who searched for it where it wasn't. And the home you lacked you can, at last, give to yourself, slowly, building within the home you never had. Because the place where you belong is not a point on the map waiting for you. It's a ground that is planted, and the soil where it grows is you.
 
-And before you set this book down like someone leaving an address, I ask one thing of you only. A hard thing, for you.
+And before you set this book down like someone leaving an address, I ask one thing of you only. A hard thing to ask of someone who keeps her bags by the door.
 
 This week, instead of searching for where you belong, ask yourself what makes you feel, yourself, at home with yourself. It could be a gesture, an inner place, a way of being, something that is yours. And practice it, carry it with you, repeat it, wherever you are. Because it is in that cultivating of an inner home that you begin to put down roots, and that you discover, at last, that the home you searched for your whole life, from place to place, could have been, all this time, being built by you, within you, wherever you go.
 

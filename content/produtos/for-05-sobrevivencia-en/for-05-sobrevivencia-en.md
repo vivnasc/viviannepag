@@ -35,7 +35,7 @@ I want you to know why this book is different from the others in this collection
 
 Because there is hope, and a great deal of it. What you live has a name, has an explanation, and has real help. You are not broken, you are not doomed, you are not a lost cause. You are a person whose body got stuck protecting you from a danger that has already passed, and that, today, is known how to treat. Read this book, then, not as a cure, but as a hand that takes hold of you and points you in the right direction, and that tells you, from beginning to end: it is worth it, you deserve it, and you don't have to do this alone.
 
-Perhaps you recognize yourself in concrete things.
+Maybe the alert shows itself to you in concrete, everyday things.
 
 In a tension in the body that never lets go, shoulders, jaw, chest, always contracted.
 
@@ -45,7 +45,7 @@ In a difficulty relaxing, resting, ever feeling truly safe.
 
 In a background anxiety that has no visible cause, but that does not let go of you, as if there were always a danger about to arrive.
 
-They are all the same. Survival mode. The body trapped in an alert that the danger no longer justifies.
+Different shapes, one same alarm. Survival mode. The body trapped in an alert that the danger no longer justifies.
 
 I want to show you how this shows up in daily life, in things you may already take for who you are. You enter a new place, and before any thought, your body has already swept the exits, already measured the people, already searched for the threat. Someone changes their tone, frowns, closes a door hard, and your body fires, your heart races, your stomach tightens, even if rationally you know there's no danger. You have days when you feel exhausted without having done anything special, and you don't understand why, without knowing that being on alert all day long consumes as much as an enormous physical effort.
 
@@ -81,7 +81,7 @@ In the way I learned to look at these stories, there is room to understand where
 
 There is an enormous cost to living in survival mode, and I want to name it, because perhaps you already take it for normal, so used are you to it. And naming the cost is not to weigh you down, it is so that you recognize, at last, how much you have been carrying, and how much you deserve to set it down.
 
-It costs you the body. Because a body in permanent alert never rests. The tense muscles, the racing heart, the system always activated, wear out. And prolonged survival mode has real physical consequences, on health, on sleep, on energy, on the immune system. Your body pays, in silence, the price of an alarm that never switches off.
+The first price is paid by the body itself. Because a body in permanent alert never rests. The tense muscles, the racing heart, the system always activated, wear out. And prolonged survival mode has real physical consequences, on health, on sleep, on energy, on the immune system. Your body pays, in silence, the price of an alarm that never switches off.
 
 It costs you peace. Because you never feel, truly, safe. Even in safety, there's always a part of you waiting for the danger, on guard, on alert. You don't know the deep rest of someone who feels safe, because your body never learned that it is safe. You live at the edge of the precipice, even when the ground, around you, is firm.
 
@@ -107,7 +107,7 @@ And I want to add a truth that may relieve you: part of your exhaustion comes no
 
 ## 4. Who am I beyond the danger
 
-I'll leave a question here. Alone. Don't run from it, even though it is difficult.
+I'll set down a question here, the way one sets down a guard. Alone. Don't run from it, even though it is difficult.
 
 Who would you be, if your body knew, at last, that the danger has passed? If you could live, and not only survive?
 
@@ -189,7 +189,7 @@ I want you to know, further, that getting better is not erasing what you lived, 
 
 ## 7. Teaching the body that the danger has passed
 
-There is a verb for this crossing. To live. And there is a path to get there, that I want to name for you with honesty, without promising you shortcuts.
+There is a verb that waits on the far side of the smoke. To live. And there is a path to get there, that I want to name for you with honesty, without promising you shortcuts.
 
 The path is your body learning that the danger has passed. Not your head, which perhaps already knows it. Your body, your nervous system, which continues to react as if the danger were present. And the body does not learn by effort, nor by reason. It learns slowly, with experiences of safety, repeated, in the body, very often with the help of someone trained to facilitate them.
 
@@ -241,9 +241,9 @@ The crossing is your body learning that the fire ended. And that, no one does al
 
 And I want to leave you something, about those who live with you, above all if there are children, or people close who learn by looking at you. A body in survival is transmitted, without words: children feel the alert of those who care for them, and they learn, themselves, to live on guard, even without danger. I don't tell you this to weigh on your conscience further, which already carries too much. I tell you as one more reason, perhaps the strongest, to seek help: because caring for your nervous system is not only for yourself, it is also so as not to pass, without meaning to, the alert to those you love. The most protective thing you can do for them is to give yourself the care that helps you find calm. An adult who regulates herself teaches, just by existing nearby, a small body to feel safe.
 
-And I want to tell you one last thing, with all tenderness. What happened to you was not your fault, and the state in which you got stuck is not a defect of yours. You are someone who survived something the body could not, alone, leave behind. There is no shame in that. There is, rather, an enormous dignity in your having continued, in your having endured, and there is a courage greater still waiting for you: that of letting yourself, at last, be helped to set down an alert you have carried for too long.
+And before the smoke clears from these pages, let me tell you one last thing, with all tenderness. What happened to you was not your fault, and the state in which you got stuck is not a defect of yours. You are someone who survived something the body could not, alone, leave behind. There is no shame in that. There is, rather, an enormous dignity in your having continued, in your having endured, and there is a courage greater still waiting for you: that of letting yourself, at last, be helped to set down an alert you have carried for too long.
 
-You know, deep down, the sentence that holds this book. I can live beyond the danger. Not as a promise you have to keep alone, but as a real direction, toward which there are trained hands that can take you.
+Beneath the alert, your body already carries the one sentence that holds this book. I can live beyond the danger. Not as a promise you have to keep alone, but as a real direction, toward which there are trained hands that can take you.
 
 And you know, too, what the first step is, and it is not an effort, it is a care. It is seeking help. It is letting someone trained accompany you in leaving the fire that ended everywhere except in your body. That step is not weakness. It is the beginning of living.
 
