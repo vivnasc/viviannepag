@@ -419,9 +419,9 @@ I want to warn you about one thing. When you begin to need, to ask, to stop bein
 
 That guilt is the old pattern defending itself. For you, always giving was the norm, and asking seems like a transgression. But needing is not selfishness. It's human. And a relationship where only one person can need is not love, it's a service, and you deserve more than to be the provider of a service you mistake for being loved.
 
-There's something else you're going to have to relearn. To receive. When someone wants to give to you, care for you, help you, notice your impulse. You deflect. You refuse. You run to give back, to return to the position of the one who gives. Because receiving puts you in the exposed place you avoid.
+There's still something you're going to have to relearn, and it's perhaps the strangest. Not to fill the silences with tasks. Notice how, when he's simply with you, needing nothing, an itch rises in you to get up, to tidy, to offer a cup of tea, to invent some usefulness. That functionless silence terrifies you, because it's in it that you're left alone with your presence, stripped of what you do.
 
-Choosing yourself includes staying, for once, on the side of the one who receives. Letting them care for you without fleeing right away to care in return. Bearing the discomfort of not giving anything, and discovering that, even so, they stay. It's there, in that borne receiving, that you learn the truth you most lack: that you can be loved without serving.
+Endure that silence. Stay seated in it. Let him see you doing nothing, and discover, with astonishment, that he's still there, that he wants you there, without your having moved a finger. It's in that shared nothing, and not in the much that you produce, that the intimacy you always lacked dwells.
 
 ## 7. Chosen without being indispensable
 
@@ -477,9 +477,9 @@ That hunger is not weakness. It's human. We all need to receive, to be cared for
 
 And there's something that changes when you let yourself receive. Your relationships become reciprocal, and not one-way streets. People can, at last, give to you, and that draws you closer, equalizes, deepens. You stop being the spring that's never watered, and you come to be in a flow of giving and receiving, where you too are filled.
 
-Notice one last thing, about the one who watches you. If there are children, or younger people, who learn to love by looking at you, notice what you teach them. If they see you always give and never receive, erase yourself to be necessary, buy love with usefulness, they learn that this is how a woman loves. And it's likely they'll repeat it.
+Notice one last thing, about how your body gradually grows used to this new place. At first, receiving will seem to you almost a mistake, a debt that piles up. You'll want to record everything you're given, so as to return it twofold, quickly. Notice that impulse of the accountant of affection, and let it go. Love has no ledger. No one is going to charge you, in the end, for what you received and didn't pay back with service.
 
-The most liberating thing you can do for the one who watches you is not to give her even more. It's to show her a woman who lets herself be loved without erasing herself. Who gives and receives. Who has a place without paying for it. Sometimes a woman learns to choose herself, at last, not only for her own sake, but so as not to pass on to those she loves the same endless rent she paid.
+And there's a new measure you'll learn to feel, with time. That of a relationship in which no one is creditor or debtor. In which one gives without an invoice and receives without guilt. That balance, which you never knew, isn't calculated. It's felt, in the rest of someone who, at last, has stopped weighing every gesture on a scale.
 
 ## 8. The crossing
 
