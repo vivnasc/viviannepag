@@ -105,6 +105,8 @@ Repara, também, na injustiça que a impostora faz à verdade dos factos. Os teu
 
 Custa-te, também, a alegria do que conquistaste. Houve marcos na tua vida, conquistas reais, dignas de festejo, e tu não os festejaste, ou festejaste-los com uma reserva, com um aperto, com a sensação de que era cedo de mais, de que não era para tanto, de que talvez não os merecesses. E assim passaste ao lado da alegria de chegares onde chegaste, sempre a desvalorizar, sempre a relativizar, sempre a não te deixares saborear o que ganhaste. Há um luto silencioso nisto: o de todas as vitórias que tiveste e não viveste, porque a impostora não te deixou acreditar que eram tuas.
 
+E repara que a impostora não vive só nos teus pensamentos, vive no teu corpo, na forma como te sentas. Repara, numa reunião, na pose que fazes sem pensar. Os ombros que se fecham para dentro. As mãos que se juntam no colo, como quem pede desculpa por ocupar espaço. A voz que sobe no fim das frases, transformando uma afirmação tua num pedido de aprovação. O assento que ocupas só até meio, o corpo inclinado para a saída, como quem está de passagem e não de direito. O teu corpo conta, sem que dês por isso, a mesma história que a impostora te conta por dentro: não pertences aqui, prepara-te para sair. E o mais cruel é que os outros leem essa história no teu corpo antes de leres a tua competência no teu trabalho, e tratam-te, sem maldade, pela mulher de passagem que a tua postura anuncia, e não pela profissional que de facto és.
+
 Quero que sintas o peso disto. O peso de viver como impostora, num lugar que conquistaste. De nunca desfrutar do que ganhaste, por sentires que não o mereces. De viver com o medo de ser descoberta, quando não há nada a descobrir. É uma exaustão funda, e talvez já a tomes por humildade, quando é, no fundo, uma ferida que te impede de ocupar, em paz, o que é teu. E mereces, depois de tanto trabalho, deixar de a carregar.
 
 ## 4. Quem sou eu se ocupar o meu lugar
@@ -171,6 +173,8 @@ E quero dar-te uma imagem que talvez te ajude. Pensa no teu percurso como um cur
 
 Quero dar-te um gesto concreto, pequeno, para começares. Da próxima vez que te apanhares a precederes uma ideia de talvez esteja enganada, ou não sei se faz sentido, ou é só uma ideia parva, corta essa desculpa, e diz a ideia direta, sem o pedido de licença à frente. Repara como custa, e repara também que a ideia, dita sem o amortecedor, ganha peso, é ouvida de outra forma. Esses pequenos cortes, repetidos, vão ensinando o teu corpo, e os outros, que tens direito a falar sem te desculpares de o fazer. Não é uma técnica de afirmação. É deixares de minar, com palavras, o teu próprio direito a estar.
 
+E quero que distingas duas coisas que andam, na tua cabeça, confundidas. Uma é a cadeira que te deram. A outra é a cadeira que te dás. A primeira já a tens, alguém te a ofereceu, com o cargo, o contrato, o título na porta. Mas há mulheres que recebem a cadeira de fora e nunca chegam a recebê-la por dentro, e por isso vivem sentadas num lugar que, na verdade, ainda não aceitaram. A segunda cadeira, a que te dás a ti, é a que falta. É a permissão interior, a que não vem em nenhum contrato, a que nenhuma promoção traz, e que só tu podes assinar. E enquanto te limitares a ocupar a cadeira que te deram sem te dares a cadeira que é só tua, vais sentir-te sempre de empréstimo, hóspede num lugar que, no papel, já é teu há anos. A travessia deste livro é, no fundo, deixar de esperar que alguém te traga a segunda cadeira, e percebes, devagar, que ela esteve sempre nas tuas mãos.
+
 Quero falar-te do verbo desta travessia. Ocupar. Ocupar a tua cadeira por inteiro. Sentares-te nela com o direito de quem a conquistou. Dares a tua opinião com a firmeza de quem pertence. Reclamares o que mereces sem pedir licença. Reconheceres os teus sucessos como teus, fruto do teu mérito, e não da sorte. Ocupares o teu lugar, enfim, como teu.
 
 Vai custar-te. Vais sentir, a cada vez que ocupas mais o teu lugar, a velha impostora, o medo de seres descoberta, a sensação de presunção, a vontade de te diminuíres de novo. E vais querer voltar à pontinha da cadeira, ao pedir licença, à segurança de não te expores.
@@ -179,7 +183,7 @@ Mas é precisamente aí, nesse ocupar o teu lugar apesar do medo, que está a tu
 
 E não confundas, no caminho, a dúvida que volta com uma prova de que afinal não mereces. A dúvida vai voltar, mesmo depois de muitos passos dados, sobretudo nos momentos de maior exposição, num novo cargo, num desafio maior, perante pessoas que admiras. Isso não significa que recuaste, nem que a impostura tinha razão. Significa apenas que a ferida é antiga e que se reativa quando o terreno é novo. O trabalho não é nunca mais duvidares, é aprenderes a ocupar o teu lugar mesmo quando a dúvida aparece, a não lhe entregares as rédeas, a seguir em frente apesar dela. A diferença não está em deixares de sentir a impostora, está em deixares de lhe obedecer.
 
-Vai custar-te, porque a velha voz, a da impostora, está gravada fundo, e vai aparecer a cada vez que ocupas mais o teu lugar, com a sua dureza de sempre. Vai dizer-te quem é que tu pensas que és, vão perceber que não prestas, não te metas a tanto. O trabalho não é silenciá-la de uma vez, é deixar de lhe obedecer. Ouvi-la dizer não tens direito, e responder-lhe, devagar, conquistei este lugar, e ele é meu. E cada vez que ocupas o teu lugar apesar dela, e o céu não cai, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, mais justa, que sabe reconhecer o que vales.
+Vai custar-te, porque a velha voz, a da impostora, está gravada fundo, e vai aparecer a cada vez que ocupas mais o teu lugar, com a sua dureza de sempre. Vai dizer-te quem é que tu pensas que és, vão perceber que não prestas, não te metas a tanto. Não é preciso que ela se cale para te sentares, basta que deixes de te levantar sempre que ela manda. Ouvi-la dizer não tens direito a essa cadeira, e responder-lhe, devagar, conquistei este lugar, e ele é meu. E cada vez que ocupas o teu lugar apesar dela, e o céu não cai, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, mais justa, que sabe reconhecer o que vales.
 
 O despertar, quando vem, é uma sensação nova de pertença. É o dia em que te sentas à mesa e sentes, por um instante, que pertences ali. Que mereces estar. Que não estás por engano, mas por direito. É um instante pequeno, mas muda tudo, porque desmente a impostura de uma vida, e devolve-te o lugar que sempre foi teu, mas que nunca te tinhas dado licença para ocupar.
 
@@ -187,7 +191,7 @@ O despertar, quando vem, é uma sensação nova de pertença. É o dia em que te
 
 Há um destino para esta travessia. Ocupares, por inteiro, o que conquistaste.
 
-E quero mostrar-te o que isto significa, na prática.
+E quero mostrar-te, em gestos, o que é estar de facto sentada na tua cadeira.
 
 Ocupar o que conquistaste é parares de te diminuir. É dares a tua opinião sem pedir desculpa, sem a precederes de se calhar estou enganada, sem a engolires por medo de não teres direito a ela. É reclamares o reconhecimento, a remuneração, as oportunidades que mereces, sem esperares que alguém tas ofereça por bondade. É reconheceres os teus sucessos como teus, e não como sorte.
 
@@ -227,7 +231,7 @@ Sabes que a dúvida pode tornar-se sofrimento, e que procurar ajuda não confirm
 
 Sabes que não precisas de pedir licença, e que o verbo é ocupar, o que já conquistaste, com a serenidade de quem deixou de esperar a autorização dos outros e se autorizou, enfim, a si.
 
-Quero deixar-te uma imagem, e quero que fiques com ela.
+Deixo-te uma cena, e quero que a leves contigo para a próxima sala em que entrares.
 
 Imagina alguém que ganhou, com mérito real, um lugar à mesa de uma sala importante. E que entra na sala, mas fica de pé, encostada à parede, sem se sentar na cadeira que é sua, à espera de que alguém lhe diga que pode sentar-se. E ninguém lhe diz, porque ninguém imagina que ela precise de autorização para ocupar a cadeira que ganhou. E ela fica de pé, a reunião inteira, a olhar para a sua cadeira vazia, sem ousar ocupá-la.
 
@@ -235,15 +239,15 @@ A travessia é sentares-te. Reconheceres que a cadeira é tua, que a ganhaste, q
 
 Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma coisa em que tens de ser perfeita. Vai haver recuos. Dias em que ocupas o teu lugar com firmeza, e dias em que voltas à pontinha da cadeira, a pedir licença, a diminuir-te, como sempre. E a impostora vai aproveitar cada recuo para te dizer estás a ver, afinal não mereces. Não acredites nela. Os recuos fazem parte. Ninguém desfaz de uma vez uma impostura de uma vida inteira. Desfaz-se aos poucos, e cada vez que ocupas o teu lugar e nada de mau acontece, ficou uma prova nova, e é dessas provas, somadas, que a tua legitimidade interior, devagar, se constrói.
 
-E quero dizer-te uma última coisa, simples, para fechar. Tu mereces o teu lugar. Não por o ocupares na perfeição, não por nunca duvidares, não por seres infalível. Mereces porque o conquistaste, com o teu trabalho, a tua competência, a tua história. A menina, ou a jovem, a quem ensinaram a duvidar do seu direito a estar, não estava errada por duvidar, aprendeu a duvidar num lugar que lhe negou a legitimidade. Mas hoje, em adulta, o lugar é teu, ganhaste-o, e não há mais nada a provar a ninguém. Só falta uma coisa: dares-te, tu, a licença que sempre esperaste de fora.
+Antes de te levantares desta leitura, fica com uma coisa simples. Tu mereces o teu lugar. Não por o ocupares na perfeição, não por nunca duvidares, não por seres infalível. Mereces porque o conquistaste, com o teu trabalho, a tua competência, a tua história. A menina, ou a jovem, a quem ensinaram a duvidar do seu direito a estar, não estava errada por duvidar, aprendeu a duvidar num lugar que lhe negou a legitimidade. Mas hoje, em adulta, o lugar é teu, ganhaste-o, e não há mais nada a provar a ninguém. Só falta uma coisa: dares-te, tu, a licença que sempre esperaste de fora.
 
-Sabes, no fundo, a frase que segura este livro. Não preciso de pedir licença para ocupar o que já conquistei. A cadeira é minha, ganhei-a, e tenho direito a sentar-me nela por inteiro.
+Há uma frase que é o encosto desta cadeira inteira, e tu já a sabes. Não preciso de pedir licença para ocupar o que já conquistei. A cadeira é minha, ganhei-a, e tenho direito a sentar-me nela por inteiro.
 
-Ocupar foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a sentares-te, devagar, na tua cadeira. A ocupares o teu lugar, sem te diminuíres, sem pedir licença. E há um trabalho mais fundo, com quem te acompanhe, para desfazer a impostora e reconstruir o teu sentido de legitimidade, porque ele vem de longe, e raramente se reconstrói sozinha.
+Compreender foi o primeiro passo. O segundo não se lê, faz-se com o corpo. Faz-se a sentares-te, devagar, na tua cadeira. A ocupares o teu lugar, sem te diminuíres, sem pedir licença. E há um trabalho mais fundo, com quem te acompanhe, para desfazer a impostora e reconstruir o teu sentido de legitimidade, porque ele vem de longe, e raramente se reconstrói sozinha.
 
-E se houver um único pensamento que leves destas páginas, que seja este. A cadeira é tua. Não emprestada, não por engano, não à espera de ser reclamada por alguém mais legítimo. Tua, conquistada, merecida. E a única pessoa no mundo que ainda precisa de ser convencida disso és tu. Os outros já sabem, por isso te deram o lugar, por isso contam contigo, por isso te tratam como a profissional que és. Falta só convenceres-te a ti, e esse é o trabalho mais importante, e mais justo, que podes fazer: dares-te, enfim, a permissão de ocupares, em paz, aquilo que sempre foi teu.
+E se uma só certeza ficar contigo quando fechares o livro, que seja esta. A cadeira é tua. Não emprestada, não por engano, não à espera de ser reclamada por alguém mais legítimo. Tua, conquistada, merecida. E a única pessoa no mundo que ainda precisa de ser convencida disso és tu. Os outros já sabem, por isso te deram o lugar, por isso contam contigo, por isso te tratam como a profissional que és. Falta só convenceres-te a ti, e esse é o trabalho mais importante, e mais justo, que podes fazer: dares-te, enfim, a permissão de ocupares, em paz, aquilo que sempre foi teu.
 
-E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
+E antes de te levantares de vez desta leitura, peço-te um gesto só. Difícil, para ti.
 
 Esta semana, ocupa o teu lugar num momento em que costumas pedir licença. Dá a tua opinião sem a precederes de desculpas. Reclama algo que mereces. Reconhece um sucesso teu como teu, sem o atribuíres à sorte. E repara no medo da impostura, na sensação de presunção, na vontade de te diminuíres. E ocupa o teu lugar na mesma. Porque é nesse ocupar, suportado apesar do medo, que começas a sentir, enfim, que o lugar é teu, e que nunca precisaste da licença de ninguém para ocupares o que, com mérito, conquistaste.
 

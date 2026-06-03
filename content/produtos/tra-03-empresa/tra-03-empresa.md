@@ -99,6 +99,8 @@ E custa às tuas relações, também. Porque quem está fundido com uma obra rar
 
 Custa-te, também, partes de ti que ficaram por viver. Porque quando toda a tua identidade está numa obra, tudo o resto atrofia: os interesses que tinhas, as amizades que cultivavas, os sonhos que não cabiam no projeto, as partes de ti que nada têm a ver com o que produzes. Foste-te encolhendo até caberes inteira na obra, e o resto de ti, o que existia para além dela, foi ficando por viver, esquecido, à espera. Há um luto nisto, o de uma vida mais larga que trocaste por uma vida inteira dentro de uma só coisa, por maior e mais bela que essa coisa seja.
 
+E há um custo de que quase ninguém fala, escondido por baixo dos números que parecem bons. Uma empresa fundida com quem a fundou tem um valor de fachada e uma fragilidade real, porque tudo o que a faz andar mora numa só cabeça, na tua. As decisões que não estão escritas em parte nenhuma, os contactos que só tu tens, o jeito de resolver as coisas que ninguém ao teu lado aprendeu, porque nunca lhes deste espaço para aprender. Se alguém olhasse a sério para o que construíste, veria uma obra que não sobrevive uma semana à tua ausência, e isso, que tu vives como prova de quanto és necessária, é, na verdade, a maior fraqueza de tudo o que ergueste. Uma criação que só existe enquanto estás colada a ela não está protegida pela tua presença. Está refém dela.
+
 Quero que sintas o peso disto. O peso de carregar uma obra como se fosse a tua própria existência. De nunca poder descansar dela, porque é de ti que não podes descansar. De não saber quem serias sem ela. É uma exaustão funda, e talvez já a tomes por dedicação, quando é, no fundo, a perda de ti naquilo que crias.
 
 ## 4. Quem sou eu sem o que crio
@@ -167,7 +169,7 @@ Quero que vejas, também, que uma obra fundida com o criador transmite, sem quer
 
 Quero falar-te do verbo desta travessia. Soltar. Soltar não é abandonar a obra. É deixares de a segurar com a vida, de te fundires com ela, de a carregar como se fosse a tua própria existência. É amá-la mantendo-te distinta dela. É confiar que ela pode existir, em parte, sem a tua mão em cada detalhe. É recuperares a fronteira entre quem és e o que crias.
 
-E soltar exige uma coisa que te custa: tolerar que a obra se faça sem ti, talvez de forma diferente da tua, e que esteja bem. Que delegues, e que os outros não façam exatamente como tu, mas que façam. Que a obra ganhe vida própria, e que isso, longe de te tirar a obra, a torne mais forte, e a ti mais livre. Soltar o controlo, para quem se fundiu com a obra, dá medo. Mas é nesse soltar que está a tua libertação.
+E soltar exige uma coisa que te custa: tolerar que a obra se faça sem ti, talvez de forma diferente da tua, e que esteja bem. Que delegues, e que os outros não façam exatamente como tu, mas que façam. Que a obra ganhe vida própria, e que isso, longe de te tirar a obra, a torne mais forte, e a ti mais livre. Soltar o controlo, para quem se fundiu com a obra, dá medo. Mas é a tirar as mãos do leme, e a ver que o barco não vira, que vais, devagar, voltando a ser tua.
 
 Quero ser-te honesta sobre uma coisa: soltar não se faz de uma vez, nem de forma total. Não vais passar de carregares tudo a largares tudo. Soltar faz-se aos poucos, começando pelo que é mais fácil de delegar, pelo que menos te assusta largar, e ganhando confiança a cada vez que vês que a obra aguenta sem a tua mão em cima. É um músculo que se treina devagar: hoje largas uma tarefa pequena, e vês que corre bem; amanhã largas uma maior. Não te exijas soltar tudo já, que seria pôr a fusão ao serviço de a desfazer. Exige-te só dar o primeiro passo, e depois o seguinte, confiando que cada prova de que a obra continua sem ti vai tornando o passo seguinte menos assustador.
 
@@ -181,7 +183,7 @@ E quero que vejas que recuperar a fronteira não te torna fria, nem distante, ne
 
 Há um destino para esta travessia. Recuperares a fronteira entre ti e o que crias.
 
-E quero mostrar-te o que isto significa, na prática.
+E quero pôr-te isto em concreto, no chão dos teus dias de trabalho.
 
 Recuperar a fronteira é começares a distinguir-te da obra. A reconhecer que tu és uma coisa, e o projeto é outra, ligadas mas distintas. A separar o teu valor do sucesso da obra, a tua identidade da existência do projeto, a tua paz da saúde do negócio. A poderes amar o que crias sem te confundires com ele.
 
@@ -193,6 +195,8 @@ E é, sobretudo, devolveres a outras áreas da tua vida o lugar que a obra lhes 
 
 E não penses que isto te tira à obra, ou te faz menos dedicada. É o contrário. Uma criadora que tem vida própria, que descansa, que se alimenta de outras fontes além do trabalho, traz à obra uma frescura, uma perspetiva, uma energia que uma criadora esgotada e fundida não consegue ter. As melhores ideias vêm muitas vezes de longe do trabalho, no descanso, no passeio, na conversa que nada tem a ver com o projeto. Ao recuperares uma vida fora da obra, não a abandonas, alimenta-la, porque lhe trazes uma pessoa mais inteira, mais viva, mais capaz de criar.
 
+E há um sinal simples, no dia a dia, de que a fronteira está a voltar. É quando consegues estar fora, um dia inteiro, sem telefone, e descobrir, ao regressar, que houve coisas decididas sem ti, talvez não como tu as terias feito, mas decididas, e que a empresa não parou à tua espera. Da primeira vez, isso dói, porque mexe com a ilusão de seres insubstituível. Mas, se deixares assentar, descobres um alívio fundo por baixo da dor: o de saberes que aquilo que construíste já não te prende a cada hora, que pode respirar sem ti, e que tu, por isso, também podes. A fronteira não se mede no quanto seguras. Mede-se no quanto consegues largar e ver que aguenta.
+
 Quero dar-te uma imagem concreta do que é a fronteira saudável. Imagina que a obra é um filho. Um bom pai, uma boa mãe, ama o filho profundamente, dá-lhe o melhor, e ao mesmo tempo sabe que o filho não é ele, que tem vida própria, que há de crescer e seguir o seu caminho. O amor sadio não funde, deixa o outro ser outro. E o teu projeto, como um filho, merece esse amor que cuida sem possuir, que se dedica sem se fundir, que ama o suficiente para deixar crescer. Soltar não é amar menos. É amar de uma forma que deixa a obra, e a ti, respirar.
 
 Vai custar-te. Vais sentir, a cada vez que soltas, que delegas, que recuperas vida fora da obra, o velho medo de te perderes, a sensação de abandono do projeto, o vazio de quem és sem ele. E vais querer voltar a fundir-te, a segurar tudo, a mergulhar na obra, para o vazio passar.
@@ -201,7 +205,7 @@ Mas é precisamente aí, nesse soltar suportado apesar do medo, que está a tua 
 
 E quero que percebas que recuperar a fronteira não acontece num dia, é um caminho com idas e vindas. Vai haver alturas em que voltas a mergulhar inteira, sobretudo nos momentos de maior pressão, de maior risco para o projeto, porque é aí que a fusão mais puxa. Isso não significa que falhaste. Significa apenas que a ferida é antiga e que se reativa quando o medo aperta. O trabalho não é nunca mais te enredares, é aprenderes a notar quando estás a fundir-te de novo, e a dar, devagar, um passo atrás, recuperando a distância que te devolve a ti. A diferença não está em nunca mais te perderes na obra, está em saberes regressar a ti cada vez mais depressa.
 
-Vai custar-te, porque a velha voz, a que te diz que tu és a obra, está gravada fundo, e vai aparecer a cada vez que soltas, a cada vez que descansas, a cada vez que recuperas uma vida própria. Vai dizer-te que estás a abandonar o que construíste, a desleixar-te, a arriscar tudo. O trabalho não é silenciá-la de uma vez, é deixar de lhe obedecer. Ouvi-la dizer tu és isto, não te separes, e responder-lhe, devagar, eu existo para além disto, e posso soltar sem me perder. E cada vez que soltas apesar dela, e continuas inteira, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, que sabe que vales por quem és, e não só pelo que crias.
+Vai custar-te, porque a velha voz, a que te diz que tu és a obra, está gravada fundo, e vai aparecer a cada vez que soltas, a cada vez que descansas, a cada vez que recuperas uma vida própria. Vai dizer-te que estás a abandonar o que construíste, a desleixar-te, a arriscar tudo. Não tens de a calar de uma vez, essa voz que confunde a empresa contigo, basta deixares de fazer o que ela manda. Ouvi-la dizer tu és isto, não te separes, e responder-lhe, devagar, eu existo para além disto, e posso soltar sem me perder. E cada vez que soltas apesar dela, e continuas inteira, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, que sabe que vales por quem és, e não só pelo que crias.
 
 Quero que vejas o que se abre quando recuperas a fronteira. Abre-se o descanso, porque já não tens de segurar tudo. Abre-se a vida, porque já tens identidade fora da obra. Abre-se o crescimento da própria obra, que pode, enfim, ganhar vida própria. E abre-se uma paz: a de quem sabe que existe, com valor, para além do que cria, e que por isso pode criar livremente, sem a obra ser uma questão de vida ou morte para a sua identidade.
 
@@ -229,7 +233,7 @@ Sabes que podes continuar inteira sem segurares tudo, e que o verbo é soltar, r
 
 E sabes que soltar não é abandonar, é a forma mais sã de amar o que crias: a que cuida sem possuir, que se dedica sem se perder, que deixa a obra, e a ti, respirar.
 
-Quero deixar-te uma imagem, e quero que fiques com ela.
+Deixo-te uma imagem para guardares, e voltares a ela nos dias difíceis.
 
 Imagina alguém que plantou uma árvore, e que a amou tanto que se colou a ela, abraçada ao tronco, dia e noite, anos a fio, sem nunca largar, convencida de que, se largasse, a árvore morreria. E que, de tanto estar colada, deixou de viver a sua vida, e a árvore, com alguém colado ao tronco, não pôde crescer livremente.
 
@@ -237,15 +241,15 @@ A travessia é descolares-te do tronco. Dares um passo atrás. Descobrires que a
 
 Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma exigência. Vai haver recuos. Dias em que soltas, em que tens vida própria, em que descansas, e dias em que voltas a mergulhar inteira na obra, a carregar tudo, a desaparecer nela, como sempre. E a velha voz vai dizer-te que afinal não consegues, que sem te fundires nada anda. Não acredites nela. Os recuos fazem parte. Ninguém desfaz de uma vez uma fusão de anos. Desfaz-se aos poucos, e cada vez que te afastas e a obra continua, e tu continuas inteira, ficou uma prova nova, e é dessas provas, somadas, que a fronteira entre ti e o que crias, devagar, se reconstrói.
 
-E quero dizer-te uma última coisa, simples, para fechar. Tu existes. Não como extensão da obra, não como função do projeto, mas como pessoa, inteira, de valor, que por acaso criou algo grande, mas que vale por quem é, e não só pelo que fez. A mulher que se fundiu com a sua criação fê-lo porque ali encontrou valor, sentido, lugar, e isso é digno de ternura. Mas o valor que ela procurava na obra estava nela desde sempre, antes da obra, para além da obra. Não há nada a corrigir na sua dedicação. Há só uma coisa a lembrar-lhe, devagar, até acreditar: tu não és o que crias, tu és quem cria, e isso é muito maior, e ninguém to pode tirar.
+Resta-me dizer-te uma coisa só, sem rodeios, para terminar. Tu existes. Não como extensão da obra, não como função do projeto, mas como pessoa, inteira, de valor, que por acaso criou algo grande, mas que vale por quem é, e não só pelo que fez. A mulher que se fundiu com a sua criação fê-lo porque ali encontrou valor, sentido, lugar, e isso é digno de ternura. Mas o valor que ela procurava na obra estava nela desde sempre, antes da obra, para além da obra. Não há nada a corrigir na sua dedicação. Há só uma coisa a lembrar-lhe, devagar, até acreditar: tu não és o que crias, tu és quem cria, e isso é muito maior, e ninguém to pode tirar.
 
-Sabes, no fundo, a frase que segura este livro. Posso continuar inteira sem segurar tudo. E sabes que soltar não te tira a obra, devolve-te a ti.
+E já trazes contigo, no fundo, a frase em que assenta tudo o que aqui se disse. Posso continuar inteira sem segurar tudo. E sabes que soltar não te tira a obra, devolve-te a ti.
 
-Soltar foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a descolar, devagar, da obra. A recuperar a fronteira, a vida própria, a identidade que não depende do que crias. E há um trabalho mais fundo, com quem te acompanhe, para descobrir o tu que existe para além da obra, porque essa identidade, que andou perdida na criação, raramente se recupera sozinha.
+Soltar foi o primeiro passo. Mas o passo a seguir não cabe nestas páginas, nenhum livro o dá por ti. Faz-se a descolar, devagar, da obra. A recuperar a fronteira, a vida própria, a identidade que não depende do que crias. E há um trabalho mais fundo, com quem te acompanhe, para descobrir o tu que existe para além da obra, porque essa identidade, que andou perdida na criação, raramente se recupera sozinha.
 
-E se houver um único pensamento que leves destas páginas, que seja este. Tu não és a tua obra. És quem a fez. E quem faz é sempre maior do que o que faz, porque pode fazer aquilo, e também outra coisa, e também nada, e continuar a ser, em qualquer caso, alguém de valor. A obra é uma das coisas que fazes com a tua vida, talvez a mais importante, mas não é a tua vida, nem és tu. Lembrares-te disto, devagar, vez após vez, é o que te devolve a liberdade de a amar sem te perderes nela, e de existires, inteira, com ou sem ela.
+Se de tudo isto guardares uma só ideia, quando fechares o livro e voltares à empresa amanhã, guarda esta. Tu não és a tua obra. És quem a fez. E quem faz é sempre maior do que o que faz, porque pode fazer aquilo, e também outra coisa, e também nada, e continuar a ser, em qualquer caso, alguém de valor. A obra é uma das coisas que fazes com a tua vida, talvez a mais importante, mas não é a tua vida, nem és tu. Lembrares-te disto, devagar, vez após vez, é o que te devolve a liberdade de a amar sem te perderes nela, e de existires, inteira, com ou sem ela.
 
-E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
+E antes de pousares o livro e voltares à correria, fica com um pedido meu. Pequeno de dizer, difícil de fazer, para quem é como tu.
 
 Esta semana, dedica um tempo a algo que seja só teu, que não tenha nada a ver com a obra, com o trabalho, com o que crias. Algo que te lembre quem és para além do projeto. E repara no desconforto, na vontade de voltar à obra, na sensação de que estás a perder tempo, a abandonar o que importa. E fica com o que é só teu na mesma. Porque é nesse recuperar de uma vida própria, suportado apesar do medo, que começas a descolar-te da obra, e a descobrir, enfim, que existes, inteira, muito para além daquilo que crias.
 
