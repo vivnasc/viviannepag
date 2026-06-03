@@ -119,6 +119,8 @@ export function BotaoCompra({
   if (pago) {
     return (
       <div className="bg-ambar/10 border border-ambar/40 rounded-[14px] p-6 text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/gratidao-sucesso.jpg" alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-[84px] h-[84px] rounded-full object-cover mx-auto mb-3 border border-ambar/40" />
         <p className="text-ambar font-serif text-[1.2rem] mb-2">
           {isPt ? 'Obrigada!' : 'Thank you!'}
         </p>

@@ -133,6 +133,8 @@ export function CartWidget() {
               {vista === 'pago' ? (
                 <div>
                   <div className="bg-ambar/10 border border-ambar/40 rounded-[14px] p-5 mb-5 text-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/gratidao-sucesso.jpg" alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-[84px] h-[84px] rounded-full object-cover mx-auto mb-3 border border-ambar/40" />
                     <p className="text-ambar font-serif text-[1.25rem] mb-1">{isPt ? 'Obrigada!' : 'Thank you!'}</p>
                     <p className="text-creme-2 text-sm">{isPt ? 'Pagamento confirmado. Os teus ficheiros estão abaixo e também vão para o teu email.' : 'Payment confirmed. Your files are below and were also sent to your email.'}</p>
                     <p className="text-creme-2/60 text-xs mt-2">{email}</p>
