@@ -40,10 +40,10 @@ export const PACKS: Pack[] = [
   },
   {
     slug: 'pack-amor', colecao: 'amor',
-    titulo: 'Amor · coleção completa', titulo_en: 'Love · complete collection',
+    titulo: 'SyncHim · coleção completa', titulo_en: 'SyncHim · complete collection',
     subtitulo: 'Casal e vínculo: o que se repete por baixo do que dizem.',
     subtitulo_en: 'Couple and bond: what repeats beneath what you say.',
-    descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo Amor num só acesso. Sobre o nó invisível do casal, a diferença entre amor e intensidade, e o que te faz perder-te quando amas.',
+    descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo SyncHim num só acesso. Sobre o nó invisível do casal, a diferença entre amor e intensidade, e o que te faz perder-te quando amas.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Love world in one access. On the invisible knot in the couple, the difference between love and intensity, and what makes you lose yourself when you love.',
     preco: '€29', preco_original: '€66', capa: '/produtos/ebook-06-no-casal-capa.png', badge: 'pack',
   },
@@ -107,4 +107,20 @@ export function isPackSlug(slug: string): boolean {
 export function packIncluiProduto(pack: Pack, produtoSlug: string): boolean {
   if (pack.colecao === 'all') return true;
   return slugToColecao(produtoSlug) === pack.colecao;
+}
+
+// Upsell no checkout: se o carrinho tem >=2 titulos avulsos do mesmo universo
+// e ainda nao tem o pack desse universo, sugere trocar pelos packs (poupanca).
+// Devolve os slugs que o pack substitui, para o checkout trocar e calcular a poupanca.
+export function upsellsParaCarrinho(slugsNoCarrinho: string[]): { pack: Pack; substitui: string[] }[] {
+  const avulsos = slugsNoCarrinho.filter((s) => !s.startsWith('pack-'));
+  const packsNoCarrinho = new Set(slugsNoCarrinho.filter((s) => s.startsWith('pack-')));
+  const res: { pack: Pack; substitui: string[] }[] = [];
+  for (const pack of PACKS) {
+    if (pack.colecao === 'all') continue;
+    if (packsNoCarrinho.has(pack.slug)) continue;
+    const incluidos = avulsos.filter((s) => packIncluiProduto(pack, s));
+    if (incluidos.length >= 2) res.push({ pack, substitui: incluidos });
+  }
+  return res;
 }

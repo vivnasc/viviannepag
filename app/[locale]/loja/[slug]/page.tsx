@@ -8,7 +8,9 @@ import { BotaoCompra } from '@/components/BotaoCompra';
 import { GotaMini } from '@/components/icons/GotaAssina';
 import { PartilhaProduto } from '@/components/PartilhaProduto';
 import { getSupabase } from '@/lib/supabase';
-import { packBySlug, isPackSlug, packIncluiProduto } from '@/lib/packs';
+import { packBySlug, isPackSlug, packIncluiProduto, PACKS } from '@/lib/packs';
+import { slugToColecao } from '@/lib/colecoes';
+import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -163,6 +165,8 @@ export default async function ProdutoPage({
   const isEbook = p.badge?.toLowerCase().includes('ebook');
   const isPack = isPackSlug(slug);
   const conteudoPack = isPack ? await getPackConteudo(slug) : [];
+  // Cross-sell: pack do universo deste produto (para sugerir levar tudo).
+  const packDoUniverso = !isPack ? PACKS.find((pk) => pk.colecao !== 'all' && pk.colecao === slugToColecao(slug)) : undefined;
 
   return (
     <>
@@ -246,11 +250,36 @@ export default async function ProdutoPage({
                   pack={isPack}
                 />
               </div>
-              <p className="text-[0.72rem] text-creme-2/50">
-                {isPt
-                  ? 'Download imediato em PDF. Pagamento seguro via PayPal.'
-                  : 'Immediate PDF download. Secure payment via PayPal.'}
-              </p>
+              {!p.checkout_url && (
+                <div className="mb-4">
+                  <AdicionarCarrinho variante="inline" item={{ slug, titulo: p.titulo, preco: p.preco, capa: p.capa, badge: p.badge }} />
+                </div>
+              )}
+              {/* Bloco de confiança */}
+              <ul className="flex flex-wrap gap-x-5 gap-y-1.5 mb-3 text-[0.75rem] text-creme-2/70">
+                <li className="flex items-center gap-1.5"><span className="text-ambar">↓</span> {isPt ? 'Entrega imediata' : 'Instant delivery'}</li>
+                <li className="flex items-center gap-1.5"><span className="text-ambar">▢</span> {isPt ? 'PDF (telemóvel, PC, imprimir)' : 'PDF (phone, PC, print)'}</li>
+                <li className="flex items-center gap-1.5"><span className="text-ambar">∞</span> {isPt ? 'É teu para sempre' : 'Yours forever'}</li>
+                <li className="flex items-center gap-1.5"><span className="text-ambar">✓</span> {isPt ? 'Pagamento seguro' : 'Secure payment'}</li>
+              </ul>
+              {/* Cross-sell do pack do universo */}
+              {packDoUniverso && (
+                <a
+                  href={`${locale === 'en' ? '/en' : ''}/loja/${packDoUniverso.slug}`}
+                  className="block mt-2 rounded-[12px] border border-ouro/40 bg-ouro/10 px-4 py-3 no-underline hover:bg-ouro/20 transition-colors"
+                >
+                  <span className="block text-ambar text-[0.84rem] font-medium">
+                    {isPt
+                      ? `Faz parte do pack ${packDoUniverso.titulo} · ${packDoUniverso.preco}`
+                      : `Part of the ${packDoUniverso.titulo_en} pack · ${packDoUniverso.preco}`}
+                  </span>
+                  <span className="block text-creme-2/70 text-[0.74rem] mt-0.5">
+                    {isPt
+                      ? `Leva o universo completo em vez de ${p.preco} avulso — poupa face a ${packDoUniverso.preco_original}. →`
+                      : `Get the whole world instead of ${p.preco} apiece — save vs ${packDoUniverso.preco_original}. →`}
+                  </span>
+                </a>
+              )}
             </div>
           </div>
         </div>

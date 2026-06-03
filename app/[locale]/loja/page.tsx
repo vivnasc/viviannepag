@@ -5,9 +5,10 @@ import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { getSupabase } from '@/lib/supabase';
 import { GotaMini } from '@/components/icons/GotaAssina';
-import { COLECOES, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
+import { COLECOES, COLECOES_ORDENADAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
 import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
+import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { PACKS } from '@/lib/packs';
 import type { Metadata } from 'next';
 
@@ -117,7 +118,7 @@ export default async function LojaPage({
         <LojaSidebar
           locale={locale}
           produtos={produtos.map(p => ({ slug: p.slug, titulo: p.titulo, subtitulo: p.subtitulo, badge: p.badge }))}
-          itens={COLECOES.map(c => {
+          itens={COLECOES_ORDENADAS.map(c => {
             const count = produtos.filter(p => slugToColecao(p.slug) === c.id).length;
             return { id: c.id, romano: c.romano, nome: isPt ? c.nome : c.nome_en, count, ativo: c.estado !== 'em-breve' || count > 0 };
           })}
@@ -166,7 +167,9 @@ export default async function LojaPage({
           const renderCard = (p: Produto) => {
               const href = `${locale === 'en' ? '/en' : ''}/loja/${p.slug}`;
               return (
-                <Link key={p.id} href={href} className="group block no-underline">
+                <div key={p.id} className="relative">
+                <AdicionarCarrinho variante="overlay" item={{ slug: p.slug, titulo: p.titulo, preco: p.preco, capa: p.capa, badge: p.badge }} />
+                <Link href={href} className="group block no-underline">
                   <div className={`overflow-hidden rounded-[18px] border transition-colors ${p.destaque ? 'border-ambar/50 group-hover:border-ambar' : 'border-ocre/25 group-hover:border-ambar/40'}`}>
                     {p.capa ? (
                       <div className="relative aspect-[3/4] overflow-hidden">
@@ -208,6 +211,7 @@ export default async function LojaPage({
                     </div>
                   </div>
                 </Link>
+                </div>
               );
           };
 
@@ -240,7 +244,7 @@ export default async function LojaPage({
 
               {/* NAV ANCORA DAS COLECOES */}
               <nav className="mb-14 flex flex-wrap justify-center gap-2">
-                {COLECOES.map(c => {
+                {COLECOES_ORDENADAS.map(c => {
                   const count = porColecao.get(c.id)?.length ?? 0;
                   const ativo = c.estado !== 'em-breve' || count > 0;
                   return (
@@ -312,7 +316,7 @@ export default async function LojaPage({
               {/* BLOCO POR COLECAO — qualquer universo com produtos publicados
                   aparece (mesmo os marcados 'em-breve' em colecoes.ts). Assim,
                   renderizar um universo basta para ele surgir na loja. */}
-              {COLECOES.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0).map(c => {
+              {COLECOES_ORDENADAS.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0).map(c => {
                 const lista = porColecao.get(c.id) ?? [];
                 if (lista.length === 0) return null;
                 return (

@@ -354,3 +354,10 @@ export function getColecao(id: ColecaoId): Colecao {
 
 export const COLECOES_ATIVAS = COLECOES.filter(c => c.estado !== 'em-breve');
 export const COLECOES_EM_BREVE = COLECOES.filter(c => c.estado === 'em-breve');
+
+// Ordem de exibicao pelos numerais romanos (I → VII), para a loja e o admin
+// mostrarem os universos por ordem e nao pela ordem interna do array.
+const _ROMANO_VAL: Record<string, number> = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7 };
+export const COLECOES_ORDENADAS = [...COLECOES].sort(
+  (a, b) => (_ROMANO_VAL[a.romano] ?? 99) - (_ROMANO_VAL[b.romano] ?? 99),
+);

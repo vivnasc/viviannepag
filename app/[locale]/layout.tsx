@@ -5,6 +5,8 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { notFound } from 'next/navigation';
 import { Analytics } from '@vercel/analytics/next';
 import { routing } from '@/i18n/routing';
+import { CartProvider } from '@/lib/cart';
+import { CartWidget } from '@/components/CartWidget';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -153,7 +155,10 @@ export default async function LocaleLayout({
       <body>
         <div className="grain" />
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <CartProvider>
+            {children}
+            <CartWidget />
+          </CartProvider>
         </NextIntlClientProvider>
         <Analytics />
         <a
