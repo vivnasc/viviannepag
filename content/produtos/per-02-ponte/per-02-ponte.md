@@ -215,9 +215,9 @@ E abre-se também uma libertação para os outros. Porque enquanto és a ponte, 
 
 Quero que vejas, ainda, que atravessar para o teu lado não te torna menos sensível, menos boa com os outros, menos capaz de ligar quem precisa de ser ligado. A tua sensibilidade fica lá, intacta. O que muda é que deixa de ser uma obrigação compulsiva, sem fronteira, e passa a ser uma escolha. Vais poder, sim, ajudar a unir, mediar quando faz sentido, usar o teu dom, mas a partir de um centro teu, e por escolha, e não porque não sabes existir de outra forma. O dom, posto ao serviço de uma vida própria, em vez de a substituir, torna-se uma riqueza, e não uma prisão.
 
-Há uma alegria à espera do outro lado. A alegria de teres um lado teu. De seres destino, e não só passagem. De teres relações diretas, a dois, em que existes inteira. De usares a tua sensibilidade enorme, o teu dom de sentir os outros, ao serviço da tua própria vida, e não só da gestão das vidas alheias. Essa alegria é o teu direito, e está do outro lado do medo, no dia em que atravessares, enfim, para o teu lado.
+Há uma alegria à espera, do outro lado do rio, na margem que é tua. A alegria de teres um lado teu. De seres destino, e não só passagem. De teres relações diretas, a dois, em que existes inteira. De usares a tua sensibilidade enorme, o teu dom de sentir os outros, ao serviço da tua própria vida, e não só da gestão das vidas alheias. Essa alegria é o teu direito, e está do outro lado do medo, no dia em que atravessares, enfim, para o teu lado.
 
-E se houver um único pensamento que leves destas páginas, que seja este. Tu não és a ligação entre as vidas dos outros. És uma vida, inteira, com um lado próprio, com desejos, com opiniões, com um centro onde alguém pode querer chegar. A função de ponte foi um lugar que ocupaste para sobreviver e para pertencer, mas não é quem és. E descobrir quem és, do outro lado da ponte, não é perder as ligações, é ganhar, enfim, a primeira ligação que sempre te faltou: a ligação contigo.
+E se de tudo isto guardares só uma frase, que seja esta. Tu não és a ligação entre as vidas dos outros. És uma vida, inteira, com um lado próprio, com desejos, com opiniões, com um centro onde alguém pode querer chegar. A função de ponte foi um lugar que ocupaste para sobreviver e para pertencer, mas não é quem és. E descobrir quem és, do outro lado da ponte, não é perder as ligações, é ganhar, enfim, a primeira ligação que sempre te faltou: a ligação contigo.
 
 ## 8. A travessia
 
@@ -241,7 +241,7 @@ Sabes que sentes tudo o que os outros sentem, ao ponto de perderes a tua frontei
 
 E sabes que deixar de ser ponte não é perder as ligações, é poderes, enfim, ter as tuas, diretas, a dois, em que sejas tu o destino e não o meio.
 
-Quero deixar-te uma imagem, e quero que fiques com ela.
+Deixo-te uma imagem, a imagem que dá nome a tudo isto, e quero que fiques com ela.
 
 És uma ponte de pedra, antiga, sólida, paciente, sobre um rio largo. Há anos que os outros passam por ti, de uma margem à outra, e tu seguras o peso de todos, leal, firme, sempre no meio. E nunca chegaste a nenhuma das margens, porque uma ponte não chega a lado nenhum, é só o meio.
 
@@ -251,13 +251,13 @@ A travessia é essa. Não deixares de te ligar às pessoas. Mas deixares de vive
 
 Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma coisa a fazer na perfeição. Vai ser lenta, e vai ter recuos. Dias em que ficas no teu lado, e dias em que voltas a correr para o meio, a mediar, a apaziguar, como sempre. E a velha lealdade vai aproveitar cada recuo para te dizer estás a ver, o teu lugar é unir os outros. Não acredites nela. Os recuos fazem parte. Ninguém deixa de uma vez um lugar que ocupou a vida inteira. Deixa-se aos poucos, e cada vez que ficas no teu lado e ninguém se perde, ficou uma prova nova, e é dessas provas, somadas, que a margem própria, devagar, se constrói.
 
-E quero dizer-te uma última coisa, simples, para fechar. Tu não foste feita para ser passagem. A criança que se pôs no meio para manter a casa unida fez o que pôde, com um amor enorme, para segurar o que os adultos não seguravam. Não há nada a censurar nela. Mas ela merecia ter tido um lado, um centro, um lugar onde fosse ela e não a ligação entre os outros. E esse lado continua à tua espera, intacto, do outro lado da ponte. Não tens de o merecer, nem de o conquistar unindo mais ninguém. Basta atravesares, enfim, para ele.
+E há uma última coisa, simples, com que quero fechar esta travessia. Tu não foste feita para ser passagem. A criança que se pôs no meio para manter a casa unida fez o que pôde, com um amor enorme, para segurar o que os adultos não seguravam. Não há nada a censurar nela. Mas ela merecia ter tido um lado, um centro, um lugar onde fosse ela e não a ligação entre os outros. E esse lado continua à tua espera, intacto, do outro lado da ponte. Não tens de o merecer, nem de o conquistar unindo mais ninguém. Basta atravesares, enfim, para ele.
 
-Sabes, no fundo, a frase que segura este livro. Posso deixar de ser ponte e continuar ligada. Mais do que isso: só deixando de ser ponte poderei, enfim, ligar-me de verdade.
+No fundo, há uma frase que segura todas estas páginas, e tu já a sabes. Só quem tem uma margem própria pode encontrar, de verdade, a margem de outro. Mais do que isso: só deixando de ser passagem poderei, enfim, ser destino de alguém, e ligar-me a dois, e não a três.
 
-Atravessar foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a sair, devagar, do meio. A deixar as relações dos outros aos outros. A construir, dia a dia, o teu próprio lado. E há um trabalho mais fundo, com quem te acompanhe, para habitar um centro que nunca foi cultivado, porque ninguém constrói um lado próprio do nada, sozinha, de um dia para o outro.
+Compreender o teu lugar de ponte foi o primeiro passo. Mas há um segundo, e esse não se atravessa a ler. Faz-se a sair, devagar, do meio. A deixar as relações dos outros aos outros. A construir, dia a dia, o teu próprio lado. E há um trabalho mais fundo, com quem te acompanhe, para habitar um centro que nunca foi cultivado, porque ninguém constrói um lado próprio do nada, sozinha, de um dia para o outro.
 
-E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
+E antes de saíres destas páginas para a tua margem, peço-te uma coisa só. Difícil, para quem viveu no meio.
 
 Esta semana, quando sentires o impulso de te pores no meio, de mediar, de apaziguar uma tensão que não é tua, não o faças. Deixa os outros entenderem-se, ou não. E em vez de gastares essa energia no meio deles, vira-a para ti. Pergunta-te o que tu queres, o que tu sentes, o que tu desejas, naquele momento. Repara na ansiedade de não estares a unir ninguém, e fica com ela, do teu lado. Porque é nesse ficar fora do meio, do teu próprio lado, que começas a atravessar, e que descobres, enfim, que há ali uma margem que sempre foi tua, à tua espera.
 
