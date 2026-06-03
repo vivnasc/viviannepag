@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { routing } from '@/i18n/routing';
 import { CartProvider } from '@/lib/cart';
 import { CartWidget } from '@/components/CartWidget';
+import { RevealObserver } from '@/components/RevealObserver';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -176,11 +177,7 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.12});document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){el.classList.add('in')})},2500);})();`,
-          }}
-        />
+        <RevealObserver />
       </body>
     </html>
   );
