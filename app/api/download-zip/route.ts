@@ -5,6 +5,8 @@ import { packBySlug, packIncluiProduto } from '@/lib/packs';
 import { getProdutoPdfBuffer } from '@/lib/produto-pdf';
 
 export const runtime = 'nodejs';
+// Pack pode ter muitos PDFs; damos folga para os buscar e zipar sem estourar.
+export const maxDuration = 60;
 
 // Nome de ficheiro seguro a partir do titulo do produto.
 function nomeFicheiro(titulo: string, slug: string, n: number): string {
@@ -54,23 +56,28 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ erro: 'pack-vazio' }, { status: 404 });
   }
 
+  // Busca os PDFs em paralelo (em vez de em sequencia) — corta drasticamente
+  // o tempo num pack com muitos titulos e evita o timeout da funcao.
   const zip = new JSZip();
-  let n = 0;
+  const resultados = await Promise.all(
+    incluidos.map((p) => getProdutoPdfBuffer(p.slug, lang, email)),
+  );
   let adicionados = 0;
-  for (const p of incluidos) {
-    n += 1;
-    const res = await getProdutoPdfBuffer(p.slug, lang, email);
+  incluidos.forEach((p, i) => {
+    const res = resultados[i];
     if (res) {
-      zip.file(nomeFicheiro(p.titulo, p.slug, n), res.buffer);
+      zip.file(nomeFicheiro(p.titulo, p.slug, i + 1), res.buffer);
       adicionados += 1;
     }
-  }
+  });
 
   if (adicionados === 0) {
     return NextResponse.json({ erro: 'sem-ficheiros' }, { status: 404 });
   }
 
-  const conteudo = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+  // STORE (sem compressao): PDFs ja vem comprimidos, por isso comprimir de novo
+  // so gastaria CPU/tempo sem ganho real de tamanho.
+  const conteudo = await zip.generateAsync({ type: 'nodebuffer', compression: 'STORE' });
   const nomeZip = `${nomeBase}.zip`;
 
   return new NextResponse(new Uint8Array(conteudo), {
