@@ -95,19 +95,34 @@ function getPack(slug: string, locale: string): Produto | null {
   };
 }
 
-// Produtos incluidos num pack (publicados), para a seccao "inclui".
-async function getPackConteudo(slug: string): Promise<{ slug: string; titulo: string; badge: string | null }[]> {
+// Produtos incluidos num pack (publicados), com capa + subtitulo, para mostrar
+// a colecao inteira na pagina do pack (ebooks primeiro). Aplica EN.
+type ItemPack = { slug: string; titulo: string; subtitulo: string; capa: string | null; badge: string | null };
+async function getPackConteudo(slug: string, locale: string): Promise<ItemPack[]> {
   const pk = packBySlug(slug);
   if (!pk) return [];
   try {
     const supabase = getSupabase();
     const { data } = await supabase
       .from('produtos')
-      .select('slug, titulo, badge')
+      .select('slug, titulo, subtitulo, capa, badge')
       .eq('publicado', true);
-    return ((data as { slug: string; titulo: string; badge: string | null }[] | null) ?? [])
+    const sb = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
+    const isEn = locale === 'en';
+    return ((data as ItemPack[] | null) ?? [])
       .filter((p) => packIncluiProduto(pk, p.slug))
-      .sort((a, b) => a.slug.localeCompare(b.slug));
+      .map((p) => {
+        if (!isEn) return p;
+        const en = PRODUTOS_EN[p.slug];
+        const capaEn = sb ? `${sb}/storage/v1/object/public/viviannepag-assets/produtos/capas/${p.slug}-en.jpg` : p.capa;
+        return { slug: p.slug, titulo: en?.titulo ?? p.titulo, subtitulo: en?.subtitulo ?? p.subtitulo, capa: capaEn, badge: p.badge };
+      })
+      .sort((a, b) => {
+        const ae = a.badge?.toLowerCase().includes('ebook') ? 0 : 1;
+        const be = b.badge?.toLowerCase().includes('ebook') ? 0 : 1;
+        if (ae !== be) return ae - be;
+        return a.slug.localeCompare(b.slug);
+      });
   } catch {
     return [];
   }
@@ -178,9 +193,21 @@ export default async function ProdutoPage({
   const descHtml = p.descricao ? await marked.parse(p.descricao, { async: true }) : '';
   const isEbook = p.badge?.toLowerCase().includes('ebook');
   const isPack = isPackSlug(slug);
-  const conteudoPack = isPack ? await getPackConteudo(slug) : [];
+  const conteudoPack = isPack ? await getPackConteudo(slug, locale) : [];
   // Cross-sell: pack do universo deste produto (para sugerir levar tudo).
   const packDoUniverso = !isPack ? PACKS.find((pk) => pk.colecao !== 'all' && pk.colecao === slugToColecao(slug)) : undefined;
+  // Capa do pack = capa real (foto) de um livro da colecao (ebook em destaque),
+  // em vez da estatica antiga/partida.
+  const capaPackReal = isPack
+    ? (conteudoPack.find((i) => i.badge?.toLowerCase().includes('ebook') && i.capa)?.capa ?? conteudoPack.find((i) => i.capa)?.capa ?? null)
+    : null;
+  const capaExibida = capaPackReal ?? p.capa;
+  // Poupanca (preco original riscado vs preco).
+  const precoN = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
+  const poupanca = p.preco_original ? Math.round(precoN(p.preco_original) - precoN(p.preco)) : 0;
+  const poupancaPct = p.preco_original && precoN(p.preco_original) > 0
+    ? Math.round((1 - precoN(p.preco) / precoN(p.preco_original)) * 100)
+    : 0;
 
   return (
     <>
@@ -202,10 +229,10 @@ export default async function ProdutoPage({
           <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] gap-12 items-center">
             {/* CAPA */}
             <div className="mx-auto md:mx-0 w-[280px] md:w-full">
-              {p.capa ? (
+              {capaExibida ? (
                 <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden border border-ocre/20 shadow-2xl shadow-black/30">
                   <Image
-                    src={p.capa}
+                    src={capaExibida}
                     alt={p.titulo}
                     fill
                     priority
@@ -241,17 +268,26 @@ export default async function ProdutoPage({
               <GotaMini className="w-[24px] h-[24px] opacity-50 mb-8 block" />
 
               {/* PRECO + CTA */}
-              <div className="flex items-baseline gap-4 mb-5">
+              <div className="flex items-baseline gap-4 mb-2 flex-wrap">
                 <span className="text-ambar font-serif text-[2.2rem] leading-none">{p.preco}</span>
                 {p.preco_original && (
                   <span className="text-creme-2/40 text-[1.15rem] line-through">{p.preco_original}</span>
                 )}
+                {poupanca > 0 && (
+                  <span className="bg-ouro/20 text-ouro border border-ouro/40 rounded-full px-3 py-1 text-[0.72rem] font-semibold tracking-[0.04em]">
+                    {isPt ? `Poupas €${poupanca}` : `Save €${poupanca}`}{poupancaPct > 0 ? ` · -${poupancaPct}%` : ''}
+                  </span>
+                )}
               </div>
               {p.preco_original && (
                 <p className="text-[0.78rem] text-ocre/70 mb-5">
-                  {isPt
-                    ? `Valor real: ${p.preco_original}. Preço de lançamento.`
-                    : `Real value: ${p.preco_original}. Launch price.`}
+                  {isPack
+                    ? (isPt
+                        ? `Avulso daria ${p.preco_original}. Em pack, ${p.preco} — levas os ${conteudoPack.length} títulos.`
+                        : `Separately it would be ${p.preco_original}. As a bundle, ${p.preco} — you get all ${conteudoPack.length} titles.`)
+                    : (isPt
+                        ? `Valor real: ${p.preco_original}. Preço de lançamento.`
+                        : `Real value: ${p.preco_original}. Launch price.`)}
                 </p>
               )}
               <div className="mb-4 max-w-[360px]">
@@ -266,7 +302,7 @@ export default async function ProdutoPage({
               </div>
               {!p.checkout_url && (
                 <div className="mb-4">
-                  <AdicionarCarrinho variante="inline" item={{ slug, titulo: p.titulo, preco: p.preco, capa: p.capa, badge: p.badge }} />
+                  <AdicionarCarrinho variante="inline" item={{ slug, titulo: p.titulo, preco: p.preco, capa: capaExibida, badge: p.badge }} />
                 </div>
               )}
               {/* Bloco de confiança */}
@@ -316,32 +352,100 @@ export default async function ProdutoPage({
         </div>
       </section>
 
-      {/* CONTEUDO DO PACK */}
+      {/* CONTEUDO DO PACK — a colecao inteira, com capa + descricao de cada livro */}
       {isPack && conteudoPack.length > 0 && (
-        <section className="relative z-[2] py-10 px-7">
-          <div className="max-w-[720px] mx-auto">
-            <h2 className="font-serif font-light text-creme text-[1.5rem] mb-2">
-              {isPt ? `Inclui ${conteudoPack.length} títulos` : `Includes ${conteudoPack.length} titles`}
-            </h2>
-            <p className="text-creme-2/60 text-[0.85rem] mb-6">
+        <section className="relative z-[2] py-12 px-7">
+          <div className="max-w-[1060px] mx-auto">
+            <div className="flex items-center gap-4 mb-3">
+              <h2 className="font-serif font-light text-creme text-[1.7rem]">
+                {isPt ? `O que levas — ${conteudoPack.length} títulos` : `What you get — ${conteudoPack.length} titles`}
+              </h2>
+              <div className="flex-1 h-px bg-ocre/25" />
+              <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
+                {isPt ? 'tudo incluído' : 'all included'}
+              </span>
+            </div>
+            <p className="text-creme-2/70 text-[0.95rem] leading-[1.6] mb-8 max-w-[640px]">
               {isPt
-                ? 'Todos os ebooks e guias deste universo, em PDF, num só acesso.'
-                : 'Every ebook and guide from this world, in PDF, in one access.'}
+                ? `Não é uma lista — é a coleção inteira, cada livro com a sua travessia. ${poupanca > 0 ? `Avulso seria ${p.preco_original}; aqui levas tudo por ${p.preco}.` : ''}`
+                : `Not a list — the whole collection, each book with its own crossing. ${poupanca > 0 ? `Separately it would be ${p.preco_original}; here you get it all for ${p.preco}.` : ''}`}
             </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {conteudoPack.map((item) => (
-                <li
+                <Link
                   key={item.slug}
-                  className="flex items-center gap-2 bg-terra-2/40 rounded-[10px] px-3.5 py-2.5 text-creme-2/90 text-[0.88rem]"
+                  href={`${locale === 'en' ? '/en' : ''}/loja/${item.slug}`}
+                  className="group flex gap-4 rounded-[16px] border border-ocre/20 p-4 no-underline hover:border-ambar/50 hover:bg-terra-2/30 transition-colors"
                 >
-                  <span className="text-ambar text-[0.7rem]">{item.badge?.toLowerCase().includes('ebook') ? '◆' : '◇'}</span>
-                  {item.titulo}
-                </li>
+                  <div className="relative w-[72px] shrink-0 aspect-[3/4] rounded-[10px] overflow-hidden border border-ocre/25 bg-terra-2/60">
+                    {item.capa && (
+                      <Image src={item.capa} alt={item.titulo} fill className="object-cover" unoptimized />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[0.6rem] tracking-[0.16em] uppercase text-ocre/70 mb-1">
+                      {item.badge?.toLowerCase().includes('ebook') ? 'ebook' : (isPt ? 'guia' : 'guide')}
+                    </span>
+                    <h3 className="font-serif text-creme text-[1.02rem] leading-tight mb-1 group-hover:text-ambar transition-colors">
+                      {item.titulo}
+                    </h3>
+                    <p className="text-creme-2/70 text-[0.8rem] leading-[1.45] line-clamp-3">
+                      {item.subtitulo}
+                    </p>
+                  </div>
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
         </section>
       )}
+
+      {/* CONFIANCA + FAQ */}
+      <section className="relative z-[2] py-12 px-7 border-t border-ocre/10">
+        <div className="max-w-[860px] mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+            {[
+              { t: isPt ? 'Entrega imediata' : 'Instant delivery', d: isPt ? 'Acesso logo após o pagamento' : 'Access right after payment' },
+              { t: isPt ? 'Formato PDF' : 'PDF format', d: isPt ? 'Telemóvel, computador ou imprimir' : 'Phone, computer or print' },
+              { t: isPt ? 'É teu para sempre' : 'Yours forever', d: isPt ? 'Descarregas as vezes que precisares' : 'Download it whenever you need' },
+              { t: isPt ? 'Pagamento seguro' : 'Secure payment', d: isPt ? 'PayPal e cartão · não guardamos dados' : 'PayPal & card · we store no card data' },
+            ].map((b) => (
+              <div key={b.t} className="text-center px-2">
+                <GotaMini className="w-[20px] h-[20px] mx-auto opacity-50 mb-2 block" />
+                <p className="text-creme text-[0.85rem] font-medium mb-0.5">{b.t}</p>
+                <p className="text-creme-2/60 text-[0.74rem] leading-snug">{b.d}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="font-serif font-light text-creme text-[1.4rem] mb-6 text-center">
+            {isPt ? 'Perguntas frequentes' : 'Frequently asked'}
+          </h2>
+          <div className="space-y-4 max-w-[640px] mx-auto">
+            {(isPt
+              ? [
+                  { q: 'Como recebo o material?', a: 'Assim que o pagamento é confirmado, descarregas aqui mesmo e recebes também o link no teu email. Sem espera.' },
+                  { q: 'Em que formato vem?', a: 'PDF, pensado para ler no telemóvel, no computador ou imprimir. Fica contigo para sempre.' },
+                  { q: 'Preciso de criar conta?', a: 'Não. Só precisas do teu email para te enviarmos o acesso.' },
+                  { q: 'O pagamento é seguro?', a: 'Sim. É processado pelo PayPal (que também aceita cartão). Não guardamos os dados do teu cartão.' },
+                  { q: 'E se tiver algum problema com o download?', a: 'Falas comigo diretamente no WhatsApp e resolvo contigo.' },
+                ]
+              : [
+                  { q: 'How do I receive it?', a: 'As soon as payment is confirmed you download it right here and also get the link by email. No waiting.' },
+                  { q: 'What format is it?', a: 'PDF, made to read on your phone, computer or to print. It is yours forever.' },
+                  { q: 'Do I need an account?', a: 'No. You only need your email so we can send you access.' },
+                  { q: 'Is payment secure?', a: 'Yes. It is handled by PayPal (which also accepts card). We never store your card data.' },
+                  { q: 'What if I have a problem downloading?', a: 'Message me directly on WhatsApp and I will sort it out with you.' },
+                ]
+            ).map((f) => (
+              <div key={f.q} className="border border-ocre/15 rounded-[12px] p-4">
+                <p className="text-creme font-medium text-[0.92rem] mb-1.5">{f.q}</p>
+                <p className="text-creme-2/75 text-[0.86rem] leading-[1.55]">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* GARANTIA + SEGUNDO CTA */}
       <section className="relative z-[2] py-14 px-7">
@@ -401,7 +505,7 @@ export default async function ProdutoPage({
         <>
           <div className="h-20 sm:hidden" />
           <BarraCompraMobile
-            item={{ slug, titulo: p.titulo, preco: p.preco, capa: p.capa, badge: p.badge }}
+            item={{ slug, titulo: p.titulo, preco: p.preco, capa: capaExibida, badge: p.badge }}
             precoOriginal={p.preco_original}
           />
         </>
