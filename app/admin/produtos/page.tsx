@@ -286,13 +286,17 @@ export default function ProdutosAdmin() {
           <button
             onClick={async () => {
               setMsg('A verificar entrega dos packs (PT + EN)…');
-              const r = await fetch('/api/admin/testar-pack');
-              const j = await r.json();
-              if (!r.ok) { setMsg(`Erro: ${j.erro}`); return; }
-              const linhas = (j.packs as Array<{ slug: string; total: number; ptOk: number; enOk: number; faltamPt: string[]; faltamEn: string[] }>)
-                .map(p => `${p.slug}: ${p.ptOk}/${p.total} PT · ${p.enOk}/${p.total} EN${p.faltamPt.length ? ` · faltam PT: ${p.faltamPt.join(', ')}` : ''}${p.faltamEn.length ? ` · faltam EN: ${p.faltamEn.join(', ')}` : ''}`)
-                .join('  ||  ');
-              setMsg(`Entrega packs → ${linhas}`);
+              try {
+                const r = await fetch('/api/admin/testar-pack');
+                const j = await r.json().catch(() => ({}));
+                if (!r.ok) { setMsg(`Erro: ${j.erro ?? r.status}`); return; }
+                const linhas = (j.packs as Array<{ slug: string; total: number; ptOk: number; enOk: number; faltamPt: string[]; faltamEn: string[] }>)
+                  .map(p => `${p.slug}: ${p.ptOk}/${p.total} PT · ${p.enOk}/${p.total} EN${p.faltamPt.length ? ` · faltam PT: ${p.faltamPt.join(', ')}` : ''}${p.faltamEn.length ? ` · faltam EN: ${p.faltamEn.join(', ')}` : ''}`)
+                  .join('  ||  ');
+                setMsg(`Entrega packs (${j.totalPdfs} PDFs no storage) → ${linhas}`);
+              } catch (e) {
+                setMsg(`Erro ao testar packs: ${e instanceof Error ? e.message : 'falhou'}`);
+              }
             }}
             className="bg-salvia/15 text-salvia border border-salvia/50 rounded-[12px] px-4 py-2 text-[0.8rem] font-semibold hover:bg-salvia hover:text-terra transition-colors"
             title="Verifica, sem pagar, se cada pack entrega todos os PDFs (PT e EN)"
