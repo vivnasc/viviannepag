@@ -27,7 +27,7 @@ I want to tell you right away, before anything else, that this is not only ambit
 
 There is a fusion. Your identity has fused with your creation. You don't have a company, you are the company. You didn't make a project, you are the project. And that fusion, which looks like total dedication, is, deep down, the loss of the border between you and what you create, to the point of no longer knowing how to exist separate from it.
 
-This book is not about management, nor about entrepreneurship, nor about how to lead better. I've come to look at something else, something deeper. At the fusion between you and what you create. At the fact that you placed your whole identity in what you do, to the point of not knowing who you are without it. And at what that costs you, and even costs the very creation you carry so much and which, without your knowing, you bind by not letting it grow without you.
+This book is not about management, nor about entrepreneurship, nor about how to lead better. I've come to open the door behind the office, the one nobody audits. At the fusion between you and what you create. At the fact that you placed your whole identity in what you do, to the point of not knowing who you are without it. And at what that costs you, and even costs the very creation you carry so much and which, without your knowing, you bind by not letting it grow without you.
 
 And I'll tell you the direction of this book up front, so you can read it without your foot on the brake. You can stay a whole person even without your hand on every decision of the company. You can love what you create, dedicate yourself to it, without fusing with it, without losing the border between you and your work. And that ability to let go, to separate who you are from what you create, doesn't take the project from you. It gives you back yourself.
 
@@ -35,7 +35,7 @@ I want you to understand, from the start, the difference between loving what you
 
 This book hasn't come to ask you to love your work less, nor to dedicate yourself less, nor for it to count less for you. Your creation can keep being one of the most important things in your life. It asks you only that it not be the only one, that it not be you, that it not carry the impossible weight of being your whole identity. Because a work loved by a whole person flourishes more than a work carried by a person who lost herself in it.
 
-Maybe you recognize yourself in small things.
+Maybe you see your own face in the smallest details of the day.
 
 In not being able to delegate anything, because everything is yours, everything is personal, everything passes through you, as if each detail were a part of your own body.
 
@@ -69,23 +69,23 @@ Maybe what you created is the place where you finally felt you were someone. Whe
 
 Or maybe the work was your way of fleeing. From an emptiness, from a pain, from a life that in other areas was not going well, from questions about yourself that you didn't want to face. To plunge into work is, for many people, a socially applauded way of not being with oneself, of filling every hour so that there is no room for what hurts. And if it was also like that for you, then letting go of the work frightens you twice over: because it confronts you not only with the loss of identity, but with everything the work was letting you flee from. And that, though it hurts to look at, is precisely what deserves, at last, to be cared for, instead of covered over with more work.
 
-Notice what this does to you. You confuse yourself with what you create. The success of the work is your worth, the failure of the work is your personal failure. Each problem of the project is a problem of yours, existential, and not only professional. You live the work as if it were your own skin, and so it weighs on you with a weight that no project, by itself, should have.
+Notice the figure this leaves on your own books. You confuse yourself with what you create. The success of the work is your worth, the failure of the work is your personal failure. Each problem of the project is a problem of yours, existential, and not only professional. You live the work as if it were your own skin, and so it weighs on you with a weight that no project, by itself, should have.
 
 Maybe what you created was born, too, from a need to have control over something, in a world where, in other areas, you felt powerless. The work is your territory, the place where you are in charge, where you decide, where things depend on you. And there is a security in that, that of someone who, having felt without control in other areas of life, found in creation a space entirely her own. But that same security becomes a prison, because letting go of control of the work reactivates the old powerlessness, and that is why you cling to every detail, not only out of love, but out of fear of feeling again that nothing is in your hands.
 
-I want you to see this without guilt. Your fusion with what you create is not a flaw, nor excess of ego. It is a way of existing that you learned, in a time when your worth seemed to be in what you did, and not in who you were. You are not obsessive by nature. You are someone who placed her existence in her work, because it was there that she learned to find worth, and who therefore doesn't know how to separate herself from it.
+I want you to read this entry without writing it down as a debt against yourself. Your fusion with what you create is not a flaw, nor excess of ego. It is a way of existing that you learned, in a time when your worth seemed to be in what you did, and not in who you were. You are not obsessive by nature. You are someone who placed her existence in her work, because it was there that she learned to find worth, and who therefore doesn't know how to separate herself from it.
 
 And I want to show you in what layer of yourself this got inscribed, because that is where the difficulty lies. The fusion is not only an idea, a conscious choice. It is a way of feeling yourself that carved itself deep. That is why it isn't enough to understand, rationally, that you are not the company, to stop feeling it. The fusion lives below reason, in a layer where your worth and your work are so intertwined that your reason can't separate them alone. That is why even knowing that you should rest, let go, delegate, you can't: because it isn't a matter of knowing, it is a matter of an identity that got confused, and that disentangles itself slowly, with time, experience, and, very often, help.
 
 ## 3. The border that was lost
 
-There is something you need to see. Between you and what you create, the border was lost. And without a border, there is no health, neither for you nor for the work.
+There is a line on the floor you've walked over so many times you no longer see it. Between you and what you create, the border was lost. And without a border, there is no health, neither for you nor for the work.
 
 Notice what a healthy border would be. You, on one side, with your identity, your worth, your life. The work, on the other, as something you create, love, dedicate yourself to, but which is not you. Connected, yes, but distinct. You would exist even if the work failed. The work would have a life of its own, capable of existing, in part, without you.
 
 But in you there is no such border. You and the work are the same thing. And without a border, everything gets confused. The problem of the work is your existential problem. The risk of the work is the risk of your identity. You can't separate your peace from the health of the project, because there is no separation between you and it.
 
-And there is an enormous cost in this. It costs you your peace, because you never rest, since the work never rests, and you are the work. It costs you your health, because you carry, in your body, the weight of everything that concerns the project. It costs you your life, because you have no life outside of it, you have no identity of your own, you have no you that doesn't depend on what you create.
+And this carries a bill no balance sheet records. It costs you your peace, because you never rest, since the work never rests, and you are the work. It costs you your health, because you carry, in your body, the weight of everything that concerns the project. It costs you your life, because you have no life outside of it, you have no identity of your own, you have no you that doesn't depend on what you create.
 
 And it costs, paradoxically, the work itself. Because a creation fused with its creator, that depends on her for everything, that can't grow without her, is a fragile, limited, trapped creation. You can't delegate, build a team, let the work gain a life of its own, because that would be separating it from you, and you don't know how to separate yourself. And so the work stays hostage to your fusion, unable to grow beyond you, just as you stay hostage to it.
 
@@ -101,11 +101,11 @@ It costs you, too, parts of you that went unlived. Because when your whole ident
 
 And there is a cost that almost nobody speaks of, hidden beneath the numbers that look good. A company fused with the one who founded it has a facade value and a real fragility, because everything that makes it run lives in one single head, in yours. The decisions that are written down nowhere, the contacts only you have, the way of solving things that no one beside you learned, because you never gave them room to learn. If someone looked seriously at what you built, they would see a work that doesn't survive a week of your absence, and that, which you live as proof of how necessary you are, is, in truth, the greatest weakness of everything you raised. A creation that only exists while you are stuck to it is not protected by your presence. It is hostage to it.
 
-I want you to feel the weight of this. The weight of carrying a work as if it were your own existence. Of never being able to rest from it, because it is from yourself that you can't rest. Of not knowing who you would be without it. It is a deep exhaustion, and perhaps you already take it for dedication, when it is, deep down, the loss of yourself in what you create.
+I want you to feel the load on your shoulders, the one you've stopped naming because you've carried it so long. The weight of carrying a work as if it were your own existence. Of never being able to rest from it, because it is from yourself that you can't rest. Of not knowing who you would be without it. It is a deep exhaustion, and perhaps you already take it for dedication, when it is, deep down, the loss of yourself in what you create.
 
 ## 4. Who am I without what I create
 
-I'll leave a question here. On its own. Don't run from it.
+I'll set a question on the desk between us, like a paper you can't file away. On its own. Don't run from it.
 
 Who are you without what you create? If the project ended, if the company closed, if the work ceased to exist, who would remain?
 
@@ -117,9 +117,9 @@ Notice that the force of that abyss is the exact measure of how much you fused. 
 
 And the shadow that hides here is the emptiness of having no identity of your own, separate from what you create. The sense that, without the work, there is no person there, only an emptiness. That you, without the project, don't exist, because you placed your whole existence in it.
 
-Notice how this imprisons you. You can't let go of the work, even if it exhausts you, because to let go of it is to confront the emptiness of who you are without it. You cling to it with all your strength, not only out of love for what you create, but out of terror of what would be left of you if you let it go. The fusion is not only dedication. It is also a flight from the question of who you would be, without the work defining you.
+See how this locks you in, like a founder who can't hand over a single key. You can't let go of the work, even if it exhausts you, because to let go of it is to confront the emptiness of who you are without it. You cling to it with all your strength, not only out of love for what you create, but out of terror of what would be left of you if you let it go. The fusion is not only dedication. It is also a flight from the question of who you would be, without the work defining you.
 
-And there is an enormous fragility in this. Because an identity fused with a work is an identity forever at risk. All it takes is for the work to fail, change, end, and your identity threatens to collapse with it. You live, therefore, with a background fear, that of losing the work, because to lose the work is to lose yourself. And that fear makes you unable to take risks, to change, to let the work evolve, because any threat to it is a threat to your own existence.
+And what looks from outside like a thriving company hides a crack down its foundation. Because an identity fused with a work is an identity forever at risk. All it takes is for the work to fail, change, end, and your identity threatens to collapse with it. You live, therefore, with a background fear, that of losing the work, because to lose the work is to lose yourself. And that fear makes you unable to take risks, to change, to let the work evolve, because any threat to it is a threat to your own existence.
 
 I want to tell you something about the terror this question raises, because it begins to disarm it. What terrifies you is not, truly, letting go of the work. It is the emptiness you imagine finding beneath it, the sense that, without the project, there is no one there. But that emptiness is an illusion of the fusion, not a truth about you. Beneath the work there is no emptiness, there is a person, you, with a story, with tastes, with loved ones, with parts that existed before the work and that will exist after it. The fusion made you forget that person, but it didn't erase her. She is there, waiting to be found again, and finding her again is not falling into emptiness, it is returning to yourself.
 
@@ -129,7 +129,7 @@ And there is a truth about that emptiness which, the moment you see it, undoes i
 
 And I want you to see how this fusion makes you hostage, too, of the fear of ending. Every work, every project, has a possible end: it can fail, it can change, it can reach its natural close. But if you are the work, then the end of the work is your end, and so you live with a background terror, that of it ending, which makes you unable to accept changes, to close cycles, to let die what has to die so that something else can be born. You cling to the work like someone clinging to her own life, and that rigidity, that fear of the end, harms not only your peace, but the very ability of the work to evolve.
 
-Don't answer the question of who you are without what you create just yet. But leave it open. Because it is there that the door lies. On the day you discover that you exist beyond the work, that you have an identity of your own, that you are not only what you create, you stop having to fuse with it in order to exist. And then, only then, can you let go, without losing yourself.
+Don't answer the question of who you are without what you create just yet. But leave it open. Because that is the door at the back of the company nobody else can open for you. On the day you discover that you exist beyond the work, that you have an identity of your own, that you are not only what you create, you stop having to fuse with it in order to exist. And then, only then, can you let go, without losing yourself.
 
 ## 5. When the fusion leads to burnout
 
@@ -143,7 +143,7 @@ If your head never switches off from the project, not in bed, not in the shower,
 
 These may be signs of exhaustion, and that is not solved by carrying more, by holding more, by fusing even more with the work. It is solved by letting go, by separating, by resting, and very often with support, from a professional who helps you recover the border between you and what you create.
 
-And I want to name the trap of someone who fused with the work. It is that stopping, resting, letting go, seems to abandon the work, and abandoning the work seems to abandon yourself. And that is why you endure, beyond your limit, fused with the project, until the body or the mind gives way. Don't wait for that point. Seeking help is not admitting that you are not capable, it is taking care of the person the work most depends on, who is you, and doing it before exhaustion decides for you.
+And I want to name the trap of someone who fused with the work. It is that stopping, resting, letting go, seems to abandon the work, and abandoning the work seems to abandon yourself. And that is why you endure, beyond your limit, fused with the project, until the body or the mind gives way. Don't wait for the day the whole structure forces the stop. Seeking help is not admitting that you are not capable, it is taking care of the person the work most depends on, who is you, and doing it before exhaustion decides for you.
 
 And I want to tell you a truth that costs, but that frees. If you fall, the work falls with you. It is precisely because everything is fused in you that your exhaustion is also the greatest risk to the project. You, who carry everything to protect it, are, at your limit, its greatest fragility, because a work that depends entirely on an exhausted person is one step from collapsing with her. Taking care of yourself, recovering the border, is not betraying the work. It is, paradoxically, the most responsible way to protect it, because a whole and rested creator sustains what a fused and exhausted creator lets fall.
 
@@ -155,9 +155,9 @@ If you fused with what you create, then there is a new truth waiting for you. Yo
 
 Read this slowly. For you, letting go of the work, ceasing to hold everything, seems to undo you, to lose your integrity, to let a part of you fall. As if your wholeness depended on holding every detail, and as if letting go would break you.
 
-And I propose the opposite to you. Your wholeness doesn't depend on holding everything. On the contrary. While you are fused with the work, you are not whole, you are dispersed in it, lost in it, with no border of your own. To stay whole is, precisely, to recover the border, to separate yourself from what you create enough to exist on your own, and not dispersed in the project.
+And I put the opposite motion before you. Your wholeness doesn't depend on holding everything. On the contrary. While you are fused with the work, you are not whole, you are dispersed in it, lost in it, with no border of your own. To stay whole is, precisely, to recover the border, to separate yourself from what you create enough to exist on your own, and not dispersed in the project.
 
-Let me put it another way. A healthy creator is not the one who fuses with the work. She is the one who loves the work and remains distinct from it. Who dedicates herself without losing herself. Who creates without confusing herself with the creation. Who can let go, delegate, rest, because her identity is not all there, but in herself. And it is that creator, whole and separate, who can create in good health, for a long time, without exhausting herself.
+Let me draft the clause differently. A healthy creator is not the one who fuses with the work. She is the one who loves the work and remains distinct from it. Who dedicates herself without losing herself. Who creates without confusing herself with the creation. Who can let go, delegate, rest, because her identity is not all there, but in herself. And it is that creator, whole and separate, who can create in good health, for a long time, without exhausting herself.
 
 And notice: the creators you most admire, the ones who last, the ones who create work after work over an entire lifetime, are not the ones who burned themselves out on a single creation. They are the ones who knew how to stay whole, who had a life beyond work, who didn't place their whole existence in a single project. The longevity of a creator depends, precisely, on not fusing, because whoever fuses exhausts herself and stops, and whoever stays distinct renews herself and continues. Letting go is not the opposite of creating a lot. It is the condition for creating over time, without one work consuming you before the next is born.
 
@@ -167,7 +167,7 @@ Think of the works that last, that grow, that become greater than those who crea
 
 I want you to see, too, that a work fused with the creator transmits, without meaning to, that fusion to those who work in it. People feel that nothing is theirs, that everything passes through you, that there is no room for them to own anything, and so they don't give themselves, they don't create, they don't grow, they wait for your orders. By letting go, by letting them own parts of the work, you give them what your fusion took from them: the room to care as if it were theirs. And a work cared for by many who feel it is theirs is stronger than a work carried by one who feels it is all hers.
 
-I want to speak to you of the verb of this crossing. To let go. To let go is not to abandon the work. It is to stop holding it with your life, to stop fusing with it, to stop carrying it as if it were your own existence. It is to love it while remaining distinct from it. It is to trust that it can exist, in part, without your hand on every detail. It is to recover the border between who you are and what you create.
+I want to name the one action this whole company rests on. To let go. To let go is not to abandon the work. It is to stop holding it with your life, to stop fusing with it, to stop carrying it as if it were your own existence. It is to love it while remaining distinct from it. It is to trust that it can exist, in part, without your hand on every detail. It is to recover the border between who you are and what you create.
 
 And letting go demands something that costs you: tolerating that the work gets done without you, perhaps differently from your way, and that it's fine. That you delegate, and that others don't do it exactly as you do, but that they do it. That the work gains a life of its own, and that this, far from taking the work from you, makes it stronger, and you freer. Letting go of control, for someone who fused with the work, is frightening. But it is in taking your hands off the helm, and seeing that the boat doesn't capsize, that you slowly go back to being your own.
 
@@ -181,7 +181,7 @@ And I want you to see that recovering the border doesn't make you cold, nor dist
 
 ## 7. To recover the border
 
-There is a destination for this crossing. To recover the border between you and what you create.
+This crossing has a place it is heading toward. To recover the border between you and what you create.
 
 And I want to put this to you concretely, in the ground of your working days.
 
@@ -211,13 +211,13 @@ I want you to see what opens up when you recover the border. Rest opens up, beca
 
 And I want to leave you with something, about who sees you, above all if there are children, or close people who learn by looking at you. If they see you fused with the work, with no life outside of it, unable to stop, living as if you were only your work, they learn that this is how one ought to be, and it is likely they will carry, too, the same fusion, the same emptiness outside of what they produce. The most freeing thing you can teach those who watch you is not the example of someone who gave herself entirely to a work. It is that of a woman who creates with passion and also lives, who dedicates herself and also rests, who is more than what she does. Sometimes a woman learns to let go, at last, not only for herself, but to show those she loves that one can love what one does without disappearing into it.
 
-I won't give you a method of management, because this book is not about companies. But I leave you the principle. Love what you create, but don't fuse with it. Recover the border between who you are and what you do. And discover, slowly, that you stay whole without holding everything, and that you exist, with worth, far beyond the work you carried so much.
+I won't give you a method of management, because this book is not about companies. But I hand you the founding clause to keep. Love what you create, but don't fuse with it. Recover the border between who you are and what you do. And discover, slowly, that you stay whole without holding everything, and that you exist, with worth, far beyond the work you carried so much.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, let go of a work you fused with your whole life. But it changes enough for you to stop confusing your exhaustion with dedication, and your work with who you are.
+It won't turn the whole operation around in a single morning. It doesn't make you, tomorrow, let go of a work you fused with your whole life. But it changes enough for you to stop confusing your exhaustion with dedication, and your work with who you are.
 
 Now you know that you carry the company, the project, the work, on your shoulders, and that this is not only ambition nor love for what you do, it is a fusion between you and what you create.
 
@@ -239,7 +239,7 @@ Imagine someone who planted a tree, and who loved it so much that she stuck to i
 
 The crossing is to unstick yourself from the trunk. To take a step back. To discover that the tree has roots of its own, that it doesn't die from your letting go, that it even grows better with space. And to recover your life, beside the tree, caring for it, loving it, but without being the tree, without being stuck to it, whole and distinct, at last, yourself again.
 
-I want you to know what to expect from this crossing, so that you don't live it as one more demand. There will be setbacks. Days when you let go, when you have a life of your own, when you rest, and days when you plunge whole into the work again, carrying everything, disappearing into it, as always. And the old voice will tell you that you can't after all, that without your fusing nothing moves. Don't believe it. Setbacks are part of it. Nobody undoes all at once a fusion of years. It is undone little by little, and each time you step away and the work carries on, and you remain whole, a new proof is left, and it is from those proofs, added together, that the border between you and what you create, slowly, is rebuilt.
+I want you to know what to expect from this crossing, so that you don't live it as one more demand. There will be setbacks. Days when you let go, when you have a life of your own, when you rest, and days when you plunge whole into the work again, carrying everything, disappearing into it, as always. And the old voice will tell you that you can't after all, that without your fusing nothing moves. Don't believe it. The relapses are written into the ledger of this crossing. Nobody undoes all at once a fusion of years. It is undone little by little, and each time you step away and the work carries on, and you remain whole, a new proof is left, and it is from those proofs, added together, that the border between you and what you create, slowly, is rebuilt.
 
 There remains one thing for me to tell you, without detours, to close. You exist. Not as an extension of the work, not as a function of the project, but as a person, whole, of worth, who happened to create something big, but who is worth something for who she is, and not only for what she made. The woman who fused with her creation did so because there she found worth, meaning, place, and that is worthy of tenderness. But the worth she sought in the work was in her all along, before the work, beyond the work. There is nothing to correct in her dedication. There is only one thing to remind her, slowly, until she believes it: you are not what you create, you are the one who creates, and that is much greater, and nobody can take it from you.
 
