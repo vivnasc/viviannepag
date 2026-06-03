@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { existsSync } from 'fs';
-import { join } from 'path';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
@@ -430,7 +428,7 @@ export default async function ProdutoPage({
       <section className="relative z-[2] py-12 px-7 border-t border-ocre/10">
         <div className="max-w-[760px] mx-auto flex flex-col sm:flex-row items-center gap-8">
           <div className="relative w-[140px] h-[140px] shrink-0 rounded-full overflow-hidden border border-ocre/30 shadow-xl shadow-black/30">
-            <Image src={existsSync(join(process.cwd(), 'public', 'gratidao-venda.png')) ? '/gratidao-venda.png' : '/vivianne-2.jpg'} alt="Vivianne dos Santos" fill className="object-cover" unoptimized />
+            <Image src="/gratidao-venda.png" alt="Vivianne dos Santos" fill className="object-cover" unoptimized />
           </div>
           <div className="text-center sm:text-left">
             <p className="text-[0.7rem] tracking-[0.2em] uppercase text-ocre/80 mb-2">

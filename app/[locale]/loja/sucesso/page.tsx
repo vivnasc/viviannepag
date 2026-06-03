@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { existsSync } from 'fs';
-import { join } from 'path';
 import { setRequestLocale } from 'next-intl/server';
 import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
@@ -16,20 +14,14 @@ export default async function SucessoPage({
   setRequestLocale(locale);
   const isPt = locale === 'pt';
 
-  // Foto de gratidao (gerada no MidJourney). So mostra se o ficheiro existir,
-  // para nunca aparecer imagem partida. Basta guardar em public/gratidao-sucesso.jpg.
-  const temFoto = existsSync(join(process.cwd(), 'public', 'gratidao-sucesso.png'));
-
   return (
     <>
       <TopNav />
       <LangToggle />
       <main className="relative z-[2] max-w-wrap mx-auto px-7 min-h-[70vh] flex flex-col items-center justify-center text-center py-16">
-        {temFoto && (
-          <div className="relative w-full max-w-[420px] aspect-[3/2] mb-8 rounded-[18px] overflow-hidden border border-ambar/30 shadow-xl shadow-black/30">
-            <Image src="/gratidao-sucesso.png" alt="" fill className="object-cover" unoptimized priority />
-          </div>
-        )}
+        <div className="relative w-full max-w-[420px] aspect-[3/2] mb-8 rounded-[18px] overflow-hidden border border-ambar/30 shadow-xl shadow-black/30">
+          <Image src="/gratidao-sucesso.png" alt="" fill className="object-cover" unoptimized priority />
+        </div>
         <p className="text-[0.78rem] tracking-[0.32em] uppercase text-ambar mb-5">
           {isPt ? 'obrigada' : 'thank you'}
         </p>
