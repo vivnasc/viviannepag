@@ -509,9 +509,9 @@ A travessia é deixares de ser a estrutura e passares a ser a habitante. Deixare
 
 E quero que leves uma última coisa, sobre o medo que está debaixo de tudo. O medo de seres deixada não se cura tornando-te indispensável. Cura-se descobrindo que o teu valor não depende de fazeres falta. Que há quem te queira a ti, e não ao que fazes. E que, mesmo que alguém parta, tu ficas, inteira, contigo, porque o teu lugar no mundo nunca dependeu, afinal, de seres a peça de que tudo depende. Esse medo aprendeu-se, e o que se aprende pode, devagar, e talvez com ajuda, desaprender-se.
 
-Sabes, no fundo, a frase que segura este livro. Posso ser escolhida sem me tornar indispensável.
+Toda esta travessia cabe, no fundo, numa só frase, que te peço que repitas até o teu corpo a acreditar. Posso ser escolhida sem me tornar indispensável.
 
-Escolher-se foi o primeiro passo. Mas há um segundo, e esse não se faz a ler. Faz-se a parar de servir, quando tudo em ti quer correr a tornar-se útil. A suportar o terror de não seres precisa. E, se houver alguém ao teu lado, a aprender, a dois, a serem livres e escolherem-se na mesma.
+Escolher-se foi o primeiro passo. Mas há um segundo, e esse não cabe nestas páginas, mora nas tuas mãos quando se recusam a fazer. Faz-se a parar de servir, quando tudo em ti quer correr a tornar-se útil. A suportar o terror de não seres precisa. E, se houver alguém ao teu lado, a aprender, a dois, a serem livres e escolherem-se na mesma.
 
 Há um sinal simples para te guiares, no dia a dia. Repara, perante uma pessoa, no que te liga a ela. É o quanto ela precisa de ti? Ou é o quanto gostas de estar com ela, precise ou não?
 
@@ -519,7 +519,7 @@ Quando reparares que te ligas pela necessidade do outro, desconfia. Não é amor
 
 É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
 
-E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
+E antes de pousares este livro e correres a tratar do mundo, fica comigo só mais um pedido. Difícil, para ti.
 
 Esta semana, deixa uma coisa por resolver que normalmente resolverias por ele. Não por castigo, não por jogo. Só para veres o que acontece, e o que sentes. Repara no terror que sobe, na vontade de correr a fazer. E fica, mais um pouco, sem fazer. Porque é aí, nesse não-fazer suportado, que começas a descobrir se te amam por ti, e que começas, enfim, a voltar para ti.
 
