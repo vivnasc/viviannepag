@@ -24,7 +24,7 @@ function hashSlugs(slugs: string[]): string {
 export function MontaPack({ universos, isPt }: { universos: Universo[]; isPt: boolean }) {
   const { add, abrir } = useCart();
   const [sel, setSel] = useState<Record<string, Livro>>({});
-  const [aberto, setAberto] = useState(false);
+  const [aberto, setAberto] = useState(true);
 
   const escolhidos = Object.values(sel);
   const n = escolhidos.length;
