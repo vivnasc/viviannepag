@@ -9,6 +9,7 @@ export async function POST(req: Request) {
     email?: string;
     slug?: string;
     titulo?: string;
+    lang?: string;
   };
 
   if (!body.email || !body.slug) {
@@ -19,11 +20,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'email-nao-configurado' }, { status: 500 });
   }
 
+  const isEn = body.lang === 'en';
+
   // /api/download-directo gere a cascata Supabase -> disco e marca licenca
-  // no rodape com o email do comprador.
-  const downloadUrl = `${SITE}/api/download-directo?slug=${encodeURIComponent(body.slug)}&email=${encodeURIComponent(body.email)}`;
+  // no rodape com o email do comprador. Em EN entrega o PDF ingles.
+  const downloadUrl = `${SITE}/api/download-directo?slug=${encodeURIComponent(body.slug)}&email=${encodeURIComponent(body.email)}${isEn ? '&lang=en' : ''}`;
 
   const titulo = body.titulo || body.slug;
+  const t = isEn
+    ? { obrigada: 'Thank you for your purchase.', acesso: 'Here is your access to', botao: 'Download PDF', guarda: 'Keep this email — you can reuse the link whenever you need.', subject: `Your access: "${titulo}" — Vivianne dos Santos`, rodape: 'You received this email because you bought a product at viviannedossantos.com.' }
+    : { obrigada: 'Obrigada pela tua compra.', acesso: 'Aqui está o teu acesso a', botao: 'Descarregar PDF', guarda: 'Guarda este email — podes voltar a usar o link sempre que precisares.', subject: `O teu acesso: "${titulo}" — Vivianne dos Santos`, rodape: 'Este email foi enviado porque compraste um produto em viviannedossantos.com.' };
 
   const html = `
 <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#3D2B1F;padding:40px 20px">
@@ -31,18 +37,18 @@ export async function POST(req: Request) {
     <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#9A5A43">VIVIANNE DOS SANTOS</p>
   </div>
   <h1 style="font-size:24px;font-weight:normal;text-align:center;margin-bottom:20px;color:#3D2B1F">
-    Obrigada pela tua compra.
+    ${t.obrigada}
   </h1>
   <p style="font-size:16px;line-height:1.7;text-align:center;color:#6B5548;margin-bottom:30px">
-    Aqui está o teu acesso a <strong>"${titulo}"</strong>.
+    ${t.acesso} <strong>"${titulo}"</strong>.
   </p>
   <div style="text-align:center;margin-bottom:30px">
     <a href="${downloadUrl}" style="display:inline-block;background:#EBAE4A;color:#2A1C12;text-decoration:none;padding:14px 36px;border-radius:12px;font-size:16px;font-weight:500">
-      Descarregar PDF
+      ${t.botao}
     </a>
   </div>
   <p style="font-size:13px;color:#9A5A43;text-align:center;margin-bottom:10px">
-    Guarda este email — podes voltar a usar o link sempre que precisares.
+    ${t.guarda}
   </p>
   <p style="font-size:13px;color:#9A5A43;text-align:center">
     <a href="https://wa.me/258845243875" style="color:#9A5A43">WhatsApp</a> ·
@@ -50,7 +56,7 @@ export async function POST(req: Request) {
   </p>
   <hr style="border:none;border-top:1px solid #F3E4D6;margin:30px 0" />
   <p style="font-size:11px;color:#9A5A43;text-align:center">
-    © 2026 Vivianne dos Santos. Este email foi enviado porque compraste um produto em viviannedossantos.com.
+    © 2026 Vivianne dos Santos. ${t.rodape}
   </p>
 </div>`;
 
@@ -63,7 +69,7 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       from: FROM,
       to: body.email,
-      subject: `O teu acesso: "${titulo}" — Vivianne dos Santos`,
+      subject: t.subject,
       html,
     }),
   });

@@ -54,6 +54,8 @@ export function CartWidget() {
   async function processarCompra(orderId?: string) {
     setProcessando(true);
     const mail = email.trim().toLowerCase();
+    const lang = isPt ? 'pt' : 'en';
+    const sufixoEn = isPt ? '' : '&lang=en';
     const lista = [...itens];
     const out: Entrega[] = [];
     for (const it of lista) {
@@ -65,7 +67,7 @@ export function CartWidget() {
       } catch {}
       if (it.slug.startsWith('pack-')) {
         try {
-          const r = await fetch('/api/download-pack', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
+          const r = await fetch('/api/download-pack', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, lang }) });
           const j = await r.json();
           if (r.ok && Array.isArray(j.ficheiros) && j.ficheiros.length) {
             for (const f of j.ficheiros) out.push({ slug: f.slug, titulo: f.titulo, url: f.url ?? null });
@@ -74,15 +76,15 @@ export function CartWidget() {
       } else {
         let url: string | null = null;
         try {
-          const r = await fetch('/api/download', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
+          const r = await fetch('/api/download', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, lang }) });
           const j = await r.json();
           if (r.ok && j.url) url = j.url;
         } catch {}
-        if (!url) url = `/api/download-directo?slug=${it.slug}&email=${encodeURIComponent(mail)}`;
+        if (!url) url = `/api/download-directo?slug=${it.slug}&email=${encodeURIComponent(mail)}${sufixoEn}`;
         out.push({ slug: it.slug, titulo: it.titulo, url });
       }
       try {
-        await fetch('/api/email-compra', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: mail, slug: it.slug, titulo: it.titulo }) });
+        await fetch('/api/email-compra', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: mail, slug: it.slug, titulo: it.titulo, lang }) });
       } catch {}
     }
     setEntregas(out);

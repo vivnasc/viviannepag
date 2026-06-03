@@ -9,10 +9,11 @@ const BUCKET = 'escritos';
 // POST { slug: 'pack-xxx' } -> lista de { slug, titulo, url } com URLs assinados
 // (24h) de todos os PDFs do pack. Conteudo derivado dinamicamente do universo.
 export async function POST(req: Request) {
-  const body = (await req.json()) as { slug?: string };
+  const body = (await req.json()) as { slug?: string; lang?: string };
   if (!body.slug) {
     return NextResponse.json({ erro: 'slug-obrigatorio' }, { status: 400 });
   }
+  const isEn = body.lang === 'en';
 
   const pack = packBySlug(body.slug);
   if (!pack) {
@@ -33,14 +34,20 @@ export async function POST(req: Request) {
 
   const ficheiros: { slug: string; titulo: string; url: string | null }[] = [];
   for (const p of incluidos) {
-    const ficheiroPath = p.ficheiro_path || `produtos/${p.slug}.pdf`;
     let url: string | null = null;
-    const { data } = await supabase.storage.from(BUCKET).createSignedUrl(ficheiroPath, 60 * 60 * 24);
-    if (data?.signedUrl) {
-      url = data.signedUrl;
-    } else {
-      // Fallback: download-directo resolve outros buckets/disco por slug.
-      url = `/api/download-directo?slug=${encodeURIComponent(p.slug)}`;
+    // Em EN, tenta primeiro o PDF ingles (<slug>-en.pdf). Capas iguais.
+    if (isEn) {
+      const { data: en } = await supabase.storage.from(BUCKET).createSignedUrl(`produtos/${p.slug}-en.pdf`, 60 * 60 * 24);
+      if (en?.signedUrl) url = en.signedUrl;
+    }
+    if (!url) {
+      const ficheiroPath = p.ficheiro_path || `produtos/${p.slug}.pdf`;
+      const { data } = await supabase.storage.from(BUCKET).createSignedUrl(ficheiroPath, 60 * 60 * 24);
+      if (data?.signedUrl) url = data.signedUrl;
+    }
+    if (!url) {
+      // Fallback: download-directo resolve outros buckets/disco por slug (+lang).
+      url = `/api/download-directo?slug=${encodeURIComponent(p.slug)}${isEn ? '&lang=en' : ''}`;
     }
     ficheiros.push({ slug: p.slug, titulo: p.titulo, url });
   }

@@ -60,12 +60,15 @@ export function BotaoCompra({
     } catch {}
   }
 
+  const lang = isPt ? 'pt' : 'en';
+  const sufixoEn = isPt ? '' : '&lang=en';
+
   async function enviarEmail() {
     try {
       await fetch('/api/email-compra', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email: email.trim().toLowerCase(), slug, titulo }),
+        body: JSON.stringify({ email: email.trim().toLowerCase(), slug, titulo, lang }),
       });
     } catch {}
   }
@@ -76,7 +79,7 @@ export function BotaoCompra({
         const res = await fetch('/api/download-pack', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ slug }),
+          body: JSON.stringify({ slug, lang }),
         });
         const json = await res.json();
         if (res.ok && Array.isArray(json.ficheiros) && json.ficheiros.length) {
@@ -92,12 +95,12 @@ export function BotaoCompra({
       const res = await fetch('/api/download', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ slug }),
+        body: JSON.stringify({ slug, lang }),
       });
       const json = await res.json();
       if (res.ok && json.url) { setDownloadUrl(json.url); return; }
     } catch {}
-    setDownloadUrl(`/api/download-directo?slug=${slug}&email=${encodeURIComponent(email.trim().toLowerCase())}`);
+    setDownloadUrl(`/api/download-directo?slug=${slug}&email=${encodeURIComponent(email.trim().toLowerCase())}${sufixoEn}`);
   }
 
   if (checkoutUrl) {

@@ -47,11 +47,20 @@ async function fetchPdf(slug: string): Promise<Buffer | null> {
 export async function GET(req: NextRequest) {
   const slug = req.nextUrl.searchParams.get('slug')?.replace(/[^a-z0-9-]/g, '');
   const email = req.nextUrl.searchParams.get('email') || '';
+  const lang = (req.nextUrl.searchParams.get('lang') || '').toLowerCase();
   if (!slug) {
     return NextResponse.json({ erro: 'slug-obrigatorio' }, { status: 400 });
   }
 
-  const file = await fetchPdf(slug);
+  // Em EN, tenta primeiro o PDF ingles (<slug>-en.pdf); se nao existir, cai
+  // no PT. As capas sao iguais; so muda o texto do PDF.
+  const candidatos = lang === 'en' ? [`${slug}-en`, slug] : [slug];
+  let file: Buffer | null = null;
+  let usado = slug;
+  for (const s of candidatos) {
+    file = await fetchPdf(s);
+    if (file) { usado = s; break; }
+  }
   if (!file) {
     return NextResponse.json({ erro: 'ficheiro-nao-encontrado' }, { status: 404 });
   }
@@ -67,7 +76,7 @@ export async function GET(req: NextRequest) {
       return new NextResponse(Buffer.from(modifiedPdf, 'binary'), {
         headers: {
           'Content-Type': 'application/pdf',
-          'Content-Disposition': `attachment; filename="${slug}.pdf"`,
+          'Content-Disposition': `attachment; filename="${usado}.pdf"`,
         },
       });
     }
@@ -76,7 +85,7 @@ export async function GET(req: NextRequest) {
   return new NextResponse(new Uint8Array(file), {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="${slug}.pdf"`,
+      'Content-Disposition': `attachment; filename="${usado}.pdf"`,
     },
   });
 }
