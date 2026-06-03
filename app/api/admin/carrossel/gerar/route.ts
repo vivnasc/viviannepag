@@ -111,12 +111,12 @@ DEVOLVE APENAS JSON valido, sem texto a volta:
       "produtoRelacionado": "slug-ou-vazio",
       "horario": "11:30",
       "slides": [
-        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|nome-da-oferta", "texto": "...", "destaque": "so cta: tagline curta", "notaVisual": "EN editorial boho contemplativo, SEM pessoas/rostos/texto" }
+        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|nome-da-oferta", "texto": "...", "destaque": "so cta: tagline curta", "notaVisual": "SO em capa e cta: EN editorial boho contemplativo, SEM pessoas/rostos/texto" }
       ]
     }
   ]
 }
-Notas: 6 slides por dia. A palavra-destaque do dia aparece na capa e da coesao ao carrossel. Slides do meio (prosa/poetico/pratica) sao base clara; capa e cta sao fundo escuro.`;
+Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio sao base clara, sem imagem — deixa notaVisual vazio). Nos slides do meio mantem o texto curto. A palavra-destaque do dia aparece na capa e da coesao ao carrossel.`;
 
   const userPrompt = `Territorio da semana: "${tema}" — ${brief}. Universo: ${col.nome}. Estacao: ${estacao}.\nGera ${numDias} dias (carrosseis), cada um com a sua palavra-destaque UNICA — nunca repetidas entre si nem com a lista de proibidas. Agora.`;
 
@@ -127,7 +127,7 @@ Notas: 6 slides por dia. A palavra-destaque do dia aparece na capa e da coesao a
       headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-opus-4-7',
-        max_tokens: 8192,
+        max_tokens: 16000,
         system: SYSTEM,
         messages: [{ role: 'user', content: userPrompt }],
       }),
