@@ -9,6 +9,7 @@ import { COLECOES, COLECOES_ORDENADAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slu
 import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
+import { PRODUTOS_EN } from '@/lib/produtos-en';
 import { PACKS } from '@/lib/packs';
 import type { Metadata } from 'next';
 
@@ -74,13 +75,12 @@ async function listarProdutos(locale: string): Promise<Produto[]> {
       .order('ordem', { ascending: true });
     const list = (data as Produto[]) ?? [];
     if (list.length === 0) return getStaticProducts(locale);
-    // A tabela 'produtos' so guarda PT. Em EN, sobrepoe o titulo/subtitulo
-    // traduzidos do CATALOGO (onde existe). Produtos sem traducao ficam em PT.
+    // A tabela 'produtos' so guarda PT. Em EN, sobrepoe titulo/subtitulo com a
+    // traducao lida dos markdowns EN (PRODUTOS_EN cobre os 72 produtos).
     if (locale === 'en') {
-      const en = new Map(CATALOGO.map((c) => [c.slug, c]));
       return list.map((p) => {
-        const c = en.get(p.slug);
-        return c ? { ...p, titulo: c.titulo_en, subtitulo: c.subtitulo_en } : p;
+        const en = PRODUTOS_EN[p.slug];
+        return en ? { ...p, titulo: en.titulo, subtitulo: en.subtitulo } : p;
       });
     }
     return list;

@@ -11,6 +11,7 @@ import { getSupabase } from '@/lib/supabase';
 import { packBySlug, isPackSlug, packIncluiProduto, PACKS } from '@/lib/packs';
 import { slugToColecao } from '@/lib/colecoes';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
+import { PRODUTOS_EN } from '@/lib/produtos-en';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -123,9 +124,11 @@ async function getProduto(slug: string, locale: string): Promise<Produto | null>
       .single();
     const row = data as Produto | null;
     if (!row) return getFallback(slug, locale);
-    // A DB so guarda PT. Em EN, sobrepoe os campos traduzidos do CATALOGO
-    // (onde existe). Produtos sem traducao ficam em PT.
+    // A DB so guarda PT. Em EN, sobrepoe titulo/subtitulo/descricao com a
+    // traducao lida dos markdowns EN (PRODUTOS_EN cobre os 72 produtos).
     if (locale === 'en') {
+      const en = PRODUTOS_EN[slug];
+      if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao };
       const c = CATALOGO[slug];
       if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en };
     }
