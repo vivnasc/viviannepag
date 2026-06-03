@@ -11,6 +11,7 @@ import { getSupabase } from '@/lib/supabase';
 import { packBySlug, isPackSlug, packIncluiProduto, PACKS } from '@/lib/packs';
 import { slugToColecao } from '@/lib/colecoes';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
+import { BarraCompraMobile } from '@/components/BarraCompraMobile';
 import { PRODUTOS_EN } from '@/lib/produtos-en';
 
 export const dynamic = 'force-dynamic';
@@ -393,6 +394,16 @@ export default async function ProdutoPage({
           </p>
         </div>
       </section>
+
+      {!p.checkout_url && (
+        <>
+          <div className="h-20 sm:hidden" />
+          <BarraCompraMobile
+            item={{ slug, titulo: p.titulo, preco: p.preco, capa: p.capa, badge: p.badge }}
+            precoOriginal={p.preco_original}
+          />
+        </>
+      )}
     </>
   );
 }

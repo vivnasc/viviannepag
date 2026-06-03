@@ -9,6 +9,7 @@ import { COLECOES, COLECOES_ORDENADAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slu
 import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
+import { FiltrosLoja } from '@/components/loja/FiltrosLoja';
 import { PRODUTOS_EN } from '@/lib/produtos-en';
 import { PACKS } from '@/lib/packs';
 import type { Metadata } from 'next';
@@ -112,12 +113,19 @@ export async function generateMetadata({
 
 export default async function LojaPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ tipo?: string; ordenar?: string }>;
 }) {
   const { locale } = await params;
+  const { tipo, ordenar } = await searchParams;
   setRequestLocale(locale);
-  const produtos = await listarProdutos(locale);
+  const todosProdutos = await listarProdutos(locale);
+  // Filtro por tipo (ebook/guia) via badge. 'todos' ou ausente = sem filtro.
+  const produtos = (tipo === 'ebook' || tipo === 'guia')
+    ? todosProdutos.filter(p => p.badge?.toLowerCase().includes(tipo))
+    : todosProdutos;
   const isPt = locale === 'pt';
 
   return (
@@ -127,9 +135,9 @@ export default async function LojaPage({
       <main className="relative z-[2] max-w-[1280px] mx-auto px-7 pt-24 pb-20 lg:flex lg:gap-10">
         <LojaSidebar
           locale={locale}
-          produtos={produtos.map(p => ({ slug: p.slug, titulo: p.titulo, subtitulo: p.subtitulo, badge: p.badge }))}
+          produtos={todosProdutos.map(p => ({ slug: p.slug, titulo: p.titulo, subtitulo: p.subtitulo, badge: p.badge }))}
           itens={COLECOES_ORDENADAS.map(c => {
-            const count = produtos.filter(p => slugToColecao(p.slug) === c.id).length;
+            const count = todosProdutos.filter(p => slugToColecao(p.slug) === c.id).length;
             return { id: c.id, romano: c.romano, nome: isPt ? c.nome : c.nome_en, count, ativo: c.estado !== 'em-breve' || count > 0 };
           })}
         />
@@ -149,9 +157,11 @@ export default async function LojaPage({
           <GotaMini className="w-[28px] h-[28px] mx-auto mt-7 opacity-60 block" />
         </header>
 
+        <FiltrosLoja locale={locale} />
+
         {produtos.length === 0 ? (
           <p className="text-center text-creme-2/70 italic font-serif">
-            {isPt ? 'Em breve.' : 'Coming soon.'}
+            {isPt ? 'Nada com este filtro.' : 'Nothing with this filter.'}
           </p>
         ) : (() => {
           // Agrupa produtos por colecao
@@ -162,9 +172,13 @@ export default async function LojaPage({
             lista.push(p);
             porColecao.set(id, lista);
           }
-          // Dentro de cada colecao: ebooks primeiro, depois guias, ordenados por destaque + ordem
+          // Ordenacao dentro de cada colecao. Por preco quando pedido; senao
+          // ebooks primeiro, depois guias, por destaque + slug.
+          const precoN = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
           for (const [id, lista] of porColecao) {
             lista.sort((a, b) => {
+              if (ordenar === 'preco-asc') return precoN(a.preco) - precoN(b.preco);
+              if (ordenar === 'preco-desc') return precoN(b.preco) - precoN(a.preco);
               const aEb = a.badge?.toLowerCase().includes('ebook') ? 0 : 1;
               const bEb = b.badge?.toLowerCase().includes('ebook') ? 0 : 1;
               if (aEb !== bEb) return aEb - bEb;
