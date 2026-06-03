@@ -77,7 +77,7 @@ Vou deixar cair aqui uma frase, sozinha, e peço-te que fiques com ela, mesmo qu
 
 Não era isto que eu estava, de verdade, à procura.
 
-Fica com isto um momento.
+Deixa isto assentar um momento.
 
 O vazio que sentiste na chegada não é um erro a corrigir, nem um defeito a esconder. É uma mensagem. É o teu próprio ser a dizer-te, da forma mais clara que encontrou, que aquilo que procuravas não era aquilo que alcançaste. Durante anos, conseguiste manter essa verdade à distância, porque a meta estava à frente, e enquanto há uma meta à frente, podemos acreditar que ela vai trazer o que falta. Mas no momento em que chegas, em que a meta deixa de estar à frente e passa a estar nas tuas mãos, a ilusão desfaz-se, e o vazio que estava tapado pela expectativa aparece, nu. A chegada não criou o vazio. Apenas tirou aquilo que o tapava.
 

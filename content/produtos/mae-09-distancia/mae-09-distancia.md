@@ -97,7 +97,7 @@ Vou deixar cair aqui a perceção que muda tudo, e peço-te que fiques com ela, 
 
 O teu amor não se mede só pelo que sofreste. E tu és mais do que a mulher que sacrificou a própria vida.
 
-Fica com isto um momento.
+Fica com isto por um instante.
 
 Durante anos, o teu sofrimento foi a prova do teu amor. Quanto mais sofreste, mais amaste, era essa a equação que te sustentou. E há uma verdade nisso, o teu sacrifício foi de facto amor. Mas, sem dares por isso, essa equação tornou-se uma armadilha: passaste a precisar de provar que sofreste, que valeu a pena, que o sacrifício foi justificado, como se o teu amor só fosse real se fosse medido em sofrimento e em resultados. E essa necessidade de provar tornou-se tão forte que já não te deixa existir fora dela. Toda a tua relação com os teus filhos, com a tua própria história, passou a girar à volta de uma pergunta: valeu a pena? E essa pergunta, repetida sem fim, não te deixa em paz.
 

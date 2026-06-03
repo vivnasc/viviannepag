@@ -31,7 +31,7 @@ Há uma forma de te sabotares que talvez nunca tenhas reconhecido como tal, porq
 
 Há uma contradição na tua relação com o preço que, quando a vês de frente, denuncia o tamanho exato desta crença. Tu queres, profundamente, viver bem do que fazes. Sonhas com estabilidade, com folga, com poder fazer o que amas sem a angústia das contas. E ao mesmo tempo, sempre que te aproximas de cobrar o que te daria essa vida, recuas, baixas, ofereces, sabotas, porque cobrar o suficiente para viveres bem te parece, lá no fundo, demais, ganancioso, errado. Queres a vida com folga e fechas, com as tuas próprias mãos, a única torneira por onde o dinheiro entraria para a construir. É por isso que tantas mulheres talentosas e dedicadas como tu passam a vida a trabalhar muito e a ganhar pouco, não por falta de valor nem de procura, mas por uma incapacidade de cobrar à altura do que entregam. Não é o mercado que te paga mal. És tu que não te deixas cobrar bem.
 
-Talvez te reconheças em cenas concretas. É olhares para o que outros cobram pelo mesmo que tu fazes, muitas vezes pior, e perceberes que cobras metade. É sentires alívio quando um cliente aceita o teu preço, em vez de sentires que é justo. É dares descontos a quem nem os pediu, por antecipares o desconforto de cobrar. É trabalhares imenso e teres pouco, e não perceberes que o problema não é a quantidade de trabalho, é o que te recusas a cobrar por ele. São todas o mesmo: a voz que aperta na hora de pôr preço, e que te faz dar quase de graça o que devia sustentar a tua vida.
+Talvez te reconheças nestas cenas do dia a dia. É olhares para o que outros cobram pelo mesmo que tu fazes, muitas vezes pior, e perceberes que cobras metade. É sentires alívio quando um cliente aceita o teu preço, em vez de sentires que é justo. É dares descontos a quem nem os pediu, por antecipares o desconforto de cobrar. É trabalhares imenso e teres pouco, e não perceberes que o problema não é a quantidade de trabalho, é o que te recusas a cobrar por ele. São todas o mesmo: a voz que aperta na hora de pôr preço, e que te faz dar quase de graça o que devia sustentar a tua vida.
 
 ---
 
@@ -157,7 +157,7 @@ E há um efeito que talvez te surpreenda quando começares: ao cobrares com just
 
 Sabes, no fundo, a frase que segura este livro inteiro: o valor que entrego pode ser valorizado.
 
-Ver isto foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a cobrar, devagar, o que vales, e a ficar no teu preço, vez após vez, apesar do aperto.
+Ver o preço a que te vendes foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a cobrar, devagar, o que vales, e a ficar no teu preço, vez após vez, apesar do aperto.
 
 Foi para essa travessia que criei o **Prosperidade**.
 

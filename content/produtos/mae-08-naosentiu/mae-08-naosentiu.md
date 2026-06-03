@@ -163,7 +163,7 @@ Sabes, no fundo, a frase que segura este livro inteiro: não preciso de sentir t
 
 E talvez, lá no fundo, comece a abrir-se a porta secreta deste livro: posso encontrar o meu filho antes de encontrar a mãe que imaginei ser.
 
-Compreender foi o primeiro passo. Mas há outro, e esse já não acontece só nestas páginas, acontece no terreno onde a vergonha pousa e o vínculo se vai tecendo. E aqui, mais do que em quase todos os outros livros, quero ser muito honesta sobre qual é esse passo para ti.
+Ter compreendido já foi o primeiro passo. Mas há outro, e esse já não acontece só nestas páginas, acontece no terreno onde a vergonha pousa e o vínculo se vai tecendo. E aqui, mais do que em quase todos os outros livros, quero ser muito honesta sobre qual é esse passo para ti.
 
 Se o que vives é a experiência comum de não sentir o esperado, com a vergonha e o luto que a acompanham, criei uma travessia guiada, o **FreeMe**, que te pode acompanhar a pousar a vergonha, a fazer o luto da mãe idealizada, e a permitir que o vínculo aconteça ao seu tempo. Encontra-lo em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 

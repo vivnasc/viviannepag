@@ -373,7 +373,7 @@ Amar a ausência é, no fundo, uma forma de nunca te arriscares. Persegues o que
 
 ## 5. Quando perseguir deixa de ser padrão
 
-Tenho de interromper aqui esta travessia. Com seriedade.
+Preciso de parar aqui um instante, com seriedade. Com seriedade.
 
 Há uma fronteira entre um padrão e uma ferida que magoa a sério. E é importante saberes de que lado dela estás.
 

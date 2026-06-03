@@ -179,7 +179,7 @@ Lá, as frases que aqui leste sozinha dizem-se devagar, com espaço para, pela p
 
 Se sentes que é o momento, estou lá. Em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 
-E se ainda não é o momento, está tudo bem, e ninguém te apressa. O que leste já é teu, e o caminho fica à tua espera, sem pressa e sem cobrança.
+E se ainda não for o momento, está tudo bem, ninguém te apressa nesta travessia. O que leste já é teu, e o caminho fica à tua espera, sem pressa e sem cobrança.
 
 E quero que saibas que esta travessia não te pede para deixares de ser forte, porque a tua força é real e é tua e não tens de a entregar. Pede-te só para a libertares da obrigação de ser permanente. Há uma diferença entre ter força e ter de ser forte a toda a hora, sem nunca poder pousar. A força que escolhes usar, quando é preciso, é um dom. A força que és obrigada a manter, sem descanso, sem alternativa, sem poderes nunca ser frágil, é uma prisão. Esta travessia não te tira a força, devolve-te a escolha: a de poderes ser forte quando faz falta, e poderes, também, descansar, precisar, receber, ser cuidada, sem que isso te tire nada de quem és. Continuas a ser uma mulher forte. Só deixas de estar condenada a sê-lo a cada minuto, sozinha, para sempre.
 

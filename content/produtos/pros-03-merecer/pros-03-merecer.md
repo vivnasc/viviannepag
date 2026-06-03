@@ -29,7 +29,7 @@ Há uma forma de sentires que talvez nunca tenhas relacionado com isto, mas que 
 
 E repara numa contradição que diz tudo sobre o tamanho desta crença. Tu queres, profundamente, uma vida mais leve. Sonhas com descanso, com folga, com poderes receber sem te matares, com uma prosperidade que não te custe a pele. E ao mesmo tempo, sempre que a leveza se aproxima, tu desconfias dela, complica-la, foge-la, voltas a pegar no peso, porque a leveza te assusta mais do que o esforço. Desejas o destino e recusas a chegada. É por isso que mulheres extraordinariamente capazes como tu, que poderiam ter uma vida muito mais leve do que têm, continuam a escolher, vez após vez, o caminho que dói, não porque seja preciso, mas porque o que não dói lhes parece, lá no fundo, que não é para elas. Não é que a leveza te falte. É que tu, quando ela chega, não a deixas ficar.
 
-Talvez te reconheças em cenas concretas. É não conseguires desfrutar de umas férias sem sentir que tens de as "compensar" com trabalho antes ou depois. É olhares para quem ganha bem fazendo o que gosta, com leveza, e sentires uma mistura de inveja e desconfiança, um "isso não é trabalho a sério". É pores entraves a ti mesma, a complicar processos que podiam ser simples, porque o simples te parece pouco sério. É medir o valor do teu dia pelo cansaço com que acabas, e ir dormir satisfeita só quando estás exausta, como se a exaustão fosse o recibo de um dia bem vivido. São todas o mesmo: a equação que te diz que sem dor não há valor, e que por isso converte tudo o que recebes em mais uma coisa para suar.
+Talvez te vejas em situações bem concretas. É não conseguires desfrutar de umas férias sem sentir que tens de as "compensar" com trabalho antes ou depois. É olhares para quem ganha bem fazendo o que gosta, com leveza, e sentires uma mistura de inveja e desconfiança, um "isso não é trabalho a sério". É pores entraves a ti mesma, a complicar processos que podiam ser simples, porque o simples te parece pouco sério. É medir o valor do teu dia pelo cansaço com que acabas, e ir dormir satisfeita só quando estás exausta, como se a exaustão fosse o recibo de um dia bem vivido. São todas o mesmo: a equação que te diz que sem dor não há valor, e que por isso converte tudo o que recebes em mais uma coisa para suar.
 
 ---
 
@@ -155,7 +155,7 @@ Deixo-te, para o fim, uma cena, porque há nela tudo o que estas páginas tentar
 
 Sabes, no fundo, a frase que segura este livro inteiro: não preciso de sofrer para merecer.
 
-Ver isto foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a desfazer, devagar, uma equação de gerações, e a dares-te licença, vez após vez, para receberes sem dor.
+Compreender esta equação foi o primeiro passo. Mas há um segundo, e esse não se faz a ler, faz-se a desfazer, devagar, uma equação de gerações, e a dares-te licença, vez após vez, para receberes sem dor.
 
 Foi para essa travessia que criei o **Prosperidade**.
 

@@ -75,7 +75,7 @@ Chegamos ao coração deste livro, e à perceção que muda tudo. Vou dizê-la d
 
 Receber também é amar. E recusar receber, por mais que pareça amor, pode ser, sem que queiras, uma forma de privar quem te ama.
 
-Fica com isto um momento.
+Demora-te nisto um momento.
 
 Tu acreditas que, ao não pesar, proteges os teus filhos. E em parte é verdade, há um cuidado real em não os sobrecarregar. Mas há uma outra verdade, escondida, que talvez nunca tenhas visto: ao recusares sempre o cuidado deles, ao insistires que não precisas de nada, ao não os deixares fazer por ti, tu estás a recusar-lhes algo. Estás a recusar-lhes a possibilidade de te amarem na prática, de te retribuírem, de cuidarem de quem cuidou deles. E essa possibilidade não é um peso para eles. É, para muitos filhos, uma necessidade profunda: a de poderem dar de volta, a de fecharem um ciclo, a de expressarem, em gestos concretos, o amor e a gratidão que sentem.
 

@@ -73,7 +73,7 @@ Vou deixar cair aqui uma pergunta, sozinha, e peço-te que fiques com ela, mesmo
 
 Quem sou eu sem esta história?
 
-Fica com ela um momento.
+Fica com ela mais um instante.
 
 Porque há um momento, nesta travessia, que é ao mesmo tempo o mais assustador e o mais libertador: o momento em que começas a separar-te dos sonhos herdados, das expectativas, do guião, e ficas, por um instante, sem saber quem és. Se tiraste a vida que cumprias, e ela não era inteiramente tua, então o que fica? Quem és tu, quando não és a realização dos sonhos dos teus pais, quando não és a resposta às expectativas da tua família, quando não és o guião que te foi dado? Por baixo de tudo o que herdaste, há uma pessoa que talvez nunca tenhas conhecido bem, porque nunca houve espaço para ela aparecer, sempre ocupada que estava a cumprir o que não escolheu.
 

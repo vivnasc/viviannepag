@@ -157,7 +157,7 @@ Quero deixar-te com a pergunta que está no coração de tudo isto, porque ela �
 
 E há uma forma de sentido que merece um lugar especial nesta fase, porque o nosso tempo a desvaloriza e ela é, na verdade, das mais altas: a de transmitir. Tens, agora, algo que poucos têm e que só os anos dão, uma vida inteira de experiência, de saber vivido, de sabedoria conquistada a custo. E há um mundo de pessoas mais novas, dentro e fora da tua família, que precisam exatamente disso, de quem já passou, de quem já sabe, de quem pode acompanhar com a calma de quem viu muito. Ser uma presença sábia, uma referência, alguém a quem se vai buscar conselho e colo, é um sentido imenso, e é talvez o mais natural para quem chega a esta idade com uma vida cumprida. Não precisas de ser necessária da forma intensa e diária de antes. Podes ser preciosa de outra forma, mais serena e mais livre: pela presença, pela escuta, pelo que tens para transmitir. O mundo precisa de mais velhos que saibam ser velhos com dignidade e generosidade, e tu podes ser um deles.
 
-Estes são os contornos. O mapa, não a viagem. A viagem é mais funda, faz-se devagar, e às vezes precisa de companhia, de mãos que te ajudem a atravessar a passagem sem te perderes nela. Mas o mapa já mostra que há vida do outro lado, e que ela é tua. Tu, agora, já sabes a direção.
+Estes são os contornos, o mapa e não a viagem em si. A viagem é mais funda, faz-se devagar, e às vezes precisa de companhia, de mãos que te ajudem a atravessar a passagem sem te perderes nela. Mas o mapa já mostra que há vida do outro lado, e que ela é tua. Tu, a partir daqui, já sabes para onde caminhar.
 
 ---
 

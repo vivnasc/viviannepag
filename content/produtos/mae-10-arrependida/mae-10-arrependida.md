@@ -159,7 +159,7 @@ Sabes, no fundo, a frase que segura este livro inteiro: posso amar-te sem ter am
 
 E sabes, acima de tudo, a frase que este livro existe para te dar, e que é tua e do teu filho ao mesmo tempo: tu nunca foste o erro.
 
-Compreender foi o primeiro passo. Mas saber separar o amor do lamento dentro da cabeça é uma coisa, e descolar, devagar, as duas folhas que secaram juntas dentro do peito é outra, e essa segunda não se faz só a ler. E aqui quero ser honesta sobre qual é, para ti.
+Compreender já foi um primeiro passo. Mas saber separar o amor do lamento dentro da cabeça é uma coisa, e descolar, devagar, as duas folhas que secaram juntas dentro do peito é outra, e essa segunda não se faz só a ler. E aqui quero ser honesta sobre qual é, para ti.
 
 Se o que vives é o lamento lúcido, com a vergonha e o silêncio que o acompanham, criei uma travessia guiada, o **FreeMe**, que te pode acompanhar a pousar a vergonha, a distinguir o amor da perda, e a fazer as pazes com uma verdade que carregaste sozinha durante demasiado tempo. Encontra-la em [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 

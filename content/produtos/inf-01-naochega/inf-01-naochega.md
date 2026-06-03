@@ -79,7 +79,7 @@ Vou deixar cair aqui uma pergunta, sozinha, e peço-te que não fujas dela depre
 
 Quem sou eu quando não estou a correr?
 
-Fica com ela um momento. Repara no que ela mexe.
+Demora-te nela um momento. Repara no que ela remexe em ti.
 
 Para muitas mulheres como tu, esta pergunta abre um buraco, e por uma razão que vale a pena compreender com cuidado. É que, ao longo dos anos, sem o decidires, foste construindo a tua identidade inteira em cima do movimento. Tu és a que faz, a que consegue, a que entrega, a que está sempre a avançar. Quando te perguntam quem és, respondes com o que fazes, com o que alcançaste, com o que estás a construir. O teu valor, a tua sensação de existir, de importar, de ter um lugar, ficou colado ao movimento, à conquista, ao próximo objetivo. E por isso parar não é, para ti, apenas descansar. É algo que ameaça a tua própria existência, como se, ao parares de correr, deixasses de existir.
 
