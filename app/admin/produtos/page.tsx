@@ -2,6 +2,22 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import { COLECOES, slugToColecao, type ColecaoId } from '@/lib/colecoes';
+
+// Thumbnail com fallback: se a capa faltar ou partir (404), mostra caixa
+// "sem capa" em vez do icone de imagem partida. A capa real entra quando o
+// render editorial a gera e grava em produtos.capa.
+function CapaThumb({ src }: { src: string | null }) {
+  const [erro, setErro] = useState(false);
+  if (!src || erro) {
+    return (
+      <div className="w-16 h-20 rounded-md bg-terra-2/60 border border-ocre/15 shrink-0 flex items-center justify-center">
+        <span className="text-creme-2/30 text-[0.55rem] italic leading-none text-center px-1">sem capa</span>
+      </div>
+    );
+  }
+  return <img src={src} alt="" onError={() => setErro(true)} className="w-16 h-20 object-cover rounded-md border border-ocre/25 shrink-0" />;
+}
 
 type Produto = {
   id: string;
@@ -279,69 +295,95 @@ export default function ProdutosAdmin() {
       {msg && <p className="text-ambar text-sm mb-6 italic font-serif">{msg}</p>}
       {produtos.length === 0 ? (
         <p className="text-creme-2/70 italic font-serif">Sem produtos. Cria o primeiro.</p>
-      ) : (
-        <div className="grid gap-4">
-          {produtos.map(p => (
-            <div key={p.id} className="flex items-center gap-5 border border-ocre/15 rounded-[14px] p-4 hover:bg-terra-2/40 transition-colors">
-              {p.capa ? <img src={p.capa} alt="" className="w-16 h-20 object-cover rounded-md border border-ocre/25 shrink-0" /> : <div className="w-16 h-20 rounded-md bg-terra-2/60 shrink-0" />}
-              <div className="flex-1 min-w-0">
-                <h3 className="font-serif text-creme text-[1.05rem]">{p.titulo}</h3>
-                <p className="text-creme-2/60 text-[0.78rem]">{p.slug} · {p.preco} · {p.publicado ? 'publicado' : 'rascunho'}</p>
-              </div>
-              <button onClick={() => gerarLegendas(p)} className="text-salvia text-[0.78rem] hover:text-ambar">legendas</button>
-              {pdfs[p.slug] && (
-                <a
-                  href={`${pdfs[p.slug].url}?t=${Date.now()}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-ouro text-[0.78rem] hover:underline no-underline"
-                  title={`Actualizado ${pdfs[p.slug].updatedAt ? new Date(pdfs[p.slug].updatedAt!).toLocaleString('pt-PT') : ''}`}
-                >
-                  ver PDF
-                </a>
-              )}
+      ) : (() => {
+        // Agrupa os produtos por universo (mesmo mapa slug->colecao da loja),
+        // pela ordem das COLECOES. Universos sem produtos nao aparecem.
+        const porColecao = new Map<ColecaoId, Produto[]>();
+        for (const p of produtos) {
+          const id = slugToColecao(p.slug);
+          const lista = porColecao.get(id) ?? [];
+          lista.push(p);
+          porColecao.set(id, lista);
+        }
+        const renderProduto = (p: Produto) => (
+          <div key={p.id} className="flex items-center gap-5 border border-ocre/15 rounded-[14px] p-4 hover:bg-terra-2/40 transition-colors">
+            <CapaThumb src={p.capa} />
+            <div className="flex-1 min-w-0">
+              <h3 className="font-serif text-creme text-[1.05rem]">{p.titulo}</h3>
+              <p className="text-creme-2/60 text-[0.78rem]">{p.slug} · {p.preco} · {p.publicado ? 'publicado' : 'rascunho'}</p>
+            </div>
+            <button onClick={() => gerarLegendas(p)} className="text-salvia text-[0.78rem] hover:text-ambar">legendas</button>
+            {pdfs[p.slug] && (
               <a
-                href={`/api/download-directo?slug=${p.slug}&email=test@viviannedossantos.com`}
+                href={`${pdfs[p.slug].url}?t=${Date.now()}`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-salvia text-[0.78rem] hover:text-ambar no-underline"
-                title="Bate no mesmo endpoint que o cliente bate pos-compra (com rodape de licenca)"
+                className="text-ouro text-[0.78rem] hover:underline no-underline"
+                title={`Actualizado ${pdfs[p.slug].updatedAt ? new Date(pdfs[p.slug].updatedAt!).toLocaleString('pt-PT') : ''}`}
               >
-                testar como cliente
+                ver PDF
               </a>
-              {(p.slug?.startsWith('ebook-') || p.slug?.startsWith('guia-')) && (
-                <button
-                  onClick={async () => {
-                    const mundo = prompt(`Mundo das imagens MJ para "${p.titulo}"?\n(freeme | infonte | synchim | escola | autora)`, 'freeme');
-                    if (!mundo) return;
-                    setMsg('A disparar render editorial...');
-                    const r = await fetch('/api/admin/produtos/render-ebook-dispatch', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ slug: p.slug, mundo }),
-                    });
-                    const j = await r.json();
-                    if (r.ok) {
-                      setUltimoPdf({ slug: p.slug, url: j.pdfUrl, ts: Date.now() });
-                      setPolling(true);
-                      setMsg(`Render disparado para ${p.slug}. PDF pronto em ~3min. Link 'ver PDF' aparece sozinho.`);
-                    } else {
-                      setMsg(`Erro: ${j.erro}`);
-                    }
-                  }}
-                  className="text-ambar text-[0.78rem] hover:text-ouro"
-                  title="Gera PDF editorial com imagens MJ"
-                >
-                  📖 PDF editorial
-                </button>
-              )}
-              <button onClick={() => { const u = `https://viviannedossantos.com/loja/${p.slug}`; navigator.clipboard.writeText(u); setMsg('Link copiado!'); setTimeout(() => setMsg(null), 1500); }} className="text-creme-2/60 text-[0.78rem] hover:text-ambar">link</button>
-              <button onClick={() => setEdit(p)} className="text-ocre text-[0.8rem] hover:text-ambar">editar</button>
-              <button onClick={() => apagar(p)} className="text-rosa/60 text-[0.78rem] hover:text-rosa">apagar</button>
-            </div>
-          ))}
-        </div>
-      )}
+            )}
+            <a
+              href={`/api/download-directo?slug=${p.slug}&email=test@viviannedossantos.com`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-salvia text-[0.78rem] hover:text-ambar no-underline"
+              title="Bate no mesmo endpoint que o cliente bate pos-compra (com rodape de licenca)"
+            >
+              testar como cliente
+            </a>
+            {(p.slug?.startsWith('ebook-') || p.slug?.startsWith('guia-')) && (
+              <button
+                onClick={async () => {
+                  const mundo = prompt(`Mundo das imagens MJ para "${p.titulo}"?\n(freeme | infonte | synchim | escola | autora)`, 'freeme');
+                  if (!mundo) return;
+                  setMsg('A disparar render editorial...');
+                  const r = await fetch('/api/admin/produtos/render-ebook-dispatch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slug: p.slug, mundo }),
+                  });
+                  const j = await r.json();
+                  if (r.ok) {
+                    setUltimoPdf({ slug: p.slug, url: j.pdfUrl, ts: Date.now() });
+                    setPolling(true);
+                    setMsg(`Render disparado para ${p.slug}. PDF pronto em ~3min. Link 'ver PDF' aparece sozinho.`);
+                  } else {
+                    setMsg(`Erro: ${j.erro}`);
+                  }
+                }}
+                className="text-ambar text-[0.78rem] hover:text-ouro"
+                title="Gera PDF editorial com imagens MJ"
+              >
+                📖 PDF editorial
+              </button>
+            )}
+            <button onClick={() => { const u = `https://viviannedossantos.com/loja/${p.slug}`; navigator.clipboard.writeText(u); setMsg('Link copiado!'); setTimeout(() => setMsg(null), 1500); }} className="text-creme-2/60 text-[0.78rem] hover:text-ambar">link</button>
+            <button onClick={() => setEdit(p)} className="text-ocre text-[0.8rem] hover:text-ambar">editar</button>
+            <button onClick={() => apagar(p)} className="text-rosa/60 text-[0.78rem] hover:text-rosa">apagar</button>
+          </div>
+        );
+        return (
+          <div className="space-y-12">
+            {COLECOES.filter(c => (porColecao.get(c.id)?.length ?? 0) > 0).map(c => {
+              const lista = porColecao.get(c.id)!;
+              return (
+                <section key={c.id}>
+                  <div className="flex items-baseline gap-3 mb-4 pb-2 border-b border-ocre/20">
+                    <span className="text-ocre/60 text-[0.8rem] font-serif">{c.romano}</span>
+                    <h2 className="font-serif text-ambar text-[1.25rem]">{c.nome}</h2>
+                    <span className="text-creme-2/40 text-[0.72rem]">{lista.length} {lista.length === 1 ? 'título' : 'títulos'}</span>
+                  </div>
+                  <div className="grid gap-4">
+                    {lista.map(renderProduto)}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        );
+      })()}
       {legendaModal && legendas && (
         <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setLegendaModal(null)}>
           <div className="bg-terra rounded-[18px] border border-ocre/30 max-w-[700px] w-full max-h-[90vh] overflow-y-auto p-7" onClick={e => e.stopPropagation()}>
