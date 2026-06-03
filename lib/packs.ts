@@ -27,7 +27,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Everything on guilt, inheritance and what you carry that isn\'t yours.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo FreeMe Mãe num só acesso. Sobre a maternidade, a culpa que não tem origem e o peso que pousas quando percebes o que é teu.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the FreeMe Mother world in one access. On motherhood, the guilt that has no origin, and the weight you set down once you see what is yours.',
-    preco: '€29', preco_original: '€106', capa: '/produtos/ebook-01-culpa-capa.png', badge: 'pack',
+    preco: '€40', preco_original: '€106', capa: '/produtos/ebook-01-culpa-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-infonte', colecao: 'infonte',
@@ -36,7 +36,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Identity and purpose: who you are beyond what you do.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo Infonte num só acesso. Sobre a voz que decide o que conta, as metas que não são tuas, e o que emerge quando o ruído pára.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Infonte world in one access. On the voice that decides what counts, the goals that aren\'t yours, and what emerges when the noise stops.',
-    preco: '€29', preco_original: '€90', capa: '/produtos/ebook-03-quemes-capa.png', badge: 'pack',
+    preco: '€35', preco_original: '€90', capa: '/produtos/ebook-03-quemes-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-amor', colecao: 'amor',
@@ -45,7 +45,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Couple and bond: what repeats beneath what you say.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo SyncHim num só acesso. Sobre o nó invisível do casal, a diferença entre amor e intensidade, e o que te faz perder-te quando amas.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Love world in one access. On the invisible knot in the couple, the difference between love and intensity, and what makes you lose yourself when you love.',
-    preco: '€29', preco_original: '€66', capa: '/produtos/ebook-06-no-casal-capa.png', badge: 'pack',
+    preco: '€25', preco_original: '€66', capa: '/produtos/ebook-06-no-casal-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-forca', colecao: 'forca',
@@ -54,7 +54,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Crossing the dark and setting down the armour you no longer need.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo Força num só acesso. Sobre as crises como passagem, o luto que ninguém vê, e baixar a guarda em segurança.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Strength world in one access. On crises as passage, the grief nobody sees, and lowering your guard safely.',
-    preco: '€29', preco_original: '€59', capa: '/produtos/ebook-05-escuro-capa.png', badge: 'pack',
+    preco: '€23', preco_original: '€59', capa: '/produtos/ebook-05-escuro-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-prosperidade', colecao: 'prosperidade',
@@ -63,7 +63,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Receiving, deserving, and letting in what is already yours.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo Prosperidade num só acesso. Sobre a escassez herdada, o reflexo de devolver, e aprender a receber.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Prosperity world in one access. On inherited scarcity, the reflex to give back, and learning to receive.',
-    preco: '€29', preco_original: '€54', capa: '/produtos/guia-10-receber-capa.png', badge: 'pack',
+    preco: '€20', preco_original: '€54', capa: '/produtos/guia-10-receber-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-pertenca', colecao: 'pertenca',
@@ -72,7 +72,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Your place among others, taken without asking permission.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo Pertença num só acesso. Sobre o que carregas pela família, a ponte que fazes entre todos, e ocupares o teu lugar à mesa.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Belonging world in one access. On what you carry for the family, the bridge you build between everyone, and taking your place at the table.',
-    preco: '€29', preco_original: '€54', capa: '/produtos/guia-12-lugar-capa.png', badge: 'pack',
+    preco: '€20', preco_original: '€54', capa: '/produtos/guia-12-lugar-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-trabalho', colecao: 'trabalho',
@@ -81,7 +81,7 @@ export const PACKS: Pack[] = [
     subtitulo_en: 'Separating your worth from what you produce.',
     descricao: '**Pack · PDF imediato**\n\nTodos os ebooks e guias do universo Trabalho e Vocação num só acesso. Sobre a indispensabilidade, a cadeira que ocupas, e quem és quando paras.',
     descricao_en: '**Bundle · Immediate PDF**\n\nEvery ebook and guide from the Work & Vocation world in one access. On indispensability, the chair you occupy, and who you are when you stop.',
-    preco: '€29', preco_original: '€47', capa: '/produtos/guia-14-parar-capa.png', badge: 'pack',
+    preco: '€18', preco_original: '€47', capa: '/produtos/guia-14-parar-capa.png', badge: 'pack',
   },
   {
     slug: 'pack-tudo', colecao: 'all',

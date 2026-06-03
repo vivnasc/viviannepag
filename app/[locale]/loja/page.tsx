@@ -239,15 +239,65 @@ export default async function LojaPage({
               );
           };
 
-          // Capa do pack = capa real (foto MJ) de um produto do seu universo
-          // (destaque, senao o primeiro). Para 'all', um produto em destaque do
-          // catalogo. Evita as capas estaticas antigas/partidas do lib/packs.
-          const capaPack = (colecao: ColecaoId | 'all', fallback: string): string => {
-            const pool = colecao === 'all'
-              ? todosProdutos
-              : todosProdutos.filter(p => slugToColecao(p.slug) === colecao);
-            const escolhido = pool.find(p => p.destaque && p.capa) ?? pool.find(p => p.capa);
-            return escolhido?.capa ?? fallback;
+          // Capas do pack = mosaico das capas reais (foto) dos livros do universo
+          // (ate 4). Para 'all', uma de cada universo, para variedade.
+          const capasPack = (colecao: ColecaoId | 'all'): string[] => {
+            if (colecao === 'all') {
+              return COLECOES_ORDENADAS
+                .map(c => todosProdutos.find(p => slugToColecao(p.slug) === c.id && p.capa)?.capa)
+                .filter((u): u is string => Boolean(u))
+                .slice(0, 4);
+            }
+            return todosProdutos
+              .filter(p => slugToColecao(p.slug) === colecao && p.capa)
+              .map(p => p.capa as string)
+              .slice(0, 4);
+          };
+
+          // Card de pack com mosaico 2x2 + poupanca. Mesma moldura/overlay do renderCard.
+          const precoNumLoja = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
+          const renderPackCard = (pk: typeof PACKS[number]) => {
+            const titulo = isPt ? pk.titulo : pk.titulo_en;
+            const subtitulo = isPt ? pk.subtitulo : pk.subtitulo_en;
+            const href = `${locale === 'en' ? '/en' : ''}/loja/${pk.slug}`;
+            const mosaico = capasPack(pk.colecao);
+            const poup = pk.preco_original ? Math.round(precoNumLoja(pk.preco_original) - precoNumLoja(pk.preco)) : 0;
+            const ehTudo = pk.colecao === 'all';
+            return (
+              <div key={pk.slug} className="relative">
+                <AdicionarCarrinho variante="overlay" item={{ slug: pk.slug, titulo, preco: pk.preco, capa: mosaico[0] ?? null, badge: pk.badge }} />
+                <Link href={href} className="group block no-underline">
+                  <div className={`overflow-hidden rounded-[18px] border transition-colors ${ehTudo ? 'border-ambar/50 group-hover:border-ambar' : 'border-ocre/25 group-hover:border-ambar/40'}`}>
+                    <div className="relative aspect-[3/4] overflow-hidden bg-terra-2/60">
+                      <div className="grid grid-cols-2 grid-rows-2 gap-[2px] w-full h-full">
+                        {Array.from({ length: 4 }).map((_, i) => (
+                          <div key={i} className="relative overflow-hidden">
+                            {mosaico[i % (mosaico.length || 1)] && (
+                              <Image src={mosaico[i % mosaico.length]} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" unoptimized />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-terra/80 via-transparent to-transparent" />
+                      <span className="absolute top-4 left-4 bg-ambar text-terra text-[0.68rem] tracking-[0.12em] uppercase font-medium px-3 py-1.5 rounded-full">
+                        {pk.badge}
+                      </span>
+                      <span className="absolute bottom-4 left-4 right-4 font-serif text-creme text-[1.05rem] leading-tight drop-shadow">
+                        {titulo}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-creme-2/70 text-[0.88rem] leading-[1.5] mb-4 line-clamp-2">{subtitulo}</p>
+                      <div className="flex items-baseline gap-3 flex-wrap">
+                        <span className="text-ambar font-serif text-[1.15rem]">{pk.preco}</span>
+                        {pk.preco_original && <span className="text-creme-2/50 text-[0.85rem] line-through">{pk.preco_original}</span>}
+                        {poup > 0 && <span className="text-ouro text-[0.72rem] font-semibold">{isPt ? `poupas €${poup}` : `save €${poup}`}</span>}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            );
           };
 
           // 'Em breve' = so colecoes sem produtos publicados (as que ja tem
@@ -365,17 +415,7 @@ export default async function LojaPage({
                     : 'Take a whole world in one access, for a fraction of the individual price. Or the complete library, all seven worlds together.'}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {PACKS.map((pk) => renderCard({
-                    id: pk.slug,
-                    slug: pk.slug,
-                    titulo: isPt ? pk.titulo : pk.titulo_en,
-                    subtitulo: isPt ? pk.subtitulo : pk.subtitulo_en,
-                    preco: pk.preco,
-                    preco_original: pk.preco_original,
-                    capa: capaPack(pk.colecao, pk.capa),
-                    badge: pk.badge,
-                    destaque: pk.colecao === 'all',
-                  }))}
+                  {PACKS.map((pk) => renderPackCard(pk))}
                 </div>
               </section>
 

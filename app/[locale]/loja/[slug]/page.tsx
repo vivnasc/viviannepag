@@ -191,12 +191,11 @@ export default async function ProdutoPage({
   const conteudoPack = isPack ? await getPackConteudo(slug, locale) : [];
   // Cross-sell: pack do universo deste produto (para sugerir levar tudo).
   const packDoUniverso = !isPack ? PACKS.find((pk) => pk.colecao !== 'all' && pk.colecao === slugToColecao(slug)) : undefined;
-  // Capa do pack = capa real (foto) de um livro da colecao (ebook em destaque),
-  // em vez da estatica antiga/partida.
-  const capaPackReal = isPack
-    ? (conteudoPack.find((i) => i.badge?.toLowerCase().includes('ebook') && i.capa)?.capa ?? conteudoPack.find((i) => i.capa)?.capa ?? null)
-    : null;
-  const capaExibida = capaPackReal ?? p.capa;
+  // Pack: mosaico das capas reais dos livros (ate 4) para o hero.
+  const mosaicoPack = isPack
+    ? conteudoPack.map((i) => i.capa).filter((c): c is string => Boolean(c)).slice(0, 4)
+    : [];
+  const capaExibida = mosaicoPack[0] ?? p.capa;
   // Poupanca (preco original riscado vs preco).
   const precoN = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
   const poupanca = p.preco_original ? Math.round(precoN(p.preco_original) - precoN(p.preco)) : 0;
@@ -224,7 +223,23 @@ export default async function ProdutoPage({
           <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] gap-12 items-center">
             {/* CAPA */}
             <div className="mx-auto md:mx-0 w-[280px] md:w-full">
-              {capaExibida ? (
+              {isPack && mosaicoPack.length > 1 ? (
+                <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden border border-ocre/20 shadow-2xl shadow-black/30">
+                  <div className="grid grid-cols-2 grid-rows-2 gap-[2px] w-full h-full">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div key={i} className="relative overflow-hidden">
+                        <Image src={mosaicoPack[i % mosaicoPack.length]} alt="" fill className="object-cover" unoptimized />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-terra/70 via-transparent to-transparent" />
+                  {p.badge && (
+                    <span className="absolute top-4 left-4 bg-ambar text-terra text-[0.65rem] tracking-[0.14em] uppercase font-medium px-3 py-1.5 rounded-full">
+                      {p.badge}
+                    </span>
+                  )}
+                </div>
+              ) : capaExibida ? (
                 <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden border border-ocre/20 shadow-2xl shadow-black/30">
                   <Image
                     src={capaExibida}
@@ -300,6 +315,14 @@ export default async function ProdutoPage({
                   <AdicionarCarrinho variante="inline" item={{ slug, titulo: p.titulo, preco: p.preco, capa: capaExibida, badge: p.badge }} />
                 </div>
               )}
+              {/* Selo de garantia 7 dias */}
+              <div className="flex items-center gap-3 mb-3 rounded-[12px] border border-salvia/40 bg-salvia/10 px-4 py-3">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-salvia shrink-0"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                <p className="text-creme-2/90 text-[0.82rem] leading-snug">
+                  <span className="text-salvia font-medium">{isPt ? 'Garantia de 7 dias.' : '7-day guarantee.'}</span>{' '}
+                  {isPt ? 'Se não for para ti, escreves-me e devolvo o valor. Sem complicações.' : 'If it is not for you, message me and I refund you. No fuss.'}
+                </p>
+              </div>
               {/* Bloco de confiança */}
               <ul className="flex flex-wrap gap-x-5 gap-y-1.5 mb-3 text-[0.75rem] text-creme-2/70">
                 <li className="flex items-center gap-1.5"><span className="text-ambar">↓</span> {isPt ? 'Entrega imediata' : 'Instant delivery'}</li>
@@ -395,6 +418,31 @@ export default async function ProdutoPage({
         </section>
       )}
 
+      {/* AUTORA — foto real + nota genuina (nao e testemunho inventado) */}
+      <section className="relative z-[2] py-12 px-7 border-t border-ocre/10">
+        <div className="max-w-[760px] mx-auto flex flex-col sm:flex-row items-center gap-8">
+          <div className="relative w-[140px] h-[140px] shrink-0 rounded-full overflow-hidden border border-ocre/30 shadow-xl shadow-black/30">
+            <Image src="/vivianne-2.jpg" alt="Vivianne dos Santos" fill className="object-cover" unoptimized />
+          </div>
+          <div className="text-center sm:text-left">
+            <p className="text-[0.7rem] tracking-[0.2em] uppercase text-ocre/80 mb-2">
+              {isPt ? 'quem escreve' : 'who writes this'}
+            </p>
+            <h2 className="font-serif font-light text-creme text-[1.5rem] mb-3">Vivianne dos Santos</h2>
+            <p className="text-creme-2/85 text-[0.92rem] leading-[1.7] mb-2">
+              {isPt
+                ? 'Escritora, mãe de três, em formação avançada em Psicologia Transpessoal, Psicologia e Espiritualidade, e Constelação Familiar Sistémica. Não escrevo de fora — escrevo de dentro da mesma travessia.'
+                : 'Writer, mother of three, in advanced training in Transpersonal Psychology, Psychology and Spirituality, and Systemic Family Constellation Therapy. I do not write from the outside — I write from inside the same crossing.'}
+            </p>
+            <p className="text-creme-2/70 text-[0.86rem] italic font-serif">
+              {isPt
+                ? 'Cada livro nasceu de uma ferida real e do caminho de volta a partir dela.'
+                : 'Each book was born from a real wound and the way back from it.'}
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CONFIANCA + FAQ */}
       <section className="relative z-[2] py-12 px-7 border-t border-ocre/10">
         <div className="max-w-[860px] mx-auto">
@@ -419,6 +467,7 @@ export default async function ProdutoPage({
           <div className="space-y-4 max-w-[640px] mx-auto">
             {(isPt
               ? [
+                  { q: 'E se não for para mim?', a: 'Tens garantia de 7 dias. Se sentires que não era para ti, escreves-me e devolvo o valor — sem complicações.' },
                   { q: 'Como recebo o material?', a: 'Assim que o pagamento é confirmado, descarregas aqui mesmo e recebes também o link no teu email. Sem espera.' },
                   { q: 'Em que formato vem?', a: 'PDF, pensado para ler no telemóvel, no computador ou imprimir. Fica contigo para sempre.' },
                   { q: 'Preciso de criar conta?', a: 'Não. Só precisas do teu email para te enviarmos o acesso.' },
@@ -426,6 +475,7 @@ export default async function ProdutoPage({
                   { q: 'E se tiver algum problema com o download?', a: 'Falas comigo diretamente no WhatsApp e resolvo contigo.' },
                 ]
               : [
+                  { q: 'What if it is not for me?', a: 'You have a 7-day guarantee. If you feel it was not for you, message me and I refund you — no fuss.' },
                   { q: 'How do I receive it?', a: 'As soon as payment is confirmed you download it right here and also get the link by email. No waiting.' },
                   { q: 'What format is it?', a: 'PDF, made to read on your phone, computer or to print. It is yours forever.' },
                   { q: 'Do I need an account?', a: 'No. You only need your email so we can send you access.' },
