@@ -39,13 +39,13 @@ There's a difference between giving yourself and dissolving yourself. Giving you
 
 You don't give yourself. You dissolve yourself. And you call that love, when it's, deep down, a disappearance.
 
-This book will not teach you to love less, to hold yourself back, to give yourself by halves out of calculation. I didn't come to teach you to defend yourself from love, to close off a part, to not give yourself. That would be to have understood nothing. Your capacity to give yourself is beautiful. The problem is not giving yourself. It's giving all of yourself, until no one is left to be loved.
+This book will not teach you to love less, to hold yourself back, to give yourself by halves out of calculation. I didn't come to teach you to defend yourself from love, to close off a part, to not give yourself. That would be to mistake the whole current for its danger. Your capacity to give yourself is beautiful. The problem is not giving yourself. It's giving all of yourself, until no one is left to be loved.
 
 I came to help you do something much harder. To remain with yourself while you love. To not lose yourself in the other. To keep existing, you, inside the relationship.
 
-I'll tell you the direction now, so you can read in peace. You can love without abandoning yourself. You can have a we without ceasing to have an I. And the path is not to love less. It's to return to yourself.
+I'll point you toward the far bank now, so you can read in peace. You can love without abandoning yourself. You can have a we without ceasing to have an I. And the path is not to love less. It's to return to yourself.
 
-Maybe you'll recognize yourself in small things.
+Maybe the dilution shows itself first in small things.
 
 In not knowing how to answer, on your own, what you want for dinner, what you want to do on the weekend, because you got used to wanting what he wants.
 
@@ -55,7 +55,7 @@ In feeling a disproportionate panic when he moves away, because without him you 
 
 In looking at photos of yourself from before this relationship and barely recognizing that woman, who had so much that was only hers.
 
-They are all the same. The disappearance. The slow dilution of you inside the one you love.
+They all flow into the same current. The disappearance. The slow dilution of you inside the one you love.
 
 There's something you'll want to say in your defense. "But I like his things. I'm not pretending."
 
@@ -101,7 +101,7 @@ There's a moment of the day when all of this is seen with particular clarity, an
 
 ## 2. Giving yourself or dissolving yourself
 
-There's a confusion at the center of everything. And I want to undo it carefully, because it's from there that your loss comes.
+At the source of all of this, two waters are mistaken for one. And I want to separate them carefully, because it's from there that your loss comes.
 
 You confused giving yourself with dissolving yourself. As if to truly love were to renounce yourself. As if keeping a place of your own were not loving enough.
 
@@ -115,7 +115,7 @@ In the first, there are two. In the second, there's one and a half.
 
 And you do the second. You give over your whole place. You give, not a part of you, but you entirely, until no outline is left.
 
-Notice what this costs you.
+Notice what this dilution drains from you.
 
 When you dissolve yourself, you stop bringing a person to the relationship. You bring a mirror. You agree with everything, you want what he wants, you adapt to everything, and at first that looks like harmony, looks like easy love, looks like you two are so compatible.
 
@@ -153,7 +153,7 @@ I want to undo one more misunderstanding that you probably carry, and that makes
 
 ## 3. Who am I when I'm alone
 
-I'm going to lay a question here, and I ask you to stay with it longer than you feel like. Don't run from it too quickly.
+I'm going to lay a question here, and I ask you to stay with it longer than you feel like. Don't let it drain away too quickly.
 
 Who are you when you're alone?
 
@@ -189,7 +189,7 @@ When that isn't allowed, when having a center of one's own is lived as disloyalt
 
 Maybe you had a mother who needed you to be an extension of her, who couldn't bear that you had a will different from hers. Maybe you grew up where disagreeing brought conflict, coldness, or the withdrawal of love, and where peace was bought by erasing yourself, agreeing, dissolving your will into others'.
 
-I want to give a name to a very common form of this, because maybe you'll recognize it without ever having thought of it this way. There are mothers who don't ask their daughter to do things. They ask her to feel what they feel. If the mother was sad, the whole house had to be sad, and a cheerful daughter was a betrayal. If the mother was anxious, the daughter had to share the anxiety, or she was accused of not caring. You grew up tuning yourself to her state, minute by minute, like an instrument that never plays its own note. And you learned, without words, that feeling something different from the one you love is dangerous. You carried that into adult love. That's why you walk into a room and read his state first. It's not a character flaw. It's an old training, that began long before you met this man.
+I want to give a name to a very common form of this, because maybe you'll recognize it without ever having thought of it this way. There are mothers who don't ask their daughter to do things. They ask her to feel what they feel. If the mother was sad, the whole house had to be sad, and a cheerful daughter was a betrayal. If the mother was anxious, the daughter had to share the anxiety, or she was accused of not caring. You grew up tuning yourself to her state, minute by minute, like an instrument that never plays its own note. And you learned, without words, that feeling something different from the one you love is dangerous. You carried that into adult love. That's why you walk into a room and read his state first. It's not a flaw carved into you. It's an old training, that began long before you met this man.
 
 A child like that learns a terrible equation. To have the bond, disappear. To be loved, don't be too much. To stay, dilute yourself. And she chooses, always, the bond, because for a child the bond is life. She gives up herself so as not to be alone. And that trade, made early, becomes her way of loving forever.
 
@@ -199,13 +199,13 @@ It wasn't. It was the price of a love of origin that didn't let you exist. And t
 
 I want you to look at this without loading yourself with guilt, and without needing to point a finger at whoever raised you. Whoever didn't let you have a center of your own, almost always, didn't have one either. They repeated, in you, what had been done in them. They didn't mean to erase you. But they erased you, without meaning to, and you carry it still, in the way you disappear in every love.
 
-Don't answer right away the question of who you are alone. It isn't answered all at once. It's built, slowly, as you cultivate a center that is yours alone.
+Don't answer right away the question of who you are alone. It isn't answered in one pouring. It's built, slowly, as you cultivate a center that is yours alone.
 
 But leave it open. Because it's in that question that your return begins. The day there's a firm you, even without anyone at your side, you stop needing to dissolve yourself in order to love. And then, only then, can you love whole. That blank is not your truth. It's your center yet to be built, waiting to be, at last, inhabited.
 
 ## 4. The love that erases
 
-We come to the deepest point. And I want you to read it slowly.
+We reach the deepest water now. And I want you to wade in slowly.
 
 You love by erasing yourself. For you, loving and disappearing have become the same thing.
 
@@ -215,13 +215,13 @@ And there's a belief here, old and painful. The belief that you, whole, with you
 
 That's why, the moment you enter a relationship, you begin to erase yourself. To give in. To agree. To disappear. Not because the other demands it, often, but because you learned that this is how love is guaranteed: by not bothering, not diverging, not being too much.
 
-I want you to feel the weight of this. Imagine what it is to not be able to exist and love at the same time. To have to choose between being yourself and being loved. And to always choose love, at the cost of yourself, until you no longer know who you are.
+I want you to feel how much of you this dilutes away. Imagine what it is to not be able to exist and love at the same time. To have to choose between being yourself and being loved. And to always choose love, at the cost of yourself, until you no longer know who you are.
 
 It's an extremely high price. You pay with your entire identity for your staying in a relationship. And even so you don't rest, because a part of you knows that, if you disappeared in order to be loved, then it isn't you who's being loved, it's your erasure.
 
 There's a trap here worth seeing in the clear light of day. Your erasure never gives you the security it promised. You erase yourself thinking that this way he'll never leave you, that a woman so easy to love, so without rough edges, so always available, is a woman no one abandons. But the truth is the opposite. You live in permanent alert, always measuring his mood, always afraid you said something too much, always correcting yourself. The erasure doesn't take away your fear of losing him. It multiplies it. Because whoever disappeared to be loved knows, deep down, that one instant of reappearing is enough for the castle to fall. And no one lives in peace on such fragile ground.
 
-Let me tell you where this usually comes from. Almost always from a love of origin that left no place for you.
+Let me trace this back to its spring. Almost always it rises from a love of origin that left no place for you.
 
 Where your will was a problem. Where having your own opinion was a challenge. Where the way to be loved, or at least tolerated, was to be what others needed you to be, and never what you were.
 
@@ -237,13 +237,13 @@ But notice this hard and liberating truth. The love that demands you disappear i
 
 ## 5. When disappearing is danger
 
-I have to stop the book here. With seriousness.
+Here the current has to be held back. With seriousness.
 
 There's a border between dissolving yourself a little in love and truly losing yourself. And it's vital to know which side of it you're on.
 
 On one side is everything we've been talking about. You dilute yourself, you give over your center, you lose yourself in the other. It hurts, but there's a path, and the path is these pages.
 
-On the other side is something more serious. And I want to name it, without circling around it.
+On the other side, the dilution has gone past the point of return. And I want to name it plainly, without letting it slip past.
 
 If you let drop everything that was yours, and today you have no life at all outside the relationship. No friends, no activities, no network, only him.
 
@@ -255,11 +255,11 @@ If the idea of being alone brings you a physical panic, a sense that without him
 
 If you depend on him for everything, and that dependency already takes away your capacity to live on your own.
 
-This is no longer only a pattern to understand. It may be a serious emotional dependency, a loss of identity that asks for help. And serious help, from a professional.
+This is no longer only a dilution to understand. It may be a serious emotional dependency, a loss of identity that asks for help. And help with firm ground beneath it, from a professional.
 
 And I want to say one thing with all firmness. If your dissolution was accompanied by someone who kept you from your own, who controls you, who decides for you, who doesn't let you have a life of your own, that is not love, and it may be a relationship of control, or abuse.
 
-There, understanding isn't enough, and it isn't the priority. The priority is your protection. Seek help. Talk with someone you trust, with a professional, with a support line. You're not crazy, and you're not alone.
+There, understanding isn't enough, and it isn't the priority. What matters first is keeping you from washing away entirely. Seek help. Talk with someone you trust, with a professional, with a support line. You're not crazy, and you're not alone.
 
 I want to give you a concrete way to orient yourself, because the border isn't always felt, and dissolution is skilled at disguising itself as love. Ask yourself three questions, and answer slowly. If you disappeared from this relationship tomorrow, would any life be left to you? Someone to call, somewhere to go, some taste to return to? Second question. When was the last time you were with someone who wasn't him, without having to explain, without having to ask, without guilt? And the third, the hardest. If you wanted to leave, could you? Do you have money of your own, somewhere to stay, people to turn to, or is everything tied to him? If these questions bring you an emptiness, or a physical fear, don't stay alone with the answer. Take it to a professional. There are answers that should not be held in silence.
 
@@ -291,11 +291,11 @@ Mature love is not two who merge into one. It's two who remain two, and who meet
 
 When you dissolve yourself, you kill precisely that space. You stick yourself so closely that there are no longer two to meet. And without two, there's no meeting, no desire, no true love. There's fusion, which looks like love, but which is, deep down, the disappearance of one of the people.
 
-Let me tell you this another way. The other fell in love with a person. With you, with your tastes, your life, your way of being, your center. When you dissolve yourself into him, you make precisely the person he fell in love with disappear. Your dissolution, which serves to guarantee love, is what, slowly, empties it.
+Let me pour the same truth from another vessel. The other fell in love with a person. With you, with your tastes, your life, your way of being, your center. When you dissolve yourself into him, you make precisely the person he fell in love with disappear. Your dissolution, which serves to guarantee love, is what, slowly, empties it.
 
 I want to tell you something about desire, because it's where dissolution charges a price that few women connect to their loss of self. Desire needs mystery, and mystery needs an interior the other doesn't know in full. When you dissolve yourself, you keep nothing for yourself. You anticipate what he wants, you give before you're asked, you're always available, always predictable, always there. And desire, which lives on the tension between two worlds, goes on fading, not from a lack of love, but from a lack of two people. Whoever returns to herself goes back to having an interior of her own, a world that isn't given over all at once. And, without wanting to, she becomes desirable again, because she becomes an other again.
 
-The awakening, when it comes, doesn't arrive like a thunderclap. It arrives like a reunion.
+The awakening, when it comes, doesn't break like a flood. It arrives like a reunion.
 
 It's the day you go back to doing something that was only yours. That you say an opinion that's yours, and not his. That you spend time with your friends, in your world, and feel, with surprise, that there's still a person there, beneath the dilution. You.
 
@@ -323,7 +323,7 @@ And I want to give you a sign to guide you, because your head is going to want t
 
 ## 7. Returning to yourself inside love
 
-There's a verb for this crossing. To return.
+There's a single verb that carries you across these waters. To return.
 
 To return to yourself. Not outside love, but inside it. To remain with yourself while you love.
 
@@ -365,13 +365,13 @@ I want to leave you, also, a joy that's on the other side. The joy of being love
 
 And notice what you teach, if there are those who watch you love. If there are daughters, nieces, girls who observe you, they learn love by watching you love. If they see you disappear in every relationship, dissolve yourself, lose yourself, they learn that this is how you love, and they carry that lesson into their own loves. The most liberating thing you can do for the one who learns by looking at you is to show a woman who loves without erasing herself. Who remains whole inside love. Who is, herself, the proof that you can love and continue to exist.
 
-I won't give you a method. It would be one more way of dissolving yourself, now into some rules. But I leave you the beginning. Remain with yourself while you love him. Don't disappear in order to fit. Bring yourself whole to the relationship, and let love be between two people, and not the dilution of one into the other. And where you need help to build a center that was never cultivated, seek it, because no one raises a ground of their own from nothing, alone, overnight.
+I won't hand you a set of rules to dissolve into. It would be one more way of dissolving yourself, now into some rules. But I leave you the place where the river starts. Remain with yourself while you love him. Don't disappear in order to fit. Bring yourself whole to the relationship, and let love be between two people, and not the dilution of one into the other. And where you need help to build a center that was never cultivated, seek it, because no one raises a ground of their own from nothing, alone, overnight.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, reappear whole. But it changes enough for you to stop mistaking your disappearance for love.
+It doesn't bring you back to the surface all at once. It doesn't make you, tomorrow, reappear whole. But it changes enough for you to stop mistaking your disappearance for love.
 
 Now you know that you dissolve yourself in love, and that this isn't loving too much, it's a lack of you.
 
@@ -389,7 +389,7 @@ I want, before the end, to give you back a concrete hope, so you don't leave the
 
 And there's a care I want to leave you, about time. To build a center that never existed isn't done in a day, nor with a book. You're going to relapse, you're going to dissolve yourself again, you're going to lose yourself again. It's not failure. It's the old habit still being there, while the new one is built. What transforms, even in the relapses, is that now you see. And seeing, even in the middle of the dissolution, is the beginning of being able, one day, to return more quickly. Be patient with yourself, and where you need hands to help you raise that ground, accept them.
 
-I want to leave you an image.
+I want to leave you with water in your hands.
 
 You're like a river that, on reaching the sea, gives itself so entirely that it ceases to be a river. It loses the name, the bank, the course. It dissolves into the salt water and disappears.
 
@@ -403,7 +403,7 @@ The sentence that holds everything I've told you here fits in a line, and I want
 
 And there's a step that these pages can't take for you, because it isn't done by reading. It's done by recovering, slowly, what you gave away. By reappearing where you had erased yourself. And, if there's someone at your side, by learning, together, to be two, and not one and a half. That's the work that continues after you close the book. The book names. The crossing is crossed with your feet, in daily life, one gesture at a time.
 
-And I ask you one thing only, now, before you close these pages. A hard one, for you.
+And I ask you one thing only, now, before you close these pages. A hard one, for a woman so used to dissolving.
 
 This week, do something that's only yours. That has nothing to do with him, with the relationship, with pleasing someone. Something that you, alone, like. And notice what you feel. Maybe guilt, maybe strangeness, maybe a panic of separating yourself. Stay with it, and do it anyway. Because it's in that gesture only yours, kept despite the fear, that your return begins, and that you discover, at last, that there's still someone there. You.
 

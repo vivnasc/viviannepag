@@ -37,11 +37,11 @@ You learned to point it at absence. At what runs away. At what doesn't arrive. A
 
 This book will not teach you how to catch the man who runs. I didn't come to give you strategies to hold him, to make him stay, to win the game.
 
-I came to show you something else. Why the game attracts you. Why absence tastes to you like love, and presence tastes like danger.
+What I came to do is point at something else. Why the game attracts you. Why absence tastes to you like love, and presence tastes like danger.
 
-And I'll tell you the direction now, so you can read in peace. The love you chase is not the love you want. It's the love you learned to chase, long before this man, long before any man.
+I'll point you toward where this is going right now, so you don't read it the way you wait for a message, on edge. The love you chase is not the love you want. It's the love you learned to chase, long before this man, long before any man.
 
-Maybe you'll recognize yourself in small things.
+Perhaps it's the small, distant things that will show you your own face.
 
 In staying awake staring at your phone, waiting for a message that doesn't come, and feeling, in that waiting, a living intensity, almost sweet.
 
@@ -49,7 +49,7 @@ In losing interest on the exact day he shows himself sure of you.
 
 In finding the steady, present, good men "without chemistry," and in calling "passion" the unrest of the one who treats you badly.
 
-They are all the same. Absence lights you up. Presence puts you out. And until today you called it your type, your luck, your bad luck in love.
+All of them run the same circuit. Absence lights you up. Presence puts you out. And until today you called it your type, your luck, your bad luck in love.
 
 It's none of that. It's a pattern. And patterns, when they are seen, can change.
 
@@ -73,9 +73,7 @@ It isn't over. It just stopped hurting. And you learned to mistake love for the 
 
 ## 2. The love you learned to chase
 
-Go back. Further back than any boyfriend.
-
-Your first love was not a man. It was whoever raised you.
+Go back. Past every platform where a man once stood. Your first love was not a man. It was whoever raised you.
 
 And it's there, in that first love, that you learn what it is to love. Not in theory. In the body. In the way love arrived, or didn't arrive, when you were little.
 
@@ -89,7 +87,7 @@ Maybe you had a mother who gave her love in drops, conditional, unpredictable. O
 
 Or maybe love was always busy. With a sick sibling, with the pain of the adults, with survival. Present in the house, unavailable to you.
 
-Notice what a child learns in a place like this.
+See what a child takes in, growing up in a home built like that.
 
 She learns that love does not come simply because she exists. It comes when she chases it, deserves it, wins it.
 
@@ -107,9 +105,9 @@ A man who runs, that one fits. That one rekindles the child who learned to love 
 
 That's why you fall in love with the unavailable. Not because you're drawn to suffering. But because the unavailable reproduces the love of origin, and your system mistakes the familiar for the right.
 
-I want you to see this without guilt. And without accusing whoever raised you.
+Look at this without guilt weighing you down. And without turning it into a charge against whoever raised you.
 
-Whoever gave you an unavailable love, most of the time, gave what they had. They gave the love that was also given to them that way. They didn't mean to wound you. They wished you well, in the incomplete way they knew.
+Whoever gave you an unavailable love, most of the time, gave what they had. They gave the love that was also given to them that way. Wounding you was never their intention. They wished you well, in the incomplete way they knew.
 
 And there is an order in families that is worth knowing, because it explains a great deal about your love.
 
@@ -121,7 +119,7 @@ If you were that child, you learned to stand on the wrong side of the order. You
 
 That's why, in adult love, you put yourself to work again. To deserve. To win. Even when love is offered to you for free, you don't know how to receive it for free, and you find a way to turn it into something to be deserved.
 
-But the truth is this. You learned to love where love was difficult. And you carried that lesson everywhere.
+But here is what it comes down to. You learned to love where love was difficult. And you carried that lesson everywhere.
 
 There's one thing worth looking at calmly. Children don't ask for the love they need. They adapt to the love that's there.
 
@@ -275,13 +273,13 @@ Given love, that one rests. You don't have to hold on to it, because it's not ru
 
 ## 4. Who am I when I'm not chasing
 
-I'll leave a question here. Alone. Don't run from it too quickly.
+I'll set a question down on the empty bench beside you. Alone. Don't run from it the way you run toward the ones who leave.
 
 Who are you when you're not chasing anyone?
 
 Stay with it. Notice what it opens.
 
-For you, this question may bring an emptiness. Because chasing is not just something you do. It became who you are.
+For you, this question may bring an emptiness. Because chasing is not just something you do. It turned into the very shape of who you are.
 
 You're always wanting someone. Always with a thought occupied by a man who isn't there, who doesn't answer, who won't decide. That tension, that stretched desire, has accompanied you for so long that it now seems like your personality.
 
@@ -337,9 +335,9 @@ That's why letting go of pursuit isn't only letting go of a man. It's accepting 
 
 But it's there, in that postponed meeting, that your life is. Not in his next message. In you, waiting for yourself, for so long now, in the silence you always filled with absence.
 
-Don't answer right away the question of who you are when you don't chase. It isn't answered with the head.
+Don't answer right away the question of who you are when you don't chase. The head is the wrong place to look for its answer.
 
-But leave it open. Because it's in that question that your freedom begins. The day you know how to exist without chasing anyone, you stop needing absence to feel alive. And then, only then, can you begin to recognize the love that is there.
+But leave it open. Because that question is the doorway your freedom comes in by. The day you know how to exist without chasing anyone, you stop needing absence to feel alive. And then, only then, can you begin to recognize the love that is there.
 
 I want to stay a little longer in this emptiness, because it's there that everything is decided.
 
@@ -373,13 +371,13 @@ To love absence is, deep down, a way of never risking yourself. You chase what r
 
 ## 5. When chasing stops being a pattern
 
-I have to stop the book here. With seriousness.
+Here I have to bring the book to a halt, the way you'd stop short on a platform. With seriousness.
 
 There is a border between a pattern and a wound that truly wounds. And it's important to know which side of it you're on.
 
 On one side is what we've been talking about. You light up with absence, you grow cold with presence, you chase what runs away. It hurts, but there's a path, and the path is this book.
 
-On the other side is something more serious. And I want to name it, without circling around it.
+On the other side stands something far more serious. And I'm going to call it by its name, without keeping my distance from it.
 
 If your thinking about a man who isn't there has become an obsession you can't stop. If you spend hours, days, chewing it over, watching, waiting, and you can't live in the meantime.
 
@@ -389,15 +387,15 @@ If you've gone back, time and again, to someone who treats you badly, not out of
 
 If your entire life revolves around a bond that consumes you, and everything else, work, friends, you yourself, has disappeared.
 
-This is no longer only a pattern to understand. It may be attachment anxiety, emotional dependency, a relational obsession that asks for help. And serious help, from a professional.
+At that point it has stopped being only a pattern to understand. It may be attachment anxiety, emotional dependency, a relational obsession that asks for help. And the kind of help that is serious, the kind a professional gives.
 
 I want to be clear, with firmness and with tenderness. Understanding where your pattern comes from is precious. But it doesn't treat an established dependency.
 
-If you see yourself in these signs, this is the chapter I want you to remember. Don't skip it. Seek support. A psychologist, a therapist, someone trained to hold you while you come out of the pit.
+If you see yourself in these signs, this is the chapter I want you to remember. Don't skip it. Seek support that stays close. A psychologist, a therapist, someone trained to hold you while you come out of the pit.
 
 It's not weakness. It's the most lucid thing you can do.
 
-Because there is a difference between loving absence and being trapped in it to the point of losing yourself. The first, this book accompanies. The second asks for hands closer than mine.
+Because there is a difference between loving absence and being trapped in it to the point of losing yourself. The first, this book can walk beside. The second asks for hands closer than mine.
 
 And seeking those hands is not giving up on love. It's beginning to treat yourself with the care you've been giving, all of it, to those who don't stay.
 
@@ -423,13 +421,13 @@ Love does not have to be conquered.
 
 It can be received. It can be available. It can arrive without your having to deserve it, chase it, or wrench it from someone who doesn't want to give it.
 
-I know this sounds strange. Your map says the opposite. Your map says easy love isn't worth anything, that real love costs, that if there's no pursuit there's no passion.
+I know it lands as something strange. Everything your map marks runs the other way. Your map says easy love isn't worth anything, that real love costs, that if there's no pursuit there's no passion.
 
 But your map was drawn by a child, in a place where love was, in fact, unavailable. It was accurate then. It's not accurate now.
 
 Today there is, in the world, available love. There are men who stay, who answer, who give themselves without games. Your map doesn't mark them, because it was made in a territory where they didn't exist. But they exist. And recognizing that is redrawing the map.
 
-Let me tell you this another way.
+Let me come at it from another direction.
 
 A newborn child doesn't chase her mother's love. She receives it. She does nothing to deserve it, doesn't run after it, doesn't win it. Love arrives because she exists.
 
@@ -437,11 +435,11 @@ That was your birthright. Available love, given, present. If you didn't have it 
 
 And what we're going to do is not teach you to chase better. It's to give you back the possibility of receiving. Of letting love arrive without your hunting it.
 
-The awakening, when it comes, doesn't arrive like a thunderclap. It arrives like a calm strangeness.
+The awakening, when it comes, doesn't pull in like an express train. It arrives like a calm strangeness.
 
 It's the day you're with a present man and, instead of the usual boredom, you feel, for an instant, peace. And you notice that peace, after all, is not the absence of love. It's what love feels when it stops running.
 
-It's a small instant. But it changes everything. Because it disproves, with the force of what you felt, a law you'd been carrying for decades.
+It's a small instant. But it changes everything. Because that single instant, with all the weight of what you felt in it, breaks a law you'd been hauling around for decades.
 
 I want you to understand why peace tasted to you, for so long, like boredom.
 
@@ -493,7 +491,7 @@ Until the day when, without effort, the present attracts you more than the absen
 
 ## 7. Seeing the love that is here
 
-There is a destination for this crossing. And it fits in one word. To see.
+This crossing has a station it is heading toward. And its name fits in one word. To see.
 
 Not to chase. Not to conquer. To see. To recognize the love that is here, instead of running after what runs away.
 
@@ -531,7 +529,7 @@ It's not to force yourself to anything. It's only to begin asking. Because while
 
 It's not that present love is bland. It's that your palate needs to be re-educated. And it's re-educated by staying. By bearing the strangeness of presence until it stops being strange.
 
-I won't give you a method. It would be one more way of turning this into a task, and love is not a task.
+I'm not going to hand you a set of steps to chase. It would be one more way of turning this into a task, and love is not a task.
 
 And there's a concrete sign to guide you, because your head is going to want to complicate things. Ask yourself, before a man: with him, do I feel calmer or more anxious?
 
@@ -563,7 +561,7 @@ But I leave you the beginning, in one sentence. The love that is here is also lo
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything at once. It doesn't make you, tomorrow, desire the present man and let go of the one who runs. But it changes enough for you to stop feeling crazy, or condemned, or without a solution in love.
+It doesn't turn the whole sky around in one morning. It doesn't make you, tomorrow, desire the present man and let go of the one who runs. But it changes enough for you to stop feeling crazy, or condemned, or without a solution in love.
 
 Now you know that you light up with absence and grow cold with presence, and that this isn't your type, it's a pattern.
 
@@ -577,7 +575,7 @@ You know how to distinguish the pattern from the wound that asks for help, and t
 
 And you know that love does not have to be conquered. That it can stay. That staying is not less.
 
-I want to leave you an image.
+Let me hand you a picture to keep.
 
 You spent your life running after trains that were leaving. Loving the empty platform, the smoke moving away, the longing for the one who left. And there was, all this time, someone sitting beside you on the station bench, looking at you, waiting to be seen.
 
@@ -599,11 +597,11 @@ Seeing gives you back the choice. You look at the present without the reflex to 
 
 It may even keep on not being this one or that one. But for the first time it's a choice of yours, and not your wound choosing for you.
 
-You know, deep down, the sentence that holds this book. I can recognize the love that is present.
+Beneath all the noise of pursuit, you already carry the sentence this book turns on. I can recognize the love that is present.
 
-Seeing was the first step. But there's a second, and that one isn't done by reading. It's done by staying, when everything in you wants to run. By bearing presence until it stops frightening. And, if there's someone at your side, by learning, together, to remain.
+Seeing was the first step. But a second one waits past it, and that step no page can take for you. It's done by staying, when everything in you wants to run. By bearing presence until it stops frightening. And, if there's someone at your side, by learning, together, to remain.
 
-That is the work of SyncHim. The book names. SyncHim crosses over. Each in her own time.
+That is the work of SyncHim. The book names. SyncHim crosses over. Every woman at the pace her own crossing allows.
 
 There's one last thing I want you to know, about time.
 
@@ -615,7 +613,7 @@ What changes, even in the relapses, is that now you see. You no longer chase in 
 
 Be patient with yourself. Treat your wound as you would treat a much-loved friend who learned to love in a difficult place. Not with haste, not with judgment. With tenderness, and with all the time it takes.
 
-And before you close these pages, I ask you one thing only. A hard one, for you, because it's so calm.
+And before these pages close behind you, there's a single thing I'm asking of you. A hard one, for you, because it's so calm.
 
 The next time someone present comes close, and you feel the boredom, the alarm, the urge to run, don't run right away. Stay a little longer. Notice the fear. And ask yourself, honestly, whether what you call a lack of chemistry is not, after all, the fright of being, for the first time, truly loved.
 

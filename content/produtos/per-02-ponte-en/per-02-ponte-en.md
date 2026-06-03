@@ -29,15 +29,15 @@ I want to tell you right away, before anything else, that this is not only a vir
 
 There is a place you took up early, the place of the middle, and which you never again let go of. You became the bridge, and you forgot that a bridge has a problem. A bridge has no side of its own. It is not a bank. It is only the passage between the banks of others.
 
-This book is not going to teach you to stop caring about relationships, to stop connecting people, to become indifferent to the conflicts of others. I have come to look at something else. At the price of living in the middle. At the fact that, from being a passage for so long, you never had a side of your own, a destination of your own, a place where you are you, and not the connection between two.
+This book is not going to teach you to stop caring about relationships, to stop connecting people, to become indifferent to the conflicts of others. I have come to look at what the river hides beneath the bridge. At the price of living in the middle. At the fact that, from being a passage for so long, you never had a side of your own, a destination of your own, a place where you are you, and not the connection between two.
 
-And I'll tell you the direction now, so you can read in peace. You can stop being a bridge and stay connected. You can cross over to your own side, have a place of your own, exist at the center and not only in the middle, without losing the people you connect. Your worth is not in being the passage for others. And there is a side, yours, that you never got to inhabit, waiting for you.
+And I'll point to the far bank now, so you can read in peace. You can stop being a bridge and stay connected. You can cross over to your own side, have a place of your own, exist at the center and not only in the middle, without losing the people you connect. Your worth is not in being the passage for others. And there is a side, yours, that you never got to inhabit, waiting for you.
 
-I want you to understand, right away, the difference between what it looks like and what it is. What it looks like, from the outside, is a generous, empathetic person, with a rare gift for getting along with everyone. What it is, on the inside, is a person who learned to live in the function of connecting others, and who lost herself in that middle. Your empathy is real, your gift is real, and there is nothing wrong with feeling others. What this book comes to show you is that this gift, put entirely in the service of mediating, became an erasing, and that you can keep your sensitivity without losing yourself in it, using it for yourself too, and not only for others.
+I want you to see, right away, what crosses the bridge and what holds the bridge up, two very different things. What it looks like, from the outside, is a generous, empathetic person, with a rare gift for getting along with everyone. What it is, on the inside, is a person who learned to live in the function of connecting others, and who lost herself in that middle. Your empathy is real, your gift is real, and there is nothing wrong with feeling others. What this book comes to show you is that this gift, put entirely in the service of mediating, became an erasing, and that you can keep your sensitivity without losing yourself in it, using it for yourself too, and not only for others.
 
 This book does not come to tell you that caring for relationships is wrong, nor that you have to become cold, indifferent, someone who turns her back on conflicts. It comes to distinguish caring from compulsive mediating, having empathy from having to manage everyone's emotions, being connected from being the bridge with no side of its own. It comes to give you back a center of your own, a side of your own, without taking away your connection to others, but placing you, at last, yourself too, on the map of the people you care for.
 
-Perhaps you recognize yourself in small things.
+Perhaps you recognize yourself in the small stones that pave this bridge.
 
 In always being the one to take the first step to reconcile those who have fallen out, even when the falling-out isn't yours, and even when no one asked you to.
 
@@ -49,7 +49,7 @@ In having the sense, in moments of silence, that without the role of connecting 
 
 In feeling divided, almost guilty, whenever you have to take a side, as though choosing a position were betraying the one left on the other side.
 
-They are all the same thing. Life in the middle. The bridge that forgot to have a side of its own.
+They are all the same span of stone. Life in the middle. The bridge that forgot to have a side of its own.
 
 I want to show you how this shows up in everyday life, in things you may already take to be who you are. In a group conversation, you're more attentive to making sure no one feels excluded, to softening what might hurt, to managing the climate, than to taking part with what you yourself think. When someone speaks badly of another person you love, you feel divided, with the urgency to defend, to explain one to the other, to repair the relationship between them, as though it were yours. You receive confidences from both sides of a conflict, and you hold both, you carry both, without ever being able to take a side, because your place is the middle.
 
@@ -79,11 +79,11 @@ And she learns a very particular loyalty. The loyalty of keeping the peace. If I
 
 That loyalty was etched deep. And it governs you still. That's why, as an adult, you remain in the middle. You go on soothing, translating, uniting. You go on feeling that, if you leave the middle, the people you love will drift apart, and that it will be your fault. The child who held up the peace of the house became the adult who holds up everyone's peace, and who doesn't know how to exist outside that post.
 
-I want you to see this without guilt, and without accusing those who raised you. The tension that put you in the middle was not, most of the time, created to wound you. The adults in your house were caught in their own conflicts, in their own incapacities, and didn't see that a child was carrying the peace they couldn't make. They didn't mean to put you in the middle. But they did, without meaning to, by letting you fill the place of mediator of a house that couldn't mediate itself.
+I want you to walk back over this without guilt, and without accusing those who raised you. The tension that put you in the middle was not, most of the time, created to wound you. The adults in your house were caught in their own conflicts, in their own incapacities, and didn't see that a child was carrying the peace they couldn't make. They didn't mean to put you in the middle. But they did, without meaning to, by letting you fill the place of mediator of a house that couldn't mediate itself.
 
 And I want you to see where this is stored, because it matters. This loyalty is not just an idea, a habit that can be changed at will. It's etched deep, in a place where keeping the peace between others became linked to your own safety, to your emotional survival as a child. That's why, today, when there's tension between people you love, you don't decide rationally to intervene, your body fires off, the anxiety rises, and you rush to soothe things before you think, like someone answering an alarm. It's not a choice, it's a reflex. And that's why it isn't enough to realize that the relationships of others are not yours to fix: the reflex keeps firing, and it's disarmed slowly, with practice, and often with help.
 
-I want to add a root you may recognize. Sometimes, the child in the middle isn't only keeping the peace, she's securing her own place. In a house in tension, being useful, being the one who unites, who calms, the one no one wants to lose, is a way of ensuring that there's always a place for you, that you're not dispensable, that you serve a purpose. And so the function of the bridge became not only a way of protecting the family, but of protecting your own belonging: as long as you're indispensable to everyone's connection, no one leaves you out. That's why leaving the middle frightens you twice over, because it threatens not only the peace of others, but your place among them.
+I want to add a foundation stone you may recognize beneath the bridge. Sometimes, the child in the middle isn't only keeping the peace, she's securing her own place. In a house in tension, being useful, being the one who unites, who calms, the one no one wants to lose, is a way of ensuring that there's always a place for you, that you're not dispensable, that you serve a purpose. And so the function of the bridge became not only a way of protecting the family, but of protecting your own belonging: as long as you're indispensable to everyone's connection, no one leaves you out. That's why leaving the middle frightens you twice over, because it threatens not only the peace of others, but your place among them.
 
 ## 3. Existing in the connection, not at the center
 
@@ -107,17 +107,17 @@ And there's a particular loneliness in this. The loneliness of someone who is al
 
 And it costs you your health, too, because managing everyone's relationships is an invisible and ceaseless work that drains you. Your mind never stops monitoring the climate, anticipating conflicts, calculating what to say to each one. It's a permanent vigilance, that no one sees, and that consumes you from within, and many people who live in the middle fall ill, not out of weakness, but out of the exhaustion of carrying, alone, the emotional balance of an entire group.
 
-I want you to feel the weight of this. Imagine living your whole life as a passage. Useful, important, necessary, and never a destination. Always the middle, never the bank. Always connecting, never being sought for yourself. It's a place of a deep loneliness, disguised as usefulness, and perhaps you already take it for normal, so used to it are you.
+I want you to feel the weight that arches your back like a span of stone. Imagine living your whole life as a passage. Useful, important, necessary, and never a destination. Always the middle, never the bank. Always connecting, never being sought for yourself. It's a place of a deep loneliness, disguised as usefulness, and perhaps you already take it for normal, so used to it are you.
 
 And there's a particular sadness in realizing that, from caring for the relationships of others for so long, you never cared for your own. That you know how to unite everyone, and you don't have, perhaps, a connection that is only yours, deep, between two, in which you are the destination and not the middle. That you're everyone's confidant, and you don't have, perhaps, anyone to confide in about what is yours, because your place was always to listen, never to be listened to. There is a hunger for a connection of your own beneath so much connecting of others, and it is that hunger, more than anything, that this crossing comes, at last, to feed.
 
 ## 4. Who am I when I'm not between two
 
-I'm going to leave a question here. On its own. Don't run from it.
+I'm going to set a question here, in the middle of the bridge. On its own. Don't run from it.
 
 Who are you when you're not between two sides?
 
-Stay with it. Notice the emptiness it opens.
+Stay with it. Notice the empty span it opens beneath your feet, like a bridge with no far bank.
 
 For you, this question may be one of the hardest there is, because it touches your very existence. You know who you are in the middle. The mediator, the translator, the one who unites. But you, outside the middle, with no one to connect, who are you?
 
@@ -125,7 +125,7 @@ Perhaps you don't know. Perhaps, imagining yourself without the role, you feel a
 
 And the shadow hiding here is the emptiness of your own side. You spent your life serving the banks of others, and you never built your own. You don't have a side of your own, a ground of your own, a center of your own, where you can be when you're not connecting anyone. And without that side, the question of who you are, outside the middle, is left without an answer.
 
-Notice how this imprisons you. You can't leave the middle, even when it drains you, because outside the middle you have nowhere to be. It's like a bridge that's afraid of becoming a bank, because it never knew how to be anything other than a passage. So you stay, eternally in the middle, serving crossings that aren't yours, because it's the only place you know how to exist.
+Notice how this fixes you in place, span anchored to two banks that aren't yours. You can't leave the middle, even when it drains you, because outside the middle you have nowhere to be. It's like a bridge that's afraid of becoming a bank, because it never knew how to be anything other than a passage. So you stay, eternally in the middle, serving crossings that aren't yours, because it's the only place you know how to exist.
 
 There is also a fragility hidden within your importance as a bridge. Because a bridge does not live for itself. It exists in the service of the crossing of others. And you, from being a bridge for so long, forgot that you are also a person, that you too have the right to a side, to a destination, to a life that is not only connecting the lives of others. The bridge has nowhere to go. And you, by becoming a bridge, slowly lost your own destination.
 
@@ -149,7 +149,7 @@ Becoming a destination means ceasing to live in the middle and beginning to live
 
 And I want you to see that being a destination is not closing yourself off, isolating yourself, ceasing to connect. It's the opposite: it's having, at last, a place from which to connect for real. Someone who has no side of her own cannot truly connect with anyone, because there is no center there from which the connection departs. Only someone who exists, with her own bank, can find another bank and build a true bridge, with two ends, and not a passage through which others simply cross. Having a destination of your own does not pull you away from people. It gives you, for the first time, a place from which to meet them as an equal, and not as a service.
 
-I know this frightens you. Because leaving the middle, ceasing to mediate, letting others understand each other, or not understand each other, without you, feels like risking everything. It feels like letting them drift apart. It feels like your fault, if the peace breaks.
+I know this makes the bridge tremble under you. Because leaving the middle, ceasing to mediate, letting others understand each other, or not understand each other, without you, feels like risking everything. It feels like letting them drift apart. It feels like your fault, if the peace breaks.
 
 But notice this freeing truth. The relationships of others are not your responsibility. Whether two adults speak or not, understand each other or not, draw closer or drift apart, is their business, not yours. You took on, as a child, a mission that wasn't yours, that of keeping others united, and you carry it still. But it isn't yours. Every relationship between two people belongs to those two people, and not to the bridge that connects them.
 
@@ -169,7 +169,7 @@ The awakening, when it comes, is a moment of strange lightness. It's the day you
 
 ## 6. Crossing over to my side
 
-There is a verb for this crossing. To cross over.
+There is a verb that turns a bridge into a traveler. To cross over.
 
 To cross over to your own side. To leave the middle, the bridge, the passage, and arrive, at last, at a bank that is yours. To stop living in the connection between others and begin to live in your own center, with ground, with a side, with a destination.
 
@@ -177,7 +177,7 @@ And I want to show you what it really is to leave the middle and set your feet o
 
 Crossing over to your side begins with something hard. Leaving the middle of conflicts that aren't yours. When two people around you fall out, not rushing to soothe things. When someone wants to put you in the middle, carrying messages, taking sides, translating, refusing, with love, that place. Saying, in words or in gestures, that this is between them, and that you are not the bridge.
 
-It's going to cost you. You're going to feel the old loyalty, the old fear that they'll drift apart, the old guilt of not keeping the peace. And you're going to want to return to the middle, to mediate, to unite, so that the anxiety will pass.
+It's going to cost you, like prying your own feet loose from stone. You're going to feel the old loyalty, the old fear that they'll drift apart, the old guilt of not keeping the peace. And you're going to want to return to the middle, to mediate, to unite, so that the anxiety will pass.
 
 But it's precisely there, in that staying outside the middle despite the anxiety, that you begin to cross over. Because each time you leave the middle, and the house doesn't break apart, you learn that you weren't the one holding it together. And each time you refuse to be a passage, you gain a little more of your own side.
 
@@ -187,9 +187,9 @@ And I want to warn you about something: at first, that question, what do I want,
 
 And I want to teach you to tolerate the tension of others without resolving it, because that's where a large part of your crossing lies. When there's a conflict around you, you're going to feel an almost unbearable pressure to intervene, to soothe, to unite. Learning to stay with that tension, to let it exist without rushing to resolve it, is a muscle that is trained. At first, the anxiety will be great, you'll feel that something terrible is going to happen if you don't do anything. But, if you stay, you'll discover, slowly, that the tension of others doesn't destroy you, that they resolve it, or not, without you, and that you can exist, whole, in the middle of the discomfort of not mediating. It's in that toleration of the tension of others that your freedom is born.
 
-I want to give you a sign to guide you by. Notice, over the course of a day, how much of your attention is on the relationships of others and how much is on your own life. How many times you busy yourself managing what's going on between people, and how many you busy yourself with what's going on with you. That ratio is the map of your erasing, and you can begin, slowly, to bring more attention to your own side, and less to the middle of others.
+I want to give you a marker, like a milestone set along the bridge. Notice, over the course of a day, how much of your attention is on the relationships of others and how much is on your own life. How many times you busy yourself managing what's going on between people, and how many you busy yourself with what's going on with you. That ratio is the map of your erasing, and you can begin, slowly, to bring more attention to your own side, and less to the middle of others.
 
-I won't give you a method. But I leave you the principle. Leave the middle. Leave the relationships of others to others. And use the energy you spent connecting the banks of others to build, at last, your own. Because you have the right to a side of your own. To a destination. To a place where you are you, and not the bridge through which the lives of everyone pass.
+I won't hand you a blueprint for the crossing. But I leave you the keystone of it. Leave the middle. Leave the relationships of others to others. And use the energy you spent connecting the banks of others to build, at last, your own. Because you have the right to a side of your own. To a destination. To a place where you are you, and not the bridge through which the lives of everyone pass.
 
 ## 7. Ceasing to be a bridge and staying connected
 
@@ -209,21 +209,21 @@ I want to show you what opens up when you stop being a bridge. There opens up th
 
 It's going to cost you, because the old voice, the one that tells you that without uniting others you have no place, is etched deep, and it will appear each time you leave the middle, with its anxiety of always. It will tell you that you're being selfish, leaving the others adrift, abandoning the peace it was your job to make. You won't silence it all at once, and that isn't what's asked of you, what's asked is that you stop running to the middle when it calls. To hear it say go back to the middle, and to answer it, slowly, this is between them, and I have my own side. And each time you stay outside the middle despite it, and the house doesn't break apart, you weaken the old voice, and strengthen a new one, more yours, that knows you have the right to exist without being anyone's passage.
 
-And I want to leave you something, about the ones who watch you, especially if you have children. Because this place is passed on, from generation to generation. If your children see you live in the middle, managing everyone's relationships, erasing yourself to keep the peace, they learn that this is how one loves, and they risk becoming, themselves too, the bridges who lose themselves. The most freeing thing you can teach those who watch you is not the example of the one who unites everyone at the cost of herself. It's that of a person who has a side of her own, who cares for her relationships without losing herself in those of others, who belongs without erasing herself. Sometimes a person crosses over to her side, at last, not only for herself, but to show those she loves that one can be connected without ceasing to exist.
+And I want to leave you something, about the ones who cross over you, especially if you have children. Because this place is passed on, from generation to generation. If your children see you live in the middle, managing everyone's relationships, erasing yourself to keep the peace, they learn that this is how one loves, and they risk becoming, themselves too, the bridges who lose themselves. The most freeing thing you can teach those who watch you is not the example of the one who unites everyone at the cost of herself. It's that of a person who has a side of her own, who cares for her relationships without losing herself in those of others, who belongs without erasing herself. Sometimes a person crosses over to her side, at last, not only for herself, but to show those she loves that one can be connected without ceasing to exist.
 
 And there also opens up a liberation for the others. Because as long as you're the bridge, you keep people dependent on you to connect, and you keep them, without meaning to, from building connections of their own. When you leave the middle, you let them connect directly, or not, and that, far from pushing them apart, gives them the responsibility for their own relationships, which was never yours to carry.
 
 I want you to see, as well, that crossing over to your side does not make you less sensitive, less good with others, less able to connect those who need to be connected. Your sensitivity stays there, intact. What changes is that it stops being a compulsive obligation, without a boundary, and becomes a choice. You'll be able, yes, to help unite, to mediate when it makes sense, to use your gift, but from a center of your own, and by choice, and not because you don't know how to exist any other way. The gift, put in the service of a life of your own, instead of replacing it, becomes a richness, and not a prison.
 
-There is a joy waiting on the other side. The joy of having a side of your own. Of being a destination, and not only a passage. Of having direct relationships, between two, in which you exist whole. Of using your enormous sensitivity, your gift for feeling others, in the service of your own life, and not only of the management of the lives of others. That joy is your right, and it is on the other side of the fear, on the day you cross over, at last, to your side.
+There is a joy waiting on the far bank, once you have crossed. The joy of having a side of your own. Of being a destination, and not only a passage. Of having direct relationships, between two, in which you exist whole. Of using your enormous sensitivity, your gift for feeling others, in the service of your own life, and not only of the management of the lives of others. That joy is your right, and it is on the other side of the fear, on the day you cross over, at last, to your side.
 
-And if there is a single thought you take from these pages, let it be this. You are not the connection between the lives of others. You are a life, whole, with a side of your own, with desires, with opinions, with a center where someone can want to arrive. The function of the bridge was a place you took up to survive and to belong, but it is not who you are. And discovering who you are, on the other side of the bridge, is not losing the connections, it's gaining, at last, the first connection that was always missing: the connection with yourself.
+And if a single stone is to remain when the rest of this bridge falls away, let it be this. You are not the connection between the lives of others. You are a life, whole, with a side of your own, with desires, with opinions, with a center where someone can want to arrive. The function of the bridge was a place you took up to survive and to belong, but it is not who you are. And discovering who you are, on the other side of the bridge, is not losing the connections, it's gaining, at last, the first connection that was always missing: the connection with yourself.
 
 ## 8. The crossing
 
 I wrote this book out of a simple conviction. Understanding changes things.
 
-It doesn't change everything all at once. It doesn't make you, tomorrow, leave a place you took up your whole life. But it changes enough for you to stop confusing your erasing with a gift, and your usefulness with belonging.
+It doesn't move the whole bridge in a single step. It doesn't make you, tomorrow, leave a place you took up your whole life. But it changes enough for you to stop confusing your erasing with a gift, and your usefulness with belonging.
 
 Now you know that you live in the middle, and that this is not only a virtue nor a gift, it's a place you took up early, in a house in tension, to keep everything united.
 
@@ -241,7 +241,7 @@ You know that you feel everything others feel, to the point of losing your bound
 
 And you know that ceasing to be a bridge is not losing the connections, it's being able, at last, to have your own, direct, between two, in which you are the destination and not the middle.
 
-I want to leave you with an image, and I want you to keep it.
+I want to leave you with an image carved in stone, and I want you to keep it.
 
 You are a bridge of stone, ancient, solid, patient, over a wide river. For years others have passed through you, from one bank to the other, and you bear the weight of all of them, loyal, firm, always in the middle. And you never arrived at either bank, because a bridge arrives nowhere, it is only the middle.
 
@@ -249,15 +249,15 @@ But you are not a bridge. You are a person, who learned to live as a bridge. And
 
 That is the crossing. Not ceasing to connect with people. But ceasing to live between them, and beginning to live on your own side. To cross over, at last, to the bank that was always yours, and where you never got to set foot.
 
-I want you to know what to expect from this crossing, so that you don't live it as one more thing to be done to perfection. It's going to be slow, and it's going to have setbacks. Days when you stay on your side, and days when you run back to the middle, to mediate, to soothe, as always. And the old loyalty will use each setback to tell you, you see, your place is to unite others. Don't believe it. The setbacks are part of it. No one leaves all at once a place they took up their whole life. It's left little by little, and each time you stay on your side and no one is lost, a new piece of proof remains, and it's from those proofs, added together, that the bank of your own, slowly, is built.
+I want you to know what to expect from this crossing, so that you don't live it as one more thing to be done to perfection. It's going to be slow, the way one crosses a long bridge against the wind, and it's going to have setbacks. Days when you stay on your side, and days when you run back to the middle, to mediate, to soothe, as always. And the old loyalty will use each setback to tell you, you see, your place is to unite others. Don't believe it. The steps back along the bridge belong to the crossing too. No one leaves all at once a place they took up their whole life. It's left little by little, and each time you stay on your side and no one is lost, a new piece of proof remains, and it's from those proofs, added together, that the bank of your own, slowly, is built.
 
-And I want to tell you one last thing, simple, to close. You were not made to be a passage. The child who placed herself in the middle to keep the house united did what she could, with an enormous love, to hold up what the adults didn't hold up. There is nothing to reproach in her. But she deserved to have had a side, a center, a place where she was herself and not the connection between others. And that side waits for you still, intact, on the other side of the bridge. You don't have to deserve it, nor to earn it by uniting anyone else. It's enough that you cross over, at last, to it.
+And I want to tell you one last thing, simple, to close. You were not made to be a passage. The child who placed herself in the middle to keep the house united did what she could, with an enormous love, to hold up what the adults didn't hold up. There is nothing to reproach in that small bridge of a child. But she deserved to have had a side, a center, a place where she was herself and not the connection between others. And that side waits for you still, intact, on the other side of the bridge. You don't have to deserve it, nor to earn it by uniting anyone else. It's enough that you cross over, at last, to it.
 
-You know, deep down, the sentence that holds up this book. I can stop being a bridge and stay connected. More than that: only by ceasing to be a bridge will I be able, at last, to connect for real.
+You know, deep down, the sentence that arches beneath this book like its keystone. I can stop being a bridge and stay connected. More than that: only by ceasing to be a bridge will I be able, at last, to connect for real.
 
-Crossing over was the first step. But there is a second, and that one isn't done by reading. It's done by leaving, slowly, the middle. By leaving the relationships of others to others. By building, day by day, your own side. And there is a deeper work, with people to accompany you, to inhabit a center that was never cultivated, because no one builds a side of their own from nothing, alone, from one day to the next.
+Crossing over was the first step onto the bank. But there is a second, further inland, and that one isn't done by reading. It's done by leaving, slowly, the middle. By leaving the relationships of others to others. By building, day by day, your own side. And there is a deeper work, with people to accompany you, to inhabit a center that was never cultivated, because no one builds a side of their own from nothing, alone, from one day to the next.
 
-And before you close these pages, I ask one thing of you only. A hard thing, for you.
+And before you close these pages, I ask of you a single step onto the bank. A hard thing, for a bridge.
 
 This week, when you feel the impulse to place yourself in the middle, to mediate, to soothe a tension that isn't yours, don't do it. Let the others understand each other, or not. And instead of spending that energy in their middle, turn it toward yourself. Ask yourself what you want, what you feel, what you desire, in that moment. Notice the anxiety of not uniting anyone, and stay with it, on your own side. Because it is in that staying outside the middle, on your own side, that you begin to cross over, and that you discover, at last, that there is, there, a bank that was always yours, waiting for you.
 
