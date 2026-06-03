@@ -29,7 +29,7 @@ Há uma diferença entre conquistar um lugar e sentir-se com direito a ele. Tu c
 
 Repara que esta é uma das maiores injustiças que vives: trabalhaste para chegar ali, mais do que muitos, talvez mais do que os que ocupam o lugar sem hesitar, e és precisamente tu quem não o desfruta. Os que menos mereceram, por vezes, ocupam o seu lugar com toda a tranquilidade, e tu, que tanto fizeste, ocupa-lo a tremer. Há algo de profundamente injusto nisto, e quero que o vejas, porque ver a injustiça é o princípio de a corrigires: não é certo que quem mais se esforçou seja quem menos se permite saborear a chegada.
 
-Este livro não é sobre carreira, nem sobre confiança profissional, nem sobre técnicas para te imporeres. Vim olhar para outra coisa, mais funda. Para a razão pela qual, tendo conquistado o teu lugar, não te sentes com direito a ele. Para a ferida, existencial e não profissional, que te faz pedir licença para ocupares o que já é teu.
+Este livro não é sobre carreira, nem sobre confiança profissional, nem sobre técnicas para te imporeres. Vim sentar-me ao lado da tua cadeira e olhar para o que se passa, mais fundo, debaixo dela. Para a razão pela qual, tendo conquistado o teu lugar, não te sentes com direito a ele. Para a ferida, existencial e não profissional, que te faz pedir licença para ocupares o que já é teu.
 
 E digo-te já para onde vai este livro, para que te possas sentar e ler sem ficar na pontinha da página. Não precisas de pedir autorização para ocupares o que já conquistaste. O lugar é teu, ganhaste-o, e tens direito a ocupá-lo por inteiro, sem pedir licença, sem te diminuíres, sem esperares que alguém te confirme que podes estar ali. E a sensação de impostura, que te encolhe, vem de uma ferida que vamos olhar, e que não se cura conquistando ainda mais.
 
@@ -37,7 +37,7 @@ Olha bem para a distância entre a mulher que se vê e a mulher que de facto est
 
 Este livro não te vem pedir que te tornes arrogante, que te gabes, que diminuas os outros para te elevares. Vem pedir-te o contrário da arrogância e o contrário do apagamento: que te coloques no teu lugar justo, nem acima nem abaixo do que és. Reconheceres o teu valor real não é vaidade, é verdade. E ocupares o teu lugar por inteiro não te torna numa pessoa que não queres ser. Torna-te, enfim, na mulher inteira que conquistou aquele lugar e que merece habitá-lo em paz.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos pequenos gestos com que ocupas a tua cadeira.
 
 Em sentires que não mereces o teu cargo, a tua posição, o teu reconhecimento, mesmo tendo-os conquistado com o teu próprio esforço.
 
@@ -73,11 +73,11 @@ Talvez sejas a primeira, na tua família, a chegar onde chegaste. A primeira a e
 
 Mas repara: ser a primeira não é prova de que não pertences. É prova do contrário, de que tiveste de ser mais, de fazer mais, de abrir um caminho que ninguém te tinha aberto. Não chegaste ali por sorte nem por engano, chegaste porque rompeste um teto que outros, antes de ti, nem chegaram a tocar. A tua estranheza naquele mundo não diz que não mereces estar nele. Diz que foste pioneira, e os pioneiros sentem-se sempre estranhos, porque pisam terreno onde ninguém da sua origem pisou. Isso não é impostura. É coragem, e merece ser reconhecida como tal, sobretudo por ti.
 
-Repara no que isto te faz. Conquistas o lugar, mas não o habitas. Tens o cargo, mas sentes-te de fora. E vives com uma sensação de impostura, de que vão descobrir que não devias estar ali, que faz com que ocupes a tua posição a medo, a pedir licença, em vez de a ocupares com o direito de quem a ganhou.
+Repara no que esta ferida faz à tua cadeira. Conquistas o lugar, mas não o habitas. Tens o cargo, mas sentes-te de fora. E vives com uma sensação de impostura, de que vão descobrir que não devias estar ali, que faz com que ocupes a tua posição a medo, a pedir licença, em vez de a ocupares com o direito de quem a ganhou.
 
 Talvez tenhas crescido numa casa onde o teu valor só era reconhecido quando vinha acompanhado de modéstia, e onde mostrar orgulho no que fazias era visto como vaidade, presunção, defeito. Onde te ensinaram que era feio gabar-se, que era preciso esperar que os outros reconhecessem, nunca reclamar. E aprendeste a esconder o teu valor até de ti, a desvalorizá-lo por reflexo, a temer que reconhecê-lo fosse tornares-te numa pessoa que não devias ser. E levaste essa lição para o trabalho, onde continuas a não te poder dar o crédito que mereces, porque dá-lo te parece uma transgressão.
 
-Quero que vejas isto sem culpa. A tua falta de legitimidade não é falta de mérito, nem falsa modéstia. É uma ferida antiga, a de quem aprendeu, algures, que não tinha direito a ocupar certos lugares, e que carrega essa mensagem mesmo depois de os ter conquistado. Não és impostora. És alguém a quem ensinaram a duvidar do seu direito a estar, e que ganhou o lugar mas não a permissão interior de o ocupar.
+Quero que olhes para esta cadeira sem culpa. A tua falta de legitimidade não é falta de mérito, nem falsa modéstia. É uma ferida antiga, a de quem aprendeu, algures, que não tinha direito a ocupar certos lugares, e que carrega essa mensagem mesmo depois de os ter conquistado. Não és impostora. És alguém a quem ensinaram a duvidar do seu direito a estar, e que ganhou o lugar mas não a permissão interior de o ocupar.
 
 E repara onde mora, de verdade, esta recusa de te sentares, porque é aí que ela se trata. Esta dúvida não está só na tua cabeça, no que pensas sobre ti. Está mais funda, numa sensação que não obedece à razão. Tu sabes, racionalmente, que conquistaste o teu lugar, que és competente, que mereces. E mesmo assim não sentes. Porque a legitimidade não se decide com argumentos, sente-se, ou não se sente, e a tua, marcada por um tempo em que o teu direito a estar foi negado, não se sente, por mais que a tua razão a confirme. É por isso que não basta listares os teus méritos para te sentires legítima: a ferida não está na lista, está num lugar mais antigo do que as palavras, e cura-se devagar, com experiência e, muitas vezes, com ajuda.
 
@@ -107,23 +107,23 @@ Custa-te, também, a alegria do que conquistaste. Houve marcos na tua vida, conq
 
 E repara que a impostora não vive só nos teus pensamentos, vive no teu corpo, na forma como te sentas. Repara, numa reunião, na pose que fazes sem pensar. Os ombros que se fecham para dentro. As mãos que se juntam no colo, como quem pede desculpa por ocupar espaço. A voz que sobe no fim das frases, transformando uma afirmação tua num pedido de aprovação. O assento que ocupas só até meio, o corpo inclinado para a saída, como quem está de passagem e não de direito. O teu corpo conta, sem que dês por isso, a mesma história que a impostora te conta por dentro: não pertences aqui, prepara-te para sair. E o mais cruel é que os outros leem essa história no teu corpo antes de leres a tua competência no teu trabalho, e tratam-te, sem maldade, pela mulher de passagem que a tua postura anuncia, e não pela profissional que de facto és.
 
-Quero que sintas o peso disto. O peso de viver como impostora, num lugar que conquistaste. De nunca desfrutar do que ganhaste, por sentires que não o mereces. De viver com o medo de ser descoberta, quando não há nada a descobrir. É uma exaustão funda, e talvez já a tomes por humildade, quando é, no fundo, uma ferida que te impede de ocupar, em paz, o que é teu. E mereces, depois de tanto trabalho, deixar de a carregar.
+Quero que sintas o peso que esta impostora deita sobre os teus ombros. O peso de viver como impostora, num lugar que conquistaste. De nunca desfrutar do que ganhaste, por sentires que não o mereces. De viver com o medo de ser descoberta, quando não há nada a descobrir. É uma exaustão funda, e talvez já a tomes por humildade, quando é, no fundo, uma ferida que te impede de ocupar, em paz, o que é teu. E mereces, depois de tanto trabalho, deixar de a carregar.
 
 ## 4. Quem sou eu se ocupar o meu lugar
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar uma pergunta em cima da tua cadeira. Sozinha. Não fujas dela.
 
 Quem serias tu se ocupasses, por inteiro, o teu lugar? Se te sentasses na tua cadeira com o direito de quem a conquistou? Se deixasses de pedir licença para estar onde já estás?
 
-Fica com ela. Repara no que ela mexe. Talvez uma vertigem, talvez um receio.
+Fica com ela. Repara no que ela move por baixo do assento. Talvez uma vertigem, talvez um receio.
 
 Para ti, esta pergunta mexe num medo que vive mesmo por baixo da cadeira. Porque ocupar o teu lugar por inteiro, sem te diminuíres, sem pedir licença, parece-te presunção, arrogância, exposição. Como se reclamar o teu lugar fosse arriscar ser apanhada na fraude, ser olhada como quem se acha demais, ser punida por ousar ocupar o que sentes não merecer.
 
 E a sombra que aqui se esconde é o medo de te assumires plenamente. De ocupares o teu lugar com direito, de reconheceres o teu valor, de te afirmares sem pedir licença. Porque isso confronta-te com a impostura que temes, e com o medo de, ao ocupares o lugar, seres exposta, julgada, mandada embora.
 
-Repara como isto te aprisiona. Não ocupas o teu lugar, mesmo tendo-o conquistado, porque ocupá-lo desperta o medo da impostura. Diminuis-te, pedes licença, ficas na pontinha da cadeira, não porque não mereças, mas porque te falta a permissão interior de ocupar o que é teu. E vives, assim, sempre aquém do teu lugar, sempre a pedir autorização para estar onde já tens direito a estar.
+Repara como isto te prende à pontinha da cadeira. Não ocupas o teu lugar, mesmo tendo-o conquistado, porque ocupá-lo desperta o medo da impostura. Diminuis-te, pedes licença, ficas na pontinha da cadeira, não porque não mereças, mas porque te falta a permissão interior de ocupar o que é teu. E vives, assim, sempre aquém do teu lugar, sempre a pedir autorização para estar onde já tens direito a estar.
 
-E há uma fragilidade enorme nisto. Porque uma pessoa que não ocupa o seu lugar, que se diminui, que pede licença, é tratada, muitas vezes, como quem não merece o lugar. O mundo, em parte, trata-nos pela forma como nos colocamos. Quem ocupa o seu lugar com direito é respeitada nele. Quem o ocupa a pedir licença convida, sem querer, a ser questionada. A tua falta de direito interior torna-se, por vezes, uma falta de reconhecimento exterior, num círculo que confirma a impostura que sentes.
+E sentar-se a medo deixa-te numa fragilidade enorme. Porque uma pessoa que não ocupa o seu lugar, que se diminui, que pede licença, é tratada, muitas vezes, como quem não merece o lugar. O mundo, em parte, trata-nos pela forma como nos colocamos. Quem ocupa o seu lugar com direito é respeitada nele. Quem o ocupa a pedir licença convida, sem querer, a ser questionada. A tua falta de direito interior torna-se, por vezes, uma falta de reconhecimento exterior, num círculo que confirma a impostura que sentes.
 
 Repara neste círculo, porque é importante quebrá-lo. Tu diminuis-te porque te sentes impostora. Os outros, vendo-te diminuída, tratam-te como menos. Esse tratamento confirma-te a impostura, e diminuis-te ainda mais. É uma profecia que se cumpre a si própria: a tua dúvida produz, no mundo, exatamente os sinais que depois usas como prova da dúvida. E a única forma de quebrar o círculo é entrares nele por outro ponto: ocupares o teu lugar apesar da dúvida, e descobrires que, quando te colocas com direito, os outros te tratam com o respeito que a tua postura, agora, convida. Não é manipulação. É deixares o teu valor real aparecer, em vez de o esconderes atrás de um pedido de desculpas.
 
@@ -133,7 +133,7 @@ Há algo neste medo que se desfaz mal o nomeias. Sentares-te por inteiro na tua 
 
 E quero que vejas a ironia da impostora, que talvez te alivie. As pessoas que mais sofrem de se sentir impostoras são, quase sempre, as mais competentes e as mais exigentes consigo. As verdadeiras fraudes, as que de facto não merecem o lugar, raramente duvidam de si, ocupam-no sem hesitar, convictas do seu valor inflado. O facto de duvidares tanto, de teres tanto medo de não mereceres, é, paradoxalmente, sinal de que mereces: porque só quem leva a sério o seu trabalho, quem tem padrões altos, quem se importa de verdade, é que se questiona assim. A tua dúvida não prova que és impostora. Prova exatamente o contrário.
 
-Não respondas já à pergunta de quem serias se ocupasses o teu lugar. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que te sentires com direito ao lugar que conquistaste, deixas de o ter de ocupar a pedir licença. E aí, só aí, podes sentar-te, enfim, na tua cadeira, por inteiro.
+Não respondas já à pergunta de quem serias se ocupasses o teu lugar. Mas deixa-a aberta. Porque é nessa pergunta que está o caminho de volta à tua cadeira. No dia em que te sentires com direito ao lugar que conquistaste, deixas de o ter de ocupar a pedir licença. E aí, só aí, podes sentar-te, enfim, na tua cadeira, por inteiro.
 
 ## 5. Quando a dúvida se torna sofrimento
 
@@ -175,7 +175,7 @@ Quero dar-te um gesto concreto, pequeno, para começares. Da próxima vez que te
 
 E quero que distingas duas coisas que andam, na tua cabeça, confundidas. Uma é a cadeira que te deram. A outra é a cadeira que te dás. A primeira já a tens, alguém te a ofereceu, com o cargo, o contrato, o título na porta. Mas há mulheres que recebem a cadeira de fora e nunca chegam a recebê-la por dentro, e por isso vivem sentadas num lugar que, na verdade, ainda não aceitaram. A segunda cadeira, a que te dás a ti, é a que falta. É a permissão interior, a que não vem em nenhum contrato, a que nenhuma promoção traz, e que só tu podes assinar. E enquanto te limitares a ocupar a cadeira que te deram sem te dares a cadeira que é só tua, vais sentir-te sempre de empréstimo, hóspede num lugar que, no papel, já é teu há anos. A travessia deste livro é, no fundo, deixar de esperar que alguém te traga a segunda cadeira, e percebes, devagar, que ela esteve sempre nas tuas mãos.
 
-Quero falar-te do verbo desta travessia. Ocupar. Ocupar a tua cadeira por inteiro. Sentares-te nela com o direito de quem a conquistou. Dares a tua opinião com a firmeza de quem pertence. Reclamares o que mereces sem pedir licença. Reconheceres os teus sucessos como teus, fruto do teu mérito, e não da sorte. Ocupares o teu lugar, enfim, como teu.
+Quero falar-te do verbo que dá nome a sentar-se inteira. Ocupar. Ocupar a tua cadeira por inteiro. Sentares-te nela com o direito de quem a conquistou. Dares a tua opinião com a firmeza de quem pertence. Reclamares o que mereces sem pedir licença. Reconheceres os teus sucessos como teus, fruto do teu mérito, e não da sorte. Ocupares o teu lugar, enfim, como teu.
 
 Vai custar-te. Vais sentir, a cada vez que ocupas mais o teu lugar, a velha impostora, o medo de seres descoberta, a sensação de presunção, a vontade de te diminuíres de novo. E vais querer voltar à pontinha da cadeira, ao pedir licença, à segurança de não te expores.
 
@@ -189,7 +189,7 @@ O despertar, quando vem, é uma sensação nova de pertença. É o dia em que te
 
 ## 7. Ocupar o que conquistei
 
-Há um destino para esta travessia. Ocupares, por inteiro, o que conquistaste.
+Esta cadeira tem um destino, e é simples. Ocupares, por inteiro, o que conquistaste.
 
 E quero mostrar-te, em gestos, o que é estar de facto sentada na tua cadeira.
 
@@ -203,7 +203,7 @@ E é reclamares o que é justo sem culpa. Uma remuneração à altura do que dá
 
 Quero desfazer um receio, porque ele vai aparecer. O receio de que, ao ocupares o teu lugar, te tornes arrogante, presunçosa, daquelas que se acham demais. Há uma distância enorme entre ocupar o teu lugar e ser arrogante. A arrogância é achar-se mais do que se é, ocupar um lugar que não se merece, diminuir os outros para se elevar. Ocupar o teu lugar é simplesmente tomares o que é teu, sem te diminuíres nem diminuíres ninguém. Não é achares-te superior. É deixares de te achares inferior. E isso, longe de arrogância, é apenas justiça contigo.
 
-E há uma libertação enorme nisto. Quando ocupas o teu lugar por inteiro, deixas de gastar energia a esconder uma fraude que não existe, a provar um valor que já tens, a justificar uma presença que já é legítima. Essa energia, libertada, fica disponível para o que importa: para o teu trabalho, para a tua vida, para desfrutares, enfim, do que conquistaste. Ocupar o teu lugar não te esgota. Liberta-te do esgotamento de o pedires emprestado.
+E sentar-te de vez na tua cadeira traz uma libertação enorme. Quando ocupas o teu lugar por inteiro, deixas de gastar energia a esconder uma fraude que não existe, a provar um valor que já tens, a justificar uma presença que já é legítima. Essa energia, libertada, fica disponível para o que importa: para o teu trabalho, para a tua vida, para desfrutares, enfim, do que conquistaste. Ocupar o teu lugar não te esgota. Liberta-te do esgotamento de o pedires emprestado.
 
 Quero que vejas, também, que ocupar o teu lugar é, paradoxalmente, um serviço aos outros, e não só a ti. Quando te diminuis, quando escondes o teu valor, quando pedes licença para estar, privas os outros do que tens para dar. As tuas ideias ficam por dizer, a tua experiência por partilhar, a tua liderança por exercer. E quem perde com isso não és só tu, são as equipas, os projetos, as pessoas que beneficiariam do teu contributo pleno. Quando te recusas a ocupar a cadeira, não és só tu que ficas de fora, é tudo o que tinhas para trazer à mesa e que, por medo, deixas por trazer. O mundo não precisa de mais uma mulher encolhida no canto da cadeira. Precisa, precisamente, do que tu calas para não pareceres demais.
 
@@ -217,7 +217,7 @@ Não te vou dar um método, porque este livro não é sobre técnicas de afirma�
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, sentires-te plenamente legítima num lugar que sempre ocupaste a medo. Mas muda o suficiente para deixares de confundir a tua ferida com humildade, e a tua impostura com uma verdade.
+Não te senta na cadeira toda de uma só vez. Não te faz, amanhã, sentires-te plenamente legítima num lugar que sempre ocupaste a medo. Mas muda o suficiente para deixares de confundir a tua ferida com humildade, e a tua impostura com uma verdade.
 
 Agora sabes que conquistaste o lugar mas não o ocupas, e que isso não é falta de competência, é uma ferida antiga vestida de humildade.
 
@@ -243,7 +243,7 @@ Antes de te levantares desta leitura, fica com uma coisa simples. Tu mereces o t
 
 Há uma frase que é o encosto desta cadeira inteira, e tu já a sabes. Não preciso de pedir licença para ocupar o que já conquistei. A cadeira é minha, ganhei-a, e tenho direito a sentar-me nela por inteiro.
 
-Compreender foi o primeiro passo. O segundo não se lê, faz-se com o corpo. Faz-se a sentares-te, devagar, na tua cadeira. A ocupares o teu lugar, sem te diminuíres, sem pedir licença. E há um trabalho mais fundo, com quem te acompanhe, para desfazer a impostora e reconstruir o teu sentido de legitimidade, porque ele vem de longe, e raramente se reconstrói sozinha.
+Compreender foi sentares-te na pontinha da cadeira. O segundo passo não se lê, faz-se com o corpo. Faz-se a sentares-te, devagar, na tua cadeira. A ocupares o teu lugar, sem te diminuíres, sem pedir licença. E há um trabalho mais fundo, com quem te acompanhe, para desfazer a impostora e reconstruir o teu sentido de legitimidade, porque ele vem de longe, e raramente se reconstrói sozinha.
 
 E se uma só certeza ficar contigo quando fechares o livro, que seja esta. A cadeira é tua. Não emprestada, não por engano, não à espera de ser reclamada por alguém mais legítimo. Tua, conquistada, merecida. E a única pessoa no mundo que ainda precisa de ser convencida disso és tu. Os outros já sabem, por isso te deram o lugar, por isso contam contigo, por isso te tratam como a profissional que és. Falta só convenceres-te a ti, e esse é o trabalho mais importante, e mais justo, que podes fazer: dares-te, enfim, a permissão de ocupares, em paz, aquilo que sempre foi teu.
 

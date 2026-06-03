@@ -13,7 +13,7 @@
 
 ## 1. Faço tudo sozinha
 
-Repara numa coisa, com honestidade. Tu não pedes.
+Olha para a tua mão, com honestidade. Ela nunca se estende. Tu não pedes.
 
 Não pedes ajuda. Não pedes apoio. Não pedes que alguém te dê uma mão, te alivie, te segure. Fazes tudo sozinha, custe o que custar, mesmo quando estás a afundar-te, mesmo quando há quem te ajudasse de bom grado, se tu pedisses.
 
@@ -27,7 +27,7 @@ Quero dizer-te já, antes de tudo, que isto não é orgulho, nem teimosia, nem i
 
 Aprendeste que pedir não é seguro. Que quando pediste, em criança, não valeu a pena. Ninguém veio, ou veio tarde, ou veio a cobrar. E tiraste daí uma conclusão de sobrevivência: não vou pedir mais, vou fazer tudo sozinha, porque contar com alguém só traz desilusão, ou dor.
 
-Este livro é diferente. Porque o silêncio em que carregas tudo sozinha não é um vício de método que se desfaça com um conselho. É uma resposta a algo que viveste. Uma adaptação a um tempo em que pedir, de facto, não te trouxe o que precisavas. E isso merece mais do que compreensão. Por isso, página após página, vou repetir-te uma coisa que custa a ouvir a quem sempre se bastou: entenderes o teu travão talvez não chegue, e talvez precises de uma mão preparada para o desarmar contigo.
+Este livro é diferente. Porque o silêncio em que carregas tudo sozinha não é um vício de método que se desfaça com um conselho. É uma resposta a algo que viveste. Uma adaptação a um tempo em que pedir, de facto, não te trouxe o que precisavas. E uma garganta que aprendeu a fechar-se a cada pedido merece mais do que ser compreendida. Por isso, página após página, vou repetir-te uma coisa que custa a ouvir a quem sempre se bastou: entenderes o teu travão talvez não chegue, e talvez precises de uma mão preparada para o desarmar contigo.
 
 Deixo-te, antes do mais, a margem por onde quero que leias, para que leias sem aperto. Precisar não te diminui. E podes pedir antes de estares desesperada, em vez de esperares pelo extremo. O que te ensinou a nunca pedir foi uma ferida real, e essa ferida pode, devagar, e talvez com ajuda, começar a sarar.
 
@@ -35,7 +35,7 @@ Repara, desde já, na distância entre a mulher que os outros aplaudem e a mulhe
 
 Este livro não te vem dizer que a tua força é falsa, nem que tens de te tornar dependente, frágil, pendurada nos outros. Vem dizer-te que a tua força ficaria maior, e não menor, se lhe acrescentasses a capacidade de pedir. Que uma mulher que sabe fazer sozinha e sabe apoiar-se é mais inteira do que uma que só sabe a primeira metade. E que tu mereces essa inteireza, depois de uma vida a carregar, sozinha, o que ninguém devia carregar só.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos gestos miúdos de quem nunca estende a mão.
 
 Em carregares pesos enormes sozinha, sem dizeres a ninguém, enquanto garantes a todos que está tudo bem.
 
@@ -75,7 +75,7 @@ E essa menina fez a única coisa que a podia salvar. Tornou-se autossuficiente. 
 
 Mas o travão que te poupou da desilusão em criança não se soltou quando cresceste. Ficou. E hoje, em adulta, num mundo onde talvez houvesse quem te ajudasse de verdade, continuas a não pedir, defendida de uma desilusão antiga, e privada de um apoio presente que nunca te deixas receber.
 
-Quero que vejas isto com clareza. A tua incapacidade de pedir não é um defeito. É a manobra mais sensata que uma criança encontrou para não voltar a estender a mão a quem não a segurava. Não és orgulhosa. És uma sobrevivente, que aprendeu a não contar com ninguém porque, quando contou, foi deixada cair. E reconhecer isto não é guardar mágoa. É honrar a criança que aprendeu a bastar-se a si para não voltar a ser desiludida.
+Quero que olhes para a tua mão fechada sem dureza. A tua incapacidade de pedir não é um defeito. É a manobra mais sensata que uma criança encontrou para não voltar a estender a mão a quem não a segurava. Não és orgulhosa. És uma sobrevivente, que aprendeu a não contar com ninguém porque, quando contou, foi deixada cair. E reconhecer isto não é guardar mágoa. É honrar a criança que aprendeu a bastar-se a si para não voltar a ser desiludida.
 
 Quero acrescentar uma raiz que talvez reconheças, porque é das mais comuns em quem não sabe pedir. A de teres sido, em criança, a forte da casa. A que tratava de tudo, a que resolvia, a que cuidava dos outros, talvez dos próprios pais, dos irmãos mais pequenos, quando os adultos não davam conta. Cresceste no papel de quem ampara, não de quem é amparada. E aprendeste, cedo, que a tua função era dar, não receber, que precisar não era um direito teu, porque havia sempre alguém a precisar mais, e tu eras a que segurava, não a que era segurada.
 
@@ -93,7 +93,7 @@ Repara na diferença. Uma pessoa com força interior pode fazer sozinha quando f
 
 A tua independência tornou-se uma armadura contra a desilusão. Enquanto não pedes, não podes ser deixada cair. Enquanto não precisas de ninguém, não podes ser desiludida por ninguém. Enquanto fazes tudo sozinha, não te expões à dor de pedir e não receber. A autossuficiência protege-te dessa dor, mas ao preço de te manteres sempre só.
 
-E há um custo enorme nisto. Custa-te o corpo, que carrega sozinho pesos que deviam ser partilhados, até à exaustão. Custa-te a saúde, porque ninguém aguenta tudo sozinho indefinidamente, e tu tentas. Custa-te a intimidade, porque a proximidade verdadeira nasce de nos deixarmos precisar uns dos outros, e tu nunca te deixas precisar de ninguém.
+E esta armadura cobra-te um preço enorme, pago em silêncio. Custa-te o corpo, que carrega sozinho pesos que deviam ser partilhados, até à exaustão. Custa-te a saúde, porque ninguém aguenta tudo sozinho indefinidamente, e tu tentas. Custa-te a intimidade, porque a proximidade verdadeira nasce de nos deixarmos precisar uns dos outros, e tu nunca te deixas precisar de ninguém.
 
 Quero que vejas a diferença entre a independência sã e a tua. A independência sã é uma capacidade a mais: sei fazer por mim, e também sei pedir, e escolho conforme faz sentido. A tua é uma capacidade a menos: só sei fazer por mim, pedir não está disponível, e por isso faço tudo sozinha mesmo quando me destrói. A primeira é liberdade, porque tem as duas portas. A segunda é uma porta trancada, ainda que se vista de força. E o trabalho desta travessia não é tirar-te a independência, que é real e é tua. É destrancar a outra porta, a de pedir, para que a tua força deixe de ser uma prisão e passe a ser uma escolha.
 
@@ -115,11 +115,11 @@ Custa-te a intimidade. Porque a proximidade verdadeira não nasce só de dar. Na
 
 Custa-te a possibilidade de seres cuidada. Há um cuidado que só chega a quem se deixa precisar, e tu fechas-te a ele. As pessoas que te amam gostariam de te dar, de te aliviar, de fazer por ti o que tu fazes por toda a gente. E não as deixas. Recusas, resolves sozinha, dispensas. E assim privas-te de uma das coisas mais doces da vida, a de ser amparada por quem te quer bem, e privas quem te ama da alegria de o poder fazer.
 
-Quero que sintas o peso disto. O peso de carregar tudo sozinha, sempre. De nunca poder pousar nas mãos de ninguém. De enfrentar, sozinha, o que ninguém devia enfrentar só. É um cansaço de uma vida inteira a bastar-se a si, e talvez já o tomes por força, quando é, no fundo, a solidão de quem aprendeu que pedir não era seguro.
+Quero que sintas, nos ombros, o que isto pesa. O peso de carregar tudo sozinha, sempre. De nunca poder pousar nas mãos de ninguém. De enfrentar, sozinha, o que ninguém devia enfrentar só. É um cansaço de uma vida inteira a bastar-se a si, e talvez já o tomes por força, quando é, no fundo, a solidão de quem aprendeu que pedir não era seguro.
 
 ## 4. Quem sou eu quando preciso de alguém
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou estender-te aqui uma pergunta, como quem te estende uma mão. Sozinha. Não fujas dela.
 
 Quem és tu quando precisas de alguém? Quando não dás conta sozinha? Quando tens de pedir, de te apoiar, de depender, por um momento, de outro?
 
@@ -129,7 +129,7 @@ Para ti, esta pergunta mexe num medo que mora bem fundo, porque te tira a única
 
 E a sombra que aqui se esconde é a dependência. O lugar de quem precisa de outro, e que por isso fica vulnerável, exposto, à mercê de o outro vir ou não vir. Esse lugar aterroriza-te, porque foi nele que foste, um dia, deixada cair. E preferes não precisar de ninguém a voltar a esse lugar onde a desilusão te marcou.
 
-Repara como isto te aprisiona. Não consegues pedir, mesmo a afundar-te, porque pedir te devolve ao lugar vulnerável de quem depende. Não consegues apoiar-te, mesmo exausta, porque apoiar-te parece arriscar a queda. Vives a carregar tudo sozinha, a um custo enorme, porque o terror de precisar é maior do que o próprio peso que carregas.
+Repara como esta armadura te tranca por dentro. Não consegues pedir, mesmo a afundar-te, porque pedir te devolve ao lugar vulnerável de quem depende. Não consegues apoiar-te, mesmo exausta, porque apoiar-te parece arriscar a queda. Vives a carregar tudo sozinha, a um custo enorme, porque o terror de precisar é maior do que o próprio peso que carregas.
 
 E há uma crueldade escondida neste teu nunca pedir, que talvez nunca tenhas visto de frente. Aquilo que o teu passado te fez, fazes-lo agora a ti. Naquele tempo, foste deixada à tua conta, sem ninguém a quem pedir, obrigada a bastar-te sozinha. E hoje, em adulta, continuas a deixar-te à tua conta, a recusar-te a ti mesma o amparo que talvez já existisse, a obrigar-te a fazer tudo sozinha como se ainda não houvesse ninguém. O abandono que sofreste tornou-se um abandono que praticas, contra ti. E parar de o praticar, deixares-te, enfim, ser amparada, é talvez o gesto mais reparador desta travessia: o de deixares de continuar, sozinha, o abandono que outros começaram.
 
@@ -141,13 +141,13 @@ E repara como esta crença te torna estranhamente frágil, apesar de toda a tua 
 
 Uma pessoa que sabe pedir constrói, ao longo da vida, uma rede. Pessoas a quem se habituou a recorrer, e que se habituaram a estar lá. E quando a vida aperta, essa rede segura-a. Tu não a construíste, porque nunca pediste, e por isso, na hora do aperto, encontras-te suspensa no vazio, a cair sozinha, não porque ninguém te amparasse, mas porque nunca deixaste ninguém aprender a fazê-lo. A independência que te parecia uma fortaleza revela-se, na hora difícil, uma solidão sem fundo.
 
-Não respondas já a quem és quando precisas de alguém. Uma pergunta destas não se resolve a pensar, e desfazer o que ela mexe pede, muitas vezes, mais do que estas páginas te podem dar. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que precisar, hoje, com as pessoas certas, é seguro, deixas de te ter de bastar a ti sozinha. E aí, só aí, podes começar a apoiar-te.
+Não respondas já a quem és quando precisas de alguém. Uma pergunta destas não se resolve a pensar, e desfazer o que ela mexe pede, muitas vezes, mais do que estas páginas te podem dar. Mas deixa-a aberta. Porque é por ela que se destranca a porta que sempre manténs fechada. No dia em que o teu corpo aprender que precisar, hoje, com as pessoas certas, é seguro, deixas de te ter de bastar a ti sozinha. E aí, só aí, podes começar a apoiar-te.
 
 ## 5. Talvez precises de mais do que compreender
 
-Tenho de parar o livro aqui. Com toda a seriedade. Porque aquilo que te fecha a garganta na hora de pedir raramente é só um feitio reservado ou um gosto de fazer à tua maneira. É uma resposta a algo que viveste, e isso muda o que precisas.
+Aqui preciso de pousar o livro e falar-te de mão estendida. Com toda a seriedade. Porque aquilo que te fecha a garganta na hora de pedir raramente é só um feitio reservado ou um gosto de fazer à tua maneira. É uma resposta a algo que viveste, e isso muda o que precisas.
 
-Se aprendeste a não pedir porque, quando pediste, foste deixada cair, ignorada, ou ferida, então a tua autossuficiência não é só um hábito. É uma resposta de trauma. Uma adaptação à dor de teres precisado e não teres sido atendida. E uma resposta de trauma não se desfaz só por se compreender. Mora no aperto que te sobe à garganta antes de qualquer palavra de pedido, num sistema nervoso que aprendeu a tratar a mão estendida como uma porta para a desilusão.
+Se aprendeste a não pedir porque, quando pediste, foste deixada cair, ignorada, ou ferida, então a tua autossuficiência não é só um hábito. É a cicatriz de um trauma. Uma adaptação à dor de teres precisado e não teres sido atendida. E uma resposta de trauma não se desfaz só por se compreender. Mora no aperto que te sobe à garganta antes de qualquer palavra de pedido, num sistema nervoso que aprendeu a tratar a mão estendida como uma porta para a desilusão.
 
 Quero dizer-te, sem rodeios, o que pode estar por baixo deste teu fazer tudo sozinha. Se houve, na tua história, negligência, abandono, uma infância em que tiveste de cuidar de ti porque ninguém cuidava, ou relações em que pedir te custou caro, então a tua dificuldade de pedir é uma ferida séria, e merece ser cuidada com apoio.
 
@@ -159,7 +159,7 @@ Repara na ironia, e deixa que ela te ajude. Tu, que mais resistes a pedir, és p
 
 E quero tirar-te da frente um receio que, em ti mais do que em ninguém, costuma travar este passo. Não é exagero procurar ajuda só porque não consegues pedir. Não tens de estar em colapso para mereceres apoio. Essa é, aliás, a própria lógica da tua ferida a falar, a dizer-te que só no extremo se justifica precisar. Procurar acompanhamento porque reconheces, em ti, uma dificuldade funda de pedir, de te apoiar, de te deixares amparar, é exatamente o tipo de cuidado precoce, antes do desespero, que este livro te convida a aprender. Seria, ele próprio, um primeiro pedido feito a tempo, e não no extremo. E talvez seja o mais importante que algum dia faças.
 
-Há aqui duas coisas que preciso de separar para ti, porque delas depende o que vais procurar. Uma dificuldade de feitio cede à compreensão: vês que sempre foste reservada, percebes de onde isso vem, e isso, com o tempo, solta um pouco o nó. Uma resposta de trauma não cede assim. Não está só nas ideias que tens sobre pedir, está no reflexo de recusa que dispara antes de pensares, no corpo que se arma de armadura à mínima hipótese de precisar de alguém. E essa não se resolve a entender. Pede tempo, pede corpo, pede uma relação segura onde o sistema nervoso reaprenda, devagar, que estender a mão já não é o perigo que foi. Isso, sozinha, raramente se alcança. Faz-se com acompanhamento.
+Há aqui duas coisas que preciso de separar para ti, porque delas depende o que vais procurar. Uma dificuldade de feitio cede à compreensão: vês que sempre foste reservada, percebes de onde isso vem, e isso, com o tempo, solta um pouco o nó. Uma resposta de trauma não cede assim. Não está só nas ideias que tens sobre pedir, está no reflexo de recusa que dispara antes de pensares, no corpo que se arma de armadura à mínima hipótese de precisar de alguém. E essa não se resolve a entender. Pede tempo, pede corpo, pede uma relação segura onde o sistema nervoso reaprenda, devagar, que estender a mão já não é o perigo que foi. E uma garganta que se fecha sozinha raramente se reabre sozinha. Faz-se com acompanhamento.
 
 E isto digo-to com toda a firmeza e todo o carinho de que sou capaz, porque sei o quanto custa a quem nunca pediu. Se a tua dificuldade de pedir vem de negligência, de abandono, de uma infância em que precisaste e não foste atendida, isto não é falha tua, e não se resolve só a esforço. Mereces o apoio de alguém preparado para trabalhar não só a tua compreensão, mas o teu corpo, a tua desconfiança, a memória antiga de teres pedido e não ter vindo ninguém. E procurar esse apoio não é mais um fardo que te pões. É o cuidado que essa ferida, há tanto, pede.
 
@@ -195,7 +195,7 @@ A viragem, quando chega, sente-se quase como um choque no corpo. É a vez em que
 
 ## 7. Apoiar-me sem perder a força
 
-Há um destino para esta travessia. Aprenderes a apoiar-te, sem perderes a tua força.
+Esta travessia tem uma margem do outro lado. Aprenderes a apoiar-te, sem perderes a tua força.
 
 E quero desfazer um medo, porque ele vai aparecer. O medo de que, se começares a pedir, a apoiar-te, a precisar, percas a força que te define, te tornes dependente, fraca, à mercê.
 
@@ -223,7 +223,7 @@ Não te deixo uma receita, e desaprender a fazer tudo sozinha faz-se, muitas vez
 
 Escrevi este livro por uma convicção simples. Compreender muda. Mas, com uma garganta que se fecha à mínima hipótese de pedir, compreender pode ficar a meio caminho, e calar-te isso seria deixar-te outra vez a resolver tudo sozinha.
 
-Não muda tudo de uma vez. Não te faz, amanhã, pedir o que nunca pediste. Mas muda o suficiente para deixares de confundir a tua solidão com força, e a tua incapacidade de pedir com independência.
+Não destranca tudo de uma vez. Não te faz, amanhã, pedir o que nunca pediste. Mas muda o suficiente para deixares de confundir a tua solidão com força, e a tua incapacidade de pedir com independência.
 
 Agora sabes que nunca pedes, e que isso não é orgulho, é uma aprendizagem dolorosa.
 
@@ -245,7 +245,7 @@ Imagina alguém que, em criança, caiu, e chamou, e ninguém veio. E que aprende
 
 A travessia é arriscares chamar de novo. Em pequeno, primeiro. A quem é de confiança. E descobrires que, desta vez, com estas pessoas, alguém vem. Que nem sempre se cai sozinha. Que o mundo, hoje, não é aquele onde chamaste e ninguém veio. Reaprender a chamar não é fácil, e às vezes só se consegue com uma mão preparada a segurar a tua. Mas do outro lado está o fim de uma solidão de uma vida inteira.
 
-Quero dizer-te o que te espera por este caminho, para que não o transformes, também ele, em mais uma prova a vencer sem pedir ajuda a ninguém. Vai haver recuos. Dias em que pedes, e dias em que voltas a fechar-te por completo, a fazer tudo sozinha, como sempre. E a tua velha voz vai dizer-te que não vale a pena, que já viste que ninguém vem, que é mais seguro como sempre fizeste. Não acredites nela à primeira. Voltar a fechar a garganta depois de a teres aberto não é o fim do caminho, é o vaivém de quem o percorre. Uma armadura erguida ao longo de uma vida inteira não se larga de uma só vez. Desfaz-se em vaivém, um pedido de cada vez, devagar, e cada vez que pedes e és atendida, mesmo que depois recues, ficou uma prova nova no corpo, e é dessas provas, somadas, que a confiança, devagar, renasce.
+Quero dizer-te o que te espera por este caminho, para que não o transformes, também ele, em mais uma prova a vencer sem pedir ajuda a ninguém. Vai haver recuos. Dias em que pedes, e dias em que voltas a fechar-te por completo, a fazer tudo sozinha, como sempre. E a tua velha voz vai dizer-te que não vale a pena, que já viste que ninguém vem, que é mais seguro como sempre fizeste. Não baixes a mão só porque ela manda. Voltar a fechar a garganta depois de a teres aberto não é o fim do caminho, é o vaivém de quem o percorre. Uma armadura erguida ao longo de uma vida inteira não se larga de uma só vez. Desfaz-se em vaivém, um pedido de cada vez, devagar, e cada vez que pedes e és atendida, mesmo que depois recues, ficou uma prova nova no corpo, e é dessas provas, somadas, que a confiança, devagar, renasce.
 
 E quero dizer-te uma coisa, sobre quem te vê, se há quem aprenda olhando para ti, filhos, pessoas que te são próximas. Se te veem fazer sempre tudo sozinha, nunca pedir, afundar-te em silêncio em vez de procurar uma mão, aprendem que é assim que se deve ser, e é provável que carreguem, também, a mesma incapacidade de pedir. A coisa mais libertadora que podes fazer por quem te vê não é dar-lhes o exemplo da mulher que aguenta tudo só. É mostrares-lhes uma mulher que pede, que se deixa amparar, que sabe que precisar não diminui ninguém. Às vezes uma mulher aprende a pedir, enfim, não só por si, mas para não condenar quem ama à mesma solidão de quem nunca soube fazê-lo.
 
@@ -253,7 +253,7 @@ Sabes, lá no fundo, a frase que sustenta tudo o que aqui te disse. Posso pedir 
 
 Ler sobre pedir foi o primeiro passo. Mas há um segundo, e esse nenhuma página o dá por ti. Faz-se a pedir, devagar, em pequenas coisas. E, muitas vezes, faz-se com ajuda, com alguém preparado para te acompanhar a aprender que pedir, hoje, pode ser seguro. Porque uma ferida de quem foi deixada cair merece mãos que a saibam segurar, e pedir essas mãos é, talvez, o teu primeiro e mais corajoso pedido.
 
-E fecho com uma coisa simples, dita à menina que vive ainda dentro de ti. Tu não estavas errada. A menina que aprendeu a não pedir, a bastar-se a si, a nunca mais chamar, fez o que tinha de fazer para sobreviver a um lugar onde pedir não trazia ninguém. Não há nada a censurar nela. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: já não estás ali. Hoje há quem venha. Podes chamar de novo.
+E fecho com uma coisa simples, dita à menina que vive ainda dentro de ti. Tu não estavas errada. A menina que aprendeu a não pedir, a bastar-se a si, a nunca mais chamar, fez o que tinha de fazer para sobreviver a um lugar onde a mão estendida voltava sempre vazia. Não há nela uma única coisa a censurar. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: já não estás ali. Hoje há quem venha. Podes chamar de novo.
 
 E se de tudo isto guardares um só pensamento, tu que sempre te bastaste, guarda este. Precisar dos outros não é o oposto de seres forte. É o que significa ser humana, estar viva, estar em relação. As pessoas mais inteiras que conheces não são as que nunca precisam de ninguém. São as que sabem dar e sabem receber, as que carregam os seus e se deixam carregar, as que entenderam que ninguém atravessa a vida sozinho, e que pedir, longe de as diminuir, as liga ao que há de mais humano em estar com os outros.
 

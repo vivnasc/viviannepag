@@ -37,7 +37,7 @@ Antes de mais, quero pôr lado a lado a coluna que os outros veem e a pessoa que
 
 Este livro não te vem afastar da tua família, nem dizer-te que cuidar dos teus é errado. Cuidar de quem amamos é uma das coisas mais bonitas que há. Vem distinguir o cuidar do carregar, o amar do sustentar, o estar presente do esmagar-se debaixo do peso de todos. Vem devolver-te o direito a uma vida tua, dentro de uma família que continuas a amar, mas que já não tens de segurar sozinha aos ombros.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças no peso de gestos pequenos, dos que carregas sem dar por isso.
 
 Em seres a primeira a quem todos ligam quando há um problema na família, e a última a pedir alguma coisa para ti.
 
@@ -81,7 +81,7 @@ Na forma como aprendi a olhar para estas histórias, há aqui uma lealdade que �
 
 Porque o que aprendeste, no fundo, foi uma equação. Segurar é amar. Se eu seguro a família, amo a família. Se eu largasse, seria abandono. E essa equação, gravada na infância, governa-te ainda. Por isso não consegues pousar. Pousar, para ti, não é descansar. É trair. É abandonar quem amas. É deixar cair a casa que juraste, em criança, segurar.
 
-Olha para este vazio sem o transformares em acusação contra quem devia ter sido a coluna e não foi. Quem deixou o vazio que tu ocupaste, na maioria das vezes, não o fez por mal. Estava afundado na sua própria dor, na sua própria incapacidade, e não teve como ser o pilar que devia. Não te quis roubar a infância. Mas roubou-ta, sem querer, ao deixar-te ocupar um lugar que não era o teu. E reconhecer isso não é odiar ninguém. É, finalmente, ver o que te aconteceu.
+Olha para este vazio sem o transformares em acusação contra quem devia ter sido a coluna e não foi. Quem deixou o vazio que tu ocupaste, na maioria das vezes, não o fez por mal. Estava afundado na sua própria dor, na sua própria incapacidade, e não teve como ser o pilar que devia. Não te quis pôr aos ombros uma casa inteira. Mas pô-la, sem querer, ao deixar-te ocupar um lugar que não era o teu. E reconhecer isso não é odiar ninguém. É, finalmente, ver o que te aconteceu.
 
 Quero que repares numa coisa que talvez te custe admitir, porque mexe com o orgulho que tiras de seres o pilar. A tua família, em muitos casos, organizou-se à volta da tua disponibilidade. Habituou-se a que fosses tu a segurar, e por isso deixou de desenvolver outras formas de se aguentar. Não por maldade, mas porque, havendo quem segure, ninguém mais precisa de o fazer. Tu tornaste-te tão fiável, tão presente, tão capaz, que a tua família passou a contar contigo como se conta com uma lei da natureza, e a tua presença permanente tornou-se a desculpa silenciosa para que mais ninguém crescesse. Sem o quereres, ao segurares tudo, ensinaste os outros a não segurar nada. E hoje, quando pensas em pousar, sentes o peso redobrado de uma família que, de facto, já não sabe aguentar-se sem ti, precisamente porque tu nunca lhe deste espaço para aprender.
 
@@ -125,19 +125,19 @@ E quero dizer-te uma coisa sobre a culpa, porque ela vai ser a tua maior advers�
 
 ## 4. Quem sou eu sem ser a coluna
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela, ainda que ela te traga vertigem.
+Vou pousar aqui uma pergunta, e pedir-te que a segures só por um momento. Sozinha. Não fujas dela, ainda que ela te traga vertigem.
 
 Quem és tu se deixares de ser a coluna da casa?
 
-Fica com ela. Repara no que ela abre. Talvez um vazio. Talvez um terror.
+Fica com ela. Repara no vão que ela abre debaixo de ti. Talvez um vazio. Talvez um terror.
 
-Para ti, esta pergunta toca num medo profundo, e vale a pena compreendê-lo. É que tu não sabes quem és sem o peso. A tua identidade inteira se construiu sobre seres a que segura, a forte, o pilar. Tira-te isso, imagina-te a não carregar nada, e aparece uma pergunta aterradora. Então o que sou eu? Que valor tenho, se não for o de sustentar? Que lugar ocupo, se não for o de coluna?
+Para ti, esta pergunta toca num medo profundo, e vale a pena compreendê-lo. É que tu não sabes quem és sem o peso. A tua identidade inteira se construiu sobre seres a que segura, a forte, o pilar. Tira-te isso, imagina-te a não carregar nada, e aparece uma pergunta aterradora. Então o que resta de mim, sem o peso aos ombros? Que valor tenho, se não for o de sustentar? Que lugar ocupo, se não for o de coluna?
 
 E a sombra que aqui se esconde não é a fraqueza. É o medo do colapso. O terror de que, se largares, tudo desmorona. A casa cai. A família desfaz-se. E será tua a culpa, porque foste tu que largaste.
 
 Esse medo é tão antigo, e tão fundo, que mesmo exausta não te permites pousar. Porque pousar, na tua imaginação, não é descansar. É provocar o desastre que passaste a vida a evitar. É deixar cair o que só tu seguras. E preferes esmagar-te debaixo do peso a arriscar o colapso que temes.
 
-Repara como isto te aprisiona. Estás presa a um posto que ocupaste em criança, e do qual nunca mais saíste. Não por ele ser teu, mas por teres medo do que acontece se o abandonares. És guardiã de uma casa que talvez já não precise de ti como precisou, mas continuas em sentinela, porque largar a vigilância te parece arriscar tudo.
+Repara como este teto te prende debaixo dele. Estás presa a um posto que ocupaste em criança, e do qual nunca mais saíste. Não por ele ser teu, mas por teres medo do que acontece se o abandonares. És guardiã de uma casa que talvez já não precise de ti como precisou, mas continuas em sentinela, porque largar a vigilância te parece arriscar tudo.
 
 Há também uma fragilidade escondida nesta tua força de pilar. Porque um pilar não vive. Sustenta. Está sempre ao serviço da estrutura, nunca da sua própria vida. E tu, de tanto seres pilar, esqueceste-te de que também és pessoa. De que também tens direito a ser sustentada, a apoiar-te, a descansar, a viver. O pilar não tem vida própria. E tu, ao tornares-te pilar, foste perdendo, devagar, a tua.
 
@@ -147,7 +147,7 @@ Quero dizer-te uma coisa sobre o medo do colapso, porque ela começa a desarmá-
 
 E quero que distingas uma coisa importante: uma é a tua responsabilidade real, outra é a responsabilidade que a ferida te faz sentir. A criança que foste sentiu-se responsável por tudo, porque para uma criança, no meio do caos, sentir-se responsável é, paradoxalmente, mais suportável do que sentir-se impotente. Se for minha a tarefa segurar, então posso fazer algo; se não for, então estou à mercê. E por isso assumiste uma responsabilidade total, que te dava uma ilusão de controlo sobre um mundo que te aterrorizava. Mas essa responsabilidade total era uma ilusão de criança, não uma verdade. Tu não eras, nem és, responsável pela vida, pelas escolhas, pela dor dos adultos da tua família. Eles eram, e são, responsáveis por si. E libertares-te do peso começa por veres que muito do que carregas nunca foi, de facto, tua responsabilidade, foi uma carga que uma criança assustada assumiu para não se sentir impotente.
 
-Não respondas já à pergunta de quem és sem o peso. Não se responde de repente. Mas deixa-a aberta. Porque é nela que está a tua libertação. No dia em que descobrires que existe ali uma pessoa, por baixo do pilar, com direito a uma vida própria, deixas de precisar de carregar tudo para teres lugar. E aí, só aí, podes começar a pousar.
+Não respondas já à pergunta de quem és sem o peso. Não se baixa de repente uns braços erguidos há tanto tempo. Mas deixa-a aberta. Porque é nela que está a tua libertação. No dia em que descobrires que existe ali uma pessoa, por baixo do pilar, com direito a uma vida própria, deixas de precisar de carregar tudo para teres lugar. E é então, com os pés assentes nesse chão novo, que os teus braços começam, enfim, a poder baixar.
 
 ## 5. A casa existia antes de mim
 
@@ -159,7 +159,7 @@ A tua família existia antes de tu nasceres. Tinha as suas dores, os seus proble
 
 O que aconteceu foi que, em criança, perante um vazio, assumiste um peso que não era teu. Tomaste para ti uma responsabilidade que pertencia aos adultos. E vieste a acreditar, porque uma criança acredita no que vive, que eras tu a segurar tudo, quando na verdade estavas a carregar algo que nunca te competiu.
 
-Quero mostrar-te uma distinção que liberta. Há o sistema, e há o teu lugar nele. O sistema, a tua família, com a sua história, as suas dores, o seu destino, é maior do que tu, e não depende de ti para existir. O teu lugar, o lugar que te cabe, é o de membro, de filho, de irmão, e não o de pilar, de salvador, de adulto de todos. Quando confundes o teu lugar com o de sustentar o sistema inteiro, ocupas um posto grande demais para ti, e esmagas-te debaixo dele.
+Quero mostrar-te uma distinção que te deixa pousar os braços. Há o sistema, e há o teu lugar nele. O sistema, a tua família, com a sua história, as suas dores, o seu destino, é maior do que tu, e não depende de ti para existir. O teu lugar, o lugar que te cabe, é o de membro, de filho, de irmão, e não o de pilar, de salvador, de adulto de todos. Quando confundes o teu lugar com o de sustentar o sistema inteiro, ocupas um posto grande demais para ti, e esmagas-te debaixo dele.
 
 Devolver esse posto não é abandonar a família. É ocupares, enfim, o lugar que era teu, e deixares o sistema ocupar o seu. É reconheceres que não te cabe segurar tudo, que há um todo maior do que tu, que existia antes e continuará depois, e que tu, nesse todo, és uma pessoa, e não uma coluna.
 
@@ -197,11 +197,11 @@ E quero que vejas que, ao pousares, não estás a fazer mal aos teus, ainda que 
 
 Quero que vejas, ainda, a diferença entre uma criança que cresce amparada e uma que cresce a amparar. A primeira aprende que o mundo a sustenta, que pode apoiar-se, que tem direito a ser cuidada, e leva essa confiança para a vida. A segunda, tu, aprendeu o contrário: que o mundo se apoia nela, que não pode apoiar-se em ninguém, que o seu lugar é dar e nunca receber. E essa inversão deixou-te com uma dificuldade profunda em deixares-te cuidar, em pedires, em receberes, porque receber nunca foi seguro, nem sequer permitido. Parte desta travessia é, por isso, não só pousares o peso dos outros, mas aprenderes, devagar, a deixares-te tu também ser amparada, a receberes o cuidado que sempre deste e nunca recebeste.
 
-Não te vou dar um método. Mas deixo-te o princípio. Ama, mas não carregues. Acompanha, mas não sustentes. Está presente, mas deixa a cada um o peso que é seu. E descobre, devagar, que o amor que não carrega é mais leve, mais livre, e, no fim, mais amor, do que o que se esmaga a sustentar tudo.
+Não te vou pôr nas mãos mais uma tarefa para segurares na perfeição. Mas deixo-te o princípio. Ama, mas não carregues. Acompanha, mas não sustentes. Está presente, mas deixa a cada um o peso que é seu. E descobre, devagar, que o amor que não carrega é mais leve, mais livre, e, no fim, mais amor, do que o que se esmaga a sustentar tudo.
 
 ## 7. Pousar sem abandonar
 
-Há um verbo para esta travessia. Pousar.
+Há um só verbo para o que te peço, e cabe inteiro num gesto de braços. Pousar.
 
 Pousar o peso. Não atirá-lo ao chão, não fugir dele, não cortar com ninguém. Pousar. Com cuidado, com amor, mas pousar. Deixar de carregar aos ombros o que não te cabe carregar.
 
@@ -219,7 +219,7 @@ E quero ensinar-te a pousar aos poucos, porque pousar tudo de uma vez seria impo
 
 E distingue, ao pousar, o que é cuidado legítimo do que é sustentação a mais. Há coisas que faz sentido fazeres pelos teus, por amor, por escolha, e que te dão alegria, e essas não tens de pousar. E há o carregar compulsivo, o resolver tudo, o não poder faltar, o esmagar-te debaixo do peso de todos, e é isso que te está a destruir. Pousar não é deixares de fazer nada pela família. É deixares de fazer tudo, de seres a responsável por todos, de carregares o que cabe a cada um carregar. A diferença está em escolheres, do lugar certo, o que fazes por amor, em vez de carregares tudo por terror de que, se não o fizeres, a casa caia.
 
-Quero falar-te do que se abre quando pousas. Abre-se, pela primeira vez, espaço para ti. Para os teus sonhos, que adiaste à espera de a família já não precisar de ti. Para a tua alegria, que te proibiste enquanto os teus sofriam. Para a tua própria vida, que ficou em suspenso enquanto seguravas a de todos. Pousar não te tira nada de essencial. Devolve-te a tua vida.
+Quero falar-te do que se levanta contigo quando os braços, enfim, descem. Abre-se, pela primeira vez, espaço para ti. Para os teus sonhos, que adiaste à espera de a família já não precisar de ti. Para a tua alegria, que te proibiste enquanto os teus sofriam. Para a tua própria vida, que ficou em suspenso enquanto seguravas a de todos. Pousar não te tira nada de essencial. Devolve-te a tua vida.
 
 E abre-se também, paradoxalmente, uma forma melhor de amar a tua família. Porque quando deixas de os carregar, podes estar com eles de outra maneira. Mais leve, mais presente, menos ressentida. Sem o peso da sustentação a contaminar o amor. Podes amá-los como pessoas, e não como fardos. E eles podem amar-te como pessoa, e não como pilar. A relação respira, liberta do peso que a esmagava.
 
@@ -227,13 +227,13 @@ Do outro lado do teto que seguraste há uma alegria à tua espera. A alegria de 
 
 E pousa um momento os olhos em quem te observa segurar, sobretudo se tens filhos. Porque este lugar de coluna transmite-se, de geração em geração, como talvez te tenha chegado a ti. Se os teus filhos te veem carregar tudo, afundar-te, viver para a família sem nunca viveres para ti, aprendem que é assim que se ama, e arriscam tornar-se, eles também, os pilares que se esmagam. A coisa mais libertadora que podes fazer por eles não é dar-lhes o exemplo da que carrega tudo. É mostrares-lhes uma mulher que ama e também vive, que cuida e também pousa, que pertence a uma família sem se sacrificar por ela. Às vezes uma mulher aprende a pousar, enfim, não só por si, mas para não passar a quem ama o peso que lhe foi passado a ela.
 
-E quero que saibas o que esperar desta travessia, para que não a vivas como mais uma tarefa a cumprir na perfeição. Vai ser lenta, e vai ter recuos. Dias em que pousas, e dias em que voltas a pegar em tudo, em pânico, como sempre. E a velha culpa vai aproveitar cada recuo para te dizer estás a ver, o teu lugar é segurar. Não acredites nela. Os recuos fazem parte. Ninguém baixa de uma vez braços que ergueu em criança. Baixa-os aos poucos, um peso de cada vez, e cada vez que pousas e a casa não cai, ficou uma prova nova, e é dessas provas, somadas, que a confiança de que podes viver, devagar, se constrói.
+E quero que saibas o que esperar desta travessia, para que não a vivas como mais uma tarefa a cumprir na perfeição. Vai ser lenta, e os braços vão voltar a erguer-se sozinhos mais de uma vez. Dias em que pousas, e dias em que voltas a pegar em tudo, em pânico, como sempre. E a velha culpa vai aproveitar cada recuo para te dizer estás a ver, o teu lugar é segurar. Não acredites nela. Os recuos fazem parte. Ninguém baixa de uma vez braços que ergueu em criança. Baixa-os aos poucos, um peso de cada vez, e cada vez que pousas e a casa não cai, ficou uma prova nova, e é dessas provas, somadas, que a confiança de que podes viver, devagar, se constrói.
 
 ## 8. A travessia
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, pousar um peso de uma vida inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com amor, e o teu peso com dever.
+Não te tira o teto dos braços de uma só vez. Não te faz, amanhã, pousar um peso de uma vida inteira. Mas muda o suficiente para deixares de confundir a tua exaustão com amor, e o teu peso com dever.
 
 Agora sabes que carregas a família, e que isso não é a tua força, é um lugar que ocupaste cedo demais, por amor e por medo, e do qual nunca mais saíste.
 
@@ -259,7 +259,7 @@ E talvez descubras, ao baixares os braços, que eles estão dormentes, doridos, 
 
 No fundo, já conheces a coluna que sustenta este livro inteiro. Posso pousar sem abandonar. Pousar não é deixar de amar, é amar do lugar certo, enfim.
 
-Compreender foi o primeiro passo. Mas há um segundo, e esse não se baixa com os olhos numa página. Faz-se a baixar, devagar, os braços de verdade. A devolver, com amor, o peso que não era teu. A descobrir, peso a peso, que a casa se aguenta sem ti a esmagares-te debaixo dela, e que continuas a pertencer-lhe sem teres de a sustentar.
+Compreender foi baixar os braços por dentro. Mas há um segundo gesto, e esse não se faz com os olhos numa página. Faz-se a baixar, devagar, os braços de verdade. A devolver, com amor, o peso que não era teu. A descobrir, peso a peso, que a casa se aguenta sem ti a esmagares-te debaixo dela, e que continuas a pertencer-lhe sem teres de a sustentar.
 
 E há um lugar para fazer essa travessia mais funda, a dois ou em grupo, com quem te acompanhe, porque devolver um peso de uma vida inteira raramente se faz sozinha. É esse o trabalho que continua para além deste livro. O livro mostra-te o peso. A travessia funda faz-se com mãos que te ajudem a pousá-lo.
 
