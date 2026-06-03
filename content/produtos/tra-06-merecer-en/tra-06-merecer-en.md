@@ -33,7 +33,7 @@ I want you to understand, from the start, that this book hasn't come to ask you 
 
 And I want you to know that this is, perhaps, the hardest wound to see, precisely because it's the deepest, and because the world applauds it. No one will tell you there's a problem in your working so much, in producing always, in never stopping; on the contrary, they'll praise you for it. That's why this wound hides better than all the others, dressed up as virtue, rewarded everywhere. And only you, on the inside, know the anguish that feeds it, the terror of the emptiness that sustains it, the doubt about the right to exist that no one sees. Seeing this, naming it, is the beginning of freeing yourself from a prison that everyone confuses with merit.
 
-Perhaps you recognize yourself in small things.
+Perhaps you find yourself in the small ledgers of an ordinary day.
 
 In feeling that a day in which you didn't produce was a wasted day, empty, in which you didn't justify your existence, in which you didn't pay for your place.
 
@@ -45,7 +45,7 @@ In having, deep down, the sense that your right to exist is conditional, that it
 
 In feeling guilt or anguish when you're ill, or idle, or simply resting, as if you were failing at something essential, ceasing to pay the rent on your own life.
 
-They are all the same. Work as proof of the right to exist. Production as the condition of an existence you feel you have to deserve.
+They are all one rent, paid in different coins. Work as proof of the right to exist. Production as the condition of an existence you feel you have to deserve.
 
 I want to show you how this appears day to day, in things you may already take for who you are. A Sunday with no plans, with nothing to do, instead of rest, brings you an anguish, a discomfort, a need to find something to produce. You're on holiday, and instead of simply being, you feel you should make the most of it to do, to get ahead, not to waste it. You receive affection, care, attention, and inside there's a voice that says you haven't yet done enough to deserve it, that you have to make up for it, give it back, earn it.
 
@@ -67,7 +67,7 @@ Perhaps you come from a place where a person's worth was measured by what she di
 
 Or perhaps your existence arrived in difficult circumstances, at a moment when it wasn't received with the simple joy with which a child should be received. Perhaps you were one more burden in an already overloaded home, or you arrived when you weren't expected, or you grew up feeling, without anyone saying it, that your presence complicated things, cost something, weighed. And a child who feels this does something touching and terrible: she tries to make up for her own existence, to make herself useful, to do for the space she occupies, as if she had to pay for being there. And she carries, into adult life, that impossible mission, that of justifying, with work, an existence she felt, from early on, she had no right to have for free.
 
-Notice what a child learns in a place like this. She learns that existence isn't a right, it's a condition. That she has to deserve her place. That she's only worth something when she produces, when she does, when she justifies her presence. And that learning is engraved at the deepest level, because it touches the most basic thing: the right to exist, which should be unconditional, and which became, for her, something to deserve.
+Notice what a child learns under a roof where her place must be earned. She learns that existence isn't a right, it's a condition. That she has to deserve her place. That she's only worth something when she produces, when she does, when she justifies her presence. And that learning is engraved at the deepest level, because it touches the most basic thing: the right to exist, which should be unconditional, and which became, for her, something to deserve.
 
 And that child did what she had to do. She began to work in order to exist. To produce in order to deserve. To justify, with what she did, her right to be. And she carried that equation into adult life, where she keeps working, without end, to prove a right to exist that should never have been in question.
 
@@ -79,13 +79,13 @@ And I want you to see where this is kept, because it's the deepest of everything
 
 ## 3. I don't know how to exist without producing
 
-There's something you need to see. You don't know, simply, how to exist. Without producing, without doing, without justifying, you don't know how to be.
+There's a debt you keep paying without ever seeing it. You don't know, simply, how to exist. Without producing, without doing, without justifying, you don't know how to be.
 
 Notice what happens when you try, simply, to be. To stay still, doing nothing, without producing, without purpose. An anguish appears, a discomfort, a restlessness that pushes you to do, to produce, to justify your presence. You can't bear pure existence, without the activity that justifies it. As if existing, without producing, were unbearable, illegitimate, wrong.
 
 Notice, too, the quantity of things you fill your life with so as never to reach that emptiness. Always a task, always a project, always something to do, even in rest, even in leisure, which you turn, without realizing it, into one more way of producing. There are not, in your life, spaces of pure existing, because you avoid them, instinctively, like someone avoiding a pain. And that permanent flight, that filling everything so as not to reach the nothing, is, in itself, exhausting, because living in flight from yourself is as tiring as the work that feeds it. There's a rest that comes only from stopping fleeing, from letting yourself reach the emptiness you so fear, and from discovering, there, not the abyss you imagined, but the firm ground that you exist, and that's enough.
 
-And there's an enormous cost in this. Because a person who doesn't know how to exist without producing never rests, never stays, never simply is. She lives doing, without end, to justify an existence she never feels she has the right to have. And that exhausts, not only the body, but the soul, because it's an existential exhaustion, that of someone who has to prove, each day, that she deserves to be alive.
+And the price of this rent is enormous. Because a person who doesn't know how to exist without producing never rests, never stays, never simply is. She lives doing, without end, to justify an existence she never feels she has the right to have. And that exhausts, not only the body, but the soul, because it's an existential exhaustion, that of someone who has to prove, each day, that she deserves to be alive.
 
 And it costs you the present. Because to be present, to live the moment, to simply be, you have to stop producing, and stopping producing opens the anguish of not deserving. So you're never truly anywhere. You're always doing, producing, justifying, and life, which happens in the present, in the simple existing, passes you by, because you're too busy deserving the right to live it.
 
@@ -103,7 +103,7 @@ I want you to see, too, how this wound robs you of the capacity to receive life 
 
 And it costs you the love you receive without feeling it deserved. Because even when you're loved, cared for, valued, there's a part of you that can't receive, that feels she hasn't yet done enough to deserve it, that has to give it back, to pay for it, to earn it. And so love doesn't reach your depths, because the filter of the wound doesn't let it in without a bill. You live, perhaps, surrounded by affection, and inside always in debt, always thinking you have to deserve what's given to you for free, and so the love you receive never fills you, because you don't let yourself, simply, receive it.
 
-I want you to feel the weight of this. The weight of having to justify your existence, each day, with work. Of never being able to, simply, be. Of living a whole life deserving a right that was yours from your origin. It's the deepest exhaustion there is, and perhaps you already take it for who you are, when it's, deep down, the wound of someone who never knew she had the right to exist, just so. And you deserve, after a life of paying, to rest at last from that rent you should never have been obliged to pay.
+I want you to feel the weight of this rent on your shoulders. The weight of having to justify your existence, each day, with work. Of never being able to, simply, be. Of living a whole life deserving a right that was yours from your origin. It's the deepest exhaustion there is, and perhaps you already take it for who you are, when it's, deep down, the wound of someone who never knew she had the right to exist, just so. And you deserve, after a life of paying, to rest at last from that rent you should never have been obliged to pay.
 
 ## 4. Who am I if I don't produce
 
@@ -203,7 +203,7 @@ I won't give you a method, because this isn't solved with techniques, and someti
 
 I wrote this book, the deepest of this collection, out of a simple conviction. Understanding changes things. And, in this wound, understanding is the beginning of giving yourself back a right that was always yours.
 
-It doesn't change everything at once. It won't make you, tomorrow, feel, without doubt, that you have the right to exist. But it changes enough for you to stop confusing your production with your worth, and your work with your right to be, and to begin to suspect that the doubt that governs you is a wound, and not a truth.
+It doesn't tear up the whole rent contract overnight. It won't make you, tomorrow, feel, without doubt, that you have the right to exist. But it changes enough for you to stop confusing your production with your worth, and your work with your right to be, and to begin to suspect that the doubt that governs you is a wound, and not a truth.
 
 Now you know that you work to deserve to exist, and that this is the deepest wound of work, and it's existential, not professional.
 
