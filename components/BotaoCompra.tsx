@@ -16,18 +16,21 @@ export function BotaoCompra({
   titulo,
   preco,
   checkoutUrl,
+  pack = false,
 }: {
   slug: string;
   locale: string;
   titulo: string;
   preco: string;
   checkoutUrl?: string | null;
+  pack?: boolean;
 }) {
   const [email, setEmail] = useState('');
   const [licenca, setLicenca] = useState<string | null>(null);
   const [emailValido, setEmailValido] = useState(false);
   const [pago, setPago] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [downloads, setDownloads] = useState<{ slug: string; titulo: string; url: string | null }[] | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const isPt = locale === 'pt';
@@ -68,6 +71,23 @@ export function BotaoCompra({
   }
 
   async function obterDownload() {
+    if (pack) {
+      try {
+        const res = await fetch('/api/download-pack', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ slug }),
+        });
+        const json = await res.json();
+        if (res.ok && Array.isArray(json.ficheiros) && json.ficheiros.length) {
+          setDownloads(json.ficheiros);
+          return;
+        }
+      } catch {}
+      // Sem ficheiros prontos: o email leva o acesso. Deixa downloads vazio.
+      setDownloads([]);
+      return;
+    }
     try {
       const res = await fetch('/api/download', {
         method: 'POST',
@@ -121,7 +141,36 @@ export function BotaoCompra({
             <p className="font-mono text-ambar text-[0.9rem] tracking-[0.1em]">{licenca}</p>
           </div>
         )}
-        {downloadUrl ? <a
+        {pack ? (
+          downloads && downloads.length ? (
+            <div className="text-left">
+              <p className="text-creme-2/70 text-xs mb-2 text-center">
+                {isPt ? `${downloads.length} ficheiros incluídos:` : `${downloads.length} files included:`}
+              </p>
+              <div className="max-h-[220px] overflow-y-auto flex flex-col gap-1.5">
+                {downloads.map((f) => (
+                  f.url ? (
+                    <a
+                      key={f.slug}
+                      href={f.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block bg-terra-2/50 hover:bg-ambar/20 rounded-[8px] px-3 py-2 text-creme-2 text-[0.82rem] no-underline transition-colors"
+                    >
+                      ↓ {f.titulo}
+                    </a>
+                  ) : (
+                    <span key={f.slug} className="block bg-terra-2/30 rounded-[8px] px-3 py-2 text-creme-2/50 text-[0.82rem] italic">
+                      {f.titulo} {isPt ? '(em breve por email)' : '(coming by email)'}
+                    </span>
+                  )
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-creme-2/70 text-sm italic">{isPt ? 'Vais receber todos os ficheiros no teu email.' : 'You will receive all the files in your email.'}</p>
+          )
+        ) : downloadUrl ? <a
           href={downloadUrl}
           target="_blank"
           rel="noopener noreferrer"

@@ -8,6 +8,7 @@ import { BotaoCompra } from '@/components/BotaoCompra';
 import { GotaMini } from '@/components/icons/GotaAssina';
 import { PartilhaProduto } from '@/components/PartilhaProduto';
 import { getSupabase } from '@/lib/supabase';
+import { packBySlug, isPackSlug, packIncluiProduto } from '@/lib/packs';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -72,7 +73,44 @@ function getFallback(slug: string, locale: string): Produto | null {
   };
 }
 
+function getPack(slug: string, locale: string): Produto | null {
+  const pk = packBySlug(slug);
+  if (!pk) return null;
+  const isEn = locale === 'en';
+  return {
+    id: pk.slug,
+    slug: pk.slug,
+    titulo: isEn ? pk.titulo_en : pk.titulo,
+    subtitulo: isEn ? pk.subtitulo_en : pk.subtitulo,
+    descricao: isEn ? pk.descricao_en : pk.descricao,
+    preco: pk.preco,
+    preco_original: pk.preco_original,
+    capa: pk.capa,
+    checkout_url: null,
+    badge: pk.badge,
+  };
+}
+
+// Produtos incluidos num pack (publicados), para a seccao "inclui".
+async function getPackConteudo(slug: string): Promise<{ slug: string; titulo: string; badge: string | null }[]> {
+  const pk = packBySlug(slug);
+  if (!pk) return [];
+  try {
+    const supabase = getSupabase();
+    const { data } = await supabase
+      .from('produtos')
+      .select('slug, titulo, badge')
+      .eq('publicado', true);
+    return ((data as { slug: string; titulo: string; badge: string | null }[] | null) ?? [])
+      .filter((p) => packIncluiProduto(pk, p.slug))
+      .sort((a, b) => a.slug.localeCompare(b.slug));
+  } catch {
+    return [];
+  }
+}
+
 async function getProduto(slug: string, locale: string): Promise<Produto | null> {
+  if (isPackSlug(slug)) return getPack(slug, locale);
   try {
     const supabase = getSupabase();
     const { data } = await supabase
@@ -123,6 +161,8 @@ export default async function ProdutoPage({
   const isPt = locale === 'pt';
   const descHtml = p.descricao ? await marked.parse(p.descricao, { async: true }) : '';
   const isEbook = p.badge?.toLowerCase().includes('ebook');
+  const isPack = isPackSlug(slug);
+  const conteudoPack = isPack ? await getPackConteudo(slug) : [];
 
   return (
     <>
@@ -203,6 +243,7 @@ export default async function ProdutoPage({
                   titulo={p.titulo}
                   preco={p.preco}
                   checkoutUrl={p.checkout_url}
+                  pack={isPack}
                 />
               </div>
               <p className="text-[0.72rem] text-creme-2/50">
@@ -232,6 +273,33 @@ export default async function ProdutoPage({
         </div>
       </section>
 
+      {/* CONTEUDO DO PACK */}
+      {isPack && conteudoPack.length > 0 && (
+        <section className="relative z-[2] py-10 px-7">
+          <div className="max-w-[720px] mx-auto">
+            <h2 className="font-serif font-light text-creme text-[1.5rem] mb-2">
+              {isPt ? `Inclui ${conteudoPack.length} títulos` : `Includes ${conteudoPack.length} titles`}
+            </h2>
+            <p className="text-creme-2/60 text-[0.85rem] mb-6">
+              {isPt
+                ? 'Todos os ebooks e guias deste universo, em PDF, num só acesso.'
+                : 'Every ebook and guide from this world, in PDF, in one access.'}
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {conteudoPack.map((item) => (
+                <li
+                  key={item.slug}
+                  className="flex items-center gap-2 bg-terra-2/40 rounded-[10px] px-3.5 py-2.5 text-creme-2/90 text-[0.88rem]"
+                >
+                  <span className="text-ambar text-[0.7rem]">{item.badge?.toLowerCase().includes('ebook') ? '◆' : '◇'}</span>
+                  {item.titulo}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {/* GARANTIA + SEGUNDO CTA */}
       <section className="relative z-[2] py-14 px-7">
         <div className="max-w-[600px] mx-auto text-center">
@@ -258,6 +326,7 @@ export default async function ProdutoPage({
               titulo={p.titulo}
               preco={p.preco}
               checkoutUrl={p.checkout_url}
+              pack={isPack}
             />
           </div>
 

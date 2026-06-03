@@ -8,6 +8,7 @@ import { GotaMini } from '@/components/icons/GotaAssina';
 import { COLECOES, COLECOES_ATIVAS, COLECOES_EM_BREVE, ABERTURA_UNIVERSO, slugToColecao, type ColecaoId } from '@/lib/colecoes';
 import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
+import { PACKS } from '@/lib/packs';
 import type { Metadata } from 'next';
 
 // Forca dynamic — quando produtos.capa muda na DB (apos render-ebook),
@@ -353,6 +354,37 @@ export default async function LojaPage({
                   </section>
                 );
               })}
+
+              {/* PACKS — COLECOES COMPLETAS */}
+              <section id="packs" className="mb-20 scroll-mt-24">
+                <div className="flex items-center gap-4 mb-3">
+                  <h2 className="font-serif font-light text-creme text-[1.7rem]">
+                    {isPt ? 'Coleções completas' : 'Complete collections'}
+                  </h2>
+                  <div className="flex-1 h-px bg-ocre/25" />
+                  <span className="text-[0.72rem] tracking-[0.18em] uppercase text-ocre">
+                    {isPt ? 'poupa em pack' : 'save in a bundle'}
+                  </span>
+                </div>
+                <p className="text-creme-2/80 text-[0.95rem] leading-[1.6] mb-8 max-w-[640px]">
+                  {isPt
+                    ? 'Leva um universo inteiro num só acesso, por uma fração do valor avulso. Ou a biblioteca completa, os sete universos juntos.'
+                    : 'Take a whole world in one access, for a fraction of the individual price. Or the complete library, all seven worlds together.'}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                  {PACKS.map((pk) => renderCard({
+                    id: pk.slug,
+                    slug: pk.slug,
+                    titulo: isPt ? pk.titulo : pk.titulo_en,
+                    subtitulo: isPt ? pk.subtitulo : pk.subtitulo_en,
+                    preco: pk.preco,
+                    preco_original: pk.preco_original,
+                    capa: pk.capa,
+                    badge: pk.badge,
+                    destaque: pk.colecao === 'all',
+                  }))}
+                </div>
+              </section>
 
               {/* COLECOES EM BREVE */}
               {COLECOES_EM_BREVE.length > 0 && (
