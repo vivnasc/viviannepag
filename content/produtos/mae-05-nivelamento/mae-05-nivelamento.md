@@ -93,7 +93,7 @@ Lembra-te, outra vez, do que tu acreditavas estar a fazer. Tu não acordavas a p
 
 E há um efeito ainda mais escondido, que toca o futuro. Um filho que cresce a sentir que não tem autorização para a sua própria vida enquanto um irmão sofre, leva esse padrão para fora da família. Aprende a sentir culpa sempre que está bem, a não se permitir prosperar sem dar uma parte, a não conseguir desfrutar do que conquista sem pensar em quem não tem. O nivelamento que viveu em casa torna-se a forma como se relaciona com o seu próprio sucesso para o resto da vida, e ele carrega, mundo fora, uma dívida invisível que ninguém lhe cobra a não ser ele próprio. Libertá-lo dessa dívida, devolver-lhe o direito de estar bem sem culpa, não é só sarar a relação de hoje. É soltar-lhe um peso que ele levaria a vida inteira, e talvez passaria, sem querer, aos próprios filhos.
 
-E começa a formar-se, talvez, uma pergunta. Uma pergunta que dói e que ao mesmo tempo abre uma porta. Estarei eu a pedir a um filho que pague uma dívida que não é dele? Estarei, sem querer, a fazer com que a vida boa de um seja vivida com culpa, em nome de uma justiça que afinal não ajuda o outro e magoa este? Não respondas com pressa, e sobretudo não respondas com culpa, porque a culpa, aqui, seria só mais um peso, e este livro não veio acrescentar pesos, veio mostrar-te quais podes pousar. A pergunta não é uma acusação. É o início de uma libertação, para ti e para os teus filhos, todos eles.
+E começa a formar-se, talvez, uma pergunta. Uma pergunta que dói e que ao mesmo tempo abre uma porta. Estarei eu a pedir a um filho que pague uma dívida que não é dele? Estarei, sem querer, a fazer com que a vida boa de um seja vivida com culpa, em nome de uma justiça que afinal não ajuda o outro e magoa este? Não respondas com pressa, e sobretudo não respondas com culpa, porque a culpa, aqui, seria só mais um peso, e este livro não veio acrescentar pesos, veio mostrar-te quais podes pousar. Esta pergunta não é uma régua que te mede nem um dedo que te aponta. É o início de uma libertação, para ti e para os teus filhos, todos eles.
 
 ---
 
@@ -103,7 +103,7 @@ Vou deixar cair aqui a perceção que muda tudo. Lê devagar, e fica com ela o t
 
 O teu esforço para unir os teus filhos pode estar a impedir cada um de ocupar o seu próprio lugar.
 
-Fica com isto um momento.
+Deixa esta frase pousar em ti como um filho que finalmente pode parar de correr para junto dos irmãos.
 
 Durante toda a tua vida de mãe, uniste. E unir foi bom, foi necessário, foi amor. Mas há uma confusão que se instalou, devagar, sem que ninguém a percebesse, e que está na raiz de toda a dor deste livro: a confusão entre unir e fundir. Não são a mesma coisa. Unir é manter ligados seres que continuam distintos, cada um com a sua forma, o seu caminho, o seu destino, ligados pelo amor e pela pertença. Fundir é diluir as diferenças até todos parecerem um só, até nenhum poder ser inteiramente ele próprio sem ameaçar o conjunto. Tu quiseste unir. Mas o medo da diferença levou-te, sem querer, a fundir, e a fusão, por mais que pareça amor, sufoca.
 
@@ -125,7 +125,7 @@ Há uma imagem que pode ajudar-te a sentir a diferença entre unir e fundir. Pen
 
 Se unir não é fundir, então o que é, na prática, abençoar? Vamos olhar de perto, porque é aqui que o amor muda de forma sem deixar de ser amor.
 
-Mas antes de te mostrar o que abençoar faz, quero tirar-te um peso, porque sei que ele já apareceu: o medo de que abençoar a diferença seja abandonar o filho que sofre. Não é. Abençoar não te pede que deixes de te importar com o filho que luta, que lhe vires as costas, que o trates com indiferença. Pede só que pares de tentar resolver a dor dele à custa da liberdade do outro. Podes continuar a apoiar o que luta, com todo o teu amor, com tudo o que esteja genuinamente ao teu alcance, e ao mesmo tempo deixar o que avança viver livremente. As duas coisas cabem juntas. Abençoar não é escolher um filho contra o outro, é parar de os pôr em competição por um equilíbrio impossível, e amar cada um, inteiramente, no lugar onde a vida o colocou.
+Mas antes de te mostrar o que abençoar faz, quero tirar-te um peso, porque sei que ele já apareceu: o medo de que abençoar a diferença seja abandonar o filho que sofre. Não é. Abençoar não te pede que deixes de te importar com o filho que luta, que lhe vires as costas, que o trates com indiferença. Pede só que pares de tentar resolver a dor dele à custa da liberdade do outro. Podes continuar a apoiar o que luta, com todo o teu amor, com tudo o que esteja genuinamente ao teu alcance, e ao mesmo tempo deixar o que avança viver livremente. Apoiar quem luta e libertar quem avança não são pratos de uma balança que se anulam: cabem ambos, inteiros, na mesma mãe, como dois filhos cabem no mesmo colo sem que um tire o lugar ao outro. Abençoar não é escolher um filho contra o outro, é parar de os pôr em competição por um equilíbrio impossível, e amar cada um, inteiramente, no lugar onde a vida o colocou.
 
 Abençoar é, antes de tudo, parar de distribuir responsabilidades emocionais entre os teus filhos. Deixar de fazer do que tem mais o responsável pelo que tem menos. Deixar de transformar o amor de irmãos numa obrigação, numa dívida, num dever de equilibrar vidas. Não para que deixem de se ajudar, atenção, mas para que a ajuda, quando vier, seja escolha e não imposição. Há uma diferença enorme entre um irmão que ajuda outro porque quer, com o coração livre, e um irmão que ajuda porque sente que a sua vida boa o obriga, porque carrega a culpa de ter mais. A primeira é solidariedade. A segunda é uma dívida que envenena, devagar, o amor entre eles.
 
@@ -159,7 +159,7 @@ E há um regresso teu, também, escondido neste caminho, e que vale a pena nomea
 
 E há uma palavra sobre o tempo e a culpa, antes de fecharmos este capítulo. Talvez, ao ler, te tenha vindo um arrependimento, um "se eu tivesse percebido isto há vinte anos". Não deixes que esse arrependimento se transforme num novo nivelamento, agora contra ti mesma, em que te castigas para equilibrar uma culpa. Fizeste o que sabias com o amor que tinhas, e o amor que tinhas era enorme, e a intenção foi sempre boa. Não há aqui nada a expiar. Há, isso sim, uma forma nova de amar que ainda podes praticar, a partir de hoje, com os filhos que tens, na fase em que estão. Nunca é tarde para começar a abençoar. Os filhos sentem quando uma mãe pousa o peso de os equilibrar e começa a celebrá-los, cada um por si, e essa mudança, mesmo tardia, mesmo imperfeita, chega-lhes e muda alguma coisa.
 
-Estes são os contornos. O mapa, não a viagem. A viagem é mais funda, faz-se devagar, e às vezes precisa de companhia. Mas o mapa já mostra que há um caminho, e que ele leva a uma família mais livre e a uma mãe mais leve. Tu, agora, já sabes a direção.
+Estes são os contornos. É o céu visto de longe, não o voo. O voo é mais fundo, faz-se devagar, e às vezes precisa de companhia. Mas já se vê, daqui, que há um céu por onde cada filho pode soltar-se, e que ele leva a uma família mais livre e a uma mãe mais leve. Tu, daqui em diante, já sabes para onde abrir as asas.
 
 ---
 

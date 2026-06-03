@@ -77,7 +77,7 @@ Vou deixar cair aqui uma pergunta, sozinha, e peço-te que fiques com ela, porqu
 
 Quem é que tu estás à espera que te autorize a ter mais?
 
-Fica com ela um momento.
+Deixa-a pousar em ti, sem pressa de responder, como quem fica diante de uma porta sem a empurrar já.
 
 Porque há, no fundo do teu travão, uma espera. Estás à espera de uma autorização que nunca chega. À espera de que alguém, a tua família, os teus pais, o mundo, te diga "podes, tens permissão, está tudo bem teres mais". Como se houvesse uma autorização exterior em falta, e tu não pudesses avançar sem ela. E vives, sem saber, à espera dessa permissão, travada à porta do que poderias ter, à espera de que alguém a abra por ti, de que alguém te dê a licença que sentes que te falta para ultrapassares o nível dos teus sem culpa.
 
@@ -123,7 +123,7 @@ E há um gesto sistémico que ajuda, e que vem da forma como aprendi a olhar par
 
 E quero dar-te uma imagem do que é autorizares-te, porque pode parecer abstrato. Imagina uma porta para uma vida maior, que esteve sempre destrancada, e diante da qual passaste anos parada, à espera de que alguém viesse abri-la por ti, de que alguém te desse a chave, sem perceberes que a porta nunca esteve trancada, que bastava empurrá-la, que a chave que esperavas já estava na fechadura, do teu lado. Autorizares-te é dares conta de que a porta sempre esteve aberta, e atravessá-la. Não é forçar nada, não é conquistar uma permissão difícil, é simplesmente parar de esperar e dar o passo que sempre pudeste dar. E o mais comovente é perceber quanto tempo passaste parada diante de uma porta aberta, à espera de uma autorização que não precisavas, quando bastava saberes que podias, e ires. A maior parte dos tetos invisíveis são assim: portas abertas diante das quais esperamos, a vida inteira, uma permissão que sempre tivemos.
 
-Há uma frase que guarda o coração disto, e que podes dizer por dentro: posso ter mais sem amar menos. Repara no que ela separa. Ter mais: autorizo-me à abundância, ao sucesso, ao crescimento, ao que a vida me oferece. Sem amar menos: e isso não diminui em nada o meu amor, a minha lealdade, a minha pertença aos meus. As duas coisas não se tocam. O amor não se mede pelo nivelamento, a lealdade não exige privação, e tu podes ter tudo o que a vida te oferece e continuar a amar os teus exatamente como sempre amaste, talvez até mais, porque o amor que vem da abundância é mais livre e mais generoso do que o que vem da privação culpada.
+Há uma frase que guarda o coração disto, e que podes dizer por dentro: posso ter mais sem amar menos. Repara no que ela separa. Ter mais: autorizo-me à abundância, ao sucesso, ao crescimento, ao que a vida me oferece. Sem amar menos: e isso não diminui em nada o meu amor, a minha lealdade, a minha pertença aos meus. Uma não rouba à outra, como o teto que sobe não derruba a casa de onde vieste. O amor não se mede pelo nivelamento, a lealdade não exige privação, e tu podes ter tudo o que a vida te oferece e continuar a amar os teus exatamente como sempre amaste, talvez até mais, porque o amor que vem da abundância é mais livre e mais generoso do que o que vem da privação culpada.
 
 ---
 
@@ -173,7 +173,7 @@ Lá, a culpa pela abundância deixa de ser um guardião do teu teto e começa a 
 
 Se sentes que é o momento, estou lá. Em [infonte.viviannedossantos.com](https://infonte.viviannedossantos.com).
 
-E se ainda não é o momento, está tudo bem, e ninguém te apressa. O que leste fica contigo, sereno, até ao dia em que decidires que já esperaste autorização suficiente, e que está na hora, enfim, de te autorizares tu.
+E se ainda não é o momento de empurrar a porta, está tudo bem, ninguém te puxa para cima antes de quereres subir. O que leste fica contigo, sereno, até ao dia em que decidires que já esperaste autorização suficiente, e que está na hora, enfim, de te autorizares tu.
 
 E quero deixar-te com a verdade que está por baixo do teto inteiro. Autorizares-te a ter mais não é, no fundo, sobre dinheiro nem sobre sucesso. É sobre o direito de receberes plenamente o que a vida te oferece, em vez de o recusares à porta por uma lealdade que já não te serve. A vida oferece-te abundância, oportunidades, crescimento, e tu, por amor mal traduzido, tens-te recusado a recebê-los, mantendo-te ao nível dos teus. Autorizares-te é abrires-te à abundância da vida, é deixares-te receber o que ela tem para te dar, é parares de a recusar em nome de uma culpa que não ajuda ninguém. E ao fazê-lo, não traís a tua origem, honra-la, porque transformas o sacrifício de quem veio antes na colheita que eles sonharam para ti, e tornas-te, com a tua abundância, alguém que pode dar mais, amar mais, servir mais. Ter mais sem amar menos é, no fundo, deixares a vida amar-te plenamente, e a partir dessa plenitude, amares tu, também, mais plenamente.
 

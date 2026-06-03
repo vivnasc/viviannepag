@@ -29,7 +29,7 @@ Quero começar por te dizer uma coisa que talvez ninguém te tenha dito. O que s
 
 E quero dizer-te também, com todo o cuidado, que este livro vai ser diferente dos outros que talvez tenhas lido sobre maternidade. Não vou pedir-te para teres mais paciência. Não vou pedir-te para compreenderes melhor o teu filho, para te esforçares mais, para amares de forma mais perfeita. Tu já fizeste tudo isso, e muito, e durante demasiado tempo. O que vou fazer é o contrário: vou ajudar-te a ver que há um ponto, e tu talvez já o tenhas ultrapassado há muito, em que compreender mais deixa de ser amor e passa a ser uma forma de te apagares.
 
-Há uma coisa que precisas de ouvir antes de tudo o resto, e que é o coração deste livro inteiro: compreender alguém não te obriga a permanecer exposta ao que ele faz. Podes entender a dor do teu filho, a história dele, as feridas dele, e ao mesmo tempo decidir que não aceitas ser tratada como ele te trata. As duas coisas cabem juntas. Não tens de escolher entre amá-lo e proteger-te. E aprender a segurar as duas ao mesmo tempo é, talvez, a coisa mais importante que podes fazer, por ti e, por mais estranho que pareça, também por ele.
+Há uma coisa que precisas de ouvir antes de tudo o resto, e que é o coração deste livro inteiro: compreender alguém não te obriga a permanecer exposta ao que ele faz. Podes entender a dor do teu filho, a história dele, as feridas dele, e ao mesmo tempo decidir que não aceitas ser tratada como ele te trata. Cabem as duas na mesma casa, o coração aberto numa divisão e a porta com fecho noutra. Não tens de escolher entre amá-lo e proteger-te. E aprender a segurar as duas ao mesmo tempo é, talvez, a coisa mais importante que podes fazer, por ti e, por mais estranho que pareça, também por ele.
 
 Vou pedir-te uma coisa ao longo destas páginas: que leias com ternura por ti. Que, sempre que aparecer a voz que diz "mas eu sou a mãe, tenho de aguentar", pares um momento e te perguntes se dirias isso a uma amiga na tua situação. Porque tu mereces o mesmo cuidado que darias a ela. E talvez, ao fim deste livro, comeces a acreditar que pôr um limite a quem te magoa não é deixar de ser mãe. É a forma de continuares a sê-lo sem te perderes inteira no caminho.
 
@@ -113,7 +113,7 @@ Vou deixar cair aqui a frase que pode partir a corrente que te prende há anos. 
 
 Dizer basta não é deixar de amar.
 
-Fica com isto um momento. Sente o que mexe.
+Pousa esta frase no peito como quem pousa uma chave na mão e a sente fria, antes de a usar. Sente o que mexe.
 
 Durante toda a tua vida de mãe acreditaste no contrário. Acreditaste que dizer não, pôr um limite, recusar, afastar, era o oposto de amar. Que uma mãe que ama aguenta, acolhe, perdoa sempre, está sempre disponível. E por isso, cada vez que o teu corpo te pedia para parar, para te protegeres, para dizeres basta, a tua mente travava-te com a mesma sentença: se fizeres isso, deixas de ser boa mãe. E ficaste. E sofreste. E o limite, que era a tua salvação, ficou proibido por uma crença que nunca chegaste a questionar.
 
@@ -125,7 +125,7 @@ Aqui está o despertar deste livro, a coisa que muda tudo: compreender o teu fil
 
 Quero ajudar-te a ver de onde vem a crença de que pôr um limite a um filho te tira a maternidade, porque vê-la nascer ajuda a soltá-la. Para muitas mulheres, esta crença foi herdada, passada por linhas de mães e avós que se sacrificaram inteiras e a quem nunca foi permitido recusar nada a um filho. Cresceste a ver mulheres que davam tudo e não pediam nada, que aguentavam tudo e não diziam nada, e aprendeste, sem palavras, que era isso que uma mãe fazia. A tua dificuldade em dizer basta não começou contigo. Vem de trás, de uma ideia de maternidade construída sobre o sacrifício sem limite. E parte do que estás a fazer agora, ao questioná-la, é interromper uma herança, decidir que em ti essa linha pode mudar, que se pode amar um filho sem se desaparecer por ele.
 
-E há uma confusão de fundo que vale a pena desfazer: a confusão entre ser mãe e estar disponível sem fim. Tu és mãe do teu filho para sempre, isso não está em causa, não é algo que um limite te possa tirar. Ser mãe é um vínculo, não é uma porta sempre aberta para ser ferida. Podes ser inteiramente mãe e, ao mesmo tempo, indisponível para o que te magoa. As duas coisas não se tocam. O limite não mexe no facto de seres mãe dele, mexe apenas nas condições em que estás disponível, e ter condições não é deixar de amar, é amar como uma pessoa inteira ama, e não como alguém que se anulou.
+E há uma confusão de fundo que vale a pena desfazer: a confusão entre ser mãe e estar disponível sem fim. Tu és mãe do teu filho para sempre, isso não está em causa, não é algo que um limite te possa tirar. Ser mãe é um vínculo, não é uma porta sempre aberta para ser ferida. Podes ser inteiramente mãe e, ao mesmo tempo, indisponível para o que te magoa. Uma é a casa, a outra é a porta, e a porta nunca derruba a casa. O limite não mexe no facto de seres mãe dele, mexe apenas nas condições em que estás disponível, e ter condições não é deixar de amar, é amar como uma pessoa inteira ama, e não como alguém que se anulou.
 
 E preciso de ser honesta contigo numa coisa, porque não te quero vender uma ilusão. Dizer basta protege-te a ti. Não garante que o teu filho mude. Talvez mude, talvez a tua firmeza abra nele uma porta que a tua tolerância mantinha fechada. Mas talvez não, pelo menos não já, e tu tens de poder pôr o limite mesmo sem a garantia de que ele vai reagir bem. Porque o limite não é uma estratégia para o transformar. É uma proteção para ti. Se ele mudar, será um presente. Mas tu pões o limite por ti, pela tua dignidade, pela tua sobrevivência, e não na condição de ele te recompensar com a mudança que esperas. Esperar que o limite mude o outro é, no fundo, mais uma forma de pores a tua vida nas mãos dele.
 
@@ -197,7 +197,7 @@ E sabes, talvez pela primeira vez, que a tua dor conta. Que não és só a mãe 
 
 Sabes, no fundo, a frase que segura este livro inteiro: posso amar-te e dizer basta.
 
-Compreender foi o primeiro passo. Mas há um segundo, e o segundo, neste livro, é mais do que autoconhecimento. É proteção, e às vezes é cuidado profissional, e é uma rede à tua volta.
+Pôr nome ao que vives foi a primeira porta que abriste. Mas há uma segunda, e a segunda, neste livro, é mais do que autoconhecimento. É proteção, e às vezes é cuidado profissional, e é uma rede à tua volta.
 
 E quero que leves contigo a coexistência que percorre este livro inteiro, porque é nela que mora a tua liberdade. Vejo a tua dor, e não aceito esta forma de me tratares. Repete-a até deixar de soar a contradição e começar a soar a verdade. Porque foi a impossibilidade de segurar estas duas coisas ao mesmo tempo que te prendeu durante anos: achavas que tinhas de escolher entre a compaixão e a proteção, entre ser boa mãe e ser uma pessoa inteira. Não tens. Podes ficar com as duas, na mesma mão, com o mesmo amor. E o dia em que conseguires dizer as duas coisas, e mantê-las, é o dia em que paras de te perder e começas a poder amar sem desapareceres.
 
