@@ -27,7 +27,7 @@ E há, por baixo, uma questão de legitimidade, e às vezes algo mais fundo. O m
 
 Repara na contradição em que isto te deixa, porque ela é cruel. Por um lado, desejas ser vista, reconhecida, que o teu trabalho chegue, que a tua voz conte. Esse desejo é legítimo e é saudável, todos queremos, no fundo, ser vistos no que temos de melhor. Por outro lado, aterroriza-te exatamente isso. E vives no meio destas duas forças, a querer e a temer, a aproximar-te e a recuar, num conflito que te esgota e te paralisa. Não é que não queiras a luz. É que a queres e a temes ao mesmo tempo, e o medo, por ser mais antigo e mais forte, ganha quase sempre, deixando o desejo por cumprir e a frustração a crescer.
 
-Este livro não é sobre marketing pessoal, nem sobre como ganhar confiança em palco. Vim olhar para outra coisa, mais funda. Para o medo de seres vista. Para a razão pela qual te escondes de uma visibilidade que o teu trabalho merece. E para a possibilidade de te mostrares sem o terror que hoje te paralisa, e de deixares chegar ao mundo o que tens, enfim, para dar.
+Este livro não é sobre marketing pessoal, nem sobre como ganhar confiança em palco. Vim olhar para o que fica na sombra, mais fundo. Para o medo de seres vista. Para a razão pela qual te escondes de uma visibilidade que o teu trabalho merece. E para a possibilidade de te mostrares sem o terror que hoje te paralisa, e de deixares chegar ao mundo o que tens, enfim, para dar.
 
 E deixo-te a direção logo à entrada, para que leias sem o aperto de quem teme o que vem. Podes ser vista sem te perderes. Mostrar o teu trabalho, a tua voz, o teu valor, não te tira nada, não te expõe ao perigo que temes. E o medo de ser vista, que te esconde, vem de uma ferida que vamos olhar, e que, se for intensa, merece também o apoio de quem saiba acompanhá-la.
 
@@ -35,7 +35,7 @@ Quero que distingas, desde já, a mulher que os outros veem da mulher que se esc
 
 Este livro não te vem dizer que tens de te tornar extrovertida, que tens de adorar palcos, que tens de viver exposta. Não se trata de mudares quem és. Trata-se de te devolver uma escolha que o medo te tirou: a de poderes mostrar o teu trabalho quando o quiseres, de ocupares a luz quando ela for tua, de seres vista sem que um terror te obrigue a esconder. Quer sejas, por natureza, mais reservada ou mais expansiva, mereces que isso seja uma escolha tua, e não uma imposição do medo.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te vejas nestes gestos pequenos, desses que escondem mais do que parecem.
 
 Em teres algo valioso para mostrar, e em o esconderes, adiares, guardares, por medo de te exporeres, dizendo a ti mesma que ainda não está pronto quando, na verdade, o que te trava é o medo.
 
@@ -71,13 +71,13 @@ Repara no que aprendeste. Que ser vista é perigoso, ou vergonhoso. Que a exposi
 
 Talvez a humilhação tenha sido um momento marcante, daqueles que ficam: uma vez em que te expuseste, em que mostraste algo de ti com orgulho ou com entusiasmo, e foste cortada, gozada, ridicularizada, à frente de outros. E o corpo guardou essa vergonha de uma forma tão funda que, desde então, ser vista e ser humilhada ficaram colados, e basta a hipótese de te mostrares para o corpo reviver, em antecipação, aquela vergonha antiga. Não te lembras, talvez, conscientemente, do quanto aquilo te marcou. Mas o teu medo lembra-se por ti, e protege-te, escondendo-te, de uma humilhação que já passou.
 
-Quero que vejas isto sem culpa. O teu medo de ser vista não é fraqueza, nem falta de confiança que se resolva com umas dicas. É uma ferida, a de quem foi julgada, exposta, ou humilhada, ao mostrar-se, e que aprendeu a esconder-se para se proteger. Não és tímida por feitio. És alguém que aprendeu que ser vista doía, e que se esconde para não voltar a doer.
+Olha para isto sem te culpares por te esconderes. O teu medo de ser vista não é fraqueza, nem falta de confiança que se resolva com umas dicas. É uma ferida, a de quem foi julgada, exposta, ou humilhada, ao mostrar-se, e que aprendeu a esconder-se para se proteger. Não és reservada por feitio. És alguém que aprendeu que ser vista doía, e que se esconde para não voltar a doer.
 
 E quero mostrar-te em que lugar do corpo este medo se aloja, porque é aí que se decide tudo. Este medo não está só na tua cabeça, no que pensas. Está no corpo, numa reação que dispara antes do pensamento. Por isso não basta dizeres a ti mesma que não há perigo, que ninguém te vai gozar, que o teu trabalho é bom. O medo não obedece à razão, porque não nasce dela, nasce de uma memória de corpo, antiga, que trata a visibilidade como ameaça. E uma memória de corpo não se desfaz com argumentos, reaprende-se devagar, com experiências novas, em que o corpo descobre que se mostrou e não foi humilhado, vez após vez, até acreditar.
 
 ## 3. Esconder-me custa-me a vida que poderia ter
 
-Há uma coisa que precisas de ver. Esconderes-te protege-te do julgamento, sim. Mas custa-te a vida que poderias ter.
+Há uma conta escondida que precisas de ver à luz. Esconderes-te protege-te do julgamento, sim. Mas custa-te a vida que poderias ter.
 
 Repara no preço. O que não se mostra não se conhece, não se escolhe, não se reconhece. Ao esconderes o teu trabalho, a tua voz, o teu valor, passas ao lado de oportunidades, de reconhecimento, de impacto, que seriam teus se te mostrasses. A tua visibilidade evitada é uma porta fechada a tudo o que exigiria seres vista.
 
@@ -101,21 +101,21 @@ E custa-te, talvez, o mais doloroso de tudo: assistires a outros a viverem o que
 
 Quero que vejas, também, que esconderes-te não te poupa, afinal, ao sofrimento. Trocaste o medo de seres vista pela frustração de não o seres. Achavas que esconder-te te protegia, mas o esconderijo tem o seu próprio sofrimento: o da vida por viver, do valor por mostrar, da frustração de quem se sabe capaz e se vê parada. Não há, afinal, opção sem dor. Há a dor de arriscares ser vista, que passa e ensina, e a dor de te esconderes, que fica e corrói. E entre as duas, talvez valha a pena escolher a que, ao menos, te leva a algum lado.
 
-Quero que sintas o peso disto. O peso de teres algo para dar e o esconderes. De viveres aquém de ti, na sombra, por medo da luz. De veres passar a vida que poderias ter, por não te atreveres a ser vista. É uma frustração funda, e talvez já a tomes por modéstia, ou por feitio, quando é, no fundo, uma ferida que te rouba o que poderias ser.
+Quero que sintas o peso de viver na sombra. O peso de teres algo para dar e o esconderes. De viveres aquém de ti, na sombra, por medo da luz. De veres passar a vida que poderias ter, por não te atreveres a ser vista. É uma frustração funda, e talvez já a tomes por modéstia, ou por feitio, quando é, no fundo, uma ferida que te rouba o que poderias ser.
 
 ## 4. Quem sou eu se me mostrar
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pôr aqui uma pergunta, à vista, sem onde te esconderes dela. Sozinha. Não fujas dela.
 
 Quem serias tu se te mostrasses? Se ocupasses a luz, em vez da sombra? Se deixasses o mundo ver o teu trabalho, a tua voz, o teu valor?
 
-Fica com ela. Repara no que ela mexe. Talvez um terror, talvez um desejo logo abafado.
+Fica com ela. Repara no que se acende e no que se apaga em ti ao lê-la. Talvez um terror, talvez um desejo logo abafado.
 
 Para ti, esta pergunta acende logo o alarme antigo. Porque mostrares-te, expores-te, seres vista, desperta o terror antigo do julgamento, da humilhação, da exposição. Como se ser vista fosse arriscar o que te magoou antes: o gozo, a crítica, a vergonha de teres ousado mostrar-te.
 
 E a sombra que aqui se esconde é o medo de te exporeres e seres julgada. De que, ao mostrares-te, te vejam, e te critiquem, e descubram algo em ti que te faça merecer a vergonha que temes. O medo não é só de ser vista. É do que imaginas que verão, e do julgamento que imaginas que virá.
 
-Repara como isto te aprisiona. Não te mostras, mesmo tendo valor, porque mostrar-te desperta o terror do julgamento. Escondes-te, encolhes-te, deixas a luz para outros, não por não mereceres a luz, mas por teres medo do que ela traz. E vives, assim, aquém de ti, na sombra, presa a um medo que te rouba a vida que o teu valor mereceria.
+Repara como isto te tranca na sombra. Não te mostras, mesmo tendo valor, porque mostrar-te desperta o terror do julgamento. Escondes-te, encolhes-te, deixas a luz para outros, não por não mereceres a luz, mas por teres medo do que ela traz. E vives, assim, aquém de ti, na sombra, presa a um medo que te rouba a vida que o teu valor mereceria.
 
 E quero parar aqui um momento, com cuidado. Porque se o medo de ser vista é muito intenso, se te causa uma angústia que aperta, ataques de pânico, uma evitação que limita seriamente a tua vida, isto pode ser mais do que timidez. Pode ser ansiedade social, e isso tem nome, e tem ajuda. Não é feitio, não é fraqueza, não é algo que se resolva só a esforço. Um profissional pode ajudar-te, e procurá-lo não é exagero, é cuidar de algo que merece ser cuidado.
 
@@ -123,15 +123,15 @@ Quero pôr à luz uma verdade que faz este medo começar a encolher. Ser vista, 
 
 E quero distinguir-te uma coisa que liberta. O que te assusta não é, de facto, seres vista. É seres julgada. Reparas? Se soubesses, com certeza, que ao mostrares-te serias acolhida, reconhecida, bem recebida, não terias medo nenhum de te mostrar. O medo não é da visibilidade em si, é do julgamento que imaginas que ela traz. E esse julgamento, na maioria das vezes, é muito maior na tua imaginação do que na realidade. As pessoas não olham para ti com a lupa cruel com que tu te imaginas observada. Olham distraídas, ocupadas consigo, e a maioria nem repara, e dos que reparam, a maioria não julga, e dos que julgam, o juízo fala mais deles do que de ti.
 
-Não respondas já à pergunta de quem serias se te mostrasses. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu medo de ser vista deixar de te governar, deixas de te esconder de uma luz que mereces. E aí, só aí, podes mostrar, enfim, o que tens para dar.
+Não respondas já à pergunta de quem serias se te mostrasses. Mas deixa-a aberta. Porque é por essa pergunta que se sai da sombra para a luz. No dia em que o teu medo de ser vista deixar de te governar, deixas de te esconder de uma luz que mereces. E aí, só aí, podes mostrar, enfim, o que tens para dar.
 
 ## 5. Quando o medo é ansiedade social
 
-Tenho de parar o livro aqui. Com seriedade. Porque há uma fronteira entre o medo de ser vista e uma ansiedade que pede ajuda, e é importante saberes de que lado estás.
+Tenho de parar e acender uma luz neste ponto. Com seriedade. Porque há uma fronteira entre o medo de ser vista e uma ansiedade que pede ajuda, e é importante saberes de que lado estás.
 
 De um lado, está um receio de te exporeres, um desconforto com a visibilidade, uma timidez que te encolhe. Dói, mas tem caminho, e o caminho passa por compreender, e por arriscares, devagar, mostrar-te.
 
-Do outro lado, está algo mais sério. E quero nomeá-lo. Se a ideia de seres vista te causa uma angústia intensa, um pânico, sintomas físicos, o coração a disparar, a respiração a faltar, um terror que te paralisa. Se evitas, a todo o custo, situações de exposição, e essa evitação limita seriamente a tua vida, o teu trabalho, as tuas relações. Se o medo do julgamento dos outros te domina, te tira o sono, te impede de viver o que querias.
+Do outro lado, está algo mais sério, que não se resolve a coberto da sombra. E quero nomeá-lo. Se a ideia de seres vista te causa uma angústia intensa, um pânico, sintomas físicos, o coração a disparar, a respiração a faltar, um terror que te paralisa. Se evitas, a todo o custo, situações de exposição, e essa evitação limita seriamente a tua vida, o teu trabalho, as tuas relações. Se o medo do julgamento dos outros te domina, te tira o sono, te impede de viver o que querias.
 
 Isto pode ser ansiedade social. E a ansiedade social não é timidez, não é feitio, não é falta de esforço. É uma condição real, que causa sofrimento real, e que tem tratamento. Há formas de ajudar quem vive com ansiedade social, e elas funcionam, mas passam por apoio profissional, de um psicólogo, por vezes de um médico, e não por te forçares, sozinha, a enfrentar o que te aterroriza.
 
@@ -157,7 +157,7 @@ Repara na palavra que escolhi: multiplica-te. Porque o que escondes fica preso e
 
 E quero que percebas que o controlo, aqui, está mais nas tuas mãos do que o medo te deixa ver. Tu escolhes o que mostras e o que guardas, onde te mostras e a quem, quando avanças e quando recuas. Mostrar-te não é entregares-te, desarmada, ao olhar de todos. É partilhares, com intenção, o que decides partilhar, mantendo sempre o leme. E saber isto muda a experiência: já não é um salto no escuro, à mercê do julgamento, é um gesto teu, controlado, em que decides cada passo. A visibilidade que temes é a que não controlas; a que te proponho é a que conduzes.
 
-Vou dizer-te de outra forma. Há uma diferença entre ser vista e ser exposta. Ser exposta é estar à mercê do olhar dos outros, sem controlo, despida, vulnerável, como talvez tenhas sido, um dia. Ser vista, por escolha, é mostrares o que escolhes mostrar, o teu trabalho, o teu valor, com o controlo de quem decide o que partilha. São coisas diferentes, e o teu medo confunde-as. A exposição magoou-te. Mas ser vista, por escolha, é outra coisa, e pode ser segura, e boa.
+Deixa-me mostrar-te isto a outra luz. Há uma diferença entre ser vista e ser exposta. Ser exposta é estar à mercê do olhar dos outros, sem controlo, despida, vulnerável, como talvez tenhas sido, um dia. Ser vista, por escolha, é mostrares o que escolhes mostrar, o teu trabalho, o teu valor, com o controlo de quem decide o que partilha. São coisas diferentes, e o teu medo confunde-as. A exposição magoou-te. Mas ser vista, por escolha, é outra coisa, e pode ser segura, e boa.
 
 Repara nesta distinção, porque ela devolve-te o poder. Quando foste humilhada, não escolheste expor-te, ou expuseste-te confiando e foste traída nessa confiança. Estavas sem controlo, à mercê. Mas mostrares o teu trabalho hoje, por tua decisão, é o oposto disso: és tu quem decide o quê, quando, a quem, e como. Tu seguras as rédeas. E essa diferença, entre seres exposta sem controlo e mostrares-te por escolha, muda tudo, porque o que te aterroriza é a primeira, e o que te proponho é a segunda. Podes ser vista mantendo o leme nas tuas mãos, e isso não é o perigo que viveste, é uma forma nova, tua, de te mostrares.
 
@@ -165,7 +165,7 @@ E quero que vejas que mostrar o teu trabalho não é mostrar-te a ti, toda, desp
 
 E quero ser honesta. Se o teu medo é ansiedade social a sério, esta verdade não basta para o curar. O teu corpo vai continuar a entrar em pânico perante a visibilidade, por mais que a tua cabeça saiba que é seguro. Por isso, nesse caso, este caminho faz-se com ajuda, com alguém preparado para te acompanhar a enfrentar, devagar e em segurança, o que te aterroriza.
 
-Mas há coisas que podes começar, com cuidado. Podes começar por mostrar-te em pequeno, em contextos seguros. Partilhar uma ideia, mostrar um trabalho, ocupar um pouco de luz, num lugar onde te sintas relativamente segura. E observar o que acontece. Quase de certeza, não a humilhação que temes, mas uma resposta normal, ou até boa, ao que mostras. E cada vez que te mostras, e não és julgada como temias, o teu medo perde um pouco de força.
+Mas há coisas que podes começar, com cuidado. Podes começar por mostrar-te em pequeno, em contextos seguros. Partilhar uma ideia, mostrar um trabalho, ocupar um pouco de luz, num lugar onde te sintas relativamente segura. E reparar no que o olhar do outro te devolve. Quase de certeza, não a humilhação que temes, mas uma resposta normal, ou até boa, ao que mostras. E cada vez que te mostras, e não és julgada como temias, o teu medo perde um pouco de força.
 
 Cada vez que te mostras, em pequeno, e nada de terrível acontece, dás ao teu sistema uma prova nova. Que ser vista, hoje, não traz o perigo de então. E é com provas, repetidas, no corpo, e não só com ideias, na cabeça, que o medo, devagar, se afrouxa. Não se desfaz o terror convencendo-te de que podes mostrar-te. Desfaz-se mostrando-te, em pequeno, e sobrevivendo, vez após vez, até o corpo acreditar. É um trabalho lento, de muitas pequenas provas, e por isso não te exijas perder o medo de repente: o corpo aprende ao seu ritmo, e a tua tarefa é só dar-lhe, repetidamente, a experiência de te mostrares e ficares bem.
 
@@ -179,7 +179,7 @@ O despertar, quando vem, é uma surpresa. É a vez em que te mostras, em que ocu
 
 ## 7. Mostrar o que tenho para dar
 
-Há um destino para esta travessia. Mostrares o que tens para dar.
+Há uma luz no fim desta travessia. Mostrares o que tens para dar.
 
 E quero mostrar-te o que isto significa, com cuidado.
 
@@ -201,7 +201,7 @@ Pensa em quem beneficiaria do que tu escondes. Há pessoas, algures, que precisa
 
 Quero também desfazer a confusão entre esconderes-te e seres humilde. A humildade verdadeira não esconde o valor, reconhece-o com simplicidade e partilha-o com generosidade. Esconder o que tens para dar não é humildade, é medo disfarçado de virtude. E o mundo, que aplaude a discrição, ajuda-te, sem querer, a manter o disfarce, fazendo-te sentir que esconderes-te é uma qualidade. Não é. É uma ferida. E confundi-la com humildade só a torna mais difícil de curar, porque te faz defender, como virtude, aquilo que te rouba a vida.
 
-E há uma libertação enorme nisto. Quando te mostras, deixas de viver na frustração de quem tem algo para dar e o esconde. Deixas de ver outros ocupar a luz que poderia ser tua. Deixas de viver aquém de ti, na sombra. E começas a viver a vida que o teu valor merece, com o teu trabalho a chegar ao mundo, a tua voz a ser ouvida, o teu valor a ser visto.
+E há uma luz enorme que se acende quando dás este passo. Quando te mostras, deixas de viver na frustração de quem tem algo para dar e o esconde. Deixas de ver outros ocupar a luz que poderia ser tua. Deixas de viver aquém de ti, na sombra. E começas a viver a vida que o teu valor merece, com o teu trabalho a chegar ao mundo, a tua voz a ser ouvida, o teu valor a ser visto.
 
 Vai custar-te, porque a velha voz, a que te manda esconder, está gravada fundo, e vai aparecer a cada vez que ousas mostrar-te, com o seu aviso de sempre. Vai dizer-te quem és tu para te exporeres, vão gozar-te, é melhor não arriscar. A tarefa não é calar essa voz num só gesto, é parares de fazer o que ela manda. Ouvi-la dizer esconde-te, e responder-lhe, devagar, o que tenho merece ser visto, vou mostrar. E cada vez que te mostras apesar dela, e não és humilhada, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, que sabe que tens direito à luz.
 
@@ -215,7 +215,7 @@ Não te vou dar um método de exposição, porque este livro não é sobre técn
 
 Escrevi este livro por uma convicção simples. Compreender muda. E, quando o medo é intenso, compreender abre a porta a procurar a ajuda que o pode tratar.
 
-Não muda tudo de uma vez. Não te faz, amanhã, perder um medo de uma vida inteira. Mas muda o suficiente para deixares de confundir o teu esconderijo com modéstia, e o teu medo com feitio.
+Não te acende toda a luz de uma só vez. Não te faz, amanhã, perder um medo de uma vida inteira. Mas muda o suficiente para deixares de confundir o teu esconderijo com modéstia, e o teu medo com feitio.
 
 Agora sabes que te escondes de uma visibilidade que o teu valor merece, e que isso não é só timidez, é uma ferida vestida, às vezes, de modéstia.
 

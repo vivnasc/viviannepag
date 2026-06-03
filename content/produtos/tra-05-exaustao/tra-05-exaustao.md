@@ -27,7 +27,7 @@ Quero dizer-te já, antes de tudo, que isto não é só dedicação, nem ética 
 
 Porque a exaustão não prova nada. Não és mais merecedora por te esgotares. Não vales mais por acabares destruída. O cansaço não é a medida do teu valor, nem do teu mérito, nem da tua dedicação. É, apenas, cansaço, e levado ao extremo, é doença. Uma medalha que, em vez de te honrar, te vai consumindo.
 
-Este livro não é sobre produtividade, nem sobre gestão do tempo, nem sobre como trabalhar de forma mais sustentável. Vim olhar para outra coisa, mais funda. Para a equação que te faz confundir exaustão com mérito. Para a razão pela qual precisas de te esgotar para sentires que mereces. E para a possibilidade de descansares, enfim, sem culpa, sem que isso te tire o valor que, no fundo, nunca dependeu do teu cansaço.
+Este livro não é sobre produtividade, nem sobre gestão do tempo, nem sobre como trabalhar de forma mais sustentável. Vim sentar-me ao pé de algo mais fundo, por baixo do relógio e da lista. Para a equação que te faz confundir exaustão com mérito. Para a razão pela qual precisas de te esgotar para sentires que mereces. E para a possibilidade de descansares, enfim, sem culpa, sem que isso te tire o valor que, no fundo, nunca dependeu do teu cansaço.
 
 E deixo-te já a bússola, para que leias sem a tensão de quem espera o golpe. O teu valor não se mede em exaustão. Podes descansar sem deixar de valer. E essa necessidade de te esgotares para mereceres vem de uma ferida que vamos olhar, e que, se já te levou ao limite, merece também o cuidado de quem saiba acompanhá-la.
 
@@ -35,7 +35,7 @@ Há uma mulher que os outros veem e uma mulher que se esgota por dentro, e elas 
 
 Este livro não te vem pedir que trabalhes menos, ou que deixes de te dedicar, ou que a tua entrega não vale nada. A tua dedicação é real e é bonita. Vem pedir-te que pares de a medir em sofrimento, que deixes de precisar de te esgotar para te sentires digna, e que descubras que podes dar o teu melhor e também descansar, sem que o descanso te tire o valor que o esforço, sozinho, nunca te deu de verdade.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nos pequenos recibos de cansaço que vais juntando sem dar conta.
 
 Em sentires culpa quando descansas, como se estivesses a fazer algo errado, a falhar, a ser preguiçosa, mesmo quando estás claramente exausta e precisas de parar.
 
@@ -77,19 +77,19 @@ Repara no que aprendeste, em qualquer destas raízes. Que o valor se prova no es
 
 Talvez tenhas crescido a ver, em casa, o amor e a aprovação chegarem pelo esforço. A criança que ajudava, que se sacrificava, que se cansava, era a boa filha, a que dava orgulho; a que descansava, a que brincava, a que não fazia nada, era a preguiçosa, a que dececionava. E aprendeste, cedo, a equação que te governa hoje: o amor ganha-se com esforço, e o descanso afasta-o. Por isso descansar não te traz só culpa, traz um medo antigo, o de que, ao parares, deixes de ser digna do afeto que sentiste que só o esforço te dava.
 
-Quero que vejas isto sem culpa. A tua confusão entre exaustão e mérito não é defeito, nem masoquismo. É uma equação herdada, aprendida num tempo em que o teu valor parecia depender do teu esforço visível. Não és incapaz de descansar por feitio. És alguém que aprendeu que descansar era não merecer, e que se esgota para ter direito a valer.
+Olha para isto como olharias para uma medalha herdada, sem te censurares por a teres ao peito. A tua confusão entre exaustão e mérito não é defeito, nem masoquismo. É uma equação herdada, aprendida num tempo em que o teu valor parecia depender do teu esforço visível. Não és incapaz de descansar por feitio. És alguém que aprendeu que descansar era não merecer, e que se esgota para ter direito a valer.
 
 E quero que vejas em que parte de ti esta equação mora, porque sem isso nada se desfaz. Esta equação não é só uma ideia na tua cabeça, que se mude com um argumento. É uma forma de te sentires, gravada fundo, em que o descanso aciona culpa e a exaustão acalma. Por isso não basta perceberes, racionalmente, que o teu valor não depende do esforço, para deixares de sentir a culpa quando paras. A culpa não obedece à razão, porque não nasce dela, nasce de uma equação antiga, que se desfaz devagar, com a experiência repetida de descansares e descobrires que não deixaste de valer, e muitas vezes com ajuda de quem te acompanhe a desarmá-la.
 
 ## 3. O descanso que parece traição
 
-Há uma coisa que precisas de ver. Para ti, descansar não é descansar. É culpa. É traição. É falha.
+Há aqui um nó que precisas de desatar à luz. Para ti, descansar não é descansar. É culpa. É traição. É falha.
 
 Repara no que sentes quando paras. Não é alívio. É inquietação. Uma voz que diz que devias estar a fazer algo, que estás a perder tempo, que não mereces aquele descanso, que és preguiçosa. E essa voz não te larga, e estraga-te o descanso, e empurra-te de volta para o trabalho, para a exaustão, para a única coisa que te dá paz: estar a esgotar-te.
 
 E repara, com honestidade, que muitas vezes nem chegas a descansar de verdade. Levas o trabalho para o descanso, em pensamento. Estás de férias mas a planear o regresso. Estás com a família mas a remoer o que ficou por fazer. O teu corpo para, mas a tua mente não, e por isso o descanso não repõe, porque não há descanso real onde a cabeça continua a trabalhar. É como tentares carregar uma bateria sem desligar o aparelho: nunca enche. E é por isso que, por mais que descanses assim, acordas sempre cansada, porque o teu descanso é só uma pausa vigiada, e não o repouso de quem, enfim, desligou.
 
-E há um custo enorme nisto. Porque uma pessoa que não consegue descansar sem culpa nunca descansa de verdade. O teu corpo nunca repõe, a tua mente nunca para, e tu vais acumulando um cansaço que nunca se resolve, porque o descanso que o resolveria é-te proibido pela culpa. Esgotas-te sem fim, e o esgotamento agrava-se, porque o único remédio, o descanso, não te permites tomar.
+E esta equação cobra uma fatura pesada. Porque uma pessoa que não consegue descansar sem culpa nunca descansa de verdade. O teu corpo nunca repõe, a tua mente nunca para, e tu vais acumulando um cansaço que nunca se resolve, porque o descanso que o resolveria é-te proibido pela culpa. Esgotas-te sem fim, e o esgotamento agrava-se, porque o único remédio, o descanso, não te permites tomar.
 
 E há um custo na tua relação com a vida. Porque viver não é só trabalhar. É também descansar, desfrutar, estar, brincar, não fazer nada. E tu, ao proibires-te o descanso, ao só te permitires o esforço, vives uma vida amputada, reduzida ao trabalho, sem o ócio, o prazer, a folga, que são parte do que torna uma vida cheia. Cumpres a vida como uma tarefa, e nunca a vives como um gozo.
 
@@ -105,11 +105,11 @@ Quero que vejas, ainda, que esta equação te rouba a capacidade de sentir orgul
 
 E custa-te, também, às pessoas que amas, e a ti com elas. Porque o tempo que devia ser delas, e teu, é engolido pelo trabalho, ou por uma exaustão que já não te deixa estar presente. Estás com elas mas destruída, sem energia para a conversa, para o jogo, para o carinho, porque gastaste tudo a merecer. E quando, raramente, paras, a culpa não te deixa estar inteira nem aí. Assim, a tua dedicação, que parece uma virtude, vai roubando os momentos que mais importam, e quem te ama recebe sempre os teus restos, o que sobra depois de a exaustão ter levado o melhor de ti.
 
-Quero que sintas o peso disto. O peso de nunca poderes descansar em paz. De carregares uma culpa sempre que paras. De te esgotares sem fim, porque só a exaustão te dá o direito de valer. É uma exaustão funda, e talvez já a tomes por dedicação, ou por ética de trabalho, quando é, no fundo, uma ferida que te proíbe o descanso e te empurra para o esgotamento.
+Quero que sintas, nos ombros, o quanto esta medalha pesa. O peso de nunca poderes descansar em paz. De carregares uma culpa sempre que paras. De te esgotares sem fim, porque só a exaustão te dá o direito de valer. É uma exaustão funda, e talvez já a tomes por dedicação, ou por ética de trabalho, quando é, no fundo, uma ferida que te proíbe o descanso e te empurra para o esgotamento.
 
 ## 4. Quem sou eu quando descanso
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Pouso aqui uma pergunta, no silêncio em que não há nada a cumprir. Sozinha. Não fujas dela.
 
 Quem és tu quando descansas? Quando não estás a produzir, a esforçar-te, a esgotar-te? Quem és, simplesmente parada, a não fazer nada?
 
@@ -119,9 +119,9 @@ Para ti, esta pergunta mexe num sítio que dói, e por isso lhe foges. Porque o 
 
 E a sombra que aqui se esconde é a crença de que, sem o esforço, sem a exaustão, não tens valor. De que descansar é não merecer. De que o teu direito a valer depende de estares sempre a dar, a esgotar-te, a provar, e que no momento em que paras, esse direito se suspende, e tu deixas de valer.
 
-Repara como isto te aprisiona. Não consegues descansar, mesmo destruída, porque descansar suspende o teu valor. Esgotas-te sem fim, porque só a exaustão o confirma. Vives presa a uma equação que te proíbe a folga, porque a folga, no teu mundo, é deixar de merecer. E o descanso, que é uma necessidade humana básica, torna-se, para ti, uma transgressão, um luxo culpado, uma falha.
+Repara nas grades que esta equação fecha à tua volta. Não consegues descansar, mesmo destruída, porque descansar suspende o teu valor. Esgotas-te sem fim, porque só a exaustão o confirma. Vives presa a uma equação que te proíbe a folga, porque a folga, no teu mundo, é deixar de merecer. E o descanso, que é uma necessidade humana básica, torna-se, para ti, uma transgressão, um luxo culpado, uma falha.
 
-E há uma fragilidade enorme nisto. Porque um valor que depende do esforço constante é um valor sempre em risco, sempre a precisar de ser renovado com mais exaustão. Nunca podes descansar nesse valor, porque ele depende de continuares a esgotar-te. Vives, por isso, numa corrida sem fim, a provar, a cada dia, com mais cansaço, um valor que nunca fica garantido, porque assenta numa exaustão que tens de repetir sem parar.
+E que alicerce frágil é este, feito só de cansaço. Porque um valor que depende do esforço constante é um valor sempre em risco, sempre a precisar de ser renovado com mais exaustão. Nunca podes descansar nesse valor, porque ele depende de continuares a esgotar-te. Vives, por isso, numa corrida sem fim, a provar, a cada dia, com mais cansaço, um valor que nunca fica garantido, porque assenta numa exaustão que tens de repetir sem parar.
 
 Compara com quem tem um valor que descansa em si. Essa pessoa pode trabalhar e parar, dar e repor, sem que o seu sentido de valer oscile com a quantidade de esforço de cada dia. Vale quando produz e vale quando descansa, porque o valor não está no fazer, está em ser. E por isso vive com uma paz que te falta: a de não ter de provar nada, a cada hora, para continuar a merecer. É essa paz que esta travessia te quer devolver, não a de fazeres menos, mas a de deixares de fazer depender o teu valor do quanto te esgotas.
 
@@ -129,11 +129,11 @@ Quero dizer-te uma coisa sobre esta crença, porque ela começa a desarmar-se. O
 
 E quero dizer-te uma coisa sobre o pânico fino que esta pergunta acorda, esse aperto que te faz logo procurar uma tarefa. O que te assusta no descanso não é o descanso em si, é o vazio que ele descobre, a pergunta sobre o teu valor que o esforço tapava. Enquanto te esgotas, não tens de enfrentar essa pergunta, porque a exaustão responde por ti: dei tudo, logo valho. Quando paras, a resposta automática desaparece, e fica a pergunta nua: valho, mesmo sem dar nada? E é dessa pergunta que foges, esgotando-te, porque enfrentá-la, sem a muleta do esforço, aterroriza-te. Mas é precisamente essa pergunta que precisa de uma resposta nova, e a resposta é sim, vales, e o descanso é o lugar onde, devagar, podes aprendê-la.
 
-Não respondas já à pergunta de quem és quando descansas. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que descobrires que vales mesmo quando descansas, deixas de te ter de esgotar para merecer. E aí, só aí, podes descansar, enfim, sem culpa.
+Não respondas já à pergunta de quem és quando descansas. Mas deixa-a aberta. Porque é nessa pergunta que mora a saída desta corrida. No dia em que descobrires que vales mesmo quando descansas, deixas de te ter de esgotar para merecer. E aí, só aí, podes descansar, enfim, sem culpa.
 
 ## 5. Quando a exaustão é burnout
 
-Tenho de parar o livro aqui. Com toda a seriedade. Porque há um ponto em que a exaustão deixa de ser uma medalha e passa a ser uma doença, e é vital saberes reconhecê-lo.
+Preciso de travar estas páginas e pousar a caneta. Com toda a seriedade. Porque há um ponto em que a exaustão deixa de ser uma medalha e passa a ser uma doença, e é vital saberes reconhecê-lo.
 
 Quando se confunde exaustão com mérito, esgota-se sem fim, sem parar, até ao limite. E do outro lado desse limite está o burnout, um esgotamento sério, que o corpo e a mente cobram, e que não é uma medalha, é uma ferida.
 
@@ -157,21 +157,21 @@ Quero que percebas, também, que o burnout não é uma falha de caráter, nem fa
 
 Se confundiste exaustão com mérito, então há uma verdade nova à tua espera. Podes descansar sem deixares de valer.
 
-Lê isto devagar. Para ti, descansar e valer são incompatíveis. Só vales quando te esforças, quando te esgotas. Descansar é suspender o teu valor. E proponho-te separar as duas coisas. O teu valor não depende do teu esforço. Tu vales, descanses ou não. O descanso não te diminui. É só descanso, uma necessidade humana, um direito, e não uma transgressão.
+Lê isto devagar. Para ti, descansar e valer são incompatíveis. Só vales quando te esforças, quando te esgotas. Descansar é suspender o teu valor. E venho desfazer essa soldadura entre o cansaço e o mérito. O teu valor não depende do teu esforço. Tu vales, descanses ou não. O descanso não te diminui. É só descanso, uma necessidade humana, um direito, e não uma transgressão.
 
-Vou dizer-te de outra forma. Imagina duas pessoas igualmente dedicadas, igualmente competentes. Uma esgota-se sem parar, e acaba em burnout, incapaz de continuar. A outra trabalha com dedicação e descansa, e por isso pode manter-se, com saúde, durante muito tempo. Qual das duas é mais valiosa, a longo prazo? A segunda, de longe. Porque o valor sustentável não está em esgotar-se, está em trabalhar e descansar, num ritmo que se pode manter. A exaustão não é o auge da dedicação. É o seu colapso.
+Deixa-me pôr a mesma verdade noutra balança. Imagina duas pessoas igualmente dedicadas, igualmente competentes. Uma esgota-se sem parar, e acaba em burnout, incapaz de continuar. A outra trabalha com dedicação e descansa, e por isso pode manter-se, com saúde, durante muito tempo. Qual das duas é mais valiosa, a longo prazo? A segunda, de longe. Porque o valor sustentável não está em esgotar-se, está em trabalhar e descansar, num ritmo que se pode manter. A exaustão não é o auge da dedicação. É o seu colapso.
 
 Pensa nisto como pensarias num atleta. Nenhum atleta de verdade treina até cair todos os dias, sem descanso, porque sabe que o descanso é parte do treino, é quando o corpo se reconstrói e se torna mais forte. Quem treinasse sem descansar não seria mais dedicado, seria mais tolo, e lesionar-se-ia depressa. O descanso não é o oposto do desempenho, é uma condição dele. E o mesmo vale para ti: descansar não te torna menos dedicada, torna-te capaz de te dedicares durante mais tempo, melhor, sem te partires. A tua equação confunde o esgotamento com a excelência, quando a verdadeira excelência inclui, sempre, o descanso que a sustenta.
 
 E quero que vejas que há uma soberba escondida na tua equação, que talvez não tenhas notado: a de achares que aguentas o que nenhum corpo humano aguenta sem repor. Como se tu fosses a exceção, a que pode dar sem fim, a que não precisa de descansar como os outros. Mas não és exceção, nem o teu corpo é diferente dos outros corpos. Reconhecer os teus limites não é fraqueza, é verdade, é humildade no melhor sentido: o de aceitares que és humana, que precisas de repor, que não és uma máquina. E há um alívio enorme em poderes, enfim, ser apenas humana, com os limites de toda a gente, em vez de te exigires uma resistência sobre-humana que ninguém tem.
 
-E há uma libertação enorme nisto. Quando descansar deixa de te tirar o valor, podes, enfim, descansar sem culpa. Podes folgar, parar, não fazer nada, sem a voz que te diz que não mereces. Podes cuidar de ti, repor-te, viver para além do trabalho. E, paradoxalmente, ao descansares, trabalhas melhor, com mais energia, mais clareza, mais prazer, porque uma pessoa descansada rende mais e melhor do que uma exausta.
+E que alívio se abre quando se larga esta medalha. Quando descansar deixa de te tirar o valor, podes, enfim, descansar sem culpa. Podes folgar, parar, não fazer nada, sem a voz que te diz que não mereces. Podes cuidar de ti, repor-te, viver para além do trabalho. E, paradoxalmente, ao descansares, trabalhas melhor, com mais energia, mais clareza, mais prazer, porque uma pessoa descansada rende mais e melhor do que uma exausta.
 
 Repara nesta verdade, que contraria a tua equação: o descanso não é o inimigo do bom trabalho, é parte dele. As ideias mais claras vêm depois de uma noite bem dormida, não de uma madrugada de exaustão. A criatividade nasce no repouso, na pausa, no ócio, e não no esgotamento. Os erros multiplicam-se quando estás destruída, e diminuem quando estás descansada. Por isso, ao esgotares-te em nome da dedicação, prejudicas, afinal, o próprio trabalho a que te dedicas. Descansar não te rouba ao trabalho. Devolve-te a ele melhor, e é a tua exaustão, e não o teu descanso, que te faz render menos do que poderias.
 
 E quero que vejas que medir o valor pela exaustão é uma régua não só cruel, mas falsa. Porque não premeia o resultado, premeia o sofrimento. Por essa régua, valeria mais quem se esgotasse a fazer mal do que quem, descansada, fizesse bem com leveza. É absurdo, quando o vês de fora, mas é a régua por que te avalias: não pelo que fazes, mas pelo quanto te custou. Trocar essa régua, e passar a medir-te pelo valor do que crias e pela vida que vives, em vez de pelo cansaço que acumulas, é uma das mudanças mais libertadoras desta travessia.
 
-Quero falar-te do verbo desta travessia. Descansar. Descansar não é preguiça, nem falha, nem deixar de merecer. É cuidar de ti. É repor o que o trabalho gasta. É viver a parte da vida que não é trabalho. É dares ao teu corpo, à tua mente, ao teu ser, a folga de que precisam para se manterem inteiros. Descansar é um ato de saúde, e de dignidade, e não uma transgressão a expiar com culpa.
+Há um verbo que esta travessia te vem reabilitar, e que a tua equação proibiu. Descansar. Descansar não é preguiça, nem falha, nem deixar de merecer. É cuidar de ti. É repor o que o trabalho gasta. É viver a parte da vida que não é trabalho. É dares ao teu corpo, à tua mente, ao teu ser, a folga de que precisam para se manterem inteiros. Descansar é um ato de saúde, e de dignidade, e não uma transgressão a expiar com culpa.
 
 E descansar exige uma coisa que te custa: tolerar a culpa que sobe quando paras, sem lhe obedecer. A voz que te diz que não mereces, que devias estar a fazer algo, que és preguiçosa, vai aparecer. E descansar, para ti, é ficar no descanso apesar dessa voz, deixá-la falar sem a seguires, até ela, devagar, perder força. Cada vez que descansas apesar da culpa, ensinas-te que vales mesmo a descansar.
 
@@ -181,11 +181,11 @@ E quero dar-te uma forma de começares, que talvez te ajude. Não tentes, de in�
 
 E quero dar-te uma frase pequena, para usares no instante exato em que a culpa subir e te exigir a conta do esforço. Não tenho de pagar isto. Repete-a quando te sentares e a voz te perguntar o que fizeste para mereceres aquele sofá. Não tenho de pagar isto. O descanso não é um empréstimo que contraíste e tens de saldar com cansaço. É teu, à partida, sem dívida nenhuma. E há uma libertação quieta em descobrires que podes parar sem abrir uma conta, sem ficar a dever, sem o relógio do mérito a correr por baixo da tua pausa.
 
-O despertar, quando vem, é um alívio. É o dia em que descansas, em que paras, em que não fazes nada, e em vez da culpa de sempre, sentes, por um instante, que está bem. Que mereces aquele descanso. Que não deixaste de valer por teres parado. É um instante pequeno, mas muda tudo, porque desmente a equação de uma vida, e devolve-te o direito ao descanso que sempre te negaste.
+E o dia em que esta verdade pousa em ti chega como quem, enfim, descalça os sapatos. É o dia em que descansas, em que paras, em que não fazes nada, e em vez da culpa de sempre, sentes, por um instante, que está bem. Que mereces aquele descanso. Que não deixaste de valer por teres parado. É um instante pequeno, mas muda tudo, porque desmente a equação de uma vida, e devolve-te o direito ao descanso que sempre te negaste.
 
 ## 7. O meu valor não se mede em cansaço
 
-Há um destino para esta travessia. Reconheceres que o teu valor não se mede em cansaço.
+Esta travessia tem um ponto de chegada, e é simples. Reconheceres que o teu valor não se mede em cansaço.
 
 E quero traduzir-te isto em gestos de um dia comum, porque é aí que se vive.
 
@@ -217,7 +217,7 @@ Não te vou dar um método de gestão de energia, porque este livro não é sobr
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, descansar sem culpa pela primeira vez. Mas muda o suficiente para deixares de confundir a tua exaustão com mérito, e o teu esgotamento com dedicação, e para começares a olhar a culpa de descansar como uma ferida, e não como uma verdade.
+Não desfaz a equação toda num só dia. Não te faz, amanhã, descansar sem culpa pela primeira vez. Mas muda o suficiente para deixares de confundir a tua exaustão com mérito, e o teu esgotamento com dedicação, e para começares a olhar a culpa de descansar como uma ferida, e não como uma verdade.
 
 Agora sabes que confundes exaustão com mérito, e que isso não é só ética de trabalho, é uma equação que te destrói devagar.
 
@@ -245,7 +245,7 @@ E quero deixar-te, antes de pousares estas páginas para descansar, uma última 
 
 Já a reconheces, a frase que sustenta este livro inteiro. Posso descansar sem deixar de valer. O meu valor estava garantido desde o princípio, e não tenho de o pagar com a minha exaustão.
 
-Compreender foi o primeiro passo. Mas há um segundo, e esse não se faz sentada a ler, faz-se sentada a não fazer nada. Faz-se a descansares, devagar, apesar da culpa. A medir o teu dia por outra coisa que não o cansaço. E, se já chegaste ao burnout, faz-se com ajuda, com quem te acompanhe a recuperar, porque o esgotamento instalado é fundo, e não se sai dele só a querer.
+Compreender foi a primeira pausa que te permitiste. Mas há um segundo passo, e esse não se faz sentada a ler, faz-se sentada a não fazer nada. Faz-se a descansares, devagar, apesar da culpa. A medir o teu dia por outra coisa que não o cansaço. E, se já chegaste ao burnout, faz-se com ajuda, com quem te acompanhe a recuperar, porque o esgotamento instalado é fundo, e não se sai dele só a querer.
 
 E se de tudo isto guardares uma só linha, na próxima vez que estiveres exausta a chamar-lhe dedicação, que seja esta. O descanso não é o prémio do teu valor, é parte da tua dignidade. Não tens de o merecer esgotando-te primeiro, porque ele não é uma recompensa, é uma necessidade humana, tão básica como comer ou dormir, e tens direito a ele simplesmente por seres pessoa. A vida não te foi dada para a gastares a provar que mereces estar viva. Foi-te dada para a viveres, e viver inclui descansar, sem culpa, como quem sabe que já vale, desde sempre, sem ter de o pagar com a sua exaustão.
 
