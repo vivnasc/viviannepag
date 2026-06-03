@@ -73,7 +73,7 @@ I am going to drop a question here, on its own, and I ask you to stay with it, e
 
 Who am I without this story?
 
-Stay with it a moment.
+Remain with it a moment.
 
 Because there is a moment, in this crossing, that is at the same time the most frightening and the most liberating: the moment when you begin to separate yourself from the inherited dreams, from the expectations, from the script, and you are left, for an instant, not knowing who you are. If you took away the life you fulfilled, and it was not entirely yours, then what remains? Who are you, when you are not the realization of your parents' dreams, when you are not the answer to your family's expectations, when you are not the script you were given? Beneath everything you inherited, there is a person you may never have known well, because there was never space for her to appear, always busy as she was fulfilling what she did not choose.
 

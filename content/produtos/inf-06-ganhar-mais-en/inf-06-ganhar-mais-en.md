@@ -77,7 +77,7 @@ I am going to drop a question here, on its own, and I ask you to stay with it, b
 
 Who is it that you are waiting for to authorize you to have more?
 
-Stay with it a moment.
+Stay with it a little, without rushing to answer.
 
 Because there is, at the bottom of your brake, a waiting. You are waiting for an authorization that never comes. Waiting for someone, your family, your parents, the world, to tell you "you can, you have permission, it is all right for you to have more." As if there were an external authorization missing, and you could not advance without it. And you live, without knowing it, waiting for that permission, braked at the door of what you could have, waiting for someone to open it for you, for someone to give you the license you feel you lack to surpass the level of your people without guilt.
 

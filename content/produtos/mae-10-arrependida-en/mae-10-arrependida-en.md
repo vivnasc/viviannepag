@@ -159,7 +159,7 @@ You know, deep down, the sentence that holds this whole book: I can love you wit
 
 And you know, above all, the sentence this book exists to give you, and that is yours and your child's at the same time: you never were the mistake.
 
-To understand was the first step. But knowing how to separate the love from the lament inside your head is one thing, and peeling apart, slowly, the two sheets that dried together inside your chest is another, and that second one is not done only by reading. And here I want to be honest about what it is, for you.
+To have understood was already a first step. But knowing how to separate the love from the lament inside your head is one thing, and peeling apart, slowly, the two sheets that dried together inside your chest is another, and that second one is not done only by reading. And here I want to be honest about what it is, for you.
 
 If what you're living is the lucid lament, with the shame and the silence that accompany it, I created a guided crossing, **FreeMe**, that can accompany you in setting down the shame, in distinguishing the love from the loss, and in making peace with a truth you carried alone for too long. You'll find it at [freeme.viviannedossantos.com](https://freeme.viviannedossantos.com).
 

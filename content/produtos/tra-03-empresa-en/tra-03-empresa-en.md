@@ -181,7 +181,7 @@ And I want you to see that recovering the border doesn't make you cold, nor dist
 
 ## 7. To recover the border
 
-This crossing has a place it is heading toward. To recover the border between you and what you create.
+This crossing leads to a definite place. To recover the border between you and what you create.
 
 And I want to put this to you concretely, in the ground of your working days.
 

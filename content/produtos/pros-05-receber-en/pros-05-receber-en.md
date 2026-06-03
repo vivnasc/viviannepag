@@ -31,7 +31,7 @@ There is a way of feeling that you may never have connected to this, and that co
 
 And I want you to notice something that distinguishes this wound from the others, because it is subtle. It is not that you think you don't deserve, nor that you have to pay for your place, nor that receiving imprisons you. It is something more bodily, more immediate: it is the physical discomfort of being in the place of someone who receives, the vertigo of not controlling, the itch to leave it for the safe place of someone who gives. You may know, rationally, that you deserve to receive, that that person wants to give to you from the heart, that there is no debt at all, and still your body refuses, deflects, flees, because the position of receiving is, for you, a physically intolerable place, and not a matter of ideas. That is why it is not enough to convince yourself that you deserve it: the path goes through getting the body used, slowly, to tolerating a place it learned to feel as dangerous.
 
-Perhaps you recognize yourself in concrete scenes. It's at a birthday, at a party of yours, feeling uncomfortable for being the center, and immediately wanting to serve others to get out of that place. It's falling ill and finding it almost impossible to let them take care of you, wanting to get up to handle everything anyway. It's in a difficult moment not being able to receive comfort, deflecting into "I'm fine," "don't worry about me." It's receiving help and being left so much in debt that the gesture, instead of relieving you, weighs on you. They are all the same: the flight from the place of someone who receives, the deflection of everything that comes in your direction, as if receiving were an exposure you cannot bear.
+Perhaps you can spot yourself in small, everyday moments. It's at a birthday, at a party of yours, feeling uncomfortable for being the center, and immediately wanting to serve others to get out of that place. It's falling ill and finding it almost impossible to let them take care of you, wanting to get up to handle everything anyway. It's in a difficult moment not being able to receive comfort, deflecting into "I'm fine," "don't worry about me." It's receiving help and being left so much in debt that the gesture, instead of relieving you, weighs on you. They are all the same: the flight from the place of someone who receives, the deflection of everything that comes in your direction, as if receiving were an exposure you cannot bear.
 
 ---
 
@@ -159,7 +159,7 @@ Before closing, keep a distinction that everything else needs so as not to be tw
 
 You know, deep down, the sentence that holds this whole book: I can receive without apologizing.
 
-Seeing this was the first step. But there is a second, and that one is not made by reading, it is made by staying, slowly, in the exposed place of someone who receives, and by discovering, time after time, that there you do not die, you are loved.
+Letting this in was the first step. But there is a second, and that one is not made by reading, it is made by staying, slowly, in the exposed place of someone who receives, and by discovering, time after time, that there you do not die, you are loved.
 
 It was for that crossing that I created **Prosperity**.
 

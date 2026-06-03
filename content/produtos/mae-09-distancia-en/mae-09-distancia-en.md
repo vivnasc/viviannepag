@@ -97,7 +97,7 @@ I'm going to let fall here the realization that changes everything, and I ask yo
 
 Your love is not measured only by what you suffered. And you are more than the woman who sacrificed her own life.
 
-Stay with this a moment.
+Hold this with you a moment.
 
 For years, your suffering was the proof of your love. The more you suffered, the more you loved, that was the equation that sustained you. And there is a truth in that, your sacrifice was in fact love. But, without your noticing, that equation became a trap: you came to need to prove that you suffered, that it was worth it, that the sacrifice was justified, as if your love were only real if it were measured in suffering and in results. And that need to prove became so strong that it no longer lets you exist outside of it. Your whole relationship with your children, with your own story, came to revolve around one question: was it worth it? And that question, repeated without end, doesn't leave you in peace.
 

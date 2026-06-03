@@ -29,7 +29,7 @@ There is a way of feeling that you may never have connected to this, but that co
 
 And notice a contradiction that says everything about the size of this belief. You want, deeply, a lighter life. You dream of rest, of slack, of being able to receive without killing yourself, of a prosperity that does not cost you your skin. And at the same time, whenever lightness draws near, you distrust it, you complicate it, you flee it, you go back to picking up the weight, because lightness frightens you more than effort. You desire the destination and you refuse the arrival. That is why extraordinarily capable women like you, who could have a much lighter life than they have, keep choosing, time after time, the path that hurts, not because it is necessary, but because what does not hurt seems to them, deep down, not to be for them. It is not that lightness is missing from your life. It is that you, when it arrives, do not let it stay.
 
-Perhaps you recognize yourself in concrete scenes. It's not being able to enjoy a holiday without feeling you have to "make up for it" with work before or after. It's looking at someone who earns well doing what they love, with lightness, and feeling a mixture of envy and distrust, a "that isn't real work." It's putting obstacles in your own way, complicating processes that could be simple, because the simple seems to you not serious enough. It's measuring the value of your day by the tiredness you end it with, and going to sleep satisfied only when you are exhausted, as if exhaustion were the receipt of a day well lived. They are all the same: the equation that tells you that without pain there is no value, and that therefore converts everything you receive into one more thing to sweat over.
+Perhaps these everyday situations will feel like yours. It's not being able to enjoy a holiday without feeling you have to "make up for it" with work before or after. It's looking at someone who earns well doing what they love, with lightness, and feeling a mixture of envy and distrust, a "that isn't real work." It's putting obstacles in your own way, complicating processes that could be simple, because the simple seems to you not serious enough. It's measuring the value of your day by the tiredness you end it with, and going to sleep satisfied only when you are exhausted, as if exhaustion were the receipt of a day well lived. They are all the same: the equation that tells you that without pain there is no value, and that therefore converts everything you receive into one more thing to sweat over.
 
 ---
 
@@ -155,7 +155,7 @@ I leave you, for the end, with a scene, because in it there is everything these 
 
 You know, deep down, the sentence that holds this whole book: I do not need to suffer in order to deserve.
 
-Seeing this was the first step. But there is a second, and that one is not made by reading, it is made by undoing, slowly, an equation of generations, and by giving yourself permission, time after time, to receive without pain.
+Recognizing this was where it began. But there is a second, and that one is not made by reading, it is made by undoing, slowly, an equation of generations, and by giving yourself permission, time after time, to receive without pain.
 
 It was for that crossing that I created **Prosperity**.
 
