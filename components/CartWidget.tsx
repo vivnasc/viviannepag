@@ -26,7 +26,7 @@ export function CartWidget() {
   const [processando, setProcessando] = useState(false);
   const [vista, setVista] = useState<'carrinho' | 'pago'>('carrinho');
   const [entregas, setEntregas] = useState<Entrega[]>([]);
-  const [packsPagos, setPacksPagos] = useState<{ slug: string; titulo: string }[]>([]);
+  const [packsPagos, setPacksPagos] = useState<{ titulo: string; zipUrl: string }[]>([]);
   const [erro, setErro] = useState<string | null>(null);
 
   const upsells = useMemo(() => {
@@ -59,7 +59,7 @@ export function CartWidget() {
     const sufixoEn = isPt ? '' : '&lang=en';
     const lista = [...itens];
     const out: Entrega[] = [];
-    const packs: { slug: string; titulo: string }[] = [];
+    const packs: { titulo: string; zipUrl: string }[] = [];
     // URL same-origin (anexo) por ficheiro: descarrega de imediato sem abrir
     // separador vazio (about:blank), seja produto avulso ou item de pack.
     const linkDirecto = (s: string) => `/api/download-directo?slug=${s}&email=${encodeURIComponent(mail)}${sufixoEn}`;
@@ -70,8 +70,13 @@ export function CartWidget() {
           body: JSON.stringify({ email: mail, produto_slug: it.slug, produto_titulo: it.titulo, preco: it.preco, paypal_order_id: orderId }),
         });
       } catch {}
-      if (it.slug.startsWith('pack-')) {
-        packs.push({ slug: it.slug, titulo: it.titulo });
+      if (it.incluidos && it.incluidos.length) {
+        // Pack montado pela pessoa: entrega pela lista de livros escolhidos.
+        const slugs = it.incluidos.map((f) => f.slug).join(',');
+        packs.push({ titulo: it.titulo, zipUrl: `/api/download-zip?slugs=${slugs}&email=${encodeURIComponent(mail)}${sufixoEn}` });
+        for (const f of it.incluidos) out.push({ slug: f.slug, titulo: f.titulo, url: linkDirecto(f.slug) });
+      } else if (it.slug.startsWith('pack-')) {
+        packs.push({ titulo: it.titulo, zipUrl: `/api/download-zip?slug=${it.slug}&email=${encodeURIComponent(mail)}${sufixoEn}` });
         try {
           const r = await fetch('/api/download-pack', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, lang }) });
           const j = await r.json();
@@ -134,10 +139,10 @@ export function CartWidget() {
                   </div>
                   {packsPagos.length > 0 && (
                     <div className="flex flex-col gap-2 mb-3">
-                      {packsPagos.map((pk) => (
+                      {packsPagos.map((pk, i) => (
                         <a
-                          key={pk.slug}
-                          href={`/api/download-zip?slug=${pk.slug}&email=${encodeURIComponent(email.trim().toLowerCase())}${isPt ? '' : '&lang=en'}`}
+                          key={i}
+                          href={pk.zipUrl}
                           download
                           className="flex items-center justify-center gap-2 bg-ambar text-terra font-sans text-[0.88rem] font-semibold rounded-[12px] px-4 py-3 hover:bg-ocre transition-colors no-underline"
                         >

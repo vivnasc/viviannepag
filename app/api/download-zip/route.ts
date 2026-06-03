@@ -16,18 +16,15 @@ function nomeFicheiro(titulo: string, slug: string, n: number): string {
   return `${String(n).padStart(2, '0')}-${base}.pdf`;
 }
 
-// GET /api/download-zip?slug=pack-xxx&email=...&lang=...
-// Junta todos os PDFs do pack num unico .zip (same-origin, descarga imediata
-// sem abrir separadores). Cada PDF leva a licenca carimbada com o email.
+// GET /api/download-zip?slug=pack-xxx&email=...&lang=...        (pack nomeado)
+//  ou /api/download-zip?slugs=a,b,c&email=...&lang=...          (pack montado)
+// Junta todos os PDFs num unico .zip (same-origin, descarga imediata sem abrir
+// separadores). Cada PDF leva a licenca carimbada com o email.
 export async function GET(req: NextRequest) {
   const slug = req.nextUrl.searchParams.get('slug') || '';
+  const slugsParam = req.nextUrl.searchParams.get('slugs') || '';
   const email = req.nextUrl.searchParams.get('email') || '';
   const lang = (req.nextUrl.searchParams.get('lang') || '').toLowerCase();
-
-  const pack = packBySlug(slug);
-  if (!pack) {
-    return NextResponse.json({ erro: 'pack-desconhecido' }, { status: 404 });
-  }
 
   const supabase = getSupabaseAdmin();
   const { data: produtos, error } = await supabase
@@ -38,7 +35,21 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ erro: error.message }, { status: 500 });
   }
 
-  const incluidos = (produtos ?? []).filter((p) => packIncluiProduto(pack, p.slug));
+  // Pack montado pela pessoa: lista explicita de slugs. Senao, pack nomeado.
+  let incluidos: { slug: string; titulo: string }[];
+  let nomeBase: string;
+  if (slugsParam) {
+    const pedidos = slugsParam.split(',').map((s) => s.replace(/[^a-z0-9-]/g, '')).filter(Boolean);
+    incluidos = (produtos ?? []).filter((p) => pedidos.includes(p.slug));
+    nomeBase = 'o-teu-pack';
+  } else {
+    const pack = packBySlug(slug);
+    if (!pack) {
+      return NextResponse.json({ erro: 'pack-desconhecido' }, { status: 404 });
+    }
+    incluidos = (produtos ?? []).filter((p) => packIncluiProduto(pack, p.slug));
+    nomeBase = pack.slug;
+  }
   if (incluidos.length === 0) {
     return NextResponse.json({ erro: 'pack-vazio' }, { status: 404 });
   }
@@ -60,7 +71,7 @@ export async function GET(req: NextRequest) {
   }
 
   const conteudo = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
-  const nomeZip = `${pack.slug}.zip`;
+  const nomeZip = `${nomeBase}.zip`;
 
   return new NextResponse(new Uint8Array(conteudo), {
     headers: {

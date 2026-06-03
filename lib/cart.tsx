@@ -10,6 +10,9 @@ export type CartItem = {
   preco: string;
   capa?: string | null;
   badge?: string | null;
+  // Pack personalizado ('monta o teu pack'): livros escolhidos pela pessoa.
+  // Presente => a entrega usa esta lista (em vez de um pack nomeado).
+  incluidos?: { slug: string; titulo: string }[];
 };
 
 type CartCtx = {

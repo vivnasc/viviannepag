@@ -10,6 +10,7 @@ import { LojaSidebar } from '@/components/loja/LojaSidebar';
 import { AberturaExpandivel } from '@/components/loja/AberturaExpandivel';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { FiltrosLoja } from '@/components/loja/FiltrosLoja';
+import { MontaPack } from '@/components/loja/MontaPack';
 import { semTravessoes } from '@/lib/escritos-sanitize';
 import { PRODUTOS_EN } from '@/lib/produtos-en';
 import { PACKS } from '@/lib/packs';
@@ -424,6 +425,18 @@ export default async function LojaPage({
                   {PACKS.map((pk) => renderPackCard(pk))}
                 </div>
               </section>
+
+              {/* MONTA O TEU PACK — a pessoa escolhe so os livros que quer */}
+              <MontaPack
+                isPt={isPt}
+                universos={COLECOES_ORDENADAS
+                  .filter((c) => (porColecao.get(c.id)?.length ?? 0) > 0)
+                  .map((c) => ({
+                    id: c.id,
+                    nome: isPt ? c.nome : c.nome_en,
+                    livros: (porColecao.get(c.id) ?? []).map((p) => ({ slug: p.slug, titulo: p.titulo, preco: p.preco, capa: p.capa, badge: p.badge })),
+                  }))}
+              />
 
               {/* BLOCO POR COLECAO — qualquer universo com produtos publicados
                   aparece (mesmo os marcados 'em-breve' em colecoes.ts). Assim,
