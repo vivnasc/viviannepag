@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { listarLivros } from '@/lib/editora';
 
 const PRODUTOS = [
   {
@@ -358,13 +359,75 @@ Baseado na tese Infonte: vozes herdadas, régua emprestada, lealdade às ambiç�
   },
 ];
 
+// ─── Livros profundos (mae-*, inf-*, pros-*, syn-*, per-*, for-*, tra-*) ───
+// Gerados a partir do markdown em content/produtos via listarLivros(), em vez
+// de escritos a mao. Cada um e um ebook publicado (€7). Entram automaticamente
+// no pack do seu universo (download-pack filtra por slugToColecao).
+
+const ORDEM_UNIVERSO: Record<string, number> = {
+  mae: 1, inf: 2, pros: 3, syn: 4, per: 5, for: 6, tra: 7,
+};
+
+function indiceDe(l: { capitulos: { titulo: string }[] }): string {
+  return l.capitulos
+    .map((c, i) => `${i + 1}. ${c.titulo.replace(/^\d+\.\s*/, '')}`)
+    .join('\n');
+}
+
+// capasRenderizadas = slugs cujo .jpg ja existe no Storage. So poe capa onde a
+// capa editorial ja foi renderizada; os restantes ficam null ('sem capa') ate
+// o render do universo correr e preencher produtos.capa.
+function livrosProfundos(base: string, capasRenderizadas: Set<string>) {
+  return listarLivros().map((l) => {
+    const pre = l.slug.split('-')[0];
+    const num = Number(l.slug.split('-')[1]) || 0;
+    const temCapa = base && capasRenderizadas.has(l.slug);
+    return {
+      slug: l.slug,
+      titulo: l.titulo,
+      subtitulo: l.subtitulo,
+      descricao: `**Ebook · ${l.palavras.toLocaleString('pt-PT')} palavras · ${l.capitulos.length} capítulos · PDF imediato**
+
+${l.subtitulo}
+
+**O que vais encontrar:**
+${indiceDe(l)}
+
+Por Vivianne dos Santos.`,
+      preco: '€7',
+      preco_original: '€29',
+      capa: temCapa
+        ? `${base}/storage/v1/object/public/viviannepag-assets/produtos/capas/${l.slug}.jpg`
+        : null,
+      badge: 'ebook',
+      destaque: false,
+      publicado: true,
+      ordem: 100 + (ORDEM_UNIVERSO[pre] ?? 9) * 20 + num,
+    };
+  });
+}
+
 export async function POST() {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
   const supabase = getSupabaseAdmin();
   const results: { slug: string; status: string }[] = [];
 
-  for (const p of PRODUTOS) {
+  // Capas ja renderizadas no bucket publico (so poe capa onde o jpg existe).
+  const capasRenderizadas = new Set<string>();
+  try {
+    const { data } = await supabase.storage
+      .from('viviannepag-assets')
+      .list('produtos/capas', { limit: 1000 });
+    for (const f of data ?? []) {
+      if (f.name?.endsWith('.jpg')) capasRenderizadas.add(f.name.replace(/\.jpg$/, ''));
+    }
+  } catch {}
+
+  const base = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '');
+  const todos = [...PRODUTOS, ...livrosProfundos(base, capasRenderizadas)];
+
+  for (const p of todos) {
     const { data: existing } = await supabase
       .from('produtos')
       .select('id')
@@ -385,5 +448,5 @@ export async function POST() {
     }
   }
 
-  return NextResponse.json({ total: PRODUTOS.length, results });
+  return NextResponse.json({ total: todos.length, results });
 }

@@ -272,7 +272,7 @@ export default function ProdutosAdmin() {
               {label}
             </button>
           ))}
-          <button onClick={async () => { setSalvando(true); setMsg('A popular 15 produtos...'); const r = await fetch('/api/admin/seed-produtos', { method: 'POST' }); const j = await r.json(); setSalvando(false); setMsg(r.ok ? `${j.total} produtos populados.` : `Erro: ${j.erro}`); carregar(); }} disabled={salvando} className="bg-bordeaux/80 text-creme rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-bordeaux disabled:opacity-70">seed 15 produtos</button>
+          <button onClick={async () => { setSalvando(true); setMsg('A popular catálogo completo (âncoras + livros profundos)...'); const r = await fetch('/api/admin/seed-produtos', { method: 'POST' }); const j = await r.json(); setSalvando(false); setMsg(r.ok ? `${j.total} produtos populados.` : `Erro: ${j.erro}`); carregar(); carregarPdfs(); }} disabled={salvando} className="bg-bordeaux/80 text-creme rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-bordeaux disabled:opacity-70">seed catálogo</button>
           <button onClick={() => setEdit({ ...vazio })} className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-ambar">+ novo produto</button>
         </div>
       </header>
