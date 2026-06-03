@@ -37,7 +37,7 @@ Tem um nome, o que te aconteceu. Chama-se inversão de lugares. Tornaste-te mãe
 
 E quero que vejas que esta ferida é silenciosa, e por isso difícil de reconhecer. Não há, na tua história, talvez, uma cena clara de violência, um momento de horror a apontar. Houve, antes, uma ausência: a do adulto que não esteve, do cuidado que não veio, da proteção que faltou. E as feridas de ausência são as mais difíceis de ver, porque não há um acontecimento, há um vazio, e custa chorar o que não aconteceu, o colo que não houve, a infância que não foi. Mas essas feridas, as de ausência, doem tanto como as outras, e merecem ser reconhecidas, ainda que não tenham uma cena para mostrar. O que te faltou conta tanto como o que te fizeram.
 
-Este livro não te vai dizer para te tornares irresponsável, para deixares de te importar, para abandonares quem amas. Vim olhar para outra coisa. Para o lugar trocado que ocupaste. Para a responsabilidade que assumiste e que nunca te coube. E para a possibilidade de a devolveres, enfim, a quem pertencia.
+Este livro não te vai dizer para te tornares irresponsável, para deixares de te importar, para abandonares quem amas. Vim olhar para a mochila que te puseram às costas cedo demais. Para o lugar trocado que ocupaste. Para a responsabilidade que assumiste e que nunca te coube. E para a possibilidade de a devolveres, enfim, a quem pertencia.
 
 E digo-te já para onde vamos, para que possas pousar a guarda enquanto lês. O teu lugar nunca foi ser o adulto de todos. A responsabilidade que assumiste em criança pode ser devolvida a quem pertencia. Não de um golpe, não sem cuidado, mas devagar, podes pousar o que nunca foi teu para carregar. E descansar, brincar, receber, sem que isso te pareça traição.
 
@@ -47,7 +47,7 @@ Este livro não te vem dizer que cuidar dos outros é errado, nem que tens de te
 
 Quero ser honesta contigo desde já. Este é, de todos os livros, talvez o mais delicado. Porque por baixo de uma infância roubada há, muitas vezes, dor a sério, negligência, e às vezes feridas que pedem mais do que estas páginas. Vamos lá chegar, com todo o cuidado. Mas quero que saibas, desde o início, que se o que viveste foi pesado, não estás sozinha, e há ajuda, e mereces procurá-la.
 
-Talvez te reconheças em coisas concretas. Em seres a primeira a quem todos recorrem, e a última a pedir alguma coisa para ti. Em não conseguires descansar enquanto sentes que há alguém a precisar, ainda que essa pessoa seja adulta e capaz. Em sentires uma culpa enorme só de pensares em viver a tua vida, em pôr-te à frente, em não dares conta de tudo. Em estares exausta, há tanto tempo, de carregar um peso que ninguém te pediu por palavras, mas que sentes que é teu, e só teu, para segurar. Em não saberes, sequer, o que farias com um dia inteiro sem ninguém para cuidar, porque nunca soubeste existir sem ser responsável por alguém.
+Talvez te reconheças nos gestos de quem segura sempre a casa. Em seres a primeira a quem todos recorrem, e a última a pedir alguma coisa para ti. Em não conseguires descansar enquanto sentes que há alguém a precisar, ainda que essa pessoa seja adulta e capaz. Em sentires uma culpa enorme só de pensares em viver a tua vida, em pôr-te à frente, em não dares conta de tudo. Em estares exausta, há tanto tempo, de carregar um peso que ninguém te pediu por palavras, mas que sentes que é teu, e só teu, para segurar. Em não saberes, sequer, o que farias com um dia inteiro sem ninguém para cuidar, porque nunca soubeste existir sem ser responsável por alguém.
 
 São todos o mesmo. O lugar trocado que ocupaste cedo demais. A criança que se tornou o adulto de todos, e que nunca mais soube ser, simplesmente, criança.
 
@@ -77,7 +77,7 @@ E importa veres em que parte de ti o lugar trocado ficou inscrito. O que viveste
 
 Há ainda uma coisa que esta inversão te deixou, e que talvez reconheças: uma dificuldade em saber o que tu própria sentes e precisas. Porque uma criança ocupada a sentir o que os adultos sentiam, a antecipar as necessidades deles, a gerir as emoções da casa, afina uma antena para fora e perde o acesso a si. Hoje, sabes ler num instante o estado de toda a gente, e sobre o que tu própria precisas, sentes, queres, hesitas, não sabes. Cresceste virada para as necessidades dos outros, e a tua própria vida interior ficou um território pouco explorado, à espera de que, enfim, voltes a ele.
 
-Quero que vejas isto sem culpa, e sem necessariamente acusar quem te criou. Quem te deixou ocupar o lugar de adulto, muitas vezes, estava afundado numa dor que o impedia de ser o adulto que devia. Não te quis roubar a infância. Mas roubou-ta, ao não conseguir ocupar o seu próprio lugar. E ver isto não é, necessariamente, odiar. Mas também não é desculpar tudo. É, finalmente, nomear o que te aconteceu, e reconhecer que não foi justo, e que não foi teu o erro.
+Quero que vejas isto sem culpa, e sem necessariamente acusar quem te criou. Quem te deixou ocupar o lugar de adulto, muitas vezes, estava afundado numa dor que o impedia de ser o adulto que devia. Não te quis pôr aquele peso às costas. Mas pô-lo, ao não conseguir ocupar o seu próprio lugar. E ver isto não é, necessariamente, odiar. Mas também não é desculpar tudo. É, finalmente, nomear o que te aconteceu, e reconhecer que não foi justo, e que não foi teu o erro.
 
 ## 3. O que o sistema pediu e não cabia
 
@@ -115,7 +115,7 @@ Repara em como isto te aprisiona. Não consegues descansar sem te sentires culpa
 
 E há uma coisa comovente, e dolorosa, por baixo disto. É que a criança que foste nunca recebeu o cuidado de que precisava. Cuidou, mas não foi cuidada. Deu, mas não recebeu. Segurou, mas nunca foi segurada. E essa criança, dentro de ti, ainda tem fome desse cuidado que nunca veio. Mas a culpa não a deixa recebê-lo, porque ela aprendeu que o seu lugar era dar, não receber, e que receber seria trair o único lugar que conheceu.
 
-Quero que sintas o peso disto. Imagina nunca te poderes permitir, sem culpa, um momento só teu. Um descanso sem a sensação de que devias estar a fazer algo. Uma alegria sem a sombra de quem precisa. Um cuidado recebido sem te sentires fraca, ou em dívida. É um lugar de uma exaustão sem fim, porque a culpa não te deixa, nunca, parar de cuidar, de dar, de ser responsável, nem por um instante.
+Sente, por um instante, o que essa criança carregava sem ninguém ver. Imagina nunca te poderes permitir, sem culpa, um momento só teu. Um descanso sem a sensação de que devias estar a fazer algo. Uma alegria sem a sombra de quem precisa. Um cuidado recebido sem te sentires fraca, ou em dívida. É um lugar de uma exaustão sem fim, porque a culpa não te deixa, nunca, parar de cuidar, de dar, de ser responsável, nem por um instante.
 
 E há um lugar onde tudo isto se vê, ainda que ninguém o saiba ler: o teu corpo, quando, por fim, te deitas. Repara no que acontece quando, ao fim do dia, deixas de ter o que fazer. Em vez de te soltares, a tua cabeça começa a percorrer a casa, as pessoas, as tarefas, à procura do que ficou por tratar, de quem pode estar a precisar, do próximo fogo a apagar. O descanso, para ti, não é um lugar onde se pousa, é uma sala onde a vigilância continua acesa, à espreita. Aprendeste, em criança, que baixar a guarda era arriscar que algo caísse enquanto não olhavas, e o teu corpo guardou essa lição numa zona que não obedece à razão. Por isso o cansaço não passa com o sono, porque mesmo a dormir continuas, de algum modo, de serviço. E uma parte desta travessia é, devagar, ensinar a esse corpo de sentinela que já pode descer a guarda, que já não és a única coisa entre a casa e o desastre, e que adormecer não é abandonar ninguém.
 
@@ -123,7 +123,7 @@ E a verdade que a culpa esconde é esta. Descansar não é traição. Brincar n�
 
 ## 5. Quando há trauma por baixo
 
-Tenho de parar o livro aqui. Com toda a seriedade. Este é o capítulo mais importante, e peço-te que o leves a sério, porque pode ser o que mais te importa.
+Aqui pouso o livro um instante, e peço-te que pouses comigo. Com toda a seriedade. Este é o capítulo mais importante, e peço-te que o leves a sério, porque pode ser o que mais te importa.
 
 O que viveste, uma infância invertida, uma criança que cuidou de adultos, não é só um padrão a compreender. Muitas vezes, por baixo dele, há trauma. E o trauma não se trata com um livro. Trata-se com ajuda, a sério, de um profissional.
 
@@ -215,7 +215,7 @@ Do outro lado deste posto largado, espera-te uma alegria que nunca conheceste. A
 
 Escrevi este livro por uma convicção simples. Compreender muda. E, neste caso, compreender pode também ser o princípio de uma cura mais funda, com ajuda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, pousar uma responsabilidade de uma vida inteira. Mas muda o suficiente para deixares de confundir o teu sacrifício com a tua maturidade, e o teu peso com o teu dever.
+Não pousa a mochila toda de uma só vez. Não te faz, amanhã, largar uma responsabilidade de uma vida inteira. Mas muda o suficiente para deixares de confundir o teu sacrifício com a tua maturidade, e o teu peso com o teu dever.
 
 Agora sabes que foste adulta cedo demais, e que isso não foi maturidade, foi uma infância roubada, uma adaptação a uma falta, e não um dom que floresceu.
 
@@ -239,9 +239,9 @@ Imagina uma criança pequena, ainda com pernas curtas, a carregar aos ombros uma
 
 Essa criança és tu. E a mochila nunca foi tua. Foi-te posta às costas por adultos que não a conseguiram carregar. A travessia é pousares a mochila. Devolveres, com cuidado, o que estava lá dentro a quem pertencia. E descobrires, ao endireitares-te pela primeira vez, que por baixo do peso havia uma criança, que nunca pôde sê-lo, e que merece, agora, ainda que tarde, ser, enfim, cuidada.
 
-Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma responsabilidade a cumprir na perfeição. Vai ser lenta, e vai ter recuos. Dias em que pousas, em que te deixas cuidar, em que és pequena, e dias em que voltas a carregar tudo, a ser o adulto de todos, em pânico de que algo caia. E a velha culpa vai aproveitar cada recuo para te dizer estás a ver, és tu que tens de tratar de tudo. Não acredites nela. Os recuos fazem parte. Ninguém pousa de uma vez uma mochila que carregou desde criança. Pousa-se aos poucos, e cada vez que pousas e o mundo não desaba, ficou uma prova nova, e é dessas provas, somadas, que a permissão de seres, também tu, cuidada, devagar, se constrói.
+Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma responsabilidade a cumprir na perfeição. Pousa-se a mochila devagar, e haverá dias em que voltas a pô-la às costas. Dias em que pousas, em que te deixas cuidar, em que és pequena, e dias em que voltas a carregar tudo, a ser o adulto de todos, em pânico de que algo caia. E a velha culpa vai aproveitar cada recuo para te dizer estás a ver, és tu que tens de tratar de tudo. Não acredites nela. Os recuos fazem parte. Ninguém pousa de uma vez uma mochila que carregou desde criança. Pousa-se aos poucos, e cada vez que pousas e o mundo não desaba, ficou uma prova nova, e é dessas provas, somadas, que a permissão de seres, também tu, cuidada, devagar, se constrói.
 
-Falta-me dizer-te uma coisa, e digo-a com toda a ternura que tenho. Aquela criança que carregou o mundo não fez nada de errado. Fez algo extraordinário, com um amor imenso, para segurar o que os adultos não seguravam. Não há nada a corrigir nela. Mas ela merecia ter sido protegida, segurada, deixada ser pequena. E hoje, em adulta, podes dar-lhe tu o que então faltou: podes ser, para a criança que foste, o adulto bom que ela nunca teve. Não para a substituir, mas para a cuidar, enfim, e para lhe dizer, devagar, o que ninguém lhe disse: já podes pousar, já não tens de segurar tudo, agora cuido eu de ti.
+Falta-me dizer-te uma coisa, e digo-a com toda a ternura que tenho. Aquela criança que carregou o mundo não fez nada de errado. Fez algo extraordinário, com um amor imenso, para segurar o que os adultos não seguravam. Naquela criança que segurou a casa não há nada a corrigir. Mas ela merecia ter sido protegida, segurada, deixada ser pequena. E hoje, em adulta, podes dar-lhe tu o que então faltou: podes ser, para a criança que foste, o adulto bom que ela nunca teve. Não para a substituir, mas para a cuidar, enfim, e para lhe dizer, devagar, o que ninguém lhe disse: já podes pousar, já não tens de segurar tudo, agora cuido eu de ti.
 
 Já a conheces, a frase que sustenta tudo o que aqui te disse. Não tenho de continuar a ser o adulto de todos. E posso ser, enfim, o adulto que cuida da criança que fui.
 

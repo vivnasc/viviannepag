@@ -35,7 +35,7 @@ Quero que saibas porque é que este livro é diferente dos outros desta coleçã
 
 Porque esperança há, e muita. O que vives tem nome, tem explicação, e tem ajuda real. Não estás avariada, não estás condenada, não és um caso perdido. És uma pessoa cujo corpo ficou preso a proteger-te de um perigo que já passou, e isso, hoje, sabe-se tratar. Lê este livro, então, não como uma cura, mas como uma mão que te pega e te aponta a direção certa, e que te diz, do princípio ao fim: vale a pena, mereces, e não tens de fazer isto sozinha.
 
-Talvez te reconheças em coisas concretas.
+Talvez o alerta apareça em ti de formas bem concretas.
 
 Numa tensão no corpo que nunca larga, ombros, mandíbula, peito, sempre contraídos.
 
@@ -47,7 +47,7 @@ Numa ansiedade de fundo que não tem causa visível, mas que não te larga, como
 
 São todos o mesmo. O modo de sobrevivência. O corpo preso num alerta que o perigo já não justifica.
 
-Quero mostrar-te como isto aparece no dia a dia, em coisas que talvez já tomes por quem és. Entras num sítio novo, e antes de qualquer pensamento, o teu corpo já varreu as saídas, já mediu as pessoas, já procurou a ameaça. Alguém muda de tom, franze a testa, fecha uma porta com força, e o teu corpo dispara, o coração acelera, o estômago aperta, mesmo que racionalmente saibas que não há perigo. Tens dias em que te sentes esgotada sem teres feito nada de especial, e não percebes porquê, sem saberes que estar em alerta o dia inteiro consome tanto como um esforço físico enorme.
+Quero mostrar-te como este alerta se infiltra nos teus dias, disfarçado de feitio, em gestos que já tomas por quem és. Entras num sítio novo, e antes de qualquer pensamento, o teu corpo já varreu as saídas, já mediu as pessoas, já procurou a ameaça. Alguém muda de tom, franze a testa, fecha uma porta com força, e o teu corpo dispara, o coração acelera, o estômago aperta, mesmo que racionalmente saibas que não há perigo. Tens dias em que te sentes esgotada sem teres feito nada de especial, e não percebes porquê, sem saberes que estar em alerta o dia inteiro consome tanto como um esforço físico enorme.
 
 E há um pormenor que talvez reconheças: a dificuldade de estar simplesmente bem. Quando as coisas estão calmas, em vez de descansares, ficas à espera de que algo corra mal, quase desconfortável com a paz, como se a calma fosse só o intervalo antes do próximo embate. Para um corpo que viveu no perigo, a calma não é repouso, é suspeita, porque aprendeu que baixar a guarda é quando o perigo apanha. E por isso até os bons momentos te custam a habitar, vigiados por uma parte de ti que não acredita que vão durar.
 
@@ -107,11 +107,11 @@ E quero acrescentar uma verdade que talvez te alivie: parte da tua exaustão nã
 
 ## 4. Quem sou eu para além do perigo
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela, ainda que ela seja difícil.
+Quero pousar aqui uma pergunta, e deixá-la a sós, sem alarme à volta. Não fujas dela, ainda que ela seja difícil.
 
 Quem serias tu, se o teu corpo soubesse, enfim, que o perigo passou? Se pudesses viver, e não só sobreviver?
 
-Fica com ela. Repara no que ela abre. Talvez uma saudade de algo que nunca tiveste.
+Fica com ela. Deixa baixar a guarda só o suficiente para sentir o que ela destranca dentro de ti. Talvez uma saudade de algo que nunca tiveste.
 
 Para ti, esta pergunta toca num lugar fundo, porque talvez não saibas, sequer, o que é viver sem o alerta. O modo de sobrevivência é tão antigo, tão teu, que se confunde contigo. Não sabes quem serias sem ele, porque nunca, ou quase nunca, estiveste fora dele.
 
@@ -189,7 +189,7 @@ Quero que saibas, ainda, que melhorar não é apagar o que viveste, nem voltar a
 
 ## 7. Ensinar o corpo que o perigo passou
 
-Há um verbo para esta travessia. Viver. E há um caminho para lá chegar, que quero nomear-te com honestidade, sem te prometer atalhos.
+Há uma palavra para o que está do outro lado do alerta. Viver. E há um caminho para lá chegar, que quero nomear-te com honestidade, sem te prometer atalhos.
 
 O caminho é o teu corpo aprender que o perigo passou. Não a tua cabeça, que talvez já o saiba. O teu corpo, o teu sistema nervoso, que continua a reagir como se o perigo fosse presente. E o corpo não aprende a esforço, nem a razão. Aprende devagar, com experiências de segurança, repetidas, no corpo, muitas vezes com a ajuda de alguém preparado para as facilitar.
 
@@ -243,7 +243,7 @@ E quero deixar-te uma coisa, sobre quem vive contigo, sobretudo se há filhos, o
 
 E quero dizer-te uma última coisa, com toda a ternura. O que te aconteceu não foi culpa tua, e o estado em que ficaste não é um defeito teu. És alguém que sobreviveu a algo que o corpo não conseguiu, sozinho, deixar para trás. Não há vergonha nisso. Há, isso sim, uma enorme dignidade em teres continuado, em teres aguentado, e há uma coragem ainda maior à tua espera: a de te deixares, enfim, ajudar a poisar um alerta que carregas há tempo demais.
 
-Sabes, no fundo, a frase que segura este livro. Posso viver para além do perigo. Não como uma promessa que tens de cumprir sozinha, mas como uma direção real, para a qual há mãos preparadas que te podem levar.
+Sabes, no fundo, a frase que sustém este livro inteiro, como o ar limpo sustém quem saiu do fumo. Posso viver para além do perigo. Não como uma promessa que tens de cumprir sozinha, mas como uma direção real, para a qual há mãos preparadas que te podem levar.
 
 E sabes, também, qual é o primeiro passo, e não é um esforço, é um cuidado. É procurares ajuda. É deixares que alguém preparado te acompanhe a sair do incêndio que já acabou em todo o lado menos no teu corpo. Esse passo não é fraqueza. É o princípio de viveres.
 

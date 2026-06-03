@@ -25,11 +25,11 @@ Quero dizer-te já, antes de tudo, que isto não é vaidade. Não é perfeccioni
 
 Porque a tua perfeição é uma armadura. Construíste-a, sem o saberes, para te protegeres de um perigo real. Aprendeste, algures, que falhar custava caro. Caro a sério. E fizeste-te impecável para estares a salvo, porque a perfeição era a tua forma de evitar uma consequência que, um dia, foi de facto perigosa.
 
-Este livro é diferente dos outros que talvez tenhas lido. Porque o que te trouxe aqui não é só um padrão a compreender. É, muitas vezes, uma resposta a algo que viveste, uma adaptação que te manteve segura num tempo em que errar tinha consequências reais. E isso merece mais do que compreensão. Merece cuidado. Por isso, ao longo destas páginas, vou dizer-te, sem rodeios e sem que seja falha, que talvez precises não só de te entenderes, mas de apoio.
+Este livro é diferente dos outros que talvez tenhas lido. Porque o que te trouxe aqui não é só um padrão a compreender. É, muitas vezes, uma resposta a algo que viveste, uma adaptação que te manteve segura num tempo em que errar tinha consequências reais. E uma armadura forjada para sobreviver não se poisa só por a entenderes. Merece cuidado. Por isso, ao longo destas páginas, vou dizer-te, sem rodeios e sem que seja falha, que talvez precises não só de te entenderes, mas de apoio.
 
 E digo-te já para onde vamos, para que leias sem o coração em sobressalto. Podes errar e continuar segura. Já não estás no perigo onde uma falha tua custava caro. A armadura da perfeição protegeu-te então, mas hoje aperta-te o peito a cada gralha, a cada entrega, a cada espelho, e podes, devagar, e talvez com ajuda, aprender a poisá-la.
 
-Talvez te reconheças em coisas pequenas.
+Talvez a armadura se denuncie em gestos miúdos.
 
 Em sentires uma ansiedade desproporcionada perante a hipótese de cometeres um erro, mesmo pequeno.
 
@@ -67,7 +67,7 @@ E essa menina fez exatamente o que tinha de fazer para passar incólume. Tornou-
 
 Mas a armadura não se desfez quando o perigo passou. Ficou. Tornou-se a tua forma de estar no mundo. E hoje, em adulta, num mundo onde errar já não traz a consequência que trazia então, continuas a viver como se trouxesse. Continuas impecável, vigilante, em pânico perante a falha, defendida de um perigo que já não existe, mas que o teu corpo continua a temer.
 
-Quero que vejas isto com clareza. A tua perfeição não é um defeito teu. É uma resposta inteligente a um perigo real. Não és controladora por feitio. És uma sobrevivente, que aprendeu a proteger-se da única forma que pôde. E reconhecer isto não é desculpar quem te feriu. É honrar a criança que encontrou, na perfeição, uma forma de estar a salvo.
+Quero que olhes a tua armadura sem véu. A tua perfeição não é um defeito teu. É uma resposta inteligente a um perigo real. Não te vestiste de impecável por feitio. És uma sobrevivente, que aprendeu a proteger-se da única forma que pôde. E reconhecer isto não é desculpar quem te feriu. É honrar a criança que encontrou, na perfeição, uma forma de estar a salvo.
 
 Quero acrescentar uma raiz que talvez reconheças, porque a perfeição nem sempre nasce do castigo. Às vezes nasce do amor condicional. De uma casa onde eras vista, elogiada, querida, quando trazias resultados, quando eras a melhor, quando não falhavas. E onde, sem os resultados, sem a excelência, te tornavas invisível, ou desiludias. Aprendeste, então, que o amor vinha pela perfeição, e que falhar era arriscar perder o amor, não por castigo, mas por desaparecimento do afeto.
 
@@ -81,7 +81,7 @@ Importa que vejas onde o terror de errar ficou alojado, porque é isso que expli
 
 É por isso que tantas vezes te dizes que é absurdo, que ninguém morre por uma gralha ou por uma entrega menos perfeita, e mesmo assim o medo não baixa. Não baixa porque não nasceu de um raciocínio. Nasceu de uma memória que o corpo guarda, antiga, que ainda trata cada erro como se fosse o erro que outrora trouxe a tempestade. E essa memória não se desmonta com bons argumentos sobre proporção e bom senso. Reaprende-se, devagar, errando em pequeno e descobrindo, vez após vez, que desta vez não veio castigo nenhum.
 
-Digo-te isto não para te assustar com a dificuldade, mas para tirares de cima de ti o peso de uma culpa a mais: a de não conseguires, só por quereres, deixar de temer. Não é falta de vontade. Não é fraqueza. É a natureza de uma ferida que vive no corpo, e que por isso pede um caminho que passa pelo corpo, e muitas vezes por mãos que saibam acompanhá-lo, e não só pela tua boa vontade de mudar.
+Digo-te isto não para te assustar com a dificuldade, mas para tirares de cima de ti o peso de uma culpa a mais: a de não conseguires, só por quereres, deixar de temer. Querer não basta para poisar uma armadura desta. Não é fraqueza. É a natureza de uma ferida que vive no corpo, e que por isso pede um caminho que passa pelo corpo, e muitas vezes por mãos que saibam acompanhá-lo, e não só pela tua boa vontade de mudar.
 
 ## 3. A armadura da perfeição
 
@@ -97,7 +97,7 @@ Quero mostrar-te algo mais fundo. A perfeição rouba-te a possibilidade de sere
 
 Há também uma solidão particular nisto. A de quem não pode partilhar os seus erros, as suas dúvidas, as suas falhas, com ninguém. A de quem tem de manter, sempre, a fachada impecável, e que por isso carrega sozinha tudo o que não pode mostrar. A perfeição é uma armadura solitária, porque ninguém entra nela, e tu ficas, lá dentro, só com o peso de a manteres de pé.
 
-Quero que sintas o cansaço disto. O cansaço de uma vida inteira a não poder falhar. A vigilância sem fim. O pânico permanente. A impossibilidade de descansar, de errar, de ser, simplesmente, humana. É uma exaustão funda, e talvez já a tomes por normal, de tão habituada estás a viver de armadura vestida.
+Quero que sintas o peso de carregar esta armadura. O cansaço de uma vida inteira a não poder falhar. A vigilância sem fim. O pânico permanente. A impossibilidade de descansar, de errar, de ser, simplesmente, humana. É uma exaustão funda, e talvez já a tomes por normal, de tão habituada estás a viver de armadura vestida.
 
 Quero ir mais fundo no que a perfeição te custa, porque o preço é maior do que parece, e paga-se em silêncio.
 
@@ -121,7 +121,7 @@ Largar um pouco o controlo é, por isso, parte desta travessia. Não para te tor
 
 ## 4. Quem sou eu quando erro
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar aqui uma pergunta que a tua armadura sempre evitou. Sozinha. Não fujas dela.
 
 Quem és tu quando erras? Quando não és impecável? Quando falhas, simplesmente, como qualquer ser humano falha?
 
@@ -131,13 +131,13 @@ Para ti, esta pergunta toca no medo mais fundo, porque a tua identidade inteira 
 
 A sombra que aqui se esconde é a tua própria falibilidade humana. A possibilidade de errares, de não dares conta, de seres, simplesmente, humana, com as falhas que todos os humanos têm. Essa parte de ti, a que pode falhar, aterroriza-te, porque associaste a falha ao perigo, e por isso vives a combater a tua própria humanidade, como se ela fosse uma ameaça pousada dentro de ti.
 
-Repara como isto te aprisiona. Não te podes permitir ser humana. Não te podes permitir o erro, a dúvida, a imperfeição que todos têm. Exiges de ti uma perfeição sobre-humana, e castigas-te, com uma dureza imensa, sempre que ficas aquém dela. Tornaste-te, perante a tua própria falha, o juiz mais severo que existe, mais severo do que qualquer pessoa que alguma vez te tenha ferido.
+Repara como esta armadura te prende por dentro. Não te podes permitir ser humana. Não te podes permitir o erro, a dúvida, a imperfeição que todos têm. Exiges de ti uma perfeição sobre-humana, e castigas-te, com uma dureza imensa, sempre que ficas aquém dela. Tornaste-te, perante a tua própria falha, o juiz mais severo que existe, mais severo do que qualquer pessoa que alguma vez te tenha ferido.
 
 E há uma crueldade nisto que talvez não vejas. Tratas-te como aquele perigo antigo te tratava. Interiorizaste a dureza, o juízo, o castigo perante a falha, e aplica-los a ti, hoje, sem que ninguém precise de o fazer. O perigo de fora tornou-se um perigo de dentro, e tu continuas a viver sob ameaça, agora a tua própria, a tua própria vigia armada contra qualquer descuido teu.
 
 Quero dizer-te uma coisa sobre este terror, porque é por aqui que ele começa a perder força. Errar não te torna insegura, hoje. Esta é a verdade que o teu corpo ainda não aprendeu. No tempo em que a armadura nasceu, falhar trazia perigo, e o teu terror era justo, era a única resposta sensata àquela casa. Mas hoje, na tua vida adulta, um erro é, na maioria das vezes, apenas humano. Não traz a catástrofe que o teu corpo antecipa. As pessoas erram, e continuam seguras, amadas, dignas. Tu também podes. O perigo daquele tempo passou, ainda que o teu sistema nervoso continue a tocar o alarme de incêndio à mais pequena fagulha, como se a casa ainda ardesse.
 
-Não respondas já à pergunta de quem és quando erras. Não se responde com a cabeça, e às vezes precisa de mais do que um livro. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que falhar já não é perigoso, deixas de precisar da armadura para estares segura. E aí, só aí, podes começar a permitir-te ser humana.
+Não respondas já à pergunta de quem és quando erras. Não se responde com a cabeça, e às vezes precisa de mais do que um livro. Mas deixa-a aberta. Porque é por essa pergunta que se afrouxa a primeira fivela da armadura. No dia em que o teu corpo aprender que falhar já não é perigoso, deixas de precisar da armadura para estares segura. E aí, só aí, podes começar a permitir-te ser humana.
 
 E repara como esta crença te torna estranhamente frágil, apesar de toda a tua competência. Porque se o teu valor depende de não falhares, então qualquer falha, por pequena que seja, é uma ameaça ao teu próprio valor. Não te podes dar ao luxo de um erro, porque um erro, no teu mundo interior, não é um detalhe, é uma rachadela em tudo o que te sustenta. Vives, por isso, sempre a um erro de distância de deixares de valer, e essa fragilidade, escondida atrás da tua aparente solidez, explica a tensão permanente com que vives.
 
@@ -149,7 +149,7 @@ E há outra cara desta mesma crença, que é o que fazes com a falha dos outros.
 
 ## 5. Talvez precises de mais do que compreender
 
-Tenho de parar o livro aqui. Com toda a seriedade. Este é o capítulo mais importante, e é diferente de tudo o resto.
+Tenho de baixar a guarda do livro e parar aqui. Com toda a seriedade. Este é o capítulo mais importante, e é diferente de tudo o resto.
 
 Porque o que te trouxe aqui não é, na maioria das vezes, só um padrão de personalidade. É, muito provavelmente, uma resposta a algo que viveste. Uma adaptação ao perigo. E há uma diferença enorme entre uma ferida de caráter e uma resposta de trauma, e essa diferença muda o que precisas.
 
@@ -167,7 +167,7 @@ Se reconheces, na tua história, perigo real, este é o capítulo de que quero q
 
 Quero que vejas como a perfeição te afasta das pessoas, ainda que pareça o contrário. De fora, a tua impecabilidade impõe respeito, admiração. Mas cria distância. Porque quem está sempre perfeito é difícil de alcançar, de conhecer, de amar de perto. Não mostra a fragilidade, o erro, a dúvida, a humanidade que aproxima. E as pessoas, perante uma fachada sem fissuras, mantêm-se de fora, porque não há por onde entrar.
 
-E há uma solidão particular nisto. A de quem não pode partilhar os seus erros, as suas dúvidas, os seus medos, com ninguém. A de quem tem de manter, sempre, a aparência de quem dá conta de tudo, e que por isso carrega sozinha tudo o que não pode mostrar. Estás rodeada de gente que te admira, e sozinha com o peso de manteres de pé a imagem que admiram. A perfeição é uma armadura solitária, porque ninguém entra nela.
+E dentro desta armadura mora uma solidão muito própria. A de quem não pode partilhar os seus erros, as suas dúvidas, os seus medos, com ninguém. A de quem tem de manter, sempre, a aparência de quem dá conta de tudo, e que por isso carrega sozinha tudo o que não pode mostrar. Estás rodeada de gente que te admira, e sozinha com o peso de manteres de pé a imagem que admiram. A perfeição é uma armadura solitária, porque ninguém entra nela.
 
 Quero mostrar-te, também, o que a tua perfeição faz a quem te ama, ou a quem trabalha contigo. Vivem com a régua que aplicas a ti, aplicada também a eles, ou ao menos sentida. Sentem que nunca está bom o suficiente, que há sempre algo a melhorar, que o erro não é tolerado. E isso, ainda que não o digas, pesa, porque viver ao lado de quem não se permite errar é viver com medo de errar também. Sem o quereres, a tua armadura torna o ar à tua volta tenso, vigiado, exigente.
 
@@ -219,7 +219,7 @@ Vai custar-te, porque a velha voz, a que aponta a falha e pune, está gravada fu
 
 ## 7. Permitir-me ser humana
 
-Há um verbo para esta travessia. Permitir.
+Toda esta travessia se resume a um verbo, o oposto de armar-se. Permitir.
 
 Permitir-te errar. Permitir-te ser humana. Permitir-te a falibilidade que todos têm, e que tu te proibiste em nome da segurança.
 
@@ -245,7 +245,7 @@ Abre-se a possibilidade de seres amada como és. Porque deixas de te esconder at
 
 E abre-se, sobretudo, o descanso. O descanso de não teres de ser impecável a cada instante. De poderes baixar a guarda. De viveres sem a vigilância sem fim de quem não pode falhar. É um descanso que talvez nunca tenhas conhecido, o de quem pousa, enfim, uma armadura que carregava desde a infância, e descobre como o corpo é leve sem ela.
 
-E quero que vejas que permitir-te errar não te torna menos competente, menos cuidadosa, menos boa no que fazes. A tua capacidade fica lá, intacta. O que muda é que deixa de vir do terror, e passa a vir do gosto. Continuas a fazer bem, mas porque queres, e não porque temes. E o que fazes a partir do gosto é, no fim, melhor, mais livre, mais teu, do que o que fazias a partir do medo, porque o medo encolhe, e o gosto expande.
+E quero que vejas que permitir-te errar não te torna menos competente, menos cuidadosa, menos boa no que fazes. Poisada a armadura, a tua capacidade continua ali, intacta. O que muda é que deixa de vir do terror, e passa a vir do gosto. Continuas a fazer bem, mas porque queres, e não porque temes. E o que fazes a partir do gosto é, no fim, melhor, mais livre, mais teu, do que o que fazias a partir do medo, porque o medo encolhe, e o gosto expande.
 
 Quero que leves uma coisa, sobre quem te vê, se há quem aprenda olhando para ti. Se te veem viver em perfeição, em pânico do erro, a punir-te por cada falha, aprendem que é assim que se deve ser, e é provável que vistam a mesma armadura, e que vivam o mesmo terror. A coisa mais libertadora que podes fazer por quem te vê não é dar-lhes o exemplo da impecabilidade. É mostrares-lhes uma mulher que erra, e se trata com brandura, e continua digna. Às vezes uma mulher aprende a permitir-se errar, enfim, não só por si, mas para não condenar quem ama ao mesmo terror de falhar.
 

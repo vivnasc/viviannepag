@@ -27,13 +27,13 @@ Há uma diferença entre trabalhar por gosto, por sustento, por sentido, e traba
 
 Este livro é o mais fundo desta coleção, e talvez de todos. Porque toca na raiz de tudo: o teu direito a existir, simplesmente, sem o merecer. Vim olhar para a crença de que o teu valor depende do que produzes. Para a confusão entre o que fazes e o direito de existir. E para a possibilidade, talvez a maior de todas, de existires sabendo que vales, antes de qualquer produção, sem teres de o provar.
 
-E adianto-te a direção, para leres em paz. O teu valor antecede o que produzes. Existes antes de fazeres seja o que for, e esse existir já tem valor, já basta, já merece. Não tens de trabalhar para teres direito a existir. Esse direito é teu, de origem, e nenhuma produção to dá, porque ele nunca esteve em causa, a não ser na ferida que vamos olhar.
+E adianto-te já o destino, para que leias sem teres de o merecer. O teu valor antecede o que produzes. Existes antes de fazeres seja o que for, e esse existir já tem valor, já basta, já merece. Não tens de trabalhar para teres direito a existir. Esse direito é teu, de origem, e nenhuma produção to dá, porque ele nunca esteve em causa, a não ser na ferida que vamos olhar.
 
 Quero que percebas, desde já, que este livro não te vem pedir que deixes de trabalhar, nem que a tua dedicação não vale nada, nem que o que produzes não importa. O que crias tem valor, o teu trabalho importa, e é bom amar o que se faz. Vem pedir-te outra coisa, mais funda: que separes o teu trabalho do teu direito a existir. Que continues a fazer, se quiseres, mas a partir de um chão de valor que já é teu, e não para o ganhar. A diferença não está em quanto trabalhas, está no porquê: trabalhar porque existes, e não para teres direito a existir. A primeira é vida. A segunda é uma renda sem fim.
 
 E quero que saibas que esta é, talvez, a ferida mais difícil de ver, precisamente porque é a mais funda, e porque o mundo a aplaude. Ninguém te vai dizer que há um problema em trabalhares tanto, em produzires sempre, em nunca parares; pelo contrário, vão elogiar-te por isso. Por isso esta ferida esconde-se melhor do que todas, vestida de virtude, premiada por toda a parte. E só tu, por dentro, sabes a angústia que a alimenta, o terror do vazio que a sustenta, a dúvida sobre o direito a existir que ninguém vê. Ver isto, dar-lhe nome, é o princípio de te libertares de uma prisão que todos confundem com mérito.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças em pequenas faturas que pagas sem dar conta.
 
 Em sentires que um dia em que não produziste foi um dia perdido, vazio, em que não justificaste a tua existência, em que não pagaste o teu lugar.
 
@@ -47,7 +47,7 @@ Em sentires culpa ou angústia quando estás doente, ou parada, ou simplesmente 
 
 São todos o mesmo. O trabalho como prova do direito a existir. A produção como condição de uma existência que sentes ter de merecer.
 
-Quero mostrar-te como isto aparece no dia a dia, em coisas que talvez já tomes por quem és. Um domingo sem planos, sem nada para fazer, em vez de descanso, traz-te uma angústia, um desconforto, uma necessidade de arranjar algo para produzir. Estás de férias, e em vez de simplesmente estares, sentes que devias aproveitar para fazer, para adiantar, para não desperdiçar. Recebes um afeto, um cuidado, uma atenção, e por dentro há uma voz que diz que ainda não fizeste o suficiente para o merecer, que tens de o compensar, de o retribuir, de o ganhar.
+Quero mostrar-te onde esta renda se cobra no dia a dia, em gestos tão teus que já os confundes com a tua maneira de ser. Um domingo sem planos, sem nada para fazer, em vez de descanso, traz-te uma angústia, um desconforto, uma necessidade de arranjar algo para produzir. Estás de férias, e em vez de simplesmente estares, sentes que devias aproveitar para fazer, para adiantar, para não desperdiçar. Recebes um afeto, um cuidado, uma atenção, e por dentro há uma voz que diz que ainda não fizeste o suficiente para o merecer, que tens de o compensar, de o retribuir, de o ganhar.
 
 E há um pormenor que revela a raiz: a forma como te sentes quando estás doente, ou em baixo, sem conseguir produzir. Em vez de te permitires repousar, sobe uma culpa, quase um pânico, uma sensação de estares a falhar, a deixar de merecer, a perder o direito ao teu lugar. Porque para ti adoecer não é só estar doente, é deixar de poder pagar a renda da existência, e isso aterroriza-te de uma forma que não bate com o tamanho real da situação. É aí, nesses momentos em que não podes produzir, que a ferida mais se mostra: na incapacidade de simplesmente seres cuidada, sem teres feito por isso.
 
@@ -67,7 +67,7 @@ Talvez venhas de um lugar onde o valor de uma pessoa se media pelo que ela fazia
 
 Ou talvez a tua existência tenha chegado em circunstâncias difíceis, num momento em que não foi recebida com a alegria simples com que uma criança devia ser recebida. Talvez tenhas sido um peso a mais num lar já sobrecarregado, ou tenhas chegado quando não eras esperada, ou tenhas crescido a sentir, sem que ninguém o dissesse, que a tua presença complicava, custava, pesava. E uma criança que sente isto faz uma coisa tocante e terrível: tenta compensar a própria existência, tornar-se útil, fazer por merecer o espaço que ocupa, como se tivesse de pagar por estar ali. E leva, para a vida adulta, essa missão impossível, a de justificar, com trabalho, uma existência que sentiu, desde cedo, que não tinha direito a ser gratuita.
 
-Repara no que uma criança aprende num lugar destes. Aprende que a existência não é um direito, é uma condição. Que tem de merecer o seu lugar. Que só vale quando produz, quando faz, quando justifica a sua presença. E essa aprendizagem grava-se no mais fundo, porque toca no mais básico: o direito de existir, que devia ser incondicional, e que se tornou, para ela, algo a merecer.
+Repara na equação que uma criança aprende num lugar destes. Aprende que a existência não é um direito, é uma condição. Que tem de merecer o seu lugar. Que só vale quando produz, quando faz, quando justifica a sua presença. E essa aprendizagem grava-se no mais fundo, porque toca no mais básico: o direito de existir, que devia ser incondicional, e que se tornou, para ela, algo a merecer.
 
 E essa criança fez o que tinha de fazer. Começou a trabalhar para existir. A produzir para merecer. A justificar, com o que fazia, o seu direito a estar. E levou essa equação para a vida adulta, onde continua a trabalhar, sem fim, para provar um direito a existir que nunca devia ter estado em causa.
 
@@ -79,13 +79,13 @@ E quero que vejas onde isto fica guardado, porque é o mais fundo de tudo. Esta 
 
 ## 3. Não sei existir sem produzir
 
-Há uma coisa que precisas de ver. Tu não sabes, simplesmente, existir. Sem produzir, sem fazer, sem justificar, não sabes estar.
+Há uma falta na raiz que precisas de ver. Tu não sabes, simplesmente, existir. Sem produzir, sem fazer, sem justificar, não sabes estar.
 
 Repara no que acontece quando tentas, simplesmente, ser. Estar parada, sem fazer nada, sem produzir, sem propósito. Aparece uma angústia, um desconforto, uma inquietação que te empurra a fazer, a produzir, a justificar a tua presença. Não consegues suportar a existência pura, sem a atividade que a justifica. Como se existir, sem produzir, fosse insuportável, ilegítimo, errado.
 
 Repara, também, na quantidade de coisas com que enches a vida para nunca chegares a esse vazio. Sempre uma tarefa, sempre um projeto, sempre algo para fazer, mesmo no descanso, mesmo no lazer, que transformas, sem dar conta, em mais uma forma de produzir. Não há, na tua vida, espaços de puro existir, porque os evitas, instintivamente, como quem evita uma dor. E essa fuga permanente, esse encher de tudo para não chegar ao nada, é, ela própria, exaustiva, porque viver em fuga de si é tão cansativo como o trabalho que a alimenta. Há um descanso que só vem de parares de fugir, de te deixares chegar ao vazio que tanto temes, e de descobrires, ali, não o abismo que imaginavas, mas o chão firme de que existes, e basta.
 
-E há um custo enorme nisto. Porque uma pessoa que não sabe existir sem produzir nunca descansa, nunca está, nunca simplesmente é. Vive a fazer, sem fim, para justificar uma existência que nunca sente ter direito a ter. E isso esgota, não só o corpo, mas a alma, porque é uma exaustão existencial, a de quem tem de provar, a cada dia, que merece estar viva.
+E esta renda cobra um preço enorme. Porque uma pessoa que não sabe existir sem produzir nunca descansa, nunca está, nunca simplesmente é. Vive a fazer, sem fim, para justificar uma existência que nunca sente ter direito a ter. E isso esgota, não só o corpo, mas a alma, porque é uma exaustão existencial, a de quem tem de provar, a cada dia, que merece estar viva.
 
 E custa-te o presente. Porque para estares presente, para viveres o momento, para simplesmente seres, tens de parar de produzir, e parar de produzir abre a angústia de não estares a merecer. Por isso nunca estás, de verdade, em lado nenhum. Estás sempre a fazer, a produzir, a justificar, e a vida, que acontece no presente, no simples existir, passa-te ao lado, porque tu estás demasiado ocupada a merecer o direito de a viver.
 
@@ -103,7 +103,7 @@ Quero que vejas, ainda, como esta ferida te rouba a capacidade de receber a vida
 
 E custa-te o amor recebido sem o sentires merecido. Porque mesmo quando és amada, cuidada, valorizada, há uma parte de ti que não consegue receber, que sente que ainda não fez o suficiente para o merecer, que tem de o retribuir, de o pagar, de o ganhar. E assim o amor não te chega ao fundo, porque o filtro da ferida não o deixa entrar sem fatura. Vives, talvez, rodeada de afeto, e por dentro sempre em dívida, sempre a achar que tens de merecer o que te é dado de graça, e por isso o amor que recebes nunca te enche, porque não te deixas, simplesmente, recebê-lo.
 
-Quero que sintas o peso disto. O peso de teres de justificar a tua existência, a cada dia, com trabalho. De nunca poderes, simplesmente, ser. De viveres uma vida inteira a merecer um direito que era teu de origem. É a exaustão mais funda que há, e talvez já a tomes por quem és, quando é, no fundo, a ferida de quem nunca soube que tinha direito a existir, sem mais. E mereces, depois de uma vida a pagar, descansar enfim dessa renda que nunca devias ter sido obrigada a pagar.
+Quero que sintas o peso desta renda às costas. O peso de teres de justificar a tua existência, a cada dia, com trabalho. De nunca poderes, simplesmente, ser. De viveres uma vida inteira a merecer um direito que era teu de origem. É a exaustão mais funda que há, e talvez já a tomes por quem és, quando é, no fundo, a ferida de quem nunca soube que tinha direito a existir, sem mais. E mereces, depois de uma vida a pagar, descansar enfim dessa renda que nunca devias ter sido obrigada a pagar.
 
 ## 4. Quem sou eu se não produzir
 
@@ -203,7 +203,7 @@ Não te vou dar um método, porque isto não se resolve com técnicas, e às vez
 
 Escrevi este livro, o mais fundo desta coleção, por uma convicção simples. Compreender muda. E, nesta ferida, compreender é o princípio de te devolveres um direito que sempre foi teu.
 
-Não muda tudo de uma vez. Não te faz, amanhã, sentir, sem dúvida, que tens direito a existir. Mas muda o suficiente para deixares de confundir a tua produção com o teu valor, e o teu trabalho com o teu direito a estar, e para começares a suspeitar de que a dúvida que te governa é uma ferida, e não uma verdade.
+Não te perdoa a renda toda de uma só vez. Não te faz, amanhã, sentir, sem dúvida, que tens direito a existir. Mas muda o suficiente para deixares de confundir a tua produção com o teu valor, e o teu trabalho com o teu direito a estar, e para começares a suspeitar de que a dúvida que te governa é uma ferida, e não uma verdade.
 
 Agora sabes que trabalhas para merecer existir, e que essa é a ferida mais funda do trabalho, e é existencial, não profissional.
 
@@ -233,7 +233,7 @@ E quero dizer-te uma última coisa, a mais funda que sei. Tu nunca precisaste de
 
 Sabes, no fundo, a frase que segura este livro, e que talvez segure toda esta coleção. O meu valor antecede o que faço. Existo, e isso basta. Não tenho de pagar a renda da minha própria vida, porque a casa sempre foi minha.
 
-Existir foi o primeiro passo. Mas há um segundo, e esse não se faz só a ler. Faz-se a existires, devagar, sem produzir, apesar da angústia. A habitares a tua vida, em vez de a mereceres. E, nesta ferida mais do que em qualquer outra, faz-se muitas vezes com ajuda, com quem te acompanhe a chegar à raiz, porque a dúvida sobre o direito a existir vem do início, e raramente se cura sozinha.
+Existir foi o primeiro passo. Mas há um segundo, e esse não se paga a ler, habita-se a viver. Faz-se a existires, devagar, sem produzir, apesar da angústia. A habitares a tua vida, em vez de a mereceres. E, nesta ferida mais do que em qualquer outra, faz-se muitas vezes com ajuda, com quem te acompanhe a chegar à raiz, porque a dúvida sobre o direito a existir vem do início, e raramente se cura sozinha.
 
 E antes de fechares estas páginas, e de fechares, talvez, esta travessia inteira, peço-te uma coisa só. A mais difícil, e a mais simples.
 

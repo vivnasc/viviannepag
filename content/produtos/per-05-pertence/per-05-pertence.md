@@ -29,7 +29,7 @@ Há, por baixo desta errância, um desenraizamento. Nem sempre geográfico, aind
 
 E quero que percebas que o pertencer de que falamos não é só pertencer a um sítio no mapa. É algo mais fundo: é a sensação de teres um lugar no mundo que é teu, de seres recebida, de fazeres parte, de não estares sozinha no universo. Essa pertença, a mais básica de todas, devia ter-te sido dada cedo, no colo de quem te recebeu, na casa que te acolheu, no sentires que havia um lugar feito para ti. E se ela faltou, o que ficou foi esta errância, esta busca de um lugar que, no fundo, é a busca daquele primeiro acolhimento que não houve, ou não houve o suficiente.
 
-Este livro não te vai prometer um lugar onde, finalmente, encaixes na perfeição. Vim olhar para outra coisa. Para a raiz que te falta, e para onde ela se pode, enfim, construir. Que talvez não seja num lugar lá fora, mas num chão que se constrói dentro de ti.
+Este livro não te vai prometer um lugar onde, finalmente, encaixes na perfeição. Vim virar os olhos para mais fundo. Para a raiz que te falta, e para onde ela se pode, enfim, construir. Que talvez não seja num lugar lá fora, mas num chão que se constrói dentro de ti.
 
 E aponto-te já o rumo, como quem te entrega um mapa antes da viagem, para leres sem aflição. Podes pertencer sem te encontrares em todo o lado. A casa que procuras, de cidade em cidade, de grupo em grupo, talvez não exista lá fora, à espera de ser encontrada. Talvez se construa dentro. Podes ser casa para ti. E a partir dessa casa interior, pertencer aos lugares de fora de outra maneira, sem a fome de que eles sejam o chão que só tu te podes dar.
 
@@ -37,7 +37,7 @@ Quero que separes, desde já, a tua silhueta vista de fora da pessoa que mora de
 
 Este livro não te vem dizer que tens de ficar num sítio para sempre, nem que viajar, mudar, explorar, é errado. Se a tua alma é de movimento, isso é teu, e é bom. Vem distinguir o mover-te por gosto do fugir por não conseguires ficar; o explorar o mundo a partir de um chão do andar à deriva à procura de um chão que nunca tiveste. E vem mostrar-te que esse chão, que procuras de lugar em lugar, não está em nenhum lugar à tua espera, está por construir dentro de ti, e que, tendo-o, podes mover-te ou ficar, mas sempre a partir de casa.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te encontres nestes pequenos sinais de quem anda sem chão.
 
 Em sentires-te sempre um pouco impostora nos grupos a que pertences, como se a qualquer momento fossem descobrir que não és bem dali.
 
@@ -85,7 +85,7 @@ E quero que vejas como esta frase se tornou uma profecia que se cumpre. Porque, 
 
 Repara, ainda, que muitas vezes não és tu que ficas de fora, és tu que te pões de fora. Estás num grupo, e em vez de entrares, ficas a observar, à espera de um convite que já tens, de uma permissão que já é tua, de um sinal de que pertences que nunca virá porque a pertença não se dá, toma-se. Esperas que te incluam, em vez de te incluíres. E ficas na margem, não porque te ponham lá, mas porque esperas, à porta, por um chamamento que cabe a ti dar a ti mesma. Entrar, comprometer-te, agir como quem já pertence, é muitas vezes o que falta, e o que não depende de ninguém senão de ti.
 
-Quero que vejas isto sem culpa. A falta de raiz que herdaste, na maioria das vezes, não foi criada para te ferir. Foi a circunstância da tua família, da tua história, do teu chão instável. Mas deixou em ti uma ferida, a de quem nunca pertenceu, e essa ferida merece ser vista, para poder, enfim, começar a sarar.
+Quero que olhes para esta raiz que faltou sem te culpares por ela. A falta de raiz que herdaste, na maioria das vezes, não foi criada para te ferir. Foi a circunstância da tua família, da tua história, do teu chão instável. Mas deixou em ti uma ferida, a de quem nunca pertenceu, e essa ferida merece ser vista, para poder, enfim, começar a sarar.
 
 E quero mostrar-te em que andar da casa que és isto ficou trancado, porque importa. A sensação de não pertenceres não é só uma ideia que tens sobre ti, é uma forma de estar gravada fundo, anterior às palavras. Um bebé, uma criança pequena, que não foi recebida com um sentido de pertença, que não sentiu um chão seguro a sustentá-la, grava essa falta no corpo, num lugar mais antigo do que a razão. Por isso, hoje, não decides sentir-te de fora, sentes-te de fora antes de pensar, em automático, mesmo em lugares onde, racionalmente, sabes que pertences. E é por isso que não basta dizeres a ti mesma que pertences, para o sentires: a ferida vive abaixo da razão, e a raiz que falta planta-se devagar, com experiência, e muitas vezes com ajuda.
 
@@ -111,7 +111,7 @@ Quero que sintas a injustiça que isto te faz, sem que vejas. Cada lugar que aba
 
 Quero que sintas o cansaço desta procura sem fim. A errância de quem nunca chega. A esperança que renasce a cada novo lugar e morre a cada desilusão. O peso de nunca poder descansar, porque estás sempre de saída, sempre à procura do sítio que, desta vez, vai ser casa. É um cansaço de uma vida inteira a procurar fora o que só dentro se pode construir.
 
-E há uma solidão particular nisto. A de quem está sempre de passagem. Que não cria raízes profundas, porque uma parte sua está sempre pronta a partir. Que tem muitos lugares, e nenhum lar. Que conhece muita gente, e a poucos por inteiro, porque pertencer de verdade exige ficar, comprometer-se, deixar-se enraizar, e tu, com medo de que não seja o sítio certo, nunca ficas o suficiente para criar raiz.
+E mora aqui uma solidão só de quem nunca desfaz a mala. A de quem está sempre de passagem. Que não cria raízes profundas, porque uma parte sua está sempre pronta a partir. Que tem muitos lugares, e nenhum lar. Que conhece muita gente, e a poucos por inteiro, porque pertencer de verdade exige ficar, comprometer-se, deixar-se enraizar, e tu, com medo de que não seja o sítio certo, nunca ficas o suficiente para criar raiz.
 
 E há uma armadilha nesta procura, que quero que vejas. A idealização. Porque enquanto não chegas ao lugar perfeito, podes idealizá-lo, imaginá-lo, sonhá-lo sem falhas. O lugar que ainda não tens é sempre perfeito, porque é imaginado. E o lugar onde estás é sempre imperfeito, porque é real. Por isso vives sempre a comparar o real, com as suas falhas inevitáveis, com um ideal sem falhas que só existe na tua cabeça, e o real perde sempre. Não porque seja mau, mas porque nenhum lugar real pode competir com um ideal imaginado. E essa comparação injusta é o que te faz partir sempre, à procura do ideal, que, sendo ideal, nunca encontrarás em parte nenhuma.
 
@@ -119,17 +119,17 @@ Repara, também, em como a tua procura se alimenta a si própria. Cada desilusã
 
 ## 4. Quem sou eu se parar de procurar casa
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Pouso aqui uma pergunta, no limiar desta página. Sozinha. Não partas dela como partes dos lugares.
 
 Quem és tu, se parares de procurar um lugar onde pertencer?
 
-Fica com ela. Repara no que ela mexe.
+Fica com ela. Repara no chão que ela te abana por dentro.
 
 Para quem anda sempre de mala feita, esta pergunta mexe num medo que vive no fundo. Porque a procura tornou-se a tua identidade. Es a que anda, a que busca, a que ainda não encontrou o seu lugar. Tira-te a procura, imagina-te a parar, a ficar, a deixar de buscar a casa perfeita, e aparece um vazio. Então o que sou eu, se não for a que procura? Que lugar tenho, se parar de procurar lugar?
 
 E a sombra que aqui se esconde é a errância como identidade. Tornaste-te a eterna viajante, a que não pertence, a de fora. E essa identidade, por mais solitária, é a tua, e largá-la assusta, porque sem a procura não sabes quem serias.
 
-Repara também numa coisa subtil. A procura, por mais que te canse, protege-te. Enquanto procuras o lugar perfeito, nunca tens de te comprometer com nenhum. Nunca tens de ficar, de te enraizar, de te arriscar a pertencer e, talvez, a ser de novo excluída. A procura mantém-te sempre de saída, e estar de saída é seguro, porque quem está de saída nunca é, verdadeiramente, deixada de fora, já estava a sair.
+Repara, ainda, no que a errância te esconde por baixo do cansaço. A procura, por mais que te canse, protege-te. Enquanto procuras o lugar perfeito, nunca tens de te comprometer com nenhum. Nunca tens de ficar, de te enraizar, de te arriscar a pertencer e, talvez, a ser de novo excluída. A procura mantém-te sempre de saída, e estar de saída é seguro, porque quem está de saída nunca é, verdadeiramente, deixada de fora, já estava a sair.
 
 Por baixo da errância, há, muitas vezes, um medo de pertencer. Porque pertencer é arriscar. É ficar, é entregar-te a um lugar, a um grupo, a pessoas, e arriscar que, depois de te enraizares, te excluam de novo, como aconteceu, talvez, no início. A errância poupa-te esse risco. Não te enraizas, e por isso nunca podes ser arrancada. Mas o preço é a solidão de nunca pertenceres de verdade.
 
@@ -141,7 +141,7 @@ Quero contar-te uma coisa sobre este vazio, que começa logo a mudar a cor com q
 
 E quero dizer-te, com clareza, que parar de procurar não é desistir de pertencer, é mudar de direção: deixares de procurar para fora e começares a construir para dentro. A procura, que te parece o caminho da pertença, é, no fundo, o que te impede de a alcançar, porque te mantém sempre de saída, sempre à porta, sempre a caminho do próximo. Parar não é resignares-te a nunca pertencer. É reconheceres que a pertença não está no fim de uma procura sem fim, está no princípio de uma construção, a de um chão dentro de ti, que, uma vez plantado, te permite, enfim, pertencer ao mundo.
 
-Não respondas já à pergunta de quem és se parares de procurar. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que houver, dentro de ti, um chão, uma casa, uma raiz que levas contigo, deixas de precisar de a procurar lá fora. E aí, só aí, podes pertencer aos lugares sem a fome de que eles sejam o lar que só tu te podes dar.
+Não respondas já à pergunta de quem és se parares de procurar. Mas deixa-a aberta. Porque é nela que está a soleira por onde se entra em casa. No dia em que houver, dentro de ti, um chão, uma casa, uma raiz que levas contigo, deixas de precisar de a procurar lá fora. E aí, só aí, podes pertencer aos lugares sem a fome de que eles sejam o lar que só tu te podes dar.
 
 ## 5. Enraizar sem depender do exterior
 
@@ -171,7 +171,7 @@ O despertar, quando vem, é uma sensação estranha e nova. É o dia em que te s
 
 ## 6. Ser casa para mim
 
-Há um verbo para esta travessia. Enraizar.
+Esta travessia tem um verbo que a sustenta como uma raiz sustenta a árvore. Enraizar.
 
 E é um enraizar particular. Não num lugar, mas em ti. Criar raiz dentro, num chão que és tu própria, e que levas para onde fores.
 
@@ -191,11 +191,11 @@ Vai custar-te, porque a velha voz, a que diz que não és de lado nenhum, está 
 
 E quero falar-te de quem cresce a teu lado e te toma por chão, sobretudo se tens filhos. Porque o desenraizamento transmite-se, de geração em geração, sem se querer. Uma pessoa que nunca teve chão pode, sem perceber, não conseguir dar chão aos filhos, transmitir-lhes a mesma errância, a mesma sensação de não pertencer. Construíres a tua raiz interior não é só por ti, é também para poderes ser, tu, o chão firme que os teus filhos precisam, o sentido de pertença que a ti faltou. Às vezes uma pessoa enraíza, enfim, não só por si, mas para dar a quem ama o lar que ela nunca teve.
 
-Não te vou dar um método. Mas deixo-te o princípio. Para de procurar, fora, a casa que te falta. Constrói-a dentro. Cultiva uma relação contigo em que sejas, enfim, o teu próprio lar. E descobre, devagar, que a pertença que procuraste a vida inteira, de lugar em lugar, eras tu que ta podias dar, e que, tendo-a, podes enfim pertencer ao mundo sem a fome de quem nunca teve chão.
+Não te entrego um mapa para o lar perfeito. Mas deixo-te o princípio. Para de procurar, fora, a casa que te falta. Constrói-a dentro. Cultiva uma relação contigo em que sejas, enfim, o teu próprio lar. E descobre, devagar, que a pertença que procuraste a vida inteira, de lugar em lugar, eras tu que ta podias dar, e que, tendo-a, podes enfim pertencer ao mundo sem a fome de quem nunca teve chão.
 
 ## 7. Pertencer sem se encontrar em todo o lado
 
-Há um destino para esta travessia. E cabe na frase que a segura. Pertencer sem te encontrares em todo o lado.
+Esta travessia tem uma morada onde chega. E cabe inteira numa frase que lhe serve de viga-mestra. Pertencer sem te encontrares em todo o lado.
 
 Repara nas duas partes. Há um verbo, pertencer. E há uma condição que cai, a de que cada sítio tenha de ser a casa total.
 
@@ -225,7 +225,7 @@ Do outro lado da errância, há uma alegria com a luz acesa à tua espera. A ale
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, sentir-te em casa onde nunca te sentiste. Mas muda o suficiente para deixares de procurar, fora, uma raiz que só dentro se planta.
+Não te muda o chão de um dia para o outro. Não te faz, amanhã, sentir-te em casa onde nunca te sentiste. Mas muda o suficiente para deixares de procurar, fora, uma raiz que só dentro se planta.
 
 Agora sabes que te sentes de fora em todo o lado, e que isso não é defeito teu, nem frieza, é um desenraizamento antigo que herdaste, e não uma verdade sobre o teu valor.
 
