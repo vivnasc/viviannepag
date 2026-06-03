@@ -13,7 +13,7 @@
 
 ## 1. À espera de ser querida
 
-Repara numa coisa, com honestidade.
+Olha para a tua vida amorosa com honestidade, como quem olha para uma fila parada.
 
 Tu esperas.
 
@@ -37,9 +37,9 @@ Este livro não te vai ensinar a seduzir melhor, a posicionares-te melhor, a tor
 
 Vim mostrar-te outra coisa. Que enquanto esperas que te escolham, entregas a tua vida à decisão dos outros. E que há outro lugar, o de quem decide, o de quem escolhe, o de quem deseja em voz alta, e que esse lugar, por mais que te assuste, é teu.
 
-Adianto-te a direção, para leres em paz. Podes escolher, não apenas esperar. Podes passar de quem aguarda a ser tirada da fila para quem decide para onde vai. E o que te prende à espera não é falta de valor. É medo. Medo de uma coisa que vamos olhar de frente.
+Digo-te já para onde aponta esta estrada, para leres em paz. Podes escolher, não apenas esperar. Podes passar de quem aguarda a ser tirada da fila para quem decide para onde vai. E o que te prende à espera não é falta de valor. É medo. Medo de uma coisa que vamos olhar de frente.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças nestes pequenos lugares de espera.
 
 Em gostares de alguém e nunca dares o primeiro passo, à espera, às vezes durante anos, que seja ele.
 
@@ -169,7 +169,7 @@ E há uma terceira camada, mais funda, que é o medo de descobrires o que queres
 
 Repara como estas três camadas te mantêm parada. A primeira faz-te evitar decidir, para não carregares o erro. A segunda faz-te evitar pedir, para não ouvires o não. A terceira faz-te evitar até saber o que queres, para não sentires a falta. E entre as três, constróis uma vida inteira de espera, onde nunca decides, nunca pedes, e mal sabes o que desejas.
 
-Deixa-me dizer-te de onde isto costuma vir. Quase sempre de um lugar onde desejar, em criança, não era seguro nem bem-vindo.
+Vale a pena recuar até à origem desta espera. Quase sempre vem de um lugar onde desejar, em criança, não era seguro nem bem-vindo.
 
 Talvez tenhas aprendido que querer dava problemas. Que ter vontade própria era egoísmo, ou desafio, ou incómodo. Que a criança boa era a que não pedia, não queria, não exigia, e esperava, paciente, o que lhe quisessem dar.
 
@@ -185,7 +185,7 @@ Cresceste, é possível, dentro dessa ideia. A de que o teu papel, no amor, era 
 
 E essa ideia, que parece só uma regra antiga de namoro, gravou-se mais fundo. Tornou-se a tua posição na vida. A de quem aguarda ser querida, em todos os terrenos, porque querer, ela própria, lhe parece quase indecoroso.
 
-Repara como isto te aprisiona. Se só podes ser escolhida, então o teu destino está sempre na mão de quem escolhe. Ficas à espera do gosto dos outros, refém da decisão deles, sem poder sobre quem te quer nem quando.
+Repara como isto te deixa refém da escolha alheia. Se só podes ser escolhida, então o teu destino está sempre na mão de quem escolhe. Ficas à espera do gosto dos outros, refém da decisão deles, sem poder sobre quem te quer nem quando.
 
 E há uma tristeza particular nisto. A de quereres alguém, em silêncio, e veres passar o tempo, à espera de um passo que ele não dá, sem ousares dá-lo tu. A de perderes amores possíveis, não por não os quereres, mas por esperares, paciente, que adivinhassem o que nunca disseste.
 
@@ -193,11 +193,11 @@ E quero que vejas que a espera, por mais segura que pareça, não te protege do 
 
 ## 4. O que aconteceria se fosse eu a escolher
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar aqui uma pergunta, e tirar-me da frente. Sozinha. Não fujas dela.
 
 O que aconteceria se fosses tu a escolher?
 
-Fica com ela. Repara no que ela mexe. Talvez vertigem. Talvez um peso. Talvez uma estranha excitação, logo abafada.
+Fica com ela. Repara no que se agita em ti ao ouvi-la. Talvez vertigem. Talvez um peso. Talvez uma estranha excitação, logo abafada.
 
 Para ti, esta pergunta abre um território desconhecido. Porque escolher, de verdade, querer em voz alta, avançar pela tua vida, é algo que quase nunca fizeste.
 
@@ -215,7 +215,7 @@ Tens, provavelmente, valor, talento, capacidade. Mas pões tudo isso ao serviço
 
 O volante está ali. Sempre esteve. Mas pegares nele significa assumires que vais a algum lado por tua decisão, e portanto que és tu a responsável pelo destino. E é isso que adias, talvez há uma vida.
 
-Não respondas já à pergunta com a cabeça. Vive-a. Porque é nela que está a porta. No dia em que sentires, no corpo, que podes ser tu a escolher, deixas o lugar de objeto e entras no de sujeito. E aí, só aí, a tua vida começa, enfim, a ser tua.
+Não respondas já à pergunta com a cabeça. Vive-a. Porque é por ela que se sai da fila. No dia em que sentires, no corpo, que podes ser tu a escolher, deixas o lugar de objeto e entras no de sujeito. E aí, só aí, a tua vida começa, enfim, a ser tua.
 
 Mas há uma armadilha nesta pergunta, e quero avisar-te dela, porque a tua cabeça vai cair nela de imediato. A pergunta não é "qual seria a escolha perfeita". É só "o que escolherias". A diferença é tudo. Quem espera, quando finalmente se permite imaginar uma escolha, exige-lhe logo garantias: que seja a certa, que não falhe, que não se arrependa. E como nenhuma escolha as oferece, recua, e volta a esperar, agora com a desculpa de que não havia escolha boa. Não estavas a procurar a melhor escolha. Estavas a procurar uma razão para não escolher nenhuma.
 
@@ -243,7 +243,7 @@ Imagina a diferença, numa cena simples. Numa festa, a que espera ser escolhida 
 
 E não é só com homens. É com a vida toda. Em vez de esperares a oportunidade, vais buscá-la. Em vez de esperares o reconhecimento, afirmas o teu valor. Em vez de esperares que a vida te aconteça, fazes escolhas que a constroem.
 
-Sei que isto te assusta. Sair da espera é sair da inocência, é assumir a responsabilidade que evitaste. Mas há uma alegria do outro lado que ainda não conheces. A alegria de seres autora. De olhares para a tua vida e veres, nela, as tuas escolhas, e não só o que te calhou.
+Sei que deixar a beira da estrada te assusta. Sair da espera é sair da inocência, é assumir a responsabilidade que evitaste. Mas há uma alegria do outro lado que ainda não conheces. A alegria de seres autora. De olhares para a tua vida e veres, nela, as tuas escolhas, e não só o que te calhou.
 
 Quero desfazer um receio que vai aparecer. Tornares-te sujeito não é tornares-te agressiva, dominadora, alguém que atropela os outros para conseguir o que quer. Desejar ativamente não é forçar. É afirmares o teu querer, com clareza, e deixares que o mundo, e o outro, respondam. Podes escolher um homem, ir atrás, mostrar o teu interesse, e ele pode não corresponder. Isso não é fracasso. É a vida de quem escolhe. Quem escolhe arrisca o não. Mas quem nunca escolhe garante o não, porque nunca chega sequer a pedir o sim.
 
@@ -261,7 +261,7 @@ Mas que isto não se torne mais uma estratégia. Não te escolhas para seres esc
 
 ## 6. Decidir
 
-Há um verbo para esta travessia. Decidir.
+Quem sai da fila precisa de um verbo, e este é o dela. Decidir.
 
 Não esperar. Decidir. Ser tu a virar o leme, em vez de aguardar que a corrente decida por onde vais.
 
@@ -275,13 +275,13 @@ Decidir transforma-te de quem espera num namoro para quem escolhe se quer ou nã
 
 Não controlas tudo, claro. Há coisas que não dependem de ti, e essas aceitam-se. Mas há muito mais sob a tua decisão do que a espera te deixava ver. E decidir é começar a usar esse poder, em vez de o entregar.
 
-Quero dar-te um sinal para te guiares. Repara, ao longo de um dia, em quantas vezes esperas e quantas vezes decides. Quantas vezes pensas "espero que aconteça" e quantas pensas "vou fazer acontecer". Quantas vezes ficas à espera de que alguém decida, e quantas decides tu. Esse rácio, entre a espera e a decisão, é o mapa da tua soberania, e podes começar, devagar, a inclinar a balança para o lado de decidir.
+Quero dar-te uma bússola, para saberes onde estás nesta travessia. Repara, ao longo de um dia, em quantas vezes esperas e quantas vezes decides. Quantas vezes pensas "espero que aconteça" e quantas pensas "vou fazer acontecer". Quantas vezes ficas à espera de que alguém decida, e quantas decides tu. Esse rácio, entre a espera e a decisão, é o mapa da tua soberania, e podes começar, devagar, a inclinar a balança para o lado de decidir.
 
 Quero acrescentar uma distinção que vai poupar-te muita confusão. Decidir não é o mesmo que escolher o caminho perfeito antes de avançar. Há quem confunda soberania com certeza, e fique à espera de ter a certeza toda para só então decidir, o que é, no fim, uma forma educada de continuar a esperar. Decidir é avançar com a informação que tens, sabendo que podes corrigir o rumo depois. Quem só decide quando já não há dúvida nenhuma nunca decide, porque a dúvida só desaparece depois de se ter avançado, nunca antes.
 
 E há um sítio onde a soberania se exercita com mais segurança do que no amor: nas pequenas decisões diárias que não te assustam tanto. O restaurante. O filme. Como passas a tua tarde de domingo. Estas escolhas parecem nada, mas é nelas que se treina o gesto de querer, sem o peso de uma grande vida em jogo. Quem mal sabe escolher um prato dificilmente saberá escolher um amor. Por isso começa onde dói menos, e deixa o músculo ganhar força antes de o pedires nas coisas grandes.
 
-Não te vou dar um método. Seria mais uma coisa para esperares fazer bem, e tu já és perita em transformar tudo num teste que tens medo de chumbar. Deixo-te só o princípio. A tua vida não te vai acontecer. Ou a fazes, ou não é vivida. E fazê-la começa por um ato simples e aterrador: decidires, tu, o que queres, e dares o primeiro passo para o ir buscar, em vez de esperares, mais uma vez, que to tragam.
+Não te entrego um método nem um passo a passo para decorares. Seria mais uma coisa para esperares fazer bem, e tu já és perita em transformar tudo num teste que tens medo de chumbar. Deixo-te só o princípio. A tua vida não te vai acontecer. Ou a fazes, ou não é vivida. E fazê-la começa por um ato simples e aterrador: decidires, tu, o que queres, e dares o primeiro passo para o ir buscar, em vez de esperares, mais uma vez, que to tragam.
 
 Quero parar um momento, com cuidado, porque há um ponto em que a espera deixa de ser um padrão e passa a um sofrimento que pede mais.
 
@@ -297,7 +297,7 @@ Mas há uma libertação enorme nessa responsabilidade. Porque ser autora da tua
 
 ## 7. Desejar em voz alta
 
-Há um destino para esta travessia. E cabe numa imagem. Desejar em voz alta.
+No fim desta estrada que decidiste percorrer, há um lugar, e cabe numa imagem. Desejar em voz alta.
 
 A vida inteira desejaste em silêncio. Querias, mas calavas. Esperavas que adivinhassem, que viessem, que escolhessem por ti, para nunca teres de dizer, em voz alta, eu quero isto.
 
@@ -319,7 +319,7 @@ E quero que repares numa diferença que muda tudo na forma como dizes o que quer
 
 E há uma alegria à espera, do outro lado. A alegria de quereres, e de o dizeres, e de às vezes receberes. De seres autora dos teus desejos, e não só guardiã silenciosa deles. De viveres uma vida que escolheste, mesmo com os seus nãos, em vez de uma vida que aguardaste, cheia de silêncios.
 
-Essa alegria é o teu direito. E está do outro lado do medo, no dia em que disseres, pela primeira vez, em voz alta, e a ti mesma antes de mais, eu quero isto, e for tu a ir buscá-lo.
+Essa alegria pertence-te, como quem chega à frente da fila e descobre que sempre pôde escolher. E está do outro lado do medo, no dia em que disseres, pela primeira vez, em voz alta, e a ti mesma antes de mais, eu quero isto, e for tu a ir buscá-lo.
 
 Quero prevenir-te de uma coisa, porque vai aparecer. Quando começares a desejar em voz alta, vais sentir-te exposta, quase descarada.
 
@@ -337,7 +337,7 @@ Cada não que sobrevives ensina-te uma coisa preciosa. Que não morres por quere
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, decidir tudo o que esperaste a vida inteira. Mas muda o suficiente para deixares de confundir a tua espera com paciência, ou com feitio, ou com falta de sorte.
+Não te tira da fila num só passo. Não te faz, amanhã, decidir tudo o que esperaste a vida inteira. Mas muda o suficiente para deixares de confundir a tua espera com paciência, ou com feitio, ou com falta de sorte.
 
 Agora sabes que esperas ser escolhida, e que isso não é só no amor, é em tudo.
 
@@ -367,7 +367,7 @@ Decidir foi o primeiro passo. E há um passo a seguir, que nenhuma leitura faz p
 
 Quero deixar-te um sinal concreto, para começares, porque a tua cabeça vai querer um momento perfeito que nunca chega. Não esperes por ele. Começa pequeno.
 
-Esta semana, escolhe uma coisa, mínima que seja, e vai buscá-la. Faz um convite, em vez de esperares por um. Diz o que queres jantar, em vez de "tanto faz". Candidata-te ao que querias e não ousavas. Dá o primeiro passo com alguém que te interessa, em vez de aguardares que ele o dê. Uma coisa só. E repara no que acontece.
+Esta semana, escolhe uma coisa, mínima que seja, e vai buscá-la. Faz um convite, em vez de esperares por um. Diz o que queres jantar, em vez de "tanto faz". Candidata-te ao que querias e não ousavas. Dá o primeiro passo com alguém que te interessa, em vez de aguardares que ele o dê. Uma coisa só. E repara no que muda em ti quando és tu a dar o passo.
 
 Quase de certeza, não o desastre que temes. E mesmo que venha um não, repara: sobrevives-lhe. Pedes, és recusada, e não morres. Continuas inteira. Cada não que sobrevives tira poder ao medo que te calava, e torna o próximo desejo mais fácil de dizer.
 
@@ -375,7 +375,7 @@ Porque é isso que vais descobrir: que o não, que tanto temias, é suportável.
 
 E há uma alegria, do lado de lá da espera. A de quereres, e de o dizeres, e de às vezes receberes. A de viveres uma vida que escolheste, mesmo com os seus nãos, em vez de uma vida que aguardaste, cheia de silêncios. A de seres, enfim, sujeito, e não objeto. Autora, e não personagem à espera de ser escolhida pelo guião de outro.
 
-É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma no seu tempo.
+É esse o trabalho da SyncHim. O livro nomeia. A SyncHim atravessa. Cada uma cumpre o seu passo desta caminhada.
 
 E há uma fronteira que quero deixar bem traçada, para que nada do que disse seja mal lido. Decidir, escolher, desejar em voz alta, não é deixares de ser meiga, generosa, atenta aos outros. Não é tornares-te dura, ou egoísta, ou exigente. É, simplesmente, entrares também tu na tua própria vida, como sujeito, e não só como quem aguarda. Continuas a importar-te com os outros, a ceder quando faz sentido, a ser quem és. Apenas deixas de te pores, sistematicamente, em último, à espera de uma vez que nunca chega. A tua meiguice não desaparece. Ganha, enfim, uma coluna: a de uma pessoa que também quer, também escolhe, também conta.
 

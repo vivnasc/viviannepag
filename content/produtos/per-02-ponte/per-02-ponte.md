@@ -29,7 +29,7 @@ Quero dizer-te já, antes de tudo, que isto não é só uma virtude, ainda que p
 
 Há um lugar que ocupaste cedo, o lugar do meio, e que nunca mais largaste. Tornaste-te a ponte, e esqueceste-te de que uma ponte tem um problema. Uma ponte não tem lado próprio. Não é uma margem. É só a passagem entre as margens dos outros.
 
-Este livro não te vai ensinar a deixar de te importares com as relações, a parares de ligar as pessoas, a tornares-te indiferente aos conflitos dos outros. Vim olhar para outra coisa. Para o preço de viveres no meio. Para o facto de, de tanto seres passagem, nunca teres tido um lado teu, um destino próprio, um lugar onde sejas tu, e não a ligação entre dois.
+Este livro não te vai ensinar a deixar de te importares com as relações, a parares de ligar as pessoas, a tornares-te indiferente aos conflitos dos outros. Vim olhar para o que fica por baixo da ponte, na sombra que as margens não veem. Para o preço de viveres no meio. Para o facto de, de tanto seres passagem, nunca teres tido um lado teu, um destino próprio, um lugar onde sejas tu, e não a ligação entre dois.
 
 E digo-te já para onde vamos, para que atravesses estas páginas sem receio. Pode haver uma margem tua sem que as margens dos outros se afastem. Podes sair do meio e ter um chão próprio, existir no centro e não só na passagem, sem por isso perderes ninguém de quem ligas. O teu valor não está em seres a passagem dos outros. E há um lado, o teu, que nunca chegaste a habitar, à espera de ti.
 
@@ -37,7 +37,7 @@ Quero que vejas, desde já, o que se mostra de uma margem e o que se passa no me
 
 Este livro não te vem dizer que cuidar das relações é errado, nem que tens de te tornar fria, indiferente, alguém que vira as costas aos conflitos. Vem distinguir o cuidar do mediar compulsivo, o teres empatia do teres de gerir as emoções de todos, o estares ligada do seres a ponte sem lado próprio. Vem devolver-te um centro teu, um lado teu, sem te tirar a ligação aos outros, mas pondo-te, enfim, também a ti, no mapa das pessoas de quem cuidas.
 
-Talvez te reconheças em coisas pequenas.
+Talvez te reconheças em pequenos gestos de quem vive a costurar margens.
 
 Em seres sempre tu a dar o primeiro passo para reconciliar quem se zangou, mesmo quando a zanga não é tua, e mesmo quando ninguém te pediu para o fazer.
 
@@ -83,13 +83,13 @@ Quero que olhes para esta casa sem culpa, e sem acusar quem te criou. A tensão 
 
 E quero que vejas em que lugar do corpo isto ficou alojado, porque importa. Esta lealdade de manter a paz não é só uma ideia, um hábito que se muda à vontade. Está gravada fundo, num lugar onde manter a paz entre os outros ficou ligado à tua própria segurança, à tua sobrevivência emocional de criança. Por isso, hoje, quando há tensão entre pessoas que amas, não decides racionalmente intervir, o teu corpo dispara, a ansiedade sobe, e tu corres a apaziguar antes de pensares, como quem responde a um alarme. Não é escolha, é reflexo. E é por isso que não basta perceberes que as relações dos outros não são tuas para resolver: o reflexo continua a disparar, e desarma-se devagar, com prática, e muitas vezes com ajuda.
 
-Quero acrescentar uma raiz que talvez reconheças. Às vezes, a criança no meio não está só a manter a paz, está a garantir o próprio lugar. Numa casa em tensão, ser útil, ser a que une, a que acalma, a que ninguém quer perder, é uma forma de garantir que há sempre lugar para ti, que não és dispensável, que serves. E assim a função de ponte tornou-se não só uma forma de proteger a família, mas de proteger o teu próprio pertencimento: enquanto fores indispensável à ligação de todos, ninguém te deixa de fora. Por isso sair do meio assusta a dobrar, porque ameaça não só a paz dos outros, mas o teu lugar entre eles.
+Quero descer até a outra pedra que sustenta esta ponte, e que talvez reconheças. Às vezes, a criança no meio não está só a manter a paz, está a garantir o próprio lugar. Numa casa em tensão, ser útil, ser a que une, a que acalma, a que ninguém quer perder, é uma forma de garantir que há sempre lugar para ti, que não és dispensável, que serves. E assim a função de ponte tornou-se não só uma forma de proteger a família, mas de proteger o teu próprio pertencimento: enquanto fores indispensável à ligação de todos, ninguém te deixa de fora. Por isso sair do meio assusta a dobrar, porque ameaça não só a paz dos outros, mas o teu lugar entre eles.
 
 ## 3. Existir na ligação, não no centro
 
 Há uma coisa funda aqui, e quero nomeá-la com cuidado, porque é o coração do teu apagamento. Tu aprendeste a existir na ligação, e não no centro.
 
-Repara no que isto significa. Há pessoas que existem no centro de si. Têm um lado próprio, um chão próprio, uma vida que é delas, e a partir desse centro ligam-se aos outros. Primeiro são, e depois se relacionam.
+Repara no que isto significa, como quem se debruça do parapeito e olha a água por baixo. Há pessoas que existem no centro de si. Têm um lado próprio, um chão próprio, uma vida que é delas, e a partir desse centro ligam-se aos outros. Primeiro são, e depois se relacionam.
 
 Tu, não. Tu existes na ligação. O teu sentido de ti vem de estares entre os outros, de os ligares, de seres a passagem. Sem essa função, sem alguém para mediar, sem uma relação para gerir, sentes que não há ali pessoa, só um vazio. Não tens centro próprio. Tens só o meio, a ponte, a ligação.
 
@@ -103,21 +103,21 @@ E há uma confusão funda que isto cria, e que talvez vivas sem perceber: deixas
 
 Quero que vejas a diferença entre a empatia sã e este apagamento. A empatia sã sente o outro a partir de um centro próprio: percebo o que sentes, e ao mesmo tempo sei o que eu sinto, e não me perco em ti. A tua não. A tua dissolve-te no outro, faz-te perder a tua fronteira, deixa-te sem chão próprio de onde sentir. E uma empatia que te dissolve não é um dom pleno, é um dom sem raiz, porque para sentires verdadeiramente o outro precisas, primeiro, de existir tu, de teres um lado de onde o sentir. Recuperar esse lado não te tira a empatia, dá-lhe, enfim, um chão.
 
-E há uma solidão particular nisto. A solidão de quem está sempre entre dois, e nunca com alguém de verdade. Porque a ponte não tem relação própria. Liga os outros, mas não é destino de ninguém. As pessoas passam por ti para chegar umas às outras, e tu ficas no meio, a servir a travessia delas, sem nunca seres tu o lugar onde alguém quer chegar.
+E há uma solidão própria de quem é meio e nunca margem. A solidão de quem está sempre entre dois, e nunca com alguém de verdade. Porque a ponte não tem relação própria. Liga os outros, mas não é destino de ninguém. As pessoas passam por ti para chegar umas às outras, e tu ficas no meio, a servir a travessia delas, sem nunca seres tu o lugar onde alguém quer chegar.
 
 E custa-te a saúde, também, porque gerir as relações de toda a gente é um trabalho invisível e incessante que esgota. A tua mente nunca para de monitorizar o clima, de antecipar conflitos, de calcular o que dizer a cada um. É uma vigilância permanente, que ninguém vê, e que te consome por dentro, e muitas pessoas que vivem no meio adoecem, não por fraqueza, mas por exaustão de carregarem, sozinhas, o equilíbrio emocional de um grupo inteiro.
 
-Quero que sintas o peso disto. Imagina viver a vida toda como passagem. Útil, importante, necessária, e nunca destino. Sempre o meio, nunca a margem. Sempre a ligar, nunca a ser procurada por ti mesma. É um lugar de uma solidão funda, disfarçada de utilidade, e talvez já a tomes por normal, de tão habituada estás a ela.
+Quero que sintas o peso que uma ponte carrega em silêncio. Imagina viver a vida toda como passagem. Útil, importante, necessária, e nunca destino. Sempre o meio, nunca a margem. Sempre a ligar, nunca a ser procurada por ti mesma. É um lugar de uma solidão funda, disfarçada de utilidade, e talvez já a tomes por normal, de tão habituada estás a ela.
 
 E há uma tristeza particular em perceber que, de tanto cuidar das relações dos outros, nunca cuidaste das tuas. Que sabes unir toda a gente, e não tens, talvez, uma ligação que seja só tua, funda, a dois, em que sejas tu o destino e não o meio. Que és a confidente de todos, e não tens, talvez, a quem confiar o que é teu, porque o teu lugar foi sempre o de ouvir, nunca o de ser ouvida. Há uma fome de ligação própria por baixo de tanta ligação alheia, e é essa fome, mais do que tudo, que esta travessia te vem, enfim, alimentar.
 
 ## 4. Quem sou eu quando não estou entre dois
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou pousar no meio da ponte uma pergunta, e deixar-te a sós com ela. Não fujas dela.
 
 Quem és tu quando não estás entre dois lados?
 
-Fica com ela. Repara no vazio que ela abre.
+Fica com ela. Repara no vão que ela abre por baixo de ti, como o rio sob a ponte.
 
 Para ti, esta pergunta talvez seja das mais difíceis que há, porque mexe com a tua própria existência. Sabes quem és no meio. A mediadora, a tradutora, a que une. Mas tu, fora do meio, sem ninguém para ligar, quem és?
 
@@ -125,7 +125,7 @@ Talvez não saibas. Talvez, ao imaginares-te sem o papel, sintas um branco, um v
 
 E a sombra que aqui se esconde é o vazio do teu próprio lado. Tu passaste a vida a servir as margens dos outros, e nunca construíste a tua. Não tens um lado teu, um chão teu, um centro teu, onde possas estar quando não estás a ligar ninguém. E sem esse lado, a pergunta de quem és, fora do meio, fica sem resposta.
 
-Repara como isto te aprisiona. Não consegues sair do meio, mesmo quando ele te esgota, porque fora do meio não tens onde estar. É como uma ponte que tem medo de se tornar margem, porque nunca soube ser outra coisa que não passagem. Ficas, então, eternamente no meio, a servir travessias que não são tuas, porque é o único lugar onde sabes existir.
+Repara como isto te prende ao meio do rio. Não consegues sair do meio, mesmo quando ele te esgota, porque fora do meio não tens onde estar. É como uma ponte que tem medo de se tornar margem, porque nunca soube ser outra coisa que não passagem. Ficas, então, eternamente no meio, a servir travessias que não são tuas, porque é o único lugar onde sabes existir.
 
 Há também uma fragilidade escondida na tua importância de ponte. Porque uma ponte não vive para si. Existe ao serviço da travessia dos outros. E tu, de tanto seres ponte, esqueceste-te de que também és pessoa, de que também tens direito a um lado, a um destino, a uma vida que não seja só ligar as vidas dos outros. A ponte não tem para onde ir. E tu, ao tornares-te ponte, foste perdendo, devagar, o teu próprio destino.
 
@@ -135,7 +135,7 @@ Quero também que vejas a diferença entre seres procurada e seres usada, porque
 
 Há uma verdade sobre este vazio que começa, devagar, a transformá-lo. O vazio que sentes quando imaginas sair do meio não é a prova de que não existes fora dele. É o sinal de um centro por habitar. De um lado teu que está ali, à espera, mas que nunca cultivaste porque andavas sempre ocupada a servir os lados dos outros. O vazio não é a tua verdade. É o teu lado próprio, ainda por construir, a chamar por ti.
 
-Não respondas já à pergunta de quem és fora do meio. Constrói-se, devagar, à medida que começas a habitar o teu próprio centro. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que houver um lado teu, um lugar onde sejas tu e não a ligação entre dois, deixas de precisar do meio para existir. E aí, só aí, podes atravessar para o teu lado.
+Não respondas já à pergunta de quem és fora do meio. Constrói-se, devagar, à medida que começas a habitar o teu próprio centro. Mas deixa-a aberta. Porque é nela que começa a travessia para a tua margem. No dia em que houver um lado teu, um lugar onde sejas tu e não a ligação entre dois, deixas de precisar do meio para existir. E aí, só aí, podes atravessar para o teu lado.
 
 ## 5. De passagem a destino
 
@@ -149,7 +149,7 @@ Tornares-te destino significa parares de viver no meio e começares a viver no t
 
 E quero que vejas que ser destino não é fechares-te, isolares-te, deixares de te ligar. É o contrário: é teres, enfim, um lugar de onde te ligares de verdade. Quem não tem lado próprio não pode ligar-se de verdade a ninguém, porque não há ali um centro de onde a ligação parta. Só quem existe, com a sua margem, pode encontrar outra margem e construir uma ponte de verdade, de duas pontas, e não uma passagem por onde os outros simplesmente atravessam. Ter um destino próprio não te afasta das pessoas. Dá-te, pela primeira vez, um lugar de onde as encontrar como uma igual, e não como serviço.
 
-Sei que isto te assusta. Porque sair do meio, parar de mediar, deixar que os outros se entendam, ou não se entendam, sem ti, parece arriscar tudo. Parece deixar que se afastem. Parece a tua culpa, se a paz se partir.
+Sei que dar este passo para fora do meio te assusta. Porque sair do meio, parar de mediar, deixar que os outros se entendam, ou não se entendam, sem ti, parece arriscar tudo. Parece deixar que se afastem. Parece a tua culpa, se a paz se partir.
 
 Mas repara nesta verdade libertadora. As relações dos outros não são tua responsabilidade. Que dois adultos se falem ou não, se entendam ou não, se aproximem ou se afastem, é assunto deles, não teu. Tu assumiste, em criança, uma missão que não te cabia, a de manter os outros unidos, e carrega-la ainda. Mas não é tua. Cada relação entre duas pessoas é dessas duas pessoas, e não da ponte que as liga.
 
@@ -169,7 +169,7 @@ O despertar, quando vem, é um momento de estranha leveza. É o dia em que deixa
 
 ## 6. Atravessar para o meu lado
 
-Há um verbo para esta travessia. Atravessar.
+Toda esta ponte cabe num só verbo. Atravessar.
 
 Atravessar para o teu lado. Sair do meio, da ponte, da passagem, e chegar, enfim, a uma margem que seja tua. Deixares de viver na ligação entre os outros e começares a viver no teu próprio centro, com chão, com lado, com destino.
 
@@ -187,19 +187,19 @@ E quero prevenir-te de uma coisa: ao início, essa pergunta, o que eu quero, pod
 
 E quero ensinar-te a tolerar a tensão dos outros sem a resolveres, porque é aí que está grande parte da tua travessia. Quando há um conflito à tua volta, vais sentir uma pressão quase insuportável de intervir, de apaziguar, de unir. Aprender a ficar com essa tensão, a deixá-la existir sem correres a resolvê-la, é um músculo que se treina. Ao início, a ansiedade vai ser grande, vais sentir que algo terrível vai acontecer se não fizeres nada. Mas, se ficares, vais descobrir, devagar, que a tensão dos outros não te destrói, que eles a resolvem, ou não, sem ti, e que tu podes existir, inteira, no meio do desconforto de não estares a mediar. É nessa tolerância da tensão alheia que nasce a tua liberdade.
 
-Quero dar-te um sinal para te guiares. Repara, ao longo de um dia, em quanto da tua atenção está nas relações dos outros e quanto está na tua própria vida. Quantas vezes te ocupas de gerir o que se passa entre as pessoas, e quantas te ocupas do que se passa contigo. Esse rácio é o mapa do teu apagamento, e podes começar, devagar, a trazer mais atenção para o teu lado, e menos para o meio dos outros.
+Quero deixar-te uma luz na margem, para te orientares na travessia. Repara, ao longo de um dia, em quanto da tua atenção está nas relações dos outros e quanto está na tua própria vida. Quantas vezes te ocupas de gerir o que se passa entre as pessoas, e quantas te ocupas do que se passa contigo. Esse rácio é o mapa do teu apagamento, e podes começar, devagar, a trazer mais atenção para o teu lado, e menos para o meio dos outros.
 
-Não te vou dar um método. Mas deixo-te o princípio. Sai do meio. Deixa as relações dos outros aos outros. E usa a energia que gastavas a ligar as margens alheias para construir, enfim, a tua. Porque tens direito a um lado teu. A um destino. A um lugar onde sejas tu, e não a ponte por onde passam as vidas de todos.
+Não te vou desenhar o trajeto passo a passo. Mas deixo-te a direção da margem. Sai do meio. Deixa as relações dos outros aos outros. E usa a energia que gastavas a ligar as margens alheias para construir, enfim, a tua. Porque tens direito a um lado teu. A um destino. A um lugar onde sejas tu, e não a ponte por onde passam as vidas de todos.
 
 ## 7. Deixar de ser ponte e continuar ligada
 
 Há um medo que te prende, e quero ir ao seu encontro, porque é o que te mantém no meio. O medo de que, se deixares de ser ponte, percas as ligações. Te tornes isolada. Fiques sozinha, sem as pessoas que ligavas.
 
-E quero desfazer esse medo com clareza. Deixar de ser ponte não é deixar de estar ligada. São coisas diferentes.
+E quero desmontar esse medo, pedra a pedra, como quem inspeciona uma ponte antiga. Deixar de ser ponte não é deixar de estar ligada. São coisas diferentes.
 
 Repara. Uma ponte liga as margens, mas não tem ligação própria com nenhuma. Serve a travessia, mas não é parte da relação. Quando deixas de ser ponte, não perdes ligações, porque a ponte, no fundo, nunca teve ligações próprias. Ganhas, isso sim, a possibilidade de teres, pela primeira vez, ligações tuas, de margem para margem, em que tu és uma das pontas, e não o meio.
 
-Vou dizer-te de outra forma. Enquanto és ponte, as tuas relações são todas triangulares. Tu, e dois outros que ligas. Estás sempre a três, a gerir a relação entre dois. Quando atravessas para o teu lado, podes começar a ter relações a dois. Tu e outra pessoa, diretamente, sem seres o meio de nada. E essa ligação direta, de margem a margem, é mais funda, mais verdadeira, do que qualquer ponte, porque nela tu existes, com o teu lado, e não como passagem.
+Vou levar-te à mesma verdade por outra margem. Enquanto és ponte, as tuas relações são todas triangulares. Tu, e dois outros que ligas. Estás sempre a três, a gerir a relação entre dois. Quando atravessas para o teu lado, podes começar a ter relações a dois. Tu e outra pessoa, diretamente, sem seres o meio de nada. E essa ligação direta, de margem a margem, é mais funda, mais verdadeira, do que qualquer ponte, porque nela tu existes, com o teu lado, e não como passagem.
 
 E quero que vejas que, para teres relações a dois, vais precisar de fazer algo que te aterroriza: mostrares o teu lado. Dizeres o que pensas, o que sentes, do que discordas, o que queres, mesmo que isso crie tensão, mesmo que o outro não concorde. Porque uma relação direta exige duas pessoas com lados próprios, e tu, treinada a não ter lado, vais ter de aprender a aparecer, a tomar posição, a arriscar o desacordo. Vai ser desconfortável, porque vai contra tudo o que aprendeste. Mas é só assim, mostrando-te, que deixas de ser a ponte neutra e passas a ser uma pessoa de verdade, com quem se pode ter uma relação real, e não só uma mediação.
 
@@ -223,7 +223,7 @@ E se de tudo isto guardares só uma frase, que seja esta. Tu não és a ligaçã
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, sair de um lugar que ocupaste a vida inteira. Mas muda o suficiente para deixares de confundir o teu apagamento com um dom, e a tua utilidade com pertença.
+Não te transporta de uma margem à outra num só passo. Não te faz, amanhã, sair de um lugar que ocupaste a vida inteira. Mas muda o suficiente para deixares de confundir o teu apagamento com um dom, e a tua utilidade com pertença.
 
 Agora sabes que vives no meio, e que isso não é só uma virtude nem um dom, é um lugar que ocupaste cedo, numa casa em tensão, para manteres tudo unido.
 
@@ -249,9 +249,9 @@ Mas tu não és uma ponte. És uma pessoa, que aprendeu a viver como ponte. E um
 
 A travessia é essa. Não deixares de te ligar às pessoas. Mas deixares de viver entre elas, e começares a viver no teu lado. A atravessar, enfim, para a margem que sempre foi tua, e onde nunca chegaste a pôr os pés.
 
-Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma coisa a fazer na perfeição. Vai ser lenta, e vai ter recuos. Dias em que ficas no teu lado, e dias em que voltas a correr para o meio, a mediar, a apaziguar, como sempre. E a velha lealdade vai aproveitar cada recuo para te dizer estás a ver, o teu lugar é unir os outros. Não acredites nela. Os recuos fazem parte. Ninguém deixa de uma vez um lugar que ocupou a vida inteira. Deixa-se aos poucos, e cada vez que ficas no teu lado e ninguém se perde, ficou uma prova nova, e é dessas provas, somadas, que a margem própria, devagar, se constrói.
+Quero que saibas o que esperar desta travessia, para que não a vivas como mais uma coisa a fazer na perfeição. Vai ser uma travessia lenta, e vais voltar atrás na ponte mais de uma vez. Dias em que ficas no teu lado, e dias em que voltas a correr para o meio, a mediar, a apaziguar, como sempre. E a velha lealdade vai aproveitar cada recuo para te dizer estás a ver, o teu lugar é unir os outros. Não acredites nela. Os recuos fazem parte. Ninguém deixa de uma vez um lugar que ocupou a vida inteira. Deixa-se aos poucos, e cada vez que ficas no teu lado e ninguém se perde, ficou uma prova nova, e é dessas provas, somadas, que a margem própria, devagar, se constrói.
 
-E há uma última coisa, simples, com que quero fechar esta travessia. Tu não foste feita para ser passagem. A criança que se pôs no meio para manter a casa unida fez o que pôde, com um amor enorme, para segurar o que os adultos não seguravam. Não há nada a censurar nela. Mas ela merecia ter tido um lado, um centro, um lugar onde fosse ela e não a ligação entre os outros. E esse lado continua à tua espera, intacto, do outro lado da ponte. Não tens de o merecer, nem de o conquistar unindo mais ninguém. Basta atravesares, enfim, para ele.
+E há uma última coisa, simples, com que quero fechar esta travessia. Tu não foste feita para ser passagem. A criança que se pôs no meio para manter a casa unida fez o que pôde, com um amor enorme, para segurar o que os adultos não seguravam. Não há nessa criança-ponte nada que mereça censura. Mas ela merecia ter tido um lado, um centro, um lugar onde fosse ela e não a ligação entre os outros. E esse lado continua à tua espera, intacto, do outro lado da ponte. Não tens de o merecer, nem de o conquistar unindo mais ninguém. Basta atravesares, enfim, para ele.
 
 No fundo, há uma frase que segura todas estas páginas, e tu já a sabes. Só quem tem uma margem própria pode encontrar, de verdade, a margem de outro. Mais do que isso: só deixando de ser passagem poderei, enfim, ser destino de alguém, e ligar-me a dois, e não a três.
 

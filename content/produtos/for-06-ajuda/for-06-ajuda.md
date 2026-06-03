@@ -27,7 +27,7 @@ Quero dizer-te já, antes de tudo, que isto não é orgulho. As pessoas talvez t
 
 Porque aprendeste, algures, que contar com os outros termina em dor. Apoiaste-te, e o apoio cedeu. Confiaste, e foste traída. Precisaste, e foste deixada sozinha, no momento em que mais precisavas. E o teu corpo guardou essa dor, e decidiu, para te proteger, não voltar a apoiar-se em ninguém.
 
-Este livro é diferente. Porque a tua recusa de apoio não é só um traço a corrigir. É, muitas vezes, uma resposta de trauma. Uma adaptação a uma vez em que contar com alguém terminou em dor. E isso merece mais do que compreensão. Por isso vou dizer-te, ao longo destas páginas, que talvez precises não só de te entenderes, mas de apoio, do tipo certo.
+Este livro é diferente. Porque a tua recusa de apoio não é só um traço a corrigir. É, muitas vezes, uma resposta de trauma. Uma adaptação a uma vez em que contar com alguém terminou em dor. E uma ponte que ruiu sob os teus pés pede mais do que compreensão. Por isso vou dizer-te, ao longo destas páginas, que talvez precises não só de te entenderes, mas de apoio, do tipo certo.
 
 E adianto-te já onde isto vai dar, para que leias sem te armares contra o livro como te armas contra uma mão estendida. Há uma ponte firme onde podes poisar o pé sem perderes nada da força que te trouxe até aqui. Aceitar apoio não te torna fraca, nem te põe à mercê, se for o apoio certo, de quem é de confiança. O que te ensinou a não te apoiares foi uma dor real, e essa dor pode, devagar, e talvez com ajuda, deixar de te governar.
 
@@ -35,7 +35,7 @@ Quero que distingas, desde já, a mulher que os outros veem amparar-se em ningu�
 
 Este livro não te vem dizer que tens de confiar em toda a gente, nem que a tua desconfiança é toda errada. Há quem não mereça a tua confiança, e fazes bem em guardá-la desses. Vem dizer-te que a tua desconfiança, ao recusar todos por igual, está a punir também quem te ampararia, e a deixar-te sozinha perante uma vida que ninguém devia atravessar só. E vem propor-te não que baixes a guarda cegamente, mas que recuperes o discernimento que te permite distinguir as pontes firmes da que ruiu, e apoiar-te, enfim, nas que aguentam.
 
-Talvez te reconheças em coisas pequenas.
+Talvez a tua recusa de apoio assome em gestos pequenos, daqueles que mal dão nas vistas.
 
 Em recusares ajuda mesmo quando estás a afundar-te, dizendo que está tudo bem.
 
@@ -75,7 +75,7 @@ Quero parar, por um momento, na dor que há nesta origem, porque é fácil passa
 
 Mas o pé que aprendeste a tirar de cima de qualquer ponte não voltou a poisar com o tempo. Ficou suspenso, para sempre. E hoje, em adulta, num mundo onde talvez houvesse apoio de confiança, continuas a recusá-lo, defendida de uma dor antiga, e privada de um amparo presente que nunca te deixas receber.
 
-Quero que vejas isto com clareza. A tua recusa de apoio não é orgulho, nem teimosia, nem incapacidade de caráter. É uma resposta inteligente a uma dor real. Não és desconfiada por feitio. És alguém que se apoiou e foi deixada cair, e que aprendeu, dessa dor, a não voltar a apoiar-se. E reconhecer isto é honrar a memória que te protege, e doer, ao mesmo tempo, por ela ter sido necessária.
+Quero que olhes para isto com a nitidez de quem vê, enfim, a ponte ruída por baixo do passo. A tua recusa de apoio não é orgulho, nem teimosia, nem incapacidade de caráter. É uma resposta inteligente a uma dor real. Não és desconfiada por feitio. És alguém que se apoiou e foi deixada cair, e que aprendeu, dessa dor, a não voltar a apoiar-se. E reconhecê-lo é honrar a memória que te protege, e doer, ao mesmo tempo, por ela ter sido necessária.
 
 Quero que vejas onde fica gravado o aviso de não te apoiares, porque é isso que explica por que não basta quereres confiar. A lição de que toda a ponte cai não mora só na memória que sabes contar. Mora no corpo, naquele recuo que te dá no peito antes de pensares, mais fundo do que qualquer palavra. Quando alguém em quem nos apoiámos nos deixa cair, sobretudo cedo, o corpo grava esse momento como um aviso de sobrevivência: apoiar-se é perigoso. E esse aviso dispara, depois, sozinho, sempre que alguém nos oferece apoio, antes de qualquer pensamento, num recuo, numa desconfiança, num não automático. Por isso, hoje, a tua recusa não passa por uma decisão. Acontece antes de decidires, porque é o teu corpo a proteger-te de uma queda antiga.
 
@@ -87,7 +87,7 @@ Há uma coisa sobre a tua desconfiança do apoio que precisas de ver. Ela proteg
 
 Repara. A tua desconfiança trata todo o apoio como suspeito. Toda a mão estendida como possível armadilha. Todo o oferecimento como possível cobrança. E ao tratar todo o apoio como perigoso, recusas, indiscriminadamente, tanto o apoio que te trairia como o que te ampararia de verdade. Fechas a porta a todos, por reflexo, sem distinguir.
 
-E há um custo enorme nisto. Custa-te enfrentar a vida sozinha. Tudo o que é difícil, a doença, a perda, o desespero, o peso, enfrenta-lo só, porque não te apoias em ninguém. E há momentos na vida em que ninguém devia estar só, em que aceitar apoio não é fraqueza, é o que torna o insuportável suportável. E tu, nesses momentos, recusas o amparo, e carregas sozinha o que ninguém devia carregar só.
+E atravessar sempre a nado, longe de toda a ponte, cobra-te um preço enorme. Custa-te enfrentar a vida sozinha. Tudo o que é difícil, a doença, a perda, o desespero, o peso, enfrenta-lo só, porque não te apoias em ninguém. E há momentos na vida em que ninguém devia estar só, em que aceitar apoio não é fraqueza, é o que torna o insuportável suportável. E tu, nesses momentos, recusas o amparo, e carregas sozinha o que ninguém devia carregar só.
 
 Custa-te a intimidade. Porque a proximidade verdadeira nasce, em parte, de nos deixarmos amparar uns pelos outros. De confiar o nosso peso a alguém, e de segurar o peso de alguém. Quem não se apoia em ninguém mantém todos à distância, na adversidade, e por isso nunca conhece a intimidade funda de quem se deixou, de verdade, ser segurada.
 
@@ -101,21 +101,21 @@ E custa-te, também, a injustiça que fazes a quem é de confiança. Porque a tu
 
 Quero que vejas a diferença entre a prudência sã e a tua desconfiança. A prudência sã avalia cada pessoa pelo que ela mostra, e abre-se a quem merece confiança. Tem as duas portas: desconfia de quem dá motivo, confia em quem o merece. A tua não. A tua fechou as duas portas, recusa toda a gente por igual, por reflexo, sem avaliar. E uma desconfiança que não distingue não é prudência, é uma couraça, que te protege de quem te trairia ao preço de te isolar de quem te ampararia. O trabalho desta travessia não é tornares-te ingénua, é devolveres-te o discernimento que o medo te tirou.
 
-Quero que sintas o peso disto. O peso de enfrentar a vida toda sem te poderes apoiar em ninguém. De carregar sozinha o que era para partilhar. De recusar, vez após vez, o amparo que te faria bem, por medo de uma dor que talvez não viesse. É um cansaço profundo, e talvez já o tomes por independência, quando é, no fundo, a solidão de quem foi deixada cair e nunca mais se atreveu a apoiar-se.
+Quero que sintas o peso que carregas, o de quem nunca poisa o passo numa ponte. O peso de enfrentar a vida toda sem te poderes apoiar em ninguém. De carregar sozinha o que era para partilhar. De recusar, vez após vez, o amparo que te faria bem, por medo de uma dor que talvez não viesse. É um cansaço profundo, e talvez já o tomes por independência, quando é, no fundo, a solidão de quem foi deixada cair e nunca mais se atreveu a apoiar-se.
 
 ## 4. Quem sou eu se me apoiar
 
-Vou deixar aqui uma pergunta. Sozinha. Não fujas dela.
+Vou poisar aqui uma pergunta, como quem assenta uma pedra à entrada da ponte. Sozinha. Não fujas dela.
 
 Quem és tu se te apoiares em alguém? Se aceitares ajuda? Se deixares, por um momento, de enfrentar tudo sozinha?
 
-Fica com ela. Repara no que ela mexe. Talvez uma desconfiança, talvez um medo.
+Fica com ela. Repara no que ela faz tremer, como um tabuleiro debaixo do pé. Talvez uma desconfiança, talvez um medo.
 
 Para ti, esta pergunta toca numa memória de dor. Porque apoiar-se, no teu passado, terminou em queda. E imaginar-te a apoiar-te de novo desperta o eco dessa queda, o medo de voltares a confiar e a ser deixada cair, de te expores e seres traída, de dependeres e ficares à mercê.
 
 E a sombra que aqui se esconde é a memória da confiança traída. A vez em que te apoiaste, e o apoio cedeu. Essa memória vive em ti, no corpo, e dispara sempre que alguém te oferece apoio, dizendo-te: cuidado, já te apoiaste uma vez, e olha como acabou. E tu, para não reviveres a queda, recusas o apoio, mesmo o que te ampararia.
 
-Repara como isto te aprisiona. Não te podes apoiar, mesmo a afundar-te, porque apoiar-te desperta o medo da queda antiga. Vives a enfrentar tudo sozinha, a um custo enorme, porque o medo de seres deixada cair de novo é maior do que o peso que carregas só. A memória de uma traição governa toda a tua relação com o apoio, hoje, com pessoas que talvez nunca te trairiam.
+Repara como isto te prende a esta margem. Não te podes apoiar, mesmo a afundar-te, porque apoiar-te desperta o medo da queda antiga. Vives a enfrentar tudo sozinha, a um custo enorme, porque o medo de seres deixada cair de novo é maior do que o peso que carregas só. A memória de uma traição governa toda a tua relação com o apoio, hoje, com pessoas que talvez nunca te trairiam.
 
 E há uma tristeza muito própria de quem recusa o amparo, e quero dizê-la em voz alta. É a de saberes, lá no fundo, que há quem te quereria amparar, e de não conseguires deixá-lo, por mais que o desejes. Não é que não queiras ser segurada. Querias, talvez desesperadamente. É que o teu corpo não te deixa, dispara o alarme, recua, fecha a porta, mesmo quando a tua parte mais funda anseia por entrar por ela. Viver assim, a desejar o amparo e a recusá-lo ao mesmo tempo, é uma forma silenciosa de sofrimento, e merece toda a ternura, não a dureza de quem te chama orgulhosa sem saber o que te custa.
 
@@ -129,13 +129,13 @@ Quero dizer-te uma coisa sobre esta memória, porque ela começa a desarmar-se. 
 
 E há uma crueldade escondida em recusares todo o apoio, que talvez nunca tenhas visto assim. Aquela pessoa que te deixou cair fez-te mal uma vez. Mas a memória dela, ao governar-te a vida toda, continua a fazer-te mal todos os dias, ao privar-te de todo o apoio que poderias ter. É como se a traição continuasse a acontecer, repetida, não pela pessoa que a cometeu, mas pela couraça que ela te deixou. E libertares-te disto não é só deixares de sofrer aquela queda. É deixares de continuar, contra ti, o dano que outra pessoa começou, e que tu, sem querer, prolongas há anos ao recusares tudo.
 
-Não respondas já à pergunta de quem és se te apoiares. Ela não se decide na cabeça, sente-se no corpo no dia em que ele se atreve a poisar o peso, e às vezes precisa de mais do que um livro para lá chegar. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que apoiar-se, hoje, em quem é de confiança, não termina na queda de antes, deixas de ter de enfrentar tudo sozinha. E aí, só aí, podes começar a deixar-te amparar.
+Não respondas já à pergunta de quem és se te apoiares. Ela não se decide na cabeça, sente-se no corpo no dia em que ele se atreve a poisar o peso, e às vezes precisa de mais do que um livro para lá chegar. Mas deixa-a aberta. Porque é nela que está a entrada da ponte. No dia em que o teu corpo aprender que apoiar-se, hoje, em quem é de confiança, não termina na queda de antes, deixas de ter de enfrentar tudo sozinha. E aí, só aí, podes começar a deixar-te amparar.
 
 ## 5. Talvez precises de mais do que compreender
 
-Tenho de parar o livro aqui. Com toda a seriedade. Porque a tua recusa de apoio não é, na maioria das vezes, só um traço de personalidade. É uma memória de trauma, e isso muda o que precisas.
+Tenho de fazer parar a travessia neste ponto. Com toda a seriedade. Porque a tua recusa de apoio não é, na maioria das vezes, só um traço de personalidade. É uma memória de trauma, e isso muda o que precisas.
 
-Se aprendeste a não te apoiares porque contaste com alguém e foste deixada cair, traída, ou cobrada, então a tua desconfiança não é orgulho. É uma resposta de trauma. Uma cicatriz de uma confiança que se partiu. E o medo de te apoiares não se desfaz só por entenderes de onde vem. Vive no corpo, naquele recuo que te dá quando uma mão se estende, na certeza gravada fundo de que toda a ponte acaba por ceder.
+Se aprendeste a não te apoiares porque contaste com alguém e foste deixada cair, traída, ou cobrada, então a tua desconfiança não é orgulho. É uma resposta de trauma, do tempo em que a ponte cedeu. Uma cicatriz de uma confiança que se partiu. E o medo de te apoiares não se desfaz só por entenderes de onde vem. Vive no corpo, naquele recuo que te dá quando uma mão se estende, na certeza gravada fundo de que toda a ponte acaba por ceder.
 
 Quero nomear, sem rodeios, que tipo de queda pode estar por baixo da tua recusa. Se houve, na tua história, traição grave, abandono no momento de necessidade, abuso de confiança por quem devia cuidar de ti, então a tua dificuldade de receber apoio é uma ferida séria, e merece ser cuidada com apoio especializado.
 
@@ -143,7 +143,7 @@ E aqui vou pedir-te que me ouças com firmeza e com carinho ao mesmo tempo. Há 
 
 Porque numa relação de ajuda bem conduzida, experimentas algo novo. Apoias-te, e o apoio não cede. Confias, e a confiança não é traída. Dependes, por um momento, e não és cobrada nem deixada cair. E o teu corpo aprende, com essa experiência, repetida, segura, que existe apoio em que se pode, de facto, confiar. É a cura da ferida deste livro, feita no próprio lugar do apoio.
 
-Quero separar-te duas coisas, porque é disso que depende saberes que apoio procurar. Uma desconfiança de feitio trabalha-se por compreensão: vês o padrão de recusares ajuda, entendes a origem, e isso, com o tempo, ajuda a mudá-lo. Uma queda que se gravou como trauma é outra coisa. Não vive só na cabeça, vive no corpo, no recuo que dispara antes do pensamento, mal alguém te estende a mão. E uma ferida assim precisa de mais do que entender. Precisa de tempo, de corpo, de uma relação segura onde o sistema reaprenda, devagar, que apoiar-se já não termina na queda de antes. Isso, sozinha, raramente se alcança. Faz-se com acompanhamento.
+Quero separar-te duas coisas, porque é disso que depende saberes que apoio procurar. Uma desconfiança de feitio trabalha-se por compreensão: vês o padrão de recusares ajuda, entendes a origem, e isso, com o tempo, ajuda a mudá-lo. Uma queda que se gravou como trauma é outra coisa. Não vive só na cabeça, vive no corpo, no recuo que dispara antes do pensamento, mal alguém te estende a mão. E uma ferida assim precisa de mais do que entender. Precisa de tempo, de corpo, de uma relação segura onde o sistema reaprenda, devagar, que apoiar-se já não termina na queda de antes. Essa ponte, sozinha, raramente se atravessa. Faz-se com acompanhamento.
 
 E quero tirar-te o receio que, neste livro mais do que em qualquer outro, te vai travar: o de que procurar ajuda seja, ele próprio, mais uma ocasião para seres deixada cair. Eu sei que te custa precisamente isto, confiar num profissional, apoiar-te em alguém que ainda não conheces. Mas repara: uma boa relação de ajuda não te pede que confies cegamente, à partida. Pede-te só que dês um primeiro passo pequeno, e deixa que a confiança se construa devagar, à medida que esse apoio prova, vez após vez, que segura. Tens todo o direito de avançar com cautela, de avaliar, de ir confiando ao teu ritmo. Não tens de te atirar. Tens só de te permitir começar.
 
@@ -167,7 +167,7 @@ Repara que é precisamente o teu medo da dependência que te empurra para o extr
 
 Quero ser honesto. Se a tua é uma ferida de queda funda, não basta concordares com isto para o passares a sentir. O teu corpo vai continuar a desconfiar, a recear a queda, por mais que a tua cabeça saiba que há apoio de confiança. Por isso este caminho, muitas vezes, faz-se com ajuda, com alguém que te acompanhe a reconstruir, devagar, a confiança que se partiu.
 
-Mas há pequenos passos que podes dar, com o pé ainda receoso. Podes começar por aceitar apoio em pequeno, de quem, ao longo do tempo, te mostrou ser de confiança. Uma ajuda pequena. Um amparo num momento difícil. E observar o que acontece. Por fora, com a pessoa certa, quase de certeza, o apoio não cede, não cobra, não te deixa cair. Por dentro, a desconfiança, o medo da queda, a vontade de voltar a fazer sozinha. E ficar com isso, deixar-te apoiar, é dar ao teu corpo uma prova nova. Que te apoiaste, e não caíste. Que houve, desta vez, quem te segurasse.
+Mas há pequenos passos que podes dar, com o pé ainda receoso. Podes começar por aceitar apoio em pequeno, de quem, ao longo do tempo, te mostrou ser de confiança. Uma ajuda pequena. Um amparo num momento difícil. E reparar no que sustém o passo, e no que cede. Por fora, com a pessoa certa, quase de certeza, o apoio não cede, não cobra, não te deixa cair. Por dentro, a desconfiança, o medo da queda, a vontade de voltar a fazer sozinha. E ficar com isso, deixar-te apoiar, é dar ao teu corpo uma prova nova. Que te apoiaste, e não caíste. Que houve, desta vez, quem te segurasse.
 
 Cada vez que te apoias, em pequeno, e a ponte aguenta, dás ao teu sistema uma prova nova. Que apoiar-se, hoje, não termina na queda de então. E é com provas, repetidas, no corpo, e não só com ideias, na cabeça, que a desconfiança, devagar, se afrouxa. Não se desfaz a couraça convencendo-te de que podes confiar. Desfaz-se apoiando-te, em pequeno, em quem merece, e descobrindo que a ponte aguentou, vez após vez, até o corpo acreditar. É um trabalho lento, de muitas pequenas provas, e por isso não te exijas confiar de repente: o corpo aprende ao seu ritmo, e a tua tarefa é só dar-lhe, repetidamente, a experiência de te apoiares e não caíres.
 
@@ -179,7 +179,7 @@ O despertar, quando vem, sente-se no corpo antes de o pensares. É a vez em que 
 
 ## 7. Deixar-me amparar
 
-Há um verbo para esta travessia. Apoiar-se.
+Há um verbo que dá nome a esta ponte. Apoiar-se.
 
 Apoiares-te. Deixares-te amparar. Aceitares apoio, na adversidade, de quem é de confiança. Não enfrentares tudo sozinha, mas partilhares o peso, descansares, por um momento, nas mãos de outro.
 
@@ -215,7 +215,7 @@ Não te vou dar uma receita para confiares, e esta travessia faz-se, muitas veze
 
 Escrevi este livro por uma convicção simples. Compreender muda. Mas, com uma queda gravada no corpo, compreender pode não chegar para te deixar poisar o pé numa ponte, e esconder-te isso seria deixar-te cair de novo.
 
-Não muda tudo de uma vez. Não te faz, amanhã, aceitar o apoio que recusaste a vida inteira. Mas muda o suficiente para deixares de confundir a tua recusa de apoio com força, e o teu isolamento com independência.
+Não atravessa a ponte toda de um só passo. Não te faz, amanhã, aceitar o apoio que recusaste a vida inteira. Mas muda o suficiente para deixares de confundir a tua recusa de apoio com força, e o teu isolamento com independência.
 
 Agora sabes que não sabes receber ajuda, e que isso não é orgulho, é memória, a memória de uma queda que o teu corpo nunca esqueceu.
 
@@ -237,15 +237,15 @@ Imagina alguém que, a atravessar um rio, se apoiou numa ponte, e a ponte ruiu, 
 
 A travessia é aprenderes a distinguir as pontes firmes da que ruiu. A confiar que nem todas as pontes caem. A pôr o pé, devagar, numa ponte sólida, e a descobrir que ela aguenta, que não cais, que podes atravessar amparada, em vez de a nado, sozinha, sempre. Pôr o pé numa ponte depois daquela que ruiu não é fácil, e às vezes faz-se com quem te segure a mão no primeiro passo. Mas do outro lado está o fim de uma travessia solitária de uma vida inteira.
 
-Quero dizer-te o que vais encontrar pelo caminho, para que não atravesses esta travessia a nado e sozinha, como tudo o resto. Vai haver recuos. Dias em que te apoias, e dias em que voltas a fechar a porta a tudo, a desconfiar de todos, a fazer tudo sozinha, como sempre. E a tua velha voz vai dizer-te que já viste, que não se pode confiar em ninguém, que é mais seguro como sempre fizeste. Não acredites nela à primeira. Voltar a desconfiar uns dias não é teres falhado a travessia, é parte de a fazeres. Ninguém reconstrói de uma vez uma confiança que se partiu. Reconstrói-se aos poucos, um apoio de cada vez, e cada vez que te apoias e a ponte aguenta, mesmo que depois recues, ficou uma prova nova no corpo, e é dessas provas, somadas, que a confiança, devagar, renasce.
+Quero dizer-te o que vais encontrar pelo caminho, para que não atravesses esta travessia a nado e sozinha, como tudo o resto. Vai haver recuos. Dias em que te apoias, e dias em que voltas a fechar a porta a tudo, a desconfiar de todos, a fazer tudo sozinha, como sempre. E a tua velha voz vai dizer-te que já viste, que não se pode confiar em ninguém, que é mais seguro como sempre fizeste. Não recues à primeira ponte que essa voz condena. Voltar a desconfiar uns dias não é teres falhado a travessia, é parte de a fazeres. Ninguém reconstrói de uma vez uma confiança que se partiu. Reconstrói-se aos poucos, um apoio de cada vez, e cada vez que te apoias e a ponte aguenta, mesmo que depois recues, ficou uma prova nova no corpo, e é dessas provas, somadas, que a confiança, devagar, renasce.
 
 E quero falar-te de quem cresce a ver-te aguentar tudo sozinha, se há filhos, pessoas próximas, que aprendem olhando para ti. Se te veem recusar sempre apoio, desconfiar de todos, enfrentar tudo sozinha, aprendem que é assim que se deve ser, e é provável que carreguem, também, a mesma desconfiança, a mesma solidão. A coisa mais libertadora que podes fazer por quem te vê não é dar-lhes o exemplo da mulher que nunca precisa de ninguém. É mostrares-lhes uma mulher que sabe escolher bem em quem confiar, e que se deixa, enfim, amparar por quem merece. Às vezes uma mulher aprende a apoiar-se, enfim, não só por si, mas para não condenar quem ama à mesma desconfiança de quem nunca mais ousou contar com alguém.
 
-E fica uma última coisa, simples, antes de te soltar. Tu não estavas errada em desconfiar. A pessoa que se protegeu, depois de ter sido deixada cair, fez o que tinha de fazer para não voltar a magoar-se. Não há nada a censurar nela. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: aquela ponte ruiu, mas não são todas as pontes. Podes voltar a atravessar, com cuidado, e descobrir que há quem te aguente.
+E fica uma última coisa, simples, antes de te soltar. Tu não estavas errada em desconfiar. A pessoa que se protegeu, depois de ter sido deixada cair, fez o que tinha de fazer para não voltar a magoar-se. Não há ponte ruída que se lhe possa censurar. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: aquela ponte ruiu, mas não são todas as pontes. Podes voltar a atravessar, com cuidado, e descobrir que há quem te aguente.
 
 Sabes, no fundo, qual é a ponte firme que aguenta este livro todo. Posso apoiar-me sem perder a força. E sabes que apoiar-te, com discernimento, em quem é de confiança, não é repetir a queda, é descobrir, enfim, que há quem te aguente.
 
-Reconheceres que não sabes receber ajuda foi o primeiro passo. Mas há um segundo, e esse não se atravessa só a ler. Atravessa-se a poisar o pé, devagar, em pontes de confiança. E, muitas vezes, faz-se com ajuda, com alguém preparado para ser, ele próprio, a primeira ponte firme em que aprendes que o apoio, hoje, pode não cair. Porque uma ferida de quem foi deixada cair merece mãos que a saibam, desta vez, segurar.
+Reconheceres que não sabes receber ajuda foi o primeiro passo. Mas há um segundo passo, e esse não se dá só a ler. Atravessa-se a poisar o pé, devagar, em pontes de confiança. E, muitas vezes, faz-se com ajuda, com alguém preparado para ser, ele próprio, a primeira ponte firme em que aprendes que o apoio, hoje, pode não cair. Porque uma ferida de quem foi deixada cair merece mãos que a saibam, desta vez, segurar.
 
 E se levares destas páginas um único pensamento, que seja este. A pessoa que te deixou cair não tem de ser a última palavra sobre o que o apoio é. Ela mostrou-te uma ponte que ruiu, mas não te mostrou todas as pontes, e há, no mundo, pontes firmes que ela nunca te deixou conhecer, porque o medo que ela te deixou te fez recusá-las antes de as experimentares. Devolveres-te a possibilidade de as atravessar não é esqueceres o que sofreste. É recusares deixar que quem te magoou continue, hoje, a escolher por ti quem podes deixar entrar.
 

@@ -39,13 +39,13 @@ Há uma diferença entre entregar-se e dissolver-se. Entregar-se é dares-te a a
 
 Tu não te entregas. Dissolves-te. E chamas a isso amor, quando é, no fundo, um desaparecimento.
 
-Este livro não te vai ensinar a amar menos, a guardar-te, a dares-te a meias por cálculo. Não vim ensinar-te a defenderes-te do amor, a fechares uma parte, a não te entregares. Isso seria não ter percebido nada. A tua capacidade de te entregares é bela. O problema não é entregares-te. É entregares a ti inteira, até não sobrar ninguém para ser amado.
+Este livro não te vai ensinar a amar menos, a guardar-te, a dares-te a meias por cálculo. Não vim ensinar-te a defenderes-te do amor, a fechares uma parte, a não te entregares. Isso seria confundir o teu desaparecimento com o problema, quando ele é só o sintoma. A tua capacidade de te entregares é bela. O problema não é entregares-te. É entregares a ti inteira, até não sobrar ninguém para ser amado.
 
 Vim ajudar-te a fazer uma coisa muito mais difícil. A permaneceres contigo enquanto amas. A não te perderes no outro. A continuares a existir, tu, dentro da relação.
 
-Adianto-te a direção, para leres em paz. Podes amar sem te abandonar. Podes ter um nós sem deixar de ter um eu. E o caminho não é amar menos. É regressares a ti.
+Deixo-te o contorno do caminho à partida, para que o leias sem te dissolveres na pressa. Podes amar sem te abandonar. Podes ter um nós sem deixar de ter um eu. E o caminho não é amar menos. É regressares a ti.
 
-Talvez te reconheças em coisas pequenas.
+O teu desaparecimento costuma assomar primeiro em pormenores quase invisíveis.
 
 Em não saberes responder, sozinha, ao que queres jantar, ao que queres fazer no fim de semana, porque te habituaste a querer o que ele quer.
 
@@ -101,7 +101,7 @@ Há um momento do dia em que tudo isto se vê com particular nitidez, e quero qu
 
 ## 2. Entregar-se ou dissolver-se
 
-Há uma confusão no centro de tudo. E quero desfazê-la com cuidado, porque é dela que vem a tua perda.
+No fundo de todo o teu desaparecimento mora uma confusão. E quero desfazê-la com cuidado, porque é dela que vem a tua perda.
 
 Confundiste entregar-te com dissolveres-te. Como se amar de verdade fosse abdicar de ti. Como se guardar um lugar próprio fosse não amar o suficiente.
 
@@ -115,7 +115,7 @@ No primeiro, há dois. No segundo, há um e meio.
 
 E tu fazes o segundo. Cedes o teu lugar todo. Entregas, não uma parte de ti, mas a ti inteira, até não sobrar contorno.
 
-Repara no que isto te custa.
+Repara no que este desaparecimento te tira, bocado a bocado.
 
 Quando te dissolves, deixas de trazer para a relação uma pessoa. Trazes um espelho. Concordas com tudo, queres o que ele quer, adaptas-te a tudo, e ao início isso parece harmonia, parece amor fácil, parece que vocês são tão compatíveis.
 
@@ -199,13 +199,13 @@ Não era. Era o preço de um amor de origem que não te deixava existir. E esse 
 
 Quero que olhes para isto sem te carregares de culpa, e sem precisares de apontar o dedo a quem te criou. Quem não te deixou ter um centro próprio, quase sempre, também não tinha um. Repetiu, em ti, o que tinha sido feito nele. Não te quis apagar. Mas apagou-te, sem querer, e tu carrega-lo ainda, na forma como desapareces em cada amor.
 
-Não respondas já à pergunta de quem és sozinha. Não se responde de repente. Constrói-se, devagar, à medida que cultivas um centro que é só teu.
+Não respondas já à pergunta de quem és sozinha. A quem se diluiu, ela não devolve a resposta de repente. Constrói-se, devagar, à medida que cultivas um centro que é só teu.
 
 Mas deixa-a aberta. Porque é nela que começa o teu regresso. No dia em que houver um tu firme, mesmo sem ninguém ao lado, deixas de precisar de te dissolver para amar. E aí, só aí, podes amar inteira. Esse branco não é a tua verdade. É o teu centro por construir, à espera de ser, enfim, habitado.
 
 ## 4. O amor que apaga
 
-Chegamos ao ponto mais fundo. E quero que o leias devagar.
+Chegamos ao sítio onde a tua diluição é mais funda. E quero que o leias devagar, sem te apagares na pressa.
 
 Tu amas apagando-te. Para ti, amar e desaparecer tornaram-se a mesma coisa.
 
@@ -215,13 +215,13 @@ E há aqui uma crença, antiga e dolorosa. A crença de que tu, inteira, com a t
 
 Por isso, mal entras numa relação, começas a apagar-te. A ceder. A concordar. A desaparecer. Não porque o outro o exija, muitas vezes, mas porque tu aprendeste que é assim que se garante o amor: não incomodando, não divergindo, não sendo demasiado.
 
-Quero que sintas o peso disto. Imagina o que é não poderes existir e amar ao mesmo tempo. Ter de escolher entre seres tu e seres amada. E escolheres sempre o amor, à custa de ti, até já não saberes quem és.
+Quero que sintas o que pesa em desaparecer assim. Imagina o que é não poderes existir e amar ao mesmo tempo. Ter de escolher entre seres tu e seres amada. E escolheres sempre o amor, à custa de ti, até já não saberes quem és.
 
 É um preço altíssimo. Pagas com a tua identidade inteira a permanência numa relação. E ainda assim não descansas, porque uma parte de ti sabe que, se desapareceste para seres amada, então não és tu a ser amada, é o teu apagamento.
 
 Há aqui uma armadilha que vale a pena ver à clara luz do dia. O teu apagamento nunca te dá a segurança que prometia. Tu apagas-te a pensar que assim ele nunca te deixará, que uma mulher tão fácil de amar, tão sem arestas, tão sempre disponível, é uma mulher que ninguém abandona. Mas a verdade é o contrário. Vives em alerta permanente, sempre a medir o humor dele, sempre com medo de teres dito algo a mais, sempre a corrigir-te. O apagamento não te tira o medo de perder. Multiplica-o. Porque quem desapareceu para ser amada sabe, no fundo, que basta reaparecer um instante para o castelo cair. E ninguém vive em paz sobre um chão tão frágil.
 
-Deixa-me dizer-te de onde isto costuma vir. Quase sempre de um amor de origem que não deixava lugar para ti.
+Deixa-me levar-te à nascente deste desaparecimento. Quase sempre, é um amor de origem que não deixava lugar para ti.
 
 Onde a tua vontade era um problema. Onde ter opinião própria era desafiar. Onde a forma de seres amada, ou pelo menos tolerada, era seres o que os outros precisavam que fosses, e nunca o que tu eras.
 
@@ -237,13 +237,13 @@ Mas repara nesta verdade dura e libertadora. O amor que te exige que desapareça
 
 ## 5. Quando desaparecer é perigo
 
-Tenho de parar o livro aqui. Com seriedade.
+Tenho de interromper aqui esta travessia. Com seriedade.
 
 Há uma fronteira entre dissolveres-te um pouco no amor e perderes-te a sério. E é vital saberes de que lado dela estás.
 
 Num dos lados, está tudo o que viemos a falar. Diluis-te, cedes o teu centro, perdes-te no outro. Custa, mas há por onde caminhar, e o caminho são estas páginas.
 
-Do outro lado, está algo mais sério. E quero nomeá-lo, sem rodeios.
+Do outro lado da fronteira, está um desaparecimento que já não é metáfora. E quero nomeá-lo, sem o diluir em rodeios.
 
 Se foste deixando cair tudo o que era teu, e hoje não tens vida nenhuma fora da relação. Sem amigas, sem atividades, sem rede, só ele.
 
@@ -255,11 +255,11 @@ Se a ideia de ficares sozinha te traz um pânico físico, uma sensação de que 
 
 Se dependes dele para tudo, e essa dependência já te tira a capacidade de viver por ti.
 
-Isto deixou de ser apenas um padrão para compreender. Pode ser uma dependência emocional séria, uma perda de identidade que pede ajuda. E ajuda a sério, de um profissional.
+Isto deixou de ser apenas um padrão para compreender. Pode ser uma dependência emocional séria, uma perda de identidade que pede ajuda. E ajuda de quem sabe segurar quem se está a apagar, de um profissional.
 
 E quero dizer uma coisa com toda a firmeza. Se a tua dissolução foi acompanhada de alguém que te afastou dos teus, que te controla, que decide por ti, que não te deixa ter vida própria, isso não é amor, e pode ser uma relação de controlo, ou abuso.
 
-Aí, a compreensão não chega, e não é a prioridade. A prioridade é a tua proteção. Procura ajuda. Fala com alguém de confiança, com um profissional, com uma linha de apoio. Não estás louca, e não estás sozinha.
+Aí, a compreensão não chega, e não é a prioridade. A prioridade é pôr-te a salvo antes que mais alguma coisa tua se apague. Procura ajuda. Fala com alguém de confiança, com um profissional, com uma linha de apoio. Não estás louca, e não estás sozinha.
 
 Quero dar-te um modo concreto de te orientares, porque a fronteira nem sempre se sente, e a dissolução é hábil a disfarçar-se de amor. Faz-te três perguntas, e responde devagar. Se desaparecesses amanhã desta relação, restava-te alguma vida? Alguém a quem ligar, algum sítio para onde ir, algum gosto a que voltar? Segunda pergunta. Quando foi a última vez que estiveste com alguém que não fosse ele, sem teres de explicar, sem teres de pedir, sem culpa? E a terceira, a mais dura. Se quisesses ir embora, conseguirias? Tens dinheiro teu, casa onde ficar, pessoas a quem recorrer, ou está tudo amarrado a ele? Se estas perguntas te trazem um vazio, ou um medo físico, não fiques sozinha com a resposta. Leva-a a um profissional. Há respostas que não se devem segurar em silêncio.
 
@@ -291,7 +291,7 @@ O amor maduro não é dois que se fundem num só. É dois que permanecem dois, e
 
 Quando te dissolves, matas precisamente esse espaço. Colas-te de tal forma que já não há dois para se encontrarem. E sem dois, não há encontro, não há desejo, não há amor verdadeiro. Há fusão, que parece amor, mas que é, no fundo, o desaparecimento de uma das pessoas.
 
-Vou dizer-te isto de outra forma. O outro apaixonou-se por uma pessoa. Por ti, com os teus gostos, a tua vida, a tua maneira de ser, o teu centro. Quando te dissolves nele, fazes desaparecer aquilo que o tinha prendido. A tua dissolução, que serve para garantir o amor, é o que, devagar, o esvazia.
+Deixa-me chegar a isto por outra margem. O outro apaixonou-se por uma pessoa. Por ti, com os teus gostos, a tua vida, a tua maneira de ser, o teu centro. Quando te dissolves nele, fazes desaparecer aquilo que o tinha prendido. A tua dissolução, que serve para garantir o amor, é o que, devagar, o esvazia.
 
 Quero dizer-te uma coisa sobre o desejo, porque é onde a dissolução cobra um preço que poucas mulheres ligam à sua perda de si. O desejo precisa de mistério, e o mistério precisa de um interior que o outro não conhece todo. Quando te dissolves, não guardas nada para ti. Antecipas o que ele quer, dás antes de te pedirem, estás sempre disponível, sempre previsível, sempre lá. E o desejo, que vive da tensão entre dois mundos, vai-se apagando, não por falta de amor, mas por falta de duas pessoas. Quem regressa a si volta a ter um interior próprio, um mundo que não se entrega todo de uma vez. E, sem o querer, volta a ser desejável, porque volta a ser outra.
 
@@ -323,7 +323,7 @@ E quero dar-te um sinal para te guiares, porque a tua cabeça vai querer complic
 
 ## 7. Regressar a si dentro do amor
 
-Há um verbo para esta travessia. Regressar.
+Para quem se diluiu há um único verbo que desfaz a diluição. Regressar.
 
 Regressar a ti. Não fora do amor, mas dentro dele. Permanecer contigo enquanto amas.
 
@@ -365,13 +365,13 @@ Quero deixar-te, ainda, uma alegria que está do outro lado. A alegria de seres 
 
 E repara no que ensinas, se há quem te veja amar. Se há filhas, sobrinhas, miúdas que te observam, elas aprendem o amor a ver-te amar. Se te veem desaparecer em cada relação, dissolver-te, perder-te, aprendem que é assim que se ama, e levam essa lição para os seus próprios amores. A coisa mais libertadora que podes fazer por quem aprende olhando para ti é mostrar uma mulher que ama sem se apagar. Que permanece inteira dentro do amor. Que é, ela própria, a prova de que se pode amar e continuar a existir.
 
-Não te vou dar um método. Seria mais uma forma de te dissolveres, agora numas regras. Mas deixo-te o princípio. Permanece contigo enquanto o amas. Não desapareças para caber. Traz-te inteira para a relação, e deixa que o amor seja entre duas pessoas, e não a diluição de uma na outra. E onde precisares de ajuda para construir um centro que nunca foi cultivado, procura-a, porque ninguém ergue um chão próprio do nada, sozinha, de um dia para o outro.
+Não te deixo um método fechado. Seria mais uma água onde te dissolveres, agora a das regras. Mas deixo-te o princípio. Permanece contigo enquanto o amas. Não desapareças para caber. Traz-te inteira para a relação, e deixa que o amor seja entre duas pessoas, e não a diluição de uma na outra. E onde precisares de ajuda para construir um centro que nunca foi cultivado, procura-a, porque ninguém ergue um chão próprio do nada, sozinha, de um dia para o outro.
 
 ## 8. A travessia
 
 Escrevi este livro por uma convicção simples. Compreender muda.
 
-Não muda tudo de uma vez. Não te faz, amanhã, reaparecer inteira. Mas muda o suficiente para deixares de confundir o teu desaparecimento com amor.
+Não te devolve toda de uma vez. Não te faz, amanhã, reaparecer inteira onde te tinhas diluído. Mas muda o suficiente para deixares de confundir o teu desaparecimento com amor.
 
 Agora sabes que te dissolves no amor, e que isso não é amar demais, é falta de ti.
 
