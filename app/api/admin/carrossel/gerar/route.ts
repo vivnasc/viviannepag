@@ -54,6 +54,7 @@ export async function POST(req: Request) {
 REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". A palavra da semana lidera tudo.
+- ACENTUACAO OBRIGATORIA: escreve em portugues europeu com TODOS os acentos correctos e completos (á, à, ã, â, ç, é, ê, í, ó, ô, õ, ú). A palavra-capa tambem acentuada (ex.: "GESTAÇÃO", nunca "GESTACAO"; "FÉ", nunca "FE"). Texto sem acentos e ERRADO.
 
 ${ecossistema}
 

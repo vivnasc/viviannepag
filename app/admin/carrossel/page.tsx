@@ -5,18 +5,19 @@ import Link from 'next/link';
 import { CALENDARIO_ANUAL } from '@/lib/carrossel/calendario';
 import { PALETAS_UNIVERSO } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
-import { SlideWithLayout } from '@/components/admin/SlideRenderer';
+import { VeuSlide } from '@/components/admin/VeuSlide';
 import { Btn, Card, Pill } from '@/components/admin/EstudioKit';
 import { gerarCaptionInstagram, gerarMetricoolCSV } from '@/lib/estudio-export';
 import { TIPO_LABELS, PALETAS, type ConteudoDia, type Mundo } from '@/lib/estudio-conteudo';
 
 type Jornada = { entrada?: string; aprofundar?: string; complemento?: string; fio?: string };
+type VeuDia = ConteudoDia & { diaSemana?: string };
 type Coleccao = {
   id: string;
   slug: string;
   title: string;
   brief: string;
-  dias: ConteudoDia[];
+  dias: VeuDia[];
   theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; palavra?: string; subtitulo?: string; estacao?: string; musica?: string; jornada?: Jornada | null };
   created_at: string;
 };
@@ -27,10 +28,6 @@ function downloadFile(content: string, filename: string, type = 'text/plain') {
   const a = document.createElement('a');
   a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
-}
-
-function defaultLayout(tipo: string): 'cta' | 'foto-fundo' {
-  return tipo === 'cta' ? 'cta' : 'foto-fundo';
 }
 
 export default function CarrosselPage() {
@@ -99,7 +96,7 @@ export default function CarrosselPage() {
               return (
                 <Card key={dia.dia} className="p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <Pill variant="info">Dia {dia.dia}</Pill>
+                    <Pill variant="info">{dia.diaSemana ?? `Dia ${dia.dia}`}</Pill>
                     <span className="text-[0.7rem] opacity-80">{tl?.emoji} {tl?.label}</span>
                     {dia.produtoRelacionado && <Pill variant="feito">→ {dia.produtoRelacionado}</Pill>}
                   </div>
@@ -108,9 +105,14 @@ export default function CarrosselPage() {
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
                       {dia.slides.map((s, i) => (
-                        <div key={i}>
-                          <SlideWithLayout slide={s} mundo={dia.mundo} defaultLayout={defaultLayout(s.tipo)} slideKey={`${sel.slug}-d${dia.dia}-s${i}`} />
-                        </div>
+                        <VeuSlide
+                          key={i}
+                          slide={s}
+                          mundo={dia.mundo}
+                          palavra={sel.theme?.palavra}
+                          subtitulo={sel.theme?.subtitulo}
+                          diaSemana={dia.diaSemana}
+                        />
                       ))}
                     </div>
                   )}
