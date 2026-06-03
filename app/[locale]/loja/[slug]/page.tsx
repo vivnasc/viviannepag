@@ -121,7 +121,15 @@ async function getProduto(slug: string, locale: string): Promise<Produto | null>
       .eq('slug', slug)
       .eq('publicado', true)
       .single();
-    return (data as Produto | null) ?? getFallback(slug, locale);
+    const row = data as Produto | null;
+    if (!row) return getFallback(slug, locale);
+    // A DB so guarda PT. Em EN, sobrepoe os campos traduzidos do CATALOGO
+    // (onde existe). Produtos sem traducao ficam em PT.
+    if (locale === 'en') {
+      const c = CATALOGO[slug];
+      if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en };
+    }
+    return row;
   } catch {
     return getFallback(slug, locale);
   }

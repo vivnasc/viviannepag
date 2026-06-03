@@ -73,7 +73,17 @@ async function listarProdutos(locale: string): Promise<Produto[]> {
       .eq('publicado', true)
       .order('ordem', { ascending: true });
     const list = (data as Produto[]) ?? [];
-    return list.length > 0 ? list : getStaticProducts(locale);
+    if (list.length === 0) return getStaticProducts(locale);
+    // A tabela 'produtos' so guarda PT. Em EN, sobrepoe o titulo/subtitulo
+    // traduzidos do CATALOGO (onde existe). Produtos sem traducao ficam em PT.
+    if (locale === 'en') {
+      const en = new Map(CATALOGO.map((c) => [c.slug, c]));
+      return list.map((p) => {
+        const c = en.get(p.slug);
+        return c ? { ...p, titulo: c.titulo_en, subtitulo: c.subtitulo_en } : p;
+      });
+    }
+    return list;
   } catch {
     return getStaticProducts(locale);
   }
