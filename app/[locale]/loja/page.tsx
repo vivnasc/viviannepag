@@ -66,6 +66,13 @@ function getStaticProducts(locale: string): Produto[] {
   }));
 }
 
+// URL publica da capa EN (mesma foto, titulo ingles), gerada pelo render EN em
+// produtos/capas/<slug>-en.jpg. Null se a base do Supabase nao estiver definida.
+const SB_BASE = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
+function capaEn(slug: string): string | null {
+  return SB_BASE ? `${SB_BASE}/storage/v1/object/public/viviannepag-assets/produtos/capas/${slug}-en.jpg` : null;
+}
+
 async function listarProdutos(locale: string): Promise<Produto[]> {
   try {
     const supabase = getSupabase();
@@ -76,12 +83,13 @@ async function listarProdutos(locale: string): Promise<Produto[]> {
       .order('ordem', { ascending: true });
     const list = (data as Produto[]) ?? [];
     if (list.length === 0) return getStaticProducts(locale);
-    // A tabela 'produtos' so guarda PT. Em EN, sobrepoe titulo/subtitulo com a
-    // traducao lida dos markdowns EN (PRODUTOS_EN cobre os 72 produtos).
+    // A tabela 'produtos' so guarda PT. Em EN, sobrepoe titulo/subtitulo (texto)
+    // e a capa (mesma foto, titulo em ingles, gerada pelo render EN).
     if (locale === 'en') {
       return list.map((p) => {
         const en = PRODUTOS_EN[p.slug];
-        return en ? { ...p, titulo: en.titulo, subtitulo: en.subtitulo } : p;
+        if (!en) return p;
+        return { ...p, titulo: en.titulo, subtitulo: en.subtitulo, capa: capaEn(p.slug) ?? p.capa };
       });
     }
     return list;

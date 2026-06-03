@@ -1107,6 +1107,13 @@ async function renderUm(slug, mundoOverride, lang = 'pt') {
       if (!error) { okEn = true; console.log(`  [entregavel-en] ${bucket}/${enKey}`); }
       else console.warn(`  [en-upload ${bucket}] ${error.message}`);
     }
+    // Capa EN: MESMA imagem, titulo em ingles (o screenshot foi feito do HTML EN).
+    // Guarda em produtos/capas/<slug>-en.jpg (publico) para a loja /en usar.
+    const capaEnKey = `produtos/capas/${slug}-en.jpg`;
+    const { error: eCapaEn } = await supabase.storage
+      .from(BUCKET_ASSETS).upload(capaEnKey, capaJpg, { contentType: 'image/jpeg', upsert: true });
+    if (!eCapaEn) console.log(`  [capa-en] ${capaEnKey}`);
+    else console.warn(`  [capa-en-falhou] ${eCapaEn.message}`);
     try { fs.unlinkSync(tmpPdf); } catch {}
     if (!okEn) throw new Error('upload EN falhou em todos os buckets');
     return { slug, mundo, lane, size: pdfBuf.length, lang: 'en' };

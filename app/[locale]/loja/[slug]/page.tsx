@@ -125,13 +125,15 @@ async function getProduto(slug: string, locale: string): Promise<Produto | null>
       .single();
     const row = data as Produto | null;
     if (!row) return getFallback(slug, locale);
-    // A DB so guarda PT. Em EN, sobrepoe titulo/subtitulo/descricao com a
-    // traducao lida dos markdowns EN (PRODUTOS_EN cobre os 72 produtos).
+    // A DB so guarda PT. Em EN, sobrepoe texto (titulo/subtitulo/descricao) e a
+    // capa (mesma foto, titulo ingles, gerada pelo render EN).
     if (locale === 'en') {
+      const sb = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
+      const capaEn = sb ? `${sb}/storage/v1/object/public/viviannepag-assets/produtos/capas/${slug}-en.jpg` : row.capa;
       const en = PRODUTOS_EN[slug];
-      if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao };
+      if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao, capa: capaEn };
       const c = CATALOGO[slug];
-      if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en };
+      if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en, capa: capaEn };
     }
     return row;
   } catch {
