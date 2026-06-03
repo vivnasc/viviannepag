@@ -22,10 +22,12 @@ export async function POST(req: Request) {
   let slug = 'ALL';
   let slugs = '';
   let mundo = 'auto';
+  let colecao = '';
   try {
     const body = await req.json();
     if (typeof body?.slug === 'string') slug = body.slug;
     if (typeof body?.mundo === 'string') mundo = body.mundo;
+    if (typeof body?.colecao === 'string') colecao = body.colecao;
     if (Array.isArray(body?.slugs)) slugs = body.slugs.filter((s: unknown) => typeof s === 'string').join(',');
     else if (typeof body?.slugs === 'string') slugs = body.slugs;
   } catch {}
@@ -40,7 +42,7 @@ export async function POST(req: Request) {
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ref, inputs: { slug, slugs, mundo } }),
+      body: JSON.stringify({ ref, inputs: { slug, slugs, mundo, colecao } }),
     }
   );
 
@@ -53,7 +55,7 @@ export async function POST(req: Request) {
   }
 
   const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '');
-  const ehBulk = slug === 'ALL' || (slugs && slugs.includes(','));
+  const ehBulk = Boolean(colecao) || slug === 'ALL' || (slugs && slugs.includes(','));
   const slugUnico = !ehBulk && slug !== 'ALL' ? slug : (slugs.split(',')[0] || slug);
   const pdfUrl = ehBulk
     ? null
@@ -64,6 +66,7 @@ export async function POST(req: Request) {
     slug,
     slugs,
     mundo,
+    colecao,
     bulk: ehBulk,
     pdfUrl,
     workflowRunUrl: `https://github.com/${owner}/${repo}/actions/workflows/render-ebook.yml`,

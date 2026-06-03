@@ -7,7 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "render:plan": "DRY=1 SLUG=ALL node scripts/render-ebook.js",
+    "render:freeme": "COLECAO=freeme-mae node scripts/render-ebook.js",
+    "render:infonte": "COLECAO=infonte node scripts/render-ebook.js",
+    "render:amor": "COLECAO=amor node scripts/render-ebook.js",
+    "render:forca": "COLECAO=forca node scripts/render-ebook.js",
+    "render:prosperidade": "COLECAO=prosperidade node scripts/render-ebook.js",
+    "render:pertenca": "COLECAO=pertenca node scripts/render-ebook.js",
+    "render:trabalho": "COLECAO=trabalho node scripts/render-ebook.js"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^9.2.0",

@@ -312,19 +312,37 @@ export const COLECOES: Colecao[] = [
 // Mapeia slug do produto -> colecao. Sem mexer na DB; fica versionado no codigo.
 // Adiciona aqui novos produtos a medida que sao criados.
 export function slugToColecao(slug: string): ColecaoId {
+  // Ebooks novos por prefixo de colecao (1 prefixo = 1 universo).
+  if (/^mae-\d/.test(slug)) return 'freeme-mae';
+  if (/^inf-\d/.test(slug)) return 'infonte';
+  if (/^pros-\d/.test(slug)) return 'prosperidade';
+  if (/^syn-\d/.test(slug)) return 'amor';
+  if (/^per-\d/.test(slug)) return 'pertenca';
+  if (/^for-\d/.test(slug)) return 'forca';
+  if (/^tra-\d/.test(slug)) return 'trabalho';
+
   // FreeMe Mae — maternidade
-  if (/^ebook-01-culpa|^ebook-02-herdaste|^guia-01-meu|^guia-02-frases/.test(slug)) return 'freeme-mae';
+  if (/^ebook-01-culpa|^ebook-02-herdaste|^guia-01-meu|^guia-02-frases|^guia-08-culpa/.test(slug)) return 'freeme-mae';
   if (/^ebook-(09|10|11|12)|mae-que|mae-arrependida|mae-solo|mae-que-teme/.test(slug)) return 'freeme-mae';
 
   // Infonte — identidade e proposito
   if (/^ebook-03-quemes|^ebook-04-sentido|^ebook-07-sonho|^ebook-08-voz/.test(slug)) return 'infonte';
-  if (/^guia-03-presenca|^guia-04-mente|^guia-07-teu/.test(slug)) return 'infonte';
+  if (/^guia-03-presenca|^guia-04-mente|^guia-07-teu|^guia-09-meta/.test(slug)) return 'infonte';
+
+  // Prosperidade — receber, merecer
+  if (/^guia-10-receber/.test(slug)) return 'prosperidade';
 
   // Amor — casal e vinculacao
-  if (/^ebook-06-no-casal|^guia-06-perguntas/.test(slug)) return 'amor';
+  if (/^ebook-06-no-casal|^guia-06-perguntas|^guia-11-intensidade/.test(slug)) return 'amor';
+
+  // Pertenca — lugar, familia
+  if (/^guia-12-lugar/.test(slug)) return 'pertenca';
 
   // Forca — sobrevivencia, atravessar
-  if (/^ebook-05-escuro|^guia-05-luto/.test(slug)) return 'forca';
+  if (/^ebook-05-escuro|^guia-05-luto|^guia-13-guarda/.test(slug)) return 'forca';
+
+  // Trabalho e Vocacao — valor e produzir
+  if (/^guia-14-parar/.test(slug)) return 'trabalho';
 
   // Default — fica em FreeMe Mae como entrada principal
   return 'freeme-mae';

@@ -242,7 +242,24 @@ SLUGS=ebook-01-culpa,guia-02-frases MUNDO=auto node scripts/render-ebook.js
 
 # Render local de TODOS
 SLUG=ALL MUNDO=auto node scripts/render-ebook.js
+
+# Render por UNIVERSO (lote mais leve, 1 de cada vez) — recomendado para bulk
+npm run render:plan          # so lista: quantos produtos por universo (nao renderiza)
+npm run render:freeme        # 16 produtos (freeme-mae)
+npm run render:infonte       # 14
+npm run render:amor          # 10
+npm run render:forca         # 9
+npm run render:prosperidade  # 8
+npm run render:pertenca      # 8
+npm run render:trabalho      # 7
+# equivalente cru: COLECAO=prosperidade node scripts/render-ebook.js
 ```
+
+**Por universo no GitHub Actions / admin:** o workflow `render-ebook.yml` tem
+agora o input `colecao` (e a API `render-ebook-dispatch` aceita `{ colecao }`).
+No /admin/produtos, os 7 botões de universo disparam um lote leve cada
+(FreeMe, Infonte, Amor, Força, Prosperidade, Pertença, Trabalho). Os re-runs
+saltam o que já existe, por isso é seguro correr universo a universo.
 
 ---
 

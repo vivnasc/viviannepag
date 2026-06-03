@@ -248,6 +248,30 @@ export default function ProdutosAdmin() {
           >
             📚 render TODOS
           </button>
+          {([
+            ['freeme-mae', 'FreeMe'], ['infonte', 'Infonte'], ['amor', 'Amor'],
+            ['forca', 'Força'], ['prosperidade', 'Prosperidade'], ['pertenca', 'Pertença'], ['trabalho', 'Trabalho'],
+          ] as const).map(([col, label]) => (
+            <button
+              key={col}
+              onClick={async () => {
+                if (!confirm(`Renderizar só o universo "${label}"? Lote mais leve, 1 GH Action. Re-runs skipam o que já existe.`)) return;
+                setMsg(`A disparar render do universo ${label}...`);
+                const r = await fetch('/api/admin/produtos/render-ebook-dispatch', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ colecao: col, mundo: 'auto' }),
+                });
+                const j = await r.json();
+                if (r.ok) { setPolling(true); setMsg(`Universo ${label} disparado. 'ver PDF' aparece em cada card a medida que ficam prontos.`); }
+                else { setMsg(`Erro: ${j.erro}`); }
+              }}
+              className="bg-ouro/70 text-terra-2 rounded-[12px] px-3 py-2 text-[0.72rem] font-medium hover:bg-ambar"
+              title={`Render só ${label} (lote leve)`}
+            >
+              {label}
+            </button>
+          ))}
           <button onClick={async () => { setSalvando(true); setMsg('A popular 15 produtos...'); const r = await fetch('/api/admin/seed-produtos', { method: 'POST' }); const j = await r.json(); setSalvando(false); setMsg(r.ok ? `${j.total} produtos populados.` : `Erro: ${j.erro}`); carregar(); }} disabled={salvando} className="bg-bordeaux/80 text-creme rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-bordeaux disabled:opacity-70">seed 15 produtos</button>
           <button onClick={() => setEdit({ ...vazio })} className="bg-ocre text-terra rounded-[12px] px-4 py-2 text-[0.8rem] lowercase hover:bg-ambar">+ novo produto</button>
         </div>

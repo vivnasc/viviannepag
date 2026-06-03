@@ -18,6 +18,11 @@ on:
         required: false
         type: string
         default: 'auto'
+      colecao:
+        description: 'Universo a renderizar de cada vez (lote mais leve): freeme-mae | infonte | amor | forca | prosperidade | pertenca | trabalho. Vazio = todos.'
+        required: false
+        type: string
+        default: ''
 
 jobs:
   render:
@@ -55,6 +60,7 @@ jobs:
           SLUG: ${{ github.event.inputs.slug }}
           SLUGS: ${{ github.event.inputs.slugs }}
           MUNDO: ${{ github.event.inputs.mundo }}
+          COLECAO: ${{ github.event.inputs.colecao }}
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/render-ebook.js

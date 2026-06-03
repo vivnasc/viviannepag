@@ -13,26 +13,36 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const matter = require('gray-matter');
-const { marked } = require('marked');
-const puppeteer = require('puppeteer');
-const { createClient } = require('@supabase/supabase-js');
 
 const SLUG = process.env.SLUG || 'ebook-01-culpa';
 const SLUGS = (process.env.SLUGS ?? '').split(',').map(s => s.trim()).filter(Boolean);
 const MUNDO = process.env.MUNDO || 'freeme';
+// COLECAO=freeme-mae|infonte|amor|forca|prosperidade|pertenca|trabalho
+// Filtra o bulk a um universo de cada vez (lotes mais leves). Ver npm run render:<universo>.
+const COLECAO = (process.env.COLECAO || '').trim();
+// DRY=1 lista os slugs do lote e sai (sem render, sem Supabase nem deps pesadas).
+const DRY = ['1', 'true', 'yes'].includes((process.env.DRY || '').toLowerCase());
+
+// Deps pesadas (parsing/render) so sao precisas no render real, nao no DRY/plan.
+const matter = DRY ? null : require('gray-matter');
+const { marked } = DRY ? {} : require('marked');
+const puppeteer = DRY ? null : require('puppeteer');
+const { createClient } = DRY ? {} : require('@supabase/supabase-js');
+
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-for (const [k, v] of Object.entries({ SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY })) {
-  if (!v) { console.error(`Missing env: ${k}`); process.exit(1); }
+if (!DRY) {
+  for (const [k, v] of Object.entries({ SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY })) {
+    if (!v) { console.error(`Missing env: ${k}`); process.exit(1); }
+  }
 }
 
 // Imagens MJ vivem em viviannepag-assets (publico). PDFs entregaveis em
 // escritos (privado, lido pelo /api/download via signed URL).
 const BUCKET_ASSETS = 'viviannepag-assets';
 const BUCKET_PRODUTOS = 'escritos';
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+const supabase = DRY ? null : createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
@@ -292,18 +302,37 @@ function slugToMundo(slug) {
   if (/^inf-/.test(slug) || /sonho|voz|mente|teu/.test(slug)) return 'infonte';
   if (/casal|perguntas/.test(slug)) return 'synchim';
   if (/quemes|sentido|escuro|presenca/.test(slug)) return 'escola';
+  // Guias-ancora novos (um por universo) — fontes/label corretos.
+  if (/^guia-09-meta/.test(slug)) return 'infonte';
+  if (/^guia-10-receber/.test(slug)) return 'prosperidade';
+  if (/^guia-11-intensidade/.test(slug)) return 'synchim';
+  if (/^guia-12-lugar/.test(slug)) return 'pertenca';
+  if (/^guia-13-guarda/.test(slug)) return 'forca';
+  if (/^guia-14-parar/.test(slug)) return 'trabalho';
   return 'freeme';
 }
 
 // Mapeia slug -> colecao (replica lib/colecoes.ts slugToColecao em JS).
 // Pool de imagens e organizado por colecao, nao por mundo de origem.
 function slugToColecao(slug) {
-  if (/^ebook-01-culpa|^ebook-02-herdaste|^guia-01-meu|^guia-02-frases/.test(slug)) return 'freeme-mae';
+  // Ebooks novos por prefixo de colecao (1 prefixo = 1 universo).
+  if (/^mae-\d/.test(slug)) return 'freeme-mae';
+  if (/^inf-\d/.test(slug)) return 'infonte';
+  if (/^pros-\d/.test(slug)) return 'prosperidade';
+  if (/^syn-\d/.test(slug)) return 'amor';
+  if (/^per-\d/.test(slug)) return 'pertenca';
+  if (/^for-\d/.test(slug)) return 'forca';
+  if (/^tra-\d/.test(slug)) return 'trabalho';
+  // Ebooks/guias antigos + guias-ancora novos (um por universo).
+  if (/^ebook-01-culpa|^ebook-02-herdaste|^guia-01-meu|^guia-02-frases|^guia-08-culpa/.test(slug)) return 'freeme-mae';
   if (/^ebook-(09|10|11|12)|mae-que|mae-arrependida|mae-solo|mae-que-teme/.test(slug)) return 'freeme-mae';
   if (/^ebook-03-quemes|^ebook-04-sentido|^ebook-07-sonho|^ebook-08-voz/.test(slug)) return 'infonte';
-  if (/^guia-03-presenca|^guia-04-mente|^guia-07-teu/.test(slug)) return 'infonte';
-  if (/^ebook-06-no-casal|^guia-06-perguntas/.test(slug)) return 'amor';
-  if (/^ebook-05-escuro|^guia-05-luto/.test(slug)) return 'forca';
+  if (/^guia-03-presenca|^guia-04-mente|^guia-07-teu|^guia-09-meta/.test(slug)) return 'infonte';
+  if (/^guia-10-receber/.test(slug)) return 'prosperidade';
+  if (/^ebook-06-no-casal|^guia-06-perguntas|^guia-11-intensidade/.test(slug)) return 'amor';
+  if (/^guia-12-lugar/.test(slug)) return 'pertenca';
+  if (/^ebook-05-escuro|^guia-05-luto|^guia-13-guarda/.test(slug)) return 'forca';
+  if (/^guia-14-parar/.test(slug)) return 'trabalho';
   return 'freeme-mae';
 }
 
@@ -323,7 +352,7 @@ const MUNDOS_POR_COLECAO = {
 function listAllSlugs() {
   const dir = path.join(__dirname, '..', 'content', 'produtos');
   return fs.readdirSync(dir)
-    .filter(name => /^(ebook|guia)-\d+/.test(name) && !name.endsWith('-en'))
+    .filter(name => /^(ebook|guia|mae|inf|pros|syn|per|for|tra)-\d+/.test(name) && !name.endsWith('-en'))
     .filter(name => fs.existsSync(path.join(dir, name, `${name}.md`)))
     .sort();
 }
@@ -1060,11 +1089,27 @@ async function main() {
   // Determina lista de slugs a renderizar
   let slugs = [];
   if (SLUGS.length > 0) slugs = SLUGS;
+  else if (COLECAO) slugs = listAllSlugs();         // COLECAO=<universo> => todo o universo
   else if (SLUG && SLUG !== 'ALL') slugs = [SLUG];
   else slugs = listAllSlugs();
 
   // SLUG="ALL" ou SLUGS vazio + SLUG vazio = todos
   if (SLUG === 'ALL' || slugs.length === 0) slugs = listAllSlugs();
+
+  // COLECAO=<universo> filtra o lote a um unico universo (render mais leve).
+  if (COLECAO) {
+    const antes = slugs.length;
+    slugs = slugs.filter(s => slugToColecao(s) === COLECAO);
+    console.log(`[colecao] ${COLECAO}: ${slugs.length}/${antes} produto(s)`);
+    if (slugs.length === 0) { console.error(`Nenhum produto na colecao '${COLECAO}'. Validas: freeme-mae, infonte, amor, forca, prosperidade, pertenca, trabalho.`); process.exit(1); }
+  }
+
+  // DRY=1 — so lista o lote e sai, sem renderizar.
+  if (DRY) {
+    console.log(`[dry] ${slugs.length} produto(s)${COLECAO ? ' em ' + COLECAO : ''}:`);
+    slugs.forEach(s => console.log(`  ${s}  ->  ${slugToColecao(s)} / ${slugToMundo(s)}`));
+    return;
+  }
 
   console.log(`[start] ${slugs.length} produto(s): ${slugs.join(', ')}`);
 
