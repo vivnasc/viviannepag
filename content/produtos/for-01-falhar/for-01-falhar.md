@@ -27,7 +27,7 @@ Porque a tua perfeição é uma armadura. Construíste-a, sem o saberes, para te
 
 Este livro é diferente dos outros que talvez tenhas lido. Porque o que te trouxe aqui não é só um padrão a compreender. É, muitas vezes, uma resposta a algo que viveste, uma adaptação que te manteve segura num tempo em que errar tinha consequências reais. E isso merece mais do que compreensão. Merece cuidado. Por isso, ao longo destas páginas, vou dizer-te, sem rodeios e sem que seja falha, que talvez precises não só de te entenderes, mas de apoio.
 
-E adianto-te a direção, para leres em paz. Podes errar e continuar segura. Já não estás no perigo onde falhar custava caro. A armadura da perfeição protegeu-te então, mas hoje esmaga-te, e podes, devagar, e talvez com ajuda, aprender a poisá-la.
+E digo-te já para onde vamos, para que leias sem o coração em sobressalto. Podes errar e continuar segura. Já não estás no perigo onde uma falha tua custava caro. A armadura da perfeição protegeu-te então, mas hoje aperta-te o peito a cada gralha, a cada entrega, a cada espelho, e podes, devagar, e talvez com ajuda, aprender a poisá-la.
 
 Talvez te reconheças em coisas pequenas.
 
@@ -61,9 +61,9 @@ Talvez tenhas vivido numa casa onde tinhas de ser perfeita para manter a paz. On
 
 Talvez o erro, em tua casa, tivesse consequências que iam muito além de uma repreensão. Talvez houvesse violência, imprevisibilidade, perigo real, e a tua perfeição fosse a forma de não dares motivo, de não chamares a tempestade, de te manteres a salvo num lugar onde falhar podia custar muito.
 
-Repara no que uma criança aprende num lugar destes. Aprende que errar é perigoso. Que a falha tem consequências graves. Que a única forma de estar segura é ser impecável, não dar motivo, controlar tudo, prever tudo, nunca falhar. E essa aprendizagem grava-se não como uma ideia, mas como um terror, no corpo, ligado à sobrevivência.
+Pensa no que uma menina aprende numa casa onde a falha acende a tempestade. Aprende que o caderno tem de estar sem rasura, que a cama tem de ficar sem uma ruga, que a resposta tem de sair certa à primeira, porque um erro, ali, não fica num erro. Aprende que a única forma de estar segura é não dar motivo, é antecipar tudo, é não deixar uma única ponta por verificar. E essa aprendizagem não se grava como ideia, grava-se como terror no corpo, colada à sobrevivência.
 
-E essa criança fez o que tinha de fazer. Tornou-se perfeita. Construiu a armadura da impecabilidade, e ela protegeu-a, naquele tempo, daquele perigo. Foi uma adaptação inteligente, talvez salvadora, a uma situação em que errar era, de facto, arriscado.
+E essa menina fez exatamente o que tinha de fazer para passar incólume. Tornou-se impecável. Construiu, brinquedo a brinquedo arrumado, prova a prova perfeita, a armadura da perfeição, e ela protegeu-a, naquele tempo, daquele perigo. Fazer-se sem falha foi, então, uma resposta inteligente, talvez salvadora, a uma casa onde errar era, de facto, arriscado.
 
 Mas a armadura não se desfez quando o perigo passou. Ficou. Tornou-se a tua forma de estar no mundo. E hoje, em adulta, num mundo onde errar já não traz a consequência que trazia então, continuas a viver como se trouxesse. Continuas impecável, vigilante, em pânico perante a falha, defendida de um perigo que já não existe, mas que o teu corpo continua a temer.
 
@@ -77,9 +77,9 @@ E há, às vezes, ainda outra raiz: a de teres sido a criança de quem se espera
 
 Em qualquer destas raízes, a lição é parecida: o teu valor, o teu lugar, o teu amor, dependem de não falhares. E é essa equação, gravada cedo, que te governa hoje, e que faz de cada erro, por pequeno que seja, uma ameaça ao teu próprio direito a ser amada e a ter lugar.
 
-Quero que vejas onde isto fica guardado, porque importa para entenderes por que custa tanto mudar. Esta lição não está só na tua memória, naquilo de que te lembras. Está no teu corpo, num lugar mais fundo do que as palavras. Quando uma criança aprende, cedo, que errar é perigoso, o corpo dela grava esse aviso no sistema nervoso, abaixo da consciência, num registo que não se apaga só por se compreender. Por isso, hoje, o teu pânico perante a falha não passa por uma decisão. Surge antes de pensares, num aperto, num gelo, numa urgência, porque é o teu corpo a reagir, e não a tua razão a escolher.
+Importa que vejas onde o terror de errar ficou alojado, porque é isso que explica por que custa tanto desfazê-lo. Este alarme da falha não mora apenas naquilo de que te lembras, na memória que sabes contar. Mora num registo mais antigo do que as palavras, gravado no instante em que o teu corpo associou um erro a uma consequência. Quando uma menina aprende, cedo, que falhar traz perigo, o sistema nervoso dela arquiva esse aviso abaixo da consciência, e nenhuma explicação o apaga sozinha. Por isso, hoje, o pânico que sobe quando vês uma falha não passa por uma decisão tua. Chega antes do pensamento, num aperto de garganta, num gelo nas mãos, numa pressa de corrigir, porque é o corpo a reagir, e não a razão a escolher.
 
-É por isso que tantas vezes te dizes que é absurdo, que não há motivo para tanto medo de um erro pequeno, e mesmo assim o medo não obedece. Não obedece porque não nasce do raciocínio. Nasce de uma memória de corpo, antiga, que continua a tratar a falha como uma ameaça à sobrevivência. E uma memória de corpo não se convence com argumentos. Aprende-se de novo, devagar, com experiências novas, repetidas, em que o corpo descobre, vez após vez, que desta vez não veio o perigo.
+É por isso que tantas vezes te dizes que é absurdo, que ninguém morre por uma gralha ou por uma entrega menos perfeita, e mesmo assim o medo não baixa. Não baixa porque não nasceu de um raciocínio. Nasceu de uma memória que o corpo guarda, antiga, que ainda trata cada erro como se fosse o erro que outrora trouxe a tempestade. E essa memória não se desmonta com bons argumentos sobre proporção e bom senso. Reaprende-se, devagar, errando em pequeno e descobrindo, vez após vez, que desta vez não veio castigo nenhum.
 
 Digo-te isto não para te assustar com a dificuldade, mas para tirares de cima de ti o peso de uma culpa a mais: a de não conseguires, só por quereres, deixar de temer. Não é falta de vontade. Não é fraqueza. É a natureza de uma ferida que vive no corpo, e que por isso pede um caminho que passa pelo corpo, e muitas vezes por mãos que saibam acompanhá-lo, e não só pela tua boa vontade de mudar.
 
@@ -89,7 +89,7 @@ Há uma coisa sobre a tua perfeição que precisas de ver. Ela protege-te, sim. 
 
 Repara no peso de viver impecável. A vigilância que nunca para. A tensão de teres de estar sempre certa. A energia imensa que gastas a controlar, a prever, a verificar, a garantir que nada falha. É um trabalho a tempo inteiro, exaustivo, que ninguém vê, e que te consome por dentro.
 
-E há um custo na tua relação com a vida. Porque quem não pode falhar não pode arriscar. Não pode experimentar, tentar, ousar, porque tudo isso traz a possibilidade de errar. Ficas presa ao seguro, ao controlado, ao que já dominas, porque o novo, o incerto, o que poderia correr mal, é demasiado ameaçador. A perfeição, que te protege, também te aprisiona ao que já sabes fazer sem falha.
+E há um custo no tamanho da vida que te permites. Porque quem não pode falhar não pode arriscar. Não pode experimentar, tentar, ousar, porque tudo isso traz a possibilidade de errar. Ficas presa ao seguro, ao controlado, ao que já dominas, porque o novo, o incerto, o que poderia correr mal, é demasiado ameaçador. A perfeição, que te protege, também te aprisiona ao que já sabes fazer sem falha.
 
 E há um custo nas relações. Porque a perfeição cria distância. Quem está sempre impecável é difícil de alcançar, de conhecer, de amar de perto, porque nunca mostra a fragilidade, o erro, a humanidade que aproxima. As pessoas admiram-te, mas talvez não te sintam próxima, porque a armadura que te protege também as mantém de fora.
 
@@ -127,31 +127,25 @@ Quem és tu quando erras? Quando não és impecável? Quando falhas, simplesment
 
 Fica com ela. Repara no terror que ela traz.
 
-Para ti, esta pergunta toca no medo mais fundo. Porque a tua identidade inteira se construiu sobre seres impecável. Es a que não falha, a que faz tudo bem, a competente, a de confiança. Tira-te isso, imagina-te a errar, a falhar, a não estar à altura, e aparece um pânico. Então o que sou eu? Que segurança me resta, se falho? Que valor tenho, se não for perfeita?
+Para ti, esta pergunta toca no medo mais fundo, porque a tua identidade inteira se ergueu sobre seres impecável. És a que não falha, a que entrega sem uma falha, a competente, a de confiança, a que os outros procuram quando querem que algo fique bem feito. Tira-te isso, imagina-te a errar à frente de todos, a não dar conta, a não estar à altura, e abre-se um abismo. Então o que sou eu, se não for a que nunca falha? Que segurança me resta, se falho? Que valor tenho, se não for perfeita?
 
-E a sombra que aqui se esconde é a falibilidade humana. A possibilidade de errares, de não dares conta, de seres, simplesmente, humana, com as falhas que todos os humanos têm. Essa parte de ti, a que pode falhar, aterroriza-te, porque associaste a falha ao perigo, e por isso vives a combater a tua própria humanidade, como se ela fosse uma ameaça.
+A sombra que aqui se esconde é a tua própria falibilidade humana. A possibilidade de errares, de não dares conta, de seres, simplesmente, humana, com as falhas que todos os humanos têm. Essa parte de ti, a que pode falhar, aterroriza-te, porque associaste a falha ao perigo, e por isso vives a combater a tua própria humanidade, como se ela fosse uma ameaça pousada dentro de ti.
 
-Repara como isto te aprisiona. Não te podes permitir ser humana. Não te podes permitir o erro, a dúvida, a imperfeição que todos têm. Vives a exigir de ti uma perfeição sobre-humana, e a punir-te, com uma dureza imensa, sempre que ficas aquém dela. És, para ti própria, o juiz mais severo que existe, mais severo do que qualquer pessoa que te tenha ferido.
+Repara como isto te aprisiona. Não te podes permitir ser humana. Não te podes permitir o erro, a dúvida, a imperfeição que todos têm. Exiges de ti uma perfeição sobre-humana, e castigas-te, com uma dureza imensa, sempre que ficas aquém dela. Tornaste-te, perante a tua própria falha, o juiz mais severo que existe, mais severo do que qualquer pessoa que alguma vez te tenha ferido.
 
-E há uma crueldade nisto que talvez não vejas. Tratas-te como aquele perigo antigo te tratava. Interiorizaste a dureza, o juízo, o castigo perante a falha, e aplica-los a ti, hoje, sem que ninguém precise de o fazer. O perigo de fora tornou-se um perigo de dentro, e tu continuas a viver sob ameaça, agora a tua própria.
+E há uma crueldade nisto que talvez não vejas. Tratas-te como aquele perigo antigo te tratava. Interiorizaste a dureza, o juízo, o castigo perante a falha, e aplica-los a ti, hoje, sem que ninguém precise de o fazer. O perigo de fora tornou-se um perigo de dentro, e tu continuas a viver sob ameaça, agora a tua própria, a tua própria vigia armada contra qualquer descuido teu.
 
-Quero dizer-te uma coisa sobre este terror, porque ela começa a desarmá-lo. Errar não te torna insegura, hoje. Esta é a verdade que o teu corpo ainda não aprendeu. No tempo em que a armadura nasceu, errar trazia perigo, e o teu terror era justo. Mas hoje, na tua vida adulta, errar é, na maioria das vezes, apenas humano. Não traz a catástrofe que o teu corpo teme. As pessoas erram, e continuam seguras, amadas, dignas. Tu também podes. O perigo daquele tempo passou, ainda que o teu sistema continue a soar o alarme como se não tivesse passado.
+Quero dizer-te uma coisa sobre este terror, porque é por aqui que ele começa a perder força. Errar não te torna insegura, hoje. Esta é a verdade que o teu corpo ainda não aprendeu. No tempo em que a armadura nasceu, falhar trazia perigo, e o teu terror era justo, era a única resposta sensata àquela casa. Mas hoje, na tua vida adulta, um erro é, na maioria das vezes, apenas humano. Não traz a catástrofe que o teu corpo antecipa. As pessoas erram, e continuam seguras, amadas, dignas. Tu também podes. O perigo daquele tempo passou, ainda que o teu sistema nervoso continue a tocar o alarme de incêndio à mais pequena fagulha, como se a casa ainda ardesse.
 
-Não respondas já à pergunta de quem és quando erras. Não se responde com a cabeça, e às vezes precisa de mais do que um livro. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que errar já não é perigoso, deixas de precisar da armadura para estares segura. E aí, só aí, podes começar a permitir-te ser humana.
-
-Vou deixar-te uma pergunta, e peço-te que fiques com ela, ainda que ela te dê pânico. Quem serias tu se te permitisses ser humana?
-
-Para ti, esta pergunta abre um abismo, porque a tua identidade inteira se construiu sobre seres impecável. És a que não falha, a competente, a de confiança. Tira-te isso, imagina-te a errar, a não dar conta, a não estar à altura, e aparece um terror: então o que sou eu? Que segurança me resta, se falho? Que valor tenho, se não for perfeita?
-
-A sombra que aqui se esconde é a tua própria falibilidade humana. A possibilidade de errares, de não dares conta, de seres, simplesmente, humana, com as falhas que todos os humanos têm. Essa parte de ti aterroriza-te, porque associaste a falha ao perigo, e por isso vives a combater a tua própria humanidade, como se ela fosse uma ameaça.
-
-E há uma crueldade nisto que talvez não vejas. Tratas-te como aquele perigo antigo te tratava. Interiorizaste a dureza, o juízo, o castigo perante a falha, e aplica-los a ti, hoje, sem que ninguém precise de o fazer. O perigo de fora tornou-se um perigo de dentro, e tu continuas a viver sob ameaça, agora a tua própria. És, para ti mesma, o juiz mais severo que existe, mais severo do que qualquer pessoa que te tenha ferido.
-
-Quero dizer-te uma coisa que começa a desarmar o terror. Errar não te torna insegura, hoje. No tempo em que a armadura nasceu, errar trazia perigo, e o teu terror era justo. Mas hoje, na tua vida adulta, errar é, na maioria das vezes, apenas humano. As pessoas erram, e continuam seguras, amadas, dignas. Tu também podes. O perigo daquele tempo passou, ainda que o teu corpo continue a soar o alarme como se não tivesse passado.
+Não respondas já à pergunta de quem és quando erras. Não se responde com a cabeça, e às vezes precisa de mais do que um livro. Mas deixa-a aberta. Porque é nela que está a porta. No dia em que o teu corpo aprender que falhar já não é perigoso, deixas de precisar da armadura para estares segura. E aí, só aí, podes começar a permitir-te ser humana.
 
 E repara como esta crença te torna estranhamente frágil, apesar de toda a tua competência. Porque se o teu valor depende de não falhares, então qualquer falha, por pequena que seja, é uma ameaça ao teu próprio valor. Não te podes dar ao luxo de um erro, porque um erro, no teu mundo interior, não é um detalhe, é uma rachadela em tudo o que te sustenta. Vives, por isso, sempre a um erro de distância de deixares de valer, e essa fragilidade, escondida atrás da tua aparente solidez, explica a tensão permanente com que vives.
 
 Uma pessoa cujo valor não dependesse da perfeição poderia errar e continuar inteira. Tu não te dás esse direito, porque construíste o teu valor inteiro sobre uma coisa que tens de provar, sem falha, vez após vez, sem fim. E isso é um lugar terrível para se viver, porque não há descanso possível: o valor que tens de provar a cada instante nunca fica provado de vez, e por isso a prova recomeça todos os dias, sem nunca acabar.
+
+Há um sinal pequeno onde esta fragilidade se denuncia, e talvez o reconheças. É a forma como recebes um elogio. Quando alguém te diz que fizeste um trabalho impecável, não sentes alegria limpa. Sentes uma pontada de medo, porque agora há mais uma pessoa que espera de ti a perfeição, e mais uma altura de onde podes cair. O elogio, que devia aquecer, aperta, porque o lês como uma encomenda do próximo acerto. E reparas, também, em como não consegues ouvir um louvor sem o desmontar por dentro, sem pensar que se eles soubessem o esforço que aquilo custou, ou a falha que quase escapou, não te admirariam assim. Vives a receber aplausos por uma fachada, e sozinha com a certeza de que a fachada, um dia, vai rachar.
+
+E há outra cara desta mesma crença, que é o que fazes com a falha dos outros. Porque quem se proíbe de errar tende, sem querer, a vigiar o erro alheio com a mesma lupa. Reparas no engano do colega, na falha de quem trabalha contigo, no descuido de quem amas, não por maldade, mas porque o teu olho foi treinado, desde cedo, a procurar a fenda por onde o perigo entra. E essa atenção, que parece rigor, é o mesmo terror virado para fora. Quando aprenderes a tratar a tua falha com brandura, vais reparar que também o olhar com que cercas a falha dos outros, devagar, se suaviza, e que as pessoas à tua volta começam, enfim, a respirar.
 
 ## 5. Talvez precises de mais do que compreender
 
@@ -165,11 +159,11 @@ Uma resposta de trauma é outra coisa. Não vive só na cabeça, vive no corpo. 
 
 Quero nomear, sem rodeios, o que pode estar por baixo do teu pânico de falhar. Se cresceste com perigo real, com violência, com imprevisibilidade, com castigo duro, com humilhação, então a tua perfeição não é só um traço. É uma resposta de sobrevivência a um trauma. E o pânico que sentes perante a falha não é exagero. É o teu sistema nervoso a reviver um perigo antigo, gravado fundo.
 
-E quero dizer-te uma coisa com toda a firmeza e todo o carinho. Isto não é falha tua, e não se resolve só a esforço, nem só a compreender. Se o teu terror de errar é uma resposta de trauma, mereces mais do que este livro. Mereces o apoio de um profissional, de um psicólogo, de um terapeuta, alguém preparado para trabalhar não só a tua compreensão, mas o teu corpo, o teu sistema nervoso, a memória de perigo que carregas.
+E quero dizer-te isto com toda a firmeza, e com toda a ternura, porque é precisamente a ti, que não suportas falhar, que custa mais ouvi-lo. Isto não é falha tua, e não se resolve só com mais esforço, nem só a compreender. Se o teu terror de errar é uma resposta de trauma, mereces mais do que este livro. Mereces o apoio de um profissional, de um psicólogo, de um terapeuta, alguém preparado para trabalhar não só a tua compreensão, mas o teu corpo, o teu sistema nervoso, a memória de perigo que carregas.
 
 Procurar essa ajuda não é admitir que falhaste. É precisamente o contrário. É o ato mais lúcido e mais corajoso que podes ter, o de cuidares de uma ferida que merece ser cuidada por mãos preparadas. Tu, que nunca podes falhar, talvez precises, mais do que ninguém, de aprender que pedir ajuda não é uma falha, é a coisa mais sábia que há.
 
-Se reconheces, na tua história, perigo real, este é o capítulo de que quero que te lembres. Não o saltes. A compreensão deste livro acompanha-te. Mas há feridas que pedem mais, e a tua, talvez, seja uma delas. E mereces todo o cuidado que ela pede.
+Se reconheces, na tua história, perigo real, este é o capítulo de que quero que te lembres. Não o saltes, tu que tens o hábito de saltar para o próximo nível, para a próxima exigência. A compreensão deste livro acompanha-te. Mas há feridas que pedem mais do que uma leitura bem feita, e o terror de errar, quando vem de uma casa perigosa, talvez seja uma delas. Não a trates como mais uma tarefa a executar na perfeição. Trata-a como uma ferida que merece mãos que saibam segurá-la.
 
 Quero que vejas como a perfeição te afasta das pessoas, ainda que pareça o contrário. De fora, a tua impecabilidade impõe respeito, admiração. Mas cria distância. Porque quem está sempre perfeito é difícil de alcançar, de conhecer, de amar de perto. Não mostra a fragilidade, o erro, a dúvida, a humanidade que aproxima. E as pessoas, perante uma fachada sem fissuras, mantêm-se de fora, porque não há por onde entrar.
 
@@ -201,13 +195,9 @@ Lê isto devagar, porque o teu corpo ainda não acredita. Para ti, errar e perig
 
 Quero ser honesto. Esta separação não se faz só por te convenceres dela. Se a tua resposta é de trauma, o teu corpo vai continuar a soar o alarme perante a falha, por mais que a tua cabeça saiba que não há perigo. Por isso este caminho, muitas vezes, faz-se com ajuda, com alguém que te acompanhe a ensinar o teu sistema nervoso, devagar, que o perigo passou. Não é fraqueza precisar disso. É o que esta ferida pede.
 
-Mas há coisas que podes começar a fazer, com cuidado. Podes começar por permitir-te erros pequenos, de propósito. Coisas sem consequência real, em que deixas, conscientemente, algo imperfeito. E observar o que acontece, por fora e por dentro. Por fora, quase de certeza, nada de terrível. Por dentro, o alarme, o terror, a vontade de corrigir. E ficar com isso, sem corrigir, deixando o teu corpo descobrir, devagar, que errou e continuou seguro.
+Mas há um caminho, e ele não passa por mais um esforço de vontade, passa por dar ao teu corpo experiências novas que contradigam, devagar, a velha lição. O teu sistema nervoso aprendeu que falha igual a perigo numa casa concreta, em situações concretas. Vai desaprender da mesma maneira: em situações concretas, pequenas, em que falha deixa de trazer castigo. Não se argumenta com o corpo. Mostra-se-lhe.
 
-Cada vez que erras, em pequeno, e nada de catastrófico acontece, dás ao teu sistema uma prova nova. Que falhar, hoje, não traz o perigo de então. E é com provas, repetidas, no corpo, e não só com ideias, na cabeça, que a armadura, devagar, se afrouxa.
-
-O despertar, quando vem, é uma sensação física de alívio. É o dia em que erras, e em vez do pânico de sempre, sentes, por um instante, que está bem. Que não aconteceu nada de terrível. Que falhaste, e continuas aqui, segura, inteira. É um instante pequeno, mas é enorme, porque é o teu corpo a aprender, pela primeira vez, que o perigo passou.
-
-Quero que vejas o que se abre quando errar deixa de ser perigo. Abre-se a possibilidade de arriscar, de tentar, de viver, sem o terror de falhar. Abre-se a possibilidade de seres humana, de te mostrares falível, de seres amada não pela tua perfeição, mas por quem és. E abre-se, sobretudo, o descanso. O descanso de não teres de ser impecável a cada instante. De poderes baixar a guarda. De viveres, enfim, sem a vigilância sem fim de quem não pode falhar.
+E quando este caminho começa a abrir, o primeiro sinal não é um pensamento, é uma sensação física de alívio. É o dia em que deixas escapar um erro, e em vez do aperto de sempre, sentes, por um instante, os ombros descerem, o ar entrar mais fundo, uma estranha calma onde costumava estar o pânico. Não aconteceu nada de terrível. Falhaste, e continuas aqui, inteira, segura. É um instante curto, mas é enorme, porque é o teu corpo a registar, talvez pela primeira vez na vida, que desta vez a falha não trouxe a tempestade.
 
 Quero mostrar-te como se desfaz, na prática, a ligação entre errar e perigo, porque ela está gravada no corpo, e o corpo aprende devagar, com provas.
 
@@ -225,7 +215,7 @@ Repara nesta assimetria. Se uma amiga tua errasse, o que lhe dirias? Quase de ce
 
 E permitir-te ser humana é deixares de seres, para ti mesma, o perigo que outros foram. Porque interiorizaste a dureza, o juízo, a punição perante a falha, e aplica-los a ti, hoje, sem necessidade. Não há ninguém a castigar-te. És tu. E parar de te castigar, de seres a tua própria carcereira, é talvez o ato mais libertador desta travessia: deixares de continuar, contra ti, a guerra que outros começaram.
 
-Vai custar-te, porque a velha voz, a que pune, está gravada fundo, e vai aparecer a cada erro, com a sua dureza de sempre. O trabalho não é silenciá-la de uma vez, é deixar de lhe obedecer. Ouvi-la dizer "és um desastre", e responder-lhe, devagar, "errei, sou humana, e continuo a valer". E cada vez que escolhes a brandura em vez do castigo, enfraqueces a voz antiga, e fortaleces uma nova, mais tua, mais terna, que talvez nunca tenhas tido.
+Vai custar-te, porque a velha voz, a que aponta a falha e pune, está gravada fundo, e há de saltar a cada erro com a dureza de sempre, a dizer-te que não devias ter falhado, que agora vão ver, que isto prova o que sempre temeste. Não esperes calá-la de uma vez, nem isso seria realista, era só mais uma perfeição a exigir-te. Espera, sim, deixar de lhe obedecer. Ouvi-la dizer "és um desastre, vais ser apanhada", e responder-lhe, devagar, "errei, sou humana, e continuo a valer, e ninguém vem aí". E cada vez que escolhes esta brandura em vez do castigo, a voz antiga enfraquece um pouco, e cresce uma outra, mais tua, mais terna, a voz que ninguém te deu na casa onde aprendeste a não falhar.
 
 ## 7. Permitir-me ser humana
 
@@ -233,7 +223,7 @@ Há um verbo para esta travessia. Permitir.
 
 Permitir-te errar. Permitir-te ser humana. Permitir-te a falibilidade que todos têm, e que tu te proibiste em nome da segurança.
 
-E quero mostrar-te o que isto significa, com cuidado.
+Repara que não digo esforçar-te, nem conseguir, nem corrigir. Digo permitir, que é o oposto do verbo que governou a tua vida. Toda ela foi feita de garantir, controlar, prevenir, não deixar passar. Permitir é abrir a mão, e a ti, que aprendeste que abrir a mão era deixar entrar o perigo, este é o gesto mais difícil de todos. Por isso quero mostrar-te, devagar, o que ele significa.
 
 Permitir-te ser humana é parares de te exigir uma perfeição sobre-humana. É deixares de te punir, com uma dureza imensa, por cada falha. É tratares os teus erros como os erros de qualquer pessoa, com compreensão, e não com o terror e o castigo de quem vive sob ameaça.
 
@@ -263,9 +253,9 @@ E quero que percebas que poisar a armadura não é desistir da excelência, nem 
 
 ## 8. A travessia
 
-Escrevi este livro por uma convicção simples. Compreender muda. Mas, neste caso, compreender pode não chegar, e dizer-to é a forma mais honesta de te cuidar.
+Escrevi este livro por uma convicção simples. Entender de onde vem o terror de errar já alivia. Mas, no caso de quem se fez impecável para sobreviver, entender pode não bastar, e dizer-te isto, em vez de te prometer uma cura fácil, é a forma mais honrada de cuidar de ti.
 
-Não muda tudo de uma vez. Não te faz, amanhã, poisar uma armadura de uma vida inteira. Mas muda o suficiente para deixares de te julgar por uma perfeição impossível, e para começares a entender que o teu pânico de falhar não é um defeito, é uma ferida.
+Compreender não tira a armadura toda de uma vez. Não te faz, amanhã de manhã, entregar algo imperfeito sem o coração disparar, nem deixar uma gralha sem a ânsia de a corrigir. Mas muda o suficiente para deixares de te julgar por não atingires uma perfeição que ninguém atinge, e para começares a olhar o teu pânico de falhar não como um defeito de feitio, mas como uma ferida que pede cuidado.
 
 Agora sabes que não podes falhar, e que isso não é vaidade, é uma armadura.
 
@@ -291,13 +281,13 @@ E quero que saibas que não tens de fazer esta travessia sozinha, nem de a fazer
 
 Por fim, quero dizer-te uma coisa simples, para fechar. Tu não estavas errada. A menina que se fez impecável para estar a salvo fez o que tinha de fazer, e fê-lo bem. Não há nada a corrigir nela, nada a censurar. Há só uma coisa a dizer-lhe, devagar, vez após vez, até o corpo acreditar: já passou. Já estás a salvo. Podes poisar isso agora.
 
-E se houver um único pensamento que leves destas páginas, que seja este. Não tens de merecer o descanso sendo perfeita primeiro. O descanso não é um prémio que se ganha ao fim de uma vida impecável. É um direito que tens agora, hoje, com todos os erros que ainda vais cometer, simplesmente por seres humana, e por já não estares na guerra onde falhar custava caro.
+E se levares uma só frase fechada no peito ao saíres destas páginas, leva esta. Não tens de merecer o descanso sendo perfeita primeiro. O descanso não é um prémio que se ganha ao fim de uma vida impecável. É um direito que tens agora, hoje, com todos os erros que ainda vais cometer, simplesmente por seres humana, e por já não estares na guerra onde falhar custava caro.
 
-Sabes, no fundo, a frase que segura este livro. Posso errar e continuar segura.
+E já reconheces, lá no fundo, a frase que sustenta tudo o que aqui te disse. Posso errar e continuar segura.
 
-Permitir foi o primeiro passo. Mas há um segundo, e esse não se faz só a ler. Faz-se a permitires-te, devagar, a falha. E, muitas vezes, faz-se com ajuda, com alguém preparado para acompanhar o teu corpo a aprender que o perigo passou. Porque uma ferida de sobrevivência merece mãos que saibam segurá-la, e procurá-las não é falhares. É cuidares, enfim, de quem aprendeu a nunca poder falhar.
+Permitir-te lê-la foi o primeiro passo. Há um segundo, e esse não cabe num livro. Faz-se na vida, a permitires-te, devagar, a falha que sempre te proibiste. E, muitas vezes, faz-se com ajuda, com alguém preparado para acompanhar o teu corpo a aprender que o perigo passou. Porque uma ferida de sobrevivência merece mãos que saibam segurá-la, e procurá-las não é falhares. É cuidares, enfim, de quem aprendeu a nunca poder falhar.
 
-E antes de fechares estas páginas, peço-te uma coisa só. Difícil, para ti.
+E antes de fechares o livro, deixo-te um único pedido. Sei que, para ti, é dos mais difíceis que há.
 
 Esta semana, deixa uma coisa imperfeita, de propósito. Pequena, sem consequência real. Um erro que normalmente corrigirias, um detalhe que deixarias por aperfeiçoar. E não o corrijas. E observa o teu corpo, o alarme que sobe, o terror, a vontade de consertar. E fica com isso, sem consertar. Porque é nesse permitir, suportado apesar do terror, que o teu corpo começa, devagar, a aprender que errou e continuou seguro, e que a guerra, afinal, já acabou.
 
