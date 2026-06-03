@@ -29,7 +29,7 @@ Notice this sentence, which you may have thought yourself. "If it doesn't hurt, 
 
 I want to tell you right now, before anything else, that this isn't you being dramatic, or exaggerating, or addicted to suffering by nature. People may tell you that you like to complicate things, that you go looking for drama, that you don't know how to be at ease. That isn't it. It's that you learned, very early, that love and intensity were the same thing. And today you chase intensity, convinced that you're chasing love, when they're different things.
 
-This book carries a special care, and I want to tell you that right away. Because the confusion between intensity and love can take you to dangerous places. And there is a difference, one we will have to draw with total clarity, between an intense relationship and a relationship that harms you. The first, this book accompanies. The second, this book tells you to protect yourself from. And that is why, more than in any other, I'm going to be very direct with you about the border, because here clarity is not only understanding, it is safety.
+This book carries a special care, and I want to tell you that right away. Because the confusion between intensity and love can take you to dangerous places. And there is a difference, one we will have to draw with total clarity, between an intense relationship and a relationship that harms you. Through the first, an intense love, this book sails beside you. The second, the one that harms you, this book tells you to protect yourself from. And that is why, more than in any other, I'm going to be very direct with you about the border, because here clarity is not only understanding, it is safety.
 
 Let me give you the direction in advance. You can tell love apart from intensity. And there is an even greater, and more important, difference between intensity and harm. Peace, contrary to what you learned, is not a lack of love. It is the ground where love can, finally, settle.
 
@@ -51,7 +51,7 @@ There's also a small, everyday sign in which this shows. Notice what you feel wh
 
 ## 2. Love equals intensity
 
-Go back. Further back than any boyfriend.
+Go back. Back past every storm with a man's name on it.
 
 You learned what love is in your first home. And if today you confuse love with intensity, it's likely that your first home was intense.
 
@@ -67,7 +67,7 @@ Her body learns that love is this. This mixture of affection and anguish. This a
 
 And it learns more. It learns that calm is suspect. Because in her childhood calm was not peace, it was the silence before the storm, the tense moment waiting for the next tremor. Calm, for her, was never rest. It was a threat lying in wait.
 
-And that child grows up. But her body stays calibrated for intensity. She seeks, in adult love, the climate of her origin, because that's the one she recognizes. And when she finds it, in turbulence, in drama, in highs and lows, she feels, without knowing why, at home.
+And that child grows into a woman. But her body stays tuned to the storm, calibrated for intensity. She seeks, in adult love, the climate of her origin, because that's the one she recognizes. And when she finds it, in turbulence, in drama, in highs and lows, she feels, without knowing why, at home.
 
 And when she finds the opposite, a calm love, stable, secure, her body finds it strange. The intensity it grew used to is missing. The calm, instead of calming her, leaves her restless, waiting for the storm that doesn't come. And she concludes that it isn't love, because it doesn't look like the love she knew.
 
@@ -79,13 +79,13 @@ I want to tell you one more thing about guilt, because it tends to show up here.
 
 ## 3. Calm tastes like boredom
 
-There's something you need to see. For you, calm isn't comfortable. It's almost intolerable.
+There's a current under all this you need to see. For you, calm isn't comfortable. It's almost intolerable.
 
 When a relationship is peaceful, without drama, without jolts, you feel a restlessness. A boredom. A sense that something is wrong, that life is missing, that the thing is dying.
 
 And sometimes, without realizing it, you do something to rekindle the intensity. You provoke a fight. You create jealousy. You call the relationship into question. You generate drama. Not out of malice, but because your system needs the intensity to feel alive, and the calm leaves it in withdrawal.
 
-Notice this, because it's important. The boredom you feel in calm is not a lack of love. It's your nervous system coming down from a state of alert it was used to, and feeling that coming down as emptiness.
+Notice this, because everything turns on it. The boredom you feel in calm is not a lack of love. It's your nervous system coming down from a state of alert it was used to, and feeling that coming down as emptiness.
 
 Someone who has always lived in high tension feels strange in low tension. Not because low tension is bad, but because it's unknown. The body reads what it knows as normal, and what it doesn't know as wrong. And you don't know peace. So peace seems to you like a mistake.
 
@@ -107,7 +107,7 @@ And I want you to notice the contrast with the bad phases, because it's revealin
 
 ## 4. Who am I in peace
 
-I'm going to leave a question here. Alone. Don't run from it.
+I'm going to set a question down in the still water here. Alone. Don't run from it.
 
 Who are you in peace?
 
@@ -127,13 +127,13 @@ But there's a deep confusion here. You confused intensity with life. And they're
 
 There's an even more uncomfortable question here, and I want to leave it too. If a difficult love occupies you so much, if it fills your thoughts, your conversations with friends, your sleepless nights, notice what that love is covering over. Very often, the intensity of a relationship serves to keep you from looking at the rest: at what your life lacks, at the dreams you postponed, at an emptiness of your own, prior to any man, that hurts more than any fight. Drama is convenient, deep down, because it gives you a pain with a name, a pain out there, in a "him," and spares you the nameless pain that lives in here. So part of learning to tolerate calm is learning to find, in its silence, that other pain, and to treat it, instead of smothering it with the storm of the next love.
 
-Don't answer the question of who you are in peace just yet. It builds itself, slowly, as you learn to tolerate the quiet without filling it with drama. But leave it open. Because that's where the door is. The day you know how to exist in calm, without feeling it as emptiness, you stop needing the storm to feel alive. And then, only then, can you let peace be love, instead of confusing it with its absence.
+Don't answer the question of who you are in peace just yet. It builds itself, slowly, as you learn to tolerate the quiet without filling it with drama. But leave it open. Because that quiet question is the mouth of the harbor. The day you know how to exist in calm, without feeling it as emptiness, you stop needing the storm to feel alive. And then, only then, can you let peace be love, instead of confusing it with its absence.
 
 I want you to see what the roller coaster costs you, because it's high and you almost never count it.
 
 It costs you quiet. Because a life built on intensity is a life without rest. You're always on the high or in the low, in euphoria or in despair, in reconciliation or in rupture. Never at peace. And your nervous system, always in high tension, wears out, because the human body wasn't made to live permanently on a roller coaster.
 
-It costs you your health. Because living in high activation, in constant alert, in endless drama, has real consequences in the body, in sleep, in anxiety. The roller coaster you confuse with passion is, to your organism, a chronic stress, and chronic stress makes you ill.
+It costs you your health, the way a body battered by waves for years finally wears thin. Because living in high activation, in constant alert, in endless drama, has real consequences in the body, in sleep, in anxiety. The roller coaster you confuse with passion is, to your organism, a chronic stress, and chronic stress makes you ill.
 
 It costs you good loves. Because to every stable, secure man, who would do you good, you say lukewarm, and you discard him. And to every turbulent man, who harms you, you say passion, and you cling. And so you choose, time after time, against yourself, fleeing what would heal you and running toward what wounds you.
 
@@ -143,7 +143,7 @@ And it costs you a whole life of suffering that you confuse with depth. You thin
 
 ## 5. Intensity, love and harm
 
-I have to stop the book here. And this is the most important chapter of all. Read it slowly, and take it seriously, because it may be what matters most in this whole book.
+I have to drop anchor here and hold the book still. And this is the most important chapter of all. Read it slowly, and take it seriously, because it may be what matters most in this whole book.
 
 There are three things you need to learn to separate. Intensity. Love. And harm.
 
@@ -209,7 +209,7 @@ And I want to leave you an image of what the calm of a good love is, so that you
 
 ## 7. Telling apart
 
-There's a verb for this crossing. Telling apart.
+There's one verb that steers this whole crossing from storm to harbor. Telling apart.
 
 Telling love apart from intensity. And, above all, telling love apart from harm.
 
@@ -245,7 +245,7 @@ And be wary, on the other hand, of what sets you alight at once, with force, wit
 
 I wrote this book out of a simple conviction. Understanding changes things. And, in this case, understanding can also protect.
 
-It doesn't change everything at once. It won't make you, tomorrow, fall in love with calm. But it changes enough for you to stop trusting blindly in an attraction that has led you toward the storm.
+It doesn't calm the whole sea at once. It won't make you, tomorrow, fall in love with calm. But it changes enough for you to stop trusting blindly in an attraction that has led you toward the storm.
 
 Now you know that you confuse intensity with love, and adrenaline with passion.
 
@@ -267,7 +267,7 @@ And I want you to see that choosing peace is not resigning yourself to a love wi
 
 And there's a joy waiting, on the other side, that you may not even know how to name. The joy of loving without fear. Of not living on alert. Of sleeping peacefully beside someone, without waiting for the next storm. Of a love that doesn't pull the ground out from under you, but gives you one. That joy doesn't have the rapture of drama, and so, at first, you'll find it little. But it's the only one that can be lived every day, for years, without destroying you. And it is, deep down, the one you always wanted, beneath all the storm you learned to pursue.
 
-I want to leave you with an image.
+I want to leave you with one last picture of sea and shore.
 
 You grew up on the high sea, in a storm, and you learned to call that life. The huge waves, the boat heeling over, the danger, the adrenaline. And today, when someone takes you to a calm harbor, to serene waters, you feel that the sea is missing, and you want to go back to the storm, because that's where you feel alive.
 
@@ -281,13 +281,13 @@ You know, deep down, the sentence that holds this book from beginning to end. I 
 
 Telling apart was the first step. But there's a second, and that one isn't crossed only by reading. It's done by tolerating, slowly, the calm, without filling it with drama. By choosing peace, even when the old system calls for the storm. And, if there's someone at your side, someone who does you good, by learning, together, that love can be, at last, a safe place.
 
-That is the work of SyncHim. The book names. SyncHim crosses. Each in her own time.
+That is the work of SyncHim. The book names. SyncHim carries you across the water. Each woman reaches harbor at her own pace.
 
 And I want you to carry one last thing with you, about who sees you. If there are those who learn to love by watching you, daughters above all, notice what you show them. If they see you live in the storm, return to whoever wounds you, confuse drama with passion, they learn that love is like this, that if it doesn't hurt it isn't real. And it's likely they'll repeat it, and that they'll seek, too, the roller coaster, thinking they're seeking love. The calibration you received from those who raised you, that is how it passes from generation to generation, with no one choosing it, in the climate of the homes where one grows up.
 
 The most liberating thing you can do for whoever sees you is not to give them one more example of turbulent passion. It's to show them a woman who chose peace, who learned that love can be a safe place, who tells intensity apart from care. Sometimes a woman learns to tell apart, at last, not only for herself, but so as not to teach whoever she loves to confuse, as she confused, pain with love. And there's a rare dignity in this: that it's you who breaks, in your line, the language of chaos, so that whoever comes after grows up speaking, from the start, the language of safety.
 
-And before you close these pages, I ask you one thing only. And this time it isn't just an exercise. It's a plea from the bottom of my heart.
+And before this book reaches its last shore and you close it, I ask you one thing only. And this time it isn't just an exercise. It's a plea from the bottom of my heart.
 
 Look at your relationship, or at your relationships, and ask yourself the question that matters more than all of them. Does this do me good, or does it do me ill? And if the honest answer is that it does you ill, that it hurts you, that it diminishes you, that it frightens you, then this book has only one thing to say to you, and it says it with all its love and all its firmness. Understanding why it holds you is not a reason to stay. Seek help. Protect yourself. Because you deserve a love that is home, and not storm. And no intensity, none, in the world, is worth your safety.
 
