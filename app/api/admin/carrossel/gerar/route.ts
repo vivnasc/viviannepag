@@ -65,6 +65,7 @@ export async function POST(req: Request) {
 REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
+- CLAREZA ACIMA DE TUDO: cada carrossel diz UMA coisa concreta que qualquer pessoa entende a primeira leitura. Fala de situacoes reais do dia a dia (a culpa ao deitar, o sim que devia ser nao, a chamada que nao fizeste). Usa a imagem poetica para ILUMINAR a mensagem, nunca para a esconder. Proibido: linguagem hermetica, abstracao a mais, frases que so a autora entende. Se uma frase precisa de ser decifrada, reescreve-a simples.
 - ACENTUACAO OBRIGATORIA: escreve em portugues europeu com TODOS os acentos correctos e completos (á, à, ã, â, ç, é, ê, í, ó, ô, õ, ú). A palavra-capa tambem acentuada (ex.: "GESTAÇÃO", nunca "GESTACAO"; "FÉ", nunca "FE"). Texto sem acentos e ERRADO.
 - LINKS (expandir nao e cortar): os produtos da LOJA apontam para viviannedossantos.com/loja/<slug>; as OFERTAS ANTERIORES (LUMINA, Loranne, Sete Ecos, livro, Escola) mantem os seus links proprios da lista. Usa o ecossistema TODO. Nunca inventes links — usa sempre os exactos das listas.
 

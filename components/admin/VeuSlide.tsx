@@ -21,6 +21,17 @@ const C = {
 const GOLD_HARD = (a: number) => `rgba(201, 169, 97, ${a})`;
 const TERRA_HARD = (a: number) => `rgba(184, 92, 56, ${a})`;
 
+// Paleta por dia/veu (1-7) — spec: rosa, lavanda, menta, salvia, ambar, ceu, aurora
+const HUES = [
+  { hue: '#f5b8a8', deep: '#e89684' }, // 1 rosa
+  { hue: '#d8c4e8', deep: '#b29bce' }, // 2 lavanda
+  { hue: '#b8dcc8', deep: '#82bea4' }, // 3 menta
+  { hue: '#cde0b6', deep: '#9fbc7c' }, // 4 salvia
+  { hue: '#f0c890', deep: '#d8a868' }, // 5 ambar
+  { hue: '#bedaee', deep: '#8cb4d0' }, // 6 ceu
+  { hue: '#e6cde8', deep: '#c098c8' }, // 7 aurora
+];
+
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
@@ -80,6 +91,8 @@ export function VeuSlide({
   const isCapa = slide.tipo === 'capa';
   const isCta = slide.tipo === 'cta';
   const escuro = isCapa || isCta;
+  const hue = numeroDia ? HUES[(numeroDia - 1) % 7] : undefined;
+  const ornamento = hue?.deep ?? C.gold; // accent tingido pela cor do dia
 
   // escala da folha 1080 para caber no container
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -142,6 +155,7 @@ export function VeuSlide({
         )}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: escuro ? 'screen' : 'overlay', opacity: escuro ? 0.18 : 0.45, zIndex: 0, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, background: vinheta, zIndex: 0, pointerEvents: 'none' }} />
+        {hue && <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 75% 55% at 50% 32%, ${hue.hue}${escuro ? '2e' : '40'} 0%, transparent 66%)`, mixBlendMode: escuro ? 'screen' : 'multiply', opacity: escuro ? 0.55 : 0.4, zIndex: 0, pointerEvents: 'none' }} />}
         {glow !== 'none' && <div style={{ position: 'absolute', inset: 0, background: glow, zIndex: 1, pointerEvents: 'none' }} />}
 
         {isCapa && numeroDia != null && (
@@ -161,7 +175,7 @@ export function VeuSlide({
             </div>
             <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 34 }}>
               <div ref={tituloRef} style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 180, lineHeight: 0.95, letterSpacing: '-0.025em', whiteSpace: 'nowrap', color: C.ivory, textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.6)' : 'none' }}>{palavra ?? slide.texto}</div>
-              <div style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, letterSpacing: '1.2em', color: C.gold, opacity: 0.8, paddingLeft: '1.2em' }}>◇ ◇ ◇</div>
+              <div style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, letterSpacing: '1.2em', color: ornamento, opacity: 0.85, paddingLeft: '1.2em' }}>◇ ◇ ◇</div>
               {subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 300, fontSize: 38, lineHeight: 1.4, color: C.ivory, opacity: 0.82, maxWidth: 780 }}>{subtitulo}</p>}
               {slide.destaque && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, marginTop: 30, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>{slide.destaque}</p>}
             </div>
@@ -193,7 +207,7 @@ export function VeuSlide({
               )}
             </div>
             <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-              <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 24, letterSpacing: '0.8em', color: C.terracotta, opacity: 0.6, paddingLeft: '0.8em' }}>◇ ◇ ◇</span>
+              <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 24, letterSpacing: '0.8em', color: ornamento, opacity: 0.7, paddingLeft: '0.8em' }}>◇ ◇ ◇</span>
               {palavra && <span style={{ fontFamily: FONT_SANS, fontSize: 16, letterSpacing: '0.6em', textTransform: 'lowercase', color: 'rgba(26,22,20,0.35)' }}>{palavra.toLowerCase()}</span>}
             </div>
           </>
