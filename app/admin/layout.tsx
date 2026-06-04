@@ -21,6 +21,14 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: 'admin · Vivianne dos Santos',
   robots: { index: false, follow: false },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/favicon-180.png',
+  },
 };
 
 const NAV = [
