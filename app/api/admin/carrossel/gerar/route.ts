@@ -5,6 +5,7 @@ import { semanaSeed } from '@/lib/carrossel/calendario';
 import { getCatalogoProdutos, produtosRelevantes, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
+import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -64,6 +65,7 @@ REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
 - ACENTUACAO OBRIGATORIA: escreve em portugues europeu com TODOS os acentos correctos e completos (á, à, ã, â, ç, é, ê, í, ó, ô, õ, ú). A palavra-capa tambem acentuada (ex.: "GESTAÇÃO", nunca "GESTACAO"; "FÉ", nunca "FE"). Texto sem acentos e ERRADO.
+- URLs e dominios SEMPRE em viviannedossantos.com (ex.: viviannedossantos.com/loja/...). NUNCA uses seteveus.space, seteecos.com nem qualquer outro dominio.
 
 ${ecossistema}
 
@@ -155,11 +157,14 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
   }
 
   // Normaliza: garante mundo, dia sequencial, defaults.
+  const semNum = body.semana ?? 1;
   const dias = (Array.isArray(parsed.dias) ? parsed.dias : []).map((d, i) => {
     const dia = d as Record<string, unknown>;
+    const diaNum = typeof dia.dia === 'number' ? dia.dia : i + 1;
+    const faixa = faixaParaCarrossel(semNum, diaNum, estacao);
     return {
       ...dia,
-      dia: typeof dia.dia === 'number' ? dia.dia : i + 1,
+      dia: diaNum,
       diaSemana: typeof dia.diaSemana === 'string' ? dia.diaSemana : DIAS_SEMANA[i % 7],
       palavra: typeof dia.palavra === 'string' ? (dia.palavra as string).toUpperCase() : undefined,
       subtitulo: typeof dia.subtitulo === 'string' ? dia.subtitulo : undefined,
@@ -167,7 +172,8 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
       plataforma: dia.plataforma ?? 'ambas',
       horario: dia.horario ?? '11:30',
       hashtags: Array.isArray(dia.hashtags) ? dia.hashtags : [],
-      musicaSugerida: dia.musicaSugerida ?? musica,
+      faixa: { titulo: faixa.titulo, url: faixa.url ?? '' },
+      musicaSugerida: `Ancient Ground · ${faixa.titulo}`,
     };
   });
 

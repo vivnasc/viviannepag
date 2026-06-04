@@ -9,7 +9,7 @@ import { getColecao, type ColecaoId } from '@/lib/colecoes';
 import { VeuSlide } from '@/components/admin/VeuSlide';
 import { Btn, Card, Pill } from '@/components/admin/EstudioKit';
 import { gerarCaptionInstagram, gerarMetricoolCSV } from '@/lib/estudio-export';
-import { TIPO_LABELS, PALETAS, type ConteudoDia, type Mundo, type Slide } from '@/lib/estudio-conteudo';
+import { TIPO_LABELS, PALETAS, type ConteudoDia, type Mundo } from '@/lib/estudio-conteudo';
 
 // Fontes do spec dos 7 Veus
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -18,7 +18,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
 type Jornada = { entrada?: string; aprofundar?: string; complemento?: string; fio?: string };
-type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string };
+type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string; faixa?: { titulo: string; url?: string } };
 type Coleccao = {
   id: string;
   slug: string;
@@ -42,7 +42,27 @@ export default function CarrosselPage() {
   const [gerando, setGerando] = useState<number | null>(null);
   const [sel, setSel] = useState<Coleccao | null>(null);
   const [erro, setErro] = useState<string | null>(null);
-  const [zoom, setZoom] = useState<{ slide: Slide; palavra?: string; subtitulo?: string; mundo: Mundo; numeroDia?: number; slideIndex?: number; slideTotal?: number } | null>(null);
+  const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
+
+  const zoomSlides = zoom?.dia.slides ?? [];
+  const navZoom = useCallback((delta: number) => {
+    setZoom((z) => {
+      if (!z) return z;
+      const total = z.dia.slides?.length ?? 0;
+      if (!total) return z;
+      return { ...z, index: (z.index + delta + total) % total };
+    });
+  }, []);
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') navZoom(1);
+      else if (e.key === 'ArrowLeft') navZoom(-1);
+      else if (e.key === 'Escape') setZoom(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [zoom, navZoom]);
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/carrossel/list');
@@ -77,15 +97,33 @@ export default function CarrosselPage() {
     const jornada = sel.theme?.jornada;
     return (
       <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${FONTS}`}>
-        {zoom && (
+        {zoom && zoomSlides[zoom.index] && (
           <div
             onClick={() => setZoom(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 cursor-zoom-out"
+            className="fixed inset-0 z-50 flex items-center justify-center gap-3 sm:gap-6 bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out"
           >
-            <div className="w-full" style={{ maxWidth: 'min(92vw, 440px)' }} onClick={(e) => e.stopPropagation()}>
-              <VeuSlide slide={zoom.slide} mundo={zoom.mundo} palavra={zoom.palavra} subtitulo={zoom.subtitulo} numeroDia={zoom.numeroDia} slideIndex={zoom.slideIndex} slideTotal={zoom.slideTotal} />
-              <p className="text-center text-[0.65rem] opacity-60 mt-3">toca fora para fechar</p>
+            <button
+              onClick={(e) => { e.stopPropagation(); navZoom(-1); }}
+              className="shrink-0 w-11 h-11 rounded-full border border-white/20 text-[#F2E8DC] text-xl flex items-center justify-center hover:bg-white/10"
+              aria-label="anterior"
+            >‹</button>
+            <div className="w-full" style={{ maxWidth: 'min(80vw, 460px)' }} onClick={(e) => e.stopPropagation()}>
+              <VeuSlide
+                slide={zoomSlides[zoom.index]}
+                mundo={zoom.dia.mundo}
+                palavra={zoom.dia.palavra}
+                subtitulo={zoom.dia.subtitulo}
+                numeroDia={zoom.dia.dia}
+                slideIndex={zoom.index + 1}
+                slideTotal={zoomSlides.length}
+              />
+              <p className="text-center text-[0.7rem] opacity-70 mt-3">{zoom.index + 1} / {zoomSlides.length} · {zoom.dia.diaSemana ?? `dia ${zoom.dia.dia}`} · toca fora para fechar</p>
             </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); navZoom(1); }}
+              className="shrink-0 w-11 h-11 rounded-full border border-white/20 text-[#F2E8DC] text-xl flex items-center justify-center hover:bg-white/10"
+              aria-label="seguinte"
+            >›</button>
           </div>
         )}
         <div className="max-w-5xl mx-auto">
@@ -119,7 +157,8 @@ export default function CarrosselPage() {
                     {dia.palavra && <span className="font-serif tracking-[0.12em]" style={{ color: PALETAS[dia.mundo].destaque }}>{dia.palavra}</span>}
                     {dia.produtoRelacionado && <Pill variant="feito">→ {dia.produtoRelacionado}</Pill>}
                   </div>
-                  {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-3">{dia.subtitulo}</p>}
+                  {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-1">{dia.subtitulo}</p>}
+                  {dia.faixa?.titulo && <p className="text-[0.68rem] opacity-45 mb-3">♪ Ancient Ground · {dia.faixa.titulo}{dia.faixa.url ? '' : ' (sem url)'}</p>}
 
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
@@ -127,7 +166,7 @@ export default function CarrosselPage() {
                         <button
                           key={i}
                           type="button"
-                          onClick={() => setZoom({ slide: s, palavra: dia.palavra, subtitulo: dia.subtitulo, mundo: dia.mundo, numeroDia: dia.dia, slideIndex: i + 1, slideTotal: dia.slides!.length })}
+                          onClick={() => setZoom({ dia, index: i })}
                           className="block w-full cursor-zoom-in transition-transform hover:scale-[1.02]"
                           title="ver em tamanho real"
                         >
