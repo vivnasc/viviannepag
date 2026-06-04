@@ -1,11 +1,10 @@
 'use client';
 
-// Pele dos Carrosseis dos 7 Veus, fiel ao sistema da Vivianne:
-//  - CAPA e CTA: fundo escuro/editorial (imagem full-bleed com veu, ou
-//    gradiente do universo). Palavra-destaque do dia em serif, ou oferta no CTA.
-//  - PROSA / POETICO / PRATICA: BASE CLARA (creme), serif italico centrado,
-//    etiqueta de seccao no topo, "OS SETE VEUS" e a palavra do dia no rodape.
-// Cada DIA tem a sua propria palavra-destaque (passada por slide-dia).
+// Pele dos Carrosseis dos 7 Veus, fiel ao sistema da Vivianne.
+// Tipografia em unidades de CONTAINER (cqw): o texto escala com a largura do
+// proprio slide, por isso as proporcoes ficam identicas em miniatura ou em
+// tamanho real. CAPA/CTA escuros (imagem ou gradiente do universo); PROSA/
+// POETICO/PRATICA em base clara (creme).
 
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 import { PALETAS } from '@/lib/estudio-conteudo';
@@ -28,11 +27,9 @@ export function VeuSlide({
   const p = PALETAS[mundo];
   const isCapa = slide.tipo === 'capa';
   const isCta = slide.tipo === 'cta';
-  const escuro = isCapa || isCta; // capa e fecho sao escuros; meio e claro
+  const escuro = isCapa || isCta;
 
-  const bg = escuro
-    ? `linear-gradient(165deg, ${p.bg}, ${p.bg2})`
-    : `linear-gradient(165deg, ${CREME.bg}, ${CREME.bg2})`;
+  const bg = escuro ? `linear-gradient(165deg, ${p.bg}, ${p.bg2})` : `linear-gradient(165deg, ${CREME.bg}, ${CREME.bg2})`;
   const cor = escuro ? p.texto : CREME.texto;
   const accent = p.destaque;
   const etiqueta = !isCapa && !isCta ? slide.titulo : undefined;
@@ -40,8 +37,14 @@ export function VeuSlide({
 
   return (
     <div
-      className="relative aspect-[4/5] rounded-2xl overflow-hidden flex flex-col items-center justify-between text-center px-5 py-6 select-none"
-      style={{ background: escuro && imageUrl ? '#000' : bg, color: cor, fontFamily: 'var(--font-serif), Georgia, serif' }}
+      className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden flex flex-col items-center justify-between text-center select-none"
+      style={{
+        containerType: 'inline-size',
+        background: escuro && imageUrl ? '#000' : bg,
+        color: cor,
+        fontFamily: 'var(--font-serif), Georgia, serif',
+        padding: '8cqw 6cqw',
+      }}
     >
       {escuro && imageUrl && (
         <>
@@ -50,37 +53,33 @@ export function VeuSlide({
         </>
       )}
 
-      {/* topo: OS SETE VEUS (+ etiqueta de seccao no meio) */}
-      <div className="relative z-10 flex flex-col items-center gap-1">
-        <span className="text-[0.42rem] tracking-[0.4em] uppercase opacity-50">Os Sete Véus</span>
+      {/* topo */}
+      <div className="relative z-10 flex flex-col items-center" style={{ gap: '1.5cqw' }}>
+        <span style={{ fontSize: '2.4cqw', letterSpacing: '0.4em', textTransform: 'uppercase', opacity: 0.5 }}>Os Sete Véus</span>
+        {etiqueta && (
+          <span style={{ fontSize: '2.5cqw', letterSpacing: '0.45em', textTransform: 'uppercase', color: accent, opacity: 0.9 }}>{etiqueta}</span>
+        )}
       </div>
 
       {/* centro */}
-      <div className="relative z-10 flex flex-col items-center gap-3 px-1 w-full">
-        {etiqueta && (
-          <span className="text-[0.46rem] tracking-[0.45em] uppercase opacity-70" style={{ color: accent }}>{etiqueta}</span>
-        )}
-        {!etiqueta && <span className="text-[0.7rem] opacity-40 leading-none">⋄</span>}
-
+      <div className="relative z-10 flex flex-col items-center" style={{ gap: '3.5cqw', width: '100%' }}>
         {isCapa ? (
           <>
-            <h2 className="tracking-[0.16em] text-[1.65rem] leading-tight">{palavraTopo}</h2>
-            {subtitulo && <p className="italic text-[0.66rem] leading-snug opacity-75 max-w-[85%]">{subtitulo}</p>}
+            <h2 style={{ fontSize: '9cqw', letterSpacing: '0.04em', lineHeight: 1.05 }}>{palavraTopo}</h2>
+            {subtitulo && <p style={{ fontSize: '3.4cqw', fontStyle: 'italic', lineHeight: 1.4, opacity: 0.8, maxWidth: '88%' }}>{subtitulo}</p>}
           </>
         ) : (
-          <p className="italic text-[0.9rem] leading-relaxed max-w-[92%] whitespace-pre-line">{slide.texto}</p>
+          <p style={{ fontSize: '4.4cqw', fontStyle: 'italic', lineHeight: 1.55, maxWidth: '90%', whiteSpace: 'pre-line' }}>{slide.texto}</p>
         )}
-
         {isCta && slide.destaque && (
-          <p className="mt-1 text-[0.55rem] tracking-[0.2em] uppercase opacity-80" style={{ color: accent }}>{slide.destaque}</p>
+          <p style={{ fontSize: '2.8cqw', letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.85 }}>{slide.destaque}</p>
         )}
-        {!isCapa && !isCta && <span className="text-[0.7rem] opacity-40 leading-none">—</span>}
       </div>
 
       {/* rodape: a palavra do dia */}
-      <div className="relative z-10 flex flex-col items-center gap-0.5">
-        <span className="text-[0.42rem] tracking-[0.4em] uppercase opacity-45">{palavra ?? ''}</span>
-        {isCapa && <span className="text-[0.42rem] tracking-[0.25em] uppercase opacity-60">desliza →</span>}
+      <div className="relative z-10 flex flex-col items-center" style={{ gap: '1cqw' }}>
+        <span style={{ fontSize: '2.2cqw', letterSpacing: '0.4em', textTransform: 'uppercase', opacity: 0.45 }}>{palavra ?? ''}</span>
+        {isCapa && <span style={{ fontSize: '2.2cqw', letterSpacing: '0.25em', textTransform: 'uppercase', opacity: 0.6 }}>desliza →</span>}
       </div>
     </div>
   );

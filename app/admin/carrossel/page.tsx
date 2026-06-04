@@ -8,7 +8,7 @@ import { getColecao, type ColecaoId } from '@/lib/colecoes';
 import { VeuSlide } from '@/components/admin/VeuSlide';
 import { Btn, Card, Pill } from '@/components/admin/EstudioKit';
 import { gerarCaptionInstagram, gerarMetricoolCSV } from '@/lib/estudio-export';
-import { TIPO_LABELS, PALETAS, type ConteudoDia, type Mundo } from '@/lib/estudio-conteudo';
+import { TIPO_LABELS, PALETAS, type ConteudoDia, type Mundo, type Slide } from '@/lib/estudio-conteudo';
 
 type Jornada = { entrada?: string; aprofundar?: string; complemento?: string; fio?: string };
 type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string };
@@ -35,6 +35,7 @@ export default function CarrosselPage() {
   const [gerando, setGerando] = useState<number | null>(null);
   const [sel, setSel] = useState<Coleccao | null>(null);
   const [erro, setErro] = useState<string | null>(null);
+  const [zoom, setZoom] = useState<{ slide: Slide; palavra?: string; subtitulo?: string; mundo: Mundo } | null>(null);
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/carrossel/list');
@@ -69,6 +70,17 @@ export default function CarrosselPage() {
     const jornada = sel.theme?.jornada;
     return (
       <div className="min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8">
+        {zoom && (
+          <div
+            onClick={() => setZoom(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 cursor-zoom-out"
+          >
+            <div className="w-full" style={{ maxWidth: 'min(92vw, 440px)' }} onClick={(e) => e.stopPropagation()}>
+              <VeuSlide slide={zoom.slide} mundo={zoom.mundo} palavra={zoom.palavra} subtitulo={zoom.subtitulo} />
+              <p className="text-center text-[0.65rem] opacity-60 mt-3">toca fora para fechar</p>
+            </div>
+          </div>
+        )}
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <button onClick={() => setSel(null)} className="text-[0.7rem] tracking-wide opacity-70 hover:opacity-100">← voltar à grelha</button>
@@ -105,13 +117,15 @@ export default function CarrosselPage() {
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
                       {dia.slides.map((s, i) => (
-                        <VeuSlide
+                        <button
                           key={i}
-                          slide={s}
-                          mundo={dia.mundo}
-                          palavra={dia.palavra}
-                          subtitulo={dia.subtitulo}
-                        />
+                          type="button"
+                          onClick={() => setZoom({ slide: s, palavra: dia.palavra, subtitulo: dia.subtitulo, mundo: dia.mundo })}
+                          className="block w-full cursor-zoom-in transition-transform hover:scale-[1.02]"
+                          title="ver em tamanho real"
+                        >
+                          <VeuSlide slide={s} mundo={dia.mundo} palavra={dia.palavra} subtitulo={dia.subtitulo} />
+                        </button>
                       ))}
                     </div>
                   )}
