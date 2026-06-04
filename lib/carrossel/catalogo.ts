@@ -116,7 +116,26 @@ export function produtosRelevantes(
     .map((x) => x.it);
 }
 
-// Monta a seccao "ECOSSISTEMA" do system prompt a partir dos itens escolhidos.
+// Amostra do ecossistema para o gerador: destaca o universo da semana mas
+// inclui produtos de TODOS os 7 universos (alguns por universo) + packs, para o
+// CTA de cada dia poder explorar universos diferentes ao longo da semana.
+export function amostraEcossistema(
+  catalogo: ItemCatalogo[],
+  universoFoco: ColecaoId,
+  perOutro = 2,
+): ItemCatalogo[] {
+  const foco = catalogo.filter((i) => i.universo === universoFoco && i.tipo === 'produto').slice(0, 8);
+  const packs = catalogo.filter((i) => i.tipo === 'pack');
+  const universos = [...new Set(catalogo.map((i) => i.universo))].filter(
+    (u) => u !== universoFoco && u !== 'all',
+  ) as ColecaoId[];
+  const outros: ItemCatalogo[] = [];
+  for (const u of universos) {
+    outros.push(...catalogo.filter((i) => i.universo === u && i.tipo === 'produto').slice(0, perOutro));
+  }
+  const seen = new Set<string>();
+  return [...foco, ...packs, ...outros].filter((i) => (seen.has(i.id) ? false : seen.add(i.id)));
+}
 export function ecossistemaPrompt(itens: ItemCatalogo[]): string {
   const linhas = itens.map((it) => {
     const preco = it.preco ? ` · ${it.preco}` : '';

@@ -43,6 +43,7 @@ export default function CarrosselPage() {
   const [sel, setSel] = useState<Coleccao | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
+  const [imgProg, setImgProg] = useState<{ done: number; total: number } | null>(null);
 
   const zoomSlides = zoom?.dia.slides ?? [];
   const navZoom = useCallback((delta: number) => {
@@ -92,6 +93,50 @@ export default function CarrosselPage() {
     downloadFile(csv, `${c.slug}-metricool.csv`, 'text/csv');
   }
 
+  // Gera as imagens editoriais (capa + fecho de cada dia) reutilizando o motor
+  // Flux existente, guarda os URLs na coleccao e mostra-os nos slides.
+  async function gerarImagens(c: Coleccao) {
+    const alvos: { di: number; si: number }[] = [];
+    c.dias.forEach((d, di) => (d.slides ?? []).forEach((s, si) => {
+      if (s.tipo === 'capa' || s.tipo === 'cta') alvos.push({ di, si });
+    }));
+    if (!alvos.length) return;
+    setErro(null);
+    setImgProg({ done: 0, total: alvos.length });
+    const dias = c.dias.map((d) => ({ ...d, slides: (d.slides ?? []).map((s) => ({ ...s })) }));
+    let done = 0;
+    for (const a of alvos) {
+      const d = dias[a.di];
+      const s = d.slides![a.si] as { tipo: string; texto?: string; notaVisual?: string; imageUrl?: string };
+      try {
+        const r = await fetch('/api/admin/estudio/gerar-imagem', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            texto: s.texto || d.palavra || c.title,
+            mundo: d.mundo,
+            tipo: s.tipo,
+            promptCustom: s.notaVisual || `editorial boho still life evoking "${d.palavra ?? ''}", warm contemplative atmosphere, no text, no people`,
+            aspectRatio: '9:16',
+            slideKey: `carrossel-${c.slug}-d${d.dia}-s${a.si}`,
+          }),
+        });
+        const j = await r.json();
+        if (j.imageUrl) s.imageUrl = j.imageUrl;
+      } catch { /* continua */ }
+      done++;
+      setImgProg({ done, total: alvos.length });
+      setSel((prev) => (prev && prev.slug === c.slug ? { ...prev, dias } : prev));
+    }
+    try {
+      await fetch('/api/admin/carrossel/imagens', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slug: c.slug, dias }),
+      });
+      await carregar();
+    } catch { /* ignore */ }
+    setImgProg(null);
+  }
+
   // ── Detalhe de uma coleccao ──
   if (sel) {
     const jornada = sel.theme?.jornada;
@@ -113,6 +158,7 @@ export default function CarrosselPage() {
                 mundo={zoom.dia.mundo}
                 palavra={zoom.dia.palavra}
                 subtitulo={zoom.dia.subtitulo}
+                imageUrl={(zoomSlides[zoom.index] as { imageUrl?: string }).imageUrl}
                 numeroDia={zoom.dia.dia}
                 slideIndex={zoom.index + 1}
                 slideTotal={zoomSlides.length}
@@ -129,7 +175,12 @@ export default function CarrosselPage() {
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <button onClick={() => setSel(null)} className="text-[0.7rem] tracking-wide opacity-70 hover:opacity-100">← voltar à grelha</button>
-            <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
+            <div className="flex items-center gap-2">
+              {imgProg
+                ? <span className="text-[0.7rem] opacity-70">a gerar imagens… {imgProg.done}/{imgProg.total}</span>
+                : <Btn variant="default" onClick={() => gerarImagens(sel)}>gerar imagens (capa+fecho)</Btn>}
+              <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
+            </div>
           </div>
           <p className="text-[0.6rem] uppercase tracking-[0.3em] opacity-50 mb-1">Território da semana</p>
           <h1 className="text-2xl font-serif italic mb-2">{sel.theme?.territorio ?? sel.title}</h1>
@@ -170,7 +221,7 @@ export default function CarrosselPage() {
                           className="block w-full cursor-zoom-in transition-transform hover:scale-[1.02]"
                           title="ver em tamanho real"
                         >
-                          <VeuSlide slide={s} mundo={dia.mundo} palavra={dia.palavra} subtitulo={dia.subtitulo} numeroDia={dia.dia} slideIndex={i + 1} slideTotal={dia.slides!.length} />
+                          <VeuSlide slide={s} mundo={dia.mundo} palavra={dia.palavra} subtitulo={dia.subtitulo} imageUrl={(s as { imageUrl?: string }).imageUrl} numeroDia={dia.dia} slideIndex={i + 1} slideTotal={dia.slides!.length} />
                         </button>
                       ))}
                     </div>

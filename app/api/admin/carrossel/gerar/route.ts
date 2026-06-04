@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { semanaSeed } from '@/lib/carrossel/calendario';
-import { getCatalogoProdutos, produtosRelevantes, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
+import { getCatalogoProdutos, amostraEcossistema, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
@@ -46,8 +46,8 @@ export async function POST(req: Request) {
 
   // Catalogo ciente dos produtos: top-N relevantes ao brief deste universo.
   const catalogo = await getCatalogoProdutos();
-  const relevantes = produtosRelevantes(catalogo, { universo, brief, n: 14 });
-  const ecossistema = `${ecossistemaPrompt(relevantes)}\n\nOFERTAS ANTERIORES (o ecossistema que ja existia — usa-as tambem nos CTAs, com os links proprios):\n${ofertasAnterioresPrompt()}`;
+  const amostra = amostraEcossistema(catalogo, universo, 2);
+  const ecossistema = `${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (o ecossistema que ja existia — usa-as tambem nos CTAs, com os links proprios):\n${ofertasAnterioresPrompt()}`;
 
   // Palavras-destaque JA usadas em qualquer coleccao — nunca repetir (regra
   // dela: as palavras nao se repetem entre dias, semanas ou carrosseis).
@@ -88,12 +88,12 @@ SLIDES DE CADA DIA (6 slides, nesta ordem):
 3) 'conteudo' POETICO: frase poetica espacada com quebras de linha (titulo = "POÉTICO"). Base clara.
 4) 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRÁTICA" ou "HÁBITO DA SEMANA"). Base clara.
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
-6) 'cta': fecho GENEROSO numa oferta (titulo = nome da oferta; texto = convite; destaque = tagline curta). Fundo escuro/editorial.
+6) 'cta': fecho com UM PRODUTO/oferta (titulo = nome do produto; texto = convite curto; destaque = a URL exacta). Fundo escuro/editorial.
 
-CTA — roda entre TODO o ecossistema conforme o tema (nunca anuncio, sempre convite). Escolhe a oferta certa para cada dia, alternando entre:
-- OFERTAS ANTERIORES (com link proprio): LUMINA (espelho gratuito), Loranne (musica), Sete Ecos (comunidade), "Os 7 Veus do Despertar" (livro), Escola dos Veus.
-- PRODUTOS DA LOJA: ebook/guia/pack do universo desta semana (viviannedossantos.com/loja/<slug>), como passo seguinte para aprofundar.
-Equilibra a semana: parte dos dias fecha numa oferta generosa/gratuita (ex.: LUMINA, Loranne) e parte aponta a um produto da loja. Usa nome e link EXACTOS de cada um.
+CTA — CADA DIA FECHA SEMPRE COM UM PRODUTO. O CTA e o lugar onde exploras o ecossistema. Ao longo dos 7 dias, VARIA o produto:
+- uns dias um ebook/guia/pack de um dos 7 UNIVERSOS da loja (URL: viviannedossantos.com/loja/<slug>);
+- outros dias uma OFERTA ANTERIOR (LUMINA, Loranne, Sete Ecos, "Os 7 Veus do Despertar", Escola dos Veus) com o seu link proprio.
+Regras: nao repitas o mesmo produto na mesma semana; explora universos diferentes (nao fiques so no universo do territorio); o produto escolhido deve tocar o tema do dia; usa nome e link/URL EXACTOS de cada um (no campo destaque do slide cta poe a URL).
 
 DEVOLVE APENAS JSON valido, sem texto a volta:
 {
