@@ -6,6 +6,7 @@ import { getCatalogoProdutos, produtosRelevantes, ecossistemaPrompt } from '@/li
 import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
+import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
   // Catalogo ciente dos produtos: top-N relevantes ao brief deste universo.
   const catalogo = await getCatalogoProdutos();
   const relevantes = produtosRelevantes(catalogo, { universo, brief, n: 14 });
-  const ecossistema = ecossistemaPrompt(relevantes);
+  const ecossistema = `${ecossistemaPrompt(relevantes)}\n\nOFERTAS ANTERIORES (o ecossistema que ja existia — usa-as tambem nos CTAs, com os links proprios):\n${ofertasAnterioresPrompt()}`;
 
   // Palavras-destaque JA usadas em qualquer coleccao — nunca repetir (regra
   // dela: as palavras nao se repetem entre dias, semanas ou carrosseis).
@@ -65,7 +66,7 @@ REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
 - ACENTUACAO OBRIGATORIA: escreve em portugues europeu com TODOS os acentos correctos e completos (á, à, ã, â, ç, é, ê, í, ó, ô, õ, ú). A palavra-capa tambem acentuada (ex.: "GESTAÇÃO", nunca "GESTACAO"; "FÉ", nunca "FE"). Texto sem acentos e ERRADO.
-- URLs e dominios SEMPRE em viviannedossantos.com (ex.: viviannedossantos.com/loja/...). NUNCA uses seteveus.space, seteecos.com nem qualquer outro dominio.
+- LINKS (expandir nao e cortar): os produtos da LOJA apontam para viviannedossantos.com/loja/<slug>; as OFERTAS ANTERIORES (LUMINA, Loranne, Sete Ecos, livro, Escola) mantem os seus links proprios da lista. Usa o ecossistema TODO. Nunca inventes links — usa sempre os exactos das listas.
 
 ${ecossistema}
 
@@ -89,12 +90,10 @@ SLIDES DE CADA DIA (6 slides, nesta ordem):
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
 6) 'cta': fecho GENEROSO numa oferta (titulo = nome da oferta; texto = convite; destaque = tagline curta). Fundo escuro/editorial.
 
-CTA — roda entre estas ofertas conforme o tema (nunca anuncio, sempre convite):
-- "Espelho gratuito" — 7 perguntas, 2 minutos; nao para te diagnosticar, para te devolver a ti.
-- "Musica contemplativa" — para ficar contigo, sem pressa, so presenca.
-- "Comunidade" — mulheres que continuam, sem mascara, sem prova.
-- Um PRODUTO da loja (ebook/pack do ecossistema, slug/link exactos) — SO quando o tema o pede mesmo, como passo seguinte natural.
-No MAXIMO 1-2 dias da semana fecham num produto da loja; os restantes fecham em ofertas generosas/gratuitas.
+CTA — roda entre TODO o ecossistema conforme o tema (nunca anuncio, sempre convite). Escolhe a oferta certa para cada dia, alternando entre:
+- OFERTAS ANTERIORES (com link proprio): LUMINA (espelho gratuito), Loranne (musica), Sete Ecos (comunidade), "Os 7 Veus do Despertar" (livro), Escola dos Veus.
+- PRODUTOS DA LOJA: ebook/guia/pack do universo desta semana (viviannedossantos.com/loja/<slug>), como passo seguinte para aprofundar.
+Equilibra a semana: parte dos dias fecha numa oferta generosa/gratuita (ex.: LUMINA, Loranne) e parte aponta a um produto da loja. Usa nome e link EXACTOS de cada um.
 
 DEVOLVE APENAS JSON valido, sem texto a volta:
 {
