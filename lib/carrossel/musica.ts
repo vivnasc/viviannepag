@@ -1,48 +1,26 @@
-// Faixas Ancient Ground + ALOCACAO automatica por carrossel.
-// No escola-veus a faixa era escolhida a mao; aqui cada carrossel do calendario
-// recebe automaticamente uma faixa, de forma deterministica (estavel) e variada,
-// alinhada ao mood da estacao.
-//
-// >>> EDITA AQUI: substitui titulo/url pelas tuas faixas reais Ancient Ground.
-//     (url = link publico do mp3; fica vazio ate o preencheres.)
+// Faixas Ancient Ground (Supabase publico) + ALOCACAO automatica por carrossel.
+// Os mp3 vivem em: audios/albums/ancient-ground/faixa-NN.mp3
+// Cada carrossel recebe uma faixa de forma deterministica (estavel) e variada.
+// >>> Se o album tiver mais/menos faixas, ajusta NUM_FAIXAS.
 
-import type { Estacao } from './calendario';
+const BASE_AUDIO = 'https://tdytdamtfillqyklgrmb.supabase.co/storage/v1/object/public/audios/albums/ancient-ground';
 
-export type Faixa = { id: string; titulo: string; mood: Estacao | 'neutro'; url?: string };
+export const NUM_FAIXAS = 7; // nº de faixas no album (faixa-01.mp3 ... faixa-0N.mp3)
 
-export const FAIXAS_ANCIENT_GROUND: Faixa[] = [
-  // verão — amplo, luminoso
-  { id: 'ag-verao-1', titulo: 'Maré Longa', mood: 'verao', url: '' },
-  { id: 'ag-verao-2', titulo: 'Luz Inteira', mood: 'verao', url: '' },
-  { id: 'ag-verao-3', titulo: 'Águas Claras', mood: 'verao', url: '' },
-  // outono — dourado, nostálgico
-  { id: 'ag-outono-1', titulo: 'Colheita', mood: 'outono', url: '' },
-  { id: 'ag-outono-2', titulo: 'Folha Solta', mood: 'outono', url: '' },
-  { id: 'ag-outono-3', titulo: 'Dourado Lento', mood: 'outono', url: '' },
-  // inverno — piano só, contemplativo
-  { id: 'ag-inverno-1', titulo: 'Recolhimento', mood: 'inverno', url: '' },
-  { id: 'ag-inverno-2', titulo: 'Noite Longa', mood: 'inverno', url: '' },
-  { id: 'ag-inverno-3', titulo: 'Raiz', mood: 'inverno', url: '' },
-  // primavera — luz crescente, esperança
-  { id: 'ag-primavera-1', titulo: 'Primeiro Broto', mood: 'primavera', url: '' },
-  { id: 'ag-primavera-2', titulo: 'Despertar', mood: 'primavera', url: '' },
-  { id: 'ag-primavera-3', titulo: 'Abertura', mood: 'primavera', url: '' },
-  // neutras — servem qualquer estação
-  { id: 'ag-neutro-1', titulo: 'Presença', mood: 'neutro', url: '' },
-  { id: 'ag-neutro-2', titulo: 'Travessia', mood: 'neutro', url: '' },
-];
+export type Faixa = { numero: number; titulo: string; url: string };
 
-// Aloca uma faixa a um carrossel (semana+dia). Determinístico: o mesmo dia dá
-// sempre a mesma faixa; varia ao longo do ano; prefere o mood da estação.
-export function faixaParaCarrossel(semana: number, dia: number, estacao: Estacao): Faixa {
-  const pool = FAIXAS_ANCIENT_GROUND.filter((f) => f.mood === estacao || f.mood === 'neutro');
-  const lista = pool.length ? pool : FAIXAS_ANCIENT_GROUND;
-  const idx = ((Math.max(1, semana) - 1) * 7 + (Math.max(1, dia) - 1)) % lista.length;
-  return lista[idx];
+export function faixaUrl(n: number): string {
+  return `${BASE_AUDIO}/faixa-${String(n).padStart(2, '0')}.mp3`;
 }
 
-// Texto de música pronto a mostrar/exportar para um carrossel.
-export function musicaDoCarrossel(semana: number, dia: number, estacao: Estacao): string {
-  const f = faixaParaCarrossel(semana, dia, estacao);
-  return `Ancient Ground · ${f.titulo}`;
+// Aloca uma faixa a um carrossel (semana+dia). Determinístico e variado ao longo
+// do ano. (estacao aceite por compatibilidade, não usada na alocação.)
+export function faixaParaCarrossel(semana: number, dia: number, _estacao?: unknown): Faixa {
+  const idx = ((Math.max(1, semana) - 1) * 7 + (Math.max(1, dia) - 1)) % NUM_FAIXAS;
+  const numero = idx + 1;
+  return { numero, titulo: `Faixa ${String(numero).padStart(2, '0')}`, url: faixaUrl(numero) };
+}
+
+export function musicaDoCarrossel(semana: number, dia: number): string {
+  return `Ancient Ground · ${faixaParaCarrossel(semana, dia).titulo}`;
 }
