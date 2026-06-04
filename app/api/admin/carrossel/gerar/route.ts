@@ -83,7 +83,7 @@ PALAVRA-DESTAQUE (a regra mais importante para ela):
 - As palavras do dia orbitam o territorio da semana por angulos diferentes; cada uma fresca e unica.
 
 SLIDES DE CADA DIA (6 slides, nesta ordem):
-1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico). Fundo escuro/editorial.
+1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico; destaque = uma frase curta de abertura, 1-2 linhas, que entra no tema, ex.: "Ha um escuro que nao e ausencia. E o inicio de tudo."). Fundo escuro/editorial.
 2) 'conteudo' PROSA: reflexao em prosa curta, intima (titulo = "PROSA"). Base clara.
 3) 'conteudo' POETICO: frase poetica espacada com quebras de linha (titulo = "POÉTICO"). Base clara.
 4) 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRÁTICA" ou "HÁBITO DA SEMANA"). Base clara.
@@ -112,7 +112,7 @@ DEVOLVE APENAS JSON valido, sem texto a volta:
       "produtoRelacionado": "slug-ou-vazio",
       "horario": "11:30",
       "slides": [
-        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|nome-da-oferta", "texto": "...", "destaque": "so cta: tagline curta", "notaVisual": "SO em capa e cta: EN editorial boho contemplativo, SEM pessoas/rostos/texto" }
+        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|subtitulo-da-capa|nome-da-oferta", "texto": "...", "destaque": "na CAPA = frase de abertura; no CTA = a URL exacta", "notaVisual": "SO em capa e cta: EN editorial boho contemplativo, SEM pessoas/rostos/texto" }
       ]
     }
   ]
