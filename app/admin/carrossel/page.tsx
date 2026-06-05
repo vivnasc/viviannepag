@@ -228,8 +228,16 @@ export default function CarrosselPage() {
                   {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-1">{dia.subtitulo}</p>}
                   <div className="flex items-center gap-3 mb-3">
                     <p className="text-[0.68rem] opacity-45">♪ Ancient Ground · {dia.faixa?.titulo ?? faixaParaCarrossel(sel.theme?.semana ?? 1, dia.dia).titulo}</p>
-                    {dia.videoUrl && <a href={dia.videoUrl} target="_blank" rel="noreferrer" className="text-[0.68rem] text-salvia hover:underline">▶ ver vídeo MP4</a>}
                   </div>
+                  {dia.videoUrl && (
+                    <div className="mb-3 flex items-center gap-3">
+                      <video src={dia.videoUrl} controls playsInline className="w-36 rounded-lg border border-white/10 bg-black" />
+                      <div className="flex flex-col gap-1.5">
+                        <span className="text-[0.62rem] text-salvia">✓ vídeo pronto</span>
+                        <a href={dia.videoUrl} download className="text-[0.66rem] px-2.5 py-1 rounded border border-ocre/30 text-creme-2/80 hover:border-ambar hover:text-ambar">⬇ descarregar MP4</a>
+                      </div>
+                    </div>
+                  )}
 
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
