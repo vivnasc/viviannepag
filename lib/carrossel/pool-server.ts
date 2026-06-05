@@ -22,9 +22,10 @@ function escolaClient() {
 }
 
 // Imagens contemplativas reaproveitadas do escola-veus (sem pessoas: fundos MJ).
+// Se nao houver creds separadas, tenta o cliente principal (caso seja o MESMO
+// projecto Supabase — entao course-assets ja e acessivel sem env extra).
 export async function listarPoolEscolaVeus(): Promise<string[]> {
-  const client = escolaClient();
-  if (!client) return [];
+  const client = escolaClient() ?? getSupabaseAdmin();
   const urls: string[] = [];
   for (const folder of ESCOLA_FOLDERS) {
     try {
