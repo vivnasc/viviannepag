@@ -72,6 +72,8 @@ export function gerarCaptionInstagram(c: ConteudoDia): string {
   } else if (c.slides && c.slides.length > 0) {
     const capa = c.slides[0];
     lines.push(capa.texto.replace(/\n/g, ' '));
+    if (capa.titulo) lines.push(capa.titulo);                        // subtitulo (carrossel 7 Veus)
+    if (capa.destaque) { lines.push(''); lines.push(capa.destaque); } // frase de abertura (carrossel)
     lines.push('');
     lines.push('Desliza para ler.');
   }
