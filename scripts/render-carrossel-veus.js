@@ -12,7 +12,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const SITE_URL = process.env.SITE_URL;
+const SITE_URL = (process.env.SITE_URL || '').replace(/\/+$/, '');
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const SLUG = process.env.SLUG;
