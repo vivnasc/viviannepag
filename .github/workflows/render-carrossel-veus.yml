@@ -1,0 +1,48 @@
+name: Render carrossel 7 Veus (MP4)
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Slug da coleccao (ex: semana-1-freeme-mae)'
+        required: true
+        type: string
+      siteUrl:
+        description: 'URL publica do site'
+        required: true
+        type: string
+      dias:
+        description: 'Filtro de dias (ex: "1" ou "1,3,5"). Vazio = todos'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install npm packages
+        run: npm install --no-save puppeteer @supabase/supabase-js
+
+      - name: Render carrossel MP4
+        env:
+          SITE_URL: ${{ github.event.inputs.siteUrl }}
+          SLUG: ${{ github.event.inputs.slug }}
+          DIAS_FILTER: ${{ github.event.inputs.dias }}
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/render-carrossel-veus.js

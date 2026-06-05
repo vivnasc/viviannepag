@@ -18,7 +18,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
 type Jornada = { entrada?: string; aprofundar?: string; complemento?: string; fio?: string };
-type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string; faixa?: { titulo: string; url?: string } };
+type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string; faixa?: { titulo: string; url?: string }; videoUrl?: string };
 type Coleccao = {
   id: string;
   slug: string;
@@ -44,6 +44,20 @@ export default function CarrosselPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
   const [imgProg, setImgProg] = useState<{ done: number; total: number } | null>(null);
+  const [videoMsg, setVideoMsg] = useState<string | null>(null);
+
+  async function gerarVideos(c: Coleccao) {
+    setErro(null); setVideoMsg(null);
+    try {
+      const r = await fetch('/api/admin/carrossel/render-dispatch', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slug: c.slug }),
+      });
+      const j = await r.json();
+      if (!r.ok) { setErro('vídeos: ' + (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setVideoMsg('Render dos MP4 disparado no GitHub Actions (~10 min). Recarrega a semana depois para veres os vídeos.');
+    } catch (e) { setErro(String(e)); }
+  }
 
   const zoomSlides = zoom?.dia.slides ?? [];
   const navZoom = useCallback((delta: number) => {
@@ -179,9 +193,12 @@ export default function CarrosselPage() {
               {imgProg
                 ? <span className="text-[0.7rem] opacity-70">a gerar imagens… {imgProg.done}/{imgProg.total}</span>
                 : <Btn variant="default" onClick={() => gerarImagens(sel)}>gerar imagens (capa+fecho)</Btn>}
+              <Btn variant="default" onClick={() => gerarVideos(sel)}>gerar vídeos (MP4)</Btn>
               <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
             </div>
           </div>
+          {videoMsg && <div className="mb-4 text-[0.72rem] text-salvia bg-salvia/10 rounded-lg p-3">{videoMsg}</div>}
+          {erro && <div className="mb-4 text-[0.72rem] text-red-300 bg-red-950/40 rounded-lg p-3">{erro}</div>}
           <p className="text-[0.6rem] uppercase tracking-[0.3em] opacity-50 mb-1">Território da semana</p>
           <h1 className="text-2xl font-serif italic mb-2">{sel.theme?.territorio ?? sel.title}</h1>
           <p className="text-[0.72rem] opacity-55 mb-4">{getColecao(sel.theme.universo).nome} · {sel.theme?.estacao ?? ''} {sel.theme?.musica ? `· ♪ ${sel.theme.musica}` : ''}</p>
@@ -209,7 +226,10 @@ export default function CarrosselPage() {
                     {dia.produtoRelacionado && <Pill variant="feito">→ {dia.produtoRelacionado}</Pill>}
                   </div>
                   {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-1">{dia.subtitulo}</p>}
-                  {dia.faixa?.titulo && <p className="text-[0.68rem] opacity-45 mb-3">♪ Ancient Ground · {dia.faixa.titulo}{dia.faixa.url ? '' : ' (sem url)'}</p>}
+                  <div className="flex items-center gap-3 mb-3">
+                    {dia.faixa?.titulo && <p className="text-[0.68rem] opacity-45">♪ Ancient Ground · {dia.faixa.titulo}</p>}
+                    {dia.videoUrl && <a href={dia.videoUrl} target="_blank" rel="noreferrer" className="text-[0.68rem] text-salvia hover:underline">▶ ver vídeo MP4</a>}
+                  </div>
 
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
