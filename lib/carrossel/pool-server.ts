@@ -58,16 +58,34 @@ export async function listarPoolImagens(mundo: string): Promise<string[]> {
   return Array.from(new Set([...escola, ...estudio]));
 }
 
-// Atribui imagens do pool aos slides capa+cta de cada dia (deterministico).
-// Devolve novos dias com slide.imageUrl preenchido onde havia pool.
 type Rec = Record<string, unknown>;
-export function atribuirPool(dias: Rec[], pool: string[]): Rec[] {
+
+// Imagens do pool JA usadas noutras coleccoes (para nao repetir ate esgotar).
+export async function imagensUsadas(excluindoSlug?: string): Promise<Set<string>> {
+  const supabase = getSupabaseAdmin();
+  const { data } = await supabase.from('carousel_collections').select('slug, dias');
+  const used = new Set<string>();
+  for (const c of data ?? []) {
+    if (excluindoSlug && c.slug === excluindoSlug) continue;
+    for (const d of (Array.isArray(c.dias) ? c.dias : []) as Rec[]) {
+      for (const s of (Array.isArray(d.slides) ? d.slides : []) as Rec[]) {
+        if (typeof s?.imageUrl === 'string') used.add(s.imageUrl);
+      }
+    }
+  }
+  return used;
+}
+
+// Atribui imagens do pool aos slides capa+cta (deterministico). Da as NAO-usadas
+// primeiro; so reutiliza quando todas tiverem sido usadas.
+export function atribuirPool(dias: Rec[], pool: string[], usadas: Set<string> = new Set()): Rec[] {
   if (!pool.length) return dias;
+  const ordenado = [...pool.filter((u) => !usadas.has(u)), ...pool.filter((u) => usadas.has(u))];
   let k = 0;
   return dias.map((d) => {
     const slides = Array.isArray(d.slides) ? (d.slides as Rec[]).map((s) => {
       if (s && (s.tipo === 'capa' || s.tipo === 'cta')) {
-        const img = pool[k % pool.length];
+        const img = ordenado[k % ordenado.length];
         k++;
         return { ...s, imageUrl: img };
       }

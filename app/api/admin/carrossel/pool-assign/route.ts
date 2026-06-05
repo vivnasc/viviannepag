@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import { listarPoolImagens, atribuirPool } from '@/lib/carrossel/pool-server';
+import { listarPoolImagens, atribuirPool, imagensUsadas } from '@/lib/carrossel/pool-server';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -27,7 +27,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'pool-vazio', mundo, detalhe: `Sem imagens em estudio/${mundo}. Gera no Estudio ou usa "gerar imagens".` }, { status: 200 });
   }
 
-  const novosDias = atribuirPool(Array.isArray(col.dias) ? col.dias : [], pool);
+  const usadas = await imagensUsadas(slug);
+  const novosDias = atribuirPool(Array.isArray(col.dias) ? col.dias : [], pool, usadas);
   const { data, error: upErr } = await supabase
     .from('carousel_collections')
     .update({ dias: novosDias })

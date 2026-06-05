@@ -38,6 +38,27 @@ function downloadFile(content: string, filename: string, type = 'text/plain') {
   URL.revokeObjectURL(url);
 }
 
+// Redimensiona qualquer imagem para 1080x1920 JPEG (cover) — fica leve e passa
+// sempre no upload, e fica na proporcao do slide.
+function resizeToJpeg(file: File): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const W = 1080, H = 1920;
+      const canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { reject(new Error('canvas')); return; }
+      const s = Math.max(W / img.width, H / img.height);
+      const w = img.width * s, h = img.height * s;
+      ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob'))), 'image/jpeg', 0.9);
+    };
+    img.onerror = () => reject(new Error('img'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
 function CopyButton({ text }: { text: string }) {
   const [ok, setOk] = useState(false);
   return (
@@ -174,17 +195,19 @@ export default function CarrosselPage() {
   async function uploadFundo(file: File | undefined, diaNum: number, idx: number) {
     if (!sel || !file) return;
     setErro(null); setVideoMsg(null);
-    const fd = new FormData();
-    fd.append('file', file);
-    fd.append('slug', sel.slug);
-    fd.append('dia', String(diaNum));
-    fd.append('idx', String(idx));
     try {
+      const jpeg = await resizeToJpeg(file);
+      const fd = new FormData();
+      fd.append('file', jpeg, 'fundo.jpg');
+      fd.append('slug', sel.slug);
+      fd.append('dia', String(diaNum));
+      fd.append('idx', String(idx));
       const r = await fetch('/api/admin/carrossel/upload-fundo', { method: 'POST', body: fd });
       const j = await r.json();
       if (!r.ok) { setErro('fundo: ' + (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       if (j.coleccao) setSel(j.coleccao);
-    } catch (e) { setErro(String(e)); }
+      setVideoMsg(`Fundo carregado no dia ${diaNum}.`);
+    } catch (e) { setErro('fundo: ' + String(e)); }
   }
 
   // ── Detalhe de uma coleccao ──

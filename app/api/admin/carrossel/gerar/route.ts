@@ -7,7 +7,7 @@ import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
-import { listarPoolImagens, atribuirPool } from '@/lib/carrossel/pool-server';
+import { listarPoolImagens, atribuirPool, imagensUsadas } from '@/lib/carrossel/pool-server';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -184,13 +184,14 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
 
   // Pool global: reaproveita imagens ja geradas no Estudio (estudio/{mundo}) para
   // os fundos capa+fecho, sem gerar novas.
+  const slug = body.semana ? `semana-${body.semana}-${universo}` : `${universo}-${Date.now()}`;
   let diasFinal: typeof dias = dias;
   try {
     const pool = await listarPoolImagens(mundo);
-    diasFinal = atribuirPool(dias as unknown as Record<string, unknown>[], pool) as unknown as typeof dias;
+    const usadas = await imagensUsadas(slug);
+    diasFinal = atribuirPool(dias as unknown as Record<string, unknown>[], pool, usadas) as unknown as typeof dias;
   } catch { /* sem pool, segue sem imagens */ }
 
-  const slug = body.semana ? `semana-${body.semana}-${universo}` : `${universo}-${Date.now()}`;
   const supabase = getSupabaseAdmin();
 
   // Backup: arquiva a versao anterior (ate 3) antes de sobrescrever.
