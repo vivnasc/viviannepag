@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { CALENDARIO_ANUAL, intervaloDatas } from '@/lib/carrossel/calendario';
+import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { PALETAS_UNIVERSO } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 import { VeuSlide } from '@/components/admin/VeuSlide';
@@ -226,7 +227,7 @@ export default function CarrosselPage() {
                   </div>
                   {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-1">{dia.subtitulo}</p>}
                   <div className="flex items-center gap-3 mb-3">
-                    {dia.faixa?.titulo && <p className="text-[0.68rem] opacity-45">♪ Ancient Ground · {dia.faixa.titulo}</p>}
+                    <p className="text-[0.68rem] opacity-45">♪ Ancient Ground · {dia.faixa?.titulo ?? faixaParaCarrossel(sel.theme?.semana ?? 1, dia.dia).titulo}</p>
                     {dia.videoUrl && <a href={dia.videoUrl} target="_blank" rel="noreferrer" className="text-[0.68rem] text-salvia hover:underline">▶ ver vídeo MP4</a>}
                   </div>
 
