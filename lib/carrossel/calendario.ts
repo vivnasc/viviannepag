@@ -41,6 +41,13 @@ export function intervaloDatas(semana: number, ano: number): string {
   return mi === mf ? `${di}–${df} ${mi}` : `${di} ${mi}–${df} ${mf}`;
 }
 
+// Data (YYYY-MM-DD) da segunda-feira da semana — para agendar no Metricool.
+export function dataInicioSemana(semana: number, ano: number): string {
+  const ini = primeiraSegunda(ano);
+  ini.setUTCDate(ini.getUTCDate() + (semana - 1) * 7);
+  return ini.toISOString().slice(0, 10);
+}
+
 function mesDaSemana(semana: number): string {
   return MESES[Math.min(11, Math.floor((semana - 1) / (52 / 12)))];
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { CALENDARIO_ANUAL, intervaloDatas } from '@/lib/carrossel/calendario';
+import { CALENDARIO_ANUAL, intervaloDatas, dataInicioSemana } from '@/lib/carrossel/calendario';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { PALETAS_UNIVERSO } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
@@ -185,7 +185,14 @@ export default function CarrosselPage() {
   }
 
   function exportarMetricool(c: Coleccao) {
-    const csv = gerarMetricoolCSV(c.dias, new Date().toISOString().slice(0, 10));
+    const imagensPorDia = new Map<number, string[]>();
+    for (const d of c.dias) if (d.imagens?.length) imagensPorDia.set(d.dia, d.imagens);
+    if (imagensPorDia.size === 0) {
+      setErro('O Metricool precisa das imagens dos slides. Carrega "gerar carrossel + vídeo" primeiro e depois exporta.');
+      return;
+    }
+    const inicio = c.theme?.semana ? dataInicioSemana(c.theme.semana, anoAtual) : new Date().toISOString().slice(0, 10);
+    const csv = gerarMetricoolCSV(c.dias, inicio, imagensPorDia);
     downloadFile(csv, `${c.slug}-metricool.csv`, 'text/csv');
   }
 
