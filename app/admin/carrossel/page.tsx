@@ -251,7 +251,7 @@ export default function CarrosselPage() {
             <div className="flex items-center gap-2">
               <Btn variant="default" onClick={() => puxarPool(sel)}>imagens do pool</Btn>
               {(sel.theme?.historico?.length ?? 0) > 0 && <Btn variant="default" onClick={() => restaurar(sel)}>↺ restaurar anterior</Btn>}
-              <Btn variant="primary" onClick={() => gerarVideos(sel)}>gerar carrossel (imagens)</Btn>
+              <Btn variant="primary" onClick={() => gerarVideos(sel)}>gerar carrossel + vídeo</Btn>
               <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
             </div>
           </div>
