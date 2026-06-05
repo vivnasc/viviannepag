@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { CALENDARIO_ANUAL, intervaloDatas, dataInicioSemana } from '@/lib/carrossel/calendario';
+import { CALENDARIO_ANUAL, intervaloDatas } from '@/lib/carrossel/calendario';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { PALETAS_UNIVERSO } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
@@ -57,6 +57,14 @@ function resizeToJpeg(file: File): Promise<Blob> {
     img.onerror = () => reject(new Error('img'));
     img.src = URL.createObjectURL(file);
   });
+}
+
+function proximaSegunda(): string {
+  const d = new Date();
+  const day = d.getDay(); // 0 Dom .. 6 Sab
+  const diff = day === 1 ? 0 : ((8 - day) % 7) || 7; // próxima segunda >= hoje
+  d.setDate(d.getDate() + diff);
+  return d.toISOString().slice(0, 10);
 }
 
 function CopyButton({ text }: { text: string }) {
@@ -191,8 +199,10 @@ export default function CarrosselPage() {
       setErro('O Metricool precisa das imagens dos slides. Carrega "gerar carrossel + vídeo" primeiro e depois exporta.');
       return;
     }
-    const inicio = c.theme?.semana ? dataInicioSemana(c.theme.semana, anoAtual) : new Date().toISOString().slice(0, 10);
-    const csv = gerarMetricoolCSV(c.dias, inicio, imagensPorDia);
+    // Agenda a partir da PRÓXIMA segunda-feira (nunca no passado) e às 13h.
+    const inicio = proximaSegunda();
+    const dias13 = c.dias.map((d) => ({ ...d, horario: '13:00' }));
+    const csv = gerarMetricoolCSV(dias13, inicio, imagensPorDia);
     downloadFile(csv, `${c.slug}-metricool.csv`, 'text/csv');
   }
 

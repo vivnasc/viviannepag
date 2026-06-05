@@ -171,7 +171,7 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
       subtitulo: typeof dia.subtitulo === 'string' ? dia.subtitulo : undefined,
       mundo,
       plataforma: dia.plataforma ?? 'ambas',
-      horario: dia.horario ?? '11:30',
+      horario: dia.horario ?? '13:00',
       hashtags: Array.isArray(dia.hashtags) ? dia.hashtags : [],
       faixa: { titulo: faixa.titulo, url: faixa.url ?? '' },
       musicaSugerida: `Ancient Ground · ${faixa.titulo}`,
