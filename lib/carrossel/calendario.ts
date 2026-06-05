@@ -20,6 +20,26 @@ export type WeekSeed = {
 };
 
 const MESES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const MESES_CURTOS = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+// Primeira segunda-feira do ano (semana 1 comeca aqui).
+function primeiraSegunda(ano: number): Date {
+  const d = new Date(Date.UTC(ano, 0, 1));
+  const dow = d.getUTCDay() || 7; // 1=2a ... 7=Dom
+  if (dow !== 1) d.setUTCDate(d.getUTCDate() + (8 - dow));
+  return d;
+}
+
+// Intervalo de datas de uma semana (ex.: "8–14 Jun" ou "29 Jun–5 Jul").
+export function intervaloDatas(semana: number, ano: number): string {
+  const ini = primeiraSegunda(ano);
+  ini.setUTCDate(ini.getUTCDate() + (semana - 1) * 7);
+  const fim = new Date(ini);
+  fim.setUTCDate(ini.getUTCDate() + 6);
+  const di = ini.getUTCDate(), df = fim.getUTCDate();
+  const mi = MESES_CURTOS[ini.getUTCMonth()], mf = MESES_CURTOS[fim.getUTCMonth()];
+  return mi === mf ? `${di}–${df} ${mi}` : `${di} ${mi}–${df} ${mf}`;
+}
 
 function mesDaSemana(semana: number): string {
   return MESES[Math.min(11, Math.floor((semana - 1) / (52 / 12)))];

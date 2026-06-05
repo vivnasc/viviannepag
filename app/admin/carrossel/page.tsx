@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { CALENDARIO_ANUAL } from '@/lib/carrossel/calendario';
+import { CALENDARIO_ANUAL, intervaloDatas } from '@/lib/carrossel/calendario';
 import { PALETAS_UNIVERSO } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 import { VeuSlide } from '@/components/admin/VeuSlide';
@@ -45,6 +45,7 @@ export default function CarrosselPage() {
   const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
   const [imgProg, setImgProg] = useState<{ done: number; total: number } | null>(null);
   const [videoMsg, setVideoMsg] = useState<string | null>(null);
+  const anoAtual = new Date().getFullYear();
 
   async function gerarVideos(c: Coleccao) {
     setErro(null); setVideoMsg(null);
@@ -289,7 +290,7 @@ export default function CarrosselPage() {
               <div key={w.semana} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: `linear-gradient(135deg, ${p.bg}22, ${p.bg2}55)` }}>
                 <div className="p-3.5">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-60">Sem. {w.semana} · {w.mes} · {w.estacao}</span>
+                    <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-60">Sem. {w.semana} · {intervaloDatas(w.semana, anoAtual)} · {w.estacao}</span>
                     <span className="text-[0.6rem] px-1.5 py-0.5 rounded" style={{ background: p.destaque + '33', color: p.destaque }}>{getColecao(w.universo).nome}</span>
                   </div>
                   <p className="text-[0.55rem] uppercase tracking-[0.25em] opacity-45 mb-0.5">Território</p>
