@@ -26,7 +26,7 @@ type Coleccao = {
   title: string;
   brief: string;
   dias: VeuDia[];
-  theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; territorio?: string; estacao?: string; musica?: string; jornada?: Jornada | null };
+  theme: { mundo: Mundo; universo: ColecaoId; semana?: number | null; territorio?: string; estacao?: string; musica?: string; jornada?: Jornada | null; historico?: Array<{ dias: unknown; em: string }> };
   created_at: string;
 };
 
@@ -70,6 +70,22 @@ export default function CarrosselPage() {
       if (j.coleccao) setSel(j.coleccao);
       await carregar();
       setVideoMsg(`Imagens do pool aplicadas às capas e fechos (${j.usadas} no pool).`);
+    } catch (e) { setErro(String(e)); }
+  }
+
+  async function restaurar(c: Coleccao) {
+    setErro(null); setVideoMsg(null);
+    try {
+      const r = await fetch('/api/admin/carrossel/restaurar', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slug: c.slug }),
+      });
+      const j = await r.json();
+      if (j.erro === 'sem-historico') { setErro(j.detalhe ?? 'sem versão anterior'); return; }
+      if (!r.ok) { setErro('restaurar: ' + (j.erro ?? '')); return; }
+      if (j.coleccao) setSel(j.coleccao);
+      await carregar();
+      setVideoMsg('Versão anterior restaurada.');
     } catch (e) { setErro(String(e)); }
   }
 
@@ -193,6 +209,7 @@ export default function CarrosselPage() {
             <button onClick={() => setSel(null)} className="text-[0.7rem] tracking-wide opacity-70 hover:opacity-100">← voltar à grelha</button>
             <div className="flex items-center gap-2">
               <Btn variant="default" onClick={() => puxarPool(sel)}>imagens do pool</Btn>
+              {(sel.theme?.historico?.length ?? 0) > 0 && <Btn variant="default" onClick={() => restaurar(sel)}>↺ restaurar anterior</Btn>}
               <Btn variant="default" onClick={() => gerarVideos(sel)}>gerar vídeos (MP4)</Btn>
               <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
             </div>

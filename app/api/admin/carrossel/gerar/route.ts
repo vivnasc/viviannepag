@@ -192,10 +192,18 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
 
   const slug = body.semana ? `semana-${body.semana}-${universo}` : `${universo}-${Date.now()}`;
   const supabase = getSupabaseAdmin();
+
+  // Backup: arquiva a versao anterior (ate 3) antes de sobrescrever.
+  const { data: existente } = await supabase.from('carousel_collections').select('dias, theme').eq('slug', slug).maybeSingle();
+  const histAnt = (existente?.theme as { historico?: unknown[] } | null)?.historico ?? [];
+  const historico = existente?.dias
+    ? [{ dias: existente.dias, em: new Date().toISOString() }, ...histAnt].slice(0, 3)
+    : histAnt;
+
   const { data, error } = await supabase
     .from('carousel_collections')
     .upsert(
-      { slug, title: tema, brief, dias: diasFinal, theme: { mundo, universo, semana: body.semana ?? null, territorio: tema, estacao, musica, jornada: parsed.jornada ?? null } },
+      { slug, title: tema, brief, dias: diasFinal, theme: { mundo, universo, semana: body.semana ?? null, territorio: tema, estacao, musica, jornada: parsed.jornada ?? null, historico } },
       { onConflict: 'slug' },
     )
     .select()
