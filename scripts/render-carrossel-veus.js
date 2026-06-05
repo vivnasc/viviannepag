@@ -54,15 +54,21 @@ async function main() {
     const diaDir = path.join(tmp, `dia-${d.dia}`);
     fs.mkdirSync(diaDir, { recursive: true });
 
-    // 1. screenshot de cada slide
+    // 1. screenshot de cada slide (PNG) + upload como imagem do carrossel
+    const imagensDia = [];
     for (let i = 0; i < slides.length; i++) {
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
       const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=${i}`;
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
-      await page.screenshot({ path: path.join(diaDir, `s${i}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
+      const pngPath = path.join(diaDir, `s${i}.png`);
+      await page.screenshot({ path: pngPath, clip: { x: 0, y: 0, width: 1080, height: 1920 } });
       await page.close();
+      // upload da imagem do slide
+      const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-${i}.png`;
+      const { error: pngErr } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(pngPath), { contentType: 'image/png', upsert: true });
+      if (!pngErr) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
       console.log(`[shot] dia ${d.dia} slide ${i}`);
     }
 
@@ -82,21 +88,21 @@ async function main() {
     lista.push(`file 's${slides.length - 1}.png'`);
     fs.writeFileSync(path.join(diaDir, 'list.txt'), lista.join('\n'));
 
-    // 4. ffmpeg -> mp4
-    const outPath = path.join(diaDir, 'out.mp4');
-    const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p';
-    const inputs = `-f concat -safe 0 -i list.txt${temAudio ? ' -i audio.mp3' : ''}`;
-    const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-    execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -vf "${vf}" -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+    // 4. vídeo (OPCIONAL — o carrossel sao as imagens acima). Se falhar, segue.
+    let videoUrl = null;
+    try {
+      const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p';
+      const inputs = `-f concat -safe 0 -i list.txt${temAudio ? ' -i audio.mp3' : ''}`;
+      const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
+      execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -vf "${vf}" -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+      const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
+      const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
+      if (upErr) console.error(`[upload mp4] ${upErr.message}`);
+      else videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
+    } catch (e) { console.error(`[mp4] ${e.message}`); }
 
-    // 5. upload
-    const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
-    const buf = fs.readFileSync(outPath);
-    const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, buf, { contentType: 'video/mp4', upsert: true });
-    if (upErr) { console.error(`[upload] ${upErr.message}`); continue; }
-    const videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
-    resultados.push({ dia: d.dia, videoUrl });
-    console.log(`[mp4] dia ${d.dia} -> ${videoUrl}`);
+    resultados.push({ dia: d.dia, videoUrl, imagens: imagensDia });
+    console.log(`[dia ${d.dia}] ${imagensDia.length} imagens · mp4=${videoUrl ? 'ok' : 'falhou'}`);
   }
 
   await browser.close();
@@ -105,7 +111,7 @@ async function main() {
   if (resultados.length) {
     const novosDias = (col.dias || []).map((d) => {
       const rsd = resultados.find((x) => x.dia === d.dia);
-      return rsd ? { ...d, videoUrl: rsd.videoUrl } : d;
+      return rsd ? { ...d, videoUrl: rsd.videoUrl ?? d.videoUrl, imagens: rsd.imagens } : d;
     });
     const { error } = await supabase.from('carousel_collections').update({ dias: novosDias }).eq('slug', SLUG);
     if (error) console.error(`[update] ${error.message}`);

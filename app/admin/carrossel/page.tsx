@@ -19,7 +19,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
 type Jornada = { entrada?: string; aprofundar?: string; complemento?: string; fio?: string };
-type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string; faixa?: { titulo: string; url?: string }; videoUrl?: string };
+type VeuDia = ConteudoDia & { diaSemana?: string; palavra?: string; subtitulo?: string; faixa?: { titulo: string; url?: string }; videoUrl?: string; imagens?: string[] };
 type Coleccao = {
   id: string;
   slug: string;
@@ -87,6 +87,24 @@ export default function CarrosselPage() {
       await carregar();
       setVideoMsg('Versão anterior restaurada.');
     } catch (e) { setErro(String(e)); }
+  }
+
+  async function descarregarCarrossel(dia: VeuDia) {
+    const urls = dia.imagens ?? [];
+    if (!urls.length || !sel) { setErro('Ainda não há imagens deste dia — corre "gerar carrossel" primeiro.'); return; }
+    try {
+      const JSZip = (await import('jszip')).default;
+      const zip = new JSZip();
+      for (let i = 0; i < urls.length; i++) {
+        const r = await fetch(urls[i]);
+        zip.file(`slide-${i + 1}.png`, await r.blob());
+      }
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `${sel.slug}-dia-${dia.dia}.zip`; a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) { setErro('zip: ' + String(e)); }
   }
 
   async function gerarVideos(c: Coleccao) {
@@ -210,7 +228,7 @@ export default function CarrosselPage() {
             <div className="flex items-center gap-2">
               <Btn variant="default" onClick={() => puxarPool(sel)}>imagens do pool</Btn>
               {(sel.theme?.historico?.length ?? 0) > 0 && <Btn variant="default" onClick={() => restaurar(sel)}>↺ restaurar anterior</Btn>}
-              <Btn variant="default" onClick={() => gerarVideos(sel)}>gerar vídeos (MP4)</Btn>
+              <Btn variant="primary" onClick={() => gerarVideos(sel)}>gerar carrossel (imagens)</Btn>
               <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
             </div>
           </div>
@@ -245,6 +263,9 @@ export default function CarrosselPage() {
                   {dia.subtitulo && <p className="text-[0.82rem] italic opacity-75 mb-1">{dia.subtitulo}</p>}
                   <div className="flex items-center gap-3 mb-3">
                     <p className="text-[0.68rem] opacity-45">♪ Ancient Ground · {dia.faixa?.titulo ?? faixaParaCarrossel(sel.theme?.semana ?? 1, dia.dia).titulo}</p>
+                    {(dia.imagens?.length ?? 0) > 0 && (
+                      <button onClick={() => descarregarCarrossel(dia)} className="text-[0.66rem] px-2.5 py-1 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ descarregar carrossel ({dia.imagens!.length} imagens)</button>
+                    )}
                   </div>
                   {dia.videoUrl && (
                     <div className="mb-3 flex items-center gap-3">
