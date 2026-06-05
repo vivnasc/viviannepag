@@ -84,7 +84,7 @@ async function main() {
 
     // 4. ffmpeg -> mp4
     const outPath = path.join(diaDir, 'out.mp4');
-    const vf = 'scale=1080:1920:force_original_aspect_ratio=cover,fps=30,format=yuv420p';
+    const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p';
     const inputs = `-f concat -safe 0 -i list.txt${temAudio ? ' -i audio.mp3' : ''}`;
     const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
     execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -vf "${vf}" -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
