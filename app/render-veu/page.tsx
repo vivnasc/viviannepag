@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { VeuSlide } from '@/components/admin/VeuSlide';
+import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
@@ -59,10 +60,19 @@ export default function RenderVeuPage() {
     }
   }, [estado]);
 
+  const ehInfo = (estado?.slide as { tipo?: string } | undefined)?.tipo === 'infografico';
+  const H = ehInfo ? 1350 : 1920;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; ciclo?: string[]; custo?: string; virada?: string; url?: string }) | undefined;
   return (
-    <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: 1920, overflow: 'hidden', background: '#000' }}>
+    <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
-      {estado && (
+      {estado && ehInfo && s && (
+        <InfograficoSlide
+          info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custo: s.custo ?? '', virada: s.virada, url: s.url }}
+          imageUrl={s.imageUrl}
+        />
+      )}
+      {estado && !ehInfo && (
         <VeuSlide
           slide={estado.slide}
           mundo={estado.dia.mundo}
