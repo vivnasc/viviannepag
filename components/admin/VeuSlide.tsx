@@ -168,18 +168,23 @@ export function VeuSlide({
         {/* CAPA */}
         {isCapa && (
           <>
-            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-              <span style={{ width: 320, height: 1, background: C.gold, opacity: 0.65 }} />
-              <span style={{ width: 200, height: 1, background: C.gold, opacity: 0.45 }} />
-              <span style={{ width: 100, height: 1, background: C.gold, opacity: 0.28 }} />
-            </div>
-            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 34 }}>
+            {/* TOPO: linhas + palavra + ◇◇◇ + subtitulo */}
+            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 320, height: 1, background: C.gold, opacity: 0.65 }} />
+                <span style={{ width: 200, height: 1, background: C.gold, opacity: 0.45 }} />
+                <span style={{ width: 100, height: 1, background: C.gold, opacity: 0.28 }} />
+              </div>
               <div ref={tituloRef} style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 180, lineHeight: 0.95, letterSpacing: '-0.025em', whiteSpace: 'nowrap', color: C.ivory, textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.6)' : 'none' }}>{palavra ?? slide.texto}</div>
               <div style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, letterSpacing: '1.2em', color: ornamento, opacity: 0.85, paddingLeft: '1.2em' }}>◇ ◇ ◇</div>
               {subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 300, fontSize: 38, lineHeight: 1.4, color: C.ivory, opacity: 0.82, maxWidth: 780 }}>{subtitulo}</p>}
-              {slide.destaque && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, marginTop: 30, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>{slide.destaque}</p>}
             </div>
-            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
+            {/* CENTRO: frase de abertura */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
+              {slide.destaque && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>{slide.destaque}</p>}
+            </div>
+            {/* BAIXO: marca */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
               <span style={{ fontFamily: FONT_SANS, fontWeight: 300, fontSize: 18, letterSpacing: '0.6em', textTransform: 'uppercase', color: C.gold, opacity: 0.7 }}>os sete véus</span>
             </div>
           </>

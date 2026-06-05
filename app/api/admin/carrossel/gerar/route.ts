@@ -7,6 +7,7 @@ import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
+import { listarPoolImagens, atribuirPool } from '@/lib/carrossel/pool-server';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -113,7 +114,7 @@ DEVOLVE APENAS JSON valido, sem texto a volta:
       "produtoRelacionado": "slug-ou-vazio",
       "horario": "11:30",
       "slides": [
-        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|subtitulo-da-capa|nome-da-oferta", "texto": "...", "destaque": "na CAPA = frase de abertura; no CTA = a URL exacta", "notaVisual": "SO em capa e cta: EN editorial boho contemplativo, SEM pessoas/rostos/texto" }
+        { "tipo": "capa|conteudo|cta", "titulo": "PROSA|POÉTICO|PRÁTICA|subtitulo-da-capa|nome-da-oferta", "texto": "...", "destaque": "na CAPA = frase de abertura; no CTA = a URL exacta", "notaVisual": "SO em capa e cta: um PROMPT MidJourney COMPLETO em ingles, pronto a colar — natureza-morta editorial contemplativa (objetos, texturas, luz, botanicos do universo), SEM pessoas, SEM rostos, SEM texto. Termina com ' --ar 9:16'" }
       ]
     }
   ]
@@ -181,12 +182,20 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
     return NextResponse.json({ erro: 'sem-dias' }, { status: 502 });
   }
 
+  // Pool global: reaproveita imagens ja geradas no Estudio (estudio/{mundo}) para
+  // os fundos capa+fecho, sem gerar novas.
+  let diasFinal: typeof dias = dias;
+  try {
+    const pool = await listarPoolImagens(mundo);
+    diasFinal = atribuirPool(dias as unknown as Record<string, unknown>[], pool) as unknown as typeof dias;
+  } catch { /* sem pool, segue sem imagens */ }
+
   const slug = body.semana ? `semana-${body.semana}-${universo}` : `${universo}-${Date.now()}`;
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
     .upsert(
-      { slug, title: tema, brief, dias, theme: { mundo, universo, semana: body.semana ?? null, territorio: tema, estacao, musica, jornada: parsed.jornada ?? null } },
+      { slug, title: tema, brief, dias: diasFinal, theme: { mundo, universo, semana: body.semana ?? null, territorio: tema, estacao, musica, jornada: parsed.jornada ?? null } },
       { onConflict: 'slug' },
     )
     .select()

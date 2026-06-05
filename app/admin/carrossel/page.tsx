@@ -37,15 +37,40 @@ function downloadFile(content: string, filename: string, type = 'text/plain') {
   URL.revokeObjectURL(url);
 }
 
+function CopyButton({ text }: { text: string }) {
+  const [ok, setOk] = useState(false);
+  return (
+    <button
+      onClick={() => { navigator.clipboard?.writeText(text); setOk(true); setTimeout(() => setOk(false), 1200); }}
+      className="shrink-0 text-[0.58rem] px-2 py-1 rounded border border-ocre/30 text-creme-2/70 hover:border-ambar hover:text-ambar"
+    >{ok ? '✓ copiado' : 'copiar'}</button>
+  );
+}
+
 export default function CarrosselPage() {
   const [coleccoes, setColeccoes] = useState<Coleccao[]>([]);
   const [gerando, setGerando] = useState<number | null>(null);
   const [sel, setSel] = useState<Coleccao | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
-  const [imgProg, setImgProg] = useState<{ done: number; total: number } | null>(null);
   const [videoMsg, setVideoMsg] = useState<string | null>(null);
   const anoAtual = new Date().getFullYear();
+
+  async function puxarPool(c: Coleccao) {
+    setErro(null); setVideoMsg(null);
+    try {
+      const r = await fetch('/api/admin/carrossel/pool-assign', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slug: c.slug }),
+      });
+      const j = await r.json();
+      if (j.erro === 'pool-vazio') { setErro(j.detalhe ?? 'pool vazio'); return; }
+      if (!r.ok) { setErro('pool: ' + (j.erro ?? '')); return; }
+      if (j.coleccao) setSel(j.coleccao);
+      await carregar();
+      setVideoMsg(`Imagens do pool aplicadas às capas e fechos (${j.usadas} no pool).`);
+    } catch (e) { setErro(String(e)); }
+  }
 
   async function gerarVideos(c: Coleccao) {
     setErro(null); setVideoMsg(null);
@@ -110,46 +135,21 @@ export default function CarrosselPage() {
 
   // Gera as imagens editoriais (capa + fecho de cada dia) reutilizando o motor
   // Flux existente, guarda os URLs na coleccao e mostra-os nos slides.
-  async function gerarImagens(c: Coleccao) {
-    const alvos: { di: number; si: number }[] = [];
-    c.dias.forEach((d, di) => (d.slides ?? []).forEach((s, si) => {
-      if (s.tipo === 'capa' || s.tipo === 'cta') alvos.push({ di, si });
-    }));
-    if (!alvos.length) return;
-    setErro(null);
-    setImgProg({ done: 0, total: alvos.length });
-    const dias = c.dias.map((d) => ({ ...d, slides: (d.slides ?? []).map((s) => ({ ...s })) }));
-    let done = 0;
-    for (const a of alvos) {
-      const d = dias[a.di];
-      const s = d.slides![a.si] as { tipo: string; texto?: string; notaVisual?: string; imageUrl?: string };
-      try {
-        const r = await fetch('/api/admin/estudio/gerar-imagem', {
-          method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            texto: s.texto || d.palavra || c.title,
-            mundo: d.mundo,
-            tipo: s.tipo,
-            promptCustom: s.notaVisual || `editorial boho still life evoking "${d.palavra ?? ''}", warm contemplative atmosphere, no text, no people`,
-            aspectRatio: '9:16',
-            slideKey: `carrossel-${c.slug}-d${d.dia}-s${a.si}`,
-          }),
-        });
-        const j = await r.json();
-        if (j.imageUrl) s.imageUrl = j.imageUrl;
-      } catch { /* continua */ }
-      done++;
-      setImgProg({ done, total: alvos.length });
-      setSel((prev) => (prev && prev.slug === c.slug ? { ...prev, dias } : prev));
-    }
+  // Arrasta/escolhe uma imagem MJ como fundo de um slide (capa/fecho).
+  async function uploadFundo(file: File | undefined, diaNum: number, idx: number) {
+    if (!sel || !file) return;
+    setErro(null); setVideoMsg(null);
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('slug', sel.slug);
+    fd.append('dia', String(diaNum));
+    fd.append('idx', String(idx));
     try {
-      await fetch('/api/admin/carrossel/imagens', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ slug: c.slug, dias }),
-      });
-      await carregar();
-    } catch { /* ignore */ }
-    setImgProg(null);
+      const r = await fetch('/api/admin/carrossel/upload-fundo', { method: 'POST', body: fd });
+      const j = await r.json();
+      if (!r.ok) { setErro('fundo: ' + (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      if (j.coleccao) setSel(j.coleccao);
+    } catch (e) { setErro(String(e)); }
   }
 
   // ── Detalhe de uma coleccao ──
@@ -191,9 +191,7 @@ export default function CarrosselPage() {
           <div className="flex items-center justify-between mb-6">
             <button onClick={() => setSel(null)} className="text-[0.7rem] tracking-wide opacity-70 hover:opacity-100">← voltar à grelha</button>
             <div className="flex items-center gap-2">
-              {imgProg
-                ? <span className="text-[0.7rem] opacity-70">a gerar imagens… {imgProg.done}/{imgProg.total}</span>
-                : <Btn variant="default" onClick={() => gerarImagens(sel)}>gerar imagens (capa+fecho)</Btn>}
+              <Btn variant="default" onClick={() => puxarPool(sel)}>imagens do pool</Btn>
               <Btn variant="default" onClick={() => gerarVideos(sel)}>gerar vídeos (MP4)</Btn>
               <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
             </div>
@@ -234,17 +232,44 @@ export default function CarrosselPage() {
 
                   {dia.slides && dia.slides.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
-                      {dia.slides.map((s, i) => (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={() => setZoom({ dia, index: i })}
-                          className="block w-full cursor-zoom-in transition-transform hover:scale-[1.02]"
-                          title="ver em tamanho real"
-                        >
-                          <VeuSlide slide={s} mundo={dia.mundo} palavra={dia.palavra} subtitulo={dia.subtitulo} imageUrl={(s as { imageUrl?: string }).imageUrl} numeroDia={dia.dia} slideIndex={i + 1} slideTotal={dia.slides!.length} />
-                        </button>
-                      ))}
+                      {dia.slides.map((s, i) => {
+                        const ehFundo = s.tipo === 'capa' || s.tipo === 'cta';
+                        return (
+                          <div key={i}>
+                            <button
+                              type="button"
+                              onClick={() => setZoom({ dia, index: i })}
+                              onDragOver={ehFundo ? (e) => e.preventDefault() : undefined}
+                              onDrop={ehFundo ? (e) => { e.preventDefault(); uploadFundo(e.dataTransfer.files?.[0], dia.dia, i); } : undefined}
+                              className="block w-full cursor-zoom-in transition-transform hover:scale-[1.02]"
+                              title={ehFundo ? 'ver / arrastar imagem MJ para fundo' : 'ver em tamanho real'}
+                            >
+                              <VeuSlide slide={s} mundo={dia.mundo} palavra={dia.palavra} subtitulo={dia.subtitulo} imageUrl={(s as { imageUrl?: string }).imageUrl} numeroDia={dia.dia} slideIndex={i + 1} slideTotal={dia.slides!.length} />
+                            </button>
+                            {ehFundo && (
+                              <label className="mt-1 block text-center text-[0.6rem] opacity-55 hover:opacity-90 cursor-pointer">
+                                ⬆ arrastar/escolher fundo MJ
+                                <input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], dia.dia, i)} />
+                              </label>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {dia.slides?.some((s) => (s.tipo === 'capa' || s.tipo === 'cta') && s.notaVisual) && (
+                    <div className="mb-3 rounded-lg bg-black/20 p-3">
+                      <p className="text-[0.58rem] uppercase tracking-[0.2em] opacity-50 mb-2">Prompts MidJourney · capa + fecho (copia → gera no MJ → arrasta a imagem)</p>
+                      <div className="space-y-2">
+                        {dia.slides.map((s, i) => (s.tipo === 'capa' || s.tipo === 'cta') && s.notaVisual ? (
+                          <div key={i} className="flex items-start gap-2">
+                            <span className="text-[0.55rem] tracking-wide opacity-50 mt-1 w-10 shrink-0">{s.tipo === 'capa' ? 'CAPA' : 'FECHO'}</span>
+                            <p className="text-[0.66rem] opacity-80 flex-1 leading-snug">{s.notaVisual}</p>
+                            <CopyButton text={s.notaVisual} />
+                          </div>
+                        ) : null)}
+                      </div>
                     </div>
                   )}
 
