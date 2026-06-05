@@ -5,7 +5,7 @@
 
 const BASE_AUDIO = 'https://tdytdamtfillqyklgrmb.supabase.co/storage/v1/object/public/audios/albums/ancient-ground';
 
-export const NUM_FAIXAS = 7; // nº de faixas no album (faixa-01.mp3 ... faixa-0N.mp3)
+export const NUM_FAIXAS = 100; // nº de faixas no album (faixa-01.mp3 ... faixa-100.mp3)
 
 export type Faixa = { numero: number; titulo: string; url: string };
 
