@@ -41,14 +41,16 @@ export default function InfograficoPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
 
-  async function gerar() {
-    if (!tema.trim()) { setErro('Escreve o conceito (ou clica numa sugestão).'); return; }
+  async function gerar(temaArg?: string) {
+    const t = (temaArg ?? tema).trim();
+    if (!t) { setErro('Escreve o conceito ou clica numa sugestão.'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema, curso }) });
+      const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, curso }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
-      setTema('');
+      if (!temaArg) setTema('');
+      setMsg(`Gerado: ${j.coleccao?.title ?? t}`);
       await carregar();
     } catch (e) { setErro(String(e)); }
     finally { setGerando(false); }
@@ -108,14 +110,14 @@ export default function InfograficoPage() {
             <select value={curso} onChange={(e) => { setCurso(e.target.value); setSugestoes([]); }} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
               {CURSOS.map((c) => <option key={c.id} value={c.id} className="bg-[#0F0F1A]">{c.nome}</option>)}
             </select>
-            <Btn variant="primary" onClick={gerar} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar 1'}</Btn>
+            <Btn variant="primary" onClick={() => gerar()} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar o que escrevi'}</Btn>
             <Btn variant="default" onClick={gerarBiblioteca} disabled={gerando}>gerar biblioteca (5)</Btn>
           </div>
           <p className="mt-2 text-[0.66rem] opacity-50 italic">{cursoAtual.descricao}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mr-1">conceitos:</span>
+            <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mr-1">clica para gerar:</span>
             {conceitos.map((sug) => (
-              <button key={sug} onClick={() => setTema(sug)} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar">{sug}</button>
+              <button key={sug} onClick={() => gerar(sug)} disabled={gerando} title="gerar este conceito" className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
             ))}
             <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ sugestões IA (profundas)'}</button>
           </div>
