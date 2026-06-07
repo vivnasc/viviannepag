@@ -33,6 +33,13 @@ export async function POST() {
 
   const slug = `aneis-${Date.now()}`;
   const supabase = getSupabaseAdmin();
+  // recriar substitui: apaga coleccoes de aneis antigas (so fica a nova)
+  try {
+    const { data: velhas } = await supabase.from('carousel_collections').select('slug, theme');
+    const apagar = (velhas ?? []).filter((c) => (c.theme as { formato?: string } | null)?.formato === 'aneis').map((c) => c.slug);
+    if (apagar.length) await supabase.from('carousel_collections').delete().in('slug', apagar);
+  } catch { /* segue */ }
+
   const { data, error } = await supabase
     .from('carousel_collections')
     .upsert({ slug, title: 'Anéis · Véu a Véu', brief: 'destaques + perfil', dias, theme: { formato: 'aneis', mundo } }, { onConflict: 'slug' })
