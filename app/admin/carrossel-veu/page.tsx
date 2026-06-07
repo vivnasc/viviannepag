@@ -209,9 +209,15 @@ export default function CarrosselVeuPage() {
                     <span className="text-[0.62rem] opacity-50">{slides.length} slides</span>
                   </div>
                   <h3 className="font-serif text-lg mb-3 text-center">{it.title}</h3>
-                  <button onClick={() => setZoom({ it, idx: 0 })} className="block w-[52%] mx-auto mb-4 cursor-zoom-in" title="ver os slides">
-                    <KineticSlide texto={slides[0].texto} destaque={slides[0].destaque} imageUrl={slides[0].imageUrl} mundo={mundo} prog={1} ratio="4:5" />
-                  </button>
+                  {/* todos os slides à vista (filmstrip) */}
+                  <div className="flex gap-2 overflow-x-auto pb-2 mb-4">
+                    {slides.map((s, i) => (
+                      <button key={i} onClick={() => setZoom({ it, idx: i })} className="shrink-0 w-[92px] cursor-zoom-in" title={`slide ${i + 1}`}>
+                        <KineticSlide texto={s.texto} destaque={s.destaque} imageUrl={s.imageUrl} mundo={mundo} prog={1} ratio="4:5" />
+                        <p className="text-center text-[0.55rem] opacity-45 mt-1">{i + 1}{s.imageUrl ? '' : ' ·sem img'}</p>
+                      </button>
+                    ))}
+                  </div>
 
                   {!temFundo && (
                     <div className="mb-3 rounded-lg bg-black/25 p-3">
