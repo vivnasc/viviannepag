@@ -72,6 +72,18 @@ export default function CarrosselVeuPage() {
     } catch (e) { setErro(String(e)); }
   }
 
+  async function resetGlossario() {
+    if (!confirm('Apagar todos os glossários e recomeçar a sequência do início (A psique, Ego, Self…)? Não toca no Sobre nem nos outros carrosséis.')) return;
+    setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/carrossel-veu/reset-glossario', { method: 'POST' });
+      const j = await r.json();
+      if (!r.ok) { setErro('reset: ' + (j.erro ?? '')); return; }
+      setMsg(`Glossários apagados (${j.apagados}). A sequência recomeça em "A psique".`);
+      await carregar();
+    } catch (e) { setErro(String(e)); }
+  }
+
   function copiar(it: Item) {
     const d = it.dias?.[0];
     const t = [d?.legenda?.trim(), (d?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
@@ -183,7 +195,8 @@ export default function CarrosselVeuPage() {
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <button onClick={() => gerar({ modo: 'sobre' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Sobre (apresentação da conta)</button>
             <button onClick={() => gerar({ modo: 'glossario' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Glossário (do teu universo)</button>
-            <span className="text-[0.62rem] opacity-40">presets prontos. O glossário puxa sozinho conceitos dos teus cursos, sem repetir.</span>
+            <button onClick={resetGlossario} disabled={gerando} className="text-[0.66rem] px-2.5 py-1.5 rounded-full border border-rosa/30 text-rosa/80 hover:bg-rosa/10">↺ recomeçar glossário do início</button>
+            <span className="text-[0.62rem] opacity-40">presets prontos. O glossário avança na sequência, sem repetir.</span>
           </div>
 
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mt-5 mb-2">Ou um tema pronto (gera logo)</p>
