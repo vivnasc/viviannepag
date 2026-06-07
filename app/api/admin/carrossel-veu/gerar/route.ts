@@ -109,16 +109,18 @@ DEVOLVE APENAS JSON valido:
   const slidesIn = (Array.isArray(p.slides) ? p.slides : []).filter((s) => s && s.texto);
   if (!slidesIn.length) return NextResponse.json({ erro: 'sem-slides', amostra: texto.slice(0, 300) }, { status: 502 });
 
-  const semAcc = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const semAcc = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const slides = slidesIn.map((s, i) => {
     let texto = (s.texto ?? '').trim();
     let destaque = Array.isArray(s.destaque) ? s.destaque.map(String) : [];
-    // glossário: garante que o TERMO sai com a acentuação certa do teu universo
-    if (modo === 'glossario' && i > 0 && termosPrompt[i - 1]) {
-      const termo = termosPrompt[i - 1];
-      const na = semAcc(termo).toLowerCase();
-      if (semAcc(texto).toLowerCase().startsWith(na)) texto = termo + texto.slice(termo.length);
-      destaque = [termo];
+    // glossário: o TERMO a dourar é o que está ANTES do primeiro ponto (o que está mesmo no slide).
+    // Assim o realce bate sempre certo. Corrige o acento se corresponder a um termo do universo.
+    if (modo === 'glossario' && i > 0) {
+      const dot = texto.indexOf('.');
+      let termoTxt = (dot > 0 ? texto.slice(0, dot) : texto).trim();
+      const canon = termosPrompt.find((t) => semAcc(t) === semAcc(termoTxt));
+      if (canon && canon !== termoTxt) { texto = canon + texto.slice(termoTxt.length); termoTxt = canon; }
+      destaque = termoTxt ? [termoTxt] : destaque;
     }
     return { tipo: 'kinetico', texto, destaque, notaVisual: i === 0 ? (p.fundoPrompt ?? '').trim() : '', capa: i === 0 };
   });
