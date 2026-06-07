@@ -31,6 +31,8 @@ export default function InfograficoPage() {
   const [zoom, setZoom] = useState<{ info: Infografico; mundo: Mundo; imageUrl?: string } | null>(null);
   const [sugestoesMap, setSugestoesMap] = useState<Record<string, string[]>>({});
   const [sugLoading, setSugLoading] = useState<string | null>(null);
+  const [filtro, setFiltro] = useState('todos');
+  const [busca, setBusca] = useState('');
 
   const cursoAtual = getCurso(curso);
   const conceitosDe = (cid: string) => [...getCurso(cid).conceitos, ...(sugestoesMap[cid] ?? [])];
@@ -86,6 +88,14 @@ export default function InfograficoPage() {
     finally { setSugLoading(null); }
   }
 
+  async function apagar(slug: string) {
+    if (!confirm('Apagar este infográfico?')) return;
+    try {
+      const r = await fetch('/api/admin/infografico/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      if (r.ok) await carregar(); else setErro('apagar falhou');
+    } catch (e) { setErro(String(e)); }
+  }
+
   async function gerarImagem(slug: string) {
     setErro(null); setMsg(null);
     try {
@@ -138,9 +148,25 @@ export default function InfograficoPage() {
           {msg && <p className="mt-3 text-[0.75rem] text-salvia">{msg}</p>}
         </Card>
 
-        {itens.length > 0 && <p className="text-[0.72rem] opacity-55 mb-4">Biblioteca · {itens.length} infográfico{itens.length === 1 ? '' : 's'}</p>}
-        <div className="grid grid-cols-1 gap-8">
-          {itens.map((it) => {
+        {itens.length > 0 && (
+          <div className="mb-4">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className="text-[0.72rem] opacity-55 mr-1">Biblioteca · {itens.length}</span>
+              <button onClick={() => setFiltro('todos')} className={`text-[0.66rem] px-2.5 py-1 rounded-full border ${filtro === 'todos' ? 'border-ambar text-ambar' : 'border-ocre/25 text-creme-2/65'}`}>todos ({itens.length})</button>
+              {CURSOS.map((c) => {
+                const n = itens.filter((it) => it.theme?.curso === c.id).length;
+                if (!n) return null;
+                return <button key={c.id} onClick={() => setFiltro(c.id)} className={`text-[0.66rem] px-2.5 py-1 rounded-full border ${filtro === c.id ? 'border-ambar text-ambar' : 'border-ocre/25 text-creme-2/65'}`}>{c.nome.split(' ')[0]} ({n})</button>;
+              })}
+              <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="procurar…" className="ml-auto bg-black/30 border border-ocre/25 rounded-lg px-3 py-1 text-[0.75rem] outline-none focus:border-ambar" />
+            </div>
+          </div>
+        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {itens
+            .filter((it) => filtro === 'todos' || it.theme?.curso === filtro)
+            .filter((it) => !busca.trim() || it.title.toLowerCase().includes(busca.trim().toLowerCase()))
+            .map((it) => {
             const s = it.dias?.[0]?.slides?.[0];
             const img = it.dias?.[0]?.imagens?.[0];
             const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
@@ -156,6 +182,7 @@ export default function InfograficoPage() {
                   {img
                     ? <a href={img} download className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia">⬇ descarregar imagem</a>
                     : <Btn variant="default" onClick={() => gerarImagem(it.slug)}>gerar imagem (PNG)</Btn>}
+                  <button onClick={() => apagar(it.slug)} className="text-[0.72rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                 </div>
               </Card>
             );

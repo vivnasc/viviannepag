@@ -27,6 +27,7 @@ REGRAS:
 - PURAMENTE DIDATICO: SEM CTA, SEM produtos, SEM links, SEM promover nada. So conhecimento.
 - Claro a primeira leitura. Concreto, com exemplos do real.
 - Fiel ao conceito academico; honra a profundidade (ex.: Ordens do Amor, substituicao de papeis, lealdades invisiveis, niveis de consciencia) quando o tema o pedir.
+- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O custo do padrao e para o AMOR e para a RELACAO (amor construido sobre alguem que desaparece nao e amor real; os outros aprendem a amar uma pessoa que nao existe). A alternativa nao e ego — e INTEIREZA, PRESENCA e RECIPROCIDADE saudavel (estar inteira para poder dar a serio, e tambem deixar receber). Evita linguagem de auto-prioridade que soe egocentrica; a virada abre uma reflexao, nao manda "cuida de ti primeiro".
 
 DEVOLVE APENAS JSON valido:
 {
