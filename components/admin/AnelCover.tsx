@@ -54,10 +54,8 @@ export function AnelCover({ label, imageUrl, mundo = 'escola', perfil = false }:
         <Mandala cor={p.destaque} op={imageUrl ? 0.16 : 0.24} />
 
         {perfil ? (
-          <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-            <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 36, letterSpacing: '0.5em', color: p.destaque, opacity: 0.9, paddingLeft: '0.5em' }}>◇ ◇ ◇</span>
-            <span style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 152, lineHeight: 0.9, letterSpacing: '0.02em', textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}>Véu<br />a Véu</span>
-            <span style={{ fontFamily: FONT_SANS, fontWeight: 300, fontSize: 25, letterSpacing: '0.42em', textTransform: 'uppercase', color: p.destaque, opacity: 0.85, marginTop: 6 }}>vivianne dos santos</span>
+          <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 26 }}>
+            <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 120, letterSpacing: '0.3em', color: p.destaque, opacity: 0.92, paddingLeft: '0.3em', textShadow: '0 2px 40px rgba(0,0,0,0.5)' }}>◇</span>
           </div>
         ) : (
           <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22, padding: '0 110px' }}>
