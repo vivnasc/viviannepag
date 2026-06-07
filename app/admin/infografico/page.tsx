@@ -103,7 +103,7 @@ export default function InfograficoPage() {
             const img = it.dias?.[0]?.imagens?.[0];
             const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'freeme';
             if (!s) return null;
-            const info = { padrao: s.padrao, subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
+            const info = { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
             return (
               <Card key={it.slug} className="p-5">
                 <h3 className="font-serif text-lg mb-4 text-center">{it.title}</h3>

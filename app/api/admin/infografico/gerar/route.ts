@@ -33,15 +33,23 @@ ${ecossistema}
 
 DEVOLVE APENAS JSON valido:
 {
-  "padrao": "nome curto do padrao (2-4 palavras, ex.: 'Apagar-se para amar')",
+  "padrao": "nome curto do padrao (2-4 palavras)",
   "subtitulo": "1 linha que o descreve",
-  "ciclo": ["passo curto", "passo curto", "passo curto", "passo curto"],
-  "custoTi": "1 frase concreta: o que este padrao te custa A TI (o que perdes/deixas de ser)",
-  "custoOutros": "1 frase concreta: o que custa AOS OUTROS (filhos, parceiro, familia — o que aprendem ou recebem)",
-  "virada": "1 frase curta de abertura/reframe (uma pergunta)",
-  "produtoRelacionado": "slug-ou-link-exacto-do-ecossistema para o CTA"
+  "tipoDiagrama": "ciclo | espectro | herdado | camadas | travessia",
+  "diagrama": { },
+  "custoTi": "1 frase concreta: o que te custa A TI",
+  "custoOutros": "1 frase concreta: o que custa AOS OUTROS (parceiro, filhos, familia)",
+  "virada": "1 frase curta de abertura (uma pergunta)",
+  "produtoRelacionado": "slug-ou-link-exacto-do-ecossistema"
 }
-Notas: o "ciclo" sao 3-4 passos do circulo automatico (gatilho -> reacao -> alivio -> repete). CADA passo no MAXIMO 5 palavras (vai num diagrama em roda). custoTi e custoOutros sao concretos e distintos. Usa nome/link EXACTOS do ecossistema.`;
+
+ESCOLHE o tipoDiagrama que MELHOR explica este padrao e preenche "diagrama" na forma certa:
+- "ciclo" (o padrao repete-se em loop) -> { "passos": ["3-4 passos curtos, <=5 palavras"] }
+- "espectro" (vives entre dois extremos) -> { "poloA": "extremo 1", "poloB": "extremo 2", "equilibrio": "o ponto saudavel no meio" }
+- "herdado" (o que vem de tras vs o que e teu) -> { "esquerda": { "titulo": "Herdado", "itens": ["...","..."] }, "direita": { "titulo": "Teu", "itens": ["...","..."] } }
+- "camadas" (o que se ve por fora vs o que esta por baixo) -> { "camadas": [ { "label": "O que se ve", "texto": "..." }, { "label": "Por baixo", "texto": "..." } ] }
+- "travessia" (um caminho linear, nao um loop) -> { "passos": ["3-4 etapas curtas"] }
+Ex.: "dar e receber" -> espectro (poloA "dar demais", poloB "receber de menos", equilibrio "presenca que fica"). Usa nome/link EXACTOS do ecossistema.`;
 
   let texto = '';
   try {
@@ -56,7 +64,7 @@ Notas: o "ciclo" sao 3-4 passos do circulo automatico (gatilho -> reacao -> aliv
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { padrao?: string; subtitulo?: string; ciclo?: unknown; custoTi?: string; custoOutros?: string; virada?: string; produtoRelacionado?: string };
+  let p: { padrao?: string; subtitulo?: string; tipoDiagrama?: string; diagrama?: unknown; custoTi?: string; custoOutros?: string; virada?: string; produtoRelacionado?: string };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
 
   // resolve URL do produto (slug -> /loja/slug, ou link directo)
@@ -77,7 +85,8 @@ Notas: o "ciclo" sao 3-4 passos do circulo automatico (gatilho -> reacao -> aliv
     tipo: 'infografico',
     padrao: p.padrao ?? tema,
     subtitulo: p.subtitulo ?? '',
-    ciclo: Array.isArray(p.ciclo) ? p.ciclo.map(String) : [],
+    tipoDiagrama: p.tipoDiagrama ?? 'ciclo',
+    diagrama: p.diagrama ?? {},
     custoTi: p.custoTi ?? '',
     custoOutros: p.custoOutros ?? '',
     virada: p.virada ?? '',

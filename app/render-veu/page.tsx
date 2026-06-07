@@ -62,13 +62,13 @@ export default function RenderVeuPage() {
 
   const ehInfo = (estado?.slide as { tipo?: string } | undefined)?.tipo === 'infografico';
   const H = ehInfo ? 1350 : 1920;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string }) | undefined;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
       {estado && ehInfo && s && (
         <InfograficoSlide
-          info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
+          info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
           mundo={estado.dia.mundo}
           imageUrl={s.imageUrl}
         />
