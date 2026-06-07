@@ -69,6 +69,7 @@ export default function RenderVeuPage() {
       {estado && ehInfo && s && (
         <InfograficoSlide
           info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custo: s.custo ?? '', virada: s.virada, url: s.url }}
+          mundo={estado.dia.mundo}
           imageUrl={s.imageUrl}
         />
       )}

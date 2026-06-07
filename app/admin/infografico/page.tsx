@@ -12,11 +12,12 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
+type Mundo = 'freeme' | 'infonte' | 'synchim' | 'escola' | 'autora';
 type InfoSlide = Infografico & { tipo: string; imageUrl?: string };
 type Item = {
   slug: string; title: string;
-  dias: Array<{ dia: number; imagens?: string[]; slides?: InfoSlide[] }>;
-  theme: { universo?: ColecaoId };
+  dias: Array<{ dia: number; mundo?: Mundo; imagens?: string[]; slides?: InfoSlide[] }>;
+  theme: { universo?: ColecaoId; mundo?: Mundo };
   created_at: string;
 };
 
@@ -27,6 +28,7 @@ export default function InfograficoPage() {
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [zoom, setZoom] = useState<{ info: Infografico; mundo: Mundo; imageUrl?: string } | null>(null);
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/infografico/list');
@@ -88,26 +90,37 @@ export default function InfograficoPage() {
           {msg && <p className="mt-3 text-[0.75rem] text-salvia">{msg}</p>}
         </Card>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-8">
           {itens.map((it) => {
             const s = it.dias?.[0]?.slides?.[0];
             const img = it.dias?.[0]?.imagens?.[0];
+            const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'freeme';
             if (!s) return null;
+            const info = { padrao: s.padrao, subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custo: s.custo, virada: s.virada, url: s.url };
             return (
-              <Card key={it.slug} className="p-4">
-                <h3 className="font-serif text-lg mb-3">{it.title}</h3>
-                <div className="max-w-[300px] mx-auto mb-3">
-                  <InfograficoSlide info={{ padrao: s.padrao, subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custo: s.custo, virada: s.virada, url: s.url }} imageUrl={s.imageUrl} />
-                </div>
+              <Card key={it.slug} className="p-5">
+                <h3 className="font-serif text-lg mb-4 text-center">{it.title}</h3>
+                <button onClick={() => setZoom({ info, mundo, imageUrl: s.imageUrl })} className="block w-full max-w-[460px] mx-auto mb-4 cursor-zoom-in" title="ampliar">
+                  <InfograficoSlide info={info} mundo={mundo} imageUrl={s.imageUrl} />
+                </button>
                 <div className="flex items-center gap-2 justify-center">
                   {img
-                    ? <a href={img} download className="text-[0.7rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia">⬇ descarregar imagem</a>
+                    ? <a href={img} download className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia">⬇ descarregar imagem</a>
                     : <Btn variant="default" onClick={() => gerarImagem(it.slug)}>gerar imagem (PNG)</Btn>}
                 </div>
               </Card>
             );
           })}
         </div>
+
+        {zoom && (
+          <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">
+            <div className="w-full" style={{ maxWidth: 'min(88vw, 520px)' }} onClick={(e) => e.stopPropagation()}>
+              <InfograficoSlide info={zoom.info} mundo={zoom.mundo} imageUrl={zoom.imageUrl} />
+              <p className="text-center text-[0.7rem] opacity-60 mt-3">toca fora para fechar</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
