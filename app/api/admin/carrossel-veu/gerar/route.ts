@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   // sem repetir os já usados. Sem teres de escolher.
   let termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
   if (modo === 'glossario' && !termos.length) {
-    const N = Math.max(3, Math.min(7, Number(body.slides) ? Number(body.slides) - 1 : 5));
+    const N = Math.max(3, Math.min(19, Number(body.slides) ? Number(body.slides) - 1 : 5));
     // sequência pedagógica fixa: avança pelos termos ainda não usados, NA ORDEM
     const pool = SEQUENCIA_GLOSSARIO;
     try {
@@ -43,13 +43,13 @@ export async function POST(req: Request) {
 
   const nSlides = modo === 'sobre' ? 4
     : modo === 'glossario' ? termos.length + 1
-    : Math.max(3, Math.min(8, Number(body.slides) || 5));
+    : Math.max(3, Math.min(20, Number(body.slides) || 5));
 
   // termo "limpo" (só o nome: sem descrição após ":" nem parênteses) para o glossário
   const termosPrompt = termos.map((t) => t.split(':')[0].replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim());
 
   const instrucaoModo = modo === 'sobre'
-    ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
+    ? 'MODO APRESENTACAO (SEM slide de capa, ela ja existe no destaque): TODOS os slides sao conteudo, nenhum e so o nome da conta. Slide 1: o que e a Véu a Véu (a psicologia da alma, transpessoal, constelacao familiar, espiritualidade, tornadas simples). Slide 2: para quem e. Slide 3: o que vais encontrar aqui. Slide 4: quem es (Vivianne, partilha com verdade, sem formulas) e um convite a ficar. NAO faças um slide so com o nome "Véu a Véu".'
     : modo === 'glossario'
     ? (termos.length
       ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, um por slide (slide 1 = CAPA com "Glossário da Alma"): ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide de termo: comeca pelo TERMO escrito com a acentuacao CORRETA (ex.: "Inclusão", "Parentificação", "Pertença"), realcado a ouro, seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
@@ -76,7 +76,7 @@ DEVOLVE APENAS JSON valido:
 }`;
 
   const userMsg = modo === 'sobre'
-    ? `Cria o carrossel de APRESENTACAO da conta Véu a Véu em ${nSlides} slides.`
+    ? `Cria a apresentacao da Véu a Véu em ${nSlides} slides de CONTEUDO, SEM slide de capa (sem um slide so com o nome).`
     : modo === 'glossario'
     ? (termos.length
       ? `Cria "Glossário da Alma": capa + a definicao destes termos, um por slide, por esta ordem: ${termosPrompt.join('; ')}.`

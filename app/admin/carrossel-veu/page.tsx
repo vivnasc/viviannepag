@@ -184,7 +184,7 @@ export default function CarrosselVeuPage() {
           <div className="flex flex-col sm:flex-row gap-3 items-stretch">
             <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Tema do carrossel. Ex.: as Ordens do Amor" className="flex-1 bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar" />
             <select value={slidesN} onChange={(e) => setSlidesN(Number(e.target.value))} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
-              {[3, 4, 5, 6, 7, 8].map((n) => <option key={n} value={n} className="bg-[#0F0F1A]">{n} slides</option>)}
+              {[3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20].map((n) => <option key={n} value={n} className="bg-[#0F0F1A]">{n} slides</option>)}
             </select>
             <select value={curso} onChange={(e) => setCurso(e.target.value)} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
               {CURSOS.map((c) => <option key={c.id} value={c.id} className="bg-[#0F0F1A]">{c.nome}</option>)}
