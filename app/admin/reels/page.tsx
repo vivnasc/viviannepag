@@ -191,9 +191,12 @@ export default function ReelsPage() {
     (async () => {
       try {
         await (document.fonts?.ready ?? Promise.resolve());
-        await new Promise((r) => setTimeout(r, 550));
+        await new Promise((r) => setTimeout(r, 300));
         const node = capRef.current?.firstElementChild as HTMLElement | null;
-        if (node) { const url = await toPng(node, { pixelRatio: 1, cacheBust: true }); const a = document.createElement('a'); a.href = url; a.download = `${capKin.slug}.png`; a.click(); }
+        const imgs = Array.from(capRef.current?.querySelectorAll('img') ?? []);
+        await Promise.all(imgs.map((im) => (im.complete && im.naturalWidth) ? Promise.resolve() : new Promise((res) => { im.onload = res; im.onerror = res; })));
+        await new Promise((r) => setTimeout(r, 200));
+        if (node) { await toPng(node, { pixelRatio: 1 }).catch(() => {}); const url = await toPng(node, { pixelRatio: 1 }); const a = document.createElement('a'); a.href = url; a.download = `${capKin.slug}.png`; a.click(); }
       } catch (e) { setErro('download: ' + String(e)); }
       setCapKin(null);
     })();

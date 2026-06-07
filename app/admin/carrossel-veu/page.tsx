@@ -130,13 +130,20 @@ export default function CarrosselVeuPage() {
     (async () => {
       try {
         await (document.fonts?.ready ?? Promise.resolve());
-        await new Promise((r) => setTimeout(r, 600));
-        const nodes = zipRef.current?.querySelectorAll<HTMLElement>('[data-slide]');
+        await new Promise((r) => setTimeout(r, 300));
+        const host = zipRef.current;
+        // esperar que TODAS as imagens carreguem (senao o 1.o slide sai sem fundo)
+        const imgs = Array.from(host?.querySelectorAll('img') ?? []);
+        await Promise.all(imgs.map((im) => (im.complete && im.naturalWidth) ? Promise.resolve() : new Promise((res) => { im.onload = res; im.onerror = res; })));
+        await new Promise((r) => setTimeout(r, 250));
+        const nodes = host?.querySelectorAll<HTMLElement>('[data-slide]');
         if (nodes && nodes.length) {
           const JSZip = (await import('jszip')).default;
           const zip = new JSZip();
+          // aquecimento: a 1.a captura costuma falir imagens/fontes
+          await toPng(nodes[0], { pixelRatio: 1 }).catch(() => {});
           for (let i = 0; i < nodes.length; i++) {
-            const url = await toPng(nodes[i], { pixelRatio: 1, cacheBust: true });
+            const url = await toPng(nodes[i], { pixelRatio: 1 });
             zip.file(`slide-${i + 1}.png`, url.split(',')[1], { base64: true });
           }
           const blob = await zip.generateAsync({ type: 'blob' });
