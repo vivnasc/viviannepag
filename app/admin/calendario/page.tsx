@@ -17,7 +17,7 @@ const SEMANA: Dia[] = [
   { dia: '5ª feira', emoji: '📖', titulo: 'Glossário da Alma / Uma ideia de…', nota: 'Reel: um termo (sombra, ego…) OU uma ideia (Jung, Frankl…). Vão alternando.', href: '/admin/reels', cta: 'gerar nos reels' },
   { dia: '6ª feira', emoji: '💡', titulo: 'O que ninguém te explica', nota: 'Reel de perspetiva — gera curiosidade e partilhas.', href: '/admin/reels', cta: 'gerar nos reels' },
   { dia: 'sábado', emoji: '📊', titulo: 'Infográfico profundo', nota: 'Constrói autoridade. (Ou outra Frase com motion, se preferires leve.)', href: '/admin/infografico', cta: 'gerar infográfico' },
-  { dia: 'domingo', emoji: '🌙', titulo: 'Descanso (só stories)', nota: 'Descansa. Se te apetecer, uma Pergunta leve para gerar comentários.', href: '/admin/reels', cta: 'gerar uma Pergunta', descanso: true },
+  { dia: 'domingo', emoji: '🌙', titulo: 'Descanso (ou uma Pergunta)', nota: 'Descansa. Se te apetecer, uma Pergunta leve para gerar comentários.', href: '/admin/reels', cta: 'gerar uma Pergunta', descanso: true },
 ];
 
 type Tipo = { emoji: string; nome: string; oque: string; freq: string; href: string };
@@ -30,7 +30,7 @@ const TIPOS: Tipo[] = [
   { emoji: '💬', nome: 'Pergunta', oque: 'Reel/post que convida a comentar. Comentários = alcance.', freq: 'opcional (dom)', href: '/admin/reels' },
   { emoji: '🎭', nome: 'Cá em Casa', oque: 'Banda desenhada da família sobre limites no dia a dia.', freq: '1× / semana', href: '/admin/banda' },
   { emoji: '📊', nome: 'Infográfico', oque: 'Imagem didática que explica um conceito a fundo. Autoridade.', freq: '1× / semana', href: '/admin/infografico' },
-  { emoji: '📱', nome: 'Stories', oque: 'Pergunta, republicar o post do dia, bastidores leves (livros, anotações — sem cara).', freq: 'todos os dias', href: '/admin/reels' },
+  { emoji: '📱', nome: 'Stories', oque: 'Só fazem sentido com seguidores que as vejam. Por agora, ignora — entram na fase 2.', freq: 'fase 2', href: '/admin/calendario' },
 ];
 
 export default function CalendarioPage() {
@@ -41,8 +41,8 @@ export default function CalendarioPage() {
           <h1 className="text-2xl font-semibold">Calendário · Véu a Véu</h1>
           <Link href="/admin/reels" className="text-[0.7rem] opacity-60 hover:opacity-100">Reels →</Link>
         </div>
-        <p className="text-[0.85rem] opacity-70 mb-1"><b>1 publicação principal por dia + stories.</b> Conta nova: <i>consistência &gt; volume</i>.</p>
-        <p className="text-[0.78rem] opacity-55 mb-6">Hora: sempre a mesma — <b>~13h</b> ou <b>20h–21h</b> (pico). Stories: 1 de manhã (~9h) + 1 à noite (~21h).</p>
+        <p className="text-[0.85rem] opacity-70 mb-1"><b>1 publicação principal por dia.</b> Conta nova: <i>consistência &gt; volume</i>.</p>
+        <p className="text-[0.78rem] opacity-55 mb-6">Hora: sempre a mesma — <b>~13h</b> ou <b>20h–21h</b> (pico). <b>Sem stories por agora</b> — só fazem sentido quando já tiveres seguidores que as vejam.</p>
 
         {/* A semana */}
         <h2 className="text-[0.65rem] uppercase tracking-[0.25em] text-[#C9B6FA] mb-3">A tua semana</h2>
@@ -79,9 +79,20 @@ export default function CalendarioPage() {
         <div className="rounded-xl border border-salvia/25 bg-salvia/5 p-4 mb-8">
           <p className="text-[0.7rem] uppercase tracking-[0.2em] text-salvia mb-2">No total, por semana</p>
           <p className="text-[0.85rem] leading-relaxed opacity-85">
-            ~5 reels (✨🔎💡📖/🕯️ + 1 extra) · 1 Cá em Casa 🎭 · 1 infográfico 📊 · stories 📱 todos os dias.
-            <br />É a proporção que faz crescer: reels trazem gente nova, o resto cria autoridade e ligação.
+            ~5 reels (✨🔎💡📖/🕯️ + 1 extra) · 1 Cá em Casa 🎭 · 1 infográfico 📊.
+            <br />Os <b>reels</b> trazem gente nova; o resto cria autoridade. (Stories só na fase 2.)
           </p>
+        </div>
+
+        {/* Do zero */}
+        <div className="rounded-xl border border-[#C9B6FA]/25 bg-[#C9B6FA]/5 p-4 mb-8">
+          <p className="text-[0.7rem] uppercase tracking-[0.2em] text-[#C9B6FA] mb-2">Do zero — como ganhas os primeiros seguidores</p>
+          <ul className="text-[0.82rem] leading-relaxed opacity-85 list-disc pl-5 space-y-1">
+            <li><b>Reels</b> são o que te mostra a quem ainda não te segue. É a tua porta de entrada.</li>
+            <li><b>Comenta com verdade</b> em 5–10 posts/dia de contas maiores do teu nicho (transpessoal, constelação, autoconhecimento). É assim que os primeiros te descobrem.</li>
+            <li>Hashtags boas em cada post (já vêm prontas com cada conteúdo).</li>
+            <li><b>Stories só quando já tiveres ~50–100 seguidores</b> para as ver.</li>
+          </ul>
         </div>
 
         <div className="rounded-xl border border-ambar/20 bg-ambar/5 p-4">
