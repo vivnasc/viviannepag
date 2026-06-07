@@ -13,6 +13,15 @@ export type FormatoReel = {
 
 export const FORMATOS: FormatoReel[] = [
   {
+    id: 'kinetico',
+    nome: 'Frase com motion',
+    descricao: 'O reel que mais rende: uma imagem transcendente + uma frase que se escreve (typewriter/kinetic) + música.',
+    emoji: '✨',
+    video: true,
+    instrucao:
+      'Formato "Frase com motion" (reel simples de alto alcance). Devolve em "frames" UM ÚNICO frame com a frase forte e curta (8 a 16 palavras, uma só ideia, com ritmo poético — a frase é a estrela). Em "destaque" devolve 1 a 3 palavras-chave dessa frase para realçar a ouro. Em "fundoPrompt" devolve um prompt MidJourney para uma imagem transcendente de fundo (sem pessoas, sem texto, --ar 9:16). Sem listas, sem passos: só a frase.',
+  },
+  {
     id: 'sinais',
     nome: 'Sinais de que…',
     descricao: 'Lista de sinais de um padrão (parentificação, lealdades, burnout…). Muito partilhável.',

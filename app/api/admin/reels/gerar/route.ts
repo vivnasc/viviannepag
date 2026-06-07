@@ -39,7 +39,8 @@ DEVOLVE APENAS JSON valido:
 {
   "titulo": "titulo interno curto (2-5 palavras)",
   "frames": [ { "kicker": "etiqueta curta ou vazio", "texto": "frase do frame", "nota": "linha pequena opcional (ex.: comenta em baixo) ou vazio" } ],
-  "roteiro": ["so para formato a falar: linhas faladas, na 1.a pessoa"],
+  "destaque": ["1 a 3 palavras-chave da frase para realcar (so no formato Frase com motion)"],
+  "fundoPrompt": "prompt MidJourney para imagem transcendente de fundo, sem pessoas, sem texto, --ar 9:16 (so no formato Frase com motion)",
   "legenda": "legenda para Instagram: 1.a linha gancho, depois 2-4 linhas que aprofundam em palavras simples, fecha com convite a refletir + 'guarda este reel' ou 'partilha com quem precisa'. SEM vender. Portugues europeu com acentos.",
   "hashtags": ["10-12 hashtags em portugues, mistura amplas e de nicho, sem repetir"]
 }`;
@@ -58,20 +59,29 @@ DEVOLVE APENAS JSON valido:
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
   type Frame = { kicker?: string; texto?: string; nota?: string };
-  let p: { titulo?: string; frames?: Frame[]; roteiro?: string[]; legenda?: string; hashtags?: string[] };
+  let p: { titulo?: string; frames?: Frame[]; roteiro?: string[]; destaque?: string[]; fundoPrompt?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
 
   const framesIn = Array.isArray(p.frames) ? p.frames.filter((f) => f && f.texto) : [];
   if (!framesIn.length) return NextResponse.json({ erro: 'sem-frames', amostra: texto.slice(0, 300) }, { status: 502 });
 
-  // cada frame vira um "slide" tipo='reel' (a capa = frame 0)
-  const slides = framesIn.map((f, i) => ({
-    tipo: 'reel',
-    kicker: (f.kicker ?? '').trim() || (i === 0 ? formato.nome : ''),
-    texto: (f.texto ?? '').trim(),
-    nota: (f.nota ?? '').trim(),
-    capa: i === 0,
-  }));
+  const ehKinetico = formato.id === 'kinetico';
+  // cada frame vira um "slide". Kinetico = 1 slide tipo='kinetico' (frase + fundo).
+  const slides = ehKinetico
+    ? [{
+        tipo: 'kinetico',
+        texto: (framesIn[0].texto ?? '').trim(),
+        destaque: Array.isArray(p.destaque) ? p.destaque.map(String) : [],
+        notaVisual: (p.fundoPrompt ?? '').trim(), // prompt MJ para o fundo (copia -> gera -> arrasta)
+        capa: true,
+      }]
+    : framesIn.map((f, i) => ({
+        tipo: 'reel',
+        kicker: (f.kicker ?? '').trim() || (i === 0 ? formato.nome : ''),
+        texto: (f.texto ?? '').trim(),
+        nota: (f.nota ?? '').trim(),
+        capa: i === 0,
+      }));
 
   // musica: uma faixa variada (deterministica por agora)
   const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;

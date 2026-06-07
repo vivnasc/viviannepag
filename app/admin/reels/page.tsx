@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { toPng } from 'html-to-image';
 import { ReelSlide, type ReelFrame } from '@/components/admin/ReelSlide';
+import { KineticSlide } from '@/components/admin/KineticSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import { CURSOS, getCurso } from '@/lib/infografico/cursos';
 import { FORMATOS, getFormato } from '@/lib/reels/formatos';
@@ -16,9 +17,20 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; capa?: boolean };
+type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
 type Dia = { dia: number; mundo?: Mundo; slides?: ReelSlideT[]; videoUrl?: string; roteiro?: string[]; legenda?: string; hashtags?: string[]; faixa?: { titulo?: string } };
 type Item = { slug: string; title: string; dias: Dia[]; theme: { formato?: string; subtipo?: string; curso?: string; mundo?: Mundo; video?: boolean }; created_at: string };
+
+// pré-visualização animada do cinético (loop suave)
+function KineticPreview({ texto, destaque, imageUrl, mundo }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo }) {
+  const [prog, setProg] = useState(0);
+  useEffect(() => {
+    let raf = 0; let t0 = 0; const CICLO = 6500;
+    const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.75)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
+  }, []);
+  return <KineticSlide texto={texto} destaque={destaque} imageUrl={imageUrl} mundo={mundo} prog={prog} />;
+}
 
 export default function ReelsPage() {
   const [itens, setItens] = useState<Item[]>([]);
@@ -96,6 +108,35 @@ export default function ReelsPage() {
     const r = it.dias?.[0]?.roteiro ?? [];
     if (r.length) { navigator.clipboard?.writeText(r.join('\n')); setMsg('Guião copiado.'); }
   }
+  function copiarTexto(t: string, aviso = 'Copiado.') {
+    if (t) { navigator.clipboard?.writeText(t); setMsg(aviso); }
+  }
+
+  // arrasta/escolhe a imagem de fundo do cinético (1080x1920)
+  function resizeFundo(file: File): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const W = 1080, H = 1920; const c = document.createElement('canvas'); c.width = W; c.height = H;
+        const ctx = c.getContext('2d'); if (!ctx) return reject(new Error('canvas'));
+        const s = Math.max(W / img.width, H / img.height); const w = img.width * s, h = img.height * s;
+        ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+        c.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob'))), 'image/jpeg', 0.9);
+      };
+      img.onerror = () => reject(new Error('img')); img.src = URL.createObjectURL(file);
+    });
+  }
+  async function uploadFundo(file: File | undefined, it: Item) {
+    if (!file) return; setErro(null);
+    try {
+      const jpeg = await resizeFundo(file);
+      const fd = new FormData(); fd.append('file', jpeg, 'fundo.jpg'); fd.append('slug', it.slug); fd.append('dia', '1'); fd.append('idx', '0');
+      const r = await fetch('/api/admin/carrossel/upload-fundo', { method: 'POST', body: fd });
+      const j = await r.json();
+      if (!r.ok) { setErro('fundo: ' + (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setMsg('Fundo aplicado.'); await carregar();
+    } catch (e) { setErro('fundo: ' + String(e)); }
+  }
 
   // ── download de frames (PNG, no browser) ──
   const zipRef = useRef<HTMLDivElement>(null);
@@ -123,8 +164,26 @@ export default function ReelsPage() {
     })();
   }, [zipIt]);
 
+  // ── download da imagem do cinético (PNG, frase completa) ──
+  const capRef = useRef<HTMLDivElement>(null);
+  const [capKin, setCapKin] = useState<Item | null>(null);
+  useEffect(() => {
+    if (!capKin) return;
+    (async () => {
+      try {
+        await (document.fonts?.ready ?? Promise.resolve());
+        await new Promise((r) => setTimeout(r, 550));
+        const node = capRef.current?.firstElementChild as HTMLElement | null;
+        if (node) { const url = await toPng(node, { pixelRatio: 1, cacheBust: true }); const a = document.createElement('a'); a.href = url; a.download = `${capKin.slug}.png`; a.click(); }
+      } catch (e) { setErro('download: ' + String(e)); }
+      setCapKin(null);
+    })();
+  }, [capKin]);
+
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
   const framesDe = (it: Item): ReelFrame[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota }));
+  const kinDe = (it: Item) => it.dias?.[0]?.slides?.[0];
+  const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico';
 
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${FONTS}`}>
@@ -196,19 +255,66 @@ export default function ReelsPage() {
             .filter((it) => !busca.trim() || it.title.toLowerCase().includes(busca.trim().toLowerCase()))
             .map((it) => {
               const d = it.dias?.[0];
-              const frames = framesDe(it);
-              if (!frames.length) return null;
               const mundo = mundoDe(it);
               const f = getFormato(it.theme?.subtipo ?? 'sinais');
-              const ehVideo = it.theme?.video !== false;
-              return (
-                <Card key={it.slug} className="p-5">
+              const ehKin = it.theme?.subtipo === 'kinetico';
+              const header = (
+                <>
                   <div className="flex items-center justify-center gap-2 mb-3">
                     <span className="text-[0.62rem] px-2 py-0.5 rounded-full" style={{ background: PALETAS[mundo].destaque + '22', color: PALETAS[mundo].destaque }}>{f.emoji} {f.nome}</span>
                     <span className="text-[0.62rem] opacity-50">{getCurso(it.theme?.curso ?? 'transpessoal').nome.split(' ')[0]}</span>
                   </div>
                   <h3 className="font-serif text-lg mb-3 text-center">{it.title}</h3>
+                </>
+              );
 
+              // ── CINÉTICO: imagem + frase com motion ──
+              if (ehKin) {
+                const ks = kinDe(it);
+                if (!ks) return null;
+                return (
+                  <Card key={it.slug} className="p-5">
+                    {header}
+                    <button onClick={() => setZoom({ it, idx: 0 })} className="block w-[58%] mx-auto mb-3 cursor-zoom-in" title="ver em grande (animado)">
+                      <KineticPreview texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundo} />
+                    </button>
+
+                    {/* fundo: prompt MJ + arrastar */}
+                    {!ks.imageUrl && ks.notaVisual && (
+                      <div className="mb-3 rounded-lg bg-black/25 p-3">
+                        <p className="text-[0.58rem] uppercase tracking-[0.2em] opacity-50 mb-1">Fundo: copia o prompt → gera no MJ → arrasta</p>
+                        <p className="text-[0.66rem] opacity-80 leading-snug mb-2">{ks.notaVisual}</p>
+                        <div className="flex flex-wrap gap-2">
+                          <button onClick={() => copiarTexto(ks.notaVisual ?? '', 'Prompt MJ copiado.')} className="text-[0.62rem] px-2 py-1 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">copiar prompt MJ</button>
+                          <label className="text-[0.62rem] px-2 py-1 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar cursor-pointer">arrastar imagem<input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], it)} /></label>
+                        </div>
+                      </div>
+                    )}
+
+                    {d?.videoUrl && (
+                      <div className="mb-3 flex items-center justify-center gap-3">
+                        <video src={d.videoUrl} controls playsInline className="w-28 rounded-lg border border-white/10 bg-black" />
+                        <a href={d.videoUrl} download className="text-[0.66rem] px-2.5 py-1 rounded border border-ocre/30 text-creme-2/80 hover:border-ambar hover:text-ambar">⬇ MP4</a>
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap items-center gap-2 justify-center">
+                      {ks.imageUrl && <label className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar cursor-pointer">trocar fundo<input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], it)} /></label>}
+                      <button onClick={() => setCapKin(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ imagem (PNG)</button>
+                      <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
+                      <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
+                      <button onClick={() => apagar(it.slug)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
+                    </div>
+                  </Card>
+                );
+              }
+
+              // ── REEL normal (frames) ──
+              const frames = framesDe(it);
+              if (!frames.length) return null;
+              return (
+                <Card key={it.slug} className="p-5">
+                  {header}
                   <button onClick={() => setZoom({ it, idx: 0 })} className="block w-[58%] mx-auto mb-4 cursor-zoom-in" title="ver os frames">
                     <ReelSlide frame={frames[0]} mundo={mundo} numero={1} total={frames.length} capa />
                   </button>
@@ -220,18 +326,10 @@ export default function ReelsPage() {
                     </div>
                   )}
 
-                  {!ehVideo && (d?.roteiro?.length ?? 0) > 0 && (
-                    <div className="mb-3 rounded-lg bg-black/25 p-3 text-[0.78rem] leading-relaxed">
-                      <p className="text-[0.58rem] uppercase tracking-[0.2em] opacity-50 mb-2">Guião (lê enquanto gravas)</p>
-                      {d!.roteiro!.map((l, i) => <p key={i} className={i === 0 ? 'font-medium mb-1' : 'opacity-85'}>{l}</p>)}
-                    </div>
-                  )}
-
                   <div className="flex flex-wrap items-center gap-2 justify-center">
                     <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ frames (PNG)</button>
-                    {ehVideo && <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>}
+                    <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
                     <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
-                    {!ehVideo && <button onClick={() => copiarGuiao(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 guião</button>}
                     <button onClick={() => apagar(it.slug)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                   </div>
                 </Card>
@@ -250,8 +348,25 @@ export default function ReelsPage() {
           </div>
         )}
 
-        {/* zoom: navegar pelos frames */}
-        {zoom && (() => {
+        {/* host escondido para capturar a imagem do cinético */}
+        {capKin && (() => { const ks = kinDe(capKin); return ks ? (
+          <div ref={capRef} style={{ position: 'fixed', left: -10000, top: 0, width: 1080 }} aria-hidden>
+            <KineticSlide texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundoDe(capKin)} prog={1} />
+          </div>
+        ) : null; })()}
+
+        {/* zoom */}
+        {zoom && it_kinetic(zoom.it) ? (() => {
+          const ks = kinDe(zoom.it); const mundo = mundoDe(zoom.it);
+          return (
+            <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">
+              <div className="w-full" style={{ maxWidth: 'min(70vw, 320px)' }} onClick={(e) => e.stopPropagation()}>
+                {ks && <KineticPreview texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundo} />}
+                <p className="text-center text-[0.7rem] opacity-60 mt-3">toca fora para fechar</p>
+              </div>
+            </div>
+          );
+        })() : zoom && (() => {
           const frames = framesDe(zoom.it); const mundo = mundoDe(zoom.it);
           const nav = (delta: number) => setZoom((z) => z ? { ...z, idx: (z.idx + delta + frames.length) % frames.length } : z);
           return (

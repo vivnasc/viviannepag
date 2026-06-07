@@ -4,6 +4,33 @@
 // desenvolvimento pessoal e profissional.
 
 export const TOPICOS_REELS: Record<string, string[]> = {
+  kinetico: [
+    'O que carregas que nunca foi teu',
+    'Dizer não é também um ato de amor',
+    'Não nasceste para caber, nasceste para existir',
+    'O teu cansaço é um pedido de limite',
+    'Pertencer não devia custar-te a ti',
+    'Honrar os pais não é viver a vida deles',
+    'A culpa que sentes pode ser herdada',
+    'Receber também é uma forma de amar',
+    'O que recusas no outro vive dentro de ti',
+    'Curar é deixar voltar a cada um o que é seu',
+    'O sintoma é amor que ainda não encontrou palavras',
+    'Há quem ame tanto que desaparece',
+    'O teu lugar na família é só teu',
+    'Soltar não é desistir, é confiar',
+    'A ferida é por onde entra a luz',
+    'Quem tem um porquê suporta quase todo o como',
+    'O amor maduro deixa o outro ser',
+    'Não és responsável pela dor de toda a gente',
+    'Descansar também é cuidar',
+    'O silêncio de família também educa',
+    'Tornar-se quem és é o trabalho de uma vida',
+    'O que não se fala, repete-se',
+    'Estar inteira para poder dar a sério',
+    'A vida pede-te presença, não perfeição',
+    'O que aceitas em ti, liberta-te',
+  ],
   sinais: [
     'Sinais de parentificação',
     'Sinais de lealdades invisíveis',

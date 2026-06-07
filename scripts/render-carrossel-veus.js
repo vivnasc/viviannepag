@@ -45,6 +45,7 @@ async function main() {
   console.log(`[data] ${dias.length} dias`);
 
   const formato = col.theme?.formato;
+  const kinetic = formato === 'reel' && col.theme?.subtipo === 'kinetico'; // frase com motion
   const soImagens = formato === 'infografico' || formato === 'aneis'; // imagem unica, sem video
   const H = formato === 'aneis' ? 1080 : formato === 'infografico' ? 1350 : 1920;
 
@@ -57,6 +58,57 @@ async function main() {
     if (!slides.length) continue;
     const diaDir = path.join(tmp, `dia-${d.dia}`);
     fs.mkdirSync(diaDir, { recursive: true });
+
+    // ── KINETIC: frase com motion (typewriter). Captura frame a frame
+    // conduzindo window.__setKProg e monta MP4 a partir da sequencia. ──
+    if (kinetic) {
+      const FPS = 25, DUR = 7, N = FPS * DUR;
+      const framesDir = path.join(diaDir, 'frames');
+      fs.mkdirSync(framesDir, { recursive: true });
+      const page = await browser.newPage();
+      await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
+      const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0`;
+      await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
+      await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+      for (let i = 0; i < N; i++) {
+        const prog = i / (N - 1);
+        await page.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
+        await new Promise((r) => setTimeout(r, 35));
+        await page.screenshot({ path: path.join(framesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
+      }
+      await page.close();
+      console.log(`[kinetic] dia ${d.dia}: ${N} frames`);
+
+      // audio
+      let temAudio = false;
+      const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
+      try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+
+      // video da sequencia
+      let videoUrl = null;
+      try {
+        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
+        const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
+        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
+        const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
+        if (upErr) console.error(`[upload mp4] ${upErr.message}`);
+        else videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
+      } catch (e) { console.error(`[kinetic mp4] ${e.message}`); }
+
+      // poster: ultimo frame (frase completa) como imagem
+      const imagensDia = [];
+      try {
+        const last = path.join(framesDir, `f${String(N - 1).padStart(4, '0')}.png`);
+        const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/cover.png`;
+        const { error: ce } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(last), { contentType: 'image/png', upsert: true });
+        if (!ce) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+      } catch (e) { console.log(`[poster] ${e.message}`); }
+
+      resultados.push({ dia: d.dia, videoUrl, imagens: imagensDia });
+      console.log(`[dia ${d.dia}] kinetic mp4=${videoUrl ? 'ok' : 'falhou'}`);
+      continue;
+    }
 
     // 1. screenshot de cada slide (PNG) + upload como imagem do carrossel
     const imagensDia = [];
