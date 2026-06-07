@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import { CURSOS, getCurso } from '@/lib/infografico/cursos';
+import { getCurso } from '@/lib/infografico/cursos';
+import { SEQUENCIA_GLOSSARIO } from '@/lib/glossario';
 import { limparTravessoes } from '@/lib/texto';
 
 export const runtime = 'nodejs';
@@ -28,15 +29,15 @@ export async function POST(req: Request) {
   let termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
   if (modo === 'glossario' && !termos.length) {
     const N = Math.max(3, Math.min(7, Number(body.slides) ? Number(body.slides) - 1 : 5));
-    const pool = Array.from(new Set(CURSOS.flatMap((c) => c.conceitos)));
+    // sequência pedagógica fixa: avança pelos termos ainda não usados, NA ORDEM
+    const pool = SEQUENCIA_GLOSSARIO;
     try {
       const sb = getSupabaseAdmin();
       const { data: prev } = await sb.from('carousel_collections').select('theme').eq('theme->>formato', 'carrossel-veu').eq('theme->>modo', 'glossario');
       const usados = new Set((prev ?? []).flatMap((r) => ((r.theme as { termos?: string[] } | null)?.termos ?? [])));
-      let disp = pool.filter((t) => !usados.has(t));
-      if (disp.length < N) disp = pool; // esgotou, recomeça
-      for (let i = disp.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [disp[i], disp[j]] = [disp[j], disp[i]]; }
-      termos = disp.slice(0, N);
+      let disp = pool.filter((t) => !usados.has(t)); // mantém a ordem pedagógica
+      if (disp.length < N) disp = pool; // já deu a volta, recomeça do início
+      termos = disp.slice(0, N); // os próximos N por ordem, sem baralhar
     } catch { termos = pool.slice(0, N); }
   }
 
