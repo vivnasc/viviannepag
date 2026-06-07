@@ -10,6 +10,7 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { VeuSlide } from '@/components/admin/VeuSlide';
 import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
 import { AnelCover } from '@/components/admin/AnelCover';
+import { ReelSlide } from '@/components/admin/ReelSlide';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
@@ -64,8 +65,9 @@ export default function RenderVeuPage() {
   const tipoSlide = (estado?.slide as { tipo?: string } | undefined)?.tipo;
   const ehInfo = tipoSlide === 'infografico';
   const ehAnel = tipoSlide === 'anel' || tipoSlide === 'perfil';
+  const ehReel = tipoSlide === 'reel';
   const H = ehAnel ? 1080 : ehInfo ? 1350 : 1920;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean }) | undefined;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
@@ -79,7 +81,17 @@ export default function RenderVeuPage() {
           imageUrl={s.imageUrl}
         />
       )}
-      {estado && !ehInfo && !ehAnel && (
+      {estado && ehReel && s && (
+        <ReelSlide
+          frame={{ kicker: s.kicker, texto: s.texto ?? '', nota: s.nota }}
+          mundo={estado.dia.mundo}
+          imageUrl={s.imageUrl}
+          numero={estado.idx + 1}
+          total={estado.dia.slides?.length ?? 1}
+          capa={!!s.capa}
+        />
+      )}
+      {estado && !ehInfo && !ehAnel && !ehReel && (
         <VeuSlide
           slide={estado.slide}
           mundo={estado.dia.mundo}

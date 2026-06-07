@@ -40,6 +40,7 @@ const NAV = [
   { href: '/admin/estudio', label: 'estúdio' },
   { href: '/admin/carrossel', label: 'carrosséis' },
   { href: '/admin/infografico', label: 'infográficos' },
+  { href: '/admin/reels', label: 'reels' },
   { href: '/admin/aneis', label: 'anéis' },
 ];
 

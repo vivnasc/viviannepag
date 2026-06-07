@@ -43,7 +43,7 @@ export function AnelCover({ label, imageUrl, mundo = 'escola', perfil = false, s
           <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 45%, ${p.bg} 0%, ${p.bg2} 80%)`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 30 }}>
             <span style={{ position: 'absolute', inset: 90, borderRadius: '50%', border: `2px dashed ${p.destaque}55` }} />
             <span style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 78, color: p.texto, opacity: 0.55 }}>{perfil ? 'perfil' : label}</span>
-            <span style={{ fontFamily: FONT_SANS, fontWeight: 400, fontSize: 30, letterSpacing: '0.1em', color: p.destaque, opacity: 0.85, maxWidth: 620, lineHeight: 1.4 }}>copia o prompt MJ →<br />gera no MidJourney → arrasta aqui</span>
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 400, fontSize: 30, letterSpacing: '0.1em', color: p.destaque, opacity: 0.85, maxWidth: 620, lineHeight: 1.4 }}>{perfil ? <>arrasta aqui a tua<br />foto profissional</> : <>copia o prompt MJ →<br />gera no MidJourney → arrasta aqui</>}</span>
           </div>
         )}
       </div>
