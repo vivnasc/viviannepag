@@ -170,9 +170,10 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
 
           {info.virada && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 40, lineHeight: 1.3, margin: '24px auto 0', maxWidth: 880 }}>{info.virada}</p>}
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, marginTop: 28 }}>
-            <span style={{ fontFamily: FONT_SANS, fontWeight: 300, fontSize: 18, letterSpacing: '0.6em', textTransform: 'uppercase', color: ACCENT, opacity: 0.7 }}>os sete véus</span>
-            <span style={{ fontFamily: FONT_MONO, fontSize: 24, letterSpacing: '0.03em', color: ACCENT, opacity: 0.8 }}>{info.url ?? 'viviannedossantos.com'}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 28 }}>
+            <span style={{ width: 70, height: 1, background: ACCENT, opacity: 0.5 }} />
+            <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, color: TXT, opacity: 0.95 }}>Vivianne dos Santos</span>
+            <span style={{ fontFamily: FONT_MONO, fontSize: 22, letterSpacing: '0.04em', color: ACCENT, opacity: 0.8 }}>{info.url ?? 'viviannedossantos.com'}</span>
           </div>
         </div>
       </div>
