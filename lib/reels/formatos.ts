@@ -57,15 +57,6 @@ export const FORMATOS: FormatoReel[] = [
     instrucao:
       'Formato "Uma ideia de <pensador> em 20 segundos". Frame 1 (capa): "Uma ideia de <pensador>" (nomeia o pensador no tema). 2 a 3 frames com a ideia central explicada de forma simples e fiel. Frame final: como aplicar/refletir hoje. kicker = nome do pensador.',
   },
-  {
-    id: 'falar',
-    nome: 'Guião para falares',
-    descricao: 'Gancho + guião 15–45s + legenda. O vídeo gravas tu (a tua cara é o motor).',
-    emoji: '🎙️',
-    video: false,
-    instrucao:
-      'Formato "Reel a falar" (a Vivianne grava-se a falar para a câmara). Em vez de muitos frames, devolve em "roteiro" um guião FALADO de 15-45s: 1ª linha = GANCHO forte (primeiros 3 segundos), depois 4-7 linhas curtas como ela diria em voz alta (naturais, na 1ª pessoa, calorosas, com profundidade), última linha = convite a comentar/guardar. Em "frames" devolve APENAS 1 frame de capa com o gancho (texto curto para sobrepor ao vídeo).',
-  },
 ];
 
 export function getFormato(id: string): FormatoReel {

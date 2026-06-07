@@ -20,7 +20,7 @@ const ANEIS: { label: string; mj: string }[] = [
   { label: 'Padrões', mj: 'luminous concentric circles and a repeating geometric pattern of golden light on deep navy, hypnotic sacred symmetry, fine art, ultra detailed, no people, no text, no logo --ar 1:1 --style raw' },
   { label: 'Sobre', mj: 'warm ethereal golden light through soft fog, gentle luminous glow, abstract sacred calm, deep tones, fine art, ultra detailed, no people, no text, no logo --ar 1:1 --style raw' },
 ];
-const PERFIL = { label: 'Véu a Véu', mj: 'USA A TUA FOTO PROFISSIONAL — rosto visível, sorriso suave, fundo escuro/neutro. As contas que mais crescem têm cara. Arrasta-a aqui em baixo. (Caso prefiras mesmo uma imagem gerada: a single luminous mandala of overlapping translucent veils, radiant gold light at the centre on a deep navy cosmos, sacred and symmetrical, ethereal, fine art, ultra detailed, centered composition, no people, no text, no logo --ar 1:1 --style raw)' };
+const PERFIL = { label: 'Véu a Véu', mj: 'a single luminous mandala of overlapping translucent veils, radiant gold light at the centre on a deep navy cosmos, sacred and symmetrical, ethereal, fine art, ultra detailed, centered composition, no people, no text, no logo --ar 1:1 --style raw' };
 
 // redimensiona p/ 1080x1080 e devolve dataURL
 function resizeSquare(file: File): Promise<string> {
