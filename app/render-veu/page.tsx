@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { VeuSlide } from '@/components/admin/VeuSlide';
 import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
+import { AnelCover } from '@/components/admin/AnelCover';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
@@ -60,12 +61,17 @@ export default function RenderVeuPage() {
     }
   }, [estado]);
 
-  const ehInfo = (estado?.slide as { tipo?: string } | undefined)?.tipo === 'infografico';
-  const H = ehInfo ? 1350 : 1920;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string }) | undefined;
+  const tipoSlide = (estado?.slide as { tipo?: string } | undefined)?.tipo;
+  const ehInfo = tipoSlide === 'infografico';
+  const ehAnel = tipoSlide === 'anel' || tipoSlide === 'perfil';
+  const H = ehAnel ? 1080 : ehInfo ? 1350 : 1920;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
+      {estado && ehAnel && s && (
+        <AnelCover label={s.label ?? ''} imageUrl={s.imageUrl} mundo={estado.dia.mundo} perfil={!!s.perfil} />
+      )}
       {estado && ehInfo && s && (
         <InfograficoSlide
           info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
@@ -73,7 +79,7 @@ export default function RenderVeuPage() {
           imageUrl={s.imageUrl}
         />
       )}
-      {estado && !ehInfo && (
+      {estado && !ehInfo && !ehAnel && (
         <VeuSlide
           slide={estado.slide}
           mundo={estado.dia.mundo}

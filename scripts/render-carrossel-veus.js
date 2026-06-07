@@ -44,8 +44,9 @@ async function main() {
   if (DIAS_FILTER.length) dias = dias.filter((d) => DIAS_FILTER.includes(String(d.dia)));
   console.log(`[data] ${dias.length} dias`);
 
-  const soImagens = col.theme?.formato === 'infografico'; // infografico = imagem unica, sem video
-  const H = soImagens ? 1350 : 1920;
+  const formato = col.theme?.formato;
+  const soImagens = formato === 'infografico' || formato === 'aneis'; // imagem unica, sem video
+  const H = formato === 'aneis' ? 1080 : formato === 'infografico' ? 1350 : 1920;
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'veu-'));
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
