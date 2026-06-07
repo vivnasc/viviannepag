@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { FAMILIA } from '@/lib/banda/personagens';
 import { faixaUrl } from '@/lib/carrossel/musica';
+import { limparTravessoes } from '@/lib/texto';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -33,7 +34,8 @@ REGRAS:
 - Cada painel (menos a licao): "cenario" curto (onde estao) + 1 a 2 personagens com "fala" CURTA (max ~12 palavras, cabe num balao).
 - "modo": "fala" (normal), "pensa" (pensamento), "herdada" (a voz herdada/interior que aperta — ex.: a Avó Alice ou uma frase antiga que ainda manda).
 - Mostra um limite real do dia a dia (dizer nao sem culpa, deixar o outro dar, nao carregar o que nao e teu...).
-- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O limite com amor nao e rejeicao — e INTEIREZA, PRESENCA e RECIPROCIDADE. A licao abre reflexao, nao manda "cuida de ti primeiro".
+- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O limite com amor nao e rejeicao, e INTEIREZA, PRESENCA e RECIPROCIDADE. A licao abre reflexao, nao manda "cuida de ti primeiro".
+- NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
 - Calorosa, humana, com profundidade. Reconhecivel ("isto sou eu").
 
 DEVOLVE APENAS JSON valido:
@@ -64,6 +66,7 @@ DEVOLVE APENAS JSON valido:
   type Painel = { cenario?: string; personagens?: Fala[]; licao?: string };
   let p: { titulo?: string; paineis?: Painel[]; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
+  p = limparTravessoes(p); // a Vivianne nao usa travessoes
 
   const ids = new Set(FAMILIA.map((x) => x.id));
   const paineisIn = (Array.isArray(p.paineis) ? p.paineis : []).filter((pa) => pa && (pa.licao || (pa.personagens && pa.personagens.length)));

@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { listarPoolImagens, imagensUsadas } from '@/lib/carrossel/pool-server';
 import { getCurso } from '@/lib/infografico/cursos';
+import { limparTravessoes } from '@/lib/texto';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -27,7 +28,8 @@ REGRAS:
 - PURAMENTE DIDATICO: SEM CTA, SEM produtos, SEM links, SEM promover nada. So conhecimento.
 - Claro a primeira leitura. Concreto, com exemplos do real.
 - Fiel ao conceito academico; honra a profundidade (ex.: Ordens do Amor, substituicao de papeis, lealdades invisiveis, niveis de consciencia) quando o tema o pedir.
-- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O custo do padrao e para o AMOR e para a RELACAO (amor construido sobre alguem que desaparece nao e amor real; os outros aprendem a amar uma pessoa que nao existe). A alternativa nao e ego — e INTEIREZA, PRESENCA e RECIPROCIDADE saudavel (estar inteira para poder dar a serio, e tambem deixar receber). Evita linguagem de auto-prioridade que soe egocentrica; a virada abre uma reflexao, nao manda "cuida de ti primeiro".
+- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O custo do padrao e para o AMOR e para a RELACAO (amor construido sobre alguem que desaparece nao e amor real; os outros aprendem a amar uma pessoa que nao existe). A alternativa nao e ego, e INTEIREZA, PRESENCA e RECIPROCIDADE saudavel (estar inteira para poder dar a serio, e tambem deixar receber). Evita linguagem de auto-prioridade que soe egocentrica; a virada abre uma reflexao, nao manda "cuida de ti primeiro".
+- NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
 
 DEVOLVE APENAS JSON valido:
 {
@@ -64,6 +66,7 @@ ESCOLHE o tipoDiagrama que MELHOR explica o conceito e preenche "diagrama":
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
   let p: { padrao?: string; subtitulo?: string; tipoDiagrama?: string; diagrama?: unknown; custoTi?: string; custoOutros?: string; virada?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
+  p = limparTravessoes(p); // a Vivianne nao usa travessoes
 
   // fundo do pool (nao-usado primeiro) — so estetica
   let imageUrl: string | undefined;

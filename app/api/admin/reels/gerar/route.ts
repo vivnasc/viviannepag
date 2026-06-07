@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCurso } from '@/lib/infografico/cursos';
 import { getFormato } from '@/lib/reels/formatos';
 import { faixaUrl } from '@/lib/carrossel/musica';
+import { limparTravessoes } from '@/lib/texto';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -31,7 +32,8 @@ REGRAS:
 - O 1.o frame (capa) tem de PARAR O SCROLL nos primeiros 3 segundos.
 - Frases CURTAS (cabem grandes no ecra). Concreto, com exemplos do real.
 - Fiel ao conceito academico; honra a profundidade quando o tema o pedir.
-- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O caminho e INTEIREZA, PRESENCA e RECIPROCIDADE saudavel — nao auto-prioridade egocentrica.
+- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O caminho e INTEIREZA, PRESENCA e RECIPROCIDADE saudavel (nao auto-prioridade egocentrica).
+- NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
 
 ${formato.instrucao}
 
@@ -61,6 +63,7 @@ DEVOLVE APENAS JSON valido:
   type Frame = { kicker?: string; texto?: string; nota?: string };
   let p: { titulo?: string; frames?: Frame[]; roteiro?: string[]; destaque?: string[]; fundoPrompt?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
+  p = limparTravessoes(p); // a Vivianne nao usa travessoes
 
   const framesIn = Array.isArray(p.frames) ? p.frames.filter((f) => f && f.texto) : [];
   if (!framesIn.length) return NextResponse.json({ erro: 'sem-frames', amostra: texto.slice(0, 300) }, { status: 502 });
