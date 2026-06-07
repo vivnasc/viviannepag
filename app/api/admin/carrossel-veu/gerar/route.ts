@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   // sem repetir os já usados. Sem teres de escolher.
   let termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
   if (modo === 'glossario' && !termos.length) {
-    const N = Math.max(3, Math.min(19, Number(body.slides) ? Number(body.slides) - 1 : 5));
+    const N = Math.max(3, Math.min(20, Number(body.slides) || 5));
     // sequência pedagógica fixa: avança pelos termos ainda não usados, NA ORDEM
     const pool = SEQUENCIA_GLOSSARIO;
     try {
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
   }
 
   const nSlides = modo === 'sobre' ? 4
-    : modo === 'glossario' ? termos.length + 1
+    : modo === 'glossario' ? termos.length
     : Math.max(3, Math.min(20, Number(body.slides) || 5));
 
   // termo "limpo" (só o nome: sem descrição após ":" nem parênteses) para o glossário
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     ? 'MODO APRESENTACAO (SEM slide de capa, ela ja existe no destaque): TODOS os slides sao conteudo, nenhum e so o nome da conta. Slide 1: o que e a Véu a Véu (a psicologia da alma, transpessoal, constelacao familiar, espiritualidade, tornadas simples). Slide 2: para quem e. Slide 3: o que vais encontrar aqui. Slide 4: quem es (Vivianne, partilha com verdade, sem formulas) e um convite a ficar. NAO faças um slide so com o nome "Véu a Véu".'
     : modo === 'glossario'
     ? (termos.length
-      ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, um por slide (slide 1 = CAPA com "Glossário da Alma"): ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide de termo: comeca pelo TERMO escrito com a acentuacao CORRETA (ex.: "Inclusão", "Parentificação", "Pertença"), realcado a ouro, seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
+      ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, UM POR SLIDE, SEM nenhum slide de capa (nada de slide so com "Glossário da Alma"): ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide: comeca pelo TERMO escrito com a acentuacao CORRETA (ex.: "Inclusão", "Parentificação", "Pertença"), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
       : 'MODO GLOSSARIO: cada slide (menos a capa) define UM termo da psicologia da alma. Slide 1 = CAPA com "Glossario da Alma". Cada um dos outros slides: comeca pelo TERMO (sera realcado a ouro), seguido de uma definicao simples e clara numa frase. Em "destaque" poe o proprio termo. Usa termos do ambito (sombra, ego, self, individuacao, ordens do amor, lealdade invisivel, parentificacao, campo morfogenetico). NAO repitas termos.')
     : `Tema do carrossel: "${tema}" (curso ${curso.nome}). Fiel ao conceito, concreto, com exemplos do real.`;
 
@@ -79,7 +79,7 @@ DEVOLVE APENAS JSON valido:
     ? `Cria a apresentacao da Véu a Véu em ${nSlides} slides de CONTEUDO, SEM slide de capa (sem um slide so com o nome).`
     : modo === 'glossario'
     ? (termos.length
-      ? `Cria "Glossário da Alma": capa + a definicao destes termos, um por slide, por esta ordem: ${termosPrompt.join('; ')}.`
+      ? `Cria os slides do "Glossário da Alma", UM termo por slide, SEM capa, por esta ordem: ${termosPrompt.join('; ')}.`
       : `Cria um carrossel "Glossario da Alma" com ${nSlides} slides (capa + ${nSlides - 1} termos distintos).`)
     : `Cria um carrossel didatico de ${nSlides} slides sobre: "${tema}".`;
 
@@ -115,7 +115,7 @@ DEVOLVE APENAS JSON valido:
     let destaque = Array.isArray(s.destaque) ? s.destaque.map(String) : [];
     // glossário: o TERMO a dourar é o que está ANTES do primeiro ponto (o que está mesmo no slide).
     // Assim o realce bate sempre certo. Corrige o acento se corresponder a um termo do universo.
-    if (modo === 'glossario' && i > 0) {
+    if (modo === 'glossario') {
       const dot = texto.indexOf('.');
       let termoTxt = (dot > 0 ? texto.slice(0, dot) : texto).trim();
       const canon = termosPrompt.find((t) => semAcc(t) === semAcc(termoTxt));
