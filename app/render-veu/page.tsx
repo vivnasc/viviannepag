@@ -11,6 +11,7 @@ import { VeuSlide } from '@/components/admin/VeuSlide';
 import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
 import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
+import { BandaSlide } from '@/components/admin/BandaSlide';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
@@ -66,8 +67,9 @@ export default function RenderVeuPage() {
   const ehInfo = tipoSlide === 'infografico';
   const ehAnel = tipoSlide === 'anel' || tipoSlide === 'perfil';
   const ehReel = tipoSlide === 'reel';
+  const ehBanda = tipoSlide === 'banda';
   const H = ehAnel ? 1080 : ehInfo ? 1350 : 1920;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean }) | undefined;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; personagens?: import('@/components/admin/BandaSlide').Fala[] }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
@@ -91,7 +93,16 @@ export default function RenderVeuPage() {
           capa={!!s.capa}
         />
       )}
-      {estado && !ehInfo && !ehAnel && !ehReel && (
+      {estado && ehBanda && s && (
+        <BandaSlide
+          painel={{ cenario: s.cenario, licao: s.licao, personagens: s.personagens }}
+          mundo={estado.dia.mundo}
+          numero={estado.idx + 1}
+          total={estado.dia.slides?.length ?? 1}
+          capa={!!s.capa}
+        />
+      )}
+      {estado && !ehInfo && !ehAnel && !ehReel && !ehBanda && (
         <VeuSlide
           slide={estado.slide}
           mundo={estado.dia.mundo}
