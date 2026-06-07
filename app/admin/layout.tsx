@@ -52,6 +52,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/calendario', label: 'calendário' },
       { href: '/admin/infografico', label: 'infográficos' },
       { href: '/admin/reels', label: 'reels' },
+      { href: '/admin/carrossel-veu', label: 'carrosséis' },
       { href: '/admin/banda', label: 'cá em casa' },
     ],
   },

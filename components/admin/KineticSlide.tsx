@@ -14,10 +14,12 @@ const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1 }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number }) {
+export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16' }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5' }) {
   const pal = PALETAS[mundo];
   const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
+  const H = ratio === '4:5' ? 1350 : 1920;
+  const ar = ratio === '4:5' ? '1080 / 1350' : '1080 / 1920';
 
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -37,8 +39,8 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.55) / 0.25));
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1920', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1920, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 110% 80% at 50% 35%, ${BG1} 0%, ${BG2} 80%)`, overflow: 'hidden' }}>
+    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: ar, overflow: 'hidden', borderRadius: 16, background: BG2 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 110% 80% at 50% 35%, ${BG1} 0%, ${BG2} 80%)`, overflow: 'hidden' }}>
         {imageUrl && (<>
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', zIndex: 0 }} />
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(BG2, '55')} 0%, ${a(BG2, '22')} 40%, ${a(BG2, 'cc')} 100%)`, zIndex: 1 }} />
