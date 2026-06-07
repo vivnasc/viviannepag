@@ -228,18 +228,15 @@ export default function CarrosselVeuPage() {
                     ))}
                   </div>
 
-                  {!temFundo && (
-                    <div className="mb-3 rounded-lg bg-black/25 p-3">
-                      <p className="text-[0.58rem] uppercase tracking-[0.2em] opacity-50 mb-2">Falta o fundo: copia o prompt, gera no MJ, arrasta UMA imagem</p>
-                      <div className="flex flex-wrap gap-2">
-                        <button onClick={() => copiarPrompt(it)} className="text-[0.62rem] px-2 py-1 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">copiar prompt MJ</button>
-                        <label className="text-[0.62rem] px-2 py-1 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar cursor-pointer">arrastar imagem (1 para todos)<input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], it)} /></label>
-                      </div>
-                    </div>
-                  )}
+                  {/* FUNDO: uma imagem para todos os slides (o caminho simples) */}
+                  <div className="mb-3 rounded-lg bg-black/25 p-3 flex flex-wrap items-center justify-center gap-2">
+                    <span className="w-full text-center text-[0.58rem] uppercase tracking-[0.2em] opacity-50 mb-1">Fundo</span>
+                    <button onClick={() => copiarPrompt(it)} className="text-[0.66rem] px-2.5 py-1 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">copiar prompt MJ</button>
+                    <label className="text-[0.66rem] px-2.5 py-1 rounded border border-salvia/50 bg-salvia/10 text-salvia hover:bg-salvia/20 cursor-pointer">⬆ {temFundo ? 'trocar' : 'pôr'} 1 imagem para TODOS os slides<input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], it)} /></label>
+                    <span className="w-full text-center text-[0.56rem] opacity-40 mt-1">para uma imagem diferente por slide, abre um slide (clica na miniatura) e arrasta lá</span>
+                  </div>
 
                   <div className="flex flex-wrap items-center gap-2 justify-center">
-                    {temFundo && <label className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar cursor-pointer">trocar fundo<input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], it)} /></label>}
                     <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ carrossel (PNG)</button>
                     <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
                     <button onClick={() => apagar(it.slug)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>

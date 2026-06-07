@@ -44,11 +44,14 @@ export async function POST(req: Request) {
     : modo === 'glossario' ? termos.length + 1
     : Math.max(3, Math.min(8, Number(body.slides) || 5));
 
+  // termo "limpo" (só o nome, sem a descrição depois de ":") para o glossário
+  const termosPrompt = termos.map((t) => t.split(':')[0].trim());
+
   const instrucaoModo = modo === 'sobre'
     ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
     : modo === 'glossario'
     ? (termos.length
-      ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, um por slide (slide 1 = CAPA com "Glossario da Alma"): ${termos.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide de termo: comeca pelo TERMO (realcado a ouro), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
+      ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, um por slide (slide 1 = CAPA com "Glossário da Alma"): ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide de termo: comeca pelo TERMO escrito com a acentuacao CORRETA (ex.: "Inclusão", "Parentificação", "Pertença"), realcado a ouro, seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
       : 'MODO GLOSSARIO: cada slide (menos a capa) define UM termo da psicologia da alma. Slide 1 = CAPA com "Glossario da Alma". Cada um dos outros slides: comeca pelo TERMO (sera realcado a ouro), seguido de uma definicao simples e clara numa frase. Em "destaque" poe o proprio termo. Usa termos do ambito (sombra, ego, self, individuacao, ordens do amor, lealdade invisivel, parentificacao, campo morfogenetico). NAO repitas termos.')
     : `Tema do carrossel: "${tema}" (curso ${curso.nome}). Fiel ao conceito, concreto, com exemplos do real.`;
 
@@ -59,6 +62,7 @@ REGRAS:
 - Slide 1 = CAPA que para o scroll. Slides do meio = a ideia passo a passo. Ultimo = fecho que convida a refletir (e "guarda este post" ou "partilha com quem precisa").
 - PURAMENTE DIDATICO: sem CTA de venda, sem produtos, sem links.
 - NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
+- ACENTUAÇÃO OBRIGATÓRIA: escreve sempre com a acentuação correta do português europeu (ã, õ, ç, á, é, í, ó, ú, â, ê, ô). Ex.: "Inclusão" e nunca "Inclusao"; "Pertença", "Parentificação", "Lealdade". Nunca escrevas uma palavra sem o acento que ela tem.
 - ${instrucaoModo}
 
 DEVOLVE APENAS JSON valido:
@@ -74,7 +78,7 @@ DEVOLVE APENAS JSON valido:
     ? `Cria o carrossel de APRESENTACAO da conta Véu a Véu em ${nSlides} slides.`
     : modo === 'glossario'
     ? (termos.length
-      ? `Cria "Glossario da Alma": capa + a definicao destes termos, um por slide, por esta ordem: ${termos.join('; ')}.`
+      ? `Cria "Glossário da Alma": capa + a definicao destes termos, um por slide, por esta ordem: ${termosPrompt.join('; ')}.`
       : `Cria um carrossel "Glossario da Alma" com ${nSlides} slides (capa + ${nSlides - 1} termos distintos).`)
     : `Cria um carrossel didatico de ${nSlides} slides sobre: "${tema}".`;
 
@@ -99,13 +103,19 @@ DEVOLVE APENAS JSON valido:
   const slidesIn = (Array.isArray(p.slides) ? p.slides : []).filter((s) => s && s.texto);
   if (!slidesIn.length) return NextResponse.json({ erro: 'sem-slides', amostra: texto.slice(0, 300) }, { status: 502 });
 
-  const slides = slidesIn.map((s, i) => ({
-    tipo: 'kinetico',
-    texto: (s.texto ?? '').trim(),
-    destaque: Array.isArray(s.destaque) ? s.destaque.map(String) : [],
-    notaVisual: i === 0 ? (p.fundoPrompt ?? '').trim() : '', // o prompt do fundo fica no 1.o slide
-    capa: i === 0,
-  }));
+  const semAcc = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const slides = slidesIn.map((s, i) => {
+    let texto = (s.texto ?? '').trim();
+    let destaque = Array.isArray(s.destaque) ? s.destaque.map(String) : [];
+    // glossário: garante que o TERMO sai com a acentuação certa do teu universo
+    if (modo === 'glossario' && i > 0 && termosPrompt[i - 1]) {
+      const termo = termosPrompt[i - 1];
+      const na = semAcc(termo).toLowerCase();
+      if (semAcc(texto).toLowerCase().startsWith(na)) texto = termo + texto.slice(termo.length);
+      destaque = [termo];
+    }
+    return { tipo: 'kinetico', texto, destaque, notaVisual: i === 0 ? (p.fundoPrompt ?? '').trim() : '', capa: i === 0 };
+  });
 
   const slug = `carrossel-veu-${modo}-${Date.now()}`;
   const titulo = p.titulo ?? (modo === 'sobre' ? 'Sobre' : modo === 'glossario' ? 'Glossário da Alma' : (tema ?? 'carrossel'));
