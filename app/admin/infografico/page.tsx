@@ -6,6 +6,7 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { InfograficoSlide, type Infografico } from '@/components/admin/InfograficoSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import { COLECOES, type ColecaoId } from '@/lib/colecoes';
+import { PADROES_SUGERIDOS } from '@/lib/infografico/padroes';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -86,6 +87,12 @@ export default function InfograficoPage() {
             </select>
             <Btn variant="primary" onClick={gerar} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar infográfico'}</Btn>
           </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 self-center mr-1">sugestões:</span>
+            {(PADROES_SUGERIDOS[universo] ?? []).map((sug) => (
+              <button key={sug} onClick={() => setTema(sug)} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar">{sug}</button>
+            ))}
+          </div>
           {erro && <p className="mt-3 text-[0.75rem] text-red-300">{erro}</p>}
           {msg && <p className="mt-3 text-[0.75rem] text-salvia">{msg}</p>}
         </Card>
@@ -96,7 +103,7 @@ export default function InfograficoPage() {
             const img = it.dias?.[0]?.imagens?.[0];
             const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'freeme';
             if (!s) return null;
-            const info = { padrao: s.padrao, subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custo: s.custo, virada: s.virada, url: s.url };
+            const info = { padrao: s.padrao, subtitulo: s.subtitulo, ciclo: s.ciclo ?? [], custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
             return (
               <Card key={it.slug} className="p-5">
                 <h3 className="font-serif text-lg mb-4 text-center">{it.title}</h3>

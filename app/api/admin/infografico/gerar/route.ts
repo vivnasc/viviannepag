@@ -33,14 +33,15 @@ ${ecossistema}
 
 DEVOLVE APENAS JSON valido:
 {
-  "padrao": "nome curto do padrao (2-4 palavras, ex.: 'Compensar a mais')",
+  "padrao": "nome curto do padrao (2-4 palavras, ex.: 'Apagar-se para amar')",
   "subtitulo": "1 linha que o descreve",
-  "ciclo": ["passo 1", "passo 2", "passo 3", "passo 4"],
-  "custo": "1-2 frases: o que este padrao te impede de ver/ter (a limitacao real)",
-  "virada": "1 frase de abertura/reframe (uma pergunta ou convite)",
+  "ciclo": ["passo curto", "passo curto", "passo curto", "passo curto"],
+  "custoTi": "1 frase concreta: o que este padrao te custa A TI (o que perdes/deixas de ser)",
+  "custoOutros": "1 frase concreta: o que custa AOS OUTROS (filhos, parceiro, familia — o que aprendem ou recebem)",
+  "virada": "1 frase curta de abertura/reframe (uma pergunta)",
   "produtoRelacionado": "slug-ou-link-exacto-do-ecossistema para o CTA"
 }
-Notas: o "ciclo" sao 3-5 passos curtos do circulo automatico (gatilho -> reacao -> alivio curto -> repete). Usa nome/link EXACTOS do ecossistema.`;
+Notas: o "ciclo" sao 3-4 passos do circulo automatico (gatilho -> reacao -> alivio -> repete). CADA passo no MAXIMO 5 palavras (vai num diagrama em roda). custoTi e custoOutros sao concretos e distintos. Usa nome/link EXACTOS do ecossistema.`;
 
   let texto = '';
   try {
@@ -55,7 +56,7 @@ Notas: o "ciclo" sao 3-5 passos curtos do circulo automatico (gatilho -> reacao 
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { padrao?: string; subtitulo?: string; ciclo?: unknown; custo?: string; virada?: string; produtoRelacionado?: string };
+  let p: { padrao?: string; subtitulo?: string; ciclo?: unknown; custoTi?: string; custoOutros?: string; virada?: string; produtoRelacionado?: string };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
 
   // resolve URL do produto (slug -> /loja/slug, ou link directo)
@@ -77,7 +78,8 @@ Notas: o "ciclo" sao 3-5 passos curtos do circulo automatico (gatilho -> reacao 
     padrao: p.padrao ?? tema,
     subtitulo: p.subtitulo ?? '',
     ciclo: Array.isArray(p.ciclo) ? p.ciclo.map(String) : [],
-    custo: p.custo ?? '',
+    custoTi: p.custoTi ?? '',
+    custoOutros: p.custoOutros ?? '',
     virada: p.virada ?? '',
     url,
     produtoRelacionado: ref,
