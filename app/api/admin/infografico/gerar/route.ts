@@ -37,7 +37,9 @@ DEVOLVE APENAS JSON valido:
   "diagrama": { },
   "custoTi": "1 frase: como isto se manifesta na pessoa (efeito interno)",
   "custoOutros": "1 frase: como afeta a relacao / os outros / o sistema",
-  "virada": "1 frase de reflexao ou pergunta (abre, nao vende)"
+  "virada": "1 frase de reflexao ou pergunta (abre, nao vende)",
+  "legenda": "legenda para Instagram, DIDATICA: 1.a linha gancho forte, depois 2-4 linhas que explicam o conceito em palavras simples, e fecha com um convite a refletir + 'guarda este post' ou 'partilha com quem precisa'. SEM vender. Portugues europeu com acentos.",
+  "hashtags": ["10-12 hashtags relevantes em portugues, mistura amplas e de nicho (ex.: #constelacaofamiliar #psicologiatranspessoal #autoconhecimento), sem # repetido"]
 }
 
 ESCOLHE o tipoDiagrama que MELHOR explica o conceito e preenche "diagrama":
@@ -60,7 +62,7 @@ ESCOLHE o tipoDiagrama que MELHOR explica o conceito e preenche "diagrama":
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { padrao?: string; subtitulo?: string; tipoDiagrama?: string; diagrama?: unknown; custoTi?: string; custoOutros?: string; virada?: string };
+  let p: { padrao?: string; subtitulo?: string; tipoDiagrama?: string; diagrama?: unknown; custoTi?: string; custoOutros?: string; virada?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
 
   // fundo do pool (nao-usado primeiro) — so estetica
@@ -81,6 +83,8 @@ ESCOLHE o tipoDiagrama que MELHOR explica o conceito e preenche "diagrama":
     custoTi: p.custoTi ?? '',
     custoOutros: p.custoOutros ?? '',
     virada: p.virada ?? '',
+    legenda: p.legenda ?? '',
+    hashtags: Array.isArray(p.hashtags) ? p.hashtags : [],
     imageUrl,
   };
   const dias = [{ dia: 1, mundo, palavra: p.padrao ?? tema, slides: [slide] }];

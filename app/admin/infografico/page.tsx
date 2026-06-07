@@ -14,13 +14,22 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type InfoSlide = Infografico & { tipo: string; imageUrl?: string };
+type InfoSlide = Infografico & { tipo: string; imageUrl?: string; legenda?: string; hashtags?: string[] };
 type Item = {
   slug: string; title: string;
   dias: Array<{ dia: number; mundo?: Mundo; imagens?: string[]; slides?: InfoSlide[] }>;
   theme: { curso?: string; mundo?: Mundo };
   created_at: string;
 };
+
+function CopiarLegenda({ legenda, hashtags }: { legenda?: string; hashtags?: string[] }) {
+  const [ok, setOk] = useState(false);
+  const texto = [legenda?.trim(), (hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
+  if (!texto) return null;
+  return (
+    <button onClick={() => { navigator.clipboard?.writeText(texto); setOk(true); setTimeout(() => setOk(false), 1400); }} className="text-[0.72rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10" title="legenda + hashtags para o Instagram">{ok ? '✓ copiado' : '📋 legenda'}</button>
+  );
+}
 
 export default function InfograficoPage() {
   const [itens, setItens] = useState<Item[]>([]);
@@ -192,8 +201,9 @@ export default function InfograficoPage() {
                 <button onClick={() => setZoom({ info, mundo, imageUrl: s.imageUrl })} className="block w-full max-w-[460px] mx-auto mb-4 cursor-zoom-in" title="ampliar">
                   <InfograficoSlide info={info} mundo={mundo} imageUrl={s.imageUrl} />
                 </button>
-                <div className="flex items-center gap-2 justify-center">
+                <div className="flex flex-wrap items-center gap-2 justify-center">
                   <button onClick={() => baixar(it)} className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ descarregar PNG</button>
+                  <CopiarLegenda legenda={s.legenda} hashtags={s.hashtags} />
                   <button onClick={() => apagar(it.slug)} className="text-[0.72rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                 </div>
               </Card>
