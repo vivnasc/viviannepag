@@ -17,24 +17,28 @@ export async function POST(req: Request) {
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
   const body = (await req.json().catch(() => ({}))) as { tema?: string; slides?: number; curso?: string; modo?: string };
-  const modo = body.modo === 'sobre' ? 'sobre' : 'tema';
-  // o Sobre são sempre 4 slides (o que é / para quem / quem és / convite)
-  const nSlides = modo === 'sobre' ? 4 : Math.max(3, Math.min(8, Number(body.slides) || 5));
+  const modo = body.modo === 'sobre' ? 'sobre' : body.modo === 'glossario' ? 'glossario' : 'tema';
+  // o Sobre são sempre 4 slides; glossário e tema respeitam o seletor
+  const nSlides = modo === 'sobre' ? 4 : Math.max(3, Math.min(8, Number(body.slides) || (modo === 'glossario' ? 6 : 5)));
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
   const tema = body.tema?.trim();
   if (modo === 'tema' && !tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
+  const instrucaoModo = modo === 'sobre'
+    ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
+    : modo === 'glossario'
+    ? 'MODO GLOSSARIO: cada slide (menos a capa) define UM termo da psicologia da alma. Slide 1 = CAPA com "Glossario da Alma". Cada um dos outros slides: comeca pelo TERMO (sera realcado a ouro), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo. Usa termos do ambito (sombra, ego, self, individuacao, arquetipo, inconsciente coletivo, sincronicidade, persona, ordens do amor, lealdade invisivel, parentificacao, campo morfogenetico, pertenca, projecao). NAO repitas termos.'
+    : `Tema do carrossel: "${tema}" (curso ${curso.nome}). Fiel ao conceito, concreto, com exemplos do real.`;
+
   const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Crias CARROSSEIS DIDATICOS para Instagram (varios slides, cada um uma imagem com uma frase). Para ENSINAR e atrair, nunca vender. Portugues europeu COM acentos. Linguagem humana, com profundidade real.
 
 REGRAS:
-- ${nSlides} slides no total. BREVIDADE: cada slide UMA frase curta (max ~12 palavras, cabe grande no ecra).
+- ${nSlides} slides no total. BREVIDADE: cada slide UMA frase curta (max ~14 palavras, cabe grande no ecra).
 - Slide 1 = CAPA que para o scroll. Slides do meio = a ideia passo a passo. Ultimo = fecho que convida a refletir (e "guarda este post" ou "partilha com quem precisa").
 - PURAMENTE DIDATICO: sem CTA de venda, sem produtos, sem links.
 - NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
-- ${modo === 'sobre'
-      ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
-      : `Tema do carrossel: "${tema}" (curso ${curso.nome}). Fiel ao conceito, concreto, com exemplos do real.`}
+- ${instrucaoModo}
 
 DEVOLVE APENAS JSON valido:
 {
@@ -47,6 +51,8 @@ DEVOLVE APENAS JSON valido:
 
   const userMsg = modo === 'sobre'
     ? `Cria o carrossel de APRESENTACAO da conta Véu a Véu em ${nSlides} slides.`
+    : modo === 'glossario'
+    ? `Cria um carrossel "Glossario da Alma" com ${nSlides} slides (capa + ${nSlides - 1} termos distintos).`
     : `Cria um carrossel didatico de ${nSlides} slides sobre: "${tema}".`;
 
   let texto = '';
@@ -79,13 +85,13 @@ DEVOLVE APENAS JSON valido:
   }));
 
   const slug = `carrossel-veu-${modo}-${Date.now()}`;
-  const titulo = p.titulo ?? (modo === 'sobre' ? 'Sobre' : (tema ?? 'carrossel'));
+  const titulo = p.titulo ?? (modo === 'sobre' ? 'Sobre' : modo === 'glossario' ? 'Glossário da Alma' : (tema ?? 'carrossel'));
   const dias = [{ dia: 1, mundo, palavra: titulo, slides, legenda: p.legenda ?? '', hashtags: Array.isArray(p.hashtags) ? p.hashtags : [], fundoPrompt: (p.fundoPrompt ?? '').trim() }];
 
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
-    .upsert({ slug, title: titulo, brief: tema ?? 'apresentação', dias, theme: { formato: 'carrossel-veu', modo, mundo, curso: curso.id } }, { onConflict: 'slug' })
+    .upsert({ slug, title: titulo, brief: tema ?? modo, dias, theme: { formato: 'carrossel-veu', modo, mundo, curso: curso.id } }, { onConflict: 'slug' })
     .select().single();
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, coleccao: data });

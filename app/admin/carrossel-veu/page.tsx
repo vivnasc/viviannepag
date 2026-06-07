@@ -181,7 +181,8 @@ export default function CarrosselVeuPage() {
 
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <button onClick={() => gerar({ modo: 'sobre' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Sobre (apresentação da conta)</button>
-            <span className="text-[0.62rem] opacity-40">cria o carrossel de apresentação para o destaque "Sobre"</span>
+            <button onClick={() => gerar({ modo: 'glossario' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Glossário (vários termos)</button>
+            <span className="text-[0.62rem] opacity-40">presets prontos para os destaques</span>
           </div>
 
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mt-5 mb-2">Ou um tema pronto (gera logo)</p>
