@@ -16,10 +16,13 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; slides?: number; curso?: string; modo?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; slides?: number; curso?: string; modo?: string; termos?: string[] };
   const modo = body.modo === 'sobre' ? 'sobre' : body.modo === 'glossario' ? 'glossario' : 'tema';
-  // o Sobre são sempre 4 slides; glossário e tema respeitam o seletor
-  const nSlides = modo === 'sobre' ? 4 : Math.max(3, Math.min(8, Number(body.slides) || (modo === 'glossario' ? 6 : 5)));
+  const termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
+  // o Sobre são sempre 4 slides; glossário com termos escolhidos = capa + termos
+  const nSlides = modo === 'sobre' ? 4
+    : modo === 'glossario' && termos.length ? termos.length + 1
+    : Math.max(3, Math.min(8, Number(body.slides) || (modo === 'glossario' ? 6 : 5)));
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
   const tema = body.tema?.trim();
@@ -28,7 +31,9 @@ export async function POST(req: Request) {
   const instrucaoModo = modo === 'sobre'
     ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
     : modo === 'glossario'
-    ? 'MODO GLOSSARIO: cada slide (menos a capa) define UM termo da psicologia da alma. Slide 1 = CAPA com "Glossario da Alma". Cada um dos outros slides: comeca pelo TERMO (sera realcado a ouro), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo. Usa termos do ambito (sombra, ego, self, individuacao, arquetipo, inconsciente coletivo, sincronicidade, persona, ordens do amor, lealdade invisivel, parentificacao, campo morfogenetico, pertenca, projecao). NAO repitas termos.'
+    ? (termos.length
+      ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, um por slide (slide 1 = CAPA com "Glossario da Alma"): ${termos.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide de termo: comeca pelo TERMO (realcado a ouro), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
+      : 'MODO GLOSSARIO: cada slide (menos a capa) define UM termo da psicologia da alma. Slide 1 = CAPA com "Glossario da Alma". Cada um dos outros slides: comeca pelo TERMO (sera realcado a ouro), seguido de uma definicao simples e clara numa frase. Em "destaque" poe o proprio termo. Usa termos do ambito (sombra, ego, self, individuacao, ordens do amor, lealdade invisivel, parentificacao, campo morfogenetico). NAO repitas termos.')
     : `Tema do carrossel: "${tema}" (curso ${curso.nome}). Fiel ao conceito, concreto, com exemplos do real.`;
 
   const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Crias CARROSSEIS DIDATICOS para Instagram (varios slides, cada um uma imagem com uma frase). Para ENSINAR e atrair, nunca vender. Portugues europeu COM acentos. Linguagem humana, com profundidade real.
@@ -52,7 +57,9 @@ DEVOLVE APENAS JSON valido:
   const userMsg = modo === 'sobre'
     ? `Cria o carrossel de APRESENTACAO da conta Véu a Véu em ${nSlides} slides.`
     : modo === 'glossario'
-    ? `Cria um carrossel "Glossario da Alma" com ${nSlides} slides (capa + ${nSlides - 1} termos distintos).`
+    ? (termos.length
+      ? `Cria "Glossario da Alma": capa + a definicao destes termos, um por slide, por esta ordem: ${termos.join('; ')}.`
+      : `Cria um carrossel "Glossario da Alma" com ${nSlides} slides (capa + ${nSlides - 1} termos distintos).`)
     : `Cria um carrossel didatico de ${nSlides} slides sobre: "${tema}".`;
 
   let texto = '';

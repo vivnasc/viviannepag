@@ -6,8 +6,8 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { toPng } from 'html-to-image';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
-import { CURSOS } from '@/lib/infografico/cursos';
-import { type Mundo } from '@/lib/estudio-conteudo';
+import { CURSOS, getCurso } from '@/lib/infografico/cursos';
+import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -41,6 +41,9 @@ export default function CarrosselVeuPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [busca, setBusca] = useState('');
   const [zoom, setZoom] = useState<{ it: Item; idx: number } | null>(null);
+  const [glossTermos, setGlossTermos] = useState<string[]>([]);
+  const [mostrarGloss, setMostrarGloss] = useState(false);
+  const toggleTermo = (t: string) => setGlossTermos((p) => p.includes(t) ? p.filter((x) => x !== t) : (p.length >= 7 ? p : [...p, t]));
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/carrossel-veu/list');
@@ -48,12 +51,13 @@ export default function CarrosselVeuPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
 
-  async function gerar(opts: { tema?: string; modo?: string }) {
+  async function gerar(opts: { tema?: string; modo?: string; termos?: string[] }) {
     const t = (opts.tema ?? tema).trim();
-    if (opts.modo !== 'sobre' && !t) { setErro('Escreve o tema ou clica numa sugestão.'); return; }
+    const ehGlossComTermos = opts.modo === 'glossario' && (opts.termos?.length ?? 0) > 0;
+    if (opts.modo !== 'sobre' && !ehGlossComTermos && opts.modo !== 'glossario' && !t) { setErro('Escreve o tema ou clica numa sugestão.'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/carrossel-veu/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, slides: slidesN, curso, modo: opts.modo ?? 'tema' }) });
+      const r = await fetch('/api/admin/carrossel-veu/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, slides: slidesN, curso, modo: opts.modo ?? 'tema', termos: opts.termos }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       if (!opts.tema && opts.modo !== 'sobre') setTema('');
@@ -181,9 +185,33 @@ export default function CarrosselVeuPage() {
 
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <button onClick={() => gerar({ modo: 'sobre' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Sobre (apresentação da conta)</button>
-            <button onClick={() => gerar({ modo: 'glossario' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Glossário (vários termos)</button>
-            <span className="text-[0.62rem] opacity-40">presets prontos para os destaques</span>
+            <button onClick={() => setMostrarGloss((v) => !v)} disabled={gerando} className={`text-[0.72rem] px-3 py-1.5 rounded-full border ${mostrarGloss ? 'border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/10' : 'border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10'}`}>★ Glossário (escolhe os termos)</button>
+            <span className="text-[0.62rem] opacity-40">presets para os destaques</span>
           </div>
+
+          {mostrarGloss && (
+            <div className="mt-3 rounded-xl border border-[#C9B6FA]/25 bg-[#C9B6FA]/[0.04] p-3.5">
+              <p className="text-[0.62rem] uppercase tracking-[0.15em] text-[#C9B6FA] mb-2">Glossário do teu universo, escolhe até 7 termos ({glossTermos.length}/7)</p>
+              <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
+                {CURSOS.map((c) => (
+                  <div key={c.id}>
+                    <p className="text-[0.62rem] tracking-[0.08em] mb-1.5" style={{ color: PALETAS[c.mundo].destaque }}>{c.nome}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {getCurso(c.id).conceitos.map((t) => {
+                        const on = glossTermos.includes(t);
+                        return <button key={t} onClick={() => toggleTermo(t)} className={`text-[0.66rem] px-2 py-1 rounded-full border ${on ? 'border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/15' : 'border-ocre/25 text-creme-2/70 hover:border-[#C9B6FA]'}`}>{on ? '✓ ' : ''}{t}</button>;
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-3 mt-3">
+                <Btn variant="primary" onClick={() => gerar({ modo: 'glossario', termos: glossTermos })} disabled={gerando || glossTermos.length === 0}>{gerando ? 'a gerar…' : `gerar glossário (${glossTermos.length})`}</Btn>
+                {glossTermos.length > 0 && <button onClick={() => setGlossTermos([])} className="text-[0.66rem] opacity-60 hover:opacity-100">limpar</button>}
+                <span className="text-[0.62rem] opacity-40">define exatamente os que escolheres, um por slide</span>
+              </div>
+            </div>
+          )}
 
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mt-5 mb-2">Ou um tema pronto (gera logo)</p>
           <div className="flex flex-wrap gap-2">
