@@ -16,13 +16,34 @@ export const maxDuration = 120;
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; formato?: string; curso?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; formato?: string; curso?: string; manual?: boolean; frase?: string; destaque?: string; legenda?: string; fundoPrompt?: string };
   const tema = body.tema?.trim();
   const formato = getFormato(body.formato ?? 'sinais');
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
+
+  // ── MODO "frase exata" (sem IA): cria um cinetico com o texto aprovado ──
+  if (body.manual) {
+    const frase = limparTravessoes((body.frase ?? '').trim());
+    if (!frase) return NextResponse.json({ erro: 'falta frase' }, { status: 400 });
+    const destaque = limparTravessoes((body.destaque ?? '').split(',').map((s) => s.trim()).filter(Boolean));
+    const fundoPrompt = limparTravessoes((body.fundoPrompt ?? '').trim()) || 'luminous golden roots and threads of light weaving upward through deep indigo blue, ethereal, sacred, soft glow, fine art, no people, no text, --ar 9:16 --style raw';
+    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, capa: true }];
+    const numeroFaixaM = (Math.floor(Date.now() / 1000) % 100) + 1;
+    const faixaM = { numero: numeroFaixaM, titulo: `Faixa ${String(numeroFaixaM).padStart(2, '0')}`, url: faixaUrl(numeroFaixaM) };
+    const slugM = `reel-kinetico-${curso.id}-${Date.now()}`;
+    const diasM = [{ dia: 1, mundo, palavra: frase.slice(0, 48), slides, faixa: faixaM, legenda: limparTravessoes((body.legenda ?? '').trim()), hashtags: [] }];
+    const supabaseM = getSupabaseAdmin();
+    const { data: dataM, error: errM } = await supabaseM
+      .from('carousel_collections')
+      .upsert({ slug: slugM, title: frase.slice(0, 48), brief: frase, dias: diasM, theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo, curso: curso.id } }, { onConflict: 'slug' })
+      .select().single();
+    if (errM) return NextResponse.json({ erro: 'db', detalhe: errM.message }, { status: 500 });
+    return NextResponse.json({ ok: true, coleccao: dataM });
+  }
+
+  if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
   const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Crias REELS DIDATICOS para Instagram — para ENSINAR e atrair pessoas novas, nunca para vender. Contexto academico: "${curso.nome}" (${curso.descricao}). Portugues europeu COM acentos. Linguagem humana, calorosa, com profundidade real (nada de frases motivacionais ocas).

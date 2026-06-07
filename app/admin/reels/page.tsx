@@ -40,6 +40,10 @@ export default function ReelsPage() {
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  // modo "frase exata" (sem IA) — cinético
+  const [manFrase, setManFrase] = useState('');
+  const [manDest, setManDest] = useState('');
+  const [manLeg, setManLeg] = useState('');
   const [sugMap, setSugMap] = useState<Record<string, string[]>>({});
   const [sugLoading, setSugLoading] = useState(false);
   const [filtro, setFiltro] = useState('todos');
@@ -65,6 +69,21 @@ export default function ReelsPage() {
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       if (!temaArg) setTema('');
       setMsg(`Gerado: ${j.coleccao?.title ?? t}`);
+      await carregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setGerando(false); }
+  }
+
+  async function criarManual() {
+    const frase = manFrase.trim();
+    if (!frase) { setErro('Escreve a frase exata.'); return; }
+    setGerando(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/reels/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ manual: true, formato: 'kinetico', curso, frase, destaque: manDest, legenda: manLeg }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setManFrase(''); setManDest(''); setManLeg('');
+      setMsg('Post criado. Agora copia o prompt do fundo, gera no MJ e arrasta a imagem na biblioteca em baixo.');
       await carregar();
     } catch (e) { setErro(String(e)); }
     finally { setGerando(false); }
@@ -213,6 +232,20 @@ export default function ReelsPage() {
             </select>
             <Btn variant="primary" onClick={() => gerar()} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar'}</Btn>
           </div>
+
+          {/* frase exata (sem IA) — só no cinético */}
+          {formato === 'kinetico' && (
+            <div className="mt-4 rounded-xl border border-ambar/25 bg-ambar/[0.04] p-3.5">
+              <p className="text-[0.62rem] uppercase tracking-[0.15em] text-ambar mb-2">✍️ Ou escreve a frase exata (sem IA)</p>
+              <input value={manFrase} onChange={(e) => setManFrase(e.target.value)} placeholder="Frase exata. Ex.: Nem tudo o que sentes é teu." className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar mb-2" />
+              <input value={manDest} onChange={(e) => setManDest(e.target.value)} placeholder="Palavra(s) a ouro, separadas por vírgula. Ex.: teu" className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.8rem] outline-none focus:border-ambar mb-2" />
+              <textarea value={manLeg} onChange={(e) => setManLeg(e.target.value)} placeholder="Legenda completa (com hashtags). Opcional." rows={4} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.8rem] outline-none focus:border-ambar mb-2" />
+              <div className="flex items-center gap-3">
+                <Btn variant="primary" onClick={criarManual} disabled={gerando}>{gerando ? 'a criar…' : 'criar post'}</Btn>
+                <span className="text-[0.68rem] opacity-50">cria o post com o teu texto. Depois arrastas a imagem de fundo na biblioteca.</span>
+              </div>
+            </div>
+          )}
 
           {/* pool pronta de temas — escolhe e gera */}
           {(() => {
