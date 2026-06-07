@@ -11,8 +11,8 @@ export async function GET() {
   const { data, error } = await supabase
     .from('carousel_collections')
     .select('id, slug, title, brief, dias, theme, created_at')
-    .eq('theme->>formato', 'infografico')
     .order('created_at', { ascending: false });
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
-  return NextResponse.json({ infograficos: data ?? [] });
+  const infograficos = (data ?? []).filter((c) => (c.theme as { formato?: string } | null)?.formato === 'infografico');
+  return NextResponse.json({ infograficos });
 }

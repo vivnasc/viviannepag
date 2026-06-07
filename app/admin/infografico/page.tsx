@@ -58,12 +58,18 @@ export default function InfograficoPage() {
     const lista = conceitos.slice(0, 5);
     if (!lista.length) return;
     setGerando(true); setErro(null); setMsg(null);
-    let done = 0;
+    let ok = 0; let ultimoErro = '';
     for (const t of lista) {
-      try { await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, curso }) }); } catch { /* segue */ }
-      done++; setMsg(`a gerar biblioteca… ${done}/${lista.length}`); await carregar();
+      try {
+        const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, curso }) });
+        const j = await r.json();
+        if (r.ok) ok++; else ultimoErro = (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '');
+      } catch (e) { ultimoErro = String(e); }
+      setMsg(`a gerar… ${ok}/${lista.length}`); await carregar();
     }
-    setGerando(false); setMsg(`Biblioteca: +${lista.length} infográficos.`);
+    setGerando(false);
+    if (ok === 0) setErro(`Nenhum gerado. Erro: ${ultimoErro || 'desconhecido'}`);
+    else { setMsg(`Biblioteca: ${ok} de ${lista.length} gerados.`); if (ultimoErro) setErro(`Alguns falharam: ${ultimoErro}`); }
   }
 
   async function pedirSugestoes() {
