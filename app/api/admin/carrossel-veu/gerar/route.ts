@@ -18,7 +18,8 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => ({}))) as { tema?: string; slides?: number; curso?: string; modo?: string };
   const modo = body.modo === 'sobre' ? 'sobre' : 'tema';
-  const nSlides = Math.max(3, Math.min(8, Number(body.slides) || (modo === 'sobre' ? 4 : 5)));
+  // o Sobre são sempre 4 slides (o que é / para quem / quem és / convite)
+  const nSlides = modo === 'sobre' ? 4 : Math.max(3, Math.min(8, Number(body.slides) || 5));
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
   const tema = body.tema?.trim();
