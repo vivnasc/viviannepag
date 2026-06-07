@@ -19,7 +19,7 @@ export const FORMATOS: FormatoReel[] = [
     emoji: '✨',
     video: true,
     instrucao:
-      'Formato "Frase com motion" (reel simples de alto alcance). Devolve em "frames" UM ÚNICO frame com a frase forte e curta (8 a 16 palavras, uma só ideia, com ritmo poético — a frase é a estrela). Em "destaque" devolve 1 a 3 palavras-chave dessa frase para realçar a ouro. Em "fundoPrompt" devolve um prompt MidJourney para uma imagem transcendente de fundo (sem pessoas, sem texto, --ar 9:16). Sem listas, sem passos: só a frase.',
+      'Formato "Frase com motion" (reel simples de alto alcance). A BREVIDADE VENCE (os posts mais curtos rendem mais views): devolve em "frames" UM ÚNICO frame com uma frase CURTA e forte (5 a 12 palavras, uma só ideia, ritmo poético) OU — quando o conceito for poderoso por si só — UMA ÚNICA PALAVRA-conceito (ex.: Dignidade, Pertença, Inteireza). A frase/palavra é a estrela. Em "destaque" devolve 1 a 2 palavras-chave para realçar a ouro (no caso de palavra única, a própria palavra). Em "fundoPrompt" devolve um prompt MidJourney para uma imagem transcendente de fundo, evocativa do conceito (sem pessoas, sem texto, --ar 9:16). Nada de listas nem explicações: só a frase/palavra.',
   },
   {
     id: 'sinais',

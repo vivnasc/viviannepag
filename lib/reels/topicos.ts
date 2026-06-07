@@ -5,6 +5,14 @@
 
 export const TOPICOS_REELS: Record<string, string[]> = {
   kinetico: [
+    'Dignidade',
+    'Pertença',
+    'Inteireza',
+    'Presença',
+    'Reciprocidade',
+    'Limite',
+    'Raiz',
+    'Travessia',
     'O que carregas que nunca foi teu',
     'Dizer não é também um ato de amor',
     'Não nasceste para caber, nasceste para existir',
