@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
+import { toPng } from 'html-to-image';
 import { InfograficoSlide, type Infografico } from '@/components/admin/InfograficoSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import { CURSOS, getCurso } from '@/lib/infografico/cursos';
@@ -96,14 +97,28 @@ export default function InfograficoPage() {
     } catch (e) { setErro(String(e)); }
   }
 
-  async function gerarImagem(slug: string) {
-    setErro(null); setMsg(null);
-    try {
-      const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
-      const j = await r.json();
-      if (!r.ok) { setErro('imagem: ' + (j.erro ?? '')); return; }
-      setMsg('Render da imagem disparado (~3 min). Recarrega depois para a descarregares.');
-    } catch (e) { setErro(String(e)); }
+  // descarrega o infografico como PNG 1080x1350 — captura no browser (instantaneo)
+  const capRef = useRef<HTMLDivElement>(null);
+  const [cap, setCap] = useState<{ info: Infografico; mundo: Mundo; nome: string } | null>(null);
+  useEffect(() => {
+    if (!cap) return;
+    (async () => {
+      try {
+        await (document.fonts?.ready ?? Promise.resolve());
+        await new Promise((r) => setTimeout(r, 450));
+        const node = capRef.current?.firstElementChild as HTMLElement | null;
+        if (node) {
+          const dataUrl = await toPng(node, { pixelRatio: 1, cacheBust: true });
+          const a = document.createElement('a'); a.href = dataUrl; a.download = `${cap.nome}.png`; a.click();
+        }
+      } catch (e) { setErro('download: ' + String(e)); }
+      setCap(null);
+    })();
+  }, [cap]);
+  function baixar(it: Item) {
+    const s = it.dias?.[0]?.slides?.[0]; if (!s) return;
+    const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
+    setCap({ info: { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }, mundo, nome: it.slug });
   }
 
   return (
@@ -168,7 +183,6 @@ export default function InfograficoPage() {
             .filter((it) => !busca.trim() || it.title.toLowerCase().includes(busca.trim().toLowerCase()))
             .map((it) => {
             const s = it.dias?.[0]?.slides?.[0];
-            const img = it.dias?.[0]?.imagens?.[0];
             const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
             if (!s) return null;
             const info = { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
@@ -179,15 +193,19 @@ export default function InfograficoPage() {
                   <InfograficoSlide info={info} mundo={mundo} imageUrl={s.imageUrl} />
                 </button>
                 <div className="flex items-center gap-2 justify-center">
-                  {img
-                    ? <a href={img} download className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia">⬇ descarregar imagem</a>
-                    : <Btn variant="default" onClick={() => gerarImagem(it.slug)}>gerar imagem (PNG)</Btn>}
+                  <button onClick={() => baixar(it)} className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ descarregar PNG</button>
                   <button onClick={() => apagar(it.slug)} className="text-[0.72rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                 </div>
               </Card>
             );
           })}
         </div>
+
+        {cap && (
+          <div ref={capRef} style={{ position: 'fixed', left: -10000, top: 0, width: 1080 }} aria-hidden>
+            <InfograficoSlide info={cap.info} mundo={cap.mundo} />
+          </div>
+        )}
 
         {zoom && (
           <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">

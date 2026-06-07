@@ -30,7 +30,7 @@ function Mandala({ cor, op = 0.22 }: { cor: string; op?: number }) {
   );
 }
 
-export function AnelCover({ label, imageUrl, mundo = 'escola', perfil = false }: { label: string; imageUrl?: string; mundo?: Mundo; perfil?: boolean }) {
+export function AnelCover({ label, imageUrl, mundo = 'escola', perfil = false, square = false }: { label: string; imageUrl?: string; mundo?: Mundo; perfil?: boolean; square?: boolean }) {
   const p = PALETAS[mundo];
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -41,7 +41,7 @@ export function AnelCover({ label, imageUrl, mundo = 'escola', perfil = false }:
   }, []);
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', overflow: 'hidden', borderRadius: '50%', background: p.bg2 }}>
+    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', overflow: 'hidden', borderRadius: square ? 0 : '50%', background: p.bg2 }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1080, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontFamily: FONT_SERIF, color: p.texto, textAlign: 'center', background: `radial-gradient(circle at 50% 42%, ${p.bg} 0%, ${p.bg2} 70%)` }}>
         {/* imagem MJ opcional */}
         {imageUrl && (<>

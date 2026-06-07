@@ -50,7 +50,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
   const [fit, setFit] = useState(1);
   useLayoutEffect(() => {
     const el = contentRef.current; if (!el) return;
-    const apply = () => { el.style.transform = 'scale(1)'; const avail = 1350 - 150; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.55, avail / h) : 1); };
+    const apply = () => { el.style.transform = 'scale(1)'; const avail = 1350 - 120; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
     apply();
     if (typeof document !== 'undefined' && document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
   }, [info]);
@@ -170,10 +170,9 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
 
           {info.virada && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 40, lineHeight: 1.3, margin: '24px auto 0', maxWidth: 880 }}>{info.virada}</p>}
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 28 }}>
-            <span style={{ width: 70, height: 1, background: ACCENT, opacity: 0.5 }} />
-            <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, color: TXT, opacity: 0.95 }}>Vivianne dos Santos</span>
-            <span style={{ fontFamily: FONT_MONO, fontSize: 22, letterSpacing: '0.04em', color: ACCENT, opacity: 0.8 }}>{info.url ?? 'viviannedossantos.com'}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, marginTop: 20 }}>
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 300, fontSize: 17, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.65 }}>os sete véus</span>
+            <span style={{ fontFamily: FONT_MONO, fontSize: 24, letterSpacing: '0.04em', color: ACCENT, opacity: 0.85 }}>{info.url ?? 'viviannedossantos.com'}</span>
           </div>
         </div>
       </div>

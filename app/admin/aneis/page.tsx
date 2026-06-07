@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { toPng } from 'html-to-image';
 import { AnelCover } from '@/components/admin/AnelCover';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import type { Mundo } from '@/lib/estudio-conteudo';
@@ -36,29 +37,37 @@ export default function AneisPage() {
     } catch (e) { setErro(String(e)); } finally { setBusy(false); }
   }
 
-  async function gerarImagens() {
-    if (!item) return; setErro(null);
-    try {
-      const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: item.slug }) });
-      const j = await r.json();
-      if (!r.ok) { setErro('imagens: ' + (j.erro ?? '')); return; }
-      setMsg('A preparar as imagens (~3 min). Recarrega depois e descarrega cada uma.');
-    } catch (e) { setErro(String(e)); }
+  // download instantaneo no browser (1080x1080)
+  const capRef = useRef<HTMLDivElement>(null);
+  const [cap, setCap] = useState<{ label: string; perfil: boolean; mundo: Mundo; nome: string } | null>(null);
+  useEffect(() => {
+    if (!cap) return;
+    (async () => {
+      try {
+        await (document.fonts?.ready ?? Promise.resolve());
+        await new Promise((r) => setTimeout(r, 450));
+        const node = capRef.current?.firstElementChild as HTMLElement | null;
+        if (node) { const dataUrl = await toPng(node, { pixelRatio: 1, cacheBust: true }); const a = document.createElement('a'); a.href = dataUrl; a.download = `${cap.nome}.png`; a.click(); }
+      } catch (e) { setErro('download: ' + String(e)); }
+      setCap(null);
+    })();
+  }, [cap]);
+  function baixar(d: Dia) {
+    const s = d.slides?.[0]; if (!s) return;
+    setCap({ label: s.label ?? '', perfil: !!s.perfil, mundo: d.mundo ?? item?.theme?.mundo ?? 'escola', nome: s.perfil ? 'perfil-veu-a-veu' : `anel-${(s.label ?? '').toLowerCase().replace(/\s+/g, '-')}` });
   }
 
   const perfil = item?.dias.find((d) => d.slides?.[0]?.perfil);
   const aneis = item?.dias.filter((d) => !d.slides?.[0]?.perfil) ?? [];
 
   const Cartao = ({ d }: { d: Dia }) => {
-    const s = d.slides?.[0]; const img = d.imagens?.[0];
+    const s = d.slides?.[0];
     if (!s) return null;
     return (
       <div className="flex flex-col items-center gap-2">
         <div className="w-full max-w-[210px]"><AnelCover label={s.label ?? ''} mundo={d.mundo ?? item?.theme?.mundo ?? 'escola'} perfil={!!s.perfil} /></div>
         <span className="text-[0.72rem] opacity-80">{s.perfil ? 'foto de perfil' : s.label}</span>
-        {img
-          ? <a href={img} download className="text-[0.62rem] px-2.5 py-1 rounded border border-salvia/40 bg-salvia/10 text-salvia">⬇ descarregar</a>
-          : <span className="text-[0.58rem] opacity-40">(falta gerar imagem)</span>}
+        <button onClick={() => baixar(d)} className="text-[0.62rem] px-2.5 py-1 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ descarregar</button>
       </div>
     );
   };
@@ -75,10 +84,15 @@ export default function AneisPage() {
 
         <Card className="p-4 mb-8 flex flex-wrap items-center gap-3">
           <Btn variant="primary" onClick={criar} disabled={busy}>{busy ? 'a criar…' : item ? 'recriar' : 'criar'}</Btn>
-          {item && <Btn variant="default" onClick={gerarImagens}>preparar imagens p/ descarregar</Btn>}
           {erro && <span className="text-[0.75rem] text-red-300">{erro}</span>}
           {msg && <span className="text-[0.75rem] text-salvia">{msg}</span>}
         </Card>
+
+        {cap && (
+          <div ref={capRef} style={{ position: 'fixed', left: -10000, top: 0, width: 1080 }} aria-hidden>
+            <AnelCover label={cap.label} mundo={cap.mundo} perfil={cap.perfil} square />
+          </div>
+        )}
 
         {perfil && (
           <div className="mb-10">
