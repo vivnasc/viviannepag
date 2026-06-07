@@ -6,7 +6,7 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { InfograficoSlide, type Infografico } from '@/components/admin/InfograficoSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import { CURSOS, getCurso } from '@/lib/infografico/cursos';
-import type { Mundo } from '@/lib/estudio-conteudo';
+import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -29,11 +29,11 @@ export default function InfograficoPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [zoom, setZoom] = useState<{ info: Infografico; mundo: Mundo; imageUrl?: string } | null>(null);
-  const [sugestoes, setSugestoes] = useState<string[]>([]);
-  const [sugLoading, setSugLoading] = useState(false);
+  const [sugestoesMap, setSugestoesMap] = useState<Record<string, string[]>>({});
+  const [sugLoading, setSugLoading] = useState<string | null>(null);
 
   const cursoAtual = getCurso(curso);
-  const conceitos = sugestoes.length ? sugestoes : cursoAtual.conceitos;
+  const conceitosDe = (cid: string) => [...getCurso(cid).conceitos, ...(sugestoesMap[cid] ?? [])];
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/infografico/list');
@@ -41,12 +41,13 @@ export default function InfograficoPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
 
-  async function gerar(temaArg?: string) {
+  async function gerar(temaArg?: string, cursoArg?: string) {
     const t = (temaArg ?? tema).trim();
+    const c = cursoArg ?? curso;
     if (!t) { setErro('Escreve o conceito ou clica numa sugestão.'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, curso }) });
+      const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, curso: c }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       if (!temaArg) setTema('');
@@ -57,7 +58,7 @@ export default function InfograficoPage() {
   }
 
   async function gerarBiblioteca() {
-    const lista = conceitos.slice(0, 5);
+    const lista = conceitosDe(curso).slice(0, 5);
     if (!lista.length) return;
     setGerando(true); setErro(null); setMsg(null);
     let ok = 0; let ultimoErro = '';
@@ -74,15 +75,15 @@ export default function InfograficoPage() {
     else { setMsg(`Biblioteca: ${ok} de ${lista.length} gerados.`); if (ultimoErro) setErro(`Alguns falharam: ${ultimoErro}`); }
   }
 
-  async function pedirSugestoes() {
-    setErro(null); setSugLoading(true);
+  async function pedirSugestoes(cid: string) {
+    setErro(null); setSugLoading(cid);
     try {
-      const r = await fetch('/api/admin/infografico/sugerir', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ curso }) });
+      const r = await fetch('/api/admin/infografico/sugerir', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ curso: cid }) });
       const j = await r.json();
       if (!r.ok) { setErro('sugestões: ' + (j.erro ?? '')); return; }
-      setSugestoes(j.padroes ?? []);
+      setSugestoesMap((prev) => ({ ...prev, [cid]: [...(prev[cid] ?? []), ...(j.padroes ?? [])] }));
     } catch (e) { setErro(String(e)); }
-    finally { setSugLoading(false); }
+    finally { setSugLoading(null); }
   }
 
   async function gerarImagem(slug: string) {
@@ -105,21 +106,33 @@ export default function InfograficoPage() {
         <p className="text-[0.8rem] opacity-65 mb-6">Conhecimento das tuas pós-graduações, em imagem. Puramente educativo — sem CTA, sem produtos.</p>
 
         <Card className="p-4 mb-8">
+          {/* escrever o teu */}
+          <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">Escreve o teu conceito</p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Conceito a explicar (ex.: as Ordens do Amor, dar e receber)…" className="flex-1 bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar" />
-            <select value={curso} onChange={(e) => { setCurso(e.target.value); setSugestoes([]); }} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
+            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Ex.: as Ordens do Amor, dar e receber…" className="flex-1 bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar" />
+            <select value={curso} onChange={(e) => setCurso(e.target.value)} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
               {CURSOS.map((c) => <option key={c.id} value={c.id} className="bg-[#0F0F1A]">{c.nome}</option>)}
             </select>
-            <Btn variant="primary" onClick={() => gerar()} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar o que escrevi'}</Btn>
-            <Btn variant="default" onClick={gerarBiblioteca} disabled={gerando}>gerar biblioteca (5)</Btn>
+            <Btn variant="primary" onClick={() => gerar()} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar'}</Btn>
+            <Btn variant="default" onClick={gerarBiblioteca} disabled={gerando}>biblioteca de {cursoAtual.nome.split(' ')[0]} (5)</Btn>
           </div>
-          <p className="mt-2 text-[0.66rem] opacity-50 italic">{cursoAtual.descricao}</p>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mr-1">clica para gerar:</span>
-            {conceitos.map((sug) => (
-              <button key={sug} onClick={() => gerar(sug)} disabled={gerando} title="gerar este conceito" className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
+
+          {/* conceitos por curso — clica para gerar */}
+          <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mt-5 mb-2">Ou clica um conceito (gera logo)</p>
+          <div className="space-y-3">
+            {CURSOS.map((c) => (
+              <div key={c.id} className="border border-ocre/12 rounded-xl p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[0.66rem] tracking-[0.08em]" style={{ color: PALETAS[c.mundo].destaque }}>{c.nome}</span>
+                  <button onClick={() => pedirSugestoes(c.id)} disabled={!!sugLoading} className="text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading === c.id ? '…' : '↻ IA'}</button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {conceitosDe(c.id).map((sug) => (
+                    <button key={sug} onClick={() => gerar(sug, c.id)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
+                  ))}
+                </div>
+              </div>
             ))}
-            <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ sugestões IA (profundas)'}</button>
           </div>
           {erro && <p className="mt-3 text-[0.75rem] text-red-300">{erro}</p>}
           {msg && <p className="mt-3 text-[0.75rem] text-salvia">{msg}</p>}

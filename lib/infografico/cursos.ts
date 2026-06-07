@@ -24,6 +24,10 @@ export const CURSOS: Curso[] = [
       'A mandala como mapa interno',
       'Estados ampliados de consciência',
       'O Self transpessoal',
+      'Sombra e integração',
+      'Experiências de pico (Maslow)',
+      'O inconsciente coletivo',
+      'Símbolo, mito e cura',
     ],
   },
   {
@@ -40,6 +44,10 @@ export const CURSOS: Curso[] = [
       'Substituição de papéis',
       'Identificar-se com um excluído',
       'O campo morfogenético',
+      'Parentificação: ser mãe da mãe',
+      'A consciência do clã',
+      'Tomar os pais como são',
+      'O sintoma como amor',
     ],
   },
   {
@@ -54,6 +62,10 @@ export const CURSOS: Curso[] = [
       'Bem-estar espiritual',
       'Espiritualidade na clínica',
       'Emoções e autoconhecimento',
+      'A noite escura da alma',
+      'Logoterapia: o porquê',
+      'Práticas contemplativas',
+      'Religiosidade e desenvolvimento',
     ],
   },
   {
@@ -67,6 +79,10 @@ export const CURSOS: Curso[] = [
       'Comunicar com presença',
       'Saúde mental de quem cuida',
       'Liderança que cuida',
+      'Limites saudáveis',
+      'Escuta ativa',
+      'Autocompaixão',
+      'Propósito profissional',
     ],
   },
 ];
