@@ -172,7 +172,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, marginTop: 28 }}>
             <span style={{ fontFamily: FONT_SANS, fontWeight: 300, fontSize: 18, letterSpacing: '0.6em', textTransform: 'uppercase', color: ACCENT, opacity: 0.7 }}>os sete véus</span>
-            {info.url && <span style={{ fontFamily: FONT_MONO, fontSize: 24, letterSpacing: '0.03em', color: ACCENT, opacity: 0.85 }}>{info.url}</span>}
+            <span style={{ fontFamily: FONT_MONO, fontSize: 24, letterSpacing: '0.03em', color: ACCENT, opacity: 0.8 }}>{info.url ?? 'viviannedossantos.com'}</span>
           </div>
         </div>
       </div>
