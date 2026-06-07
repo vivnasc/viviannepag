@@ -31,18 +31,35 @@ export const metadata: Metadata = {
   },
 };
 
-const NAV = [
-  { href: '/admin', label: 'escritos' },
-  { href: '/admin/editora', label: 'editora' },
-  { href: '/admin/produtos', label: 'produtos' },
-  { href: '/admin/compras', label: 'compras' },
-  { href: '/admin/imagens', label: 'galeria' },
-  { href: '/admin/estudio', label: 'estúdio' },
-  { href: '/admin/carrossel', label: 'carrosséis' },
-  { href: '/admin/infografico', label: 'infográficos' },
-  { href: '/admin/reels', label: 'reels' },
-  { href: '/admin/banda', label: 'cá em casa' },
-  { href: '/admin/aneis', label: 'anéis' },
+const SECOES: { titulo: string; cor: string; itens: { href: string; label: string }[] }[] = [
+  {
+    titulo: 'viviannedossantos · loja',
+    cor: '#EBAE4A',
+    itens: [
+      { href: '/admin', label: 'escritos' },
+      { href: '/admin/editora', label: 'editora' },
+      { href: '/admin/produtos', label: 'produtos' },
+      { href: '/admin/compras', label: 'compras' },
+      { href: '/admin/estudio', label: 'estúdio' },
+      { href: '/admin/carrossel', label: 'carrosséis' },
+    ],
+  },
+  {
+    titulo: 'Véu a Véu · didático',
+    cor: '#C9B6FA',
+    itens: [
+      { href: '/admin/infografico', label: 'infográficos' },
+      { href: '/admin/reels', label: 'reels' },
+      { href: '/admin/banda', label: 'cá em casa' },
+    ],
+  },
+  {
+    titulo: 'geral',
+    cor: '#9aa39a',
+    itens: [
+      { href: '/admin/imagens', label: 'galeria' },
+    ],
+  },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -51,24 +68,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <body>
         <div className="grain" />
         <div className="flex min-h-screen">
-          <aside className="w-[200px] shrink-0 border-r border-ocre/10 bg-terra/50 py-8 px-5 flex flex-col gap-1 fixed top-0 left-0 bottom-0 z-40">
+          <aside className="w-[210px] shrink-0 border-r border-ocre/10 bg-terra/50 py-8 px-5 flex flex-col gap-1 fixed top-0 left-0 bottom-0 z-40 overflow-y-auto">
             <Link href="/" className="text-ocre text-[0.7rem] tracking-[0.2em] uppercase no-underline hover:text-ambar mb-6 block">
               home
             </Link>
-            <p className="text-[0.6rem] tracking-[0.3em] uppercase text-creme-2/30 mb-4">ADMIN</p>
-            {NAV.map(n => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className="block py-2.5 px-3 rounded-[10px] text-creme-2/80 text-[0.85rem] no-underline hover:bg-terra-2/50 hover:text-ambar transition-colors"
-              >
-                {n.label}
-              </Link>
+            {SECOES.map((sec) => (
+              <div key={sec.titulo} className="mb-4">
+                <p className="text-[0.58rem] tracking-[0.22em] uppercase mb-2 flex items-center gap-1.5" style={{ color: sec.cor }}>
+                  <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: sec.cor }} />
+                  {sec.titulo}
+                </p>
+                {sec.itens.map((n) => (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    className="block py-2 px-3 rounded-[10px] text-creme-2/80 text-[0.85rem] no-underline hover:bg-terra-2/50 hover:text-ambar transition-colors"
+                  >
+                    {n.label}
+                  </Link>
+                ))}
+              </div>
             ))}
             <div className="flex-1" />
             <p className="text-[0.6rem] text-creme-2/20 mt-4">viviannedossantos.com</p>
           </aside>
-          <main className="flex-1 ml-[200px]">
+          <main className="flex-1 ml-[210px]">
             {children}
           </main>
         </div>
