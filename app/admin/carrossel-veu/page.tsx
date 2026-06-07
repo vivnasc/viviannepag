@@ -50,8 +50,8 @@ export default function CarrosselVeuPage() {
 
   async function gerar(opts: { tema?: string; modo?: string; termos?: string[] }) {
     const t = (opts.tema ?? tema).trim();
-    const ehGlossComTermos = opts.modo === 'glossario' && (opts.termos?.length ?? 0) > 0;
-    if (opts.modo !== 'sobre' && !ehGlossComTermos && opts.modo !== 'glossario' && !t) { setErro('Escreve o tema ou clica numa sugestão.'); return; }
+    const semTema = opts.modo === 'sobre' || opts.modo === 'glossario' || opts.modo === 'padroes';
+    if (!semTema && !t) { setErro('Escreve o tema ou clica numa sugestão.'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
       const r = await fetch('/api/admin/carrossel-veu/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, slides: slidesN, curso, modo: opts.modo ?? 'tema', termos: opts.termos }) });
