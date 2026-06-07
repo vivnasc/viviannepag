@@ -107,6 +107,21 @@ export default function CarrosselVeuPage() {
     } catch (e) { setErro('fundo: ' + String(e)); }
   }
 
+  // imagem DIFERENTE por slide (arrasta no detalhe)
+  async function uploadFundoSlide(file: File | undefined, it: Item, idx: number) {
+    if (!file) return; setErro(null);
+    try {
+      const jpeg = await resizeFundo(file);
+      const fd = new FormData(); fd.append('file', jpeg, 'fundo.jpg'); fd.append('slug', it.slug); fd.append('dia', '1'); fd.append('idx', String(idx));
+      const r = await fetch('/api/admin/carrossel/upload-fundo', { method: 'POST', body: fd });
+      const j = await r.json();
+      if (!r.ok) { setErro('fundo: ' + (j.erro ?? '')); return; }
+      await carregar();
+      if (j.coleccao) setZoom((z) => z ? { ...z, it: j.coleccao as Item } : z);
+      setMsg(`Imagem aplicada ao slide ${idx + 1}.`);
+    } catch (e) { setErro('fundo: ' + String(e)); }
+  }
+
   // ⬇ carrossel inteiro (zip de PNGs), no browser
   const zipRef = useRef<HTMLDivElement>(null);
   const [zipIt, setZipIt] = useState<Item | null>(null);
@@ -238,8 +253,13 @@ export default function CarrosselVeuPage() {
             <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center gap-3 sm:gap-6 bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">
               <button onClick={(e) => { e.stopPropagation(); nav(-1); }} className="shrink-0 w-11 h-11 rounded-full border border-white/20 text-xl flex items-center justify-center hover:bg-white/10">‹</button>
               <div className="w-full" style={{ maxWidth: 'min(78vw, 380px)' }} onClick={(e) => e.stopPropagation()}>
-                <KineticSlide texto={slides[zoom.idx].texto} destaque={slides[zoom.idx].destaque} imageUrl={slides[zoom.idx].imageUrl} mundo={mundo} prog={1} ratio="4:5" />
-                <p className="text-center text-[0.7rem] opacity-60 mt-3">{zoom.idx + 1} / {slides.length} · toca fora para fechar</p>
+                <div onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); uploadFundoSlide(e.dataTransfer.files?.[0], zoom.it, zoom.idx); }}>
+                  <KineticSlide texto={slides[zoom.idx].texto} destaque={slides[zoom.idx].destaque} imageUrl={slides[zoom.idx].imageUrl} mundo={mundo} prog={1} ratio="4:5" />
+                </div>
+                <div className="flex items-center justify-center gap-2 mt-3">
+                  <label className="text-[0.66rem] px-3 py-1.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 cursor-pointer">⬆ imagem para o slide {zoom.idx + 1}<input type="file" accept="image/*" hidden onChange={(e) => uploadFundoSlide(e.target.files?.[0], zoom.it, zoom.idx)} /></label>
+                </div>
+                <p className="text-center text-[0.7rem] opacity-60 mt-2">{zoom.idx + 1} / {slides.length} · arrasta a imagem para o slide · toca fora para fechar</p>
               </div>
               <button onClick={(e) => { e.stopPropagation(); nav(1); }} className="shrink-0 w-11 h-11 rounded-full border border-white/20 text-xl flex items-center justify-center hover:bg-white/10">›</button>
             </div>
