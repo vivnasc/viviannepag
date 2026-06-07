@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCurso } from '@/lib/infografico/cursos';
 import { SEQUENCIA_GLOSSARIO } from '@/lib/glossario';
+import { SEQUENCIA_PADROES } from '@/lib/padroes';
 import { limparTravessoes } from '@/lib/texto';
 
 export const runtime = 'nodejs';
@@ -18,22 +19,22 @@ export async function POST(req: Request) {
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
   const body = (await req.json().catch(() => ({}))) as { tema?: string; slides?: number; curso?: string; modo?: string; termos?: string[] };
-  const modo = body.modo === 'sobre' ? 'sobre' : body.modo === 'glossario' ? 'glossario' : 'tema';
+  const modo = body.modo === 'sobre' ? 'sobre' : body.modo === 'glossario' ? 'glossario' : body.modo === 'padroes' ? 'padroes' : 'tema';
+  const ehSequencia = modo === 'glossario' || modo === 'padroes'; // modos que avançam por uma sequência fixa
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
   const tema = body.tema?.trim();
   if (modo === 'tema' && !tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
-  // Glossário: termos do TEU universo (conceitos dos cursos), automáticos,
-  // sem repetir os já usados. Sem teres de escolher.
-  let termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
-  if (modo === 'glossario' && !termos.length) {
+  // Glossário/Padrões: termos do TEU universo, automáticos, na sequência
+  // pedagógica, sem repetir os já usados. Sem teres de escolher.
+  let termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 20);
+  if (ehSequencia && !termos.length) {
     const N = Math.max(3, Math.min(20, Number(body.slides) || 5));
-    // sequência pedagógica fixa: avança pelos termos ainda não usados, NA ORDEM
-    const pool = SEQUENCIA_GLOSSARIO;
+    const pool = modo === 'glossario' ? SEQUENCIA_GLOSSARIO : SEQUENCIA_PADROES;
     try {
       const sb = getSupabaseAdmin();
-      const { data: prev } = await sb.from('carousel_collections').select('theme').eq('theme->>formato', 'carrossel-veu').eq('theme->>modo', 'glossario');
+      const { data: prev } = await sb.from('carousel_collections').select('theme').eq('theme->>formato', 'carrossel-veu').eq('theme->>modo', modo);
       const usados = new Set((prev ?? []).flatMap((r) => ((r.theme as { termos?: string[] } | null)?.termos ?? [])));
       let disp = pool.filter((t) => !usados.has(t)); // mantém a ordem pedagógica
       if (disp.length < N) disp = pool; // já deu a volta, recomeça do início
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
   }
 
   const nSlides = modo === 'sobre' ? 4
-    : modo === 'glossario' ? termos.length
+    : ehSequencia ? termos.length
     : Math.max(3, Math.min(20, Number(body.slides) || 5));
 
   // termo "limpo" (só o nome: sem descrição após ":" nem parênteses) para o glossário
@@ -51,9 +52,9 @@ export async function POST(req: Request) {
   const instrucaoModo = modo === 'sobre'
     ? 'MODO APRESENTACAO (SEM slide de capa, ela ja existe no destaque): TODOS os slides sao conteudo, nenhum e so o nome da conta. Slide 1: o que e a Véu a Véu (a psicologia da alma, transpessoal, constelacao familiar, espiritualidade, tornadas simples). Slide 2: para quem e. Slide 3: o que vais encontrar aqui. Slide 4: quem es (Vivianne, partilha com verdade, sem formulas) e um convite a ficar. NAO faças um slide so com o nome "Véu a Véu".'
     : modo === 'glossario'
-    ? (termos.length
-      ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, UM POR SLIDE, SEM nenhum slide de capa (nada de slide so com "Glossário da Alma"): ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide: comeca pelo TERMO escrito com a acentuacao CORRETA (ex.: "Inclusão", "Parentificação", "Pertença"), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
-      : 'MODO GLOSSARIO: cada slide (menos a capa) define UM termo da psicologia da alma. Slide 1 = CAPA com "Glossario da Alma". Cada um dos outros slides: comeca pelo TERMO (sera realcado a ouro), seguido de uma definicao simples e clara numa frase. Em "destaque" poe o proprio termo. Usa termos do ambito (sombra, ego, self, individuacao, ordens do amor, lealdade invisivel, parentificacao, campo morfogenetico). NAO repitas termos.')
+    ? `MODO GLOSSARIO: define EXATAMENTE estes termos, por esta ordem, UM POR SLIDE, SEM nenhum slide de capa (nada de slide so com "Glossário da Alma"): ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Cada slide: comeca pelo TERMO escrito com a acentuacao CORRETA (ex.: "Inclusão", "Parentificação", "Pertença"), seguido de uma definicao simples e clara numa frase (ex.: "Sombra. A parte de ti que aprendeste a esconder para seres aceite."). Em "destaque" poe o proprio termo.`
+    : modo === 'padroes'
+    ? `MODO PADROES: mostra EXATAMENTE estes padroes vividos, por esta ordem, UM POR SLIDE, SEM nenhum slide de capa: ${termosPrompt.join('; ')}. NAO acrescentes outros, NAO troques, NAO repitas. Nao e uma definicao academica: e o padrao COMO se vive, de forma que a pessoa se reconheca ("isto sou eu"). Cada slide: comeca pelo NOME do padrao com a acentuacao CORRETA, seguido de uma frase que mostra como ele se manifesta no dia a dia (ex.: "Parentificação. Foste a criança que cuidou dos pais e esqueceu de ser criança."). Em "destaque" poe o nome do padrao.`
     : `Tema do carrossel: "${tema}" (curso ${curso.nome}). Fiel ao conceito, concreto, com exemplos do real.`;
 
   const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Crias CARROSSEIS DIDATICOS para Instagram (varios slides, cada um uma imagem com uma frase). Para ENSINAR e atrair, nunca vender. Portugues europeu COM acentos. Linguagem humana, com profundidade real.
@@ -78,9 +79,9 @@ DEVOLVE APENAS JSON valido:
   const userMsg = modo === 'sobre'
     ? `Cria a apresentacao da Véu a Véu em ${nSlides} slides de CONTEUDO, SEM slide de capa (sem um slide so com o nome).`
     : modo === 'glossario'
-    ? (termos.length
-      ? `Cria os slides do "Glossário da Alma", UM termo por slide, SEM capa, por esta ordem: ${termosPrompt.join('; ')}.`
-      : `Cria um carrossel "Glossario da Alma" com ${nSlides} slides (capa + ${nSlides - 1} termos distintos).`)
+    ? `Cria os slides do "Glossário da Alma", UM termo por slide, SEM capa, por esta ordem: ${termosPrompt.join('; ')}.`
+    : modo === 'padroes'
+    ? `Cria os slides de "Padrões", UM padrao por slide, SEM capa, por esta ordem: ${termosPrompt.join('; ')}.`
     : `Cria um carrossel didatico de ${nSlides} slides sobre: "${tema}".`;
 
   let texto = '';
@@ -101,9 +102,11 @@ DEVOLVE APENAS JSON valido:
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
 
-  // glossário: fundo fixo, coeso e escuro (uma imagem para TODOS os slides, com o texto a ler bem)
+  // glossário/padrões: fundo fixo, coeso e escuro (uma imagem para TODOS os slides, com o texto a ler bem)
   if (modo === 'glossario') {
     p.fundoPrompt = 'abstract deep indigo and midnight blue background with soft floating golden particles and gentle luminous mist, calm cosmic texture, dark and minimal with empty centre so text reads clearly, ethereal sacred, fine art, no people, no text, no logo, --ar 4:5 --style raw';
+  } else if (modo === 'padroes') {
+    p.fundoPrompt = 'abstract deep indigo background with interwoven luminous golden threads and soft glow, quiet and sacred, dark and minimal with empty centre so text reads clearly, fine art, no people, no text, no logo, --ar 4:5 --style raw';
   }
 
   const slidesIn = (Array.isArray(p.slides) ? p.slides : []).filter((s) => s && s.texto);
@@ -115,7 +118,7 @@ DEVOLVE APENAS JSON valido:
     let destaque = Array.isArray(s.destaque) ? s.destaque.map(String) : [];
     // glossário: o TERMO a dourar é o que está ANTES do primeiro ponto (o que está mesmo no slide).
     // Assim o realce bate sempre certo. Corrige o acento se corresponder a um termo do universo.
-    if (modo === 'glossario') {
+    if (ehSequencia) {
       const dot = texto.indexOf('.');
       let termoTxt = (dot > 0 ? texto.slice(0, dot) : texto).trim();
       const canon = termosPrompt.find((t) => semAcc(t) === semAcc(termoTxt));
@@ -126,13 +129,13 @@ DEVOLVE APENAS JSON valido:
   });
 
   const slug = `carrossel-veu-${modo}-${Date.now()}`;
-  const titulo = p.titulo ?? (modo === 'sobre' ? 'Sobre' : modo === 'glossario' ? 'Glossário da Alma' : (tema ?? 'carrossel'));
+  const titulo = p.titulo ?? (modo === 'sobre' ? 'Sobre' : modo === 'glossario' ? 'Glossário da Alma' : modo === 'padroes' ? 'Padrões' : (tema ?? 'carrossel'));
   const dias = [{ dia: 1, mundo, palavra: titulo, slides, legenda: p.legenda ?? '', hashtags: Array.isArray(p.hashtags) ? p.hashtags : [], fundoPrompt: (p.fundoPrompt ?? '').trim() }];
 
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
-    .upsert({ slug, title: titulo, brief: tema ?? modo, dias, theme: { formato: 'carrossel-veu', modo, mundo, curso: curso.id, ...(modo === 'glossario' ? { termos } : {}) } }, { onConflict: 'slug' })
+    .upsert({ slug, title: titulo, brief: tema ?? modo, dias, theme: { formato: 'carrossel-veu', modo, mundo, curso: curso.id, ...(ehSequencia ? { termos } : {}) } }, { onConflict: 'slug' })
     .select().single();
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, coleccao: data });

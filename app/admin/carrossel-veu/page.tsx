@@ -72,14 +72,15 @@ export default function CarrosselVeuPage() {
     } catch (e) { setErro(String(e)); }
   }
 
-  async function resetGlossario() {
-    if (!confirm('Apagar todos os glossários e recomeçar a sequência do início (A psique, Ego, Self…)? Não toca no Sobre nem nos outros carrosséis.')) return;
+  async function recomecar(modo: 'glossario' | 'padroes') {
+    const nome = modo === 'glossario' ? 'glossários' : 'padrões';
+    if (!confirm(`Apagar todos os ${nome} e recomeçar a sequência do início? Não toca no Sobre nem nos outros carrosséis.`)) return;
     setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/carrossel-veu/reset-glossario', { method: 'POST' });
+      const r = await fetch('/api/admin/carrossel-veu/reset-glossario', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo }) });
       const j = await r.json();
       if (!r.ok) { setErro('reset: ' + (j.erro ?? '')); return; }
-      setMsg(`Glossários apagados (${j.apagados}). A sequência recomeça em "A psique".`);
+      setMsg(`${nome} apagados (${j.apagados}). A sequência recomeça do início.`);
       await carregar();
     } catch (e) { setErro(String(e)); }
   }
@@ -195,8 +196,10 @@ export default function CarrosselVeuPage() {
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <button onClick={() => gerar({ modo: 'sobre' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Sobre (apresentação da conta)</button>
             <button onClick={() => gerar({ modo: 'glossario' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Glossário (do teu universo)</button>
-            <button onClick={resetGlossario} disabled={gerando} className="text-[0.66rem] px-2.5 py-1.5 rounded-full border border-rosa/30 text-rosa/80 hover:bg-rosa/10">↺ recomeçar glossário do início</button>
-            <span className="text-[0.62rem] opacity-40">presets prontos. O glossário avança na sequência, sem repetir.</span>
+            <button onClick={() => gerar({ modo: 'padroes' })} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded-full border border-[#C9B6FA]/50 text-[#C9B6FA] hover:bg-[#C9B6FA]/10">★ Padrões (do teu universo)</button>
+            <button onClick={() => recomecar('glossario')} disabled={gerando} className="text-[0.64rem] px-2 py-1.5 rounded-full border border-rosa/30 text-rosa/80 hover:bg-rosa/10">↺ glossário do início</button>
+            <button onClick={() => recomecar('padroes')} disabled={gerando} className="text-[0.64rem] px-2 py-1.5 rounded-full border border-rosa/30 text-rosa/80 hover:bg-rosa/10">↺ padrões do início</button>
+            <span className="w-full text-[0.62rem] opacity-40 mt-1">presets prontos. Glossário e Padrões avançam na sequência, um por slide, sem capa e sem repetir.</span>
           </div>
 
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mt-5 mb-2">Ou um tema pronto (gera logo)</p>
