@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import { getCurso } from '@/lib/infografico/cursos';
+import { CURSOS, getCurso } from '@/lib/infografico/cursos';
 import { limparTravessoes } from '@/lib/texto';
 
 export const runtime = 'nodejs';
@@ -18,15 +18,31 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => ({}))) as { tema?: string; slides?: number; curso?: string; modo?: string; termos?: string[] };
   const modo = body.modo === 'sobre' ? 'sobre' : body.modo === 'glossario' ? 'glossario' : 'tema';
-  const termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
-  // o Sobre são sempre 4 slides; glossário com termos escolhidos = capa + termos
-  const nSlides = modo === 'sobre' ? 4
-    : modo === 'glossario' && termos.length ? termos.length + 1
-    : Math.max(3, Math.min(8, Number(body.slides) || (modo === 'glossario' ? 6 : 5)));
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
   const tema = body.tema?.trim();
   if (modo === 'tema' && !tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
+
+  // Glossário: termos do TEU universo (conceitos dos cursos), automáticos,
+  // sem repetir os já usados. Sem teres de escolher.
+  let termos = (Array.isArray(body.termos) ? body.termos.map(String).map((s) => s.trim()).filter(Boolean) : []).slice(0, 7);
+  if (modo === 'glossario' && !termos.length) {
+    const N = Math.max(3, Math.min(7, Number(body.slides) ? Number(body.slides) - 1 : 5));
+    const pool = Array.from(new Set(CURSOS.flatMap((c) => c.conceitos)));
+    try {
+      const sb = getSupabaseAdmin();
+      const { data: prev } = await sb.from('carousel_collections').select('theme').eq('theme->>formato', 'carrossel-veu').eq('theme->>modo', 'glossario');
+      const usados = new Set((prev ?? []).flatMap((r) => ((r.theme as { termos?: string[] } | null)?.termos ?? [])));
+      let disp = pool.filter((t) => !usados.has(t));
+      if (disp.length < N) disp = pool; // esgotou, recomeça
+      for (let i = disp.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [disp[i], disp[j]] = [disp[j], disp[i]]; }
+      termos = disp.slice(0, N);
+    } catch { termos = pool.slice(0, N); }
+  }
+
+  const nSlides = modo === 'sobre' ? 4
+    : modo === 'glossario' ? termos.length + 1
+    : Math.max(3, Math.min(8, Number(body.slides) || 5));
 
   const instrucaoModo = modo === 'sobre'
     ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
@@ -98,7 +114,7 @@ DEVOLVE APENAS JSON valido:
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
-    .upsert({ slug, title: titulo, brief: tema ?? modo, dias, theme: { formato: 'carrossel-veu', modo, mundo, curso: curso.id } }, { onConflict: 'slug' })
+    .upsert({ slug, title: titulo, brief: tema ?? modo, dias, theme: { formato: 'carrossel-veu', modo, mundo, curso: curso.id, ...(modo === 'glossario' ? { termos } : {}) } }, { onConflict: 'slug' })
     .select().single();
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, coleccao: data });
