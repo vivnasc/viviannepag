@@ -45,8 +45,8 @@ export async function POST(req: Request) {
     : modo === 'glossario' ? termos.length + 1
     : Math.max(3, Math.min(8, Number(body.slides) || 5));
 
-  // termo "limpo" (só o nome, sem a descrição depois de ":") para o glossário
-  const termosPrompt = termos.map((t) => t.split(':')[0].trim());
+  // termo "limpo" (só o nome: sem descrição após ":" nem parênteses) para o glossário
+  const termosPrompt = termos.map((t) => t.split(':')[0].replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim());
 
   const instrucaoModo = modo === 'sobre'
     ? 'MODO APRESENTACAO: este carrossel apresenta a conta "Véu a Véu". Slide 1: o nome + essencia (aprender a alma, camada a camada). Depois: o que e a conta (transpessoal, constelacao familiar, espiritualidade, tornadas simples), para quem e, o que vai encontrar, e quem es (Vivianne, partilha com verdade, sem formulas). Ultimo: convite a ficar.'
@@ -100,6 +100,11 @@ DEVOLVE APENAS JSON valido:
   let p: { titulo?: string; fundoPrompt?: string; slides?: SlideIn[]; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
+
+  // glossário: fundo fixo, coeso e escuro (uma imagem para TODOS os slides, com o texto a ler bem)
+  if (modo === 'glossario') {
+    p.fundoPrompt = 'abstract deep indigo and midnight blue background with soft floating golden particles and gentle luminous mist, calm cosmic texture, dark and minimal with empty centre so text reads clearly, ethereal sacred, fine art, no people, no text, no logo, --ar 4:5 --style raw';
+  }
 
   const slidesIn = (Array.isArray(p.slides) ? p.slides : []).filter((s) => s && s.texto);
   if (!slidesIn.length) return NextResponse.json({ erro: 'sem-slides', amostra: texto.slice(0, 300) }, { status: 502 });

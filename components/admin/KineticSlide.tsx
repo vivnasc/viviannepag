@@ -30,7 +30,18 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
   }, []);
 
   const palavras = texto.trim().split(/\s+/).filter(Boolean);
-  const destSet = new Set(destaque.map(norm));
+  // realce: apanha EXPRESSÕES inteiras (ex.: "Consciente e inconsciente"), não só palavras soltas
+  const normW = palavras.map(norm);
+  const goldIdx = new Set<number>();
+  for (const frase of destaque) {
+    const pw = frase.trim().split(/\s+/).map(norm).filter(Boolean);
+    if (!pw.length) continue;
+    for (let i = 0; i + pw.length <= normW.length; i++) {
+      let ok = true;
+      for (let j = 0; j < pw.length; j++) if (normW[i + j] !== pw[j]) { ok = false; break; }
+      if (ok) for (let j = 0; j < pw.length; j++) goldIdx.add(i + j);
+    }
+  }
   const revelar = Math.min(1, prog / 0.72);          // 0..0.72 revela, depois segura
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
@@ -50,7 +61,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 120px', zIndex: 2 }}>
           <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 92, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: 'center', color: '#F4ECDD', textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
             {palavras.map((w, i) => {
-              const dest = destSet.has(norm(w));
+              const dest = goldIdx.has(i);
               let op = 0, dy = 14;
               if (i < ultimoVisivel) { op = 1; dy = 0; }
               else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
