@@ -8,6 +8,7 @@ import { ReelSlide, type ReelFrame } from '@/components/admin/ReelSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import { CURSOS, getCurso } from '@/lib/infografico/cursos';
 import { FORMATOS, getFormato } from '@/lib/reels/formatos';
+import { topicosReels } from '@/lib/reels/topicos';
 import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -154,17 +155,23 @@ export default function ReelsPage() {
             <Btn variant="primary" onClick={() => gerar()} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar'}</Btn>
           </div>
 
-          {/* sugestões */}
-          <div className="flex items-center gap-2 mt-5 mb-2">
-            <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Ou clica uma sugestão (gera logo)</p>
-            <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ IA'}</button>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {(sugMap[sugKey] ?? []).length === 0 && <span className="text-[0.7rem] opacity-40">carrega em ↻ IA para sugestões deste formato + curso</span>}
-            {(sugMap[sugKey] ?? []).map((sug) => (
-              <button key={sug} onClick={() => gerar(sug)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
-            ))}
-          </div>
+          {/* pool pronta de temas — escolhe e gera */}
+          {(() => {
+            const pool = Array.from(new Set([...topicosReels(formato), ...(sugMap[sugKey] ?? [])]));
+            return (
+              <>
+                <div className="flex items-center gap-2 mt-5 mb-2">
+                  <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Escolhe um tema (gera logo) · {pool.length} prontos</p>
+                  <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ mais com IA'}</button>
+                </div>
+                <div className="flex flex-wrap gap-2 max-h-64 overflow-y-auto pr-1">
+                  {pool.map((sug) => (
+                    <button key={sug} onClick={() => gerar(sug)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
+                  ))}
+                </div>
+              </>
+            );
+          })()}
           {erro && <p className="mt-3 text-[0.75rem] text-red-300">{erro}</p>}
           {msg && <p className="mt-3 text-[0.75rem] text-salvia">{msg}</p>}
         </Card>

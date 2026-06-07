@@ -7,6 +7,7 @@ import { toPng } from 'html-to-image';
 import { BandaSlide, type Painel } from '@/components/admin/BandaSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
 import { FAMILIA } from '@/lib/banda/personagens';
+import { TOPICOS_BANDA } from '@/lib/banda/topicos';
 import { type Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -130,16 +131,22 @@ export default function BandaPage() {
             <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Ex.: dizer não sem culpa, o telefonema da mãe, deixar o outro ajudar…" className="flex-1 bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar" />
             <Btn variant="primary" onClick={() => gerar()} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar conto'}</Btn>
           </div>
-          <div className="flex items-center gap-2 mt-5 mb-2">
-            <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Ou clica uma sugestão (gera logo)</p>
-            <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ IA'}</button>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {sugestoes.length === 0 && <span className="text-[0.7rem] opacity-40">carrega em ↻ IA para sugestões de contos</span>}
-            {sugestoes.map((sug) => (
-              <button key={sug} onClick={() => gerar(sug)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
-            ))}
-          </div>
+          {(() => {
+            const pool = Array.from(new Set([...TOPICOS_BANDA, ...sugestoes]));
+            return (
+              <>
+                <div className="flex items-center gap-2 mt-5 mb-2">
+                  <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Escolhe um tema (gera logo) · {pool.length} prontos</p>
+                  <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ mais com IA'}</button>
+                </div>
+                <div className="flex flex-wrap gap-2 max-h-64 overflow-y-auto pr-1">
+                  {pool.map((sug) => (
+                    <button key={sug} onClick={() => gerar(sug)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
+                  ))}
+                </div>
+              </>
+            );
+          })()}
           {erro && <p className="mt-3 text-[0.75rem] text-red-300">{erro}</p>}
           {msg && <p className="mt-3 text-[0.75rem] text-salvia">{msg}</p>}
         </Card>
