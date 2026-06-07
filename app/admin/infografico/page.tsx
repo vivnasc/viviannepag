@@ -5,27 +5,26 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { InfograficoSlide, type Infografico } from '@/components/admin/InfograficoSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
-import { COLECOES, type ColecaoId } from '@/lib/colecoes';
-import { PADROES_SUGERIDOS } from '@/lib/infografico/padroes';
+import { CURSOS, getCurso } from '@/lib/infografico/cursos';
+import type { Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type Mundo = 'freeme' | 'infonte' | 'synchim' | 'escola' | 'autora';
 type InfoSlide = Infografico & { tipo: string; imageUrl?: string };
 type Item = {
   slug: string; title: string;
   dias: Array<{ dia: number; mundo?: Mundo; imagens?: string[]; slides?: InfoSlide[] }>;
-  theme: { universo?: ColecaoId; mundo?: Mundo };
+  theme: { curso?: string; mundo?: Mundo };
   created_at: string;
 };
 
 export default function InfograficoPage() {
   const [itens, setItens] = useState<Item[]>([]);
   const [tema, setTema] = useState('');
-  const [universo, setUniverso] = useState<ColecaoId>('freeme-mae');
+  const [curso, setCurso] = useState('transpessoal');
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -33,19 +32,8 @@ export default function InfograficoPage() {
   const [sugestoes, setSugestoes] = useState<string[]>([]);
   const [sugLoading, setSugLoading] = useState(false);
 
-  async function pedirSugestoes() {
-    setErro(null); setSugLoading(true);
-    try {
-      const r = await fetch('/api/admin/infografico/sugerir', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ universo }),
-      });
-      const j = await r.json();
-      if (!r.ok) { setErro('sugestões: ' + (j.erro ?? '')); return; }
-      setSugestoes(j.padroes ?? []);
-    } catch (e) { setErro(String(e)); }
-    finally { setSugLoading(false); }
-  }
+  const cursoAtual = getCurso(curso);
+  const conceitos = sugestoes.length ? sugestoes : cursoAtual.conceitos;
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/infografico/list');
@@ -54,13 +42,10 @@ export default function InfograficoPage() {
   useEffect(() => { carregar(); }, [carregar]);
 
   async function gerar() {
-    if (!tema.trim()) { setErro('Escreve o padrão/tema.'); return; }
+    if (!tema.trim()) { setErro('Escreve o conceito (ou clica numa sugestão).'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/infografico/gerar', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ tema, universo }),
-      });
+      const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema, curso }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       setTema('');
@@ -70,32 +55,32 @@ export default function InfograficoPage() {
   }
 
   async function gerarBiblioteca() {
-    const lista = (sugestoes.length ? sugestoes : PADROES_SUGERIDOS[universo] ?? []).slice(0, 5);
+    const lista = conceitos.slice(0, 5);
     if (!lista.length) return;
     setGerando(true); setErro(null); setMsg(null);
     let done = 0;
     for (const t of lista) {
-      try {
-        await fetch('/api/admin/infografico/gerar', {
-          method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ tema: t, universo }),
-        });
-      } catch { /* segue */ }
-      done++;
-      setMsg(`a gerar biblioteca… ${done}/${lista.length}`);
-      await carregar();
+      try { await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, curso }) }); } catch { /* segue */ }
+      done++; setMsg(`a gerar biblioteca… ${done}/${lista.length}`); await carregar();
     }
-    setGerando(false);
-    setMsg(`Biblioteca: +${lista.length} infográficos.`);
+    setGerando(false); setMsg(`Biblioteca: +${lista.length} infográficos.`);
+  }
+
+  async function pedirSugestoes() {
+    setErro(null); setSugLoading(true);
+    try {
+      const r = await fetch('/api/admin/infografico/sugerir', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ curso }) });
+      const j = await r.json();
+      if (!r.ok) { setErro('sugestões: ' + (j.erro ?? '')); return; }
+      setSugestoes(j.padroes ?? []);
+    } catch (e) { setErro(String(e)); }
+    finally { setSugLoading(false); }
   }
 
   async function gerarImagem(slug: string) {
     setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/carrossel/render-dispatch', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ slug }),
-      });
+      const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
       const j = await r.json();
       if (!r.ok) { setErro('imagem: ' + (j.erro ?? '')); return; }
       setMsg('Render da imagem disparado (~3 min). Recarrega depois para a descarregares.');
@@ -106,27 +91,24 @@ export default function InfograficoPage() {
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${FONTS}`}>
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-2">
-          <h1 className="text-2xl font-semibold">Infográficos de Padrão</h1>
+          <h1 className="text-2xl font-semibold">Infográficos didáticos</h1>
           <Link href="/admin/carrossel" className="text-[0.7rem] opacity-60 hover:opacity-100">Carrosséis →</Link>
         </div>
-        <p className="text-[0.8rem] opacity-65 mb-6">Uma imagem que explica um padrão e a sua limitação. Série à parte — geras quando quiseres.</p>
+        <p className="text-[0.8rem] opacity-65 mb-6">Conhecimento das tuas pós-graduações, em imagem. Puramente educativo — sem CTA, sem produtos.</p>
 
         <Card className="p-4 mb-8">
           <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              value={tema} onChange={(e) => setTema(e.target.value)}
-              placeholder="Padrão / tema (ex.: compensar a mais, agradar para pertencer)…"
-              className="flex-1 bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar"
-            />
-            <select value={universo} onChange={(e) => { setUniverso(e.target.value as ColecaoId); setSugestoes([]); }} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
-              {COLECOES.map((c) => <option key={c.id} value={c.id} className="bg-[#0F0F1A]">{c.nome}</option>)}
+            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Conceito a explicar (ex.: as Ordens do Amor, dar e receber)…" className="flex-1 bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar" />
+            <select value={curso} onChange={(e) => { setCurso(e.target.value); setSugestoes([]); }} className="bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem]">
+              {CURSOS.map((c) => <option key={c.id} value={c.id} className="bg-[#0F0F1A]">{c.nome}</option>)}
             </select>
             <Btn variant="primary" onClick={gerar} disabled={gerando}>{gerando ? 'a gerar…' : 'gerar 1'}</Btn>
             <Btn variant="default" onClick={gerarBiblioteca} disabled={gerando}>gerar biblioteca (5)</Btn>
           </div>
+          <p className="mt-2 text-[0.66rem] opacity-50 italic">{cursoAtual.descricao}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mr-1">sugestões:</span>
-            {(sugestoes.length ? sugestoes : PADROES_SUGERIDOS[universo] ?? []).map((sug) => (
+            <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mr-1">conceitos:</span>
+            {conceitos.map((sug) => (
               <button key={sug} onClick={() => setTema(sug)} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar">{sug}</button>
             ))}
             <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ sugestões IA (profundas)'}</button>
@@ -140,7 +122,7 @@ export default function InfograficoPage() {
           {itens.map((it) => {
             const s = it.dias?.[0]?.slides?.[0];
             const img = it.dias?.[0]?.imagens?.[0];
-            const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'freeme';
+            const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
             if (!s) return null;
             const info = { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
             return (
