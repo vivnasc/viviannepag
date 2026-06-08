@@ -46,12 +46,13 @@ REGRAS:
 - Cada "frase" e o TEXTO QUE APARECE NO ECRA: curta, que cabe grande, que para o scroll. No maximo 14 palavras.
 - A "legenda" e o texto do Instagram: 1.a linha gancho, 2-4 linhas que aprofundam em palavras simples, fecha com um convite a refletir e "guarda este reel" ou "partilha com quem precisa". SEM vender, SEM links.
 - "destaque": 1 a 3 palavras-chave da frase para realcar a ouro.
+- "fundoPrompt": prompt MidJourney para o fundo, UNICO e DIFERENTE em cada dia, ligado a imagem da frase desse dia. VARIA o motivo (agua, luz, pedra, ceu, tecido, maos, horizonte, raizes, nevoa, areia, fogo suave, folhas...). NUNCA repitas raizes/fios dourados em todos. Paleta indigo profundo e ouro/ambar, etereo, sagrado, fine art, SEM pessoas, SEM texto. Termina sempre com "--ar 9:16 --style raw".
 - NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
 - NUNCA soar a egoismo nem "poe-te primeiro": o caminho e inteireza, presenca e reciprocidade saudavel.
 - Os 6 dias formam um arco coerente do mesmo tema, mas cada frase e DISTINTA.
 
 DEVOLVE APENAS JSON valido:
-{ "dias": [ { "frase": "texto no ecra", "destaque": ["palavra"], "legenda": "legenda completa com 8-10 hashtags em portugues no fim" } ] }
+{ "dias": [ { "frase": "texto no ecra", "destaque": ["palavra"], "legenda": "legenda completa com 8-10 hashtags em portugues no fim", "fundoPrompt": "prompt MJ unico deste dia, --ar 9:16 --style raw" } ] }
 Exatamente 6 itens, pela ordem dos dias acima.`;
 
   let texto = '';
@@ -66,18 +67,19 @@ Exatamente 6 itens, pela ordem dos dias acima.`;
   } catch (e) { return NextResponse.json({ erro: 'claude-fetch', detalhe: String(e) }, { status: 502 }); }
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
-  let dias: { frase: string; destaque: string[]; legenda: string }[] = [];
+  let dias: { frase: string; destaque: string[]; legenda: string; fundoPrompt: string }[] = [];
   try {
     const parsed = JSON.parse(texto.slice(ini, fim + 1)).dias ?? [];
-    dias = parsed.map((d: { frase?: string; destaque?: string[]; legenda?: string }) => ({
+    dias = parsed.map((d: { frase?: string; destaque?: string[]; legenda?: string; fundoPrompt?: string }) => ({
       frase: limparTravessoes((d.frase ?? '').trim()),
       destaque: limparTravessoes((Array.isArray(d.destaque) ? d.destaque : []).map((s) => String(s).trim()).filter(Boolean)),
       legenda: limparTravessoes((d.legenda ?? '').trim()),
+      fundoPrompt: limparTravessoes((d.fundoPrompt ?? '').trim()),
     }));
   } catch { return NextResponse.json({ erro: 'parse', detalhe: texto.slice(0, 200) }, { status: 502 }); }
   if (!dias.length) return NextResponse.json({ erro: 'vazio' }, { status: 502 });
 
   // junta o angulo/etiqueta de cada slot ao texto rascunhado
-  const plano = SLOTS.map((s, i) => ({ ...s, ...(dias[i] ?? { frase: '', destaque: [], legenda: '' }) }));
+  const plano = SLOTS.map((s, i) => ({ ...s, ...(dias[i] ?? { frase: '', destaque: [], legenda: '', fundoPrompt: '' }) }));
   return NextResponse.json({ plano });
 }

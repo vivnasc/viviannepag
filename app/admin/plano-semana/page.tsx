@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 // desenvolvimento. Tu escolhes a MATÉRIA e o TEMA dessa matéria; a IA rascunha
 // as 6 frases EM TEXTO; tu lês, editas, e só depois crias os posts.
 
-type Dia = { dia: string; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string };
+type Dia = { dia: string; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string };
 type Estado = { curso: string; tema: string; plano: Dia[]; criados: Record<number, boolean> };
 
 const CHAVE = 'veu-plano-atual';
@@ -92,7 +92,7 @@ export default function PlanoSemanaPage() {
     // rota para o gerador certo conforme o formato real do dia
     let url = '/api/admin/reels/gerar';
     let payload: Record<string, unknown> = {};
-    if (d.gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda };
+    if (d.gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
     else if (d.gen === 'reel') payload = { tema: d.frase, formato: d.formato, curso };
     else if (d.gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
     else if (d.gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
