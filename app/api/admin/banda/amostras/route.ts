@@ -9,6 +9,8 @@ export const maxDuration = 300;
 // pedido, com a MESMA cena, para a Vivianne comparar e escolher a assinatura
 // visual da série. Devolve [{ estilo, nome, imageUrl }].
 const CENA_AMOSTRA = 'a woman at home in the evening, holding a phone, a quiet tender domestic moment, warm kitchen light, seen from a calm distance';
+// representação fixa nas amostras (para a comparação de ESTILO ser justa)
+const REP_AMOSTRA = 'the woman has warm brown mixed-race skin';
 
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
@@ -23,7 +25,7 @@ export async function POST(req: Request) {
   const amostras = await Promise.all(
     pedidos.map(async (estilo) => {
       try {
-        const url = await gerarImagemFlux(cena, token, estilo);
+        const url = await gerarImagemFlux(cena, token, estilo, REP_AMOSTRA);
         let imageUrl = url;
         try { imageUrl = await guardarImagem(url, `banda/amostras/${estilo}-${ts}.jpg`); } catch { /* fica o URL do Replicate */ }
         return { estilo, nome: ESTILOS[estilo].nome, imageUrl };

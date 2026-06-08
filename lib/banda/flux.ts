@@ -8,7 +8,18 @@ const BUCKET = 'viviannepag-assets';
 
 // Linguagem comum a todos os estilos (tom + paleta + regras de segurança).
 // Família e pertença, quente; rosto nunca colado à câmara; SEM texto na imagem.
-const COMMON = `intimate domestic scene about family, belonging and tenderness, warm caring mood, bordeaux / terracotta / rose warm palette (deep wine); a person, or hands, or a quiet everyday gesture; faces never glued to camera; NO text, NO words, NO letters, NO logos, NO watermarks, NO speech bubbles, NO captions, NO clickbait, NO exaggerated acting`;
+const COMMON = `intimate domestic scene about family, belonging and tenderness, warm caring mood, bordeaux / terracotta / rose warm palette (deep wine); a person, or hands, or a quiet everyday gesture; faces never glued to camera; people portrayed with warmth and dignity, NEVER associating any ethnicity with a negative, blaming or villain role; NO text, NO words, NO letters, NO logos, NO watermarks, NO speech bubbles, NO captions, NO clickbait, NO exaggerated acting`;
+
+// Representação: VARIA ao longo da série (universal/inclusivo) em vez de fixar
+// uma raça. Cada post sorteia uma. Evita que a série tenha "uma cara" só e, com
+// a regra acima, que um tema pesado calhe a acusar uma etnia.
+export const REPRESENTACOES = [
+  'any person shown has warm brown mixed-race skin',
+  'any person shown is Black with warm deep brown skin',
+  'any person shown has warm olive Mediterranean skin',
+  'any person shown has warm light skin',
+];
+export const representacaoAleatoria = () => REPRESENTACOES[Math.floor(Math.random() * REPRESENTACOES.length)];
 
 export const ESTILOS: Record<string, { nome: string; prompt: string }> = {
   gouache: { nome: 'Gouache / storybook', prompt: `distinctive editorial illustration, soft gouache painting with visible brush texture and paper grain, hand-painted organic shapes, storybook-for-adults feel; ${COMMON}` },
@@ -26,8 +37,8 @@ type ReplicatePrediction = {
   error?: string;
 };
 
-export async function gerarImagemFlux(prompt: string, token: string, estilo?: string): Promise<string> {
-  const fullPrompt = `${prompt}\n\n${estiloPrompt(estilo)}`;
+export async function gerarImagemFlux(prompt: string, token: string, estilo?: string, extra?: string): Promise<string> {
+  const fullPrompt = `${prompt}\n\n${estiloPrompt(estilo)}${extra ? `\n\n${extra}` : ''}`;
   const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
