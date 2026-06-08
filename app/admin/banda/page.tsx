@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
@@ -15,6 +16,15 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
 type BandaSlideT = Painel & { tipo: string; capa?: boolean; imageUrl?: string | null; gancho?: string; texto?: string };
+
+// Estilos de ilustração (assinatura visual). Espelha lib/banda/flux.ts (este é
+// o lado cliente, não importa a lib do servidor).
+const ESTILOS_UI = [
+  { id: 'gouache', nome: 'Gouache / storybook' },
+  { id: 'aguarela', nome: 'Tinta + aguarela' },
+  { id: 'riso', nome: 'Risograph 2 cores' },
+  { id: 'flat', nome: 'Flat editorial' },
+];
 type Dia = { dia: number; mundo?: Mundo; slides?: BandaSlideT[]; videoUrl?: string; legenda?: string; hashtags?: string[] };
 type Item = { slug: string; title: string; dias: Dia[]; theme: { mundo?: Mundo }; created_at: string };
 
@@ -28,6 +38,10 @@ export default function BandaPage() {
   const [sugLoading, setSugLoading] = useState(false);
   const [busca, setBusca] = useState('');
   const [zoom, setZoom] = useState<{ it: Item; idx: number } | null>(null);
+  // estilo = assinatura visual da série (escolhe-se por amostras)
+  const [estilo, setEstilo] = useState('gouache');
+  const [amostras, setAmostras] = useState<{ estilo: string; nome: string; imageUrl: string | null }[]>([]);
+  const [amostrando, setAmostrando] = useState(false);
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/banda/list');
@@ -35,13 +49,27 @@ export default function BandaPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
   useEffect(() => { const t = new URLSearchParams(window.location.search).get('tema'); if (t) setTema(t); }, []);
+  useEffect(() => { try { const e = localStorage.getItem('banda-estilo'); if (e) setEstilo(e); } catch {} }, []);
+  const escolherEstilo = (e: string) => { setEstilo(e); try { localStorage.setItem('banda-estilo', e); } catch {} };
+
+  async function pedirAmostras() {
+    setErro(null); setMsg(null); setAmostrando(true);
+    try {
+      const r = await fetch('/api/admin/banda/amostras', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ estilos: ESTILOS_UI.map((s) => s.id) }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setAmostras(j.amostras ?? []);
+      setMsg('Amostras prontas. Clica na que gostares para a fixar como estilo da série.');
+    } catch (e) { setErro(String(e)); }
+    finally { setAmostrando(false); }
+  }
 
   async function gerar(temaArg?: string) {
     const t = (temaArg ?? tema).trim();
     if (!t) { setErro('Escreve o tema ou clica numa sugestão.'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/banda/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t }) });
+      const r = await fetch('/api/admin/banda/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, estilo }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       if (!temaArg) setTema('');
@@ -121,11 +149,37 @@ export default function BandaPage() {
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${FONTS}`}>
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-2">
-          <h1 className="text-2xl font-semibold">Cá em Casa · banda desenhada</h1>
+          <h1 className="text-2xl font-semibold">Cá em Casa · carrossel ilustrado</h1>
           <Link href="/admin/reels" className="text-[0.7rem] opacity-60 hover:opacity-100">Reels →</Link>
         </div>
-        <p className="text-[0.8rem] opacity-65 mb-1">Carrosséis sobre limites no dia a dia: capa com imagem real + frase-gancho, depois slides de ensino. Feito para parar o scroll e guardar.</p>
-        <p className="text-[0.72rem] opacity-45 mb-6">A imagem é gerada (Flux); descarrega o JPG da capa e os slides em PNG para publicar.</p>
+        <p className="text-[0.8rem] opacity-65 mb-1">Carrosséis sobre limites no dia a dia: capa com <b>ilustração</b> + frase-gancho, depois slides de ensino. Feito para parar o scroll e guardar.</p>
+        <p className="text-[0.72rem] opacity-45 mb-6">Limite com amor <b>honra</b> a família (reciprocidade, presença), nunca a desvaloriza. Descarrega o JPG da capa e os slides em PNG.</p>
+
+        {/* Estilo da série (assinatura visual) — escolhe-se vendo amostras */}
+        <Card className="p-4 mb-5">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Estilo da série · <span className="text-ambar normal-case tracking-normal">{ESTILOS_UI.find((s) => s.id === estilo)?.nome}</span></p>
+            <button onClick={pedirAmostras} disabled={amostrando} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 disabled:opacity-40">{amostrando ? 'a gerar amostras…' : '✨ ver amostras dos estilos'}</button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {ESTILOS_UI.map((s) => (
+              <button key={s.id} onClick={() => escolherEstilo(s.id)} className={`text-[0.7rem] px-3 py-1.5 rounded-full border ${estilo === s.id ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>{s.nome}</button>
+            ))}
+          </div>
+          {amostras.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+              {amostras.map((a) => (
+                <button key={a.estilo} onClick={() => escolherEstilo(a.estilo)} className={`rounded-lg overflow-hidden border ${estilo === a.estilo ? 'border-ambar ring-2 ring-ambar/40' : 'border-white/10 hover:border-ambar/60'}`} title={`fixar ${a.nome}`}>
+                  {a.imageUrl
+                    ? <img src={a.imageUrl} alt={a.nome} className="w-full aspect-[9/16] object-cover" />
+                    : <div className="w-full aspect-[9/16] grid place-items-center text-[0.6rem] opacity-50 p-2 text-center">falhou</div>}
+                  <span className="block text-[0.6rem] py-1 text-center bg-black/40">{a.nome}{estilo === a.estilo ? ' ✓' : ''}</span>
+                </button>
+              ))}
+            </div>
+          )}
+          <p className="text-[0.62rem] opacity-45 mt-3">A foto realista saía genérica. Escolhe um estilo <b>ilustrado único</b> — fica a assinatura da série, igual em todos os posts.</p>
+        </Card>
 
         <Card className="p-4 mb-8">
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">Tema do conto</p>

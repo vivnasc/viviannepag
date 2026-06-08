@@ -3,79 +3,27 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
+import { gerarImagemFlux, guardarImagem, ESTILO_DEFAULT } from '@/lib/banda/flux';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
-// POST { tema } — gera UM "Cá em Casa" no formato B (alto-conversor):
-//   capa = UMA imagem realista forte (Flux/Replicate, o motor do Estúdio) com a
-//   frase-gancho por cima, + slides de ENSINO em texto (sem pessoas) + lição.
-// Uma só imagem => sem problema de consistência de personagens. Sem CTA de venda.
-// Grava em carousel_collections (formato='banda').
+// POST { tema, estilo? } — gera UM "Cá em Casa" (formato alto-conversor):
+//   capa = UMA ILUSTRAÇÃO forte (Flux, estilo = assinatura visual da série) com
+//   a frase-gancho por cima, + slides de ENSINO em texto (sem pessoas) + lição.
+// Uma só imagem => sem problema de consistência. Grava em carousel_collections.
 const MUNDO = 'synchim'; // paleta relacional (constelação familiar)
-
-// Estética da imagem (mesma linguagem do Estúdio): foto editorial quente,
-// íntima, rosto NUNCA colado à câmara (mãos, costas, silhueta, gesto servem).
-const STYLE_BASE = `warm intimate editorial photography, cinematic domestic scene, soft natural window light, golden-hour or evening warmth, painterly film-like colour grading, shallow depth of field, bordeaux and rose and warm earth tones (deep wine palette); candid emotional storytelling; NO text overlay, NO logos, NO watermarks, NO captions, NO clickbait close-ups, NO faces glued to camera, NO exaggerated acting`;
-
-type ReplicatePrediction = {
-  id: string;
-  status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled';
-  output?: string | string[];
-  error?: string;
-};
-
-async function gerarImagemFlux(prompt: string, token: string): Promise<string> {
-  const fullPrompt = `${prompt}\n\n${STYLE_BASE}`;
-  const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
-    body: JSON.stringify({
-      input: { prompt: fullPrompt, aspect_ratio: '9:16', output_format: 'jpg', output_quality: 90, safety_tolerance: 5 },
-    }),
-  });
-  if (!createRes.ok) throw new Error(`Replicate ${createRes.status}: ${(await createRes.text()).slice(0, 160)}`);
-  let pred = (await createRes.json()) as ReplicatePrediction;
-  let polls = 0;
-  while (!['succeeded', 'failed', 'canceled'].includes(pred.status) && polls < 60) {
-    await new Promise((r) => setTimeout(r, 2000));
-    const pr = await fetch(`https://api.replicate.com/v1/predictions/${pred.id}`, { headers: { Authorization: `Bearer ${token}` } });
-    if (!pr.ok) throw new Error(`Replicate poll ${pr.status}`);
-    pred = (await pr.json()) as ReplicatePrediction;
-    polls++;
-  }
-  if (pred.status !== 'succeeded') throw new Error(`Replicate: ${pred.error ?? pred.status}`);
-  const out = Array.isArray(pred.output) ? pred.output[0] : pred.output;
-  if (!out) throw new Error('Replicate: sem output');
-  return out;
-}
-
-async function guardarImagem(imageUrl: string, slug: string): Promise<string> {
-  const supabase = getSupabaseAdmin();
-  const bucket = 'viviannepag-assets';
-  const { data: existing } = await supabase.storage.getBucket(bucket);
-  if (!existing) {
-    const { error } = await supabase.storage.createBucket(bucket, { public: true });
-    if (error && !/already exists|duplicate/.test(error.message)) throw new Error(`createBucket: ${error.message}`);
-  }
-  const imgRes = await fetch(imageUrl);
-  if (!imgRes.ok) throw new Error(`download img ${imgRes.status}`);
-  const buffer = Buffer.from(await (await imgRes.blob()).arrayBuffer());
-  const path = `banda/${slug}/capa-${Date.now()}.jpg`;
-  const { error } = await supabase.storage.from(bucket).upload(path, buffer, { contentType: 'image/jpeg', upsert: true });
-  if (error) throw new Error(`upload: ${error.message}`);
-  return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
-}
 
 const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar). Crias "Cá em Casa": um carrossel DIDATICO sobre LIMITES no dia a dia. Ensinar, nunca vender. Portugues europeu COM acentos.
 
 OBJETIVO: parar o scroll, converter seguidores, crescer. A CAPA tem de prender em 1 segundo (imagem emocional forte + frase-gancho que faz "isto sou eu"). Os slides de ensino dao valor (sao para guardar).
 
+ENQUADRAMENTO (CRITICO, nao falhar): NUNCA dês a entender que se deve desvalorizar a familia, cortar lacos, afastar-se de quem se ama ou "pôr-se em primeiro". O limite com amor HONRA o vinculo: e reciprocidade, presenca e inteireza (estar inteiro com o outro, nao a meio). O gancho e a licao tem de soar a AMOR e PERTENCA, nunca a ressentimento ou a egoismo. Mostrar que cuidar de si faz parte de amar bem a familia.
+
 FORMATO (carrossel):
-- CAPA: uma frase-gancho curta (PT, max ~10 palavras) + um "imagePrompt" EM INGLES (~40-60 palavras) para gerar UMA foto realista, intima e quente que CONVERSA com o gancho (mãos, gesto, costas voltadas, silhueta ou um momento de casa; rosto nunca colado a camara; SEM texto na imagem).
-- ENSINO: 3 a 4 frases curtas (PT), cada uma um slide, que explicam o padrao em palavras simples e humanas (o que se passa por dentro, porque custa, o que muda). Reconhecivel.
-- LICAO: a virada/ensinamento final.
-- ENQUADRAMENTO (critico): o limite com amor NAO e egoismo nem "poe-te primeiro"; e INTEIREZA, PRESENCA e RECIPROCIDADE. Abre reflexao.
+- CAPA: uma frase-gancho curta (PT, max ~10 palavras) + um "imagePrompt" EM INGLES (~40-60 palavras) para gerar UMA ILUSTRACAO intima e quente que CONVERSA com o gancho (cena de casa; mãos, gesto, costas voltadas ou silhueta; rosto nunca colado a camara; SEM texto na imagem). NAO descrevas o estilo de desenho (isso e fixo a parte); descreve so a cena/momento/emocao.
+- ENSINO: 3 a 4 frases curtas (PT), cada uma um slide, que explicam o padrao em palavras simples e humanas. Reconhecivel.
+- LICAO: a virada/ensinamento final, em tom de amor e pertenca.
 - NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
 
 DEVOLVE APENAS JSON valido:
@@ -83,8 +31,8 @@ DEVOLVE APENAS JSON valido:
   "titulo": "titulo curto (2-5 palavras)",
   "capa": { "gancho": "...", "imagePrompt": "..." },
   "ensino": ["frase 1", "frase 2", "frase 3"],
-  "licao": "frase de fecho que ensina/abre reflexao",
-  "legenda": "legenda Instagram: 1.a linha gancho, depois 2-4 linhas que explicam o padrao em palavras simples, fecha com convite a refletir + 'guarda este post' ou 'partilha com quem precisa'. SEM vender. Portugues europeu com acentos.",
+  "licao": "frase de fecho que ensina/abre reflexao (amor e pertenca)",
+  "legenda": "legenda Instagram: 1.a linha gancho, depois 2-4 linhas que explicam o padrao em palavras simples, fecha com convite a refletir + 'guarda este post' ou 'partilha com quem precisa'. SEM vender. Deixa claro que limite com amor honra a familia. Portugues europeu com acentos.",
   "hashtags": ["10-12 hashtags PT, amplas + de nicho, sem repetir"]
 }`;
 
@@ -95,8 +43,9 @@ export async function POST(req: Request) {
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
   if (!replicateToken) return NextResponse.json({ erro: 'sem-replicate-token' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; estilo?: string };
   const tema = body.tema?.trim();
+  const estilo = body.estilo || ESTILO_DEFAULT;
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
   // 1) Claude escreve o carrossel (gancho + prompt de imagem + ensino + licao)
@@ -126,11 +75,11 @@ export async function POST(req: Request) {
 
   const slug = `banda-${Date.now()}`;
 
-  // 2) Flux gera UMA imagem (a capa). Se falhar, devolve erro claro.
+  // 2) Flux gera UMA ilustração (a capa), no estilo escolhido.
   let imageUrl: string | null = null;
   try {
-    const replicateUrl = await gerarImagemFlux(imagePrompt, replicateToken);
-    try { imageUrl = await guardarImagem(replicateUrl, slug); } catch { imageUrl = replicateUrl; }
+    const replicateUrl = await gerarImagemFlux(imagePrompt, replicateToken, estilo);
+    try { imageUrl = await guardarImagem(replicateUrl, `banda/${slug}/capa-${Date.now()}.jpg`); } catch { imageUrl = replicateUrl; }
   } catch (e) {
     return NextResponse.json({ erro: 'flux', detalhe: e instanceof Error ? e.message : String(e), prompt: imagePrompt }, { status: 502 });
   }
@@ -148,7 +97,7 @@ export async function POST(req: Request) {
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
-    .upsert({ slug, title: p.titulo ?? tema, brief: tema, dias, theme: { formato: 'banda', mundo: MUNDO, realista: true } }, { onConflict: 'slug' })
+    .upsert({ slug, title: p.titulo ?? tema, brief: tema, dias, theme: { formato: 'banda', mundo: MUNDO, estilo } }, { onConflict: 'slug' })
     .select().single();
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, coleccao: data });
