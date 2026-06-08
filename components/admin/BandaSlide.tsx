@@ -117,10 +117,10 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={painel.imageUrl as string} alt="" crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: 1080, height: 1920, objectFit: 'cover', zIndex: 0 }} />
-            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${a(BG2, 'cc')} 0%, transparent 26%, transparent 44%, ${a(BG2, 'd9')} 84%, ${a(BG2, 'f2')} 100%)`, zIndex: 1 }} />
+            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${a(BG2, 'cc')} 0%, transparent 20%, transparent 38%, ${a(BG2, 'b3')} 60%, ${a(BG2, 'f0')} 86%, ${BG2} 100%)`, zIndex: 1 }} />
             {painel.gancho && (
               <div style={{ position: 'absolute', left: 90, right: 90, bottom: 300, zIndex: 3, textAlign: 'center' }}>
-                <p style={{ fontFamily: FONT_SERIF, fontWeight: 500, fontSize: 88, lineHeight: 1.16, color: '#FBF3E8', margin: 0, textShadow: '0 4px 24px rgba(0,0,0,0.6)' }}>{painel.gancho}</p>
+                <p style={{ fontFamily: FONT_SERIF, fontWeight: 500, fontSize: 88, lineHeight: 1.16, color: '#FBF3E8', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 6px 30px rgba(0,0,0,0.6)' }}>{painel.gancho}</p>
               </div>
             )}
           </>
@@ -128,9 +128,13 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
 
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: ehImagem ? 0.06 : 0.12, zIndex: 1, pointerEvents: 'none' }} />
 
-        {/* título da série no topo */}
-        <div style={{ position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', zIndex: 3 }}>
-          <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 24, letterSpacing: '0.45em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>Cá em Casa</span>
+        {/* selo da série (wordmark consistente, reconhecível ao primeiro relance) */}
+        <div style={{ position: 'absolute', top: 92, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '13px 30px', borderRadius: 999, border: `1px solid ${a(ACCENT, '66')}`, background: a(BG2, '4d') }}>
+            <span style={{ width: 22, height: 1, background: ACCENT, opacity: 0.6 }} />
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 26, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#FBF3E8' }}>Cá em Casa</span>
+            <span style={{ width: 22, height: 1, background: ACCENT, opacity: 0.6 }} />
+          </div>
         </div>
 
         {!ehImagem && (
@@ -146,9 +150,10 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
               <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 76, lineHeight: 1.2, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.licao}</p>
             </div>
           ) : ehEnsino ? (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
-              <span style={{ width: 80, height: 3, background: ACCENT, opacity: 0.7, borderRadius: 2 }} />
-              <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 64, lineHeight: 1.28, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.texto}</p>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+              <span style={{ fontFamily: FONT_MONO, fontSize: 30, letterSpacing: '0.35em', color: ACCENT, opacity: 0.6 }}>{String(numero ?? 0).padStart(2, '0')}</span>
+              <span style={{ width: 64, height: 2, background: ACCENT, opacity: 0.5, borderRadius: 2 }} />
+              <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 62, lineHeight: 1.3, textAlign: 'center', margin: 0, maxWidth: 860 }}>{painel.texto}</p>
             </div>
           ) : (
             <>
