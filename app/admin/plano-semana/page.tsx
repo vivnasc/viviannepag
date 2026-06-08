@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CURSOS } from '@/lib/infografico/cursos';
+import { semanaEditorialAtual, PLANO_EDITORIAL } from '@/lib/veu/planoEditorial';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -35,11 +36,19 @@ export default function PlanoSemanaPage() {
   const [msg, setMsg] = useState<string | null>(null);
 
   const cursoAtual = CURSOS.find((c) => c.id === curso) ?? CURSOS[0];
+  const semEd = semanaEditorialAtual();
 
-  // carrega o último plano guardado
+  // carrega o último plano guardado; se não houver, abre JÁ no tema desta
+  // semana do plano editorial de 3 meses (a Vivianne não tem de escolher nada).
   useEffect(() => {
-    try { const s = localStorage.getItem(CHAVE); if (s) { const e: Estado = JSON.parse(s); setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setPlano(e.plano ?? []); setCriados(e.criados ?? {}); } } catch {}
-  }, []);
+    try { const s = localStorage.getItem(CHAVE); if (s) { const e: Estado = JSON.parse(s); setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setPlano(e.plano ?? []); setCriados(e.criados ?? {}); return; } } catch {}
+    setCurso(semEd.curso); setTema(semEd.tema);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function usarSemanaDoPlano() {
+    setCurso(semEd.curso); setTema(semEd.tema); setPlano([]); setCriados({});
+    guardar({ curso: semEd.curso, tema: semEd.tema, plano: [], criados: {} });
+  }
   const guardar = useCallback((next: Partial<Estado>) => {
     try {
       const base: Estado = { curso, tema, plano, criados };
@@ -93,7 +102,21 @@ export default function PlanoSemanaPage() {
           <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1">Conta <b>didática</b>. Âmbito: psicologia transpessoal, constelação familiar (heranças sistémicas), espiritualidade e desenvolvimento.</p>
-        <p className="text-[0.78rem] opacity-60 mb-5">Escolhes a <b>matéria</b> e o <b>tema</b>; vês as <b>6 frases reais</b>, editas à mão, e só depois crias cada post. Nunca às cegas.</p>
+        <p className="text-[0.78rem] opacity-60 mb-4">Vês as <b>6 frases reais</b>, editas à mão, e só depois crias cada post. Nunca às cegas.</p>
+
+        {/* a semana de hoje, vinda do plano de 3 meses (não escolhes nada) */}
+        <div className="rounded-xl border border-ambar/25 bg-ambar/[0.05] p-4 mb-5">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[0.6rem] uppercase tracking-[0.18em] text-ambar">Plano de 3 meses · semana {semEd.semana} de {PLANO_EDITORIAL.length}</span>
+            <Link href="/admin/calendario-veu" className="text-[0.66rem] text-ambar/80 hover:text-ambar">ver os 3 meses →</Link>
+          </div>
+          <p className="font-serif text-xl leading-tight">“{semEd.mote}”</p>
+          <p className="text-[0.74rem] opacity-65 mt-0.5">{semEd.tema} · {(CURSOS.find((c) => c.id === semEd.curso) ?? CURSOS[0]).nome}</p>
+          {(curso !== semEd.curso || tema !== semEd.tema) && (
+            <button onClick={usarSemanaDoPlano} className="mt-2 text-[0.66rem] px-3 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">usar o tema desta semana</button>
+          )}
+        </div>
+        <p className="text-[0.72rem] opacity-45 mb-3">Já está preenchido com o tema de hoje. Carrega em rascunhar — ou troca abaixo se quiseres outro.</p>
 
         {/* matéria + tema (âmbito didático) */}
         <div className="rounded-xl border border-[#C9B6FA]/30 bg-[#C9B6FA]/[0.05] p-4 mb-5">
