@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CURSOS } from '@/lib/infografico/cursos';
@@ -59,11 +59,41 @@ export default function PlanoSemanaPage() {
   const cursoAtual = CURSOS.find((c) => c.id === curso) ?? CURSOS[0];
   const semEd = semanaEditorialAtual();
 
-  // carrega o último plano guardado; se não houver, abre JÁ no tema desta
-  // semana do plano editorial de 3 meses (a Vivianne não tem de escolher nada).
+  const aplicar = useCallback((e: Estado) => {
+    setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setPlano(e.plano ?? []); setCriados(e.criados ?? {});
+  }, []);
+
+  // grava no servidor (cross-device) com debounce, para não disparar a cada tecla
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const salvarServidor = useCallback((estado: Estado) => {
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      fetch('/api/admin/plano-semana/estado', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(estado) }).catch(() => {});
+    }, 700);
+  }, []);
+
+  // carrega o último plano guardado. Fonte de verdade: SERVIDOR (aparece em
+  // qualquer dispositivo). Cai para o cache local e, por fim, abre JÁ no tema
+  // desta semana do plano editorial de 3 meses (a Vivianne não escolhe nada).
   useEffect(() => {
-    try { const s = localStorage.getItem(CHAVE); if (s) { const e: Estado = JSON.parse(s); setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setPlano(e.plano ?? []); setCriados(e.criados ?? {}); return; } } catch {}
-    setCurso(semEd.curso); setTema(semEd.tema);
+    let cancel = false;
+    (async () => {
+      try {
+        const r = await fetch('/api/admin/plano-semana/estado');
+        if (r.ok) {
+          const { estado } = await r.json();
+          if (!cancel && estado && (estado.tema || (estado.plano?.length))) { aplicar(estado); return; }
+        }
+      } catch {}
+      if (cancel) return;
+      try {
+        const s = localStorage.getItem(CHAVE);
+        if (s) { const e: Estado = JSON.parse(s); aplicar(e); salvarServidor(e); return; } // migra o rascunho local antigo p/ o servidor
+      } catch {}
+      if (cancel) return;
+      setCurso(semEd.curso); setTema(semEd.tema);
+    })();
+    return () => { cancel = true; };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function usarSemanaDoPlano() {
@@ -71,11 +101,10 @@ export default function PlanoSemanaPage() {
     guardar({ curso: semEd.curso, tema: semEd.tema, plano: [], criados: {} });
   }
   const guardar = useCallback((next: Partial<Estado>) => {
-    try {
-      const base: Estado = { curso, tema, plano, criados };
-      localStorage.setItem(CHAVE, JSON.stringify({ ...base, ...next }));
-    } catch {}
-  }, [curso, tema, plano, criados]);
+    const merged: Estado = { curso, tema, plano, criados, ...next };
+    try { localStorage.setItem(CHAVE, JSON.stringify(merged)); } catch {}
+    salvarServidor(merged);
+  }, [curso, tema, plano, criados, salvarServidor]);
 
   async function rascunhar() {
     const t = tema.trim();
