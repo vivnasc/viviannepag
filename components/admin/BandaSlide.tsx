@@ -5,9 +5,11 @@
 // O balão "herdada" é a voz herdada (tracejado, itálico). O último painel é a
 // LIÇÃO (reflexão de fecho, sem personagens). Assinatura no rodapé.
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createAvatar } from '@dicebear/core';
+import { openPeeps } from '@dicebear/collection';
 import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
-import { getPersonagem, type Personagem } from '@/lib/banda/personagens';
+import { getPersonagem, SKIN, expressaoDoModo, type Personagem } from '@/lib/banda/personagens';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
@@ -18,32 +20,30 @@ const GRAIN =
 export type Fala = { id: string; fala: string; modo?: 'fala' | 'pensa' | 'herdada' };
 export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string };
 
-// ── Avatar SVG (consistente por personagem) ──
-function Avatar({ p, size = 240 }: { p: Personagem; size?: number }) {
-  const s = p.crianca ? size * 0.78 : size;
-  const { skin, cabelo, roupa, estilo } = p;
-  return (
-    <svg width={s} height={s} viewBox="0 0 200 200" style={{ display: 'block' }}>
-      {/* ombros / roupa */}
-      <path d="M40 200 Q40 150 100 150 Q160 150 160 200 Z" fill={roupa} />
-      <rect x="88" y="128" width="24" height="28" fill={skin} />
-      {/* cabelo de trás (comprido / apanhado) */}
-      {estilo === 'comprido' && <path d="M52 92 Q48 160 70 168 L130 168 Q152 160 148 92 Z" fill={cabelo} />}
-      {estilo === 'apanhado' && <circle cx="100" cy="40" r="22" fill={cabelo} />}
-      {estilo === 'medio' && <path d="M56 90 Q54 130 72 138 L128 138 Q146 130 144 90 Z" fill={cabelo} />}
-      {/* cabeça */}
-      <circle cx="100" cy="92" r="46" fill={skin} />
-      {/* cabelo de cima */}
-      {estilo === 'curto' && <path d="M56 88 Q60 48 100 46 Q140 48 144 88 Q140 70 100 68 Q60 70 56 88 Z" fill={cabelo} />}
-      {estilo === 'tufo' && <path d="M62 78 Q70 50 100 50 Q130 50 138 78 Q126 64 100 64 Q74 64 62 78 Z" fill={cabelo} />}
-      {(estilo === 'comprido' || estilo === 'medio') && <path d="M54 90 Q58 50 100 48 Q142 50 146 90 Q138 66 100 64 Q62 66 54 90 Z" fill={cabelo} />}
-      {estilo === 'apanhado' && <path d="M58 92 Q62 56 100 54 Q138 56 142 92 Q134 70 100 68 Q66 70 58 92 Z" fill={cabelo} />}
-      {/* olhos + sorriso suave */}
-      <circle cx="84" cy="94" r="4.5" fill="#2A211A" />
-      <circle cx="116" cy="94" r="4.5" fill="#2A211A" />
-      <path d="M86 110 Q100 120 114 110" stroke="#2A211A" strokeWidth="3" fill="none" strokeLinecap="round" />
-    </svg>
+// ── Avatar (Open Peeps): ilustrado, consistente por personagem, sem cara real.
+// A mesma personagem dá sempre a mesma cara; só a expressão segue o "modo" da
+// fala (pensa -> preocupada, fala -> a explicar). Pele única na família (SKIN).
+const noHash = (h: string) => h.replace('#', '');
+function Avatar({ p, size = 240, modo }: { p: Personagem; size?: number; modo?: string }) {
+  const s = Math.round(p.crianca ? size * 0.85 : size);
+  const svg = useMemo(
+    () =>
+      createAvatar(openPeeps, {
+        seed: p.id,
+        size: s,
+        head: [p.head],
+        face: [expressaoDoModo(p, modo)],
+        skinColor: [noHash(SKIN)],
+        clothingColor: [noHash(p.cloth)],
+        headContrastColor: [noHash(p.hair)],
+        facialHairProbability: 0,
+        accessoriesProbability: 0,
+        maskProbability: 0,
+        backgroundColor: ['transparent'],
+      }).toString(),
+    [p.id, p.head, p.cloth, p.hair, modo, s],
   );
+  return <div style={{ width: s, height: s, lineHeight: 0 }} dangerouslySetInnerHTML={{ __html: svg }} />;
 }
 
 // ── Balão de fala ──
@@ -138,7 +138,7 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
                   const p = getPersonagem(f.id)!;
                   return (
                     <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                      <Avatar p={p} size={300} />
+                      <Avatar p={p} size={300} modo={f.modo} />
                     </div>
                   );
                 })}

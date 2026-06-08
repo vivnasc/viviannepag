@@ -19,6 +19,8 @@
     "render:trabalho": "COLECAO=trabalho node scripts/render-ebook.js"
   },
   "dependencies": {
+    "@dicebear/collection": "^9.4.2",
+    "@dicebear/core": "^9.4.2",
     "@paypal/react-paypal-js": "^9.2.0",
     "@supabase/supabase-js": "^2.106.1",
     "@vercel/analytics": "^2.0.1",
