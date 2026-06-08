@@ -19,6 +19,20 @@ type Estado = { curso: string; tema: string; plano: Dia[]; criados: Record<numbe
 
 const CHAVE = 'veu-plano-atual';
 
+// Tipo de cada dia por ORDEM (resiliente a rascunhos antigos guardados sem o
+// campo "gen"/"formato"): seg frase, ter reel, qua Cá em Casa, qui reel, sex
+// frase, sáb infográfico.
+const SLOTS_META = [
+  { gen: 'kinetico', formato: 'kinetico' },
+  { gen: 'reel', formato: 'ninguem' },
+  { gen: 'banda', formato: 'banda' },
+  { gen: 'reel', formato: 'sinais' },
+  { gen: 'kinetico', formato: 'kinetico' },
+  { gen: 'infografico', formato: 'infografico' },
+];
+const genDe = (d: Dia, i: number) => d.gen ?? SLOTS_META[i]?.gen ?? 'kinetico';
+const formatoDe = (d: Dia, i: number) => d.formato ?? SLOTS_META[i]?.formato ?? 'kinetico';
+
 // info de cada formato não-cinético (o que gera e onde se revê)
 const GEN: Record<string, { badge: string; nota: string; destino: string; verLabel: string; botao: string }> = {
   reel: { badge: 'Reel · vários frames', nota: 'O texto dos frames é montado pelo gerador, a partir deste gancho. Revês e descarregas em Reels.', destino: '/admin/reels', verLabel: 'abrir Reels', botao: 'criar reel' },
@@ -89,19 +103,20 @@ export default function PlanoSemanaPage() {
     const d = plano[i];
     if (!d?.frase.trim() || busy !== null) return;
     setBusy(i); setErro(null); setMsg(null);
-    // rota para o gerador certo conforme o formato real do dia
+    // rota para o gerador certo conforme o formato real do dia (resiliente)
+    const gen = genDe(d, i); const formato = formatoDe(d, i);
     let url = '/api/admin/reels/gerar';
     let payload: Record<string, unknown> = {};
-    if (d.gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
-    else if (d.gen === 'reel') payload = { tema: d.frase, formato: d.formato, curso };
-    else if (d.gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
-    else if (d.gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
+    if (gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
+    else if (gen === 'reel') payload = { tema: d.frase, formato, curso };
+    else if (gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
+    else if (gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
     try {
       const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       const c = { ...criados, [i]: true }; setCriados(c); guardar({ criados: c });
-      const onde = d.gen === 'kinetico' ? 'Reels (põe o fundo e descarrega)' : (GEN[d.gen]?.verLabel ?? 'a biblioteca');
+      const onde = gen === 'kinetico' ? 'Reels (põe o fundo e descarrega)' : (GEN[gen]?.verLabel ?? 'a biblioteca');
       setMsg(`${d.label} criado. Vê em ${onde}.`);
     } catch (e) { setErro(String(e)); }
     finally { setBusy(null); }
@@ -164,8 +179,9 @@ export default function PlanoSemanaPage() {
         <div className="space-y-4">
           {plano.map((d, i) => {
             const feito = !!criados[i];
-            const ehKin = d.gen === 'kinetico';
-            const info = GEN[d.gen];
+            const gen = genDe(d, i);
+            const ehKin = gen === 'kinetico';
+            const info = GEN[gen];
             return (
               <div key={i} className={`rounded-xl border border-ocre/12 bg-terra/15 overflow-hidden ${feito ? 'opacity-60' : ''}`}>
                 <div className="px-4 py-2 flex items-center gap-2 text-[0.7rem] border-b border-ocre/10">
@@ -204,7 +220,7 @@ export default function PlanoSemanaPage() {
                     <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-ambar" />
                     <p className="text-[0.66rem] opacity-55 leading-relaxed">{info?.nota}</p>
                     <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === i ? 'a gerar…' : feito ? `↻ recriar` : `✓ ${info?.botao}`}</button>
+                      <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === i ? 'a gerar…' : feito ? `↻ recriar` : `✓ ${info?.botao ?? 'criar'}`}</button>
                       {feito && info && <Link href={info.destino} className="text-[0.66rem] px-3 py-1.5 rounded-full border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar no-underline">{info.verLabel} →</Link>}
                     </div>
                   </div>
