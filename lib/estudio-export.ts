@@ -310,7 +310,7 @@ export function gerarMetricoolCSV(
     // - Reels: Picture Url 1 = MP4 (Metricool detecta pela extensao)
     const pictureCols: RowOverrides = {};
     if (ehReel && videoReel) {
-      pictureCols['Picture Url 1'] = videoReel;
+      pictureCols['Picture Url 1'] = semCache(videoReel);
       pictureCols['Alt text picture 1'] = `${c.titulo} — reel video por Vivianne dos Santos`;
     } else if ((ehCarrossel || ehCitacao) && urls.length > 0) {
       urls.slice(0, 10).forEach((u, i) => {
@@ -421,7 +421,7 @@ export function gerarMetricoolCSV(
       const urlsJpg = ehReel ? null : (imagensJpgPorDia?.get(c.dia) ?? null);
       const pictureColsTT: RowOverrides = {};
       if (ehReel && videoReel) {
-        pictureColsTT['Picture Url 1'] = videoReel;
+        pictureColsTT['Picture Url 1'] = semCache(videoReel);
         pictureColsTT['Alt text picture 1'] = pictureCols['Alt text picture 1'] ?? '';
       } else if ((ehCarrossel || ehCitacao) && urlsJpg && urlsJpg.length > 0) {
         urlsJpg.slice(0, 10).forEach((u, i) => {
