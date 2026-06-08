@@ -84,6 +84,7 @@ export default function CarrosselPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
   const [videoMsg, setVideoMsg] = useState<string | null>(null);
+  const [aba, setAba] = useState<'calendario' | 'gerados'>('calendario');
   const anoAtual = new Date().getFullYear();
 
   async function puxarPool(c: Coleccao) {
@@ -390,11 +391,26 @@ export default function CarrosselPage() {
           <h1 className="text-2xl font-semibold">Carrosséis Semanais</h1>
           <Link href="/admin/estudio" className="text-[0.7rem] opacity-60 hover:opacity-100">Estúdio →</Link>
         </div>
-        <p className="text-[0.8rem] opacity-65 mb-6">Calendário temático de 52 semanas. Cada semana gera uma jornada de carrosséis que combina produtos do teu ecossistema.</p>
+        <p className="text-[0.8rem] opacity-65 mb-4">Calendário temático de 52 semanas. Cada semana gera uma jornada de carrosséis que combina produtos do teu ecossistema.</p>
+
+        {/* abas: calendário completo vs. só os já gerados */}
+        {(() => {
+          const nGerados = CALENDARIO_ANUAL.filter((w) => colDaSemana(w.semana)).length;
+          return (
+            <div className="flex gap-2 mb-6">
+              <button onClick={() => setAba('calendario')} className={`text-[0.74rem] px-4 py-1.5 rounded-full border ${aba === 'calendario' ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>Calendário · 52</button>
+              <button onClick={() => setAba('gerados')} className={`text-[0.74rem] px-4 py-1.5 rounded-full border ${aba === 'gerados' ? 'border-salvia text-salvia bg-salvia/10' : 'border-ocre/25 text-creme-2/70 hover:border-salvia'}`}>Já gerados · {nGerados}</button>
+            </div>
+          );
+        })()}
         {erro && <div className="mb-4 text-[0.75rem] text-red-300 bg-red-950/40 rounded-lg p-3">{erro}</div>}
 
+        {aba === 'gerados' && CALENDARIO_ANUAL.every((w) => !colDaSemana(w.semana)) && (
+          <p className="text-[0.8rem] opacity-50 text-center py-10">Ainda não geraste nenhuma semana. Vai ao <b>Calendário</b> e carrega "gerar" numa semana.</p>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {CALENDARIO_ANUAL.map((w) => {
+          {CALENDARIO_ANUAL.filter((w) => aba === 'calendario' || colDaSemana(w.semana)).map((w) => {
             const col = colDaSemana(w.semana);
             const pal = PALETAS_UNIVERSO[w.universo];
             const p = PALETAS[pal.mundo];
