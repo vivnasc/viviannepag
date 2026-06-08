@@ -27,7 +27,7 @@ const RITMO: Record<number, Tipo | null> = {
   1: T.motion,    // 2ª
   2: T.ninguem,   // 3ª
   3: T.banda,     // 4ª
-  4: T.glossario, // 5ª
+  4: T.sinais,    // 5ª
   5: T.motion,    // 6ª (repete, é o que mais rende)
   6: T.info,      // sáb
   0: null,        // dom — descanso
