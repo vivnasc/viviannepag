@@ -14,10 +14,17 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 // desenvolvimento. Tu escolhes a MATÉRIA e o TEMA dessa matéria; a IA rascunha
 // as 6 frases EM TEXTO; tu lês, editas, e só depois crias os posts.
 
-type Dia = { dia: string; emoji: string; label: string; frase: string; destaque: string[]; legenda: string };
+type Dia = { dia: string; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string };
 type Estado = { curso: string; tema: string; plano: Dia[]; criados: Record<number, boolean> };
 
 const CHAVE = 'veu-plano-atual';
+
+// info de cada formato não-cinético (o que gera e onde se revê)
+const GEN: Record<string, { badge: string; nota: string; destino: string; verLabel: string; botao: string }> = {
+  reel: { badge: 'Reel · vários frames', nota: 'O texto dos frames é montado pelo gerador, a partir deste gancho. Revês e descarregas em Reels.', destino: '/admin/reels', verLabel: 'abrir Reels', botao: 'criar reel' },
+  banda: { badge: 'Cá em Casa · com personagens', nota: 'A cena com os personagens é montada pelo gerador, a partir desta ideia. Revês em Cá em Casa.', destino: '/admin/banda', verLabel: 'abrir Cá em Casa', botao: 'criar Cá em Casa' },
+  infografico: { badge: 'Infográfico', nota: 'O infográfico é montado pelo gerador, a partir desta ideia. Revês em Infográficos.', destino: '/admin/infografico', verLabel: 'abrir Infográficos', botao: 'criar infográfico' },
+};
 
 function realcar(frase: string, destaque: string[]) {
   if (!destaque.length) return <>{frase}</>;
@@ -82,12 +89,20 @@ export default function PlanoSemanaPage() {
     const d = plano[i];
     if (!d?.frase.trim() || busy !== null) return;
     setBusy(i); setErro(null); setMsg(null);
+    // rota para o gerador certo conforme o formato real do dia
+    let url = '/api/admin/reels/gerar';
+    let payload: Record<string, unknown> = {};
+    if (d.gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda };
+    else if (d.gen === 'reel') payload = { tema: d.frase, formato: d.formato, curso };
+    else if (d.gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
+    else if (d.gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
     try {
-      const r = await fetch('/api/admin/reels/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda }) });
+      const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       const c = { ...criados, [i]: true }; setCriados(c); guardar({ criados: c });
-      setMsg(`"${d.frase.slice(0, 32)}…" criado. Vai a Reels para pôr a imagem de fundo e descarregar.`);
+      const onde = d.gen === 'kinetico' ? 'Reels (põe o fundo e descarrega)' : (GEN[d.gen]?.verLabel ?? 'a biblioteca');
+      setMsg(`${d.label} criado. Vê em ${onde}.`);
     } catch (e) { setErro(String(e)); }
     finally { setBusy(null); }
   }
@@ -149,35 +164,51 @@ export default function PlanoSemanaPage() {
         <div className="space-y-4">
           {plano.map((d, i) => {
             const feito = !!criados[i];
+            const ehKin = d.gen === 'kinetico';
+            const info = GEN[d.gen];
             return (
               <div key={i} className={`rounded-xl border border-ocre/12 bg-terra/15 overflow-hidden ${feito ? 'opacity-60' : ''}`}>
                 <div className="px-4 py-2 flex items-center gap-2 text-[0.7rem] border-b border-ocre/10">
                   <span className="text-base">{d.emoji}</span>
                   <span className="uppercase tracking-[0.14em] text-[#C9B6FA]">{d.dia}</span>
                   <span className="opacity-50">· {d.label}</span>
-                  {feito && <span className="ml-auto text-[0.6rem] px-2 py-0.5 rounded-full bg-salvia/15 text-salvia">✓ post criado</span>}
+                  <span className="ml-auto text-[0.56rem] px-2 py-0.5 rounded-full border border-ocre/25 opacity-70">{ehKin ? 'Post · frase controlada' : info?.badge}</span>
+                  {feito && <span className="text-[0.6rem] px-2 py-0.5 rounded-full bg-salvia/15 text-salvia">✓ criado</span>}
                 </div>
 
-                {/* pré-visualização da frase como vai aparecer */}
-                <div className="px-4 pt-4">
-                  <div className="rounded-lg bg-gradient-to-br from-[#1a1730] to-[#0F0F1A] border border-white/5 px-5 py-6 text-center">
-                    <p className="font-serif text-[1.35rem] leading-snug">{realcar(d.frase, d.destaque)}</p>
+                {ehKin ? (
+                  // ── FRASE COM MOTION: tu controlas o texto a 100% ──
+                  <>
+                    <div className="px-4 pt-4">
+                      <div className="rounded-lg bg-gradient-to-br from-[#1a1730] to-[#0F0F1A] border border-white/5 px-5 py-6 text-center">
+                        <p className="font-serif text-[1.35rem] leading-snug">{realcar(d.frase, d.destaque)}</p>
+                      </div>
+                    </div>
+                    <div className="p-4 space-y-2">
+                      <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45">Frase no ecrã</label>
+                      <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-ambar" />
+                      <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45 pt-1">Palavras a ouro (vírgulas)</label>
+                      <input value={d.destaque.join(', ')} onChange={(e) => editar(i, 'destaque', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-1.5 text-[0.8rem] outline-none focus:border-ambar" />
+                      <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45 pt-1">Legenda do Instagram</label>
+                      <textarea value={d.legenda} onChange={(e) => editar(i, 'legenda', e.target.value)} rows={4} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.8rem] leading-relaxed outline-none focus:border-ambar" />
+                      <div className="flex flex-wrap items-center gap-2 pt-1">
+                        <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-40">{busy === i ? 'a criar…' : feito ? '↻ recriar post' : '✓ criar post com este texto'}</button>
+                        <span className="text-[0.64rem] opacity-45">cria o post com o TEU texto. Fundo pões em Reels.</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  // ── REEL / CÁ EM CASA / INFOGRÁFICO: gerador monta o formato ──
+                  <div className="p-4 space-y-2">
+                    <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45">A ideia / gancho deste dia</label>
+                    <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-ambar" />
+                    <p className="text-[0.66rem] opacity-55 leading-relaxed">{info?.nota}</p>
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === i ? 'a gerar…' : feito ? `↻ recriar` : `✓ ${info?.botao}`}</button>
+                      {feito && info && <Link href={info.destino} className="text-[0.66rem] px-3 py-1.5 rounded-full border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar no-underline">{info.verLabel} →</Link>}
+                    </div>
                   </div>
-                </div>
-
-                {/* campos editáveis */}
-                <div className="p-4 space-y-2">
-                  <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45">Frase no ecrã</label>
-                  <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-ambar" />
-                  <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45 pt-1">Palavras a ouro (vírgulas)</label>
-                  <input value={d.destaque.join(', ')} onChange={(e) => editar(i, 'destaque', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-1.5 text-[0.8rem] outline-none focus:border-ambar" />
-                  <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45 pt-1">Legenda do Instagram</label>
-                  <textarea value={d.legenda} onChange={(e) => editar(i, 'legenda', e.target.value)} rows={4} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.8rem] leading-relaxed outline-none focus:border-ambar" />
-                  <div className="flex items-center gap-2 pt-1">
-                    <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-40">{busy === i ? 'a criar…' : feito ? '↻ recriar post' : '✓ criar post com este texto'}</button>
-                    <span className="text-[0.64rem] opacity-45">cria o post com o TEU texto. A imagem de fundo pões em Reels.</span>
-                  </div>
-                </div>
+                )}
               </div>
             );
           })}
