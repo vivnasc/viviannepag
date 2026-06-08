@@ -287,7 +287,9 @@ export function gerarMetricoolCSV(
 
     const date = new Date(start);
     date.setDate(date.getDate() + c.dia - 1);
-    const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    // Formata a partir dos componentes LOCAIS (nao toISOString, que converte
+    // para UTC e em Portugal/UTC+1 recuava a data um dia para domingo).
+    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; // YYYY-MM-DD
     const timeStr = c.horario.length === 5 ? `${c.horario}:00` : c.horario; // HH:MM:SS
 
     const podeTerMusica = ehCitacao;

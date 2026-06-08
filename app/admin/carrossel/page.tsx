@@ -64,7 +64,8 @@ function proximaSegunda(): string {
   const day = d.getDay(); // 0 Dom .. 6 Sab
   const diff = day === 1 ? 0 : ((8 - day) % 7) || 7; // próxima segunda >= hoje
   d.setDate(d.getDate() + diff);
-  return d.toISOString().slice(0, 10);
+  // data LOCAL (não toISOString, que converte para UTC e podia recuar um dia)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
 function CopyButton({ text }: { text: string }) {
