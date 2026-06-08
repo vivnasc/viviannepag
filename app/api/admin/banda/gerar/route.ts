@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
-import { gerarImagemFlux, guardarImagem, ESTILO_DEFAULT } from '@/lib/banda/flux';
+import { gerarImagemFlux, guardarImagem, ESTILO_DEFAULT, representacaoAleatoria } from '@/lib/banda/flux';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
   // 2) Flux gera UMA ilustração (a capa), no estilo escolhido.
   let imageUrl: string | null = null;
   try {
-    const replicateUrl = await gerarImagemFlux(imagePrompt, replicateToken, estilo);
+    const replicateUrl = await gerarImagemFlux(imagePrompt, replicateToken, estilo, representacaoAleatoria());
     try { imageUrl = await guardarImagem(replicateUrl, `banda/${slug}/capa-${Date.now()}.jpg`); } catch { imageUrl = replicateUrl; }
   } catch (e) {
     return NextResponse.json({ erro: 'flux', detalhe: e instanceof Error ? e.message : String(e), prompt: imagePrompt }, { status: 502 });
