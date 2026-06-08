@@ -47,6 +47,7 @@ export default function CarrosselVeuPage() {
     if (r.ok) setItens((await r.json()).carrosseis ?? []);
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
+  useEffect(() => { const t = new URLSearchParams(window.location.search).get('tema'); if (t) setTema(t); }, []);
 
   async function gerar(opts: { tema?: string; modo?: string; termos?: string[] }) {
     const t = (opts.tema ?? tema).trim();

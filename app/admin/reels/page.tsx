@@ -58,6 +58,8 @@ export default function ReelsPage() {
     if (r.ok) setItens((await r.json()).reels ?? []);
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
+  // pré-preenche tema/formato vindos do Calendário (?tema=&formato=)
+  useEffect(() => { const p = new URLSearchParams(window.location.search); const t = p.get('tema'); if (t) setTema(t); const f = p.get('formato'); if (f) setFormato(f); }, []);
 
   async function gerar(temaArg?: string) {
     const t = (temaArg ?? tema).trim();

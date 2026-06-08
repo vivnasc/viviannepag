@@ -52,6 +52,7 @@ export default function InfograficoPage() {
     if (r.ok) setItens((await r.json()).infograficos ?? []);
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
+  useEffect(() => { const t = new URLSearchParams(window.location.search).get('tema'); if (t) setTema(t); }, []);
 
   async function gerar(temaArg?: string, cursoArg?: string) {
     const t = (temaArg ?? tema).trim();
