@@ -5,9 +5,11 @@
 // O balão "herdada" é a voz herdada (tracejado, itálico). O último painel é a
 // LIÇÃO (reflexão de fecho, sem personagens). Assinatura no rodapé.
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createAvatar } from '@dicebear/core';
+import { openPeeps } from '@dicebear/collection';
 import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
-import { getPersonagem, type Personagem } from '@/lib/banda/personagens';
+import { getPersonagem, SKIN, expressaoDoModo, type Personagem } from '@/lib/banda/personagens';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
@@ -16,34 +18,34 @@ const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
 export type Fala = { id: string; fala: string; modo?: 'fala' | 'pensa' | 'herdada' };
-export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string };
+// Um painel pode ser: CAPA realista (imageUrl + gancho por cima), slide de
+// ENSINO (texto, sem pessoas), LIÇÃO (fecho) ou banda desenhada (legado).
+export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string; imageUrl?: string | null; gancho?: string; texto?: string };
 
-// ── Avatar SVG (consistente por personagem) ──
-function Avatar({ p, size = 240 }: { p: Personagem; size?: number }) {
-  const s = p.crianca ? size * 0.78 : size;
-  const { skin, cabelo, roupa, estilo } = p;
-  return (
-    <svg width={s} height={s} viewBox="0 0 200 200" style={{ display: 'block' }}>
-      {/* ombros / roupa */}
-      <path d="M40 200 Q40 150 100 150 Q160 150 160 200 Z" fill={roupa} />
-      <rect x="88" y="128" width="24" height="28" fill={skin} />
-      {/* cabelo de trás (comprido / apanhado) */}
-      {estilo === 'comprido' && <path d="M52 92 Q48 160 70 168 L130 168 Q152 160 148 92 Z" fill={cabelo} />}
-      {estilo === 'apanhado' && <circle cx="100" cy="40" r="22" fill={cabelo} />}
-      {estilo === 'medio' && <path d="M56 90 Q54 130 72 138 L128 138 Q146 130 144 90 Z" fill={cabelo} />}
-      {/* cabeça */}
-      <circle cx="100" cy="92" r="46" fill={skin} />
-      {/* cabelo de cima */}
-      {estilo === 'curto' && <path d="M56 88 Q60 48 100 46 Q140 48 144 88 Q140 70 100 68 Q60 70 56 88 Z" fill={cabelo} />}
-      {estilo === 'tufo' && <path d="M62 78 Q70 50 100 50 Q130 50 138 78 Q126 64 100 64 Q74 64 62 78 Z" fill={cabelo} />}
-      {(estilo === 'comprido' || estilo === 'medio') && <path d="M54 90 Q58 50 100 48 Q142 50 146 90 Q138 66 100 64 Q62 66 54 90 Z" fill={cabelo} />}
-      {estilo === 'apanhado' && <path d="M58 92 Q62 56 100 54 Q138 56 142 92 Q134 70 100 68 Q66 70 58 92 Z" fill={cabelo} />}
-      {/* olhos + sorriso suave */}
-      <circle cx="84" cy="94" r="4.5" fill="#2A211A" />
-      <circle cx="116" cy="94" r="4.5" fill="#2A211A" />
-      <path d="M86 110 Q100 120 114 110" stroke="#2A211A" strokeWidth="3" fill="none" strokeLinecap="round" />
-    </svg>
+// ── Avatar (Open Peeps): ilustrado, consistente por personagem, sem cara real.
+// A mesma personagem dá sempre a mesma cara; só a expressão segue o "modo" da
+// fala (pensa -> preocupada, fala -> a explicar). Pele única na família (SKIN).
+const noHash = (h: string) => h.replace('#', '');
+function Avatar({ p, size = 240, modo }: { p: Personagem; size?: number; modo?: string }) {
+  const s = Math.round(p.crianca ? size * 0.85 : size);
+  const svg = useMemo(
+    () =>
+      createAvatar(openPeeps, {
+        seed: p.id,
+        size: s,
+        head: [p.head],
+        face: [expressaoDoModo(p, modo)],
+        skinColor: [noHash(SKIN)],
+        clothingColor: [noHash(p.cloth)],
+        headContrastColor: [noHash(p.hair)],
+        facialHairProbability: 0,
+        accessoriesProbability: 0,
+        maskProbability: 0,
+        backgroundColor: ['transparent'],
+      }).toString(),
+    [p.id, p.head, p.cloth, p.hair, modo, s],
   );
+  return <div style={{ width: s, height: s, lineHeight: 0 }} dangerouslySetInnerHTML={{ __html: svg }} />;
 }
 
 // ── Balão de fala ──
@@ -103,21 +105,38 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
   }, [painel]);
 
   const personagens = (painel.personagens ?? []).filter((f) => f.fala && getPersonagem(f.id)).slice(0, 2);
-  const ehLicao = !!painel.licao && personagens.length === 0;
+  const ehImagem = !!painel.imageUrl;
+  const ehLicao = !!painel.licao && !ehImagem;
+  const ehEnsino = !!painel.texto && !ehImagem && !ehLicao;
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1920', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1920, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: `radial-gradient(ellipse 110% 80% at 50% 24%, ${BG1} 0%, ${BG2} 76%)`, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.12, zIndex: 0, pointerEvents: 'none' }} />
+        {/* CAPA realista: foto a sangrar + véu para legibilidade + gancho por cima */}
+        {ehImagem && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={painel.imageUrl as string} alt="" crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: 1080, height: 1920, objectFit: 'cover', zIndex: 0 }} />
+            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${a(BG2, 'cc')} 0%, transparent 26%, transparent 44%, ${a(BG2, 'd9')} 84%, ${a(BG2, 'f2')} 100%)`, zIndex: 1 }} />
+            {painel.gancho && (
+              <div style={{ position: 'absolute', left: 90, right: 90, bottom: 300, zIndex: 3, textAlign: 'center' }}>
+                <p style={{ fontFamily: FONT_SERIF, fontWeight: 500, fontSize: 88, lineHeight: 1.16, color: '#FBF3E8', margin: 0, textShadow: '0 4px 24px rgba(0,0,0,0.6)' }}>{painel.gancho}</p>
+              </div>
+            )}
+          </>
+        )}
+
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: ehImagem ? 0.06 : 0.12, zIndex: 1, pointerEvents: 'none' }} />
 
         {/* título da série no topo */}
         <div style={{ position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', zIndex: 3 }}>
           <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 24, letterSpacing: '0.45em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>Cá em Casa</span>
         </div>
 
+        {!ehImagem && (
         <div ref={contentRef} style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 90px', zIndex: 3, transform: `scale(${fit})`, transformOrigin: 'center' }}>
-          {/* cenário */}
-          {painel.cenario && !ehLicao && (
+          {/* cenário (só na banda desenhada legado) */}
+          {painel.cenario && !ehLicao && !ehEnsino && (
             <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 38, lineHeight: 1.3, opacity: 0.8, textAlign: 'center', margin: '0 0 40px', maxWidth: 820 }}>{painel.cenario}</p>
           )}
 
@@ -125,6 +144,11 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
               <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
               <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 76, lineHeight: 1.2, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.licao}</p>
+            </div>
+          ) : ehEnsino ? (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
+              <span style={{ width: 80, height: 3, background: ACCENT, opacity: 0.7, borderRadius: 2 }} />
+              <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 64, lineHeight: 1.28, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.texto}</p>
             </div>
           ) : (
             <>
@@ -138,7 +162,7 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
                   const p = getPersonagem(f.id)!;
                   return (
                     <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                      <Avatar p={p} size={300} />
+                      <Avatar p={p} size={300} modo={f.modo} />
                     </div>
                   );
                 })}
@@ -146,6 +170,7 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
             </>
           )}
         </div>
+        )}
 
         {/* rodapé: pager + assinatura */}
         <div style={{ position: 'absolute', bottom: 120, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
