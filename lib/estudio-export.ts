@@ -273,6 +273,11 @@ export function gerarMetricoolCSV(
 ): string {
   const lines: string[] = [CSV_HEADER.join(',')];
   const start = new Date(startDate + 'T00:00:00');
+  // Cache-busting: as imagens do carrossel sao re-renderizadas no MESMO URL, mas
+  // o CDN do Supabase serve a versao antiga em cache (ate ~1h). Acrescentar um
+  // ?v= forca o Metricool/Instagram a buscar a versao mais recente (a 4:5).
+  const cacheBust = Date.now();
+  const semCache = (u: string) => u + (u.includes('?') ? '&' : '?') + 'v=' + cacheBust;
 
   for (const c of conteudos) {
     const ehReel = c.tipo.startsWith('reel');
@@ -306,7 +311,7 @@ export function gerarMetricoolCSV(
       pictureCols['Alt text picture 1'] = `${c.titulo} — reel video por Vivianne dos Santos`;
     } else if ((ehCarrossel || ehCitacao) && urls.length > 0) {
       urls.slice(0, 10).forEach((u, i) => {
-        pictureCols[`Picture Url ${i + 1}`] = u;
+        pictureCols[`Picture Url ${i + 1}`] = semCache(u);
         const slide = c.slides?.[i];
         if (slide) {
           pictureCols[`Alt text picture ${i + 1}`] = gerarAltText(slide, c.mundo);
