@@ -45,6 +45,33 @@ export default function CalendarioPage() {
   const feitosCount = Object.values(feitos).filter(Boolean).length;
   const semanas = CALENDARIO_ANUAL.filter((w) => filtro === 'todas' || w.estacao === filtro);
 
+  // gerar em bulk o pacote da semana (sobre o tema da semana)
+  const [bulk, setBulk] = useState<number | null>(null);
+  const [bulkMsg, setBulkMsg] = useState<string>('');
+  async function gerarSemana(semana: number, tema: string, subtitulo: string) {
+    if (bulk !== null) return;
+    setBulk(semana); setBulkMsg('');
+    const t = `${tema}. ${subtitulo}`;
+    const calls = [
+      { nome: 'Frase com motion', url: '/api/admin/reels/gerar', body: { tema: t, formato: 'kinetico', curso: 'transpessoal' } },
+      { nome: 'Reel', url: '/api/admin/reels/gerar', body: { tema: t, formato: 'ninguem', curso: 'transpessoal' } },
+      { nome: 'Cá em Casa', url: '/api/admin/banda/gerar', body: { tema: t } },
+      { nome: 'Infográfico', url: '/api/admin/infografico/gerar', body: { tema: t, curso: 'transpessoal' } },
+    ];
+    let ok = 0; let ultimoErro = '';
+    for (const c of calls) {
+      setBulkMsg(`a gerar ${c.nome}… (${ok}/${calls.length})`);
+      try {
+        const r = await fetch(c.url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(c.body) });
+        if (r.ok) ok++; else { const j = await r.json().catch(() => ({})); ultimoErro = (j.erro ?? r.status) + ''; }
+      } catch (e) { ultimoErro = String(e); }
+    }
+    setBulk(null);
+    setBulkMsg(ok === calls.length
+      ? `Semana ${semana} gerada: ${ok} peças. Vê em Reels, Cá em Casa e Infográficos para pores as imagens e descarregar.`
+      : `Semana ${semana}: ${ok} de ${calls.length} geradas${ultimoErro ? ` (erro: ${ultimoErro})` : ''}.`);
+  }
+
   const link = (base: string, tema: string, extra = '') => `${base}?tema=${encodeURIComponent(tema)}${extra}`;
 
   return (
@@ -79,6 +106,10 @@ export default function CalendarioPage() {
                   </div>
                   <h3 className="font-serif text-xl leading-tight" style={{ color: cor }}>{w.tema}</h3>
                   <p className="text-[0.85rem] italic opacity-75 mb-3">{w.subtitulo}</p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <button onClick={() => gerarSemana(w.semana, w.tema, w.subtitulo)} disabled={bulk !== null} className="text-[0.66rem] px-3 py-1.5 rounded-full border border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/10 hover:bg-[#C9B6FA]/20 disabled:opacity-40">{bulk === w.semana ? 'a gerar a semana…' : '⚡ gerar a semana toda'}</button>
+                    {bulkMsg && (bulk === w.semana || bulkMsg.startsWith(`Semana ${w.semana} `) || bulkMsg.startsWith(`Semana ${w.semana}:`)) && <span className="text-[0.62rem] text-salvia">{bulkMsg}</span>}
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     <Link href={link('/admin/reels', w.tema, '&formato=kinetico')} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline">✨ Frase com motion</Link>
                     <Link href={link('/admin/reels', w.tema)} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">🔎 Reel</Link>
