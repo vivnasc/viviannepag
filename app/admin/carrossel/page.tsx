@@ -195,16 +195,18 @@ export default function CarrosselPage() {
   }
 
   function exportarMetricool(c: Coleccao) {
-    const imagensPorDia = new Map<number, string[]>();
-    for (const d of c.dias) if (d.imagens?.length) imagensPorDia.set(d.dia, d.imagens);
-    if (imagensPorDia.size === 0) {
-      setErro('O Metricool precisa das imagens dos slides. Carrega "gerar carrossel + vídeo" primeiro e depois exporta.');
+    // Este produto é em VÍDEO (MP4 com música): publica-se como Reel, não como
+    // carrossel de imagens. Exporta os MP4 de cada dia.
+    const videosPorDia = new Map<number, string>();
+    for (const d of c.dias) if (d.videoUrl) videosPorDia.set(d.dia, d.videoUrl);
+    if (videosPorDia.size === 0) {
+      setErro('Este produto é em vídeo. Carrega "gerar carrossel + vídeo" primeiro para teres os MP4 e depois exporta.');
       return;
     }
     // Agenda a partir da PRÓXIMA segunda-feira (nunca no passado) e às 13h.
     const inicio = proximaSegunda();
     const dias13 = c.dias.map((d) => ({ ...d, horario: '13:00' }));
-    const csv = gerarMetricoolCSV(dias13, inicio, imagensPorDia);
+    const csv = gerarMetricoolCSV(dias13, inicio, undefined, videosPorDia);
     downloadFile(csv, `${c.slug}-metricool.csv`, 'text/csv');
   }
 

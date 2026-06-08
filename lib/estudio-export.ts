@@ -280,15 +280,18 @@ export function gerarMetricoolCSV(
   const semCache = (u: string) => u + (u.includes('?') ? '&' : '?') + 'v=' + cacheBust;
 
   for (const c of conteudos) {
-    const ehReel = c.tipo.startsWith('reel');
     const ehCitacao = c.tipo === 'citacao-visual';
     const ehCarrossel = c.tipo.startsWith('carrossel');
     const urls = imagensPorDia?.get(c.dia) ?? [];
-    const videoReel = ehReel ? videosReelsPorDia?.get(c.dia) : undefined;
+    const videoReel = videosReelsPorDia?.get(c.dia);
+    // Se houver MP4 para o dia, PUBLICA-SE COMO REEL de video (mesmo que o tipo
+    // seja "carrossel"): ha produtos que sao reels MP4 com musica, nao carrosseis
+    // de imagens. So cai no PNG quando NAO ha video nenhum.
+    const ehReel = c.tipo.startsWith('reel') || !!videoReel;
 
-    // Skip se nao ha media: reel sem MP4, carrossel/citacao sem PNG.
+    // Skip se nao ha media: reel sem MP4, ou carrossel/citacao sem imagem nem video.
     if (ehReel && !videoReel) continue;
-    if ((ehCarrossel || ehCitacao) && urls.length === 0) continue;
+    if ((ehCarrossel || ehCitacao) && urls.length === 0 && !videoReel) continue;
 
     const date = new Date(start);
     date.setDate(date.getDate() + c.dia - 1);
@@ -326,7 +329,8 @@ export function gerarMetricoolCSV(
         : '';
 
       const igPostType = ehReel ? 'REEL' : 'POST';
-      const podePinterest = ehCarrossel || ehCitacao;
+      // Pinterest nao aceita video: so quando e mesmo carrossel/citacao de imagem.
+      const podePinterest = (ehCarrossel || ehCitacao) && !ehReel;
 
       // ─── LINHA 1: Instagram + Facebook (caption longa + todos os pics) ───
       lines.push(buildRow({
