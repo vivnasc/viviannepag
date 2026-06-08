@@ -18,7 +18,9 @@ const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
 export type Fala = { id: string; fala: string; modo?: 'fala' | 'pensa' | 'herdada' };
-export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string };
+// Um painel pode ser: CAPA realista (imageUrl + gancho por cima), slide de
+// ENSINO (texto, sem pessoas), LIÇÃO (fecho) ou banda desenhada (legado).
+export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string; imageUrl?: string | null; gancho?: string; texto?: string };
 
 // ── Avatar (Open Peeps): ilustrado, consistente por personagem, sem cara real.
 // A mesma personagem dá sempre a mesma cara; só a expressão segue o "modo" da
@@ -103,21 +105,38 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
   }, [painel]);
 
   const personagens = (painel.personagens ?? []).filter((f) => f.fala && getPersonagem(f.id)).slice(0, 2);
-  const ehLicao = !!painel.licao && personagens.length === 0;
+  const ehImagem = !!painel.imageUrl;
+  const ehLicao = !!painel.licao && !ehImagem;
+  const ehEnsino = !!painel.texto && !ehImagem && !ehLicao;
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1920', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1920, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: `radial-gradient(ellipse 110% 80% at 50% 24%, ${BG1} 0%, ${BG2} 76%)`, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.12, zIndex: 0, pointerEvents: 'none' }} />
+        {/* CAPA realista: foto a sangrar + véu para legibilidade + gancho por cima */}
+        {ehImagem && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={painel.imageUrl as string} alt="" crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: 1080, height: 1920, objectFit: 'cover', zIndex: 0 }} />
+            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${a(BG2, 'cc')} 0%, transparent 26%, transparent 44%, ${a(BG2, 'd9')} 84%, ${a(BG2, 'f2')} 100%)`, zIndex: 1 }} />
+            {painel.gancho && (
+              <div style={{ position: 'absolute', left: 90, right: 90, bottom: 300, zIndex: 3, textAlign: 'center' }}>
+                <p style={{ fontFamily: FONT_SERIF, fontWeight: 500, fontSize: 88, lineHeight: 1.16, color: '#FBF3E8', margin: 0, textShadow: '0 4px 24px rgba(0,0,0,0.6)' }}>{painel.gancho}</p>
+              </div>
+            )}
+          </>
+        )}
+
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: ehImagem ? 0.06 : 0.12, zIndex: 1, pointerEvents: 'none' }} />
 
         {/* título da série no topo */}
         <div style={{ position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', zIndex: 3 }}>
           <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 24, letterSpacing: '0.45em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>Cá em Casa</span>
         </div>
 
+        {!ehImagem && (
         <div ref={contentRef} style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 90px', zIndex: 3, transform: `scale(${fit})`, transformOrigin: 'center' }}>
-          {/* cenário */}
-          {painel.cenario && !ehLicao && (
+          {/* cenário (só na banda desenhada legado) */}
+          {painel.cenario && !ehLicao && !ehEnsino && (
             <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 38, lineHeight: 1.3, opacity: 0.8, textAlign: 'center', margin: '0 0 40px', maxWidth: 820 }}>{painel.cenario}</p>
           )}
 
@@ -125,6 +144,11 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
               <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
               <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 76, lineHeight: 1.2, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.licao}</p>
+            </div>
+          ) : ehEnsino ? (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
+              <span style={{ width: 80, height: 3, background: ACCENT, opacity: 0.7, borderRadius: 2 }} />
+              <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 64, lineHeight: 1.28, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.texto}</p>
             </div>
           ) : (
             <>
@@ -146,6 +170,7 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
             </>
           )}
         </div>
+        )}
 
         {/* rodapé: pager + assinatura */}
         <div style={{ position: 'absolute', bottom: 120, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>

@@ -6,7 +6,6 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { toPng } from 'html-to-image';
 import { BandaSlide, type Painel } from '@/components/admin/BandaSlide';
 import { Btn, Card } from '@/components/admin/EstudioKit';
-import { FAMILIA } from '@/lib/banda/personagens';
 import { TOPICOS_BANDA } from '@/lib/banda/topicos';
 import { type Mundo } from '@/lib/estudio-conteudo';
 
@@ -15,7 +14,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type BandaSlideT = Painel & { tipo: string; capa?: boolean };
+type BandaSlideT = Painel & { tipo: string; capa?: boolean; imageUrl?: string | null; gancho?: string; texto?: string };
 type Dia = { dia: number; mundo?: Mundo; slides?: BandaSlideT[]; videoUrl?: string; legenda?: string; hashtags?: string[] };
 type Item = { slug: string; title: string; dias: Dia[]; theme: { mundo?: Mundo }; created_at: string };
 
@@ -114,7 +113,9 @@ export default function BandaPage() {
   }, [zipIt]);
 
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'synchim';
-  const paineisDe = (it: Item): Painel[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ cenario: s.cenario, personagens: s.personagens, licao: s.licao }));
+  const paineisDe = (it: Item): Painel[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ cenario: s.cenario, personagens: s.personagens, licao: s.licao, imageUrl: s.imageUrl, gancho: s.gancho, texto: s.texto }));
+  // imagens reais (JPG) deste conto, para descarregar/arrastar diretamente
+  const imagensDe = (it: Item): string[] => (it.dias?.[0]?.slides ?? []).map((s) => s.imageUrl).filter((u): u is string => !!u);
 
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${FONTS}`}>
@@ -123,8 +124,8 @@ export default function BandaPage() {
           <h1 className="text-2xl font-semibold">Cá em Casa · banda desenhada</h1>
           <Link href="/admin/reels" className="text-[0.7rem] opacity-60 hover:opacity-100">Reels →</Link>
         </div>
-        <p className="text-[0.8rem] opacity-65 mb-1">Mini-contos sobre limites no dia a dia, com a família. Ninguém precisa de te ver — as personagens dão a ligação.</p>
-        <p className="text-[0.72rem] opacity-45 mb-6">A família: {FAMILIA.map((f) => f.nome).join(' · ')}</p>
+        <p className="text-[0.8rem] opacity-65 mb-1">Carrosséis sobre limites no dia a dia: capa com imagem real + frase-gancho, depois slides de ensino. Feito para parar o scroll e guardar.</p>
+        <p className="text-[0.72rem] opacity-45 mb-6">A imagem é gerada (Flux); descarrega o JPG da capa e os slides em PNG para publicar.</p>
 
         <Card className="p-4 mb-8">
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">Tema do conto</p>
@@ -180,7 +181,10 @@ export default function BandaPage() {
                     </div>
                   )}
                   <div className="flex flex-wrap items-center gap-2 justify-center">
-                    <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ painéis (PNG)</button>
+                    {imagensDe(it).map((u, i) => (
+                      <a key={i} href={u} target="_blank" rel="noopener" download className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ imagem (JPG)</a>
+                    ))}
+                    <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">⬇ slides (PNG)</button>
                     <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
                     <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
                     <button onClick={() => apagar(it.slug)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
