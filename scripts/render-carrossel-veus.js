@@ -121,9 +121,21 @@ async function main() {
       const pngPath = path.join(diaDir, `s${i}.png`);
       await page.screenshot({ path: pngPath, clip: { x: 0, y: 0, width: 1080, height: H } });
       await page.close();
-      // upload da imagem do slide
+      // O Instagram RECUSA 9:16 (0.562) no carrossel de FEED: so aceita entre
+      // 3:4 e 1.91:1. Por isso, quando o slide e 1080x1920, gera-se uma versao
+      // 4:5 (1080x1350) que encaixa o slide INTEIRO (sem cortar texto nem
+      // imagens) e preenche os lados com a cor de fundo. O MP4 fica 9:16.
+      let uploadPath = pngPath;
+      if (H === 1920) {
+        const feedPath = path.join(diaDir, `s${i}_feed.png`);
+        try {
+          execSync(`ffmpeg -y -i "${pngPath}" -vf "scale=-1:1350,pad=1080:1350:(ow-iw)/2:0:color=0x0F0F1A" "${feedPath}"`, { stdio: 'ignore' });
+          uploadPath = feedPath;
+        } catch (e) { console.log(`[feed 4:5] falhou dia ${d.dia} slide ${i}: ${e.message}`); }
+      }
+      // upload da imagem do slide (versao 4:5 para o carrossel de feed)
       const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-${i}.png`;
-      const { error: pngErr } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(pngPath), { contentType: 'image/png', upsert: true });
+      const { error: pngErr } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(uploadPath), { contentType: 'image/png', upsert: true });
       if (!pngErr) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
       console.log(`[shot] dia ${d.dia} slide ${i}`);
     }
