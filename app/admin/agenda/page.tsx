@@ -52,9 +52,10 @@ export default function AgendaPage() {
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-2xl font-semibold">Agenda · Véu a Véu</h1>
-          <Link href="/admin/calendario" className="text-[0.7rem] opacity-60 hover:opacity-100">Calendário →</Link>
+          <Link href="/admin/plano-semana" className="text-[0.7rem] opacity-60 hover:opacity-100">Ver as frases da semana →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1"><b>1 post por dia</b> (~20h, sempre à mesma hora). Domingo descansas.</p>
+        <p className="text-[0.74rem] opacity-60 mb-1">Queres ver o que vai sair? Abre o <Link href="/admin/plano-semana" className="text-[#C9B6FA] underline">Plano da Semana</Link> e lê as 6 frases reais antes de gerar.</p>
         <p className="text-[0.74rem] opacity-50 mb-6">Geras aqui → descarregas → publicas no Instagram → marcas ✓. Próximos 7 dias a partir de amanhã.</p>
 
         <div className="space-y-3">

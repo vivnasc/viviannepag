@@ -79,7 +79,7 @@ export default function CalendarioPage() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-2xl font-semibold">Calendário · Véu a Véu</h1>
-          <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda da semana →</Link>
+          <Link href="/admin/plano-semana" className="text-[0.7rem] opacity-60 hover:opacity-100">Plano da semana →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1">A jornada do ano, semana a semana. Cada tema acompanha a <b>estação</b> (hemisfério sul). Tu escolhes o que tratar e marcas o que já fizeste.</p>
         <p className="text-[0.74rem] opacity-50 mb-5">Estamos na <b style={{ color: COR_EST[estacaoAtual] }}>semana {atual} · {NOME_EST[estacaoAtual]}</b>. {feitosCount} de 52 semanas tratadas.</p>
