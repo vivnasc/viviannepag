@@ -45,10 +45,17 @@ function semanaDoAno(d: Date): number {
   return Math.max(1, diff + 1);
 }
 
-// A semana atual do PLANO (1..13), avançando sozinha e dando a volta ao fim de 13.
+// ARRANQUE do plano: a 2ª-feira em que a jornada começa = semana 1.
+// (8 de junho de 2026, segunda-feira.) A partir daqui conta-se sozinho.
+const INICIO = Date.UTC(2026, 5, 8);
+
+// A semana atual do PLANO (1..13), contada a partir do arranque e dando a
+// volta ao fim de 13. Antes do arranque, fica na semana 1.
 export function semanaEditorialAtual(hoje = new Date()): SemanaEditorial {
-  const idx = (semanaDoAno(hoje) - 1) % PLANO_EDITORIAL.length;
-  return PLANO_EDITORIAL[idx];
+  const hojeUTC = Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate());
+  const semanasPassadas = Math.floor((hojeUTC - INICIO) / (7 * 864e5));
+  const idx = ((semanasPassadas % PLANO_EDITORIAL.length) + PLANO_EDITORIAL.length) % PLANO_EDITORIAL.length;
+  return PLANO_EDITORIAL[Math.max(0, idx)];
 }
 
 export function getSemanaEditorial(n: number): SemanaEditorial {
