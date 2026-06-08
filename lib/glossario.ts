@@ -34,6 +34,10 @@ export const SEQUENCIA_GLOSSARIO: string[] = [
   // 3 · O sentido e o espiritual (temático)
   'Sentido (logos)',
   'O Self transpessoal',
+  'O transpessoal',
+  'Identidade',
+  'Dualidade',
+  'Impermanência',
   'Transcendência',
   'Sincronicidade',
   'Presença',
