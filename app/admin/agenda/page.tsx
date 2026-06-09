@@ -47,9 +47,12 @@ export default function AgendaPage() {
     await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...p }) }).catch(() => {});
   }
 
-  // próximos 7 dias a partir de AMANHÃ
+  // a SEMANA atual, de segunda a domingo (não "a partir de amanhã")
   const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-  const dias = Array.from({ length: 7 }).map((_, i) => { const d = new Date(hoje); d.setDate(d.getDate() + 1 + i); return d; });
+  const dow = hoje.getDay(); // 0=domingo..6=sábado
+  const segunda = new Date(hoje); segunda.setDate(hoje.getDate() + (dow === 0 ? -6 : 1 - dow));
+  const dias = Array.from({ length: 7 }).map((_, i) => { const d = new Date(segunda); d.setDate(segunda.getDate() + i); return d; });
+  const hojeIso = isoLocal(hoje);
 
   const porAgendar = itens.filter((it) => !it.theme?.agendadoEm); // disponíveis para pôr num dia
   const totalAgendados = itens.filter((it) => it.theme?.agendadoEm).length;
@@ -62,7 +65,7 @@ export default function AgendaPage() {
           <Link href="/admin/conteudos" className="text-[0.7rem] opacity-60 hover:opacity-100">Biblioteca →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1"><b>1 post por dia</b> (~20h). Domingo descansas. Aqui pões os posts que <b>já geraste</b>, baixas e marcas publicado.</p>
-        <p className="text-[0.74rem] opacity-50 mb-6">Fluxo: geras (cá em casa, i am a hero, reels…) → aparece em <Link href="/admin/conteudos" className="text-[#C9B6FA] underline">Conteúdos</Link> → <b>escolhes o dia aqui</b> → publicas e marcas ✓. {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
+        <p className="text-[0.74rem] opacity-50 mb-6">Semana atual, <b>segunda a domingo</b>. Cada dia mostra o formato planeado (vê as frases no <Link href="/admin/plano-semana" className="text-[#C9B6FA] underline">Plano da Semana</Link>) e os posts que lá puseres. {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
 
         <div className="space-y-3">
           {dias.map((d) => {
@@ -74,7 +77,7 @@ export default function AgendaPage() {
             return (
               <div key={iso} className="rounded-xl border border-ocre/12 bg-terra/15 overflow-hidden">
                 <div className="px-4 py-2 flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-[#C9B6FA] border-b border-ocre/10">
-                  {dataLabel}
+                  {dataLabel}{iso === hojeIso && <span className="normal-case tracking-normal text-[0.56rem] px-1.5 py-0.5 rounded-full bg-ambar/20 text-ambar">hoje</span>}
                   {!descanso && <span className="ml-auto normal-case tracking-normal text-[0.62rem] opacity-40">{SUG[wd]}</span>}
                 </div>
 

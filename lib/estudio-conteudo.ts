@@ -44,12 +44,17 @@ export type ConteudoDia = {
   musicaSugerida?: string;
 };
 
-export const PALETAS: Record<Mundo, { bg: string; bg2: string; texto: string; destaque: string; nome: string }> = {
+// Indexável por string: além dos 5 mundos, há paletas extra (carvao, creme) só
+// para séries de reels, sem entrarem no tipo Mundo (export/hashtags ficam iguais).
+export const PALETAS: Record<string, { bg: string; bg2: string; texto: string; destaque: string; nome: string }> = {
   freeme: { bg: '#8C4A36', bg2: '#2A1C12', texto: '#F2E8DC', destaque: '#EBAE4A', nome: 'FreeMe' },
   infonte: { bg: '#B8843D', bg2: '#2A1C12', texto: '#F2E8DC', destaque: '#EBAE4A', nome: 'Infonte' },
   synchim: { bg: '#5A1A2A', bg2: '#2A1C12', texto: '#F2E8DC', destaque: '#E08496', nome: 'SyncHim' },
   escola: { bg: '#1A1A2E', bg2: '#0F0F1A', texto: '#F2E8DC', destaque: '#C9B6FA', nome: 'Escola dos Véus' },
   autora: { bg: '#3A2818', bg2: '#2A1C12', texto: '#F2E8DC', destaque: '#EBAE4A', nome: 'Vivianne' },
+  // carvão (escuro, neutro — sem dourado nem roxo) e creme (claro, minimalista)
+  carvao: { bg: '#2A2825', bg2: '#141312', texto: '#EDE8DE', destaque: '#B9B2A6', nome: 'Carvão' },
+  creme: { bg: '#F3ECE0', bg2: '#E7DCC9', texto: '#2C2622', destaque: '#6E5A44', nome: 'Creme' },
 };
 
 export const TIPO_LABELS: Record<TipoConteudo, { label: string; emoji: string; cor: string }> = {

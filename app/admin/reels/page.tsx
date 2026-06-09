@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; motivo?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
+type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; motivo?: string; pal?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
 type Dia = { dia: number; mundo?: Mundo; slides?: ReelSlideT[]; videoUrl?: string; roteiro?: string[]; legenda?: string; hashtags?: string[]; faixa?: { titulo?: string } };
 type Item = { slug: string; title: string; dias: Dia[]; theme: { formato?: string; subtipo?: string; curso?: string; mundo?: Mundo; video?: boolean }; created_at: string };
 
@@ -40,6 +41,20 @@ export default function ReelsPage() {
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [capaBusy, setCapaBusy] = useState(false);
+  const [capaUrl, setCapaUrl] = useState<string | null>(null);
+
+  async function gerarCapaSerie() {
+    setCapaBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/reels/capa-serie', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie: 'ninguem' }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setCapaUrl(j.url ?? null);
+      setMsg('Capa-lanterna gerada e fixada. As próximas "O que ninguém te explica" usam-na. Não gostas? gera outra.');
+    } catch (e) { setErro(String(e)); }
+    finally { setCapaBusy(false); }
+  }
   // modo "frase exata" (sem IA) — cinético
   const [manFrase, setManFrase] = useState('');
   const [manDest, setManDest] = useState('');
@@ -205,7 +220,7 @@ export default function ReelsPage() {
   }, [capKin]);
 
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
-  const framesDe = (it: Item): ReelFrame[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo }));
+  const framesDe = (it: Item): ReelFrame[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, pal: s.pal, imageUrl: s.imageUrl }));
   const kinDe = (it: Item) => it.dias?.[0]?.slides?.[0];
   const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico';
 
@@ -227,6 +242,18 @@ export default function ReelsPage() {
             ))}
           </div>
           <p className="text-[0.72rem] opacity-55 mb-4">{fmt.descricao} {!fmt.video && <span className="text-ambar">· dá-te o guião; o vídeo gravas tu</span>}</p>
+
+          {/* capa-assinatura fixa da série (lanterna), gerada por Flux */}
+          {formato === 'ninguem' && (
+            <div className="mb-4 rounded-xl border border-ocre/20 bg-black/20 p-3.5 flex items-center gap-3 flex-wrap">
+              {capaUrl ? <img src={capaUrl} alt="" className="w-14 h-20 object-cover rounded-md border border-white/10" /> : <div className="w-14 h-20 rounded-md border border-white/10 grid place-items-center text-lg">🏮</div>}
+              <div className="flex-1 min-w-0">
+                <p className="text-[0.72rem] mb-0.5">Capa-assinatura da série (lanterna)</p>
+                <p className="text-[0.64rem] opacity-55 leading-snug">Gera UMA vez; fica fixa em todas as capas desta série. Carvão + lanterna; ensino em creme.</p>
+              </div>
+              <button onClick={gerarCapaSerie} disabled={capaBusy} className="text-[0.68rem] px-3 py-1.5 rounded-full border border-ambar/45 text-ambar hover:bg-ambar/10 disabled:opacity-40">{capaBusy ? 'a gerar… (~30s)' : '🏮 gerar capa-lanterna'}</button>
+            </div>
+          )}
 
           {/* tema + curso */}
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">Tema</p>

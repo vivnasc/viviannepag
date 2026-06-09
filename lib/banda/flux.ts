@@ -13,6 +13,7 @@ const SAFETY = `people portrayed with warmth and dignity, NEVER associating any 
 export const TEMAS: Record<string, string> = {
   caemcasa: 'intimate everyday domestic scene about family, belonging and tenderness, warm caring mood, bordeaux / terracotta / rose warm palette (deep wine)',
   heroi: 'evocative scene about lineage, ancestry and healing across generations, hopeful and luminous, soft light breaking through, dignified and quietly epic, warm golden amber and honey palette',
+  lanterna: 'a single old lantern glowing softly in deep charcoal darkness, its gentle light revealing the surrounding shadow, intimate, mysterious and contemplative, mostly dark with generous empty space, fine-art; NO people',
 };
 export const TEMA_DEFAULT = 'caemcasa';
 
