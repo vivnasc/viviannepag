@@ -106,6 +106,8 @@ DEVOLVE APENAS JSON valido:
         nota: (f.nota ?? '').trim(),
         titulo: (f.titulo ?? '').trim(),
         pontos: Array.isArray(f.pontos) ? f.pontos.map((s) => String(s).trim()).filter(Boolean) : [],
+        // selo de capa fixo por série (reconhecimento): "O que ninguém te explica" = lanterna
+        motivo: i === 0 && formato.id === 'ninguem' ? 'lanterna' : '',
         capa: i === 0,
       }));
 

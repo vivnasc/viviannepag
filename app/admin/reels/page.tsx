@@ -17,7 +17,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
+type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; motivo?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
 type Dia = { dia: number; mundo?: Mundo; slides?: ReelSlideT[]; videoUrl?: string; roteiro?: string[]; legenda?: string; hashtags?: string[]; faixa?: { titulo?: string } };
 type Item = { slug: string; title: string; dias: Dia[]; theme: { formato?: string; subtipo?: string; curso?: string; mundo?: Mundo; video?: boolean }; created_at: string };
 
@@ -205,7 +205,7 @@ export default function ReelsPage() {
   }, [capKin]);
 
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
-  const framesDe = (it: Item): ReelFrame[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos }));
+  const framesDe = (it: Item): ReelFrame[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo }));
   const kinDe = (it: Item) => it.dias?.[0]?.slides?.[0];
   const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico';
 
