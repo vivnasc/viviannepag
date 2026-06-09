@@ -42,7 +42,11 @@ export default function ReelsPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [capaBusy, setCapaBusy] = useState(false);
-  const [capaUrl, setCapaUrl] = useState<string | null>(null);
+  // capas-assinatura por série (resolvidas à hora de mostrar, valem p/ todos os posts)
+  const [capasSerie, setCapasSerie] = useState<Record<string, string>>({});
+  const capaUrl = capasSerie[formato] ?? null;
+
+  useEffect(() => { fetch('/api/admin/reels/capa-serie').then((r) => r.ok ? r.json() : { capas: {} }).then((j) => setCapasSerie(j.capas ?? {})).catch(() => {}); }, []);
 
   async function gerarCapaSerie() {
     setCapaBusy(true); setErro(null); setMsg(null);
@@ -50,8 +54,8 @@ export default function ReelsPage() {
       const r = await fetch('/api/admin/reels/capa-serie', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie: formato }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
-      setCapaUrl(j.url ?? null);
-      setMsg('Capa-lanterna gerada e fixada. As próximas "O que ninguém te explica" usam-na. Não gostas? gera outra.');
+      setCapasSerie(j.capas ?? {});
+      setMsg('Capa-assinatura gerada e fixada. Vale para TODOS os posts desta série (antigos e novos). Não gostas? gera outra.');
     } catch (e) { setErro(String(e)); }
     finally { setCapaBusy(false); }
   }
@@ -220,7 +224,10 @@ export default function ReelsPage() {
   }, [capKin]);
 
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
-  const framesDe = (it: Item): ReelFrame[] => (it.dias?.[0]?.slides ?? []).map((s) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo, pal: s.pal, imageUrl: s.imageUrl }));
+  const framesDe = (it: Item): ReelFrame[] => {
+    const capaSerie = capasSerie[it.theme?.subtipo ?? '']; // capa-assinatura da série (vale p/ todos)
+    return (it.dias?.[0]?.slides ?? []).map((s, i) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo, pal: s.pal, imageUrl: (i === 0 ? (s.imageUrl ?? capaSerie) : s.imageUrl) }));
+  };
   const kinDe = (it: Item) => it.dias?.[0]?.slides?.[0];
   const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico';
 

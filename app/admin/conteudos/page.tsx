@@ -34,7 +34,7 @@ const FMT: Record<string, { emoji: string; label: string; href: string; cor: str
 // chave da série: nos reels é o subtipo (o nome real); nos outros, o formato
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
 const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#', cor: '#9aa39a' };
-const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
+const capaDe = (it: Item, capas: Record<string, string> = {}) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? capas[it.theme?.subtipo ?? ''] ?? null;
 const estadoDe = (it: Item): 'gerado' | 'agendado' | 'publicado' => it.theme?.publicado ? 'publicado' : it.theme?.agendadoEm ? 'agendado' : 'gerado';
 const COR_ESTADO = { gerado: '#9aa39a', agendado: '#EBAE4A', publicado: '#7E9B8E' } as const;
 
@@ -49,6 +49,8 @@ export default function ConteudosPage() {
     if (r.ok) setItens((await r.json()).contos ?? []);
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
+  const [capasSerie, setCapasSerie] = useState<Record<string, string>>({});
+  useEffect(() => { fetch('/api/admin/reels/capa-serie').then((r) => r.ok ? r.json() : { capas: {} }).then((j) => setCapasSerie(j.capas ?? {})).catch(() => {}); }, []);
 
   async function apagar(slug: string) {
     if (!confirm('Apagar este conteúdo? Não dá para desfazer.')) return;
@@ -93,7 +95,7 @@ export default function ConteudosPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {filtrados.map((it) => {
             const m = fmtDe(it);
-            const capa = capaDe(it);
+            const capa = capaDe(it, capasSerie);
             const estado = estadoDe(it);
             const d = it.dias?.[0];
             return (
