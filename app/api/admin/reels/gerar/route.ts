@@ -61,7 +61,7 @@ ${formato.instrucao}
 DEVOLVE APENAS JSON valido:
 {
   "titulo": "titulo interno curto (2-5 palavras)",
-  "frames": [ { "kicker": "etiqueta curta ou vazio", "texto": "frase do frame", "nota": "linha pequena opcional (ex.: comenta em baixo) ou vazio" } ],
+  "frames": [ { "kicker": "etiqueta curta ou vazio", "texto": "frase do frame", "nota": "linha pequena opcional ou vazio", "titulo": "(opcional) título curto do frame quando ele tem pontos", "pontos": ["(opcional) bullets curtos, só nos frames de explicação que pedem hierarquia"] } ],
   "destaque": ["1 a 3 palavras-chave da frase para realcar (so no formato Frase com motion)"],
   "fundoPrompt": "prompt MidJourney para imagem transcendente de fundo, sem pessoas, sem texto, --ar 9:16 (so no formato Frase com motion)",
   "legenda": "legenda para Instagram: 1.a linha gancho, depois 2-4 linhas que aprofundam em palavras simples, fecha com convite a refletir + 'guarda este reel' ou 'partilha com quem precisa'. SEM vender. Portugues europeu com acentos.",
@@ -81,12 +81,12 @@ DEVOLVE APENAS JSON valido:
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  type Frame = { kicker?: string; texto?: string; nota?: string };
+  type Frame = { kicker?: string; texto?: string; nota?: string; titulo?: string; pontos?: string[] };
   let p: { titulo?: string; frames?: Frame[]; roteiro?: string[]; destaque?: string[]; fundoPrompt?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p); // a Vivianne nao usa travessoes
 
-  const framesIn = Array.isArray(p.frames) ? p.frames.filter((f) => f && f.texto) : [];
+  const framesIn = Array.isArray(p.frames) ? p.frames.filter((f) => f && (f.texto || (Array.isArray(f.pontos) && f.pontos.length))) : [];
   if (!framesIn.length) return NextResponse.json({ erro: 'sem-frames', amostra: texto.slice(0, 300) }, { status: 502 });
 
   const ehKinetico = formato.id === 'kinetico';
@@ -104,6 +104,8 @@ DEVOLVE APENAS JSON valido:
         kicker: (f.kicker ?? '').trim() || (i === 0 ? formato.nome : ''),
         texto: (f.texto ?? '').trim(),
         nota: (f.nota ?? '').trim(),
+        titulo: (f.titulo ?? '').trim(),
+        pontos: Array.isArray(f.pontos) ? f.pontos.map((s) => String(s).trim()).filter(Boolean) : [],
         capa: i === 0,
       }));
 
