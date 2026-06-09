@@ -52,8 +52,11 @@ const INICIO = Date.UTC(2026, 5, 8);
 
 // A semana atual do PLANO (1..13), contada a partir do arranque e dando a
 // volta ao fim de 13. Antes do arranque, fica na semana 1.
+// IMPORTANTE (fuso): usa os componentes LOCAIS da data (getFullYear/Month/Date),
+// nunca os UTC — senão em PT (UTC+1) a meia-noite de 2.ª recua um dia e o cálculo
+// salta uma semana inteira (ex.: mostrava "individuação" em vez de "pertencer").
 export function semanaEditorialAtual(hoje = new Date()): SemanaEditorial {
-  const hojeUTC = Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate());
+  const hojeUTC = Date.UTC(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
   const semanasPassadas = Math.floor((hojeUTC - INICIO) / (7 * 864e5));
   const idx = ((semanasPassadas % PLANO_EDITORIAL.length) + PLANO_EDITORIAL.length) % PLANO_EDITORIAL.length;
   return PLANO_EDITORIAL[Math.max(0, idx)];
