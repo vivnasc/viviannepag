@@ -36,16 +36,6 @@ export const PLANO_EDITORIAL: SemanaEditorial[] = [
   { semana: 13, parte: 'IV', curso: 'transpessoal', tema: 'Individuação', mote: 'Tornar-te quem sempre foste.', heroi: 'tornares-te quem és é o maior presente para quem vem depois' },
 ];
 
-// número de semana do ano (ISO simplificado, 2ª-feira começa a semana)
-function semanaDoAno(d: Date): number {
-  const ano = d.getUTCFullYear();
-  const j1 = new Date(Date.UTC(ano, 0, 1));
-  const dow = j1.getUTCDay() || 7;
-  if (dow !== 1) j1.setUTCDate(j1.getUTCDate() + (8 - dow));
-  const diff = Math.floor((Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - j1.getTime()) / (7 * 864e5));
-  return Math.max(1, diff + 1);
-}
-
 // ARRANQUE do plano: a 2ª-feira em que a jornada começa = semana 1.
 // (8 de junho de 2026, segunda-feira.) A partir daqui conta-se sozinho.
 const INICIO = Date.UTC(2026, 5, 8);
