@@ -54,7 +54,7 @@ export default function CalendarioVeuPage() {
                   const cor = COR_CURSO[s.curso] ?? '#C9B6FA';
                   const ehAtual = s.semana === atual;
                   return (
-                    <Link key={s.semana} href="/admin/plano-semana" className={`block rounded-xl border overflow-hidden no-underline ${ehAtual ? 'border-ambar/60' : 'border-ocre/12'}`} style={{ background: `linear-gradient(135deg, ${cor}12, transparent 60%)` }}>
+                    <div key={s.semana} className={`rounded-xl border overflow-hidden ${ehAtual ? 'border-ambar/60' : 'border-ocre/12'}`} style={{ background: `linear-gradient(135deg, ${cor}12, transparent 60%)` }}>
                       <div className="p-4">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-[0.58rem] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full" style={{ background: cor + '22', color: cor }}>sem. {s.semana}</span>
@@ -62,9 +62,13 @@ export default function CalendarioVeuPage() {
                           {ehAtual && <span className="ml-auto text-[0.58rem] px-2 py-0.5 rounded-full bg-ambar/20 text-ambar">esta semana</span>}
                         </div>
                         <p className="font-serif text-lg leading-tight" style={{ color: cor }}>“{s.mote}”</p>
-                        <p className="text-[0.76rem] opacity-65">{s.tema}</p>
+                        <p className="text-[0.76rem] opacity-65 mb-2">{s.tema}</p>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <Link href="/admin/plano-semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">abrir no Plano →</Link>
+                          <Link href={`/admin/heroi?tema=${encodeURIComponent(s.heroi)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline" title={s.heroi}>🌅 I am a Hero</Link>
+                        </div>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>

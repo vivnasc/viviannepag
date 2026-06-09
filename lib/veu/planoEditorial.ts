@@ -10,6 +10,7 @@ export type SemanaEditorial = {
   curso: string;         // id da matéria (cursos.ts)
   tema: string;          // conceito da matéria (sem repetir)
   mote: string;          // a frase-âncora da semana (o coração do tema)
+  heroi: string;         // o gancho "I am a Hero" da semana (curar liberta as gerações)
 };
 
 export const PARTES: { id: string; nome: string; descricao: string }[] = [
@@ -20,19 +21,19 @@ export const PARTES: { id: string; nome: string; descricao: string }[] = [
 ];
 
 export const PLANO_EDITORIAL: SemanaEditorial[] = [
-  { semana: 1, parte: 'I', curso: 'constelacao', tema: 'O direito de pertencer', mote: 'Pertencer é a primeira fome da alma.' },
-  { semana: 2, parte: 'I', curso: 'constelacao', tema: 'Dar e receber em equilíbrio', mote: 'O amor vive do que circula entre dois.' },
-  { semana: 3, parte: 'I', curso: 'desenvolvimento', tema: 'Limites saudáveis', mote: 'Um limite é onde começa o respeito.' },
-  { semana: 4, parte: 'II', curso: 'transpessoal', tema: 'Persona e máscara social', mote: 'Quem és por baixo do que mostras?' },
-  { semana: 5, parte: 'II', curso: 'transpessoal', tema: 'Sombra e integração', mote: 'O que recusas em ti, governa-te.' },
-  { semana: 6, parte: 'III', curso: 'constelacao', tema: 'Lealdades invisíveis', mote: 'Há amores que te fazem repetir destinos.' },
-  { semana: 7, parte: 'III', curso: 'constelacao', tema: 'Parentificação: ser mãe da mãe', mote: 'A criança que cresceu cedo demais.' },
-  { semana: 8, parte: 'III', curso: 'desenvolvimento', tema: 'Burnout do cuidador', mote: 'O teu cansaço é um pedido de limite.' },
-  { semana: 9, parte: 'IV', curso: 'espiritualidade', tema: 'Sentido e propósito (Frankl)', mote: 'Um porquê sustenta quase todo o como.' },
-  { semana: 10, parte: 'IV', curso: 'espiritualidade', tema: 'A noite escura da alma', mote: 'No escuro também se cresce.' },
-  { semana: 11, parte: 'IV', curso: 'constelacao', tema: 'O que pertence a cada um voltar a cada um', mote: 'Curar é devolver o que não é teu.' },
-  { semana: 12, parte: 'IV', curso: 'espiritualidade', tema: 'Perdão: libertar-se, não esquecer', mote: 'Perdoar é soltar o peso, não negar a dor.' },
-  { semana: 13, parte: 'IV', curso: 'transpessoal', tema: 'Individuação', mote: 'Tornar-te quem sempre foste.' },
+  { semana: 1, parte: 'I', curso: 'constelacao', tema: 'O direito de pertencer', mote: 'Pertencer é a primeira fome da alma.', heroi: 'pertencer sem repetir: ficar sendo quem és' },
+  { semana: 2, parte: 'I', curso: 'constelacao', tema: 'Dar e receber em equilíbrio', mote: 'O amor vive do que circula entre dois.', heroi: 'quebras o ciclo quando aprendes a receber, não só a dar' },
+  { semana: 3, parte: 'I', curso: 'desenvolvimento', tema: 'Limites saudáveis', mote: 'Um limite é onde começa o respeito.', heroi: 'pôr um limite é parar a dor antes de ela passar à frente' },
+  { semana: 4, parte: 'II', curso: 'transpessoal', tema: 'Persona e máscara social', mote: 'Quem és por baixo do que mostras?', heroi: 'tirar a máscara liberta quem vem depois de a usar' },
+  { semana: 5, parte: 'II', curso: 'transpessoal', tema: 'Sombra e integração', mote: 'O que recusas em ti, governa-te.', heroi: 'o que integras em ti, deixas de passar aos teus filhos' },
+  { semana: 6, parte: 'III', curso: 'constelacao', tema: 'Lealdades invisíveis', mote: 'Há amores que te fazem repetir destinos.', heroi: 'não tens de repetir o destino de ninguém para o amar' },
+  { semana: 7, parte: 'III', curso: 'constelacao', tema: 'Parentificação: ser mãe da mãe', mote: 'A criança que cresceu cedo demais.', heroi: 'não nasceste para ser mãe da tua mãe, podes pousar isso' },
+  { semana: 8, parte: 'III', curso: 'desenvolvimento', tema: 'Burnout do cuidador', mote: 'O teu cansaço é um pedido de limite.', heroi: 'descansar também é cortar uma herança de exaustão' },
+  { semana: 9, parte: 'IV', curso: 'espiritualidade', tema: 'Sentido e propósito (Frankl)', mote: 'Um porquê sustenta quase todo o como.', heroi: 'a tua dor, transformada, vira o sentido de quem vem a seguir' },
+  { semana: 10, parte: 'IV', curso: 'espiritualidade', tema: 'A noite escura da alma', mote: 'No escuro também se cresce.', heroi: 'atravessas o escuro para que eles não tenham de o herdar' },
+  { semana: 11, parte: 'IV', curso: 'constelacao', tema: 'O que pertence a cada um voltar a cada um', mote: 'Curar é devolver o que não é teu.', heroi: 'devolves o que não é teu, e a linhagem inteira respira' },
+  { semana: 12, parte: 'IV', curso: 'espiritualidade', tema: 'Perdão: libertar-se, não esquecer', mote: 'Perdoar é soltar o peso, não negar a dor.', heroi: 'perdoar corta a corrente, sem fingir que não doeu' },
+  { semana: 13, parte: 'IV', curso: 'transpessoal', tema: 'Individuação', mote: 'Tornar-te quem sempre foste.', heroi: 'tornares-te quem és é o maior presente para quem vem depois' },
 ];
 
 // número de semana do ano (ISO simplificado, 2ª-feira começa a semana)
