@@ -20,7 +20,10 @@ const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
 type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
 type Dia = { dia: number; mundo?: Mundo; slides?: ReelSlideT[]; videoUrl?: string; roteiro?: string[]; legenda?: string; hashtags?: string[]; faixa?: { titulo?: string } };
-type Item = { slug: string; title: string; dias: Dia[]; theme: { formato?: string; subtipo?: string; curso?: string; mundo?: Mundo; video?: boolean }; created_at: string };
+type Item = { slug: string; title: string; brief?: string; dias: Dia[]; theme: { formato?: string; subtipo?: string; curso?: string; mundo?: Mundo; video?: boolean }; created_at: string };
+
+// normaliza um tema para comparar (minúsculas, sem acentos/pontuação) — saber se já foi gerado
+const normTema = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
 // pré-visualização animada do cinético (loop suave)
 function KineticPreview({ texto, destaque, imageUrl, mundo, variante }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; variante?: string }) {
@@ -318,19 +321,25 @@ export default function ReelsPage() {
             </div>
           )}
 
-          {/* pool pronta de temas — escolhe e gera */}
+          {/* pool pronta de temas — escolhe e gera. Os JÁ gerados ficam marcados (✓) e
+              bloqueados, para não repetir; se apagares o post na biblioteca, volta a abrir. */}
           {(() => {
             const pool = Array.from(new Set([...topicosReels(formato), ...(sugMap[sugKey] ?? [])]));
+            const gerados = new Set(itens.filter((it) => (it.theme?.subtipo ?? '') === formato).map((it) => normTema(it.brief ?? it.title ?? '')));
+            const nFeitos = pool.filter((s) => gerados.has(normTema(s))).length;
             return (
               <>
                 <div className="flex items-center gap-2 mt-5 mb-2">
-                  <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Escolhe um tema (gera logo) · {pool.length} prontos</p>
+                  <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50">Escolhe um tema (gera logo) · {pool.length} prontos · {nFeitos} já gerados</p>
                   <button onClick={pedirSugestoes} disabled={sugLoading} className="text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">{sugLoading ? '…' : '↻ mais com IA'}</button>
                 </div>
                 <div className="flex flex-wrap gap-2 max-h-64 overflow-y-auto pr-1">
-                  {pool.map((sug) => (
-                    <button key={sug} onClick={() => gerar(sug)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40">{sug}</button>
-                  ))}
+                  {pool.map((sug) => {
+                    const feito = gerados.has(normTema(sug));
+                    return (
+                      <button key={sug} onClick={() => gerar(sug)} disabled={gerando || feito} title={feito ? 'Já geraste este tema. Apaga o post na biblioteca para voltar a abrir.' : undefined} className={`text-[0.68rem] px-2.5 py-1 rounded-full border disabled:opacity-100 ${feito ? 'border-salvia/40 bg-salvia/10 text-salvia/70 line-through cursor-not-allowed' : 'border-ocre/25 text-creme-2/75 hover:border-ambar hover:text-ambar disabled:opacity-40'}`}>{feito ? '✓ ' : ''}{sug}</button>
+                    );
+                  })}
                 </div>
               </>
             );
