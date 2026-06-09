@@ -6,6 +6,7 @@ import { getFormato } from '@/lib/reels/formatos';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { garantirCapaSerie } from '@/lib/reels/capaSerie';
+import { fundoAleatorio } from '@/lib/reels/fundos';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -13,24 +14,6 @@ export const maxDuration = 300;
 // Séries de reel com CAPA-ASSINATURA (imagem Flux fixa + selo, carvão na capa,
 // creme no conteúdo) para reconhecimento imediato no feed.
 const SERIE_ASSINATURA = ['ninguem', 'sinais'];
-
-// Pool de fundos VARIADOS para a "Frase com motion" (manual, sem prompt próprio).
-// Nunca repetir o mesmo (a Vivianne pediu para variar; chega de "raízes douradas").
-const FUNDOS_VARIADOS = [
-  'soft morning light through sheer curtains, dust motes floating, calm interior, fine art, no people, no text, --ar 9:16 --style raw',
-  'still water surface with gentle ripples reflecting a pale sky, serene, fine art, no people, no text, --ar 9:16 --style raw',
-  'a single smooth stone with soft shadow on sand, minimal, warm neutral tones, fine art, no people, no text, --ar 9:16 --style raw',
-  'soft mist over quiet hills at dawn, muted tones, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
-  'flowing translucent fabric in soft light, gentle folds, muted palette, fine art, no people, no text, --ar 9:16 --style raw',
-  'a calm horizon over the sea at blue hour, vast and serene, fine art, no people, no text, --ar 9:16 --style raw',
-  'fine sand with delicate wind ripples, soft warm light, minimal, fine art, no people, no text, --ar 9:16 --style raw',
-  'a few translucent leaves backlit by soft sun, delicate veins, muted green, fine art, no people, no text, --ar 9:16 --style raw',
-  'a gentle candle flame in the dark, soft warm glow, intimate, fine art, no people, no text, --ar 9:16 --style raw',
-  'pale petals drifting on still water, soft dreamy tones, fine art, no people, no text, --ar 9:16 --style raw',
-  'wisps of soft smoke curling in a beam of light, deep indigo, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
-  'a clearing in a misty forest with soft light, calm and sacred, fine art, no people, no text, --ar 9:16 --style raw',
-];
-const fundoAleatorio = () => FUNDOS_VARIADOS[Math.floor(Math.random() * FUNDOS_VARIADOS.length)];
 
 // POST { tema, formato, curso? } — gera UM reel DIDATICO (educativo, sem CTA
 // nem produtos). Devolve frames (texto no ecra) + legenda + hashtags; nos

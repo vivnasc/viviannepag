@@ -125,7 +125,10 @@ export default function AgendaPage() {
         const wd = new Date(picker + 'T12:00:00').getDay();
         const fmtDia = DIA_FORMATO[wd];
         const nomeDia = fmtDia ? (FMT[fmtDia]?.label ?? fmtDia) : '';
-        const lista = (verTodos || !fmtDia) ? porAgendar : porAgendar.filter((it) => tipoChave(it) === fmtDia);
+        // mostra posts não-publicados que ainda não estão NESTE dia (inclui os
+        // agendados noutro dia, para os poderes mover) — nada "desaparece".
+        const disponiveis = itens.filter((it) => !it.theme?.publicado && it.theme?.agendadoEm !== picker);
+        const lista = (verTodos || !fmtDia) ? disponiveis : disponiveis.filter((it) => tipoChave(it) === fmtDia);
         return (
         <div onClick={() => { setPicker(null); setVerTodos(false); }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
           <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-5 ${cormorant.variable} ${inter.variable}`}>
@@ -134,14 +137,16 @@ export default function AgendaPage() {
               {fmtDia && <button onClick={() => setVerTodos((v) => !v)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar">{verTodos ? `só ${nomeDia}` : 'ver todos'}</button>}
             </div>
             <div className="space-y-2">
-              {lista.length === 0 && <p className="text-[0.78rem] opacity-55 py-6 text-center">{porAgendar.length === 0 ? 'Não há posts por agendar. Gera nos formatos e volta aqui.' : `Nenhum "${nomeDia}" por agendar. Carrega "ver todos" ou gera um.`}</p>}
+              {lista.length === 0 && <p className="text-[0.78rem] opacity-55 py-6 text-center">{disponiveis.length === 0 ? 'Não há posts para agendar. Gera nos formatos e volta aqui.' : `Nenhum "${nomeDia}" disponível. Carrega "ver todos" ou gera um.`}</p>}
               {lista.map((it) => {
                 const m = fmtDe(it); const capa = capaDe(it);
+                const noutroDia = it.theme?.agendadoEm; // já agendado noutro dia (o clique move)
                 return (
                   <button key={it.slug} onClick={() => { patch(it.slug, { agendadoEm: picker }); setPicker(null); setVerTodos(false); }} className="w-full flex items-center gap-3 rounded-lg border border-white/8 hover:border-ambar/50 bg-black/20 p-2 text-left">
                     <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                     <span className="text-[0.56rem] uppercase tracking-[0.12em] opacity-60 shrink-0">{m.emoji} {m.label}</span>
                     <span className="flex-1 min-w-0 truncate text-[0.84rem]">{it.title}</span>
+                    {noutroDia && <span className="shrink-0 text-[0.54rem] px-1.5 py-0.5 rounded-full border border-ambar/30 text-ambar/80">agendado {noutroDia.split('-').reverse().slice(0, 2).join('/')} · mover</span>}
                   </button>
                 );
               })}
