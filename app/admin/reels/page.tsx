@@ -127,8 +127,7 @@ export default function ReelsPage() {
       const r = await fetch('/api/admin/reels/novo-fundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
-      try { await navigator.clipboard?.writeText(j.prompt ?? ''); } catch {}
-      setMsg('Novo prompt de fundo copiado. Gera no MJ e usa "trocar fundo" para pôr a imagem nova.');
+      setMsg('Fundo novo gerado automaticamente.');
       await carregar();
     } catch (e) { setErro(String(e)); }
   }
