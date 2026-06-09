@@ -46,6 +46,7 @@ export default function HeroiPage() {
     if (r.ok) setItens((await r.json()).contos ?? []);
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
+  useEffect(() => { const t = new URLSearchParams(window.location.search).get('tema'); if (t) setTema(t); }, []);
 
   async function gerar(temaArg?: string) {
     const t = (temaArg ?? tema).trim();
