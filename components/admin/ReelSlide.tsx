@@ -20,7 +20,8 @@ export type ReelFrame = {
   nota?: string;     // linha pequena por baixo (ex.: "comenta em baixo")
   titulo?: string;   // título do frame (mini-aula): lê maior, em cima dos pontos
   pontos?: string[]; // bullets (hierarquia + retenção em frames com muito texto)
-  motivo?: string;   // motivo de capa fixo da série (ex.: 'lanterna') p/ reconhecimento
+  motivo?: string;   // (legado) 'lanterna' = capa de "O que ninguém te explica"
+  selo?: string;     // nome da série no selo da capa (ex.: "Sinais de que…")
   imageUrl?: string | null; // imagem de fundo do frame (ex.: capa-assinatura gerada)
   pal?: string;      // paleta por frame (ex.: 'carvao' na capa, 'creme' no ensino)
 };
@@ -50,7 +51,9 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
   }, [frame]);
 
   const base = capa ? 104 : 88;
-  const ehLanterna = capa && frame.motivo === 'lanterna'; // selo fixo da série "O que ninguém te explica"
+  // selo de capa por série (genérico). 'motivo:lanterna' = legado da 1.ª série.
+  const seloTxt = frame.selo ?? (frame.motivo === 'lanterna' ? 'O que ninguém te explica' : undefined);
+  const ehSelo = capa && !!seloTxt;
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1920', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
@@ -61,15 +64,15 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         </>)}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.13, zIndex: 0, pointerEvents: 'none' }} />
 
-        {/* CAPA da série "O que ninguém te explica": imagem (lanterna) + selo neutro.
+        {/* CAPA-assinatura da série: imagem (Flux) + selo neutro com o nome.
             Sem imagem ainda? mostra um brilho suave de marcador (sem desenho infantil). */}
-        {ehLanterna && (
+        {ehSelo && (
           <>
             {!img && <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'radial-gradient(circle at 50% 24%, rgba(255,247,224,0.30) 0%, rgba(255,247,224,0.08) 24%, transparent 46%)' }} />}
             <div style={{ position: 'absolute', top: 150, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 28px', borderRadius: 999, border: `1px solid ${a(TXT, '4d')}`, background: a(BG2, '40') }}>
                 <span style={{ width: 20, height: 1, background: TXT, opacity: 0.5 }} />
-                <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.34em', textTransform: 'uppercase', color: TXT }}>O que ninguém te explica</span>
+                <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.34em', textTransform: 'uppercase', color: TXT }}>{seloTxt}</span>
                 <span style={{ width: 20, height: 1, background: TXT, opacity: 0.5 }} />
               </div>
             </div>
@@ -83,8 +86,8 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
           return <span key={i} style={st} />;
         })}
 
-        {/* topo: kicker (escondido na capa-lanterna, que já traz o selo) */}
-        {!ehLanterna && (
+        {/* topo: kicker (escondido na capa-assinatura, que já traz o selo) */}
+        {!ehSelo && (
           <div style={{ position: 'absolute', top: 150, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, zIndex: 3 }}>
             {frame.kicker && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 26, letterSpacing: '0.42em', textTransform: 'uppercase', color: ACCENT, opacity: 0.92, textAlign: 'center', padding: '0 90px' }}>{frame.kicker}</span>}
             <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
