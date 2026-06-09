@@ -118,12 +118,17 @@ export default function AgendaPage() {
         const { toPng } = await import('html-to-image');
         const JSZip = (await import('jszip')).default;
         const zip = new JSZip();
+        // dados FRESCOS: apanha os MP4s já renderizados (a página em memória pode estar desatualizada)
+        const fresh: Record<string, Item> = {};
+        try { const fr = await fetch('/api/admin/conteudos/list', { cache: 'no-store' }); if (fr.ok) for (const x of ((await fr.json()).contos ?? []) as Item[]) fresh[x.slug] = x; } catch { /* usa o que há em memória */ }
+        const videoUrlDe = (it: Item) => fresh[it.slug]?.dias?.[0]?.videoUrl ?? it.dias?.[0]?.videoUrl;
         await (document.fonts?.ready ?? Promise.resolve());
         await new Promise((r) => setTimeout(r, 600)); // deixa as imagens de fundo carregar
         const imgs = Array.from(hostRef.current?.querySelectorAll('img') ?? []);
         await Promise.all(imgs.map((im) => (im.complete && im.naturalWidth) ? Promise.resolve() : new Promise((res) => { im.onload = res; im.onerror = res; })));
         await new Promise((r) => setTimeout(r, 200));
 
+        let mp4Incluidos = 0, mp4Falta = 0;
         for (const ent of semana) {
           const m = fmtDe(ent.it);
           const pasta = zip.folder(`${ent.ordem}-${ent.diaPt}-${slugSeguro(m.label)}`)!;
@@ -135,16 +140,17 @@ export default function AgendaPage() {
           }
           // legenda + hashtags
           pasta.file('legenda.txt', legendaDe(ent.it));
-          // MP4 se existir
-          const videoUrl = ent.it.dias?.[0]?.videoUrl;
+          // MP4 já renderizado (dados frescos). Se for formato de vídeo e ainda não houver, conta como em falta.
+          const videoUrl = videoUrlDe(ent.it);
+          const ehVideo = VIDEO_FORMATOS.includes(tipoChave(ent.it));
           if (videoUrl) {
-            try { const blob = await (await fetch(videoUrl, { cache: 'no-store' })).blob(); pasta.file('reel.mp4', blob); } catch { /* fica sem o MP4 */ }
-          }
+            try { const blob = await (await fetch(videoUrl, { cache: 'no-store' })).blob(); pasta.file('reel.mp4', blob); mp4Incluidos++; } catch { /* fica sem o MP4 */ }
+          } else if (ehVideo) { mp4Falta++; }
         }
         const blob = await zip.generateAsync({ type: 'blob' });
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
         a.download = `veuaveu-semana-${isoSemana[0]}.zip`; a.click(); URL.revokeObjectURL(a.href);
-        setZipMsg(`Pronto: ${semana.length} post(s) da semana, com imagens e legendas.`);
+        setZipMsg(`Pronto: ${semana.length} post(s), ${mp4Incluidos} MP4 incluído(s)${mp4Falta ? `, ${mp4Falta} ainda por renderizar (carrega "🎬 renderizar MP4s da semana", espera ~10 min e volta a baixar)` : ''}.`);
       } catch (e) { setZipMsg('Falhou o download: ' + String(e)); }
       setBaixando(false);
     })();
