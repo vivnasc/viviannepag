@@ -40,12 +40,6 @@ export default function ConteudosPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
 
-  // atualiza um item localmente + persiste
-  async function agendar(slug: string, patch: { agendadoEm?: string | null; publicado?: boolean }) {
-    setItens((prev) => prev.map((it) => it.slug === slug ? { ...it, theme: { ...it.theme, ...patch } } : it));
-    await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...patch }) }).catch(() => {});
-  }
-
   async function apagar(slug: string) {
     if (!confirm('Apagar este conteúdo? Não dá para desfazer.')) return;
     setItens((prev) => prev.filter((it) => it.slug !== slug));
@@ -70,7 +64,7 @@ export default function ConteudosPage() {
           <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1">Tudo o que já geraste, num só sítio. Já não anda nada solto.</p>
-        <p className="text-[0.74rem] opacity-50 mb-5">{itens.length} conteúdos · {cont.gerado} por agendar · {cont.agendado} agendados · {cont.publicado} publicados. Agenda à mão escolhendo uma data.</p>
+        <p className="text-[0.74rem] opacity-50 mb-5">{itens.length} conteúdos · {cont.gerado} por agendar · {cont.agendado} agendados · {cont.publicado} publicados. Aqui acedes e baixas; o <Link href="/admin/agenda" className="text-[#C9B6FA] underline">agendamento é na Agenda</Link>.</p>
 
         {/* filtros */}
         <div className="flex flex-wrap items-center gap-2 mb-5">
@@ -105,11 +99,7 @@ export default function ConteudosPage() {
                   <h3 className="font-serif text-base leading-tight truncate" title={it.title}>{it.title}</h3>
                   <p className="text-[0.66rem] opacity-45 mb-2">{new Date(it.created_at).toLocaleDateString('pt-PT')}</p>
                   <div className="flex flex-wrap items-center gap-2">
-                    <label className="text-[0.62rem] opacity-60 flex items-center gap-1">
-                      agendar
-                      <input type="date" value={it.theme?.agendadoEm ?? ''} onChange={(e) => agendar(it.slug, { agendadoEm: e.target.value || null })} className="bg-black/30 border border-ocre/25 rounded px-1.5 py-0.5 text-[0.66rem] outline-none focus:border-ambar" />
-                    </label>
-                    <button onClick={() => agendar(it.slug, { publicado: !it.theme?.publicado })} className={`text-[0.62rem] px-2.5 py-1 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'publicado?'}</button>
+                    {capa && <a href={capa} download target="_blank" rel="noopener" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">⬇ imagem</a>}
                     {m.href !== '#' && <Link href={m.href} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">abrir →</Link>}
                     {d?.legenda && <button onClick={() => { navigator.clipboard?.writeText([d.legenda?.trim(), (d.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n')); }} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar">📋 legenda</button>}
                     <button onClick={() => apagar(it.slug)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
