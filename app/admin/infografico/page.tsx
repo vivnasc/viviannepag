@@ -26,7 +26,7 @@ type Item = {
 function InfograficoPreview({ info, mundo, imageUrl }: { info: Infografico; mundo: Mundo; imageUrl?: string }) {
   const [prog, setProg] = useState(0);
   useEffect(() => {
-    let raf = 0; let t0 = 0; const CICLO = 9000;
+    let raf = 0; let t0 = 0; const CICLO = 14000; // igual ao MP4: tempo de leitura
     const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.8)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
   }, []);

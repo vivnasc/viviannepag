@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
-import { limparTravessoes } from '@/lib/texto';
+import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { gerarImagemFlux, guardarImagem, representacaoAleatoria } from '@/lib/banda/flux';
 
 export const runtime = 'nodejs';
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 2000, system: SYSTEM, messages: [{ role: 'user', content: `Carrossel "I am a Hero" sobre: "${tema}".` }] }),
+      body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 2000, system: `${SYSTEM}\n\n${REGRA_ACENTOS}`, messages: [{ role: 'user', content: `Carrossel "I am a Hero" sobre: "${tema}".` }] }),
     });
     if (!res.ok) return NextResponse.json({ erro: 'claude', detalhe: await res.text() }, { status: 502 });
     texto = (await res.json())?.content?.[0]?.text ?? '';
@@ -68,6 +68,7 @@ export async function POST(req: Request) {
   let p: { titulo?: string; capa?: { gancho?: string; imagePrompt?: string }; ensino?: string[]; licao?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
+  p = await corrigirAcentos(p, apiKey); // rede de segurança: acentuação correta
 
   const gancho = p.capa?.gancho?.trim();
   const imagePrompt = p.capa?.imagePrompt?.trim();

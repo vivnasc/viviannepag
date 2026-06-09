@@ -235,9 +235,15 @@ export default function ReelsPage() {
   }, [capKin]);
 
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
+  // séries com capa-assinatura (selo + carvão na capa, creme no resto)
+  const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
   const framesDe = (it: Item): ReelFrame[] => {
-    const capaSerie = capasSerie[it.theme?.subtipo ?? '']; // capa-assinatura da série (vale p/ todos)
-    return (it.dias?.[0]?.slides ?? []).map((s, i) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo, pal: s.pal, imageUrl: (i === 0 ? (s.imageUrl ?? capaSerie) : s.imageUrl) }));
+    const sub = it.theme?.subtipo ?? '';
+    const capaSerie = capasSerie[sub]; // capa-assinatura da série (vale p/ todos)
+    const ehAssinatura = SERIE_ASSINATURA.includes(sub);
+    const nome = getFormato(sub).nome;
+    // resolve selo/paleta à hora de mostrar: posts antigos (sem selo guardado) também ganham o cabeçalho
+    return (it.dias?.[0]?.slides ?? []).map((s, i) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo || (ehAssinatura && i === 0 ? nome : ''), pal: s.pal ?? (ehAssinatura ? (i === 0 ? 'carvao' : 'creme') : undefined), imageUrl: (i === 0 ? (s.imageUrl ?? capaSerie) : s.imageUrl) }));
   };
   const kinDe = (it: Item) => it.dias?.[0]?.slides?.[0];
   const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico' || it.theme?.subtipo === 'domingo';

@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCurso } from '@/lib/infografico/cursos';
 import { getFormato } from '@/lib/reels/formatos';
 import { faixaUrl } from '@/lib/carrossel/musica';
-import { limparTravessoes } from '@/lib/texto';
+import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { garantirCapaSerie } from '@/lib/reels/capaSerie';
 import { fundoAleatorio } from '@/lib/reels/fundos';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
@@ -90,27 +90,30 @@ export async function POST(req: Request) {
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
-  const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Crias REELS DIDATICOS para Instagram — para ENSINAR e atrair pessoas novas, nunca para vender. Contexto academico: "${curso.nome}" (${curso.descricao}). Portugues europeu COM acentos. Linguagem humana, calorosa, com profundidade real (nada de frases motivacionais ocas).
+  const SYSTEM = `És a Vivianne dos Santos (psicologia transpessoal, constelação familiar; pós-graduada). Crias REELS DIDÁTICOS para Instagram, para ENSINAR e atrair pessoas novas, nunca para vender. Contexto académico: "${curso.nome}" (${curso.descricao}). Linguagem humana, calorosa, com profundidade real (nada de frases motivacionais ocas).
 
 REGRAS:
-- PURAMENTE DIDATICO: SEM CTA de venda, SEM produtos, SEM links. So conhecimento.
-- O 1.o frame (capa) tem de PARAR O SCROLL nos primeiros 3 segundos.
-- Frases CURTAS (cabem grandes no ecra). Concreto, com exemplos do real.
-- Fiel ao conceito academico; honra a profundidade quando o tema o pedir.
-- ENQUADRAMENTO (critico): NUNCA soar a ensinar egoismo nem "poe-te primeiro". O caminho e INTEIREZA, PRESENCA e RECIPROCIDADE saudavel (nao auto-prioridade egocentrica).
-- NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
+- PURAMENTE DIDÁTICO: SEM CTA de venda, SEM produtos, SEM links. Só conhecimento.
+- O 1.º frame (capa) tem de PARAR O SCROLL nos primeiros 3 segundos.
+- Frases CURTAS (cabem grandes no ecrã). Concreto, com exemplos do real.
+- Fiel ao conceito académico; honra a profundidade quando o tema o pedir.
+- CADA frame tem de PRENDER por si só (não perder retenção): uma ideia forte por frame, sem frames de enchimento.
+- ENQUADRAMENTO (crítico): NUNCA soar a ensinar egoísmo nem "põe-te primeiro". O caminho é INTEIREZA, PRESENÇA e RECIPROCIDADE saudável (não autoprioridade egocêntrica).
+- NUNCA uses travessões (— nem –). Usa vírgulas, pontos ou parênteses.
 
 ${formato.instrucao}
 
-DEVOLVE APENAS JSON valido:
+DEVOLVE APENAS JSON válido:
 {
-  "titulo": "titulo interno curto (2-5 palavras)",
+  "titulo": "título interno curto (2-5 palavras)",
   "frames": [ { "kicker": "etiqueta curta ou vazio", "texto": "frase do frame", "nota": "linha pequena opcional ou vazio", "titulo": "(opcional) título curto do frame quando ele tem pontos", "pontos": ["(opcional) bullets curtos, só nos frames de explicação que pedem hierarquia"] } ],
-  "destaque": ["1 a 3 palavras-chave da frase para realcar (so no formato Frase com motion)"],
-  "fundoPrompt": "prompt MidJourney para imagem transcendente de fundo, sem pessoas, sem texto, --ar 9:16 (so no formato Frase com motion)",
-  "legenda": "legenda para Instagram: 1.a linha gancho, depois 2-4 linhas que aprofundam em palavras simples, fecha com convite a refletir + 'guarda este reel' ou 'partilha com quem precisa'. SEM vender. Portugues europeu com acentos.",
-  "hashtags": ["10-12 hashtags em portugues, mistura amplas e de nicho, sem repetir"]
-}`;
+  "destaque": ["1 a 3 palavras-chave da frase para realçar (só no formato Frase com motion)"],
+  "fundoPrompt": "prompt MidJourney para imagem transcendente de fundo, sem pessoas, sem texto, --ar 9:16 (só no formato Frase com motion)",
+  "legenda": "legenda para Instagram: 1.ª linha gancho, depois 2 a 4 linhas que aprofundam em palavras simples, fecha com convite a refletir e 'guarda este reel' ou 'partilha com quem precisa'. SEM vender.",
+  "hashtags": ["10-12 hashtags em português, mistura amplas e de nicho, sem repetir"]
+}
+
+${REGRA_ACENTOS}`;
 
   let texto = '';
   try {
@@ -129,6 +132,7 @@ DEVOLVE APENAS JSON valido:
   let p: { titulo?: string; frames?: Frame[]; roteiro?: string[]; destaque?: string[]; fundoPrompt?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p); // a Vivianne nao usa travessoes
+  p = await corrigirAcentos(p, apiKey); // rede de segurança: acentuação correta
 
   const framesIn = Array.isArray(p.frames) ? p.frames.filter((f) => f && (f.texto || (Array.isArray(f.pontos) && f.pontos.length))) : [];
   if (!framesIn.length) return NextResponse.json({ erro: 'sem-frames', amostra: texto.slice(0, 300) }, { status: 502 });

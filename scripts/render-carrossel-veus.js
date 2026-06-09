@@ -130,8 +130,8 @@ async function main() {
         if (!pe) imagensInfo.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
       } catch (e) { console.log(`[info feed] ${e.message}`); }
 
-      // (b) MP4 9:16 animado (camada a camada)
-      const FPS = 25, DUR = 9, N = FPS * DUR;
+      // (b) MP4 9:16 animado (camada a camada). Mais longo = tempo de leitura.
+      const FPS = 25, DUR = 14, N = FPS * DUR;
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
