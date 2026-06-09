@@ -9,6 +9,7 @@ export const maxDuration = 300;
 // Cena base por série (a imagem-assinatura fixa). Por agora: a lanterna.
 const CENAS: Record<string, string> = {
   ninguem: 'a single old brass lantern glowing softly in the dark, warm light revealing soft dust and shadow around it',
+  sinais: 'a delicate constellation of soft pale points of light connected by faint glowing threads in deep charcoal darkness, a hidden pattern quietly revealed, contemplative',
 };
 
 // GET — capas guardadas. POST { serie } — gera a imagem (Flux) e fixa-a.

@@ -10,6 +10,10 @@ import { getCapasSerie } from '@/lib/reels/capaSerie';
 export const runtime = 'nodejs';
 export const maxDuration = 120;
 
+// Séries de reel com CAPA-ASSINATURA (imagem Flux fixa + selo, carvão na capa,
+// creme no conteúdo) para reconhecimento imediato no feed.
+const SERIE_ASSINATURA = ['ninguem', 'sinais'];
+
 // POST { tema, formato, curso? } — gera UM reel DIDATICO (educativo, sem CTA
 // nem produtos). Devolve frames (texto no ecra) + legenda + hashtags; nos
 // formatos a falar tambem um roteiro. Grava em carousel_collections
@@ -107,16 +111,15 @@ DEVOLVE APENAS JSON valido:
         nota: (f.nota ?? '').trim(),
         titulo: (f.titulo ?? '').trim(),
         pontos: Array.isArray(f.pontos) ? f.pontos.map((s) => String(s).trim()).filter(Boolean) : [],
-        // selo de capa fixo por série (reconhecimento): "O que ninguém te explica" = lanterna
-        motivo: i === 0 && formato.id === 'ninguem' ? 'lanterna' : '',
-        // "O que ninguém te explica": capa em carvão (com a lanterna), ensino em creme
-        pal: formato.id === 'ninguem' ? (i === 0 ? 'carvao' : 'creme') : undefined,
+        // séries com assinatura: capa com selo (nome) em carvão, conteúdo em creme
+        selo: i === 0 && SERIE_ASSINATURA.includes(formato.id) ? formato.nome : '',
+        pal: SERIE_ASSINATURA.includes(formato.id) ? (i === 0 ? 'carvao' : 'creme') : undefined,
         capa: i === 0,
       }));
 
-  // "O que ninguém te explica": a capa usa a imagem-assinatura fixa (lanterna)
-  if (formato.id === 'ninguem' && slides.length) {
-    try { const capas = await getCapasSerie(); if (capas.ninguem) (slides[0] as { imageUrl?: string }).imageUrl = capas.ninguem; } catch {}
+  // capa-assinatura fixa (imagem Flux gerada uma vez) para as séries com assinatura
+  if (SERIE_ASSINATURA.includes(formato.id) && slides.length) {
+    try { const capas = await getCapasSerie(); if (capas[formato.id]) (slides[0] as { imageUrl?: string }).imageUrl = capas[formato.id]; } catch {}
   }
 
   // musica: uma faixa variada (deterministica por agora)
