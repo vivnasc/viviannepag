@@ -125,9 +125,9 @@ export default function AgendaPage() {
         const wd = new Date(picker + 'T12:00:00').getDay();
         const fmtDia = DIA_FORMATO[wd];
         const nomeDia = fmtDia ? (FMT[fmtDia]?.label ?? fmtDia) : '';
-        // mostra posts não-publicados que ainda não estão NESTE dia (inclui os
-        // agendados noutro dia, para os poderes mover) — nada "desaparece".
-        const disponiveis = itens.filter((it) => !it.theme?.publicado && it.theme?.agendadoEm !== picker);
+        // mostra TUDO o que não está já neste dia (inclui agendados noutro dia e
+        // publicados, com etiqueta) — nada desaparece do seletor.
+        const disponiveis = itens.filter((it) => it.theme?.agendadoEm !== picker);
         const lista = (verTodos || !fmtDia) ? disponiveis : disponiveis.filter((it) => tipoChave(it) === fmtDia);
         return (
         <div onClick={() => { setPicker(null); setVerTodos(false); }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
@@ -146,6 +146,7 @@ export default function AgendaPage() {
                     <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                     <span className="text-[0.56rem] uppercase tracking-[0.12em] opacity-60 shrink-0">{m.emoji} {m.label}</span>
                     <span className="flex-1 min-w-0 truncate text-[0.84rem]">{it.title}</span>
+                    {it.theme?.publicado && <span className="shrink-0 text-[0.54rem] px-1.5 py-0.5 rounded-full border border-salvia/30 text-salvia/80">publicado</span>}
                     {noutroDia && <span className="shrink-0 text-[0.54rem] px-1.5 py-0.5 rounded-full border border-ambar/30 text-ambar/80">agendado {noutroDia.split('-').reverse().slice(0, 2).join('/')} · mover</span>}
                   </button>
                 );
