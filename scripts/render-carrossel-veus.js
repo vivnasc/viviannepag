@@ -161,9 +161,28 @@ async function main() {
       // 4. video (opcional)
       try {
         const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p';
+        if (formato === 'heroi' && slides.length >= 2) {
+          // "I am a Hero": transições em FUNDIDO (crossfade), em vez de cortes
+          // secos, para um registo mais cinematográfico e distinto das outras séries.
+          const D = 0.8; // duração da transição (s)
+          const ins = slides.map((_, i) => `-loop 1 -t ${SEG} -i s${i}.png`).join(' ');
+          let fc = slides.map((_, i) => `[${i}:v]${vf},setsar=1[v${i}]`).join(';');
+          let last = 'v0';
+          for (let i = 1; i < slides.length; i++) {
+            const off = (i * (SEG - D)).toFixed(3);
+            const out = i === slides.length - 1 ? 'vout' : `x${i}`;
+            fc += `;[${last}][v${i}]xfade=transition=fade:duration=${D}:offset=${off}[${out}]`;
+            last = out;
+          }
+          const totalDur = (slides.length * SEG - (slides.length - 1) * D).toFixed(3);
+          const audioIn = temAudio ? ' -i audio.mp3' : '';
+          const maps = temAudio ? `-map "[vout]" -map ${slides.length}:a -c:a aac -b:a 160k -t ${totalDur}` : '-map "[vout]"';
+          execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        } else {
         const inputs = `-f concat -safe 0 -i list.txt${temAudio ? ' -i audio.mp3' : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
         execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -vf "${vf}" -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        }
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
