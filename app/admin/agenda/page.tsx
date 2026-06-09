@@ -83,9 +83,10 @@ export default function AgendaPage() {
 
   // os posts agendados PARA ESTA SEMANA, por ordem do dia (seg→dom)
   const isoSemana = dias.map(isoLocal);
-  const semana = isoSemana
-    .map((iso, i) => ({ iso, ordem: i + 1, diaPt: DIAS_PT[dias[i].getDay()], it: itens.find((x) => x.theme?.agendadoEm === iso) }))
-    .filter((x): x is { iso: string; ordem: number; diaPt: string; it: Item } => !!x.it);
+  // TODOS os posts agendados da semana (não só um por dia: a quarta tem 2)
+  const semana = isoSemana.flatMap((iso, i) =>
+    itens.filter((x) => x.theme?.agendadoEm === iso).map((it) => ({ iso, ordem: i + 1, diaPt: DIAS_PT[dias[i].getDay()], it })),
+  );
 
   // aplica a capa-assinatura + selo/paleta da série ao 1.º slide, como na biblioteca
   // (resolve à hora de mostrar: posts antigos também ganham capa e cabeçalho)
@@ -135,7 +136,7 @@ export default function AgendaPage() {
           const m = fmtDe(ent.it);
           const pasta = zip.folder(`${ent.ordem}-${ent.diaPt}-${slugSeguro(m.label)}`)!;
           // PNG de cada slide
-          const nodes = hostRef.current?.querySelectorAll<HTMLElement>(`[data-post="${ent.iso}"] [data-slide]`);
+          const nodes = hostRef.current?.querySelectorAll<HTMLElement>(`[data-post="${ent.it.slug}"] [data-slide]`);
           if (nodes) for (let i = 0; i < nodes.length; i++) {
             const url = await toPng(nodes[i], { pixelRatio: 1, cacheBust: true });
             pasta.file(`slide-${String(i + 1).padStart(2, '0')}.png`, url.split(',')[1], { base64: true });
@@ -192,6 +193,7 @@ export default function AgendaPage() {
           <button onClick={() => { if (semana.length) { setZipMsg(null); setBaixando(true); } }} disabled={baixando || semana.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{baixando ? 'a preparar o ZIP…' : `⬇ baixar a semana (ZIP) · ${semana.length} post(s)`}</button>
           <button onClick={renderMp4Semana} disabled={renderizando || mp4Pendentes.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{renderizando ? 'a disparar…' : `🎬 renderizar MP4s da semana · ${mp4Pendentes.length} em falta`}</button>
           <span className="text-[0.68rem] opacity-50 w-full">ZIP: imagens (PNG) + legenda.txt (+ MP4 quando já existe), uma pasta por dia. O botão dos MP4s dispara o render dos vídeos em falta (Cá em Casa, I am a Hero, Infográfico, Domingo, Frase com motion) ~10 min cada.</span>
+          {mp4Pendentes.length > 0 && <span className="text-[0.66rem] opacity-60 w-full">Em falta ({mp4Pendentes.length}): {mp4Pendentes.map((e) => `${e.diaPt} ${FMT[tipoChave(e.it)]?.label ?? ''}`).join(' · ')}. Os carrosséis (Sinais, O que ninguém, Uma ideia) não têm MP4. Se faltar algum dia, é porque ainda não geraste/agendaste esse post.</span>}
           {zipMsg && <span className="text-[0.72rem] text-salvia w-full">{zipMsg}</span>}
           {renderMsg && <span className="text-[0.72rem] text-[#C9B6FA] w-full">{renderMsg}</span>}
         </div>
@@ -263,7 +265,7 @@ export default function AgendaPage() {
           {semana.map((ent) => {
             const slides = slidesComCapa(ent.it);
             return (
-              <div key={ent.iso} data-post={ent.iso} style={{ width: 1080 }}>
+              <div key={ent.it.slug} data-post={ent.it.slug} style={{ width: 1080 }}>
                 {slides.map((s, i) => (
                   <div key={i} data-slide style={{ width: 1080 }}>
                     <PostSlide slide={s} mundo={mundoDe(ent.it)} numero={i + 1} total={slides.length} ratio={CARROSSEL_FORMATOS.includes(ent.it.theme?.subtipo ?? '') ? '4:5' : '9:16'} />

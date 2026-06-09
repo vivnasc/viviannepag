@@ -33,9 +33,9 @@ const FMT: Record<string, { emoji: string; label: string; href: string; cor: str
   reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels', cor: '#C9B6FA' },
 };
 // dia da semana de cada tipo (o plano editorial) — para a Vivianne não andar perdida
-const DIA_SERIE: Record<string, string> = { kinetico: 'Seg', sinais: 'Ter', ninguem: 'Qua', banda: 'Qui', heroi: 'Sex', infografico: 'Sáb', domingo: 'Dom' };
-// ordem canónica do plano (mostra-se SEMPRE, mesmo a zero); extras (Uma ideia…, carrossel) entram depois se existirem
-const ORDEM_PLANO = ['kinetico', 'sinais', 'ninguem', 'banda', 'heroi', 'infografico', 'domingo'];
+const DIA_SERIE: Record<string, string> = { kinetico: 'Seg', sinais: 'Ter', ninguem: 'Qua', pensador: 'Qua', banda: 'Qui', heroi: 'Sex', infografico: 'Sáb', domingo: 'Dom' };
+// ordem canónica do plano (mostra-se SEMPRE, mesmo a zero); quarta leva 2 (ninguém + uma ideia)
+const ORDEM_PLANO = ['kinetico', 'sinais', 'ninguem', 'pensador', 'banda', 'heroi', 'infografico', 'domingo'];
 // chave da série: nos reels é o subtipo (o nome real); nos outros, o formato
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
 const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#', cor: '#9aa39a' };
@@ -86,7 +86,7 @@ export default function ConteudosPage() {
           <h1 className="text-2xl font-semibold">Conteúdos · Véu a Véu</h1>
           <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
         </div>
-        <p className="text-[0.82rem] opacity-70 mb-1">Tudo o que já geraste, num só sítio. Já não anda nada solto. <b>7 tipos no plano da semana</b> (Seg→Dom), cada um com o seu dia.</p>
+        <p className="text-[0.82rem] opacity-70 mb-1">Tudo o que já geraste, num só sítio. Já não anda nada solto. <b>8 posts no plano da semana</b> (Seg→Dom; a quarta leva 2), cada um com o seu dia.</p>
         <p className="text-[0.74rem] opacity-50 mb-5">{itens.length} conteúdos · {cont.gerado} por agendar · {cont.agendado} agendados · {cont.publicado} publicados. Aqui acedes e baixas; o <Link href="/admin/agenda" className="text-[#C9B6FA] underline">agendamento é na Agenda</Link>.</p>
 
         {/* filtros */}
