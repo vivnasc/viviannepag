@@ -68,6 +68,7 @@ export default function PlanoSemanaPage() {
   const [plano, setPlano] = useState<Dia[]>([]);
   const [criados, setCriados] = useState<Record<number, boolean>>({});
   const [rascunhando, setRascunhando] = useState(false);
+  const [criandoTudo, setCriandoTudo] = useState(false);
   const [busy, setBusy] = useState<number | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -186,6 +187,43 @@ export default function PlanoSemanaPage() {
     finally { setBusy(null); }
   }
 
+  // CRIAR A SEMANA TODA de uma vez (usa o texto JÁ rascunhado/editado), agenda cada
+  // um no seu dia e dispara os MP4s. Sem ser 1 a 1.
+  async function criarSemanaToda() {
+    if (criandoTudo || !plano.length) return;
+    setCriandoTudo(true); setErro(null); setMsg(null);
+    const videoSlugs: string[] = [];
+    const novo = { ...criados };
+    let ok = 0;
+    for (let i = 0; i < plano.length; i++) {
+      const d = plano[i];
+      if (!d?.frase?.trim()) continue;
+      setMsg(`a criar ${i + 1}/${plano.length}…`);
+      const gen = genDe(d, i); const formato = formatoDe(d, i);
+      let url = '/api/admin/reels/gerar'; let payload: Record<string, unknown> = {};
+      if (gen === 'kinetico') payload = { manual: true, formato, curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
+      else if (gen === 'reel') payload = { tema: d.frase, formato, curso };
+      else if (gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
+      else if (gen === 'heroi') { url = '/api/admin/heroi/gerar'; payload = { tema: d.frase }; }
+      else if (gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
+      try {
+        const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+        const j = await r.json();
+        const slug = j?.coleccao?.slug as string | undefined;
+        if (r.ok && slug) {
+          await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: dataDoDiaNaSemana(targetSeg, wdDe(d, i)) }) }).catch(() => {});
+          if (gen !== 'reel') videoSlugs.push(slug); // reel = carrossel (sem MP4)
+          novo[i] = true; ok++;
+        }
+      } catch { /* segue para o próximo */ }
+    }
+    setCriados(novo); guardar({ criados: novo });
+    let mp4 = 0;
+    for (const slug of videoSlugs) { setMsg(`a disparar MP4 ${mp4 + 1}/${videoSlugs.length}…`); try { const rr = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (rr.ok) mp4++; } catch { /* segue */ } }
+    setMsg(`Semana criada: ${ok} posts agendados, ${mp4} MP4s a renderizar (~10 min). Agora é só ir à Agenda baixar o ZIP.`);
+    setCriandoTudo(false);
+  }
+
   const nCriados = Object.values(criados).filter(Boolean).length;
 
   return (
@@ -242,6 +280,11 @@ export default function PlanoSemanaPage() {
 
         {plano.length === 0 && !rascunhando && (
           <p className="text-[0.8rem] opacity-50 text-center py-10">Escolhe a matéria e o tema, depois carrega <b>✍️ rascunhar a semana</b> para veres as frases.</p>
+        )}
+
+        {/* criar TODA a semana de uma vez (não 1 a 1), depois de leres/editares */}
+        {plano.length > 0 && (
+          <button onClick={criarSemanaToda} disabled={criandoTudo || busy !== null} className="w-full mb-4 text-[0.82rem] py-2.5 rounded-lg border border-salvia/50 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-50">{criandoTudo ? `⏳ ${msg ?? 'a criar…'}` : `✓ criar a semana toda (${plano.length} posts), agendar e renderizar`}</button>
         )}
 
         <div className="space-y-4">
