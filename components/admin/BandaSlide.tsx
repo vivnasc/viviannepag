@@ -20,7 +20,7 @@ const GRAIN =
 export type Fala = { id: string; fala: string; modo?: 'fala' | 'pensa' | 'herdada' };
 // Um painel pode ser: CAPA realista (imageUrl + gancho por cima), slide de
 // ENSINO (texto, sem pessoas), LIÇÃO (fecho) ou banda desenhada (legado).
-export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string; imageUrl?: string | null; gancho?: string; texto?: string };
+export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string; imageUrl?: string | null; gancho?: string; texto?: string; serie?: string };
 
 // ── Avatar (Open Peeps): ilustrado, consistente por personagem, sem cara real.
 // A mesma personagem dá sempre a mesma cara; só a expressão segue o "modo" da
@@ -132,7 +132,7 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
         <div style={{ position: 'absolute', top: 92, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 4 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '13px 30px', borderRadius: 999, border: `1px solid ${a(ACCENT, '66')}`, background: a(BG2, '4d') }}>
             <span style={{ width: 22, height: 1, background: ACCENT, opacity: 0.6 }} />
-            <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 26, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#FBF3E8' }}>Cá em Casa</span>
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 26, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#FBF3E8' }}>{painel.serie ?? 'Cá em Casa'}</span>
             <span style={{ width: 22, height: 1, background: ACCENT, opacity: 0.6 }} />
           </div>
         </div>

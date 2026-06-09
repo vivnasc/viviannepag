@@ -80,7 +80,7 @@ export async function POST(req: Request) {
   // 2) Flux gera UMA ilustração (a capa), no estilo escolhido.
   let imageUrl: string | null = null;
   try {
-    const replicateUrl = await gerarImagemFlux(imagePrompt, replicateToken, estilo, representacaoAleatoria());
+    const replicateUrl = await gerarImagemFlux(imagePrompt, replicateToken, { estilo, tema: 'caemcasa', extra: representacaoAleatoria() });
     try { imageUrl = await guardarImagem(replicateUrl, `banda/${slug}/capa-${Date.now()}.jpg`); } catch { imageUrl = replicateUrl; }
   } catch (e) {
     return NextResponse.json({ erro: 'flux', detalhe: e instanceof Error ? e.message : String(e), prompt: imagePrompt }, { status: 502 });

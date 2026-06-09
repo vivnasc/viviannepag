@@ -55,6 +55,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/reels', label: 'reels' },
       { href: '/admin/carrossel-veu', label: 'carrosséis' },
       { href: '/admin/banda', label: 'cá em casa' },
+      { href: '/admin/heroi', label: 'i am a hero' },
     ],
   },
   {
