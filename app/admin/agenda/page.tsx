@@ -35,6 +35,8 @@ const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoCha
 const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
 // sugestão de formato por dia (só dica, não obriga)
 const SUG: Record<number, string> = { 1: '✨ frase', 2: '💡 o que ninguém explica', 3: '🎭 Cá em Casa', 4: '🔎 sinais de que…', 5: '🌅 I am a Hero', 6: '📊 infográfico', 0: '' };
+// formato planeado de cada dia (para o seletor mostrar só esse formato)
+const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'ninguem', 3: 'banda', 4: 'sinais', 5: 'heroi', 6: 'infografico' };
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const HORA = '20:00';
@@ -42,6 +44,7 @@ const HORA = '20:00';
 export default function AgendaPage() {
   const [itens, setItens] = useState<Item[]>([]);
   const [picker, setPicker] = useState<string | null>(null); // iso do dia a preencher
+  const [verTodos, setVerTodos] = useState(false); // no seletor, mostrar todos os formatos
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list');
@@ -117,16 +120,24 @@ export default function AgendaPage() {
       </div>
 
       {/* seletor de post para um dia */}
-      {picker && (
-        <div onClick={() => setPicker(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+      {picker && (() => {
+        const wd = new Date(picker + 'T12:00:00').getDay();
+        const fmtDia = DIA_FORMATO[wd];
+        const nomeDia = fmtDia ? (FMT[fmtDia]?.label ?? fmtDia) : '';
+        const lista = (verTodos || !fmtDia) ? porAgendar : porAgendar.filter((it) => tipoChave(it) === fmtDia);
+        return (
+        <div onClick={() => { setPicker(null); setVerTodos(false); }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
           <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-5 ${cormorant.variable} ${inter.variable}`}>
-            <p className="text-[0.8rem] mb-3">Escolhe um post para <b>{picker.split('-').reverse().join('/')}</b> <span className="opacity-50">(só os ainda não agendados)</span></p>
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <p className="text-[0.8rem]">{fmtDia && !verTodos ? <>Só <b>{nomeDia}</b> para <b>{picker.split('-').reverse().join('/')}</b></> : <>Post para <b>{picker.split('-').reverse().join('/')}</b></>}</p>
+              {fmtDia && <button onClick={() => setVerTodos((v) => !v)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar">{verTodos ? `só ${nomeDia}` : 'ver todos'}</button>}
+            </div>
             <div className="space-y-2">
-              {porAgendar.length === 0 && <p className="text-[0.78rem] opacity-55 py-6 text-center">Não há posts por agendar. Gera nos formatos e volta aqui.</p>}
-              {porAgendar.map((it) => {
+              {lista.length === 0 && <p className="text-[0.78rem] opacity-55 py-6 text-center">{porAgendar.length === 0 ? 'Não há posts por agendar. Gera nos formatos e volta aqui.' : `Nenhum "${nomeDia}" por agendar. Carrega "ver todos" ou gera um.`}</p>}
+              {lista.map((it) => {
                 const m = fmtDe(it); const capa = capaDe(it);
                 return (
-                  <button key={it.slug} onClick={() => { patch(it.slug, { agendadoEm: picker }); setPicker(null); }} className="w-full flex items-center gap-3 rounded-lg border border-white/8 hover:border-ambar/50 bg-black/20 p-2 text-left">
+                  <button key={it.slug} onClick={() => { patch(it.slug, { agendadoEm: picker }); setPicker(null); setVerTodos(false); }} className="w-full flex items-center gap-3 rounded-lg border border-white/8 hover:border-ambar/50 bg-black/20 p-2 text-left">
                     <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                     <span className="text-[0.56rem] uppercase tracking-[0.12em] opacity-60 shrink-0">{m.emoji} {m.label}</span>
                     <span className="flex-1 min-w-0 truncate text-[0.84rem]">{it.title}</span>
@@ -134,10 +145,11 @@ export default function AgendaPage() {
                 );
               })}
             </div>
-            <button onClick={() => setPicker(null)} className="mt-4 text-[0.7rem] px-3 py-1.5 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">fechar</button>
+            <button onClick={() => { setPicker(null); setVerTodos(false); }} className="mt-4 text-[0.7rem] px-3 py-1.5 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">fechar</button>
           </div>
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
