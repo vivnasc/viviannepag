@@ -218,7 +218,7 @@ export default function PlanoSemanaPage() {
             ))}
           </div>
 
-          <button onClick={rascunhar} disabled={rascunhando} className="text-[0.72rem] px-3.5 py-1.5 rounded-full border border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/10 hover:bg-[#C9B6FA]/20 disabled:opacity-40">{rascunhando ? 'a escrever as 6 frases…' : plano.length ? '↻ rascunhar de novo' : '✍️ rascunhar a semana'}</button>
+          <button onClick={rascunhar} disabled={rascunhando} className="text-[0.72rem] px-3.5 py-1.5 rounded-full border border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/10 hover:bg-[#C9B6FA]/20 disabled:opacity-40">{rascunhando ? 'a escrever a semana…' : plano.length ? '↻ rascunhar de novo' : '✍️ rascunhar a semana'}</button>
         </div>
 
         {erro && <p className="mb-3 text-[0.75rem] text-red-300">{erro}</p>}
