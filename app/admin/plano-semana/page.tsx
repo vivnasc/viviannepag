@@ -24,9 +24,9 @@ const CHAVE = 'veu-plano-atual';
 // frase, sáb infográfico.
 const SLOTS_META = [
   { gen: 'kinetico', formato: 'kinetico' },
+  { gen: 'reel', formato: 'sinais' },
   { gen: 'reel', formato: 'ninguem' },
   { gen: 'banda', formato: 'banda' },
-  { gen: 'reel', formato: 'sinais' },
   { gen: 'kinetico', formato: 'kinetico' },
   { gen: 'infografico', formato: 'infografico' },
 ];
