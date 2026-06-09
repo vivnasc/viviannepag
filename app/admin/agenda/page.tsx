@@ -35,10 +35,28 @@ const RITMO: Record<number, Tipo | null> = {
 const HORA = '20:00';
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 
+// data local (NUNCA toISOString — em PT recua um dia)
+const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const FMT_AG: Record<string, { emoji: string; href: string }> = {
+  banda: { emoji: '🎭', href: '/admin/banda' }, heroi: { emoji: '🌅', href: '/admin/heroi' },
+  infografico: { emoji: '📊', href: '/admin/infografico' }, reel: { emoji: '🎬', href: '/admin/reels' }, aneis: { emoji: '🎞️', href: '/admin/carrossel-veu' },
+};
+type Agendado = { slug: string; title: string; theme: { formato?: string; agendadoEm?: string | null; publicado?: boolean } };
+
 export default function AgendaPage() {
   const [feitos, setFeitos] = useState<Record<string, boolean>>({});
   useEffect(() => { try { const s = localStorage.getItem('veu-agenda-feitos'); if (s) setFeitos(JSON.parse(s)); } catch {} }, []);
   useEffect(() => { try { localStorage.setItem('veu-agenda-feitos', JSON.stringify(feitos)); } catch {} }, [feitos]);
+
+  // conteúdos AGENDADOS (da biblioteca única), para mostrar em cada dia
+  const [agendados, setAgendados] = useState<Agendado[]>([]);
+  useEffect(() => {
+    fetch('/api/admin/conteudos/list').then((r) => r.ok ? r.json() : { contos: [] }).then((j) => setAgendados((j.contos ?? []).filter((c: Agendado) => c.theme?.agendadoEm))).catch(() => {});
+  }, []);
+  async function marcarPublicado(slug: string, valor: boolean) {
+    setAgendados((prev) => prev.map((a) => a.slug === slug ? { ...a, theme: { ...a.theme, publicado: valor } } : a));
+    await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, publicado: valor }) }).catch(() => {});
+  }
 
   // próximos 7 dias a partir de AMANHÃ
   const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
@@ -65,6 +83,7 @@ export default function AgendaPage() {
             const iso = d.toISOString().slice(0, 10);
             const k = iso; const feito = !!feitos[k];
             const dataLabel = `${DIAS_PT[wd]} · ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+            const doDia = agendados.filter((a) => a.theme?.agendadoEm === isoLocal(d));
             return (
               <div key={iso} className={`rounded-xl border border-ocre/12 bg-terra/15 overflow-hidden ${feito ? 'opacity-45' : ''}`}>
                 <div className="px-4 py-2 text-[0.7rem] uppercase tracking-[0.18em] text-[#C9B6FA] border-b border-ocre/10">{dataLabel}</div>
@@ -80,6 +99,22 @@ export default function AgendaPage() {
                   <div className="flex items-center gap-3 px-4 py-3 opacity-60">
                     <span className="text-xl shrink-0">🌙</span>
                     <span className="flex-1 text-[0.92rem]">Descanso</span>
+                  </div>
+                )}
+                {doDia.length > 0 && (
+                  <div className="px-4 pb-3 pt-1 border-t border-ocre/10 space-y-1.5">
+                    <p className="text-[0.56rem] uppercase tracking-[0.16em] opacity-40 pt-2">agendado para este dia</p>
+                    {doDia.map((a) => {
+                      const m = FMT_AG[a.theme?.formato ?? ''] ?? { emoji: '•', href: '#' };
+                      return (
+                        <div key={a.slug} className="flex items-center gap-2">
+                          <span className="text-base shrink-0">{m.emoji}</span>
+                          <span className={`flex-1 text-[0.82rem] truncate ${a.theme?.publicado ? 'line-through opacity-50' : ''}`} title={a.title}>{a.title}</span>
+                          {m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">abrir</Link>}
+                          <button onClick={() => marcarPublicado(a.slug, !a.theme?.publicado)} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${a.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{a.theme?.publicado ? '✓' : 'publicado?'}</button>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>

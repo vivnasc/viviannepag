@@ -45,17 +45,24 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    titulo: 'Véu a Véu · didático',
+    titulo: 'Véu a Véu · planear',
     cor: '#C9B6FA',
     itens: [
+      { href: '/admin/calendario-veu', label: 'calendário · 3 meses' },
       { href: '/admin/plano-semana', label: 'plano da semana' },
       { href: '/admin/agenda', label: 'agenda' },
-      { href: '/admin/calendario-veu', label: 'calendário · 3 meses' },
-      { href: '/admin/infografico', label: 'infográficos' },
-      { href: '/admin/reels', label: 'reels' },
-      { href: '/admin/carrossel-veu', label: 'carrosséis' },
+      { href: '/admin/conteudos', label: 'conteúdos · biblioteca' },
+    ],
+  },
+  {
+    titulo: 'Véu a Véu · criar',
+    cor: '#EBAE4A',
+    itens: [
       { href: '/admin/banda', label: 'cá em casa' },
       { href: '/admin/heroi', label: 'i am a hero' },
+      { href: '/admin/reels', label: 'reels' },
+      { href: '/admin/infografico', label: 'infográficos' },
+      { href: '/admin/carrossel-veu', label: 'carrosséis' },
     ],
   },
   {
