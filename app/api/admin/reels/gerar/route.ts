@@ -7,6 +7,18 @@ import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { garantirCapaSerie } from '@/lib/reels/capaSerie';
 import { fundoAleatorio } from '@/lib/reels/fundos';
+import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
+
+// Gera a imagem de fundo (Flux) a partir do prompt e devolve o URL (ou null).
+// Tudo automático: a Vivianne não vai mais ao Midjourney à mão.
+async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
+  const token = process.env.REPLICATE_API_TOKEN;
+  if (!token || !prompt) return null;
+  try {
+    const url = await gerarImagemFlux(prompt, token, { raw: true });
+    try { return await guardarImagem(url, `reel/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
+  } catch { return null; }
+}
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -60,10 +72,11 @@ export async function POST(req: Request) {
       if (apiKey) { try { fundoPrompt = await fundoEvocativo(frase, subId === 'domingo', apiKey); } catch {} }
       if (!fundoPrompt) fundoPrompt = fundoAleatorio();
     }
-    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
+    const slugM = `reel-${subId}-${curso.id}-${Date.now()}`;
+    const imgM = await fundoImagem(fundoPrompt, slugM); // imagem gerada automaticamente
+    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, imageUrl: imgM, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
     const numeroFaixaM = (Math.floor(Date.now() / 1000) % 100) + 1;
     const faixaM = { numero: numeroFaixaM, titulo: `Faixa ${String(numeroFaixaM).padStart(2, '0')}`, url: faixaUrl(numeroFaixaM) };
-    const slugM = `reel-${subId}-${curso.id}-${Date.now()}`;
     const diasM = [{ dia: 1, mundo, palavra: frase.slice(0, 48), slides, faixa: faixaM, legenda: limparTravessoes((body.legenda ?? '').trim()), hashtags: [] }];
     const supabaseM = getSupabaseAdmin();
     const { data: dataM, error: errM } = await supabaseM
@@ -158,6 +171,11 @@ DEVOLVE APENAS JSON valido:
   const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
 
   const slug = `reel-${formato.id}-${curso.id}-${Date.now()}`;
+  // cinético: a imagem de fundo gera-se automaticamente (sem ir ao MJ à mão)
+  if (ehKinetico && slides.length) {
+    const img = await fundoImagem((slides[0] as { notaVisual?: string }).notaVisual ?? '', slug);
+    if (img) (slides[0] as { imageUrl?: string }).imageUrl = img;
+  }
   const dias = [{ dia: 1, mundo, palavra: p.titulo ?? tema, slides, faixa, roteiro: formato.video ? [] : (p.roteiro ?? []), legenda: p.legenda ?? '', hashtags: Array.isArray(p.hashtags) ? p.hashtags : [] }];
 
   const supabase = getSupabaseAdmin();
