@@ -32,6 +32,10 @@ const FMT: Record<string, { emoji: string; label: string; href: string; cor: str
   domingo: { emoji: '🕊️', label: 'Domingo de Luz', href: '/admin/reels', cor: '#EBB7CE' },
   reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels', cor: '#C9B6FA' },
 };
+// dia da semana de cada tipo (o plano editorial) — para a Vivianne não andar perdida
+const DIA_SERIE: Record<string, string> = { kinetico: 'Seg', sinais: 'Ter', ninguem: 'Qua', banda: 'Qui', heroi: 'Sex', infografico: 'Sáb', domingo: 'Dom' };
+// ordem canónica do plano (mostra-se SEMPRE, mesmo a zero); extras (Uma ideia…, carrossel) entram depois se existirem
+const ORDEM_PLANO = ['kinetico', 'sinais', 'ninguem', 'banda', 'heroi', 'infografico', 'domingo'];
 // chave da série: nos reels é o subtipo (o nome real); nos outros, o formato
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
 const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#', cor: '#9aa39a' };
@@ -59,7 +63,13 @@ export default function ConteudosPage() {
     await fetch('/api/admin/conteudos/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }).catch(() => {});
   }
 
-  const formatos = useMemo(() => Array.from(new Set(itens.map((it) => tipoChave(it)).filter(Boolean))) as string[], [itens]);
+  const porFormato = useCallback((k: string) => itens.filter((it) => tipoChave(it) === k).length, [itens]);
+  // mostra SEMPRE os 7 do plano (na ordem) + quaisquer extras já gerados (Uma ideia…, carrossel)
+  const formatos = useMemo(() => {
+    const presentes = Array.from(new Set(itens.map((it) => tipoChave(it)).filter(Boolean))) as string[];
+    const extras = presentes.filter((f) => !ORDEM_PLANO.includes(f));
+    return [...ORDEM_PLANO, ...extras];
+  }, [itens]);
   const filtrados = itens.filter((it) =>
     (fFormato === 'todos' || tipoChave(it) === fFormato) &&
     (fEstado === 'todos' || estadoDe(it) === fEstado) &&
@@ -76,7 +86,7 @@ export default function ConteudosPage() {
           <h1 className="text-2xl font-semibold">Conteúdos · Véu a Véu</h1>
           <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
         </div>
-        <p className="text-[0.82rem] opacity-70 mb-1">Tudo o que já geraste, num só sítio. Já não anda nada solto.</p>
+        <p className="text-[0.82rem] opacity-70 mb-1">Tudo o que já geraste, num só sítio. Já não anda nada solto. <b>7 tipos no plano da semana</b> (Seg→Dom), cada um com o seu dia.</p>
         <p className="text-[0.74rem] opacity-50 mb-5">{itens.length} conteúdos · {cont.gerado} por agendar · {cont.agendado} agendados · {cont.publicado} publicados. Aqui acedes e baixas; o <Link href="/admin/agenda" className="text-[#C9B6FA] underline">agendamento é na Agenda</Link>.</p>
 
         {/* filtros */}
@@ -84,7 +94,8 @@ export default function ConteudosPage() {
           <button onClick={() => setFFormato('todos')} className={`text-[0.7rem] px-3 py-1.5 rounded-full border ${fFormato === 'todos' ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>todos</button>
           {formatos.map((f) => {
             const m = FMT[f] ?? { emoji: '•', label: f };
-            return <button key={f} onClick={() => setFFormato(f)} className={`text-[0.7rem] px-3 py-1.5 rounded-full border ${fFormato === f ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>{m.emoji} {m.label}</button>;
+            const dia = DIA_SERIE[f]; const n = porFormato(f);
+            return <button key={f} onClick={() => setFFormato(f)} className={`text-[0.7rem] px-3 py-1.5 rounded-full border ${fFormato === f ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'} ${n === 0 ? 'opacity-45' : ''}`}>{m.emoji} {m.label}{dia ? <span className="opacity-60"> · {dia}</span> : null} <span className="opacity-50">({n})</span></button>;
           })}
           <span className="mx-1 opacity-20">|</span>
           {(['todos', 'gerado', 'agendado', 'publicado'] as const).map((e) => (
@@ -106,7 +117,7 @@ export default function ConteudosPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[0.56rem] uppercase tracking-[0.14em] px-2 py-0.5 rounded-full" style={{ background: m.cor + '22', color: m.cor }}>{m.emoji} {m.label}</span>
+                    <span className="text-[0.56rem] uppercase tracking-[0.14em] px-2 py-0.5 rounded-full" style={{ background: m.cor + '22', color: m.cor }}>{m.emoji} {m.label}{DIA_SERIE[tipoChave(it)] ? ` · ${DIA_SERIE[tipoChave(it)]}` : ''}</span>
                     <span className="text-[0.56rem] uppercase tracking-[0.12em] px-2 py-0.5 rounded-full" style={{ background: COR_ESTADO[estado] + '22', color: COR_ESTADO[estado] }}>{estado}</span>
                   </div>
                   <h3 className="font-serif text-base leading-tight truncate" title={it.title}>{it.title}</h3>
