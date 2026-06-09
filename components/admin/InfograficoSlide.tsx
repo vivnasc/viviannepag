@@ -55,7 +55,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
   const [fit, setFit] = useState(1);
   useLayoutEffect(() => {
     const el = contentRef.current; if (!el) return;
-    const apply = () => { el.style.transform = 'scale(1)'; const avail = 1350 - 120; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
+    const apply = () => { el.style.transform = 'scale(1)'; const avail = 1350 - 180; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
     apply();
     if (typeof document !== 'undefined' && document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
   }, [info]);
@@ -183,7 +183,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1350', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1350, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 95% 80% at 50% 30%, ${BG1} 0%, ${BG2} 80%)`, display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1350, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 95% 80% at 50% 30%, ${BG1} 0%, ${BG2} 80%)`, display: 'flex', flexDirection: 'column', justifyContent: fit < 1 ? 'flex-start' : 'center', paddingTop: fit < 1 ? 90 : 0, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
         {imageUrl && (<>
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
           <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 50% 40%, ${a(BG2, 'cc')} 0%, ${a(BG2, 'f2')} 100%)`, zIndex: 0 }} />
