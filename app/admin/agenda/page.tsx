@@ -188,6 +188,15 @@ export default function AgendaPage() {
     setRenderizando(false);
     setRenderMsg(`${ok} render(s) MP4 disparado(s) (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para os veres.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
   }
+  // (re)renderizar o MP4 de UM post (útil para refazer um já renderizado com a animação nova)
+  async function reRender(it: Item) {
+    setRenderMsg(null);
+    try {
+      const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
+      const j = await r.json().catch(() => ({}));
+      setRenderMsg(r.ok ? `Re-render disparado: “${it.title}” (~10 min). Recarrega para veres o MP4 novo.` : 'Falhou: ' + (j.erro ?? r.status));
+    } catch (e) { setRenderMsg('Erro: ' + String(e)); }
+  }
 
   // ── GERAR A SEMANA TODA: rascunha o tema editorial desta semana, gera os 8 posts
   //    e agenda cada um no seu dia. Sem saltar de aba. ──
@@ -312,9 +321,12 @@ export default function AgendaPage() {
                         </div>
                         {/* baixar o FORMATO CERTO: MP4 só quando existe; carrossel abre as imagens */}
                         {ehVideo
-                          ? (videoUrl
-                              ? <a href={semCacheUrl(videoUrl)} download className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">⬇ MP4</a>
-                              : <span className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/15 text-creme-2/35 cursor-not-allowed" title="Ainda sem MP4. Carrega 🎬 renderizar MP4s da semana e espera ~10 min.">⬇ por renderizar</span>)
+                          ? (<>
+                              {videoUrl
+                                ? <a href={semCacheUrl(videoUrl)} download className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">⬇ MP4</a>
+                                : <span className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/15 text-creme-2/35 cursor-not-allowed" title="Ainda sem MP4. Carrega 🎬 renderizar e espera ~10 min.">⬇ por renderizar</span>}
+                              <button onClick={() => reRender(it)} title={videoUrl ? 're-renderizar o MP4 (~10 min) — útil para aplicar a animação nova' : 'renderizar o MP4 (~10 min)'} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-[#C9B6FA]/30 text-[#C9B6FA]/85 hover:bg-[#C9B6FA]/10">{videoUrl ? '↻🎬' : '🎬'}</button>
+                            </>)
                           : (m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">⬇ imagens</Link>)}
                         <button onClick={() => patch(it.slug, { publicado: !it.theme?.publicado })} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'marcar'}</button>
                         <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia">✕</button>
