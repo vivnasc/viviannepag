@@ -5,10 +5,10 @@ import { getCurso } from '@/lib/infografico/cursos';
 import { getFormato } from '@/lib/reels/formatos';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
-import { getCapasSerie } from '@/lib/reels/capaSerie';
+import { garantirCapaSerie } from '@/lib/reels/capaSerie';
 
 export const runtime = 'nodejs';
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 // Séries de reel com CAPA-ASSINATURA (imagem Flux fixa + selo, carvão na capa,
 // creme no conteúdo) para reconhecimento imediato no feed.
@@ -117,9 +117,13 @@ DEVOLVE APENAS JSON valido:
         capa: i === 0,
       }));
 
-  // capa-assinatura fixa (imagem Flux gerada uma vez) para as séries com assinatura
+  // capa-assinatura fixa: gera-se SOZINHA na 1.ª vez (nunca fica sem capa), e
+  // reutiliza-se depois. Cada série tem a sua imagem (identidade própria).
   if (SERIE_ASSINATURA.includes(formato.id) && slides.length) {
-    try { const capas = await getCapasSerie(); if (capas[formato.id]) (slides[0] as { imageUrl?: string }).imageUrl = capas[formato.id]; } catch {}
+    const replicateToken = process.env.REPLICATE_API_TOKEN;
+    if (replicateToken) {
+      try { const url = await garantirCapaSerie(formato.id, replicateToken); if (url) (slides[0] as { imageUrl?: string }).imageUrl = url; } catch {}
+    }
   }
 
   // musica: uma faixa variada (deterministica por agora)
