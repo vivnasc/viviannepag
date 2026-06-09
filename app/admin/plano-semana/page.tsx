@@ -27,7 +27,7 @@ const SLOTS_META = [
   { gen: 'reel', formato: 'sinais' },
   { gen: 'reel', formato: 'ninguem' },
   { gen: 'banda', formato: 'banda' },
-  { gen: 'kinetico', formato: 'kinetico' },
+  { gen: 'heroi', formato: 'heroi' },
   { gen: 'infografico', formato: 'infografico' },
 ];
 const genDe = (d: Dia, i: number) => d.gen ?? SLOTS_META[i]?.gen ?? 'kinetico';
@@ -37,6 +37,7 @@ const formatoDe = (d: Dia, i: number) => d.formato ?? SLOTS_META[i]?.formato ?? 
 const GEN: Record<string, { badge: string; nota: string; destino: string; verLabel: string; botao: string }> = {
   reel: { badge: 'Reel · vários frames', nota: 'O texto dos frames é montado pelo gerador, a partir deste gancho. Revês e descarregas em Reels.', destino: '/admin/reels', verLabel: 'abrir Reels', botao: 'criar reel' },
   banda: { badge: 'Cá em Casa · com personagens', nota: 'A cena com os personagens é montada pelo gerador, a partir desta ideia. Revês em Cá em Casa.', destino: '/admin/banda', verLabel: 'abrir Cá em Casa', botao: 'criar Cá em Casa' },
+  heroi: { badge: 'I am a Hero · curar liberta', nota: 'O carrossel (capa ilustrada + ensino) é montado pelo gerador, a partir desta ideia. Revês em I am a Hero.', destino: '/admin/heroi', verLabel: 'abrir I am a Hero', botao: 'criar I am a Hero' },
   infografico: { badge: 'Infográfico', nota: 'O infográfico é montado pelo gerador, a partir desta ideia. Revês em Infográficos.', destino: '/admin/infografico', verLabel: 'abrir Infográficos', botao: 'criar infográfico' },
 };
 
@@ -148,6 +149,7 @@ export default function PlanoSemanaPage() {
     if (gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
     else if (gen === 'reel') payload = { tema: d.frase, formato, curso };
     else if (gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
+    else if (gen === 'heroi') { url = '/api/admin/heroi/gerar'; payload = { tema: d.frase }; }
     else if (gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
     try {
       const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
