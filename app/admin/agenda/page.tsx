@@ -61,6 +61,7 @@ export default function AgendaPage() {
   const [itens, setItens] = useState<Item[]>([]);
   const [semanaOffset, setSemanaOffset] = useState(0); // 0 = esta semana, +1 = próxima…
   const [gerSemana, setGerSemana] = useState<{ feito: number; total: number; msg: string } | null>(null);
+  const [gerandoSemana, setGerandoSemana] = useState(false); // true só enquanto corre (permite repetir)
   const [picker, setPicker] = useState<string | null>(null); // iso do dia a preencher
   const [pickerFmt, setPickerFmt] = useState<string | null>(null); // formato do slot clicado (filtra o seletor)
   const [verTodos, setVerTodos] = useState(false); // no seletor, mostrar todos os formatos
@@ -201,7 +202,8 @@ export default function AgendaPage() {
   // ── GERAR A SEMANA TODA: rascunha o tema editorial desta semana, gera os 8 posts
   //    e agenda cada um no seu dia. Sem saltar de aba. ──
   async function gerarSemana() {
-    if (gerSemana) return;
+    if (gerandoSemana) return;
+    setGerandoSemana(true);
     const curso = getCurso(semEd.curso);
     setGerSemana({ feito: 0, total: 8, msg: 'a rascunhar a semana…' });
     try {
@@ -240,6 +242,7 @@ export default function AgendaPage() {
       }
       setGerSemana({ feito, total: plano.length, msg: `Pronto: ${feito} posts gerados e agendados, ${mp4} MP4s a renderizar (~10 min cada). Daqui a pouco recarrega e baixa o ZIP.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}` });
     } catch (e) { setGerSemana({ feito: 0, total: 0, msg: 'Erro: ' + String(e) }); }
+    finally { setGerandoSemana(false); }
   }
 
   return (
@@ -262,7 +265,7 @@ export default function AgendaPage() {
             <button onClick={() => setSemanaOffset((o) => o + 1)} className="text-[0.8rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">▶</button>
             {semanaOffset !== 0 && <button onClick={() => setSemanaOffset(0)} className="text-[0.6rem] px-2 py-1 rounded-full border border-ambar/30 text-ambar/80 hover:bg-ambar/10">hoje</button>}
           </div>
-          <button onClick={gerarSemana} disabled={!!gerSemana && gerSemana.feito < gerSemana.total} className="w-full text-[0.82rem] py-2.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-50">{gerSemana && gerSemana.feito < gerSemana.total ? `⚡ ${gerSemana.msg}` : '⚡ gerar a semana toda (8 posts) e agendar'}</button>
+          <button onClick={gerarSemana} disabled={gerandoSemana} className="w-full text-[0.82rem] py-2.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-50">{gerandoSemana ? `⚡ ${gerSemana?.msg ?? 'a gerar…'}` : '⚡ gerar a semana toda (8 posts) e agendar'}</button>
           {gerSemana && <p className="text-[0.66rem] opacity-70 mt-1.5 text-center">{gerSemana.msg}</p>}
           <p className="text-[0.6rem] opacity-45 mt-1 text-center">Gera os 8 posts do tema da semana e agenda-os nos dias certos. Depois é só renderizar os MP4s e baixar. {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
         </div>
