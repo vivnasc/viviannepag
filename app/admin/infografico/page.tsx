@@ -17,10 +17,21 @@ const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 type InfoSlide = Infografico & { tipo: string; imageUrl?: string; legenda?: string; hashtags?: string[] };
 type Item = {
   slug: string; title: string;
-  dias: Array<{ dia: number; mundo?: Mundo; imagens?: string[]; slides?: InfoSlide[] }>;
+  dias: Array<{ dia: number; mundo?: Mundo; imagens?: string[]; slides?: InfoSlide[]; videoUrl?: string }>;
   theme: { curso?: string; mundo?: Mundo };
   created_at: string;
 };
+
+// pré-visualização ANIMADA do infográfico (camada a camada, em loop suave)
+function InfograficoPreview({ info, mundo, imageUrl }: { info: Infografico; mundo: Mundo; imageUrl?: string }) {
+  const [prog, setProg] = useState(0);
+  useEffect(() => {
+    let raf = 0; let t0 = 0; const CICLO = 9000;
+    const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.8)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
+  }, []);
+  return <InfograficoSlide info={info} mundo={mundo} imageUrl={imageUrl} prog={prog} />;
+}
 
 function CopiarLegenda({ legenda, hashtags }: { legenda?: string; hashtags?: string[] }) {
   const [ok, setOk] = useState(false);
@@ -97,6 +108,16 @@ export default function InfograficoPage() {
       setSugestoesMap((prev) => ({ ...prev, [cid]: [...(prev[cid] ?? []), ...(j.padroes ?? [])] }));
     } catch (e) { setErro(String(e)); }
     finally { setSugLoading(null); }
+  }
+
+  async function gerarVideo(slug: string) {
+    setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro('vídeo: ' + (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setMsg('Render do MP4 (animado, camada a camada) disparado (~10 min no GitHub Actions). Recarrega a página depois para veres o vídeo.');
+    } catch (e) { setErro(String(e)); }
   }
 
   async function apagar(slug: string) {
@@ -196,14 +217,24 @@ export default function InfograficoPage() {
             const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
             if (!s) return null;
             const info = { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
+            const videoUrl = it.dias?.[0]?.videoUrl;
             return (
               <Card key={it.slug} className="p-5">
                 <h3 className="font-serif text-lg mb-4 text-center">{it.title}</h3>
-                <button onClick={() => setZoom({ info, mundo, imageUrl: s.imageUrl })} className="block w-full max-w-[460px] mx-auto mb-4 cursor-zoom-in" title="ampliar">
-                  <InfograficoSlide info={info} mundo={mundo} imageUrl={s.imageUrl} />
+                <button onClick={() => setZoom({ info, mundo, imageUrl: s.imageUrl })} className="block w-full max-w-[460px] mx-auto mb-4 cursor-zoom-in" title="ampliar (pré-visualização animada)">
+                  <InfograficoPreview info={info} mundo={mundo} imageUrl={s.imageUrl} />
                 </button>
+
+                {videoUrl && (
+                  <div className="mb-3 flex items-center justify-center gap-3">
+                    <video src={videoUrl} controls playsInline className="w-28 rounded-lg border border-white/10 bg-black" />
+                    <a href={videoUrl} download className="text-[0.66rem] px-2.5 py-1 rounded border border-ocre/30 text-creme-2/80 hover:border-ambar hover:text-ambar">⬇ MP4 (Reel)</a>
+                  </div>
+                )}
+
                 <div className="flex flex-wrap items-center gap-2 justify-center">
-                  <button onClick={() => baixar(it)} className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ descarregar PNG</button>
+                  <button onClick={() => gerarVideo(it.slug)} className="text-[0.72rem] px-3 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
+                  <button onClick={() => baixar(it)} className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ PNG (feed)</button>
                   <CopiarLegenda legenda={s.legenda} hashtags={s.hashtags} />
                   <button onClick={() => apagar(it.slug)} className="text-[0.72rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                 </div>
@@ -221,8 +252,8 @@ export default function InfograficoPage() {
         {zoom && (
           <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">
             <div className="w-full" style={{ maxWidth: 'min(88vw, 520px)' }} onClick={(e) => e.stopPropagation()}>
-              <InfograficoSlide info={zoom.info} mundo={zoom.mundo} imageUrl={zoom.imageUrl} />
-              <p className="text-center text-[0.7rem] opacity-60 mt-3">toca fora para fechar</p>
+              <InfograficoPreview info={zoom.info} mundo={zoom.mundo} imageUrl={zoom.imageUrl} />
+              <p className="text-center text-[0.7rem] opacity-60 mt-3">pré-visualização animada · toca fora para fechar</p>
             </div>
           </div>
         )}

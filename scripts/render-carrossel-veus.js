@@ -46,7 +46,8 @@ async function main() {
 
   const formato = col.theme?.formato;
   const kinetic = formato === 'reel' && col.theme?.subtipo === 'kinetico'; // frase com motion
-  const soImagens = formato === 'infografico' || formato === 'aneis'; // imagem unica, sem video
+  const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
+  const soImagens = formato === 'aneis'; // so os aneis ficam so imagem
   const H = formato === 'aneis' ? 1080 : formato === 'infografico' ? 1350 : 1920;
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'veu-'));
@@ -107,6 +108,62 @@ async function main() {
 
       resultados.push({ dia: d.dia, videoUrl, imagens: imagensDia });
       console.log(`[dia ${d.dia}] kinetic mp4=${videoUrl ? 'ok' : 'falhou'}`);
+      continue;
+    }
+
+    // ── INFOGRAFICO: gera DUAS coisas — (a) o PNG 4:5 para o feed (estatico,
+    // prog=1) e (b) um MP4 9:16 onde cada camada entra a vez (conduzido por
+    // window.__setKProg, igual ao cinetico). Reels rendem muito mais que estatico. ──
+    if (infografico) {
+      const imagensInfo = [];
+      // (a) PNG estatico 4:5 para o feed
+      try {
+        const p0 = await browser.newPage();
+        await p0.setViewport({ width: 1080, height: 1350, deviceScaleFactor: 1 });
+        await p0.goto(`${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0`, { waitUntil: 'networkidle0', timeout: 60000 });
+        await p0.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+        const feedPng = path.join(diaDir, 'feed.png');
+        await p0.screenshot({ path: feedPng, clip: { x: 0, y: 0, width: 1080, height: 1350 } });
+        await p0.close();
+        const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-0.png`;
+        const { error: pe } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(feedPng), { contentType: 'image/png', upsert: true });
+        if (!pe) imagensInfo.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+      } catch (e) { console.log(`[info feed] ${e.message}`); }
+
+      // (b) MP4 9:16 animado (camada a camada)
+      const FPS = 25, DUR = 9, N = FPS * DUR;
+      const framesDir = path.join(diaDir, 'frames');
+      fs.mkdirSync(framesDir, { recursive: true });
+      const page = await browser.newPage();
+      await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
+      await page.goto(`${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0&video=1`, { waitUntil: 'networkidle0', timeout: 60000 });
+      await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+      for (let i = 0; i < N; i++) {
+        const prog = Math.min(1, (i / (N - 1)) / 0.8); // revela ate 80%, segura cheio no fim
+        await page.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
+        await new Promise((r) => setTimeout(r, 30));
+        await page.screenshot({ path: path.join(framesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
+      }
+      await page.close();
+      console.log(`[infografico] dia ${d.dia}: ${N} frames`);
+
+      let temAudio = false;
+      const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
+      try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+
+      let videoUrl = null;
+      try {
+        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
+        const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
+        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
+        const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
+        if (upErr) console.error(`[upload mp4] ${upErr.message}`);
+        else videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
+      } catch (e) { console.error(`[info mp4] ${e.message}`); }
+
+      resultados.push({ dia: d.dia, videoUrl, imagens: imagensInfo });
+      console.log(`[dia ${d.dia}] infografico mp4=${videoUrl ? 'ok' : 'falhou'}`);
       continue;
     }
 

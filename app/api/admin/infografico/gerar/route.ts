@@ -95,7 +95,7 @@ ESCOLHE o tipoDiagrama que MELHOR explica o conceito e preenche "diagrama":
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
-    .upsert({ slug, title: p.padrao ?? tema, brief: tema, dias, theme: { formato: 'infografico', mundo, curso: curso.id } }, { onConflict: 'slug' })
+    .upsert({ slug, title: p.padrao ?? tema, brief: tema, dias, theme: { formato: 'infografico', mundo, curso: curso.id, video: true } }, { onConflict: 'slug' })
     .select().single();
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, coleccao: data });

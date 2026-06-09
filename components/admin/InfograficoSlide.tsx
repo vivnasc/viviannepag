@@ -5,7 +5,7 @@
 //   ciclo (roda) · espectro (dois polos) · herdado (2 colunas) · camadas · travessia
 // + implicacoes EM TI / NOS OUTROS + virada + CTA. Paleta do universo. Auto-encolhe.
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
@@ -33,7 +33,7 @@ export type Infografico = {
   url?: string;
 };
 
-export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: Infografico; mundo?: Mundo; imageUrl?: string }) {
+export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }: { info: Infografico; mundo?: Mundo; imageUrl?: string; prog?: number }) {
   const p = PALETAS[mundo];
   // Identidade COMUM da Veu a Veu: fundo índigo profundo + texto creme, igual ao
   // resto do feed. Só o ACENTO (bordas, rótulos, diagrama) vem da matéria, para
@@ -63,6 +63,21 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
   const tipo = info.tipoDiagrama ?? (info.ciclo?.length ? 'ciclo' : 'ciclo');
   const passos = (d.passos && d.passos.length ? d.passos : info.ciclo ?? []).slice(0, 4);
   const cardSt = { fontFamily: FONT_SERIF, color: TXT, background: a(BG2, 'cc'), border: `1px solid ${a(ACCENT, '55')}`, borderRadius: 12 } as const;
+
+  // Revelação CAMADA A CAMADA (para o MP4): cada bloco entra à vez, conforme o
+  // "prog" (0..1) que o render conduz frame a frame. prog=1 => tudo visível, sem
+  // transform — por isso o PNG estático e o feed ficam EXATAMENTE como antes.
+  const temCustos = !!(info.custoTi || info.custoOutros);
+  let _n = 0;
+  const idxHeader = _n++, idxDiagrama = _n++, idxCustos = temCustos ? _n++ : -1, idxVirada = info.virada ? _n++ : -1, idxFooter = _n++;
+  const STAGES = _n;
+  const reveal = (i: number): CSSProperties => {
+    if (prog >= 1 || i < 0) return {};
+    const slice = 1 / STAGES;
+    const local = Math.max(0, Math.min(1, (prog - i * slice) / (slice * 1.5)));
+    const e = 1 - Math.pow(1 - local, 3); // easeOutCubic
+    return { opacity: e, transform: `translateY(${(1 - e) * 26}px)` };
+  };
 
   function Diagrama() {
     // ESPECTRO — dois polos + equilibrio no meio
@@ -155,14 +170,16 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.14, zIndex: 0, pointerEvents: 'none' }} />
 
         <div ref={contentRef} style={{ position: 'relative', zIndex: 2, width: 1080, padding: '0 84px', boxSizing: 'border-box', transform: `scale(${fit})`, transformOrigin: 'top center', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 22, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>O padrão</span>
-          <h2 style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 78, lineHeight: 1.0, letterSpacing: '-0.02em', margin: '16px 0 0' }}>{info.padrao}</h2>
-          {info.subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, lineHeight: 1.3, opacity: 0.82, margin: '12px auto 0', maxWidth: 820 }}>{info.subtitulo}</p>}
+          <div style={{ ...reveal(idxHeader), display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 22, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>O padrão</span>
+            <h2 style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 78, lineHeight: 1.0, letterSpacing: '-0.02em', margin: '16px 0 0' }}>{info.padrao}</h2>
+            {info.subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, lineHeight: 1.3, opacity: 0.82, margin: '12px auto 0', maxWidth: 820 }}>{info.subtitulo}</p>}
+          </div>
 
-          <Diagrama />
+          <div style={{ ...reveal(idxDiagrama), display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}><Diagrama /></div>
 
-          {(info.custoTi || info.custoOutros) && (
-            <div style={{ display: 'flex', gap: 20, width: '100%', marginTop: 18 }}>
+          {temCustos && (
+            <div style={{ ...reveal(idxCustos), display: 'flex', gap: 20, width: '100%', marginTop: 18 }}>
               {[{ t: 'Em ti', v: info.custoTi }, { t: 'Nos outros', v: info.custoOutros }].filter((b) => b.v).map((b) => (
                 <div key={b.t} style={{ flex: 1, border: `1px solid ${a(ACCENT, '45')}`, borderRadius: 16, padding: '18px 22px', background: a(BG2, '55') }}>
                   <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 18, letterSpacing: '0.32em', textTransform: 'uppercase', color: ACCENT }}>{b.t}</span>
@@ -172,9 +189,9 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: I
             </div>
           )}
 
-          {info.virada && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 40, lineHeight: 1.3, margin: '24px auto 0', maxWidth: 880 }}>{info.virada}</p>}
+          {info.virada && <p style={{ ...reveal(idxVirada), fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 40, lineHeight: 1.3, margin: '24px auto 0', maxWidth: 880 }}>{info.virada}</p>}
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, marginTop: 20 }}>
+          <div style={{ ...reveal(idxFooter), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, marginTop: 20 }}>
             <span style={{ fontFamily: FONT_SANS, fontWeight: 300, fontSize: 17, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.65 }}>os sete véus</span>
             <span style={{ fontFamily: FONT_MONO, fontSize: 24, letterSpacing: '0.04em', color: ACCENT, opacity: 0.85 }}>{info.url ?? 'viviannedossantos.com'}</span>
           </div>

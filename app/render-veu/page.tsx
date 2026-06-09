@@ -25,7 +25,8 @@ type Coleccao = { dias: Dia[] };
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number } | null>(null);
   const [erro, setErro] = useState<string | null>(null);
-  const [prog, setProg] = useState(1); // progresso do cinético (0..1), conduzido pelo render
+  const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
+  const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
 
   // o render conduz a animacao do cinetico frame a frame via window.__setKProg
   useEffect(() => { (window as unknown as { __setKProg?: (p: number) => void }).__setKProg = (p: number) => setProg(p); }, []);
@@ -36,6 +37,7 @@ export default function RenderVeuPage() {
       const slug = p.get('slug');
       const diaN = Number(p.get('dia'));
       const idx = Number(p.get('idx'));
+      if (p.get('video') === '1') setVideo(true);
       if (!slug || !diaN || isNaN(idx)) { setErro('faltam params: slug, dia, idx'); return; }
       try {
         const r = await fetch(`/api/carrossel-veus/data?slug=${encodeURIComponent(slug)}`);
@@ -74,7 +76,7 @@ export default function RenderVeuPage() {
   const ehReel = tipoSlide === 'reel';
   const ehBanda = tipoSlide === 'banda';
   const ehKinetic = tipoSlide === 'kinetico';
-  const H = ehAnel ? 1080 : ehInfo ? 1350 : 1920;
+  const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : 1920;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[] }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
@@ -83,11 +85,25 @@ export default function RenderVeuPage() {
         <AnelCover label={s.label ?? ''} imageUrl={s.imageUrl} mundo={estado.dia.mundo} perfil={!!s.perfil} />
       )}
       {estado && ehInfo && s && (
-        <InfograficoSlide
-          info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
-          mundo={estado.dia.mundo}
-          imageUrl={s.imageUrl}
-        />
+        video ? (
+          // MP4: cartão 4:5 centrado numa tela 9:16 índigo, revelado camada a camada
+          <div style={{ width: 1080, height: 1920, background: '#0F0F1A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 1080 }}>
+              <InfograficoSlide
+                info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
+                mundo={estado.dia.mundo}
+                imageUrl={s.imageUrl}
+                prog={prog}
+              />
+            </div>
+          </div>
+        ) : (
+          <InfograficoSlide
+            info={{ padrao: s.padrao ?? '', subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
+            mundo={estado.dia.mundo}
+            imageUrl={s.imageUrl}
+          />
+        )
       )}
       {estado && ehReel && s && (
         <ReelSlide
