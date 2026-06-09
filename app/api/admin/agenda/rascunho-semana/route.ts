@@ -15,9 +15,9 @@ export const maxDuration = 120;
 // cena com personagens (Ca em Casa); infografico = infografico.
 const SLOTS = [
   { dia: 'segunda', emoji: '✨', label: 'Frase com motion', gen: 'kinetico', formato: 'kinetico', angulo: 'uma frase curta e luminosa que para o scroll, do tema da semana' },
-  { dia: 'terça', emoji: '💡', label: 'O que ninguém te explica', gen: 'reel', formato: 'ninguem', angulo: 'uma verdade pouco dita sobre o tema, que faz pensar (gancho de reel)' },
-  { dia: 'quarta', emoji: '🎭', label: 'Cá em Casa', gen: 'banda', formato: 'banda', angulo: 'uma cena do dia a dia em família onde o tema aparece' },
-  { dia: 'quinta', emoji: '🔎', label: 'Sinais de que…', gen: 'reel', formato: 'sinais', angulo: 'um sinal concreto e reconhecível ligado ao tema (gancho de reel)' },
+  { dia: 'terça', emoji: '🔎', label: 'Sinais de que…', gen: 'reel', formato: 'sinais', angulo: 'um sinal concreto e reconhecível ligado ao tema (gancho de reel)' },
+  { dia: 'quarta', emoji: '💡', label: 'O que ninguém te explica', gen: 'reel', formato: 'ninguem', angulo: 'uma verdade pouco dita sobre o tema, que faz pensar (gancho de reel)' },
+  { dia: 'quinta', emoji: '🎭', label: 'Cá em Casa', gen: 'banda', formato: 'banda', angulo: 'uma cena do dia a dia em família onde o tema aparece' },
   { dia: 'sexta', emoji: '✨', label: 'Frase com motion', gen: 'kinetico', formato: 'kinetico', angulo: 'outra frase curta e forte do tema, diferente da de segunda' },
   { dia: 'sábado', emoji: '📊', label: 'Infográfico', gen: 'infografico', formato: 'infografico', angulo: 'uma ideia que se resume numa frase-título clara' },
 ];

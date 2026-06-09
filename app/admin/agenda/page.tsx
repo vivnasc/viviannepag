@@ -34,9 +34,9 @@ const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subti
 const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#' };
 const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
 // sugestão de formato por dia (só dica, não obriga)
-const SUG: Record<number, string> = { 1: '✨ frase', 2: '💡 o que ninguém explica', 3: '🎭 Cá em Casa', 4: '🔎 sinais de que…', 5: '🌅 I am a Hero', 6: '📊 infográfico', 0: '' };
+const SUG: Record<number, string> = { 1: '✨ frase', 2: '🔎 sinais de que…', 3: '💡 o que ninguém explica', 4: '🎭 Cá em Casa', 5: '✨ frase', 6: '📊 infográfico', 0: '' };
 // formato planeado de cada dia (para o seletor mostrar só esse formato)
-const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'ninguem', 3: 'banda', 4: 'sinais', 5: 'heroi', 6: 'infografico' };
+const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'sinais', 3: 'ninguem', 4: 'banda', 5: 'kinetico', 6: 'infografico' };
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const HORA = '20:00';
