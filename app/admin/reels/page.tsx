@@ -249,6 +249,7 @@ export default function ReelsPage() {
   }, [capKin]);
 
   const mundoDe = (it: Item) => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
+  const ehCarrossel = (it: Item) => !!getFormato(it.theme?.subtipo ?? '').carrossel; // 4:5, sem MP4
   // séries com capa-assinatura (selo + carvão na capa, creme no resto)
   const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
   const framesDe = (it: Item): ReelFrame[] => {
@@ -413,17 +414,18 @@ export default function ReelsPage() {
                 );
               }
 
-              // ── REEL normal (frames) ──
+              // ── REEL normal (frames) ou CARROSSEL (4:5, sem MP4) ──
               const frames = framesDe(it);
               if (!frames.length) return null;
+              const ehCar = ehCarrossel(it);
               return (
                 <Card key={it.slug} className="p-5">
                   {header}
-                  <button onClick={() => setZoom({ it, idx: 0 })} className="block w-[58%] mx-auto mb-4 cursor-zoom-in" title="ver os frames">
-                    <ReelSlide frame={frames[0]} mundo={mundo} numero={1} total={frames.length} capa />
+                  <button onClick={() => setZoom({ it, idx: 0 })} className={`block ${ehCar ? 'w-[62%]' : 'w-[58%]'} mx-auto mb-4 cursor-zoom-in`} title="ver os frames">
+                    <ReelSlide frame={frames[0]} mundo={mundo} numero={1} total={frames.length} capa ratio={ehCar ? '4:5' : '9:16'} />
                   </button>
 
-                  {d?.videoUrl && (
+                  {!ehCar && d?.videoUrl && (
                     <div className="mb-3 flex items-center justify-center gap-3">
                       <video src={d.videoUrl} controls playsInline className="w-28 rounded-lg border border-white/10 bg-black" />
                       <a href={d.videoUrl} download className="text-[0.66rem] px-2.5 py-1 rounded border border-ocre/30 text-creme-2/80 hover:border-ambar hover:text-ambar">⬇ MP4</a>
@@ -431,8 +433,8 @@ export default function ReelsPage() {
                   )}
 
                   <div className="flex flex-wrap items-center gap-2 justify-center">
-                    <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ frames (PNG)</button>
-                    <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
+                    <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">{ehCar ? '⬇ carrossel (PNG)' : '⬇ frames (PNG)'}</button>
+                    {!ehCar && <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>}
                     <button onClick={() => regenerar(it)} disabled={gerando} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-[#C9B6FA]/40 text-[#C9B6FA] hover:bg-[#C9B6FA]/10 disabled:opacity-40">↻ regenerar</button>
                     <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
                     <button onClick={() => apagar(it.slug)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
@@ -447,7 +449,7 @@ export default function ReelsPage() {
           <div ref={zipRef} style={{ position: 'fixed', left: -10000, top: 0, width: 1080 }} aria-hidden>
             {framesDe(zipIt).map((fr, i) => (
               <div key={i} data-frame style={{ width: 1080 }}>
-                <ReelSlide frame={fr} mundo={mundoDe(zipIt)} numero={i + 1} total={framesDe(zipIt).length} capa={i === 0} />
+                <ReelSlide frame={fr} mundo={mundoDe(zipIt)} numero={i + 1} total={framesDe(zipIt).length} capa={i === 0} ratio={ehCarrossel(zipIt) ? '4:5' : '9:16'} />
               </div>
             ))}
           </div>
@@ -478,7 +480,7 @@ export default function ReelsPage() {
             <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center gap-3 sm:gap-6 bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">
               <button onClick={(e) => { e.stopPropagation(); nav(-1); }} className="shrink-0 w-11 h-11 rounded-full border border-white/20 text-xl flex items-center justify-center hover:bg-white/10">‹</button>
               <div className="w-full" style={{ maxWidth: 'min(70vw, 320px)' }} onClick={(e) => e.stopPropagation()}>
-                <ReelSlide frame={frames[zoom.idx]} mundo={mundo} numero={zoom.idx + 1} total={frames.length} capa={zoom.idx === 0} />
+                <ReelSlide frame={frames[zoom.idx]} mundo={mundo} numero={zoom.idx + 1} total={frames.length} capa={zoom.idx === 0} ratio={ehCarrossel(zoom.it) ? '4:5' : '9:16'} />
                 <p className="text-center text-[0.7rem] opacity-60 mt-3">{zoom.idx + 1} / {frames.length} · toca fora para fechar</p>
               </div>
               <button onClick={(e) => { e.stopPropagation(); nav(1); }} className="shrink-0 w-11 h-11 rounded-full border border-white/20 text-xl flex items-center justify-center hover:bg-white/10">›</button>

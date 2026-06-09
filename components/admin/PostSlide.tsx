@@ -32,8 +32,8 @@ export function alturaSlide(tipo?: string): number {
   return tipo === 'infografico' ? 1350 : 1920;
 }
 
-export function PostSlide({ slide, mundo = 'escola', numero, total }: {
-  slide: PostSlideT; mundo?: Mundo; numero?: number; total?: number;
+export function PostSlide({ slide, mundo = 'escola', numero, total, ratio = '9:16' }: {
+  slide: PostSlideT; mundo?: Mundo; numero?: number; total?: number; ratio?: '9:16' | '4:5';
 }) {
   const tipo = slide.tipo;
   if (tipo === 'infografico') {
@@ -70,6 +70,7 @@ export function PostSlide({ slide, mundo = 'escola', numero, total }: {
       numero={numero}
       total={total}
       capa={!!slide.capa}
+      ratio={ratio}
     />
   );
 }

@@ -86,6 +86,7 @@ export default function AgendaPage() {
   // aplica a capa-assinatura + selo/paleta da série ao 1.º slide, como na biblioteca
   // (resolve à hora de mostrar: posts antigos também ganham capa e cabeçalho)
   const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
+  const CARROSSEL_FORMATOS = ['sinais', 'ninguem', 'pensador']; // saem 4:5 (carrossel de feed), não 9:16
   const slidesComCapa = (it: Item): Slide[] => {
     const sub = it.theme?.subtipo ?? '';
     const capa = capasSerie[sub];
@@ -216,7 +217,7 @@ export default function AgendaPage() {
               <div key={ent.iso} data-post={ent.iso} style={{ width: 1080 }}>
                 {slides.map((s, i) => (
                   <div key={i} data-slide style={{ width: 1080 }}>
-                    <PostSlide slide={s} mundo={mundoDe(ent.it)} numero={i + 1} total={slides.length} />
+                    <PostSlide slide={s} mundo={mundoDe(ent.it)} numero={i + 1} total={slides.length} ratio={CARROSSEL_FORMATOS.includes(ent.it.theme?.subtipo ?? '') ? '4:5' : '9:16'} />
                   </div>
                 ))}
               </div>
