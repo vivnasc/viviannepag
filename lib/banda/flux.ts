@@ -1,18 +1,32 @@
-// Motor de imagem do "Cá em Casa": gera ILUSTRAÇÕES (a assinatura visual da
-// série) via Flux/Replicate, o mesmo serviço do Estúdio. A foto realista saía
-// genérica ("toda a gente tem"); um estilo ilustrado fixo é único e
-// identificável. O estilo escolhe-se na UI (amostras + lock).
+// Motor de imagem partilhado (Flux/Replicate, o mesmo serviço do Estúdio).
+// Separa ESTILO (assinatura de desenho) de TEMA (cena+paleta por série), para
+// servir o "Cá em Casa" (vinho, quotidiano) e o "I am a Hero" (dourado,
+// ancestral) com o mesmo motor.
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const BUCKET = 'viviannepag-assets';
 
-// Linguagem comum a todos os estilos (tom + paleta + regras de segurança).
-// Família e pertença, quente; rosto nunca colado à câmara; SEM texto na imagem.
-const COMMON = `intimate domestic scene about family, belonging and tenderness, warm caring mood, bordeaux / terracotta / rose warm palette (deep wine); a person, or hands, or a quiet everyday gesture; faces never glued to camera; people portrayed with warmth and dignity, NEVER associating any ethnicity with a negative, blaming or villain role; NO text, NO words, NO letters, NO logos, NO watermarks, NO speech bubbles, NO captions, NO clickbait, NO exaggerated acting`;
+// Segurança comum a todas as séries (dignidade + sem texto/logos).
+const SAFETY = `people portrayed with warmth and dignity, NEVER associating any ethnicity with a negative, blaming or villain role; faces never glued to camera; NO text, NO words, NO letters, NO logos, NO watermarks, NO speech bubbles, NO captions, NO clickbait, NO exaggerated acting`;
+
+// Tema visual por série (cena + paleta/mood).
+export const TEMAS: Record<string, string> = {
+  caemcasa: 'intimate everyday domestic scene about family, belonging and tenderness, warm caring mood, bordeaux / terracotta / rose warm palette (deep wine)',
+  heroi: 'evocative scene about lineage, ancestry and healing across generations, hopeful and luminous, soft light breaking through, dignified and quietly epic, warm golden amber and honey palette',
+};
+export const TEMA_DEFAULT = 'caemcasa';
+
+// Estilos de ilustração (assinatura visual) — só o estilo, sem tema/paleta.
+export const ESTILOS: Record<string, { nome: string; prompt: string }> = {
+  gouache: { nome: 'Gouache / storybook', prompt: 'distinctive editorial illustration, soft gouache painting with visible brush texture and paper grain, hand-painted organic shapes, storybook-for-adults feel' },
+  aguarela: { nome: 'Tinta + aguarela', prompt: 'elegant editorial illustration, confident ink line-and-wash with loose watercolour washes, generous soft negative space, calm and tender' },
+  riso: { nome: 'Risograph 2 cores', prompt: 'risograph print illustration, grainy two-tone, bold simple shapes, slight misregistration texture, modern and ownable' },
+  flat: { nome: 'Flat editorial', prompt: 'modern flat editorial illustration with subtle paper grain, simple confident shapes, sophisticated magazine feel' },
+};
+export const ESTILO_DEFAULT = 'gouache';
 
 // Representação: VARIA ao longo da série (universal/inclusivo) em vez de fixar
-// uma raça. Cada post sorteia uma. Evita que a série tenha "uma cara" só e, com
-// a regra acima, que um tema pesado calhe a acusar uma etnia.
+// uma raça. Cada post sorteia uma. Com a regra de SAFETY, evita polémica.
 export const REPRESENTACOES = [
   'any person shown has warm brown mixed-race skin',
   'any person shown is Black with warm deep brown skin',
@@ -21,14 +35,11 @@ export const REPRESENTACOES = [
 ];
 export const representacaoAleatoria = () => REPRESENTACOES[Math.floor(Math.random() * REPRESENTACOES.length)];
 
-export const ESTILOS: Record<string, { nome: string; prompt: string }> = {
-  gouache: { nome: 'Gouache / storybook', prompt: `distinctive editorial illustration, soft gouache painting with visible brush texture and paper grain, hand-painted organic shapes, storybook-for-adults feel; ${COMMON}` },
-  aguarela: { nome: 'Tinta + aguarela', prompt: `elegant editorial illustration, confident ink line-and-wash with loose watercolour washes, generous soft negative space, calm and tender; ${COMMON}` },
-  riso: { nome: 'Risograph 2 cores', prompt: `risograph print illustration, grainy two-tone (deep bordeaux and warm ochre), bold simple shapes, slight misregistration texture, modern and ownable; ${COMMON}` },
-  flat: { nome: 'Flat editorial', prompt: `modern flat editorial illustration with subtle paper grain, simple confident shapes, sophisticated magazine feel; ${COMMON}` },
-};
-export const ESTILO_DEFAULT = 'gouache';
-export const estiloPrompt = (e?: string) => (ESTILOS[e ?? '']?.prompt) ?? ESTILOS[ESTILO_DEFAULT].prompt;
+function construirPrompt(scene: string, estilo?: string, tema?: string, extra?: string): string {
+  const est = ESTILOS[estilo ?? '']?.prompt ?? ESTILOS[ESTILO_DEFAULT].prompt;
+  const tem = TEMAS[tema ?? ''] ?? TEMAS[TEMA_DEFAULT];
+  return `${scene}\n\n${est}\n\n${tem}\n\n${SAFETY}${extra ? `\n\n${extra}` : ''}`;
+}
 
 type ReplicatePrediction = {
   id: string;
@@ -37,8 +48,10 @@ type ReplicatePrediction = {
   error?: string;
 };
 
-export async function gerarImagemFlux(prompt: string, token: string, estilo?: string, extra?: string): Promise<string> {
-  const fullPrompt = `${prompt}\n\n${estiloPrompt(estilo)}${extra ? `\n\n${extra}` : ''}`;
+export type GerarOpts = { estilo?: string; tema?: string; extra?: string };
+
+export async function gerarImagemFlux(scene: string, token: string, opts: GerarOpts = {}): Promise<string> {
+  const fullPrompt = construirPrompt(scene, opts.estilo, opts.tema, opts.extra);
   const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
@@ -60,8 +73,7 @@ export async function gerarImagemFlux(prompt: string, token: string, estilo?: st
   return out;
 }
 
-// Guarda a imagem no Storage e devolve o URL público. `path` é a chave dentro
-// do bucket (ex.: "banda/slug/capa-123.jpg").
+// Guarda a imagem no Storage e devolve o URL público. `path` é a chave no bucket.
 export async function guardarImagem(imageUrl: string, path: string): Promise<string> {
   const supabase = getSupabaseAdmin();
   const { data: existing } = await supabase.storage.getBucket(BUCKET);

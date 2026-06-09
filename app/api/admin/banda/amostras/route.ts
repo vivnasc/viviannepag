@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   const amostras = await Promise.all(
     pedidos.map(async (estilo) => {
       try {
-        const url = await gerarImagemFlux(cena, token, estilo, REP_AMOSTRA);
+        const url = await gerarImagemFlux(cena, token, { estilo, tema: 'caemcasa', extra: REP_AMOSTRA });
         let imageUrl = url;
         try { imageUrl = await guardarImagem(url, `banda/amostras/${estilo}-${ts}.jpg`); } catch { /* fica o URL do Replicate */ }
         return { estilo, nome: ESTILOS[estilo].nome, imageUrl };
