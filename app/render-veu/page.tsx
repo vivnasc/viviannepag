@@ -90,25 +90,15 @@ export default function RenderVeuPage() {
         <AnelCover label={s.label ?? ''} imageUrl={s.imageUrl} mundo={estado.dia.mundo} perfil={!!s.perfil} />
       )}
       {estado && ehInfo && s && (
-        video ? (
-          // MP4: cartão 4:5 centrado numa tela 9:16 índigo, revelado camada a camada
-          <div style={{ width: 1080, height: 1920, background: '#0F0F1A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: 1080 }}>
-              <InfograficoSlide
-                info={{ padrao: s.padrao ?? '', rotulo: s.rotulo, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
-                mundo={estado.dia.mundo}
-                imageUrl={s.imageUrl}
-                prog={prog}
-              />
-            </div>
-          </div>
-        ) : (
-          <InfograficoSlide
-            info={{ padrao: s.padrao ?? '', rotulo: s.rotulo, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
-            mundo={estado.dia.mundo}
-            imageUrl={s.imageUrl}
-          />
-        )
+        // MP4 = 9:16 cheio (preenche o ecrã como os outros reels), revelado camada a
+        // camada via prog; PNG do feed = 4:5.
+        <InfograficoSlide
+          info={{ padrao: s.padrao ?? '', rotulo: s.rotulo, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }}
+          mundo={estado.dia.mundo}
+          imageUrl={s.imageUrl}
+          prog={video ? prog : 1}
+          ratio={video ? '9:16' : '4:5'}
+        />
       )}
       {estado && ehReel && s && (
         <ReelSlide

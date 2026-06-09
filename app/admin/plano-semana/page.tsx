@@ -44,14 +44,17 @@ const GEN: Record<string, { badge: string; nota: string; destino: string; verLab
   infografico: { badge: 'Infográfico', nota: 'O infográfico é montado pelo gerador, a partir desta ideia. Revês em Infográficos.', destino: '/admin/infografico', verLabel: 'abrir Infográficos', botao: 'criar infográfico' },
 };
 
-// dia (YYYY-MM-DD local) a partir do dia da semana (1=segunda … 7=domingo)
-function dataDoDia(wd: number): string {
-  const dow = wd % 7; // domingo (7) -> 0, como Date.getDay()
-  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-  let add = (dow - hoje.getDay() + 7) % 7; if (add === 0) add = 7;
-  const d = new Date(hoje); d.setDate(d.getDate() + add);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+// dia (YYYY-MM-DD local)
+const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+// 2.ª-feira da semana a "off" semanas de hoje (0 = esta, +1 = próxima…)
+function segundaComOffset(off: number): Date {
+  const h = new Date(); h.setHours(0, 0, 0, 0);
+  const dw = h.getDay(); // 0=domingo..6=sábado
+  const s = new Date(h); s.setDate(h.getDate() + (dw === 0 ? -6 : 1 - dw) + off * 7);
+  return s;
 }
+// data real do dia "wd" (1=2ª…7=dom) na semana mostrada
+const dataDoDiaNaSemana = (seg: Date, wd: number) => { const d = new Date(seg); d.setDate(seg.getDate() + (wd - 1)); return isoLocal(d); };
 
 function realcar(frase: string, destaque: string[]) {
   if (!destaque.length) return <>{frase}</>;
@@ -69,8 +72,10 @@ export default function PlanoSemanaPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
 
+  const [semOffset, setSemOffset] = useState(0); // 0 = esta semana, +1 = próxima…
   const cursoAtual = CURSOS.find((c) => c.id === curso) ?? CURSOS[0];
-  const semEd = semanaEditorialAtual();
+  const targetSeg = segundaComOffset(semOffset);
+  const semEd = semanaEditorialAtual(targetSeg); // tema do plano trimestral DESSA semana
 
   const aplicar = useCallback((e: Estado) => {
     setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setPlano(e.plano ?? []); setCriados(e.criados ?? {});
@@ -112,6 +117,13 @@ export default function PlanoSemanaPage() {
   function usarSemanaDoPlano() {
     setCurso(semEd.curso); setTema(semEd.tema); setPlano([]); setCriados({});
     guardar({ curso: semEd.curso, tema: semEd.tema, plano: [], criados: {} });
+  }
+  // navega pelas semanas do plano trimestral (carrega o tema sozinho, não escolhes nada)
+  function irSemana(delta: number) {
+    const no = semOffset + delta; if (no < 0) return; // não planear o passado
+    const se = semanaEditorialAtual(segundaComOffset(no));
+    setSemOffset(no); setCurso(se.curso); setTema(se.tema); setPlano([]); setCriados({});
+    guardar({ curso: se.curso, tema: se.tema, plano: [], criados: {} });
   }
   const guardar = useCallback((next: Partial<Estado>) => {
     const merged: Estado = { curso, tema, plano, criados, ...next };
@@ -164,7 +176,7 @@ export default function PlanoSemanaPage() {
       const slug = j.coleccao?.slug as string | undefined;
       let quando = '';
       if (slug) {
-        const data = dataDoDia(wdDe(d, i));
+        const data = dataDoDiaNaSemana(targetSeg, wdDe(d, i));
         quando = ` e agendado p/ ${data.split('-').reverse().join('/')}`;
         fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
       }
@@ -186,19 +198,23 @@ export default function PlanoSemanaPage() {
         <p className="text-[0.82rem] opacity-70 mb-1">Conta <b>didática</b>. Âmbito: psicologia transpessoal, constelação familiar (heranças sistémicas), espiritualidade e desenvolvimento.</p>
         <p className="text-[0.78rem] opacity-60 mb-4">Vês <b>as frases reais da semana</b> (8 posts, Seg→Dom, com 2 à quarta), editas à mão, e só depois crias cada post. Nunca às cegas.</p>
 
-        {/* a semana de hoje, vinda do plano de 3 meses (não escolhes nada) */}
+        {/* semana do plano trimestral — navega com ◀▶, o tema vem sozinho (não escolhes nada) */}
         <div className="rounded-xl border border-ambar/25 bg-ambar/[0.05] p-4 mb-5">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[0.6rem] uppercase tracking-[0.18em] text-ambar">Plano de 3 meses · semana {semEd.semana} de {PLANO_EDITORIAL.length}</span>
+          <div className="flex items-center gap-2 mb-1">
+            <button onClick={() => irSemana(-1)} disabled={semOffset === 0} className="text-[0.85rem] px-2.5 py-0.5 rounded-full border border-ambar/30 text-ambar hover:bg-ambar/10 disabled:opacity-25">◀</button>
+            <span className="flex-1 text-center text-[0.6rem] uppercase tracking-[0.16em] text-ambar">{semOffset === 0 ? 'Esta semana' : semOffset === 1 ? 'Próxima semana' : `+${semOffset} semanas`} · semana {semEd.semana} de {PLANO_EDITORIAL.length}</span>
+            <button onClick={() => irSemana(1)} className="text-[0.85rem] px-2.5 py-0.5 rounded-full border border-ambar/30 text-ambar hover:bg-ambar/10">▶</button>
+          </div>
+          <p className="font-serif text-xl leading-tight text-center">“{semEd.mote}”</p>
+          <p className="text-[0.74rem] opacity-65 mt-0.5 text-center">{semEd.tema} · {(CURSOS.find((c) => c.id === semEd.curso) ?? CURSOS[0]).nome}</p>
+          <div className="flex items-center justify-center gap-3 mt-2">
+            {(curso !== semEd.curso || tema !== semEd.tema) && (
+              <button onClick={usarSemanaDoPlano} className="text-[0.66rem] px-3 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">usar o tema desta semana</button>
+            )}
             <Link href="/admin/calendario-veu" className="text-[0.66rem] text-ambar/80 hover:text-ambar">ver os 3 meses →</Link>
           </div>
-          <p className="font-serif text-xl leading-tight">“{semEd.mote}”</p>
-          <p className="text-[0.74rem] opacity-65 mt-0.5">{semEd.tema} · {(CURSOS.find((c) => c.id === semEd.curso) ?? CURSOS[0]).nome}</p>
-          {(curso !== semEd.curso || tema !== semEd.tema) && (
-            <button onClick={usarSemanaDoPlano} className="mt-2 text-[0.66rem] px-3 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">usar o tema desta semana</button>
-          )}
         </div>
-        <p className="text-[0.72rem] opacity-45 mb-3">Já está preenchido com o tema de hoje. Carrega em rascunhar — ou troca abaixo se quiseres outro.</p>
+        <p className="text-[0.72rem] opacity-45 mb-3">O tema vem do plano trimestral. Usa ◀▶ para a semana que queres (esta, a próxima…) e carrega em <b>rascunhar a semana</b>. Não escolhes nada.</p>
 
         {/* matéria + tema (âmbito didático) */}
         <div className="rounded-xl border border-[#C9B6FA]/30 bg-[#C9B6FA]/[0.05] p-4 mb-5">

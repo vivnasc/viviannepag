@@ -34,7 +34,7 @@ export type Infografico = {
   url?: string;
 };
 
-export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }: { info: Infografico; mundo?: Mundo; imageUrl?: string; prog?: number }) {
+export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1, ratio = '4:5' }: { info: Infografico; mundo?: Mundo; imageUrl?: string; prog?: number; ratio?: '4:5' | '9:16' }) {
   const p = PALETAS[mundo];
   // Identidade COMUM da Veu a Veu: fundo índigo profundo + texto creme, igual ao
   // resto do feed. Só o ACENTO (bordas, rótulos, diagrama) vem da matéria, para
@@ -42,6 +42,9 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
   const BG1 = '#1A1726', BG2 = '#0F0F1A', TXT = '#F2E8DC';
   const ACCENT = p.destaque;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
+  // 4:5 = PNG do feed; 9:16 = MP4 (preenche o ecrã todo, como os outros reels)
+  const H = ratio === '9:16' ? 1920 : 1350;
+  const AR = ratio === '9:16' ? '1080 / 1920' : '1080 / 1350';
 
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -55,10 +58,10 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
   const [fit, setFit] = useState(1);
   useLayoutEffect(() => {
     const el = contentRef.current; if (!el) return;
-    const apply = () => { el.style.transform = 'scale(1)'; const avail = 1350 - 180; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
+    const apply = () => { el.style.transform = 'scale(1)'; const avail = H - 180; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
     apply();
     if (typeof document !== 'undefined' && document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
-  }, [info]);
+  }, [info, H]);
 
   const d = info.diagrama ?? {};
   const tipo = info.tipoDiagrama ?? (info.ciclo?.length ? 'ciclo' : 'ciclo');
@@ -182,8 +185,8 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
   }
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1350', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1350, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 95% 80% at 50% 30%, ${BG1} 0%, ${BG2} 80%)`, display: 'flex', flexDirection: 'column', justifyContent: fit < 1 ? 'flex-start' : 'center', paddingTop: fit < 1 ? 90 : 0, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
+    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: AR, overflow: 'hidden', borderRadius: 16, background: BG2 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 95% 80% at 50% 30%, ${BG1} 0%, ${BG2} 80%)`, display: 'flex', flexDirection: 'column', justifyContent: fit < 1 ? 'flex-start' : 'center', paddingTop: fit < 1 ? 90 : 0, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
         {imageUrl && (<>
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
           <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 50% 40%, ${a(BG2, 'cc')} 0%, ${a(BG2, 'f2')} 100%)`, zIndex: 0 }} />
