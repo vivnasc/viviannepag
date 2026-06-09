@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { REGRA_ACENTOS } from '@/lib/texto';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -25,7 +26,7 @@ Devolve APENAS JSON: { "temas": ["tema curto e concreto", ...] } com 6 temas fre
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 600, system: SYSTEM, messages: [{ role: 'user', content: 'Sugere 6 temas de mini-conto "Cá em Casa" sobre limites, sem repetir os usados.' }] }),
+      body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 600, system: `${SYSTEM}\n\n${REGRA_ACENTOS}`, messages: [{ role: 'user', content: 'Sugere 6 temas de mini-conto "Cá em Casa" sobre limites, sem repetir os usados.' }] }),
     });
     if (!res.ok) return NextResponse.json({ erro: 'claude', detalhe: await res.text() }, { status: 502 });
     texto = (await res.json())?.content?.[0]?.text ?? '';

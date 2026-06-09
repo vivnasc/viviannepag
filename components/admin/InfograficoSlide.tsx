@@ -68,75 +68,95 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
   // "prog" (0..1) que o render conduz frame a frame. prog=1 => tudo visível, sem
   // transform — por isso o PNG estático e o feed ficam EXATAMENTE como antes.
   const temCustos = !!(info.custoTi || info.custoOutros);
+  // cada ITEM do diagrama revela-se sozinho (não o diagrama todo de uma vez)
+  const diagItems = (tipo === 'espectro' && (d.poloA || d.poloB)) ? 3
+    : (tipo === 'herdado' && (d.esquerda || d.direita)) ? 2
+    : (tipo === 'camadas' && d.camadas?.length) ? Math.min(3, d.camadas.length)
+    : (tipo === 'travessia' && passos.length) ? passos.length
+    : Math.max(passos.length, 1);
   let _n = 0;
-  const idxHeader = _n++, idxDiagrama = _n++, idxCustos = temCustos ? _n++ : -1, idxVirada = info.virada ? _n++ : -1, idxFooter = _n++;
+  const idxHeader = _n++;
+  const idxDiag0 = _n; _n += diagItems;
+  const idxCustos = temCustos ? _n++ : -1, idxVirada = info.virada ? _n++ : -1, idxFooter = _n++;
   const STAGES = _n;
   const reveal = (i: number): CSSProperties => {
     if (prog >= 1 || i < 0) return {};
     const slice = 1 / STAGES;
-    const local = Math.max(0, Math.min(1, (prog - i * slice) / (slice * 1.5)));
+    // entra depressa (0.55 da fatia) e SEGURA o resto da fatia => dá tempo de leitura
+    const local = Math.max(0, Math.min(1, (prog - i * slice) / (slice * 0.55)));
     const e = 1 - Math.pow(1 - local, 3); // easeOutCubic
-    return { opacity: e, transform: `translateY(${(1 - e) * 26}px)` };
+    return { opacity: e, transform: `translateY(${(1 - e) * 28}px)` };
   };
+  const dRev = (k: number): CSSProperties => reveal(idxDiag0 + k);
+
+  // selo numerado (realce forte, para prender)
+  const Badge = ({ n, size = 56 }: { n: number; size?: number }) => (
+    <span style={{ flexShrink: 0, width: size, height: size, borderRadius: '50%', background: ACCENT, color: BG2, fontFamily: FONT_SANS, fontWeight: 800, fontSize: size * 0.5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
+  );
 
   function Diagrama() {
-    // ESPECTRO — dois polos + equilibrio no meio
+    // ESPECTRO — dois polos + equilibrio no meio (cada um entra à vez)
     if (tipo === 'espectro' && (d.poloA || d.poloB)) {
       return (
         <div style={{ width: '100%', margin: '14px 0 6px' }}>
           <div style={{ position: 'relative', height: 4, background: a(ACCENT, '40'), borderRadius: 2, margin: '0 40px' }}>
             <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: 18, height: 18, borderRadius: '50%', background: ACCENT }} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 14 }}>
-            <div style={{ ...cardSt, padding: '12px 18px', maxWidth: 320, fontSize: 32 }}>{d.poloA}</div>
-            <div style={{ ...cardSt, padding: '12px 18px', maxWidth: 320, fontSize: 32 }}>{d.poloB}</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 20, marginTop: 14 }}>
+            <div style={{ ...cardSt, ...dRev(0), flex: 1, padding: '18px 22px', fontSize: 34, borderLeft: `6px solid ${ACCENT}` }}>{d.poloA}</div>
+            <div style={{ ...cardSt, ...dRev(1), flex: 1, padding: '18px 22px', fontSize: 34, borderRight: `6px solid ${ACCENT}`, textAlign: 'right' }}>{d.poloB}</div>
           </div>
           {d.equilibrio && (
-            <div style={{ textAlign: 'center', marginTop: 18 }}>
-              <span style={{ fontFamily: FONT_SANS, fontSize: 17, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT, opacity: 0.8 }}>equilíbrio</span>
-              <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 38, lineHeight: 1.3, margin: '6px 0 0' }}>{d.equilibrio}</p>
+            <div style={{ ...dRev(2), textAlign: 'center', marginTop: 22 }}>
+              <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 18, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT }}>equilíbrio</span>
+              <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 42, lineHeight: 1.3, margin: '8px 0 0' }}>{d.equilibrio}</p>
             </div>
           )}
         </div>
       );
     }
-    // HERDADO — duas colunas
+    // HERDADO — duas colunas (cada coluna entra à vez)
     if (tipo === 'herdado' && (d.esquerda || d.direita)) {
-      const col = (c?: { titulo?: string; itens?: string[] }) => (
-        <div style={{ flex: 1, ...cardSt, padding: '20px 22px', textAlign: 'left' }}>
-          <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 18, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT }}>{c?.titulo}</span>
-          {(c?.itens ?? []).slice(0, 4).map((it, i) => <p key={i} style={{ fontFamily: FONT_SERIF, fontSize: 30, lineHeight: 1.3, margin: '10px 0 0' }}>· {it}</p>)}
+      const col = (c: { titulo?: string; itens?: string[] } | undefined, st: CSSProperties) => (
+        <div style={{ flex: 1, ...cardSt, ...st, padding: '24px 26px', textAlign: 'left', borderLeft: `6px solid ${ACCENT}` }}>
+          <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 19, letterSpacing: '0.26em', textTransform: 'uppercase', color: ACCENT }}>{c?.titulo}</span>
+          {(c?.itens ?? []).slice(0, 4).map((it, i) => <p key={i} style={{ fontFamily: FONT_SERIF, fontSize: 33, lineHeight: 1.32, margin: '14px 0 0', display: 'flex', gap: 12 }}><span style={{ color: ACCENT }}>◆</span><span>{it}</span></p>)}
         </div>
       );
-      return <div style={{ display: 'flex', gap: 20, width: '100%', margin: '16px 0 6px' }}>{col(d.esquerda)}{col(d.direita)}</div>;
+      return <div style={{ display: 'flex', gap: 20, width: '100%', margin: '16px 0 6px' }}>{col(d.esquerda, dRev(0))}{col(d.direita, dRev(1))}</div>;
     }
-    // CAMADAS — bandas empilhadas
+    // CAMADAS — bandas numeradas (cada uma entra à vez, com realce)
     if (tipo === 'camadas' && d.camadas?.length) {
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', margin: '16px 0 6px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', margin: '16px 0 6px' }}>
           {d.camadas.slice(0, 3).map((c, i) => (
-            <div key={i} style={{ ...cardSt, padding: '18px 24px', textAlign: 'left', opacity: 1 - i * 0.12 }}>
-              <span style={{ fontFamily: FONT_SANS, fontSize: 16, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT }}>{c.label}</span>
-              <p style={{ fontFamily: FONT_SERIF, fontSize: 32, lineHeight: 1.3, margin: '8px 0 0' }}>{c.texto}</p>
+            <div key={i} style={{ ...cardSt, ...dRev(i), display: 'flex', gap: 24, alignItems: 'flex-start', padding: '24px 28px', textAlign: 'left', borderLeft: `6px solid ${ACCENT}`, background: a(BG2, 'e6') }}>
+              <Badge n={i + 1} />
+              <div>
+                <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 17, letterSpacing: '0.26em', textTransform: 'uppercase', color: ACCENT }}>{c.label}</span>
+                <p style={{ fontFamily: FONT_SERIF, fontSize: 35, lineHeight: 1.3, margin: '8px 0 0' }}>{c.texto}</p>
+              </div>
             </div>
           ))}
         </div>
       );
     }
-    // TRAVESSIA — passos lineares com seta →
+    // TRAVESSIA — passos numerados com seta (cada passo entra à vez)
     if (tipo === 'travessia' && passos.length) {
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, margin: '16px 0 6px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, margin: '16px 0 6px' }}>
           {passos.map((passo, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-              <div style={{ ...cardSt, padding: '12px 26px', fontSize: 34, maxWidth: 800 }}>{passo}</div>
-              {i < passos.length - 1 && <span style={{ color: ACCENT, opacity: 0.7, fontSize: 26 }}>↓</span>}
+            <div key={i} style={{ ...dRev(i), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, width: '100%' }}>
+              <div style={{ ...cardSt, display: 'flex', gap: 20, alignItems: 'center', padding: '16px 28px', fontSize: 36, maxWidth: 840, borderLeft: `6px solid ${ACCENT}` }}>
+                <Badge n={i + 1} size={50} /><span>{passo}</span>
+              </div>
+              {i < passos.length - 1 && <span style={{ color: ACCENT, opacity: 0.7, fontSize: 30 }}>↓</span>}
             </div>
           ))}
         </div>
       );
     }
-    // CICLO (roda) — default
+    // CICLO (roda) — cada raio entra à vez
     const n = Math.max(passos.length, 1), RING = 500, CXY = RING / 2, R = 172;
     return (
       <div style={{ position: 'relative', width: RING, height: RING, margin: '18px 0 4px' }}>
@@ -149,9 +169,9 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
           const ang = (-90 + i * (360 / n)) * Math.PI / 180;
           const x = CXY + R * Math.cos(ang), y = CXY + R * Math.sin(ang);
           return (
-            <div key={i} style={{ position: 'absolute', left: x, top: y, transform: 'translate(-50%,-50%)', width: 240 }}>
-              <div style={{ ...cardSt, padding: '10px 16px', fontSize: 29, lineHeight: 1.18 }}>
-                <span style={{ fontFamily: FONT_SANS, fontSize: 15, color: ACCENT, opacity: 0.8, display: 'block', marginBottom: 2 }}>{i + 1}</span>{passo}
+            <div key={i} style={{ position: 'absolute', left: x, top: y, transform: 'translate(-50%,-50%)', width: 248 }}>
+              <div style={{ ...cardSt, ...dRev(i), display: 'flex', gap: 14, alignItems: 'center', padding: '12px 16px', fontSize: 30, lineHeight: 1.18, borderLeft: `5px solid ${ACCENT}` }}>
+                <Badge n={i + 1} size={42} /><span>{passo}</span>
               </div>
             </div>
           );
@@ -176,7 +196,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
             {info.subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, lineHeight: 1.3, opacity: 0.82, margin: '12px auto 0', maxWidth: 820 }}>{info.subtitulo}</p>}
           </div>
 
-          <div style={{ ...reveal(idxDiagrama), display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}><Diagrama /></div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}><Diagrama /></div>
 
           {temCustos && (
             <div style={{ ...reveal(idxCustos), display: 'flex', gap: 20, width: '100%', marginTop: 18 }}>

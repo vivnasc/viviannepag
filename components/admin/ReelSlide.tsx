@@ -62,7 +62,7 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
           <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
           {/* na capa-assinatura o véu é mais leve no topo (a imagem aparece), escuro em baixo (texto legível) */}
           <div style={{ position: 'absolute', inset: 0, background: ehSelo
-            ? `linear-gradient(to bottom, ${a(BG2, '26')} 0%, ${a(BG2, '12')} 24%, ${a(BG2, '99')} 54%, ${a(BG2, 'f2')} 100%)`
+            ? `linear-gradient(to bottom, ${a(BG2, '14')} 0%, ${a(BG2, '0d')} 30%, ${a(BG2, '82')} 58%, ${a(BG2, 'f0')} 100%)`
             : `radial-gradient(ellipse at 50% 42%, ${a(BG2, 'd9')} 0%, ${a(BG2, 'f7')} 100%)`, zIndex: 0 }} />
         </>)}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.13, zIndex: 0, pointerEvents: 'none' }} />
@@ -101,14 +101,15 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 110px', zIndex: 3 }}>
           <div ref={txtRef} style={{ transform: `scale(${fit})`, transformOrigin: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, width: '100%' }}>
             {frame.pontos && frame.pontos.length ? (
-              // ── frame de mini-aula: título (maior) + bullets (hierarquia/retenção) ──
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 40, maxWidth: 880, width: '100%' }}>
-                {frame.titulo && <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 74, lineHeight: 1.14, textAlign: 'center', margin: 0 }}>{frame.titulo}</p>}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 30 }}>
+              // ── mini-aula: título grande + passos NUMERADOS em cartões com acento
+              //    (realce forte, hierarquia clara: cada passo prende e segura a retenção) ──
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 48, maxWidth: 920, width: '100%' }}>
+                {frame.titulo && <p style={{ fontFamily: FONT_SERIF, fontWeight: 500, fontSize: 80, lineHeight: 1.1, textAlign: 'center', margin: 0 }}>{frame.titulo}</p>}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                   {frame.pontos.map((pt, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-                      <span style={{ color: ACCENT, fontSize: 34, lineHeight: 1.4, flexShrink: 0 }}>◆</span>
-                      <span style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 50, lineHeight: 1.3, textAlign: 'left' }}>{pt}</span>
+                    <div key={i} style={{ display: 'flex', gap: 28, alignItems: 'center', padding: '26px 32px', borderRadius: 22, background: a(ACCENT, '14'), borderLeft: `7px solid ${ACCENT}` }}>
+                      <span style={{ flexShrink: 0, width: 66, height: 66, borderRadius: '50%', background: ACCENT, color: BG2, fontFamily: FONT_SANS, fontWeight: 800, fontSize: 34, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</span>
+                      <span style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 54, lineHeight: 1.26, textAlign: 'left' }}>{pt}</span>
                     </div>
                   ))}
                 </div>

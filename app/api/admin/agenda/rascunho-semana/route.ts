@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getCurso } from '@/lib/infografico/cursos';
-import { limparTravessoes } from '@/lib/texto';
+import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -53,7 +53,9 @@ REGRAS:
 
 DEVOLVE APENAS JSON valido:
 { "dias": [ { "frase": "texto no ecra", "destaque": ["palavra"], "legenda": "legenda completa com 8-10 hashtags em portugues no fim", "fundoPrompt": "prompt MJ unico deste dia, --ar 9:16 --style raw" } ] }
-Exatamente 6 itens, pela ordem dos dias acima.`;
+Exatamente 6 itens, pela ordem dos dias acima.
+
+${REGRA_ACENTOS}`;
 
   let texto = '';
   try {
@@ -78,6 +80,7 @@ Exatamente 6 itens, pela ordem dos dias acima.`;
     }));
   } catch { return NextResponse.json({ erro: 'parse', detalhe: texto.slice(0, 200) }, { status: 502 }); }
   if (!dias.length) return NextResponse.json({ erro: 'vazio' }, { status: 502 });
+  dias = await corrigirAcentos(dias, apiKey); // rede de segurança: acentuação correta
 
   // junta o angulo/etiqueta de cada slot ao texto rascunhado
   const plano = SLOTS.map((s, i) => ({ ...s, ...(dias[i] ?? { frase: '', destaque: [], legenda: '', fundoPrompt: '' }) }));

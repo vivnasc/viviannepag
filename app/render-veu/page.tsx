@@ -20,10 +20,14 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
 type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[] };
-type Coleccao = { dias: Dia[] };
+type Coleccao = { dias: Dia[]; theme?: { subtipo?: string } };
+
+// séries de reels com capa-assinatura (selo + carvão na capa)
+const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
 
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number } | null>(null);
+  const [subtipo, setSubtipo] = useState<string>('');
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
@@ -43,6 +47,7 @@ export default function RenderVeuPage() {
         const r = await fetch(`/api/carrossel-veus/data?slug=${encodeURIComponent(slug)}`);
         if (!r.ok) { setErro(`coleccao ${r.status}`); return; }
         const col = (await r.json()) as Coleccao;
+        setSubtipo(col.theme?.subtipo ?? '');
         const dia = col.dias.find((d) => d.dia === diaN);
         const slide = dia?.slides?.[idx];
         if (!dia || !slide) { setErro('slide nao encontrado'); return; }
@@ -107,7 +112,7 @@ export default function RenderVeuPage() {
       )}
       {estado && ehReel && s && (
         <ReelSlide
-          frame={{ kicker: s.kicker, texto: s.texto ?? '', nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo, pal: s.pal, imageUrl: s.imageUrl }}
+          frame={{ kicker: s.kicker, texto: s.texto ?? '', nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo || (estado.idx === 0 && SERIE_ASSINATURA[subtipo] ? SERIE_ASSINATURA[subtipo] : undefined), pal: s.pal ?? (SERIE_ASSINATURA[subtipo] ? (estado.idx === 0 ? 'carvao' : 'creme') : undefined), imageUrl: s.imageUrl }}
           mundo={estado.dia.mundo}
           imageUrl={s.imageUrl}
           numero={estado.idx + 1}

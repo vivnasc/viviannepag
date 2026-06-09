@@ -83,10 +83,21 @@ export default function AgendaPage() {
     .map((iso, i) => ({ iso, ordem: i + 1, diaPt: DIAS_PT[dias[i].getDay()], it: itens.find((x) => x.theme?.agendadoEm === iso) }))
     .filter((x): x is { iso: string; ordem: number; diaPt: string; it: Item } => !!x.it);
 
-  // aplica a capa-assinatura da série ao 1.º slide (sinais/ninguém), como na biblioteca
+  // aplica a capa-assinatura + selo/paleta da série ao 1.º slide, como na biblioteca
+  // (resolve à hora de mostrar: posts antigos também ganham capa e cabeçalho)
+  const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
   const slidesComCapa = (it: Item): Slide[] => {
-    const capa = capasSerie[it.theme?.subtipo ?? ''];
-    return (it.dias?.[0]?.slides ?? []).map((s, i) => (i === 0 && capa && !s.imageUrl ? { ...s, imageUrl: capa } : s));
+    const sub = it.theme?.subtipo ?? '';
+    const capa = capasSerie[sub];
+    const ehAssinatura = SERIE_ASSINATURA.includes(sub);
+    const nome = FMT[sub]?.label ?? '';
+    return (it.dias?.[0]?.slides ?? []).map((s, i) => {
+      if (i !== 0) return s;
+      const out: Slide = { ...s };
+      if (capa && !s.imageUrl) out.imageUrl = capa;
+      if (ehAssinatura) { out.selo = s.selo || nome; out.pal = s.pal ?? 'carvao'; }
+      return out;
+    });
   };
   const legendaDe = (it: Item): string => {
     const d = it.dias?.[0];
