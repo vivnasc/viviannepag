@@ -45,7 +45,7 @@ async function main() {
   console.log(`[data] ${dias.length} dias`);
 
   const formato = col.theme?.formato;
-  const kinetic = formato === 'reel' && col.theme?.subtipo === 'kinetico'; // frase com motion
+  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo'); // frase com motion / Domingo de Luz (animados)
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   const soImagens = formato === 'aneis'; // so os aneis ficam so imagem
   const H = formato === 'aneis' ? 1080 : formato === 'infografico' ? 1350 : 1920;

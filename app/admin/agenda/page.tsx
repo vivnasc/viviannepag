@@ -41,6 +41,8 @@ const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl
 const SUG: Record<number, string> = { 1: '✨ frase', 2: '🔎 sinais de que…', 3: '💡 o que ninguém explica', 4: '🎭 Cá em Casa', 5: '🌅 I am a Hero', 6: '📊 infográfico', 0: '🕊️ Domingo de Luz' };
 // formato planeado de cada dia (para o seletor mostrar só esse formato)
 const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'sinais', 3: 'ninguem', 4: 'banda', 5: 'heroi', 6: 'infografico', 0: 'domingo' };
+// formatos que SÃO vídeo (precisam de render MP4); os outros são carrossel/imagem
+const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const HORA = '20:00';
@@ -149,6 +151,24 @@ export default function AgendaPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baixando]);
 
+  // ── renderizar todos os MP4s EM FALTA da semana (dispara o GitHub Actions p/ cada um) ──
+  const mp4Pendentes = semana.filter((e) => VIDEO_FORMATOS.includes(tipoChave(e.it)) && !e.it.dias?.[0]?.videoUrl);
+  const [renderizando, setRenderizando] = useState(false);
+  const [renderMsg, setRenderMsg] = useState<string | null>(null);
+  async function renderMp4Semana() {
+    if (!mp4Pendentes.length) { setRenderMsg('Não há MP4s em falta esta semana.'); return; }
+    setRenderizando(true); setRenderMsg(null);
+    let ok = 0; const erros: string[] = [];
+    for (const e of mp4Pendentes) {
+      try {
+        const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: e.it.slug }) });
+        if (r.ok) ok++; else { const j = await r.json().catch(() => ({})); erros.push(`${e.diaPt}: ${j.erro ?? r.status}`); }
+      } catch (err) { erros.push(`${e.diaPt}: ${String(err)}`); }
+    }
+    setRenderizando(false);
+    setRenderMsg(`${ok} render(s) MP4 disparado(s) (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para os veres.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
+  }
+
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${cormorant.variable} ${inter.variable}`}>
       <div className="max-w-3xl mx-auto">
@@ -162,8 +182,10 @@ export default function AgendaPage() {
         {/* descarregar a semana inteira (imagens + legendas + MP4) para publicar à mão */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
           <button onClick={() => { if (semana.length) { setZipMsg(null); setBaixando(true); } }} disabled={baixando || semana.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{baixando ? 'a preparar o ZIP…' : `⬇ baixar a semana (ZIP) · ${semana.length} post(s)`}</button>
-          <span className="text-[0.68rem] opacity-50">imagens (PNG) + legenda.txt {`{`}+ MP4 quando existe{`}`}, uma pasta por dia. Para agendares à mão.</span>
+          <button onClick={renderMp4Semana} disabled={renderizando || mp4Pendentes.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{renderizando ? 'a disparar…' : `🎬 renderizar MP4s da semana · ${mp4Pendentes.length} em falta`}</button>
+          <span className="text-[0.68rem] opacity-50 w-full">ZIP: imagens (PNG) + legenda.txt (+ MP4 quando já existe), uma pasta por dia. O botão dos MP4s dispara o render dos vídeos em falta (Cá em Casa, I am a Hero, Infográfico, Domingo, Frase com motion) ~10 min cada.</span>
           {zipMsg && <span className="text-[0.72rem] text-salvia w-full">{zipMsg}</span>}
+          {renderMsg && <span className="text-[0.72rem] text-[#C9B6FA] w-full">{renderMsg}</span>}
         </div>
 
         <div className="space-y-3">
