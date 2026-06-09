@@ -60,7 +60,10 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1920, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: img ? '#000' : `radial-gradient(ellipse 100% 75% at 50% 28%, ${BG1} 0%, ${BG2} 78%)`, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
         {img && (<>
           <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
-          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 50% 42%, ${a(BG2, 'd9')} 0%, ${a(BG2, 'f7')} 100%)`, zIndex: 0 }} />
+          {/* na capa-assinatura o véu é mais leve no topo (a imagem aparece), escuro em baixo (texto legível) */}
+          <div style={{ position: 'absolute', inset: 0, background: ehSelo
+            ? `linear-gradient(to bottom, ${a(BG2, '26')} 0%, ${a(BG2, '12')} 24%, ${a(BG2, '99')} 54%, ${a(BG2, 'f2')} 100%)`
+            : `radial-gradient(ellipse at 50% 42%, ${a(BG2, 'd9')} 0%, ${a(BG2, 'f7')} 100%)`, zIndex: 0 }} />
         </>)}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.13, zIndex: 0, pointerEvents: 'none' }} />
 

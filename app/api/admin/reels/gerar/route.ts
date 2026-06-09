@@ -34,15 +34,16 @@ export async function POST(req: Request) {
     if (!frase) return NextResponse.json({ erro: 'falta frase' }, { status: 400 });
     const destaque = limparTravessoes((body.destaque ?? '').split(',').map((s) => s.trim()).filter(Boolean));
     const fundoPrompt = limparTravessoes((body.fundoPrompt ?? '').trim()) || 'luminous golden roots and threads of light weaving upward through deep indigo blue, ethereal, sacred, soft glow, fine art, no people, no text, --ar 9:16 --style raw';
-    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, capa: true }];
+    const subId = formato.id === 'domingo' ? 'domingo' : 'kinetico'; // respeita o Domingo de Luz
+    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
     const numeroFaixaM = (Math.floor(Date.now() / 1000) % 100) + 1;
     const faixaM = { numero: numeroFaixaM, titulo: `Faixa ${String(numeroFaixaM).padStart(2, '0')}`, url: faixaUrl(numeroFaixaM) };
-    const slugM = `reel-kinetico-${curso.id}-${Date.now()}`;
+    const slugM = `reel-${subId}-${curso.id}-${Date.now()}`;
     const diasM = [{ dia: 1, mundo, palavra: frase.slice(0, 48), slides, faixa: faixaM, legenda: limparTravessoes((body.legenda ?? '').trim()), hashtags: [] }];
     const supabaseM = getSupabaseAdmin();
     const { data: dataM, error: errM } = await supabaseM
       .from('carousel_collections')
-      .upsert({ slug: slugM, title: frase.slice(0, 48), brief: frase, dias: diasM, theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo, curso: curso.id } }, { onConflict: 'slug' })
+      .upsert({ slug: slugM, title: frase.slice(0, 48), brief: frase, dias: diasM, theme: { formato: 'reel', subtipo: subId, video: true, mundo, curso: curso.id } }, { onConflict: 'slug' })
       .select().single();
     if (errM) return NextResponse.json({ erro: 'db', detalhe: errM.message }, { status: 500 });
     return NextResponse.json({ ok: true, coleccao: dataM });
@@ -94,7 +95,7 @@ DEVOLVE APENAS JSON valido:
   const framesIn = Array.isArray(p.frames) ? p.frames.filter((f) => f && (f.texto || (Array.isArray(f.pontos) && f.pontos.length))) : [];
   if (!framesIn.length) return NextResponse.json({ erro: 'sem-frames', amostra: texto.slice(0, 300) }, { status: 502 });
 
-  const ehKinetico = formato.id === 'kinetico';
+  const ehKinetico = formato.id === 'kinetico' || formato.id === 'domingo';
   // cada frame vira um "slide". Kinetico = 1 slide tipo='kinetico' (frase + fundo).
   const slides = ehKinetico
     ? [{
@@ -102,6 +103,7 @@ DEVOLVE APENAS JSON valido:
         texto: (framesIn[0].texto ?? '').trim(),
         destaque: Array.isArray(p.destaque) ? p.destaque.map(String) : [],
         notaVisual: (p.fundoPrompt ?? '').trim(), // prompt MJ para o fundo (copia -> gera -> arrasta)
+        variante: formato.id === 'domingo' ? 'domingo' : undefined, // motion próprio do Domingo de Luz
         capa: true,
       }]
     : framesIn.map((f, i) => ({

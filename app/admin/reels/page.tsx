@@ -18,19 +18,19 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
+type ReelSlideT = { tipo: string; kicker?: string; texto: string; nota?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; capa?: boolean; destaque?: string[]; imageUrl?: string; notaVisual?: string };
 type Dia = { dia: number; mundo?: Mundo; slides?: ReelSlideT[]; videoUrl?: string; roteiro?: string[]; legenda?: string; hashtags?: string[]; faixa?: { titulo?: string } };
 type Item = { slug: string; title: string; dias: Dia[]; theme: { formato?: string; subtipo?: string; curso?: string; mundo?: Mundo; video?: boolean }; created_at: string };
 
 // pré-visualização animada do cinético (loop suave)
-function KineticPreview({ texto, destaque, imageUrl, mundo }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo }) {
+function KineticPreview({ texto, destaque, imageUrl, mundo, variante }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; variante?: string }) {
   const [prog, setProg] = useState(0);
   useEffect(() => {
     let raf = 0; let t0 = 0; const CICLO = 6500;
     const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.75)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
   }, []);
-  return <KineticSlide texto={texto} destaque={destaque} imageUrl={imageUrl} mundo={mundo} prog={prog} />;
+  return <KineticSlide texto={texto} destaque={destaque} imageUrl={imageUrl} mundo={mundo} prog={prog} variante={variante} />;
 }
 
 export default function ReelsPage() {
@@ -100,7 +100,7 @@ export default function ReelsPage() {
     if (!frase) { setErro('Escreve a frase exata.'); return; }
     setGerando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/reels/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ manual: true, formato: 'kinetico', curso, frase, destaque: manDest, legenda: manLeg }) });
+      const r = await fetch('/api/admin/reels/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ manual: true, formato, curso, frase, destaque: manDest, legenda: manLeg }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       setManFrase(''); setManDest(''); setManLeg('');
@@ -229,7 +229,7 @@ export default function ReelsPage() {
     return (it.dias?.[0]?.slides ?? []).map((s, i) => ({ kicker: s.kicker, texto: s.texto, nota: s.nota, titulo: s.titulo, pontos: s.pontos, motivo: s.motivo, selo: s.selo, pal: s.pal, imageUrl: (i === 0 ? (s.imageUrl ?? capaSerie) : s.imageUrl) }));
   };
   const kinDe = (it: Item) => it.dias?.[0]?.slides?.[0];
-  const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico';
+  const it_kinetic = (it: Item) => it.theme?.subtipo === 'kinetico' || it.theme?.subtipo === 'domingo';
 
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${FONTS}`}>
@@ -273,7 +273,7 @@ export default function ReelsPage() {
           </div>
 
           {/* frase exata (sem IA) — só no cinético */}
-          {formato === 'kinetico' && (
+          {(formato === 'kinetico' || formato === 'domingo') && (
             <div className="mt-4 rounded-xl border border-ambar/25 bg-ambar/[0.04] p-3.5">
               <p className="text-[0.62rem] uppercase tracking-[0.15em] text-ambar mb-2">✍️ Ou escreve a frase exata (sem IA)</p>
               <input value={manFrase} onChange={(e) => setManFrase(e.target.value)} placeholder="Frase exata. Ex.: Nem tudo o que sentes é teu." className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.85rem] outline-none focus:border-ambar mb-2" />
@@ -329,7 +329,7 @@ export default function ReelsPage() {
               const d = it.dias?.[0];
               const mundo = mundoDe(it);
               const f = getFormato(it.theme?.subtipo ?? 'sinais');
-              const ehKin = it.theme?.subtipo === 'kinetico';
+              const ehKin = it.theme?.subtipo === 'kinetico' || it.theme?.subtipo === 'domingo';
               const header = (
                 <>
                   <div className="flex items-center justify-center gap-2 mb-3">
@@ -348,7 +348,7 @@ export default function ReelsPage() {
                   <Card key={it.slug} className="p-5">
                     {header}
                     <button onClick={() => setZoom({ it, idx: 0 })} className="block w-[58%] mx-auto mb-3 cursor-zoom-in" title="ver em grande (animado)">
-                      <KineticPreview texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundo} />
+                      <KineticPreview texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundo} variante={ks.variante} />
                     </button>
 
                     {/* fundo: prompt MJ + arrastar */}
@@ -423,7 +423,7 @@ export default function ReelsPage() {
         {/* host escondido para capturar a imagem do cinético */}
         {capKin && (() => { const ks = kinDe(capKin); return ks ? (
           <div ref={capRef} style={{ position: 'fixed', left: -10000, top: 0, width: 1080 }} aria-hidden>
-            <KineticSlide texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundoDe(capKin)} prog={1} />
+            <KineticSlide texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundoDe(capKin)} prog={1} variante={ks.variante} />
           </div>
         ) : null; })()}
 
@@ -433,7 +433,7 @@ export default function ReelsPage() {
           return (
             <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 cursor-zoom-out">
               <div className="w-full" style={{ maxWidth: 'min(70vw, 320px)' }} onClick={(e) => e.stopPropagation()}>
-                {ks && <KineticPreview texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundo} />}
+                {ks && <KineticPreview texto={ks.texto} destaque={ks.destaque} imageUrl={ks.imageUrl} mundo={mundo} variante={ks.variante} />}
                 <p className="text-center text-[0.7rem] opacity-60 mt-3">toca fora para fechar</p>
               </div>
             </div>

@@ -29,6 +29,7 @@ const FMT: Record<string, { emoji: string; label: string; href: string; cor: str
   pergunta: { emoji: '💬', label: 'Pergunta', href: '/admin/reels', cor: '#7E9B8E' },
   glossario: { emoji: '📖', label: 'Glossário da Alma', href: '/admin/reels', cor: '#C9B6FA' },
   pensador: { emoji: '🕯️', label: 'Uma ideia de…', href: '/admin/reels', cor: '#EBAE4A' },
+  domingo: { emoji: '🕊️', label: 'Domingo de Luz', href: '/admin/reels', cor: '#EBB7CE' },
   reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels', cor: '#C9B6FA' },
 };
 // chave da série: nos reels é o subtipo (o nome real); nos outros, o formato
