@@ -26,11 +26,16 @@ export type ReelFrame = {
   pal?: string;      // paleta por frame (ex.: 'carvao' na capa, 'creme' no ensino)
 };
 
-export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, capa = false }: { frame: ReelFrame; mundo?: Mundo; imageUrl?: string; numero?: number; total?: number; capa?: boolean }) {
+export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, capa = false, ratio = '9:16' }: { frame: ReelFrame; mundo?: Mundo; imageUrl?: string; numero?: number; total?: number; capa?: boolean; ratio?: '9:16' | '4:5' }) {
   const img = imageUrl ?? frame.imageUrl ?? undefined;
   const p = PALETAS[frame.pal ?? mundo] ?? PALETAS[mundo] ?? PALETAS.escola;
   const BG1 = p.bg, BG2 = p.bg2, ACCENT = p.destaque, TXT = p.texto;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
+  // 9:16 = Reel (MP4); 4:5 = carrossel de feed (o Instagram recusa 9:16 no carrossel)
+  const r4 = ratio === '4:5';
+  const H = r4 ? 1350 : 1920;
+  const AR = r4 ? '1080 / 1350' : '1080 / 1920';
+  const topUI = r4 ? 116 : 150, botUI = r4 ? 100 : 130, cInset = r4 ? 48 : 60;
 
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -45,10 +50,10 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
   const [fit, setFit] = useState(1);
   useLayoutEffect(() => {
     const el = txtRef.current; if (!el) return;
-    const apply = () => { el.style.transform = 'scale(1)'; const avail = 1180; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.45, avail / h) : 1); };
+    const apply = () => { el.style.transform = 'scale(1)'; const avail = H * 0.62; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.45, avail / h) : 1); };
     apply();
     if (typeof document !== 'undefined' && document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
-  }, [frame]);
+  }, [frame, H]);
 
   const base = capa ? 104 : 88;
   // selo de capa por série (genérico). 'motivo:lanterna' = legado da 1.ª série.
@@ -56,8 +61,8 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
   const ehSelo = capa && !!seloTxt;
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1920', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 1920, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: img ? '#000' : `radial-gradient(ellipse 100% 75% at 50% 28%, ${BG1} 0%, ${BG2} 78%)`, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
+    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: AR, overflow: 'hidden', borderRadius: 16, background: BG2 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: img ? '#000' : `radial-gradient(ellipse 100% 75% at 50% 28%, ${BG1} 0%, ${BG2} 78%)`, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
         {img && (<>
           <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
           {/* na capa-assinatura o véu é mais leve no topo (a imagem aparece), escuro em baixo (texto legível) */}
@@ -72,7 +77,7 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         {ehSelo && (
           <>
             {!img && <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'radial-gradient(circle at 50% 24%, rgba(255,247,224,0.30) 0%, rgba(255,247,224,0.08) 24%, transparent 46%)' }} />}
-            <div style={{ position: 'absolute', top: 150, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
+            <div style={{ position: 'absolute', top: topUI, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 28px', borderRadius: 999, border: `1px solid ${a(TXT, '4d')}`, background: a(BG2, '40') }}>
                 <span style={{ width: 20, height: 1, background: TXT, opacity: 0.5 }} />
                 <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.34em', textTransform: 'uppercase', color: TXT }}>{seloTxt}</span>
@@ -85,13 +90,13 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         {/* cantoneiras finas (premium) */}
         {([['top', 'left'], ['top', 'right'], ['bottom', 'left'], ['bottom', 'right']] as const).map(([v, h], i) => {
           const isTop = v === 'top', isLeft = h === 'left';
-          const st: CSSProperties = { position: 'absolute', width: 40, height: 40, zIndex: 2, top: isTop ? 60 : undefined, bottom: !isTop ? 60 : undefined, left: isLeft ? 60 : undefined, right: !isLeft ? 60 : undefined, borderTop: isTop ? `2px solid ${a(ACCENT, '66')}` : undefined, borderBottom: !isTop ? `2px solid ${a(ACCENT, '66')}` : undefined, borderLeft: isLeft ? `2px solid ${a(ACCENT, '66')}` : undefined, borderRight: !isLeft ? `2px solid ${a(ACCENT, '66')}` : undefined };
+          const st: CSSProperties = { position: 'absolute', width: 40, height: 40, zIndex: 2, top: isTop ? cInset : undefined, bottom: !isTop ? cInset : undefined, left: isLeft ? cInset : undefined, right: !isLeft ? cInset : undefined, borderTop: isTop ? `2px solid ${a(ACCENT, '66')}` : undefined, borderBottom: !isTop ? `2px solid ${a(ACCENT, '66')}` : undefined, borderLeft: isLeft ? `2px solid ${a(ACCENT, '66')}` : undefined, borderRight: !isLeft ? `2px solid ${a(ACCENT, '66')}` : undefined };
           return <span key={i} style={st} />;
         })}
 
         {/* topo: kicker (escondido na capa-assinatura, que já traz o selo) */}
         {!ehSelo && (
-          <div style={{ position: 'absolute', top: 150, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, zIndex: 3 }}>
+          <div style={{ position: 'absolute', top: topUI, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, zIndex: 3 }}>
             {frame.kicker && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 26, letterSpacing: '0.42em', textTransform: 'uppercase', color: ACCENT, opacity: 0.92, textAlign: 'center', padding: '0 90px' }}>{frame.kicker}</span>}
             <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
           </div>
@@ -122,7 +127,7 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         </div>
 
         {/* rodape: assinatura + pager */}
-        <div style={{ position: 'absolute', bottom: 130, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
+        <div style={{ position: 'absolute', bottom: botUI, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
           {total && total > 1 && (
             <div style={{ display: 'flex', gap: 12 }}>
               {Array.from({ length: total }).map((_, i) => <span key={i} style={{ width: 12, height: 12, borderRadius: '50%', background: ACCENT, opacity: i + 1 === numero ? 1 : 0.3 }} />)}
