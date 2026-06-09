@@ -49,6 +49,8 @@ const HORA = '20:00';
 // nome de pasta/ficheiro seguro (sem acentos, sem espaços)
 const slugSeguro = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/\s+/g, '-').toLowerCase().slice(0, 40);
 const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
+// cache-busting para o MP4 (re-render fica no mesmo URL; o CDN podia servir o antigo)
+const semCacheUrl = (u: string) => u + (u.includes('?') ? '&' : '?') + 'v=' + Date.now();
 
 export default function AgendaPage() {
   const [itens, setItens] = useState<Item[]>([]);
@@ -227,12 +229,25 @@ export default function AgendaPage() {
                   const extras = doDia.filter((it) => !usados.has(it.slug)); // posts de outro formato neste dia
                   const linhaPost = (it: Item, etiqueta?: string) => {
                     const m = fmtDe(it); const capa = capaDe(it);
+                    const ehVideo = VIDEO_FORMATOS.includes(tipoChave(it));
+                    const videoUrl = it.dias?.[0]?.videoUrl;
                     return (
-                      <div key={it.slug} className="flex items-center gap-3 rounded-lg bg-black/20 border border-white/5 p-2">
+                      <div key={it.slug} className="flex items-center gap-2.5 rounded-lg bg-black/20 border border-white/5 p-2">
                         <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{HORA}</span>
                         <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
-                        <span className={`flex-1 min-w-0 truncate text-[0.88rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}</span>
-                        {m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">baixar</Link>}
+                        <div className="flex-1 min-w-0">
+                          <span className={`block truncate text-[0.86rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}</span>
+                          {/* etiqueta de formato + estado de render */}
+                          {ehVideo
+                            ? <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={videoUrl ? { background: '#7E9B8E22', color: '#7E9B8E' } : { background: '#EBAE4A22', color: '#EBAE4A' }}>{videoUrl ? '🎬 MP4 pronto' : '🎬 por renderizar'}</span>
+                            : <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={{ background: '#C9B6FA22', color: '#C9B6FA' }}>🖼️ carrossel</span>}
+                        </div>
+                        {/* baixar o FORMATO CERTO: MP4 só quando existe; carrossel abre as imagens */}
+                        {ehVideo
+                          ? (videoUrl
+                              ? <a href={semCacheUrl(videoUrl)} download className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">⬇ MP4</a>
+                              : <span className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/15 text-creme-2/35 cursor-not-allowed" title="Ainda sem MP4. Carrega 🎬 renderizar MP4s da semana e espera ~10 min.">⬇ por renderizar</span>)
+                          : (m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">⬇ imagens</Link>)}
                         <button onClick={() => patch(it.slug, { publicado: !it.theme?.publicado })} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'marcar'}</button>
                         <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia">✕</button>
                       </div>
