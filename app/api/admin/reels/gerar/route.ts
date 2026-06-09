@@ -7,6 +7,18 @@ import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { garantirCapaSerie } from '@/lib/reels/capaSerie';
 import { fundoAleatorio } from '@/lib/reels/fundos';
+import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
+
+// Gera a imagem de fundo (Flux) a partir do prompt e devolve o URL (ou null).
+// Tudo automático: a Vivianne não vai mais ao Midjourney à mão.
+async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
+  const token = process.env.REPLICATE_API_TOKEN;
+  if (!token || !prompt) return null;
+  try {
+    const url = await gerarImagemFlux(prompt, token, { raw: true });
+    try { return await guardarImagem(url, `reel/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
+  } catch { return null; }
+}
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -19,6 +31,24 @@ const SERIE_ASSINATURA = ['ninguem', 'sinais'];
 // nem produtos). Devolve frames (texto no ecra) + legenda + hashtags; nos
 // formatos a falar tambem um roteiro. Grava em carousel_collections
 // (formato='reel') para reaproveitar o render -> MP4 com Ancient Ground.
+// Gera um prompt MidJourney de FUNDO evocativo da frase (metáfora visual do
+// conceito), não genérico. domingo = luminoso/sóbrio; senão = etéreo variado.
+async function fundoEvocativo(frase: string, ehDomingo: boolean, apiKey: string): Promise<string> {
+  const estilo = ehDomingo
+    ? 'luminoso, claro e sereno mas SÓBRIO/elegante (luz natural suave, amanhecer, névoa sobre água), sem dourado, sem pétalas/penas, nada de kitsch'
+    : 'etéreo e fine art, paleta profunda (indigo, terra, vinho), evocativo e simbólico';
+  const sys = `Escreves UM prompt MidJourney para a IMAGEM DE FUNDO de um post de psicologia/alma. A imagem é uma METÁFORA VISUAL da frase (conversa com o sentido dela), nunca um postal genérico. ${estilo}. VARIA o motivo. SEM pessoas, SEM texto, SEM letras. Devolve SÓ o prompt em inglês, a terminar com "--ar 9:16 --style raw".`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 200, system: sys, messages: [{ role: 'user', content: `Frase: "${frase}". Prompt de fundo evocativo dela.` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}`);
+  const t = ((await res.json())?.content?.[0]?.text ?? '').trim();
+  if (!t) throw new Error('vazio');
+  return limparTravessoes(t);
+}
+
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -34,12 +64,19 @@ export async function POST(req: Request) {
     const frase = limparTravessoes((body.frase ?? '').trim());
     if (!frase) return NextResponse.json({ erro: 'falta frase' }, { status: 400 });
     const destaque = limparTravessoes((body.destaque ?? '').split(',').map((s) => s.trim()).filter(Boolean));
-    const fundoPrompt = limparTravessoes((body.fundoPrompt ?? '').trim()) || fundoAleatorio();
     const subId = formato.id === 'domingo' ? 'domingo' : 'kinetico'; // respeita o Domingo de Luz
-    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
+    // fundo: usa o que a Vivianne deu; senão, gera um EVOCATIVO da frase (não
+    // genérico); só cai no pool variado se a IA falhar.
+    let fundoPrompt = limparTravessoes((body.fundoPrompt ?? '').trim());
+    if (!fundoPrompt) {
+      if (apiKey) { try { fundoPrompt = await fundoEvocativo(frase, subId === 'domingo', apiKey); } catch {} }
+      if (!fundoPrompt) fundoPrompt = fundoAleatorio();
+    }
+    const slugM = `reel-${subId}-${curso.id}-${Date.now()}`;
+    const imgM = await fundoImagem(fundoPrompt, slugM); // imagem gerada automaticamente
+    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, imageUrl: imgM, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
     const numeroFaixaM = (Math.floor(Date.now() / 1000) % 100) + 1;
     const faixaM = { numero: numeroFaixaM, titulo: `Faixa ${String(numeroFaixaM).padStart(2, '0')}`, url: faixaUrl(numeroFaixaM) };
-    const slugM = `reel-${subId}-${curso.id}-${Date.now()}`;
     const diasM = [{ dia: 1, mundo, palavra: frase.slice(0, 48), slides, faixa: faixaM, legenda: limparTravessoes((body.legenda ?? '').trim()), hashtags: [] }];
     const supabaseM = getSupabaseAdmin();
     const { data: dataM, error: errM } = await supabaseM
@@ -134,6 +171,11 @@ DEVOLVE APENAS JSON valido:
   const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
 
   const slug = `reel-${formato.id}-${curso.id}-${Date.now()}`;
+  // cinético: a imagem de fundo gera-se automaticamente (sem ir ao MJ à mão)
+  if (ehKinetico && slides.length) {
+    const img = await fundoImagem((slides[0] as { notaVisual?: string }).notaVisual ?? '', slug);
+    if (img) (slides[0] as { imageUrl?: string }).imageUrl = img;
+  }
   const dias = [{ dia: 1, mundo, palavra: p.titulo ?? tema, slides, faixa, roteiro: formato.video ? [] : (p.roteiro ?? []), legenda: p.legenda ?? '', hashtags: Array.isArray(p.hashtags) ? p.hashtags : [] }];
 
   const supabase = getSupabaseAdmin();

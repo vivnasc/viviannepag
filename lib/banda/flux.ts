@@ -49,10 +49,12 @@ type ReplicatePrediction = {
   error?: string;
 };
 
-export type GerarOpts = { estilo?: string; tema?: string; extra?: string };
+export type GerarOpts = { estilo?: string; tema?: string; extra?: string; raw?: boolean };
 
 export async function gerarImagemFlux(scene: string, token: string, opts: GerarOpts = {}): Promise<string> {
-  const fullPrompt = construirPrompt(scene, opts.estilo, opts.tema, opts.extra);
+  // raw = usa o prompt tal e qual (já é um prompt completo, ex.: fundo do cinético),
+  // só com as regras de segurança; sem estilo/tema da banda por cima.
+  const fullPrompt = opts.raw ? `${scene}\n\n${SAFETY}` : construirPrompt(scene, opts.estilo, opts.tema, opts.extra);
   const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },

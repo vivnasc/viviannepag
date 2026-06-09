@@ -1,19 +1,20 @@
 // Pool de fundos VARIADOS para a "Frase com motion" / cinéticos (modo manual ou
 // quando a IA não dá um próprio). Nunca repetir o mesmo (chega de "raízes
 // douradas"). Cada um é um prompt MidJourney pronto, fine art, sem pessoas/texto.
+// Dentro do conceito da marca: ETÉREO, SAGRADO, ABSTRATO, paleta profunda
+// (indigo/vinho) com luz suave. Varia o motivo, mas nunca "raízes douradas"
+// nem fotos genéricas (tecido/floresta).
 export const FUNDOS_VARIADOS = [
-  'soft morning light through sheer curtains, dust motes floating, calm interior, fine art, no people, no text, --ar 9:16 --style raw',
-  'still water surface with gentle ripples reflecting a pale sky, serene, fine art, no people, no text, --ar 9:16 --style raw',
-  'a single smooth stone with soft shadow on sand, minimal, warm neutral tones, fine art, no people, no text, --ar 9:16 --style raw',
-  'soft mist over quiet hills at dawn, muted tones, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
-  'flowing translucent fabric in soft light, gentle folds, muted palette, fine art, no people, no text, --ar 9:16 --style raw',
-  'a calm horizon over the sea at blue hour, vast and serene, fine art, no people, no text, --ar 9:16 --style raw',
-  'fine sand with delicate wind ripples, soft warm light, minimal, fine art, no people, no text, --ar 9:16 --style raw',
-  'a few translucent leaves backlit by soft sun, delicate veins, muted green, fine art, no people, no text, --ar 9:16 --style raw',
-  'a gentle candle flame in the dark, soft warm glow, intimate, fine art, no people, no text, --ar 9:16 --style raw',
-  'pale petals resting on still water, soft dreamy tones, calm, fine art, no people, no text, --ar 9:16 --style raw',
-  'wisps of soft smoke curling in a beam of light, deep indigo, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
-  'a clearing in a misty forest with soft light, calm and sacred, fine art, no people, no text, --ar 9:16 --style raw',
+  'a single soft shaft of light descending through deep indigo darkness, dust of light, ethereal and sacred, fine art, no people, no text, --ar 9:16 --style raw',
+  'gentle ripples of light over still dark water at dusk, deep indigo and faint warm glow, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
+  'soft luminous mist drifting in deep blue darkness, a quiet inner glow, sacred and contemplative, fine art, no people, no text, --ar 9:16 --style raw',
+  'tiny floating particles of light suspended in deep indigo, like breath made visible, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
+  'a faint aurora of soft rose and blue light over a dark serene sky, ethereal and vast, fine art, no people, no text, --ar 9:16 --style raw',
+  'a warm gentle glow emerging from deep wine-dark shadow, intimate and sacred, fine art, no people, no text, --ar 9:16 --style raw',
+  'soft veils of light layered in deep indigo space, translucent and luminous, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
+  'a calm horizon line where deep blue meets a soft band of warm light, serene and transcendent, fine art, no people, no text, --ar 9:16 --style raw',
+  'delicate embers of light rising slowly in the dark, deep indigo and amber glow, sacred, fine art, no people, no text, --ar 9:16 --style raw',
+  'a soft halo of light blooming in deep darkness, gentle and numinous, fine art, no people, no text, --ar 9:16 --style raw',
 ];
 // um diferente do atual (para "novo prompt" dar mesmo outro)
 export function fundoAleatorio(excluir?: string): string {
