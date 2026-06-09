@@ -148,6 +148,8 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
               <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
               <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 76, lineHeight: 1.2, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.licao}</p>
+              {/* CTA discreto, só no fecho: gesto de guardar (alcance), sem soar a venda */}
+              <span style={{ marginTop: 16, fontFamily: FONT_SANS, fontSize: 25, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT, opacity: 0.85 }}>↓ guarda este post</span>
             </div>
           ) : ehEnsino ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
