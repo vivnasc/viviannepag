@@ -40,6 +40,15 @@ const GEN: Record<string, { badge: string; nota: string; destino: string; verLab
   infografico: { badge: 'Infográfico', nota: 'O infográfico é montado pelo gerador, a partir desta ideia. Revês em Infográficos.', destino: '/admin/infografico', verLabel: 'abrir Infográficos', botao: 'criar infográfico' },
 };
 
+// dia (YYYY-MM-DD local) do slot i: seg=0..sáb=5 -> próxima ocorrência desse dia
+function dataDoSlot(i: number): string {
+  const wd = i + 1; // 1=segunda ... 6=sábado
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  let add = (wd - hoje.getDay() + 7) % 7; if (add === 0) add = 7;
+  const d = new Date(hoje); d.setDate(d.getDate() + add);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
 function realcar(frase: string, destaque: string[]) {
   if (!destaque.length) return <>{frase}</>;
   const re = new RegExp(`(${destaque.map((d) => d.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi');
@@ -145,8 +154,17 @@ export default function PlanoSemanaPage() {
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       const c = { ...criados, [i]: true }; setCriados(c); guardar({ criados: c });
+      // AGENDA-SE SOZINHO no dia do slot (seg..sáb), para apareceres na Agenda
+      // sem teres de escolher à mão o que o Plano já criou.
+      const slug = j.coleccao?.slug as string | undefined;
+      let quando = '';
+      if (slug) {
+        const data = dataDoSlot(i);
+        quando = ` e agendado p/ ${data.split('-').reverse().join('/')}`;
+        fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
+      }
       const onde = gen === 'kinetico' ? 'Reels (põe o fundo e descarrega)' : (GEN[gen]?.verLabel ?? 'a biblioteca');
-      setMsg(`${d.label} criado. Vê em ${onde}.`);
+      setMsg(`${d.label} criado${quando}. Vê na Agenda, ou em ${onde}.`);
     } catch (e) { setErro(String(e)); }
     finally { setBusy(null); }
   }
