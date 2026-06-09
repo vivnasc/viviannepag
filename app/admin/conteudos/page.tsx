@@ -46,6 +46,12 @@ export default function ConteudosPage() {
     await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...patch }) }).catch(() => {});
   }
 
+  async function apagar(slug: string) {
+    if (!confirm('Apagar este conteúdo? Não dá para desfazer.')) return;
+    setItens((prev) => prev.filter((it) => it.slug !== slug));
+    await fetch('/api/admin/conteudos/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }).catch(() => {});
+  }
+
   const formatos = useMemo(() => Array.from(new Set(itens.map((it) => it.theme?.formato).filter(Boolean))) as string[], [itens]);
   const filtrados = itens.filter((it) =>
     (fFormato === 'todos' || it.theme?.formato === fFormato) &&
@@ -106,6 +112,7 @@ export default function ConteudosPage() {
                     <button onClick={() => agendar(it.slug, { publicado: !it.theme?.publicado })} className={`text-[0.62rem] px-2.5 py-1 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'publicado?'}</button>
                     {m.href !== '#' && <Link href={m.href} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">abrir →</Link>}
                     {d?.legenda && <button onClick={() => { navigator.clipboard?.writeText([d.legenda?.trim(), (d.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n')); }} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar">📋 legenda</button>}
+                    <button onClick={() => apagar(it.slug)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                   </div>
                 </div>
               </div>
