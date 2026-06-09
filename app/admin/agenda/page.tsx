@@ -6,6 +6,11 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { PostSlide, type PostSlideT } from '@/components/admin/PostSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
+import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
+import { getCurso } from '@/lib/infografico/cursos';
+
+// orquestração "gerar a semana toda": cada dia → o seu gerador
+const ROTA_GEN: Record<string, string> = { kinetico: '/api/admin/reels/gerar', reel: '/api/admin/reels/gerar', banda: '/api/admin/banda/gerar', heroi: '/api/admin/heroi/gerar', infografico: '/api/admin/infografico/gerar' };
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -54,6 +59,8 @@ const semCacheUrl = (u: string) => u + (u.includes('?') ? '&' : '?') + 'v=' + Da
 
 export default function AgendaPage() {
   const [itens, setItens] = useState<Item[]>([]);
+  const [semanaOffset, setSemanaOffset] = useState(0); // 0 = esta semana, +1 = próxima…
+  const [gerSemana, setGerSemana] = useState<{ feito: number; total: number; msg: string } | null>(null);
   const [picker, setPicker] = useState<string | null>(null); // iso do dia a preencher
   const [pickerFmt, setPickerFmt] = useState<string | null>(null); // formato do slot clicado (filtra o seletor)
   const [verTodos, setVerTodos] = useState(false); // no seletor, mostrar todos os formatos
@@ -73,12 +80,14 @@ export default function AgendaPage() {
     await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...p }) }).catch(() => {});
   }
 
-  // a SEMANA atual, de segunda a domingo (não "a partir de amanhã")
+  // a semana mostrada, de segunda a domingo. semanaOffset: 0 = esta, +1 = próxima…
   const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
   const dow = hoje.getDay(); // 0=domingo..6=sábado
-  const segunda = new Date(hoje); segunda.setDate(hoje.getDate() + (dow === 0 ? -6 : 1 - dow));
+  const segunda = new Date(hoje); segunda.setDate(hoje.getDate() + (dow === 0 ? -6 : 1 - dow) + semanaOffset * 7);
   const dias = Array.from({ length: 7 }).map((_, i) => { const d = new Date(segunda); d.setDate(segunda.getDate() + i); return d; });
   const hojeIso = isoLocal(hoje);
+  // tema editorial DESTA semana (para o "gerar a semana toda")
+  const semEd = semanaEditorialAtual(segunda);
 
   const porAgendar = itens.filter((it) => !it.theme?.agendadoEm); // disponíveis para pôr num dia
   const totalAgendados = itens.filter((it) => it.theme?.agendadoEm).length;
@@ -180,6 +189,50 @@ export default function AgendaPage() {
     setRenderMsg(`${ok} render(s) MP4 disparado(s) (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para os veres.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
   }
 
+  // ── GERAR A SEMANA TODA: rascunha o tema editorial desta semana, gera os 8 posts
+  //    e agenda cada um no seu dia. Sem saltar de aba. ──
+  async function gerarSemana() {
+    if (gerSemana) return;
+    const curso = getCurso(semEd.curso);
+    setGerSemana({ feito: 0, total: 8, msg: 'a rascunhar a semana…' });
+    try {
+      const r = await fetch('/api/admin/agenda/rascunho-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: semEd.tema, subtitulo: curso.descricao, curso: semEd.curso }) });
+      const j = await r.json();
+      if (!r.ok || !Array.isArray(j.plano)) { setGerSemana({ feito: 0, total: 0, msg: 'Falhou o rascunho: ' + (j.erro ?? r.status) }); return; }
+      const plano = j.plano as Array<{ wd: number; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string }>;
+      const erros: string[] = [];
+      const videoSlugs: string[] = []; // posts de vídeo, para disparar o MP4 no fim
+      let feito = 0;
+      for (const d of plano) {
+        setGerSemana({ feito, total: plano.length, msg: `a gerar ${feito + 1}/${plano.length}…` });
+        const url = ROTA_GEN[d.gen] ?? ROTA_GEN.reel;
+        let payload: Record<string, unknown> = {};
+        if (d.gen === 'kinetico') payload = { manual: true, formato: d.formato, curso: semEd.curso, frase: d.frase, destaque: (d.destaque ?? []).join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
+        else if (d.gen === 'reel') payload = { tema: d.frase, formato: d.formato, curso: semEd.curso };
+        else if (d.gen === 'banda' || d.gen === 'heroi') payload = { tema: d.frase };
+        else if (d.gen === 'infografico') payload = { tema: d.frase, curso: semEd.curso };
+        try {
+          const gr = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+          const gj = await gr.json();
+          const slug = gj?.coleccao?.slug as string | undefined;
+          if (gr.ok && slug) {
+            const data = isoLocal(dias[d.wd - 1]); // wd 1..7 -> dias[0..6] desta semana
+            await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
+            if (d.gen !== 'reel') videoSlugs.push(slug); // reel = carrossel (sem MP4); o resto é vídeo
+          } else { erros.push(`dia ${d.wd}: ${gj?.erro ?? gr.status}`); }
+        } catch (e) { erros.push(`dia ${d.wd}: ${String(e)}`); }
+        feito++; await carregar();
+      }
+      // dispara os MP4s dos vídeos gerados (flow completa: gerar → renderizar → baixar)
+      let mp4 = 0;
+      for (const slug of videoSlugs) {
+        setGerSemana({ feito, total: plano.length, msg: `a disparar MP4 ${mp4 + 1}/${videoSlugs.length}…` });
+        try { const rr = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (rr.ok) mp4++; } catch { /* segue */ }
+      }
+      setGerSemana({ feito, total: plano.length, msg: `Pronto: ${feito} posts gerados e agendados, ${mp4} MP4s a renderizar (~10 min cada). Daqui a pouco recarrega e baixa o ZIP.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}` });
+    } catch (e) { setGerSemana({ feito: 0, total: 0, msg: 'Erro: ' + String(e) }); }
+  }
+
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-8 ${cormorant.variable} ${inter.variable}`}>
       <div className="max-w-3xl mx-auto">
@@ -187,8 +240,23 @@ export default function AgendaPage() {
           <h1 className="text-2xl font-semibold">Agenda · Véu a Véu</h1>
           <Link href="/admin/conteudos" className="text-[0.7rem] opacity-60 hover:opacity-100">Biblioteca →</Link>
         </div>
-        <p className="text-[0.82rem] opacity-70 mb-1"><b>1 post por dia</b> (~20h). Aqui pões os posts que <b>já geraste</b>, baixas e marcas publicado.</p>
-        <p className="text-[0.74rem] opacity-50 mb-4">Semana atual, <b>segunda a domingo</b>. Cada dia mostra o formato planeado (vê as frases no <Link href="/admin/plano-semana" className="text-[#C9B6FA] underline">Plano da Semana</Link>) e os posts que lá puseres. {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
+        <p className="text-[0.82rem] opacity-70 mb-3">Tudo num só sítio: <b>planeia → gera → renderiza → baixa</b>, sem saltar de aba.</p>
+
+        {/* navegação de semanas + tema editorial dessa semana */}
+        <div className="rounded-xl border border-[#C9B6FA]/25 bg-[#C9B6FA]/[0.05] p-3 mb-3">
+          <div className="flex items-center gap-2 mb-2">
+            <button onClick={() => setSemanaOffset((o) => o - 1)} className="text-[0.8rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">◀</button>
+            <div className="flex-1 text-center">
+              <p className="text-[0.78rem]"><b>{semanaOffset === 0 ? 'Esta semana' : semanaOffset === 1 ? 'Próxima semana' : `${semanaOffset > 0 ? '+' : ''}${semanaOffset} semanas`}</b> · {String(dias[0].getDate()).padStart(2, '0')}/{String(dias[0].getMonth() + 1).padStart(2, '0')} a {String(dias[6].getDate()).padStart(2, '0')}/{String(dias[6].getMonth() + 1).padStart(2, '0')}</p>
+              <p className="text-[0.66rem] opacity-60">tema: “{semEd.tema}” · {getCurso(semEd.curso).nome.split(' ')[0]}</p>
+            </div>
+            <button onClick={() => setSemanaOffset((o) => o + 1)} className="text-[0.8rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">▶</button>
+            {semanaOffset !== 0 && <button onClick={() => setSemanaOffset(0)} className="text-[0.6rem] px-2 py-1 rounded-full border border-ambar/30 text-ambar/80 hover:bg-ambar/10">hoje</button>}
+          </div>
+          <button onClick={gerarSemana} disabled={!!gerSemana && gerSemana.feito < gerSemana.total} className="w-full text-[0.82rem] py-2.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-50">{gerSemana && gerSemana.feito < gerSemana.total ? `⚡ ${gerSemana.msg}` : '⚡ gerar a semana toda (8 posts) e agendar'}</button>
+          {gerSemana && <p className="text-[0.66rem] opacity-70 mt-1.5 text-center">{gerSemana.msg}</p>}
+          <p className="text-[0.6rem] opacity-45 mt-1 text-center">Gera os 8 posts do tema da semana e agenda-os nos dias certos. Depois é só renderizar os MP4s e baixar. {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
+        </div>
 
         {/* descarregar a semana inteira (imagens + legendas + MP4) para publicar à mão */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
