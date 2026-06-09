@@ -14,12 +14,14 @@ export const maxDuration = 120;
 // rotear o "criar": kinetico = frase controlada; reel = varios frames; banda =
 // cena com personagens (Ca em Casa); infografico = infografico.
 const SLOTS = [
-  { dia: 'segunda', emoji: '✨', label: 'Frase com motion', gen: 'kinetico', formato: 'kinetico', angulo: 'uma frase curta e luminosa que para o scroll, do tema da semana' },
-  { dia: 'terça', emoji: '🔎', label: 'Sinais de que…', gen: 'reel', formato: 'sinais', angulo: 'um sinal concreto e reconhecível ligado ao tema (gancho de reel)' },
-  { dia: 'quarta', emoji: '💡', label: 'O que ninguém te explica', gen: 'reel', formato: 'ninguem', angulo: 'uma verdade pouco dita sobre o tema, que faz pensar (gancho de reel)' },
-  { dia: 'quinta', emoji: '🎭', label: 'Cá em Casa', gen: 'banda', formato: 'banda', angulo: 'uma cena do dia a dia em família onde o tema aparece' },
-  { dia: 'sexta', emoji: '🌅', label: 'I am a Hero', gen: 'heroi', formato: 'heroi', angulo: 'uma afirmação luminosa de "I am a Hero" ligada ao tema: curar-te liberta as próximas gerações, quebrar o ciclo (gancho forte e identitário)' },
-  { dia: 'sábado', emoji: '📊', label: 'Infográfico', gen: 'infografico', formato: 'infografico', angulo: 'uma ideia que se resume numa frase-título clara' },
+  { dia: 'segunda', wd: 1, emoji: '✨', label: 'Frase com motion', gen: 'kinetico', formato: 'kinetico', angulo: 'uma frase curta e luminosa que para o scroll, do tema da semana' },
+  { dia: 'terça', wd: 2, emoji: '🔎', label: 'Sinais de que…', gen: 'reel', formato: 'sinais', angulo: 'um sinal concreto e reconhecível ligado ao tema (carrossel)' },
+  { dia: 'quarta', wd: 3, emoji: '💡', label: 'O que ninguém te explica', gen: 'reel', formato: 'ninguem', angulo: 'uma verdade pouco dita sobre o tema, que faz pensar (carrossel)' },
+  { dia: 'quarta', wd: 3, emoji: '🕯️', label: 'Uma ideia de…', gen: 'reel', formato: 'pensador', angulo: 'uma ideia de um grande pensador (Jung, Frankl, Hellinger, Rumi, Maslow…) sobre o tema, fiel e simples, atribuída ao autor (carrossel). Quarta é o dia de maior audiência, leva 2 posts.' },
+  { dia: 'quinta', wd: 4, emoji: '🎭', label: 'Cá em Casa', gen: 'banda', formato: 'banda', angulo: 'uma cena do dia a dia em família onde o tema aparece' },
+  { dia: 'sexta', wd: 5, emoji: '🌅', label: 'I am a Hero', gen: 'heroi', formato: 'heroi', angulo: 'uma afirmação luminosa de "I am a Hero" ligada ao tema: curar-te liberta as próximas gerações, quebrar o ciclo (gancho forte e identitário)' },
+  { dia: 'sábado', wd: 6, emoji: '📊', label: 'Infográfico', gen: 'infografico', formato: 'infografico', angulo: 'uma ideia que se resume numa frase-título clara' },
+  { dia: 'domingo', wd: 7, emoji: '🕊️', label: 'Domingo de Luz', gen: 'kinetico', formato: 'domingo', angulo: 'uma frase leve, luminosa e esperançosa para fechar a semana, sem peso, depois de uma semana de temas mais fundos' },
 ];
 
 export async function POST(req: Request) {
@@ -37,7 +39,7 @@ export async function POST(req: Request) {
 
   const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Escreves para o Instagram "Veu a Veu" — DIDATICO, para ensinar e tocar, nunca para vender. Portugues europeu COM acentos. Voz humana, calorosa, com profundidade real (nada de motivacional oco).
 
-Vais planear UMA SEMANA inteira (6 posts) sobre o tema "${contexto}", no contexto academico "${curso.nome}" (${curso.descricao}).
+Vais planear UMA SEMANA inteira (${SLOTS.length} posts) sobre o tema "${contexto}", no contexto academico "${curso.nome}" (${curso.descricao}).
 
 Para CADA dia ha um angulo proprio:
 ${listaSlots}
@@ -49,11 +51,11 @@ REGRAS:
 - "fundoPrompt": prompt MidJourney para o fundo, UNICO e DIFERENTE em cada dia, ligado a imagem da frase desse dia. VARIA o motivo (agua, luz, pedra, ceu, tecido, maos, horizonte, raizes, nevoa, areia, fogo suave, folhas...). NUNCA repitas raizes/fios dourados em todos. Paleta indigo profundo e ouro/ambar, etereo, sagrado, fine art, SEM pessoas, SEM texto. Termina sempre com "--ar 9:16 --style raw".
 - NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.
 - NUNCA soar a egoismo nem "poe-te primeiro": o caminho e inteireza, presenca e reciprocidade saudavel.
-- Os 6 dias formam um arco coerente do mesmo tema, mas cada frase e DISTINTA.
+- Os ${SLOTS.length} posts formam um arco coerente do mesmo tema, mas cada frase e DISTINTA (incluindo os 2 de quarta, bem diferentes um do outro).
 
 DEVOLVE APENAS JSON valido:
 { "dias": [ { "frase": "texto no ecra", "destaque": ["palavra"], "legenda": "legenda completa com 8-10 hashtags em portugues no fim", "fundoPrompt": "prompt MJ unico deste dia, --ar 9:16 --style raw" } ] }
-Exatamente 6 itens, pela ordem dos dias acima.
+Exatamente ${SLOTS.length} itens, pela ordem dos dias acima.
 
 ${REGRA_ACENTOS}`;
 

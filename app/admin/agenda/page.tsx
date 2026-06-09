@@ -38,9 +38,9 @@ const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subti
 const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#' };
 const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
 // sugestão de formato por dia (só dica, não obriga)
-const SUG: Record<number, string> = { 1: '✨ frase', 2: '🔎 sinais de que…', 3: '💡 o que ninguém explica', 4: '🎭 Cá em Casa', 5: '🌅 I am a Hero', 6: '📊 infográfico', 0: '🕊️ Domingo de Luz' };
-// formato planeado de cada dia (para o seletor mostrar só esse formato)
-const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'sinais', 3: 'ninguem', 4: 'banda', 5: 'heroi', 6: 'infografico', 0: 'domingo' };
+const SUG: Record<number, string> = { 1: '✨ Frase com motion', 2: '🔎 Sinais de que…', 3: '💡 O que ninguém · 🕯️ Uma ideia de…', 4: '🎭 Cá em Casa', 5: '🌅 I am a Hero', 6: '📊 Infográfico', 0: '🕊️ Domingo de Luz' };
+// formato(s) planeado(s) de cada dia. Quarta (3) leva 2 (dia de maior audiência).
+const DIA_FORMATO: Record<number, string[]> = { 1: ['kinetico'], 2: ['sinais'], 3: ['ninguem', 'pensador'], 4: ['banda'], 5: ['heroi'], 6: ['infografico'], 0: ['domingo'] };
 // formatos que SÃO vídeo (precisam de render MP4); os outros são carrossel/imagem
 const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
@@ -257,18 +257,18 @@ export default function AgendaPage() {
       {/* seletor de post para um dia */}
       {picker && (() => {
         const wd = new Date(picker + 'T12:00:00').getDay();
-        const fmtDia = DIA_FORMATO[wd];
-        const nomeDia = fmtDia ? (FMT[fmtDia]?.label ?? fmtDia) : '';
+        const fmtDia = DIA_FORMATO[wd] ?? [];
+        const nomeDia = fmtDia.map((f) => FMT[f]?.label ?? f).join(' + ');
         // mostra TUDO o que não está já neste dia (inclui agendados noutro dia e
         // publicados, com etiqueta) — nada desaparece do seletor.
         const disponiveis = itens.filter((it) => it.theme?.agendadoEm !== picker);
-        const lista = (verTodos || !fmtDia) ? disponiveis : disponiveis.filter((it) => tipoChave(it) === fmtDia);
+        const lista = (verTodos || !fmtDia.length) ? disponiveis : disponiveis.filter((it) => fmtDia.includes(tipoChave(it)));
         return (
         <div onClick={() => { setPicker(null); setVerTodos(false); }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
           <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-5 ${cormorant.variable} ${inter.variable}`}>
             <div className="flex items-center justify-between gap-2 mb-3">
-              <p className="text-[0.8rem]">{fmtDia && !verTodos ? <>Só <b>{nomeDia}</b> para <b>{picker.split('-').reverse().join('/')}</b></> : <>Post para <b>{picker.split('-').reverse().join('/')}</b></>}</p>
-              {fmtDia && <button onClick={() => setVerTodos((v) => !v)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar">{verTodos ? `só ${nomeDia}` : 'ver todos'}</button>}
+              <p className="text-[0.8rem]">{fmtDia.length > 0 && !verTodos ? <>Para <b>{picker.split('-').reverse().join('/')}</b>: <b>{nomeDia}</b></> : <>Post para <b>{picker.split('-').reverse().join('/')}</b></>}</p>
+              {fmtDia.length > 0 && <button onClick={() => setVerTodos((v) => !v)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar">{verTodos ? `só ${nomeDia}` : 'ver todos'}</button>}
             </div>
             <div className="space-y-2">
               {lista.length === 0 && <p className="text-[0.78rem] opacity-55 py-6 text-center">{disponiveis.length === 0 ? 'Não há posts para agendar. Gera nos formatos e volta aqui.' : `Nenhum "${nomeDia}" disponível. Carrega "ver todos" ou gera um.`}</p>}

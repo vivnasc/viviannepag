@@ -66,6 +66,7 @@ export default function CalendarioVeuPage() {
                         <div className="flex flex-wrap items-center gap-2">
                           <Link href="/admin/plano-semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">abrir no Plano →</Link>
                           <Link href={`/admin/heroi?tema=${encodeURIComponent(s.heroi)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline" title={s.heroi}>🌅 I am a Hero</Link>
+                          <Link href={`/admin/reels?formato=pensador&tema=${encodeURIComponent(s.tema)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/40 text-[#C9B6FA] hover:bg-[#C9B6FA]/10 no-underline" title={`Uma ideia de um pensador sobre: ${s.tema}`}>🕯️ Uma ideia de…</Link>
                         </div>
                       </div>
                     </div>

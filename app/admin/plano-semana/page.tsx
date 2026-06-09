@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 // desenvolvimento. Tu escolhes a MATÉRIA e o TEMA dessa matéria; a IA rascunha
 // as 6 frases EM TEXTO; tu lês, editas, e só depois crias os posts.
 
-type Dia = { dia: string; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string };
+type Dia = { dia: string; wd?: number; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string };
 type Estado = { curso: string; tema: string; plano: Dia[]; criados: Record<number, boolean> };
 
 const CHAVE = 'veu-plano-atual';
@@ -23,29 +23,32 @@ const CHAVE = 'veu-plano-atual';
 // campo "gen"/"formato"): seg frase, ter reel, qua Cá em Casa, qui reel, sex
 // frase, sáb infográfico.
 const SLOTS_META = [
-  { gen: 'kinetico', formato: 'kinetico' },
-  { gen: 'reel', formato: 'sinais' },
-  { gen: 'reel', formato: 'ninguem' },
-  { gen: 'banda', formato: 'banda' },
-  { gen: 'heroi', formato: 'heroi' },
-  { gen: 'infografico', formato: 'infografico' },
+  { wd: 1, gen: 'kinetico', formato: 'kinetico' },
+  { wd: 2, gen: 'reel', formato: 'sinais' },
+  { wd: 3, gen: 'reel', formato: 'ninguem' },
+  { wd: 3, gen: 'reel', formato: 'pensador' }, // 2.º post de quarta (dia de maior audiência)
+  { wd: 4, gen: 'banda', formato: 'banda' },
+  { wd: 5, gen: 'heroi', formato: 'heroi' },
+  { wd: 6, gen: 'infografico', formato: 'infografico' },
+  { wd: 7, gen: 'kinetico', formato: 'domingo' },
 ];
+const wdDe = (d: Dia, i: number) => d.wd ?? SLOTS_META[i]?.wd ?? (i + 1);
 const genDe = (d: Dia, i: number) => d.gen ?? SLOTS_META[i]?.gen ?? 'kinetico';
 const formatoDe = (d: Dia, i: number) => d.formato ?? SLOTS_META[i]?.formato ?? 'kinetico';
 
 // info de cada formato não-cinético (o que gera e onde se revê)
 const GEN: Record<string, { badge: string; nota: string; destino: string; verLabel: string; botao: string }> = {
-  reel: { badge: 'Reel · vários frames', nota: 'O texto dos frames é montado pelo gerador, a partir deste gancho. Revês e descarregas em Reels.', destino: '/admin/reels', verLabel: 'abrir Reels', botao: 'criar reel' },
+  reel: { badge: 'Vários frames (carrossel/reel)', nota: 'O texto dos frames é montado pelo gerador, a partir deste gancho. Revês e descarregas em Reels.', destino: '/admin/reels', verLabel: 'abrir Reels', botao: 'criar' },
   banda: { badge: 'Cá em Casa · com personagens', nota: 'A cena com os personagens é montada pelo gerador, a partir desta ideia. Revês em Cá em Casa.', destino: '/admin/banda', verLabel: 'abrir Cá em Casa', botao: 'criar Cá em Casa' },
   heroi: { badge: 'I am a Hero · curar liberta', nota: 'O carrossel (capa ilustrada + ensino) é montado pelo gerador, a partir desta ideia. Revês em I am a Hero.', destino: '/admin/heroi', verLabel: 'abrir I am a Hero', botao: 'criar I am a Hero' },
   infografico: { badge: 'Infográfico', nota: 'O infográfico é montado pelo gerador, a partir desta ideia. Revês em Infográficos.', destino: '/admin/infografico', verLabel: 'abrir Infográficos', botao: 'criar infográfico' },
 };
 
-// dia (YYYY-MM-DD local) do slot i: seg=0..sáb=5 -> próxima ocorrência desse dia
-function dataDoSlot(i: number): string {
-  const wd = i + 1; // 1=segunda ... 6=sábado
+// dia (YYYY-MM-DD local) a partir do dia da semana (1=segunda … 7=domingo)
+function dataDoDia(wd: number): string {
+  const dow = wd % 7; // domingo (7) -> 0, como Date.getDay()
   const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-  let add = (wd - hoje.getDay() + 7) % 7; if (add === 0) add = 7;
+  let add = (dow - hoje.getDay() + 7) % 7; if (add === 0) add = 7;
   const d = new Date(hoje); d.setDate(d.getDate() + add);
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
@@ -146,7 +149,7 @@ export default function PlanoSemanaPage() {
     const gen = genDe(d, i); const formato = formatoDe(d, i);
     let url = '/api/admin/reels/gerar';
     let payload: Record<string, unknown> = {};
-    if (gen === 'kinetico') payload = { manual: true, formato: 'kinetico', curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
+    if (gen === 'kinetico') payload = { manual: true, formato, curso, frase: d.frase, destaque: d.destaque.join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
     else if (gen === 'reel') payload = { tema: d.frase, formato, curso };
     else if (gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
     else if (gen === 'heroi') { url = '/api/admin/heroi/gerar'; payload = { tema: d.frase }; }
@@ -161,7 +164,7 @@ export default function PlanoSemanaPage() {
       const slug = j.coleccao?.slug as string | undefined;
       let quando = '';
       if (slug) {
-        const data = dataDoSlot(i);
+        const data = dataDoDia(wdDe(d, i));
         quando = ` e agendado p/ ${data.split('-').reverse().join('/')}`;
         fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
       }
@@ -181,7 +184,7 @@ export default function PlanoSemanaPage() {
           <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1">Conta <b>didática</b>. Âmbito: psicologia transpessoal, constelação familiar (heranças sistémicas), espiritualidade e desenvolvimento.</p>
-        <p className="text-[0.78rem] opacity-60 mb-4">Vês as <b>6 frases reais</b>, editas à mão, e só depois crias cada post. Nunca às cegas.</p>
+        <p className="text-[0.78rem] opacity-60 mb-4">Vês <b>as frases reais da semana</b> (8 posts, Seg→Dom, com 2 à quarta), editas à mão, e só depois crias cada post. Nunca às cegas.</p>
 
         {/* a semana de hoje, vinda do plano de 3 meses (não escolhes nada) */}
         <div className="rounded-xl border border-ambar/25 bg-ambar/[0.05] p-4 mb-5">
@@ -222,7 +225,7 @@ export default function PlanoSemanaPage() {
         {msg && <p className="mb-3 text-[0.75rem] text-salvia">{msg}</p>}
 
         {plano.length === 0 && !rascunhando && (
-          <p className="text-[0.8rem] opacity-50 text-center py-10">Escolhe a matéria e o tema, depois carrega <b>✍️ rascunhar a semana</b> para veres as 6 frases.</p>
+          <p className="text-[0.8rem] opacity-50 text-center py-10">Escolhe a matéria e o tema, depois carrega <b>✍️ rascunhar a semana</b> para veres as frases.</p>
         )}
 
         <div className="space-y-4">
