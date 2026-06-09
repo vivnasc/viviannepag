@@ -20,6 +20,7 @@ export type ReelFrame = {
   nota?: string;     // linha pequena por baixo (ex.: "comenta em baixo")
   titulo?: string;   // título do frame (mini-aula): lê maior, em cima dos pontos
   pontos?: string[]; // bullets (hierarquia + retenção em frames com muito texto)
+  motivo?: string;   // motivo de capa fixo da série (ex.: 'lanterna') p/ reconhecimento
 };
 
 export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, capa = false }: { frame: ReelFrame; mundo?: Mundo; imageUrl?: string; numero?: number; total?: number; capa?: boolean }) {
@@ -46,6 +47,7 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
   }, [frame]);
 
   const base = capa ? 104 : 88;
+  const ehLanterna = capa && frame.motivo === 'lanterna'; // selo fixo da série "O que ninguém te explica"
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: '1080 / 1920', overflow: 'hidden', borderRadius: 16, background: BG2 }}>
@@ -56,6 +58,33 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         </>)}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.13, zIndex: 0, pointerEvents: 'none' }} />
 
+        {/* CAPA da série "O que ninguém te explica": lanterna que revela o escuro */}
+        {ehLanterna && (
+          <>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'radial-gradient(circle at 50% 21%, rgba(246,201,122,0.40) 0%, rgba(246,201,122,0.10) 26%, transparent 46%)' }} />
+            <svg width={1080} height={1920} viewBox="0 0 1080 1920" style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+              <defs>
+                <radialGradient id="lglow" cx="50%" cy="45%" r="55%"><stop offset="0%" stopColor="#FDEFC2" /><stop offset="60%" stopColor="#F4B85E" /><stop offset="100%" stopColor="#B9772E" /></radialGradient>
+              </defs>
+              <line x1="540" y1="150" x2="540" y2="258" stroke="#3a2a1e" strokeWidth="5" />
+              <path d="M512 258 h56 l12 16 h-80 z" fill="#241712" />
+              <rect x="500" y="276" width="80" height="120" rx="16" fill="#241712" />
+              <rect x="514" y="290" width="52" height="92" rx="10" fill="url(#lglow)" />
+              <circle cx="540" cy="338" r="17" fill="#FFF6DB" />
+              <path d="M512 384 h56 l12 16 h-80 z" fill="#241712" />
+              <line x1="540" y1="150" x2="540" y2="138" stroke="#3a2a1e" strokeWidth="5" />
+            </svg>
+            {/* selo fixo da série */}
+            <div style={{ position: 'absolute', top: 430, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 28px', borderRadius: 999, border: '1px solid rgba(235,192,122,0.5)', background: 'rgba(20,15,12,0.35)' }}>
+                <span style={{ width: 20, height: 1, background: '#EBC07A', opacity: 0.7 }} />
+                <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.34em', textTransform: 'uppercase', color: '#FBE9C6' }}>O que ninguém te explica</span>
+                <span style={{ width: 20, height: 1, background: '#EBC07A', opacity: 0.7 }} />
+              </div>
+            </div>
+          </>
+        )}
+
         {/* cantoneiras finas (premium) */}
         {([['top', 'left'], ['top', 'right'], ['bottom', 'left'], ['bottom', 'right']] as const).map(([v, h], i) => {
           const isTop = v === 'top', isLeft = h === 'left';
@@ -63,11 +92,13 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
           return <span key={i} style={st} />;
         })}
 
-        {/* topo: kicker */}
-        <div style={{ position: 'absolute', top: 150, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, zIndex: 3 }}>
-          {frame.kicker && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 26, letterSpacing: '0.42em', textTransform: 'uppercase', color: ACCENT, opacity: 0.92, textAlign: 'center', padding: '0 90px' }}>{frame.kicker}</span>}
-          <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
-        </div>
+        {/* topo: kicker (escondido na capa-lanterna, que já traz o selo) */}
+        {!ehLanterna && (
+          <div style={{ position: 'absolute', top: 150, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, zIndex: 3 }}>
+            {frame.kicker && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 26, letterSpacing: '0.42em', textTransform: 'uppercase', color: ACCENT, opacity: 0.92, textAlign: 'center', padding: '0 90px' }}>{frame.kicker}</span>}
+            <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
+          </div>
+        )}
 
         {/* centro: a frase grande */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 110px', zIndex: 3 }}>
