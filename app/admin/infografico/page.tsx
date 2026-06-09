@@ -120,6 +120,20 @@ export default function InfograficoPage() {
     } catch (e) { setErro(String(e)); }
   }
 
+  // regenerar NO MESMO sítio (mesmo slug) — corrige acentos/identidade sem duplicar
+  async function regenerar(it: Item) {
+    if (!confirm('Regenerar este infográfico? Substitui o atual (mesmo lugar, não duplica).')) return;
+    setGerando(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/infografico/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, tema: it.title, curso: it.theme?.curso ?? 'transpessoal' }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setMsg('Regenerado no mesmo lugar (acentos e identidade corrigidos).');
+      await carregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setGerando(false); }
+  }
+
   async function apagar(slug: string) {
     if (!confirm('Apagar este infográfico?')) return;
     try {
@@ -149,7 +163,7 @@ export default function InfograficoPage() {
   function baixar(it: Item) {
     const s = it.dias?.[0]?.slides?.[0]; if (!s) return;
     const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
-    setCap({ info: { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }, mundo, nome: it.slug });
+    setCap({ info: { padrao: s.padrao, rotulo: s.rotulo, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url }, mundo, nome: it.slug });
   }
 
   return (
@@ -216,7 +230,7 @@ export default function InfograficoPage() {
             const s = it.dias?.[0]?.slides?.[0];
             const mundo = it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
             if (!s) return null;
-            const info = { padrao: s.padrao, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
+            const info = { padrao: s.padrao, rotulo: s.rotulo, subtitulo: s.subtitulo, tipoDiagrama: s.tipoDiagrama, diagrama: s.diagrama, ciclo: s.ciclo, custoTi: s.custoTi, custoOutros: s.custoOutros, virada: s.virada, url: s.url };
             const videoUrl = it.dias?.[0]?.videoUrl;
             return (
               <Card key={it.slug} className="p-5">
@@ -234,6 +248,7 @@ export default function InfograficoPage() {
 
                 <div className="flex flex-wrap items-center gap-2 justify-center">
                   <button onClick={() => gerarVideo(it.slug)} className="text-[0.72rem] px-3 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
+                  <button onClick={() => regenerar(it)} disabled={gerando} className="text-[0.72rem] px-3 py-1.5 rounded border border-[#C9B6FA]/40 text-[#C9B6FA] hover:bg-[#C9B6FA]/10 disabled:opacity-40">↻ regenerar</button>
                   <button onClick={() => baixar(it)} className="text-[0.72rem] px-3 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ PNG (feed)</button>
                   <CopiarLegenda legenda={s.legenda} hashtags={s.hashtags} />
                   <button onClick={() => apagar(it.slug)} className="text-[0.72rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>

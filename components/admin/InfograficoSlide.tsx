@@ -23,6 +23,7 @@ export type Diagrama = {
 };
 export type Infografico = {
   padrao: string;
+  rotulo?: string; // "O PADRÃO" (dinâmica que se repete) ou "O CONCEITO" (ideia/distinção)
   subtitulo?: string;
   tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia';
   diagrama?: Diagrama;
@@ -191,7 +192,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1 }:
 
         <div ref={contentRef} style={{ position: 'relative', zIndex: 2, width: 1080, padding: '0 84px', boxSizing: 'border-box', transform: `scale(${fit})`, transformOrigin: 'top center', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           <div style={{ ...reveal(idxHeader), display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-            <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 22, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>O padrão</span>
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 22, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>{info.rotulo ?? 'O padrão'}</span>
             <h2 style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 78, lineHeight: 1.0, letterSpacing: '-0.02em', margin: '16px 0 0' }}>{info.padrao}</h2>
             {info.subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, lineHeight: 1.3, opacity: 0.82, margin: '12px auto 0', maxWidth: 820 }}>{info.subtitulo}</p>}
           </div>

@@ -45,7 +45,7 @@ export async function POST(req: Request) {
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
   if (!replicateToken) return NextResponse.json({ erro: 'sem-replicate-token' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; estilo?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; estilo?: string; slug?: string };
   const tema = body.tema?.trim();
   const estilo = body.estilo || ESTILO_DEFAULT;
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
   const ensino = (Array.isArray(p.ensino) ? p.ensino : []).map((s) => (s ?? '').trim()).filter(Boolean).slice(0, 4);
   if (!gancho || !imagePrompt) return NextResponse.json({ erro: 'sem-capa', amostra: texto.slice(0, 300) }, { status: 502 });
 
-  const slug = `banda-${Date.now()}`;
+  const slug = body.slug ?? `banda-${Date.now()}`; // regenerar = mesmo slug
 
   // 2) Flux gera UMA ilustração (a capa), no estilo escolhido.
   let imageUrl: string | null = null;

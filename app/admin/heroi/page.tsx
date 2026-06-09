@@ -63,6 +63,19 @@ export default function HeroiPage() {
     finally { setGerando(false); }
   }
 
+  async function regenerar(it: Item) {
+    if (!confirm('Regenerar este I am a Hero? Substitui o atual (mesmo lugar, não duplica).')) return;
+    setGerando(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/heroi/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug, tema: it.title }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      setMsg('Regenerado no mesmo lugar (acentos corrigidos).');
+      await carregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setGerando(false); }
+  }
+
   async function apagar(slug: string) {
     if (!confirm('Apagar este carrossel?')) return;
     try {
@@ -176,6 +189,7 @@ export default function HeroiPage() {
                     ))}
                     <button onClick={() => setZipIt(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">⬇ slides (PNG)</button>
                     <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
+                    <button onClick={() => regenerar(it)} disabled={gerando} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-[#C9B6FA]/40 text-[#C9B6FA] hover:bg-[#C9B6FA]/10 disabled:opacity-40">↻ regenerar</button>
                     <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
                     <button onClick={() => apagar(it.slug)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-rosa/30 text-rosa/80 hover:bg-rosa/10">remover</button>
                   </div>

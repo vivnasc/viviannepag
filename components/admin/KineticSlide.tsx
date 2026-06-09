@@ -47,7 +47,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
   const revelar = Math.min(1, prog / (ehDomingo ? 0.85 : 0.72)); // domingo revela mais devagar
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
-  const accent = ehDomingo ? '#CDA6AE' : ACCENT; // Domingo de Luz: rosa muito suave/sóbrio, sem dourado
+  const accent = ehDomingo ? '#F0C6CF' : ACCENT; // Domingo de Luz: rosa luminoso (legível sobre fundo), sem dourado
   const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série
   const ultimoVisivel = Math.min(palavras.length - 1, Math.floor(mostradas));
   const zoom = 1 + 0.07 * prog;                        // leve Ken Burns
@@ -58,7 +58,9 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 110% 80% at 50% 35%, ${BG1} 0%, ${BG2} 80%)`, overflow: 'hidden' }}>
         {imageUrl && (<>
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', zIndex: 0 }} />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(BG2, '55')} 0%, ${a(BG2, '22')} 40%, ${a(BG2, 'cc')} 100%)`, zIndex: 1 }} />
+          {/* véu vertical (topo/base) + scrim central ESCURO atrás da frase = contraste garantido sobre qualquer imagem */}
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(BG2, '66')} 0%, ${a(BG2, '38')} 36%, ${a(BG2, 'd9')} 100%)`, zIndex: 1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 40% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 56%, transparent 76%)', zIndex: 1 }} />
         </>)}
 
         {/* cabeçalho/selo da série (como as outras coleções) */}
@@ -81,12 +83,12 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
                 const n = palavras.length;
                 const ini = n > 1 ? (i / (n - 1)) * 0.5 : 0;
                 const f = Math.max(0, Math.min(1, (revelar - ini) / 0.42));
-                st = { opacity: f, filter: `blur(${(1 - f) * 12}px)`, transform: `translateY(${(1 - f) * 8}px) scale(${0.96 + 0.04 * f})`, textShadow: `0 0 ${30 * (1 - f) + 10}px rgba(255,244,250,${0.45 * (1 - f) + 0.2})` };
+                st = { opacity: f, filter: `blur(${(1 - f) * 12}px)`, transform: `translateY(${(1 - f) * 8}px) scale(${0.96 + 0.04 * f})`, textShadow: `0 0 ${30 * (1 - f) + 10}px rgba(255,244,250,${0.45 * (1 - f) + 0.2}), 0 2px 20px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6)` };
               } else {
                 let op = 0, dy = 14;
                 if (i < ultimoVisivel) { op = 1; dy = 0; }
                 else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
-                st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none' };
+                st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)' : 'none' };
               }
               return (
                 <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F8EFE9', fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>{w}</span>
