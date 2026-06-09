@@ -262,7 +262,7 @@ export default function ReelsPage() {
           <p className="text-[0.72rem] opacity-55 mb-4">{fmt.descricao} {!fmt.video && <span className="text-ambar">· dá-te o guião; o vídeo gravas tu</span>}</p>
 
           {/* capa-assinatura fixa da série, gerada por Flux (carvão + creme) */}
-          {['ninguem', 'sinais'].includes(formato) && (
+          {['ninguem', 'sinais', 'pensador'].includes(formato) && (
             <div className="mb-4 rounded-xl border border-ocre/20 bg-black/20 p-3.5 flex items-center gap-3 flex-wrap">
               {capaUrl ? <img src={capaUrl} alt="" className="w-14 h-20 object-cover rounded-md border border-white/10" /> : <div className="w-14 h-20 rounded-md border border-white/10 grid place-items-center text-lg">{fmt.emoji}</div>}
               <div className="flex-1 min-w-0">

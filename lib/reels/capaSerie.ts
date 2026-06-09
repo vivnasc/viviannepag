@@ -11,6 +11,7 @@ const PATH = 'config/serie-capas.json';
 export const CENAS_SERIE: Record<string, string> = {
   ninguem: 'a single old brass lantern glowing softly in the dark, warm light revealing soft dust and shadow around it',
   sinais: 'a soft trail of footprints in pale sand fading into the dark, gentle traces leading back towards their origin, quiet and contemplative, dim moody light, generous dark space, fine-art',
+  pensador: 'a single lit candle with a soft steady flame in the dark, an open old book faintly visible below it, quiet contemplative scholarly atmosphere, dim moody light, generous dark space, fine-art',
 };
 
 export async function getCapasSerie(): Promise<Record<string, string>> {

@@ -35,7 +35,11 @@ export type Infografico = {
 
 export function InfograficoSlide({ info, mundo = 'freeme', imageUrl }: { info: Infografico; mundo?: Mundo; imageUrl?: string }) {
   const p = PALETAS[mundo];
-  const BG1 = p.bg, BG2 = p.bg2, ACCENT = p.destaque, TXT = p.texto;
+  // Identidade COMUM da Veu a Veu: fundo índigo profundo + texto creme, igual ao
+  // resto do feed. Só o ACENTO (bordas, rótulos, diagrama) vem da matéria, para
+  // o infográfico deixar de destoar mas continuar a ler-se como "aquela matéria".
+  const BG1 = '#1A1726', BG2 = '#0F0F1A', TXT = '#F2E8DC';
+  const ACCENT = p.destaque;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
 
   const wrapRef = useRef<HTMLDivElement>(null);
