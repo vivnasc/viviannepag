@@ -10,6 +10,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
+const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
@@ -47,6 +48,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
   const accent = ehDomingo ? '#CDA6AE' : ACCENT; // Domingo de Luz: rosa muito suave/sóbrio, sem dourado
+  const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série
   const ultimoVisivel = Math.min(palavras.length - 1, Math.floor(mostradas));
   const zoom = 1 + 0.07 * prog;                        // leve Ken Burns
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.55) / 0.25));
@@ -58,6 +60,15 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', zIndex: 0 }} />
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(BG2, '55')} 0%, ${a(BG2, '22')} 40%, ${a(BG2, 'cc')} 100%)`, zIndex: 1 }} />
         </>)}
+
+        {/* cabeçalho/selo da série (como as outras coleções) */}
+        <div style={{ position: 'absolute', top: 110, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '11px 26px', borderRadius: 999, border: `1px solid ${a('#F4ECDD', '3d')}`, background: 'rgba(18,16,22,0.32)' }}>
+            <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
+            <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.36em', textTransform: 'uppercase', color: '#F8F1E8' }}>{serie}</span>
+            <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
+          </div>
+        </div>
 
         {/* frase */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 120px', zIndex: 2 }}>

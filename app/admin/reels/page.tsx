@@ -121,6 +121,18 @@ export default function ReelsPage() {
     finally { setSugLoading(false); }
   }
 
+  async function novoFundo(it: Item) {
+    setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/reels/novo-fundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      try { await navigator.clipboard?.writeText(j.prompt ?? ''); } catch {}
+      setMsg('Novo prompt de fundo copiado. Gera no MJ e usa "trocar fundo" para pôr a imagem nova.');
+      await carregar();
+    } catch (e) { setErro(String(e)); }
+  }
+
   async function apagar(slug: string) {
     if (!confirm('Apagar este reel?')) return;
     try {
@@ -372,6 +384,7 @@ export default function ReelsPage() {
 
                     <div className="flex flex-wrap items-center gap-2 justify-center">
                       {ks.imageUrl && <label className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar cursor-pointer">trocar fundo<input type="file" accept="image/*" hidden onChange={(e) => uploadFundo(e.target.files?.[0], it)} /></label>}
+                      <button onClick={() => novoFundo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">↻ novo fundo</button>
                       <button onClick={() => setCapKin(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20">⬇ imagem (PNG)</button>
                       <button onClick={() => gerarVideo(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ambar/40 text-ambar hover:bg-ambar/10">🎬 gerar vídeo MP4</button>
                       <button onClick={() => copiar(it)} className="text-[0.7rem] px-2.5 py-1.5 rounded border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar">📋 legenda</button>
