@@ -10,7 +10,7 @@ const PATH = 'config/serie-capas.json';
 // cena (Flux) própria de cada série — a sua IDENTIDADE visual.
 export const CENAS_SERIE: Record<string, string> = {
   ninguem: 'a single old brass lantern glowing softly in the dark, warm light revealing soft dust and shadow around it',
-  sinais: 'a delicate constellation of soft pale points of light connected by faint glowing threads in deep charcoal darkness, a hidden pattern quietly revealed, contemplative',
+  sinais: 'a soft trail of footprints in pale sand fading into the dark, gentle traces leading back towards their origin, quiet and contemplative, dim moody light, generous dark space, fine-art',
 };
 
 export async function getCapasSerie(): Promise<Record<string, string>> {
