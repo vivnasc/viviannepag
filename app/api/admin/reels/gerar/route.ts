@@ -14,6 +14,24 @@ export const maxDuration = 300;
 // creme no conteúdo) para reconhecimento imediato no feed.
 const SERIE_ASSINATURA = ['ninguem', 'sinais'];
 
+// Pool de fundos VARIADOS para a "Frase com motion" (manual, sem prompt próprio).
+// Nunca repetir o mesmo (a Vivianne pediu para variar; chega de "raízes douradas").
+const FUNDOS_VARIADOS = [
+  'soft morning light through sheer curtains, dust motes floating, calm interior, fine art, no people, no text, --ar 9:16 --style raw',
+  'still water surface with gentle ripples reflecting a pale sky, serene, fine art, no people, no text, --ar 9:16 --style raw',
+  'a single smooth stone with soft shadow on sand, minimal, warm neutral tones, fine art, no people, no text, --ar 9:16 --style raw',
+  'soft mist over quiet hills at dawn, muted tones, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
+  'flowing translucent fabric in soft light, gentle folds, muted palette, fine art, no people, no text, --ar 9:16 --style raw',
+  'a calm horizon over the sea at blue hour, vast and serene, fine art, no people, no text, --ar 9:16 --style raw',
+  'fine sand with delicate wind ripples, soft warm light, minimal, fine art, no people, no text, --ar 9:16 --style raw',
+  'a few translucent leaves backlit by soft sun, delicate veins, muted green, fine art, no people, no text, --ar 9:16 --style raw',
+  'a gentle candle flame in the dark, soft warm glow, intimate, fine art, no people, no text, --ar 9:16 --style raw',
+  'pale petals drifting on still water, soft dreamy tones, fine art, no people, no text, --ar 9:16 --style raw',
+  'wisps of soft smoke curling in a beam of light, deep indigo, ethereal, fine art, no people, no text, --ar 9:16 --style raw',
+  'a clearing in a misty forest with soft light, calm and sacred, fine art, no people, no text, --ar 9:16 --style raw',
+];
+const fundoAleatorio = () => FUNDOS_VARIADOS[Math.floor(Math.random() * FUNDOS_VARIADOS.length)];
+
 // POST { tema, formato, curso? } — gera UM reel DIDATICO (educativo, sem CTA
 // nem produtos). Devolve frames (texto no ecra) + legenda + hashtags; nos
 // formatos a falar tambem um roteiro. Grava em carousel_collections
@@ -33,7 +51,7 @@ export async function POST(req: Request) {
     const frase = limparTravessoes((body.frase ?? '').trim());
     if (!frase) return NextResponse.json({ erro: 'falta frase' }, { status: 400 });
     const destaque = limparTravessoes((body.destaque ?? '').split(',').map((s) => s.trim()).filter(Boolean));
-    const fundoPrompt = limparTravessoes((body.fundoPrompt ?? '').trim()) || 'luminous golden roots and threads of light weaving upward through deep indigo blue, ethereal, sacred, soft glow, fine art, no people, no text, --ar 9:16 --style raw';
+    const fundoPrompt = limparTravessoes((body.fundoPrompt ?? '').trim()) || fundoAleatorio();
     const subId = formato.id === 'domingo' ? 'domingo' : 'kinetico'; // respeita o Domingo de Luz
     const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
     const numeroFaixaM = (Math.floor(Date.now() / 1000) % 100) + 1;
@@ -102,7 +120,7 @@ DEVOLVE APENAS JSON valido:
         tipo: 'kinetico',
         texto: (framesIn[0].texto ?? '').trim(),
         destaque: Array.isArray(p.destaque) ? p.destaque.map(String) : [],
-        notaVisual: (p.fundoPrompt ?? '').trim(), // prompt MJ para o fundo (copia -> gera -> arrasta)
+        notaVisual: (p.fundoPrompt ?? '').trim() || fundoAleatorio(), // fundo varia sempre (nunca repete o mesmo)
         variante: formato.id === 'domingo' ? 'domingo' : undefined, // motion próprio do Domingo de Luz
         capa: true,
       }]

@@ -46,7 +46,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
   const revelar = Math.min(1, prog / (ehDomingo ? 0.85 : 0.72)); // domingo revela mais devagar
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
-  const accent = ehDomingo ? '#EBB7CE' : ACCENT; // Domingo de Luz: rosa suave, sem dourado
+  const accent = ehDomingo ? '#CDA6AE' : ACCENT; // Domingo de Luz: rosa muito suave/sóbrio, sem dourado
   const ultimoVisivel = Math.min(palavras.length - 1, Math.floor(mostradas));
   const zoom = 1 + 0.07 * prog;                        // leve Ken Burns
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.55) / 0.25));
