@@ -53,7 +53,9 @@ const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? '
 export default function AgendaPage() {
   const [itens, setItens] = useState<Item[]>([]);
   const [picker, setPicker] = useState<string | null>(null); // iso do dia a preencher
+  const [pickerFmt, setPickerFmt] = useState<string | null>(null); // formato do slot clicado (filtra o seletor)
   const [verTodos, setVerTodos] = useState(false); // no seletor, mostrar todos os formatos
+  const abrirPicker = (iso: string, fmt?: string) => { setPickerFmt(fmt ?? null); setVerTodos(false); setPicker(iso); };
   // capas-assinatura por série (para a capa do 1.º slide de sinais/ninguém no ZIP)
   const [capasSerie, setCapasSerie] = useState<Record<string, string>>({});
 
@@ -210,24 +212,43 @@ export default function AgendaPage() {
 
                 {descanso ? (
                   <div className="flex items-center gap-3 px-4 py-3 opacity-60"><span className="text-xl">🌙</span><span className="text-[0.92rem]">Descanso</span></div>
-                ) : (
-                  <div className="p-3 space-y-2">
-                    {doDia.map((it) => {
-                      const m = fmtDe(it); const capa = capaDe(it);
-                      return (
-                        <div key={it.slug} className="flex items-center gap-3 rounded-lg bg-black/20 border border-white/5 p-2">
-                          <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{HORA}</span>
-                          <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
-                          <span className={`flex-1 min-w-0 truncate text-[0.88rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}</span>
-                          {m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">baixar</Link>}
-                          <button onClick={() => patch(it.slug, { publicado: !it.theme?.publicado })} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'marcar'}</button>
-                          <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia">✕</button>
-                        </div>
-                      );
-                    })}
-                    <button onClick={() => setPicker(iso)} className="w-full text-[0.7rem] py-2 rounded-lg border border-dashed border-ambar/40 text-ambar/90 hover:bg-ambar/10">+ escolher post para este dia</button>
-                  </div>
-                )}
+                ) : (() => {
+                  // SLOTS planeados do dia (quarta = 2). Cada slot casa com um post desse
+                  // formato já agendado, ou fica vazio (placeholder para preencher).
+                  const planned = DIA_FORMATO[wd] ?? [];
+                  const usados = new Set<string>();
+                  const slots = planned.map((fmt) => {
+                    const post = doDia.find((it) => tipoChave(it) === fmt && !usados.has(it.slug));
+                    if (post) usados.add(post.slug);
+                    return { fmt, post };
+                  });
+                  const extras = doDia.filter((it) => !usados.has(it.slug)); // posts de outro formato neste dia
+                  const linhaPost = (it: Item, etiqueta?: string) => {
+                    const m = fmtDe(it); const capa = capaDe(it);
+                    return (
+                      <div key={it.slug} className="flex items-center gap-3 rounded-lg bg-black/20 border border-white/5 p-2">
+                        <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{HORA}</span>
+                        <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
+                        <span className={`flex-1 min-w-0 truncate text-[0.88rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}</span>
+                        {m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">baixar</Link>}
+                        <button onClick={() => patch(it.slug, { publicado: !it.theme?.publicado })} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'marcar'}</button>
+                        <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia">✕</button>
+                      </div>
+                    );
+                  };
+                  return (
+                    <div className="p-3 space-y-2">
+                      {slots.map(({ fmt, post }, k) => post ? linhaPost(post) : (
+                        <button key={`vazio-${fmt}-${k}`} onClick={() => abrirPicker(iso, fmt)} className="w-full flex items-center gap-2 text-[0.74rem] py-2.5 px-3 rounded-lg border border-dashed border-ambar/35 text-ambar/85 hover:bg-ambar/10">
+                          <span>{FMT[fmt]?.emoji ?? '＋'}</span><span className="opacity-90">+ {FMT[fmt]?.label ?? fmt}</span>
+                          {slots.length > 1 && <span className="ml-auto text-[0.54rem] opacity-50">post {k + 1} de {slots.length}</span>}
+                        </button>
+                      ))}
+                      {extras.map((it) => linhaPost(it, '· extra'))}
+                      <button onClick={() => abrirPicker(iso)} className="w-full text-[0.64rem] py-1.5 rounded-lg border border-ocre/20 text-creme-2/55 hover:border-ambar hover:text-ambar">+ outro post</button>
+                    </div>
+                  );
+                })()}
               </div>
             );
           })}
@@ -257,18 +278,20 @@ export default function AgendaPage() {
       {/* seletor de post para um dia */}
       {picker && (() => {
         const wd = new Date(picker + 'T12:00:00').getDay();
-        const fmtDia = DIA_FORMATO[wd] ?? [];
-        const nomeDia = fmtDia.map((f) => FMT[f]?.label ?? f).join(' + ');
+        // se clicaste um slot específico (pickerFmt), filtra a esse formato; senão, aos formatos do dia
+        const alvo = pickerFmt ? [pickerFmt] : (DIA_FORMATO[wd] ?? []);
+        const nomeDia = alvo.map((f) => FMT[f]?.label ?? f).join(' + ');
+        const fechar = () => { setPicker(null); setVerTodos(false); setPickerFmt(null); };
         // mostra TUDO o que não está já neste dia (inclui agendados noutro dia e
         // publicados, com etiqueta) — nada desaparece do seletor.
         const disponiveis = itens.filter((it) => it.theme?.agendadoEm !== picker);
-        const lista = (verTodos || !fmtDia.length) ? disponiveis : disponiveis.filter((it) => fmtDia.includes(tipoChave(it)));
+        const lista = (verTodos || !alvo.length) ? disponiveis : disponiveis.filter((it) => alvo.includes(tipoChave(it)));
         return (
-        <div onClick={() => { setPicker(null); setVerTodos(false); }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+        <div onClick={fechar} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
           <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-lg max-h-[80vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-5 ${cormorant.variable} ${inter.variable}`}>
             <div className="flex items-center justify-between gap-2 mb-3">
-              <p className="text-[0.8rem]">{fmtDia.length > 0 && !verTodos ? <>Para <b>{picker.split('-').reverse().join('/')}</b>: <b>{nomeDia}</b></> : <>Post para <b>{picker.split('-').reverse().join('/')}</b></>}</p>
-              {fmtDia.length > 0 && <button onClick={() => setVerTodos((v) => !v)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar">{verTodos ? `só ${nomeDia}` : 'ver todos'}</button>}
+              <p className="text-[0.8rem]">{alvo.length > 0 && !verTodos ? <>Para <b>{picker.split('-').reverse().join('/')}</b>: <b>{nomeDia}</b></> : <>Post para <b>{picker.split('-').reverse().join('/')}</b></>}</p>
+              {alvo.length > 0 && <button onClick={() => setVerTodos((v) => !v)} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar">{verTodos ? `só ${nomeDia}` : 'ver todos'}</button>}
             </div>
             <div className="space-y-2">
               {lista.length === 0 && <p className="text-[0.78rem] opacity-55 py-6 text-center">{disponiveis.length === 0 ? 'Não há posts para agendar. Gera nos formatos e volta aqui.' : `Nenhum "${nomeDia}" disponível. Carrega "ver todos" ou gera um.`}</p>}
@@ -276,7 +299,7 @@ export default function AgendaPage() {
                 const m = fmtDe(it); const capa = capaDe(it);
                 const noutroDia = it.theme?.agendadoEm; // já agendado noutro dia (o clique move)
                 return (
-                  <button key={it.slug} onClick={() => { patch(it.slug, { agendadoEm: picker }); setPicker(null); setVerTodos(false); }} className="w-full flex items-center gap-3 rounded-lg border border-white/8 hover:border-ambar/50 bg-black/20 p-2 text-left">
+                  <button key={it.slug} onClick={() => { patch(it.slug, { agendadoEm: picker }); fechar(); }} className="w-full flex items-center gap-3 rounded-lg border border-white/8 hover:border-ambar/50 bg-black/20 p-2 text-left">
                     <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                     <span className="text-[0.56rem] uppercase tracking-[0.12em] opacity-60 shrink-0">{m.emoji} {m.label}</span>
                     <span className="flex-1 min-w-0 truncate text-[0.84rem]">{it.title}</span>
@@ -286,7 +309,7 @@ export default function AgendaPage() {
                 );
               })}
             </div>
-            <button onClick={() => { setPicker(null); setVerTodos(false); }} className="mt-4 text-[0.7rem] px-3 py-1.5 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">fechar</button>
+            <button onClick={fechar} className="mt-4 text-[0.7rem] px-3 py-1.5 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar">fechar</button>
           </div>
         </div>
         );
