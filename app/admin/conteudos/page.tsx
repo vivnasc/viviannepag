@@ -16,14 +16,24 @@ type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?:
 type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean };
 type Item = { slug: string; title: string; brief?: string; dias: Dia[]; theme: Theme; created_at: string };
 
+// Cada série tem o seu NOME (os reels têm subtipos com nome próprio).
 const FMT: Record<string, { emoji: string; label: string; href: string; cor: string }> = {
   banda: { emoji: '🎭', label: 'Cá em Casa', href: '/admin/banda', cor: '#E08496' },
   heroi: { emoji: '🌅', label: 'I am a Hero', href: '/admin/heroi', cor: '#EBAE4A' },
   infografico: { emoji: '📊', label: 'Infográfico', href: '/admin/infografico', cor: '#7E9B8E' },
-  reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels', cor: '#C9B6FA' },
   aneis: { emoji: '🎞️', label: 'Carrossel', href: '/admin/carrossel-veu', cor: '#B8843D' },
+  // reels (por subtipo, cada um com o seu nome)
+  kinetico: { emoji: '✨', label: 'Frase com motion', href: '/admin/reels', cor: '#EBAE4A' },
+  sinais: { emoji: '🔎', label: 'Sinais de que…', href: '/admin/reels', cor: '#C9B6FA' },
+  ninguem: { emoji: '🏮', label: 'O que ninguém te explica', href: '/admin/reels', cor: '#D9CBB4' },
+  pergunta: { emoji: '💬', label: 'Pergunta', href: '/admin/reels', cor: '#7E9B8E' },
+  glossario: { emoji: '📖', label: 'Glossário da Alma', href: '/admin/reels', cor: '#C9B6FA' },
+  pensador: { emoji: '🕯️', label: 'Uma ideia de…', href: '/admin/reels', cor: '#EBAE4A' },
+  reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels', cor: '#C9B6FA' },
 };
-const fmtDe = (it: Item) => FMT[it.theme?.formato ?? ''] ?? { emoji: '•', label: it.theme?.formato ?? 'outro', href: '#', cor: '#9aa39a' };
+// chave da série: nos reels é o subtipo (o nome real); nos outros, o formato
+const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
+const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#', cor: '#9aa39a' };
 const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
 const estadoDe = (it: Item): 'gerado' | 'agendado' | 'publicado' => it.theme?.publicado ? 'publicado' : it.theme?.agendadoEm ? 'agendado' : 'gerado';
 const COR_ESTADO = { gerado: '#9aa39a', agendado: '#EBAE4A', publicado: '#7E9B8E' } as const;
@@ -46,9 +56,9 @@ export default function ConteudosPage() {
     await fetch('/api/admin/conteudos/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }).catch(() => {});
   }
 
-  const formatos = useMemo(() => Array.from(new Set(itens.map((it) => it.theme?.formato).filter(Boolean))) as string[], [itens]);
+  const formatos = useMemo(() => Array.from(new Set(itens.map((it) => tipoChave(it)).filter(Boolean))) as string[], [itens]);
   const filtrados = itens.filter((it) =>
-    (fFormato === 'todos' || it.theme?.formato === fFormato) &&
+    (fFormato === 'todos' || tipoChave(it) === fFormato) &&
     (fEstado === 'todos' || estadoDe(it) === fEstado) &&
     (!busca.trim() || it.title.toLowerCase().includes(busca.trim().toLowerCase())),
   );

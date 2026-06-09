@@ -14,17 +14,24 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[] };
-type Theme = { formato?: string; agendadoEm?: string | null; publicado?: boolean };
+type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 const FMT: Record<string, { emoji: string; label: string; href: string }> = {
   banda: { emoji: '🎭', label: 'Cá em Casa', href: '/admin/banda' },
   heroi: { emoji: '🌅', label: 'I am a Hero', href: '/admin/heroi' },
   infografico: { emoji: '📊', label: 'Infográfico', href: '/admin/infografico' },
-  reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels' },
   aneis: { emoji: '🎞️', label: 'Carrossel', href: '/admin/carrossel-veu' },
+  kinetico: { emoji: '✨', label: 'Frase com motion', href: '/admin/reels' },
+  sinais: { emoji: '🔎', label: 'Sinais de que…', href: '/admin/reels' },
+  ninguem: { emoji: '🏮', label: 'O que ninguém te explica', href: '/admin/reels' },
+  pergunta: { emoji: '💬', label: 'Pergunta', href: '/admin/reels' },
+  glossario: { emoji: '📖', label: 'Glossário da Alma', href: '/admin/reels' },
+  pensador: { emoji: '🕯️', label: 'Uma ideia de…', href: '/admin/reels' },
+  reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels' },
 };
-const fmtDe = (it: Item) => FMT[it.theme?.formato ?? ''] ?? { emoji: '•', label: it.theme?.formato ?? 'outro', href: '#' };
+const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
+const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#' };
 const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
 // sugestão de formato por dia (só dica, não obriga)
 const SUG: Record<number, string> = { 1: '✨ frase', 2: '💡 o que ninguém explica', 3: '🎭 Cá em Casa', 4: '🔎 sinais de que…', 5: '🌅 I am a Hero', 6: '📊 infográfico', 0: '' };
