@@ -19,7 +19,7 @@ export const FORMATOS: FormatoReel[] = [
     emoji: '🕊️',
     video: true,
     instrucao:
-      'Formato "Domingo de Luz" (frase com motion, registo LUMINOSO e terno). Devolve em "frames" UM ÚNICO frame com uma frase CURTA, doce e esperançosa (6 a 12 palavras): permissão para descansar, ternura consigo, honrar o caminho percorrido, fé suave. NADA de ensinar padrões pesados nem limites, é um abraço de fim de semana. Em "destaque" 1 a 2 palavras-chave para realçar. Em "fundoPrompt" devolve um prompt MidJourney de FANTASIA LEVE e PASTEL: tons suaves de rosa, azul, lavanda e branco; céu sonhador, nuvens macias, névoa luminosa, pétalas ou penas a flutuar, brilho etéreo; muito claro e onírico, dreamy, fine art, SEM dourado/ouro, SEM pessoas, SEM texto. Termina sempre com "--ar 9:16 --style raw". Só a frase, nada de listas.',
+      'Formato "Domingo de Luz" (frase com motion, registo LUMINOSO e terno). Devolve em "frames" UM ÚNICO frame com uma frase CURTA, doce e esperançosa (6 a 12 palavras): permissão para descansar, ternura consigo, honrar o caminho percorrido, fé suave. NADA de ensinar padrões pesados nem limites, é um abraço de fim de semana. Em "destaque" 1 a 2 palavras-chave para realçar. Em "fundoPrompt" devolve um prompt MidJourney LUMINOSO mas SÓBRIO e elegante (coerente com uma marca profunda, NADA de açucarado/kitsch/fru-fru): luz natural suave e clara, ex.: amanhecer sereno, raios de sol ténues por uma janela, névoa luminosa sobre água calma, céu limpo ao nascer do dia, um campo em luz macia. Tons claros e calmos (toques de rosa/azul subtis, SEM dourado). VARIA o motivo a cada vez. Fine art, refinado, SEM pétalas/penas a voar, SEM pessoas, SEM texto. Termina com "--ar 9:16 --style raw". Só a frase, nada de listas.',
   },
   {
     id: 'kinetico',
@@ -28,7 +28,7 @@ export const FORMATOS: FormatoReel[] = [
     emoji: '✨',
     video: true,
     instrucao:
-      'Formato "Frase com motion" (reel simples de alto alcance). A BREVIDADE VENCE (os posts mais curtos rendem mais views): devolve em "frames" UM ÚNICO frame com uma frase CURTA e forte (5 a 12 palavras, uma só ideia, ritmo poético) OU — quando o conceito for poderoso por si só — UMA ÚNICA PALAVRA-conceito (ex.: Dignidade, Pertença, Inteireza). A frase/palavra é a estrela. Em "destaque" devolve 1 a 2 palavras-chave para realçar a ouro (no caso de palavra única, a própria palavra). Em "fundoPrompt" devolve um prompt MidJourney para uma imagem transcendente de fundo, evocativa do conceito (sem pessoas, sem texto, --ar 9:16). Nada de listas nem explicações: só a frase/palavra.',
+      'Formato "Frase com motion" (reel simples de alto alcance). A BREVIDADE VENCE (os posts mais curtos rendem mais views): devolve em "frames" UM ÚNICO frame com uma frase CURTA e forte (5 a 12 palavras, uma só ideia, ritmo poético) OU — quando o conceito for poderoso por si só — UMA ÚNICA PALAVRA-conceito (ex.: Dignidade, Pertença, Inteireza). A frase/palavra é a estrela. Em "destaque" devolve 1 a 2 palavras-chave para realçar. Em "fundoPrompt" devolve um prompt MidJourney ÚNICO e VARIADO para o fundo, evocativo DESTE conceito: varia mesmo o motivo (água, luz por uma janela, pedra, céu, névoa, areia, folhas, vela, fumo suave, horizonte, tecido, mar, montanha…). NUNCA repitas "raízes douradas" nem fios dourados, varia a paleta. Sempre fine art, sem pessoas, sem texto, termina com "--ar 9:16 --style raw". Nada de listas: só a frase/palavra.',
   },
   {
     id: 'sinais',
