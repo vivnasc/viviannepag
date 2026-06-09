@@ -4,6 +4,23 @@
 // desenvolvimento pessoal e profissional.
 
 export const TOPICOS_REELS: Record<string, string[]> = {
+  domingo: [
+    'Hoje não tens de te emendar. Hoje, só descansa.',
+    'O que curaste esta semana já está a mudar a tua casa.',
+    'Sê gentil contigo. Já é coragem continuar.',
+    'Há luz mesmo nos dias em que não a sentes.',
+    'Floresces no teu tempo, não no dos outros.',
+    'Que a semana que vem te encontre mais inteira.',
+    'Descansar também é cuidar de quem amas.',
+    'Não vieste para caber, vieste para existir.',
+    'A tua alma também precisa de domingo.',
+    'O simples já é sagrado.',
+    'Respira. Não tens de carregar tudo hoje.',
+    'Permite-te um dia sem te exigires nada.',
+    'Já fizeste o suficiente. Agora, sê.',
+    'Que a tua ternura comece por ti.',
+    'O descanso também é uma oração.',
+  ],
   kinetico: [
     'Dignidade',
     'Pertença',

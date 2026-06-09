@@ -13,6 +13,15 @@ export type FormatoReel = {
 
 export const FORMATOS: FormatoReel[] = [
   {
+    id: 'domingo',
+    nome: 'Domingo de Luz',
+    descricao: 'O respiro luminoso do domingo: uma frase doce e esperançosa, depois da semana mais funda.',
+    emoji: '🕊️',
+    video: true,
+    instrucao:
+      'Formato "Domingo de Luz" (frase com motion, registo LUMINOSO e terno). Devolve em "frames" UM ÚNICO frame com uma frase CURTA, doce e esperançosa (6 a 12 palavras): permissão para descansar, ternura consigo, honrar o caminho percorrido, fé suave. NADA de ensinar padrões pesados nem limites, é um abraço de fim de semana. Em "destaque" 1 a 2 palavras-chave para realçar. Em "fundoPrompt" devolve um prompt MidJourney de FANTASIA LEVE e PASTEL: tons suaves de rosa, azul, lavanda e branco; céu sonhador, nuvens macias, névoa luminosa, pétalas ou penas a flutuar, brilho etéreo; muito claro e onírico, dreamy, fine art, SEM dourado/ouro, SEM pessoas, SEM texto. Termina sempre com "--ar 9:16 --style raw". Só a frase, nada de listas.',
+  },
+  {
     id: 'kinetico',
     nome: 'Frase com motion',
     descricao: 'O reel que mais rende: uma imagem transcendente + uma frase que se escreve (typewriter/kinetic) + música.',

@@ -28,15 +28,16 @@ const FMT: Record<string, { emoji: string; label: string; href: string }> = {
   pergunta: { emoji: '💬', label: 'Pergunta', href: '/admin/reels' },
   glossario: { emoji: '📖', label: 'Glossário da Alma', href: '/admin/reels' },
   pensador: { emoji: '🕯️', label: 'Uma ideia de…', href: '/admin/reels' },
+  domingo: { emoji: '🕊️', label: 'Domingo de Luz', href: '/admin/reels' },
   reel: { emoji: '🎬', label: 'Reel', href: '/admin/reels' },
 };
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
 const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'outro', href: '#' };
 const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? null;
 // sugestão de formato por dia (só dica, não obriga)
-const SUG: Record<number, string> = { 1: '✨ frase', 2: '🔎 sinais de que…', 3: '💡 o que ninguém explica', 4: '🎭 Cá em Casa', 5: '✨ frase', 6: '📊 infográfico', 0: '' };
+const SUG: Record<number, string> = { 1: '✨ frase', 2: '🔎 sinais de que…', 3: '💡 o que ninguém explica', 4: '🎭 Cá em Casa', 5: '✨ frase', 6: '📊 infográfico', 0: '🕊️ Domingo de Luz' };
 // formato planeado de cada dia (para o seletor mostrar só esse formato)
-const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'sinais', 3: 'ninguem', 4: 'banda', 5: 'kinetico', 6: 'infografico' };
+const DIA_FORMATO: Record<number, string> = { 1: 'kinetico', 2: 'sinais', 3: 'ninguem', 4: 'banda', 5: 'kinetico', 6: 'infografico', 0: 'domingo' };
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const HORA = '20:00';
@@ -83,7 +84,7 @@ export default function AgendaPage() {
             const iso = isoLocal(d);
             const doDia = itens.filter((it) => it.theme?.agendadoEm === iso);
             const dataLabel = `${DIAS_PT[wd]} · ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
-            const descanso = wd === 0;
+            const descanso = false; // domingo passou a 🕊️ Domingo de Luz (post leve)
             return (
               <div key={iso} className="rounded-xl border border-ocre/12 bg-terra/15 overflow-hidden">
                 <div className="px-4 py-2 flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-[#C9B6FA] border-b border-ocre/10">
