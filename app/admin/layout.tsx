@@ -80,13 +80,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <body>
         <div className="grain" />
         <div className="flex min-h-screen">
-          <aside className="w-[210px] shrink-0 border-r border-ocre/10 bg-terra/50 py-8 px-5 flex flex-col gap-1 fixed top-0 left-0 bottom-0 z-40 overflow-y-auto">
-            <Link href="/" className="text-ocre text-[0.7rem] tracking-[0.2em] uppercase no-underline hover:text-ambar mb-6 block">
+          <aside className="w-[210px] shrink-0 border-r border-ocre/10 bg-terra/50 py-5 px-5 flex flex-col gap-0.5 fixed top-0 left-0 bottom-0 z-40 overflow-y-auto">
+            <Link href="/" className="text-ocre text-[0.7rem] tracking-[0.2em] uppercase no-underline hover:text-ambar mb-3 block">
               home
             </Link>
             {SECOES.map((sec) => (
-              <div key={sec.titulo} className="mb-4">
-                <p className="text-[0.58rem] tracking-[0.22em] uppercase mb-2 flex items-center gap-1.5" style={{ color: sec.cor }}>
+              <div key={sec.titulo} className="mb-2.5">
+                <p className="text-[0.58rem] tracking-[0.22em] uppercase mb-1 flex items-center gap-1.5" style={{ color: sec.cor }}>
                   <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: sec.cor }} />
                   {sec.titulo}
                 </p>
@@ -94,7 +94,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   <Link
                     key={n.href}
                     href={n.href}
-                    className="block py-2 px-3 rounded-[10px] text-creme-2/80 text-[0.85rem] no-underline hover:bg-terra-2/50 hover:text-ambar transition-colors"
+                    className="block py-1 px-3 rounded-[10px] text-creme-2/80 text-[0.82rem] no-underline hover:bg-terra-2/50 hover:text-ambar transition-colors"
                   >
                     {n.label}
                   </Link>
@@ -102,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </div>
             ))}
             <div className="flex-1" />
-            <p className="text-[0.6rem] text-creme-2/20 mt-4">viviannedossantos.com</p>
+            <p className="text-[0.6rem] text-creme-2/20 mt-2">viviannedossantos.com</p>
           </aside>
           <main className="flex-1 ml-[210px]">
             {children}
