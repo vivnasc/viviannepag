@@ -5,6 +5,7 @@ import { getCurso } from '@/lib/infografico/cursos';
 import { getFormato } from '@/lib/reels/formatos';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
+import { getCapasSerie } from '@/lib/reels/capaSerie';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -108,8 +109,15 @@ DEVOLVE APENAS JSON valido:
         pontos: Array.isArray(f.pontos) ? f.pontos.map((s) => String(s).trim()).filter(Boolean) : [],
         // selo de capa fixo por série (reconhecimento): "O que ninguém te explica" = lanterna
         motivo: i === 0 && formato.id === 'ninguem' ? 'lanterna' : '',
+        // "O que ninguém te explica": capa em carvão (com a lanterna), ensino em creme
+        pal: formato.id === 'ninguem' ? (i === 0 ? 'carvao' : 'creme') : undefined,
         capa: i === 0,
       }));
+
+  // "O que ninguém te explica": a capa usa a imagem-assinatura fixa (lanterna)
+  if (formato.id === 'ninguem' && slides.length) {
+    try { const capas = await getCapasSerie(); if (capas.ninguem) (slides[0] as { imageUrl?: string }).imageUrl = capas.ninguem; } catch {}
+  }
 
   // musica: uma faixa variada (deterministica por agora)
   const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
