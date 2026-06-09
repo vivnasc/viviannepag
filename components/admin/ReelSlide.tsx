@@ -18,6 +18,8 @@ export type ReelFrame = {
   kicker?: string;   // etiqueta pequena no topo (formato / nº)
   texto: string;     // a frase grande (gancho, sinal, ideia, fecho)
   nota?: string;     // linha pequena por baixo (ex.: "comenta em baixo")
+  titulo?: string;   // título do frame (mini-aula): lê maior, em cima dos pontos
+  pontos?: string[]; // bullets (hierarquia + retenção em frames com muito texto)
 };
 
 export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, capa = false }: { frame: ReelFrame; mundo?: Mundo; imageUrl?: string; numero?: number; total?: number; capa?: boolean }) {
@@ -69,8 +71,23 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
 
         {/* centro: a frase grande */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 110px', zIndex: 3 }}>
-          <div ref={txtRef} style={{ transform: `scale(${fit})`, transformOrigin: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
-            <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: base, lineHeight: 1.12, letterSpacing: '-0.01em', textAlign: 'center', margin: 0 }}>{frame.texto}</p>
+          <div ref={txtRef} style={{ transform: `scale(${fit})`, transformOrigin: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, width: '100%' }}>
+            {frame.pontos && frame.pontos.length ? (
+              // ── frame de mini-aula: título (maior) + bullets (hierarquia/retenção) ──
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 40, maxWidth: 880, width: '100%' }}>
+                {frame.titulo && <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 74, lineHeight: 1.14, textAlign: 'center', margin: 0 }}>{frame.titulo}</p>}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 30 }}>
+                  {frame.pontos.map((pt, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+                      <span style={{ color: ACCENT, fontSize: 34, lineHeight: 1.4, flexShrink: 0 }}>◆</span>
+                      <span style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 50, lineHeight: 1.3, textAlign: 'left' }}>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: base, lineHeight: 1.12, letterSpacing: '-0.01em', textAlign: 'center', margin: 0 }}>{frame.texto}</p>
+            )}
             {frame.nota && <span style={{ fontFamily: FONT_SANS, fontWeight: 400, fontSize: 30, letterSpacing: '0.12em', color: ACCENT, opacity: 0.9, textAlign: 'center' }}>{frame.nota}</span>}
           </div>
         </div>

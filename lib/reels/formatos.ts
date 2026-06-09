@@ -37,7 +37,11 @@ export const FORMATOS: FormatoReel[] = [
     emoji: '💡',
     video: true,
     instrucao:
-      'Formato "O que ninguém te explica". Frame 1 (capa): uma pergunta/afirmação que pára o scroll (ex.: "Porque é que algumas pessoas nunca conseguem sair da pobreza?"). 3 a 5 frames que dão UMA perspetiva psicológica ou sistémica clara, passo a passo (nada de clichés, dá profundidade real). Frame final: a virada/reflexão. kicker discreto.',
+      'Formato "O que ninguém te explica" (mini-aula). É quase uma aula: tem de ENSINAR algo concreto, não dar frases genéricas/motivacionais. ' +
+      'Frame 1 (capa): uma pergunta/afirmação que pára o scroll (ex.: "Porque é que voltas sempre ao mesmo tipo de relação?"), só "texto" (sem pontos). ' +
+      'Depois 3 a 4 frames de EXPLICAÇÃO, cada um com "titulo" (3 a 6 palavras, a ideia desse passo) e "pontos" (2 a 3 bullets CURTOS, concretos, com o mecanismo real ou um exemplo do dia a dia; deixa "texto" vazio nesses). Nada de clichés: nomeia o porquê psicológico/sistémico (ex.: "o sistema familiar puxa-te para a lealdade", "o cérebro confunde familiar com seguro"). ' +
+      'Frame final: a virada/reflexão, só "texto" (uma frase que assenta a aprendizagem). kicker discreto (ex.: "o que ninguém te explica"). ' +
+      'Regra de ouro: cada bullet tem de ENSINAR (um facto, um mecanismo, um exemplo), nunca repetir o óbvio.',
   },
   {
     id: 'pergunta',
