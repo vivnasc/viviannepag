@@ -25,7 +25,7 @@ export const maxDuration = 300;
 
 // Séries de reel com CAPA-ASSINATURA (imagem Flux fixa + selo, carvão na capa,
 // creme no conteúdo) para reconhecimento imediato no feed.
-const SERIE_ASSINATURA = ['ninguem', 'sinais'];
+const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
 
 // POST { tema, formato, curso? } — gera UM reel DIDATICO (educativo, sem CTA
 // nem produtos). Devolve frames (texto no ecra) + legenda + hashtags; nos
