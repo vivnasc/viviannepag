@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; curso?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; curso?: string; slug?: string };
   const tema = body.tema?.trim();
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
@@ -38,6 +38,7 @@ CONSISTÊNCIA (importante, para todos os infográficos ficarem com o MESMO peso 
 DEVOLVE APENAS JSON válido:
 {
   "padrao": "nome curto do conceito (2-4 palavras)",
+  "rotulo": "ESCOLHE conforme o tema: 'O PADRÃO' se for uma dinâmica/comportamento que se repete (ex.: parentificação, lealdades invisíveis, repetição de relações); 'O CONCEITO' se for um conceito, distinção ou ideia (ex.: a sombra, individuação, espiritualidade e religião, as Ordens do Amor). Em maiúsculas.",
   "subtitulo": "1 linha que o explica",
   "tipoDiagrama": "ciclo | espectro | herdado | camadas | travessia",
   "diagrama": { },
@@ -70,7 +71,7 @@ ${REGRA_ACENTOS}`;
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { padrao?: string; subtitulo?: string; tipoDiagrama?: string; diagrama?: unknown; custoTi?: string; custoOutros?: string; virada?: string; legenda?: string; hashtags?: string[] };
+  let p: { padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: string; diagrama?: unknown; custoTi?: string; custoOutros?: string; virada?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p); // a Vivianne nao usa travessoes
   p = await corrigirAcentos(p, apiKey); // rede de segurança: garante acentuação correta
@@ -83,10 +84,11 @@ ${REGRA_ACENTOS}`;
     imageUrl = [...pool.filter((u) => !usadas.has(u)), ...pool][0];
   } catch { /* sem pool */ }
 
-  const slug = `infografico-${curso.id}-${Date.now()}`;
+  const slug = body.slug ?? `infografico-${curso.id}-${Date.now()}`; // regenerar = mesmo slug (sobrescreve, não duplica)
   const slide = {
     tipo: 'infografico',
     padrao: p.padrao ?? tema,
+    rotulo: (p.rotulo ?? 'O CONCEITO').toUpperCase(),
     subtitulo: p.subtitulo ?? '',
     tipoDiagrama: p.tipoDiagrama ?? 'ciclo',
     diagrama: p.diagrama ?? {},

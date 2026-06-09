@@ -53,7 +53,7 @@ export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; formato?: string; curso?: string; manual?: boolean; frase?: string; destaque?: string; legenda?: string; fundoPrompt?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; formato?: string; curso?: string; manual?: boolean; frase?: string; destaque?: string; legenda?: string; fundoPrompt?: string; slug?: string };
   const tema = body.tema?.trim();
   const formato = getFormato(body.formato ?? 'sinais');
   const curso = getCurso(body.curso ?? 'transpessoal');
@@ -174,7 +174,7 @@ ${REGRA_ACENTOS}`;
   const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
   const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
 
-  const slug = `reel-${formato.id}-${curso.id}-${Date.now()}`;
+  const slug = body.slug ?? `reel-${formato.id}-${curso.id}-${Date.now()}`; // regenerar = mesmo slug
   // cinético: a imagem de fundo gera-se automaticamente (sem ir ao MJ à mão)
   if (ehKinetico && slides.length) {
     const img = await fundoImagem((slides[0] as { notaVisual?: string }).notaVisual ?? '', slug);

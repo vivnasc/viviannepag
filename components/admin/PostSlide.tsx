@@ -23,7 +23,7 @@ export type PostSlideT = {
   cenario?: string; licao?: string; gancho?: string; serie?: string;
   personagens?: { id: string; fala: string; modo?: 'fala' | 'pensa' | 'herdada' }[];
   // infografico
-  padrao?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia';
+  padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia';
   diagrama?: Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string;
 };
 
@@ -39,7 +39,7 @@ export function PostSlide({ slide, mundo = 'escola', numero, total }: {
   if (tipo === 'infografico') {
     return (
       <InfograficoSlide
-        info={{ padrao: slide.padrao ?? '', subtitulo: slide.subtitulo, tipoDiagrama: slide.tipoDiagrama, diagrama: slide.diagrama, ciclo: slide.ciclo, custoTi: slide.custoTi, custoOutros: slide.custoOutros, virada: slide.virada, url: slide.url }}
+        info={{ padrao: slide.padrao ?? '', rotulo: slide.rotulo, subtitulo: slide.subtitulo, tipoDiagrama: slide.tipoDiagrama, diagrama: slide.diagrama, ciclo: slide.ciclo, custoTi: slide.custoTi, custoOutros: slide.custoOutros, virada: slide.virada, url: slide.url }}
         mundo={mundo}
         imageUrl={slide.imageUrl}
       />
