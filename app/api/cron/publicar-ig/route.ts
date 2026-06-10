@@ -36,9 +36,13 @@ function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
 
 const tipoChave = (t: Theme) => (t?.formato === 'reel' ? (t?.subtipo ?? 'reel') : (t?.formato ?? ''));
 
-// número comparável YYYYMMDDHHMM na hora de Lisboa (sem bugs de fuso/DST)
-function lisboaAgoraNum(): number {
-  const f = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Lisbon', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
+// FUSO em que as horas dos posts são interpretadas (o fuso da Vivianne).
+// As horas escolhidas (13:00, 16:00…) são DESTE fuso. Trocar aqui se mudares.
+const FUSO = 'Africa/Johannesburg';
+
+// número comparável YYYYMMDDHHMM na hora do FUSO (sem bugs de DST)
+function agoraNum(): number {
+  const f = new Intl.DateTimeFormat('en-CA', { timeZone: FUSO, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
   const p = Object.fromEntries(f.formatToParts(new Date()).map((x) => [x.type, x.value])) as Record<string, string>;
   return Number(`${p.year}${p.month}${p.day}${p.hour}${p.minute}`);
 }
@@ -69,7 +73,7 @@ export async function GET(req: NextRequest) {
     .not('theme->>agendadoEm', 'is', null);
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 
-  const agora = lisboaAgoraNum();
+  const agora = agoraNum();
   const resultados: { slug: string; estado: string }[] = [];
 
   for (const row of (data ?? []) as Row[]) {
