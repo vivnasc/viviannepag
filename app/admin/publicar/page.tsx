@@ -174,6 +174,19 @@ export default function PublicarPage() {
     else { setMsg(`✗ ${j.detalhe ?? j.erro ?? r.status}`); }
   }
 
+  // importar CSV do Metricool → cria posts (rascunho) na conta selecionada
+  async function importarCSV(file?: File | null) {
+    if (!file) return;
+    setMsg('a ler CSV…');
+    try {
+      const txt = await file.text();
+      const r = await fetch('/api/admin/publicar/importar-csv', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ csv: txt, conta }) });
+      const j = await r.json().catch(() => ({}));
+      if (r.ok) { setMsg(`✓ ${j.criados} posts importados do CSV para ${conta} (${j.ignorados} linhas não-Instagram ignoradas). Revê e aprova.`); await carregar(); }
+      else setMsg(`✗ ${j.detalhe ?? j.erro ?? r.status}`);
+    } catch (e) { setMsg('Erro a ler o CSV: ' + String(e)); }
+  }
+
   // ── componentes ──
   const Cartao = ({ it, compacto }: { it: Item; compacto?: boolean }) => {
     const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const pronto = mediaPronta(it);
@@ -239,6 +252,9 @@ export default function PublicarPage() {
             <select value={fFormato} onChange={(e) => setFFormato(e.target.value)} className="text-[0.7rem] px-2 py-1.5 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2">
               <option value="todos">todos os formatos</option>{Object.entries(FMT).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
             </select>
+            <label className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 cursor-pointer" title={`importa um CSV do Metricool para ${conta}`}>⬆ importar CSV
+              <input type="file" accept=".csv,text/csv" hidden onChange={(e) => { importarCSV(e.target.files?.[0]); e.currentTarget.value = ''; }} />
+            </label>
             {vista === 'semana' && (
               <div className="ml-auto flex items-center gap-2">
                 {conta === 'loja' && <button onClick={() => setPickerLoja(true)} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">＋ colocar carrosséis da Loja</button>}
