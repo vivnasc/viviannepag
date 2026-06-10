@@ -47,8 +47,10 @@ async function main() {
   const formato = col.theme?.formato;
   const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo'); // frase com motion / Domingo de Luz (animados)
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
+  // carrossel de imagens (sinais, o que ninguem, uma ideia): so PNGs 4:5, sem MP4
+  const carrossel = formato === 'reel' && ['sinais', 'ninguem', 'pensador'].includes(col.theme?.subtipo);
   const soImagens = formato === 'aneis'; // so os aneis ficam so imagem
-  const H = formato === 'aneis' ? 1080 : formato === 'infografico' ? 1350 : 1920;
+  const H = formato === 'aneis' ? 1080 : (formato === 'infografico' || carrossel) ? 1350 : 1920;
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'veu-'));
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
@@ -59,6 +61,29 @@ async function main() {
     if (!slides.length) continue;
     const diaDir = path.join(tmp, `dia-${d.dia}`);
     fs.mkdirSync(diaDir, { recursive: true });
+
+    // ── CARROSSEL (sinais / o que ninguem / uma ideia): so PNGs 4:5, sem MP4.
+    // Guarda os URLs em dias[].imagens para poderem ser publicados no Instagram. ──
+    if (carrossel) {
+      const imagensDia = [];
+      for (let i = 0; i < slides.length; i++) {
+        const page = await browser.newPage();
+        await page.setViewport({ width: 1080, height: 1350, deviceScaleFactor: 1 });
+        const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=${i}`;
+        await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
+        await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+        const pngPath = path.join(diaDir, `c${i}.png`);
+        await page.screenshot({ path: pngPath, clip: { x: 0, y: 0, width: 1080, height: 1350 } });
+        await page.close();
+        const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-${i}.png`;
+        const { error: pe } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(pngPath), { contentType: 'image/png', upsert: true });
+        if (!pe) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+        console.log(`[carrossel] dia ${d.dia} slide ${i}`);
+      }
+      resultados.push({ dia: d.dia, videoUrl: null, imagens: imagensDia });
+      console.log(`[dia ${d.dia}] carrossel: ${imagensDia.length} imagens`);
+      continue;
+    }
 
     // ── KINETIC: frase com motion (typewriter). Captura frame a frame
     // conduzindo window.__setKProg e monta MP4 a partir da sequencia. ──

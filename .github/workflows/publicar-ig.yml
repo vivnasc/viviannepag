@@ -1,0 +1,17 @@
+name: Publicar Instagram (posts agendados)
+
+# Corre a cada 15 min e pede à app para publicar os posts cuja hora já chegou.
+# Precisa do secret CRON_SECRET (igual ao da app). As credenciais do Instagram
+# (INSTAGRAM_TOKEN, INSTAGRAM_IG_ID) ficam nas variáveis de ambiente da app (Vercel).
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar publicação dos posts cuja hora chegou
+        run: |
+          curl -fsS "https://viviannedossantos.com/api/cron/publicar-ig?secret=${{ secrets.CRON_SECRET }}" -w '\n[http %{http_code}]\n'
