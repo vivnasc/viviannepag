@@ -39,17 +39,20 @@ function erroDe(json: Record<string, unknown>): string {
   return e?.message ? `${e.message}${e.code ? ` (cod ${e.code})` : ''}` : JSON.stringify(json).slice(0, 200);
 }
 
-// Espera o container de vídeo/reel ficar pronto (a Meta processa o MP4).
-async function esperarContainer(token: string, containerId: string, maxMs = 5 * 60 * 1000): Promise<boolean> {
+// Espera o container ficar FINISHED. Devolve o estado + o MOTIVO real da Meta
+// (campo "status") quando dá ERROR, para o erro ser honesto (não um 9007 vago).
+async function esperarContainer(token: string, containerId: string, maxMs = 5 * 60 * 1000): Promise<{ ok: boolean; detalhe?: string }> {
   const ini = Date.now();
+  let ultimo = '';
   while (Date.now() - ini < maxMs) {
-    const j = await graphGet(containerId, { fields: 'status_code', access_token: token });
-    const status = j?.status_code as string | undefined;
-    if (status === 'FINISHED') return true;
-    if (status === 'ERROR') return false;
+    const j = await graphGet(containerId, { fields: 'status_code,status', access_token: token });
+    const code = j?.status_code as string | undefined;
+    ultimo = (j?.status as string | undefined) ?? ultimo;
+    if (code === 'FINISHED') return { ok: true };
+    if (code === 'ERROR') return { ok: false, detalhe: ultimo || 'a Meta marcou o conteúdo como ERROR' };
     await new Promise((r) => setTimeout(r, 5000));
   }
-  return false;
+  return { ok: false, detalhe: `tempo esgotado à espera do Instagram${ultimo ? ` (último estado: ${ultimo})` : ''}` };
 }
 
 export async function publicarInstagram(opts: PublishOpts): Promise<PublishResult> {
@@ -65,8 +68,8 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
       const c = await graphPost(`${igUserId}/media`, { media_type: 'REELS', video_url: opts.videoUrl, caption, access_token: token, share_to_feed: 'true' });
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container reel: ' + erroDe(c.json) };
       creationId = c.json.id as string;
-      const pronto = await esperarContainer(token, creationId);
-      if (!pronto) return { ok: false, erro: 'o Instagram não acabou de processar o vídeo a tempo' };
+      const w = await esperarContainer(token, creationId);
+      if (!w.ok) return { ok: false, erro: 'o Instagram não processou o vídeo: ' + w.detalhe };
     }
 
     // ── IMAGEM única ──
@@ -76,7 +79,8 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
       const c = await graphPost(`${igUserId}/media`, { image_url: url, caption, access_token: token });
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container imagem: ' + erroDe(c.json) };
       creationId = c.json.id as string;
-      await esperarContainer(token, creationId, 60 * 1000); // deixa a imagem processar
+      const w = await esperarContainer(token, creationId, 60 * 1000);
+      if (!w.ok) return { ok: false, erro: 'a imagem não ficou pronta: ' + w.detalhe };
     }
 
     // ── CARROSSEL (várias imagens) ──
@@ -84,17 +88,19 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
       const urls = (opts.imageUrls ?? []).slice(0, 10); // Instagram aceita até 10 (ou 20 em alguns casos)
       if (urls.length < 2) return { ok: false, erro: 'carrossel precisa de pelo menos 2 imagens' };
       const childIds: string[] = [];
-      for (const url of urls) {
-        const ch = await graphPost(`${igUserId}/media`, { image_url: url, is_carousel_item: 'true', access_token: token });
-        if (!ch.ok || !ch.json.id) return { ok: false, erro: 'item do carrossel: ' + erroDe(ch.json) };
+      for (let i = 0; i < urls.length; i++) {
+        const ch = await graphPost(`${igUserId}/media`, { image_url: urls[i], is_carousel_item: 'true', access_token: token });
+        if (!ch.ok || !ch.json.id) return { ok: false, erro: `imagem ${i + 1} do carrossel: ${erroDe(ch.json)}` };
         const cid = ch.json.id as string;
-        await esperarContainer(token, cid, 60 * 1000); // cada imagem tem de estar pronta
+        const w = await esperarContainer(token, cid, 90 * 1000); // cada imagem tem de estar pronta
+        if (!w.ok) return { ok: false, erro: `imagem ${i + 1} do carrossel não ficou pronta: ${w.detalhe}` };
         childIds.push(cid);
       }
       const c = await graphPost(`${igUserId}/media`, { media_type: 'CAROUSEL', children: childIds.join(','), caption, access_token: token });
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container carrossel: ' + erroDe(c.json) };
       creationId = c.json.id as string;
-      await esperarContainer(token, creationId, 120 * 1000); // o contentor do carrossel também
+      const w = await esperarContainer(token, creationId, 120 * 1000); // o contentor do carrossel também
+      if (!w.ok) return { ok: false, erro: 'o carrossel não ficou pronto: ' + w.detalhe };
     }
 
     // ── PUBLICAR (com re-tentativa: a Meta às vezes ainda diz "not available", cod 9007) ──
