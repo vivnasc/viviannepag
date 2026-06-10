@@ -32,7 +32,7 @@ function InstagramInner() {
 
   async function guardar() {
     if (busy || token.trim().length < 20) return;
-    if (conta === 'loja' && igId.trim().length < 5) { setErro('para a Loja, indica o IG_USER_ID dessa conta.'); return; }
+    if (conta !== 'veuaveu' && igId.trim().length < 5) { setErro('indica o IG_USER_ID dessa conta.'); return; }
     setBusy(true); setMsg(null); setErro(null);
     try {
       const r = await fetch('/api/admin/ig/set-token', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token: token.trim(), conta, igUserId: igId.trim() || undefined }) });
@@ -67,8 +67,8 @@ function InstagramInner() {
 
         <p className="text-[0.8rem] opacity-65 mb-4">Para (re)ligar a <b>{nomeConta(conta)}</b>: cola um token do Instagram dessa conta (mesmo de curta duração, do Graph API Explorer). Eu torno-o <b>permanente (~60 dias)</b> e renova-se sozinho.</p>
 
-        {conta === 'loja' && (
-          <input value={igId} onChange={(e) => setIgId(e.target.value)} placeholder="IG_USER_ID da conta da Loja (ex.: 1784141...)" className="w-full text-[0.78rem] font-mono p-2.5 mb-2 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2" />
+        {conta !== 'veuaveu' && (
+          <input value={igId} onChange={(e) => setIgId(e.target.value)} placeholder={`IG_USER_ID da conta ${nomeConta(conta)} (ex.: 1784141...)`} className="w-full text-[0.78rem] font-mono p-2.5 mb-2 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2" />
         )}
         <textarea value={token} onChange={(e) => setToken(e.target.value)} placeholder="cola o token aqui (EAA...)" rows={4} className="w-full text-[0.78rem] font-mono p-3 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2 resize-y" />
         <button onClick={guardar} disabled={busy || token.trim().length < 20} className="mt-3 text-[0.84rem] px-5 py-2.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy ? 'a tornar permanente…' : '🔑 guardar e tornar permanente'}</button>
