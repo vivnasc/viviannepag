@@ -1,0 +1,17 @@
+name: Renovar token Instagram
+
+# Renova o token de longa duração do Instagram (vale ~60 dias) MUITO antes de
+# expirar. Corre todas as segundas às 05:00 UTC. Assim a Vivianne nunca tem de
+# trocar chaves à mão.
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar endpoint de renovação
+        run: |
+          curl -fsS "https://viviannedossantos.com/api/cron/renovar-token-ig?secret=${{ secrets.CRON_SECRET }}"

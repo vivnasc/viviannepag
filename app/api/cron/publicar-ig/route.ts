@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { publicarInstagram } from '@/lib/instagram/publish';
+import { getIgCredenciais } from '@/lib/instagram/config';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -46,8 +47,8 @@ export async function GET(req: NextRequest) {
   if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
     return NextResponse.json({ erro: 'auth' }, { status: 401 });
   }
-  const token = process.env.INSTAGRAM_TOKEN;
-  const igUserId = process.env.INSTAGRAM_IG_ID;
+  // token vem da config privada (já renovado) ou da env de arranque do Vercel
+  const { token, igUserId } = await getIgCredenciais();
   if (!token || !igUserId) return NextResponse.json({ erro: 'sem-credenciais', detalhe: 'falta INSTAGRAM_TOKEN / INSTAGRAM_IG_ID' }, { status: 500 });
 
   const supabase = getSupabaseAdmin();
