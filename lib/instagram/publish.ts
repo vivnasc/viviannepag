@@ -76,6 +76,7 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
       const c = await graphPost(`${igUserId}/media`, { image_url: url, caption, access_token: token });
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container imagem: ' + erroDe(c.json) };
       creationId = c.json.id as string;
+      await esperarContainer(token, creationId, 60 * 1000); // deixa a imagem processar
     }
 
     // ── CARROSSEL (várias imagens) ──
@@ -86,15 +87,26 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
       for (const url of urls) {
         const ch = await graphPost(`${igUserId}/media`, { image_url: url, is_carousel_item: 'true', access_token: token });
         if (!ch.ok || !ch.json.id) return { ok: false, erro: 'item do carrossel: ' + erroDe(ch.json) };
-        childIds.push(ch.json.id as string);
+        const cid = ch.json.id as string;
+        await esperarContainer(token, cid, 60 * 1000); // cada imagem tem de estar pronta
+        childIds.push(cid);
       }
       const c = await graphPost(`${igUserId}/media`, { media_type: 'CAROUSEL', children: childIds.join(','), caption, access_token: token });
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container carrossel: ' + erroDe(c.json) };
       creationId = c.json.id as string;
+      await esperarContainer(token, creationId, 120 * 1000); // o contentor do carrossel também
     }
 
-    // ── PUBLICAR ──
-    const pub = await graphPost(`${igUserId}/media_publish`, { creation_id: creationId!, access_token: token });
+    // ── PUBLICAR (com re-tentativa: a Meta às vezes ainda diz "not available", cod 9007) ──
+    let pub = await graphPost(`${igUserId}/media_publish`, { creation_id: creationId!, access_token: token });
+    let tentativas = 0;
+    while ((!pub.ok || !pub.json.id) && tentativas < 5) {
+      const err = erroDe(pub.json);
+      if (!/9007|not available|not ready|media id is not/i.test(err)) break; // erro não-transitório: desiste já
+      await new Promise((r) => setTimeout(r, 6000));
+      pub = await graphPost(`${igUserId}/media_publish`, { creation_id: creationId!, access_token: token });
+      tentativas++;
+    }
     if (!pub.ok || !pub.json.id) return { ok: false, erro: 'publicar: ' + erroDe(pub.json) };
     return { ok: true, id: pub.json.id as string };
   } catch (e) {
