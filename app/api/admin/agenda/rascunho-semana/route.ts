@@ -46,7 +46,7 @@ ${listaSlots}
 
 REGRAS:
 - Cada "frase" e o TEXTO QUE APARECE NO ECRA: curta, que cabe grande, que para o scroll. No maximo 14 palavras.
-- A "legenda" e o texto do Instagram: 1.a linha gancho, 2-4 linhas que aprofundam em palavras simples, fecha com um convite a refletir e "guarda este reel" ou "partilha com quem precisa". SEM vender, SEM links.
+- A "legenda" e o texto do Instagram, em PARAGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada paragrafo — NUNCA um bloco corrido): gancho na 1.a linha; 2 a 3 paragrafos curtos que aprofundam em palavras simples, separados por \\n\\n; fecho a parte com convite a refletir e a guardar/partilhar (NAO nomeies o formato). SEM vender, SEM links.
 - "destaque": 1 a 3 palavras-chave da frase para realcar a ouro.
 - "fundoPrompt": prompt MidJourney para o fundo, UNICO e DIFERENTE em cada dia, ligado a imagem da frase desse dia. VARIA o motivo (agua, luz, pedra, ceu, tecido, maos, horizonte, raizes, nevoa, areia, fogo suave, folhas...). NUNCA repitas raizes/fios dourados em todos. Paleta indigo profundo e ouro/ambar, etereo, sagrado, fine art, SEM pessoas, SEM texto. Termina sempre com "--ar 9:16 --style raw".
 - NUNCA uses travessoes (— nem –). Usa virgulas, pontos ou parenteses.

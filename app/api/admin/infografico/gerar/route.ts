@@ -45,7 +45,7 @@ DEVOLVE APENAS JSON válido:
   "custoTi": "1 frase: como isto se manifesta na pessoa (efeito interno)",
   "custoOutros": "1 frase: como afeta a relação, os outros, o sistema",
   "virada": "1 frase de reflexão ou pergunta (abre, não vende)",
-  "legenda": "legenda para Instagram, DIDÁTICA: 1.ª linha gancho forte, depois 2 a 4 linhas que explicam o conceito em palavras simples, e fecha com um convite a refletir e 'guarda este post' ou 'partilha com quem precisa'. SEM vender.",
+  "legenda": "legenda para Instagram, DIDÁTICA, em PARÁGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada parágrafo — NUNCA um bloco corrido): gancho forte na 1.ª linha; 2 a 3 parágrafos curtos que explicam o conceito em palavras simples, cada um separado por \\n\\n; fecho num parágrafo à parte com convite a refletir e a guardar/partilhar (NÃO nomeies o formato). SEM vender.",
   "hashtags": ["10-12 hashtags relevantes em português, mistura amplas e de nicho (ex.: #constelacaofamiliar #psicologiatranspessoal #autoconhecimento), sem # repetido"]
 }
 

@@ -72,7 +72,7 @@ DEVOLVE APENAS JSON valido:
   "titulo": "titulo interno curto (2-5 palavras)",
   "fundoPrompt": "UM prompt MidJourney para a imagem de fundo (transcendente, evocativa, sem pessoas, sem texto, --ar 4:5) que servira para TODOS os slides",
   "slides": [ { "texto": "frase do slide", "destaque": ["1 a 2 palavras a realcar a ouro"] } ],
-  "legenda": "legenda Instagram: 1.a linha gancho, depois 2-4 linhas que aprofundam, fecha com convite a refletir + guarda/partilha. SEM vender.",
+  "legenda": "legenda Instagram em PARAGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada paragrafo — NUNCA um bloco corrido): gancho na 1.a linha; 2 a 3 paragrafos curtos que aprofundam, separados por \\n\\n; fecho a parte com convite a refletir e a guardar/partilhar (NAO nomeies o formato). SEM vender.",
   "hashtags": ["10-12 hashtags em portugues, amplas + de nicho, sem repetir"]
 }`;
 
