@@ -22,11 +22,12 @@ const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)
 function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
+  if (t.externo) return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1; // CSV: media já pronta
   if (conta === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(chave)) return !!d?.videoUrl;
   if (CARROSSEL.includes(chave)) return (d?.imagens?.length ?? 0) >= 2 && t.capaRev === CAPA_REV;
@@ -112,7 +113,11 @@ export async function GET(req: NextRequest) {
 
     // que media publicar?
     let r: { ok: boolean; id?: string; erro?: string };
-    if (conta === 'loja') {
+    if (t.externo) {
+      if (d?.videoUrl) r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
+      else if ((d?.imagens?.length ?? 0) >= 2) r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d!.imagens! });
+      else r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d?.imagens ?? [] });
+    } else if (conta === 'loja') {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
     } else if (VIDEO.includes(chave) && d?.videoUrl) {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
