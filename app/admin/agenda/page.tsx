@@ -316,7 +316,10 @@ export default function AgendaPage() {
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-2xl font-semibold">Agenda · Véu a Véu</h1>
-          <Link href="/admin/conteudos" className="text-[0.7rem] opacity-60 hover:opacity-100">Biblioteca →</Link>
+          <div className="flex items-center gap-3">
+            <Link href="/admin/instagram" className="text-[0.7rem] opacity-60 hover:opacity-100">🔑 Instagram</Link>
+            <Link href="/admin/conteudos" className="text-[0.7rem] opacity-60 hover:opacity-100">Biblioteca →</Link>
+          </div>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-3">Tudo num só sítio: <b>planeia → gera → renderiza → baixa</b>, sem saltar de aba.</p>
 
