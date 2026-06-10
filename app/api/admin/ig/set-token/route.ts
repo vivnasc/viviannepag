@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   const { token, igUserId, conta = 'veuaveu' } = (await req.json().catch(() => ({}))) as { token?: string; igUserId?: string; conta?: ContaId };
   if (!token || token.length < 20) return NextResponse.json({ erro: 'token-invalido', detalhe: 'cola o token completo' }, { status: 400 });
-  if (conta === 'loja' && !igUserId?.trim()) return NextResponse.json({ erro: 'falta-igid', detalhe: 'para a Loja, indica também o IG_USER_ID dessa conta.' }, { status: 400 });
+  if (conta !== 'veuaveu' && !igUserId?.trim()) return NextResponse.json({ erro: 'falta-igid', detalhe: 'indica também o IG_USER_ID dessa conta.' }, { status: 400 });
 
   const appId = process.env.META_APP_ID;
   const appSecret = process.env.META_APP_SECRET;
