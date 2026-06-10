@@ -207,8 +207,24 @@ export default function AgendaPage() {
     try {
       const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
       const j = await r.json().catch(() => ({}));
-      setRenderMsg(r.ok ? `Re-render disparado: “${it.title}” (~10 min). Recarrega para veres o MP4 novo.` : 'Falhou: ' + (j.erro ?? r.status));
+      setRenderMsg(r.ok ? `Render disparado: “${it.title}” (~10 min no servidor). Recarrega para veres o resultado novo.` : 'Falhou: ' + (j.erro ?? r.status));
     } catch (e) { setRenderMsg('Erro: ' + String(e)); }
+  }
+
+  // publicar JÁ um post no Instagram (teste). Publica mesmo no IG real.
+  const [igBusy, setIgBusy] = useState<string | null>(null);
+  const [igMsg, setIgMsg] = useState<string | null>(null);
+  async function publicarAgora(it: Item) {
+    if (igBusy) return;
+    if (!confirm(`Publicar JÁ no Instagram (a sério, no teu perfil):\n\n“${it.title}”\n\nPodes apagar depois no Instagram. Continuar?`)) return;
+    setIgBusy(it.slug); setIgMsg(null);
+    try {
+      const r = await fetch('/api/admin/ig/publicar-agora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
+      const j = await r.json().catch(() => ({}));
+      if (r.ok) { setIgMsg(`✓ Publicado no Instagram: “${it.title}”.`); await carregar(); }
+      else setIgMsg(`✗ Não publicou “${it.title}”: ${j.detalhe ?? j.erro ?? r.status}`);
+    } catch (e) { setIgMsg('Erro: ' + String(e)); }
+    setIgBusy(null);
   }
 
   // ── GERAR A SEMANA TODA: rascunha o tema editorial desta semana, gera os 8 posts
@@ -290,6 +306,7 @@ export default function AgendaPage() {
           {mp4Pendentes.length > 0 && <span className="text-[0.66rem] opacity-60 w-full">Em falta ({mp4Pendentes.length}): {mp4Pendentes.map((e) => `${e.diaPt} ${FMT[tipoChave(e.it)]?.label ?? ''}`).join(' · ')}. Os carrosséis (Sinais, O que ninguém, Uma ideia) não têm MP4. Se faltar algum dia, é porque ainda não geraste/agendaste esse post.</span>}
           {zipMsg && <span className="text-[0.72rem] text-salvia w-full">{zipMsg}</span>}
           {renderMsg && <span className="text-[0.72rem] text-[#C9B6FA] w-full">{renderMsg}</span>}
+          {igMsg && <span className="text-[0.74rem] text-ambar w-full">{igMsg}</span>}
           {/* imagens-assinatura LIMPAS (sem texto) — para animar no MidJourney */}
           {Object.keys(capasSerie).length > 0 && (
             <div className="w-full flex flex-wrap items-center gap-2 pt-1">
@@ -351,7 +368,11 @@ export default function AgendaPage() {
                                 : <span className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/15 text-creme-2/35 cursor-not-allowed" title="Ainda sem MP4. Carrega 🎬 renderizar e espera ~10 min.">⬇ por renderizar</span>}
                               <button onClick={() => reRender(it)} title={videoUrl ? 're-renderizar o MP4 (~10 min) — útil para aplicar a animação nova' : 'renderizar o MP4 (~10 min)'} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-[#C9B6FA]/30 text-[#C9B6FA]/85 hover:bg-[#C9B6FA]/10">{videoUrl ? '↻🎬' : '🎬'}</button>
                             </>)
-                          : (m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">⬇ imagens</Link>)}
+                          : (<>
+                              {m.href !== '#' && <Link href={m.href} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/65 hover:border-ambar hover:text-ambar no-underline">⬇ imagens</Link>}
+                              <button onClick={() => reRender(it)} title="render no servidor (~10 min) — necessário para o carrossel publicar sozinho no Instagram" className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-[#C9B6FA]/30 text-[#C9B6FA]/85 hover:bg-[#C9B6FA]/10">↻🖼️</button>
+                            </>)}
+                        <button onClick={() => publicarAgora(it)} disabled={igBusy === it.slug || !!it.theme?.igPublicado} title={it.theme?.igPublicado ? 'já publicado no Instagram' : 'publicar JÁ no Instagram (teste — vai mesmo para o teu perfil)'} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{igBusy === it.slug ? '…' : it.theme?.igPublicado ? '✓ IG' : '🧪 publicar'}</button>
                         <button onClick={() => patch(it.slug, { publicado: !it.theme?.publicado })} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'marcar'}</button>
                         <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia">✕</button>
                       </div>
