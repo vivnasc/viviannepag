@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getCurso } from '@/lib/infografico/cursos';
+import { getArena } from '@/lib/veu/arenas';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 
 export const runtime = 'nodejs';
@@ -29,17 +30,35 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; subtitulo?: string; curso?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; subtitulo?: string; curso?: string; arenas?: string[] };
   const tema = body.tema?.trim();
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
   const curso = getCurso(body.curso ?? 'transpessoal');
   const contexto = [tema, body.subtitulo?.trim()].filter(Boolean).join('. ');
+
+  // ARENA(S): onde o conceito ATERRA esta semana (arenas.ts). O conceito lidera
+  // sempre; a arena só o ilumina. Família é a casa-base se nada vier.
+  const arenasSel = (Array.isArray(body.arenas) && body.arenas.length ? body.arenas : ['pessoal']).map(getArena);
+  const multiArena = arenasSel.length > 1;
+  const arenaTxt = arenasSel.map((a) => `${a.nome} (${a.lente})`).join('\n');
 
   const listaSlots = SLOTS.map((s, i) => `${i + 1}. ${s.dia} (${s.label}): ${s.angulo}`).join('\n');
 
   const SYSTEM = `Es a Vivianne dos Santos (psicologia transpessoal, constelacao familiar; pos-graduada). Escreves para o Instagram "Veu a Veu" — DIDATICO, para ensinar e tocar, nunca para vender. Portugues europeu COM acentos. Voz humana, calorosa, com profundidade real (nada de motivacional oco).
 
 Vais planear UMA SEMANA inteira (${SLOTS.length} posts) sobre o tema "${contexto}", no contexto academico "${curso.nome}" (${curso.descricao}).
+
+ARENA(S) ONDE O CONCEITO ATERRA esta semana:
+${arenaTxt}
+
+ENQUADRAMENTO DA ARENA (regra dura, NAO falhar):
+- A arena e ONDE o conceito aterra, NUNCA um recado a uma pessoa concreta (chefe, sogra, parceiro, colega, sogros). Fala-se sempre de PADROES e do MEU LUGAR, de dentro para fora.
+- Tom de DIGNIDADE, PERTENCA e INTEIREZA. NUNCA vitimismo, ressentimento, culpa, nem por a culpa no outro. Ninguem e vilao, ninguem e vitima. Ensina-se para EVOLUIR, nao para acusar.
+- O movimento e sempre INTERNO: honrar quem veio antes, tomar o proprio lugar com respeito, distinguir o que e meu carregar do que pertence ao sistema. A forca esta em mudar a minha posicao, nao em corrigir o outro.
+- O conceito "${tema}" LIDERA sempre; a arena so o ilumina (a mesma licao, lida nessa escala da vida).
+${multiArena
+  ? '- Esta semana e MULTI-ARENA: distribui as arenas pelos dias sem dispersar (o conceito e o mesmo fio que os une). O "Ca em Casa" fica SEMPRE numa cena de casa/familia que faz a ponte para a(s) outra(s) arena(s).'
+  : '- O "Ca em Casa" e uma cena de casa/familia; se a arena dominante nao for familia, faz a PONTE (o padrao da arena a aparecer no lar), mantendo a cena em casa.'}
 
 Para CADA dia ha um angulo proprio:
 ${listaSlots}
