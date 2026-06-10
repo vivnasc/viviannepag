@@ -1,17 +1,19 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getIgCredenciais } from '@/lib/instagram/config';
+import type { ContaId } from '@/lib/instagram/contas';
 
 export const runtime = 'nodejs';
 
 const GRAPH = 'https://graph.facebook.com/v21.0';
 
-// GET — testa se o token guardado funciona mesmo (pergunta o username ao
-// Instagram). Diz claramente se está ligado e a que conta.
-export async function GET() {
+// GET ?conta= — testa se o token guardado DA CONTA funciona (pergunta o username
+// ao Instagram). Diz claramente se está ligado e a que conta.
+export async function GET(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
-  const { token, igUserId } = await getIgCredenciais();
+  const conta = (req.nextUrl.searchParams.get('conta') as ContaId) || 'veuaveu';
+  const { token, igUserId } = await getIgCredenciais(conta);
   if (!token) return NextResponse.json({ ligado: false, erro: 'Ainda não há token guardado. Cola um token em baixo.' });
   if (!igUserId) return NextResponse.json({ ligado: false, erro: 'Falta o IG_USER_ID (INSTAGRAM_IG_ID no Vercel).' });
 

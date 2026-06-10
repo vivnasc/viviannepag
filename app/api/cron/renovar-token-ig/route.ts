@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { renovarToken } from '@/lib/instagram/publish';
-import { getIgConfig, setIgConfig } from '@/lib/instagram/config';
+import { getIgConfig, getIgCredenciais, setContaCredenciais } from '@/lib/instagram/config';
+import { CONTAS } from '@/lib/instagram/contas';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -25,24 +26,17 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ erro: 'sem-app', detalhe: 'falta META_APP_ID / META_APP_SECRET' }, { status: 500 });
   }
 
-  const cfg = await getIgConfig();
-  const tokenAtual = cfg.token || process.env.INSTAGRAM_TOKEN;
-  if (!tokenAtual) {
-    return NextResponse.json({ erro: 'sem-token', detalhe: 'falta INSTAGRAM_TOKEN (arranque) ou config privada' }, { status: 500 });
+  await getIgConfig(); // garante bucket/config existentes
+  // renova o token de CADA conta que já tenha um
+  const resultados: { conta: string; estado: string }[] = [];
+  for (const c of CONTAS) {
+    const { token, igUserId } = await getIgCredenciais(c.id);
+    if (!token) { resultados.push({ conta: c.id, estado: 'sem token' }); continue; }
+    const novo = await renovarToken(token, appId, appSecret);
+    if (!novo) { resultados.push({ conta: c.id, estado: 'falhou' }); continue; }
+    await setContaCredenciais(c.id, { token: novo, igUserId, renovadoEm: new Date().toISOString() });
+    resultados.push({ conta: c.id, estado: 'renovado' });
   }
 
-  const novo = await renovarToken(tokenAtual, appId, appSecret);
-  if (!novo) {
-    return NextResponse.json({ erro: 'renovacao-falhou', detalhe: 'a Meta não devolveu novo token (token expirado? app errada?)' }, { status: 502 });
-  }
-
-  await setIgConfig({
-    token: novo,
-    appId,
-    appSecret,
-    igUserId: cfg.igUserId || process.env.INSTAGRAM_IG_ID,
-    renovadoEm: new Date().toISOString(),
-  });
-
-  return NextResponse.json({ ok: true, renovadoEm: new Date().toISOString() });
+  return NextResponse.json({ ok: true, renovadoEm: new Date().toISOString(), resultados });
 }

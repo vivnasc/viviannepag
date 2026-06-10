@@ -4,25 +4,27 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { publicarInstagram } from '@/lib/instagram/publish';
 import { getIgCredenciais } from '@/lib/instagram/config';
 import { dispararRender, CAPA_REV } from '@/lib/render/dispatch';
+import { contaDe, nomeConta } from '@/lib/instagram/contas';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
-// POST { slug } — publica JÁ um post no Instagram (botão "publicar agora (teste)"
-// da Agenda). Mesma lógica de media do cron, mas a pedido e com resposta imediata.
-// Marca theme.igPublicado para o cron das 13h não voltar a publicar o mesmo.
+// POST { slug } — publica JÁ um post no Instagram, na conta a que pertence
+// (veu.a.veu ou loja). A pedido e com resposta imediata. Marca igPublicado.
 
 const CARROSSEL = ['sinais', 'ninguem', 'pensador'];
 const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; igPublicado?: boolean; igStatus?: string; igTentativas?: number; publicado?: boolean; capaRev?: number; renderPedidoEm?: number };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; igPublicado?: boolean; igStatus?: string; igTentativas?: number; publicado?: boolean; capaRev?: number; renderPedidoEm?: number };
 
 const tipoChave = (t: Theme) => (t?.formato === 'reel' ? (t?.subtipo ?? 'reel') : (t?.formato ?? ''));
 const legendaDe = (d?: Dia) => !d ? '' : [d.legenda?.trim(), (d.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
 
-function mediaPronta(chave: string, t: Theme, d?: Dia): boolean {
+// a loja é sempre REEL (MP4 com música); a veu varia conforme o formato.
+function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
+  if (conta === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(chave)) return !!d?.videoUrl;
   if (CARROSSEL.includes(chave)) return (d?.imagens?.length ?? 0) >= 2 && t.capaRev === CAPA_REV;
   if (chave === 'infografico') return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1;
@@ -34,9 +36,6 @@ export async function POST(req: Request) {
 
   const { slug } = (await req.json().catch(() => ({}))) as { slug?: string };
   if (!slug) return NextResponse.json({ erro: 'slug' }, { status: 400 });
-
-  const { token, igUserId } = await getIgCredenciais();
-  if (!token || !igUserId) return NextResponse.json({ erro: 'sem-credenciais', detalhe: 'falta INSTAGRAM_TOKEN / INSTAGRAM_IG_ID no Vercel' }, { status: 500 });
 
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
@@ -50,11 +49,15 @@ export async function POST(req: Request) {
   const d = (data.dias as Dia[] | undefined)?.[0];
   const caption = legendaDe(d);
   const chave = tipoChave(t);
+  const conta = contaDe(t, slug);
+
+  const { token, igUserId } = await getIgCredenciais(conta);
+  if (!token || !igUserId) return NextResponse.json({ erro: 'sem-credenciais', detalhe: `A conta "${nomeConta(conta)}" ainda não tem token. Liga-a em 🔑 Instagram.` }, { status: 409 });
 
   // media ainda não pronta (ou capa por corrigir)? PREPARA sozinho. Só dispara
   // um render novo se não tiver pedido um nos últimos 20 min (senão a app fica
   // a sondar e não duplica renders). O frontend sonda este endpoint até publicar.
-  if (!mediaPronta(chave, t, d)) {
+  if (!mediaPronta(conta, chave, t, d)) {
     const pedido = t.renderPedidoEm ?? 0;
     const haPouco = Date.now() - pedido < 20 * 60 * 1000;
     let ok = true;
@@ -71,7 +74,9 @@ export async function POST(req: Request) {
   }
 
   let r: { ok: boolean; id?: string; erro?: string };
-  if (VIDEO.includes(chave) && d?.videoUrl) {
+  if (conta === 'loja') {
+    r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
+  } else if (VIDEO.includes(chave) && d?.videoUrl) {
     r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
   } else if (CARROSSEL.includes(chave)) {
     r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });

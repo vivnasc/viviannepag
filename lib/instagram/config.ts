@@ -7,16 +7,20 @@
 // NUNCA expor este bucket publicamente. Só o service-role o lê/escreve.
 
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import type { ContaId } from '@/lib/instagram/contas';
 
 const BUCKET = 'config-privado';
 const PATH = 'instagram.json';
 
+export type ContaCfg = { token?: string; igUserId?: string; renovadoEm?: string };
+
 export type IgConfig = {
-  token?: string;     // token de longa duração mais recente
-  igUserId?: string;  // ID da conta de Instagram
+  token?: string;     // (legado) token de longa duração da conta veu.a.veu
+  igUserId?: string;  // (legado) ID da conta veu.a.veu
   appId?: string;     // META_APP_ID (guardado para futuras renovações)
   appSecret?: string; // META_APP_SECRET
-  renovadoEm?: string; // ISO da última renovação
+  renovadoEm?: string; // ISO da última renovação (legado)
+  contas?: Partial<Record<ContaId, ContaCfg>>; // credenciais POR conta
 };
 
 async function garantirBucket(): Promise<void> {
@@ -50,12 +54,25 @@ export async function setIgConfig(patch: Partial<IgConfig>): Promise<void> {
   });
 }
 
-// Credenciais a usar para publicar: primeiro a config privada (token já
-// renovado), senão as env vars de arranque do Vercel.
-export async function getIgCredenciais(): Promise<{ token?: string; igUserId?: string }> {
+// Credenciais a usar para publicar NUMA conta. Primeiro a config privada da
+// conta (token já renovado); para a veu.a.veu há fallback ao legado/env do
+// Vercel (arranque). A loja só funciona depois de colares o token dela.
+export async function getIgCredenciais(conta: ContaId = 'veuaveu'): Promise<{ token?: string; igUserId?: string }> {
   const cfg = await getIgConfig();
-  return {
-    token: cfg.token || process.env.INSTAGRAM_TOKEN,
-    igUserId: cfg.igUserId || process.env.INSTAGRAM_IG_ID,
-  };
+  const c = cfg.contas?.[conta];
+  if (conta === 'veuaveu') {
+    return {
+      token: c?.token || cfg.token || process.env.INSTAGRAM_TOKEN,
+      igUserId: c?.igUserId || cfg.igUserId || process.env.INSTAGRAM_IG_ID,
+    };
+  }
+  return { token: c?.token, igUserId: c?.igUserId };
+}
+
+// guarda token/igUserId de UMA conta (sem mexer nas outras).
+export async function setContaCredenciais(conta: ContaId, patch: ContaCfg): Promise<void> {
+  const cfg = await getIgConfig();
+  const contas = { ...(cfg.contas ?? {}) };
+  contas[conta] = { ...(contas[conta] ?? {}), ...patch };
+  await setIgConfig({ contas });
 }
