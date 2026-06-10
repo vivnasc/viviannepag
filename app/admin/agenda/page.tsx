@@ -22,7 +22,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 
 type Slide = PostSlideT & { imageUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string };
-type Theme = { formato?: string; subtipo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean };
+type Theme = { formato?: string; subtipo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 const FMT: Record<string, { emoji: string; label: string; href: string }> = {
@@ -241,7 +241,7 @@ export default function AgendaPage() {
           if (gr.ok && slug) {
             const data = isoLocal(dias[d.wd - 1]); // wd 1..7 -> dias[0..6] desta semana
             await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
-            if (d.gen !== 'reel') videoSlugs.push(slug); // reel = carrossel (sem MP4); o resto é vídeo
+            videoSlugs.push(slug); // render TODOS: vídeos -> MP4; carrosséis -> PNGs (para publicar)
           } else { erros.push(`dia ${d.wd}: ${gj?.erro ?? gr.status}`); }
         } catch (e) { erros.push(`dia ${d.wd}: ${String(e)}`); }
         feito++; await carregar();
@@ -328,7 +328,7 @@ export default function AgendaPage() {
                         <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{hora}</span>
                         <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                         <div className="flex-1 min-w-0">
-                          <span className={`block truncate text-[0.86rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}</span>
+                          <span className={`block truncate text-[0.86rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}{it.theme?.igPublicado && <span className="ml-1 text-[0.54rem] text-salvia">✓ Instagram</span>}{!it.theme?.igPublicado && it.theme?.igStatus?.startsWith('erro') && <span className="ml-1 text-[0.54rem] text-rosa/80" title={it.theme.igStatus}>⚠ IG</span>}</span>
                           {/* etiqueta de formato + estado de render */}
                           {ehVideo
                             ? <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={videoUrl ? { background: '#7E9B8E22', color: '#7E9B8E' } : { background: '#EBAE4A22', color: '#EBAE4A' }}>{videoUrl ? '🎬 MP4 pronto' : '🎬 por renderizar'}</span>

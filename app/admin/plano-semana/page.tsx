@@ -212,7 +212,7 @@ export default function PlanoSemanaPage() {
         const slug = j?.coleccao?.slug as string | undefined;
         if (r.ok && slug) {
           await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: dataDoDiaNaSemana(targetSeg, wdDe(d, i)) }) }).catch(() => {});
-          if (gen !== 'reel') videoSlugs.push(slug); // reel = carrossel (sem MP4)
+          videoSlugs.push(slug); // render TODOS: vídeos -> MP4; carrosséis -> PNGs (para publicar)
           novo[i] = true; ok++;
         }
       } catch { /* segue para o próximo */ }
