@@ -25,6 +25,23 @@ const SLOTS = [
   { dia: 'domingo', wd: 7, emoji: '🕊️', label: 'Domingo de Luz', gen: 'kinetico', formato: 'domingo', angulo: 'uma frase leve, luminosa e esperançosa para fechar a semana, sem peso, depois de uma semana de temas mais fundos' },
 ];
 
+// Recupera dias de um JSON possivelmente CORTADO (resposta truncada): percorre o
+// texto a equilibrar chavetas (ignorando o que está dentro de strings) e devolve
+// só os objetos {...} completos. O último, se vier a meio, é simplesmente deixado.
+function salvarDias(raw: string): { frase?: string; destaque?: string[]; legenda?: string; fundoPrompt?: string }[] {
+  const out: { frase?: string; destaque?: string[]; legenda?: string; fundoPrompt?: string }[] = [];
+  const start = raw.indexOf('['); if (start < 0) return out;
+  let depth = 0, objStart = -1, inStr = false, esc = false;
+  for (let i = start; i < raw.length; i++) {
+    const c = raw[i];
+    if (inStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') inStr = false; continue; }
+    if (c === '"') { inStr = true; continue; }
+    if (c === '{') { if (depth === 0) objStart = i; depth++; }
+    else if (c === '}') { depth--; if (depth === 0 && objStart >= 0) { try { out.push(JSON.parse(raw.slice(objStart, i + 1))); } catch {} objStart = -1; } }
+  }
+  return out;
+}
+
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -83,23 +100,29 @@ ${REGRA_ACENTOS}`;
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 3000, system: SYSTEM, messages: [{ role: 'user', content: `Planeia a semana sobre "${contexto}". Devolve os 6 dias em JSON.` }] }),
+      body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 8000, system: SYSTEM, messages: [{ role: 'user', content: `Planeia a semana sobre "${contexto}". Devolve os ${SLOTS.length} dias em JSON.` }] }),
     });
     if (!res.ok) return NextResponse.json({ erro: 'claude', detalhe: await res.text() }, { status: 502 });
     texto = (await res.json())?.content?.[0]?.text ?? '';
   } catch (e) { return NextResponse.json({ erro: 'claude-fetch', detalhe: String(e) }, { status: 502 }); }
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
-  let dias: { frase: string; destaque: string[]; legenda: string; fundoPrompt: string }[] = [];
+  type DiaRaw = { frase?: string; destaque?: string[]; legenda?: string; fundoPrompt?: string };
+  let crus: DiaRaw[] = [];
   try {
-    const parsed = JSON.parse(texto.slice(ini, fim + 1)).dias ?? [];
-    dias = parsed.map((d: { frase?: string; destaque?: string[]; legenda?: string; fundoPrompt?: string }) => ({
-      frase: limparTravessoes((d.frase ?? '').trim()),
-      destaque: limparTravessoes((Array.isArray(d.destaque) ? d.destaque : []).map((s) => String(s).trim()).filter(Boolean)),
-      legenda: limparTravessoes((d.legenda ?? '').trim()),
-      fundoPrompt: limparTravessoes((d.fundoPrompt ?? '').trim()),
-    }));
-  } catch { return NextResponse.json({ erro: 'parse', detalhe: texto.slice(0, 200) }, { status: 502 }); }
+    crus = JSON.parse(texto.slice(ini, fim + 1)).dias ?? [];
+  } catch {
+    // JSON cortado (resposta truncada): salva os dias COMPLETOS um a um, em vez
+    // de falhar a semana toda. Equilibra chavetas e ignora o último, se incompleto.
+    crus = salvarDias(texto);
+    if (!crus.length) return NextResponse.json({ erro: 'parse', detalhe: texto.slice(0, 200) }, { status: 502 });
+  }
+  let dias = crus.map((d) => ({
+    frase: limparTravessoes((d.frase ?? '').trim()),
+    destaque: limparTravessoes((Array.isArray(d.destaque) ? d.destaque : []).map((s) => String(s).trim()).filter(Boolean)),
+    legenda: limparTravessoes((d.legenda ?? '').trim()),
+    fundoPrompt: limparTravessoes((d.fundoPrompt ?? '').trim()),
+  }));
   if (!dias.length) return NextResponse.json({ erro: 'vazio' }, { status: 502 });
   dias = await corrigirAcentos(dias, apiKey); // rede de segurança: acentuação correta
 
