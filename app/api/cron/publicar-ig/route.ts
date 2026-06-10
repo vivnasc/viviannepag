@@ -3,6 +3,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { publicarInstagram } from '@/lib/instagram/publish';
 import { getIgCredenciais } from '@/lib/instagram/config';
 import { dispararRender, CAPA_REV } from '@/lib/render/dispatch';
+import { contaDe, type ContaId } from '@/lib/instagram/contas';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -21,11 +22,12 @@ const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
-// a media de um post está pronta a publicar? (carrossel exige capa corrigida)
-function mediaPronta(chave: string, t: Theme, d?: Dia): boolean {
+// a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)
+function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
+  if (conta === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(chave)) return !!d?.videoUrl;
   if (CARROSSEL.includes(chave)) return (d?.imagens?.length ?? 0) >= 2 && t.capaRev === CAPA_REV;
   if (chave === 'infografico') return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1;
@@ -56,9 +58,9 @@ export async function GET(req: NextRequest) {
   if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
     return NextResponse.json({ erro: 'auth' }, { status: 401 });
   }
-  // token vem da config privada (já renovado) ou da env de arranque do Vercel
-  const { token, igUserId } = await getIgCredenciais();
-  if (!token || !igUserId) return NextResponse.json({ erro: 'sem-credenciais', detalhe: 'falta INSTAGRAM_TOKEN / INSTAGRAM_IG_ID' }, { status: 500 });
+  // credenciais por conta (em cache nesta execução)
+  const credCache: Partial<Record<ContaId, { token?: string; igUserId?: string }>> = {};
+  const credsDe = async (c: ContaId) => (credCache[c] ??= await getIgCredenciais(c));
 
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
@@ -81,13 +83,17 @@ export async function GET(req: NextRequest) {
     const hora = t.hora || HORA_FMT[chave] || '13:00';
     if (agendadoNum(ag, hora) > agora) continue; // ainda não é hora
 
+    const conta = contaDe(t, row.slug);
+    const { token, igUserId } = await credsDe(conta);
+    if (!token || !igUserId) { resultados.push({ slug: row.slug, estado: `conta "${conta}" sem token` }); continue; }
+
     const d = row.dias?.[0];
     const caption = legendaDe(d);
 
     // ── media ainda não pronta? PREPARA sozinho (dispara o render) e segue.
     // No ciclo seguinte (~15 min) já está pronta e publica-se. Assim, estar
     // na Agenda basta — a Vivianne não carrega em nada. ──
-    if (!mediaPronta(chave, t, d)) {
+    if (!mediaPronta(conta, chave, t, d)) {
       const pedido = t.renderPedidoEm ?? 0;
       const haPouco = Date.now() - pedido < 20 * 60 * 1000; // já pedido nos últimos 20 min?
       if (!haPouco) {
@@ -102,7 +108,9 @@ export async function GET(req: NextRequest) {
 
     // que media publicar?
     let r: { ok: boolean; id?: string; erro?: string };
-    if (VIDEO.includes(chave) && d?.videoUrl) {
+    if (conta === 'loja') {
+      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
+    } else if (VIDEO.includes(chave) && d?.videoUrl) {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
     } else if (CARROSSEL.includes(chave)) {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });

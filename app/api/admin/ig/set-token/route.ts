@@ -1,19 +1,20 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { renovarToken } from '@/lib/instagram/publish';
-import { setIgConfig } from '@/lib/instagram/config';
+import { setIgConfig, setContaCredenciais } from '@/lib/instagram/config';
+import type { ContaId } from '@/lib/instagram/contas';
 
 export const runtime = 'nodejs';
 
-// POST { token } — recebe um token do Instagram (mesmo de curta duração, do
+// POST { token, conta?, igUserId? } — recebe um token (mesmo de curta duração, do
 // Graph API Explorer), troca-o por um de LONGA duração (~60 dias) e guarda-o na
-// config privada. A partir daqui a renovação semanal mantém-no vivo sozinho.
-// Assim a Vivianne nunca mexe no Vercel para o token.
+// config privada DA CONTA escolhida. A renovação semanal mantém-no vivo.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
-  const { token, igUserId } = (await req.json().catch(() => ({}))) as { token?: string; igUserId?: string };
+  const { token, igUserId, conta = 'veuaveu' } = (await req.json().catch(() => ({}))) as { token?: string; igUserId?: string; conta?: ContaId };
   if (!token || token.length < 20) return NextResponse.json({ erro: 'token-invalido', detalhe: 'cola o token completo' }, { status: 400 });
+  if (conta === 'loja' && !igUserId?.trim()) return NextResponse.json({ erro: 'falta-igid', detalhe: 'para a Loja, indica também o IG_USER_ID dessa conta.' }, { status: 400 });
 
   const appId = process.env.META_APP_ID;
   const appSecret = process.env.META_APP_SECRET;
@@ -25,11 +26,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'troca-falhou', detalhe: 'A Meta não aceitou o token (expirado, ou da app errada). Gera um token novo e tenta outra vez.' }, { status: 502 });
   }
 
-  await setIgConfig({
+  // guarda o app id/secret (partilhados) + as credenciais DA conta
+  await setIgConfig({ appId, appSecret });
+  await setContaCredenciais(conta, {
     token: longo,
-    appId,
-    appSecret,
-    igUserId: igUserId?.trim() || process.env.INSTAGRAM_IG_ID,
+    igUserId: igUserId?.trim() || (conta === 'veuaveu' ? process.env.INSTAGRAM_IG_ID : undefined),
     renovadoEm: new Date().toISOString(),
   });
 

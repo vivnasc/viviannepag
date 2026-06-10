@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
+import { CONTAS, contaDe, type ContaId } from '@/lib/instagram/contas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-cormorant' });
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-inter' });
@@ -15,7 +16,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], variable: '--f
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -36,7 +37,10 @@ const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'o
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
-const fmtDe = (it: Item) => FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'post' };
+const fmtDe = (it: Item): { emoji: string; label: string } => {
+  if (contaDe(it.theme, it.slug) === 'loja') return { emoji: '🛍️', label: it.theme?.universo ? `7 Véus · ${it.theme.universo}` : 'Reel · 7 Véus' };
+  return FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'post' };
+};
 const legendaDe = (it: Item) => { const d = it.dias?.[0]; return [d?.legenda?.trim(), (d?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n'); };
 const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00';
 function mediaPronta(it: Item): boolean {
@@ -72,6 +76,7 @@ export default function PublicarPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [legenda, setLegenda] = useState<Item | null>(null); // painel de rever
   const [igOk, setIgOk] = useState<boolean | null>(null);
+  const [conta, setConta] = useState<ContaId>('veuaveu'); // conta selecionada
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list', { cache: 'no-store' });
@@ -79,7 +84,10 @@ export default function PublicarPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
   useEffect(() => { fetch('/api/admin/reels/capa-serie').then((r) => r.ok ? r.json() : { capas: {} }).then((j) => setCapas(j.capas ?? {})).catch(() => {}); }, []);
-  useEffect(() => { fetch('/api/admin/ig/status', { cache: 'no-store' }).then((r) => r.json()).then((j) => setIgOk(!!j.ligado)).catch(() => setIgOk(false)); }, []);
+  useEffect(() => { setIgOk(null); fetch(`/api/admin/ig/status?conta=${conta}`, { cache: 'no-store' }).then((r) => r.json()).then((j) => setIgOk(!!j.ligado)).catch(() => setIgOk(false)); }, [conta]);
+
+  // só o conteúdo DESTA conta (veu.a.veu vs loja) — nunca misturar
+  const itensConta = itens.filter((it) => contaDe(it.theme, it.slug) === conta);
 
   const capaDe = (it: Item): string | null => {
     const d = it.dias?.[0];
@@ -122,11 +130,11 @@ export default function PublicarPage() {
   const hojeIso = isoLocal(hoje);
 
   const passaFiltro = (it: Item) => (fEstado === 'todos' || estadoDe(it) === fEstado) && (fFormato === 'todos' || tipoChave(it) === fFormato);
-  const naoPublicados = itens.filter((it) => estadoDe(it) !== 'publicado');
+  const naoPublicados = itensConta.filter((it) => estadoDe(it) !== 'publicado');
 
   async function aprovarSemana() {
     const isos = new Set(diasSemana.map(isoLocal));
-    const alvo = itens.filter((it) => it.theme?.agendadoEm && isos.has(it.theme.agendadoEm) && estadoDe(it) === 'rascunho');
+    const alvo = itensConta.filter((it) => it.theme?.agendadoEm && isos.has(it.theme.agendadoEm) && estadoDe(it) === 'rascunho');
     if (!alvo.length) { setMsg('Nada por aprovar nesta semana.'); return; }
     if (!confirm(`Aprovar ${alvo.length} post(s) desta semana? Ficam a publicar-se sozinhos nas suas horas.`)) return;
     for (const it of alvo) await setTheme(it.slug, { aprovado: true });
@@ -172,12 +180,20 @@ export default function PublicarPage() {
       <div className="flex min-h-screen">
         {/* SIDEBAR */}
         <aside className="w-44 shrink-0 border-r border-ocre/12 p-3 flex flex-col gap-1.5 sticky top-0 h-screen">
-          <p className="text-[1.05rem] font-semibold px-2 pb-2 leading-tight">Véu a Véu</p>
+          <p className="text-[1.05rem] font-semibold px-2 pb-1 leading-tight">Publicar</p>
+          {/* seletor de CONTA — nunca misturar veu.a.veu com a loja */}
+          <div className="px-1 pb-2">
+            {CONTAS.map((c) => (
+              <button key={c.id} onClick={() => setConta(c.id)} className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[0.74rem] mb-0.5 ${conta === c.id ? 'bg-ambar/15 text-ambar border border-ambar/40' : 'text-creme-2/65 hover:bg-white/5 border border-transparent'}`}>
+                <span>{c.emoji}</span><span className="truncate">{c.nome}</span>
+              </button>
+            ))}
+          </div>
           <NavItem href="/admin/calendario-veu" n="①" label="Planear" />
           <NavItem href="/admin/conteudos" n="②" label="Criar" />
           <NavItem href="/admin/publicar" n="③" label="Publicar" active />
           <div className="mt-auto pt-3 border-t border-ocre/12">
-            <Link href="/admin/instagram" className="flex items-center gap-2 px-3 py-2 rounded-lg text-[0.72rem] no-underline text-creme-2/70 hover:bg-white/5">
+            <Link href={`/admin/instagram?conta=${conta}`} className="flex items-center gap-2 px-3 py-2 rounded-lg text-[0.72rem] no-underline text-creme-2/70 hover:bg-white/5">
               <span>🔑 Instagram</span>
               <span className="ml-auto w-2 h-2 rounded-full" style={{ background: igOk == null ? '#888' : igOk ? '#7E9B8E' : '#C97373' }} title={igOk ? 'ligado' : 'não ligado'} />
             </Link>
@@ -223,7 +239,7 @@ export default function PublicarPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {diasSemana.map((d) => {
                   const iso = isoLocal(d);
-                  const posts = itens.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
+                  const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
                   return (
                     <div key={iso} className={`rounded-xl border p-2.5 ${iso === hojeIso ? 'border-ambar/40 bg-ambar/5' : 'border-ocre/12 bg-black/10'}`}>
                       <p className="text-[0.7rem] uppercase tracking-wider mb-2 flex items-center gap-2"><span className="text-[#C9B6FA]">{DIAS_PT[d.getDay()]} {d.getDate()}</span>{iso === hojeIso && <span className="text-[0.5rem] px-1.5 py-0.5 rounded-full bg-ambar/20 text-ambar normal-case tracking-normal">hoje</span>}</p>
@@ -249,7 +265,7 @@ export default function PublicarPage() {
                 <div className="grid grid-cols-7 gap-1">
                   {celulas.map((d) => {
                     const iso = isoLocal(d); const noMes = d.getMonth() === base.getMonth();
-                    const posts = itens.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
+                    const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
                     return (
                       <button key={iso} onClick={() => { if (posts.length) { setLegenda(posts[0]); } }} className={`min-h-[4.5rem] rounded-lg border p-1 text-left ${iso === hojeIso ? 'border-ambar/50' : 'border-ocre/10'} ${noMes ? 'bg-black/15' : 'bg-transparent opacity-40'}`}>
                         <span className="text-[0.56rem] opacity-55">{d.getDate()}</span>
