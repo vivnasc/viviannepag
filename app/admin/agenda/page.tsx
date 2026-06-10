@@ -321,7 +321,6 @@ export default function AgendaPage() {
             <Link href="/admin/conteudos" className="text-[0.7rem] opacity-60 hover:opacity-100">Biblioteca →</Link>
           </div>
         </div>
-        <Link href="/admin/publicar" className="block mb-3 text-[0.78rem] px-3 py-2 rounded-lg border border-ambar/40 bg-ambar/10 text-ambar hover:bg-ambar/20 no-underline">③ Para publicar/agendar com calma (ver legenda e capa), usa o novo ambiente <b>Publicar →</b></Link>
         <p className="text-[0.82rem] opacity-70 mb-3">Tudo num só sítio: <b>planeia → gera → renderiza → baixa</b>, sem saltar de aba.</p>
 
         {/* navegação de semanas + tema editorial dessa semana */}
