@@ -3,20 +3,23 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
 import { CONTAS, contaDe, type ContaId } from '@/lib/instagram/contas';
+import { PostSlide, type PostSlideT } from '@/components/admin/PostSlide';
+import type { Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-cormorant' });
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-inter' });
+const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono' });
 
 // ③ PUBLICAR — o planeador da Véu a Véu. NÃO se gera nada aqui (isso é no ②
 // Criar). Vês cada post (capa + legenda), aprovas, e publica-se sozinho à hora.
 // gerar ≠ publicar: NADA vai para o ar sem estar APROVADO.
 
-type Slide = { imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[] };
-type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
+type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string };
+type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -43,6 +46,8 @@ const fmtDe = (it: Item): { emoji: string; label: string } => {
 };
 const legendaDe = (it: Item) => { const d = it.dias?.[0]; return [d?.legenda?.trim(), (d?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n'); };
 const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00';
+const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador']; // capa-assinatura no 1.º slide
+const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
 function mediaPronta(it: Item): boolean {
   const c = tipoChave(it); const d = it.dias?.[0];
   if (contaDe(it.theme, it.slug) === 'loja') return !!d?.videoUrl;
@@ -93,6 +98,21 @@ export default function PublicarPage() {
   const capaDe = (it: Item): string | null => {
     const d = it.dias?.[0];
     return d?.imagens?.[0] ?? (d?.slides ?? []).find((s) => s.imageUrl)?.imageUrl ?? capas[tipoChave(it)] ?? null;
+  };
+
+  // aplica a capa-assinatura + selo/paleta ao 1.º slide, como na biblioteca,
+  // para a pré-visualização visual sair igual ao que é publicado.
+  const slidesComCapa = (it: Item): Slide[] => {
+    const sub = tipoChave(it);
+    const capa = capas[sub];
+    const ehAss = SERIE_ASSINATURA.includes(sub);
+    return (it.dias?.[0]?.slides ?? []).map((s, i) => {
+      if (i !== 0) return s;
+      const out: Slide = { ...s };
+      if (capa && !out.imageUrl) out.imageUrl = capa;
+      if (ehAss) { out.selo = out.selo || (FMT[sub]?.label ?? ''); out.pal = out.pal ?? 'carvao'; }
+      return out;
+    });
   };
 
   // grava no theme (optimista) e persiste
@@ -173,7 +193,7 @@ export default function PublicarPage() {
   };
 
   return (
-    <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-6 ${cormorant.variable} ${inter.variable}`}>
+    <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-6 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
       {/* topo: seletor de CONTA (nunca misturar) + estado do Instagram */}
       <div className="flex items-center gap-2 flex-wrap mb-4">
         {CONTAS.map((c) => (
@@ -287,7 +307,7 @@ export default function PublicarPage() {
         const it = legenda; const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it);
         return (
           <div onClick={() => setLegenda(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
-            <div onClick={(ev) => ev.stopPropagation()} className={`w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable}`}>
+            <div onClick={(ev) => ev.stopPropagation()} className={`w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
               <div className="flex items-start gap-4">
                 <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
                 <div className="flex-1 min-w-0">
@@ -322,23 +342,22 @@ export default function PublicarPage() {
                     </div>
                   </div>
                 );
-                const slides = dia?.slides ?? [];
-                if (slides.length) return (
-                  <div className="mt-4">
-                    <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo · {slides.length} slides (ainda por renderizar — texto)</p>
-                    <div className="space-y-2">
-                      {slides.map((s, i) => (
-                        <div key={i} className="rounded-lg border border-ocre/15 bg-black/15 p-2.5">
-                          <p className="text-[0.5rem] uppercase tracking-wider opacity-40 mb-0.5">slide {i + 1}{s.kicker ? ` · ${s.kicker}` : ''}</p>
-                          {s.titulo && <p className="text-[0.84rem] font-medium">{s.titulo}</p>}
-                          {s.texto && <p className="text-[0.82rem] leading-snug opacity-90">{s.texto}</p>}
-                          {s.pontos?.length ? <ul className="mt-1 ml-3 list-disc text-[0.76rem] opacity-80">{s.pontos.map((p, k) => <li key={k}>{p}</li>)}</ul> : null}
-                          {s.nota && <p className="text-[0.66rem] opacity-50 mt-0.5">{s.nota}</p>}
-                        </div>
-                      ))}
+                const slides = slidesComCapa(it);
+                if (slides.length) {
+                  const ratio = SERIE_ASSINATURA.includes(tipoChave(it)) ? '4:5' : '9:16';
+                  return (
+                    <div className="mt-4">
+                      <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo · {slides.length} slides (como vai sair) — desliza →</p>
+                      <div className="flex gap-3 overflow-x-auto pb-2">
+                        {slides.map((s, i) => (
+                          <div key={i} className="w-52 shrink-0">
+                            <PostSlide slide={s as unknown as PostSlideT} mundo={mundoDe(it)} numero={i + 1} total={slides.length} ratio={ratio} />
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                );
+                  );
+                }
                 return null;
               })()}
 
