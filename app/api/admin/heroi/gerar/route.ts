@@ -35,7 +35,7 @@ DEVOLVE APENAS JSON válido (texto em português com TODOS os acentos):
   "capa": { "gancho": "...", "imagePrompt": "..." },
   "ensino": ["frase 1", "frase 2", "frase 3"],
   "licao": "afirmação final identitária e luminosa",
-  "legenda": "legenda Instagram: 1.ª linha gancho, depois 2-4 linhas que explicam (curar-se liberta as gerações, sem salvar ninguém), fecha com convite a refletir + 'guarda este post' ou 'partilha com quem precisa'. SEM vender. Português europeu com todos os acentos.",
+  "legenda": "legenda Instagram em PARÁGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada parágrafo — NUNCA um bloco corrido): gancho na 1.ª linha; 2 a 3 parágrafos curtos que explicam (curar-se liberta as gerações, sem salvar ninguém), separados por \\n\\n; fecho à parte com convite a refletir e a guardar/partilhar (NÃO nomeies o formato). SEM vender. Português europeu com todos os acentos.",
   "hashtags": ["10-12 hashtags PT, amplas + de nicho (constelação familiar, heranças, curar, gerações), sem repetir"]
 }`;
 

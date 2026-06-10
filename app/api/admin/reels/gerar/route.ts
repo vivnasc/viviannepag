@@ -109,7 +109,7 @@ DEVOLVE APENAS JSON válido:
   "frames": [ { "kicker": "etiqueta curta ou vazio", "texto": "frase do frame", "nota": "linha pequena opcional ou vazio", "titulo": "(opcional) título curto do frame quando ele tem pontos", "pontos": ["(opcional) bullets curtos, só nos frames de explicação que pedem hierarquia"] } ],
   "destaque": ["1 a 3 palavras-chave da frase para realçar (só no formato Frase com motion)"],
   "fundoPrompt": "prompt MidJourney para imagem transcendente de fundo, sem pessoas, sem texto, --ar 9:16 (só no formato Frase com motion)",
-  "legenda": "legenda para Instagram: 1.ª linha gancho, depois 2 a 4 linhas que aprofundam em palavras simples, fecha com convite a refletir e 'guarda este reel' ou 'partilha com quem precisa'. SEM vender.",
+  "legenda": "legenda para Instagram em PARÁGRAFOS CURTOS separados por uma LINHA EM BRANCO (usa \\n\\n entre cada parágrafo — NUNCA um bloco de texto corrido). Estrutura: gancho na 1.ª linha; depois 2 a 3 parágrafos curtos (1-2 frases cada) que aprofundam em palavras simples, cada um separado por \\n\\n; fecho num parágrafo à parte com convite a refletir e a guardar/partilhar. NÃO digas 'reel' nem nomeies o formato — diz 'guarda esta publicação' ou 'partilha com quem precisa'. SEM vender.",
   "hashtags": ["10-12 hashtags em português, mistura amplas e de nicho, sem repetir"]
 }
 

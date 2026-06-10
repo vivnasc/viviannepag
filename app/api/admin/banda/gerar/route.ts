@@ -34,7 +34,7 @@ DEVOLVE APENAS JSON válido (os valores de texto em português com TODOS os acen
   "capa": { "gancho": "...", "imagePrompt": "..." },
   "ensino": ["frase 1", "frase 2", "frase 3"],
   "licao": "frase de fecho que ensina/abre reflexão (amor e pertença)",
-  "legenda": "legenda Instagram: 1.ª linha gancho, depois 2-4 linhas que explicam o padrão em palavras simples, fecha com convite a refletir + 'guarda este post' ou 'partilha com quem precisa'. SEM vender. Deixa claro que limite com amor honra a família. Português europeu com todos os acentos.",
+  "legenda": "legenda Instagram em PARÁGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada parágrafo — NUNCA um bloco corrido): gancho na 1.ª linha; 2 a 3 parágrafos curtos que explicam o padrão em palavras simples, separados por \\n\\n; fecho à parte com convite a refletir e a guardar/partilhar (NÃO nomeies o formato). SEM vender. Deixa claro que limite com amor honra a família. Português europeu com todos os acentos.",
   "hashtags": ["10-12 hashtags PT, amplas + de nicho, sem repetir"]
 }`;
 
