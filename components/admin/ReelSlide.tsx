@@ -64,7 +64,7 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: AR, overflow: 'hidden', borderRadius: 16, background: BG2 }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: img ? '#000' : `radial-gradient(ellipse 100% 75% at 50% 28%, ${BG1} 0%, ${BG2} 78%)`, boxSizing: 'border-box', fontFamily: FONT_SERIF, color: TXT }}>
         {img && (<>
-          <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+          <img src={img} alt="" crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
           {/* na capa-assinatura o véu é mais leve no topo (a imagem aparece), escuro em baixo (texto legível) */}
           <div style={{ position: 'absolute', inset: 0, background: ehSelo
             ? `linear-gradient(to bottom, ${a(BG2, '14')} 0%, ${a(BG2, '0d')} 30%, ${a(BG2, '82')} 58%, ${a(BG2, 'f0')} 100%)`

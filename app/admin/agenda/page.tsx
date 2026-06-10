@@ -290,6 +290,15 @@ export default function AgendaPage() {
           {mp4Pendentes.length > 0 && <span className="text-[0.66rem] opacity-60 w-full">Em falta ({mp4Pendentes.length}): {mp4Pendentes.map((e) => `${e.diaPt} ${FMT[tipoChave(e.it)]?.label ?? ''}`).join(' · ')}. Os carrosséis (Sinais, O que ninguém, Uma ideia) não têm MP4. Se faltar algum dia, é porque ainda não geraste/agendaste esse post.</span>}
           {zipMsg && <span className="text-[0.72rem] text-salvia w-full">{zipMsg}</span>}
           {renderMsg && <span className="text-[0.72rem] text-[#C9B6FA] w-full">{renderMsg}</span>}
+          {/* imagens-assinatura LIMPAS (sem texto) — para animar no MidJourney */}
+          {Object.keys(capasSerie).length > 0 && (
+            <div className="w-full flex flex-wrap items-center gap-2 pt-1">
+              <span className="text-[0.66rem] opacity-55">Imagem da capa (limpa, p/ animar no MJ):</span>
+              {Object.entries(capasSerie).map(([sub, url]) => (
+                <a key={sub} href={url} target="_blank" rel="noreferrer" download className="text-[0.66rem] px-2.5 py-1 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">⬇ {FMT[sub]?.label ?? sub}</a>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="space-y-3">
