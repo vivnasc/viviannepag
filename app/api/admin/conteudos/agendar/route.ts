@@ -4,11 +4,12 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const runtime = 'nodejs';
 
-// POST { slug, agendadoEm?: string|null, publicado?: boolean } — guarda o estado
-// de agendamento de um conteúdo no theme (agendadoEm = 'YYYY-MM-DD', publicado).
+// POST { slug, agendadoEm?, publicado?, aprovado?, hora? } — guarda o estado de
+// agendamento/aprovação no theme. aprovado=true é a TRAVA: só posts aprovados é
+// que o cron publica sozinho (gerar ≠ publicar). hora = 'HH:MM' override opcional.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { slug?: string; agendadoEm?: string | null; publicado?: boolean };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; agendadoEm?: string | null; publicado?: boolean; aprovado?: boolean; hora?: string | null };
   if (!body.slug) return NextResponse.json({ erro: 'falta slug' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -18,6 +19,8 @@ export async function POST(req: Request) {
   const theme = { ...((row?.theme as Record<string, unknown>) ?? {}) };
   if ('agendadoEm' in body) theme.agendadoEm = body.agendadoEm || null;
   if ('publicado' in body) theme.publicado = !!body.publicado;
+  if ('aprovado' in body) theme.aprovado = !!body.aprovado;
+  if ('hora' in body) theme.hora = body.hora || null;
 
   const { error } = await supabase.from('carousel_collections').update({ theme }).eq('slug', body.slug);
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
