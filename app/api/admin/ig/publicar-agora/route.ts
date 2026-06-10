@@ -51,15 +51,21 @@ export async function POST(req: Request) {
   const caption = legendaDe(d);
   const chave = tipoChave(t);
 
-  // media ainda não pronta (ou capa por corrigir)? PREPARA sozinho e diz para
-  // voltar daqui a ~10 min — entretanto o cron também a publica sozinho.
+  // media ainda não pronta (ou capa por corrigir)? PREPARA sozinho. Só dispara
+  // um render novo se não tiver pedido um nos últimos 20 min (senão a app fica
+  // a sondar e não duplica renders). O frontend sonda este endpoint até publicar.
   if (!mediaPronta(chave, t, d)) {
-    const ok = await dispararRender(slug);
-    await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', slug);
+    const pedido = t.renderPedidoEm ?? 0;
+    const haPouco = Date.now() - pedido < 20 * 60 * 1000;
+    let ok = true;
+    if (!haPouco) {
+      ok = await dispararRender(slug);
+      await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', slug);
+    }
     return NextResponse.json({
       preparando: true,
       detalhe: ok
-        ? 'Estou a preparar as imagens no servidor (~10 min) — com a capa nova. Depois publica-se sozinho à hora marcada, ou carrega outra vez daqui a ~10 min.'
+        ? 'a preparar as imagens no servidor (com a capa nova)…'
         : 'Não consegui pedir a preparação das imagens (falta GITHUB_DISPATCH_TOKEN?).',
     }, { status: 202 });
   }
