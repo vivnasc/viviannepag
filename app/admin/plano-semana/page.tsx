@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CURSOS } from '@/lib/infografico/cursos';
 import { semanaEditorialAtual, PLANO_EDITORIAL } from '@/lib/veu/planoEditorial';
+import { ARENAS, getArena } from '@/lib/veu/arenas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -15,7 +16,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 // as 6 frases EM TEXTO; tu lês, editas, e só depois crias os posts.
 
 type Dia = { dia: string; wd?: number; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string };
-type Estado = { curso: string; tema: string; plano: Dia[]; criados: Record<number, boolean> };
+type Estado = { curso: string; tema: string; arenas?: string[]; plano: Dia[]; criados: Record<number, boolean> };
 
 const CHAVE = 'veu-plano-atual';
 
@@ -65,6 +66,7 @@ function realcar(frase: string, destaque: string[]) {
 export default function PlanoSemanaPage() {
   const [curso, setCurso] = useState('transpessoal');
   const [tema, setTema] = useState('');
+  const [arenas, setArenas] = useState<string[]>(['pessoal']); // arena(s) onde o conceito aterra
   const [plano, setPlano] = useState<Dia[]>([]);
   const [criados, setCriados] = useState<Record<number, boolean>>({});
   const [rascunhando, setRascunhando] = useState(false);
@@ -79,7 +81,7 @@ export default function PlanoSemanaPage() {
   const semEd = semanaEditorialAtual(targetSeg); // tema do plano trimestral DESSA semana
 
   const aplicar = useCallback((e: Estado) => {
-    setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setPlano(e.plano ?? []); setCriados(e.criados ?? {});
+    setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setArenas(e.arenas?.length ? e.arenas : ['pessoal']); setPlano(e.plano ?? []); setCriados(e.criados ?? {});
   }, []);
 
   // grava no servidor (cross-device) com debounce, para não disparar a cada tecla
@@ -110,27 +112,38 @@ export default function PlanoSemanaPage() {
         if (s) { const e: Estado = JSON.parse(s); aplicar(e); salvarServidor(e); return; } // migra o rascunho local antigo p/ o servidor
       } catch {}
       if (cancel) return;
-      setCurso(semEd.curso); setTema(semEd.tema);
+      setCurso(semEd.curso); setTema(semEd.tema); setArenas(semEd.arenas?.length ? semEd.arenas : ['pessoal']);
     })();
     return () => { cancel = true; };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function usarSemanaDoPlano() {
-    setCurso(semEd.curso); setTema(semEd.tema); setPlano([]); setCriados({});
-    guardar({ curso: semEd.curso, tema: semEd.tema, plano: [], criados: {} });
+    const ar = semEd.arenas?.length ? semEd.arenas : ['pessoal'];
+    setCurso(semEd.curso); setTema(semEd.tema); setArenas(ar); setPlano([]); setCriados({});
+    guardar({ curso: semEd.curso, tema: semEd.tema, arenas: ar, plano: [], criados: {} });
   }
-  // navega pelas semanas do plano trimestral (carrega o tema sozinho, não escolhes nada)
+  // navega pelas semanas do plano trimestral (carrega o tema e a arena sozinhos, não escolhes nada)
   function irSemana(delta: number) {
     const no = semOffset + delta; if (no < 0) return; // não planear o passado
     const se = semanaEditorialAtual(segundaComOffset(no));
-    setSemOffset(no); setCurso(se.curso); setTema(se.tema); setPlano([]); setCriados({});
-    guardar({ curso: se.curso, tema: se.tema, plano: [], criados: {} });
+    const ar = se.arenas?.length ? se.arenas : ['pessoal'];
+    setSemOffset(no); setCurso(se.curso); setTema(se.tema); setArenas(ar); setPlano([]); setCriados({});
+    guardar({ curso: se.curso, tema: se.tema, arenas: ar, plano: [], criados: {} });
+  }
+  // troca MANUAL da arena (a base vem sozinha; aqui ajustas se a semana pedir outra)
+  function toggleArena(id: string) {
+    setArenas((prev) => {
+      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+      const fixed = next.length ? next : ['pessoal']; // nunca fica sem arena
+      guardar({ arenas: fixed });
+      return fixed;
+    });
   }
   const guardar = useCallback((next: Partial<Estado>) => {
-    const merged: Estado = { curso, tema, plano, criados, ...next };
+    const merged: Estado = { curso, tema, arenas, plano, criados, ...next };
     try { localStorage.setItem(CHAVE, JSON.stringify(merged)); } catch {}
     salvarServidor(merged);
-  }, [curso, tema, plano, criados, salvarServidor]);
+  }, [curso, tema, arenas, plano, criados, salvarServidor]);
 
   async function rascunhar() {
     const t = tema.trim();
@@ -138,7 +151,7 @@ export default function PlanoSemanaPage() {
     if (rascunhando) return;
     setRascunhando(true); setErro(null); setMsg(null);
     try {
-      const r = await fetch('/api/admin/agenda/rascunho-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, subtitulo: cursoAtual.descricao, curso }) });
+      const r = await fetch('/api/admin/agenda/rascunho-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, subtitulo: cursoAtual.descricao, curso, arenas }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       setPlano(j.plano ?? []); setCriados({}); guardar({ plano: j.plano ?? [], criados: {} });
@@ -245,7 +258,22 @@ export default function PlanoSemanaPage() {
           </div>
           <p className="font-serif text-xl leading-tight text-center">“{semEd.mote}”</p>
           <p className="text-[0.74rem] opacity-65 mt-0.5 text-center">{semEd.tema} · {(CURSOS.find((c) => c.id === semEd.curso) ?? CURSOS[0]).nome}</p>
-          <div className="flex items-center justify-center gap-3 mt-2">
+
+          {/* arena(s) onde o conceito ATERRA — vem sozinha do plano; troca manual se a semana pedir */}
+          <div className="mt-3 pt-3 border-t border-ambar/15">
+            <p className="text-[0.58rem] uppercase tracking-[0.15em] text-center opacity-50 mb-1.5">Arena · onde aterra (vem sozinha, troca se quiseres)</p>
+            <div className="flex flex-wrap justify-center gap-1.5">
+              {ARENAS.map((a) => {
+                const on = arenas.includes(a.id);
+                return (
+                  <button key={a.id} onClick={() => toggleArena(a.id)} className="text-[0.62rem] px-2.5 py-1 rounded-full border transition-colors" style={on ? { borderColor: a.cor, color: a.cor, background: a.cor + '1A' } : { borderColor: '#ffffff22', color: '#F2E8DC99' }}>{a.emoji} {a.nome}</button>
+                );
+              })}
+            </div>
+            {arenas.length > 1 && <p className="text-[0.58rem] text-center opacity-45 mt-1.5">semana multi-arena · o conceito “{semEd.tema}” é o fio que une as arenas</p>}
+          </div>
+
+          <div className="flex items-center justify-center gap-3 mt-3">
             {(curso !== semEd.curso || tema !== semEd.tema) && (
               <button onClick={usarSemanaDoPlano} className="text-[0.66rem] px-3 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">usar o tema desta semana</button>
             )}

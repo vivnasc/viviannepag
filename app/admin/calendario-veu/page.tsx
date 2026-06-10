@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { PLANO_EDITORIAL, PARTES, semanaEditorialAtual } from '@/lib/veu/planoEditorial';
 import { CURSOS } from '@/lib/infografico/cursos';
+import { ARENAS, getArena } from '@/lib/veu/arenas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -34,10 +35,21 @@ export default function CalendarioVeuPage() {
         <p className="text-[0.76rem] opacity-55 mb-6">Não escolhes nada: cada semana avança sozinha. Hoje estás na <b className="text-ambar">semana {atual}</b>. Toca numa semana para a abrir no Plano.</p>
 
         {/* legenda das matérias */}
-        <div className="flex flex-wrap gap-3 mb-7">
+        <div className="flex flex-wrap gap-3 mb-3">
           {CURSOS.map((c) => (
             <span key={c.id} className="flex items-center gap-1.5 text-[0.68rem] opacity-75">
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: COR_CURSO[c.id] }} />{c.nome}
+            </span>
+          ))}
+        </div>
+
+        {/* legenda das arenas (onde cada conceito ATERRA; o conceito lidera, a arena ilumina) */}
+        <p className="text-[0.7rem] opacity-55 mb-1.5">As <b>arenas</b> dizem <i>onde</i> cada conceito aterra. O conceito é o mesmo; a arena ilumina-o numa escala da vida. <b>Família</b> é a casa-base.</p>
+        <div className="flex flex-wrap gap-3 mb-7">
+          {ARENAS.map((a) => (
+            <span key={a.id} className="flex items-center gap-1 text-[0.66rem] opacity-75">
+              <span className="text-[0.8rem]">{a.emoji}</span>
+              <span style={{ color: a.cor }}>{a.nome}</span>
             </span>
           ))}
         </div>
@@ -62,7 +74,14 @@ export default function CalendarioVeuPage() {
                           {ehAtual && <span className="ml-auto text-[0.58rem] px-2 py-0.5 rounded-full bg-ambar/20 text-ambar">esta semana</span>}
                         </div>
                         <p className="font-serif text-lg leading-tight" style={{ color: cor }}>“{s.mote}”</p>
-                        <p className="text-[0.76rem] opacity-65 mb-2">{s.tema}</p>
+                        <p className="text-[0.76rem] opacity-65 mb-1.5">{s.tema}</p>
+                        {/* arena(s) onde o conceito aterra (a 1.ª é a dominante) */}
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {s.arenas.map((aid) => { const a = getArena(aid); return (
+                            <span key={aid} className="text-[0.58rem] px-2 py-0.5 rounded-full border" style={{ borderColor: a.cor + '55', color: a.cor, background: a.cor + '12' }}>{a.emoji} {a.nome}</span>
+                          ); })}
+                          {s.arenas.length > 1 && <span className="text-[0.54rem] px-1.5 py-0.5 rounded-full opacity-50 self-center">semana multi-arena</span>}
+                        </div>
                         <div className="flex flex-wrap items-center gap-2">
                           <Link href="/admin/plano-semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">abrir no Plano →</Link>
                           <Link href={`/admin/heroi?tema=${encodeURIComponent(s.heroi)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline" title={s.heroi}>🌅 I am a Hero</Link>
