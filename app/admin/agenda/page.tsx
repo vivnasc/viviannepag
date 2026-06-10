@@ -221,16 +221,23 @@ export default function AgendaPage() {
   const [igMsg, setIgMsg] = useState<string | null>(null);
   async function publicarAgora(it: Item) {
     if (igBusy) return;
-    if (!confirm(`Publicar JÁ no Instagram (a sério, no teu perfil):\n\n“${it.title}”\n\nPodes apagar depois no Instagram. Continuar?`)) return;
+    if (!confirm(`Publicar JÁ no Instagram (a sério, no teu perfil):\n\n“${it.title}”\n\nSe ainda não estiver pronto, eu preparo e publico sozinho (~10 min) — deixa esta página aberta. Podes apagar depois no Instagram. Continuar?`)) return;
     setIgBusy(it.slug); setIgMsg(null);
-    try {
+    const ini = Date.now();
+    const tentar = async (): Promise<void> => {
       const r = await fetch('/api/admin/ig/publicar-agora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
       const j = await r.json().catch(() => ({}));
-      if (j.preparando) { const m = `⏳ “${it.title}”: ${j.detalhe}`; setIgMsg(m); alert(m); await carregar(); }
-      else if (r.ok) { const m = `✓ Publicado no Instagram: “${it.title}”.`; setIgMsg(m); alert(m); await carregar(); }
+      if (j.preparando) {
+        const mins = Math.floor((Date.now() - ini) / 60000);
+        setIgMsg(`⏳ “${it.title}”: a preparar as imagens no servidor… (${mins} min) — deixa esta página aberta, publica-se sozinho quando estiver pronto.`);
+        if (Date.now() - ini < 15 * 60 * 1000) { setTimeout(() => { tentar().catch(() => {}); }, 30000); return; }
+        const m = `⏳ “${it.title}”: ainda a preparar passados 15 min. As imagens devem estar quase — tenta o 🧪 publicar daqui a pouco.`; setIgMsg(m); alert(m); setIgBusy(null); return;
+      }
+      if (r.ok) { const m = `✓ Publicado no Instagram: “${it.title}”.`; setIgMsg(m); alert(m); await carregar(); }
       else { const m = `✗ Não publicou “${it.title}”:\n\n${j.detalhe ?? j.erro ?? r.status}`; setIgMsg(m); alert(m); }
-    } catch (e) { const m = 'Erro: ' + String(e); setIgMsg(m); alert(m); }
-    setIgBusy(null);
+      setIgBusy(null);
+    };
+    try { await tentar(); } catch (e) { const m = 'Erro: ' + String(e); setIgMsg(m); alert(m); setIgBusy(null); }
   }
 
   // ── GERAR UMA SEMANA (por offset): rascunha o tema editorial DESSA semana,
