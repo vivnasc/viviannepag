@@ -50,7 +50,19 @@ const DIA_FORMATO: Record<number, string[]> = { 1: ['kinetico'], 2: ['sinais'], 
 const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-const HORA = '20:00';
+const HORA = '13:00';
+// horas ÓPTIMAS por dia (best-times do Metricool: meio-dia + fim de dia), por slot.
+// A quarta (2 posts) reparte-se: meio-dia e fim de dia.
+const HORAS: Record<number, string[]> = {
+  1: ['13:00'],          // seg · Frase com motion
+  2: ['13:00'],          // ter · Sinais
+  3: ['13:00', '20:00'], // qua · O que ninguém (meio-dia) + Uma ideia de… (fim de dia)
+  4: ['13:00'],          // qui · Cá em Casa
+  5: ['13:00'],          // sex · I am a Hero
+  6: ['11:00'],          // sáb · Infográfico (manhã de fim de semana)
+  0: ['11:00'],          // dom · Domingo de Luz (manhã)
+};
+const horaDoSlot = (wd: number, k: number) => HORAS[wd]?.[k] ?? HORAS[wd]?.[0] ?? HORA;
 // nome de pasta/ficheiro seguro (sem acentos, sem espaços)
 const slugSeguro = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/\s+/g, '-').toLowerCase().slice(0, 40);
 const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
@@ -307,13 +319,13 @@ export default function AgendaPage() {
                     return { fmt, post };
                   });
                   const extras = doDia.filter((it) => !usados.has(it.slug)); // posts de outro formato neste dia
-                  const linhaPost = (it: Item, etiqueta?: string) => {
+                  const linhaPost = (it: Item, etiqueta?: string, hora: string = horaDoSlot(wd, 0)) => {
                     const m = fmtDe(it); const capa = capaDe(it);
                     const ehVideo = VIDEO_FORMATOS.includes(tipoChave(it));
                     const videoUrl = it.dias?.[0]?.videoUrl;
                     return (
                       <div key={it.slug} className="flex items-center gap-2.5 rounded-lg bg-black/20 border border-white/5 p-2">
-                        <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{HORA}</span>
+                        <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{hora}</span>
                         <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                         <div className="flex-1 min-w-0">
                           <span className={`block truncate text-[0.86rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}</span>
@@ -338,13 +350,13 @@ export default function AgendaPage() {
                   };
                   return (
                     <div className="p-3 space-y-2">
-                      {slots.map(({ fmt, post }, k) => post ? linhaPost(post) : (
+                      {slots.map(({ fmt, post }, k) => post ? linhaPost(post, undefined, horaDoSlot(wd, k)) : (
                         <button key={`vazio-${fmt}-${k}`} onClick={() => abrirPicker(iso, fmt)} className="w-full flex items-center gap-2 text-[0.74rem] py-2.5 px-3 rounded-lg border border-dashed border-ambar/35 text-ambar/85 hover:bg-ambar/10">
                           <span>{FMT[fmt]?.emoji ?? '＋'}</span><span className="opacity-90">+ {FMT[fmt]?.label ?? fmt}</span>
                           {slots.length > 1 && <span className="ml-auto text-[0.54rem] opacity-50">post {k + 1} de {slots.length}</span>}
                         </button>
                       ))}
-                      {extras.map((it) => linhaPost(it, '· extra'))}
+                      {extras.map((it, ei) => linhaPost(it, '· extra', horaDoSlot(wd, slots.length + ei)))}
                       <button onClick={() => abrirPicker(iso)} className="w-full text-[0.64rem] py-1.5 rounded-lg border border-ocre/20 text-creme-2/55 hover:border-ambar hover:text-ambar">+ outro post</button>
                     </div>
                   );
