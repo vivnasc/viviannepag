@@ -82,7 +82,7 @@ function Balao({ f }: { f: Fala }) {
   );
 }
 
-export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = false }: { painel: Painel; mundo?: Mundo; numero?: number; total?: number; capa?: boolean }) {
+export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = false, conceito }: { painel: Painel; mundo?: Mundo; numero?: number; total?: number; capa?: boolean; conceito?: string }) {
   const pal = PALETAS[mundo];
   const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque, TXT = pal.texto;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
@@ -128,13 +128,14 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
 
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: ehImagem ? 0.06 : 0.12, zIndex: 1, pointerEvents: 'none' }} />
 
-        {/* selo da série (wordmark consistente, reconhecível ao primeiro relance) */}
-        <div style={{ position: 'absolute', top: 92, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 4 }}>
+        {/* selo da série (wordmark consistente, reconhecível ao primeiro relance) + selo do conceito */}
+        <div style={{ position: 'absolute', top: 92, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 4 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '13px 30px', borderRadius: 999, border: `1px solid ${a(ACCENT, '66')}`, background: a(BG2, '4d') }}>
             <span style={{ width: 22, height: 1, background: ACCENT, opacity: 0.6 }} />
             <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 26, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#FBF3E8' }}>{painel.serie ?? 'Cá em Casa'}</span>
             <span style={{ width: 22, height: 1, background: ACCENT, opacity: 0.6 }} />
           </div>
+          {conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 22, letterSpacing: '0.22em', textTransform: 'uppercase', color: ACCENT, opacity: 0.85, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
         </div>
 
         {!ehImagem && (

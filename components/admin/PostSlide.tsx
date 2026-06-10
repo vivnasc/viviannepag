@@ -14,6 +14,7 @@ import type { Mundo } from '@/lib/estudio-conteudo';
 // Slide generico tal como vem guardado (campos opcionais conforme o formato).
 export type PostSlideT = {
   tipo?: string;
+  conceito?: string; // selo do conceito/matéria desta semana (guia a compreensão)
   // reel
   kicker?: string; texto?: string; nota?: string; titulo?: string; pontos?: string[];
   motivo?: string; selo?: string; pal?: string; capa?: boolean; imageUrl?: string;
@@ -42,6 +43,7 @@ export function PostSlide({ slide, mundo = 'escola', numero, total, ratio = '9:1
         info={{ padrao: slide.padrao ?? '', rotulo: slide.rotulo, subtitulo: slide.subtitulo, tipoDiagrama: slide.tipoDiagrama, diagrama: slide.diagrama, ciclo: slide.ciclo, custoTi: slide.custoTi, custoOutros: slide.custoOutros, virada: slide.virada, url: slide.url }}
         mundo={mundo}
         imageUrl={slide.imageUrl}
+        conceito={slide.conceito}
       />
     );
   }
@@ -53,12 +55,13 @@ export function PostSlide({ slide, mundo = 'escola', numero, total, ratio = '9:1
         numero={numero}
         total={total}
         capa={!!slide.capa}
+        conceito={slide.conceito}
       />
     );
   }
   if (tipo === 'kinetico') {
     return (
-      <KineticSlide texto={slide.texto ?? ''} destaque={slide.destaque} imageUrl={slide.imageUrl} mundo={mundo} prog={1} variante={slide.variante} />
+      <KineticSlide texto={slide.texto ?? ''} destaque={slide.destaque} imageUrl={slide.imageUrl} mundo={mundo} prog={1} variante={slide.variante} conceito={slide.conceito} />
     );
   }
   // reel (sinais, ninguem, heroi, etc.) — o caso por defeito
@@ -71,6 +74,7 @@ export function PostSlide({ slide, mundo = 'escola', numero, total, ratio = '9:1
       total={total}
       capa={!!slide.capa}
       ratio={ratio}
+      conceito={slide.conceito}
     />
   );
 }

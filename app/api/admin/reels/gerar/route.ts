@@ -53,11 +53,12 @@ export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; formato?: string; curso?: string; manual?: boolean; frase?: string; destaque?: string; legenda?: string; fundoPrompt?: string; slug?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; formato?: string; curso?: string; manual?: boolean; frase?: string; destaque?: string; legenda?: string; fundoPrompt?: string; slug?: string; conceito?: string };
   const tema = body.tema?.trim();
   const formato = getFormato(body.formato ?? 'sinais');
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
+  const conceito = body.conceito?.trim() || undefined; // selo do conceito da semana (capa)
 
   // ── MODO "frase exata" (sem IA): cria um cinetico com o texto aprovado ──
   if (body.manual) {
@@ -74,7 +75,7 @@ export async function POST(req: Request) {
     }
     const slugM = `reel-${subId}-${curso.id}-${Date.now()}`;
     const imgM = await fundoImagem(fundoPrompt, slugM); // imagem gerada automaticamente
-    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, imageUrl: imgM, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true }];
+    const slides = [{ tipo: 'kinetico', texto: frase, destaque, notaVisual: fundoPrompt, imageUrl: imgM, variante: subId === 'domingo' ? 'domingo' : undefined, capa: true, conceito }];
     const numeroFaixaM = (Math.floor(Date.now() / 1000) % 100) + 1;
     const faixaM = { numero: numeroFaixaM, titulo: `Faixa ${String(numeroFaixaM).padStart(2, '0')}`, url: faixaUrl(numeroFaixaM) };
     const diasM = [{ dia: 1, mundo, palavra: frase.slice(0, 48), slides, faixa: faixaM, legenda: limparTravessoes((body.legenda ?? '').trim()), hashtags: [] }];
@@ -147,6 +148,7 @@ ${REGRA_ACENTOS}`;
         notaVisual: (p.fundoPrompt ?? '').trim() || fundoAleatorio(), // fundo varia sempre (nunca repete o mesmo)
         variante: formato.id === 'domingo' ? 'domingo' : undefined, // motion próprio do Domingo de Luz
         capa: true,
+        conceito,
       }]
     : framesIn.map((f, i) => ({
         tipo: 'reel',
@@ -159,6 +161,7 @@ ${REGRA_ACENTOS}`;
         selo: i === 0 && SERIE_ASSINATURA.includes(formato.id) ? formato.nome : '',
         pal: SERIE_ASSINATURA.includes(formato.id) ? (i === 0 ? 'carvao' : 'creme') : undefined,
         capa: i === 0,
+        conceito: i === 0 ? conceito : undefined, // selo do conceito só na capa
       }));
 
   // capa-assinatura fixa: gera-se SOZINHA na 1.ª vez (nunca fica sem capa), e

@@ -180,6 +180,7 @@ export default function PlanoSemanaPage() {
     else if (gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
     else if (gen === 'heroi') { url = '/api/admin/heroi/gerar'; payload = { tema: d.frase }; }
     else if (gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
+    if (tema.trim()) payload.conceito = tema.trim(); // selo do conceito da semana, impresso no post
     try {
       const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
       const j = await r.json();
@@ -219,6 +220,7 @@ export default function PlanoSemanaPage() {
       else if (gen === 'banda') { url = '/api/admin/banda/gerar'; payload = { tema: d.frase }; }
       else if (gen === 'heroi') { url = '/api/admin/heroi/gerar'; payload = { tema: d.frase }; }
       else if (gen === 'infografico') { url = '/api/admin/infografico/gerar'; payload = { tema: d.frase, curso }; }
+      if (tema.trim()) payload.conceito = tema.trim(); // selo do conceito da semana, impresso no post
       try {
         const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
         const j = await r.json();

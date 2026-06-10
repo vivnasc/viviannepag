@@ -26,7 +26,7 @@ export type ReelFrame = {
   pal?: string;      // paleta por frame (ex.: 'carvao' na capa, 'creme' no ensino)
 };
 
-export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, capa = false, ratio = '9:16' }: { frame: ReelFrame; mundo?: Mundo; imageUrl?: string; numero?: number; total?: number; capa?: boolean; ratio?: '9:16' | '4:5' }) {
+export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, capa = false, ratio = '9:16', conceito }: { frame: ReelFrame; mundo?: Mundo; imageUrl?: string; numero?: number; total?: number; capa?: boolean; ratio?: '9:16' | '4:5'; conceito?: string }) {
   const img = imageUrl ?? frame.imageUrl ?? undefined;
   const p = PALETAS[frame.pal ?? mundo] ?? PALETAS[mundo] ?? PALETAS.escola;
   const BG1 = p.bg, BG2 = p.bg2, ACCENT = p.destaque, TXT = p.texto;
@@ -77,12 +77,13 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         {ehSelo && (
           <>
             {!img && <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'radial-gradient(circle at 50% 24%, rgba(255,247,224,0.30) 0%, rgba(255,247,224,0.08) 24%, transparent 46%)' }} />}
-            <div style={{ position: 'absolute', top: topUI, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
+            <div style={{ position: 'absolute', top: topUI, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 28px', borderRadius: 999, border: `1px solid ${a(TXT, '4d')}`, background: a(BG2, '40') }}>
                 <span style={{ width: 20, height: 1, background: TXT, opacity: 0.5 }} />
                 <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.34em', textTransform: 'uppercase', color: TXT }}>{seloTxt}</span>
                 <span style={{ width: 20, height: 1, background: TXT, opacity: 0.5 }} />
               </div>
+              {conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: ACCENT, opacity: 0.85, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
             </div>
           </>
         )}
@@ -98,6 +99,7 @@ export function ReelSlide({ frame, mundo = 'escola', imageUrl, numero, total, ca
         {!ehSelo && (
           <div style={{ position: 'absolute', top: topUI, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, zIndex: 3 }}>
             {frame.kicker && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 26, letterSpacing: '0.42em', textTransform: 'uppercase', color: ACCENT, opacity: 0.92, textAlign: 'center', padding: '0 90px' }}>{frame.kicker}</span>}
+            {capa && conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: ACCENT, opacity: 0.7, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
             <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
           </div>
         )}
