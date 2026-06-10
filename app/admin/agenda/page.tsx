@@ -101,6 +101,11 @@ export default function AgendaPage() {
   const hojeIso = isoLocal(hoje);
   // tema editorial DESTA semana (para o "gerar a semana toda")
   const semEd = semanaEditorialAtual(segunda);
+  // os 7 dias (seg→dom) de uma semana qualquer, por offset (para o bulk)
+  const diasDaSemana = (offset: number) => {
+    const seg = new Date(hoje); seg.setDate(hoje.getDate() + (dow === 0 ? -6 : 1 - dow) + offset * 7);
+    return Array.from({ length: 7 }).map((_, i) => { const d = new Date(seg); d.setDate(seg.getDate() + i); return d; });
+  };
 
   const porAgendar = itens.filter((it) => !it.theme?.agendadoEm); // disponíveis para pôr num dia
   const totalAgendados = itens.filter((it) => it.theme?.agendadoEm).length;
@@ -228,49 +233,74 @@ export default function AgendaPage() {
     setIgBusy(null);
   }
 
-  // ── GERAR A SEMANA TODA: rascunha o tema editorial desta semana, gera os 8 posts
-  //    e agenda cada um no seu dia. Sem saltar de aba. ──
+  // ── GERAR UMA SEMANA (por offset): rascunha o tema editorial DESSA semana,
+  //    gera os 8 posts, agenda cada um no seu dia e dispara o render. Devolve
+  //    o resumo. `prefixo` enfeita a mensagem de progresso no modo bulk. ──
+  async function gerarUmaSemana(offset: number, prefixo = ''): Promise<{ feito: number; mp4: number; erros: string[]; tema: string }> {
+    const dias7 = diasDaSemana(offset);
+    const semEdW = semanaEditorialAtual(dias7[0]);
+    const cursoW = getCurso(semEdW.curso);
+    const erros: string[] = [];
+    const videoSlugs: string[] = [];
+    let feito = 0, mp4 = 0;
+    setGerSemana({ feito: 0, total: 8, msg: `${prefixo}a rascunhar “${semEdW.tema}”…` });
+    const r = await fetch('/api/admin/agenda/rascunho-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: semEdW.tema, subtitulo: cursoW.descricao, curso: semEdW.curso }) });
+    const j = await r.json();
+    if (!r.ok || !Array.isArray(j.plano)) { erros.push(`rascunho: ${j.erro ?? r.status}`); return { feito, mp4, erros, tema: semEdW.tema }; }
+    const plano = j.plano as Array<{ wd: number; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string }>;
+    for (const d of plano) {
+      setGerSemana({ feito, total: plano.length, msg: `${prefixo}a gerar ${feito + 1}/${plano.length}…` });
+      const url = ROTA_GEN[d.gen] ?? ROTA_GEN.reel;
+      let payload: Record<string, unknown> = {};
+      if (d.gen === 'kinetico') payload = { manual: true, formato: d.formato, curso: semEdW.curso, frase: d.frase, destaque: (d.destaque ?? []).join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
+      else if (d.gen === 'reel') payload = { tema: d.frase, formato: d.formato, curso: semEdW.curso };
+      else if (d.gen === 'banda' || d.gen === 'heroi') payload = { tema: d.frase };
+      else if (d.gen === 'infografico') payload = { tema: d.frase, curso: semEdW.curso };
+      try {
+        const gr = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+        const gj = await gr.json();
+        const slug = gj?.coleccao?.slug as string | undefined;
+        if (gr.ok && slug) {
+          const data = isoLocal(dias7[d.wd - 1]); // wd 1..7 -> dias7[0..6] dessa semana
+          await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
+          videoSlugs.push(slug);
+        } else { erros.push(`dia ${d.wd}: ${gj?.erro ?? gr.status}`); }
+      } catch (e) { erros.push(`dia ${d.wd}: ${String(e)}`); }
+      feito++; await carregar();
+    }
+    for (const slug of videoSlugs) {
+      setGerSemana({ feito, total: plano.length, msg: `${prefixo}a preparar media ${mp4 + 1}/${videoSlugs.length}…` });
+      try { const rr = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (rr.ok) mp4++; } catch { /* segue */ }
+    }
+    return { feito, mp4, erros, tema: semEdW.tema };
+  }
+
+  // gerar/agendar a SEMANA mostrada (1 semana)
   async function gerarSemana() {
     if (gerandoSemana) return;
     setGerandoSemana(true);
-    const curso = getCurso(semEd.curso);
-    setGerSemana({ feito: 0, total: 8, msg: 'a rascunhar a semana…' });
     try {
-      const r = await fetch('/api/admin/agenda/rascunho-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: semEd.tema, subtitulo: curso.descricao, curso: semEd.curso }) });
-      const j = await r.json();
-      if (!r.ok || !Array.isArray(j.plano)) { setGerSemana({ feito: 0, total: 0, msg: 'Falhou o rascunho: ' + (j.erro ?? r.status) }); return; }
-      const plano = j.plano as Array<{ wd: number; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string }>;
-      const erros: string[] = [];
-      const videoSlugs: string[] = []; // posts de vídeo, para disparar o MP4 no fim
-      let feito = 0;
-      for (const d of plano) {
-        setGerSemana({ feito, total: plano.length, msg: `a gerar ${feito + 1}/${plano.length}…` });
-        const url = ROTA_GEN[d.gen] ?? ROTA_GEN.reel;
-        let payload: Record<string, unknown> = {};
-        if (d.gen === 'kinetico') payload = { manual: true, formato: d.formato, curso: semEd.curso, frase: d.frase, destaque: (d.destaque ?? []).join(', '), legenda: d.legenda, fundoPrompt: d.fundoPrompt ?? '' };
-        else if (d.gen === 'reel') payload = { tema: d.frase, formato: d.formato, curso: semEd.curso };
-        else if (d.gen === 'banda' || d.gen === 'heroi') payload = { tema: d.frase };
-        else if (d.gen === 'infografico') payload = { tema: d.frase, curso: semEd.curso };
-        try {
-          const gr = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
-          const gj = await gr.json();
-          const slug = gj?.coleccao?.slug as string | undefined;
-          if (gr.ok && slug) {
-            const data = isoLocal(dias[d.wd - 1]); // wd 1..7 -> dias[0..6] desta semana
-            await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data }) }).catch(() => {});
-            videoSlugs.push(slug); // render TODOS: vídeos -> MP4; carrosséis -> PNGs (para publicar)
-          } else { erros.push(`dia ${d.wd}: ${gj?.erro ?? gr.status}`); }
-        } catch (e) { erros.push(`dia ${d.wd}: ${String(e)}`); }
-        feito++; await carregar();
-      }
-      // dispara os MP4s dos vídeos gerados (flow completa: gerar → renderizar → baixar)
-      let mp4 = 0;
-      for (const slug of videoSlugs) {
-        setGerSemana({ feito, total: plano.length, msg: `a disparar MP4 ${mp4 + 1}/${videoSlugs.length}…` });
-        try { const rr = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (rr.ok) mp4++; } catch { /* segue */ }
-      }
-      setGerSemana({ feito, total: plano.length, msg: `Pronto: ${feito} posts gerados e agendados, ${mp4} MP4s a renderizar (~10 min cada). Daqui a pouco recarrega e baixa o ZIP.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}` });
+      const res = await gerarUmaSemana(semanaOffset);
+      setGerSemana({ feito: res.feito, total: 8, msg: `Pronto: ${res.feito} posts gerados e agendados (“${res.tema}”), ${res.mp4} a preparar (~10 min).${res.erros.length ? ' Falhas: ' + res.erros.join('; ') : ''}` });
     } catch (e) { setGerSemana({ feito: 0, total: 0, msg: 'Erro: ' + String(e) }); }
+    finally { setGerandoSemana(false); }
+  }
+
+  // ── BULK: gerar/agendar VÁRIAS semanas seguidas, a partir da semana mostrada.
+  //    Cada semana leva o seu tema do plano editorial de 13 semanas. ──
+  const [nSemanas, setNSemanas] = useState(4);
+  async function gerarVariasSemanas(n: number) {
+    if (gerandoSemana) return;
+    if (!confirm(`Gerar e agendar ${n} semana(s) seguidas (a partir da semana mostrada), ~8 posts cada?\n\nIsto demora uns minutos e gera ~${n * 8} posts. Continuar?`)) return;
+    setGerandoSemana(true);
+    let totFeito = 0, totMp4 = 0; const todasErros: string[] = [];
+    try {
+      for (let k = 0; k < n; k++) {
+        const res = await gerarUmaSemana(semanaOffset + k, `semana ${k + 1}/${n} · `);
+        totFeito += res.feito; totMp4 += res.mp4; todasErros.push(...res.erros.map((e) => `s${k + 1}: ${e}`));
+      }
+      setGerSemana({ feito: totFeito, total: n * 8, msg: `Pronto: ${n} semanas · ${totFeito} posts agendados, ${totMp4} a preparar (~10 min cada). Publica-se tudo sozinho.${todasErros.length ? ' Falhas: ' + todasErros.slice(0, 6).join('; ') + (todasErros.length > 6 ? '…' : '') : ''}` });
+    } catch (e) { setGerSemana({ feito: totFeito, total: n * 8, msg: 'Erro a meio: ' + String(e) }); }
     finally { setGerandoSemana(false); }
   }
 
@@ -295,8 +325,16 @@ export default function AgendaPage() {
             {semanaOffset !== 0 && <button onClick={() => setSemanaOffset(0)} className="text-[0.6rem] px-2 py-1 rounded-full border border-ambar/30 text-ambar/80 hover:bg-ambar/10">hoje</button>}
           </div>
           <button onClick={gerarSemana} disabled={gerandoSemana} className="w-full text-[0.82rem] py-2.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-50">{gerandoSemana ? `⚡ ${gerSemana?.msg ?? 'a gerar…'}` : '⚡ gerar a semana toda (8 posts) e agendar'}</button>
+          {/* BULK: várias semanas de uma vez, a partir da semana mostrada */}
+          <div className="mt-2 flex items-center justify-center gap-2 flex-wrap">
+            <span className="text-[0.66rem] opacity-55">ou de uma vez:</span>
+            <select value={nSemanas} onChange={(e) => setNSemanas(Number(e.target.value))} disabled={gerandoSemana} className="text-[0.72rem] px-2 py-1 rounded-lg border border-ambar/30 bg-[#15131f] text-ambar disabled:opacity-50">
+              {[2, 3, 4, 6, 8, 13].map((n) => <option key={n} value={n}>{n} semanas</option>)}
+            </select>
+            <button onClick={() => gerarVariasSemanas(nSemanas)} disabled={gerandoSemana} className="text-[0.76rem] px-3 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-50">⚡⚡ gerar {nSemanas} semanas e agendar</button>
+          </div>
           {gerSemana && <p className="text-[0.66rem] opacity-70 mt-1.5 text-center">{gerSemana.msg}</p>}
-          <p className="text-[0.6rem] opacity-45 mt-1 text-center">Gera os 8 posts do tema da semana e agenda-os nos dias certos. Depois é só renderizar os MP4s e baixar. {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
+          <p className="text-[0.6rem] opacity-45 mt-1 text-center">Gera os 8 posts do tema da semana e agenda-os nos dias certos — depois publica-se tudo sozinho. O bulk faz N semanas seguidas (cada uma com o seu tema do plano de 13). {porAgendar.length} por agendar · {totalAgendados} agendados.</p>
         </div>
 
         {/* descarregar a semana inteira (imagens + legendas + MP4) para publicar à mão */}
