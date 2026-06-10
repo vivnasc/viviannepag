@@ -33,6 +33,13 @@ export const metadata: Metadata = {
 
 const SECOES: { titulo: string; cor: string; itens: { href: string; label: string }[] }[] = [
   {
+    titulo: 'publicar · todas as contas',
+    cor: '#7E9B8E',
+    itens: [
+      { href: '/admin/publicar', label: 'publicar · agendar' },
+    ],
+  },
+  {
     titulo: 'viviannedossantos · loja',
     cor: '#EBAE4A',
     itens: [

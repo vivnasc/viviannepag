@@ -45,6 +45,7 @@ const legendaDe = (it: Item) => { const d = it.dias?.[0]; return [d?.legenda?.tr
 const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00';
 function mediaPronta(it: Item): boolean {
   const c = tipoChave(it); const d = it.dias?.[0];
+  if (contaDe(it.theme, it.slug) === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(c)) return !!d?.videoUrl;
   if (CARROSSEL.includes(c)) return (d?.imagens?.length ?? 0) >= 2 && it.theme?.capaRev === CAPA_REV;
   if (c === 'infografico') return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1;
@@ -145,9 +146,9 @@ export default function PublicarPage() {
   const Cartao = ({ it, compacto }: { it: Item; compacto?: boolean }) => {
     const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const pronto = mediaPronta(it);
     return (
-      <div className="rounded-xl border border-ocre/15 bg-terra/15 overflow-hidden">
+      <div onClick={() => setLegenda(it)} className="rounded-xl border border-ocre/15 bg-terra/15 overflow-hidden cursor-pointer hover:border-ambar/40 transition-colors" title="clica para ver o conteúdo">
         <div className="flex gap-3 p-2.5">
-          <button onClick={() => setLegenda(it)} className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center" title="ver capa e legenda">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</button>
+          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
               <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span>
@@ -157,7 +158,7 @@ export default function PublicarPage() {
             <p className="text-[0.88rem] leading-tight mt-1 line-clamp-2" title={it.title}>{it.title}</p>
             <p className="text-[0.56rem] opacity-50 mt-0.5">{m.emoji} {m.label}</p>
             {!compacto && e !== 'publicado' && (
-              <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+              <div onClick={(ev) => ev.stopPropagation()} className="flex items-center gap-1.5 mt-2 flex-wrap">
                 {e === 'rascunho' && <button onClick={() => setTheme(it.slug, { aprovado: true })} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/45 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20">✓ aprovar</button>}
                 {e === 'agendado' && <button onClick={() => setTheme(it.slug, { aprovado: false })} className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/60 hover:border-ambar">↩ desaprovar</button>}
                 <button onClick={() => publicar(it)} disabled={busy === it.slug} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === it.slug ? '…' : '⚡ publicar já'}</button>
@@ -171,41 +172,20 @@ export default function PublicarPage() {
     );
   };
 
-  const NavItem = ({ href, n, label, active }: { href: string; n: string; label: string; active?: boolean }) => (
-    <Link href={href} className={`flex items-center gap-2 px-3 py-2 rounded-lg text-[0.82rem] no-underline ${active ? 'bg-ambar/15 text-ambar border border-ambar/40' : 'text-creme-2/75 hover:bg-white/5'}`}><span className="opacity-70">{n}</span>{label}</Link>
-  );
-
   return (
-    <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] ${cormorant.variable} ${inter.variable}`}>
-      <div className="flex min-h-screen">
-        {/* SIDEBAR */}
-        <aside className="w-44 shrink-0 border-r border-ocre/12 p-3 flex flex-col gap-1.5 sticky top-0 h-screen">
-          <p className="text-[1.05rem] font-semibold px-2 pb-1 leading-tight">Publicar</p>
-          {/* seletor de CONTA — nunca misturar veu.a.veu com a loja */}
-          <div className="px-1 pb-2">
-            {CONTAS.map((c) => (
-              <button key={c.id} onClick={() => setConta(c.id)} className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[0.74rem] mb-0.5 ${conta === c.id ? 'bg-ambar/15 text-ambar border border-ambar/40' : 'text-creme-2/65 hover:bg-white/5 border border-transparent'}`}>
-                <span>{c.emoji}</span><span className="truncate">{c.nome}</span>
-              </button>
-            ))}
-          </div>
-          <NavItem href="/admin/calendario-veu" n="①" label="Planear" />
-          <NavItem href="/admin/conteudos" n="②" label="Criar" />
-          <NavItem href="/admin/publicar" n="③" label="Publicar" active />
-          <div className="mt-auto pt-3 border-t border-ocre/12">
-            <Link href={`/admin/instagram?conta=${conta}`} className="flex items-center gap-2 px-3 py-2 rounded-lg text-[0.72rem] no-underline text-creme-2/70 hover:bg-white/5">
-              <span>🔑 Instagram</span>
-              <span className="ml-auto w-2 h-2 rounded-full" style={{ background: igOk == null ? '#888' : igOk ? '#7E9B8E' : '#C97373' }} title={igOk ? 'ligado' : 'não ligado'} />
-            </Link>
-          </div>
-        </aside>
+    <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-6 ${cormorant.variable} ${inter.variable}`}>
+      {/* topo: seletor de CONTA (nunca misturar) + estado do Instagram */}
+      <div className="flex items-center gap-2 flex-wrap mb-4">
+        {CONTAS.map((c) => (
+          <button key={c.id} onClick={() => setConta(c.id)} className={`text-[0.8rem] px-3 py-1.5 rounded-lg border ${conta === c.id ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>{c.emoji} {c.nome}</button>
+        ))}
+        <Link href={`/admin/instagram?conta=${conta}`} className="ml-auto flex items-center gap-2 text-[0.72rem] px-3 py-1.5 rounded-lg border border-ocre/25 text-creme-2/70 hover:border-ambar no-underline">🔑 Instagram <span className="w-2 h-2 rounded-full" style={{ background: igOk == null ? '#888' : igOk ? '#7E9B8E' : '#C97373' }} /></Link>
+      </div>
 
-        {/* MAIN */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6">
-          <div className="flex items-baseline gap-3 flex-wrap">
-            <h1 className="text-2xl font-semibold">Publicar</h1>
-            <span className="text-[0.74rem] opacity-55">vês, aprovas, e publica-se sozinho às horas — nada vai ao ar sem o teu ✓</span>
-          </div>
+      <div className="flex items-baseline gap-3 flex-wrap">
+        <h1 className="text-2xl font-semibold">Publicar · {CONTAS.find((c) => c.id === conta)?.nome}</h1>
+        <span className="text-[0.74rem] opacity-55">vês, aprovas, e publica-se sozinho às horas — nada vai ao ar sem o teu ✓</span>
+      </div>
 
           {/* barra: vistas + filtros + nav */}
           <div className="flex items-center gap-2 flex-wrap mt-4 mb-4">
@@ -301,8 +281,6 @@ export default function PublicarPage() {
               </>
             );
           })()}
-        </main>
-      </div>
 
       {/* PAINEL DE REVER (capa grande + legenda) */}
       {legenda && (() => {
