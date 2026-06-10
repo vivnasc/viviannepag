@@ -21,7 +21,7 @@ const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number };
+type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (carrossel exige capa corrigida)
@@ -72,12 +72,13 @@ export async function GET(req: NextRequest) {
 
   for (const row of (data ?? []) as Row[]) {
     const t = row.theme ?? {};
-    if (t.igPublicado) continue;                 // já publicado
+    if (t.igPublicado || t.publicado) continue;  // já publicado (por nós ou à mão)
+    if (!t.aprovado) continue;                   // TRAVA: só publica o que foi aprovado
     if ((t.igTentativas ?? 0) >= 3) continue;    // chega de tentar
     const ag = t.agendadoEm;
     if (!ag) continue;
     const chave = tipoChave(t);
-    const hora = HORA_FMT[chave] ?? '13:00';
+    const hora = t.hora || HORA_FMT[chave] || '13:00';
     if (agendadoNum(ag, hora) > agora) continue; // ainda não é hora
 
     const d = row.dias?.[0];
