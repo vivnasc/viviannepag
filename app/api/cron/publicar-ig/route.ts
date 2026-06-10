@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { publicarInstagram } from '@/lib/instagram/publish';
 import { getIgCredenciais } from '@/lib/instagram/config';
+import { dispararRender, CAPA_REV } from '@/lib/render/dispatch';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -20,8 +21,16 @@ const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number };
+type Theme = { formato?: string; subtipo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
+
+// a media de um post está pronta a publicar? (carrossel exige capa corrigida)
+function mediaPronta(chave: string, t: Theme, d?: Dia): boolean {
+  if (VIDEO.includes(chave)) return !!d?.videoUrl;
+  if (CARROSSEL.includes(chave)) return (d?.imagens?.length ?? 0) >= 2 && t.capaRev === CAPA_REV;
+  if (chave === 'infografico') return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1;
+  return false;
+}
 
 const tipoChave = (t: Theme) => (t?.formato === 'reel' ? (t?.subtipo ?? 'reel') : (t?.formato ?? ''));
 
@@ -74,14 +83,28 @@ export async function GET(req: NextRequest) {
     const d = row.dias?.[0];
     const caption = legendaDe(d);
 
+    // ── media ainda não pronta? PREPARA sozinho (dispara o render) e segue.
+    // No ciclo seguinte (~15 min) já está pronta e publica-se. Assim, estar
+    // na Agenda basta — a Vivianne não carrega em nada. ──
+    if (!mediaPronta(chave, t, d)) {
+      const pedido = t.renderPedidoEm ?? 0;
+      const haPouco = Date.now() - pedido < 20 * 60 * 1000; // já pedido nos últimos 20 min?
+      if (!haPouco) {
+        const ok = await dispararRender(row.slug);
+        await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', row.slug);
+        resultados.push({ slug: row.slug, estado: ok ? 'a preparar (render disparado)' : 'falha ao disparar render' });
+      } else {
+        resultados.push({ slug: row.slug, estado: 'a preparar (render em curso)' });
+      }
+      continue;
+    }
+
     // que media publicar?
     let r: { ok: boolean; id?: string; erro?: string };
     if (VIDEO.includes(chave) && d?.videoUrl) {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
     } else if (CARROSSEL.includes(chave)) {
-      const imgs = d?.imagens ?? [];
-      if (imgs.length < 2) { r = { ok: false, erro: 'carrossel ainda sem imagens renderizadas (PNGs)' }; }
-      else r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: imgs });
+      r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
     } else if (chave === 'infografico') {
       if (d?.videoUrl) r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
       else if (d?.imagens?.length) r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d.imagens });

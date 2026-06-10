@@ -221,7 +221,8 @@ export default function AgendaPage() {
     try {
       const r = await fetch('/api/admin/ig/publicar-agora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
       const j = await r.json().catch(() => ({}));
-      if (r.ok) { const m = `✓ Publicado no Instagram: “${it.title}”.`; setIgMsg(m); alert(m); await carregar(); }
+      if (j.preparando) { const m = `⏳ “${it.title}”: ${j.detalhe}`; setIgMsg(m); alert(m); await carregar(); }
+      else if (r.ok) { const m = `✓ Publicado no Instagram: “${it.title}”.`; setIgMsg(m); alert(m); await carregar(); }
       else { const m = `✗ Não publicou “${it.title}”:\n\n${j.detalhe ?? j.erro ?? r.status}`; setIgMsg(m); alert(m); }
     } catch (e) { const m = 'Erro: ' + String(e); setIgMsg(m); alert(m); }
     setIgBusy(null);

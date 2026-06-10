@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { publicarInstagram } from '@/lib/instagram/publish';
 import { getIgCredenciais } from '@/lib/instagram/config';
+import { dispararRender, CAPA_REV } from '@/lib/render/dispatch';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -16,10 +17,17 @@ const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; igPublicado?: boolean; igStatus?: string; igTentativas?: number; publicado?: boolean };
+type Theme = { formato?: string; subtipo?: string; igPublicado?: boolean; igStatus?: string; igTentativas?: number; publicado?: boolean; capaRev?: number; renderPedidoEm?: number };
 
 const tipoChave = (t: Theme) => (t?.formato === 'reel' ? (t?.subtipo ?? 'reel') : (t?.formato ?? ''));
 const legendaDe = (d?: Dia) => !d ? '' : [d.legenda?.trim(), (d.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
+
+function mediaPronta(chave: string, t: Theme, d?: Dia): boolean {
+  if (VIDEO.includes(chave)) return !!d?.videoUrl;
+  if (CARROSSEL.includes(chave)) return (d?.imagens?.length ?? 0) >= 2 && t.capaRev === CAPA_REV;
+  if (chave === 'infografico') return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1;
+  return false;
+}
 
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
@@ -43,21 +51,27 @@ export async function POST(req: Request) {
   const caption = legendaDe(d);
   const chave = tipoChave(t);
 
+  // media ainda não pronta (ou capa por corrigir)? PREPARA sozinho e diz para
+  // voltar daqui a ~10 min — entretanto o cron também a publica sozinho.
+  if (!mediaPronta(chave, t, d)) {
+    const ok = await dispararRender(slug);
+    await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', slug);
+    return NextResponse.json({
+      preparando: true,
+      detalhe: ok
+        ? 'Estou a preparar as imagens no servidor (~10 min) — com a capa nova. Depois publica-se sozinho à hora marcada, ou carrega outra vez daqui a ~10 min.'
+        : 'Não consegui pedir a preparação das imagens (falta GITHUB_DISPATCH_TOKEN?).',
+    }, { status: 202 });
+  }
+
   let r: { ok: boolean; id?: string; erro?: string };
   if (VIDEO.includes(chave) && d?.videoUrl) {
     r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
   } else if (CARROSSEL.includes(chave)) {
-    const imgs = d?.imagens ?? [];
-    if (imgs.length < 2) {
-      return NextResponse.json({ erro: 'sem-imagens', detalhe: 'Este carrossel ainda não tem imagens no servidor. Carrega "↻ render no servidor" e espera ~10 min antes de publicar.' }, { status: 409 });
-    }
-    r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: imgs });
+    r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
   } else if (chave === 'infografico') {
     if (d?.videoUrl) r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
-    else if (d?.imagens?.length) r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d.imagens });
-    else return NextResponse.json({ erro: 'sem-media', detalhe: 'Infográfico ainda sem MP4 nem imagem no servidor.' }, { status: 409 });
-  } else if (chave === 'kinetico' || chave === 'domingo' || chave === 'banda' || chave === 'heroi') {
-    return NextResponse.json({ erro: 'sem-media', detalhe: 'Este vídeo ainda não está renderizado no servidor (sem MP4). Carrega 🎬 renderizar e espera ~10 min.' }, { status: 409 });
+    else r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d?.imagens ?? [] });
   } else {
     return NextResponse.json({ erro: 'formato', detalhe: `formato "${chave}" sem media para publicar` }, { status: 409 });
   }

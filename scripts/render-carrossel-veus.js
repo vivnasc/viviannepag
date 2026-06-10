@@ -279,7 +279,10 @@ async function main() {
       const rsd = resultados.find((x) => x.dia === d.dia);
       return rsd ? { ...d, videoUrl: rsd.videoUrl ?? d.videoUrl, imagens: rsd.imagens } : d;
     });
-    const { error } = await supabase.from('carousel_collections').update({ dias: novosDias }).eq('slug', SLUG);
+    // carimba a capa como renderizada com a correção atual (ver CAPA_REV em
+    // lib/render/dispatch.ts): o publicador só publica carrosséis com esta rev.
+    const novoTheme = { ...(col.theme || {}), capaRev: 2 };
+    const { error } = await supabase.from('carousel_collections').update({ dias: novosDias, theme: novoTheme }).eq('slug', SLUG);
     if (error) console.error(`[update] ${error.message}`);
   }
   console.log(`[done] ${resultados.length} videos`);
