@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], variable: '--f
 // Criar). Vês cada post (capa + legenda), aprovas, e publica-se sozinho à hora.
 // gerar ≠ publicar: NADA vai para o ar sem estar APROVADO.
 
-type Slide = { imageUrl?: string | null };
+type Slide = { imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[] };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
 type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
@@ -305,6 +305,43 @@ export default function PublicarPage() {
                   </div>
                 </div>
               </div>
+              {/* CONTEÚDO REAL do post: vídeo, imagens renderizadas, ou os textos dos slides */}
+              {(() => {
+                const dia = it.dias?.[0];
+                if (dia?.videoUrl) return (
+                  <div className="mt-4">
+                    <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo (vídeo)</p>
+                    <video src={dia.videoUrl} controls className="w-full max-h-[55vh] rounded-lg bg-black" />
+                  </div>
+                );
+                if (dia?.imagens?.length) return (
+                  <div className="mt-4">
+                    <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo ({dia.imagens.length} imagens) — desliza →</p>
+                    <div className="flex gap-2 overflow-x-auto pb-2">
+                      {dia.imagens.map((u, i) => <img key={i} src={u} alt={`slide ${i + 1}`} className="h-64 rounded-lg shrink-0" />)}
+                    </div>
+                  </div>
+                );
+                const slides = dia?.slides ?? [];
+                if (slides.length) return (
+                  <div className="mt-4">
+                    <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo · {slides.length} slides (ainda por renderizar — texto)</p>
+                    <div className="space-y-2">
+                      {slides.map((s, i) => (
+                        <div key={i} className="rounded-lg border border-ocre/15 bg-black/15 p-2.5">
+                          <p className="text-[0.5rem] uppercase tracking-wider opacity-40 mb-0.5">slide {i + 1}{s.kicker ? ` · ${s.kicker}` : ''}</p>
+                          {s.titulo && <p className="text-[0.84rem] font-medium">{s.titulo}</p>}
+                          {s.texto && <p className="text-[0.82rem] leading-snug opacity-90">{s.texto}</p>}
+                          {s.pontos?.length ? <ul className="mt-1 ml-3 list-disc text-[0.76rem] opacity-80">{s.pontos.map((p, k) => <li key={k}>{p}</li>)}</ul> : null}
+                          {s.nota && <p className="text-[0.66rem] opacity-50 mt-0.5">{s.nota}</p>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+                return null;
+              })()}
+
               <div className="mt-4">
                 <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Legenda</p>
                 <div className="text-[0.82rem] leading-relaxed whitespace-pre-wrap opacity-90 border-l-2 border-ocre/20 pl-3">{legendaDe(it) || <span className="opacity-40">(sem legenda)</span>}</div>
