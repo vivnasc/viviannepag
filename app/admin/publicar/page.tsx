@@ -83,6 +83,7 @@ export default function PublicarPage() {
   const [legenda, setLegenda] = useState<Item | null>(null); // painel de rever
   const [igOk, setIgOk] = useState<boolean | null>(null);
   const [conta, setConta] = useState<ContaId>('veuaveu'); // conta selecionada
+  const [pickerLoja, setPickerLoja] = useState(false); // seletor de semana da Loja a colocar
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list', { cache: 'no-store' });
@@ -162,6 +163,17 @@ export default function PublicarPage() {
     setMsg(`✓ ${alvo.length} post(s) aprovados. Publicam-se sozinhos às horas marcadas.`);
   }
 
+  // molds da Loja = coleções-semana ainda SEM datas (para "colocar" numa semana)
+  const moldesLoja = itens.filter((it) => contaDe(it.theme, it.slug) === 'loja' && !it.theme?.agendadoEm && !it.slug.startsWith('loja-'));
+  async function colocarLoja(moldSlug: string) {
+    setPickerLoja(false); setMsg(null);
+    const seg = isoLocal(diasSemana[0]);
+    const r = await fetch('/api/admin/loja/colocar-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: moldSlug, segunda: seg }) });
+    const j = await r.json().catch(() => ({}));
+    if (r.ok) { setMsg(`✓ ${j.criados} carrossel(éis) da Loja colocados nesta semana (seg→dom). Revê e aprova.`); await carregar(); }
+    else { setMsg(`✗ ${j.detalhe ?? j.erro ?? r.status}`); }
+  }
+
   // ── componentes ──
   const Cartao = ({ it, compacto }: { it: Item; compacto?: boolean }) => {
     const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const pronto = mediaPronta(it);
@@ -227,7 +239,12 @@ export default function PublicarPage() {
             <select value={fFormato} onChange={(e) => setFFormato(e.target.value)} className="text-[0.7rem] px-2 py-1.5 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2">
               <option value="todos">todos os formatos</option>{Object.entries(FMT).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
             </select>
-            {vista === 'semana' && <button onClick={aprovarSemana} className="ml-auto text-[0.74rem] px-3 py-1.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20">✓✓ aprovar a semana</button>}
+            {vista === 'semana' && (
+              <div className="ml-auto flex items-center gap-2">
+                {conta === 'loja' && <button onClick={() => setPickerLoja(true)} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">＋ colocar carrosséis da Loja</button>}
+                <button onClick={aprovarSemana} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20">✓✓ aprovar a semana</button>
+              </div>
+            )}
           </div>
 
           {msg && <div className="mb-4 text-[0.78rem] text-ambar whitespace-pre-wrap p-3 rounded-lg border border-ambar/25 bg-ambar/5">{msg}</div>}
@@ -301,6 +318,26 @@ export default function PublicarPage() {
               </>
             );
           })()}
+
+      {/* SELETOR: que semana de carrosséis da Loja colocar nesta semana */}
+      {pickerLoja && (
+        <div onClick={() => setPickerLoja(false)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
+          <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-md max-h-[80vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable}`}>
+            <p className="text-[0.95rem] font-semibold mb-1">Colocar carrosséis da Loja</p>
+            <p className="text-[0.72rem] opacity-60 mb-3">Escolhe a semana de carrosséis (7 Véus) para abrir nos dias <b>{isoLocal(diasSemana[0]).split('-').reverse().slice(0,2).join('/')}→{isoLocal(diasSemana[6]).split('-').reverse().slice(0,2).join('/')}</b>.</p>
+            <div className="space-y-2">
+              {moldesLoja.length === 0 && <p className="text-[0.78rem] opacity-55 py-4 text-center">Nenhuma semana de carrosséis disponível (gera/renderiza em <code>/admin/carrossel</code> primeiro).</p>}
+              {moldesLoja.map((it) => (
+                <button key={it.slug} onClick={() => colocarLoja(it.slug)} className="w-full text-left p-2.5 rounded-lg border border-ocre/20 bg-black/15 hover:border-ambar">
+                  <p className="text-[0.84rem] truncate">{it.title}</p>
+                  <p className="text-[0.6rem] opacity-50">{it.theme?.universo ?? ''} · {(it.dias?.length ?? 0)} dias</p>
+                </button>
+              ))}
+            </div>
+            <button onClick={() => setPickerLoja(false)} className="mt-3 text-[0.7rem] opacity-60 hover:opacity-100">fechar ✕</button>
+          </div>
+        </div>
+      )}
 
       {/* PAINEL DE REVER (capa grande + legenda) */}
       {legenda && (() => {
