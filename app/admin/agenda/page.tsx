@@ -221,9 +221,9 @@ export default function AgendaPage() {
     try {
       const r = await fetch('/api/admin/ig/publicar-agora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) });
       const j = await r.json().catch(() => ({}));
-      if (r.ok) { setIgMsg(`✓ Publicado no Instagram: “${it.title}”.`); await carregar(); }
-      else setIgMsg(`✗ Não publicou “${it.title}”: ${j.detalhe ?? j.erro ?? r.status}`);
-    } catch (e) { setIgMsg('Erro: ' + String(e)); }
+      if (r.ok) { const m = `✓ Publicado no Instagram: “${it.title}”.`; setIgMsg(m); alert(m); await carregar(); }
+      else { const m = `✗ Não publicou “${it.title}”:\n\n${j.detalhe ?? j.erro ?? r.status}`; setIgMsg(m); alert(m); }
+    } catch (e) { const m = 'Erro: ' + String(e); setIgMsg(m); alert(m); }
     setIgBusy(null);
   }
 
@@ -354,7 +354,7 @@ export default function AgendaPage() {
                         <span className="text-[0.66rem] font-mono opacity-50 w-10 shrink-0">{hora}</span>
                         <div className="w-9 h-12 shrink-0 rounded overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span>{m.emoji}</span>}</div>
                         <div className="flex-1 min-w-0">
-                          <span className={`block truncate text-[0.86rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}{it.theme?.igPublicado && <span className="ml-1 text-[0.54rem] text-salvia">✓ Instagram</span>}{!it.theme?.igPublicado && it.theme?.igStatus?.startsWith('erro') && <span className="ml-1 text-[0.54rem] text-rosa/80" title={it.theme.igStatus}>⚠ IG</span>}</span>
+                          <span className={`block truncate text-[0.86rem] ${it.theme?.publicado ? 'line-through opacity-50' : ''}`} title={it.title}>{it.title}{etiqueta && <span className="ml-1 text-[0.54rem] opacity-50">{etiqueta}</span>}{it.theme?.igPublicado && <span className="ml-1 text-[0.54rem] text-salvia">✓ Instagram</span>}{!it.theme?.igPublicado && it.theme?.igStatus?.startsWith('erro') && <button onClick={() => alert(it.theme?.igStatus)} className="ml-1 text-[0.54rem] text-rosa/80 underline" title={it.theme.igStatus}>⚠ IG (ver)</button>}</span>
                           {/* etiqueta de formato + estado de render */}
                           {ehVideo
                             ? <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={videoUrl ? { background: '#7E9B8E22', color: '#7E9B8E' } : { background: '#EBAE4A22', color: '#EBAE4A' }}>{videoUrl ? '🎬 MP4 pronto' : '🎬 por renderizar'}</span>
