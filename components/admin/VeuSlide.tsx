@@ -116,11 +116,13 @@ export function VeuSlide({
       ? `radial-gradient(ellipse 70% 50% at 50% 50%, ${C.deepWarm} 0%, ${C.deep} 70%)`
       : `radial-gradient(ellipse 80% 70% at 50% 50%, ${C.ivory} 0%, ${C.parchmentDark} 70%)`;
   const padding = isCapa ? '150px 110px 200px' : isCta ? '180px 110px 180px' : '110px';
+  // CAPA/CTA com imagem: véu LEVE para a imagem transcendente respirar (era 0.68/0.92,
+  // escurecia quase tudo). O título tem sombra própria, por isso continua legível.
   const scrim = escuro
-    ? 'radial-gradient(ellipse at 50% 40%, rgba(15,12,10,0.68) 0%, rgba(15,12,10,0.92) 100%)'
+    ? 'radial-gradient(ellipse at 50% 42%, rgba(15,12,10,0.30) 0%, rgba(15,12,10,0.60) 100%)'
     : 'radial-gradient(ellipse at 50% 40%, rgba(245,234,213,0.94) 0%, rgba(245,234,213,0.62) 100%)';
   const vinheta = escuro
-    ? 'radial-gradient(ellipse 80% 60% at center, transparent 40%, rgba(0,0,0,0.55) 100%)'
+    ? 'radial-gradient(ellipse 82% 62% at center, transparent 48%, rgba(0,0,0,0.40) 100%)'
     : 'radial-gradient(ellipse 90% 70% at center, transparent 50%, rgba(60,35,15,0.18) 100%)';
   const glow = isCapa
     ? `radial-gradient(ellipse 60% 50% at 50% 35%, ${GOLD_HARD(0.1)} 0%, transparent 70%)`
