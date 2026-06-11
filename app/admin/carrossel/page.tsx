@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { CALENDARIO_ANUAL, intervaloDatas } from '@/lib/carrossel/calendario';
+import { CALENDARIO_ANUAL, intervaloDatas, semanaAtual } from '@/lib/carrossel/calendario';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { PALETAS_UNIVERSO } from '@/lib/carrossel/paletas';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
@@ -396,6 +396,35 @@ export default function CarrosselPage() {
         </div>
         <p className="text-[0.8rem] opacity-65 mb-4">Calendário temático de 52 semanas. Cada semana gera uma jornada de carrosséis que combina produtos do teu ecossistema.</p>
 
+        {/* DESTAQUE: a semana EM CURSO — leva-te direto a ela, sem caçar na grelha */}
+        {(() => {
+          const semAtual = semanaAtual(anoAtual);
+          const wAtual = CALENDARIO_ANUAL.find((w) => w.semana === semAtual);
+          if (!wAtual) return null;
+          const colAtual = colDaSemana(semAtual);
+          const palU = PALETAS_UNIVERSO[wAtual.universo];
+          const pA = PALETAS[palU.mundo];
+          return (
+            <div className="rounded-2xl border-2 mb-6 p-4 sm:p-5" style={{ borderColor: pA.destaque + '88', background: `linear-gradient(135deg, ${pA.bg}33, ${pA.bg2}66)` }}>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <p className="text-[0.6rem] uppercase tracking-[0.3em] mb-1" style={{ color: pA.destaque }}>● Esta semana · Sem. {semAtual} · {intervaloDatas(semAtual, anoAtual)}</p>
+                  <h2 className="text-xl font-serif italic leading-snug" style={{ color: pA.destaque }}>{wAtual.tema}</h2>
+                  <p className="text-[0.74rem] italic opacity-75 leading-snug">{wAtual.subtitulo}</p>
+                  <p className="text-[0.62rem] opacity-50 mt-1">{getColecao(wAtual.universo).nome} · {wAtual.estacao}{colAtual ? '' : ' · ainda não gerada'}</p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  {colAtual ? (
+                    <Btn variant="primary" onClick={() => setSel(colAtual)}>abrir esta semana →</Btn>
+                  ) : (
+                    <Btn variant="primary" onClick={() => gerar(semAtual)} disabled={gerando !== null}>{gerando === semAtual ? 'a gerar…' : 'gerar esta semana'}</Btn>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
         {/* abas: calendário completo vs. só os já gerados */}
         {(() => {
           const nGerados = CALENDARIO_ANUAL.filter((w) => colDaSemana(w.semana)).length;
@@ -417,11 +446,13 @@ export default function CarrosselPage() {
             const col = colDaSemana(w.semana);
             const pal = PALETAS_UNIVERSO[w.universo];
             const p = PALETAS[pal.mundo];
+            const ehAtual = w.semana === semanaAtual(anoAtual);
             return (
-              <div key={w.semana} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: `linear-gradient(135deg, ${p.bg}22, ${p.bg2}55)` }}>
+              <div key={w.semana} className={`rounded-xl overflow-hidden ${ehAtual ? 'border-2' : 'border border-white/10'}`} style={{ background: `linear-gradient(135deg, ${p.bg}22, ${p.bg2}55)`, borderColor: ehAtual ? p.destaque + 'aa' : undefined }}>
                 <div className="p-3.5">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[0.6rem] uppercase tracking-[0.15em] opacity-60">Sem. {w.semana} · {intervaloDatas(w.semana, anoAtual)} · {w.estacao}</span>
+                    {ehAtual && <span className="text-[0.55rem] uppercase tracking-[0.15em] px-1.5 py-0.5 rounded-full shrink-0" style={{ background: p.destaque + '33', color: p.destaque }}>● esta semana</span>}
                     <span className="text-[0.6rem] px-1.5 py-0.5 rounded" style={{ background: p.destaque + '33', color: p.destaque }}>{getColecao(w.universo).nome}</span>
                   </div>
                   <p className="text-[0.55rem] uppercase tracking-[0.25em] opacity-45 mb-0.5">Território</p>
