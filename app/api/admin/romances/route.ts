@@ -22,6 +22,7 @@ export async function GET() {
         .sort((a, b) => (b.name > a.name ? 1 : -1))
         .map((f) => ({ name: f.name, url: pub(f.name) }));
       const temEscolhida = (files ?? []).some((f) => f.name === 'capa.jpg');
+      const temPdf = (n: string) => (files ?? []).some((f) => f.name === n);
       return {
         slug: r.slug,
         titulo: r.titulo,
@@ -33,6 +34,8 @@ export async function GET() {
         variantes,
         // cache-busting: a escolhida vive sempre no mesmo path
         capaEscolhida: temEscolhida ? `${pub('capa.jpg')}?v=${Date.now()}` : null,
+        pdfPt: temPdf('livro-pt.pdf') ? `${pub('livro-pt.pdf')}?v=${Date.now()}` : null,
+        pdfEn: temPdf('livro-en.pdf') ? `${pub('livro-en.pdf')}?v=${Date.now()}` : null,
       };
     }),
   );

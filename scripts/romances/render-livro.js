@@ -1,0 +1,291 @@
+// As Mãos de Amparo — edição final: capa composta + miolo v3 (o cabeçalho da
+// primeira versão sobre o papel e a respiração dos ebooks, toques sálvia).
+// Uso: node render-livro.js <pt|en>
+const fs = require('fs');
+const path = require('path');
+const puppeteer = require('puppeteer');
+const { marked } = require('marked');
+const { PDFDocument } = require('pdf-lib');
+
+const LANG = process.argv[2] || 'pt';
+const BASE = path.join(__dirname, '..', '..', 'ficcao-plano');
+const DIR = LANG === 'pt' ? path.join(BASE, 'amparo-livro') : path.join(BASE, 'amparo-livro-en');
+const CAPA = path.join(BASE, `AMPARO-capa-${LANG}.png`);
+const OUT = LANG === 'pt' ? path.join(BASE, 'AS-MAOS-DE-AMPARO-pt.pdf') : path.join(BASE, 'AMPAROS-HANDS-en.pdf');
+
+const C = {
+  barro: '#8C4A36', barroEscuro: '#5A3D2E', barroClaro: '#9A5A43',
+  areia: '#F3E4D6', creme: '#F1E8DD', salvia: '#7D8A6A',
+  texto: '#3D2B1F', textoSuave: '#6B5548', ouro: '#EBAE4A',
+};
+
+function fontFace(fam, w, st, file) {
+  const dir = fam === 'Fraunces' ? 'fraunces' : 'outfit';
+  const base = path.dirname(require.resolve(`@fontsource/${dir}/package.json`));
+  const b64 = fs.readFileSync(path.join(base, 'files', `${file}.woff2`)).toString('base64');
+  return `@font-face { font-family:'${fam}'; font-weight:${w}; font-style:${st}; src:url('data:font/woff2;base64,${b64}') format('woff2'); }`;
+}
+const FONTS = [
+  ['Fraunces',300,'normal','fraunces-latin-300-normal'],
+  ['Fraunces',400,'normal','fraunces-latin-400-normal'],
+  ['Fraunces',500,'normal','fraunces-latin-500-normal'],
+  ['Fraunces',300,'italic','fraunces-latin-300-italic'],
+  ['Fraunces',400,'italic','fraunces-latin-400-italic'],
+  ['Outfit',300,'normal','outfit-latin-300-normal'],
+  ['Outfit',400,'normal','outfit-latin-400-normal'],
+  ['Outfit',500,'normal','outfit-latin-500-normal'],
+].map(a => fontFace(...a)).join('\n');
+
+// Espiral limpa (arquimediana), traço sálvia.
+function espiral(px, cor = C.salvia, voltas = 3.2) {
+  const cx = 50, cy = 50, passos = 220, a = 1.6, b = 4.4;
+  let d = '';
+  for (let i = 0; i <= passos; i++) {
+    const t = (i / passos) * voltas * 2 * Math.PI;
+    const r = a + b * t / (2 * Math.PI) * 3.2;
+    const x = cx + r * Math.cos(t), y = cy + r * Math.sin(t);
+    d += (i === 0 ? `M${x.toFixed(1)} ${y.toFixed(1)}` : ` L${x.toFixed(1)} ${y.toFixed(1)}`);
+  }
+  return `<svg width="${px}" height="${px}" viewBox="0 0 100 100"><path d="${d}" fill="none" stroke="${cor}" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/></svg>`;
+}
+
+const NUM = LANG==='pt'
+  ? ['','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze']
+  : ['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
+
+const T = LANG==='pt' ? {
+  tituloHtml:'As Mãos<br>de Amparo', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante I · As Casas de Família',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Amparo te doer em sítios reais, o nome do que ela carrega está em «A mãe que salva», na coleção FreeMe Mãe. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Amparo. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:"Amparo's<br>Hands", autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf I · The Family Houses',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Amparo hurts you in real places, the name of what she carries is in “The Mother Who Saves”, in the FreeMe Mother collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Amparo. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
+let sumarioItens = [];
+const corpoHtml = files.map(f => {
+  const md = fs.readFileSync(path.join(DIR, f), 'utf8').trim();
+  const isRegisto = f.startsWith('00') || f.startsWith('13');
+  if (isRegisto) {
+    const html = marked.parse(md.replace(/^## .+$/m, '').trim());
+    const titulo = (md.match(/^## (.+)$/m) || [,''])[1];
+    return `<div class="registo-page"><div class="registo-box">
+      <div class="registo-label">${T.registoLabel}</div>
+      <h2 class="registo-tit">${titulo}</h2>
+      ${html}
+    </div></div>`;
+  }
+  const m = md.match(/^## (\d+)\.\s*(.+)$/m);
+  const n = m ? parseInt(m[1], 10) : 0;
+  const titulo = m ? m[2].trim() : '';
+  sumarioItens.push({ n, titulo });
+  const corpo = marked.parse(md.replace(/^## .+$/m, '').trim())
+    .replace(/^<p>/, '<p class="primeiro-p">');
+  return `<section class="capitulo">
+    <div class="cap-cabeca">
+      <div class="cap-num">${T.cap} ${NUM[n] || n}</div>
+      <h2>${titulo}</h2>
+      <div class="cap-orn">${espiral(30)}</div>
+    </div>
+    ${corpo}
+  </section>`;
+}).join('\n');
+
+const sumarioHtml = sumarioItens.map(({n, titulo}) => `
+  <li><span class="sum-num">${String(n).padStart(2,'0')}</span><span class="sum-tit">${titulo}</span></li>`).join('');
+
+const html = `<!DOCTYPE html>
+<html lang="${LANG}">
+<head>
+<meta charset="UTF-8">
+<style>
+  ${FONTS}
+
+  @page { size: A5; margin: 21mm 18mm 24mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    font-size: 11pt;
+    line-height: 1.85;
+    color: ${C.texto};
+    background: ${C.creme};
+  }
+
+  .rosto {
+    page-break-after: always;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 88vh; text-align: center;
+  }
+  .rosto .serie {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 7.5pt;
+    letter-spacing: 0.28em; text-transform: uppercase; color: ${C.salvia}; margin-bottom: 13mm;
+  }
+  .rosto h1 { font-weight: 300; font-size: 27pt; line-height: 1.14; color: ${C.barro}; letter-spacing: -0.015em; margin-bottom: 4mm; }
+  .rosto .sub { font-style: italic; font-size: 11pt; color: ${C.textoSuave}; margin-bottom: 12mm; }
+  .rosto .orn { margin-bottom: 10mm; }
+  .rosto .autora {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 9pt;
+    letter-spacing: 0.24em; text-transform: uppercase; color: ${C.texto};
+  }
+
+  .ficha-page {
+    page-break-after: always; display: flex; align-items: center; justify-content: center;
+    min-height: 80vh; padding: 6mm 0;
+  }
+  .ficha-box { border-top: 0.5pt solid ${C.salvia}80; border-bottom: 0.5pt solid ${C.salvia}80; padding: 10mm 2mm; }
+  .ficha-label {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 8pt;
+    letter-spacing: 0.32em; text-transform: uppercase; color: ${C.salvia};
+    text-align: center; margin-bottom: 6mm;
+  }
+  .ficha-text {
+    font-weight: 300; font-style: italic; font-size: 9.5pt; line-height: 1.75;
+    color: ${C.textoSuave}; text-align: center;
+  }
+
+  .sumario { page-break-after: always; min-height: 80vh; padding-top: 6mm; }
+  .sumario-label {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 8pt;
+    letter-spacing: 0.32em; text-transform: uppercase; color: ${C.salvia}; margin-bottom: 4mm;
+  }
+  .sumario h2 { font-weight: 300; font-size: 22pt; color: ${C.barro}; margin-bottom: 11mm; letter-spacing: -0.015em; }
+  .sumario ol { list-style: none; }
+  .sumario li { display: flex; align-items: baseline; gap: 6mm; padding: 3.2mm 0; border-bottom: 0.3pt solid ${C.barroClaro}30; }
+  .sum-num { font-weight: 300; font-size: 12pt; color: ${C.salvia}; min-width: 10mm; font-variant-numeric: tabular-nums; }
+  .sum-tit { font-weight: 400; font-size: 11pt; color: ${C.texto}; line-height: 1.4; }
+
+  .registo-page {
+    page-break-before: always; page-break-after: always;
+    display: flex; align-items: center; justify-content: center; min-height: 80vh; padding: 4mm 0;
+  }
+  .registo-box { border-top: 0.5pt solid ${C.salvia}80; border-bottom: 0.5pt solid ${C.salvia}80; padding: 9mm 2mm; }
+  .registo-label {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 8pt;
+    letter-spacing: 0.32em; text-transform: uppercase; color: ${C.salvia};
+    text-align: center; margin-bottom: 5mm;
+  }
+  .registo-tit { font-weight: 400; font-style: italic; font-size: 13.5pt; color: ${C.barro}; text-align: center; margin-bottom: 6mm; }
+  .registo-box p {
+    font-weight: 300; font-style: italic; font-size: 9.6pt; line-height: 1.75;
+    color: ${C.textoSuave}; text-align: center; margin-bottom: 3.2mm;
+  }
+  .registo-box p:last-child { margin-bottom: 0; margin-top: 4mm; color: ${C.barro}; }
+
+  .capitulo { page-break-before: always; }
+  .cap-cabeca { text-align: center; margin: 13mm 0 12mm; }
+  .cap-num {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 8.5pt;
+    letter-spacing: 0.34em; text-transform: uppercase; color: ${C.salvia}; margin-bottom: 4mm;
+  }
+  .capitulo h2 {
+    font-weight: 400; font-style: italic; font-size: 19pt; color: ${C.barro};
+    line-height: 1.2; margin-bottom: 5mm; page-break-after: avoid; letter-spacing: -0.01em;
+  }
+  .cap-orn { opacity: 0.9; }
+
+  .capitulo p { margin-bottom: 4mm; text-align: justify; hyphens: auto; -webkit-hyphens: auto; orphans: 3; widows: 3; }
+  .capitulo p.primeiro-p::first-letter {
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 50pt; line-height: 0.88;
+    color: ${C.barro}; float: left; margin: 0 3mm -2mm 0; padding-top: 1mm;
+  }
+  .capitulo strong { font-weight: 500; color: ${C.barro}; }
+  .capitulo em { font-style: italic; color: ${C.texto}; }
+  .capitulo hr { border: none; text-align: center; margin: 9mm auto; height: 8mm; line-height: 8mm; }
+  .capitulo hr::before { content: '· · ·'; color: ${C.salvia}; font-size: 13pt; letter-spacing: 0.4em; opacity: 0.7; }
+
+  .final {
+    page-break-before: always; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; min-height: 85vh; text-align: center;
+  }
+  .final .orn { margin-bottom: 11mm; }
+  .final h3 { font-style: italic; font-weight: 300; font-size: 18pt; color: ${C.barro}; margin-bottom: 9mm; letter-spacing: -0.01em; }
+  .final p { font-weight: 300; font-size: 10pt; line-height: 1.7; color: ${C.textoSuave}; margin-bottom: 4mm; max-width: 80%; }
+  .final a { color: ${C.barro}; text-decoration: none; border-bottom: 0.3pt solid ${C.barroClaro}60; }
+  .final-credits {
+    margin-top: 14mm; font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: 7.5pt; letter-spacing: 0.3em; text-transform: uppercase; color: ${C.salvia};
+  }
+</style>
+</head>
+<body>
+
+<div class="rosto">
+  <div class="serie">${T.serie}</div>
+  <h1>${T.tituloHtml}</h1>
+  <p class="sub">${T.sub}</p>
+  <div class="orn">${espiral(46, C.barroClaro)}</div>
+  <p class="autora">${T.autora}</p>
+</div>
+
+<div class="ficha-page">
+  <div class="ficha-box">
+    <div class="ficha-label">${T.fichaLabel}</div>
+    <p class="ficha-text">${T.ficha}</p>
+  </div>
+</div>
+
+<div class="sumario">
+  <div class="sumario-label">${T.sumarioLabel}</div>
+  <h2>${T.sumario}</h2>
+  <ol>${sumarioHtml}</ol>
+</div>
+
+${corpoHtml}
+
+<div class="final">
+  <div class="orn">${espiral(40)}</div>
+  <h3>${T.finalTit}</h3>
+  <p>${T.finalTxt1}</p>
+  <p>${T.finalTxt2}</p>
+  <div class="final-credits">${T.copy}</div>
+</div>
+
+</body>
+</html>`;
+
+(async () => {
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox', '--font-render-hinting=none'] });
+  const page = await browser.newPage();
+  await page.setContent(html, { waitUntil: 'load', timeout: 120000 });
+  await page.evaluateHandle('document.fonts.ready');
+  const mioloBuf = await page.pdf({
+    format: 'A5', printBackground: true,
+    displayHeaderFooter: true,
+    headerTemplate: '<div></div>',
+    footerTemplate: `<div style="width:100%;text-align:center;font-family:Outfit,sans-serif;font-size:7pt;color:${C.textoSuave}80;"><span class="pageNumber"></span></div>`,
+    margin: { top: '21mm', right: '18mm', bottom: '24mm', left: '18mm' },
+  });
+  await browser.close();
+
+  const livro = await PDFDocument.create();
+  const capaImg = await livro.embedPng(fs.readFileSync(CAPA));
+  const A5 = [419.53, 595.28];
+  const capaPage = livro.addPage(A5);
+  capaPage.drawImage(capaImg, { x: 0, y: 0, width: A5[0], height: A5[1] });
+  const miolo = await PDFDocument.load(mioloBuf);
+  (await livro.copyPages(miolo, miolo.getPageIndices())).forEach(p => livro.addPage(p));
+  fs.writeFileSync(OUT, await livro.save());
+  console.log('livro final:', OUT, Math.round(fs.statSync(OUT).size/1024) + ' KB,', livro.getPageCount(), 'páginas');
+})();

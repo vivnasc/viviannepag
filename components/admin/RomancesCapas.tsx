@@ -13,6 +13,8 @@ type RomanceItem = {
   palavras: number;
   variantes: Variante[];
   capaEscolhida: string | null;
+  pdfPt: string | null;
+  pdfEn: string | null;
 };
 
 export function RomancesCapas() {
@@ -102,6 +104,23 @@ export function RomancesCapas() {
               <p className="text-[0.7rem] tracking-[0.28em] uppercase text-salvia mb-2">capa escolhida</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={r.capaEscolhida} alt={`Capa escolhida de ${r.titulo}`} className="w-44 rounded-[10px] border border-salvia/40" />
+              <div className="flex flex-wrap gap-3 mt-4">
+                {r.pdfPt && (
+                  <a href={r.pdfPt} className="rounded-full border border-salvia/50 text-salvia px-5 py-2 text-[0.82rem] hover:bg-salvia/10 transition-colors no-underline">
+                    descarregar livro (pt)
+                  </a>
+                )}
+                {r.pdfEn && (
+                  <a href={r.pdfEn} className="rounded-full border border-salvia/50 text-salvia px-5 py-2 text-[0.82rem] hover:bg-salvia/10 transition-colors no-underline">
+                    download book (en)
+                  </a>
+                )}
+                {!r.pdfPt && !r.pdfEn && (
+                  <p className="text-creme-2/50 text-[0.78rem] italic font-serif">
+                    Os PDFs finais com esta capa chegam aqui depois do render (GitHub Actions · Render romance).
+                  </p>
+                )}
+              </div>
             </div>
           )}
 
