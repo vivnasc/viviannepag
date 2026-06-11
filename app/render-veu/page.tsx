@@ -145,6 +145,7 @@ export default function RenderVeuPage() {
           numeroDia={estado.dia.dia}
           slideIndex={estado.idx + 1}
           slideTotal={estado.dia.slides?.length ?? 6}
+          prog={prog}
         />
       )}
     </div>

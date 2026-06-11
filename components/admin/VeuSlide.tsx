@@ -78,6 +78,7 @@ export function VeuSlide({
   numeroDia,
   slideIndex,
   slideTotal = 6,
+  prog = 1,
 }: {
   slide: Slide;
   mundo?: Mundo;
@@ -87,10 +88,21 @@ export function VeuSlide({
   numeroDia?: number;
   slideIndex?: number;
   slideTotal?: number;
+  prog?: number;
 }) {
   const isCapa = slide.tipo === 'capa';
   const isCta = slide.tipo === 'cta';
   const escuro = isCapa || isCta;
+  // CAPA com movimento (o render conduz prog 0..1; a prog=1 fica IDENTICA ao
+  // estatico, por isso as imagens de feed nao mudam). O topo (palavra/linhas/
+  // subtitulo) floresce de um leve desfoque e o gancho escreve-se palavra a
+  // palavra (typewriter), como nos reels cineticos.
+  const motion = isCapa && prog < 1;
+  const topReveal = Math.min(1, prog / 0.4);
+  const ganchoProg = Math.max(0, Math.min(1, (prog - 0.3) / 0.62));
+  const ganchoPalavras = (slide.destaque ?? '').trim().split(/\s+/).filter(Boolean);
+  const ganchoMostradas = ganchoProg * ganchoPalavras.length;
+  const ganchoEscreve = motion && ganchoProg < 1;
   const hue = numeroDia ? HUES[(numeroDia - 1) % 7] : undefined;
   const ornamento = hue?.deep ?? C.gold; // accent tingido pela cor do dia
 
@@ -171,7 +183,7 @@ export function VeuSlide({
         {isCapa && (
           <>
             {/* TOPO: linhas + palavra + ◇◇◇ + subtitulo */}
-            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
+            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, opacity: motion ? topReveal : 1, filter: motion ? `blur(${(1 - topReveal) * 10}px)` : 'none', transform: motion ? `translateY(${(1 - topReveal) * 18}px)` : 'none' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 320, height: 1, background: C.gold, opacity: 0.65 }} />
                 <span style={{ width: 200, height: 1, background: C.gold, opacity: 0.45 }} />
@@ -181,9 +193,22 @@ export function VeuSlide({
               <div style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, letterSpacing: '1.2em', color: ornamento, opacity: 0.85, paddingLeft: '1.2em' }}>◇ ◇ ◇</div>
               {subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 300, fontSize: 38, lineHeight: 1.4, color: C.ivory, opacity: 0.82, maxWidth: 780 }}>{subtitulo}</p>}
             </div>
-            {/* CENTRO: frase de abertura */}
+            {/* CENTRO: frase de abertura (o GANCHO). Estatico a prog=1; com
+                movimento escreve-se palavra a palavra. */}
             <div style={{ position: 'relative', zIndex: 2 }}>
-              {slide.destaque && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>{slide.destaque}</p>}
+              {slide.destaque && (
+                motion ? (
+                  <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>
+                    {ganchoPalavras.map((w, i) => {
+                      const f = Math.max(0, Math.min(1, ganchoMostradas - i));
+                      return <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', opacity: f, transform: `translateY(${(1 - f) * 12}px)` }}>{w}</span>;
+                    })}
+                    {ganchoEscreve && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: ornamento, opacity: 0.85, transform: 'translateY(0.1em)', marginLeft: '0.02em' }} />}
+                  </p>
+                ) : (
+                  <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>{slide.destaque}</p>
+                )
+              )}
             </div>
             {/* BAIXO: marca */}
             <div style={{ position: 'relative', zIndex: 2 }}>
