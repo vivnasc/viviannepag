@@ -93,3 +93,5 @@ Despediram-se com os beijos do costume, cada uma para sua casa pelo seu caminho,
 — Eu não te julgo. Mas também não te sigo mais.
 
 Depois entrou, e fechou a porta, e o fecho fez na noite um estalo pequeno e definitivo, como o lápis da Benvinda a riscar uma linha no caderno.
+
+Na manhã seguinte, o largo amanheceu lavado e vazio, como amanhecia sempre depois das festas, com as marcas das mesas na terra batida e meia dúzia de copos esquecidos nos parapeitos, e a vila acordou tarde e em paz, sem saber que tinha mudado alguma coisa nela durante a noite, ao pé do tanque, entre três irmãs e uma pergunta. As mudanças de Véspera eram assim, aprendera Amparo a vida inteira sem saber que aprendia: nunca vinham nos dias anunciados, nas datas grandes, nos acontecimentos. Vinham nas arrumações, nas louças, nos fins de festa, pela calada, como a água nos regos: abre-se-lhe um caminho de palmo com a enxada e ela parece que não vai, e não vai, e de repente já lá está, já correu o rego todo, e a terra do fundo, que era clara, ficou escura, e nunca mais ninguém a viu seca.
