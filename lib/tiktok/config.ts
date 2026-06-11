@@ -102,3 +102,10 @@ export function getRedirectUri(): string {
   const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com').replace(/\/$/, '');
   return `${base}/api/admin/tiktok/callback`;
 }
+
+// Envolve um URL do Supabase no proxy do nosso domínio verificado, para o TikTok
+// o poder ir buscar (PULL_FROM_URL). Ver app/api/tiktok-media/route.ts.
+export function mediaProxyUrl(supabaseUrl: string): string {
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com').replace(/\/$/, '');
+  return `${base}/api/tiktok-media?u=${encodeURIComponent(supabaseUrl)}`;
+}
