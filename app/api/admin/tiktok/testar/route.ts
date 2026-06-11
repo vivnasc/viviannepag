@@ -53,9 +53,11 @@ export async function GET(req: NextRequest) {
       if (d?.videoUrl) { videoUrl = d.videoUrl; titulo = legendaDe(d); }
     } else {
       const { data } = await supabase.from('carousel_collections').select('slug, title, dias').limit(100);
+      // no modo automático preferimos vídeos COM faststart (reels). Os da LOJA
+      // (carrossel-veus) ainda não têm faststart, por isso o TikTok recusa-os.
       for (const row of (data as Row[] | null) ?? []) {
         const d = row.dias?.[0];
-        if (d?.videoUrl) { videoUrl = d.videoUrl; titulo = legendaDe(d); break; }
+        if (d?.videoUrl && !d.videoUrl.includes('/carrossel-veus/')) { videoUrl = d.videoUrl; titulo = legendaDe(d); break; }
       }
     }
   }
