@@ -90,3 +90,15 @@ export function getCredenciaisApp(): { clientKey?: string; clientSecret?: string
     clientSecret: process.env.TIKTOK_CLIENT_SECRET,
   };
 }
+
+// O redirect_uri TEM de ser SEMPRE exatamente igual ao registado no Login Kit
+// do TikTok — senão dá erro "redirect_uri". Por isso fixamo-lo a partir de uma
+// fonte canónica (env TIKTOK_REDIRECT_URI, senão NEXT_PUBLIC_SITE_URL), e NÃO da
+// origem do pedido (que pode variar entre www/apex). O mesmo valor é usado no
+// arranque (auth) e na troca de token (callback).
+export function getRedirectUri(): string {
+  const explicit = process.env.TIKTOK_REDIRECT_URI;
+  if (explicit) return explicit.replace(/\/$/, '');
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://viviannedossantos.com').replace(/\/$/, '');
+  return `${base}/api/admin/tiktok/callback`;
+}

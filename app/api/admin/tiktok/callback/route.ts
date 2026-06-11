@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
-import { getCredenciaisApp, upsertConta } from '@/lib/tiktok/config';
+import { getCredenciaisApp, getRedirectUri, upsertConta } from '@/lib/tiktok/config';
 import { trocarCodigo } from '@/lib/tiktok/publish';
 
 export const runtime = 'nodejs';
@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
   const { clientKey, clientSecret } = getCredenciaisApp();
   if (!clientKey || !clientSecret) return paraAdmin(req, { tiktok: 'erro', detalhe: 'falta TIKTOK_CLIENT_KEY/SECRET' });
 
-  const redirectUri = process.env.TIKTOK_REDIRECT_URI || `${req.nextUrl.origin}/api/admin/tiktok/callback`;
+  const redirectUri = getRedirectUri();
   const r = await trocarCodigo({ clientKey, clientSecret, code, redirectUri });
   if (!r.ok || !r.tokens) return paraAdmin(req, { tiktok: 'erro', detalhe: r.erro || 'troca de token falhou' });
 
