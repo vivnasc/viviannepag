@@ -53,17 +53,20 @@ export async function GET(req: NextRequest) {
       if (d?.videoUrl) { videoUrl = d.videoUrl; titulo = legendaDe(d); }
     } else {
       const { data } = await supabase.from('carousel_collections').select('slug, title, dias').limit(100);
-      // no modo automático preferimos vídeos COM faststart (reels). Os da LOJA
-      // (carrossel-veus) ainda não têm faststart, por isso o TikTok recusa-os.
       for (const row of (data as Row[] | null) ?? []) {
         const d = row.dias?.[0];
-        if (d?.videoUrl && !d.videoUrl.includes('/carrossel-veus/')) { videoUrl = d.videoUrl; titulo = legendaDe(d); break; }
+        if (d?.videoUrl) { videoUrl = d.videoUrl; titulo = legendaDe(d); break; }
       }
     }
   }
 
   if (!videoUrl) return NextResponse.json({ erro: 'sem-video', detalhe: 'não encontrei nenhum MP4 pronto. Passa ?videoUrl= ou ?slug=' }, { status: 409 });
 
+  // fura a cache do CDN do Supabase (um re-render fica no MESMO URL e o CDN podia
+  // servir a versão ANTIGA ~1h — o TikTok apanharia o MP4 sem faststart).
+  if (videoUrl.startsWith(SUPA)) {
+    videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'v=' + Date.now();
+  }
   // se o vídeo está no Supabase, serve-o pelo nosso domínio verificado
   const urlParaTikTok = videoUrl.startsWith(SUPA) ? mediaProxyUrl(videoUrl) : videoUrl;
 
