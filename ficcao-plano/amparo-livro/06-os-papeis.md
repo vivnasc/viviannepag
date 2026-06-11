@@ -22,11 +22,15 @@ Não a disse. Disse outras coisas, as do costume: que a casa não se deixava ass
 
 — A mãe não larga isto nem morta. Eu sei. Eu só tinha de tentar.
 
-E mudou de assunto com a mesma ordem com que tinha chegado a ele, e o resto da tarde foi manso, e à despedida abraçou a mãe um segundo a mais que o costume, e Amparo ficou no portão a ver o carro descer, com a pasta azul nos braços, a doer-lhe um sítio que não vinha nas análises.
+E mudou de assunto com a mesma ordem com que tinha chegado a ele, e o resto da tarde foi manso. Mas à despedida, já com a porta do carro aberta, a Vera parou, com as chaves na mão, e disse mais uma coisa, de costas meio voltadas, na voz mais baixa do dia: a mãe acha que eu venho cá tratar de papéis. Eu sei que parece. Eu trato de papéis quando tenho medo, mãe, é a minha maneira, sempre foi: ponho o medo por alíneas para ele caber em mim. — Entrou no carro, fechou a porta, baixou o vidro. — Aquilo na horta assustou-me. Era só isto que as alíneas queriam dizer.
+
+E desceu o caminho. Amparo ficou no portão a ver o carro até à curva, com a pasta azul nos braços, a doer-lhe um sítio que não vinha nas análises: a filha tinha-lhe acabado de mostrar, pela primeira vez em quarenta anos, o avesso da sua ordem toda, e o avesso era uma menina aflita, e a menina aflita tinha ido embora outra vez sem que ninguém lhe pegasse ao colo.
 
 Foi por causa da pasta azul que, na quarta-feira seguinte, Amparo subiu os três degraus gastos da Casa dos Assentos.
 
 Era um edifício pequeno e fundo, entre o largo e o adro, com cheiro a papel velho e a cera, e fora ali que a vila guardara, desde sempre, a sua memória oficial: os livros dos nascimentos, dos casamentos e dos óbitos, as escrituras, as plantas, os testamentos de quem os fizera. A Guardiã atendia a uma secretária de madeira escura, sem computador à vista, embora se dissesse que havia um nos fundos. Ninguém sabia ao certo há quanto tempo aquela mulher ali estava. Tinha a idade de que cada um se lembrava dela, e a vila desistira de fazer as contas.
+
+A vila tinha com aquela casa uma relação que não tinha com mais nenhuma. Não se ia lá por gosto, e não se sabia bem porquê, porque a casa não fazia mal a ninguém: guardava. Talvez fosse isso. Em Véspera toda a gente vivia de contar a sua própria versão, e a Casa dos Assentos era o único sítio da vila onde as versões não entravam: lá dentro, a vida de cada um estava reduzida ao que tinha mesmo acontecido, em meia dúzia de linhas, sem desculpas nem enfeites, e havia qualquer coisa nessa nudez que fazia as pessoas adiar a ida anos a fio. Dizia-se que a Guardiã sabia mais de cada casa do que a própria casa. Não era verdade. Era pior: sabia o mesmo, mas sabia-o arrumado.
 
 — Dona Amparo — disse a Guardiã, como se a esperasse, o que era impossível e parecia sempre.
 
@@ -64,7 +68,9 @@ A Guardiã copiou o assento à mão, com a sua letra direita, carimbou, dobrou o
 
 — A maior parte das pessoas — disse, e foi o mais perto de um comentário que chegou em toda a tarde — só pede este papel quando precisa dele para tratar dos outros. A senhora é a terceira, em todos os meus anos, que o pede por ele. — Recolheu os livros para os braços, como se recolhem crianças com sono. — As outras duas mudaram de vida. Mas pode ter sido coincidência.
 
-Amparo desceu os três degraus com o papel dobrado em quatro no bolso do casaco, do lado esquerdo, onde no inverno levava o dinheiro do mês. Pesava o mesmo que nada, e ela sentiu-o o caminho todo, como se levasse no bolso uma brasa pequena, ou uma semente, ou as duas coisas, que talvez fossem a mesma. Em casa, não o guardou na despensa, nem na gaveta dos papéis, nem na pasta azul da Vera. Pô-lo no quarto, em cima da cómoda, encostado ao retrato de Fortunato, onde pudesse vê-lo da cama.
+Não foi logo para casa. Os pés levaram-na, sem consulta, pelo caminho da encosta nascente, ao cemitério, onde não ia desde o dia dos finados. A campa da mãe e a do Amadeu ficavam lado a lado, no jeito antigo da família, e Amparo deu por si diante delas com as mãos já em movimento, porque era isso que sempre ali fizera: arrancar a erva, endireitar a jarra, esfregar a pedra, servir os mortos como servia os vivos. Desta vez mandou as mãos parar. Custou-lhes, e a ela. Ficou quieta diante das duas pedras, de mãos cruzadas à frente do avental, e não arrumou nada, e não disse nada, e deixou-se só estar ali, com eles, no vento morno do fim do verão. À mãe, ao fim de um tempo, disse por dentro o que tinha para dizer, que era pouco e era tudo: a senhora fez o que sabia. Eu vou tentar fazer o que a senhora não pôde saber. Ao irmão não disse nada. Ao irmão pousou a mão na pedra, um momento, como se pousa a mão num ombro, de homem para homem, de queda para queda. E à saída passou, como sempre passava, pelo canto do talhão dos anjinhos, e abrandou, como toda a vila abrandava ali, nesse passo mais lento que era a única reza que aqueles pequenos recebiam, e seguiu.
+
+Desceu depois para casa com o papel dobrado em quatro no bolso do casaco, do lado esquerdo, onde no inverno levava o dinheiro do mês. Pesava o mesmo que nada, e ela sentiu-o o caminho todo, como se levasse no bolso uma brasa pequena, ou uma semente, ou as duas coisas, que talvez fossem a mesma. Em casa, não o guardou na despensa, nem na gaveta dos papéis, nem na pasta azul da Vera. Pô-lo no quarto, em cima da cómoda, encostado ao retrato de Fortunato, onde pudesse vê-lo da cama.
 
 — Não digas nada — disse ao retrato.
 

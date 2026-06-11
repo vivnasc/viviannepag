@@ -14,7 +14,9 @@ Não tinha planeado contar tudo. Tinha planeado o essencial: a nova regra, o ped
 
 — O teu mês ainda lá está por riscar — disse a Benvinda, a desembrulhar o livro com cuidado. — Mas antes de falarmos do teu caderno, quero mostrar-te o do meu pai. Há quarenta anos que isto está na arrecadação e nunca o mostrei a ninguém. Acho que estava à tua espera, este livro.
 
-O caderno do pai da Benvinda era igual ao dela e era de outro mundo: o papel mais amarelo, os preços noutra moeda de falar, a letra apertada de um homem que poupava em tudo, até na tinta. A Benvinda abriu-o numa página marcada com uma palhinha seca, virou-o para Amparo, e apontou.
+A saleta era do tamanho de uma despensa e tinha dentro a Mercearia inteira por outra ordem: as faturas de quarenta anos em molhos atados com cordel, a balança avariada que ninguém deitava fora, o calendário do ano em que o pai morreu, parado em maio, pendurado ao lado do calendário deste ano, que a Benvinda nunca explicara a ninguém e não precisava: maio era o mês em que o homem caíra ali mesmo, atrás do balcão, de avental posto, a meio de fiar meio quilo de açúcar a uma freguesa. Morrera como vivera, costumava dizer a filha, a dar sem receber, e dizia-o como elogio, e só nesta noite, nesta conversa, é que Amparo a ouviu dizê-lo de outra maneira, mais devagar, como quem prova a frase pela primeira vez pelo lado de dentro: morreu a fiar, Amparo. A última coisa que o meu pai fez neste mundo foi apontar uma dívida que nunca ia cobrar.
+
+O caderno do pai era igual ao dela e era de outro mundo: o papel mais amarelo, os preços noutra moeda de falar, a letra apertada de um homem que poupava em tudo, até na tinta. A Benvinda abriu-o numa página marcada com uma palhinha seca, virou-o para Amparo, e apontou.
 
 — Lê.
 
@@ -47,6 +49,8 @@ Levantou-se, foi buscar o caderno novo, o de agora, e abriu-o na página do Salv
 — Salvo, casa da rua do rio. Conta nova, aberta ao próprio. — E acrescentou, na coluna das observações, a data, e mais isto, que Amparo levou consigo para casa como se leva uma chave: — A pagar pelo titular.
 
 Olharam as duas para a linha escrita. Era uma linha de mercearia, num caderno de fiados de uma vila pequena, três palavras e uma data. E era, sabiam-no as duas sem o dizer, a primeira linha de uma história diferente: a primeira vez, em três gerações e dois cadernos, que um homem daquela família ia ficar a dever em seu próprio nome.
+
+E porque os pactos a sério se estreiam logo, ali mesmo, a Benvinda quis treinar. Tinha uma conta antiga da mulher do empreiteiro, dezassete embrulhos ao longo de dois anos, nunca pagos nem falados, e decidiu, com a coragem das oito da noite, que havia de lhe falar no assunto na segunda-feira. Faltava o como. E as duas mulheres de sessenta e tantos anos passaram a meia hora seguinte na saleta a ensaiar uma frase, como meninas a decorar a lição: a Benvinda de pé atrás do balcão imaginário, a Amparo no papel da freguesa, e a frase a sair sempre torta, ou pedinte de mais, ou seca de mais, ou com um desconto já embutido na ponta. Diz outra vez, mandava Amparo. Dona Eduvina, aproveitava eu que a senhora cá está... não, isso é pedir desculpa. Outra vez. Dona Eduvina, a sua conta vai em tanto, quer pôr em dia? E à sétima ou oitava tentativa saiu uma direita, simples, sem culpa nenhuma, e as duas ficaram tão espantadas com o som dela que se riram alto, na saleta, atrás da loja fechada, um riso de raparigas que ninguém em Véspera lhes ouvia há quarenta anos.
 
 — Deus queira que ele pague — disse a Benvinda, a fechar o caderno.
 
