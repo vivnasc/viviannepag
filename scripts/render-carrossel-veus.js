@@ -117,7 +117,7 @@ async function main() {
       try {
         const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
@@ -182,7 +182,7 @@ async function main() {
       try {
         const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
@@ -281,7 +281,7 @@ async function main() {
             // 1 slide: só o zoom lento
             const audioIn = temAudio ? ' -i audio.mp3' : '';
             const maps = temAudio ? '-map "[vout]" -map 1:a -c:a aac -b:a 160k -shortest' : '-map "[vout]"';
-            execSync(`ffmpeg -y -loop 1 -t ${SEG} -i s0.png${audioIn} -filter_complex "${kb(0).replace('[v0]', '[vout]')}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+            execSync(`ffmpeg -y -loop 1 -t ${SEG} -i s0.png${audioIn} -filter_complex "${kb(0).replace('[v0]', '[vout]')}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
             return;
           }
           if (animCapa) {
@@ -302,7 +302,7 @@ async function main() {
             const totalDur = (capaSeg + nImg * SEG - nImg * D).toFixed(3);
             const audioIn = temAudio ? ' -i audio.mp3' : '';
             const maps = temAudio ? `-map "[vout]" -map ${slides.length}:a -c:a aac -b:a 160k -t ${totalDur}` : '-map "[vout]"';
-            execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+            execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
             return;
           }
           // estático (de sempre): todas as imagens com Ken Burns + fundido
@@ -318,7 +318,7 @@ async function main() {
           const totalDur = (slides.length * SEG - (slides.length - 1) * D).toFixed(3);
           const audioIn = temAudio ? ' -i audio.mp3' : '';
           const maps = temAudio ? `-map "[vout]" -map ${slides.length}:a -c:a aac -b:a 160k -t ${totalDur}` : '-map "[vout]"';
-          execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+          execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         };
 
         try {
