@@ -5,7 +5,7 @@ import { getArena } from '@/lib/veu/arenas';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 
 export const runtime = 'nodejs';
-export const maxDuration = 120;
+export const maxDuration = 300; // 8000 tokens (opus) + correção de acentos = 2 chamadas; 120s estourava o tempo
 
 // POST { tema, subtitulo?, curso? } — RASCUNHA as 6 frases da semana de uma so
 // vez, em TEXTO, para a Vivianne LER e EDITAR antes de gerar qualquer visual.
@@ -144,7 +144,7 @@ ${REGRA_ACENTOS}`;
     fundoPrompt: limparTravessoes((d.fundoPrompt ?? '').trim()),
   }));
   if (!dias.length) return NextResponse.json({ erro: 'vazio' }, { status: 502 });
-  dias = await corrigirAcentos(dias, apiKey); // rede de segurança: acentuação correta
+  try { dias = await corrigirAcentos(dias, apiKey); } catch { /* acentos é só rede de segurança; nunca derrubar a semana por isto */ }
 
   // junta o angulo/etiqueta de cada slot ao texto rascunhado
   const plano = slots.map((s, i) => ({ ...s, ...(dias[i] ?? { frase: '', destaque: [], legenda: '', fundoPrompt: '' }) }));
