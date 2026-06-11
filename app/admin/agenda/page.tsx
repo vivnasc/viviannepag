@@ -46,8 +46,8 @@ const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl
 const SUG: Record<number, string> = { 1: '✨ Frase com motion', 2: '🔎 Sinais de que…', 3: '💡 O que ninguém · 🕯️ Uma ideia de…', 4: '🎭 Cá em Casa', 5: '🌅 I am a Hero', 6: '📊 Infográfico', 0: '🕊️ Domingo de Luz' };
 // formato(s) planeado(s) de cada dia. Quarta (3) leva 2 (dia de maior audiência).
 const DIA_FORMATO: Record<number, string[]> = { 1: ['kinetico'], 2: ['sinais'], 3: ['ninguem', 'pensador'], 4: ['banda'], 5: ['heroi'], 6: ['infografico'], 0: ['domingo'] };
-// formatos que SÃO vídeo (precisam de render MP4); os outros são carrossel/imagem
-const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
+// formatos que SÃO vídeo (precisam de render MP4); já não há carrossel de imagens na veu.a.veu
+const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const HORA = '13:00';
