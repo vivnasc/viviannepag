@@ -8,6 +8,12 @@ on:
         required: false
         type: string
         default: 'rom-01-amparo'
+  push:
+    branches: [main]
+    paths: ['scripts/romances/.disparar']
+
+env:
+  SLUG: ${{ github.event.inputs.slug || 'rom-01-amparo' }}
 
 permissions:
   contents: write
@@ -49,7 +55,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
         run: |
-          curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/romances/${{ github.event.inputs.slug }}/capa.jpg" -o /tmp/capa-escolhida.jpg
+          curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/romances/$SLUG/capa.jpg" -o /tmp/capa-escolhida.jpg
           ls -la /tmp/capa-escolhida.jpg
 
       - name: Compor capas (pt e en)
