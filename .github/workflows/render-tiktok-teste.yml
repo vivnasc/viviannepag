@@ -1,0 +1,41 @@
+name: Render teste TikTok (semana-14-trabalho)
+
+# Render PONTUAL para o teste do TikTok: re-renderiza o semana-14-trabalho (dia 1)
+# já com -movflags +faststart, para termos um MP4 que o TikTok aceita.
+# Corre sozinho quando este ficheiro é adicionado/alterado em main (paths abaixo),
+# e também pode ser corrido à mão (workflow_dispatch). É descartável.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/render-tiktok-teste.yml']
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install npm packages
+        run: npm install --no-save puppeteer @supabase/supabase-js
+
+      - name: Render MP4 (semana-14-trabalho, dia 1) com faststart
+        env:
+          SITE_URL: https://viviannedossantos.com
+          SLUG: semana-14-trabalho
+          DIAS_FILTER: '1'
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/render-carrossel-veus.js

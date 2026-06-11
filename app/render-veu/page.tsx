@@ -81,7 +81,7 @@ export default function RenderVeuPage() {
   const ehReel = tipoSlide === 'reel';
   const ehBanda = tipoSlide === 'banda';
   const ehKinetic = tipoSlide === 'kinetico';
-  const ehCarrosselReel = ehReel && ['sinais', 'ninguem', 'pensador'].includes(subtipo); // carrossel 4:5 (PNG), não 9:16
+  const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string }) | undefined;
   return (
@@ -145,6 +145,7 @@ export default function RenderVeuPage() {
           numeroDia={estado.dia.dia}
           slideIndex={estado.idx + 1}
           slideTotal={estado.dia.slides?.length ?? 6}
+          prog={prog}
         />
       )}
     </div>

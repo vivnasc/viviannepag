@@ -66,6 +66,7 @@ export async function POST(req: Request) {
 REGRAS DE VOZ:
 ${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
+- VALOR PRIMEIRO (alcance): o reel tem de GANHAR a atencao antes de qualquer convite. A capa para o scroll com um gancho reconhecivel; os 4 slides do meio sao VALOR PURO, que apetece guardar e partilhar; so o fecho traz, em tom suave, um produto. Nunca soar a venda a cabeca.
 - CLAREZA ACIMA DE TUDO: cada carrossel diz UMA coisa concreta que qualquer pessoa entende a primeira leitura. Fala de situacoes reais do dia a dia (a culpa ao deitar, o sim que devia ser nao, a chamada que nao fizeste). Usa a imagem poetica para ILUMINAR a mensagem, nunca para a esconder. Proibido: linguagem hermetica, abstracao a mais, frases que so a autora entende. Se uma frase precisa de ser decifrada, reescreve-a simples.
 - ACENTUACAO OBRIGATORIA: escreve em portugues europeu com TODOS os acentos correctos e completos (á, à, ã, â, ç, é, ê, í, ó, ô, õ, ú). A palavra-capa tambem acentuada (ex.: "GESTAÇÃO", nunca "GESTACAO"; "FÉ", nunca "FE"). Texto sem acentos e ERRADO.
 - LINKS (expandir nao e cortar): os produtos da LOJA apontam para viviannedossantos.com/loja/<slug>; as OFERTAS ANTERIORES (LUMINA, Loranne, Sete Ecos, livro, Escola) mantem os seus links proprios da lista. Usa o ecossistema TODO. Nunca inventes links — usa sempre os exactos das listas.
@@ -85,14 +86,14 @@ PALAVRA-DESTAQUE (a regra mais importante para ela):
 - As palavras do dia orbitam o territorio da semana por angulos diferentes; cada uma fresca e unica.
 
 SLIDES DE CADA DIA (6 slides, nesta ordem):
-1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico; destaque = uma frase curta de abertura, 1-2 linhas, que entra no tema, ex.: "Ha um escuro que nao e ausencia. E o inicio de tudo."). Fundo escuro/editorial.
+1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico; destaque = O GANCHO que para o scroll nos primeiros segundos: uma verdade tensa e RECONHECIVEL do dia a dia, curta (1-2 linhas), que faz a pessoa pensar "isto sou eu" e querer ver mais. Concreta, do real, nunca abertura suave/abstrata que nao prende (ex.: "Deitas o corpo. A cabeca e que nao se deita." em vez de "Ha um escuro que e o inicio de tudo.")). Fundo escuro/editorial.
 2) 'conteudo' PROSA: reflexao em prosa curta, intima (titulo = "PROSA"). Base clara.
 3) 'conteudo' POETICO: frase poetica espacada com quebras de linha (titulo = "POÉTICO"). Base clara.
 4) 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRÁTICA" ou "HÁBITO DA SEMANA"). Base clara.
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
-6) 'cta': fecho com UM PRODUTO/oferta (titulo = nome do produto; texto = convite curto; destaque = a URL exacta). Fundo escuro/editorial.
+6) 'cta': fecho GENEROSO e NAO-vendedor (o reel ja deu valor; agora um sussurro, nao um grito). Comeca por um convite a refletir/guardar/partilhar; depois, em tom suave, UM produto/oferta que APROFUNDA o tema do dia (titulo = nome do produto; texto = convite curto e generoso, NUNCA "compra"/"adquire"/"garante ja" — antes "se quiseres ir mais fundo...", "fica aqui para quando precisares"; destaque = a URL exacta). Fundo escuro/editorial.
 
-CTA — CADA DIA FECHA SEMPRE COM UM PRODUTO. O CTA e o lugar onde exploras o ecossistema. Ao longo dos 7 dias, VARIA o produto:
+CTA — o fecho leva UM produto, mas em tom GENEROSO e nao-vendedor (valor primeiro, convite depois; o produto e um sussurro). Ao longo dos 7 dias, VARIA o produto:
 - uns dias um ebook/guia/pack de um dos 7 UNIVERSOS da loja (URL: viviannedossantos.com/loja/<slug>);
 - outros dias uma OFERTA ANTERIOR (LUMINA, Loranne, Sete Ecos, "Os 7 Veus do Despertar", Escola dos Veus) com o seu link proprio.
 Regras: nao repitas o mesmo produto na mesma semana; explora universos diferentes (nao fiques so no universo do territorio); o produto escolhido deve tocar o tema do dia; usa nome e link/URL EXACTOS de cada um (no campo destaque do slide cta poe a URL).

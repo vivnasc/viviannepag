@@ -18,7 +18,7 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const SLUG = process.env.SLUG;
 const DIAS_FILTER = (process.env.DIAS_FILTER || '').split(',').map((s) => s.trim()).filter(Boolean);
 const BUCKET = 'viviannepag-assets';
-const SEG = 3.5; // segundos por slide
+const SEG = 5.5; // segundos por slide (tempo de leitura; 3.5 era rapido demais nos reels de varios slides)
 const AUDIO_BASE = 'https://tdytdamtfillqyklgrmb.supabase.co/storage/v1/object/public/audios/albums/ancient-ground';
 const NUM_FAIXAS = 100;
 
@@ -47,8 +47,10 @@ async function main() {
   const formato = col.theme?.formato;
   const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo'); // frase com motion / Domingo de Luz (animados)
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
-  // carrossel de imagens (sinais, o que ninguem, uma ideia): so PNGs 4:5, sem MP4
-  const carrossel = formato === 'reel' && ['sinais', 'ninguem', 'pensador'].includes(col.theme?.subtipo);
+  // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
+  // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
+  // carrossel de imagens nesta conta (o carrossel quase nao gera alcance).
+  const carrossel = false;
   const soImagens = formato === 'aneis'; // so os aneis ficam so imagem
   const H = formato === 'aneis' ? 1080 : (formato === 'infografico' || carrossel) ? 1350 : 1920;
 
@@ -115,7 +117,7 @@ async function main() {
       try {
         const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
@@ -156,7 +158,7 @@ async function main() {
       } catch (e) { console.log(`[info feed] ${e.message}`); }
 
       // (b) MP4 9:16 animado (camada a camada). Mais longo = tempo de leitura.
-      const FPS = 25, DUR = 14, N = FPS * DUR;
+      const FPS = 25, DUR = 19, N = FPS * DUR;
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
@@ -180,7 +182,7 @@ async function main() {
       try {
         const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
@@ -234,13 +236,76 @@ async function main() {
         else console.log(`[audio] ${ar.status} ${aUrl}`);
       } catch (e) { console.log(`[audio] erro ${e.message}`); }
 
+      // 3b. CAPA ANIMADA (loja): o slide 0 (o gancho) revela-se com movimento —
+      // o topo floresce e a frase escreve-se palavra a palavra — capturado frame
+      // a frame conduzindo __setKProg (como os reels cinéticos). Entra no
+      // slideshow no lugar do slide 0 estático. Se falhar, cai no render de
+      // sempre (capaFramesDir = null).
+      let capaFramesDir = null;
+      const capaFps = 30, capaN = Math.round(capaFps * 4.6);
+      if (slides.length >= 2 && slides[0]?.tipo === 'capa') {
+        try {
+          capaFramesDir = path.join(diaDir, 'capa');
+          fs.mkdirSync(capaFramesDir, { recursive: true });
+          const cp = await browser.newPage();
+          await cp.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
+          await cp.goto(`${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0`, { waitUntil: 'networkidle0', timeout: 60000 });
+          await cp.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+          for (let i = 0; i < capaN; i++) {
+            const prog = Math.min(1, (i / (capaN - 1)) / 0.72); // escreve-se até 72%, segura cheio no fim
+            await cp.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
+            await new Promise((r) => setTimeout(r, 30));
+            await cp.screenshot({ path: path.join(capaFramesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
+          }
+          await cp.close();
+          // monta os frames num clip de VÍDEO real (30fps). Um input de vídeo
+          // encaixa no xfade do slideshow; o input image2 (frames soltos) dava
+          // "Failed to configure output pad on xfade / Invalid argument" e caía
+          // no fallback estático (por isso a capa saía parada).
+          execSync(`ffmpeg -y -framerate ${capaFps} -i capa/f%04d.png -c:v libx264 -r ${capaFps} -pix_fmt yuv420p capa.mp4`, { cwd: diaDir, stdio: 'inherit' });
+          console.log(`[capa-motion] dia ${d.dia}: ${capaN} frames -> capa.mp4`);
+        } catch (e) { console.log(`[capa-motion] falhou dia ${d.dia}: ${e.message}`); capaFramesDir = null; }
+      }
+
       // 4. video ANIMADO: cada slide com Ken Burns (zoom lento) + fundido entre
       // slides, para Cá em Casa e I am a Hero terem movimento (como os outros).
       try {
         const FPS = 30, D = 0.8; // FPS e duração do fundido (s)
         // sobe a imagem (1.5x) e faz zoom lento dentro dela => movimento suave, sem perder nitidez
-        const kb = (i) => `[${i}:v]scale=1620:2880:force_original_aspect_ratio=increase,crop=1620:2880,zoompan=z='min(zoom+0.0004,1.10)':d=${Math.round(SEG * FPS)}:s=1080x1920:fps=${FPS},setsar=1,format=yuv420p[v${i}]`;
-        if (slides.length >= 2) {
+        const kb = (i, inIdx = i) => `[${inIdx}:v]scale=1620:2880:force_original_aspect_ratio=increase,crop=1620:2880,zoompan=z='min(zoom+0.0004,1.10)':d=${Math.round(SEG * FPS)}:s=1080x1920:fps=${FPS},setsar=1,format=yuv420p[v${i}]`;
+
+        // monta o slideshow. Com animCapa, o slide 0 entra como CLIP ANIMADO
+        // (frames da capa, o gancho a escrever-se) em vez de imagem estática.
+        const buildSlideshow = (animCapa) => {
+          if (slides.length < 2) {
+            // 1 slide: só o zoom lento
+            const audioIn = temAudio ? ' -i audio.mp3' : '';
+            const maps = temAudio ? '-map "[vout]" -map 1:a -c:a aac -b:a 160k -shortest' : '-map "[vout]"';
+            execSync(`ffmpeg -y -loop 1 -t ${SEG} -i s0.png${audioIn} -filter_complex "${kb(0).replace('[v0]', '[vout]')}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+            return;
+          }
+          if (animCapa) {
+            const capaSeg = capaN / capaFps;
+            // input 0 = capa.mp4 (clip de vídeo real, 30fps; o movimento É o
+            // reveal, sem zoompan); inputs 1..n = imagens dos slides com Ken Burns.
+            const ins = `-i capa.mp4 ` + slides.slice(1).map((_, i) => `-loop 1 -t ${SEG} -i s${i + 1}.png`).join(' ');
+            let fc = `[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=${FPS},format=yuv420p[v0]`;
+            for (let i = 1; i < slides.length; i++) fc += `;${kb(i, i)}`;
+            let last = 'v0';
+            for (let i = 1; i < slides.length; i++) {
+              const off = (capaSeg - D + (i - 1) * (SEG - D)).toFixed(3);
+              const out = i === slides.length - 1 ? 'vout' : `x${i}`;
+              fc += `;[${last}][v${i}]xfade=transition=fade:duration=${D}:offset=${off}[${out}]`;
+              last = out;
+            }
+            const nImg = slides.length - 1;
+            const totalDur = (capaSeg + nImg * SEG - nImg * D).toFixed(3);
+            const audioIn = temAudio ? ' -i audio.mp3' : '';
+            const maps = temAudio ? `-map "[vout]" -map ${slides.length}:a -c:a aac -b:a 160k -t ${totalDur}` : '-map "[vout]"';
+            execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+            return;
+          }
+          // estático (de sempre): todas as imagens com Ken Burns + fundido
           const ins = slides.map((_, i) => `-loop 1 -t ${SEG} -i s${i}.png`).join(' ');
           let fc = slides.map((_, i) => kb(i)).join(';');
           let last = 'v0';
@@ -253,13 +318,17 @@ async function main() {
           const totalDur = (slides.length * SEG - (slides.length - 1) * D).toFixed(3);
           const audioIn = temAudio ? ' -i audio.mp3' : '';
           const maps = temAudio ? `-map "[vout]" -map ${slides.length}:a -c:a aac -b:a 160k -t ${totalDur}` : '-map "[vout]"';
-          execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
-        } else {
-          // 1 slide: só o zoom lento
-          const audioIn = temAudio ? ' -i audio.mp3' : '';
-          const maps = temAudio ? '-map "[vout]" -map 1:a -c:a aac -b:a 160k -shortest' : '-map "[vout]"';
-          execSync(`ffmpeg -y -loop 1 -t ${SEG} -i s0.png${audioIn} -filter_complex "${kb(0).replace('[v0]', '[vout]')}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+          execSync(`ffmpeg -y ${ins}${audioIn} -filter_complex "${fc}" ${maps} -c:v libx264 -r ${FPS} -pix_fmt yuv420p -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        };
+
+        try {
+          buildSlideshow(!!capaFramesDir);
+        } catch (e) {
+          // se a capa animada falhar no ffmpeg, cai no render de sempre (estático)
+          if (capaFramesDir) { console.log(`[capa-motion mp4] falhou, fallback estático: ${e.message}`); buildSlideshow(false); }
+          else throw e;
         }
+
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);

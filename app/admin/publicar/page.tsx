@@ -23,8 +23,8 @@ type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: st
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
-const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
-const CARROSSEL = ['sinais', 'ninguem', 'pensador'];
+const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
+const CARROSSEL: string[] = []; // já não há carrossel de imagens (sinais/ninguem/pensador passaram a reels MP4)
 // melhor hora por formato (best-times editoriais; trocar pelas reais do IG com +100 seguidores)
 const HORA_FMT: Record<string, string> = { kinetico: '13:00', domingo: '11:00', sinais: '13:00', ninguem: '13:00', pensador: '20:00', banda: '13:00', heroi: '13:00', infografico: '11:00', aneis: '13:00', reel: '13:00' };
 

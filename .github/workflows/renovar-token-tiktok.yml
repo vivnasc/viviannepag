@@ -1,0 +1,17 @@
+name: Renovar token TikTok
+
+# O access_token do TikTok dura só 24h. Isto renova-o (e ao refresh_token, que
+# dura 365 dias) todos os dias às 04:00 UTC. Assim a Vivianne nunca tem de voltar
+# a ligar as contas à mão.
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar endpoint de renovação
+        run: |
+          curl -fsS "https://viviannedossantos.com/api/cron/renovar-token-tiktok?secret=${{ secrets.CRON_SECRET }}"

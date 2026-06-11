@@ -152,7 +152,14 @@ export default function PlanoSemanaPage() {
     setRascunhando(true); setErro(null); setMsg(null);
     try {
       const r = await fetch('/api/admin/agenda/rascunho-semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tema: t, subtitulo: cursoAtual.descricao, curso, arenas }) });
-      const j = await r.json();
+      // a resposta pode não ser JSON (ex.: timeout do servidor devolve texto "An error...");
+      // lê em texto e só depois tenta parsear, para mostrar um erro legível em vez de rebentar.
+      const raw = await r.text();
+      let j: { erro?: string; detalhe?: string; plano?: Dia[] } = {};
+      try { j = raw ? JSON.parse(raw) : {}; } catch {
+        setErro(r.ok ? 'O servidor devolveu algo inesperado. Tenta rascunhar de novo.' : `O pedido falhou ou demorou demais (${r.status}). Tenta de novo daqui a pouco.`);
+        return;
+      }
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
       setPlano(j.plano ?? []); setCriados({}); guardar({ plano: j.plano ?? [], criados: {} });
       setMsg('Rascunho pronto. Lê, ajusta o que quiseres, e depois cria cada post.');

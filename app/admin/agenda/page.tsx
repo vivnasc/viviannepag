@@ -8,6 +8,7 @@ import { PostSlide, type PostSlideT } from '@/components/admin/PostSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
 import { getCurso } from '@/lib/infografico/cursos';
+import { contaDe } from '@/lib/instagram/contas';
 
 // orquestração "gerar a semana toda": cada dia → o seu gerador
 const ROTA_GEN: Record<string, string> = { kinetico: '/api/admin/reels/gerar', reel: '/api/admin/reels/gerar', banda: '/api/admin/banda/gerar', heroi: '/api/admin/heroi/gerar', infografico: '/api/admin/infografico/gerar' };
@@ -22,7 +23,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 
 type Slide = PostSlideT & { imageUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string };
-type Theme = { formato?: string; subtipo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string };
+type Theme = { formato?: string; subtipo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; marca?: string; universo?: string; curso?: string };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 const FMT: Record<string, { emoji: string; label: string; href: string }> = {
@@ -46,8 +47,8 @@ const capaDe = (it: Item) => (it.dias?.[0]?.slides ?? []).find((s) => s.imageUrl
 const SUG: Record<number, string> = { 1: '✨ Frase com motion', 2: '🔎 Sinais de que…', 3: '💡 O que ninguém · 🕯️ Uma ideia de…', 4: '🎭 Cá em Casa', 5: '🌅 I am a Hero', 6: '📊 Infográfico', 0: '🕊️ Domingo de Luz' };
 // formato(s) planeado(s) de cada dia. Quarta (3) leva 2 (dia de maior audiência).
 const DIA_FORMATO: Record<number, string[]> = { 1: ['kinetico'], 2: ['sinais'], 3: ['ninguem', 'pensador'], 4: ['banda'], 5: ['heroi'], 6: ['infografico'], 0: ['domingo'] };
-// formatos que SÃO vídeo (precisam de render MP4); os outros são carrossel/imagem
-const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico'];
+// formatos que SÃO vídeo (precisam de render MP4); já não há carrossel de imagens na veu.a.veu
+const VIDEO_FORMATOS = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const HORA = '13:00';
@@ -83,7 +84,9 @@ export default function AgendaPage() {
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list');
-    if (r.ok) setItens((await r.json()).contos ?? []);
+    // A Agenda é SÓ da veu.a.veu: NUNCA mostrar conteúdo da loja nem de outras
+    // contas (importadas por CSV). Filtra pela conta detetada (theme + slug).
+    if (r.ok) setItens((((await r.json()).contos ?? []) as Item[]).filter((it) => contaDe(it.theme, it.slug) === 'veuaveu'));
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
   useEffect(() => { fetch('/api/admin/reels/capa-serie').then((r) => r.ok ? r.json() : { capas: {} }).then((j) => setCapasSerie(j.capas ?? {})).catch(() => {}); }, []);
@@ -120,7 +123,7 @@ export default function AgendaPage() {
   // aplica a capa-assinatura + selo/paleta da série ao 1.º slide, como na biblioteca
   // (resolve à hora de mostrar: posts antigos também ganham capa e cabeçalho)
   const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
-  const CARROSSEL_FORMATOS = ['sinais', 'ninguem', 'pensador']; // saem 4:5 (carrossel de feed), não 9:16
+  const CARROSSEL_FORMATOS: string[] = []; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não saem 4:5
   const slidesComCapa = (it: Item): Slide[] => {
     const sub = it.theme?.subtipo ?? '';
     const capa = capasSerie[sub];
@@ -205,6 +208,24 @@ export default function AgendaPage() {
     }
     setRenderizando(false);
     setRenderMsg(`${ok} render(s) MP4 disparado(s) (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para os veres.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
+  }
+  // ── RE-renderizar a semana TODA, À FORÇA (mesmo os MP4 que já estão prontos).
+  // Útil para refazer todos os vídeos da semana de uma vez (ex.: aplicar uma
+  // melhoria do render sem ter de carregar post a post). ──
+  const videoSemana = semana.filter((e) => VIDEO_FORMATOS.includes(tipoChave(e.it)));
+  async function reRenderSemana() {
+    if (!videoSemana.length) { setRenderMsg('Não há vídeos nesta semana para renderizar.'); return; }
+    if (!window.confirm(`Re-renderizar à força os ${videoSemana.length} MP4 desta semana (mesmo os já prontos)? Cada um leva ~10 min no GitHub Actions.`)) return;
+    setRenderizando(true); setRenderMsg(null);
+    let ok = 0; const erros: string[] = [];
+    for (const e of videoSemana) {
+      try {
+        const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: e.it.slug }) });
+        if (r.ok) ok++; else { const j = await r.json().catch(() => ({})); erros.push(`${e.diaPt}: ${j.erro ?? r.status}`); }
+      } catch (err) { erros.push(`${e.diaPt}: ${String(err)}`); }
+    }
+    setRenderizando(false);
+    setRenderMsg(`${ok} render(s) re-disparado(s) à força (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para veres os MP4 novos.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
   }
   // (re)renderizar o MP4 de UM post (útil para refazer um já renderizado com a animação nova)
   async function reRender(it: Item) {
@@ -351,6 +372,7 @@ export default function AgendaPage() {
         <div className="mb-6 flex flex-wrap items-center gap-3">
           <button onClick={() => { if (semana.length) { setZipMsg(null); setBaixando(true); } }} disabled={baixando || semana.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{baixando ? 'a preparar o ZIP…' : `⬇ baixar a semana (ZIP) · ${semana.length} post(s)`}</button>
           <button onClick={renderMp4Semana} disabled={renderizando || mp4Pendentes.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{renderizando ? 'a disparar…' : `🎬 renderizar MP4s da semana · ${mp4Pendentes.length} em falta`}</button>
+          <button onClick={reRenderSemana} disabled={renderizando || videoSemana.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderizando ? 'a disparar…' : `↻ re-renderizar a semana toda · ${videoSemana.length} MP4`}</button>
           <span className="text-[0.68rem] opacity-50 w-full">ZIP: imagens (PNG) + legenda.txt (+ MP4 quando já existe), uma pasta por dia. O botão dos MP4s dispara o render dos vídeos em falta (Cá em Casa, I am a Hero, Infográfico, Domingo, Frase com motion) ~10 min cada.</span>
           {mp4Pendentes.length > 0 && <span className="text-[0.66rem] opacity-60 w-full">Em falta ({mp4Pendentes.length}): {mp4Pendentes.map((e) => `${e.diaPt} ${FMT[tipoChave(e.it)]?.label ?? ''}`).join(' · ')}. Os carrosséis (Sinais, O que ninguém, Uma ideia) não têm MP4. Se faltar algum dia, é porque ainda não geraste/agendaste esse post.</span>}
           {zipMsg && <span className="text-[0.72rem] text-salvia w-full">{zipMsg}</span>}

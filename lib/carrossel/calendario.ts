@@ -48,6 +48,16 @@ export function dataInicioSemana(semana: number, ano: number): string {
   return ini.toISOString().slice(0, 10);
 }
 
+// Numero da semana EM CURSO (1..52) para uma data — ancorada na mesma
+// primeira-segunda que as restantes datas, por isso casa com intervaloDatas().
+export function semanaAtual(ano: number, hoje: Date = new Date()): number {
+  const ini = primeiraSegunda(ano);
+  // compara a meia-noite UTC do dia de hoje (componentes locais) com a ancora
+  const h = Date.UTC(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  const semanas = Math.floor((h - ini.getTime()) / (7 * 24 * 3600 * 1000)) + 1;
+  return Math.min(52, Math.max(1, semanas));
+}
+
 function mesDaSemana(semana: number): string {
   return MESES[Math.min(11, Math.floor((semana - 1) / (52 / 12)))];
 }
