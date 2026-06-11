@@ -59,8 +59,13 @@ function legendaDe(d?: Dia): string {
 }
 
 export async function GET(req: NextRequest) {
+  // Aceita os dois disparadores: o ?secret= (cron do GitHub, reserva) e o
+  // header Authorization: Bearer CRON_SECRET (Vercel Cron envia-o quando existe
+  // a env CRON_SECRET). O Vercel Cron bate na app por dentro, sem o redirect.
+  const expected = process.env.CRON_SECRET;
   const secret = req.nextUrl.searchParams.get('secret');
-  if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
+  const auth = req.headers.get('authorization');
+  if (!expected || (secret !== expected && auth !== `Bearer ${expected}`)) {
     return NextResponse.json({ erro: 'auth' }, { status: 401 });
   }
   // credenciais por conta (em cache nesta execução)
