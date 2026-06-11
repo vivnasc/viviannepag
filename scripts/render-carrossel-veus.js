@@ -47,8 +47,10 @@ async function main() {
   const formato = col.theme?.formato;
   const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo'); // frase com motion / Domingo de Luz (animados)
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
-  // carrossel de imagens (sinais, o que ninguem, uma ideia): so PNGs 4:5, sem MP4
-  const carrossel = formato === 'reel' && ['sinais', 'ninguem', 'pensador'].includes(col.theme?.subtipo);
+  // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
+  // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
+  // carrossel de imagens nesta conta (o carrossel quase nao gera alcance).
+  const carrossel = false;
   const soImagens = formato === 'aneis'; // so os aneis ficam so imagem
   const H = formato === 'aneis' ? 1080 : (formato === 'infografico' || carrossel) ? 1350 : 1920;
 
