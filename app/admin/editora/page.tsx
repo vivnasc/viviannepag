@@ -22,6 +22,12 @@ export default function EditoraAdmin() {
       <header className="mb-10">
         <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre mb-2">admin</p>
         <h1 className="font-serif font-light text-creme text-3xl">editora</h1>
+        <nav className="flex gap-5 mt-4 text-[0.85rem]">
+          <span className="text-ambar border-b border-ambar/60 pb-1">ebooks</span>
+          <Link href="/admin/editora/romances" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
+            romances
+          </Link>
+        </nav>
         <p className="text-creme-2/60 text-[0.85rem] mt-3 font-serif italic">
           {livros.length} livros · {totalPalavras.toLocaleString('pt-PT')} palavras · tudo publicado — marca o que já leste
         </p>
