@@ -92,4 +92,3 @@ Quando ele saiu, já com a luz a fugir dos campos, Amparo ficou à janela a vê-
 
 Mas tinham dado por elas. E em Véspera sabe-se, melhor do que em qualquer outro lugar, como começam as cheias: longe, num riacho pequeno, com um som que ainda ninguém ouve. Depois não há volta a dar-lhes.
 
-═══════════════════════════════════════
