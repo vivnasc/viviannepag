@@ -18,7 +18,7 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const SLUG = process.env.SLUG;
 const DIAS_FILTER = (process.env.DIAS_FILTER || '').split(',').map((s) => s.trim()).filter(Boolean);
 const BUCKET = 'viviannepag-assets';
-const SEG = 3.5; // segundos por slide
+const SEG = 5.5; // segundos por slide (tempo de leitura; 3.5 era rapido demais nos reels de varios slides)
 const AUDIO_BASE = 'https://tdytdamtfillqyklgrmb.supabase.co/storage/v1/object/public/audios/albums/ancient-ground';
 const NUM_FAIXAS = 100;
 
