@@ -15,7 +15,7 @@ const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string }) {
+export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, conceito }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; conceito?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   const pal = PALETAS[mundo];
   const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque;
@@ -63,13 +63,14 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 40% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 56%, transparent 76%)', zIndex: 1 }} />
         </>)}
 
-        {/* cabeçalho/selo da série (como as outras coleções) */}
-        <div style={{ position: 'absolute', top: 110, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 3 }}>
+        {/* cabeçalho/selo da série (como as outras coleções) + selo do conceito */}
+        <div style={{ position: 'absolute', top: 110, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '11px 26px', borderRadius: 999, border: `1px solid ${a('#F4ECDD', '3d')}`, background: 'rgba(18,16,22,0.32)' }}>
             <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
             <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.36em', textTransform: 'uppercase', color: '#F8F1E8' }}>{serie}</span>
             <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
           </div>
+          {conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.82, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
         </div>
 
         {/* frase */}

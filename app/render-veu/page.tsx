@@ -83,7 +83,7 @@ export default function RenderVeuPage() {
   const ehKinetic = tipoSlide === 'kinetico';
   const ehCarrosselReel = ehReel && ['sinais', 'ninguem', 'pensador'].includes(subtipo); // carrossel 4:5 (PNG), não 9:16
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[] }) | undefined;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
@@ -99,6 +99,7 @@ export default function RenderVeuPage() {
           imageUrl={s.imageUrl}
           prog={video ? prog : 1}
           ratio={video ? '9:16' : '4:5'}
+          conceito={s.conceito}
         />
       )}
       {estado && ehReel && s && (
@@ -110,6 +111,7 @@ export default function RenderVeuPage() {
           total={estado.dia.slides?.length ?? 1}
           capa={!!s.capa}
           ratio={ehCarrosselReel ? '4:5' : '9:16'}
+          conceito={s.conceito}
         />
       )}
       {estado && ehBanda && s && (
@@ -119,6 +121,7 @@ export default function RenderVeuPage() {
           numero={estado.idx + 1}
           total={estado.dia.slides?.length ?? 1}
           capa={!!s.capa}
+          conceito={s.conceito}
         />
       )}
       {estado && ehKinetic && s && (
@@ -129,6 +132,7 @@ export default function RenderVeuPage() {
           mundo={estado.dia.mundo}
           prog={prog}
           variante={s.variante}
+          conceito={s.conceito}
         />
       )}
       {estado && !ehInfo && !ehAnel && !ehReel && !ehBanda && !ehKinetic && (

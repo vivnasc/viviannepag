@@ -45,9 +45,10 @@ export async function POST(req: Request) {
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
   if (!replicateToken) return NextResponse.json({ erro: 'sem-replicate-token' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; estilo?: string; slug?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; estilo?: string; slug?: string; conceito?: string };
   const tema = body.tema?.trim();
   const estilo = body.estilo || ESTILO_DEFAULT;
+  const conceito = body.conceito?.trim() || undefined; // selo do conceito da semana (capa)
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
   // 1) Claude escreve o carrossel (gancho + prompt de imagem + ensino + licao)
@@ -88,7 +89,7 @@ export async function POST(req: Request) {
   }
 
   const slides = [
-    { tipo: 'banda', imageUrl, gancho, imagePrompt, capa: true },
+    { tipo: 'banda', imageUrl, gancho, imagePrompt, capa: true, conceito },
     ...ensino.map((t) => ({ tipo: 'banda', texto: t, capa: false })),
     { tipo: 'banda', licao: (p.licao ?? '').trim(), capa: false },
   ];

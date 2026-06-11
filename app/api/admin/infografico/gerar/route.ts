@@ -16,10 +16,11 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tema?: string; curso?: string; slug?: string };
+  const body = (await req.json().catch(() => ({}))) as { tema?: string; curso?: string; slug?: string; conceito?: string };
   const tema = body.tema?.trim();
   const curso = getCurso(body.curso ?? 'transpessoal');
   const mundo = curso.mundo;
+  const conceito = body.conceito?.trim() || undefined; // selo do conceito da semana
   if (!tema) return NextResponse.json({ erro: 'falta tema' }, { status: 400 });
 
   const SYSTEM = `És a Vivianne dos Santos (psicologia transpessoal, constelação familiar; pós-graduada). Crias UM INFOGRÁFICO DIDÁTICO que EXPLICA um conceito de forma clara e educativa, para ENSINAR, nunca para vender. Contexto académico: "${curso.nome}" (${curso.descricao}). Sem jargão (ou explica-o em palavras simples).
@@ -98,6 +99,7 @@ ${REGRA_ACENTOS}`;
     legenda: p.legenda ?? '',
     hashtags: Array.isArray(p.hashtags) ? p.hashtags : [],
     imageUrl,
+    conceito,
   };
   const dias = [{ dia: 1, mundo, palavra: p.padrao ?? tema, slides: [slide] }];
 
