@@ -1,7 +1,7 @@
 # AS MÃOS DE AMPARO · capítulo zero (para a Vivianne VER o tom)
 ## Estante I da biblioteca de Véspera · espelho de "A mãe que salva" · verbo: sustentar (sem substituir)
 ## Página dos Assentos + primeira cena, nas duas línguas. Nada disto é definitivo: é a prova de tom.
-## Cumpre: pt-PT pós-AO90 · travessão só no diálogo · mundo neutro · leis de Véspera.
+## Cumpre: pt-PT pós-AO90 · léxico pan-lusófono (sem regionalismos de Portugal) · travessão só no diálogo · mundo neutro · leis de Véspera.
 ## Autoria: Vivianne dos Santos
 
 ═══════════════════════════════════════
@@ -23,7 +23,7 @@ Os assentos dizem quem nasceu, quem casou, quem partiu. Não dizem quem carrega 
 
 As mãos de Amparo acordavam antes dela.
 
-Era assim desde sempre, ou desde um sempre tão antigo que já não tinha princípio. Abria os olhos no escuro e as mãos já iam a meio do dia: já tinham acendido o lume, já tinham posto a água ao calor, já sabiam, antes de ela saber, o que era preciso fazer e por quem. Amparo seguia atrás delas como quem segue atrás de duas cadelas de gado, confiada, sem perguntar para onde.
+Era assim desde sempre, ou desde um sempre tão antigo que já não tinha princípio. Abria os olhos no escuro e as mãos já iam a meio do dia: já tinham acendido o fogo, já tinham posto a água a aquecer, já sabiam, antes de ela saber, o que era preciso fazer e por quem. Amparo seguia atrás delas como quem segue dois cães fiéis, confiada, sem perguntar o caminho.
 
 Naquela manhã, as mãos sabiam que era dia de Mercearia.
 
@@ -41,13 +41,13 @@ Não era preciso mais. Benvinda foi buscar o caderno das dívidas debaixo do bal
 
 Benvinda não pegou logo no dinheiro. Ficou a olhar para ele com um cansaço antigo, que não era daquela manhã.
 
-— Eu risco, Amparo. Riscar, eu risco. — E baixou a voz, embora não houvesse mais ninguém na loja. — Mas repara numa coisa, que eu nunca ta disse. Há vinte anos que este caderno tem a letra do teu filho e o dinheiro da tua mão. Quem deve nunca soube o que custa. E quem paga nunca deveu nada.
+— Eu risco, Amparo. Riscar, eu risco. — E baixou a voz, embora não houvesse mais ninguém na loja. — Mas repara numa coisa, que eu nunca te disse. Há vinte anos que este caderno tem a letra do teu filho e o dinheiro da tua mão. Quem deve nunca soube o que custa. E quem paga nunca deveu nada.
 
 — Risca — repetiu Amparo, sem dureza. — O resto não é teu nem meu.
 
 Benvinda riscou. Riscou devagar, linha a linha, como ela própria nunca riscara dívida nenhuma a ninguém, e ficou ainda de lápis no ar quando Amparo já ia na porta. Da rua, Amparo ouviu-a dizer qualquer coisa que tanto podia ser adeus como mulher, mulher. Não voltou atrás para tirar a dúvida.
 
-Em casa, fez o que fazia. Abriu as janelas ao nascente, deu de comer às galinhas, pôs o caldo a puxar. A meio da manhã, as mãos foram sozinhas à prateleira alta da despensa, à lata da farinha que não tinha farinha. Era ali que vivia o outro dinheiro, o de reserva, o de Deus nos livre. Contaram-no em cima da mesa, alisaram as notas, separaram o que chegava para uma renda. Amparo deu por si já com o envelope feito, e havia de jurar que não tinha decidido fazê-lo. Não tinha sabido de nada. Mas as mãos sabiam. As mãos sabiam sempre primeiro, e o que elas sabiam naquela manhã era isto: o Salvo vinha aí. Ninguém lho tinha dito. Não era preciso. Há trinta anos que Amparo sentia as quedas do filho antes de o filho cair, como as velhas da serra sentem a chuva nos joelhos.
+Em casa, fez o que fazia. Abriu as janelas ao nascente, deu de comer às galinhas, pôs a sopa ao fogo. A meio da manhã, as mãos foram sozinhas à prateleira alta da despensa, à lata da farinha que não tinha farinha. Era ali que vivia o outro dinheiro, o de reserva, o de Deus nos livre. Contaram-no em cima da mesa, alisaram as notas, separaram o que chegava para uma renda. Amparo deu por si já com o envelope feito, e havia de jurar que não tinha decidido fazê-lo. Não tinha sabido de nada. Mas as mãos sabiam. As mãos sabiam sempre primeiro, e o que elas sabiam naquela manhã era isto: o Salvo vinha aí. Ninguém lho tinha dito. Não era preciso. Há trinta anos que Amparo sentia as quedas do filho antes de o filho cair, como as velhas da serra sentem a chuva nos joelhos.
 
 O telefone tocou ao meio-dia. Era Vera.
 
@@ -73,23 +73,23 @@ Vera calou-se um momento.
 
 — Faz — disse por fim, cansada. — Faz falta a quem o respira, mãe. Tu é que já não respiras há muito tempo. Dá-lhe um beijo meu.
 
-Salvo chegou a meio da tarde, com a luz já de viés nos campos. Amparo ouviu o portão e não foi à porta: ficou na cozinha, de propósito, com as mãos atadas uma na outra debaixo do avental, para as ensinar a esperar. Ele entrou como entrava sempre, num arrastado de quem pede desculpa ao chão, e sentou-se ao canto da mesa, no lugar que era dele desde criança.
+Salvo chegou a meio da tarde, com a luz já baixa nos campos. Amparo ouviu o portão e não foi à porta: ficou na cozinha, de propósito, com as mãos atadas uma na outra debaixo do avental, para as ensinar a esperar. Ele entrou como entrava sempre, num arrastado de quem pede desculpa ao chão, e sentou-se ao canto da mesa, no lugar que era dele desde criança.
 
-Estava bem, à primeira vista. Era isso que ninguém de fora entendia: o Salvo estava sempre bem à primeira vista. Tinha o riso fácil do pai e os olhos dela, e uma maneira de contar as desgraças em que as desgraças pareciam anedotas, ao menos durante o tempo de as contar.
+Estava bem, à primeira vista. Era isso que ninguém de fora entendia: o Salvo estava sempre bem à primeira vista. Tinha o riso fácil do pai e os olhos dela, e uma maneira de contar as desgraças em que as desgraças pareciam piadas, ao menos durante o tempo de as contar.
 
-— A obra parou, mãe — disse. — Não é nada, é o costume. O empreiteiro meteu-se em sarilhos com os de fora, aquilo agora ou paga o material ou paga a gente, enfim. Não é nada meu, desta vez. Eu até estava a render bem. Pergunte ali ao Ti Justo, que ele viu-me lá em cima…
+— A obra parou, mãe — disse. — Não é nada, é o costume. O empreiteiro meteu-se em problemas com os de fora, aquilo agora ou paga o material ou paga a gente, enfim. Não é nada meu, desta vez. Eu até estava a render bem. Pergunte ao velho Justo, que ele viu-me lá em cima…
 
-E falou, falou. Amparo aqueceu-lhe o caldo, cortou-lhe pão, pôs-lhe o prato à frente, e tudo isto as mãos fizeram por ela enquanto ela ouvia, porque era isso que as mãos sabiam fazer com a aflição: dar-lhe de comer. Ele comeu como comia em pequeno, depressa e agradecido, a falar de través, e a certa altura, sem mudar de tom, no meio de uma frase sobre o empreiteiro, deixou cair:
+E falou, falou. Amparo aqueceu-lhe a sopa, cortou-lhe pão, pôs-lhe o prato à frente, e tudo isto as mãos fizeram por ela enquanto ela ouvia, porque era isso que as mãos sabiam fazer com a aflição: dar-lhe de comer. Ele comeu como comia em pequeno, depressa e agradecido, a falar com os olhos no prato, e a certa altura, sem mudar de tom, no meio de uma frase sobre o empreiteiro, deixou cair:
 
-— …e depois há a renda, claro, que era para ser desta quinzena, mas pronto, isso agora logo se vê…
+— …e depois há a renda, claro, que era para ser paga esta semana, mas pronto, isso agora logo se vê…
 
 Não pediu. O Salvo nunca pedia. Tinha um jeito de pousar as faltas em cima da mesa, ao alcance das mãos dela, e as mãos dela faziam o resto. Era um entendimento tão velho e tão certo que já nem precisava de palavras: ele trazia a queda, ela trazia o chão.
 
 E as mãos de Amparo, debaixo do avental, moveram-se.
 
-Foi nesse movimento, nesse meio movimento na direção do envelope que estava ali mesmo, na ponta do aparador, que aconteceu a coisa pequena de que tudo o resto haveria de vir. Amparo viu-se. Não soube explicar de outra maneira, nem nessa tarde nem depois: viu-se, como se estivesse de pé ao canto da cozinha a olhar para uma mulher sentada, uma mulher de mãos a caminho, e ao mesmo tempo, sobreposta a essa, viu outra cozinha igual àquela, e outra mulher, a mãe dela, a ir ao bolso do avental enquanto o Amadeu, ao canto da mesa, no mesmo canto, contava de través a desgraça que não era culpa dele, daquela vez também não. A vila inteira dizia que a mãe era uma santa. Diziam-no no adro, à saída, com aquele respeito que se tem pelas mulheres que se gastam. Uma santa. E o Amadeu foi ficando, foi ficando, foi ficando, e do irmão mais velho de Amparo a vila acabou por dizer apenas, e cada vez mais baixo, que nunca tivera sorte.
+Foi nesse movimento, nesse meio movimento na direção do envelope que estava ali mesmo, na ponta do armário, que aconteceu a coisa pequena de que tudo o resto haveria de vir. Amparo viu-se. Não soube explicar de outra maneira, nem nessa tarde nem depois: viu-se, como se estivesse de pé ao canto da cozinha a olhar para uma mulher sentada, uma mulher de mãos a caminho, e ao mesmo tempo, sobreposta a essa, viu outra cozinha igual àquela, e outra mulher, a mãe dela, a ir ao bolso do avental enquanto o Amadeu, ao canto da mesa, no mesmo canto, contava com os olhos no chão a desgraça que não era culpa dele, daquela vez também não. A vila inteira dizia que a mãe era uma santa. Diziam-no no largo, à saída, com aquele respeito que se tem pelas mulheres que se gastam. Uma santa. E o Amadeu foi ficando, foi ficando, foi ficando, e do irmão mais velho de Amparo a vila acabou por dizer apenas, e cada vez mais baixo, que nunca tivera sorte.
 
-A mãe morreu primeiro. Foi-se ainda o Amadeu lá estava, no canto da mesa.
+A mãe morreu primeiro. Morreu com o Amadeu ainda ali, no canto da mesa.
 
 As mãos de Amparo pararam debaixo do avental.
 
@@ -111,7 +111,7 @@ O Salvo olhou para a mãe. Abriu a boca para responder o costume, e viu-se que n
 
 Quando ele saiu, já com a luz a fugir dos campos, Amparo ficou à janela a vê-lo descer o caminho, como sempre ficava. Depois sentou-se à mesa, no lugar dele, coisa que nunca fazia, e pousou as mãos abertas na madeira, viradas para cima, à maneira de quem pede ou de quem mostra. Olhou-as muito tempo. As suas mãos de apanhar, de pagar, de aparar quedas. Ainda não sabiam estar quietas, e haviam de mover-se muitas vezes ainda, e mal, e cedo demais, antes de aprenderem.
 
-Mas tinham dado por elas. E em Véspera sabe-se, melhor do que em qualquer outro lugar, como começam as cheias: longe, num ribeiro pequeno, com um som que ainda ninguém ouve. Depois não há volta a dar-lhes.
+Mas tinham dado por elas. E em Véspera sabe-se, melhor do que em qualquer outro lugar, como começam as cheias: longe, num riacho pequeno, com um som que ainda ninguém ouve. Depois não há volta a dar-lhes.
 
 ═══════════════════════════════════════
 # ENGLISH VERSION
