@@ -120,7 +120,7 @@ export default function AgendaPage() {
   // aplica a capa-assinatura + selo/paleta da série ao 1.º slide, como na biblioteca
   // (resolve à hora de mostrar: posts antigos também ganham capa e cabeçalho)
   const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador'];
-  const CARROSSEL_FORMATOS = ['sinais', 'ninguem', 'pensador']; // saem 4:5 (carrossel de feed), não 9:16
+  const CARROSSEL_FORMATOS: string[] = []; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não saem 4:5
   const slidesComCapa = (it: Item): Slide[] => {
     const sub = it.theme?.subtipo ?? '';
     const capa = capasSerie[sub];
