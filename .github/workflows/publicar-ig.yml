@@ -14,4 +14,7 @@ jobs:
     steps:
       - name: Disparar publicação dos posts cuja hora chegou
         run: |
-          curl -fsS "https://viviannedossantos.com/api/cron/publicar-ig?secret=${{ secrets.CRON_SECRET }}" -w '\n[http %{http_code}]\n'
+          # -L: segue o redirect de domínio (apex -> www). Sem isto o curl
+          # recebia 307 e PARAVA, e a publicação automática nunca corria.
+          # O ?secret= viaja no redirect canónico (path+query preservados).
+          curl -fsSL --max-redirs 5 "https://viviannedossantos.com/api/cron/publicar-ig?secret=${{ secrets.CRON_SECRET }}" -w '\n[http %{http_code}]\n'
