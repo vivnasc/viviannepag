@@ -163,6 +163,22 @@ export default function PublicarPage() {
     setMsg(`✓ ${alvo.length} post(s) aprovados. Publicam-se sozinhos às horas marcadas.`);
   }
 
+  // LIMPAR todos os agendamentos desta conta: tira-os do calendário e deixam de
+  // publicar sozinhos, mas NÃO apaga os posts (ficam nas bibliotecas). Para
+  // trocar o conteúdo. Os já publicados ficam intactos. Por conta (nunca mistura).
+  async function limparAgendamentos() {
+    if (busy) return;
+    const nome = CONTAS.find((c) => c.id === conta)?.nome ?? conta;
+    const alvo = itensConta.filter((it) => it.theme?.agendadoEm && estadoDe(it) !== 'publicado');
+    if (!alvo.length) { setMsg(`Não há agendamentos por limpar em ${nome}.`); return; }
+    if (!confirm(`Limpar ${alvo.length} agendamento(s) de ${nome}?\n\nOs posts saem do calendário e DEIXAM de publicar sozinhos, mas NÃO são apagados (ficam nas bibliotecas). Os já publicados não são tocados.\n\nContinuar?`)) return;
+    setBusy('limpar'); setMsg(null);
+    let ok = 0;
+    for (const it of alvo) { await setTheme(it.slug, { agendadoEm: null, aprovado: false }); ok++; }
+    setBusy(null);
+    setMsg(`🧹 ${ok} agendamento(s) limpos em ${nome}. Os posts ficaram por agendar — podes trocar o conteúdo.`);
+  }
+
   // molds da Loja = coleções-semana ainda SEM datas (para "colocar" numa semana)
   const moldesLoja = itens.filter((it) => contaDe(it.theme, it.slug) === 'loja' && !it.theme?.agendadoEm && !it.slug.startsWith('loja-'));
   async function colocarLoja(moldSlug: string) {
@@ -255,6 +271,7 @@ export default function PublicarPage() {
             <label className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 cursor-pointer" title={`importa um CSV do Metricool para ${conta}`}>⬆ importar CSV
               <input type="file" accept=".csv,text/csv" hidden onChange={(e) => { importarCSV(e.target.files?.[0]); e.currentTarget.value = ''; }} />
             </label>
+            <button onClick={limparAgendamentos} disabled={busy === 'limpar'} title={`tira do calendário TODOS os agendamentos desta conta (não apaga os posts) — para trocar o conteúdo`} className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-[#C97373]/45 bg-[#C97373]/10 text-[#C97373] hover:bg-[#C97373]/20 disabled:opacity-40">{busy === 'limpar' ? 'a limpar…' : '🧹 limpar agendamentos'}</button>
             {vista === 'semana' && (
               <div className="ml-auto flex items-center gap-2">
                 {conta === 'loja' && <button onClick={() => setPickerLoja(true)} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">＋ colocar carrosséis da Loja</button>}
