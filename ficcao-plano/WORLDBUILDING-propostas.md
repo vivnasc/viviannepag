@@ -2,6 +2,9 @@
 ## A biblioteca de romances do universo: o mesmo osso dos ebooks, agora em literatura.
 ## Proposta para a Vivianne aprovar ou ajustar. Nada aqui altera o que já existe.
 ## Autoria: Vivianne dos Santos
+## ESTADO: aprovada pela Vivianne (11 jun 2026) com três afinações, já incorporadas:
+## mundo neutro (país nenhum, folclore de ninguém), nomes todos fictícios e
+## pessoas de raça incógnita, e edição bilingue pt e en de raiz.
 
 ═══════════════════════════════════════
 ## 0. DE ONDE ISTO PARTE (o que a ficção herda do universo)
@@ -28,9 +31,9 @@ O ebook dá um nome à ferida. O romance dá-lhe um rosto, uma casa, uma rua, um
 ═══════════════════════════════════════
 ## 1. TRÊS PROPOSTAS DE MUNDO (escolher uma antes de tudo)
 
-### Proposta A · VÉSPERA (recomendada)
-**Uma vila portuguesa fictícia onde todas as histórias acontecem, ao longo de três gerações.**
-Realismo psicológico com um fio simbólico discreto, na linha do que a literatura portuguesa faz melhor. Cada coleção do universo corresponde a um lugar da vila. As personagens cruzam-se de livro para livro: a protagonista de um romance é vizinha, prima ou freguesa da protagonista de outro. Os romances são autónomos (cada um lê-se sozinho), mas quem lê vários vai montando o mapa da vila e a árvore das famílias, exatamente como quem compra vários ebooks vai montando o mapa do universo.
+### Proposta A · VÉSPERA (aprovada)
+**Uma vila fictícia, de língua portuguesa mas de país nenhum, onde todas as histórias acontecem, ao longo de três gerações.**
+Realismo psicológico com um fio simbólico discreto, na grande tradição do romance de vila. Cada coleção do universo corresponde a um lugar da vila. As personagens cruzam-se de livro para livro: a protagonista de um romance é vizinha, prima ou freguesa da protagonista de outro. Os romances são autónomos (cada um lê-se sozinho), mas quem lê vários vai montando o mapa da vila e a árvore das famílias, exatamente como quem compra vários ebooks vai montando o mapa do universo.
 
 Porquê esta: é a que mais serve as três lentes. A constelação É material de romance de vila: segredos de família, excluídos que voltam, destinos que rimam entre gerações, emigração, não-nascidos, lealdades invisíveis. E é a mais comercial a longo prazo: um mundo coeso cria leitores colecionadores, não compradores de um livro.
 
@@ -54,7 +57,14 @@ Força: produção leve, ponte natural com a loja. Risco: a casa-conceito é men
 ### 2.1 O nome
 **Véspera.** Uma vila do interior, entre a serra e o rio. Véspera porque tudo ali vive no dia antes: à espera do regresso de alguém, da chuva, da fábrica reabrir, da vida começar. E porque cada protagonista está, sem saber, na véspera da sua travessia.
 
-Alternativas se Véspera não assentar: **O Pouso** (do verbo central do universo, pousar) · **Fonte Funda** (a fonte e o fundo, identidade e profundidade). Decisão da Vivianne.
+O nome atravessa as duas línguas: na edição inglesa mantém-se Véspera (com a glosa, the eve, dada uma vez na página dos Assentos), como se mantêm todos os nomes próprios do mundo. (Alternativas que ficaram em banco: O Pouso, Fonte Funda.)
+
+### 2.1-B A neutralidade do mundo (decisão da autora)
+Véspera é de língua portuguesa e de país nenhum. Três regras duras, ao nível das regras de escrita:
+
+1. **País sem nome.** Nenhum país real é nomeado, nem o da vila nem os outros: quem emigra vai "para fora", quem volta são "os de fora". Topónimos todos fictícios (Véspera, o rio Fundo, a Fiandeira, a Serra). Sem datas históricas reais, sem guerras com nome, sem moeda nomeada: o tempo conta-se pelos eventos internos do mundo (as cheias grandes, os anos da fome, o fecho da fábrica).
+2. **Rostos sem raça.** As personagens são de raça incógnita: o texto nunca descreve cor de pele nem traços étnicos, de ninguém. Descrevem-se mãos, posturas, cansaços, vozes, idades. Cada leitora, em cada língua, põe na personagem o rosto que trouxer.
+3. **Folclore de ninguém.** As festas, rezas, superstições e ditos de Véspera são inventados para os livros. Não se importa folclore real de nenhuma tradição, nem europeia nem africana nem outra: o mundo fica deliberadamente no meio-termo, com uma cultura própria, feita só do que as três leis (secção 2.5) precisam.
 
 ### 2.2 A geografia (os sete palcos)
 A vila desenha-se para que cada coleção do universo tenha o seu lugar físico. Sete lugares, sete estantes:
@@ -72,12 +82,14 @@ E dois lugares transversais, que pertencem a todos os livros:
 - **A Casa dos Assentos**, onde se guardam os registos de nascimentos, casamentos e óbitos da vila. É a memória oficial; os livros contam a memória verdadeira.
 
 ### 2.3 O tempo (três gerações)
-O mundo cobre, por baixo, um século: das cheias grandes e da fome à emigração para França e Suíça nos anos sessenta, ao fecho da fábrica, aos que voltam em agosto e aos que voltaram de vez. Cada romance instala-se numa década à escolha, mas carrega sempre as duas gerações anteriores, porque a tese do mundo é transgeracional: a ferida da protagonista nunca começa nela.
+O mundo cobre, por baixo, um século: das cheias grandes e dos anos da fome à grande emigração (para fora, sem país nomeado), ao fecho da fábrica, aos que voltam nas festas e aos que voltaram de vez. Cada romance instala-se numa década à escolha, mas carrega sempre as duas gerações anteriores, porque a tese do mundo é transgeracional: a ferida da protagonista nunca começa nela.
 
 Regra prática: cada livro tem UMA protagonista no presente da sua história, e pelo menos UMA cena-raiz numa geração anterior, onde a ferida foi semeada. É a versão narrativa do "isto vem de antes de ti" dos ebooks.
 
 ### 2.4 Os nomes-destino (o achado do mundo)
-Em Véspera, como no Portugal real de antigamente, as mulheres recebem nomes que são funções: **Amparo, Custódia, Remédios, Dores, Esperança, Benvinda, Deolinda, Serafina, Rosário, Eufémia, Libânia, Gracinda**. O mundo leva isto a sério como dispositivo literário: o nome é o primeiro papel-prisão que se recebe, ao colo, antes de saber falar. Deram-lhe o nome e o nome cumpriu-se.
+Em Véspera as mulheres recebem nomes que são funções, palavras comuns tornadas batismo: **Amparo, Custódia, Remédios, Dores, Esperança, Benvinda, Deolinda, Serafina, Rosário, Eufémia, Libânia, Gracinda**. São nomes fictícios no sentido que importa: nenhum refere uma pessoa real, nenhum é homenagem, nenhum marca etnia; são escolhidos como palavras (amparo, custódia, remédios), e a Vivianne pode trocá-los ou inventar outros da mesma família. O mundo leva isto a sério como dispositivo literário: o nome é o primeiro papel-prisão que se recebe, ao colo, antes de saber falar. Deram-lhe o nome e o nome cumpriu-se.
+
+Nas edições inglesas os nomes mantêm-se em português e a página dos Assentos dá a glosa uma vez (Amparo, which means shelter; Custódia, which means custody). Em vez de se perder na tradução, o dispositivo torna-se um selo da coleção nas duas línguas.
 
 A travessia de cada protagonista passa, de alguma forma, por se desamarrar do nome: deixar que lhe chamem outra coisa, assinar de outra maneira, ou ficar com o nome mas já não o servir. É o filtro papel-prisão tornado batismo.
 
@@ -112,25 +124,25 @@ Cada romance tem uma protagonista de uma destas linhas ou da sua vizinhança ime
 Mesma pergunta de cada coleção, agora encarnada. Um exemplo concebido por estante, para se VER o tom (títulos e enredos a aprovar ou substituir pela Vivianne; isto é amostra, não catálogo fechado):
 
 **Estante I · As Casas de Família** (espelha FreeMe Mãe: o que estou a carregar que não é meu?)
-*As Mãos de Amparo.* Amparo, 63 anos, Casa do Lagar. O filho mais novo nunca levantou voo, e de cada vez que ele cai são as mãos dela que o apanham, como as da mãe dela apanharam o irmão que ninguém mencionava. O romance é o ano em que Amparo aprende que as mãos também se pousam. Verbo: recuar.
+*As Mãos de Amparo* (en: *Amparo's Hands*). Amparo, 63 anos, Casa do Lagar. O filho mais novo nunca levantou voo, e de cada vez que ele cai são as mãos dela que o apanham, como as da mãe dela apanharam o irmão que ninguém mencionava. O romance é o ano em que Amparo aprende que as mãos também se pousam. Verbo: recuar.
 
 **Estante II · O Largo da Fonte** (espelha Infonte: o que estou a perseguir que não é meu?)
-*O Nome da Irmã.* Eufémia recebeu o nome da irmã que morreu antes de ela nascer, e com o nome recebeu a vida que a irmã não viveu: o curso, o noivo, a casa em frente ao largo. Aos cinquenta anos, ao esvaziar o quarto da mãe, encontra a certidão da primeira Eufémia e percebe que nunca escolheu nada. Verbo: escolher.
+*O Nome da Irmã* (en: *The Sister's Name*). Eufémia recebeu o nome da irmã que morreu antes de ela nascer, e com o nome recebeu a vida que a irmã não viveu: o curso, o noivo, a casa em frente ao largo. Aos cinquenta anos, ao esvaziar o quarto da mãe, encontra a certidão da primeira Eufémia e percebe que nunca escolheu nada. Verbo: escolher.
 
 **Estante III · A Mercearia** (espelha Prosperidade: o que me impede de receber o que é meu?)
-*O Caderno das Dívidas.* Benvinda herdou a mercearia e o caderno onde está fiada a vila inteira. Sabe de cor o que todos lhe devem e nunca cobrou nada a ninguém; só a dívida dela, a de existir, é que paga todos os dias. Verbo: receber.
+*O Caderno das Dívidas* (en: *The Ledger of Debts*). Benvinda herdou a mercearia e o caderno onde está fiada a vila inteira. Sabe de cor o que todos lhe devem e nunca cobrou nada a ninguém; só a dívida dela, a de existir, é que paga todos os dias. Verbo: receber.
 
 **Estante IV · A Ponte** (espelha SyncHim: o que me faz perder-me quando amo?)
-*O Homem das Cheias.* Rosário ama um homem da outra margem que aparece com as águas grandes e desaparece com elas. Toda a vila lhe chama paixão; o livro mostra de onde vem, na casa do pai ausente, a confusão entre amar e esperar. Verbo: ver.
+*O Homem das Cheias* (en: *The Man the Floods Brought*). Rosário ama um homem da outra margem que aparece com as águas grandes e desaparece com elas. Toda a vila lhe chama paixão; o livro mostra de onde vem, na casa do pai ausente, a confusão entre amar e esperar. Verbo: ver.
 
 **Estante V · A Mesa Comprida** (espelha Pertença: qual é o meu lugar entre os outros?)
-*A Mesa dos Outros.* Deolinda arma a mesa das festas há trinta anos, faz a ponte entre os irmãos zangados, serve, levanta, compõe. Na mesa comprida há um lugar que nunca ninguém a viu ocupar: o dela. Verbo: sentar-se (ocupar).
+*A Mesa dos Outros* (en: *The Table of Others*). Deolinda arma a mesa das festas há trinta anos, faz a ponte entre os irmãos zangados, serve, levanta, compõe. Na mesa comprida há um lugar que nunca ninguém a viu ocupar: o dela. Verbo: sentar-se (ocupar).
 
 **Estante VI · A Serra** (espelha Força: o que tive de me tornar para sobreviver?)
-*A Mulher Que Nunca Teve Frio.* Serafina ficou com a casa do alto e os irmãos pequenos no inverno em que os pais desceram e não voltaram. Tinha onze anos. Sessenta anos depois, toda a gente diz que ela não sente o frio; o romance conta o que custou deixar de o sentir, e a primeira vez que se deixa agasalhar. Verbo: permitir.
+*A Mulher Que Nunca Teve Frio* (en: *The Woman Who Never Felt the Cold*). Serafina ficou com a casa do alto e os irmãos pequenos no inverno em que os pais desceram e não voltaram. Tinha onze anos. Sessenta anos depois, toda a gente diz que ela não sente o frio; o romance conta o que custou deixar de o sentir, e a primeira vez que se deixa agasalhar. Verbo: permitir.
 
 **Estante VII · A Fiandeira** (espelha Trabalho: quem sou eu sem aquilo que faço?)
-*Enquanto a Fábrica Dorme.* Libânia foi a encarregada que segurou a Fiandeira em todos os fechos anunciados. Agora que fecha de vez, continua a acordar às cinco, porque sem a fábrica não sabe a que horas existe. Verbo: pousar a prova.
+*Enquanto a Fábrica Dorme* (en: *While the Mill Sleeps*). Libânia foi a encarregada que segurou a Fiandeira em todos os fechos anunciados. Agora que fecha de vez, continua a acordar às cinco, porque sem a fábrica não sabe a que horas existe. Verbo: pousar a prova.
 
 Nota de sobreposição (a mesma vigilância do posicionamento dos ebooks): Amparo (estante I) e Serafina (estante VI) partilham o osso da carregadora; distingue-as o palco e a idade da ferida, como já se distingue no universo. Vigiar na escrita, como lá.
 
@@ -145,16 +157,23 @@ Regras de escrita (herdam as regras duras dos ebooks):
 3. Sem CTA dentro dos romances. A ponte para os ebooks faz-se fora do texto (na ficha do livro, na loja: "se Amparo te doeu, o nome do que ela carrega está em A mãe que salva").
 4. Finais que apontam, não fecham (Lei 3). Nunca prometer cura, também em ficção.
 5. Cada formato no seu formato real: o romance é romance, não é ebook esticado com personagens. Cenas, corpo, tempo, silêncio.
+6. **Bilingue de raiz, como todos os produtos da casa.** Cada livro publica-se em pt-PT e EN. Escreve-se primeiro em português; a edição inglesa mantém topónimos e nomes próprios (com a glosa única na página dos Assentos) e cada título nasce já com a sua versão inglesa. Nenhum título, epíteto ou frase-chave pode depender de um jogo de palavras que não atravesse as duas línguas.
+7. **As regras de neutralidade do mundo (2.1-B) são regras duras:** país sem nome, rostos sem raça, folclore de ninguém. Verificar em cada livro antes de fechar, como se verifica a ortografia.
 
 ═══════════════════════════════════════
-## 5. DECISÕES A TOMAR (antes de escrever uma linha)
+## 5. DECISÕES (atualizado após a aprovação de 11 jun 2026)
 
-1. **O mundo:** Proposta A (Véspera), B (Inventário dos Pesos) ou C (Sete Portas)? Recomendada: A.
-2. **O nome da vila:** Véspera, O Pouso, Fonte Funda, ou outro da Vivianne.
-3. **O narrador:** terceira pessoa íntima com a Guardiã dos Assentos (recomendado) ou o "nós" coral da vila.
-4. **O formato e a escada:** novelas de 25 a 40 mil palavras (recomendado para começar: produção realista, preço de entrada, espelha a escada da loja) ou romances de 60 a 90 mil. Possível porta de entrada: uma antologia "Sete noites em Véspera" com sete novelas curtas, uma por estante, a apresentar a vila inteira.
-5. **O travessão de diálogo:** proibido como em tudo (aspas) ou exceção única da ficção.
-6. **O primeiro livro:** sugerido *As Mãos de Amparo* (estante I), pela mesma lógica do posicionamento dos ebooks: a porta de entrada é a dor mais larga, e a maternidade é a coleção madura.
+Decidido pela Vivianne, ao aprovar a proposta com as afinações:
+1. **O mundo:** Proposta A, Véspera. (B fica em banco como linguagem de objetos dentro de A; C fica em banco como possível formato de entrada.)
+2. **O nome da vila:** Véspera.
+3. **O narrador:** terceira pessoa íntima com a Guardiã dos Assentos.
+4. **A neutralidade:** país sem nome, nomes todos fictícios, pessoas de raça incógnita, folclore de ninguém.
+5. **As línguas:** pt-PT e EN de raiz, em todos os livros.
+6. **O primeiro livro:** *As Mãos de Amparo* (estante I), pela mesma lógica do posicionamento dos ebooks: a porta de entrada é a dor mais larga, e a maternidade é a coleção madura.
+
+Ainda em aberto (decidir antes do capítulo zero, ou ao lê-lo):
+7. **O formato e a escada:** novelas de 25 a 40 mil palavras (recomendado para começar) ou romances de 60 a 90 mil. E se a antologia "Sete noites em Véspera" (sete novelas curtas, uma por estante) entra como porta da biblioteca.
+8. **O travessão de diálogo:** proibido como em tudo (diálogo com aspas) ou exceção única da ficção.
 
 ═══════════════════════════════════════
 ## 6. PRIMEIRO PASSO SUGERIDO (o método da casa)
