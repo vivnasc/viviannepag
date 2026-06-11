@@ -209,6 +209,24 @@ export default function AgendaPage() {
     setRenderizando(false);
     setRenderMsg(`${ok} render(s) MP4 disparado(s) (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para os veres.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
   }
+  // ── RE-renderizar a semana TODA, À FORÇA (mesmo os MP4 que já estão prontos).
+  // Útil para refazer todos os vídeos da semana de uma vez (ex.: aplicar uma
+  // melhoria do render sem ter de carregar post a post). ──
+  const videoSemana = semana.filter((e) => VIDEO_FORMATOS.includes(tipoChave(e.it)));
+  async function reRenderSemana() {
+    if (!videoSemana.length) { setRenderMsg('Não há vídeos nesta semana para renderizar.'); return; }
+    if (!window.confirm(`Re-renderizar à força os ${videoSemana.length} MP4 desta semana (mesmo os já prontos)? Cada um leva ~10 min no GitHub Actions.`)) return;
+    setRenderizando(true); setRenderMsg(null);
+    let ok = 0; const erros: string[] = [];
+    for (const e of videoSemana) {
+      try {
+        const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: e.it.slug }) });
+        if (r.ok) ok++; else { const j = await r.json().catch(() => ({})); erros.push(`${e.diaPt}: ${j.erro ?? r.status}`); }
+      } catch (err) { erros.push(`${e.diaPt}: ${String(err)}`); }
+    }
+    setRenderizando(false);
+    setRenderMsg(`${ok} render(s) re-disparado(s) à força (~10 min cada, no GitHub Actions). Recarrega esta página daqui a pouco para veres os MP4 novos.${erros.length ? ' Falhas: ' + erros.join('; ') : ''}`);
+  }
   // (re)renderizar o MP4 de UM post (útil para refazer um já renderizado com a animação nova)
   async function reRender(it: Item) {
     setRenderMsg(null);
@@ -354,6 +372,7 @@ export default function AgendaPage() {
         <div className="mb-6 flex flex-wrap items-center gap-3">
           <button onClick={() => { if (semana.length) { setZipMsg(null); setBaixando(true); } }} disabled={baixando || semana.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{baixando ? 'a preparar o ZIP…' : `⬇ baixar a semana (ZIP) · ${semana.length} post(s)`}</button>
           <button onClick={renderMp4Semana} disabled={renderizando || mp4Pendentes.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{renderizando ? 'a disparar…' : `🎬 renderizar MP4s da semana · ${mp4Pendentes.length} em falta`}</button>
+          <button onClick={reRenderSemana} disabled={renderizando || videoSemana.length === 0} className="text-[0.78rem] px-4 py-2 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderizando ? 'a disparar…' : `↻ re-renderizar a semana toda · ${videoSemana.length} MP4`}</button>
           <span className="text-[0.68rem] opacity-50 w-full">ZIP: imagens (PNG) + legenda.txt (+ MP4 quando já existe), uma pasta por dia. O botão dos MP4s dispara o render dos vídeos em falta (Cá em Casa, I am a Hero, Infográfico, Domingo, Frase com motion) ~10 min cada.</span>
           {mp4Pendentes.length > 0 && <span className="text-[0.66rem] opacity-60 w-full">Em falta ({mp4Pendentes.length}): {mp4Pendentes.map((e) => `${e.diaPt} ${FMT[tipoChave(e.it)]?.label ?? ''}`).join(' · ')}. Os carrosséis (Sinais, O que ninguém, Uma ideia) não têm MP4. Se faltar algum dia, é porque ainda não geraste/agendaste esse post.</span>}
           {zipMsg && <span className="text-[0.72rem] text-salvia w-full">{zipMsg}</span>}
