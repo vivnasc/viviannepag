@@ -174,21 +174,23 @@ export async function publicarVideo(opts: PublicarVideoOpts): Promise<{ ok: bool
 }
 
 // Estado de uma publicação: PROCESSING_* / PUBLISH_COMPLETE / FAILED.
-export async function estadoPublicacao(accessToken: string, publishId: string): Promise<{ ok: boolean; status?: string; erro?: string }> {
+// Em caso de falha, o TikTok devolve fail_reason — devolvemo-lo para diagnóstico.
+export async function estadoPublicacao(accessToken: string, publishId: string): Promise<{ ok: boolean; status?: string; failReason?: string; erro?: string }> {
   const r = await apiPost('/post/publish/status/fetch/', accessToken, { publish_id: publishId });
   if (!r.ok) return { ok: false, erro: erroDe(r.json) };
-  return { ok: true, status: r.json.data?.status as string };
+  const d = (r.json.data ?? {}) as Record<string, unknown>;
+  return { ok: true, status: d.status as string, failReason: d.fail_reason as string | undefined };
 }
 
 // Sonda o estado até concluir (ou falhar / esgotar o tempo). O TikTok faz o
 // download e processamento do MP4, por isso pode demorar.
-export async function esperarPublicacao(accessToken: string, publishId: string, maxMs = 5 * 60 * 1000): Promise<{ ok: boolean; status?: string; erro?: string }> {
+export async function esperarPublicacao(accessToken: string, publishId: string, maxMs = 5 * 60 * 1000): Promise<{ ok: boolean; status?: string; failReason?: string; erro?: string }> {
   const ini = Date.now();
   while (Date.now() - ini < maxMs) {
     const e = await estadoPublicacao(accessToken, publishId);
     if (!e.ok) return e;
     if (e.status === 'PUBLISH_COMPLETE') return { ok: true, status: e.status };
-    if (e.status === 'FAILED') return { ok: false, status: e.status, erro: 'o TikTok marcou a publicação como FAILED' };
+    if (e.status === 'FAILED') return { ok: false, status: e.status, failReason: e.failReason, erro: `FAILED${e.failReason ? `: ${e.failReason}` : ''}` };
     await new Promise((r) => setTimeout(r, 5000));
   }
   return { ok: false, erro: 'o TikTok não acabou de processar o vídeo a tempo' };

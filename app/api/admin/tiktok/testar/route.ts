@@ -76,6 +76,8 @@ export async function GET(req: NextRequest) {
     conta: conta.displayName ?? conta.openId.slice(0, 8),
     publishId: r.publishId,
     status: estado.status,
+    failReason: estado.failReason,
+    urlParaTikTok,
     erro: estado.erro,
     detalhe: estado.ok
       ? (modo === 'rascunho' ? 'Vai à app do TikTok → Caixa de entrada/Rascunhos para veres o vídeo.' : 'Publicado como privado (SELF_ONLY) no perfil.')
