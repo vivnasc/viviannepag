@@ -50,6 +50,8 @@ Lembrava-se de tudo. Do cheiro a serradura e a corda, do Justo a limpar as mãos
 
 Amparo agradeceu, comprou ali mesmo, por vergonha, meio quilo de pregos de que não precisava, e voltou para casa pelo caminho de cima para não falar com ninguém. À noite, Fortunato perguntou-lhe onde tinha ido de manhã, e ela disse que à Mercearia. Foi a primeira mentira do casamento. Os pregos ficaram anos numa lata da despensa, ao lado da farinha, e nunca pregaram nada.
 
+E era curioso, pensava ela agora, na cama, de olhos no teto: a casa tinha duas latas, afinal, lado a lado na mesma prateleira, e ela nunca as tinha visto como o par que eram. A lata da farinha, com o dinheiro das quedas dele. E a lata dos pregos, com a vergonha dela. Uma guardava o que se dava a mais, a outra o que se calava a mais, e as duas tinham nascido no mesmo gesto: tapar. Trinta anos a alimentar as duas latas, às escondidas, e a casa por cima, à vista de toda a gente, sempre tão arrumada, tão direita, tão louvada. As casas têm sempre uma prateleira alta onde mora a verdade, e é por isso que se inventou a prateleira alta: para a verdade ficar fora do alcance dos dias.
+
 A porta seguinte da memória, Amparo abriu-a já de madrugada, deitada de olhos no teto: e era a porta do costume, a que doía sempre da mesma maneira. Fortunato a morrer, seis invernos atrás, no quarto ao lado, devagar e com modos, como fez tudo na vida. Nos últimos dias falava pouco e só do essencial. Chamou a Vera e disse-lhe coisas que a Vera nunca contou. E a ela, à mulher de quarenta anos de cama e mesa, deixou-lhe um pedido só, dito de mão dada, com os olhos já meio noutro lado:
 
 — Não fiques agarrada ao rapaz, Amparo. Ele só vai poder ser homem quando não tiver onde cair.

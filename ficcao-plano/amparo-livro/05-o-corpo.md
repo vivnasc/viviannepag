@@ -70,6 +70,8 @@ Nessa noite, na cama, as mãos não fechavam.
 
 Não era o tremor da despensa. Era outra coisa: cansaço puro, fundo, de dentro dos ossos. Amparo deitada de costas, com as duas mãos abertas em cima da colcha, a mandar-lhes o gesto simples de fechar, e as mãos a obedecerem devagar, a custo, até meio, como portas com a casa torta. Ficou assim muito tempo, às escuras, a ouvir o rio ao longe, a sentir o próprio coração, e esperou pelo medo da morte, porque achou que era isso que vinha a seguir, era isso que vinha às pessoas da idade dela nas noites assim.
 
+Enquanto esperava, fez por distração o inventário do quarto às escuras, que era um mapa que conhecia de cor: a cómoda de solteira da mãe dela, herdada por ser a mais velha das vivas; o retrato de Fortunato no dia do casamento, sério como ele só foi nesse dia e no do enterro; o armário com a roupa de inverno do lado esquerdo e a de verão do direito, mudadas de lado duas vezes por ano há quarenta anos; e na parede, a única coisa pendurada, a moldura pequena com a flor seca que a Vera lhe trouxe da escola aos oito anos e que sobrevivera a tudo, a mudanças, a limpezas, a décadas, sem ninguém nunca dizer porquê. Tudo naquele quarto era de antes ou era dos outros. Procurou, no escuro, uma única coisa que fosse dela, escolhida por ela, para ela, depois de adulta, e a procura ainda ia a meio quando o medo chegou e a interrompeu.
+
 O medo veio. Mas não era da morte.
 
 O pensamento formou-se sozinho, nítido como a voz da médica, e era este, e ela odiou-o no instante em que o viu: se eu faltar, quem é que o apanha?

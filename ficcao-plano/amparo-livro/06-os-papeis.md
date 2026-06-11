@@ -22,7 +22,7 @@ Não a disse. Disse outras coisas, as do costume: que a casa não se deixava ass
 
 — A mãe não larga isto nem morta. Eu sei. Eu só tinha de tentar.
 
-E mudou de assunto com a mesma ordem com que tinha chegado a ele, e o resto da tarde foi manso. Mas à despedida, já com a porta do carro aberta, a Vera parou, com as chaves na mão, e disse mais uma coisa, de costas meio voltadas, na voz mais baixa do dia: a mãe acha que eu venho cá tratar de papéis. Eu sei que parece. Eu trato de papéis quando tenho medo, mãe, é a minha maneira, sempre foi: ponho o medo por alíneas para ele caber em mim. — Entrou no carro, fechou a porta, baixou o vidro. — Aquilo na horta assustou-me. Era só isto que as alíneas queriam dizer.
+E mudou de assunto com a mesma ordem com que tinha chegado a ele, e o resto da tarde foi manso. Mas à despedida, já com a porta do carro aberta, a Vera parou, com as chaves na mão, e disse mais uma coisa, de costas meio voltadas, na voz mais baixa do dia: a mãe acha que eu venho cá tratar de papéis. Eu sei que parece. Eu trato de papéis quando tenho medo, mãe, é a minha maneira, sempre foi: ponho o medo por alíneas para ele caber em mim. Entrou no carro, fechou a porta, baixou o vidro, e disse ainda, antes de arrancar: aquilo na horta assustou-me, mãe. Era só isto que as alíneas queriam dizer.
 
 E desceu o caminho. Amparo ficou no portão a ver o carro até à curva, com a pasta azul nos braços, a doer-lhe um sítio que não vinha nas análises: a filha tinha-lhe acabado de mostrar, pela primeira vez em quarenta anos, o avesso da sua ordem toda, e o avesso era uma menina aflita, e a menina aflita tinha ido embora outra vez sem que ninguém lhe pegasse ao colo.
 
