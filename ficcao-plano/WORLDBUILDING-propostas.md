@@ -124,13 +124,13 @@ Cada romance tem uma protagonista de uma destas linhas ou da sua vizinhança ime
 Mesma pergunta de cada coleção, agora encarnada. Um exemplo concebido por estante, para se VER o tom (títulos e enredos a aprovar ou substituir pela Vivianne; isto é amostra, não catálogo fechado):
 
 **Estante I · As Casas de Família** (espelha FreeMe Mãe: o que estou a carregar que não é meu?)
-*As Mãos de Amparo* (en: *Amparo's Hands*). Amparo, 63 anos, Casa do Lagar. O filho mais novo nunca levantou voo, e de cada vez que ele cai são as mãos dela que o apanham, como as da mãe dela apanharam o irmão que ninguém mencionava. O romance é o ano em que Amparo aprende que as mãos também se pousam. Verbo: recuar.
+*As Mãos de Amparo* (en: *Amparo's Hands*). Amparo, 63 anos, Casa do Lagar. O filho mais novo nunca levantou voo, e de cada vez que ele cai são as mãos dela que o apanham, como as da mãe dela apanharam o irmão que ninguém mencionava. O romance é o ano em que Amparo aprende que as mãos também se pousam. Verbo: sustentar (sem substituir).
 
 **Estante II · O Largo da Fonte** (espelha Infonte: o que estou a perseguir que não é meu?)
 *O Nome da Irmã* (en: *The Sister's Name*). Eufémia recebeu o nome da irmã que morreu antes de ela nascer, e com o nome recebeu a vida que a irmã não viveu: o curso, o noivo, a casa em frente ao largo. Aos cinquenta anos, ao esvaziar o quarto da mãe, encontra a certidão da primeira Eufémia e percebe que nunca escolheu nada. Verbo: escolher.
 
 **Estante III · A Mercearia** (espelha Prosperidade: o que me impede de receber o que é meu?)
-*O Caderno das Dívidas* (en: *The Ledger of Debts*). Benvinda herdou a mercearia e o caderno onde está fiada a vila inteira. Sabe de cor o que todos lhe devem e nunca cobrou nada a ninguém; só a dívida dela, a de existir, é que paga todos os dias. Verbo: receber.
+*O Caderno das Dívidas* (en: *The Ledger of Debts*). Benvinda herdou a mercearia e o caderno onde está fiada a vila inteira. Sabe de cor o que todos lhe devem e nunca cobrou nada a ninguém; só a dívida dela, a de existir, é que paga todos os dias. Verbo: cobrar (deixar o valor ser valorizado).
 
 **Estante IV · A Ponte** (espelha SyncHim: o que me faz perder-me quando amo?)
 *O Homem das Cheias* (en: *The Man the Floods Brought*). Rosário ama um homem da outra margem que aparece com as águas grandes e desaparece com elas. Toda a vila lhe chama paixão; o livro mostra de onde vem, na casa do pai ausente, a confusão entre amar e esperar. Verbo: ver.
@@ -152,7 +152,7 @@ Nota de sobreposição (a mesma vigilância do posicionamento dos ebooks): Ampar
 O filtro do universo mantém-se, adaptado: **só entra na biblioteca o romance cujo motor é um papel-prisão**. Enredo, época ou drama de vila não bastam; se a protagonista não habita um papel que a protegeu e agora a prende, o livro não pertence a Véspera.
 
 Regras de escrita (herdam as regras duras dos ebooks):
-1. pt-PT pós-AO90, sem exceção. Travessões proibidos também na ficção: o diálogo resolve-se com aspas ou discurso indireto (decisão estética a confirmar com a Vivianne, porque em romance o travessão de diálogo é a norma portuguesa; alternativa: permitir SÓ o travessão de diálogo e manter a proibição no resto).
+1. pt-PT pós-AO90, sem exceção. Travessões: o de diálogo é permitido (decisão da Vivianne); o de ênfase só onde for mesmo preciso, no máximo um por capítulo fora do diálogo, e nunca aos pares à maneira de parêntesis (o tique de IA a evitar; para encaixes, vírgulas ou parêntesis).
 2. A ficção mostra, não ensina. Nenhuma personagem dá aulas de constelação; nenhum narrador explica a moral. As três lentes ficam por baixo do chão, como fundações: visíveis nos efeitos, nunca no vocabulário. Proibido o jargão (sistema, campo, sombra, padrão) na boca do narrador.
 3. Sem CTA dentro dos romances. A ponte para os ebooks faz-se fora do texto (na ficha do livro, na loja: "se Amparo te doeu, o nome do que ela carrega está em A mãe que salva").
 4. Finais que apontam, não fecham (Lei 3). Nunca prometer cura, também em ficção.
@@ -171,9 +171,12 @@ Decidido pela Vivianne, ao aprovar a proposta com as afinações:
 5. **As línguas:** pt-PT e EN de raiz, em todos os livros.
 6. **O primeiro livro:** *As Mãos de Amparo* (estante I), pela mesma lógica do posicionamento dos ebooks: a porta de entrada é a dor mais larga, e a maternidade é a coleção madura.
 
-Ainda em aberto (decidir antes do capítulo zero, ou ao lê-lo):
-7. **O formato e a escada:** novelas de 25 a 40 mil palavras (recomendado para começar) ou romances de 60 a 90 mil. E se a antologia "Sete noites em Véspera" (sete novelas curtas, uma por estante) entra como porta da biblioteca.
-8. **O travessão de diálogo:** proibido como em tudo (diálogo com aspas) ou exceção única da ficção.
+Decidido pela Vivianne em 11 jun 2026 (segunda ronda):
+7. **O formato:** novelas de 30 a 40 mil palavras.
+8. **O travessão:** o travessão de diálogo é permitido, e o de ênfase só onde for mesmo preciso, sem virar tique (regra prática no REPERTORIO-biblioteca.md).
+9. **O repertório completo** da biblioteca (as 51 novelas, espelho das 51 feridas) está em ficcao-plano/REPERTORIO-biblioteca.md, à espera de aprovação livro a livro. Nada se escreve antes desse OK.
+
+Ainda em aberto: se a Vaga 1 entra também como antologia "Sete noites em Véspera" (ver repertório).
 
 ═══════════════════════════════════════
 ## 6. PRIMEIRO PASSO SUGERIDO (o método da casa)
