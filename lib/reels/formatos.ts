@@ -38,7 +38,7 @@ export const FORMATOS: FormatoReel[] = [
     emoji: '🔎',
     video: true,
     instrucao:
-      'Formato "Sinais de que…". Frame 1 (capa): gancho "Sinais de que <tema>" curto e forte. Depois 4 a 6 frames, UM sinal concreto por frame (frase curta, do dia a dia, que faça a pessoa reconhecer-se). Frame final: uma frase de cuidado/reflexão (não diagnóstico, não vender). kicker dos sinais = "sinal 1", "sinal 2"…',
+      'Formato "Sinais de que…". Frame 1 (capa, a PORTA): gancho "Sinais de que <tema>" curto e forte, do real e reconhecível ("isto sou eu"). Depois 4 a 6 frames, UM sinal concreto por frame: uma CENA do dia a dia (corpo, casa, gesto, relação) onde a pessoa se reconhece, com ternura e NUNCA com o dedo apontado (tem de se sentir VISTA, não julgada nem diagnosticada). Frame final (a SALA): uma frase funda de cuidado e pertença, que apetece GUARDAR. Conteúdo que dá palavras ao que não se diz é o que mais se PARTILHA. kicker dos sinais = "sinal 1", "sinal 2"…',
   },
   {
     id: 'ninguem',
@@ -48,9 +48,9 @@ export const FORMATOS: FormatoReel[] = [
     video: true,
     instrucao:
       'Formato "O que ninguém te explica" (mini-aula). É quase uma aula: tem de ENSINAR algo concreto, não dar frases genéricas/motivacionais. ' +
-      'Frame 1 (capa): uma pergunta/afirmação que pára o scroll (ex.: "Porque é que voltas sempre ao mesmo tipo de relação?"), só "texto" (sem pontos). ' +
+      'Frame 1 (capa, a PORTA): uma pergunta/afirmação do real e reconhecível ("isto sou eu") que pára o scroll (ex.: "Porque é que voltas sempre ao mesmo tipo de relação?"), nunca abstrata; só "texto" (sem pontos). ' +
       'Depois 3 a 4 frames de EXPLICAÇÃO, cada um com "titulo" (3 a 6 palavras, a ideia desse passo) e "pontos" (2 a 3 bullets CURTOS, concretos, com o mecanismo real ou um exemplo do dia a dia; deixa "texto" vazio nesses). Nada de clichés: nomeia o porquê psicológico/sistémico (ex.: "o sistema familiar puxa-te para a lealdade", "o cérebro confunde familiar com seguro"). ' +
-      'Frame final: a virada/reflexão, só "texto" (uma frase que assenta a aprendizagem). kicker discreto (ex.: "o que ninguém te explica"). ' +
+      'Frame final (a SALA): a virada/reflexão, só "texto", uma frase funda que assenta a aprendizagem e apetece GUARDAR. kicker discreto (ex.: "o que ninguém te explica"). ' +
       'Regra de ouro: cada bullet tem de ENSINAR (um facto, um mecanismo, um exemplo), nunca repetir o óbvio.',
   },
   {
@@ -78,7 +78,7 @@ export const FORMATOS: FormatoReel[] = [
     emoji: '🕯️',
     video: true,
     instrucao:
-      'Formato "Uma ideia de <pensador>" (carrossel). Frame 1 (capa): "Uma ideia de <pensador>" (nomeia o pensador no tema). 2 a 3 frames com a ideia central explicada de forma simples e fiel. Frame final: como aplicar/refletir hoje. kicker = nome do pensador.',
+      'Formato "Uma ideia de <pensador>" (carrossel). Frame 1 (capa): "Uma ideia de <pensador>" (nomeia o pensador no tema). Frame 2 (a PORTA): abre com uma situação do dia a dia onde a ideia se reconhece ("isto sou eu"), antes da teoria. Depois 2 a 3 frames com a ideia central explicada de forma simples e fiel. Frame final (a SALA): como aplicar/refletir hoje, numa frase funda que apetece GUARDAR e que faz pensar em alguém (partilhável). kicker = nome do pensador.',
   },
 ];
 
