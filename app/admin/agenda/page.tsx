@@ -8,6 +8,7 @@ import { PostSlide, type PostSlideT } from '@/components/admin/PostSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
 import { getCurso } from '@/lib/infografico/cursos';
+import { contaDe } from '@/lib/instagram/contas';
 
 // orquestração "gerar a semana toda": cada dia → o seu gerador
 const ROTA_GEN: Record<string, string> = { kinetico: '/api/admin/reels/gerar', reel: '/api/admin/reels/gerar', banda: '/api/admin/banda/gerar', heroi: '/api/admin/heroi/gerar', infografico: '/api/admin/infografico/gerar' };
@@ -22,7 +23,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 
 type Slide = PostSlideT & { imageUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string };
-type Theme = { formato?: string; subtipo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string };
+type Theme = { formato?: string; subtipo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; marca?: string; universo?: string; curso?: string };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 const FMT: Record<string, { emoji: string; label: string; href: string }> = {
@@ -83,7 +84,9 @@ export default function AgendaPage() {
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list');
-    if (r.ok) setItens((await r.json()).contos ?? []);
+    // A Agenda é SÓ da veu.a.veu: NUNCA mostrar conteúdo da loja nem de outras
+    // contas (importadas por CSV). Filtra pela conta detetada (theme + slug).
+    if (r.ok) setItens((((await r.json()).contos ?? []) as Item[]).filter((it) => contaDe(it.theme, it.slug) === 'veuaveu'));
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
   useEffect(() => { fetch('/api/admin/reels/capa-serie').then((r) => r.ok ? r.json() : { capas: {} }).then((j) => setCapasSerie(j.capas ?? {})).catch(() => {}); }, []);
