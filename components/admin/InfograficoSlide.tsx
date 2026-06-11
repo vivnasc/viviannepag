@@ -45,6 +45,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1, r
   // 4:5 = PNG do feed; 9:16 = MP4 (preenche o ecrã todo, como os outros reels)
   const H = ratio === '9:16' ? 1920 : 1350;
   const AR = ratio === '9:16' ? '1080 / 1920' : '1080 / 1350';
+  const avail = H - 180; // altura util (deixa margem em cima/baixo); o conteudo distribui-se nela
 
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -58,7 +59,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1, r
   const [fit, setFit] = useState(1);
   useLayoutEffect(() => {
     const el = contentRef.current; if (!el) return;
-    const apply = () => { el.style.transform = 'scale(1)'; const avail = H - 180; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
+    const apply = () => { el.style.transform = 'scale(1)'; const h = el.scrollHeight; setFit(h > avail ? Math.max(0.4, avail / h) : 1); };
     apply();
     if (typeof document !== 'undefined' && document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
   }, [info, H]);
@@ -193,7 +194,7 @@ export function InfograficoSlide({ info, mundo = 'freeme', imageUrl, prog = 1, r
         </>)}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: GRAIN, backgroundSize: 220, mixBlendMode: 'screen', opacity: 0.14, zIndex: 0, pointerEvents: 'none' }} />
 
-        <div ref={contentRef} style={{ position: 'relative', zIndex: 2, width: 1080, padding: '0 84px', boxSizing: 'border-box', transform: `scale(${fit})`, transformOrigin: 'top center', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+        <div ref={contentRef} style={{ position: 'relative', zIndex: 2, width: 1080, minHeight: fit < 1 ? undefined : avail, padding: '0 84px', boxSizing: 'border-box', transform: `scale(${fit})`, transformOrigin: 'top center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: fit < 1 ? 'flex-start' : 'space-between', textAlign: 'center' }}>
           <div style={{ ...reveal(idxHeader), display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             {conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 20, letterSpacing: '0.2em', textTransform: 'uppercase', color: ACCENT, opacity: 0.7, marginBottom: 14, textAlign: 'center' }}>{conceito}</span>}
             <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 22, letterSpacing: '0.5em', textTransform: 'uppercase', color: ACCENT, opacity: 0.9 }}>{info.rotulo ?? 'O padrão'}</span>
