@@ -242,7 +242,7 @@ async function main() {
       // slideshow no lugar do slide 0 estático. Se falhar, cai no render de
       // sempre (capaFramesDir = null).
       let capaFramesDir = null;
-      const capaFps = 25, capaN = Math.round(capaFps * 4.2);
+      const capaFps = 30, capaN = Math.round(capaFps * 4.6);
       if (slides.length >= 2 && slides[0]?.tipo === 'capa') {
         try {
           capaFramesDir = path.join(diaDir, 'capa');
@@ -252,13 +252,18 @@ async function main() {
           await cp.goto(`${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0`, { waitUntil: 'networkidle0', timeout: 60000 });
           await cp.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
           for (let i = 0; i < capaN; i++) {
-            const prog = Math.min(1, (i / (capaN - 1)) / 0.8); // revela até 80%, segura cheio no fim
+            const prog = Math.min(1, (i / (capaN - 1)) / 0.72); // escreve-se até 72%, segura cheio no fim
             await cp.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
             await new Promise((r) => setTimeout(r, 30));
             await cp.screenshot({ path: path.join(capaFramesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
           }
           await cp.close();
-          console.log(`[capa-motion] dia ${d.dia}: ${capaN} frames`);
+          // monta os frames num clip de VÍDEO real (30fps). Um input de vídeo
+          // encaixa no xfade do slideshow; o input image2 (frames soltos) dava
+          // "Failed to configure output pad on xfade / Invalid argument" e caía
+          // no fallback estático (por isso a capa saía parada).
+          execSync(`ffmpeg -y -framerate ${capaFps} -i capa/f%04d.png -c:v libx264 -r ${capaFps} -pix_fmt yuv420p capa.mp4`, { cwd: diaDir, stdio: 'inherit' });
+          console.log(`[capa-motion] dia ${d.dia}: ${capaN} frames -> capa.mp4`);
         } catch (e) { console.log(`[capa-motion] falhou dia ${d.dia}: ${e.message}`); capaFramesDir = null; }
       }
 
@@ -281,10 +286,10 @@ async function main() {
           }
           if (animCapa) {
             const capaSeg = capaN / capaFps;
-            // input 0 = frames da capa (já 1080x1920; o movimento É o reveal, sem
-            // zoompan); inputs 1..n = imagens dos slides 1..n com Ken Burns.
-            const ins = `-framerate ${capaFps} -i capa/f%04d.png ` + slides.slice(1).map((_, i) => `-loop 1 -t ${SEG} -i s${i + 1}.png`).join(' ');
-            let fc = `[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,format=yuv420p[v0]`;
+            // input 0 = capa.mp4 (clip de vídeo real, 30fps; o movimento É o
+            // reveal, sem zoompan); inputs 1..n = imagens dos slides com Ken Burns.
+            const ins = `-i capa.mp4 ` + slides.slice(1).map((_, i) => `-loop 1 -t ${SEG} -i s${i + 1}.png`).join(' ');
+            let fc = `[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=${FPS},format=yuv420p[v0]`;
             for (let i = 1; i < slides.length; i++) fc += `;${kb(i, i)}`;
             let last = 'v0';
             for (let i = 1; i < slides.length; i++) {
