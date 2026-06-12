@@ -15,9 +15,9 @@ type Serie = 'vcsabia' | 'hojeemmim';
 
 const VOZ: Record<Serie, string> = {
   vcsabia:
-    'Série "VC Sabia" (abre com "Sabias que…"), de MANHÃ: tom esperançoso e luminoso. Padrão preferido: uma verdade serena da natureza ou do dia a dia + uma ponte para a pessoa ("Tu também…"). Ex.: "Uma planta não cresce mais depressa por receber mais água do que precisa. Tu também floresces melhor quando respeitas os teus limites." Doce, com lastro, nunca foleiro.',
+    'Série "VC Sabia" (abre com "Sabias que…"), de MANHÃ: tom esperançoso e luminoso. Padrão preferido: uma verdade serena da natureza ou do dia a dia + uma ponte para a pessoa ("Tu também…"). Ex.: "Uma planta não cresce mais depressa por receber mais água do que precisa. Tu também floresces melhor quando respeitas os teus limites." A analogia da natureza requadra uma LUTA real (pressa, exigência, culpa) em força serena, e vira um PRESENTE que apetece enviar a quem precisa de o ouvir hoje. Doce, com lastro, nunca foleiro.',
   hojeemmim:
-    'Série "Hoje em Mim" (estilo "Hoje aprendi que…"), de NOITE: contemplativo, na PRIMEIRA pessoa, íntimo. Uma aprendizagem sobre si própria (silêncio, limites, pertença, herança). Ex.: "Hoje aprendi que o meu silêncio é, muitas vezes, a resposta mais honesta." O dia da semana colore o tom (ex.: domingo mais repouso, segunda mais recomeço, sexta mais balanço), com subtileza.',
+    'Série "Hoje em Mim" (estilo "Hoje aprendi que…"), de NOITE: contemplativo, na PRIMEIRA pessoa, íntimo. Uma aprendizagem sobre si própria (silêncio, limites, pertença, herança). Ex.: "Hoje aprendi que o meu silêncio é, muitas vezes, a resposta mais honesta." Uma verdade na 1.ª pessoa tão PRECISA que a pessoa a sente como SUA e a põe na sua story como quem diz "sou eu". O dia da semana colore o tom (ex.: domingo mais repouso, segunda mais recomeço, sexta mais balanço), com subtileza.',
 };
 
 function estacaoPt(d: Date): string {
@@ -63,6 +63,12 @@ ${ritual ? `RITUAL DO DIA (${dia}): a frase serve o foco "${ritual.kicker}" — 
 CONTEXTO: ${dia ? `dia da semana: ${dia}. ` : ''}época do ano: ${estacao} (hoje, ${dataPt}). A frase encaixa no momento (dia da semana + estação) com SUBTILEZA, nunca à força nem nomeando a data.
 
 PORTA->SALA: quando a frase funda for fechada para um estranho, abre por um reconhecimento concreto e fecha na frase funda. Concreto e sensorial, NUNCA genérico/autoajuda. Uma só ideia, ritmo poético. Português europeu com TODOS os acentos. SEM travessões (usa vírgulas/pontos).
+
+REFLEXO DE PARTILHA (o objetivo destes posts é SEREM PARTILHADOS): escreve para a pessoa ler e, sem pensar, sentir "isto sou eu" OU "tenho de mandar isto a alguém". Para isso:
+- nomeia um sentimento PRECISO e universal que quase ninguém consegue pôr em palavras (dás voz ao indizível);
+- dá RECONHECIMENTO ou PERMISSÃO que apetece passar a outra pessoa (descansar, dizer não, ir devagar, parar de carregar o que não é teu);
+- tão verdadeira que apeteça GUARDAR e ENVIAR a alguém concreto (a mãe, a irmã, a amiga cansada);
+- a partilha nasce do RECONHECIMENTO e da BELEZA, NUNCA do choque, alarme ou clickbait. Nada de "3 sinais", "o erro que…", nem promessas. Dignidade sempre.
 
 NUNCA repitas nenhuma destas frases já usadas, nem versões quase iguais:
 ${proibidas.length ? proibidas.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda)'}
