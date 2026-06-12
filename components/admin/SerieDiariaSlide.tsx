@@ -160,17 +160,19 @@ export function SerieDiariaSlide({
           </>
         ) : (
           <>
-            {/* cartão fosco + cantoneiras (VC Sabia). Altura CRESCE com o texto e
-                fica centrado, para a assinatura nunca sair do quadrado. Frase em
-                BLOOM (palavras florescem) — distinto do typewriter do Hoje em Mim. */}
-            <div style={{ position: 'absolute', left: 110, right: 110, top: '50%', transform: 'translateY(-50%)', borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}`, padding: '82px 72px', boxSizing: 'border-box' }}>
+            {/* cartão fosco + cantoneiras (VC Sabia). Abraça SÓ a mensagem
+                ("Sabias que…" + frase); a assinatura vai FORA, como rodapé do
+                post (igual ao Hoje em Mim). Frase em BLOOM (palavras florescem)
+                — distinto do typewriter do Hoje em Mim. */}
+            <div style={{ position: 'absolute', left: 110, right: 110, top: '47%', transform: 'translateY(-50%)', borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}`, padding: '82px 72px', boxSizing: 'border-box' }}>
               {cantoneira(true, true)}{cantoneira(true, false)}{cantoneira(false, true)}{cantoneira(false, false)}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40, textAlign: 'center' }}>
                 <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 56, letterSpacing: '0.02em', color: OURO }}>Sabias que…</span>
                 <FraseTW texto={frase} prog={prog} size={tamanhoFrase(frase)} color={CREME} maxW={680} modo="bloom" />
-                <span style={{ fontFamily: FONT_SANS, fontWeight: 400, fontSize: 24, letterSpacing: '0.16em', color: OURO, opacity: 0.88 }}>{SIGNATURE}</span>
               </div>
             </div>
+            {/* rodapé/assinatura FORA do cartão (selo do post) */}
+            <div style={{ position: 'absolute', top: 1748, left: 0, right: 0, textAlign: 'center', fontFamily: FONT_SANS, fontWeight: 400, fontSize: 24, letterSpacing: '0.16em', color: OURO, opacity: 0.85 }}>{SIGNATURE}</div>
           </>
         )}
       </div>
