@@ -145,6 +145,9 @@ type PublicarVideoOpts = {
   titulo: string;          // legenda + hashtags
   modo: 'rascunho' | 'direto';
   privacidade?: Privacidade; // só usado no modo 'direto' (default SELF_ONLY até auditoria)
+  disableComment?: boolean;  // interação (respeitar o creator_info)
+  disableDuet?: boolean;
+  disableStitch?: boolean;
 };
 
 // Inicia a publicação de um vídeo. Devolve o publish_id para sondar o estado.
@@ -164,9 +167,9 @@ export async function publicarVideo(opts: PublicarVideoOpts): Promise<{ ok: bool
   const post_info = {
     title: opts.titulo,
     privacy_level: opts.privacidade ?? 'SELF_ONLY',
-    disable_comment: false,
-    disable_duet: false,
-    disable_stitch: false,
+    disable_comment: opts.disableComment ?? false,
+    disable_duet: opts.disableDuet ?? false,
+    disable_stitch: opts.disableStitch ?? false,
   };
   const r = await apiPost('/post/publish/video/init/', opts.accessToken, { post_info, source_info });
   if (!r.ok) return { ok: false, erro: erroDe(r.json) };
