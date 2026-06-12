@@ -44,7 +44,7 @@ const espacadoUpper = (s: string) => s.toUpperCase().split('').join(' ');
 // frase com MOTION palavra a palavra, conduzida por prog (0..1). prog=1 => tudo
 // visível (estático, p/ poster/feed). modo: 'typewriter' (Hoje em Mim, escreve-se
 // + cursor) ou 'bloom' (VC Sabia, as palavras florescem de um leve desfoque/brilho).
-function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter', fonte = FONT_SERIF }: { texto: string; prog: number; size: number; color: string; maxW?: number; modo?: 'typewriter' | 'bloom'; fonte?: string }) {
+function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter', fonte = FONT_SERIF, alturaLinha = 1.42 }: { texto: string; prog: number; size: number; color: string; maxW?: number; modo?: 'typewriter' | 'bloom'; fonte?: string; alturaLinha?: number }) {
   const palavras = texto.trim().split(/\s+/).filter(Boolean);
   const n = palavras.length;
   const revelar = Math.min(1, prog / 0.85); // revela até 85%, segura cheio no fim
@@ -52,7 +52,7 @@ function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter', fonte = 
   const ultimo = Math.min(n - 1, Math.floor(mostradas));
   const escreve = modo === 'typewriter' && prog < 1 && revelar < 1;
   return (
-    <p style={{ fontFamily: fonte, fontStyle: 'italic', fontWeight: 400, fontSize: size, lineHeight: 1.42, color, margin: 0, maxWidth: maxW, marginLeft: maxW ? 'auto' : undefined, marginRight: maxW ? 'auto' : undefined, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>
+    <p style={{ fontFamily: fonte, fontStyle: 'italic', fontWeight: 400, fontSize: size, lineHeight: alturaLinha, color, margin: 0, maxWidth: maxW, marginLeft: maxW ? 'auto' : undefined, marginRight: maxW ? 'auto' : undefined, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>
       {palavras.map((w, i) => {
         let st: CSSProperties;
         if (modo === 'bloom') {
@@ -65,9 +65,16 @@ function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter', fonte = 
           else if (i === ultimo) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 12 * (1 - f); }
           st = { opacity: op, transform: `translateY(${dy}px)` };
         }
-        return <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', ...st }}>{w}</span>;
+        // o CURSOR vive DENTRO da última palavra visível — acompanha a escrita
+        // (antes ficava no fim da frase completa, parado, porque as palavras
+        // invisíveis já reservam o espaço todo)
+        return (
+          <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', ...st }}>
+            {w}
+            {escreve && i === ultimo && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: color, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
+          </span>
+        );
       })}
-      {escreve && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: color, opacity: 0.85, transform: 'translateY(0.1em)', marginLeft: '0.02em' }} />}
     </p>
   );
 }
@@ -164,12 +171,14 @@ export function SerieDiariaSlide({
             {/* cartão fosco + cantoneiras (VC Sabia). Abraça SÓ a mensagem
                 ("Sabias que…" + frase); a assinatura vai FORA, como rodapé do
                 post (igual ao Hoje em Mim). Frase em BLOOM (palavras florescem)
-                — distinto do typewriter do Hoje em Mim. */}
-            <div style={{ position: 'absolute', left: 110, right: 110, top: '47%', transform: 'translateY(-50%)', borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}`, padding: '82px 72px', boxSizing: 'border-box' }}>
+                — distinto do typewriter do Hoje em Mim. Mais ABAIXO (a imagem
+                contemplativa respira em cima) e com respiro entre linhas.
+                A frase nunca repete o "Sabias que…" (o rótulo já o diz). */}
+            <div style={{ position: 'absolute', left: 110, right: 110, top: '58%', transform: 'translateY(-50%)', borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}`, padding: '72px 72px', boxSizing: 'border-box' }}>
               {cantoneira(true, true)}{cantoneira(true, false)}{cantoneira(false, true)}{cantoneira(false, false)}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40, textAlign: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 44, textAlign: 'center' }}>
                 <span style={{ fontFamily: FONT_MONO, fontStyle: 'italic', fontWeight: 400, fontSize: 50, letterSpacing: '0.01em', color: OURO }}>Sabias que…</span>
-                <FraseTW texto={frase} prog={prog} size={tamanhoFrase(frase)} color={CREME} maxW={680} modo="bloom" fonte={FONT_MONO} />
+                <FraseTW texto={frase.replace(/^sabias\s+que(\.\.\.|…)?,?\s*/i, '')} prog={prog} size={tamanhoFrase(frase)} color={CREME} maxW={680} modo="bloom" fonte={FONT_MONO} alturaLinha={1.66} />
               </div>
             </div>
             {/* rodapé/assinatura FORA do cartão (selo do post) — mono, como o VC Sabia */}
