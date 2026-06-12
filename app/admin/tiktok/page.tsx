@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 
 type Conta = { openId: string; displayName?: string | null; scope?: string | null; ligadoEm: string };
@@ -42,14 +42,19 @@ export default function TikTokPage() {
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [semVideo, setSemVideo] = useState(false);
+  const legendaManualRef = useRef(false); // a Vivianne já editou a legenda à mão?
 
-  // pré-visualização do vídeo do slug (mostra o que vai ser publicado)
+  // pré-visualização do vídeo do slug (mostra o que vai ser publicado) + legenda
   useEffect(() => {
     if (!slug.trim()) { setPreviewUrl(null); setSemVideo(false); return; }
     const t = setTimeout(() => {
       fetch(`/api/admin/tiktok/video?slug=${encodeURIComponent(slug.trim())}`)
         .then((r) => (r.ok ? r.json() : { videoUrl: null }))
-        .then((j: { videoUrl?: string | null }) => { setPreviewUrl(j.videoUrl ?? null); setSemVideo(!j.videoUrl); })
+        .then((j: { videoUrl?: string | null; legenda?: string }) => {
+          setPreviewUrl(j.videoUrl ?? null);
+          setSemVideo(!j.videoUrl);
+          if (!legendaManualRef.current && j.legenda) setTitulo(j.legenda); // pré-enche a legenda+hashtags
+        })
         .catch(() => { setPreviewUrl(null); setSemVideo(true); });
     }, 600);
     return () => clearTimeout(t);
@@ -150,10 +155,11 @@ export default function TikTokPage() {
             </div>
           </div>
 
-          {/* legenda */}
+          {/* legenda + hashtags */}
           <div>
-            <label className="block text-sm font-medium">Legenda (opcional)</label>
-            <textarea value={titulo} onChange={(e) => setTitulo(e.target.value)} rows={3} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900" placeholder="Deixa vazio para usar a legenda da coleção" />
+            <label className="block text-sm font-medium">Legenda e hashtags</label>
+            <textarea value={titulo} onChange={(e) => { legendaManualRef.current = true; setTitulo(e.target.value); }} rows={5} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900" placeholder="A legenda da coleção aparece aqui automaticamente…" />
+            <p className="mt-1 text-xs text-stone-500">Vem da coleção (legenda + hashtags). Podes editar à vontade.</p>
           </div>
 
           {/* info do criador + privacidade */}
