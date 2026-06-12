@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { SerieDiariaSlide, SERIES, type SerieId } from '@/components/admin/SerieDiariaSlide';
-import { PALETAS, REGENTE, paletaDoDia, type PaletaId } from '@/lib/series/serie-design';
+import { PALETAS, REGENTE, paletaDoDia, HORA_SERIE, type PaletaId } from '@/lib/series/serie-design';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'block' });
@@ -85,6 +85,7 @@ export default function SeriesDiariaPreview() {
                 <button key={s} onClick={() => trocarSerie(s)} className={`text-[0.8rem] px-3 py-1.5 rounded-lg border ${serie === s ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>{SERIES[s].nome} <span className="opacity-50">· {SERIES[s].momento}</span></button>
               ))}
             </div>
+            <p className="text-[0.62rem] opacity-55 mt-1.5">publica ~ <b className="opacity-90">{HORA_SERIE[serie]}</b> ({serie === 'vcsabia' ? 'manhã, motivação para começar o dia' : 'noite, fecho do dia'})</p>
           </div>
 
           {serie === 'hojeemmim' && (

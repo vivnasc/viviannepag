@@ -45,3 +45,7 @@ export const PALETA_DO_DIA: Record<string, PaletaId> = {
   domingo: 'dourado',         // Sol — dourado, luz/intenção
 };
 export const paletaDoDia = (dia?: string): PaletaId => (dia && PALETA_DO_DIA[dia]) || 'carta-noturna';
+
+// Hora de publicação por série: a MANHÃ (VC Sabia) às 07h, quando as pessoas
+// procuram motivação para começar o dia; a NOITE (Hoje em Mim) fecha o dia.
+export const HORA_SERIE: Record<string, string> = { vcsabia: '07:00', hojeemmim: '21:00' };
