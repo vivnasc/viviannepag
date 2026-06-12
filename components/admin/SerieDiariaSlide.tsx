@@ -6,7 +6,7 @@
 // Desenha-se sobre o vídeo de motion (Midjourney/Runway). transparente=true =>
 // sem fundo, para o render sobrepor ao vídeo. Canvas 1080x1920 escalado.
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { ROTACAO, PALETAS, CREME, type PaletaId } from '@/lib/series/serie-design';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
@@ -40,22 +40,31 @@ function tamanhoFrase(t: string): number {
 
 const espacadoUpper = (s: string) => s.toUpperCase().split('').join(' ');
 
-// frase em TYPEWRITER: revela-se palavra a palavra em função de prog (0..1).
-// prog=1 => tudo visível (estático, p/ poster/feed). O render conduz prog frame
-// a frame e compõe sobre o vídeo de motion.
-function FraseTW({ texto, prog, size, color, maxW }: { texto: string; prog: number; size: number; color: string; maxW?: number }) {
+// frase com MOTION palavra a palavra, conduzida por prog (0..1). prog=1 => tudo
+// visível (estático, p/ poster/feed). modo: 'typewriter' (Hoje em Mim, escreve-se
+// + cursor) ou 'bloom' (VC Sabia, as palavras florescem de um leve desfoque/brilho).
+function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter' }: { texto: string; prog: number; size: number; color: string; maxW?: number; modo?: 'typewriter' | 'bloom' }) {
   const palavras = texto.trim().split(/\s+/).filter(Boolean);
-  const revelar = Math.min(1, prog / 0.85); // escreve até 85%, segura cheio no fim
-  const mostradas = revelar * palavras.length;
-  const ultimo = Math.min(palavras.length - 1, Math.floor(mostradas));
-  const escreve = prog < 1 && revelar < 1;
+  const n = palavras.length;
+  const revelar = Math.min(1, prog / 0.85); // revela até 85%, segura cheio no fim
+  const mostradas = revelar * n;
+  const ultimo = Math.min(n - 1, Math.floor(mostradas));
+  const escreve = modo === 'typewriter' && prog < 1 && revelar < 1;
   return (
     <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: size, lineHeight: 1.42, color, margin: 0, maxWidth: maxW, marginLeft: maxW ? 'auto' : undefined, marginRight: maxW ? 'auto' : undefined, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>
       {palavras.map((w, i) => {
-        let op = 0, dy = 12;
-        if (i < ultimo) { op = 1; dy = 0; }
-        else if (i === ultimo) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 12 * (1 - f); }
-        return <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', opacity: op, transform: `translateY(${dy}px)` }}>{w}</span>;
+        let st: CSSProperties;
+        if (modo === 'bloom') {
+          const ini = n > 1 ? (i / (n - 1)) * 0.5 : 0; // entram escalonadas
+          const f = Math.max(0, Math.min(1, (revelar - ini) / 0.42));
+          st = { opacity: f, filter: `blur(${(1 - f) * 12}px)`, transform: `translateY(${(1 - f) * 8}px) scale(${0.965 + 0.035 * f})`, textShadow: `0 0 ${28 * (1 - f) + 8}px rgba(255,243,225,${0.4 * (1 - f) + 0.18}), 0 2px 18px rgba(0,0,0,0.55)` };
+        } else {
+          let op = 0, dy = 12;
+          if (i < ultimo) { op = 1; dy = 0; }
+          else if (i === ultimo) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 12 * (1 - f); }
+          st = { opacity: op, transform: `translateY(${dy}px)` };
+        }
+        return <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', ...st }}>{w}</span>;
       })}
       {escreve && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: color, opacity: 0.85, transform: 'translateY(0.1em)', marginLeft: '0.02em' }} />}
     </p>
@@ -151,12 +160,14 @@ export function SerieDiariaSlide({
           </>
         ) : (
           <>
-            {/* cartão fosco + cantoneiras (VC Sabia) */}
-            <div style={{ position: 'absolute', left: 110, top: 560, width: 860, height: 800, borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}` }}>
+            {/* cartão fosco + cantoneiras (VC Sabia). Altura CRESCE com o texto e
+                fica centrado, para a assinatura nunca sair do quadrado. Frase em
+                BLOOM (palavras florescem) — distinto do typewriter do Hoje em Mim. */}
+            <div style={{ position: 'absolute', left: 110, right: 110, top: '50%', transform: 'translateY(-50%)', borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}`, padding: '82px 72px', boxSizing: 'border-box' }}>
               {cantoneira(true, true)}{cantoneira(true, false)}{cantoneira(false, true)}{cantoneira(false, false)}
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 46, padding: '90px 72px', textAlign: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40, textAlign: 'center' }}>
                 <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 56, letterSpacing: '0.02em', color: OURO }}>Sabias que…</span>
-                <FraseTW texto={frase} prog={prog} size={60} color={CREME} maxW={700} />
+                <FraseTW texto={frase} prog={prog} size={tamanhoFrase(frase)} color={CREME} maxW={680} modo="bloom" />
                 <span style={{ fontFamily: FONT_SANS, fontWeight: 400, fontSize: 24, letterSpacing: '0.16em', color: OURO, opacity: 0.88 }}>{SIGNATURE}</span>
               </div>
             </div>
