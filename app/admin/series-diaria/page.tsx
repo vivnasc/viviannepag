@@ -6,6 +6,7 @@
 // do teu Midjourney) para veres a moldura sobre um fundo real.
 
 import { useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { SerieDiariaSlide, SERIES, type SerieId } from '@/components/admin/SerieDiariaSlide';
 import { PALETAS, REGENTE, paletaDoDia, HORA_SERIE, type PaletaId } from '@/lib/series/serie-design';
@@ -66,6 +67,41 @@ export default function SeriesDiariaPreview() {
     const id = setInterval(() => setBulkSeg((s) => s + 1), 1000);
     return () => clearInterval(id);
   }, [bulkBusy]);
+
+  // ── PRODUÇÃO do mês: rever cada dia, copiar prompts MJ, carregar motions ──
+  type ProdDia = { slug: string; data: string | null; dia: string | null; frase: string; motionUrl: string | null; motionFonte: string | null; mjPrompt: string; audioMood: string | null; aprovado: boolean };
+  const [prodDias, setProdDias] = useState<ProdDia[] | null>(null);
+  const [prodBusy, setProdBusy] = useState(false);
+  const [uploadSlug, setUploadSlug] = useState<string | null>(null);
+  const [copiadoSlug, setCopiadoSlug] = useState<string | null>(null);
+
+  async function carregarProducao() {
+    setProdBusy(true);
+    try {
+      const r = await fetch(`/api/admin/series-diaria/list?serie=${serie}`);
+      const j = await r.json();
+      setProdDias(j.ok ? j.dias : []);
+    } catch { setProdDias([]); }
+    setProdBusy(false);
+  }
+
+  async function carregarMotion(slug: string, file: File) {
+    setUploadSlug(slug);
+    try {
+      const ext = file.name.split('.').pop() || 'mp4';
+      const r1 = await fetch('/api/admin/series-diaria/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'sign', slug, ext }) });
+      const j1 = await r1.json();
+      if (!r1.ok) throw new Error(j1.detalhe ?? j1.erro);
+      const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL as string, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string);
+      const { error } = await sb.storage.from(j1.bucket).uploadToSignedUrl(j1.path, j1.token, file, { contentType: file.type || 'video/mp4' });
+      if (error) throw error;
+      const r2 = await fetch('/api/admin/series-diaria/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'set', slug, path: j1.path }) });
+      const j2 = await r2.json();
+      if (!r2.ok) throw new Error(j2.detalhe ?? j2.erro);
+      setProdDias((xs) => (xs ?? []).map((d) => d.slug === slug ? { ...d, motionUrl: j2.url, motionFonte: 'upload' } : d));
+    } catch (e) { alert('Falha no upload do motion: ' + String(e)); }
+    setUploadSlug(null);
+  }
 
   const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setMjPrompt(''); if (s === 'hojeemmim') setPaleta(paletaDoDia(dia)); };
   const trocarDia = (d: string) => { setDia(d); setPaleta(paletaDoDia(d)); }; // paleta FIXA por dia (regente)
@@ -205,6 +241,50 @@ export default function SeriesDiariaPreview() {
                     </tbody>
                   </table>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── PRODUÇÃO do mês: rever · copiar prompts MJ · carregar motions ── */}
+          <div className="rounded-xl border border-ocre/20 bg-black/15 p-4 space-y-3">
+            <div className="flex items-center gap-2 flex-wrap">
+              <p className="text-[0.8rem] font-semibold">🎬 Produção do mês ({SERIES[serie].nome})</p>
+              <button onClick={carregarProducao} disabled={prodBusy} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/45 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{prodBusy ? 'a ler…' : '↻ atualizar'}</button>
+              {prodDias && <span className="text-[0.66rem] opacity-55">{prodDias.length} dias · {prodDias.filter((d) => d.motionUrl).length} com motion · {prodDias.filter((d) => !d.motionUrl).length} por carregar</span>}
+            </div>
+            <p className="text-[0.62rem] opacity-50 -mt-1">O passo entre gerar e publicar: para cada dia, vê a frase, copia o prompt MJ (dos que não têm motion da pool), gera no Midjourney/Runway e <b>arrasta o vídeo</b> aqui. Depois aprovas na Publicar.</p>
+
+            {!prodDias && <p className="text-[0.7rem] opacity-50">Carrega <b>↻ atualizar</b> para ver os dias gerados.</p>}
+            {prodDias && prodDias.length === 0 && <p className="text-[0.7rem] opacity-50">Ainda não há dias gerados desta série. Usa o <b>📦 Gerar 1 mês</b> em cima.</p>}
+
+            {prodDias && prodDias.length > 0 && (
+              <div className="space-y-2">
+                {prodDias.map((d) => (
+                  <div key={d.slug} className="flex gap-3 items-start rounded-lg border border-ocre/15 bg-black/20 p-2.5">
+                    <div className="w-20 shrink-0">
+                      {d.motionUrl
+                        ? <video src={d.motionUrl} muted loop playsInline className="w-20 aspect-[9/16] object-cover rounded-md bg-black" onMouseEnter={(e) => e.currentTarget.play().catch(() => {})} onMouseLeave={(e) => e.currentTarget.pause()} />
+                        : <div className="w-20 aspect-[9/16] rounded-md bg-black/40 grid place-items-center text-[0.55rem] opacity-40 text-center px-1">sem<br />motion</div>}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 text-[0.62rem] opacity-60">
+                        <span className="font-mono">{d.data}</span><span>·</span><span>{d.dia}</span>
+                        {d.audioMood && <><span>·</span><span>🔊 {d.audioMood}</span></>}
+                        {d.aprovado && <span className="text-salvia">· ✓ aprovado</span>}
+                      </div>
+                      <p className="text-[0.84rem] leading-snug mt-0.5 line-clamp-2">{d.frase}</p>
+                      <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                        {d.motionUrl
+                          ? <span className="text-[0.62rem] px-2 py-0.5 rounded-full bg-salvia/15 text-salvia">{d.motionFonte === 'pool' ? '♻ motion da pool' : '⬆ motion teu'}</span>
+                          : <button onClick={() => { navigator.clipboard.writeText(d.mjPrompt); setCopiadoSlug(d.slug); setTimeout(() => setCopiadoSlug(null), 1500); }} disabled={!d.mjPrompt} className="text-[0.64rem] px-2 py-0.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30">{copiadoSlug === d.slug ? '✓ copiado' : '⧉ copiar prompt MJ'}</button>}
+                        <label className="text-[0.64rem] px-2 py-0.5 rounded-full border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 cursor-pointer">
+                          {uploadSlug === d.slug ? 'a carregar…' : (d.motionUrl ? '⬆ trocar motion' : '⬆ carregar motion')}
+                          <input type="file" accept="video/*" hidden disabled={uploadSlug === d.slug} onChange={(e) => { const f = e.target.files?.[0]; if (f) carregarMotion(d.slug, f); e.currentTarget.value = ''; }} />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
