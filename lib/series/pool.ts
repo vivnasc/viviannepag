@@ -29,7 +29,9 @@ export type Motion = { nome: string; path: string; url: string; mood?: string; c
 export type AudioMood = { mood: string; ficheiros: { nome: string; url: string }[] };
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-const palavrasDe = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 3);
+// inclui palavras curtas de imagem (sol, lua, mar, luz, céu…); stopwords não
+// fazem mal — só contam se aparecerem também no nome/etiqueta do motion.
+const palavrasDe = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length >= 3);
 
 function publicUrl(path: string): string {
   return `${ESCOLA_URL}/storage/v1/object/public/${COURSE_BUCKET}/${path}`;
@@ -116,25 +118,29 @@ function score(frase: string, m: Motion): number {
   return s;
 }
 
-// regra da Vivianne: NOVOS primeiro (nunca usados, mais recentes à frente);
-// entre novos com match, o melhor match ganha; senão o novo mais recente.
-// QUARENTENA: usados nos últimos 90 dias (vs a data alvo) ficam de fora —
-// se não sobrar nenhum, devolve null (o dia fica "falta motion", e ela sabe
-// que precisa de gerar um novo no MJ). Nunca repete dentro do mesmo lote.
-export function escolherMotion(frase: string, pool: Motion[], usos: Record<string, UsoMotion>, jaNesteLote: Set<string>, dataAlvo = ''): Motion | null {
+// regra da Vivianne: os motions NOVOS que ela gera casam sempre (são feitos a
+// partir do mjPrompt daquele dia). O risco está na REUTILIZAÇÃO da pool — por
+// isso aqui o CONTEÚDO manda: recebe um DESCRITOR (de preferência o mjPrompt em
+// inglês — a metáfora visual que o Claude escreveu — junto com a frase PT, para
+// casar tenham as etiquetas inglês ou português) e escolhe o motion da pool cujo
+// nome/etiqueta/categoria mais partilha com essa imagem. Só devolve se houver
+// encaixe REAL (≥1 conceito partilhado); senão devolve null e o dia fica "falta
+// motion" — ela gera um novo no MJ a partir do mesmo mjPrompt (esse, por
+// construção, casa sempre). QUARENTENA 90d e nunca repetir no lote mantêm-se.
+export function escolherMotion(descritor: string, pool: Motion[], usos: Record<string, UsoMotion>, jaNesteLote: Set<string>, dataAlvo = ''): Motion | null {
   if (!pool.length) return null;
   const cands = pool.filter((m) => !jaNesteLote.has(m.path) && !emQuarentena(usos[m.path], dataAlvo));
   if (!cands.length) return null;
-  const novos = cands.filter((m) => !((usos[m.path]?.n ?? 0) > 0));
-  const ordenar = (xs: Motion[]) =>
-    [...xs].sort((a, b) => {
-      const ds = score(frase, b) - score(frase, a);
-      if (ds) return ds;
-      const du = (usos[a.path]?.n ?? 0) - (usos[b.path]?.n ?? 0);
-      if (du) return du;
-      return (b.criadoEm ?? '').localeCompare(a.criadoEm ?? '');
-    });
-  return ordenar(novos.length ? novos : cands)[0] ?? null;
+  const melhor = [...cands].sort((a, b) => {
+    const ds = score(descritor, b) - score(descritor, a);
+    if (ds) return ds;                                          // 1.º: melhor encaixe visual
+    const du = (usos[a.path]?.n ?? 0) - (usos[b.path]?.n ?? 0);
+    if (du) return du;                                          // 2.º: menos usado (entre iguais)
+    return (b.criadoEm ?? '').localeCompare(a.criadoEm ?? '');  // 3.º: mais recente
+  })[0];
+  // o conteúdo MANDA: sem encaixe real não se força um motion da pool numa frase
+  // que não tem nada a ver — o dia fica "falta motion" e gera-se o certo no MJ.
+  return melhor && score(descritor, melhor) > 0 ? melhor : null;
 }
 
 // mood do áudio: keyword da frase → mood; senão fallback do dia da semana

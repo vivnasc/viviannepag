@@ -54,6 +54,7 @@ export default function SeriesDiariaPage() {
   const [prodDias, setProdDias] = useState<ProdDia[] | null>(null);
   const [prodBusy, setProdBusy] = useState(false);
   const [uploadSlug, setUploadSlug] = useState<string | null>(null);
+  const [dragSlug, setDragSlug] = useState<string | null>(null); // dia sob arrasto (highlight da dropzone)
   const [copiadoSlug, setCopiadoSlug] = useState<string | null>(null);
   const [selSlug, setSelSlug] = useState<string | null>(null);
   const [prodProg, setProdProg] = useState(1);
@@ -423,8 +424,18 @@ export default function SeriesDiariaPage() {
                       <span className="text-[0.6rem] opacity-55">{sel.motionUrl ? (sel.motionFonte === 'pool' ? '♻ motion da pool' : '⬆ motion teu') : '⚠ sem motion'}</span>
                       {sel.motionUrl && <button onClick={() => queimarMotion(sel.slug)} disabled={diaBusy === sel.slug} className="text-[0.64rem] px-2.5 py-1 rounded-lg border border-[#C97373]/40 text-[#C97373]/85 hover:bg-[#C97373]/10 disabled:opacity-30 text-left">{diaBusy === sel.slug ? '⏳…' : '🔁 já usei este motion (quarentena + trocar)'}</button>}
                       <button onClick={() => { navigator.clipboard.writeText(sel.mjPrompt); setCopiadoSlug(sel.slug); setTimeout(() => setCopiadoSlug(null), 1500); }} disabled={!sel.mjPrompt} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30 text-left">{copiadoSlug === sel.slug ? '✓ copiado — cola no MJ/Runway' : '⧉ copiar prompt (gerar motion novo)'}</button>
-                      <label className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 cursor-pointer text-center">
-                        {uploadSlug === sel.slug ? 'a carregar…' : (sel.motionUrl ? '⬆ trocar motion' : '⬆ carregar motion')}
+                      {/* DROPZONE real: arrasta o MP4 do MJ/Runway para aqui (ou clica). */}
+                      <label
+                        onDragOver={(e) => { e.preventDefault(); if (uploadSlug !== sel.slug) setDragSlug(sel.slug); }}
+                        onDragLeave={(e) => { e.preventDefault(); setDragSlug((s) => (s === sel.slug ? null : s)); }}
+                        onDrop={(e) => {
+                          e.preventDefault(); setDragSlug(null);
+                          const f = Array.from(e.dataTransfer.files).find((x) => x.type.startsWith('video/') || /\.(mp4|mov|webm|m4v)$/i.test(x.name));
+                          if (f) carregarMotion(sel.slug, f); else alert('Arrasta um ficheiro de vídeo (MP4/MOV).');
+                        }}
+                        className={`text-[0.66rem] px-2.5 py-3 rounded-lg border border-dashed cursor-pointer text-center transition-colors ${dragSlug === sel.slug ? 'border-ambar bg-ambar/15 text-ambar' : 'border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20'}`}
+                      >
+                        {uploadSlug === sel.slug ? 'a carregar…' : dragSlug === sel.slug ? '⬇ larga o vídeo aqui' : (sel.motionUrl ? '⬆ arrasta o vídeo aqui (ou clica) p/ trocar' : '⬆ arrasta o vídeo aqui (ou clica)')}
                         <input type="file" accept="video/*" hidden disabled={uploadSlug === sel.slug} onChange={(e) => { const f = e.target.files?.[0]; if (f) carregarMotion(sel.slug, f); e.currentTarget.value = ''; }} />
                       </label>
                       <button onClick={() => renderDia(sel.slug)} disabled={!sel.motionUrl || diaBusy === sel.slug} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-30">🎬 renderizar este dia{sel.videoUrl ? ' (de novo)' : ''}</button>
