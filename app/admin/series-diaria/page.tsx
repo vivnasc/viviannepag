@@ -203,6 +203,9 @@ export default function SeriesDiariaPage() {
     setRegBusy(false);
   }
 
+  // moldura: anima o motion de texto em loop
+  useEffect(() => {
+    if (!verMoldura || !anima) { setProg(1); return; }
     let raf = 0; let start: number | null = null;
     const DUR = 4200, HOLD = 1500, TOTAL = DUR + HOLD;
     const tick = (t: number) => { if (start == null) start = t; setProg(Math.min(1, ((t - start) % TOTAL) / DUR)); raf = requestAnimationFrame(tick); };
