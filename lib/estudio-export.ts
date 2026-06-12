@@ -465,12 +465,17 @@ export function gerarMetricoolCSV(
   return lines.join('\r\n');
 }
 
-// ── CSV Metricool das SÉRIES DIÁRIAS (VC Sabia / Hoje em Mim) ──
-// Reaproveita o CABEÇALHO e o escaping reais do Metricool. Cada dia já é um
-// MP4 (reel/vídeo): TikTok e/ou Instagram (Reel). A legenda LONGA vai no Text.
-export type SerieCsvDia = { videoUrl: string; caption: string; titulo?: string; date: string; time: string };
+// ── CSV Metricool a partir da PUBLICAR (qualquer conta) ──
+// Reaproveita o CABEÇALHO e o escaping reais do Metricool. Exporta os posts que
+// a Vivianne escolhe na Publicar (por conta + intervalo de datas) para agendar
+// em massa — sobretudo o TikTok, que não se publica sozinho daqui.
+//   - post com vídeo (reel/MP4): TikTok e/ou Instagram (Reel)
+//   - post com imagens (carrossel): Instagram (carrossel). TikTok não aceita PNG,
+//     por isso fica de fora dos posts de imagem.
+// A legenda LONGA (com hashtags) vai no Text. Cache-busting no URL.
+export type PublicarCsvDia = { videoUrl?: string | null; imagens?: string[]; caption: string; titulo?: string; date: string; time: string };
 
-export function gerarMetricoolCSVSeries(dias: SerieCsvDia[], plataforma: 'tiktok' | 'instagram' | 'ambas' = 'tiktok'): string {
+export function gerarMetricoolCSVPublicar(dias: PublicarCsvDia[], plataforma: 'tiktok' | 'instagram' | 'ambas' = 'tiktok'): string {
   const lines: string[] = [CSV_HEADER.join(',')];
   const cacheBust = Date.now();
   const semCache = (u: string) => u + (u.includes('?') ? '&' : '?') + 'v=' + cacheBust;
@@ -479,26 +484,42 @@ export function gerarMetricoolCSVSeries(dias: SerieCsvDia[], plataforma: 'tiktok
     'Instagram': 'FALSE', 'Pinterest': 'FALSE', 'TikTok': 'FALSE', 'Youtube': 'FALSE',
     'Threads': 'FALSE', 'Bluesky': 'FALSE', 'Draft': 'FALSE',
   };
+  const querTT = plataforma === 'tiktok' || plataforma === 'ambas';
+  const querIG = plataforma === 'instagram' || plataforma === 'ambas';
   for (const d of dias) {
-    if (!d.videoUrl) continue;
+    const video = d.videoUrl ? semCache(d.videoUrl) : '';
+    const imagens = (d.imagens ?? []).filter(Boolean);
+    if (!video && !imagens.length) continue;
     const time = d.time?.length === 5 ? `${d.time}:00` : (d.time || '13:00:00');
     const alt = (d.titulo ?? '').slice(0, 140);
-    const video = semCache(d.videoUrl);
-    if (plataforma === 'tiktok' || plataforma === 'ambas') {
+
+    if (video) {
+      // REEL / vídeo — TikTok (Picture Url 1 = MP4) e/ou Instagram Reel
+      if (querTT) {
+        lines.push(buildRow({
+          ...base, 'Picture Url 1': video, 'Alt text picture 1': alt,
+          'Text': d.caption, 'Date': d.date, 'Time': time, 'TikTok': 'TRUE',
+          'TikTok Title': (d.titulo ?? '').slice(0, 90),
+          'TikTok disable comments': 'FALSE', 'TikTok disable duet': 'FALSE', 'TikTok disable stitch': 'FALSE',
+          'TikTok Post Privacy': 'PUBLIC_TO_EVERYONE', 'TikTok Branded Content': 'FALSE',
+          'TikTok Your Brand': 'FALSE', 'TikTok Auto Add Music': 'FALSE', 'TikTok is AI generated content': 'FALSE',
+        }));
+      }
+      if (querIG) {
+        lines.push(buildRow({
+          ...base, 'Picture Url 1': video, 'Alt text picture 1': alt,
+          'Text': d.caption, 'Date': d.date, 'Time': time, 'Instagram': 'TRUE',
+          'Instagram Post Type': 'Reel', 'Instagram Show Reel On Feed': 'TRUE',
+        }));
+      }
+    } else if (querIG) {
+      // CARROSSEL de imagens — só Instagram (TikTok rejeita PNG)
+      const pics: RowOverrides = {};
+      imagens.slice(0, 10).forEach((u, i) => { pics[`Picture Url ${i + 1}`] = semCache(u); });
+      if (alt) pics['Alt text picture 1'] = alt;
       lines.push(buildRow({
-        ...base, 'Picture Url 1': video, 'Alt text picture 1': alt,
-        'Text': d.caption, 'Date': d.date, 'Time': time, 'TikTok': 'TRUE',
-        'TikTok Title': (d.titulo ?? '').slice(0, 90),
-        'TikTok disable comments': 'FALSE', 'TikTok disable duet': 'FALSE', 'TikTok disable stitch': 'FALSE',
-        'TikTok Post Privacy': 'PUBLIC_TO_EVERYONE', 'TikTok Branded Content': 'FALSE',
-        'TikTok Your Brand': 'FALSE', 'TikTok Auto Add Music': 'FALSE', 'TikTok is AI generated content': 'FALSE',
-      }));
-    }
-    if (plataforma === 'instagram' || plataforma === 'ambas') {
-      lines.push(buildRow({
-        ...base, 'Picture Url 1': video, 'Alt text picture 1': alt,
-        'Text': d.caption, 'Date': d.date, 'Time': time, 'Instagram': 'TRUE',
-        'Instagram Post Type': 'Reel', 'Instagram Show Reel On Feed': 'TRUE',
+        ...base, ...pics, 'Text': d.caption, 'Date': d.date, 'Time': time,
+        'Instagram': 'TRUE', 'Instagram Post Type': 'POST',
       }));
     }
   }

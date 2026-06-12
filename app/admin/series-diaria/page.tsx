@@ -62,9 +62,6 @@ export default function SeriesDiariaPage() {
   const [renderMsg, setRenderMsg] = useState<string | null>(null);
   const [rndDe, setRndDe] = useState('');
   const [rndAte, setRndAte] = useState('');
-  // ── 4 · PUBLICAR (CSV Metricool) ──
-  const [csvPlat, setCsvPlat] = useState<'tiktok' | 'instagram' | 'ambas'>('tiktok');
-  const [csvMsg, setCsvMsg] = useState<string | null>(null);
 
   // ── moldura (preview, colapsável) ──
   const [verMoldura, setVerMoldura] = useState(false);
@@ -183,18 +180,6 @@ export default function SeriesDiariaPage() {
       setRenderMsg(r.ok ? `🎬 ${comMotion.length} dia(s) a renderizar no GitHub Actions. Daqui a uns minutos carrega "↻ atualizar" no ② e os MP4 aparecem.` : `⚠ ${j.detalhe ?? j.erro ?? r.status}`);
     } catch (e) { setRenderMsg('⚠ ' + String(e)); }
     setRenderBusy(false);
-  }
-
-  // CSV do Metricool: só os dias COM MP4 no período (de/até do passo ③). TikTok
-  // por defeito (que ela não consegue agendar de outra forma); pode ser IG ou ambas.
-  function baixarCSV() {
-    const prontos = (prodDias ?? []).filter((d) => d.videoUrl && d.data && (!rndDe || d.data >= rndDe) && (!rndAte || d.data <= rndAte));
-    if (!prontos.length) { setCsvMsg('Nenhum dia COM MP4 no período. Renderiza primeiro (passo ③).'); return; }
-    const qs = new URLSearchParams({ serie, plataforma: csvPlat });
-    if (rndDe) qs.set('de', rndDe);
-    if (rndAte) qs.set('ate', rndAte);
-    window.location.href = `/api/admin/series-diaria/csv?${qs.toString()}`;
-    setCsvMsg(`⬇ CSV de ${prontos.length} dia(s) (${csvPlat === 'ambas' ? 'TikTok + Instagram' : csvPlat}). Importa no Metricool → agenda em massa.`);
   }
 
   const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setBulkRes(null); setBulkErro(null); };
@@ -467,20 +452,8 @@ export default function SeriesDiariaPage() {
         </Passo>
 
         {/* ── 4 · PUBLICAR ── */}
-        <Passo n="④" titulo="Publicar · aprovar e agendar" sub="Instagram publica-se sozinho à hora depois do teu ✓ na Publicar (vivianne.dos.santos). TikTok não dá para agendar aqui — sai por CSV do Metricool, que agenda em massa. Usa o mesmo período (de/até) do passo ③.">
-          <div className="flex items-center gap-2 flex-wrap">
-            <Link href="/admin/publicar" className="inline-block text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-salvia/50 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">abrir Publicar →</Link>
-            <span className="opacity-30">·</span>
-            <div className="inline-flex rounded-lg border border-ocre/25 overflow-hidden text-[0.7rem]">
-              {([['tiktok', 'TikTok'], ['instagram', 'Instagram'], ['ambas', 'ambas']] as const).map(([k, lbl]) => (
-                <button key={k} onClick={() => setCsvPlat(k)} className={`px-2.5 py-1.5 ${csvPlat === k ? 'bg-ambar/15 text-ambar' : 'text-creme-2/60 hover:text-creme-2'}`}>{lbl}</button>
-              ))}
-            </div>
-            <button onClick={baixarCSV} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">⬇ CSV Metricool</button>
-            {prodDias && <span className="text-[0.64rem] opacity-55">{prodDias.filter((d) => d.videoUrl).length} dia(s) com MP4</span>}
-          </div>
-          {csvMsg && <p className="text-[0.7rem] text-ambar">{csvMsg}</p>}
-          <p className="text-[0.62rem] opacity-45">Só entram dias COM MP4 (renderizados no ③). O CSV leva o MP4 (com cache-busting), a legenda longa, data e hora ({HORA_SERIE[serie]}). No Metricool: importar planeamento → CSV.</p>
+        <Passo n="④" titulo="Publicar · aprovar e agendar" sub="Tudo na Publicar (conta vivianne.dos.santos): cada dia gerado fica lá. Aprovas → o Instagram publica-se sozinho à hora. O TikTok sai por CSV do Metricool — na Publicar tens ⬇ exportar CSV (escolhes a conta + intervalo de datas) e agendas em massa.">
+          <Link href="/admin/publicar" className="inline-block text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-salvia/50 bg-salvia/10 text-salvia hover:bg-salvia/20 no-underline">abrir Publicar →</Link>
         </Passo>
 
         {/* ── moldura (preview, colapsável) ── */}
