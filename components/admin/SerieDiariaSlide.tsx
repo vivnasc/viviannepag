@@ -11,6 +11,7 @@ import { ROTACAO, PALETAS, CREME, type PaletaId } from '@/lib/series/serie-desig
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
+const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), "Courier New", monospace'; // VC Sabia (máquina de escrever)
 const SIGNATURE = 'viviannedossantos.com';
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
@@ -43,7 +44,7 @@ const espacadoUpper = (s: string) => s.toUpperCase().split('').join(' ');
 // frase com MOTION palavra a palavra, conduzida por prog (0..1). prog=1 => tudo
 // visível (estático, p/ poster/feed). modo: 'typewriter' (Hoje em Mim, escreve-se
 // + cursor) ou 'bloom' (VC Sabia, as palavras florescem de um leve desfoque/brilho).
-function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter' }: { texto: string; prog: number; size: number; color: string; maxW?: number; modo?: 'typewriter' | 'bloom' }) {
+function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter', fonte = FONT_SERIF }: { texto: string; prog: number; size: number; color: string; maxW?: number; modo?: 'typewriter' | 'bloom'; fonte?: string }) {
   const palavras = texto.trim().split(/\s+/).filter(Boolean);
   const n = palavras.length;
   const revelar = Math.min(1, prog / 0.85); // revela até 85%, segura cheio no fim
@@ -51,7 +52,7 @@ function FraseTW({ texto, prog, size, color, maxW, modo = 'typewriter' }: { text
   const ultimo = Math.min(n - 1, Math.floor(mostradas));
   const escreve = modo === 'typewriter' && prog < 1 && revelar < 1;
   return (
-    <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: size, lineHeight: 1.42, color, margin: 0, maxWidth: maxW, marginLeft: maxW ? 'auto' : undefined, marginRight: maxW ? 'auto' : undefined, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>
+    <p style={{ fontFamily: fonte, fontStyle: 'italic', fontWeight: 400, fontSize: size, lineHeight: 1.42, color, margin: 0, maxWidth: maxW, marginLeft: maxW ? 'auto' : undefined, marginRight: maxW ? 'auto' : undefined, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>
       {palavras.map((w, i) => {
         let st: CSSProperties;
         if (modo === 'bloom') {
@@ -167,12 +168,12 @@ export function SerieDiariaSlide({
             <div style={{ position: 'absolute', left: 110, right: 110, top: '47%', transform: 'translateY(-50%)', borderRadius: 22, background: 'rgba(20,15,30,0.30)', border: `1px solid ${OURO}`, padding: '82px 72px', boxSizing: 'border-box' }}>
               {cantoneira(true, true)}{cantoneira(true, false)}{cantoneira(false, true)}{cantoneira(false, false)}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40, textAlign: 'center' }}>
-                <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 56, letterSpacing: '0.02em', color: OURO }}>Sabias que…</span>
-                <FraseTW texto={frase} prog={prog} size={tamanhoFrase(frase)} color={CREME} maxW={680} modo="bloom" />
+                <span style={{ fontFamily: FONT_MONO, fontStyle: 'italic', fontWeight: 400, fontSize: 50, letterSpacing: '0.01em', color: OURO }}>Sabias que…</span>
+                <FraseTW texto={frase} prog={prog} size={tamanhoFrase(frase)} color={CREME} maxW={680} modo="bloom" fonte={FONT_MONO} />
               </div>
             </div>
-            {/* rodapé/assinatura FORA do cartão (selo do post) */}
-            <div style={{ position: 'absolute', top: 1748, left: 0, right: 0, textAlign: 'center', fontFamily: FONT_SANS, fontWeight: 400, fontSize: 24, letterSpacing: '0.16em', color: OURO, opacity: 0.85 }}>{SIGNATURE}</div>
+            {/* rodapé/assinatura FORA do cartão (selo do post) — mono, como o VC Sabia */}
+            <div style={{ position: 'absolute', top: 1748, left: 0, right: 0, textAlign: 'center', fontFamily: FONT_MONO, fontWeight: 400, fontSize: 22, letterSpacing: '0.14em', color: OURO, opacity: 0.85 }}>{SIGNATURE}</div>
           </>
         )}
       </div>
