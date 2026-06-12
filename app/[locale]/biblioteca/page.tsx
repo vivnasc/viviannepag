@@ -92,7 +92,7 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
           {ESTANTES.map(estante => (
             <section key={estante.id} id={estante.id} className="scroll-mt-24">
               <div className="mb-6">
-                <p className="text-[0.64rem] tracking-[0.28em] uppercase text-salvia/70 mb-2">
+                <p className={`text-[0.64rem] tracking-[0.28em] uppercase ${estante.cor.texto} mb-2`}>
                   {isEn ? 'shelf' : 'estante'} {estante.romano} · {isEn ? estante.nomeEn : estante.nome}
                 </p>
                 <h2 className="font-serif italic font-light text-creme text-[1.45rem] leading-snug mb-2">
@@ -109,9 +109,9 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
                     <Link
                       key={livro.slug}
                       href={`${prefix}${livro.href}`}
-                      className="no-underline border border-salvia/40 rounded-[14px] p-5 hover:border-salvia transition-colors"
+                      className={`no-underline border ${estante.cor.borda} rounded-[14px] p-5 ${estante.cor.bordaHover} transition-colors`}
                     >
-                      <p className="text-[0.66rem] tracking-[0.26em] uppercase text-salvia mb-1.5">
+                      <p className={`text-[0.66rem] tracking-[0.26em] uppercase ${estante.cor.texto} mb-1.5`}>
                         {isEn ? 'available · free' : 'disponível · grátis'}
                       </p>
                       <p className="font-serif text-creme text-[1.1rem] mb-1.5">
@@ -122,8 +122,8 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
                       </p>
                     </Link>
                   ) : (
-                    <div key={livro.slug} className="border border-ocre/15 rounded-[14px] p-5">
-                      <p className="text-[0.64rem] tracking-[0.26em] uppercase text-creme-2/40 mb-1.5">
+                    <div key={livro.slug} className={`border ${estante.cor.borda} rounded-[14px] p-5`}>
+                      <p className={`text-[0.64rem] tracking-[0.26em] uppercase ${estante.cor.textoSuave} mb-1.5`}>
                         {isEn ? 'on its way' : 'a caminho'}
                       </p>
                       <p className="font-serif text-creme-2/85 text-[1.1rem] mb-1.5">
