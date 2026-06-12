@@ -7,15 +7,26 @@
 
 const GRAPH = 'https://graph.facebook.com/v21.0';
 
-async function gget(path: string, params: Record<string, string>): Promise<Record<string, unknown>> {
+async function gget(path: string, params: Record<string, string>, tentativa = 0): Promise<Record<string, unknown>> {
   const qs = new URLSearchParams(params).toString();
   const res = await fetch(`${GRAPH}/${path}?${qs}`);
-  return (await res.json().catch(() => ({}))) as Record<string, unknown>;
+  const j = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+  // códigos 1/2 do Meta = erro temporário ("unknown"/"service") → tenta de novo
+  const code = (j?.error as { code?: number } | undefined)?.code;
+  if ((code === 1 || code === 2) && tentativa < 2) {
+    await new Promise((r) => setTimeout(r, 800 * (tentativa + 1)));
+    return gget(path, params, tentativa + 1);
+  }
+  return j;
 }
 
 function erroDe(j: Record<string, unknown>): string | undefined {
-  const e = j?.error as { message?: string; code?: number } | undefined;
-  return e?.message ? `${e.message}${e.code ? ` (${e.code})` : ''}` : undefined;
+  const e = j?.error as { message?: string; code?: number; error_subcode?: number; type?: string } | undefined;
+  if (!e) return undefined;
+  const partes = [e.message ?? 'erro'];
+  if (e.code != null) partes.push(`code ${e.code}${e.error_subcode ? `/${e.error_subcode}` : ''}`);
+  if (e.type) partes.push(e.type);
+  return partes.join(' · ');
 }
 
 export type PostAnalytics = {
