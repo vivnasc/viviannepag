@@ -425,12 +425,12 @@ export default function PublicarPage() {
 
       {/* PAINEL DE REVER (capa grande + legenda) */}
       {legenda && (() => {
-        const it = legenda; const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it);
+        const it = legenda; const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const vidCapa = capa ? null : videoDe(it);
         return (
           <div onClick={() => setLegenda(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
             <div onClick={(ev) => ev.stopPropagation()} className={`w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
               <div className="flex items-start gap-4">
-                <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
+                <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vidCapa ? <video src={`${vidCapa}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1"><span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span><span className="text-[0.62rem] opacity-55">{m.emoji} {m.label}</span></div>
                   <p className="text-[1.1rem] leading-tight">{it.title}</p>
@@ -461,6 +461,14 @@ export default function PublicarPage() {
                     <div className="flex gap-2 overflow-x-auto pb-2">
                       {dia.imagens.map((u, i) => <img key={i} src={u} alt={`slide ${i + 1}`} className="h-64 rounded-lg shrink-0" />)}
                     </div>
+                  </div>
+                );
+                // séries sem MP4 ainda: mostra o MOTION cru (a moldura/frase entram no render)
+                const motion = videoDe(it);
+                if (motion) return (
+                  <div className="mt-4">
+                    <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo (motion — a moldura + frase entram no render do ③)</p>
+                    <video src={motion} controls muted playsInline className="w-full max-h-[55vh] rounded-lg bg-black" />
                   </div>
                 );
                 const slides = slidesComCapa(it);
