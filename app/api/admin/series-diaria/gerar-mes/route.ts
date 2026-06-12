@@ -11,8 +11,9 @@ export const maxDuration = 300;
 
 // POST { serie, inicio?, dias? } — gera UM MÊS (ou N dias) da série em bulk:
 // 1 chamada ao Claude para as frases todas (únicas, dia+estação+ritual), e para
-// cada dia recicla um motion da POOL (novos primeiro; senão melhor match por
-// keyword) + um áudio por mood. Grava 1 coleção POR DIA (formato 'serie-diaria',
+// cada dia reutiliza um motion da POOL só se ele REALMENTE casa com a imagem da
+// frase (match pelo mjPrompt inglês); senão deixa "falta motion" para gerar um
+// novo no MJ. + um áudio por mood. Grava 1 coleção POR DIA (formato 'serie-diaria',
 // conta vivianne.dos.santos), agendada (rascunho — nada publica sem aprovares).
 // Só os dias SEM motion na pool ficam com o prompt MJ para gerares um novo.
 
@@ -123,9 +124,12 @@ ${REGRA_ACENTOS}`;
     const frase = (g.frase ?? '').trim();
     const alvo = aFazer.find((d) => d.data === data);
     if (!alvo || !frase) continue;
-    const motion = pool.length ? escolherMotion(frase, pool, usos, jaNesteLote, data) : null;
-    if (motion) jaNesteLote.add(motion.path);
     const mjPrompt = (g.mjPrompt ?? '').trim();
+    // casa o motion da pool pela IMAGEM: o mjPrompt (inglês) é a metáfora visual
+    // da frase — bate com etiquetas/nome em inglês; juntamos a frase PT para
+    // também bater etiquetas em português. Sem encaixe real → null (falta motion).
+    const motion = pool.length ? escolherMotion(`${mjPrompt} ${frase}`, pool, usos, jaNesteLote, data) : null;
+    if (motion) jaNesteLote.add(motion.path);
     // O SOM casa com o MOTION: se da pool, pela etiqueta/mood + nome+categoria;
     // se ainda não há motion (vai ser carregado), pelo PROMPT que o vai gerar.
     const audio = audios.length

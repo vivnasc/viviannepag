@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
-import { CONTAS, contaDe, type ContaId } from '@/lib/instagram/contas';
+import { CONTAS, contaDe, nomeConta, type ContaId } from '@/lib/instagram/contas';
 import { PostSlide, type PostSlideT } from '@/components/admin/PostSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 
@@ -84,6 +84,9 @@ export default function PublicarPage() {
   const [igOk, setIgOk] = useState<boolean | null>(null);
   const [conta, setConta] = useState<ContaId>('veuaveu'); // conta selecionada
   const [pickerLoja, setPickerLoja] = useState(false); // seletor de semana da Loja a colocar
+  const [exportar, setExportar] = useState(false); // painel de exportar CSV (Metricool)
+  const [expDe, setExpDe] = useState(''); const [expAte, setExpAte] = useState('');
+  const [expPlat, setExpPlat] = useState<'tiktok' | 'instagram' | 'ambas'>('tiktok');
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list', { cache: 'no-store' });
@@ -203,6 +206,22 @@ export default function PublicarPage() {
     } catch (e) { setMsg('Erro a ler o CSV: ' + String(e)); }
   }
 
+  // exportar CSV do Metricool: os posts DESTA conta no intervalo escolhido, para
+  // agendar em massa (sobretudo TikTok, que não publica sozinho daqui).
+  const itensConexpo = itensConta.filter((it) => {
+    const d = it.theme?.agendadoEm; if (!d || !mediaPronta(it)) return false;
+    return (!expDe || d >= expDe) && (!expAte || d <= expAte);
+  });
+  function exportarCSV() {
+    if (!itensConexpo.length) { setMsg('Nenhum post com média pronta no intervalo escolhido (renderiza/prepara primeiro).'); return; }
+    const qs = new URLSearchParams({ conta, plataforma: expPlat });
+    if (expDe) qs.set('de', expDe);
+    if (expAte) qs.set('ate', expAte);
+    window.location.href = `/api/admin/publicar/exportar-csv?${qs.toString()}`;
+    setExportar(false);
+    setMsg(`⬇ CSV de ${itensConexpo.length} post(s) (${expPlat === 'ambas' ? 'TikTok + Instagram' : expPlat}). Importa no Metricool → agenda em massa.`);
+  }
+
   // ── componentes ──
   const Cartao = ({ it, compacto }: { it: Item; compacto?: boolean }) => {
     const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const pronto = mediaPronta(it);
@@ -271,6 +290,7 @@ export default function PublicarPage() {
             <label className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 cursor-pointer" title={`importa um CSV do Metricool para ${conta}`}>⬆ importar CSV
               <input type="file" accept=".csv,text/csv" hidden onChange={(e) => { importarCSV(e.target.files?.[0]); e.currentTarget.value = ''; }} />
             </label>
+            <button onClick={() => setExportar(true)} title={`exporta os posts de ${nomeConta(conta)} num intervalo de datas como CSV do Metricool (TikTok)`} className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20">⬇ exportar CSV</button>
             <button onClick={limparAgendamentos} disabled={busy === 'limpar'} title={`tira do calendário TODOS os agendamentos desta conta (não apaga os posts) — para trocar o conteúdo`} className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-[#C97373]/45 bg-[#C97373]/10 text-[#C97373] hover:bg-[#C97373]/20 disabled:opacity-40">{busy === 'limpar' ? 'a limpar…' : '🧹 limpar agendamentos'}</button>
             {vista === 'semana' && (
               <div className="ml-auto flex items-center gap-2">
@@ -351,6 +371,30 @@ export default function PublicarPage() {
               </>
             );
           })()}
+
+      {/* EXPORTAR CSV (Metricool) — posts desta conta num intervalo de datas */}
+      {exportar && (
+        <div onClick={() => setExportar(false)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
+          <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-md rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
+            <p className="text-[0.95rem] font-semibold mb-1">Exportar CSV · {nomeConta(conta)}</p>
+            <p className="text-[0.72rem] opacity-60 mb-3">Escolhe o intervalo de datas. Gera um CSV do Metricool com os posts que têm média pronta (vídeo/imagens), para agendar em massa — sobretudo o <b>TikTok</b>, que não se publica sozinho daqui.</p>
+            <div className="flex items-center gap-2 flex-wrap mb-3">
+              <label className="flex items-center gap-1.5 text-[0.72rem] opacity-80">de <input type="date" value={expDe} onChange={(e) => setExpDe(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
+              <label className="flex items-center gap-1.5 text-[0.72rem] opacity-80">até <input type="date" value={expAte} onChange={(e) => setExpAte(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
+            </div>
+            <div className="inline-flex rounded-lg border border-ocre/25 overflow-hidden text-[0.72rem] mb-3">
+              {([['tiktok', 'TikTok'], ['instagram', 'Instagram'], ['ambas', 'ambas']] as const).map(([k, lbl]) => (
+                <button key={k} onClick={() => setExpPlat(k)} className={`px-3 py-1.5 ${expPlat === k ? 'bg-ambar/15 text-ambar' : 'text-creme-2/60 hover:text-creme-2'}`}>{lbl}</button>
+              ))}
+            </div>
+            <p className="text-[0.66rem] opacity-55 mb-3">{itensConexpo.length} post(s) prontos no intervalo{expDe || expAte ? ` (${expDe || '…'} → ${expAte || '…'})` : ' (todas as datas)'}.</p>
+            <div className="flex items-center gap-2">
+              <button onClick={exportarCSV} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">⬇ descarregar CSV</button>
+              <button onClick={() => setExportar(false)} className="text-[0.7rem] opacity-60 hover:opacity-100">fechar ✕</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* SELETOR: que semana de carrosséis da Loja colocar nesta semana */}
       {pickerLoja && (
