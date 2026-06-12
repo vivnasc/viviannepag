@@ -25,8 +25,30 @@ export default function SeriesDiariaPreview() {
   const [dia, setDia] = useState('quinta');
   const [frase, setFrase] = useState(EXEMPLOS.hojeemmim);
   const [bgUrl, setBgUrl] = useState('');
+  const [mjPrompt, setMjPrompt] = useState('');
+  const [gerando, setGerando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+  const [copiado, setCopiado] = useState(false);
 
-  const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); };
+  const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setMjPrompt(''); };
+
+  async function gerar(outra: boolean) {
+    setGerando(true); setErro(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/gerar-frase', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ serie, dia, evitar: outra && frase ? [frase] : [] }),
+      });
+      const j = await r.json();
+      if (r.ok && j.frase) { setFrase(j.frase); setMjPrompt(j.mjPrompt || ''); }
+      else setErro(j.detalhe ?? j.erro ?? `erro ${r.status}`);
+    } catch (e) { setErro(String(e)); }
+    setGerando(false);
+  }
+
+  async function copiarMj() {
+    try { await navigator.clipboard.writeText(mjPrompt); setCopiado(true); setTimeout(() => setCopiado(false), 1500); } catch { /* */ }
+  }
 
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-6 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
@@ -57,8 +79,21 @@ export default function SeriesDiariaPreview() {
           )}
 
           <div>
-            <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Frase</p>
+            <div className="flex items-center gap-2 mb-1.5">
+              <p className="text-[0.7rem] uppercase tracking-wider opacity-50">Frase (do Claude · editável)</p>
+              <button onClick={() => gerar(false)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{gerando ? '…' : '✨ gerar frase'}</button>
+              <button onClick={() => gerar(true)} disabled={gerando} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/45 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">↻ outra</button>
+            </div>
             <textarea value={frase} onChange={(e) => setFrase(e.target.value)} rows={5} className="w-full text-[0.9rem] p-3 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2 leading-relaxed" />
+            <p className="text-[0.62rem] opacity-40 mt-1">O Claude escolhe (nunca repete, ciente do dia + estação). Podes editar à mão ou pedir "outra".</p>
+            {erro && <p className="text-[0.68rem] text-rosa/80 mt-1">⚠ {erro}</p>}
+          </div>
+
+          <div>
+            <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Prompt Midjourney (fundo em movimento)</p>
+            <textarea value={mjPrompt} readOnly rows={3} placeholder='Carrega "✨ gerar frase" e aparece aqui o prompt para copiares para o Midjourney.' className="w-full text-[0.76rem] p-3 rounded-lg border border-ocre/20 bg-[#120f1a] text-creme-2/85 leading-relaxed font-mono" />
+            <button onClick={copiarMj} disabled={!mjPrompt} className="mt-1.5 text-[0.68rem] px-2.5 py-1 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-30">{copiado ? '✓ copiado' : '⧉ copiar prompt'}</button>
+            <p className="text-[0.62rem] opacity-40 mt-1">Geras o motion no Midjourney com este prompt, e depois arrasta-lo para aqui (próximo passo).</p>
           </div>
 
           <div>
