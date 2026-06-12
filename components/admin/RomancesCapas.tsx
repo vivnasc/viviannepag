@@ -51,6 +51,25 @@ export function RomancesCapas() {
     }
   }
 
+  async function apagar(slug: string, name: string) {
+    setErro(null);
+    setAEscolher(name);
+    try {
+      const res = await fetch('/api/admin/romances/capa-apagar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, name }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      await carregar();
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : String(e));
+    } finally {
+      setAEscolher(null);
+    }
+  }
+
   async function escolher(slug: string, url: string) {
     setErro(null);
     setAEscolher(url);
@@ -145,13 +164,23 @@ export function RomancesCapas() {
                   <figure key={v.name} className="group">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={v.url} alt={v.name} className="rounded-[10px] border border-ocre/20 group-hover:border-ambar/50 transition-colors" />
-                    <button
-                      onClick={() => escolher(r.slug, v.url)}
-                      disabled={aEscolher === v.url}
-                      className="mt-2 w-full rounded-full border border-salvia/40 text-salvia px-3 py-1.5 text-[0.75rem] hover:bg-salvia/10 transition-colors disabled:opacity-50"
-                    >
-                      {aEscolher === v.url ? 'a fixar…' : 'usar esta'}
-                    </button>
+                    <div className="mt-2 flex gap-1.5">
+                      <button
+                        onClick={() => escolher(r.slug, v.url)}
+                        disabled={aEscolher !== null}
+                        className="flex-1 rounded-full border border-salvia/40 text-salvia px-3 py-1.5 text-[0.75rem] hover:bg-salvia/10 transition-colors disabled:opacity-50"
+                      >
+                        {aEscolher === v.url ? 'a fixar…' : 'usar esta'}
+                      </button>
+                      <button
+                        onClick={() => apagar(r.slug, v.name)}
+                        disabled={aEscolher !== null}
+                        title="apagar esta variante"
+                        className="rounded-full border border-rosa/30 text-rosa/70 px-3 py-1.5 text-[0.75rem] hover:bg-rosa/10 transition-colors disabled:opacity-50"
+                      >
+                        {aEscolher === v.name ? '…' : 'apagar'}
+                      </button>
+                    </div>
                   </figure>
                 ))}
               </div>
