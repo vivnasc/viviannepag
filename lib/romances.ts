@@ -1,4 +1,4 @@
-// Os romances da Biblioteca de Véspera — aba Romances da Editora.
+// Os romances da Biblioteca de Véspera · aba Romances da Editora.
 // Registo estático (sem fs em runtime): o texto vive em ficcao-plano/ e os
 // PDFs finais são compostos fora do site; aqui gere-se a CAPA (Replicate) e
 // a ficha de cada romance.
