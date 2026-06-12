@@ -67,8 +67,10 @@ export async function GET(req: NextRequest) {
   if (videoUrl.startsWith(SUPA)) {
     videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'v=' + Date.now();
   }
-  // se o vídeo está no Supabase, serve-o pelo nosso domínio verificado
-  const urlParaTikTok = videoUrl.startsWith(SUPA) ? mediaProxyUrl(videoUrl) : videoUrl;
+  // ?proxy=0 → dá ao TikTok o URL DIRETO do Supabase (exige o domínio do Supabase
+  // verificado no portal). Por defeito serve pelo nosso domínio (proxy).
+  const direto = sp.get('proxy') === '0';
+  const urlParaTikTok = (videoUrl.startsWith(SUPA) && !direto) ? mediaProxyUrl(videoUrl) : videoUrl;
 
   // ── publicar ──
   const r = await publicarVideo({ accessToken: conta.accessToken, videoUrl: urlParaTikTok, titulo, modo, privacidade });
