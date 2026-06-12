@@ -8,7 +8,7 @@ export const runtime = 'nodejs';
 // para a PRODUÇÃO: frase, motion (pool ou carregado), prompt MJ, áudio, estado.
 type S0 = { frase?: string; motionUrl?: string | null; videoUrl?: string | null };
 type Dia = { palavra?: string; slides?: S0[]; faixa?: { titulo?: string; url?: string }; videoUrl?: string | null };
-type Theme = { serie?: string; dia?: string; paleta?: string; agendadoEm?: string; hora?: string; aprovado?: boolean; mjPrompt?: string; motionPath?: string; motionFonte?: string };
+type Theme = { serie?: string; dia?: string; paleta?: string; agendadoEm?: string; hora?: string; aprovado?: boolean; mjPrompt?: string; motionPath?: string; motionFonte?: string; audioFonte?: string };
 
 export async function GET(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
@@ -30,6 +30,7 @@ export async function GET(req: NextRequest) {
       mjPrompt: t.mjPrompt ?? '',
       audioMood: d0?.faixa?.titulo ?? null,
       audioUrl: d0?.faixa?.url ?? null,
+      audioFonte: t.audioFonte ?? (d0?.faixa?.url ? 'match' : null),
       videoUrl: s0.videoUrl ?? d0?.videoUrl ?? null,
     };
   }).filter((d) => !serie || d.serie === serie)

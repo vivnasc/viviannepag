@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, estacaoPt, type Serie } from '@/lib/series/voz';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -56,10 +56,12 @@ ${REFLEXO_PARTILHA}
 
 ${LEGENDA_LONGA}
 
+${SOM_PROMPT}
+
 VARIEDADE: cada frase ÚNICA em ideia e imagem. NUNCA repitas nenhuma destas já usadas (nem versões quase iguais):
 ${proibidas.map((p) => `- ${p}`).join('\n')}
 
-Devolve APENAS JSON: { "dias": [ { "data": "YYYY-MM-DD", "frase": "a CURTA da imagem", "legenda": "a longa (2-4 frases, \\n\\n)", "mjPrompt": "prompt MidJourney EN do fundo em movimento, sem pessoas/texto, --ar 9:16" } ] }
+Devolve APENAS JSON: { "dias": [ { "data": "YYYY-MM-DD", "frase": "a CURTA da imagem", "legenda": "a longa (2-4 frases, \\n\\n)", "mjPrompt": "prompt MidJourney EN do fundo em movimento, sem pessoas/texto, --ar 9:16", "somPrompt": "ambiente sonoro da MESMA cena, EN, com seamless loop, no music, no voices" } ] }
 Um item por CADA dia da lista.
 
 ${REGRA_ACENTOS}`;
@@ -76,7 +78,7 @@ ${REGRA_ACENTOS}`;
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let pj: { dias?: { data?: string; frase?: string; legenda?: string; mjPrompt?: string }[] };
+  let pj: { dias?: { data?: string; frase?: string; legenda?: string; mjPrompt?: string; somPrompt?: string }[] };
   try { pj = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   pj = limparTravessoes(pj);
   pj = await corrigirAcentos(pj, apiKey);
@@ -95,7 +97,7 @@ ${REGRA_ACENTOS}`;
     dias[0].legenda = (n.legenda ?? '').trim() || frase;
     dias[0].videoUrl = null;
     if (dias[0].slides?.[0]) { dias[0].slides[0].frase = frase; dias[0].slides[0].videoUrl = null; }
-    const theme = { ...((row.theme as Record<string, unknown>) ?? {}), mjPrompt: (n.mjPrompt ?? '').trim() || (row.theme as { mjPrompt?: string })?.mjPrompt };
+    const theme = { ...((row.theme as Record<string, unknown>) ?? {}), mjPrompt: (n.mjPrompt ?? '').trim() || (row.theme as { mjPrompt?: string })?.mjPrompt, somPrompt: (n.somPrompt ?? '').trim() || (row.theme as { somPrompt?: string })?.somPrompt };
     const { error } = await sb.from('carousel_collections').update({ title: frase.slice(0, 80), dias, theme }).eq('slug', alvo.slug);
     if (!error) atualizados++;
   }

@@ -31,18 +31,22 @@ export async function POST(req: Request) {
     const url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
     const { data: row, error: e1 } = await sb.from('carousel_collections').select('dias, theme').eq('slug', slug).single();
     if (e1 || !row) return NextResponse.json({ erro: 'colecao-nao-encontrada' }, { status: 404 });
-    const t = (row.theme ?? {}) as { serie?: SerieId; dia?: string; mjPrompt?: string };
+    const t = (row.theme ?? {}) as { serie?: SerieId; dia?: string; mjPrompt?: string; audioFonte?: string };
     const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ motionUrl?: string; videoUrl?: string | null }>; faixa?: { titulo?: string; url?: string }; videoUrl?: string | null }>;
     if (dias[0]?.slides?.[0]) { dias[0].slides[0].motionUrl = url; dias[0].slides[0].videoUrl = null; }
     if (dias[0]) dias[0].videoUrl = null; // motion novo → MP4 antigo desatualizado
-    // o SOM re-casa com o motion NOVO: sem etiqueta, usa o PROMPT do dia (chuva→chuva)
+    // o SOM só re-casa automaticamente se NÃO foi escolhido à mão pela Vivianne
+    // (audioFonte='manual' = escolha dela, intocável; o match automático tem
+    // inconsistências e som que não bate parte o momento contemplativo)
     let audioMood: string | null = dias[0]?.faixa?.titulo ?? null;
-    try {
-      const serie: SerieId = t.serie === 'vcsabia' ? 'vcsabia' : 'hojeemmim';
-      const audios = await listarAudios(serie);
-      const a = audios.length ? escolherAudio({ descritor: t.mjPrompt ?? '', dia: t.dia ?? '', serie, audios }) : null;
-      if (a && dias[0]) { dias[0].faixa = { titulo: a.mood, url: a.url }; audioMood = a.mood; }
-    } catch { /* sem pool de áudios: mantém o som que tinha */ }
+    if (t.audioFonte !== 'manual') {
+      try {
+        const serie: SerieId = t.serie === 'vcsabia' ? 'vcsabia' : 'hojeemmim';
+        const audios = await listarAudios(serie);
+        const a = audios.length ? escolherAudio({ descritor: t.mjPrompt ?? '', dia: t.dia ?? '', serie, audios }) : null;
+        if (a && dias[0]) { dias[0].faixa = { titulo: a.mood, url: a.url }; audioMood = a.mood; }
+      } catch { /* sem pool de áudios: mantém o som que tinha */ }
+    }
     const theme = { ...((row.theme as Record<string, unknown>) ?? {}), motionPath: path, motionFonte: 'upload' };
     const { error } = await sb.from('carousel_collections').update({ dias, theme }).eq('slug', slug);
     if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });

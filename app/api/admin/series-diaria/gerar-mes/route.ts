@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO, paletaDoDia } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, estacaoPt, type Serie } from '@/lib/series/voz';
 import { listarMotions, listarAudios, usosDeMotions, escolherMotion, escolherAudio } from '@/lib/series/pool';
 
 export const runtime = 'nodejs';
@@ -75,11 +75,13 @@ ${REFLEXO_PARTILHA}
 
 ${LEGENDA_LONGA}
 
+${SOM_PROMPT}
+
 VARIEDADE NO LOTE: cada frase é ÚNICA em ideia E em imagem (não repetir motivos: se uma usa planta, outra não usa planta; varia natureza, casa, corpo, luz, água…). NUNCA repitas nenhuma destas já usadas, nem versões quase iguais:
 ${proibidas.length ? proibidas.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda)'}
 
 Devolve APENAS JSON válido:
-{ "dias": [ { "data": "YYYY-MM-DD", "frase": "a frase CURTA da imagem", "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)", "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16" } ] }
+{ "dias": [ { "data": "YYYY-MM-DD", "frase": "a frase CURTA da imagem", "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)", "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16", "somPrompt": "o ambiente sonoro da MESMA cena, em inglês, a terminar com seamless loop, no music, no voices" } ] }
 Um item por CADA dia da lista, pela ordem.
 
 ${REGRA_ACENTOS}`;
@@ -97,7 +99,7 @@ ${REGRA_ACENTOS}`;
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { dias?: { data?: string; frase?: string; legenda?: string; mjPrompt?: string }[] };
+  let p: { dias?: { data?: string; frase?: string; legenda?: string; mjPrompt?: string; somPrompt?: string }[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
   p = await corrigirAcentos(p, apiKey);
@@ -141,7 +143,7 @@ ${REGRA_ACENTOS}`;
     const theme = {
       formato: 'serie-diaria', serie, marca: 'loja', dia: alvo.dia, paleta,
       agendadoEm: data, hora, aprovado: false,
-      motionPath: motion?.path ?? null, motionNome: motion?.nome ?? null, mjPrompt,
+      motionPath: motion?.path ?? null, motionNome: motion?.nome ?? null, mjPrompt, somPrompt: (g.somPrompt ?? '').trim(),
     };
     const { error } = await supabase.from('carousel_collections').insert({ slug: slugDe(data), title: frase.slice(0, 80), brief: `${serie} · ${alvo.dia} · ${data}`, dias: diasCol, theme });
     if (error) { resumo.push({ data, dia: alvo.dia, frase, motion: null, audio: null, mj: false }); continue; }

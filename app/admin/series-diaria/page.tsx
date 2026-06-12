@@ -24,7 +24,7 @@ const EXEMPLOS: Record<SerieId, string> = {
   hojeemmim: 'Hoje aprendi que o meu silêncio é, muitas vezes, a resposta mais honesta.',
 };
 
-type ProdDia = { slug: string; data: string | null; dia: string | null; frase: string; motionUrl: string | null; motionFonte: string | null; mjPrompt: string; audioMood: string | null; audioUrl: string | null; videoUrl: string | null; aprovado: boolean };
+type ProdDia = { slug: string; data: string | null; dia: string | null; frase: string; motionUrl: string | null; motionFonte: string | null; mjPrompt: string; audioMood: string | null; audioUrl: string | null; audioFonte: string | null; videoUrl: string | null; aprovado: boolean };
 type BulkRes = { criados: number; semMotion: number; poolErro?: string | null; resumo: { data: string; dia: string; frase: string; motion: string | null; audio: string | null; mj: boolean; mjPrompt?: string }[] };
 
 const Passo = ({ n, titulo, children, sub }: { n: string; titulo: string; sub?: string; children: React.ReactNode }) => (
@@ -124,6 +124,35 @@ export default function SeriesDiariaPage() {
       setDiaMsg(action === 'regenerar' ? '✓ frase nova — renderiza este dia quando estiver a teu gosto.' : '✓ guardado — renderiza este dia para atualizar o MP4.');
     } catch (e) { setDiaMsg('⚠ ' + String(e)); }
     setDiaBusy(null);
+  }
+
+  // SOM gerado na app (ElevenLabs) a partir da CENA do motion — match real
+  async function gerarSomDia(slug: string) {
+    setDiaBusy(slug); setDiaMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/audio', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'gerar', slug }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setProdDias((xs) => (xs ?? []).map((d) => d.slug === slug ? { ...d, audioMood: j.mood, audioUrl: j.url, audioFonte: 'gerado', videoUrl: null } : d));
+      setDiaMsg('🔊 som gerado da cena do motion — ouve no leitor; renderiza para o meter no MP4.');
+    } catch (e) { setDiaMsg('⚠ ' + String(e)); }
+    setDiaBusy(null);
+  }
+
+  const [sonsBusy, setSonsBusy] = useState(false);
+  async function gerarSonsBulk() {
+    if (sonsBusy) return;
+    const porGerar = (prodDias ?? []).filter((d) => d.audioFonte !== 'gerado' && d.audioFonte !== 'manual').length;
+    if (!confirm(`Gerar os sons de ${SERIES[serie].nome} na ElevenLabs (${porGerar} por gerar)?\n\nCada som nasce da cena do motion desse dia — match real. ~poucos segundos por dia.`)) return;
+    setSonsBusy(true); setRegMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/gerar-sons', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setRegMsg(`🔊 ${j.gerados ?? 0} som(ns) gerados${j.nota ? ' · ' + j.nota : ''}${j.erros?.length ? ' · ⚠ ' + j.erros.join('; ') : ''}`);
+      carregarProducao(serie);
+    } catch (e) { setRegMsg('⚠ ' + String(e)); }
+    setSonsBusy(false);
   }
 
   async function renderDia(slug: string) {
@@ -310,6 +339,8 @@ export default function SeriesDiariaPage() {
             <button onClick={() => regenerarFrasesBulk('longas')} disabled={regBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ambar/40 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30">{regBusy ? '⏳…' : '↻ encurtar as longas'}</button>
             <button onClick={() => regenerarFrasesBulk('todas')} disabled={regBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/65 hover:border-ambar disabled:opacity-30">↻ regenerar todas</button>
             <span className="text-[0.6rem] opacity-30">|</span>
+            <button onClick={gerarSonsBulk} disabled={sonsBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-30">{sonsBusy ? '⏳ a gerar sons…' : '🔊 gerar sons (ElevenLabs)'}</button>
+            <span className="text-[0.6rem] opacity-30">|</span>
             <span className="text-[0.6rem] opacity-50">apagar:</span>
             <label className="flex items-center gap-1 text-[0.62rem] opacity-80">de <input type="date" value={apgDe} onChange={(e) => setApgDe(e.target.value)} className="px-1.5 py-0.5 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2 text-[0.62rem]" /></label>
             <label className="flex items-center gap-1 text-[0.62rem] opacity-80">até <input type="date" value={apgAte} onChange={(e) => setApgAte(e.target.value)} className="px-1.5 py-0.5 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2 text-[0.62rem]" /></label>
@@ -355,8 +386,9 @@ export default function SeriesDiariaPage() {
                     </div>
                     <p className="text-[0.6rem] opacity-55 text-center">{sel.data} · {sel.dia} · {sel.videoUrl ? '🎬 MP4 pronto' : sel.motionUrl ? 'montado (falta render)' : 'falta motion'}</p>
                     {sel.audioUrl
-                      ? <div className="flex items-center gap-2"><span className="text-[0.6rem] opacity-60 shrink-0">🔊 {sel.audioMood}</span><audio src={sel.audioUrl} controls className="w-full h-7" /></div>
+                      ? <div className="flex items-center gap-2"><span className="text-[0.6rem] opacity-60 shrink-0">🔊 {sel.audioMood}{sel.audioFonte === 'gerado' ? ' ✓' : sel.audioFonte === 'manual' ? ' (teu)' : ' (match antigo)'}</span><audio src={sel.audioUrl} controls className="w-full h-7" /></div>
                       : <p className="text-[0.6rem] opacity-40">sem áudio</p>}
+                    <button onClick={() => gerarSomDia(sel.slug)} disabled={diaBusy === sel.slug} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-30 w-full">{diaBusy === sel.slug ? '⏳…' : sel.audioFonte === 'gerado' ? '🔊 regenerar som (da cena)' : '🔊 gerar som da cena (ElevenLabs)'}</button>
                     {/* frase: ver / editar à mão / regenerar SÓ este dia */}
                     {editSlug === sel.slug ? (
                       <div className="space-y-1.5">

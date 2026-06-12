@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
       quarentena,
       disponiveis: motions.length - quarentena,
       quarentenaDias: QUARENTENA_DIAS,
-      audios: audios.map((a) => ({ mood: a.mood, n: a.ficheiros.length })),
+      audios: audios.map((a) => ({ mood: a.mood, n: a.ficheiros.length, ficheiros: a.ficheiros })),
       amostra: motions.slice(0, 5).map((m) => ({ nome: m.nome, categoria: m.categoria ?? null, mood: m.mood ?? null })),
     });
   } catch (e) {
