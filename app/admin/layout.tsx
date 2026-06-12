@@ -49,6 +49,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/compras', label: 'compras' },
       { href: '/admin/estudio', label: 'estúdio' },
       { href: '/admin/carrossel', label: 'carrosséis' },
+      { href: '/admin/series-diaria', label: 'séries diárias' },
     ],
   },
   {
