@@ -186,9 +186,23 @@ export default function SeriesDiariaPage() {
     setUploadSlug(null);
   }
 
-  // moldura: anima o motion de texto em loop
-  useEffect(() => {
-    if (!verMoldura || !anima) { setProg(1); return; }
+  // ── BULK: regenerar frases (o par do "↻ outra frase" por dia) ──
+  const [regBusy, setRegBusy] = useState(false);
+  const [regMsg, setRegMsg] = useState<string | null>(null);
+  async function regenerarFrasesBulk(escopo: 'todas' | 'longas') {
+    if (regBusy) return;
+    if (!confirm(`Regenerar ${escopo === 'longas' ? 'as frases LONGAS' : 'TODAS as frases'} de ${SERIES[serie].nome}?\n\nReescreve curtas (mantém motion/áudio/data) e invalida os MP4 desses dias (re-renderiza depois). ~1-2 min.`)) return;
+    setRegBusy(true); setRegMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/regenerar-frases', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, escopo }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setRegMsg(`✓ ${j.atualizados ?? 0} frase(s) reescritas${j.nota ? ` · ${j.nota}` : ''}. Renderiza (o mês ou os dias) para atualizar os MP4.`);
+      carregarProducao(serie);
+    } catch (e) { setRegMsg('⚠ ' + String(e)); }
+    setRegBusy(false);
+  }
+
     let raf = 0; let start: number | null = null;
     const DUR = 4200, HOLD = 1500, TOTAL = DUR + HOLD;
     const tick = (t: number) => { if (start == null) start = t; setProg(Math.min(1, ((t - start) % TOTAL) / DUR)); raf = requestAnimationFrame(tick); };
@@ -232,7 +246,12 @@ export default function SeriesDiariaPage() {
           <div className="flex items-center gap-2 flex-wrap">
             <button onClick={() => carregarProducao(serie)} disabled={prodBusy} className="text-[0.68rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/45 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{prodBusy ? 'a ler…' : '↻ atualizar'}</button>
             {prodDias && <span className="text-[0.66rem] opacity-55">{prodDias.length} dias · {prodDias.length - semMotion.length} com motion · <b className={semMotion.length ? 'text-ambar' : ''}>{semMotion.length} por resolver</b></span>}
+            <span className="text-[0.6rem] opacity-30">|</span>
+            <span className="text-[0.6rem] opacity-50">frases em bulk:</span>
+            <button onClick={() => regenerarFrasesBulk('longas')} disabled={regBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ambar/40 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30">{regBusy ? '⏳…' : '↻ encurtar as longas'}</button>
+            <button onClick={() => regenerarFrasesBulk('todas')} disabled={regBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/65 hover:border-ambar disabled:opacity-30">↻ regenerar todas</button>
           </div>
+          {regMsg && <p className="text-[0.66rem] text-ambar">{regMsg}</p>}
           {prodBusy && !prodDias && <p className="text-[0.7rem] opacity-50">a carregar os dias…</p>}
           {prodDias && prodDias.length === 0 && <p className="text-[0.7rem] opacity-50">Ainda não há dias gerados de {SERIES[serie].nome} — usa o passo ①.</p>}
           {prodDias && prodDias.length > 0 && (
