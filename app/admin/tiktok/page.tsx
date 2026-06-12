@@ -31,6 +31,7 @@ export default function TikTokPage() {
 
   const [info, setInfo] = useState<CreatorInfo | null>(null);
   const [carregandoInfo, setCarregandoInfo] = useState(false);
+  const [avatarOk, setAvatarOk] = useState(true);
   const [privacidade, setPrivacidade] = useState('');
   const [permitirComentarios, setPermitirComentarios] = useState(true);
   const [permitirDuo, setPermitirDuo] = useState(true);
@@ -38,6 +39,21 @@ export default function TikTokPage() {
 
   const [publicando, setPublicando] = useState(false);
   const [resultado, setResultado] = useState<string | null>(null);
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [semVideo, setSemVideo] = useState(false);
+
+  // pré-visualização do vídeo do slug (mostra o que vai ser publicado)
+  useEffect(() => {
+    if (!slug.trim()) { setPreviewUrl(null); setSemVideo(false); return; }
+    const t = setTimeout(() => {
+      fetch(`/api/admin/tiktok/video?slug=${encodeURIComponent(slug.trim())}`)
+        .then((r) => (r.ok ? r.json() : { videoUrl: null }))
+        .then((j: { videoUrl?: string | null }) => { setPreviewUrl(j.videoUrl ?? null); setSemVideo(!j.videoUrl); })
+        .catch(() => { setPreviewUrl(null); setSemVideo(true); });
+    }, 600);
+    return () => clearTimeout(t);
+  }, [slug]);
 
   // carrega contas ligadas
   useEffect(() => {
@@ -50,7 +66,7 @@ export default function TikTokPage() {
   // ao escolher conta, busca as opções reais (privacidade/interações) — exigido pela auditoria
   const carregarInfo = useCallback(async (oid: string) => {
     if (!oid) return;
-    setCarregandoInfo(true); setInfo(null); setPrivacidade(''); setResultado(null);
+    setCarregandoInfo(true); setInfo(null); setPrivacidade(''); setResultado(null); setAvatarOk(true);
     try {
       const r = await fetch(`/api/admin/tiktok/creator-info?account=${encodeURIComponent(oid)}`);
       const j = await r.json();
@@ -122,6 +138,16 @@ export default function TikTokPage() {
           <div>
             <label className="block text-sm font-medium">Vídeo (slug da coleção)</label>
             <input value={slug} onChange={(e) => setSlug(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900" placeholder="ex: semana-14-trabalho" />
+            {/* pré-visualização do vídeo a publicar */}
+            <div className="mt-3">
+              {previewUrl ? (
+                <video src={previewUrl} controls playsInline className="w-44 rounded-xl border border-stone-700 bg-black" />
+              ) : semVideo ? (
+                <p className="text-xs text-amber-400">Esta coleção ainda não tem vídeo (MP4) gerado.</p>
+              ) : (
+                <p className="text-xs text-stone-500">A carregar pré-visualização…</p>
+              )}
+            </div>
           </div>
 
           {/* legenda */}
@@ -137,7 +163,13 @@ export default function TikTokPage() {
             ) : info ? (
               <>
                 <div className="flex items-center gap-3">
-                  {info.creator_avatar_url && <img src={info.creator_avatar_url} alt="" className="h-9 w-9 rounded-full" />}
+                  {info.creator_avatar_url && avatarOk ? (
+                    <img src={info.creator_avatar_url} alt="" className="h-9 w-9 rounded-full object-cover" onError={() => setAvatarOk(false)} />
+                  ) : (
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-rose-600 text-sm font-medium text-white">
+                      {(info.creator_nickname ?? 'V').slice(0, 1).toUpperCase()}
+                    </div>
+                  )}
                   <div className="text-sm">
                     <div className="font-medium">{info.creator_nickname ?? '—'}</div>
                     {info.creator_username && <div className="text-stone-400">@{info.creator_username}</div>}
