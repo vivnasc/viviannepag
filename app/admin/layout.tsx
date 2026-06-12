@@ -38,6 +38,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     itens: [
       { href: '/admin/publicar', label: 'publicar · agendar' },
       { href: '/admin/tiktok', label: 'tiktok · publicar' },
+      { href: '/admin/analytics', label: 'analytics · instagram' },
     ],
   },
   {
