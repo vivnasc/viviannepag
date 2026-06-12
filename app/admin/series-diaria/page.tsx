@@ -39,6 +39,8 @@ export default function SeriesDiariaPreview() {
   const [bulkInicio, setBulkInicio] = useState(() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; });
   const [bulkDias, setBulkDias] = useState(30);
   const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkErro, setBulkErro] = useState<string | null>(null);
+  const [bulkSeg, setBulkSeg] = useState(0);
   const [bulkRes, setBulkRes] = useState<{ criados: number; semMotion: number; poolErro?: string | null; resumo: { data: string; dia: string; frase: string; motion: string | null; audio: string | null; mj: boolean; mjPrompt?: string }[] } | null>(null);
 
   useEffect(() => {
@@ -49,14 +51,21 @@ export default function SeriesDiariaPreview() {
   async function gerarMes() {
     if (bulkBusy) return;
     if (!confirm(`Gerar ${bulkDias} dia(s) de ${SERIES[serie].nome} a partir de ${bulkInicio}?\n\nFica tudo em RASCUNHO na Publicar (vivianne.dos.santos) — nada publica sem aprovares.`)) return;
-    setBulkBusy(true); setBulkRes(null); setErro(null);
+    setBulkBusy(true); setBulkRes(null); setBulkErro(null); setErro(null); setBulkSeg(0);
     try {
       const r = await fetch('/api/admin/series-diaria/gerar-mes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, inicio: bulkInicio, dias: bulkDias }) });
-      const j = await r.json();
-      if (r.ok) setBulkRes(j); else setErro(j.detalhe ?? j.erro ?? `erro ${r.status}`);
-    } catch (e) { setErro(String(e)); }
+      const j = await r.json().catch(() => ({}));
+      if (r.ok && j.ok) setBulkRes(j); else setBulkErro(j.detalhe ?? j.erro ?? `erro ${r.status}`);
+    } catch (e) { setBulkErro(`falha de rede: ${String(e)}`); }
     setBulkBusy(false);
   }
+
+  // contador de segundos enquanto o lote gera (feedback de que está vivo)
+  useEffect(() => {
+    if (!bulkBusy) return;
+    const id = setInterval(() => setBulkSeg((s) => s + 1), 1000);
+    return () => clearInterval(id);
+  }, [bulkBusy]);
 
   const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setMjPrompt(''); if (s === 'hojeemmim') setPaleta(paletaDoDia(dia)); };
   const trocarDia = (d: string) => { setDia(d); setPaleta(paletaDoDia(d)); }; // paleta FIXA por dia (regente)
@@ -173,8 +182,10 @@ export default function SeriesDiariaPreview() {
             <div className="flex items-center gap-2 flex-wrap text-[0.74rem]">
               <label className="flex items-center gap-1.5 opacity-80">início <input type="date" value={bulkInicio} onChange={(e) => setBulkInicio(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
               <label className="flex items-center gap-1.5 opacity-80">dias <input type="number" min={1} max={31} value={bulkDias} onChange={(e) => setBulkDias(Number(e.target.value))} className="w-16 px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
-              <button onClick={gerarMes} disabled={bulkBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{bulkBusy ? 'a gerar o lote… (~1-2 min)' : `⚡ gerar ${bulkDias} dia(s)`}</button>
+              <button onClick={gerarMes} disabled={bulkBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{bulkBusy ? `⏳ a gerar… ${bulkSeg}s` : `⚡ gerar ${bulkDias} dia(s)`}</button>
             </div>
+            {bulkBusy && <p className="text-[0.68rem] text-ambar animate-pulse">⏳ a escrever as frases e a casar motions da pool… pode levar 1-2 min. Não feches a página. ({bulkSeg}s)</p>}
+            {bulkErro && <p className="text-[0.7rem] text-rosa/90">⚠ {bulkErro}</p>}
             <p className="text-[0.62rem] opacity-45">Frases únicas (dia + estação{serie === 'hojeemmim' ? ' + ritual' : ''}), motion reciclado da pool (novos primeiro, senão melhor match) e áudio por mood. Fica em <b>rascunho</b> na Publicar (vivianne.dos.santos) — nada publica sem o teu ✓. Dias que já existem são saltados.</p>
             {bulkRes && (
               <div className="space-y-2">
