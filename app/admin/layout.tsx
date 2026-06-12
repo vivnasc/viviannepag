@@ -80,8 +80,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     cor: '#9aa39a',
     itens: [
       { href: '/admin/imagens', label: 'galeria' },
-      { href: '/biblioteca', label: 'biblioteca (pública)' },
-      { href: '/amparo', label: 'funil · amparo (pública)' },
     ],
   },
 ];
