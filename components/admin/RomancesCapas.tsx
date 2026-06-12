@@ -111,6 +111,7 @@ export function RomancesCapas() {
             </div>
             <div className="shrink-0 flex flex-wrap gap-2">
               {[
+                ['vintage', 'vintage desgastado'],
                 ['aguarela', 'aguarela literária'],
                 ['atmosferica', 'pintura atmosférica'],
                 ['gouache', 'gouache'],
