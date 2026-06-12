@@ -1,0 +1,135 @@
+## 1. O quarto da mãe
+
+Em casa de Eufémia, o dia sabia o caminho sem lhe perguntar nada.
+
+Acordava às seis, antes do sino e antes de Leal, e a casa recebia-a já combinada: o pão do dia anterior no sítio do pão, a louça do jantar enxuta e arrumada de véspera, o avental no prego da porta, pendurado pela alça esquerda, porque a direita coçava. Não havia nada para decidir. Havia coisas para fazer, que é diferente, e Eufémia fazia-as bem e pela ordem certa, com a satisfação calada de quem caminha por um trilho batido e o encontra sempre limpo. Se alguém lhe perguntasse se era feliz, teria respondido que sim sem demorar nada. Era essa a prova, dizia-se a si própria nas raras vezes em que a pergunta se punha: a felicidade verdadeira não precisa de pensar na resposta.
+
+Da janela da cozinha via-se o largo inteiro, e no meio do largo a fonte. A fonte de Véspera estava seca desde antes da sua nascença: a água, que nasce na serra, ia buscar-se fora, e a fonte ficara no largo como ficam certos móveis nas casas, por ninguém ter coragem de tirar de lá uma coisa com aquele feitio de eternidade. Eufémia gostava dela assim. Uma fonte com água é uma fonte que se gasta; uma fonte seca está sempre composta.
+
+Leal desceu às sete, de camisa abotoada até acima, como todos os dias há vinte e cinco anos.
+
+— Está frio o suficiente — disse ele, que era a maneira dele de dizer que o verão tinha acabado.
+
+— Eu levo o xaile.
+
+Ele acenou que sim, satisfeito, e sentou-se ao lugar dele. Eufémia pôs-lhe à frente a malga, o pão, o mel, e sentou-se ao lugar dela. Conversaram a conversa daquela hora: o telhado da casa velha, que havia de se ver antes das chuvas; a horta; a mãe. As frases iam e vinham já respondidas, como cartas que se escrevem sabendo a resposta de cor, e nisso também havia conforto. Casados assim, dizia a vila, é que era ver gente entendida: nunca uma palavra mais alta, nunca uma porta batida. Leal tinha setenta e dois anos e as mãos mais cuidadosas de Véspera, e em vinte e cinco anos de casamento nunca uma vez se esquecera do xaile dela quando o tempo virava.
+
+— Logo à tarde vou buscá-la — disse ele, a pousar a malga. — Tu acabas a escola e vais andando para lá, para escolher o que vem.
+
+— O que vem é pouco — disse Eufémia. — Ela já não quer quase nada.
+
+— Pois. Mas é melhor seres tu a escolher o pouco.
+
+A escola era do outro lado do largo, e Eufémia atravessou-o às oito, de xaile, a passo certo. À porta da Casa dos Assentos, a Guardiã levantava o fecho com a chave grande, devagar, e fez-lhe o cumprimento de cabeça que fazia a toda a vila à mesma hora. Eufémia retribuiu, como sempre, sem abrandar. Havia quem tivesse medo daquela casa, dos papéis que lá dormiam; ela não. Os papéis dela estavam todos certos.
+
+À porta da Mercearia, Benvinda punha as caixas da fruta cá fora, e endireitou-se quando a viu passar.
+
+— É hoje que a tua mãe vai para tua casa.
+
+Não era pergunta. Em Véspera as notícias não se davam: confirmavam-se. Eufémia parou o suficiente para não ser desfeita.
+
+— É hoje.
+
+— Fazes bem. — Benvinda limpou as mãos ao avental, com a cabeça já dentro das contas de outra coisa. — A casa velha fica fechada?
+
+— Fica fechada até se ver.
+
+— Até se ver — repetiu Benvinda, que sabia tão bem como toda a gente o que queria dizer até se ver quando se fala de casas de mães. — Diz-lhe que o alecrim deste ano está bom. Ela sempre foi mais de alecrim que de flores.
+
+Eufémia seguiu, e ia já a meio do largo quando deu conta de que a vila inteira sabia o dia, a hora e o alecrim, sem ela ter dito nada a ninguém. Não se incomodou. Era assim que as coisas eram, e havia descanso nisso: numa terra onde tudo se sabe, não há nada para contar.
+
+Tinha os mais pequenos, as primeiras letras. Era a professora deles desde antes de muitos dos pais deles saberem ler, e nesse ofício, como em tudo, era certa: a vila confiava-lhe os filhos como se confia a roupa boa a quem engoma bem. Naquela manhã andavam no caderno de linhas, na letra e, que é das traiçoeiras, e Eufémia ia de carteira em carteira a endireitar o mundo.
+
+A mais pequena dos Serranos, que era canhota e teimosa, tinha inventado uma maneira própria de fazer a letra: começava-a ao contrário, de dentro para fora, e a letra saía-lhe viva e torta como um rebento de videira.
+
+— Olha como a senhora faz — disse Eufémia, e fez, na margem do caderno, um e perfeito.
+
+A letra de Eufémia era famosa em Véspera. Redonda, igual, certa como as horas: as atas da junta eram passadas por ela, os letreiros das festas eram dela, e quando alguém precisava de escrever uma carta que fosse levada a sério, vinha bater-lhe à porta. Diziam que era um dom. Ela sabia que não era dom nenhum: era treino, um caderno antigo copiado linha a linha durante anos de infância, até a mão dela aprender a andar pelo caminho de outra mão. Mas isso não o dizia, porque não vinha a propósito, e porque havia muito tempo que não pensava nisso.
+
+A pequena olhou para o e perfeito da margem, olhou para o e torto dela, e fez que sim com a cabeça, sem convicção nenhuma. Eufémia endireitou-lhe a letra sem pensar mais no assunto, como quem endireita um quadro ao passar, e seguiu para a carteira seguinte.
+
+A mãe chegou ao princípio da tarde, no banco de trás, pequena como um embrulho bem feito.
+
+Chamava-se Saudade e tinha oitenta e nove anos, e até à primavera tinha vivido sozinha na casa velha, na rua de trás do adro, com uma teimosia que a vila admirava em voz alta e lamentava em voz baixa. Mas no verão começara a perder os dias. Perdia-os como quem perde agulhas: sabia que os tivera na mão ainda agora, e depois nada, e era inútil procurar. Acendia o lume e esquecia-o aceso. Punha a mesa para gente que já lá não comia. Na última semana, a vizinha encontrara-a no quintal de camisa de dormir, ao meio-dia, à espera de não se sabia o quê.
+
+Decidiu-se o que se decide sempre, e como sempre se decidiu: sem ninguém decidir nada. A mãe vinha para casa da filha. Era a ordem natural das coisas, e Eufémia recebeu-a como recebia a ordem natural das coisas, com o quarto dos fundos pronto, os lençóis de linho, uma jarra com alecrim.
+
+— Isto é por uns tempos — disse Saudade, à porta, sem olhar para ninguém. — Até eu me compor.
+
+— Pois é, mãe. Por uns tempos.
+
+A velha entrou devagar, parou no meio da cozinha e olhou em volta com uma atenção estranha, de quem confere. Depois foi à janela, viu o largo, a fonte, e qualquer coisa nela se arrumou.
+
+— Sempre gostei mais desta casa do que da minha — disse, e foi sentar-se.
+
+Eufémia levou-a ao quarto dos fundos depois do lanche, quando a velha começou a dobrar-se de sono na cadeira. Saudade entrou, correu os olhos pelas paredes, apalpou a colcha com as costas dos dedos, e demorou-se na jarra de alecrim mais do que em tudo o resto.
+
+— Quem te ensinou a fazer uma cama assim fui eu — disse.
+
+— Foi, mãe.
+
+— Lençol de linho é para se sentir. — Puxou a dobra com dois dedos, à prova. — Está bem feita.
+
+Era o mais perto de um agradecimento a que Saudade chegava, e Eufémia recebeu-o como tal. Ajudou-a a deitar-se, pôs-lhe a água ao alcance, deixou a porta encostada no encosto certo, nem aberta nem fechada, que era como a mãe sempre dormira. Ficou um momento no corredor, à escuta. Lá dentro, a velha disse qualquer coisa, baixo, com a voz de quem conversa. Eufémia esperou que chamasse. Não chamou: a conversa não era com ela, nem com ninguém da casa, era dessas que os velhos têm com os seus dias perdidos, à procura das agulhas. Foi-se embora pelo corredor com o passo leve que se usa nos quartos dos doentes e das crianças, e não deu importância àquilo, porque havia muito que tinha decidido não dar.
+
+Eufémia foi para a casa velha ao cair da tarde, sozinha, com a chave grande no bolso do casaco, deixando a mãe a dormir e Leal de ouvido na casa.
+
+A casa cheirava ao que cheiram as casas onde alguém viveu muito tempo devagar: a maçã guardada, a cinza fria, a roupa limpa envelhecida nas gavetas. Eufémia abriu as janelas por sistema, mais por respeito do que por precisão, e foi direita ao quarto da mãe, porque não tinha vindo para se comover, tinha vindo para escolher o pouco.
+
+O quarto era o de sempre. A cama alta, a colcha de quadrados, o retrato do pai na cómoda: Bendito, morto havia tanto tempo que já era mais retrato do que pai. Eufémia trabalhou com método. Roupa de dar, roupa de levar, papéis para Leal ver, o resto para se decidir depois. Encheu dois sacos e uma arca pequena e não se comoveu, o que registou com um certo orgulho, como quem verifica que a costura aguentou.
+
+Foi ao fundo da arca grande do enxoval, debaixo das camisas de linho que a mãe guardava para a morte, com o à-vontade de filha única.
+
+Filha única. Era assim que pensava em si própria, por hábito, embora soubesse que não era exatamente verdade. Toda a vida soubera, da maneira como se sabem em pequeno as coisas que não se perguntam: por meias palavras apanhadas, por silêncios com feitio, pelo modo como as velhas do largo lhe punham a mão na cabeça e diziam "tal e qual" sem dizer tal e qual o quê. Houvera outra antes dela. Uma irmã que morreu nova, antes de ela nascer, e de quem nesta casa nunca se falou: nem mal, nem bem, nem nada, que é a maneira mais funda de falar de alguém todos os dias.
+
+Debaixo das camisas, as mãos dela toparam uma aresta de metal.
+
+Era uma caixa de folha, das de bolachas, com a pintura gasta até ao cinzento. Pesava pouco. Eufémia sentou-se com ela na beira da cama alta, e ficou um momento parada, com a caixa fechada no colo, a ouvir a casa. Depois disse a si própria que era tarde, que havia ainda os sacos para levar, e abriu-a, porque abrir caixas era o trabalho daquele dia.
+
+Dentro estava um retrato pequeno, uma rapariga de dezoito ou dezanove anos, séria para a máquina como então se era, com uma trança grossa puxada para a frente do ombro. Eufémia conheceu-a sem nunca a ter visto. Era parecida com ela como uma palavra é parecida com o seu eco: a boca era a sua boca, a testa era a sua testa, e o conjunto, não se sabia porquê, era outra pessoa. Ficou a olhar para a rapariga mais tempo do que queria. Era a primeira vez na vida que lhe via a cara.
+
+Debaixo do retrato estava um caderno. Capa parda, cantos gastos, e na capa, a tinta já ferrugem, numa letra redonda, igual, certa como as horas: *Caderno de preparação. Eufémia.*
+
+A letra era a dela.
+
+Foi isso que o corpo lhe disse primeiro, antes de a cabeça emendar: que aquela letra era a sua. Conhecia aquele caderno. Não aquele exemplar, mas o caminho dele: fora por um caderno assim que a mãe a pusera a treinar a letra, anos de infância, linha a linha, copia até ficar igual. Nunca lhe tinham dito igual a quê. Igual à letra do caderno, dizia a mãe, e a letra do caderno era bonita, e a menina copiou-a até a mão dela aprender a andar por aquele caminho, e a vila inteira passou a dizer que Eufémia tinha um dom.
+
+Abriu o caderno. Apontamentos de quem se preparava para um exame: regras, listas, contas dadas com aplicação. A primeira página tinha um cabeçalho sublinhado duas vezes: *Para levar para a Cidade.* E por baixo, uma lista de coisas pequenas, meias, livros, o despertador, escrita com a alegria com que se escrevem as listas das vidas que vão começar.
+
+Eufémia fechou o caderno com cuidado, como se ele dormisse.
+
+Por baixo do caderno havia ainda duas coisas. Uma carta, fechada, com o papel amarelo do tempo, e na frente, numa letra de homem, nova e esforçada: *Para a Eufémia, em mão.* Eufémia não conheceu a letra, e depois conheceu-a, e a mão dela pousou a carta na colcha mais depressa do que devia, como quem pousa uma coisa quente. Não a abriu. Disse a si própria que não a abria por ser tarde, e soube perfeitamente, ao dizê-lo, que era mentira de primeira apanha.
+
+A última coisa era um papel dobrado em quatro, de um papel mais sério, com selo branco. Esse abriu-o. Era uma cópia, passada pela mão de uma Guardiã antiga, do assento de óbito.
+
+*Eufémia, filha de Bendito e de Saudade*, leu. As palavras eram as do costume dos assentos, secas, certas, e diziam pouco: a primavera em que nascera, a primavera em que morrera, a febre, os nove dias. Dezanove anos entre uma coisa e a outra. E no fim, a letra da Guardiã antiga fechava o assento com a fórmula de sempre, aquela que se lê em todos os papéis daquela casa, *e de tudo se fez registo*.
+
+Eufémia ficou muito quieta na beira da cama alta, com o papel nas mãos, e a casa à volta dela fez o silêncio que as casas fazem quando finalmente se diz aquilo que elas sabiam.
+
+Não era nada que ela não soubesse. Era tudo coisa sabida, dita por meias palavras há cinquenta anos. Houvera outra. Morrera nova. Tinha o nome dela; ou ela, emendou-se, tinha o nome da outra. Não era nada de novo, e Eufémia repetiu-o a si própria algumas vezes, sentada na beira da cama, enquanto lá fora acabava de escurecer e ela não acendia a luz.
+
+Mas os papéis têm isto: tornam contável o que andava solto. E no escuro do quarto da mãe, sem querer, a cabeça de Eufémia começou a fazer contas. A irmã morrera na primavera. Ela nascera no inverno seguinte, no inverno em que o rio levou a Ponte, toda a vida lho tinham dito, nasceste na noite das águas grandes. Da primavera ao inverno. Contou pelos dedos, devagar, encostando o polegar a cada dedo como ensinava aos pequenos da escola, e os dedos chegaram-lhe certos.
+
+A mãe ia dela quando enterrou a primeira.
+
+Estava no enterro com ela na barriga, de sete meses ou perto, a fazer as contas dos dedos. De luto por uma filha e de esperanças de outra, ao mesmo tempo, no mesmo corpo. E à beira daquela cova decidira-se um nome, e o nome tinha vindo direito a ela, antes de ela nascer, antes de ela respirar, o nome já cá estava à espera, já tinha caderno, já tinha letra treinada, já tinha noivo com carta escrita e casa pensada, e Eufémia, cinquenta anos depois, sentada às escuras na cama da mãe, percebeu de uma vez, não como ideia mas como peso, à maneira como se percebe um saco posto às costas, que nunca na vida tinha escolhido nada.
+
+Levantou-se, porque o corpo quis fazer alguma coisa. Arrumou a caixa: o retrato, o caderno, a carta por abrir, o assento dobrado em quatro. Fechou a tampa de folha, que cedeu com o estalido cansado do metal velho, e ficou de pé no meio do quarto, com a caixa nas mãos, no escuro.
+
+— Eufémia — disse, em voz alta.
+
+Não soube bem a qual das duas chamava. A casa, essa, também não respondeu: ficou em silêncio à volta do nome, como a vila inteira ficara em silêncio à volta dele durante cinquenta anos, à espera de ver quem o vinha levantar.
+
+Levou a caixa consigo, debaixo do braço, por dentro do xaile. O largo estava deserto àquela hora, e a fonte seca era um vulto composto contra as primeiras luzes. Eufémia atravessou-o no seu passo certo de sempre, o passo de quem vai de uma coisa que acabou para uma coisa que vai começar, e nada nela, vista da janela de qualquer casa, dizia que levava o peso que levava.
+
+Em casa, a cozinha estava quente e Leal tinha posto a água a aquecer.
+
+— A tua mãe jantou uma malga de leite e voltou a dormir — disse ele. — Correu bem, por lá?
+
+— Correu. — Eufémia pousou a caixa de folha em cima da arca do corredor, sem a esconder e sem a mostrar, no gesto exato do meio. — Trouxe uns papéis para se verem com tempo.
+
+— Papéis há sempre — disse Leal, e serviu-lhe o chá.
+
+Beberam-no um em frente ao outro, nos lugares de sempre, na paz de sempre. E Eufémia olhou para o marido por cima da malga, para aquele homem certo, abotoado, que nunca se esquecia do xaile dela, e pela primeira vez em vinte e cinco anos de casamento fez por dentro, sem mexer a cara, uma pergunta que não soube acabar: e tu, quando olhas para mim.
+
+Lá fora era noite fechada sobre o largo. Na fonte seca, como sempre, não corria nada, e a vila ia dizendo que aquilo também era uma maneira de estar composta.
