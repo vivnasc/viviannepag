@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: isEn ? 'The Véspera Library — novels by Vivianne dos Santos' : 'Biblioteca de Véspera — os romances de Vivianne dos Santos',
     description: isEn
-      ? 'A village with one question: who carries whom? Seven shelves, seven questions, one novel at a time.'
-      : 'Uma vila com uma pergunta só: quem carrega quem? Sete estantes, sete perguntas, um romance de cada vez.',
+      ? 'The novels of Véspera: every book is a woman, a role that once protected her and became a prison, and the year she learns to set it down. Seven shelves, seven questions.'
+      : 'Os romances de Véspera: cada livro é uma mulher, um papel que um dia a protegeu e se tornou prisão, e o ano em que aprende a pousá-lo. Sete estantes, sete perguntas.',
     openGraph: { images: [CAPA_AMPARO] },
   };
 }
@@ -38,11 +38,18 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
         <h1 className="font-serif font-light text-creme text-[clamp(2rem,5vw,3rem)] leading-[1.12] mb-5">
           {isEn ? 'The Véspera Library' : 'Biblioteca de Véspera'}
         </h1>
-        <p className="font-serif italic text-creme-2/80 text-lg leading-relaxed max-w-[560px] mx-auto">
-          {isEn
-            ? 'A village of one question: who carries whom? Seven shelves, seven questions. Every book is a woman, a role that once protected her, and the year she learns to set it down.'
-            : 'Uma vila com uma pergunta só: quem carrega quem? Sete estantes, sete perguntas. Cada livro é uma mulher, um papel que um dia a protegeu, e o ano em que aprende a pousá-lo.'}
-        </p>
+        <div className="max-w-[620px] mx-auto space-y-4">
+          <p className="font-serif italic text-creme-2/85 text-lg leading-relaxed">
+            {isEn
+              ? 'There is a village where all the stories are the same crossing. It is called Véspera, and every novel is a woman inside a role that once protected her — the one who holds everything, the one who pays, the one who waits, the one who never asks — and the year that role begins to crack.'
+              : 'Há uma vila onde todas as histórias são a mesma travessia. Chama-se Véspera, e cada romance é uma mulher dentro de um papel que um dia a protegeu — a que segura tudo, a que paga, a que espera, a que nunca pede — e o ano em que esse papel começa a ranger.'}
+          </p>
+          <p className="font-serif italic text-creme-2/70 text-[1.02rem] leading-relaxed">
+            {isEn
+              ? 'Seven shelves, seven questions — and not one of them sends you far away. Like all the verbs of this house, they send you back: to your place, to your size, to yourself.'
+              : 'Sete estantes, sete perguntas — e nenhuma te manda para longe. Como todos os verbos desta casa, mandam-te voltar: ao teu lugar, ao teu tamanho, a ti.'}
+          </p>
+        </div>
         {/* navegação das estantes */}
         <nav className="flex flex-wrap justify-center gap-2 mt-9">
           {ESTANTES.map(e => (
