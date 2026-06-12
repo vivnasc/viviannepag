@@ -179,6 +179,9 @@ Decidido pela Vivianne em 11 jun 2026 (segunda ronda):
 
 Ainda em aberto: se a Vaga 1 entra também como antologia "Sete noites em Véspera" (ver repertório).
 
+Decidido pela Vivianne em 12 jun 2026 (terceira ronda, opção C):
+10. **O universo ganha um segundo polo, a Cidade** (sem nome, neutra como tudo), para a leitora urbana: as mesmas famílias, os que ficaram e os que partiram. Véspera não se reescreve; o polo urbano entra pelo livro 2 (estante VII, a do trabalho, que é urbana por natureza). Detalhe canónico na BIBLIA-vespera.md, secção 6.
+
 ═══════════════════════════════════════
 ## 6. PRIMEIRO PASSO SUGERIDO (o método da casa)
 

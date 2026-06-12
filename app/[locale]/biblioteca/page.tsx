@@ -41,8 +41,8 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
         <div className="max-w-[620px] mx-auto space-y-4">
           <p className="font-serif italic text-creme-2/85 text-lg leading-relaxed">
             {isEn
-              ? 'There is a village where all the stories are the same crossing. It is called Véspera, and every novel is a woman inside a role that once protected her (the one who holds everything, the one who pays, the one who waits, the one who never asks) and the year that role begins to crack.'
-              : 'Há uma vila onde todas as histórias são a mesma travessia. Chama-se Véspera, e cada romance é uma mulher dentro de um papel que um dia a protegeu (a que segura tudo, a que paga, a que espera, a que nunca pede) e o ano em que esse papel começa a ranger.'}
+              ? 'There is a village where all the stories are the same crossing. It is called Véspera, and every novel is a woman inside a role that once protected her (the one who holds everything, the one who pays, the one who waits, the one who never asks) and the year that role begins to crack. It is the village that lives inside those who live in the city.'
+              : 'Há uma vila onde todas as histórias são a mesma travessia. Chama-se Véspera, e cada romance é uma mulher dentro de um papel que um dia a protegeu (a que segura tudo, a que paga, a que espera, a que nunca pede) e o ano em que esse papel começa a ranger. É a vila que mora dentro de quem vive na cidade.'}
           </p>
           <p className="font-serif italic text-creme-2/70 text-[1.02rem] leading-relaxed">
             {isEn
