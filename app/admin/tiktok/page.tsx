@@ -109,7 +109,10 @@ export default function TikTokPage() {
         <div className="mt-8 space-y-6">
           {/* conta */}
           <div>
-            <label className="block text-sm font-medium">Conta</label>
+            <div className="flex items-center justify-between">
+              <label className="block text-sm font-medium">Conta</label>
+              <a href="/api/admin/tiktok/auth" className="text-xs text-rose-400 hover:text-rose-300">+ Ligar conta TikTok</a>
+            </div>
             <select value={openId} onChange={(e) => setOpenId(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900">
               {contas.map((c) => <option key={c.openId} value={c.openId}>{c.displayName ?? c.openId.slice(0, 10)}</option>)}
             </select>
