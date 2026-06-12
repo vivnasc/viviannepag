@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO, paletaDoDia } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, estacaoPt, type Serie } from '@/lib/series/voz';
 import { listarMotions, listarAudios, usosDeMotions, escolherMotion, escolherAudio } from '@/lib/series/pool';
 
 export const runtime = 'nodejs';
@@ -67,15 +67,19 @@ ${VOZ[serie]}
 
 CONTEXTO: época do ano: ${estacaoPt(inicio)}. Cada frase encaixa no SEU dia da semana${serie === 'hojeemmim' ? ' e serve o RITUAL desse dia (na 1.ª pessoa)' : ''}, com subtileza, nunca nomeando a data.
 
+${BREVIDADE[serie]}
+
 ${PORTA_SALA}
 
 ${REFLEXO_PARTILHA}
+
+${LEGENDA_LONGA}
 
 VARIEDADE NO LOTE: cada frase é ÚNICA em ideia E em imagem (não repetir motivos: se uma usa planta, outra não usa planta; varia natureza, casa, corpo, luz, água…). NUNCA repitas nenhuma destas já usadas, nem versões quase iguais:
 ${proibidas.length ? proibidas.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda)'}
 
 Devolve APENAS JSON válido:
-{ "dias": [ { "data": "YYYY-MM-DD", "frase": "...", "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16" } ] }
+{ "dias": [ { "data": "YYYY-MM-DD", "frase": "a frase CURTA da imagem", "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)", "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16" } ] }
 Um item por CADA dia da lista, pela ordem.
 
 ${REGRA_ACENTOS}`;
@@ -93,7 +97,7 @@ ${REGRA_ACENTOS}`;
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { dias?: { data?: string; frase?: string; mjPrompt?: string }[] };
+  let p: { dias?: { data?: string; frase?: string; legenda?: string; mjPrompt?: string }[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
   p = await corrigirAcentos(p, apiKey);
@@ -123,8 +127,9 @@ ${REGRA_ACENTOS}`;
     const paleta = serie === 'hojeemmim' ? paletaDoDia(alvo.dia) : 'dourado';
     const mjPrompt = (g.mjPrompt ?? '').trim();
 
+    const legenda = (g.legenda ?? '').trim() || frase; // a versão LONGA vive na legenda
     const slides = [{ tipo: 'serie-diaria', serie, frase, dia: alvo.dia, paleta, motionUrl: motion?.url ?? null, capa: true }];
-    const diasCol = [{ dia: 1, mundo: 'escola', palavra: frase, slides, faixa: audio ? { titulo: audio.mood, url: audio.url } : undefined, legenda: frase, hashtags: [] }];
+    const diasCol = [{ dia: 1, mundo: 'escola', palavra: frase, slides, faixa: audio ? { titulo: audio.mood, url: audio.url } : undefined, legenda, hashtags: [] }];
     const theme = {
       formato: 'serie-diaria', serie, marca: 'loja', dia: alvo.dia, paleta,
       agendadoEm: data, hora, aprovado: false,
