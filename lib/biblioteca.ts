@@ -2,9 +2,9 @@
 // Sete estantes (uma pergunta cada), espelho das sete coleções da loja.
 // Fonte: ficcao-plano/REPERTORIO-biblioteca.md (os títulos "a caminho" são a
 // montra do que vem; só entram aqui quando a Vivianne os fechar no repertório).
-// NOTA (12 jun 2026): os nomes das estantes (As Casas de Família, O Largo da
-// Fonte…) são nomes de PRODUÇÃO e não aparecem na página pública; ao público
-// fala-se com a pergunta e com o tema em linguagem comum.
+// NOTA (12 jun 2026): a Vivianne decidiu manter os nomes das estantes na
+// página pública, mas pequenos e sempre acompanhados da pergunta e do tema
+// em linguagem comum; o nome nunca aparece sozinho como cabeçalho.
 
 export type LivroBiblioteca = {
   slug: string;
