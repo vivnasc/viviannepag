@@ -50,6 +50,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/estudio', label: 'estúdio' },
       { href: '/admin/carrossel', label: 'carrosséis' },
       { href: '/admin/series-diaria', label: 'séries diárias' },
+      { href: '/admin/lista', label: 'a lista · emails' },
     ],
   },
   {
@@ -78,6 +79,8 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     cor: '#9aa39a',
     itens: [
       { href: '/admin/imagens', label: 'galeria' },
+      { href: '/biblioteca', label: 'biblioteca (pública)' },
+      { href: '/amparo', label: 'funil · amparo (pública)' },
     ],
   },
 ];

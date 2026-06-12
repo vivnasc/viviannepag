@@ -12,10 +12,12 @@ export function TopNav() {
   const inicioHref = locale === 'en' ? '/en' : '/';
   const escritosHref = locale === 'en' ? '/en/escritos' : '/escritos';
   const lojaHref = locale === 'en' ? '/en/loja' : '/loja';
+  const bibliotecaHref = locale === 'en' ? '/en/biblioteca' : '/biblioteca';
 
   const isInicio = pathname === '/';
   const isEscritos = pathname.startsWith('/escritos');
   const isLoja = pathname.startsWith('/loja');
+  const isBiblioteca = pathname.startsWith('/biblioteca');
 
   const base =
     'text-[0.72rem] tracking-[0.18em] uppercase font-normal text-creme-2 hover:text-ambar transition-colors';
@@ -36,6 +38,10 @@ export function TopNav() {
       <span className="text-ocre/35 text-[0.6rem]">·</span>
       <Link href={lojaHref} className={`${base} ${isLoja ? active : ''}`}>
         {t('loja')}
+      </Link>
+      <span className="text-ocre/35 text-[0.6rem]">·</span>
+      <Link href={bibliotecaHref} className={`${base} ${isBiblioteca ? active : ''}`}>
+        {locale === 'en' ? 'library' : 'biblioteca'}
       </Link>
     </nav>
   );
