@@ -23,7 +23,7 @@ export type LivroBiblioteca = {
 export type Estante = {
   id: string;
   romano: string;
-  // nome interno de produção (não renderizar ao público)
+  // nome da estante (aparece pequeno, sempre com a pergunta e o tema ao lado)
   nome: string;
   nomeEn: string;
   pergunta: string;
@@ -31,12 +31,26 @@ export type Estante = {
   // o tema da estante dito de forma simples, para quem chega de fora
   tema: string;
   temaEn: string;
+  // cor da estante = cor da coleção irmã na loja (lib/colecoes.ts);
+  // classes Tailwind completas, porque o JIT só gera literais
+  cor: {
+    texto: string;       // a linha "estante · nome"
+    textoSuave: string;  // o selo "a caminho"
+    borda: string;       // contorno dos cartões
+    bordaHover: string;  // contorno do cartão disponível ao passar
+  };
   livros: LivroBiblioteca[];
 };
 
 export const ESTANTES: Estante[] = [
   {
     id: 'casas',
+    cor: {
+      texto: 'text-bordeaux-claro/90',
+      textoSuave: 'text-bordeaux-claro/60',
+      borda: 'border-bordeaux-claro/25',
+      bordaHover: 'hover:border-bordeaux-claro/70',
+    },
     romano: 'I',
     nome: 'As Casas de Família',
     nomeEn: 'The Family Houses',
@@ -84,6 +98,12 @@ export const ESTANTES: Estante[] = [
   },
   {
     id: 'fonte',
+    cor: {
+      texto: 'text-ambar/90',
+      textoSuave: 'text-ambar/60',
+      borda: 'border-ambar/25',
+      bordaHover: 'hover:border-ambar/70',
+    },
     romano: 'II',
     nome: 'O Largo da Fonte',
     nomeEn: 'The Fountain Square',
@@ -120,6 +140,12 @@ export const ESTANTES: Estante[] = [
   },
   {
     id: 'mercearia',
+    cor: {
+      texto: 'text-ouro/90',
+      textoSuave: 'text-ouro/60',
+      borda: 'border-ouro/25',
+      bordaHover: 'hover:border-ouro/70',
+    },
     romano: 'III',
     nome: 'A Mercearia',
     nomeEn: 'The Shop',
@@ -156,6 +182,12 @@ export const ESTANTES: Estante[] = [
   },
   {
     id: 'ponte',
+    cor: {
+      texto: 'text-rosa/90',
+      textoSuave: 'text-rosa/60',
+      borda: 'border-rosa/25',
+      bordaHover: 'hover:border-rosa/70',
+    },
     romano: 'IV',
     nome: 'A Ponte',
     nomeEn: 'The Bridge',
@@ -192,6 +224,12 @@ export const ESTANTES: Estante[] = [
   },
   {
     id: 'mesa',
+    cor: {
+      texto: 'text-salvia/90',
+      textoSuave: 'text-salvia/60',
+      borda: 'border-salvia/25',
+      bordaHover: 'hover:border-salvia/70',
+    },
     romano: 'V',
     nome: 'A Mesa Comprida',
     nomeEn: 'The Long Table',
@@ -228,6 +266,12 @@ export const ESTANTES: Estante[] = [
   },
   {
     id: 'serra',
+    cor: {
+      texto: 'text-lila/90',
+      textoSuave: 'text-lila/60',
+      borda: 'border-lila/25',
+      bordaHover: 'hover:border-lila/70',
+    },
     romano: 'VI',
     nome: 'A Serra',
     nomeEn: 'The Mountains',
@@ -264,6 +308,12 @@ export const ESTANTES: Estante[] = [
   },
   {
     id: 'fiandeira',
+    cor: {
+      texto: 'text-ocre/90',
+      textoSuave: 'text-ocre/60',
+      borda: 'border-ocre/25',
+      bordaHover: 'hover:border-ocre/70',
+    },
     romano: 'VII',
     nome: 'A Fiandeira',
     nomeEn: 'The Mill',

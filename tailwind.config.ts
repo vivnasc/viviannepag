@@ -4,6 +4,8 @@ const config: Config = {
   content: [
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
+    // lib guarda classes de cor (colecoes.ts, biblioteca.ts); sem isto o JIT não as gera
+    './lib/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
@@ -19,10 +21,15 @@ const config: Config = {
         ocre: '#B8843D',
         ambar: '#EBAE4A',
         ouro: '#D49A3A',
-        bordeaux: '#8B2235',
+        bordeaux: {
+          DEFAULT: '#8B2235',
+          // versão legível como texto sobre o castanho escuro
+          claro: '#C8657A',
+        },
         violeta: '#5A4A6A',
         rosa: '#E08496',
         lila: '#C9B6FA',
+        salvia: '#9CAD8D',
       },
       fontFamily: {
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
