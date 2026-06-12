@@ -104,6 +104,37 @@ export default function SeriesDiariaPage() {
     return () => cancelAnimationFrame(raf);
   }, [selSlug, sel?.frase, serie]);
 
+  // ── mexer num SÓ dia (sem tocar no lote): editar / regenerar frase, render ──
+  const [editSlug, setEditSlug] = useState<string | null>(null);
+  const [editTxt, setEditTxt] = useState('');
+  const [diaBusy, setDiaBusy] = useState<string | null>(null);
+  const [diaMsg, setDiaMsg] = useState<string | null>(null);
+
+  async function mexerDia(slug: string, action: 'editar' | 'regenerar', frase?: string) {
+    setDiaBusy(slug); setDiaMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/dia', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, action, frase }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      // texto mudou → o MP4 antigo foi invalidado no servidor (volta a "falta render")
+      setProdDias((xs) => (xs ?? []).map((d) => d.slug === slug ? { ...d, frase: j.frase, mjPrompt: j.mjPrompt || d.mjPrompt, videoUrl: null } : d));
+      setEditSlug(null);
+      setDiaMsg(action === 'regenerar' ? '✓ frase nova — renderiza este dia quando estiver a teu gosto.' : '✓ guardado — renderiza este dia para atualizar o MP4.');
+    } catch (e) { setDiaMsg('⚠ ' + String(e)); }
+    setDiaBusy(null);
+  }
+
+  async function renderDia(slug: string) {
+    setDiaBusy(slug); setDiaMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slugs: slug, force: true }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setDiaMsg('🎬 render deste dia disparado (~poucos min). Carrega "↻ atualizar" daqui a pouco.');
+    } catch (e) { setDiaMsg('⚠ ' + String(e)); }
+    setDiaBusy(null);
+  }
+
   async function renderMes(force: boolean) {
     if (renderBusy) return;
     const comMotion = (prodDias ?? []).filter((d) => d.motionUrl);
@@ -232,14 +263,31 @@ export default function SeriesDiariaPage() {
                     {sel.audioUrl
                       ? <div className="flex items-center gap-2"><span className="text-[0.6rem] opacity-60 shrink-0">🔊 {sel.audioMood}</span><audio src={sel.audioUrl} controls className="w-full h-7" /></div>
                       : <p className="text-[0.6rem] opacity-40">sem áudio</p>}
-                    <p className="text-[0.74rem] leading-snug opacity-90 border-l-2 border-ocre/20 pl-2">{sel.frase}</p>
+                    {/* frase: ver / editar à mão / regenerar SÓ este dia */}
+                    {editSlug === sel.slug ? (
+                      <div className="space-y-1.5">
+                        <textarea value={editTxt} onChange={(e) => setEditTxt(e.target.value)} rows={3} className="w-full text-[0.78rem] p-2 rounded-lg border border-ambar/35 bg-[#15131f] text-creme-2 leading-snug" />
+                        <div className="flex gap-1.5">
+                          <button onClick={() => mexerDia(sel.slug, 'editar', editTxt)} disabled={diaBusy === sel.slug} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-salvia/50 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-40">{diaBusy === sel.slug ? 'a guardar…' : '✓ guardar'}</button>
+                          <button onClick={() => setEditSlug(null)} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-ocre/25 text-creme-2/60 hover:border-ambar">cancelar</button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-[0.74rem] leading-snug opacity-90 border-l-2 border-ocre/20 pl-2">{sel.frase}</p>
+                    )}
                     <div className="flex flex-col gap-1.5">
+                      <div className="flex gap-1.5">
+                        <button onClick={() => { setEditSlug(sel.slug); setEditTxt(sel.frase); }} disabled={diaBusy === sel.slug} className="flex-1 text-[0.66rem] px-2 py-1 rounded-lg border border-ocre/30 text-creme-2/70 hover:border-ambar disabled:opacity-40">✏️ editar</button>
+                        <button onClick={() => mexerDia(sel.slug, 'regenerar')} disabled={diaBusy === sel.slug} className="flex-1 text-[0.66rem] px-2 py-1 rounded-lg border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{diaBusy === sel.slug ? '⏳…' : '↻ outra frase'}</button>
+                      </div>
                       <span className="text-[0.6rem] opacity-55">{sel.motionUrl ? (sel.motionFonte === 'pool' ? '♻ motion da pool' : '⬆ motion teu') : '⚠ sem motion'}</span>
                       <button onClick={() => { navigator.clipboard.writeText(sel.mjPrompt); setCopiadoSlug(sel.slug); setTimeout(() => setCopiadoSlug(null), 1500); }} disabled={!sel.mjPrompt} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30 text-left">{copiadoSlug === sel.slug ? '✓ copiado — cola no MJ/Runway' : '⧉ copiar prompt (gerar motion novo)'}</button>
                       <label className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 cursor-pointer text-center">
                         {uploadSlug === sel.slug ? 'a carregar…' : (sel.motionUrl ? '⬆ trocar motion' : '⬆ carregar motion')}
                         <input type="file" accept="video/*" hidden disabled={uploadSlug === sel.slug} onChange={(e) => { const f = e.target.files?.[0]; if (f) carregarMotion(sel.slug, f); e.currentTarget.value = ''; }} />
                       </label>
+                      <button onClick={() => renderDia(sel.slug)} disabled={!sel.motionUrl || diaBusy === sel.slug} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-30">🎬 renderizar este dia{sel.videoUrl ? ' (de novo)' : ''}</button>
+                      {diaMsg && <p className="text-[0.62rem] text-ambar">{diaMsg}</p>}
                     </div>
                   </>
                 )}

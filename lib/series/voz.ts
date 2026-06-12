@@ -19,6 +19,19 @@ export const REFLEXO_PARTILHA = `REFLEXO DE PARTILHA (o objetivo destes posts é
 - tão verdadeira que apeteça GUARDAR e ENVIAR a alguém concreto (a mãe, a irmã, a amiga cansada);
 - a partilha nasce do RECONHECIMENTO e da BELEZA, NUNCA do choque, alarme ou clickbait. Nada de "3 sinais", "o erro que…", nem promessas. Dignidade sempre.`;
 
+// BREVIDADE (decisão da Vivianne, com exemplos aprovados): a frase da IMAGEM é
+// curta, de leitura rápida — a imagem contemplativa respira. A versão longa,
+// que ela ama, vive na LEGENDA. Manter a imagem + a viragem; cortar a explicação.
+export const BREVIDADE: Record<Serie, string> = {
+  vcsabia:
+    'BREVIDADE (regra dura): a "frase" tem NO MÁXIMO ~18 palavras — a imagem da natureza (1 frase curta) + a ponte "Tu também…" (1 frase curta). Corta a explicação: a frase confia em quem lê. Ex. aprovado: "…o pão só cresce depois de repousar? Tu também." / "…a porta de madeira incha no verão e custa a abrir? Não estás partida. É a estação."',
+  hojeemmim:
+    'BREVIDADE (regra dura): a "frase" tem NO MÁXIMO ~13 palavras, UMA só respiração. Corta a explicação. Ex. aprovado: "Solto hoje a versão de mim que tinha de ser forte sempre."',
+};
+
+export const LEGENDA_LONGA =
+  'LEGENDA: além da frase curta, devolve uma "legenda" mais LONGA (2 a 4 frases curtas): a versão que respira, a mesma ideia desenvolvida com toda a beleza, em parágrafos separados por \\n\\n; fecha com um convite digno a guardar/enviar a alguém (sem vender, sem nomear o formato).';
+
 export function estacaoPt(d: Date): string {
   const m = d.getMonth() + 1; // Portugal (hemisfério norte)
   if (m === 12 || m <= 2) return 'inverno';
