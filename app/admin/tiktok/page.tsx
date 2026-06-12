@@ -98,10 +98,10 @@ export default function TikTokPage() {
   const opcoes = info?.privacy_level_options ?? [];
 
   return (
-    <main className="mx-auto max-w-xl px-6 py-10 text-stone-800">
-      <Link href="/admin" className="text-sm text-stone-400 hover:text-stone-600">← Admin</Link>
-      <h1 className="mt-4 text-2xl font-semibold">Publicar no TikTok</h1>
-      <p className="mt-1 text-sm text-stone-500">Envia um vídeo para a conta TikTok escolhida, com as opções reais da conta.</p>
+    <main className="mx-auto max-w-xl px-6 py-10 text-stone-100">
+      <Link href="/admin" className="text-sm text-stone-400 hover:text-stone-200">← Admin</Link>
+      <h1 className="mt-4 text-2xl font-semibold text-white">Publicar no TikTok</h1>
+      <p className="mt-1 text-sm text-stone-400">Envia um vídeo para a conta TikTok escolhida, com as opções reais da conta.</p>
 
       {contas.length === 0 ? (
         <p className="mt-8 rounded-lg bg-amber-50 p-4 text-sm text-amber-800">Ainda não há contas ligadas. Liga uma em <code>/api/admin/tiktok/auth</code>.</p>
@@ -110,7 +110,7 @@ export default function TikTokPage() {
           {/* conta */}
           <div>
             <label className="block text-sm font-medium">Conta</label>
-            <select value={openId} onChange={(e) => setOpenId(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2">
+            <select value={openId} onChange={(e) => setOpenId(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900">
               {contas.map((c) => <option key={c.openId} value={c.openId}>{c.displayName ?? c.openId.slice(0, 10)}</option>)}
             </select>
           </div>
@@ -118,17 +118,17 @@ export default function TikTokPage() {
           {/* vídeo */}
           <div>
             <label className="block text-sm font-medium">Vídeo (slug da coleção)</label>
-            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2" placeholder="ex: semana-14-trabalho" />
+            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900" placeholder="ex: semana-14-trabalho" />
           </div>
 
           {/* legenda */}
           <div>
             <label className="block text-sm font-medium">Legenda (opcional)</label>
-            <textarea value={titulo} onChange={(e) => setTitulo(e.target.value)} rows={3} className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2" placeholder="Deixa vazio para usar a legenda da coleção" />
+            <textarea value={titulo} onChange={(e) => setTitulo(e.target.value)} rows={3} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900" placeholder="Deixa vazio para usar a legenda da coleção" />
           </div>
 
           {/* info do criador + privacidade */}
-          <div className="rounded-xl border border-stone-200 p-4">
+          <div className="rounded-xl border border-stone-600 bg-stone-900/40 p-4">
             {carregandoInfo ? (
               <p className="text-sm text-stone-500">A carregar opções da conta…</p>
             ) : info ? (
@@ -176,7 +176,7 @@ export default function TikTokPage() {
             <a className="underline" href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noreferrer">Confirmação de Uso de Música</a>{' '}do TikTok.
           </p>
 
-          <button onClick={publicar} disabled={publicando || !privacidade} className="w-full rounded-lg bg-stone-900 py-3 font-medium text-white disabled:opacity-40">
+          <button onClick={publicar} disabled={publicando || !privacidade} className="w-full rounded-lg bg-rose-600 py-3 font-medium text-white hover:bg-rose-500 disabled:opacity-40">
             {publicando ? 'A publicar…' : 'Publicar no TikTok'}
           </button>
 
