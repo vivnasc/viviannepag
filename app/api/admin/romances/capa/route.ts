@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { guardarImagem } from '@/lib/banda/flux';
-import { getRomance, ROMANCE_CAPA_ESTILO, ROMANCE_CAPA_PALETA } from '@/lib/romances';
+import { getRomance, ROMANCE_CAPA_ESTILOS, ROMANCE_CAPA_ESTILO_DEFAULT, ROMANCE_CAPA_PALETA } from '@/lib/romances';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -24,11 +24,12 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate-token' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { slug?: string };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; estilo?: string };
   const romance = getRomance(body.slug ?? '');
   if (!romance) return NextResponse.json({ erro: 'romance-desconhecido' }, { status: 400 });
 
-  const prompt = `${romance.cena}\n\n${ROMANCE_CAPA_ESTILO}\n\n${ROMANCE_CAPA_PALETA}\n\n${SAFETY}`;
+  const estilo = ROMANCE_CAPA_ESTILOS[body.estilo ?? ''] ?? ROMANCE_CAPA_ESTILOS[ROMANCE_CAPA_ESTILO_DEFAULT];
+  const prompt = `${romance.cena}\n\n${estilo.prompt}\n\n${ROMANCE_CAPA_PALETA}\n\n${SAFETY}`;
 
   const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
     method: 'POST',

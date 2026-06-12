@@ -22,14 +22,14 @@ const FONTS = [
 ].map(a => fontFace(...a)).join('\n');
 
 const T = LANG === 'pt' ? {
-  serie: 'BIBLIOTECA DE VÉSPERA',
+  serie: 'BIBLIOTECA DE VÉSPERA · I',
   t1: 'As Mãos', t2: 'de Amparo',
-  sub: 'um romance de Véspera',
+  sub: 'romance',
   autora: 'VIVIANNE DOS SANTOS',
 } : {
-  serie: 'THE VÉSPERA LIBRARY',
+  serie: 'THE VÉSPERA LIBRARY · I',
   t1: "Amparo's", t2: 'Hands',
-  sub: 'a novel of Véspera',
+  sub: 'a novel',
   autora: 'VIVIANNE DOS SANTOS',
 };
 
@@ -54,16 +54,16 @@ body { width:1400px; height:1873px; position:relative; overflow:hidden; backgrou
   font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:30px; color:#EFE2CF; opacity:.95;
   text-shadow:0 1px 14px rgba(18,14,26,.5); }
 .autora { position:absolute; bottom:50px; left:0; right:0; text-align:center;
-  font-family:'Outfit',sans-serif; font-weight:500; font-size:25px; letter-spacing:.30em; color:#F6EDE0;
+  font-family:'Outfit',sans-serif; font-weight:500; font-size:19px; letter-spacing:.34em; color:#F6EDE0;
   text-shadow:0 1px 12px rgba(18,14,26,.65); }
 </style></head><body>
 <div class="bg"></div>
 <div class="scrim-top"></div>
 <div class="scrim-bot"></div>
-<div class="serie">${T.serie}</div>
+<div class="serie">${T.autora}</div>
 <div class="titulo">${T.t1}<br><span class="l2">${T.t2}</span></div>
 <div class="sub">${T.sub}</div>
-<div class="autora">${T.autora}</div>
+<div class="autora">${T.serie}</div>
 </body></html>`;
 
 (async () => {

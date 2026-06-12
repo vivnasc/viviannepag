@@ -16,10 +16,23 @@ export type Romance = {
   cena: string;
 };
 
-// Estilo de capa dos romances: o gouache/storybook da casa (lib/banda/flux.ts)
-// com paleta própria de Véspera.
-export const ROMANCE_CAPA_ESTILO =
-  'distinctive editorial illustration, soft gouache painting with visible brush texture and paper grain, hand-painted organic shapes, storybook-for-adults feel';
+// Estilos de capa dos romances (registo adulto/literário; o gouache fica como
+// opção). A paleta de Véspera é comum a todos.
+export const ROMANCE_CAPA_ESTILOS: Record<string, { nome: string; prompt: string }> = {
+  aguarela: {
+    nome: 'Aguarela literária',
+    prompt: 'sophisticated literary fiction book cover art, confident ink line-and-wash with loose watercolour washes, muted and atmospheric, generous negative space, painterly textures, adult and elegant, contemporary prize-winning literary cover feel',
+  },
+  atmosferica: {
+    nome: 'Pintura atmosférica',
+    prompt: 'evocative painterly book cover art, oil-painting texture with soft expressive brushwork, moody atmospheric light, impressionistic and adult, quiet emotional weight, fine-art literary cover',
+  },
+  gouache: {
+    nome: 'Gouache / storybook',
+    prompt: 'distinctive editorial illustration, soft gouache painting with visible brush texture and paper grain, hand-painted organic shapes, storybook-for-adults feel',
+  },
+};
+export const ROMANCE_CAPA_ESTILO_DEFAULT = 'aguarela';
 export const ROMANCE_CAPA_PALETA =
   'warm terracotta, sand, cream, sage green and deep dusk-blue palette';
 
