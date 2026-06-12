@@ -76,16 +76,32 @@ export async function listarAudios(serie: SerieId): Promise<AudioMood[]> {
   return out;
 }
 
-// motions já usados (e quantas vezes) nas coleções serie-diaria existentes
-export async function usosDeMotions(): Promise<Record<string, number>> {
+// motions já usados nas coleções serie-diaria: quantas vezes + ÚLTIMA data de
+// uso (agendadoEm). Regra da Vivianne: um motion usado entra em QUARENTENA de
+// 90 dias — não volta a ser escolhido até descansar. Assim ela sabe exatamente
+// quantos motions novos precisa de gerar no MJ.
+export const QUARENTENA_DIAS = 90;
+export type UsoMotion = { n: number; ultimo: string };
+
+export async function usosDeMotions(): Promise<Record<string, UsoMotion>> {
   const sb = getSupabaseAdmin();
   const { data } = await sb.from('carousel_collections').select('theme').eq('theme->>formato', 'serie-diaria');
-  const usos: Record<string, number> = {};
+  const usos: Record<string, UsoMotion> = {};
   for (const c of data ?? []) {
-    const p = (c.theme as { motionPath?: string } | null)?.motionPath;
-    if (p) usos[p] = (usos[p] ?? 0) + 1;
+    const t = (c.theme as { motionPath?: string; agendadoEm?: string } | null) ?? {};
+    if (!t.motionPath) continue;
+    const u = usos[t.motionPath] ?? { n: 0, ultimo: '' };
+    u.n += 1;
+    if ((t.agendadoEm ?? '') > u.ultimo) u.ultimo = t.agendadoEm ?? '';
+    usos[t.motionPath] = u;
   }
   return usos;
+}
+
+export function emQuarentena(uso: UsoMotion | undefined, dataAlvo: string): boolean {
+  if (!uso || !uso.ultimo || !dataAlvo) return false;
+  const ms = Math.abs(new Date(`${dataAlvo}T12:00:00`).getTime() - new Date(`${uso.ultimo}T12:00:00`).getTime());
+  return ms < QUARENTENA_DIAS * 24 * 3600 * 1000;
 }
 
 // pontuação de match frase↔motion: palavras partilhadas com categoria+mood+nome
@@ -98,17 +114,19 @@ function score(frase: string, m: Motion): number {
 
 // regra da Vivianne: NOVOS primeiro (nunca usados, mais recentes à frente);
 // entre novos com match, o melhor match ganha; senão o novo mais recente.
-// Se não há novos: melhor match entre todos (menos usado desempata).
-export function escolherMotion(frase: string, pool: Motion[], usos: Record<string, number>, jaNesteLote: Set<string>): Motion | null {
+// QUARENTENA: usados nos últimos 90 dias (vs a data alvo) ficam de fora —
+// se não sobrar nenhum, devolve null (o dia fica "falta motion", e ela sabe
+// que precisa de gerar um novo no MJ). Nunca repete dentro do mesmo lote.
+export function escolherMotion(frase: string, pool: Motion[], usos: Record<string, UsoMotion>, jaNesteLote: Set<string>, dataAlvo = ''): Motion | null {
   if (!pool.length) return null;
-  const livres = pool.filter((m) => !jaNesteLote.has(m.path));
-  const cands = livres.length ? livres : pool; // lote maior que a pool: reusa
-  const novos = cands.filter((m) => !(usos[m.path] > 0));
+  const cands = pool.filter((m) => !jaNesteLote.has(m.path) && !emQuarentena(usos[m.path], dataAlvo));
+  if (!cands.length) return null;
+  const novos = cands.filter((m) => !((usos[m.path]?.n ?? 0) > 0));
   const ordenar = (xs: Motion[]) =>
     [...xs].sort((a, b) => {
       const ds = score(frase, b) - score(frase, a);
       if (ds) return ds;
-      const du = (usos[a.path] ?? 0) - (usos[b.path] ?? 0);
+      const du = (usos[a.path]?.n ?? 0) - (usos[b.path]?.n ?? 0);
       if (du) return du;
       return (b.criadoEm ?? '').localeCompare(a.criadoEm ?? '');
     });
