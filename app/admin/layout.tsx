@@ -37,6 +37,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     cor: '#7E9B8E',
     itens: [
       { href: '/admin/publicar', label: 'publicar · agendar' },
+      { href: '/admin/tiktok', label: 'tiktok · publicar' },
     ],
   },
   {
