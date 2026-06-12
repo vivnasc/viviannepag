@@ -309,7 +309,7 @@ export default function PublicarPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {diasSemana.map((d) => {
                   const iso = isoLocal(d);
-                  const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
+                  const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it)).sort((a, b) => horaDe(a).localeCompare(horaDe(b)));
                   return (
                     <div key={iso} className={`rounded-xl border p-2.5 ${iso === hojeIso ? 'border-ambar/40 bg-ambar/5' : 'border-ocre/12 bg-black/10'}`}>
                       <p className="text-[0.7rem] uppercase tracking-wider mb-2 flex items-center gap-2"><span className="text-[#C9B6FA]">{DIAS_PT[d.getDay()]} {d.getDate()}</span>{iso === hojeIso && <span className="text-[0.5rem] px-1.5 py-0.5 rounded-full bg-ambar/20 text-ambar normal-case tracking-normal">hoje</span>}</p>
@@ -335,7 +335,7 @@ export default function PublicarPage() {
                 <div className="grid grid-cols-7 gap-1">
                   {celulas.map((d) => {
                     const iso = isoLocal(d); const noMes = d.getMonth() === base.getMonth();
-                    const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
+                    const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it)).sort((a, b) => horaDe(a).localeCompare(horaDe(b)));
                     return (
                       <button key={iso} onClick={() => { if (posts.length) { setLegenda(posts[0]); } }} className={`min-h-[4.5rem] rounded-lg border p-1 text-left ${iso === hojeIso ? 'border-ambar/50' : 'border-ocre/10'} ${noMes ? 'bg-black/15' : 'bg-transparent opacity-40'}`}>
                         <span className="text-[0.56rem] opacity-55">{d.getDate()}</span>
