@@ -53,12 +53,27 @@ export async function POST(req: Request) {
     disableDuet: body.disableDuet,
     disableStitch: body.disableStitch,
   });
+
+  // Pré-auditoria, o direct post recusa (conta não-privada / cliente não auditado).
+  // Para não falhar, cai no RASCUNHO (o vídeo vai para a caixa do TikTok). Depois
+  // da auditoria aprovada, o direct post passa e este fallback deixa de disparar.
+  const precisaAuditoria = !r.ok && /unaudited|private|spam_risk/i.test(r.erro ?? '');
+  if (!r.ok && precisaAuditoria) {
+    const d = await publicarVideo({ accessToken: conta.accessToken, videoUrl, titulo: titulo || 'veu.a.veu', modo: 'rascunho' });
+    if (!d.ok || !d.publishId) return NextResponse.json({ erro: 'init', detalhe: d.erro }, { status: 502 });
+    const e2 = await esperarPublicacao(conta.accessToken, d.publishId, 20000);
+    return NextResponse.json({
+      ok: e2.ok, modo: 'rascunho', publishId: d.publishId, status: e2.status, failReason: e2.failReason,
+      detalhe: 'Enviado para os RASCUNHOS do TikTok (publicação pública direta fica disponível após a auditoria).',
+    });
+  }
   if (!r.ok || !r.publishId) return NextResponse.json({ erro: 'init', detalhe: r.erro }, { status: 502 });
 
   const estado = await esperarPublicacao(conta.accessToken, r.publishId, 20000);
   const aindaProcessa = !estado.ok && !estado.failReason && estado.erro?.includes('a tempo');
   return NextResponse.json({
     ok: estado.ok,
+    modo: 'direto',
     publishId: r.publishId,
     status: estado.status,
     failReason: estado.failReason,
