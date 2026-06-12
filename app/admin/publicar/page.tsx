@@ -52,6 +52,21 @@ const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00
 // preview de VÍDEO (séries/reels): o MP4 renderizado, ou o motion ainda por
 // renderizar — para o cartão mostrar a 1.ª frame quando não há imagem de capa.
 const videoDe = (it: Item): string | null => { const d = it.dias?.[0]; const s = d?.slides?.[0]; return d?.videoUrl ?? s?.videoUrl ?? s?.motionUrl ?? null; };
+// thumbnail de vídeo FIÁVEL: preload=metadata + seek a 0.1s no onLoadedMetadata
+// força o browser (Edge/Chrome) a decodificar e PINTAR a 1.ª frame — o truque
+// só com "#t=0.1" no src não pinta de forma consistente.
+function VideoThumb({ src, className }: { src: string; className?: string }) {
+  return (
+    <video
+      src={src}
+      className={className}
+      muted
+      playsInline
+      preload="metadata"
+      onLoadedMetadata={(e) => { try { e.currentTarget.currentTime = 0.1; } catch { /* ignora */ } }}
+    />
+  );
+}
 const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador']; // capa-assinatura no 1.º slide
 const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
 function mediaPronta(it: Item): boolean {
@@ -235,7 +250,7 @@ export default function PublicarPage() {
     return (
       <div onClick={() => setLegenda(it)} className="rounded-xl border border-ocre/15 bg-terra/15 overflow-hidden cursor-pointer hover:border-ambar/40 transition-colors" title="clica para ver o conteúdo">
         <div className="flex gap-3 p-2.5">
-          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vid ? <video src={`${vid}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
+          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vid ? <VideoThumb src={vid} className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
               <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span>
@@ -347,7 +362,7 @@ export default function PublicarPage() {
                       <button key={iso} onClick={() => { if (posts.length) { setLegenda(posts[0]); } }} className={`min-h-[4.5rem] rounded-lg border p-1 text-left ${iso === hojeIso ? 'border-ambar/50' : 'border-ocre/10'} ${noMes ? 'bg-black/15' : 'bg-transparent opacity-40'}`}>
                         <span className="text-[0.56rem] opacity-55">{d.getDate()}</span>
                         <div className="flex flex-wrap gap-0.5 mt-0.5">
-                          {posts.slice(0, 4).map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return <span key={it.slug} className="w-4 h-5 rounded-sm overflow-hidden bg-black/40 ring-1" style={{ ['--tw-ring-color' as string]: COR[e].fg } as React.CSSProperties}>{c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <video src={`${v}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="text-[0.5rem]">{fmtDe(it).emoji}</span>}</span>; })}
+                          {posts.slice(0, 4).map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return <span key={it.slug} className="w-4 h-5 rounded-sm overflow-hidden bg-black/40 ring-1" style={{ ['--tw-ring-color' as string]: COR[e].fg } as React.CSSProperties}>{c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <VideoThumb src={v} className="w-full h-full object-cover" /> : <span className="text-[0.5rem]">{fmtDe(it).emoji}</span>}</span>; })}
                           {posts.length > 4 && <span className="text-[0.5rem] opacity-50">+{posts.length - 4}</span>}
                         </div>
                       </button>
@@ -369,7 +384,7 @@ export default function PublicarPage() {
                   <div className="grid grid-cols-3 gap-1 max-w-md">
                     {ord.map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return (
                       <button key={it.slug} onClick={() => setLegenda(it)} className="relative aspect-[4/5] bg-black/30 overflow-hidden">
-                        {c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <video src={`${v}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="grid place-items-center w-full h-full text-xl">{fmtDe(it).emoji}</span>}
+                        {c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <VideoThumb src={v} className="w-full h-full object-cover" /> : <span className="grid place-items-center w-full h-full text-xl">{fmtDe(it).emoji}</span>}
                         <span className="absolute top-1 right-1 w-2 h-2 rounded-full" style={{ background: COR[e].fg }} />
                       </button>
                     ); })}
@@ -430,7 +445,7 @@ export default function PublicarPage() {
           <div onClick={() => setLegenda(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
             <div onClick={(ev) => ev.stopPropagation()} className={`w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
               <div className="flex items-start gap-4">
-                <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vidCapa ? <video src={`${vidCapa}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
+                <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vidCapa ? <VideoThumb src={vidCapa} className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1"><span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span><span className="text-[0.62rem] opacity-55">{m.emoji} {m.label}</span></div>
                   <p className="text-[1.1rem] leading-tight">{it.title}</p>
