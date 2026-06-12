@@ -76,7 +76,11 @@ export async function GET(req: NextRequest) {
   const r = await publicarVideo({ accessToken: conta.accessToken, videoUrl: urlParaTikTok, titulo, modo, privacidade });
   if (!r.ok || !r.publishId) return NextResponse.json({ erro: 'init', detalhe: r.erro, urlParaTikTok }, { status: 502 });
 
-  const estado = await esperarPublicacao(conta.accessToken, r.publishId);
+  // sonda só ~20s para não pendurar o pedido (o TikTok pode demorar mais a
+  // processar). Se ainda não acabou, devolve o publishId para sondar depois em
+  // /api/admin/tiktok/estado?publishId=...
+  const estado = await esperarPublicacao(conta.accessToken, r.publishId, 20000);
+  const aindaProcessa = !estado.ok && !estado.failReason && estado.erro?.includes('a tempo');
   return NextResponse.json({
     ok: estado.ok,
     modo,
@@ -85,9 +89,11 @@ export async function GET(req: NextRequest) {
     status: estado.status,
     failReason: estado.failReason,
     urlParaTikTok,
-    erro: estado.erro,
+    erro: aindaProcessa ? undefined : estado.erro,
     detalhe: estado.ok
       ? (modo === 'rascunho' ? 'Vai à app do TikTok → Caixa de entrada/Rascunhos para veres o vídeo.' : 'Publicado como privado (SELF_ONLY) no perfil.')
-      : 'não concluiu — vê o erro/status',
+      : aindaProcessa
+        ? `ainda a processar no TikTok. Verifica daqui a 1 min: /api/admin/tiktok/estado?publishId=${r.publishId}`
+        : 'não concluiu — vê o erro/status',
   });
 }
