@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-const CAPA_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/viviannepag-assets/romances/rom-01-amparo/capa-composta-pt.png`;
+const CAPA_URL = `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '')}/storage/v1/object/public/viviannepag-assets/romances/rom-01-amparo/capa-composta-pt.png`;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

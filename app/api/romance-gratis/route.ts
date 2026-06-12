@@ -33,14 +33,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'servidor' }, { status: 500 });
   }
 
-  const base = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/viviannepag-assets/romances/rom-01-amparo`;
-  const pt = `${base}/livro-pt.pdf`;
-  const en = `${base}/livro-en.pdf`;
+  const pt = 'https://viviannedossantos.com/api/romance-download?lang=pt';
+  const en = 'https://viviannedossantos.com/api/romance-download?lang=en';
 
   const isEn = body.locale === 'en';
   if (RESEND_KEY) {
     try {
-      await fetch('https://api.resend.com/emails', {
+      const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
         body: JSON.stringify({
@@ -67,8 +66,9 @@ export async function POST(req: Request) {
 </div>`,
         }),
       });
-    } catch {
-      /* o download na página continua a funcionar mesmo sem email */
+      if (!resendRes.ok) console.error('romance-gratis resend', resendRes.status, await resendRes.text());
+    } catch (e) {
+      console.error('romance-gratis resend:', e);
     }
   }
 
