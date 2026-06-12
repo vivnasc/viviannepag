@@ -6,8 +6,8 @@ export const runtime = 'nodejs';
 
 // GET /api/admin/series-diaria/list?serie= — os dias gerados (formato serie-diaria),
 // para a PRODUÇÃO: frase, motion (pool ou carregado), prompt MJ, áudio, estado.
-type S0 = { frase?: string; motionUrl?: string | null };
-type Dia = { palavra?: string; slides?: S0[]; faixa?: { titulo?: string } };
+type S0 = { frase?: string; motionUrl?: string | null; videoUrl?: string | null };
+type Dia = { palavra?: string; slides?: S0[]; faixa?: { titulo?: string; url?: string }; videoUrl?: string | null };
 type Theme = { serie?: string; dia?: string; paleta?: string; agendadoEm?: string; hora?: string; aprovado?: boolean; mjPrompt?: string; motionPath?: string; motionFonte?: string };
 
 export async function GET(req: NextRequest) {
@@ -29,6 +29,8 @@ export async function GET(req: NextRequest) {
       motionFonte: t.motionFonte ?? (t.motionPath ? 'pool' : null),
       mjPrompt: t.mjPrompt ?? '',
       audioMood: d0?.faixa?.titulo ?? null,
+      audioUrl: d0?.faixa?.url ?? null,
+      videoUrl: s0.videoUrl ?? d0?.videoUrl ?? null,
     };
   }).filter((d) => !serie || d.serie === serie)
     .sort((a, b) => (a.data ?? '').localeCompare(b.data ?? ''));
