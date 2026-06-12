@@ -112,7 +112,7 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
                       className={`no-underline border ${estante.cor.borda} rounded-[14px] p-5 ${estante.cor.bordaHover} transition-colors`}
                     >
                       <p className={`text-[0.66rem] tracking-[0.26em] uppercase ${estante.cor.texto} mb-1.5`}>
-                        {isEn ? 'available · free' : 'disponível · grátis'}
+                        {(isEn ? livro.notaEn : livro.nota) ?? (isEn ? 'available · free' : 'disponível · grátis')}
                       </p>
                       <p className="font-serif text-creme text-[1.1rem] mb-1.5">
                         {isEn ? livro.tituloEn : livro.titulo}
