@@ -49,9 +49,9 @@ export const LEGENDA_LONGA =
   'LEGENDA: além da frase curta, devolve uma "legenda" mais LONGA (2 a 4 frases curtas): a versão que respira, a mesma ideia desenvolvida com toda a beleza, em parágrafos separados por \\n\\n; fecha com um convite digno a guardar/enviar a alguém (sem vender, sem nomear o formato).';
 
 export function estacaoPt(d: Date): string {
-  const m = d.getMonth() + 1; // Portugal (hemisfério norte)
-  if (m === 12 || m <= 2) return 'inverno';
-  if (m <= 5) return 'primavera';
-  if (m <= 8) return 'verão';
-  return 'outono';
+  const m = d.getMonth() + 1; // HEMISFÉRIO SUL (como o resto da app, ex. carrossel/calendario)
+  if (m === 12 || m <= 2) return 'verão';   // Dez–Fev
+  if (m <= 5) return 'outono';              // Mar–Mai
+  if (m <= 8) return 'inverno';             // Jun–Ago
+  return 'primavera';                       // Set–Nov
 }
