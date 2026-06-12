@@ -33,6 +33,30 @@ export default function SeriesDiariaPreview() {
   const [copiado, setCopiado] = useState(false);
   const [motion, setMotion] = useState(true);
   const [prog, setProg] = useState(1);
+  // pool (motions/áudios reciclados da escola-veus) + bulk do mês
+  const [pool, setPool] = useState<{ motions: number; novos: number; audios: { mood: string; n: number }[] } | null>(null);
+  const [poolErro, setPoolErro] = useState<string | null>(null);
+  const [bulkInicio, setBulkInicio] = useState(() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; });
+  const [bulkDias, setBulkDias] = useState(30);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkRes, setBulkRes] = useState<{ criados: number; semMotion: number; poolErro?: string | null; resumo: { data: string; dia: string; frase: string; motion: string | null; audio: string | null; mj: boolean; mjPrompt?: string }[] } | null>(null);
+
+  useEffect(() => {
+    setPool(null); setPoolErro(null);
+    fetch(`/api/admin/series-diaria/pool?serie=${serie}`).then((r) => r.json()).then((j) => { if (j.ok) setPool(j); else setPoolErro(j.detalhe ?? j.erro ?? 'erro'); }).catch((e) => setPoolErro(String(e)));
+  }, [serie]);
+
+  async function gerarMes() {
+    if (bulkBusy) return;
+    if (!confirm(`Gerar ${bulkDias} dia(s) de ${SERIES[serie].nome} a partir de ${bulkInicio}?\n\nFica tudo em RASCUNHO na Publicar (vivianne.dos.santos) — nada publica sem aprovares.`)) return;
+    setBulkBusy(true); setBulkRes(null); setErro(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/gerar-mes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, inicio: bulkInicio, dias: bulkDias }) });
+      const j = await r.json();
+      if (r.ok) setBulkRes(j); else setErro(j.detalhe ?? j.erro ?? `erro ${r.status}`);
+    } catch (e) { setErro(String(e)); }
+    setBulkBusy(false);
+  }
 
   const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setMjPrompt(''); if (s === 'hojeemmim') setPaleta(paletaDoDia(dia)); };
   const trocarDia = (d: string) => { setDia(d); setPaleta(paletaDoDia(d)); }; // paleta FIXA por dia (regente)
@@ -136,6 +160,42 @@ export default function SeriesDiariaPreview() {
             <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Fundo (URL de imagem, opcional)</p>
             <input value={bgUrl} onChange={(e) => setBgUrl(e.target.value)} placeholder="cola um frame do teu motion para veres sobre fundo real" className="w-full text-[0.8rem] px-3 py-2 rounded-lg border border-ocre/25 bg-[#15131f] text-creme-2" />
             <p className="text-[0.62rem] opacity-40 mt-1">No render real, o fundo é o teu vídeo de motion (Midjourney). Aqui é só para pré-visualizar.</p>
+          </div>
+
+          {/* ── POOL reciclada (escola-veus) + BULK do mês ── */}
+          <div className="rounded-xl border border-ocre/20 bg-black/15 p-4 space-y-3">
+            <p className="text-[0.8rem] font-semibold">📦 Gerar 1 mês ({SERIES[serie].nome})</p>
+            <p className="text-[0.66rem] opacity-60 -mt-1">
+              {pool ? <>Pool ligada: <b>{pool.motions}</b> motions ({pool.novos} novos por usar) · áudios: {pool.audios.map((a) => `${a.mood} (${a.n})`).join(' · ') || '—'}</>
+                : poolErro ? <span className="text-rosa/80">⚠ pool: {poolErro}</span>
+                : 'a ler a pool de motions/áudios…'}
+            </p>
+            <div className="flex items-center gap-2 flex-wrap text-[0.74rem]">
+              <label className="flex items-center gap-1.5 opacity-80">início <input type="date" value={bulkInicio} onChange={(e) => setBulkInicio(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
+              <label className="flex items-center gap-1.5 opacity-80">dias <input type="number" min={1} max={31} value={bulkDias} onChange={(e) => setBulkDias(Number(e.target.value))} className="w-16 px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
+              <button onClick={gerarMes} disabled={bulkBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{bulkBusy ? 'a gerar o lote… (~1-2 min)' : `⚡ gerar ${bulkDias} dia(s)`}</button>
+            </div>
+            <p className="text-[0.62rem] opacity-45">Frases únicas (dia + estação{serie === 'hojeemmim' ? ' + ritual' : ''}), motion reciclado da pool (novos primeiro, senão melhor match) e áudio por mood. Fica em <b>rascunho</b> na Publicar (vivianne.dos.santos) — nada publica sem o teu ✓. Dias que já existem são saltados.</p>
+            {bulkRes && (
+              <div className="space-y-2">
+                <p className="text-[0.72rem] text-salvia">✓ {bulkRes.criados} dia(s) criados{bulkRes.semMotion ? <> · <b className="text-ambar">{bulkRes.semMotion} sem motion na pool</b> (gera no MJ com os prompts abaixo)</> : ' · todos com motion da pool'}{bulkRes.poolErro ? <span className="text-rosa/80"> · ⚠ pool: {bulkRes.poolErro}</span> : null}</p>
+                <div className="max-h-72 overflow-y-auto rounded-lg border border-ocre/15">
+                  <table className="w-full text-[0.66rem]">
+                    <thead><tr className="text-left opacity-50"><th className="px-2 py-1">data</th><th className="px-2 py-1">frase</th><th className="px-2 py-1">motion</th><th className="px-2 py-1">áudio</th></tr></thead>
+                    <tbody>
+                      {bulkRes.resumo.map((r) => (
+                        <tr key={r.data} className="border-t border-ocre/10 align-top">
+                          <td className="px-2 py-1 whitespace-nowrap opacity-70">{r.data}<br /><span className="opacity-60">{r.dia}</span></td>
+                          <td className="px-2 py-1">{r.frase}</td>
+                          <td className="px-2 py-1">{r.motion ? <span className="text-salvia">♻ {r.motion}</span> : <button onClick={() => navigator.clipboard.writeText(r.mjPrompt ?? '')} title={r.mjPrompt} className="text-ambar underline">⧉ copiar prompt MJ</button>}</td>
+                          <td className="px-2 py-1 opacity-70">{r.audio ?? '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
