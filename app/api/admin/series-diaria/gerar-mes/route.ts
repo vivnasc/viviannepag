@@ -123,9 +123,17 @@ ${REGRA_ACENTOS}`;
     if (!alvo || !frase) continue;
     const motion = pool.length ? escolherMotion(frase, pool, usos, jaNesteLote) : null;
     if (motion) jaNesteLote.add(motion.path);
-    const audio = audios.length ? escolherAudio(frase, alvo.dia, serie, audios) : null;
-    const paleta = serie === 'hojeemmim' ? paletaDoDia(alvo.dia) : 'dourado';
     const mjPrompt = (g.mjPrompt ?? '').trim();
+    // O SOM casa com o MOTION: se da pool, pela etiqueta/mood + nome+categoria;
+    // se ainda não há motion (vai ser carregado), pelo PROMPT que o vai gerar.
+    const audio = audios.length
+      ? escolherAudio({
+          descritor: motion ? `${motion.categoria ?? ''} ${motion.mood ?? ''} ${motion.nome}` : mjPrompt,
+          moodPreferido: motion?.mood ?? null,
+          dia: alvo.dia, serie, audios,
+        })
+      : null;
+    const paleta = serie === 'hojeemmim' ? paletaDoDia(alvo.dia) : 'dourado';
 
     const legenda = (g.legenda ?? '').trim() || frase; // a versão LONGA vive na legenda
     const slides = [{ tipo: 'serie-diaria', serie, frase, dia: alvo.dia, paleta, motionUrl: motion?.url ?? null, capa: true }];

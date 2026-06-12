@@ -121,15 +121,32 @@ const MOOD_DIA: Record<SerieId, Record<string, string>> = {
   vcsabia: { segunda: 'birds', 'terça': 'stream', quarta: 'wind', quinta: 'silence', sexta: 'birds', 'sábado': 'rain', domingo: 'silence' },
 };
 
-export function escolherAudio(frase: string, dia: string, serie: SerieId, audios: AudioMood[]): { mood: string; url: string } | null {
+// O ÁUDIO casa com o MOTION (não com a frase):
+//  - motion da pool: usa a etiqueta/mood do motion (água→água, coruja→coruja);
+//  - motion carregado (novo): não tem etiqueta, mas foi gerado do PROMPT desse
+//    dia — passa-se o prompt como `descritor` e casa por keyword (chuva→chuva).
+// Fallback: mood do dia da semana.
+export function escolherAudio(opts: { descritor: string; moodPreferido?: string | null; dia: string; serie: SerieId; audios: AudioMood[] }): { mood: string; url: string } | null {
+  const { descritor, moodPreferido, dia, serie, audios } = opts;
   if (!audios.length) return null;
-  const fw = palavrasDe(frase);
-  let melhor: AudioMood | null = null, melhorS = 0;
-  for (const a of audios) {
-    const aw = palavrasDe(a.mood.replace(/[-_]/g, ' '));
-    const s = aw.filter((w) => fw.includes(w)).length;
-    if (s > melhorS) { melhor = a; melhorS = s; }
+  let melhor: AudioMood | null = null;
+  // 1) match direto à etiqueta do motion (pool)
+  if (moodPreferido) {
+    const mp = norm(moodPreferido.replace(/[-_]/g, ' '));
+    melhor = audios.find((a) => norm(a.mood.replace(/[-_]/g, ' ')) === mp)
+      ?? audios.find((a) => norm(a.mood).includes(norm(moodPreferido)) || norm(moodPreferido).includes(norm(a.mood))) ?? null;
   }
+  // 2) match por palavras do descritor (prompt do motion / nome+categoria)
+  if (!melhor) {
+    const dw = palavrasDe(descritor.replace(/[-_]/g, ' '));
+    let melhorS = 0;
+    for (const a of audios) {
+      const aw = palavrasDe(a.mood.replace(/[-_]/g, ' '));
+      const s = aw.filter((w) => dw.includes(w)).length;
+      if (s > melhorS) { melhor = a; melhorS = s; }
+    }
+  }
+  // 3) fallback: mood do dia da semana
   if (!melhor) {
     const alvo = MOOD_DIA[serie][dia] ?? '';
     melhor = audios.find((a) => norm(a.mood).includes(norm(alvo))) ?? audios[0];

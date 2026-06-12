@@ -60,6 +60,8 @@ export default function SeriesDiariaPage() {
   // ── 3 · RENDER ──
   const [renderBusy, setRenderBusy] = useState(false);
   const [renderMsg, setRenderMsg] = useState<string | null>(null);
+  const [rndDe, setRndDe] = useState('');
+  const [rndAte, setRndAte] = useState('');
 
   // ── moldura (preview, colapsável) ──
   const [verMoldura, setVerMoldura] = useState(false);
@@ -135,16 +137,18 @@ export default function SeriesDiariaPage() {
     setDiaBusy(null);
   }
 
-  async function renderMes(force: boolean) {
+  async function renderPeriodo(force: boolean) {
     if (renderBusy) return;
-    const comMotion = (prodDias ?? []).filter((d) => d.motionUrl);
-    if (!comMotion.length) { setRenderMsg('Nenhum dia com motion ainda — resolve os motions no passo ② primeiro.'); return; }
-    if (!confirm(`Renderizar ${comMotion.length} dia(s) de ${SERIES[serie].nome}?\n\nCompõe a moldura + áudio sobre cada motion no GitHub Actions (~alguns min). ${force ? 'Inclui os que já têm vídeo.' : 'Só os que ainda não têm vídeo.'}`)) return;
+    // o período é escolhido por ti (de/até); rende só os dias COM motion nesse intervalo
+    const noIntervalo = (prodDias ?? []).filter((d) => d.data && (!rndDe || d.data >= rndDe) && (!rndAte || d.data <= rndAte));
+    const comMotion = noIntervalo.filter((d) => d.motionUrl && (force || !d.videoUrl));
+    if (!comMotion.length) { setRenderMsg(force ? 'Nenhum dia com motion no período escolhido.' : 'Nada por renderizar no período (ou já têm MP4 — usa "re-render à força").'); return; }
+    if (!confirm(`Renderizar ${comMotion.length} dia(s) de ${SERIES[serie].nome}${rndDe || rndAte ? ` (${rndDe || '…'} → ${rndAte || '…'})` : ''}?\n\nCompõe a moldura + áudio sobre cada motion no GitHub Actions (~alguns min).`)) return;
     setRenderBusy(true); setRenderMsg(null);
     try {
-      const r = await fetch('/api/admin/series-diaria/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, force: !!force }) });
+      const r = await fetch('/api/admin/series-diaria/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slugs: comMotion.map((d) => d.slug).join(','), force: !!force }) });
       const j = await r.json();
-      setRenderMsg(r.ok ? '🎬 render disparado no GitHub Actions. Daqui a uns minutos carrega "↻ atualizar" no passo ② e os MP4 aparecem (e ficam prontos na Publicar).' : `⚠ ${j.detalhe ?? j.erro ?? r.status}`);
+      setRenderMsg(r.ok ? `🎬 ${comMotion.length} dia(s) a renderizar no GitHub Actions. Daqui a uns minutos carrega "↻ atualizar" no ② e os MP4 aparecem.` : `⚠ ${j.detalhe ?? j.erro ?? r.status}`);
     } catch (e) { setRenderMsg('⚠ ' + String(e)); }
     setRenderBusy(false);
   }
@@ -319,10 +323,12 @@ export default function SeriesDiariaPage() {
         </Passo>
 
         {/* ── 3 · RENDER ── */}
-        <Passo n="③" titulo="Render · MP4 finais" sub="Compõe a moldura + frase (typewriter/bloom) + áudio sobre cada motion, no GitHub Actions, e produz os MP4 9:16 prontos a publicar.">
+        <Passo n="③" titulo="Render · MP4 finais" sub="Escolhe o PERÍODO (de/até; deixa vazio = todos os dias). Compõe a moldura + frase + áudio sobre cada motion no GitHub Actions → MP4 9:16. Só renderiza dias COM motion.">
           <div className="flex items-center gap-2 flex-wrap">
-            <button onClick={() => renderMes(false)} disabled={renderBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderBusy ? 'a disparar…' : '🎬 renderizar o mês'}</button>
-            <button onClick={() => renderMes(true)} disabled={renderBusy} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/60 hover:border-ambar disabled:opacity-40">re-render à força</button>
+            <label className="flex items-center gap-1.5 text-[0.72rem] opacity-80">de <input type="date" value={rndDe} onChange={(e) => setRndDe(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
+            <label className="flex items-center gap-1.5 text-[0.72rem] opacity-80">até <input type="date" value={rndAte} onChange={(e) => setRndAte(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
+            <button onClick={() => renderPeriodo(false)} disabled={renderBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderBusy ? 'a disparar…' : '🎬 renderizar o período'}</button>
+            <button onClick={() => renderPeriodo(true)} disabled={renderBusy} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/60 hover:border-ambar disabled:opacity-40">re-render à força</button>
             {prodDias && <span className="text-[0.64rem] opacity-55">{prodDias.filter((d) => d.videoUrl).length}/{prodDias.length} com MP4</span>}
           </div>
           {renderMsg && <p className="text-[0.7rem] text-ambar">{renderMsg}</p>}
