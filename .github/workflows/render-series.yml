@@ -1,0 +1,54 @@
+name: Render séries diárias (MP4)
+
+# Compõe a moldura (typewriter/bloom) sobre o motion + áudio e produz os MP4 9:16
+# das séries VC Sabia / Hoje em Mim. Disparado por /api/admin/series-diaria/render-dispatch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      serie:
+        description: 'Série (vcsabia | hojeemmim). Vazio = todas'
+        required: false
+        type: string
+        default: ''
+      slugs:
+        description: 'Slugs específicos (vírgula). Vazio = todos os da série'
+        required: false
+        type: string
+        default: ''
+      siteUrl:
+        description: 'URL público do site'
+        required: true
+        type: string
+      force:
+        description: 'Re-renderizar mesmo os que já têm vídeo (1)'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Install npm packages
+        run: npm install --no-save puppeteer @supabase/supabase-js
+      - name: Render séries MP4
+        env:
+          SITE_URL: ${{ github.event.inputs.siteUrl }}
+          SERIE: ${{ github.event.inputs.serie }}
+          SLUGS: ${{ github.event.inputs.slugs }}
+          FORCE: ${{ github.event.inputs.force }}
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/render-series.js

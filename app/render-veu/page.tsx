@@ -13,6 +13,8 @@ import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide } from '@/components/admin/KineticSlide';
+import { SerieDiariaSlide, type SerieId } from '@/components/admin/SerieDiariaSlide';
+import { type PaletaId } from '@/lib/series/serie-design';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
@@ -65,6 +67,12 @@ export default function RenderVeuPage() {
     })();
   }, []);
 
+  // séries diárias: body transparente para a moldura sair com alpha (omitBackground)
+  useEffect(() => {
+    const t = (estado?.slide as { tipo?: string } | undefined)?.tipo;
+    if (typeof document !== 'undefined') document.body.style.background = t === 'serie-diaria' ? 'transparent' : '#000';
+  }, [estado]);
+
   useEffect(() => {
     if (!estado) return;
     const marcar = () => { document.body.setAttribute('data-slide-ready', 'true'); };
@@ -81,11 +89,13 @@ export default function RenderVeuPage() {
   const ehReel = tipoSlide === 'reel';
   const ehBanda = tipoSlide === 'banda';
   const ehKinetic = tipoSlide === 'kinetico';
+  const ehSerie = tipoSlide === 'serie-diaria'; // moldura das séries diárias, sobreposta ao motion no render
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
+  const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string }) | undefined;
   return (
-    <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: '#000' }}>
+    <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: ehSerie ? 'transparent' : '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
       {estado && ehAnel && s && (
         <AnelCover label={s.label ?? ''} imageUrl={s.imageUrl} mundo={estado.dia.mundo} perfil={!!s.perfil} />
@@ -135,7 +145,11 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
-      {estado && !ehInfo && !ehAnel && !ehReel && !ehBanda && !ehKinetic && (
+      {estado && ehSerie && sd && (
+        // moldura TRANSPARENTE (só texto/marca); o ffmpeg sobrepõe-na ao motion
+        <SerieDiariaSlide serie={sd.serie ?? 'vcsabia'} frase={sd.frase ?? ''} dia={sd.dia} paleta={sd.paleta} prog={prog} transparente />
+      )}
+      {estado && !ehInfo && !ehAnel && !ehReel && !ehBanda && !ehKinetic && !ehSerie && (
         <VeuSlide
           slide={estado.slide}
           mundo={estado.dia.mundo}

@@ -24,7 +24,7 @@ const EXEMPLOS: Record<SerieId, string> = {
   hojeemmim: 'Hoje aprendi que o meu silêncio é, muitas vezes, a resposta mais honesta.',
 };
 
-type ProdDia = { slug: string; data: string | null; dia: string | null; frase: string; motionUrl: string | null; motionFonte: string | null; mjPrompt: string; audioMood: string | null; aprovado: boolean };
+type ProdDia = { slug: string; data: string | null; dia: string | null; frase: string; motionUrl: string | null; motionFonte: string | null; mjPrompt: string; audioMood: string | null; audioUrl: string | null; videoUrl: string | null; aprovado: boolean };
 type BulkRes = { criados: number; semMotion: number; poolErro?: string | null; resumo: { data: string; dia: string; frase: string; motion: string | null; audio: string | null; mj: boolean; mjPrompt?: string }[] };
 
 const Passo = ({ n, titulo, children, sub }: { n: string; titulo: string; sub?: string; children: React.ReactNode }) => (
@@ -55,6 +55,11 @@ export default function SeriesDiariaPage() {
   const [prodBusy, setProdBusy] = useState(false);
   const [uploadSlug, setUploadSlug] = useState<string | null>(null);
   const [copiadoSlug, setCopiadoSlug] = useState<string | null>(null);
+  const [selSlug, setSelSlug] = useState<string | null>(null);
+  const [prodProg, setProdProg] = useState(1);
+  // ── 3 · RENDER ──
+  const [renderBusy, setRenderBusy] = useState(false);
+  const [renderMsg, setRenderMsg] = useState<string | null>(null);
 
   // ── moldura (preview, colapsável) ──
   const [verMoldura, setVerMoldura] = useState(false);
@@ -80,7 +85,38 @@ export default function SeriesDiariaPage() {
     } catch { setProdDias([]); }
     setProdBusy(false);
   }, []);
-  useEffect(() => { setProdDias(null); carregarProducao(serie); }, [serie, carregarProducao]);
+  useEffect(() => { setProdDias(null); setSelSlug(null); carregarProducao(serie); }, [serie, carregarProducao]);
+
+  // dia selecionado para o preview montado (à direita)
+  useEffect(() => {
+    if (!prodDias || !prodDias.length) { setSelSlug(null); return; }
+    if (!selSlug || !prodDias.some((d) => d.slug === selSlug)) setSelSlug(prodDias[0].slug);
+  }, [prodDias, selSlug]);
+  const sel = (prodDias ?? []).find((d) => d.slug === selSlug) ?? null;
+
+  // anima o typewriter no preview montado
+  useEffect(() => {
+    if (!sel) { setProdProg(1); return; }
+    let raf = 0; let start: number | null = null;
+    const DUR = 4200, HOLD = 1500, TOTAL = DUR + HOLD;
+    const tick = (t: number) => { if (start == null) start = t; setProdProg(Math.min(1, ((t - start) % TOTAL) / DUR)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [selSlug, sel?.frase, serie]);
+
+  async function renderMes(force: boolean) {
+    if (renderBusy) return;
+    const comMotion = (prodDias ?? []).filter((d) => d.motionUrl);
+    if (!comMotion.length) { setRenderMsg('Nenhum dia com motion ainda — resolve os motions no passo ② primeiro.'); return; }
+    if (!confirm(`Renderizar ${comMotion.length} dia(s) de ${SERIES[serie].nome}?\n\nCompõe a moldura + áudio sobre cada motion no GitHub Actions (~alguns min). ${force ? 'Inclui os que já têm vídeo.' : 'Só os que ainda não têm vídeo.'}`)) return;
+    setRenderBusy(true); setRenderMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, force: !!force }) });
+      const j = await r.json();
+      setRenderMsg(r.ok ? '🎬 render disparado no GitHub Actions. Daqui a uns minutos carrega "↻ atualizar" no passo ② e os MP4 aparecem (e ficam prontos na Publicar).' : `⚠ ${j.detalhe ?? j.erro ?? r.status}`);
+    } catch (e) { setRenderMsg('⚠ ' + String(e)); }
+    setRenderBusy(false);
+  }
 
   const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setBulkRes(null); setBulkErro(null); };
 
@@ -169,40 +205,58 @@ export default function SeriesDiariaPage() {
           {prodBusy && !prodDias && <p className="text-[0.7rem] opacity-50">a carregar os dias…</p>}
           {prodDias && prodDias.length === 0 && <p className="text-[0.7rem] opacity-50">Ainda não há dias gerados de {SERIES[serie].nome} — usa o passo ①.</p>}
           {prodDias && prodDias.length > 0 && (
-            <div className="space-y-2 max-h-[34rem] overflow-y-auto pr-1">
-              {prodDias.map((d) => (
-                <div key={d.slug} className="flex gap-3 items-start rounded-lg border border-ocre/15 bg-black/20 p-2.5">
-                  <div className="w-20 shrink-0">
-                    {d.motionUrl
-                      ? <video src={d.motionUrl} muted loop playsInline className="w-20 aspect-[9/16] object-cover rounded-md bg-black" onMouseEnter={(e) => e.currentTarget.play().catch(() => {})} onMouseLeave={(e) => e.currentTarget.pause()} />
-                      : <div className="w-20 aspect-[9/16] rounded-md bg-black/40 border border-ambar/25 grid place-items-center text-[0.55rem] text-ambar/70 text-center px-1">falta<br />motion</div>}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 text-[0.62rem] opacity-60">
-                      <span className="font-mono">{d.data}</span><span>·</span><span>{d.dia}</span>
-                      {d.audioMood && <><span>·</span><span>🔊 {d.audioMood}</span></>}
-                      {d.aprovado && <span className="text-salvia">· ✓ aprovado</span>}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_270px] gap-4 items-start">
+              {/* lista dos dias — clica para ver montado à direita */}
+              <div className="space-y-1.5 max-h-[36rem] overflow-y-auto pr-1">
+                {prodDias.map((d) => (
+                  <button key={d.slug} onClick={() => setSelSlug(d.slug)} className={`w-full text-left flex gap-2.5 items-center rounded-lg border p-2 ${selSlug === d.slug ? 'border-ambar bg-ambar/10' : 'border-ocre/12 bg-black/20 hover:border-ocre/30'}`}>
+                    <span className={`w-2 h-2 rounded-full shrink-0 ${d.videoUrl ? 'bg-salvia' : d.motionUrl ? 'bg-[#C9B6FA]' : 'bg-ambar'}`} title={d.videoUrl ? 'MP4 pronto' : d.motionUrl ? 'tem motion' : 'falta motion'} />
+                    <span className="font-mono text-[0.58rem] opacity-55 shrink-0 leading-tight w-16">{d.data}<br />{d.dia}</span>
+                    <span className="text-[0.74rem] leading-tight line-clamp-2 min-w-0">{d.frase}</span>
+                  </button>
+                ))}
+              </div>
+              {/* dia MONTADO (moldura sobre o motion) + áudio + ações */}
+              <div className="lg:sticky lg:top-4 space-y-2">
+                {sel && (
+                  <>
+                    <div className="relative w-full max-w-[240px] mx-auto aspect-[9/16] rounded-xl overflow-hidden bg-black">
+                      {sel.videoUrl
+                        ? <video key={sel.videoUrl} src={sel.videoUrl} muted loop autoPlay playsInline className="absolute inset-0 w-full h-full object-cover" />
+                        : (<>
+                            {sel.motionUrl && <video key={sel.motionUrl} src={sel.motionUrl} muted loop autoPlay playsInline className="absolute inset-0 w-full h-full object-cover" />}
+                            <div className="absolute inset-0"><SerieDiariaSlide serie={serie} frase={sel.frase} dia={sel.dia ?? undefined} paleta={serie === 'hojeemmim' ? paletaDoDia(sel.dia ?? 'quinta') : 'dourado'} prog={prodProg} transparente /></div>
+                          </>)}
                     </div>
-                    <p className="text-[0.84rem] leading-snug mt-0.5 line-clamp-2">{d.frase}</p>
-                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                      {d.motionUrl
-                        ? <span className="text-[0.62rem] px-2 py-0.5 rounded-full bg-salvia/15 text-salvia">{d.motionFonte === 'pool' ? '♻ motion da pool' : '⬆ motion teu'}</span>
-                        : <button onClick={() => { navigator.clipboard.writeText(d.mjPrompt); setCopiadoSlug(d.slug); setTimeout(() => setCopiadoSlug(null), 1500); }} disabled={!d.mjPrompt} className="text-[0.64rem] px-2 py-0.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30">{copiadoSlug === d.slug ? '✓ copiado — cola no MJ/Runway' : '⧉ copiar prompt (1º)'}</button>}
-                      <label className="text-[0.64rem] px-2 py-0.5 rounded-full border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 cursor-pointer">
-                        {uploadSlug === d.slug ? 'a carregar…' : (d.motionUrl ? '⬆ trocar motion' : '⬆ arrastar o vídeo (2º)')}
-                        <input type="file" accept="video/*" hidden disabled={uploadSlug === d.slug} onChange={(e) => { const f = e.target.files?.[0]; if (f) carregarMotion(d.slug, f); e.currentTarget.value = ''; }} />
+                    <p className="text-[0.6rem] opacity-55 text-center">{sel.data} · {sel.dia} · {sel.videoUrl ? '🎬 MP4 pronto' : sel.motionUrl ? 'montado (falta render)' : 'falta motion'}</p>
+                    {sel.audioUrl
+                      ? <div className="flex items-center gap-2"><span className="text-[0.6rem] opacity-60 shrink-0">🔊 {sel.audioMood}</span><audio src={sel.audioUrl} controls className="w-full h-7" /></div>
+                      : <p className="text-[0.6rem] opacity-40">sem áudio</p>}
+                    <p className="text-[0.74rem] leading-snug opacity-90 border-l-2 border-ocre/20 pl-2">{sel.frase}</p>
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[0.6rem] opacity-55">{sel.motionUrl ? (sel.motionFonte === 'pool' ? '♻ motion da pool' : '⬆ motion teu') : '⚠ sem motion'}</span>
+                      <button onClick={() => { navigator.clipboard.writeText(sel.mjPrompt); setCopiadoSlug(sel.slug); setTimeout(() => setCopiadoSlug(null), 1500); }} disabled={!sel.mjPrompt} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30 text-left">{copiadoSlug === sel.slug ? '✓ copiado — cola no MJ/Runway' : '⧉ copiar prompt (gerar motion novo)'}</button>
+                      <label className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 cursor-pointer text-center">
+                        {uploadSlug === sel.slug ? 'a carregar…' : (sel.motionUrl ? '⬆ trocar motion' : '⬆ carregar motion')}
+                        <input type="file" accept="video/*" hidden disabled={uploadSlug === sel.slug} onChange={(e) => { const f = e.target.files?.[0]; if (f) carregarMotion(sel.slug, f); e.currentTarget.value = ''; }} />
                       </label>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </>
+                )}
+              </div>
             </div>
           )}
         </Passo>
 
         {/* ── 3 · RENDER ── */}
-        <Passo n="③" titulo="Render · MP4 finais" sub="Compõe a moldura + frase (typewriter/bloom) + áudio sobre cada motion e produz os MP4 prontos a publicar.">
-          <p className="text-[0.7rem] opacity-55">🚧 Em construção — é a próxima peça. Quando estiver, há aqui um botão "renderizar o mês" e os MP4 aparecem em cada dia do passo ②.</p>
+        <Passo n="③" titulo="Render · MP4 finais" sub="Compõe a moldura + frase (typewriter/bloom) + áudio sobre cada motion, no GitHub Actions, e produz os MP4 9:16 prontos a publicar.">
+          <div className="flex items-center gap-2 flex-wrap">
+            <button onClick={() => renderMes(false)} disabled={renderBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderBusy ? 'a disparar…' : '🎬 renderizar o mês'}</button>
+            <button onClick={() => renderMes(true)} disabled={renderBusy} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/60 hover:border-ambar disabled:opacity-40">re-render à força</button>
+            {prodDias && <span className="text-[0.64rem] opacity-55">{prodDias.filter((d) => d.videoUrl).length}/{prodDias.length} com MP4</span>}
+          </div>
+          {renderMsg && <p className="text-[0.7rem] text-ambar">{renderMsg}</p>}
+          <p className="text-[0.62rem] opacity-45">Só renderiza dias COM motion (♻ pool ou ⬆ teu). Os que faltam, resolve no passo ②. Depois carrega "↻ atualizar" no ② para veres os MP4.</p>
         </Passo>
 
         {/* ── 4 · PUBLICAR ── */}
