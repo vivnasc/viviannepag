@@ -6,7 +6,7 @@ import { ROMANCES } from '@/lib/romances';
 export const runtime = 'nodejs';
 
 const BUCKET = 'viviannepag-assets';
-const BUCKET_PRIVADO = 'escritos';
+const BUCKET_PRIVADO = 'romances';
 
 // GET — lista os romances com as variantes de capa já geradas e a escolhida.
 export async function GET() {

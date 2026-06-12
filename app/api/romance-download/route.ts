@@ -3,7 +3,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const runtime = 'nodejs';
 
-const BUCKET = 'escritos';
+const BUCKET = 'romances';
 
 // GET ?lang=pt|en — o download do romance-oferta SAI SEMPRE pelo domínio da
 // casa (viviannedossantos.com/api/romance-download?lang=pt). Por trás, um URL
