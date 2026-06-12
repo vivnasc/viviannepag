@@ -90,6 +90,26 @@ Cruzamentos canónicos já assumidos no repertório (não desfazer): Benvinda es
 5. **Vigilância de sobreposições:** antes de escrever cada novela, reler a secção respetiva do REPERTORIO-biblioteca.md e as irmãs de ferida.
 
 ═══════════════════════════════════════
-## 6. PRÓXIMO PASSO
+## 6. O SEGUNDO POLO: A CIDADE (decisão da Vivianne, 12 jun 2026, opção C)
+
+O universo tem dois polos e uma só travessia. Véspera é o polo de origem; a Cidade (sem nome, como tudo no mundo: a regra da neutralidade vale igual) é o polo para onde se parte. As mesmas famílias atravessam os dois: os que ficaram e os que partiram, e a Estrada Nova liga-os.
+
+A leitora urbana é a razão deste polo: uma mulher de cidade com uma Véspera dentro (a terra, a avó, a origem). O posicionamento da biblioteca para ela: a vila que mora dentro de quem vive na cidade.
+
+As três leis do mundo valem nos dois polos. Na Cidade, o campo sistémico (nada se perde, herda-se; toda a gente sabe o que ninguém diz) não vive na metrópole anónima: vive nos círculos fechados dela, que são as vilas verticais e horizontais da cidade:
+- **O Prédio** (a vila vertical: a vizinha do terceiro que tudo ouve, a porteira que tudo regista, a assembleia de condóminos que é a mesa comprida em mau feitio).
+- **A Empresa** (a Fiandeira da cidade: os papéis que se confundem com pessoas, a indispensável, a que não ocupa a cadeira).
+- **A Família espalhada** (os domingos de visita, o grupo da família no telemóvel, as romarias a Véspera nas festas).
+- **O Café da esquina** (a mercearia urbana: quem fia, quem deve, quem nunca paga).
+
+Morada das estantes pelos polos:
+- Estante VII (o trabalho) ganha dupla morada: a Fiandeira em Véspera e os escritórios da Cidade. É a estante urbana por natureza, e é onde nasce o primeiro romance do polo Cidade (livro 2 da biblioteca).
+- Estante V tem a ponte viva entre polos: A Estrangeira de Cá (Peregrina), que pertence aos dois e a nenhum.
+- As restantes estantes podem visitar a Cidade quando a história pedir; cada livro declara o seu polo na bíblia de produção.
+
+Regra de produção: nada do que está escrito se reescreve. As Mãos de Amparo fica como está; o polo Cidade entra pelo livro 2 em diante.
+
+═══════════════════════════════════════
+## 7. PRÓXIMO PASSO
 
 Com o repertório aprovado e a bíblia fixada, o passo seguinte do método da casa é o **capítulo zero de *As Mãos de Amparo*** (a página dos Assentos e a primeira cena, 2 a 3 mil palavras, pt e en), para a Vivianne VER o tom antes da produção em série. Escreve-se quando ela disser.

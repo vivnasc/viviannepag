@@ -215,6 +215,13 @@ As feridas rimam entre estantes, por desenho do universo. Na ficção, a distin�
 - **As que travam o crescimento:** Prudência (II.6, lealdade à casa) e Abundância (III.7, igualdade entre irmãs). Fronteira marcada nas próprias entradas.
 
 ═══════════════════════════════════════
+## OS DOIS POLOS (decisão de 12 jun 2026, opção C)
+
+O universo passa a ter dois polos: Véspera e a Cidade (BIBLIA, secção 6). Os 51 livros deste repertório mantêm-se; o polo de cada um declara-se na bíblia de produção. Por natureza: a estante VII pode viver nos escritórios da Cidade; V.5 (A Estrangeira de Cá) é a ponte entre polos; o resto é de Véspera salvo decisão em contrário.
+
+**Livro 2 proposto (primeiro do polo Cidade), a aprovar pela Vivianne:** a indispensável da empresa, espelho de «A mulher que se tornou indispensável» (tra-01), estante VII, passado nos escritórios da Cidade: a mulher sem quem nada anda, a primeira a chegar e a última a sair, e o ano em que aprende a entregar a chave. Três títulos possíveis: *A Primeira a Chegar* · *O Crachá* · *A Última Luz do Escritório*. (A Chave da Fábrica, VII.1, mantém-se no repertório como o irmão de Véspera da mesma ferida.)
+
+═══════════════════════════════════════
 ## ORDEM DE PRODUÇÃO SUGERIDA (por procura, como nos ebooks)
 
 **Vaga 1, uma por estante, a apresentar a vila inteira (e possível antologia de entrada):**
