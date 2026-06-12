@@ -1,6 +1,6 @@
-// As Mãos de Amparo — edição final: capa composta + miolo v3 (o cabeçalho da
+// Edição final dos romances de Véspera: capa composta + miolo v3 (o cabeçalho da
 // primeira versão sobre o papel e a respiração dos ebooks, toques sálvia).
-// Uso: node render-livro.js <pt|en>
+// Uso: node render-livro.js <pt|en> [amparo|irma]
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
@@ -8,10 +8,16 @@ const { marked } = require('marked');
 const { PDFDocument } = require('pdf-lib');
 
 const LANG = process.argv[2] || 'pt';
+const LIVRO = process.argv[3] || 'amparo';
 const BASE = path.join(__dirname, '..', '..', 'ficcao-plano');
-const DIR = LANG === 'pt' ? path.join(BASE, 'amparo-livro') : path.join(BASE, 'amparo-livro-en');
-const CAPA = path.join(BASE, `AMPARO-capa-${LANG}.png`);
-const OUT = LANG === 'pt' ? path.join(BASE, 'AS-MAOS-DE-AMPARO-pt.pdf') : path.join(BASE, 'AMPAROS-HANDS-en.pdf');
+const PASTAS = {
+  amparo: { pt: 'amparo-livro', en: 'amparo-livro-en', capa: 'AMPARO-capa', outPt: 'AS-MAOS-DE-AMPARO-pt.pdf', outEn: 'AMPAROS-HANDS-en.pdf' },
+  irma: { pt: 'nome-da-irma-livro', en: 'nome-da-irma-livro-en', capa: 'NOME-DA-IRMA-capa', outPt: 'O-NOME-DA-IRMA-pt.pdf', outEn: 'THE-SISTERS-NAME-en.pdf' },
+};
+const P = PASTAS[LIVRO] || PASTAS.amparo;
+const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
+const CAPA = path.join(BASE, `${P.capa}-${LANG}.png`);
+const OUT = path.join(BASE, LANG === 'pt' ? P.outPt : P.outEn);
 
 const C = {
   barro: '#8C4A36', barroEscuro: '#5A3D2E', barroClaro: '#9A5A43',
@@ -52,7 +58,35 @@ const NUM = LANG==='pt'
   ? ['','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze']
   : ['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
 
-const T = LANG==='pt' ? {
+const T_IRMA = LANG==='pt' ? {
+  tituloHtml:'O Nome<br>da Irmã', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante II · O Largo da Fonte',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Eufémia te doer em sítios reais, o nome do que ela carrega está em «A mulher que herdou uma vida», na coleção Infonte. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Eufémia. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:"The Sister's<br>Name", autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf II · The Fountain Square',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Eufémia hurts you in real places, the name of what she carries is in “The Woman Who Inherited a Life”, in the Infonte collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Eufémia. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T_AMPARO = LANG==='pt' ? {
   tituloHtml:'As Mãos<br>de Amparo', autora:'Vivianne dos Santos',
   serie:'Biblioteca de Véspera · Estante I · As Casas de Família',
   sub:'um romance de Véspera',
@@ -79,6 +113,8 @@ const T = LANG==='pt' ? {
   copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
   registoLabel:'From the register of Véspera',
 };
+
+const T = LIVRO === 'irma' ? T_IRMA : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
