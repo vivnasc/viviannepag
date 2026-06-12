@@ -330,6 +330,24 @@ export default async function LojaPage({
                     assinatura={ABERTURA_UNIVERSO.assinatura}
                     align="center"
                   />
+
+                  {/* ROMANCE-OFERTA: o funil de Véspera (amostra antes do email) */}
+                  <Link
+                    href={isPt ? '/amparo' : '/en/amparo'}
+                    className="mt-10 inline-block no-underline border border-salvia/40 rounded-[14px] px-7 py-5 hover:border-salvia transition-colors text-left max-w-[520px]"
+                  >
+                    <p className="text-[0.68rem] tracking-[0.3em] uppercase text-salvia mb-2">
+                      {isPt ? 'oferta da casa · romance' : 'a gift from the house · novel'}
+                    </p>
+                    <p className="font-serif text-creme text-[1.15rem] mb-1">
+                      {isPt ? 'As Mãos de Amparo' : "Amparo's Hands"}
+                    </p>
+                    <p className="text-creme-2/70 text-[0.85rem] font-serif italic">
+                      {isPt
+                        ? 'O primeiro romance de Véspera. Lê o capítulo 1 sem pedir nada; se ficar contigo, o livro inteiro é teu.'
+                        : 'The first novel of Véspera. Read chapter 1 freely; if it stays with you, the whole book is yours.'}
+                    </p>
+                  </Link>
                   <div className="mt-8 mx-auto w-[60px] h-px bg-ouro/40" />
                 </section>
               )}
