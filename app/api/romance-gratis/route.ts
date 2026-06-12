@@ -4,7 +4,7 @@ import { getSupabase } from '@/lib/supabase';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const RESEND_KEY = process.env.RESEND_API_KEY;
 
-// POST { email, locale?, website? } — o gate do romance-oferta (funil do Insta).
+// POST { email, locale?, website? }: o gate do romance-oferta (funil do Insta).
 // Regista a leitora na lista (source: romance-amparo) e devolve os links de
 // download pt e en. A amostra (capítulo 1) é pública na página ANTES deste gate.
 export async function POST(req: Request) {
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           from: 'Vivianne dos Santos <noreply@viviannedossantos.com>',
           to: email,
-          subject: isEn ? "Amparo's Hands — your book" : 'As Mãos de Amparo — o teu livro',
+          subject: isEn ? "Amparo's Hands: your book" : 'As Mãos de Amparo: o teu livro',
           html: `
 <div style="font-family:Georgia,serif;max-width:520px;margin:0 auto;color:#3D2B1F;padding:40px 20px">
   <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#9A5A43;text-align:center;margin-bottom:30px">VIVIANNE DOS SANTOS</p>

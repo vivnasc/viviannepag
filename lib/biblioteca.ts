@@ -1,4 +1,4 @@
-// A Biblioteca de Véspera — a secção pública dos romances.
+// A Biblioteca de Véspera · a secção pública dos romances.
 // Sete estantes (uma pergunta cada), espelho das sete coleções da loja.
 // Fonte: ficcao-plano/REPERTORIO-biblioteca.md (os títulos "a caminho" são a
 // montra do que vem; só entram aqui quando a Vivianne os fechar no repertório).

@@ -64,7 +64,7 @@ export default async function ListaAdmin() {
                   </span>
                 </td>
                 <td className="px-5 py-2.5 text-creme-2/50">
-                  {s.created_at ? new Date(s.created_at).toLocaleDateString('pt-PT', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'}
+                  {s.created_at ? new Date(s.created_at).toLocaleDateString('pt-PT', { day: '2-digit', month: 'short', year: 'numeric' }) : '·'}
                 </td>
               </tr>
             ))}

@@ -5,7 +5,7 @@ export const runtime = 'nodejs';
 
 const BUCKET = 'romances';
 
-// GET ?lang=pt|en — o download do romance-oferta SAI SEMPRE pelo domínio da
+// GET ?lang=pt|en · o download do romance-oferta SAI SEMPRE pelo domínio da
 // casa (viviannedossantos.com/api/romance-download?lang=pt). Por trás, um URL
 // assinado de 60 segundos no bucket privado: quem partilhar o link, partilha
 // a casa da Vivianne, não o Supabase.

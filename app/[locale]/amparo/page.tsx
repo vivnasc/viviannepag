@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const isEn = locale === 'en';
   return {
-    title: isEn ? "Amparo's Hands — a novel of Véspera (free)" : 'As Mãos de Amparo — um romance de Véspera (oferta)',
+    title: isEn ? "Amparo's Hands · a novel of Véspera (free)" : 'As Mãos de Amparo · um romance de Véspera (oferta)',
     description: isEn
       ? 'Read the first chapter freely. If it stays with you, the whole novel is a gift.'
       : 'Lê o primeiro capítulo sem pedir nada. Se ficar contigo, o romance inteiro é oferta.',
@@ -79,7 +79,7 @@ export default async function AmparoLanding({ params }: { params: Promise<{ loca
             ))}
           </div>
           <p className="text-center text-[#9A5A43] mt-8 font-serif italic">
-            {isEn ? '— end of the sample —' : '— fim da amostra —'}
+            {isEn ? '· end of the sample ·' : '· fim da amostra ·'}
           </p>
         </div>
       </section>
@@ -91,8 +91,8 @@ export default async function AmparoLanding({ params }: { params: Promise<{ loca
         </div>
         <p className="text-center text-creme-2/40 text-[0.75rem] mt-6 font-serif italic">
           {isEn
-            ? 'Véspera is a village where the roles that protect us become prisons — and every novel is a road back. Eleven more are on their way.'
-            : 'Véspera é uma vila onde os papéis que nos protegem se tornam prisões — e cada romance é um caminho de regresso. Vêm mais onze a caminho.'}
+            ? 'Véspera is a village where the roles that protect us become prisons, and every novel is a road back. Eleven more are on their way.'
+            : 'Véspera é uma vila onde os papéis que nos protegem se tornam prisões, e cada romance é um caminho de regresso. Vêm mais onze a caminho.'}
         </p>
       </section>
     </main>
