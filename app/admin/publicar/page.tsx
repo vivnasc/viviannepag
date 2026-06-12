@@ -17,9 +17,9 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 // Criar). Vês cada post (capa + legenda), aprovas, e publica-se sozinho à hora.
 // gerar ≠ publicar: NADA vai para o ar sem estar APROVADO.
 
-type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string };
+type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string; motionUrl?: string | null; videoUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -41,11 +41,32 @@ const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).pad
 
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
 const fmtDe = (it: Item): { emoji: string; label: string } => {
+  // séries diárias têm marca:'loja' (publicam na conta vivianne.dos.santos), mas
+  // NÃO são o produto 7 Véus — rótulo próprio por série.
+  if (it.theme?.formato === 'serie-diaria') return { emoji: '🎬', label: it.theme?.serie === 'vcsabia' ? 'VC Sabia' : it.theme?.serie === 'hojeemmim' ? 'Hoje em Mim' : 'Série diária' };
   if (contaDe(it.theme, it.slug) === 'loja') return { emoji: '🛍️', label: it.theme?.universo ? `7 Véus · ${it.theme.universo}` : 'Reel · 7 Véus' };
   return FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'post' };
 };
 const legendaDe = (it: Item) => { const d = it.dias?.[0]; return [d?.legenda?.trim(), (d?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n'); };
 const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00';
+// preview de VÍDEO (séries/reels): o MP4 renderizado, ou o motion ainda por
+// renderizar — para o cartão mostrar a 1.ª frame quando não há imagem de capa.
+const videoDe = (it: Item): string | null => { const d = it.dias?.[0]; const s = d?.slides?.[0]; return d?.videoUrl ?? s?.videoUrl ?? s?.motionUrl ?? null; };
+// thumbnail de vídeo FIÁVEL: preload=metadata + seek a 0.1s no onLoadedMetadata
+// força o browser (Edge/Chrome) a decodificar e PINTAR a 1.ª frame — o truque
+// só com "#t=0.1" no src não pinta de forma consistente.
+function VideoThumb({ src, className }: { src: string; className?: string }) {
+  return (
+    <video
+      src={src}
+      className={className}
+      muted
+      playsInline
+      preload="metadata"
+      onLoadedMetadata={(e) => { try { e.currentTarget.currentTime = 0.1; } catch { /* ignora */ } }}
+    />
+  );
+}
 const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador']; // capa-assinatura no 1.º slide
 const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
 function mediaPronta(it: Item): boolean {
@@ -225,10 +246,11 @@ export default function PublicarPage() {
   // ── componentes ──
   const Cartao = ({ it, compacto }: { it: Item; compacto?: boolean }) => {
     const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const pronto = mediaPronta(it);
+    const vid = capa ? null : videoDe(it);
     return (
       <div onClick={() => setLegenda(it)} className="rounded-xl border border-ocre/15 bg-terra/15 overflow-hidden cursor-pointer hover:border-ambar/40 transition-colors" title="clica para ver o conteúdo">
         <div className="flex gap-3 p-2.5">
-          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
+          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vid ? <VideoThumb src={vid} className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
               <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span>
@@ -309,7 +331,7 @@ export default function PublicarPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {diasSemana.map((d) => {
                   const iso = isoLocal(d);
-                  const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
+                  const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it)).sort((a, b) => horaDe(a).localeCompare(horaDe(b)));
                   return (
                     <div key={iso} className={`rounded-xl border p-2.5 ${iso === hojeIso ? 'border-ambar/40 bg-ambar/5' : 'border-ocre/12 bg-black/10'}`}>
                       <p className="text-[0.7rem] uppercase tracking-wider mb-2 flex items-center gap-2"><span className="text-[#C9B6FA]">{DIAS_PT[d.getDay()]} {d.getDate()}</span>{iso === hojeIso && <span className="text-[0.5rem] px-1.5 py-0.5 rounded-full bg-ambar/20 text-ambar normal-case tracking-normal">hoje</span>}</p>
@@ -335,12 +357,12 @@ export default function PublicarPage() {
                 <div className="grid grid-cols-7 gap-1">
                   {celulas.map((d) => {
                     const iso = isoLocal(d); const noMes = d.getMonth() === base.getMonth();
-                    const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it));
+                    const posts = itensConta.filter((it) => it.theme?.agendadoEm === iso && passaFiltro(it)).sort((a, b) => horaDe(a).localeCompare(horaDe(b)));
                     return (
                       <button key={iso} onClick={() => { if (posts.length) { setLegenda(posts[0]); } }} className={`min-h-[4.5rem] rounded-lg border p-1 text-left ${iso === hojeIso ? 'border-ambar/50' : 'border-ocre/10'} ${noMes ? 'bg-black/15' : 'bg-transparent opacity-40'}`}>
                         <span className="text-[0.56rem] opacity-55">{d.getDate()}</span>
                         <div className="flex flex-wrap gap-0.5 mt-0.5">
-                          {posts.slice(0, 4).map((it) => { const c = capaDe(it); const e = estadoDe(it); return <span key={it.slug} className="w-4 h-5 rounded-sm overflow-hidden bg-black/40 ring-1" style={{ ['--tw-ring-color' as string]: COR[e].fg } as React.CSSProperties}>{c ? <img src={c} alt="" className="w-full h-full object-cover" /> : <span className="text-[0.5rem]">{fmtDe(it).emoji}</span>}</span>; })}
+                          {posts.slice(0, 4).map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return <span key={it.slug} className="w-4 h-5 rounded-sm overflow-hidden bg-black/40 ring-1" style={{ ['--tw-ring-color' as string]: COR[e].fg } as React.CSSProperties}>{c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <VideoThumb src={v} className="w-full h-full object-cover" /> : <span className="text-[0.5rem]">{fmtDe(it).emoji}</span>}</span>; })}
                           {posts.length > 4 && <span className="text-[0.5rem] opacity-50">+{posts.length - 4}</span>}
                         </div>
                       </button>
@@ -360,9 +382,9 @@ export default function PublicarPage() {
                 <p className="text-[0.72rem] opacity-55 mb-3">Como o teu feed vai ficar (próximos posts, dos mais recentes ao topo). As capas conversam entre si?</p>
                 {ord.length === 0 ? <p className="text-[0.8rem] opacity-50 py-8 text-center">Sem posts por publicar.</p> : (
                   <div className="grid grid-cols-3 gap-1 max-w-md">
-                    {ord.map((it) => { const c = capaDe(it); const e = estadoDe(it); return (
+                    {ord.map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return (
                       <button key={it.slug} onClick={() => setLegenda(it)} className="relative aspect-[4/5] bg-black/30 overflow-hidden">
-                        {c ? <img src={c} alt="" className="w-full h-full object-cover" /> : <span className="grid place-items-center w-full h-full text-xl">{fmtDe(it).emoji}</span>}
+                        {c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <VideoThumb src={v} className="w-full h-full object-cover" /> : <span className="grid place-items-center w-full h-full text-xl">{fmtDe(it).emoji}</span>}
                         <span className="absolute top-1 right-1 w-2 h-2 rounded-full" style={{ background: COR[e].fg }} />
                       </button>
                     ); })}
@@ -418,12 +440,12 @@ export default function PublicarPage() {
 
       {/* PAINEL DE REVER (capa grande + legenda) */}
       {legenda && (() => {
-        const it = legenda; const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it);
+        const it = legenda; const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const vidCapa = capa ? null : videoDe(it);
         return (
           <div onClick={() => setLegenda(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
             <div onClick={(ev) => ev.stopPropagation()} className={`w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-ocre/20 bg-[#15131f] p-4 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
               <div className="flex items-start gap-4">
-                <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
+                <div className="w-40 shrink-0 rounded-lg overflow-hidden bg-black/30 aspect-[4/5] grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vidCapa ? <VideoThumb src={vidCapa} className="w-full h-full object-cover" /> : <span className="text-3xl">{m.emoji}</span>}</div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1"><span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span><span className="text-[0.62rem] opacity-55">{m.emoji} {m.label}</span></div>
                   <p className="text-[1.1rem] leading-tight">{it.title}</p>
@@ -454,6 +476,14 @@ export default function PublicarPage() {
                     <div className="flex gap-2 overflow-x-auto pb-2">
                       {dia.imagens.map((u, i) => <img key={i} src={u} alt={`slide ${i + 1}`} className="h-64 rounded-lg shrink-0" />)}
                     </div>
+                  </div>
+                );
+                // séries sem MP4 ainda: mostra o MOTION cru (a moldura/frase entram no render)
+                const motion = videoDe(it);
+                if (motion) return (
+                  <div className="mt-4">
+                    <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo (motion — a moldura + frase entram no render do ③)</p>
+                    <video src={motion} controls muted playsInline className="w-full max-h-[55vh] rounded-lg bg-black" />
                   </div>
                 );
                 const slides = slidesComCapa(it);

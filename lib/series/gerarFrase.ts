@@ -4,7 +4,7 @@
 
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, LUZ, estacaoPt, type Serie } from '@/lib/series/voz';
 
 export async function gerarFraseSerie(opts: { serie: Serie; dia?: string; evitar: string[]; apiKey: string }): Promise<{ frase: string; mjPrompt: string; legenda: string; somPrompt: string }> {
   const { serie, apiKey } = opts;
@@ -31,11 +31,13 @@ ${SOM_PROMPT}
 NUNCA repitas nenhuma destas frases já usadas, nem versões quase iguais:
 ${opts.evitar.length ? opts.evitar.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda)'}
 
+${LUZ[serie]}
+
 Devolve APENAS JSON válido:
 {
   "frase": "a frase CURTA da imagem, na voz certa",
   "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)",
-  "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16",
+  "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico; SEM pessoas, SEM texto). Termina com --ar 9:16",
   "somPrompt": "o ambiente sonoro da MESMA cena, em inglês, a terminar com seamless loop, no music, no voices"
 }
 

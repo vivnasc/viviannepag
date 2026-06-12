@@ -43,20 +43,26 @@ async function main() {
 
   let cols = (data || []).filter((c) => !SERIE || (c.theme && c.theme.serie === SERIE));
   if (SLUGS.length) cols = cols.filter((c) => SLUGS.includes(c.slug));
+  const comDia = cols.map((c) => ({ c, d: (Array.isArray(c.dias) && c.dias[0]) || null }));
+  // dias SEM motion ("falta motion"): não dá para renderizar — conta-se e avisa-se,
+  // mas NÃO é falha (a Vivianne gera o motion certo no MJ e re-renderiza).
+  const semMotion = comDia.filter((x) => !(x.d && x.d.slides && x.d.slides[0] && x.d.slides[0].motionUrl));
   // ordena por data; rende os que têm motion e (sem vídeo, ou FORCE)
-  cols = cols
-    .map((c) => ({ c, d: (Array.isArray(c.dias) && c.dias[0]) || null }))
+  const fila = comDia
     .filter((x) => x.d && x.d.slides && x.d.slides[0] && x.d.slides[0].motionUrl)
     .filter((x) => FORCE || !(x.d.videoUrl || x.d.slides[0].videoUrl))
     .sort((a, b) => String(a.c.theme.agendadoEm || '').localeCompare(String(b.c.theme.agendadoEm || '')));
 
-  console.log(`[start] ${cols.length} dia(s) a renderizar (serie=${SERIE || 'todas'})`);
-  if (!cols.length) { console.log('[done] nada a fazer'); return; }
+  console.log(`[start] ${fila.length} a renderizar · ${semMotion.length} sem motion (saltados) · serie=${SERIE || 'todas'}`);
+  if (semMotion.length) console.log(`[sem-motion] ${semMotion.map((x) => x.c.slug).join(', ')}`);
+  if (!fila.length) { console.log(`[done] nada a renderizar · ${semMotion.length} sem motion`); return; }
+  const cols2 = fila;
+  let ok = 0; const falhas = [];
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'serie-'));
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 
-  for (const { c, d } of cols) {
+  for (const { c, d } of cols2) {
     const slug = c.slug;
     const slide = d.slides[0];
     const dir = path.join(tmp, slug.replace(/[^a-z0-9-]/gi, '_'));
@@ -95,7 +101,7 @@ async function main() {
       // 4) upload + grava videoUrl
       const filePath = `series-renders/${slug}.mp4`;
       const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(dir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
-      if (upErr) { console.error(`[upload] ${slug}: ${upErr.message}`); continue; }
+      if (upErr) { console.error(`[upload] ${slug}: ${upErr.message}`); falhas.push(slug); continue; }
       const url = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
       const novasDias = (Array.isArray(c.dias) ? c.dias : []).map((x, i) => {
         if (i !== 0) return x;
@@ -105,13 +111,18 @@ async function main() {
       const novoTheme = { ...(c.theme || {}), renderEm: Date.now() };
       await supabase.from('carousel_collections').update({ dias: novasDias, theme: novoTheme }).eq('slug', slug);
       console.log(`[ok] ${slug} -> ${url}`);
+      ok++;
     } catch (e) {
       console.error(`[falhou] ${slug}: ${e.message}`);
+      falhas.push(slug);
     }
   }
 
   await browser.close();
-  console.log('[done]');
+  console.log(`[done] ${ok} feito(s) · ${falhas.length} falhado(s) · ${semMotion.length} sem motion (saltados)`);
+  // verde HONESTO: o job só passa se nada falhou de verdade. Dias "sem motion"
+  // são esperados (a Vivianne gera-os) e NÃO fazem o lote ficar vermelho.
+  if (falhas.length) { console.error(`[falhas] ${falhas.join(', ')}`); process.exit(1); }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

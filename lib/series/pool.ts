@@ -2,8 +2,9 @@
 // Vivianne já tem da escola-veus (MESMO projeto Supabase, bucket course-assets):
 //   vc-sabia-motions/ · hoje-em-mim-motions/ · {vc-sabia,hoje-em-mim}-audios/<mood>/
 //   tags: vc-sabia-meta/motion-tags.json  { tags: {nome→mood}, categories: {nome→categoria} }
-// Regra dela: se houver motions NOVOS (nunca usados) prioriza-os; senão vai
-// buscar o MELHOR MATCH por keyword. Só sem pool é que se gera no MJ.
+// Regra dela: reutiliza um motion da pool SÓ se ele casar mesmo com a imagem da
+// frase (match por CONCEITO, com ponte PT↔EN abaixo); senão o dia fica "falta
+// motion" e ela gera o motion certo no MJ (esse casa sempre, por construção).
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
@@ -110,11 +111,75 @@ export function emQuarentena(uso: UsoMotion | undefined, dataAlvo: string): bool
   return ms < QUARENTENA_DIAS * 24 * 3600 * 1000;
 }
 
-// pontuação de match frase↔motion: palavras partilhadas com categoria+mood+nome
-function score(frase: string, m: Motion): number {
-  const alvo = new Set(palavrasDe(`${m.categoria ?? ''} ${m.mood ?? ''} ${m.nome.replace(/[-_]/g, ' ')}`));
+// PONTE PT↔EN: o mjPrompt é em inglês, mas os motions/áudios da escola-veus têm
+// nomes/etiquetas em português. Para o match casar de verdade, mapeamos sinónimos
+// das duas línguas ao MESMO conceito (ex.: sunflower↔girassol, dawn↔amanhecer).
+// Palavras fora desta lista valem por si — match na mesma língua continua a
+// funcionar. A Vivianne pode enriquecer os motions em vc-sabia-meta/motion-tags.json.
+const GRUPOS: string[][] = [
+  ['sol', 'sun', 'sunlight', 'sunrise', 'sunset'],
+  ['girassol', 'sunflower', 'sunflowers'],
+  ['lua', 'moon', 'moonlight', 'luar'],
+  ['estrela', 'estrelas', 'star', 'stars', 'starry'],
+  ['mar', 'sea', 'ocean', 'oceano'],
+  ['onda', 'ondas', 'wave', 'waves', 'mare'],
+  ['agua', 'water'],
+  ['rio', 'river', 'stream', 'riacho', 'ribeiro'],
+  ['chuva', 'rain', 'rainfall'],
+  ['nevoa', 'neblina', 'bruma', 'mist', 'fog', 'haze'],
+  ['orvalho', 'dew'],
+  ['amanhecer', 'aurora', 'dawn', 'daybreak', 'manha', 'morning'],
+  ['crepusculo', 'twilight', 'dusk'],
+  ['noite', 'night', 'nocturnal', 'noturna', 'noturno'],
+  ['luz', 'light', 'glow', 'radiance'],
+  ['fogo', 'fogueira', 'lareira', 'fire', 'bonfire', 'fireplace', 'campfire'],
+  ['vela', 'velas', 'candle', 'candles', 'candlelight'],
+  ['floresta', 'forest', 'woods', 'mata'],
+  ['arvore', 'arvores', 'tree', 'trees'],
+  ['raiz', 'raizes', 'root', 'roots'],
+  ['folha', 'folhas', 'leaf', 'leaves', 'foliage'],
+  ['flor', 'flores', 'flower', 'flowers', 'blossom', 'bloom'],
+  ['campo', 'field', 'fields', 'meadow', 'prado', 'prados'],
+  ['erva', 'relva', 'grass', 'grama'],
+  ['montanha', 'montanhas', 'mountain', 'mountains', 'serra'],
+  ['ceu', 'sky', 'skies', 'heavens'],
+  ['nuvem', 'nuvens', 'cloud', 'clouds'],
+  ['vento', 'brisa', 'wind', 'breeze'],
+  ['pedra', 'rocha', 'stone', 'rock', 'rocks', 'seixo'],
+  ['caminho', 'trilho', 'path', 'trail'],
+  ['janela', 'window'],
+  ['porta', 'door', 'doorway'],
+  ['casa', 'lar', 'home', 'house'],
+  ['trigo', 'wheat'],
+  ['pao', 'bread'],
+  ['caracol', 'snail'],
+  ['coruja', 'owl'],
+  ['passaro', 'passaros', 'ave', 'aves', 'bird', 'birds'],
+  ['bambu', 'bamboo'],
+  ['dourado', 'dourada', 'golden', 'gold'],
+  ['neve', 'snow'],
+  ['gelo', 'ice', 'frost', 'geada'],
+  ['praia', 'beach', 'areia', 'sand'],
+  ['lago', 'lake', 'lagoa', 'pond'],
+  ['vale', 'valley'],
+  ['ponte', 'bridge'],
+  ['sombra', 'sombras', 'shadow', 'shadows'],
+  ['semente', 'sementes', 'seed', 'seeds'],
+  ['fruto', 'fruta', 'fruit'],
+  ['ninho', 'nest'],
+  ['borboleta', 'butterfly'],
+];
+const CANON = new Map<string, string>();
+for (const g of GRUPOS) for (const w of g) CANON.set(w, g[0]);
+const conceito = (w: string) => CANON.get(w) ?? w;
+const conceitosDe = (s: string) => new Set(palavrasDe(s).map(conceito));
+
+// pontuação de match frase↔motion: CONCEITOS partilhados (PT↔EN) entre o
+// descritor (mjPrompt EN + frase PT) e categoria+mood+nome do motion.
+function score(descritor: string, m: Motion): number {
+  const alvo = conceitosDe(`${m.categoria ?? ''} ${m.mood ?? ''} ${m.nome.replace(/[-_]/g, ' ')}`);
   let s = 0;
-  for (const w of palavrasDe(frase)) if (alvo.has(w)) s++;
+  for (const c of conceitosDe(descritor)) if (alvo.has(c)) s++;
   return s;
 }
 

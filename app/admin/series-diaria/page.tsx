@@ -169,6 +169,7 @@ export default function SeriesDiariaPage() {
 
   async function renderPeriodo(force: boolean) {
     if (renderBusy) return;
+    if (bulkBusy) { setRenderMsg('⏳ espera o rascunho (①) acabar — só depois é que há dias e motions para renderizar.'); return; }
     // o período é escolhido por ti (de/até); rende só os dias COM motion nesse intervalo
     const noIntervalo = (prodDias ?? []).filter((d) => d.data && (!rndDe || d.data >= rndDe) && (!rndAte || d.data <= rndAte));
     const comMotion = noIntervalo.filter((d) => d.motionUrl && (force || !d.videoUrl));
@@ -183,12 +184,14 @@ export default function SeriesDiariaPage() {
     setRenderBusy(false);
   }
 
-  const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setBulkRes(null); setBulkErro(null); };
+  const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setBulkRes(null); setBulkErro(null); setRenderMsg(null); setRegMsg(null); };
 
   async function gerarMes() {
     if (bulkBusy) return;
     if (!confirm(`Gerar ${bulkDias} dia(s) de ${SERIES[serie].nome} a partir de ${bulkInicio}?\n\nFica tudo em RASCUNHO — nada publica sem aprovares na Publicar.`)) return;
-    setBulkBusy(true); setBulkRes(null); setBulkErro(null); setBulkSeg(0);
+    // limpa estados de outros momentos (render/apagar) para não parecer que está
+    // a rascunhar E a renderizar/apagar ao mesmo tempo — são mensagens coladas.
+    setBulkBusy(true); setBulkRes(null); setBulkErro(null); setBulkSeg(0); setRenderMsg(null); setRegMsg(null);
     try {
       const r = await fetch('/api/admin/series-diaria/gerar-mes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, inicio: bulkInicio, dias: bulkDias }) });
       const j = await r.json().catch(() => ({}));
@@ -240,7 +243,7 @@ export default function SeriesDiariaPage() {
   const [apgBusy, setApgBusy] = useState(false);
   async function apagarDia(slug: string, data: string | null) {
     if (!confirm(`Apagar o dia ${data ?? slug} de ${SERIES[serie].nome}?\n\nApaga a frase/legenda/agendamento deste dia (não toca nos teus vídeos no storage). Não dá para desfazer.`)) return;
-    setApgBusy(true);
+    setApgBusy(true); setRenderMsg(null);
     try {
       const r = await fetch('/api/admin/series-diaria/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
       const j = await r.json();
@@ -255,7 +258,7 @@ export default function SeriesDiariaPage() {
     const alvo = (prodDias ?? []).filter((d) => d.data && (!apgDe || d.data >= apgDe) && (!apgAte || d.data <= apgAte));
     if (!alvo.length) { setRegMsg('Nenhum dia no intervalo escolhido.'); return; }
     if (!confirm(`Apagar ${alvo.length} dia(s) de ${SERIES[serie].nome}${apgDe || apgAte ? ` (${apgDe || '…'} → ${apgAte || '…'})` : ' (TODOS)'}?\n\nApaga frases/legendas/agendamentos (não toca nos teus vídeos no storage). Não dá para desfazer.`)) return;
-    setApgBusy(true); setRegMsg(null);
+    setApgBusy(true); setRegMsg(null); setRenderMsg(null);
     try {
       const r = await fetch('/api/admin/series-diaria/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, de: apgDe, ate: apgAte }) });
       const j = await r.json();
@@ -329,7 +332,7 @@ export default function SeriesDiariaPage() {
 
       <div className="max-w-3xl space-y-4">
         {/* ── 1 · PLANEAR ── */}
-        <Passo n="①" titulo="Planear · gerar o mês" sub="O Claude escreve as frases (únicas, dia + estação + ritual) e casa cada dia com um motion da pool (novos primeiro; senão melhor match) + áudio por mood.">
+        <Passo n="①" titulo="Planear · gerar o mês" sub="O Claude escreve as frases (únicas, dia + estação + ritual) e reutiliza um motion da pool SÓ se ele casar mesmo com a imagem da frase; senão o dia fica 'falta motion' para gerares o certo. + áudio por mood.">
           <p className="text-[0.66rem] opacity-60">
             {pool ? <>Pool: <b>{pool.disponiveis ?? pool.motions}</b> motions disponíveis ({pool.novos} novos{pool.quarentena ? <> · <span className="text-[#C9B6FA]">{pool.quarentena} a descansar {pool.quarentenaDias ?? 90} dias</span></> : null}) · áudios: {pool.audios.map((a) => a.mood).join(' · ') || '—'}</>
               : poolErro ? <span className="text-rosa/80">⚠ pool: {poolErro}</span> : 'a ler a pool…'}
@@ -454,8 +457,8 @@ export default function SeriesDiariaPage() {
           <div className="flex items-center gap-2 flex-wrap">
             <label className="flex items-center gap-1.5 text-[0.72rem] opacity-80">de <input type="date" value={rndDe} onChange={(e) => setRndDe(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
             <label className="flex items-center gap-1.5 text-[0.72rem] opacity-80">até <input type="date" value={rndAte} onChange={(e) => setRndAte(e.target.value)} className="px-2 py-1 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2" /></label>
-            <button onClick={() => renderPeriodo(false)} disabled={renderBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderBusy ? 'a disparar…' : '🎬 renderizar o período'}</button>
-            <button onClick={() => renderPeriodo(true)} disabled={renderBusy} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/60 hover:border-ambar disabled:opacity-40">re-render à força</button>
+            <button onClick={() => renderPeriodo(false)} disabled={renderBusy || bulkBusy} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{renderBusy ? 'a disparar…' : bulkBusy ? '⏳ a rascunhar…' : '🎬 renderizar o período'}</button>
+            <button onClick={() => renderPeriodo(true)} disabled={renderBusy || bulkBusy} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/60 hover:border-ambar disabled:opacity-40">re-render à força</button>
             {prodDias && <span className="text-[0.64rem] opacity-55">{prodDias.filter((d) => d.videoUrl).length}/{prodDias.length} com MP4</span>}
           </div>
           {renderMsg && <p className="text-[0.7rem] text-ambar">{renderMsg}</p>}
