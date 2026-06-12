@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO, paletaDoDia } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, LUZ, estacaoPt, type Serie } from '@/lib/series/voz';
 import { listarMotions, listarAudios, usosDeMotions, escolherMotion, escolherAudio } from '@/lib/series/pool';
 
 export const runtime = 'nodejs';
@@ -81,8 +81,10 @@ ${SOM_PROMPT}
 VARIEDADE NO LOTE: cada frase é ÚNICA em ideia E em imagem (não repetir motivos: se uma usa planta, outra não usa planta; varia natureza, casa, corpo, luz, água…). NUNCA repitas nenhuma destas já usadas, nem versões quase iguais:
 ${proibidas.length ? proibidas.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda)'}
 
+${LUZ[serie]}
+
 Devolve APENAS JSON válido:
-{ "dias": [ { "data": "YYYY-MM-DD", "frase": "a frase CURTA da imagem", "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)", "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16", "somPrompt": "o ambiente sonoro da MESMA cena, em inglês, a terminar com seamless loop, no music, no voices" } ] }
+{ "dias": [ { "data": "YYYY-MM-DD", "frase": "a frase CURTA da imagem", "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)", "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico; SEM pessoas, SEM texto). Termina com --ar 9:16", "somPrompt": "o ambiente sonoro da MESMA cena, em inglês, a terminar com seamless loop, no music, no voices" } ] }
 Um item por CADA dia da lista, pela ordem.
 
 ${REGRA_ACENTOS}`;

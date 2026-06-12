@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, LUZ, estacaoPt, type Serie } from '@/lib/series/voz';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -60,6 +60,8 @@ ${SOM_PROMPT}
 
 VARIEDADE: cada frase ÚNICA em ideia e imagem. NUNCA repitas nenhuma destas já usadas (nem versões quase iguais):
 ${proibidas.map((p) => `- ${p}`).join('\n')}
+
+${LUZ[serie]}
 
 Devolve APENAS JSON: { "dias": [ { "data": "YYYY-MM-DD", "frase": "a CURTA da imagem", "legenda": "a longa (2-4 frases, \\n\\n)", "mjPrompt": "prompt MidJourney EN do fundo em movimento, sem pessoas/texto, --ar 9:16", "somPrompt": "ambiente sonoro da MESMA cena, EN, com seamless loop, no music, no voices" } ] }
 Um item por CADA dia da lista.

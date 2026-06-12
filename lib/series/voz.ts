@@ -29,6 +29,17 @@ export const BREVIDADE: Record<Serie, string> = {
     'BREVIDADE (regra dura): a "frase" tem NO MÁXIMO ~13 palavras, UMA só respiração. Corta a explicação. Ex. aprovado: "Solto hoje a versão de mim que tinha de ser forte sempre."',
 };
 
+// LUZ por série (decisão da Vivianne): cada série publica-se a uma HORA própria
+// (vcsabia 07h, hojeemmim 21h — ver HORA_SERIE) e a IMAGEM + o SOM têm de bater
+// com essa hora. vcsabia = manhã/dia; hojeemmim = fim de tarde/noite. Vale para
+// o mjPrompt E o somPrompt.
+export const LUZ: Record<Serie, string> = {
+  vcsabia:
+    'LUZ (obrigatório): esta série publica-se DE MANHÃ. mjPrompt e somPrompt são SEMPRE de dia/manhã — luz natural suave, amanhecer, sol matinal, névoa que levanta, orvalho, céu claro. NUNCA noite, lua, estrelas, escuro, fogueira, velas, candeeiro, crepúsculo; no som, nada de grilos/corujas/noite — sim pássaros da manhã, brisa diurna, água a correr.',
+  hojeemmim:
+    'LUZ (obrigatório): esta série publica-se À NOITE. mjPrompt e somPrompt são SEMPRE de fim de tarde/noite — pôr do sol, crepúsculo, luz dourada baixa, luar suave, lareira/velas, penumbra quente e íntima, céu estrelado. NUNCA sol alto, meio-dia, manhã clara, amanhecer luminoso; no som, nada de pássaros da manhã — sim grilos, lareira a crepitar, coruja, brisa noturna, silêncio sereno.',
+};
+
 // O SOM nasce em PAR com a imagem (decisão da Vivianne: o som gera-se na app
 // via ElevenLabs a partir da MESMA cena do mjPrompt — match real, não keywords)
 export const SOM_PROMPT =
