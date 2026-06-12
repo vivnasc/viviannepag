@@ -5,10 +5,22 @@
 // Regra dela: se houver motions NOVOS (nunca usados) prioriza-os; senão vai
 // buscar o MELHOR MATCH por keyword. Só sem pool é que se gera no MJ.
 
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const COURSE_BUCKET = 'course-assets';
 export type SerieId = 'vcsabia' | 'hojeemmim';
+
+// A pool vive no projeto Supabase da ESCOLA-VEUS (OUTRO projeto, não o do
+// viviannepag). Os ficheiros são públicos, mas LISTAR exige uma chave desse
+// projeto: ESCOLA_SUPABASE_KEY (anon ou service role da escola-veus).
+const ESCOLA_URL = (process.env.ESCOLA_SUPABASE_URL || 'https://tdytdamtfillqyklgrmb.supabase.co').replace(/\/+$/, '');
+
+function getEscola(): SupabaseClient {
+  const key = process.env.ESCOLA_SUPABASE_KEY || process.env.ESCOLA_SUPABASE_SERVICE_ROLE_KEY;
+  if (!key) throw new Error('falta a env ESCOLA_SUPABASE_KEY (chave do projeto Supabase da escola-veus, para listar a pool)');
+  return createClient(ESCOLA_URL, key, { auth: { persistSession: false, autoRefreshToken: false } });
+}
 
 const MOTIONS_DIR: Record<SerieId, string> = { vcsabia: 'vc-sabia-motions', hojeemmim: 'hoje-em-mim-motions' };
 const AUDIOS_DIR: Record<SerieId, string> = { vcsabia: 'vc-sabia-audios', hojeemmim: 'hoje-em-mim-audios' };
@@ -20,11 +32,11 @@ const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,
 const palavrasDe = (s: string) => norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 3);
 
 function publicUrl(path: string): string {
-  return getSupabaseAdmin().storage.from(COURSE_BUCKET).getPublicUrl(path).data.publicUrl;
+  return `${ESCOLA_URL}/storage/v1/object/public/${COURSE_BUCKET}/${path}`;
 }
 
 export async function listarMotions(serie: SerieId): Promise<Motion[]> {
-  const sb = getSupabaseAdmin();
+  const sb = getEscola();
   const dir = MOTIONS_DIR[serie];
   const { data, error } = await sb.storage.from(COURSE_BUCKET).list(dir, { limit: 1000 });
   if (error) throw new Error(`pool motions: ${error.message}`);
@@ -50,7 +62,7 @@ export async function listarMotions(serie: SerieId): Promise<Motion[]> {
 }
 
 export async function listarAudios(serie: SerieId): Promise<AudioMood[]> {
-  const sb = getSupabaseAdmin();
+  const sb = getEscola();
   const dir = AUDIOS_DIR[serie];
   const { data, error } = await sb.storage.from(COURSE_BUCKET).list(dir, { limit: 200 });
   if (error) throw new Error(`pool audios: ${error.message}`);
