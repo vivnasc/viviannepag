@@ -6,6 +6,7 @@ import { ROMANCES } from '@/lib/romances';
 export const runtime = 'nodejs';
 
 const BUCKET = 'viviannepag-assets';
+const BUCKET_PRIVADO = 'escritos';
 
 // GET — lista os romances com as variantes de capa já geradas e a escolhida.
 export async function GET() {
@@ -22,7 +23,8 @@ export async function GET() {
         .sort((a, b) => (b.name > a.name ? 1 : -1))
         .map((f) => ({ name: f.name, url: pub(f.name) }));
       const temEscolhida = (files ?? []).some((f) => f.name === 'capa.jpg');
-      const temPdf = (n: string) => (files ?? []).some((f) => f.name === n);
+      const { data: privados } = await supabase.storage.from(BUCKET_PRIVADO).list(`romances/${r.slug}`, { limit: 20 });
+      const temPdf = (n: string) => (privados ?? []).some((f) => f.name === n);
       return {
         slug: r.slug,
         titulo: r.titulo,
@@ -34,8 +36,8 @@ export async function GET() {
         variantes,
         // cache-busting: a escolhida vive sempre no mesmo path
         capaEscolhida: temEscolhida ? `${pub('capa.jpg')}?v=${Date.now()}` : null,
-        pdfPt: temPdf('livro-pt.pdf') ? `${pub('livro-pt.pdf')}?v=${Date.now()}` : null,
-        pdfEn: temPdf('livro-en.pdf') ? `${pub('livro-en.pdf')}?v=${Date.now()}` : null,
+        pdfPt: temPdf('livro-pt.pdf') ? '/api/romance-download?lang=pt' : null,
+        pdfEn: temPdf('livro-en.pdf') ? '/api/romance-download?lang=en' : null,
       };
     }),
   );
