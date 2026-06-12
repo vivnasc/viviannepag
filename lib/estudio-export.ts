@@ -465,6 +465,46 @@ export function gerarMetricoolCSV(
   return lines.join('\r\n');
 }
 
+// ── CSV Metricool das SÉRIES DIÁRIAS (VC Sabia / Hoje em Mim) ──
+// Reaproveita o CABEÇALHO e o escaping reais do Metricool. Cada dia já é um
+// MP4 (reel/vídeo): TikTok e/ou Instagram (Reel). A legenda LONGA vai no Text.
+export type SerieCsvDia = { videoUrl: string; caption: string; titulo?: string; date: string; time: string };
+
+export function gerarMetricoolCSVSeries(dias: SerieCsvDia[], plataforma: 'tiktok' | 'instagram' | 'ambas' = 'tiktok'): string {
+  const lines: string[] = [CSV_HEADER.join(',')];
+  const cacheBust = Date.now();
+  const semCache = (u: string) => u + (u.includes('?') ? '&' : '?') + 'v=' + cacheBust;
+  const base: RowOverrides = {
+    'Facebook': 'FALSE', 'Twitter/X': 'FALSE', 'LinkedIn': 'FALSE', 'GBP': 'FALSE',
+    'Instagram': 'FALSE', 'Pinterest': 'FALSE', 'TikTok': 'FALSE', 'Youtube': 'FALSE',
+    'Threads': 'FALSE', 'Bluesky': 'FALSE', 'Draft': 'FALSE',
+  };
+  for (const d of dias) {
+    if (!d.videoUrl) continue;
+    const time = d.time?.length === 5 ? `${d.time}:00` : (d.time || '13:00:00');
+    const alt = (d.titulo ?? '').slice(0, 140);
+    const video = semCache(d.videoUrl);
+    if (plataforma === 'tiktok' || plataforma === 'ambas') {
+      lines.push(buildRow({
+        ...base, 'Picture Url 1': video, 'Alt text picture 1': alt,
+        'Text': d.caption, 'Date': d.date, 'Time': time, 'TikTok': 'TRUE',
+        'TikTok Title': (d.titulo ?? '').slice(0, 90),
+        'TikTok disable comments': 'FALSE', 'TikTok disable duet': 'FALSE', 'TikTok disable stitch': 'FALSE',
+        'TikTok Post Privacy': 'PUBLIC_TO_EVERYONE', 'TikTok Branded Content': 'FALSE',
+        'TikTok Your Brand': 'FALSE', 'TikTok Auto Add Music': 'FALSE', 'TikTok is AI generated content': 'FALSE',
+      }));
+    }
+    if (plataforma === 'instagram' || plataforma === 'ambas') {
+      lines.push(buildRow({
+        ...base, 'Picture Url 1': video, 'Alt text picture 1': alt,
+        'Text': d.caption, 'Date': d.date, 'Time': time, 'Instagram': 'TRUE',
+        'Instagram Post Type': 'Reel', 'Instagram Show Reel On Feed': 'TRUE',
+      }));
+    }
+  }
+  return lines.join('\r\n');
+}
+
 export function gerarResumoTexto(conteudos: ConteudoDia[]): string {
   const lines: string[] = ['CALENDARIO DE CONTEUDO · 30 DIAS', '='.repeat(50), ''];
 
