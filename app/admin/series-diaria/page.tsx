@@ -190,6 +190,38 @@ export default function SeriesDiariaPage() {
     setUploadSlug(null);
   }
 
+  // ── APAGAR (individual e em bloco, como tudo) ──
+  const [apgDe, setApgDe] = useState('');
+  const [apgAte, setApgAte] = useState('');
+  const [apgBusy, setApgBusy] = useState(false);
+  async function apagarDia(slug: string, data: string | null) {
+    if (!confirm(`Apagar o dia ${data ?? slug} de ${SERIES[serie].nome}?\n\nApaga a frase/legenda/agendamento deste dia (não toca nos teus vídeos no storage). Não dá para desfazer.`)) return;
+    setApgBusy(true);
+    try {
+      const r = await fetch('/api/admin/series-diaria/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setProdDias((xs) => (xs ?? []).filter((d) => d.slug !== slug));
+      setSelSlug(null);
+    } catch (e) { alert('Falha ao apagar: ' + String(e)); }
+    setApgBusy(false);
+  }
+  async function apagarPeriodo() {
+    if (apgBusy) return;
+    const alvo = (prodDias ?? []).filter((d) => d.data && (!apgDe || d.data >= apgDe) && (!apgAte || d.data <= apgAte));
+    if (!alvo.length) { setRegMsg('Nenhum dia no intervalo escolhido.'); return; }
+    if (!confirm(`Apagar ${alvo.length} dia(s) de ${SERIES[serie].nome}${apgDe || apgAte ? ` (${apgDe || '…'} → ${apgAte || '…'})` : ' (TODOS)'}?\n\nApaga frases/legendas/agendamentos (não toca nos teus vídeos no storage). Não dá para desfazer.`)) return;
+    setApgBusy(true); setRegMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, de: apgDe, ate: apgAte }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setRegMsg(`🗑 ${j.apagados} dia(s) apagados.`);
+      carregarProducao(serie);
+    } catch (e) { setRegMsg('⚠ ' + String(e)); }
+    setApgBusy(false);
+  }
+
   // ── BULK: regenerar frases (o par do "↻ outra frase" por dia) ──
   const [regBusy, setRegBusy] = useState(false);
   const [regMsg, setRegMsg] = useState<string | null>(null);
@@ -257,6 +289,11 @@ export default function SeriesDiariaPage() {
             <span className="text-[0.6rem] opacity-50">frases em bulk:</span>
             <button onClick={() => regenerarFrasesBulk('longas')} disabled={regBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ambar/40 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30">{regBusy ? '⏳…' : '↻ encurtar as longas'}</button>
             <button onClick={() => regenerarFrasesBulk('todas')} disabled={regBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-ocre/30 text-creme-2/65 hover:border-ambar disabled:opacity-30">↻ regenerar todas</button>
+            <span className="text-[0.6rem] opacity-30">|</span>
+            <span className="text-[0.6rem] opacity-50">apagar:</span>
+            <label className="flex items-center gap-1 text-[0.62rem] opacity-80">de <input type="date" value={apgDe} onChange={(e) => setApgDe(e.target.value)} className="px-1.5 py-0.5 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2 text-[0.62rem]" /></label>
+            <label className="flex items-center gap-1 text-[0.62rem] opacity-80">até <input type="date" value={apgAte} onChange={(e) => setApgAte(e.target.value)} className="px-1.5 py-0.5 rounded-md border border-ocre/25 bg-[#0F0F1A] text-creme-2 text-[0.62rem]" /></label>
+            <button onClick={apagarPeriodo} disabled={apgBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-[#C97373]/45 bg-[#C97373]/10 text-[#C97373] hover:bg-[#C97373]/20 disabled:opacity-30">{apgBusy ? '⏳…' : '🗑 apagar período'}</button>
           </div>
           {regMsg && <p className="text-[0.66rem] text-ambar">{regMsg}</p>}
           {prodBusy && !prodDias && <p className="text-[0.7rem] opacity-50">a carregar os dias…</p>}
@@ -313,6 +350,7 @@ export default function SeriesDiariaPage() {
                         <input type="file" accept="video/*" hidden disabled={uploadSlug === sel.slug} onChange={(e) => { const f = e.target.files?.[0]; if (f) carregarMotion(sel.slug, f); e.currentTarget.value = ''; }} />
                       </label>
                       <button onClick={() => renderDia(sel.slug)} disabled={!sel.motionUrl || diaBusy === sel.slug} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-30">🎬 renderizar este dia{sel.videoUrl ? ' (de novo)' : ''}</button>
+                      <button onClick={() => apagarDia(sel.slug, sel.data)} disabled={apgBusy} className="text-[0.64rem] px-2.5 py-1 rounded-lg border border-[#C97373]/40 text-[#C97373]/85 hover:bg-[#C97373]/10 disabled:opacity-30">🗑 apagar este dia</button>
                       {diaMsg && <p className="text-[0.62rem] text-ambar">{diaMsg}</p>}
                     </div>
                   </>
