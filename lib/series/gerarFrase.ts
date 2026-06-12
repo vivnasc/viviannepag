@@ -4,9 +4,9 @@
 
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
 import { ROTACAO } from '@/lib/series/serie-design';
-import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, estacaoPt, type Serie } from '@/lib/series/voz';
+import { VOZ, PORTA_SALA, REFLEXO_PARTILHA, BREVIDADE, LEGENDA_LONGA, SOM_PROMPT, estacaoPt, type Serie } from '@/lib/series/voz';
 
-export async function gerarFraseSerie(opts: { serie: Serie; dia?: string; evitar: string[]; apiKey: string }): Promise<{ frase: string; mjPrompt: string; legenda: string }> {
+export async function gerarFraseSerie(opts: { serie: Serie; dia?: string; evitar: string[]; apiKey: string }): Promise<{ frase: string; mjPrompt: string; legenda: string; somPrompt: string }> {
   const { serie, apiKey } = opts;
   const dia = (opts.dia || '').trim();
   const hoje = new Date();
@@ -26,6 +26,8 @@ ${REFLEXO_PARTILHA}
 
 ${LEGENDA_LONGA}
 
+${SOM_PROMPT}
+
 NUNCA repitas nenhuma destas frases já usadas, nem versões quase iguais:
 ${opts.evitar.length ? opts.evitar.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda)'}
 
@@ -33,7 +35,8 @@ Devolve APENAS JSON válido:
 {
   "frase": "a frase CURTA da imagem, na voz certa",
   "legenda": "a versão longa (2-4 frases, parágrafos com \\n\\n, fecho digno)",
-  "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16"
+  "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; contemplativo, fine-art, cinematográfico, luz natural suave/noturna; SEM pessoas, SEM texto). Termina com --ar 9:16",
+  "somPrompt": "o ambiente sonoro da MESMA cena, em inglês, a terminar com seamless loop, no music, no voices"
 }
 
 ${REGRA_ACENTOS}`;
@@ -47,11 +50,11 @@ ${REGRA_ACENTOS}`;
   const texto: string = (await res.json())?.content?.[0]?.text ?? '';
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) throw new Error('sem-json: ' + texto.slice(0, 150));
-  let p: { frase?: string; legenda?: string; mjPrompt?: string };
+  let p: { frase?: string; legenda?: string; mjPrompt?: string; somPrompt?: string };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { throw new Error('json-invalido: ' + texto.slice(0, 150)); }
   p = limparTravessoes(p);
   p = await corrigirAcentos(p, apiKey);
   const frase = (p.frase ?? '').trim();
   if (!frase) throw new Error('sem-frase');
-  return { frase, mjPrompt: (p.mjPrompt ?? '').trim(), legenda: (p.legenda ?? '').trim() || frase };
+  return { frase, mjPrompt: (p.mjPrompt ?? '').trim(), legenda: (p.legenda ?? '').trim() || frase, somPrompt: (p.somPrompt ?? '').trim() };
 }

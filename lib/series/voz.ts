@@ -29,6 +29,11 @@ export const BREVIDADE: Record<Serie, string> = {
     'BREVIDADE (regra dura): a "frase" tem NO MÁXIMO ~13 palavras, UMA só respiração. Corta a explicação. Ex. aprovado: "Solto hoje a versão de mim que tinha de ser forte sempre."',
 };
 
+// O SOM nasce em PAR com a imagem (decisão da Vivianne: o som gera-se na app
+// via ElevenLabs a partir da MESMA cena do mjPrompt — match real, não keywords)
+export const SOM_PROMPT =
+  'SOM (par da imagem): devolve também "somPrompt" — um prompt EM INGLÊS para gerar o AMBIENTE SONORO da MESMA cena do mjPrompt: descreve o que se OUVE nessa cena (ex.: fine rain on a window, crickets at night, fireplace crackle, calm waves). Suave e contemplativo; termina com "seamless loop, no music, no voices".';
+
 export const LEGENDA_LONGA =
   'LEGENDA: além da frase curta, devolve uma "legenda" mais LONGA (2 a 4 frases curtas): a versão que respira, a mesma ideia desenvolvida com toda a beleza, em parágrafos separados por \\n\\n; fecha com um convite digno a guardar/enviar a alguém (sem vender, sem nomear o formato).';
 
