@@ -6,7 +6,7 @@ const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 
 const BUCKET_PUBLICO = 'viviannepag-assets';
-const BUCKET_PRIVADO = 'escritos';
+const BUCKET_PRIVADO = 'romances'; // bucket privado próprio, sem lista de mimes
 const SLUG = 'rom-01-amparo';
 const BASE = path.join(__dirname, '..', '..', 'ficcao-plano');
 
@@ -24,6 +24,12 @@ const FICHEIROS = [
 ];
 
 (async () => {
+  // garante o bucket privado dos romances
+  const { data: existe } = await supabase.storage.getBucket(BUCKET_PRIVADO);
+  if (!existe) {
+    const { error } = await supabase.storage.createBucket(BUCKET_PRIVADO, { public: false });
+    if (error && !/already exists|duplicate/i.test(error.message)) throw new Error(`createBucket: ${error.message}`);
+  }
   for (const [local, bucket, remoto, tipo] of FICHEIROS) {
     const buf = fs.readFileSync(path.join(BASE, local));
     // cascata de mime como no render-ebook: o bucket escritos recusa
