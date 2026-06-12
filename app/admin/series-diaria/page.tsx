@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { SerieDiariaSlide, SERIES, type SerieId } from '@/components/admin/SerieDiariaSlide';
+import { PALETAS, type PaletaId } from '@/lib/series/serie-design';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'block' });
@@ -25,6 +26,7 @@ export default function SeriesDiariaPreview() {
   const [dia, setDia] = useState('quinta');
   const [frase, setFrase] = useState(EXEMPLOS.hojeemmim);
   const [bgUrl, setBgUrl] = useState('');
+  const [paleta, setPaleta] = useState<PaletaId>('carta-noturna');
   const [mjPrompt, setMjPrompt] = useState('');
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
@@ -63,6 +65,15 @@ export default function SeriesDiariaPreview() {
             <div className="flex gap-2 flex-wrap">
               {(Object.keys(SERIES) as SerieId[]).map((s) => (
                 <button key={s} onClick={() => trocarSerie(s)} className={`text-[0.8rem] px-3 py-1.5 rounded-lg border ${serie === s ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>{SERIES[s].nome} <span className="opacity-50">· {SERIES[s].momento}</span></button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Paleta (Tema visual)</p>
+            <div className="flex gap-1.5 flex-wrap">
+              {(Object.keys(PALETAS) as PaletaId[]).map((p) => (
+                <button key={p} onClick={() => setPaleta(p)} className={`flex items-center gap-1.5 text-[0.72rem] px-2.5 py-1 rounded-full border ${paleta === p ? 'border-ambar text-ambar' : 'border-ocre/20 text-creme-2/60 hover:border-ambar'}`}><span className="w-3 h-3 rounded-full" style={{ background: PALETAS[p].highlight }} />{PALETAS[p].nome}</button>
               ))}
             </div>
           </div>
@@ -106,7 +117,7 @@ export default function SeriesDiariaPreview() {
         {/* preview 9:16 */}
         <div className="order-1 lg:order-2">
           <div className="w-full max-w-[360px] mx-auto">
-            <SerieDiariaSlide serie={serie} frase={frase} dia={dia} bgUrl={bgUrl || undefined} />
+            <SerieDiariaSlide serie={serie} frase={frase} dia={dia} bgUrl={bgUrl || undefined} paleta={paleta} />
           </div>
           <p className="text-[0.62rem] opacity-45 text-center mt-2">9:16 · {SERIES[serie].nome}</p>
         </div>

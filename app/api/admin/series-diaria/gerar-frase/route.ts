@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes, corrigirAcentos, REGRA_ACENTOS } from '@/lib/texto';
+import { ROTACAO } from '@/lib/series/serie-design';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -53,9 +54,11 @@ export async function POST(req: Request) {
   const hoje = new Date();
   const estacao = estacaoPt(hoje);
   const dataPt = hoje.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long' });
+  const ritual = serie === 'hojeemmim' && dia ? ROTACAO[dia] : undefined;
 
-  const SYSTEM = `És a voz da Vivianne dos Santos (psicologia transpessoal, constelação familiar; seteveus.space). Escreves frases diárias para Instagram, didáticas e com alma, NUNCA para vender.
+  const SYSTEM = `És a voz da Vivianne dos Santos (psicologia transpessoal, constelação familiar; viviannedossantos.com). Escreves frases diárias para Instagram, didáticas e com alma, NUNCA para vender.
 ${VOZ[serie]}
+${ritual ? `RITUAL DO DIA (${dia}): a frase serve o foco "${ritual.kicker}" — ${ritual.tema}. A frase deve encaixar neste ritual, na 1.ª pessoa.` : ''}
 
 CONTEXTO: ${dia ? `dia da semana: ${dia}. ` : ''}época do ano: ${estacao} (hoje, ${dataPt}). A frase encaixa no momento (dia da semana + estação) com SUBTILEZA, nunca à força nem nomeando a data.
 
@@ -67,7 +70,7 @@ ${proibidas.length ? proibidas.map((p) => `- ${p}`).join('\n') : '(nenhuma ainda
 Devolve APENAS JSON válido:
 {
   "frase": "a frase da série, na voz certa, pronta a publicar",
-  "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; estética seteveus: contemplativa, fine-art, cinematográfica, luz natural suave, profundidade; SEM pessoas, SEM texto, SEM letras). Termina com --ar 9:16"
+  "mjPrompt": "prompt MidJourney em INGLÊS para o FUNDO em MOVIMENTO (metáfora visual da frase; estética contemplativa, fine-art, cinematográfica, luz natural suave/noturna, profundidade; SEM pessoas, SEM texto, SEM letras). Termina com --ar 9:16"
 }
 
 ${REGRA_ACENTOS}`;
