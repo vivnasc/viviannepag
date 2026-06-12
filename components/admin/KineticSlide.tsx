@@ -92,10 +92,13 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
                 st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)' : 'none' };
               }
               return (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F8EFE9', fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>{w}</span>
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F8EFE9', fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>
+                  {w}
+                  {/* cursor DENTRO da última palavra visível — acompanha a escrita (antes ficava parado no fim da frase, porque as palavras invisíveis já reservam o espaço) */}
+                  {aindaEscreve && !ehDomingo && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
+                </span>
               );
             })}
-            {aindaEscreve && !ehDomingo && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.04em' }} />}
           </p>
         </div>
 

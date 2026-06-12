@@ -201,9 +201,15 @@ export function VeuSlide({
                   <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>
                     {ganchoPalavras.map((w, i) => {
                       const f = Math.max(0, Math.min(1, ganchoMostradas - i));
-                      return <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', opacity: f, transform: `translateY(${(1 - f) * 12}px)` }}>{w}</span>;
+                      const ultimo = Math.min(ganchoPalavras.length - 1, Math.floor(ganchoMostradas));
+                      return (
+                        <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', opacity: f, transform: `translateY(${(1 - f) * 12}px)` }}>
+                          {w}
+                          {/* cursor DENTRO da última palavra visível — acompanha a escrita */}
+                          {ganchoEscreve && i === ultimo && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: ornamento, opacity: 0.9, transform: 'translateY(0.1em)', marginLeft: '0.08em' }} />}
+                        </span>
+                      );
                     })}
-                    {ganchoEscreve && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: ornamento, opacity: 0.85, transform: 'translateY(0.1em)', marginLeft: '0.02em' }} />}
                   </p>
                 ) : (
                   <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 50, lineHeight: 1.4, color: C.ivory, maxWidth: 820, textShadow: imageUrl ? '0 2px 24px rgba(0,0,0,0.55)' : 'none' }}>{slide.destaque}</p>
