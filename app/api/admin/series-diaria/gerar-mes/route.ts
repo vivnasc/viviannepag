@@ -107,7 +107,7 @@ ${REGRA_ACENTOS}`;
   // ── pool: motions + áudios reciclados da escola-veus ──
   let pool: Awaited<ReturnType<typeof listarMotions>> = [];
   let audios: Awaited<ReturnType<typeof listarAudios>> = [];
-  let usos: Record<string, number> = {};
+  let usos: Awaited<ReturnType<typeof usosDeMotions>> = {};
   let poolErro: string | null = null;
   try { [pool, audios, usos] = await Promise.all([listarMotions(serie), listarAudios(serie), usosDeMotions()]); }
   catch (e) { poolErro = e instanceof Error ? e.message : String(e); }
@@ -121,7 +121,7 @@ ${REGRA_ACENTOS}`;
     const frase = (g.frase ?? '').trim();
     const alvo = aFazer.find((d) => d.data === data);
     if (!alvo || !frase) continue;
-    const motion = pool.length ? escolherMotion(frase, pool, usos, jaNesteLote) : null;
+    const motion = pool.length ? escolherMotion(frase, pool, usos, jaNesteLote, data) : null;
     if (motion) jaNesteLote.add(motion.path);
     const mjPrompt = (g.mjPrompt ?? '').trim();
     // O SOM casa com o MOTION: se da pool, pela etiqueta/mood + nome+categoria;
@@ -145,7 +145,7 @@ ${REGRA_ACENTOS}`;
     };
     const { error } = await supabase.from('carousel_collections').insert({ slug: slugDe(data), title: frase.slice(0, 80), brief: `${serie} · ${alvo.dia} · ${data}`, dias: diasCol, theme });
     if (error) { resumo.push({ data, dia: alvo.dia, frase, motion: null, audio: null, mj: false }); continue; }
-    if (motion) usos[motion.path] = (usos[motion.path] ?? 0) + 1;
+    if (motion) { const u = usos[motion.path] ?? { n: 0, ultimo: '' }; usos[motion.path] = { n: u.n + 1, ultimo: data > u.ultimo ? data : u.ultimo }; }
     resumo.push({ data, dia: alvo.dia, frase, motion: motion?.nome ?? null, audio: audio?.mood ?? null, mj: !motion, mjPrompt: !motion ? mjPrompt : undefined });
   }
 

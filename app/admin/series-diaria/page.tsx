@@ -41,7 +41,7 @@ export default function SeriesDiariaPage() {
   const [serie, setSerie] = useState<SerieId>('vcsabia');
 
   // ── 1 · PLANEAR ──
-  const [pool, setPool] = useState<{ motions: number; novos: number; audios: { mood: string; n: number }[] } | null>(null);
+  const [pool, setPool] = useState<{ motions: number; novos: number; disponiveis?: number; quarentena?: number; quarentenaDias?: number; audios: { mood: string; n: number }[] } | null>(null);
   const [poolErro, setPoolErro] = useState<string | null>(null);
   const [bulkInicio, setBulkInicio] = useState(() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; });
   const [bulkDias, setBulkDias] = useState(30);
@@ -89,11 +89,11 @@ export default function SeriesDiariaPage() {
   }, []);
   useEffect(() => { setProdDias(null); setSelSlug(null); carregarProducao(serie); }, [serie, carregarProducao]);
 
-  // dia selecionado para o preview montado (à direita)
+  // dia selecionado para o preview montado (à direita) — escolhido da VISTA
+  // (a seleção a partir de `visiveis` acontece mais abaixo, depois do filtro)
   useEffect(() => {
     if (!prodDias || !prodDias.length) { setSelSlug(null); return; }
-    if (!selSlug || !prodDias.some((d) => d.slug === selSlug)) setSelSlug(prodDias[0].slug);
-  }, [prodDias, selSlug]);
+  }, [prodDias]);
   const sel = (prodDias ?? []).find((d) => d.slug === selSlug) ?? null;
 
   // anima o typewriter no preview montado
@@ -249,7 +249,27 @@ export default function SeriesDiariaPage() {
     return () => cancelAnimationFrame(raf);
   }, [verMoldura, anima, frase, serie, dia]);
 
+  // ── vista da lista do ②: ARQUIVO automático (passados saem) + filtro por estado ──
+  const [verArquivo, setVerArquivo] = useState(false);
+  const [filtro, setFiltro] = useState<'todos' | 'faltaMotion' | 'faltaRender' | 'pronto'>('todos');
+  const hojeIso = (() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; })();
+  const visiveis = (prodDias ?? []).filter((d) => {
+    if (!verArquivo && d.data && d.data < hojeIso) return false; // passados = arquivo
+    if (filtro === 'faltaMotion') return !d.motionUrl;
+    if (filtro === 'faltaRender') return !!d.motionUrl && !d.videoUrl;
+    if (filtro === 'pronto') return !!d.videoUrl;
+    return true;
+  });
+  const arquivados = (prodDias ?? []).filter((d) => d.data && d.data < hojeIso).length;
   const semMotion = (prodDias ?? []).filter((d) => !d.motionUrl);
+
+  // a seleção vive sempre dentro da VISTA (nunca aponta a um dia escondido)
+  const visiveisKey = visiveis.map((d) => d.slug).join(',');
+  useEffect(() => {
+    if (!visiveis.length) return;
+    if (!selSlug || !visiveis.some((d) => d.slug === selSlug)) setSelSlug(visiveis[0].slug);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visiveisKey]);
 
   return (
     <div className={`min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-4 sm:p-6 ${cormorant.variable} ${inter.variable} ${jetmono.variable}`}>
@@ -267,7 +287,7 @@ export default function SeriesDiariaPage() {
         {/* ── 1 · PLANEAR ── */}
         <Passo n="①" titulo="Planear · gerar o mês" sub="O Claude escreve as frases (únicas, dia + estação + ritual) e casa cada dia com um motion da pool (novos primeiro; senão melhor match) + áudio por mood.">
           <p className="text-[0.66rem] opacity-60">
-            {pool ? <>Pool: <b>{pool.motions}</b> motions ({pool.novos} novos) · áudios: {pool.audios.map((a) => a.mood).join(' · ') || '—'}</>
+            {pool ? <>Pool: <b>{pool.disponiveis ?? pool.motions}</b> motions disponíveis ({pool.novos} novos{pool.quarentena ? <> · <span className="text-[#C9B6FA]">{pool.quarentena} a descansar {pool.quarentenaDias ?? 90} dias</span></> : null}) · áudios: {pool.audios.map((a) => a.mood).join(' · ') || '—'}</>
               : poolErro ? <span className="text-rosa/80">⚠ pool: {poolErro}</span> : 'a ler a pool…'}
           </p>
           <div className="flex items-center gap-2 flex-wrap text-[0.74rem]">
@@ -296,13 +316,24 @@ export default function SeriesDiariaPage() {
             <button onClick={apagarPeriodo} disabled={apgBusy || !prodDias?.length} className="text-[0.66rem] px-2.5 py-1 rounded-full border border-[#C97373]/45 bg-[#C97373]/10 text-[#C97373] hover:bg-[#C97373]/20 disabled:opacity-30">{apgBusy ? '⏳…' : '🗑 apagar período'}</button>
           </div>
           {regMsg && <p className="text-[0.66rem] text-ambar">{regMsg}</p>}
+          {/* vista: arquivo automático (passados saem) + filtro por estado */}
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {([['todos', 'todos'], ['faltaMotion', '⚠ falta motion'], ['faltaRender', '🎞 falta render'], ['pronto', '✓ MP4 pronto']] as const).map(([k, lbl]) => (
+              <button key={k} onClick={() => setFiltro(k)} className={`text-[0.62rem] px-2 py-0.5 rounded-full border ${filtro === k ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/20 text-creme-2/55 hover:border-ambar'}`}>{lbl}</button>
+            ))}
+            {arquivados > 0 && (
+              <button onClick={() => setVerArquivo((v) => !v)} className={`text-[0.62rem] px-2 py-0.5 rounded-full border ${verArquivo ? 'border-[#C9B6FA] bg-[#C9B6FA]/15 text-[#C9B6FA]' : 'border-ocre/20 text-creme-2/55 hover:border-ambar'}`}>{verArquivo ? '▾ a mostrar arquivo' : `📦 arquivo (${arquivados} passados)`}</button>
+            )}
+            <span className="text-[0.6rem] opacity-45">{visiveis.length} na vista</span>
+          </div>
           {prodBusy && !prodDias && <p className="text-[0.7rem] opacity-50">a carregar os dias…</p>}
           {prodDias && prodDias.length === 0 && <p className="text-[0.7rem] opacity-50">Ainda não há dias gerados de {SERIES[serie].nome} — usa o passo ①.</p>}
-          {prodDias && prodDias.length > 0 && (
+          {prodDias && prodDias.length > 0 && visiveis.length === 0 && <p className="text-[0.7rem] opacity-50">Nada nesta vista (muda o filtro ou abre o 📦 arquivo).</p>}
+          {visiveis.length > 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_270px] gap-4 items-start">
               {/* lista dos dias — clica para ver montado à direita */}
               <div className="space-y-1.5 max-h-[36rem] overflow-y-auto pr-1">
-                {prodDias.map((d) => (
+                {visiveis.map((d) => (
                   <button key={d.slug} onClick={() => setSelSlug(d.slug)} className={`w-full text-left flex gap-2.5 items-center rounded-lg border p-2 ${selSlug === d.slug ? 'border-ambar bg-ambar/10' : 'border-ocre/12 bg-black/20 hover:border-ocre/30'}`}>
                     <span className={`w-2 h-2 rounded-full shrink-0 ${d.videoUrl ? 'bg-salvia' : d.motionUrl ? 'bg-[#C9B6FA]' : 'bg-ambar'}`} title={d.videoUrl ? 'MP4 pronto' : d.motionUrl ? 'tem motion' : 'falta motion'} />
                     <span className="font-mono text-[0.58rem] opacity-55 shrink-0 leading-tight w-16">{d.data}<br />{d.dia}</span>
