@@ -46,7 +46,7 @@ export const ROMANCES: Romance[] = [
     espelho: 'A mãe que salva',
     capitulos: 12,
     palavras: 30000,
-    cena: `book cover illustration, vertical composition: a pair of weathered older mother's hands gently cupped together, holding a tiny house with one warmly lit window, rising from the bottom of the frame; behind and above, at blue dusk, a small village of terracotta rooftops with thin chimney smoke between soft green mountains and a quiet river, warm lit windows; a low full moon, a few swallows; generous calm sky with empty space at the top third for a title; intimate, tender, quietly epic`,
+    cena: `book cover illustration, vertical composition: a pair of weathered older mother's hands gently cupped together, holding a tiny house with one warmly lit window, rising from the bottom of the frame; behind and above, at blue dusk, a small village of terracotta rooftops with thin chimney smoke between soft green mountains and a quiet river, warm lit windows; a low full moon, a few swallows; generous calm sky with empty space at the top third for a title; the two hands belong to ONE person: identical skin tone and IDENTICAL matching sleeves/cuffs (same fabric, same colour on both arms); intimate, tender, quietly epic`,
   },
 ];
 
