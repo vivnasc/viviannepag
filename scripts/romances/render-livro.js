@@ -36,17 +36,16 @@ const FONTS = [
   ['Outfit',500,'normal','outfit-latin-500-normal'],
 ].map(a => fontFace(...a)).join('\n');
 
-// Espiral limpa (arquimediana), traço sálvia.
-function espiral(px, cor = C.salvia, voltas = 3.2) {
-  const cx = 50, cy = 50, passos = 220, a = 1.6, b = 4.4;
-  let d = '';
-  for (let i = 0; i <= passos; i++) {
-    const t = (i / passos) * voltas * 2 * Math.PI;
-    const r = a + b * t / (2 * Math.PI) * 3.2;
-    const x = cx + r * Math.cos(t), y = cy + r * Math.sin(t);
-    d += (i === 0 ? `M${x.toFixed(1)} ${y.toFixed(1)}` : ` L${x.toFixed(1)} ${y.toFixed(1)}`);
-  }
-  return `<svg width="${px}" height="${px}" viewBox="0 0 100 100"><path d="${d}" fill="none" stroke="${cor}" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/></svg>`;
+// O símbolo da casa (favicon/gota dos ebooks): duas curvas + ponto + onda.
+function gota(px, cor = C.barroClaro) {
+  return `<svg viewBox="0 0 512 512" width="${px}" height="${px}">
+    <g fill="none" stroke="${cor}" stroke-width="12" stroke-linecap="round">
+      <path d="M170 130 C170 270 200 340 248 374"/>
+      <path d="M342 130 C342 270 312 340 264 374"/>
+    </g>
+    <circle cx="256" cy="244" r="16" fill="${cor}"/>
+    <path d="M170 400 C200 376 230 420 256 400 C282 380 312 420 342 400" fill="none" stroke="${cor}" stroke-width="12" stroke-linecap="round"/>
+  </svg>`;
 }
 
 const NUM = LANG==='pt'
@@ -105,7 +104,7 @@ const corpoHtml = files.map(f => {
     <div class="cap-cabeca">
       <div class="cap-num">${T.cap} ${NUM[n] || n}</div>
       <h2>${titulo}</h2>
-      <div class="cap-orn">${espiral(30)}</div>
+      <div class="cap-orn">${gota(34)}</div>
     </div>
     ${corpo}
   </section>`;
@@ -130,7 +129,7 @@ const html = `<!DOCTYPE html>
     font-size: 11pt;
     line-height: 1.85;
     color: ${C.texto};
-    background: ${C.creme};
+    background: #FFFFFF;
   }
 
   .rosto {
@@ -235,7 +234,7 @@ const html = `<!DOCTYPE html>
   <div class="serie">${T.serie}</div>
   <h1>${T.tituloHtml}</h1>
   <p class="sub">${T.sub}</p>
-  <div class="orn">${espiral(46, C.barroClaro)}</div>
+  <div class="orn">${gota(46)}</div>
   <p class="autora">${T.autora}</p>
 </div>
 
@@ -255,7 +254,7 @@ const html = `<!DOCTYPE html>
 ${corpoHtml}
 
 <div class="final">
-  <div class="orn">${espiral(40)}</div>
+  <div class="orn">${gota(40, C.salvia)}</div>
   <h3>${T.finalTit}</h3>
   <p>${T.finalTxt1}</p>
   <p>${T.finalTxt2}</p>

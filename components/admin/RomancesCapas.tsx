@@ -32,14 +32,14 @@ export function RomancesCapas() {
 
   useEffect(() => { carregar(); }, [carregar]);
 
-  async function gerar(slug: string) {
+  async function gerar(slug: string, estilo: string) {
     setErro(null);
-    setAGerar(slug);
+    setAGerar(`${slug}:${estilo}`);
     try {
       const res = await fetch('/api/admin/romances/capa', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug }),
+        body: JSON.stringify({ slug, estilo }),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
@@ -90,13 +90,22 @@ export function RomancesCapas() {
                 {r.slug} · {r.capitulos} capítulos · ~{r.palavras.toLocaleString('pt-PT')} palavras · espelho de «{r.espelho}»
               </p>
             </div>
-            <button
-              onClick={() => gerar(r.slug)}
-              disabled={aGerar === r.slug}
-              className="shrink-0 rounded-full border border-ambar/50 text-ambar px-5 py-2 text-[0.82rem] hover:bg-ambar/10 transition-colors disabled:opacity-50"
-            >
-              {aGerar === r.slug ? 'a pintar… (≈20s)' : 'gerar variante de capa'}
-            </button>
+            <div className="shrink-0 flex flex-wrap gap-2">
+              {[
+                ['aguarela', 'aguarela literária'],
+                ['atmosferica', 'pintura atmosférica'],
+                ['gouache', 'gouache'],
+              ].map(([estilo, nome]) => (
+                <button
+                  key={estilo}
+                  onClick={() => gerar(r.slug, estilo)}
+                  disabled={aGerar !== null}
+                  className="rounded-full border border-ambar/50 text-ambar px-4 py-2 text-[0.78rem] hover:bg-ambar/10 transition-colors disabled:opacity-50"
+                >
+                  {aGerar === `${r.slug}:${estilo}` ? 'a pintar… (≈20s)' : `gerar capa · ${nome}`}
+                </button>
+              ))}
+            </div>
           </div>
 
           {r.capaEscolhida && (
