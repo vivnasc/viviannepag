@@ -91,8 +91,8 @@ export default async function AmparoLanding({ params }: { params: Promise<{ loca
         </div>
         <p className="text-center text-creme-2/40 text-[0.75rem] mt-6 font-serif italic">
           {isEn
-            ? 'Véspera is a village of one question: who carries whom? Eleven more novels are on their way.'
-            : 'Véspera é uma vila com uma pergunta só: quem carrega quem? Vêm mais onze romances a caminho.'}
+            ? 'Véspera is a village where the roles that protect us become prisons — and every novel is a road back. Eleven more are on their way.'
+            : 'Véspera é uma vila onde os papéis que nos protegem se tornam prisões — e cada romance é um caminho de regresso. Vêm mais onze a caminho.'}
         </p>
       </section>
     </main>
