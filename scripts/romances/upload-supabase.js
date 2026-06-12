@@ -26,7 +26,13 @@ const FICHEIROS = [
 (async () => {
   for (const [local, bucket, remoto, tipo] of FICHEIROS) {
     const buf = fs.readFileSync(path.join(BASE, local));
-    const { error } = await supabase.storage.from(bucket).upload(remoto, buf, { contentType: tipo, upsert: true });
+    // cascata de mime como no render-ebook: o bucket escritos recusa
+    // application/pdf, aceita octet-stream.
+    let error = null;
+    for (const mime of [tipo, 'application/octet-stream']) {
+      ({ error } = await supabase.storage.from(bucket).upload(remoto, buf, { contentType: mime, upsert: true }));
+      if (!error) break;
+    }
     if (error) throw new Error(`${remoto}: ${error.message}`);
     console.log('publicado:', bucket, remoto);
   }
