@@ -5,10 +5,10 @@
 // upload do motion + render + publicação. Cola um URL de imagem (ou um frame
 // do teu Midjourney) para veres a moldura sobre um fundo real.
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { SerieDiariaSlide, SERIES, type SerieId } from '@/components/admin/SerieDiariaSlide';
-import { PALETAS, type PaletaId } from '@/lib/series/serie-design';
+import { PALETAS, REGENTE, paletaDoDia, type PaletaId } from '@/lib/series/serie-design';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'block' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'block' });
@@ -26,13 +26,31 @@ export default function SeriesDiariaPreview() {
   const [dia, setDia] = useState('quinta');
   const [frase, setFrase] = useState(EXEMPLOS.hojeemmim);
   const [bgUrl, setBgUrl] = useState('');
-  const [paleta, setPaleta] = useState<PaletaId>('carta-noturna');
+  const [paleta, setPaleta] = useState<PaletaId>(paletaDoDia('quinta'));
   const [mjPrompt, setMjPrompt] = useState('');
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [copiado, setCopiado] = useState(false);
+  const [motion, setMotion] = useState(true);
+  const [prog, setProg] = useState(1);
 
-  const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setMjPrompt(''); };
+  const trocarSerie = (s: SerieId) => { setSerie(s); setFrase(EXEMPLOS[s]); setMjPrompt(''); if (s === 'hojeemmim') setPaleta(paletaDoDia(dia)); };
+  const trocarDia = (d: string) => { setDia(d); setPaleta(paletaDoDia(d)); }; // paleta FIXA por dia (regente)
+
+  // anima o typewriter (loop) para veres a frase a escrever-se
+  useEffect(() => {
+    if (!motion) { setProg(1); return; }
+    let raf = 0; let start: number | null = null;
+    const DUR = 4200, HOLD = 1500, TOTAL = DUR + HOLD;
+    const tick = (t: number) => {
+      if (start == null) start = t;
+      const e = (t - start) % TOTAL;
+      setProg(Math.min(1, e / DUR));
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [motion, frase, serie, dia]);
 
   async function gerar(outra: boolean) {
     setGerando(true); setErro(null);
@@ -69,8 +87,20 @@ export default function SeriesDiariaPreview() {
             </div>
           </div>
 
+          {serie === 'hojeemmim' && (
+            <div>
+              <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Dia da semana <span className="opacity-60 normal-case tracking-normal">· cada dia tem a sua paleta fixa (regente planetário)</span></p>
+              <div className="flex gap-1.5 flex-wrap">
+                {DIAS.map((d) => (
+                  <button key={d} onClick={() => trocarDia(d)} className={`text-[0.72rem] px-2.5 py-1 rounded-full border ${dia === d ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/20 text-creme-2/60 hover:border-ambar'}`}>{d}</button>
+                ))}
+              </div>
+              <p className="text-[0.62rem] opacity-55 mt-1.5">{dia} · regente <b className="opacity-90">{REGENTE[dia]}</b> → paleta <b className="opacity-90">{PALETAS[paletaDoDia(dia)].nome}</b></p>
+            </div>
+          )}
+
           <div>
-            <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Paleta (Tema visual)</p>
+            <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Paleta {serie === 'hojeemmim' && <span className="opacity-60 normal-case tracking-normal">(fixa pelo dia; aqui só p/ comparar)</span>}</p>
             <div className="flex gap-1.5 flex-wrap">
               {(Object.keys(PALETAS) as PaletaId[]).map((p) => (
                 <button key={p} onClick={() => setPaleta(p)} className={`flex items-center gap-1.5 text-[0.72rem] px-2.5 py-1 rounded-full border ${paleta === p ? 'border-ambar text-ambar' : 'border-ocre/20 text-creme-2/60 hover:border-ambar'}`}><span className="w-3 h-3 rounded-full" style={{ background: PALETAS[p].highlight }} />{PALETAS[p].nome}</button>
@@ -78,16 +108,10 @@ export default function SeriesDiariaPreview() {
             </div>
           </div>
 
-          {serie === 'hojeemmim' && (
-            <div>
-              <p className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-1.5">Dia da semana</p>
-              <div className="flex gap-1.5 flex-wrap">
-                {DIAS.map((d) => (
-                  <button key={d} onClick={() => setDia(d)} className={`text-[0.72rem] px-2.5 py-1 rounded-full border ${dia === d ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/20 text-creme-2/60 hover:border-ambar'}`}>{d}</button>
-                ))}
-              </div>
-            </div>
-          )}
+          <div>
+            <button onClick={() => setMotion((m) => !m)} className={`text-[0.72rem] px-3 py-1.5 rounded-lg border ${motion ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/25 text-creme-2/70 hover:border-ambar'}`}>{motion ? '⏸ parar motion' : '▶ ver motion (typewriter)'}</button>
+            <span className="text-[0.62rem] opacity-45 ml-2">a frase escreve-se (typewriter) — é assim que vai animar no reel.</span>
+          </div>
 
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -117,7 +141,7 @@ export default function SeriesDiariaPreview() {
         {/* preview 9:16 */}
         <div className="order-1 lg:order-2">
           <div className="w-full max-w-[360px] mx-auto">
-            <SerieDiariaSlide serie={serie} frase={frase} dia={dia} bgUrl={bgUrl || undefined} paleta={paleta} />
+            <SerieDiariaSlide serie={serie} frase={frase} dia={dia} bgUrl={bgUrl || undefined} paleta={paleta} prog={prog} />
           </div>
           <p className="text-[0.62rem] opacity-45 text-center mt-2">9:16 · {SERIES[serie].nome}</p>
         </div>

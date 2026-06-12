@@ -40,6 +40,28 @@ function tamanhoFrase(t: string): number {
 
 const espacadoUpper = (s: string) => s.toUpperCase().split('').join(' ');
 
+// frase em TYPEWRITER: revela-se palavra a palavra em função de prog (0..1).
+// prog=1 => tudo visível (estático, p/ poster/feed). O render conduz prog frame
+// a frame e compõe sobre o vídeo de motion.
+function FraseTW({ texto, prog, size, color, maxW }: { texto: string; prog: number; size: number; color: string; maxW?: number }) {
+  const palavras = texto.trim().split(/\s+/).filter(Boolean);
+  const revelar = Math.min(1, prog / 0.85); // escreve até 85%, segura cheio no fim
+  const mostradas = revelar * palavras.length;
+  const ultimo = Math.min(palavras.length - 1, Math.floor(mostradas));
+  const escreve = prog < 1 && revelar < 1;
+  return (
+    <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: size, lineHeight: 1.42, color, margin: 0, maxWidth: maxW, marginLeft: maxW ? 'auto' : undefined, marginRight: maxW ? 'auto' : undefined, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>
+      {palavras.map((w, i) => {
+        let op = 0, dy = 12;
+        if (i < ultimo) { op = 1; dy = 0; }
+        else if (i === ultimo) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 12 * (1 - f); }
+        return <span key={i} style={{ display: 'inline-block', marginRight: '0.26em', opacity: op, transform: `translateY(${dy}px)` }}>{w}</span>;
+      })}
+      {escreve && <span style={{ display: 'inline-block', width: 4, height: '0.9em', background: color, opacity: 0.85, transform: 'translateY(0.1em)', marginLeft: '0.02em' }} />}
+    </p>
+  );
+}
+
 export function SerieDiariaSlide({
   serie,
   frase,
@@ -47,6 +69,7 @@ export function SerieDiariaSlide({
   bgUrl,
   paleta = 'carta-noturna',
   transparente = false,
+  prog = 1,
 }: {
   serie: SerieId;
   frase: string;
@@ -54,6 +77,7 @@ export function SerieDiariaSlide({
   bgUrl?: string;
   paleta?: PaletaId;
   transparente?: boolean;
+  prog?: number;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -113,9 +137,9 @@ export function SerieDiariaSlide({
               <span style={{ width: 5, height: 5, borderRadius: '50%', background: HL, opacity: 0.85 }} />
             </div>
             <div style={{ position: 'absolute', top: 507, left: 0, right: 0, transform: 'translateY(-50%)', textAlign: 'center', fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 29, letterSpacing: '12px', color: HL, opacity: 0.82, paddingLeft: '12px' }}>{espacadoUpper(dia || '')}</div>
-            {/* frase, centrada a y≈1014 */}
-            <div style={{ position: 'absolute', top: 1014, left: 130, right: 130, transform: 'translateY(-50%)', textAlign: 'center' }}>
-              <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: tamanhoFrase(frase), lineHeight: 1.42, color: CREME, margin: 0, textShadow: '0 2px 26px rgba(0,0,0,0.6)' }}>{frase}</p>
+            {/* frase, centrada a y≈1014, DENTRO do arco (x 220–860) e typewriter */}
+            <div style={{ position: 'absolute', top: 1014, left: 270, right: 270, transform: 'translateY(-50%)', textAlign: 'center' }}>
+              <FraseTW texto={frase} prog={prog} size={tamanhoFrase(frase)} color={CREME} />
             </div>
             {/* glifo + kicker do dia, por baixo da frase */}
             <div style={{ position: 'absolute', top: 1600, left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 18 }}>
@@ -132,7 +156,7 @@ export function SerieDiariaSlide({
               {cantoneira(true, true)}{cantoneira(true, false)}{cantoneira(false, true)}{cantoneira(false, false)}
               <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 46, padding: '90px 72px', textAlign: 'center' }}>
                 <span style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 56, letterSpacing: '0.02em', color: OURO }}>Sabias que…</span>
-                <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 60, lineHeight: 1.33, color: CREME, maxWidth: 700, margin: 0, textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}>{frase}</p>
+                <FraseTW texto={frase} prog={prog} size={60} color={CREME} maxW={700} />
                 <span style={{ fontFamily: FONT_SANS, fontWeight: 400, fontSize: 24, letterSpacing: '0.16em', color: OURO, opacity: 0.88 }}>{SIGNATURE}</span>
               </div>
             </div>
