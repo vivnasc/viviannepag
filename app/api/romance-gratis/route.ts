@@ -3,6 +3,8 @@ import { getSupabase } from '@/lib/supabase';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const RESEND_KEY = process.env.RESEND_API_KEY;
+// O padrão da casa (app/api/compra): cada evento da loja avisa a Vivianne.
+const VIVIANNE_EMAILS = ['ola@viviannedossantos.com'];
 
 // POST { email, locale?, website? }: o gate do romance-oferta (funil do Insta).
 // Regista a leitora na lista (source: romance-amparo) e devolve os links de
@@ -69,6 +71,31 @@ export async function POST(req: Request) {
       if (!resendRes.ok) console.error('romance-gratis resend', resendRes.status, await resendRes.text());
     } catch (e) {
       console.error('romance-gratis resend:', e);
+    }
+
+    // aviso para a Vivianne (padrão de app/api/compra)
+    for (const dest of VIVIANNE_EMAILS) {
+      try {
+        const avisoRes = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
+          body: JSON.stringify({
+            from: 'Vivianne dos Santos <noreply@viviannedossantos.com>',
+            to: dest,
+            subject: `Nova leitora no funil: ${email}`,
+            html: `
+<div style="font-family:sans-serif;padding:20px;color:#333">
+  <p><strong>As Mãos de Amparo</strong> · funil do romance</p>
+  <p>Email: <strong>${email}</strong></p>
+  <p>Locale: ${isEn ? 'en' : 'pt'} · ${jaExistia ? 'já estava na lista (reenvio dos links)' : 'novo na lista'}</p>
+  <p>Origem: romance-amparo · vê tudo em /admin/lista</p>
+</div>`,
+          }),
+        });
+        if (!avisoRes.ok) console.error('romance-gratis aviso-admin', avisoRes.status, await avisoRes.text());
+      } catch (e) {
+        console.error('romance-gratis aviso-admin:', e);
+      }
     }
   }
 
