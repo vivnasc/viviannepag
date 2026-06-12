@@ -201,6 +201,20 @@ export default function SeriesDiariaPage() {
     return () => clearInterval(id);
   }, [bulkBusy]);
 
+  // marca o motion atual como já usado (quarentena 90d) e liberta o dia
+  async function queimarMotion(slug: string) {
+    if (!confirm('Marcar o motion deste dia como já usado?\n\nEntra em quarentena 90 dias (não volta a ser escolhido) e o dia fica "falta motion" para gerares/carregares outro.')) return;
+    setDiaBusy(slug); setDiaMsg(null);
+    try {
+      const r = await fetch('/api/admin/series-diaria/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'queimar', slug }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detalhe ?? j.erro);
+      setProdDias((xs) => (xs ?? []).map((d) => d.slug === slug ? { ...d, motionUrl: null, motionFonte: null, videoUrl: null } : d));
+      setDiaMsg('🔁 motion em quarentena. Copia o prompt → gera no MJ → arrasta o novo aqui.');
+    } catch (e) { setDiaMsg('⚠ ' + String(e)); }
+    setDiaBusy(null);
+  }
+
   async function carregarMotion(slug: string, file: File) {
     setUploadSlug(slug);
     try {
@@ -407,6 +421,7 @@ export default function SeriesDiariaPage() {
                         <button onClick={() => mexerDia(sel.slug, 'regenerar')} disabled={diaBusy === sel.slug} className="flex-1 text-[0.66rem] px-2 py-1 rounded-lg border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-40">{diaBusy === sel.slug ? '⏳…' : '↻ outra frase'}</button>
                       </div>
                       <span className="text-[0.6rem] opacity-55">{sel.motionUrl ? (sel.motionFonte === 'pool' ? '♻ motion da pool' : '⬆ motion teu') : '⚠ sem motion'}</span>
+                      {sel.motionUrl && <button onClick={() => queimarMotion(sel.slug)} disabled={diaBusy === sel.slug} className="text-[0.64rem] px-2.5 py-1 rounded-lg border border-[#C97373]/40 text-[#C97373]/85 hover:bg-[#C97373]/10 disabled:opacity-30 text-left">{diaBusy === sel.slug ? '⏳…' : '🔁 já usei este motion (quarentena + trocar)'}</button>}
                       <button onClick={() => { navigator.clipboard.writeText(sel.mjPrompt); setCopiadoSlug(sel.slug); setTimeout(() => setCopiadoSlug(null), 1500); }} disabled={!sel.mjPrompt} className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-30 text-left">{copiadoSlug === sel.slug ? '✓ copiado — cola no MJ/Runway' : '⧉ copiar prompt (gerar motion novo)'}</button>
                       <label className="text-[0.66rem] px-2.5 py-1 rounded-lg border border-[#C9B6FA]/40 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 cursor-pointer text-center">
                         {uploadSlug === sel.slug ? 'a carregar…' : (sel.motionUrl ? '⬆ trocar motion' : '⬆ carregar motion')}

@@ -17,6 +17,23 @@ export async function POST(req: Request) {
   if (!slug) return NextResponse.json({ erro: 'falta slug' }, { status: 400 });
   const sb = getSupabaseAdmin();
 
+  // QUEIMAR: marca o motion ATUAL deste dia como já usado (entra em quarentena
+  // 90 dias) e LIBERTA o dia (volta a "falta motion") para gerar/carregar outro.
+  if (body.action === 'queimar') {
+    const { data: row, error: e1 } = await sb.from('carousel_collections').select('dias, theme').eq('slug', slug).single();
+    if (e1 || !row) return NextResponse.json({ erro: 'dia-nao-encontrado' }, { status: 404 });
+    const t = (row.theme ?? {}) as { formato?: string; motionPath?: string; agendadoEm?: string };
+    if (t.formato !== 'serie-diaria') return NextResponse.json({ erro: 'nao-e-serie' }, { status: 400 });
+    if (!t.motionPath) return NextResponse.json({ erro: 'este dia não tem motion para marcar' }, { status: 400 });
+    const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ motionUrl?: string | null; videoUrl?: string | null }>; videoUrl?: string | null }>;
+    if (dias[0]?.slides?.[0]) { dias[0].slides[0].motionUrl = null; dias[0].slides[0].videoUrl = null; }
+    if (dias[0]) dias[0].videoUrl = null;
+    const theme = { ...((row.theme as Record<string, unknown>) ?? {}), motionQueimado: t.motionPath, motionQueimadoEm: t.agendadoEm ?? new Date().toISOString().slice(0, 10), motionPath: null, motionNome: null, motionFonte: null };
+    const { error } = await sb.from('carousel_collections').update({ dias, theme }).eq('slug', slug);
+    if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  }
+
   if (body.action === 'sign') {
     const ext = ((body.ext || 'mp4').replace(/[^a-z0-9]/gi, '').toLowerCase()) || 'mp4';
     const path = `series-motions/${slug}-${Date.now()}.${ext}`;

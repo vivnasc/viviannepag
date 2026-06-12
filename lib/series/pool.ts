@@ -87,13 +87,17 @@ export async function usosDeMotions(): Promise<Record<string, UsoMotion>> {
   const sb = getSupabaseAdmin();
   const { data } = await sb.from('carousel_collections').select('theme').eq('theme->>formato', 'serie-diaria');
   const usos: Record<string, UsoMotion> = {};
-  for (const c of data ?? []) {
-    const t = (c.theme as { motionPath?: string; agendadoEm?: string } | null) ?? {};
-    if (!t.motionPath) continue;
-    const u = usos[t.motionPath] ?? { n: 0, ultimo: '' };
+  const marcar = (path: string | undefined | null, data: string | undefined) => {
+    if (!path) return;
+    const u = usos[path] ?? { n: 0, ultimo: '' };
     u.n += 1;
-    if ((t.agendadoEm ?? '') > u.ultimo) u.ultimo = t.agendadoEm ?? '';
-    usos[t.motionPath] = u;
+    if ((data ?? '') > u.ultimo) u.ultimo = data ?? '';
+    usos[path] = u;
+  };
+  for (const c of data ?? []) {
+    const t = (c.theme as { motionPath?: string; agendadoEm?: string; motionQueimado?: string; motionQueimadoEm?: string } | null) ?? {};
+    marcar(t.motionPath, t.agendadoEm);                              // motion ativo num dia
+    marcar(t.motionQueimado, t.motionQueimadoEm ?? t.agendadoEm);    // motion QUEIMADO (já usado, mantém quarentena)
   }
   return usos;
 }
