@@ -170,7 +170,7 @@ export default function TikTokPage() {
               <>
                 <div className="flex items-center gap-3">
                   {info.creator_avatar_url && avatarOk ? (
-                    <img src={info.creator_avatar_url} alt="" className="h-9 w-9 rounded-full object-cover" onError={() => setAvatarOk(false)} />
+                    <img src={`/api/admin/tiktok/avatar?u=${encodeURIComponent(info.creator_avatar_url)}`} alt="" className="h-9 w-9 rounded-full object-cover" onError={() => setAvatarOk(false)} />
                   ) : (
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-rose-600 text-sm font-medium text-white">
                       {(info.creator_nickname ?? 'V').slice(0, 1).toUpperCase()}
