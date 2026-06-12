@@ -92,6 +92,9 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
           {ESTANTES.map(estante => (
             <section key={estante.id} id={estante.id} className="scroll-mt-24">
               <div className="mb-6">
+                <p className="text-[0.64rem] tracking-[0.28em] uppercase text-salvia/70 mb-2">
+                  {isEn ? 'shelf' : 'estante'} {estante.romano} · {isEn ? estante.nomeEn : estante.nome}
+                </p>
                 <h2 className="font-serif italic font-light text-creme text-[1.45rem] leading-snug mb-2">
                   {isEn ? estante.perguntaEn : estante.pergunta}
                 </h2>
