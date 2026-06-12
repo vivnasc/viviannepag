@@ -17,9 +17,9 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 // Criar). Vês cada post (capa + legenda), aprovas, e publica-se sozinho à hora.
 // gerar ≠ publicar: NADA vai para o ar sem estar APROVADO.
 
-type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string };
+type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string; motionUrl?: string | null; videoUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -41,11 +41,17 @@ const isoLocal = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).pad
 
 const tipoChave = (it: Item) => (it.theme?.formato === 'reel' ? (it.theme?.subtipo ?? 'reel') : (it.theme?.formato ?? ''));
 const fmtDe = (it: Item): { emoji: string; label: string } => {
+  // séries diárias têm marca:'loja' (publicam na conta vivianne.dos.santos), mas
+  // NÃO são o produto 7 Véus — rótulo próprio por série.
+  if (it.theme?.formato === 'serie-diaria') return { emoji: '🎬', label: it.theme?.serie === 'vcsabia' ? 'VC Sabia' : it.theme?.serie === 'hojeemmim' ? 'Hoje em Mim' : 'Série diária' };
   if (contaDe(it.theme, it.slug) === 'loja') return { emoji: '🛍️', label: it.theme?.universo ? `7 Véus · ${it.theme.universo}` : 'Reel · 7 Véus' };
   return FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'post' };
 };
 const legendaDe = (it: Item) => { const d = it.dias?.[0]; return [d?.legenda?.trim(), (d?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n'); };
 const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00';
+// preview de VÍDEO (séries/reels): o MP4 renderizado, ou o motion ainda por
+// renderizar — para o cartão mostrar a 1.ª frame quando não há imagem de capa.
+const videoDe = (it: Item): string | null => { const d = it.dias?.[0]; const s = d?.slides?.[0]; return d?.videoUrl ?? s?.videoUrl ?? s?.motionUrl ?? null; };
 const SERIE_ASSINATURA = ['ninguem', 'sinais', 'pensador']; // capa-assinatura no 1.º slide
 const mundoDe = (it: Item): Mundo => it.dias?.[0]?.mundo ?? it.theme?.mundo ?? 'escola';
 function mediaPronta(it: Item): boolean {
@@ -225,10 +231,11 @@ export default function PublicarPage() {
   // ── componentes ──
   const Cartao = ({ it, compacto }: { it: Item; compacto?: boolean }) => {
     const m = fmtDe(it); const capa = capaDe(it); const e = estadoDe(it); const pronto = mediaPronta(it);
+    const vid = capa ? null : videoDe(it);
     return (
       <div onClick={() => setLegenda(it)} className="rounded-xl border border-ocre/15 bg-terra/15 overflow-hidden cursor-pointer hover:border-ambar/40 transition-colors" title="clica para ver o conteúdo">
         <div className="flex gap-3 p-2.5">
-          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
+          <div className="w-14 h-[4.5rem] shrink-0 rounded-lg overflow-hidden bg-black/30 grid place-items-center">{capa ? <img src={capa} alt="" className="w-full h-full object-cover" /> : vid ? <video src={`${vid}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="text-lg">{m.emoji}</span>}</div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
               <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span>
@@ -340,7 +347,7 @@ export default function PublicarPage() {
                       <button key={iso} onClick={() => { if (posts.length) { setLegenda(posts[0]); } }} className={`min-h-[4.5rem] rounded-lg border p-1 text-left ${iso === hojeIso ? 'border-ambar/50' : 'border-ocre/10'} ${noMes ? 'bg-black/15' : 'bg-transparent opacity-40'}`}>
                         <span className="text-[0.56rem] opacity-55">{d.getDate()}</span>
                         <div className="flex flex-wrap gap-0.5 mt-0.5">
-                          {posts.slice(0, 4).map((it) => { const c = capaDe(it); const e = estadoDe(it); return <span key={it.slug} className="w-4 h-5 rounded-sm overflow-hidden bg-black/40 ring-1" style={{ ['--tw-ring-color' as string]: COR[e].fg } as React.CSSProperties}>{c ? <img src={c} alt="" className="w-full h-full object-cover" /> : <span className="text-[0.5rem]">{fmtDe(it).emoji}</span>}</span>; })}
+                          {posts.slice(0, 4).map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return <span key={it.slug} className="w-4 h-5 rounded-sm overflow-hidden bg-black/40 ring-1" style={{ ['--tw-ring-color' as string]: COR[e].fg } as React.CSSProperties}>{c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <video src={`${v}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="text-[0.5rem]">{fmtDe(it).emoji}</span>}</span>; })}
                           {posts.length > 4 && <span className="text-[0.5rem] opacity-50">+{posts.length - 4}</span>}
                         </div>
                       </button>
@@ -360,9 +367,9 @@ export default function PublicarPage() {
                 <p className="text-[0.72rem] opacity-55 mb-3">Como o teu feed vai ficar (próximos posts, dos mais recentes ao topo). As capas conversam entre si?</p>
                 {ord.length === 0 ? <p className="text-[0.8rem] opacity-50 py-8 text-center">Sem posts por publicar.</p> : (
                   <div className="grid grid-cols-3 gap-1 max-w-md">
-                    {ord.map((it) => { const c = capaDe(it); const e = estadoDe(it); return (
+                    {ord.map((it) => { const c = capaDe(it); const v = c ? null : videoDe(it); const e = estadoDe(it); return (
                       <button key={it.slug} onClick={() => setLegenda(it)} className="relative aspect-[4/5] bg-black/30 overflow-hidden">
-                        {c ? <img src={c} alt="" className="w-full h-full object-cover" /> : <span className="grid place-items-center w-full h-full text-xl">{fmtDe(it).emoji}</span>}
+                        {c ? <img src={c} alt="" className="w-full h-full object-cover" /> : v ? <video src={`${v}#t=0.1`} muted playsInline preload="metadata" className="w-full h-full object-cover" /> : <span className="grid place-items-center w-full h-full text-xl">{fmtDe(it).emoji}</span>}
                         <span className="absolute top-1 right-1 w-2 h-2 rounded-full" style={{ background: COR[e].fg }} />
                       </button>
                     ); })}
