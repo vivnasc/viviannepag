@@ -31,6 +31,10 @@ export const ROMANCE_CAPA_ESTILOS: Record<string, { nome: string; prompt: string
     nome: 'Gouache / storybook',
     prompt: 'distinctive editorial illustration, soft gouache painting with visible brush texture and paper grain, hand-painted organic shapes, storybook-for-adults feel',
   },
+  vintage: {
+    nome: 'Vintage desgastado',
+    prompt: 'vintage literary book jacket illustration, aged textured paper with worn edges and subtle patina, weathered print grain and faded inks, mid-century illustrated cover feel, muted earthy colours, nostalgic, adult and collectible',
+  },
 };
 export const ROMANCE_CAPA_ESTILO_DEFAULT = 'aguarela';
 export const ROMANCE_CAPA_PALETA =
