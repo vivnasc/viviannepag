@@ -1,24 +1,18 @@
 import { NextResponse } from 'next/server';
-import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { getProdutoPdfBuffer } from '@/lib/produto-pdf';
 
 export const runtime = 'nodejs';
 
-const BUCKET = 'escritos';
-
-// GET · o download do pilar SAI SEMPRE pelo domínio da casa
-// (viviannedossantos.com/api/livro-pilar-download). Por trás, um URL assinado
-// de 60 segundos no bucket privado.
-export async function GET() {
-  const path = 'livro-pilar/os-7-veus/livro-pt.pdf';
-  const nome = 'Os Sete Veus - Vivianne dos Santos.pdf';
-
-  const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase.storage
-    .from(BUCKET)
-    .createSignedUrl(path, 60, { download: nome });
-
-  if (error || !data?.signedUrl) {
-    return NextResponse.json({ erro: error?.message ?? 'sem-ficheiro' }, { status: 404 });
-  }
-  return NextResponse.redirect(data.signedUrl, 302);
+// GET ?email= · download do PDF do pilar (Os Sete Véus), pelo mesmo caminho dos
+// produtos da loja (produtos/os-7-veus.pdf no bucket). Marca a licença se vier email.
+export async function GET(req: Request) {
+  const email = new URL(req.url).searchParams.get('email') ?? undefined;
+  const res = await getProdutoPdfBuffer('os-7-veus', 'pt', email);
+  if (!res) return NextResponse.json({ erro: 'sem-ficheiro' }, { status: 404 });
+  return new NextResponse(res.buffer as unknown as BodyInit, {
+    headers: {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename="Os Sete Veus - Vivianne dos Santos.pdf"',
+    },
+  });
 }
