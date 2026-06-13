@@ -20,6 +20,49 @@ const nf = (n?: number) => (n == null ? '—' : new Intl.NumberFormat('pt-PT').f
 const FORMATO_PT: Record<string, string> = { REELS: 'Reels', CAROUSEL_ALBUM: 'Carrossel', VIDEO: 'Vídeo', IMAGE: 'Imagem', FEED: 'Imagem' };
 const fmt = (f: string) => FORMATO_PT[f] ?? f;
 const emojiFormato = (f: string) => (f === 'REELS' || f === 'VIDEO' ? '🎬' : f === 'CAROUSEL_ALBUM' ? '🖼️' : '📷');
+const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+
+// "Caminho a seguir": lê os dados das 2 contas e devolve recomendações concretas.
+function caminhoASeguir(a: Analytics | null, b: Analytics | null): string[] {
+  const recs: string[] = [];
+  const nome = (d: Analytics | null) => (d?.username ? `@${d.username}` : '—');
+
+  // melhor formato de cada conta (Reels vs resto)
+  for (const d of [a, b]) {
+    if (!d?.ok || !d.resumo) continue;
+    const reels = d.resumo.porFormato.find((f) => f.formato === 'REELS' && f.mediaAlcance > 0);
+    const outros = d.resumo.porFormato.filter((f) => f.formato !== 'REELS' && f.mediaAlcance > 0);
+    const mo = avg(outros.map((o) => o.mediaAlcance));
+    if (reels && mo > 0 && reels.mediaAlcance > mo * 1.3) {
+      recs.push(`${nome(d)}: os Reels alcançam ~${(reels.mediaAlcance / mo).toFixed(1)}× mais que os outros formatos — aposta mais em Reels.`);
+    }
+  }
+
+  // quem engaja mais (taxa de interação)
+  const ta = a?.resumo?.taxaInteracao, tb = b?.resumo?.taxaInteracao;
+  if (ta != null && tb != null && Math.abs(ta - tb) >= 0.3) {
+    const aMaior = ta > tb;
+    recs.push(`${nome(aMaior ? a : b)} tem maior taxa de interação (${aMaior ? ta : tb}% vs ${aMaior ? tb : ta}%) — o conteúdo ressoa mais. Vê o que resulta aí e leva esse tom para ${nome(aMaior ? b : a)}.`);
+  }
+
+  // poucos posts → consistência
+  for (const d of [a, b]) {
+    if (d?.ok && (d.posts?.length ?? 0) > 0 && d.posts.length < 6) {
+      recs.push(`${nome(d)} tem poucos posts recentes — a consistência ajuda o alcance. Mantém um ritmo regular.`);
+    }
+  }
+
+  // melhor post como referência
+  for (const d of [a, b]) {
+    if (!d?.ok || !d.posts?.length) continue;
+    const top = [...d.posts].sort((x, y) => (y.alcance ?? -1) - (x.alcance ?? -1))[0];
+    if (top?.alcance && top.caption) {
+      recs.push(`${nome(d)}: o que mais alcançou foi "${top.caption.slice(0, 60)}…" (${nf(top.alcance)} de alcance). Faz mais no mesmo registo.`);
+    }
+  }
+
+  return recs.slice(0, 5);
+}
 
 export default function AnalyticsPage() {
   const [contas, setContas] = useState<Conta[]>([]);
@@ -80,6 +123,20 @@ export default function AnalyticsPage() {
         <LinhaComp label="Taxa de interação" a={dataA?.resumo?.taxaInteracao} b={dataB?.resumo?.taxaInteracao} sufixo="%" />
         <LinhaTexto label="Melhor formato" a={dataA?.resumo?.melhorFormato ? fmt(dataA.resumo.melhorFormato) : '—'} b={dataB?.resumo?.melhorFormato ? fmt(dataB.resumo.melhorFormato) : '—'} />
       </div>
+
+      {/* caminho a seguir */}
+      {(() => {
+        const recs = caminhoASeguir(dataA, dataB);
+        if (!recs.length) return null;
+        return (
+          <div className="mt-6 rounded-2xl border border-amber-700/40 bg-amber-950/20 p-5">
+            <div className="text-sm font-semibold text-amber-300">🧭 Caminho a seguir</div>
+            <ul className="mt-3 space-y-2 text-sm text-stone-200">
+              {recs.map((r, i) => <li key={i} className="flex gap-2"><span className="text-amber-400">→</span><span>{r}</span></li>)}
+            </ul>
+          </div>
+        );
+      })()}
 
       {/* colunas detalhadas */}
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
