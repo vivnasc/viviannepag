@@ -10,7 +10,9 @@ export const maxDuration = 300;
 // 3:4, estética do véu, SEM texto na imagem) e guarda em
 // livro-pilar/os-7-veus/capa-<ts>.jpg.
 
-const SAFETY = 'NO text, NO words, NO letters, NO logos, NO watermarks, NO captions';
+const SAFETY =
+  'NO text, NO words, NO letters, NO logos, NO watermarks, NO captions, ' +
+  'NO people, NO person, NO face, NO faces, NO human figure, NO body, NO portrait, NO hands';
 
 type Prediction = {
   id: string;
