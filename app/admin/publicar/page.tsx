@@ -52,6 +52,10 @@ const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00
 // preview de VÍDEO (séries/reels): o MP4 renderizado, ou o motion ainda por
 // renderizar — para o cartão mostrar a 1.ª frame quando não há imagem de capa.
 const videoDe = (it: Item): string | null => { const d = it.dias?.[0]; const s = d?.slides?.[0]; return d?.videoUrl ?? s?.videoUrl ?? s?.motionUrl ?? null; };
+// chave/rótulo de formato para o filtro do export (levar só uma parte: VC Sabia,
+// Hoje em Mim, Carrosséis 7 Véus…). Igual à lógica do route do CSV.
+const chaveFmt = (it: Item): string => it.theme?.formato === 'serie-diaria' ? (it.theme?.serie || 'serie') : (contaDe(it.theme, it.slug) === 'loja' ? 'veus' : tipoChave(it));
+const rotuloFmt = (k: string): string => k === 'vcsabia' ? 'VC Sabia' : k === 'hojeemmim' ? 'Hoje em Mim' : k === 'veus' ? 'Carrosséis 7 Véus' : k === 'serie' ? 'Série diária' : (FMT[k]?.label ?? k);
 // thumbnail de vídeo FIÁVEL: preload=metadata + seek a 0.1s no onLoadedMetadata
 // força o browser (Edge/Chrome) a decodificar e PINTAR a 1.ª frame — o truque
 // só com "#t=0.1" no src não pinta de forma consistente.
@@ -107,6 +111,7 @@ export default function PublicarPage() {
   const [pickerLoja, setPickerLoja] = useState(false); // seletor de semana da Loja a colocar
   const [exportar, setExportar] = useState(false); // painel de exportar CSV (Metricool)
   const [expDe, setExpDe] = useState(''); const [expAte, setExpAte] = useState('');
+  const [expFmt, setExpFmt] = useState('tudo'); // filtro de formato no export (tudo | vcsabia | hojeemmim | veus | …)
   const [expPlat, setExpPlat] = useState<'tiktok' | 'instagram' | 'ambas'>('tiktok');
 
   const carregar = useCallback(async () => {
@@ -231,11 +236,15 @@ export default function PublicarPage() {
   // agendar em massa (sobretudo TikTok, que não publica sozinho daqui).
   const itensConexpo = itensConta.filter((it) => {
     const d = it.theme?.agendadoEm; if (!d || !mediaPronta(it)) return false;
+    if (expFmt !== 'tudo' && chaveFmt(it) !== expFmt) return false;
     return (!expDe || d >= expDe) && (!expAte || d <= expAte);
   });
+  // formatos disponíveis nesta conta (só os que têm média pronta) → opções do filtro
+  const fmtsExport = Array.from(new Set(itensConta.filter(mediaPronta).map(chaveFmt)));
   function exportarCSV() {
     if (!itensConexpo.length) { setMsg('Nenhum post com média pronta no intervalo escolhido (renderiza/prepara primeiro).'); return; }
     const qs = new URLSearchParams({ conta, plataforma: expPlat });
+    if (expFmt !== 'tudo') qs.set('formato', expFmt);
     if (expDe) qs.set('de', expDe);
     if (expAte) qs.set('ate', expAte);
     window.location.href = `/api/admin/publicar/exportar-csv?${qs.toString()}`;
@@ -312,7 +321,7 @@ export default function PublicarPage() {
             <label className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-salvia/40 bg-salvia/10 text-salvia hover:bg-salvia/20 cursor-pointer" title={`importa um CSV do Metricool para ${conta}`}>⬆ importar CSV
               <input type="file" accept=".csv,text/csv" hidden onChange={(e) => { importarCSV(e.target.files?.[0]); e.currentTarget.value = ''; }} />
             </label>
-            <button onClick={() => setExportar(true)} title={`exporta os posts de ${nomeConta(conta)} num intervalo de datas como CSV do Metricool (TikTok)`} className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20">⬇ exportar CSV</button>
+            <button onClick={() => { setExpFmt('tudo'); setExportar(true); }} title={`exporta os posts de ${nomeConta(conta)} num intervalo de datas como CSV do Metricool (TikTok)`} className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20">⬇ exportar CSV</button>
             <button onClick={limparAgendamentos} disabled={busy === 'limpar'} title={`tira do calendário TODOS os agendamentos desta conta (não apaga os posts) — para trocar o conteúdo`} className="text-[0.7rem] px-3 py-1.5 rounded-lg border border-[#C97373]/45 bg-[#C97373]/10 text-[#C97373] hover:bg-[#C97373]/20 disabled:opacity-40">{busy === 'limpar' ? 'a limpar…' : '🧹 limpar agendamentos'}</button>
             {vista === 'semana' && (
               <div className="ml-auto flex items-center gap-2">
@@ -409,7 +418,18 @@ export default function PublicarPage() {
                 <button key={k} onClick={() => setExpPlat(k)} className={`px-3 py-1.5 ${expPlat === k ? 'bg-ambar/15 text-ambar' : 'text-creme-2/60 hover:text-creme-2'}`}>{lbl}</button>
               ))}
             </div>
-            <p className="text-[0.66rem] opacity-55 mb-3">{itensConexpo.length} post(s) prontos no intervalo{expDe || expAte ? ` (${expDe || '…'} → ${expAte || '…'})` : ' (todas as datas)'}.</p>
+            {/* FORMATO: levar só uma parte (ex.: só VC Sabia, ou só carrosséis) */}
+            {fmtsExport.length > 1 && (
+              <div className="mb-3">
+                <p className="text-[0.62rem] opacity-55 mb-1">Formato (leva só uma parte):</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {['tudo', ...fmtsExport].map((k) => (
+                    <button key={k} onClick={() => setExpFmt(k)} className={`text-[0.68rem] px-2.5 py-1 rounded-full border ${expFmt === k ? 'border-ambar bg-ambar/15 text-ambar' : 'border-ocre/25 text-creme-2/60 hover:text-creme-2 hover:border-ambar/40'}`}>{k === 'tudo' ? 'Tudo' : rotuloFmt(k)}</button>
+                  ))}
+                </div>
+              </div>
+            )}
+            <p className="text-[0.66rem] opacity-55 mb-3">{itensConexpo.length} post(s) prontos{expFmt !== 'tudo' ? ` · ${rotuloFmt(expFmt)}` : ''}{expDe || expAte ? ` (${expDe || '…'} → ${expAte || '…'})` : ' (todas as datas)'}.</p>
             <div className="flex items-center gap-2">
               <button onClick={exportarCSV} className="text-[0.76rem] px-3.5 py-1.5 rounded-lg border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">⬇ descarregar CSV</button>
               <button onClick={() => setExportar(false)} className="text-[0.7rem] opacity-60 hover:opacity-100">fechar ✕</button>

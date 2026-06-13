@@ -1594,6 +1594,10 @@ export default function EstudioPage() {
     d.setDate(d.getDate() + 1);
     return d.toISOString().split('T')[0];
   });
+  // PERÍODO opcional do export (de/até): vazio = os 30 dias todos. Permite
+  // empacotar só uma fatia (ex.: 15 a 30 jun) para o Metricool.
+  const [expDe, setExpDe] = useState('');
+  const [expAte, setExpAte] = useState('');
 
   // Fetch renders + agrupa por dia/tipo. Partilhado entre os botoes de CSV.
   async function fetchRendersAgrupados() {
@@ -1647,8 +1651,8 @@ export default function EstudioPage() {
 
   async function exportarCSV(apenas?: 'tiktok' | 'instagram') {
     const { imagensPorDia, imagensJpgPorDia, videosReelsPorDia } = await fetchRendersAgrupados();
-    const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia, videosReelsPorDia, imagensJpgPorDia, apenas);
-    const sufixo = apenas ? `-${apenas}` : '';
+    const csv = gerarMetricoolCSV(CALENDARIO_30_DIAS, startDate, imagensPorDia, videosReelsPorDia, imagensJpgPorDia, apenas, expDe || undefined, expAte || undefined);
+    const sufixo = `${apenas ? `-${apenas}` : ''}${expDe || expAte ? `-${expDe || 'ini'}_a_${expAte || 'fim'}` : ''}`;
     downloadFile('﻿' + csv, `metricool-30dias${sufixo}-${startDate}.csv`, 'text/csv;charset=utf-8');
   }
 
@@ -1973,6 +1977,14 @@ export default function EstudioPage() {
             onChange={e => setStartDate(e.target.value)}
             className="bg-transparent border border-ocre/30 rounded-[8px] px-2 py-1 text-[0.72rem] text-creme outline-none focus:border-ambar"
           />
+        </div>
+        {/* PERÍODO opcional: empacotar só uma fatia (ex.: 15 a 30 jun). Vazio = 30 dias todos. */}
+        <div className="flex items-center gap-2">
+          <label className="text-[0.68rem] text-creme-2/50">Só de:</label>
+          <input type="date" value={expDe} onChange={e => setExpDe(e.target.value)} className="bg-transparent border border-ocre/30 rounded-[8px] px-2 py-1 text-[0.72rem] text-creme outline-none focus:border-ambar" />
+          <label className="text-[0.68rem] text-creme-2/50">até:</label>
+          <input type="date" value={expAte} onChange={e => setExpAte(e.target.value)} className="bg-transparent border border-ocre/30 rounded-[8px] px-2 py-1 text-[0.72rem] text-creme outline-none focus:border-ambar" />
+          {(expDe || expAte) && <button onClick={() => { setExpDe(''); setExpAte(''); }} className="text-[0.62rem] text-creme-2/40 hover:text-ambar" title="limpar período (volta aos 30 dias)">✕</button>}
         </div>
         <button
           onClick={() => exportarCSV()}

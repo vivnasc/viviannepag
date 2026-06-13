@@ -12,8 +12,16 @@ export const runtime = 'nodejs';
 // sozinho daqui). Só posts com média pronta (vídeo ou imagens). Datas/horas LOCAIS.
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string | null; imagens?: string[] };
-type Theme = { marca?: string; universo?: string; curso?: string; agendadoEm?: string | null; hora?: string | null };
+type Theme = { marca?: string; universo?: string; curso?: string; serie?: string; formato?: string; subtipo?: string; agendadoEm?: string | null; hora?: string | null };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
+
+// chave de formato para o filtro do export (igual à do frontend): séries pela
+// série (vcsabia/hojeemmim), produto da loja = 'veus', resto pelo formato/subtipo.
+function chaveFmt(theme: Theme, slug: string): string {
+  if (theme?.formato === 'serie-diaria') return theme?.serie || 'serie';
+  if (contaDe(theme, slug) === 'loja') return 'veus';
+  return theme?.formato === 'reel' ? (theme?.subtipo || 'reel') : (theme?.formato || '');
+}
 
 export async function GET(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
@@ -21,6 +29,7 @@ export async function GET(req: NextRequest) {
   const conta = (sp.get('conta') || 'veuaveu') as ContaId;
   const de = (sp.get('de') || '').trim();
   const ate = (sp.get('ate') || '').trim();
+  const formato = (sp.get('formato') || '').trim(); // '' ou 'tudo' = todos
   const p = sp.get('plataforma');
   const plataforma: 'tiktok' | 'instagram' | 'ambas' =
     p === 'instagram' ? 'instagram' : p === 'ambas' ? 'ambas' : 'tiktok';
@@ -31,6 +40,7 @@ export async function GET(req: NextRequest) {
 
   const dias: PublicarCsvDia[] = ((data ?? []) as Row[])
     .filter((it) => contaDe(it.theme, it.slug) === conta)
+    .filter((it) => !formato || formato === 'tudo' || chaveFmt(it.theme, it.slug) === formato)
     .map((it) => {
       const d0 = Array.isArray(it.dias) ? it.dias[0] : undefined;
       const date = it.theme?.agendadoEm ?? '';
