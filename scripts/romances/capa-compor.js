@@ -1,5 +1,6 @@
 // Compõe a capa final do romance: imagem escolhida (Replicate) + tipografia da casa.
-// Uso: node capa-compor.js <capa-src.jpg> <pt|en> <out.png>
+// Uso: node capa-compor.js <capa-src.jpg> <pt|en> <out.png> [livro]
+//   livro: amparo (predefinido) | irma
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
@@ -7,6 +8,7 @@ const puppeteer = require('puppeteer');
 const SRC = process.argv[2];
 const LANG = process.argv[3] || 'pt';
 const OUT = process.argv[4];
+const LIVRO = process.argv[5] || 'amparo';
 
 function fontFace(fam, w, st, file) {
   const dir = fam === 'Fraunces' ? 'fraunces' : 'outfit';
@@ -21,17 +23,17 @@ const FONTS = [
   ['Outfit', 500, 'normal', 'outfit-latin-500-normal'],
 ].map(a => fontFace(...a)).join('\n');
 
-const T = LANG === 'pt' ? {
-  serie: 'BIBLIOTECA DE VÉSPERA · I',
-  t1: 'As Mãos', t2: 'de Amparo',
-  sub: 'romance',
-  autora: 'VIVIANNE DOS SANTOS',
-} : {
-  serie: 'THE VÉSPERA LIBRARY · I',
-  t1: "Amparo's", t2: 'Hands',
-  sub: 'a novel',
-  autora: 'VIVIANNE DOS SANTOS',
+const TEXTOS = {
+  amparo: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · I', t1: 'As Mãos', t2: 'de Amparo', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · I', t1: "Amparo's", t2: 'Hands', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  irma: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · II', t1: 'O Nome', t2: 'da Irmã', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · II', t1: "The Sister's", t2: 'Name', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
 };
+const T = (TEXTOS[LIVRO] || TEXTOS.amparo)[LANG === 'en' ? 'en' : 'pt'];
 
 const imgB64 = fs.readFileSync(SRC).toString('base64');
 
