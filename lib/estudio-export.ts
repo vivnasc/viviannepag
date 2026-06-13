@@ -270,6 +270,8 @@ export function gerarMetricoolCSV(
   videosReelsPorDia?: Map<number, string>,
   imagensJpgPorDia?: Map<number, string[]>,
   apenas?: 'tiktok' | 'instagram',
+  de?: string,
+  ate?: string,
 ): string {
   const lines: string[] = [CSV_HEADER.join(',')];
   const start = new Date(startDate + 'T00:00:00');
@@ -298,6 +300,9 @@ export function gerarMetricoolCSV(
     // Formata a partir dos componentes LOCAIS (nao toISOString, que converte
     // para UTC e em Portugal/UTC+1 recuava a data um dia para domingo).
     const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; // YYYY-MM-DD
+    // PERÍODO: exporta só os dias cuja data cai no intervalo escolhido (de/até),
+    // inclusivo. Vazio = todos os 30 dias.
+    if ((de && dateStr < de) || (ate && dateStr > ate)) continue;
     const timeStr = c.horario.length === 5 ? `${c.horario}:00` : c.horario; // HH:MM:SS
 
     const podeTerMusica = ehCitacao;
@@ -429,40 +434,45 @@ export function gerarMetricoolCSV(
           const altKey = `Alt text picture ${i + 1}`;
           if (pictureCols[altKey]) pictureColsTT[altKey] = pictureCols[altKey];
         });
-      } else {
-        // Fallback: usa as URLs PNG (TikTok vai rejeitar se nao tiver JPG ainda)
-        Object.assign(pictureColsTT, pictureCols);
       }
-
-      lines.push(buildRow({
-        ...pictureColsTT,
-        'Text': captionTT,
-        'Date': dateStr,
-        'Time': timeStr,
-        'Draft': draft,
-        'Facebook': 'FALSE',
-        'Twitter/X': 'FALSE',
-        'LinkedIn': 'FALSE',
-        'GBP': 'FALSE',
-        'Instagram': 'FALSE',
-        'Pinterest': 'FALSE',
-        'TikTok': 'TRUE',
-        'Youtube': 'FALSE',
-        'Threads': 'FALSE',
-        'Bluesky': 'FALSE',
-        'TikTok disable comments': 'FALSE',
-        'TikTok disable duet': 'FALSE',
-        'TikTok disable stitch': 'FALSE',
-        'TikTok Post Privacy': 'PUBLIC_TO_EVERYONE',
-        'TikTok Branded Content': 'FALSE',
-        'TikTok Your Brand': 'FALSE',
-        'TikTok Auto Add Music': podeTerMusica ? 'TRUE' : 'FALSE',
-        'TikTok is AI generated content': 'FALSE',
-      }));
+      // TikTok REJEITA PNG: se não há vídeo nem JPG, NÃO se emite a linha do
+      // TikTok (antes mandava PNG e o post falhava no TikTok). Melhor faltar do
+      // que falhar — o resto das plataformas desse dia sai na mesma.
+      if (pictureColsTT['Picture Url 1']) {
+        lines.push(buildRow({
+          ...pictureColsTT,
+          'Text': captionTT,
+          'Date': dateStr,
+          'Time': timeStr,
+          'Draft': draft,
+          'Facebook': 'FALSE',
+          'Twitter/X': 'FALSE',
+          'LinkedIn': 'FALSE',
+          'GBP': 'FALSE',
+          'Instagram': 'FALSE',
+          'Pinterest': 'FALSE',
+          'TikTok': 'TRUE',
+          'Youtube': 'FALSE',
+          'Threads': 'FALSE',
+          'Bluesky': 'FALSE',
+          'TikTok disable comments': 'FALSE',
+          'TikTok disable duet': 'FALSE',
+          'TikTok disable stitch': 'FALSE',
+          'TikTok Post Privacy': 'PUBLIC_TO_EVERYONE',
+          'TikTok Branded Content': 'FALSE',
+          'TikTok Your Brand': 'FALSE',
+          'TikTok Auto Add Music': podeTerMusica ? 'TRUE' : 'FALSE',
+          'TikTok is AI generated content': 'FALSE',
+        }));
+      }
     }
   }
 
-  return lines.join('\r\n');
+  // dedupe defensivo: tira linhas EXATAMENTE iguais (mesma plataforma+data+hora+
+  // média+texto), caso a fonte gere repetidos. Não toca em linhas distintas.
+  const header = lines[0];
+  const corpo = Array.from(new Set(lines.slice(1)));
+  return [header, ...corpo].join('\r\n');
 }
 
 // ── CSV Metricool a partir da PUBLICAR (qualquer conta) ──
