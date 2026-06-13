@@ -7,6 +7,14 @@
 
 ---
 
+### Dedicatória
+
+Para Nana.
+
+Houve um tempo em que certas partes de mim repousaram, não por esquecimento, mas porque o caminho pedia silêncio. A menina que fui, com nome de colo e semente de presença, ficou guardada nalgum lugar entre os gestos e os dias. Hoje, não te busco: reconheço-te. És o sopro antigo que volta a mover-se em mim, não como regresso, mas como continuidade do que sempre quis. E escrevo para lembrar que somos sempre mais do que aquilo que o mundo nos ensinou a ser.
+
+---
+
 Há uma pergunta que me acompanha há anos, e começou em mim. Porque é que alguém lúcido, que vê com clareza o que lhe faz mal, volta a fazê-lo? Não uma vez, vezes sem conta. O mesmo tipo de amor que já se sabe de cor. A mesma exaustão de quem dá até não ter. A mesma forma de se apagar para caber no espaço que sobra. A pessoa percebe, jura que da próxima é diferente, e da próxima volta a acontecer, com outra cara e a mesma raiz.
 
 Durante muito tempo chamei a isto fraqueza. Falta de carácter, falta de constância, falta de querer o suficiente. Olhava para os meus próprios ciclos e concluía que, se fosse mais forte, mais disciplinada, mais consciente, deixaria de tropeçar na mesma pedra. Cheguei a colecionar livros, frases, decisões tomadas à meia-noite com toda a certeza do mundo. E mesmo assim repetia. Foi aí que percebi que estava a olhar para o lugar errado. O problema não era eu não ver. Era eu ver e, ainda assim, não conseguir.
@@ -50,6 +58,26 @@ Sobre o tempo, e sobre as recaídas, porque vais ter, e não quero que te apanhe
 E uma nota sobre como ler isto, porque a forma como leres também faz parte. Não leias com pressa, de uma assentada, para chegar ao fim. Este não é um livro para terminar, é um livro para habitar. Lê um véu de cada vez, e depois fecha-o e deixa-o trabalhar em ti uns dias. Repara onde, na tua vida concreta, aquele padrão aparece. Faz a prática, mesmo que te pareça pequena de mais, porque é justamente o corpo, e não a cabeça, que precisa de aprender o que aqui se diz. Se puderes, escreve, num caderno só teu, o que cada véu mexer. Não para o resolveres, para o veres. E volta. Volta a este livro daqui a uns meses e relê o mesmo véu, e vais encontrá-lo diferente, porque tu estarás diferente. Os livros que importam não se leem uma vez. Acompanham-nos, e dizem-nos coisas novas a cada idade da alma.
 
 ---
+
+## Por onde começar
+
+Os sete véus aparecem aqui por uma ordem, mas a tua vida não os vive por ordem nenhuma. Em cada fase, há um que está mais espesso, mais ativo, a puxar os cordelinhos com mais força. Começar por esse, o que mais te aperta agora, costuma ser mais fértil do que seguir a numeração. Por isso, antes de avançares, deixa-me ajudar-te a encontrá-lo, com algumas perguntas simples. Lê devagar e repara em qual delas te faz dizer, por dentro, "esta sou eu".
+
+Se o que mais te pesa é não saberes quem és fora dos teus papéis, se te agarras a uma imagem de ti com medo de a perder, se mudar te parece trair-te, o teu véu de agora é provavelmente o primeiro, **a Permanência**.
+
+Se vives presa à tua história, se "sou assim desde sempre" é a tua frase, se o passado escolhe por ti antes de tu escolheres, começa pelo segundo, **a Memória**.
+
+Se a tua cabeça não para, se a ansiedade e a ruminação te governam, se sentes que és as tuas emoções em vez de as teres, o teu véu é o terceiro, **o Turbilhão**.
+
+Se te esgotas a cuidar de todos, se o descanso te dá culpa, se aprendeste que o amor se ganha a fazer, vai direta ao quarto, **o Esforço**. É, talvez, o mais comum entre nós.
+
+Se foges do silêncio e da solidão, se enches a vida para não sentir o vazio, se estar só te parece perigo, o teu véu é o quinto, **a Desolação**.
+
+Se vives sempre à espera de um "quando", se adias a vida para um depois que nunca chega, se nenhuma conquista te traz paz por muito tempo, começa pelo sexto, **o Horizonte**.
+
+E se, por baixo de tudo, sentes uma separação e uma solidão de fundo que nenhuma companhia cura, se o mundo te parece sempre do outro lado de um vidro, o teu véu mais fundo é o sétimo, **a Dualidade**, e talvez te faça sentido lê-lo no fim, porque é o que os sustenta a todos.
+
+Reconheceste-te em mais do que um? É natural, os véus entrelaçam-se, e tirar um costuma afrouxar os outros. Não te preocupes em escolher certo. Escolhe o que te chamou, lê esse véu, e deixa-o trabalhar. O livro fica à tua espera para os outros, no tempo que for o teu. Não há ordem errada para regressar a casa.
 
 ## Véu 1 · A Permanência
 
@@ -281,6 +309,18 @@ A prática é a mais simples e talvez a mais funda. Ao ar livre, se puderes, esc
 
 ---
 
+## Quando os véus se cruzam
+
+Apresentei-te os sete véus um a um, para os poderes ver com nitidez. Mas na vida real eles raramente aparecem sozinhos. Entrelaçam-se, dão as mãos, reforçam-se uns aos outros, e é por isso que às vezes te sentes presa numa teia e não num só fio. Vale a pena ver alguns destes cruzamentos, porque reconhecê-los poupa-te muito sofrimento e muita confusão.
+
+Repara como o esforço e a desolação costumam andar de mãos dadas. Esforças-te até à exaustão, enches a vida de fazer e de cuidar, e uma das razões, a mais escondida, é não teres de parar e enfrentar o vazio. O esforço é, muitas vezes, a fuga mais socialmente aplaudida da desolação. Por isso, quando finalmente paras, a angústia que evitavas sobe toda de uma vez, e tu corres a arranjar mais o que fazer. Vês o ciclo? Um véu a alimentar o outro.
+
+Ou repara no horizonte e na permanência. Vives sempre projetada num "quando serei finalmente feliz", e ao mesmo tempo agarrada a uma identidade que já não te serve, e os dois juntos roubam-te o presente por completo: um, atirando-te para o futuro; o outro, prendendo-te ao que já foste. Ou no turbilhão e na memória, em que a cabeça que não para anda quase sempre a remoer o passado ou a ensaiar um futuro à imagem desse passado, raramente no agora.
+
+E há o véu que vive por baixo de todos, a dualidade, a sensação de separação. Já te disse, e repito-o aqui porque é a chave: foi a separação que te fez agarrar à identidade, prender-te à história, encher o vazio, correr para o horizonte, esforçar-te para seres amada. Quando trabalhas qualquer um dos outros seis com profundidade suficiente, mais cedo ou mais tarde chegas a este, porque é a raiz comum. E quando este afrouxa, todos os outros perdem força ao mesmo tempo, como folhas de um ramo que finalmente se solta.
+
+O que quero que leves daqui é simples e libertador: não tens de resolver tudo ao mesmo tempo, nem de saber exatamente qual véu é qual. Puxa o fio que te chamar, com paciência, e vais sentir os outros a afrouxar sozinhos. A teia não se desfaz nó a nó pela força. Desfaz-se quando deixas de a apertar.
+
 ## Viver o método, no dia a dia
 
 Os sete véus que atravessámos não são para ler e arrumar. São para viver, e a vida não acontece em retiros nem em páginas, acontece na cozinha, no trânsito, a meio de uma discussão, na cama às três da manhã quando o medo aperta. É aí que o método se prova, e é aí que ele é mais simples do que parece, porque se reduz, no fundo, a dois gestos que podes fazer em qualquer lugar e a qualquer hora: ver, e soltar.
@@ -300,4 +340,19 @@ Tiraste alguns véus ao ler este livro, e talvez tenhas chorado nalguma página 
 Quando isso acontecer, e vai acontecer, lembra-te de que já sabes o que fazer, e de que não precisas, nunca mais, de te castigar por isso. Não corras para a solução. Não te exijas mudar à força, que é só mais um véu, o do esforço, a vestir-se de crescimento pessoal. Faz apenas o que aprendeste aqui, devagar, uma coisa de cada vez, com a mão no peito se ajudar: vê, e solta. Vê primeiro, sem te julgares, até o padrão deixar de ser nevoeiro e ganhar contorno. E depois solta, sem violência, abrindo a mão. Véu a véu, ao teu ritmo, e nem um instante antes de estares pronta.
 
 E confia nisto, mesmo nos dias em que for difícil acreditar: por baixo de tudo o que ainda se solta em ti, por baixo de cada véu que ainda hás de erguer, há algo que nunca esteve preso. Algo inteiro, sereno, que não precisa de ser conquistado nem merecido, e que esperou por ti este tempo todo, com a paciência das coisas que não têm pressa porque não têm fim. Não caminhamos sozinhas. E há, no centro de cada uma de nós, um lugar tão quieto e tão pleno que, ao chegar lá, percebes enfim a coisa mais simples e mais difícil de todas: na verdade, nunca chegámos a caminhar. Sempre estivemos, desde o início, exatamente onde era preciso estar.
+
+---
+
+### Uma última palavra, de mim para ti
+
+Se chegaste até aqui, obrigada. Não pela leitura, mas pela coragem, porque olhar para dentro com esta honestidade não é coisa pequena, e tu fizeste-o. Quero que saibas que escrevi cada página a pensar numa mulher concreta, e que essa mulher, em muitos dias, fui eu, e noutros és tu, e no fundo somos a mesma a aprender as mesmas coisas em corpos diferentes.
+
+Não te vou desejar que tires todos os véus, nem que chegues a um estado de paz definitiva, porque isso seria devolver-te ao véu do horizonte, à promessa de uma chegada. Desejo-te outra coisa, mais pequena e mais verdadeira: que, da próxima vez que te apanhares a repetir, em vez do velho aperto no peito e da velha vergonha, sintas uma quase ternura por ti, e penses, com um sorriso cansado, "ah, estás aqui outra vez". E que vejas. E que soltes o que conseguires nesse dia. E que sejas, sobretudo, do teu lado.
+
+Os véus hão de voltar a pousar, e tu hás de voltar a erguê-los, e nisso não há fracasso nenhum, há só uma vida a ser vivida acordada, que é a única coisa que alguma vez te pedi. Volta a este livro quando precisares. Ele fica aqui, paciente, como uma amiga que não tem pressa.
+
+Vê. E solta. Véu a véu. E lembra-te, nos dias em que esqueceres tudo o resto, da única coisa que importa: nunca caminhaste sozinha.
+
+Com todo o cuidado,
+Vivianne
 
