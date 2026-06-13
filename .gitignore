@@ -12,3 +12,7 @@ slide-preview-all.png
 
 # preview/mocks locais do Cá em Casa (não fazem parte do produto)
 .preview-banda/
+
+# render do livro-pilar (artefactos de build)
+livro-pilar/*.pdf
+livro-pilar/*.png
