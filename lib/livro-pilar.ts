@@ -15,22 +15,24 @@ export type LivroPilar = {
 };
 
 // Estilos de capa do pilar (estética renascentista-do-véu). A paleta é comum.
+// IMPORTANTE: a capa é SEM caras e SEM figura humana (pedido da Vivianne).
+// Só véus, tecido e luz, abstrato e simbólico. Universal, sem etnia nem pose.
 export const PILAR_CAPA_ESTILOS: Record<string, { nome: string; prompt: string }> = {
   renascentista: {
     nome: 'Renascentista do véu',
-    prompt: 'fine-art book cover painting, renaissance chiaroscuro, a serene woman seen through layers of sheer translucent veils, soft sfumato, painterly oil texture, contemplative and timeless, museum-quality, generous calm space at the top for a title',
+    prompt: 'fine-art book cover painting, renaissance chiaroscuro, layers of sheer translucent veils and folds of luminous cloth catching soft light, painterly oil texture, sfumato, contemplative and timeless, museum-quality, NO figures, NO faces, generous calm space at the top for a title',
   },
   etereo: {
     nome: 'Etéreo / luz',
-    prompt: 'ethereal book cover art, sheer flowing veils catching warm golden light against deep dusk, soft volumetric glow, dreamlike and quiet, fine-art atmosphere, abstract enough to feel symbolic, generous negative space',
+    prompt: 'ethereal book cover art, sheer flowing veils and gauze catching warm golden light against deep dusk, soft volumetric glow, dreamlike and quiet, abstract and purely symbolic, NO figures, NO faces, generous negative space',
   },
   simbolico: {
     nome: 'Simbólico minimal',
-    prompt: 'minimal symbolic book cover, a single translucent veil lifting against a deep contemplative background, elegant restraint, fine grain, lots of negative space, sophisticated literary non-fiction feel',
+    prompt: 'minimal symbolic book cover, a single translucent veil lifting against a deep contemplative background, elegant restraint, fine grain, lots of negative space, NO figures, NO faces, sophisticated literary non-fiction feel',
   },
   dourado: {
     nome: 'Dourado contemplativo',
-    prompt: 'luminous book cover painting, gold-leaf and deep indigo, a veiled silhouette dissolving into light, sacred and serene, painterly texture with subtle gilt highlights, contemplative spiritual non-fiction',
+    prompt: 'luminous book cover painting, gold-leaf and deep indigo, sheer veils dissolving into warm light, sacred and serene, painterly texture with subtle gilt highlights, NO figures, NO faces, contemplative spiritual non-fiction',
   },
 };
 export const PILAR_CAPA_ESTILO_DEFAULT = 'renascentista';
@@ -45,7 +47,7 @@ export const LIVRO_PILAR: LivroPilar = {
   autora: 'Vivianne dos Santos',
   palavras: 22000,
   fonte: 'OS-7-VEUS-v2.md',
-  cena: `book cover painting, vertical composition: a serene woman's face and shoulders seen through several layers of sheer, translucent veils that soften and dissolve toward the edges; warm golden light glowing from within against a deep indigo and aubergine background; the topmost veil lifting just slightly, as if about to be removed; painterly renaissance texture, sfumato, quiet and timeless; generous calm space in the upper third for a title; no harsh detail, intimate and contemplative`,
+  cena: `book cover painting, vertical composition: layers of sheer, translucent veils and flowing gauze, parting and lifting to reveal a soft glow of warm golden light at the centre, against a deep indigo and aubergine background; folds of luminous cloth dissolving toward the edges; entirely abstract and symbolic, with NO human figure, NO face, NO body, NO person, NO portrait; painterly renaissance texture, sfumato, quiet and timeless; generous calm space in the upper third for a title; contemplative and serene`,
 };
 
 export function getLivroPilar(slug: string): LivroPilar | undefined {
