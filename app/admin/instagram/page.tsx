@@ -17,14 +17,16 @@ function InstagramInner() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
-  const [estado, setEstado] = useState<{ ligado: boolean; username?: string; erro?: string } | null>(null);
+  const [estado, setEstado] = useState<{ ligado: boolean; username?: string; erro?: string; igUserId?: string } | null>(null);
   const [aVerificar, setAVerificar] = useState(false);
 
   const verificar = useCallback(async (c: ContaId) => {
     setAVerificar(true); setEstado(null);
     try {
       const r = await fetch(`/api/admin/ig/status?conta=${c}`, { cache: 'no-store' });
-      setEstado(await r.json());
+      const j = await r.json();
+      setEstado(j);
+      if (j?.igUserId) setIgId(j.igUserId); // pré-preenche o ID guardado (não muda)
     } catch (e) { setEstado({ ligado: false, erro: String(e) }); }
     setAVerificar(false);
   }, []);
