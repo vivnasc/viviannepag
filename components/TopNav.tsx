@@ -10,6 +10,7 @@ export function TopNav() {
   const t = useTranslations('nav');
 
   const inicioHref = locale === 'en' ? '/en' : '/';
+  const livroHref = locale === 'en' ? '/en/os-sete-veus' : '/os-sete-veus';
   const escritosHref = locale === 'en' ? '/en/escritos' : '/escritos';
   const lojaHref = locale === 'en' ? '/en/loja' : '/loja';
   const bibliotecaHref = locale === 'en' ? '/en/biblioteca' : '/biblioteca';
@@ -30,6 +31,10 @@ export function TopNav() {
     >
       <Link href={inicioHref} className={`${base} ${isInicio ? active : ''}`}>
         {t('inicio')}
+      </Link>
+      <span className="text-ocre/35 text-[0.6rem]">·</span>
+      <Link href={livroHref} className={`${base} text-ambar`}>
+        {locale === 'en' ? 'the book' : 'o livro'}
       </Link>
       <span className="text-ocre/35 text-[0.6rem]">·</span>
       <Link href={escritosHref} className={`${base} ${isEscritos ? active : ''}`}>
