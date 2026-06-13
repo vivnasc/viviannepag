@@ -3,7 +3,42 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { listarLivros } from '@/lib/editora';
 
-const PRODUTOS = [
+type SeedProduto = {
+  slug: string; titulo: string; subtitulo: string; descricao: string;
+  preco: string; preco_original: string | null; capa: string | null;
+  badge: string; destaque: boolean; publicado: boolean; ordem: number;
+  ficheiro_path?: string;
+};
+
+const PRODUTOS: SeedProduto[] = [
+  {
+    slug: 'os-7-veus',
+    titulo: 'Os Sete Véus',
+    subtitulo: 'Vê o que te prende. Solta o que te faz repetir.',
+    descricao: `**Livro · ~22.000 palavras · PDF imediato**
+
+O livro-pilar do Método VS. Uma travessia pelos sete véus que se põem entre ti e quem és, e o caminho simples para os erguer: ver o que te prende, soltar o que te faz repetir.
+
+**Os sete véus:**
+1. A Permanência, defenderes quem já não és.
+2. A Memória, viveres preso à tua história.
+3. O Turbilhão, afogares-te na própria cabeça.
+4. O Esforço, esforçares-te para seres amada.
+5. A Desolação, o medo do vazio.
+6. O Horizonte, viver à espera de um quando.
+7. A Dualidade, a separação que está na raiz de todos.
+
+Cada véu com a sua raiz (infância, heranças, constelação familiar), o que muda quando se ergue, e uma prática. No fim, um caderno de oito semanas para levares o método à tua vida.
+
+Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelação familiar sistémica.`,
+    preco: '€19',
+    preco_original: null,
+    capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa-composta.png`,
+    badge: 'livro · pilar',
+    destaque: true,
+    publicado: true,
+    ordem: 0,
+  },
   {
     slug: 'ebook-01-culpa',
     titulo: 'A culpa não é boa conselheira',
@@ -377,7 +412,7 @@ function indiceDe(l: { capitulos: { titulo: string }[] }): string {
 // capasRenderizadas = slugs cujo .jpg ja existe no Storage. So poe capa onde a
 // capa editorial ja foi renderizada; os restantes ficam null ('sem capa') ate
 // o render do universo correr e preencher produtos.capa.
-function livrosProfundos(base: string, capasRenderizadas: Set<string>) {
+function livrosProfundos(base: string, capasRenderizadas: Set<string>): SeedProduto[] {
   return listarLivros().map((l) => {
     const pre = l.slug.split('-')[0];
     const num = Number(l.slug.split('-')[1]) || 0;
