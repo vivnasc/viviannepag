@@ -10,7 +10,7 @@ export const runtime = 'nodejs';
 // Exporta os posts de UMA conta (nunca mistura) num intervalo de datas, como CSV
 // do Metricool — para agendar em massa (sobretudo o TikTok, que não se publica
 // sozinho daqui). Só posts com média pronta (vídeo ou imagens). Datas/horas LOCAIS.
-type Slide = { imageUrl?: string | null };
+type Slide = { imageUrl?: string | null; videoUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string | null; imagens?: string[] };
 type Theme = { marca?: string; universo?: string; curso?: string; serie?: string; formato?: string; subtipo?: string; agendadoEm?: string | null; hora?: string | null };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
@@ -38,6 +38,24 @@ export async function GET(req: NextRequest) {
   const { data, error } = await sb.from('carousel_collections').select('slug, title, dias, theme');
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 
+  // DIAGNÓSTICO (?diag=1): mostra, com os dados reais, quantos posts há por
+  // formato nesta conta, quantos têm MP4 (vídeo) e quantos caem no período —
+  // para perceber porque é que algo não sai no CSV, sem adivinhar.
+  if (sp.get('diag')) {
+    const porFormato: Record<string, { total: number; comVideo: number; comVideoNoPeriodo: number; exemplos: string[] }> = {};
+    for (const it of (data ?? []) as Row[]) {
+      if (contaDe(it.theme, it.slug) !== conta) continue;
+      const d0 = Array.isArray(it.dias) ? it.dias[0] : undefined;
+      const k = chaveFmt(it.theme, it.slug);
+      const temVideo = !!(d0?.videoUrl ?? (d0 as { slides?: { videoUrl?: string | null }[] } | undefined)?.slides?.[0]?.videoUrl);
+      const date = it.theme?.agendadoEm ?? '';
+      const noPeriodo = !!date && (!de || date >= de) && (!ate || date <= ate);
+      const e = (porFormato[k] ??= { total: 0, comVideo: 0, comVideoNoPeriodo: 0, exemplos: [] });
+      e.total++; if (temVideo) e.comVideo++; if (temVideo && noPeriodo) { e.comVideoNoPeriodo++; if (e.exemplos.length < 3) e.exemplos.push(`${date} ${it.slug}`); }
+    }
+    return NextResponse.json({ conta, de: de || '(todas)', ate: ate || '(todas)', porFormato }, { status: 200 });
+  }
+
   const dias: PublicarCsvDia[] = ((data ?? []) as Row[])
     .filter((it) => contaDe(it.theme, it.slug) === conta)
     .filter((it) => !formato || formato === 'tudo' || chaveFmt(it.theme, it.slug) === formato)
@@ -48,7 +66,7 @@ export async function GET(req: NextRequest) {
         : (d0?.slides ?? []).map((s) => s.imageUrl).filter((u): u is string => !!u));
       const caption = [d0?.legenda?.trim(), (d0?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
       return {
-        videoUrl: d0?.videoUrl ?? null,
+        videoUrl: d0?.videoUrl ?? d0?.slides?.[0]?.videoUrl ?? null, // MP4 ao nível do dia OU do slide (séries)
         imagens,
         caption: caption || it.title,
         titulo: it.title,
