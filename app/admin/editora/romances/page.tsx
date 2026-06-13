@@ -14,6 +14,9 @@ export default function EditoraRomancesAdmin() {
             ebooks
           </Link>
           <span className="text-ambar border-b border-ambar/60 pb-1">romances</span>
+          <Link href="/admin/livro-pilar" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
+            pilar
+          </Link>
         </nav>
         <p className="text-creme-2/60 text-[0.85rem] mt-4 font-serif italic">
           Biblioteca de Véspera. Gera variantes de capa (Replicate, gouache da casa, sem texto), escolhe a tua, e a composição final faz-se com a tipografia da casa por cima.

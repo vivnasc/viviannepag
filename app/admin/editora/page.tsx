@@ -27,6 +27,9 @@ export default function EditoraAdmin() {
           <Link href="/admin/editora/romances" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
             romances
           </Link>
+          <Link href="/admin/livro-pilar" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
+            pilar
+          </Link>
         </nav>
         <p className="text-creme-2/60 text-[0.85rem] mt-3 font-serif italic">
           {livros.length} livros · {totalPalavras.toLocaleString('pt-PT')} palavras · tudo publicado — marca o que já leste

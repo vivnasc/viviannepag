@@ -1,0 +1,63 @@
+name: Render livro-pilar (Os Sete Véus)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/livro-pilar/.disparar']
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Chromium deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
+            libgbm1 libpango-1.0-0 libxcomposite1 libxdamage1 \
+            libxrandr2 libxfixes3 libxkbcommon0 libasound2t64 \
+            libxshmfence1 fonts-liberation libu2f-udev
+
+      - name: Install npm packages
+        run: |
+          npm install --no-save \
+            puppeteer \
+            marked \
+            pdf-lib \
+            @supabase/supabase-js \
+            @fontsource/fraunces \
+            @fontsource/outfit
+
+      - name: Download capa escolhida
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        run: |
+          mkdir -p livro-pilar
+          curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa.jpg" -o /tmp/capa-escolhida.jpg
+          ls -la /tmp/capa-escolhida.jpg
+
+      - name: Compor capa (imagem + tipografia)
+        run: node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta.png
+
+      - name: Render do livro (capa + miolo A5)
+        run: node scripts/livro-pilar/render-livro.js
+
+      - name: Publicar no bucket (capa composta + PDF)
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/livro-pilar/upload-supabase.js
