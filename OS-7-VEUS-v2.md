@@ -47,6 +47,10 @@ Não há soltar sem ver. Escreve isto em ti se puderes, porque é o coração de
 
 São sete véus. Cada um esconde uma crença e, ao erguer-se, revela o que ela tapava. Não são uma escada a subir até um topo, nem etapas a cumprir por ordem, nem níveis de um jogo. São uma espiral que se abre. Vais reconhecer-te muito mais nuns do que noutros, e tudo bem, é natural, cada vida tem os seus véus mais espessos. Vais voltar ao mesmo véu em momentos diferentes e encontrá-lo cada vez um pouco mais fino. Não precisas de os tirar todos, nem de uma vez, nem pela ordem em que aqui aparecem. Basta começar a ver. O resto solta-se a seu tempo, véu a véu, à medida que estiveres pronta, e nem um instante antes.
 
+Talvez te perguntes porquê sete, e não cinco ou dez. Não é um número mágico nem uma fórmula fechada. É que, ao longo de muito tempo a escutar as voltas que dou e as que vi noutras, foram estes sete os nós que apareciam vezes sem conta, por baixo de mil histórias diferentes. A identidade que se defende. O passado que aprisiona. A mente que afoga. O esforço que esgota. O vazio que aterra. O horizonte que adia. E a separação que está na raiz de todos. Podia haver outros nomes, outras divisões, e há, noutros livros e noutras tradições. Mas estes sete cobrem, na minha experiência, quase todo o terreno onde uma mulher se perde de si. Se sentires que um te falta, ou que um teu não cabe bem em nenhum, confia mais na tua experiência do que no meu mapa. O mapa serve a viagem, nunca o contrário.
+
+E quanto à ordem, ela tem uma lógica suave, embora não seja obrigatória. Começamos no mais visível, a identidade e a história, o que mostramos e o que contamos. Descemos depois ao que se agita por dentro, a mente e o esforço. Mais fundo ainda, tocamos o que evitamos, o vazio e a ilusão de chegada. E terminamos na raiz de tudo, a separação, porque é dela que os outros seis nasceram e é a ela que regressam. Mas, repito, esta é uma espiral, não uma escada. Vais entrar por onde a tua vida te abrir a porta, e vais voltar aos mesmos véus em alturas diferentes, encontrando-os de cada vez um pouco mais finos. Não há ordem certa para regressar a casa, há só o teu próprio passo.
+
 E há algo que vais sentir, do primeiro véu ao último, por baixo de todos eles. Nunca estiveste assim tão só. O que parece separação, esse vidro entre ti e a vida, é o mais fino e o mais antigo de todos os véus, e quando ele cai resta o que sempre lá esteve, a pertença simples à vida que respira em tudo. Como diz o velho saber, eu sou porque nós somos. Vamos chegar lá, no sétimo véu. Por agora, basta saberes que, mesmo nesta leitura, mesmo nos teus piores dias, não caminhas sozinha.
 
 Deixa-me dizer uma palavra mais sobre ver, porque é metade do método e a parte que mais se subestima. Ver não é pensar sobre. Não é analisar-te até à exaustão, dissecar a infância, encontrar culpados, montar a teoria perfeita sobre porque és como és. Isso, muitas vezes, é só a mente a usar a introspeção como mais uma forma de controlo, e podes passar a vida a entender-te sem nunca te veres de facto. Ver é outra coisa, mais simples e mais difícil. É um notar quieto, quase sem palavras, em que apanhas o padrão em flagrante, no momento em que ele acontece, e ficas com ele sem correr a julgá-lo nem a consertá-lo. É a diferença entre falar sobre o mar e molhar os pés. Há mulheres que sabem tudo sobre as suas feridas e nunca as viram, porque o saber foi mais uma maneira de não sentir. Ver dói um bocadinho, sempre, porque te tira a anestesia da explicação. E é esse pequeno arder que, afinal, cura.
@@ -80,6 +84,8 @@ E se, por baixo de tudo, sentes uma separação e uma solidão de fundo que nenh
 Reconheceste-te em mais do que um? É natural, os véus entrelaçam-se, e tirar um costuma afrouxar os outros. Não te preocupes em escolher certo. Escolhe o que te chamou, lê esse véu, e deixa-o trabalhar. O livro fica à tua espera para os outros, no tempo que for o teu. Não há ordem errada para regressar a casa.
 
 ## Véu 1 · A Permanência
+
+> *Há algo em ti que permanece quando tudo o resto se dissolve.*
 
 Apresentas-te, e sai sempre a mesma frase. O nome, o que fazes, de quem és filha, o que já perdeste, aquilo em que te tornaste boa. Disseste-a tantas vezes que deixou de ser uma apresentação e passou a ser um contorno, e dentro desse contorno aprendeste a caber. És a forte. És a responsável. És a que aguenta, a que não desaba, a que os outros procuram quando o chão treme. Há um orgulho legítimo nisso, e há também uma armadilha, porque com o tempo já nem sabes onde acaba o papel e começas tu. Tornaste-te tão boa a ser quem te disseram que eras que perdeste o rasto de quem eras antes de to dizerem.
 
@@ -123,6 +129,8 @@ A prática, para o corpo aprender o que a cabeça já entendeu, é simples e pod
 
 ## Véu 2 · A Memória
 
+> *Não és a tua narrativa. És um agora vivo, sempre por escrever.*
+
 Há uma frase que dizes sobre ti há tanto tempo que já nem reparas que a dizes. "Eu sou assim desde sempre." "Depois daquilo, fiquei assim." "Comigo é sempre a mesma coisa." Sai-te com a naturalidade de quem afirma a cor dos olhos, como se fosse um facto e não uma escolha de cada dia. A tua história anda contigo como prova e como sentença ao mesmo tempo, e é ela que decide, antes de tu decidires, quem amas, do que foges, quanto pedes, o que achas que mereces. Sem dares conta, vives a olhar para trás, a confirmar quem és pelo que já te aconteceu, como quem conduz o carro inteiro a olhar pelo retrovisor.
 
 Repara numa cena pequena e comum. Alguém demora a responder a uma mensagem tua, e em segundos já tens a história montada: estão a afastar-se, foi como da outra vez, é sempre assim comigo, não sou prioridade para ninguém. A pessoa só estava numa reunião. Mas tu já viveste a tarde inteira dentro de um filme antigo, com personagens de há vinte anos, a sentir no corpo de hoje uma dor que pertence a outro tempo. Não reagiste ao presente. Reagiste à memória.
@@ -157,6 +165,8 @@ A prática é esta, e pede-te coragem mansa. Escolhe uma frase que dizes sobre t
 
 ## Véu 3 · O Turbilhão
 
+> *Há em ti uma presença que observa, e não se prende ao que se agita.*
+
 A tua cabeça não para. Antecipas conversas que ainda não aconteceram e revives, ponto por ponto, as que já aconteceram. Ensaias respostas perfeitas para discussões imaginárias, defendes-te de ataques que ninguém te fez, resolves dez vezes um problema que ainda nem chegou e que talvez nunca chegue. À noite, quando o corpo finalmente para, a mente acelera, como se aproveitasse o silêncio para despejar tudo o que reteve durante o dia. E sentes cada coisa com tal intensidade que te tornas aquilo que sentes: não estás triste, és a tristeza inteira, da cabeça aos pés; não tens medo, és o medo de uma ponta à outra. Quando o turbilhão te apanha, parece que não existe mais nada além dele, e que ele é tu.
 
 Repara como o turbilhão se disfarça de responsabilidade. Dizes a ti mesma que estás só a pensar, a prevenir, a resolver com antecedência, e por isso deixas a roda girar como se fosse trabalho útil. Uma mulher contava que passava as noites a planear conversas com a chefe, a antecipar cada crítica, a ensaiar defesas para ataques que nunca aconteciam. De manhã acordava esgotada, como se tivesse vivido a discussão dez vezes, e a discussão real, quando enfim chegava, durava dois minutos e corria bem. Tinha sofrido tudo, exceto o que de facto aconteceu. O turbilhão não a estava a proteger de nada. Estava só a roubar-lhe as noites em nome de uma segurança que ela nunca chegava a sentir.
@@ -188,6 +198,8 @@ A prática é curta e podes usá-la hoje, no meio de uma crise pequena. Da próx
 ---
 
 ## Véu 4 · O Esforço
+
+> *Não é na corrida, mas no repouso, que a verdade se revela.*
 
 Chegas sempre primeiro. Antecipas o que os outros vão precisar antes de eles próprios saberem, resolves antes que peçam, seguras o que está a cair antes de cair. Agradas, cuidas, fazes a tua parte e depois, calada, fazes também a dos outros, e ainda pedes desculpa por não teres feito mais. Sentar-te sem nada para fazer dá-te uma inquietação imediata, uma culpa surda, como se o descanso fosse uma falta que vais ter de pagar. E no fundo, num lugar que raramente olhas de frente, vive um acordo antigo que nunca chegaste a assinar com consciência mas que cumpres todos os dias: se eu fizer o suficiente, fico. Se eu parar, deixam de gostar de mim.
 
@@ -221,6 +233,8 @@ A prática é pequena de fora e enorme por dentro, e talvez seja a mais difícil
 
 ## Véu 5 · A Desolação
 
+> *O vazio não é ausência. É o campo silencioso onde a alma germina.*
+
 Há um lugar dentro de ti que evitas a todo o custo, e nem sempre sabes que o evitas. Não aparece de cara descoberta. Notas-o nas entrelinhas dos teus gestos: na pressa de ligar a televisão mal entras em casa, no telemóvel a que pegas sem nenhuma razão, na tarefa que inventas quando, por um instante raro, ninguém precisa de ti e não há nada para resolver. Mal o silêncio se instala, sobe uma angústia surda, sem forma, e tu corres a preenchê-la antes mesmo de a sentires por inteiro, como quem foge de um quarto escuro sem esperar para ver se há lá, de facto, alguma coisa.
 
 Uma mulher percebeu isto num fim de semana em que, por acaso, ficou sozinha em casa, sem planos, sem ninguém para cuidar. Em vez do descanso que dizia desejar há meses, sentiu um desconforto crescente, quase pânico, e deu por si a ligar a amigos, a inventar saídas, a encher as horas com qualquer coisa. Ao domingo à noite, exausta de tanto fugir, sentou-se finalmente no sofá com o silêncio. Os primeiros minutos foram quase insuportáveis. Depois, devagar, a angústia começou a assentar, como pó que pousa, e por baixo dela apareceu não o abismo que temia, mas uma espécie de paz esquecida, e umas lágrimas mansas, e a pergunta simples que andava a fugir dela há anos: e eu, do que é que eu preciso? O vazio não a tinha engolido. Tinha-lhe devolvido a voz.
@@ -251,6 +265,8 @@ A prática é breve e exige só que não fujas. Da próxima vez que o silêncio 
 
 ## Véu 6 · O Horizonte
 
+> *Não há um fim a alcançar. Há um fluxo sempre aberto, e ele é agora.*
+
 Vives inclinada para a frente, sempre um pouco à frente de onde estás, em direção a um ponto mais adiante onde, finalmente, vais poder ser feliz. Quando emagreceres. Quando ele mudar. Quando as crianças crescerem. Quando tiveres o dinheiro, a casa, o diagnóstico resolvido, a paz que andas a adiar. Há sempre um "quando" e há sempre um "lá", e é para esse lá luminoso que vais empurrando a vida, enquanto a vida verdadeira, a única que existe, vai acontecendo por inteiro neste aqui apressado em que mal reparas, porque já estás no próximo.
 
 Pensa em todas as vezes que disseste "para o ano". Para o ano vou abrandar, vou viajar, vou cuidar de mim, vou fazer aquilo que adio desde sempre. Há mulheres que dizem isto durante trinta anos, com toda a sinceridade, todos os anos, e chegam a uma certa idade com a estranha sensação de que a vida lhes passou ao lado enquanto a preparavam para começar. Não foram infelizes, exatamente. Foi pior, de certo modo: estiveram quase sempre a meio caminho de uma felicidade marcada para depois, sempre de mala feita à porta de um comboio que nunca chegava. A vida não estava no destino. Estava na sala de espera, e ninguém lhes tinha dito que a sala de espera era a viagem.
@@ -280,6 +296,8 @@ A prática é um regresso, e podes fazê-la várias vezes ao dia, em segundos. P
 ---
 
 ## Véu 7 · A Dualidade
+
+> *Resta o centro indiviso, onde tu e a vida não são dois.*
 
 Por mais rodeada que estejas, por mais cheia que seja a casa, há sempre, num canto de ti, um vidro. Tu de um lado, o resto do mundo do outro. A vida como algo que te acontece, vindo de fora, contra o qual te defendes, pelo qual lutas, que tentas controlar para que não te magoe. E no fundo de tudo, por baixo das pessoas e dos dias e das conversas, uma solidão antiga e funda que nenhuma companhia preenche por completo, como se faltasse sempre qualquer coisa que não sabes nomear e que já desististe de procurar.
 
@@ -333,6 +351,22 @@ Há dias em que vais conseguir, e há dias em que vais cair em todos os sete vé
 
 E se houver uma única coisa que leves contigo quando fechares este livro, que seja esta, dita com todo o cuidado: sê do teu lado. A vida inteira aprendeste a ser dura contigo, a exigir, a corrigir, a apontar o que falta. O método só funciona se for praticado com ternura, porque a dureza é, ela própria, mais um véu, talvez o que veste todos os outros. Trata a mulher que tu és como tratarias uma amiga muito amada que estivesse a aprender, devagar, a libertar-se de tudo o que lhe ensinaram que tinha de ser. Com essa, terias paciência. Com essa, não desistirias. Sê essa amiga de ti.
 
+## Dúvidas no caminho
+
+Ao longo dos anos, algumas perguntas repetem-se sempre, e merecem resposta honesta. Talvez sejam também as tuas.
+
+E se eu fizer a prática e não sentir nada? Ótimo. A prática não é para sentir nada de especial, é para treinar o olhar. Muitas vezes não há fogos de artifício, há só um milímetro de espaço a abrir-se entre ti e o padrão, e esse milímetro não se sente, percebe-se depois, quando reparas que reagiste de outra maneira. Não persigas experiências. Faz o gesto, simples, e deixa o resto trabalhar no escuro.
+
+E se, ao começar a ver, eu me sentir pior? Pode acontecer, e não é mau sinal, é sinal de profundidade. Quando se levanta uma camada, o que estava por baixo vem à superfície, e às vezes o que estava por baixo era dor adormecida. Vai devagar. Não escaves tudo de uma vez. Se a dor for muito grande, não a atravesses sozinha, e isto leva-me à pergunta seguinte.
+
+Isto substitui a terapia ou o acompanhamento? Não, e não quero que penses que sim. Este livro é um caminho de consciência, não um tratamento. Há feridas, traumas e sofrimentos que pedem mãos profissionais, e procurar essa ajuda não é fraqueza, é sabedoria, e é, ela própria, um gesto de ver e de cuidar. Usa este livro como companheiro, não como muleta única. Se sentires que precisas de mais do que ele te pode dar, ouve esse sinal.
+
+Quanto tempo demora? A pergunta é, ela mesma, o véu do horizonte a falar. Não há um fim a alcançar, há uma forma de viver a praticar. Alguns véus afrouxam depressa, outros levam anos, outros voltam. Não estás atrasada para nada. O tempo certo é o teu.
+
+Tenho de acreditar em algo espiritual para isto resultar? Não tens de acreditar em nada. Não te peço fé, peço atenção. Ver e soltar funcionam quer chames presença, consciência, alma ou simplesmente a parte de ti que observa. Fica com a linguagem que te for verdadeira e ignora o resto.
+
+E se eu não conseguir parar de repetir? Vais repetir, garanto-te, e isso não é falhar. A diferença é que, agora, vais repetir a ver. E ver, cada vez mais cedo, é todo o caminho. Sê paciente e sê do teu lado. Estás a desfazer com ternura o que levou gerações a tecer.
+
 ## Para fechar
 
 Tiraste alguns véus ao ler este livro, e talvez tenhas chorado nalguma página sem saber bem porquê, porque há reconhecimentos que doem antes de aliviar. Outros véus voltarão a pousar amanhã, com o cansaço, com um susto, com um dia mau, e isso não é falhar, não é recuar, não é prova de que não aprendeste nada. O despertar não é uma coroa que se conquista de uma vez e se exibe para sempre. É chão comum. É um desfiar que continua a acontecer enquanto houver vida e enquanto houver amor, e que nunca está propriamente terminado. Vais reconhecer-te a repetir outra vez, porque os padrões antigos não desaparecem como por magia, apenas perdem aos poucos a força à medida que deixam de te apanhar às escuras.
@@ -355,4 +389,146 @@ Vê. E solta. Véu a véu. E lembra-te, nos dias em que esqueceres tudo o resto,
 
 Com todo o cuidado,
 Vivianne
+
+---
+
+# Apêndice · O caderno dos sete véus
+
+### Uma travessia de sete semanas
+
+Ler é o primeiro gesto. Viver é o que vem depois, e é aí que tudo se decide. Este caderno é o teu companheiro para levar o livro do entendimento para o corpo, ao longo de sete semanas, uma para cada véu. Não é um programa rígido nem um teste. É um convite a abrandar e a habitar cada véu o tempo suficiente para o conheceres por dentro, e não só de ideias.
+
+Como usar: dedica uma semana a cada véu, na ordem que quiseres, começando pelo que mais te chama hoje. Não precisas de mais do que alguns minutos por dia. Se um véu pedir mais tempo, fica nele duas semanas, três, o tempo que for. Não há atraso possível nesta viagem, porque o destino é exatamente onde já estás. Se puderes, tem à mão um caderno só teu, não para encontrares respostas, mas para te veres a pensar. E lembra-te, em cada semana, da regra de ouro: primeiro ver, sem te julgares. Soltar vem depois, e vem sozinho.
+
+Cada semana tem quatro tempos. **Para ver**, umas perguntas para abrir o olhar. **A prática**, o gesto central da semana. **Um gesto para os dias**, uma micro-ação para levares contigo. E **no fim da semana**, uma reflexão para colher o que se moveu.
+
+---
+
+## Semana 1 · A Permanência
+
+O foco desta semana é reparar em quem julgas que tens de ser. Anda pela semana com uma pergunta solta no bolso: onde é que estou a defender uma imagem de mim?
+
+**Para ver.** Em que situações desta semana sentiste necessidade de defender quem és, de provar, de corrigir a imagem que os outros têm de ti? Que papel te custaria mais largar, e o que temes que aconteça se o largasses? Houve algum momento em que te sentiste tu, sem teres de ser nada para ninguém? Não respondas de cabeça. Repara ao longo dos dias e deixa as respostas chegarem.
+
+**A prática da semana.** Uma vez por dia, num momento de calma, diz o teu nome em voz baixa, três vezes, e à terceira repara em quem o ouve, esse que está por trás do nome e não precisa de defesa. Fica três respirações com ele. E, a meio da semana, escreve três frases que comecem por "eu sou", e ao lado de cada uma pergunta o que aconteceria se ela deixasse de ser verdade. A que te apertar o peito é o teu véu mais defendido.
+
+**Um gesto para os dias.** Escolhe uma pequena ocasião para mudar de ideias em voz alta, ou para dizer "não sei", sem te justificares. Repara que não desabas. Que continuas inteira mesmo sem teres razão, mesmo sem saber.
+
+**No fim da semana.** O que descobriste sobre quem és por baixo dos papéis? Houve algum momento em que sentiste que permanecias, mesmo quando a forma mudou? Anota-o, não como conclusão, mas como semente.
+
+---
+
+## Semana 2 · A Memória
+
+O foco desta semana é a história que contas sobre ti. Anda atenta às frases que repetes, sobretudo as que começam por "eu sempre" e "eu nunca".
+
+**Para ver.** Que história sobre ti repetiste esta semana sem a questionar? Quando reagiste com mais força do que a situação pedia, a que outro tempo, a que outras pessoas pertencia, de facto, aquela dor? De quem é a voz que ouves quando te diminuis ou te limitas? Escuta com atenção, porque muitas vezes não é tua.
+
+**A prática da semana.** Escolhe uma frase antiga que dizes sobre ti, escreve-a, e lê-a em voz alta. Pergunta: de quem é esta voz? Quando reconheceres a quem pertence, em silêncio, devolve-lha, com respeito e sem rancor. Repete isto com uma frase diferente a meio da semana.
+
+**Um gesto para os dias.** Uma vez por dia, quando te apanhares a contar a velha história, acrescenta-lhe baixinho quatro palavras: "até aqui, foi assim". O "até aqui" abre a porta que o "sempre" tinha fechado.
+
+**No fim da semana.** Que parte da tua história percebeste ser interpretação, e não facto? E que parte talvez nem seja tua, mas herança? Escreve o que se aligeirou.
+
+---
+
+## Semana 3 · O Turbilhão
+
+O foco desta semana é a tua relação com os pensamentos e as emoções. Não para os calares, para os veres passar.
+
+**Para ver.** Em que momentos a tua cabeça acelerou esta semana, e o que estava ela a tentar proteger-te de sentir? Reparaste na diferença entre ter um pensamento e ser arrastada por ele? Conseguiste, alguma vez, encontrar quem em ti observa o turbilhão sem ser o turbilhão?
+
+**A prática da semana.** Várias vezes ao dia, sobretudo quando a mente disparar, diz por dentro: "estou a reparar que estou a pensar isto". E respira três vezes a partir desse que repara. É um regresso curto à margem, repetido até o corpo aprender o caminho.
+
+**Um gesto para os dias.** Escolhe uma tarefa simples por dia, lavar a loiça, caminhar, beber o chá, e fá-la só ela, sem telemóvel, sem planear o resto. Quando a cabeça fugir, traz-na de volta ao gesto, com doçura, sem te ralhares.
+
+**No fim da semana.** Encontraste, mesmo que por instantes, o silêncio por baixo do barulho? Como foi estar aí? Anota a sensação, não a explicação.
+
+---
+
+## Semana 4 · O Esforço
+
+O foco desta semana é o quanto te esforças para seres amada, e o medo que mora por baixo do descanso.
+
+**Para ver.** Onde te apanhaste a fazer demais esta semana, a antecipar, a salvar, a agradar? O que sentiste quando alguém te ofereceu ajuda ou descanso? Conseguiste receber, ou ficaste desconfortável? E a culpa, quando paraste, de onde vinha?
+
+**A prática da semana.** Uma vez por dia, escolhe uma pequena coisa que farias por hábito para servir ou adiantar, e não a faças. Fica com o desconforto que sobe, a mão no peito, três respirações, sem o resolveres. É o véu a ser erguido.
+
+**Um gesto para os dias.** Recebe uma coisa por dia sem retribuir de imediato, um elogio, um favor, um cuidado, e treina dizer só "obrigada", sem o devolver, sem o minimizar. Deixa-te ser cuidada.
+
+**No fim da semana.** O que aconteceu quando paraste de fazer? Foste menos amada, ou só menos ocupada? Escreve o que descobriste sobre o teu valor quando não estavas a prová-lo.
+
+---
+
+## Semana 5 · A Desolação
+
+O foco desta semana é a tua relação com o silêncio e o vazio. Não para os encheres, para os habitares.
+
+**Para ver.** Do que é que fugiste esta semana quando a casa ficou em silêncio? Que ruídos, ecrãs ou tarefas usaste para não sentir o vazio? E quando, por acaso, ficaste só sem nada para fazer, o que subiu?
+
+**A prática da semana.** Uma vez por dia, fica dois minutos no silêncio, sem preencher. Sem telemóvel, sem música, sem tarefa. A mão no peito, e por dentro: "isto não é perigo, é espaço". Deixa o vazio ser terra, não abismo. Se subir emoção, deixa-a vir. Era só isso que ela pedia.
+
+**Um gesto para os dias.** Faz uma coisa sozinha por gosto, e não por falta, esta semana. Um café, um passeio, sentar-te a olhar o céu. Repara na diferença entre estar só e estar contigo.
+
+**No fim da semana.** O vazio engoliu-te, ou revelou-te alguma coisa? Que pergunta tua, há muito calada, talvez tenha começado a fazer-se ouvir no silêncio? Escreve-a.
+
+---
+
+## Semana 6 · O Horizonte
+
+O foco desta semana é reparar em quanto vives à espera de um "depois", e trazer a vida de volta ao presente.
+
+**Para ver.** Para que "quando" estás a adiar a tua vida neste momento? Quantas vezes esta semana disseste, por dentro ou em voz alta, "quando isto passar"? Alcançaste algo que querias e sentiste, em vez de paz, a ânsia do passo seguinte?
+
+**A prática da semana.** Várias vezes ao dia, pára e diz: "não estou a caminho de lugar nenhum, já cá estou". Depois demora-te numa coisa pequena e presente, a luz, o calor da chávena, a respiração, três respirações. Era para isto que esperavas.
+
+**Um gesto para os dias.** Escolhe, por dia, um prazer pequeno que costumas adiar para quando tiveres tempo, e dá-to agora, sem o merecer primeiro. A vida é feita destes agora.
+
+**No fim da semana.** O que mudou quando trouxeste a felicidade de "depois" para hoje? O que descobriste estar a perder, de quem amas e do que tens, por viveres sempre um passo à frente? Anota.
+
+---
+
+## Semana 7 · A Dualidade
+
+O foco desta última semana é a pertença. Reparar onde te sentes separada, e lembrar que não és uma ilha.
+
+**Para ver.** Onde te sentiste do lado de fora esta semana, separada por um vidro, mesmo no meio de pessoas? Reparaste em viver as relações como contas a fechar, quem deu mais, quem ficou a dever? E houve momentos de paz inexplicável, na natureza, na música, no afeto, em que essa separação afrouxou?
+
+**A prática da semana.** Uma vez por dia, ao ar livre se puderes, escolhe um ser vivo, uma árvore, um pássaro, uma pessoa ao longe, e em vez de "eu e aquilo" deixa subir "somos do mesmo". O mesmo ar, a mesma vida em formas diferentes. Fica três respirações nessa pertença.
+
+**Um gesto para os dias.** Esta semana, deixa-te depender de alguém numa coisa pequena, pede ajuda, aceita colo, partilha um peso. Treina pertencer, em vez de te bastares a ti por medo.
+
+**No fim da semana.** Em que momentos sentiste que não estavas só, que fazias parte? O que muda no teu medo quando te lembras de que pertences? Escreve, para mais tarde recordares.
+
+---
+
+### Ao fechar o caderno
+
+Sete semanas não tiram sete véus para sempre, e não era essa a promessa. O que fazem é ensinar ao corpo um caminho novo, o de ver e soltar, para que ele esteja lá, disponível, da próxima vez que um véu pousar. E haverá próxima vez, muitas, porque isto é uma espiral e não uma linha. Quando voltares a um padrão antigo, volta também a este caderno, à semana que precisares, sem vergonha e sem pressa. Os livros que importam acompanham-nos a vida toda, e dizem-nos coisas novas a cada idade da alma. Que este seja um desses para ti.
+
+Vê. E solta. Véu a véu.
+
+---
+
+# As palavras deste livro
+
+Algumas palavras aparecem muitas vezes nestas páginas, e vale a pena guardá-las claras, porque são as ferramentas do método.
+
+**Véu.** Um condicionamento antigo, aprendido ou herdado, que se pôs entre ti e o que és, tão cedo que passou a parecer a tua cara. Não é defeito nem culpa. Foi proteção que se tornou prisão. Há sete, e atravessá-los é o caminho deste livro.
+
+**Ver.** O primeiro movimento do método. Reconhecer o padrão sem te julgares, dar-lhe nome e contorno, perceber onde nasce. Não é analisar até à exaustão, é um notar quieto, quase sem palavras. O que deixa de ser invisível deixa de ser destino.
+
+**Soltar.** O segundo movimento. Largar o que viste, não com força, mas deixando de o segurar e de o alimentar com a tua atenção e o teu medo. Soltar vem por si quando o ver está maduro. Não há soltar sem ver.
+
+**Padrão.** A forma repetida de sentir, reagir ou amar que o véu te faz viver em automático. O que te faz repetir, mesmo quando já sabes.
+
+**Sombra.** Aquilo que escondeste de ti própria, e que precisamente por não veres mais te governa. O véu vive na sombra. Ver é trazer luz a essa zona.
+
+**Herança.** O que recebeste sem escolher, de quem veio antes de ti. Lealdades, medos, renúncias e gestos que atravessam gerações. Muito do que carregas não é teu, é fidelidade. Ver isto permite honrar sem repetir.
+
+**Presença.** Aquilo que em ti permanece quando tudo o resto muda. Quem observa os pensamentos sem ser os pensamentos, quem assiste aos papéis sem ser os papéis. Não tem nome, não pode ser perdido, não precisa de defesa. É o que os véus encobrem e a que sempre podes regressar.
+
+**Espiral.** A forma do caminho. Não uma escada que se sobe até um topo, mas uma volta que se repete a alturas diferentes. Passas várias vezes pelo mesmo véu, e de cada vez mais fino. Por isso não há recaída que seja fracasso, nem atraso possível.
+
+Pertencer, no fim, é a palavra que está por baixo de todas. Lembrá-la é o sétimo e último véu a erguer-se. Eras já, desde sempre, pertença.
 
