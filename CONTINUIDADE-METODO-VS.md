@@ -38,7 +38,7 @@ Construir o **livro-pilar** que ancora a bio, a página e o funil dela. Modelo d
 
 ## ESTADO DOS FICHEIROS (repo vivnasc/viviannepag, em scope)
 - `METODO-VS.md` — one-pager do método. Feito, na main.
-- `OS-7-VEUS-v2.md` — **a 2.ª edição, ~25 mil palavras**. Voz linda e consistente, MAS os 7 capítulos dos véus **perderam coerência** (ver diagnóstico). É o que vamos reconstruir.
+- `OS-7-VEUS-v2.md` — **a 2.ª edição, ~25 mil palavras**. Voz linda e consistente, MAS os 7 capítulos dos véus **perderam coerência** (ver diagnóstico). É o que vamos reconstruir. **JÁ FEITO (não repetir):** a fundação já inclui o protocolo de bolso (Ver e Soltar em 4 tempos) e o gesto diário 'o minuto do véu'. Falta a RECONSTRUÇÃO DE COERÊNCIA dos 7 véus (molde igual, cortar repetição, arrumar a ordem) — é o próximo grande passo.
 - `livro-7-veus.json` — a 1.ª edição (v1), 56 mil palavras, já limpa de corrupção de OCR. É a **pedreira** (material autêntico para destilar) e a prova de conceito. **Manter intacta.**
 
 ## DIAGNÓSTICO EDITORIAL (porque reconstruímos — ela sentiu e tem razão)
