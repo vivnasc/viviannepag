@@ -16,10 +16,10 @@ type Pilar = {
 };
 
 const ESTILOS: [string, string][] = [
-  ['renascentista', 'renascentista do véu'],
-  ['etereo', 'etéreo / luz'],
-  ['dourado', 'dourado contemplativo'],
-  ['simbolico', 'simbólico minimal'],
+  ['limiar', 'limiar (arco de luz)'],
+  ['veu', 'véu (tecido + luz)'],
+  ['labirinto', 'labirinto dourado'],
+  ['chave', 'chave (soltar)'],
 ];
 
 export function LivroPilarCapas() {

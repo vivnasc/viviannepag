@@ -1,6 +1,7 @@
-// Capa DESENHADA do pilar (conceito selo/sistema): emblema do véu + tipografia
-// + fundo texturado. Sem IA: tudo SVG/CSS, renderizado por Puppeteer.
-// Pensada como MOLDE da coleção: muda-se a cor e o título para cada livro-filho.
+// Capa do pilar (proposta com lógica de mercado): tipografia-heroína, serif de
+// alto contraste, título em dourado-foil, ornamento tipográfico discreto, fundo
+// índigo/ameixa profundo com luz e textura, moldura de colecionável. Sem IA,
+// sem caras, sem ícones. Molde da coleção (muda cor/título nos filhos).
 // Uso: node capa-selo.js [out.png]
 const fs = require('fs');
 const path = require('path');
@@ -8,17 +9,12 @@ const puppeteer = require('puppeteer');
 
 const OUT = process.argv[2] || path.join(__dirname, '..', '..', 'livro-pilar', 'capa-composta.png');
 
-// >>> identidade da capa (mudar aqui para os filhos) <<<
 const T = {
   selo: 'MÉTODO VS · VER E SOLTAR',
-  titulo: 'OS SETE VÉUS',
+  l1: 'OS SETE',
+  l2: 'VÉUS',
   sub: 'Vê o que te prende.\nSolta o que te faz repetir.',
   autora: 'VIVIANNE DOS SANTOS',
-};
-// paleta (do véu)
-const COR = {
-  fundoTopo: '#211733', fundoBaixo: '#130E1F', ouro: '#D8B25A', ouroClaro: '#EBD79A',
-  creme: '#F4ECDD', tenue: 'rgba(235,215,154,0.50)',
 };
 
 function fontFace(fam, w, st, file) {
@@ -30,38 +26,10 @@ function fontFace(fam, w, st, file) {
 const FONTS = [
   ['Fraunces', 300, 'normal', 'fraunces-latin-300-normal'],
   ['Fraunces', 400, 'normal', 'fraunces-latin-400-normal'],
+  ['Fraunces', 500, 'normal', 'fraunces-latin-500-normal'],
   ['Fraunces', 300, 'italic', 'fraunces-latin-300-italic'],
-  ['Outfit', 400, 'normal', 'outfit-latin-400-normal'],
   ['Outfit', 500, 'normal', 'outfit-latin-500-normal'],
 ].map(a => fontFace(...a)).join('\n');
-
-// EMBLEMA: sete véus (arcos apontados aninhados) a abrir para uma luz no ápice;
-// é véu e é limiar (porta de entrada). Desenhado por geometria.
-function emblema() {
-  const cx = 200, baseY = 440;
-  let arcos = '';
-  for (let i = 0; i < 7; i++) {
-    const hw = 150 - i * 21;
-    const apex = 84 + i * 15;
-    const op = (0.95 - i * 0.07).toFixed(2);
-    const sw = (3.0 - i * 0.28).toFixed(2);
-    arcos += `<path d="M ${cx - hw} ${baseY} Q ${cx - hw} ${apex} ${cx} ${apex} Q ${cx + hw} ${apex} ${cx + hw} ${baseY}" fill="none" stroke="${COR.ouro}" stroke-width="${sw}" stroke-linecap="round" opacity="${op}"/>`;
-  }
-  return `<svg viewBox="0 0 400 480" width="560" height="672" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="glow" cx="50%" cy="14%" r="42%">
-        <stop offset="0%" stop-color="${COR.ouroClaro}" stop-opacity="0.55"/>
-        <stop offset="55%" stop-color="${COR.ouro}" stop-opacity="0.10"/>
-        <stop offset="100%" stop-color="${COR.ouro}" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect x="0" y="0" width="400" height="480" fill="url(#glow)"/>
-    ${arcos}
-    <line x1="44" y1="${baseY}" x2="356" y2="${baseY}" stroke="${COR.ouro}" stroke-width="1.4" opacity="0.7"/>
-    <circle cx="${cx}" cy="58" r="7" fill="${COR.ouroClaro}"/>
-    <circle cx="${cx}" cy="58" r="15" fill="none" stroke="${COR.ouroClaro}" stroke-width="1.1" opacity="0.55"/>
-  </svg>`;
-}
 
 const subHtml = T.sub.split('\n').join('<br>');
 
@@ -69,32 +37,39 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 ${FONTS}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{width:1400px;height:1873px;position:relative;overflow:hidden;
-  background:linear-gradient(170deg, ${COR.fundoTopo} 0%, ${COR.fundoBaixo} 100%);}
-/* grão/textura subtil */
-.grao{position:absolute;inset:0;opacity:0.05;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");}
-/* vinheta */
-.vinheta{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 36%, transparent 55%, rgba(8,5,14,0.55) 100%);}
-/* moldura de coleção */
-.moldura{position:absolute;inset:60px;border:1.5px solid ${COR.tenue};}
-.moldura::after{content:'';position:absolute;inset:10px;border:0.8px solid rgba(235,215,154,0.22);}
-.selo{position:absolute;top:150px;left:0;right:0;text-align:center;
-  font-family:'Outfit',sans-serif;font-weight:500;font-size:23px;letter-spacing:.42em;color:${COR.ouroClaro};opacity:.92;}
-.emblema{position:absolute;top:300px;left:0;right:0;display:flex;justify-content:center;}
-.titulo{position:absolute;top:1010px;left:0;right:0;text-align:center;color:${COR.creme};
-  font-family:'Fraunces',serif;font-weight:300;font-size:108px;line-height:1.0;letter-spacing:.02em;}
-.regua{position:absolute;top:1180px;left:50%;transform:translateX(-50%);width:160px;height:1px;background:${COR.ouro};opacity:.7;}
-.sub{position:absolute;top:1230px;left:0;right:0;text-align:center;
-  font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:38px;line-height:1.5;color:${COR.creme};opacity:.92;}
-.autora{position:absolute;bottom:120px;left:0;right:0;text-align:center;
-  font-family:'Outfit',sans-serif;font-weight:500;font-size:22px;letter-spacing:.36em;color:${COR.ouroClaro};opacity:.9;}
+  background:linear-gradient(168deg,#2C2046 0%, #1A1130 46%, #0C0816 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+/* luz quente alta (profundidade, sem forma) */
+.luz{position:absolute;top:-14%;left:50%;transform:translateX(-50%);width:1100px;height:1100px;
+  background:radial-gradient(circle, rgba(235,215,154,0.22) 0%, rgba(216,178,90,0.07) 38%, transparent 66%);}
+/* grão fino */
+.grao{position:absolute;inset:0;opacity:0.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");}
+.vinheta{position:absolute;inset:0;background:radial-gradient(125% 80% at 50% 40%, transparent 56%, rgba(6,4,12,0.62) 100%);}
+.moldura{position:absolute;inset:62px;border:1.4px solid rgba(216,178,90,0.42);}
+.moldura::after{content:'';position:absolute;inset:12px;border:0.8px solid rgba(216,178,90,0.18);}
+
+.selo{position:relative;font-family:'Outfit',sans-serif;font-weight:500;font-size:24px;
+  letter-spacing:.46em;color:#E6CE8E;opacity:.95;}
+.diamante{position:relative;color:#D8B25A;font-size:26px;line-height:1;margin:34px 0 50px;opacity:.9;}
+.titulo{position:relative;font-family:'Fraunces',serif;font-weight:400;font-size:150px;line-height:0.96;
+  letter-spacing:.015em;
+  background:linear-gradient(180deg,#F3E3B0 0%, #E2BE6B 42%, #C79A45 70%, #EBD79A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 18px rgba(216,178,90,0.18));}
+.regua{position:relative;width:180px;height:1px;background:#D8B25A;opacity:.75;margin:56px 0;}
+.sub{position:relative;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:43px;
+  line-height:1.5;color:#F4ECDD;opacity:.94;}
+.autora{position:absolute;bottom:126px;left:0;right:0;font-family:'Outfit',sans-serif;font-weight:500;
+  font-size:23px;letter-spacing:.4em;color:#E6CE8E;opacity:.92;}
 </style></head><body>
+<div class="luz"></div>
 <div class="grao"></div>
 <div class="vinheta"></div>
 <div class="moldura"></div>
 <div class="selo">${T.selo}</div>
-<div class="emblema">${emblema()}</div>
-<div class="titulo">${T.titulo}</div>
+<div class="diamante">&#9670;</div>
+<div class="titulo">${T.l1}<br>${T.l2}</div>
 <div class="regua"></div>
 <div class="sub">${subHtml}</div>
 <div class="autora">${T.autora}</div>
@@ -109,5 +84,5 @@ body{width:1400px;height:1873px;position:relative;overflow:hidden;
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   await page.screenshot({ path: OUT });
   await browser.close();
-  console.log('capa selo:', OUT);
+  console.log('capa:', OUT);
 })();
