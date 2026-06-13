@@ -35,8 +35,8 @@ Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelaçã
     preco_original: null,
     capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa-composta.png`,
     badge: 'livro · pilar',
-    destaque: true,
-    publicado: true,
+    destaque: false,
+    publicado: false,
     ordem: 0,
   },
   {
