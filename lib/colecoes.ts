@@ -312,8 +312,6 @@ export const COLECOES: Colecao[] = [
 // Mapeia slug do produto -> colecao. Sem mexer na DB; fica versionado no codigo.
 // Adiciona aqui novos produtos a medida que sao criados.
 export function slugToColecao(slug: string): ColecaoId {
-  // O livro-pilar (Método VS) entra no universo de identidade e propósito.
-  if (slug === 'os-7-veus') return 'infonte';
   // Ebooks novos por prefixo de colecao (1 prefixo = 1 universo).
   if (/^mae-\d/.test(slug)) return 'freeme-mae';
   if (/^inf-\d/.test(slug)) return 'infonte';
