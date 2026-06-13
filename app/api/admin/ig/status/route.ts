@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
 
   const conta = (req.nextUrl.searchParams.get('conta') as ContaId) || 'veuaveu';
   const { token, igUserId } = await getIgCredenciais(conta);
-  if (!token) return NextResponse.json({ ligado: false, erro: 'Ainda não há token guardado. Cola um token em baixo.' });
+  if (!token) return NextResponse.json({ ligado: false, igUserId, erro: 'Ainda não há token guardado. Cola um token em baixo.' });
   if (!igUserId) return NextResponse.json({ ligado: false, erro: 'Falta o IG_USER_ID (INSTAGRAM_IG_ID no Vercel).' });
 
   try {
@@ -22,10 +22,10 @@ export async function GET(req: NextRequest) {
     const j = (await res.json().catch(() => ({}))) as { username?: string; name?: string; error?: { message?: string; code?: number } };
     if (j.error) {
       const expirado = j.error.code === 190;
-      return NextResponse.json({ ligado: false, erro: expirado ? 'O token expirou ou é inválido. Cola um token novo em baixo.' : (j.error.message ?? 'token inválido') });
+      return NextResponse.json({ ligado: false, igUserId, erro: expirado ? 'O token expirou ou é inválido. Cola um token novo em baixo.' : (j.error.message ?? 'token inválido') });
     }
-    return NextResponse.json({ ligado: true, username: j.username ?? j.name ?? '(conta)' });
+    return NextResponse.json({ ligado: true, igUserId, username: j.username ?? j.name ?? '(conta)' });
   } catch (e) {
-    return NextResponse.json({ ligado: false, erro: String(e) });
+    return NextResponse.json({ ligado: false, igUserId, erro: String(e) });
   }
 }
