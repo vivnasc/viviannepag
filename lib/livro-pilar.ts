@@ -15,27 +15,27 @@ export type LivroPilar = {
 };
 
 // Estilos de capa do pilar (estética renascentista-do-véu). A paleta é comum.
-// IMPORTANTE: a capa é SEM caras e SEM figura humana (pedido da Vivianne).
-// Só véus, tecido e luz, abstrato e simbólico. Universal, sem etnia nem pose.
+// IMPORTANTE: a capa é SEM pessoas e SEM caras (pedido da Vivianne). Cada estilo
+// é um SÍMBOLO central (véu, limiar, labirinto, chave), em registo fine-art.
 export const PILAR_CAPA_ESTILOS: Record<string, { nome: string; prompt: string }> = {
-  renascentista: {
-    nome: 'Renascentista do véu',
-    prompt: 'fine-art book cover painting, renaissance chiaroscuro, layers of sheer translucent veils and folds of luminous cloth catching soft light, painterly oil texture, sfumato, contemplative and timeless, museum-quality, NO figures, NO faces, generous calm space at the top for a title',
+  limiar: {
+    nome: 'Limiar (arco de luz)',
+    prompt: 'a single ancient ornate stone archway or doorway standing alone, empty, opening onto warm radiant golden light, seen straight on, symbolic threshold, painterly fine-art, NO people, NO figures',
   },
-  etereo: {
-    nome: 'Etéreo / luz',
-    prompt: 'ethereal book cover art, sheer flowing veils and gauze catching warm golden light against deep dusk, soft volumetric glow, dreamlike and quiet, abstract and purely symbolic, NO figures, NO faces, generous negative space',
+  veu: {
+    nome: 'Véu (tecido + luz)',
+    prompt: 'a single sheer translucent veil of fabric alone in mid-air, no one wearing it, empty cloth lifting and parting to reveal warm golden light behind it, painterly still-life of fabric and light, NO people, NO body, NO figure, NO face',
   },
-  simbolico: {
-    nome: 'Simbólico minimal',
-    prompt: 'minimal symbolic book cover, a single translucent veil lifting against a deep contemplative background, elegant restraint, fine grain, lots of negative space, NO figures, NO faces, sophisticated literary non-fiction feel',
+  labirinto: {
+    nome: 'Labirinto dourado',
+    prompt: 'a circular labyrinth of fine gold lines on deep indigo, a single winding path to a glowing centre, elegant sacred geometry, symbolic of an inner journey, NO people, NO figures',
   },
-  dourado: {
-    nome: 'Dourado contemplativo',
-    prompt: 'luminous book cover painting, gold-leaf and deep indigo, sheer veils dissolving into warm light, sacred and serene, painterly texture with subtle gilt highlights, NO figures, NO faces, contemplative spiritual non-fiction',
+  chave: {
+    nome: 'Chave (soltar)',
+    prompt: 'a single ornate antique golden key resting in soft light against deep indigo, painterly still-life, symbolic of unlocking and letting go, NO people, NO figures, NO hands',
   },
 };
-export const PILAR_CAPA_ESTILO_DEFAULT = 'renascentista';
+export const PILAR_CAPA_ESTILO_DEFAULT = 'limiar';
 export const PILAR_CAPA_PALETA =
   'deep indigo and aubergine night, warm gold, cream and soft dusk-violet palette';
 

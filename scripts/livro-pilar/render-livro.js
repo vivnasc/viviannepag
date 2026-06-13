@@ -139,6 +139,8 @@ const html = `<!DOCTYPE html>
   /* fecho */
   .final { page-break-before: always; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 85vh; text-align: center; }
   .final .orn { margin-bottom: 11mm; }
+  .ponto { color: ${C.ouro}; font-size: 24pt; line-height: 1; }
+  .rosto .orn { margin-bottom: 11mm; }
   .final h3 { font-style: italic; font-weight: 300; font-size: 18pt; color: ${C.violeta}; margin-bottom: 9mm; }
   .final p { font-weight: 300; font-size: 10pt; line-height: 1.7; color: ${C.textoSuave}; margin-bottom: 4mm; max-width: 80%; }
   .final-credits { margin-top: 14mm; font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 7.5pt; letter-spacing: 0.3em; text-transform: uppercase; color: ${C.salvia}; }
@@ -150,7 +152,7 @@ const html = `<!DOCTYPE html>
   <div class="selo">${META.selo}</div>
   <h1>${META.titulo}</h1>
   <p class="sub">${META.sub}</p>
-  <div class="orn">${veu(48)}</div>
+  <div class="orn"><span class="ponto">·</span></div>
   <p class="autora">${META.autora}</p>
   <p class="edicao">${META.edicao}</p>
 </div>
@@ -170,7 +172,7 @@ ${corpoHtml}
 </div>
 
 <div class="final">
-  <div class="orn">${veu(40, C.salvia)}</div>
+  <div class="orn"><span class="ponto">·</span></div>
   <h3>${META.finalTit}</h3>
   <p>${META.finalTxt}</p>
   <div class="final-credits">${META.copy}</div>
