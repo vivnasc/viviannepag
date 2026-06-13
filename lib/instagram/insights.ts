@@ -1,9 +1,9 @@
 // Analytics do Instagram via Graph API oficial. Para cada conta (token +
-// IG_USER_ID) buscamos: dados do perfil (seguidores), os posts recentes com
-// gostos/comentários (campos básicos — NÃO precisam de insights), e, quando o
-// token tem a permissão instagram_manage_insights, métricas mais fundas por post
-// (alcance, guardados, partilhas, views). Degrada com elegância: se faltar a
-// permissão, mostramos o básico e avisamos.
+// IG_USER_ID): perfil (seguidores) + posts recentes com gostos/comentários
+// (campos básicos) e, quando o token tem instagram_manage_insights, métricas
+// fundas por post (alcance, guardados, partilhas, views). Calcula ainda um
+// RESUMO (médias, taxa de interação, desempenho por formato) para o painel de
+// comparação. Degrada com elegância se faltar a permissão.
 
 const GRAPH = 'https://graph.facebook.com/v21.0';
 
@@ -11,7 +11,6 @@ async function gget(path: string, params: Record<string, string>, tentativa = 0)
   const qs = new URLSearchParams(params).toString();
   const res = await fetch(`${GRAPH}/${path}?${qs}`);
   const j = (await res.json().catch(() => ({}))) as Record<string, unknown>;
-  // códigos 1/2 do Meta = erro temporário ("unknown"/"service") → tenta de novo
   const code = (j?.error as { code?: number } | undefined)?.code;
   if ((code === 1 || code === 2) && tentativa < 2) {
     await new Promise((r) => setTimeout(r, 800 * (tentativa + 1)));
@@ -29,20 +28,40 @@ function erroDe(j: Record<string, unknown>): string | undefined {
   return partes.join(' · ');
 }
 
+// nome amigável do formato
+export function nomeFormato(f: string): string {
+  if (f === 'REELS') return 'Reels';
+  if (f === 'CAROUSEL_ALBUM') return 'Carrossel';
+  if (f === 'VIDEO') return 'Vídeo';
+  if (f === 'IMAGE' || f === 'FEED') return 'Imagem';
+  return f;
+}
+
 export type PostAnalytics = {
   id: string;
   caption: string;
-  tipo: string;            // IMAGE | VIDEO | CAROUSEL_ALBUM
-  formato: string;         // FEED | REELS | ...
-  data: string;            // timestamp ISO
+  tipo: string;
+  formato: string;        // REELS | CAROUSEL_ALBUM | IMAGE | ...
+  data: string;
   permalink: string;
+  thumbnail?: string;
   gostos: number;
   comentarios: number;
-  alcance?: number;        // insights (se permitido)
+  alcance?: number;
   guardados?: number;
   partilhas?: number;
   views?: number;
-  interacoes?: number;     // gostos+comentários+guardados+partilhas
+  interacoes: number;     // total (insights ou soma dos básicos)
+};
+
+export type FormatoResumo = { formato: string; n: number; mediaAlcance: number; mediaInteracoes: number };
+
+export type Resumo = {
+  mediaAlcance: number;
+  mediaInteracoes: number;
+  taxaInteracao: number;   // % interações / alcance
+  porFormato: FormatoResumo[];
+  melhorFormato?: string;
 };
 
 export type ContaAnalytics = {
@@ -50,18 +69,20 @@ export type ContaAnalytics = {
   username?: string;
   seguidores?: number;
   totalPosts?: number;
-  insightsDisponiveis: boolean;  // o token tem instagram_manage_insights?
+  insightsDisponiveis: boolean;
   posts: PostAnalytics[];
+  resumo?: Resumo;
   erro?: string;
-  avisoInsights?: string;        // mensagem se as métricas fundas falharam
+  avisoInsights?: string;
 };
 
+type Child = { media_url?: string; thumbnail_url?: string };
 type MediaRaw = {
   id: string; caption?: string; media_type?: string; media_product_type?: string;
   timestamp?: string; permalink?: string; like_count?: number; comments_count?: number;
+  media_url?: string; thumbnail_url?: string; children?: { data?: Child[] };
 };
 
-// métricas de insights por post, conforme o formato. 'views' só faz sentido em vídeo/reel.
 function metricasDe(formato: string): string[] {
   const base = ['reach', 'saved', 'shares', 'total_interactions'];
   if (formato === 'REELS' || formato === 'VIDEO') base.push('views');
@@ -79,37 +100,61 @@ async function insightsDoPost(id: string, formato: string, token: string): Promi
   return { vals };
 }
 
-export async function getContaAnalytics(token: string, igUserId: string, limite = 12): Promise<ContaAnalytics> {
+function thumbDe(m: MediaRaw): string | undefined {
+  return m.thumbnail_url || m.media_url || m.children?.data?.[0]?.thumbnail_url || m.children?.data?.[0]?.media_url;
+}
+
+const media = (xs: number[]) => (xs.length ? Math.round(xs.reduce((a, b) => a + b, 0) / xs.length) : 0);
+
+function calcResumo(posts: PostAnalytics[]): Resumo | undefined {
+  const comAlcance = posts.filter((p) => p.alcance != null) as (PostAnalytics & { alcance: number })[];
+  const mediaAlcance = media(comAlcance.map((p) => p.alcance));
+  const mediaInteracoes = media(posts.map((p) => p.interacoes));
+  const somaAlc = comAlcance.reduce((a, p) => a + p.alcance, 0);
+  const somaInt = comAlcance.reduce((a, p) => a + p.interacoes, 0);
+  const taxaInteracao = somaAlc > 0 ? Math.round((somaInt / somaAlc) * 1000) / 10 : 0;
+
+  const grupos = new Map<string, PostAnalytics[]>();
+  for (const p of posts) {
+    const arr = grupos.get(p.formato) ?? [];
+    arr.push(p); grupos.set(p.formato, arr);
+  }
+  const porFormato: FormatoResumo[] = [...grupos.entries()].map(([formato, ps]) => ({
+    formato,
+    n: ps.length,
+    mediaAlcance: media(ps.filter((p) => p.alcance != null).map((p) => p.alcance as number)),
+    mediaInteracoes: media(ps.map((p) => p.interacoes)),
+  })).sort((a, b) => b.mediaAlcance - a.mediaAlcance);
+
+  const melhorFormato = porFormato.find((f) => f.mediaAlcance > 0)?.formato ?? porFormato[0]?.formato;
+  return { mediaAlcance, mediaInteracoes, taxaInteracao, porFormato, melhorFormato };
+}
+
+export async function getContaAnalytics(token: string, igUserId: string, limite = 18): Promise<ContaAnalytics> {
   if (!token || !igUserId) return { ok: false, insightsDisponiveis: false, posts: [], erro: 'conta sem token/ID' };
 
-  // perfil
   const perfil = await gget(igUserId, { fields: 'username,followers_count,media_count', access_token: token });
   const erroPerfil = erroDe(perfil);
   if (erroPerfil) return { ok: false, insightsDisponiveis: false, posts: [], erro: erroPerfil };
 
-  // posts recentes (campos básicos — sem insights)
   const mediaResp = await gget(`${igUserId}/media`, {
-    fields: 'id,caption,media_type,media_product_type,timestamp,permalink,like_count,comments_count',
+    fields: 'id,caption,media_type,media_product_type,timestamp,permalink,like_count,comments_count,media_url,thumbnail_url,children{media_url,thumbnail_url}',
     limit: String(limite),
     access_token: token,
   });
-  const media = (mediaResp.data as MediaRaw[] | undefined) ?? [];
+  const lista = (mediaResp.data as MediaRaw[] | undefined) ?? [];
 
-  // insights por post (em paralelo). Se o 1º falhar por permissão, marcamos como indisponível.
   let insightsDisponiveis = true;
   let avisoInsights: string | undefined;
 
-  const posts: PostAnalytics[] = await Promise.all(media.map(async (m) => {
-    const formato = m.media_product_type ?? m.media_type ?? 'FEED';
+  const posts: PostAnalytics[] = await Promise.all(lista.map(async (m) => {
+    const formato = m.media_product_type ?? m.media_type ?? 'IMAGE';
+    const gostos = m.like_count ?? 0;
+    const comentarios = m.comments_count ?? 0;
     const base: PostAnalytics = {
-      id: m.id,
-      caption: (m.caption ?? '').slice(0, 140),
-      tipo: m.media_type ?? '—',
-      formato,
-      data: m.timestamp ?? '',
-      permalink: m.permalink ?? '',
-      gostos: m.like_count ?? 0,
-      comentarios: m.comments_count ?? 0,
+      id: m.id, caption: (m.caption ?? '').slice(0, 140), tipo: m.media_type ?? '—', formato,
+      data: m.timestamp ?? '', permalink: m.permalink ?? '', thumbnail: thumbDe(m),
+      gostos, comentarios, interacoes: gostos + comentarios,
     };
     const ins = await insightsDoPost(m.id, formato, token);
     if (ins.erro) {
@@ -117,13 +162,13 @@ export async function getContaAnalytics(token: string, igUserId: string, limite 
       if (!avisoInsights) avisoInsights = ins.erro;
       return base;
     }
+    const guardados = ins.vals.saved ?? 0;
+    const partilhas = ins.vals.shares ?? 0;
     return {
       ...base,
       alcance: ins.vals.reach,
-      guardados: ins.vals.saved,
-      partilhas: ins.vals.shares,
-      views: ins.vals.views,
-      interacoes: ins.vals.total_interactions,
+      guardados, partilhas, views: ins.vals.views,
+      interacoes: ins.vals.total_interactions ?? (gostos + comentarios + guardados + partilhas),
     };
   }));
 
@@ -135,5 +180,6 @@ export async function getContaAnalytics(token: string, igUserId: string, limite 
     insightsDisponiveis,
     avisoInsights: insightsDisponiveis ? undefined : avisoInsights,
     posts,
+    resumo: calcResumo(posts),
   };
 }
