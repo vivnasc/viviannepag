@@ -486,7 +486,13 @@ export function gerarMetricoolCSVPublicar(dias: PublicarCsvDia[], plataforma: 't
   };
   const querTT = plataforma === 'tiktok' || plataforma === 'ambas';
   const querIG = plataforma === 'instagram' || plataforma === 'ambas';
+  // dedupe: garante CSV limpo mesmo se a fonte tiver coleções repetidas no mesmo
+  // dia (a Vivianne teve duplicações na campanha). Chave = data+hora+média+texto.
+  const vistos = new Set<string>();
   for (const d of dias) {
+    const chaveDup = `${d.date}|${d.time}|${d.videoUrl ?? d.imagens?.[0] ?? ''}|${d.caption}`;
+    if (vistos.has(chaveDup)) continue;
+    vistos.add(chaveDup);
     const video = d.videoUrl ? semCache(d.videoUrl) : '';
     const imagens = (d.imagens ?? []).filter(Boolean);
     if (!video && !imagens.length) continue;
