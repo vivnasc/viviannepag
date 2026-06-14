@@ -1,72 +1,80 @@
-# Contas do Método VS · identidade, bios e distribuição de conteúdo
+# Contas do Método VS · o eixo Ver · Vir · Viver
 
-Documento de organização das contas. Objetivo: **converter sem dispersão**. Cada
-conta é uma porta com identidade própria; todas desaguam no **Método VS** e no
-pilar **Os Sete Véus**. Cada conta sabe exatamente o que é seu (largura vs
-profundidade), por isso o conteúdo não se espalha.
+Documento-espinha das contas. Objetivo: **converter sem dispersão**. Tudo gira à
+volta de um eixo descoberto (não inventado) dentro do próprio método.
 
-## Regra de ouro da distinção
-- **Conta-mãe = LARGURA:** o método inteiro, a autora, o pilar, o diagnóstico (todos os véus).
-- **Contas-filho = PROFUNDIDADE:** um véu cada, em **reels** problema→solução, e vende o seu manual.
-- **veu.a.veu = DIDÁTICA:** fora desta equação de venda (já orquestrada; nutre e dá autoridade).
-- **Formato:** contas novas (filhas) vivem de **reels** (vídeo curto, o que pega em contas novas). Carrosséis ficam na **mãe** e na **veu.a.veu**, onde já funcionam.
-- **Registo do conteúdo:** o livro é o manual (fundo, literário). O conteúdo de social é **problema → solução**: convence que há algo na vida da pessoa para resolver, e que a Vivianne ajuda. São dois registos diferentes.
+## O eixo (canon)
+**Ver → Vir → Viver.** Os três movimentos da mesma travessia:
+- **Ver** = consciência (sair de dentro da tempestade e ver).
+- **Vir** = regresso (parar de empurrar e regressar a si).
+- **Viver** = integração (entrar na própria vida, encarná-la).
+
+E o par de letras guarda tudo: **VS = Ver e Soltar = Vivianne Saraiva**, e a tríade
+**Ver / Vir / Viver**. Mesma letra, mesma família sonora, uma história inteira.
+Os nomes das contas nascem daqui, não do marketing.
+
+## Regra de distinção
+- **Conta-mãe = LARGURA:** a autora + o método inteiro + o pilar + o diagnóstico.
+- **3 portas = os 3 MOVIMENTOS:** cada uma um movimento (ver/vir/viver), em **reels** problema→solução, e vende o seu manual.
+- **veu.a.veu = DIDÁTICA:** fora da venda (já orquestrada; nutre e dá autoridade).
+- **Formato:** portas vivem de **reels**; carrosséis ficam na mãe e na veu.a.veu.
+- **Dois registos:** o livro/manual é fundo e literário; o social é problema→solução (convence que há algo a resolver e que a Vivianne ajuda).
+- **Dualidade** (a separação) não vira porta: é a **raiz** dos outros seis, vive no **pilar**.
 
 ---
 
-## 1. Conta-mãe · vivianne.dos.santos  (identidade já existente)
-- **Papel:** a autora + o método inteiro. O hub para onde tudo aponta.
+## Conta-mãe · vivianne.dos.santos  (identidade já existente)
+- **É:** Vivianne · *Ver e Soltar (VS)* · o método inteiro. O hub.
 - **Bio:** *Vivianne dos Santos · criadora do Método VS · Ver e Soltar. Os padrões que te fazem repetir são véus. Ensino-te a vê-los e a soltá-los, um a um. 📖 Os Sete Véus ↓*
-- **Conteúdo (lanes):** método transversal; a tua história/voz; VC Sabia (manhã); Hoje em Mim (noite); carrosséis dos 7 véus (loja); o diagnóstico *"qual é o teu véu?"*.
+- **Conteúdo:** método transversal; a tua história/voz; VC Sabia; Hoje em Mim; carrosséis dos 7 véus; o diagnóstico *"qual é o teu véu?"*.
 - **Vende:** *Os Sete Véus* (o pilar, €19).
-- **NÃO faz:** o aprofundamento dor-a-dor de cada véu (isso é das filhas), para não competir consigo mesma.
 
-## 2. veu.a.veu  (didática · fora da venda)
-- **Papel:** ensinar, sem vender. 4 matérias fixas (Psicologia Transpessoal · Constelação Familiar · Psicologia e Espiritualidade · Desenvolvimento Pessoal). Já orquestrada.
-- **Bio:** (mantém a atual, didática.)
-- **Conteúdo:** o que já produz aqui. Nutre autoridade; não entra no funil de venda direta.
+## veu.a.veu  (didática · fora da venda)
+- Ensina (4 matérias). Já orquestrada. Nutre autoridade; não entra no funil de venda.
 
 ---
 
-## 3. Porta do ESFORÇO  (ex-FreeMe)
-- **Nome/handle:** a fechar contigo (registo de marca, não frase). Mantém-se o handle atual no arranque para não perder seguidores; muda-se **nome de ecrã + bio + conteúdo**.
-- **Identidade (a dor):** a mulher que carrega tudo; esgotamento; culpa de descansar; agradar/salvar.
-- **Bio:** *Esgotas-te a cuidar de todos e descansar dá-te culpa? Ajudo-te a pousar o que não é teu. Método VS · Ver e Soltar 🕯️ 📖 ↓*
-- **Fenómeno-marca:** **O Acordo Invisível** ("se eu fizer o suficiente, fico; se parar, deixam de gostar de mim").
-- **Reels (lanes):** "dormes 8h e acordas no mesmo cansaço"; "4 sinais de que carregas o que não é teu"; "ninguém fala do cansaço de ser sempre a forte"; "treinaste toda a gente a não ajudar"; "porque é que parar te dá culpa".
-- **Vende:** *Ver e Soltar o Esforço* (€9) → e o pilar.
-- **CTA:** comenta **POUSAR** → DM com o 1.º passo grátis → manual.
+## Porta 1 · ver.soltar  — a consciência
+- **Movimento:** Ver. **Cacho:** Turbilhão + Memória.
+- **A pessoa depois:** sai de dentro da cabeça e vê a tempestade passar de terra.
+- **Bio:** *A tua cabeça não para, a remoer o passado e a ensaiar o que aí vem? O primeiro movimento é ver: sair de dentro da tempestade. Método VS · Ver e Soltar 🕯️ 📖 ↓*
+- **Reels (lanes):** "a cabeça que não desliga à noite"; "estás a reagir à memória, não ao presente"; "4 sinais de que vives em alerta"; "não és os teus pensamentos".
+- **Vende:** o manual **ver.soltar** (€9) → e o pilar.
+- **CTA:** comenta **VER** → DM com o 1.º passo grátis → manual.
 
-## 4. Porta da PERMANÊNCIA  (ex-Infonte)
-- **Nome/handle:** a fechar contigo (mesma lógica).
-- **Identidade (a dor):** quem és para além dos papéis; medo de mudar; ser sempre a forte.
-- **Bio:** *Mudar parece trair-te? Não és os teus papéis. Ajudo-te a descobrir quem permanece quando tudo muda. Método VS · Ver e Soltar 🕯️ 📖 ↓*
-- **Reels (lanes):** "mudar de vida parece trair-te?"; "quem és quando paras de ser a forte?"; "agarras-te a um papel que já te sufoca"; "tens medo de não saber quem és sem isso".
-- **Vende:** *Ver e Soltar a Permanência* (€9) → e o pilar.
-- **CTA:** comenta **RAIZ** → DM com o 1.º passo grátis → manual.
+## Porta 2 · vir.soltar  — o regresso
+- **Movimento:** Vir. **Cacho:** Esforço + Desolação.
+- **A pessoa depois:** para de empurrar, regressa a si, deixa-se segurar e descansar.
+- **Bio:** *Carregas tudo e, quando paras, vem o vazio? O movimento é vir: regressar a ti, deixar-te segurar. Método VS · Ver e Soltar 🕯️ 📖 ↓*
+- **Reels (lanes):** "dormes 8h e acordas no mesmo cansaço"; "carregas um peso que nem é teu"; "descansar dá-te culpa?"; "o vazio não é falta, é onde germinas".
+- **Vende:** o manual **vir.soltar** (€9) → e o pilar.
+- **CTA:** comenta **VIR** → DM com o 1.º passo grátis → manual.
 
-## 5. Porta da DESOLAÇÃO  (ex-Synchim)
-- **Nome/handle:** a fechar contigo (mesma lógica).
-- **Identidade (a dor):** medo do vazio e da solidão; encher tudo para não sentir.
-- **Bio:** *O silêncio assusta-te e enches tudo para não sentir? Ajudo-te a habitar o vazio sem medo. Método VS · Ver e Soltar 🕯️ 📖 ↓*
-- **Reels (lanes):** "enches o silêncio para não sentir?"; "estar só não é estar partida"; "porque é que a casa vazia te aperta o peito"; "o vazio não é falta, é onde germinas".
-- **Vende:** *Ver e Soltar a Desolação* (€9) → e o pilar.
-- **CTA:** comenta **VAZIO** → DM com o 1.º passo grátis → manual.
+## Porta 3 · viver.soltar  — a integração
+- **Movimento:** Viver. **Cacho:** Horizonte + Permanência.
+- **A pessoa depois:** sai da sala de espera, tira a armadura dos papéis e entra na própria vida, agora.
+- **Bio:** *Vives à espera de viver, presa a quem já foste? O movimento é viver: entrar na tua própria vida, agora. Método VS · Ver e Soltar 🕯️ 📖 ↓*
+- **Reels (lanes):** "adias a vida para um 'quando' que não chega"; "mudar parece trair-te?"; "quem és quando paras de ser a forte?"; "a estreia é hoje".
+- **Vende:** o manual **viver.soltar** (€9) → e o pilar.
+- **CTA:** comenta **VIVER** → DM com o 1.º passo grátis → manual.
 
 ---
 
-## O funil (igual nas três filhas)
-1. **Reel** que nomeia a dor (problema→solução).
-2. **CTA** no reel/legenda: "comenta [PALAVRA]".
-3. **DM** automática com o 1.º passo grátis (uma prática do método) + link do **manual** (o filho).
-4. O manual leva ao **pilar** (Os Sete Véus).
-5. **Diagnóstico "qual é o teu véu?"** vive na mãe e encaminha cada pessoa para a porta certa.
+## O funil (e a beleza do eixo)
+O eixo é, ao mesmo tempo, **conteúdo, marca e jornada**: quem segue passa por
+ver (consciência) → vir (regresso) → viver (integração). Em cada porta:
+1. **Reel** que nomeia a dor.
+2. **CTA**: "comenta [VER/VIR/VIVER]".
+3. **DM** com o 1.º passo grátis (uma prática) + link do manual.
+4. O manual leva ao **pilar**.
+5. O **diagnóstico** "qual é o teu véu?" (na mãe) encaminha para a porta certa.
 
-## Preços (proposta)
+## Preços
 - Pilar *Os Sete Véus*: **€19**.
-- Filhos (Esforço, Permanência, Desolação): **€9** cada (portas de entrada).
+- Manuais (ver.soltar · vir.soltar · viver.soltar): **€9** cada.
 
 ## Por fechar
-- Os **nomes/handles** das 3 portas (registo de marca, a definir contigo).
-- Capas dos 3 filhos (mesma família do limiar, símbolo/cor por véu).
-- Páginas de venda dos filhos + ligar o funil de DM.
+- Handles exatos (ver.soltar / vir.soltar / viver.soltar, ou variação por disponibilidade).
+- Os 3 manuais escritos como os 3 movimentos (PT+EN) — em curso.
+- Capas dos 3 manuais (família do limiar, cor/símbolo por movimento).
+- Páginas de venda + funil de DM.
