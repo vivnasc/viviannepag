@@ -2,16 +2,23 @@
 // tipografia. Layout ancorado em baixo: a imagem é o herói em cima, e o bloco
 // de texto (selo + título + subtítulo + autora) agrupa-se na base sobre um
 // degradê, para não ficar título a flutuar nem nome órfão.
-// Uso: node capa-compor.js <capa-src.jpg> <out.png>
+// Uso: node capa-compor.js <capa-src.jpg> <out.png> [pt|en]
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
 const SRC = process.argv[2];
 const OUT = process.argv[3] || path.join(__dirname, '..', '..', 'livro-pilar', 'capa-composta.png');
+const LANG = process.argv[4] === 'en' ? 'en' : 'pt';
 
 // >>> textos da capa (mudar aqui se o título evoluir) <<<
-const T = {
+const T = LANG === 'en' ? {
+  selo: 'METHOD VS · SEE AND RELEASE',
+  t1: 'The Seven',
+  t2: 'Veils',
+  sub: 'See what binds you.\nRelease what makes you repeat.',
+  autora: 'VIVIANNE DOS SANTOS',
+} : {
   selo: 'MÉTODO VS · VER E SOLTAR',
   t1: 'Os Sete',
   t2: 'Véus',
