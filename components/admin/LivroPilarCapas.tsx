@@ -27,6 +27,9 @@ export function LivroPilarCapas() {
   const [aGerar, setAGerar] = useState<string | null>(null);
   const [aFixar, setAFixar] = useState<string | null>(null);
   const [aRender, setARender] = useState(false);
+  const [testeEmail, setTesteEmail] = useState('');
+  const [aTestar, setATestar] = useState(false);
+  const [testeRes, setTesteRes] = useState<{ ok: boolean; emailOk: boolean; downloadUrl: string } | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
 
@@ -93,6 +96,21 @@ export function LivroPilarCapas() {
     } catch (e) {
       setErro(e instanceof Error ? e.message : String(e));
     } finally { setARender(false); }
+  }
+
+  async function testarCompra() {
+    setErro(null); setTesteRes(null); setATestar(true);
+    try {
+      const res = await fetch('/api/admin/livro-pilar/teste-compra', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: testeEmail }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      setTesteRes(json);
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : String(e));
+    } finally { setATestar(false); }
   }
 
   if (!livro) return <p className="text-creme-2/60 italic font-serif">a carregar…</p>;
@@ -192,6 +210,35 @@ export function LivroPilarCapas() {
                 </figure>
               ))}
             </div>
+          </div>
+        )}
+      </section>
+
+      <section className="border border-salvia/20 rounded-[14px] p-6">
+        <h3 className="font-serif text-creme text-[1.05rem] mb-1">Testar compra (sem PayPal)</h3>
+        <p className="text-creme-2/60 text-[0.82rem] mb-4 font-serif italic">
+          Reproduz o pós-pagamento: envia-te o email de compra e dá-te o download, exatamente como um comprador. Só funciona depois de um render bem-sucedido (PDF no sítio).
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <input
+            type="email"
+            value={testeEmail}
+            onChange={(e) => setTesteEmail(e.target.value)}
+            placeholder="o teu email"
+            className="bg-transparent border border-ocre/25 rounded-[10px] px-4 py-2 text-[0.85rem] text-creme min-w-[240px]"
+          />
+          <button
+            onClick={testarCompra}
+            disabled={aTestar}
+            className="rounded-full border border-salvia/50 text-salvia px-5 py-2 text-[0.82rem] hover:bg-salvia/10 transition-colors disabled:opacity-50"
+          >
+            {aTestar ? 'a testar…' : 'testar entrega + email'}
+          </button>
+        </div>
+        {testeRes && (
+          <div className="mt-4 text-[0.85rem] text-creme-2/80">
+            <p>{testeRes.emailOk ? '✓ Email de compra enviado.' : '⚠ Email não enviou (verifica RESEND); o download abaixo funciona na mesma.'}</p>
+            <a href={testeRes.downloadUrl} className="text-ambar underline">descarregar o livro (teste)</a>
           </div>
         )}
       </section>
