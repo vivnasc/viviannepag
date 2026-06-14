@@ -1,14 +1,17 @@
 // Render genérico de um método-filho (PT ou EN): lê o markdown, monta rosto +
-// ficha + sumário + corpo em A5. Deteta o idioma pelo nome (-EN).
-// Uso: node render-filho.js <ficheiro.md> <saida.pdf>
+// ficha + sumário + corpo em A5. Deteta o idioma pelo nome (-EN). Se for dada
+// uma capa composta (PNG), sobrepõe-na como 1.ª página, tal como no pilar.
+// Uso: node render-filho.js <ficheiro.md> <saida.pdf> [capa-composta.png]
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const { marked } = require('marked');
+const { PDFDocument } = require('pdf-lib');
 
 const SRC = process.argv[2];
 const OUT = process.argv[3];
-if (!SRC || !OUT) { console.error('uso: node render-filho.js <md> <pdf>'); process.exit(1); }
+const CAPA = process.argv[4]; // opcional: capa composta a sobrepor como 1.ª página
+if (!SRC || !OUT) { console.error('uso: node render-filho.js <md> <pdf> [capa.png]'); process.exit(1); }
 const LANG = /-EN\.md$/i.test(SRC) ? 'en' : 'pt';
 
 const raw = fs.readFileSync(SRC, 'utf8');
@@ -88,11 +91,23 @@ body { font-family:'Fraunces',Georgia,serif; font-weight:300; font-size:11pt; li
   await page.setContent(html, { waitUntil: 'load', timeout: 120000 });
   await page.evaluateHandle('document.fonts.ready');
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
-  const buf = await page.pdf({ format: 'A5', printBackground: true, displayHeaderFooter: true,
+  const mioloBuf = await page.pdf({ format: 'A5', printBackground: true, displayHeaderFooter: true,
     headerTemplate: '<div></div>',
     footerTemplate: `<div style="width:100%;text-align:center;font-family:Outfit,sans-serif;font-size:7pt;color:#5A546880;"><span class="pageNumber"></span></div>`,
     margin: { top: '21mm', right: '18mm', bottom: '24mm', left: '18mm' } });
   await browser.close();
-  fs.writeFileSync(OUT, buf);
-  console.log('filho:', OUT, Math.round(buf.length / 1024) + ' KB');
+
+  if (CAPA && fs.existsSync(CAPA)) {
+    const livro = await PDFDocument.create();
+    const A5 = [419.53, 595.28];
+    const capaImg = await livro.embedPng(fs.readFileSync(CAPA));
+    livro.addPage(A5).drawImage(capaImg, { x: 0, y: 0, width: A5[0], height: A5[1] });
+    const miolo = await PDFDocument.load(mioloBuf);
+    (await livro.copyPages(miolo, miolo.getPageIndices())).forEach((p) => livro.addPage(p));
+    fs.writeFileSync(OUT, await livro.save());
+    console.log('filho (com capa):', OUT, Math.round(fs.statSync(OUT).size / 1024) + ' KB,', livro.getPageCount(), 'páginas');
+  } else {
+    fs.writeFileSync(OUT, mioloBuf);
+    console.log('filho:', OUT, Math.round(mioloBuf.length / 1024) + ' KB');
+  }
 })();

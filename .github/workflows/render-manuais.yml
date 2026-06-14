@@ -23,15 +23,36 @@ jobs:
           sudo apt-get install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libgbm1 libpango-1.0-0 libxcomposite1 libxdamage1 libxrandr2 libxfixes3 libxkbcommon0 libasound2t64 libxshmfence1 fonts-liberation libu2f-udev
       - name: npm
         run: npm install --no-save puppeteer marked pdf-lib @supabase/supabase-js @fontsource/fraunces @fontsource/outfit
-      - name: Render manuais (miolo) PT e EN
+      - name: Download capas escolhidas
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        run: |
+          for s in ver-soltar vir-soltar viver-soltar; do
+            mkdir -p "livro-pilar/$s"
+            if curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/livro-pilar/$s/capa.jpg" -o "/tmp/$s-capa.jpg"; then
+              echo "capa escolhida: $s"
+            else
+              echo "sem capa escolhida para $s (sai sem capa de imagem)"
+            fi
+          done
+      - name: Compor capas (imagem escolhida + tipografia) PT e EN
+        run: |
+          for s in ver-soltar vir-soltar viver-soltar; do
+            if [ -f "/tmp/$s-capa.jpg" ]; then
+              node scripts/livro-pilar/capa-compor.js "/tmp/$s-capa.jpg" "livro-pilar/$s/capa-composta.png" pt "$s"
+              node scripts/livro-pilar/capa-compor.js "/tmp/$s-capa.jpg" "/tmp/$s-capa-en.png"             en "$s"
+            fi
+          done
+      - name: Render manuais (miolo + capa) PT e EN
         run: |
           mkdir -p /tmp/manual
-          node scripts/livro-pilar/render-filho.js VER-SOLTAR-PT.md   /tmp/manual/ver-soltar-PT.pdf
-          node scripts/livro-pilar/render-filho.js VER-SOLTAR-EN.md   /tmp/manual/ver-soltar-EN.pdf
-          node scripts/livro-pilar/render-filho.js VIR-SOLTAR-PT.md   /tmp/manual/vir-soltar-PT.pdf
-          node scripts/livro-pilar/render-filho.js VIR-SOLTAR-EN.md   /tmp/manual/vir-soltar-EN.pdf
-          node scripts/livro-pilar/render-filho.js VIVER-SOLTAR-PT.md /tmp/manual/viver-soltar-PT.pdf
-          node scripts/livro-pilar/render-filho.js VIVER-SOLTAR-EN.md /tmp/manual/viver-soltar-EN.pdf
+          cap() { [ -f "$1" ] && echo "$1" || echo ""; }
+          node scripts/livro-pilar/render-filho.js VER-SOLTAR-PT.md   /tmp/manual/ver-soltar-PT.pdf   "$(cap livro-pilar/ver-soltar/capa-composta.png)"
+          node scripts/livro-pilar/render-filho.js VER-SOLTAR-EN.md   /tmp/manual/ver-soltar-EN.pdf   "$(cap /tmp/ver-soltar-capa-en.png)"
+          node scripts/livro-pilar/render-filho.js VIR-SOLTAR-PT.md   /tmp/manual/vir-soltar-PT.pdf   "$(cap livro-pilar/vir-soltar/capa-composta.png)"
+          node scripts/livro-pilar/render-filho.js VIR-SOLTAR-EN.md   /tmp/manual/vir-soltar-EN.pdf   "$(cap /tmp/vir-soltar-capa-en.png)"
+          node scripts/livro-pilar/render-filho.js VIVER-SOLTAR-PT.md /tmp/manual/viver-soltar-PT.pdf "$(cap livro-pilar/viver-soltar/capa-composta.png)"
+          node scripts/livro-pilar/render-filho.js VIVER-SOLTAR-EN.md /tmp/manual/viver-soltar-EN.pdf "$(cap /tmp/viver-soltar-capa-en.png)"
       - name: Render cartões de bolso (bónus) PT e EN
         run: node scripts/livro-pilar/render-cartoes-filhos.js /tmp/cartoes
       - name: Juntar manual + bónus

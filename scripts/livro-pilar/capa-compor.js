@@ -1,30 +1,22 @@
-// Compõe a capa final do pilar: imagem escolhida (símbolo, sem texto) +
-// tipografia. Layout ancorado em baixo: a imagem é o herói em cima, e o bloco
-// de texto (selo + título + subtítulo + autora) agrupa-se na base sobre um
-// degradê, para não ficar título a flutuar nem nome órfão.
-// Uso: node capa-compor.js <capa-src.jpg> <out.png> [pt|en]
+// Compõe a capa final de qualquer um dos 4 livros: imagem escolhida (símbolo,
+// sem texto) + tipografia. Layout ancorado em baixo: a imagem é o herói em cima,
+// e o bloco de texto (selo + título + subtítulo + autora) agrupa-se na base
+// sobre um degradê, para não ficar título a flutuar nem nome órfão. Os textos
+// vêm de capas-textos.js (fonte única); o slug escolhe o livro.
+// Uso: node capa-compor.js <capa-src.jpg> <out.png> [pt|en] [slug]
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
+const TEXTOS = require('./capas-textos.js');
 
 const SRC = process.argv[2];
 const OUT = process.argv[3] || path.join(__dirname, '..', '..', 'livro-pilar', 'capa-composta.png');
 const LANG = process.argv[4] === 'en' ? 'en' : 'pt';
+const SLUG = process.argv[5] || 'os-7-veus';
 
-// >>> textos da capa (mudar aqui se o título evoluir) <<<
-const T = LANG === 'en' ? {
-  selo: 'METHOD VS · SEE AND RELEASE',
-  t1: 'The Seven',
-  t2: 'Veils',
-  sub: 'See what binds you.\nRelease what makes you repeat.',
-  autora: 'VIVIANNE DOS SANTOS',
-} : {
-  selo: 'MÉTODO VS · VER E SOLTAR',
-  t1: 'Os Sete',
-  t2: 'Véus',
-  sub: 'Vê o que te prende.\nSolta o que te faz repetir.',
-  autora: 'VIVIANNE DOS SANTOS',
-};
+const entrada = TEXTOS[SLUG] || TEXTOS['os-7-veus'];
+const T = entrada[LANG];
+const TITULO_PX = entrada.px || 142;
 
 function fontFace(fam, w, st, file) {
   const dir = fam === 'Fraunces' ? 'fraunces' : 'outfit';
@@ -62,7 +54,7 @@ body { width:1400px; height:1873px; position:relative; overflow:hidden; backgrou
 
 /* bloco de texto ancorado em baixo */
 .bloco { position:absolute; left:0; right:0; bottom:150px; text-align:center; padding:0 80px; }
-.titulo { font-family:'Fraunces',serif; font-weight:400; font-size:142px; line-height:0.96; letter-spacing:.012em;
+.titulo { font-family:'Fraunces',serif; font-weight:400; font-size:${TITULO_PX}px; line-height:0.96; letter-spacing:.012em;
   background:linear-gradient(180deg,#F3E3B0 0%, #E2BE6B 44%, #C79A45 72%, #EBD79A 100%);
   -webkit-background-clip:text; background-clip:text; color:transparent;
   filter:drop-shadow(0 2px 22px rgba(8,5,14,0.6)); }
@@ -78,7 +70,7 @@ body { width:1400px; height:1873px; position:relative; overflow:hidden; backgrou
 <div class="moldura"></div>
 <div class="selo-topo">${T.selo}</div>
 <div class="bloco">
-  <div class="titulo">${T.t1}<br>${T.t2}</div>
+  <div class="titulo">${T.t2 ? `${T.t1}<br>${T.t2}` : T.t1}</div>
   <div class="regua"></div>
   <div class="sub">${subHtml}</div>
   <div class="autora">${T.autora}</div>
