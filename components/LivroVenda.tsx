@@ -26,6 +26,7 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
 
   const t = {
     selo: isEn ? 'Method VS · See and Release' : 'Método VS · Ver e Soltar',
+    paraTiSe: isEn ? 'This manual is for you if…' : 'Este manual é para ti se…',
     clareza: isEn
       ? 'A PDF manual with a protocol to use day to day. €9.'
       : 'Um manual em PDF, com um protocolo para usar no dia a dia. €9.',
@@ -62,14 +63,17 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
           <p className="font-sans text-[0.7rem] tracking-[0.34em] uppercase text-salvia mb-3 text-center">{t.selo}</p>
           <h1 className="font-serif font-light text-[clamp(2.1rem,6vw,3.2rem)] leading-[1.08] text-creme text-center">{isEn ? m.dorTituloEn : m.dorTitulo}</h1>
 
-          {/* reconhecimento imediato, nas palavras dela */}
-          <ul className="max-w-[520px] mx-auto mt-8 space-y-2.5">
-            {(isEn ? m.paraQuemEn : m.paraQuem).map((p, i) => (
-              <li key={i} className="flex gap-3 text-creme-2 text-[1.02rem] leading-[1.6]">
-                <span className="text-ambar/70 mt-0.5">·</span><span>{p}</span>
-              </li>
-            ))}
-          </ul>
+          {/* "Este manual é para ti se…" — reconhecimento imediato, em destaque */}
+          <div className="max-w-[480px] mx-auto mt-9 rounded-[16px] border border-ambar/30 bg-ambar/5 p-6 text-left">
+            <p className="font-sans text-[0.7rem] tracking-[0.2em] uppercase text-ambar mb-4">{t.paraTiSe}</p>
+            <ul className="space-y-2.5">
+              {(isEn ? m.sintomasEn : m.sintomas).map((s, i) => (
+                <li key={i} className="flex gap-3 text-creme-2 text-[1.02rem] leading-[1.55]">
+                  <span className="text-ambar mt-0.5">·</span><span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <p className="max-w-[560px] mx-auto mt-8 text-center font-serif text-creme text-[1.12rem] leading-[1.7]">
             {isEn ? m.comoFuncionaEn : m.comoFunciona}
