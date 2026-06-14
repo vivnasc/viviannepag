@@ -1,6 +1,7 @@
 // Os manuais-filhos do Método VS (os 3 movimentos), para as páginas de venda e
 // os produtos. O texto vive em VER/VIR/VIVER-SOLTAR-{PT,EN}.md; aqui ficam os
-// metadados de montra (título, promessa, amostra, preço, cor de marca).
+// metadados de montra (título, promessa, amostra, o que está lá dentro, para
+// quem é, o estado-depois em linguagem clara, preço, cor de marca).
 
 export type ManualLivro = {
   slug: string;            // ver-soltar | vir-soltar | viver-soltar
@@ -13,10 +14,30 @@ export type ManualLivro = {
   introEn: string;
   amostra: string[];       // 2 parágrafos de amostra (PT)
   amostraEn: string[];
-  depois: string;          // o estado-depois (uma palavra/imagem)
+  // o que NÃO é / o que É — para separar de "mais um texto sobre ansiedade"
+  naoE: string; naoEEn: string;
+  e: string; eEn: string;
+  // reconhecimento: "isto é para ti se…"
+  paraQuem: string[]; paraQuemEn: string[];
+  // o que está lá dentro: os cinco tempos do protocolo
+  protocoloNome: string; protocoloNomeEn: string; // "o protocolo do ver"
+  protocolo: string[]; protocoloEn: string[];     // 5 tempos
+  caminho: string; caminhoEn: string;             // "Sete dias a ver"
+  // o estado-depois EM LINGUAGEM CLARA (não só "a margem", que só faz sentido
+  // a quem já leu): uma frase que um leitor frio entende.
+  depois: string;          // a palavra-imagem (a margem)
   depoisEn: string;
+  depoisFrase: string; depoisFraseEn: string;
   preco: string;           // €9
   cor: { topo: string; baixo: string }; // gradiente do herói
+};
+
+// A autora, com a sua autoridade real (igual à do "quem sou" da home; nada
+// inventado). É o que dá peso ao método na página de venda.
+export const AUTORA = {
+  nome: 'Vivianne dos Santos',
+  bio: 'Autora de Os 7 Véus do Despertar e criadora do Método VS. Estuda os sistemas que nos formam, em formação em psicologia transpessoal, psicologia e espiritualidade, e constelação familiar sistémica. Não escreve de um lugar de chegada: cada coisa que aqui partilha passou primeiro por ela.',
+  bioEn: 'Author of The 7 Veils of Awakening and creator of the VS Method. She studies the systems that shape us, in training in transpersonal psychology, psychology and spirituality, and systemic family constellation therapy. She does not write from a place of arrival: everything she shares here passed first through her.',
 };
 
 export const MANUAIS: ManualLivro[] = [
@@ -37,8 +58,44 @@ export const MANUAIS: ManualLivro[] = [
       'Your mind will not stop. You anticipate conversations that have not yet happened and relive, point by point, the ones that already have. And you feel each thing so intensely that you become what you feel.',
       'But there is a shore. If you can see a thought, then there is something in you that is not that thought. You are not the storm. You are the sky it passes through, and no sky was ever torn by a cloud.',
     ],
+    naoE: 'Não é mais um texto para entenderes a ansiedade, nem uma técnica para esvaziar a cabeça (a mente não se esvazia).',
+    naoEEn: 'It is not one more text to understand anxiety, nor a technique to empty your head (the mind does not empty).',
+    e: 'É um método para fazeres: sair de dentro da tempestade e aprender a vê-la passar da margem.',
+    eEn: 'It is a method to practise: to step out of the storm and learn to watch it pass from the shore.',
+    paraQuem: [
+      'Acordas já cansada de um dia que ainda não começou, porque o viveste todo durante a noite.',
+      'Revives, ponto por ponto, conversas que acabaram há anos, e ensaias outras que talvez nunca aconteçam.',
+      'Sentes cada emoção com tal força que deixas de a ter e passas a ser ela.',
+      'Reages ao presente com uma dor que, no fundo, pertence a outro tempo.',
+    ],
+    paraQuemEn: [
+      'You wake already tired of a day that has not begun, because you lived it all through the night.',
+      'You relive, point by point, conversations that ended years ago, and rehearse others that may never happen.',
+      'You feel each emotion so strongly that you stop having it and become it.',
+      'You react to the present with a pain that, deep down, belongs to another time.',
+    ],
+    protocoloNome: 'o protocolo do ver',
+    protocoloNomeEn: 'the protocol of seeing',
+    protocolo: [
+      'Nomeia: "estou a reparar".',
+      'Passa para a margem.',
+      'Pergunta de que tempo é isto.',
+      'Pergunta de quem é esta voz.',
+      'Respira, e volta ao agora.',
+    ],
+    protocoloEn: [
+      'Name it: "I am noticing".',
+      'Step onto the bank.',
+      'Ask what time this belongs to.',
+      'Ask whose voice this is.',
+      'Breathe, and return to the now.',
+    ],
+    caminho: 'Sete dias a ver',
+    caminhoEn: 'Seven days of seeing',
     depois: 'a margem',
     depoisEn: 'the shore',
+    depoisFrase: 'Deixas de ser arrastada por cada onda de pensamento. Ganhas uma margem, um lugar dentro de ti de onde ver a tempestade passar, e o caminho de volta a ela sempre que precisares.',
+    depoisFraseEn: 'You stop being swept away by every wave of thought. You gain a shore, a place within you from which to watch the storm pass, and the way back to it whenever you need.',
     preco: '€9',
     cor: { topo: '#1F1B38', baixo: '#0E0B1A' },
   },
@@ -59,8 +116,44 @@ export const MANUAIS: ManualLivro[] = [
       'You always arrive first. You anticipate what others will need, you solve before they ask, and still you apologise for not having done more. To sit with nothing to do gives you a dull guilt.',
       'The fullness you chase at the bottom of one more list is not in the race. It is in the rest you are afraid to allow yourself. The hands that all your life caught others can, at last, come to rest.',
     ],
+    naoE: 'Não é um elogio ao descanso nem mais uma lista de autocuidado para cumprires (e onde possas falhar).',
+    naoEEn: 'It is not a tribute to rest, nor one more self-care list to complete (and to fail at).',
+    e: 'É um método para parares de empurrar a vida à força, regressares a ti, e te deixares segurar.',
+    eEn: 'It is a method to stop forcing life forward, to return to yourself, and to let yourself be held.',
+    paraQuem: [
+      'Chegas sempre primeiro, resolves antes que peçam, e ainda pedes desculpa por não teres feito mais.',
+      'Sentar-te sem nada para fazer dá-te uma culpa surda.',
+      'Enches os dias para não sentir o vazio que aparece quando paras.',
+      'Sabes segurar toda a gente, menos deixar-te segurar.',
+    ],
+    paraQuemEn: [
+      'You always arrive first, you solve before they ask, and still you apologise for not doing more.',
+      'To sit with nothing to do gives you a dull guilt.',
+      'You fill your days so as not to feel the emptiness that comes when you stop.',
+      'You know how to hold everyone, except how to let yourself be held.',
+    ],
+    protocoloNome: 'o protocolo do vir',
+    protocoloNomeEn: 'the protocol of returning',
+    protocolo: [
+      'Pára e nomeia.',
+      'Sente o corpo.',
+      'Não faças, e fica.',
+      'Lê o oco como colo.',
+      'Recebe, e escuta.',
+    ],
+    protocoloEn: [
+      'Stop and name.',
+      'Feel the body.',
+      'Do not do, and stay.',
+      'Read the hollow as a lap.',
+      'Receive, and listen.',
+    ],
+    caminho: 'Sete dias a regressar',
+    caminhoEn: 'Seven days returning',
     depois: 'o colo',
     depoisEn: 'the lap',
+    depoisFrase: 'Deixas de empurrar a vida à força. Aprendes a parar sem culpa e a deixar-te segurar, e descobres que o vazio que temias é, afinal, um colo.',
+    depoisFraseEn: 'You stop forcing life forward. You learn to stop without guilt and to let yourself be held, and you discover that the emptiness you feared is, after all, a lap.',
     preco: '€9',
     cor: { topo: '#2C1E33', baixo: '#160E1A' },
   },
@@ -81,8 +174,44 @@ export const MANUAIS: ManualLivro[] = [
       'You live leaning forward, always a little ahead of where you are, towards a "when" where, finally, you will be able to be happy. And, at the same time, clinging to an image of yourself, afraid to lose it.',
       'But there is no arrival. You are not late for anywhere. You can stop running, take off the armour, and enter the only life there is, this one. The premiere you waited for all your life is today.',
     ],
+    naoE: 'Não é motivação para aproveitares mais a vida, nem um plano de produtividade.',
+    naoEEn: 'It is not motivation to make the most of life, nor a productivity plan.',
+    e: 'É um método para saíres da sala de espera e entrares no presente, sem a armadura dos papéis.',
+    eEn: 'It is a method to leave the waiting room and enter the present, without the armour of the roles.',
+    paraQuem: [
+      'Vives inclinada para a frente, sempre em direção a um "quando" onde finalmente vais poder ser feliz.',
+      'Adias a tua vida para depois, e agarras-te a uma imagem de quem já foste.',
+      'Trazes a armadura dos papéis mesmo quando ninguém a pede.',
+      'Sentes que estás atrasada para um lugar a que, no fundo, nunca chegas.',
+    ],
+    paraQuemEn: [
+      'You live leaning forward, always towards a "when" where you will finally get to be happy.',
+      'You postpone your life for later, and cling to an image of who you once were.',
+      'You wear the armour of your roles even when no one asks for it.',
+      'You feel late for a place you somehow never arrive at.',
+    ],
+    protocoloNome: 'o protocolo do viver',
+    protocoloNomeEn: 'the protocol of living',
+    protocolo: [
+      'Já cá estás.',
+      'Tira uma peça da armadura.',
+      'Pergunta de quem é o "quando".',
+      'Honra o que isto protege.',
+      'Uma coisa presente, pequena.',
+    ],
+    protocoloEn: [
+      'You are already here.',
+      'Take off one piece of the armour.',
+      'Ask whose "when" it is.',
+      'Honour what this protects.',
+      'One present, small thing.',
+    ],
+    caminho: 'Sete dias a viver',
+    caminhoEn: 'Seven days of living',
     depois: 'descalça',
     depoisEn: 'barefoot',
+    depoisFrase: 'Sais da sala de espera onde adiavas viver. Tiras a armadura dos papéis e entras, descalça, na única vida que existe: esta, agora.',
+    depoisFraseEn: 'You step out of the waiting room where you kept postponing your life. You take off the armour of the roles and step, barefoot, into the only life there is: this one, now.',
     preco: '€9',
     cor: { topo: '#26203A', baixo: '#100C1C' },
   },

@@ -4,6 +4,7 @@ export const revalidate = 60;
 import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { MetodoHero } from '@/components/home/MetodoHero';
+import { MetodoMovimentos } from '@/components/home/MetodoMovimentos';
 import { Respira } from '@/components/home/Respira';
 import { Mundos } from '@/components/home/Mundos';
 import { Sobre } from '@/components/home/Sobre';
@@ -27,6 +28,9 @@ export default async function HomePage({
       <div className="relative z-[2] max-w-wrap mx-auto px-7">
         {/* A Vivianne (rosto) + o Método VS; aponta para o livro, não o repete */}
         <MetodoHero locale={locale} />
+        <div className="veu my-16" />
+        {/* O método em três movimentos (ver/vir/viver), apresentado, não só citado */}
+        <MetodoMovimentos locale={locale} />
         <div className="veu my-16" />
         <Respira />
         <div className="veu my-16" />
