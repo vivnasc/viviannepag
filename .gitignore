@@ -16,3 +16,4 @@ slide-preview-all.png
 # render do livro-pilar (artefactos de build)
 livro-pilar/*.pdf
 livro-pilar/*.png
+livro-pilar/build/
