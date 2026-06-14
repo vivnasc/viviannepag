@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA } from '@/lib/metodo/contas';
-import { reelsDaConta } from '@/lib/metodo/reels';
-import { aberturaDaConta } from '@/lib/metodo/abertura';
+import { postsDaConta } from '@/lib/metodo/posts';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -29,9 +28,9 @@ export default function MetodoPage() {
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {CONTAS_LISTA.map((c) => {
-            const ids = new Set<string>([...aberturaDaConta(c.id).map((r) => r.id), ...reelsDaConta(c.id).map((r) => r.id)]);
-            const total = ids.size;
-            const gerados = Array.from(ids).filter((id) => estado[id]).length;
+            const posts = postsDaConta(c.id);
+            const total = posts.length;
+            const gerados = posts.filter((p) => estado[p.id]).length;
             return (
               <Link key={c.id} href={`/admin/metodo/${c.id}`} className="block rounded-2xl border border-white/10 p-5 hover:border-white/25 transition-colors" style={{ background: `${c.cor}22` }}>
                 <div className="text-xl" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{c.emoji} {c.handle}</div>

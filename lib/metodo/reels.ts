@@ -25,6 +25,8 @@ export interface Reel {
   fonte: string;
   /** Palavras da sala a realçar a ouro. Se vazio, usa DESTAQUE_POR_REEL. */
   destaque?: string[];
+  /** Aforismo forte o suficiente para ser post de revelação por si só (30%). */
+  revelacaoForte?: boolean;
 }
 
 /** Prompt completo do fundo deste reel (cena própria + família comum). */
@@ -44,6 +46,7 @@ export const REELS: Reel[] = [
     fundoCena:
       'a dark bedroom window at night, a faint warm glow far beyond the glass, deep stillness',
     fonte: 'VER-SOLTAR-PT.md l.27',
+    revelacaoForte: true,
   },
   {
     id: 'ver-02',
@@ -74,6 +77,7 @@ export const REELS: Reel[] = [
       'Não és a tempestade. És o céu por onde ela passa. As nuvens passam, o céu fica.',
     fundoCena: 'a wide night sky with slow clouds passing, calm, a break of warm light behind them',
     fonte: 'VER-SOLTAR-PT.md l.65',
+    revelacaoForte: true,
   },
   {
     id: 'ver-05',
@@ -84,6 +88,7 @@ export const REELS: Reel[] = [
     sala: 'Não te lembras do que aconteceu. Lembras-te da última vez que te lembraste.',
     fundoCena: 'an old empty theatre with a dim warm stage light, dust in the air, deep shadow',
     fonte: 'VER-SOLTAR-PT.md l.77',
+    revelacaoForte: true,
   },
   {
     id: 'ver-06',
@@ -124,6 +129,7 @@ export const REELS: Reel[] = [
       'Não era o cansaço de quem trabalhou muito. Era o peso de me sentir responsável pela felicidade de toda a gente.',
     fundoCena: 'an unmade bed at dawn, soft grey and gold light through a window, quiet',
     fonte: 'VIR-SOLTAR-PT.md l.53',
+    revelacaoForte: true,
   },
   {
     id: 'vir-02',
@@ -134,6 +140,7 @@ export const REELS: Reel[] = [
     sala: 'O fazer é a fuga mais aplaudida do mundo.',
     fundoCena: 'a single empty chair in a warm pool of light, surrounded by deep shadow',
     fonte: 'VIR-SOLTAR-PT.md l.13',
+    revelacaoForte: true,
   },
   {
     id: 'vir-03',
@@ -172,6 +179,7 @@ export const REELS: Reel[] = [
     sala: 'O que te parece falta é, tantas vezes, espaço para algo teu que ainda não nasceu.',
     fundoCena: 'dark fertile soil cradling a single seed, a faint warm glow within the earth',
     fonte: 'VIR-SOLTAR-PT.md l.75',
+    revelacaoForte: true,
   },
   {
     id: 'vir-07',
@@ -203,6 +211,7 @@ export const REELS: Reel[] = [
     sala: 'A sala de espera era a viagem.',
     fundoCena: 'an empty railway platform at dawn, warm light along the tracks, no train',
     fonte: 'VIVER-SOLTAR-PT.md l.53',
+    revelacaoForte: true,
   },
   {
     id: 'viver-02',
@@ -222,6 +231,7 @@ export const REELS: Reel[] = [
       'O "lá" é um lugar onde não se chega, como a linha onde o céu toca o mar e que recua a cada passo que damos na sua direção.',
     fundoCena: 'a far horizon where dark sea meets sky, a single thin line of warm gold light',
     fonte: 'VIVER-SOLTAR-PT.md l.55',
+    revelacaoForte: true,
   },
   {
     id: 'viver-04',
@@ -240,6 +250,7 @@ export const REELS: Reel[] = [
     sala: 'Tu não és as folhas. És o que permanece quando elas caem.',
     fundoCena: 'a tall tree letting golden leaves fall in still autumn air, calm, warm light',
     fonte: 'VIVER-SOLTAR-PT.md l.83',
+    revelacaoForte: true,
   },
   {
     id: 'viver-06',
@@ -310,10 +321,11 @@ export function destaqueDe(reel: Reel): string[] {
   return reel.destaque ?? DESTAQUE_POR_REEL[reel.id] ?? [];
 }
 
-/** Texto no ecrã: a porta (dor) seguida da sala (revelação). O typewriter
- *  revela a porta primeiro e a sala a seguir, que aterra a ouro (destaque). */
+/** Texto no ecrã: a dor entre aspas (a voz dela, 1.ª pessoa) e, a seguir, a
+ *  revelação (a resposta). As aspas marcam a mudança de voz para não confundir;
+ *  o typewriter revela a dor primeiro e a sala depois (que aterra a ouro). */
 export function fraseDoReel(reel: Reel): string {
-  return `${reel.porta} ${reel.sala}`;
+  return `«${reel.porta}» ${reel.sala}`;
 }
 
 export function reelsDaConta(conta: ContaId): Reel[] {

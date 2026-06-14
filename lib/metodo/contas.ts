@@ -45,8 +45,12 @@ export interface Conta {
   simbolo: string;
   /** Prompt-base do fundo dos reels (família comum + símbolo da conta). */
   fundoBase: string;
-  /** Cor de acento para o admin (não é a estética final do reel). */
+  /** Cor de acento para o admin (= paleta.accent). */
   cor: string;
+  /** Paleta PRÓPRIA da conta (identidade distinta, não a da veu.a.veu). */
+  paleta: { bg1: string; bg2: string; accent: string };
+  /** Linha de manifesto (declarativa, curta): o 10% manifesto. */
+  manifestoLinha: string;
   emoji: string;
   /** Bios canónicas (CONTAS-METODO-VS.md). */
   bioPT: string;
@@ -81,7 +85,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     fundoBase:
       'a calm still expanse of dark water with a single thin line of warm ' +
       'light on the far horizon, seen from the near shore, serene, room to breathe',
-    cor: '#3b4a6b',
+    cor: '#9cc1ee',
+    paleta: { bg1: '#16263f', bg2: '#0a0f1a', accent: '#9cc1ee' }, // azul frio (a margem, água, noite)
+    manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
     emoji: '🕯️',
     bioPT:
       'Não consegues desligar a cabeça? Aprende a criar distância dos ' +
@@ -107,7 +113,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     fundoBase:
       'a soft cupped hollow of warm golden light cradled in deep shadow, ' +
       'like a held nest or a quiet hearth, tender and sheltering, abstract, no figure',
-    cor: '#6b4a52',
+    cor: '#e8b56b',
+    paleta: { bg1: '#3a241a', bg2: '#1a0f0a', accent: '#e8b56b' }, // âmbar quente (o colo, lareira)
+    manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
     emoji: '🕯️',
     bioPT:
       'Fazes tudo por toda a gente e sentes culpa quando pensas em ti? ' +
@@ -135,7 +143,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     fundoBase:
       'an open doorway seen from inside a dark room, the threshold and the ' +
       'ground just beyond it bathed in warm morning light, a path of light leading out',
-    cor: '#5a5a3b',
+    cor: '#c4dd84',
+    paleta: { bg1: '#21331f', bg2: '#0d140b', accent: '#c4dd84' }, // verde-manhã (descalça, limiar)
+    manifestoLinha: 'A estreia não é para o ano. É hoje.',
     emoji: '🕯️',
     bioPT:
       'Estás sempre à espera que a tua vida comece? Aprende a sair do ' +

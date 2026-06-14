@@ -8,15 +8,11 @@
 
 export type ContaId = string;
 
+// As 5 contas reais (as antigas synchim/freeme/infonte/loranne/ancient/escola
+// foram removidas a pedido da Vivianne: já não existem).
 export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
-  { id: 'veuaveu', nome: 'Véu a Véu', emoji: '🌿' },
-  { id: 'loja', nome: 'vivianne.dos.santos', emoji: '🛍️' },
-  { id: 'synchim', nome: 'synchim.app', emoji: '🔄' },
-  { id: 'freeme', nome: 'freeme_app', emoji: '🕊️' },
-  { id: 'infonte', nome: 'infonte.app', emoji: '💧' },
-  { id: 'loranne', nome: 'loranne_music', emoji: '🎵' },
-  { id: 'ancient', nome: 'ancient.ground', emoji: '🌑' },
-  { id: 'escola', nome: 'escola_dos_veus', emoji: '📿' },
+  { id: 'loja', nome: 'vivianne.dos.santos', emoji: '🛍️' }, // conta-mãe
+  { id: 'veuaveu', nome: 'veu.a.veu', emoji: '🌿' }, // didática
   // Método VS · as 3 portas (Ver, Vir, Viver). Conteúdo gerado em /admin/metodo,
   // distinguido por theme.marca. Ver lib/metodo/contas.ts.
   { id: 'versoltar', nome: 'ver.soltar', emoji: '🕯️' },

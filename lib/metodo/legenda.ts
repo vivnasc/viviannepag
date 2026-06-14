@@ -10,6 +10,8 @@
 
 import { Conta, CONTAS, VeuNome } from './contas';
 import { Reel } from './reels';
+import { Post, nomeVeu } from './posts';
+import { legendaManifesto } from './abertura';
 
 // Hashtags por véu (a língua da dor) + base do método.
 const HASHTAGS_BASE = [
@@ -60,4 +62,40 @@ export function legendaDoReel(reel: Reel, conta: Conta = CONTAS[reel.conta]): st
 /** Legenda + hashtags prontas (o que vai para o Instagram). */
 export function legendaCompleta(reel: Reel, conta: Conta = CONTAS[reel.conta]): string {
   return `${legendaDoReel(reel, conta)}\n\n${hashtagsDoReel(reel).join(' ')}`;
+}
+
+// ── Posts tipados (o motor editorial) ──────────────────────────────────────
+
+export function hashtagsDoPost(post: Post): string[] {
+  const veu = post.veu ? HASHTAGS_VEU[post.veu] : [];
+  return Array.from(new Set<string>([...veu, ...HASHTAGS_BASE])).slice(0, 12);
+}
+
+/** Legenda de um post, conforme o tipo (a dor lidera; a revelação recompensa). */
+export function legendaDoPost(post: Post): string {
+  const c = CONTAS[post.conta];
+  const cta = `${c.ctaPT} O manual ${c.manualNome} está na bio.`;
+  const guardar = 'Guarda esta publicação para o dia em que precisares.';
+
+  let paras: string[];
+  if (post.tipo === 'manifesto') {
+    return legendaManifesto(post.conta);
+  } else if (post.tipo === 'revelacao') {
+    paras = [
+      post.bridge ? `Talvez te soe: «${post.bridge}»` : post.texto,
+      post.veu ? `Isto, no Método VS, tem um nome: o ${nomeVeu(post.veu)}.` : '',
+      cta,
+      guardar,
+    ].filter(Boolean);
+  } else {
+    // reconhecimento: a dor (no ecrã) entra; a revelação chega como recompensa.
+    paras = [
+      post.texto,
+      post.payoff ?? '',
+      post.veu ? `No Método VS, isto tem um nome: o ${nomeVeu(post.veu)}.` : '',
+      cta,
+      guardar,
+    ].filter(Boolean);
+  }
+  return paras.join('\n\n');
 }
