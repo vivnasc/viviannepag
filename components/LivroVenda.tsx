@@ -20,6 +20,15 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
   const livroHref = isEn ? '/en/os-sete-veus' : '/os-sete-veus';
   const grad = `linear-gradient(168deg, ${m.cor.topo}, ${m.cor.baixo})`;
 
+  // A capa composta (imagem escolhida + tipografia), publicada pelo render.
+  // Se ainda não existir, cai no cartão tipográfico.
+  const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
+  const capaImg = `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/${m.slug}/capa-composta.png`;
+  let mostrarCapa = false;
+  if (SUPA) {
+    try { mostrarCapa = (await fetch(capaImg, { method: 'HEAD', cache: 'no-store' })).ok; } catch { /* fica o cartão */ }
+  }
+
   const recebes = isEn
     ? ['Manual in PDF, immediate', `5-step protocol ${m.protocoloParaEn}`, 'Daily exercises', 'Guided 7-day crossing', 'Pocket summary card to keep with you']
     : ['Manual em PDF, imediato', `Protocolo de 5 passos ${m.protocoloPara}`, 'Exercícios diários', 'Travessia guiada de 7 dias', 'Cartão-resumo para levares contigo'];
@@ -52,14 +61,24 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
 
         {/* HERO — a linguagem da pessoa: a dor, o reconhecimento, o que o método faz */}
         <header className="pt-24 pb-10">
-          <div
-            className="w-[200px] h-[267px] mx-auto mb-9 rounded-[14px] border border-ocre/30 flex flex-col items-center justify-center text-center px-6"
-            style={{ background: grad, boxShadow: '0 24px 70px -24px rgba(0,0,0,0.7)' }}
-          >
-            <p className="font-sans text-[0.55rem] tracking-[0.3em] uppercase text-[#E6CE8E]/90 mb-3">{t.selo}</p>
-            <p className="font-serif text-creme text-[1.7rem] leading-none">{m.marca}</p>
-            <p className="font-serif italic text-creme-2/80 text-[0.8rem] mt-2">{m.movimento}</p>
-          </div>
+          {mostrarCapa ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={`${capaImg}?v=${Date.now()}`}
+              alt={m.marca}
+              className="w-[230px] h-auto mx-auto mb-9 rounded-[14px] block border border-ocre"
+              style={{ boxShadow: '0 24px 70px -24px rgba(0,0,0,0.7)', aspectRatio: '1400 / 1873' }}
+            />
+          ) : (
+            <div
+              className="w-[200px] h-[267px] mx-auto mb-9 rounded-[14px] border border-ocre/30 flex flex-col items-center justify-center text-center px-6"
+              style={{ background: grad, boxShadow: '0 24px 70px -24px rgba(0,0,0,0.7)' }}
+            >
+              <p className="font-sans text-[0.55rem] tracking-[0.3em] uppercase text-[#E6CE8E]/90 mb-3">{t.selo}</p>
+              <p className="font-serif text-creme text-[1.7rem] leading-none">{m.marca}</p>
+              <p className="font-serif italic text-creme-2/80 text-[0.8rem] mt-2">{m.movimento}</p>
+            </div>
+          )}
           <p className="font-sans text-[0.7rem] tracking-[0.34em] uppercase text-salvia mb-3 text-center">{t.selo}</p>
           <h1 className="font-serif font-light text-[clamp(2.1rem,6vw,3.2rem)] leading-[1.08] text-creme text-center">{isEn ? m.dorTituloEn : m.dorTitulo}</h1>
 
