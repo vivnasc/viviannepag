@@ -13,7 +13,6 @@ const mundos: Mundo[] = [
   { key: 'infonte', href: 'https://infonte.viviannedossantos.com', accent: 'ocre' },
   { key: 'synchim', href: 'https://synchim.viviannedossantos.com', accent: 'rosa' },
   { key: 'escola', href: 'https://escoladosveus.space', accent: 'lila' },
-  { key: 'livro', href: 'https://seteveus.space', accent: 'ocre' },
   { key: 'ecos', href: 'https://app.seteecos.com', accent: 'ocre' },
   { key: 'loranne', href: 'https://music.seteveus.space', accent: 'ocre' },
 ];
