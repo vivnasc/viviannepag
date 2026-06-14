@@ -31,6 +31,7 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
     protocoloSub: isEn
       ? 'five movements you train until your body knows them by heart, for the middle of a crisis.'
       : 'cinco tempos que treinas até o corpo os saber de cor, para o meio de uma crise.',
+    protocoloLock: isEn ? 'The five movements, step by step, are in the manual.' : 'Os cinco tempos, passo a passo, estão no manual.',
     praticas: isEn ? 'The practices' : 'As práticas',
     praticasSub: isEn
       ? 'the daily training, for the calm moments, so the path is there when you need it.'
@@ -68,7 +69,7 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
             <p className="font-serif text-creme text-[2rem] leading-none">{m.marca}</p>
             <p className="font-serif italic text-creme-2/80 text-[0.85rem] mt-3">{m.movimento}</p>
           </div>
-          <p className="font-sans text-[0.7rem] tracking-[0.34em] uppercase text-salvia mb-3">{t.selo} · {m.cacho}</p>
+          <p className="font-sans text-[0.7rem] tracking-[0.34em] uppercase text-salvia mb-3">{t.selo}</p>
           <h1 className="font-serif font-light text-[clamp(2.2rem,6vw,3.4rem)] leading-[1.05] text-creme">{m.marca}</h1>
           <p className="font-serif italic font-light text-ocre text-[clamp(1.05rem,3.4vw,1.35rem)] mt-4 leading-[1.4] max-w-[600px] mx-auto">
             {isEn ? m.promessaEn : m.promessa}
@@ -124,14 +125,14 @@ export async function LivroVenda({ slug, locale }: { slug: string; locale: strin
           <div className="rounded-[16px] border border-ocre/20 p-7 mb-5" style={{ background: grad }}>
             <p className="font-serif text-creme text-[1.2rem]">{m.protocoloNome}</p>
             <p className="text-creme-2/70 text-[0.9rem] mt-1 mb-5">{t.protocoloSub}</p>
-            <ol className="space-y-2.5">
-              {(isEn ? m.protocoloEn : m.protocolo).map((p, i) => (
-                <li key={i} className="flex gap-3 items-baseline text-creme-2 text-[1rem] leading-[1.6]">
-                  <span className="font-serif text-ambar text-[0.95rem] shrink-0 w-5">{i + 1}.</span>
-                  <span>{p}</span>
-                </li>
+            {/* sinaliza que são cinco tempos, sem os revelar (isso é o produto) */}
+            <div className="flex gap-2.5 mb-5">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <span key={n} className="w-8 h-8 rounded-full border border-ambar/40 text-ambar/85 text-[0.82rem] flex items-center justify-center font-serif">{n}</span>
               ))}
-            </ol>
+            </div>
+            <p className="text-creme-2/85 text-[0.98rem] leading-[1.75]">{isEn ? m.protocoloFormaEn : m.protocoloForma}</p>
+            <p className="text-ambar/80 text-[0.82rem] italic font-serif mt-4">{t.protocoloLock}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">

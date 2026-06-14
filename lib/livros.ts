@@ -19,9 +19,10 @@ export type ManualLivro = {
   e: string; eEn: string;
   // reconhecimento: "isto é para ti se…"
   paraQuem: string[]; paraQuemEn: string[];
-  // o que está lá dentro: os cinco tempos do protocolo
+  // o que está lá dentro: o protocolo. NÃO se dão os passos (isso é o produto);
+  // diz-se que são cinco tempos e descreve-se a FORMA, para cativar sem entregar.
   protocoloNome: string; protocoloNomeEn: string; // "o protocolo do ver"
-  protocolo: string[]; protocoloEn: string[];     // 5 tempos
+  protocoloForma: string; protocoloFormaEn: string; // o que o protocolo faz, sem o revelar
   caminho: string; caminhoEn: string;             // "Sete dias a ver"
   // o estado-depois EM LINGUAGEM CLARA (não só "a margem", que só faz sentido
   // a quem já leu): uma frase que um leitor frio entende.
@@ -76,20 +77,8 @@ export const MANUAIS: ManualLivro[] = [
     ],
     protocoloNome: 'o protocolo do ver',
     protocoloNomeEn: 'the protocol of seeing',
-    protocolo: [
-      'Nomeia: "estou a reparar".',
-      'Passa para a margem.',
-      'Pergunta de que tempo é isto.',
-      'Pergunta de quem é esta voz.',
-      'Respira, e volta ao agora.',
-    ],
-    protocoloEn: [
-      'Name it: "I am noticing".',
-      'Step onto the bank.',
-      'Ask what time this belongs to.',
-      'Ask whose voice this is.',
-      'Breathe, and return to the now.',
-    ],
+    protocoloForma: 'Os dois primeiros tempos tiram-te de dentro da água. Os dois do meio desfazem a tempestade pela raiz, em vez de só a aguentarem. O último devolve-te ao agora. Cabe num minuto, e treina-se até o corpo o saber de cor.',
+    protocoloFormaEn: 'The first two movements take you out of the water. The middle two undo the storm at its root, instead of merely enduring it. The last returns you to the now. It fits in a minute, and is trained until the body knows it by heart.',
     caminho: 'Sete dias a ver',
     caminhoEn: 'Seven days of seeing',
     depois: 'a margem',
@@ -134,20 +123,8 @@ export const MANUAIS: ManualLivro[] = [
     ],
     protocoloNome: 'o protocolo do vir',
     protocoloNomeEn: 'the protocol of returning',
-    protocolo: [
-      'Pára e nomeia.',
-      'Sente o corpo.',
-      'Não faças, e fica.',
-      'Lê o oco como colo.',
-      'Recebe, e escuta.',
-    ],
-    protocoloEn: [
-      'Stop and name.',
-      'Feel the body.',
-      'Do not do, and stay.',
-      'Read the hollow as a lap.',
-      'Receive, and listen.',
-    ],
+    protocoloForma: 'Os primeiros tempos param a corrida e trazem-te ao corpo. Os do meio ensinam-te a ficar no que dói sem o tapares com mais uma tarefa. O último abre-te as mãos para, enfim, receberes.',
+    protocoloFormaEn: 'The first movements stop the race and bring you to the body. The middle ones teach you to stay with what hurts without covering it with one more task. The last opens your hands to, at last, receive.',
     caminho: 'Sete dias a regressar',
     caminhoEn: 'Seven days returning',
     depois: 'o colo',
@@ -192,20 +169,8 @@ export const MANUAIS: ManualLivro[] = [
     ],
     protocoloNome: 'o protocolo do viver',
     protocoloNomeEn: 'the protocol of living',
-    protocolo: [
-      'Já cá estás.',
-      'Tira uma peça da armadura.',
-      'Pergunta de quem é o "quando".',
-      'Honra o que isto protege.',
-      'Uma coisa presente, pequena.',
-    ],
-    protocoloEn: [
-      'You are already here.',
-      'Take off one piece of the armour.',
-      'Ask whose "when" it is.',
-      'Honour what this protects.',
-      'One present, small thing.',
-    ],
+    protocoloForma: 'Os primeiros tempos trazem-te ao presente e tiram-te uma peça da armadura. Os do meio mostram-te de quem é a pressa, e o que ela protege. O último volta a pôr-te em contacto com uma coisa viva, agora.',
+    protocoloFormaEn: 'The first movements bring you to the present and take off one piece of the armour. The middle ones show you whose hurry it is, and what it protects. The last puts you back in touch with one living thing, now.',
     caminho: 'Sete dias a viver',
     caminhoEn: 'Seven days of living',
     depois: 'descalça',
