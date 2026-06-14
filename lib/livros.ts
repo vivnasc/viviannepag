@@ -8,10 +8,16 @@ export type ManualLivro = {
   marca: string;           // ver.soltar
   movimento: string;       // a consciência
   cacho: string;           // Turbilhão + Memória
-  promessa: string;        // dor -> alívio (uma linha)
+  promessa: string;        // a metáfora (vai mais abaixo, como reconhecimento)
   promessaEn: string;
   intro: string;           // 2-3 linhas de pitch
   introEn: string;
+  // LINGUAGEM DA PESSOA (topo): a dor nas palavras dela, não na metáfora
+  dorTitulo: string; dorTituloEn: string;       // "Não consegues parar de pensar?"
+  aprende: string; aprendeEn: string;           // "Aprende a…" — o benefício concreto, na língua da dor
+  comoFunciona: string; comoFuncionaEn: string; // o que o método faz, concreto, 1 linha
+  protocoloPara: string; protocoloParaEn: string; // "para os momentos de ansiedade"
+  mudancas: string[]; mudancasEn: string[];     // o que muda na vida (concreto), 5 linhas
   amostra: string[];       // 2 parágrafos de amostra (PT)
   amostraEn: string[];
   // o que NÃO é / o que É — para separar de "mais um texto sobre ansiedade"
@@ -51,6 +57,28 @@ export const MANUAIS: ManualLivro[] = [
     promessaEn: 'Your mind will not stop, reliving the past and rehearsing what is coming? The first movement is to see: to step out of the storm.',
     intro: 'Um método para saíres de dentro da cabeça e veres a tempestade passar de terra. Não é re-explicar a ansiedade, é um caminho com o seu protocolo.',
     introEn: 'A method to step out of your head and watch the storm pass from solid ground. Not a re-explanation of anxiety, but a path with its own protocol.',
+    dorTitulo: 'Não consegues parar de pensar?',
+    dorTituloEn: 'Can’t stop thinking?',
+    aprende: 'Aprende a sair das espirais de pensamento e da ansiedade, sem tentares desligar a cabeça.',
+    aprendeEn: 'Learn to step out of thought spirals and anxiety, without trying to switch your head off.',
+    comoFunciona: 'Este método ensina-te a criar distância dos pensamentos sem tentares desligá-los.',
+    comoFuncionaEn: 'This method teaches you to create distance from your thoughts without trying to switch them off.',
+    protocoloPara: 'para os momentos de ansiedade',
+    protocoloParaEn: 'for moments of anxiety',
+    mudancas: [
+      'Deixas de seguir cada pensamento como se fosse uma ordem.',
+      'Recuperas mais depressa das espirais mentais.',
+      'Consegues interromper os ciclos de ruminação.',
+      'Reconheces quando a ansiedade está a assumir o comando.',
+      'Tens um protocolo concreto para usar quando precisas.',
+    ],
+    mudancasEn: [
+      'You stop following every thought as if it were an order.',
+      'You recover faster from mental spirals.',
+      'You can interrupt cycles of rumination.',
+      'You recognise when anxiety is taking over.',
+      'You have a concrete protocol to use when you need it.',
+    ],
     amostra: [
       'A tua cabeça não para. Antecipas conversas que ainda não aconteceram e revives, ponto por ponto, as que já aconteceram. E sentes cada coisa com tal intensidade que te tornas aquilo que sentes.',
       'Mas há uma margem. Se consegues ver um pensamento, então há em ti algo que não é esse pensamento. Não és a tempestade. És o céu por onde ela passa, e nenhum céu foi alguma vez rasgado por uma nuvem.',
@@ -97,6 +125,28 @@ export const MANUAIS: ManualLivro[] = [
     promessaEn: 'You carry everything, and when you stop, the emptiness comes? The movement is to return: to come back to yourself, to let yourself be held.',
     intro: 'Um método para parares de empurrar e regressares a ti. Fazes e enches para não sentir o vazio; aqui aprendes a ficar, e a descobrir que ele te segura.',
     introEn: 'A method to stop pushing and return to yourself. You do and you fill so as not to feel the emptiness; here you learn to stay, and to discover it holds you.',
+    dorTitulo: 'Carregas tudo sozinha?',
+    dorTituloEn: 'Carrying everything alone?',
+    aprende: 'Aprende a parar de carregar tudo sozinha, a descansar sem culpa e a deixar-te apoiar.',
+    aprendeEn: 'Learn to stop carrying everything alone, to rest without guilt and to let yourself be supported.',
+    comoFunciona: 'Este método ensina-te a parar sem culpa e a deixar-te segurar, em vez de encheres o vazio com mais uma tarefa.',
+    comoFuncionaEn: 'This method teaches you to stop without guilt and to let yourself be held, instead of filling the emptiness with one more task.',
+    protocoloPara: 'para quando o vazio aperta',
+    protocoloParaEn: 'for when the emptiness hits',
+    mudancas: [
+      'Consegues parar sem sentir que estás a falhar.',
+      'Descansas sem a culpa a estragar o descanso.',
+      'Deixas os outros segurarem-te, e não só o contrário.',
+      'Reconheces quando estás a fugir para a próxima tarefa.',
+      'Tens um protocolo concreto para quando o vazio aperta.',
+    ],
+    mudancasEn: [
+      'You can stop without feeling you are failing.',
+      'You rest without guilt ruining the rest.',
+      'You let others hold you, not only the other way around.',
+      'You recognise when you are escaping into the next task.',
+      'You have a concrete protocol for when the emptiness hits.',
+    ],
     amostra: [
       'Chegas sempre primeiro. Antecipas o que os outros vão precisar, resolves antes que peçam, e ainda pedes desculpa por não teres feito mais. Sentar-te sem nada para fazer dá-te uma culpa surda.',
       'A plenitude que andas a perseguir ao fundo de mais uma lista não está na corrida. Está no repouso que tens medo de te permitir. As mãos que toda a vida apanharam os outros podem, enfim, pousar.',
@@ -143,6 +193,28 @@ export const MANUAIS: ManualLivro[] = [
     promessaEn: 'You live waiting to live, clinging to who you once were? The movement is to live: to enter your own life, now.',
     intro: 'Um método para saíres da sala de espera e tirares a armadura dos papéis. Adias para um "quando" e agarras-te a quem foste; aqui entras no presente.',
     introEn: 'A method to step out of the waiting room and take off the armour of the roles. You postpone for a "when" and cling to who you were; here you enter the present.',
+    dorTitulo: 'Sabes o que precisas, mas voltas sempre ao mesmo?',
+    dorTituloEn: 'Know what you need, but keep ending up in the same place?',
+    aprende: 'Aprende a transformar o que já compreendeste em mudança real, e a parar de adiar a tua vida.',
+    aprendeEn: 'Learn to turn what you already understand into real change, and to stop postponing your life.',
+    comoFunciona: 'Este método ensina-te a sair da sala de espera e a entrar na tua vida agora, sem a armadura dos papéis.',
+    comoFuncionaEn: 'This method teaches you to leave the waiting room and step into your life now, without the armour of the roles.',
+    protocoloPara: 'para quando te perdes no "depois"',
+    protocoloParaEn: 'for when you get lost in the "later"',
+    mudancas: [
+      'Páras de adiar a vida para um "quando" que não chega.',
+      'Largas a armadura que carregas mesmo quando ninguém a pede.',
+      'Deixas de te agarrar a quem já foste.',
+      'Reconheces quando estás a viver no futuro em vez do presente.',
+      'Tens um protocolo concreto para voltares ao agora.',
+    ],
+    mudancasEn: [
+      'You stop postponing life for a "when" that never comes.',
+      'You drop the armour you carry even when no one asks for it.',
+      'You stop clinging to who you used to be.',
+      'You recognise when you are living in the future instead of the present.',
+      'You have a concrete protocol to return to now.',
+    ],
     amostra: [
       'Vives inclinada para a frente, sempre um pouco à frente de onde estás, em direção a um "quando" onde, finalmente, vais poder ser feliz. E, ao mesmo tempo, agarrada a uma imagem de ti com medo de a perder.',
       'Mas não há chegada. Não estás atrasada para lugar nenhum. Podes parar de correr, tirar a armadura, e entrar na única vida que existe, esta. A estreia por que esperaste a vida toda é hoje.',
