@@ -1,25 +1,39 @@
 // Edição final do livro-pilar Os Sete Véus: capa composta + miolo A5.
-// Lê OS-7-VEUS-v2.md (raiz), monta o miolo (rosto, ficha, sumário, corpo,
-// fecho) e sobrepõe a capa composta como primeira página.
-// Uso: node render-livro.js
+// Lê o markdown (PT ou EN), monta o miolo e sobrepõe a capa como 1.ª página.
+// Uso: node render-livro.js [pt|en]
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const { marked } = require('marked');
 const { PDFDocument } = require('pdf-lib');
 
+const LANG = process.argv[2] === 'en' ? 'en' : 'pt';
 const RAIZ = path.join(__dirname, '..', '..');
-const FONTE = path.join(RAIZ, 'OS-7-VEUS-v2.md');
-const CAPA = path.join(RAIZ, 'livro-pilar', 'capa-composta.png');
-const OUT = path.join(RAIZ, 'livro-pilar', 'OS-SETE-VEUS-pt.pdf');
+const FONTE = path.join(RAIZ, LANG === 'en' ? 'OS-7-VEUS-EN.md' : 'OS-7-VEUS-v2.md');
+const CAPA = path.join(RAIZ, 'livro-pilar', LANG === 'en' ? 'capa-composta-en.png' : 'capa-composta.png');
+const OUT = path.join(RAIZ, 'livro-pilar', LANG === 'en' ? 'OS-SETE-VEUS-en.pdf' : 'OS-SETE-VEUS-pt.pdf');
 
 // textos da casa (espelham a capa)
-const META = {
+const META = LANG === 'en' ? {
+  selo: 'Method VS · See and Release',
+  titulo: 'The Seven Veils',
+  sub: 'See what binds you. Release what makes you repeat.',
+  autora: 'Vivianne dos Santos',
+  edicao: 'Second edition',
+  sumarioLabel: 'Contents',
+  sumarioTit: 'Contents',
+  ficha: 'The Seven Veils, second edition. Rewritten and expanded in the voice of Method VS · See and Release. This book understands, but it does not replace care: in the deeper matters, seek support. You deserve the same care you give.',
+  finalTit: 'For you, who read',
+  finalTxt: 'If any veil lifted a little while you read, share this book, not as proof, but as seed. You will find the rest of the path at viviannedossantos.com.',
+  copy: '© 2026 Vivianne dos Santos · viviannedossantos.com',
+} : {
   selo: 'Método VS · Ver e Soltar',
   titulo: 'Os Sete Véus',
   sub: 'Vê o que te prende. Solta o que te faz repetir.',
   autora: 'Vivianne dos Santos',
   edicao: 'Segunda edição',
+  sumarioLabel: 'Conteúdo',
+  sumarioTit: 'Sumário',
   ficha: 'Os Sete Véus, segunda edição. Reescrita e ampliada na voz do Método VS · Ver e Soltar. Este livro compreende, mas não substitui acompanhamento: nos temas mais fundos, procura apoio. Mereces o mesmo cuidado que dás.',
   finalTit: 'Para ti, que leste',
   finalTxt: 'Se algum véu se ergueu um pouco enquanto lias, partilha este livro, não como prova, mas como semente. Encontras o resto do caminho em viviannedossantos.com.',
@@ -71,7 +85,7 @@ const sumarioHtml = sumarioItens.map((t) => `<li>${t}</li>`).join('');
 const corpoHtml = marked.parse(corpoMd);
 
 const html = `<!DOCTYPE html>
-<html lang="pt">
+<html lang="${LANG}">
 <head>
 <meta charset="UTF-8">
 <style>
@@ -162,8 +176,8 @@ const html = `<!DOCTYPE html>
 </div>
 
 <div class="sumario">
-  <div class="sumario-label">Conteúdo</div>
-  <h2>Sumário</h2>
+  <div class="sumario-label">${META.sumarioLabel}</div>
+  <h2>${META.sumarioTit}</h2>
   <ol>${sumarioHtml}</ol>
 </div>
 

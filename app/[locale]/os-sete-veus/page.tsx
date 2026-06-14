@@ -8,7 +8,10 @@ import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-const CAPA_BASE = `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '')}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa-composta.png`;
+const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
+const capaUrl = (locale: string) =>
+  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa-composta${locale === 'en' ? '-en' : ''}.png`;
+const CAPA_BASE = capaUrl('pt');
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -36,7 +39,7 @@ export default async function OsSeteVeus({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   setRequestLocale(locale);
   const isEn = locale === 'en';
-  const capa = `${CAPA_BASE}?v=${Date.now()}`;
+  const capa = `${capaUrl(locale)}?v=${Date.now()}`;
 
   return (
     <>

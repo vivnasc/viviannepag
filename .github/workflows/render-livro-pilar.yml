@@ -50,11 +50,15 @@ jobs:
           curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa.jpg" -o /tmp/capa-escolhida.jpg
           ls -la /tmp/capa-escolhida.jpg
 
-      - name: Compor capa (imagem + tipografia)
-        run: node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta.png
+      - name: Compor capas (PT e EN)
+        run: |
+          node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta.png pt
+          node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta-en.png en
 
-      - name: Render do livro (capa + miolo A5)
-        run: node scripts/livro-pilar/render-livro.js
+      - name: Render do livro (PT e, se houver tradução, EN)
+        run: |
+          node scripts/livro-pilar/render-livro.js pt
+          if [ -f OS-7-VEUS-EN.md ]; then node scripts/livro-pilar/render-livro.js en; else echo "sem OS-7-VEUS-EN.md, salto o EN"; fi
 
       - name: Publicar no bucket (capa composta + PDF)
         env:
