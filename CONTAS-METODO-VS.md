@@ -25,8 +25,8 @@ Os nomes das contas nascem daqui, não do marketing.
 
 ## Conta-mãe · vivianne.dos.santos  (identidade já existente)
 - **É:** Vivianne · *Ver e Soltar (VS)* · o método inteiro. O hub.
-- **Bio (PT):** *Continuas a repetir o que te faz sofrer? Ajudo-te a ver os padrões invisíveis que te prendem e a largá-los. Método VS · Ver e Soltar 📖 Os Sete Véus ↓*
-- **Bio (EN):** *Do you keep repeating what makes you suffer? I help you see the invisible patterns that bind you, and release them. Method VS 📖 The Seven Veils ↓*
+- **Bio (PT):** *Continuas a repetir o que te faz sofrer? Ajudo-te a reconhecer os padrões invisíveis por trás da ansiedade, da culpa e das relações que se repetem. Método VS · Ver e Soltar 📖 Os Sete Véus ↓*
+- **Bio (EN):** *Do you keep repeating what makes you suffer? I help you recognise the invisible patterns behind anxiety, guilt and relationships that keep repeating. Method VS 📖 The Seven Veils ↓*
 - **Conteúdo:** método transversal; a tua história/voz; VC Sabia; Hoje em Mim; carrosséis dos 7 véus; o diagnóstico *"qual é o teu véu?"*.
 - **Vende:** *Os Sete Véus* (o pilar, €19).
 
@@ -38,8 +38,8 @@ Os nomes das contas nascem daqui, não do marketing.
 ## Porta 1 · ver.soltar  — a consciência
 - **Movimento:** Ver. **Cacho:** Turbilhão + Memória.
 - **A pessoa depois:** sai de dentro da cabeça e vê a tempestade passar de terra.
-- **Bio (PT):** *Não consegues desligar a cabeça? Aprende a criar distância dos pensamentos e da ansiedade, sem os tentares desligar. Método VS · Ver e Soltar 🕯️ ↓*
-- **Bio (EN):** *Can’t switch your head off? Learn to create distance from your thoughts and anxiety, without forcing them off. Method VS · See and Release 🕯️ ↓*
+- **Bio (PT):** *Não consegues desligar a cabeça? Aprende a criar distância dos pensamentos sem lutares contra eles. Método VS · Ver e Soltar 🕯️ ↓*
+- **Bio (EN):** *Can’t switch your head off? Learn to create distance from your thoughts without fighting them. Method VS · See and Release 🕯️ ↓*
 - **Reels (lanes):** "a cabeça que não desliga à noite"; "estás a reagir à memória, não ao presente"; "4 sinais de que vives em alerta"; "não és os teus pensamentos".
 - **Vende:** o manual **ver.soltar** (€9) → e o pilar.
 - **CTA:** comenta **VER** → DM com o 1.º passo grátis → manual.
@@ -47,8 +47,8 @@ Os nomes das contas nascem daqui, não do marketing.
 ## Porta 2 · vir.soltar  — o regresso
 - **Movimento:** Vir. **Cacho:** Esforço + Desolação.
 - **A pessoa depois:** para de empurrar, regressa a si, deixa-se segurar e descansar.
-- **Bio (PT):** *Carregas tudo sozinha e sentes culpa quando paras? Aprende a descansar sem culpa e a deixar-te apoiar. Método VS · Ver e Soltar 🕯️ ↓*
-- **Bio (EN):** *Carrying everything alone, guilty when you stop? Learn to rest without guilt and let yourself be supported. Method VS · See and Release 🕯️ ↓*
+- **Bio (PT):** *Fazes tudo por toda a gente e sentes culpa quando pensas em ti? Aprende a descansar sem culpa e a deixar-te apoiar. Método VS · Ver e Soltar 🕯️ ↓*
+- **Bio (EN):** *Do everything for everyone and feel guilty when you think of yourself? Learn to rest without guilt and let yourself be supported. Method VS · See and Release 🕯️ ↓*
 - **Reels (lanes):** "dormes 8h e acordas no mesmo cansaço"; "carregas um peso que nem é teu"; "descansar dá-te culpa?"; "o vazio não é falta, é onde germinas".
 - **Vende:** o manual **vir.soltar** (€9) → e o pilar.
 - **CTA:** comenta **VIR** → DM com o 1.º passo grátis → manual.
@@ -56,8 +56,8 @@ Os nomes das contas nascem daqui, não do marketing.
 ## Porta 3 · viver.soltar  — a integração
 - **Movimento:** Viver. **Cacho:** Horizonte + Permanência.
 - **A pessoa depois:** sai da sala de espera, tira a armadura dos papéis e entra na própria vida, agora.
-- **Bio (PT):** *Sabes o que precisas mudar mas voltas sempre ao mesmo? Aprende a transformar compreensão em mudança real. Método VS · Ver e Soltar 🕯️ ↓*
-- **Bio (EN):** *Know what to change but keep ending up in the same place? Learn to turn insight into real change. Method VS · See and Release 🕯️ ↓*
+- **Bio (PT):** *Estás sempre à espera que a tua vida comece? Aprende a sair do "depois" e a transformar o que já compreendeste em mudança real. Método VS · Ver e Soltar 🕯️ ↓*
+- **Bio (EN):** *Always waiting for your life to begin? Learn to step out of the "later" and turn what you understand into real change. Method VS · See and Release 🕯️ ↓*
 - **Reels (lanes):** "adias a vida para um 'quando' que não chega"; "mudar parece trair-te?"; "quem és quando paras de ser a forte?"; "a estreia é hoje".
 - **Vende:** o manual **viver.soltar** (€9) → e o pilar.
 - **CTA:** comenta **VIVER** → DM com o 1.º passo grátis → manual.
