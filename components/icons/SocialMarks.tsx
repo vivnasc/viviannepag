@@ -94,3 +94,39 @@ export function LoranneMark() {
     </svg>
   );
 }
+
+// Marcas dos 3 métodos-filhos (favicons das contas). Cada uma é o símbolo da
+// capa do método, reduzido a um sinal: ver = a margem (horizonte + luz);
+// vir = o colo (taça que ampara a luz); viver = descalça (a porta de luz).
+export function VerSoltarMark() {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden className={cls}>
+      <circle cx="256" cy="232" r="40" fill="#F4C56A" />
+      <line x1="96" y1="300" x2="416" y2="300" stroke="#EBAE4A" strokeWidth="22" strokeLinecap="round" />
+      <g stroke="#F4C56A" strokeWidth="14" strokeLinecap="round" opacity="0.7">
+        <line x1="226" y1="340" x2="286" y2="340" />
+        <line x1="206" y1="380" x2="306" y2="380" />
+      </g>
+    </svg>
+  );
+}
+
+export function VirSoltarMark() {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden className={cls}>
+      <circle cx="256" cy="244" r="46" fill="#F4C56A" />
+      <path d="M132 250 C132 380 200 430 256 430 C312 430 380 380 380 250"
+        fill="none" stroke="#EBAE4A" strokeWidth="22" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function ViverSoltarMark() {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden className={cls}>
+      <path d="M168 420 L168 232 Q168 132 256 132 Q344 132 344 232 L344 420"
+        fill="none" stroke="#EBAE4A" strokeWidth="22" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M236 420 L236 268 Q236 212 256 212 Q276 212 276 268 L276 420 Z" fill="#F4C56A" opacity="0.85" />
+    </svg>
+  );
+}

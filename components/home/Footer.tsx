@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
 import {
   VivianneMark,
-  FreeMeMark,
-  InfonteMark,
-  SyncHimMark,
+  VerSoltarMark,
+  VirSoltarMark,
+  ViverSoltarMark,
   EscolaMark,
   LoranneMark,
 } from '../icons/SocialMarks';
@@ -16,9 +16,9 @@ type Social = {
 
 const socials: Social[] = [
   { href: 'https://instagram.com/vivianne.dos.santos', handle: '@vivianne.dos.santos', Mark: VivianneMark },
-  { href: 'https://instagram.com/freeme_app', handle: '@freeme_app', Mark: FreeMeMark },
-  { href: 'https://instagram.com/infonte.app', handle: '@infonte.app', Mark: InfonteMark },
-  { href: 'https://instagram.com/synchim.app', handle: '@synchim.app', Mark: SyncHimMark },
+  { href: 'https://instagram.com/ver.soltar', handle: '@ver.soltar', Mark: VerSoltarMark },
+  { href: 'https://instagram.com/vir.soltar', handle: '@vir.soltar', Mark: VirSoltarMark },
+  { href: 'https://instagram.com/viver.soltar', handle: '@viver.soltar', Mark: ViverSoltarMark },
   { href: 'https://instagram.com/escola_dos_veus', handle: '@escola_dos_veus', Mark: EscolaMark },
   { href: 'https://instagram.com/loranne_music', handle: '@loranne_music', Mark: LoranneMark },
 ];
