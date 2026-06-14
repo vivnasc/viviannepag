@@ -25,14 +25,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+// Cada véu: o nome (a marca) + a legenda humana, o padrão reconhecível em 3
+// segundos por quem nunca ouviu falar do método.
 const VEUS: [string, string, string, string][] = [
-  ['A Permanência', 'defenderes quem já não és', 'Permanence', 'defending who you no longer are'],
-  ['A Memória', 'viveres preso à tua história', 'Memory', 'living trapped in your story'],
-  ['O Turbilhão', 'afogares-te na própria cabeça', 'The Whirlwind', 'drowning in your own head'],
-  ['O Esforço', 'esforçares-te para seres amada', 'Effort', 'striving to be loved'],
-  ['A Desolação', 'o medo do vazio', 'Desolation', 'the fear of emptiness'],
-  ['O Horizonte', 'viver à espera de um quando', 'The Horizon', 'living in wait for a someday'],
-  ['A Dualidade', 'a separação, raiz de todos', 'Duality', 'separation, the root of them all'],
+  ['O Turbilhão', 'Ficares presa dentro da própria cabeça.', 'The Whirlwind', 'Getting stuck inside your own head.'],
+  ['A Memória', 'Continuares a viver a partir de uma história antiga.', 'Memory', 'Still living from an old story.'],
+  ['O Esforço', 'Tentares merecer amor através do que fazes.', 'Effort', 'Trying to earn love through what you do.'],
+  ['A Desolação', 'O medo do vazio quando páras.', 'Desolation', 'The fear of emptiness when you stop.'],
+  ['O Horizonte', 'Viveres à espera de um "quando" que não chega.', 'The Horizon', 'Always waiting for a "someday" that never comes.'],
+  ['A Permanência', 'Agarrares-te a quem já foste, com medo de mudar.', 'Permanence', 'Clinging to who you used to be, afraid to change.'],
+  ['A Dualidade', 'Sentires-te separada de tudo. A raiz dos outros seis.', 'Duality', 'Feeling separate from everything. The root of the other six.'],
 ];
 
 export default async function OsSeteVeus({ params }: { params: Promise<{ locale: string }> }) {
@@ -95,15 +97,20 @@ export default async function OsSeteVeus({ params }: { params: Promise<{ locale:
 
         <div className="veu my-16" />
 
-        {/* OS SETE VÉUS */}
+        {/* OS SETE VÉUS — reconhecimento antes do nome */}
         <section className="my-12">
-          <p className="font-sans text-[0.7rem] tracking-[0.32em] uppercase text-salvia mb-8 text-center">{isEn ? 'The seven veils' : 'Os sete véus'}</p>
+          <p className="font-sans text-[0.7rem] tracking-[0.32em] uppercase text-salvia mb-3 text-center">{isEn ? 'The seven veils' : 'Os sete véus'}</p>
+          <p className="text-center text-creme-2/70 max-w-[520px] mx-auto mb-9 text-[1rem] leading-relaxed">
+            {isEn ? 'Each veil is a pattern you learned early. Do you recognise yourself in any of them?' : 'Cada véu é um padrão que aprendeste cedo. Reconheces-te em algum?'}
+          </p>
           <ol className="max-w-[560px] mx-auto">
             {VEUS.map(([nomePt, descPt, nomeEn, descEn], i) => (
               <li key={i} className="flex items-baseline gap-5 py-4 border-b border-ocre/12 last:border-0">
                 <span className="font-serif font-light text-ocre text-2xl w-7 shrink-0">{i + 1}</span>
-                <span className="font-serif text-creme text-[1.15rem]">{isEn ? nomeEn : nomePt}</span>
-                <span className="text-creme-2/60 text-[0.95rem] italic leading-snug">{isEn ? descEn : descPt}</span>
+                <span className="flex-1">
+                  <span className="block text-creme-2 text-[1.05rem] leading-snug">{isEn ? descEn : descPt}</span>
+                  <span className="block font-sans text-[0.66rem] tracking-[0.26em] uppercase text-salvia mt-1.5">{isEn ? nomeEn : nomePt}</span>
+                </span>
               </li>
             ))}
           </ol>
