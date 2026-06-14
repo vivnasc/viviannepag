@@ -4,21 +4,21 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS } from '@/lib/metodo/contas';
-import { fraseDoReel, destaqueDe, fundoPrompt } from '@/lib/metodo/reels';
-import { legendaDoReel, hashtagsDoReel } from '@/lib/metodo/legenda';
-import { resolverReel, ehManifesto, legendaManifesto } from '@/lib/metodo/abertura';
+import { CONTAS, FUNDO_FAMILIA } from '@/lib/metodo/contas';
+import { getPost } from '@/lib/metodo/posts';
+import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
 // Pipeline NOVO e SEPARADO da veu.a.veu (não toca em app/api/admin/reels/*).
-// Gera UM reel de uma porta do Método VS: cinético (frase com motion) com a
-// porta (dor) seguida da sala (revelação a ouro), fundo Flux próprio e música
-// Ancient Ground. Grava em carousel_collections com theme.marca da conta, para
-// fluir para /admin/publicar e o export Metricool já existentes.
+// Gera UM post do Método VS (reconhecimento / revelação / manifesto): UMA linha
+// no ecrã, com IDENTIDADE PRÓPRIA da conta (MetodoSlide, @conta, paleta própria,
+// SEM assinatura Véu a Véu) e música Ancient Ground. Grava em
+// carousel_collections com slide.tipo='metodo' e theme.marca da conta, para
+// fluir para /admin/publicar, o render (/render-veu usa o MetodoSlide) e o
+// export Metricool já existentes.
 
-// Gera a imagem de fundo (Flux) e devolve o URL público (ou null se falhar).
 async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token || !prompt) return null;
@@ -34,39 +34,38 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
   }
 }
 
-// POST { reelId }: reelId pode ser de manifesto (ver-00) ou da biblioteca (ver-01...).
+// POST { postId }: id de um post tipado (ex.: 'ver-01', 'ver-01-rev', 'ver-mani').
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
-  const body = (await req.json().catch(() => ({}))) as { reelId?: string };
-  const reelId = (body.reelId ?? '').trim();
-  if (!reelId) return NextResponse.json({ erro: 'falta reelId' }, { status: 400 });
+  const body = (await req.json().catch(() => ({}))) as { postId?: string };
+  const postId = (body.postId ?? '').trim();
+  if (!postId) return NextResponse.json({ erro: 'falta postId' }, { status: 400 });
 
-  const reel = resolverReel(reelId);
-  if (!reel) return NextResponse.json({ erro: 'reel-desconhecido', reelId }, { status: 404 });
+  const post = getPost(postId);
+  if (!post) return NextResponse.json({ erro: 'post-desconhecido', postId }, { status: 404 });
 
-  const conta = CONTAS[reel.conta];
-  const frase = limparTravessoes(fraseDoReel(reel));
-  const destaque = limparTravessoes(destaqueDe(reel));
-  const legenda = limparTravessoes(
-    ehManifesto(reel.id) ? legendaManifesto(reel.conta) : legendaDoReel(reel, conta),
-  );
-  const hashtags = hashtagsDoReel(reel);
-  const promptFundo = limparTravessoes(fundoPrompt(reel));
+  const conta = CONTAS[post.conta];
+  const texto = limparTravessoes(post.texto);
+  const destaque = limparTravessoes(post.destaque);
+  const legenda = limparTravessoes(legendaDoPost(post));
+  const hashtags = hashtagsDoPost(post);
+  const promptFundo = limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`);
 
-  // slug ESTÁVEL por reel: regenerar atualiza a mesma coleção (sem duplicar).
-  const slug = `metodo-${reel.id}`;
+  // slug ESTÁVEL por post: regenerar atualiza a mesma coleção (sem duplicar).
+  const slug = `metodo-${post.id}`;
   const imageUrl = await fundoImagem(promptFundo, slug);
 
   const slides = [
     {
-      tipo: 'kinetico',
-      texto: frase,
+      tipo: 'metodo', // <- render-veu usa o MetodoSlide (identidade própria)
+      texto,
       destaque,
       notaVisual: promptFundo,
       imageUrl,
       capa: true,
-      conceito: conta.movimento, // selo de marca (Ver/Vir/Viver), discreto
+      conceito: post.conceito, // selo editorial (Véu do… / Revelação / Manifesto)
+      contaId: post.conta, // o MetodoSlide lê a paleta e o @conta daqui
     },
   ];
 
@@ -80,8 +79,8 @@ export async function POST(req: Request) {
   const dias = [
     {
       dia: 1,
-      mundo: 'autora', // paleta de acento dourado (família das capas do método)
-      palavra: reel.porta.slice(0, 48),
+      mundo: 'autora', // ignorado pelo MetodoSlide; só para compatibilidade do render
+      palavra: texto.slice(0, 48),
       slides,
       faixa,
       legenda,
@@ -95,17 +94,16 @@ export async function POST(req: Request) {
     .upsert(
       {
         slug,
-        title: reel.porta.slice(0, 48),
-        brief: frase,
+        title: texto.slice(0, 48),
+        brief: texto,
         dias,
         theme: {
           formato: 'reel',
-          subtipo: 'kinetico',
+          subtipo: 'kinetico', // o render trata como typewriter MP4 (conduzido por prog)
           video: true,
           mundo: 'autora',
-          curso: 'transpessoal',
           marca: conta.marca, // <- distingue a conta no Publicar/export
-          metodo: { conta: reel.conta, veu: reel.veu, reelId: reel.id },
+          metodo: { conta: post.conta, tipo: post.tipo, veu: post.veu ?? null, postId: post.id },
         },
       },
       { onConflict: 'slug' },

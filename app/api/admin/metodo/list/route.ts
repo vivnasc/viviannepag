@@ -21,14 +21,14 @@ export async function GET() {
   type Row = {
     slug: string;
     dias?: { videoUrl?: string | null }[] | null;
-    theme?: { agendadoEm?: string | null; igPublicado?: boolean; metodo?: { reelId?: string } } | null;
+    theme?: { agendadoEm?: string | null; igPublicado?: boolean; metodo?: { postId?: string } } | null;
     created_at?: string;
   };
 
   const estado: Record<string, { slug: string; videoUrl: string | null; agendadoEm: string | null; publicado: boolean; criadoEm: string | null }> = {};
   for (const row of (data ?? []) as Row[]) {
-    const reelId = row.theme?.metodo?.reelId ?? row.slug.replace(/^metodo-/, '');
-    estado[reelId] = {
+    const postId = row.theme?.metodo?.postId ?? row.slug.replace(/^metodo-/, '');
+    estado[postId] = {
       slug: row.slug,
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       agendadoEm: row.theme?.agendadoEm ?? null,
