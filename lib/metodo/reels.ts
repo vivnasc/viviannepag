@@ -310,10 +310,11 @@ export function destaqueDe(reel: Reel): string[] {
   return reel.destaque ?? DESTAQUE_POR_REEL[reel.id] ?? [];
 }
 
-/** Texto no ecrã: a porta (dor) seguida da sala (revelação). O typewriter
- *  revela a porta primeiro e a sala a seguir, que aterra a ouro (destaque). */
+/** Texto no ecrã: a dor entre aspas (a voz dela, 1.ª pessoa) e, a seguir, a
+ *  revelação (a resposta). As aspas marcam a mudança de voz para não confundir;
+ *  o typewriter revela a dor primeiro e a sala depois (que aterra a ouro). */
 export function fraseDoReel(reel: Reel): string {
-  return `${reel.porta} ${reel.sala}`;
+  return `«${reel.porta}» ${reel.sala}`;
 }
 
 export function reelsDaConta(conta: ContaId): Reel[] {

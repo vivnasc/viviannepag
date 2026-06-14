@@ -23,8 +23,8 @@ type EstadoReel = { slug: string; videoUrl: string | null; agendadoEm: string | 
 function KineticPreview({ texto, destaque, imageUrl }: { texto: string; destaque?: string[]; imageUrl?: string }) {
   const [prog, setProg] = useState(0);
   useEffect(() => {
-    let raf = 0; let t0 = 0; const CICLO = 7000;
-    const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.78)); raf = requestAnimationFrame(tick); };
+    let raf = 0; let t0 = 0; const CICLO = 13000; // mais lento, dá tempo de ler
+    const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.85)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
   }, []);
   return <KineticSlide texto={texto} destaque={destaque} imageUrl={imageUrl} mundo="autora" prog={prog} />;
@@ -90,7 +90,7 @@ export default function MetodoContaPage() {
             <span className="opacity-40 normal-case tracking-normal">{r.fonte}</span>
           </div>
           <p className="mt-2 text-[1.05rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
-            <span className="opacity-95">{r.porta}</span>{' '}
+            <span className="opacity-95">«{r.porta}»</span>{' '}
             <span style={{ color: '#EBAE4A' }} className="italic">{r.sala}</span>
           </p>
           <details className="mt-2 text-[0.78rem] opacity-80">
