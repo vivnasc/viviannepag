@@ -24,7 +24,7 @@ export function MetodoMovimentos({ locale }: { locale: string }) {
         {isEn ? 'Method VS · See and Release' : 'Método VS · Ver e Soltar'}
       </p>
       <h2 className="rv text-center font-serif font-light text-creme text-[clamp(1.7rem,5vw,2.4rem)] leading-[1.2] mb-3">
-        {isEn ? 'Where do you begin?' : 'Por onde começar?'}
+        {isEn ? 'Where do you recognise yourself?' : 'Onde te reconheces?'}
       </h2>
       <p className="rv text-center text-creme-2/70 max-w-[540px] mx-auto mb-12 text-[1.02rem] leading-relaxed">
         {isEn
@@ -47,9 +47,13 @@ export function MetodoMovimentos({ locale }: { locale: string }) {
               <h3 className="font-serif font-light text-creme text-[1.3rem] leading-[1.24] mb-4">
                 {isEn ? m.dorTituloEn : m.dorTitulo}
               </h3>
-              <p className="text-creme-2/70 text-[0.92rem] leading-[1.6] mb-6 flex-1">
-                {isEn ? m.aprendeEn : m.aprende}
-              </p>
+              <ul className="space-y-1.5 mb-6 flex-1">
+                {(isEn ? m.sintomasEn : m.sintomas).map((s, i) => (
+                  <li key={i} className="flex gap-2 text-creme-2/75 text-[0.9rem] leading-[1.45]">
+                    <span className="text-ambar/60">·</span><span>{s}</span>
+                  </li>
+                ))}
+              </ul>
               <span className="font-serif text-ambar text-[1.05rem] group-hover:text-ocre transition-colors">
                 {m.marca} →
               </span>

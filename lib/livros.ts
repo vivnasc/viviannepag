@@ -14,6 +14,7 @@ export type ManualLivro = {
   introEn: string;
   // LINGUAGEM DA PESSOA (topo): a dor nas palavras dela, não na metáfora
   dorTitulo: string; dorTituloEn: string;       // "Não consegues parar de pensar?"
+  sintomas: string[]; sintomasEn: string[];     // 3 sintomas curtos (reconhecimento imediato)
   aprende: string; aprendeEn: string;           // "Aprende a…" — o benefício concreto, na língua da dor
   comoFunciona: string; comoFuncionaEn: string; // o que o método faz, concreto, 1 linha
   protocoloPara: string; protocoloParaEn: string; // "para os momentos de ansiedade"
@@ -59,6 +60,8 @@ export const MANUAIS: ManualLivro[] = [
     introEn: 'A method to step out of your head and watch the storm pass from solid ground. Not a re-explanation of anxiety, but a path with its own protocol.',
     dorTitulo: 'Não consegues parar de pensar?',
     dorTituloEn: 'Can’t stop thinking?',
+    sintomas: ['Revives conversas antigas.', 'Antecipas problemas que ainda não aconteceram.', 'Ficas presa dentro dos teus pensamentos.'],
+    sintomasEn: ['You replay old conversations.', 'You anticipate problems that haven’t happened.', 'You get stuck inside your own thoughts.'],
     aprende: 'Aprende a sair das espirais de pensamento e da ansiedade, sem tentares desligar a cabeça.',
     aprendeEn: 'Learn to step out of thought spirals and anxiety, without trying to switch your head off.',
     comoFunciona: 'Este método ensina-te a criar distância dos pensamentos sem tentares desligá-los.',
@@ -127,6 +130,8 @@ export const MANUAIS: ManualLivro[] = [
     introEn: 'A method to stop pushing and return to yourself. You do and you fill so as not to feel the emptiness; here you learn to stay, and to discover it holds you.',
     dorTitulo: 'Carregas tudo sozinha?',
     dorTituloEn: 'Carrying everything alone?',
+    sintomas: ['Não consegues descansar.', 'Sentes culpa quando paras.', 'Carregas mais do que te pertence.'],
+    sintomasEn: ['You can’t rest.', 'You feel guilty when you stop.', 'You carry more than is yours.'],
     aprende: 'Aprende a parar de carregar tudo sozinha, a descansar sem culpa e a deixar-te apoiar.',
     aprendeEn: 'Learn to stop carrying everything alone, to rest without guilt and to let yourself be supported.',
     comoFunciona: 'Este método ensina-te a parar sem culpa e a deixar-te segurar, em vez de encheres o vazio com mais uma tarefa.',
@@ -195,6 +200,8 @@ export const MANUAIS: ManualLivro[] = [
     introEn: 'A method to step out of the waiting room and take off the armour of the roles. You postpone for a "when" and cling to who you were; here you enter the present.',
     dorTitulo: 'Sabes o que precisas, mas voltas sempre ao mesmo?',
     dorTituloEn: 'Know what you need, but keep ending up in the same place?',
+    sintomas: ['Adias a vida para depois.', 'Vives em função da próxima meta.', 'Sentes que nunca chegas.'],
+    sintomasEn: ['You postpone life for later.', 'You live for the next goal.', 'You feel you never arrive.'],
     aprende: 'Aprende a transformar o que já compreendeste em mudança real, e a parar de adiar a tua vida.',
     aprendeEn: 'Learn to turn what you already understand into real change, and to stop postponing your life.',
     comoFunciona: 'Este método ensina-te a sair da sala de espera e a entrar na tua vida agora, sem a armadura dos papéis.',
