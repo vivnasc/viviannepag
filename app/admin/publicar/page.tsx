@@ -56,29 +56,6 @@ const videoDe = (it: Item): string | null => { const d = it.dias?.[0]; const s =
 // Hoje em Mim, Carrosséis 7 Véus…). Igual à lógica do route do CSV.
 const chaveFmt = (it: Item): string => it.theme?.formato === 'serie-diaria' ? (it.theme?.serie || 'serie') : (contaDe(it.theme, it.slug) === 'loja' ? 'veus' : tipoChave(it));
 const rotuloFmt = (k: string): string => k === 'vcsabia' ? 'VC Sabia' : k === 'hojeemmim' ? 'Hoje em Mim' : k === 'veus' ? 'Carrosséis 7 Véus' : k === 'serie' ? 'Série diária' : (FMT[k]?.label ?? k);
-// ficheiros descarregáveis de um post (vídeo ou imagens), com nome amigável
-const mediaDe = (it: Item): { url: string; nome: string }[] => {
-  const d = it.dias?.[0];
-  if (d?.videoUrl) return [{ url: d.videoUrl, nome: `${it.slug}.mp4` }];
-  if (d?.imagens?.length) return d.imagens.map((u, i) => ({ url: u, nome: `${it.slug}-${i + 1}.jpg` }));
-  const motion = videoDe(it);
-  if (motion) return [{ url: motion, nome: `${it.slug}-motion.mp4` }];
-  return [];
-};
-// baixa um ficheiro (fetch→blob força o download; se o CORS bloquear, abre numa aba para guardar à mão)
-async function baixarFicheiro(url: string, nome: string) {
-  try {
-    const r = await fetch(url);
-    if (!r.ok) throw new Error(String(r.status));
-    const blob = await r.blob();
-    const u = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = u; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(u), 4000);
-  } catch {
-    window.open(url, '_blank');
-  }
-}
 // thumbnail de vídeo FIÁVEL: preload=metadata + seek a 0.1s no onLoadedMetadata
 // força o browser (Edge/Chrome) a decodificar e PINTAR a 1.ª frame — o truque
 // só com "#t=0.1" no src não pinta de forma consistente.
@@ -136,7 +113,6 @@ export default function PublicarPage() {
   const [expDe, setExpDe] = useState(''); const [expAte, setExpAte] = useState('');
   const [expFmt, setExpFmt] = useState('tudo'); // filtro de formato no export (tudo | vcsabia | hojeemmim | veus | …)
   const [expPlat, setExpPlat] = useState<'tiktok' | 'instagram' | 'ambas'>('tiktok');
-  const [copiado, setCopiado] = useState<string | null>(null); // slug do post cuja legenda foi copiada
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list', { cache: 'no-store' });
@@ -298,8 +274,6 @@ export default function PublicarPage() {
                 {e === 'agendado' && <button onClick={() => setTheme(it.slug, { aprovado: false })} className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/60 hover:border-ambar">↩ desaprovar</button>}
                 <button onClick={() => publicar(it)} disabled={busy === it.slug} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === it.slug ? '…' : '⚡ publicar já'}</button>
                 <button onClick={() => setLegenda(it)} className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/55 hover:border-ambar">👁 rever</button>
-                <button onClick={async () => { try { await navigator.clipboard.writeText(legendaDe(it)); setCopiado(it.slug); setTimeout(() => setCopiado(null), 1500); } catch {} }} title="copiar a legenda+hashtags" className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/55 hover:border-ambar">{copiado === it.slug ? '✓ copiado' : '📋 legenda'}</button>
-                {mediaDe(it)[0] && <button onClick={() => { const ms = mediaDe(it); if (ms.length > 1) setLegenda(it); else baixarFicheiro(ms[0].url, ms[0].nome); }} title="baixar o ficheiro" className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/55 hover:border-ambar">⬇ baixar</button>}
               </div>
             )}
             {e === 'publicado' && <p className="text-[0.6rem] text-salvia mt-2">✓ já no Instagram</p>}
@@ -550,16 +524,6 @@ export default function PublicarPage() {
                 }
                 return null;
               })()}
-
-              {/* para publicar à mão (WhatsApp, etc.): copiar legenda + baixar ficheiros */}
-              <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-ocre/10 pt-3">
-                <span className="text-[0.6rem] uppercase tracking-wider opacity-45">para publicar à mão:</span>
-                <button onClick={async () => { try { await navigator.clipboard.writeText(legendaDe(it)); setCopiado(it.slug); setTimeout(() => setCopiado(null), 1500); } catch {} }} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20">📋 {copiado === it.slug ? 'copiado!' : 'copiar legenda'}</button>
-                {mediaDe(it).map((mm, i, arr) => (
-                  <button key={i} onClick={() => baixarFicheiro(mm.url, mm.nome)} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-[#7E9B8E]/45 bg-[#7E9B8E]/10 text-[#9DB6A9] hover:bg-[#7E9B8E]/20">⬇ baixar {arr.length > 1 ? `imagem ${i + 1}` : (it.dias?.[0]?.videoUrl || videoDe(it) ? 'vídeo' : 'imagem')}</button>
-                ))}
-                {mediaDe(it).length === 0 && <span className="text-[0.66rem] opacity-40">(este post ainda não tem ficheiro pronto)</span>}
-              </div>
 
               <div className="mt-4">
                 <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Legenda</p>
