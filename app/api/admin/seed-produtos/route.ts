@@ -40,6 +40,66 @@ Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelaçã
     ordem: 0,
   },
   {
+    slug: 'ver-soltar',
+    titulo: 'ver.soltar',
+    subtitulo: 'a consciência: sair de dentro da tempestade',
+    descricao: `**Método-filho · ~12.000 palavras · PDF imediato**
+
+O primeiro movimento do Método VS: ver. Um método para saíres de dentro da cabeça (o turbilhão e a memória) e veres a tempestade passar de terra. Com o seu protocolo de 5 passos, práticas e um caminho de sete dias.
+
+**Inclui o rascunho de bolso (bónus)**, para teres o método por perto.
+
+Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelação familiar sistémica.`,
+    preco: '€9',
+    preco_original: null,
+    capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-pilar/ver-soltar/capa-composta.png`,
+    ficheiro_path: 'produtos/ver-soltar.pdf',
+    badge: 'método · filho',
+    destaque: false,
+    publicado: false,
+    ordem: 0,
+  },
+  {
+    slug: 'vir-soltar',
+    titulo: 'vir.soltar',
+    subtitulo: 'o regresso: voltar a ti',
+    descricao: `**Método-filho · ~11.000 palavras · PDF imediato**
+
+O segundo movimento do Método VS: vir. Um método para parares de empurrar e regressares a ti (o esforço e a desolação), e te deixares, enfim, segurar. Com o seu protocolo de 5 passos, práticas e um caminho de sete dias.
+
+**Inclui o rascunho de bolso (bónus)**, para teres o método por perto.
+
+Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelação familiar sistémica.`,
+    preco: '€9',
+    preco_original: null,
+    capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-pilar/vir-soltar/capa-composta.png`,
+    ficheiro_path: 'produtos/vir-soltar.pdf',
+    badge: 'método · filho',
+    destaque: false,
+    publicado: false,
+    ordem: 0,
+  },
+  {
+    slug: 'viver-soltar',
+    titulo: 'viver.soltar',
+    subtitulo: 'a integração: entrar na tua vida',
+    descricao: `**Método-filho · ~12.000 palavras · PDF imediato**
+
+O terceiro movimento do Método VS: viver. Um método para saíres da sala de espera e tirares a armadura dos papéis (o horizonte e a permanência), e entrares na tua própria vida, agora. Com o seu protocolo de 5 passos, práticas e um caminho de sete dias.
+
+**Inclui o rascunho de bolso (bónus)**, para teres o método por perto.
+
+Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelação familiar sistémica.`,
+    preco: '€9',
+    preco_original: null,
+    capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-pilar/viver-soltar/capa-composta.png`,
+    ficheiro_path: 'produtos/viver-soltar.pdf',
+    badge: 'método · filho',
+    destaque: false,
+    publicado: false,
+    ordem: 0,
+  },
+  {
     slug: 'ebook-01-culpa',
     titulo: 'A culpa não é boa conselheira',
     subtitulo: 'Porque te sentes sempre em falta com os teus filhos, e o que essa culpa te está a impedir de fazer.',
