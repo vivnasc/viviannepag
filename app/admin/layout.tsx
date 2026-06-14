@@ -57,6 +57,16 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
+    titulo: 'Método VS · 3 portas',
+    cor: '#C8A24A',
+    itens: [
+      { href: '/admin/metodo', label: 'painel · ver/vir/viver' },
+      { href: '/admin/metodo/ver', label: 'ver.soltar' },
+      { href: '/admin/metodo/vir', label: 'vir.soltar' },
+      { href: '/admin/metodo/viver', label: 'viver.soltar' },
+    ],
+  },
+  {
     titulo: 'Véu a Véu · planear',
     cor: '#C9B6FA',
     itens: [
