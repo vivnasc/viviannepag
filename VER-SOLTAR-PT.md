@@ -166,6 +166,8 @@ Cada dia treina, de propósito, um dos tempos do protocolo, para que, ao fim da 
 
 **Dia 7 · A travessia inteira.** Hoje juntas tudo. Sempre que algo te apertar, faz o protocolo de bolso, mesmo que aos saltos: nomeia, passa para a margem, pergunta de que tempo é, pergunta de quem é a voz, respira e volta. Não precisa de sair perfeito. À noite, escreve-te uma frase curta, para leres daqui a uns meses, sobre o que mudou em ti nestes sete dias. Não como conclusão. Como semente.
 
+Sete dias não tiram este véu para sempre, e não era essa a promessa. O que fazem é ensinar ao corpo um caminho novo, o de sair da água e voltar à margem, para que ele esteja lá, disponível, da próxima vez que a tempestade subir. E vai subir, muitas vezes, porque isto é uma espiral e não uma linha reta: passas várias vezes pelo mesmo ponto, mas nunca à mesma altura. Quando voltares a um padrão antigo, volta também a estes sete dias, ao dia que precisares, sem vergonha e sem pressa. Não há recaída que seja fracasso aqui, há só a água a subir outra vez e tu, cada vez mais depressa, a lembrares-te do caminho de volta à margem.
+
 ## O que muda
 
 Não vais acordar um dia com a cabeça em silêncio para sempre, e quero dizer-to com clareza, para não te sentires falhada por não chegares a um lugar que não existe. A mente vai continuar a produzir pensamentos, é a função dela. O que muda não é a quantidade de água no rio. É que descobres a margem, e aprendes a voltar a ela. Ganhas um centro.
