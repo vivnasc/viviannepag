@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { LivroPilarCapas } from '@/components/admin/LivroPilarCapas';
+import { ManuaisRender } from '@/components/admin/ManuaisRender';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +25,7 @@ export default function LivroPilarAdmin() {
       </header>
 
       <LivroPilarCapas />
+      <ManuaisRender />
     </main>
   );
 }
