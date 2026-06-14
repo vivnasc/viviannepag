@@ -6,7 +6,6 @@ import { TopNav } from '@/components/TopNav';
 import { MetodoHero } from '@/components/home/MetodoHero';
 import { MetodoMovimentos } from '@/components/home/MetodoMovimentos';
 import { Respira } from '@/components/home/Respira';
-import { Mundos } from '@/components/home/Mundos';
 import { Sobre } from '@/components/home/Sobre';
 import { EscritosRecentes } from '@/components/home/EscritosRecentes';
 import { Newsletter } from '@/components/home/Newsletter';
@@ -36,9 +35,6 @@ export default async function HomePage({
         <div className="veu my-16" />
         {/* Quem está por trás do método */}
         <Sobre />
-        <div className="veu my-16" />
-        {/* Os outros mundos (apps) */}
-        <Mundos />
         <div className="veu my-16" />
         <EscritosRecentes locale={locale as Locale} />
         <div className="veu my-16" />
