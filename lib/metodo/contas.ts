@@ -68,11 +68,12 @@ export interface Conta {
 }
 
 // A família comum a todas as capas/fundos (o que faz a coleção ser coleção).
+// Equilíbrio: luz E sombra, não penumbra. Luminoso, arejado, sereno.
 export const FUNDO_FAMILIA =
-  'fine-art painterly background, deep indigo and aubergine with soft luminous ' +
-  'dawn light, warm gold glow, airy and bright, renaissance sfumato texture, ' +
-  'contemplative and timeless, generous calm space, NO people, NO faces, NO ' +
-  'figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
+  'fine-art painterly background, soft natural light, luminous and airy, light ' +
+  'and shadow in gentle balance, soft warm and cool tones, contemplative and ' +
+  'serene, generous calm space, NO people, NO faces, NO figures, NO hands, NO ' +
+  'text, NO letters, NO watermark, vertical 9:16';
 
 export const CONTAS: Record<ContaId, Conta> = {
   ver: {
@@ -88,7 +89,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'a calm still expanse of dark water with a single thin line of warm ' +
       'light on the far horizon, seen from the near shore, serene, room to breathe',
     cor: '#9cc1ee',
-    paleta: { bg1: '#16263f', bg2: '#0a0f1a', accent: '#9cc1ee' }, // azul frio (a margem, água, noite)
+    paleta: { bg1: '#34506e', bg2: '#1e2e44', accent: '#bcd6f2' }, // azul sereno (a margem, água, luz)
     manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
     manifestoLinhas: [
       'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
@@ -121,7 +122,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'a soft cupped hollow of warm golden light cradled in deep shadow, ' +
       'like a held nest or a quiet hearth, tender and sheltering, abstract, no figure',
     cor: '#e8b56b',
-    paleta: { bg1: '#3a241a', bg2: '#1a0f0a', accent: '#e8b56b' }, // âmbar quente (o colo, lareira)
+    paleta: { bg1: '#5a3f2e', bg2: '#2e2018', accent: '#f0c98a' }, // âmbar quente e suave (o colo)
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
     manifestoLinhas: [
       'Não precisas de carregar tudo para mereceres o teu lugar.',
@@ -156,7 +157,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'an open doorway seen from inside a dark room, the threshold and the ' +
       'ground just beyond it bathed in warm morning light, a path of light leading out',
     cor: '#c4dd84',
-    paleta: { bg1: '#21331f', bg2: '#0d140b', accent: '#c4dd84' }, // verde-manhã (descalça, limiar)
+    paleta: { bg1: '#3a4f2c', bg2: '#20301a', accent: '#cfe08a' }, // verde-manhã suave (descalça, limiar)
     manifestoLinha: 'Não estás atrasada para lugar nenhum.',
     manifestoLinhas: [
       'Não estás atrasada para lugar nenhum.',
