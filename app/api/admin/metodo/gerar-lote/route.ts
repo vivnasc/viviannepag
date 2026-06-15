@@ -3,35 +3,23 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
-import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, FUNDO_FAMILIA, ContaId } from '@/lib/metodo/contas';
 import { reelsDaConta } from '@/lib/metodo/reels';
 import { Post, nomeVeu } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 import { fraseReconhecimento } from '@/lib/metodo/ia';
 import { planoSemana } from '@/lib/metodo/semana';
+import { VEU_SEMENTE } from '@/lib/metodo/veus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
 // LOTE no SERVIDOR, ALINHADO AO PLANO DA SEMANA (como a veu.a.veu): segue o
-// plano dia a dia (cada post sabe a sua DATA e o seu tipo), gera a imagem (Flux)
-// em paralelo, e grava com agendadoEm = a data planeada (é o PLANO, fica como
-// rascunho; nada publica sem o ✓ da Vivianne no Publicar). Corre no servidor:
-// pode sair/fechar a página. semanas = quantas semanas gerar (a partir do offset).
-
-async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
-  const token = process.env.REPLICATE_API_TOKEN;
-  if (!token || !prompt) return null;
-  // tenta até 3 vezes (a Replicate falha às vezes sob concorrência).
-  for (let t = 0; t < 3; t++) {
-    try {
-      const url = await gerarImagemFlux(prompt, token, { raw: true });
-      try { return await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
-    } catch { await new Promise((r) => setTimeout(r, 1200 * (t + 1))); }
-  }
-  return null;
-}
+// plano dia a dia (cada post sabe a sua DATA e o seu tipo) e grava com
+// agendadoEm = a data planeada (é o PLANO, fica rascunho; nada publica sem o ✓).
+// SÓ GERA TEXTO (não gasta créditos de imagem): a imagem gera-se depois, só das
+// frases que ficarem (botão 'gerar imagens em falta'), para não pagar imagens de
+// frases que vais descartar. Corre no servidor: pode sair/fechar a página.
 
 type Pendente = { post: Post; slug: string; ia: boolean; i: number; promptFundo: string; data: string; hora: string };
 
@@ -82,9 +70,11 @@ export async function POST(req: Request) {
         const veu = d.post.veu!;
         const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
         const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
+        const cenas = VEU_SEMENTE[veu].cenas;
+        const cena = cenas[i % cenas.length]; // cena VARIADA (não repetir imagens)
         try {
           const texto = await fraseReconhecimento(veu, apiKey);
-          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: fonte?.fundoCena ?? conta.fundoBase, fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
+          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: cena, fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
           return { post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`), data: d.data, hora: d.hora } as Pendente;
         } catch { return null; }
       }
@@ -96,17 +86,12 @@ export async function POST(req: Request) {
 
   if (!pendentes.length) return NextResponse.json({ erro: 'nada-gerado' }, { status: 500 });
 
-  // imagens (Flux) em paralelo por blocos.
-  const rows: ReturnType<typeof buildRow>[] = [];
-  for (let c = 0; c < pendentes.length; c += 5) {
-    const bloco = pendentes.slice(c, c + 5);
-    const imgs = await Promise.all(bloco.map((p) => fundoImagem(p.promptFundo, p.slug)));
-    bloco.forEach((p, k) => rows.push(buildRow(p, imgs[k])));
-  }
+  // SÓ texto (imageUrl null). O prompt da imagem fica guardado (notaVisual) para
+  // a gerares depois, só das que ficarem.
+  const rows = pendentes.map((p) => buildRow(p, null));
 
   const supabase = getSupabaseAdmin();
   const { error } = await supabase.from('carousel_collections').upsert(rows, { onConflict: 'slug' });
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
-  const comImagem = rows.filter((r) => r.dias[0].slides[0].imageUrl).length;
-  return NextResponse.json({ ok: true, gerados: rows.length, comImagem });
+  return NextResponse.json({ ok: true, gerados: rows.length });
 }

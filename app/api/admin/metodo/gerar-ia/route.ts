@@ -9,6 +9,7 @@ import { reelsDaConta } from '@/lib/metodo/reels';
 import { Post, nomeVeu } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 import { fraseReconhecimento } from '@/lib/metodo/ia';
+import { VEU_SEMENTE } from '@/lib/metodo/veus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -45,7 +46,8 @@ export async function POST(req: Request) {
   const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
   const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[Math.floor(Math.random() * Math.max(1, doVeu.length))];
   const payoff = fonte?.sala;
-  const fundoCena = fonte?.fundoCena ?? conta.fundoBase;
+  const cenas = VEU_SEMENTE[veu].cenas; // cena VARIADA (não repetir imagens)
+  const fundoCena = cenas[Math.floor(Math.random() * cenas.length)];
 
   let texto: string;
   try { texto = await fraseReconhecimento(veu, apiKey); }

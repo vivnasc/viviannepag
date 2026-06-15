@@ -53,7 +53,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: ar, overflow: 'hidden', borderRadius: 16, background: bg2 }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 120% 85% at 50% 32%, ${bg1} 0%, ${bg2} 82%)`, overflow: 'hidden' }}>
         {imageUrl && (<>
-          <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', filter: 'brightness(1.18) saturate(1.05)', zIndex: 0 }} />
+          <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', filter: 'brightness(1.28) saturate(1.06)', zIndex: 0 }} />
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(bg2, '33')} 0%, ${a(bg2, '0f')} 44%, ${a(bg2, '8c')} 100%)`, zIndex: 1 }} />
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 42% at 50% 50%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.08) 58%, transparent 82%)', zIndex: 1 }} />
         </>)}
