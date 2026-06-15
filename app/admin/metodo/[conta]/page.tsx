@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
 import { getConta, Conta } from '@/lib/metodo/contas';
-import { Post, postsDaConta, sequenciaMix } from '@/lib/metodo/posts';
+import { Post, postsDaConta } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; videoUrl: string | null; agendadoEm: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; videoUrl: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 
@@ -56,25 +56,34 @@ export default function MetodoContaPage() {
     finally { setBusy(null); }
   }, [recarregar]);
 
-  const gerarLista = useCallback(async (posts: Post[]) => {
-    for (const p of posts) { await gerar(p.id); }
-  }, [gerar]);
-
-  // gerar em lote (default 30) NO SERVIDOR: um pedido só, corre sozinho mesmo que
-  // saias ou feches a página. Cria com o fundo de cor da conta (gradiente); a
-  // imagem pintada é opcional (botão regenerar por post).
-  const gerarLote = useCallback(async (n = 30) => {
+  // gerar o plano (4 semanas) NO SERVIDOR, alinhado ao Plano da Semana: cada post
+  // já com a sua DATA e a sua imagem. Corre sozinho mesmo que saias/feches.
+  const gerarLote = useCallback(async (semanas = 4) => {
     if (!conta || lote) return;
-    setErro(null); setLote({ feito: 0, total: n });
-    setMsg('A gerar no servidor. Podes sair ou fechar a página, que ele termina sozinho. Volta daqui a um minuto e recarrega.');
+    setErro(null); setLote({ feito: 0, total: semanas * 7 });
+    setMsg('A gerar no servidor (texto + imagem, por dia). Podes sair ou fechar a página. Demora 1 a 2 minutos; volta e recarrega.');
     try {
-      const r = await fetch('/api/admin/metodo/gerar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, n }) });
+      const r = await fetch('/api/admin/metodo/gerar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
-      else setMsg(`Lote gerado: ${j.gerados} posts. Revê-os em baixo e renderiza os que aprovares (o vídeo sai com o @conta).`);
+      else setMsg(`Plano gerado: ${j.gerados} posts (${j.comImagem} com imagem), já organizados por dia. Revê em baixo e em Publicar.`);
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setLote(null); recarregar(); }
   }, [conta, lote, recarregar]);
+
+  // gera a imagem (Flux) dos posts sem imagem desta conta (sem reescrever texto).
+  const [imgBusy, setImgBusy] = useState(false);
+  const gerarImagens = useCallback(async () => {
+    if (!conta || imgBusy) return;
+    setImgBusy(true); setErro(null); setMsg('A gerar imagens no servidor. Podes sair; volta e recarrega.');
+    try {
+      const r = await fetch('/api/admin/metodo/imagens', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`${j.feitas ?? 0} imagens geradas. Recarrega para ver.`);
+    } catch (e) { setErro(String(e)); }
+    finally { setImgBusy(false); recarregar(); }
+  }, [conta, imgBusy, recarregar]);
 
   // dispara o render (GitHub Actions) de UM slug. O MP4 sai com o @conta.
   const [renderBusy, setRenderBusy] = useState(false);
@@ -103,6 +112,7 @@ export default function MetodoContaPage() {
   // tudo o que já foi gerado para esta conta (inclui os do lote/IA), para feedback e render.
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id);
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
+  const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
   const grupos: { tipo: string; itens: Post[] }[] = [
     { tipo: 'reconhecimento', itens: posts.filter((p) => p.tipo === 'reconhecimento') },
     { tipo: 'revelacao', itens: posts.filter((p) => p.tipo === 'revelacao') },
@@ -152,18 +162,18 @@ export default function MetodoContaPage() {
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
-            <button onClick={() => gerarLote(30)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar lote (30)</button>
-            <button onClick={() => gerarLista(sequenciaMix(conta.id))} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>gerar a sequência (60/30/10)</button>
+            <button onClick={() => gerarLote(4)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 4 semanas (por dia, com imagem)</button>
+            <Link href="/admin/metodo/semana" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>ver por dia (produção semanal)</Link>
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=feed`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (esta conta) →</Link>
-            {lote && <span className="opacity-80">a gerar… {lote.feito}/{lote.total}</span>}
+            {lote && <span className="opacity-80">a gerar no servidor… (~1-2 min)</span>}
           </div>
-          <p className="mt-1 text-[0.68rem] opacity-50">O lote demora alguns minutos (gera imagem por post). O progresso aparece aqui ao lado. Podes deixar a correr.</p>
+          <p className="mt-1 text-[0.68rem] opacity-50">Gera no servidor (texto + imagem), já com a data de cada post (o plano). Podes sair que continua. Nada publica sem o teu ✓.</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
-            <span className="opacity-80">Gerados nesta conta: <b style={{ color: conta.cor }}>{geradosConta.length}</b> · com vídeo: {geradosConta.length - faltamRender.length}</span>
+            <span className="opacity-80">Gerados: <b style={{ color: conta.cor }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
+            {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
-            <span className="opacity-50">o vídeo (com o @conta) sai do render, demora alguns minutos.</span>
           </div>
         </header>
 
@@ -176,10 +186,12 @@ export default function MetodoContaPage() {
             <div className="grid gap-3 md:grid-cols-2">
               {geradosConta.map((e) => (
                 <div key={e.slug} className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex gap-3">
-                  <div className="w-[150px] shrink-0"><MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} prog={1} /></div>
+                  <div className="w-[150px] shrink-0"><MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} prog={1} /></div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap text-[0.64rem] uppercase tracking-wider opacity-70">
                       <span className="px-2 py-0.5 rounded-full" style={{ background: `${conta.cor}33`, color: conta.cor }}>{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo}</span>
+                      {e.agendadoEm && <span className="opacity-60 normal-case tracking-normal">{e.agendadoEm}{e.hora ? ` · ${e.hora}` : ''}</span>}
+                      {!e.imageUrl && <span className="opacity-40 normal-case tracking-normal">sem imagem</span>}
                     </div>
                     <p className="mt-1.5 text-[0.95rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>{e.texto}</p>
                     <div className="mt-2 flex items-center gap-2 flex-wrap text-[0.7rem]">
