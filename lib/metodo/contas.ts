@@ -189,8 +189,10 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'fine-art painterly, airy and alive, full of light and air, the quiet joy of finally inhabiting your own life now, present and unhurried',
-      elementos: ['bare feet on a warm sunlit wooden floor', 'a simple breakfast laid out by an open window in the morning', 'two hands pressing a small seedling into dark earth', 'rumpled white sheets with morning sun across the bed', 'a window thrown wide open onto a vast bright sky', 'a steaming cup of coffee on a sunlit windowsill', 'a worn travel bag set down on a wooden floor, finally home', 'a calm sea meeting a luminous open horizon', 'a single wooden chair turned to face the morning sun', 'fresh laundry drifting on a line in a warm breeze', 'an open doorway from shadow into bright daylight', 'a quiet meadow opening under a wide clear sky'],
+      prompt: 'lush verdant green world, alive and full of light and air, the quiet joy of stepping into your own life now, present and unhurried',
+      // verde é a IDENTIDADE da viver, mas verde NÃO é só floresta: prado, água,
+      // plantas, interior com verde, estufa, lago — variedade DENTRO do verde.
+      elementos: ['a sunlit green meadow rolling toward the horizon', 'close-up of dewy green leaves in soft morning light', 'a calm river between green banks under a bright sky', 'potted plants and fresh herbs on a sunlit windowsill', 'a lush bright greenhouse full of light', 'soft green hills under a wide clear sky', 'young ferns unfurling in soft green light', 'ivy climbing a sunlit pale wall', 'a green garden path opening into light', 'water lilies on a calm green pond', 'a bright kitchen with fresh herbs and greens by the window', 'wildflowers and moss in a sunlit green clearing'],
       // luz/hora (dentro do mundo verdejante): da madrugada à hora azul, para o
       // feed deixar de ser uma só parede verde sempre com a mesma luz.
       registos: ['fresh first dawn light', 'clear bright morning air', 'warm afternoon sun', 'soft overcast daylight', 'golden-hour backlight', 'the cool stillness of blue hour'],
