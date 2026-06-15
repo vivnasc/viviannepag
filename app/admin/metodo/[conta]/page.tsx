@@ -38,6 +38,7 @@ export default function MetodoContaPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
+  const [zoom, setZoom] = useState<{ texto: string; destaque?: string[]; conceito?: string; imageUrl?: string } | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
@@ -75,12 +76,18 @@ export default function MetodoContaPage() {
   const [imgBusy, setImgBusy] = useState(false);
   const gerarImagens = useCallback(async () => {
     if (!conta || imgBusy) return;
-    setImgBusy(true); setErro(null); setMsg('A gerar imagens no servidor. Podes sair; volta e recarrega.');
+    setImgBusy(true); setErro(null);
+    let totalFeitas = 0;
     try {
-      const r = await fetch('/api/admin/metodo/imagens', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setMsg(`${j.feitas ?? 0} imagens geradas. Recarrega para ver.`);
+      for (let pass = 0; pass < 20; pass++) {
+        const r = await fetch('/api/admin/metodo/imagens', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+        const j = await r.json();
+        if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); break; }
+        totalFeitas += j.feitas ?? 0;
+        setMsg(`Imagens: ${totalFeitas} geradas${j.restantes ? `, faltam ${j.restantes}…` : ''}.`);
+        recarregar();
+        if ((j.feitas ?? 0) === 0 || (j.restantes ?? 0) === 0) break;
+      }
     } catch (e) { setErro(String(e)); }
     finally { setImgBusy(false); recarregar(); }
   }, [conta, imgBusy, recarregar]);
@@ -101,6 +108,15 @@ export default function MetodoContaPage() {
     setRenderBusy(false);
     setMsg(`${n} renders disparados. Cada vídeo demora alguns minutos a aparecer (GitHub Actions). Recarrega daqui a pouco.`);
   }, [renderBusy, renderOne]);
+
+  // descartar (apagar) um post gerado que não presta, na revisão.
+  const descartar = useCallback(async (slug: string) => {
+    if (typeof window !== 'undefined' && !window.confirm('Descartar este post?')) return;
+    try {
+      const r = await fetch('/api/admin/metodo/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      if (r.ok) recarregar(); else { const j = await r.json().catch(() => ({})); setErro(j.erro ?? 'erro a apagar'); }
+    } catch (e) { setErro(String(e)); }
+  }, [recarregar]);
 
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
@@ -124,9 +140,9 @@ export default function MetodoContaPage() {
     const gerado = Boolean(st);
     return (
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden flex flex-col md:flex-row gap-4 p-4">
-        <div className="w-full md:w-[210px] shrink-0">
+        <button onClick={() => setZoom({ texto: p.texto, destaque: p.destaque, conceito: p.conceito })} title="clicar para aumentar" className="w-full md:w-[210px] shrink-0 block">
           <MetodoPreview texto={p.texto} destaque={p.destaque} conta={conta} conceito={p.conceito} />
-        </div>
+        </button>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap text-[0.68rem] uppercase tracking-wider opacity-70">
             <span className="px-2 py-0.5 rounded-full" style={{ background: `${conta.cor}33`, color: conta.cor }}>{TIPO_LABEL[p.tipo]}</span>
@@ -186,7 +202,7 @@ export default function MetodoContaPage() {
             <div className="grid gap-3 md:grid-cols-2">
               {geradosConta.map((e) => (
                 <div key={e.slug} className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex gap-3">
-                  <div className="w-[150px] shrink-0"><MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} prog={1} /></div>
+                  <button onClick={() => setZoom({ texto: e.texto, conceito: e.conceito, imageUrl: e.imageUrl ?? undefined })} title="clicar para aumentar" className="w-[150px] shrink-0 block"><MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} prog={1} /></button>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap text-[0.64rem] uppercase tracking-wider opacity-70">
                       <span className="px-2 py-0.5 rounded-full" style={{ background: `${conta.cor}33`, color: conta.cor }}>{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo}</span>
@@ -198,6 +214,7 @@ export default function MetodoContaPage() {
                       {e.videoUrl
                         ? <a href={e.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                         : <button onClick={() => renderOne(e.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((err) => setErro(String(err)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
+                      <button onClick={() => descartar(e.slug)} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
                       <span className="opacity-50">{e.videoUrl ? 'MP4 pronto' : 'falta render'}</span>
                     </div>
                   </div>
@@ -216,6 +233,15 @@ export default function MetodoContaPage() {
           </section>
         ))}
       </div>
+
+      {zoom && (
+        <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
+          <div onClick={(ev) => ev.stopPropagation()} className="w-full max-w-[380px]">
+            <MetodoSlide texto={zoom.texto} destaque={zoom.destaque} conceito={zoom.conceito} imageUrl={zoom.imageUrl} conta={conta} prog={1} />
+            <p className="text-center text-[0.72rem] opacity-60 mt-2">clica fora para fechar</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

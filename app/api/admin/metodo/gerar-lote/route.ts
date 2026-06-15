@@ -23,10 +23,14 @@ export const maxDuration = 300;
 async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token || !prompt) return null;
-  try {
-    const url = await gerarImagemFlux(prompt, token, { raw: true });
-    try { return await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
-  } catch { return null; }
+  // tenta até 3 vezes (a Replicate falha às vezes sob concorrência).
+  for (let t = 0; t < 3; t++) {
+    try {
+      const url = await gerarImagemFlux(prompt, token, { raw: true });
+      try { return await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
+    } catch { await new Promise((r) => setTimeout(r, 1200 * (t + 1))); }
+  }
+  return null;
 }
 
 type Pendente = { post: Post; slug: string; ia: boolean; i: number; promptFundo: string; data: string; hora: string };

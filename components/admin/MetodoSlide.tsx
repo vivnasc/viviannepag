@@ -54,8 +54,8 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 120% 85% at 50% 32%, ${bg1} 0%, ${bg2} 82%)`, overflow: 'hidden' }}>
         {imageUrl && (<>
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', zIndex: 0 }} />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(bg2, '70')} 0%, ${a(bg2, '33')} 38%, ${a(bg2, 'e0')} 100%)`, zIndex: 1 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 42% at 50% 50%, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.18) 58%, transparent 78%)', zIndex: 1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(bg2, '40')} 0%, ${a(bg2, '14')} 42%, ${a(bg2, 'a6')} 100%)`, zIndex: 1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 42% at 50% 50%, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.1) 58%, transparent 80%)', zIndex: 1 }} />
         </>)}
 
         {/* selo editorial (Véu do… / Revelação / Manifesto) */}
