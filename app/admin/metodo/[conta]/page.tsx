@@ -6,8 +6,8 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
-import { getConta, Conta } from '@/lib/metodo/contas';
-import { Post, postsDaConta, sequenciaMix } from '@/lib/metodo/posts';
+import { getConta, Conta, VeuNome } from '@/lib/metodo/contas';
+import { Post, postsDaConta, sequenciaMix, revelacaoPosts, manifestoPosts } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -37,6 +37,7 @@ export default function MetodoContaPage() {
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
@@ -58,6 +59,38 @@ export default function MetodoContaPage() {
   const gerarLista = useCallback(async (posts: Post[]) => {
     for (const p of posts) { await gerar(p.id); }
   }, [gerar]);
+
+  // gerar em lote (default 30) na proporção 60/30/10: reconhecimento com IA
+  // (frase nova do véu), revelação e manifesto curados. Mostra progresso.
+  const gerarLote = useCallback(async (n = 30) => {
+    if (!conta || lote) return;
+    setErro(null); setMsg(null);
+    const veus = conta.veus;
+    const revs = revelacaoPosts(conta.id);
+    const manis = manifestoPosts(conta.id);
+    const nRecon = Math.round(n * 0.6);
+    const nRev = Math.round(n * 0.3);
+    const nMani = Math.max(0, n - nRecon - nRev);
+    type Job = { kind: 'ia'; veu: VeuNome } | { kind: 'post'; id: string };
+    const jobs: Job[] = [];
+    for (let i = 0; i < nRecon; i++) jobs.push({ kind: 'ia', veu: veus[i % veus.length] });
+    for (let i = 0; i < nRev; i++) jobs.push({ kind: 'post', id: revs[i % revs.length].id });
+    for (let i = 0; i < nMani; i++) jobs.push({ kind: 'post', id: manis[i % manis.length].id });
+    setLote({ feito: 0, total: jobs.length });
+    let feito = 0;
+    for (const j of jobs) {
+      try {
+        if (j.kind === 'ia') {
+          await fetch('/api/admin/metodo/gerar-ia', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, veu: j.veu }) });
+        } else {
+          await fetch('/api/admin/metodo/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ postId: j.id }) });
+        }
+      } catch { /* continua o lote */ }
+      feito += 1; setLote({ feito, total: jobs.length });
+    }
+    setMsg(`Lote concluído: ${feito} posts gerados. Vai a Publicar para agendar, renderizar e exportar.`);
+    setLote(null); recarregar();
+  }, [conta, lote, recarregar]);
 
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
@@ -113,10 +146,13 @@ export default function MetodoContaPage() {
           </h1>
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
-          <div className="mt-3 flex gap-2 flex-wrap text-[0.72rem]">
-            <button onClick={() => gerarLista(sequenciaMix(conta.id))} className="px-3 py-1.5 rounded-lg border" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>gerar a sequência (60/30/10)</button>
+          <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
+            <button onClick={() => gerarLote(30)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar lote (30)</button>
+            <button onClick={() => gerarLista(sequenciaMix(conta.id))} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>gerar a sequência (60/30/10)</button>
             <Link href="/admin/publicar" className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar →</Link>
+            {lote && <span className="opacity-80">a gerar… {lote.feito}/{lote.total}</span>}
           </div>
+          <p className="mt-1 text-[0.68rem] opacity-50">O lote demora alguns minutos (gera imagem por post). Podes deixar a correr.</p>
         </header>
 
         {erro && <p className="mb-3 text-[0.8rem] text-rose-300">{erro}</p>}
