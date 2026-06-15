@@ -22,3 +22,18 @@ Devolve SÓ a frase, nada mais.`;
   if (!t) throw new Error('vazio');
   return limparTravessoes(t);
 }
+
+// Reescreve uma frase de reconhecimento para tirar a ambiguidade, SEM perder a
+// dor. Para "melhorar" um post já gerado (mantendo a imagem, sem custo novo).
+export async function melhorarFrase(texto: string, apiKey: string): Promise<string> {
+  const sys = `Reescreves UMA frase de reconhecimento (psicologia, Método VS) para ficar CLARA e AUTÓNOMA, sem perder a dor. Tira pronomes ambíguos (evita "ela", "ele", "isso", "aquilo", "lá" sem dizer a quê ou a quem). Mantém a 1.ª pessoa e o mesmo sentido, português europeu, máximo 12 palavras, concreta, SEM travessões, SEM aspas, SEM hashtags. Devolve SÓ a frase.`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 120, system: sys, messages: [{ role: 'user', content: `Frase a clarificar: "${texto}"` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}`);
+  const t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');
+  if (!t) throw new Error('vazio');
+  return limparTravessoes(t);
+}
