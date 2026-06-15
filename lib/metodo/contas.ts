@@ -97,7 +97,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       sensacao: 'silêncio depois do ruído',
       fraseVisual: 'alguém observa a tempestade sem estar dentro dela',
       prompt: 'cool contemplative atmosphere, petrol blue and cool grey with soft white light, serene and still, the feeling of silence after the noise',
-      elementos: ['soft fog', 'rain on a window pane', 'a quiet window with grey light', 'soft light reflections', 'light passing through dust', 'a blurred distant city', 'soft shadows on a wall', 'misty calm water at dawn'],
+      elementos: ['soft fog drifting over a quiet city', 'rain running down a window pane', 'a misty calm lake at dawn', 'a quiet empty room in cool grey light', 'soft reflections on wet pavement', 'mist among tall pine trees', 'a calm grey sea under a pale sky', 'condensation on cold glass', 'a lighthouse beam through fog', 'soft shadows on a pale wall', 'a still rainy street at dusk', 'a single chair by a cool grey window'],
       textura: 'shallow depth of field, soft blur, wet glass, fine grain',
     },
     manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
@@ -137,7 +137,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       sensacao: 'finalmente pousar',
       fraseVisual: 'o momento em que alguém larga o peso que carregava',
       prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of finally setting down a weight, intimate and held',
-      elementos: ['a soft folded blanket', 'a warm cup on a wooden table', 'an empty welcoming chair', 'soft draped fabric', 'golden sunset light through a window', 'a quiet warm hearth', 'sunlight on warm linen'],
+      elementos: ['a warm cup of tea on a windowsill', 'golden hour light across a wooden floor', 'an empty armchair in warm lamplight', 'a single lit candle on a table', 'sunlight through soft linen curtains', 'a quiet kitchen corner at sunset', 'the warm glow of a lamp in a cosy room', 'an open book in golden light', 'a blanket draped over a sofa', 'warm evening light on a brick wall', 'steam rising from a mug', 'soft embers in a quiet hearth'],
       textura: 'analog film, warm grain, soft warm light',
     },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
@@ -178,9 +178,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'open luminous atmosphere, light blue soft green and solar gold, airy alive and bright, the feeling of stepping back into your own life',
-      elementos: ['an open road at sunrise', 'an open doorway with light', 'the open sea and sky', 'wind moving through fields', 'a wide open bright sky', 'an open window with daylight', 'a sunlit path through fields'],
-      textura: 'air, space, depth, bright and clear, soft sunlight',
+      prompt: 'lush living green atmosphere, verdant plants and foliage, soft green and warm solar gold light, airy alive and bright, the feeling of stepping back into your own life',
+      elementos: ['sunlight through fresh green leaves', 'a lush green forest clearing', 'ferns unfurling in soft green light', 'a green meadow full of wildflowers', 'morning light through a green canopy', 'dew on green grass at sunrise', 'a winding path through green woods', 'climbing plants on a sunlit wall', 'a green valley opening to the light', 'tall grasses swaying in warm light', 'moss and green leaves in dappled light', 'a garden alive in early summer light'],
+      textura: 'air, space, depth, verdant and clear, soft warm sunlight',
     },
     manifestoLinha: 'Não estás atrasada para lugar nenhum.',
     manifestoLinhas: [
@@ -222,7 +222,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       sensacao: 'entrar numa biblioteca secreta da alma',
       fraseVisual: 'existe algo por trás do que vês',
       prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, candlelit, archetypal and symbolic, the feeling of entering a secret library of the soul',
-      elementos: ['ancient veils drifting in candlelight', 'a long candlelit corridor', 'an ornate doorway opening to golden light', 'a spiral staircase in shadow', 'old books and a single candle', 'golden light in deep shadow', 'a threshold opening to warm light'],
+      elementos: ['a long candlelit corridor', 'an ornate doorway opening to golden light', 'a spiral staircase fading into shadow', 'old books beside a single candle', 'sheer veils drifting in golden light', 'an antique key on dark velvet', 'golden light pouring through a stone arch', 'a dim library aisle with warm light', 'a single lantern in the dark', 'gold dust floating in a shaft of light', 'a moonlit threshold', 'an old mirror in candlelight'],
       textura: 'cinematic, chiaroscuro, symbolic, warm gold on deep dark',
     },
     bioPT:
@@ -257,10 +257,15 @@ export function getConta(id: string): Conta | undefined {
 // O fundo (prompt Flux) de um post: o MUNDO da conta + um elemento variado.
 // É isto que dá a cada conta uma atmosfera própria (e evita repetir imagens).
 const COMUM = 'fine-art painterly, contemplative, generous calm space, NO people, NO faces, NO figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
+// enquadramentos rodam para dar imagens DISTINTAS mesmo dentro do mesmo mundo.
+const ENQUADRAMENTOS = ['wide cinematic shot', 'intimate close detail', 'soft-focus background', 'seen from above', 'low warm angle', 'distant atmospheric view'];
 export function fundoDaConta(conta: Conta, i = 0): string {
   const els = conta.atmosfera.elementos;
-  const el = els[((i % els.length) + els.length) % els.length];
-  return `${el}, ${conta.atmosfera.prompt}, ${conta.atmosfera.textura}, ${COMUM}`;
+  const idx = ((i % els.length) + els.length) % els.length;
+  const el = els[idx];
+  const enq = ENQUADRAMENTOS[((i % ENQUADRAMENTOS.length) + ENQUADRAMENTOS.length) % ENQUADRAMENTOS.length];
+  // o ASSUNTO (elemento) varia muito; a atmosfera dá só o ambiente (luz, cor, sensação).
+  return `${el}, ${enq}, ${conta.atmosfera.prompt}, ${conta.atmosfera.textura}, ${COMUM}`;
 }
 
 // O hub (conta-mãe) e a didática, aqui só para referência (não geramos por elas).
