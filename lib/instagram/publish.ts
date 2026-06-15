@@ -17,7 +17,8 @@ type PublishOpts = {
   tipo: 'imagem' | 'carrossel' | 'reel';
   imageUrls?: string[]; // imagem/carrossel
   videoUrl?: string;    // reel
-  thumbOffsetMs?: number; // reel: ms do frame da CAPA (evita a capa no 1.º frame vazio)
+  thumbOffsetMs?: number; // reel: ms do frame da CAPA (fallback se não houver cover_url)
+  coverUrl?: string;    // reel: imagem de CAPA (poster do último frame, com a frase)
 };
 
 type PublishResult = { ok: boolean; id?: string; erro?: string };
@@ -69,7 +70,9 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
       // CAPA do Reel: por defeito a Meta usa o 1.º frame (no typewriter está vazio,
       // sem texto). thumb_offset escolhe um instante já com a frase completa.
       const reelParams: Record<string, string> = { media_type: 'REELS', video_url: opts.videoUrl, caption, access_token: token, share_to_feed: 'true' };
-      if (opts.thumbOffsetMs && opts.thumbOffsetMs > 0) reelParams.thumb_offset = String(Math.round(opts.thumbOffsetMs));
+      // CAPA: cover_url (poster com a frase) vence; senão thumb_offset (instante do vídeo).
+      if (opts.coverUrl) reelParams.cover_url = opts.coverUrl;
+      else if (opts.thumbOffsetMs && opts.thumbOffsetMs > 0) reelParams.thumb_offset = String(Math.round(opts.thumbOffsetMs));
       const c = await graphPost(`${igUserId}/media`, reelParams);
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container reel: ' + erroDe(c.json) };
       creationId = c.json.id as string;
