@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Fraunces, Outfit } from 'next/font/google';
 import '../[locale]/globals.css';
 import Link from 'next/link';
+import { AdminNav } from '@/components/admin/AdminNav';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -107,23 +108,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/" className="text-ocre text-[0.7rem] tracking-[0.2em] uppercase no-underline hover:text-ambar mb-3 block">
               home
             </Link>
-            {SECOES.map((sec) => (
-              <div key={sec.titulo} className="mb-2.5">
-                <p className="text-[0.58rem] tracking-[0.22em] uppercase mb-1 flex items-center gap-1.5" style={{ color: sec.cor }}>
-                  <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: sec.cor }} />
-                  {sec.titulo}
-                </p>
-                {sec.itens.map((n) => (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    className="block py-1 px-3 rounded-[10px] text-creme-2/80 text-[0.82rem] no-underline hover:bg-terra-2/50 hover:text-ambar transition-colors"
-                  >
-                    {n.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
+            <AdminNav secoes={SECOES} />
             <div className="flex-1" />
             <p className="text-[0.6rem] text-creme-2/20 mt-2">viviannedossantos.com</p>
           </aside>
