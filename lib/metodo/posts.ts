@@ -11,7 +11,7 @@
 // dos posts de reconhecimento, ou como post próprio nos aforismos mais fortes).
 
 import { ContaId, VeuNome, CONTAS } from './contas';
-import { Reel, reelsDaConta, destaqueDe } from './reels';
+import { Reel, reelsDaConta, destaqueDe, destaquePortaDe, realceAuto } from './reels';
 
 export type PostTipo = 'reconhecimento' | 'revelacao' | 'manifesto';
 
@@ -51,7 +51,7 @@ function reconhecimentoDoReel(r: Reel, conta: ContaId): Post {
     tipo: 'reconhecimento',
     veu: r.veu,
     texto: r.porta,
-    destaque: [],
+    destaque: destaquePortaDe(r), // realce SEMPRE (cai sobre a ferida, não a resposta)
     payoff: r.sala,
     fundoCena: r.fundoCena,
     fonte: r.fonte,
@@ -83,6 +83,23 @@ export function revelacaoPosts(conta: ContaId): Post[] {
   const reels = reelsDaConta(conta);
   return [...reels.filter((r) => r.revelacaoForte), ...reels.filter((r) => !r.revelacaoForte)].map((r) => revelacaoDoReel(r, conta));
 }
+// Realce curado por linha de manifesto (a palavra que tem de ficar). Fallback
+// heurístico garante realce mesmo em linhas novas.
+const DESTAQUE_MANIFESTO: Record<string, string[]> = {
+  'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.': ['um lugar na tua vida'],
+  'Pensar não é ver.': ['ver'],
+  'A paz não é a cabeça em silêncio. É deixares de te agarrar ao barulho.': ['agarrar ao barulho'],
+  'Não precisas de carregar tudo para mereceres o teu lugar.': ['o teu lugar'],
+  'Descansar não é desistir.': ['desistir'],
+  'O amor que se paga com exaustão não era amor, era medo.': ['era medo'],
+  'Não estás atrasada para lugar nenhum.': ['lugar nenhum'],
+  'A tua vida não começa depois. Já começou.': ['Já começou'],
+  'Não há nenhum comboio a partir sem ti.': ['sem ti'],
+  'Vê o que te prende. Solta o que te faz repetir.': ['Solta'],
+  'Os padrões que te fazem repetir são véus. Aprende a vê-los e a soltá-los.': ['véus'],
+  'Não há soltar sem ver.': ['ver'],
+};
+
 export function manifestoPosts(conta: ContaId): Post[] {
   const c = CONTAS[conta];
   return c.manifestoLinhas.map((linha, i) => ({
@@ -90,7 +107,7 @@ export function manifestoPosts(conta: ContaId): Post[] {
     conta,
     tipo: 'manifesto' as const,
     texto: linha,
-    destaque: [],
+    destaque: DESTAQUE_MANIFESTO[linha] ?? realceAuto(linha),
     fundoCena: c.fundoBase,
     fonte: `manifesto ${c.handle}`,
     conceito: 'Manifesto',

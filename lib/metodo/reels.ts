@@ -321,6 +321,67 @@ export function destaqueDe(reel: Reel): string[] {
   return reel.destaque ?? DESTAQUE_POR_REEL[reel.id] ?? [];
 }
 
+// Palavras da PORTA (a dor) a realçar a ouro. Antes deixávamos a dor "limpa",
+// mas a Vivianne quer realce SEMPRE: a frase no ecrã tem de ter um ponto de
+// aterragem. Aqui cai sobre a ferida (a palavra que dói), não sobre a resposta.
+export const DESTAQUE_PORTA: Record<string, string[]> = {
+  'ver-01': ['não desliga'],
+  'ver-02': ['ainda nem chegou'],
+  'ver-03': ['negligente'],
+  'ver-04': ['fico pior'],
+  'ver-05': ['um filme antigo'],
+  'ver-06': ['sempre a mesma coisa'],
+  'ver-07': ['nunca chegou'],
+  'ver-08': ['trair'],
+  'vir-01': ['acorda na mesma'],
+  'vir-02': ['culpa surda'],
+  'vir-03': ['receber'],
+  'vir-04': ['quem me segure a mim'],
+  'vir-05': ['silêncio'],
+  'vir-06': ['não encontre nada'],
+  'vir-07': ['o vazio'],
+  'vir-08': ['ninguém ajuda'],
+  'viver-01': ['nunca chega'],
+  'viver-02': ['nunca bebo mesmo o café'],
+  'viver-03': ['a ânsia da próxima'],
+  'viver-04': ['trinta anos'],
+  'viver-05': ['quem seria eu'],
+  'viver-06': ['entretanto mudou'],
+  'viver-07': ['nos dias bons'],
+  'viver-08': ['mudei de ideias'],
+};
+
+/** Destaque da porta (a dor no ecrã): curado, com recurso ao heurístico. */
+export function destaquePortaDe(reel: Reel): string[] {
+  const cur = DESTAQUE_PORTA[reel.id];
+  if (cur && cur.length) return cur;
+  return realceAuto(reel.porta);
+}
+
+// Heurístico de realce (fallback p/ linhas geradas pela IA ou novas): escolhe a
+// "aterragem" da frase, a última expressão com peso (1 a 3 palavras), saltando
+// pontuação e palavras-função no fim. Garante que NUNCA fica sem realce.
+const PALAVRAS_FUNCAO = new Set([
+  'a', 'o', 'as', 'os', 'um', 'uma', 'uns', 'umas', 'de', 'do', 'da', 'dos', 'das',
+  'em', 'no', 'na', 'nos', 'nas', 'e', 'ou', 'que', 'se', 'me', 'te', 'lhe', 'nos',
+  'por', 'para', 'com', 'sem', 'ao', 'aos', 'à', 'às', 'mais', 'já', 'mas', 'como',
+  'eu', 'tu', 'ela', 'ele', 'minha', 'meu', 'tua', 'teu', 'sua', 'seu', 'isto', 'isso',
+]);
+export function realceAuto(texto: string): string[] {
+  const limpo = texto.replace(/[«»"“”]/g, '').trim();
+  const tokens = limpo.split(/\s+/).filter(Boolean);
+  if (!tokens.length) return [];
+  const ehFuncao = (w: string) => PALAVRAS_FUNCAO.has(w.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, ''));
+  // recua até à última palavra "cheia" (não-função, sem pontuação terminal forte).
+  let fim = tokens.length - 1;
+  while (fim > 0 && ehFuncao(tokens[fim].replace(/[.,;:!?]+$/, ''))) fim -= 1;
+  // junta até 2 palavras anteriores se também forem cheias (uma expressão).
+  let ini = fim;
+  while (ini > 0 && fim - ini < 2 && !ehFuncao(tokens[ini - 1].replace(/[.,;:!?]+$/, '')) && !/[.,;:!?]$/.test(tokens[ini - 1])) ini -= 1;
+  const frase = tokens.slice(ini, fim + 1).join(' ').replace(/[.,;:!?]+$/, '');
+  return frase ? [frase] : [];
+}
+
 /** Texto no ecrã: a dor entre aspas (a voz dela, 1.ª pessoa) e, a seguir, a
  *  revelação (a resposta). As aspas marcam a mudança de voz para não confundir;
  *  o typewriter revela a dor primeiro e a sala depois (que aterra a ouro). */

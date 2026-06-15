@@ -10,6 +10,7 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import type { Conta } from '@/lib/metodo/contas';
+import { realceAuto } from '@/lib/metodo/reels';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
@@ -32,8 +33,11 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
 
   const palavras = texto.trim().split(/\s+/).filter(Boolean);
   const normW = palavras.map(norm);
+  // realce SEMPRE: se o post não trouxe destaque (conteúdo antigo ou gerado pela
+  // IA), derivamos a aterragem da frase aqui, no render. Nenhum slide fica sem ouro.
+  const realce = destaque && destaque.length ? destaque : realceAuto(texto);
   const goldIdx = new Set<number>();
-  for (const frase of destaque) {
+  for (const frase of realce) {
     const pw = frase.trim().split(/\s+/).map(norm).filter(Boolean);
     if (!pw.length) continue;
     for (let i = 0; i + pw.length <= normW.length; i++) {
@@ -56,7 +60,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', filter: 'brightness(1.12) saturate(1.04)', zIndex: 0 }} />
           {/* sombra SÓ no rodapé (para o @conta) e atrás do texto (legibilidade); resto fica claro */}
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, transparent 0%, transparent 56%, ${a(bg2, '55')} 100%)`, zIndex: 1 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 120% 34% at 50% 47%, rgba(0,0,0,0.34) 0%, transparent 66%)', zIndex: 1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 122% 42% at 50% 47%, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.22) 50%, transparent 72%)', zIndex: 1 }} />
         </>)}
 
         {/* selo editorial (Véu do… / Revelação / Manifesto) */}
