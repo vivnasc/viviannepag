@@ -128,10 +128,11 @@ export async function GET(req: NextRequest) {
     } else if (conta === 'loja') {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
     } else if (VIDEO.includes(chave) && d?.videoUrl) {
-      // typewriter (kinetico/domingo, render de 7s): capa a 6s, já com a frase
-      // completa + @conta, em vez do 1.º frame vazio.
+      // CAPA do reel: o poster do último frame (com a frase) está em d.imagens[0];
+      // usa-o como cover_url. Sem poster, cai no thumb_offset (6s) do typewriter.
+      const coverUrl = d.imagens?.[0];
       const thumbOffsetMs = (chave === 'kinetico' || chave === 'domingo') ? 6000 : undefined;
-      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl, thumbOffsetMs });
+      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl, coverUrl, thumbOffsetMs });
     } else if (CARROSSEL.includes(chave)) {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
     } else if (chave === 'infografico') {
