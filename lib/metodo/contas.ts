@@ -189,8 +189,10 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'fine-art painterly, airy and alive, full of light and air, the quiet joy of finally inhabiting your own life now, present and unhurried',
-      elementos: ['bare feet on a warm sunlit wooden floor', 'a simple breakfast laid out by an open window in the morning', 'two hands pressing a small seedling into dark earth', 'rumpled white sheets with morning sun across the bed', 'a window thrown wide open onto a vast bright sky', 'a steaming cup of coffee on a sunlit windowsill', 'a worn travel bag set down on a wooden floor, finally home', 'a calm sea meeting a luminous open horizon', 'a single wooden chair turned to face the morning sun', 'fresh laundry drifting on a line in a warm breeze', 'an open doorway from shadow into bright daylight', 'a quiet meadow opening under a wide clear sky'],
+      prompt: 'lush verdant green world, alive and full of light and air, the quiet joy of stepping into your own life now, present and unhurried',
+      // verde é a IDENTIDADE da viver, mas verde NÃO é só floresta: prado, água,
+      // plantas, interior com verde, estufa, lago — variedade DENTRO do verde.
+      elementos: ['a sunlit green meadow rolling toward the horizon', 'close-up of dewy green leaves in soft morning light', 'a calm river between green banks under a bright sky', 'potted plants and fresh herbs on a sunlit windowsill', 'a lush bright greenhouse full of light', 'soft green hills under a wide clear sky', 'young ferns unfurling in soft green light', 'ivy climbing a sunlit pale wall', 'a green garden path opening into light', 'water lilies on a calm green pond', 'a bright kitchen with fresh herbs and greens by the window', 'wildflowers and moss in a sunlit green clearing'],
       // luz/hora (dentro do mundo verdejante): da madrugada à hora azul, para o
       // feed deixar de ser uma só parede verde sempre com a mesma luz.
       registos: ['fresh first dawn light', 'clear bright morning air', 'warm afternoon sun', 'soft overcast daylight', 'golden-hour backlight', 'the cool stillness of blue hour'],
@@ -237,12 +239,12 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'entrar numa biblioteca secreta da alma',
       fraseVisual: 'existe algo por trás do que vês',
-      prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, archetypal and symbolic, the feeling of entering a secret library of the soul',
-      elementos: ['a long candlelit corridor fading into deep shadow', 'an ornate doorway opening onto radiant golden light', 'a spiral staircase descending into darkness', 'a hidden passage lit by a single distant flame', 'sheer veils parting before a shaft of gold light', 'a vast dim library aisle in warm candlelight', 'golden light pouring through an ancient stone arch', 'an antique mirror holding a single candle flame', 'a threshold between deep dark and warm gold', 'a high window dropping a shaft of light into the dark', 'an arched gateway into glowing darkness', 'a chamber of old books touched by gold light'],
-      // luz/hora (dentro do mundo escuro e cinematográfico): varia a fonte de luz
-      // sem clarear o mistério (continua chiaroscuro, ouro sobre escuro).
-      registos: ['a single candle flame in deep dark', 'one shaft of gold light through shadow', 'a dim glow fading into black', 'warm gold rim light on deep dark', 'a distant flame down a dark corridor', 'a thread of gold in moonless dark'],
-      textura: 'cinematic, chiaroscuro, symbolic, warm gold on deep dark',
+      prompt: 'cinematic warm candlelit atmosphere, glowing gold and deep teal-blue, rich and LUMINOUS (clearly lit, never pitch black), archetypal and symbolic, a secret library of the soul filled with warm light',
+      elementos: ['an open old book glowing in warm candlelight', 'a sunlit dust-filled grand hall with tall windows', 'golden light pouring generously through an ancient stone arch', 'an antique key resting on a table in warm light', 'sheer veils glowing before a bright shaft of gold light', 'a warm-lit library aisle rich with old books', 'a tall window dropping bright gold light across a room', 'an old map unrolled under warm lamplight', 'a doorway opening from shadow into radiant gold light', 'a candlelit table with an open book and a warm glow', 'morning light flooding a grand old hall', 'a spiral staircase warmly lit from above'],
+      // luz/hora (mundo da mãe): a fonte de luz varia mas SEMPRE ilumina de facto
+      // (a Vivianne pediu MENOS escuridão) — ouro quente e legível, não quase-preto.
+      registos: ['warm candle glow filling the room', 'bright gold light through tall windows', 'soft warm lamplight', 'first morning light entering a grand hall', 'firelight warming the whole scene', 'a radiant shaft of gold light'],
+      textura: 'painterly, warm gold light, rich but luminous shadow, cinematic and clearly readable',
     },
     bioPT:
       'Continuas a repetir o que te faz sofrer? Ajudo-te a reconhecer os padrões ' +

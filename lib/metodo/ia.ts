@@ -3,9 +3,50 @@
 // Partilhado entre /gerar-ia (um) e /gerar-lote (vários). Escreve UMA frase de
 // reconhecimento nova do véu, na voz dela, sem travessões.
 
-import { VeuNome } from './contas';
+import { VeuNome, Conta } from './contas';
 import { VEU_SEMENTE } from './veus';
 import { limparTravessoes } from '@/lib/texto';
+
+// Regras fixas do fundo (incluídas sempre, mesmo que o modelo as esqueça).
+const FUNDO_REGRAS =
+  'fine-art painterly background, soft natural light, luminous and airy, contemplative and serene, ' +
+  'generous calm empty space in the centre for an overlaid sentence, NO people, NO faces, NO figures, ' +
+  'NO hands, NO text, NO letters, NO watermark, vertical 9:16';
+
+// assunto curto de um prompt (para alimentar a lista "evita") — as primeiras palavras.
+export function assuntoCurto(prompt: string): string {
+  return prompt.split(',')[0].trim().split(/\s+/).slice(0, 10).join(' ');
+}
+
+// O Claude ESCREVE o prompt de fundo de UM post: criativo e VARIADO (assunto,
+// composição e luz diferentes a cada vez), mantendo só a paleta/atmosfera da
+// conta como fio condutor. Recebe `evitar` = assuntos já usados, para não repetir.
+// É isto que mata a monotonia (substitui a lista fixa fundoDaConta).
+export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string): Promise<string> {
+  const a = conta.atmosfera;
+  const sys = `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post de Instagram contemplativo (Método VS, @${conta.handle}).
+
+MUNDO desta conta (ÚNICO fio condutor, manter sempre): ${a.prompt}. Sensação: ${a.sensacao}. O que representa: ${conta.depois} Símbolo: ${conta.simbolo}.
+
+A PALETA/ATMOSFERA acima é a única coisa constante. TUDO o resto VARIA a cada imagem, senão o feed fica monótono:
+- ASSUNTO: a paleta NÃO dita o assunto. Ex.: um mundo verde é prados, água, plantas, estufas, interiores com plantas, colinas, lagos, ervas — NÃO só floresta. Escolhe um assunto coerente mas inesperado, sem pessoas.
+- COMPOSIÇÃO: varia (plano largo / grande plano macro / interior / vista de cima / ao nível do olhar).
+- LUZ/HORA: varia (madrugada / manhã clara / fim de tarde dourado / céu encoberto / contraluz / hora azul).
+${evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : ''}
+
+Termina sempre com: ${FUNDO_REGRAS}.
+Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 320, system: sys, messages: [{ role: 'user', content: `Novo fundo para @${conta.handle}, claramente diferente dos já usados.` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}`);
+  let t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');
+  if (!t) throw new Error('vazio');
+  if (!/9:16/.test(t)) t += `, ${FUNDO_REGRAS}`; // garante as regras fixas
+  return limparTravessoes(t);
+}
 
 export async function fraseReconhecimento(veu: VeuNome, apiKey: string): Promise<string> {
   const s = VEU_SEMENTE[veu];
