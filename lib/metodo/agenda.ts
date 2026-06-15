@@ -15,6 +15,12 @@ import { aberturaDaConta } from './abertura';
 
 export const DIAS_POST = [1, 3, 5]; // segunda, quarta, sexta (getDay: 0=dom)
 export const HORA_POST = '11:00';
+// A MÃE (@vivianne.dos.santos) partilha a conta com as séries diárias e a loja,
+// que já ocupam a manhã e a noite (vcsabia 07h · 7 Véus 13h · hojeemmim 21h).
+// Por isso o método da mãe vai para a TARDE (17h), o vão livre do dia, para não
+// amontoar conteúdo. As portas (ver/vir/viver) têm conta própria → ficam às 11h.
+export const HORA_POST_MAE = '17:00';
+export const horaDoMetodo = (conta: string): string => (conta === 'mae' ? HORA_POST_MAE : HORA_POST);
 
 /** 'YYYY-MM-DD' a partir de componentes locais (nunca toISOString). */
 export function dataLocal(d: Date): string {

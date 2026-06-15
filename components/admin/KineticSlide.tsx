@@ -89,7 +89,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
                 let op = 0, dy = 14;
                 if (i < ultimoVisivel) { op = 1; dy = 0; }
                 else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
-                st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)' : 'none' };
+                st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? (dest ? '0 2px 24px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)') : 'none' };
               }
               return (
                 <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F8EFE9', fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>

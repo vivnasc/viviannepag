@@ -7,6 +7,7 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
 import { CONTAS, contaDe, nomeConta, type ContaId } from '@/lib/instagram/contas';
 import { PostSlide, type PostSlideT } from '@/components/admin/PostSlide';
+import { horaDoMetodo } from '@/lib/metodo/agenda';
 import type { Mundo } from '@/lib/estudio-conteudo';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-cormorant' });
@@ -19,7 +20,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 
 type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string; motionUrl?: string | null; videoUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -48,7 +49,9 @@ const fmtDe = (it: Item): { emoji: string; label: string } => {
   return FMT[tipoChave(it)] ?? { emoji: '•', label: tipoChave(it) || 'post' };
 };
 const legendaDe = (it: Item) => { const d = it.dias?.[0]; return [d?.legenda?.trim(), (d?.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n'); };
-const horaDe = (it: Item) => it.theme?.hora || HORA_FMT[tipoChave(it)] || '13:00';
+// Método VS = frases da manhã (canon: 11h; a mãe à tarde, 17h). Sem hora
+// explícita, usa a hora do método (não o default genérico, que dava 13h/20h).
+const horaDe = (it: Item) => it.theme?.hora || (it.theme?.metodo ? horaDoMetodo(it.theme.metodo.conta ?? '') : HORA_FMT[tipoChave(it)]) || '13:00';
 // preview de VÍDEO (séries/reels): o MP4 renderizado, ou o motion ainda por
 // renderizar — para o cartão mostrar a 1.ª frame quando não há imagem de capa.
 const videoDe = (it: Item): string | null => { const d = it.dias?.[0]; const s = d?.slides?.[0]; return d?.videoUrl ?? s?.videoUrl ?? s?.motionUrl ?? null; };

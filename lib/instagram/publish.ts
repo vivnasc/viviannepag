@@ -17,6 +17,7 @@ type PublishOpts = {
   tipo: 'imagem' | 'carrossel' | 'reel';
   imageUrls?: string[]; // imagem/carrossel
   videoUrl?: string;    // reel
+  thumbOffsetMs?: number; // reel: ms do frame da CAPA (evita a capa no 1.º frame vazio)
 };
 
 type PublishResult = { ok: boolean; id?: string; erro?: string };
@@ -65,7 +66,11 @@ export async function publicarInstagram(opts: PublishOpts): Promise<PublishResul
     // ── REEL (vídeo) ──
     if (opts.tipo === 'reel') {
       if (!opts.videoUrl) return { ok: false, erro: 'reel sem videoUrl' };
-      const c = await graphPost(`${igUserId}/media`, { media_type: 'REELS', video_url: opts.videoUrl, caption, access_token: token, share_to_feed: 'true' });
+      // CAPA do Reel: por defeito a Meta usa o 1.º frame (no typewriter está vazio,
+      // sem texto). thumb_offset escolhe um instante já com a frase completa.
+      const reelParams: Record<string, string> = { media_type: 'REELS', video_url: opts.videoUrl, caption, access_token: token, share_to_feed: 'true' };
+      if (opts.thumbOffsetMs && opts.thumbOffsetMs > 0) reelParams.thumb_offset = String(Math.round(opts.thumbOffsetMs));
+      const c = await graphPost(`${igUserId}/media`, reelParams);
       if (!c.ok || !c.json.id) return { ok: false, erro: 'container reel: ' + erroDe(c.json) };
       creationId = c.json.id as string;
       const w = await esperarContainer(token, creationId);

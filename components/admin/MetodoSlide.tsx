@@ -60,7 +60,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
           <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', filter: 'brightness(1.12) saturate(1.04)', zIndex: 0 }} />
           {/* sombra SÓ no rodapé (para o @conta) e atrás do texto (legibilidade); resto fica claro */}
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, transparent 0%, transparent 56%, ${a(bg2, '55')} 100%)`, zIndex: 1 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 122% 42% at 50% 47%, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.22) 50%, transparent 72%)', zIndex: 1 }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 128% 46% at 50% 47%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.34) 52%, transparent 74%)', zIndex: 1 }} />
         </>)}
 
         {/* selo editorial (Véu do… / Revelação / Manifesto) */}
@@ -82,7 +82,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
               if (i < ultimoVisivel) { op = 1; dy = 0; }
               else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
               return (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F7EFE6', fontStyle: dest ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.85)' : 'none' }}>
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F7EFE6', fontStyle: dest ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? (dest ? '0 2px 22px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 26px rgba(0,0,0,0.82), 0 0 7px rgba(0,0,0,0.6)') : 'none' }}>
                   {w}
                   {aindaEscreve && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
                 </span>
