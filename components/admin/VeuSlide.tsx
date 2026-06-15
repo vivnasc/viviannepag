@@ -191,7 +191,7 @@ export function VeuSlide({
               </div>
               <div ref={tituloRef} style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 180, lineHeight: 0.95, letterSpacing: '-0.025em', whiteSpace: 'nowrap', color: C.ivory, textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.6)' : 'none' }}>{palavra ?? slide.texto}</div>
               <div style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, letterSpacing: '1.2em', color: ornamento, opacity: 0.85, paddingLeft: '1.2em' }}>◇ ◇ ◇</div>
-              {subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 300, fontSize: 38, lineHeight: 1.4, color: C.ivory, opacity: 0.82, maxWidth: 780 }}>{subtitulo}</p>}
+              {subtitulo && <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 46, lineHeight: 1.4, color: C.ivory, opacity: 0.9, maxWidth: 820 }}>{subtitulo}</p>}
             </div>
             {/* CENTRO: frase de abertura (o GANCHO). Estatico a prog=1; com
                 movimento escreve-se palavra a palavra. */}
