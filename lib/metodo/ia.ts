@@ -12,7 +12,7 @@ import { limparTravessoes } from '@/lib/texto';
 // (ver COVER-PROMPTS-METODO-VS.md). NÃO é fotografia.
 const FUNDO_REGRAS =
   'fine-art painterly oil painting in a renaissance manner, sfumato, visible painterly brushwork and texture, ' +
-  'a signature warm gold light, contemplative and timeless, luminous and readable (never near-black), ' +
+  'soft natural painterly light, contemplative and timeless, luminous and readable (never near-black), ' +
   'NOT a photograph, NOT stock photography, generous calm empty space in the centre for an overlaid sentence, ' +
   'NO people, NO faces, NO figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
 
