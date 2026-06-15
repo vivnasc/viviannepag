@@ -81,7 +81,13 @@ export function reconhecimentoPosts(conta: ContaId): Post[] {
 // volume sem repetir tão cedo.
 export function revelacaoPosts(conta: ContaId): Post[] {
   const reels = reelsDaConta(conta);
-  return [...reels.filter((r) => r.revelacaoForte), ...reels.filter((r) => !r.revelacaoForte)].map((r) => revelacaoDoReel(r, conta));
+  const porForte = (arr: Reel[]) => [...arr.filter((r) => r.revelacaoForte), ...arr.filter((r) => !r.revelacaoForte)];
+  // a mãe lidera pelas revelações da Dualidade (território próprio dela), para
+  // não repetir as mesmas revelações das portas na mesma semana.
+  const ordenados = conta === 'mae'
+    ? [...porForte(reels.filter((r) => r.veu === 'Dualidade')), ...porForte(reels.filter((r) => r.veu !== 'Dualidade'))]
+    : porForte(reels);
+  return ordenados.map((r) => revelacaoDoReel(r, conta));
 }
 // Realce curado por linha de manifesto (a palavra que tem de ficar). Fallback
 // heurístico garante realce mesmo em linhas novas.
