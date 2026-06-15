@@ -1,8 +1,18 @@
-# CLAUDE.md — guia para continuar (veu.a.veu)
+# CLAUDE.md — guia para continuar
 
-Documento de handoff. Lê isto antes de mexer. O objetivo da Vivianne agora é
-**continuar a produzir conteúdo para a conta didática veu.a.veu**, com foco
-especial no **Cá em Casa** (que ainda nunca gerou para ver).
+Documento de handoff. Lê isto antes de mexer.
+
+**Há TRÊS coisas distintas neste repo, que NÃO se misturam** (ver secção a
+seguir). Cruzam-se só no vocabulário (transpessoal, constelação, heranças,
+sombra — a área de estudo dela), mas têm propósitos, estruturas, contas e
+código separados:
+
+1. **veu.a.veu** — conta DIDÁTICA (ensina, não vende). `lib/veu/*`.
+2. **Carrosséis dos 7 Véus** — produto de LOJA (reels MP4 sazonais). `lib/carrossel/*`.
+3. **Método VS** — motor COMERCIAL (pilar + manuais + contas que vendem). `lib/metodo/*`.
+
+⚠️ **Erro fácil de evitar: a veu.a.veu NÃO tem nada a ver com o Método VS.** São
+motores diferentes. Não reframes a didática à luz do método nem o contrário.
 
 ## Regras de ouro (pedidas pela Vivianne — NÃO violar)
 
@@ -12,16 +22,23 @@ especial no **Cá em Casa** (que ainda nunca gerou para ver).
 3. **Cada formato no seu formato real** (ver abaixo).
 4. Fazer uma coisa de cada vez, com calma. Não empilhar mudanças.
 
-## Os dois perfis/produtos (NÃO misturar)
+## Os TRÊS perfis/produtos (NÃO misturar)
 
 - **veu.a.veu (DIDÁTICA)** — ensinar, sem vender. Âmbito FIXO, 4 matérias
   (`lib/infografico/cursos.ts`): Psicologia Transpessoal · Constelação Familiar
   Sistémica · Psicologia e Espiritualidade · Desenvolvimento Pessoal e
-  Profissional. NADA de estações/Solstício aqui.
+  Profissional. NADA de estações/Solstício aqui. Pipeline próprio (`lib/veu/*`),
+  **não tocar a partir do método**.
 - **Carrosséis dos 7 Véus (LOJA, produto)** — `/admin/carrossel`. É um produto
   de **REELS MP4 com música** (Ancient Ground), calendário sazonal de 52
   semanas. **Sempre foi MP4**, nunca carrossel de imagens PNG. O export para o
-  Metricool manda o **MP4 como Reel** (não PNG).
+  Metricool manda o **MP4 como Reel** (não PNG). **Desde junho/2026 a GERAÇÃO
+  corre pelo Método VS** (`lib/carrossel/metodo.ts`): eixo Ver→Vir→Viver→o todo
+  ao longo da semana e CTAs ancorados nos produtos do método. O render e o
+  calendário sazonal mantêm-se; é uma camada na geração, não um substituto.
+- **Método VS (MOTOR COMERCIAL)** — o método de autoconhecimento dela, que
+  VENDE. Pipeline próprio (`lib/metodo/*`), SEPARADO da veu.a.veu (ver secção
+  abaixo). Os carrosséis da loja passaram a correr por ele, a veu.a.veu **não**.
 
 ## Fluxo da veu.a.veu (o que usar e por que ordem)
 
@@ -56,6 +73,29 @@ por ordem em `SLOTS_META`, resiliente a rascunhos antigos):
 - Os outros (reel/banda/infografico): o gancho/ideia vem do rascunho, o gerador
   monta o formato; revê-se na biblioteca respetiva.
 
+## Método VS · Ver e Soltar (motor COMERCIAL — pipeline próprio)
+
+O método de autoconhecimento dela, **separado da veu.a.veu** (não toca
+`lib/veu/*`). Docs: `METODO-VS.md`, `CONTINUIDADE-METODO-VS.md`.
+
+- **VS = Vivianne dos Santos = Ver e Soltar.** Promessa: *Vê o que te prende.
+  Solta o que te faz repetir.* Mecanismo: **VER** (reconhecer o padrão sem te
+  julgares) → **SOLTAR** (largar sem força). Regra de ouro: **não há soltar sem ver.**
+- **Os 7 véus = 7 padrões** (não confundir com os 7 universos da loja):
+  Permanência · Memória · Turbilhão · Esforço · Desolação · Horizonte · Dualidade.
+- **3 portas (contas) + a mãe** (`lib/metodo/contas.ts`): **Ver** (ver.soltar) ·
+  **Vir** (vir.soltar) · **Viver** (viver.soltar), cada uma com o seu cacho de
+  véus e identidade; a conta-mãe (vivianne.dos.santos) segura o método inteiro.
+- **Motor editorial 60/30/10** (`lib/metodo/posts.ts`, `semana.ts`):
+  reconhecimento (60%, a dor na 1.ª pessoa) · revelação (30%, o aforismo) ·
+  manifesto (10%). Produção semanal autónoma. Admin: `/admin/metodo`.
+- **Produtos** (páginas PRÓPRIAS, de propósito FORA da grelha da loja —
+  `publicado: false` no `app/api/admin/seed-produtos`): pilar **Os Sete Véus**
+  (€19, `/os-sete-veus`) + 3 manuais-filhos (€9): `/ver-soltar` · `/vir-soltar`
+  · `/viver-soltar`.
+- **Voz inviolável:** travessões BANIDOS (— e –); autoridade do caminho
+  ("reconheci primeiro em mim"), NUNCA inventar biografia/marcos/clientes.
+
 ## FOCO da próxima sessão: Cá em Casa
 
 A Vivianne quer trabalhar o **Cá em Casa** (parece o mais elaborado e nunca
@@ -83,6 +123,10 @@ gerou nada para ver). Pontos de partida:
 
 ## Estado atual (o que já existe, não rebuildar)
 
-Plano editorial 13 sem · Calendário 3 meses · Plano da Semana (formatos reais) ·
-Agenda 1/dia · abas Calendário/Já gerados no `/admin/carrossel` · export
-Metricool da LOJA = MP4 Reel com cache-busting e datas seg→dom 13h.
+- **veu.a.veu:** Plano editorial 13 sem · Calendário 3 meses · Plano da Semana
+  (formatos reais) · Agenda 1/dia.
+- **Loja (Carrosséis 7 Véus):** abas Calendário/Já gerados no `/admin/carrossel`
+  · export Metricool = MP4 Reel com cache-busting e datas seg→dom 13h · **geração
+  a correr pelo Método VS** (`lib/carrossel/metodo.ts`).
+- **Método VS:** pilar *Os Sete Véus* + 3 manuais (PT/EN) · contas mãe/ver/vir/
+  viver com produção autónoma 60/30/10 · admin `/admin/metodo`.
