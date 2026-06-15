@@ -172,6 +172,25 @@ export default function MetodoContaPage() {
     finally { setMelLoteBusy(false); recarregar(); }
   }, [conta, melLoteBusy, recarregar]);
 
+  // outra imagem: regenera só a imagem (variação nova), mantém o texto. Para
+  // SUBSTITUIR uma imagem que não se quer, sem descartar o post.
+  const [novaImgBusy, setNovaImgBusy] = useState<string | null>(null);
+  const novaImagem = useCallback(async (slug: string) => {
+    if (novaImgBusy) return;
+    setNovaImgBusy(slug); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/imagem-uma', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else {
+        setMsg('Imagem trocada. Se ainda não gostares, carrega outra vez.');
+        setDetalhe((d) => (d && d.slug === slug ? { ...d, imageUrl: j.imageUrl, videoUrl: null } : d));
+        recarregar();
+      }
+    } catch (e) { setErro(String(e)); }
+    finally { setNovaImgBusy(null); }
+  }, [novaImgBusy, recarregar]);
+
   // melhorar: reescreve só o texto (tira ambiguidade), mantém a imagem.
   const melhorar = useCallback(async (slug: string) => {
     if (melBusy) return;
@@ -357,6 +376,7 @@ export default function MetodoContaPage() {
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
+              {detalhe.imageUrl && <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title="trocar por outra imagem (mantém o texto)" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : 'outra imagem'}</button>}
               <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
