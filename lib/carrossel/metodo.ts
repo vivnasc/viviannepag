@@ -1,13 +1,16 @@
 // Método VS · a espinha dos Carrosséis dos 7 Véus.
 //
 // O carrossel sazonal continua (calendário de 52 semanas, território, estação,
-// música Ancient Ground), mas agora CORRE PELO MÉTODO VS: o gesto Ver e Soltar,
-// as três portas (Ver/Vir/Viver) como fio condutor da semana, e os CTAs
-// ancorados nos produtos do próprio método.
+// música Ancient Ground). O Método VS entra como ESPINHA do CONTEÚDO: o gesto
+// Ver e Soltar (voz) e as três portas (Ver/Vir/Viver) como fio condutor da
+// semana. Os CTAs NÃO se reduzem ao método: mostram o ECOSSISTEMA TODO (ebooks,
+// guias, música, comunidade, livro, Escola) com variedade, e os produtos do
+// método são MAIS UMA família nesse universo, nunca o único destino (ver
+// CTA_FILOSOFIA). Amplia o universo, não o reduzas.
 //
 // Fonte canónica: METODO-VS.md · lib/metodo/contas.ts. Voz: CONTINUIDADE-METODO-VS.md.
-// Os URLs apontam para páginas de venda REAIS e vivas (já ligadas no TopNav, na
-// home e no diagnóstico): viviannedossantos.com/os-sete-veus · /ver-soltar · etc.
+// Os URLs do método apontam para páginas de venda REAIS e vivas (já ligadas no
+// TopNav, na home e no diagnóstico): viviannedossantos.com/os-sete-veus · /ver-soltar · etc.
 
 export type Movimento = 'ver' | 'vir' | 'viver' | 'todo';
 
@@ -132,17 +135,26 @@ export function metodoOfertasPrompt(): string {
 }
 
 // Bloco que descreve o arco Ver->Vir->Viver->o todo desta semana, dia a dia,
-// para o gerador costurar a semana e ancorar os CTAs. `numDias` por defeito 7.
+// para o gerador costurar a semana. É o fio do CONTEÚDO (a lente), NÃO uma regra
+// de CTA. `numDias` por defeito 7.
 export function eixoSemanaPrompt(numDias = 7): string {
   const DIAS = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
   const linhas = Array.from({ length: numDias }, (_, i) => {
     const m = movimentoDoDia(i + 1);
     const p = PORTAS[m];
-    const of = ofertaDoMovimento(m);
-    return `- ${DIAS[i] ?? `dia ${i + 1}`} · ${p.nome} (${p.essencia}): ler o território por este movimento, ${p.gesto}. Véus: ${p.veus}. CTA-âncora possível: ${of.nome} (${of.url}).`;
+    return `- ${DIAS[i] ?? `dia ${i + 1}`} · ${p.nome} (${p.essencia}): ler o território por este movimento, ${p.gesto}. Véus: ${p.veus}.`;
   });
-  return `EIXO DA SEMANA (Método VS · as três portas como fio condutor):
-A semana é uma travessia: os dias movem-se de VER (sair da tempestade) para VIR (regressar a si) para VIVER (entrar na própria vida), e fecham no TODO (a raiz, a Dualidade, o pilar). O território sazonal mantém-se; cada dia lê-o através do seu movimento (não achatar, é uma camada a mais, não a substituir).
+  return `EIXO DA SEMANA (Método VS · as três portas como fio condutor do CONTEÚDO):
+A semana é uma travessia: os dias movem-se de VER (sair da tempestade) para VIR (regressar a si) para VIVER (entrar na própria vida), e fecham no TODO (a raiz, a Dualidade). O território sazonal mantém-se; cada dia lê-o através do seu movimento (não achatar, é uma camada a mais, não a substituir).
 ${linhas.join('\n')}
-O "fio" da jornada nomeia este arco Ver->Vir->Viver->o todo.`;
+O "fio" da jornada nomeia este arco Ver->Vir->Viver->o todo.
+NOTA IMPORTANTE: isto é só o fio do CONTEÚDO (a lente da semana), NÃO é uma regra de CTA. Os CTAs seguem a variedade do ecossistema inteiro (ver a secção CTA).`;
 }
+
+// Filosofia dos CTAs (partilhada pela geração e pela remontagem): AMPLIAR o
+// universo, não reduzir. O Método é mais uma família, não o único destino.
+export const CTA_FILOSOFIA = `CTA — o fecho leva UM produto, em tom GENEROSO e não-vendedor (valor primeiro, o produto é um sussurro). AMPLIAR o universo, NÃO reduzir:
+- ao longo dos dias mostra a RIQUEZA do ecossistema TODO: ebooks e guias dos vários universos da loja, a música (Loranne), a comunidade (Sete Ecos), o livro, a Escola, E TAMBÉM os produtos do Método (pilar e manuais). Nenhuma família domina; o Método é MAIS UMA, nunca o único destino.
+- para cada dia escolhe o produto que MELHOR toca o tema desse dia. O manual do método do movimento do dia encaixa de forma natural quando o tema o pede, mas NÃO é obrigatório: há dias que pedem antes um guia, uma música, o livro ou a comunidade.
+- VARIA muito: não repitas o mesmo produto na semana, não fiques só num tipo nem só no método, explora universos diferentes.
+- usa nome e link/URL EXACTOS (no campo destaque do slide cta põe a URL).`;

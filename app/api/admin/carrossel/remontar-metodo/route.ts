@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCatalogoProdutos, amostraEcossistema, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
 import { REGRAS_GLOBAIS } from '@/lib/carrossel/overrides';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA } from '@/lib/carrossel/metodo';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -54,7 +54,7 @@ export async function POST(req: Request) {
 
   const catalogo = await getCatalogoProdutos();
   const amostra = amostraEcossistema(catalogo, universo, 2);
-  const ecossistema = `MÉTODO VS (a ESPINHA dos CTAs, o produto-casa):\n${metodoOfertasPrompt()}\n\n${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (entram como aprofundamento, com os links proprios):\n${ofertasAnterioresPrompt()}`;
+  const ecossistema = `ECOSSISTEMA COMPLETO (o universo TODO — usa-o INTEIRO nos CTAs, com variedade; amplia, nao reduzas):\n\nPRODUTOS DA LOJA (ebooks, guias, packs):\n${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (LUMINA, Loranne, Sete Ecos, livro, Escola — links proprios):\n${ofertasAnterioresPrompt()}\n\nMÉTODO VS (mais uma familia: pilar e manuais — a par dos outros, nunca o unico destino):\n${metodoOfertasPrompt()}`;
 
   const SYSTEM = `Es a voz dos Carrosseis dos 7 Veus da Vivianne dos Santos (psicologia transpessoal, constelacao familiar).
 
@@ -73,9 +73,11 @@ O QUE REESCREVES em cada dia (na voz do Método, coerente com a palavra que se m
 - poetico1: frase poetica (pode ter quebras de linha).
 - pratica: um convite ou pergunta pratica.
 - poetico2: fecho poetico que volta a palavra do dia.
-- cta: fecho generoso. UM produto, ancorado no Método conforme o movimento do dia (titulo = nome do produto; texto = convite curto e generoso, nunca "compra"/"adquire"; url = a URL exacta da lista).
+- cta: fecho generoso. UM produto do ecossistema TODO, com variedade (ver a seccao CTA em baixo). titulo = nome do produto; texto = convite curto e generoso, nunca "compra"/"adquire"; url = a URL exacta da lista.
 
 ${ecossistema}
+
+${CTA_FILOSOFIA}
 
 ${eixoSemanaPrompt(diasAntigos.length)}
 
@@ -91,7 +93,7 @@ DEVOLVE APENAS JSON valido, sem texto a volta:
   ]
 }`;
 
-  const userPrompt = `Passa esta semana pelo Método VS. Mantem TODAS as palavras-destaque e subtitulos. Reescreve so o gancho, os 4 slides do meio e o CTA de cada dia, na voz do Método e com os CTAs ancorados no metodo conforme o movimento. ${diasAntigos.length} dias. Agora.`;
+  const userPrompt = `Passa esta semana pelo Método VS. Mantem TODAS as palavras-destaque e subtitulos. Reescreve so o gancho, os 4 slides do meio e o CTA de cada dia, na voz do Método. Os CTAs variam por TODO o ecossistema (loja, ofertas anteriores e metodo), nunca so o metodo. ${diasAntigos.length} dias. Agora.`;
 
   let texto = '';
   try {
