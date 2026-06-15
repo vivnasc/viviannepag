@@ -39,6 +39,28 @@ São carrosséis (vários slides). **Esta é a "biblioteca de formatos" a constr
 
 ---
 
+## A.3) PRINCÍPIO A ESTENDER: conexão imagem↔texto em TODOS os geradores
+A Vivianne quer que a **imagem nasça SEMPRE em par com o texto** (representa o estado
+da frase), em **todos** os geradores — não só no método. É possível e é o caminho
+natural para os **clips** (a cena que encarna o texto, depois animada). **Sem partir
+o que já existe — incremental.**
+
+Estado atual por gerador:
+- ✅ **Séries diárias** (VC Sabia / Hoje em Mim): JÁ fazem (a imagem e o som nascem em
+  par com a frase — `lib/series/*`, `mjPrompt`/`somPrompt`). É o modelo a seguir.
+- ✅ **Método VS** (ver/vir/viver/mãe): agora faz — `gerarFundoIA(conta, evitar, apiKey, frase)`.
+- 〰️ **veu.a.veu kinético**: fundo do **MidJourney próprio** dela (curado à mão) — já é
+  "conexão", mas manual; decidir se passa a auto-par.
+- ⬜ **A fazer/confirmar**: Cá em Casa (banda), Infográfico, reels editoriais
+  ("O que ninguém te explica", "Sinais de que…", "Uma ideia de…") — passar o
+  texto/gancho ao prompt da imagem.
+
+**Como (não-quebrar):** generalizar o `gerarFundoIA` num **helper partilhado** —
+"prompt de fundo em par com o texto" (recebe mundo/paleta + texto + lista `evitar`) —
+e ligar cada gerador a ele **um a um, testando 1 e mostrando** antes de produzir.
+
+---
+
 ## A.1) VÍDEO — um dos tipos de post (spec já decidida)
 
 Objetivo: dar ao Método VS um formato de **vídeo curto** com voz e legenda (1 tipo de
