@@ -72,21 +72,22 @@ export function hashtagsDoPost(post: Post): string[] {
   return Array.from(new Set<string>([...veu, ...HASHTAGS_BASE])).slice(0, 12);
 }
 
-/** Legenda de um post, conforme o tipo (a dor lidera; a revelação recompensa). */
+/** Legenda de um post (FASE 1: crescer, não vender).
+ *  A dor lidera, a revelação recompensa, o véu dá o nome (marca). NÃO leva
+ *  "Comenta X / o manual está na bio": esse funil é da FASE 2 (ver
+ *  CONTAS-METODO-VS-FASE2.md). O fecho convida a guardar e partilhar, que gera
+ *  alcance sem vender. Pode ser editada à mão no /admin/metodo. */
 export function legendaDoPost(post: Post): string {
-  const c = CONTAS[post.conta];
-  const cta = `${c.ctaPT} O manual ${c.manualNome} está na bio.`;
-  const guardar = 'Guarda esta publicação para o dia em que precisares.';
+  const fecho = 'Guarda para o dia em que precisares, e partilha com quem isto faça sentido.';
 
   let paras: string[];
   if (post.tipo === 'manifesto') {
-    return [post.texto, cta, guardar].join('\n\n');
+    return [post.texto, fecho].join('\n\n');
   } else if (post.tipo === 'revelacao') {
     paras = [
       post.bridge ? `Talvez te soe: «${post.bridge}»` : post.texto,
       post.veu ? `Isto, no Método VS, tem um nome: o ${nomeVeu(post.veu)}.` : '',
-      cta,
-      guardar,
+      fecho,
     ].filter(Boolean);
   } else {
     // reconhecimento: a dor (no ecrã) entra; a revelação chega como recompensa.
@@ -94,8 +95,7 @@ export function legendaDoPost(post: Post): string {
       post.texto,
       post.payoff ?? '',
       post.veu ? `No Método VS, isto tem um nome: o ${nomeVeu(post.veu)}.` : '',
-      cta,
-      guardar,
+      fecho,
     ].filter(Boolean);
   }
   return paras.join('\n\n');

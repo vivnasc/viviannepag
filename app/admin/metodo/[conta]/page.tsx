@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; videoUrl: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -126,6 +126,37 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setHoraBusy(false); }
   }, [conta, horaBusy, horaInput, recarregar]);
+
+  // legenda: editar à mão a legenda de UM post (a Vivianne corrige o texto da
+  // publicação). E repor TODAS (Fase 1, sem funil) de uma vez.
+  const [legendaTxt, setLegendaTxt] = useState('');
+  const [legBusy, setLegBusy] = useState(false);
+  useEffect(() => { setLegendaTxt(detalhe?.legenda ?? ''); }, [detalhe]);
+  const guardarLegenda = useCallback(async (slug: string) => {
+    if (legBusy) return;
+    setLegBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/legenda', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, legenda: legendaTxt }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Legenda guardada.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, legenda: legendaTxt } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setLegBusy(false); }
+  }, [legBusy, legendaTxt, recarregar]);
+  const [reporBusy, setReporBusy] = useState(false);
+  const reporLegendas = useCallback(async () => {
+    if (!conta || reporBusy) return;
+    if (typeof window !== 'undefined' && !window.confirm('Repor a legenda de TODOS os posts desta conta (Fase 1, sem "Comenta X / manual na bio")? As edições manuais serão substituídas.')) return;
+    setReporBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/legendas-repor', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`${j.repostos ?? 0} legendas repostas (sem funil). Edita à mão as que quiseres afinar.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setReporBusy(false); }
+  }, [conta, reporBusy, recarregar]);
 
   // apagar TUDO desta conta (recomeçar do zero).
   const [apagarBusy, setApagarBusy] = useState(false);
@@ -326,6 +357,7 @@ export default function MetodoContaPage() {
                 <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: conta.cor, color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
               </span>
             )}
+            {geradosConta.length > 0 && <button onClick={reporLegendas} disabled={reporBusy} title="repor as legendas sem o funil de venda (Fase 1)" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{reporBusy ? 'a repor…' : 'repor legendas (Fase 1)'}</button>}
             {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
         </header>
@@ -405,6 +437,13 @@ export default function MetodoContaPage() {
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
             </div>
             <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>
+            <div className="mt-3">
+              <p className="text-[0.66rem] uppercase tracking-wider opacity-50 mb-1">Legenda (edita à mão)</p>
+              <textarea value={legendaTxt} onChange={(e) => setLegendaTxt(e.target.value)} rows={7} className="w-full rounded-lg border border-white/15 bg-black/30 p-2 text-[0.78rem] leading-relaxed outline-none focus:border-white/35" />
+              <div className="mt-1.5 flex justify-end">
+                <button onClick={() => guardarLegenda(detalhe.slug)} disabled={legBusy || legendaTxt === (detalhe.legenda ?? '')} className="px-2.5 py-1 rounded-lg disabled:opacity-40 text-[0.72rem]" style={{ background: conta.cor, color: '#0F0F1A' }}>{legBusy ? '…' : 'guardar legenda'}</button>
+              </div>
+            </div>
           </div>
         </div>
       )}
