@@ -16,16 +16,20 @@ type Slide = { imageUrl?: string | null; notaVisual?: string };
 type Dia = { slides?: Slide[]; videoUrl?: string | null };
 type Row = { slug: string; dias?: Dia[] | null; theme?: { metodo?: { conta?: string } } | null };
 
-async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
+async function fundoImagem(prompt: string, slug: string): Promise<{ url: string | null; erro?: string }> {
   const token = process.env.REPLICATE_API_TOKEN;
-  if (!token || !prompt) return null;
-  for (let t = 0; t < 3; t++) {
+  if (!token || !prompt) return { url: null, erro: !token ? 'falta REPLICATE_API_TOKEN' : 'prompt vazio' };
+  let ultimoErro = '';
+  for (let t = 0; t < 4; t++) {
     try {
       const url = await gerarImagemFlux(prompt, token, { raw: true });
-      try { return await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
-    } catch { await new Promise((r) => setTimeout(r, 1200 * (t + 1))); }
+      try { return { url: await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`) }; } catch { return { url }; }
+    } catch (e) {
+      ultimoErro = e instanceof Error ? e.message : String(e);
+      await new Promise((r) => setTimeout(r, /429|throttl/i.test(ultimoErro) ? 12000 : 1500 * (t + 1)));
+    }
   }
-  return null;
+  return { url: null, erro: ultimoErro || 'falhou sem detalhe' };
 }
 
 // POST { slug }: regenera a imagem desse post e devolve o novo imageUrl.
@@ -70,8 +74,8 @@ export async function POST(req: Request) {
     try { prompt = await gerarFundoIA(conta, evitar, apiKey); }
     catch { /* fica o fallback */ }
   }
-  const img = await fundoImagem(prompt, slug);
-  if (!img) return NextResponse.json({ erro: 'flux-falhou' }, { status: 502 });
+  const { url: img, erro } = await fundoImagem(prompt, slug);
+  if (!img) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro }, { status: 502 });
 
   slide.imageUrl = img;
   slide.notaVisual = prompt;
