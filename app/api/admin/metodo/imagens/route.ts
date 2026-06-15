@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS, FUNDO_FAMILIA, ContaId, VeuNome } from '@/lib/metodo/contas';
-import { VEU_SEMENTE } from '@/lib/metodo/veus';
+import { CONTAS, fundoDaConta, ContaId } from '@/lib/metodo/contas';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -29,7 +28,7 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
 
 type Slide = { imageUrl?: string | null; notaVisual?: string };
 type Dia = { slides?: Slide[] };
-type Row = { slug: string; dias?: Dia[] | null; theme?: { metodo?: { conta?: string; veu?: string } } | null };
+type Row = { slug: string; dias?: Dia[] | null; theme?: { metodo?: { conta?: string } } | null };
 
 // POST { conta }: gera a imagem de até LIMITE posts sem imagem; devolve restantes.
 export async function POST(req: Request) {
@@ -44,22 +43,14 @@ export async function POST(req: Request) {
 
   const semImagem = (data ?? []).filter((r: Row) => {
     if (r.theme?.metodo?.conta !== contaId) return false;
-    if (r.dias?.[0]?.slides?.[0]?.imageUrl) return false;
-    const veu = r.theme?.metodo?.veu as VeuNome | undefined;
-    return (veu && VEU_SEMENTE[veu]) || !!r.dias?.[0]?.slides?.[0]?.notaVisual;
+    return !r.dias?.[0]?.slides?.[0]?.imageUrl;
   }) as Row[];
   const total = semImagem.length;
   const lote = semImagem.slice(0, LIMITE);
 
-  // prompt por post: reconhecimento -> cena VARIADA do véu; outros -> notaVisual.
-  const promptDe = (r: Row, i: number): string => {
-    const veu = r.theme?.metodo?.veu as VeuNome | undefined;
-    if (veu && VEU_SEMENTE[veu]) {
-      const cenas = VEU_SEMENTE[veu].cenas;
-      return `${cenas[i % cenas.length]}. ${FUNDO_FAMILIA}`;
-    }
-    return r.dias?.[0]?.slides?.[0]?.notaVisual ?? '';
-  };
+  // prompt por post: a ATMOSFERA da conta (mundo próprio + elemento variado).
+  const conta = CONTAS[contaId];
+  const promptDe = (_r: Row, i: number): string => fundoDaConta(conta, i);
 
   let feitas = 0;
   for (let c = 0; c < lote.length; c += 3) {

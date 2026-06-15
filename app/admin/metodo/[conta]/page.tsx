@@ -20,8 +20,7 @@ type EstadoPost = { slug: string; conta: string | null; tipo: string | null; tex
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
 const AMBIG = /\b(ela|ele|elas|eles|dela|dele|delas|deles|isso|isto|aquilo|aquela|aquele|disso|nisso)\b/i;
-const SEMANA = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
-const diaNome = (iso: string): string => { const [y, m, d] = iso.split('-').map(Number); return SEMANA[new Date(y, (m ?? 1) - 1, d ?? 1).getDay()] ?? ''; };
+const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
 // Pré-visualização animada (loop), com a identidade própria da conta.
 function MetodoPreview({ texto, destaque, conta, conceito, imageUrl }: { texto: string; destaque?: string[]; conta: Conta; conceito?: string; imageUrl?: string }) {
@@ -43,6 +42,7 @@ export default function MetodoContaPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [zoom, setZoom] = useState<{ texto: string; destaque?: string[]; conceito?: string; imageUrl?: string } | null>(null);
+  const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [melBusy, setMelBusy] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
@@ -110,6 +110,21 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setOrgBusy(false); recarregar(); }
   }, [conta, orgBusy, recarregar]);
+
+  // apagar TUDO desta conta (recomeçar do zero).
+  const [apagarBusy, setApagarBusy] = useState(false);
+  const apagarTudo = useCallback(async () => {
+    if (!conta || apagarBusy) return;
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar TODOS os posts gerados de @${conta.handle}? Não dá para desfazer.`)) return;
+    setApagarBusy(true); setErro(null);
+    try {
+      const r = await fetch('/api/admin/metodo/apagar-tudo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`${j.apagados ?? 0} posts apagados. Recomeça do zero quando quiseres.`);
+    } catch (e) { setErro(String(e)); }
+    finally { setApagarBusy(false); recarregar(); }
+  }, [conta, apagarBusy, recarregar]);
 
   // dispara o render (GitHub Actions) de UM slug. O MP4 sai com o @conta.
   const [renderBusy, setRenderBusy] = useState(false);
@@ -223,31 +238,27 @@ export default function MetodoContaPage() {
   };
 
   const semData = geradosConta.filter((e) => !e.agendadoEm).length;
-  // agrupar os gerados por dia (a data é o plano); "sem data" vai para o fim.
+  // por dia (a data é o plano): para a grelha de calendário.
   const porDia = new Map<string, EstadoPost[]>();
   for (const e of geradosConta) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
-  const dias = Array.from(porDia.keys()).sort((a, b) => (a === 'sem data' ? 1 : b === 'sem data' ? -1 : a.localeCompare(b)));
+  const semDataList = porDia.get('sem data') ?? [];
 
-  const GeradoCard = ({ e }: { e: EstadoPost }) => (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex gap-3">
-      <button onClick={() => setZoom({ texto: e.texto, conceito: e.conceito, imageUrl: e.imageUrl ?? undefined })} title="clicar para aumentar" className="w-[150px] shrink-0 block"><MetodoPreview texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} /></button>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap text-[0.64rem] uppercase tracking-wider opacity-70">
-          <span className="px-2 py-0.5 rounded-full" style={{ background: `${conta.cor}33`, color: conta.cor }}>{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo}</span>
-          {!e.imageUrl && <span className="opacity-40 normal-case tracking-normal">imagem por gerar</span>}
-        </div>
-        <p className="mt-1.5 text-[0.95rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>{e.texto}</p>
-        <div className="mt-2 flex items-center gap-2 flex-wrap text-[0.7rem]">
-          {e.videoUrl
-            ? <a href={e.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
-            : <button onClick={() => renderOne(e.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((err) => setErro(String(err)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
-          <button onClick={() => melhorar(e.slug)} disabled={melBusy === e.slug} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === e.slug ? 'a melhorar…' : 'melhorar'}</button>
-          <button onClick={() => descartar(e.slug)} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
-          <span className="opacity-50">{e.videoUrl ? 'MP4 pronto' : 'falta render'}</span>
-        </div>
-      </div>
-    </div>
-  );
+  // grelha de calendário: colunas Seg-Dom, linhas as semanas. Vê-se tudo num relance.
+  const parse = (iso: string) => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, (m ?? 1) - 1, d ?? 1); };
+  const fmtD = (dt: Date) => `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+  const segundaDe = (dt: Date) => { const x = new Date(dt); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd)); return x; };
+  const datasComPost = geradosConta.filter((e) => e.agendadoEm).map((e) => e.agendadoEm as string).sort();
+  const semanasGrade: string[][] = [];
+  if (datasComPost.length) {
+    let cur = segundaDe(parse(datasComPost[0]));
+    const fim = parse(datasComPost[datasComPost.length - 1]);
+    let guarda = 0;
+    while (cur <= fim && guarda < 30) {
+      const ini = new Date(cur);
+      semanasGrade.push(Array.from({ length: 7 }, (_, i) => { const d = new Date(ini); d.setDate(ini.getDate() + i); return fmtD(d); }));
+      cur = new Date(ini); cur.setDate(ini.getDate() + 7); guarda += 1;
+    }
+  }
 
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
@@ -273,6 +284,7 @@ export default function MetodoContaPage() {
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
+            {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
         </header>
 
@@ -281,20 +293,40 @@ export default function MetodoContaPage() {
 
         {geradosConta.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · por dia <span className="opacity-40">· {geradosConta.length}</span></h2>
-            {dias.map((d) => (
-              <div key={d} className="mb-5">
-                <h3 className="text-[0.8rem] mb-2 flex items-center gap-2 sticky top-0 bg-[#0F0F1A]/90 py-1 z-10">
-                  {d === 'sem data'
-                    ? <span className="opacity-70">sem data <span className="opacity-45">(carrega &quot;organizar por dias&quot;)</span></span>
-                    : <><span className="capitalize font-semibold" style={{ color: conta.cor }}>{diaNome(d)}</span><span className="opacity-55">{d}</span></>}
-                  <span className="opacity-40 text-[0.7rem]">· {porDia.get(d)!.length}</span>
-                </h3>
-                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                  {porDia.get(d)!.map((e) => <GeradoCard key={e.slug} e={e} />)}
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosConta.length}</span></h2>
+            {semanasGrade.length > 0 && (
+              <div className="overflow-x-auto -mx-1 px-1">
+                <div className="grid grid-cols-7 gap-1 min-w-[700px]">
+                  {DIAS_CAB.map((h) => <div key={h} className="text-center text-[0.6rem] uppercase tracking-wider opacity-50 pb-1">{h}</div>)}
+                  {semanasGrade.flatMap((semana) => semana.map((d) => {
+                    const wd = parse(d).getDay();
+                    const fds = wd === 0 || wd === 6;
+                    const posts = porDia.get(d) ?? [];
+                    return (
+                      <div key={d} className={`min-h-[80px] rounded-lg border border-white/10 p-1 ${fds ? 'bg-white/[0.015]' : 'bg-white/[0.035]'}`}>
+                        <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}</div>
+                        {posts.map((e) => (
+                          <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="block w-full text-left text-[0.58rem] leading-tight rounded px-1 py-0.5 mb-0.5 truncate" style={{ background: `${conta.cor}26`, color: '#F2E8DC', borderLeft: `2px solid ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : conta.cor}` }}>
+                            {e.texto}
+                          </button>
+                        ))}
+                      </div>
+                    );
+                  }))}
                 </div>
               </div>
-            ))}
+            )}
+            {semDataList.length > 0 && (
+              <div className="mt-4">
+                <p className="text-[0.7rem] opacity-60 mb-1.5">Sem data ({semDataList.length}): carrega &quot;organizar por dias&quot; no topo para as encaixar no calendário.</p>
+                <div className="flex flex-wrap gap-1">
+                  {semDataList.map((e) => (
+                    <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="text-[0.58rem] text-left rounded px-1.5 py-1 max-w-[160px] truncate" style={{ background: `${conta.cor}26` }}>{e.texto}</button>
+                  ))}
+                </div>
+              </div>
+            )}
+            <p className="mt-2 text-[0.62rem] opacity-40">Clica num post para ver grande e agir (renderizar · melhorar · descartar). Barra à esquerda: verde = MP4 pronto, vermelho = sem imagem.</p>
           </section>
         )}
 
@@ -313,6 +345,23 @@ export default function MetodoContaPage() {
           <div onClick={(ev) => ev.stopPropagation()} className="w-full max-w-[380px]">
             <MetodoSlide texto={zoom.texto} destaque={zoom.destaque} conceito={zoom.conceito} imageUrl={zoom.imageUrl} conta={conta} prog={1} />
             <p className="text-center text-[0.72rem] opacity-60 mt-2">clica fora para fechar</p>
+          </div>
+        </div>
+      )}
+
+      {detalhe && (
+        <div onClick={() => setDetalhe(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
+          <div onClick={(ev) => ev.stopPropagation()} className="w-full max-w-[360px]">
+            <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} />
+            <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
+              {detalhe.videoUrl
+                ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
+                : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
+              <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
+              <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
+              <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
+            </div>
+            <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>
           </div>
         </div>
       )}

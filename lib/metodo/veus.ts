@@ -4,9 +4,9 @@
 // em 3 segundos) a partir destas sementes, sem repetir os exemplos. As revelações
 // e manifestos NÃO se inventam: vêm curados dos manuais (reels.ts).
 //
-// `cenas` = leque de fundos VARIADOS por véu (combinam com FUNDO_FAMILIA). Cada
-// post escolhe uma cena diferente, para não repetir imagens (não gastar créditos
-// a gerar a mesma imagem).
+// `cenas` = leque de fundos VARIADOS por véu (combinam com FUNDO_FAMILIA). São
+// LUMINOSOS e arejados (luz e sombra em equilíbrio, não penumbra) e cada post
+// escolhe uma cena diferente, para não repetir imagens nem escurecer o feed.
 
 import { VeuNome } from './contas';
 
@@ -20,12 +20,12 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'Resolvo dez vezes um problema que ainda nem chegou.',
     ],
     cenas: [
-      'a dark bedroom window at night, a faint warm glow far beyond the glass',
-      'a still lake before dawn, mist over the water, one thin band of gold',
-      'a wide night sky with slow clouds passing, a break of warm light behind them',
-      'rain running down a window pane, soft blurred light beyond',
-      'a calm sea meeting a pale horizon at first light, vast and quiet',
-      'a single candle flame in a vast quiet room, soft halo of gold',
+      'a calm sea at soft dawn, pale luminous sky, gentle light',
+      'a bright window with sheer curtains and soft morning light',
+      'a wide luminous sky with slow soft clouds, airy and open',
+      'still water reflecting a pale bright sky, serene',
+      'a quiet room in soft daylight, calm and bright',
+      'misty morning light over a calm lake, luminous',
     ],
   },
   Memória: {
@@ -37,12 +37,12 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'Fecho portas antes mesmo de me aproximar delas.',
     ],
     cenas: [
-      'an old empty theatre with a dim warm stage light, dust in the air',
-      'a still antique mirror reflecting a single candle flame, warm gold on dark glass',
-      'a long dim hallway of an old house, one warm door ajar at the end',
-      'faded photographs resting on a dark table, soft lamplight',
-      'a single ancient tree with deep visible roots, warm light through the branches',
-      'an empty stone watchtower at first light, calm fields below',
+      'an old sunlit room with soft warm light through a tall window',
+      'faded photographs on a table in gentle daylight',
+      'a single tree in soft golden afternoon light, open field',
+      'a calm hallway with warm light from an open door',
+      'a quiet mirror catching soft daylight, gentle reflection',
+      'a meadow at first light, soft and luminous',
     ],
   },
   Esforço: {
@@ -54,12 +54,12 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'Tenho um cansaço que dorme oito horas e acorda na mesma.',
     ],
     cenas: [
-      'an unmade bed at dawn, soft grey and gold light through a window',
-      'a single empty chair in a warm pool of light, deep shadow around',
-      'a long table laid for many, warm candlelight, all the chairs empty',
-      'a simple bowl filling with warm golden light, dark tender background',
-      'a soft cupped hollow of warm golden light cradled in deep shadow, like a nest',
-      'folded linen resting in a quiet warm room, soft morning light',
+      'soft morning light on rumpled linen, gentle and warm',
+      'a calm sunlit chair by a bright window',
+      'a warm bright table with soft daylight and an empty cup',
+      'a simple bowl in soft warm light, gentle glow',
+      'a soft cupped hollow of warm light, tender and bright',
+      'folded linen resting in a bright calm room',
     ],
   },
   Desolação: {
@@ -71,12 +71,12 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'Já nem sei do que é que eu, só eu, gosto.',
     ],
     cenas: [
-      'a quiet dark room with one unlit lamp, a thin sliver of warm light under a door',
-      'a still deep well seen from above, calm water holding a circle of warm light',
-      'dark fertile soil cradling a single seed, a faint warm glow within the earth',
-      'an open doorway into a quiet room, soft warm light at the threshold',
-      'embers glowing softly in deep darkness, warm and alive',
-      'a single chair by a window at dusk, the room dim and still',
+      'a quiet bright room with soft empty space and gentle light',
+      'a single seed in warm earth touched by soft light',
+      'an open doorway into a softly lit calm room',
+      'dawn light gently filling an empty serene space',
+      'soft warm light on still water, calm and open',
+      'a calm window with warm gentle light at dusk',
     ],
   },
   Horizonte: {
@@ -88,12 +88,12 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'Chego à meta e já só penso na próxima.',
     ],
     cenas: [
-      'an empty railway platform at dawn, warm light along the tracks',
-      'a single steaming cup of coffee on a table by a window, soft morning gold',
-      'a far horizon where sea meets sky, a single thin line of warm gold light',
-      'an open country road at sunrise, mist and warm light ahead',
-      'old calendar pages turning in warm dim light',
-      'a quiet path through open fields at first light, dew and gold',
+      'an open road at sunrise, soft luminous light ahead',
+      'a bright cup of coffee by a sunny window, morning glow',
+      'a far horizon where sea meets a luminous bright sky',
+      'a path through sunlit fields, dew and soft gold',
+      'soft morning light over quiet rooftops, airy',
+      'a calm bright sky at dawn, open and serene',
     ],
   },
   Permanência: {
@@ -105,12 +105,12 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'Tenho medo de mudar e desiludir quem conta comigo.',
     ],
     cenas: [
-      'a tall tree letting golden leaves fall in still autumn air, warm light',
-      'a soft garment resting over the back of a chair, warm shadow, quiet room',
-      'an empty suit of armour standing in a dim hall, one warm shaft of light',
-      'a calm river bending through dark land, a long reflection of gold',
-      'still water slowly taking a new shape, soft luminous light',
-      'bare branches against a soft dawn sky, the first warm light',
+      'a tree in soft autumn light, gentle and luminous',
+      'a soft garment over a chair in a bright calm room',
+      'a calm river under a soft bright sky',
+      'bare branches against a luminous dawn sky',
+      'still water slowly taking a new shape in soft light',
+      'soft daylight through tall windows, serene and open',
     ],
   },
 };
