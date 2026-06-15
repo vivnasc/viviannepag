@@ -7,7 +7,7 @@
 
 import { ContaId } from './contas';
 import { Post, PostTipo, reconhecimentoPosts, revelacaoPosts, manifestoPosts } from './posts';
-import { proximaSegunda, dataLocal, HORA_POST } from './agenda';
+import { proximaSegunda, dataLocal, horaDoMetodo } from './agenda';
 
 // A semana, de segunda a domingo (wd: getDay, 0=domingo).
 export const DIAS_SEMANA: { wd: number; nome: string; tipo: PostTipo }[] = [
@@ -59,6 +59,6 @@ export function planoSemana(conta: ContaId, offset = 0, base: Date = proximaSegu
     idx[d.tipo] += 1;
     const data = new Date(inicio);
     data.setDate(data.getDate() + i);
-    return { wd: d.wd, nome: d.nome, tipo: d.tipo, post, data: dataLocal(data), hora: HORA_POST };
+    return { wd: d.wd, nome: d.nome, tipo: d.tipo, post, data: dataLocal(data), hora: horaDoMetodo(conta) };
   });
 }

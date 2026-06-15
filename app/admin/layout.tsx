@@ -66,6 +66,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/metodo/ver', label: 'ver.soltar' },
       { href: '/admin/metodo/vir', label: 'vir.soltar' },
       { href: '/admin/metodo/viver', label: 'viver.soltar' },
+      { href: '/admin/metodo/mae', label: 'vivianne.dos.santos (mãe)' },
     ],
   },
   {

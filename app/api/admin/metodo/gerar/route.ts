@@ -5,6 +5,7 @@ import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, FUNDO_FAMILIA } from '@/lib/metodo/contas';
+import { horaDoMetodo } from '@/lib/metodo/agenda';
 import { getPost } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 
@@ -103,6 +104,7 @@ export async function POST(req: Request) {
           video: true,
           mundo: 'autora',
           marca: conta.marca, // <- distingue a conta no Publicar/export
+          hora: horaDoMetodo(post.conta), // frases da manhã (11h); a mãe à tarde (17h)
           metodo: { conta: post.conta, tipo: post.tipo, veu: post.veu ?? null, postId: post.id },
         },
       },

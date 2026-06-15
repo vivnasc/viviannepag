@@ -4,6 +4,7 @@ import { publicarInstagram } from '@/lib/instagram/publish';
 import { getIgCredenciais } from '@/lib/instagram/config';
 import { dispararRender, CAPA_REV } from '@/lib/render/dispatch';
 import { contaDe, type ContaId } from '@/lib/instagram/contas';
+import { horaDoMetodo } from '@/lib/metodo/agenda';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -22,7 +23,7 @@ const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico', 'sinais',
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null };
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)
@@ -90,7 +91,9 @@ export async function GET(req: NextRequest) {
     const ag = t.agendadoEm;
     if (!ag) continue;
     const chave = tipoChave(t);
-    const hora = t.hora || HORA_FMT[chave] || '13:00';
+    // Método VS = frases da manhã (canon: 11h; a mãe à tarde, 17h). Sem hora
+    // explícita, NUNCA cai no default genérico (que dava 13h/20h).
+    const hora = t.hora || (t.metodo ? horaDoMetodo(t.metodo.conta ?? '') : HORA_FMT[chave]) || '13:00';
     if (agendadoNum(ag, hora) > agora) continue; // ainda não é hora
 
     const conta = contaDe(t, row.slug);
@@ -125,7 +128,10 @@ export async function GET(req: NextRequest) {
     } else if (conta === 'loja') {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
     } else if (VIDEO.includes(chave) && d?.videoUrl) {
-      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
+      // typewriter (kinetico/domingo, render de 7s): capa a 6s, já com a frase
+      // completa + @conta, em vez do 1.º frame vazio.
+      const thumbOffsetMs = (chave === 'kinetico' || chave === 'domingo') ? 6000 : undefined;
+      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl, thumbOffsetMs });
     } else if (CARROSSEL.includes(chave)) {
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
     } else if (chave === 'infografico') {

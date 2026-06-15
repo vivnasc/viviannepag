@@ -57,7 +57,7 @@ export interface Conta {
    *  nevoeiro, água, escadas) que encarnam o movimento da conta (ver da margem ·
    *  regressar a casa · atravessar o limiar para a vida · descer à estrutura
    *  oculta), não objetos literais. A linguagem repete-se = identidade. */
-  atmosfera: { sensacao: string; fraseVisual: string; prompt: string; elementos: string[]; textura: string };
+  atmosfera: { sensacao: string; fraseVisual: string; prompt: string; elementos: string[]; registos: string[]; textura: string };
   /** Linha de manifesto (declarativa, curta): o 10% manifesto. (= manifestoLinhas[0]) */
   manifestoLinha: string;
   /** Manifestos da conta (declarações de 10 palavras, alto potencial de circulação). */
@@ -102,8 +102,11 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'silêncio depois do ruído',
       fraseVisual: 'alguém observa a tempestade sem estar dentro dela',
-      prompt: 'cool contemplative atmosphere, petrol blue and cool grey with soft white light, serene and still, the feeling of watching the storm pass from a calm distance, silence after the noise',
+      prompt: 'cool contemplative atmosphere, petrol blue and cool grey, serene and still, the feeling of watching the storm pass from a calm distance, silence after the noise',
       elementos: ['a calm far shore facing a vast still expanse of water', 'a high window looking out over a distant misty city', 'fog slowly lifting to reveal a quiet open horizon', 'a long pier reaching out into calm pale water', 'a lighthouse beam crossing slow drifting mist', 'rain easing on the far side of a wide glass window', 'storm clouds parting over a calm distant plain', 'a still mirror-like lake holding a pale sky', 'a quiet threshold between a dim room and pale daylight', 'a wide empty shoreline under soft grey light', 'a calm bank watching a slow river drift past', 'mist clearing from tall quiet pines'],
+      // luz/hora (dentro do mundo frio): muda o brilho e a hora de post para post,
+      // para o feed não sair todo com a mesma luz (a causa de parecer tudo igual).
+      registos: ['the cold light just before dawn', 'soft silver overcast light', 'pale light diffused through mist', 'low cool side light', 'rain-washed grey light', 'the clearing light after a storm'],
       textura: 'shallow depth of field, soft blur, wet glass, fine grain',
     },
     manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
@@ -142,8 +145,10 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'finalmente pousar',
       fraseVisual: 'o momento em que alguém larga o peso que carregava',
-      prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of coming home and being received after a long day, warm and sheltering, room to breathe',
+      prompt: 'warm tender atmosphere, terracotta amber and warm brown, the feeling of coming home and being received after a long day, warm and sheltering, room to breathe',
       elementos: ['a warm lit doorway at the end of a darkening path', 'a small harbour with warm lights glowing at dusk', 'a lit window seen from the cold outside, welcoming', 'a glowing hearth in a dim quiet room', 'a sheltered hollow cupped in warm golden light', 'a covered porch glowing at the end of the day', 'lantern light marking a path leading home', 'a warm passage opening toward golden light', 'an open gate into a sheltered warm garden', 'a quiet valley holding the last warm light', 'a soft nest of warm light deep in shadow', 'a doorway spilling warm light onto a cold step'],
+      // luz/hora (dentro do mundo quente): varia a hora sem perder o acolhimento.
+      registos: ['a warm early dawn glow', 'low golden-hour light', 'warm interior daylight', 'firelit dusk', 'lantern-lit evening', 'soft warm overcast light'],
       textura: 'analog film, warm grain, soft warm light',
     },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
@@ -184,9 +189,12 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'living green nature, soft green and warm solar gold light, airy alive and bright, the feeling of crossing the threshold into your own life',
-      elementos: ['an open doorway onto a sunlit green landscape', 'a threshold from shadow into bright green light', 'a path beginning across a sunlit green meadow', 'wide gates opening onto green fields in the sun', 'a bridge crossing into a bright green valley', 'a forest opening into a clearing full of light', 'an open window onto a living green morning', 'a green hillside path rising toward open sky', 'light pouring through an archway into greenery', 'stepping stones crossing a clear green stream', 'a road unfolding through bright green hills', 'a garden gate ajar onto sunlit green'],
-      textura: 'air, space, depth, verdant and clear, soft warm sunlight',
+      prompt: 'living green nature, soft verdant green tones, airy alive and bright, the feeling of crossing the threshold into your own life',
+      elementos: ['an open doorway onto a sunlit landscape', 'a threshold from shadow into bright open light', 'a path beginning across an open meadow', 'wide gates opening onto fields stretching away', 'a bridge crossing into a bright valley', 'a forest opening into a clearing full of light', 'an open window onto a living morning', 'a hillside path rising toward open sky', 'light pouring through a stone archway into greenery', 'stepping stones crossing a clear stream', 'a road unfolding through rolling hills', 'a garden gate ajar onto open ground'],
+      // luz/hora (dentro do mundo verdejante): da madrugada à hora azul, para o
+      // feed deixar de ser uma só parede verde sempre com a mesma luz.
+      registos: ['fresh first dawn light', 'clear bright morning air', 'warm afternoon sun', 'soft overcast daylight', 'golden-hour backlight', 'the cool stillness of blue hour'],
+      textura: 'air, space, depth, soft natural light',
     },
     manifestoLinha: 'Não estás atrasada para lugar nenhum.',
     manifestoLinhas: [
@@ -229,8 +237,11 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'entrar numa biblioteca secreta da alma',
       fraseVisual: 'existe algo por trás do que vês',
-      prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, candlelit, archetypal and symbolic, the feeling of entering a secret library of the soul',
+      prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, archetypal and symbolic, the feeling of entering a secret library of the soul',
       elementos: ['a long candlelit corridor fading into deep shadow', 'an ornate doorway opening onto radiant golden light', 'a spiral staircase descending into darkness', 'a hidden passage lit by a single distant flame', 'sheer veils parting before a shaft of gold light', 'a vast dim library aisle in warm candlelight', 'golden light pouring through an ancient stone arch', 'an antique mirror holding a single candle flame', 'a threshold between deep dark and warm gold', 'a high window dropping a shaft of light into the dark', 'an arched gateway into glowing darkness', 'a chamber of old books touched by gold light'],
+      // luz/hora (dentro do mundo escuro e cinematográfico): varia a fonte de luz
+      // sem clarear o mistério (continua chiaroscuro, ouro sobre escuro).
+      registos: ['a single candle flame in deep dark', 'one shaft of gold light through shadow', 'a dim glow fading into black', 'warm gold rim light on deep dark', 'a distant flame down a dark corridor', 'a thread of gold in moonless dark'],
       textura: 'cinematic, chiaroscuro, symbolic, warm gold on deep dark',
     },
     bioPT:
@@ -274,10 +285,14 @@ const mod = (n: number, m: number) => ((n % m) + m) % m;
 // mas pode ser dado à parte para variar o enquadramento sem repetir o assunto).
 export function fundoDaConta(conta: Conta, i = 0, j = i): string {
   const els = conta.atmosfera.elementos;
+  const regs = conta.atmosfera.registos;
   const el = els[mod(i, els.length)];
   const enq = ENQUADRAMENTOS[mod(j, ENQUADRAMENTOS.length)];
-  // o ASSUNTO (elemento) varia muito; a atmosfera dá só o ambiente (luz, cor, sensação).
-  return `${el}, ${enq}, ${conta.atmosfera.prompt}, ${conta.atmosfera.textura}, ${COMUM}`;
+  // luz/hora DESFASADA do assunto e do enquadramento (offset +2), para posts
+  // seguidos não saírem todos com a mesma luz — era isso que tornava o feed
+  // monótono ("tudo a mesma imagem"). O ASSUNTO varia, a LUZ varia, o enquadramento varia.
+  const reg = regs[mod(i + 2, regs.length)];
+  return `${el}, ${reg}, ${enq}, ${conta.atmosfera.prompt}, ${conta.atmosfera.textura}, ${COMUM}`;
 }
 
 /** O índice do elemento atual de um prompt já gerado (lê o início do notaVisual).
