@@ -4,12 +4,11 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS, FUNDO_FAMILIA, ContaId, VeuNome } from '@/lib/metodo/contas';
+import { CONTAS, fundoDaConta, ContaId, VeuNome } from '@/lib/metodo/contas';
 import { reelsDaConta } from '@/lib/metodo/reels';
 import { Post, nomeVeu } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 import { fraseReconhecimento } from '@/lib/metodo/ia';
-import { VEU_SEMENTE } from '@/lib/metodo/veus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -46,8 +45,6 @@ export async function POST(req: Request) {
   const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
   const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[Math.floor(Math.random() * Math.max(1, doVeu.length))];
   const payoff = fonte?.sala;
-  const cenas = VEU_SEMENTE[veu].cenas; // cena VARIADA (não repetir imagens)
-  const fundoCena = cenas[Math.floor(Math.random() * cenas.length)];
 
   let texto: string;
   try { texto = await fraseReconhecimento(veu, apiKey); }
@@ -56,11 +53,12 @@ export async function POST(req: Request) {
   const slug = `metodo-ia-${contaId}-${Date.now()}`;
   const post: Post = {
     id: slug, conta: contaId, tipo: 'reconhecimento', veu,
-    texto, destaque: [], payoff, fundoCena, fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu),
+    texto, destaque: [], payoff, fundoCena: '', fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu),
   };
   const legenda = limparTravessoes(legendaDoPost(post));
   const hashtags = hashtagsDoPost(post);
-  const promptFundo = limparTravessoes(`${fundoCena}. ${FUNDO_FAMILIA}`);
+  // fundo da ATMOSFERA da conta (mundo próprio + elemento variado)
+  const promptFundo = limparTravessoes(fundoDaConta(conta, Math.floor(Math.random() * 8)));
   const imageUrl = await fundoImagem(promptFundo, slug);
 
   const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;

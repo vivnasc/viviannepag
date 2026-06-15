@@ -3,13 +3,12 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
-import { CONTAS, FUNDO_FAMILIA, ContaId } from '@/lib/metodo/contas';
+import { CONTAS, fundoDaConta, ContaId } from '@/lib/metodo/contas';
 import { reelsDaConta } from '@/lib/metodo/reels';
 import { Post, nomeVeu } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 import { fraseReconhecimento } from '@/lib/metodo/ia';
 import { planoSemana } from '@/lib/metodo/semana';
-import { VEU_SEMENTE } from '@/lib/metodo/veus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -66,20 +65,19 @@ export async function POST(req: Request) {
     const bloco = dias.slice(c, c + 6);
     const feitos = await Promise.all(bloco.map(async (d) => {
       const i = idx++;
+      // o fundo vem da ATMOSFERA da conta (mundo próprio + elemento variado).
       if (d.tipo === 'reconhecimento') {
         const veu = d.post.veu!;
         const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
         const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
-        const cenas = VEU_SEMENTE[veu].cenas;
-        const cena = cenas[i % cenas.length]; // cena VARIADA (não repetir imagens)
         try {
           const texto = await fraseReconhecimento(veu, apiKey);
-          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: cena, fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
-          return { post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`), data: d.data, hora: d.hora } as Pendente;
+          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: '', fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
+          return { post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora } as Pendente;
         } catch { return null; }
       }
       // curado (revelação/manifesto): slug com a data, para o mesmo poder repetir noutra semana.
-      return { post: d.post, slug: `metodo-${d.post.id}-${d.data}`, ia: false, i, promptFundo: limparTravessoes(`${d.post.fundoCena}. ${FUNDO_FAMILIA}`), data: d.data, hora: d.hora } as Pendente;
+      return { post: d.post, slug: `metodo-${d.post.id}-${d.data}`, ia: false, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora } as Pendente;
     }));
     for (const p of feitos) if (p) pendentes.push(p);
   }

@@ -49,6 +49,9 @@ export interface Conta {
   cor: string;
   /** Paleta PRÓPRIA da conta (identidade distinta, não a da veu.a.veu). */
   paleta: { bg1: string; bg2: string; accent: string };
+  /** Atmosfera emocional da conta (o "mundo" visual). Alimenta o fundo Flux:
+   *  cada imagem nasce deste mundo, com um elemento variado. */
+  atmosfera: { sensacao: string; fraseVisual: string; prompt: string; elementos: string[]; textura: string };
   /** Linha de manifesto (declarativa, curta): o 10% manifesto. (= manifestoLinhas[0]) */
   manifestoLinha: string;
   /** Manifestos da conta (declarações de 10 palavras, alto potencial de circulação). */
@@ -88,8 +91,15 @@ export const CONTAS: Record<ContaId, Conta> = {
     fundoBase:
       'a calm still expanse of dark water with a single thin line of warm ' +
       'light on the far horizon, seen from the near shore, serene, room to breathe',
-    cor: '#9cc1ee',
-    paleta: { bg1: '#34506e', bg2: '#1e2e44', accent: '#bcd6f2' }, // azul sereno (a margem, água, luz)
+    cor: '#cdd8df',
+    paleta: { bg1: '#324a59', bg2: '#1c2a33', accent: '#cdd8df' }, // azul petróleo, cinza frio, branco suave
+    atmosfera: {
+      sensacao: 'silêncio depois do ruído',
+      fraseVisual: 'alguém observa a tempestade sem estar dentro dela',
+      prompt: 'cool contemplative atmosphere, petrol blue and cool grey with soft white light, serene and still, the feeling of silence after the noise',
+      elementos: ['soft fog', 'rain on a window pane', 'a quiet window with grey light', 'soft light reflections', 'light passing through dust', 'a blurred distant city', 'soft shadows on a wall', 'misty calm water at dawn'],
+      textura: 'shallow depth of field, soft blur, wet glass, fine grain',
+    },
     manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
     manifestoLinhas: [
       'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
@@ -121,8 +131,15 @@ export const CONTAS: Record<ContaId, Conta> = {
     fundoBase:
       'a soft cupped hollow of warm golden light cradled in deep shadow, ' +
       'like a held nest or a quiet hearth, tender and sheltering, abstract, no figure',
-    cor: '#e8b56b',
-    paleta: { bg1: '#5a3f2e', bg2: '#2e2018', accent: '#f0c98a' }, // âmbar quente e suave (o colo)
+    cor: '#e8bd84',
+    paleta: { bg1: '#6a4838', bg2: '#322218', accent: '#e8bd84' }, // terracota, âmbar, castanho quente, dourado suave
+    atmosfera: {
+      sensacao: 'finalmente pousar',
+      fraseVisual: 'o momento em que alguém larga o peso que carregava',
+      prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of finally setting down a weight, intimate and held',
+      elementos: ['a soft folded blanket', 'a warm cup on a wooden table', 'an empty welcoming chair', 'soft draped fabric', 'golden sunset light through a window', 'a quiet warm hearth', 'sunlight on warm linen'],
+      textura: 'analog film, warm grain, soft warm light',
+    },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
     manifestoLinhas: [
       'Não precisas de carregar tudo para mereceres o teu lugar.',
@@ -156,8 +173,15 @@ export const CONTAS: Record<ContaId, Conta> = {
     fundoBase:
       'an open doorway seen from inside a dark room, the threshold and the ' +
       'ground just beyond it bathed in warm morning light, a path of light leading out',
-    cor: '#c4dd84',
-    paleta: { bg1: '#3a4f2c', bg2: '#20301a', accent: '#cfe08a' }, // verde-manhã suave (descalça, limiar)
+    cor: '#cfe0a0',
+    paleta: { bg1: '#3e5a4f', bg2: '#21302a', accent: '#cfe0a0' }, // azul claro, verde suave, dourado solar
+    atmosfera: {
+      sensacao: 'voltar a entrar na própria vida',
+      fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
+      prompt: 'open luminous atmosphere, light blue soft green and solar gold, airy alive and bright, the feeling of stepping back into your own life',
+      elementos: ['an open road at sunrise', 'an open doorway with light', 'the open sea and sky', 'wind moving through fields', 'a wide open bright sky', 'an open window with daylight', 'a sunlit path through fields'],
+      textura: 'air, space, depth, bright and clear, soft sunlight',
+    },
     manifestoLinha: 'Não estás atrasada para lugar nenhum.',
     manifestoLinhas: [
       'Não estás atrasada para lugar nenhum.',
@@ -184,6 +208,15 @@ export const CONTAS_LISTA: Conta[] = [CONTAS.ver, CONTAS.vir, CONTAS.viver];
 
 export function getConta(id: string): Conta | undefined {
   return (CONTAS as Record<string, Conta>)[id];
+}
+
+// O fundo (prompt Flux) de um post: o MUNDO da conta + um elemento variado.
+// É isto que dá a cada conta uma atmosfera própria (e evita repetir imagens).
+const COMUM = 'fine-art painterly, contemplative, generous calm space, NO people, NO faces, NO figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
+export function fundoDaConta(conta: Conta, i = 0): string {
+  const els = conta.atmosfera.elementos;
+  const el = els[((i % els.length) + els.length) % els.length];
+  return `${el}, ${conta.atmosfera.prompt}, ${conta.atmosfera.textura}, ${COMUM}`;
 }
 
 // O hub (conta-mãe) e a didática, aqui só para referência (não geramos por elas).
