@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; videoUrl: string | null; agendadoEm: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; videoUrl: string | null; agendadoEm: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 
@@ -88,9 +88,26 @@ export default function MetodoContaPage() {
       } catch { /* continua o lote */ }
       feito += 1; setLote({ feito, total: jobs.length });
     }
-    setMsg(`Lote concluído: ${feito} posts gerados. Vai a Publicar para agendar, renderizar e exportar.`);
+    setMsg(`Lote concluído: ${feito} posts gerados. Carrega "renderizar os que faltam" para os vídeos (com o @conta).`);
     setLote(null); recarregar();
   }, [conta, lote, recarregar]);
+
+  // dispara o render (GitHub Actions) de UM slug. O MP4 sai com o @conta.
+  const [renderBusy, setRenderBusy] = useState(false);
+  const renderOne = useCallback(async (slug: string) => {
+    const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
+    if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); }
+  }, []);
+
+  // renderiza todos os posts gerados desta conta que ainda não têm vídeo.
+  const renderFaltam = useCallback(async (faltam: EstadoPost[]) => {
+    if (renderBusy || !faltam.length) return;
+    setRenderBusy(true); setErro(null); setMsg(null);
+    let n = 0;
+    for (const e of faltam) { try { await renderOne(e.slug); n += 1; } catch (err) { setErro(String(err)); break; } }
+    setRenderBusy(false);
+    setMsg(`${n} renders disparados. Cada vídeo demora alguns minutos a aparecer (GitHub Actions). Recarrega daqui a pouco.`);
+  }, [renderBusy, renderOne]);
 
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
@@ -99,6 +116,9 @@ export default function MetodoContaPage() {
   }
 
   const posts = postsDaConta(conta.id);
+  // tudo o que já foi gerado para esta conta (inclui os do lote/IA), para feedback e render.
+  const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id);
+  const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   const grupos: { tipo: string; itens: Post[] }[] = [
     { tipo: 'reconhecimento', itens: posts.filter((p) => p.tipo === 'reconhecimento') },
     { tipo: 'revelacao', itens: posts.filter((p) => p.tipo === 'revelacao') },
@@ -129,6 +149,7 @@ export default function MetodoContaPage() {
             <button onClick={() => gerar(p.id)} disabled={busy === p.id} className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>
               {busy === p.id ? 'a gerar…' : gerado ? 'regenerar' : 'gerar'}
             </button>
+            {gerado && !st?.videoUrl && <button onClick={() => renderOne(st!.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-3 py-1.5 rounded-lg border border-white/25">renderizar</button>}
             {gerado && <span className="text-emerald-300/80">gerado{st?.videoUrl ? ' · MP4 pronto' : ' · falta render'}</span>}
           </div>
         </div>
@@ -152,7 +173,14 @@ export default function MetodoContaPage() {
             <Link href="/admin/publicar" className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar →</Link>
             {lote && <span className="opacity-80">a gerar… {lote.feito}/{lote.total}</span>}
           </div>
-          <p className="mt-1 text-[0.68rem] opacity-50">O lote demora alguns minutos (gera imagem por post). Podes deixar a correr.</p>
+          <p className="mt-1 text-[0.68rem] opacity-50">O lote demora alguns minutos (gera imagem por post). O progresso aparece aqui ao lado. Podes deixar a correr.</p>
+          <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
+            <span className="opacity-80">Gerados nesta conta: <b style={{ color: conta.cor }}>{geradosConta.length}</b> · com vídeo: {geradosConta.length - faltamRender.length}</span>
+            <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
+              {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
+            </button>
+            <span className="opacity-50">o vídeo (com o @conta) sai do render, demora alguns minutos.</span>
+          </div>
         </header>
 
         {erro && <p className="mb-3 text-[0.8rem] text-rose-300">{erro}</p>}

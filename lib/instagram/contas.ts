@@ -15,9 +15,9 @@ export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   { id: 'veuaveu', nome: 'veu.a.veu', emoji: '🌿' }, // didática
   // Método VS · as 3 portas (Ver, Vir, Viver). Conteúdo gerado em /admin/metodo,
   // distinguido por theme.marca. Ver lib/metodo/contas.ts.
-  { id: 'versoltar', nome: 'ver.soltar', emoji: '🕯️' },
-  { id: 'virsoltar', nome: 'vir.soltar', emoji: '🕯️' },
-  { id: 'viversoltar', nome: 'viver.soltar', emoji: '🕯️' },
+  { id: 'versoltar', nome: 'ver.soltar', emoji: '🌊' }, // a margem
+  { id: 'virsoltar', nome: 'vir.soltar', emoji: '🤲' }, // o colo
+  { id: 'viversoltar', nome: 'viver.soltar', emoji: '🌅' }, // descalça (o limiar)
 ];
 
 const IDS = new Set(CONTAS.map((c) => c.id));

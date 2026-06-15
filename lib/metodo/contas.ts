@@ -95,7 +95,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'Pensar não é ver.',
       'A paz não é a cabeça em silêncio. É deixares de te agarrar ao barulho.',
     ],
-    emoji: '🕯️',
+    emoji: '🌊',
     bioPT:
       'Não consegues desligar a cabeça? Aprende a criar distância dos ' +
       'pensamentos sem lutares contra eles. Método VS · Ver e Soltar 🕯️ ↓',
@@ -128,7 +128,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'Descansar não é desistir.',
       'O amor que se paga com exaustão não era amor, era medo.',
     ],
-    emoji: '🕯️',
+    emoji: '🤲',
     bioPT:
       'Fazes tudo por toda a gente e sentes culpa quando pensas em ti? ' +
       'Aprende a descansar sem culpa e a deixar-te apoiar. Método VS · Ver e Soltar 🕯️ ↓',
@@ -163,7 +163,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'A tua vida não começa depois. Já começou.',
       'Não há nenhum comboio a partir sem ti.',
     ],
-    emoji: '🕯️',
+    emoji: '🌅',
     bioPT:
       'Estás sempre à espera que a tua vida comece? Aprende a sair do ' +
       '"depois" e a transformar o que já compreendeste em mudança real. ' +

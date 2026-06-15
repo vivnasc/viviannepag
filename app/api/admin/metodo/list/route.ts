@@ -21,15 +21,17 @@ export async function GET() {
   type Row = {
     slug: string;
     dias?: { videoUrl?: string | null }[] | null;
-    theme?: { agendadoEm?: string | null; igPublicado?: boolean; metodo?: { postId?: string } } | null;
+    theme?: { agendadoEm?: string | null; igPublicado?: boolean; metodo?: { postId?: string; conta?: string; tipo?: string } } | null;
     created_at?: string;
   };
 
-  const estado: Record<string, { slug: string; videoUrl: string | null; agendadoEm: string | null; publicado: boolean; criadoEm: string | null }> = {};
+  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; videoUrl: string | null; agendadoEm: string | null; publicado: boolean; criadoEm: string | null }> = {};
   for (const row of (data ?? []) as Row[]) {
     const postId = row.theme?.metodo?.postId ?? row.slug.replace(/^metodo-/, '');
     estado[postId] = {
       slug: row.slug,
+      conta: row.theme?.metodo?.conta ?? null,
+      tipo: row.theme?.metodo?.tipo ?? null,
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       agendadoEm: row.theme?.agendadoEm ?? null,
       publicado: Boolean(row.theme?.igPublicado),
