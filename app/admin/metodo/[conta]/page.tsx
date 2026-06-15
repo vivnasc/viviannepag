@@ -18,6 +18,8 @@ const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; videoUrl: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
+// pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
+const AMBIG = /\b(ela|ele|elas|eles|dela|dele|delas|deles|isso|isto|aquilo|aquela|aquele|disso|nisso)\b/i;
 
 // Pré-visualização animada (loop), com a identidade própria da conta.
 function MetodoPreview({ texto, destaque, conta, conceito }: { texto: string; destaque?: string[]; conta: Conta; conceito?: string }) {
@@ -119,6 +121,26 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
+  // melhorar EM LOTE: reescreve todas as ambíguas desta conta, repetindo até acabar.
+  const [melLoteBusy, setMelLoteBusy] = useState(false);
+  const melhorarLote = useCallback(async () => {
+    if (!conta || melLoteBusy) return;
+    setMelLoteBusy(true); setErro(null);
+    let total = 0;
+    try {
+      for (let pass = 0; pass < 20; pass++) {
+        const r = await fetch('/api/admin/metodo/melhorar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+        const j = await r.json();
+        if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); break; }
+        total += j.feitas ?? 0;
+        setMsg(`Frases melhoradas: ${total}${j.restantes ? `, faltam ${j.restantes}…` : ''}.`);
+        recarregar();
+        if ((j.feitas ?? 0) === 0 || (j.restantes ?? 0) === 0) break;
+      }
+    } catch (e) { setErro(String(e)); }
+    finally { setMelLoteBusy(false); recarregar(); }
+  }, [conta, melLoteBusy, recarregar]);
+
   // melhorar: reescreve só o texto (tira ambiguidade), mantém a imagem.
   const melhorar = useCallback(async (slug: string) => {
     if (melBusy) return;
@@ -143,6 +165,7 @@ export default function MetodoContaPage() {
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id);
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
+  const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
   const grupos: { tipo: string; itens: Post[] }[] = [
     { tipo: 'reconhecimento', itens: posts.filter((p) => p.tipo === 'reconhecimento') },
     { tipo: 'revelacao', itens: posts.filter((p) => p.tipo === 'revelacao') },
@@ -201,6 +224,7 @@ export default function MetodoContaPage() {
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
             <span className="opacity-80">Gerados: <b style={{ color: conta.cor }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
+            {ambiguas > 0 && <button onClick={melhorarLote} disabled={melLoteBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : `melhorar ambíguas (${ambiguas})`}</button>}
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
