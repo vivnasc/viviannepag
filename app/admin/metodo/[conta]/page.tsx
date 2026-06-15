@@ -154,7 +154,7 @@ export default function MetodoContaPage() {
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
             <button onClick={() => gerarLote(30)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar lote (30)</button>
             <button onClick={() => gerarLista(sequenciaMix(conta.id))} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>gerar a sequência (60/30/10)</button>
-            <Link href="/admin/publicar" className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar →</Link>
+            <Link href={`/admin/publicar?conta=${conta.marca}&vista=feed`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (esta conta) →</Link>
             {lote && <span className="opacity-80">a gerar… {lote.feito}/{lote.total}</span>}
           </div>
           <p className="mt-1 text-[0.68rem] opacity-50">O lote demora alguns minutos (gera imagem por post). O progresso aparece aqui ao lado. Podes deixar a correr.</p>

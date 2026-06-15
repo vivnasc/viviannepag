@@ -108,6 +108,13 @@ export default function PublicarPage() {
   const [legenda, setLegenda] = useState<Item | null>(null); // painel de rever
   const [igOk, setIgOk] = useState<boolean | null>(null);
   const [conta, setConta] = useState<ContaId>('veuaveu'); // conta selecionada
+  // abre já na conta/vista pedidas por link (ex.: /admin/publicar?conta=versoltar&vista=feed)
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    const c = p.get('conta'); const v = p.get('vista');
+    if (c && CONTAS.some((x) => x.id === c)) setConta(c as ContaId);
+    if (v === 'feed' || v === 'semana' || v === 'mes') setVista(v);
+  }, []);
   const [pickerLoja, setPickerLoja] = useState(false); // seletor de semana da Loja a colocar
   const [exportar, setExportar] = useState(false); // painel de exportar CSV (Metricool)
   const [expDe, setExpDe] = useState(''); const [expAte, setExpAte] = useState('');
