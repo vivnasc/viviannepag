@@ -39,6 +39,7 @@ export default function MetodoContaPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [zoom, setZoom] = useState<{ texto: string; destaque?: string[]; conceito?: string; imageUrl?: string } | null>(null);
+  const [melBusy, setMelBusy] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
@@ -117,6 +118,19 @@ export default function MetodoContaPage() {
       if (r.ok) recarregar(); else { const j = await r.json().catch(() => ({})); setErro(j.erro ?? 'erro a apagar'); }
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
+
+  // melhorar: reescreve só o texto (tira ambiguidade), mantém a imagem.
+  const melhorar = useCallback(async (slug: string) => {
+    if (melBusy) return;
+    setMelBusy(slug); setErro(null);
+    try {
+      const r = await fetch('/api/admin/metodo/melhorar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg(`Reescrito: «${j.texto}»`); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setMelBusy(null); }
+  }, [melBusy, recarregar]);
 
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
@@ -214,6 +228,7 @@ export default function MetodoContaPage() {
                       {e.videoUrl
                         ? <a href={e.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                         : <button onClick={() => renderOne(e.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((err) => setErro(String(err)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
+                      <button onClick={() => melhorar(e.slug)} disabled={melBusy === e.slug} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === e.slug ? 'a melhorar…' : 'melhorar'}</button>
                       <button onClick={() => descartar(e.slug)} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
                       <span className="opacity-50">{e.videoUrl ? 'MP4 pronto' : 'falta render'}</span>
                     </div>
