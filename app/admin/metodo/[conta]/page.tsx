@@ -44,6 +44,8 @@ export default function MetodoContaPage() {
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [zoom, setZoom] = useState<{ texto: string; destaque?: string[]; conceito?: string; imageUrl?: string } | null>(null);
   const [melBusy, setMelBusy] = useState<string | null>(null);
+  const [diasAbertos, setDiasAbertos] = useState<Set<string>>(new Set());
+  const toggleDia = useCallback((d: string) => setDiasAbertos((s) => { const n = new Set(s); if (n.has(d)) n.delete(d); else n.add(d); return n; }), []);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
@@ -282,19 +284,25 @@ export default function MetodoContaPage() {
         {geradosConta.length > 0 && (
           <section className="mb-8">
             <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · por dia <span className="opacity-40">· {geradosConta.length}</span></h2>
-            {dias.map((d) => (
-              <div key={d} className="mb-5">
-                <h3 className="text-[0.82rem] mb-2 flex items-center gap-2">
-                  {d === 'sem data'
-                    ? <span className="opacity-70">sem data <span className="opacity-45">(carrega &quot;organizar por dias&quot;)</span></span>
-                    : <><span className="capitalize font-semibold" style={{ color: conta.cor }}>{diaNome(d)}</span><span className="opacity-55">{d}</span></>}
-                  <span className="opacity-40 text-[0.7rem]">· {porDia.get(d)!.length}</span>
-                </h3>
-                <div className="grid gap-3 md:grid-cols-2">
-                  {porDia.get(d)!.map((e) => <GeradoCard key={e.slug} e={e} />)}
+            {dias.map((d) => {
+              const aberto = diasAbertos.has(d);
+              return (
+                <div key={d} className="mb-2 rounded-xl border border-white/10 overflow-hidden">
+                  <button onClick={() => toggleDia(d)} className="w-full flex items-center gap-2 px-3 py-2.5 text-left text-[0.82rem] hover:bg-white/[0.03]">
+                    <span className="opacity-50 w-3">{aberto ? '▾' : '▸'}</span>
+                    {d === 'sem data'
+                      ? <span className="opacity-70">sem data <span className="opacity-45">(carrega &quot;organizar por dias&quot;)</span></span>
+                      : <><span className="capitalize font-semibold" style={{ color: conta.cor }}>{diaNome(d)}</span><span className="opacity-55">{d}</span></>}
+                    <span className="opacity-40 text-[0.7rem] ml-auto">{porDia.get(d)!.length} post{porDia.get(d)!.length > 1 ? 's' : ''}</span>
+                  </button>
+                  {aberto && (
+                    <div className="grid gap-3 md:grid-cols-2 p-3 pt-0">
+                      {porDia.get(d)!.map((e) => <GeradoCard key={e.slug} e={e} />)}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </section>
         )}
 
