@@ -58,28 +58,42 @@ export async function POST(req: Request) {
   // junta todos os dias das semanas pedidas (cada um com a sua data e tipo).
   const dias = Array.from({ length: semanas }).flatMap((_, w) => planoSemana(contaId, offset + w));
 
+  const supabase = getSupabaseAdmin();
+
+  // MEMÓRIA anti-repetição: as frases de reconhecimento JÁ usadas nesta conta
+  // (semanas anteriores). A IA recebe-as e NÃO repete o tema (conteúdo infinito,
+  // pensado a longo prazo). Acumula também as desta geração, para não repetir
+  // dentro da própria semana (era o que dava QUI = SÁB iguais).
+  const evitar: string[] = [];
+  try {
+    const { data: existentes } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'metodo-%');
+    for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { metodo?: { conta?: string; tipo?: string } } }[]) {
+      if (r.theme?.metodo?.conta !== contaId || r.theme?.metodo?.tipo !== 'reconhecimento') continue;
+      const tx = r.dias?.[0]?.slides?.[0]?.texto;
+      if (tx) evitar.push(tx);
+    }
+  } catch { /* sem memória prévia, segue */ }
+
   const pendentes: Pendente[] = [];
   let idx = 0;
-  // RECONHECIMENTO (IA) em paralelo por blocos; revelação/manifesto direto.
-  for (let c = 0; c < dias.length; c += 6) {
-    const bloco = dias.slice(c, c + 6);
-    const feitos = await Promise.all(bloco.map(async (d) => {
-      const i = idx++;
-      // o fundo vem da ATMOSFERA da conta (mundo próprio + elemento variado).
-      if (d.tipo === 'reconhecimento') {
-        const veu = d.post.veu!;
-        const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
-        const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
-        try {
-          const texto = await fraseReconhecimento(veu, apiKey);
-          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: '', fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
-          return { post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora } as Pendente;
-        } catch { return null; }
-      }
+  // SEQUENCIAL (não paralelo): cada reconhecimento conhece os anteriores e não
+  // repete. Revelação/manifesto são curados (direto).
+  for (const d of dias) {
+    const i = idx++;
+    if (d.tipo === 'reconhecimento') {
+      const veu = d.post.veu!;
+      const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
+      const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
+      try {
+        const texto = await fraseReconhecimento(veu, apiKey, evitar);
+        evitar.push(texto);
+        const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: '', fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
+        pendentes.push({ post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora });
+      } catch { /* salta este dia */ }
+    } else {
       // curado (revelação/manifesto): slug com a data, para o mesmo poder repetir noutra semana.
-      return { post: d.post, slug: `metodo-${d.post.id}-${d.data}`, ia: false, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora } as Pendente;
-    }));
-    for (const p of feitos) if (p) pendentes.push(p);
+      pendentes.push({ post: d.post, slug: `metodo-${d.post.id}-${d.data}`, ia: false, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora });
+    }
   }
 
   if (!pendentes.length) return NextResponse.json({ erro: 'nada-gerado' }, { status: 500 });
@@ -87,8 +101,6 @@ export async function POST(req: Request) {
   // SÓ texto (imageUrl null). O prompt da imagem fica guardado (notaVisual) para
   // a gerares depois, só das que ficarem.
   const rows = pendentes.map((p) => buildRow(p, null));
-
-  const supabase = getSupabaseAdmin();
   const { error } = await supabase.from('carousel_collections').upsert(rows, { onConflict: 'slug' });
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, gerados: rows.length });

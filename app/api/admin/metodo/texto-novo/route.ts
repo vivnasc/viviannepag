@@ -54,8 +54,17 @@ export async function POST(req: Request) {
     if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
     const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
     const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
+    // MEMÓRIA anti-repetição: as frases já usadas nesta conta (e a atual), para a
+    // IA não voltar ao mesmo tema (era por isto que "texto novo" repetia).
+    const evitar: string[] = slide.texto ? [slide.texto] : [];
+    const { data: irmaos } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'metodo-%');
+    for (const r of (irmaos ?? []) as { dias?: Dia[]; theme?: Theme }[]) {
+      if (r.theme?.metodo?.conta !== contaId) continue;
+      const tx = r.dias?.[0]?.slides?.[0]?.texto;
+      if (tx) evitar.push(tx);
+    }
     let texto: string;
-    try { texto = await fraseReconhecimento(veu, apiKey); }
+    try { texto = await fraseReconhecimento(veu, apiKey, evitar); }
     catch (e) { return NextResponse.json({ erro: 'claude', detalhe: String(e) }, { status: 502 }); }
     post = { id: `tn-${Date.now()}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: '', fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
   }
