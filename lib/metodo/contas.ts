@@ -189,7 +189,7 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'lush verdant green world, alive and full of light and air, the quiet joy of stepping into your own life now, present and unhurried',
+      prompt: 'luminous warm morning light, soft gold and fresh tones, open and alive, the quiet joy of finally stepping into your own life now, presence and a new beginning, unhurried (NOT about plants or forests — real varied scenes of a life beginning)',
       // verde é a IDENTIDADE da viver, mas verde NÃO é só floresta: prado, água,
       // plantas, interior com verde, estufa, lago — variedade DENTRO do verde.
       elementos: ['a sunlit green meadow rolling toward the horizon', 'close-up of dewy green leaves in soft morning light', 'a calm river between green banks under a bright sky', 'potted plants and fresh herbs on a sunlit windowsill', 'a lush bright greenhouse full of light', 'soft green hills under a wide clear sky', 'young ferns unfurling in soft green light', 'ivy climbing a sunlit pale wall', 'a green garden path opening into light', 'water lilies on a calm green pond', 'a bright kitchen with fresh herbs and greens by the window', 'wildflowers and moss in a sunlit green clearing'],

@@ -34,7 +34,7 @@ ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente dest
 MUNDO desta conta (paleta/atmosfera, o fio condutor): ${a.prompt}. Sensação: ${a.sensacao}. Representa: ${conta.depois} Símbolo: ${conta.simbolo}.
 
 VARIA a cada imagem (senão fica monótono), MANTENDO sempre a assinatura e a paleta acima:
-- ASSUNTO: a paleta NÃO dita o assunto (ex.: um mundo verde é prados, água, plantas, estufas, interiores com plantas, colinas, lagos — NÃO só floresta). Assunto coerente mas inesperado, sem pessoas.
+- ASSUNTO: a paleta/luz é só o AMBIENTE, NÃO dita o assunto. Escolhe cenas REAIS e variadas — interiores, objetos do dia a dia, janelas, mesas, água, ruas, paisagens, detalhes próximos — que encarnem o SIGNIFICADO da conta. NÃO fiques preso a um único tipo de cena (ex.: não repitas plantas/vegetação). Sem pessoas.
 - COMPOSIÇÃO: varia (plano largo / grande plano macro / interior / vista de cima / ao nível do olhar).
 - LUZ/HORA: varia a hora (madrugada, manhã, fim de tarde, encoberto, contraluz) mas SEMPRE com a luz de ouro quente da assinatura.
 ${evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : ''}
