@@ -22,14 +22,14 @@ const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', r
 const AMBIG = /\b(ela|ele|elas|eles|dela|dele|delas|deles|isso|isto|aquilo|aquela|aquele|disso|nisso)\b/i;
 
 // Pré-visualização animada (loop), com a identidade própria da conta.
-function MetodoPreview({ texto, destaque, conta, conceito }: { texto: string; destaque?: string[]; conta: Conta; conceito?: string }) {
+function MetodoPreview({ texto, destaque, conta, conceito, imageUrl }: { texto: string; destaque?: string[]; conta: Conta; conceito?: string; imageUrl?: string }) {
   const [prog, setProg] = useState(0);
   useEffect(() => {
     let raf = 0; let t0 = 0; const CICLO = 11000;
     const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.85)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
   }, []);
-  return <MetodoSlide texto={texto} destaque={destaque} conta={conta} conceito={conceito} prog={prog} />;
+  return <MetodoSlide texto={texto} destaque={destaque} conta={conta} conceito={conceito} imageUrl={imageUrl} prog={prog} />;
 }
 
 export default function MetodoContaPage() {
@@ -162,7 +162,7 @@ export default function MetodoContaPage() {
 
   const posts = postsDaConta(conta.id);
   // tudo o que já foi gerado para esta conta (inclui os do lote/IA), para feedback e render.
-  const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id);
+  const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~'));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
   const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
@@ -224,7 +224,7 @@ export default function MetodoContaPage() {
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
             <span className="opacity-80">Gerados: <b style={{ color: conta.cor }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
-            {ambiguas > 0 && <button onClick={melhorarLote} disabled={melLoteBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : `melhorar ambíguas (${ambiguas})`}</button>}
+            {geradosConta.length > 0 && <button onClick={melhorarLote} disabled={melLoteBusy || ambiguas === 0} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : ambiguas === 0 ? 'sem ambíguas' : `melhorar ambíguas (${ambiguas})`}</button>}
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
@@ -240,7 +240,7 @@ export default function MetodoContaPage() {
             <div className="grid gap-3 md:grid-cols-2">
               {geradosConta.map((e) => (
                 <div key={e.slug} className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex gap-3">
-                  <button onClick={() => setZoom({ texto: e.texto, conceito: e.conceito, imageUrl: e.imageUrl ?? undefined })} title="clicar para aumentar" className="w-[150px] shrink-0 block"><MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} prog={1} /></button>
+                  <button onClick={() => setZoom({ texto: e.texto, conceito: e.conceito, imageUrl: e.imageUrl ?? undefined })} title="clicar para aumentar" className="w-[150px] shrink-0 block"><MetodoPreview texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} /></button>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap text-[0.64rem] uppercase tracking-wider opacity-70">
                       <span className="px-2 py-0.5 rounded-full" style={{ background: `${conta.cor}33`, color: conta.cor }}>{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo}</span>
