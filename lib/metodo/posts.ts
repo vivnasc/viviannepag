@@ -70,28 +70,27 @@ function revelacaoDoReel(r: Reel): Post {
   };
 }
 
-function manifestoDaConta(conta: ContaId): Post {
+export function reconhecimentoPosts(conta: ContaId): Post[] {
+  return reelsDaConta(conta).map(reconhecimentoDoReel);
+}
+// Todas as revelações disponíveis (aforismos), as mais fortes primeiro, para dar
+// volume sem repetir tão cedo.
+export function revelacaoPosts(conta: ContaId): Post[] {
+  const reels = reelsDaConta(conta);
+  return [...reels.filter((r) => r.revelacaoForte), ...reels.filter((r) => !r.revelacaoForte)].map(revelacaoDoReel);
+}
+export function manifestoPosts(conta: ContaId): Post[] {
   const c = CONTAS[conta];
-  return {
-    id: `${conta}-mani`,
+  return c.manifestoLinhas.map((linha, i) => ({
+    id: `${conta}-mani-${i + 1}`,
     conta,
-    tipo: 'manifesto',
-    texto: c.manifestoLinha,
+    tipo: 'manifesto' as const,
+    texto: linha,
     destaque: [],
     fundoCena: c.fundoBase,
     fonte: `manifesto ${c.handle}`,
     conceito: 'Manifesto',
-  };
-}
-
-export function reconhecimentoPosts(conta: ContaId): Post[] {
-  return reelsDaConta(conta).map(reconhecimentoDoReel);
-}
-export function revelacaoPosts(conta: ContaId): Post[] {
-  return reelsDaConta(conta).filter((r) => r.revelacaoForte).map(revelacaoDoReel);
-}
-export function manifestoPosts(conta: ContaId): Post[] {
-  return [manifestoDaConta(conta)];
+  }));
 }
 
 /** Todos os posts de uma conta, agrupados por tipo (para o admin). */

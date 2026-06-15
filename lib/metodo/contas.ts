@@ -49,8 +49,10 @@ export interface Conta {
   cor: string;
   /** Paleta PRÓPRIA da conta (identidade distinta, não a da veu.a.veu). */
   paleta: { bg1: string; bg2: string; accent: string };
-  /** Linha de manifesto (declarativa, curta): o 10% manifesto. */
+  /** Linha de manifesto (declarativa, curta): o 10% manifesto. (= manifestoLinhas[0]) */
   manifestoLinha: string;
+  /** Manifestos da conta (declarações de 10 palavras, alto potencial de circulação). */
+  manifestoLinhas: string[];
   emoji: string;
   /** Bios canónicas (CONTAS-METODO-VS.md). */
   bioPT: string;
@@ -88,6 +90,11 @@ export const CONTAS: Record<ContaId, Conta> = {
     cor: '#9cc1ee',
     paleta: { bg1: '#16263f', bg2: '#0a0f1a', accent: '#9cc1ee' }, // azul frio (a margem, água, noite)
     manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
+    manifestoLinhas: [
+      'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
+      'Pensar não é ver.',
+      'A paz não é a cabeça em silêncio. É deixares de te agarrar ao barulho.',
+    ],
     emoji: '🕯️',
     bioPT:
       'Não consegues desligar a cabeça? Aprende a criar distância dos ' +
@@ -116,6 +123,11 @@ export const CONTAS: Record<ContaId, Conta> = {
     cor: '#e8b56b',
     paleta: { bg1: '#3a241a', bg2: '#1a0f0a', accent: '#e8b56b' }, // âmbar quente (o colo, lareira)
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
+    manifestoLinhas: [
+      'Não precisas de carregar tudo para mereceres o teu lugar.',
+      'Descansar não é desistir.',
+      'O amor que se paga com exaustão não era amor, era medo.',
+    ],
     emoji: '🕯️',
     bioPT:
       'Fazes tudo por toda a gente e sentes culpa quando pensas em ti? ' +
@@ -145,7 +157,12 @@ export const CONTAS: Record<ContaId, Conta> = {
       'ground just beyond it bathed in warm morning light, a path of light leading out',
     cor: '#c4dd84',
     paleta: { bg1: '#21331f', bg2: '#0d140b', accent: '#c4dd84' }, // verde-manhã (descalça, limiar)
-    manifestoLinha: 'A estreia não é para o ano. É hoje.',
+    manifestoLinha: 'Não estás atrasada para lugar nenhum.',
+    manifestoLinhas: [
+      'Não estás atrasada para lugar nenhum.',
+      'A tua vida não começa depois. Já começou.',
+      'Não há nenhum comboio a partir sem ti.',
+    ],
     emoji: '🕯️',
     bioPT:
       'Estás sempre à espera que a tua vida comece? Aprende a sair do ' +
