@@ -19,6 +19,18 @@ function InstagramInner() {
   const [erro, setErro] = useState<string | null>(null);
   const [estado, setEstado] = useState<{ ligado: boolean; username?: string; erro?: string; igUserId?: string } | null>(null);
   const [aVerificar, setAVerificar] = useState(false);
+  const [perms, setPerms] = useState<string[] | null>(null);
+  const [permsBusy, setPermsBusy] = useState(false);
+
+  const verPerms = useCallback(async (c: ContaId) => {
+    setPermsBusy(true); setPerms(null);
+    try {
+      const r = await fetch(`/api/admin/ig/permissoes?conta=${c}`, { cache: 'no-store' });
+      const j = await r.json();
+      setPerms(r.ok ? (j.scopes ?? []) : [`erro: ${j.detalhe ?? j.erro ?? r.status}`]);
+    } catch (e) { setPerms([`erro: ${String(e)}`]); }
+    setPermsBusy(false);
+  }, []);
 
   const verificar = useCallback(async (c: ContaId) => {
     setAVerificar(true); setEstado(null);
@@ -65,6 +77,14 @@ function InstagramInner() {
               ? <span className="text-[0.9rem] text-salvia">✓ <b>{nomeConta(conta)}</b> ligado a @{estado.username}.</span>
               : <span className="text-[0.9rem] text-rosa">✗ <b>{nomeConta(conta)}</b> não ligado. {estado?.erro ?? 'cola um token em baixo.'}</span>}
           <button onClick={() => verificar(conta)} disabled={aVerificar} className="ml-2 text-[0.66rem] px-2 py-0.5 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar disabled:opacity-40">↻ testar</button>
+          <button onClick={() => verPerms(conta)} disabled={permsBusy} className="ml-2 text-[0.66rem] px-2 py-0.5 rounded-full border border-ocre/30 text-creme-2/70 hover:border-ambar disabled:opacity-40">{permsBusy ? '…' : 'ver permissões'}</button>
+          {perms && (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {perms.length === 0 ? <span className="text-[0.7rem] opacity-60">sem permissões (ou token inválido)</span> : perms.map((p) => (
+                <span key={p} className="text-[0.62rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/70">{p}</span>
+              ))}
+            </div>
+          )}
         </div>
 
         <p className="text-[0.8rem] opacity-65 mb-4">Para (re)ligar a <b>{nomeConta(conta)}</b>: cola um token do Instagram dessa conta (mesmo de curta duração, do Graph API Explorer). Eu torno-o <b>permanente (~60 dias)</b> e renova-se sozinho.</p>
