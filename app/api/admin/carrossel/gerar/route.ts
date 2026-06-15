@@ -7,7 +7,7 @@ import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA } from '@/lib/carrossel/metodo';
 import { listarPoolImagens, atribuirPool, imagensUsadas } from '@/lib/carrossel/pool-server';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
   // Catalogo ciente dos produtos: top-N relevantes ao brief deste universo.
   const catalogo = await getCatalogoProdutos();
   const amostra = amostraEcossistema(catalogo, universo, 2);
-  const ecossistema = `MÉTODO VS (a ESPINHA dos CTAs, o produto-casa): o pilar e os três manuais. É para aqui que o carrossel encaminha primeiro; a loja entra como aprofundamento do tema.\n${metodoOfertasPrompt()}\n\n${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (o ecossistema que ja existia, entram como aprofundamento, com os links proprios):\n${ofertasAnterioresPrompt()}`;
+  const ecossistema = `ECOSSISTEMA COMPLETO (o universo TODO da Vivianne — usa-o INTEIRO nos CTAs, com variedade; amplia, nao reduzas):\n\nPRODUTOS DA LOJA (ebooks, guias, packs dos varios universos):\n${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (LUMINA, Loranne, Sete Ecos, livro, Escola — links proprios da lista):\n${ofertasAnterioresPrompt()}\n\nMÉTODO VS (mais uma familia: o pilar e os tres manuais — boa opcao quando o tema do dia o pede, a par dos outros, nunca o unico destino):\n${metodoOfertasPrompt()}`;
 
   // Palavras-destaque JA usadas em qualquer coleccao — nunca repetir (regra
   // dela: as palavras nao se repetem entre dias, semanas ou carrosseis).
@@ -99,11 +99,7 @@ SLIDES DE CADA DIA (6 slides, nesta ordem):
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
 6) 'cta': fecho GENEROSO e NAO-vendedor (o reel ja deu valor; agora um sussurro, nao um grito). Comeca por um convite a refletir/guardar/partilhar; depois, em tom suave, UM produto/oferta que APROFUNDA o tema do dia (titulo = nome do produto; texto = convite curto e generoso, NUNCA "compra"/"adquire"/"garante ja" — antes "se quiseres ir mais fundo...", "fica aqui para quando precisares"; destaque = a URL exacta). Fundo escuro/editorial.
 
-CTA — o fecho leva UM produto, mas em tom GENEROSO e nao-vendedor (valor primeiro, convite depois; o produto e um sussurro). Os CTAs honram o arco Ver->Vir->Viver->o todo da semana, com o MÉTODO VS como espinha:
-- Em cada movimento (2 dias), UM dos dois dias encaminha para o manual do método desse movimento (ver.soltar nos dias de Ver, vir.soltar nos de Vir, viver.soltar nos de Viver), com a URL exacta da lista MÉTODO VS;
-- o OUTRO dia do movimento aprofunda o territorio com um ebook/guia/pack da loja (URL: viviannedossantos.com/loja/<slug>) ou uma OFERTA ANTERIOR (LUMINA, Loranne, Sete Ecos, livro, Escola), com o seu link proprio;
-- o ultimo dia (o TODO, a raiz) encaminha para o pilar "Os Sete Véus" (https://viviannedossantos.com/os-sete-veus).
-Regras: nao repitas o mesmo produto na mesma semana; o produto escolhido deve tocar o tema do dia e o seu movimento; usa nome e link/URL EXACTOS de cada um (no campo destaque do slide cta poe a URL).
+${CTA_FILOSOFIA}
 
 DEVOLVE APENAS JSON valido, sem texto a volta:
 {
