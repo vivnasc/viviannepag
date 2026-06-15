@@ -1,16 +1,44 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import { toPng } from 'html-to-image';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
-import { CONTAS_LISTA } from '@/lib/metodo/contas';
+import { CONTAS_LISTA, Conta } from '@/lib/metodo/contas';
 import { postsDaConta } from '@/lib/metodo/posts';
+import { MetodoAvatar } from '@/components/admin/MetodoAvatar';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable}`;
 
 type EstadoReel = { slug: string; videoUrl: string | null; agendadoEm: string | null; publicado: boolean };
+
+function AvatarCard({ conta }: { conta: Conta }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [busy, setBusy] = useState(false);
+  const baixar = useCallback(async () => {
+    if (!ref.current) return;
+    setBusy(true);
+    try {
+      const url = await toPng(ref.current, { pixelRatio: 1, width: 1080, height: 1080, cacheBust: true });
+      const a = document.createElement('a');
+      a.href = url; a.download = `perfil-${conta.handle}.png`; a.click();
+    } catch { /* ignore */ }
+    finally { setBusy(false); }
+  }, [conta.handle]);
+  return (
+    <div className="flex flex-col items-center gap-2">
+      {/* render a 1080 fora de vista para exportar nítido; preview escalado */}
+      <div style={{ position: 'absolute', left: -9999, top: 0 }}>
+        <div ref={ref}><MetodoAvatar conta={conta} size={1080} /></div>
+      </div>
+      <div style={{ borderRadius: '50%', overflow: 'hidden' }}><MetodoAvatar conta={conta} size={150} /></div>
+      <div className="text-[0.72rem] opacity-70">@{conta.handle}</div>
+      <button onClick={baixar} disabled={busy} className="px-2.5 py-1 rounded-lg border border-white/20 text-[0.7rem] disabled:opacity-40">{busy ? '…' : 'descarregar PNG'}</button>
+    </div>
+  );
+}
 
 export default function MetodoPage() {
   const [estado, setEstado] = useState<Record<string, EstadoReel>>({});
@@ -25,6 +53,9 @@ export default function MetodoPage() {
         <p className="mt-2 text-[0.9rem] opacity-80 max-w-2xl">
           Ver, Vir, Viver: os três movimentos da mesma travessia. Cada porta vive de reels que entram pela dor (1.ª pessoa) e fecham pela revelação. Pipeline separado da veu.a.veu. O conteúdo flui para Publicar (theme.marca próprio) e exporta para o Metricool.
         </p>
+        <div className="mt-3">
+          <Link href="/admin/metodo/semana" className="inline-block px-3 py-1.5 rounded-lg border border-[#EBAE4A]/50 text-[#EBAE4A] text-[0.78rem]">produção semanal (gerar a semana) →</Link>
+        </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {CONTAS_LISTA.map((c) => {
@@ -47,6 +78,14 @@ export default function MetodoPage() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-white/10 p-5">
+          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Fotos de perfil das contas</h2>
+          <p className="text-[0.78rem] opacity-70 mb-4">Identidade de cada conta. Descarrega o PNG (1080x1080) e usa como foto de perfil no Instagram.</p>
+          <div className="flex gap-6 flex-wrap">
+            {CONTAS_LISTA.map((c) => <AvatarCard key={c.id} conta={c} />)}
+          </div>
         </div>
 
         <div className="mt-8 rounded-2xl border border-white/10 p-5 text-[0.82rem] opacity-85">
