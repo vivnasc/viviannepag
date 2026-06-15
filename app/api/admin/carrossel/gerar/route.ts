@@ -7,6 +7,7 @@ import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia } from '@/lib/carrossel/metodo';
 import { listarPoolImagens, atribuirPool, imagensUsadas } from '@/lib/carrossel/pool-server';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
   // Catalogo ciente dos produtos: top-N relevantes ao brief deste universo.
   const catalogo = await getCatalogoProdutos();
   const amostra = amostraEcossistema(catalogo, universo, 2);
-  const ecossistema = `${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (o ecossistema que ja existia — usa-as tambem nos CTAs, com os links proprios):\n${ofertasAnterioresPrompt()}`;
+  const ecossistema = `MÉTODO VS (a ESPINHA dos CTAs, o produto-casa): o pilar e os três manuais. É para aqui que o carrossel encaminha primeiro; a loja entra como aprofundamento do tema.\n${metodoOfertasPrompt()}\n\n${ecossistemaPrompt(amostra)}\n\nOFERTAS ANTERIORES (o ecossistema que ja existia, entram como aprofundamento, com os links proprios):\n${ofertasAnterioresPrompt()}`;
 
   // Palavras-destaque JA usadas em qualquer coleccao — nunca repetir (regra
   // dela: as palavras nao se repetem entre dias, semanas ou carrosseis).
@@ -63,8 +64,11 @@ export async function POST(req: Request) {
   const palavrasUsadas = Array.from(usadas);
 
   const SYSTEM = `Es a voz dos Carrosseis dos 7 Veus da Vivianne dos Santos (psicologia transpessoal, constelacao familiar). Conteudo contemplativo, partilhavel, que segue o ano (estacoes e datas).
+
+${METODO_ESPINHA}
+
 REGRAS DE VOZ:
-${REGRAS_GLOBAIS.map((r) => `- ${r}`).join('\n')}
+${[...METODO_VOZ, ...REGRAS_GLOBAIS].map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
 - VALOR PRIMEIRO (alcance): o reel tem de GANHAR a atencao antes de qualquer convite. A capa para o scroll com um gancho reconhecivel; os 4 slides do meio sao VALOR PURO, que apetece guardar e partilhar; so o fecho traz, em tom suave, um produto. Nunca soar a venda a cabeca.
 - CLAREZA ACIMA DE TUDO: cada carrossel diz UMA coisa concreta que qualquer pessoa entende a primeira leitura. Fala de situacoes reais do dia a dia (a culpa ao deitar, o sim que devia ser nao, a chamada que nao fizeste). Usa a imagem poetica para ILUMINAR a mensagem, nunca para a esconder. Proibido: linguagem hermetica, abstracao a mais, frases que so a autora entende. Se uma frase precisa de ser decifrada, reescreve-a simples.
@@ -78,6 +82,8 @@ ${directivaImagem(universo)}
 ESTRUTURA DA SEMANA (formato 7 Veus, ${numDias} dias = ${numDias} carrosseis):
 TERRITORIO da semana: "${tema}" — ${brief}. Universo: ${col.nome}. Estacao: ${estacao}. Musica instrumental: ${musica}.
 NAO ha palavra de semana: cada DIA e um carrossel proprio com a SUA palavra-destaque unica.
+
+${eixoSemanaPrompt(numDias)}
 
 PALAVRA-DESTAQUE (a regra mais importante para ela):
 - Cada dia tem UMA palavra-destaque: 1 so palavra, substantivo forte, em MAIUSCULAS e ACENTUADA (ex.: TRAVESSIA, REPOUSO, MISTERIO->MISTÉRIO, RAIZ, FÉ), mais um subtitulo poetico curto em minusculas que a desdobra (ex.: "o escuro que ensina o que a luz nao alcanca").
@@ -93,10 +99,11 @@ SLIDES DE CADA DIA (6 slides, nesta ordem):
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
 6) 'cta': fecho GENEROSO e NAO-vendedor (o reel ja deu valor; agora um sussurro, nao um grito). Comeca por um convite a refletir/guardar/partilhar; depois, em tom suave, UM produto/oferta que APROFUNDA o tema do dia (titulo = nome do produto; texto = convite curto e generoso, NUNCA "compra"/"adquire"/"garante ja" — antes "se quiseres ir mais fundo...", "fica aqui para quando precisares"; destaque = a URL exacta). Fundo escuro/editorial.
 
-CTA — o fecho leva UM produto, mas em tom GENEROSO e nao-vendedor (valor primeiro, convite depois; o produto e um sussurro). Ao longo dos 7 dias, VARIA o produto:
-- uns dias um ebook/guia/pack de um dos 7 UNIVERSOS da loja (URL: viviannedossantos.com/loja/<slug>);
-- outros dias uma OFERTA ANTERIOR (LUMINA, Loranne, Sete Ecos, "Os 7 Veus do Despertar", Escola dos Veus) com o seu link proprio.
-Regras: nao repitas o mesmo produto na mesma semana; explora universos diferentes (nao fiques so no universo do territorio); o produto escolhido deve tocar o tema do dia; usa nome e link/URL EXACTOS de cada um (no campo destaque do slide cta poe a URL).
+CTA — o fecho leva UM produto, mas em tom GENEROSO e nao-vendedor (valor primeiro, convite depois; o produto e um sussurro). Os CTAs honram o arco Ver->Vir->Viver->o todo da semana, com o MÉTODO VS como espinha:
+- Em cada movimento (2 dias), UM dos dois dias encaminha para o manual do método desse movimento (ver.soltar nos dias de Ver, vir.soltar nos de Vir, viver.soltar nos de Viver), com a URL exacta da lista MÉTODO VS;
+- o OUTRO dia do movimento aprofunda o territorio com um ebook/guia/pack da loja (URL: viviannedossantos.com/loja/<slug>) ou uma OFERTA ANTERIOR (LUMINA, Loranne, Sete Ecos, livro, Escola), com o seu link proprio;
+- o ultimo dia (o TODO, a raiz) encaminha para o pilar "Os Sete Véus" (https://viviannedossantos.com/os-sete-veus).
+Regras: nao repitas o mesmo produto na mesma semana; o produto escolhido deve tocar o tema do dia e o seu movimento; usa nome e link/URL EXACTOS de cada um (no campo destaque do slide cta poe a URL).
 
 DEVOLVE APENAS JSON valido, sem texto a volta:
 {
@@ -170,6 +177,7 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
       diaSemana: typeof dia.diaSemana === 'string' ? dia.diaSemana : DIAS_SEMANA[i % 7],
       palavra: typeof dia.palavra === 'string' ? (dia.palavra as string).toUpperCase() : undefined,
       subtitulo: typeof dia.subtitulo === 'string' ? dia.subtitulo : undefined,
+      movimento: movimentoDoDia(diaNum), // arco Ver->Vir->Viver->o todo da semana
       mundo,
       plataforma: dia.plataforma ?? 'ambas',
       horario: dia.horario ?? '13:00',
