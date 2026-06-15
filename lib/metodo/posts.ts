@@ -82,11 +82,9 @@ export function reconhecimentoPosts(conta: ContaId): Post[] {
 export function revelacaoPosts(conta: ContaId): Post[] {
   const reels = reelsDaConta(conta);
   const porForte = (arr: Reel[]) => [...arr.filter((r) => r.revelacaoForte), ...arr.filter((r) => !r.revelacaoForte)];
-  // a mãe lidera pelas revelações da Dualidade (território próprio dela), para
-  // não repetir as mesmas revelações das portas na mesma semana.
-  const ordenados = conta === 'mae'
-    ? [...porForte(reels.filter((r) => r.veu === 'Dualidade')), ...porForte(reels.filter((r) => r.veu !== 'Dualidade'))]
-    : porForte(reels);
+  // a mãe percorre os véus TODOS (ordem já intercalada por véu em reelsDaConta),
+  // para as revelações da semana também atravessarem o método, não um véu só.
+  const ordenados = conta === 'mae' ? reels : porForte(reels);
   return ordenados.map((r) => revelacaoDoReel(r, conta));
 }
 // Realce curado por linha de manifesto (a palavra que tem de ficar). Fallback
