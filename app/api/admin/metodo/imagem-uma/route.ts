@@ -12,7 +12,7 @@ export const maxDuration = 120;
 // Não toca no texto. Escolhe uma variação DIFERENTE da atual (outro elemento +
 // outro enquadramento), para não sair igual nem desperdiçar o crédito à toa.
 
-type Slide = { imageUrl?: string | null; notaVisual?: string };
+type Slide = { imageUrl?: string | null; notaVisual?: string; texto?: string };
 type Dia = { slides?: Slide[]; videoUrl?: string | null };
 type Row = { slug: string; dias?: Dia[] | null; theme?: { metodo?: { conta?: string } } | null };
 
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
   // PREFERIDO: o Claude escreve um fundo DIFERENTE de todos os já usados na conta.
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (apiKey) {
-    try { prompt = await gerarFundoIA(conta, evitar, apiKey); }
+    try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto); }
     catch { /* fica o fallback */ }
   }
   const { url: img, erro } = await fundoImagem(prompt, slug);
