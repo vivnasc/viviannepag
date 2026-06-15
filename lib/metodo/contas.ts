@@ -69,10 +69,10 @@ export interface Conta {
 
 // A família comum a todas as capas/fundos (o que faz a coleção ser coleção).
 export const FUNDO_FAMILIA =
-  'fine-art painterly background, deep indigo and aubergine night, warm gold ' +
-  'light, renaissance sfumato texture, contemplative and timeless, generous ' +
-  'calm space, NO people, NO faces, NO figures, NO hands, NO text, NO letters, ' +
-  'NO watermark, vertical 9:16';
+  'fine-art painterly background, deep indigo and aubergine with soft luminous ' +
+  'dawn light, warm gold glow, airy and bright, renaissance sfumato texture, ' +
+  'contemplative and timeless, generous calm space, NO people, NO faces, NO ' +
+  'figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
 
 export const CONTAS: Record<ContaId, Conta> = {
   ver: {
