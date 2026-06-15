@@ -9,17 +9,33 @@ Handoff para a próxima sessão fluir sem perder contexto. Lê isto antes de mex
 Partes: **A)** os posts a trabalhar (A.1 vídeo · A.2 outros tipos por fechar) e
 **B)** o que mudámos HOJE (estado atual, para não refazer).
 
-## A.2) OUTROS TIPOS DE POST POR FECHAR  *(a confirmar com a Vivianne no arranque)*
-A Vivianne disse que o vídeo é só 1 tipo e que há outros posts **por fechar**, e que
-quer continuar nos **"posts da tarde"**. Candidatos prováveis (CONFIRMAR o que conta e
-o que falta a cada um logo no início da sessão, perguntando-lhe):
-- **Cá em Casa** (banda · `app/api/admin/banda/gerar`, `components/admin/BandaSlide.tsx`) — CLAUDE.md marcava-o como foco e "nunca gerou nada para ver".
-- **Infográfico** (`infografico/gerar`, `InfograficoSlide.tsx`).
-- Reels editoriais: "O que ninguém te explica", "Sinais de que…", "Uma ideia de…".
-- Eventuais **tipos novos** do método para o slot da tarde.
-- O que exatamente são os **"posts da tarde"** (slot 17h da mãe? outra coisa?) — perguntar.
+## A.2) POSTS DA TARDE — biblioteca de formatos (o grande "por fechar")
 
-> Não assumir; a 1.ª coisa a fazer é pedir-lhe a lista exata dos tipos a fechar.
+**Insight central (decidido com a Vivianne):** manhã e tarde têm funções DIFERENTES.
+A tarde NÃO deve competir com a manhã (nem ser "mais frases em motion") — deve
+**aprofundar** o interesse que a manhã gera.
+
+| | MANHÃ | TARDE |
+|---|---|---|
+| forma | 1 imagem + 1 frase + motion | **carrossel** |
+| função | reconhecimento + **alcance** | **profundidade + autoridade + construção do método** |
+
+### Biblioteca de FORMATOS da tarde (para gerar conteúdo infinito, sem ficar preso a frases soltas)
+Cada formato tem uma ESTRUTURA fixa; o Claude gera dentro dela, por véu → infinito.
+São carrosséis (vários slides). **Esta é a "biblioteca de formatos" a construir.**
+
+1. **O MECANISMO INVISÍVEL** — explica como o véu funciona. Estrutura: comportamento observado → explicação inesperada → mecanismo do véu → consequência. Ex.: "Porque verificas o telefone tantas vezes?", "Porque pensas demais antes de dormir?", "Porque descansas e sentes culpa?".
+2. **A ORIGEM** — de onde o padrão veio. Estrutura: comportamento atual → função protetora antiga → porque continua hoje. Ex.: "Porque te tornaste a pessoa forte", "Porque aprendeste a agradar", "Porque tens medo de falhar".
+3. **O ERRO DE INTERPRETAÇÃO** — desmonta crenças. Estrutura: pensas que é X → na verdade é Y → explicação. Ex.: "Pensas que é preguiça", "…falta de disciplina", "…dependência".
+4. **O CUSTO ESCONDIDO** — cria consciência. Estrutura: benefício aparente → custo invisível → preço pago. Ex.: "O custo de ser indispensável", "…de pensar em tudo", "…de viver para depois".
+5. **O MAPA DO VÉU** — diagnóstico (dos mais fortes, replicável a QUALQUER véu). Estrutura: "Quando estás neste véu: pensas… / sentes… / fazes… / pagas…".
+6. **CENA DO DIA-A-DIA** — reconhecimento profundo. Estrutura: cena concreta → comportamento → leitura do véu. Ex.: "A mensagem tinha três palavras. O filme que fizeste dela tinha vinte cenas." → explica o Turbilhão.
+7. **MITO vs VERDADE** — autoridade. Estrutura: Mito ("Se pensares mais, resolves") vs Verdade ("Se te fundires com o pensamento, perdes clareza").
+8. **O VÉU DE…** — alcance (identificação rápida). Ex.: "O Véu da Mulher Forte", "O Véu do Bom Filho", "O Véu da Salvadora", "O Véu da Perfeccionista".
+
+> Implementação sugerida: tipo de post novo "carrossel-tarde" com um `formato` (1–8) +
+> véu; o Claude preenche a estrutura do formato escolhido; render como carrossel.
+> Reaproveitar o motor de imagem (par com o texto) e a memória anti-repetição.
 
 ---
 
@@ -50,6 +66,16 @@ post entre os vários), mantendo a identidade. Spec já **decidida** (não re-de
 - **Biblioteca reutilizável de ambientes simbólicos por conta** (gerados por IA),
   recombinados por vídeo. Custo: criar a biblioteca uma vez (~$10–34 p/ 4 contas), depois ~$0/vídeo.
 - Mesma lógica de identidade das imagens (ver Parte B): paleta própria por conta + assinatura pintada.
+
+### Motor seguinte (anotado): Remotion — "universos, não perfis"
+- Princípio validado: **universos, não perfis.** Cada conta vive no SEU mundo (já
+  codificado nas atmosferas das imagens): **ver** frio/névoa/azul-petróleo · **vir**
+  quente/âmbar/analógico · **viver** claro/arejado/solar · **mãe** mistério preto/dourado/azul profundo.
+- **Remotion** (vídeo programático em React) é o motor novo que faz estes mundos
+  **mexerem** (em vez de imagens paradas): névoa a mover-se + chuva no vidro (ver),
+  luz quente a respirar + grão analógico (vir), horizonte com parallax + vento nos
+  campos (viver). Objetivo: **reconhecimento em 1s, sem ler o @**. É a fase a seguir
+  (um motor próprio) — anotado para quando avançarmos os clips.
 
 ### Estado técnico da voz (IMPORTANTE)
 - `ELEVENLABS_API_KEY` e `ELEVEN_VOICE_ID` **já existem nas envs**.
