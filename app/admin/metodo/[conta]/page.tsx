@@ -178,7 +178,9 @@ export default function MetodoContaPage() {
 
   const posts = postsDaConta(conta.id);
   // tudo o que já foi gerado para esta conta (inclui os do lote/IA), para feedback e render.
-  const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~'));
+  // ordem ESTÁVEL (data, depois slug): os cartões não saltam de sítio quando a
+  // lista recarrega após melhorar/descartar/gerar.
+  const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
   const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
