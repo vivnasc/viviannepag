@@ -174,3 +174,23 @@ Tudo merged (PRs #306, #309, #311–#323). Resumo por área:
 4. **Auditar o próprio trabalho ANTES de entregar** (erros engolidos em silêncio custam-lhe muito).
 5. Voz do método: travessões BANIDOS; português europeu; nunca inventar biografia.
 6. É sensível ao **gasto** (Replicate/IA): não regenerar às cegas; preferir testar 1 e mostrar.
+
+---
+
+## PROMPT DE ARRANQUE (copiar/colar no início da próxima sessão)
+> Lê o `CONTINUIDADE-VIDEOS.md` e o `CLAUDE.md` antes de tudo. Com base neles, faz-me
+> um **PLANO DE TRABALHO sequenciado** para os posts do Método VS, para eu avançar sem
+> me perder.
+>
+> Regras: uma coisa de cada vez; não partir o que já existe; testar 1 e mostrar antes
+> de produzir; cuidado com o gasto (Replicate/IA); auditar antes de entregar.
+>
+> Organiza em **fases curtas, ordenadas por prioridade/valor**, cada fase com:
+> objetivo · passos concretos · o que muda no código · "pronto quando". Cobre:
+> 1) **Posts da tarde** — biblioteca de 8 formatos (carrossel, profundidade).
+> 2) **Conexão imagem↔texto em TODOS os geradores** (helper partilhado, incremental).
+> 3) **Vídeo** (1 tipo): pipeline voz ElevenLabs v3 contínua + legenda sincronizada;
+>    depois **Remotion** (mundos que mexem).
+>
+> NÃO comeces a construir já: mostra-me primeiro o plano com a ORDEM proposta e o
+> PRIMEIRO passo concreto, recomenda por onde começar, e espera o meu OK.
