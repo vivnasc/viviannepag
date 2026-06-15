@@ -86,6 +86,7 @@ export default function CarrosselPage() {
   const [zoom, setZoom] = useState<{ dia: VeuDia; index: number } | null>(null);
   const [videoMsg, setVideoMsg] = useState<string | null>(null);
   const [aba, setAba] = useState<'calendario' | 'gerados'>('calendario');
+  const [remontando, setRemontando] = useState(false);
   const anoAtual = new Date().getFullYear();
 
   async function puxarPool(c: Coleccao) {
@@ -136,6 +137,25 @@ export default function CarrosselPage() {
       a.href = url; a.download = `${sel.slug}-dia-${dia.dia}.zip`; a.click();
       URL.revokeObjectURL(url);
     } catch (e) { setErro('zip: ' + String(e)); }
+  }
+
+  // "Passar pelo Método": reescreve só o texto e os CTAs de uma semana já feita,
+  // mantendo as palavras grandes, os subtítulos e as imagens (sem pool, sem
+  // regenerar do zero). Para alinhar conteúdo já gerado sem perder a estética.
+  async function remontarMetodo(c: Coleccao) {
+    setErro(null); setVideoMsg(null); setRemontando(true);
+    try {
+      const r = await fetch('/api/admin/carrossel/remontar-metodo', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slug: c.slug }),
+      });
+      const j = await r.json();
+      if (!r.ok) { setErro('método: ' + (j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
+      if (j.coleccao) setSel(j.coleccao);
+      await carregar();
+      setVideoMsg('Semana passada pelo Método: texto e CTAs novos; palavras grandes, subtítulos e imagens mantidos. Revê e depois re-renderiza os MP4.');
+    } catch (e) { setErro(String(e)); }
+    finally { setRemontando(false); }
   }
 
   async function gerarVideos(c: Coleccao) {
@@ -272,6 +292,7 @@ export default function CarrosselPage() {
             <div className="flex items-center gap-2">
               <Btn variant="default" onClick={() => puxarPool(sel)}>imagens do pool</Btn>
               {(sel.theme?.historico?.length ?? 0) > 0 && <Btn variant="default" onClick={() => restaurar(sel)}>↺ restaurar anterior</Btn>}
+              <Btn variant="default" onClick={() => remontarMetodo(sel)}>{remontando ? 'a passar…' : '✶ passar pelo Método'}</Btn>
               <Btn variant="primary" onClick={() => gerarVideos(sel)}>gerar carrossel + vídeo</Btn>
               <Btn variant="primary" onClick={() => exportarMetricool(sel)}>exportar Metricool (CSV)</Btn>
             </div>
