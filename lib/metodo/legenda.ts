@@ -11,7 +11,6 @@
 import { Conta, CONTAS, VeuNome } from './contas';
 import { Reel } from './reels';
 import { Post, nomeVeu } from './posts';
-import { legendaManifesto } from './abertura';
 
 // Hashtags por véu (a língua da dor) + base do método.
 const HASHTAGS_BASE = [
@@ -79,7 +78,7 @@ export function legendaDoPost(post: Post): string {
 
   let paras: string[];
   if (post.tipo === 'manifesto') {
-    return legendaManifesto(post.conta);
+    return [post.texto, cta, guardar].join('\n\n');
   } else if (post.tipo === 'revelacao') {
     paras = [
       post.bridge ? `Talvez te soe: «${post.bridge}»` : post.texto,

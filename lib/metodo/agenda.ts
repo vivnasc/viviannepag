@@ -60,7 +60,7 @@ export function agendarAbertura(conta: ContaId, inicio: Date = new Date()): Agen
 
 /** Agenda das 3 contas, escalonada (cada conta começa numa semana, para não
  *  abrir tudo no mesmo dia e dar fôlego à produção). */
-export function agendarTodas(inicio: Date = new Date()): Record<ContaId, AgendaItem[]> {
+export function agendarTodas(inicio: Date = new Date()): Record<'ver' | 'vir' | 'viver', AgendaItem[]> {
   const base = proximaSegunda(inicio);
   const semana = (n: number) => {
     const d = new Date(base);

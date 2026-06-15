@@ -306,8 +306,8 @@ export default function MetodoContaPage() {
                       <div key={d} className={`min-h-[80px] rounded-lg border border-white/10 p-1 ${fds ? 'bg-white/[0.015]' : 'bg-white/[0.035]'}`}>
                         <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}</div>
                         {posts.map((e) => (
-                          <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="block w-full text-left text-[0.58rem] leading-tight rounded px-1 py-0.5 mb-0.5 truncate" style={{ background: `${conta.cor}26`, color: '#F2E8DC', borderLeft: `2px solid ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : conta.cor}` }}>
-                            {e.texto}
+                          <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="block w-full mb-1 rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${conta.cor}66`}` }}>
+                            <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} prog={1} />
                           </button>
                         ))}
                       </div>
