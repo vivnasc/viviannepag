@@ -146,7 +146,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       sensacao: 'finalmente pousar',
       fraseVisual: 'o momento em que alguém larga o peso que carregava',
       prompt: 'warm tender atmosphere, terracotta amber and warm brown, the feeling of coming home and being received after a long day, warm and sheltering, room to breathe',
-      elementos: ['a warm lit doorway at the end of a darkening path', 'a small harbour with warm lights glowing at dusk', 'a lit window seen from the cold outside, welcoming', 'a glowing hearth in a dim quiet room', 'a sheltered hollow cupped in warm golden light', 'a covered porch glowing at the end of the day', 'lantern light marking a path leading home', 'a warm passage opening toward golden light', 'an open gate into a sheltered warm garden', 'a quiet valley holding the last warm light', 'a soft nest of warm light deep in shadow', 'a doorway spilling warm light onto a cold step'],
+      elementos: ['a warm bed with soft rumpled blankets in low evening light', 'two hands cradling a warm cup of tea', 'a cat curled asleep in a pool of warm lamplight', 'a single armchair with a folded blanket in a softly lit room', 'a glowing hearth in a quiet dim room', 'a small table set for one by warm candlelight', 'a lit window seen from the cold outside, welcoming', 'soft pillows piled in warm lamplight', 'a warm bath drawn in a dim quiet bathroom', 'a worn sofa under a soft reading lamp', 'a doorway spilling warm light onto a cold step', 'a small harbour with warm lights at dusk'],
       // luz/hora (dentro do mundo quente): varia a hora sem perder o acolhimento.
       registos: ['a warm early dawn glow', 'low golden-hour light', 'warm interior daylight', 'firelit dusk', 'lantern-lit evening', 'soft warm overcast light'],
       textura: 'analog film, warm grain, soft warm light',
@@ -189,8 +189,8 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'living green nature, soft verdant green tones, airy alive and bright, the feeling of crossing the threshold into your own life',
-      elementos: ['an open doorway onto a sunlit landscape', 'a threshold from shadow into bright open light', 'a path beginning across an open meadow', 'wide gates opening onto fields stretching away', 'a bridge crossing into a bright valley', 'a forest opening into a clearing full of light', 'an open window onto a living morning', 'a hillside path rising toward open sky', 'light pouring through a stone archway into greenery', 'stepping stones crossing a clear stream', 'a road unfolding through rolling hills', 'a garden gate ajar onto open ground'],
+      prompt: 'fine-art painterly, airy and alive, full of light and air, the quiet joy of finally inhabiting your own life now, present and unhurried',
+      elementos: ['bare feet on a warm sunlit wooden floor', 'a simple breakfast laid out by an open window in the morning', 'two hands pressing a small seedling into dark earth', 'rumpled white sheets with morning sun across the bed', 'a window thrown wide open onto a vast bright sky', 'a steaming cup of coffee on a sunlit windowsill', 'a worn travel bag set down on a wooden floor, finally home', 'a calm sea meeting a luminous open horizon', 'a single wooden chair turned to face the morning sun', 'fresh laundry drifting on a line in a warm breeze', 'an open doorway from shadow into bright daylight', 'a quiet meadow opening under a wide clear sky'],
       // luz/hora (dentro do mundo verdejante): da madrugada à hora azul, para o
       // feed deixar de ser uma só parede verde sempre com a mesma luz.
       registos: ['fresh first dawn light', 'clear bright morning air', 'warm afternoon sun', 'soft overcast daylight', 'golden-hour backlight', 'the cool stillness of blue hour'],
