@@ -15,16 +15,18 @@ export const maxDuration = 300;
 
 const LIMITE = 10;
 
-async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
+async function fundoImagem(prompt: string, slug: string): Promise<{ url: string | null; erro?: string }> {
   const token = process.env.REPLICATE_API_TOKEN;
-  if (!token || !prompt) return null;
+  if (!token) return { url: null, erro: 'falta REPLICATE_API_TOKEN' };
+  if (!prompt) return { url: null, erro: 'prompt vazio' };
+  let ultimoErro = '';
   for (let t = 0; t < 3; t++) {
     try {
       const url = await gerarImagemFlux(prompt, token, { raw: true });
-      try { return await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
-    } catch { await new Promise((r) => setTimeout(r, 1200 * (t + 1))); }
+      try { return { url: await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`) }; } catch { return { url }; }
+    } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); await new Promise((r) => setTimeout(r, 1200 * (t + 1))); }
   }
-  return null;
+  return { url: null, erro: ultimoErro || 'falhou sem detalhe' };
 }
 
 type Slide = { imageUrl?: string | null; notaVisual?: string };
@@ -71,6 +73,7 @@ export async function POST(req: Request) {
   }
 
   let feitas = 0;
+  let ultimoErro = '';
   for (let c = 0; c < lote.length; c += 3) {
     const bloco = lote.slice(c, c + 3);
     // prompts SEQUENCIAIS (para a lista "evitar" crescer e diversificar); imagens em paralelo.
@@ -78,13 +81,17 @@ export async function POST(req: Request) {
     for (let k = 0; k < bloco.length; k++) comPrompt.push({ r: bloco[k], prompt: await promptDe(c + k) });
     await Promise.all(comPrompt.map(async ({ r, prompt }) => {
       const slide = r.dias![0].slides![0];
-      const img = await fundoImagem(prompt, r.slug);
-      if (!img) return;
-      slide.imageUrl = img;
+      const { url, erro } = await fundoImagem(prompt, r.slug);
+      if (!url) { if (erro) ultimoErro = erro; return; }
+      slide.imageUrl = url;
       slide.notaVisual = prompt; // grava o prompt usado
       const { error: e2 } = await supabase.from('carousel_collections').update({ dias: r.dias }).eq('slug', r.slug);
       if (!e2) feitas += 1;
     }));
+  }
+  // se NADA foi gerado e houve erro do Flux, devolve o MOTIVO real (não um "0" mudo).
+  if (lote.length > 0 && feitas === 0 && ultimoErro) {
+    return NextResponse.json({ erro: 'flux-falhou', detalhe: ultimoErro, feitas: 0, restantes: total }, { status: 502 });
   }
   return NextResponse.json({ ok: true, feitas, restantes: Math.max(0, total - feitas) });
 }
