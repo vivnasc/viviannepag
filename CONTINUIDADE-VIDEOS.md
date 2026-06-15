@@ -67,6 +67,11 @@ post entre os vários), mantendo a identidade. Spec já **decidida** (não re-de
 
 Tudo merged (PRs #306, #309, #311–#323). Resumo por área:
 
+### PRINCÍPIO-CHAVE (validado pela Vivianne): imagem↔texto + identidade por paleta
+- A imagem do post **nasce em PAR com a FRASE** (como nas séries VC Sabia / Hoje em Mim, que ela fez "juntos"): a imagem **encarna** o estado/metáfora da frase — não é fundo genérico. `gerarFundoIA(conta, evitar, apiKey, frase)` recebe a frase.
+- **A frase manda o ASSUNTO; a conta dá a PALETA/luz/tratamento.** É daqui que vêm a identidade E a conexão imagem↔texto. (Se faltar conexão ou identidade, é por aqui que se resolve.)
+- viver = **verde como paleta/identidade** (não vegetação-assunto). ver=azul, vir=âmbar, mãe=ouro/escuro com luz.
+
 ### Imagens — agora geradas por IA, variadas e com identidade
 - **`lib/metodo/ia.ts` → `gerarFundoIA(conta, evitar, apiKey)`**: o **Claude escreve o prompt** de cada fundo (criativo, varia assunto/composição/luz) e **evita os assuntos já usados** (`evitar` = `assuntoCurto` dos `notaVisual` existentes). Substituiu a lista fixa `fundoDaConta` (que ficou só como FALLBACK sem API key).
 - Usado em: `app/api/admin/metodo/imagens/route.ts` (lote), `imagem-uma/route.ts` ("outra imagem", evita também os assuntos dos posts vizinhos), `gerar/route.ts` (post único).
