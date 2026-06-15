@@ -485,7 +485,14 @@ export function fraseDoReel(reel: Reel): string {
 }
 
 export function reelsDaConta(conta: ContaId): Reel[] {
-  if (conta === 'mae') return REELS; // a mãe é transversal: todos os véus
+  if (conta === 'mae') {
+    // a mãe é transversal (todos os véus), MAS o território PRÓPRIO dela é a
+    // Dualidade (o 7.º véu, que nenhuma porta cobre). Lidera pela Dualidade para
+    // ter assunto próprio e NÃO duplicar a semana das portas (ver/vir/viver).
+    const dual = REELS.filter((r) => r.veu === 'Dualidade');
+    const resto = REELS.filter((r) => r.veu !== 'Dualidade');
+    return [...dual, ...resto];
+  }
   return REELS.filter((r) => r.conta === conta);
 }
 
