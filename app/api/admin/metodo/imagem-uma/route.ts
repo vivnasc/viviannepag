@@ -53,11 +53,21 @@ export async function POST(req: Request) {
   const enqIdx = Math.floor(Math.random() * 6);
   let prompt = fundoDaConta(conta, elIdx, enqIdx);
 
-  // PREFERIDO: o Claude escreve um fundo DIFERENTE do atual (evita o assunto que
-  // lá está), criativo e variado — como nos outros geradores.
+  // evita os assuntos JÁ usados nos OUTROS posts desta conta (não só o deste
+  // post) — senão dois posts caem na mesma cena (ex.: duas estufas iguais).
+  const evitar: string[] = [];
+  if (slide.notaVisual) evitar.push(assuntoCurto(slide.notaVisual));
+  const { data: irmaos } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodo-%');
+  for (const r of (irmaos ?? []) as Row[]) {
+    if (r.slug === slug || r.theme?.metodo?.conta !== contaId) continue;
+    const nv = r.dias?.[0]?.slides?.[0]?.notaVisual;
+    if (nv) evitar.push(assuntoCurto(nv));
+  }
+
+  // PREFERIDO: o Claude escreve um fundo DIFERENTE de todos os já usados na conta.
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (apiKey) {
-    try { prompt = await gerarFundoIA(conta, slide.notaVisual ? [assuntoCurto(slide.notaVisual)] : [], apiKey); }
+    try { prompt = await gerarFundoIA(conta, evitar, apiKey); }
     catch { /* fica o fallback */ }
   }
   const img = await fundoImagem(prompt, slug);
