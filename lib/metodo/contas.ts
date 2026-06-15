@@ -137,8 +137,8 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'finalmente pousar',
       fraseVisual: 'o momento em que alguém larga o peso que carregava',
-      prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of finally setting down a weight, intimate and held',
-      elementos: ['a warm cup of tea on a windowsill', 'golden hour light across a wooden floor', 'an empty armchair in warm lamplight', 'a single lit candle on a table', 'sunlight through soft linen curtains', 'a quiet kitchen corner at sunset', 'the warm glow of a lamp in a cosy room', 'an open book in golden light', 'a blanket draped over a sofa', 'warm evening light on a brick wall', 'steam rising from a mug', 'soft embers in a quiet hearth'],
+      prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of finally setting down a weight, warm and sheltering, room to breathe',
+      elementos: ['a warm sunset over calm rolling hills', 'golden hour light through tall autumn trees', 'a quiet harbour glowing at golden hour', 'a calm lake at warm sunset', 'warm evening light along an old stone path', 'a soft sandy shore at the end of the day', 'a single lamp glowing in a far window at dusk', 'embers glowing softly in a quiet hearth', 'an open doorway onto a warm golden evening', 'warm sunset light over a wheat field', 'a warm cup of tea resting on a windowsill', 'soft golden light filling a calm quiet room'],
       textura: 'analog film, warm grain, soft warm light',
     },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
