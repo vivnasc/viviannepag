@@ -237,12 +237,12 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'entrar numa biblioteca secreta da alma',
       fraseVisual: 'existe algo por trás do que vês',
-      prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, archetypal and symbolic, the feeling of entering a secret library of the soul',
-      elementos: ['a long candlelit corridor fading into deep shadow', 'an ornate doorway opening onto radiant golden light', 'a spiral staircase descending into darkness', 'a hidden passage lit by a single distant flame', 'sheer veils parting before a shaft of gold light', 'a vast dim library aisle in warm candlelight', 'golden light pouring through an ancient stone arch', 'an antique mirror holding a single candle flame', 'a threshold between deep dark and warm gold', 'a high window dropping a shaft of light into the dark', 'an arched gateway into glowing darkness', 'a chamber of old books touched by gold light'],
-      // luz/hora (dentro do mundo escuro e cinematográfico): varia a fonte de luz
-      // sem clarear o mistério (continua chiaroscuro, ouro sobre escuro).
-      registos: ['a single candle flame in deep dark', 'one shaft of gold light through shadow', 'a dim glow fading into black', 'warm gold rim light on deep dark', 'a distant flame down a dark corridor', 'a thread of gold in moonless dark'],
-      textura: 'cinematic, chiaroscuro, symbolic, warm gold on deep dark',
+      prompt: 'cinematic warm candlelit atmosphere, glowing gold and deep teal-blue, rich and LUMINOUS (clearly lit, never pitch black), archetypal and symbolic, a secret library of the soul filled with warm light',
+      elementos: ['an open old book glowing in warm candlelight', 'a sunlit dust-filled grand hall with tall windows', 'golden light pouring generously through an ancient stone arch', 'an antique key resting on a table in warm light', 'sheer veils glowing before a bright shaft of gold light', 'a warm-lit library aisle rich with old books', 'a tall window dropping bright gold light across a room', 'an old map unrolled under warm lamplight', 'a doorway opening from shadow into radiant gold light', 'a candlelit table with an open book and a warm glow', 'morning light flooding a grand old hall', 'a spiral staircase warmly lit from above'],
+      // luz/hora (mundo da mãe): a fonte de luz varia mas SEMPRE ilumina de facto
+      // (a Vivianne pediu MENOS escuridão) — ouro quente e legível, não quase-preto.
+      registos: ['warm candle glow filling the room', 'bright gold light through tall windows', 'soft warm lamplight', 'first morning light entering a grand hall', 'firelight warming the whole scene', 'a radiant shaft of gold light'],
+      textura: 'painterly, warm gold light, rich but luminous shadow, cinematic and clearly readable',
     },
     bioPT:
       'Continuas a repetir o que te faz sofrer? Ajudo-te a reconhecer os padrões ' +
