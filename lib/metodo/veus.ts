@@ -113,4 +113,21 @@ export const VEU_SEMENTE: Record<VeuNome, { descricao: string; exemplos: string[
       'soft daylight through tall windows, serene and open',
     ],
   },
+  Dualidade: {
+    descricao: 'a separação de fundo; sentir-se só no meio de tudo, do lado de fora de um vidro; a solidão que nenhuma companhia cura.',
+    exemplos: [
+      'Estou rodeada de gente e, mesmo assim, sinto-me só.',
+      'Sinto o mundo sempre do outro lado de um vidro.',
+      'Falta-me sempre qualquer coisa que não sei nomear.',
+      'No fundo de tudo, sinto-me sozinha contra a vida.',
+    ],
+    cenas: [
+      'a vast calm sea meeting a luminous sky at the horizon',
+      'soft light through an old window onto a quiet room',
+      'a single tree in a wide open field at gentle dawn',
+      'still water reflecting a pale luminous sky, serene and open',
+      'warm light touching dust in the air of a calm space',
+      'a quiet shoreline where land and water meet in soft light',
+    ],
+  },
 };

@@ -29,6 +29,7 @@ const HASHTAGS_VEU: Record<VeuNome, string[]> = {
   Desolação: ['#solidão', '#medodovazio', '#estarsó', '#presença'],
   Horizonte: ['#viverodepois', '#ansiedadedefuturo', '#aquiagora', '#viveropresente'],
   Permanência: ['#medodemudar', '#identidade', '#reinventar', '#deixarir'],
+  Dualidade: ['#solidão', '#pertença', '#separação', '#sentidodavida', '#espiritualidade'],
 };
 
 // "isto tem um nome": a frase que entrega o conceito como recompensa.
@@ -39,6 +40,7 @@ const NOME_DO_VEU: Record<VeuNome, string> = {
   Desolação: 'No Método VS, isto tem um nome: é o Véu da Desolação.',
   Horizonte: 'No Método VS, isto tem um nome: é o Véu do Horizonte.',
   Permanência: 'No Método VS, isto tem um nome: é o Véu da Permanência.',
+  Dualidade: 'No Método VS, isto tem um nome: é o Véu da Dualidade.',
 };
 
 export function hashtagsDoReel(reel: Reel): string[] {

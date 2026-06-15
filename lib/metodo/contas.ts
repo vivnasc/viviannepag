@@ -25,7 +25,8 @@ export type VeuNome =
   | 'Esforço'
   | 'Desolação'
   | 'Horizonte'
-  | 'Permanência';
+  | 'Permanência'
+  | 'Dualidade';
 
 export interface Conta {
   id: ContaId;
@@ -211,7 +212,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     marca: 'loja', // publica na conta vivianne.dos.santos (já existente)
     essencia: 'o método inteiro',
     depois: 'Vês o que te prende e soltas o que te faz repetir, véu a véu.',
-    veus: ['Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência'],
+    // a mãe segura os SETE véus. A Dualidade (o 7.º) é território só dela: a raiz
+    // comum que as portas não cobrem (ver/vir/viver repartem os outros seis).
+    veus: ['Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência', 'Dualidade'],
     simbolo: 'o limiar',
     fundoBase:
       'an ancient ornate stone archway opening onto warm radiant golden light, ' +
@@ -243,6 +246,8 @@ export const CONTAS: Record<ContaId, Conta> = {
       'Vê o que te prende. Solta o que te faz repetir.',
       'Os padrões que te fazem repetir são véus. Aprende a vê-los e a soltá-los.',
       'Não há soltar sem ver.',
+      'Nunca, em momento nenhum, caminhaste sozinha.',
+      'A casa que procuras nunca esteve longe.',
     ],
     emoji: '✨',
   },

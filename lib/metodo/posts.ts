@@ -36,7 +36,7 @@ export interface Post {
 
 const ARTIGO: Record<VeuNome, string> = {
   Turbilhão: 'do', Esforço: 'do', Horizonte: 'do',
-  Memória: 'da', Desolação: 'da', Permanência: 'da',
+  Memória: 'da', Desolação: 'da', Permanência: 'da', Dualidade: 'da',
 };
 export const nomeVeu = (veu: VeuNome) => `Véu ${ARTIGO[veu]} ${veu}`;
 
@@ -98,6 +98,8 @@ const DESTAQUE_MANIFESTO: Record<string, string[]> = {
   'Vê o que te prende. Solta o que te faz repetir.': ['Solta'],
   'Os padrões que te fazem repetir são véus. Aprende a vê-los e a soltá-los.': ['véus'],
   'Não há soltar sem ver.': ['ver'],
+  'Nunca, em momento nenhum, caminhaste sozinha.': ['sozinha'],
+  'A casa que procuras nunca esteve longe.': ['nunca esteve longe'],
 };
 
 export function manifestoPosts(conta: ContaId): Post[] {
