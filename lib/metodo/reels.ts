@@ -486,12 +486,18 @@ export function fraseDoReel(reel: Reel): string {
 
 export function reelsDaConta(conta: ContaId): Reel[] {
   if (conta === 'mae') {
-    // a mãe é transversal (todos os véus), MAS o território PRÓPRIO dela é a
-    // Dualidade (o 7.º véu, que nenhuma porta cobre). Lidera pela Dualidade para
-    // ter assunto próprio e NÃO duplicar a semana das portas (ver/vir/viver).
-    const dual = REELS.filter((r) => r.veu === 'Dualidade');
-    const resto = REELS.filter((r) => r.veu !== 'Dualidade');
-    return [...dual, ...resto];
+    // a mãe é o PILAR transversal: fala de TODOS os 7 véus. INTERCALA os véus
+    // (um véu diferente por post) para a semana mostrar a largura do método e
+    // NÃO sair de um véu só (nem duplicar a semana de uma porta). A Dualidade
+    // vem à cabeça (é a assinatura dela, território que nenhuma porta cobre).
+    const ordem = ['Dualidade', 'Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência'];
+    const porVeu = ordem.map((v) => REELS.filter((r) => r.veu === v));
+    const out: Reel[] = [];
+    for (let i = 0, vivos = true; vivos; i++) {
+      vivos = false;
+      for (const arr of porVeu) if (i < arr.length) { out.push(arr[i]); vivos = true; }
+    }
+    return out;
   }
   return REELS.filter((r) => r.conta === conta);
 }
