@@ -50,8 +50,13 @@ export interface Conta {
   cor: string;
   /** Paleta PRÓPRIA da conta (identidade distinta, não a da veu.a.veu). */
   paleta: { bg1: string; bg2: string; accent: string };
-  /** Atmosfera emocional da conta (o "mundo" visual). Alimenta o fundo Flux:
-   *  cada imagem nasce deste mundo, com um elemento variado. */
+  /** Atmosfera emocional da conta (o "mundo" visual). Alimenta o fundo Flux.
+   *  PRINCÍPIO (descoberto a olhar contas virais): a imagem não ilustra o texto,
+   *  REPRESENTA o estado psicológico por trás dele. Por isso os `elementos` são
+   *  AMBIENTES SIMBÓLICOS de transição (limiares, portas, corredores, margens,
+   *  nevoeiro, água, escadas) que encarnam o movimento da conta (ver da margem ·
+   *  regressar a casa · atravessar o limiar para a vida · descer à estrutura
+   *  oculta), não objetos literais. A linguagem repete-se = identidade. */
   atmosfera: { sensacao: string; fraseVisual: string; prompt: string; elementos: string[]; textura: string };
   /** Linha de manifesto (declarativa, curta): o 10% manifesto. (= manifestoLinhas[0]) */
   manifestoLinha: string;
@@ -97,8 +102,8 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'silêncio depois do ruído',
       fraseVisual: 'alguém observa a tempestade sem estar dentro dela',
-      prompt: 'cool contemplative atmosphere, petrol blue and cool grey with soft white light, serene and still, the feeling of silence after the noise',
-      elementos: ['soft fog drifting over a quiet city', 'rain running down a window pane', 'a misty calm lake at dawn', 'a quiet empty room in cool grey light', 'soft reflections on wet pavement', 'mist among tall pine trees', 'a calm grey sea under a pale sky', 'condensation on cold glass', 'a lighthouse beam through fog', 'soft shadows on a pale wall', 'a still rainy street at dusk', 'a single chair by a cool grey window'],
+      prompt: 'cool contemplative atmosphere, petrol blue and cool grey with soft white light, serene and still, the feeling of watching the storm pass from a calm distance, silence after the noise',
+      elementos: ['a calm far shore facing a vast still expanse of water', 'a high window looking out over a distant misty city', 'fog slowly lifting to reveal a quiet open horizon', 'a long pier reaching out into calm pale water', 'a lighthouse beam crossing slow drifting mist', 'rain easing on the far side of a wide glass window', 'storm clouds parting over a calm distant plain', 'a still mirror-like lake holding a pale sky', 'a quiet threshold between a dim room and pale daylight', 'a wide empty shoreline under soft grey light', 'a calm bank watching a slow river drift past', 'mist clearing from tall quiet pines'],
       textura: 'shallow depth of field, soft blur, wet glass, fine grain',
     },
     manifestoLinha: 'Nem tudo o que passa pela tua cabeça merece um lugar na tua vida.',
@@ -137,8 +142,8 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'finalmente pousar',
       fraseVisual: 'o momento em que alguém larga o peso que carregava',
-      prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of finally setting down a weight, warm and sheltering, room to breathe',
-      elementos: ['a warm sunset over calm rolling hills', 'golden hour light through tall autumn trees', 'a quiet harbour glowing at golden hour', 'a calm lake at warm sunset', 'warm evening light along an old stone path', 'a soft sandy shore at the end of the day', 'a single lamp glowing in a far window at dusk', 'embers glowing softly in a quiet hearth', 'an open doorway onto a warm golden evening', 'warm sunset light over a wheat field', 'a warm cup of tea resting on a windowsill', 'soft golden light filling a calm quiet room'],
+      prompt: 'warm tender atmosphere, terracotta amber and warm brown with soft golden light, the feeling of coming home and being received after a long day, warm and sheltering, room to breathe',
+      elementos: ['a warm lit doorway at the end of a darkening path', 'a small harbour with warm lights glowing at dusk', 'a lit window seen from the cold outside, welcoming', 'a glowing hearth in a dim quiet room', 'a sheltered hollow cupped in warm golden light', 'a covered porch glowing at the end of the day', 'lantern light marking a path leading home', 'a warm passage opening toward golden light', 'an open gate into a sheltered warm garden', 'a quiet valley holding the last warm light', 'a soft nest of warm light deep in shadow', 'a doorway spilling warm light onto a cold step'],
       textura: 'analog film, warm grain, soft warm light',
     },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
@@ -179,8 +184,8 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'living green nature, soft green and warm solar gold light, airy alive and bright, the feeling of stepping back into your own life',
-      elementos: ['a sunlit green meadow with wildflowers', 'rolling green hills under a clear sky', 'a single great tree in an open green field', 'a calm green riverbank in morning light', 'a lush garden in early summer', 'a wide green valley opening to the light', 'a forest clearing with light breaking through', 'a field of tall green grass swaying', 'green vineyard rows in warm light', 'a clear stream over green mossy stones', 'a sunlit path through a green park', 'fresh green leaves close up in soft light'],
+      prompt: 'living green nature, soft green and warm solar gold light, airy alive and bright, the feeling of crossing the threshold into your own life',
+      elementos: ['an open doorway onto a sunlit green landscape', 'a threshold from shadow into bright green light', 'a path beginning across a sunlit green meadow', 'wide gates opening onto green fields in the sun', 'a bridge crossing into a bright green valley', 'a forest opening into a clearing full of light', 'an open window onto a living green morning', 'a green hillside path rising toward open sky', 'light pouring through an archway into greenery', 'stepping stones crossing a clear green stream', 'a road unfolding through bright green hills', 'a garden gate ajar onto sunlit green'],
       textura: 'air, space, depth, verdant and clear, soft warm sunlight',
     },
     manifestoLinha: 'Não estás atrasada para lugar nenhum.',
@@ -225,7 +230,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       sensacao: 'entrar numa biblioteca secreta da alma',
       fraseVisual: 'existe algo por trás do que vês',
       prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, candlelit, archetypal and symbolic, the feeling of entering a secret library of the soul',
-      elementos: ['a long candlelit corridor', 'an ornate doorway opening to golden light', 'a spiral staircase fading into shadow', 'old books beside a single candle', 'sheer veils drifting in golden light', 'an antique key on dark velvet', 'golden light pouring through a stone arch', 'a dim library aisle with warm light', 'a single lantern in the dark', 'gold dust floating in a shaft of light', 'a moonlit threshold', 'an old mirror in candlelight'],
+      elementos: ['a long candlelit corridor fading into deep shadow', 'an ornate doorway opening onto radiant golden light', 'a spiral staircase descending into darkness', 'a hidden passage lit by a single distant flame', 'sheer veils parting before a shaft of gold light', 'a vast dim library aisle in warm candlelight', 'golden light pouring through an ancient stone arch', 'an antique mirror holding a single candle flame', 'a threshold between deep dark and warm gold', 'a high window dropping a shaft of light into the dark', 'an arched gateway into glowing darkness', 'a chamber of old books touched by gold light'],
       textura: 'cinematic, chiaroscuro, symbolic, warm gold on deep dark',
     },
     bioPT:
