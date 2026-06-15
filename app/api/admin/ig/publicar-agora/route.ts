@@ -82,7 +82,10 @@ export async function POST(req: Request) {
   } else if (conta === 'loja') {
     r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
   } else if (VIDEO.includes(chave) && d?.videoUrl) {
-    r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
+    // CAPA do reel: o poster do último frame (com a frase) está em d.imagens[0].
+    const coverUrl = d.imagens?.[0];
+    const thumbOffsetMs = (chave === 'kinetico' || chave === 'domingo') ? 6000 : undefined;
+    r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl, coverUrl, thumbOffsetMs });
   } else if (CARROSSEL.includes(chave)) {
     r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
   } else if (chave === 'infografico') {
