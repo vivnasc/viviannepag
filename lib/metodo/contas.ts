@@ -179,8 +179,8 @@ export const CONTAS: Record<ContaId, Conta> = {
     atmosfera: {
       sensacao: 'voltar a entrar na própria vida',
       fraseVisual: 'alguém que deixa de esperar e começa a caminhar',
-      prompt: 'lush living green atmosphere, verdant plants and foliage, soft green and warm solar gold light, airy alive and bright, the feeling of stepping back into your own life',
-      elementos: ['sunlight through fresh green leaves', 'a lush green forest clearing', 'ferns unfurling in soft green light', 'a green meadow full of wildflowers', 'morning light through a green canopy', 'dew on green grass at sunrise', 'a winding path through green woods', 'climbing plants on a sunlit wall', 'a green valley opening to the light', 'tall grasses swaying in warm light', 'moss and green leaves in dappled light', 'a garden alive in early summer light'],
+      prompt: 'living green nature, soft green and warm solar gold light, airy alive and bright, the feeling of stepping back into your own life',
+      elementos: ['a sunlit green meadow with wildflowers', 'rolling green hills under a clear sky', 'a single great tree in an open green field', 'a calm green riverbank in morning light', 'a lush garden in early summer', 'a wide green valley opening to the light', 'a forest clearing with light breaking through', 'a field of tall green grass swaying', 'green vineyard rows in warm light', 'a clear stream over green mossy stones', 'a sunlit path through a green park', 'fresh green leaves close up in soft light'],
       textura: 'air, space, depth, verdant and clear, soft warm sunlight',
     },
     manifestoLinha: 'Não estás atrasada para lugar nenhum.',
@@ -264,13 +264,23 @@ export function getConta(id: string): Conta | undefined {
 const COMUM = 'fine-art painterly, contemplative, generous calm space, NO people, NO faces, NO figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
 // enquadramentos rodam para dar imagens DISTINTAS mesmo dentro do mesmo mundo.
 const ENQUADRAMENTOS = ['wide cinematic shot', 'intimate close detail', 'soft-focus background', 'seen from above', 'low warm angle', 'distant atmospheric view'];
-export function fundoDaConta(conta: Conta, i = 0): string {
+const mod = (n: number, m: number) => ((n % m) + m) % m;
+// i = índice do ELEMENTO (assunto). j = índice do ENQUADRAMENTO (por defeito = i,
+// mas pode ser dado à parte para variar o enquadramento sem repetir o assunto).
+export function fundoDaConta(conta: Conta, i = 0, j = i): string {
   const els = conta.atmosfera.elementos;
-  const idx = ((i % els.length) + els.length) % els.length;
-  const el = els[idx];
-  const enq = ENQUADRAMENTOS[((i % ENQUADRAMENTOS.length) + ENQUADRAMENTOS.length) % ENQUADRAMENTOS.length];
+  const el = els[mod(i, els.length)];
+  const enq = ENQUADRAMENTOS[mod(j, ENQUADRAMENTOS.length)];
   // o ASSUNTO (elemento) varia muito; a atmosfera dá só o ambiente (luz, cor, sensação).
   return `${el}, ${enq}, ${conta.atmosfera.prompt}, ${conta.atmosfera.textura}, ${COMUM}`;
+}
+
+/** O índice do elemento atual de um prompt já gerado (lê o início do notaVisual).
+ *  Serve para o "outra imagem" escolher um assunto DIFERENTE do que já lá está. */
+export function indiceElementoAtual(conta: Conta, notaVisual?: string | null): number {
+  if (!notaVisual) return -1;
+  const inicio = notaVisual.split(',')[0].trim().toLowerCase();
+  return conta.atmosfera.elementos.findIndex((e) => e.trim().toLowerCase() === inicio);
 }
 
 // O hub (conta-mãe) e a didática, aqui só para referência (não geramos por elas).
