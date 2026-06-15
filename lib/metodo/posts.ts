@@ -40,10 +40,14 @@ const ARTIGO: Record<VeuNome, string> = {
 };
 export const nomeVeu = (veu: VeuNome) => `Véu ${ARTIGO[veu]} ${veu}`;
 
-function reconhecimentoDoReel(r: Reel): Post {
+// prefixo de id: a mãe é transversal e reusa os reels das 3 portas, por isso
+// os ids são namespaced ('mae-...') para não colidirem com os das portas.
+const pid = (conta: ContaId, id: string) => (conta === 'mae' ? `mae-${id}` : id);
+
+function reconhecimentoDoReel(r: Reel, conta: ContaId): Post {
   return {
-    id: r.id,
-    conta: r.conta,
+    id: pid(conta, r.id),
+    conta,
     tipo: 'reconhecimento',
     veu: r.veu,
     texto: r.porta,
@@ -55,10 +59,10 @@ function reconhecimentoDoReel(r: Reel): Post {
   };
 }
 
-function revelacaoDoReel(r: Reel): Post {
+function revelacaoDoReel(r: Reel, conta: ContaId): Post {
   return {
-    id: `${r.id}-rev`,
-    conta: r.conta,
+    id: pid(conta, `${r.id}-rev`),
+    conta,
     tipo: 'revelacao',
     veu: r.veu,
     texto: r.sala,
@@ -71,13 +75,13 @@ function revelacaoDoReel(r: Reel): Post {
 }
 
 export function reconhecimentoPosts(conta: ContaId): Post[] {
-  return reelsDaConta(conta).map(reconhecimentoDoReel);
+  return reelsDaConta(conta).map((r) => reconhecimentoDoReel(r, conta));
 }
 // Todas as revelações disponíveis (aforismos), as mais fortes primeiro, para dar
 // volume sem repetir tão cedo.
 export function revelacaoPosts(conta: ContaId): Post[] {
   const reels = reelsDaConta(conta);
-  return [...reels.filter((r) => r.revelacaoForte), ...reels.filter((r) => !r.revelacaoForte)].map(revelacaoDoReel);
+  return [...reels.filter((r) => r.revelacaoForte), ...reels.filter((r) => !r.revelacaoForte)].map((r) => revelacaoDoReel(r, conta));
 }
 export function manifestoPosts(conta: ContaId): Post[] {
   const c = CONTAS[conta];
@@ -99,7 +103,7 @@ export function postsDaConta(conta: ContaId): Post[] {
 }
 
 export function getPost(id: string): Post | undefined {
-  for (const conta of ['ver', 'vir', 'viver'] as ContaId[]) {
+  for (const conta of ['ver', 'vir', 'viver', 'mae'] as ContaId[]) {
     const p = postsDaConta(conta).find((x) => x.id === id);
     if (p) return p;
   }

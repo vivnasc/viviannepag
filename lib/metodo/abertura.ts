@@ -10,7 +10,8 @@ import { ContaId, CONTAS } from './contas';
 import { Reel, getReel } from './reels';
 
 /** O manifesto de cada conta: o primeiro post, a porta da própria conta. */
-export const MANIFESTOS: Record<ContaId, Reel> = {
+type Porta = 'ver' | 'vir' | 'viver';
+export const MANIFESTOS: Record<Porta, Reel> = {
   ver: {
     id: 'ver-00',
     conta: 'ver',
@@ -46,9 +47,11 @@ export const MANIFESTOS: Record<ContaId, Reel> = {
 /** Legenda do manifesto: apresenta a conta, o método e o convite. */
 export function legendaManifesto(conta: ContaId): string {
   const c = CONTAS[conta];
+  const m = MANIFESTOS[conta as Porta];
+  if (!m) return '';
   const paras = [
-    MANIFESTOS[conta].porta,
-    MANIFESTOS[conta].sala,
+    m.porta,
+    m.sala,
     `Bem-vinda a ${c.handle}, a porta do ${c.movimento} dentro do Método VS · Ver e Soltar. ${c.depois}`,
     `${c.ctaPT} Caminhamos um véu de cada vez.`,
     'Segue, e guarda esta publicação para o dia em que precisares.',
@@ -58,7 +61,7 @@ export function legendaManifesto(conta: ContaId): string {
 
 // A ordem de lançamento de cada conta: manifesto, depois 6 reels alternando os
 // dois véus do movimento (o mais forte primeiro, como âncora).
-const SEQUENCIAS: Record<ContaId, string[]> = {
+const SEQUENCIAS: Record<Porta, string[]> = {
   ver: ['ver-00', 'ver-01', 'ver-05', 'ver-04', 'ver-06', 'ver-03', 'ver-07'],
   vir: ['vir-00', 'vir-01', 'vir-05', 'vir-02', 'vir-06', 'vir-04', 'vir-07'],
   viver: ['viver-00', 'viver-01', 'viver-05', 'viver-03', 'viver-06', 'viver-02', 'viver-07'],
@@ -67,7 +70,7 @@ const SEQUENCIAS: Record<ContaId, string[]> = {
 /** Resolve um id para um Reel (manifesto ou biblioteca). */
 export function resolverReel(id: string): Reel | undefined {
   if (id.endsWith('-00')) {
-    const conta = id.replace('-00', '') as ContaId;
+    const conta = id.replace('-00', '') as Porta;
     return MANIFESTOS[conta];
   }
   return getReel(id);
@@ -75,7 +78,7 @@ export function resolverReel(id: string): Reel | undefined {
 
 /** A sequência de abertura de uma conta, já resolvida em Reels. */
 export function aberturaDaConta(conta: ContaId): Reel[] {
-  return SEQUENCIAS[conta]
+  return (SEQUENCIAS[conta as Porta] ?? [])
     .map((id) => resolverReel(id))
     .filter((r): r is Reel => Boolean(r));
 }

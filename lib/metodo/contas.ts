@@ -18,7 +18,7 @@
 //   pintada, sfumato, contemplativo e intemporal. Sem pessoas, sem texto.
 //   Cada conta tem o SEU símbolo: a margem · o colo · descalça.
 
-export type ContaId = 'ver' | 'vir' | 'viver';
+export type ContaId = 'ver' | 'vir' | 'viver' | 'mae';
 export type VeuNome =
   | 'Turbilhão'
   | 'Memória'
@@ -29,8 +29,8 @@ export type VeuNome =
 
 export interface Conta {
   id: ContaId;
-  /** Movimento (canon): Ver · Vir · Viver. */
-  movimento: 'Ver' | 'Vir' | 'Viver';
+  /** Movimento (canon): Ver · Vir · Viver (a mãe é o método inteiro). */
+  movimento: string;
   /** Handle de Instagram (a fechar, ver CONTAS-METODO-VS.md). */
   handle: string;
   /** marca = id da conta no enum partilhado (lib/instagram/contas.ts). */
@@ -202,9 +202,53 @@ export const CONTAS: Record<ContaId, Conta> = {
     manualPrecoEur: 9,
     manualFonte: 'VIVER-SOLTAR-PT.md',
   },
+  // A conta-mãe: a largura (o método inteiro, transversal), a voz da autora,
+  // difunde o pilar Os Sete Véus (€19). É o mundo do mistério (escuro, cinematográfico).
+  mae: {
+    id: 'mae',
+    movimento: 'Ver e Soltar',
+    handle: 'vivianne.dos.santos',
+    marca: 'loja', // publica na conta vivianne.dos.santos (já existente)
+    essencia: 'o método inteiro',
+    depois: 'Vês o que te prende e soltas o que te faz repetir, véu a véu.',
+    veus: ['Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência'],
+    simbolo: 'o limiar',
+    fundoBase:
+      'an ancient ornate stone archway opening onto warm radiant golden light, ' +
+      'seen straight on, a threshold, cinematic chiaroscuro',
+    cor: '#d8b25a',
+    paleta: { bg1: '#1a1726', bg2: '#0b0a13', accent: '#d8b25a' }, // preto, dourado, azul profundo
+    atmosfera: {
+      sensacao: 'entrar numa biblioteca secreta da alma',
+      fraseVisual: 'existe algo por trás do que vês',
+      prompt: 'cinematic mysterious atmosphere, deep black, gold and deep blue, candlelit, archetypal and symbolic, the feeling of entering a secret library of the soul',
+      elementos: ['ancient veils drifting in candlelight', 'a long candlelit corridor', 'an ornate doorway opening to golden light', 'a spiral staircase in shadow', 'old books and a single candle', 'golden light in deep shadow', 'a threshold opening to warm light'],
+      textura: 'cinematic, chiaroscuro, symbolic, warm gold on deep dark',
+    },
+    bioPT:
+      'Continuas a repetir o que te faz sofrer? Ajudo-te a reconhecer os padrões ' +
+      'invisíveis por trás da ansiedade, da culpa e das relações que se repetem. ' +
+      'Método VS · Ver e Soltar 📖 Os Sete Véus ↓',
+    bioEN:
+      'Do you keep repeating what makes you suffer? I help you recognise the ' +
+      'invisible patterns behind anxiety, guilt and relationships that keep ' +
+      'repeating. Method VS 📖 The Seven Veils ↓',
+    comentaPalavra: 'VÉUS',
+    ctaPT: 'Descobre qual é o teu véu.',
+    manualNome: 'Os Sete Véus',
+    manualPrecoEur: 19,
+    manualFonte: 'OS-7-VEUS-v2.md',
+    manifestoLinha: 'Vê o que te prende. Solta o que te faz repetir.',
+    manifestoLinhas: [
+      'Vê o que te prende. Solta o que te faz repetir.',
+      'Os padrões que te fazem repetir são véus. Aprende a vê-los e a soltá-los.',
+      'Não há soltar sem ver.',
+    ],
+    emoji: '✨',
+  },
 };
 
-export const CONTAS_LISTA: Conta[] = [CONTAS.ver, CONTAS.vir, CONTAS.viver];
+export const CONTAS_LISTA: Conta[] = [CONTAS.mae, CONTAS.ver, CONTAS.vir, CONTAS.viver];
 
 export function getConta(id: string): Conta | undefined {
   return (CONTAS as Record<string, Conta>)[id];

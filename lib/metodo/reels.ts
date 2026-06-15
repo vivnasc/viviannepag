@@ -329,6 +329,7 @@ export function fraseDoReel(reel: Reel): string {
 }
 
 export function reelsDaConta(conta: ContaId): Reel[] {
+  if (conta === 'mae') return REELS; // a mãe é transversal: todos os véus
   return REELS.filter((r) => r.conta === conta);
 }
 
