@@ -6,6 +6,7 @@ import { limparTravessoes } from '@/lib/texto';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, FUNDO_FAMILIA } from '@/lib/metodo/contas';
 import { horaDoMetodo } from '@/lib/metodo/agenda';
+import { gerarFundoIA } from '@/lib/metodo/ia';
 import { getPost } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 
@@ -51,7 +52,11 @@ export async function POST(req: Request) {
   const destaque = limparTravessoes(post.destaque);
   const legenda = limparTravessoes(legendaDoPost(post));
   const hashtags = hashtagsDoPost(post);
-  const promptFundo = limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`);
+  // fundo: o Claude escreve o prompt (criativo e variado), como nos outros
+  // geradores; sem API key cai no fundo curado + família da conta.
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  let promptFundo = limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`);
+  if (apiKey) { try { promptFundo = await gerarFundoIA(conta, [], apiKey); } catch { /* fica o fallback */ } }
 
   // slug ESTÁVEL por post: regenerar atualiza a mesma coleção (sem duplicar).
   const slug = `metodo-${post.id}`;

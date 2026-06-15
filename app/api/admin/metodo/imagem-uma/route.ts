@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId } from '@/lib/metodo/contas';
+import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -44,14 +45,21 @@ export async function POST(req: Request) {
   const slide = row.dias?.[0]?.slides?.[0];
   if (!slide) return NextResponse.json({ erro: 'sem-slide' }, { status: 400 });
 
-  // variação NOVA: escolhe um ELEMENTO (assunto) DIFERENTE do atual, para nunca
-  // sair "a mesma imagem". Lê o assunto atual do notaVisual e salta para outro.
+  // fallback (sem API key ou se a IA falhar): salta para outro elemento da lista.
   const els = conta.atmosfera.elementos;
   const atual = indiceElementoAtual(conta, slide.notaVisual);
   let elIdx = Math.floor(Math.random() * els.length);
   if (els.length > 1 && elIdx === atual) elIdx = (elIdx + 1) % els.length; // garante outro assunto
-  const enqIdx = Math.floor(Math.random() * 6); // enquadramento à parte (mais variação)
-  const prompt = fundoDaConta(conta, elIdx, enqIdx);
+  const enqIdx = Math.floor(Math.random() * 6);
+  let prompt = fundoDaConta(conta, elIdx, enqIdx);
+
+  // PREFERIDO: o Claude escreve um fundo DIFERENTE do atual (evita o assunto que
+  // lá está), criativo e variado — como nos outros geradores.
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (apiKey) {
+    try { prompt = await gerarFundoIA(conta, slide.notaVisual ? [assuntoCurto(slide.notaVisual)] : [], apiKey); }
+    catch { /* fica o fallback */ }
+  }
   const img = await fundoImagem(prompt, slug);
   if (!img) return NextResponse.json({ erro: 'flux-falhou' }, { status: 502 });
 
