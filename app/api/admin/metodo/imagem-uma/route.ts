@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS, fundoDaConta, ContaId } from '@/lib/metodo/contas';
+import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId } from '@/lib/metodo/contas';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -44,9 +44,14 @@ export async function POST(req: Request) {
   const slide = row.dias?.[0]?.slides?.[0];
   if (!slide) return NextResponse.json({ erro: 'sem-slide' }, { status: 400 });
 
-  // variação NOVA: índice aleatório (outro elemento/enquadramento que a atual).
-  const i = Math.floor(Math.random() * conta.atmosfera.elementos.length * 6) + Math.floor(Math.random() * 7);
-  const prompt = fundoDaConta(conta, i);
+  // variação NOVA: escolhe um ELEMENTO (assunto) DIFERENTE do atual, para nunca
+  // sair "a mesma imagem". Lê o assunto atual do notaVisual e salta para outro.
+  const els = conta.atmosfera.elementos;
+  const atual = indiceElementoAtual(conta, slide.notaVisual);
+  let elIdx = Math.floor(Math.random() * els.length);
+  if (els.length > 1 && elIdx === atual) elIdx = (elIdx + 1) % els.length; // garante outro assunto
+  const enqIdx = Math.floor(Math.random() * 6); // enquadramento à parte (mais variação)
+  const prompt = fundoDaConta(conta, elIdx, enqIdx);
   const img = await fundoImagem(prompt, slug);
   if (!img) return NextResponse.json({ erro: 'flux-falhou' }, { status: 502 });
 
