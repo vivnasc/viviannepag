@@ -7,11 +7,14 @@ import { VeuNome, Conta } from './contas';
 import { VEU_SEMENTE } from './veus';
 import { limparTravessoes } from '@/lib/texto';
 
-// Regras fixas do fundo (incluídas sempre, mesmo que o modelo as esqueça).
+// Regras fixas do fundo (incluídas sempre). A ASSINATURA (pintura renascentista,
+// sfumato, luz de ouro) é o que torna o feed inconfundível e não genérico
+// (ver COVER-PROMPTS-METODO-VS.md). NÃO é fotografia.
 const FUNDO_REGRAS =
-  'fine-art painterly background, soft natural light, luminous and airy, contemplative and serene, ' +
-  'generous calm empty space in the centre for an overlaid sentence, NO people, NO faces, NO figures, ' +
-  'NO hands, NO text, NO letters, NO watermark, vertical 9:16';
+  'fine-art painterly oil painting in a renaissance manner, sfumato, visible painterly brushwork and texture, ' +
+  'a signature warm gold light, contemplative and timeless, luminous and readable (never near-black), ' +
+  'NOT a photograph, NOT stock photography, generous calm empty space in the centre for an overlaid sentence, ' +
+  'NO people, NO faces, NO figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
 
 // assunto curto de um prompt (para alimentar a lista "evita") — as primeiras palavras.
 export function assuntoCurto(prompt: string): string {
@@ -24,14 +27,16 @@ export function assuntoCurto(prompt: string): string {
 // É isto que mata a monotonia (substitui a lista fixa fundoDaConta).
 export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string): Promise<string> {
   const a = conta.atmosfera;
-  const sys = `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post de Instagram contemplativo (Método VS, @${conta.handle}).
+  const sys = `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post do Método VS (@${conta.handle}).
 
-MUNDO desta conta (ÚNICO fio condutor, manter sempre): ${a.prompt}. Sensação: ${a.sensacao}. O que representa: ${conta.depois} Símbolo: ${conta.simbolo}.
+ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca e NUNCA genérico): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), LUZ DE OURO QUENTE como assinatura, contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
 
-A PALETA/ATMOSFERA acima é a única coisa constante. TUDO o resto VARIA a cada imagem, senão o feed fica monótono:
-- ASSUNTO: a paleta NÃO dita o assunto. Ex.: um mundo verde é prados, água, plantas, estufas, interiores com plantas, colinas, lagos, ervas — NÃO só floresta. Escolhe um assunto coerente mas inesperado, sem pessoas.
+MUNDO desta conta (paleta/atmosfera, o fio condutor): ${a.prompt}. Sensação: ${a.sensacao}. Representa: ${conta.depois} Símbolo: ${conta.simbolo}.
+
+VARIA a cada imagem (senão fica monótono), MANTENDO sempre a assinatura e a paleta acima:
+- ASSUNTO: a paleta NÃO dita o assunto (ex.: um mundo verde é prados, água, plantas, estufas, interiores com plantas, colinas, lagos — NÃO só floresta). Assunto coerente mas inesperado, sem pessoas.
 - COMPOSIÇÃO: varia (plano largo / grande plano macro / interior / vista de cima / ao nível do olhar).
-- LUZ/HORA: varia (madrugada / manhã clara / fim de tarde dourado / céu encoberto / contraluz / hora azul).
+- LUZ/HORA: varia a hora (madrugada, manhã, fim de tarde, encoberto, contraluz) mas SEMPRE com a luz de ouro quente da assinatura.
 ${evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 Termina sempre com: ${FUNDO_REGRAS}.
