@@ -34,7 +34,7 @@ async function fundoImagem(prompt: string, slug: string): Promise<{ url: string 
   return { url: null, erro: ultimoErro || 'falhou sem detalhe' };
 }
 
-type Slide = { imageUrl?: string | null; notaVisual?: string };
+type Slide = { imageUrl?: string | null; notaVisual?: string; texto?: string };
 type Dia = { slides?: Slide[] };
 type Row = { slug: string; dias?: Dia[] | null; theme?: { metodo?: { conta?: string } } | null };
 
@@ -69,9 +69,9 @@ export async function POST(req: Request) {
     const nv = r.dias?.[0]?.slides?.[0]?.notaVisual;
     if (nv) evitar.push(assuntoCurto(nv));
   }
-  async function promptDe(i: number): Promise<string> {
+  async function promptDe(i: number, frase?: string): Promise<string> {
     if (apiKey) {
-      try { const p = await gerarFundoIA(conta, evitar, apiKey); evitar.push(assuntoCurto(p)); return p; }
+      try { const p = await gerarFundoIA(conta, evitar, apiKey, frase); evitar.push(assuntoCurto(p)); return p; }
       catch { /* cai no fallback abaixo */ }
     }
     return fundoDaConta(conta, evitar.length + i);
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
     const r = lote[i];
     const slide = r.dias?.[0]?.slides?.[0];
     if (!slide) continue;
-    const prompt = await promptDe(i);
+    const prompt = await promptDe(i, slide.texto); // a imagem encarna a FRASE deste post
     const { url, erro } = await fundoImagem(prompt, r.slug);
     if (!url) { if (erro) ultimoErro = erro; continue; }
     slide.imageUrl = url;

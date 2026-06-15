@@ -56,7 +56,7 @@ export async function POST(req: Request) {
   // geradores; sem API key cai no fundo curado + família da conta.
   const apiKey = process.env.ANTHROPIC_API_KEY;
   let promptFundo = limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`);
-  if (apiKey) { try { promptFundo = await gerarFundoIA(conta, [], apiKey); } catch { /* fica o fallback */ } }
+  if (apiKey) { try { promptFundo = await gerarFundoIA(conta, [], apiKey, texto); } catch { /* fica o fallback */ } }
 
   // slug ESTÁVEL por post: regenerar atualiza a mesma coleção (sem duplicar).
   const slug = `metodo-${post.id}`;

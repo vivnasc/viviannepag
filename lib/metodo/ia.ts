@@ -25,18 +25,16 @@ export function assuntoCurto(prompt: string): string {
 // composição e luz diferentes a cada vez), mantendo só a paleta/atmosfera da
 // conta como fio condutor. Recebe `evitar` = assuntos já usados, para não repetir.
 // É isto que mata a monotonia (substitui a lista fixa fundoDaConta).
-export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string): Promise<string> {
+export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string, frase?: string): Promise<string> {
   const a = conta.atmosfera;
   const sys = `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post do Método VS (@${conta.handle}).
 
-ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca e NUNCA genérico): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), LUZ DE OURO QUENTE como assinatura, contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
+ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
 
-MUNDO desta conta (paleta/atmosfera, o fio condutor): ${a.prompt}. Sensação: ${a.sensacao}. Representa: ${conta.depois} Símbolo: ${conta.simbolo}.
-
-VARIA a cada imagem (senão fica monótono), MANTENDO sempre a assinatura e a paleta acima:
-- ASSUNTO: a paleta/luz é só o AMBIENTE, NÃO dita o assunto. Escolhe cenas REAIS e variadas — interiores, objetos do dia a dia, janelas, mesas, água, ruas, paisagens, detalhes próximos — que encarnem o SIGNIFICADO da conta. NÃO fiques preso a um único tipo de cena (ex.: não repitas plantas/vegetação). Sem pessoas.
-- COMPOSIÇÃO: varia (plano largo / grande plano macro / interior / vista de cima / ao nível do olhar).
-- LUZ/HORA: varia a hora (madrugada, manhã, fim de tarde, encoberto, contraluz) mas SEMPRE com a luz de ouro quente da assinatura.
+MUNDO desta conta (a PALETA/luz, o fio condutor de identidade): ${a.prompt}. Sensação: ${a.sensacao}. Representa: ${conta.depois}
+${frase ? `A FRASE deste post é: «${frase}».
+CONEXÃO IMAGEM↔TEXTO (o mais importante, como nas séries VC Sabia / Hoje em Mim): a imagem tem de ENCARNAR esta frase — uma cena ou objeto concreto que representa o ESTADO ou a METÁFORA por trás dela, NÃO um fundo genérico. A FRASE manda o ASSUNTO; o mundo da conta dá só a PALETA, a luz e o tratamento. Ex.: uma frase sobre adiar a vida → algo que evoque espera/limiar; sobre o corpo → algo do corpo/casa; etc. Concreto, sensorial, sem pessoas.` : `ASSUNTO: cena real e concreta que encarne o significado da conta (interiores, objetos, janelas, água, paisagens, detalhes), variada, sem pessoas.`}
+COMPOSIÇÃO: varia (plano largo / macro / interior / vista de cima / ao nível do olhar). LUZ: dentro da paleta da conta, varia a hora.
 ${evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 Termina sempre com: ${FUNDO_REGRAS}.
