@@ -111,6 +111,22 @@ export default function MetodoContaPage() {
     finally { setOrgBusy(false); recarregar(); }
   }, [conta, orgBusy, recarregar]);
 
+  // hora de publicação em MASSA: a Vivianne quer as frases de manhã (11h).
+  const [horaInput, setHoraInput] = useState('11:00');
+  const [horaBusy, setHoraBusy] = useState(false);
+  const definirHora = useCallback(async () => {
+    if (!conta || horaBusy) return;
+    setHoraBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/hora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, hora: horaInput }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`${j.mudados ?? 0} posts passam a publicar às ${j.hora}.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setHoraBusy(false); }
+  }, [conta, horaBusy, horaInput, recarregar]);
+
   // apagar TUDO desta conta (recomeçar do zero).
   const [apagarBusy, setApagarBusy] = useState(false);
   const apagarTudo = useCallback(async () => {
@@ -303,6 +319,13 @@ export default function MetodoContaPage() {
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
+            {geradosConta.length > 0 && (
+              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 px-2 py-1">
+                <span className="opacity-70">hora:</span>
+                <input type="time" value={horaInput} onChange={(e) => setHoraInput(e.target.value)} className="bg-transparent text-[#F2E8DC] outline-none [color-scheme:dark]" />
+                <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: conta.cor, color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
+              </span>
+            )}
             {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
         </header>

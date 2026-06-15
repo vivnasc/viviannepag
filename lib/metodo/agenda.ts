@@ -1,8 +1,10 @@
 // Método VS · agenda das portas (cadência de reels)
 //
 // As portas vivem de REELS (carrosséis ficam na mãe e na veu.a.veu).
-// Cadência sustentável: 3 reels por semana por conta (segunda, quarta, sexta),
-// às 20h (a dor lê-se melhor à noite, quando a cabeça não desliga).
+// Cadência sustentável: 3 reels por semana por conta (segunda, quarta, sexta).
+//
+// HORA: as frases publicam-se DE MANHÃ, às 11h (a Vivianne pediu; o conteúdo da
+// manhã é a frase). A hora é editável em massa em /admin/metodo (botão "hora").
 //
 // REGRA DE TIMEZONE (aprendida à força): datas formatadas a partir de
 // componentes LOCAIS, nunca toISOString (em UTC+1 recua um dia).
@@ -12,7 +14,7 @@ import { Reel } from './reels';
 import { aberturaDaConta } from './abertura';
 
 export const DIAS_POST = [1, 3, 5]; // segunda, quarta, sexta (getDay: 0=dom)
-export const HORA_POST = '20:00';
+export const HORA_POST = '11:00';
 
 /** 'YYYY-MM-DD' a partir de componentes locais (nunca toISOString). */
 export function dataLocal(d: Date): string {
