@@ -251,6 +251,21 @@ export default function MetodoContaPage() {
     finally { setMelBusy(null); }
   }, [melBusy, recarregar]);
 
+  // TEXTO NOVO mantendo a IMAGEM: frase nova na voz certa da conta (mãe = Dualidade),
+  // para destravar "imagem boa, texto mau" sem perder a imagem nem gastar imagem.
+  const [txtBusy, setTxtBusy] = useState<string | null>(null);
+  const textoNovo = useCallback(async (slug: string) => {
+    if (txtBusy) return;
+    setTxtBusy(slug); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/texto-novo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg(`Texto novo (imagem mantida): «${j.texto}»`); setDetalhe((d) => (d && d.slug === slug ? { ...d, texto: j.texto, conceito: j.conceito ?? d.conceito, videoUrl: null } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setTxtBusy(null); }
+  }, [txtBusy, recarregar]);
+
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
       <p>Conta desconhecida. <Link className="underline" href="/admin/metodo">Voltar</Link></p>
@@ -432,7 +447,8 @@ export default function MetodoContaPage() {
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
               {detalhe.imageUrl && <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title="trocar por outra imagem (mantém o texto)" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : 'outra imagem'}</button>}
-              <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
+              <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta (mãe = Dualidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>
+              <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual (tira ambiguidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
             </div>
