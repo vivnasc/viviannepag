@@ -10,6 +10,7 @@ import { Post, nomeVeu } from '@/lib/metodo/posts';
 import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
 import { fraseReconhecimento } from '@/lib/metodo/ia';
 import { planoSemana } from '@/lib/metodo/semana';
+import { VEU_SEMENTE } from '@/lib/metodo/veus';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -82,9 +83,11 @@ export async function POST(req: Request) {
         const veu = d.post.veu!;
         const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
         const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
+        const cenas = VEU_SEMENTE[veu].cenas;
+        const cena = cenas[i % cenas.length]; // cena VARIADA (não repetir imagens)
         try {
           const texto = await fraseReconhecimento(veu, apiKey);
-          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: fonte?.fundoCena ?? conta.fundoBase, fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
+          const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: cena, fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
           return { post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(`${post.fundoCena}. ${FUNDO_FAMILIA}`), data: d.data, hora: d.hora } as Pendente;
         } catch { return null; }
       }
