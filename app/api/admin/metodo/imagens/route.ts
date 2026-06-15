@@ -13,18 +13,23 @@ export const maxDuration = 300;
 // desperdiça créditos). Concorrência baixa + retry. Processa um lote por pedido
 // e devolve quantos faltam (o cliente repete até acabar).
 
-const LIMITE = 10;
+const LIMITE = 4; // poucas por pedido: geração sequencial + respeito ao rate limit; o cliente repete
 
 async function fundoImagem(prompt: string, slug: string): Promise<{ url: string | null; erro?: string }> {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return { url: null, erro: 'falta REPLICATE_API_TOKEN' };
   if (!prompt) return { url: null, erro: 'prompt vazio' };
   let ultimoErro = '';
-  for (let t = 0; t < 3; t++) {
+  for (let t = 0; t < 4; t++) {
     try {
       const url = await gerarImagemFlux(prompt, token, { raw: true });
       try { return { url: await guardarImagem(url, `metodo/${slug}/fundo-${Date.now()}.jpg`) }; } catch { return { url }; }
-    } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); await new Promise((r) => setTimeout(r, 1200 * (t + 1))); }
+    } catch (e) {
+      ultimoErro = e instanceof Error ? e.message : String(e);
+      // 429 (rate limit da Replicate: ~6/min, burst 1) → espera mais (~12s) antes de repetir.
+      const espera = /429|throttl/i.test(ultimoErro) ? 12000 : 1500 * (t + 1);
+      await new Promise((r) => setTimeout(r, espera));
+    }
   }
   return { url: null, erro: ultimoErro || 'falhou sem detalhe' };
 }
@@ -74,20 +79,19 @@ export async function POST(req: Request) {
 
   let feitas = 0;
   let ultimoErro = '';
-  for (let c = 0; c < lote.length; c += 3) {
-    const bloco = lote.slice(c, c + 3);
-    // prompts SEQUENCIAIS (para a lista "evitar" crescer e diversificar); imagens em paralelo.
-    const comPrompt: { r: Row; prompt: string }[] = [];
-    for (let k = 0; k < bloco.length; k++) comPrompt.push({ r: bloco[k], prompt: await promptDe(c + k) });
-    await Promise.all(comPrompt.map(async ({ r, prompt }) => {
-      const slide = r.dias![0].slides![0];
-      const { url, erro } = await fundoImagem(prompt, r.slug);
-      if (!url) { if (erro) ultimoErro = erro; return; }
-      slide.imageUrl = url;
-      slide.notaVisual = prompt; // grava o prompt usado
-      const { error: e2 } = await supabase.from('carousel_collections').update({ dias: r.dias }).eq('slug', r.slug);
-      if (!e2) feitas += 1;
-    }));
+  // UMA de cada vez (NÃO em paralelo): a Replicate limita a ~6/min com burst 1;
+  // pedir várias ao mesmo tempo dava 429 em todas. Sequencial respeita o limite.
+  for (let i = 0; i < lote.length; i++) {
+    const r = lote[i];
+    const slide = r.dias?.[0]?.slides?.[0];
+    if (!slide) continue;
+    const prompt = await promptDe(i);
+    const { url, erro } = await fundoImagem(prompt, r.slug);
+    if (!url) { if (erro) ultimoErro = erro; continue; }
+    slide.imageUrl = url;
+    slide.notaVisual = prompt; // grava o prompt usado
+    const { error: e2 } = await supabase.from('carousel_collections').update({ dias: r.dias }).eq('slug', r.slug);
+    if (!e2) feitas += 1;
   }
   // se NADA foi gerado e houve erro do Flux, devolve o MOTIVO real (não um "0" mudo).
   if (lote.length > 0 && feitas === 0 && ultimoErro) {
