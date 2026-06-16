@@ -5,7 +5,7 @@
 // Datas LOCAIS (nunca toISOString). Autónomo: a Vivianne carrega "gerar a
 // semana" e o sistema escolhe e gera.
 
-import { ContaId } from './contas';
+import { ContaId, VeuNome } from './contas';
 import { Post, PostTipo, reconhecimentoPosts, revelacaoPosts, manifestoPosts } from './posts';
 import { proximaSegunda, dataLocal, horaDoMetodo } from './agenda';
 
@@ -60,5 +60,42 @@ export function planoSemana(conta: ContaId, offset = 0, base: Date = proximaSegu
     const data = new Date(inicio);
     data.setDate(data.getDate() + i);
     return { wd: d.wd, nome: d.nome, tipo: d.tipo, post, data: dataLocal(data), hora: horaDoMetodo(conta) };
+  });
+}
+
+// ── MÃE · 1 véu por dia (volta semanal aos 7 véus), cada dia um REEL de 2 FACES ──
+// (motion, NÃO carrossel): face 1 = a dor (reconhecimento, gerada por IA na rota,
+// do SABER) -> face 2 = a revelação (do cânone). Aqui o plano fixa o VÉU de cada
+// dia e a revelação (face 2); a dor (face 1) é gerada na rota com anti-repetição.
+export const VEUS_SEMANA_MAE: { wd: number; nome: string; veu: VeuNome }[] = [
+  { wd: 1, nome: 'segunda', veu: 'Dualidade' },
+  { wd: 2, nome: 'terça', veu: 'Turbilhão' },
+  { wd: 3, nome: 'quarta', veu: 'Memória' },
+  { wd: 4, nome: 'quinta', veu: 'Esforço' },
+  { wd: 5, nome: 'sexta', veu: 'Desolação' },
+  { wd: 6, nome: 'sábado', veu: 'Horizonte' },
+  { wd: 0, nome: 'domingo', veu: 'Permanência' },
+];
+
+export interface DiaSemanaMae {
+  wd: number;
+  nome: string;
+  veu: VeuNome;
+  /** A face 2 (revelação, do cânone). A face 1 (dor) é gerada por IA na rota. */
+  revelacao: Post;
+  data: string; // 'YYYY-MM-DD' local
+  hora: string;
+}
+
+export function planoSemanaMae(offset = 0, base: Date = proximaSegunda()): DiaSemanaMae[] {
+  const inicio = new Date(base);
+  inicio.setDate(inicio.getDate() + offset * 7);
+  return VEUS_SEMANA_MAE.map((d, i) => {
+    // face 2: a revelação do véu, rodando por semana (offset) para não repetir cedo.
+    const revs = revelacaoPosts('mae').filter((p) => p.veu === d.veu);
+    const revelacao = revs[offset % Math.max(1, revs.length)] ?? revs[0];
+    const data = new Date(inicio);
+    data.setDate(data.getDate() + i);
+    return { wd: d.wd, nome: d.nome, veu: d.veu, revelacao, data: dataLocal(data), hora: horaDoMetodo('mae') };
   });
 }
