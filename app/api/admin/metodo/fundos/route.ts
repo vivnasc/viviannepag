@@ -4,41 +4,44 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const runtime = 'nodejs';
 
-// GET ?conta= : FUNDOS já guardados — as imagens das imagens já geradas no
-// método, para reaproveitar num reel de frase rápido (sem gerar imagem nova,
-// sem gastar Replicate). Sem `conta` devolve os fundos de todas as contas.
-// É a galeria que a Vivianne pediu para não perder as imagens lindas (ver.soltar).
+const BUCKET = 'viviannepag-assets';
+
+// a conta de um fundo, inferida do slug da pasta (best-effort). Os fundos cujo
+// slug não revela a conta ficam como null e mostram-se SEMPRE (nunca se escondem).
+function contaDoSlug(slug: string): string | null {
+  const m = slug.match(/^metodo-(?:ia-|frase-)?(mae|ver|vir|viver)-/);
+  return m ? m[1] : null;
+}
+
+// GET ?conta= : FUNDOS já guardados — lidos DIRETO do Storage (metodo/<slug>/...),
+// NÃO dos posts. Assim os fundos de posts APAGADOS continuam a aparecer (os
+// ficheiros sobrevivem ao apagar): a Vivianne não perde as imagens lindas.
 export async function GET(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const conta = new URL(req.url).searchParams.get('conta') ?? '';
 
-  const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase
-    .from('carousel_collections')
-    .select('slug, dias, theme, created_at')
-    .like('slug', 'metodo-%');
-  if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
+  const sb = getSupabaseAdmin();
+  // 1) pastas dentro de metodo/ (cada uma = um slug)
+  const { data: pastas, error } = await sb.storage.from(BUCKET).list('metodo', { limit: 1000, sortBy: { column: 'name', order: 'desc' } });
+  if (error) return NextResponse.json({ erro: 'storage', detalhe: error.message }, { status: 500 });
 
-  type Row = {
-    slug: string;
-    dias?: { slides?: { imageUrl?: string | null }[] }[] | null;
-    theme?: { metodo?: { conta?: string } } | null;
-    created_at?: string;
-  };
-
-  const vistos = new Set<string>();
-  const fundos: { url: string; conta: string | null; slug: string; criadoEm: string | null }[] = [];
-  for (const r of (data ?? []) as Row[]) {
-    const c = r.theme?.metodo?.conta ?? null;
-    if (conta && c !== conta) continue;
-    for (const s of r.dias?.[0]?.slides ?? []) {
-      const u = s.imageUrl;
-      if (u && !vistos.has(u)) {
-        vistos.add(u);
-        fundos.push({ url: u, conta: c, slug: r.slug, criadoEm: r.created_at ?? null });
-      }
+  const fundos: { url: string; slug: string; conta: string | null; criadoEm: string | null }[] = [];
+  for (const p of pastas ?? []) {
+    if (!p.name) continue;
+    // entradas com id null = pastas; mesmo que venha um ficheiro à mistura, o filtro abaixo trata
+    const slug = p.name;
+    const { data: files } = await sb.storage.from(BUCKET).list(`metodo/${slug}`, { limit: 100, sortBy: { column: 'name', order: 'desc' } });
+    for (const f of files ?? []) {
+      if (!/\.(jpe?g|png|webp)$/i.test(f.name)) continue;
+      const path = `metodo/${slug}/${f.name}`;
+      const url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+      fundos.push({ url, slug, conta: contaDoSlug(slug), criadoEm: (f as { created_at?: string }).created_at ?? null });
     }
   }
-  fundos.sort((a, b) => (b.criadoEm ?? '').localeCompare(a.criadoEm ?? ''));
-  return NextResponse.json({ ok: true, fundos });
+
+  // filtro por conta LENIENTE: mostra os da conta + os de conta desconhecida
+  // (nunca esconde tudo; o objetivo é não perder imagens).
+  const lista = conta ? fundos.filter((f) => f.conta === conta || f.conta === null) : fundos;
+  lista.sort((a, b) => (b.criadoEm ?? '').localeCompare(a.criadoEm ?? ''));
+  return NextResponse.json({ ok: true, fundos: lista });
 }
