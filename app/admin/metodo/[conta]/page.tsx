@@ -361,6 +361,11 @@ export default function MetodoContaPage() {
       {detalhe && (
         <div onClick={() => setDetalhe(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
           <div onClick={(ev) => ev.stopPropagation()} className="w-full max-w-[360px]">
+            <div className="flex items-center justify-between mb-2 text-[0.74rem]">
+              <button onClick={() => { const i = geradosConta.findIndex((e) => e.slug === detalhe.slug); if (i > 0) setDetalhe(geradosConta[i - 1]); }} className="px-3 py-1.5 rounded-lg border border-white/25 hover:bg-white/10">← anterior</button>
+              <span className="opacity-45">{geradosConta.findIndex((e) => e.slug === detalhe.slug) + 1}/{geradosConta.length}</span>
+              <button onClick={() => { const i = geradosConta.findIndex((e) => e.slug === detalhe.slug); if (i >= 0 && i < geradosConta.length - 1) setDetalhe(geradosConta[i + 1]); }} className="px-3 py-1.5 rounded-lg border border-white/25 hover:bg-white/10">seguinte →</button>
+            </div>
             <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} />
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
               {detalhe.videoUrl
