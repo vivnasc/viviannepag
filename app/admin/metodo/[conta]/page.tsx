@@ -469,6 +469,14 @@ export default function MetodoContaPage() {
               <span className="opacity-45">{geradosConta.findIndex((e) => e.slug === detalhe.slug) + 1}/{geradosConta.length}</span>
               <button onClick={() => { const i = geradosConta.findIndex((e) => e.slug === detalhe.slug); if (i >= 0 && i < geradosConta.length - 1) setDetalhe(geradosConta[i + 1]); }} className="px-3 py-1.5 rounded-lg border border-white/25 hover:bg-white/10">seguinte →</button>
             </div>
+            {detalhe.videoUrl && (
+              <div className="mb-2">
+                <p className="text-[0.6rem] uppercase tracking-wider text-emerald-300 text-center mb-1">reel final (renderizado)</p>
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                <video src={detalhe.videoUrl} controls autoPlay loop playsInline className="w-full rounded-xl border border-emerald-400/40 max-h-[55vh] mx-auto" />
+                <p className="text-center text-[0.55rem] opacity-40 mt-1">é este que vai para o Publicar. Em baixo: as faces e os clips de origem.</p>
+              </div>
+            )}
             {detalhe.texto2 ? (
               <div>
                 <div className="grid grid-cols-2 gap-2">
