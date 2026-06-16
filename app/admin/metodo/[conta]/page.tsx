@@ -29,6 +29,16 @@ export default function MetodoContaPage() {
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [sel, setSel] = useState<Set<string>>(new Set());
+  // PREVIEW A MEXER: quando um post está aberto, o prog corre em loop (0→1) para
+  // veres o movimento real (typewriter + reveal + fundo a mexer) ANTES de renderizar.
+  const [previewProg, setPreviewProg] = useState(1);
+  useEffect(() => {
+    if (!detalhe) { setPreviewProg(1); return; }
+    let raf = 0; const DUR = 11000; const inicio = performance.now();
+    const tick = (t: number) => { setPreviewProg(((t - inicio) % DUR) / DUR); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [detalhe]);
   const [melBusy, setMelBusy] = useState<string | null>(null);
 
   const toggleSel = (slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; });
@@ -398,18 +408,19 @@ export default function MetodoContaPage() {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1 text-center">face 1 · a dor</p>
-                    <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="typewriter" prog={1} />
+                    <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="typewriter" prog={Math.min(1, previewProg / 0.5)} />
                   </div>
                   <div>
                     <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1 text-center">face 2 · revelação</p>
-                    <MetodoSlide texto={detalhe.texto2} conceito={detalhe.conceito2 ?? undefined} veuReveal={detalhe.veuReveal2 ?? undefined} imageUrl={detalhe.imageUrl2 ?? undefined} conta={conta} anim="reveal" prog={1} />
+                    <MetodoSlide texto={detalhe.texto2} conceito={detalhe.conceito2 ?? undefined} veuReveal={detalhe.veuReveal2 ?? undefined} imageUrl={detalhe.imageUrl2 ?? undefined} conta={conta} anim="reveal" prog={Math.max(0, (previewProg - 0.5) / 0.5)} />
                   </div>
                 </div>
                 <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a face 1 escreve-se, depois a face 2</p>
               </div>
             ) : (
-              <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} />
+              <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={previewProg} />
             )}
+            <p className="text-center text-[0.58rem] opacity-40 mt-1">pré-visualização a mexer (em loop), como sai no clip — antes de renderizar</p>
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
