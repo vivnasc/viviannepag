@@ -32,6 +32,12 @@ export default function MetodoContaPage() {
   const [melBusy, setMelBusy] = useState<string | null>(null);
 
   const toggleSel = (slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; });
+
+  const recarregar = useCallback(() => {
+    fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
+  }, []);
+  useEffect(() => { recarregar(); }, [recarregar]);
+
   const apagarSelecionados = useCallback(async () => {
     if (!sel.size) return;
     if (typeof window !== 'undefined' && !window.confirm(`Apagar ${sel.size} post(s) selecionado(s)? Os já publicados são protegidos (não se apagam).`)) return;
@@ -41,11 +47,6 @@ export default function MetodoContaPage() {
     }
     setSel(new Set()); setMsg(`${n} post(s) apagado(s) (os publicados ficaram).`); recarregar();
   }, [sel, recarregar]);
-
-  const recarregar = useCallback(() => {
-    fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
-  }, []);
-  useEffect(() => { recarregar(); }, [recarregar]);
 
 
   // gerar o plano (4 semanas) NO SERVIDOR, alinhado ao Plano da Semana: cada post
