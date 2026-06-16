@@ -6,6 +6,7 @@
 import { VeuNome, Conta } from './contas';
 import { VEU_SEMENTE } from './veus';
 import { SABER } from './saber';
+import { REFERENCIAS } from './referencias';
 import { limparTravessoes } from '@/lib/texto';
 
 // Regras fixas do fundo (incluídas sempre). A ASSINATURA (pintura renascentista,
@@ -63,10 +64,17 @@ MATÉRIA-PRIMA deste véu (a área de estudo dela; usa para encontrar um ÂNGULO
 - cenas do dia a dia: ${k.cenas.join(' · ')}
 - custos: ${k.custos.join(' · ')}
 - mecanismos: ${k.mecanismos.join(' · ')}` : '';
+  // CAMPO DE ESTUDO (cadeiras): conceitos reais SÓ para pensar um ângulo novo da
+  // dor. NUNCA aparecem na frase (nada de nomes/termos técnicos): a frase fica
+  // sempre brusca e concreta. É o que dá variedade "infinita".
+  const ref = REFERENCIAS[veu];
+  const campo = ref?.conceitos.length
+    ? `\nCAMPO DE ESTUDO (conceitos reais, SÓ para TU encontrares uma face nova e concreta da dor; NUNCA os nomeies nem uses termos técnicos, nomes de autores, livros ou jargão na frase): ${ref.conceitos.join(' · ')}.`
+    : '';
   const sys = `Escreves UMA frase curta de RECONHECIMENTO para um reel de psicologia (Método VS). É a voz interior de uma mulher cansada, na 1.ª pessoa, que ela reconhece em 3 segundos ("isto sou eu"). Padrão: ${s.descricao}
 FALA SIMPLES (regra dura): escreve como uma pessoa REAL fala a uma amiga, em voz alta. PROIBIDO metáforas, comparações ("como o/a…"), linguagem poética, filosófica, espiritual ou de coach. Nada de "alma", "universo", "tempestade", "rio", "véu". Uma frase que alguém DIZ mesmo, não que escreve num livro.
 REGRAS: português europeu; máximo 12 palavras; concreta e do dia a dia (não abstrata, não aforismo). A frase tem de fazer sentido SOZINHA, sem contexto: NÃO uses pronomes ambíguos (evita "ela", "ele", "isso", "aquilo", "lá" sem dizer a quê ou a quem te referes). SEM travessões (nem — nem –); SEM hashtags; sem aspas. Tem de ser DIFERENTE destes exemplos: ${s.exemplos.map((e) => `"${e}"`).join('; ')}.
-${materia}
+${materia}${campo}
 VARIEDADE (essencial, pensamos a LONGO PRAZO): a mesma dor tem muitas faces (o corpo, o tempo, o dinheiro, o trabalho, a casa, as relações, o futuro, a noite). NÃO voltes sempre ao mesmo exemplo nem ao mesmo tema; escolhe uma face diferente da matéria-prima de cada vez.
 VARIA A FORMA: muda a ABERTURA e a estrutura. NÃO comeces várias frases da mesma maneira (ex.: não repitas frases a começar por "Sorrio" ou "Estou"). Alterna entre uma cena concreta, um hábito, um pensamento e uma fala.
 ${evitar.length ? `JÁ FORAM usadas estas frases nesta conta, NÃO repitas o tema nem as palavras de nenhuma (encontra outra face da dor): ${evitar.slice(-30).map((e) => `"${e}"`).join('; ')}.` : ''}
