@@ -441,7 +441,11 @@ export default function MetodoContaPage() {
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
-              <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post — só este'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : (detalhe.imageUrl ? 'outra imagem' : 'gerar imagem')}</button>
+              {(() => {
+                const faltaFace2 = !!detalhe.texto2 && (!detalhe.imageUrl || !detalhe.imageUrl2);
+                const label = !detalhe.imageUrl ? 'gerar imagem' : faltaFace2 ? 'gerar 2.ª imagem' : 'outra imagem';
+                return <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={faltaFace2 ? 'gera a imagem da face que falta (mantém a que já tens)' : detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : label}</button>;
+              })()}
               <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta (mãe = Dualidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>
               <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual (tira ambiguidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>

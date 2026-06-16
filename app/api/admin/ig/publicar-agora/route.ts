@@ -13,7 +13,7 @@ export const maxDuration = 300;
 // (veu.a.veu ou loja). A pedido e com resposta imediata. Marca igPublicado.
 
 const CARROSSEL: string[] = []; // já não há carrossel de imagens (sinais/ninguem/pensador passaram a reels MP4)
-const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
+const VIDEO = ['kinetico', 'domingo', 'duasfaces', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
