@@ -19,7 +19,7 @@ const HORA_FMT: Record<string, string> = {
   banda: '13:00', heroi: '13:00', infografico: '11:00', domingo: '11:00', reel: '13:00', aneis: '13:00',
 };
 const CARROSSEL: string[] = []; // já não há carrossel de imagens (sinais/ninguem/pensador passaram a reels MP4)
-const VIDEO = ['kinetico', 'domingo', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
+const VIDEO = ['kinetico', 'domingo', 'duasfaces', 'banda', 'heroi', 'infografico', 'sinais', 'ninguem', 'pensador'];
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
