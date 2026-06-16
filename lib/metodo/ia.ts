@@ -90,6 +90,34 @@ Devolve SÓ a frase, nada mais.`;
   return limparTravessoes(t);
 }
 
+// FACE 2 de um reel de 2 faces (mãe): a REVELAÇÃO do MECANISMO INVISÍVEL da cena
+// da Face 1. Nasce DA Face 1 (não de uma lista genérica), por isso liga-se a ela.
+// Regra (da Vivianne): se a Face 1 mostra uma cena, a Face 2 revela o que a pessoa
+// fez sem perceber — específico, não um aforismo bonito. É o que torna o método VS.
+export async function revelacaoDaDor(veu: VeuNome, dor: string, apiKey: string): Promise<string> {
+  const mecanismos = SABER[veu]?.mecanismos ?? [];
+  const sys = `És a voz do Método VS. Recebes a FACE 1 de um reel: uma CENA concreta da dor (a pessoa reconhece-se nela). Escreves a FACE 2: a REVELAÇÃO do MECANISMO INVISÍVEL DAQUELA cena exata.
+
+O QUE É (regra dura): NÃO é uma frase inspiracional, NÃO é um aforismo bonito, NÃO é "cura a tua dor". É "olha o que acabaste de fazer sem perceber". Mostras o mecanismo escondido por trás DAQUELA cena, com uma observação ESPECÍFICA que a pessoa nunca tinha percebido. Liga-te ao concreto da cena; NÃO subas para abstrato genérico ("a vida", "a alma", "o amor").
+
+VOZ: português europeu, 2.ª pessoa ("tu"), brusca e direta. SEM metáforas, SEM linguagem poética/espiritual/de coach, SEM nomear jargão, conceitos ou autores. 1 a 2 frases curtas e secas. SEM travessões (nem — nem –), SEM aspas, SEM hashtags.
+
+MECANISMO deste véu (matéria-prima para descobrires o que está POR BAIXO da cena; NÃO copiar à letra, NÃO nomear): ${mecanismos.join(' · ')}.
+
+REGISTO CERTO (exemplo): Face 1 "Antecipo a despedida antes de o jantar acabar." -> Face 2 "Não estás a viver este jantar. Estás a tentar sofrer primeiro para doer menos depois."
+
+Devolve SÓ a Face 2 (1 a 2 frases), nada mais.`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 160, system: sys, messages: [{ role: 'user', content: `Face 1 (a cena): «${dor}». Escreve a Face 2: revela o mecanismo invisível desta cena.` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}`);
+  const t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');
+  if (!t) throw new Error('vazio');
+  return limparTravessoes(t);
+}
+
 // Reescreve uma frase de reconhecimento para tirar a ambiguidade, SEM perder a
 // dor. Para "melhorar" um post já gerado (mantendo a imagem, sem custo novo).
 export async function melhorarFrase(texto: string, apiKey: string): Promise<string> {
