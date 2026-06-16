@@ -287,6 +287,17 @@ export default function MetodoContaPage() {
     return () => clearInterval(id);
   }, [haPendentes, colher]);
 
+  // mantém a JANELA aberta (detalhe) em sincronia com a lista: quando a colheita
+  // traz o 2.º clip (ou o vídeo final), a janela atualiza-se sozinha em vez de
+  // ficar presa no estado em que a abriste (era isto que mostrava "só 1 clip").
+  useEffect(() => {
+    setDetalhe((d) => {
+      if (!d) return d;
+      const fresh = Object.values(estado).find((e) => e.slug === d.slug);
+      return fresh ?? d;
+    });
+  }, [estado]);
+
   // REJEITAR os clips (limpa-os) para regenerar com o movimento contido.
   const rejeitarClips = useCallback(async (slug: string) => {
     try {
