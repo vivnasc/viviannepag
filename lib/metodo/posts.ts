@@ -11,7 +11,8 @@
 // dos posts de reconhecimento, ou como post próprio nos aforismos mais fortes).
 
 import { ContaId, VeuNome, CONTAS } from './contas';
-import { Reel, reelsDaConta, destaqueDe, destaquePortaDe, realceAuto } from './reels';
+import { Reel, reelsDaConta, destaquePortaDe, realceAuto } from './reels';
+import { SABER } from './saber';
 
 export type PostTipo = 'reconhecimento' | 'revelacao' | 'manifesto';
 
@@ -59,30 +60,29 @@ function reconhecimentoDoReel(r: Reel, conta: ContaId): Post {
   };
 }
 
-function revelacaoDoReel(r: Reel, conta: ContaId): Post {
-  return {
-    id: pid(conta, `${r.id}-rev`),
-    conta,
-    tipo: 'revelacao',
-    veu: r.veu,
-    texto: r.sala,
-    destaque: destaqueDe(r),
-    bridge: r.porta,
-    fundoCena: r.fundoCena,
-    fonte: r.fonte,
-    conceito: `Revelação · ${nomeVeu(r.veu)}`,
-  };
-}
-
 export function reconhecimentoPosts(conta: ContaId): Post[] {
   return reelsDaConta(conta).map((r) => reconhecimentoDoReel(r, conta));
 }
-// Todas as revelações disponíveis (aforismos), as mais fortes primeiro, para dar
-// volume sem repetir tão cedo.
+// A REVELAÇÃO (a lição) vem das "verdades" do SABER — fala plana e brusca, na voz
+// da Vivianne (levanta o véu, mostra a dor, deixa a lição). Por véu da conta,
+// intercaladas, para TODAS as contas falarem assim (sem o cânone poético).
 export function revelacaoPosts(conta: ContaId): Post[] {
-  // reelsDaConta já vem intercalado por véu (e forte primeiro dentro de cada véu),
-  // para as revelações da semana cobrirem TODOS os véus da conta, não um só.
-  return reelsDaConta(conta).map((r) => revelacaoDoReel(r, conta));
+  const ordem: VeuNome[] = conta === 'mae'
+    ? ['Dualidade', 'Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência']
+    : CONTAS[conta].veus;
+  const porVeu = ordem.map((veu) => (SABER[veu]?.crencas ?? []).map((c, k): Post => ({
+    id: pid(conta, `rev-${veu}-${k}`),
+    conta, tipo: 'revelacao', veu,
+    texto: c.verdade,
+    destaque: realceAuto(c.verdade),
+    bridge: c.pensa,
+    fundoCena: '',
+    fonte: 'SABER',
+    conceito: `Revelação · ${nomeVeu(veu)}`,
+  })));
+  const out: Post[] = [];
+  for (let i = 0, vivo = true; vivo; i++) { vivo = false; for (const g of porVeu) if (i < g.length) { out.push(g[i]); vivo = true; } }
+  return out;
 }
 // Realce curado por linha de manifesto (a palavra que tem de ficar). Fallback
 // heurístico garante realce mesmo em linhas novas.

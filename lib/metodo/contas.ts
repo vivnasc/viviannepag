@@ -203,6 +203,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'Não estás atrasada para lugar nenhum.',
       'A tua vida não começa depois. Já começou.',
       'Não há nenhum comboio a partir sem ti.',
+      'Não estás atrasada. É a pressa que te faz perder a vida que está a acontecer agora.',
     ],
     emoji: '🌅',
     bioPT:
@@ -265,7 +266,7 @@ export const CONTAS: Record<ContaId, Conta> = {
       'Os padrões que te fazem repetir são véus. Aprende a vê-los e a soltá-los.',
       'Não há soltar sem ver.',
       'Nunca, em momento nenhum, caminhaste sozinha.',
-      'A casa que procuras nunca esteve longe.',
+      'Não precisas de quem te complete. Precisas de parar de te abandonar.',
     ],
     emoji: '✨',
   },

@@ -69,13 +69,13 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'A mente confunde pensar com agir: ruminar dá a sensação de estar a resolver.',
       'Fusão cognitiva: acreditas que cada pensamento é verdade e uma ordem a cumprir.',
       'Um alarme antigo continua ligado, num presente que já não é a ameaça de então.',
-      'O corpo em modo ameaça produz pensamento sem parar, como o estômago produz sumo gástrico.',
+      'Em modo de alerta, a mente fabrica pensamento sem parar, à procura de uma ameaça para resolver.',
     ],
     crencas: [
-      { pensa: 'Se eu pensar mais, resolvo.', verdade: 'Quando te fundes com o pensamento, perdes a clareza que procuravas.' },
-      { pensa: 'Estou a prevenir-me.', verdade: 'Estás a viver o problema antes de ele existir, e a pagá-lo duas vezes.' },
-      { pensa: 'Sou ansiosa, é a minha personalidade.', verdade: 'É um padrão aprendido para te protegeres, não a tua natureza.' },
-      { pensa: 'Parar é perder tempo.', verdade: 'É no descanso que a clareza volta; a pressa é que te tira tempo.' },
+      { pensa: 'Se eu pensar mais, resolvo.', verdade: 'Pensar de mais não resolve nada. Só te tira o sono.' },
+      { pensa: 'Estou a prevenir-me.', verdade: 'Estás a sofrer por coisas que ainda não aconteceram, e quase nunca acontecem.' },
+      { pensa: 'Sou ansiosa, é a minha personalidade.', verdade: 'Não nasceste ansiosa. Aprendeste a estar em alerta, e isso desaprende-se.' },
+      { pensa: 'Parar é perder tempo.', verdade: 'Descansar não é preguiça. É quando a cabeça finalmente assenta.' },
     ],
     custos: [
       'Noites de sono trocadas por simulações que nunca aconteceram.',
@@ -129,9 +129,9 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'Repetir o conhecido, mesmo doloroso, parece mais seguro do que o desconhecido.',
     ],
     crencas: [
-      { pensa: 'Eu sou assim desde sempre.', verdade: 'Não és a tua história, és quem a pode reescrever.' },
-      { pensa: 'Já sei como isto acaba.', verdade: 'Estás a prever o presente com um final antigo que pode não ser o desta vez.' },
-      { pensa: 'Se me protejo, não me magoam.', verdade: 'A armadura que te protege da dor também te tranca por dentro.' },
+      { pensa: 'Eu sou assim desde sempre.', verdade: 'Aquilo já passou. Não tens de reagir hoje à dor de antes.' },
+      { pensa: 'Já sei como isto acaba.', verdade: 'Não sabes como acaba. Estás só à espera do mesmo de sempre.' },
+      { pensa: 'Se me protejo, não me magoam.', verdade: 'Fechares-te não te protege. Só te deixa mais sozinha.' },
     ],
     custos: [
       'Relações que terminam antes de começarem.',
@@ -178,9 +178,9 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'Receber dói porque te coloca em dívida, e só sabes estar do lado de quem dá.',
     ],
     crencas: [
-      { pensa: 'Se eu não fizer, ninguém faz.', verdade: 'Carregar tudo não te torna mais amada, torna-te mais sozinha.' },
-      { pensa: 'Descansar é egoísmo.', verdade: 'Descansar não é desistir; é devolveres-te o que dás aos outros.' },
-      { pensa: 'O amor prova-se com sacrifício.', verdade: 'O amor que se paga com exaustão não era amor, era medo.' },
+      { pensa: 'Se eu não fizer, ninguém faz.', verdade: 'Fazeres tudo por todos não te faz mais amada. Faz-te mais cansada.' },
+      { pensa: 'Descansar é egoísmo.', verdade: 'Descansar não é egoísmo. Mereces o mesmo cuidado que dás aos outros.' },
+      { pensa: 'O amor prova-se com sacrifício.', verdade: 'Se te esgotas para te quererem, isso não é amor. É medo de seres deixada.' },
     ],
     custos: [
       'Um cansaço que dorme oito horas e acorda igual.',
@@ -227,9 +227,9 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'Quanto mais enches, menos te ouves, e mais estranho fica o silêncio.',
     ],
     crencas: [
-      { pensa: 'Se parar, vou afundar.', verdade: 'O que temes no vazio não é o vazio, é a dor que evitaste sentir.' },
-      { pensa: 'Estar só é estar em falta.', verdade: 'Há uma diferença entre estar só e estar contigo.' },
-      { pensa: 'Preciso de barulho para estar bem.', verdade: 'A paz que procuras está do outro lado do silêncio que evitas.' },
+      { pensa: 'Se parar, vou afundar.', verdade: 'Não tens medo do silêncio. Tens medo do que sentes quando ele chega.' },
+      { pensa: 'Estar só é estar em falta.', verdade: 'Estar sozinha não é estar em falta. Dá para aprender a gostar da tua companhia.' },
+      { pensa: 'Preciso de barulho para estar bem.', verdade: 'Não precisas de encher tudo. O sossego que procuras está na pausa que evitas.' },
     ],
     custos: [
       'Nunca saberes do que tu, só tu, gostas.',
@@ -276,9 +276,9 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'Viver no depois evita o luto de aceitar a vida possível agora.',
     ],
     crencas: [
-      { pensa: 'Quando conseguir X, aí sim começo a viver.', verdade: 'A tua vida não começa depois. Já começou.' },
-      { pensa: 'Estou atrasada, tenho de apanhar o comboio.', verdade: 'Não há nenhum comboio a partir sem ti; não estás atrasada para lugar nenhum.' },
-      { pensa: 'Primeiro o dever, depois a vida.', verdade: 'A vida adiada não fica à tua espera; passa enquanto esperas.' },
+      { pensa: 'Quando conseguir X, aí sim começo a viver.', verdade: 'A tua vida não começa depois. É esta, agora.' },
+      { pensa: 'Estou atrasada, tenho de apanhar o comboio.', verdade: 'Não estás atrasada para nada. Não há prazo nenhum a correr.' },
+      { pensa: 'Primeiro o dever, depois a vida.', verdade: 'A vida não fica à espera de estares pronta. Passa enquanto adias.' },
     ],
     custos: [
       'Anos inteiros vividos em sala de espera.',
@@ -325,9 +325,9 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'Defender quem já não és é mais fácil do que enfrentar o luto de mudar.',
     ],
     crencas: [
-      { pensa: 'Se eu mudar, deixo de ser eu.', verdade: 'Não és uma estátua; és um rio que muda de curso sem deixar de ser água.' },
-      { pensa: 'Não posso desiludir quem conta comigo.', verdade: 'Manteres-te igual para os outros é desiludires-te a ti.' },
-      { pensa: 'Mostrar fraqueza é perigoso.', verdade: 'A armadura que te protege também te impede de seres vista.' },
+      { pensa: 'Se eu mudar, deixo de ser eu.', verdade: 'Mudar não é deixares de ser tu. É parar de te forçar a ser quem já não és.' },
+      { pensa: 'Não posso desiludir quem conta comigo.', verdade: 'Manteres-te igual para não desiludir os outros desilude-te a ti.' },
+      { pensa: 'Mostrar fraqueza é perigoso.', verdade: 'Seres sempre a forte afasta-te. Ninguém te ajuda se nunca te vê precisar.' },
     ],
     custos: [
       'Uma vida a sustentar uma versão que já não te cabe.',
@@ -374,9 +374,9 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'Nenhuma companhia cura porque a falta é de ligação contigo e com o todo, não de gente à volta.',
     ],
     crencas: [
-      { pensa: 'Ninguém me entende verdadeiramente.', verdade: 'A ligação que procuras lá fora começa por uma ligação contigo.' },
-      { pensa: 'Estou sozinha contra a vida.', verdade: 'Nunca, em momento nenhum, caminhaste sozinha.' },
-      { pensa: 'Falta-me algo que os outros têm.', verdade: 'A casa que procuras nunca esteve longe.' },
+      { pensa: 'Ninguém me entende verdadeiramente.', verdade: 'Sentires-te de fora não quer dizer que estejas. Muita gente sente isto e não diz.' },
+      { pensa: 'Estou sozinha contra a vida.', verdade: 'Não estás sozinha nisto. Só ninguém fala sobre o assunto.' },
+      { pensa: 'Falta-me algo que os outros têm.', verdade: 'Não te falta nada que os outros têm. Falta-te dares-te a atenção que pedes a eles.' },
     ],
     custos: [
       'A intimidade adiada por te manteres sempre meio de fora.',

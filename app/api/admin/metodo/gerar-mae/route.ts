@@ -7,6 +7,8 @@ import { fraseReconhecimento } from '@/lib/metodo/ia';
 import { nomeVeu } from '@/lib/metodo/posts';
 import { hashtagsDoPost } from '@/lib/metodo/legenda';
 import { planoSemanaMae, diaMaeDaData, type DiaSemanaMae } from '@/lib/metodo/semana';
+import { SABER } from '@/lib/metodo/saber';
+import { realceAuto } from '@/lib/metodo/reels';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -30,12 +32,13 @@ export async function POST(req: Request) {
   const supabase = getSupabaseAdmin();
 
   // memória anti-repetição: as dores (face 1) já usadas na mãe.
-  const evitar: string[] = [];
+  const evitar: string[] = [];          // dores (face 1) já usadas
+  const evitarRev = new Set<string>();  // revelações (face 2) já usadas
   try {
     const { data: existentes } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'metodo-mae-2f-%');
     for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }> }[]) {
-      const tx = r.dias?.[0]?.slides?.[0]?.texto;
-      if (tx) evitar.push(tx);
+      const s0 = r.dias?.[0]?.slides?.[0]?.texto; if (s0) evitar.push(s0);
+      const s1 = r.dias?.[0]?.slides?.[1]?.texto; if (s1) evitarRev.add(s1);
     }
   } catch { /* sem memória prévia */ }
 
@@ -64,15 +67,20 @@ export async function POST(req: Request) {
       try { dor = limparTravessoes(await fraseReconhecimento(d.veu, apiKey, evitar)); evitar.push(dor); }
       catch { continue; }
       const conceito = nomeVeu(d.veu);
-      const rev = d.revelacao;
+      // face 2 (revelação): das "verdades" do SABER (várias por véu, diretas), com
+      // anti-repetição; fallback à revelação do cânone se faltar.
+      const verdades = (SABER[d.veu]?.crencas ?? []).map((c) => c.verdade);
+      const livres = verdades.filter((v) => !evitarRev.has(v));
+      const revTexto = limparTravessoes(livres[0] ?? verdades[0] ?? d.revelacao.texto);
+      evitarRev.add(revTexto);
       const slides = [
         { tipo: 'metodo', face: 1, texto: dor, destaque: [], notaVisual: '', imageUrl: null, capa: true, conceito, contaId: 'mae' },
-        { tipo: 'metodo', face: 2, texto: limparTravessoes(rev.texto), destaque: limparTravessoes(rev.destaque), notaVisual: '', imageUrl: null, capa: false, conceito: `Revelação · ${conceito}`, contaId: 'mae' },
+        { tipo: 'metodo', face: 2, texto: revTexto, destaque: realceAuto(revTexto), notaVisual: '', imageUrl: null, capa: false, conceito: `Revelação · ${conceito}`, contaId: 'mae' },
       ];
       const numeroFaixa = ((Math.floor(Date.now() / 1000) + i) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
-      const legenda = limparTravessoes(`${dor}\n\n${rev.texto}`);
-      const dias_ = [{ dia: 1, mundo: 'autora', palavra: dor.slice(0, 48), slides, faixa, legenda, hashtags: hashtagsDoPost(rev) }];
+      const legenda = limparTravessoes(`${dor}\n\n${revTexto}`);
+      const dias_ = [{ dia: 1, mundo: 'autora', palavra: dor.slice(0, 48), slides, faixa, legenda, hashtags: hashtagsDoPost(d.revelacao) }];
       rows.push({
         slug: `metodo-mae-2f-${d.data}`,
         title: dor.slice(0, 48),
