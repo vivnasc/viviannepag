@@ -64,6 +64,12 @@ export type Resumo = {
   melhorFormato?: string;
 };
 
+export type Crescimento = {
+  novos30d?: number;             // novos seguidores ganhos nos últimos ~30 dias
+  porSemana?: number;            // média de novos seguidores por semana
+  alcanceDescobertaPct?: number; // % do alcance que foi a NÃO-seguidores (descoberta)
+};
+
 export type ContaAnalytics = {
   ok: boolean;
   username?: string;
@@ -72,9 +78,37 @@ export type ContaAnalytics = {
   insightsDisponiveis: boolean;
   posts: PostAnalytics[];
   resumo?: Resumo;
+  crescimento?: Crescimento;
   erro?: string;
   avisoInsights?: string;
 };
+
+// métricas de CONTA (crescimento): novos seguidores (30d) + alcance a não-seguidores.
+// Cada parte é best-effort (degrada se a API recusar uma delas).
+async function getCrescimento(token: string, igUserId: string): Promise<Crescimento> {
+  const cres: Crescimento = {};
+  // novos seguidores nos últimos 30 dias
+  try {
+    const until = Math.floor(Date.now() / 1000);
+    const since = until - 30 * 86400;
+    const j = await gget(`${igUserId}/insights`, { metric: 'follower_count', period: 'day', since: String(since), until: String(until), access_token: token });
+    const vals = ((j.data as { values?: { value?: number }[] }[] | undefined)?.[0]?.values) ?? [];
+    if (vals.length) {
+      const soma = vals.reduce((a, v) => a + (v.value ?? 0), 0);
+      cres.novos30d = soma;
+      cres.porSemana = Math.round(soma / Math.max(1, vals.length / 7));
+    }
+  } catch { /* sem dados de seguidores */ }
+  // alcance: % a não-seguidores (descoberta)
+  try {
+    const j = await gget(`${igUserId}/insights`, { metric: 'reach', period: 'days_28', metric_type: 'total_value', breakdown: 'follow_type', access_token: token });
+    const results = ((j.data as { total_value?: { breakdowns?: { results?: { dimension_values?: string[]; value?: number }[] }[] } }[] | undefined)?.[0]?.total_value?.breakdowns?.[0]?.results) ?? [];
+    let f = 0, nf = 0;
+    for (const r of results) { const dim = r.dimension_values?.[0]; if (dim === 'follower') f = r.value ?? 0; else if (dim === 'non_follower') nf = r.value ?? 0; }
+    if (f + nf > 0) cres.alcanceDescobertaPct = Math.round((nf / (f + nf)) * 1000) / 10;
+  } catch { /* sem breakdown de alcance */ }
+  return cres;
+}
 
 type Child = { media_url?: string; thumbnail_url?: string };
 type MediaRaw = {
@@ -172,6 +206,8 @@ export async function getContaAnalytics(token: string, igUserId: string, limite 
     };
   }));
 
+  const crescimento = await getCrescimento(token, igUserId);
+
   return {
     ok: true,
     username: perfil.username as string | undefined,
@@ -181,5 +217,6 @@ export async function getContaAnalytics(token: string, igUserId: string, limite 
     avisoInsights: insightsDisponiveis ? undefined : avisoInsights,
     posts,
     resumo: calcResumo(posts),
+    crescimento,
   };
 }
