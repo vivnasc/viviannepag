@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta } from '@/lib/metodo/contas';
-import { planoSemana } from '@/lib/metodo/semana';
+import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -24,7 +24,9 @@ export default function MetodoSemanaPage() {
     setBusy(chave); setErro(null);
     setMsg('A gerar no servidor (texto + imagem, por dia). Podes sair ou fechar. Demora 1 a 2 minutos por semana.');
     try {
-      const r = await fetch('/api/admin/metodo/gerar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta, semanas, offset: off }) });
+      // a mãe tem pipeline própria: 1 véu/dia, reel de 2 faces (dor -> revelação).
+      const endpoint = conta === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-lote';
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta, semanas, offset: off }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} posts gerados (${j.comImagem} com imagem), já com a data de cada dia. Vê-os no Publicar (vista Feed/Semana) ou na página da conta.`);
@@ -53,7 +55,9 @@ export default function MetodoSemanaPage() {
 
         <div className="mt-5 space-y-6">
           {CONTAS_LISTA.map((conta: Conta) => {
-            const dias = planoSemana(conta.id, offset);
+            const isMae = conta.id === 'mae';
+            const dias = isMae ? [] : planoSemana(conta.id, offset);
+            const diasMae = isMae ? planoSemanaMae(offset) : [];
             return (
               <section key={conta.id} className="rounded-2xl border border-white/10 p-4" style={{ background: `${conta.paleta.bg1}` }}>
                 <div className="flex items-center justify-between flex-wrap gap-2">
@@ -69,7 +73,21 @@ export default function MetodoSemanaPage() {
                   </div>
                 </div>
                 <div className="mt-3 grid gap-2 md:grid-cols-2 lg:grid-cols-4">
-                  {dias.map((d) => (
+                  {isMae ? diasMae.map((d) => (
+                    <div key={d.wd} className="rounded-xl border border-white/10 bg-black/20 p-3 text-[0.8rem]">
+                      <div className="flex items-center gap-2 flex-wrap text-[0.64rem] uppercase tracking-wider opacity-70">
+                        <span className="font-semibold">{d.nome}</span>
+                        <span className="opacity-50">{d.data}</span>
+                      </div>
+                      <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[0.62rem] uppercase tracking-wider" style={{ background: `${conta.cor}33`, color: conta.cor }}>Véu {d.veu} · reel 2 faces</span>
+                      <p className="mt-1.5 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
+                        <span className="opacity-55 italic">face 1 · a dor (IA)</span>
+                      </p>
+                      <p className="mt-1 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
+                        <span className="text-[0.6rem] uppercase tracking-wider opacity-50">face 2 · revelação</span><br />{d.revelacao.texto}
+                      </p>
+                    </div>
+                  )) : dias.map((d) => (
                     <div key={d.wd} className="rounded-xl border border-white/10 bg-black/20 p-3 text-[0.8rem]">
                       <div className="flex items-center gap-2 flex-wrap text-[0.64rem] uppercase tracking-wider opacity-70">
                         <span className="font-semibold">{d.nome}</span>

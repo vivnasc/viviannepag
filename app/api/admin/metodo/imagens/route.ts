@@ -49,12 +49,14 @@ export async function POST(req: Request) {
   const { data, error } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodo-%');
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 
-  const semImagem = (data ?? []).filter((r: Row) => {
-    if (r.theme?.metodo?.conta !== contaId) return false;
-    return !r.dias?.[0]?.slides?.[0]?.imageUrl;
-  }) as Row[];
-  const total = semImagem.length;
-  const lote = semImagem.slice(0, LIMITE);
+  // unidade = SLIDE (um post de 2 faces tem 2 slides; ambos precisam de imagem).
+  const pendentes: { row: Row; slide: Slide }[] = [];
+  for (const r of (data ?? []) as Row[]) {
+    if (r.theme?.metodo?.conta !== contaId) continue;
+    for (const s of r.dias?.[0]?.slides ?? []) if (!s.imageUrl) pendentes.push({ row: r, slide: s });
+  }
+  const total = pendentes.length;
+  const lote = pendentes.slice(0, LIMITE);
 
   // O PROMPT de cada fundo é ESCRITO pelo Claude (criativo e variado: assunto,
   // composição e luz diferentes a cada vez), evitando os assuntos JÁ usados nesta
@@ -66,8 +68,7 @@ export async function POST(req: Request) {
   const evitar: string[] = [];
   for (const r of (data ?? []) as Row[]) {
     if (r.theme?.metodo?.conta !== contaId) continue;
-    const nv = r.dias?.[0]?.slides?.[0]?.notaVisual;
-    if (nv) evitar.push(assuntoCurto(nv));
+    for (const s of r.dias?.[0]?.slides ?? []) if (s.notaVisual) evitar.push(assuntoCurto(s.notaVisual));
   }
   async function promptDe(i: number, frase?: string): Promise<string> {
     if (apiKey) {
@@ -82,15 +83,13 @@ export async function POST(req: Request) {
   // UMA de cada vez (NÃO em paralelo): a Replicate limita a ~6/min com burst 1;
   // pedir várias ao mesmo tempo dava 429 em todas. Sequencial respeita o limite.
   for (let i = 0; i < lote.length; i++) {
-    const r = lote[i];
-    const slide = r.dias?.[0]?.slides?.[0];
-    if (!slide) continue;
-    const prompt = await promptDe(i, slide.texto); // a imagem encarna a FRASE deste post
-    const { url, erro } = await fundoImagem(prompt, r.slug);
+    const { row, slide } = lote[i];
+    const prompt = await promptDe(i, slide.texto); // a imagem encarna a FRASE deste slide
+    const { url, erro } = await fundoImagem(prompt, row.slug);
     if (!url) { if (erro) ultimoErro = erro; continue; }
     slide.imageUrl = url;
-    slide.notaVisual = prompt; // grava o prompt usado
-    const { error: e2 } = await supabase.from('carousel_collections').update({ dias: r.dias }).eq('slug', r.slug);
+    slide.notaVisual = prompt;
+    const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', row.slug);
     if (!e2) feitas += 1;
   }
   // se NADA foi gerado e houve erro do Flux, devolve o MOTIVO real (não um "0" mudo).

@@ -126,7 +126,7 @@ export async function GET(req: NextRequest) {
       else if ((d?.imagens?.length ?? 0) >= 2) r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d!.imagens! });
       else r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d?.imagens ?? [] });
     } else if (conta === 'loja') {
-      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl! });
+      r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d!.videoUrl!, coverUrl: d?.imagens?.[0] });
     } else if (VIDEO.includes(chave) && d?.videoUrl) {
       // CAPA do reel: o poster do último frame (com a frase) está em d.imagens[0];
       // usa-o como cover_url. Sem poster, cai no thumb_offset (6s) do typewriter.
