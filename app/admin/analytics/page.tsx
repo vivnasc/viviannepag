@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 type Conta = { id: string; nome: string; emoji: string };
@@ -22,56 +22,52 @@ const fmt = (f: string) => FORMATO_PT[f] ?? f;
 const emojiFormato = (f: string) => (f === 'REELS' || f === 'VIDEO' ? '🎬' : f === 'CAROUSEL_ALBUM' ? '🖼️' : '📷');
 const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
 
-// "Caminho a seguir": lê os dados das 2 contas e devolve recomendações concretas.
-function caminhoASeguir(a: Analytics | null, b: Analytics | null): string[] {
+const ACCENTS = [
+  { text: 'text-rose-300', bar: 'bg-rose-500' },
+  { text: 'text-emerald-300', bar: 'bg-emerald-500' },
+  { text: 'text-amber-300', bar: 'bg-amber-500' },
+  { text: 'text-sky-300', bar: 'bg-sky-500' },
+  { text: 'text-violet-300', bar: 'bg-violet-500' },
+  { text: 'text-pink-300', bar: 'bg-pink-500' },
+];
+
+// recomendações globais a partir de TODAS as contas carregadas
+function caminhoASeguir(contas: Conta[], dados: Record<string, Analytics>): string[] {
+  const oks = contas.map((c) => ({ c, d: dados[c.id] })).filter((x) => x.d?.ok && x.d.resumo);
+  if (oks.length === 0) return [];
   const recs: string[] = [];
-  const nome = (d: Analytics | null) => (d?.username ? `@${d.username}` : '—');
+  const nome = (c: Conta) => `@${dados[c.id]?.username ?? c.nome}`;
 
-  // melhor formato de cada conta (Reels vs resto)
-  for (const d of [a, b]) {
-    if (!d?.ok || !d.resumo) continue;
-    const reels = d.resumo.porFormato.find((f) => f.formato === 'REELS' && f.mediaAlcance > 0);
-    const outros = d.resumo.porFormato.filter((f) => f.formato !== 'REELS' && f.mediaAlcance > 0);
-    const mo = avg(outros.map((o) => o.mediaAlcance));
-    if (reels && mo > 0 && reels.mediaAlcance > mo * 1.3) {
-      recs.push(`${nome(d)}: os Reels alcançam ~${(reels.mediaAlcance / mo).toFixed(1)}× mais que os outros formatos — aposta mais em Reels.`);
-    }
+  // conta que mais engaja
+  const porTaxa = [...oks].sort((a, b) => (b.d.resumo!.taxaInteracao) - (a.d.resumo!.taxaInteracao));
+  if (porTaxa[0]?.d.resumo!.taxaInteracao > 0) {
+    recs.push(`${nome(porTaxa[0].c)} é a que mais engaja (${porTaxa[0].d.resumo!.taxaInteracao}% de interação) — vê o que resulta aí e leva esse tom para as outras.`);
   }
-
-  // quem engaja mais (taxa de interação)
-  const ta = a?.resumo?.taxaInteracao, tb = b?.resumo?.taxaInteracao;
-  if (ta != null && tb != null && Math.abs(ta - tb) >= 0.3) {
-    const aMaior = ta > tb;
-    recs.push(`${nome(aMaior ? a : b)} tem maior taxa de interação (${aMaior ? ta : tb}% vs ${aMaior ? tb : ta}%) — o conteúdo ressoa mais. Vê o que resulta aí e leva esse tom para ${nome(aMaior ? b : a)}.`);
+  // conta com mais alcance médio
+  const porAlc = [...oks].sort((a, b) => (b.d.resumo!.mediaAlcance) - (a.d.resumo!.mediaAlcance));
+  if (porAlc[0]?.d.resumo!.mediaAlcance > 0) {
+    recs.push(`${nome(porAlc[0].c)} tem o maior alcance médio (${nf(porAlc[0].d.resumo!.mediaAlcance)}).`);
   }
-
-  // poucos posts → consistência
-  for (const d of [a, b]) {
-    if (d?.ok && (d.posts?.length ?? 0) > 0 && d.posts.length < 6) {
-      recs.push(`${nome(d)} tem poucos posts recentes — a consistência ajuda o alcance. Mantém um ritmo regular.`);
-    }
+  // formato global: Reels vs resto
+  const todosPosts = oks.flatMap((x) => x.d.posts);
+  const reels = todosPosts.filter((p) => p.formato === 'REELS' && p.alcance != null);
+  const outros = todosPosts.filter((p) => p.formato !== 'REELS' && p.alcance != null);
+  const mr = avg(reels.map((p) => p.alcance as number));
+  const mo = avg(outros.map((p) => p.alcance as number));
+  if (mr > 0 && mo > 0 && mr > mo * 1.3) {
+    recs.push(`No geral, os Reels alcançam ~${(mr / mo).toFixed(1)}× mais que os outros formatos — aposta em Reels.`);
   }
-
-  // melhor post como referência
-  for (const d of [a, b]) {
-    if (!d?.ok || !d.posts?.length) continue;
-    const top = [...d.posts].sort((x, y) => (y.alcance ?? -1) - (x.alcance ?? -1))[0];
-    if (top?.alcance && top.caption) {
-      recs.push(`${nome(d)}: o que mais alcançou foi "${top.caption.slice(0, 60)}…" (${nf(top.alcance)} de alcance). Faz mais no mesmo registo.`);
-    }
-  }
+  // contas com poucos posts
+  const poucos = oks.filter((x) => (x.d.posts?.length ?? 0) > 0 && x.d.posts.length < 6).map((x) => nome(x.c));
+  if (poucos.length) recs.push(`Publica com mais consistência em ${poucos.join(', ')} — poucos posts recentes limitam o alcance.`);
 
   return recs.slice(0, 5);
 }
 
 export default function AnalyticsPage() {
   const [contas, setContas] = useState<Conta[]>([]);
-  const [a, setA] = useState('');
-  const [b, setB] = useState('');
-  const [dataA, setDataA] = useState<Analytics | null>(null);
-  const [dataB, setDataB] = useState<Analytics | null>(null);
-  const [loadA, setLoadA] = useState(false);
-  const [loadB, setLoadB] = useState(false);
+  const [dados, setDados] = useState<Record<string, Analytics>>({});
+  const [loading, setLoading] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     fetch('/api/admin/instagram/insights')
@@ -79,131 +75,102 @@ export default function AnalyticsPage() {
       .then((j: { contas?: Conta[] }) => {
         const cs = j.contas ?? [];
         setContas(cs);
-        if (cs[0]) setA(cs[0].id);
-        if (cs[1]) setB(cs[1].id);
+        for (const c of cs) {
+          setLoading((l) => ({ ...l, [c.id]: true }));
+          fetch(`/api/admin/instagram/insights?conta=${encodeURIComponent(c.id)}&limite=10`)
+            .then((r) => r.json())
+            .then((d: Analytics) => setDados((prev) => ({ ...prev, [c.id]: d })))
+            .catch(() => setDados((prev) => ({ ...prev, [c.id]: { ok: false, insightsDisponiveis: false, posts: [], erro: 'falhou' } })))
+            .finally(() => setLoading((l) => ({ ...l, [c.id]: false })));
+        }
       })
       .catch(() => {});
   }, []);
 
-  const carregar = useCallback(async (id: string, set: (d: Analytics | null) => void, setLoad: (b: boolean) => void) => {
-    if (!id) { set(null); return; }
-    setLoad(true); set(null);
-    try {
-      const r = await fetch(`/api/admin/instagram/insights?conta=${encodeURIComponent(id)}`);
-      set(await r.json());
-    } catch (e) { set({ ok: false, insightsDisponiveis: false, posts: [], erro: String(e) }); }
-    finally { setLoad(false); }
-  }, []);
-
-  useEffect(() => { carregar(a, setDataA, setLoadA); }, [a, carregar]);
-  useEffect(() => { carregar(b, setDataB, setLoadB); }, [b, carregar]);
+  const oks = contas.filter((c) => dados[c.id]?.ok);
+  const maxSeg = Math.max(0, ...oks.map((c) => dados[c.id]?.seguidores ?? 0));
+  const maxAlc = Math.max(0, ...oks.map((c) => dados[c.id]?.resumo?.mediaAlcance ?? 0));
+  const maxTaxa = Math.max(0, ...oks.map((c) => dados[c.id]?.resumo?.taxaInteracao ?? 0));
+  const recs = caminhoASeguir(contas, dados);
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10 text-stone-100">
       <Link href="/admin" className="text-sm text-stone-400 hover:text-stone-200">← Admin</Link>
       <h1 className="mt-4 text-2xl font-semibold text-white">Analytics · Instagram</h1>
-      <p className="mt-1 text-sm text-stone-400">As tuas contas lado a lado — o que funciona, e onde apostar.</p>
+      <p className="mt-1 text-sm text-stone-400">Todas as contas de uma vez — o que funciona, e onde apostar.</p>
 
-      {/* seletores */}
-      <div className="mt-6 grid grid-cols-2 gap-4">
-        <Seletor label="Conta A" contas={contas} valor={a} onChange={setA} cor="rose" />
-        <Seletor label="Conta B" contas={contas} valor={b} onChange={setB} cor="emerald" />
-      </div>
-
-      {/* comparação topo */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-stone-700">
-        <div className="grid grid-cols-[1.2fr_1fr_1fr] items-center bg-stone-900/60 text-xs text-stone-400">
-          <div className="p-3">Métrica</div>
-          <div className="p-3 text-center text-rose-300">{dataA?.username ? `@${dataA.username}` : '—'}</div>
-          <div className="p-3 text-center text-emerald-300">{dataB?.username ? `@${dataB.username}` : '—'}</div>
-        </div>
-        <LinhaComp label="Seguidores" a={dataA?.seguidores} b={dataB?.seguidores} />
-        <LinhaComp label="Média de alcance" a={dataA?.resumo?.mediaAlcance} b={dataB?.resumo?.mediaAlcance} />
-        <LinhaComp label="Média de interações" a={dataA?.resumo?.mediaInteracoes} b={dataB?.resumo?.mediaInteracoes} />
-        <LinhaComp label="Taxa de interação" a={dataA?.resumo?.taxaInteracao} b={dataB?.resumo?.taxaInteracao} sufixo="%" />
-        <LinhaTexto label="Melhor formato" a={dataA?.resumo?.melhorFormato ? fmt(dataA.resumo.melhorFormato) : '—'} b={dataB?.resumo?.melhorFormato ? fmt(dataB.resumo.melhorFormato) : '—'} />
+      {/* tabela geral — todas as contas */}
+      <div className="mt-6 overflow-x-auto rounded-2xl border border-stone-700">
+        <table className="w-full text-sm">
+          <thead className="bg-stone-900/60 text-left text-xs text-stone-400">
+            <tr>
+              <th className="p-3 font-medium">Conta</th>
+              <th className="p-3 text-right font-medium">Seguidores</th>
+              <th className="p-3 text-right font-medium">Média alcance</th>
+              <th className="p-3 text-right font-medium">Taxa interação</th>
+              <th className="p-3 font-medium">Melhor formato</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contas.map((c) => {
+              const d = dados[c.id];
+              const carregando = loading[c.id] && !d;
+              return (
+                <tr key={c.id} className="border-t border-stone-800">
+                  <td className="p-3 whitespace-nowrap">{c.emoji} {d?.ok && d.username ? `@${d.username}` : c.nome}</td>
+                  {carregando ? (
+                    <td colSpan={4} className="p-3 text-stone-500">a carregar…</td>
+                  ) : !d?.ok ? (
+                    <td colSpan={4} className="p-3 text-stone-500">{d?.erro === 'sem-credenciais' ? 'não ligado — liga o token' : `sem dados${d?.detalhe ? ' · ' + d.detalhe : d?.erro ? ' · ' + d.erro : ''}`}</td>
+                  ) : (
+                    <>
+                      <td className={`p-3 text-right ${(d.seguidores ?? 0) === maxSeg && maxSeg > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{nf(d.seguidores)}</td>
+                      <td className={`p-3 text-right ${(d.resumo?.mediaAlcance ?? 0) === maxAlc && maxAlc > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{nf(d.resumo?.mediaAlcance)}</td>
+                      <td className={`p-3 text-right ${(d.resumo?.taxaInteracao ?? 0) === maxTaxa && maxTaxa > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{d.resumo?.taxaInteracao ?? 0}%</td>
+                      <td className="p-3 text-stone-300">{d.resumo?.melhorFormato ? `${emojiFormato(d.resumo.melhorFormato)} ${fmt(d.resumo.melhorFormato)}` : '—'}</td>
+                    </>
+                  )}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
       {/* caminho a seguir */}
-      {(() => {
-        const recs = caminhoASeguir(dataA, dataB);
-        if (!recs.length) return null;
-        return (
-          <div className="mt-6 rounded-2xl border border-amber-700/40 bg-amber-950/20 p-5">
-            <div className="text-sm font-semibold text-amber-300">🧭 Caminho a seguir</div>
-            <ul className="mt-3 space-y-2 text-sm text-stone-200">
-              {recs.map((r, i) => <li key={i} className="flex gap-2"><span className="text-amber-400">→</span><span>{r}</span></li>)}
-            </ul>
-          </div>
-        );
-      })()}
+      {recs.length > 0 && (
+        <div className="mt-6 rounded-2xl border border-amber-700/40 bg-amber-950/20 p-5">
+          <div className="text-sm font-semibold text-amber-300">🧭 Caminho a seguir</div>
+          <ul className="mt-3 space-y-2 text-sm text-stone-200">
+            {recs.map((r, i) => <li key={i} className="flex gap-2"><span className="text-amber-400">→</span><span>{r}</span></li>)}
+          </ul>
+        </div>
+      )}
 
-      {/* colunas detalhadas */}
+      {/* detalhe de cada conta ligada */}
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-        <Coluna data={dataA} carregando={loadA} cor="rose" />
-        <Coluna data={dataB} carregando={loadB} cor="emerald" />
+        {contas.filter((c) => dados[c.id]?.ok).map((c, i) => (
+          <Coluna key={c.id} data={dados[c.id]} accent={ACCENTS[i % ACCENTS.length]} />
+        ))}
       </div>
     </main>
   );
 }
 
-function Seletor({ label, contas, valor, onChange, cor }: { label: string; contas: Conta[]; valor: string; onChange: (v: string) => void; cor: string }) {
-  return (
-    <div>
-      <label className={`block text-xs ${cor === 'rose' ? 'text-rose-300' : 'text-emerald-300'}`}>{label}</label>
-      <select value={valor} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900">
-        {contas.map((c) => <option key={c.id} value={c.id}>{c.emoji} {c.nome}</option>)}
-      </select>
-    </div>
-  );
-}
-
-function melhor(a?: number, b?: number): 'a' | 'b' | null {
-  if (a == null || b == null) return null;
-  if (a === b) return null;
-  return a > b ? 'a' : 'b';
-}
-function LinhaComp({ label, a, b, sufixo = '' }: { label: string; a?: number; b?: number; sufixo?: string }) {
-  const m = melhor(a, b);
-  return (
-    <div className="grid grid-cols-[1.2fr_1fr_1fr] items-center border-t border-stone-800 text-sm">
-      <div className="p-3 text-stone-400">{label}</div>
-      <div className={`p-3 text-center ${m === 'a' ? 'font-semibold text-rose-300' : 'text-stone-200'}`}>{nf(a)}{a != null && sufixo}{m === 'a' && ' ↑'}</div>
-      <div className={`p-3 text-center ${m === 'b' ? 'font-semibold text-emerald-300' : 'text-stone-200'}`}>{nf(b)}{b != null && sufixo}{m === 'b' && ' ↑'}</div>
-    </div>
-  );
-}
-function LinhaTexto({ label, a, b }: { label: string; a: string; b: string }) {
-  return (
-    <div className="grid grid-cols-[1.2fr_1fr_1fr] items-center border-t border-stone-800 text-sm">
-      <div className="p-3 text-stone-400">{label}</div>
-      <div className="p-3 text-center text-stone-200">{a}</div>
-      <div className="p-3 text-center text-stone-200">{b}</div>
-    </div>
-  );
-}
-
-function Coluna({ data, carregando, cor }: { data: Analytics | null; carregando: boolean; cor: string }) {
-  const acc = cor === 'rose' ? 'text-rose-300' : 'text-emerald-300';
-  if (carregando) return <div className="rounded-2xl border border-stone-700 p-6 text-sm text-stone-400">A carregar…</div>;
-  if (!data) return <div className="rounded-2xl border border-stone-800 p-6 text-sm text-stone-600">Escolhe uma conta.</div>;
-  if (!data.ok) return <div className="rounded-2xl border border-amber-900 bg-amber-950/30 p-6 text-sm text-amber-300">Não deu para carregar: {data.detalhe ?? data.erro}</div>;
-
+function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar: string } }) {
   const maxAlc = Math.max(1, ...(data.resumo?.porFormato ?? []).map((f) => f.mediaAlcance));
   const top = [...data.posts].sort((x, y) => (y.alcance ?? -1) - (x.alcance ?? -1)).slice(0, 4);
-
   return (
     <div className="rounded-2xl border border-stone-700 p-5">
-      <div className={`text-lg font-semibold ${acc}`}>@{data.username}</div>
-      <div className="text-xs text-stone-400">{nf(data.seguidores)} seguidores · {nf(data.totalPosts)} posts</div>
+      <div className={`text-lg font-semibold ${accent.text}`}>@{data.username}</div>
+      <div className="text-xs text-stone-400">{nf(data.seguidores)} seguidores · {nf(data.totalPosts)} posts · {data.resumo?.taxaInteracao ?? 0}% interação</div>
 
       {!data.insightsDisponiveis && (
         <div className="mt-3 rounded-lg bg-amber-950/40 p-3 text-xs text-amber-300">
-          Só gostos/comentários — falta a permissão <code>instagram_manage_insights</code> nesta conta. Religa o token em <Link href="/admin/instagram" className="underline">instagram · ligar token</Link>.
+          Só gostos/comentários — falta a permissão <code>instagram_manage_insights</code>. Religa o token em <Link href="/admin/instagram" className="underline">instagram · ligar token</Link>.
         </div>
       )}
 
-      {/* por formato */}
       <div className="mt-5">
         <div className="text-xs font-medium text-stone-300">O que funciona por formato</div>
         <div className="mt-2 space-y-2">
@@ -214,7 +181,7 @@ function Coluna({ data, carregando, cor }: { data: Analytics | null; carregando:
                 <span className="text-stone-300">{nf(f.mediaAlcance)} alc. · {nf(f.mediaInteracoes)} int.</span>
               </div>
               <div className="mt-1 h-1.5 rounded-full bg-stone-800">
-                <div className={`h-1.5 rounded-full ${cor === 'rose' ? 'bg-rose-500' : 'bg-emerald-500'}`} style={{ width: `${Math.round((f.mediaAlcance / maxAlc) * 100)}%` }} />
+                <div className={`h-1.5 rounded-full ${accent.bar}`} style={{ width: `${Math.round((f.mediaAlcance / maxAlc) * 100)}%` }} />
               </div>
             </div>
           ))}
@@ -222,7 +189,6 @@ function Coluna({ data, carregando, cor }: { data: Analytics | null; carregando:
         </div>
       </div>
 
-      {/* melhores posts */}
       <div className="mt-5">
         <div className="text-xs font-medium text-stone-300">Melhores posts (por alcance)</div>
         <div className="mt-2 grid grid-cols-2 gap-2">

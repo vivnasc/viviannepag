@@ -26,6 +26,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: false, erro: 'sem-credenciais', detalhe: `a conta "${conta}" ainda não tem token ligado (liga em /admin/instagram)` });
   }
 
-  const data = await getContaAnalytics(token, igUserId);
+  // ?limite= controla quantos posts buscar (menos = mais rápido, p/ o painel geral)
+  const limiteRaw = Number(req.nextUrl.searchParams.get('limite'));
+  const limite = Number.isFinite(limiteRaw) && limiteRaw > 0 ? Math.min(30, limiteRaw) : 18;
+
+  const data = await getContaAnalytics(token, igUserId, limite);
   return NextResponse.json(data);
 }
