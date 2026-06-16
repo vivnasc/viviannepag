@@ -398,11 +398,11 @@ export default function MetodoContaPage() {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1 text-center">face 1 · a dor</p>
-                    <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} />
+                    <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="typewriter" prog={1} />
                   </div>
                   <div>
                     <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1 text-center">face 2 · revelação</p>
-                    <MetodoSlide texto={detalhe.texto2} conceito={detalhe.conceito2 ?? undefined} veuReveal={detalhe.veuReveal2 ?? undefined} imageUrl={detalhe.imageUrl2 ?? undefined} conta={conta} prog={1} />
+                    <MetodoSlide texto={detalhe.texto2} conceito={detalhe.conceito2 ?? undefined} veuReveal={detalhe.veuReveal2 ?? undefined} imageUrl={detalhe.imageUrl2 ?? undefined} conta={conta} anim="reveal" prog={1} />
                   </div>
                 </div>
                 <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a face 1 escreve-se, depois a face 2</p>

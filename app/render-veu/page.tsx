@@ -40,10 +40,10 @@ function DuasFaces({ face1, face2, conta, prog }: { face1: Face; face2: Face; co
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
-        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} prog={p1} />
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
-        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} prog={p2} />
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} />
       </div>
     </div>
   );
