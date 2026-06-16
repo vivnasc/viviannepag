@@ -26,10 +26,11 @@ export async function GET() {
     created_at?: string;
   };
 
-  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null }> = {};
+  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null }> = {};
   for (const row of (data ?? []) as Row[]) {
     const postId = row.theme?.metodo?.postId ?? row.slug.replace(/^metodo-/, '');
     const slide = row.dias?.[0]?.slides?.[0];
+    const slide2 = row.dias?.[0]?.slides?.[1]; // face 2 (revelação) dos posts de 2 faces
     estado[postId] = {
       slug: row.slug,
       conta: row.theme?.metodo?.conta ?? null,
@@ -37,6 +38,9 @@ export async function GET() {
       texto: slide?.texto ?? row.brief ?? '',
       conceito: slide?.conceito ?? '',
       imageUrl: slide?.imageUrl ?? null,
+      texto2: slide2?.texto ?? null,
+      conceito2: slide2?.conceito ?? null,
+      imageUrl2: slide2?.imageUrl ?? null,
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       legenda: row.dias?.[0]?.legenda ?? null,
       agendadoEm: row.theme?.agendadoEm ?? null,
