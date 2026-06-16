@@ -11,9 +11,10 @@ type Post = {
 };
 type FormatoResumo = { formato: string; n: number; mediaAlcance: number; mediaInteracoes: number };
 type Resumo = { mediaAlcance: number; mediaInteracoes: number; taxaInteracao: number; porFormato: FormatoResumo[]; melhorFormato?: string };
+type Crescimento = { novos30d?: number; porSemana?: number; alcanceDescobertaPct?: number };
 type Analytics = {
   ok: boolean; username?: string; seguidores?: number; totalPosts?: number;
-  insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; erro?: string; detalhe?: string; avisoInsights?: string;
+  insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; crescimento?: Crescimento; erro?: string; detalhe?: string; avisoInsights?: string;
   consistenteDesde?: string | null;
 };
 
@@ -61,6 +62,12 @@ function caminhoASeguir(contas: Conta[], dados: Record<string, Analytics>): stri
   const porAlc = [...base].sort((a, b) => b.d.resumo!.mediaAlcance - a.d.resumo!.mediaAlcance);
   if (porAlc[0]?.d.resumo!.mediaAlcance > 0) recs.push(`${nome(porAlc[0].c)} tem o maior alcance médio (${nf(porAlc[0].d.resumo!.mediaAlcance)}).`);
 
+  const porNovos = [...base].sort((a, b) => (b.d.crescimento?.novos30d ?? 0) - (a.d.crescimento?.novos30d ?? 0));
+  if ((porNovos[0]?.d.crescimento?.novos30d ?? 0) > 0) recs.push(`${nome(porNovos[0].c)} é a que mais cresce (+${nf(porNovos[0].d.crescimento!.novos30d!)} seguidores em 30 dias).`);
+
+  const porDesc = [...base].filter((x) => x.d.crescimento?.alcanceDescobertaPct != null).sort((a, b) => (b.d.crescimento!.alcanceDescobertaPct!) - (a.d.crescimento!.alcanceDescobertaPct!));
+  if (porDesc[0]) recs.push(`${nome(porDesc[0].c)} chega a ${porDesc[0].d.crescimento!.alcanceDescobertaPct}% de não-seguidores (descoberta) — é o teu maior motor de gente nova; vê o que lá resulta e repete.`);
+
   const todosPosts = base.flatMap((x) => x.d.posts);
   const reels = todosPosts.filter((p) => p.formato === 'REELS' && p.alcance != null);
   const outros = todosPosts.filter((p) => p.formato !== 'REELS' && p.alcance != null);
@@ -70,7 +77,7 @@ function caminhoASeguir(contas: Conta[], dados: Record<string, Analytics>): stri
   const novas = todas.filter((x) => ehNova(x.c.id)).map((x) => `${nome(x.c)} (${idadeLabel(dados[x.c.id]?.consistenteDesde)})`);
   if (novas.length) recs.push(`${novas.join(', ')} ${novas.length === 1 ? 'é recente' : 'são recentes'} — ainda é cedo para comparar com as antigas. Dá-lhes tempo e consistência; mede daqui a umas semanas.`);
 
-  return recs.slice(0, 5);
+  return recs.slice(0, 6);
 }
 
 export default function AnalyticsPage() {
@@ -107,6 +114,7 @@ export default function AnalyticsPage() {
   const maxSeg = Math.max(0, ...oks.map((c) => dados[c.id]?.seguidores ?? 0));
   const maxAlc = Math.max(0, ...oks.map((c) => dados[c.id]?.resumo?.mediaAlcance ?? 0));
   const maxTaxa = Math.max(0, ...oks.map((c) => dados[c.id]?.resumo?.taxaInteracao ?? 0));
+  const maxNovos = Math.max(0, ...oks.map((c) => dados[c.id]?.crescimento?.novos30d ?? 0));
   const recs = caminhoASeguir(contas, dados);
 
   return (
@@ -121,8 +129,10 @@ export default function AnalyticsPage() {
             <tr>
               <th className="p-3 font-medium">Conta</th>
               <th className="p-3 text-right font-medium">Seguidores</th>
+              <th className="p-3 text-right font-medium">Novos (30d)</th>
               <th className="p-3 text-right font-medium">Média alcance</th>
               <th className="p-3 text-right font-medium">Taxa interação</th>
+              <th className="p-3 text-right font-medium">Descoberta</th>
               <th className="p-3 font-medium">Melhor formato</th>
               <th className="p-3 font-medium">Consistente desde</th>
             </tr>
@@ -139,14 +149,16 @@ export default function AnalyticsPage() {
                 <tr key={c.id} className="border-t border-stone-800">
                   <td className="p-3 whitespace-nowrap">{c.emoji} {d?.ok && d.username ? `@${d.username}` : c.nome}</td>
                   {carregando ? (
-                    <td colSpan={5} className="p-3 text-stone-500">a carregar…</td>
+                    <td colSpan={7} className="p-3 text-stone-500">a carregar…</td>
                   ) : !d?.ok ? (
-                    <td colSpan={5} className="p-3 text-stone-500">{d?.erro === 'sem-credenciais' ? 'não ligado — liga o token' : `sem dados${d?.detalhe ? ' · ' + d.detalhe : d?.erro ? ' · ' + d.erro : ''}`}</td>
+                    <td colSpan={7} className="p-3 text-stone-500">{d?.erro === 'sem-credenciais' ? 'não ligado — liga o token' : `sem dados${d?.detalhe ? ' · ' + d.detalhe : d?.erro ? ' · ' + d.erro : ''}`}</td>
                   ) : (
                     <>
                       <td className={`p-3 text-right ${(d.seguidores ?? 0) === maxSeg && maxSeg > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{nf(d.seguidores)}</td>
+                      <td className={`p-3 text-right ${(d.crescimento?.novos30d ?? 0) === maxNovos && maxNovos > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{d.crescimento?.novos30d != null ? `+${nf(d.crescimento.novos30d)}` : '—'}</td>
                       <td className={`p-3 text-right ${(d.resumo?.mediaAlcance ?? 0) === maxAlc && maxAlc > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{nf(d.resumo?.mediaAlcance)}</td>
                       <td className={`p-3 text-right ${(d.resumo?.taxaInteracao ?? 0) === maxTaxa && maxTaxa > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{d.resumo?.taxaInteracao ?? 0}%</td>
+                      <td className="p-3 text-right text-stone-200">{d.crescimento?.alcanceDescobertaPct != null ? `${d.crescimento.alcanceDescobertaPct}%` : '—'}</td>
                       <td className="p-3 text-stone-300">{d.resumo?.melhorFormato ? `${emojiFormato(d.resumo.melhorFormato)} ${fmt(d.resumo.melhorFormato)}` : '—'}</td>
                       <td className="p-3 whitespace-nowrap">{dataInput} <span className="ml-1 text-xs text-stone-400">{d.consistenteDesde ? idadeLabel(d.consistenteDesde) : ''}</span></td>
                     </>
@@ -188,6 +200,12 @@ function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar
         {data.consistenteDesde && <span className={`rounded-full px-2 py-0.5 text-[0.65rem] ${nova ? 'bg-amber-900/40 text-amber-300' : 'bg-stone-800 text-stone-400'}`}>consistente {idadeLabel(data.consistenteDesde)}{nova ? ' · nova' : ''}</span>}
       </div>
       <div className="text-xs text-stone-400">{nf(data.seguidores)} seguidores · {nf(data.totalPosts)} posts · {data.resumo?.taxaInteracao ?? 0}% interação</div>
+      {data.crescimento && (data.crescimento.novos30d != null || data.crescimento.alcanceDescobertaPct != null) && (
+        <div className="mt-1 text-xs text-stone-300">
+          {data.crescimento.novos30d != null && <span>📈 +{nf(data.crescimento.novos30d)} seg. (30d){data.crescimento.porSemana != null ? ` · ~${nf(data.crescimento.porSemana)}/sem` : ''}</span>}
+          {data.crescimento.alcanceDescobertaPct != null && <span className="ml-2">🧲 {data.crescimento.alcanceDescobertaPct}% a não-seguidores</span>}
+        </div>
+      )}
 
       {!data.insightsDisponiveis && (
         <div className="mt-3 rounded-lg bg-amber-950/40 p-3 text-xs text-amber-300">
