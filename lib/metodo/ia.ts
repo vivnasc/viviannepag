@@ -53,7 +53,7 @@ Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`;
   return limparTravessoes(t);
 }
 
-export async function fraseReconhecimento(veu: VeuNome, apiKey: string, evitar: string[] = []): Promise<string> {
+export async function fraseReconhecimento(veu: VeuNome, apiKey: string, evitar: string[] = [], foco?: { titulo: string; exemplos: string[] }): Promise<string> {
   const s = VEU_SEMENTE[veu];
   // POÇO FUNDO: o SABER do véu (a área de estudo) dá MUITAS faces da dor, para a
   // frase ter ângulos novos infinitos em vez de repetir os poucos exemplos-semente.
@@ -71,10 +71,15 @@ MATÉRIA-PRIMA deste véu (a área de estudo dela; usa para encontrar um ÂNGULO
   const campo = ref?.conceitos.length
     ? `\nCAMPO DE ESTUDO (conceitos reais, SÓ para TU encontrares uma face nova e concreta da dor; NUNCA os nomeies nem uses termos técnicos, nomes de autores, livros ou jargão na frase): ${ref.conceitos.join(' · ')}.`
     : '';
+  // ÂNGULO DA SEMANA (o percurso trimestral): faz a dor SAIR pela dimensão que a
+  // semana planeou. É isto que liga o trimestral ao semanal (o planeado é executado).
+  const angulo = foco?.exemplos?.length
+    ? `\nÂNGULO DESTA SEMANA (o foco do percurso de 3 meses; escreve a dor a partir DESTE ângulo): ${foco.titulo}. Inspira-te nestas faces para encontrares UMA nova (NÃO copies à letra): ${foco.exemplos.slice(0, 6).map((e) => `"${e}"`).join('; ')}.`
+    : '';
   const sys = `Escreves UMA frase curta de RECONHECIMENTO para um reel de psicologia (Método VS). É a voz interior de uma mulher cansada, na 1.ª pessoa, que ela reconhece em 3 segundos ("isto sou eu"). Padrão: ${s.descricao}
 FALA SIMPLES (regra dura): escreve como uma pessoa REAL fala a uma amiga, em voz alta. PROIBIDO metáforas, comparações ("como o/a…"), linguagem poética, filosófica, espiritual ou de coach. Nada de "alma", "universo", "tempestade", "rio", "véu". Uma frase que alguém DIZ mesmo, não que escreve num livro.
 REGRAS: português europeu; máximo 12 palavras; concreta e do dia a dia (não abstrata, não aforismo). A frase tem de fazer sentido SOZINHA, sem contexto: NÃO uses pronomes ambíguos (evita "ela", "ele", "isso", "aquilo", "lá" sem dizer a quê ou a quem te referes). SEM travessões (nem — nem –); SEM hashtags; sem aspas. Tem de ser DIFERENTE destes exemplos: ${s.exemplos.map((e) => `"${e}"`).join('; ')}.
-${materia}${campo}
+${materia}${campo}${angulo}
 VARIEDADE (essencial, pensamos a LONGO PRAZO): a mesma dor tem muitas faces (o corpo, o tempo, o dinheiro, o trabalho, a casa, as relações, o futuro, a noite). NÃO voltes sempre ao mesmo exemplo nem ao mesmo tema; escolhe uma face diferente da matéria-prima de cada vez.
 VARIA A FORMA: muda a ABERTURA e a estrutura. NÃO comeces várias frases da mesma maneira (ex.: não repitas frases a começar por "Sorrio" ou "Estou"). Alterna entre uma cena concreta, um hábito, um pensamento e uma fala.
 ${evitar.length ? `JÁ FORAM usadas estas frases nesta conta, NÃO repitas o tema nem as palavras de nenhuma (encontra outra face da dor): ${evitar.slice(-30).map((e) => `"${e}"`).join('; ')}.` : ''}

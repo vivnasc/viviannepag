@@ -4,8 +4,9 @@ import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta, type ContaId } from '@/lib/metodo/contas';
-import { planoSemana, planoSemanaMae, VEUS_SEMANA_MAE } from '@/lib/metodo/semana';
-import { jornadaConta, totalTemas, semanaTrimestreAtual } from '@/lib/metodo/planoTrimestral';
+import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
+import { jornadaConta, totalTemas, semanaTrimestreAtual, semanaMaeDoOffset, parteMae } from '@/lib/metodo/planoTrimestral';
+import { exemplosDimensao } from '@/lib/metodo/saber';
 import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -100,8 +101,11 @@ export default function MetodoSemanaPage() {
   const rotuloSemana = offset === 0 ? 'Esta semana' : offset === 1 ? 'Próxima semana' : offset === -1 ? 'Semana passada' : `${offset > 0 ? '+' : ''}${offset} semanas`;
 
   // CONTEXTO TRIMESTRAL: a produção semanal DESCE do plano de 3 meses (como o
-  // Plano da Semana desce do plano editorial da veu.a.veu). Portas: o tema desta
-  // semana da jornada; mãe: os temas são DIAS (os 7 véus, 1 por dia).
+  // Plano da Semana desce do plano editorial da veu.a.veu).
+  //  - MÃE: a semana é uma TEMÁTICA do percurso; os 7 véus (1/dia) saem por esse
+  //    ângulo. É o que a geração executa (gerar-mae usa a mesma dimensão).
+  //  - PORTAS: o tema desta semana da jornada.
+  const semMae = sel === 'mae' ? semanaMaeDoOffset(offset) : null;
   const totalT = sel === 'mae' ? 0 : totalTemas(sel);
   const jornada = sel === 'mae' ? [] : jornadaConta(sel);
   const idxT = totalT ? (((semanaTrimestreAtual() - 1 + offset) % totalT) + totalT) % totalT : 0;
@@ -139,14 +143,11 @@ export default function MetodoSemanaPage() {
         {/* o plano de 3 meses para esta semana — a produção DESCE daqui (como o
             Plano da Semana desce do plano editorial da veu.a.veu) */}
         <div className="mt-4 rounded-xl border border-[#EBAE4A]/25 bg-[#EBAE4A]/[0.05] p-4">
-          {sel === 'mae' ? (
+          {sel === 'mae' && semMae ? (
             <>
-              <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1.5">Do plano de 3 meses · {rotuloSemana} · os temas são dias</p>
-              <div className="flex flex-wrap gap-1.5">
-                {VEUS_SEMANA_MAE.map((v) => (
-                  <span key={v.wd} className="text-[0.62rem] px-2 py-0.5 rounded-full border border-[#EBAE4A]/35 text-[#EBAE4A]/90">{v.nome.slice(0, 3)} · {v.veu}</span>
-                ))}
-              </div>
+              <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1">Do plano de 3 meses · {rotuloSemana} · {parteMae(semMae.parte).nome}</p>
+              <p className="text-lg leading-tight" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>“{semMae.mote}”</p>
+              <p className="text-[0.74rem] opacity-65">{semMae.tema} · os 7 véus (1/dia) saem por este ângulo</p>
             </>
           ) : temaT ? (
             <>
@@ -192,7 +193,8 @@ export default function MetodoSemanaPage() {
                       </div>
                       <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[0.62rem] uppercase tracking-wider" style={{ background: `${conta.cor}33`, color: conta.cor }}>Véu {d.veu} · reel 2 faces</span>
                       <p className="mt-1.5 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
-                        <span className="opacity-55 italic">face 1 · a dor (IA)</span>
+                        <span className="opacity-55 italic">face 1 · a dor (IA){semMae ? `, por: ${semMae.tema.toLowerCase()}` : ''}</span>
+                        {semMae && (() => { const ex = exemplosDimensao(d.veu, semMae.dimensao); const e = ex[((offset % ex.length) + ex.length) % (ex.length || 1)]; return e ? <><br /><span className="opacity-45 text-[0.74rem]">ex.: {e}</span></> : null; })()}
                       </p>
                       <p className="mt-1 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
                         <span className="text-[0.6rem] uppercase tracking-wider opacity-50">face 2 · revelação</span><br />{d.revelacao.texto}

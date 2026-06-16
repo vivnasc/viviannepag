@@ -101,24 +101,30 @@ O método de autoconhecimento dela, **separado da veu.a.veu** (não toca
 Três níveis, **separados por conta** (barra de separadores das 4 contas em cada
 página, como na página Publicar):
 
-1. **Calendário · 3 meses** (`/admin/metodo/calendario`) — o MAPA / a FONTE
-   (exatamente como o Calendário da veu.a.veu). A jornada trimestral de cada
-   conta, em `lib/metodo/planoTrimestral.ts` (`jornadaConta`). Para as PORTAS,
-   cada cartão é um **tema** (uma semana da jornada). Para a **MÃE, os temas são
-   DIAS**: cada semana mostra os 7 véus (1/dia), vindos do motor (`planoSemanaMae`).
-   "abrir na produção →" leva `?conta=` e `?off=` (a semana do cartão).
+1. **Calendário · 3 meses** (`/admin/metodo/calendario`) — o MAPA / a VISÃO
+   (como o Calendário da veu.a.veu). É a FONTE; o semanal desce daqui.
+   - **MÃE = um PERCURSO** (`PERCURSO_MAE` em `lib/metodo/planoTrimestral.ts`):
+     4 partes (**Ver → Compreender → O custo → Soltar**, o arco do método), 12
+     semanas, cada uma uma **temática** = um ângulo (uma `DimensaoVeu` do SABER:
+     comportamentos, cenas, origens, mecanismos, custos, crenças, verdades, mapa).
+     NÃO é "1 véu por semana" nem repetição aleatória: tem **direção**. Ao fim,
+     recomeça com conteúdo NOVO (a IA puxa do SABER + anti-repetição).
+   - **PORTAS** = a jornada de temas (`jornadaConta`), cada cartão uma semana.
+   - "abrir na produção →" leva `?conta=` e `?off=` (a semana do cartão).
 2. **Produção semanal** (`/admin/metodo/semana`) — o EXECUTOR, que **desce do
-   plano de 3 meses** (igual ao Plano da Semana da veu.a.veu, que desce do plano
-   editorial). Tem um banner "Do plano de 3 meses · esta semana" que lê o
-   `planoTrimestral` para o offset selecionado (portas: o tema da semana; mãe: os
-   7 véus, 1/dia) + "ver os 3 meses →". Lê `?conta=` e `?off=`; ◀▶ (offset 0 =
-   ESTA semana, `segundaDestaSemana`); `gerar/completar/gerar dia`.
+   plano de 3 meses** (como o Plano da Semana da veu.a.veu). Banner "Do plano de
+   3 meses · esta semana" (mãe: a temática + ângulo de `semanaMaeDoOffset(off)`;
+   portas: o tema de `jornadaConta`) + "ver os 3 meses →". Lê `?conta=`/`?off=`;
+   ◀▶ (offset 0 = ESTA semana); `gerar/completar/gerar dia`.
 3. **Publicar / Agenda** — o dia.
 
-✅ **Calendário↔semanal LIGADOS, como na veu.a.veu:** o plano de 3 meses
-(`planoTrimestral`) é a fonte; a produção semanal desce dele (banner que lê o
-plano para a semana selecionada). NUNCA apagar o `planoTrimestral` — é o mapa.
-Na mãe os temas são DIAS (calendário e semana mostram os 7 véus, 1/dia).
+✅ **Calendário↔semanal LIGADOS de verdade, como na veu.a.veu:** o trimestral é a
+fonte; o semanal desce dele E **executa-o** — a MÃE faz 1 véu/dia, mas a dor (face
+1) sai pelo ÂNGULO da semana do percurso (`gerar-mae` usa `semanaMaeDaData` +
+`exemplosDimensao` → `fraseReconhecimento(foco)`). Assim o planeado no trimestral
+é o que sai no semanal. NUNCA apagar o `planoTrimestral` — é o mapa/percurso.
+**Longo prazo:** o percurso dá a direção (repete a cada trimestre); o SABER dá o
+conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
 
 **Regras de ouro do método (aprendidas à força):**
 - **Expandir, nunca refazer do zero** o definido. A visão é uma **vista por cima
