@@ -65,6 +65,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/metodo', label: 'painel · ver/vir/viver' },
       { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
       { href: '/admin/metodo/semana', label: 'produção semanal' },
+      { href: '/admin/metodo/formatos', label: 'motores · posts da tarde' },
       { href: '/admin/metodo/ver', label: 'ver.soltar' },
       { href: '/admin/metodo/vir', label: 'vir.soltar' },
       { href: '/admin/metodo/viver', label: 'viver.soltar' },
