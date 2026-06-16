@@ -96,6 +96,60 @@ O método de autoconhecimento dela, **separado da veu.a.veu** (não toca
 - **Voz inviolável:** travessões BANIDOS (— e –); autoridade do caminho
   ("reconheci primeiro em mim"), NUNCA inventar biografia/marcos/clientes.
 
+### Fluxo editorial do método (copiado da veu.a.veu, do amplo ao específico)
+
+Três níveis, **separados por conta** (barra de separadores das 4 contas em cada
+página, como na página Publicar):
+
+1. **Calendário · 3 meses** (`/admin/metodo/calendario`) — jornada de temas por
+   conta, véus **ALTERNADOS** (nunca um mês no mesmo). Vem de
+   `lib/metodo/planoTrimestral.ts` (`jornadaConta` puxa de TODO o SABER do véu:
+   crenças + cenas + custos). Botão "abrir na produção →" leva `?conta=`.
+2. **Produção semanal** (`/admin/metodo/semana`) — por conta (lê `?conta=`), com
+   ◀▶ (offset 0 = ESTA semana, `segundaDestaSemana`), `gerar/completar/gerar dia`.
+3. **Publicar / Agenda** — o dia.
+
+⚠️ **PROBLEMA POR RESOLVER (a Vivianne apanhou, é o próximo trabalho):** o
+calendário e o plano semanal **ainda não estão ligados de verdade**. O calendário
+mostra uma jornada de temas ALTERNADOS (1 tema por cartão), mas o plano da mãe é
+**7 véus/dia**. Não batem. **Fix:** o calendário tem de ser DERIVADO do mesmo
+motor que o semanal (`planoSemanaMae`/`planoSemana`) — para a mãe os "temas" são
+**DIAS** (1 véu/dia), não semanas; aí ligam (o calendário mostra exatamente os
+posts do plano). Manter o look de cartões da veu.a.veu, mas com dados reais do
+motor, e a semana atual a casar com a produção.
+
+**Regras de ouro do método (aprendidas à força):**
+- **Expandir, nunca refazer do zero** o definido. A visão é uma **vista por cima
+  dos motores** (`semana.ts`/`contas.ts`), nunca estrutura paralela que contradiga.
+- **mãe = 1 véu por DIA** (7/semana, `planoSemanaMae`, reel 2 faces). Portas têm
+  os SEUS véus (ver: Turbilhão+Memória; vir: Esforço+Desolação; viver:
+  Horizonte+Permanência). **Véus sempre ALTERNADOS**, nunca em bloco.
+- `completar` (`gerar-mae`/`gerar-lote`) salta dias que JÁ existem (por DATA, não
+  por slug) e **NUNCA toca em publicados**, em nenhum modo.
+- **NÃO didático** (isso é a veu.a.veu): SABER (`saber.ts`) e `referencias.ts`
+  (das cadeiras dela) só dão PROFUNDIDADE por baixo; o que SAI é **dor revelada +
+  direção**, na linguagem das dores da vida. NUNCA nomear autores/jargão na frase.
+  SABER cresce com as cadeiras (estão na 1.ª). Os 2 livros de inspiração
+  ("A Extraordinária Arte de Tirar o Véu", "O Véu da Escassez") **NÃO são dela**.
+- **Frase rápida** (`components/admin/FraseRapida.tsx`): reel de motion na hora,
+  reaproveita **fundos guardados** (`/api/admin/metodo/fundos`), agenda.
+
+**Disciplina (a Vivianne pediu, MUITO sensível):**
+- **Builds/custos:** `npx tsc --noEmit` E `npm run build` LOCAIS e limpos ANTES
+  de push; juntar mudanças num só deploy; **unsubscribe** dos webhooks do PR após
+  merge (ela odeia o spam).
+- **Entregas, não questionamento.** Inferir o passo natural (separei o trimestral
+  por conta → separo o semanal também, sem ela pedir).
+- Commits de **squash-merge no `main`** aparecem "Unverified" (do GitHub) — NÃO é
+  trabalho pendente, não reescrever o `main`.
+
+**Próximos passos do método:** (1) **ligar calendário↔semanal** (ver ⚠️ acima);
+(2) **formatos da tarde** (carrossel de profundidade: O Custo Escondido · O
+Mecanismo Invisível · A Origem · O Erro de Interpretação · Cena · O Véu de… · O
+Mapa do Véu — revelar dor + direção, não dar aula); (3) **voz nos motions**
+(`ELEVEN_VOICE_ID` PURA, `eleven_v3`, SEM voice_settings/language_code — ver
+`render-reels.js`); (4) anti-repetição entre contas + camada de análise (o que rende).
+
 ## FOCO da próxima sessão: Cá em Casa
 
 A Vivianne quer trabalhar o **Cá em Casa** (parece o mais elaborado e nunca
@@ -129,4 +183,7 @@ gerou nada para ver). Pontos de partida:
   · export Metricool = MP4 Reel com cache-busting e datas seg→dom 13h · **geração
   a correr pelo Método VS** (`lib/carrossel/metodo.ts`).
 - **Método VS:** pilar *Os Sete Véus* + 3 manuais (PT/EN) · contas mãe/ver/vir/
-  viver com produção autónoma 60/30/10 · admin `/admin/metodo`.
+  viver com produção autónoma 60/30/10 · admin `/admin/metodo`. Fluxo de 3 níveis
+  por conta (Calendário 3 meses → Produção semanal → Publicar), separados por
+  separadores, ligados por `?conta=`. SABER + `referencias.ts` (das cadeiras) por
+  baixo. ⚠️ calendário↔semanal ainda por LIGAR de verdade (ver secção do método).

@@ -59,7 +59,7 @@ export default function MetodoCalendarioPage() {
                   <p className="leading-tight text-lg" style={{ fontFamily: 'var(--font-cormorant), serif', color: cor }}>“{s.mote}”</p>
                   <p className="text-[0.76rem] opacity-60 mb-2.5">{s.nota}</p>
                   <div className="flex flex-wrap items-center gap-2">
-                    <Link href="/admin/metodo/semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-white/20 hover:border-[#EBAE4A] hover:text-[#EBAE4A] no-underline">abrir na produção →</Link>
+                    <Link href={`/admin/metodo/semana?conta=${sel}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-white/20 hover:border-[#EBAE4A] hover:text-[#EBAE4A] no-underline">abrir na produção →</Link>
                     <Link href={`/admin/metodo/${sel}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border no-underline" style={{ borderColor: cor + '55', color: cor }}>@{conta.handle} →</Link>
                   </div>
                 </div>

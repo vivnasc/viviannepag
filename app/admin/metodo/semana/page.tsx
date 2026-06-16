@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
-import { CONTAS_LISTA, Conta } from '@/lib/metodo/contas';
+import { CONTAS_LISTA, Conta, type ContaId } from '@/lib/metodo/contas';
 import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
 import { FraseRapida } from '@/components/admin/FraseRapida';
 
@@ -15,6 +15,12 @@ const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', r
 
 export default function MetodoSemanaPage() {
   const [offset, setOffset] = useState(0);
+  const [sel, setSel] = useState<ContaId>('mae'); // conta ativa (separadores, como no calendário)
+  // ligação a partir do calendário: /admin/metodo/semana?conta=ver abre nessa conta
+  useEffect(() => {
+    const c = new URLSearchParams(window.location.search).get('conta');
+    if (c && CONTAS_LISTA.some((x) => x.id === c)) setSel(c as ContaId);
+  }, []);
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -100,6 +106,16 @@ export default function MetodoSemanaPage() {
           O plano por dia (como na veu.a.veu): cada dia tem o seu tipo, na proporção 60/30/10. Carregas e gera no servidor, com texto + imagem, já com a data de cada post. Podes sair que continua. Nada publica sem o teu ✓ no Publicar.
         </p>
 
+        {/* separadores das contas (mesmo padrão do calendário trimestral) */}
+        <div className="mt-4 flex gap-2 flex-wrap">
+          {CONTAS_LISTA.map((c) => {
+            const ativo = c.id === sel;
+            return (
+              <button key={c.id} onClick={() => setSel(c.id)} className="px-3 py-1.5 rounded-lg border text-[0.82rem]" style={{ borderColor: ativo ? c.cor : 'rgba(255,255,255,0.15)', color: ativo ? c.cor : '#F2E8DC', background: ativo ? c.cor + '18' : 'transparent' }}>@{c.handle}</button>
+            );
+          })}
+        </div>
+
         <div className="mt-4 flex items-center gap-3 text-[0.8rem]">
           <button onClick={() => setOffset((o) => o - 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">◀</button>
           <p><b>{rotuloSemana}</b> · {dm(seg)} a {dm(dom)}</p>
@@ -111,7 +127,7 @@ export default function MetodoSemanaPage() {
         {msg && <p className="mt-3 text-[0.8rem] text-emerald-300">{msg}</p>}
 
         <div className="mt-5 space-y-6">
-          {CONTAS_LISTA.map((conta: Conta) => {
+          {CONTAS_LISTA.filter((c) => c.id === sel).map((conta: Conta) => {
             const isMae = conta.id === 'mae';
             const dias = isMae ? [] : planoSemana(conta.id, offset);
             const diasMae = isMae ? planoSemanaMae(offset) : [];
