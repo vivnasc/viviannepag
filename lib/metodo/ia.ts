@@ -24,11 +24,11 @@ export function assuntoCurto(prompt: string): string {
 }
 
 // Regras fixas do fundo DRAMÁTICO (estilo de tarde, para alcance): cinematográfico,
-// uma silhueta humana sem rosto, um foco de energia/luz, escuro e contrastado. É o
-// oposto do contemplativo — feito para parar o scroll. Mantém 9:16 e sem texto.
+// escuro e contrastado, luz dramática. O DRAMA vem da luz/escala/atmosfera, NÃO de
+// uma fórmula fixa. Mantém 9:16 e espaço para texto.
 const FUNDO_REGRAS_DRAMA =
-  'cinematic photographic still, dramatic volumetric light, deep moody high-contrast darkness with one glowing focal light, atmospheric haze, epic and emotional, ' +
-  'space in the lower third for an overlaid sentence, NO faces visible, NO text, NO letters, NO watermark, NO logo, vertical 9:16';
+  'cinematic photographic still, dramatic film lighting (god rays, a shaft of light, a glowing horizon, an aurora, distant fire or a luminous focal point — vary it), moody high-contrast with deep shadows, atmospheric haze, cinematic colour grade, epic and emotional, ' +
+  'generous space in the lower third for an overlaid sentence, NO faces visible, NO text, NO letters, NO watermark, NO logo, vertical 9:16';
 
 // O Claude ESCREVE o prompt de fundo de UM post: criativo e VARIADO (assunto,
 // composição e luz diferentes a cada vez), mantendo só a paleta/atmosfera da
@@ -40,12 +40,18 @@ export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: strin
   const corMundo = `${a.prompt}. Sensação: ${a.sensacao}`;
   const evita = evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : '';
   const sys = estilo === 'dramatico'
-    ? `És diretor de arte de uma marca de psicologia (Método VS, @${conta.handle}). Escreves UM prompt de imagem (em inglês) para um reel DRAMÁTICO e cinematográfico, feito para parar o scroll e ser partilhado (estilo dos grandes canais de energia/espiritualidade).
+    ? `És diretor de arte de cinema de uma marca de psicologia (Método VS, @${conta.handle}). Escreves UM prompt de imagem (em inglês) para um reel DRAMÁTICO e cinematográfico, que para o scroll — mas SOFISTICADO, nunca um clichê.
 
-ASSINATURA DRAMÁTICA (essencial): uma ÚNICA figura humana solitária em SILHUETA (de costas ou de lado, SEM rosto visível, anónima e universal), pequena perante algo vasto — uma paisagem imensa (campo, horizonte, montanha, mar, deserto). Atrás/à volta dela, um GRANDE fenómeno de LUZ/ENERGIA (uma aura, um orbe luminoso, um portal, uma coluna de luz, uma aurora) na cor desta conta. Cinematográfico, fotográfico, luz volumétrica, escuro e contrastado, atmosférico, épico e emocional.
-COR DESTA CONTA (a energia/luz sai nesta paleta): ${corMundo}. Representa: ${conta.depois}
-${frase ? `A FRASE deste post é: «${frase}». A imagem ENCARNA o sentimento da frase (a silhueta vive esse momento perante a energia). A frase manda a emoção; a energia/luz é o espetáculo.` : ''}
-MOVIMENTO (a imagem vai ser ANIMADA depois, com força): compõe para que a energia/luz possa PULSAR e rodopiar, raios a deslocar-se, nuvens/névoa a derivar, o tecido/cabelo da figura a mexer ao vento. Movimento FORTE mas natural.
+O QUE É O DRAMÁTICO (essencial): o impacto vem da LUZ, da ESCALA, da ATMOSFERA, da COR e da EMOÇÃO cinematográfica — NÃO de uma fórmula. Fotográfico, escuro e contrastado, luz de cinema, intemporal e épico.
+NÃO REPETIR FÓRMULA (regra dura): NÃO ponhas sempre uma silhueta humana com uma bola/orbe de luz atrás — isso fica ridículo e repetido. VARIA MUITO de post para post:
+- SUJEITO: às vezes uma figura humana solitária em silhueta (sem rosto, de costas), mas MUITAS VEZES SEM pessoa nenhuma (só a cena, a paisagem, um objeto, um lugar);
+- LUZ/FENÓMENO: raios de luz por entre nuvens de tempestade, uma única réstia de luz numa sala, um horizonte incandescente, uma aurora, um clarão ao longe, uma fenda de luz no escuro, céu cósmico, relâmpago, névoa a apanhar a luz, reflexos na água — NEM SEMPRE um círculo/orbe ao centro;
+- CENÁRIO: mar, deserto, ruínas, floresta, falésia, interior vasto, montanha, chuva, neve, estrada, cosmos;
+- ESCALA e COMPOSIÇÃO (grande plano, macro, plano muito aberto, vista de cima).
+COR DESTA CONTA (a luz/atmosfera sai nesta paleta): ${corMundo}. Representa: ${conta.depois}
+${frase ? `A FRASE deste post é: «${frase}».
+CONEXÃO IMAGEM↔TEXTO (TÃO importante como o drama): a cena tem de ENCARNAR esta frase — o ESTADO ou a METÁFORA concreta por trás dela — NÃO um fundo épico genérico. A frase manda o ASSUNTO e a EMOÇÃO; o tratamento cinematográfico e a cor da conta dão o espetáculo. Ex.: frase sobre adiar a vida → um limiar/porta com luz do outro lado; sobre carregar peso → uma figura minúscula a atravessar uma imensidão; sobre repetir o passado → um lugar em ruínas ao entardecer. Concreto e sensorial.` : 'ASSUNTO: uma cena cinematográfica concreta que encarne o significado da conta, variada, dramática.'}
+MOVIMENTO (a imagem vai ser ANIMADA depois, com força): compõe para que a luz/atmosfera possa MEXER — luz a pulsar, raios a deslocar-se, nuvens/névoa a derivar, água a ondular, chuva, tecido ao vento. Movimento FORTE mas natural.
 ${evita}
 
 Termina sempre com: ${FUNDO_REGRAS_DRAMA}.
