@@ -8,7 +8,7 @@
 // Travessões BANIDOS. Cada reel leva um fundo ÚNICO (família das capas + cena
 // própria), nunca repetido, para não achatar o feed.
 
-import { ContaId, VeuNome, FUNDO_FAMILIA } from './contas';
+import { ContaId, VeuNome, FUNDO_FAMILIA, CONTAS } from './contas';
 
 export interface Reel {
   /** id estável: conta + nº. */
@@ -484,22 +484,26 @@ export function fraseDoReel(reel: Reel): string {
   return `«${reel.porta}» ${reel.sala}`;
 }
 
-export function reelsDaConta(conta: ContaId): Reel[] {
-  if (conta === 'mae') {
-    // a mãe é o PILAR transversal: fala de TODOS os 7 véus. INTERCALA os véus
-    // (um véu diferente por post) para a semana mostrar a largura do método e
-    // NÃO sair de um véu só (nem duplicar a semana de uma porta). A Dualidade
-    // vem à cabeça (é a assinatura dela, território que nenhuma porta cobre).
-    const ordem = ['Dualidade', 'Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência'];
-    const porVeu = ordem.map((v) => REELS.filter((r) => r.veu === v));
-    const out: Reel[] = [];
-    for (let i = 0, vivos = true; vivos; i++) {
-      vivos = false;
-      for (const arr of porVeu) if (i < arr.length) { out.push(arr[i]); vivos = true; }
-    }
-    return out;
+const porForteR = (arr: Reel[]): Reel[] => [...arr.filter((r) => r.revelacaoForte), ...arr.filter((r) => !r.revelacaoForte)];
+function intercalarVeus(grupos: Reel[][]): Reel[] {
+  const out: Reel[] = [];
+  for (let i = 0, vivos = true; vivos; i++) {
+    vivos = false;
+    for (const g of grupos) if (i < g.length) { out.push(g[i]); vivos = true; }
   }
-  return REELS.filter((r) => r.conta === conta);
+  return out;
+}
+
+// INTERCALA os véus da conta (em vez de agrupar) para a semana cobrir TODOS os
+// véus da conta, não ficar presa ao primeiro. Forte primeiro dentro de cada véu.
+//   portas (ver/vir/viver) = os SEUS 2 véus (ex.: ver = Turbilhão + Memória).
+//   mãe = transversal, os 7 véus, com a Dualidade (território só dela) à cabeça.
+export function reelsDaConta(conta: ContaId): Reel[] {
+  const ordemVeus: VeuNome[] = conta === 'mae'
+    ? ['Dualidade', 'Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência']
+    : CONTAS[conta].veus;
+  const grupos = ordemVeus.map((v) => porForteR(REELS.filter((r) => r.veu === v && (conta === 'mae' || r.conta === conta))));
+  return intercalarVeus(grupos);
 }
 
 export function getReel(id: string): Reel | undefined {
