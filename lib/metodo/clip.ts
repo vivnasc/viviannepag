@@ -35,12 +35,22 @@ export async function criarPredicaoClip(imageUrl: string, token: string, prompt 
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ input: { prompt, negative_prompt: negative, duration: duracao, [imgField]: imageUrl } }),
     });
-  let res = await criar('start_image');
-  if (res.status === 422) res = await criar('image');
-  if (!res.ok) throw new Error(`Replicate ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const pred = (await res.json()) as Pred;
-  if (!pred.id) throw new Error('Replicate: sem id de previsão');
-  return pred.id;
+  // o Replicate limita pedidos simultâneos (429). Retry com espera para a 2.ª face
+  // não falhar quando se animam as duas (criar é rápido; só o processamento é longo).
+  let ultimo = '';
+  for (let t = 0; t < 5; t++) {
+    let res = await criar('start_image');
+    if (res.status === 422) res = await criar('image'); // algumas versões usam 'image'
+    if (res.ok) {
+      const pred = (await res.json()) as Pred;
+      if (!pred.id) throw new Error('Replicate: sem id de previsão');
+      return pred.id;
+    }
+    ultimo = `Replicate ${res.status}: ${(await res.text()).slice(0, 200)}`;
+    if (res.status === 429 || res.status >= 500) { await new Promise((r) => setTimeout(r, 2500 * (t + 1))); continue; }
+    throw new Error(ultimo); // erro não recuperável (ex.: 400/401)
+  }
+  throw new Error(ultimo || 'Replicate: falhou a criar previsão');
 }
 
 // Lê o estado de uma previsão (para a COLHER quando ficar pronta).
