@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 export const runtime = 'nodejs';
 
 // SQL para criar a tabela (corre 1x no Supabase → SQL Editor). Devolvido se faltar.
-export const SQL_TABELA = `create table if not exists site_views (
+const SQL_TABELA = `create table if not exists site_views (
   id bigint generated always as identity primary key,
   ts timestamptz not null default now(),
   path text,
