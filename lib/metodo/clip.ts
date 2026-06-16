@@ -5,10 +5,15 @@
 
 const MODEL = 'kwaivgi/kling-v2.5-turbo-pro';
 
-// movimento subtil e fotorrealista, mantendo composição/paleta; sem objetos
-// novos, sem pessoas, sem texto. É o registo do Método VS (contemplativo).
+// movimento MÍNIMO e natural: anima SÓ o que já existe na imagem (a chama treme
+// devagar, a luz respira, leve movimento do que já lá está). NUNCA acrescenta
+// objetos (nada de folhas/pó/fumo/cortinas a voar). Registo contemplativo do método.
 export const PROMPT_MOVIMENTO =
-  'Bring this still painting to life with subtle, natural, cinematic motion: water ripples gently, mist and light drift, leaves, fabric and clouds sway slowly. Keep the exact composition, palette, mood and framing. Calm, slow, atmospheric, contemplative. No new objects, no people appearing, no text, no camera shake.';
+  'Animate ONLY what already exists in this image, with very subtle, natural, almost-still motion: a flame flickers gently, light and reflections shift softly, a faint breathing of the scene. Keep the exact same composition, objects, palette and framing. Extremely slow, calm, minimal, realistic. Do NOT add anything new and do NOT invent elements: no flying leaves, no falling petals, no sparkles or glitter, no floating particles, no extra smoke, no curtains, no birds. No camera movement, no zoom.';
+
+// o que o modelo NÃO deve fazer (evita o exagero: pó dourado, folhas a voar, etc.)
+export const NEGATIVE_MOVIMENTO =
+  'added objects, new elements, flying leaves, falling petals, sparkles, glitter, floating particles, gold flecks, extra smoke, fog appearing, curtains, fabric blowing, birds, butterflies, text, watermark, fast motion, dramatic motion, camera shake, zoom, pan, morphing, warping, distortion, people, faces, hands';
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
@@ -19,7 +24,7 @@ export async function gerarClipKling(imageUrl: string, token: string, prompt = P
     fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
-      body: JSON.stringify({ input: { prompt, duration: duracao, [imgField]: imageUrl } }),
+      body: JSON.stringify({ input: { prompt, negative_prompt: NEGATIVE_MOVIMENTO, duration: duracao, [imgField]: imageUrl } }),
     });
 
   let res = await criar('start_image');
