@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -184,15 +184,16 @@ export default function MetodoContaPage() {
   const [animarLoteBusy, setAnimarLoteBusy] = useState(false);
   const animarFaltam = useCallback(async (faltam: EstadoPost[]) => {
     if (animarLoteBusy || !faltam.length) return;
-    if (typeof window !== 'undefined' && !window.confirm(`Animar os clips em falta de ${faltam.length} post(s)? Custa ~$0.35 por clip (até ~${faltam.length * 2} clips). Demora vários minutos.`)) return;
+    if (typeof window !== 'undefined' && !window.confirm(`Animar os clips em falta de ${faltam.length} post(s)? Custa ~$0.35 por clip (até ~${faltam.length * 2} clips). Disparam todos no servidor e aparecem sozinhos quando ficarem prontos — podes sair.`)) return;
     setAnimarLoteBusy(true); setErro(null); setMsg(null);
     let n = 0;
+    // só DISPARA cada um (volta em segundos); a colheita automática traz os clips.
     for (const e of faltam) {
-      setMsg(`a animar ${n + 1}/${faltam.length}…`);
+      setMsg(`a disparar ${n + 1}/${faltam.length}…`);
       try { const r = await fetch('/api/admin/metodo/animar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: e.slug }) }); if (r.ok) n += 1; } catch { /* segue */ }
     }
     setAnimarLoteBusy(false); recarregar();
-    setMsg(`${n} post(s) animados. Agora "renderizar os que faltam" para os reels com os clips.`);
+    setMsg(`${n} post(s) a animar no servidor (~2-5 min cada). Podes mudar de conta ou fechar — os clips aparecem sozinhos. Depois "renderizar os que faltam".`);
   }, [animarLoteBusy, recarregar]);
 
   // descartar (apagar) um post gerado que não presta, na revisão.
@@ -244,24 +245,47 @@ export default function MetodoContaPage() {
     finally { setNovaImgBusy(null); }
   }, [novaImgBusy, recarregar]);
 
-  // TESTE de clip: anima o fundo (imagem -> vídeo, Kling). ~$0.35, ~1-3 min.
+  // ANIMAR o fundo (imagem -> vídeo, Kling). DISPARA no servidor e volta em segundos:
+  // o clip é colhido depois (corre no Replicate), por isso PODES MUDAR DE CONTA OU
+  // FECHAR que não se perde. ~$0.35/face, fica pronto em ~2-5 min.
   const [animarBusy, setAnimarBusy] = useState<string | null>(null);
   const animar = useCallback(async (slug: string, face?: number) => {
     if (animarBusy) return;
-    setAnimarBusy(slug); setErro(null); setMsg('A animar as faces (Kling, ~2-5 min). Cada face vira um clip. Não feches.');
+    setAnimarBusy(slug); setErro(null); setMsg('A disparar a animação no servidor…');
     try {
       const r = await fetch('/api/admin/metodo/animar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(face === undefined ? { slug } : { slug, face }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else {
-        const cf = (j.clipsPorFace ?? []) as (string | null)[];
-        setMsg(`${j.clips ?? 1} clip(s) pronto(s). O fundo passa a mexer; carrega "renderizar" para o reel final.`);
-        setDetalhe((d) => (d && d.slug === slug ? { ...d, clip: cf[0] ?? d.clip, clip2: cf[1] ?? d.clip2 } : d));
+        setMsg(`A animar ${j.pendentes ?? 1} face(s) no servidor (~2-5 min). Podes mudar de conta ou fechar — o clip aparece sozinho quando ficar pronto.`);
+        // marca pendente já (a colheita automática traz o clip quando estiver pronto)
+        setDetalhe((d) => (d && d.slug === slug ? { ...d, clipPend: true, clipPend2: d.imageUrl2 ? true : d.clipPend2 } : d));
         recarregar();
       }
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setAnimarBusy(null); }
   }, [animarBusy, recarregar]);
+
+  // COLHE os clips prontos (varre o método todo). Corre sozinho enquanto houver
+  // faces a animar — e também ao abrir a página, para apanhar o que ficou pronto
+  // enquanto estiveste fora. É isto que torna a animação independente da aba.
+  const colher = useCallback(async () => {
+    try {
+      const r = await fetch('/api/admin/metodo/colher', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({}) });
+      const j = await r.json().catch(() => ({}));
+      if (r.ok && (j.colhidos ?? 0) > 0) recarregar();
+    } catch { /* tenta na próxima */ }
+  }, [recarregar]);
+
+  // colhe ao abrir (apanha o que ficou pronto enquanto saíste) e, enquanto houver
+  // faces a animar, vai colhendo a cada 15s — o clip aparece sozinho na página.
+  const haPendentes = Object.values(estado).some((e) => e.clipPend || e.clipPend2);
+  useEffect(() => { colher(); }, [colher]);
+  useEffect(() => {
+    if (!haPendentes) return;
+    const id = setInterval(colher, 15000);
+    return () => clearInterval(id);
+  }, [haPendentes, colher]);
 
   // REJEITAR os clips (limpa-os) para regenerar com o movimento contido.
   const rejeitarClips = useCallback(async (slug: string) => {
@@ -313,7 +337,9 @@ export default function MetodoContaPage() {
   // lista recarrega após melhorar/descartar/gerar.
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
-  const faltamClip = geradosConta.filter((e) => (e.imageUrl && !e.clip) || (e.imageUrl2 && !e.clip2));
+  // "falta clip" = tem imagem, não tem clip E não está a animar (pendente conta como já tratado).
+  const faltamClip = geradosConta.filter((e) => (e.imageUrl && !e.clip && !e.clipPend) || (e.imageUrl2 && !e.clip2 && !e.clipPend2));
+  const aAnimar = geradosConta.filter((e) => e.clipPend || e.clipPend2).length;
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
   const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
 
@@ -361,7 +387,8 @@ export default function MetodoContaPage() {
             {semData > 0 && <button onClick={organizar} disabled={orgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{orgBusy ? 'a organizar…' : `organizar por dias (${semData})`}</button>}
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
             {geradosConta.length > 0 && <button onClick={melhorarLote} disabled={melLoteBusy || ambiguas === 0} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : ambiguas === 0 ? 'sem ambíguas' : `melhorar ambíguas (${ambiguas})`}</button>}
-            {geradosConta.length > 0 && <button onClick={() => animarFaltam(faltamClip)} disabled={animarLoteBusy || !faltamClip.length} title="anima (Kling) os clips em falta de todos os posts — ~$0.35 por clip" className="px-3 py-1.5 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarLoteBusy ? '🎬 a animar…' : `🎬 animar clips em falta (${faltamClip.length})`}</button>}
+            {geradosConta.length > 0 && <button onClick={() => animarFaltam(faltamClip)} disabled={animarLoteBusy || !faltamClip.length} title="dispara (Kling) os clips em falta de todos os posts — ~$0.35 por clip; correm no servidor, podes sair" className="px-3 py-1.5 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarLoteBusy ? '🎬 a disparar…' : `🎬 animar clips em falta (${faltamClip.length})`}</button>}
+            {aAnimar > 0 && <button onClick={colher} title="vai buscar os clips que já ficaram prontos no servidor" className="px-3 py-1.5 rounded-lg border border-emerald-400/30 text-emerald-300/90">🎬 a animar {aAnimar}… (colher prontos)</button>}
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
@@ -459,20 +486,23 @@ export default function MetodoContaPage() {
             ) : (
               <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} />
             )}
-            {(detalhe.clip || detalhe.clip2) && (
+            {(detalhe.clip || detalhe.clip2 || detalhe.clipPend || detalhe.clipPend2) && (
               <div className="mt-2">
                 <div className="flex items-center justify-center gap-2 mb-1">
                   <p className="text-[0.6rem] uppercase tracking-wider text-emerald-300">clips (movimento real · Kling)</p>
+                  {(detalhe.clipPend || detalhe.clipPend2) && <button onClick={colher} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-emerald-400/40 text-emerald-300/90">colher prontos</button>}
                   <button onClick={() => rejeitarClips(detalhe.slug)} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-rose-400/40 text-rose-300/90">rejeitar clips</button>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {[detalhe.clip, detalhe.clip2].map((c, i) => (
+                  {[{ c: detalhe.clip, p: detalhe.clipPend }, { c: detalhe.clip2, p: detalhe.clipPend2 }].map(({ c, p }, i) => (
                     <div key={i}>
                       <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-0.5 text-center">{i === 0 ? 'face 1' : 'face 2'}</p>
                       {c
                         // eslint-disable-next-line jsx-a11y/media-has-caption
                         ? <video src={c} controls autoPlay loop muted playsInline className="w-full rounded-xl border border-emerald-400/30" />
-                        : <div className="aspect-[9/16] rounded-xl border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40">sem clip</div>}
+                        : p
+                          ? <div className="aspect-[9/16] rounded-xl border border-dashed border-emerald-400/30 grid place-items-center text-center text-[0.55rem] text-emerald-300/80 px-2">🎬 a animar…<br/>(aparece sozinho)</div>
+                          : <div className="aspect-[9/16] rounded-xl border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40">sem clip</div>}
                     </div>
                   ))}
                 </div>

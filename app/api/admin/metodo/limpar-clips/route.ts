@@ -16,8 +16,8 @@ export async function POST(req: Request) {
   const { data: row, error } = await supabase.from('carousel_collections').select('dias, theme').eq('slug', slug).maybeSingle();
   if (error || !row) return NextResponse.json({ erro: 'nao-encontrado' }, { status: 404 });
 
-  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ clipUrl?: string | null }>; videoUrl?: string | null }>;
-  for (const s of dias[0]?.slides ?? []) s.clipUrl = null;
+  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ clipUrl?: string | null; clipPredId?: string | null; clipPend?: boolean; clipErro?: string | null }>; videoUrl?: string | null }>;
+  for (const s of dias[0]?.slides ?? []) { s.clipUrl = null; s.clipPredId = null; s.clipPend = false; s.clipErro = null; }
   if (dias[0]) dias[0].videoUrl = null; // o MP4 fica desatualizado
   const theme = { ...((row.theme as Record<string, unknown>) ?? {}), clipTeste: null };
   const { error: e2 } = await supabase.from('carousel_collections').update({ dias, theme }).eq('slug', slug);
