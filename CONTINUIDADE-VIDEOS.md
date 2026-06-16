@@ -37,6 +37,29 @@ São carrosséis (vários slides). **Esta é a "biblioteca de formatos" a constr
 > véu; o Claude preenche a estrutura do formato escolhido; render como carrossel.
 > Reaproveitar o motor de imagem (par com o texto) e a memória anti-repetição.
 
+### ATUALIZAÇÃO (16 jun 2026) — o material já existe, falta CONSTRUIR os formatos
+**Os posts da tarde AINDA NÃO estão em produção. NÃO perder.** O substrato que os
+alimenta JÁ existe e é rico:
+- **`lib/metodo/saber.ts`** — por véu: `comportamentos · origens · mecanismos ·
+  crencas{pensa,verdade} · custos · cenas · subtipos · mapa{pensa,sente,faz,paga}`.
+  Mapa formato↔campo do SABER (já anotado no topo do saber.ts):
+  mecanismos→Mecanismo Invisível · origens→A Origem · crencas→Erro de Interpretação /
+  Mito vs Verdade · custos→Custo Escondido · cenas→Cena do dia-a-dia · subtipos→O
+  Véu de… · mapa→O Mapa do Véu.
+- **`lib/metodo/referencias.ts`** (NOVO, das 6 cadeiras dela) — por véu: conceitos ·
+  autores · estudos · livros · filmes REAIS. Para enriquecer os formatos (ex.: um
+  "exemplo" de filme/livro), mas **só por baixo**: NUNCA citar jargão/autores na voz.
+- **PRINCÍPIO (inviolável):** a tarde NÃO é didática (isso é a veu.a.veu). Revela a
+  DOR e aponta uma DIREÇÃO, na linguagem das dores da vida. SABER/referências dão a
+  profundidade nos bastidores; o que sai é dor + saída, brusco e concreto.
+- **Exemplo aprovado (em espírito) — "O Custo Escondido" · Esforço (@vir):**
+  1) "Fazes tudo por todos. E à noite ninguém pergunta como tu estás." 2) "Dizes que
+  sim quando querias dizer não. Depois a raiva é contigo, não com eles." 3) "Chamas-lhe
+  cuidar. Mas há semanas que não te perguntas do que é que tu precisas." 4) "O custo
+  não aparece logo. Aparece no cansaço que dormir já não tira." 5) "Fazer mais não te
+  torna mais amada. Torna-te mais fácil de esquecer." 6) "Hoje deixa uma coisa por
+  fazer. Repara em quem fica. Esses ficam por ti, não pelo que entregas."
+
 ---
 
 ## A.3) PRINCÍPIO A ESTENDER: conexão imagem↔texto em TODOS os geradores

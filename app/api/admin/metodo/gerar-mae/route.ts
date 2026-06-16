@@ -3,11 +3,11 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
-import { fraseReconhecimento } from '@/lib/metodo/ia';
+import { fraseReconhecimento, revelacaoDaDor } from '@/lib/metodo/ia';
 import { nomeVeu } from '@/lib/metodo/posts';
 import { hashtagsDoPost } from '@/lib/metodo/legenda';
 import { planoSemanaMae, diaMaeDaData, type DiaSemanaMae } from '@/lib/metodo/semana';
-import { SABER, exemplosDimensao } from '@/lib/metodo/saber';
+import { exemplosDimensao } from '@/lib/metodo/saber';
 import { semanaMaeDaData } from '@/lib/metodo/planoTrimestral';
 import { realceAuto } from '@/lib/metodo/reels';
 
@@ -81,19 +81,21 @@ export async function POST(req: Request) {
       try { dor = limparTravessoes(await fraseReconhecimento(d.veu, apiKey, evitar, foco)); evitar.push(dor); }
       catch { continue; }
       const conceito = nomeVeu(d.veu);
-      // face 2 (revelação): das "verdades" do SABER (várias por véu, diretas), com
-      // anti-repetição; fallback à revelação do cânone se faltar.
-      const verdades = (SABER[d.veu]?.crencas ?? []).map((c) => c.verdade);
-      const livres = verdades.filter((v) => !evitarRev.has(v));
-      const revTexto = limparTravessoes(livres[0] ?? verdades[0] ?? d.revelacao.texto);
+      // face 2 (revelação): NASCE da face 1 — revela o MECANISMO INVISÍVEL daquela
+      // cena (não um aforismo genérico). Fallback ao cânone se a IA falhar.
+      let revTexto: string;
+      try { revTexto = limparTravessoes(await revelacaoDaDor(d.veu, dor, apiKey)); }
+      catch { revTexto = limparTravessoes(d.revelacao.texto); }
       evitarRev.add(revTexto);
+      // A DOR lidera (face 1 sem véu no topo). O VÉU revela-se no FIM (rodapé da
+      // face 2) + legenda. Decisão da Vivianne: manter os véus, não abrir por eles.
       const slides = [
-        { tipo: 'metodo', face: 1, texto: dor, destaque: [], notaVisual: '', imageUrl: null, capa: true, conceito, contaId: 'mae' },
-        { tipo: 'metodo', face: 2, texto: revTexto, destaque: realceAuto(revTexto), notaVisual: '', imageUrl: null, capa: false, conceito: `Revelação · ${conceito}`, contaId: 'mae' },
+        { tipo: 'metodo', face: 1, texto: dor, destaque: [], notaVisual: '', imageUrl: null, capa: true, conceito: '', contaId: 'mae' },
+        { tipo: 'metodo', face: 2, texto: revTexto, destaque: realceAuto(revTexto), notaVisual: '', imageUrl: null, capa: false, conceito: 'Revelação', veuReveal: conceito, contaId: 'mae' },
       ];
       const numeroFaixa = ((Math.floor(Date.now() / 1000) + i) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
-      const legenda = limparTravessoes(`${dor}\n\n${revTexto}`);
+      const legenda = limparTravessoes(`${dor}\n\n${revTexto}\n\nMétodo VS · ${conceito}`);
       const dias_ = [{ dia: 1, mundo: 'autora', palavra: dor.slice(0, 48), slides, faixa, legenda, hashtags: hashtagsDoPost(d.revelacao) }];
       rows.push({
         slug: `metodo-mae-2f-${d.data}`,

@@ -155,7 +155,9 @@ conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
 (plano de 3 meses = fonte; a semana desce dele com banner, como na veu.a.veu);
 (2) **formatos da tarde** (carrossel de profundidade: O Custo Escondido · O
 Mecanismo Invisível · A Origem · O Erro de Interpretação · Cena · O Véu de… · O
-Mapa do Véu — revelar dor + direção, não dar aula); (3) **voz nos motions**
+Mapa do Véu — revelar dor + direção, não dar aula). **SPEC COMPLETA (8 formatos,
+estrutura de cada, exemplo aprovado, mapa formato↔SABER): `CONTINUIDADE-VIDEOS.md`
+secção A.2 — NÃO perder, é para construir.** Alimenta-se de `saber.ts` + `referencias.ts`; (3) **voz nos motions**
 (`ELEVEN_VOICE_ID` PURA, `eleven_v3`, SEM voice_settings/language_code — ver
 `render-reels.js`); (4) anti-repetição entre contas + camada de análise (o que rende).
 

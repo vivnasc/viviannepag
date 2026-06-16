@@ -80,6 +80,7 @@ MATÉRIA-PRIMA deste véu (a área de estudo dela; usa para encontrar um ÂNGULO
 FALA SIMPLES (regra dura): escreve como uma pessoa REAL fala a uma amiga, em voz alta. PROIBIDO metáforas, comparações ("como o/a…"), linguagem poética, filosófica, espiritual ou de coach. Nada de "alma", "universo", "tempestade", "rio", "véu". Uma frase que alguém DIZ mesmo, não que escreve num livro.
 REGRAS: português europeu; máximo 12 palavras; concreta e do dia a dia (não abstrata, não aforismo). A frase tem de fazer sentido SOZINHA, sem contexto: NÃO uses pronomes ambíguos (evita "ela", "ele", "isso", "aquilo", "lá" sem dizer a quê ou a quem te referes). SEM travessões (nem — nem –); SEM hashtags; sem aspas. Tem de ser DIFERENTE destes exemplos: ${s.exemplos.map((e) => `"${e}"`).join('; ')}.
 ${materia}${campo}${angulo}
+ASSINATURA DO VÉU (essencial): a dor tem de ser inconfundível DESTE padrão. Se tapares o nome do véu, tem de ser óbvio que só podia ser este. Evita dores genéricas que servem qualquer pessoa; mostra a observação concreta e específica deste véu.
 VARIEDADE (essencial, pensamos a LONGO PRAZO): a mesma dor tem muitas faces (o corpo, o tempo, o dinheiro, o trabalho, a casa, as relações, o futuro, a noite). NÃO voltes sempre ao mesmo exemplo nem ao mesmo tema; escolhe uma face diferente da matéria-prima de cada vez.
 VARIA A FORMA: muda a ABERTURA e a estrutura. NÃO comeces várias frases da mesma maneira (ex.: não repitas frases a começar por "Sorrio" ou "Estou"). Alterna entre uma cena concreta, um hábito, um pensamento e uma fala.
 ${evitar.length ? `JÁ FORAM usadas estas frases nesta conta, NÃO repitas o tema nem as palavras de nenhuma (encontra outra face da dor): ${evitar.slice(-30).map((e) => `"${e}"`).join('; ')}.` : ''}
@@ -88,6 +89,37 @@ Devolve SÓ a frase, nada mais.`;
     method: 'POST',
     headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 120, system: sys, messages: [{ role: 'user', content: `Nova frase de reconhecimento do véu ${veu}.` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}`);
+  const t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');
+  if (!t) throw new Error('vazio');
+  return limparTravessoes(t);
+}
+
+// FACE 2 de um reel de 2 faces (mãe): a REVELAÇÃO do MECANISMO INVISÍVEL da cena
+// da Face 1. Nasce DA Face 1 (não de uma lista genérica), por isso liga-se a ela.
+// Regra (da Vivianne): se a Face 1 mostra uma cena, a Face 2 revela o que a pessoa
+// fez sem perceber — específico, não um aforismo bonito. É o que torna o método VS.
+export async function revelacaoDaDor(veu: VeuNome, dor: string, apiKey: string): Promise<string> {
+  const mecanismos = SABER[veu]?.mecanismos ?? [];
+  const sys = `És a voz do Método VS. Recebes a FACE 1 de um reel: uma CENA concreta da dor (a pessoa reconhece-se nela). Escreves a FACE 2: a REVELAÇÃO do MECANISMO INVISÍVEL DAQUELA cena exata.
+
+O QUE É (regra dura): NÃO é uma frase inspiracional, NÃO é um aforismo bonito, NÃO é "cura a tua dor". É "olha o que acabaste de fazer sem perceber". Mostras o mecanismo escondido por trás DAQUELA cena, com uma observação ESPECÍFICA que a pessoa nunca tinha percebido. Liga-te ao concreto da cena; NÃO subas para abstrato genérico ("a vida", "a alma", "o amor").
+
+PANCADA MENTAL (essencial): tem de criar um pequeno estalo, um reframe que vira a cena do avesso. NÃO uma verdade bonita e geral. Exemplo do que EVITAR vs FAZER: EVITA "A tua vida não começa depois." → FAZ "Estás a adiar viver até mereceres viver." (nomeia o que ela faz e o porquê escondido).
+ASSINATURA DO VÉU (essencial): se tapares o nome do véu, tem de ser ÓBVIO que isto só podia ser ESTE padrão. Usa o mecanismo PRÓPRIO deste véu, não algo que serviria qualquer dor. Uma revelação que pudesse estar noutro véu está ERRADA.
+
+VOZ: português europeu, 2.ª pessoa ("tu"), brusca e direta. SEM metáforas, SEM linguagem poética/espiritual/de coach, SEM nomear jargão, conceitos ou autores. 1 a 2 frases curtas e secas. SEM travessões (nem — nem –), SEM aspas, SEM hashtags.
+
+MECANISMO deste véu (matéria-prima para descobrires o que está POR BAIXO da cena; NÃO copiar à letra, NÃO nomear): ${mecanismos.join(' · ')}.
+
+REGISTO CERTO (exemplo): Face 1 "Antecipo a despedida antes de o jantar acabar." -> Face 2 "Não estás a viver este jantar. Estás a tentar sofrer primeiro para doer menos depois."
+
+Devolve SÓ a Face 2 (1 a 2 frases), nada mais.`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 160, system: sys, messages: [{ role: 'user', content: `Face 1 (a cena): «${dor}». Escreve a Face 2: revela o mecanismo invisível desta cena.` }] }),
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);
   const t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');

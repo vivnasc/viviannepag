@@ -29,7 +29,7 @@ type Coleccao = { dias: Dia[]; theme?: { subtipo?: string } };
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
 
-type Face = { texto?: string; destaque?: string[]; imageUrl?: string; conceito?: string };
+type Face = { texto?: string; destaque?: string[]; imageUrl?: string; conceito?: string; veuReveal?: string };
 // MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
 // (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
 function DuasFaces({ face1, face2, conta, prog }: { face1: Face; face2: Face; conta: Conta; prog: number }) {
@@ -40,10 +40,10 @@ function DuasFaces({ face1, face2, conta, prog }: { face1: Face; face2: Face; co
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
-        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} conta={conta} conceito={face1.conceito} prog={p1} />
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} prog={p1} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
-        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} conta={conta} conceito={face2.conceito} prog={p2} />
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} prog={p2} />
       </div>
     </div>
   );
@@ -114,7 +114,7 @@ export default function RenderVeuPage() {
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
   const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string }) | undefined;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: ehSerie ? 'transparent' : '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
@@ -176,6 +176,7 @@ export default function RenderVeuPage() {
           imageUrl={s.imageUrl}
           conta={getConta(s.contaId ?? '')!}
           conceito={s.conceito}
+          veuReveal={s.veuReveal}
           prog={prog}
         />
       )}
