@@ -8,6 +8,7 @@ import { routing } from '@/i18n/routing';
 import { CartProvider } from '@/lib/cart';
 import { CartWidget } from '@/components/CartWidget';
 import { RevealObserver } from '@/components/RevealObserver';
+import { SiteTracker } from '@/components/SiteTracker';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -178,6 +179,7 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <RevealObserver />
+        <SiteTracker />
       </body>
     </html>
   );
