@@ -17,7 +17,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 export default function MetodoCalendarioPage() {
   const [sel, setSel] = useState<ContaId>('mae');
   const conta = getConta(sel)!;
-  const partes = useMemo(() => jornadaConta(sel), [sel]);
+  const temas = useMemo(() => jornadaConta(sel), [sel]);
   // "esta semana": mapeia a semana do trimestre ao tema correspondente da jornada.
   const total = useMemo(() => totalTemas(sel), [sel]);
   const atualSemana = total ? ((semanaTrimestreAtual() - 1) % total) + 1 : 0;
@@ -42,42 +42,33 @@ export default function MetodoCalendarioPage() {
         </div>
 
         <p className="text-[0.78rem] opacity-65 mb-1">{conta.movimento} · {conta.essencia}</p>
-        <p className="text-[0.74rem] opacity-50 mb-6">{sel === 'mae' ? 'Na publicação, 1 véu por dia (reel 2 faces). Aqui é a jornada dos temas.' : `Véus desta porta: ${conta.veus.join(' · ')}.`}</p>
+        <p className="text-[0.74rem] opacity-50 mb-6">{sel === 'mae' ? 'Os 7 véus ALTERNADOS (nunca um mês no mesmo). Na publicação, 1 véu por dia.' : `Os véus desta porta ALTERNADOS: ${conta.veus.join(' · ')}.`}</p>
 
-        {partes.map((parte) => {
-          if (!parte.semanas.length) return null;
-          const cor = conta.cor;
-          return (
-            <div key={parte.veu} className="mb-8">
-              <h2 className="text-xl mb-0.5" style={{ fontFamily: 'var(--font-cormorant), serif', color: cor }}>Véu {parte.veu}</h2>
-              <p className="text-[0.78rem] italic opacity-60 mb-3">{parte.essencia}.</p>
-              <div className="space-y-2.5">
-                {parte.semanas.map((s) => {
-                  const ehAtual = s.semana === atualSemana;
-                  return (
-                    <div key={s.semana} className={`rounded-xl border overflow-hidden ${ehAtual ? 'border-[#EBAE4A]/60' : 'border-white/10'}`} style={{ background: `linear-gradient(135deg, ${cor}12, transparent 60%)` }}>
-                      <div className="p-4">
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="text-[0.58rem] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full" style={{ background: cor + '22', color: cor }}>tema {s.semana}</span>
-                          <span className="text-[0.62rem] opacity-55">Véu {parte.veu}</span>
-                          {ehAtual && <span className="ml-auto text-[0.58rem] px-2 py-0.5 rounded-full bg-[#EBAE4A]/20 text-[#EBAE4A]">esta semana</span>}
-                        </div>
-                        <p className="leading-tight text-lg" style={{ fontFamily: 'var(--font-cormorant), serif', color: cor }}>“{s.mote}”</p>
-                        <p className="text-[0.76rem] opacity-60 mb-2.5">Pensas: «{s.pensa}»</p>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <Link href="/admin/metodo/semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-white/20 hover:border-[#EBAE4A] hover:text-[#EBAE4A] no-underline">abrir na produção →</Link>
-                          <Link href={`/admin/metodo/${sel}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border no-underline" style={{ borderColor: cor + '55', color: cor }}>@{conta.handle} →</Link>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+        <div className="space-y-2.5">
+          {temas.map((s) => {
+            const cor = conta.cor;
+            const ehAtual = s.semana === atualSemana;
+            return (
+              <div key={s.semana} className={`rounded-xl border overflow-hidden ${ehAtual ? 'border-[#EBAE4A]/60' : 'border-white/10'}`} style={{ background: `linear-gradient(135deg, ${cor}12, transparent 60%)` }}>
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <span className="text-[0.58rem] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full" style={{ background: cor + '22', color: cor }}>tema {s.semana}</span>
+                    <span className="text-[0.58rem] uppercase tracking-[0.14em] px-2 py-0.5 rounded-full border" style={{ borderColor: cor + '55', color: cor }}>Véu {s.veu}</span>
+                    {ehAtual && <span className="ml-auto text-[0.58rem] px-2 py-0.5 rounded-full bg-[#EBAE4A]/20 text-[#EBAE4A]">esta semana</span>}
+                  </div>
+                  <p className="leading-tight text-lg" style={{ fontFamily: 'var(--font-cormorant), serif', color: cor }}>“{s.mote}”</p>
+                  <p className="text-[0.76rem] opacity-60 mb-2.5">{s.nota}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Link href="/admin/metodo/semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-white/20 hover:border-[#EBAE4A] hover:text-[#EBAE4A] no-underline">abrir na produção →</Link>
+                    <Link href={`/admin/metodo/${sel}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border no-underline" style={{ borderColor: cor + '55', color: cor }}>@{conta.handle} →</Link>
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
 
-        <p className="text-[0.7rem] opacity-40 mt-2">Os temas vêm do teu campo de estudo (SABER), por véu. À medida que trazes mais cadeiras, a jornada enriquece. Para gerar e agendar, abre a produção semanal.</p>
+        <p className="text-[0.7rem] opacity-40 mt-4">Os véus alternam (nunca seguidos); os temas vêm do teu campo de estudo (SABER). À medida que trazes mais cadeiras, a jornada enriquece. Para gerar e agendar, abre a produção semanal.</p>
       </div>
     </div>
   );
