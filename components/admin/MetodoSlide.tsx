@@ -17,7 +17,7 @@ const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, prog = 1, ratio = '9:16' }: { texto: string; destaque?: string[]; imageUrl?: string; conta: Conta; conceito?: string; prog?: number; ratio?: '9:16' | '4:5' }) {
+export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, veuReveal, prog = 1, ratio = '9:16' }: { texto: string; destaque?: string[]; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog?: number; ratio?: '9:16' | '4:5' }) {
   const { bg1, bg2, accent } = conta.paleta;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
   const H = ratio === '4:5' ? 1350 : 1920;
@@ -91,8 +91,11 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, p
           </p>
         </div>
 
-        {/* assinatura: o @conta (identidade própria, NUNCA "Véu a Véu") */}
+        {/* assinatura: o @conta (identidade própria, NUNCA "Véu a Véu").
+            O VÉU revela-se AQUI, no fim (não no topo): a dor lidera, o nome do
+            padrão aprende-se depois. Decisão da Vivianne (manter véus, não abrir por eles). */}
         <div style={{ position: 'absolute', bottom: 132, left: 0, right: 0, textAlign: 'center', zIndex: 3, opacity: rodapeOp }}>
+          {veuReveal && <p style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 24, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.9, margin: '0 0 14px' }}>Isto é o {veuReveal}</p>}
           <p style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 30, letterSpacing: '0.06em', color: accent, margin: 0 }}>@{conta.handle}</p>
           <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, color: '#F2E8DC', opacity: 0.7, margin: '8px 0 0' }}>Ver e Soltar</p>
         </div>
