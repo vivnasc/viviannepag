@@ -91,7 +91,10 @@ export default function MetodoSemanaPage() {
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-5xl mx-auto">
-        <Link href="/admin/metodo" className="text-[0.75rem] opacity-60 hover:opacity-100">← Método VS</Link>
+        <div className="flex items-center justify-between">
+          <Link href="/admin/metodo" className="text-[0.75rem] opacity-60 hover:opacity-100">← Método VS</Link>
+          <Link href="/admin/metodo/calendario" className="text-[0.7rem] opacity-60 hover:opacity-100">← Calendário · 3 meses</Link>
+        </div>
         <h1 className="mt-3 text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif' }}>Produção semanal</h1>
         <p className="mt-2 text-[0.86rem] opacity-80 max-w-2xl">
           O plano por dia (como na veu.a.veu): cada dia tem o seu tipo, na proporção 60/30/10. Carregas e gera no servidor, com texto + imagem, já com a data de cada post. Podes sair que continua. Nada publica sem o teu ✓ no Publicar.
