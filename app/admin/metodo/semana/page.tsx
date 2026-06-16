@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta } from '@/lib/metodo/contas';
 import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
+import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -30,6 +31,37 @@ export default function MetodoSemanaPage() {
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} posts gerados (${j.comImagem} com imagem), já com a data de cada dia. Vê-os no Publicar (vista Feed/Semana) ou na página da conta.`);
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setBusy(null); }
+  }, [busy]);
+
+  // COMPLETAR a semana: gera SÓ os dias que ainda faltam (não estraga os já
+  // feitos). Mãe já salta os existentes; as portas levam completar:true.
+  const completar = useCallback(async (conta: string, off: number) => {
+    if (busy) return;
+    setBusy(`${conta}-comp`); setErro(null);
+    setMsg('A completar os dias que faltam (não estraga os já feitos). Podes sair que continua.');
+    try {
+      const endpoint = conta === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-lote';
+      const payload = conta === 'mae' ? { conta, semanas: 1, offset: off } : { conta, completar: true, offset: off };
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else setMsg(j.jaExistiam ? 'A semana já está completa.' : `${j.gerados} dia(s) em falta gerado(s).`);
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setBusy(null); }
+  }, [busy]);
+
+  // PORTAS: gerar SÓ um dia (a data escolhida) — regenera esse, não a semana.
+  const gerarDiaPorta = useCallback(async (conta: string, data: string, off: number) => {
+    if (busy) return;
+    setBusy(`${conta}-dia-${data}`); setErro(null);
+    setMsg('A gerar este dia (texto). Depois gera a imagem e renderiza na página da conta.');
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta, dia: data, offset: off }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else setMsg(`${j.gerados} dia gerado para ${data}.`);
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(null); }
   }, [busy]);
@@ -80,6 +112,9 @@ export default function MetodoSemanaPage() {
                     <button onClick={() => gerar(`${conta.id}-1`, conta.id, 1, offset)} disabled={!!busy} className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>
                       {busy === `${conta.id}-1` ? 'a gerar…' : 'gerar esta semana'}
                     </button>
+                    <button onClick={() => completar(conta.id, offset)} disabled={!!busy} className="px-3 py-1.5 rounded-lg border border-white/20 disabled:opacity-40">
+                      {busy === `${conta.id}-comp` ? 'a completar…' : 'completar (faltam)'}
+                    </button>
                     <button onClick={() => gerar(`${conta.id}-4`, conta.id, 4, 0)} disabled={!!busy} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>
                       {busy === `${conta.id}-4` ? 'a gerar…' : 'gerar 4 semanas'}
                     </button>
@@ -112,6 +147,7 @@ export default function MetodoSemanaPage() {
                       <p className="mt-1.5 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
                         {d.tipo === 'reconhecimento' ? <span className="opacity-55 italic">frase nova do {d.post.conceito} (IA)</span> : d.post.texto}
                       </p>
+                      <button onClick={() => gerarDiaPorta(conta.id, d.data, offset)} disabled={!!busy} className="mt-2 text-[0.62rem] px-2 py-1 rounded-md border disabled:opacity-40" style={{ borderColor: `${conta.cor}66`, color: conta.cor }}>{busy === `${conta.id}-dia-${d.data}` ? 'a gerar…' : 'gerar este dia'}</button>
                     </div>
                   ))}
                 </div>
@@ -119,6 +155,8 @@ export default function MetodoSemanaPage() {
             );
           })}
         </div>
+
+        <FraseRapida />
       </div>
     </main>
   );

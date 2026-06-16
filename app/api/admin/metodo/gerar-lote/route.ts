@@ -42,44 +42,60 @@ function buildRow(p: Pendente, imageUrl: string | null) {
   };
 }
 
-// POST { conta, semanas?, offset? }: gera o plano (datas + imagens) no servidor.
+// POST { conta, semanas?, offset?, dia?, completar? }: gera o plano no servidor.
+//   - sem `dia`/`completar`: a(s) semana(s) inteira(s) (reescreve, como sempre)
+//   - dia: 'YYYY-MM-DD'   -> só esse dia da semana do offset (regenera esse)
+//   - completar: true     -> só os dias da semana que AINDA não existem (não
+//                            estraga o já feito; é a autonomia para completar)
+// O índice de posição (i) é sempre o lugar do dia na semana do offset, por isso
+// o slug bate certo com "gerar esta semana" (regenera/sobrescreve, não duplica).
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { conta?: string; semanas?: number; offset?: number };
+  const body = (await req.json().catch(() => ({}))) as { conta?: string; semanas?: number; offset?: number; dia?: string; completar?: boolean };
   const contaId = (body.conta ?? '') as ContaId;
   const conta = CONTAS[contaId];
   if (!conta) return NextResponse.json({ erro: 'conta-desconhecida' }, { status: 400 });
   const semanas = Math.min(4, Math.max(1, body.semanas ?? 1));
   const offset = Math.max(0, body.offset ?? 0);
 
-  // junta todos os dias das semanas pedidas (cada um com a sua data e tipo).
-  const dias = Array.from({ length: semanas }).flatMap((_, w) => planoSemana(contaId, offset + w));
-
   const supabase = getSupabaseAdmin();
 
-  // MEMÓRIA anti-repetição: as frases de reconhecimento JÁ usadas nesta conta
-  // (semanas anteriores). A IA recebe-as e NÃO repete o tema (conteúdo infinito,
-  // pensado a longo prazo). Acumula também as desta geração, para não repetir
-  // dentro da própria semana (era o que dava QUI = SÁB iguais).
+  // MEMÓRIA anti-repetição + datas JÁ geradas (para "completar"), numa só leitura:
+  // - evitar: frases de reconhecimento já usadas nesta conta (não repete o tema)
+  // - datasExistentes: as datas que já têm post nesta conta (não as regenera)
   const evitar: string[] = [];
+  const datasExistentes = new Set<string>();
   try {
     const { data: existentes } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'metodo-%');
-    for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { metodo?: { conta?: string; tipo?: string } } }[]) {
-      if (r.theme?.metodo?.conta !== contaId || r.theme?.metodo?.tipo !== 'reconhecimento') continue;
+    for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { agendadoEm?: string; metodo?: { conta?: string; tipo?: string } } }[]) {
+      if (r.theme?.metodo?.conta !== contaId) continue;
+      if (r.theme?.agendadoEm) datasExistentes.add(r.theme.agendadoEm);
+      if (r.theme?.metodo?.tipo !== 'reconhecimento') continue;
       const tx = r.dias?.[0]?.slides?.[0]?.texto;
       if (tx) evitar.push(tx);
     }
   } catch { /* sem memória prévia, segue */ }
 
+  // dias a gerar, cada um com o seu índice de posição na semana (i).
+  type Tarefa = { d: ReturnType<typeof planoSemana>[number]; i: number };
+  let tarefas: Tarefa[];
+  if (body.dia || body.completar) {
+    const semana = planoSemana(contaId, offset).map((d, i) => ({ d, i }));
+    if (body.dia) tarefas = semana.filter((t) => t.d.data === body.dia);
+    else tarefas = semana.filter((t) => !datasExistentes.has(t.d.data)); // completar: só os que faltam
+  } else {
+    const dias = Array.from({ length: semanas }).flatMap((_, w) => planoSemana(contaId, offset + w));
+    tarefas = dias.map((d, i) => ({ d, i }));
+  }
+  if (!tarefas.length) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: true });
+
   const pendentes: Pendente[] = [];
-  let idx = 0;
   // SEQUENCIAL (não paralelo): cada reconhecimento conhece os anteriores e não
   // repete. Revelação/manifesto são curados (direto).
-  for (const d of dias) {
-    const i = idx++;
+  for (const { d, i } of tarefas) {
     if (d.tipo === 'reconhecimento') {
       const veu = d.post.veu!;
       const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
