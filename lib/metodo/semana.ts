@@ -99,3 +99,14 @@ export function planoSemanaMae(offset = 0, base: Date = proximaSegunda()): DiaSe
     return { wd: d.wd, nome: d.nome, veu: d.veu, revelacao, data: dataLocal(data), hora: horaDoMetodo('mae') };
   });
 }
+
+/** O dia da mãe (véu + revelação) de UMA data — para gerar só 1 dia. */
+export function diaMaeDaData(dataISO: string): DiaSemanaMae | null {
+  const [y, m, dd] = dataISO.split('-').map(Number);
+  if (!y || !m || !dd) return null;
+  const wd = new Date(y, m - 1, dd).getDay();
+  const veuDia = VEUS_SEMANA_MAE.find((v) => v.wd === wd);
+  if (!veuDia) return null;
+  const revs = revelacaoPosts('mae').filter((p) => p.veu === veuDia.veu);
+  return { wd: veuDia.wd, nome: veuDia.nome, veu: veuDia.veu, revelacao: revs[0], data: dataISO, hora: horaDoMetodo('mae') };
+}

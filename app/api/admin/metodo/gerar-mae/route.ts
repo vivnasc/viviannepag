@@ -6,7 +6,7 @@ import { limparTravessoes } from '@/lib/texto';
 import { fraseReconhecimento } from '@/lib/metodo/ia';
 import { nomeVeu } from '@/lib/metodo/posts';
 import { hashtagsDoPost } from '@/lib/metodo/legenda';
-import { planoSemanaMae } from '@/lib/metodo/semana';
+import { planoSemanaMae, diaMaeDaData, type DiaSemanaMae } from '@/lib/metodo/semana';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { semanas?: number; offset?: number };
+  const body = (await req.json().catch(() => ({}))) as { semanas?: number; offset?: number; dia?: string };
   const semanas = Math.min(4, Math.max(1, body.semanas ?? 1));
   const offset = Math.max(0, body.offset ?? 0);
 
@@ -39,11 +39,27 @@ export async function POST(req: Request) {
     }
   } catch { /* sem memória prévia */ }
 
+  // dias a gerar: 1 dia (body.dia, sobrescreve esse) OU a(s) semana(s) inteira(s),
+  // SALTANDO os dias que JÁ existem (não estraga o que já agendaste).
+  let existentesDatas = new Set<string>();
+  try {
+    const { data: ex } = await supabase.from('carousel_collections').select('slug').like('slug', 'metodo-mae-2f-%');
+    existentesDatas = new Set((ex ?? []).map((r: { slug: string }) => r.slug.replace('metodo-mae-2f-', '')));
+  } catch { /* segue */ }
+
+  let diasParaGerar: DiaSemanaMae[] = [];
+  if (body.dia) {
+    const dm = diaMaeDaData(body.dia);
+    if (dm) diasParaGerar = [dm]; // 1 dia escolhido: gera mesmo que exista (regenerar)
+  } else {
+    for (let w = 0; w < semanas; w++) diasParaGerar.push(...planoSemanaMae(offset + w));
+    diasParaGerar = diasParaGerar.filter((d) => !existentesDatas.has(d.data)); // não sobrescreve o que já existe
+  }
+  if (!diasParaGerar.length) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: true });
+
   const rows: Record<string, unknown>[] = [];
   let i = 0;
-  for (let w = 0; w < semanas; w++) {
-    const dias = planoSemanaMae(offset + w);
-    for (const d of dias) {
+  for (const d of diasParaGerar) {
       let dor: string;
       try { dor = limparTravessoes(await fraseReconhecimento(d.veu, apiKey, evitar)); evitar.push(dor); }
       catch { continue; }
@@ -69,7 +85,6 @@ export async function POST(req: Request) {
         },
       });
       i++;
-    }
   }
 
   if (!rows.length) return NextResponse.json({ erro: 'nada-gerado' }, { status: 500 });
