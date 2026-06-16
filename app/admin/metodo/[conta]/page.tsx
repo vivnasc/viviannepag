@@ -28,12 +28,25 @@ export default function MetodoContaPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
+  const [sel, setSel] = useState<Set<string>>(new Set());
   const [melBusy, setMelBusy] = useState<string | null>(null);
+
+  const toggleSel = (slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; });
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
   }, []);
   useEffect(() => { recarregar(); }, [recarregar]);
+
+  const apagarSelecionados = useCallback(async () => {
+    if (!sel.size) return;
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar ${sel.size} post(s) selecionado(s)? Os já publicados são protegidos (não se apagam).`)) return;
+    let n = 0;
+    for (const slug of Array.from(sel)) {
+      try { const r = await fetch('/api/admin/metodo/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (r.ok) n += 1; } catch { /* segue */ }
+    }
+    setSel(new Set()); setMsg(`${n} post(s) apagado(s) (os publicados ficaram).`); recarregar();
+  }, [sel, recarregar]);
 
 
   // gerar o plano (4 semanas) NO SERVIDOR, alinhado ao Plano da Semana: cada post
@@ -321,6 +334,14 @@ export default function MetodoContaPage() {
         {geradosConta.length > 0 && (
           <section className="mb-8">
             <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosConta.length}</span></h2>
+            {sel.size > 0 && (
+              <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem] rounded-lg border border-rose-400/30 bg-rose-500/5 px-3 py-2">
+                <span><b>{sel.size}</b> selecionado(s)</span>
+                <button onClick={apagarSelecionados} className="px-3 py-1 rounded-lg border border-rose-400/50 text-rose-200 hover:bg-rose-500/20">apagar selecionados</button>
+                <button onClick={() => setSel(new Set())} className="px-3 py-1 rounded-lg border border-white/20 opacity-70">limpar seleção</button>
+                <span className="opacity-50">(os publicados ficam protegidos)</span>
+              </div>
+            )}
             {semanasGrade.length > 0 && (
               <div className="overflow-x-auto -mx-1 px-1">
                 <div className="grid grid-cols-7 gap-1 min-w-[700px]">
@@ -333,10 +354,11 @@ export default function MetodoContaPage() {
                       <div key={d} className={`min-h-[80px] rounded-lg border border-white/10 p-1 ${fds ? 'bg-white/[0.015]' : 'bg-white/[0.035]'}`}>
                         <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}</div>
                         {posts.map((e) => (
-                          <div key={e.slug} className="relative mb-1">
+                          <div key={e.slug} className={`relative mb-1 rounded-md ${sel.has(e.slug) ? 'ring-2 ring-rose-400' : ''}`}>
                             <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${conta.cor}66`}` }}>
                               <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} imageUrl={e.imageUrl ?? undefined} prog={1} />
                             </button>
+                            {!e.publicado && <input type="checkbox" checked={sel.has(e.slug)} onClick={(ev) => ev.stopPropagation()} onChange={() => toggleSel(e.slug)} title="selecionar" className="absolute top-1 left-1 z-10 w-4 h-4 cursor-pointer" />}
                             {e.publicado
                               ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5" title="já publicado (protegido)">✓</span>
                               : <button onClick={(ev) => { ev.stopPropagation(); descartar(e.slug); }} title="apagar este post" className="absolute top-1 right-1 w-5 h-5 grid place-items-center rounded-full bg-black/75 text-rose-300 hover:bg-rose-500/50 text-[0.72rem] leading-none">✕</button>}
