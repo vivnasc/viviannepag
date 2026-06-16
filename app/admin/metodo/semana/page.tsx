@@ -16,10 +16,14 @@ const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', r
 export default function MetodoSemanaPage() {
   const [offset, setOffset] = useState(0);
   const [sel, setSel] = useState<ContaId>('mae'); // conta ativa (separadores, como no calendário)
-  // ligação a partir do calendário: /admin/metodo/semana?conta=ver abre nessa conta
+  // ligação a partir do calendário: ?conta=ver abre nessa conta; ?off=3 abre nessa
+  // semana (offset 0 = esta), para o "abrir na produção" cair na semana do cartão.
   useEffect(() => {
-    const c = new URLSearchParams(window.location.search).get('conta');
+    const q = new URLSearchParams(window.location.search);
+    const c = q.get('conta');
     if (c && CONTAS_LISTA.some((x) => x.id === c)) setSel(c as ContaId);
+    const o = q.get('off');
+    if (o !== null && o.trim() !== '' && Number.isFinite(Number(o))) setOffset(Number(o));
   }, []);
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
