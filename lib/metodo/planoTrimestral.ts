@@ -27,23 +27,43 @@ const VEUS_CONTA: Record<ContaId, VeuNome[]> = {
   mae: ['Dualidade', 'Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência'],
 };
 
-export type TemaSemana = { semana: number; veu: VeuNome; pensa: string; mote: string };
-export type ParteConta = { veu: VeuNome; essencia: string; semanas: TemaSemana[] };
+export type TemaSemana = { semana: number; veu: VeuNome; nota: string; mote: string };
 
-// a jornada trimestral de uma conta: cada véu é uma PARTE; cada crença do SABER
-// é um tema (a dor reconhecida -> a verdade). Numeração corrida, como na veu.a.veu.
-export function jornadaConta(conta: ContaId): ParteConta[] {
+// os temas de UM véu, de TODO o seu SABER (não só crenças): a verdade (com a dor
+// reconhecida), as cenas do dia a dia e os custos escondidos. Muito conteúdo por
+// véu — nenhuma conta fica curta. Tipos intercalados dentro do véu.
+function temasDoVeu(veu: VeuNome): { veu: VeuNome; nota: string; mote: string }[] {
+  const k = SABER[veu];
+  if (!k) return [];
+  const cr = k.crencas ?? [], ce = k.cenas ?? [], cu = k.custos ?? [];
+  const out: { veu: VeuNome; nota: string; mote: string }[] = [];
+  const m = Math.max(cr.length, ce.length, cu.length);
+  for (let i = 0; i < m; i++) {
+    if (cr[i]) out.push({ veu, mote: cr[i].verdade, nota: `Pensas: «${cr[i].pensa}»` });
+    if (ce[i]) out.push({ veu, mote: ce[i], nota: 'Cena do dia a dia' });
+    if (cu[i]) out.push({ veu, mote: cu[i], nota: 'O custo escondido' });
+  }
+  return out;
+}
+
+// a jornada trimestral de uma conta: os véus da conta ALTERNADOS (nunca o mesmo
+// véu seguido, nunca um mês no mesmo). Round-robin: tema 0 de cada véu, depois
+// tema 1 de cada véu, etc. A mãe alterna os 7; as portas os seus.
+export function jornadaConta(conta: ContaId): TemaSemana[] {
   const veus = VEUS_CONTA[conta] ?? [];
+  const listas = veus.map(temasDoVeu);
+  const max = Math.max(0, ...listas.map((l) => l.length));
+  const out: TemaSemana[] = [];
   let n = 1;
-  return veus.map((veu) => {
-    const k = SABER[veu];
-    const essencia = (k?.essencia ?? '').split('.')[0];
-    const semanas: TemaSemana[] = (k?.crencas ?? []).map((c) => ({ semana: n++, veu, pensa: c.pensa, mote: c.verdade }));
-    return { veu, essencia, semanas };
-  });
+  for (let i = 0; i < max; i++) {
+    for (const l of listas) {
+      if (l[i]) out.push({ semana: n++, veu: l[i].veu, nota: l[i].nota, mote: l[i].mote });
+    }
+  }
+  return out;
 }
 
 // quantos temas tem a jornada de uma conta (para mapear "esta semana").
 export function totalTemas(conta: ContaId): number {
-  return jornadaConta(conta).reduce((s, p) => s + p.semanas.length, 0);
+  return jornadaConta(conta).length;
 }
