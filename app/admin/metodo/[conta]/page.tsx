@@ -230,15 +230,15 @@ export default function MetodoContaPage() {
 
   // TESTE de clip: anima o fundo (imagem -> vídeo, Kling). ~$0.35, ~1-3 min.
   const [animarBusy, setAnimarBusy] = useState<string | null>(null);
-  const animar = useCallback(async (slug: string, face = 0) => {
+  const animar = useCallback(async (slug: string, face?: number) => {
     if (animarBusy) return;
-    setAnimarBusy(slug); setErro(null); setMsg('A animar o fundo (Kling, ~1-3 min). Não feches.');
+    setAnimarBusy(slug); setErro(null); setMsg('A animar as faces (Kling, ~2-5 min). Cada face vira um clip. Não feches.');
     try {
-      const r = await fetch('/api/admin/metodo/animar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, face }) });
+      const r = await fetch('/api/admin/metodo/animar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(face === undefined ? { slug } : { slug, face }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else {
-        setMsg('Clip de teste pronto. Vê em baixo se o movimento te convence.');
+        setMsg(`${j.clips ?? 1} clip(s) pronto(s). O fundo passa a mexer; carrega "renderizar" para o reel final.`);
         setDetalhe((d) => (d && d.slug === slug ? { ...d, clipTeste: j.clipUrl } : d));
         recarregar();
       }
@@ -437,7 +437,7 @@ export default function MetodoContaPage() {
               </div>
             )}
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
-              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug, 0)} disabled={animarBusy === detalhe.slug} title="anima o fundo (imagem → vídeo, Kling) ~$0.35, 1-3 min" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (clip teste)'}</button>}
+              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima as faces (imagem → vídeo, Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (clips das faces)'}</button>}
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}

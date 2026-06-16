@@ -29,21 +29,24 @@ type Coleccao = { dias: Dia[]; theme?: { subtipo?: string } };
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
 
-type Face = { texto?: string; destaque?: string[]; imageUrl?: string; conceito?: string; veuReveal?: string };
+type Face = { texto?: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conceito?: string; veuReveal?: string };
 // MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
 // (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
 function DuasFaces({ face1, face2, conta, prog }: { face1: Face; face2: Face; conta: Conta; prog: number }) {
-  const FADE = 0.06;
+  // crossfade LARGO e suave entre as faces (não brusco): a face 2 desvanece a
+  // entrar ao longo de ~24% do tempo, centrado na passagem (prog 0.5).
+  const FADE = 0.12;
   const p1 = Math.min(1, prog / 0.5);
   const p2 = Math.min(1, Math.max(0, (prog - 0.5) / 0.5));
-  const op2 = prog <= 0.5 - FADE ? 0 : Math.min(1, (prog - (0.5 - FADE)) / FADE);
+  const tt = Math.max(0, Math.min(1, (prog - (0.5 - FADE)) / (2 * FADE)));
+  const op2 = tt * tt * (3 - 2 * tt); // smoothstep (ease-in-out), sem corte seco
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
-        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} />
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
-        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} />
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} />
       </div>
     </div>
   );
@@ -56,8 +59,30 @@ export default function RenderVeuPage() {
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
 
-  // o render conduz a animacao do cinetico frame a frame via window.__setKProg
-  useEffect(() => { (window as unknown as { __setKProg?: (p: number) => void }).__setKProg = (p: number) => setProg(p); }, []);
+  // o render conduz a animação frame a frame via window.__setKProg. Quando há
+  // CLIPS (fundo de vídeo), o __setKProg também faz SEEK do(s) vídeo(s) ao tempo
+  // certo e ESPERA o frame ('seeked'), para o screenshot apanhar o frame do clip.
+  // 2 vídeos = duas faces (sequenciadas 0→0.5 / 0.5→1); 1 vídeo = range cheio.
+  useEffect(() => {
+    const seekTo = (v: HTMLVideoElement, frac: number) => new Promise<void>((res) => {
+      const dur = v.duration; if (!dur || !isFinite(dur)) { res(); return; }
+      const t = Math.max(0, Math.min(0.999, frac)) * dur;
+      if (Math.abs(v.currentTime - t) < 0.02) { res(); return; }
+      const done = () => { v.removeEventListener('seeked', done); res(); };
+      v.addEventListener('seeked', done);
+      try { v.currentTime = t; } catch { res(); }
+      setTimeout(done, 500); // segurança: nunca pendura o frame
+    });
+    (window as unknown as { __setKProg?: (p: number) => void | Promise<void> }).__setKProg = async (p: number) => {
+      setProg(p);
+      const vids = Array.from(document.querySelectorAll('video.clip-bg')) as HTMLVideoElement[];
+      if (!vids.length) return;
+      const seeks = vids.length >= 2
+        ? [seekTo(vids[0], Math.min(1, p / 0.5)), seekTo(vids[1], Math.max(0, (p - 0.5) / 0.5))]
+        : vids.map((v) => seekTo(v, p));
+      await Promise.all(seeks);
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -95,12 +120,21 @@ export default function RenderVeuPage() {
 
   useEffect(() => {
     if (!estado) return;
-    const marcar = () => { document.body.setAttribute('data-slide-ready', 'true'); };
-    if (typeof document !== 'undefined' && document.fonts?.ready) {
-      document.fonts.ready.then(() => setTimeout(marcar, 150)).catch(marcar);
-    } else {
-      setTimeout(marcar, 400);
-    }
+    let cancel = false;
+    const marcar = () => { if (!cancel) document.body.setAttribute('data-slide-ready', 'true'); };
+    // espera os CLIPS (fundo de vídeo) terem dados antes de marcar ready, senão o
+    // primeiro seek/screenshot apanha um frame vazio.
+    const esperarVideos = () => {
+      const vids = Array.from(document.querySelectorAll('video.clip-bg')) as HTMLVideoElement[];
+      return Promise.all(vids.map((v) => v.readyState >= 2 ? Promise.resolve() : new Promise<void>((res) => {
+        const done = () => res();
+        v.addEventListener('loadeddata', done, { once: true });
+        v.addEventListener('error', done, { once: true });
+        setTimeout(done, 8000);
+      })));
+    };
+    (document.fonts?.ready ?? Promise.resolve()).then(() => esperarVideos()).then(() => setTimeout(marcar, 200)).catch(marcar);
+    return () => { cancel = true; };
   }, [estado]);
 
   const tipoSlide = (estado?.slide as { tipo?: string } | undefined)?.tipo;
@@ -114,7 +148,7 @@ export default function RenderVeuPage() {
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
   const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
-  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string }) | undefined;
+  const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string; clipUrl?: string }) | undefined;
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: ehSerie ? 'transparent' : '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
@@ -174,6 +208,7 @@ export default function RenderVeuPage() {
           texto={s.texto ?? ''}
           destaque={s.destaque}
           imageUrl={s.imageUrl}
+          clipUrl={s.clipUrl}
           conta={getConta(s.contaId ?? '')!}
           conceito={s.conceito}
           veuReveal={s.veuReveal}
