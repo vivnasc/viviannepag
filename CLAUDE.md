@@ -101,22 +101,24 @@ O método de autoconhecimento dela, **separado da veu.a.veu** (não toca
 Três níveis, **separados por conta** (barra de separadores das 4 contas em cada
 página, como na página Publicar):
 
-1. **Calendário · 3 meses** (`/admin/metodo/calendario`) — a vista por cima do
-   MESMO motor da produção (`calendarioMetodo` em `lib/metodo/semana.ts`, derivado
-   de `planoSemana`/`planoSemanaMae`). 13 semanas em cartões; cada cartão é **o
-   próprio post** que a produção gera. Para a MÃE cada dia é **1 véu** (os "temas"
-   são DIAS), véus a alternar ao longo da semana; para as portas cada dia é o seu
-   tipo 60/30/10. "esta semana" (offset 0, `segundaDestaSemana`) casa com a
-   produção. Botão "abrir na produção →" leva `?conta=` e `?off=` (a semana do cartão).
-2. **Produção semanal** (`/admin/metodo/semana`) — por conta (lê `?conta=` e
-   `?off=`), com ◀▶ (offset 0 = ESTA semana, `segundaDestaSemana`),
-   `gerar/completar/gerar dia`.
+1. **Calendário · 3 meses** (`/admin/metodo/calendario`) — o MAPA / a FONTE
+   (exatamente como o Calendário da veu.a.veu). A jornada trimestral de cada
+   conta, em `lib/metodo/planoTrimestral.ts` (`jornadaConta`). Para as PORTAS,
+   cada cartão é um **tema** (uma semana da jornada). Para a **MÃE, os temas são
+   DIAS**: cada semana mostra os 7 véus (1/dia), vindos do motor (`planoSemanaMae`).
+   "abrir na produção →" leva `?conta=` e `?off=` (a semana do cartão).
+2. **Produção semanal** (`/admin/metodo/semana`) — o EXECUTOR, que **desce do
+   plano de 3 meses** (igual ao Plano da Semana da veu.a.veu, que desce do plano
+   editorial). Tem um banner "Do plano de 3 meses · esta semana" que lê o
+   `planoTrimestral` para o offset selecionado (portas: o tema da semana; mãe: os
+   7 véus, 1/dia) + "ver os 3 meses →". Lê `?conta=` e `?off=`; ◀▶ (offset 0 =
+   ESTA semana, `segundaDestaSemana`); `gerar/completar/gerar dia`.
 3. **Publicar / Agenda** — o dia.
 
-✅ **Calendário↔semanal LIGADOS:** o calendário deixou de ter jornada própria
-(o antigo `planoTrimestral.ts` foi removido, era a estrutura paralela que
-contradizia o motor). Agora ambos saem de `planoSemana`/`planoSemanaMae`, por
-isso batem certo (na mãe, 1 véu/dia; "esta semana" igual nos dois).
+✅ **Calendário↔semanal LIGADOS, como na veu.a.veu:** o plano de 3 meses
+(`planoTrimestral`) é a fonte; a produção semanal desce dele (banner que lê o
+plano para a semana selecionada). NUNCA apagar o `planoTrimestral` — é o mapa.
+Na mãe os temas são DIAS (calendário e semana mostram os 7 véus, 1/dia).
 
 **Regras de ouro do método (aprendidas à força):**
 - **Expandir, nunca refazer do zero** o definido. A visão é uma **vista por cima
@@ -144,7 +146,8 @@ isso batem certo (na mãe, 1 véu/dia; "esta semana" igual nos dois).
   trabalho pendente, não reescrever o `main`.
 
 **Próximos passos do método:** (1) ~~ligar calendário↔semanal~~ ✅ FEITO
-(calendário derivado de `planoSemana`/`planoSemanaMae`); (2) **formatos da tarde** (carrossel de profundidade: O Custo Escondido · O
+(plano de 3 meses = fonte; a semana desce dele com banner, como na veu.a.veu);
+(2) **formatos da tarde** (carrossel de profundidade: O Custo Escondido · O
 Mecanismo Invisível · A Origem · O Erro de Interpretação · Cena · O Véu de… · O
 Mapa do Véu — revelar dor + direção, não dar aula); (3) **voz nos motions**
 (`ELEVEN_VOICE_ID` PURA, `eleven_v3`, SEM voice_settings/language_code — ver
@@ -186,4 +189,5 @@ gerou nada para ver). Pontos de partida:
   viver com produção autónoma 60/30/10 · admin `/admin/metodo`. Fluxo de 3 níveis
   por conta (Calendário 3 meses → Produção semanal → Publicar), separados por
   separadores, ligados por `?conta=`. SABER + `referencias.ts` (das cadeiras) por
-  baixo. ✅ calendário↔semanal LIGADOS (calendário derivado do motor da produção).
+  baixo. ✅ calendário↔semanal LIGADOS (plano de 3 meses = fonte; a semana desce
+  dele, banner como na veu.a.veu; `planoTrimestral` mantido).

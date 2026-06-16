@@ -4,7 +4,8 @@ import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta, type ContaId } from '@/lib/metodo/contas';
-import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
+import { planoSemana, planoSemanaMae, VEUS_SEMANA_MAE } from '@/lib/metodo/semana';
+import { jornadaConta, totalTemas, semanaTrimestreAtual } from '@/lib/metodo/planoTrimestral';
 import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -98,6 +99,14 @@ export default function MetodoSemanaPage() {
   const dm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
   const rotuloSemana = offset === 0 ? 'Esta semana' : offset === 1 ? 'Próxima semana' : offset === -1 ? 'Semana passada' : `${offset > 0 ? '+' : ''}${offset} semanas`;
 
+  // CONTEXTO TRIMESTRAL: a produção semanal DESCE do plano de 3 meses (como o
+  // Plano da Semana desce do plano editorial da veu.a.veu). Portas: o tema desta
+  // semana da jornada; mãe: os temas são DIAS (os 7 véus, 1 por dia).
+  const totalT = sel === 'mae' ? 0 : totalTemas(sel);
+  const jornada = sel === 'mae' ? [] : jornadaConta(sel);
+  const idxT = totalT ? (((semanaTrimestreAtual() - 1 + offset) % totalT) + totalT) % totalT : 0;
+  const temaT = jornada[idxT];
+
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-5xl mx-auto">
@@ -125,6 +134,28 @@ export default function MetodoSemanaPage() {
           <p><b>{rotuloSemana}</b> · {dm(seg)} a {dm(dom)}</p>
           <button onClick={() => setOffset((o) => o + 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">▶</button>
           {offset !== 0 && <button onClick={() => setOffset(0)} className="text-[0.66rem] px-2 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">hoje</button>}
+        </div>
+
+        {/* o plano de 3 meses para esta semana — a produção DESCE daqui (como o
+            Plano da Semana desce do plano editorial da veu.a.veu) */}
+        <div className="mt-4 rounded-xl border border-[#EBAE4A]/25 bg-[#EBAE4A]/[0.05] p-4">
+          {sel === 'mae' ? (
+            <>
+              <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1.5">Do plano de 3 meses · {rotuloSemana} · os temas são dias</p>
+              <div className="flex flex-wrap gap-1.5">
+                {VEUS_SEMANA_MAE.map((v) => (
+                  <span key={v.wd} className="text-[0.62rem] px-2 py-0.5 rounded-full border border-[#EBAE4A]/35 text-[#EBAE4A]/90">{v.nome.slice(0, 3)} · {v.veu}</span>
+                ))}
+              </div>
+            </>
+          ) : temaT ? (
+            <>
+              <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1">Do plano de 3 meses · {rotuloSemana} · tema {idxT + 1} de {totalT}</p>
+              <p className="text-lg leading-tight" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>“{temaT.mote}”</p>
+              <p className="text-[0.74rem] opacity-65">Véu {temaT.veu} · {temaT.nota}</p>
+            </>
+          ) : null}
+          <Link href="/admin/metodo/calendario" className="inline-block mt-2 text-[0.66rem] text-[#EBAE4A]/80 hover:text-[#EBAE4A]">ver os 3 meses →</Link>
         </div>
 
         {erro && <p className="mt-3 text-[0.8rem] text-rose-300">{erro}</p>}
