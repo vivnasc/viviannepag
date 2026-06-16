@@ -68,11 +68,15 @@ export async function POST(req: Request) {
   // - datasExistentes: as datas que já têm post nesta conta (não as regenera)
   const evitar: string[] = [];
   const datasExistentes = new Set<string>();
+  const publicadasDatas = new Set<string>(); // dias já publicados: NUNCA se tocam
   try {
     const { data: existentes } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'metodo-%');
-    for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { agendadoEm?: string; metodo?: { conta?: string; tipo?: string } } }[]) {
+    for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { agendadoEm?: string; igPublicado?: boolean; publicado?: boolean; metodo?: { conta?: string; tipo?: string } } }[]) {
       if (r.theme?.metodo?.conta !== contaId) continue;
-      if (r.theme?.agendadoEm) datasExistentes.add(r.theme.agendadoEm);
+      if (r.theme?.agendadoEm) {
+        datasExistentes.add(r.theme.agendadoEm);
+        if (r.theme?.igPublicado || r.theme?.publicado) publicadasDatas.add(r.theme.agendadoEm);
+      }
       if (r.theme?.metodo?.tipo !== 'reconhecimento') continue;
       const tx = r.dias?.[0]?.slides?.[0]?.texto;
       if (tx) evitar.push(tx);
@@ -90,6 +94,8 @@ export async function POST(req: Request) {
     const dias = Array.from({ length: semanas }).flatMap((_, w) => planoSemana(contaId, offset + w));
     tarefas = dias.map((d, i) => ({ d, i }));
   }
+  // SEGURANÇA: nunca regenerar/sobrescrever um dia já PUBLICADO (em qualquer modo).
+  tarefas = tarefas.filter((t) => !publicadasDatas.has(t.d.data));
   if (!tarefas.length) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: true });
 
   const pendentes: Pendente[] = [];
