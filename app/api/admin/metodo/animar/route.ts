@@ -37,8 +37,10 @@ export async function POST(req: Request) {
 
   let ultimoErro = '';
   let disparados = 0;
-  // dispara as previsões EM PARALELO (são chamadas rápidas — só criam o job).
-  await Promise.all(validos.map(async (i) => {
+  // cria as previsões UMA A UMA (NÃO em paralelo): o Replicate rejeita pedidos
+  // simultâneos (429) e uma das faces ficava por animar. A criação é rápida; os
+  // dois clips processam à mesma em paralelo no Replicate depois de criados.
+  for (const i of validos) {
     try {
       const drama = slides[i]!.estilo === 'dramatico';
       const predId = await criarPredicaoClip(
@@ -52,7 +54,7 @@ export async function POST(req: Request) {
     } catch (e) {
       ultimoErro = e instanceof Error ? e.message : String(e);
     }
-  }));
+  }
 
   if (!disparados) return NextResponse.json({ erro: 'kling', detalhe: ultimoErro }, { status: 502 });
   await supabase.from('carousel_collections').update({ dias }).eq('slug', slug);
