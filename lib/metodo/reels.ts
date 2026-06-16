@@ -42,7 +42,7 @@ export const REELS: Reel[] = [
     veu: 'Turbilhão',
     porta: 'A minha cabeça não desliga, sobretudo à noite.',
     sala:
-      'A mente produz pensamentos como o estômago produz sumo gástrico. O problema nunca foi teres pensamentos: é estares lá dentro.',
+      'A tua mente não pára de produzir pensamentos, é a natureza dela. O problema nunca foi teres pensamentos, é estares lá dentro deles.',
     fundoCena:
       'a dark bedroom window at night, a faint warm glow far beyond the glass, deep stillness',
     fonte: 'VER-SOLTAR-PT.md l.27',

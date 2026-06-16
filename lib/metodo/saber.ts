@@ -69,7 +69,7 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       'A mente confunde pensar com agir: ruminar dá a sensação de estar a resolver.',
       'Fusão cognitiva: acreditas que cada pensamento é verdade e uma ordem a cumprir.',
       'Um alarme antigo continua ligado, num presente que já não é a ameaça de então.',
-      'O corpo em modo ameaça produz pensamento sem parar, como o estômago produz sumo gástrico.',
+      'Em modo de alerta, a mente fabrica pensamento sem parar, à procura de uma ameaça para resolver.',
     ],
     crencas: [
       { pensa: 'Se eu pensar mais, resolvo.', verdade: 'Quando te fundes com o pensamento, perdes a clareza que procuravas.' },
