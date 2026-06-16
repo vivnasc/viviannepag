@@ -25,8 +25,23 @@ export default function MetodoFormatosPage() {
   // manda-os ao motor, que foge deles. Carregar "gerar" várias vezes dá sempre
   // ângulos NOVOS (é o que prova que não se repete).
   const [historico, setHistorico] = useState<Record<string, string[]>>({});
+  // CAMADA 2: criar o reel dramático da tarde a partir deste motor+véu.
+  const [criarBusy, setCriarBusy] = useState(false);
+  const [criado, setCriado] = useState<{ slug: string; conta: string } | null>(null);
 
   const f = FORMATOS.find((x) => x.id === formato)!;
+
+  async function criarTarde() {
+    if (criarBusy) return;
+    setCriarBusy(true); setErro(null); setCriado(null);
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-tarde', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ formato, veu }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setCriado({ slug: j.slug, conta: j.conta });
+    } catch (e) { setErro(String(e)); }
+    finally { setCriarBusy(false); }
+  }
 
   async function gerar() {
     if (busy) return;
@@ -106,7 +121,13 @@ export default function MetodoFormatosPage() {
                 </div>
               ))}
             </div>
-            <p className="text-[0.7rem] opacity-40 mt-4">Estes beats são o motor (Camada 1). O recipiente (motion, reel narrado, vídeo, carrossel) é o passo seguinte — veste estes mesmos beats.</p>
+            <div className="mt-5 rounded-xl border border-amber-400/30 bg-amber-400/[0.05] p-3.5">
+              <p className="text-[0.78rem] opacity-85 mb-2">Camada 2 · <b>reel dramático da tarde</b>: veste estes beats numa cena dramática (com movimento e som ElevenLabs).</p>
+              <button onClick={criarTarde} disabled={criarBusy} className="px-4 py-2 rounded-lg border border-amber-400/60 text-amber-200 disabled:opacity-50 text-[0.8rem] font-medium">{criarBusy ? 'a criar (gera cena + som, ~1-2 min)…' : '⚡ criar reel dramático da tarde'}</button>
+              {criado && (
+                <p className="text-[0.74rem] text-emerald-300 mt-2">Criado em <b>@{criado.conta}</b>. <a className="underline" href={`/admin/metodo/${criado.conta}`}>abrir na conta →</a> e lá: <b>animar</b> (a cena vira clip) → <b>renderizar</b> (o reel com os beats em sequência + som).</p>
+              )}
+            </div>
           </div>
         )}
       </div>

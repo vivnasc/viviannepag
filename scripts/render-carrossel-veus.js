@@ -46,7 +46,8 @@ async function main() {
 
   const formato = col.theme?.formato;
   const duasFaces = col.theme?.subtipo === 'duasfaces'; // MÃE: 1 reel, 2 FACES (dor -> revelação) num só MP4
-  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces); // frase com motion (animados)
+  const nbeats = col.theme?.subtipo === 'nbeats'; // TARDE: N beats sobre 1 cena dramática (1 só MP4)
+  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats); // frase/beats com motion
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
@@ -91,7 +92,8 @@ async function main() {
     // ── KINETIC: frase com motion (typewriter). Captura frame a frame
     // conduzindo window.__setKProg e monta MP4 a partir da sequencia. ──
     if (kinetic) {
-      const FPS = 25, DUR = duasFaces ? 14 : 7, N = FPS * DUR; // 2 faces = o dobro (dor + revelação)
+      // TARDE (nbeats): ~3.4s por beat (tempo de leitura). 2 faces = 14s. Frase = 7s.
+      const FPS = 25, DUR = duasFaces ? 14 : nbeats ? Math.max(11, Math.round(3.4 * slides.length)) : 7, N = FPS * DUR;
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
@@ -113,10 +115,12 @@ async function main() {
       const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
       try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
 
-      // video da sequencia
+      // video da sequencia. O som da TARDE (ElevenLabs ~11s) faz LOOP para cobrir
+      // o reel inteiro (-stream_loop); -shortest corta no fim do vídeo. Para a mãe
+      // (faixa longa) o loop é inofensivo.
       let videoUrl = null;
       try {
-        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -i audio.mp3' : ''}`;
+        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -stream_loop -1 -i audio.mp3' : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
         execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
@@ -130,7 +134,7 @@ async function main() {
       try {
         // capa: no reel de 2 faces, o gancho é a DOR (face 1), por isso a capa sai
         // de um frame da 1.ª metade (face 1 completa), não do fim (revelação).
-        const coverIdx = duasFaces ? Math.round((N - 1) * 0.42) : (N - 1);
+        const coverIdx = duasFaces ? Math.round((N - 1) * 0.42) : nbeats ? Math.round((N - 1) * 0.08) : (N - 1);
         const last = path.join(framesDir, `f${String(coverIdx).padStart(4, '0')}.png`);
         const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/cover.png`;
         const { error: ce } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(last), { contentType: 'image/png', upsert: true });

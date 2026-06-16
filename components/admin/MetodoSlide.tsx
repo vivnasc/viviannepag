@@ -17,7 +17,10 @@ const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, conceito, veuReveal, anim = 'typewriter', prog = 1, ratio = '9:16' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; anim?: 'typewriter' | 'reveal'; prog?: number; ratio?: '9:16' | '4:5' }) {
+// `semFundo`: não desenha fundo (transparente) — para sobrepor um beat a um fundo
+// ÚNICO partilhado (reel da tarde, N beats sobre 1 cena). `semRodape`: esconde a
+// assinatura @conta (só o último beat a mostra).
+export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, conceito, veuReveal, anim = 'typewriter', prog = 1, ratio = '9:16', semFundo = false, semRodape = false }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; anim?: 'typewriter' | 'reveal'; prog?: number; ratio?: '9:16' | '4:5'; semFundo?: boolean; semRodape?: boolean }) {
   const { bg1, bg2, accent } = conta.paleta;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
   const H = ratio === '4:5' ? 1350 : 1920;
@@ -61,11 +64,12 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
   // linha inteira aparece em bloco (fade + foco + subida), registo diferente.
   const revealOp = Math.min(1, prog / 0.55);
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.5) / 0.25));
+  const temFundo = !!(imageUrl || clipUrl || semFundo); // sombra do texto (há fundo por baixo)
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: ar, overflow: 'hidden', borderRadius: 16, background: bg2 }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: (imageUrl || clipUrl) ? '#000' : `radial-gradient(ellipse 120% 85% at 50% 32%, ${bg1} 0%, ${bg2} 82%)`, overflow: 'hidden' }}>
-        {(imageUrl || clipUrl) && (<>
+    <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: ar, overflow: 'hidden', borderRadius: 16, background: semFundo ? 'transparent' : bg2 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: semFundo ? 'transparent' : (imageUrl || clipUrl) ? '#000' : `radial-gradient(ellipse 120% 85% at 50% 32%, ${bg1} 0%, ${bg2} 82%)`, overflow: 'hidden' }}>
+        {!semFundo && (imageUrl || clipUrl) && (<>
           {clipUrl
             // CLIP (vídeo): o fundo MEXE por si (Kling). O render busca o frame por prog (seek),
             // o admin mostra o frame atual. Sem pan CSS (o movimento é o do clip).
@@ -88,7 +92,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
 
         {/* a linha (uma só, no centro) */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 130px', zIndex: 2 }}>
-          <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 98, lineHeight: 1.16, letterSpacing: '-0.01em', textAlign: 'center', color: '#F5EEE3', textShadow: (imageUrl || clipUrl) ? '0 2px 30px rgba(0,0,0,0.65)' : 'none', margin: 0, opacity: isReveal ? revealOp : 1, filter: isReveal ? `blur(${((1 - revealOp) * 4).toFixed(2)}px)` : 'none', transform: isReveal ? `translateY(${((1 - revealOp) * 22).toFixed(1)}px)` : 'none' }}>
+          <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 98, lineHeight: 1.16, letterSpacing: '-0.01em', textAlign: 'center', color: '#F5EEE3', textShadow: temFundo ? '0 2px 30px rgba(0,0,0,0.65)' : 'none', margin: 0, opacity: isReveal ? revealOp : 1, filter: isReveal ? `blur(${((1 - revealOp) * 4).toFixed(2)}px)` : 'none', transform: isReveal ? `translateY(${((1 - revealOp) * 22).toFixed(1)}px)` : 'none' }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
               // reveal: a linha aparece em bloco (a animação está no <p>); typewriter: palavra a palavra.
@@ -99,7 +103,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
                 else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
               }
               return (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F7EFE6', fontStyle: dest ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: (imageUrl || clipUrl) ? (dest ? '0 2px 22px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 26px rgba(0,0,0,0.82), 0 0 7px rgba(0,0,0,0.6)') : 'none' }}>
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F7EFE6', fontStyle: dest ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: temFundo ? (dest ? '0 2px 22px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 26px rgba(0,0,0,0.82), 0 0 7px rgba(0,0,0,0.6)') : 'none' }}>
                   {w}
                   {!isReveal && aindaEscreve && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
                 </span>
@@ -111,11 +115,13 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
         {/* assinatura: o @conta (identidade própria, NUNCA "Véu a Véu").
             O VÉU revela-se AQUI, no fim (não no topo): a dor lidera, o nome do
             padrão aprende-se depois. Decisão da Vivianne (manter véus, não abrir por eles). */}
+        {!semRodape && (
         <div style={{ position: 'absolute', bottom: 132, left: 0, right: 0, textAlign: 'center', zIndex: 3, opacity: rodapeOp }}>
           {veuReveal && <p style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 24, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.9, margin: '0 0 14px' }}>Isto é o {veuReveal}</p>}
           <p style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 30, letterSpacing: '0.06em', color: accent, margin: 0 }}>@{conta.handle}</p>
           <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 28, color: '#F2E8DC', opacity: 0.7, margin: '8px 0 0' }}>Ver e Soltar</p>
         </div>
+        )}
       </div>
     </div>
   );
