@@ -28,14 +28,20 @@ export async function POST(req: Request) {
 
   const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ imageUrl?: string | null; clipUrl?: string | null }>; videoUrl?: string | null }>;
   const slides = dias[0]?.slides ?? [];
-  // quais faces animar: a indicada, OU todas as que têm imagem.
-  const alvos = typeof body.face === 'number' ? [body.face] : slides.map((_, i) => i).filter((i) => slides[i]?.imageUrl);
-  const comImagem = alvos.filter((i) => slides[i]?.imageUrl);
-  if (!comImagem.length) return NextResponse.json({ erro: 'sem-imagem', detalhe: 'gera primeiro as imagens deste post' }, { status: 409 });
+  const comImagem = slides.map((_, i) => i).filter((i) => slides[i]?.imageUrl);
+  // quais faces animar: a indicada; senão as que TÊM imagem mas AINDA NÃO têm clip
+  // (preenche o que falta, não re-anima o que já fizeste); se já tiverem todas,
+  // re-anima todas (variação).
+  let alvos: number[];
+  if (typeof body.face === 'number') alvos = [body.face];
+  else { const semClip = comImagem.filter((i) => !slides[i]?.clipUrl); alvos = semClip.length ? semClip : comImagem; }
+  const validos = alvos.filter((i) => slides[i]?.imageUrl);
+  if (!validos.length) return NextResponse.json({ erro: 'sem-imagem', detalhe: 'gera primeiro as imagens deste post' }, { status: 409 });
 
   let ultimoErro = '';
-  const clipsFeitos: string[] = [];
-  for (const i of comImagem) {
+  let feitos = 0;
+  // as faces correm EM PARALELO (corta a espera para ~metade num post de 2 faces).
+  await Promise.all(validos.map(async (i) => {
     const imageUrl = slides[i]!.imageUrl!;
     try {
       const clipRemoto = await gerarClipKling(imageUrl, token);
@@ -52,17 +58,18 @@ export async function POST(req: Request) {
         console.warn('[animar] upload falhou, uso URL remoto:', e instanceof Error ? e.message : e);
       }
       slides[i]!.clipUrl = clipUrl; // o clip vira o fundo desta face
-      clipsFeitos.push(clipUrl);
+      feitos++;
     } catch (e) {
       ultimoErro = e instanceof Error ? e.message : String(e);
     }
-  }
+  }));
 
-  if (!clipsFeitos.length) return NextResponse.json({ erro: 'kling', detalhe: ultimoErro }, { status: 502 });
+  if (!feitos) return NextResponse.json({ erro: 'kling', detalhe: ultimoErro }, { status: 502 });
   // o MP4 já renderizado fica desatualizado: invalida-o para re-render com o clip.
   if (dias[0]) dias[0].videoUrl = null;
-  const theme = { ...((row.theme as Record<string, unknown>) ?? {}), clipTeste: clipsFeitos[0] };
+  const clipsPorFace = slides.map((s) => s.clipUrl ?? null);
+  const theme = { ...((row.theme as Record<string, unknown>) ?? {}), clipTeste: clipsPorFace.find(Boolean) ?? null };
   await supabase.from('carousel_collections').update({ dias, theme }).eq('slug', slug);
 
-  return NextResponse.json({ ok: true, clipUrl: clipsFeitos[0], clips: clipsFeitos.length });
+  return NextResponse.json({ ok: true, clips: feitos, clipsPorFace });
 }

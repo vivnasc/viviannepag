@@ -5,7 +5,7 @@
 // slide pedido a tamanho nativo e marca body[data-slide-ready="true"].
 // URL: /render-veu?slug=<slug>&dia=<n>&idx=<i>
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { VeuSlide } from '@/components/admin/VeuSlide';
 import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
@@ -32,13 +32,13 @@ const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te e
 type Face = { texto?: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conceito?: string; veuReveal?: string };
 // MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
 // (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
-function DuasFaces({ face1, face2, conta, prog }: { face1: Face; face2: Face; conta: Conta; prog: number }) {
-  // crossfade LARGO e suave entre as faces (não brusco): a face 2 desvanece a
-  // entrar ao longo de ~24% do tempo, centrado na passagem (prog 0.5).
-  const FADE = 0.12;
-  const p1 = Math.min(1, prog / 0.5);
-  const p2 = Math.min(1, Math.max(0, (prog - 0.5) / 0.5));
-  const tt = Math.max(0, Math.min(1, (prog - (0.5 - FADE)) / (2 * FADE)));
+function DuasFaces({ face1, face2, conta, prog, split }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number }) {
+  // TEMPO DE LEITURA: a passagem entre faces é em `split` (não 50/50) — a face 2
+  // (texto mais longo) fica com mais tempo. Crossfade LARGO e suave (smoothstep).
+  const FADE = 0.1;
+  const p1 = Math.min(1, prog / split);
+  const p2 = Math.min(1, Math.max(0, (prog - split) / (1 - split)));
+  const tt = Math.max(0, Math.min(1, (prog - (split - FADE)) / (2 * FADE)));
   const op2 = tt * tt * (3 - 2 * tt); // smoothstep (ease-in-out), sem corte seco
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
@@ -58,6 +58,7 @@ export default function RenderVeuPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
+  const splitRef = useRef(0.5); // passagem entre as 2 faces (proporcional ao texto)
 
   // o render conduz a animação frame a frame via window.__setKProg. Quando há
   // CLIPS (fundo de vídeo), o __setKProg também faz SEEK do(s) vídeo(s) ao tempo
@@ -77,8 +78,9 @@ export default function RenderVeuPage() {
       setProg(p);
       const vids = Array.from(document.querySelectorAll('video.clip-bg')) as HTMLVideoElement[];
       if (!vids.length) return;
+      const sp = splitRef.current || 0.5; // passagem entre faces (tempo de leitura)
       const seeks = vids.length >= 2
-        ? [seekTo(vids[0], Math.min(1, p / 0.5)), seekTo(vids[1], Math.max(0, (p - 0.5) / 0.5))]
+        ? [seekTo(vids[0], Math.min(1, p / sp)), seekTo(vids[1], Math.max(0, (p - sp) / (1 - sp)))]
         : vids.map((v) => seekTo(v, p));
       await Promise.all(seeks);
     };
@@ -149,6 +151,18 @@ export default function RenderVeuPage() {
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
   const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string; clipUrl?: string }) | undefined;
+
+  // TEMPO DE LEITURA: a passagem entre faces (split) é proporcional ao texto — a
+  // face 2 (revelação, mais longa) fica com MAIS tempo. Face 1 nunca > 50%.
+  const split = useMemo(() => {
+    const w = (t?: string) => (t ?? '').trim().split(/\s+/).filter(Boolean).length;
+    const l1 = w((estado?.slide as { texto?: string } | undefined)?.texto);
+    const l2 = w((estado?.slide2 as { texto?: string } | undefined)?.texto);
+    if (!l1 || !l2) return 0.5;
+    return Math.max(0.34, Math.min(0.5, l1 / (l1 + l2)));
+  }, [estado]);
+  useEffect(() => { splitRef.current = split; }, [split]);
+
   return (
     <div className={`${cormorant.variable} ${inter.variable} ${jetmono.variable}`} style={{ margin: 0, padding: 0, width: 1080, height: H, overflow: 'hidden', background: ehSerie ? 'transparent' : '#000' }}>
       {erro && <div style={{ color: '#fff', padding: 40 }}>{erro}</div>}
@@ -201,7 +215,7 @@ export default function RenderVeuPage() {
         />
       )}
       {estado && ehMetodo && estado.slide2 && s && getConta(s.contaId ?? '') && (
-        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} />
+        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} />
       )}
       {estado && ehMetodo && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
