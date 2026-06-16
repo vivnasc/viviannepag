@@ -399,3 +399,26 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
 };
 
 export const veusComSaber = (): VeuNome[] => Object.keys(SABER) as VeuNome[];
+
+// Os exemplos de UMA dimensão do SABER de um véu (a matéria-prima do ângulo da
+// semana no percurso da mãe). Serve ao calendário/semana (pré-visualização) e à
+// geração (alimenta a IA com o ângulo certo). DimensaoVeu vive no planoTrimestral;
+// aqui o tipo é inline para não criar import circular (planoTrimestral usa SABER).
+export function exemplosDimensao(
+  veu: VeuNome,
+  dim: 'comportamentos' | 'cenas' | 'subtipos' | 'origens' | 'mecanismos' | 'custos' | 'crencas' | 'verdades' | 'mapa',
+): string[] {
+  const k = SABER[veu];
+  if (!k) return [];
+  switch (dim) {
+    case 'comportamentos': return k.comportamentos;
+    case 'cenas': return k.cenas;
+    case 'subtipos': return k.subtipos;
+    case 'origens': return k.origens;
+    case 'mecanismos': return k.mecanismos;
+    case 'custos': return k.custos;
+    case 'crencas': return k.crencas.map((c) => c.pensa);
+    case 'verdades': return k.crencas.map((c) => c.verdade);
+    case 'mapa': return [k.mapa.pensa, k.mapa.sente, k.mapa.faz, k.mapa.paga];
+  }
+}

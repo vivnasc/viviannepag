@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta, type ContaId } from '@/lib/metodo/contas';
 import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
+import { jornadaConta, totalTemas, semanaTrimestreAtual, semanaMaeDoOffset, parteMae } from '@/lib/metodo/planoTrimestral';
+import { exemplosDimensao } from '@/lib/metodo/saber';
 import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -16,10 +18,14 @@ const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', r
 export default function MetodoSemanaPage() {
   const [offset, setOffset] = useState(0);
   const [sel, setSel] = useState<ContaId>('mae'); // conta ativa (separadores, como no calendário)
-  // ligação a partir do calendário: /admin/metodo/semana?conta=ver abre nessa conta
+  // ligação a partir do calendário: ?conta=ver abre nessa conta; ?off=3 abre nessa
+  // semana (offset 0 = esta), para o "abrir na produção" cair na semana do cartão.
   useEffect(() => {
-    const c = new URLSearchParams(window.location.search).get('conta');
+    const q = new URLSearchParams(window.location.search);
+    const c = q.get('conta');
     if (c && CONTAS_LISTA.some((x) => x.id === c)) setSel(c as ContaId);
+    const o = q.get('off');
+    if (o !== null && o.trim() !== '' && Number.isFinite(Number(o))) setOffset(Number(o));
   }, []);
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
@@ -94,6 +100,17 @@ export default function MetodoSemanaPage() {
   const dm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
   const rotuloSemana = offset === 0 ? 'Esta semana' : offset === 1 ? 'Próxima semana' : offset === -1 ? 'Semana passada' : `${offset > 0 ? '+' : ''}${offset} semanas`;
 
+  // CONTEXTO TRIMESTRAL: a produção semanal DESCE do plano de 3 meses (como o
+  // Plano da Semana desce do plano editorial da veu.a.veu).
+  //  - MÃE: a semana é uma TEMÁTICA do percurso; os 7 véus (1/dia) saem por esse
+  //    ângulo. É o que a geração executa (gerar-mae usa a mesma dimensão).
+  //  - PORTAS: o tema desta semana da jornada.
+  const semMae = sel === 'mae' ? semanaMaeDoOffset(offset) : null;
+  const totalT = sel === 'mae' ? 0 : totalTemas(sel);
+  const jornada = sel === 'mae' ? [] : jornadaConta(sel);
+  const idxT = totalT ? (((semanaTrimestreAtual() - 1 + offset) % totalT) + totalT) % totalT : 0;
+  const temaT = jornada[idxT];
+
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-5xl mx-auto">
@@ -121,6 +138,25 @@ export default function MetodoSemanaPage() {
           <p><b>{rotuloSemana}</b> · {dm(seg)} a {dm(dom)}</p>
           <button onClick={() => setOffset((o) => o + 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">▶</button>
           {offset !== 0 && <button onClick={() => setOffset(0)} className="text-[0.66rem] px-2 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">hoje</button>}
+        </div>
+
+        {/* o plano de 3 meses para esta semana — a produção DESCE daqui (como o
+            Plano da Semana desce do plano editorial da veu.a.veu) */}
+        <div className="mt-4 rounded-xl border border-[#EBAE4A]/25 bg-[#EBAE4A]/[0.05] p-4">
+          {sel === 'mae' && semMae ? (
+            <>
+              <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1">Do plano de 3 meses · {rotuloSemana} · {parteMae(semMae.parte).nome}</p>
+              <p className="text-lg leading-tight" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>“{semMae.mote}”</p>
+              <p className="text-[0.74rem] opacity-65">{semMae.tema} · os 7 véus (1/dia) saem por este ângulo</p>
+            </>
+          ) : temaT ? (
+            <>
+              <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1">Do plano de 3 meses · {rotuloSemana} · tema {idxT + 1} de {totalT}</p>
+              <p className="text-lg leading-tight" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>“{temaT.mote}”</p>
+              <p className="text-[0.74rem] opacity-65">Véu {temaT.veu} · {temaT.nota}</p>
+            </>
+          ) : null}
+          <Link href="/admin/metodo/calendario" className="inline-block mt-2 text-[0.66rem] text-[#EBAE4A]/80 hover:text-[#EBAE4A]">ver os 3 meses →</Link>
         </div>
 
         {erro && <p className="mt-3 text-[0.8rem] text-rose-300">{erro}</p>}
@@ -157,7 +193,8 @@ export default function MetodoSemanaPage() {
                       </div>
                       <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[0.62rem] uppercase tracking-wider" style={{ background: `${conta.cor}33`, color: conta.cor }}>Véu {d.veu} · reel 2 faces</span>
                       <p className="mt-1.5 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
-                        <span className="opacity-55 italic">face 1 · a dor (IA)</span>
+                        <span className="opacity-55 italic">face 1 · a dor (IA){semMae ? `, por: ${semMae.tema.toLowerCase()}` : ''}</span>
+                        {semMae && (() => { const ex = exemplosDimensao(d.veu, semMae.dimensao); const e = ex[((offset % ex.length) + ex.length) % (ex.length || 1)]; return e ? <><br /><span className="opacity-45 text-[0.74rem]">ex.: {e}</span></> : null; })()}
                       </p>
                       <p className="mt-1 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
                         <span className="text-[0.6rem] uppercase tracking-wider opacity-50">face 2 · revelação</span><br />{d.revelacao.texto}

@@ -7,6 +7,8 @@ import { fraseReconhecimento, revelacaoDaDor } from '@/lib/metodo/ia';
 import { nomeVeu } from '@/lib/metodo/posts';
 import { hashtagsDoPost } from '@/lib/metodo/legenda';
 import { planoSemanaMae, diaMaeDaData, type DiaSemanaMae } from '@/lib/metodo/semana';
+import { exemplosDimensao } from '@/lib/metodo/saber';
+import { semanaMaeDaData } from '@/lib/metodo/planoTrimestral';
 import { realceAuto } from '@/lib/metodo/reels';
 
 export const runtime = 'nodejs';
@@ -71,8 +73,12 @@ export async function POST(req: Request) {
   const rows: Record<string, unknown>[] = [];
   let i = 0;
   for (const d of diasParaGerar) {
+      // ÂNGULO DO PERCURSO: a semana trimestral desta data dá a dimensão (o foco)
+      // por que a dor sai. É o que faz o planeado no trimestral ser EXECUTADO aqui.
+      const sem = semanaMaeDaData(d.data);
+      const foco = { titulo: `${sem.tema} (${sem.foco})`, exemplos: exemplosDimensao(d.veu, sem.dimensao) };
       let dor: string;
-      try { dor = limparTravessoes(await fraseReconhecimento(d.veu, apiKey, evitar)); evitar.push(dor); }
+      try { dor = limparTravessoes(await fraseReconhecimento(d.veu, apiKey, evitar, foco)); evitar.push(dor); }
       catch { continue; }
       const conceito = nomeVeu(d.veu);
       // face 2 (revelação): NASCE da face 1 — revela o MECANISMO INVISÍVEL daquela
@@ -99,7 +105,7 @@ export async function POST(req: Request) {
         theme: {
           formato: 'reel', subtipo: 'duasfaces', video: true, mundo: 'autora', marca: 'loja',
           agendadoEm: d.data, hora: d.hora,
-          metodo: { conta: 'mae', tipo: 'duasfaces', veu: d.veu },
+          metodo: { conta: 'mae', tipo: 'duasfaces', veu: d.veu, tema: sem.tema, dimensao: sem.dimensao },
         },
       });
       i++;
