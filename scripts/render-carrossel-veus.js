@@ -45,7 +45,8 @@ async function main() {
   console.log(`[data] ${dias.length} dias`);
 
   const formato = col.theme?.formato;
-  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo'); // frase com motion / Domingo de Luz (animados)
+  const duasFaces = col.theme?.subtipo === 'duasfaces'; // MÃE: 1 reel, 2 FACES (dor -> revelação) num só MP4
+  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces); // frase com motion (animados)
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
@@ -90,7 +91,7 @@ async function main() {
     // ── KINETIC: frase com motion (typewriter). Captura frame a frame
     // conduzindo window.__setKProg e monta MP4 a partir da sequencia. ──
     if (kinetic) {
-      const FPS = 25, DUR = 7, N = FPS * DUR;
+      const FPS = 25, DUR = duasFaces ? 14 : 7, N = FPS * DUR; // 2 faces = o dobro (dor + revelação)
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
@@ -127,7 +128,10 @@ async function main() {
       // poster: ultimo frame (frase completa) como imagem
       const imagensDia = [];
       try {
-        const last = path.join(framesDir, `f${String(N - 1).padStart(4, '0')}.png`);
+        // capa: no reel de 2 faces, o gancho é a DOR (face 1), por isso a capa sai
+        // de um frame da 1.ª metade (face 1 completa), não do fim (revelação).
+        const coverIdx = duasFaces ? Math.round((N - 1) * 0.42) : (N - 1);
+        const last = path.join(framesDir, `f${String(coverIdx).padStart(4, '0')}.png`);
         const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/cover.png`;
         const { error: ce } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(last), { contentType: 'image/png', upsert: true });
         if (!ce) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);

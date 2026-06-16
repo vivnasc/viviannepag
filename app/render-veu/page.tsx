@@ -14,7 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
-import { getConta } from '@/lib/metodo/contas';
+import { getConta, type Conta } from '@/lib/metodo/contas';
 import { SerieDiariaSlide, type SerieId } from '@/components/admin/SerieDiariaSlide';
 import { type PaletaId } from '@/lib/series/serie-design';
 import type { Slide, Mundo } from '@/lib/estudio-conteudo';
@@ -29,8 +29,28 @@ type Coleccao = { dias: Dia[]; theme?: { subtipo?: string } };
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
 
+type Face = { texto?: string; destaque?: string[]; imageUrl?: string; conceito?: string };
+// MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
+// (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
+function DuasFaces({ face1, face2, conta, prog }: { face1: Face; face2: Face; conta: Conta; prog: number }) {
+  const FADE = 0.06;
+  const p1 = Math.min(1, prog / 0.5);
+  const p2 = Math.min(1, Math.max(0, (prog - 0.5) / 0.5));
+  const op2 = prog <= 0.5 - FADE ? 0 : Math.min(1, (prog - (0.5 - FADE)) / FADE);
+  return (
+    <div style={{ position: 'relative', width: 1080, height: 1920 }}>
+      <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} conta={conta} conceito={face1.conceito} prog={p1} />
+      </div>
+      <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} conta={conta} conceito={face2.conceito} prog={p2} />
+      </div>
+    </div>
+  );
+}
+
 export default function RenderVeuPage() {
-  const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number } | null>(null);
+  const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number; slide2?: Slide & { imageUrl?: string } } | null>(null);
   const [subtipo, setSubtipo] = useState<string>('');
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
@@ -55,16 +75,14 @@ export default function RenderVeuPage() {
         const dia = col.dias.find((d) => d.dia === diaN);
         const slide = dia?.slides?.[idx];
         if (!dia || !slide) { setErro('slide nao encontrado'); return; }
-        // pre-carrega a imagem de fundo (se houver) antes de marcar ready
-        if (slide.imageUrl) {
-          await new Promise<void>((resolve) => {
-            const im = new Image();
-            im.onload = () => resolve();
-            im.onerror = () => resolve();
-            im.src = slide.imageUrl!;
-          });
-        }
-        setEstado({ slide, dia, idx });
+        // 2 FACES: a mãe usa subtipo 'duasfaces' = 1 reel com a dor (slide 0) e a
+        // revelação (slide 1), reveladas pela 1.ª e 2.ª metade do prog.
+        const slide2 = col.theme?.subtipo === 'duasfaces' ? dia?.slides?.[1] : undefined;
+        // pre-carrega as imagens de fundo (as duas, se houver) antes de marcar ready
+        await Promise.all([slide.imageUrl, slide2?.imageUrl].filter(Boolean).map((src) => new Promise<void>((resolve) => {
+          const im = new Image(); im.onload = () => resolve(); im.onerror = () => resolve(); im.src = src as string;
+        })));
+        setEstado({ slide, dia, idx, slide2 });
       } catch (e) { setErro(String(e)); }
     })();
   }, []);
@@ -148,7 +166,10 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
-      {estado && ehMetodo && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && estado.slide2 && s && getConta(s.contaId ?? '') && (
+        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} />
+      )}
+      {estado && ehMetodo && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}

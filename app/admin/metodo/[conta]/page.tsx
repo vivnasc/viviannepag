@@ -43,7 +43,9 @@ export default function MetodoContaPage() {
     setErro(null); setLote({ feito: 0, total: semanas * 7 });
     setMsg('A gerar o TEXTO no servidor, já com a data de cada dia (não gasta créditos de imagem). Podes sair ou fechar. Volta e recarrega.');
     try {
-      const r = await fetch('/api/admin/metodo/gerar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas }) });
+      // a mãe tem pipeline própria: 1 véu/dia, reel de 2 faces (dor -> revelação).
+      const endpoint = conta.id === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-lote';
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} frases geradas, organizadas por dia. Revê e limpa; depois "gerar imagens em falta" só das que ficarem.`);
