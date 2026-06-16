@@ -219,8 +219,9 @@ export default function MetodoContaPage() {
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else {
-        setMsg('Imagem trocada. Se ainda não gostares, carrega outra vez.');
-        setDetalhe((d) => (d && d.slug === slug ? { ...d, imageUrl: j.imageUrl, videoUrl: null } : d));
+        const urls = (j.imageUrls ?? [j.imageUrl]) as (string | null)[];
+        setMsg(urls.length > 1 ? 'Imagens geradas (as 2 faces). Se não gostares, carrega outra vez.' : 'Imagem gerada. Se não gostares, carrega outra vez.');
+        setDetalhe((d) => (d && d.slug === slug ? { ...d, imageUrl: urls[0] ?? d.imageUrl, imageUrl2: urls[1] ?? d.imageUrl2, videoUrl: null } : d));
         recarregar();
       }
     } catch (e) { setErro(String(e)); }

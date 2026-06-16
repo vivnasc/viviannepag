@@ -6,11 +6,12 @@ import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId } from '@/lib/metodo
 import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
-export const maxDuration = 120;
+export const maxDuration = 300;
 
-// Regenera a imagem (Flux) de UM post, para SUBSTITUIR uma que não se quer.
-// Não toca no texto. Escolhe uma variação DIFERENTE da atual (outro elemento +
-// outro enquadramento), para não sair igual nem desperdiçar o crédito à toa.
+// Gera/regenera as imagens (Flux) de UM post — TODAS as faces (a mãe tem 2: a dor
+// e a revelação), cada imagem em PAR com o texto da sua face. Não toca no texto.
+// Escolhe variações diferentes (evita assuntos já usados na conta), para não sair
+// igual nem desperdiçar crédito.
 
 type Slide = { imageUrl?: string | null; notaVisual?: string; texto?: string };
 type Dia = { slides?: Slide[]; videoUrl?: string | null };
@@ -46,42 +47,59 @@ export async function POST(req: Request) {
   const contaId = (row?.theme?.metodo?.conta ?? '') as ContaId;
   const conta = CONTAS[contaId];
   if (!row || !conta) return NextResponse.json({ erro: 'post-desconhecido' }, { status: 404 });
-  const slide = row.dias?.[0]?.slides?.[0];
-  if (!slide) return NextResponse.json({ erro: 'sem-slide' }, { status: 400 });
+  const slides = row.dias?.[0]?.slides ?? [];
+  if (!slides.length) return NextResponse.json({ erro: 'sem-slide' }, { status: 400 });
 
-  // fallback (sem API key ou se a IA falhar): salta para outro elemento da lista.
-  const els = conta.atmosfera.elementos;
-  const atual = indiceElementoAtual(conta, slide.notaVisual);
-  let elIdx = Math.floor(Math.random() * els.length);
-  if (els.length > 1 && elIdx === atual) elIdx = (elIdx + 1) % els.length; // garante outro assunto
-  const enqIdx = Math.floor(Math.random() * 6);
-  let prompt = fundoDaConta(conta, elIdx, enqIdx);
-
-  // evita os assuntos JÁ usados nos OUTROS posts desta conta (não só o deste
-  // post) — senão dois posts caem na mesma cena (ex.: duas estufas iguais).
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  // evita os assuntos JÁ usados nos OUTROS posts desta conta (não só o deste) —
+  // senão dois posts caem na mesma cena. Acumula também os desta geração para a
+  // face 1 e a face 2 NÃO saírem iguais.
   const evitar: string[] = [];
-  if (slide.notaVisual) evitar.push(assuntoCurto(slide.notaVisual));
   const { data: irmaos } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodo-%');
   for (const r of (irmaos ?? []) as Row[]) {
     if (r.slug === slug || r.theme?.metodo?.conta !== contaId) continue;
-    const nv = r.dias?.[0]?.slides?.[0]?.notaVisual;
-    if (nv) evitar.push(assuntoCurto(nv));
+    for (const s of r.dias?.[0]?.slides ?? []) if (s.notaVisual) evitar.push(assuntoCurto(s.notaVisual));
   }
 
-  // PREFERIDO: o Claude escreve um fundo DIFERENTE de todos os já usados na conta.
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (apiKey) {
-    try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto); }
-    catch { /* fica o fallback */ }
-  }
-  const { url: img, erro } = await fundoImagem(prompt, slug);
-  if (!img) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro }, { status: 502 });
+  // assuntos JÁ neste post (para a face nova diferir da que já existe, ex.: a vela).
+  for (const s of slides) if (s.imageUrl && s.notaVisual) evitar.push(assuntoCurto(s.notaVisual));
 
-  slide.imageUrl = img;
-  slide.notaVisual = prompt;
+  const els = conta.atmosfera.elementos;
+  const imageUrls: (string | null)[] = slides.map((s) => s.imageUrl ?? null);
+  let ultimoErro = '';
+  // se FALTAM faces, preenche SÓ as que faltam (mantém as que já tens); se já
+  // estiverem todas, regenera todas (o caso "outra imagem", variação).
+  const faltam = slides.filter((s) => !s.imageUrl);
+  const alvo = faltam.length ? faltam : slides;
+  // gera a imagem de cada face-alvo, em par com o texto da face (a dor / a revelação).
+  for (const slide of alvo) {
+    const i = slides.indexOf(slide);
+    // fallback: salta para outro elemento (variação), evitando o atual.
+    const atual = indiceElementoAtual(conta, slide.notaVisual);
+    let elIdx = Math.floor(Math.random() * els.length);
+    if (els.length > 1 && elIdx === atual) elIdx = (elIdx + 1) % els.length;
+    let prompt = fundoDaConta(conta, elIdx, Math.floor(Math.random() * 6));
+    if (slide.notaVisual) evitar.push(assuntoCurto(slide.notaVisual));
+    // PREFERIDO: o Claude escreve um fundo que ENCARNA o texto desta face, diferente dos já usados.
+    if (apiKey) {
+      try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto); }
+      catch { /* fica o fallback */ }
+    }
+    const { url: img, erro } = await fundoImagem(prompt, slug);
+    if (img) {
+      slide.imageUrl = img;
+      slide.notaVisual = prompt;
+      evitar.push(assuntoCurto(prompt)); // a face seguinte evita esta cena
+      imageUrls[i] = img;
+    } else {
+      ultimoErro = erro ?? 'falhou';
+    }
+  }
+
+  if (!imageUrls.some(Boolean)) return NextResponse.json({ erro: 'flux-falhou', detalhe: ultimoErro }, { status: 502 });
   // o MP4 já renderizado (se houver) fica desatualizado: invalida-o para re-render.
   if (row.dias?.[0]) row.dias[0].videoUrl = null;
   const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', slug);
   if (e2) return NextResponse.json({ erro: 'db-update', detalhe: e2.message }, { status: 500 });
-  return NextResponse.json({ ok: true, imageUrl: img });
+  return NextResponse.json({ ok: true, imageUrl: imageUrls[0] ?? null, imageUrls });
 }
