@@ -30,6 +30,15 @@ export function dataLocal(d: Date): string {
   return `${ano}-${mes}-${dia}`;
 }
 
+/** A segunda-feira da semana ATUAL (a que contém hoje; domingo conta como fim
+ *  da semana seg→dom). offset 0 da produção = esta semana, como na veu.a.veu. */
+export function segundaDestaSemana(de: Date = new Date()): Date {
+  const d = new Date(de.getFullYear(), de.getMonth(), de.getDate());
+  const dow = d.getDay(); // 0=dom, 1=seg, ...
+  d.setDate(d.getDate() + (dow === 0 ? -6 : 1 - dow));
+  return d;
+}
+
 /** A próxima segunda-feira (ou hoje, se já for segunda), a meia-noite local. */
 export function proximaSegunda(de: Date = new Date()): Date {
   const d = new Date(de.getFullYear(), de.getMonth(), de.getDate());
