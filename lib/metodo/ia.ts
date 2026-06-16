@@ -23,13 +23,34 @@ export function assuntoCurto(prompt: string): string {
   return prompt.split(',')[0].trim().split(/\s+/).slice(0, 10).join(' ');
 }
 
+// Regras fixas do fundo DRAMÁTICO (estilo de tarde, para alcance): cinematográfico,
+// uma silhueta humana sem rosto, um foco de energia/luz, escuro e contrastado. É o
+// oposto do contemplativo — feito para parar o scroll. Mantém 9:16 e sem texto.
+const FUNDO_REGRAS_DRAMA =
+  'cinematic photographic still, dramatic volumetric light, deep moody high-contrast darkness with one glowing focal light, atmospheric haze, epic and emotional, ' +
+  'space in the lower third for an overlaid sentence, NO faces visible, NO text, NO letters, NO watermark, NO logo, vertical 9:16';
+
 // O Claude ESCREVE o prompt de fundo de UM post: criativo e VARIADO (assunto,
 // composição e luz diferentes a cada vez), mantendo só a paleta/atmosfera da
 // conta como fio condutor. Recebe `evitar` = assuntos já usados, para não repetir.
-// É isto que mata a monotonia (substitui a lista fixa fundoDaConta).
-export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string, frase?: string): Promise<string> {
+// É isto que mata a monotonia (substitui a lista fixa fundoDaConta). `estilo`:
+// 'contemplativo' (padrão, manhã) ou 'dramatico' (tarde, alcance).
+export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string, frase?: string, estilo: 'contemplativo' | 'dramatico' = 'contemplativo'): Promise<string> {
   const a = conta.atmosfera;
-  const sys = `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post do Método VS (@${conta.handle}).
+  const corMundo = `${a.prompt}. Sensação: ${a.sensacao}`;
+  const evita = evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : '';
+  const sys = estilo === 'dramatico'
+    ? `És diretor de arte de uma marca de psicologia (Método VS, @${conta.handle}). Escreves UM prompt de imagem (em inglês) para um reel DRAMÁTICO e cinematográfico, feito para parar o scroll e ser partilhado (estilo dos grandes canais de energia/espiritualidade).
+
+ASSINATURA DRAMÁTICA (essencial): uma ÚNICA figura humana solitária em SILHUETA (de costas ou de lado, SEM rosto visível, anónima e universal), pequena perante algo vasto — uma paisagem imensa (campo, horizonte, montanha, mar, deserto). Atrás/à volta dela, um GRANDE fenómeno de LUZ/ENERGIA (uma aura, um orbe luminoso, um portal, uma coluna de luz, uma aurora) na cor desta conta. Cinematográfico, fotográfico, luz volumétrica, escuro e contrastado, atmosférico, épico e emocional.
+COR DESTA CONTA (a energia/luz sai nesta paleta): ${corMundo}. Representa: ${conta.depois}
+${frase ? `A FRASE deste post é: «${frase}». A imagem ENCARNA o sentimento da frase (a silhueta vive esse momento perante a energia). A frase manda a emoção; a energia/luz é o espetáculo.` : ''}
+MOVIMENTO (a imagem vai ser ANIMADA depois, com força): compõe para que a energia/luz possa PULSAR e rodopiar, raios a deslocar-se, nuvens/névoa a derivar, o tecido/cabelo da figura a mexer ao vento. Movimento FORTE mas natural.
+${evita}
+
+Termina sempre com: ${FUNDO_REGRAS_DRAMA}.
+Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`
+    : `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post do Método VS (@${conta.handle}).
 
 ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
 
@@ -38,7 +59,7 @@ ${frase ? `A FRASE deste post é: «${frase}».
 CONEXÃO IMAGEM↔TEXTO (o mais importante, como nas séries VC Sabia / Hoje em Mim): a imagem tem de ENCARNAR esta frase — uma cena ou objeto concreto que representa o ESTADO ou a METÁFORA por trás dela, NÃO um fundo genérico. A FRASE manda o ASSUNTO; o mundo da conta dá só a PALETA, a luz e o tratamento. Ex.: uma frase sobre adiar a vida → algo que evoque espera/limiar; sobre o corpo → algo do corpo/casa; etc. Concreto, sensorial, sem pessoas.` : `ASSUNTO: cena real e concreta que encarne o significado da conta (interiores, objetos, janelas, água, paisagens, detalhes), variada, sem pessoas.`}
 MOVIMENTO (INVIOLÁVEL — a imagem vai ser ANIMADA depois): a cena TEM de conter, em destaque, pelo menos UM elemento que se mova sozinho de forma natural e contínua — água a ondular, chama/vela a tremer, fumo ou incenso a subir, névoa/neblina a derivar, vapor, mar/ondas, chuva, tecido/cortina ao vento, luz a tremeluzir, brasas, pó num raio de sol, ramos/folhagem ao vento, reflexos na água. É este elemento que dá vida ao vídeo. PROIBIDO uma cena que seja só um objeto parado sem nada vivo (ex.: um casaco pendurado, uma cadeira vazia, um copo de água pousado, um livro fechado): se a metáfora pedir um objeto assim, ENCENA-O sempre com um elemento em movimento à volta (a luz a tremer sobre ele, fumo a passar, a água ao lado a mexer, a cortina atrás ao vento). A metáfora da frase manda o assunto; o movimento é OBRIGATÓRIO na composição.
 COMPOSIÇÃO: varia (plano largo / macro / interior / vista de cima / ao nível do olhar). LUZ: dentro da paleta da conta, varia a hora.
-${evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : ''}
+${evita}
 
 Termina sempre com: ${FUNDO_REGRAS}.
 Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`;
@@ -50,7 +71,7 @@ Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`;
   if (!res.ok) throw new Error(`claude ${res.status}`);
   let t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');
   if (!t) throw new Error('vazio');
-  if (!/9:16/.test(t)) t += `, ${FUNDO_REGRAS}`; // garante as regras fixas
+  if (!/9:16/.test(t)) t += `, ${estilo === 'dramatico' ? FUNDO_REGRAS_DRAMA : FUNDO_REGRAS}`; // garante as regras fixas
   return limparTravessoes(t);
 }
 
