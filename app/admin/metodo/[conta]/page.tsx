@@ -6,9 +6,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
-import { getConta, Conta } from '@/lib/metodo/contas';
-import { Post, postsDaConta } from '@/lib/metodo/posts';
-import { legendaDoPost, hashtagsDoPost } from '@/lib/metodo/legenda';
+import { getConta } from '@/lib/metodo/contas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -22,26 +20,13 @@ const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', r
 const AMBIG = /\b(ela|ele|elas|eles|dela|dele|delas|deles|isso|isto|aquilo|aquela|aquele|disso|nisso)\b/i;
 const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
-// Pré-visualização animada (loop), com a identidade própria da conta.
-function MetodoPreview({ texto, destaque, conta, conceito, imageUrl }: { texto: string; destaque?: string[]; conta: Conta; conceito?: string; imageUrl?: string }) {
-  const [prog, setProg] = useState(0);
-  useEffect(() => {
-    let raf = 0; let t0 = 0; const CICLO = 11000;
-    const tick = (t: number) => { if (!t0) t0 = t; const e = ((t - t0) % CICLO) / CICLO; setProg(Math.min(1, e / 0.85)); raf = requestAnimationFrame(tick); };
-    raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
-  }, []);
-  return <MetodoSlide texto={texto} destaque={destaque} conta={conta} conceito={conceito} imageUrl={imageUrl} prog={prog} />;
-}
-
 export default function MetodoContaPage() {
   const params = useParams<{ conta: string }>();
   const conta = getConta(params.conta);
   const [estado, setEstado] = useState<Record<string, EstadoPost>>({});
-  const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
-  const [zoom, setZoom] = useState<{ texto: string; destaque?: string[]; conceito?: string; imageUrl?: string } | null>(null);
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [melBusy, setMelBusy] = useState<string | null>(null);
 
@@ -50,17 +35,6 @@ export default function MetodoContaPage() {
   }, []);
   useEffect(() => { recarregar(); }, [recarregar]);
 
-  const gerar = useCallback(async (postId: string) => {
-    setBusy(postId); setErro(null); setMsg(null);
-    try {
-      const r = await fetch('/api/admin/metodo/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ postId }) });
-      const j = await r.json();
-      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
-      setMsg(`Gerado: ${j.slug}. Vai a Publicar para agendar, renderizar o MP4 e exportar.`);
-      recarregar();
-    } catch (e) { setErro(String(e)); }
-    finally { setBusy(null); }
-  }, [recarregar]);
 
   // gerar o plano (4 semanas) NO SERVIDOR, alinhado ao Plano da Semana: cada post
   // já com a sua DATA e a sua imagem. Corre sozinho mesmo que saias/feches.
@@ -272,7 +246,6 @@ export default function MetodoContaPage() {
     </main>;
   }
 
-  const posts = postsDaConta(conta.id);
   // tudo o que já foi gerado para esta conta (inclui os do lote/IA), para feedback e render.
   // ordem ESTÁVEL (data, depois slug): os cartões não saltam de sítio quando a
   // lista recarrega após melhorar/descartar/gerar.
@@ -280,43 +253,6 @@ export default function MetodoContaPage() {
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
   const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
-  const grupos: { tipo: string; itens: Post[] }[] = [
-    { tipo: 'reconhecimento', itens: posts.filter((p) => p.tipo === 'reconhecimento') },
-    { tipo: 'revelacao', itens: posts.filter((p) => p.tipo === 'revelacao') },
-    { tipo: 'manifesto', itens: posts.filter((p) => p.tipo === 'manifesto') },
-  ];
-
-  const PostCard = ({ p }: { p: Post }) => {
-    const st = estado[p.id];
-    const gerado = Boolean(st);
-    return (
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden flex flex-col md:flex-row gap-4 p-4">
-        <button onClick={() => setZoom({ texto: p.texto, destaque: p.destaque, conceito: p.conceito })} title="clicar para aumentar" className="w-full md:w-[210px] shrink-0 block">
-          <MetodoPreview texto={p.texto} destaque={p.destaque} conta={conta} conceito={p.conceito} />
-        </button>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap text-[0.68rem] uppercase tracking-wider opacity-70">
-            <span className="px-2 py-0.5 rounded-full" style={{ background: `${conta.cor}33`, color: conta.cor }}>{TIPO_LABEL[p.tipo]}</span>
-            {p.veu && <span className="px-2 py-0.5 rounded-full bg-white/10">{p.conceito}</span>}
-            <span className="opacity-40 normal-case tracking-normal">{p.fonte}</span>
-          </div>
-          <p className="mt-2 text-[1.1rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>{p.texto}</p>
-          <details className="mt-2 text-[0.78rem] opacity-80">
-            <summary className="cursor-pointer opacity-70">legenda + hashtags</summary>
-            <pre className="whitespace-pre-wrap mt-1 text-[0.74rem] opacity-90">{legendaDoPost(p)}</pre>
-            <p className="mt-1 text-[0.72rem] opacity-70">{hashtagsDoPost(p).join(' ')}</p>
-          </details>
-          <div className="mt-3 flex items-center gap-2 flex-wrap text-[0.72rem]">
-            <button onClick={() => gerar(p.id)} disabled={busy === p.id} className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: `${conta.cor}88`, color: conta.cor }}>
-              {busy === p.id ? 'a gerar…' : gerado ? 'regenerar' : 'gerar'}
-            </button>
-            {gerado && !st?.videoUrl && <button onClick={() => renderOne(st!.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-3 py-1.5 rounded-lg border border-white/25">renderizar</button>}
-            {gerado && <span className="text-emerald-300/80">gerado{st?.videoUrl ? ' · MP4 pronto' : ' · falta render'}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const semData = geradosConta.filter((e) => !e.agendadoEm).length;
   // por dia (a data é o plano): para a grelha de calendário.
@@ -418,25 +354,7 @@ export default function MetodoContaPage() {
             <p className="mt-2 text-[0.62rem] opacity-40">Clica num post para ver grande e agir (renderizar · melhorar · descartar). Barra à esquerda: verde = MP4 pronto, vermelho = sem imagem.</p>
           </section>
         )}
-
-        {grupos.map((g) => g.itens.length > 0 && (
-          <section key={g.tipo} className="mb-8">
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">{TIPO_LABEL[g.tipo]} <span className="opacity-40">· {g.itens.length}</span></h2>
-            <div className="space-y-3">
-              {g.itens.map((p) => <PostCard key={p.id} p={p} />)}
-            </div>
-          </section>
-        ))}
       </div>
-
-      {zoom && (
-        <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-          <div onClick={(ev) => ev.stopPropagation()} className="w-full max-w-[380px]">
-            <MetodoSlide texto={zoom.texto} destaque={zoom.destaque} conceito={zoom.conceito} imageUrl={zoom.imageUrl} conta={conta} prog={1} />
-            <p className="text-center text-[0.72rem] opacity-60 mt-2">clica fora para fechar</p>
-          </div>
-        </div>
-      )}
 
       {detalhe && (
         <div onClick={() => setDetalhe(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
