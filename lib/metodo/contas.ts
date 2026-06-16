@@ -40,6 +40,18 @@ export interface Conta {
   essencia: string;
   /** O que a pessoa é depois (a transformação). */
   depois: string;
+  /** PORTAS: a FRASE-MÃE — a confissão recorrente que une os 2 véus da porta num
+   *  só movimento humano (tensão causal, não dois temas lado a lado). É a
+   *  identidade SENTIDA em QUALQUER post, em qualquer ordem (voz primeiro, arco
+   *  depois). Infiltra-se na geração de todas as dores da conta. A mãe não tem:
+   *  é a vista panorâmica (essa corre pelo percurso trimestral). */
+  fraseMae?: string;
+  /** PORTAS: as sensações que se REPETEM (a textura emocional do mundo da conta).
+   *  Alimentam a geração para o feed reforçar sempre a mesma identidade. */
+  sensacoes?: string[];
+  /** PORTAS: o verbo de CHEGADA do movimento, o que distingue o fim de cada porta
+   *  (ver: testemunhar · vir: regressar · viver: participar). */
+  chegada?: string;
   /** Os dois véus que este movimento recolhe (o cacho). */
   veus: VeuNome[];
   /** Símbolo visual desta conta (família das capas). */
@@ -92,6 +104,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     marca: 'versoltar',
     essencia: 'a consciência',
     depois: 'Sai de dentro da cabeça e vê a tempestade passar de terra.',
+    fraseMae: 'Estou sempre no que aí vem ou no que já passou, nunca no agora.',
+    sensacoes: ['a cabeça que não desliga', 'pensar de mais, antecipar tudo', 'reviver o que já passou', 'ruído interno constante', 'nunca estar mesmo no presente'],
+    chegada: 'testemunhar (ver a tempestade de fora)',
     veus: ['Turbilhão', 'Memória'],
     simbolo: 'a margem',
     fundoBase:
@@ -135,6 +150,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     marca: 'virsoltar',
     essencia: 'o regresso',
     depois: 'Para de empurrar, regressa a si, deixa-se segurar e descansar.',
+    fraseMae: 'Não paro porque não aguento o que sinto quando paro.',
+    sensacoes: ['exaustão de quem faz tudo', 'culpa ao parar', 'não saber receber', 'medo do silêncio e do vazio', 'encher o tempo para não sentir'],
+    chegada: 'regressar (voltar a casa, a si)',
     veus: ['Esforço', 'Desolação'],
     simbolo: 'o colo',
     fundoBase:
@@ -179,6 +197,9 @@ export const CONTAS: Record<ContaId, Conta> = {
     essencia: 'a integração',
     depois:
       'Sai da sala de espera, tira a armadura dos papéis e entra na própria vida, agora.',
+    fraseMae: 'Adio a vida que quero porque mudar seria deixar de ser quem sempre fui.',
+    sensacoes: ['adiar a vida para um quando', 'chegar e nunca chegar', 'agarrar-se a quem já se foi', 'medo de mudar e de expandir', 'viver na próxima ou na antiga versão de si'],
+    chegada: 'participar (entrar na vida, agora)',
     veus: ['Horizonte', 'Permanência'],
     simbolo: 'descalça',
     fundoBase:

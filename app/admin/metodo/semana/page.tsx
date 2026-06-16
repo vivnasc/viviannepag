@@ -106,6 +106,7 @@ export default function MetodoSemanaPage() {
   //    ângulo. É o que a geração executa (gerar-mae usa a mesma dimensão).
   //  - PORTAS: o tema desta semana da jornada.
   const semMae = sel === 'mae' ? semanaMaeDoOffset(offset) : null;
+  const contaSel = CONTAS_LISTA.find((c) => c.id === sel);
   const totalT = sel === 'mae' ? 0 : totalTemas(sel);
   const jornada = sel === 'mae' ? [] : jornadaConta(sel);
   const idxT = totalT ? (((semanaTrimestreAtual() - 1 + offset) % totalT) + totalT) % totalT : 0;
@@ -151,6 +152,13 @@ export default function MetodoSemanaPage() {
             </>
           ) : temaT ? (
             <>
+              {contaSel?.fraseMae && (
+                <div className="mb-2.5 pb-2.5 border-b border-[#EBAE4A]/15">
+                  <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-0.5">A voz desta conta (em todos os posts)</p>
+                  <p className="text-[0.95rem] leading-tight" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>“{contaSel.fraseMae}”</p>
+                  {contaSel.chegada && <p className="text-[0.7rem] opacity-60">chega a {contaSel.chegada}</p>}
+                </div>
+              )}
               <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[#EBAE4A] mb-1">Do plano de 3 meses · {rotuloSemana} · tema {idxT + 1} de {totalT}</p>
               <p className="text-lg leading-tight" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>“{temaT.mote}”</p>
               <p className="text-[0.74rem] opacity-65">Véu {temaT.veu} · {temaT.nota}</p>

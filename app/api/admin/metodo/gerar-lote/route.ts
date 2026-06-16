@@ -108,7 +108,11 @@ export async function POST(req: Request) {
       const doVeu = reelsDaConta(contaId).filter((r) => r.veu === veu);
       const fonte = doVeu.find((r) => r.revelacaoForte) ?? doVeu[0];
       try {
-        const texto = await fraseReconhecimento(veu, apiKey, evitar);
+        // VOZ DA PORTA: a dor orbita a FRASE-MÃE (a confissão recorrente que une
+        // os 2 véus). Assim cada post reforça a mesma identidade, em qualquer
+        // ordem que o seguidor caia (voz primeiro, arco depois).
+        const foco = conta.fraseMae ? { titulo: conta.fraseMae, exemplos: conta.sensacoes ?? [] } : undefined;
+        const texto = await fraseReconhecimento(veu, apiKey, evitar, foco);
         evitar.push(texto);
         const post: Post = { id: `r${i}`, conta: contaId, tipo: 'reconhecimento', veu, texto, destaque: [], payoff: fonte?.sala, fundoCena: '', fonte: 'gerado com IA (do véu)', conceito: nomeVeu(veu) };
         pendentes.push({ post, slug: `metodo-ia-${contaId}-${d.data}-${i}`, ia: true, i, promptFundo: limparTravessoes(fundoDaConta(conta, i)), data: d.data, hora: d.hora });
