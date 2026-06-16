@@ -31,32 +31,41 @@ export async function POST(req: Request) {
 
   const supabase = getSupabaseAdmin();
 
-  // memória anti-repetição: as dores (face 1) já usadas na mãe.
+  // Uma só leitura dos posts da mãe, para:
+  // - evitar/evitarRev: anti-repetição (texto das 2 faces)
+  // - existentesDatas: QUALQUER dia que já tenha post da mãe (por data agendada
+  //   OU pela data no slug) — robusto a esquemas de slug antigos
+  // - publicadasDatas: dias JÁ publicados (nunca se tocam)
   const evitar: string[] = [];          // dores (face 1) já usadas
   const evitarRev = new Set<string>();  // revelações (face 2) já usadas
+  const existentesDatas = new Set<string>();
+  const publicadasDatas = new Set<string>();
   try {
-    const { data: existentes } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'metodo-mae-2f-%');
-    for (const r of (existentes ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }> }[]) {
+    const { data: ex } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodo-%');
+    for (const r of (ex ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { agendadoEm?: string; igPublicado?: boolean; publicado?: boolean; metodo?: { conta?: string } } }[]) {
+      const t = r.theme ?? {};
+      const ehMae = t.metodo?.conta === 'mae' || r.slug.startsWith('metodo-mae-2f-');
+      if (!ehMae) continue;
       const s0 = r.dias?.[0]?.slides?.[0]?.texto; if (s0) evitar.push(s0);
       const s1 = r.dias?.[0]?.slides?.[1]?.texto; if (s1) evitarRev.add(s1);
+      const data = t.agendadoEm || (r.slug.startsWith('metodo-mae-2f-') ? r.slug.replace('metodo-mae-2f-', '') : '');
+      if (data) {
+        existentesDatas.add(data);
+        if (t.igPublicado || t.publicado) publicadasDatas.add(data);
+      }
     }
   } catch { /* sem memória prévia */ }
 
-  // dias a gerar: 1 dia (body.dia, sobrescreve esse) OU a(s) semana(s) inteira(s),
-  // SALTANDO os dias que JÁ existem (não estraga o que já agendaste).
-  let existentesDatas = new Set<string>();
-  try {
-    const { data: ex } = await supabase.from('carousel_collections').select('slug').like('slug', 'metodo-mae-2f-%');
-    existentesDatas = new Set((ex ?? []).map((r: { slug: string }) => r.slug.replace('metodo-mae-2f-', '')));
-  } catch { /* segue */ }
-
+  // dias a gerar: 1 dia (body.dia, regenera esse) OU a(s) semana(s), SALTANDO os
+  // dias que JÁ têm post (não duplica nem desorganiza). Nunca toca em publicados.
   let diasParaGerar: DiaSemanaMae[] = [];
   if (body.dia) {
+    if (publicadasDatas.has(body.dia)) return NextResponse.json({ erro: 'publicado', detalhe: 'esse dia já foi publicado; não o regenero' }, { status: 409 });
     const dm = diaMaeDaData(body.dia);
-    if (dm) diasParaGerar = [dm]; // 1 dia escolhido: gera mesmo que exista (regenerar)
+    if (dm) diasParaGerar = [dm]; // 1 dia escolhido: regenera (se não publicado)
   } else {
     for (let w = 0; w < semanas; w++) diasParaGerar.push(...planoSemanaMae(offset + w));
-    diasParaGerar = diasParaGerar.filter((d) => !existentesDatas.has(d.data)); // não sobrescreve o que já existe
+    diasParaGerar = diasParaGerar.filter((d) => !existentesDatas.has(d.data)); // só os que faltam
   }
   if (!diasParaGerar.length) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: true });
 
