@@ -52,6 +52,38 @@ function DuasFaces({ face1, face2, conta, prog, split }: { face1: Face; face2: F
   );
 }
 
+// TARDE · N beats sobre UMA cena dramática (clip em loop). Os beats aparecem em
+// sequência (cada um na sua janela de tempo), com crossfade. O fundo é único e
+// partilhado (1 só clip-bg, que o render faz seek por prog). O último beat mostra
+// a assinatura + o véu.
+function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog }: { beats: string[]; clipUrl?: string; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog: number }) {
+  const n = Math.max(1, beats.length);
+  const w = 1 / n;
+  return (
+    <div style={{ position: 'relative', width: 1080, height: 1920, background: '#000', overflow: 'hidden' }}>
+      {clipUrl
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        ? <video className="clip-bg" src={clipUrl} muted playsInline preload="auto" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.04)', filter: 'brightness(1.06) saturate(1.05)' }} />
+        : imageUrl ? <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${(1.08 + 0.1 * prog).toFixed(3)})`, filter: 'brightness(1.06) saturate(1.05)' }} /> : null}
+      {/* legibilidade do texto sobre a cena */}
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 130% 60% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 55%, transparent 80%)' }} />
+      {beats.map((b, i) => {
+        const lp = Math.max(0, Math.min(1, (prog - i * w) / w)); // progresso DENTRO do beat
+        const isLast = i === n - 1;
+        const fin = Math.min(1, lp / 0.18);                       // fade-in
+        const fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);   // fade-out (o último segura)
+        const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+        if (op <= 0) return null;
+        return (
+          <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+            <MetodoSlide semFundo semRodape={!isLast} texto={b} conta={conta} conceito={i === 0 ? conceito : undefined} veuReveal={isLast ? veuReveal : undefined} anim="reveal" prog={lp} />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number; slide2?: Slide & { imageUrl?: string } } | null>(null);
   const [subtipo, setSubtipo] = useState<string>('');
@@ -146,6 +178,7 @@ export default function RenderVeuPage() {
   const ehBanda = tipoSlide === 'banda';
   const ehKinetic = tipoSlide === 'kinetico';
   const ehMetodo = tipoSlide === 'metodo'; // identidade própria das contas do Método VS
+  const ehTarde = ehMetodo && subtipo === 'nbeats'; // reel da tarde: N beats sobre 1 cena
   const ehSerie = tipoSlide === 'serie-diaria'; // moldura das séries diárias, sobreposta ao motion no render
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
@@ -214,10 +247,21 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
-      {estado && ehMetodo && estado.slide2 && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && ehTarde && s && getConta(s.contaId ?? '') && (
+        <Sequencia
+          beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          imageUrl={estado.dia.slides?.[0]?.imageUrl}
+          conta={getConta(s.contaId ?? '')!}
+          conceito={s.conceito}
+          veuReveal={(estado.dia.slides?.[(estado.dia.slides?.length ?? 1) - 1] as { veuReveal?: string } | undefined)?.veuReveal}
+          prog={prog}
+        />
+      )}
+      {estado && ehMetodo && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
         <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} />
       )}
-      {estado && ehMetodo && !estado.slide2 && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && !ehTarde && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}
