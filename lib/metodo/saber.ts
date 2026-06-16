@@ -102,6 +102,300 @@ export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
       paga: 'O sono, a presença e a paz.',
     },
   },
+
+  Memória: {
+    essencia: 'Viver preso a uma história antiga. Reagir ao presente com uma dor de outro tempo, como se o passado ainda estivesse a acontecer.',
+    lentes: {
+      transpessoal: 'A identidade construída à volta de uma ferida ("eu sou assim desde sempre"). O trabalho é ver que a história não é a pessoa, é um guião que pode ser largado.',
+      constelacao: 'Lealdade a uma dor da linhagem: repetir o destino de quem veio antes é uma forma de pertencer. Reconhecer a origem devolve o peso a quem ele pertence.',
+      espiritualidade: 'O perdão não é esquecer, é soltar o peso. Libertar-se do que já passou para voltar ao presente.',
+      desenvolvimento: 'O cérebro lê o presente com o mapa do passado. Reconhecer o gatilho é o primeiro passo para responder em vez de reagir.',
+    },
+    comportamentos: [
+      'Alguém demora a responder e tu já montaste a história toda.',
+      'Fechas portas antes mesmo de te aproximares delas.',
+      'Dizes "comigo é sempre a mesma coisa" antes de tentar.',
+      'Reages a uma frase de hoje com a mágoa de há vinte anos.',
+      'Antecipas o abandono e sais primeiro, para não doer.',
+    ],
+    origens: [
+      'Uma ferida antiga que ninguém viu nem nomeou, e que ficou a decidir por ti.',
+      'Aprendeste cedo que as pessoas magoam, e levaste essa lente para todas as relações.',
+      'Uma história de família que se repete de geração em geração.',
+    ],
+    mecanismos: [
+      'O presente é lido com o mapa do passado: o cérebro assume que vai repetir.',
+      'A memória emocional dispara antes da razão; sentes primeiro, percebes depois.',
+      'Repetir o conhecido, mesmo doloroso, parece mais seguro do que o desconhecido.',
+    ],
+    crencas: [
+      { pensa: 'Eu sou assim desde sempre.', verdade: 'Não és a tua história, és quem a pode reescrever.' },
+      { pensa: 'Já sei como isto acaba.', verdade: 'Estás a prever o presente com um final antigo que pode não ser o desta vez.' },
+      { pensa: 'Se me protejo, não me magoam.', verdade: 'A armadura que te protege da dor também te tranca por dentro.' },
+    ],
+    custos: [
+      'Relações que terminam antes de começarem.',
+      'Oportunidades recusadas por medo de repetir.',
+      'O presente vivido como reposição de um filme antigo.',
+    ],
+    cenas: [
+      'Ele atrasou-se cinco minutos. Tu já tinhas revivido todos os que te deixaram.',
+      'A porta nem se abriu e tu já sabias, de cor, como ias ser deixada.',
+      'Disseram "precisamos de falar" e o teu corpo respondeu a uma conversa de há vinte anos.',
+    ],
+    subtipos: ['O Véu da Que Já Sabe Como Acaba', 'O Véu da Que Sai Primeiro', 'O Véu da Ferida Antiga', 'O Véu da Que Repete o Destino'],
+    mapa: {
+      pensa: 'Vai acabar como sempre acaba.',
+      sente: 'Uma mágoa antiga que volta inteira.',
+      faz: 'Protege-se, antecipa, foge antes do fim.',
+      paga: 'O presente, e as relações que nunca deixou nascer.',
+    },
+  },
+
+  Esforço: {
+    essencia: 'Fazer tudo por todos para ser amada. Esforçar-se sem parar, sentir culpa ao descansar, e não saber receber.',
+    lentes: {
+      transpessoal: 'O valor confundido com utilidade ("valho pelo que faço"). O caminho é descobrir que mereces existir sem te justificares.',
+      constelacao: 'Muitas vezes foste parentificada: a criança que cuidou dos pais. Carregaste um lugar que não era teu; podes devolvê-lo e voltar a ser filha.',
+      espiritualidade: 'Receber é uma entrega, não uma dívida. Deixares-te segurar é confiança, não fraqueza.',
+      desenvolvimento: 'O excesso de dar é controlo da relação: se sou indispensável, não me deixam. Pôr limites quebra o ciclo.',
+    },
+    comportamentos: [
+      'Fazes tudo por toda a gente e ninguém faz por ti.',
+      'Se paras, sobe-te uma culpa que não sabes explicar.',
+      'Dizes sim com a boca enquanto o corpo grita não.',
+      'Custa-te pedir ajuda ou aceitar um presente.',
+      'Tratas de todos e esqueces-te de ti no fim da lista.',
+    ],
+    origens: [
+      'Aprendeste que o amor se ganhava sendo útil, nunca por seres quem és.',
+      'Foste a criança forte, a que aguentava, a que não dava trabalho.',
+      'Numa casa onde alguém tinha de cuidar, esse alguém foste tu.',
+    ],
+    mecanismos: [
+      'O valor próprio ficou colado ao desempenho: parar é sentir que não vales.',
+      'Dar demais compra segurança: se sou indispensável, não me abandonam.',
+      'Receber dói porque te coloca em dívida, e só sabes estar do lado de quem dá.',
+    ],
+    crencas: [
+      { pensa: 'Se eu não fizer, ninguém faz.', verdade: 'Carregar tudo não te torna mais amada, torna-te mais sozinha.' },
+      { pensa: 'Descansar é egoísmo.', verdade: 'Descansar não é desistir; é devolveres-te o que dás aos outros.' },
+      { pensa: 'O amor prova-se com sacrifício.', verdade: 'O amor que se paga com exaustão não era amor, era medo.' },
+    ],
+    custos: [
+      'Um cansaço que dorme oito horas e acorda igual.',
+      'Relações desequilibradas onde dás sempre e recebes pouco.',
+      'A tua própria vida sempre no fim da lista.',
+    ],
+    cenas: [
+      'Perguntaram como estavas. Respondeste com a lista do que faltava fazer.',
+      'Sentaste-te um minuto e já estavas de pé a tratar de outra coisa.',
+      'Ofereceram-te ajuda e disseste "não é preciso", de mão a tremer.',
+    ],
+    subtipos: ['O Véu da Mulher Forte', 'O Véu da Que Trata de Tudo', 'O Véu da Que Não Sabe Receber', 'O Véu da Salvadora'],
+    mapa: {
+      pensa: 'Tenho de dar conta de tudo, senão falho.',
+      sente: 'Culpa ao parar, medo de não chegar.',
+      faz: 'Dá, resolve, carrega, nunca pede.',
+      paga: 'O corpo, o descanso e o seu lugar.',
+    },
+  },
+
+  Desolação: {
+    essencia: 'Medo do vazio e da solidão. Preencher cada silêncio para não sentir o que mora por baixo.',
+    lentes: {
+      transpessoal: 'O vazio temido é, muitas vezes, a porta para o encontro contigo. Ficar no silêncio sem fugir é onde te reencontras.',
+      constelacao: 'Uma falta antiga de colo e presença: faltou quem ficasse. O preenchimento de hoje tenta tapar um vazio que vem de longe.',
+      espiritualidade: 'O silêncio não é ausência, é presença. No vazio cabe o que é maior do que o ruído.',
+      desenvolvimento: 'A distração compulsiva é evitamento: encher para não contactar o que dói. Tolerar o vazio em pequenas doses devolve-te a ti.',
+    },
+    comportamentos: [
+      'Ligas a televisão mal entras em casa.',
+      'Mal o silêncio chega, corres a tapá-lo.',
+      'Enches a agenda para não teres um buraco vazio.',
+      'Pegas no telemóvel no segundo em que ficas sozinha.',
+      'Tens medo de parar e não encontrar nada cá dentro.',
+    ],
+    origens: [
+      'Faltou quem ficasse contigo no silêncio quando eras pequena.',
+      'Aprendeste que estar só era estar em perigo ou em falta.',
+      'Um vazio de presença que nunca foi nomeado, e que ainda assusta.',
+    ],
+    mecanismos: [
+      'O preenchimento é um anestésico: tapa o sinal sem tratar a ferida.',
+      'O vazio dispara o alarme antigo de abandono, e foges antes de sentir.',
+      'Quanto mais enches, menos te ouves, e mais estranho fica o silêncio.',
+    ],
+    crencas: [
+      { pensa: 'Se parar, vou afundar.', verdade: 'O que temes no vazio não é o vazio, é a dor que evitaste sentir.' },
+      { pensa: 'Estar só é estar em falta.', verdade: 'Há uma diferença entre estar só e estar contigo.' },
+      { pensa: 'Preciso de barulho para estar bem.', verdade: 'A paz que procuras está do outro lado do silêncio que evitas.' },
+    ],
+    custos: [
+      'Nunca saberes do que tu, só tu, gostas.',
+      'Uma vida cheia por fora e oca por dentro.',
+      'O reencontro contigo sempre adiado.',
+    ],
+    cenas: [
+      'A casa ficou em silêncio. Em três segundos já tinhas a televisão ligada.',
+      'Ficaste sozinha cinco minutos e já tinhas o telemóvel na mão.',
+      'Enchaste o fim de semana todo, para não ouvir o domingo à tarde.',
+    ],
+    subtipos: ['O Véu da Que Tapa o Silêncio', 'O Véu da Agenda Cheia', 'O Véu da Que Tem Medo de Parar', 'O Véu da Que Foge do Vazio'],
+    mapa: {
+      pensa: 'Não posso ficar parada com isto.',
+      sente: 'Um vazio que assusta, uma inquietação surda.',
+      faz: 'Enche, distrai, ocupa, nunca para.',
+      paga: 'O autoconhecimento e a paz do silêncio.',
+    },
+  },
+
+  Horizonte: {
+    essencia: 'Viver à espera de um quando. Adiar a vida para depois e nunca chegar, porque a meta foge sempre.',
+    lentes: {
+      transpessoal: 'A vida real é agora, não no destino imaginado. Trazer a presença para o instante, em vez de a projetar no futuro.',
+      constelacao: 'Às vezes herdou-se um "primeiro o dever, depois a vida": uma linhagem que nunca se deu licença de viver. Podes ser a que quebra isso.',
+      espiritualidade: 'O depois é uma ilusão; só existe o presente. Render-se ao agora é entrar finalmente na própria vida.',
+      desenvolvimento: 'Adiar a vida para uma condição ("quando X") é defesa contra o risco de viver agora. Dar o primeiro passo pequeno fura a espera.',
+    },
+    comportamentos: [
+      'A tua vida está sempre para depois.',
+      'Dizes "vou ser feliz quando isto passar".',
+      'Bebes o café já a pensar no que vais fazer a seguir.',
+      'Chegas à meta e já só pensas na próxima.',
+      'Adias o que te faz bem para quando "tiveres tempo".',
+    ],
+    origens: [
+      'Aprendeste que primeiro vem o dever e a vida fica para depois.',
+      'Cresceste a ouvir que descansar e gozar era para quem podia.',
+      'Uma linhagem que nunca se deu licença de simplesmente viver.',
+    ],
+    mecanismos: [
+      'O "quando" é uma defesa: enquanto a vida é no futuro, não a arriscas hoje.',
+      'A meta seguinte tapa o vazio de chegar; por isso a chegada nunca chega.',
+      'Viver no depois evita o luto de aceitar a vida possível agora.',
+    ],
+    crencas: [
+      { pensa: 'Quando conseguir X, aí sim começo a viver.', verdade: 'A tua vida não começa depois. Já começou.' },
+      { pensa: 'Estou atrasada, tenho de apanhar o comboio.', verdade: 'Não há nenhum comboio a partir sem ti; não estás atrasada para lugar nenhum.' },
+      { pensa: 'Primeiro o dever, depois a vida.', verdade: 'A vida adiada não fica à tua espera; passa enquanto esperas.' },
+    ],
+    custos: [
+      'Anos inteiros vividos em sala de espera.',
+      'O presente sempre sacrificado a um futuro que não chega.',
+      'A sensação de correr muito e nunca chegar a casa.',
+    ],
+    cenas: [
+      'Disseste "quando emagrecer". Depois "quando mudar de casa". A vida ficou toda em "quando".',
+      'Chegaste à meta que querias há anos. Em dez minutos já tinhas a meta seguinte.',
+      'O fim de semana chegou. Passaste-o a preparar a semana seguinte.',
+    ],
+    subtipos: ['O Véu da Que Vive no Quando', 'O Véu da Sala de Espera', 'O Véu da Próxima Meta', 'O Véu da Que Adia a Vida'],
+    mapa: {
+      pensa: 'Ainda não é a altura, primeiro tenho de...',
+      sente: 'Uma pressa sem chegada, uma vida em pausa.',
+      faz: 'Adia, prepara, persegue a meta seguinte.',
+      paga: 'O presente e a vida que está a acontecer agora.',
+    },
+  },
+
+  Permanência: {
+    essencia: 'Defender quem já não se é. Ter medo de mudar e deixar de ser quem se foi, mesmo que o papel já aperte.',
+    lentes: {
+      transpessoal: 'A identidade agarrada a um papel ("a forte", "a que aguenta"). O crescimento pede largar a máscara para descobrir quem és por baixo dela.',
+      constelacao: 'Mudar pode sentir-se como trair o sistema que te fez assim. Mas honrar a origem não é repetir-se para sempre; é seguir, levando o que ficou bom.',
+      espiritualidade: 'Tudo flui; agarrar-se ao que já foi é resistir à vida. Soltar a forma antiga é deixar nascer a nova.',
+      desenvolvimento: 'O medo de mudar protege de desiludir quem conta contigo. Mas a fidelidade a um papel velho custa a tua verdade de agora.',
+    },
+    comportamentos: [
+      'És a forte, a que aguenta sempre, mesmo quando já não aguentas.',
+      'Perguntas "quem seria eu sem este papel?".',
+      'Custa-te pedir ajuda ou mostrar fragilidade.',
+      'Tens medo de mudar e desiludir quem conta contigo.',
+      'Defendes uma versão tua que já não te serve.',
+    ],
+    origens: [
+      'Um papel que te deu lugar e amor, e que agora tens medo de largar.',
+      'Aprendeste que mudar era trair quem te fez assim.',
+      'Foste premiada por seres a forte; deixar de o ser parece perder o teu lugar.',
+    ],
+    mecanismos: [
+      'A identidade fixa dá segurança: saber quem sou poupa-me ao desconhecido.',
+      'Mudar ameaça os laços construídos sobre o papel antigo.',
+      'Defender quem já não és é mais fácil do que enfrentar o luto de mudar.',
+    ],
+    crencas: [
+      { pensa: 'Se eu mudar, deixo de ser eu.', verdade: 'Não és uma estátua; és um rio que muda de curso sem deixar de ser água.' },
+      { pensa: 'Não posso desiludir quem conta comigo.', verdade: 'Manteres-te igual para os outros é desiludires-te a ti.' },
+      { pensa: 'Mostrar fraqueza é perigoso.', verdade: 'A armadura que te protege também te impede de seres vista.' },
+    ],
+    custos: [
+      'Uma vida a sustentar uma versão que já não te cabe.',
+      'A exaustão de ser forte mesmo quando precisas de colo.',
+      'A pessoa que poderias ser, presa atrás do papel.',
+    ],
+    cenas: [
+      'Perguntaram se estavas bem. Sorriste e disseste "sempre", de novo.',
+      'Precisavas de ajuda. Disseste "eu trato", como há vinte anos.',
+      'Mudou tudo à tua volta. Tu continuaste a vestir a mesma armadura.',
+    ],
+    subtipos: ['O Véu da Mulher Forte', 'O Véu da Que Aguenta Sempre', 'O Véu da Que Tem Medo de Mudar', 'O Véu da Máscara que Já Aperta'],
+    mapa: {
+      pensa: 'Tenho de continuar a ser quem sempre fui.',
+      sente: 'Medo de mudar, o peso de uma armadura.',
+      faz: 'Aguenta, defende o papel, esconde a fragilidade.',
+      paga: 'A sua verdade e a pessoa que podia tornar-se.',
+    },
+  },
+
+  Dualidade: {
+    essencia: 'A separação de fundo. Sentir-se só no meio de tudo, do lado de fora de um vidro, com uma falta que nenhuma companhia cura.',
+    lentes: {
+      transpessoal: 'A separação é o véu mais fundo: a ilusão de estar apartada do todo. O reencontro é lembrar que nunca estiveste verdadeiramente só.',
+      constelacao: 'Quem não se sentiu pertencente ao sistema carrega esta solidão de raiz. Voltar a ocupar o teu lugar na ordem cura a sensação de exílio.',
+      espiritualidade: 'A solidão essencial dissolve-se na ligação ao maior do que tu; não estás fora do todo, és parte dele.',
+      desenvolvimento: 'A sensação de não pertencer leva a relações onde te sentes sempre meio de fora; nomeá-la é o primeiro passo para a intimidade real.',
+    },
+    comportamentos: [
+      'Estás rodeada de gente e, mesmo assim, sentes-te só.',
+      'Sentes o mundo sempre do outro lado de um vidro.',
+      'Falta-te sempre qualquer coisa que não sabes nomear.',
+      'No fundo de tudo, sentes-te sozinha contra a vida.',
+      'Sorris para todos e, por dentro, choras sozinha.',
+    ],
+    origens: [
+      'Uma sensação antiga de não pertencer, de chegar e nunca caber.',
+      'Faltou o lugar reconhecido, o sentires-te parte de algo.',
+      'Uma raiz comum a todos os véus: a separação que ficou por curar.',
+    ],
+    mecanismos: [
+      'A mente acredita na separação e procura provas dela em todo o lado.',
+      'A falta de pertença leva-te a manter a distância, e a distância confirma a falta.',
+      'Nenhuma companhia cura porque a falta é de ligação contigo e com o todo, não de gente à volta.',
+    ],
+    crencas: [
+      { pensa: 'Ninguém me entende verdadeiramente.', verdade: 'A ligação que procuras lá fora começa por uma ligação contigo.' },
+      { pensa: 'Estou sozinha contra a vida.', verdade: 'Nunca, em momento nenhum, caminhaste sozinha.' },
+      { pensa: 'Falta-me algo que os outros têm.', verdade: 'A casa que procuras nunca esteve longe.' },
+    ],
+    custos: [
+      'A intimidade adiada por te manteres sempre meio de fora.',
+      'A beleza da vida vivida atrás de um vidro.',
+      'Uma solidão que nenhuma companhia consegue tocar.',
+    ],
+    cenas: [
+      'A sala estava cheia de gente que gosta de ti. Sentiste-te só na mesma.',
+      'Riste com todos à mesa. Por dentro, estavas do outro lado do vidro.',
+      'Disseram que te adoram. E faltou-te, na mesma, qualquer coisa sem nome.',
+    ],
+    subtipos: ['O Véu da Que Está Só no Meio de Todos', 'O Véu do Vidro', 'O Véu da Falta sem Nome', 'O Véu da Que Não Pertence'],
+    mapa: {
+      pensa: 'No fundo, estou só, e ninguém alcança.',
+      sente: 'Uma separação surda, uma falta sem nome.',
+      faz: 'Mantém-se à distância, sorri por fora.',
+      paga: 'A intimidade e o sentir-se parte.',
+    },
+  },
 };
 
 export const veusComSaber = (): VeuNome[] => Object.keys(SABER) as VeuNome[];
