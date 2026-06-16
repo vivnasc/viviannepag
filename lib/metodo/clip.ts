@@ -17,6 +17,33 @@ export const NEGATIVE_MOVIMENTO =
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
+// CRIA a previsão e devolve JÁ o id (sem esperar). É o que torna a animação
+// independente da aba: o trabalho corre no Replicate, gravamos o id, e o clip é
+// COLHIDO mais tarde (colher/route). Assim mudar de conta/fechar NÃO perde nada.
+export async function criarPredicaoClip(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5): Promise<string> {
+  const criar = (imgField: 'start_image' | 'image') =>
+    fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input: { prompt, negative_prompt: NEGATIVE_MOVIMENTO, duration: duracao, [imgField]: imageUrl } }),
+    });
+  let res = await criar('start_image');
+  if (res.status === 422) res = await criar('image');
+  if (!res.ok) throw new Error(`Replicate ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const pred = (await res.json()) as Pred;
+  if (!pred.id) throw new Error('Replicate: sem id de previsão');
+  return pred.id;
+}
+
+// Lê o estado de uma previsão (para a COLHER quando ficar pronta).
+export async function estadoPredicao(predId: string, token: string): Promise<{ status: Pred['status']; url: string | null; erro?: string }> {
+  const pr = await fetch(`https://api.replicate.com/v1/predictions/${predId}`, { headers: { Authorization: `Bearer ${token}` } });
+  if (!pr.ok) throw new Error(`Replicate poll ${pr.status}`);
+  const pred = (await pr.json()) as Pred;
+  const out = Array.isArray(pred.output) ? pred.output[0] : pred.output;
+  return { status: pred.status, url: out ?? null, erro: pred.error };
+}
+
 // Anima `imageUrl` e devolve o URL do MP4 (remoto, do Replicate). Resiliente ao
 // nome do campo da imagem (start_image / image) entre versões do modelo.
 export async function gerarClipKling(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5): Promise<string> {
