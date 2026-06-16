@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 
 // POST { conta }: apaga TODOS os posts do método dessa conta (recomeçar do zero).
 // Só toca em slugs 'metodo-*' da conta indicada (nunca no resto).
-type Row = { slug: string; theme?: { metodo?: { conta?: string } } | null };
+type Row = { slug: string; theme?: { metodo?: { conta?: string }; igPublicado?: boolean; publicado?: boolean } | null };
 
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
@@ -19,10 +19,13 @@ export async function POST(req: Request) {
   const { data, error } = await supabase.from('carousel_collections').select('slug, theme').like('slug', 'metodo-%');
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 
-  const slugs = (data ?? []).filter((r: Row) => r.theme?.metodo?.conta === contaId).map((r: Row) => r.slug);
-  if (!slugs.length) return NextResponse.json({ ok: true, apagados: 0 });
+  const daConta = (data ?? []).filter((r: Row) => r.theme?.metodo?.conta === contaId);
+  // PROTEGE os já publicados: nunca os apaga (a Vivianne já tem posts no ar).
+  const slugs = daConta.filter((r) => !r.theme?.igPublicado && !r.theme?.publicado).map((r) => r.slug);
+  const protegidos = daConta.length - slugs.length;
+  if (!slugs.length) return NextResponse.json({ ok: true, apagados: 0, protegidos });
 
   const { error: e2 } = await supabase.from('carousel_collections').delete().in('slug', slugs);
   if (e2) return NextResponse.json({ erro: 'db', detalhe: e2.message }, { status: 500 });
-  return NextResponse.json({ ok: true, apagados: slugs.length });
+  return NextResponse.json({ ok: true, apagados: slugs.length, protegidos });
 }
