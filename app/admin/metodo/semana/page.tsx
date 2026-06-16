@@ -34,6 +34,20 @@ export default function MetodoSemanaPage() {
     finally { setBusy(null); }
   }, [busy]);
 
+  // MÃE: gerar SÓ um dia (a data escolhida) — sobrescreve só esse, não a semana.
+  const gerarDiaMae = useCallback(async (data: string) => {
+    if (busy) return;
+    setBusy(`mae-dia-${data}`); setErro(null);
+    setMsg('A gerar este dia no servidor (texto). Depois "gerar imagens em falta" e renderizar.');
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-mae', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: 'mae', dia: data }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else setMsg(`${j.gerados} dia gerado para ${data}.`);
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setBusy(null); }
+  }, [busy]);
+
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-5xl mx-auto">
@@ -86,6 +100,7 @@ export default function MetodoSemanaPage() {
                       <p className="mt-1 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
                         <span className="text-[0.6rem] uppercase tracking-wider opacity-50">face 2 · revelação</span><br />{d.revelacao.texto}
                       </p>
+                      <button onClick={() => gerarDiaMae(d.data)} disabled={!!busy} className="mt-2 text-[0.62rem] px-2 py-1 rounded-md border disabled:opacity-40" style={{ borderColor: `${conta.cor}66`, color: conta.cor }}>{busy === `mae-dia-${d.data}` ? 'a gerar…' : 'gerar este dia'}</button>
                     </div>
                   )) : dias.map((d) => (
                     <div key={d.wd} className="rounded-xl border border-white/10 bg-black/20 p-3 text-[0.8rem]">
