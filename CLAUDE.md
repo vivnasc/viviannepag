@@ -132,6 +132,18 @@ conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
 - **mãe = 1 véu por DIA** (7/semana, `planoSemanaMae`, reel 2 faces). Portas têm
   os SEUS véus (ver: Turbilhão+Memória; vir: Esforço+Desolação; viver:
   Horizonte+Permanência). **Véus sempre ALTERNADOS**, nunca em bloco.
+- **PORTAS = VOZ primeiro, arco depois** (decisão de produto, validada em equipa):
+  no Instagram ninguém consome por ordem, por isso o que faz a identidade é a
+  **sensação recorrente**, não um percurso de 12 semanas. Cada porta tem uma
+  **`fraseMae`** em `contas.ts` (a confissão que une os 2 véus num só movimento,
+  com tensão causal) + `sensacoes` + `chegada` (o verbo do fim: ver=testemunhar ·
+  vir=regressar · viver=participar). A geração das portas (`gerar-lote`) ANCORA
+  a dor na `fraseMae` (foco em `fraseReconhecimento`), para TODO o post reforçar
+  a mesma voz. Frases-mãe atuais (podem evoluir): ver=«estou sempre no que aí vem
+  ou no que já passou, nunca no agora» · vir=«não paro porque não aguento o que
+  sinto quando paro» · viver=«adio a vida que quero porque mudar seria deixar de
+  ser quem sempre fui». **Teste real:** gerar 50-200 peças e ver se as 3 vozes se
+  reconhecem SEM explicar o método.
 - `completar` (`gerar-mae`/`gerar-lote`) salta dias que JÁ existem (por DATA, não
   por slug) e **NUNCA toca em publicados**, em nenhum modo.
 - **NÃO didático** (isso é a veu.a.veu): SABER (`saber.ts`) e `referencias.ts`

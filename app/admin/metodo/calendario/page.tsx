@@ -54,6 +54,13 @@ export default function MetodoCalendarioPage() {
         </div>
 
         <p className="text-[0.78rem] opacity-65 mb-1">{conta.movimento} · {conta.essencia}</p>
+        {sel !== 'mae' && conta.fraseMae && (
+          <div className="mb-4 rounded-xl border p-3" style={{ borderColor: conta.cor + '40', background: conta.cor + '0e' }}>
+            <p className="text-[0.58rem] uppercase tracking-[0.16em] mb-0.5" style={{ color: conta.cor }}>A voz desta conta (sente-se em qualquer post)</p>
+            <p className="leading-tight text-base" style={{ fontFamily: 'var(--font-cormorant), serif', color: conta.cor }}>“{conta.fraseMae}”</p>
+            {conta.chegada && <p className="text-[0.72rem] opacity-60">chega a {conta.chegada}</p>}
+          </div>
+        )}
         <p className="text-[0.74rem] opacity-50 mb-6">{sel === 'mae' ? 'Um percurso Ver → Compreender → O custo → Soltar. Cada semana uma temática; o semanal executa 1 véu/dia por esse ângulo. Ao fim, recomeça com conteúdo novo.' : `Os véus desta porta ALTERNADOS: ${conta.veus.join(' · ')}.`}</p>
 
         {/* MÃE — o PERCURSO em PARTES (como as PARTES da veu.a.veu) */}
