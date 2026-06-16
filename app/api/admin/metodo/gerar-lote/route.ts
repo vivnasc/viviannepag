@@ -31,7 +31,7 @@ function buildRow(p: Pendente, imageUrl: string | null) {
   const numeroFaixa = ((Math.floor(Date.now() / 1000) + p.i) % 100) + 1;
   const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
   // a DOR lidera (sem véu no topo); o véu revela-se no rodapé (veuReveal).
-  const slides = [{ tipo: 'metodo', texto, destaque, notaVisual: p.promptFundo, imageUrl, capa: true, conceito: '', veuReveal: p.post.conceito, contaId: p.post.conta }];
+  const slides = [{ tipo: 'metodo', texto, destaque, notaVisual: p.promptFundo, imageUrl, capa: true, conceito: '', veuReveal: p.post.veu ? nomeVeu(p.post.veu) : undefined, contaId: p.post.conta }];
   const dias = [{ dia: 1, mundo: 'autora', palavra: texto.slice(0, 48), slides, faixa, legenda, hashtags }];
   return {
     slug: p.slug, title: texto.slice(0, 48), brief: texto, dias,
