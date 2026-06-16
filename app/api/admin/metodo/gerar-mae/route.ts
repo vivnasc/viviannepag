@@ -81,13 +81,15 @@ export async function POST(req: Request) {
       try { revTexto = limparTravessoes(await revelacaoDaDor(d.veu, dor, apiKey)); }
       catch { revTexto = limparTravessoes(d.revelacao.texto); }
       evitarRev.add(revTexto);
+      // A DOR lidera (face 1 sem véu no topo). O VÉU revela-se no FIM (rodapé da
+      // face 2) + legenda. Decisão da Vivianne: manter os véus, não abrir por eles.
       const slides = [
-        { tipo: 'metodo', face: 1, texto: dor, destaque: [], notaVisual: '', imageUrl: null, capa: true, conceito, contaId: 'mae' },
-        { tipo: 'metodo', face: 2, texto: revTexto, destaque: realceAuto(revTexto), notaVisual: '', imageUrl: null, capa: false, conceito: `Revelação · ${conceito}`, contaId: 'mae' },
+        { tipo: 'metodo', face: 1, texto: dor, destaque: [], notaVisual: '', imageUrl: null, capa: true, conceito: '', contaId: 'mae' },
+        { tipo: 'metodo', face: 2, texto: revTexto, destaque: realceAuto(revTexto), notaVisual: '', imageUrl: null, capa: false, conceito: 'Revelação', veuReveal: conceito, contaId: 'mae' },
       ];
       const numeroFaixa = ((Math.floor(Date.now() / 1000) + i) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
-      const legenda = limparTravessoes(`${dor}\n\n${revTexto}`);
+      const legenda = limparTravessoes(`${dor}\n\n${revTexto}\n\nMétodo VS · ${conceito}`);
       const dias_ = [{ dia: 1, mundo: 'autora', palavra: dor.slice(0, 48), slides, faixa, legenda, hashtags: hashtagsDoPost(d.revelacao) }];
       rows.push({
         slug: `metodo-mae-2f-${d.data}`,
