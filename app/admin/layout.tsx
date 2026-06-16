@@ -63,6 +63,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     cor: '#C8A24A',
     itens: [
       { href: '/admin/metodo', label: 'painel · ver/vir/viver' },
+      { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
       { href: '/admin/metodo/semana', label: 'produção semanal' },
       { href: '/admin/metodo/ver', label: 'ver.soltar' },
       { href: '/admin/metodo/vir', label: 'vir.soltar' },
