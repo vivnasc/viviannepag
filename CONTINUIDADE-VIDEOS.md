@@ -194,3 +194,19 @@ Tudo merged (PRs #306, #309, #311–#323). Resumo por área:
 >
 > NÃO comeces a construir já: mostra-me primeiro o plano com a ORDEM proposta e o
 > PRIMEIRO passo concreto, recomenda por onde começar, e espera o meu OK.
+
+---
+
+## MÃE · post da manhã em "2 FACES" (1 reel, motion) — DECIDIDO
+- A **mãe** (transversal, 7 véus) dedica **1 véu a cada dia** da semana: Seg→Dom =
+  Dualidade · Turbilhão · Memória · Esforço · Desolação · Horizonte · Permanência
+  (uma volta semanal ao método). As **portas** ficam como estão (2 véus intercalados).
+- Cada dia da mãe = **UM reel (motion), NÃO carrossel**, com **2 FACES** no mesmo MP4:
+  - **face 1 = a dor** (reconhecimento, do SABER via IA + anti-repetição),
+  - **face 2 = a revelação** (a viragem, do cânone `reels.ts`/`saber`),
+  - cada face com a SUA imagem em par com o texto.
+- Exemplo aprovado (Segunda · Dualidade): face 1 "Estou rodeada de gente e, mesmo
+  assim, sinto-me só." → face 2 "Nunca, em momento nenhum, caminhaste sozinha."
+- **Build (3 passos):** (1) plano da mãe (7 véus/7 dias, tipo 'duasfaces'); (2) geração
+  das 2 faces + 2 imagens; (3) **render**: estender o kinético para 2 fases num só MP4
+  (face1 escreve→segura→transição→face2 escreve→segura). Testar 1 (Dualidade) e mostrar.
