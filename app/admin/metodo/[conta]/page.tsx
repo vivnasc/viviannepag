@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -237,6 +237,24 @@ export default function MetodoContaPage() {
     finally { setNovaImgBusy(null); }
   }, [novaImgBusy, recarregar]);
 
+  // TESTE de clip: anima o fundo (imagem -> vídeo, Kling). ~$0.35, ~1-3 min.
+  const [animarBusy, setAnimarBusy] = useState<string | null>(null);
+  const animar = useCallback(async (slug: string, face = 0) => {
+    if (animarBusy) return;
+    setAnimarBusy(slug); setErro(null); setMsg('A animar o fundo (Kling, ~1-3 min). Não feches.');
+    try {
+      const r = await fetch('/api/admin/metodo/animar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, face }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else {
+        setMsg('Clip de teste pronto. Vê em baixo se o movimento te convence.');
+        setDetalhe((d) => (d && d.slug === slug ? { ...d, clipTeste: j.clipUrl } : d));
+        recarregar();
+      }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setAnimarBusy(null); }
+  }, [animarBusy, recarregar]);
+
   // melhorar: reescreve só o texto (tira ambiguidade), mantém a imagem.
   const melhorar = useCallback(async (slug: string) => {
     if (melBusy) return;
@@ -421,7 +439,15 @@ export default function MetodoContaPage() {
               <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={previewProg} />
             )}
             <p className="text-center text-[0.58rem] opacity-40 mt-1">pré-visualização a mexer (em loop), como sai no clip — antes de renderizar</p>
+            {detalhe.clipTeste && (
+              <div className="mt-2">
+                <p className="text-center text-[0.6rem] uppercase tracking-wider text-emerald-300 mb-1">clip de teste (movimento real · Kling)</p>
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                <video src={detalhe.clipTeste} controls autoPlay loop muted playsInline className="w-full max-w-[260px] mx-auto rounded-xl border border-emerald-400/30" />
+              </div>
+            )}
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
+              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug, 0)} disabled={animarBusy === detalhe.slug} title="anima o fundo (imagem → vídeo, Kling) ~$0.35, 1-3 min" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (clip teste)'}</button>}
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
