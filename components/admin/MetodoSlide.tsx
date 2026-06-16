@@ -17,7 +17,7 @@ const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, veuReveal, prog = 1, ratio = '9:16' }: { texto: string; destaque?: string[]; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog?: number; ratio?: '9:16' | '4:5' }) {
+export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, veuReveal, anim = 'typewriter', prog = 1, ratio = '9:16' }: { texto: string; destaque?: string[]; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; anim?: 'typewriter' | 'reveal'; prog?: number; ratio?: '9:16' | '4:5' }) {
   const { bg1, bg2, accent } = conta.paleta;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
   const H = ratio === '4:5' ? 1350 : 1920;
@@ -50,14 +50,23 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, v
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
   const ultimoVisivel = Math.min(palavras.length - 1, Math.floor(mostradas));
-  const zoom = 1 + 0.06 * prog;
+  // FUNDO A MEXER (clip): pan + zoom contínuos conduzidos por prog (não imagem
+  // parada). A face 1 (typewriter) e a face 2 (reveal) derivam em sentidos
+  // diferentes, para se distinguirem.
+  const isReveal = anim === 'reveal';
+  const bgScale = 1.12 + 0.12 * prog;            // zoom lento e visível
+  const bgX = (isReveal ? 1 : -1) * 34 * prog;   // deriva horizontal (sentido por face)
+  const bgY = (isReveal ? 12 : -16) * prog;      // deriva vertical
+  // REVELAÇÃO do texto: typewriter = palavra a palavra com cursor; reveal = a
+  // linha inteira aparece em bloco (fade + foco + subida), registo diferente.
+  const revealOp = Math.min(1, prog / 0.55);
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.5) / 0.25));
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: ar, overflow: 'hidden', borderRadius: 16, background: bg2 }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 120% 85% at 50% 32%, ${bg1} 0%, ${bg2} 82%)`, overflow: 'hidden' }}>
         {imageUrl && (<>
-          <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', filter: 'brightness(1.12) saturate(1.04)', zIndex: 0 }} />
+          <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${bgScale}) translate(${bgX}px, ${bgY}px)`, transformOrigin: 'center', filter: 'brightness(1.12) saturate(1.04)', zIndex: 0 }} />
           {/* sombra SÓ no rodapé (para o @conta) e atrás do texto (legibilidade); resto fica claro */}
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, transparent 0%, transparent 56%, ${a(bg2, '55')} 100%)`, zIndex: 1 }} />
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 128% 46% at 50% 47%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.34) 52%, transparent 74%)', zIndex: 1 }} />
@@ -75,16 +84,20 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, conta, conceito, v
 
         {/* a linha (uma só, no centro) */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 130px', zIndex: 2 }}>
-          <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 98, lineHeight: 1.16, letterSpacing: '-0.01em', textAlign: 'center', color: '#F5EEE3', textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.65)' : 'none', margin: 0 }}>
+          <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 98, lineHeight: 1.16, letterSpacing: '-0.01em', textAlign: 'center', color: '#F5EEE3', textShadow: imageUrl ? '0 2px 30px rgba(0,0,0,0.65)' : 'none', margin: 0, opacity: isReveal ? revealOp : 1, filter: isReveal ? `blur(${((1 - revealOp) * 4).toFixed(2)}px)` : 'none', transform: isReveal ? `translateY(${((1 - revealOp) * 22).toFixed(1)}px)` : 'none' }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
-              let op = 0, dy = 14;
-              if (i < ultimoVisivel) { op = 1; dy = 0; }
-              else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
+              // reveal: a linha aparece em bloco (a animação está no <p>); typewriter: palavra a palavra.
+              let op = 1, dy = 0;
+              if (!isReveal) {
+                op = 0; dy = 14;
+                if (i < ultimoVisivel) { op = 1; dy = 0; }
+                else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
+              }
               return (
                 <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F7EFE6', fontStyle: dest ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? (dest ? '0 2px 22px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 26px rgba(0,0,0,0.82), 0 0 7px rgba(0,0,0,0.6)') : 'none' }}>
                   {w}
-                  {aindaEscreve && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
+                  {!isReveal && aindaEscreve && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
                 </span>
               );
             })}
