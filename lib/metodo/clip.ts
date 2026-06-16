@@ -15,17 +15,25 @@ export const PROMPT_MOVIMENTO =
 export const NEGATIVE_MOVIMENTO =
   'added objects, new elements, flying leaves, falling petals, sparkles, glitter, floating particles, gold flecks, extra smoke, fog appearing, curtains, fabric blowing, birds, butterflies, text, watermark, fast motion, dramatic motion, camera shake, zoom, pan, morphing, warping, distortion, people, faces, hands';
 
+// movimento DRAMÁTICO (estilo de tarde, alcance): a energia/luz pulsa e rodopia,
+// nuvens/névoa derivam, a luz desloca-se, o tecido/cabelo da silhueta mexe ao
+// vento. FORTE e cinematográfico, mas SEM deformar o corpo nem inventar lixo.
+export const PROMPT_MOVIMENTO_DRAMA =
+  'Cinematic dramatic motion: the glowing energy and light pulse, swirl and breathe, light rays and rays of god move slowly, clouds and atmospheric haze drift, the lone silhouette stays in place while clothing and hair sway gently in the wind. Epic, emotional, flowing, alive. Keep the same composition and the human figure intact (do NOT morph or distort the body). No camera shake.';
+export const NEGATIVE_MOVIMENTO_DRAMA =
+  'morphing body, distorted figure, extra limbs, deformed face, body horror, glitch, warping, text, watermark, logo, gold flecks, glitter confetti, random floating objects, fast jittery motion, camera shake';
+
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
 // CRIA a previsão e devolve JÁ o id (sem esperar). É o que torna a animação
 // independente da aba: o trabalho corre no Replicate, gravamos o id, e o clip é
 // COLHIDO mais tarde (colher/route). Assim mudar de conta/fechar NÃO perde nada.
-export async function criarPredicaoClip(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5): Promise<string> {
+export async function criarPredicaoClip(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5, negative = NEGATIVE_MOVIMENTO): Promise<string> {
   const criar = (imgField: 'start_image' | 'image') =>
     fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input: { prompt, negative_prompt: NEGATIVE_MOVIMENTO, duration: duracao, [imgField]: imageUrl } }),
+      body: JSON.stringify({ input: { prompt, negative_prompt: negative, duration: duracao, [imgField]: imageUrl } }),
     });
   let res = await criar('start_image');
   if (res.status === 422) res = await criar('image');

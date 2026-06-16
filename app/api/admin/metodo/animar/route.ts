@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import { criarPredicaoClip } from '@/lib/metodo/clip';
+import { criarPredicaoClip, PROMPT_MOVIMENTO, NEGATIVE_MOVIMENTO, PROMPT_MOVIMENTO_DRAMA, NEGATIVE_MOVIMENTO_DRAMA } from '@/lib/metodo/clip';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   const { data: row, error } = await supabase.from('carousel_collections').select('dias, theme').eq('slug', slug).maybeSingle();
   if (error || !row) return NextResponse.json({ erro: 'nao-encontrado' }, { status: 404 });
 
-  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ imageUrl?: string | null; clipUrl?: string | null; clipPredId?: string | null; clipPend?: boolean }>; videoUrl?: string | null }>;
+  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ imageUrl?: string | null; clipUrl?: string | null; clipPredId?: string | null; clipPend?: boolean; estilo?: string | null }>; videoUrl?: string | null }>;
   const slides = dias[0]?.slides ?? [];
   const comImagem = slides.map((_, i) => i).filter((i) => slides[i]?.imageUrl);
   // quais faces animar: a indicada; senão as que TÊM imagem mas AINDA NÃO têm clip
@@ -40,7 +40,12 @@ export async function POST(req: Request) {
   // dispara as previsões EM PARALELO (são chamadas rápidas — só criam o job).
   await Promise.all(validos.map(async (i) => {
     try {
-      const predId = await criarPredicaoClip(slides[i]!.imageUrl!, token);
+      const drama = slides[i]!.estilo === 'dramatico';
+      const predId = await criarPredicaoClip(
+        slides[i]!.imageUrl!, token,
+        drama ? PROMPT_MOVIMENTO_DRAMA : PROMPT_MOVIMENTO, 5,
+        drama ? NEGATIVE_MOVIMENTO_DRAMA : NEGATIVE_MOVIMENTO,
+      );
       slides[i]!.clipPredId = predId;
       slides[i]!.clipPend = true; // fica "a animar" até /colher trazer o MP4
       disparados++;

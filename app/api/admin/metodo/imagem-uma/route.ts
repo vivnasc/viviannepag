@@ -13,7 +13,7 @@ export const maxDuration = 300;
 // Escolhe variações diferentes (evita assuntos já usados na conta), para não sair
 // igual nem desperdiçar crédito.
 
-type Slide = { imageUrl?: string | null; notaVisual?: string; texto?: string };
+type Slide = { imageUrl?: string | null; notaVisual?: string; texto?: string; estilo?: string | null; clipUrl?: string | null; clipPredId?: string | null; clipPend?: boolean };
 type Dia = { slides?: Slide[]; videoUrl?: string | null };
 type Row = { slug: string; dias?: Dia[] | null; theme?: { metodo?: { conta?: string } } | null };
 
@@ -36,8 +36,9 @@ async function fundoImagem(prompt: string, slug: string): Promise<{ url: string 
 // POST { slug }: regenera a imagem desse post e devolve o novo imageUrl.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { slug?: string };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; estilo?: 'contemplativo' | 'dramatico' };
   const slug = (body.slug ?? '').trim();
+  const estilo: 'contemplativo' | 'dramatico' = body.estilo === 'dramatico' ? 'dramatico' : 'contemplativo';
   if (!slug) return NextResponse.json({ erro: 'sem-slug' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -69,8 +70,9 @@ export async function POST(req: Request) {
   let ultimoErro = '';
   // se FALTAM faces, preenche SÓ as que faltam (mantém as que já tens); se já
   // estiverem todas, regenera todas (o caso "outra imagem", variação).
+  // No estilo DRAMÁTICO (teste de tarde) regenera TODAS — converte o post inteiro.
   const faltam = slides.filter((s) => !s.imageUrl);
-  const alvo = faltam.length ? faltam : slides;
+  const alvo = estilo === 'dramatico' ? slides : (faltam.length ? faltam : slides);
   // gera a imagem de cada face-alvo, em par com o texto da face (a dor / a revelação).
   for (const slide of alvo) {
     const i = slides.indexOf(slide);
@@ -82,13 +84,16 @@ export async function POST(req: Request) {
     if (slide.notaVisual) evitar.push(assuntoCurto(slide.notaVisual));
     // PREFERIDO: o Claude escreve um fundo que ENCARNA o texto desta face, diferente dos já usados.
     if (apiKey) {
-      try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto); }
+      try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto, estilo); }
       catch { /* fica o fallback */ }
     }
     const { url: img, erro } = await fundoImagem(prompt, slug);
     if (img) {
       slide.imageUrl = img;
       slide.notaVisual = prompt;
+      slide.estilo = estilo; // marca a face (o animar usa a motion certa)
+      // a imagem mudou: o clip antigo deixa de servir, limpa-o (re-anima depois).
+      slide.clipUrl = null; slide.clipPredId = null; slide.clipPend = false;
       evitar.push(assuntoCurto(prompt)); // a face seguinte evita esta cena
       imageUrls[i] = img;
     } else {
