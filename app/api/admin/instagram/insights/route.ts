@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
-import { getIgCredenciais } from '@/lib/instagram/config';
+import { getIgCredenciais, getContaCfg } from '@/lib/instagram/config';
 import { CONTAS, type ContaId } from '@/lib/instagram/contas';
 import { getContaAnalytics } from '@/lib/instagram/insights';
 
@@ -31,5 +31,6 @@ export async function GET(req: NextRequest) {
   const limite = Number.isFinite(limiteRaw) && limiteRaw > 0 ? Math.min(30, limiteRaw) : 18;
 
   const data = await getContaAnalytics(token, igUserId, limite);
-  return NextResponse.json(data);
+  const cfg = await getContaCfg(conta);
+  return NextResponse.json({ ...data, consistenteDesde: cfg.consistenteDesde ?? null });
 }

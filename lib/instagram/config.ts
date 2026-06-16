@@ -12,7 +12,7 @@ import type { ContaId } from '@/lib/instagram/contas';
 const BUCKET = 'config-privado';
 const PATH = 'instagram.json';
 
-export type ContaCfg = { token?: string; igUserId?: string; renovadoEm?: string };
+export type ContaCfg = { token?: string; igUserId?: string; renovadoEm?: string; consistenteDesde?: string };
 
 export type IgConfig = {
   token?: string;     // (legado) token de longa duração da conta veu.a.veu
@@ -75,4 +75,10 @@ export async function setContaCredenciais(conta: ContaId, patch: ContaCfg): Prom
   const contas = { ...(cfg.contas ?? {}) };
   contas[conta] = { ...(contas[conta] ?? {}), ...patch };
   await setIgConfig({ contas });
+}
+
+// lê a config (não-secreta) de UMA conta — ex.: consistenteDesde.
+export async function getContaCfg(conta: ContaId): Promise<ContaCfg> {
+  const cfg = await getIgConfig();
+  return cfg.contas?.[conta] ?? {};
 }

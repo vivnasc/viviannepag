@@ -14,6 +14,7 @@ type Resumo = { mediaAlcance: number; mediaInteracoes: number; taxaInteracao: nu
 type Analytics = {
   ok: boolean; username?: string; seguidores?: number; totalPosts?: number;
   insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; erro?: string; detalhe?: string; avisoInsights?: string;
+  consistenteDesde?: string | null;
 };
 
 const nf = (n?: number) => (n == null ? '—' : new Intl.NumberFormat('pt-PT').format(n));
@@ -21,6 +22,19 @@ const FORMATO_PT: Record<string, string> = { REELS: 'Reels', CAROUSEL_ALBUM: 'Ca
 const fmt = (f: string) => FORMATO_PT[f] ?? f;
 const emojiFormato = (f: string) => (f === 'REELS' || f === 'VIDEO' ? '🎬' : f === 'CAROUSEL_ALBUM' ? '🖼️' : '📷');
 const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+
+function diasDesde(iso?: string | null): number | null {
+  if (!iso) return null;
+  const d = new Date(iso); if (isNaN(d.getTime())) return null;
+  return Math.max(0, Math.floor((Date.now() - d.getTime()) / 86400000));
+}
+function idadeLabel(iso?: string | null): string {
+  const dias = diasDesde(iso);
+  if (dias == null) return '—';
+  if (dias < 14) return `há ${dias} dia${dias === 1 ? '' : 's'}`;
+  return `há ${Math.round(dias / 7)} sem.`;
+}
+const NOVA_DIAS = 14; // abaixo disto, conta "nova" — cedo para comparar
 
 const ACCENTS = [
   { text: 'text-rose-300', bar: 'bg-rose-500' },
@@ -31,35 +45,30 @@ const ACCENTS = [
   { text: 'text-pink-300', bar: 'bg-pink-500' },
 ];
 
-// recomendações globais a partir de TODAS as contas carregadas
+// recomendações globais, considerando a IDADE (contas novas não entram nos superlativos)
 function caminhoASeguir(contas: Conta[], dados: Record<string, Analytics>): string[] {
-  const oks = contas.map((c) => ({ c, d: dados[c.id] })).filter((x) => x.d?.ok && x.d.resumo);
-  if (oks.length === 0) return [];
-  const recs: string[] = [];
+  const todas = contas.map((c) => ({ c, d: dados[c.id] })).filter((x) => x.d?.ok && x.d.resumo);
+  if (todas.length === 0) return [];
   const nome = (c: Conta) => `@${dados[c.id]?.username ?? c.nome}`;
+  const ehNova = (id: string) => { const dd = diasDesde(dados[id]?.consistenteDesde); return dd != null && dd < NOVA_DIAS; };
+  const maduras = todas.filter((x) => !ehNova(x.c.id));
+  const base = maduras.length ? maduras : todas; // se nenhuma "madura", usa todas
+  const recs: string[] = [];
 
-  // conta que mais engaja
-  const porTaxa = [...oks].sort((a, b) => (b.d.resumo!.taxaInteracao) - (a.d.resumo!.taxaInteracao));
-  if (porTaxa[0]?.d.resumo!.taxaInteracao > 0) {
-    recs.push(`${nome(porTaxa[0].c)} é a que mais engaja (${porTaxa[0].d.resumo!.taxaInteracao}% de interação) — vê o que resulta aí e leva esse tom para as outras.`);
-  }
-  // conta com mais alcance médio
-  const porAlc = [...oks].sort((a, b) => (b.d.resumo!.mediaAlcance) - (a.d.resumo!.mediaAlcance));
-  if (porAlc[0]?.d.resumo!.mediaAlcance > 0) {
-    recs.push(`${nome(porAlc[0].c)} tem o maior alcance médio (${nf(porAlc[0].d.resumo!.mediaAlcance)}).`);
-  }
-  // formato global: Reels vs resto
-  const todosPosts = oks.flatMap((x) => x.d.posts);
+  const porTaxa = [...base].sort((a, b) => b.d.resumo!.taxaInteracao - a.d.resumo!.taxaInteracao);
+  if (porTaxa[0]?.d.resumo!.taxaInteracao > 0) recs.push(`${nome(porTaxa[0].c)} é a que mais engaja (${porTaxa[0].d.resumo!.taxaInteracao}% de interação) — vê o que resulta aí e leva esse tom para as outras.`);
+
+  const porAlc = [...base].sort((a, b) => b.d.resumo!.mediaAlcance - a.d.resumo!.mediaAlcance);
+  if (porAlc[0]?.d.resumo!.mediaAlcance > 0) recs.push(`${nome(porAlc[0].c)} tem o maior alcance médio (${nf(porAlc[0].d.resumo!.mediaAlcance)}).`);
+
+  const todosPosts = base.flatMap((x) => x.d.posts);
   const reels = todosPosts.filter((p) => p.formato === 'REELS' && p.alcance != null);
   const outros = todosPosts.filter((p) => p.formato !== 'REELS' && p.alcance != null);
-  const mr = avg(reels.map((p) => p.alcance as number));
-  const mo = avg(outros.map((p) => p.alcance as number));
-  if (mr > 0 && mo > 0 && mr > mo * 1.3) {
-    recs.push(`No geral, os Reels alcançam ~${(mr / mo).toFixed(1)}× mais que os outros formatos — aposta em Reels.`);
-  }
-  // contas com poucos posts
-  const poucos = oks.filter((x) => (x.d.posts?.length ?? 0) > 0 && x.d.posts.length < 6).map((x) => nome(x.c));
-  if (poucos.length) recs.push(`Publica com mais consistência em ${poucos.join(', ')} — poucos posts recentes limitam o alcance.`);
+  const mr = avg(reels.map((p) => p.alcance as number)); const mo = avg(outros.map((p) => p.alcance as number));
+  if (mr > 0 && mo > 0 && mr > mo * 1.3) recs.push(`No geral, os Reels alcançam ~${(mr / mo).toFixed(1)}× mais que os outros formatos — aposta em Reels.`);
+
+  const novas = todas.filter((x) => ehNova(x.c.id)).map((x) => `${nome(x.c)} (${idadeLabel(dados[x.c.id]?.consistenteDesde)})`);
+  if (novas.length) recs.push(`${novas.join(', ')} ${novas.length === 1 ? 'é recente' : 'são recentes'} — ainda é cedo para comparar com as antigas. Dá-lhes tempo e consistência; mede daqui a umas semanas.`);
 
   return recs.slice(0, 5);
 }
@@ -87,6 +96,13 @@ export default function AnalyticsPage() {
       .catch(() => {});
   }, []);
 
+  async function salvarMarco(id: string, valor: string) {
+    setDados((prev) => ({ ...prev, [id]: { ...(prev[id] ?? { ok: false, insightsDisponiveis: false, posts: [] }), consistenteDesde: valor || null } }));
+    try {
+      await fetch('/api/admin/instagram/marco', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: id, consistenteDesde: valor || undefined }) });
+    } catch { /* ignora */ }
+  }
+
   const oks = contas.filter((c) => dados[c.id]?.ok);
   const maxSeg = Math.max(0, ...oks.map((c) => dados[c.id]?.seguidores ?? 0));
   const maxAlc = Math.max(0, ...oks.map((c) => dados[c.id]?.resumo?.mediaAlcance ?? 0));
@@ -97,9 +113,8 @@ export default function AnalyticsPage() {
     <main className="mx-auto max-w-6xl px-6 py-10 text-stone-100">
       <Link href="/admin" className="text-sm text-stone-400 hover:text-stone-200">← Admin</Link>
       <h1 className="mt-4 text-2xl font-semibold text-white">Analytics · Instagram</h1>
-      <p className="mt-1 text-sm text-stone-400">Todas as contas de uma vez — o que funciona, e onde apostar.</p>
+      <p className="mt-1 text-sm text-stone-400">Todas as contas de uma vez — com a idade de cada uma em conta, para comparar com justiça.</p>
 
-      {/* tabela geral — todas as contas */}
       <div className="mt-6 overflow-x-auto rounded-2xl border border-stone-700">
         <table className="w-full text-sm">
           <thead className="bg-stone-900/60 text-left text-xs text-stone-400">
@@ -109,25 +124,31 @@ export default function AnalyticsPage() {
               <th className="p-3 text-right font-medium">Média alcance</th>
               <th className="p-3 text-right font-medium">Taxa interação</th>
               <th className="p-3 font-medium">Melhor formato</th>
+              <th className="p-3 font-medium">Consistente desde</th>
             </tr>
           </thead>
           <tbody>
             {contas.map((c) => {
               const d = dados[c.id];
               const carregando = loading[c.id] && !d;
+              const dataInput = (
+                <input type="date" value={(d?.consistenteDesde ?? '').slice(0, 10)} onChange={(e) => salvarMarco(c.id, e.target.value)}
+                  className="rounded border border-stone-600 bg-stone-900 px-1.5 py-0.5 text-xs text-stone-200" />
+              );
               return (
                 <tr key={c.id} className="border-t border-stone-800">
                   <td className="p-3 whitespace-nowrap">{c.emoji} {d?.ok && d.username ? `@${d.username}` : c.nome}</td>
                   {carregando ? (
-                    <td colSpan={4} className="p-3 text-stone-500">a carregar…</td>
+                    <td colSpan={5} className="p-3 text-stone-500">a carregar…</td>
                   ) : !d?.ok ? (
-                    <td colSpan={4} className="p-3 text-stone-500">{d?.erro === 'sem-credenciais' ? 'não ligado — liga o token' : `sem dados${d?.detalhe ? ' · ' + d.detalhe : d?.erro ? ' · ' + d.erro : ''}`}</td>
+                    <td colSpan={5} className="p-3 text-stone-500">{d?.erro === 'sem-credenciais' ? 'não ligado — liga o token' : `sem dados${d?.detalhe ? ' · ' + d.detalhe : d?.erro ? ' · ' + d.erro : ''}`}</td>
                   ) : (
                     <>
                       <td className={`p-3 text-right ${(d.seguidores ?? 0) === maxSeg && maxSeg > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{nf(d.seguidores)}</td>
                       <td className={`p-3 text-right ${(d.resumo?.mediaAlcance ?? 0) === maxAlc && maxAlc > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{nf(d.resumo?.mediaAlcance)}</td>
                       <td className={`p-3 text-right ${(d.resumo?.taxaInteracao ?? 0) === maxTaxa && maxTaxa > 0 ? 'font-semibold text-amber-300' : 'text-stone-200'}`}>{d.resumo?.taxaInteracao ?? 0}%</td>
                       <td className="p-3 text-stone-300">{d.resumo?.melhorFormato ? `${emojiFormato(d.resumo.melhorFormato)} ${fmt(d.resumo.melhorFormato)}` : '—'}</td>
+                      <td className="p-3 whitespace-nowrap">{dataInput} <span className="ml-1 text-xs text-stone-400">{d.consistenteDesde ? idadeLabel(d.consistenteDesde) : ''}</span></td>
                     </>
                   )}
                 </tr>
@@ -136,8 +157,8 @@ export default function AnalyticsPage() {
           </tbody>
         </table>
       </div>
+      <p className="mt-2 text-xs text-stone-500">Define o <b>&quot;consistente desde&quot;</b> de cada conta (a data em que começaste a publicar a sério). O Instagram não dá a data de criação, mas com isto o painel compara com justiça.</p>
 
-      {/* caminho a seguir */}
       {recs.length > 0 && (
         <div className="mt-6 rounded-2xl border border-amber-700/40 bg-amber-950/20 p-5">
           <div className="text-sm font-semibold text-amber-300">🧭 Caminho a seguir</div>
@@ -147,7 +168,6 @@ export default function AnalyticsPage() {
         </div>
       )}
 
-      {/* detalhe de cada conta ligada */}
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         {contas.filter((c) => dados[c.id]?.ok).map((c, i) => (
           <Coluna key={c.id} data={dados[c.id]} accent={ACCENTS[i % ACCENTS.length]} />
@@ -160,9 +180,13 @@ export default function AnalyticsPage() {
 function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar: string } }) {
   const maxAlc = Math.max(1, ...(data.resumo?.porFormato ?? []).map((f) => f.mediaAlcance));
   const top = [...data.posts].sort((x, y) => (y.alcance ?? -1) - (x.alcance ?? -1)).slice(0, 4);
+  const nova = (() => { const dd = diasDesde(data.consistenteDesde); return dd != null && dd < NOVA_DIAS; })();
   return (
     <div className="rounded-2xl border border-stone-700 p-5">
-      <div className={`text-lg font-semibold ${accent.text}`}>@{data.username}</div>
+      <div className="flex items-center gap-2">
+        <div className={`text-lg font-semibold ${accent.text}`}>@{data.username}</div>
+        {data.consistenteDesde && <span className={`rounded-full px-2 py-0.5 text-[0.65rem] ${nova ? 'bg-amber-900/40 text-amber-300' : 'bg-stone-800 text-stone-400'}`}>consistente {idadeLabel(data.consistenteDesde)}{nova ? ' · nova' : ''}</span>}
+      </div>
       <div className="text-xs text-stone-400">{nf(data.seguidores)} seguidores · {nf(data.totalPosts)} posts · {data.resumo?.taxaInteracao ?? 0}% interação</div>
 
       {!data.insightsDisponiveis && (
