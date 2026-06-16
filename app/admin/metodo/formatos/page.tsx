@@ -21,6 +21,10 @@ export default function MetodoFormatosPage() {
   const [beats, setBeats] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  // MEMÓRIA anti-repetição (por véu): acumula os beats já gerados nesta sessão e
+  // manda-os ao motor, que foge deles. Carregar "gerar" várias vezes dá sempre
+  // ângulos NOVOS (é o que prova que não se repete).
+  const [historico, setHistorico] = useState<Record<string, string[]>>({});
 
   const f = FORMATOS.find((x) => x.id === formato)!;
 
@@ -28,10 +32,15 @@ export default function MetodoFormatosPage() {
     if (busy) return;
     setBusy(true); setErro(null); setBeats([]);
     try {
-      const r = await fetch('/api/admin/metodo/formato', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ formato, veu }) });
+      const evitar = historico[veu] ?? [];
+      const r = await fetch('/api/admin/metodo/formato', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ formato, veu, evitar }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setBeats(j.beats ?? []);
+      else {
+        const novos = (j.beats ?? []) as string[];
+        setBeats(novos);
+        setHistorico((h) => ({ ...h, [veu]: [...(h[veu] ?? []), ...novos] }));
+      }
     } catch (e) { setErro(String(e)); }
     finally { setBusy(false); }
   }
@@ -76,7 +85,13 @@ export default function MetodoFormatosPage() {
           })}
         </div>
 
-        <button onClick={gerar} disabled={busy} className="px-4 py-2 rounded-lg border border-[#EBAE4A] text-[#0F0F1A] bg-[#EBAE4A] disabled:opacity-50 text-[0.82rem] font-medium">{busy ? 'a gerar os beats…' : 'gerar os beats'}</button>
+        <div className="flex items-center gap-3 flex-wrap">
+          <button onClick={gerar} disabled={busy} className="px-4 py-2 rounded-lg border border-[#EBAE4A] text-[#0F0F1A] bg-[#EBAE4A] disabled:opacity-50 text-[0.82rem] font-medium">{busy ? 'a gerar os beats…' : 'gerar os beats'}</button>
+          {(historico[veu]?.length ?? 0) > 0 && (
+            <span className="text-[0.72rem] opacity-60">memória: foge de <b>{historico[veu]!.length}</b> ângulos já gerados de {veu} · <button onClick={() => setHistorico((h) => ({ ...h, [veu]: [] }))} className="underline opacity-80 hover:opacity-100">limpar</button></span>
+          )}
+        </div>
+        <p className="text-[0.68rem] opacity-45 mt-1.5">Carrega &quot;gerar&quot; várias vezes no mesmo motor+véu: cada vez sai um ângulo NOVO (a memória obriga o motor a não repetir).</p>
 
         {erro && <p className="mt-3 text-[0.8rem] text-rose-300">{erro}</p>}
 
