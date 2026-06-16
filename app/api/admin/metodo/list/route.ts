@@ -21,12 +21,12 @@ export async function GET() {
   type Row = {
     slug: string;
     brief?: string | null;
-    dias?: { videoUrl?: string | null; legenda?: string | null; slides?: { texto?: string; conceito?: string; imageUrl?: string | null }[] }[] | null;
+    dias?: { videoUrl?: string | null; legenda?: string | null; slides?: { texto?: string; conceito?: string; imageUrl?: string | null; veuReveal?: string | null }[] }[] | null;
     theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; metodo?: { postId?: string; conta?: string; tipo?: string } } | null;
     created_at?: string;
   };
 
-  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null }> = {};
+  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null }> = {};
   for (const row of (data ?? []) as Row[]) {
     const postId = row.theme?.metodo?.postId ?? row.slug.replace(/^metodo-/, '');
     const slide = row.dias?.[0]?.slides?.[0];
@@ -41,6 +41,8 @@ export async function GET() {
       texto2: slide2?.texto ?? null,
       conceito2: slide2?.conceito ?? null,
       imageUrl2: slide2?.imageUrl ?? null,
+      veuReveal: slide?.veuReveal ?? null,
+      veuReveal2: slide2?.veuReveal ?? null,
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       legenda: row.dias?.[0]?.legenda ?? null,
       agendadoEm: row.theme?.agendadoEm ?? null,
