@@ -5,6 +5,7 @@
 
 import { VeuNome, Conta } from './contas';
 import { VEU_SEMENTE } from './veus';
+import { SABER } from './saber';
 import { limparTravessoes } from '@/lib/texto';
 
 // Regras fixas do fundo (incluídas sempre). A ASSINATURA (pintura renascentista,
@@ -53,9 +54,19 @@ Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`;
 
 export async function fraseReconhecimento(veu: VeuNome, apiKey: string, evitar: string[] = []): Promise<string> {
   const s = VEU_SEMENTE[veu];
+  // POÇO FUNDO: o SABER do véu (a área de estudo) dá MUITAS faces da dor, para a
+  // frase ter ângulos novos infinitos em vez de repetir os poucos exemplos-semente.
+  const k = SABER[veu];
+  const materia = k ? `
+MATÉRIA-PRIMA deste véu (a área de estudo dela; usa para encontrar um ÂNGULO NOVO da dor, NÃO copies à letra):
+- comportamentos: ${k.comportamentos.join(' · ')}
+- cenas do dia a dia: ${k.cenas.join(' · ')}
+- custos: ${k.custos.join(' · ')}
+- mecanismos: ${k.mecanismos.join(' · ')}` : '';
   const sys = `Escreves UMA frase curta de RECONHECIMENTO para um reel de psicologia (Método VS). É a voz interior de uma mulher cansada, na 1.ª pessoa, que ela reconhece em 3 segundos ("isto sou eu"). Padrão: ${s.descricao}
 REGRAS: português europeu; máximo 12 palavras; concreta e do dia a dia (não abstrata, não aforismo). A frase tem de fazer sentido SOZINHA, sem contexto: NÃO uses pronomes ambíguos (evita "ela", "ele", "isso", "aquilo", "lá" sem dizer a quê ou a quem te referes). SEM travessões (nem — nem –); SEM hashtags; sem aspas. Tem de ser DIFERENTE destes exemplos: ${s.exemplos.map((e) => `"${e}"`).join('; ')}.
-VARIEDADE (essencial, pensamos a LONGO PRAZO): a mesma dor tem muitas faces (o corpo, o tempo, o dinheiro, o trabalho, a casa, as relações, o futuro, a noite). NÃO voltes sempre ao mesmo exemplo nem ao mesmo tema; encontra um ângulo NOVO de cada vez.
+${materia}
+VARIEDADE (essencial, pensamos a LONGO PRAZO): a mesma dor tem muitas faces (o corpo, o tempo, o dinheiro, o trabalho, a casa, as relações, o futuro, a noite). NÃO voltes sempre ao mesmo exemplo nem ao mesmo tema; escolhe uma face diferente da matéria-prima de cada vez.
 ${evitar.length ? `JÁ FORAM usadas estas frases nesta conta, NÃO repitas o tema nem as palavras de nenhuma (encontra outra face da dor): ${evitar.slice(-30).map((e) => `"${e}"`).join('; ')}.` : ''}
 Devolve SÓ a frase, nada mais.`;
   const res = await fetch('https://api.anthropic.com/v1/messages', {
