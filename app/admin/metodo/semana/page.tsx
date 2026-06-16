@@ -80,6 +80,14 @@ export default function MetodoSemanaPage() {
     finally { setBusy(null); }
   }, [busy]);
 
+  // semana mostrada (seg→dom), offset 0 = ESTA semana (como na Agenda da veu.a.veu)
+  const hoje = new Date();
+  const dow = hoje.getDay();
+  const seg = new Date(hoje); seg.setDate(hoje.getDate() + (dow === 0 ? -6 : 1 - dow) + offset * 7);
+  const dom = new Date(seg); dom.setDate(seg.getDate() + 6);
+  const dm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+  const rotuloSemana = offset === 0 ? 'Esta semana' : offset === 1 ? 'Próxima semana' : offset === -1 ? 'Semana passada' : `${offset > 0 ? '+' : ''}${offset} semanas`;
+
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-5xl mx-auto">
@@ -89,11 +97,11 @@ export default function MetodoSemanaPage() {
           O plano por dia (como na veu.a.veu): cada dia tem o seu tipo, na proporção 60/30/10. Carregas e gera no servidor, com texto + imagem, já com a data de cada post. Podes sair que continua. Nada publica sem o teu ✓ no Publicar.
         </p>
 
-        <div className="mt-4 flex items-center gap-2 text-[0.78rem] flex-wrap">
-          <span className="opacity-60">Semana:</span>
-          {[0, 1, 2, 3].map((o) => (
-            <button key={o} onClick={() => setOffset(o)} className={`px-2.5 py-1 rounded-lg border ${offset === o ? 'border-[#EBAE4A] text-[#EBAE4A]' : 'border-white/15 opacity-70'}`}>{o === 0 ? 'próxima' : `+${o}`}</button>
-          ))}
+        <div className="mt-4 flex items-center gap-3 text-[0.8rem]">
+          <button onClick={() => setOffset((o) => o - 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">◀</button>
+          <p><b>{rotuloSemana}</b> · {dm(seg)} a {dm(dom)}</p>
+          <button onClick={() => setOffset((o) => o + 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">▶</button>
+          {offset !== 0 && <button onClick={() => setOffset(0)} className="text-[0.66rem] px-2 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">hoje</button>}
         </div>
 
         {erro && <p className="mt-3 text-[0.8rem] text-rose-300">{erro}</p>}

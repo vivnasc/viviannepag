@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => ({}))) as { semanas?: number; offset?: number; dia?: string };
   const semanas = Math.min(4, Math.max(1, body.semanas ?? 1));
-  const offset = Math.max(0, body.offset ?? 0);
+  const offset = Math.max(-12, Math.min(12, body.offset ?? 0)); // 0 = esta semana
 
   const supabase = getSupabaseAdmin();
 

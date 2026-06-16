@@ -7,7 +7,7 @@
 
 import { ContaId, VeuNome } from './contas';
 import { Post, PostTipo, reconhecimentoPosts, revelacaoPosts, manifestoPosts } from './posts';
-import { proximaSegunda, dataLocal, horaDoMetodo } from './agenda';
+import { segundaDestaSemana, dataLocal, horaDoMetodo } from './agenda';
 
 // A semana, de segunda a domingo (wd: getDay, 0=domingo).
 export const DIAS_SEMANA: { wd: number; nome: string; tipo: PostTipo }[] = [
@@ -42,9 +42,12 @@ const PORtIPO: Record<PostTipo, number> = {
   manifesto: DIAS_SEMANA.filter((d) => d.tipo === 'manifesto').length,
 };
 
-/** O plano de uma semana para uma conta (offset = nº de semanas a partir da
- *  próxima segunda). Roda a biblioteca para não repetir. */
-export function planoSemana(conta: ContaId, offset = 0, base: Date = proximaSegunda()): DiaSemana[] {
+// módulo SEMPRE positivo (offset pode ser negativo = semana atual/passada).
+const mod = (n: number, m: number) => ((n % m) + m) % m;
+
+/** O plano de uma semana para uma conta (offset = nº de semanas a partir de
+ *  ESTA semana; 0 = atual, +1 = próxima, -1 = passada). Roda a biblioteca. */
+export function planoSemana(conta: ContaId, offset = 0, base: Date = segundaDestaSemana()): DiaSemana[] {
   const inicio = new Date(base);
   inicio.setDate(inicio.getDate() + offset * 7);
   // índice corrente por tipo, já avançado pelas semanas anteriores
@@ -55,7 +58,7 @@ export function planoSemana(conta: ContaId, offset = 0, base: Date = proximaSegu
   };
   return DIAS_SEMANA.map((d, i) => {
     const p = pool(conta, d.tipo);
-    const post = p[idx[d.tipo] % p.length];
+    const post = p[mod(idx[d.tipo], p.length)];
     idx[d.tipo] += 1;
     const data = new Date(inicio);
     data.setDate(data.getDate() + i);
@@ -87,13 +90,13 @@ export interface DiaSemanaMae {
   hora: string;
 }
 
-export function planoSemanaMae(offset = 0, base: Date = proximaSegunda()): DiaSemanaMae[] {
+export function planoSemanaMae(offset = 0, base: Date = segundaDestaSemana()): DiaSemanaMae[] {
   const inicio = new Date(base);
   inicio.setDate(inicio.getDate() + offset * 7);
   return VEUS_SEMANA_MAE.map((d, i) => {
     // face 2: a revelação do véu, rodando por semana (offset) para não repetir cedo.
     const revs = revelacaoPosts('mae').filter((p) => p.veu === d.veu);
-    const revelacao = revs[offset % Math.max(1, revs.length)] ?? revs[0];
+    const revelacao = revs[mod(offset, Math.max(1, revs.length))] ?? revs[0];
     const data = new Date(inicio);
     data.setDate(data.getDate() + i);
     return { wd: d.wd, nome: d.nome, veu: d.veu, revelacao, data: dataLocal(data), hora: horaDoMetodo('mae') };
