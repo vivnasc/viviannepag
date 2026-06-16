@@ -5,35 +5,38 @@
 
 const MODEL = 'kwaivgi/kling-v2.5-turbo-pro';
 
-// movimento MÍNIMO e natural: anima SÓ o que já existe na imagem (a chama treme
-// devagar, a luz respira, leve movimento do que já lá está). NUNCA acrescenta
-// objetos (nada de folhas/pó/fumo/cortinas a voar). Registo contemplativo do método.
+// movimento MÍNIMO e natural: anima SÓ o que JÁ EXISTE na imagem. SEM exemplos
+// fixos (era o "a chama treme" que punha o Kling a inventar fogo numa almofada!):
+// move só os elementos realmente presentes, e nunca acrescenta nada.
 export const PROMPT_MOVIMENTO =
-  'Animate ONLY what already exists in this image, with very subtle, natural, almost-still motion: a flame flickers gently, light and reflections shift softly, a faint breathing of the scene. Keep the exact same composition, objects, palette and framing. Extremely slow, calm, minimal, realistic. Do NOT add anything new and do NOT invent elements: no flying leaves, no falling petals, no sparkles or glitter, no floating particles, no extra smoke, no curtains, no birds. No camera movement, no zoom.';
+  'Animate ONLY what is truly already present in this exact image, with very subtle, slow, natural motion of the elements that actually exist in it (water rippling, fabric or a curtain swaying, light and reflections shifting, steam or mist drifting, foliage moving) and ONLY if they are really there. Keep the exact same composition, objects, palette and framing. Extremely slow, calm, minimal, realistic. Do NOT invent or add ANYTHING that is not already in the image: no new flames, no fire, no falling petals, no sparkles, no glitter, no floating particles, no smoke or fog appearing. No camera movement, no zoom.';
 
-// o que o modelo NÃO deve fazer (evita o exagero: pó dourado, folhas a voar, etc.)
+// o que o modelo NÃO deve fazer (evita inventar elementos que não estão na cena).
 export const NEGATIVE_MOVIMENTO =
-  'added objects, new elements, flying leaves, falling petals, sparkles, glitter, floating particles, gold flecks, extra smoke, fog appearing, curtains, fabric blowing, birds, butterflies, text, watermark, fast motion, dramatic motion, camera shake, zoom, pan, morphing, warping, distortion, people, faces, hands';
+  'added objects, new elements, invented fire, new flames, flying leaves, falling petals, sparkles, glitter, floating particles, gold flecks, smoke appearing, fog appearing, new curtains, birds, butterflies, text, watermark, fast motion, dramatic motion, camera shake, zoom, pan, morphing, warping, distortion, people appearing, faces, hands';
 
-// movimento DRAMÁTICO (estilo de tarde, alcance): a energia/luz pulsa e rodopia,
-// nuvens/névoa derivam, a luz desloca-se, o tecido/cabelo da silhueta mexe ao
-// vento. FORTE e cinematográfico, mas SEM deformar o corpo nem inventar lixo.
+// movimento DRAMÁTICO (tarde): anima SÓ o que está na cena (a luz/energia/atmosfera
+// presentes), sem assumir objetos que podem não existir. FORTE mas sem inventar lixo
+// nem deformar o que existe.
 export const PROMPT_MOVIMENTO_DRAMA =
-  'Cinematic dramatic motion: the glowing energy and light pulse, swirl and breathe, light rays and rays of god move slowly, clouds and atmospheric haze drift, the lone silhouette stays in place while clothing and hair sway gently in the wind. Epic, emotional, flowing, alive. Keep the same composition and the human figure intact (do NOT morph or distort the body). No camera shake.';
+  'Cinematic dramatic motion of ONLY what is already present in this exact image: the existing light and energy pulse and breathe, god rays or glow shift slowly, clouds and atmospheric haze drift, water ripples, and any fabric or hair on a figure (only if a figure is present) sways gently. Keep the same composition and keep anything that exists intact (do NOT morph or distort a body). Do NOT add objects or elements that are not already in the image. Epic, emotional, flowing, alive. No camera shake.';
 export const NEGATIVE_MOVIMENTO_DRAMA =
-  'morphing body, distorted figure, extra limbs, deformed face, body horror, glitch, warping, text, watermark, logo, gold flecks, glitter confetti, random floating objects, fast jittery motion, camera shake';
+  'added objects, new elements not in the image, morphing body, distorted figure, extra limbs, deformed face, body horror, glitch, warping, text, watermark, logo, gold flecks, glitter confetti, random floating objects, fast jittery motion, camera shake';
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
 // CRIA a previsão e devolve JÁ o id (sem esperar). É o que torna a animação
 // independente da aba: o trabalho corre no Replicate, gravamos o id, e o clip é
 // COLHIDO mais tarde (colher/route). Assim mudar de conta/fechar NÃO perde nada.
-export async function criarPredicaoClip(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5, negative = NEGATIVE_MOVIMENTO): Promise<string> {
+export async function criarPredicaoClip(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5, negative = NEGATIVE_MOVIMENTO, cena?: string): Promise<string> {
+  // CIENTE DA CENA: junta a descrição real da imagem para o Kling animar o que
+  // ESTÁ lá (e não inventar fogo numa almofada). É o "match real" do motion.
+  const promptFinal = cena?.trim() ? `${prompt} The scene is: ${cena.trim().slice(0, 360)}. Animate only those real elements; add nothing that is not described there.` : prompt;
   const criar = (imgField: 'start_image' | 'image') =>
     fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input: { prompt, negative_prompt: negative, duration: duracao, [imgField]: imageUrl } }),
+      body: JSON.stringify({ input: { prompt: promptFinal, negative_prompt: negative, duration: duracao, [imgField]: imageUrl } }),
     });
   // o Replicate limita pedidos simultâneos (429). Retry com espera para a 2.ª face
   // não falhar quando se animam as duas (criar é rápido; só o processamento é longo).
