@@ -32,9 +32,15 @@ ${estrutura}
 MATÉRIA-PRIMA deste véu (dimensão "${formato.dimensao}" — usa para encontrar ângulos concretos e novos, NÃO copies à letra): ${materia.map((e) => `"${e}"`).join('; ')}
 ${ref?.conceitos?.length ? `CAMPO DE ESTUDO (conceitos reais, SÓ para TU pensares um ângulo concreto; NUNCA os nomeies nem uses jargão/autores): ${ref.conceitos.join(' · ')}.` : ''}
 
+ESCRITO PARA SER VISTO, NÃO LIDO (a regra mais importante — isto vai para um ecrã, não para um livro):
+- Frases MUITO curtas e secas. O IMPACTO vem À FRENTE, nunca escondido no fim da frase.
+- PROIBIDO orações subordinadas longas que enterram a força ("..., à espera de uma ameaça que já não existe"). Parte em frases curtíssimas.
+- Cada beat = 1 ou 2 frases curtíssimas. Se forem 2, separa-as com uma quebra de linha (\\n) — cada linha é um golpe.
+- Exemplo do que CORRIGIR: em vez de "O pensamento repete porque o teu sistema nervoso ainda está em alerta, à espera de uma ameaça que já não existe." escreve "O teu sistema nervoso continua em alerta.\\nAinda espera uma ameaça que já acabou." (mesmo sentido, impacto à frente, partido).
+
 REGRAS DE VOZ (duras):
 - Português europeu, fala simples e real (como se dissesses a uma amiga). PROIBIDO metáforas/poesia/coach, nada de "alma", "universo", "tempestade", "véu" dentro dos beats.
-- Cada beat: 1 frase curta (máx ~14 palavras), concreta, do dia a dia. 1.ª ou 2.ª pessoa.
+- Cada beat: no máximo ~16 palavras NO TOTAL (curto mesmo). 1.ª ou 2.ª pessoa, concreto, do dia a dia.
 - SEM travessões (nem — nem –). SEM aspas. SEM hashtags. SEM numerar dentro do texto.
 - O ÚLTIMO beat é a DIREÇÃO/saída: concreta e pequena, nunca uma lição moralista.
 - A dor tem de ser inconfundível DESTE véu (se tapares o nome, ainda se reconhece o padrão).

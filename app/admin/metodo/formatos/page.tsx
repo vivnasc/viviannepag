@@ -87,7 +87,7 @@ export default function MetodoFormatosPage() {
               {beats.map((b, i) => (
                 <div key={i} className="rounded-xl border border-white/10 p-3.5 flex gap-3" style={{ background: `linear-gradient(135deg, #EBAE4A10, transparent 60%)` }}>
                   <span className="text-[0.6rem] opacity-40 mt-1 shrink-0">{i + 1}</span>
-                  <p className="leading-snug text-[1.02rem]" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b}</p>
+                  <p className="leading-snug text-[1.02rem] whitespace-pre-line" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b}</p>
                 </div>
               ))}
             </div>
