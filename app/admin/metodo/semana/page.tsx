@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta } from '@/lib/metodo/contas';
 import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
+import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -119,6 +120,8 @@ export default function MetodoSemanaPage() {
             );
           })}
         </div>
+
+        <FraseRapida />
       </div>
     </main>
   );
