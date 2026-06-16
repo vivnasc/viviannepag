@@ -68,6 +68,9 @@ export type Crescimento = {
   novos30d?: number;             // novos seguidores ganhos nos últimos ~30 dias
   porSemana?: number;            // média de novos seguidores por semana
   alcanceDescobertaPct?: number; // % do alcance que foi a NÃO-seguidores (descoberta)
+  alcance30d?: number;           // contas alcançadas (28d)
+  visualizacoes30d?: number;     // visualizações (28d)
+  alcanceVarPct?: number;        // variação do alcance vs 28 dias anteriores (%)
 };
 
 export type ContaAnalytics = {
@@ -107,6 +110,27 @@ async function getCrescimento(token: string, igUserId: string): Promise<Crescime
     for (const r of results) { const dim = r.dimension_values?.[0]; if (dim === 'follower') f = r.value ?? 0; else if (dim === 'non_follower') nf = r.value ?? 0; }
     if (f + nf > 0) cres.alcanceDescobertaPct = Math.round((nf / (f + nf)) * 1000) / 10;
   } catch { /* sem breakdown de alcance */ }
+  // contas alcançadas (28d) — o número grande
+  try {
+    const j = await gget(`${igUserId}/insights`, { metric: 'reach', period: 'days_28', metric_type: 'total_value', access_token: token });
+    const v = ((j.data as { total_value?: { value?: number } }[] | undefined)?.[0]?.total_value?.value);
+    if (typeof v === 'number') cres.alcance30d = v;
+  } catch { /* sem alcance de conta */ }
+  // visualizações (28d)
+  try {
+    const j = await gget(`${igUserId}/insights`, { metric: 'views', period: 'days_28', metric_type: 'total_value', access_token: token });
+    const v = ((j.data as { total_value?: { value?: number } }[] | undefined)?.[0]?.total_value?.value);
+    if (typeof v === 'number') cres.visualizacoes30d = v;
+  } catch { /* sem visualizações */ }
+  // variação do alcance vs 28 dias anteriores (best-effort)
+  try {
+    const dia = 86400, until = Math.floor(Date.now() / 1000);
+    const a = await gget(`${igUserId}/insights`, { metric: 'reach', metric_type: 'total_value', period: 'day', since: String(until - 28 * dia), until: String(until), access_token: token });
+    const b = await gget(`${igUserId}/insights`, { metric: 'reach', metric_type: 'total_value', period: 'day', since: String(until - 56 * dia), until: String(until - 28 * dia), access_token: token });
+    const va = ((a.data as { total_value?: { value?: number } }[] | undefined)?.[0]?.total_value?.value);
+    const vb = ((b.data as { total_value?: { value?: number } }[] | undefined)?.[0]?.total_value?.value);
+    if (typeof va === 'number' && typeof vb === 'number' && vb > 0) cres.alcanceVarPct = Math.round(((va - vb) / vb) * 1000) / 10;
+  } catch { /* sem variação */ }
   return cres;
 }
 

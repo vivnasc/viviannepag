@@ -11,7 +11,7 @@ type Post = {
 };
 type FormatoResumo = { formato: string; n: number; mediaAlcance: number; mediaInteracoes: number };
 type Resumo = { mediaAlcance: number; mediaInteracoes: number; taxaInteracao: number; porFormato: FormatoResumo[]; melhorFormato?: string };
-type Crescimento = { novos30d?: number; porSemana?: number; alcanceDescobertaPct?: number };
+type Crescimento = { novos30d?: number; porSemana?: number; alcanceDescobertaPct?: number; alcance30d?: number; visualizacoes30d?: number; alcanceVarPct?: number };
 type Analytics = {
   ok: boolean; username?: string; seguidores?: number; totalPosts?: number;
   insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; crescimento?: Crescimento; erro?: string; detalhe?: string; avisoInsights?: string;
@@ -116,12 +116,29 @@ export default function AnalyticsPage() {
   const maxTaxa = Math.max(0, ...oks.map((c) => dados[c.id]?.resumo?.taxaInteracao ?? 0));
   const maxNovos = Math.max(0, ...oks.map((c) => dados[c.id]?.crescimento?.novos30d ?? 0));
   const recs = caminhoASeguir(contas, dados);
+  // conta principal (mais seguidores) — para o destaque do topo
+  const principal = oks.map((c) => dados[c.id]).sort((a, b) => (b.seguidores ?? 0) - (a.seguidores ?? 0))[0];
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10 text-stone-100">
       <Link href="/admin" className="text-sm text-stone-400 hover:text-stone-200">← Admin</Link>
       <h1 className="mt-4 text-2xl font-semibold text-white">Analytics · Instagram</h1>
       <p className="mt-1 text-sm text-stone-400">Todas as contas de uma vez — com a idade de cada uma em conta, para comparar com justiça.</p>
+
+      {/* destaque da conta principal (últimos 30 dias) */}
+      {principal?.crescimento && (
+        <div className="mt-6 rounded-2xl border border-stone-700 bg-stone-900/40 p-5">
+          <div className="text-xs text-stone-400">@{principal.username} · últimos 30 dias</div>
+          <div className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <Hero big={nf(principal.crescimento.alcance30d)} label="Contas alcançadas"
+              extra={principal.crescimento.alcanceVarPct != null ? `${principal.crescimento.alcanceVarPct >= 0 ? '▲' : '▼'} ${Math.abs(principal.crescimento.alcanceVarPct)}%` : undefined}
+              up={(principal.crescimento.alcanceVarPct ?? 0) >= 0} />
+            <Hero big={nf(principal.crescimento.visualizacoes30d)} label="Visualizações" />
+            <Hero big={principal.crescimento.novos30d != null ? `+${nf(principal.crescimento.novos30d)}` : '—'} label="Novos seguidores" />
+            <Hero big={principal.crescimento.alcanceDescobertaPct != null ? `${principal.crescimento.alcanceDescobertaPct}%` : '—'} label="A não-seguidores" />
+          </div>
+        </div>
+      )}
 
       <div className="mt-6 overflow-x-auto rounded-2xl border border-stone-700">
         <table className="w-full text-sm">
@@ -189,6 +206,18 @@ export default function AnalyticsPage() {
   );
 }
 
+function Hero({ big, label, extra, up }: { big: string; label: string; extra?: string; up?: boolean }) {
+  return (
+    <div>
+      <div className="flex items-baseline gap-2">
+        <span className="text-2xl font-semibold text-white">{big}</span>
+        {extra && <span className={`text-xs font-medium ${up ? 'text-emerald-400' : 'text-rose-400'}`}>{extra}</span>}
+      </div>
+      <div className="text-xs text-stone-400">{label}</div>
+    </div>
+  );
+}
+
 function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar: string } }) {
   const maxAlc = Math.max(1, ...(data.resumo?.porFormato ?? []).map((f) => f.mediaAlcance));
   const top = [...data.posts].sort((x, y) => (y.alcance ?? -1) - (x.alcance ?? -1)).slice(0, 4);
@@ -200,6 +229,12 @@ function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar
         {data.consistenteDesde && <span className={`rounded-full px-2 py-0.5 text-[0.65rem] ${nova ? 'bg-amber-900/40 text-amber-300' : 'bg-stone-800 text-stone-400'}`}>consistente {idadeLabel(data.consistenteDesde)}{nova ? ' · nova' : ''}</span>}
       </div>
       <div className="text-xs text-stone-400">{nf(data.seguidores)} seguidores · {nf(data.totalPosts)} posts · {data.resumo?.taxaInteracao ?? 0}% interação</div>
+      {data.crescimento && (data.crescimento.alcance30d != null || data.crescimento.visualizacoes30d != null) && (
+        <div className="mt-2 flex flex-wrap gap-2 text-xs">
+          {data.crescimento.alcance30d != null && <span className="rounded-lg bg-stone-800/60 px-2 py-1 text-stone-200">🌍 {nf(data.crescimento.alcance30d)} alcançadas (30d){data.crescimento.alcanceVarPct != null ? ` · ${data.crescimento.alcanceVarPct >= 0 ? '▲' : '▼'}${Math.abs(data.crescimento.alcanceVarPct)}%` : ''}</span>}
+          {data.crescimento.visualizacoes30d != null && <span className="rounded-lg bg-stone-800/60 px-2 py-1 text-stone-200">👁 {nf(data.crescimento.visualizacoes30d)} visualizações</span>}
+        </div>
+      )}
       {data.crescimento && (data.crescimento.novos30d != null || data.crescimento.alcanceDescobertaPct != null) && (
         <div className="mt-1 text-xs text-stone-300">
           {data.crescimento.novos30d != null && <span>📈 +{nf(data.crescimento.novos30d)} seg. (30d){data.crescimento.porSemana != null ? ` · ~${nf(data.crescimento.porSemana)}/sem` : ''}</span>}
