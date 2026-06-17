@@ -9,6 +9,12 @@
 //   - Fuga, Culpa, Saída são as que FALTAM e se acrescentam aqui.
 // NÃO toca no saber.ts de propósito (a outra sessão edita-o). Esta camada é só o
 // retrato, derivado dos manuais da Vivianne (não inventado), para validação.
+//
+// Princípio que guia os exemplos (a mulher de 2026, não a de 2000): a forma mudou,
+// a hierarquia não. A mulher de 2000 sacrificava o CORPO (comia de pé enquanto os
+// outros comiam sentados). A de 2026 sacrifica a ATENÇÃO (sentada à mesa, mas a
+// gerir tudo na cabeça enquanto os outros estão presentes). O mesmo padrão, numa
+// tradução moderna. Os exemplos da dor falam à mulher de hoje.
 
 import type { VeuNome } from './contas';
 
@@ -51,12 +57,12 @@ export const VEU_FACES: Record<VeuNome, FacesVeu> = {
     saida: 'Quando a cabeça acelerar, dizer por dentro: estou a reparar que estou a pensar isto. Isso já te tira da onda para a margem. Depois, três respirações, e sentir quem respira.',
   },
   Esforço: {
-    dor: 'Comes de pé o que sobra. Arrumas enquanto os outros já comem. Respondes a todos em segundos e a ti em três dias. E sentes culpa no instante em que te sentas.',
-    fuga: 'O fazer é a tua fuga mais aplaudida. Enquanto não paras, não chegas ao silêncio. E enquanto não chegas ao silêncio, não tens de sentir o vazio. Encher a vida de cuidar parece virtude, mas é também não teres de estar contigo.',
+    dor: 'Agendas os exames de toda a gente e adias os teus. Sentas-te à mesa, mas continuas a gerir tudo na cabeça enquanto os outros estão simplesmente presentes. Respondes a todos em minutos, e a ti não chegas há meses.',
+    fuga: 'A gestão é a tua fuga mais aplaudida. Enquanto organizas a vida de todos, não tens de parar com a tua. Estar sempre ocupada com os outros parece cuidado, mas é também não teres de estar contigo.',
     culpa: 'Descansar custa-te como uma dívida. Se paras, sentes que deixas alguém em falta. A culpa não vem de teres feito mal. Vem de teres parado.',
-    custo: 'O corpo que avisa e tu calas. As relações onde só dás e nunca recebes. A exaustão a que chamas ser responsável. E uma vida inteira a provar que mereces ficar.',
+    custo: 'Conheces as alergias de todos e ignoras os sinais do teu corpo. As relações onde só dás. A atenção sempre noutro lado, nunca em ti. E uma vida inteira a provar que mereces ficar.',
     revelacao: 'Aprendeste que o amor se ganha a fazer. Não se ganha. O que se ganha a fazer não é amor, é dependência da tua entrega. Tu bastas antes de produzires seja o que for.',
-    saida: 'Parar de empurrar. Largar uma coisa, só uma, e ver que o chão continua lá. Deixares-te segurar, em vez de seres sempre tu a segurar.',
+    saida: 'Parar de empurrar. Largar uma coisa, só uma, e ver que o chão continua lá. Marcar a tua consulta antes da dos outros. Deixares-te segurar, em vez de seres sempre tu a segurar.',
   },
   Desolação: {
     dor: 'Ligas a TV mal entras, pegas no telemóvel sem razão, inventas uma tarefa quando ninguém precisa de ti. Mal o silêncio se instala, corres a preenchê-lo antes de o sentires.',
