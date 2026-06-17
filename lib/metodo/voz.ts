@@ -9,10 +9,11 @@ const BUCKET = 'viviannepag-assets';
 
 // gera a voz a ler `texto` e devolve o URL público do MP3.
 export async function gerarVoz(texto: string, slug: string): Promise<string> {
-  const key = process.env.ELEVENLABS_API_KEY;
-  const voiceId = process.env.ELEVEN_VOICE_ID;
+  // a env real chama-se ELEVENLABS_VOICE_ID (há quem use ELEVEN_VOICE_ID) — lê os dois.
+  const key = process.env.ELEVENLABS_API_KEY || process.env.ELEVEN_API_KEY;
+  const voiceId = process.env.ELEVENLABS_VOICE_ID || process.env.ELEVEN_VOICE_ID;
   if (!key) throw new Error('falta ELEVENLABS_API_KEY');
-  if (!voiceId) throw new Error('falta ELEVEN_VOICE_ID (a tua voz clonada)');
+  if (!voiceId) throw new Error('falta ELEVENLABS_VOICE_ID (a tua voz clonada)');
 
   const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
     method: 'POST',
