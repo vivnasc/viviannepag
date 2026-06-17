@@ -6,6 +6,9 @@ import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS, type ContaId } from '@/lib/metodo/contas';
 import { CONTAS_UNIVERSO, CALENDARIO_UNIVERSO, GESTO_CONTA } from '@/lib/metodo/universo';
 import { FAMILIAS } from '@/lib/metodo/personagens';
+import { VEU_FACES, PONTES } from '@/lib/metodo/veu-faces';
+import { SABER } from '@/lib/metodo/saber';
+import type { VeuNome } from '@/lib/metodo/contas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -106,6 +109,29 @@ export default function UniversoSemanaPage() {
           ))}
         </div>
         <p className="text-[0.7rem] opacity-45 mb-8">Cada personagem atravessa vários véus. É daqui que sai conteúdo sem fim e sem repetir: o véu dá o <b>porquê</b>, a personagem dá o <b>quem</b>, a conta dá o <b>como</b>.</p>
+
+        {/* 3.5 · OS VÉUS POR DENTRO — o retrato completo (dor/fuga/culpa/custo/revelação/saída) */}
+        <h2 className="text-[0.62rem] uppercase tracking-[0.18em] opacity-50 mb-2">+ Os véus por dentro · o retrato completo</h2>
+        <p className="text-[0.7rem] opacity-45 mb-2.5">A fuga e a culpa NÃO são de um véu só: <b>cada véu foge e culpa-se à sua maneira</b>. A mesma ação (procrastinar, comprar, beber) tem um motivo diferente em cada um. O mercado fala do comportamento; tu falas do motivo.</p>
+        <div className="grid gap-2 sm:grid-cols-2 mb-2">
+          {(['Esforço', 'Turbilhão', 'Horizonte', 'Memória', 'Desolação', 'Permanência', 'Dualidade'] as VeuNome[]).map((v) => {
+            const k = SABER[v]; const f = VEU_FACES[v];
+            return (
+              <div key={v} className="rounded-xl border border-white/10 p-3 bg-black/15 text-[0.74rem]">
+                <p className="text-[0.92rem] mb-1.5" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#EBAE4A' }}>Véu {v}</p>
+                <p className="mb-1"><span className="text-[0.54rem] uppercase tracking-wider opacity-45">dor</span><br />{k?.essencia ?? '—'}</p>
+                <p className="mb-1"><span className="text-[0.54rem] uppercase tracking-wider opacity-45">fuga</span><br />{f.fuga}</p>
+                <p className="mb-1"><span className="text-[0.54rem] uppercase tracking-wider opacity-45">culpa</span><br />{f.culpa}</p>
+                <p className="mb-1"><span className="text-[0.54rem] uppercase tracking-wider opacity-45">custo</span><br />{k?.custos?.[0] ?? '—'}</p>
+                <p className="mb-1"><span className="text-[0.54rem] uppercase tracking-wider opacity-45">revelação</span><br />{k?.crencas?.[0]?.verdade ?? '—'}</p>
+                <p style={{ color: '#cfe0a0' }}><span className="text-[0.54rem] uppercase tracking-wider opacity-45 text-[#F2E8DC]">saída</span><br />{f.saida}</p>
+              </div>
+            );
+          })}
+        </div>
+        {PONTES.map((p) => (
+          <p key={p.de} className="text-[0.72rem] opacity-55 mb-8"><b>Ponte {p.de} → {p.para}:</b> {p.mecanismo}</p>
+        ))}
 
         {/* 4 · A SEMANA — desce do macro */}
         <h2 className="text-[0.62rem] uppercase tracking-[0.18em] opacity-50 mb-2">4 · A semana (desce daqui · só texto, Fase 1)</h2>
