@@ -401,6 +401,22 @@ export default function MetodoContaPage() {
     finally { setSomBusy(null); }
   }, [somBusy, recarregar]);
 
+  // FORMATO VISUAL (vir = regressar): gera UMA cena de luz + UMA linha. Pouco texto,
+  // atmosfera imersiva — a conta passa a sentir-se diferente das outras.
+  const [visualBusy, setVisualBusy] = useState(false);
+  const gerarVisual = useCallback(async () => {
+    if (!conta || visualBusy) return;
+    setVisualBusy(true); setErro(null); setMsg('A gerar um visual (cena de luz + 1 linha)…');
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-visual', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`Visual criado: «${j.linha}». Abre, anima (a luz a fluir) e renderiza.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setVisualBusy(false); }
+  }, [conta, visualBusy, recarregar]);
+
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
       <p>Conta desconhecida. <Link className="underline" href="/admin/metodo">Voltar</Link></p>
@@ -460,6 +476,7 @@ export default function MetodoContaPage() {
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
             <button onClick={() => gerarLote(4)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 4 semanas (texto, por dia)</button>
+            <button onClick={gerarVisual} disabled={visualBusy} title="cria 1 reel VISUAL: cena de luz a fluir + 1 linha (pouco texto). A atmosfera de @vir.soltar (regressar a ti)." className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{visualBusy ? '🌌 a gerar…' : '🌌 gerar visual (1 cena + 1 linha)'}</button>
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
           </div>
@@ -619,8 +636,9 @@ export default function MetodoContaPage() {
                   {(detalhe.clipPend || detalhe.clipPend2) && <button onClick={colher} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-emerald-400/40 text-emerald-300/90">colher prontos</button>}
                   <button onClick={() => rejeitarClips(detalhe.slug)} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-rose-400/40 text-rose-300/90">rejeitar clips</button>
                 </div>
-                <div className={`grid ${detalhe.subtipo === 'nbeats' ? 'grid-cols-1 max-w-[220px] mx-auto' : 'grid-cols-2'} gap-2`}>
-                  {(detalhe.subtipo === 'nbeats'
+                {(() => { const umClip = detalhe.subtipo === 'nbeats' || detalhe.subtipo === 'visual'; return (
+                <div className={`grid ${umClip ? 'grid-cols-1 max-w-[220px] mx-auto' : 'grid-cols-2'} gap-2`}>
+                  {(umClip
                     ? [{ c: detalhe.clip, p: detalhe.clipPend, label: 'a cena' }]
                     : [{ c: detalhe.clip, p: detalhe.clipPend, label: 'face 1' }, { c: detalhe.clip2, p: detalhe.clipPend2, label: 'face 2' }]
                   ).map(({ c, p, label }, i) => (
@@ -637,10 +655,11 @@ export default function MetodoContaPage() {
                     </div>
                   ))}
                 </div>
+                ); })()}
               </div>
             )}
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
-              {(() => { const tarde = detalhe.subtipo === 'nbeats'; return <>
+              {(() => { const tarde = detalhe.subtipo === 'nbeats' || detalhe.subtipo === 'visual'; return <>
               {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima a imagem (Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : tarde ? '🎬 animar (a cena)' : '🎬 animar (clips das faces)'}</button>}
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
