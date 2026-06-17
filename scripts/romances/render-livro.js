@@ -13,6 +13,7 @@ const BASE = path.join(__dirname, '..', '..', 'ficcao-plano');
 const PASTAS = {
   amparo: { pt: 'amparo-livro', en: 'amparo-livro-en', capa: 'AMPARO-capa', outPt: 'AS-MAOS-DE-AMPARO-pt.pdf', outEn: 'AMPAROS-HANDS-en.pdf' },
   irma: { pt: 'nome-da-irma-livro', en: 'nome-da-irma-livro-en', capa: 'NOME-DA-IRMA-capa', outPt: 'O-NOME-DA-IRMA-pt.pdf', outEn: 'THE-SISTERS-NAME-en.pdf' },
+  caderno: { pt: 'caderno-das-dividas-livro', en: 'caderno-das-dividas-livro-en', capa: 'CADERNO-capa', outPt: 'O-CADERNO-DAS-DIVIDAS-pt.pdf', outEn: 'THE-LEDGER-OF-DEBTS-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -114,7 +115,35 @@ const T_AMPARO = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : T_AMPARO;
+const T_CADERNO = LANG==='pt' ? {
+  tituloHtml:'O Caderno<br>das Dívidas', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante III · A Mercearia',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Benvinda te doer em sítios reais, o nome do que ela carrega está em «A mulher que não consegue cobrar», na coleção Prosperidade. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Benvinda. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Ledger<br>of Debts', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf III · The Shop',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Benvinda hurts you in real places, the name of what she carries is in “The Woman Who Cannot Charge”, in the Prosperity collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Benvinda. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
