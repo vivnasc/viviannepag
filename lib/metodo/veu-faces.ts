@@ -73,7 +73,7 @@ export const VEU_FACES: Record<VeuNome, FacesVeu> = {
     saida: 'Ficar no silêncio o tempo suficiente para a angústia assentar como pó que pousa. Não encher. Esperar para ver se há mesmo ali um abismo, ou só uma voz tua à espera de ser ouvida.',
   },
   Horizonte: {
-    dor: 'Vives num "quando". Quando emagrecer, quando tiver tempo, quando aparecer alguém. Alcanças a meta e em poucos dias já queres a próxima.',
+    dor: 'Vives num "quando". Quando os filhos crescerem, quando me reformar, quando tiver tempo, quando emagrecer. Alcanças a meta e em poucos dias já queres a próxima.',
     fuga: 'O "lá" luminoso é a tua forma de não estar aqui. Procurar sempre o passo seguinte poupa-te de habitar o presente, que te parece sempre pouco.',
     culpa: 'Achas que ainda não tens direito a viver, que primeiro tens de cumprir a condição. Descansar antes de chegares soa a preguiça, a estares a desistir.',
     custo: 'A vida passa-te ao lado enquanto a preparas para começar. Estás meia ausente de quem amas, projetada no próximo passo. Vives de mala feita à porta de um comboio que nunca chega.',
