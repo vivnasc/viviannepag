@@ -27,8 +27,8 @@ export function assuntoCurto(prompt: string): string {
 // escuro e contrastado, luz dramática. O DRAMA vem da luz/escala/atmosfera, NÃO de
 // uma fórmula fixa. Mantém 9:16 e espaço para texto.
 const FUNDO_REGRAS_DRAMA =
-  'cinematic photographic still, dramatic film lighting (god rays, a shaft of light, a glowing horizon, an aurora, distant fire or a luminous focal point — vary it), moody high-contrast with deep shadows, atmospheric haze, cinematic colour grade, epic and emotional, ' +
-  'generous space in the lower third for an overlaid sentence, NO faces visible, NO text, NO letters, NO watermark, NO logo, vertical 9:16';
+  'abstract luminous energy and flowing particles of light over deep near-black darkness, glowing filaments, sparks and light dust, ethereal cosmic fine-art, rich and hypnotic, cinematic depth, ' +
+  'generous dark space in the lower third for an overlaid sentence, NO faces, NO text, NO letters, NO watermark, NO logo, vertical 9:16';
 
 // O Claude ESCREVE o prompt de fundo de UM post: criativo e VARIADO (assunto,
 // composição e luz diferentes a cada vez), mantendo só a paleta/atmosfera da
@@ -40,18 +40,13 @@ export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: strin
   const corMundo = `${a.prompt}. Sensação: ${a.sensacao}`;
   const evita = evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : '';
   const sys = estilo === 'dramatico'
-    ? `És diretor de arte de cinema de uma marca de psicologia (Método VS, @${conta.handle}). Escreves UM prompt de imagem (em inglês) para um reel DRAMÁTICO e cinematográfico, que para o scroll — mas SOFISTICADO, nunca um clichê.
+    ? `És diretor de arte de uma marca de psicologia (Método VS, @${conta.handle}). Escreves UM prompt de imagem (em inglês) para um reel DRAMÁTICO que para o scroll — sofisticado, hipnótico, nunca clichê.
 
-O QUE É O DRAMÁTICO (essencial): o impacto vem da LUZ, da ESCALA, da ATMOSFERA, da COR e da EMOÇÃO cinematográfica — NÃO de uma fórmula. Fotográfico, escuro e contrastado, luz de cinema, intemporal e épico.
-NÃO REPETIR FÓRMULA (regra dura): NÃO ponhas sempre uma silhueta humana com uma bola/orbe de luz atrás — isso fica ridículo e repetido. VARIA MUITO de post para post:
-- SUJEITO: às vezes uma figura humana solitária em silhueta (sem rosto, de costas), mas MUITAS VEZES SEM pessoa nenhuma (só a cena, a paisagem, um objeto, um lugar);
-- LUZ/FENÓMENO: raios de luz por entre nuvens de tempestade, uma única réstia de luz numa sala, um horizonte incandescente, uma aurora, um clarão ao longe, uma fenda de luz no escuro, céu cósmico, relâmpago, névoa a apanhar a luz, reflexos na água — NEM SEMPRE um círculo/orbe ao centro;
-- CENÁRIO: mar, deserto, ruínas, floresta, falésia, interior vasto, montanha, chuva, neve, estrada, cosmos;
-- ESCALA e COMPOSIÇÃO (grande plano, macro, plano muito aberto, vista de cima).
-COR DESTA CONTA (a luz/atmosfera sai nesta paleta): ${corMundo}. Representa: ${conta.depois}
-${frase ? `A FRASE deste post é: «${frase}».
-CONEXÃO IMAGEM↔TEXTO (TÃO importante como o drama): a cena tem de ENCARNAR esta frase — o ESTADO ou a METÁFORA concreta por trás dela — NÃO um fundo épico genérico. A frase manda o ASSUNTO e a EMOÇÃO; o tratamento cinematográfico e a cor da conta dão o espetáculo. Ex.: frase sobre adiar a vida → um limiar/porta com luz do outro lado; sobre carregar peso → uma figura minúscula a atravessar uma imensidão; sobre repetir o passado → um lugar em ruínas ao entardecer. Concreto e sensorial.` : 'ASSUNTO: uma cena cinematográfica concreta que encarne o significado da conta, variada, dramática.'}
-MOVIMENTO É O PROTAGONISTA (regra dura — a imagem vai ser ANIMADA; sem isto o vídeo fica pobre): a cena TEM de ter um ELEMENTO GRANDE que se mova mesmo — mar agitado, ondas, tempestade, nuvens a correr, chuva, fogo/brasas, fumo de uma fonte real, água a cair, luz/energia a pulsar, névoa densa a rolar. Se houver uma figura humana, fica PEQUENA e parada e NÃO é ela a dar o movimento (uma silhueta parada só ganha fumo à volta e fica pardo, pobre). O dinamismo está no MUNDO à volta, não numa pessoa imóvel.
+A LINGUAGEM (essencial — o que torna isto deslumbrante E barato de gerar/animar): LUZ e PARTÍCULAS a FLUIR sobre PRETO quase total. Energia luminosa, fios e poeira de luz, espirais, anéis e portais de luz, fumo luminoso, correntes de faíscas, nebulosas, reflexos — formas ABSTRATAS feitas de luz. NÃO são cenas realistas nem pessoas: é luz viva sobre escuridão. Elegante, etéreo, cósmico, fine-art (não stock, não foto crua).
+A COR DA LUZ é a desta conta: ${corMundo}. A luz brilha NESTA paleta sobre fundo escuríssimo. Representa: ${conta.depois}
+VARIA a FORMA da luz de post para post (espiral, anel/portal, fios a subir, vórtice, chuva de faíscas, onda de luz, nuvem luminosa, fenda de luz) e a composição (macro, centrado, a abrir, vista de cima). RARAMENTE uma silhueta humana minúscula ao fundo, e só se ajudar a frase — a ESTRELA é a luz, nunca uma pessoa parada (isso anima pobre).
+${frase ? `A FRASE deste post é: «${frase}». A FORMA da luz ENCARNA o sentimento da frase (algo que se desfaz, que volta, que se abre, que se prende) — não um fundo genérico. A frase manda a metáfora; a luz na cor da conta dá o espetáculo.` : 'A forma da luz encarna o significado da conta.'}
+MOVIMENTO É O PROTAGONISTA (a imagem vai ser ANIMADA): compõe luz/partículas que FLUEM, rodopiam, sobem, pulsam e se abrem — movimento contínuo e natural da própria luz (é isto que anima lindamente, sem deformar nada).
 ${evita}
 
 Termina sempre com: ${FUNDO_REGRAS_DRAMA}.
