@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -30,6 +30,10 @@ export default function MetodoContaPage() {
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [melBusy, setMelBusy] = useState<string | null>(null);
+  // ORGANIZAÇÃO: o calendário mostra UM período de cada vez (manhã = frase 11h;
+  // tarde = motor 17h), nunca os dois amontoados. E esconde os publicados.
+  const [vista, setVista] = useState<'manha' | 'tarde'>('manha');
+  const [esconderPub, setEsconderPub] = useState(true);
 
   const toggleSel = (slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; });
 
@@ -400,11 +404,15 @@ export default function MetodoContaPage() {
   const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
 
   const semData = geradosConta.filter((e) => !e.agendadoEm).length;
+  // PERÍODO de um post: tarde = motor (nbeats) ou hora >= 15h; senão manhã.
+  const ehTardePost = (e: EstadoPost) => e.subtipo === 'nbeats' || (e.hora ?? '') >= '15:00';
+  const nManha = geradosConta.filter((e) => !ehTardePost(e)).length;
+  const nTarde = geradosConta.filter((e) => ehTardePost(e)).length;
+  // o CALENDÁRIO mostra só o período escolhido e (se pedido) sem os publicados.
+  const geradosVista = geradosConta.filter((e) => (vista === 'tarde' ? ehTardePost(e) : !ehTardePost(e)) && (!esconderPub || !e.publicado));
   // por dia (a data é o plano): para a grelha de calendário.
   const porDia = new Map<string, EstadoPost[]>();
-  for (const e of geradosConta) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
-  // dentro de cada dia, ORDENA por hora (manhã 11h antes da tarde 17h) — para o
-  // calendário não ser uma salada de manhã+tarde sem nexo.
+  for (const e of geradosVista) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
   for (const lista of porDia.values()) lista.sort((a, b) => (a.hora ?? '99').localeCompare(b.hora ?? '99'));
   const semDataList = porDia.get('sem data') ?? [];
 
@@ -412,7 +420,7 @@ export default function MetodoContaPage() {
   const parse = (iso: string) => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, (m ?? 1) - 1, d ?? 1); };
   const fmtD = (dt: Date) => `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
   const segundaDe = (dt: Date) => { const x = new Date(dt); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd)); return x; };
-  const datasComPost = geradosConta.filter((e) => e.agendadoEm).map((e) => e.agendadoEm as string).sort();
+  const datasComPost = geradosVista.filter((e) => e.agendadoEm).map((e) => e.agendadoEm as string).sort();
   const semanasGrade: string[][] = [];
   if (datasComPost.length) {
     let cur = segundaDe(parse(datasComPost[0]));
@@ -472,7 +480,16 @@ export default function MetodoContaPage() {
 
         {geradosConta.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosConta.length}</span></h2>
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosVista.length}</span></h2>
+            <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem]">
+              <div className="inline-flex rounded-lg border border-white/15 overflow-hidden">
+                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? conta.cor : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã (11h) · {nManha}</button>
+                <button onClick={() => setVista('tarde')} className="px-3 py-1.5" style={{ background: vista === 'tarde' ? '#EBAE4A' : 'transparent', color: vista === 'tarde' ? '#0F0F1A' : '#F2E8DC' }}>🌙 Tarde (17h) · {nTarde}</button>
+              </div>
+              <label className="inline-flex items-center gap-1.5 opacity-80 cursor-pointer">
+                <input type="checkbox" checked={esconderPub} onChange={(e) => setEsconderPub(e.target.checked)} className="cursor-pointer" /> esconder publicados
+              </label>
+            </div>
             {sel.size > 0 && (
               <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem] rounded-lg border border-rose-400/30 bg-rose-500/5 px-3 py-2">
                 <span><b>{sel.size}</b> selecionado(s)</span>
@@ -584,10 +601,13 @@ export default function MetodoContaPage() {
                   {(detalhe.clipPend || detalhe.clipPend2) && <button onClick={colher} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-emerald-400/40 text-emerald-300/90">colher prontos</button>}
                   <button onClick={() => rejeitarClips(detalhe.slug)} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-rose-400/40 text-rose-300/90">rejeitar clips</button>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {[{ c: detalhe.clip, p: detalhe.clipPend }, { c: detalhe.clip2, p: detalhe.clipPend2 }].map(({ c, p }, i) => (
+                <div className={`grid ${detalhe.subtipo === 'nbeats' ? 'grid-cols-1 max-w-[220px] mx-auto' : 'grid-cols-2'} gap-2`}>
+                  {(detalhe.subtipo === 'nbeats'
+                    ? [{ c: detalhe.clip, p: detalhe.clipPend, label: 'a cena' }]
+                    : [{ c: detalhe.clip, p: detalhe.clipPend, label: 'face 1' }, { c: detalhe.clip2, p: detalhe.clipPend2, label: 'face 2' }]
+                  ).map(({ c, p, label }, i) => (
                     <div key={i}>
-                      <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-0.5 text-center">{i === 0 ? 'face 1' : 'face 2'}</p>
+                      <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-0.5 text-center">{label}</p>
                       {c
                         // eslint-disable-next-line jsx-a11y/media-has-caption
                         ? <video src={c} controls autoPlay loop muted playsInline className="w-full rounded-xl border border-emerald-400/30" />
@@ -602,28 +622,42 @@ export default function MetodoContaPage() {
               </div>
             )}
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
-              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima as faces (imagem → vídeo, Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (clips das faces)'}</button>}
+              {(() => { const tarde = detalhe.subtipo === 'nbeats'; return <>
+              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima a imagem (Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : tarde ? '🎬 animar (a cena)' : '🎬 animar (clips das faces)'}</button>}
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
-              {(() => {
+              {/* botões SÓ da manhã (na tarde criam confusão e não se aplicam) */}
+              {!tarde && (() => {
                 const faltaFace2 = !!detalhe.texto2 && (!detalhe.imageUrl || !detalhe.imageUrl2);
                 const label = !detalhe.imageUrl ? 'gerar imagem' : faltaFace2 ? 'gerar 2.ª imagem' : 'outra imagem';
                 return <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={faltaFace2 ? 'gera a imagem da face que falta (mantém a que já tens)' : detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : label}</button>;
               })()}
-              <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica (silhueta + energia, escuro). Depois anima para o movimento forte. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>
-              <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta (mãe = Dualidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>
-              <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual (tira ambiguidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
-              <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="gera a TUA voz (ElevenLabs) a ler o texto, para ouvires se o sotaque sai fiel antes de usar" className="px-2.5 py-1 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{vozBusy === detalhe.slug ? '🎙️ …' : '🎙️ gerar voz (teste)'}</button>
+              {!tarde && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>}
+              {!tarde && <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>}
+              {!tarde && <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>}
+              <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="gera a TUA voz (ElevenLabs) a ler o texto, para ouvires se o sotaque sai fiel" className="px-2.5 py-1 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{vozBusy === detalhe.slug ? '🎙️ a gerar voz…' : '🎙️ gerar voz (teste)'}</button>
+              </>; })()}
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
             </div>
-            {detalhe.vozUrl && (
-              <div className="mt-2 text-center">
-                <p className="text-[0.58rem] uppercase tracking-wider text-sky-300/90 mb-1">🎙️ a tua voz (ouve o sotaque)</p>
-                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <audio src={detalhe.vozUrl} controls className="w-full" />
-                <p className="text-[0.55rem] opacity-40 mt-1">se o sotaque variar, não uses — dizes-me e tiramos a voz.</p>
+            {(detalhe.vozUrl || detalhe.som) && (
+              <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2 space-y-2">
+                {detalhe.vozUrl && (
+                  <div className="text-center">
+                    <p className="text-[0.58rem] uppercase tracking-wider text-sky-300/90 mb-1">🎙️ a tua voz (ouve o sotaque)</p>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio src={detalhe.vozUrl} controls className="w-full" />
+                    <p className="text-[0.55rem] opacity-40 mt-1">se o sotaque variar, não uses — dizes-me e tiramos a voz.</p>
+                  </div>
+                )}
+                {detalhe.som && (
+                  <div className="text-center">
+                    <p className="text-[0.58rem] uppercase tracking-wider text-amber-300/90 mb-1">🔊 som da tarde (ambiente)</p>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio src={detalhe.som} controls className="w-full" />
+                  </div>
+                )}
               </div>
             )}
             <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>
