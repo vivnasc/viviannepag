@@ -25,7 +25,9 @@ export async function gerarVoz(texto: string, slug: string): Promise<string> {
 
   const audio = Buffer.from(await res.arrayBuffer());
   const sb = getSupabaseAdmin();
-  const path = `metodo/${slug}/voz-${Date.now()}.mp3`;
+  // o storage NÃO aceita acentos/ç na chave (ex.: "turbilhão") → tira-os do caminho.
+  const slugSeguro = slug.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9_-]/g, '-');
+  const path = `metodo/${slugSeguro}/voz-${Date.now()}.mp3`;
   const { error } = await sb.storage.from(BUCKET).upload(path, audio, { contentType: 'audio/mpeg', upsert: true });
   if (error) throw new Error(`upload voz: ${error.message}`);
   return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
