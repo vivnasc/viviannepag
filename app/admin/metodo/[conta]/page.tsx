@@ -566,6 +566,9 @@ export default function MetodoContaPage() {
               <span className="opacity-45">{geradosConta.findIndex((e) => e.slug === detalhe.slug) + 1}/{geradosConta.length}</span>
               <button onClick={() => { const i = geradosConta.findIndex((e) => e.slug === detalhe.slug); if (i >= 0 && i < geradosConta.length - 1) setDetalhe(geradosConta[i + 1]); }} className="px-3 py-1.5 rounded-lg border border-white/25 hover:bg-white/10">seguinte →</button>
             </div>
+            {/* ESTADO À VISTA (dentro da modal): senão a mensagem fica atrás da modal e parece que nada acontece. */}
+            {erro && <p className="mb-2 text-[0.78rem] text-rose-300 rounded-lg border border-rose-400/30 bg-rose-500/10 px-3 py-2">{erro}</p>}
+            {msg && !erro && <p className="mb-2 text-[0.78rem] text-emerald-300 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-2">{msg}</p>}
             {detalhe.videoUrl && (
               <div className="mb-2">
                 <p className="text-[0.6rem] uppercase tracking-wider text-emerald-300 text-center mb-1">reel final (renderizado)</p>
