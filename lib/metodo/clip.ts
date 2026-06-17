@@ -31,7 +31,9 @@ type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'fai
 export async function criarPredicaoClip(imageUrl: string, token: string, prompt = PROMPT_MOVIMENTO, duracao: 5 | 10 = 5, negative = NEGATIVE_MOVIMENTO, cena?: string): Promise<string> {
   // CIENTE DA CENA: junta a descrição real da imagem para o Kling animar o que
   // ESTÁ lá (e não inventar fogo numa almofada). É o "match real" do motion.
-  const promptFinal = cena?.trim() ? `${prompt} The scene is: ${cena.trim().slice(0, 360)}. Animate only those real elements; add nothing that is not described there.` : prompt;
+  // cena curta (prompt longo demais faz o Kling falhar). Só as primeiras palavras.
+  const cenaCurta = cena?.trim() ? cena.trim().replace(/\s+/g, ' ').split(' ').slice(0, 22).join(' ') : '';
+  const promptFinal = cenaCurta ? `${prompt} Scene: ${cenaCurta}. Animate only what is really there.` : prompt;
   const criar = (imgField: 'start_image' | 'image') =>
     fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
       method: 'POST',

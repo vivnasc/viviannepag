@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -290,6 +290,23 @@ export default function MetodoContaPage() {
     } catch { /* tenta na próxima */ }
   }, [recarregar]);
 
+  // RECUPERAR clips (zero tolerância a perder clips pagos): força a buscar ao
+  // Replicate TODAS as previsões pagas que ficaram por guardar — mesmo as que
+  // pareciam falhadas. Nada do que pagaste se perde.
+  const [recuperarBusy, setRecuperarBusy] = useState(false);
+  const recuperarClips = useCallback(async () => {
+    if (recuperarBusy) return;
+    setRecuperarBusy(true); setErro(null); setMsg('A recuperar clips pagos no Replicate…');
+    try {
+      const r = await fetch('/api/admin/metodo/colher', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ force: true }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`Recuperação: ${j.colhidos ?? 0} clip(s) recuperado(s)${j.pendentes ? `, ${j.pendentes} ainda a processar` : ''}.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setRecuperarBusy(false); }
+  }, [recuperarBusy, recarregar]);
+
   // colhe ao abrir (apanha o que ficou pronto enquanto saíste) e, enquanto houver
   // faces a animar, vai colhendo a cada 15s — o clip aparece sozinho na página.
   const haPendentes = Object.values(estado).some((e) => e.clipPend || e.clipPend2);
@@ -349,6 +366,21 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setTxtBusy(null); }
   }, [txtBusy, recarregar]);
+
+  // VOZ (teste): gera a tua voz (ElevenLabs) a LER o texto, para ouvires se o
+  // sotaque sai fiel ANTES de usar. Guarda em vozUrl; ouves no player da modal.
+  const [vozBusy, setVozBusy] = useState<string | null>(null);
+  const gerarVozTeste = useCallback(async (slug: string) => {
+    if (vozBusy) return;
+    setVozBusy(slug); setErro(null); setMsg('A gerar a tua voz (ElevenLabs)…');
+    try {
+      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg('Voz gerada. Ouve no player e vê se o sotaque sai fiel.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, vozUrl: j.vozUrl } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setVozBusy(null); }
+  }, [vozBusy, recarregar]);
 
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
@@ -416,6 +448,7 @@ export default function MetodoContaPage() {
             {geradosConta.length > 0 && <button onClick={melhorarLote} disabled={melLoteBusy || ambiguas === 0} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : ambiguas === 0 ? 'sem ambíguas' : `melhorar ambíguas (${ambiguas})`}</button>}
             {geradosConta.length > 0 && <button onClick={() => animarFaltam(faltamClip)} disabled={animarLoteBusy || !faltamClip.length} title="dispara (Kling) os clips em falta de todos os posts — ~$0.35 por clip; correm no servidor, podes sair" className="px-3 py-1.5 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarLoteBusy ? '🎬 a disparar…' : `🎬 animar clips em falta (${faltamClip.length})`}</button>}
             {aAnimar > 0 && <button onClick={colher} title="vai buscar os clips que já ficaram prontos no servidor" className="px-3 py-1.5 rounded-lg border border-emerald-400/30 text-emerald-300/90">🎬 a animar {aAnimar}… (colher prontos)</button>}
+            {geradosConta.length > 0 && <button onClick={recuperarClips} disabled={recuperarBusy} title="vai ao Replicate buscar TODOS os clips pagos que ficaram por guardar (mesmo os que pareciam falhados) — nada do que pagaste se perde" className="px-3 py-1.5 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{recuperarBusy ? '♻️ a recuperar…' : '♻️ recuperar clips pagos'}</button>}
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
@@ -560,7 +593,9 @@ export default function MetodoContaPage() {
                         ? <video src={c} controls autoPlay loop muted playsInline className="w-full rounded-xl border border-emerald-400/30" />
                         : p
                           ? <div className="aspect-[9/16] rounded-xl border border-dashed border-emerald-400/30 grid place-items-center text-center text-[0.55rem] text-emerald-300/80 px-2">🎬 a animar…<br/>(aparece sozinho)</div>
-                          : <div className="aspect-[9/16] rounded-xl border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40">sem clip</div>}
+                          : detalhe.clipErro
+                            ? <div className="aspect-[9/16] rounded-xl border border-dashed border-rose-400/40 grid place-items-center text-center text-[0.55rem] text-rose-300/90 px-2">⚠️ falhou<br/>{detalhe.clipErro.slice(0, 80)}<br/><span className="opacity-70">carrega &quot;animar&quot; outra vez</span></div>
+                            : <div className="aspect-[9/16] rounded-xl border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40">sem clip</div>}
                     </div>
                   ))}
                 </div>
@@ -579,9 +614,18 @@ export default function MetodoContaPage() {
               <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica (silhueta + energia, escuro). Depois anima para o movimento forte. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>
               <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta (mãe = Dualidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>
               <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual (tira ambiguidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
+              <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="gera a TUA voz (ElevenLabs) a ler o texto, para ouvires se o sotaque sai fiel antes de usar" className="px-2.5 py-1 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{vozBusy === detalhe.slug ? '🎙️ …' : '🎙️ gerar voz (teste)'}</button>
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
             </div>
+            {detalhe.vozUrl && (
+              <div className="mt-2 text-center">
+                <p className="text-[0.58rem] uppercase tracking-wider text-sky-300/90 mb-1">🎙️ a tua voz (ouve o sotaque)</p>
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                <audio src={detalhe.vozUrl} controls className="w-full" />
+                <p className="text-[0.55rem] opacity-40 mt-1">se o sotaque variar, não uses — dizes-me e tiramos a voz.</p>
+              </div>
+            )}
             <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>
             <div className="mt-3">
               <p className="text-[0.66rem] uppercase tracking-wider opacity-50 mb-1">Legenda (edita à mão)</p>
