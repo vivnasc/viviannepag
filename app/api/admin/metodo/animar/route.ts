@@ -45,9 +45,10 @@ export async function POST(req: Request) {
       const drama = slides[i]!.estilo === 'dramatico';
       const predId = await criarPredicaoClip(
         slides[i]!.imageUrl!, token,
-        // a tarde (dramático) leva vários beats (~15s): clip de 10s para a energia
-        // evoluir devagar e cobrir o texto SEM loop nem arrasto. A manhã: 5s chega.
-        drama ? PROMPT_MOVIMENTO_DRAMA : PROMPT_MOVIMENTO, drama ? 10 : 5,
+        // 5s para TODOS (a manhã e a tarde). O clip de 5s NÃO é lixo: no render
+        // estica devagar ao longo do reel e cobre o texto sem loop. Mudar para 10s
+        // tornaria inúteis os 5s já pagos — não fazemos isso.
+        drama ? PROMPT_MOVIMENTO_DRAMA : PROMPT_MOVIMENTO, 5,
         drama ? NEGATIVE_MOVIMENTO_DRAMA : NEGATIVE_MOVIMENTO,
         // CENA só no contemplativo (evita inventar objetos). No dramático NÃO — a
         // imagem já é luz a fluir e um prompt longo pendura/falha o Kling.
