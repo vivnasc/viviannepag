@@ -15,6 +15,7 @@ const PASTAS = {
   irma: { pt: 'nome-da-irma-livro', en: 'nome-da-irma-livro-en', capa: 'NOME-DA-IRMA-capa', outPt: 'O-NOME-DA-IRMA-pt.pdf', outEn: 'THE-SISTERS-NAME-en.pdf' },
   caderno: { pt: 'caderno-das-dividas-livro', en: 'caderno-das-dividas-livro-en', capa: 'CADERNO-capa', outPt: 'O-CADERNO-DAS-DIVIDAS-pt.pdf', outEn: 'THE-LEDGER-OF-DEBTS-en.pdf' },
   cheias: { pt: 'homem-das-cheias-livro', en: 'homem-das-cheias-livro-en', capa: 'CHEIAS-capa', outPt: 'O-HOMEM-DAS-CHEIAS-pt.pdf', outEn: 'THE-MAN-THE-FLOODS-BROUGHT-en.pdf' },
+  incomodo: { pt: 'nenhum-incomodo-livro', en: 'nenhum-incomodo-livro-en', capa: 'INCOMODO-capa', outPt: 'NENHUM-INCOMODO-pt.pdf', outEn: 'NO-TROUBLE-AT-ALL-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -172,7 +173,35 @@ const T_CHEIAS = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : T_AMPARO;
+const T_INCOMODO = LANG==='pt' ? {
+  tituloHtml:'Nenhum<br>Incómodo', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante V · A Mesa Comprida',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Plácida te doer em sítios reais, o nome do que ela carrega está em «A pessoa que nunca dá trabalho», na coleção Pertença. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Plácida. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'No Trouble<br>at All', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf V · The Long Table',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Plácida hurts you in real places, the name of what she carries is in “The Person Who Is No Trouble”, in the Belonging collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Plácida. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
