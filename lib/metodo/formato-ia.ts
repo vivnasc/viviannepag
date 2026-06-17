@@ -12,14 +12,27 @@ import { REFERENCIAS } from './referencias';
 import { limparTravessoes } from '@/lib/texto';
 import type { Formato } from './formatos';
 
-/** Gera os beats de um motor para um véu. `evitar` = ângulos já usados (anti-repetição). */
-export async function gerarFormatoBeats(formato: Formato, veu: VeuNome, apiKey: string, evitar: string[] = []): Promise<string[]> {
+/** Gera os beats de um motor para um véu. `evitar` = ângulos já usados (anti-repetição).
+ *  `estilo`: 'dramatico' (tarde — palavra que bate como a imagem) ou 'contemplativo'. */
+export async function gerarFormatoBeats(formato: Formato, veu: VeuNome, apiKey: string, evitar: string[] = [], estilo: 'contemplativo' | 'dramatico' = 'dramatico'): Promise<string[]> {
   const s = VEU_SEMENTE[veu];
   const materia = exemplosDimensao(veu, formato.dimensao);
   const ref = REFERENCIAS[veu];
   const estrutura = formato.beats.map((b, i) => `${i + 1}. [${b.papel}] ${b.instrucao}`).join('\n');
 
+  // o registo DRAMÁTICO da tarde: a palavra tem de bater tão forte como a cena
+  // dramática. NÃO é poesia/coach (isso continua proibido) — é intensidade crua:
+  // alto risco, confronto, peso. De que serve uma imagem dramática se a frase é morna?
+  const registo = estilo === 'dramatico'
+    ? `REGISTO DRAMÁTICO (essencial — a imagem é cinematográfica, a PALAVRA tem de bater igual; uma frase morna estraga tudo):
+- Intenso, cru, de alto risco. Confronta. Põe peso. Que pare o scroll e doa um bocadinho.
+- Direto à veia, 2.ª pessoa, presente. Verbos fortes. Nada de "talvez", "às vezes", "um pouco".
+- CONTINUA proibido: poesia, coach, espiritual, jargão, "alma/universo/tempestade/véu". Dramático é INTENSIDADE, não floreado.`
+    : `REGISTO CONTEMPLATIVO: calmo, próximo, de reconhecimento ("isto sou eu"), sem dramatizar.`;
+
   const sys = `Escreves os BEATS de um post de psicologia do Método VS (conta de Instagram). NÃO é um post didático nem uma aula: revela a DOR de um padrão e aponta uma DIREÇÃO, na linguagem das dores da vida (a pessoa pensa "isto sou eu").
+
+${registo}
 
 MOTOR: ${formato.nome}. ${formato.proposito}
 REGISTO DESTE MOTOR: ${formato.guia}

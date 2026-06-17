@@ -22,19 +22,24 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: { videoUrl?: string | null; legenda?: string | null; slides?: { texto?: string; conceito?: string; imageUrl?: string | null; veuReveal?: string | null; clipUrl?: string | null; clipPend?: boolean }[] }[] | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; clipTeste?: string | null; metodo?: { postId?: string; conta?: string; tipo?: string } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; clipTeste?: string | null; subtipo?: string | null; metodo?: { postId?: string; conta?: string; tipo?: string; formato?: string } } | null;
     created_at?: string;
   };
 
-  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null }> = {};
+  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null }> = {};
   for (const row of (data ?? []) as Row[]) {
     const postId = row.theme?.metodo?.postId ?? row.slug.replace(/^metodo-/, '');
-    const slide = row.dias?.[0]?.slides?.[0];
-    const slide2 = row.dias?.[0]?.slides?.[1]; // face 2 (revelação) dos posts de 2 faces
+    const slidesAll = row.dias?.[0]?.slides ?? [];
+    const slide = slidesAll[0];
+    const slide2 = slidesAll[1]; // face 2 (revelação) dos posts de 2 faces
+    const ehTarde = row.theme?.subtipo === 'nbeats';
     estado[postId] = {
       slug: row.slug,
       conta: row.theme?.metodo?.conta ?? null,
       tipo: row.theme?.metodo?.tipo ?? null,
+      subtipo: row.theme?.subtipo ?? null,
+      formato: row.theme?.metodo?.formato ?? null,
+      beats: ehTarde ? slidesAll.map((x) => x.texto ?? '').filter(Boolean) : [],
       texto: slide?.texto ?? row.brief ?? '',
       conceito: slide?.conceito ?? '',
       imageUrl: slide?.imageUrl ?? null,
