@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { FORMATOS } from '@/lib/metodo/formatos';
@@ -28,6 +28,24 @@ export default function MetodoFormatosPage() {
   // CAMADA 2: criar o reel dramático da tarde a partir deste motor+véu.
   const [criarBusy, setCriarBusy] = useState(false);
   const [criado, setCriado] = useState<{ slug: string; conta: string } | null>(null);
+
+  // PERSISTE no browser: gerar custa crédito de API — NÃO se perde ao sair/refrescar.
+  // Restaura ao abrir; grava sempre que muda.
+  const LS = 'metodo-formatos-lab-v1';
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(LS);
+      if (!raw) return;
+      const j = JSON.parse(raw) as { formato?: string; veu?: VeuNome; beats?: string[]; historico?: Record<string, string[]> };
+      if (j.formato) setFormato(j.formato as typeof formato);
+      if (j.veu) setVeu(j.veu);
+      if (Array.isArray(j.beats)) setBeats(j.beats);
+      if (j.historico) setHistorico(j.historico);
+    } catch { /* ignora */ }
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem(LS, JSON.stringify({ formato, veu, beats, historico })); } catch { /* ignora */ }
+  }, [formato, veu, beats, historico]);
 
   const f = FORMATOS.find((x) => x.id === formato)!;
 
