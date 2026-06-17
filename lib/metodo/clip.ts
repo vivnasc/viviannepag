@@ -19,9 +19,9 @@ export const NEGATIVE_MOVIMENTO =
 // presentes), sem assumir objetos que podem não existir. FORTE mas sem inventar lixo
 // nem deformar o que existe.
 export const PROMPT_MOVIMENTO_DRAMA =
-  'Cinematic dramatic motion of ONLY what is already present in this exact image: the existing light and energy pulse and breathe, god rays or glow shift slowly, clouds and atmospheric haze drift, water ripples, and any fabric or hair on a figure (only if a figure is present) sways gently. Keep the same composition and keep anything that exists intact (do NOT morph or distort a body). Do NOT add objects or elements that are not already in the image. Epic, emotional, flowing, alive. No camera shake.';
+  'Animate the luminous energy and particles of light that are already in this image: the light flows, swirls, rises, pulses and opens, sparks and dust drift, filaments shimmer. Continuous, hypnotic, elegant motion of the light itself. Keep the dark background and the composition. Do NOT add new objects; do NOT morph or distort. No camera shake.';
 export const NEGATIVE_MOVIMENTO_DRAMA =
-  'added objects, new elements not in the image, morphing body, distorted figure, extra limbs, deformed face, body horror, glitch, warping, text, watermark, logo, gold flecks, glitter confetti, random floating objects, fast jittery motion, camera shake';
+  'added objects, new elements not in the image, a standing person, morphing body, distorted figure, extra limbs, deformed face, body horror, glitch, warping, text, watermark, logo, glitter confetti, fast jittery motion, camera shake';
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
