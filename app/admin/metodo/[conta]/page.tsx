@@ -386,6 +386,21 @@ export default function MetodoContaPage() {
     finally { setVozBusy(null); }
   }, [vozBusy, recarregar]);
 
+  // SOM (ambiente dramático, ElevenLabs sound-generation): gera/regenera o som de
+  // fundo do post da tarde. Ouves no player. NÃO é a voz.
+  const [somBusy, setSomBusy] = useState<string | null>(null);
+  const gerarSomTeste = useCallback(async (slug: string) => {
+    if (somBusy) return;
+    setSomBusy(slug); setErro(null); setMsg('A gerar o som ambiente (ElevenLabs)…');
+    try {
+      const r = await fetch('/api/admin/metodo/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg('Som gerado. Ouve no player.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, som: j.som } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setSomBusy(null); }
+  }, [somBusy, recarregar]);
+
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
       <p>Conta desconhecida. <Link className="underline" href="/admin/metodo">Voltar</Link></p>
@@ -637,6 +652,7 @@ export default function MetodoContaPage() {
               {!tarde && <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>}
               {!tarde && <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>}
               <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="gera a TUA voz (ElevenLabs) a ler o texto, para ouvires se o sotaque sai fiel" className="px-2.5 py-1 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{vozBusy === detalhe.slug ? '🎙️ a gerar voz…' : '🎙️ gerar voz (teste)'}</button>
+              <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="gera o som ambiente dramático (ElevenLabs) de fundo do reel" className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{somBusy === detalhe.slug ? '🔊 a gerar som…' : '🔊 gerar som'}</button>
               </>; })()}
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
