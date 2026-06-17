@@ -1,0 +1,63 @@
+## 7. A irmã
+
+Prudência soube da carta do grossista antes de Benvinda lha contar, porque em Véspera as coisas sabem-se assim, pelo ar, e porque Aurora, que era sobrinha das duas, não tinha o cuidado das gerações antigas com o que se diz e o que se cala.
+
+Veio à Mercearia num fim de tarde de chuva, fechou a porta atrás de si, virou a tabuleta para *fechado* sem pedir licença, e foi direita à mesa dos fundos, onde a irmã e a sobrinha tinham os cadernos abertos. Prudência era a mais nova das três casas de Abílio, mais nova que Benvinda treze anos, e tinha o negócio dela, uma pequena casa de costura e enxovais que montara do nada e que podia ter crescido e nunca crescera, travada sempre na mesma linha invisível, na medida da aldeia, nem um palmo acima do que os seus tiveram. As duas irmãs eram, sem nunca o terem dito, a mesma ferida virada para dois lados: uma não cobrava o que lhe deviam, a outra não cobrava de si própria o direito de crescer. Uma dava de mais aos outros, a outra dava de menos a si. E talvez por serem tão parecidas é que se entendiam tão mal.
+
+— Mostra-me a carta — disse Prudência, sem se sentar.
+
+— Boa tarde também para ti — disse Benvinda.
+
+— A carta, mana. Não vim para boas tardes.
+
+Benvinda tirou a carta do avental, amarrotada, mole de tantos dias contra o corpo, e Prudência leu-a de pé, à luz fraca da loja, com os óculos na ponta do nariz, e a cara dela foi-se fechando, e quando acabou pousou a carta na mesa com um gesto seco.
+
+— Seis semanas. E tu, o que é que fizeste estas duas que já passaram?
+
+— Fui falar com as pessoas.
+
+— Falar. — Prudência disse a palavra como quem cospe um caroço. — Foste falar. Foste levar mel à viúva do moleiro e beber o vinho do Marçais, foi o que tu foste fazer, que a vila inteira já sabe, mana, a vila inteira anda a rir-se que a Benvinda agora anda a fazer visitas. Andas a pedir desculpa de porta em porta por teres a lata de querer o que é teu. Foi isso que foste fazer.
+
+Benvinda corou. Que a vila andasse a comentar as visitas dela era uma coisa que não lhe ocorrera, e doeu-lhe mais do que devia, porque confirmava o pior: que mesmo a tentar cobrar ela só conseguia fazer figura de boa-tola.
+
+— E o que é que tu querias que eu fizesse, Prudência? Que fosse de porta em porta a ameaçar as pessoas? A pôr-lhes a dívida na cara? Isso é o que faria a casa grande.
+
+— A casa grande. — Prudência puxou enfim o banco e sentou-se, devagar, e quando voltou a falar a voz tinha mudado, descera para um sítio mais fundo e mais antigo. — Tu e a casa grande. O pai e a casa grande. Foi sempre essa a história desta família, e eu estou farta dela, mana, estou farta há cinquenta anos. Toda a desgraça desta casa cabe nessa desculpa: não cobramos para não sermos a casa grande, não crescemos para não sermos a casa grande, não pedimos o que é nosso para não sermos a casa grande. E sabes o que é que nós somos, à conta de não querermos ser a casa grande? Somos pobres. Somos pobres e somos pisados, e morremos pobres e pisados a achar que isso é virtude. O pai morreu a achar isso. Tu vais pelo mesmo caminho. E eu, que Deus me perdoe, também, com a minha costura que nunca cresce porque crescer é feio, porque ter é roubar, porque sobressair é trair os nossos. — Bateu na mesa, uma vez, sem força, mais de cansaço que de zanga. — Estou farta. Estou farta de ser pobre por causa do medo de um homem que já morreu.
+
+Benvinda ouviu, e o que a irmã dizia era verdade, e era por ser verdade que doía, e foi por doer que respondeu mal, como se responde mal às verdades das irmãs:
+
+— Fala bem do pai. O pai era um homem bom.
+
+— O pai era um homem com medo — disse Prudência. — As duas coisas não se brigam, mana, podem morar juntas, e moraram nele a vida toda. Era bom, sim. E tinha tanto medo de ser como os que lhe roubaram a terra que preferiu não ter nada a ter de cobrar fosse o que fosse. E ensinou-nos isso como quem ensina uma reza, e nós aprendemos, e olha para nós: tu a fechar a loja para não cobrares, eu a apertar a minha vida numa medida pequena para não crescer. Somos as filhas do medo dele, Benvinda. Herdámos o medo todo e a terra nenhuma.
+
+— A mãe avisou-nos — disse Prudência, mais baixo, e a chuva no vidro encheu a pausa. — Lembras-te? A mãe, no fim, já na cama, chamou-nos às duas e disse-nos para não sermos como ela. Lembras-te do que ela disse? «Não passem a vida a fazer a conta que o vosso pai não faz. Façam a conta à frente dele, à mesa, alto, e que ele aprenda a ouvi-la.» Foi a última coisa que ela nos disse de jeito, mana, e nós saímos do quarto e fizemos as duas exatamente o contrário. Tu foste continuar a dar como o pai, eu fui continuar a velar como ela, calada, encolhida. Nenhuma das duas teve a coragem que ela nos pediu, que era a do meio: fazer a conta alto. Pôr o número em cima da mesa, à frente de toda a gente, sem vergonha de dar nem vergonha de cobrar. — Riu-se, sem alegria. — A mãe morreu a pedir-nos isso, e nós, as duas filhas, somos a prova de que ela morreu sem ser ouvida. Cinquenta anos depois, mana, tens uma carta de um grossista a obrigar-te ao que a mãe te pediu de borla. Vê se desta vez fazes o que ela disse. Por ela, se não for por ti.
+
+Custou a Benvinda ouvir aquilo, porque era verdade e porque vinha com a mãe lá dentro, e a mãe era o sítio mais fundo de todos.
+
+— Eu não me lembrava dessa frase — disse, baixinho.
+
+— Pois não. Tu guardaste a do pai, a bonita, a que dava jeito. Eu guardei a da mãe, a difícil, a que obrigava. Cada uma de nós ficou com a herança que lhe pesava menos. Mas a da mãe é que era a boa, Benvinda. A da mãe é que nos podia ter salvo às duas, e nós deitámo-la fora porque dava trabalho.
+
+Ficaram caladas. A chuva batia no vidro, e Aurora, a um canto, não dizia nada, mas ouvia tudo, e guardava tudo, porque aquela conversa entre as tias era também sobre ela, sobre a corrida sem fim dela, sobre a terceira maneira de a mesma ferida se virar: nem dar de mais nem encolher-se, mas correr, correr para não chegar nunca ao sítio onde se teria de parar e olhar para o que se é.
+
+— Tu não és boa, mana — disse Prudência, por fim, e disse-o sem maldade, devagar, como se entrega uma coisa pesada que se carregou tempo de mais. — Desculpa, mas tens de ouvir, e não há mais ninguém que to diga, porque a vila toda gosta de te achar boa, dá-lhes jeito que tu sejas boa, sai-lhes barato. Mas eu sou tua irmã e digo-te a verdade: tu não és boa, tu tens medo. E a tua bondade, essa bondade toda que a vila louva, é o teu medo bem vestido. E o pior, mana, o pior de tudo, é que não és só tu a pagar esse medo. Tu fazes a vila inteira pagá-lo, em juros que ninguém vê. Cada vez que perdoas uma dívida por medo de cobrar, ensinas mais um a não pagar. Cada vez que dás a mais, ensinas mais um a esperar de mais. Tu não estás a ser boa para a vila, Benvinda. Estás a estragá-la, devagar, há quarenta anos, a ensiná-la a não respeitar quem dá. E quando fechares, e tu vais fechar com esse passo, a vila vai dizer coitada, e vai à camionete da cidade, e em meio ano ninguém se lembra de que houve aqui uma Mercearia onde se entrava de mãos vazias. Esse vai ser o prémio da tua bondade. O esquecimento.
+
+Foi de mais. Benvinda levantou-se, e a zanga, que ela continha havia muito, saiu-lhe enfim, e saiu injusta, como saem as zangas verdadeiras:
+
+— Sai. Sai da minha loja, Prudência. Tu vens aqui, que nunca cá puseste os pés para ajudar, e dizes-me que eu estrago a vila, eu, que sustentei meia vila quando tu andavas a coser bainhas para fora! Sai. Cada um trata da sua medida, já que falas em medida. A minha loja é minha, e o medo é meu, e se eu quiser fechar com ele fecho, e não preciso que a minha irmã mais nova me venha dizer quem eu sou.
+
+Prudência levantou-se. Não respondeu à zanga, o que foi pior, porque a quem responde pode-se continuar a brigar, e a quem se cala fica-se a ouvir o eco do que se gritou. Foi até à porta, virou a tabuleta outra vez para *aberto*, e antes de sair disse, sem se voltar, baixo, a frase que Benvinda havia de levar para a cama e que ia ser, embora ela ainda não soubesse, a que mais a empurraria para a frente:
+
+— Eu coso bainhas para fora, mana, porque tenho medo de cortar um vestido inteiro e ele ficar bonito de mais e os nossos acharem que eu me armo. Tu e eu temos a mesma doença. A diferença é que tu ainda tens seis semanas para te curares, e a faca às costas para te obrigar. Eu não tenho faca nenhuma. Eu posso ir coendo bainhas até morrer, e ninguém me obriga a nada, e é essa a minha desgraça, não ter um grossista que me ameace. Aproveita o teu, mana. Aproveita a tua ameaça. É a melhor coisa que te aconteceu na vida, e tu ainda não percebeste.
+
+E pôs o xaile na cabeça, e abriu a porta para a chuva, e antes de sair ainda se voltou uma última vez, e desta vez a voz já não tinha aspereza nenhuma, tinha só cansaço de irmã:
+
+— Eu não vim cá brigar contigo, mana. Eu vim porque tive medo. Tive medo de que tu fechasses a loja e morresses pobre e amada como o pai, e me deixasses a mim, sozinha, a última desta casa, a coser bainhas até morrer com o mesmo medo. Tu és a mais velha. Se tu não venceres isto, eu não tenho a quem ir buscar coragem. Estás a perceber? Não é só a tua loja que está em jogo. É a possibilidade de alguém desta família, uma vez que seja, em três gerações, conseguir olhar para o dinheiro sem medo. Se tu conseguires, mana, eu talvez também consiga. Se tu fechares, fechei eu também, lá em casa, com a minha costura pequena. Por isso é que eu te falei duro. Não foi para te magoar. Foi para te empurrar. És a minha irmã mais velha. Tu primeiro.
+
+E saiu para a chuva, e a porta bateu, e na Mercearia ficaram a irmã mais velha e a sobrinha, e o silêncio depois da irmã mais nova, que era o pior silêncio de todos, o que vem cheio de razão alheia. Benvinda sentou-se, e ficou muito tempo de mão no caderno de cartão, e Aurora teve o bom senso de não dizer uma palavra, de não fazer uma conta, de só lá estar. Pela cabeça de Benvinda passou, naquele silêncio, a infância das duas. Prudência nascera tarde, treze anos depois dela, quando a mãe já se julgava sem mais filhos, e fora criada quase por Benvinda, que lhe pegava ao colo enquanto a mãe cosia e o pai dava ao balcão. As duas tinham crescido naquela mesma loja, naquela mesma cozinha de trás, e tinham aprendido juntas, sem palavras, a lição da casa: que dar é bonito e cobrar é feio, que ter é suspeito, que sobressair é trair. Benvinda virara-se para a loja e Prudência para a costura, mas a lição fora a mesma, e dera nas duas o mesmo fruto torto: uma loja que não cobrava e uma costura que não crescia, as duas filhas a tornarem pequena, cada uma à sua maneira, a vida que podiam ter tido grande. E o pior, pensou Benvinda, é que se tinham afastado uma da outra exatamente por serem tão iguais: cada uma via na outra o espelho da própria doença, e ninguém gosta de viver ao pé do espelho que mostra o que se esconde. Por isso brigavam. Brigavam porque se reconheciam, e o reconhecimento, sem cura, é uma forma de acusação.
+
+E ao fim de muito tempo Benvinda disse, baixinho, para o caderno, para a chuva, para a irmã que já ia longe:
+
+— O pior é que ela tem razão. — Benvinda passou a mão pela capa do caderno, devagar, como quem afaga um animal velho e culpado. — E o pior do pior é o que ela disse dos juros que ninguém vê. Eu sempre achei que a minha bondade não fazia mal a ninguém. Que era só comigo, que era só eu a perder. E a Prudência mostrou-me que não, que eu, a dar de mais, a perdoar sempre, andei quarenta anos a ensinar a vila a não respeitar quem dá. Estraguei-os, Aurora. Aos poucos. O Marçais não nasceu a achar que a Mercearia era de graça: fui eu que lho ensinei, fiado a fiado, risco a risco. Se ele me deve há onze anos sem vergonha nenhuma, a culpa não é só dele, é minha também, que lhe dei onze anos de licença. A minha bondade não foi só uma cela para mim. Foi um veneno devagar para eles. E isso, minha filha, é a coisa mais difícil de engolir de tudo o que a minha irmã me veio dizer: que eu, a julgar-me boa, andei a fazer mal à vila inteira. Que há maneiras de ser boa que estragam mais que muita maldade.
+
+E ao fim de mais um tempo, ainda mais baixo, uma coisa que nunca dissera em voz alta em sessenta e um anos: — Eu tenho medo, Aurora. Tenho um medo de cobrar que me faz suar as mãos. E passei a vida a chamar-lhe bondade, porque bondade era um nome que se podia dizer ao espelho sem vergonha. Mas é medo. A minha irmã tirou-lhe o vestido e mostrou-mo nu, e agora que o vi nu já não o consigo voltar a vestir de bonito. E não sei o que é pior, minha filha: se viver com ele vestido a vida toda, se ter de o enfrentar nu nas seis semanas que me restam.

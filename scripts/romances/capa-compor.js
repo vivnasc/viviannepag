@@ -32,6 +32,10 @@ const TEXTOS = {
     pt: { serie: 'BIBLIOTECA DE VÉSPERA · II', t1: 'O Nome', t2: 'da Irmã', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
     en: { serie: 'THE VÉSPERA LIBRARY · II', t1: "The Sister's", t2: 'Name', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
   },
+  caderno: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · III', t1: 'O Caderno', t2: 'das Dívidas', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · III', t1: 'The Ledger', t2: 'of Debts', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
 };
 const T = (TEXTOS[LIVRO] || TEXTOS.amparo)[LANG === 'en' ? 'en' : 'pt'];
 
