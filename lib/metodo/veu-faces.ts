@@ -47,15 +47,38 @@ export const VEU_DOR: Record<VeuNome, string> = {
   Dualidade: 'Fazes as contas das relações. Sentes o mundo do outro lado de um vidro. Saudade de uma pertença que não sabes nomear.',
 };
 
-// As LIGAÇÕES entre véus (a teia). A primeira, descoberta na vida, não no mapa.
-export interface LigacaoVeu { de: VeuNome; para: VeuNome; nome: string; texto: string; }
+// As LIGAÇÕES entre véus (a TEIA). Não há só uma. O pilar já nomeia várias; a
+// "Procura sem Chegada" é a NOVA, descoberta na vida. A Dualidade não é uma ponte
+// entre dois, é a RAIZ de todos (ver RAIZ).
+export interface LigacaoVeu { de: VeuNome; para: VeuNome; nome: string; texto: string; nova?: boolean; }
 export const LIGACOES: LigacaoVeu[] = [
   {
+    de: 'Esforço', para: 'Desolação',
+    nome: 'O mesmo nó',
+    texto: 'O esforço é a fuga mais socialmente aplaudida da desolação. Enquanto fazes, não paras. Enquanto não paras, não chegas ao silêncio. E enquanto não chegas ao silêncio, não tens de sentir o vazio.',
+  },
+  {
     de: 'Desolação', para: 'Horizonte',
-    nome: 'A Procura sem Chegada',
+    nome: 'A Procura sem Chegada', nova: true,
     texto: 'A Desolação não te empurra só para a fuga. Às vezes empurra-te para a procura. E quando a procura encontra o Horizonte (ainda não, falta mais, continua), transforma-se numa sala de espera sem fim. A Desolação faz a fome, o Horizonte promete a refeição sempre no prato seguinte.',
   },
+  {
+    de: 'Horizonte', para: 'Permanência',
+    nome: 'Os dois ladrões do presente',
+    texto: 'O futuro puxa-te (o Horizonte, o "quando serei feliz") e o passado segura-te (a Permanência, quem já foste). Os dois juntos roubam-te o presente por inteiro, um atirando-te para a frente, o outro prendendo-te ao que já foi.',
+  },
+  {
+    de: 'Turbilhão', para: 'Memória',
+    nome: 'A cabeça fora do agora',
+    texto: 'A cabeça que não para anda quase sempre a remoer o passado ou a ensaiar um futuro à imagem desse passado. Raramente no agora.',
+  },
 ];
+
+// A Dualidade é a RAIZ comum, não uma ponte entre dois véus.
+export const RAIZ: { veu: VeuNome; texto: string } = {
+  veu: 'Dualidade',
+  texto: 'Por baixo de todos vive a Dualidade, a sensação de separação. Foi ela que te fez agarrar à identidade, prender-te à história, encher o vazio, correr para o horizonte, esforçar-te para seres amada. Quando ela afrouxa, todos os outros perdem força ao mesmo tempo, como folhas de um ramo que finalmente se solta.',
+};
 
 export const FACES_ORDEM: { chave: keyof FacesVeu; titulo: string; nova: boolean }[] = [
   { chave: 'dor', titulo: 'A dor', nova: false },

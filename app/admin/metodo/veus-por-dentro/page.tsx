@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
-import { VEU_FACES, VEU_DOR, LIGACOES, FACES_ORDEM } from '@/lib/metodo/veu-faces';
+import { VEU_FACES, VEU_DOR, LIGACOES, RAIZ, FACES_ORDEM } from '@/lib/metodo/veu-faces';
 import type { VeuNome } from '@/lib/metodo/contas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -53,10 +53,16 @@ export default function VeusPorDentroPage() {
         <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">As ligações (a teia)</p>
         {LIGACOES.map((l, i) => (
           <div key={i} className="rounded-xl border border-sky-400/25 bg-sky-400/[0.05] p-3 mb-2">
-            <p className="text-[0.78rem]"><b className="text-sky-300">{l.nome}</b> <span className="opacity-50 text-[0.66rem]">· {l.de} → {l.para}</span></p>
+            <p className="text-[0.78rem]"><b className="text-sky-300">{l.nome}</b>{l.nova && <span className="ml-1.5 text-[0.55rem] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">nova</span>} <span className="opacity-50 text-[0.66rem]">· {l.de} → {l.para}</span></p>
             <p className="leading-snug text-[0.92rem] mt-1" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{l.texto}</p>
           </div>
         ))}
+
+        {/* A raiz comum (Dualidade) — não é ponte, é o que está por baixo de todos */}
+        <div className="rounded-xl border border-amber-400/25 bg-amber-400/[0.05] p-3 mt-2">
+          <p className="text-[0.78rem]"><b className="text-amber-300">A raiz de todos</b> <span className="opacity-50 text-[0.66rem]">· {RAIZ.veu}</span></p>
+          <p className="leading-snug text-[0.92rem] mt-1" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{RAIZ.texto}</p>
+        </div>
 
         <p className="text-[0.7rem] opacity-45 mt-6">Valida o retrato do Esforço. Se for assim, preencho os outros 6 da mesma matéria (dos teus manuais), um a um, com o teu sim.</p>
       </div>
