@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -115,6 +115,19 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setHoraBusy(false); }
   }, [conta, horaBusy, horaInput, recarregar]);
+  // ARRUMA por período: manhã (frase, 2 faces) às 11h, tarde (motor) às 17h.
+  const arrumarHoras = useCallback(async () => {
+    if (!conta || horaBusy) return;
+    setHoraBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/hora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, auto: true }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`${j.mudados ?? 0} posts arrumados: manhã às 11h, tarde às 17h.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setHoraBusy(false); }
+  }, [conta, horaBusy, recarregar]);
 
   // legenda: editar à mão a legenda de UM post (a Vivianne corrige o texto da
   // publicação). E repor TODAS (Fase 1, sem funil) de uma vez.
@@ -358,6 +371,9 @@ export default function MetodoContaPage() {
   // por dia (a data é o plano): para a grelha de calendário.
   const porDia = new Map<string, EstadoPost[]>();
   for (const e of geradosConta) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
+  // dentro de cada dia, ORDENA por hora (manhã 11h antes da tarde 17h) — para o
+  // calendário não ser uma salada de manhã+tarde sem nexo.
+  for (const lista of porDia.values()) lista.sort((a, b) => (a.hora ?? '99').localeCompare(b.hora ?? '99'));
   const semDataList = porDia.get('sem data') ?? [];
 
   // grelha de calendário: colunas Seg-Dom, linhas as semanas. Vê-se tudo num relance.
@@ -410,6 +426,9 @@ export default function MetodoContaPage() {
                 <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: conta.cor, color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
               </span>
             )}
+            {geradosConta.length > 0 && (
+              <button onClick={arrumarHoras} disabled={horaBusy} title="manhã (frase) às 11h, tarde (motor) às 17h" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{horaBusy ? '…' : '🕐 arrumar (manhã 11h · tarde 17h)'}</button>
+            )}
             {geradosConta.length > 0 && <button onClick={reporLegendas} disabled={reporBusy} title="repor as legendas sem o funil de venda (Fase 1)" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{reporBusy ? 'a repor…' : 'repor legendas (Fase 1)'}</button>}
             {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
@@ -442,6 +461,8 @@ export default function MetodoContaPage() {
                         <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}</div>
                         {posts.map((e) => (
                           <div key={e.slug} className={`relative mb-1 rounded-md ${sel.has(e.slug) ? 'ring-2 ring-rose-400' : ''}`}>
+                            {/* hora + período: manhã (frase) vs tarde (motor dramático), para não misturar */}
+                            <span className="absolute bottom-1 left-1 z-10 text-[0.5rem] px-1 py-0.5 rounded" style={{ background: (e.hora ?? '') >= '15:00' ? 'rgba(235,174,74,0.9)' : 'rgba(0,0,0,0.7)', color: (e.hora ?? '') >= '15:00' ? '#0F0F1A' : '#F2E8DC' }} title={(e.hora ?? '') >= '15:00' ? 'tarde · motor dramático' : 'manhã'}>{(e.hora ?? '').slice(0, 5) || '—'}</span>
                             <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${conta.cor}66`}` }}>
                               <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} veuReveal={e.veuReveal ?? undefined} imageUrl={e.imageUrl ?? undefined} prog={1} />
                             </button>
@@ -488,7 +509,25 @@ export default function MetodoContaPage() {
                 <p className="text-center text-[0.55rem] opacity-40 mt-1">é este que vai para o Publicar. Em baixo: as faces e os clips de origem.</p>
               </div>
             )}
-            {detalhe.texto2 ? (
+            {detalhe.subtipo === 'nbeats' ? (
+              // TARDE · motor dramático: formato PRÓPRIO (N beats sobre 1 cena), não 2 faces.
+              <div>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">tarde · motor{detalhe.formato ? ` · ${detalhe.formato}` : ''}</span>
+                  <span className="text-[0.55rem] opacity-50">{detalhe.beats.length} beats sobre 1 cena</span>
+                </div>
+                <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={detalhe.clip ?? undefined} conta={conta} anim="reveal" prog={1} />
+                <ol className="mt-2 space-y-1.5">
+                  {detalhe.beats.map((b, i) => (
+                    <li key={i} className="flex gap-2 text-[0.82rem] rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2">
+                      <span className="text-[0.6rem] opacity-40 mt-0.5">{i + 1}</span>
+                      <span className="whitespace-pre-line leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a cena mexe e os beats aparecem em sequência (com som)</p>
+              </div>
+            ) : detalhe.texto2 ? (
               <div>
                 <div className="grid grid-cols-2 gap-2">
                   <div>

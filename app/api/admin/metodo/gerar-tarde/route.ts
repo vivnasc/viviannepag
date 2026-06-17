@@ -51,10 +51,25 @@ export async function POST(req: Request) {
   if (!veu) return NextResponse.json({ erro: 'veu' }, { status: 400 });
   const contaId = contaDoVeu(veu);
   const conta = CONTAS[contaId];
+  const supabase = getSupabaseAdmin();
 
-  // data: hoje (local) por defeito; a Vivianne ajusta na agenda.
-  const hoje = new Date();
-  const data = body.data || `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
+  // DATA: não amontoa tudo em "hoje". Escolhe o PRÓXIMO dia livre da TARDE desta
+  // conta (a tarde tem 1 post/dia, às 17h), para o calendário ficar organizado e
+  // não virar salada com a manhã. (a Vivianne pode mudar a data depois.)
+  const fmtData = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  let data = body.data || '';
+  if (!data) {
+    const ocupadas = new Set<string>();
+    try {
+      const { data: ex } = await supabase.from('carousel_collections').select('theme').like('slug', 'metodo-tarde-%');
+      for (const r of (ex ?? []) as { theme?: { agendadoEm?: string; metodo?: { conta?: string } } }[]) {
+        if (r.theme?.metodo?.conta === contaId && r.theme?.agendadoEm) ocupadas.add(r.theme.agendadoEm);
+      }
+    } catch { /* sem histórico */ }
+    const d = new Date();
+    for (let k = 0; k < 60; k++) { const cand = fmtData(d); if (!ocupadas.has(cand)) { data = cand; break; } d.setDate(d.getDate() + 1); }
+    if (!data) data = fmtData(new Date());
+  }
   const slug = `metodo-tarde-${formato.id}-${veu.toLowerCase()}-${Date.now().toString(36)}`;
 
   // 1) BEATS (texto do motor)
@@ -109,7 +124,6 @@ export async function POST(req: Request) {
     },
   };
 
-  const supabase = getSupabaseAdmin();
   const { error } = await supabase.from('carousel_collections').upsert([row], { onConflict: 'slug' });
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, slug, conta: contaId, beats, temImagem: !!bgUrl, temSom: !!faixaUrlTarde });

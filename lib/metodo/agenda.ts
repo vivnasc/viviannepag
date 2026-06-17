@@ -15,11 +15,11 @@ import { aberturaDaConta } from './abertura';
 
 export const DIAS_POST = [1, 3, 5]; // segunda, quarta, sexta (getDay: 0=dom)
 export const HORA_POST = '11:00';
-// A MÃE (@vivianne.dos.santos) partilha a conta com as séries diárias e a loja,
-// que já ocupam a manhã e a noite (vcsabia 07h · 7 Véus 13h · hojeemmim 21h).
-// Por isso o método da mãe vai para a TARDE (17h), o vão livre do dia, para não
-// amontoar conteúdo. As portas (ver/vir/viver) têm conta própria → ficam às 11h.
-export const HORA_POST_MAE = '17:00';
+// MANHÃ = 11h (a frase contemplativa, em todas as contas). A TARDE (motor
+// dramático) vai às 17h (ver HORA_POST_TARDE / planoTarde). Antes a mãe ia toda
+// às 17h; agora a manhã da mãe é 11h e os 17h ficam para o motor da tarde.
+export const HORA_POST_MAE = '11:00';
+export const HORA_POST_TARDE = '17:00'; // motor dramático da tarde
 export const horaDoMetodo = (conta: string): string => (conta === 'mae' ? HORA_POST_MAE : HORA_POST);
 
 /** 'YYYY-MM-DD' a partir de componentes locais (nunca toISOString). */

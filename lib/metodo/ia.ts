@@ -51,7 +51,7 @@ NÃO REPETIR FÓRMULA (regra dura): NÃO ponhas sempre uma silhueta humana com u
 COR DESTA CONTA (a luz/atmosfera sai nesta paleta): ${corMundo}. Representa: ${conta.depois}
 ${frase ? `A FRASE deste post é: «${frase}».
 CONEXÃO IMAGEM↔TEXTO (TÃO importante como o drama): a cena tem de ENCARNAR esta frase — o ESTADO ou a METÁFORA concreta por trás dela — NÃO um fundo épico genérico. A frase manda o ASSUNTO e a EMOÇÃO; o tratamento cinematográfico e a cor da conta dão o espetáculo. Ex.: frase sobre adiar a vida → um limiar/porta com luz do outro lado; sobre carregar peso → uma figura minúscula a atravessar uma imensidão; sobre repetir o passado → um lugar em ruínas ao entardecer. Concreto e sensorial.` : 'ASSUNTO: uma cena cinematográfica concreta que encarne o significado da conta, variada, dramática.'}
-MOVIMENTO (a imagem vai ser ANIMADA depois, com força): compõe para que a luz/atmosfera possa MEXER — luz a pulsar, raios a deslocar-se, nuvens/névoa a derivar, água a ondular, chuva, tecido ao vento. Movimento FORTE mas natural.
+MOVIMENTO É O PROTAGONISTA (regra dura — a imagem vai ser ANIMADA; sem isto o vídeo fica pobre): a cena TEM de ter um ELEMENTO GRANDE que se mova mesmo — mar agitado, ondas, tempestade, nuvens a correr, chuva, fogo/brasas, fumo de uma fonte real, água a cair, luz/energia a pulsar, névoa densa a rolar. Se houver uma figura humana, fica PEQUENA e parada e NÃO é ela a dar o movimento (uma silhueta parada só ganha fumo à volta e fica pardo, pobre). O dinamismo está no MUNDO à volta, não numa pessoa imóvel.
 ${evita}
 
 Termina sempre com: ${FUNDO_REGRAS_DRAMA}.
