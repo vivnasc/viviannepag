@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   const { data: row, error } = await supabase.from('carousel_collections').select('dias, theme').eq('slug', slug).maybeSingle();
   if (error || !row) return NextResponse.json({ erro: 'nao-encontrado' }, { status: 404 });
 
-  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ imageUrl?: string | null; clipUrl?: string | null; clipPredId?: string | null; clipPend?: boolean; estilo?: string | null; notaVisual?: string | null }>; videoUrl?: string | null }>;
+  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ imageUrl?: string | null; clipUrl?: string | null; clipPredId?: string | null; clipPend?: boolean; clipErro?: string | null; estilo?: string | null; notaVisual?: string | null }>; videoUrl?: string | null }>;
   const slides = dias[0]?.slides ?? [];
   const comImagem = slides.map((_, i) => i).filter((i) => slides[i]?.imageUrl);
   // quais faces animar: a indicada; senão as que TÊM imagem mas AINDA NÃO têm clip
@@ -45,19 +45,27 @@ export async function POST(req: Request) {
       const drama = slides[i]!.estilo === 'dramatico';
       const predId = await criarPredicaoClip(
         slides[i]!.imageUrl!, token,
+        // 5s para TODOS (a manhã e a tarde). O clip de 5s NÃO é lixo: no render
+        // estica devagar ao longo do reel e cobre o texto sem loop. Mudar para 10s
+        // tornaria inúteis os 5s já pagos — não fazemos isso.
         drama ? PROMPT_MOVIMENTO_DRAMA : PROMPT_MOVIMENTO, 5,
         drama ? NEGATIVE_MOVIMENTO_DRAMA : NEGATIVE_MOVIMENTO,
-        slides[i]!.notaVisual ?? undefined, // a CENA real da imagem (anima o que lá está)
+        // CENA só no contemplativo (evita inventar objetos). No dramático NÃO — a
+        // imagem já é luz a fluir e um prompt longo pendura/falha o Kling.
+        drama ? undefined : (slides[i]!.notaVisual ?? undefined),
       );
       slides[i]!.clipPredId = predId;
       slides[i]!.clipPend = true; // fica "a animar" até /colher trazer o MP4
+      slides[i]!.clipErro = null;
       disparados++;
+      // GRAVA JÁ o id (zero tolerância a perder clips pagos): se algo falhar a
+      // seguir, o id está guardado e o clip é sempre recuperável (Replicate guarda-o).
+      await supabase.from('carousel_collections').update({ dias }).eq('slug', slug);
     } catch (e) {
       ultimoErro = e instanceof Error ? e.message : String(e);
     }
   }
 
   if (!disparados) return NextResponse.json({ erro: 'kling', detalhe: ultimoErro }, { status: 502 });
-  await supabase.from('carousel_collections').update({ dias }).eq('slug', slug);
   return NextResponse.json({ ok: true, pendentes: disparados });
 }

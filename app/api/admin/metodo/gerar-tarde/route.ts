@@ -70,7 +70,9 @@ export async function POST(req: Request) {
     for (let k = 0; k < 60; k++) { const cand = fmtData(d); if (!ocupadas.has(cand)) { data = cand; break; } d.setDate(d.getDate() + 1); }
     if (!data) data = fmtData(new Date());
   }
-  const slug = `metodo-tarde-${formato.id}-${veu.toLowerCase()}-${Date.now().toString(36)}`;
+  // slug SEM acentos (o storage não aceita ã/ç na chave: ex. "turbilhão").
+  const veuSlug = veu.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+  const slug = `metodo-tarde-${formato.id}-${veuSlug}-${Date.now().toString(36)}`;
 
   // 1) BEATS (texto do motor)
   let beats: string[];

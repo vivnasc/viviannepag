@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
 const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
 // pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
@@ -30,6 +30,10 @@ export default function MetodoContaPage() {
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [melBusy, setMelBusy] = useState<string | null>(null);
+  // ORGANIZAÇÃO: o calendário mostra UM período de cada vez (manhã = frase 11h;
+  // tarde = motor 17h), nunca os dois amontoados. E esconde os publicados.
+  const [vista, setVista] = useState<'manha' | 'tarde'>('manha');
+  const [esconderPub, setEsconderPub] = useState(true);
 
   const toggleSel = (slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; });
 
@@ -290,6 +294,23 @@ export default function MetodoContaPage() {
     } catch { /* tenta na próxima */ }
   }, [recarregar]);
 
+  // RECUPERAR clips (zero tolerância a perder clips pagos): força a buscar ao
+  // Replicate TODAS as previsões pagas que ficaram por guardar — mesmo as que
+  // pareciam falhadas. Nada do que pagaste se perde.
+  const [recuperarBusy, setRecuperarBusy] = useState(false);
+  const recuperarClips = useCallback(async () => {
+    if (recuperarBusy) return;
+    setRecuperarBusy(true); setErro(null); setMsg('A recuperar clips pagos no Replicate…');
+    try {
+      const r = await fetch('/api/admin/metodo/colher', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ force: true }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`Recuperação: ${j.colhidos ?? 0} clip(s) recuperado(s)${j.pendentes ? `, ${j.pendentes} ainda a processar` : ''}.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setRecuperarBusy(false); }
+  }, [recuperarBusy, recarregar]);
+
   // colhe ao abrir (apanha o que ficou pronto enquanto saíste) e, enquanto houver
   // faces a animar, vai colhendo a cada 15s — o clip aparece sozinho na página.
   const haPendentes = Object.values(estado).some((e) => e.clipPend || e.clipPend2);
@@ -350,6 +371,52 @@ export default function MetodoContaPage() {
     finally { setTxtBusy(null); }
   }, [txtBusy, recarregar]);
 
+  // VOZ (teste): gera a tua voz (ElevenLabs) a LER o texto, para ouvires se o
+  // sotaque sai fiel ANTES de usar. Guarda em vozUrl; ouves no player da modal.
+  const [vozBusy, setVozBusy] = useState<string | null>(null);
+  const gerarVozTeste = useCallback(async (slug: string) => {
+    if (vozBusy) return;
+    setVozBusy(slug); setErro(null); setMsg('A gerar a tua voz (ElevenLabs)…');
+    try {
+      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg('Voz gerada. Ouve no player e vê se o sotaque sai fiel.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, vozUrl: j.vozUrl } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setVozBusy(null); }
+  }, [vozBusy, recarregar]);
+
+  // SOM (ambiente dramático, ElevenLabs sound-generation): gera/regenera o som de
+  // fundo do post da tarde. Ouves no player. NÃO é a voz.
+  const [somBusy, setSomBusy] = useState<string | null>(null);
+  const gerarSomTeste = useCallback(async (slug: string) => {
+    if (somBusy) return;
+    setSomBusy(slug); setErro(null); setMsg('A gerar o som ambiente (ElevenLabs)…');
+    try {
+      const r = await fetch('/api/admin/metodo/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg('Som gerado. Ouve no player.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, som: j.som } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setSomBusy(null); }
+  }, [somBusy, recarregar]);
+
+  // FORMATO VISUAL (vir = regressar): gera UMA cena de luz + UMA linha. Pouco texto,
+  // atmosfera imersiva — a conta passa a sentir-se diferente das outras.
+  const [visualBusy, setVisualBusy] = useState(false);
+  const gerarVisual = useCallback(async () => {
+    if (!conta || visualBusy) return;
+    setVisualBusy(true); setErro(null); setMsg('A gerar um visual (cena de luz + 1 linha)…');
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-visual', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`Visual criado: «${j.linha}». Abre, anima (a luz a fluir) e renderiza.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setVisualBusy(false); }
+  }, [conta, visualBusy, recarregar]);
+
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
       <p>Conta desconhecida. <Link className="underline" href="/admin/metodo">Voltar</Link></p>
@@ -368,11 +435,15 @@ export default function MetodoContaPage() {
   const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
 
   const semData = geradosConta.filter((e) => !e.agendadoEm).length;
+  // PERÍODO de um post: tarde = motor (nbeats) ou hora >= 15h; senão manhã.
+  const ehTardePost = (e: EstadoPost) => e.subtipo === 'nbeats' || (e.hora ?? '') >= '15:00';
+  const nManha = geradosConta.filter((e) => !ehTardePost(e)).length;
+  const nTarde = geradosConta.filter((e) => ehTardePost(e)).length;
+  // o CALENDÁRIO mostra só o período escolhido e (se pedido) sem os publicados.
+  const geradosVista = geradosConta.filter((e) => (vista === 'tarde' ? ehTardePost(e) : !ehTardePost(e)) && (!esconderPub || !e.publicado));
   // por dia (a data é o plano): para a grelha de calendário.
   const porDia = new Map<string, EstadoPost[]>();
-  for (const e of geradosConta) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
-  // dentro de cada dia, ORDENA por hora (manhã 11h antes da tarde 17h) — para o
-  // calendário não ser uma salada de manhã+tarde sem nexo.
+  for (const e of geradosVista) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
   for (const lista of porDia.values()) lista.sort((a, b) => (a.hora ?? '99').localeCompare(b.hora ?? '99'));
   const semDataList = porDia.get('sem data') ?? [];
 
@@ -380,7 +451,7 @@ export default function MetodoContaPage() {
   const parse = (iso: string) => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, (m ?? 1) - 1, d ?? 1); };
   const fmtD = (dt: Date) => `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
   const segundaDe = (dt: Date) => { const x = new Date(dt); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd)); return x; };
-  const datasComPost = geradosConta.filter((e) => e.agendadoEm).map((e) => e.agendadoEm as string).sort();
+  const datasComPost = geradosVista.filter((e) => e.agendadoEm).map((e) => e.agendadoEm as string).sort();
   const semanasGrade: string[][] = [];
   if (datasComPost.length) {
     let cur = segundaDe(parse(datasComPost[0]));
@@ -405,6 +476,7 @@ export default function MetodoContaPage() {
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
             <button onClick={() => gerarLote(4)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 4 semanas (texto, por dia)</button>
+            <button onClick={gerarVisual} disabled={visualBusy} title="cria 1 reel VISUAL: cena de luz a fluir + 1 linha (pouco texto). A atmosfera de @vir.soltar (regressar a ti)." className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{visualBusy ? '🌌 a gerar…' : '🌌 gerar visual (1 cena + 1 linha)'}</button>
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
           </div>
@@ -416,6 +488,7 @@ export default function MetodoContaPage() {
             {geradosConta.length > 0 && <button onClick={melhorarLote} disabled={melLoteBusy || ambiguas === 0} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : ambiguas === 0 ? 'sem ambíguas' : `melhorar ambíguas (${ambiguas})`}</button>}
             {geradosConta.length > 0 && <button onClick={() => animarFaltam(faltamClip)} disabled={animarLoteBusy || !faltamClip.length} title="dispara (Kling) os clips em falta de todos os posts — ~$0.35 por clip; correm no servidor, podes sair" className="px-3 py-1.5 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarLoteBusy ? '🎬 a disparar…' : `🎬 animar clips em falta (${faltamClip.length})`}</button>}
             {aAnimar > 0 && <button onClick={colher} title="vai buscar os clips que já ficaram prontos no servidor" className="px-3 py-1.5 rounded-lg border border-emerald-400/30 text-emerald-300/90">🎬 a animar {aAnimar}… (colher prontos)</button>}
+            {geradosConta.length > 0 && <button onClick={recuperarClips} disabled={recuperarBusy} title="vai ao Replicate buscar TODOS os clips pagos que ficaram por guardar (mesmo os que pareciam falhados) — nada do que pagaste se perde" className="px-3 py-1.5 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{recuperarBusy ? '♻️ a recuperar…' : '♻️ recuperar clips pagos'}</button>}
             <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
             </button>
@@ -439,7 +512,16 @@ export default function MetodoContaPage() {
 
         {geradosConta.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosConta.length}</span></h2>
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosVista.length}</span></h2>
+            <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem]">
+              <div className="inline-flex rounded-lg border border-white/15 overflow-hidden">
+                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? conta.cor : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã (11h) · {nManha}</button>
+                <button onClick={() => setVista('tarde')} className="px-3 py-1.5" style={{ background: vista === 'tarde' ? '#EBAE4A' : 'transparent', color: vista === 'tarde' ? '#0F0F1A' : '#F2E8DC' }}>🌙 Tarde (17h) · {nTarde}</button>
+              </div>
+              <label className="inline-flex items-center gap-1.5 opacity-80 cursor-pointer">
+                <input type="checkbox" checked={esconderPub} onChange={(e) => setEsconderPub(e.target.checked)} className="cursor-pointer" /> esconder publicados
+              </label>
+            </div>
             {sel.size > 0 && (
               <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem] rounded-lg border border-rose-400/30 bg-rose-500/5 px-3 py-2">
                 <span><b>{sel.size}</b> selecionado(s)</span>
@@ -501,6 +583,9 @@ export default function MetodoContaPage() {
               <span className="opacity-45">{geradosConta.findIndex((e) => e.slug === detalhe.slug) + 1}/{geradosConta.length}</span>
               <button onClick={() => { const i = geradosConta.findIndex((e) => e.slug === detalhe.slug); if (i >= 0 && i < geradosConta.length - 1) setDetalhe(geradosConta[i + 1]); }} className="px-3 py-1.5 rounded-lg border border-white/25 hover:bg-white/10">seguinte →</button>
             </div>
+            {/* ESTADO À VISTA (dentro da modal): senão a mensagem fica atrás da modal e parece que nada acontece. */}
+            {erro && <p className="mb-2 text-[0.78rem] text-rose-300 rounded-lg border border-rose-400/30 bg-rose-500/10 px-3 py-2">{erro}</p>}
+            {msg && !erro && <p className="mb-2 text-[0.78rem] text-emerald-300 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-2">{msg}</p>}
             {detalhe.videoUrl && (
               <div className="mb-2">
                 <p className="text-[0.6rem] uppercase tracking-wider text-emerald-300 text-center mb-1">reel final (renderizado)</p>
@@ -551,37 +636,68 @@ export default function MetodoContaPage() {
                   {(detalhe.clipPend || detalhe.clipPend2) && <button onClick={colher} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-emerald-400/40 text-emerald-300/90">colher prontos</button>}
                   <button onClick={() => rejeitarClips(detalhe.slug)} className="text-[0.58rem] px-2 py-0.5 rounded-full border border-rose-400/40 text-rose-300/90">rejeitar clips</button>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {[{ c: detalhe.clip, p: detalhe.clipPend }, { c: detalhe.clip2, p: detalhe.clipPend2 }].map(({ c, p }, i) => (
+                {(() => { const umClip = detalhe.subtipo === 'nbeats' || detalhe.subtipo === 'visual'; return (
+                <div className={`grid ${umClip ? 'grid-cols-1 max-w-[220px] mx-auto' : 'grid-cols-2'} gap-2`}>
+                  {(umClip
+                    ? [{ c: detalhe.clip, p: detalhe.clipPend, label: 'a cena' }]
+                    : [{ c: detalhe.clip, p: detalhe.clipPend, label: 'face 1' }, { c: detalhe.clip2, p: detalhe.clipPend2, label: 'face 2' }]
+                  ).map(({ c, p, label }, i) => (
                     <div key={i}>
-                      <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-0.5 text-center">{i === 0 ? 'face 1' : 'face 2'}</p>
+                      <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-0.5 text-center">{label}</p>
                       {c
                         // eslint-disable-next-line jsx-a11y/media-has-caption
                         ? <video src={c} controls autoPlay loop muted playsInline className="w-full rounded-xl border border-emerald-400/30" />
                         : p
                           ? <div className="aspect-[9/16] rounded-xl border border-dashed border-emerald-400/30 grid place-items-center text-center text-[0.55rem] text-emerald-300/80 px-2">🎬 a animar…<br/>(aparece sozinho)</div>
-                          : <div className="aspect-[9/16] rounded-xl border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40">sem clip</div>}
+                          : detalhe.clipErro
+                            ? <div className="aspect-[9/16] rounded-xl border border-dashed border-rose-400/40 grid place-items-center text-center text-[0.55rem] text-rose-300/90 px-2">⚠️ falhou<br/>{detalhe.clipErro.slice(0, 80)}<br/><span className="opacity-70">carrega &quot;animar&quot; outra vez</span></div>
+                            : <div className="aspect-[9/16] rounded-xl border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40">sem clip</div>}
                     </div>
                   ))}
                 </div>
+                ); })()}
               </div>
             )}
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
-              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima as faces (imagem → vídeo, Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (clips das faces)'}</button>}
+              {(() => { const tarde = detalhe.subtipo === 'nbeats' || detalhe.subtipo === 'visual'; return <>
+              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima a imagem (Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : tarde ? '🎬 animar (a cena)' : '🎬 animar (clips das faces)'}</button>}
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
-              {(() => {
+              {/* botões SÓ da manhã (na tarde criam confusão e não se aplicam) */}
+              {!tarde && (() => {
                 const faltaFace2 = !!detalhe.texto2 && (!detalhe.imageUrl || !detalhe.imageUrl2);
                 const label = !detalhe.imageUrl ? 'gerar imagem' : faltaFace2 ? 'gerar 2.ª imagem' : 'outra imagem';
                 return <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={faltaFace2 ? 'gera a imagem da face que falta (mantém a que já tens)' : detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : label}</button>;
               })()}
-              <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica (silhueta + energia, escuro). Depois anima para o movimento forte. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>
-              <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta (mãe = Dualidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>
-              <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual (tira ambiguidade), mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>
+              {!tarde && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>}
+              {!tarde && <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>}
+              {!tarde && <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>}
+              <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="gera a TUA voz (ElevenLabs) a ler o texto, para ouvires se o sotaque sai fiel" className="px-2.5 py-1 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{vozBusy === detalhe.slug ? '🎙️ a gerar voz…' : '🎙️ gerar voz (teste)'}</button>
+              <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="gera o som ambiente dramático (ElevenLabs) de fundo do reel" className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{somBusy === detalhe.slug ? '🔊 a gerar som…' : '🔊 gerar som'}</button>
+              </>; })()}
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
             </div>
+            {(detalhe.vozUrl || detalhe.som) && (
+              <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2 space-y-2">
+                {detalhe.vozUrl && (
+                  <div className="text-center">
+                    <p className="text-[0.58rem] uppercase tracking-wider text-sky-300/90 mb-1">🎙️ a tua voz (ouve o sotaque)</p>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio src={detalhe.vozUrl} controls className="w-full" />
+                    <p className="text-[0.55rem] opacity-40 mt-1">se o sotaque variar, não uses — dizes-me e tiramos a voz.</p>
+                  </div>
+                )}
+                {detalhe.som && (
+                  <div className="text-center">
+                    <p className="text-[0.58rem] uppercase tracking-wider text-amber-300/90 mb-1">🔊 som da tarde (ambiente)</p>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio src={detalhe.som} controls className="w-full" />
+                  </div>
+                )}
+              </div>
+            )}
             <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>
             <div className="mt-3">
               <p className="text-[0.66rem] uppercase tracking-wider opacity-50 mb-1">Legenda (edita à mão)</p>

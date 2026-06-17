@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
 
-  const { slug } = (await req.json().catch(() => ({}))) as { slug?: string };
+  const { slug, force } = (await req.json().catch(() => ({}))) as { slug?: string; force?: boolean };
   const supabase = getSupabaseAdmin();
 
   const q = supabase.from('carousel_collections').select('slug, dias, theme');
@@ -36,7 +36,12 @@ export async function POST(req: Request) {
     let mudou = false;
     for (let i = 0; i < slides.length; i++) {
       const s = slides[i];
-      if (!s?.clipPend || !s.clipPredId) continue;
+      // RECUPERAÇÃO: processa qualquer face com previsão paga (clipPredId) que ainda
+      // não tem clip guardado. Auto: só as que estão "a animar" (clipPend). Forçado
+      // (botão "recuperar"): TODAS, mesmo as que marcámos falhadas (caso tenham
+      // afinal terminado no Replicate). Nunca apagamos o id, por isso é sempre recuperável.
+      if (!s?.clipPredId || s.clipUrl) continue;
+      if (!force && !s.clipPend) continue;
       let est;
       try { est = await estadoPredicao(s.clipPredId, token); }
       catch { pendentes++; continue; } // erro de rede: tenta na próxima colheita
@@ -55,15 +60,15 @@ export async function POST(req: Request) {
         }
         s.clipUrl = clipUrl;
         s.clipPend = false;
-        s.clipPredId = null;
         s.clipErro = null;
+        // NÃO apagamos clipPredId — fica como registo (e garante recuperação futura).
         if (row.dias?.[0]) row.dias[0].videoUrl = null; // o MP4 fica desatualizado
         colhidos++;
         mudou = true;
       } else if (est.status === 'failed' || est.status === 'canceled') {
         s.clipPend = false;
-        s.clipPredId = null;
         s.clipErro = est.erro ?? est.status;
+        // mantém clipPredId: se foi um falso-falhado, o "recuperar" volta a tentar.
         mudou = true;
       } else {
         pendentes++; // ainda a processar

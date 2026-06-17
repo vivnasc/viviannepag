@@ -38,7 +38,9 @@ export async function gerarSom(prompt: string, slug: string): Promise<string> {
   if (!res.ok) throw new Error(`elevenlabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
   const audio = Buffer.from(await res.arrayBuffer());
   const sb = getSupabaseAdmin();
-  const path = `series-audios/${slug}-${Date.now()}.mp3`;
+  // o storage não aceita acentos/ç na chave (ex.: "turbilhão") → tira-os do caminho.
+  const slugSeguro = slug.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9_-]/g, '-');
+  const path = `series-audios/${slugSeguro}-${Date.now()}.mp3`;
   const { error } = await sb.storage.from(BUCKET).upload(path, audio, { contentType: 'audio/mpeg', upsert: true });
   if (error) throw new Error(`upload som: ${error.message}`);
   return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
