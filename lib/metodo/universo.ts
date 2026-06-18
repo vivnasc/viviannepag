@@ -25,6 +25,21 @@ export function semanaUniversoAtual(hoje = new Date()): number {
   return Math.max(0, Math.floor((hojeUTC - INICIO_UNIVERSO) / (7 * 864e5)));
 }
 
+// A COR de cada véu (canon, fechado pela Vivianne): seguem a sequência dos
+// chakras, do 1.º ao 7.º. NÃO é a cor da conta (a conta tem a sua paleta de
+// universo); é a cor do VÉU do dia, que TINGE a imagem por cima da veste da conta.
+// `ordem` = posição no chakra (1..7). `pt` = a cor em PT (referência). `prompt` =
+// a pista de cor para a imagem (inglês, para o gerador de fundo).
+export const VEU_COR: Record<VeuNome, { ordem: number; pt: string; prompt: string }> = {
+  Permanência: { ordem: 1, pt: 'vermelho (terra/coral)', prompt: 'a grounded earthy red and coral undertone' },
+  Memória: { ordem: 2, pt: 'laranja-âmbar', prompt: 'a warm amber-orange undertone' },
+  Turbilhão: { ordem: 3, pt: 'amarelo-dourado', prompt: 'a golden-yellow undertone' },
+  Esforço: { ordem: 4, pt: 'verde-suave', prompt: 'a soft green undertone' },
+  Desolação: { ordem: 5, pt: 'azul (profundo/turquesa)', prompt: 'a deep blue and turquoise undertone' },
+  Horizonte: { ordem: 6, pt: 'índigo (azul-escuro)', prompt: 'an indigo deep-blue undertone' },
+  Dualidade: { ordem: 7, pt: 'violeta (roxo-lilás)', prompt: 'a violet and lilac undertone' },
+};
+
 // As 4 contas do Método (a mãe é a voz). veu.a.veu fora.
 export const CONTAS_UNIVERSO: ContaId[] = ['mae', 'ver', 'vir', 'viver'];
 

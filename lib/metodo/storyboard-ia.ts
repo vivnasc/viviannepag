@@ -18,6 +18,7 @@ import { SABER } from './saber';
 import { REFERENCIAS } from './referencias';
 import type { Personagem } from './personagens';
 import { getFormatoConta } from './formatos-conta';
+import { VEU_COR } from './universo';
 import { limparTravessoes } from '@/lib/texto';
 
 export type TipoPeca = 'descoberta' | 'profundidade';
@@ -54,7 +55,10 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const materia = k
     ? `comportamentos: ${k.comportamentos.slice(0, 5).join(' · ')}; cenas do dia a dia: ${k.cenas.slice(0, 4).join(' · ')}; custos: ${k.custos.slice(0, 3).join(' · ')}; mecanismos: ${k.mecanismos.slice(0, 3).join(' · ')}; origens: ${k.origens.slice(0, 3).join(' · ')}`
     : (f?.dor ?? veu);
-  const veste = `Símbolos do universo desta conta (usa-os nas imagens, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. Cores/luz: ${a.prompt}.`;
+  // A COR DO VÉU do dia (sequência dos chakras) tinge a imagem por cima da paleta
+  // do universo da conta. Veste a IMAGEM, nunca o conteúdo do texto.
+  const cor = VEU_COR[veu];
+  const veste = `Símbolos do universo desta conta (usa-os nas imagens, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. Paleta/luz do universo da conta: ${a.prompt}. A COR DO VÉU de hoje, que tinge toda a imagem por cima dessa paleta: ${cor.pt} (${cor.prompt}).`;
   // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
   // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
   // identidade SENTIDA em qualquer post da porta. A mãe é a vista panorâmica (não
