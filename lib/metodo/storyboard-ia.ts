@@ -27,6 +27,21 @@ export interface Storyboard { tipo: TipoPeca; beats: BeatSB[]; envio: string }
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
 
+// O METAMODELO do método (a teoria por baixo de tudo: "Estratégias de
+// Sobrevivência"). Cada véu/padrão NÃO é um defeito: foi, na origem, uma
+// estratégia que te protegeu (lealdade, segurança, pertença). Por isso o SOLTAR
+// não é lutar contra o padrão, é HONRAR a estratégia (reconhecer que te serviu,
+// agradecer) e largá-la sem força, porque o presente já não a pede. Regra de
+// ouro: não há soltar sem ver. Esta lente atravessa TODAS as contas e dá o tom
+// da raiz e da volta (sem culpa, sem combate).
+const METAMODELO =
+  'O METAMODELO (a teoria por baixo, NUNCA a nomeies no texto): este padrão não ' +
+  'é um defeito. Foi, na origem, uma estratégia de sobrevivência que te protegeu ' +
+  '(era lealdade, segurança, pertença). Por isso a VOLTA nunca luta contra o ' +
+  'padrão nem o julga: reconhece que te serviu, honra-o, agradece em silêncio, e ' +
+  'só então o solta, sem força, porque o presente já não o pede. Não há soltar ' +
+  'sem ver. A raiz mostra-se sem culpa; a saída é largar, não vencer.';
+
 export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNome, personagem: Personagem, apiKey: string, evitar: string[] = [], clarificar = false): Promise<Storyboard> {
   const c = CONTAS[conta];
   const a = c.atmosfera;
@@ -44,6 +59,8 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). Sem rosto, sem pessoas. A mulher reconhece-se em 1 segundo.
 
 A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
+
+${METAMODELO}
 
 O FORMATO PRÓPRIO DESTA CONTA E DESTA PEÇA (${fmt.nome}) — é isto que a distingue das outras contas, segue à risca: ${fmt.registo}
 
