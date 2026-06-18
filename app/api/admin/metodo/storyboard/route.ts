@@ -14,10 +14,12 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { conta?: string; tipo?: string; dia?: string };
+  const body = (await req.json().catch(() => ({}))) as { conta?: string; tipo?: string; dia?: string; evitar?: string[]; clarificar?: boolean };
   const contaId = (body.conta ?? '') as ContaId;
   if (!CONTAS[contaId]) return NextResponse.json({ erro: 'conta-desconhecida' }, { status: 400 });
   const tipo = (body.tipo === 'profundidade' ? 'profundidade' : 'descoberta') as TipoPeca;
+  const evitar = Array.isArray(body.evitar) ? body.evitar.filter((s) => typeof s === 'string') : [];
+  const clarificar = body.clarificar === true;
 
   // o dia (default hoje); o véu e a personagem do dia (partilhados pelas contas).
   let d = new Date();
@@ -27,7 +29,7 @@ export async function POST(req: Request) {
   if (!personagem) return NextResponse.json({ erro: 'sem-personagem' }, { status: 409 });
 
   try {
-    const sb = await gerarStoryboard(contaId, tipo, veu, personagem, apiKey);
+    const sb = await gerarStoryboard(contaId, tipo, veu, personagem, apiKey, evitar, clarificar);
     return NextResponse.json({ ok: true, conta: contaId, veu, personagem: personagem.nome, ...sb });
   } catch (e) {
     return NextResponse.json({ erro: 'ia', detalhe: e instanceof Error ? e.message : String(e) }, { status: 502 });

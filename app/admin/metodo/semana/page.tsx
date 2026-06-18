@@ -41,17 +41,24 @@ export default function MetodoSemanaPage() {
   type SB = { tipo: string; beats: { tempo: string; imagem: string; texto: string }[]; envio: string };
   const [sbs, setSbs] = useState<Record<string, SB>>({});
   const [sbBusy, setSbBusy] = useState<string | null>(null);
-  const gerarPeca = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade') => {
+  const gerarPeca = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade', opts?: { evitar?: string[]; clarificar?: boolean }) => {
     const chave = `${sel}-${data}-${tipo}`;
     setSbBusy(chave); setErro(null);
     try {
-      const r = await fetch('/api/admin/metodo/storyboard', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: sel, tipo, dia: data }) });
+      const r = await fetch('/api/admin/metodo/storyboard', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: sel, tipo, dia: data, evitar: opts?.evitar, clarificar: opts?.clarificar }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else setSbs((s) => ({ ...s, [chave]: { tipo, beats: j.beats ?? [], envio: j.envio ?? '' } }));
     } catch (e) { setErro(String(e)); }
     finally { setSbBusy(null); }
   }, [sel]);
+  // editar à mão: muda o texto/imagem de um beat (fica guardado no estado).
+  const editarBeat = useCallback((chave: string, i: number, campo: 'texto' | 'imagem', valor: string) => {
+    setSbs((s) => { const sb = s[chave]; if (!sb) return s; const beats = sb.beats.map((b, k) => k === i ? { ...b, [campo]: valor } : b); return { ...s, [chave]: { ...sb, beats } }; });
+  }, []);
+  const editarEnvio = useCallback((chave: string, valor: string) => {
+    setSbs((s) => { const sb = s[chave]; if (!sb) return s; return { ...s, [chave]: { ...sb, envio: valor } }; });
+  }, []);
 
   // tudo passa pelo motor novo (gerar-peca): família × véu × conta -> anatomia.
   const chamar = useCallback(async (chave: string, payload: Record<string, unknown>, aGerar: string, feito: (j: { gerados?: number; jaExistiam?: boolean }) => string) => {
@@ -162,18 +169,26 @@ export default function MetodoSemanaPage() {
                   })}
                 </div>
                 {(['descoberta', 'profundidade'] as const).map((tipo) => {
-                  const sb = sbs[`${sel}-${p.data}-${tipo}`];
+                  const chave = `${sel}-${p.data}-${tipo}`;
+                  const sb = sbs[chave];
                   if (!sb) return null;
+                  const textos = sb.beats.map((b) => b.texto);
                   return (
                     <div key={tipo} className="mt-2 rounded-lg border border-white/10 bg-black/30 p-2">
-                      <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-1">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
+                      <div className="flex items-center justify-between mb-1 gap-1">
+                        <p className="text-[0.52rem] uppercase tracking-wider opacity-50">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
+                        <div className="flex gap-1">
+                          <button onClick={() => gerarPeca(p.data, tipo, { evitar: textos })} disabled={!!sbBusy} className="text-[0.54rem] px-1.5 py-0.5 rounded border border-white/20 disabled:opacity-40" title="gera de novo, com outro ângulo">regenerar</button>
+                          <button onClick={() => gerarPeca(p.data, tipo, { clarificar: true, evitar: textos })} disabled={!!sbBusy} className="text-[0.54rem] px-1.5 py-0.5 rounded border border-white/20 disabled:opacity-40" title="reescreve mais claro, tira ambiguidades">melhorar</button>
+                        </div>
+                      </div>
                       {sb.beats.map((b, i) => (
-                        <div key={i} className="mb-1">
+                        <div key={i} className="mb-1.5">
                           <p className="text-[0.54rem] opacity-40 italic leading-tight">🎞️ {b.imagem}</p>
-                          <p className="text-[0.72rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b.texto}</p>
+                          <textarea value={b.texto} onChange={(e) => editarBeat(chave, i, 'texto', e.target.value)} rows={2} className="w-full bg-black/30 border border-white/10 rounded px-1.5 py-1 text-[0.72rem] leading-snug outline-none focus:border-[#EBAE4A]/60" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#F2E8DC' }} />
                         </div>
                       ))}
-                      {sb.envio && <p className="text-[0.6rem] mt-0.5" style={{ color: contaSel.cor }}>envio · {sb.envio}</p>}
+                      <textarea value={sb.envio} onChange={(e) => editarEnvio(chave, e.target.value)} rows={1} placeholder="envio (manda a quem precisa)" className="w-full bg-black/20 border border-white/10 rounded px-1.5 py-1 text-[0.62rem] outline-none focus:border-[#EBAE4A]/60" style={{ color: contaSel.cor }} />
                     </div>
                   );
                 })}
