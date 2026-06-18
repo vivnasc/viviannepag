@@ -55,10 +55,11 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const materia = k
     ? `comportamentos: ${k.comportamentos.slice(0, 5).join(' · ')}; cenas do dia a dia: ${k.cenas.slice(0, 4).join(' · ')}; custos: ${k.custos.slice(0, 3).join(' · ')}; mecanismos: ${k.mecanismos.slice(0, 3).join(' · ')}; origens: ${k.origens.slice(0, 3).join(' · ')}`
     : (f?.dor ?? veu);
-  // A COR DO VÉU do dia (sequência dos chakras) tinge a imagem por cima da paleta
-  // do universo da conta. Veste a IMAGEM, nunca o conteúdo do texto.
+  // A COR é SÓ a do VÉU do dia (sequência dos chakras). NÃO existe paleta de cor
+  // por conta (foi banida): a cor da imagem é sempre a do véu. A conta entra com
+  // os SÍMBOLOS e o MOOD (a sensação, sem cor). Veste a IMAGEM, nunca o texto.
   const cor = VEU_COR[veu];
-  const veste = `Símbolos do universo desta conta (usa-os nas imagens, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. Paleta/luz do universo da conta: ${a.prompt}. A COR DO VÉU de hoje, que tinge toda a imagem por cima dessa paleta: ${cor.pt} (${cor.prompt}).`;
+  const veste = `A COR é a do VÉU de hoje e SÓ essa (não existe paleta de cor por conta, foi banida): ${cor.pt} (${cor.prompt}). Toda a imagem segue esta cor. Os SÍMBOLOS do universo desta conta (é o que distingue a conta, junto com o formato; rende-os NESTA cor do véu, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. O MOOD da conta (a sensação, nunca a cor): ${a.sensacao}; ${a.fraseVisual}. Textura: painterly, fine grain, em movimento.`;
   // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
   // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
   // identidade SENTIDA em qualquer post da porta. A mãe é a vista panorâmica (não
