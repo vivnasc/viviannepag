@@ -159,15 +159,18 @@ export const CONTAS: Record<ContaId, Conta> = {
       'a soft cupped hollow of warm golden light cradled in deep shadow, ' +
       'like a held nest or a quiet hearth, tender and sheltering, abstract, no figure',
     cor: '#e8bd84',
-    paleta: { bg1: '#6a4838', bg2: '#322218', accent: '#e8bd84' }, // terracota, âmbar, castanho quente, dourado suave
+    paleta: { bg1: '#1b2742', bg2: '#0e1526', accent: '#e8bd84' }, // VIR (Chamamento): azul nocturno + dourado/cobre
     atmosfera: {
-      sensacao: 'finalmente pousar',
-      fraseVisual: 'o momento em que alguém larga o peso que carregava',
-      prompt: 'warm tender atmosphere, terracotta amber and warm brown, the feeling of coming home and being received after a long day, warm and sheltering, room to breathe',
-      elementos: ['a warm bed with soft rumpled blankets in low evening light', 'two hands cradling a warm cup of tea', 'a cat curled asleep in a pool of warm lamplight', 'a single armchair with a folded blanket in a softly lit room', 'a glowing hearth in a quiet dim room', 'a small table set for one by warm candlelight', 'a lit window seen from the cold outside, welcoming', 'soft pillows piled in warm lamplight', 'a warm bath drawn in a dim quiet bathroom', 'a worn sofa under a soft reading lamp', 'a doorway spilling warm light onto a cold step', 'a small harbour with warm lights at dusk'],
-      // luz/hora (dentro do mundo quente): varia a hora sem perder o acolhimento.
-      registos: ['a warm early dawn glow', 'low golden-hour light', 'warm interior daylight', 'firelit dusk', 'lantern-lit evening', 'soft warm overcast light'],
-      textura: 'analog film, warm grain, soft warm light',
+      // VESTE do universo VIR · o Chamamento (do documento mestre): dourado, âmbar,
+      // cobre, azul nocturno · símbolos: bússolas, portais, rios de luz, aves
+      // migratórias, fios dourados, constelações-guia, mapas celestes, espirais.
+      sensacao: 'algo antigo a chamar-te de volta ao teu centro',
+      fraseVisual: 'um fio de luz que te leva de volta a ti',
+      prompt: 'the Calling: warm gold, amber, copper over deep night-blue, the feeling of something ancient calling you back to your own centre, returning home from dispersion, intimate and vast at once',
+      elementos: ['an ancient compass with a glowing needle turning toward a still centre', 'a luminous golden spiral drawing inward to a calm point', 'a golden portal opening between slow drifting stars', 'a river of golden light winding across a deep night sky', 'migrating birds following a thread of light toward home', 'fine golden threads weaving a path through the dark', 'an old celestial map glowing with constellation lines', 'a guiding constellation pulsing softly over a dark horizon', 'a crescent moon above a quiet path between stars', 'a labyrinth of light seen from above, leading to its centre', 'a bridge of light arching across the dark between two points', 'a single warm star steady amid slow cosmic dust'],
+      // luz/hora dentro do mundo do Chamamento (ouro/cobre sobre azul nocturno).
+      registos: ['deep night-blue with warm gold light', 'amber glow against near-black', 'copper light through cosmic dust', 'soft distant starlight', 'golden hour fading into a night sky', 'warm light breaking the dark'],
+      textura: 'luminous flowing particles, cinematic depth, warm gold over deep dark, fine grain',
     },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
     manifestoLinhas: [
