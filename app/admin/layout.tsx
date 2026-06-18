@@ -65,7 +65,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/metodo', label: 'painel' },
       { href: '/admin/metodo/calendario', label: '1 · calendário trimestral' },
       { href: '/admin/metodo/semana', label: '2 · calendário semanal' },
-      { href: '/admin/metodo/pecas', label: 'as 2 peças do dia (formatos)' },
       { href: '/admin/metodo/mae', label: '3 · por conta · mãe' },
       { href: '/admin/metodo/ver', label: '3 · por conta · ver' },
       { href: '/admin/metodo/vir', label: '3 · por conta · vir' },

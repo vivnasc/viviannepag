@@ -11,18 +11,19 @@ const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400'
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable}`;
 
-// Arranque do plano: 22 jun 2026 (a semana de 15-21 foi de testes). Enquanto não
-// chega lá, o calendário abre já na 1.ª semana do plano (22 jun), não na de testes.
-function semanasAteArranque(): number {
+// Arranque do plano: 22 jun 2026 (a semana de 15-21 foi de testes). O calendário
+// NUNCA mostra semanas antes do arranque (não se gera conteúdo para o passado).
+// offsetArranque = a semana de 22 jun face a esta semana (negativo após o arranque).
+function offsetArranque(): number {
   const h = new Date(); const dow = h.getDay();
   const seg = new Date(h.getFullYear(), h.getMonth(), h.getDate() + (dow === 0 ? -6 : 1 - dow));
   const arranque = new Date(2026, 5, 22);
-  const diff = Math.round((arranque.getTime() - seg.getTime()) / (7 * 864e5));
-  return diff > 0 ? diff : 0;
+  return Math.round((arranque.getTime() - seg.getTime()) / (7 * 864e5));
 }
 
 export default function MetodoSemanaPage() {
-  const [offset, setOffset] = useState(() => semanasAteArranque());
+  const [offset, setOffset] = useState(() => Math.max(0, offsetArranque()));
+  const minOff = offsetArranque(); // o calendário não recua antes do arranque (22 jun)
   const [sel, setSel] = useState<ContaId>('mae');
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
@@ -34,6 +35,23 @@ export default function MetodoSemanaPage() {
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+
+  // as 2 PEÇAS de cada dia, no FORMATO próprio da conta (descoberta de manhã ·
+  // profundidade à noite). Geradas aqui mesmo, no calendário, sem página à parte.
+  type SB = { tipo: string; beats: { tempo: string; imagem: string; texto: string }[]; envio: string };
+  const [sbs, setSbs] = useState<Record<string, SB>>({});
+  const [sbBusy, setSbBusy] = useState<string | null>(null);
+  const gerarPeca = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade') => {
+    const chave = `${sel}-${data}-${tipo}`;
+    setSbBusy(chave); setErro(null);
+    try {
+      const r = await fetch('/api/admin/metodo/storyboard', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: sel, tipo, dia: data }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setSbs((s) => ({ ...s, [chave]: { tipo, beats: j.beats ?? [], envio: j.envio ?? '' } }));
+    } catch (e) { setErro(String(e)); }
+    finally { setSbBusy(null); }
+  }, [sel]);
 
   // tudo passa pelo motor novo (gerar-peca): família × véu × conta -> anatomia.
   const chamar = useCallback(async (chave: string, payload: Record<string, unknown>, aGerar: string, feito: (j: { gerados?: number; jaExistiam?: boolean }) => string) => {
@@ -52,8 +70,6 @@ export default function MetodoSemanaPage() {
     chamar(`${conta}-${semanas}`, { conta, semanas, offset: off }, 'A gerar no servidor (a anatomia de cada dia). Podes sair ou fechar. 1 a 2 min por semana.', (j) => `${j.gerados} peças geradas, já com a data de cada dia. Vê-as no Publicar ou na página da conta.`);
   const completar = (conta: string, off: number) =>
     chamar(`${conta}-comp`, { conta, completar: true, offset: off }, 'A completar os dias que faltam (não estraga os já feitos). Podes sair que continua.', (j) => j.jaExistiam ? 'A semana já está completa.' : `${j.gerados} dia(s) em falta gerado(s).`);
-  const gerarDia = (conta: string, data: string, off: number) =>
-    chamar(`${conta}-dia-${data}`, { conta, dia: data, offset: off }, 'A gerar este dia (texto). Depois gera a imagem e renderiza na página da conta.', (j) => `${j.gerados} dia gerado para ${data}.`);
 
   // semana mostrada (seg→dom), offset 0 = ESTA semana.
   const hoje = new Date();
@@ -91,10 +107,10 @@ export default function MetodoSemanaPage() {
         </div>
 
         <div className="mt-4 flex items-center gap-3 text-[0.8rem]">
-          <button onClick={() => setOffset((o) => o - 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">◀</button>
+          <button onClick={() => setOffset((o) => Math.max(minOff, o - 1))} disabled={offset <= minOff} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10 disabled:opacity-25 disabled:cursor-not-allowed">◀</button>
           <p><b>{rotuloSemana}</b> · {dm(seg)} a {dm(dom)}</p>
           <button onClick={() => setOffset((o) => o + 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">▶</button>
-          {offset !== 0 && <button onClick={() => setOffset(0)} className="text-[0.66rem] px-2 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">hoje</button>}
+          {offset !== Math.max(minOff, 0) && <button onClick={() => setOffset(Math.max(minOff, 0))} className="text-[0.66rem] px-2 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">arranque</button>}
         </div>
 
         {/* a espiral: a face que esta semana aprofunda (desce do trimestral) */}
@@ -138,7 +154,29 @@ export default function MetodoSemanaPage() {
                 </p>
                 <p className="mt-0.5 text-[0.72rem] opacity-55 italic leading-snug">{p.personagem.frases[0]}</p>
                 <p className="mt-1 text-[0.62rem] uppercase tracking-wider opacity-45">aprofunda: {p.face.titulo.toLowerCase()}</p>
-                <button onClick={() => gerarDia(sel, p.data, offset)} disabled={!!busy} className="mt-2 text-[0.62rem] px-2 py-1 rounded-md border disabled:opacity-40" style={{ borderColor: `${contaSel.cor}66`, color: contaSel.cor }}>{busy === `${sel}-dia-${p.data}` ? 'a gerar…' : 'gerar este dia'}</button>
+                {/* as 2 PEÇAS do dia, no formato próprio da conta */}
+                <div className="mt-2 flex gap-1.5">
+                  {(['descoberta', 'profundidade'] as const).map((tipo) => {
+                    const chave = `${sel}-${p.data}-${tipo}`;
+                    return <button key={tipo} onClick={() => gerarPeca(p.data, tipo)} disabled={!!sbBusy} className="text-[0.6rem] px-2 py-1 rounded-md border disabled:opacity-40" style={{ borderColor: `${contaSel.cor}66`, color: contaSel.cor }}>{sbBusy === chave ? '…' : tipo === 'descoberta' ? 'manhã' : 'noite'}</button>;
+                  })}
+                </div>
+                {(['descoberta', 'profundidade'] as const).map((tipo) => {
+                  const sb = sbs[`${sel}-${p.data}-${tipo}`];
+                  if (!sb) return null;
+                  return (
+                    <div key={tipo} className="mt-2 rounded-lg border border-white/10 bg-black/30 p-2">
+                      <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-1">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
+                      {sb.beats.map((b, i) => (
+                        <div key={i} className="mb-1">
+                          <p className="text-[0.54rem] opacity-40 italic leading-tight">🎞️ {b.imagem}</p>
+                          <p className="text-[0.72rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b.texto}</p>
+                        </div>
+                      ))}
+                      {sb.envio && <p className="text-[0.6rem] mt-0.5" style={{ color: contaSel.cor }}>envio · {sb.envio}</p>}
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
