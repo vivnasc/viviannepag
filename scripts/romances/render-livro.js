@@ -17,6 +17,7 @@ const PASTAS = {
   cheias: { pt: 'homem-das-cheias-livro', en: 'homem-das-cheias-livro-en', capa: 'CHEIAS-capa', outPt: 'O-HOMEM-DAS-CHEIAS-pt.pdf', outEn: 'THE-MAN-THE-FLOODS-BROUGHT-en.pdf' },
   incomodo: { pt: 'nenhum-incomodo-livro', en: 'nenhum-incomodo-livro-en', capa: 'INCOMODO-capa', outPt: 'NENHUM-INCOMODO-pt.pdf', outEn: 'NO-TROUBLE-AT-ALL-en.pdf' },
   frio: { pt: 'mulher-frio-livro', en: 'mulher-frio-livro-en', capa: 'FRIO-capa', outPt: 'A-MULHER-QUE-NUNCA-TEVE-FRIO-pt.pdf', outEn: 'THE-WOMAN-WHO-NEVER-FELT-THE-COLD-en.pdf' },
+  fabrica: { pt: 'fabrica-dorme-livro', en: 'fabrica-dorme-livro-en', capa: 'FABRICA-capa', outPt: 'ENQUANTO-A-FABRICA-DORME-pt.pdf', outEn: 'WHILE-THE-FACTORY-SLEEPS-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -230,7 +231,35 @@ const T_FRIO = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : T_AMPARO;
+const T_FABRICA = LANG==='pt' ? {
+  tituloHtml:'Enquanto a<br>Fábrica Dorme', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante VII · A Fiandeira',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Libânia te doer em sítios reais, o nome do que ela carrega está em «A pessoa que só valia a trabalhar», na coleção Sentido. Aqui não há defeitos de carácter, há feridas antigas que se disfarçaram de virtude. Uma história compreende, mas não substitui acompanhamento: se o vazio for fundo, procura apoio. Vales o mesmo, faças muito ou nada.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este inverno de Véspera com a Libânia. Se a história te tocou, partilha-a, não como prova, mas como semente. E se reconheceste em ti alguma fábrica a fechar, lembra-te: existes antes de fazeres seja o que for, e existirás depois. A tua linha foi escrita à nascença, e não se apaga.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'While the<br>Mill Sleeps', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf VII · The Mill',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this winter of Véspera with Libânia.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];

@@ -48,6 +48,10 @@ const TEXTOS = {
     pt: { serie: 'BIBLIOTECA DE VÉSPERA · VI', t1: 'A Mulher Que', t2: 'Nunca Teve Frio', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
     en: { serie: 'THE VÉSPERA LIBRARY · VI', t1: 'The Woman Who', t2: 'Never Felt the Cold', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
   },
+  fabrica: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · VII', t1: 'Enquanto a', t2: 'Fábrica Dorme', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · VII', t1: 'While the', t2: 'Mill Sleeps', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
 };
 const T = (TEXTOS[LIVRO] || TEXTOS.amparo)[LANG === 'en' ? 'en' : 'pt'];
 
