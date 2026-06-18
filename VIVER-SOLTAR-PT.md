@@ -4,6 +4,8 @@
 
 > *A estreia não é para o ano. É hoje, descalça, com os pés no chão que já é teu.*
 
+*Aqui não vens conquistar a tua vida. Vens ver que a adiaste para sobreviver, e pousar a armadura no chão que já é teu.*
+
 ## Para quem é este livro
 
 Este livro é para ti, se há muito que vives um passo à frente de onde estás, sempre inclinada para um ponto mais adiante onde, finalmente, vais poder começar a viver a sério. Quando emagreceres. Quando ele mudar. Quando as crianças crescerem. Quando tiveres a casa, o dinheiro, a paz que andas a adiar. E é para ti se, ao mesmo tempo, te agarras com as duas mãos a uma versão antiga de ti, a uma frase que dizes sobre quem és há tanto tempo que já parece a tua cara, com medo de que mudar seja trair-te.

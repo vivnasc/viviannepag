@@ -4,6 +4,8 @@
 
 > *The premiere is not next year. It is today, barefoot, with your feet on the ground that is already yours.*
 
+*Here you do not come to conquer your life. You come to see that you postponed it to survive, and to lay down the armour on the ground that is already yours.*
+
 ## Who this book is for
 
 This book is for you, if for a long time you have lived a step ahead of where you are, always leaning towards a point further on where, finally, you will be able to start really living. When you lose the weight. When he changes. When the children grow up. When you have the house, the money, the peace you keep putting off. And it is for you if, at the same time, you cling with both hands to an old version of yourself, to a sentence you have said about who you are for so long that it now seems to be your own face, afraid that to change would be to betray yourself.

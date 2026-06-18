@@ -41,6 +41,8 @@ Chamo véu a um condicionamento tão antigo que já parece a tua cara. Não é d
 
 O véu não é mau. É essa a parte que ninguém te diz, e a que muda tudo. Ele foi útil. Protegeu-te quando precisaste, fez-te caber onde tinhas de caber, poupou-te a dores que na altura não terias suportado. Agradar pode ter sido o que te manteve a salvo numa casa onde o amor era condicional. Calar pode ter evitado um castigo. Controlar tudo pode ter sido a única forma de sobreviver ao imprevisível. Não há aqui inimigos. Há estratégias antigas, inteligentes, que cumpriram a sua função e nunca foram avisadas de que o perigo já passou. O problema não é o véu ter existido. É continuar a vestir-te muito depois de a ameaça ter desaparecido, e a escolher por ti em lugares onde já podias, finalmente, escolher sozinha.
 
+A pergunta deste livro não é "o que há de errado comigo?". É "como é que eu sobrevivi?". Os véus não são defeitos a corrigir, são as formas que encontraste para te manteres de pé. Vê-las é o primeiro passo para já não precisares delas.
+
 Para entenderes porque é que estes véus se mantêm, mesmo contra a tua vontade, mesmo depois de os veres, ajuda olhar para três coisas. São os três motivos por que ver, sozinho, raramente chega, e por que tantas vezes te julgaste fraca quando eras apenas humana.
 
 O primeiro é o corpo que aprendeu. O teu sistema nervoso não distingue passado de presente. Distingue uma só coisa: seguro de ameaça. Quando algo no presente toca numa ferida antiga, um tom de voz, um silêncio, uma porta que se fecha, ele não pergunta que ano é. Reage como reagiu da primeira vez, e recorre ao que já conhece, não ao que é saudável, mas ao que é familiar. Por isso a repetição quase nunca se apresenta como erro evidente. Apresenta-se como a coisa mais sensata a fazer naquele instante, como coerência interna, como instinto. Só mais tarde, quando a poeira assenta, é que pensas "outra vez", e não percebes como caíste de novo.
@@ -119,6 +121,8 @@ Este véu tem maneiras de se esconder que vale a pena saberes, porque costumam p
 
 O que muda, quando este véu se ergue, é que a vida fica mais leve. Podes mudar de rumo aos quarenta, aos cinquenta, aos sessenta, sem sentir que te trais, porque entendes que mudar é próprio de quem está vivo. As perdas passam a doer sem te destruir, porque descobres em ti um fundo que nenhuma perda alcança. Voltas a ter curiosidade por ti, deixas de ser uma estátua empenhada em manter-se igual e voltas a ser um rio. Não te tornas ninguém. Tornas-te livre dentro de quem és.
 
+E talvez caiba aqui, antes de seguires, um agradecimento, porque este véu nunca foi defeito, foi defesa. Defenderes quem eras foi como mantiveste o teu lugar quando tê-lo parecia em risco. Obrigada, identidade. Já posso existir sem te empunhar.
+
 Antes da prática, fica com estas perguntas, sem pressa de responder. Quem serias tu se largasses, por um só dia, o papel que mais te define? O que temes que aconteça se deixares de ser a forte, a que aguenta, a que resolve tudo? De quem aprendeste, lá atrás, que só uma versão tua era bem-vinda em casa? E o que em ti permanece, mesmo quando todos os papéis mudam, acabam ou te são tirados?
 
 **A prática.** Procura um momento de calma, sozinha, e diz o teu nome em voz baixa, devagar, três vezes. À terceira, em vez de pensares no nome, repara em quem o está a ouvir. Fica com esse que escuta o tempo de três respirações, sem fazer nada, sem mudar nada. E, ao longo da semana, escreve três frases que comecem por "eu sou" e, ao lado de cada uma, pergunta o que aconteceria se ela deixasse de ser verdade. Aquela que te aperta o peito não é a tua identidade. É o véu que mais defendes, e o primeiro a aprender a pousar.
@@ -152,6 +156,8 @@ Há ainda uma confusão a desfazer. Soltar a narrativa não é mentir sobre o pa
 Há também, neste véu, uma forma mais subtil de prisão, que vale a pena olhar com calma. Caminhamos pela vida como se um fio invisível conduzisse cada passo, à procura de uma explicação que nos justifique, de um sentido que dê ordem ao que vivemos. E essa procura, tão humana, pode tornar-se ela própria uma corrente: quanto mais perseguimos a resposta sobre quem somos e porque nos aconteceu o que aconteceu, mais nos afastamos da quietude que já pulsa no presente, aqui, sem explicação nenhuma. Quando finalmente soltamos a narrativa que nos definia, abre-se um espaço estranho. O eu já não se apoia no passado, mas também ainda não encontrou chão firme no agora, e a mente, habituada a continuidade, não sabe habitar esse intervalo. Surge um vazio. Não te assustes com ele, porque é um vazio de gestação, não de falta. É o território fértil entre a história que largaste e a vida que ainda não nomeaste, e é precisamente aí, sem o conforto das velhas certezas sobre ti, que algo verdadeiramente novo pode, pela primeira vez, começar a nascer.
 
 O que muda quando este véu se ergue é a tua relação com o tempo. Deixas de viver para trás, a confirmar quem és pelo que já foi, e começas a viver para a frente, aberta ao que ainda não está escrito. As mesmas memórias continuam lá, mas perdem o poder de te governar, porque deixaste de as tratar como sentença e passaste a tê-las como aprendizagem. Reages às pessoas de hoje pelo que elas são, e não pelo que outras te fizeram. E acontece, muitas vezes, uma reconciliação inesperada com quem veio antes, porque, ao veres que herdaste a dor deles sem escolher, deixas de os culpar e começas a compreendê-los, e nesse compreender liberta-se também algo em ti. Ficas mais leve de um peso que carregavas sem saber que se podia pousar.
+
+E, antes de seguires, há um agradecimento a fazer também a este véu, porque também ele te guardou. Prenderes-te ao passado foi como te protegeste de repetir uma dor antiga. Obrigada, memória. A dor era de outro tempo.
 
 Antes da prática, senta-te um momento com estas perguntas, sem pressa. Que história contas sobre ti que nunca mais voltaste a questionar? Se ela não fosse verdade, ou não fosse toda a verdade, quem poderias ser? A quem estás a ser leal quando repetes essa história, e o que terias medo de perder se a largasses? E se olhasses a tua infância com os olhos de hoje, em vez dos olhos da menina que a viveu, o que verias de diferente, o que perdoarias, a quem devolverias uma culpa que nunca foi tua?
 
@@ -189,6 +195,8 @@ Há um lugar, no fundo deste véu, a que se chega quando se larga até a ânsia 
 
 O que muda quando este véu se ergue é que ganhas um centro. A mente continua a produzir o seu ruído, mas tu deixas de morar lá dentro a tempo inteiro. Passas a ter um lugar calmo de onde observas a tempestade sem seres a tempestade, e isso muda tudo no dia a dia. As decisões deixam de ser tomadas em pânico e passam a vir de um sítio mais sereno. Sentes as emoções com a mesma intensidade, mas já não te arrastam até ao fundo, porque sabes que são vagas e que tu és o mar. Dormes melhor, porque a cabeça aprende, devagar, que nem todo o pensamento merece uma reunião de emergência às três da manhã. E descobres, talvez pela primeira vez, o sabor de estar simplesmente presente, sem comentário, num momento que não precisa de ser analisado para ser vivido.
 
+Antes da prática, talvez queiras agradecer a esta cabeça que não pára, porque ela nunca foi defeito, foi defesa. Antecipares tudo foi como te mantiveste segura. Obrigada, vigilância. Estou segura agora, e pensar não é resolver.
+
 Antes da prática, fica com estas perguntas, devagar. Quando a tua cabeça acelera, que história está ela a tentar proteger-te de sentir? Se acreditasses em metade do que pensas sobre o futuro, quanto da tua energia estarias a gastar a defender-te de coisas que nunca vão acontecer? Consegues, agora mesmo, encontrar em ti quem está a ler estas linhas, por trás do barulho todo? E o que mudaria no teu dia se tratasses os teus pensamentos como nuvens de passagem, e não como ordens a cumprir?
 
 A prática é curta e podes usá-la hoje, no meio de uma crise pequena. Da próxima vez que a cabeça acelerar, não lutes nem tentes pensar melhor para resolver o pensamento. Diz por dentro, devagar, quase como quem comenta o tempo: estou a reparar que estou a pensar isto. Esse simples "estou a reparar" já te tira de dentro da onda e te põe na margem, porque para reparares numa coisa tens de estar, por um instante, fora dela. A partir daí, respira três vezes, lentas, e em cada respiração sente quem é que respira. Não és o turbilhão que passa pela tua cabeça. És, e sempre foste, quem o vê passar.
@@ -223,6 +231,8 @@ No fundo deste véu, há um ponto em que a busca lá fora começa, sozinha, a si
 
 O que muda quando este véu se ergue é, antes de tudo, o teu corpo. O cansaço crónico começa a ceder, não porque passaste a fazer menos, mas porque deixaste de carregar a vigilância permanente de seres responsável pela vida de todos. Aprendes a receber, e descobres que receber não te diminui, completa-te. Começas a dizer "não" sem um discurso inteiro de justificação atrás, e o céu não cai. As tuas relações, curiosamente, melhoram, porque deixam de assentar na tua exaustão e passam a assentar na tua presença verdadeira. E o amor, que tanto tempo confundiste com fazer, com servir, com segurar, revela-se afinal noutra coisa muito mais simples e muito mais difícil para ti: estar. Estar inteira, sem teres de provar nada, ao lado de quem amas e ao teu próprio lado. As mãos, finalmente, podem pousar.
 
+E há, antes de seguires, uma gratidão a devolver ao próprio véu, porque ele te amou à maneira que aprendeu. Fazeres sem parar foi como te sentiste amada e necessária. Obrigada, esforço. Eu basto antes de fazer.
+
 Antes da prática, fica com estas perguntas, com ternura por ti. O que temes que aconteça se parares de fazer, de resolver, de antecipar? Se o amor não tivesse de ser ganho, o que farias hoje de diferente? Quem cuidaria de ti se tu deixasses, por um momento, de ser a que cuida de tudo? E de quem aprendeste, lá atrás, que o teu lugar era o de dar até não sobrar nada de ti?
 
 A prática é pequena de fora e enorme por dentro, e talvez seja a mais difícil deste livro. Escolhe uma coisa pequena que farias por hábito para servir, agradar ou adiantar trabalho aos outros, e hoje, só hoje, não a faças. Não recolhas a loiça da mão de quem é capaz de a levantar. Não respondas à mensagem no segundo exato. Não resolvas o problema que não é teu. E depois fica atenta ao desconforto que sobe quase de imediato: a vontade de te justificares, a culpa, a ideia de que vão pensar mal de ti. Não resolvas esse desconforto. Não o tapes com outra tarefa. Só fica a vê-lo, com a mão no peito, três respirações, como quem vela uma criança assustada. É o véu a protestar por estar a ser erguido. Do outro lado dele, e cada vez mais perto de cada vez que praticas, está o teu descanso.
@@ -254,6 +264,8 @@ Há um medo por baixo deste véu que vale a pena nomear, porque é o motor de tu
 Há, neste véu, um medo particular, e é diferente do pânico que conhecemos. Quando a quietude se instala depois de uma perda, de uma queda, do fim de uma fase, não é o vazio que mais pesa. É a presença subtil de um medo sem rosto. Ele não grita nem bloqueia, apenas permanece, como uma sombra discreta a vigiar de longe. Não te impede de caminhar, mas também não te deixa livre, ronda as margens de cada gesto como névoa que não se dissipa. Este medo não nasce de uma ameaça concreta, não há inimigo à frente nem perigo real. Cresce da ausência, do espaço vasto que se abriu quando as formas antigas colapsaram. E o que ele guarda, no fundo, já não é o teu corpo nem a tua identidade. É o velho hábito de sobreviver agarrada ao que já terminou. Repara nisto, porque muda tudo: o que te assombra na desolação não é o que perdeste, é o teu apego ao que perdeste, a mão que continua fechada à volta de algo que já não está lá. E uma mão fechada à volta do nada pode, finalmente, abrir-se. Não para perder mais. Para poder voltar a receber.
 
 O que muda quando este véu se ergue é que deixas de ter medo de ti. O silêncio, que era ameaça, torna-se refúgio. Passas a saber estar sozinha sem te sentires abandonada, e isso liberta todas as tuas relações de um peso enorme, porque já não te agarras a ninguém por terror do vazio, e passas a estar com as pessoas por escolha e não por fuga. Reencontras o gosto de coisas simples e só tuas, que tinhas esquecido por andares sempre cheia de gente e de tarefas. E, no fundo desse vazio que tanto temias, encontras não o abismo, mas uma nascente, um lugar quieto de onde brotam as respostas que andavas a procurar lá fora. Quem aprende a habitar o seu próprio silêncio nunca mais está verdadeiramente só.
+
+Antes da prática, talvez caiba um agradecimento, porque encher foi também uma forma de cuidar de ti. Encheres o vazio foi como o aguentaste sem te partires. Obrigada. O silêncio já não é abismo, é colo.
 
 Antes da prática, fica com estas perguntas, sem te apressares a tapar o que elas mexem. Do que é que o silêncio em casa te faz fugir? Se ficasses no vazio sem o preencher, o que terias medo de descobrir lá dentro? Quando foi a última vez que estiveste só por gosto, e não por falta? E se a quietude não fosse abandono, mas a única companhia que nunca te deixa, terias coragem de te sentar com ela?
 
@@ -289,6 +301,8 @@ Quando o horizonte deixa de te puxar para a frente, abre-se um campo sem margens
 
 O que muda quando este véu se ergue é que a vida volta a acontecer no presente, o único tempo onde ela alguma vez acontece. Deixas de adiar a felicidade para um "quando" que recua sempre, e começas a encontrá-la em coisas pequenas que tinhas o hábito de atravessar a correr. Continuas a ter projetos e sonhos, mas deixas de os viver como condições para teres o direito de respirar. Ficas mais presente com quem amas, porque já não estás meia ausente, projetada no passo seguinte. E há um descanso fundo em perceber que não estás atrasada para nada, que não há um comboio a partir sem ti, que a tua vida não é um ensaio para uma estreia que está sempre para vir. A estreia é hoje. Sempre foi.
 
+E, antes de seguires, vale a pena agradecer a este véu, porque o adiar foi, durante muito tempo, o que te deu forças para o dia seguinte. O "quando" foi como continuaste a andar nos dias sem sentido. Obrigada. A sala de espera era a viagem.
+
 Antes da prática, fica com estas perguntas, e repara em qual delas te incomoda mais. Para que "quando" estás a adiar a tua vida neste momento? Se soubesses que não há chegada nenhuma, que não há um lá onde tudo se resolve, o que mudarias hoje? O que estás a perder, de quem amas e do que tens, enquanto vives sempre um passo à frente? E o que seria viver como se já tivesses chegado, porque, na verdade, sempre estiveste cá?
 
 A prática é um regresso, e podes fazê-la várias vezes ao dia, em segundos. Pára o que estás a fazer, no meio de uma tarefa qualquer, e diz, em silêncio, devagar: não estou a caminho de lugar nenhum. Já cá estou. Depois escolhe uma só coisa presente e pequena, a luz a cair numa parede, o calor da chávena nas mãos, o ar a entrar e a sair de ti sem que tenhas de o pedir. Demora-te nessa coisa minúscula o tempo de três respirações, como se fosse a primeira vez que a vês e a última. Era para isto que andavas à espera, todo este tempo, sem saber. E já cá estava.
@@ -322,6 +336,8 @@ Aqui, no último véu, há uma verdade que não se conquista, vive-se. A integra
 No fundo do último véu, dá-se a inversão que dá sentido a toda a viagem. No início parecia que o caminho te conduzia para longe: desmontar crenças, atravessar medos, abrir horizontes, soltar tudo. Parecia um percurso para fora, em busca de algo que te faltava. Mas neste limiar a direção inverte-se, e percebes que não caminhavas para fora coisa nenhuma. Tudo o que tiraste foi apenas o que tapava o que já estava cá dentro, inteiro, desde sempre. O centro a que chegas não é uma meta distante. É o lugar de onde partiste, e para onde, mesmo sem saber, sempre regressaste, mesmo quando a mente jurava estar a caminhar em linha reta para longe de si. Chegar ao último véu não é, afinal, alcançar um fim. É reconhecer um chamado antigo, e responder a ele com a coisa mais simples de todas: voltar para casa, onde nunca deixaste verdadeiramente de estar.
 
 O que muda quando este véu se ergue é o pano de fundo de toda a tua vida. O medo, que era o tom de fundo de tudo, perde o chão, porque o medo nasce da separação e tu deixas de te sentir uma ilha cercada. As relações deixam de ser transações com contas a fechar e tornam-se encontros entre formas da mesma vida. Sentes-te parte, e essa pertença não depende de teres muita gente à volta, depende de uma descoberta interior que ninguém te pode tirar. A morte, até a morte, fica menos aterradora, porque deixa de ser o fim absoluto de um eu isolado e passa a caber numa imagem maior, a da onda que regressa ao mar de onde nunca se separou de verdade. E, no dia a dia, ficas com uma serenidade de fundo, uma confiança mansa de que, aconteça o que acontecer, pertences, e que pertencer é o teu estado original, não uma conquista.
+
+E cabe aqui, no último véu, o maior agradecimento de todos, porque até a separação foi, no princípio, uma forma de te protegeres. Fazeres-te ilha foi a primeira forma de sobreviver a um mundo enorme. Obrigada. Nunca estiveste, de facto, separada.
 
 Antes da prática, fica com estas perguntas, deixando-as repousar mais do que respondendo-lhes. Em que momentos da tua vida sentiste, mesmo que por instantes, que não estavas separada de tudo o resto? Onde acabas tu e começa o mundo, se procurares mesmo essa fronteira? De que te terias de defender se soubesses, no corpo e não só na ideia, que pertences? E se a paz que procuras não fosse algo a alcançar lá à frente, mas algo a lembrar, que já é teu desde sempre?
 
@@ -434,7 +450,7 @@ Cada semana tem quatro tempos. **Para ver**, umas perguntas para abrir o olhar. 
 
 O foco desta semana é reparar em quem julgas que tens de ser. Anda pela semana com uma pergunta solta no bolso: onde é que estou a defender uma imagem de mim?
 
-**Para ver.** Em que situações desta semana sentiste necessidade de defender quem és, de provar, de corrigir a imagem que os outros têm de ti? Que papel te custaria mais largar, e o que temes que aconteça se o largasses? Houve algum momento em que te sentiste tu, sem teres de ser nada para ninguém? Não respondas de cabeça. Repara ao longo dos dias e deixa as respostas chegarem.
+**Para ver.** Em que situações desta semana sentiste necessidade de defender quem és, de provar, de corrigir a imagem que os outros têm de ti? Que papel te custaria mais largar, e o que temes que aconteça se o largasses? Houve algum momento em que te sentiste tu, sem teres de ser nada para ninguém? Não respondas de cabeça. Repara ao longo dos dias e deixa as respostas chegarem. E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Uma vez por dia, num momento de calma, diz o teu nome em voz baixa, três vezes, e à terceira repara em quem o ouve, esse que está por trás do nome e não precisa de defesa. Fica três respirações com ele. E, a meio da semana, escreve três frases que comecem por "eu sou", e ao lado de cada uma pergunta o que aconteceria se ela deixasse de ser verdade. A que te apertar o peito é o teu véu mais defendido.
 
@@ -448,7 +464,7 @@ O foco desta semana é reparar em quem julgas que tens de ser. Anda pela semana 
 
 O foco desta semana é a história que contas sobre ti. Anda atenta às frases que repetes, sobretudo as que começam por "eu sempre" e "eu nunca".
 
-**Para ver.** Que história sobre ti repetiste esta semana sem a questionar? Quando reagiste com mais força do que a situação pedia, a que outro tempo, a que outras pessoas pertencia, de facto, aquela dor? De quem é a voz que ouves quando te diminuis ou te limitas? Escuta com atenção, porque muitas vezes não é tua.
+**Para ver.** Que história sobre ti repetiste esta semana sem a questionar? Quando reagiste com mais força do que a situação pedia, a que outro tempo, a que outras pessoas pertencia, de facto, aquela dor? De quem é a voz que ouves quando te diminuis ou te limitas? Escuta com atenção, porque muitas vezes não é tua. E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Escolhe uma frase antiga que dizes sobre ti, escreve-a, e lê-a em voz alta. Pergunta: de quem é esta voz? Quando reconheceres a quem pertence, em silêncio, devolve-lha, com respeito e sem rancor. Repete isto com uma frase diferente a meio da semana.
 
@@ -462,7 +478,7 @@ O foco desta semana é a história que contas sobre ti. Anda atenta às frases q
 
 O foco desta semana é a tua relação com os pensamentos e as emoções. Não para os calares, para os veres passar.
 
-**Para ver.** Em que momentos a tua cabeça acelerou esta semana, e o que estava ela a tentar proteger-te de sentir? Reparaste na diferença entre ter um pensamento e ser arrastada por ele? Conseguiste, alguma vez, encontrar quem em ti observa o turbilhão sem ser o turbilhão?
+**Para ver.** Em que momentos a tua cabeça acelerou esta semana, e o que estava ela a tentar proteger-te de sentir? Reparaste na diferença entre ter um pensamento e ser arrastada por ele? Conseguiste, alguma vez, encontrar quem em ti observa o turbilhão sem ser o turbilhão? E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Várias vezes ao dia, sobretudo quando a mente disparar, diz por dentro: "estou a reparar que estou a pensar isto". E respira três vezes a partir desse que repara. É um regresso curto à margem, repetido até o corpo aprender o caminho.
 
@@ -476,7 +492,7 @@ O foco desta semana é a tua relação com os pensamentos e as emoções. Não p
 
 O foco desta semana é o quanto te esforças para seres amada, e o medo que mora por baixo do descanso.
 
-**Para ver.** Onde te apanhaste a fazer demais esta semana, a antecipar, a salvar, a agradar? O que sentiste quando alguém te ofereceu ajuda ou descanso? Conseguiste receber, ou ficaste desconfortável? E a culpa, quando paraste, de onde vinha?
+**Para ver.** Onde te apanhaste a fazer demais esta semana, a antecipar, a salvar, a agradar? O que sentiste quando alguém te ofereceu ajuda ou descanso? Conseguiste receber, ou ficaste desconfortável? E a culpa, quando paraste, de onde vinha? E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Uma vez por dia, escolhe uma pequena coisa que farias por hábito para servir ou adiantar, e não a faças. Fica com o desconforto que sobe, a mão no peito, três respirações, sem o resolveres. É o véu a ser erguido.
 
@@ -490,7 +506,7 @@ O foco desta semana é o quanto te esforças para seres amada, e o medo que mora
 
 O foco desta semana é a tua relação com o silêncio e o vazio. Não para os encheres, para os habitares.
 
-**Para ver.** Do que é que fugiste esta semana quando a casa ficou em silêncio? Que ruídos, ecrãs ou tarefas usaste para não sentir o vazio? E quando, por acaso, ficaste só sem nada para fazer, o que subiu?
+**Para ver.** Do que é que fugiste esta semana quando a casa ficou em silêncio? Que ruídos, ecrãs ou tarefas usaste para não sentir o vazio? E quando, por acaso, ficaste só sem nada para fazer, o que subiu? E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Uma vez por dia, fica dois minutos no silêncio, sem preencher. Sem telemóvel, sem música, sem tarefa. A mão no peito, e por dentro: "isto não é perigo, é espaço". Deixa o vazio ser terra, não abismo. Se subir emoção, deixa-a vir. Era só isso que ela pedia.
 
@@ -504,7 +520,7 @@ O foco desta semana é a tua relação com o silêncio e o vazio. Não para os e
 
 O foco desta semana é reparar em quanto vives à espera de um "depois", e trazer a vida de volta ao presente.
 
-**Para ver.** Para que "quando" estás a adiar a tua vida neste momento? Quantas vezes esta semana disseste, por dentro ou em voz alta, "quando isto passar"? Alcançaste algo que querias e sentiste, em vez de paz, a ânsia do passo seguinte?
+**Para ver.** Para que "quando" estás a adiar a tua vida neste momento? Quantas vezes esta semana disseste, por dentro ou em voz alta, "quando isto passar"? Alcançaste algo que querias e sentiste, em vez de paz, a ânsia do passo seguinte? E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Várias vezes ao dia, pára e diz: "não estou a caminho de lugar nenhum, já cá estou". Depois demora-te numa coisa pequena e presente, a luz, o calor da chávena, a respiração, três respirações. Era para isto que esperavas.
 
@@ -518,7 +534,7 @@ O foco desta semana é reparar em quanto vives à espera de um "depois", e traze
 
 O foco desta última semana é a pertença. Reparar onde te sentes separada, e lembrar que não és uma ilha.
 
-**Para ver.** Onde te sentiste do lado de fora esta semana, separada por um vidro, mesmo no meio de pessoas? Reparaste em viver as relações como contas a fechar, quem deu mais, quem ficou a dever? E houve momentos de paz inexplicável, na natureza, na música, no afeto, em que essa separação afrouxou?
+**Para ver.** Onde te sentiste do lado de fora esta semana, separada por um vidro, mesmo no meio de pessoas? Reparaste em viver as relações como contas a fechar, quem deu mais, quem ficou a dever? E houve momentos de paz inexplicável, na natureza, na música, no afeto, em que essa separação afrouxou? E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Uma vez por dia, ao ar livre se puderes, escolhe um ser vivo, uma árvore, um pássaro, uma pessoa ao longe, e em vez de "eu e aquilo" deixa subir "somos do mesmo". O mesmo ar, a mesma vida em formas diferentes. Fica três respirações nessa pertença.
 
@@ -532,7 +548,7 @@ O foco desta última semana é a pertença. Reparar onde te sentes separada, e l
 
 Atravessaste os sete. Esta última semana não tem véu próprio, porque é a semana de os deixar conversar entre si e de praticar o método como um todo, no meio da vida real, sem tema marcado.
 
-**Para ver.** Olha para a semana que passou. Qual dos sete véus apareceu mais? Reparaste em algum a chamar outro, o esforço a tapar o vazio, o turbilhão a remoer o passado, o horizonte a fugir do presente? E houve momentos, mesmo pequenos, em que viste um véu a tempo e escolheste outra coisa? Repara neles, porque são o teu progresso, ainda que discretos.
+**Para ver.** Olha para a semana que passou. Qual dos sete véus apareceu mais? Reparaste em algum a chamar outro, o esforço a tapar o vazio, o turbilhão a remoer o passado, o horizonte a fugir do presente? E houve momentos, mesmo pequenos, em que viste um véu a tempo e escolheste outra coisa? Repara neles, porque são o teu progresso, ainda que discretos. E, todas as semanas, as mesmas duas perguntas: que sobrevivência foi esta? A quem é que esta estratégia foi leal, a mim, ou a quem veio antes?
 
 **A prática da semana.** Sem tema fixo. Apenas, ao longo do dia, duas perguntas de bolso, sempre que algo te apertar: o que é que estou a ver aqui? E: consigo soltar um bocadinho disto, abrir só um dedo da mão? Não precisas de saber o nome do véu. Basta ver, e soltar o que conseguires.
 
@@ -556,7 +572,7 @@ Algumas palavras aparecem muitas vezes nestas páginas, e vale a pena guardá-la
 
 **Ver.** O primeiro movimento do método. Reconhecer o padrão sem te julgares, dar-lhe nome e contorno, perceber onde nasce. Não é analisar até à exaustão, é um notar quieto, quase sem palavras. O que deixa de ser invisível deixa de ser destino.
 
-**Soltar.** O segundo movimento. Largar o que viste, não com força, mas deixando de o segurar e de o alimentar com a tua atenção e o teu medo. Soltar vem por si quando o ver está maduro. Não há soltar sem ver.
+**Soltar.** O segundo movimento. Largar o que viste, não com força, mas deixando de o segurar e de o alimentar com a tua atenção e o teu medo. Começa por agradecer: não se larga uma estratégia rejeitando-a, honra-se a proteção que ela foi, e só então a mão se abre. Soltar é gratidão, não rutura. Soltar vem por si quando o ver está maduro. Não há soltar sem ver.
 
 **Padrão.** A forma repetida de sentir, reagir ou amar que o véu te faz viver em automático. O que te faz repetir, mesmo quando já sabes.
 

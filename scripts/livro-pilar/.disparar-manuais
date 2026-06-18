@@ -1,0 +1,5 @@
+Ficheiro-gatilho do workflow "Render manuais (ver/vir/viver)".
+Tocar/alterar este ficheiro num push para main re-renderiza os 3 manuais (PT+EN)
+a partir de VER/VIR/VIVER-SOLTAR-{PT,EN}.md e republica em produtos/<slug>.pdf.
+
+re-render: 2026-06-18 — linha de enquadramento da lente da sobrevivência (PR #404)

@@ -4,6 +4,8 @@
 
 > *The water keeps passing. You are no longer in it: you are on the bank, and you see.*
 
+*Here you do not come to correct your head. You come to see how it learned to keep you safe, and to thank it, before releasing it.*
+
 ## Who this book is for
 
 This book is for you, if your mind never stops. If you wake already tired of a day that has not yet begun, because you lived it all through the night. If you relive, point by point, a conversation that ended years ago, and rehearse, point by point, a conversation that may never happen. If you feel each emotion so strongly that you stop having it and become it, head to foot. If there is an old film playing inside you almost all the time, with characters from twenty years ago, and you reacting to the present with a pain that belongs to another time.

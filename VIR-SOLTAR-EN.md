@@ -4,6 +4,8 @@
 
 > *You do not have to stay standing to be worthy of rest. The lap you return to has been open all along, waiting for you.*
 
+*Here you do not come to stop caring. You come to see that your effort was the way you were loved, and to discover that you already are, before doing anything.*
+
 ## Who this book is for
 
 This book is for you, if you carry everything and do not know how to put it down. If you always arrive first, anticipate what others will need before they know it themselves, solve things before they are asked, catch what is falling before it falls. If you do your part and then, quietly, do everyone else's part too, and still apologise for not having done more. If sitting down with nothing to do brings up an immediate restlessness, a dull guilt, as though rest were a debt you will have to repay later, with interest.
