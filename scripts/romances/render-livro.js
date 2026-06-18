@@ -20,6 +20,7 @@ const PASTAS = {
   fabrica: { pt: 'fabrica-dorme-livro', en: 'fabrica-dorme-livro-en', capa: 'FABRICA-capa', outPt: 'ENQUANTO-A-FABRICA-DORME-pt.pdf', outEn: 'WHILE-THE-FACTORY-SLEEPS-en.pdf' },
   tradutora: { pt: 'a-tradutora-livro', en: 'a-tradutora-livro-en', capa: 'TRADUTORA-capa', outPt: 'A-TRADUTORA-pt.pdf', outEn: 'THE-TRANSLATOR-en.pdf' },
   sentinela: { pt: 'a-sentinela-livro', en: 'a-sentinela-livro-en', capa: 'SENTINELA-capa', outPt: 'A-SENTINELA-pt.pdf', outEn: 'THE-SENTINEL-en.pdf' },
+  ferrolho: { pt: 'o-ferrolho-livro', en: 'o-ferrolho-livro-en', capa: 'FERROLHO-capa', outPt: 'O-FERROLHO-pt.pdf', outEn: 'THE-BOLT-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -317,7 +318,35 @@ const T_SENTINELA = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : T_AMPARO;
+const T_FERROLHO = LANG==='pt' ? {
+  tituloHtml:'O Ferrolho', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante I · As Casas de Família',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance fala da doença de quem bebe e de quem o ama, com compaixão por ambos e sem receitas. Tem um irmão de autoconhecimento na coleção das mães. Não és responsável pela doença de quem amas, não a curas destruindo-te, e fechar a porta ao mal não é fechar o coração à pessoa. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, e este é fundo, procura apoio. Também tu tens direito a uma casa sem medo.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares estas noites de Véspera com a Dores. Se te tocou, partilha-a, não como prova, mas como semente. E se reconheceste em ti alguma porta que devias ter fechado há muito, lembra-te: pôr um limite a quem amamos pode ser mais amor do que todo o sacrifício, e ninguém se salva afogando-se com quem se afunda.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Bolt', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf I · The Family Houses',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing these nights of Véspera with Dores.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
