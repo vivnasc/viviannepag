@@ -17,6 +17,8 @@
 // tradução moderna. Os exemplos da dor falam à mulher de hoje.
 
 import type { VeuNome } from './contas';
+import type { DimensaoVeu } from './planoTrimestral';
+import { exemplosDimensao } from './saber';
 
 export interface FacesVeu {
   dor: string;        // o que se sente / faz (do SABER + biblioteca de reconhecimentos)
@@ -122,6 +124,20 @@ export const RAIZ: { veu: VeuNome; texto: string } = {
   veu: 'Dualidade',
   texto: 'Por baixo de todos vive a Dualidade, a sensação de separação. Foi ela que te fez agarrar à identidade, prender-te à história, encher o vazio, correr para o horizonte, esforçar-te para seres amada. Quando ela afrouxa, todos os outros perdem força ao mesmo tempo, como folhas de um ramo que finalmente se solta.',
 };
+
+// Os exemplos do ÂNGULO de uma semana do percurso. Para as faces do retrato
+// validado (fuga/culpa/saida) devolve a face na voz dela; para as dimensões do
+// SABER delega em exemplosDimensao (sem tocar no saber.ts). É o que liga o
+// percurso trimestral expandido às faces validadas.
+export function exemplosDoAngulo(veu: VeuNome, dim: DimensaoVeu): string[] {
+  const f = VEU_FACES[veu];
+  if (f) {
+    if (dim === 'fuga') return [f.fuga];
+    if (dim === 'culpa') return [f.culpa];
+    if (dim === 'saida') return [f.saida];
+  }
+  return exemplosDimensao(veu, dim as Exclude<DimensaoVeu, 'fuga' | 'culpa' | 'saida'>);
+}
 
 export const FACES_ORDEM: { chave: keyof FacesVeu; titulo: string; nova: boolean }[] = [
   { chave: 'dor', titulo: 'A dor', nova: false },
