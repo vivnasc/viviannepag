@@ -94,10 +94,11 @@ MATÉRIA-PRIMA deste véu (a área de estudo dela; usa para encontrar um ÂNGULO
   // Âncora autoritária; a frase nasce DESTA dor, com o motivo por baixo.
   const f = VEU_FACES[veu];
   const retrato = f ? `
-RETRATO VALIDADO deste véu (a VOZ EXATA da Vivianne, validada por ela; é a verdade-mãe, ancora a dor AQUI e encontra UM ângulo concreto desta MESMA dor, sem copiar à letra):
-- a dor: ${f.dor}
+RETRATO VALIDADO deste véu (a VOZ EXATA da Vivianne, validada por ela; é a VERDADE-MÃE e o MOTIVO deste véu, não um molde a copiar à letra):
+- a dor (a verdade-mãe, para SENTIRES, não para copiar): ${f.dor}
 - o motivo por baixo (a fuga aplaudida): ${f.fuga}
 - a culpa que a prende: ${f.culpa}
+USO: a VOZ e o MOTIVO acima são CONSTANTES (toda a dor deste véu os carrega). Se houver um ÂNGULO DESTA SEMANA (abaixo), é ELE que escolhe QUE face concreta escrever desta vez. O retrato dá a alma; o ângulo dá a direção.
 O QUE SEPARA O MÉTODO DO MERCADO: o mercado fala do comportamento; a tua dor tem de deixar SENTIR o motivo (a fuga, a culpa) por baixo, não só descrever o que ela faz.` : '';
   // CAMPO DE ESTUDO (cadeiras): conceitos reais SÓ para pensar um ângulo novo da
   // dor. NUNCA aparecem na frase (nada de nomes/termos técnicos): a frase fica
