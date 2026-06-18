@@ -59,17 +59,16 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    titulo: 'Método VS · 4 níveis',
+    titulo: 'Método VS',
     cor: '#C8A24A',
     itens: [
-      { href: '/admin/metodo', label: 'painel · 4 níveis' },
+      { href: '/admin/metodo', label: 'painel' },
       { href: '/admin/metodo/calendario', label: '1 · calendário trimestral' },
       { href: '/admin/metodo/semana', label: '2 · calendário semanal' },
-      { href: '/admin/publicar', label: '3 · agenda diária' },
-      { href: '/admin/metodo/mae', label: '4 · por conta · mãe' },
-      { href: '/admin/metodo/ver', label: '4 · por conta · ver' },
-      { href: '/admin/metodo/vir', label: '4 · por conta · vir' },
-      { href: '/admin/metodo/viver', label: '4 · por conta · viver' },
+      { href: '/admin/metodo/mae', label: '3 · por conta · mãe' },
+      { href: '/admin/metodo/ver', label: '3 · por conta · ver' },
+      { href: '/admin/metodo/vir', label: '3 · por conta · vir' },
+      { href: '/admin/metodo/viver', label: '3 · por conta · viver' },
     ],
   },
   {

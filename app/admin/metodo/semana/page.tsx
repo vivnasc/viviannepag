@@ -11,8 +11,18 @@ const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400'
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable}`;
 
+// Arranque do plano: 22 jun 2026 (a semana de 15-21 foi de testes). Enquanto não
+// chega lá, o calendário abre já na 1.ª semana do plano (22 jun), não na de testes.
+function semanasAteArranque(): number {
+  const h = new Date(); const dow = h.getDay();
+  const seg = new Date(h.getFullYear(), h.getMonth(), h.getDate() + (dow === 0 ? -6 : 1 - dow));
+  const arranque = new Date(2026, 5, 22);
+  const diff = Math.round((arranque.getTime() - seg.getTime()) / (7 * 864e5));
+  return diff > 0 ? diff : 0;
+}
+
 export default function MetodoSemanaPage() {
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(() => semanasAteArranque());
   const [sel, setSel] = useState<ContaId>('mae');
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
