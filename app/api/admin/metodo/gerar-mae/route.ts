@@ -7,7 +7,7 @@ import { fraseReconhecimento, revelacaoDaDor } from '@/lib/metodo/ia';
 import { nomeVeu } from '@/lib/metodo/posts';
 import { hashtagsDoPost } from '@/lib/metodo/legenda';
 import { planoSemanaMae, diaMaeDaData, type DiaSemanaMae } from '@/lib/metodo/semana';
-import { exemplosDimensao } from '@/lib/metodo/saber';
+import { exemplosDoAngulo } from '@/lib/metodo/veu-faces';
 import { semanaMaeDaData } from '@/lib/metodo/planoTrimestral';
 import { realceAuto } from '@/lib/metodo/reels';
 
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
       // ÂNGULO DO PERCURSO: a semana trimestral desta data dá a dimensão (o foco)
       // por que a dor sai. É o que faz o planeado no trimestral ser EXECUTADO aqui.
       const sem = semanaMaeDaData(d.data);
-      const foco = { titulo: `${sem.tema} (${sem.foco})`, exemplos: exemplosDimensao(d.veu, sem.dimensao) };
+      const foco = { titulo: `${sem.tema} (${sem.foco})`, exemplos: exemplosDoAngulo(d.veu, sem.dimensao) };
       let dor: string;
       try { dor = limparTravessoes(await fraseReconhecimento(d.veu, apiKey, evitar, foco)); evitar.push(dor); }
       catch { continue; }

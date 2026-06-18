@@ -78,8 +78,10 @@ export function totalTemas(conta: ContaId): number {
 // 7 véus (1/dia) são vistos por esse ângulo. Assim o planeado no trimestral é
 // EXECUTADO no semanal. Cada ângulo é uma DIMENSÃO real do SABER (não inventado).
 
-/** A dimensão do SABER que a semana ilumina (o ângulo da dor desse véu). */
-export type DimensaoVeu = 'comportamentos' | 'cenas' | 'subtipos' | 'origens' | 'mecanismos' | 'custos' | 'crencas' | 'verdades' | 'mapa';
+/** A dimensão do SABER que a semana ilumina (o ângulo da dor desse véu).
+ *  As 3 últimas (fuga, culpa, saida) são as FACES do retrato validado
+ *  (veu-faces.ts): a fuga aplaudida, a culpa que prende, o movimento de soltar. */
+export type DimensaoVeu = 'comportamentos' | 'cenas' | 'subtipos' | 'origens' | 'mecanismos' | 'custos' | 'crencas' | 'verdades' | 'mapa' | 'fuga' | 'culpa' | 'saida';
 
 export interface ParteMae { id: string; nome: string; descricao: string }
 export interface SemanaMae {
@@ -100,7 +102,9 @@ export const PARTES_MAE: ParteMae[] = [
   { id: 'IV', nome: 'IV · Soltar', descricao: 'A verdade que liberta, e o primeiro passo.' },
 ];
 
-// 12 semanas = um trimestre inteiro (3 por parte). Avança e, ao fim, recomeça com
+// 15 semanas = um trimestre inteiro. As 12 das dimensões do SABER + 3 das FACES do
+// retrato validado (fuga na II, culpa na III, saída na IV), para o percurso passar
+// também pelo MOTIVO (não só pelo comportamento). Avança e, ao fim, recomeça com
 // outros ângulos (como as 13 da veu.a.veu). NUNCA é aleatório: tem direção.
 export const PERCURSO_MAE: SemanaMae[] = [
   { semana: 1, parte: 'I', dimensao: 'comportamentos', tema: 'Os sinais que te denunciam', mote: 'O padrão mostra-se primeiro no que fazes sem pensar.', foco: 'um comportamento observável do dia a dia' },
@@ -109,12 +113,15 @@ export const PERCURSO_MAE: SemanaMae[] = [
   { semana: 4, parte: 'II', dimensao: 'origens', tema: 'De onde isto vem', mote: 'Nada disto começou em ti. Foi aprendido.', foco: 'a origem do padrão (infância, o que se aprendeu cedo), sem culpa' },
   { semana: 5, parte: 'II', dimensao: 'mecanismos', tema: 'Como funciona por dentro', mote: 'O que parece defeito é um mecanismo que um dia te protegeu.', foco: 'o que o padrão faz por dentro (como se mantém)' },
   { semana: 6, parte: 'II', dimensao: 'origens', tema: 'A herança que não escolheste', mote: 'Há pesos que carregas e que nunca foram teus.', foco: 'a lealdade/herança de família por trás do padrão' },
-  { semana: 7, parte: 'III', dimensao: 'custos', tema: 'O custo escondido', mote: 'O padrão cobra um preço que quase nunca somas.', foco: 'o preço invisível que o padrão te cobra' },
-  { semana: 8, parte: 'III', dimensao: 'crencas', tema: 'O erro de interpretação', mote: 'Acreditas numa coisa que te prende. E nem sequer é verdade.', foco: 'a crença errada (o que a pessoa pensa) que sustenta o padrão' },
-  { semana: 9, parte: 'III', dimensao: 'custos', tema: 'O que isto já te tirou', mote: 'Soma o que ficou pelo caminho. É mais do que parece.', foco: 'o que a pessoa já perdeu por causa do padrão' },
-  { semana: 10, parte: 'IV', dimensao: 'verdades', tema: 'A verdade que liberta', mote: 'Ver a verdade por baixo do medo é onde o soltar começa.', foco: 'a dor de quem ainda não viu a verdade que a liberta' },
-  { semana: 11, parte: 'IV', dimensao: 'mapa', tema: 'O mapa do véu', mote: 'Pensa, sente, faz, paga. Ver o mapa inteiro é poder mudá-lo.', foco: 'o que a pessoa pensa e faz quando o padrão a comanda' },
-  { semana: 12, parte: 'IV', dimensao: 'verdades', tema: 'O primeiro passo para soltar', mote: 'Soltar não é força. É deixares de te agarrar.', foco: 'a dor de continuar agarrada ao que já podias largar' },
+  { semana: 7, parte: 'II', dimensao: 'fuga', tema: 'A fuga aplaudida', mote: 'A tua maneira de fugir deste padrão é tão aplaudida que ninguém te manda parar.', foco: 'a fuga socialmente aplaudida com que escapas a sentir o padrão' },
+  { semana: 8, parte: 'III', dimensao: 'custos', tema: 'O custo escondido', mote: 'O padrão cobra um preço que quase nunca somas.', foco: 'o preço invisível que o padrão te cobra' },
+  { semana: 9, parte: 'III', dimensao: 'crencas', tema: 'O erro de interpretação', mote: 'Acreditas numa coisa que te prende. E nem sequer é verdade.', foco: 'a crença errada (o que a pessoa pensa) que sustenta o padrão' },
+  { semana: 10, parte: 'III', dimensao: 'custos', tema: 'O que isto já te tirou', mote: 'Soma o que ficou pelo caminho. É mais do que parece.', foco: 'o que a pessoa já perdeu por causa do padrão' },
+  { semana: 11, parte: 'III', dimensao: 'culpa', tema: 'A culpa que te prende', mote: 'Não te prende só o medo. Prende-te a culpa de fazeres diferente.', foco: 'a culpa que o padrão gera e que te impede de soltar' },
+  { semana: 12, parte: 'IV', dimensao: 'verdades', tema: 'A verdade que liberta', mote: 'Ver a verdade por baixo do medo é onde o soltar começa.', foco: 'a dor de quem ainda não viu a verdade que a liberta' },
+  { semana: 13, parte: 'IV', dimensao: 'mapa', tema: 'O mapa do véu', mote: 'Pensa, sente, faz, paga. Ver o mapa inteiro é poder mudá-lo.', foco: 'o que a pessoa pensa e faz quando o padrão a comanda' },
+  { semana: 14, parte: 'IV', dimensao: 'verdades', tema: 'O primeiro passo para soltar', mote: 'Soltar não é força. É deixares de te agarrar.', foco: 'a dor de continuar agarrada ao que já podias largar' },
+  { semana: 15, parte: 'IV', dimensao: 'saida', tema: 'O movimento de soltar', mote: 'Soltar não é um salto. É um gesto pequeno que mostra que o chão aguenta.', foco: 'a dor de quem ainda não deu o primeiro gesto de saída deste padrão' },
 ];
 
 export const SEMANAS_PERCURSO_MAE = PERCURSO_MAE.length;

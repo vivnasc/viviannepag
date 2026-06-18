@@ -7,7 +7,7 @@
 
 import { VeuNome } from './contas';
 import { VEU_SEMENTE } from './veus';
-import { exemplosDimensao } from './saber';
+import { exemplosDoAngulo } from './veu-faces';
 import { REFERENCIAS } from './referencias';
 import { limparTravessoes } from '@/lib/texto';
 import type { Formato } from './formatos';
@@ -16,7 +16,7 @@ import type { Formato } from './formatos';
  *  `estilo`: 'dramatico' (tarde — palavra que bate como a imagem) ou 'contemplativo'. */
 export async function gerarFormatoBeats(formato: Formato, veu: VeuNome, apiKey: string, evitar: string[] = [], estilo: 'contemplativo' | 'dramatico' = 'dramatico'): Promise<string[]> {
   const s = VEU_SEMENTE[veu];
-  const materia = exemplosDimensao(veu, formato.dimensao);
+  const materia = exemplosDoAngulo(veu, formato.dimensao);
   const ref = REFERENCIAS[veu];
   const estrutura = formato.beats.map((b, i) => `${i + 1}. [${b.papel}] ${b.instrucao}`).join('\n');
 

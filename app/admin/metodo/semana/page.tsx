@@ -6,7 +6,7 @@ import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta, type ContaId } from '@/lib/metodo/contas';
 import { planoSemana, planoSemanaMae } from '@/lib/metodo/semana';
 import { jornadaConta, totalTemas, semanaTrimestreAtual, semanaMaeDoOffset, parteMae } from '@/lib/metodo/planoTrimestral';
-import { exemplosDimensao } from '@/lib/metodo/saber';
+import { exemplosDoAngulo } from '@/lib/metodo/veu-faces';
 import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -202,7 +202,7 @@ export default function MetodoSemanaPage() {
                       <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[0.62rem] uppercase tracking-wider" style={{ background: `${conta.cor}33`, color: conta.cor }}>Véu {d.veu} · reel 2 faces</span>
                       <p className="mt-1.5 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
                         <span className="opacity-55 italic">face 1 · a dor (IA){semMae ? `, por: ${semMae.tema.toLowerCase()}` : ''}</span>
-                        {semMae && (() => { const ex = exemplosDimensao(d.veu, semMae.dimensao); const e = ex[((offset % ex.length) + ex.length) % (ex.length || 1)]; return e ? <><br /><span className="opacity-45 text-[0.74rem]">ex.: {e}</span></> : null; })()}
+                        {semMae && (() => { const ex = exemplosDoAngulo(d.veu, semMae.dimensao); const e = ex[((offset % ex.length) + ex.length) % (ex.length || 1)]; return e ? <><br /><span className="opacity-45 text-[0.74rem]">ex.: {e}</span></> : null; })()}
                       </p>
                       <p className="mt-1 leading-snug" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
                         <span className="text-[0.6rem] uppercase tracking-wider opacity-50">face 2 · revelação</span><br />{d.revelacao.texto}
