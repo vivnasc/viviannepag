@@ -121,7 +121,7 @@ Este véu tem maneiras de se esconder que vale a pena saberes, porque costumam p
 
 O que muda, quando este véu se ergue, é que a vida fica mais leve. Podes mudar de rumo aos quarenta, aos cinquenta, aos sessenta, sem sentir que te trais, porque entendes que mudar é próprio de quem está vivo. As perdas passam a doer sem te destruir, porque descobres em ti um fundo que nenhuma perda alcança. Voltas a ter curiosidade por ti, deixas de ser uma estátua empenhada em manter-se igual e voltas a ser um rio. Não te tornas ninguém. Tornas-te livre dentro de quem és.
 
-*Defenderes quem eras foi como mantiveste o teu lugar quando tê-lo parecia em risco. Obrigada, identidade. Já posso existir sem te empunhar.*
+E talvez caiba aqui, antes de seguires, um agradecimento, porque este véu nunca foi defeito, foi defesa. Defenderes quem eras foi como mantiveste o teu lugar quando tê-lo parecia em risco. Obrigada, identidade. Já posso existir sem te empunhar.
 
 Antes da prática, fica com estas perguntas, sem pressa de responder. Quem serias tu se largasses, por um só dia, o papel que mais te define? O que temes que aconteça se deixares de ser a forte, a que aguenta, a que resolve tudo? De quem aprendeste, lá atrás, que só uma versão tua era bem-vinda em casa? E o que em ti permanece, mesmo quando todos os papéis mudam, acabam ou te são tirados?
 
@@ -157,7 +157,7 @@ Há também, neste véu, uma forma mais subtil de prisão, que vale a pena olhar
 
 O que muda quando este véu se ergue é a tua relação com o tempo. Deixas de viver para trás, a confirmar quem és pelo que já foi, e começas a viver para a frente, aberta ao que ainda não está escrito. As mesmas memórias continuam lá, mas perdem o poder de te governar, porque deixaste de as tratar como sentença e passaste a tê-las como aprendizagem. Reages às pessoas de hoje pelo que elas são, e não pelo que outras te fizeram. E acontece, muitas vezes, uma reconciliação inesperada com quem veio antes, porque, ao veres que herdaste a dor deles sem escolher, deixas de os culpar e começas a compreendê-los, e nesse compreender liberta-se também algo em ti. Ficas mais leve de um peso que carregavas sem saber que se podia pousar.
 
-*Prenderes-te ao passado foi como te protegeste de repetir uma dor antiga. Obrigada, memória. A dor era de outro tempo.*
+E, antes de seguires, há um agradecimento a fazer também a este véu, porque também ele te guardou. Prenderes-te ao passado foi como te protegeste de repetir uma dor antiga. Obrigada, memória. A dor era de outro tempo.
 
 Antes da prática, senta-te um momento com estas perguntas, sem pressa. Que história contas sobre ti que nunca mais voltaste a questionar? Se ela não fosse verdade, ou não fosse toda a verdade, quem poderias ser? A quem estás a ser leal quando repetes essa história, e o que terias medo de perder se a largasses? E se olhasses a tua infância com os olhos de hoje, em vez dos olhos da menina que a viveu, o que verias de diferente, o que perdoarias, a quem devolverias uma culpa que nunca foi tua?
 
@@ -195,7 +195,7 @@ Há um lugar, no fundo deste véu, a que se chega quando se larga até a ânsia 
 
 O que muda quando este véu se ergue é que ganhas um centro. A mente continua a produzir o seu ruído, mas tu deixas de morar lá dentro a tempo inteiro. Passas a ter um lugar calmo de onde observas a tempestade sem seres a tempestade, e isso muda tudo no dia a dia. As decisões deixam de ser tomadas em pânico e passam a vir de um sítio mais sereno. Sentes as emoções com a mesma intensidade, mas já não te arrastam até ao fundo, porque sabes que são vagas e que tu és o mar. Dormes melhor, porque a cabeça aprende, devagar, que nem todo o pensamento merece uma reunião de emergência às três da manhã. E descobres, talvez pela primeira vez, o sabor de estar simplesmente presente, sem comentário, num momento que não precisa de ser analisado para ser vivido.
 
-*Antecipares tudo foi como te mantiveste segura. Obrigada, vigilância. Estou segura agora, e pensar não é resolver.*
+Antes da prática, talvez queiras agradecer a esta cabeça que não pára, porque ela nunca foi defeito, foi defesa. Antecipares tudo foi como te mantiveste segura. Obrigada, vigilância. Estou segura agora, e pensar não é resolver.
 
 Antes da prática, fica com estas perguntas, devagar. Quando a tua cabeça acelera, que história está ela a tentar proteger-te de sentir? Se acreditasses em metade do que pensas sobre o futuro, quanto da tua energia estarias a gastar a defender-te de coisas que nunca vão acontecer? Consegues, agora mesmo, encontrar em ti quem está a ler estas linhas, por trás do barulho todo? E o que mudaria no teu dia se tratasses os teus pensamentos como nuvens de passagem, e não como ordens a cumprir?
 
@@ -231,7 +231,7 @@ No fundo deste véu, há um ponto em que a busca lá fora começa, sozinha, a si
 
 O que muda quando este véu se ergue é, antes de tudo, o teu corpo. O cansaço crónico começa a ceder, não porque passaste a fazer menos, mas porque deixaste de carregar a vigilância permanente de seres responsável pela vida de todos. Aprendes a receber, e descobres que receber não te diminui, completa-te. Começas a dizer "não" sem um discurso inteiro de justificação atrás, e o céu não cai. As tuas relações, curiosamente, melhoram, porque deixam de assentar na tua exaustão e passam a assentar na tua presença verdadeira. E o amor, que tanto tempo confundiste com fazer, com servir, com segurar, revela-se afinal noutra coisa muito mais simples e muito mais difícil para ti: estar. Estar inteira, sem teres de provar nada, ao lado de quem amas e ao teu próprio lado. As mãos, finalmente, podem pousar.
 
-*Fazeres sem parar foi como te sentiste amada e necessária. Obrigada, esforço. Eu basto antes de fazer.*
+E há, antes de seguires, uma gratidão a devolver ao próprio véu, porque ele te amou à maneira que aprendeu. Fazeres sem parar foi como te sentiste amada e necessária. Obrigada, esforço. Eu basto antes de fazer.
 
 Antes da prática, fica com estas perguntas, com ternura por ti. O que temes que aconteça se parares de fazer, de resolver, de antecipar? Se o amor não tivesse de ser ganho, o que farias hoje de diferente? Quem cuidaria de ti se tu deixasses, por um momento, de ser a que cuida de tudo? E de quem aprendeste, lá atrás, que o teu lugar era o de dar até não sobrar nada de ti?
 
@@ -265,7 +265,7 @@ Há, neste véu, um medo particular, e é diferente do pânico que conhecemos. Q
 
 O que muda quando este véu se ergue é que deixas de ter medo de ti. O silêncio, que era ameaça, torna-se refúgio. Passas a saber estar sozinha sem te sentires abandonada, e isso liberta todas as tuas relações de um peso enorme, porque já não te agarras a ninguém por terror do vazio, e passas a estar com as pessoas por escolha e não por fuga. Reencontras o gosto de coisas simples e só tuas, que tinhas esquecido por andares sempre cheia de gente e de tarefas. E, no fundo desse vazio que tanto temias, encontras não o abismo, mas uma nascente, um lugar quieto de onde brotam as respostas que andavas a procurar lá fora. Quem aprende a habitar o seu próprio silêncio nunca mais está verdadeiramente só.
 
-*Encheres o vazio foi como o aguentaste sem te partires. Obrigada. O silêncio já não é abismo, é colo.*
+Antes da prática, talvez caiba um agradecimento, porque encher foi também uma forma de cuidar de ti. Encheres o vazio foi como o aguentaste sem te partires. Obrigada. O silêncio já não é abismo, é colo.
 
 Antes da prática, fica com estas perguntas, sem te apressares a tapar o que elas mexem. Do que é que o silêncio em casa te faz fugir? Se ficasses no vazio sem o preencher, o que terias medo de descobrir lá dentro? Quando foi a última vez que estiveste só por gosto, e não por falta? E se a quietude não fosse abandono, mas a única companhia que nunca te deixa, terias coragem de te sentar com ela?
 
@@ -301,7 +301,7 @@ Quando o horizonte deixa de te puxar para a frente, abre-se um campo sem margens
 
 O que muda quando este véu se ergue é que a vida volta a acontecer no presente, o único tempo onde ela alguma vez acontece. Deixas de adiar a felicidade para um "quando" que recua sempre, e começas a encontrá-la em coisas pequenas que tinhas o hábito de atravessar a correr. Continuas a ter projetos e sonhos, mas deixas de os viver como condições para teres o direito de respirar. Ficas mais presente com quem amas, porque já não estás meia ausente, projetada no passo seguinte. E há um descanso fundo em perceber que não estás atrasada para nada, que não há um comboio a partir sem ti, que a tua vida não é um ensaio para uma estreia que está sempre para vir. A estreia é hoje. Sempre foi.
 
-*O "quando" foi como continuaste a andar nos dias sem sentido. Obrigada. A sala de espera era a viagem.*
+E, antes de seguires, vale a pena agradecer a este véu, porque o adiar foi, durante muito tempo, o que te deu forças para o dia seguinte. O "quando" foi como continuaste a andar nos dias sem sentido. Obrigada. A sala de espera era a viagem.
 
 Antes da prática, fica com estas perguntas, e repara em qual delas te incomoda mais. Para que "quando" estás a adiar a tua vida neste momento? Se soubesses que não há chegada nenhuma, que não há um lá onde tudo se resolve, o que mudarias hoje? O que estás a perder, de quem amas e do que tens, enquanto vives sempre um passo à frente? E o que seria viver como se já tivesses chegado, porque, na verdade, sempre estiveste cá?
 
@@ -337,7 +337,7 @@ No fundo do último véu, dá-se a inversão que dá sentido a toda a viagem. No
 
 O que muda quando este véu se ergue é o pano de fundo de toda a tua vida. O medo, que era o tom de fundo de tudo, perde o chão, porque o medo nasce da separação e tu deixas de te sentir uma ilha cercada. As relações deixam de ser transações com contas a fechar e tornam-se encontros entre formas da mesma vida. Sentes-te parte, e essa pertença não depende de teres muita gente à volta, depende de uma descoberta interior que ninguém te pode tirar. A morte, até a morte, fica menos aterradora, porque deixa de ser o fim absoluto de um eu isolado e passa a caber numa imagem maior, a da onda que regressa ao mar de onde nunca se separou de verdade. E, no dia a dia, ficas com uma serenidade de fundo, uma confiança mansa de que, aconteça o que acontecer, pertences, e que pertencer é o teu estado original, não uma conquista.
 
-*Fazeres-te ilha foi a primeira forma de sobreviver a um mundo enorme. Obrigada. Nunca estiveste, de facto, separada.*
+E cabe aqui, no último véu, o maior agradecimento de todos, porque até a separação foi, no princípio, uma forma de te protegeres. Fazeres-te ilha foi a primeira forma de sobreviver a um mundo enorme. Obrigada. Nunca estiveste, de facto, separada.
 
 Antes da prática, fica com estas perguntas, deixando-as repousar mais do que respondendo-lhes. Em que momentos da tua vida sentiste, mesmo que por instantes, que não estavas separada de tudo o resto? Onde acabas tu e começa o mundo, se procurares mesmo essa fronteira? De que te terias de defender se soubesses, no corpo e não só na ideia, que pertences? E se a paz que procuras não fosse algo a alcançar lá à frente, mas algo a lembrar, que já é teu desde sempre?
 

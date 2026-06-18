@@ -121,7 +121,7 @@ This veil has ways of hiding that are worth knowing, because they usually pass f
 
 What changes, when this veil lifts, is that life becomes lighter. You can change course at forty, at fifty, at sixty, without feeling you betray yourself, because you understand that to change is proper to one who is alive. The losses come to hurt without destroying you, because you discover in yourself a depth that no loss reaches. You regain curiosity about yourself, you stop being a statue intent on staying the same and become a river again. You do not become no one. You become free within who you are.
 
-*Defending who you were was how you kept your place when having it seemed at risk. Thank you, identity. I can exist now without wielding you.*
+And perhaps here, before you go on, a thank-you belongs, because this veil was never a flaw, it was a defence. Defending who you were was how you kept your place when having it seemed at risk. Thank you, identity. I can exist now without wielding you.
 
 Before the practice, stay with these questions, without rushing to answer. Who would you be if you let go, for a single day, of the role that most defines you? What do you fear would happen if you stopped being the strong one, the one who endures, who solves everything? From whom did you learn, back then, that only one version of you was welcome at home? And what in you remains, even when all the roles change, end or are taken from you?
 
@@ -157,7 +157,7 @@ There is also, in this veil, a subtler form of prison, worth looking at calmly. 
 
 What changes when this veil lifts is your relationship with time. You stop living backwards, confirming who you are by what has been, and begin to live forwards, open to what is not yet written. The same memories remain there, but they lose the power to govern you, because you stopped treating them as a sentence and began to hold them as learning. You react to the people of today by what they are, and not by what others did to you. And there happens, often, an unexpected reconciliation with those who came before, because, in seeing that you inherited their pain without choosing it, you stop blaming them and begin to understand them, and in that understanding something in you is also freed. You become lighter of a weight you carried without knowing it could be set down.
 
-*Holding on to the past was how you protected yourself from repeating an old pain. Thank you, memory. The pain was from another time.*
+And, before you go on, there is a thank-you to give to this veil too, because it also guarded you. Holding on to the past was how you protected yourself from repeating an old pain. Thank you, memory. The pain was from another time.
 
 Before the practice, sit a moment with these questions, without haste. What story do you tell about yourself that you never went back to question? If it were not true, or were not the whole truth, who could you be? To whom are you being loyal when you repeat that story, and what would you fear to lose if you let it go? And if you looked at your childhood with today's eyes, instead of the eyes of the girl who lived it, what would you see differently, what would you forgive, to whom would you return a guilt that was never yours?
 
@@ -195,7 +195,7 @@ There is a place, in the depth of this veil, that one reaches when one lets go e
 
 What changes when this veil lifts is that you gain a centre. The mind keeps producing its noise, but you stop living inside it full time. You come to have a calm place from which you observe the storm without being the storm, and that changes everything in daily life. The decisions stop being made in panic and begin to come from a more serene place. You feel the emotions with the same intensity, but they no longer drag you to the bottom, because you know they are waves and that you are the sea. You sleep better, because the head learns, slowly, that not every thought deserves an emergency meeting at three in the morning. And you discover, perhaps for the first time, the taste of being simply present, without commentary, in a moment that does not need to be analysed in order to be lived.
 
-*Anticipating everything was how you kept yourself safe. Thank you, vigilance. I am safe now, and thinking is not solving.*
+Before the practice, perhaps you will want to thank this head that does not stop, because it was never a flaw, it was a defence. Anticipating everything was how you kept yourself safe. Thank you, vigilance. I am safe now, and thinking is not solving.
 
 Before the practice, stay with these questions, slowly. When your head accelerates, what story is it trying to protect you from feeling? If you believed half of what you think about the future, how much of your energy would you be spending defending yourself from things that will never happen? Can you, right now, find in you the one who is reading these lines, behind all the noise? And what would change in your day if you treated your thoughts as passing clouds, and not as orders to obey?
 
@@ -231,7 +231,7 @@ In the depth of this veil, there is a point at which the search out there begins
 
 What changes when this veil lifts is, above all, your body. The chronic tiredness begins to give way, not because you started doing less, but because you stopped carrying the permanent vigilance of being responsible for everyone's life. You learn to receive, and you discover that receiving does not diminish you, it completes you. You begin to say "no" without a whole speech of justification behind it, and the sky does not fall. Your relationships, curiously, improve, because they stop resting on your exhaustion and begin to rest on your true presence. And love, which for so long you confused with doing, with serving, with holding, reveals itself after all in something much simpler and much harder for you: being. Being whole, without having to prove anything, beside those you love and beside yourself. The hands, finally, can rest.
 
-*Doing without stopping was how you felt loved and needed. Thank you, effort. I am enough before I do.*
+And there is, before you go on, a gratitude to return to the veil itself, because it loved you in the way it learned. Doing without stopping was how you felt loved and needed. Thank you, effort. I am enough before I do.
 
 Before the practice, stay with these questions, with tenderness for yourself. What do you fear would happen if you stopped doing, solving, anticipating? If love did not have to be earned, what would you do differently today? Who would care for you if you stopped, for a moment, being the one who takes care of everything? And from whom did you learn, back then, that your place was to give until there was nothing left of you?
 
@@ -265,7 +265,7 @@ There is, in this veil, a particular fear, and it is different from the panic we
 
 What changes when this veil lifts is that you stop being afraid of yourself. The silence, which was a threat, becomes a refuge. You come to know how to be alone without feeling abandoned, and that frees all your relationships of an enormous weight, because you no longer cling to anyone out of terror of the emptiness, and you come to be with people by choice and not by escape. You rediscover the liking for simple things that are only yours, which you had forgotten by being always full of people and tasks. And, at the bottom of that emptiness you so feared, you find not the abyss, but a spring, a quiet place from which spring the answers you were looking for out there. One who learns to inhabit her own silence is never again truly alone.
 
-*Filling the emptiness was how you bore it without breaking. Thank you. The silence is no longer an abyss, it is a lap.*
+Before the practice, perhaps a thank-you belongs, because filling was also a way of taking care of yourself. Filling the emptiness was how you bore it without breaking. Thank you. The silence is no longer an abyss, it is a lap.
 
 Before the practice, stay with these questions, without hurrying to cover what they stir. From what does the silence at home make you flee? If you stayed in the emptiness without filling it, what would you fear to discover in there? When was the last time you were alone out of liking, and not out of lack? And if stillness were not abandonment, but the only company that never leaves you, would you have the courage to sit with it?
 
@@ -301,7 +301,7 @@ When the horizon stops pulling you forwards, a field without margins opens where
 
 What changes when this veil lifts is that life comes to happen again in the present, the only time where it ever happens. You stop postponing happiness for a "when" that always recedes, and begin to find it in small things you used to cross at a run. You keep having projects and dreams, but you stop living them as conditions for having the right to breathe. You become more present with those you love, because you are no longer half absent, projected into the next step. And there is a deep rest in understanding that you are not late for anything, that there is no train leaving without you, that your life is not a rehearsal for a premiere that is always to come. The premiere is today. It always was.
 
-*The "when" was how you kept walking through the days without meaning. Thank you. The waiting room was the journey.*
+And, before you go on, it is worth thanking this veil, because postponing was, for a long time, what gave you strength for the next day. The "when" was how you kept walking through the days without meaning. Thank you. The waiting room was the journey.
 
 Before the practice, stay with these questions, and notice which of them bothers you most. For what "when" are you postponing your life at this moment? If you knew there was no arrival at all, that there is no there where everything resolves, what would you change today? What are you losing, of those you love and of what you have, while you live always a step ahead? And what would it be to live as if you had already arrived, because, in truth, you were always here?
 
@@ -337,7 +337,7 @@ In the depth of the last veil, the inversion that gives meaning to the whole jou
 
 What changes when this veil lifts is the backdrop of your whole life. Fear, which was the background tone of everything, loses the ground, because fear is born of separation and you stop feeling yourself a surrounded island. The relationships stop being transactions with accounts to settle and become encounters between forms of the same life. You feel yourself part, and that belonging does not depend on having many people around, it depends on an inner discovery that no one can take from you. Death, even death, becomes less terrifying, because it stops being the absolute end of an isolated self and comes to fit into a larger image, that of the wave returning to the sea from which it never truly separated. And, in daily life, you are left with a background serenity, a gentle confidence that, whatever happens, you belong, and that belonging is your original state, not a conquest.
 
-*Making yourself an island was the first way to survive an enormous world. Thank you. You were never, in fact, separate.*
+And here, in the last veil, the greatest thank-you of all belongs, because even separation was, at the start, a way of protecting yourself. Making yourself an island was the first way to survive an enormous world. Thank you. You were never, in fact, separate.
 
 Before the practice, stay with these questions, letting them rest more than answering them. In what moments of your life did you feel, even if for instants, that you were not separate from all the rest? Where do you end and the world begin, if you really look for that border? From what would you have to defend yourself if you knew, in the body and not only in the idea, that you belong? And if the peace you seek were not something to reach up ahead, but something to remember, that is already yours from always?
 
