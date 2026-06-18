@@ -55,6 +55,13 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
     ? `comportamentos: ${k.comportamentos.slice(0, 5).join(' · ')}; cenas do dia a dia: ${k.cenas.slice(0, 4).join(' · ')}; custos: ${k.custos.slice(0, 3).join(' · ')}; mecanismos: ${k.mecanismos.slice(0, 3).join(' · ')}; origens: ${k.origens.slice(0, 3).join(' · ')}`
     : (f?.dor ?? veu);
   const veste = `Símbolos do universo desta conta (usa-os nas imagens, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. Cores/luz: ${a.prompt}.`;
+  // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
+  // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
+  // identidade SENTIDA em qualquer post da porta. A mãe é a vista panorâmica (não
+  // tem fraseMae): aí a voz é o método inteiro, em 1.ª pessoa.
+  const voz = c.fraseMae
+    ? `A VOZ desta conta (é ISTO, não a cor, que define o conteúdo): a confissão recorrente que tem de ressoar em QUALQUER post desta porta é "${c.fraseMae}". As sensações que se repetem: ${(c.sensacoes ?? []).join(' · ')}. O movimento de chegada (o fim a que esta porta leva): ${c.chegada ?? ''}. Toda a peça reforça esta mesma voz, em qualquer ordem.`
+    : `A VOZ desta conta (a mãe): a vista panorâmica do método inteiro, em 1.ª pessoa, quem nomeia o padrão com clareza serena. É a voz, não a cor, que define o conteúdo.`;
 
   const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). Sem rosto, sem pessoas. A mulher reconhece-se em 1 segundo.
 
@@ -64,7 +71,9 @@ ${METAMODELO}
 
 O FORMATO PRÓPRIO DESTA CONTA E DESTA PEÇA (${fmt.nome}) — é isto que a distingue das outras contas, segue à risca: ${fmt.registo}
 
-A VESTE (o que distingue esta conta): ${veste}
+${voz}
+
+A VESTE (só veste a IMAGEM, NUNCA define o conteúdo do texto): ${veste}
 Cada beat tem uma IMAGEM feita destes símbolos, EM MOVIMENTO (o movimento é o gesto a acontecer, não fundo bonito). A imagem transforma-se ao longo dos beats.
 
 O ASSUNTO de hoje (partilhado por todas as contas; muda só a forma):
