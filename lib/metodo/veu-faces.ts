@@ -147,3 +147,9 @@ export const FACES_ORDEM: { chave: keyof FacesVeu; titulo: string; nova: boolean
   { chave: 'revelacao', titulo: 'A revelação', nova: false },
   { chave: 'saida', titulo: 'A saída', nova: true },
 ];
+
+// PONTES entre véus (compatibilidade com a página Universo do Método): as LIGACOES
+// da teia vistas como pontes {de, para, mecanismo}. Inclui a 1.ª descoberta
+// (Desolação -> Horizonte) e as restantes ligações que o pilar nomeia.
+export const PONTES: { de: VeuNome; para: VeuNome; mecanismo: string }[] =
+  LIGACOES.map((l) => ({ de: l.de, para: l.para, mecanismo: l.texto }));
