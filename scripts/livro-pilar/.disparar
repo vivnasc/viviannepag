@@ -1,0 +1,5 @@
+Ficheiro-gatilho do workflow "Render livro-pilar (Os Sete Véus)".
+Tocar/alterar este ficheiro num push para main re-renderiza o PDF (PT+EN) a
+partir de OS-7-VEUS-v2.md / OS-7-VEUS-EN.md e republica em produtos/os-7-veus.pdf.
+
+re-render: 2026-06-18 — camada da sobrevivência e lealdade (PR #404)
