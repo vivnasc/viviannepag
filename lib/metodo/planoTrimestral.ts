@@ -11,7 +11,7 @@ import { SABER } from './saber';
 
 export const SEMANAS_TRIMESTRE = 12; // ~3 meses (janela contínua)
 
-const INICIO = Date.UTC(2026, 5, 15); // 2.ª-feira da semana 1. Fuso: LOCAL, nunca UTC.
+const INICIO = Date.UTC(2026, 5, 22); // 2.ª-feira da semana 1 (arranque do plano: 22 jun 2026; a de 15 jun foi de testes). Fuso: LOCAL, nunca UTC.
 
 export function semanaTrimestreAtual(hoje = new Date()): number {
   const hojeUTC = Date.UTC(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());

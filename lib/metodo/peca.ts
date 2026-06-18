@@ -16,8 +16,9 @@ import { personagensPorVeu, familiaDaPersonagem, type Personagem, type Familia }
 import { FACES_ORDEM, type FacesVeu } from './veu-faces';
 import { dataLocal, horaDoMetodo } from './agenda';
 
-// Âncora do método (2.ª-feira da semana 1). Fuso LOCAL, nunca UTC.
-const INICIO = Date.UTC(2026, 5, 15);
+// Âncora do método (2.ª-feira da semana 1 = arranque do plano: 22 jun 2026; a de
+// 15 jun foi a semana de testes). Fuso LOCAL, nunca UTC. Ver UNIVERSO-VS.md.
+const INICIO = Date.UTC(2026, 5, 22);
 
 const SEED_CONTA: Record<ContaId, number> = { mae: 0, ver: 1, vir: 2, viver: 3 };
 
