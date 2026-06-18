@@ -14,6 +14,7 @@
 
 import { VeuNome, ContaId, CONTAS } from './contas';
 import { VEU_FACES } from './veu-faces';
+import { SABER } from './saber';
 import { REFERENCIAS } from './referencias';
 import type { Personagem } from './personagens';
 import { getFormatoConta } from './formatos-conta';
@@ -32,6 +33,12 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const f = VEU_FACES[veu];
   const fmt = getFormatoConta(conta, tipo);
   const ref = REFERENCIAS[veu];
+  const k = SABER[veu];
+  // SABER = a fonte-chave (a área de estudo dela): muitas faces da dor por véu.
+  // É o que dá ângulos concretos e infinitos. Alimenta o motor sempre.
+  const materia = k
+    ? `comportamentos: ${k.comportamentos.slice(0, 5).join(' · ')}; cenas do dia a dia: ${k.cenas.slice(0, 4).join(' · ')}; custos: ${k.custos.slice(0, 3).join(' · ')}; mecanismos: ${k.mecanismos.slice(0, 3).join(' · ')}; origens: ${k.origens.slice(0, 3).join(' · ')}`
+    : (f?.dor ?? veu);
   const veste = `Símbolos do universo desta conta (usa-os nas imagens, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. Cores/luz: ${a.prompt}.`;
 
   const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). Sem rosto, sem pessoas. A mulher reconhece-se em 1 segundo.
@@ -45,6 +52,7 @@ Cada beat tem uma IMAGEM feita destes símbolos, EM MOVIMENTO (o movimento é o 
 
 O ASSUNTO de hoje (partilhado por todas as contas; muda só a forma):
 - VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
+- MATÉRIA-PRIMA do SABER (a área de estudo dela — a fonte-chave; usa para encontrar um ângulo concreto e NOVO, NÃO copies à letra): ${materia}
 - A pessoa que se reconhece: ${personagem.nome}. Diz coisas como: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}
 - A origem/raiz (para a profundidade): ${f?.fuga ?? ''} ${f?.culpa ?? ''}
 - A saída/volta (a direção concreta): ${f?.saida ?? ''}
