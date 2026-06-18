@@ -92,6 +92,48 @@ As pessoas enviam **uma pessoa**, não um conceito. Cada linha é um comportamen
 
 ---
 
+# PARTE 3.5 · QUEM SE RECONHECE (as 5 famílias)
+
+Os comportamentos acima pertencem a mulheres — e quase todas cabem em **5 famílias**. Esta é a peça que faltava: o eixo do **QUEM**.
+
+**Três eixos, que se multiplicam (não competem):**
+- **QUEM** — as 5 famílias (a persona que se reconhece).
+- **O QUÊ** — os 7 véus (o mecanismo que a prende).
+- **COMO/ONDE** — os 5 universos/contas (a voz que lho diz).
+
+Uma peça = **uma família × um véu, dita por um universo**. 5 × 7 = **35 mulheres reconhecíveis**, cada uma dizível de 5 formas. É daqui que sai conteúdo para anos sem repetir.
+
+### 1 · AS QUE CARREGAM *(núcleo)*
+Salvadora · Diretora Invisível · Provedora · Heroína.
+- Crença: *"Se eu largar, tudo cai."* · Medo: não ser necessária · Frase: *"Eu trato."*
+- → vive sobretudo em **Esforço** · a saída é a **Vir** (deixa-te segurar).
+
+### 2 · AS QUE PROCURAM *(núcleo)*
+Peregrina-buscadora · Navegadora · Aluna Eterna · Buscadora de Casa.
+- Crença: *"Falta qualquer coisa."* · Medo: parar e descobrir que já chegou · Frase: *"Ainda não encontrei."*
+- → vive sobretudo em **Horizonte** · a saída é a **Viver** (já chegaste, descalça).
+
+> ⚠️ Esta Peregrina (a que procura) **não é** a Peregrina da Vir (a que pára de remar). Uma é a persona presa; a outra é o gesto que a liberta. É precisamente a mulher a quem a Vir fala.
+
+### 3 · AS QUE DESAPARECEM *(núcleo)*
+Invisível · Desaparecida · Órfã · Silenciosa.
+- Crença: *"Não ocupes espaço."* · Medo: ser demasiado · Frase: *"Não te preocupes comigo."*
+- → vive sobretudo em **Desolação / Dualidade** · a saída é a **Ver** (vê-te) e a **Vivianne** (nomeia-te).
+
+### 4 · AS QUE SE ADAPTAM
+Tradutora · Diplomata · Adaptadora · Fiel.
+- Crença: *"Para ser amada tenho de caber."* · Medo: desagradar · Frase: *"Para mim tanto faz."*
+- → vive em **Permanência / Esforço**.
+
+### 5 · AS QUE VIGIAM
+Guardiã · Sentinela · Perfeccionista · Observadora.
+- Crença: *"Se eu relaxar, algo corre mal."* · Medo: perder o controlo · Frase: *"Só para garantir."*
+- → vive em **Turbilhão / Permanência** (a camada de proteção das outras famílias).
+
+**O núcleo do VS** (a aposta, a confirmar contra as tuas clientes reais): *as que carregam · as que procuram · as que desapareceram de si.* Quase todos os outros padrões são estratégias que estas mulheres criaram para sobreviver. A pergunta que só tu respondes, sem pressa: **qual destas te faz pensar de imediato "estas são as minhas mulheres"?**
+
+---
+
 # PARTE 4 · O CALENDÁRIO (o fio que liga tudo)
 
 **1 véu por semana, partilhado pelas 4 contas do Método.** Cada uma trata o mesmo comportamento pelo seu gesto → o funil fecha (Visual atrai → Histórias identificam → Voz aprofunda → Exercícios convertem). **7 véus = 7 semanas, depois espiral.**

@@ -17,8 +17,12 @@
 // tradução moderna. Os exemplos da dor falam à mulher de hoje.
 
 import type { VeuNome } from './contas';
-import type { DimensaoVeu } from './planoTrimestral';
 import { exemplosDimensao } from './saber';
+
+// A dimensão/ângulo de uma semana. As 9 primeiras são do SABER; as 3 últimas são
+// as FACES do retrato (fuga/culpa/saida). Definido AQUI (neutro), para o motor
+// novo não depender do percurso trimestral antigo.
+export type DimensaoVeu = 'comportamentos' | 'cenas' | 'subtipos' | 'origens' | 'mecanismos' | 'custos' | 'crencas' | 'verdades' | 'mapa' | 'fuga' | 'culpa' | 'saida';
 
 export interface FacesVeu {
   dor: string;        // o que se sente / faz (do SABER + biblioteca de reconhecimentos)
@@ -36,7 +40,7 @@ export interface FacesVeu {
 export const VEU_FACES: Record<VeuNome, FacesVeu> = {
   Permanência: {
     dor: 'Apresentas-te sempre pela mesma frase. És a forte, a responsável, a que aguenta. E há silêncios em que essa frase te aperta como roupa de um corpo que já mudou.',
-    fuga: 'Manténs-te igual a todo o custo e chamas-lhe carácter. Definires-te por um papel é a tua maneira de nunca enfrentar a pergunta de quem serias sem ele.',
+    fuga: 'Manténs-te igual a todo o custo e chamas-lhe carácter. Definires-te por um papel é a tua maneira de nunca enfrentar a pergunta de quem serias sem ele. Adias o que muda porque começar obrigava-te a tornar-te alguém novo.',
     culpa: 'Mudar de rumo soa a traição. Se largas o papel da forte, sentes que desiludes quem conta contigo, e que atraiçoas as mulheres de quem herdaste a dureza.',
     custo: 'Vives em guarda permanente, sem direito a errar nem a não saber. E morres um bocadinho de cada vez que um papel teu muda, acaba ou te é tirado.',
     revelacao: 'Não és a forma, és o que permanece quando as folhas caem. A identidade é roupa, não pele. O que não pode ser perdido não precisa de defesa.',
@@ -44,7 +48,7 @@ export const VEU_FACES: Record<VeuNome, FacesVeu> = {
   },
   Memória: {
     dor: 'Dizes "comigo é sempre assim" com a naturalidade de quem afirma a cor dos olhos. Vives a olhar pelo retrovisor, a confirmar quem és pelo que já te aconteceu.',
-    fuga: 'Refugias-te na tua história, como prova e como sentença. Repetir quem sempre foste poupa-te ao risco de descobrir quem ainda podes ser.',
+    fuga: 'Refugias-te na tua história, como prova e como sentença. Repetir quem sempre foste poupa-te ao risco de descobrir quem ainda podes ser. Sais primeiro, fechas portas antes de te aproximares, e adias o que é novo porque falhar dói demais.',
     culpa: 'Ser feliz parece abandonar quem sofreu antes de ti. Sabotas o que te corre bem por lealdade a um destino familiar que confundiste com identidade.',
     custo: 'Reages ao presente com uma dor que pertence a outro tempo. Fechas portas antes de te aproximares. Vives tardes inteiras dentro de filmes antigos.',
     revelacao: 'A memória não guarda o passado, reconta-o. Não te lembras do que aconteceu, lembras-te da última vez que te lembraste. Não és a tua narrativa, és o agora que a está a contar.',
@@ -52,15 +56,15 @@ export const VEU_FACES: Record<VeuNome, FacesVeu> = {
   },
   Turbilhão: {
     dor: 'A cabeça não para. Ensaias discussões que não vão acontecer, levas tudo para a cama, acordas já a fazer a lista. Não tens medo, és o medo de uma ponta à outra.',
-    fuga: 'Chamas responsabilidade ao que é fuga. Pensar, prever, resolver de antemão, tudo serve para não ficares quieta com o que sentes.',
-    culpa: 'Confundes preocupação com amor. Achas que, se deixasses de te ralar, estarias a ser negligente, e por isso não te dás licença para parar a roda.',
+    fuga: 'Chamas responsabilidade ao que é fuga. Pensar, prever, resolver de antemão, tudo serve para não ficares quieta com o que sentes. E adias decidir porque precisas sempre de pensar só mais um bocado primeiro.',
+    culpa: 'Confundes preocupação com amor. Achas que, se deixasses de te ralar, estarias a ser negligente, e por isso não te dás licença para parar a roda. E ainda te culpas por estares ao jantar com a cabeça na conversa da manhã.',
     custo: 'Noites roubadas a uma discussão que durou dois minutos e correu bem. Sofres tudo, menos o que de facto acontece. E nunca estás inteira no momento bom.',
     revelacao: 'Se consegues ver um pensamento, há em ti algo que não é esse pensamento. Tu não és a tempestade. És o céu por onde ela passa, e nenhum céu foi alguma vez rasgado por uma nuvem.',
     saida: 'Quando a cabeça acelerar, dizer por dentro: estou a reparar que estou a pensar isto. Isso já te tira da onda para a margem. Depois, três respirações, e sentir quem respira.',
   },
   Esforço: {
     dor: 'Agendas os exames de toda a gente e adias os teus. Sentas-te à mesa, mas continuas a gerir tudo na cabeça enquanto os outros estão simplesmente presentes. Respondes a todos em minutos, e a ti não chegas há meses.',
-    fuga: 'A gestão é a tua fuga mais aplaudida. Enquanto organizas a vida de todos, não tens de parar com a tua. Estar sempre ocupada com os outros parece cuidado, mas é também não teres de estar contigo.',
+    fuga: 'A gestão é a tua fuga mais aplaudida. Enquanto organizas a vida de todos, não tens de parar com a tua. Estar sempre ocupada com os outros parece cuidado, mas é também não teres de estar contigo. Tornas-te indispensável e adias o que é teu porque estás exausta e nem a ti o admites.',
     culpa: 'Descansar custa-te como uma dívida. Se paras, sentes que deixas alguém em falta. A culpa não vem de teres feito mal. Vem de teres parado.',
     custo: 'Conheces as alergias de todos e ignoras os sinais do teu corpo. As relações onde só dás. A atenção sempre noutro lado, nunca em ti. E uma vida inteira a provar que mereces ficar.',
     revelacao: 'Aprendeste que o amor se ganha a fazer. Não se ganha. O que se ganha a fazer não é amor, é dependência da tua entrega. Tu bastas antes de produzires seja o que for.',
@@ -68,7 +72,7 @@ export const VEU_FACES: Record<VeuNome, FacesVeu> = {
   },
   Desolação: {
     dor: 'Ligas a TV mal entras, pegas no telemóvel sem razão, inventas uma tarefa quando ninguém precisa de ti. Mal o silêncio se instala, corres a preenchê-lo antes de o sentires.',
-    fuga: 'É sempre o mesmo gesto em mil formas: o ruído de fundo, as pessoas que cansam, o trabalho a mais, a relação que não acaba. Tudo para não chegares ao quarto escuro.',
+    fuga: 'É sempre o mesmo gesto em mil formas: a TV ligada mal entras, o scroll, as compras, o copo, o trabalho a mais, a relação que não acaba. E quando não anestesias, procuras sentido sem fim. Tudo para não chegares ao quarto escuro.',
     culpa: 'Receber custa-te como uma dívida, e a paz parece um luxo que não mereces. Sentes culpa quando descansas, como se parar fosse falhar com alguém.',
     custo: 'Manténs compromissos que já não te alimentam só para não enfrentar o vazio depois deles. E raramente sabes responder do que é que tu, só tu, gostas.',
     revelacao: 'O vazio não é ausência, é o campo onde a alma germina. Quando ficas nele sem fugir, ele não te engole. Por baixo da angústia aparece uma paz esquecida, e a pergunta: e eu, do que é que eu preciso?',
@@ -76,7 +80,7 @@ export const VEU_FACES: Record<VeuNome, FacesVeu> = {
   },
   Horizonte: {
     dor: 'Vives num "quando". Quando os filhos crescerem, quando me reformar, quando tiver tempo, quando emagrecer. Alcanças a meta e em poucos dias já queres a próxima.',
-    fuga: 'O "lá" luminoso é a tua forma de não estar aqui. Procurar sempre o passo seguinte poupa-te de habitar o presente, que te parece sempre pouco.',
+    fuga: 'O "lá" luminoso é a tua forma de não estar aqui. Procurar sempre o passo seguinte poupa-te de habitar o presente, que te parece sempre pouco. Adias a vida para um "quando" porque o momento certo está sempre mais à frente.',
     culpa: 'Achas que ainda não tens direito a viver, que primeiro tens de cumprir a condição. Descansar antes de chegares soa a preguiça, a estares a desistir.',
     custo: 'A vida passa-te ao lado enquanto a preparas para começar. Estás meia ausente de quem amas, projetada no próximo passo. Vives de mala feita à porta de um comboio que nunca chega.',
     revelacao: 'O "lá" é, por natureza, um lugar onde não se chega, feito para recuar a cada passo. Não estás atrasada para nada. Não há comboio a partir sem ti. A estreia é hoje. Sempre foi.',

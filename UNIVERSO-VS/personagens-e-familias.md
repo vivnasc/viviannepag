@@ -4,12 +4,19 @@
 
 ---
 
-## A CHAVE ESTRUTURAL
+> **Versão canónica:** a síntese fechada vive no guia (`UNIVERSO_VS_guia_completo.md`, **PARTE 3.5 · QUEM SE RECONHECE**). Este ficheiro é o registo da descoberta; o guia manda.
 
-**Personagem = quem ela é** (a mulher reconhecível, com nome e frases).
-**Véu = o mecanismo que a mantém viva** (o que a prende).
+## A CHAVE ESTRUTURAL · TRÊS EIXOS que se multiplicam
 
-Isto unifica tudo o que já existe: a *biblioteca de reconhecimentos* (comportamentos) ganha **caras e nomes**, e os 7 véus passam a ser os **motores** por baixo das personagens. Conteúdo sem fim: família × personagem × véu × gesto da conta.
+- **QUEM** — a **família/personagem** que se reconhece (a mulher, com nome e frases).
+- **O QUÊ** — o **véu** que a prende (o mecanismo por baixo).
+- **COMO/ONDE** — o **universo/conta** que lho diz (a voz, o gesto).
+
+Uma peça = **uma família × um véu, dita por um universo**. 5 × 7 = **35 mulheres reconhecíveis**, cada uma dizível de 5 formas. Conteúdo para anos sem repetir.
+
+Isto unifica tudo o que já existe: a *biblioteca de reconhecimentos* (comportamentos) ganha **caras e nomes**, e os 7 véus passam a ser os **motores** por baixo das personagens.
+
+**A saída por família (qual conta a liberta):** as que carregam → **Vir** · as que procuram → **Viver** · as que desaparecem → **Ver** + **Vivianne**.
 
 ---
 
