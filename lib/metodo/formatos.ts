@@ -14,7 +14,7 @@
 // O SABER e as referências dão profundidade SÓ por baixo; nunca jargão/autores.
 // O ÚLTIMO beat é sempre a saída/direção, não uma lição.
 
-import type { DimensaoVeu } from './planoTrimestral';
+import type { DimensaoVeu } from './veu-faces';
 
 export type FormatoId = 'mecanismo' | 'origem' | 'erro' | 'custo' | 'mapa' | 'cena' | 'mito' | 'veude';
 

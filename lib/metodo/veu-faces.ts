@@ -17,8 +17,12 @@
 // tradução moderna. Os exemplos da dor falam à mulher de hoje.
 
 import type { VeuNome } from './contas';
-import type { DimensaoVeu } from './planoTrimestral';
 import { exemplosDimensao } from './saber';
+
+// A dimensão/ângulo de uma semana. As 9 primeiras são do SABER; as 3 últimas são
+// as FACES do retrato (fuga/culpa/saida). Definido AQUI (neutro), para o motor
+// novo não depender do percurso trimestral antigo.
+export type DimensaoVeu = 'comportamentos' | 'cenas' | 'subtipos' | 'origens' | 'mecanismos' | 'custos' | 'crencas' | 'verdades' | 'mapa' | 'fuga' | 'culpa' | 'saida';
 
 export interface FacesVeu {
   dor: string;        // o que se sente / faz (do SABER + biblioteca de reconhecimentos)

@@ -10,8 +10,8 @@ const FONTS = `${cormorant.variable} ${inter.variable}`;
 
 // Os 4 níveis, do mais amplo ao mais específico. Um de cada vez, com calma.
 const NIVEIS = [
-  { n: 1, titulo: 'Calendário trimestral', href: '/admin/metodo/calendario', desc: 'O mapa de 3 meses. A direção (o percurso Ver → Compreender → O custo → Soltar). Só de vez em quando.' },
-  { n: 2, titulo: 'Calendário semanal', href: '/admin/metodo/semana', desc: 'A semana que desce do trimestral. Gerar a semana e rever, antes de produzir.' },
+  { n: 1, titulo: 'Calendário trimestral', href: '/admin/metodo/calendario', desc: 'O mapa. A semana são os 7 véus (1/dia); a espiral aprofunda uma face do retrato de cada vez (dor → … → saída). Só de vez em quando.' },
+  { n: 2, titulo: 'Calendário semanal', href: '/admin/metodo/semana', desc: 'A semana que desce do trimestral: cada dia uma família × véu × conta. Gerar e rever.' },
   { n: 3, titulo: 'Agenda diária', href: '/admin/publicar', desc: 'O dia a dia: o que sai, a que hora. Agendar, renderizar e publicar.' },
 ];
 
