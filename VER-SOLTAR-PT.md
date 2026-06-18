@@ -4,6 +4,8 @@
 
 > *A água continua a passar. Tu já não vais nela: estás na margem, e vês.*
 
+*Aqui não vens corrigir a tua cabeça. Vens ver como ela aprendeu a manter-te segura, e agradecer-lhe, antes de a soltar.*
+
 ## Para quem é este livro
 
 Este livro é para ti, se a tua cabeça não pára. Se acordas já cansada do dia que ainda não começou, porque o viveste todo durante a noite. Se revives, ponto por ponto, uma conversa que acabou há anos, e ensaias, ponto por ponto, uma conversa que talvez nunca aconteça. Se sentes cada emoção com tal força que deixas de a ter e passas a ser ela, da cabeça aos pés. Se há um filme antigo a passar por dentro de ti quase sempre, com personagens de há vinte anos, e tu a reagir ao presente com uma dor que pertence a outro tempo.

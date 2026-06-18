@@ -4,6 +4,8 @@
 
 > *Não te tens de manter de pé para seres digna de descanso. O colo a que voltas estava aberto desde sempre, à tua espera.*
 
+*Aqui não vens deixar de cuidar. Vens ver que o teu esforço foi a forma de seres amada, e descobrir que já és, antes de fazeres nada.*
+
 ## Para quem é este livro
 
 Este livro é para ti, se carregas tudo e não sabes pousar. Se chegas sempre primeiro, antecipas o que os outros vão precisar antes de eles próprios saberem, resolves antes que peçam, seguras o que está a cair antes de cair. Se dás a tua parte e depois, calada, dás também a dos outros, e ainda pedes desculpa por não teres feito mais. Se te sentares sem nada para fazer te sobe uma inquietação imediata, uma culpa surda, como se o descanso fosse uma falta que vais ter de pagar mais tarde, com juros.
