@@ -16,6 +16,7 @@ const PASTAS = {
   caderno: { pt: 'caderno-das-dividas-livro', en: 'caderno-das-dividas-livro-en', capa: 'CADERNO-capa', outPt: 'O-CADERNO-DAS-DIVIDAS-pt.pdf', outEn: 'THE-LEDGER-OF-DEBTS-en.pdf' },
   cheias: { pt: 'homem-das-cheias-livro', en: 'homem-das-cheias-livro-en', capa: 'CHEIAS-capa', outPt: 'O-HOMEM-DAS-CHEIAS-pt.pdf', outEn: 'THE-MAN-THE-FLOODS-BROUGHT-en.pdf' },
   incomodo: { pt: 'nenhum-incomodo-livro', en: 'nenhum-incomodo-livro-en', capa: 'INCOMODO-capa', outPt: 'NENHUM-INCOMODO-pt.pdf', outEn: 'NO-TROUBLE-AT-ALL-en.pdf' },
+  frio: { pt: 'mulher-frio-livro', en: 'mulher-frio-livro-en', capa: 'FRIO-capa', outPt: 'A-MULHER-QUE-NUNCA-TEVE-FRIO-pt.pdf', outEn: 'THE-WOMAN-WHO-NEVER-FELT-THE-COLD-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -201,7 +202,35 @@ const T_INCOMODO = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : T_AMPARO;
+const T_FRIO = LANG==='pt' ? {
+  tituloHtml:'A Mulher Que<br>Nunca Teve Frio', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante VI · A Serra',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Serafina te doer em sítios reais, o nome do que ela carrega está em «A mulher que se tornou forte demais», na coleção Força. Aqui não há padrões errados, há adaptações que salvaram. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, e este é fundo, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este inverno de Véspera com a Serafina. Se a história te tocou, partilha-a, não como prova, mas como semente. E se reconheceste em ti algum gelo, lembra-te: ele pode derreter, em qualquer idade, se houver quem traga o calor e a paciência.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Woman Who<br>Never Felt the Cold', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf VI · The Mountains',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Serafina hurts you in real places, the name of what she carries is in “The Woman Who Became Too Strong”, in the Strength collection. Here there are no wrong patterns, only adaptations that once saved us. A story understands, but it does not replace care: in the deep matters, and this is a deep one, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this winter of Véspera with Serafina. If the story touched you, pass it on, not as proof, but as seed. And if you recognised some ice in yourself, remember: it can melt, at any age, if someone brings the warmth and the patience.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
