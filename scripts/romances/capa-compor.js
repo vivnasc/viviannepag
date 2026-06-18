@@ -60,6 +60,10 @@ const TEXTOS = {
     pt: { serie: 'BIBLIOTECA DE VÉSPERA · I', t1: 'A', t2: 'Sentinela', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
     en: { serie: 'THE VÉSPERA LIBRARY · I', t1: 'The', t2: 'Sentinel', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
   },
+  ferrolho: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · I', t1: 'O', t2: 'Ferrolho', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · I', t1: 'The', t2: 'Bolt', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
 };
 const T = (TEXTOS[LIVRO] || TEXTOS.amparo)[LANG === 'en' ? 'en' : 'pt'];
 
