@@ -41,17 +41,26 @@ export default function MetodoSemanaPage() {
   type SB = { tipo: string; beats: { tempo: string; imagem: string; texto: string }[]; envio: string };
   const [sbs, setSbs] = useState<Record<string, SB>>({});
   const [sbBusy, setSbBusy] = useState<string | null>(null);
-  const gerarPeca = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade', opts?: { evitar?: string[]; clarificar?: boolean }) => {
-    const chave = `${sel}-${data}-${tipo}`;
+  const gerarPeca = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade', opts?: { evitar?: string[]; clarificar?: boolean }, conta: ContaId = sel) => {
+    const chave = `${conta}-${data}-${tipo}`;
     setSbBusy(chave); setErro(null);
     try {
-      const r = await fetch('/api/admin/metodo/storyboard', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: sel, tipo, dia: data, evitar: opts?.evitar, clarificar: opts?.clarificar }) });
+      const r = await fetch('/api/admin/metodo/storyboard', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta, tipo, dia: data, evitar: opts?.evitar, clarificar: opts?.clarificar }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else setSbs((s) => ({ ...s, [chave]: { tipo, beats: j.beats ?? [], envio: j.envio ?? '' } }));
     } catch (e) { setErro(String(e)); }
     finally { setSbBusy(null); }
   }, [sel]);
+  // COMPARAR AS 4 CONTAS no mesmo dia, lado a lado (sem saltar entre separadores).
+  // Gera o tipo escolhido (manhã/noite) para as 4 contas, uma de cada vez.
+  const [comparar, setComparar] = useState<string | null>(null);
+  const [compBusy, setCompBusy] = useState<string | null>(null);
+  const compararTipo = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade') => {
+    setCompBusy(`${data}-${tipo}`); setErro(null);
+    for (const c of CONTAS_LISTA) { await gerarPeca(data, tipo, undefined, c.id); }
+    setCompBusy(null);
+  }, [gerarPeca]);
   // editar à mão: muda o texto/imagem de um beat (fica guardado no estado).
   const editarBeat = useCallback((chave: string, i: number, campo: 'texto' | 'imagem', valor: string) => {
     setSbs((s) => { const sb = s[chave]; if (!sb) return s; const beats = sb.beats.map((b, k) => k === i ? { ...b, [campo]: valor } : b); return { ...s, [chave]: { ...sb, beats } }; });
@@ -162,11 +171,12 @@ export default function MetodoSemanaPage() {
                 <p className="mt-0.5 text-[0.72rem] opacity-55 italic leading-snug">{p.personagem.frases[0]}</p>
                 <p className="mt-1 text-[0.62rem] uppercase tracking-wider opacity-45">aprofunda: {p.face.titulo.toLowerCase()}</p>
                 {/* as 2 PEÇAS do dia, no formato próprio da conta */}
-                <div className="mt-2 flex gap-1.5">
+                <div className="mt-2 flex gap-1.5 flex-wrap">
                   {(['descoberta', 'profundidade'] as const).map((tipo) => {
                     const chave = `${sel}-${p.data}-${tipo}`;
                     return <button key={tipo} onClick={() => gerarPeca(p.data, tipo)} disabled={!!sbBusy} className="text-[0.6rem] px-2 py-1 rounded-md border disabled:opacity-40" style={{ borderColor: `${contaSel.cor}66`, color: contaSel.cor }}>{sbBusy === chave ? '…' : tipo === 'descoberta' ? 'manhã' : 'noite'}</button>;
                   })}
+                  <button onClick={() => setComparar(p.data)} className="text-[0.6rem] px-2 py-1 rounded-md border border-white/25 hover:bg-white/5">comparar as 4 contas →</button>
                 </div>
                 {(['descoberta', 'profundidade'] as const).map((tipo) => {
                   const chave = `${sel}-${p.data}-${tipo}`;
@@ -196,6 +206,51 @@ export default function MetodoSemanaPage() {
             ))}
           </div>
         </section>
+
+        {/* COMPARAR AS 4 CONTAS no mesmo dia, lado a lado. Mesmo véu, mesma
+            personagem, mesma cor: o que muda é o formato, a voz e os símbolos. */}
+        {comparar && (() => {
+          const pc = pecas.find((x) => x.data === comparar);
+          const compBoth = (tipo: 'descoberta' | 'profundidade') => compBusy === `${comparar}-${tipo}`;
+          return (
+            <section className="mt-5 rounded-2xl border border-white/15 bg-black/30 p-4">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div>
+                  <h2 className="text-lg" style={{ fontFamily: 'var(--font-cormorant), serif' }}>As 4 contas · {comparar.slice(8)}/{comparar.slice(5, 7)}</h2>
+                  {pc && <p className="text-[0.74rem] opacity-65">Mesmo véu <b>{pc.veu}</b>, mesma personagem <b>{pc.personagem.nome}</b>, mesma cor. Muda o formato, a voz e os símbolos.</p>}
+                </div>
+                <div className="flex gap-2 flex-wrap text-[0.74rem]">
+                  <button onClick={() => compararTipo(comparar, 'descoberta')} disabled={!!compBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{compBoth('descoberta') ? 'a gerar manhã…' : 'gerar manhã (4 contas)'}</button>
+                  <button onClick={() => compararTipo(comparar, 'profundidade')} disabled={!!compBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{compBoth('profundidade') ? 'a gerar noite…' : 'gerar noite (4 contas)'}</button>
+                  <button onClick={() => setComparar(null)} className="px-3 py-1.5 rounded-lg border border-white/15 opacity-70 hover:opacity-100">fechar</button>
+                </div>
+              </div>
+              <div className="mt-3 grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+                {CONTAS_LISTA.map((c) => (
+                  <div key={c.id} className="rounded-xl border border-white/10 p-3" style={{ background: `${c.paleta.bg1}` }}>
+                    <p className="text-[0.82rem] font-semibold" style={{ color: c.cor }}>@{c.handle}</p>
+                    {(['descoberta', 'profundidade'] as const).map((tipo) => {
+                      const sb = sbs[`${c.id}-${comparar}-${tipo}`];
+                      if (!sb) return null;
+                      return (
+                        <div key={tipo} className="mt-2 rounded-lg border border-white/10 bg-black/30 p-2">
+                          <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-1">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
+                          {sb.beats.map((b, i) => (
+                            <div key={i} className="mb-1.5">
+                              <p className="text-[0.5rem] opacity-35 italic leading-tight">🎞️ {b.imagem}</p>
+                              <p className="text-[0.74rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b.texto}</p>
+                            </div>
+                          ))}
+                          {sb.envio && <p className="text-[0.62rem] mt-1" style={{ color: c.cor }}>↳ {sb.envio}</p>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
 
         <FraseRapida />
       </div>
