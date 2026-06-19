@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { CONTAS_LISTA, Conta, type ContaId } from '@/lib/metodo/contas';
 import { planoSemanaPecas, faceDaEspiral, gestoDaConta } from '@/lib/metodo/peca';
+import { getFormatoConta } from '@/lib/metodo/formatos-conta';
 import { FraseRapida } from '@/components/admin/FraseRapida';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -124,12 +125,16 @@ export default function MetodoSemanaPage() {
       {(['descoberta', 'profundidade'] as const).map((tipo) => {
         const sb = sbs[`${c.id}-${data}-${tipo}`];
         if (!sb) return null;
+        const fmt = getFormatoConta(c.id, tipo);
         return (
           <div key={tipo} className="mt-2 rounded-lg border border-white/10 bg-black/30 p-2">
-            <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-1">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
+            <p className="text-[0.52rem] uppercase tracking-wider opacity-50">{tipo === 'descoberta' ? '☀️ manhã · descoberta' : '🌙 noite · profundidade'}</p>
+            {/* o NOME do formato: é isto que torna esta peça diferente das outras contas */}
+            <p className="text-[0.66rem] font-semibold mb-1.5 leading-tight" style={{ color: c.cor }}>{fmt.nome}</p>
             {sb.beats.map((b, i) => (
-              <div key={i} className="mb-1.5">
-                <p className="text-[0.5rem] opacity-35 italic leading-tight">🎞️ {b.imagem}</p>
+              <div key={i} className="mb-1.5 border-l-2 pl-1.5" style={{ borderColor: `${c.cor}44` }}>
+                {b.tempo && <span className="text-[0.5rem] opacity-40 tabular-nums">{b.tempo}</span>}
+                <p className="text-[0.58rem] opacity-55 italic leading-tight">🎞️ {b.imagem}</p>
                 <p className="text-[0.74rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b.texto}</p>
               </div>
             ))}
