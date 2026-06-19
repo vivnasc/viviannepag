@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCatalogoProdutos, amostraEcossistema, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
 import { REGRAS_GLOBAIS } from '@/lib/carrossel/overrides';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM } from '@/lib/carrossel/metodo';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -63,13 +63,15 @@ ${METODO_ESPINHA}
 A TUA TAREFA: reescrever o TEXTO de uma semana de carrosseis JA EXISTENTE, para passar a correr pelo Método VS, SEM mexer no que ja esta bom.
 REGRA ABSOLUTA E INVIOLAVEL: a PALAVRA-DESTAQUE (a palavra grande de cada dia) e o SUBTITULO MANTEM-SE EXACTAMENTE como estao. Nao os reescrevas, nao os traduzas, nao os "melhores". As IMAGENS tambem se mantem (nao falas delas). So reescreves o texto a volta, e fazes esse texto encaixar na palavra que JA la esta.
 
+${BREVIDADE_E_TOM}
+
 REGRAS DE VOZ:
 ${[...METODO_VOZ, ...REGRAS_GLOBAIS].map((r) => `- ${r}`).join('\n')}
 - ACENTUACAO obrigatoria (portugues europeu, todos os acentos). Tom generoso e nao-vendedor: valor primeiro, o produto e um sussurro no fim.
 
 O QUE REESCREVES em cada dia (na voz do Método, coerente com a palavra que se mantem):
 - gancho: a frase de abertura da capa. Verdade tensa e RECONHECIVEL do dia a dia ("isto sou eu"), curta (1-2 linhas), concreta.
-- prosa: reflexao em prosa curta e intima.
+- prosa: reflexao em prosa CURTISSIMA e intima (1-2 frases curtas, nunca um paragrafo denso).
 - poetico1: frase poetica (pode ter quebras de linha).
 - pratica: um convite ou pergunta pratica.
 - poetico2: fecho poetico que volta a palavra do dia.

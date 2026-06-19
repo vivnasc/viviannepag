@@ -7,7 +7,7 @@ import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM } from '@/lib/carrossel/metodo';
 import { listarPoolImagens, atribuirPool, imagensUsadas } from '@/lib/carrossel/pool-server';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
@@ -67,6 +67,8 @@ export async function POST(req: Request) {
 
 ${METODO_ESPINHA}
 
+${BREVIDADE_E_TOM}
+
 REGRAS DE VOZ:
 ${[...METODO_VOZ, ...REGRAS_GLOBAIS].map((r) => `- ${r}`).join('\n')}
 - Tom generoso e NAO-vendedor: "nao para te diagnosticar, para te devolver a ti". CADA DIA tem a sua propria palavra-destaque unica.
@@ -93,7 +95,7 @@ PALAVRA-DESTAQUE (a regra mais importante para ela):
 
 SLIDES DE CADA DIA (6 slides, nesta ordem):
 1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico; destaque = O GANCHO que para o scroll nos primeiros segundos: uma verdade tensa e RECONHECIVEL do dia a dia, curta (1-2 linhas), que faz a pessoa pensar "isto sou eu" e querer ver mais. Concreta, do real, nunca abertura suave/abstrata que nao prende (ex.: "Deitas o corpo. A cabeca e que nao se deita." em vez de "Ha um escuro que e o inicio de tudo.")). Fundo escuro/editorial.
-2) 'conteudo' PROSA: reflexao em prosa curta, intima (titulo = "PROSA"). Base clara.
+2) 'conteudo' PROSA: reflexao em prosa CURTISSIMA e intima (1-2 frases curtas, nunca um paragrafo denso) (titulo = "PROSA"). Base clara.
 3) 'conteudo' POETICO: frase poetica espacada com quebras de linha (titulo = "POÉTICO"). Base clara.
 4) 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRÁTICA" ou "HÁBITO DA SEMANA"). Base clara.
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
