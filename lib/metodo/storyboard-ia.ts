@@ -13,7 +13,7 @@
 //     mais funda. Retém quem já segue.
 
 import { VeuNome, ContaId, CONTAS } from './contas';
-import { VEU_FACES } from './veu-faces';
+import { VEU_FACES, type FacesVeu } from './veu-faces';
 import { VEU_SEMENTE } from './veus';
 import { SABER } from './saber';
 import { REFERENCIAS } from './referencias';
@@ -44,6 +44,48 @@ const METAMODELO =
   'só então o solta, sem força, porque o presente já não o pede. Não há soltar ' +
   'sem ver. A raiz mostra-se sem culpa; a saída é largar, não vencer.';
 
+// O ÂNGULO de cada conta sobre o MESMO véu do dia. É isto que faz 4 peças DIFERENTES
+// (e não a mesma dor 4 vezes): cada porta ataca uma FACE distinta do retrato e fecha
+// no SEU movimento. Sem isto, partilhando véu e personagem, as contas convergem todas
+// na cena mais óbvia. (Cura do "isto não é tudo o mesmo?".)
+function focoConta(conta: ContaId, f?: FacesVeu): { titulo: string; material: string; instrucao: string } {
+  if (!f) return { titulo: 'a dor deste véu', material: '', instrucao: '' };
+  switch (conta) {
+    case 'ver':
+      return {
+        titulo: 'VER o padrão de fora (RECONHECIMENTO, não solução)',
+        material: [f.dor, f.custo].filter(Boolean).join(' '),
+        instrucao: 'O teu trabalho é o reconhecimento: mostra o momento exato em que ela se vê no padrão, visto de fora, com clareza e sem julgamento. NÃO dês o passo de saída nem conselho (isso é de outra conta); fecha em "isto és tu", em vê-lo, não em resolvê-lo.',
+      };
+    case 'vir':
+      return {
+        titulo: 'PARAR e receber (a CULPA de descansar, a exaustão)',
+        material: [f.culpa, f.fuga, f.saida].filter(Boolean).join(' '),
+        instrucao: 'Fica na exaustão de quem faz tudo e na culpa que sobe ao parar. A volta é largar uma coisa, só uma, e deixar-se segurar em vez de seres sempre tu a segurar. Chega a regressar a si.',
+      };
+    case 'viver':
+      return {
+        titulo: 'A VIDA que fica por viver (o CUSTO) e o gesto de hoje',
+        material: [f.custo, f.saida].filter(Boolean).join(' '),
+        instrucao: 'Mostra o que fica por viver enquanto te ocupas dos outros, a vida a passar ao lado. A volta é um gesto presente e pequeno, para fazer HOJE. Chega a participar, a encarnar a vida agora.',
+      };
+    default: // mae
+      return {
+        titulo: 'NOMEAR o padrão inteiro (a vista de cima, a raiz e a direção)',
+        material: [f.dor, f.revelacao, f.saida].filter(Boolean).join(' '),
+        instrucao: 'Nomeia o padrão com clareza e calma, mostra a raiz ou a herança sem culpa, e fecha numa direção concreta. És a voz que vê o todo, não uma só face.',
+      };
+  }
+}
+
+// roda um leque para que cada conta arranque de um momento concreto DIFERENTE (e não
+// agarrem todas a primeira/mais óbvia cena do banco).
+function rodar<T>(arr: T[], n: number): T[] {
+  if (!arr.length) return arr;
+  const k = ((n % arr.length) + arr.length) % arr.length;
+  return arr.slice(k).concat(arr.slice(0, k));
+}
+
 export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNome, personagem: Personagem, apiKey: string, evitar: string[] = [], clarificar = false): Promise<Storyboard> {
   const c = CONTAS[conta];
   const a = c.atmosfera;
@@ -57,11 +99,16 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   // momento específico em que a mulher se reconhece em 1 segundo, em vez de soltar
   // uma frase de coach. Junta as frases de reconhecimento (VEU_SEMENTE), as faces
   // concretas do retrato (dor/fuga/culpa/custo) e, quando existe, o SABER.
-  const banco = [
+  const bancoBase = [
     ...(sem?.exemplos ?? []),
     f?.dor, f?.fuga, f?.culpa, f?.custo,
     ...(k ? [...k.comportamentos.slice(0, 6), ...k.cenas.slice(0, 5)] : []),
   ].filter(Boolean) as string[];
+  // cada conta vê o banco rodado por um passo diferente -> arranca de outra cena.
+  const ordemConta: ContaId[] = ['mae', 'ver', 'vir', 'viver'];
+  const banco = rodar(bancoBase, ordemConta.indexOf(conta) * 3);
+  // O ÂNGULO desta conta sobre o véu do dia (a face que ataca + onde fecha).
+  const foco = focoConta(conta, f);
   // A COR é SÓ a do VÉU do dia (sequência dos chakras). NÃO existe paleta de cor
   // por conta (foi banida): a cor da imagem é sempre a do véu. A conta entra com
   // os SÍMBOLOS e o MOOD (a sensação, sem cor). Veste a IMAGEM, nunca o texto.
@@ -75,6 +122,19 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
     ? `A VOZ desta conta (é ISTO, não a cor, que define o conteúdo): a confissão recorrente que tem de ressoar em QUALQUER post desta porta é "${c.fraseMae}". As sensações que se repetem: ${(c.sensacoes ?? []).join(' · ')}. O movimento de chegada (o fim a que esta porta leva): ${c.chegada ?? ''}. Toda a peça reforça esta mesma voz, em qualquer ordem.`
     : `A VOZ desta conta (a mãe): a vista panorâmica do método inteiro, em 1.ª pessoa, quem nomeia o padrão com clareza serena. É a voz, não a cor, que define o conteúdo.`;
 
+  // A FUNÇÃO da peça muda TUDO. Manhã = FACA (sentir). Noite = PROFUNDIDADE
+  // (compreender). O erro a evitar: a manhã fazer o trabalho da noite (explicar).
+  const ehManha = tipo === 'descoberta';
+  const regrasTipo = ehManha
+    ? `A FUNÇÃO DESTA PEÇA — MANHÃ · DESCOBERTA = uma FACA, não um artigo. Fura para estranhos, é para ser SENTIDA, não compreendida. REGRAS DE FERRO (são o que mais importa hoje):
+- POUQUÍSSIMO texto: cada beat é uma linha curta, 3 a 8 palavras, fragmentada, frase nominal. A peça inteira cabe em poucas linhas curtas.
+- UMA ideia, UM corte. Reconhecimento instantâneo, no 1.º segundo.
+- NÃO expliques. NÃO dês o mecanismo, NÃO dês a raiz nem a herança. PROIBIDO "porque", "não é… é…", "ou seja", e qualquer interpretação. Deixa a pessoa FECHAR a frase sozinha — o que ela descobre dói mais do que o que tu explicas.
+- O SÍMBOLO manda: a imagem (em movimento) faz metade do trabalho. Descreve bem a imagem de cada beat.
+- Termina como o teu FORMATO manda (muitas vezes a palavra-gesto sozinha).
+- Ritmo-modelo (copia o CORTE, não o tema): "2000: agenda da mãe. / 2026: app de todos. / Os teus exames: adiados." A pessoa fecha a frase, tu não.`
+    : `A FUNÇÃO DESTA PEÇA — NOITE · PROFUNDIDADE = voz-off contínua que APROFUNDA. Retém quem já segue. AQUI SIM entra o que a manhã não deu: a raiz, a herança sem culpa, o mecanismo, e a volta. Pode respirar em frases inteiras, mas continua concreta e sem jargão.`;
+
   const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). Sem rosto, sem pessoas. A mulher reconhece-se em 1 segundo.
 
 A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
@@ -83,17 +143,19 @@ ${METAMODELO}
 
 O FORMATO PRÓPRIO DESTA CONTA E DESTA PEÇA (${fmt.nome}) — é isto que a distingue das outras contas, segue à risca: ${fmt.registo}
 
+${regrasTipo}
+
 ${voz}
 
 A VESTE (só veste a IMAGEM, NUNCA define o conteúdo do texto): ${veste}
 Cada beat tem uma IMAGEM feita destes símbolos, EM MOVIMENTO (o movimento é o gesto a acontecer, não fundo bonito). A imagem transforma-se ao longo dos beats.
 
-O ASSUNTO de hoje (partilhado por todas as contas; muda só a forma):
+O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
 - VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
-- BANCO DE CONCRETO (a dor deste véu em momentos REAIS; escolhe UM momento específico e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
+- O TEU ÂNGULO (o que te separa das outras contas que hoje falam do mesmo véu): ${foco.titulo}.${ehManha ? ' NA MANHÃ isto é só o CORTE: mostra-o, não o expliques.' : ` ${foco.instrucao}`}
+- BANCO DE CONCRETO (momentos REAIS; escolhe UM e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
 - A pessoa que se reconhece: ${personagem.nome}. Fala assim: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}
-- A origem/raiz (para a profundidade): ${f?.fuga ?? ''} ${f?.culpa ?? ''}
-- A saída/volta (a direção concreta): ${f?.saida ?? ''}
+${ehManha ? '' : `- A raiz/herança e a volta (a NOITE aprofunda; nunca na manhã): ${f?.fuga ?? ''} ${f?.culpa ?? ''} ${foco.material} A direção concreta: ${f?.saida ?? ''}`}
 
 ${ref?.conceitos?.length ? `CAMPO DE ESTUDO (conceitos reais das cadeiras/pós-graduações dela, SÓ para TU pensares mais fundo; NUNCA os nomeies nem uses jargão/autores no texto): ${ref.conceitos.join(' · ')}${ref.estudos?.length ? ` · ${ref.estudos.join(' · ')}` : ''}.` : ''}
 
