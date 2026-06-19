@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
+import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta } from '@/lib/metodo/contas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
@@ -417,6 +418,21 @@ export default function MetodoContaPage() {
     finally { setVisualBusy(false); }
   }, [conta, visualBusy, recarregar]);
 
+  // CARTA DE RENOMEAR (vir): gera UMA carta (6 passos) e persiste-a (subtipo 'carta').
+  const [cartaBusy, setCartaBusy] = useState(false);
+  const gerarCarta = useCallback(async () => {
+    if (!conta || cartaBusy) return;
+    setCartaBusy(true); setErro(null); setMsg('A gerar uma Carta de renomear…');
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-carta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg('Carta criada (Tarde). Abre, revê e renderiza: capa alto contraste + corpo papel.');
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setCartaBusy(false); }
+  }, [conta, cartaBusy, recarregar]);
+
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
       <p>Conta desconhecida. <Link className="underline" href="/admin/metodo">Voltar</Link></p>
@@ -477,6 +493,7 @@ export default function MetodoContaPage() {
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
             <button onClick={() => gerarLote(4)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 4 semanas (texto, por dia)</button>
             <button onClick={gerarVisual} disabled={visualBusy} title="cria 1 reel VISUAL: cena de luz a fluir + 1 linha (pouco texto). A atmosfera de @vir.soltar (regressar a ti)." className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{visualBusy ? '🌌 a gerar…' : '🌌 gerar visual (1 cena + 1 linha)'}</button>
+            {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
           </div>
@@ -546,7 +563,9 @@ export default function MetodoContaPage() {
                             {/* hora + período: manhã (frase) vs tarde (motor dramático), para não misturar */}
                             <span className="absolute bottom-1 left-1 z-10 text-[0.5rem] px-1 py-0.5 rounded" style={{ background: (e.hora ?? '') >= '15:00' ? 'rgba(235,174,74,0.9)' : 'rgba(0,0,0,0.7)', color: (e.hora ?? '') >= '15:00' ? '#0F0F1A' : '#F2E8DC' }} title={(e.hora ?? '') >= '15:00' ? 'tarde · motor dramático' : 'manhã'}>{(e.hora ?? '').slice(0, 5) || '—'}</span>
                             <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${conta.cor}66`}` }}>
-                              <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} veuReveal={e.veuReveal ?? undefined} imageUrl={e.imageUrl ?? undefined} prog={1} />
+                              {e.conceito === 'Carta de renomear'
+                                ? <CartaSlide texto={e.texto} conta={conta} capa prog={1} />
+                                : <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} veuReveal={e.veuReveal ?? undefined} imageUrl={e.imageUrl ?? undefined} prog={1} />}
                             </button>
                             {!e.publicado && <input type="checkbox" checked={sel.has(e.slug)} onClick={(ev) => ev.stopPropagation()} onChange={() => toggleSel(e.slug)} title="selecionar" className="absolute top-1 left-1 z-10 w-4 h-4 cursor-pointer" />}
                             {e.publicado
