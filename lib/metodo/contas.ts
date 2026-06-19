@@ -68,6 +68,10 @@ export interface Conta {
   /** VIR · "Carta de renomear": as FRASES DE VIRAGEM que mudam o significado de
    *  tudo ("Precisávamos de ti.", "Estavas sozinha."). Molde, não lista fechada. */
   frasesViragem?: string[];
+  /** VER · "O Espelho": banco de HOOKS — uma pessoa real que vive na cabeça de quem
+   *  vê (admira, inveja, detesta, não esquece, irrita, intimida). Abre para FORA;
+   *  o formato vira para DENTRO (porque a escolheste para espelho). Molde, não fechado. */
+  bancoEspelho?: string[];
   /** MÃE · "Não normalizes…" (tarde): linhas-molde da forma. O TERRITÓRIO NÃO é
    *  "fazer muito"/tarefas: é RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
    *  e GESTÃO EMOCIONAL (responsável pelas emoções de todos menos as dela). Estas
@@ -155,6 +159,22 @@ export const CONTAS: Record<ContaId, Conta> = {
       'percebes o tom de voz de toda a gente menos quando estás em paz',
       'preparas o que vais dizer ao médico e esqueces-te de ouvir o que ele diz',
       'estás de férias e a cabeça continua na caixa de entrada do trabalho',
+    ],
+    // "O Espelho" (tarde da ver): quem fica a viver na cabeça de quem vê. Abre para
+    // FORA (uma pessoa real), vira para DENTRO (porque a escolheste para espelho).
+    bancoEspelho: [
+      'há uma mulher que segues só para te irritares',
+      'aquela colega que te faz sentir pequena sem dizer nada',
+      'segues uma pessoa que dizes que não suportas',
+      'há uma conversa de há anos que ainda refazes na cabeça',
+      'vês o perfil dela mais vezes por dia do que vês quem amas',
+      'há uma frase que te disseram e que ainda te arde',
+      'há alguém cujo sucesso te tira o sono e não sabes bem porquê',
+      'detestas nela exatamente aquilo que não te deixas fazer',
+      'a cunhada que ocupa a sala toda sem pedir desculpa fica-te na cabeça',
+      'admiras tanto uma pessoa que ao pé dela te sentes menos',
+      'despediste-te mal de alguém e ainda lhe respondes por dentro',
+      'há uma influencer que te irrita e mesmo assim não a deixas de ver',
     ],
     veus: ['Turbilhão', 'Memória'],
     simbolo: 'a margem',

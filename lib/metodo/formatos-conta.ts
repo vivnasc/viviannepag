@@ -28,6 +28,10 @@ export interface FormatoConta {
    *  Pega num NOME ANTIGO (madura, responsável…) e vira-lhe o significado com uma
    *  FRASE DE VIRAGEM. Quando true, o motor escreve a carta de 5 partes. */
   cartaRenomear?: boolean;
+  /** "O Espelho" (TARDE da ver): revela porque é que uma pessoa concreta ficou a
+   *  viver na cabeça de quem vê. Abre PARA FORA (uma pessoa real, a faca) e vira
+   *  PARA DENTRO (porque a escolheste para espelho). O outro é o vidro, tu o filme. */
+  espelho?: boolean;
 }
 
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
@@ -51,9 +55,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
       registo: 'A CENA PRIMEIRO (manhã, faca): a cena ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "Porque faço isto sem reparar?". TRÊS TEMPOS: (1) a CENA concreta do mecanismo invisível que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "revelar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda à amiga que…"). MODELO (copia a FORMA, não o tema): "O teu marido chega vinte minutos atrasado. / Na tua cabeça já houve uma discussão inteira. / revelar" + envio "Marca quem ensaia conversas que ainda não aconteceram." SEM voz. Veste: prismas, espelhos, véus translúcidos, geometrias (azul profundo, prata, violeta, branco lunar); a imagem revela, a cena é dita em texto.',
     },
     profundidade: {
-      nome: 'A tarde · o porquê em voz baixa (a raiz, sem julgar)',
+      nome: 'O Espelho (quem te vive na cabeça · fora → dentro)',
       beats: 5,
-      registo: 'TARDE, colo: a mesma cena-tema da manhã, registo oposto. Voz-off OU texto lento, imagem contemplativa e lenta. Mostra a RAIZ sem julgar e HONRA a estratégia (foi inteligente, foi proteção), devolvendo segurança ao presente. MOLDE (do prisma): "Não estás louca." → a origem na infância sem culpa ("aos seis anos aprendeste a ver o perigo antes de ele chegar, porque alguém em casa mudava de humor sem aviso") → "ensaiar o pior foi como nunca foste apanhada de surpresa, foi proteção" → "hoje já não precisas de adivinhar tempestades para estares segura" → assinatura "revelar". ENVIO: "Manda a quem vive em alerta e não sabe porquê." Veste: prisma no escuro, a luz que assenta e se unifica num feixe sereno (violeta, prata, branco lunar).',
+      espelho: true,
+      registo: 'O ESPELHO (tarde da ver) = REVELAR. A matéria: quem fica a VIVER DENTRO DA CABEÇA de quem vê (quem admira, inveja, detesta, não esquece, quem a irrita ou intimida). O outro é o VIDRO; ela é o FILME. Não revela quem o outro é, revela PORQUE é que ELA o escolheu para espelho. ESTRUTURA: (1) ABRE PARA FORA, aponta para uma figura concreta da vida de quem vê (a colega, a mulher que segue), o murro que para o scroll; (2) APROFUNDA, o comportamento exato, sobe o reconhecimento; (3) VIRA O VIDRO, de fora para dentro (a alma da peça): porque, entre milhões, esta ficou a viver nela; (4) POUSO, frase curta que liberta, palavra final "revelar" ou nada. MECANISMO (em linguagem da vida, NUNCA teoria nem véu): inveja = a vida que não te deixaste querer; irritação desproporcional = o outro faz o que tu te proíbes; intimidação = a permissão que não te deste; não esquecer = uma frase tua que ficou por dizer. LINHA VERMELHA: sempre "o outro mostra-te a ti", NUNCA "analisa os outros". Liberta, não bisbilhota. MOLDE: "Há uma mulher que segues só para te irritares. Vê-la mais vezes por dia do que vês quem amas. Ela não te irrita por ser falsa, irrita-te porque se permite a coisa que tu te proíbes: ocupar espaço sem pedir desculpa. O outro era só o vidro. O filme eras tu." ENVIO: "Manda a quem tem uma pessoa a viver-lhe na cabeça de borla." Veste: espelhos infinitos, máscaras que se desfazem, fios invisíveis tornados visíveis, prismas, véus translúcidos (azul profundo, prata, violeta, branco lunar). Sem rosto, sem voz, texto + imagem que respira.',
     },
   },
   viver: {
