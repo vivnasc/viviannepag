@@ -1,6 +1,7 @@
 import { TopNav } from '@/components/TopNav';
 import { RomanceCompra } from '@/components/romance/RomanceCompra';
 import { ROTA_PARA_ROM } from '@/lib/romance-produto';
+import { romancePdfPronto } from '@/lib/romance-loja';
 
 export type AmostraRomance = {
   titulo: string;       // título do capítulo 1
@@ -25,13 +26,18 @@ export type RomanceMeta = {
 // Bloco reutilizável para as páginas dos romances novos (a partir do livro 3).
 // Mantém o padrão do /amparo e do /nome-da-irma: capa tipográfica, pitch,
 // página dos Assentos + capítulo 1 em papel, e ponte para o Amparo (oferta).
-export function RomancePreview({
+export async function RomancePreview({
   meta, amostra, locale,
 }: { meta: RomanceMeta; amostra: AmostraRomance; locale: string }) {
   const isEn = locale === 'en';
   const paragrafos = (s: string) => s.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
   const corTexto = meta.corTexto;
   const corBorda = meta.corBorda;
+  // Estado de loja lido UMA vez do Storage e partilhado com a CTA: assim o topo
+  // da página nunca diz "chega em breve" enquanto o botão de compra já está em
+  // baixo (o que fazia o livro renderizado parecer que não tinha ficado à venda).
+  const rom = ROTA_PARA_ROM[meta.slug] ?? '';
+  const pronto = await romancePdfPronto(rom);
 
   return (
     <main className="min-h-screen">
@@ -59,8 +65,12 @@ export function RomancePreview({
           </p>
           <p className="text-creme-2/60 text-[0.9rem]">
             {isEn
-              ? 'A novel · 12 chapters, complete. Read the first one below. The full book is coming to the shop; the English edition is being prepared.'
-              : 'Um romance · 12 capítulos, terminado. Lê o primeiro aqui em baixo. O livro inteiro chega à loja em breve.'}
+              ? (pronto
+                  ? 'A novel · 12 chapters, complete. Read the first one below; the whole book is in the shop.'
+                  : 'A novel · 12 chapters, complete. Read the first one below. The full book is coming to the shop very soon.')
+              : (pronto
+                  ? 'Um romance · 12 capítulos, terminado. Lê o primeiro aqui em baixo; o livro inteiro está na loja.'
+                  : 'Um romance · 12 capítulos, terminado. Lê o primeiro aqui em baixo. O livro inteiro chega à loja em breve.')}
           </p>
         </div>
       </section>
@@ -95,7 +105,7 @@ export function RomancePreview({
         </div>
       </section>
 
-      <RomanceCompra slug={ROTA_PARA_ROM[meta.slug] ?? ''} locale={locale} />
+      <RomanceCompra slug={rom} locale={locale} pronto={pronto} />
     </main>
   );
 }
