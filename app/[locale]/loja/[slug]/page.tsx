@@ -14,6 +14,16 @@ import { slugToColecao } from '@/lib/colecoes';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { BarraCompraMobile } from '@/components/BarraCompraMobile';
 import { PRODUTOS_EN } from '@/lib/produtos-en';
+import { getRomance } from '@/lib/romances';
+import {
+  isRomanceSlug,
+  romanceProdutoEn,
+  romanceSubtituloPt,
+  romanceDescricaoPt,
+  PRECO_ROMANCE,
+  ROMANCE_BADGE,
+} from '@/lib/romance-produto';
+import { romancePdfPronto, romanceCapaUrl } from '@/lib/romance-loja';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -127,8 +137,31 @@ async function getPackConteudo(slug: string, locale: string): Promise<ItemPack[]
   }
 }
 
+// Romances de Véspera: produto montado a partir do Storage, sem linha na DB.
+// Só existe (e só se vende) quando o miolo já está renderizado. Caso contrário
+// devolve null → a página dá 404 e a landing continua a mostrar "chega em breve".
+async function getRomanceProduto(slug: string, locale: string): Promise<Produto | null> {
+  const r = getRomance(slug);
+  if (!r) return null;
+  if (!(await romancePdfPronto(slug))) return null;
+  const isEn = locale === 'en';
+  return {
+    id: slug,
+    slug,
+    titulo: isEn ? r.tituloEn : r.titulo,
+    subtitulo: isEn ? romanceProdutoEn(r).subtitulo : romanceSubtituloPt(r),
+    descricao: isEn ? romanceProdutoEn(r).descricao : romanceDescricaoPt(r),
+    preco: PRECO_ROMANCE,
+    preco_original: null,
+    capa: romanceCapaUrl(slug, isEn ? 'en' : 'pt'),
+    checkout_url: null,
+    badge: ROMANCE_BADGE,
+  };
+}
+
 async function getProduto(slug: string, locale: string): Promise<Produto | null> {
   if (isPackSlug(slug)) return getPack(slug, locale);
+  if (isRomanceSlug(slug)) return getRomanceProduto(slug, locale);
   try {
     const supabase = getSupabase();
     const { data } = await supabase

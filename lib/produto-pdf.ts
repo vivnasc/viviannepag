@@ -48,6 +48,23 @@ export async function getProdutoPdfBuffer(
   lang?: string,
   email?: string,
 ): Promise<{ buffer: Buffer; slug: string } | null> {
+  // Romances de Véspera: o miolo vive no bucket privado 'romances' (mesmo sítio
+  // de onde sai o Amparo grátis), com uma edição por língua. Entrega-se pelo
+  // mesmo fluxo da loja, só muda de onde se vai buscar o PDF.
+  if (slug.startsWith('rom-')) {
+    const l = lang === 'en' ? 'en' : 'pt';
+    try {
+      const supabase = getSupabaseAdmin();
+      const { data } = await supabase.storage
+        .from('romances')
+        .download(`romances/${slug}/livro-${l}.pdf`);
+      if (data) {
+        return { buffer: Buffer.from(await data.arrayBuffer()), slug: `${slug}-${l}` };
+      }
+    } catch {}
+    return null;
+  }
+
   const candidatos = lang === 'en' ? [`${slug}-en`, slug] : [slug];
   let file: Buffer | null = null;
   let usado = slug;

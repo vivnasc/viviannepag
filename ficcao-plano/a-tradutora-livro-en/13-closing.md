@@ -1,0 +1,13 @@
+## From the register of Véspera
+
+The Keeper of this time says that there was a woman, in Véspera, who was a whole lifetime the voice of a son and who only at the end learned to be her own.
+
+Eulália, mother of Tomé, the boy who said things in another way and whom she alone knew how to read. She was his bridge to the world for a lifetime, and in that she gave herself, and in that she effaced herself, until she no longer knew, if she were asked, what was hers and what was her son's, because everything she said began with "he" and nothing with "I." It took a fall, and a Keeper, and the courage to fall silent, for her to discover what she had always known without knowing it: that her line in this book had been written at birth, before she was the voice of whoever it was, and that beneath Tomé's mother there went on, waiting, the Eulália who had a name and a voice all her own.
+
+It was recorded that she learned to let go: to fall silent enough for the world to have to learn to hear her son, and the son to have to learn to speak for himself; and to use at last her own voice, alongside his and not in place of it. And that she said, at the end of a lifetime, the first sentence that was hers alone: I too have a voice.
+
+It was recorded too that, in doing so, she became a better mother and not a worse one, contrary to what all her fears told her; that her son, far from losing her, gained her freer and lighter; and that the house of the two, which had been cramped from their fitting so into each other, gained windows, and air, and more people, and two voices where before there was only one.
+
+And it was added, in the register of that time, that Tomé, the son who said things in another way, learned to be heard by more people than his mother, and that around him there went on forming a small village of people who knew a little of his language, so that on the day the mother was gone he would not be left mute, and that this, more than any paper, was what truly protected him.
+
+The register says who was born, who married whom, who departed. It does not say what it costs a mother to be a son's only bridge to the world, nor what is lost of oneself when one lends one's voice to one they love and forgets to keep it for oneself. There are those who love so much that they disappear, without seeing that a love that effaces the one who gives it weighs upon the one who receives it, and that the best inheritance a mother leaves a son is not to have been everything to him, it is to have prepared him not to need anyone to be everything. For those, books such as this one are needed. And of all of it a record was made.

@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { TopNav } from '@/components/TopNav';
+import { RomanceCompra } from '@/components/romance/RomanceCompra';
+import { ROTA_PARA_ROM } from '@/lib/romance-produto';
 
 export type AmostraRomance = {
   titulo: string;       // título do capítulo 1
@@ -94,34 +95,7 @@ export function RomancePreview({
         </div>
       </section>
 
-      <section className="max-w-[680px] mx-auto px-6 pb-20">
-        <div className={`border ${corBorda} rounded-[14px] px-7 py-10 text-center`}>
-          <p className={`text-[0.7rem] tracking-[0.3em] uppercase ${corTexto} mb-4`}>
-            {isEn ? 'the rest of the book' : 'o resto do livro'}
-          </p>
-          <p className="font-serif italic text-creme-2/85 text-lg leading-relaxed mb-6">
-            {isEn
-              ? 'The novel is finished: twelve chapters, complete. It is coming to the shop very soon.'
-              : 'O romance está terminado: doze capítulos. Chega à loja muito em breve.'}
-          </p>
-          <p className="text-creme-2/60 text-[0.9rem] mb-8">
-            {isEn
-              ? <>Meanwhile, the first novel of the library, <em>Amparo&rsquo;s Hands</em>, is a gift: the whole book, freely.</>
-              : <>Entretanto, o primeiro romance da biblioteca, <em>As Mãos de Amparo</em>, é oferta: o livro inteiro, sem pedir nada.</>}
-          </p>
-          <Link
-            href={isEn ? '/en/amparo' : '/amparo'}
-            className="inline-block no-underline bg-ambar text-[#2A1F17] font-medium text-[0.95rem] tracking-wide rounded-full px-8 py-3 hover:opacity-90 transition-opacity"
-          >
-            {isEn ? "Read Amparo's Hands free" : 'Ler As Mãos de Amparo grátis'}
-          </Link>
-          <p className="mt-6">
-            <Link href={isEn ? '/en/biblioteca' : '/biblioteca'} className="text-creme-2/50 text-[0.85rem] no-underline hover:text-creme-2/80">
-              {isEn ? '← the whole library' : '← a biblioteca inteira'}
-            </Link>
-          </p>
-        </div>
-      </section>
+      <RomanceCompra slug={ROTA_PARA_ROM[meta.slug] ?? ''} locale={locale} />
     </main>
   );
 }
