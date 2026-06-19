@@ -81,9 +81,9 @@ export const FAMILIAS: Familia[] = [
     tier: 'nucleo',
     crenca: 'Não ocupes espaço.',
     medo: 'Ser demasiado.',
-    fraseTipica: 'Não te preocupes comigo.',
+    fraseTipica: 'Ninguém pergunta por mim.',
     personagens: [
-      { id: 'invisivel', nome: 'A Invisível', essencia: 'Não pede, não ocupa espaço, não incomoda.', frases: ['Não te preocupes comigo.', 'Estou bem.'], sombra: 'Passa a vida à espera de ser vista.', veus: ['Desolação', 'Dualidade', 'Esforço'] },
+      { id: 'invisivel', nome: 'A Invisível', essencia: 'Faz tudo e queixa-se de que ninguém repara; reivindica em voz alta o lugar que não toma.', frases: ['Já reparaste que sou eu que me lembro de toda a gente?', 'Ninguém pergunta por mim.'], sombra: 'Passa a vida à espera de ser vista, e diz isso a toda a gente menos a si.', veus: ['Desolação', 'Dualidade', 'Esforço'] },
       { id: 'desaparecida', nome: 'A Desaparecida', essencia: 'Cuidou tanto da vida de todos que perdeu o contacto consigo (muito nos 40-55).', frases: ['Já nem sei do que gosto.', 'Passaram-se anos.'], sombra: 'Cuidou tanto da vida que se perdeu nela.', veus: ['Desolação', 'Horizonte', 'Permanência'] },
       { id: 'orfa', nome: 'A Órfã', essencia: 'Mesmo com família, parceiro e amigos, sente que no fundo está sozinha.', frases: ['No fundo, estou sozinha.', 'Não sei se alguém fica.'], sombra: 'Nunca acredita totalmente que alguém fique.', veus: ['Dualidade', 'Memória', 'Desolação'] },
       { id: 'rebelde-silenciosa', nome: 'A Rebelde Silenciosa', essencia: 'Cumpre tudo, mas por dentro quer fugir; tem tudo e continua inquieta.', frases: ['Era suposto sentir-me feliz.', 'Tenho tudo e continuo inquieta.'], sombra: 'Sente culpa pela própria insatisfação.', veus: ['Permanência', 'Horizonte', 'Desolação'] },
