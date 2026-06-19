@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCatalogoProdutos, amostraEcossistema, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
 import { REGRAS_GLOBAIS } from '@/lib/carrossel/overrides';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM, EXEMPLO_TOM } from '@/lib/carrossel/metodo';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -64,6 +64,8 @@ A TUA TAREFA: reescrever o TEXTO de uma semana de carrosseis JA EXISTENTE, para 
 REGRA ABSOLUTA E INVIOLAVEL: a PALAVRA-DESTAQUE (a palavra grande de cada dia) e o SUBTITULO MANTEM-SE EXACTAMENTE como estao. Nao os reescrevas, nao os traduzas, nao os "melhores". As IMAGENS tambem se mantem (nao falas delas). So reescreves o texto a volta, e fazes esse texto encaixar na palavra que JA la esta.
 
 ${BREVIDADE_E_TOM}
+
+${EXEMPLO_TOM}
 
 REGRAS DE VOZ:
 ${[...METODO_VOZ, ...REGRAS_GLOBAIS].map((r) => `- ${r}`).join('\n')}

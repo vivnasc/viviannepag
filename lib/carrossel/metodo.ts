@@ -165,3 +165,14 @@ export const BREVIDADE_E_TOM = `BREVIDADE E TOM (muito importante, o reel é lei
 - CURTO: cada slide lê-se num instante. A PROSA são 1 a 2 frases curtas, nunca um parágrafo denso. O POÉTICO, poucas linhas. Se uma frase se pode encurtar, encurta. Menos é mais.
 - LEVE, não denso: UMA ideia simples por carrossel, com ar à volta. Não empilhes conceitos nem peses a leitura.
 - EQUILÍBRIO luz e sombra: o método é VER E SOLTAR, não só ver a dor. Nomeia o padrão com ternura, mas abre para a luz, o respiro e o alívio. NÃO te afundes na dor nem acumules negatividade: a dor entra só o suficiente para a pessoa se reconhecer, e o carrossel caminha para a esperança e o que se solta. O fecho levanta, não pesa.`;
+
+// Exemplo aprovado pela Vivianne: o NÍVEL de brevidade e de tom a atingir. Não
+// se copiam o tema nem as palavras, copia-se o REGISTO (curto, leve, equilibrado).
+export const EXEMPLO_TOM = `EXEMPLO do NÍVEL de brevidade e de tom (NÃO copies o tema nem as palavras deste exemplo, copia o REGISTO: curto, leve, a dor só o suficiente, a caminhar para o respiro; zero travessões):
+- palavra: COLO | subtitulo: o lugar onde pousas sem teres de merecer
+- gancho (capa): Carregas toda a gente ao colo. E o teu, quem o segura?
+- PROSA: Descansar não é desistir. É confiar que o mundo aguenta um instante sem ti.
+- POÉTICO: Pousa. / O chão já cá estava antes de ti.
+- PRÁTICA: Hoje, deixa uma coisa por fazer. Repara que ninguém cai.
+- POÉTICO (fecho): Há um colo à tua espera. Às vezes é só sentares-te.
+- CTA: Loranne, música contemplativa. "Para esta pausa, põe a tocar e deixa-te ficar." (music.seteveus.space)`;
