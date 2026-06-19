@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { ESTANTES } from '@/lib/biblioteca';
 import { romancePdfPronto } from '@/lib/romance-loja';
+import { PRECO_ROMANCE } from '@/lib/romance-produto';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -93,10 +94,10 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* OS PRÓXIMOS, POR PERGUNTA */}
+      {/* OS ROMANCES, ESTANTE A ESTANTE (à venda + a caminho, por pergunta) */}
       <div className="max-w-[860px] mx-auto px-6 pb-16">
         <p className="text-center text-[0.72rem] tracking-[0.32em] uppercase text-salvia mb-12">
-          {isEn ? 'on their way · one question at a time' : 'a caminho · uma pergunta de cada vez'}
+          {isEn ? 'the novels · one question at a time' : 'os romances · uma pergunta de cada vez'}
         </p>
         <div className="space-y-14">
           {ESTANTES.map(estante => (
@@ -122,7 +123,9 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
                       className={`no-underline border ${estante.cor.borda} rounded-[14px] p-5 ${estante.cor.bordaHover} transition-colors`}
                     >
                       <p className={`text-[0.66rem] tracking-[0.26em] uppercase ${estante.cor.texto} mb-1.5`}>
-                        {(isEn ? livro.notaEn : livro.nota) ?? (isEn ? 'available · free' : 'disponível · grátis')}
+                        {livro.slug === 'rom-01-amparo'
+                          ? ((isEn ? livro.notaEn : livro.nota) ?? (isEn ? 'a gift from the house · read it free' : 'oferta da casa · lê sem pagar'))
+                          : (isEn ? `for sale · ${PRECO_ROMANCE} · read chapter 1` : `à venda · ${PRECO_ROMANCE} · lê o capítulo 1`)}
                       </p>
                       <p className="font-serif text-creme text-[1.1rem] mb-1.5">
                         {isEn ? livro.tituloEn : livro.titulo}
