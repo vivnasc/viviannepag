@@ -23,6 +23,11 @@ export interface FormatoConta {
    *  do que a CULTURA tornou normal. Cenas concretas, zero teoria/mecanismo/véu;
    *  a resposta procurada é "espera, isto não é normal". */
   naoNormalizes?: boolean;
+  /** "Carta de renomear" (TARDE da vir): carta pessoal (2.ª pessoa) que dá um nome
+   *  NOVO a uma história antiga. Não consola, não ensina, não diagnostica: renomeia.
+   *  Pega num NOME ANTIGO (madura, responsável…) e vira-lhe o significado com uma
+   *  FRASE DE VIRAGEM. Quando true, o motor escreve a carta de 5 partes. */
+  cartaRenomear?: boolean;
 }
 
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
@@ -33,9 +38,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
       registo: 'A CENA PRIMEIRO (manhã, faca): a cena da DISPERSÃO ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "Quando foi que me perdi de mim?". TRÊS TEMPOS: (1) a CENA concreta do dia a dia que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "regressar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca a que…" / "Envia a quem…"). MODELO (copia a FORMA, não o tema): "Entraste na cozinha para beber água. / Respondeste a uma mensagem. / Arrumaste uma gaveta. / E esqueceste-te da água. / regressar" + envio "Marca a que entra num sítio e já não sabe a que ia." SEM voz. Veste: bússolas, fios dourados, aves migratórias, rios de luz, constelações-guia (dourado, âmbar, azul nocturno, cobre); a imagem é o chamado, a cena é a dispersão.',
     },
     profundidade: {
-      nome: 'A tarde · o chamado (voz-off, a bússola para dentro)',
-      beats: 5,
-      registo: 'TARDE, colo: VOZ-OFF contínua (o texto de cada beat é a voz-off), lento e dourado, a imagem TRANSFORMA-SE. Uma bússola antiga a girar sem parar (cobre) → a agulha abranda e aponta para dentro, ao fundo aves migratórias → um rio de luz dourado atravessa o céu nocturno e as aves seguem-no → as aves pousam, o rio aquieta num ponto central. Inclui a RAIZ com herança sem culpa ("talvez nem seja só teu: vens de mulheres que também se perderam a cuidar de tudo") e a VOLTA ("regressar não é parar de andar, é voltar a saber para onde"). Assinatura "regressar". ENVIO: "Envia a quem orienta toda a gente e perdeu o norte de si."',
+      nome: 'Carta de renomear (dá um nome novo a uma história antiga)',
+      beats: 6,
+      cartaRenomear: true,
+      registo: 'É uma CARTA pessoal (2.ª pessoa, ex.: "À filha mais velha,") que RENOMEIA uma história antiga. NÃO é frase inspiracional, NÃO valida, NÃO aconselha, NÃO é exercício, NÃO explica véus. Se pudesse estar em mil contas de desenvolvimento pessoal, FALHOU. A pessoa passou a vida a explicar-se de UMA maneira; a carta mostra-lhe OUTRA. Não consola, não ensina, não diagnostica: RENOMEIA. ESTRUTURA (5 partes): (1) O NOME ANTIGO que ela sempre acreditou ser (madura, organizada, forte, independente, prestável, responsável, sensata); (2) A VIDA por trás do nome (a realidade concreta); (3) A FRASE DE VIRAGEM que muda o significado de tudo ("Precisávamos de ti." / "Estavas sozinha." / "Isso não era maturidade." / "Não era independência."); (4) O PREÇO que essa identidade custou (ex.: ainda hoje custa-te descansar); (5) A ABERTURA: não um conselho, só a possibilidade de já não ser preciso continuar igual ("e talvez já possas pousá-la"). MODELO (copia o MOVIMENTO, não o tema): "Passaste tanto tempo a ser a responsável que ninguém reparou quando deixaste de ser criança. Chamaram-te madura, prestável, sensata. Mas talvez fossem só maneiras bonitas de dizer: precisávamos de ti. O que fizeram contigo não foi tornar-te adulta cedo, foi pedir-te uma força que não era tua para dar. E talvez já possas pousá-la." TESTE: a pessoa pensa "nunca tinha visto isto desta maneira", nunca "sinto-me validada" nem "recebi um conselho". FORMA VISUAL: uma CARTA TIPOGRÁFICA em papel envelhecido, com elementos timbrados (timbre/letterhead) que remetam à conta. NÃO é cena fotográfica nem imagem Flux. O timbre exato ainda está POR DESCOBRIR (a definir). SEM travessões.',
     },
   },
   ver: {

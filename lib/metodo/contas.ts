@@ -62,6 +62,12 @@ export interface Conta {
    *  numa cara). É finito, por isso NÃO é a fonte de conteúdo: ensina só a FORMA. O
    *  gerador escreve cenas NOVAS nesta forma a partir do SABER (que não acaba). */
   bancoCenas?: string[];
+  /** VIR · "Carta de renomear": os NOMES ANTIGOS que a pessoa sempre acreditou ser
+   *  (madura, responsável, forte…). A carta pega num e renomeia a história. Molde. */
+  nomesAntigos?: string[];
+  /** VIR · "Carta de renomear": as FRASES DE VIRAGEM que mudam o significado de
+   *  tudo ("Precisávamos de ti.", "Estavas sozinha."). Molde, não lista fechada. */
+  frasesViragem?: string[];
   /** MÃE · "Não normalizes…" (tarde): linhas-molde da forma. O TERRITÓRIO NÃO é
    *  "fazer muito"/tarefas: é RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
    *  e GESTÃO EMOCIONAL (responsável pelas emoções de todos menos as dela). Estas
@@ -224,6 +230,9 @@ export const CONTAS: Record<ContaId, Conta> = {
       'és a que toda a gente liga quando está mal, e não sabes a quem ligas tu',
       'acabas tudo o que tinhas a fazer e sentes-te estranha por não teres nada a fazer',
     ],
+    // "Carta de renomear" (tarde da vir): pega num nome antigo e vira o significado.
+    nomesAntigos: ['madura', 'organizada', 'forte', 'independente', 'prestável', 'responsável', 'sensata', 'a que aguenta tudo'],
+    frasesViragem: ['Precisávamos de ti.', 'Estavas sozinha.', 'Isso não era maturidade.', 'Não era organização.', 'Não era independência.', 'Não era uma força tua para dar.', 'Ninguém te perguntou se querias.'],
     veus: ['Esforço', 'Desolação'],
     simbolo: 'o colo',
     fundoBase:

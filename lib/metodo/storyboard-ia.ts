@@ -120,6 +120,9 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   // "Não normalizes…" (TARDE da mãe): espelho social. NÃO é a pessoa, é o que a
   // cultura tornou normal. Sem mecanismo, sem raiz, sem véu: só a cena normalizada.
   const naoNorm = !!fmt.naoNormalizes;
+  // "Carta de renomear" (TARDE da vir): carta pessoal (2.ª pessoa) que RENOMEIA uma
+  // história antiga (pega num nome antigo e vira-lhe o significado). Não consola.
+  const cartaRen = !!fmt.cartaRenomear;
   // A COR é SÓ a do VÉU do dia (sequência dos chakras). NÃO existe paleta de cor
   // por conta (foi banida): a cor da imagem é sempre a do véu. A conta entra com
   // os SÍMBOLOS e o MOOD (a sensação, sem cor). Veste a IMAGEM, nunca o texto.
@@ -130,6 +133,8 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
     ? `A IMAGEM é UMA figura da personagem ${personagem.nome} (UMA só por carta — é a FRENTE da carta), no estilo de uma CARTA ilustrada do baralho "Sou Aquela". A imagem é GERADA na API (Flux), NUNCA no Midjourney: descreve a figura como ilustração pintada coerente — uma mulher, num ângulo digno (rosto sereno OU silhueta OU de costas) com o símbolo do padrão dela. As linhas da confissão revelam-se POR CIMA desta mesma figura (não há imagem nova por linha). O VÉU e a COR não mandam na figura: ficam no VERSO da carta. Estilo: ilustração pintada, digna, intemporal.`
     : naoNorm
     ? `A IMAGEM é UMA cena REAL de 2026 que encarna a ASSIMETRIA do beat (não "tarefas"): a responsabilidade invisível sem autoridade (ex.: uma só pessoa a segurar muitos fios ao mesmo tempo · a lista interminável só com a letra dela · ela a tratar de tudo enquanto outro descansa) OU a gestão emocional (ex.: ela a sorrir por fora com o cansaço contido por dentro · toda a casa a depender do humor dela). Dignas, SEM rosto colado à câmara. A cor do véu (${VEU_COR[veu].pt}) entra subtil, não manda. Textura: painterly, fine grain.`
+    : cartaRen
+    ? `A FORMA VISUAL é uma CARTA TIPOGRÁFICA: o texto em letra tipográfica sobre PAPEL ENVELHECIDO, com elementos TIMBRADOS (timbre/letterhead) que remetam à conta (@${c.handle}). NÃO é uma cena fotográfica nem imagem Flux: é uma carta. O timbre exato ainda está por DESCOBRIR (a definir com a Vivianne). Mood subtil da conta: ${a.sensacao}. Sóbria, íntima, intemporal.`
     : `A COR é a do VÉU de hoje e SÓ essa (não existe paleta de cor por conta, foi banida): ${cor.pt} (${cor.prompt}). Toda a imagem segue esta cor. Os SÍMBOLOS do universo desta conta (é o que distingue a conta, junto com o formato; rende-os NESTA cor do véu, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. O MOOD da conta (a sensação, nunca a cor): ${a.sensacao}; ${a.fraseVisual}. Textura: painterly, fine grain, em movimento.`;
   // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
   // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
@@ -156,6 +161,13 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - ZERO teoria, ZERO mecanismo, ZERO diagnóstico, ZERO véu, ZERO "porque". Não interpretes, não expliques: só nomeia a assimetria normalizada.
 - NÃO é sobre identidade (isso é a carta da manhã): é sobre o desequilíbrio coletivo invisível de responsabilidade e de gestão emocional.
 - O ÚLTIMO beat é o estalo: "Espera. Isto não é normal." sozinho.`
+    : cartaRen
+    ? `A FUNÇÃO DESTA PEÇA — CARTA DE RENOMEAR = dar um NOME NOVO a uma história antiga. NÃO consola, NÃO ensina, NÃO diagnostica, NÃO aconselha, NÃO valida, NÃO é frase inspiracional. RENOMEIA. Se pudesse estar em mil contas de desenvolvimento pessoal, FALHOU. REGRAS DE FERRO:
+- É uma CARTA pessoal, 2.ª pessoa, tom íntimo e sereno (pode abrir com "À filha mais velha," ou falar-lhe direto).
+- ESTRUTURA em 5 partes, por esta ordem: (1) o NOME ANTIGO que ela sempre acreditou ser; (2) a VIDA concreta por trás do nome; (3) a FRASE DE VIRAGEM que vira o significado de tudo; (4) o PREÇO que custou (ex.: ainda hoje custa-te descansar); (5) a ABERTURA, não conselho, só a possibilidade de já não ser preciso continuar igual.
+- ZERO véu, ZERO mecanismo, ZERO diagnóstico, ZERO "deves"/conselho, ZERO validação.
+- TESTE: a pessoa pensa "nunca tinha visto isto desta maneira", nunca "sinto-me validada".
+- A imagem é UMA só, contemplativa; a carta revela-se por cima dela.`
     : ehManha
     ? `A FUNÇÃO DESTA PEÇA — MANHÃ · DESCOBERTA = uma FACA, não um artigo. Fura para estranhos, é para ser SENTIDA, não compreendida. REGRAS DE FERRO (são o que mais importa hoje):
 - POUQUÍSSIMO texto: cada beat é uma linha curta, 3 a 8 palavras, fragmentada, frase nominal. A peça inteira cabe em poucas linhas curtas.
@@ -166,9 +178,9 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - Ritmo-modelo (copia o CORTE, não o tema): "2000: agenda da mãe. / 2026: app de todos. / Os teus exames: adiados." A pessoa fecha a frase, tu não.`
     : `A FUNÇÃO DESTA PEÇA — NOITE · PROFUNDIDADE = voz-off contínua que APROFUNDA. Retém quem já segue. AQUI SIM entra o que a manhã não deu: a raiz, a herança sem culpa, o mecanismo, e a volta. Pode respirar em frases inteiras, mas continua concreta e sem jargão.`;
 
-  const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). ${carta ? 'É uma CARTA ilustrada do baralho "Sou Aquela": a figura é a PERSONAGEM (pode ter rosto, é a carta dela).' : naoNorm ? 'Cenas REAIS do dia a dia, sem rosto colado à câmara.' : 'Sem rosto, sem pessoas.'} A mulher reconhece-se em 1 segundo.
+  const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). ${carta ? 'É uma CARTA ilustrada do baralho "Sou Aquela": a figura é a PERSONAGEM (pode ter rosto, é a carta dela).' : naoNorm ? 'Cenas REAIS do dia a dia, sem rosto colado à câmara.' : cartaRen ? 'É uma CARTA pessoal que renomeia uma história antiga; imagem contemplativa, sem pessoas.' : 'Sem rosto, sem pessoas.'} A mulher reconhece-se em 1 segundo.
 
-${carta ? 'É uma CARTA do baralho "Sou Aquela": uma PERSONAGEM (a máscara que a mulher usa todos os dias). O reconhecimento é tudo; a reflexão acontece sozinha.' : naoNorm ? 'É um ESPELHO SOCIAL ("Não normalizes…"): NÃO fala da pessoa, fala do que a CULTURA tornou normal. Mostra cenas concretas que toda a gente faz e já ninguém estranha, para a mulher pensar "espera, isto não é normal". SEM mecanismo, SEM raiz, SEM teoria.' : `A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
+${carta ? 'É uma CARTA do baralho "Sou Aquela": uma PERSONAGEM (a máscara que a mulher usa todos os dias). O reconhecimento é tudo; a reflexão acontece sozinha.' : naoNorm ? 'É um ESPELHO SOCIAL ("Não normalizes…"): NÃO fala da pessoa, fala do que a CULTURA tornou normal. Mostra cenas concretas que toda a gente faz e já ninguém estranha, para a mulher pensar "espera, isto não é normal". SEM mecanismo, SEM raiz, SEM teoria.' : cartaRen ? 'É uma CARTA DE RENOMEAR: dá um nome novo a uma história antiga. Não consola, não ensina, não diagnostica. Renomeia. O teste é "nunca tinha visto isto desta maneira".' : `A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
 
 ${METAMODELO}`}
 
@@ -186,7 +198,11 @@ ${carta ? `A PERSONAGEM desta carta (é só sobre ela, não sobre o véu): ${per
   (1) RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE: ser responsável por tudo e dona de quase nada; a gestão é obrigação dela e a participação dele é "ajuda"; a lista dela é obrigatória e a dele opcional; é a directora-geral da família sem nunca ter aceite o cargo; o trabalho mental nem conta como trabalho.
   (2) GESTÃO EMOCIONAL: ser responsável pelas emoções de todos menos pelas suas; a paz da casa depende do estado emocional dela; engolir o cansaço para não estragar o ambiente; a irritação dela é um problema e a exaustão é uma expectativa.
 - MOLDE (a FORMA e o tipo de assimetria; é finito, NÃO é lista para repetir nem reutilizar): ${(c.bancoNaoNormalizes ?? []).map((x) => `"${x}"`).join(' · ')}
-- NÃO nomeies o véu nem nenhum mecanismo: é só a assimetria que toda a gente normalizou.` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
+- NÃO nomeies o véu nem nenhum mecanismo: é só a assimetria que toda a gente normalizou.` : cartaRen ? `A MATÉRIA DA CARTA (renomeia uma história antiga; o conteúdo de fundo vem da vida concreta dela, NÃO de uma lista fechada):
+- NOME ANTIGO (escolhe UM como o nome que ela sempre acreditou ser): ${(c.nomesAntigos ?? []).map((x) => `"${x}"`).join(' · ')}
+- FRASE DE VIRAGEM (a viragem do significado; usa uma OU escreve outra no mesmo espírito): ${(c.frasesViragem ?? []).map((x) => `"${x}"`).join(' · ')}
+- A VIDA por trás do nome, o PREÇO e a raiz (material concreto, NÃO o nomeies como teoria): ${banco.slice(0, 8).map((x) => `"${x}"`).join(' · ')}
+- NÃO nomeies o véu nem nenhum mecanismo: a carta só renomeia.` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
 ${c.perguntaEspinha ? `- A PERGUNTA-ESPINHA desta conta (é A CENA PRIMEIRO: a mulher fá-la a si própria; NUNCA a escrevas nem nomeies o véu): "${c.perguntaEspinha}". A peça é uma MICRO-CENA concreta que faz a mulher sentir esta pergunta, sem nunca a formular.\n` : ''}${c.bancoCenas?.length ? `- MOLDE DE CENA (a FORMA da "cena primeiro": concreta, curta, do dia a dia, tão específica que a mulher pensa numa cara). Estes são EXEMPLOS da FORMA, NÃO uma lista para repetir nem reutilizar: escreve uma cena NOVA, tirada do BANCO DE CONCRETO (em baixo), na MESMA forma destes: ${c.bancoCenas.map((x) => `"${x}"`).join(' · ')}.\n` : ''}${c.assinatura ? `- A ASSINATURA no fim (discreta, sozinha, uma palavra): "${c.assinatura}".\n` : ''}- VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
 - O TEU ÂNGULO (o que te separa das outras contas que hoje falam do mesmo véu): ${foco.titulo}.${ehManha ? ' NA MANHÃ isto é só o CORTE: mostra-o, não o expliques.' : ` ${foco.instrucao}`}
 - BANCO DE CONCRETO (momentos REAIS; escolhe UM e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
@@ -202,7 +218,7 @@ O ENVIO é implícito ou aponta para uma pessoa concreta ("Marca a que…" / "J�
 ${clarificar ? 'CLARIFICA: reescreve mais claro e direto, tirando qualquer ambiguidade, sem perder a dor.' : ''}
 ${evitar.length ? `NÃO repitas estes ângulos/frases já usados (encontra outro): ${evitar.slice(-12).map((e) => `"${e}"`).join('; ')}.` : ''}
 
-Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${naoNorm ? ' Cada beat (menos o último) começa por "Não normalizes" e o ÚLTIMO beat é exatamente "Espera. Isto não é normal." sozinho.' : ''}`;
+Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${naoNorm ? ' Cada beat (menos o último) começa por "Não normalizes" e o ÚLTIMO beat é exatamente "Espera. Isto não é normal." sozinho.' : ''}${cartaRen ? ' Os beats são as PARTES da carta em sequência (UMA só imagem contemplativa partilhada por todos os beats), na ordem das 5 partes: nome antigo, vida por trás, frase de viragem, preço, abertura.' : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
