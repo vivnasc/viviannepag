@@ -127,6 +127,37 @@ export default function MetodoSemanaPage() {
     setSemProg(null);
   };
 
+  // EXPORTAR a semana gerada em texto (para fazeres as imagens no Midjourney, as
+  // legendas e o agendamento). Tira o conteúdo de dentro do ecrã = deixa de ser lixo.
+  const DIAS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+  const textoSemana = () => {
+    let out = `MÉTODO VS · semana ${dm(seg)} a ${dm(dom)}\n\n`;
+    for (const p of pecas) {
+      out += `━━━━━ ${DIAS[new Date(p.data + 'T12:00').getDay()]} ${p.data} · véu ${p.veu} · ${p.personagem.nome} ━━━━━\n`;
+      for (const c of CONTAS_LISTA) {
+        for (const tipo of ['descoberta', 'profundidade'] as const) {
+          const sb = sbs[`${c.id}-${p.data}-${tipo}`];
+          if (!sb) continue;
+          out += `\n@${c.handle} · ${tipo === 'descoberta' ? 'MANHÃ' : 'NOITE'} · ${getFormatoConta(c.id, tipo).nome}\n`;
+          sb.beats.forEach((b, i) => { out += `  [${b.tempo || i + 1}] imagem: ${b.imagem}\n        texto: ${b.texto}\n`; });
+          if (sb.envio) out += `  envio: ${sb.envio}\n`;
+        }
+      }
+      out += `\n`;
+    }
+    return out;
+  };
+  const copiarSemana = async () => {
+    try { await navigator.clipboard.writeText(textoSemana()); setMsg('Semana copiada. Cola onde precisares.'); }
+    catch { setErro('não consegui copiar'); }
+  };
+  const descarregarSemana = () => {
+    const blob = new Blob([textoSemana()], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `metodo-semana-${seg.getFullYear()}-${dm(seg).replace('/', '-')}.txt`;
+    a.click(); URL.revokeObjectURL(url);
+  };
+
   // a coluna de UMA conta num dia (manhã + noite), partilhada pelo comparador de
   // um dia e pela vista da semana toda. Só leitura (a edição fica nos separadores).
   const colunaConta = (c: Conta, data: string) => (
@@ -300,6 +331,8 @@ export default function MetodoSemanaPage() {
               <div className="flex gap-2 flex-wrap text-[0.74rem]">
                 <button onClick={() => gerarSemana4('descoberta')} disabled={!!semProg} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{semProg && semProg.includes('manhã') ? `a gerar… ${semProg}` : `gerar manhã (${pecas.length * CONTAS_LISTA.length} peças)`}</button>
                 <button onClick={() => gerarSemana4('profundidade')} disabled={!!semProg} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{semProg && semProg.includes('noite') ? `a gerar… ${semProg}` : `gerar noite (${pecas.length * CONTAS_LISTA.length} peças)`}</button>
+                <button onClick={copiarSemana} className="px-3 py-1.5 rounded-lg border border-emerald-300/40 text-emerald-200 hover:bg-emerald-300/10">copiar a semana</button>
+                <button onClick={descarregarSemana} className="px-3 py-1.5 rounded-lg border border-emerald-300/40 text-emerald-200 hover:bg-emerald-300/10">descarregar (.txt)</button>
                 <button onClick={() => setVerSemana(false)} className="px-3 py-1.5 rounded-lg border border-white/15 opacity-70 hover:opacity-100">fechar</button>
               </div>
             </div>
