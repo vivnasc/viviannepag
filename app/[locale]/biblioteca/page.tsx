@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { ESTANTES } from '@/lib/biblioteca';
-import { romancePdfPronto } from '@/lib/romance-loja';
+import { romancePdfPronto, romanceCapaUrl } from '@/lib/romance-loja';
 import { PRECO_ROMANCE } from '@/lib/romance-produto';
 import type { Metadata } from 'next';
 
@@ -120,19 +120,31 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
                     <Link
                       key={livro.slug}
                       href={`${prefix}${livro.href}`}
-                      className={`no-underline border ${estante.cor.borda} rounded-[14px] p-5 ${estante.cor.bordaHover} transition-colors`}
+                      className={`group flex gap-4 no-underline border ${estante.cor.borda} rounded-[14px] p-4 ${estante.cor.bordaHover} transition-colors`}
                     >
-                      <p className={`text-[0.66rem] tracking-[0.26em] uppercase ${estante.cor.texto} mb-1.5`}>
-                        {livro.slug === 'rom-01-amparo'
-                          ? ((isEn ? livro.notaEn : livro.nota) ?? (isEn ? 'a gift from the house · read it free' : 'oferta da casa · lê sem pagar'))
-                          : (isEn ? `for sale · ${PRECO_ROMANCE} · read chapter 1` : `à venda · ${PRECO_ROMANCE} · lê o capítulo 1`)}
-                      </p>
-                      <p className="font-serif text-creme text-[1.1rem] mb-1.5">
-                        {isEn ? livro.tituloEn : livro.titulo}
-                      </p>
-                      <p className="text-creme-2/65 text-[0.85rem] leading-relaxed font-serif italic">
-                        {isEn ? livro.promessaEn : livro.promessa}
-                      </p>
+                      {/* capa composta (a mesma do render), o que torna o cartão um livro e não só texto */}
+                      <div className={`relative w-[84px] shrink-0 self-start aspect-[2/3] rounded-[8px] overflow-hidden border ${estante.cor.borda} bg-terra-2/60`}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={romanceCapaUrl(livro.slug, isEn ? 'en' : 'pt') ?? ''}
+                          alt={isEn ? livro.tituloEn : livro.titulo}
+                          loading="lazy"
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <p className={`text-[0.66rem] tracking-[0.26em] uppercase ${estante.cor.texto} mb-1.5`}>
+                          {livro.slug === 'rom-01-amparo'
+                            ? ((isEn ? livro.notaEn : livro.nota) ?? (isEn ? 'a gift from the house · read it free' : 'oferta da casa · lê sem pagar'))
+                            : (isEn ? `for sale · ${PRECO_ROMANCE} · read chapter 1` : `à venda · ${PRECO_ROMANCE} · lê o capítulo 1`)}
+                        </p>
+                        <p className="font-serif text-creme text-[1.1rem] mb-1.5">
+                          {isEn ? livro.tituloEn : livro.titulo}
+                        </p>
+                        <p className="text-creme-2/65 text-[0.85rem] leading-relaxed font-serif italic">
+                          {isEn ? livro.promessaEn : livro.promessa}
+                        </p>
+                      </div>
                     </Link>
                   ) : (
                     <div key={livro.slug} className={`border ${estante.cor.borda} rounded-[14px] p-5`}>
