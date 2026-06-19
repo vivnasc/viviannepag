@@ -52,6 +52,14 @@ export interface Conta {
   /** PORTAS: o verbo de CHEGADA do movimento, o que distingue o fim de cada porta
    *  (ver: testemunhar · vir: regressar · viver: participar). */
   chegada?: string;
+  /** FILHAS · "A CENA PRIMEIRO": a pergunta que a mulher se faz a si própria (a
+   *  espinha da conta), NUNCA o nome do véu. Só ver/vir/viver. */
+  perguntaEspinha?: string;
+  /** FILHAS · a assinatura discreta no fim da peça (revelar · regressar · encarnar). */
+  assinatura?: string;
+  /** FILHAS · banco de MICRO-CENAS concretas do dia a dia (a cena ilumina, não se
+   *  explica; tão específica que a pessoa pensa numa cara). O gerador escolhe uma. */
+  bancoCenas?: string[];
   /** Os dois véus que este movimento recolhe (o cacho). */
   veus: VeuNome[];
   /** Símbolo visual desta conta (família das capas). */
@@ -107,6 +115,17 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Estou sempre no que aí vem ou no que já passou, nunca no agora.',
     sensacoes: ['a cabeça que não desliga', 'pensar de mais, antecipar tudo', 'reviver o que já passou', 'ruído interno constante', 'nunca estar mesmo no presente'],
     chegada: 'testemunhar (ver a tempestade de fora)',
+    perguntaEspinha: 'Porque faço isto sem reparar?',
+    assinatura: 'revelar',
+    bancoCenas: [
+      'respondes "está tudo bem" antes de saber se está',
+      'planeias a resposta antes de ouvir a pergunta',
+      'pesquisas os sintomas dos outros e ignoras os teus',
+      'adormeces a refazer o dia inteiro na cabeça',
+      'o teu marido chega vinte minutos atrasado e na tua cabeça já houve uma discussão inteira',
+      'ainda estás a reler uma mensagem que a outra pessoa já esqueceu',
+      'já estás zangada com uma conversa que ainda não aconteceu',
+    ],
     veus: ['Turbilhão', 'Memória'],
     simbolo: 'a margem',
     fundoBase:
@@ -153,6 +172,17 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Não paro porque não aguento o que sinto quando paro.',
     sensacoes: ['exaustão de quem faz tudo', 'culpa ao parar', 'não saber receber', 'medo do silêncio e do vazio', 'encher o tempo para não sentir'],
     chegada: 'regressar (voltar a casa, a si)',
+    perguntaEspinha: 'Quando foi que me perdi de mim?',
+    assinatura: 'regressar',
+    bancoCenas: [
+      'tens catorze separadores abertos e nem um és tu',
+      'planeaste as férias de todos e voltaste mais cansada',
+      'a tua lista tem trinta coisas e nenhuma é para ti',
+      'acordas já a resolver antes de pôr os pés no chão',
+      'entraste na cozinha para beber água, respondeste a uma mensagem, arrumaste uma gaveta, e esqueceste-te da água',
+      'tens cinco minutos livres, o corpo quer sentar-se e a cabeça inventa-te uma tarefa',
+      'sabes a marca do iogurte de toda a gente lá de casa e não sabes qual é o teu',
+    ],
     veus: ['Esforço', 'Desolação'],
     simbolo: 'o colo',
     fundoBase:
@@ -203,6 +233,17 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Adio a vida que quero porque mudar seria deixar de ser quem sempre fui.',
     sensacoes: ['adiar a vida para um quando', 'chegar e nunca chegar', 'agarrar-se a quem já se foi', 'medo de mudar e de expandir', 'viver na próxima ou na antiga versão de si'],
     chegada: 'participar (entrar na vida, agora)',
+    perguntaEspinha: 'O que estou à espera para começar?',
+    assinatura: 'encarnar',
+    bancoCenas: [
+      'o livro que vais ler "quando tiver tempo"',
+      'a viagem adiada para "quando der"',
+      'o curso comprado e nunca aberto',
+      '"começo na segunda" há trezentas segundas',
+      'guardaste a loiça boa para uma ocasião especial que nunca chegou',
+      'tens um vestido que adoras e esperas o corpo certo para o usar',
+      'a vela guardada, o perfume guardado, a loiça guardada, e a vida também',
+    ],
     veus: ['Horizonte', 'Permanência'],
     simbolo: 'descalça',
     fundoBase:

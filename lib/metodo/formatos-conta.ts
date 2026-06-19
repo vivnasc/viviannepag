@@ -28,38 +28,38 @@ export interface FormatoConta {
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   vir: {
     descoberta: {
-      nome: 'Faca fragmentada (da dispersão ao centro)',
-      beats: 5,
-      registo: 'SEM voz, rápido. A faca PARTE-SE em pedaços nos 3 primeiros beats (ex.: "Tens catorze separadores abertos" / "e nem um" / "és tu."). A imagem vai da DISPERSÃO (ex.: separadores que viram estrelas dispersas num céu nocturno) a um FIO DOURADO que se acende e desenha um caminho até um ponto central quieto. Beat final = a palavra "regressar".',
+      nome: 'A cena primeiro · quando foi que me perdi de mim',
+      beats: 3,
+      registo: 'A CENA PRIMEIRO (manhã, faca): a cena da DISPERSÃO ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "Quando foi que me perdi de mim?". TRÊS TEMPOS: (1) a CENA concreta do dia a dia que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "regressar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca a que…" / "Envia a quem…"). MODELO (copia a FORMA, não o tema): "Entraste na cozinha para beber água. / Respondeste a uma mensagem. / Arrumaste uma gaveta. / E esqueceste-te da água. / regressar" + envio "Marca a que entra num sítio e já não sabe a que ia." SEM voz. Veste: bússolas, fios dourados, aves migratórias, rios de luz, constelações-guia (dourado, âmbar, azul nocturno, cobre); a imagem é o chamado, a cena é a dispersão.',
     },
     profundidade: {
-      nome: 'Voz-off · a bússola que aponta para dentro',
+      nome: 'A tarde · o chamado (voz-off, a bússola para dentro)',
       beats: 5,
-      registo: 'VOZ-OFF contínua (o texto de cada beat é a voz-off). A imagem TRANSFORMA-SE: uma bússola antiga a girar sem parar (cobre) → a agulha abranda e aponta para dentro, ao fundo aves migratórias → um rio de luz dourado atravessa o céu nocturno e as aves seguem-no → as aves pousam, o rio aquieta. Inclui a RAIZ com herança ("talvez nem seja só teu: vens de mulheres que também andaram perdidas a cuidar de tudo") e a VOLTA ("regressar não é parar de andar, é deixar de te dispersares"). Beat final = "regressar".',
+      registo: 'TARDE, colo: VOZ-OFF contínua (o texto de cada beat é a voz-off), lento e dourado, a imagem TRANSFORMA-SE. Uma bússola antiga a girar sem parar (cobre) → a agulha abranda e aponta para dentro, ao fundo aves migratórias → um rio de luz dourado atravessa o céu nocturno e as aves seguem-no → as aves pousam, o rio aquieta num ponto central. Inclui a RAIZ com herança sem culpa ("talvez nem seja só teu: vens de mulheres que também se perderam a cuidar de tudo") e a VOLTA ("regressar não é parar de andar, é voltar a saber para onde"). Assinatura "regressar". ENVIO: "Envia a quem orienta toda a gente e perdeu o norte de si."',
     },
   },
   ver: {
     descoberta: {
-      nome: 'Espelho · 2000 vs 2026',
-      beats: 5,
-      registo: 'SEM voz, texto palavra-a-palavra. Um PRISMA divide a luz em dois tempos: à esquerda 2000 (o mesmo padrão na forma antiga), à direita 2026 (a forma de hoje, carga mental). Mostra que mudou tudo MENOS uma coisa (a lealdade/o padrão por baixo). No fim, um véu translúcido ergue-se e por baixo está a mesma silhueta: "Não é a época. É a lealdade." Veste: prismas, espelhos, geometrias sagradas, véus (azul profundo, prata, violeta).',
+      nome: 'A cena primeiro · porque faço isto sem reparar',
+      beats: 3,
+      registo: 'A CENA PRIMEIRO (manhã, faca): a cena ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "Porque faço isto sem reparar?". TRÊS TEMPOS: (1) a CENA concreta do mecanismo invisível que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "revelar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda à amiga que…"). MODELO (copia a FORMA, não o tema): "O teu marido chega vinte minutos atrasado. / Na tua cabeça já houve uma discussão inteira. / revelar" + envio "Marca quem ensaia conversas que ainda não aconteceram." SEM voz. Veste: prismas, espelhos, véus translúcidos, geometrias (azul profundo, prata, violeta, branco lunar); a imagem revela, a cena é dita em texto.',
     },
     profundidade: {
-      nome: 'Reconhecimento interativo (5 frases · comenta o número)',
-      beats: 6,
-      registo: 'SEM voz, gera comentários/DM. Beat 1: um espelho infinito, "Cinco frases. Para na que te apertar o peito." Beats 2-6: CINCO frases numeradas (1..5), cada uma um comportamento concreto e específico DESTE véu, cada uma sobre um cristal/geometria diferente. Beat final: "A que te apertou tem nome. E vê-se." ENVIO: "Comenta o número que te parou." Veste: espelhos infinitos, cristais, geometrias (azul profundo, prata, violeta).',
+      nome: 'A tarde · o porquê em voz baixa (a raiz, sem julgar)',
+      beats: 5,
+      registo: 'TARDE, colo: a mesma cena-tema da manhã, registo oposto. Voz-off OU texto lento, imagem contemplativa e lenta. Mostra a RAIZ sem julgar e HONRA a estratégia (foi inteligente, foi proteção), devolvendo segurança ao presente. MOLDE (do prisma): "Não estás louca." → a origem na infância sem culpa ("aos seis anos aprendeste a ver o perigo antes de ele chegar, porque alguém em casa mudava de humor sem aviso") → "ensaiar o pior foi como nunca foste apanhada de surpresa, foi proteção" → "hoje já não precisas de adivinhar tempestades para estares segura" → assinatura "revelar". ENVIO: "Manda a quem vive em alerta e não sabe porquê." Veste: prisma no escuro, a luz que assenta e se unifica num feixe sereno (violeta, prata, branco lunar).',
     },
   },
   viver: {
     descoberta: {
-      nome: 'Microdrama de objetos (o "quando")',
-      beats: 5,
-      registo: 'SEM voz, texto + som. Microdrama SEM rosto, só objetos, sobre adiar a vida ("quando acabar isto / quando emagrecer / quando tiver tempo"). Ex.: uma mala feita à porta (aurora) → uma semente na palha nunca plantada → um jardim verde-esmeralda visto através de um vidro fechado, ela do lado de dentro → a mão abre-se, a semente cai na terra e uma flor impossível começa a abrir → "Não há comboio a partir sem ti. A estreia é hoje." Beat final = "encarnar". Veste: sementes, jardins, flores impossíveis, auroras (verde esmeralda, ouro vivo, coral).',
+      nome: 'A cena primeiro · o que estou à espera para começar',
+      beats: 3,
+      registo: 'A CENA PRIMEIRO (manhã, faca): a cena da VIDA GUARDADA ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "O que estou à espera para começar?". TRÊS TEMPOS: (1) a CENA concreta de algo guardado para depois que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "encarnar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda a quem…"). MODELO (copia a FORMA, não o tema): "Guardaste a loiça boa para uma ocasião especial. / A ocasião especial nunca chegou. / encarnar" + envio "Marca quem tem a loiça boa a ganhar pó." SEM voz. Veste: sementes, jardins, flores impossíveis, auroras, frutos dourados (verde esmeralda, ouro vivo, coral, branco solar); a imagem é a vida que espera, a cena é o que está guardado.',
     },
     profundidade: {
-      nome: 'O gesto / exercício do dia',
+      nome: 'A tarde · o gesto de hoje',
       beats: 5,
-      registo: 'Voz-off suave OU texto. É um EXERCÍCIO concreto, não uma frase. "O exercício de hoje:" → uma micro-prática presente e pequena (ex.: o calor da chávena nas mãos, três respirações, reparar que já cá estás) → "Participar não é uma meta. É este instante." Mãos na terra, uma semente a ser plantada devagar, uma flor a abrir / roda solar. ENVIO: "Guarda este. É o teu lembrete para os dias de quando." Veste: mãos que criam, sementes, frutos, rodas solares (verde esmeralda, ouro vivo, coral).',
+      registo: 'TARDE, colo: voz-off suave OU texto. É um EXERCÍCIO concreto, não uma frase. "O exercício de hoje:" → uma micro-prática presente e pequena (o calor da chávena nas mãos, três respirações, reparar que já cá estás) → "Participar não é uma meta. É este instante." Assinatura "encarnar". ENVIO: "Guarda este. É o teu lembrete para os dias de quando." Veste: mãos que criam, sementes, frutos, rodas solares, uma flor a abrir (verde esmeralda, ouro vivo, coral).',
     },
   },
   mae: {
