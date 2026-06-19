@@ -163,11 +163,12 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - O ÚLTIMO beat é o estalo: "Espera. Isto não é normal." sozinho.`
     : cartaRen
     ? `A FUNÇÃO DESTA PEÇA — CARTA DE RENOMEAR = dar um NOME NOVO a uma história antiga. NÃO consola, NÃO ensina, NÃO diagnostica, NÃO aconselha, NÃO valida, NÃO é frase inspiracional. RENOMEIA. Se pudesse estar em mil contas de desenvolvimento pessoal, FALHOU. REGRAS DE FERRO:
-- É uma CARTA pessoal, 2.ª pessoa, tom íntimo e sereno (pode abrir com "À filha mais velha," ou falar-lhe direto).
-- ESTRUTURA em 5 partes, por esta ordem: (1) o NOME ANTIGO que ela sempre acreditou ser; (2) a VIDA concreta por trás do nome; (3) a FRASE DE VIRAGEM que vira o significado de tudo; (4) o PREÇO que custou (ex.: ainda hoje custa-te descansar); (5) a ABERTURA, não conselho, só a possibilidade de já não ser preciso continuar igual.
+- PARA O SCROLL no 1.º beat (a CAPA): o nome antigo dito com orgulho + uma FENDA que promete a reviravolta, curto e a furar (ex.: "Chamaram-te forte. E se nunca foi um elogio?" / "Para a filha mais velha que teve de crescer cedo."). NUNCA abras com a saudação mansa (essa vem a seguir) nem com um muro de texto.
+- É uma CARTA pessoal, 2.ª pessoa, tom íntimo e sereno.
+- ESTRUTURA depois da capa, por esta ordem: (1) o NOME ANTIGO que ela sempre acreditou ser; (2) a VIDA concreta por trás do nome; (3) a FRASE DE VIRAGEM que vira o significado de tudo; (4) o PREÇO que custou (ex.: ainda hoje custa-te descansar); (5) a ABERTURA, não conselho, só a possibilidade de já não ser preciso continuar igual.
+- MOVIMENTO: a carta REVELA-SE (as palavras a aparecer, escritas), é um REEL, não uma página de texto parada.
 - ZERO véu, ZERO mecanismo, ZERO diagnóstico, ZERO "deves"/conselho, ZERO validação.
-- TESTE: a pessoa pensa "nunca tinha visto isto desta maneira", nunca "sinto-me validada".
-- A imagem é UMA só, contemplativa; a carta revela-se por cima dela.`
+- TESTE: a pessoa pensa "nunca tinha visto isto desta maneira", nunca "sinto-me validada".`
     : ehManha
     ? `A FUNÇÃO DESTA PEÇA — MANHÃ · DESCOBERTA = uma FACA, não um artigo. Fura para estranhos, é para ser SENTIDA, não compreendida. REGRAS DE FERRO (são o que mais importa hoje):
 - POUQUÍSSIMO texto: cada beat é uma linha curta, 3 a 8 palavras, fragmentada, frase nominal. A peça inteira cabe em poucas linhas curtas.
@@ -218,7 +219,7 @@ O ENVIO é implícito ou aponta para uma pessoa concreta ("Marca a que…" / "J�
 ${clarificar ? 'CLARIFICA: reescreve mais claro e direto, tirando qualquer ambiguidade, sem perder a dor.' : ''}
 ${evitar.length ? `NÃO repitas estes ângulos/frases já usados (encontra outro): ${evitar.slice(-12).map((e) => `"${e}"`).join('; ')}.` : ''}
 
-Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${naoNorm ? ' Cada beat (menos o último) começa por "Não normalizes" e o ÚLTIMO beat é exatamente "Espera. Isto não é normal." sozinho.' : ''}${cartaRen ? ' Os beats são as PARTES da carta em sequência (UMA só imagem contemplativa partilhada por todos os beats), na ordem das 5 partes: nome antigo, vida por trás, frase de viragem, preço, abertura.' : ''}`;
+Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${naoNorm ? ' Cada beat (menos o último) começa por "Não normalizes" e o ÚLTIMO beat é exatamente "Espera. Isto não é normal." sozinho.' : ''}${cartaRen ? ' O 1.º beat é a CAPA que PARA O SCROLL (nome antigo + fenda que promete a reviravolta). Os beats seguintes são as PARTES da carta em sequência (a mesma carta tipográfica em papel, as palavras a revelarem-se), na ordem: nome antigo, vida por trás, frase de viragem, preço, abertura.' : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
