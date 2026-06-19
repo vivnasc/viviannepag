@@ -119,7 +119,7 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   // VERSO da carta, não mandam na figura.
   const cor = VEU_COR[veu];
   const veste = carta
-    ? `A IMAGEM é a FIGURA da personagem ${personagem.nome}, no estilo de uma CARTA ilustrada do baralho "Sou Aquela", em ângulos que mudam de carta para carta (rosto sereno · silhueta · de costas · o símbolo do padrão dela). A Vivianne gera a imagem no Midjourney; dá só a indicação da figura e do ângulo de cada beat. O VÉU e a COR não mandam na figura: ficam no VERSO da carta. Estilo: ilustração pintada, digna, intemporal.`
+    ? `A IMAGEM é UMA figura da personagem ${personagem.nome} (UMA só por carta — é a FRENTE da carta), no estilo de uma CARTA ilustrada do baralho "Sou Aquela". A imagem é GERADA na API (Flux), NUNCA no Midjourney: descreve a figura como ilustração pintada coerente — uma mulher, num ângulo digno (rosto sereno OU silhueta OU de costas) com o símbolo do padrão dela. As linhas da confissão revelam-se POR CIMA desta mesma figura (não há imagem nova por linha). O VÉU e a COR não mandam na figura: ficam no VERSO da carta. Estilo: ilustração pintada, digna, intemporal.`
     : `A COR é a do VÉU de hoje e SÓ essa (não existe paleta de cor por conta, foi banida): ${cor.pt} (${cor.prompt}). Toda a imagem segue esta cor. Os SÍMBOLOS do universo desta conta (é o que distingue a conta, junto com o formato; rende-os NESTA cor do véu, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. O MOOD da conta (a sensação, nunca a cor): ${a.sensacao}; ${a.fraseVisual}. Textura: painterly, fine grain, em movimento.`;
   // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
   // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
@@ -137,7 +137,7 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - O TEXTO é uma ANÁFORA de 3 a 4 comportamentos CONCRETOS e observáveis da personagem, em linhas curtas, e o ÚLTIMO beat é só "Sou aquela." sozinho.
 - MOLDE (copia a FORMA, não o tema): "Sabe as consultas de todos. / Os medicamentos de todos. / Os aniversários de todos. / Quando lhe perguntam pela dela, não sabe responder." → "Sou aquela."
 - ZERO explicação: NÃO nomeies o véu, a estratégia, o mecanismo, a "sobrevivência"; nada de "porque", nada de interpretação. A reflexão acontece sozinha na cabeça de quem lê.
-- A imagem de cada beat é a FIGURA da personagem num ângulo (a Vivianne faz no Midjourney).`
+- A imagem é UMA só figura da personagem (a FRENTE da carta), GERADA na API (Flux), nunca no Midjourney; as linhas da confissão aparecem por cima dela, não há uma imagem nova por beat.`
     : ehManha
     ? `A FUNÇÃO DESTA PEÇA — MANHÃ · DESCOBERTA = uma FACA, não um artigo. Fura para estranhos, é para ser SENTIDA, não compreendida. REGRAS DE FERRO (são o que mais importa hoje):
 - POUQUÍSSIMO texto: cada beat é uma linha curta, 3 a 8 palavras, fragmentada, frase nominal. A peça inteira cabe em poucas linhas curtas.
