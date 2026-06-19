@@ -14,6 +14,7 @@
 
 import { VeuNome, ContaId, CONTAS } from './contas';
 import { VEU_FACES } from './veu-faces';
+import { VEU_SEMENTE } from './veus';
 import { SABER } from './saber';
 import { REFERENCIAS } from './referencias';
 import type { Personagem } from './personagens';
@@ -50,11 +51,17 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const fmt = getFormatoConta(conta, tipo);
   const ref = REFERENCIAS[veu];
   const k = SABER[veu];
-  // SABER = a fonte-chave (a área de estudo dela): muitas faces da dor por véu.
-  // É o que dá ângulos concretos e infinitos. Alimenta o motor sempre.
-  const materia = k
-    ? `comportamentos: ${k.comportamentos.slice(0, 5).join(' · ')}; cenas do dia a dia: ${k.cenas.slice(0, 4).join(' · ')}; custos: ${k.custos.slice(0, 3).join(' · ')}; mecanismos: ${k.mecanismos.slice(0, 3).join(' · ')}; origens: ${k.origens.slice(0, 3).join(' · ')}`
-    : (f?.dor ?? veu);
+  const sem = VEU_SEMENTE[veu];
+  // BANCO DE CONCRETO: a dor deste véu em momentos REAIS e observáveis, para TODOS
+  // os 7 véus (não só o que tem SABER). É a cura da ambiguidade: o motor escolhe um
+  // momento específico em que a mulher se reconhece em 1 segundo, em vez de soltar
+  // uma frase de coach. Junta as frases de reconhecimento (VEU_SEMENTE), as faces
+  // concretas do retrato (dor/fuga/culpa/custo) e, quando existe, o SABER.
+  const banco = [
+    ...(sem?.exemplos ?? []),
+    f?.dor, f?.fuga, f?.culpa, f?.custo,
+    ...(k ? [...k.comportamentos.slice(0, 6), ...k.cenas.slice(0, 5)] : []),
+  ].filter(Boolean) as string[];
   // A COR é SÓ a do VÉU do dia (sequência dos chakras). NÃO existe paleta de cor
   // por conta (foi banida): a cor da imagem é sempre a do véu. A conta entra com
   // os SÍMBOLOS e o MOOD (a sensação, sem cor). Veste a IMAGEM, nunca o texto.
@@ -83,14 +90,16 @@ Cada beat tem uma IMAGEM feita destes símbolos, EM MOVIMENTO (o movimento é o 
 
 O ASSUNTO de hoje (partilhado por todas as contas; muda só a forma):
 - VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
-- MATÉRIA-PRIMA do SABER (a área de estudo dela — a fonte-chave; usa para encontrar um ângulo concreto e NOVO, NÃO copies à letra): ${materia}
-- A pessoa que se reconhece: ${personagem.nome}. Diz coisas como: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}
+- BANCO DE CONCRETO (a dor deste véu em momentos REAIS; escolhe UM momento específico e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
+- A pessoa que se reconhece: ${personagem.nome}. Fala assim: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}
 - A origem/raiz (para a profundidade): ${f?.fuga ?? ''} ${f?.culpa ?? ''}
 - A saída/volta (a direção concreta): ${f?.saida ?? ''}
 
 ${ref?.conceitos?.length ? `CAMPO DE ESTUDO (conceitos reais das cadeiras/pós-graduações dela, SÓ para TU pensares mais fundo; NUNCA os nomeies nem uses jargão/autores no texto): ${ref.conceitos.join(' · ')}${ref.estudos?.length ? ` · ${ref.estudos.join(' · ')}` : ''}.` : ''}
 
-REGRAS DE VOZ (duras): português europeu, concreto, do dia a dia (carga mental de 2026). SEM metáforas no texto (nada de alma, universo, água, tempestade). SEM testemunho ("fui eu") nem biografia. Fala na 2.ª pessoa ou descreve em 3.ª. SEM travessões. SEM aspas. SEM hashtags. Cada frase tem de fazer sentido SOZINHA (sem pronomes ambíguos: evita "isso", "aquilo", "ela", "ele" sem dizer a quê/a quem).
+CONCRETO OU NADA (a regra que mais importa, é por aqui que a peça vive ou morre): cada linha de TEXTO tem de nomear um momento concreto e observável do dia a dia (um objeto, uma hora do dia, um gesto, um sítio, uma frase exata que ela diz por dentro), tão específico que a mulher se reconhece em 1 segundo e pensa "isto sou eu". TESTE a cada linha: se pudesse servir para qualquer pessoa, ou se soasse a frase de coach ou de horóscopo, está ERRADA — troca-a por um detalhe específico (ex.: não "vives em alerta" mas "às três da manhã ainda estás a resolver uma conversa que correu bem"). PROIBIDO no texto: abstrações e jargão (padrão, presença, consciência, lealdade, vazio, alma, jornada, energia, cura, transformação, essência, propósito, autoconhecimento). A IMAGEM pode ser simbólica; o TEXTO é vida concreta.
+
+REGRAS DE VOZ (duras): português europeu, do dia a dia (a carga mental de 2026). SEM metáforas no texto (nada de alma, universo, água, tempestade). SEM testemunho ("fui eu") nem biografia. Fala na 2.ª pessoa ou descreve em 3.ª. SEM travessões. SEM aspas. SEM hashtags. Cada frase tem de fazer sentido SOZINHA (sem pronomes ambíguos: evita "isso", "aquilo", "ela", "ele" sem dizer a quê/a quem).
 O ENVIO é implícito ou aponta para uma pessoa concreta ("Marca a que…" / "Já sabes em quem pensaste").
 ${clarificar ? 'CLARIFICA: reescreve mais claro e direto, tirando qualquer ambiguidade, sem perder a dor.' : ''}
 ${evitar.length ? `NÃO repitas estes ângulos/frases já usados (encontra outro): ${evitar.slice(-12).map((e) => `"${e}"`).join('; ')}.` : ''}
