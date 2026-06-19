@@ -57,8 +57,10 @@ export interface Conta {
   perguntaEspinha?: string;
   /** FILHAS · a assinatura discreta no fim da peça (revelar · regressar · encarnar). */
   assinatura?: string;
-  /** FILHAS · banco de MICRO-CENAS concretas do dia a dia (a cena ilumina, não se
-   *  explica; tão específica que a pessoa pensa numa cara). O gerador escolhe uma. */
+  /** FILHAS · MOLDE da forma "cena primeiro": exemplos de micro-cenas concretas do
+   *  dia a dia (a cena ilumina, não se explica; tão específica que a pessoa pensa
+   *  numa cara). É finito, por isso NÃO é a fonte de conteúdo: ensina só a FORMA. O
+   *  gerador escreve cenas NOVAS nesta forma a partir do SABER (que não acaba). */
   bancoCenas?: string[];
   /** Os dois véus que este movimento recolhe (o cacho). */
   veus: VeuNome[];

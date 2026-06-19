@@ -99,9 +99,12 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   // momento específico em que a mulher se reconhece em 1 segundo, em vez de soltar
   // uma frase de coach. Junta as frases de reconhecimento (VEU_SEMENTE), as faces
   // concretas do retrato (dor/fuga/culpa/custo) e, quando existe, o SABER.
+  // A FONTE de conteúdo é o SABER + faces + sementes — material que NÃO acaba
+  // (cresce com as cadeiras). O bancoCenas da conta NÃO entra aqui: é finito (7
+  // cenas) e se liderasse o banco a manhã repetir-se-ia e esgotava. O bancoCenas
+  // entra só como MOLDE da forma (ver prompt) — a "cena primeiro" gera-se NOVA a
+  // partir deste banco infinito, na forma dos exemplos.
   const bancoBase = [
-    // A CENA PRIMEIRO (filhas): as micro-cenas concretas da conta lideram o banco.
-    ...(!fmt.cartaBaralho ? (c.bancoCenas ?? []) : []),
     ...(sem?.exemplos ?? []),
     f?.dor, f?.fuga, f?.culpa, f?.custo,
     ...(k ? [...k.comportamentos.slice(0, 6), ...k.cenas.slice(0, 5)] : []),
@@ -182,7 +185,7 @@ ${carta ? `A PERSONAGEM desta carta (é só sobre ela, não sobre o véu): ${per
 - BANCO DE CONCRETO (momentos REAIS para virar cenas normalizadas): ${banco.map((x) => `"${x}"`).join(' · ')}
 - A pessoa que se reconhece (NÃO a nomeies no texto; só te ajuda a achar cenas reais): ${personagem.nome}. Fala assim: ${personagem.frases.map((x) => `"${x}"`).join('; ')}
 - NÃO nomeies o véu nem nenhum mecanismo: é só a cena que toda a gente normalizou.` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
-${c.perguntaEspinha ? `- A PERGUNTA-ESPINHA desta conta (é A CENA PRIMEIRO: a mulher fá-la a si própria; NUNCA a escrevas nem nomeies o véu): "${c.perguntaEspinha}". A peça é uma MICRO-CENA concreta que faz a mulher sentir esta pergunta, sem nunca a formular.\n` : ''}${c.assinatura ? `- A ASSINATURA no fim (discreta, sozinha, uma palavra): "${c.assinatura}".\n` : ''}- VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
+${c.perguntaEspinha ? `- A PERGUNTA-ESPINHA desta conta (é A CENA PRIMEIRO: a mulher fá-la a si própria; NUNCA a escrevas nem nomeies o véu): "${c.perguntaEspinha}". A peça é uma MICRO-CENA concreta que faz a mulher sentir esta pergunta, sem nunca a formular.\n` : ''}${c.bancoCenas?.length ? `- MOLDE DE CENA (a FORMA da "cena primeiro": concreta, curta, do dia a dia, tão específica que a mulher pensa numa cara). Estes são EXEMPLOS da FORMA, NÃO uma lista para repetir nem reutilizar: escreve uma cena NOVA, tirada do BANCO DE CONCRETO (em baixo), na MESMA forma destes: ${c.bancoCenas.map((x) => `"${x}"`).join(' · ')}.\n` : ''}${c.assinatura ? `- A ASSINATURA no fim (discreta, sozinha, uma palavra): "${c.assinatura}".\n` : ''}- VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
 - O TEU ÂNGULO (o que te separa das outras contas que hoje falam do mesmo véu): ${foco.titulo}.${ehManha ? ' NA MANHÃ isto é só o CORTE: mostra-o, não o expliques.' : ` ${foco.instrucao}`}
 - BANCO DE CONCRETO (momentos REAIS; escolhe UM e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
 - A pessoa que se reconhece: ${personagem.nome}. Fala assim: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}
