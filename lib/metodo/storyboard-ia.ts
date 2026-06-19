@@ -227,11 +227,11 @@ ${carta ? `A PERSONAGEM desta carta (é só sobre ela, não sobre o véu): ${per
 - FRASE DE VIRAGEM (a viragem do significado; usa uma OU escreve outra no mesmo espírito): ${(c.frasesViragem ?? []).map((x) => `"${x}"`).join(' · ')}
 - A VIDA por trás do nome, o PREÇO e a raiz (material concreto, NÃO o nomeies como teoria): ${banco.slice(0, 8).map((x) => `"${x}"`).join(' · ')}
 - NÃO nomeies o véu nem nenhum mecanismo: a carta só renomeia.` : espelho ? `A MATÉRIA (O ESPELHO): quem fica a viver na cabeça de quem vê (admira, inveja, detesta, não esquece, irrita, intimida).
-- A PERGUNTA-FACA (o motor, NÃO a escrevas tal e qual): "${c.perguntaEspinha ?? 'Porque é que, entre milhões de pessoas, esta ficou a viver dentro de mim?'}"
+- A PERGUNTA-FACA (o motor, NÃO a escrevas tal e qual): "Porque é que, entre milhões de pessoas, esta ficou a viver dentro de mim?"
 - BANCO DE HOOKS (abre para FORA, uma pessoa REAL; usa um OU escreve novo no mesmo espírito, NÃO repitas): ${(c.bancoEspelho ?? []).map((x) => `"${x}"`).join(' · ')}
 - O MECANISMO (o virar para dentro, em linguagem da vida): inveja = a vida que não te deixaste querer; irritação desproporcional = o outro faz o que te proíbes; intimidação = a permissão que não te deste; não esquecer = uma frase tua por dizer.
 - LINHA VERMELHA: o outro mostra-te a ti; liberta, não bisbilhota; NUNCA analisar os outros.` : repara ? `A MATÉRIA (REPARA): a vida que JÁ está aqui, a que não dás atenção (olha para CÁ, agora).
-- A PERGUNTA DE FUNDO (NÃO a escrevas): "${c.perguntaEspinha ?? 'O que não estou a ver porque estou à espera?'}"
+- A PERGUNTA DE FUNDO (NÃO a escrevas): "O que não estou a ver porque estou à espera?"
 - BANCO DE INSTANTES (concretos, pequenos, sensoriais; usa um OU lembra-te de outro REAL no mesmo registo, NÃO inventes fórmula bonita): ${(c.bancoRepara ?? []).map((x) => `"${x}"`).join(' · ')}
 - A imagem MANDA: descreve UM instante concreto a respirar; a palavra é 1 a 2 linhas que apontam, um sussurro.
 - SEM moral, sem lição, sem "viver o momento". O pequeno e específico toca; o bonito genérico passa.` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):

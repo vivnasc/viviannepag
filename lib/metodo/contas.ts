@@ -136,7 +136,7 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Estou sempre no que aí vem ou no que já passou, nunca no agora.',
     sensacoes: ['a cabeça que não desliga', 'pensar de mais, antecipar tudo', 'reviver o que já passou', 'ruído interno constante', 'nunca estar mesmo no presente'],
     chegada: 'testemunhar (ver a tempestade de fora)',
-    perguntaEspinha: 'Porque é que, entre milhões de pessoas, esta ficou a viver dentro de mim?',
+    perguntaEspinha: 'Porque faço isto sem reparar?',
     assinatura: 'revelar',
     bancoCenas: [
       'respondes "está tudo bem" antes de saber se está',
@@ -307,7 +307,7 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Adio a vida que quero porque mudar seria deixar de ser quem sempre fui.',
     sensacoes: ['adiar a vida para um quando', 'chegar e nunca chegar', 'agarrar-se a quem já se foi', 'medo de mudar e de expandir', 'viver na próxima ou na antiga versão de si'],
     chegada: 'participar (entrar na vida, agora)',
-    perguntaEspinha: 'O que não estou a ver porque estou à espera?',
+    perguntaEspinha: 'O que estou à espera para começar?',
     assinatura: 'encarnar',
     bancoCenas: [
       'o livro que vais ler "quando tiver tempo"',
