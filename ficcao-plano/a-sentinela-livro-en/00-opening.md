@@ -1,0 +1,11 @@
+## From the register of Véspera
+
+In the record of the village, in the hand of the Keepers who have kept the book, the following is found:
+
+Custódia, daughter of Véspera folk, mother of Mercês and of Tobias. She raised her children with a vigil that never knew rest, and made of the watch her love: the mother who did not sleep, who was always at her post, who kept her own safe by never lowering her eyes. The children grew, did well, went to live far away, as is the way of life. And she stayed at the post.
+
+Her name was a promise, of the Véspera kind: her mother wanted her to bear the name of one who takes care, who keeps watch, who guards her own, in the hope of a daughter who would know how to care. And life gave a woman who cared so well, and for so long, that she did not know how to stop caring when there was no longer anyone to care for, and was left guarding empty rooms, on watch over a house where no one slept any more, awaiting a danger that had passed long ago.
+
+The register says who was born, who married whom, who left home for their own life. It does not say what it costs a mother to come down from the watch, after a life of vigil, nor what is lost of oneself in guarding a post the children have abandoned. There are those who go on standing sentinel long after the war has ended, without hearing that they may, at last, rest. For those, books such as this one are needed.
+
+This is a novel of mother and children, like the others on this shelf, and it is about the weight that is carried out of love. But the weight, here, is that of a watch that no longer has an object, the vigil that goes on after the children depart, the love that, not knowing how to stop in time, turns into a chain for the one who gives it and into guilt for the one who receives it. Whoever has ever felt the nest empty and not known what to do with themselves, whoever goes on keeping watch over children who already guard themselves, whoever confuses loving with not letting go, that one will recognise themselves in Custódia, and will learn with her that to come down from the watch is not to love less, it is to trust, and that there is, on the other side of the empty nest, a life still to be lived.
