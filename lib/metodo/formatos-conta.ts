@@ -19,6 +19,10 @@ export interface FormatoConta {
    *  GERADA na API (Flux/Replicate, gerarImagemFlux) — NUNCA no Midjourney à mão.
    *  Quando true, o motor permite figura/personagem e a 1.ª pessoa da carta. */
   cartaBaralho?: boolean;
+  /** "Não normalizes…" (TARDE da mãe): espelho social — não fala da pessoa, fala
+   *  do que a CULTURA tornou normal. Cenas concretas, zero teoria/mecanismo/véu;
+   *  a resposta procurada é "espera, isto não é normal". */
+  naoNormalizes?: boolean;
 }
 
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
@@ -66,9 +70,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
       registo: 'É uma CARTA do baralho "Sou Aquela" (a FRENTE da carta), não um reel comum. A FIGURA é a PERSONAGEM do dia, em ângulos diferentes de carta para carta (rosto sereno, silhueta, de costas, o símbolo do seu padrão); a imagem da figura é GERADA na API (Flux, gerarImagemFlux) — NUNCA no Midjourney. O prompt descreve a personagem como ILUSTRAÇÃO coerente (a mesma mulher dentro da carta, só o ângulo/símbolo muda) na veste da mãe (velas, constelações, manuscritos; âmbar, ouro velho, negro estrelado). O TEXTO é a confissão da personagem na PRIMEIRA pessoa, no ritmo das cartas: abre com uma anáfora forte ou "Sou aquela que…" e FECHA com "Não porque [o juízo fácil]. Porque [o motivo digno, a lealdade]." MODELO (carta A Leal): "Fiquei mais tempo do que devia. Aguentei mais do que devia. Esperei mais do que devia. Não porque fosse fraca. Porque fui leal." Nomeia a personagem com dignidade, NUNCA a julgues. É uma FACA: poucas linhas, e a mulher diz "sou eu". Cada beat = a figura num ângulo + a linha da confissão que aparece.',
     },
     profundidade: {
-      nome: 'A voz · confissão e direção',
+      nome: 'Não normalizes… (espelho social)',
       beats: 5,
-      registo: 'Voz-off contínua, 1.ª pessoa, contemplativa (o registo "Hoje em mim"): nomeia o padrão, mostra a raiz/herança sem culpa, e a volta com agradecimento (honra a estratégia, e solta). Termina numa direção concreta. Veste: velas, constelações vivas, manuscritos (âmbar, ouro velho, negro estrelado).',
+      naoNormalizes: true,
+      registo: 'É um ESPELHO SOCIAL, não fala da pessoa: fala do que a CULTURA tornou normal (a carga mental invisível das mulheres em casa, 2026). NÃO é sobre identidade (isso é a carta da manhã) nem sobre mecanismos (isso são as contas filhas): é sobre o hábito coletivo que toda a gente faz e já ninguém estranha. FORMA: cada beat é "Não normalizes" + UMA cena concreta, específica e observável. MODELOS (copia a FORMA e o grau de concreto, não o tema): "Não normalizes seres a única pessoa da casa que sabe quando vencem os documentos de todos." / "Não normalizes tratares de todos os assuntos da casa enquanto o teu marido vê televisão." / "Não normalizes saberes os medicamentos de todos e não te lembrares dos teus." / "Não normalizes interromperes o teu banho três vezes porque alguém te chamou." Acumula 3 a 4 cenas e FECHA no estalo "Espera. Isto não é normal." REGRAS DE FERRO: cenas concretas; NADA de teoria, mecanismos, diagnósticos, véus ou "porque". A resposta procurada é "espera, isto não é normal", nunca "aprendi algo".',
     },
   },
 };

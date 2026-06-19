@@ -112,6 +112,9 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   // CARTA do baralho "Sou Aquela" (manhã da mãe): a figura é a PERSONAGEM e o texto
   // é a confissão dela na 1.ª pessoa. Quebra duas regras gerais só para este formato.
   const carta = !!fmt.cartaBaralho;
+  // "Não normalizes…" (TARDE da mãe): espelho social. NÃO é a pessoa, é o que a
+  // cultura tornou normal. Sem mecanismo, sem raiz, sem véu: só a cena normalizada.
+  const naoNorm = !!fmt.naoNormalizes;
   // A COR é SÓ a do VÉU do dia (sequência dos chakras). NÃO existe paleta de cor
   // por conta (foi banida): a cor da imagem é sempre a do véu. A conta entra com
   // os SÍMBOLOS e o MOOD (a sensação, sem cor). Veste a IMAGEM, nunca o texto.
@@ -120,6 +123,8 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const cor = VEU_COR[veu];
   const veste = carta
     ? `A IMAGEM é UMA figura da personagem ${personagem.nome} (UMA só por carta — é a FRENTE da carta), no estilo de uma CARTA ilustrada do baralho "Sou Aquela". A imagem é GERADA na API (Flux), NUNCA no Midjourney: descreve a figura como ilustração pintada coerente — uma mulher, num ângulo digno (rosto sereno OU silhueta OU de costas) com o símbolo do padrão dela. As linhas da confissão revelam-se POR CIMA desta mesma figura (não há imagem nova por linha). O VÉU e a COR não mandam na figura: ficam no VERSO da carta. Estilo: ilustração pintada, digna, intemporal.`
+    : naoNorm
+    ? `A IMAGEM é UMA cena doméstica REAL e concreta que encarna a normalização do beat (ex.: a única agenda da casa toda preenchida pela letra dela · a caixa de medicamentos de todos sem os dela · o sofá ocupado enquanto ela trata de tudo). Cenas/objetos do dia a dia de 2026, dignas, SEM rosto colado à câmara. A cor do véu (${VEU_COR[veu].pt}) entra subtil, não manda. Textura: painterly, fine grain.`
     : `A COR é a do VÉU de hoje e SÓ essa (não existe paleta de cor por conta, foi banida): ${cor.pt} (${cor.prompt}). Toda a imagem segue esta cor. Os SÍMBOLOS do universo desta conta (é o que distingue a conta, junto com o formato; rende-os NESTA cor do véu, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. O MOOD da conta (a sensação, nunca a cor): ${a.sensacao}; ${a.fraseVisual}. Textura: painterly, fine grain, em movimento.`;
   // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
   // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
@@ -138,6 +143,13 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - MOLDE (copia a FORMA, não o tema): "Sabe as consultas de todos. / Os medicamentos de todos. / Os aniversários de todos. / Quando lhe perguntam pela dela, não sabe responder." → "Sou aquela."
 - ZERO explicação: NÃO nomeies o véu, a estratégia, o mecanismo, a "sobrevivência"; nada de "porque", nada de interpretação. A reflexão acontece sozinha na cabeça de quem lê.
 - A imagem é UMA só figura da personagem (a FRENTE da carta), GERADA na API (Flux), nunca no Midjourney; as linhas da confissão aparecem por cima dela, não há uma imagem nova por beat.`
+    : naoNorm
+    ? `A FUNÇÃO DESTA PEÇA — "NÃO NORMALIZES…" = ESPELHO SOCIAL, não fala da pessoa, fala do que a CULTURA tornou normal. O objetivo único: a mulher pensar "espera, isto não é normal". REGRAS DE FERRO:
+- Cada beat é uma frase que começa por "Não normalizes" + UMA cena concreta, específica e observável do dia a dia (um objeto, uma hora, um gesto, quem faz o quê em casa).
+- MOLDE (copia a FORMA e o grau de concreto, NÃO o tema): "Não normalizes seres a única pessoa da casa que sabe quando vencem os documentos de todos." / "Não normalizes tratares de todos os assuntos da casa enquanto o teu marido vê televisão." / "Não normalizes saberes os medicamentos de todos e não te lembrares dos teus." / "Não normalizes interromperes o teu banho três vezes porque alguém te chamou."
+- ZERO teoria, ZERO mecanismo, ZERO diagnóstico, ZERO véu, ZERO "porque". Não interpretes, não expliques: só nomeia a cena normalizada.
+- NÃO é sobre identidade (isso é a carta da manhã): é sobre o hábito coletivo invisível.
+- O ÚLTIMO beat é o estalo: "Espera. Isto não é normal." sozinho.`
     : ehManha
     ? `A FUNÇÃO DESTA PEÇA — MANHÃ · DESCOBERTA = uma FACA, não um artigo. Fura para estranhos, é para ser SENTIDA, não compreendida. REGRAS DE FERRO (são o que mais importa hoje):
 - POUQUÍSSIMO texto: cada beat é uma linha curta, 3 a 8 palavras, fragmentada, frase nominal. A peça inteira cabe em poucas linhas curtas.
@@ -148,9 +160,9 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - Ritmo-modelo (copia o CORTE, não o tema): "2000: agenda da mãe. / 2026: app de todos. / Os teus exames: adiados." A pessoa fecha a frase, tu não.`
     : `A FUNÇÃO DESTA PEÇA — NOITE · PROFUNDIDADE = voz-off contínua que APROFUNDA. Retém quem já segue. AQUI SIM entra o que a manhã não deu: a raiz, a herança sem culpa, o mecanismo, e a volta. Pode respirar em frases inteiras, mas continua concreta e sem jargão.`;
 
-  const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). ${carta ? 'É uma CARTA ilustrada do baralho "Sou Aquela": a figura é a PERSONAGEM (pode ter rosto, é a carta dela).' : 'Sem rosto, sem pessoas.'} A mulher reconhece-se em 1 segundo.
+  const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). ${carta ? 'É uma CARTA ilustrada do baralho "Sou Aquela": a figura é a PERSONAGEM (pode ter rosto, é a carta dela).' : naoNorm ? 'Cenas REAIS do dia a dia, sem rosto colado à câmara.' : 'Sem rosto, sem pessoas.'} A mulher reconhece-se em 1 segundo.
 
-${carta ? 'É uma CARTA do baralho "Sou Aquela": uma PERSONAGEM (a máscara que a mulher usa todos os dias). O reconhecimento é tudo; a reflexão acontece sozinha.' : `A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
+${carta ? 'É uma CARTA do baralho "Sou Aquela": uma PERSONAGEM (a máscara que a mulher usa todos os dias). O reconhecimento é tudo; a reflexão acontece sozinha.' : naoNorm ? 'É um ESPELHO SOCIAL ("Não normalizes…"): NÃO fala da pessoa, fala do que a CULTURA tornou normal. Mostra cenas concretas que toda a gente faz e já ninguém estranha, para a mulher pensar "espera, isto não é normal". SEM mecanismo, SEM raiz, SEM teoria.' : `A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
 
 ${METAMODELO}`}
 
@@ -163,7 +175,11 @@ ${voz}
 A VESTE (só veste a IMAGEM, NUNCA define o conteúdo do texto): ${veste}
 Cada beat tem uma IMAGEM feita destes símbolos, EM MOVIMENTO (o movimento é o gesto a acontecer, não fundo bonito). A imagem transforma-se ao longo dos beats.
 
-${carta ? `A PERSONAGEM desta carta (é só sobre ela, não sobre o véu): ${personagem.nome}. ${personagem.essencia} Diz coisas como: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}. Tira daqui 3 a 4 comportamentos CONCRETOS e do dia a dia para a anáfora, e fecha em "Sou aquela.".` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
+${carta ? `A PERSONAGEM desta carta (é só sobre ela, não sobre o véu): ${personagem.nome}. ${personagem.essencia} Diz coisas como: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}. Tira daqui 3 a 4 comportamentos CONCRETOS e do dia a dia para a anáfora, e fecha em "Sou aquela.".` : naoNorm ? `AS CENAS DE HOJE (transforma cada uma numa frase "Não normalizes…"; escolhe e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes várias numa linha):
+- O TERRENO: o trabalho invisível e a carga mental que a cultura tornou normal (sobretudo das mulheres em casa, 2026).
+- BANCO DE CONCRETO (momentos REAIS para virar cenas normalizadas): ${banco.map((x) => `"${x}"`).join(' · ')}
+- A pessoa que se reconhece (NÃO a nomeies no texto; só te ajuda a achar cenas reais): ${personagem.nome}. Fala assim: ${personagem.frases.map((x) => `"${x}"`).join('; ')}
+- NÃO nomeies o véu nem nenhum mecanismo: é só a cena que toda a gente normalizou.` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
 - VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
 - O TEU ÂNGULO (o que te separa das outras contas que hoje falam do mesmo véu): ${foco.titulo}.${ehManha ? ' NA MANHÃ isto é só o CORTE: mostra-o, não o expliques.' : ` ${foco.instrucao}`}
 - BANCO DE CONCRETO (momentos REAIS; escolhe UM e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
@@ -179,7 +195,7 @@ O ENVIO é implícito ou aponta para uma pessoa concreta ("Marca a que…" / "J�
 ${clarificar ? 'CLARIFICA: reescreve mais claro e direto, tirando qualquer ambiguidade, sem perder a dor.' : ''}
 ${evitar.length ? `NÃO repitas estes ângulos/frases já usados (encontra outro): ${evitar.slice(-12).map((e) => `"${e}"`).join('; ')}.` : ''}
 
-Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}`;
+Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${naoNorm ? ' Cada beat (menos o último) começa por "Não normalizes" e o ÚLTIMO beat é exatamente "Espera. Isto não é normal." sozinho.' : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
