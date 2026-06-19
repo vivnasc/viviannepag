@@ -22,6 +22,7 @@ const PASTAS = {
   sentinela: { pt: 'a-sentinela-livro', en: 'a-sentinela-livro-en', capa: 'SENTINELA-capa', outPt: 'A-SENTINELA-pt.pdf', outEn: 'THE-SENTINEL-en.pdf' },
   ferrolho: { pt: 'o-ferrolho-livro', en: 'o-ferrolho-livro-en', capa: 'FERROLHO-capa', outPt: 'O-FERROLHO-pt.pdf', outEn: 'THE-BOLT-en.pdf' },
   estrada: { pt: 'a-estrada-nova-livro', en: 'a-estrada-nova-livro-en', capa: 'ESTRADA-capa', outPt: 'A-ESTRADA-NOVA-pt.pdf', outEn: 'THE-NEW-ROAD-en.pdf' },
+  portas: { pt: 'as-portas-baixas-livro', en: 'as-portas-baixas-livro-en', capa: 'PORTAS-capa', outPt: 'AS-PORTAS-BAIXAS-pt.pdf', outEn: 'THE-LOW-DOORS-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -375,7 +376,35 @@ const T_ESTRADA = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : T_AMPARO;
+const T_PORTAS = LANG==='pt' ? {
+  tituloHtml:'As Portas Baixas', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante II · O Largo da Fonte',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento na coleção do Largo da Fonte. Não há aqui falsa modéstia a censurar; há um dom enterrado por medo. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Também a tua voz não te foi dada para a calares.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares esta história de Véspera com a Modesta. Se te tocou, partilha-a, não como prova, mas como semente. E se reconheceste em ti algum dom que enterras por medo de sobressair, lembra-te: um dom é para se dar, esconder não é humildade, e podes erguer-te à tua altura sem deixar de ser humilde.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Low Doors', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf II · The Fountain Square',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this story of Véspera with Modesta.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
