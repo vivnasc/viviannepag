@@ -62,6 +62,11 @@ export interface Conta {
    *  numa cara). É finito, por isso NÃO é a fonte de conteúdo: ensina só a FORMA. O
    *  gerador escreve cenas NOVAS nesta forma a partir do SABER (que não acaba). */
   bancoCenas?: string[];
+  /** MÃE · "Não normalizes…" (tarde): linhas-molde da forma. O TERRITÓRIO NÃO é
+   *  "fazer muito"/tarefas: é RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
+   *  e GESTÃO EMOCIONAL (responsável pelas emoções de todos menos as dela). Estas
+   *  ensinam a FORMA e as 2 famílias; o gerador escreve linhas NOVAS dentro delas. */
+  bancoNaoNormalizes?: string[];
   /** Os dois véus que este movimento recolhe (o cacho). */
   veus: VeuNome[];
   /** Símbolo visual desta conta (família das capas). */
@@ -378,6 +383,23 @@ export const CONTAS: Record<ContaId, Conta> = {
     manualNome: 'Os Sete Véus',
     manualPrecoEur: 19,
     manualFonte: 'OS-7-VEUS-v2.md',
+    // "Não normalizes…" (tarde da mãe). Duas famílias (o tema NÃO é tarefas):
+    bancoNaoNormalizes: [
+      // Família · RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
+      'Não normalizes seres responsável por tudo e dona de quase nada.',
+      'Não normalizes que a gestão da casa seja tua obrigação e a participação dele seja ajuda.',
+      'Não normalizes seres a única pessoa que sabe o que falta antes de faltar.',
+      'Não normalizes teres de te lembrar por dois adultos.',
+      'Não normalizes que a tua lista seja obrigatória e a dele opcional.',
+      'Não normalizes seres a directora-geral da família sem nunca teres aceite o cargo.',
+      'Não normalizes que o trabalho mental da casa nem sequer conte como trabalho.',
+      'Não normalizes que a paz da casa dependa do teu estado emocional.',
+      // Família · GESTÃO EMOCIONAL
+      'Não normalizes seres responsável pelas emoções de toda a gente menos pelas tuas.',
+      'Não normalizes engolires o teu cansaço para não estragares o ambiente.',
+      'Não normalizes teres de parecer bem para que os outros fiquem bem.',
+      'Não normalizes que a tua irritação seja um problema e a tua exaustão uma expectativa.',
+    ],
     manifestoLinha: 'Vê o que te prende. Solta o que te faz repetir.',
     manifestoLinhas: [
       'Vê o que te prende. Solta o que te faz repetir.',
