@@ -61,6 +61,9 @@ export default function MetodoSemanaPage() {
     for (const c of CONTAS_LISTA) { await gerarPeca(data, tipo, undefined, c.id); }
     setCompBusy(null);
   }, [gerarPeca]);
+  // REVER A SEMANA TODA nas 4 contas (os 7 dias × 4 contas, de uma vez).
+  const [verSemana, setVerSemana] = useState(false);
+  const [semProg, setSemProg] = useState<string | null>(null);
   // editar à mão: muda o texto/imagem de um beat (fica guardado no estado).
   const editarBeat = useCallback((chave: string, i: number, campo: 'texto' | 'imagem', valor: string) => {
     setSbs((s) => { const sb = s[chave]; if (!sb) return s; const beats = sb.beats.map((b, k) => k === i ? { ...b, [campo]: valor } : b); return { ...s, [chave]: { ...sb, beats } }; });
@@ -100,6 +103,43 @@ export default function MetodoSemanaPage() {
   const contaSel = CONTAS_LISTA.find((c) => c.id === sel)!;
   const pecas = planoSemanaPecas(sel, offset);
 
+  // gera a SEMANA TODA (7 dias) nas 4 contas, no tipo escolhido, uma de cada vez.
+  const gerarSemana4 = async (tipo: 'descoberta' | 'profundidade') => {
+    const total = pecas.length * CONTAS_LISTA.length;
+    setErro(null); let n = 0; setSemProg(`0/${total} (${tipo === 'descoberta' ? 'manhã' : 'noite'})`);
+    for (const p of pecas) {
+      for (const c of CONTAS_LISTA) {
+        await gerarPeca(p.data, tipo, undefined, c.id);
+        n += 1; setSemProg(`${n}/${total} (${tipo === 'descoberta' ? 'manhã' : 'noite'})`);
+      }
+    }
+    setSemProg(null);
+  };
+
+  // a coluna de UMA conta num dia (manhã + noite), partilhada pelo comparador de
+  // um dia e pela vista da semana toda. Só leitura (a edição fica nos separadores).
+  const colunaConta = (c: Conta, data: string) => (
+    <div key={c.id} className="rounded-xl border border-white/10 p-3" style={{ background: `${c.paleta.bg1}` }}>
+      <p className="text-[0.82rem] font-semibold" style={{ color: c.cor }}>@{c.handle}</p>
+      {(['descoberta', 'profundidade'] as const).map((tipo) => {
+        const sb = sbs[`${c.id}-${data}-${tipo}`];
+        if (!sb) return null;
+        return (
+          <div key={tipo} className="mt-2 rounded-lg border border-white/10 bg-black/30 p-2">
+            <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-1">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
+            {sb.beats.map((b, i) => (
+              <div key={i} className="mb-1.5">
+                <p className="text-[0.5rem] opacity-35 italic leading-tight">🎞️ {b.imagem}</p>
+                <p className="text-[0.74rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b.texto}</p>
+              </div>
+            ))}
+            {sb.envio && <p className="text-[0.62rem] mt-1" style={{ color: c.cor }}>↳ {sb.envio}</p>}
+          </div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-5xl mx-auto">
@@ -127,6 +167,7 @@ export default function MetodoSemanaPage() {
           <p><b>{rotuloSemana}</b> · {dm(seg)} a {dm(dom)}</p>
           <button onClick={() => setOffset((o) => o + 1)} className="px-2.5 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">▶</button>
           {offset !== Math.max(minOff, 0) && <button onClick={() => setOffset(Math.max(minOff, 0))} className="text-[0.66rem] px-2 py-1 rounded-full border border-[#EBAE4A]/30 text-[#EBAE4A]/80 hover:bg-[#EBAE4A]/10">arranque</button>}
+          <button onClick={() => setVerSemana((v) => !v)} className="ml-auto text-[0.72rem] px-3 py-1.5 rounded-lg border border-white/25 hover:bg-white/5">{verSemana ? 'fechar a semana toda' : 'rever a semana toda · 4 contas →'}</button>
         </div>
 
         {/* a espiral: a face que esta semana aprofunda (desce do trimestral) */}
@@ -226,31 +267,42 @@ export default function MetodoSemanaPage() {
                 </div>
               </div>
               <div className="mt-3 grid gap-2 md:grid-cols-2 lg:grid-cols-4">
-                {CONTAS_LISTA.map((c) => (
-                  <div key={c.id} className="rounded-xl border border-white/10 p-3" style={{ background: `${c.paleta.bg1}` }}>
-                    <p className="text-[0.82rem] font-semibold" style={{ color: c.cor }}>@{c.handle}</p>
-                    {(['descoberta', 'profundidade'] as const).map((tipo) => {
-                      const sb = sbs[`${c.id}-${comparar}-${tipo}`];
-                      if (!sb) return null;
-                      return (
-                        <div key={tipo} className="mt-2 rounded-lg border border-white/10 bg-black/30 p-2">
-                          <p className="text-[0.52rem] uppercase tracking-wider opacity-50 mb-1">{tipo === 'descoberta' ? 'manhã · descoberta' : 'noite · profundidade'}</p>
-                          {sb.beats.map((b, i) => (
-                            <div key={i} className="mb-1.5">
-                              <p className="text-[0.5rem] opacity-35 italic leading-tight">🎞️ {b.imagem}</p>
-                              <p className="text-[0.74rem] leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b.texto}</p>
-                            </div>
-                          ))}
-                          {sb.envio && <p className="text-[0.62rem] mt-1" style={{ color: c.cor }}>↳ {sb.envio}</p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
+                {CONTAS_LISTA.map((c) => colunaConta(c, comparar))}
               </div>
             </section>
           );
         })()}
+
+        {/* A SEMANA TODA nas 4 contas: os 7 dias, cada um com as 4 contas em
+            colunas. Gera tudo de uma vez (manhã ou noite) para validar a semana. */}
+        {verSemana && (
+          <section className="mt-5 rounded-2xl border border-white/15 bg-black/30 p-4">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <h2 className="text-lg" style={{ fontFamily: 'var(--font-cormorant), serif' }}>A semana toda · 4 contas</h2>
+                <p className="text-[0.74rem] opacity-65">Os 7 dias, cada um nas 4 contas. {rotuloSemana} · {dm(seg)} a {dm(dom)}.</p>
+              </div>
+              <div className="flex gap-2 flex-wrap text-[0.74rem]">
+                <button onClick={() => gerarSemana4('descoberta')} disabled={!!semProg} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{semProg && semProg.includes('manhã') ? `a gerar… ${semProg}` : `gerar manhã (${pecas.length * CONTAS_LISTA.length} peças)`}</button>
+                <button onClick={() => gerarSemana4('profundidade')} disabled={!!semProg} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{semProg && semProg.includes('noite') ? `a gerar… ${semProg}` : `gerar noite (${pecas.length * CONTAS_LISTA.length} peças)`}</button>
+                <button onClick={() => setVerSemana(false)} className="px-3 py-1.5 rounded-lg border border-white/15 opacity-70 hover:opacity-100">fechar</button>
+              </div>
+            </div>
+            <div className="mt-3 space-y-4">
+              {pecas.map((p) => (
+                <div key={p.data}>
+                  <p className="text-[0.7rem] uppercase tracking-wider opacity-60 mb-1">
+                    <span className="font-semibold">{['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][new Date(p.data + 'T12:00').getDay()]} {p.data.slice(8)}/{p.data.slice(5, 7)}</span>
+                    {' · '}véu <b>{p.veu}</b>{' · '}<span className="opacity-70">{p.personagem.nome}</span>
+                  </p>
+                  <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+                    {CONTAS_LISTA.map((c) => colunaConta(c, p.data))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <FraseRapida />
       </div>
