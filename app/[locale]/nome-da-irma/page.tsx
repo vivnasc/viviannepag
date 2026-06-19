@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { RomanceCompra } from '@/components/romance/RomanceCompra';
+import { romancePdfPronto } from '@/lib/romance-loja';
 import { AMOSTRA_IRMA } from '@/lib/romance-amostra-irma';
 import type { Metadata } from 'next';
 
@@ -22,6 +23,7 @@ export default async function NomeDaIrmaLanding({ params }: { params: Promise<{ 
   setRequestLocale(locale);
   const isEn = locale === 'en';
   const A = AMOSTRA_IRMA.pt;
+  const pronto = await romancePdfPronto('rom-irma');
 
   const paragrafos = (s: string) => s.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
 
@@ -54,8 +56,12 @@ export default async function NomeDaIrmaLanding({ params }: { params: Promise<{ 
           </p>
           <p className="text-creme-2/60 text-[0.9rem]">
             {isEn
-              ? 'A novel · 12 chapters, complete. Read the first one below. The full book is coming to the shop; the English edition is being prepared.'
-              : 'Um romance · 12 capítulos, terminado. Lê o primeiro aqui em baixo. O livro inteiro chega à loja em breve.'}
+              ? (pronto
+                  ? 'A novel · 12 chapters, complete. Read the first one below; the whole book is in the shop.'
+                  : 'A novel · 12 chapters, complete. Read the first one below. The full book is coming to the shop very soon.')
+              : (pronto
+                  ? 'Um romance · 12 capítulos, terminado. Lê o primeiro aqui em baixo; o livro inteiro está na loja.'
+                  : 'Um romance · 12 capítulos, terminado. Lê o primeiro aqui em baixo. O livro inteiro chega à loja em breve.')}
           </p>
         </div>
       </section>
@@ -92,7 +98,7 @@ export default async function NomeDaIrmaLanding({ params }: { params: Promise<{ 
       </section>
 
       {/* O RESTO DO LIVRO */}
-      <RomanceCompra slug="rom-irma" locale={locale} />
+      <RomanceCompra slug="rom-irma" locale={locale} pronto={pronto} />
     </main>
   );
 }

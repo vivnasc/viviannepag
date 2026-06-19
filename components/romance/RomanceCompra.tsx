@@ -8,12 +8,22 @@ import { getRomance } from '@/lib/romances';
 import { PRECO_ROMANCE } from '@/lib/romance-produto';
 import { romancePdfPronto } from '@/lib/romance-loja';
 
-export async function RomanceCompra({ slug, locale }: { slug: string; locale: string }) {
+export async function RomanceCompra({
+  slug,
+  locale,
+  pronto: prontoProp,
+}: {
+  slug: string;
+  locale: string;
+  // a landing pode já ter calculado o estado (uma só leitura ao Storage por
+  // página); se não vier, calcula-se aqui.
+  pronto?: boolean;
+}) {
   const isEn = locale === 'en';
   const prefix = isEn ? '/en' : '';
   const r = getRomance(slug);
   const titulo = (isEn ? r?.tituloEn : r?.titulo) ?? '';
-  const pronto = await romancePdfPronto(slug);
+  const pronto = prontoProp ?? (await romancePdfPronto(slug));
 
   const ctaBtn =
     'inline-block no-underline bg-ambar text-[#2A1F17] font-medium text-[0.95rem] tracking-wide rounded-full px-8 py-3 hover:opacity-90 transition-opacity';
