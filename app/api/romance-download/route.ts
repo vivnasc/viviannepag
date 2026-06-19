@@ -1,21 +1,34 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { ROMANCES } from '@/lib/romances';
 
 export const runtime = 'nodejs';
 
 const BUCKET = 'romances';
 
-// GET ?lang=pt|en · o download do romance-oferta SAI SEMPRE pelo domínio da
+// GET ?slug=&lang=pt|en · o download de um romance SAI SEMPRE pelo domínio da
 // casa (viviannedossantos.com/api/romance-download?lang=pt). Por trás, um URL
 // assinado de 60 segundos no bucket privado: quem partilhar o link, partilha
-// a casa da Vivianne, não o Supabase.
+// a casa da Vivianne, não o Supabase. Sem slug = o romance-oferta (Amparo),
+// para os links antigos do funil continuarem a funcionar.
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const lang = url.searchParams.get('lang') === 'en' ? 'en' : 'pt';
-  const path = `romances/rom-01-amparo/livro-${lang}.pdf`;
-  const nome = lang === 'en'
-    ? "Amparo's Hands - Vivianne dos Santos.pdf"
-    : 'As Maos de Amparo - Vivianne dos Santos.pdf';
+  const slug = url.searchParams.get('slug') || 'rom-01-amparo';
+
+  const romance = ROMANCES.find((r) => r.slug === slug);
+  if (!romance) {
+    return NextResponse.json({ erro: 'romance-desconhecido' }, { status: 404 });
+  }
+
+  const titulo = lang === 'en' ? romance.tituloEn : romance.titulo;
+  // nome de ficheiro limpo (sem acentos nem aspas), como "As Maos de Amparo …"
+  const limpo = titulo
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[‘’']/g, '');
+  const nome = `${limpo} - Vivianne dos Santos.pdf`;
+  const path = `romances/${slug}/livro-${lang}.pdf`;
 
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase.storage

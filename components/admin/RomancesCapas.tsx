@@ -21,6 +21,8 @@ export function RomancesCapas() {
   const [romances, setRomances] = useState<RomanceItem[] | null>(null);
   const [aGerar, setAGerar] = useState<string | null>(null);
   const [aEscolher, setAEscolher] = useState<string | null>(null);
+  const [aRender, setARender] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
 
   const carregar = useCallback(async () => {
@@ -70,6 +72,30 @@ export function RomancesCapas() {
     }
   }
 
+  async function renderizar(slug: string) {
+    setErro(null);
+    setMsg(null);
+    setARender(slug);
+    try {
+      const res = await fetch('/api/admin/romances/render-dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      setMsg(
+        slug === 'todos'
+          ? 'Render de TODOS os romances disparado no GitHub Actions (≈30-45 min). Os PDFs aparecem aqui quando terminar.'
+          : 'Render disparado no GitHub Actions (≈30-45 min). O PDF com esta capa aparece aqui quando terminar.',
+      );
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : String(e));
+    } finally {
+      setARender(null);
+    }
+  }
+
   async function escolher(slug: string, url: string) {
     setErro(null);
     setAEscolher(url);
@@ -98,6 +124,22 @@ export function RomancesCapas() {
       {erro && (
         <p className="text-rosa/90 text-[0.85rem] border border-rosa/30 rounded-[10px] px-4 py-3">{erro}</p>
       )}
+      {msg && (
+        <p className="text-salvia text-[0.85rem] border border-salvia/30 rounded-[10px] px-4 py-3">{msg}</p>
+      )}
+
+      <div className="flex flex-wrap items-center justify-between gap-3 border border-salvia/20 rounded-[12px] px-5 py-4">
+        <p className="text-creme-2/70 text-[0.82rem] italic font-serif">
+          Escolhe a capa de cada livro e depois renderiza aqui — o PDF é gerado no GitHub Actions e volta sozinho para os botões de download (não gasta deploy).
+        </p>
+        <button
+          onClick={() => renderizar('todos')}
+          disabled={aRender !== null}
+          className="shrink-0 rounded-full bg-salvia/90 text-terra px-5 py-2 text-[0.82rem] font-semibold hover:bg-salvia transition-colors disabled:opacity-50"
+        >
+          {aRender === 'todos' ? 'a disparar…' : '📚 renderizar todos (com capa)'}
+        </button>
+      </div>
 
       {romances.map((r) => (
         <section key={r.slug} className="border border-ocre/15 rounded-[14px] p-6">
@@ -134,6 +176,13 @@ export function RomancesCapas() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={r.capaEscolhida} alt={`Capa escolhida de ${r.titulo}`} className="w-44 rounded-[10px] border border-salvia/40" />
               <div className="flex flex-wrap gap-3 mt-4">
+                <button
+                  onClick={() => renderizar(r.slug)}
+                  disabled={aRender !== null}
+                  className="rounded-full bg-ambar text-[#2A1F17] px-5 py-2 text-[0.82rem] font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {aRender === r.slug ? 'a disparar…' : '📖 renderizar com esta capa'}
+                </button>
                 {r.pdfPt && (
                   <a href={r.pdfPt} className="rounded-full border border-salvia/50 text-salvia px-5 py-2 text-[0.82rem] hover:bg-salvia/10 transition-colors no-underline">
                     descarregar livro (pt)
