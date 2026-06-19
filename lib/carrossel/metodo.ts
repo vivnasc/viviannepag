@@ -158,3 +158,10 @@ export const CTA_FILOSOFIA = `CTA — o fecho leva UM produto, em tom GENEROSO e
 - para cada dia escolhe o produto que MELHOR toca o tema desse dia. O manual do método do movimento do dia encaixa de forma natural quando o tema o pede, mas NÃO é obrigatório: há dias que pedem antes um guia, uma música, o livro ou a comunidade.
 - VARIA muito: não repitas o mesmo produto na semana, não fiques só num tipo nem só no método, explora universos diferentes.
 - usa nome e link/URL EXACTOS (no campo destaque do slide cta põe a URL).`;
+
+// Brevidade e tom (partilhado): o reel é leitura BREVE e o método é VER E SOLTAR,
+// não só ver a dor. Contrapeso à densidade e à negatividade.
+export const BREVIDADE_E_TOM = `BREVIDADE E TOM (muito importante, o reel é leitura BREVE):
+- CURTO: cada slide lê-se num instante. A PROSA são 1 a 2 frases curtas, nunca um parágrafo denso. O POÉTICO, poucas linhas. Se uma frase se pode encurtar, encurta. Menos é mais.
+- LEVE, não denso: UMA ideia simples por carrossel, com ar à volta. Não empilhes conceitos nem peses a leitura.
+- EQUILÍBRIO luz e sombra: o método é VER E SOLTAR, não só ver a dor. Nomeia o padrão com ternura, mas abre para a luz, o respiro e o alívio. NÃO te afundes na dor nem acumules negatividade: a dor entra só o suficiente para a pessoa se reconhecer, e o carrossel caminha para a esperança e o que se solta. O fecho levanta, não pesa.`;
