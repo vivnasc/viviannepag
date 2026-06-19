@@ -32,6 +32,10 @@ export interface FormatoConta {
    *  viver na cabeça de quem vê. Abre PARA FORA (uma pessoa real, a faca) e vira
    *  PARA DENTRO (porque a escolheste para espelho). O outro é o vidro, tu o filme. */
   espelho?: boolean;
+  /** "Repara" (a VIVER): a imagem manda, a palavra serve (1-2 linhas, nunca mais).
+   *  Aponta para o que JÁ está aqui e a que não davas atenção (olha para cá, agora).
+   *  Sem moral, sem lição, sem hook agressivo: um sussurro ao lado da imagem. */
+  repara?: boolean;
 }
 
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
@@ -50,9 +54,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   },
   ver: {
     descoberta: {
-      nome: 'A cena primeiro · porque faço isto sem reparar',
+      nome: 'O Espelho · a faca (quem te vive na cabeça)',
       beats: 3,
-      registo: 'A CENA PRIMEIRO (manhã, faca): a cena ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "Porque faço isto sem reparar?". TRÊS TEMPOS: (1) a CENA concreta do mecanismo invisível que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "revelar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda à amiga que…"). MODELO (copia a FORMA, não o tema): "O teu marido chega vinte minutos atrasado. / Na tua cabeça já houve uma discussão inteira. / revelar" + envio "Marca quem ensaia conversas que ainda não aconteceram." SEM voz. Veste: prismas, espelhos, véus translúcidos, geometrias (azul profundo, prata, violeta, branco lunar); a imagem revela, a cena é dita em texto.',
+      espelho: true,
+      registo: 'O ESPELHO (manhã, faca): abre PARA FORA, uma pessoa real que vive na cabeça de quem vê, e vira numa LINHA para DENTRO. Curta. TRÊS TEMPOS: (1) a faca para FORA (uma figura concreta: a colega, a mulher que segue), o murro que para o scroll; (2) o comportamento exato; (3) UMA linha que vira o vidro de fora para dentro + assinatura "revelar". MODELO: "Há uma mulher que segues só para te irritares. / Vê-la mais vezes por dia do que vês quem amas. / Ela faz o que tu te proíbes. / revelar". LINHA VERMELHA: o outro mostra-te a ti, NUNCA analisar os outros; liberta, não bisbilhota. SEM voz. Veste: espelhos, prismas, máscaras que se desfazem, véus translúcidos (azul profundo, prata, violeta, branco lunar).',
     },
     profundidade: {
       nome: 'O Espelho (quem te vive na cabeça · fora → dentro)',
@@ -63,14 +68,16 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   },
   viver: {
     descoberta: {
-      nome: 'A cena primeiro · o que estou à espera para começar',
-      beats: 3,
-      registo: 'A CENA PRIMEIRO (manhã, faca): a cena da VIDA GUARDADA ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "O que estou à espera para começar?". TRÊS TEMPOS: (1) a CENA concreta de algo guardado para depois que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "encarnar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda a quem…"). MODELO (copia a FORMA, não o tema): "Guardaste a loiça boa para uma ocasião especial. / A ocasião especial nunca chegou. / encarnar" + envio "Marca quem tem a loiça boa a ganhar pó." SEM voz. Veste: sementes, jardins, flores impossíveis, auroras, frutos dourados (verde esmeralda, ouro vivo, coral, branco solar); a imagem é a vida que espera, a cena é o que está guardado.',
+      nome: 'Repara · um instante do dia (a imagem manda)',
+      beats: 2,
+      repara: true,
+      registo: 'REPARA (a imagem manda, a palavra serve; 1 a 2 linhas, NUNCA mais). Aponta para o que JÁ está aqui e a que não davas atenção (olha para CÁ, agora). Pergunta de fundo (NUNCA a escrevas): "O que não estou a ver porque estou à espera?". UMA imagem concreta a respirar (movimento mínimo), nos símbolos da viver. Uma linha que APONTA, não que ensina (um sussurro ao lado da imagem). SEM hook agressivo, SEM texto palavra-a-palavra, SEM voz dramática, SEM moral nem lição nem "e é por isso que…". O concreto e quase tonto toca; o universal bonito passa despercebido. Foge do "viver o momento" e da "dança na cozinha". Ex.: imagem do vapor a subir da chávena nas mãos frias + "Isto também é a tua vida." Assinatura "encarnar" ou nada. Envio opcional e suave, muitas vezes nenhum. Veste: sementes, jardins, frutos dourados, auroras, mãos, flores, rodas solares (verde esmeralda, ouro vivo, coral, branco solar).',
     },
     profundidade: {
-      nome: 'A tarde · o gesto de hoje',
-      beats: 5,
-      registo: 'TARDE, colo: voz-off suave OU texto. É um EXERCÍCIO concreto, não uma frase. "O exercício de hoje:" → uma micro-prática presente e pequena (o calor da chávena nas mãos, três respirações, reparar que já cá estás) → "Participar não é uma meta. É este instante." Assinatura "encarnar". ENVIO: "Guarda este. É o teu lembrete para os dias de quando." Veste: mãos que criam, sementes, frutos, rodas solares, uma flor a abrir (verde esmeralda, ouro vivo, coral).',
+      nome: 'Repara · um instante, com um fio de verdade',
+      beats: 2,
+      repara: true,
+      registo: 'REPARA, com um FIO DE VERDADE por baixo (sem peso, nunca vazio). A imagem manda, a palavra serve (1 a 2 linhas, nunca mais). Aponta para um instante REAL e específico do presente (lembram-se, não se inventam): uma luz a certa hora, um cheiro, um gesto, uma textura. Uma linha que aponta + um fio de verdade leve (NUNCA moral, NUNCA lição, NUNCA "e é por isso que…"). Ex.: imagem da luz das cinco da tarde na parede da cozinha + "Estavas à espera de uma vida maior. Era esta." SEM voz dramática, SEM hook agressivo, SEM texto palavra-a-palavra. Assinatura "encarnar" ou nada. Envio suave e opcional. Veste: mãos, sementes, frutos dourados, auroras, flores, rodas solares (verde esmeralda, ouro vivo, coral, branco solar).',
     },
   },
   mae: {

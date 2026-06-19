@@ -72,6 +72,10 @@ export interface Conta {
    *  vê (admira, inveja, detesta, não esquece, irrita, intimida). Abre para FORA;
    *  o formato vira para DENTRO (porque a escolheste para espelho). Molde, não fechado. */
   bancoEspelho?: string[];
+  /** VIVER · "Repara": INSTANTES concretos e pequenos do presente a que não se dá
+   *  atenção (uma luz a certa hora, um cheiro, um gesto, uma textura). Os instantes
+   *  não se inventam, lembram-se: é molde do registo, não lista para repetir. */
+  bancoRepara?: string[];
   /** MÃE · "Não normalizes…" (tarde): linhas-molde da forma. O TERRITÓRIO NÃO é
    *  "fazer muito"/tarefas: é RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
    *  e GESTÃO EMOCIONAL (responsável pelas emoções de todos menos as dela). Estas
@@ -132,7 +136,7 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Estou sempre no que aí vem ou no que já passou, nunca no agora.',
     sensacoes: ['a cabeça que não desliga', 'pensar de mais, antecipar tudo', 'reviver o que já passou', 'ruído interno constante', 'nunca estar mesmo no presente'],
     chegada: 'testemunhar (ver a tempestade de fora)',
-    perguntaEspinha: 'Porque faço isto sem reparar?',
+    perguntaEspinha: 'Porque é que, entre milhões de pessoas, esta ficou a viver dentro de mim?',
     assinatura: 'revelar',
     bancoCenas: [
       'respondes "está tudo bem" antes de saber se está',
@@ -303,7 +307,7 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Adio a vida que quero porque mudar seria deixar de ser quem sempre fui.',
     sensacoes: ['adiar a vida para um quando', 'chegar e nunca chegar', 'agarrar-se a quem já se foi', 'medo de mudar e de expandir', 'viver na próxima ou na antiga versão de si'],
     chegada: 'participar (entrar na vida, agora)',
-    perguntaEspinha: 'O que estou à espera para começar?',
+    perguntaEspinha: 'O que não estou a ver porque estou à espera?',
     assinatura: 'encarnar',
     bancoCenas: [
       'o livro que vais ler "quando tiver tempo"',
@@ -330,6 +334,22 @@ export const CONTAS: Record<ContaId, Conta> = {
       'ficas onde já não cabes porque sair dá mais medo do que ficar',
       'dizes que mudavas tudo, e ao café pedes sempre o mesmo',
       'tens a mala meio feita há anos para uma viagem que adias todos os verões',
+    ],
+    // "Repara" (a viver): a vida que já está aqui, a que não dás atenção. Instantes
+    // concretos e pequenos (lembram-se, não se inventam). A imagem manda, a palavra serve.
+    bancoRepara: [
+      'a luz das cinco da tarde a bater na parede da cozinha',
+      'o cheiro do café antes de o beberes',
+      'o peso do gato a assentar-te no colo',
+      'a primeira dentada na fruta quando está mesmo madura',
+      'o sol morno nas costas das mãos enquanto lavas a loiça',
+      'o som da chuva quando já estás em casa, quente',
+      'os pés descalços no chão fresco de manhã',
+      'o vapor a subir da chávena nas tuas mãos frias',
+      'a gargalhada do teu filho na outra divisão, sem saberes porquê',
+      'a roupa acabada de tirar do estendal, ainda quente do sol',
+      'o silêncio da casa às seis da manhã, só teu',
+      'a côdea ainda morna do pão acabado de cortar',
     ],
     veus: ['Horizonte', 'Permanência'],
     simbolo: 'descalça',
