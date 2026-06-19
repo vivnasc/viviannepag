@@ -109,11 +109,18 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   const banco = rodar(bancoBase, ordemConta.indexOf(conta) * 3);
   // O ÂNGULO desta conta sobre o véu do dia (a face que ataca + onde fecha).
   const foco = focoConta(conta, f);
+  // CARTA do baralho "Sou Aquela" (manhã da mãe): a figura é a PERSONAGEM e o texto
+  // é a confissão dela na 1.ª pessoa. Quebra duas regras gerais só para este formato.
+  const carta = !!fmt.cartaBaralho;
   // A COR é SÓ a do VÉU do dia (sequência dos chakras). NÃO existe paleta de cor
   // por conta (foi banida): a cor da imagem é sempre a do véu. A conta entra com
   // os SÍMBOLOS e o MOOD (a sensação, sem cor). Veste a IMAGEM, nunca o texto.
+  // EXCEÇÃO: na CARTA, a imagem é a FIGURA da personagem; o véu e a cor ficam no
+  // VERSO da carta, não mandam na figura.
   const cor = VEU_COR[veu];
-  const veste = `A COR é a do VÉU de hoje e SÓ essa (não existe paleta de cor por conta, foi banida): ${cor.pt} (${cor.prompt}). Toda a imagem segue esta cor. Os SÍMBOLOS do universo desta conta (é o que distingue a conta, junto com o formato; rende-os NESTA cor do véu, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. O MOOD da conta (a sensação, nunca a cor): ${a.sensacao}; ${a.fraseVisual}. Textura: painterly, fine grain, em movimento.`;
+  const veste = carta
+    ? `A IMAGEM é a FIGURA da personagem ${personagem.nome}, no estilo de uma CARTA ilustrada do baralho "Sou Aquela", em ângulos que mudam de carta para carta (rosto sereno · silhueta · de costas · o símbolo do padrão dela). A Vivianne gera a imagem no Midjourney; dá só a indicação da figura e do ângulo de cada beat. O VÉU e a COR não mandam na figura: ficam no VERSO da carta. Estilo: ilustração pintada, digna, intemporal.`
+    : `A COR é a do VÉU de hoje e SÓ essa (não existe paleta de cor por conta, foi banida): ${cor.pt} (${cor.prompt}). Toda a imagem segue esta cor. Os SÍMBOLOS do universo desta conta (é o que distingue a conta, junto com o formato; rende-os NESTA cor do véu, em movimento): ${a.elementos.slice(0, 12).join(' · ')}. O MOOD da conta (a sensação, nunca a cor): ${a.sensacao}; ${a.fraseVisual}. Textura: painterly, fine grain, em movimento.`;
   // A VOZ própria da conta = o que define o CONTEÚDO (não a cor). A confissão
   // recorrente (fraseMae), as sensações que se repetem e o verbo de chegada são a
   // identidade SENTIDA em qualquer post da porta. A mãe é a vista panorâmica (não
@@ -125,7 +132,13 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
   // A FUNÇÃO da peça muda TUDO. Manhã = FACA (sentir). Noite = PROFUNDIDADE
   // (compreender). O erro a evitar: a manhã fazer o trabalho da noite (explicar).
   const ehManha = tipo === 'descoberta';
-  const regrasTipo = ehManha
+  const regrasTipo = carta
+    ? `A FUNÇÃO DESTA PEÇA — CARTA "SOU AQUELA" = só RECONHECIMENTO, zero explicação. O objetivo único: a mulher pensar "meu Deus, és tu" (ela ou alguém que ama). REGRAS DE FERRO:
+- O TEXTO é uma ANÁFORA de 3 a 4 comportamentos CONCRETOS e observáveis da personagem, em linhas curtas, e o ÚLTIMO beat é só "Sou aquela." sozinho.
+- MOLDE (copia a FORMA, não o tema): "Sabe as consultas de todos. / Os medicamentos de todos. / Os aniversários de todos. / Quando lhe perguntam pela dela, não sabe responder." → "Sou aquela."
+- ZERO explicação: NÃO nomeies o véu, a estratégia, o mecanismo, a "sobrevivência"; nada de "porque", nada de interpretação. A reflexão acontece sozinha na cabeça de quem lê.
+- A imagem de cada beat é a FIGURA da personagem num ângulo (a Vivianne faz no Midjourney).`
+    : ehManha
     ? `A FUNÇÃO DESTA PEÇA — MANHÃ · DESCOBERTA = uma FACA, não um artigo. Fura para estranhos, é para ser SENTIDA, não compreendida. REGRAS DE FERRO (são o que mais importa hoje):
 - POUQUÍSSIMO texto: cada beat é uma linha curta, 3 a 8 palavras, fragmentada, frase nominal. A peça inteira cabe em poucas linhas curtas.
 - UMA ideia, UM corte. Reconhecimento instantâneo, no 1.º segundo.
@@ -135,11 +148,11 @@ export async function gerarStoryboard(conta: ContaId, tipo: TipoPeca, veu: VeuNo
 - Ritmo-modelo (copia o CORTE, não o tema): "2000: agenda da mãe. / 2026: app de todos. / Os teus exames: adiados." A pessoa fecha a frase, tu não.`
     : `A FUNÇÃO DESTA PEÇA — NOITE · PROFUNDIDADE = voz-off contínua que APROFUNDA. Retém quem já segue. AQUI SIM entra o que a manhã não deu: a raiz, a herança sem culpa, o mecanismo, e a volta. Pode respirar em frases inteiras, mas continua concreta e sem jargão.`;
 
-  const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). Sem rosto, sem pessoas. A mulher reconhece-se em 1 segundo.
+  const sys = `Escreves o STORYBOARD de um reel curto (9:16, ~12-20s) de uma marca de psicologia (Método VS · @${c.handle}). ${carta ? 'É uma CARTA ilustrada do baralho "Sou Aquela": a figura é a PERSONAGEM (pode ter rosto, é a carta dela).' : 'Sem rosto, sem pessoas.'} A mulher reconhece-se em 1 segundo.
 
-A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
+${carta ? 'É uma CARTA do baralho "Sou Aquela": uma PERSONAGEM (a máscara que a mulher usa todos os dias). O reconhecimento é tudo; a reflexão acontece sozinha.' : `A MECÂNICA (igual em todas as peças): faca partida no 1.º segundo · a imagem começa a mexer ao serviço do gesto · raiz no meio · volta no fim · ENVIO que aponta para UMA pessoa concreta.
 
-${METAMODELO}
+${METAMODELO}`}
 
 O FORMATO PRÓPRIO DESTA CONTA E DESTA PEÇA (${fmt.nome}) — é isto que a distingue das outras contas, segue à risca: ${fmt.registo}
 
@@ -150,23 +163,23 @@ ${voz}
 A VESTE (só veste a IMAGEM, NUNCA define o conteúdo do texto): ${veste}
 Cada beat tem uma IMAGEM feita destes símbolos, EM MOVIMENTO (o movimento é o gesto a acontecer, não fundo bonito). A imagem transforma-se ao longo dos beats.
 
-O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
+${carta ? `A PERSONAGEM desta carta (é só sobre ela, não sobre o véu): ${personagem.nome}. ${personagem.essencia} Diz coisas como: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}. Tira daqui 3 a 4 comportamentos CONCRETOS e do dia a dia para a anáfora, e fecha em "Sou aquela.".` : `O ASSUNTO de hoje (partilhado por todas as contas; muda a forma E o ângulo):
 - VÉU (o mecanismo, NÃO o nomeies no texto): ${f?.dor ?? veu}
 - O TEU ÂNGULO (o que te separa das outras contas que hoje falam do mesmo véu): ${foco.titulo}.${ehManha ? ' NA MANHÃ isto é só o CORTE: mostra-o, não o expliques.' : ` ${foco.instrucao}`}
 - BANCO DE CONCRETO (momentos REAIS; escolhe UM e dá-lhe um detalhe novo, NÃO copies à letra, NÃO juntes vários): ${banco.map((x) => `"${x}"`).join(' · ')}
 - A pessoa que se reconhece: ${personagem.nome}. Fala assim: ${personagem.frases.map((x) => `"${x}"`).join('; ')}. A sombra: ${personagem.sombra}
-${ehManha ? '' : `- A raiz/herança e a volta (a NOITE aprofunda; nunca na manhã): ${f?.fuga ?? ''} ${f?.culpa ?? ''} ${foco.material} A direção concreta: ${f?.saida ?? ''}`}
+${ehManha ? '' : `- A raiz/herança e a volta (a NOITE aprofunda; nunca na manhã): ${f?.fuga ?? ''} ${f?.culpa ?? ''} ${foco.material} A direção concreta: ${f?.saida ?? ''}`}`}
 
 ${ref?.conceitos?.length ? `CAMPO DE ESTUDO (conceitos reais das cadeiras/pós-graduações dela, SÓ para TU pensares mais fundo; NUNCA os nomeies nem uses jargão/autores no texto): ${ref.conceitos.join(' · ')}${ref.estudos?.length ? ` · ${ref.estudos.join(' · ')}` : ''}.` : ''}
 
 CONCRETO OU NADA (a regra que mais importa, é por aqui que a peça vive ou morre): cada linha de TEXTO tem de nomear um momento concreto e observável do dia a dia (um objeto, uma hora do dia, um gesto, um sítio, uma frase exata que ela diz por dentro), tão específico que a mulher se reconhece em 1 segundo e pensa "isto sou eu". TESTE a cada linha: se pudesse servir para qualquer pessoa, ou se soasse a frase de coach ou de horóscopo, está ERRADA — troca-a por um detalhe específico (ex.: não "vives em alerta" mas "às três da manhã ainda estás a resolver uma conversa que correu bem"). PROIBIDO no texto: abstrações e jargão (padrão, presença, consciência, lealdade, vazio, alma, jornada, energia, cura, transformação, essência, propósito, autoconhecimento). A IMAGEM pode ser simbólica; o TEXTO é vida concreta.
 
-REGRAS DE VOZ (duras): português europeu, do dia a dia (a carga mental de 2026). SEM metáforas no texto (nada de alma, universo, água, tempestade). SEM testemunho ("fui eu") nem biografia. Fala na 2.ª pessoa ou descreve em 3.ª. SEM travessões. SEM aspas. SEM hashtags. Cada frase tem de fazer sentido SOZINHA (sem pronomes ambíguos: evita "isso", "aquilo", "ela", "ele" sem dizer a quê/a quem).
+REGRAS DE VOZ (duras): português europeu, do dia a dia (a carga mental de 2026). SEM metáforas no texto (nada de alma, universo, água, tempestade). ${carta ? 'A CARTA descreve os comportamentos da personagem (3.ª pessoa: "Sabe…", "Já…", "Ficou…") e SÓ no fim a mulher assume: "Sou aquela." NÃO é biografia da autora.' : 'SEM testemunho ("fui eu") nem biografia. Fala na 2.ª pessoa ou descreve em 3.ª.'} SEM travessões. SEM aspas. SEM hashtags. Cada frase tem de fazer sentido SOZINHA (sem pronomes ambíguos: evita "isso", "aquilo", "ela", "ele" sem dizer a quê/a quem).
 O ENVIO é implícito ou aponta para uma pessoa concreta ("Marca a que…" / "Já sabes em quem pensaste").
 ${clarificar ? 'CLARIFICA: reescreve mais claro e direto, tirando qualquer ambiguidade, sem perder a dor.' : ''}
 ${evitar.length ? `NÃO repitas estes ângulos/frases já usados (encontra outro): ${evitar.slice(-12).map((e) => `"${e}"`).join('; ')}.` : ''}
 
-Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.`;
+Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com ${fmt.beats} beats.${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',

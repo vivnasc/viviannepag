@@ -14,6 +14,10 @@ export interface FormatoConta {
   nome: string;     // como se chama esta peça
   beats: number;    // quantos beats
   registo: string;  // a estrutura específica (o que a torna esta conta, não outra)
+  /** Carta do baralho "Sou Aquela": a figura É a personagem (em ângulos, feita no
+   *  Midjourney) e o texto é a confissão dela na 1.ª pessoa ("sou aquela que…").
+   *  Quando true, o motor permite figura/personagem e a 1.ª pessoa da carta. */
+  cartaBaralho?: boolean;
 }
 
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
@@ -55,9 +59,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   },
   mae: {
     descoberta: {
-      nome: 'A voz que nomeia (o facto que abala)',
+      nome: 'Carta do baralho · Sou Aquela',
       beats: 5,
-      registo: 'A VOZ em 1.ª pessoa que nomeia o padrão com clareza, sem rodeios (a sensação "alguém está a dizer o que eu sabia sem saber"). Faca partida no 1.º beat, depois nomeia o padrão do dia em poucas palavras exatas, e fecha numa direção concreta. Veste: estrelas-guia, velas, observatórios, constelações (âmbar, ouro velho, negro estrelado).',
+      cartaBaralho: true,
+      registo: 'É uma CARTA do baralho "Sou Aquela" (a FRENTE da carta), não um reel comum. A FIGURA é a PERSONAGEM do dia, em ângulos diferentes de carta para carta (rosto sereno, silhueta, de costas, o símbolo do seu padrão); a Vivianne gera a imagem no Midjourney, aqui dás só a indicação da figura. O TEXTO é a confissão da personagem na PRIMEIRA pessoa, no ritmo das cartas: abre com uma anáfora forte ou "Sou aquela que…" e FECHA com "Não porque [o juízo fácil]. Porque [o motivo digno, a lealdade]." MODELO (carta A Leal): "Fiquei mais tempo do que devia. Aguentei mais do que devia. Esperei mais do que devia. Não porque fosse fraca. Porque fui leal." Nomeia a personagem com dignidade, NUNCA a julgues. É uma FACA: poucas linhas, e a mulher diz "sou eu". Cada beat = a figura num ângulo + a linha da confissão que aparece.',
     },
     profundidade: {
       nome: 'A voz · confissão e direção',
