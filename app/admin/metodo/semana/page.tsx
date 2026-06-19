@@ -42,6 +42,16 @@ export default function MetodoSemanaPage() {
   type SB = { tipo: string; beats: { tempo: string; imagem: string; texto: string }[]; envio: string };
   const [sbs, setSbs] = useState<Record<string, SB>>({});
   const [sbBusy, setSbBusy] = useState<string | null>(null);
+  // GUARDAR o que se gera (no próprio navegador): geras uma vez e fica, mesmo depois
+  // de recarregar ou de um novo deploy. Para não pagares a API duas vezes pela mesma
+  // peça nem perderes nada. (Edições à mão também ficam.)
+  const STORE = 'metodo-storyboards-v1';
+  useEffect(() => {
+    try { const raw = localStorage.getItem(STORE); if (raw) setSbs(JSON.parse(raw)); } catch { /* ignora */ }
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem(STORE, JSON.stringify(sbs)); } catch { /* ignora */ }
+  }, [sbs]);
   const gerarPeca = useCallback(async (data: string, tipo: 'descoberta' | 'profundidade', opts?: { evitar?: string[]; clarificar?: boolean }, conta: ContaId = sel) => {
     const chave = `${conta}-${data}-${tipo}`;
     setSbBusy(chave); setErro(null);
