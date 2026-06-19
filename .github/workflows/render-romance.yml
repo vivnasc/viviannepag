@@ -1,10 +1,16 @@
 name: Render romance (Biblioteca de Véspera)
 
+# Renderiza o PDF final de um romance (ou de TODOS) a partir da capa escolhida
+# no estúdio da Editora. Corre no GitHub Actions (de graça) — NÃO faz deploy no
+# Vercel: os commits dos PDFs levam [skip ci], que o Vercel respeita.
+#
+# Como usar: separador Actions -> "Render romance" -> Run workflow ->
+#   slug = rom-tradutora (um livro)  ou  slug = todos (todos os que já têm capa).
 on:
   workflow_dispatch:
     inputs:
       slug:
-        description: 'Slug do romance'
+        description: 'Slug do romance (ex.: rom-tradutora) ou "todos"'
         required: false
         type: string
         default: 'rom-01-amparo'
@@ -21,7 +27,7 @@ permissions:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
@@ -51,33 +57,60 @@ jobs:
             @fontsource/fraunces \
             @fontsource/outfit
 
-      - name: Download capa escolhida
-        env:
-          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        run: |
-          curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/romances/$SLUG/capa.jpg" -o /tmp/capa-escolhida.jpg
-          ls -la /tmp/capa-escolhida.jpg
-
-      - name: Compor capas (pt e en)
-        run: |
-          node scripts/romances/capa-compor.js /tmp/capa-escolhida.jpg pt ficcao-plano/AMPARO-capa-pt.png
-          node scripts/romances/capa-compor.js /tmp/capa-escolhida.jpg en ficcao-plano/AMPARO-capa-en.png
-
-      - name: Render livros (pt e en)
-        run: |
-          node scripts/romances/render-livro.js pt
-          node scripts/romances/render-livro.js en
-
-      - name: Publicar no bucket (botões de download da Editora)
+      - name: Render dos romances (capa escolhida + miolo + upload)
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/romances/upload-supabase.js
+        run: |
+          set -e
+          # lista de slugs a processar: um, ou todos
+          if [ "$SLUG" = "todos" ]; then
+            SLUGS=$(node -e "console.log(require('./scripts/romances/livros.js').SLUGS.join(' '))")
+          else
+            SLUGS="$SLUG"
+          fi
+          echo "A processar: $SLUGS"
+
+          for s in $SLUGS; do
+            echo "::group::$s"
+            # dados do livro (key, capa, pastas, nomes dos PDFs)
+            eval "$(node -e "
+              const {LIVROS}=require('./scripts/romances/livros.js');
+              const l=LIVROS['$s'];
+              if(!l){console.error('slug desconhecido: $s');process.exit(0)}
+              console.log('KEY='+l.key);
+              console.log('CAPA='+l.capa);
+              console.log('DIREN='+l.dirEn);
+            ")"
+            if [ -z "$KEY" ]; then echo "(salto $s: desconhecido)"; echo "::endgroup::"; continue; fi
+
+            # capa escolhida no estúdio (bucket público); se não houver, salta
+            if ! curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/romances/$s/capa.jpg" -o /tmp/capa-$s.jpg; then
+              echo "(salto $s: sem capa escolhida no estúdio ainda)"
+              echo "::endgroup::"; continue
+            fi
+
+            # compor a capa (tipografia da casa) + render do miolo, PT sempre
+            node scripts/romances/capa-compor.js /tmp/capa-$s.jpg pt "ficcao-plano/$CAPA-pt.png" "$KEY"
+            node scripts/romances/render-livro.js pt "$KEY"
+
+            # EN só quando o miolo inglês existe
+            if [ -d "ficcao-plano/$DIREN" ]; then
+              node scripts/romances/capa-compor.js /tmp/capa-$s.jpg en "ficcao-plano/$CAPA-en.png" "$KEY"
+              node scripts/romances/render-livro.js en "$KEY"
+            else
+              echo "(sem miolo EN para $s; só PT)"
+            fi
+
+            # publicar no bucket (botões de download da Editora)
+            node scripts/romances/upload-supabase.js "$s"
+            echo "::endgroup::"
+          done
 
       - name: Commit dos PDFs e capas ao repo
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add ficcao-plano/AS-MAOS-DE-AMPARO-pt.pdf ficcao-plano/AMPAROS-HANDS-en.pdf ficcao-plano/AMPARO-capa-pt.png ficcao-plano/AMPARO-capa-en.png
+          git add ficcao-plano/*.pdf ficcao-plano/*-capa-*.png || true
           git diff --cached --quiet || git commit -m 'Render romance: PDFs finais com a capa escolhida [skip ci]'
           git push

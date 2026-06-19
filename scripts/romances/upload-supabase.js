@@ -4,11 +4,15 @@
 const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
+const { LIVROS } = require('./livros');
 
 const BUCKET_PUBLICO = 'viviannepag-assets';
 const BUCKET_PRIVADO = 'romances'; // bucket privado próprio, sem lista de mimes
-const SLUG = 'rom-01-amparo';
+const SLUG = process.argv[2] || process.env.SLUG || 'rom-01-amparo';
 const BASE = path.join(__dirname, '..', '..', 'ficcao-plano');
+
+const L = LIVROS[SLUG];
+if (!L) throw new Error(`slug desconhecido: ${SLUG} (ver scripts/romances/livros.js)`);
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
   auth: { persistSession: false, autoRefreshToken: false },
@@ -16,11 +20,12 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
 
 // PDFs no bucket privado (saem só pelo /api/romance-download da casa);
 // capas compostas no público (og image da landing).
+// Ficheiros EN só existem para livros já traduzidos; os que faltam saltam-se.
 const FICHEIROS = [
-  ['AS-MAOS-DE-AMPARO-pt.pdf', BUCKET_PRIVADO, `romances/${SLUG}/livro-pt.pdf`, 'application/pdf'],
-  ['AMPAROS-HANDS-en.pdf', BUCKET_PRIVADO, `romances/${SLUG}/livro-en.pdf`, 'application/pdf'],
-  ['AMPARO-capa-pt.png', BUCKET_PUBLICO, `romances/${SLUG}/capa-composta-pt.png`, 'image/png'],
-  ['AMPARO-capa-en.png', BUCKET_PUBLICO, `romances/${SLUG}/capa-composta-en.png`, 'image/png'],
+  [L.outPt, BUCKET_PRIVADO, `romances/${SLUG}/livro-pt.pdf`, 'application/pdf'],
+  [L.outEn, BUCKET_PRIVADO, `romances/${SLUG}/livro-en.pdf`, 'application/pdf'],
+  [`${L.capa}-pt.png`, BUCKET_PUBLICO, `romances/${SLUG}/capa-composta-pt.png`, 'image/png'],
+  [`${L.capa}-en.png`, BUCKET_PUBLICO, `romances/${SLUG}/capa-composta-en.png`, 'image/png'],
 ];
 
 (async () => {
@@ -31,7 +36,9 @@ const FICHEIROS = [
     if (error && !/already exists|duplicate/i.test(error.message)) throw new Error(`createBucket: ${error.message}`);
   }
   for (const [local, bucket, remoto, tipo] of FICHEIROS) {
-    const buf = fs.readFileSync(path.join(BASE, local));
+    const caminho = path.join(BASE, local);
+    if (!fs.existsSync(caminho)) { console.log('(salto, não existe):', local); continue; }
+    const buf = fs.readFileSync(caminho);
     // cascata de mime como no render-ebook: o bucket escritos recusa
     // application/pdf, aceita octet-stream.
     let error = null;
