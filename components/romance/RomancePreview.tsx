@@ -7,6 +7,10 @@ export type AmostraRomance = {
   titulo: string;       // título do capítulo 1
   assentos: string;     // página dos Assentos de abertura
   capitulo: string;     // capítulo 1 inteiro
+  // versões EN (geradas dos md -en); quando existem, a landing EN usa-as.
+  tituloEn?: string;
+  assentosEn?: string;
+  capituloEn?: string;
 };
 
 export type RomanceMeta = {
@@ -38,6 +42,11 @@ export async function RomancePreview({
   // baixo (o que fazia o livro renderizado parecer que não tinha ficado à venda).
   const rom = ROTA_PARA_ROM[meta.slug] ?? '';
   const pronto = await romancePdfPronto(rom);
+  // Em EN, mostra a amostra EN quando existe; senão cai no PT (com aviso).
+  const amEn = isEn && !!amostra.capituloEn;
+  const aTitulo = amEn ? amostra.tituloEn! : amostra.titulo;
+  const aAssentos = amEn ? amostra.assentosEn! : amostra.assentos;
+  const aCapitulo = amEn ? amostra.capituloEn! : amostra.capitulo;
 
   return (
     <main className="min-h-screen">
@@ -87,7 +96,7 @@ export async function RomancePreview({
 
       <section className="max-w-[680px] mx-auto px-6 pb-12">
         <div className="bg-[#FFFDF9] text-[#3D2B1F] rounded-[14px] px-7 md:px-12 py-10 shadow-2xl">
-          {isEn && (
+          {isEn && !amostra.capituloEn && (
             <p className="text-center text-[0.78rem] text-[#9A5A43] font-serif italic mb-6">
               The English edition is on its way. Until then, the sample below is in the original Portuguese.
             </p>
@@ -96,16 +105,16 @@ export async function RomancePreview({
             {isEn ? 'From the register of Véspera' : 'Do registo de Véspera'}
           </p>
           <div className="border-t border-b border-[#7D8A6A]/40 py-6 mb-10">
-            {paragrafos(amostra.assentos).map((p, i) => (
+            {paragrafos(aAssentos).map((p, i) => (
               <p key={i} className="font-serif italic text-[0.92rem] leading-[1.75] text-[#6B5548] text-center mb-3 last:mb-0">{p}</p>
             ))}
           </div>
           <p className="text-center text-[0.68rem] tracking-[0.3em] uppercase text-[#7D8A6A] mb-2">
             {isEn ? 'chapter one' : 'capítulo um'}
           </p>
-          <h2 className="font-serif italic text-center text-[#8C4A36] text-2xl mb-8">{amostra.titulo}</h2>
+          <h2 className="font-serif italic text-center text-[#8C4A36] text-2xl mb-8">{aTitulo}</h2>
           <div className="font-serif text-[1.02rem] leading-[1.85]">
-            {paragrafos(amostra.capitulo).map((p, i) => (
+            {paragrafos(aCapitulo).map((p, i) => (
               <p key={i} className="mb-4 text-justify" style={{ hyphens: 'auto' }}>{p}</p>
             ))}
           </div>

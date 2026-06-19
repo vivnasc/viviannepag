@@ -2,7 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { RomanceCompra } from '@/components/romance/RomanceCompra';
 import { romancePdfPronto, romanceCapaUrl } from '@/lib/romance-loja';
-import { AMOSTRA_IRMA } from '@/lib/romance-amostra-irma';
+import { AMOSTRA_NOME_DA_IRMA } from '@/lib/amostras/nome-da-irma';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -22,7 +22,13 @@ export default async function NomeDaIrmaLanding({ params }: { params: Promise<{ 
   const { locale } = await params;
   setRequestLocale(locale);
   const isEn = locale === 'en';
-  const A = AMOSTRA_IRMA.pt;
+  const am = AMOSTRA_NOME_DA_IRMA;
+  const amEn = isEn && !!am.capituloEn;
+  const A = {
+    titulo: amEn ? am.tituloEn! : am.titulo,
+    assentos: amEn ? am.assentosEn! : am.assentos,
+    capitulo: amEn ? am.capituloEn! : am.capitulo,
+  };
   const pronto = await romancePdfPronto('rom-irma');
 
   const paragrafos = (s: string) => s.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
@@ -79,7 +85,7 @@ export default async function NomeDaIrmaLanding({ params }: { params: Promise<{ 
       {/* AMOSTRA: ASSENTOS + CAPÍTULO 1, em papel */}
       <section className="max-w-[680px] mx-auto px-6 pb-12">
         <div className="bg-[#FFFDF9] text-[#3D2B1F] rounded-[14px] px-7 md:px-12 py-10 shadow-2xl">
-          {isEn && (
+          {isEn && !am.capituloEn && (
             <p className="text-center text-[0.78rem] text-[#9A5A43] font-serif italic mb-6">
               The English edition is on its way. Until then, the sample below is in the original Portuguese.
             </p>
