@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { ESTANTES } from '@/lib/biblioteca';
+import { romancePdfPronto } from '@/lib/romance-loja';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -25,6 +26,15 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
   setRequestLocale(locale);
   const isEn = locale === 'en';
   const prefix = isEn ? '/en' : '';
+
+  // Disponível na biblioteca = renderizado de verdade, não um campo escrito à
+  // mão. Lê-se o Storage (a mesma verdade da landing e da loja): um livro só
+  // acende quando o seu PDF existe. Os "a caminho" (sem landing) nunca têm
+  // ficheiro, por isso só se consultam os candidatos com página própria.
+  const candidatos = ESTANTES.flatMap((e) => e.livros).filter((l) => l.href);
+  const flags = await Promise.all(candidatos.map((l) => romancePdfPronto(l.slug)));
+  const prontos = new Set(candidatos.filter((_, i) => flags[i]).map((l) => l.slug));
+  const disponivel = (l: { slug: string; href?: string }) => !!l.href && prontos.has(l.slug);
 
   return (
     <main className="min-h-screen">
@@ -105,7 +115,7 @@ export default async function BibliotecaPage({ params }: { params: Promise<{ loc
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {estante.livros.map(livro =>
-                  livro.estado === 'disponivel' ? (
+                  disponivel(livro) ? (
                     <Link
                       key={livro.slug}
                       href={`${prefix}${livro.href}`}
