@@ -4,30 +4,16 @@
 // a entrega na hora correm pelo mesmo fluxo de toda a loja. Nada se vende antes
 // de poder ser entregue, e acende-se livro a livro sem novo deploy.
 import Link from 'next/link';
-import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getRomance } from '@/lib/romances';
 import { PRECO_ROMANCE } from '@/lib/romance-produto';
-
-async function aVenda(slug: string): Promise<boolean> {
-  try {
-    const supabase = getSupabaseAdmin();
-    const { data } = await supabase
-      .from('produtos')
-      .select('publicado')
-      .eq('slug', slug)
-      .maybeSingle();
-    return !!(data as { publicado?: boolean } | null)?.publicado;
-  } catch {
-    return false;
-  }
-}
+import { romancePdfPronto } from '@/lib/romance-loja';
 
 export async function RomanceCompra({ slug, locale }: { slug: string; locale: string }) {
   const isEn = locale === 'en';
   const prefix = isEn ? '/en' : '';
   const r = getRomance(slug);
   const titulo = (isEn ? r?.tituloEn : r?.titulo) ?? '';
-  const pronto = await aVenda(slug);
+  const pronto = await romancePdfPronto(slug);
 
   const ctaBtn =
     'inline-block no-underline bg-ambar text-[#2A1F17] font-medium text-[0.95rem] tracking-wide rounded-full px-8 py-3 hover:opacity-90 transition-opacity';
