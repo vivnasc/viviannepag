@@ -36,8 +36,8 @@ export async function GET() {
         variantes,
         // cache-busting: a escolhida vive sempre no mesmo path
         capaEscolhida: temEscolhida ? `${pub('capa.jpg')}?v=${Date.now()}` : null,
-        pdfPt: temPdf('livro-pt.pdf') ? '/api/romance-download?lang=pt' : null,
-        pdfEn: temPdf('livro-en.pdf') ? '/api/romance-download?lang=en' : null,
+        pdfPt: temPdf('livro-pt.pdf') ? `/api/romance-download?slug=${r.slug}&lang=pt` : null,
+        pdfEn: temPdf('livro-en.pdf') ? `/api/romance-download?slug=${r.slug}&lang=en` : null,
       };
     }),
   );
