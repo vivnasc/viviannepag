@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { listarLivros } from '@/lib/editora';
+import {
+  ROMANCES_PAGOS,
+  PRECO_ROMANCE,
+  ROMANCE_BADGE,
+  romanceSubtituloPt,
+  romanceDescricaoPt,
+} from '@/lib/romance-produto';
 
 type SeedProduto = {
   slug: string; titulo: string; subtitulo: string; descricao: string;
@@ -502,6 +510,44 @@ Por Vivianne dos Santos.`,
   });
 }
 
+// ─── Romances da Biblioteca de Véspera (rom-*, pagos, €12) ───
+// O miolo PT/EN e a capa composta saem do render dos romances para o Storage.
+// publicado é AUTOMÁTICO: um romance só fica à venda quando o seu PDF já existe
+// no bucket privado 'romances' (a regra "só depois de renderizado com capa").
+// Reentra-se o seed após cada render para acender o livro, sem novo deploy.
+async function romancesProdutos(base: string, supabase: SupabaseClient): Promise<SeedProduto[]> {
+  const out: SeedProduto[] = [];
+  for (let i = 0; i < ROMANCES_PAGOS.length; i++) {
+    const r = ROMANCES_PAGOS[i];
+    let pdfPronto = false;
+    let temCapa = false;
+    try {
+      const { data } = await supabase.storage.from('romances').list(`romances/${r.slug}`, { limit: 100 });
+      pdfPronto = !!data?.some((f) => f.name === 'livro-pt.pdf');
+    } catch {}
+    try {
+      const { data } = await supabase.storage.from('viviannepag-assets').list(`romances/${r.slug}`, { limit: 100 });
+      temCapa = !!data?.some((f) => f.name === 'capa-composta-pt.png');
+    } catch {}
+    out.push({
+      slug: r.slug,
+      titulo: r.titulo,
+      subtitulo: romanceSubtituloPt(r),
+      descricao: romanceDescricaoPt(r),
+      preco: PRECO_ROMANCE,
+      preco_original: null,
+      capa: temCapa && base
+        ? `${base}/storage/v1/object/public/viviannepag-assets/romances/${r.slug}/capa-composta-pt.png`
+        : null,
+      badge: ROMANCE_BADGE,
+      destaque: false,
+      publicado: pdfPronto, // só à venda quando o miolo já está renderizado
+      ordem: 300 + i,
+    });
+  }
+  return out;
+}
+
 export async function POST() {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
@@ -520,7 +566,11 @@ export async function POST() {
   } catch {}
 
   const base = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '');
-  const todos = [...PRODUTOS, ...livrosProfundos(base, capasRenderizadas)];
+  const todos = [
+    ...PRODUTOS,
+    ...livrosProfundos(base, capasRenderizadas),
+    ...(await romancesProdutos(base, supabase)),
+  ];
 
   for (const p of todos) {
     const { data: existing } = await supabase

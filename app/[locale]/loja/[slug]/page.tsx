@@ -14,6 +14,8 @@ import { slugToColecao } from '@/lib/colecoes';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { BarraCompraMobile } from '@/components/BarraCompraMobile';
 import { PRODUTOS_EN } from '@/lib/produtos-en';
+import { getRomance } from '@/lib/romances';
+import { romanceProdutoEn } from '@/lib/romance-produto';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -145,6 +147,8 @@ async function getProduto(slug: string, locale: string): Promise<Produto | null>
       if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao };
       const c = CATALOGO[slug];
       if (c) return { ...row, titulo: c.titulo_en, subtitulo: c.subtitulo_en, descricao: c.descricao_en };
+      const rom = getRomance(slug);
+      if (rom) return { ...row, ...romanceProdutoEn(rom) };
     }
     return row;
   } catch {
