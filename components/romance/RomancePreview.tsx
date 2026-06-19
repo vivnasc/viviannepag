@@ -1,7 +1,7 @@
 import { TopNav } from '@/components/TopNav';
 import { RomanceCompra } from '@/components/romance/RomanceCompra';
 import { ROTA_PARA_ROM } from '@/lib/romance-produto';
-import { romancePdfPronto } from '@/lib/romance-loja';
+import { romancePdfPronto, romanceCapaUrl } from '@/lib/romance-loja';
 
 export type AmostraRomance = {
   titulo: string;       // título do capítulo 1
@@ -45,13 +45,23 @@ export async function RomancePreview({
 
       <section className="max-w-[920px] mx-auto px-6 pt-14 pb-10 flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0 w-[220px] md:w-[260px]">
-          <div className={`aspect-[2/3] rounded-[10px] shadow-2xl border ${corBorda} bg-terra-2 flex flex-col items-center justify-center px-6 text-center`}>
-            <p className={`text-[0.6rem] tracking-[0.3em] uppercase ${corTexto} opacity-70 mb-4`}>véspera</p>
-            <p className="font-serif font-light text-creme text-2xl leading-snug mb-4">
-              {isEn ? meta.tituloEn : meta.tituloPt}
-            </p>
-            <p className="text-[0.66rem] tracking-[0.24em] uppercase text-creme-2/50">Vivianne dos Santos</p>
-          </div>
+          {pronto ? (
+            // capa composta real (a mesma do render e da biblioteca)
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={romanceCapaUrl(rom, isEn ? 'en' : 'pt') ?? ''}
+              alt={isEn ? meta.tituloEn : meta.tituloPt}
+              className={`w-full aspect-[2/3] object-cover rounded-[10px] shadow-2xl border ${corBorda}`}
+            />
+          ) : (
+            <div className={`aspect-[2/3] rounded-[10px] shadow-2xl border ${corBorda} bg-terra-2 flex flex-col items-center justify-center px-6 text-center`}>
+              <p className={`text-[0.6rem] tracking-[0.3em] uppercase ${corTexto} opacity-70 mb-4`}>véspera</p>
+              <p className="font-serif font-light text-creme text-2xl leading-snug mb-4">
+                {isEn ? meta.tituloEn : meta.tituloPt}
+              </p>
+              <p className="text-[0.66rem] tracking-[0.24em] uppercase text-creme-2/50">Vivianne dos Santos</p>
+            </div>
+          )}
         </div>
         <div className="text-center md:text-left">
           <p className={`text-[0.7rem] tracking-[0.32em] uppercase ${corTexto} mb-3`}>

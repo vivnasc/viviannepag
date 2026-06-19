@@ -1,7 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { RomanceCompra } from '@/components/romance/RomanceCompra';
-import { romancePdfPronto } from '@/lib/romance-loja';
+import { romancePdfPronto, romanceCapaUrl } from '@/lib/romance-loja';
 import { AMOSTRA_IRMA } from '@/lib/romance-amostra-irma';
 import type { Metadata } from 'next';
 
@@ -34,13 +34,23 @@ export default async function NomeDaIrmaLanding({ params }: { params: Promise<{ 
       {/* CAPA TIPOGRÁFICA + PITCH (a capa ilustrada chega com a edição final) */}
       <section className="max-w-[920px] mx-auto px-6 pt-14 pb-10 flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0 w-[220px] md:w-[260px]">
-          <div className="aspect-[2/3] rounded-[10px] shadow-2xl border border-ambar/40 bg-terra-2 flex flex-col items-center justify-center px-6 text-center">
-            <p className="text-[0.6rem] tracking-[0.3em] uppercase text-ambar/70 mb-4">véspera</p>
-            <p className="font-serif font-light text-creme text-2xl leading-snug mb-4">
-              {isEn ? <>The Sister&rsquo;s Name</> : <>O Nome da Irmã</>}
-            </p>
-            <p className="text-[0.66rem] tracking-[0.24em] uppercase text-creme-2/50">Vivianne dos Santos</p>
-          </div>
+          {pronto ? (
+            // capa composta real (a mesma do render e da biblioteca)
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={romanceCapaUrl('rom-irma', isEn ? 'en' : 'pt') ?? ''}
+              alt={isEn ? 'The Sister’s Name' : 'O Nome da Irmã'}
+              className="w-full aspect-[2/3] object-cover rounded-[10px] shadow-2xl border border-ambar/40"
+            />
+          ) : (
+            <div className="aspect-[2/3] rounded-[10px] shadow-2xl border border-ambar/40 bg-terra-2 flex flex-col items-center justify-center px-6 text-center">
+              <p className="text-[0.6rem] tracking-[0.3em] uppercase text-ambar/70 mb-4">véspera</p>
+              <p className="font-serif font-light text-creme text-2xl leading-snug mb-4">
+                {isEn ? <>The Sister&rsquo;s Name</> : <>O Nome da Irmã</>}
+              </p>
+              <p className="text-[0.66rem] tracking-[0.24em] uppercase text-creme-2/50">Vivianne dos Santos</p>
+            </div>
+          )}
         </div>
         <div className="text-center md:text-left">
           <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ambar/90 mb-3">
