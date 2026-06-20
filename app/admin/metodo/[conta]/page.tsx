@@ -59,17 +59,16 @@ export default function MetodoContaPage() {
   const gerarLote = useCallback(async (semanas = 4) => {
     if (!conta || lote) return;
     setErro(null);
-    // a mãe tem gerador novo (carta do baralho + não normalizes). As filhas ainda
-    // não foram migradas: chega quando for a vez delas (não há gerador antigo).
-    if (conta.id !== 'mae') { setMsg('As filhas (ver/vir/viver) ainda não têm gerador novo. Chega quando for a vez de cada uma. Por agora, só a mãe gera.'); return; }
     setLote({ feito: 0, total: semanas * 7 });
     setMsg('A gerar o TEXTO no servidor, já com a data de cada dia (não gasta créditos de imagem). Podes sair ou fechar. Volta e recarrega.');
     try {
-      const endpoint = '/api/admin/metodo/gerar-mae';
+      // a mãe usa o seu gerador (cartas do baralho + não normalizes); as filhas o seu
+      // (a cena de manhã + a peça funda da tarde, cada uma no seu formato).
+      const endpoint = conta.id === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-conta';
       const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
-      else setMsg(`${j.gerados} frases geradas, organizadas por dia. Revê e limpa; depois "gerar imagens em falta" só das que ficarem.`);
+      else setMsg(`${j.gerados} posts gerados, organizados por dia. Revê e limpa; depois "gerar imagens em falta" só das que ficarem.`);
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setLote(null); recarregar(); }
   }, [conta, lote, recarregar]);
@@ -405,22 +404,6 @@ export default function MetodoContaPage() {
     finally { setSomBusy(null); }
   }, [somBusy, recarregar]);
 
-  // FORMATO VISUAL (vir = regressar): gera UMA cena de luz + UMA linha. Pouco texto,
-  // atmosfera imersiva — a conta passa a sentir-se diferente das outras.
-  const [visualBusy, setVisualBusy] = useState(false);
-  const gerarVisual = useCallback(async () => {
-    if (!conta || visualBusy) return;
-    setVisualBusy(true); setErro(null); setMsg('A gerar um visual (cena de luz + 1 linha)…');
-    try {
-      const r = await fetch('/api/admin/metodo/gerar-visual', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setMsg(`Visual criado: «${j.linha}». Abre, anima (a luz a fluir) e renderiza.`);
-      recarregar();
-    } catch (e) { setErro(String(e)); }
-    finally { setVisualBusy(false); }
-  }, [conta, visualBusy, recarregar]);
-
   // CARTA DE RENOMEAR (vir): gera UMA carta (6 passos) e persiste-a (subtipo 'carta').
   const [cartaBusy, setCartaBusy] = useState(false);
   const gerarCarta = useCallback(async () => {
@@ -494,8 +477,7 @@ export default function MetodoContaPage() {
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
-            <button onClick={() => gerarLote(4)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 4 semanas (texto, por dia)</button>
-            <button onClick={gerarVisual} disabled={visualBusy} title="cria 1 reel VISUAL: cena de luz a fluir + 1 linha (pouco texto). A atmosfera de @vir.soltar (regressar a ti)." className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{visualBusy ? '🌌 a gerar…' : '🌌 gerar visual (1 cena + 1 linha)'}</button>
+            <button onClick={() => gerarLote(2)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 2 semanas (texto)</button>
             {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: conta.cor, color: conta.cor }}>📅 Plano da semana (ver a ordem) →</Link>}
