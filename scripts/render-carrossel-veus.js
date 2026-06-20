@@ -218,8 +218,13 @@ async function main() {
       // 3:4 e 1.91:1. Por isso, quando o slide e 1080x1920, gera-se uma versao
       // 4:5 (1080x1350) que encaixa o slide INTEIRO (sem cortar texto nem
       // imagens) e preenche os lados com a cor de fundo. O MP4 fica 9:16.
+      // EXCECAO: o Ca em Casa e o I am a Hero saem como REEL, e a CAPA (slide 0)
+      // e a miniatura do feed. Encaixar a capa em 4:5 com barras escuras faz a
+      // grelha do perfil "nao preencher". Por isso a capa destes fica full-bleed
+      // 9:16 (preenche a grelha, como os reels cineticos que ja enchem).
+      const capaReelFullBleed = (formato === 'banda' || formato === 'heroi') && i === 0;
       let uploadPath = pngPath;
-      if (H === 1920) {
+      if (H === 1920 && !capaReelFullBleed) {
         const feedPath = path.join(diaDir, `s${i}_feed.png`);
         try {
           execSync(`ffmpeg -y -i "${pngPath}" -vf "scale=-1:1350,pad=1080:1350:(ow-iw)/2:0:color=0x0F0F1A" "${feedPath}"`, { stdio: 'ignore' });

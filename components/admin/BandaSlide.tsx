@@ -20,7 +20,7 @@ const GRAIN =
 export type Fala = { id: string; fala: string; modo?: 'fala' | 'pensa' | 'herdada' };
 // Um painel pode ser: CAPA realista (imageUrl + gancho por cima), slide de
 // ENSINO (texto, sem pessoas), LIÇÃO (fecho) ou banda desenhada (legado).
-export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string; imageUrl?: string | null; gancho?: string; texto?: string; serie?: string };
+export type Painel = { cenario?: string; personagens?: Fala[]; licao?: string; imageUrl?: string | null; gancho?: string; texto?: string; serie?: string; cta?: string };
 
 // ── Avatar (Open Peeps): ilustrado, consistente por personagem, sem cara real.
 // A mesma personagem dá sempre a mesma cara; só a expressão segue o "modo" da
@@ -81,6 +81,10 @@ function Balao({ f }: { f: Fala }) {
     </div>
   );
 }
+
+// CTA do fecho: o gesto pedido varia por post (não é sempre "guardar"). Vem do
+// gerador (painel.cta, com o seu próprio glifo); o fallback continua "guardar".
+const CTA_FALLBACK = '↓ guarda este post';
 
 export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = false, conceito }: { painel: Painel; mundo?: Mundo; numero?: number; total?: number; capa?: boolean; conceito?: string }) {
   const pal = PALETAS[mundo];
@@ -149,8 +153,9 @@ export function BandaSlide({ painel, mundo = 'escola', numero, total, capa = fal
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
               <span style={{ color: ACCENT, opacity: 0.6, fontSize: 30, letterSpacing: '0.5em' }}>◇◇◇</span>
               <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 76, lineHeight: 1.2, textAlign: 'center', margin: 0, maxWidth: 880 }}>{painel.licao}</p>
-              {/* CTA discreto, só no fecho: gesto de guardar (alcance), sem soar a venda */}
-              <span style={{ marginTop: 16, fontFamily: FONT_SANS, fontSize: 25, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT, opacity: 0.85 }}>↓ guarda este post</span>
+              {/* CTA discreto, só no fecho: gesto VARIADO (guardar/partilhar/marcar),
+                  sem soar a venda. Vem do gerador; fallback "guardar". */}
+              <span style={{ marginTop: 16, fontFamily: FONT_SANS, fontSize: 25, letterSpacing: '0.3em', textTransform: 'uppercase', color: ACCENT, opacity: 0.85, textAlign: 'center', maxWidth: 820 }}>{painel.cta?.trim() || CTA_FALLBACK}</span>
             </div>
           ) : ehEnsino ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
