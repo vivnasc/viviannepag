@@ -18,7 +18,11 @@ const COR = '#d8b25a'; // mãe
 const DIA_SEMANA = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 
 export default function MaePlanoPage() {
-  const [off, setOff] = useState(0);
+  // arranca na próxima semana CHEIA (se hoje já passou a 2.ª-feira), nunca em semanas
+  // passadas; e o navegador fica preso ao trimestre (13 semanas), não ao infinito.
+  const offStart = new Date().getDay() === 1 ? 0 : 1;
+  const offFim = offStart + 12;
+  const [off, setOff] = useState(offStart);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
@@ -68,9 +72,9 @@ export default function MaePlanoPage() {
           <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: COR }}>Plano da semana · Mãe</h1>
           <p className="mt-2 text-[0.85rem] opacity-85">A ordem da semana do Método VS na conta-mãe, <b>antes de gerar</b>: meio da manhã (10h30) a <b>carta</b> da personagem do dia; meio da tarde (16h00) o <b>não normalizes</b>. Não mexe na abertura, no pico nem no fecho do dia.</p>
           <div className="mt-3 flex items-center gap-2 flex-wrap text-[0.75rem]">
-            <button onClick={() => setOff((o) => o - 1)} className="px-2.5 py-1 rounded-lg border border-white/20">◀</button>
-            <span className="opacity-80">{off === 0 ? 'esta semana' : off > 0 ? `daqui a ${off} sem.` : `há ${-off} sem.`}</span>
-            <button onClick={() => setOff((o) => o + 1)} className="px-2.5 py-1 rounded-lg border border-white/20">▶</button>
+            <button onClick={() => setOff((o) => Math.max(offStart, o - 1))} disabled={off <= offStart} className="px-2.5 py-1 rounded-lg border border-white/20 disabled:opacity-30">◀</button>
+            <span className="opacity-80">semana {off - offStart + 1}/13{dias[0]?.data ? ` · ${dias[0].data.slice(8)}/${dias[0].data.slice(5, 7)}` : ''}</span>
+            <button onClick={() => setOff((o) => Math.min(offFim, o + 1))} disabled={off >= offFim} className="px-2.5 py-1 rounded-lg border border-white/20 disabled:opacity-30">▶</button>
             <button onClick={gerarTudo} disabled={busy} className="ml-2 px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: COR, color: '#0F0F1A', background: COR }}>{busy ? 'a produzir…' : '✦ produzir a semana toda'}</button>
             <button onClick={gerar} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">método (cartas + não normalizes)</button>
             <button onClick={() => gerarSerie('vcsabia', 'vc sabia')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">vc sabia</button>
