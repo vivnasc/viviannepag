@@ -6,6 +6,7 @@ import { CONTAS, type ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { planoSemanaMae } from '@/lib/metodo/semana';
 import { personagemDoDia } from '@/lib/metodo/peca';
 import { gerarStoryboard } from '@/lib/metodo/storyboard-ia';
+import { hashtagsMetodo } from '@/lib/metodo/hashtags';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -28,8 +29,9 @@ function montarRow(conta: ContaId, slug: string, data: string, hora: string, sub
   const c = CONTAS[conta];
   const slides: SlideMetodo[] = beats.map((b, i) => ({ tipo: 'metodo', texto: limparTravessoes(b.texto), destaque: [], notaVisual: b.imagem ?? '', imageUrl: null, capa: i === 0, conceito: i === 0 ? conceito : '', contaId: conta }));
   const corpo = slides.map((s) => s.texto).join('\n');
-  const legenda = limparTravessoes(`${corpo}${envio ? `\n\n${envio}` : ''}\n\nMétodo VS · @${c.handle}`);
-  const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? conceito).slice(0, 48), slides, legenda, hashtags: [] as string[] }];
+  const tags = hashtagsMetodo(veu);
+  const legenda = limparTravessoes(`${corpo}${envio ? `\n\n${envio}` : ''}\n\nMétodo VS · @${c.handle}\n\n${tags.map((t) => `#${t}`).join(' ')}`);
+  const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? conceito).slice(0, 48), slides, legenda, hashtags: tags }];
   return {
     slug, title: (slides[0]?.texto ?? conceito).slice(0, 48), brief: slides[0]?.texto ?? conceito, dias,
     theme: { formato: 'reel', subtipo, video: true, mundo: 'autora', marca: c.marca, agendadoEm: data, hora, metodo: { conta, tipo, veu } },

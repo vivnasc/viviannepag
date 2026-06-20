@@ -7,6 +7,7 @@ import { planoSemanaMae, type DiaSemanaMae } from '@/lib/metodo/semana';
 import { personagemDoDia } from '@/lib/metodo/peca';
 import { gerarStoryboard } from '@/lib/metodo/storyboard-ia';
 import { cartaDoBaralho } from '@/lib/metodo/baralho';
+import { hashtagsMetodo } from '@/lib/metodo/hashtags';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -32,8 +33,9 @@ function montarRow(slug: string, data: string, hora: string, tipo: string, conce
     imageUrl: null, capa: i === 0, conceito: i === 0 ? conceito : '', contaId: 'mae',
   }));
   const corpo = slides.map((s) => s.texto).join('\n');
-  const legenda = limparTravessoes(`${corpo}${envio ? `\n\n${envio}` : ''}\n\nMétodo VS`);
-  const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? conceito).slice(0, 48), slides, legenda, hashtags: [] as string[] }];
+  const tags = hashtagsMetodo(veu);
+  const legenda = limparTravessoes(`${corpo}${envio ? `\n\n${envio}` : ''}\n\nMétodo VS\n\n${tags.map((t) => `#${t}`).join(' ')}`);
+  const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? conceito).slice(0, 48), slides, legenda, hashtags: tags }];
   return {
     slug,
     title: (slides[0]?.texto ?? conceito).slice(0, 48),
