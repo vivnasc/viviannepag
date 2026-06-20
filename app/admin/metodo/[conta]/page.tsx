@@ -46,6 +46,14 @@ export default function MetodoContaPage() {
   // tarde = motor 17h), nunca os dois amontoados. E esconde os publicados.
   const [vista, setVista] = useState<'manha' | 'tarde'>('manha');
   const [esconderPub, setEsconderPub] = useState(true);
+  // SEMANA a gerar (offset em semanas a partir de ESTA). Arranca na próxima semana
+  // CHEIA: se hoje já passou a 2.ª-feira, não geramos meia-semana — começamos na
+  // 2.ª que vem (ex.: hoje 20 jun -> semana de 22 jun). Assim nunca se gera passado.
+  const [offset, setOffset] = useState(() => { const h = new Date(); return h.getDay() === 1 ? 0 : 1; });
+  // 2.ª-feira (e domingo) da semana-alvo, para o rótulo "semana de X a Y".
+  const segDaSemanaAlvo = (() => { const x = new Date(); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd) + offset * 7); x.setHours(0, 0, 0, 0); return x; })();
+  const domDaSemanaAlvo = (() => { const d = new Date(segDaSemanaAlvo); d.setDate(d.getDate() + 6); return d; })();
+  const fmtDM = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
 
   const toggleSel = (slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; });
 
@@ -64,10 +72,24 @@ export default function MetodoContaPage() {
     setSel(new Set()); setMsg(`${n} post(s) apagado(s) (os publicados ficaram).`); recarregar();
   }, [sel, recarregar]);
 
+  // apaga os posts de DIAS QUE JÁ PASSARAM (não publicados) — limpa o lixo de
+  // semanas de teste sem mexer no que já foi publicado nem no futuro.
+  const [limparPassadoBusy, setLimparPassadoBusy] = useState(false);
+  const apagarPassados = useCallback(async (slugs: string[]) => {
+    if (limparPassadoBusy || !slugs.length) return;
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar ${slugs.length} post(s) de dias que já passaram? Os publicados ficam protegidos.`)) return;
+    setLimparPassadoBusy(true); setErro(null); setMsg(null);
+    let n = 0;
+    for (const slug of slugs) {
+      try { const r = await fetch('/api/admin/metodo/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (r.ok) n += 1; } catch { /* segue */ }
+    }
+    setLimparPassadoBusy(false); setMsg(`${n} post(s) de dias passados apagado(s). Gera a próxima semana (▶).`); recarregar();
+  }, [limparPassadoBusy, recarregar]);
 
-  // gerar o plano (4 semanas) NO SERVIDOR, alinhado ao Plano da Semana: cada post
-  // já com a sua DATA e a sua imagem. Corre sozinho mesmo que saias/feches.
-  const gerarLote = useCallback(async (semanas = 4) => {
+
+  // gerar o plano NO SERVIDOR, alinhado ao Plano da Semana: cada post já com a sua
+  // DATA. A semana-alvo é o `offset` (0 = esta, 1 = a que vem…); nunca gera passado.
+  const gerarLote = useCallback(async (semanas = 1) => {
     if (!conta || lote) return;
     setErro(null);
     setLote({ feito: 0, total: semanas * 7 });
@@ -76,13 +98,14 @@ export default function MetodoContaPage() {
       // a mãe usa o seu gerador (cartas do baralho + não normalizes); as filhas o seu
       // (a cena de manhã + a peça funda da tarde, cada uma no seu formato).
       const endpoint = conta.id === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-conta';
-      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas }) });
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas, offset }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
-      else setMsg(`${j.gerados} posts gerados, organizados por dia. Revê e limpa; depois "gerar imagens em falta" só das que ficarem.`);
+      else if (j.jaPassou) setMsg('Essa semana já passou — avança para a semana seguinte (▶) e gera essa.');
+      else setMsg(`${j.gerados} posts gerados, com a data de cada dia. Revê e limpa; depois "gerar imagens em falta" só das que ficarem.`);
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setLote(null); recarregar(); }
-  }, [conta, lote, recarregar]);
+  }, [conta, lote, offset, recarregar]);
 
   // gera a imagem (Flux) dos posts sem imagem desta conta (sem reescrever texto).
   const [imgBusy, setImgBusy] = useState(false);
@@ -168,22 +191,6 @@ export default function MetodoContaPage() {
     setMsg(`${n} renders disparados. Cada vídeo demora alguns minutos a aparecer (GitHub Actions). Recarrega daqui a pouco.`);
   }, [renderBusy, renderOne]);
 
-  // BULK: anima os clips em falta de todos os posts da conta (cada face com
-  // imagem mas sem clip). Custa ~$0.35 por clip — daí o aviso no botão.
-  const [animarLoteBusy, setAnimarLoteBusy] = useState(false);
-  const animarFaltam = useCallback(async (faltam: EstadoPost[]) => {
-    if (animarLoteBusy || !faltam.length) return;
-    if (typeof window !== 'undefined' && !window.confirm(`Animar os clips em falta de ${faltam.length} post(s)? Custa ~$0.35 por clip (até ~${faltam.length * 2} clips). Disparam todos no servidor e aparecem sozinhos quando ficarem prontos — podes sair.`)) return;
-    setAnimarLoteBusy(true); setErro(null); setMsg(null);
-    let n = 0;
-    // só DISPARA cada um (volta em segundos); a colheita automática traz os clips.
-    for (const e of faltam) {
-      setMsg(`a disparar ${n + 1}/${faltam.length}…`);
-      try { const r = await fetch('/api/admin/metodo/animar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: e.slug }) }); if (r.ok) n += 1; } catch { /* segue */ }
-    }
-    setAnimarLoteBusy(false); recarregar();
-    setMsg(`${n} post(s) a animar no servidor (~2-5 min cada). Podes mudar de conta ou fechar — os clips aparecem sozinhos. Depois "renderizar os que faltam".`);
-  }, [animarLoteBusy, recarregar]);
 
   // descartar (apagar) um post gerado que não presta, na revisão.
   const descartar = useCallback(async (slug: string) => {
@@ -319,15 +326,13 @@ export default function MetodoContaPage() {
   // lista recarrega após gerar/descartar/render.
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
-  // "falta clip" = tem imagem, não tem clip E não está a animar (pendente conta como já tratado).
-  const faltamClip = geradosConta.filter((e) => (e.imageUrl && !e.clip && !e.clipPend) || (e.imageUrl2 && !e.clip2 && !e.clipPend2));
-  const aAnimar = geradosConta.filter((e) => e.clipPend || e.clipPend2).length;
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
+  // posts de DIAS QUE JÁ PASSARAM e ainda não publicados (lixo das semanas de teste).
+  const hojeISO = (() => { const h = new Date(); return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, '0')}-${String(h.getDate()).padStart(2, '0')}`; })();
+  const passados = geradosConta.filter((e) => e.agendadoEm && e.agendadoEm < hojeISO && !e.publicado);
 
   // PERÍODO de um post: tarde = motor (nbeats) ou hora >= 15h; senão manhã.
   const ehTardePost = (e: EstadoPost) => (e.hora ?? '') >= '13:00'; // por HORA (não por subtipo): manhã < 13h, tarde >= 13h
-  const nManha = geradosConta.filter((e) => !ehTardePost(e)).length;
-  const nTarde = geradosConta.filter((e) => ehTardePost(e)).length;
   // o CALENDÁRIO mostra só o período escolhido e (se pedido) sem os publicados.
   const geradosVista = geradosConta.filter((e) => (vista === 'tarde' ? ehTardePost(e) : !ehTardePost(e)) && (!esconderPub || !e.publicado));
   // por dia (a data é o plano): para a grelha de calendário.
@@ -336,22 +341,17 @@ export default function MetodoContaPage() {
   for (const lista of porDia.values()) lista.sort((a, b) => (a.hora ?? '99').localeCompare(b.hora ?? '99'));
   const semDataList = porDia.get('sem data') ?? [];
 
-  // grelha de calendário: colunas Seg-Dom, linhas as semanas. Vê-se tudo num relance.
+  // grelha de calendário: UMA SEMANA de cada vez (a `offset`, a mesma que se gera),
+  // como o Plano da Semana da veu.a.veu. Nunca amontoa: 10 semanas = navegar 10
+  // vezes com ◀ ▶. Cada semana é a sua página limpa, sincronizada com a geração.
   const parse = (iso: string) => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, (m ?? 1) - 1, d ?? 1); };
   const fmtD = (dt: Date) => `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
-  const segundaDe = (dt: Date) => { const x = new Date(dt); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd)); return x; };
-  const datasComPost = geradosVista.filter((e) => e.agendadoEm).map((e) => e.agendadoEm as string).sort();
-  const semanasGrade: string[][] = [];
-  if (datasComPost.length) {
-    let cur = segundaDe(parse(datasComPost[0]));
-    const fim = parse(datasComPost[datasComPost.length - 1]);
-    let guarda = 0;
-    while (cur <= fim && guarda < 30) {
-      const ini = new Date(cur);
-      semanasGrade.push(Array.from({ length: 7 }, (_, i) => { const d = new Date(ini); d.setDate(ini.getDate() + i); return fmtD(d); }));
-      cur = new Date(ini); cur.setDate(ini.getDate() + 7); guarda += 1;
-    }
-  }
+  const semanaUnica: string[] = Array.from({ length: 7 }, (_, i) => { const d = new Date(segDaSemanaAlvo); d.setDate(segDaSemanaAlvo.getDate() + i); return fmtD(d); });
+  const postsDaSemana = geradosVista.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm));
+  // contadores manhã/tarde DESTA semana (não do total) — para as abas baterem com a vista.
+  const daSemanaTudo = geradosConta.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm) && (!esconderPub || !e.publicado));
+  const nManhaSem = daSemanaTudo.filter((e) => !ehTardePost(e)).length;
+  const nTardeSem = daSemanaTudo.filter((e) => ehTardePost(e)).length;
 
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
@@ -364,13 +364,20 @@ export default function MetodoContaPage() {
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
-            <button onClick={() => gerarLote(1)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>gerar a semana (texto)</button>
+            {/* SEMANA-ALVO: ◀ ▶ escolhem que semana se gera; o rótulo mostra as datas
+                reais. Arranca na próxima semana CHEIA, por isso nunca gera passado. */}
+            <span className="inline-flex items-center rounded-lg border border-white/15 overflow-hidden">
+              <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2 py-1.5 hover:bg-white/10">◀</button>
+              <span className="px-2 py-1.5 min-w-[150px] text-center">{offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : `+${offset} semanas`}<br /><span className="opacity-60 text-[0.62rem]">{fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}</span></span>
+              <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2 py-1.5 hover:bg-white/10">▶</button>
+            </span>
+            <button onClick={() => gerarLote(1)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>gerar esta semana (texto)</button>
             {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>📅 Plano da semana (ver a ordem) →</Link>}
             {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
           </div>
-          <p className="mt-1 text-[0.68rem] opacity-50">1) Gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). 2) Revês e limpas. 3) Só então "gerar imagens em falta" (paga imagem só das que ficam). Podes sair que continua.</p>
+          <p className="mt-1 text-[0.68rem] opacity-50">Escolhe a semana (◀ ▶) e gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). Para longo prazo, gera semana a semana — vão-se empilhando no calendário em baixo. Depois revês, limpas e só então "gerar imagens em falta".</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
             <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
             {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
@@ -385,6 +392,7 @@ export default function MetodoContaPage() {
                 <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
               </span>
             )}
+            {passados.length > 0 && <button onClick={() => apagarPassados(passados.map((e) => e.slug))} disabled={limparPassadoBusy} title="apaga os posts de dias que já passaram (os publicados ficam)" className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{limparPassadoBusy ? 'a apagar…' : `apagar dias passados (${passados.length})`}</button>}
             {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
         </header>
@@ -394,11 +402,16 @@ export default function MetodoContaPage() {
 
         {geradosConta.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosVista.length}</span></h2>
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Semana de {fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)} <span className="opacity-40">· {postsDaSemana.length} {vista === 'tarde' ? 'à tarde' : 'de manhã'} (total {geradosConta.length})</span></h2>
             <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem]">
+              <span className="inline-flex items-center rounded-lg border border-white/15 overflow-hidden mr-1">
+                <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2 py-1.5 hover:bg-white/10">◀</button>
+                <button onClick={() => setOffset(() => { const h = new Date(); return h.getDay() === 1 ? 0 : 1; })} className="px-2 py-1.5 text-[0.66rem] opacity-70 hover:bg-white/10">hoje</button>
+                <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2 py-1.5 hover:bg-white/10">▶</button>
+              </span>
               <div className="inline-flex rounded-lg border border-white/15 overflow-hidden">
-                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? '#d8b25a' : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã (11h) · {nManha}</button>
-                <button onClick={() => setVista('tarde')} className="px-3 py-1.5" style={{ background: vista === 'tarde' ? '#EBAE4A' : 'transparent', color: vista === 'tarde' ? '#0F0F1A' : '#F2E8DC' }}>🌙 Tarde (17h) · {nTarde}</button>
+                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? '#d8b25a' : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã · {nManhaSem}</button>
+                <button onClick={() => setVista('tarde')} className="px-3 py-1.5" style={{ background: vista === 'tarde' ? '#EBAE4A' : 'transparent', color: vista === 'tarde' ? '#0F0F1A' : '#F2E8DC' }}>🌙 Tarde · {nTardeSem}</button>
               </div>
               <label className="inline-flex items-center gap-1.5 opacity-80 cursor-pointer">
                 <input type="checkbox" checked={esconderPub} onChange={(e) => setEsconderPub(e.target.checked)} className="cursor-pointer" /> esconder publicados
@@ -412,17 +425,17 @@ export default function MetodoContaPage() {
                 <span className="opacity-50">(os publicados ficam protegidos)</span>
               </div>
             )}
-            {semanasGrade.length > 0 && (
-              <div className="overflow-x-auto -mx-1 px-1">
+            <div className="overflow-x-auto -mx-1 px-1">
                 <div className="grid grid-cols-7 gap-1 min-w-[700px]">
                   {DIAS_CAB.map((h) => <div key={h} className="text-center text-[0.6rem] uppercase tracking-wider opacity-50 pb-1">{h}</div>)}
-                  {semanasGrade.flatMap((semana) => semana.map((d) => {
+                  {semanaUnica.map((d) => {
                     const wd = parse(d).getDay();
                     const fds = wd === 0 || wd === 6;
+                    const passou = d < hojeISO;
                     const posts = porDia.get(d) ?? [];
                     return (
-                      <div key={d} className={`min-h-[80px] rounded-lg border border-white/10 p-1 ${fds ? 'bg-white/[0.015]' : 'bg-white/[0.035]'}`}>
-                        <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}</div>
+                      <div key={d} className={`min-h-[80px] rounded-lg border border-white/10 p-1 ${passou ? 'opacity-40' : ''} ${fds ? 'bg-white/[0.015]' : 'bg-white/[0.035]'}`}>
+                        <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}{passou ? ' · passou' : ''}</div>
                         {posts.map((e) => (
                           <div key={e.slug} className={`relative mb-1 rounded-md ${sel.has(e.slug) ? 'ring-2 ring-rose-400' : ''}`}>
                             {/* hora + período: manhã (frase) vs tarde (motor dramático), para não misturar */}
@@ -440,10 +453,10 @@ export default function MetodoContaPage() {
                         ))}
                       </div>
                     );
-                  }))}
+                  })}
                 </div>
+                {postsDaSemana.length === 0 && <p className="mt-2 text-center text-[0.7rem] opacity-50">Nada nesta semana ({fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}). Carrega &quot;gerar esta semana&quot; em cima, ou navega ◀ ▶.</p>}
               </div>
-            )}
             {semDataList.length > 0 && (
               <div className="mt-4">
                 <p className="text-[0.7rem] opacity-60 mb-1.5">Sem data ({semDataList.length}): posts antigos sem dia. Descarta-os e gera a semana de novo (já saem com a data certa).</p>
