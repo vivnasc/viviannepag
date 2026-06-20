@@ -6,6 +6,7 @@ import { CONTAS, type VeuNome } from '@/lib/metodo/contas';
 import { planoSemanaMae, type DiaSemanaMae } from '@/lib/metodo/semana';
 import { personagemDoDia } from '@/lib/metodo/peca';
 import { gerarStoryboard } from '@/lib/metodo/storyboard-ia';
+import { cartaDoBaralho } from '@/lib/metodo/baralho';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -89,10 +90,9 @@ export async function POST(req: Request) {
 
     const slugCarta = `metodo-mae-carta-${d.data}`;
     if (fazer(slugCarta)) {
-      try {
-        const sb = await gerarStoryboard('mae', 'descoberta', veu, personagem, apiKey, evitar);
-        if (sb.beats.length) { rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', 'Carta · Sou Aquela', veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
-      } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
+      // CARTA do baralho FIXO (a carta da personagem do dia) — texto travado, sem IA.
+      const linhas = cartaDoBaralho(personagem.id);
+      if (linhas.length) rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', `Carta · ${personagem.nome}`, veu, linhas.map((l) => ({ texto: l, imagem: '' })), ''));
     }
 
     const slugNN = `metodo-mae-naonorm-${d.data}`;

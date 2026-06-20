@@ -495,6 +495,7 @@ export default function MetodoContaPage() {
             <button onClick={gerarVisual} disabled={visualBusy} title="cria 1 reel VISUAL: cena de luz a fluir + 1 linha (pouco texto). A atmosfera de @vir.soltar (regressar a ti)." className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{visualBusy ? '🌌 a gerar…' : '🌌 gerar visual (1 cena + 1 linha)'}</button>
             {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
+            {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: conta.cor, color: conta.cor }}>📅 Plano da semana (ver a ordem) →</Link>}
             {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
           </div>
           <p className="mt-1 text-[0.68rem] opacity-50">1) Gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). 2) Revês e limpas. 3) Só então "gerar imagens em falta" (paga imagem só das que ficam). Podes sair que continua.</p>
