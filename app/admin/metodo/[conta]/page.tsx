@@ -31,6 +31,8 @@ const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean }> = {
   cartaRenomear: { imagem: false, som: false }, repara: { imagem: true, som: false },
 };
 const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false };
+// 2.ª-feira (ISO) da semana a `offset` semanas de hoje — para testar/gerar 1 dia.
+const segISO = (offset: number) => { const x = new Date(); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd) + offset * 7); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };
 const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
 export default function MetodoContaPage() {
@@ -124,6 +126,52 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setLote(null); recarregar(); }
   }, [conta, lote, offset, recarregar]);
+
+  // TESTAR 1 DIA (texto): gera SÓ a 2.ª-feira da semana-alvo (manhã + tarde) desta
+  // conta, para a Vivianne VER o conteúdo antes de gastar créditos na semana toda.
+  const [testeBusy, setTesteBusy] = useState(false);
+  const testarUmDia = useCallback(async () => {
+    if (!conta || testeBusy || lote) return;
+    setTesteBusy(true); setErro(null); setMsg('A gerar 1 dia (teste)…');
+    try {
+      const endpoint = conta.id === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-conta';
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, dia: segISO(offset), offset }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`1 dia de teste gerado (${j.gerados ?? 0} posts: manhã + tarde). Abre, vê o texto e "testar 1 imagem". Se gostares, gera a semana.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setTesteBusy(false); }
+  }, [conta, testeBusy, lote, offset, recarregar]);
+
+  // AS 4 CONTAS de uma vez (só na mãe): testa 1 dia OU gera a semana de mae+ver+
+  // vir+viver em sequência, para não entrar conta a conta. O dia/semana é o mesmo
+  // offset visível. Corre uma a uma (cada chamada já persiste no servidor).
+  const [quatroBusy, setQuatroBusy] = useState(false);
+  const correrQuatro = useCallback(async (modo: 'dia' | 'semana') => {
+    if (quatroBusy || lote) return;
+    setQuatroBusy(true); setErro(null);
+    const contas: { id: string; ep: string }[] = [
+      { id: 'mae', ep: '/api/admin/metodo/gerar-mae' },
+      { id: 'ver', ep: '/api/admin/metodo/gerar-conta' },
+      { id: 'vir', ep: '/api/admin/metodo/gerar-conta' },
+      { id: 'viver', ep: '/api/admin/metodo/gerar-conta' },
+    ];
+    let totais = 0;
+    try {
+      for (const c of contas) {
+        setMsg(`${modo === 'dia' ? 'A testar 1 dia' : 'A gerar a semana'} · ${c.id}…`);
+        const body = modo === 'dia' ? { conta: c.id, dia: segISO(offset), offset } : { conta: c.id, semanas: 1, offset };
+        const r = await fetch(c.ep, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok) totais += j.gerados ?? 0;
+        else setErro(`${c.id}: ${(j.erro ?? 'erro')}${j.detalhe ? ` (${j.detalhe})` : ''}`);
+        recarregar();
+      }
+      setMsg(`${modo === 'dia' ? 'Teste de 1 dia' : 'Semana'} das 4 contas: ${totais} posts no total. Revê cada conta na sua secção.`);
+    } catch (e) { setErro(String(e)); }
+    finally { setQuatroBusy(false); recarregar(); }
+  }, [quatroBusy, lote, offset, recarregar]);
 
   // gera a imagem (Flux) dos posts sem imagem desta conta (sem reescrever texto).
   const [imgBusy, setImgBusy] = useState(false);
@@ -396,7 +444,10 @@ export default function MetodoContaPage() {
               <span className="px-2 py-1.5 min-w-[150px] text-center">{offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : `+${offset} semanas`}<br /><span className="opacity-60 text-[0.62rem]">{fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}</span></span>
               <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2 py-1.5 hover:bg-white/10">▶</button>
             </span>
+            <button onClick={testarUmDia} disabled={testeBusy || !!lote} title="gera SÓ a 2.ª-feira desta semana (manhã + tarde) para veres o texto antes de gastar créditos na semana toda" className="px-3 py-1.5 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{testeBusy ? 'a testar…' : '🔍 testar 1 dia (texto)'}</button>
             <button onClick={() => gerarLote(1)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>gerar esta semana (texto)</button>
+            {conta.id === 'mae' && <button onClick={() => correrQuatro('dia')} disabled={quatroBusy || !!lote} title="gera 1 dia (manhã + tarde) em TODAS as contas (mãe + ver + vir + viver) para testares as 4 de uma vez" className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{quatroBusy ? '…' : '🔍 testar 1 dia · 4 contas'}</button>}
+            {conta.id === 'mae' && <button onClick={() => correrQuatro('semana')} disabled={quatroBusy || !!lote} title="gera a semana toda nas 4 contas de uma vez (só depois de testares)" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{quatroBusy ? '…' : 'gerar a semana · 4 contas'}</button>}
             {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>📅 Plano da semana (ver a ordem) →</Link>}
