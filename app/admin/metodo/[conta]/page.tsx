@@ -86,6 +86,24 @@ export default function MetodoContaPage() {
     setLimparPassadoBusy(false); setMsg(`${n} post(s) de dias passados apagado(s). Gera a próxima semana (▶).`); recarregar();
   }, [limparPassadoBusy, recarregar]);
 
+  // MOVER (não apagar) os dias passados para a semana-alvo visível: empurra-os por
+  // N semanas inteiras, mantendo o dia-da-semana (e o véu) e a hora. Assim não se
+  // perde o trabalho já feito. O delta = nº de semanas da mais antiga até à alvo.
+  const [moverBusy, setMoverBusy] = useState(false);
+  const moverPassados = useCallback(async (deltaSemanas: number) => {
+    if (!conta || moverBusy || deltaSemanas < 1) return;
+    if (typeof window !== 'undefined' && !window.confirm(`Mover os dias passados ${deltaSemanas} semana(s) para a frente (mantém o dia da semana e a hora)? Os publicados ficam onde estão.`)) return;
+    setMoverBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/mover', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, deltaSemanas }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(`${j.movidos ?? 0} post(s) movidos para a frente${j.saltados ? ` (${j.saltados} saltados: já havia post nesse dia)` : ''}.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setMoverBusy(false); }
+  }, [conta, moverBusy, recarregar]);
+
 
   // gerar o plano NO SERVIDOR, alinhado ao Plano da Semana: cada post já com a sua
   // DATA. A semana-alvo é o `offset` (0 = esta, 1 = a que vem…); nunca gera passado.
@@ -352,6 +370,13 @@ export default function MetodoContaPage() {
   const daSemanaTudo = geradosConta.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm) && (!esconderPub || !e.publicado));
   const nManhaSem = daSemanaTudo.filter((e) => !ehTardePost(e)).length;
   const nTardeSem = daSemanaTudo.filter((e) => ehTardePost(e)).length;
+  // quantas semanas é preciso empurrar os passados para a mais antiga cair na semana-alvo.
+  const deltaParaAlvo = (() => {
+    if (!passados.length) return 0;
+    const cedo = passados.map((e) => e.agendadoEm as string).sort()[0];
+    const segCedo = (() => { const d = parse(cedo); const wd = d.getDay(); d.setDate(d.getDate() + (wd === 0 ? -6 : 1 - wd)); d.setHours(0, 0, 0, 0); return d; })();
+    return Math.round((segDaSemanaAlvo.getTime() - segCedo.getTime()) / (7 * 86400000));
+  })();
 
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
@@ -392,6 +417,7 @@ export default function MetodoContaPage() {
                 <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
               </span>
             )}
+            {passados.length > 0 && deltaParaAlvo >= 1 && <button onClick={() => moverPassados(deltaParaAlvo)} disabled={moverBusy} title="empurra os dias passados para esta semana (mantém o dia da semana e a hora) — não perde o trabalho" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>{moverBusy ? 'a mover…' : `↪ mover passados para ${fmtDM(segDaSemanaAlvo)} (${passados.length})`}</button>}
             {passados.length > 0 && <button onClick={() => apagarPassados(passados.map((e) => e.slug))} disabled={limparPassadoBusy} title="apaga os posts de dias que já passaram (os publicados ficam)" className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{limparPassadoBusy ? 'a apagar…' : `apagar dias passados (${passados.length})`}</button>}
             {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
