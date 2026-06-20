@@ -72,10 +72,13 @@ export async function POST(req: Request) {
   } catch { /* sem memória prévia */ }
 
   // dias a gerar: 1 dia (body.dia, regenera) OU a(s) semana(s).
+  // NUNCA gerar para o passado.
+  const ag = new Date();
+  const hojeStr = `${ag.getFullYear()}-${String(ag.getMonth() + 1).padStart(2, '0')}-${String(ag.getDate()).padStart(2, '0')}`;
   let dias: DiaSemanaMae[] = [];
   if (body.dia) { const dm = planoSemanaMae(offset).find((d) => d.data === body.dia); if (dm) dias = [dm]; }
-  else for (let w = 0; w < semanas; w++) dias.push(...planoSemanaMae(offset + w));
-  if (!dias.length) return NextResponse.json({ ok: true, gerados: 0 });
+  else { for (let w = 0; w < semanas; w++) dias.push(...planoSemanaMae(offset + w)); dias = dias.filter((d) => d.data >= hojeStr); }
+  if (!dias.length) return NextResponse.json({ ok: true, gerados: 0, jaPassou: true });
 
   // gera o slug se NÃO publicado e (for um dia escolhido OU ainda não existir).
   const fazer = (slug: string) => !publicados.has(slug) && (!!body.dia || !existentes.has(slug));

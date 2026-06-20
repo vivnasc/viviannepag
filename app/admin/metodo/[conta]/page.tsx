@@ -438,7 +438,7 @@ export default function MetodoContaPage() {
 
   const semData = geradosConta.filter((e) => !e.agendadoEm).length;
   // PERÍODO de um post: tarde = motor (nbeats) ou hora >= 15h; senão manhã.
-  const ehTardePost = (e: EstadoPost) => e.subtipo === 'nbeats' || (e.hora ?? '') >= '15:00';
+  const ehTardePost = (e: EstadoPost) => (e.hora ?? '') >= '13:00'; // por HORA (não por subtipo): manhã < 13h, tarde >= 13h
   const nManha = geradosConta.filter((e) => !ehTardePost(e)).length;
   const nTarde = geradosConta.filter((e) => ehTardePost(e)).length;
   // o CALENDÁRIO mostra só o período escolhido e (se pedido) sem os publicados.
@@ -487,6 +487,7 @@ export default function MetodoContaPage() {
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
             <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
             {semData > 0 && <button onClick={organizar} disabled={orgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{orgBusy ? 'a organizar…' : `organizar por dias (${semData})`}</button>}
+            {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
             {geradosConta.length > 0 && <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}

@@ -3,22 +3,24 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes } from '@/lib/texto';
 import { CONTAS, type ContaId, type VeuNome } from '@/lib/metodo/contas';
-import { planoSemana } from '@/lib/metodo/semana';
+import { planoSemanaMae } from '@/lib/metodo/semana';
 import { personagemDoDia } from '@/lib/metodo/peca';
 import { gerarStoryboard } from '@/lib/metodo/storyboard-ia';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
-// FILHAS (ver/vir/viver) · 2 POSTS POR DIA, cada conta no SEU formato:
-//   manhã (11:00) = a CENA (descoberta)        -> subtipo 'nbeats'
-//   tarde (17:00) = a peça funda (profundidade) -> ver: O Espelho · viver: Repara
-//                   (nbeats);  vir: Carta de renomear (subtipo 'carta' -> CartaSlide)
-// Mesma leveza da mãe: cai no pool -> render-dispatch -> agendar -> publicar.
-// Salta posts que já existem (por slug) e NUNCA toca em publicados. Só a mãe usa
-// gerar-mae (cartas do baralho + não normalizes); as filhas usam esta rota.
+// FILHAS (ver/vir/viver) · 2 POSTS POR DIA, cada conta no SEU formato.
+// DNA do Método VS: o VÉU do dia é PARTILHADO por todas as contas (a sequência dos
+// 7, 1/dia) — vem de planoSemanaMae (NÃO do pool antigo de posts, que foi abolido).
+// Cada conta exprime o véu do dia à sua maneira:
+//   manhã (11:00) = a CENA (descoberta)            -> subtipo 'nbeats'
+//   tarde (17:00) = a peça funda (profundidade): ver O Espelho · viver Repara (nbeats);
+//                   vir a Carta de renomear (subtipo 'carta' -> CartaSlide)
+// NUNCA gera para datas passadas. Salta posts que já existem; nunca toca em publicados.
 
 const NOME_TARDE: Record<string, string> = { ver: 'O Espelho', vir: 'Carta de renomear', viver: 'Repara' };
+const TIPO_TARDE: Record<string, string> = { ver: 'espelho', vir: 'cartaRenomear', viver: 'repara' };
 
 type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: null; capa: boolean; conceito: string; contaId: ContaId };
 
@@ -41,11 +43,15 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => ({}))) as { conta?: string; semanas?: number; offset?: number; dia?: string };
   const conta = (body.conta ?? '') as ContaId;
-  if (conta !== 'ver' && conta !== 'vir' && conta !== 'viver') return NextResponse.json({ erro: 'conta-invalida', detalhe: 'esta rota é só para ver/vir/viver (a mãe usa gerar-mae)' }, { status: 400 });
+  if (conta !== 'ver' && conta !== 'vir' && conta !== 'viver') return NextResponse.json({ erro: 'conta-invalida', detalhe: 'só ver/vir/viver (a mãe usa gerar-mae)' }, { status: 400 });
   const semanas = Math.min(2, Math.max(1, body.semanas ?? 1));
   const offset = Math.max(-12, Math.min(12, body.offset ?? 0));
   const c = CONTAS[conta];
   const supabase = getSupabaseAdmin();
+
+  // NUNCA gerar para o passado: hoje (hora local), formato YYYY-MM-DD.
+  const ag = new Date();
+  const hojeStr = `${ag.getFullYear()}-${String(ag.getMonth() + 1).padStart(2, '0')}-${String(ag.getDate()).padStart(2, '0')}`;
 
   const evitar: string[] = [];
   const existentes = new Set<string>();
@@ -59,18 +65,19 @@ export async function POST(req: Request) {
     }
   } catch { /* sem memória */ }
 
-  const dias = body.dia
-    ? planoSemana(conta, offset).filter((d) => d.data === body.dia)
-    : Array.from({ length: semanas }).flatMap((_, w) => planoSemana(conta, offset + w));
-  if (!dias.length) return NextResponse.json({ ok: true, gerados: 0 });
+  // o véu do dia (DNA, partilhado) vem de planoSemanaMae — a sequência dos 7 véus.
+  let dias = body.dia
+    ? planoSemanaMae(offset).filter((d) => d.data === body.dia)
+    : Array.from({ length: semanas }).flatMap((_, w) => planoSemanaMae(offset + w));
+  if (!body.dia) dias = dias.filter((d) => d.data >= hojeStr); // só futuro
+  if (!dias.length) return NextResponse.json({ ok: true, gerados: 0, jaPassou: true });
 
   const fazer = (slug: string) => !publicados.has(slug) && (!!body.dia || !existentes.has(slug));
 
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
-  for (let i = 0; i < dias.length; i++) {
-    const d = dias[i];
-    const veu = (d.post.veu ?? c.veus[i % c.veus.length]) as VeuNome;
+  for (const d of dias) {
+    const veu = d.veu;
     const personagem = personagemDoDia(veu, new Date(d.data + 'T12:00:00'));
     if (!personagem) continue;
 
@@ -87,7 +94,7 @@ export async function POST(req: Request) {
       try {
         const sb = await gerarStoryboard(conta, 'profundidade', veu, personagem, apiKey, evitar);
         const subtipo = conta === 'vir' ? 'carta' : 'nbeats';
-        if (sb.beats.length) { rows.push(montarRow(conta, slugTarde, d.data, '17:00', subtipo, conta === 'vir' ? 'cartaRenomear' : (conta === 'ver' ? 'espelho' : 'repara'), NOME_TARDE[conta], veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
+        if (sb.beats.length) { rows.push(montarRow(conta, slugTarde, d.data, '17:00', subtipo, TIPO_TARDE[conta], NOME_TARDE[conta], veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
   }
