@@ -77,12 +77,10 @@ export async function POST(req: Request) {
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
   for (const d of dias) {
-    // PORTA = os SEUS 2 véus (o cacho), ALTERNADOS ao longo da semana (CLAUDE.md):
-    // 2.ª/4.ª/6.ª = véu[0], 3.ª/5.ª/sáb = véu[1]. NÃO os 7 véus da mãe — era isso
-    // que fazia as portas parecerem todas iguais. A mãe é que faz 1 véu/dia (gerar-mae).
-    const wd = new Date(d.data + 'T12:00:00').getDay();
-    const idxDia = wd === 0 ? 6 : wd - 1; // 2.ª=0 … dom=6
-    const veu = c.veus[idxDia % c.veus.length];
+    // O VÉU é DNA PARTILHADO (os 7, 1/dia, iguais para todas as contas — vem de
+    // planoSemanaMae). O que distingue a conta NÃO é o véu (isso foi abolido): é o
+    // FORMATO + a VOZ (fraseMae) + o ÂNGULO. Cada conta refrata o mesmo véu do dia.
+    const veu = d.veu;
     const personagem = personagemDoDia(veu, new Date(d.data + 'T12:00:00'));
     if (!personagem) continue;
 

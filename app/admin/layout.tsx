@@ -57,10 +57,16 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    titulo: 'vivianne.dos.santos · a mãe',
+    titulo: 'método vs · o mapa (4 contas)',
     cor: '#d8b25a',
     itens: [
       { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
+    ],
+  },
+  {
+    titulo: 'vivianne.dos.santos · a mãe',
+    cor: '#d8b25a',
+    itens: [
       { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
       { href: '/admin/metodo/mae', label: 'cartas + não normalizes' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },

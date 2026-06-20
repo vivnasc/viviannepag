@@ -140,9 +140,14 @@ conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
 **Regras de ouro do método (aprendidas à força):**
 - **Expandir, nunca refazer do zero** o definido. A visão é uma **vista por cima
   dos motores** (`semana.ts`/`contas.ts`), nunca estrutura paralela que contradiga.
-- **mãe = 1 véu por DIA** (7/semana, `planoSemanaMae`, reel 2 faces). Portas têm
-  os SEUS véus (ver: Turbilhão+Memória; vir: Esforço+Desolação; viver:
-  Horizonte+Permanência). **Véus sempre ALTERNADOS**, nunca em bloco.
+- **O VÉU É DNA PARTILHADO** (decisão FINAL da Vivianne — «já não há conta por
+  véu»): os 7 véus, **1 por dia, IGUAIS para TODAS as contas** (`planoSemanaMae`).
+  **NÃO há "véu por conta"** — atribuir véus a uma conta (ex. ver=Turbilhão+Memória)
+  é LIXO ABOLIDO, não ressuscitar. O que distingue as contas **NÃO é o véu nem a
+  cor**: é o **FORMATO + a VOZ + o ÂNGULO**. O mesmo véu do dia VIRA coisas
+  diferentes em cada conta (mãe: carta «Sou Aquela» + «Não normalizes» · ver: O
+  Espelho · vir: Carta de renomear · viver: Repara). A cor é por VÉU (chacras),
+  nunca por conta. [A nota histórica «portas têm os seus véus» fica revogada.]
 - **PORTAS = VOZ primeiro, arco depois** (decisão de produto, validada em equipa):
   no Instagram ninguém consome por ordem, por isso o que faz a identidade é a
   **sensação recorrente**, não um percurso de 12 semanas. Cada porta tem uma
