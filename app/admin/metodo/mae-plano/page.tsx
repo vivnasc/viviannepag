@@ -59,8 +59,8 @@ function PlanoInner() {
   const dias = useMemo(() => planoSemanaMae(off).map((d) => {
     const dt = new Date(d.data + 'T12:00:00');
     const personagem = personagemDoDia(d.veu, dt);
-    return { data: d.data, wd: DIA_SEMANA[dt.getDay()], veu: d.veu, personagem, carta: ehMae && personagem ? cartaDoBaralho(personagem.id) : [] };
-  }), [off, ehMae]);
+    return { data: d.data, wd: DIA_SEMANA[dt.getDay()], veu: d.veu, personagem };
+  }), [off]);
 
   const face = dias[0] ? faceDaData(dias[0].data) : null;
 
@@ -138,13 +138,7 @@ function PlanoInner() {
                       <span className="text-[0.62rem] uppercase tracking-wider" style={{ color: conta.cor }}>{ehMae ? '10h30' : '11h00'} · {NOME_MANHA[sel]}{d.personagem ? ` · ${d.personagem.nome}` : ''}</span>
                       <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temM ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temM ? '✓ gerada' : 'por gerar'}</span>
                     </div>
-                    {ehMae ? (
-                      <div style={{ fontFamily: 'var(--font-cormorant), serif' }} className="text-[0.95rem] leading-snug">
-                        {d.carta.length ? d.carta.map((l, i) => <div key={i} className={i === d.carta.length - 1 ? 'italic mt-1' : ''} style={i === d.carta.length - 1 ? { color: conta.cor } : undefined}>{l}</div>) : <span className="opacity-50 text-[0.8rem]">sem carta para esta personagem</span>}
-                      </div>
-                    ) : (
-                      <p className="text-[0.82rem] opacity-60 leading-snug">A cena do dia (faca), na voz da @{conta.handle}, ancorada no véu {d.veu}. <span className="italic">Escreve-se ao gerar.</span></p>
-                    )}
+                    <p className="text-[0.82rem] opacity-60 leading-snug">{ehMae ? `A carta de ${d.personagem?.nome ?? 'a personagem do dia'} (vê o texto no baralho, em baixo).` : `A cena do dia (faca), na voz da @${conta.handle}, ancorada no véu ${d.veu}.`} <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
                   </div>
                   {/* tarde */}
                   <div className="rounded-lg p-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>
