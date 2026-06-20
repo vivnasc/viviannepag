@@ -40,6 +40,7 @@ DEVOLVE APENAS JSON válido (os valores de texto em português com TODOS os acen
   "capa": { "gancho": "...", "imagePrompt": "..." },
   "ensino": ["frase 1", "frase 2", "frase 3"],
   "licao": "frase de fecho que ensina/abre reflexão (amor e pertença)",
+  "cta": "o gesto a pedir no fecho, CURTO (máx ~5 palavras), começado por um glifo. Este formato dá PALAVRAS ao indizível, por isso o gesto natural é PARTILHAR: usa quase sempre enviar/partilhar com uma pessoa concreta (ex.: '↗ envia a quem precisa', '↗ partilha com quem te veio à cabeça', '↗ manda a quem carrega isto'). De vez em quando, guardar ('↓ guarda para reler'). NUNCA sensacionalista ('marca 3 amigos'). Português europeu com acentos.",
   "legenda": "legenda Instagram em PARÁGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada parágrafo — NUNCA um bloco corrido): gancho na 1.ª linha; 2 a 3 parágrafos curtos que explicam o padrão em palavras simples, separados por \\n\\n; fecho à parte: convida a GUARDAR ("guarda para o dia em que precisares") e a PARTILHAR com uma pessoa concreta ("envia a quem também carrega isto"), com dignidade e SEM sensacionalismo (nunca "marca 3 amigos"); podes terminar com um convite suave a reagir ("se te reconheceste, deixa um coração"). NÃO nomeies o formato. SEM vender. Deixa claro que limite com amor honra a família. Português europeu com todos os acentos.",
   "hashtags": ["10-12 hashtags PT, amplas + de nicho, sem repetir"]
 }`;
@@ -73,7 +74,7 @@ export async function POST(req: Request) {
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { titulo?: string; capa?: { gancho?: string; imagePrompt?: string }; ensino?: string[]; licao?: string; legenda?: string; hashtags?: string[] };
+  let p: { titulo?: string; capa?: { gancho?: string; imagePrompt?: string }; ensino?: string[]; licao?: string; cta?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
   p = await corrigirAcentos(p, apiKey); // rede de segurança: acentuação correta
@@ -97,7 +98,7 @@ export async function POST(req: Request) {
   const slides = [
     { tipo: 'banda', imageUrl, gancho, imagePrompt, capa: true, conceito },
     ...ensino.map((t) => ({ tipo: 'banda', texto: t, capa: false })),
-    { tipo: 'banda', licao: (p.licao ?? '').trim(), capa: false },
+    { tipo: 'banda', licao: (p.licao ?? '').trim(), cta: (p.cta ?? '').trim() || '↗ envia a quem precisa', capa: false },
   ];
 
   const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;

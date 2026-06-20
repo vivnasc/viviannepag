@@ -35,6 +35,7 @@ DEVOLVE APENAS JSON válido (texto em português com TODOS os acentos):
   "capa": { "gancho": "...", "imagePrompt": "..." },
   "ensino": ["frase 1", "frase 2", "frase 3"],
   "licao": "afirmação final identitária e luminosa",
+  "cta": "o gesto a pedir no fecho, CURTO (máx ~5 palavras), começado por um glifo. Este formato é IDENTITÁRIO (quebrar o ciclo), por isso alterna entre GUARDAR a afirmação ('↓ guarda para os dias difíceis', '↓ guarda esta verdade') e MARCAR/partilhar quem rompe o ciclo contigo ('✦ marca quem rompe o ciclo contigo', '↗ envia a quem também quebra o ciclo'). NUNCA sensacionalista. Português europeu com acentos.",
   "legenda": "legenda Instagram em PARÁGRAFOS CURTOS separados por LINHA EM BRANCO (usa \\n\\n entre cada parágrafo — NUNCA um bloco corrido): gancho na 1.ª linha; 2 a 3 parágrafos curtos que explicam (curar-se liberta as gerações, sem salvar ninguém), separados por \\n\\n; fecho à parte com convite a refletir e a guardar/partilhar (NÃO nomeies o formato). SEM vender. Português europeu com todos os acentos.",
   "hashtags": ["10-12 hashtags PT, amplas + de nicho (constelação familiar, heranças, curar, gerações), sem repetir"]
 }`;
@@ -66,7 +67,7 @@ export async function POST(req: Request) {
 
   const ini = texto.indexOf('{'), fim = texto.lastIndexOf('}');
   if (ini < 0 || fim <= ini) return NextResponse.json({ erro: 'sem-json', amostra: texto.slice(0, 300) }, { status: 502 });
-  let p: { titulo?: string; capa?: { gancho?: string; imagePrompt?: string }; ensino?: string[]; licao?: string; legenda?: string; hashtags?: string[] };
+  let p: { titulo?: string; capa?: { gancho?: string; imagePrompt?: string }; ensino?: string[]; licao?: string; cta?: string; legenda?: string; hashtags?: string[] };
   try { p = JSON.parse(texto.slice(ini, fim + 1)); } catch { return NextResponse.json({ erro: 'json-invalido', amostra: texto.slice(0, 300) }, { status: 502 }); }
   p = limparTravessoes(p);
   p = await corrigirAcentos(p, apiKey); // rede de segurança: acentuação correta
@@ -89,7 +90,7 @@ export async function POST(req: Request) {
   const slides = [
     { tipo: 'banda', serie: SERIE, imageUrl, gancho, imagePrompt, capa: true, conceito },
     ...ensino.map((t) => ({ tipo: 'banda', serie: SERIE, texto: t, capa: false })),
-    { tipo: 'banda', serie: SERIE, licao: (p.licao ?? '').trim(), capa: false },
+    { tipo: 'banda', serie: SERIE, licao: (p.licao ?? '').trim(), cta: (p.cta ?? '').trim() || '✦ marca quem rompe o ciclo contigo', capa: false },
   ];
 
   const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
