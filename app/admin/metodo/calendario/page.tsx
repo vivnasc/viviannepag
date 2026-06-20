@@ -39,7 +39,7 @@ export default function MetodoCalendarioPage() {
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-cormorant), serif' }}>Calendário trimestral · Método VS</h1>
-          <Link href="/admin/metodo/semana" className="text-[0.7rem] opacity-60 hover:opacity-100">Calendário semanal →</Link>
+          <Link href="/admin/metodo/mae-plano" className="text-[0.7rem] opacity-60 hover:opacity-100">Plano da semana →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-5">O <b>mapa</b>. A semana são os 7 véus (1 por dia). Ao longo das semanas, a <b>espiral</b> aprofunda uma face do retrato de cada vez. A produção semanal desce daqui.</p>
 
@@ -86,7 +86,7 @@ export default function MetodoCalendarioPage() {
                   </div>
                   <p className="leading-tight text-lg" style={{ fontFamily: 'var(--font-cormorant), serif', color: cor }}>{f.titulo}</p>
                   <p className="text-[0.76rem] opacity-60 mb-2.5">{FACE_DESC[f.chave] ?? ''} Os 7 véus saem por esta face.</p>
-                  <Link href={`/admin/metodo/semana?conta=${sel}&off=${off}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-white/20 hover:border-[#EBAE4A] hover:text-[#EBAE4A] no-underline">abrir na produção →</Link>
+                  <Link href={`/admin/metodo/${sel}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-white/20 hover:border-[#EBAE4A] hover:text-[#EBAE4A] no-underline">abrir na conta →</Link>
                 </div>
               </div>
             );

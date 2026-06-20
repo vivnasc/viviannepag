@@ -58,11 +58,14 @@ export default function MetodoContaPage() {
   // já com a sua DATA e a sua imagem. Corre sozinho mesmo que saias/feches.
   const gerarLote = useCallback(async (semanas = 4) => {
     if (!conta || lote) return;
-    setErro(null); setLote({ feito: 0, total: semanas * 7 });
+    setErro(null);
+    // a mãe tem gerador novo (carta do baralho + não normalizes). As filhas ainda
+    // não foram migradas: chega quando for a vez delas (não há gerador antigo).
+    if (conta.id !== 'mae') { setMsg('As filhas (ver/vir/viver) ainda não têm gerador novo. Chega quando for a vez de cada uma. Por agora, só a mãe gera.'); return; }
+    setLote({ feito: 0, total: semanas * 7 });
     setMsg('A gerar o TEXTO no servidor, já com a data de cada dia (não gasta créditos de imagem). Podes sair ou fechar. Volta e recarrega.');
     try {
-      // a mãe tem pipeline própria: 1 véu/dia, reel de 2 faces (dor -> revelação).
-      const endpoint = conta.id === 'mae' ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-lote';
+      const endpoint = '/api/admin/metodo/gerar-mae';
       const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, semanas }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
