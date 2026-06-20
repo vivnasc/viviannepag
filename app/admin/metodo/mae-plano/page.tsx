@@ -39,6 +39,27 @@ export default function MaePlanoPage() {
     finally { setBusy(false); }
   }, [off, busy]);
 
+  // o hub produz TUDO da mãe num sítio: método (cartas + não normalizes) + séries.
+  const inicio = dias[0]?.data ?? ''; // a 2.ª-feira desta semana (início)
+  const gerarSerie = useCallback(async (serie: 'vcsabia' | 'hojeemmim', rotulo: string) => {
+    if (busy || !inicio) return;
+    setBusy(true); setMsg(`A gerar ${rotulo} da semana (7 dias)…`);
+    try {
+      const r = await fetch('/api/admin/series-diaria/gerar-mes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ serie, inicio, dias: 7 }) });
+      const j = await r.json();
+      setMsg(r.ok ? `${rotulo}: gerada(s) ${j.gerados ?? j.criados ?? 'ok'}.` : `erro ${rotulo}: ${j.erro ?? ''} ${j.detalhe ?? ''}`);
+    } catch (e) { setMsg(String(e)); }
+    finally { setBusy(false); }
+  }, [busy, inicio]);
+
+  const gerarTudo = useCallback(async () => {
+    if (busy) return;
+    await gerar();
+    await gerarSerie('vcsabia', 'vc sabia');
+    await gerarSerie('hojeemmim', 'hoje em mim');
+    setMsg('Semana toda gerada (método + séries). Os carrosséis geram-se na página deles. Depois: agenda → aprova → publica.');
+  }, [busy, gerar, gerarSerie]);
+
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-4xl mx-auto">
@@ -50,7 +71,11 @@ export default function MaePlanoPage() {
             <button onClick={() => setOff((o) => o - 1)} className="px-2.5 py-1 rounded-lg border border-white/20">◀</button>
             <span className="opacity-80">{off === 0 ? 'esta semana' : off > 0 ? `daqui a ${off} sem.` : `há ${-off} sem.`}</span>
             <button onClick={() => setOff((o) => o + 1)} className="px-2.5 py-1 rounded-lg border border-white/20">▶</button>
-            <button onClick={gerar} disabled={busy} className="ml-2 px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: COR, color: '#0F0F1A', background: COR }}>{busy ? 'a gerar…' : 'gerar esta semana'}</button>
+            <button onClick={gerarTudo} disabled={busy} className="ml-2 px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: COR, color: '#0F0F1A', background: COR }}>{busy ? 'a produzir…' : '✦ produzir a semana toda'}</button>
+            <button onClick={gerar} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">método (cartas + não normalizes)</button>
+            <button onClick={() => gerarSerie('vcsabia', 'vc sabia')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">vc sabia</button>
+            <button onClick={() => gerarSerie('hojeemmim', 'hoje em mim')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">hoje em mim</button>
+            <Link href="/admin/carrossel" className="px-3 py-1.5 rounded-lg border border-white/25">carrosséis →</Link>
           </div>
           {msg && <p className="mt-2 text-[0.78rem] text-emerald-300">{msg}</p>}
         </header>
