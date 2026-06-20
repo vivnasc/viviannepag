@@ -77,6 +77,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'ver.soltar',
     cor: '#cdd8df',
     itens: [
+      { href: '/admin/metodo/mae-plano?conta=ver', label: 'plano da semana' },
       { href: '/admin/metodo/ver', label: 'produzir · o Espelho' },
     ],
   },
@@ -84,6 +85,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vir.soltar',
     cor: '#e8bd84',
     itens: [
+      { href: '/admin/metodo/mae-plano?conta=vir', label: 'plano da semana' },
       { href: '/admin/metodo/vir', label: 'produzir · a Carta' },
     ],
   },
@@ -91,6 +93,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'viver.soltar',
     cor: '#cfe0a0',
     itens: [
+      { href: '/admin/metodo/mae-plano?conta=viver', label: 'plano da semana' },
       { href: '/admin/metodo/viver', label: 'produzir · o Repara' },
     ],
   },

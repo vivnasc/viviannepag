@@ -1,50 +1,83 @@
 'use client';
 
-// MÃE · PLANO DA SEMANA (a legibilidade da veu.a.veu): vês a ORDEM da semana ANTES
-// de gerar — cada dia, a CARTA do baralho (texto fixo, real) ao meio da manhã +
-// o "Não normalizes" ao meio da tarde. Em baixo, o baralho inteiro para afinares.
-// Não toca nos 3 geradores maduros (abertura/pico/fecho). 1 clique gera a semana.
+// PLANO DA SEMANA (4 contas) · a legibilidade da veu.a.veu, mas HONESTO: mostra o
+// PLANO da semana (o esqueleto), NÃO conteúdo fixo a fingir que foi gerado. Por dia:
+// o véu (DNA, partilhado) + a FACE desta semana (a espiral do calendário) + o
+// formato de manhã/tarde desta conta + a personagem. E, alimentado pela BD, marca
+// cada peça «por gerar» ou «✓ gerado». A mãe mostra ainda a carta real do baralho
+// (texto fixo, curado) como a carta que VAI sair; as filhas mostram a estrutura.
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { planoSemanaMae } from '@/lib/metodo/semana';
-import { personagemDoDia } from '@/lib/metodo/peca';
+import { personagemDoDia, semanasDesdeInicio } from '@/lib/metodo/peca';
 import { FAMILIAS } from '@/lib/metodo/personagens';
 import { cartaDoBaralho } from '@/lib/metodo/baralho';
+import { getConta, CONTAS_LISTA, type ContaId } from '@/lib/metodo/contas';
+import { FACES_ORDEM } from '@/lib/metodo/veu-faces';
+import { PORTA_ENQUADRAMENTO } from '@/lib/metodo/lentes';
 
 const FONTS = 'font-[system-ui]';
-const COR = '#d8b25a'; // mãe
-
 const DIA_SEMANA = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+const NOME_TARDE: Record<ContaId, string> = { mae: 'Não normalizes', ver: 'O Espelho', vir: 'Carta de renomear', viver: 'Repara' };
+const NOME_MANHA: Record<ContaId, string> = { mae: 'Carta', ver: 'A cena', vir: 'A cena', viver: 'A cena' };
 
-export default function MaePlanoPage() {
-  // arranca na próxima semana CHEIA (se hoje já passou a 2.ª-feira), nunca em semanas
-  // passadas; e o navegador fica preso ao trimestre (13 semanas), não ao infinito.
+type EstadoPost = { conta: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean };
+
+function faceDaData(data: string): { titulo: string } {
+  const n = semanasDesdeInicio(new Date(data + 'T12:00:00'));
+  const i = ((n % FACES_ORDEM.length) + FACES_ORDEM.length) % FACES_ORDEM.length;
+  return FACES_ORDEM[i];
+}
+
+function PlanoInner() {
+  const sp = useSearchParams();
+  const contaParam = (sp.get('conta') ?? '') as ContaId;
+  const [sel, setSel] = useState<ContaId>(getConta(contaParam) ? contaParam : 'mae');
+  const conta = getConta(sel)!;
+  const ehMae = sel === 'mae';
+
+  // arranca na próxima semana CHEIA (sem passado); navegador preso ao trimestre (13).
   const offStart = new Date().getDay() === 1 ? 0 : 1;
   const offFim = offStart + 12;
   const [off, setOff] = useState(offStart);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
+  // estado REAL (o que já foi gerado), para marcar cada peça por gerar / ✓ gerado.
+  const [estado, setEstado] = useState<Record<string, EstadoPost>>({});
+  const recarregar = useCallback(() => {
+    fetch('/api/admin/metodo/list').then((r) => (r.ok ? r.json() : { estado: {} })).then((j) => setEstado(j.estado ?? {})).catch(() => {});
+  }, []);
+  useEffect(() => { recarregar(); }, [recarregar]);
+
+  const temPost = useCallback((data: string, periodo: 'manha' | 'tarde') => {
+    return Object.values(estado).some((e) => e.conta === sel && e.agendadoEm === data && (periodo === 'tarde' ? (e.hora ?? '') >= '13:00' : (e.hora ?? '') < '13:00'));
+  }, [estado, sel]);
+
   const dias = useMemo(() => planoSemanaMae(off).map((d) => {
     const dt = new Date(d.data + 'T12:00:00');
     const personagem = personagemDoDia(d.veu, dt);
-    return { data: d.data, wd: DIA_SEMANA[dt.getDay()], veu: d.veu, personagem, carta: personagem ? cartaDoBaralho(personagem.id) : [] };
-  }), [off]);
+    return { data: d.data, wd: DIA_SEMANA[dt.getDay()], veu: d.veu, personagem, carta: ehMae && personagem ? cartaDoBaralho(personagem.id) : [] };
+  }), [off, ehMae]);
+
+  const face = dias[0] ? faceDaData(dias[0].data) : null;
 
   const gerar = useCallback(async () => {
     if (busy) return;
-    setBusy(true); setMsg('A gerar a semana da mãe (cartas do baralho + não normalizes)…');
+    setBusy(true); setMsg('A gerar a semana…');
     try {
-      const r = await fetch('/api/admin/metodo/gerar-mae', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offset: off, semanas: 1 }) });
+      const endpoint = ehMae ? '/api/admin/metodo/gerar-mae' : '/api/admin/metodo/gerar-conta';
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: sel, offset: off, semanas: 1 }) });
       const j = await r.json();
-      setMsg(r.ok ? `${j.gerados ?? 0} posts gerados. Vê-os na barra em "cartas + não normalizes" (manhã = cartas, tarde = não normalizes); lá geras as imagens em falta e renderizas. Depois, "agenda · publicar".` : `erro: ${j.erro ?? ''} ${j.detalhe ?? ''}`);
+      setMsg(r.ok ? `${j.gerados ?? 0} posts gerados. Vê-os em "produzir" desta conta; lá geras as imagens e renderizas.` : `erro: ${j.erro ?? ''} ${j.detalhe ?? ''}`);
+      recarregar();
     } catch (e) { setMsg(String(e)); }
     finally { setBusy(false); }
-  }, [off, busy]);
+  }, [busy, ehMae, sel, off, recarregar]);
 
-  // o hub produz TUDO da mãe num sítio: método (cartas + não normalizes) + séries.
-  const inicio = dias[0]?.data ?? ''; // a 2.ª-feira desta semana (início)
+  const inicio = dias[0]?.data ?? '';
   const gerarSerie = useCallback(async (serie: 'vcsabia' | 'hojeemmim', rotulo: string) => {
     if (busy || !inicio) return;
     setBusy(true); setMsg(`A gerar ${rotulo} da semana (7 dias)…`);
@@ -56,83 +89,109 @@ export default function MaePlanoPage() {
     finally { setBusy(false); }
   }, [busy, inicio]);
 
-  const gerarTudo = useCallback(async () => {
-    if (busy) return;
-    await gerar();
-    await gerarSerie('vcsabia', 'vc sabia');
-    await gerarSerie('hojeemmim', 'hoje em mim');
-    setMsg('Semana toda gerada (método + séries). Vê em "cartas + não normalizes" e nas séries; os carrosséis na página deles. Depois: "agenda · publicar" → aprova → publica.');
-  }, [busy, gerar, gerarSerie]);
-
   return (
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-4xl mx-auto">
-        <Link href="/admin/metodo/mae" className="text-[0.75rem] opacity-60 hover:opacity-100">← @vivianne.dos.santos</Link>
+        <Link href={`/admin/metodo/${sel}`} className="text-[0.75rem] opacity-60 hover:opacity-100">← @{conta.handle}</Link>
         <header className="mt-3 mb-6 rounded-2xl border border-white/10 p-5" style={{ background: '#1a1726' }}>
-          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: COR }}>Plano da semana · Mãe</h1>
-          <p className="mt-2 text-[0.85rem] opacity-85">A ordem da semana do Método VS na conta-mãe, <b>antes de gerar</b>: meio da manhã (10h30) a <b>carta</b> da personagem do dia; meio da tarde (16h00) o <b>não normalizes</b>. Não mexe na abertura, no pico nem no fecho do dia.</p>
+          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: conta.cor }}>Plano da semana · {conta.movimento}</h1>
+          <p className="mt-2 text-[0.85rem] opacity-85">O <b>plano</b> da semana (o esqueleto, não conteúdo a fingir): cada dia, o véu + a face desta semana + o formato de manhã e de tarde. Cada peça mostra se está <b>por gerar</b> ou <b>✓ gerada</b>.</p>
+
+          {/* tabs das 4 contas */}
+          <div className="mt-3 flex gap-2 flex-wrap">
+            {CONTAS_LISTA.map((c) => (
+              <button key={c.id} onClick={() => setSel(c.id)} className="px-3 py-1 rounded-lg border text-[0.78rem]" style={{ borderColor: c.id === sel ? c.cor : 'rgba(255,255,255,0.15)', color: c.id === sel ? c.cor : '#F2E8DC', background: c.id === sel ? c.cor + '18' : 'transparent' }}>@{c.handle}</button>
+            ))}
+          </div>
+
+          {!ehMae && (
+            <p className="mt-3 text-[0.82rem] opacity-80" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{PORTA_ENQUADRAMENTO[sel as 'ver' | 'vir' | 'viver']}{conta.fraseMae ? ` «${conta.fraseMae}»` : ''}</p>
+          )}
+
           <div className="mt-3 flex items-center gap-2 flex-wrap text-[0.75rem]">
             <button onClick={() => setOff((o) => Math.max(offStart, o - 1))} disabled={off <= offStart} className="px-2.5 py-1 rounded-lg border border-white/20 disabled:opacity-30">◀</button>
-            <span className="opacity-80">semana {off - offStart + 1}/13{dias[0]?.data ? ` · ${dias[0].data.slice(8)}/${dias[0].data.slice(5, 7)}` : ''}</span>
+            <span className="opacity-80">semana {off - offStart + 1}/13{dias[0]?.data ? ` · ${dias[0].data.slice(8)}/${dias[0].data.slice(5, 7)}` : ''}{face ? ` · ${face.titulo}` : ''}</span>
             <button onClick={() => setOff((o) => Math.min(offFim, o + 1))} disabled={off >= offFim} className="px-2.5 py-1 rounded-lg border border-white/20 disabled:opacity-30">▶</button>
-            <button onClick={gerarTudo} disabled={busy} className="ml-2 px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: COR, color: '#0F0F1A', background: COR }}>{busy ? 'a produzir…' : '✦ produzir a semana toda'}</button>
-            <button onClick={gerar} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">método (cartas + não normalizes)</button>
-            <button onClick={() => gerarSerie('vcsabia', 'vc sabia')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">vc sabia</button>
-            <button onClick={() => gerarSerie('hojeemmim', 'hoje em mim')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">hoje em mim</button>
-            <Link href="/admin/carrossel" className="px-3 py-1.5 rounded-lg border border-white/25">carrosséis →</Link>
+            <button onClick={gerar} disabled={busy} className="ml-2 px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>{busy ? 'a gerar…' : 'gerar a semana (texto)'}</button>
+            {ehMae && <>
+              <button onClick={() => gerarSerie('vcsabia', 'vc sabia')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">vc sabia</button>
+              <button onClick={() => gerarSerie('hojeemmim', 'hoje em mim')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">hoje em mim</button>
+              <Link href="/admin/carrossel" className="px-3 py-1.5 rounded-lg border border-white/25">carrosséis →</Link>
+            </>}
+            <Link href={`/admin/metodo/${sel}`} className="px-3 py-1.5 rounded-lg border border-white/25">produzir / ver gerados →</Link>
           </div>
           {msg && <p className="mt-2 text-[0.78rem] text-emerald-300">{msg}</p>}
         </header>
 
-        {/* a ordem da semana: 7 dias × 2 posts */}
+        {/* a ordem da semana: 7 dias × 2 peças, com estado real */}
         <section className="mb-10 space-y-2">
-          {dias.map((d) => (
-            <div key={d.data} className="rounded-xl border border-white/10 p-3" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <div className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-2">{d.wd} · {d.data.slice(8)}/{d.data.slice(5, 7)}</div>
-              <div className="grid md:grid-cols-2 gap-3">
-                {/* manhã: carta */}
-                <div className="rounded-lg p-3" style={{ background: 'rgba(216,178,90,0.06)', border: '1px solid rgba(216,178,90,0.25)' }}>
-                  <div className="text-[0.62rem] uppercase tracking-wider mb-1.5" style={{ color: COR }}>10h30 · Carta {d.personagem ? `· ${d.personagem.nome}` : ''}</div>
-                  <div style={{ fontFamily: 'var(--font-cormorant), serif' }} className="text-[0.95rem] leading-snug">
-                    {d.carta.length ? d.carta.map((l, i) => <div key={i} className={i === d.carta.length - 1 ? 'italic mt-1' : ''} style={i === d.carta.length - 1 ? { color: COR } : undefined}>{l}</div>) : <span className="opacity-50 text-[0.8rem]">sem carta para esta personagem</span>}
+          {dias.map((d) => {
+            const temM = temPost(d.data, 'manha');
+            const temT = temPost(d.data, 'tarde');
+            return (
+              <div key={d.data} className="rounded-xl border border-white/10 p-3" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                <div className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-2">{d.wd} · {d.data.slice(8)}/{d.data.slice(5, 7)} · <span style={{ color: conta.cor }}>{d.veu}</span></div>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {/* manhã */}
+                  <div className="rounded-lg p-3" style={{ background: `${conta.cor}10`, border: `1px solid ${conta.cor}33` }}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[0.62rem] uppercase tracking-wider" style={{ color: conta.cor }}>{ehMae ? '10h30' : '11h00'} · {NOME_MANHA[sel]}{d.personagem ? ` · ${d.personagem.nome}` : ''}</span>
+                      <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temM ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temM ? '✓ gerada' : 'por gerar'}</span>
+                    </div>
+                    {ehMae ? (
+                      <div style={{ fontFamily: 'var(--font-cormorant), serif' }} className="text-[0.95rem] leading-snug">
+                        {d.carta.length ? d.carta.map((l, i) => <div key={i} className={i === d.carta.length - 1 ? 'italic mt-1' : ''} style={i === d.carta.length - 1 ? { color: conta.cor } : undefined}>{l}</div>) : <span className="opacity-50 text-[0.8rem]">sem carta para esta personagem</span>}
+                      </div>
+                    ) : (
+                      <p className="text-[0.82rem] opacity-60 leading-snug">A cena do dia (faca), na voz da @{conta.handle}, ancorada no véu {d.veu}. <span className="italic">Escreve-se ao gerar.</span></p>
+                    )}
+                  </div>
+                  {/* tarde */}
+                  <div className="rounded-lg p-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[0.62rem] uppercase tracking-wider opacity-70">{ehMae ? '16h00' : '17h00'} · {NOME_TARDE[sel]}</span>
+                      <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temT ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temT ? '✓ gerada' : 'por gerar'}</span>
+                    </div>
+                    <p className="text-[0.82rem] opacity-60 leading-snug">{ehMae ? 'A assimetria invisível (responsabilidade sem autoridade · gestão emocional), com a volta de sobrevivência.' : `${NOME_TARDE[sel]}, ancorado no véu ${d.veu}.`} <span className="italic">Escreve-se ao gerar.</span></p>
                   </div>
                 </div>
-                {/* tarde: não normalizes */}
-                <div className="rounded-lg p-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <div className="text-[0.62rem] uppercase tracking-wider mb-1.5 opacity-70">16h00 · Não normalizes</div>
-                  <p className="text-[0.82rem] opacity-60 leading-snug">A assimetria invisível (responsabilidade sem autoridade · gestão emocional), com a volta de sobrevivência. <span className="italic">Gera-se com o botão.</span></p>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </section>
 
-        {/* o baralho inteiro, para afinar */}
-        <section>
-          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">O baralho "Sou Aquela" · uma carta por personagem</h2>
-          <p className="text-[0.72rem] opacity-50 mb-4">Fixo e curado (vem do material real de cada personagem). Para afinar uma carta, diz-me qual e o que mudar.</p>
-          <div className="space-y-5">
-            {FAMILIAS.map((f) => (
-              <div key={f.id}>
-                <div className="text-[0.72rem] uppercase tracking-wider mb-2" style={{ color: COR }}>{f.nome}</div>
-                <div className="grid md:grid-cols-2 gap-2">
-                  {f.personagens.map((p) => {
-                    const carta = cartaDoBaralho(p.id);
-                    return (
-                      <div key={p.id} className="rounded-lg p-3 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-                        <div className="text-[0.7rem] mb-1.5 opacity-80" style={{ color: COR }}>{p.nome}</div>
-                        <div style={{ fontFamily: 'var(--font-cormorant), serif' }} className="text-[0.88rem] leading-snug">
-                          {carta.length ? carta.map((l, i) => <div key={i} className={i === carta.length - 1 ? 'italic mt-1 opacity-90' : ''}>{l}</div>) : <span className="opacity-40 text-[0.78rem]">(por escrever)</span>}
+        {/* o baralho inteiro — só a mãe (é o material "Sou Aquela") */}
+        {ehMae && (
+          <section>
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">O baralho &quot;Sou Aquela&quot; · uma carta por personagem</h2>
+            <p className="text-[0.72rem] opacity-50 mb-4">Fixo e curado (vem do material real de cada personagem). Para afinar uma carta, diz-me qual e o que mudar.</p>
+            <div className="space-y-5">
+              {FAMILIAS.map((f) => (
+                <div key={f.id}>
+                  <div className="text-[0.72rem] uppercase tracking-wider mb-2" style={{ color: conta.cor }}>{f.nome}</div>
+                  <div className="grid md:grid-cols-2 gap-2">
+                    {f.personagens.map((p) => {
+                      const carta = cartaDoBaralho(p.id);
+                      return (
+                        <div key={p.id} className="rounded-lg p-3 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                          <div className="text-[0.7rem] mb-1.5 opacity-80" style={{ color: conta.cor }}>{p.nome}</div>
+                          <div style={{ fontFamily: 'var(--font-cormorant), serif' }} className="text-[0.88rem] leading-snug">
+                            {carta.length ? carta.map((l, i) => <div key={i} className={i === carta.length - 1 ? 'italic mt-1 opacity-90' : ''}>{l}</div>) : <span className="opacity-40 text-[0.78rem]">(por escrever)</span>}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );
+}
+
+export default function MaePlanoPage() {
+  return <Suspense fallback={<main className="min-h-screen bg-[#0F0F1A]" />}><PlanoInner /></Suspense>;
 }
