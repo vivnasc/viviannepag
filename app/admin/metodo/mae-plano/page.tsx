@@ -77,6 +77,30 @@ function PlanoInner() {
     finally { setBusy(false); }
   }, [busy, ehMae, sel, off, recarregar]);
 
+  // AS 4 CONTAS de uma vez (o hub comum): testa 1 dia OU gera a semana de mãe + ver
+  // + vir + viver, no offset visível. Cada chamada já persiste no servidor.
+  const correrQuatro = useCallback(async (modo: 'dia' | 'semana') => {
+    if (busy) return;
+    setBusy(true);
+    const alvo: { id: ContaId; ep: string }[] = [
+      { id: 'mae', ep: 'gerar-mae' }, { id: 'ver', ep: 'gerar-conta' },
+      { id: 'vir', ep: 'gerar-conta' }, { id: 'viver', ep: 'gerar-conta' },
+    ];
+    let total = 0;
+    try {
+      for (const a of alvo) {
+        setMsg(`${modo === 'dia' ? 'A testar 1 dia' : 'A gerar a semana'} · ${a.id}…`);
+        const body = modo === 'dia' ? { conta: a.id, dia: dias[0]?.data, offset: off } : { conta: a.id, offset: off, semanas: 1 };
+        const r = await fetch(`/api/admin/metodo/${a.ep}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok) total += j.gerados ?? 0;
+      }
+      setMsg(`${modo === 'dia' ? 'Teste de 1 dia' : 'Semana'} das 4 contas: ${total} posts. Vê em cada conta (tabs).`);
+      recarregar();
+    } catch (e) { setMsg(String(e)); }
+    finally { setBusy(false); }
+  }, [busy, dias, off, recarregar]);
+
   const inicio = dias[0]?.data ?? '';
   const gerarSerie = useCallback(async (serie: 'vcsabia' | 'hojeemmim', rotulo: string) => {
     if (busy || !inicio) return;
@@ -112,7 +136,9 @@ function PlanoInner() {
             <button onClick={() => setOff((o) => Math.max(offStart, o - 1))} disabled={off <= offStart} className="px-2.5 py-1 rounded-lg border border-white/20 disabled:opacity-30">◀</button>
             <span className="opacity-80">semana {off - offStart + 1}/13{dias[0]?.data ? ` · ${dias[0].data.slice(8)}/${dias[0].data.slice(5, 7)}` : ''}{face ? ` · ${face.titulo}` : ''}</span>
             <button onClick={() => setOff((o) => Math.min(offFim, o + 1))} disabled={off >= offFim} className="px-2.5 py-1 rounded-lg border border-white/20 disabled:opacity-30">▶</button>
-            <button onClick={gerar} disabled={busy} className="ml-2 px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>{busy ? 'a gerar…' : 'gerar a semana (texto)'}</button>
+            <button onClick={() => correrQuatro('dia')} disabled={busy} title="gera 1 dia (manhã + tarde) nas 4 contas, para testar antes de gastar créditos" className="ml-2 px-3 py-1.5 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-50">{busy ? '…' : '🔍 testar 1 dia · 4 contas'}</button>
+            <button onClick={() => correrQuatro('semana')} disabled={busy} title="gera a semana toda nas 4 contas de uma vez" className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>{busy ? 'a gerar…' : '✦ gerar a semana · 4 contas'}</button>
+            <button onClick={gerar} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">só esta conta</button>
             {ehMae && <>
               <button onClick={() => gerarSerie('vcsabia', 'vc sabia')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">vc sabia</button>
               <button onClick={() => gerarSerie('hojeemmim', 'hoje em mim')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">hoje em mim</button>

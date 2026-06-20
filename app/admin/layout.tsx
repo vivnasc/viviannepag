@@ -61,13 +61,13 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     cor: '#d8b25a',
     itens: [
       { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
+      { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
     ],
   },
   {
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
       { href: '/admin/metodo/mae', label: 'cartas + não normalizes' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
@@ -77,7 +77,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'ver.soltar',
     cor: '#cdd8df',
     itens: [
-      { href: '/admin/metodo/mae-plano?conta=ver', label: 'plano da semana' },
       { href: '/admin/metodo/ver', label: 'produzir · o Espelho' },
     ],
   },
@@ -85,7 +84,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vir.soltar',
     cor: '#e8bd84',
     itens: [
-      { href: '/admin/metodo/mae-plano?conta=vir', label: 'plano da semana' },
       { href: '/admin/metodo/vir', label: 'produzir · a Carta' },
     ],
   },
@@ -93,7 +91,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'viver.soltar',
     cor: '#cfe0a0',
     itens: [
-      { href: '/admin/metodo/mae-plano?conta=viver', label: 'plano da semana' },
       { href: '/admin/metodo/viver', label: 'produzir · o Repara' },
     ],
   },
