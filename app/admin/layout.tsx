@@ -65,7 +65,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/metodo/mae', label: 'cartas + não normalizes' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
-      { href: '/admin/publicar', label: 'agenda · publicar' },
     ],
   },
   {
