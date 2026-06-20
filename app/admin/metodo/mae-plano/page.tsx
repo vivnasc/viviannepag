@@ -34,7 +34,7 @@ export default function MaePlanoPage() {
     try {
       const r = await fetch('/api/admin/metodo/gerar-mae', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offset: off, semanas: 1 }) });
       const j = await r.json();
-      setMsg(r.ok ? `${j.gerados ?? 0} posts gerados. Vê-os em @vivianne.dos.santos (manhã = cartas, tarde = não normalizes), gera as imagens em falta e renderiza.` : `erro: ${j.erro ?? ''} ${j.detalhe ?? ''}`);
+      setMsg(r.ok ? `${j.gerados ?? 0} posts gerados. Vê-os na barra em "cartas + não normalizes" (manhã = cartas, tarde = não normalizes); lá geras as imagens em falta e renderizas. Depois, "agenda · publicar".` : `erro: ${j.erro ?? ''} ${j.detalhe ?? ''}`);
     } catch (e) { setMsg(String(e)); }
     finally { setBusy(false); }
   }, [off, busy]);
@@ -57,7 +57,7 @@ export default function MaePlanoPage() {
     await gerar();
     await gerarSerie('vcsabia', 'vc sabia');
     await gerarSerie('hojeemmim', 'hoje em mim');
-    setMsg('Semana toda gerada (método + séries). Os carrosséis geram-se na página deles. Depois: agenda → aprova → publica.');
+    setMsg('Semana toda gerada (método + séries). Vê em "cartas + não normalizes" e nas séries; os carrosséis na página deles. Depois: "agenda · publicar" → aprova → publica.');
   }, [busy, gerar, gerarSerie]);
 
   return (
