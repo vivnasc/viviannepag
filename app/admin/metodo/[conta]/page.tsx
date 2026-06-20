@@ -471,41 +471,33 @@ export default function MetodoContaPage() {
       <div className="max-w-4xl mx-auto">
         <Link href="/admin/metodo" className="text-[0.75rem] opacity-60 hover:opacity-100">← Método VS</Link>
         <header className="mt-3 mb-6 rounded-2xl border border-white/10 p-5" style={{ background: `${conta.paleta.bg1}` }}>
-          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: conta.cor }}>
+          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#d8b25a' }}>
             @{conta.handle} <span className="opacity-70 text-base text-[#F2E8DC]">· {conta.movimento}, {conta.essencia}</span>
           </h1>
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
-            <button onClick={() => gerarLote(2)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>gerar 2 semanas (texto)</button>
+            <button onClick={() => gerarLote(2)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>gerar 2 semanas (texto)</button>
             {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
-            {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: conta.cor, color: conta.cor }}>📅 Plano da semana (ver a ordem) →</Link>}
+            {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>📅 Plano da semana (ver a ordem) →</Link>}
             {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
           </div>
           <p className="mt-1 text-[0.68rem] opacity-50">1) Gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). 2) Revês e limpas. 3) Só então "gerar imagens em falta" (paga imagem só das que ficam). Podes sair que continua.</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
-            <span className="opacity-80">Gerados: <b style={{ color: conta.cor }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
+            <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
             {semData > 0 && <button onClick={organizar} disabled={orgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{orgBusy ? 'a organizar…' : `organizar por dias (${semData})`}</button>}
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
-            {geradosConta.length > 0 && <button onClick={melhorarLote} disabled={melLoteBusy || ambiguas === 0} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{melLoteBusy ? 'a melhorar…' : ambiguas === 0 ? 'sem ambíguas' : `melhorar ambíguas (${ambiguas})`}</button>}
-            {geradosConta.length > 0 && <button onClick={() => animarFaltam(faltamClip)} disabled={animarLoteBusy || !faltamClip.length} title="dispara (Kling) os clips em falta de todos os posts — ~$0.35 por clip; correm no servidor, podes sair" className="px-3 py-1.5 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarLoteBusy ? '🎬 a disparar…' : `🎬 animar clips em falta (${faltamClip.length})`}</button>}
-            {aAnimar > 0 && <button onClick={colher} title="vai buscar os clips que já ficaram prontos no servidor" className="px-3 py-1.5 rounded-lg border border-emerald-400/30 text-emerald-300/90">🎬 a animar {aAnimar}… (colher prontos)</button>}
-            {geradosConta.length > 0 && <button onClick={recuperarClips} disabled={recuperarBusy} title="vai ao Replicate buscar TODOS os clips pagos que ficaram por guardar (mesmo os que pareciam falhados) — nada do que pagaste se perde" className="px-3 py-1.5 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{recuperarBusy ? '♻️ a recuperar…' : '♻️ recuperar clips pagos'}</button>}
-            <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
+            {geradosConta.length > 0 && <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
-            </button>
+            </button>}
             {geradosConta.length > 0 && (
               <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 px-2 py-1">
                 <span className="opacity-70">hora:</span>
                 <input type="time" value={horaInput} onChange={(e) => setHoraInput(e.target.value)} className="bg-transparent text-[#F2E8DC] outline-none [color-scheme:dark]" />
-                <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: conta.cor, color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
+                <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
               </span>
             )}
-            {geradosConta.length > 0 && (
-              <button onClick={arrumarHoras} disabled={horaBusy} title="manhã (frase) às 11h, tarde (motor) às 17h" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{horaBusy ? '…' : '🕐 arrumar (manhã 11h · tarde 17h)'}</button>
-            )}
-            {geradosConta.length > 0 && <button onClick={reporLegendas} disabled={reporBusy} title="repor as legendas sem o funil de venda (Fase 1)" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{reporBusy ? 'a repor…' : 'repor legendas (Fase 1)'}</button>}
             {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
           </div>
         </header>
@@ -518,7 +510,7 @@ export default function MetodoContaPage() {
             <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Gerados · calendário <span className="opacity-40">· {geradosVista.length}</span></h2>
             <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem]">
               <div className="inline-flex rounded-lg border border-white/15 overflow-hidden">
-                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? conta.cor : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã (11h) · {nManha}</button>
+                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? '#d8b25a' : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã (11h) · {nManha}</button>
                 <button onClick={() => setVista('tarde')} className="px-3 py-1.5" style={{ background: vista === 'tarde' ? '#EBAE4A' : 'transparent', color: vista === 'tarde' ? '#0F0F1A' : '#F2E8DC' }}>🌙 Tarde (17h) · {nTarde}</button>
               </div>
               <label className="inline-flex items-center gap-1.5 opacity-80 cursor-pointer">
@@ -548,7 +540,7 @@ export default function MetodoContaPage() {
                           <div key={e.slug} className={`relative mb-1 rounded-md ${sel.has(e.slug) ? 'ring-2 ring-rose-400' : ''}`}>
                             {/* hora + período: manhã (frase) vs tarde (motor dramático), para não misturar */}
                             <span className="absolute bottom-1 left-1 z-10 text-[0.5rem] px-1 py-0.5 rounded" style={{ background: (e.hora ?? '') >= '15:00' ? 'rgba(235,174,74,0.9)' : 'rgba(0,0,0,0.7)', color: (e.hora ?? '') >= '15:00' ? '#0F0F1A' : '#F2E8DC' }} title={(e.hora ?? '') >= '15:00' ? 'tarde · motor dramático' : 'manhã'}>{(e.hora ?? '').slice(0, 5) || '—'}</span>
-                            <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${conta.cor}66`}` }}>
+                            <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${'#d8b25a'}66`}` }}>
                               {e.conceito === 'Carta de renomear'
                                 ? <CartaSlide texto={e.texto} conta={conta} capa prog={1} />
                                 : <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} veuReveal={e.veuReveal ?? undefined} imageUrl={e.imageUrl ?? undefined} prog={1} />}
@@ -570,7 +562,7 @@ export default function MetodoContaPage() {
                 <p className="text-[0.7rem] opacity-60 mb-1.5">Sem data ({semDataList.length}): carrega &quot;organizar por dias&quot; no topo para as encaixar no calendário.</p>
                 <div className="flex flex-wrap gap-1">
                   {semDataList.map((e) => (
-                    <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="text-[0.58rem] text-left rounded px-1.5 py-1 max-w-[160px] truncate" style={{ background: `${conta.cor}26` }}>{e.texto}</button>
+                    <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="text-[0.58rem] text-left rounded px-1.5 py-1 max-w-[160px] truncate" style={{ background: `${'#d8b25a'}26` }}>{e.texto}</button>
                   ))}
                 </div>
               </div>
@@ -708,7 +700,7 @@ export default function MetodoContaPage() {
               <p className="text-[0.66rem] uppercase tracking-wider opacity-50 mb-1">Legenda (edita à mão)</p>
               <textarea value={legendaTxt} onChange={(e) => setLegendaTxt(e.target.value)} rows={7} className="w-full rounded-lg border border-white/15 bg-black/30 p-2 text-[0.78rem] leading-relaxed outline-none focus:border-white/35" />
               <div className="mt-1.5 flex justify-end">
-                <button onClick={() => guardarLegenda(detalhe.slug)} disabled={legBusy || legendaTxt === (detalhe.legenda ?? '')} className="px-2.5 py-1 rounded-lg disabled:opacity-40 text-[0.72rem]" style={{ background: conta.cor, color: '#0F0F1A' }}>{legBusy ? '…' : 'guardar legenda'}</button>
+                <button onClick={() => guardarLegenda(detalhe.slug)} disabled={legBusy || legendaTxt === (detalhe.legenda ?? '')} className="px-2.5 py-1 rounded-lg disabled:opacity-40 text-[0.72rem]" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{legBusy ? '…' : 'guardar legenda'}</button>
               </div>
             </div>
           </div>
