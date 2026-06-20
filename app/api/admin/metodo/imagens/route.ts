@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS, fundoDaConta, ContaId } from '@/lib/metodo/contas';
+import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
@@ -70,9 +70,9 @@ export async function POST(req: Request) {
     if (r.theme?.metodo?.conta !== contaId) continue;
     for (const s of r.dias?.[0]?.slides ?? []) if (s.notaVisual) evitar.push(assuntoCurto(s.notaVisual));
   }
-  async function promptDe(i: number, frase?: string): Promise<string> {
+  async function promptDe(i: number, frase?: string, veu?: VeuNome): Promise<string> {
     if (apiKey) {
-      try { const p = await gerarFundoIA(conta, evitar, apiKey, frase); evitar.push(assuntoCurto(p)); return p; }
+      try { const p = await gerarFundoIA(conta, evitar, apiKey, frase, 'contemplativo', veu); evitar.push(assuntoCurto(p)); return p; }
       catch { /* cai no fallback abaixo */ }
     }
     return fundoDaConta(conta, evitar.length + i);
@@ -84,7 +84,8 @@ export async function POST(req: Request) {
   // pedir várias ao mesmo tempo dava 429 em todas. Sequencial respeita o limite.
   for (let i = 0; i < lote.length; i++) {
     const { row, slide } = lote[i];
-    const prompt = await promptDe(i, slide.texto); // a imagem encarna a FRASE deste slide
+    const veu = ((row.theme?.metodo as { veu?: string } | undefined)?.veu ?? undefined) as VeuNome | undefined;
+    const prompt = await promptDe(i, slide.texto, veu); // imagem encarna a FRASE; COR = véu do dia
     const { url, erro } = await fundoImagem(prompt, row.slug);
     if (!url) { if (erro) ultimoErro = erro; continue; }
     slide.imageUrl = url;

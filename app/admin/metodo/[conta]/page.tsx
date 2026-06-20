@@ -16,9 +16,21 @@ const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
 type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
 
-const TIPO_LABEL: Record<string, string> = { reconhecimento: 'Reconhecimento', revelacao: 'Revelação', manifesto: 'Manifesto' };
-// pronomes ambíguos (igual ao servidor) para contar/assinalar as que precisam de melhorar
-const AMBIG = /\b(ela|ele|elas|eles|dela|dele|delas|deles|isso|isto|aquilo|aquela|aquele|disso|nisso)\b/i;
+const TIPO_LABEL: Record<string, string> = {
+  carta: 'Carta · Sou Aquela', naonormalizes: 'Não normalizes', cena: 'A cena',
+  espelho: 'O Espelho', cartaRenomear: 'Carta de renomear', repara: 'Repara',
+};
+// O QUE CADA FORMATO PRECISA (não replicar botões sem pensar no formato — regra
+// da Vivianne): todos são texto-sobre-imagem, logo imagem SIM; voz NÃO em nenhum
+// (todos os registos dizem "sem voz"). Som ambiente só nos reels que MEXEM (cena ·
+// não normalizes · espelho), nunca nas cartas que se LÊEM nem no sussurro do Repara.
+// A carta de renomear é tipográfica (não Flux): nem imagem nem som.
+const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean }> = {
+  carta: { imagem: true, som: false }, naonormalizes: { imagem: true, som: true },
+  cena: { imagem: true, som: true }, espelho: { imagem: true, som: true },
+  cartaRenomear: { imagem: false, som: false }, repara: { imagem: true, som: false },
+};
+const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false };
 const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
 export default function MetodoContaPage() {
@@ -30,7 +42,6 @@ export default function MetodoContaPage() {
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [sel, setSel] = useState<Set<string>>(new Set());
-  const [melBusy, setMelBusy] = useState<string | null>(null);
   // ORGANIZAÇÃO: o calendário mostra UM período de cada vez (manhã = frase 11h;
   // tarde = motor 17h), nunca os dois amontoados. E esconde os publicados.
   const [vista, setVista] = useState<'manha' | 'tarde'>('manha');
@@ -93,19 +104,6 @@ export default function MetodoContaPage() {
     finally { setImgBusy(false); recarregar(); }
   }, [conta, imgBusy, recarregar]);
 
-  // organizar: dá data (encaixa no plano por tipo->dia) aos posts sem data.
-  const [orgBusy, setOrgBusy] = useState(false);
-  const organizar = useCallback(async () => {
-    if (!conta || orgBusy) return;
-    setOrgBusy(true); setErro(null);
-    try {
-      const r = await fetch('/api/admin/metodo/organizar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setMsg(`${j.datados ?? 0} posts organizados por dia.`);
-    } catch (e) { setErro(String(e)); }
-    finally { setOrgBusy(false); recarregar(); }
-  }, [conta, orgBusy, recarregar]);
 
   // hora de publicação em MASSA: a Vivianne quer as frases de manhã (11h).
   const [horaInput, setHoraInput] = useState('11:00');
@@ -122,20 +120,6 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setHoraBusy(false); }
   }, [conta, horaBusy, horaInput, recarregar]);
-  // ARRUMA por período: manhã (frase, 2 faces) às 11h, tarde (motor) às 17h.
-  const arrumarHoras = useCallback(async () => {
-    if (!conta || horaBusy) return;
-    setHoraBusy(true); setErro(null); setMsg(null);
-    try {
-      const r = await fetch('/api/admin/metodo/hora', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, auto: true }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setMsg(`${j.mudados ?? 0} posts arrumados: manhã às 11h, tarde às 17h.`);
-      recarregar();
-    } catch (e) { setErro(String(e)); }
-    finally { setHoraBusy(false); }
-  }, [conta, horaBusy, recarregar]);
-
   // legenda: editar à mão a legenda de UM post (a Vivianne corrige o texto da
   // publicação). E repor TODAS (Fase 1, sem funil) de uma vez.
   const [legendaTxt, setLegendaTxt] = useState('');
@@ -152,21 +136,6 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setLegBusy(false); }
   }, [legBusy, legendaTxt, recarregar]);
-  const [reporBusy, setReporBusy] = useState(false);
-  const reporLegendas = useCallback(async () => {
-    if (!conta || reporBusy) return;
-    if (typeof window !== 'undefined' && !window.confirm('Repor a legenda de TODOS os posts desta conta (Fase 1, sem "Comenta X / manual na bio")? As edições manuais serão substituídas.')) return;
-    setReporBusy(true); setErro(null); setMsg(null);
-    try {
-      const r = await fetch('/api/admin/metodo/legendas-repor', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setMsg(`${j.repostos ?? 0} legendas repostas (sem funil). Edita à mão as que quiseres afinar.`);
-      recarregar();
-    } catch (e) { setErro(String(e)); }
-    finally { setReporBusy(false); }
-  }, [conta, reporBusy, recarregar]);
-
   // apagar TUDO desta conta (recomeçar do zero).
   const [apagarBusy, setApagarBusy] = useState(false);
   const apagarTudo = useCallback(async () => {
@@ -225,26 +194,6 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
-  // melhorar EM LOTE: reescreve todas as ambíguas desta conta, repetindo até acabar.
-  const [melLoteBusy, setMelLoteBusy] = useState(false);
-  const melhorarLote = useCallback(async () => {
-    if (!conta || melLoteBusy) return;
-    setMelLoteBusy(true); setErro(null);
-    let total = 0;
-    try {
-      for (let pass = 0; pass < 20; pass++) {
-        const r = await fetch('/api/admin/metodo/melhorar-lote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id }) });
-        const j = await r.json();
-        if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); break; }
-        total += j.feitas ?? 0;
-        setMsg(`Frases melhoradas: ${total}${j.restantes ? `, faltam ${j.restantes}…` : ''}.`);
-        recarregar();
-        if ((j.feitas ?? 0) === 0 || (j.restantes ?? 0) === 0) break;
-      }
-    } catch (e) { setErro(String(e)); }
-    finally { setMelLoteBusy(false); recarregar(); }
-  }, [conta, melLoteBusy, recarregar]);
-
   // outra imagem: regenera só a imagem (variação nova), mantém o texto. Para
   // SUBSTITUIR uma imagem que não se quer, sem descartar o post.
   const [novaImgBusy, setNovaImgBusy] = useState<string | null>(null);
@@ -297,23 +246,6 @@ export default function MetodoContaPage() {
     } catch { /* tenta na próxima */ }
   }, [recarregar]);
 
-  // RECUPERAR clips (zero tolerância a perder clips pagos): força a buscar ao
-  // Replicate TODAS as previsões pagas que ficaram por guardar — mesmo as que
-  // pareciam falhadas. Nada do que pagaste se perde.
-  const [recuperarBusy, setRecuperarBusy] = useState(false);
-  const recuperarClips = useCallback(async () => {
-    if (recuperarBusy) return;
-    setRecuperarBusy(true); setErro(null); setMsg('A recuperar clips pagos no Replicate…');
-    try {
-      const r = await fetch('/api/admin/metodo/colher', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ force: true }) });
-      const j = await r.json().catch(() => ({}));
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else setMsg(`Recuperação: ${j.colhidos ?? 0} clip(s) recuperado(s)${j.pendentes ? `, ${j.pendentes} ainda a processar` : ''}.`);
-      recarregar();
-    } catch (e) { setErro(String(e)); }
-    finally { setRecuperarBusy(false); }
-  }, [recuperarBusy, recarregar]);
-
   // colhe ao abrir (apanha o que ficou pronto enquanto saíste) e, enquanto houver
   // faces a animar, vai colhendo a cada 15s — o clip aparece sozinho na página.
   const haPendentes = Object.values(estado).some((e) => e.clipPend || e.clipPend2);
@@ -346,51 +278,8 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
-  // melhorar: reescreve só o texto (tira ambiguidade), mantém a imagem.
-  const melhorar = useCallback(async (slug: string) => {
-    if (melBusy) return;
-    setMelBusy(slug); setErro(null);
-    try {
-      const r = await fetch('/api/admin/metodo/melhorar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else { setMsg(`Reescrito: «${j.texto}»`); recarregar(); }
-    } catch (e) { setErro(String(e)); }
-    finally { setMelBusy(null); }
-  }, [melBusy, recarregar]);
-
-  // TEXTO NOVO mantendo a IMAGEM: frase nova na voz certa da conta (mãe = Dualidade),
-  // para destravar "imagem boa, texto mau" sem perder a imagem nem gastar imagem.
-  const [txtBusy, setTxtBusy] = useState<string | null>(null);
-  const textoNovo = useCallback(async (slug: string) => {
-    if (txtBusy) return;
-    setTxtBusy(slug); setErro(null); setMsg(null);
-    try {
-      const r = await fetch('/api/admin/metodo/texto-novo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
-      const j = await r.json();
-      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else { setMsg(`Texto novo (imagem mantida): «${j.texto}»`); setDetalhe((d) => (d && d.slug === slug ? { ...d, texto: j.texto, conceito: j.conceito ?? d.conceito, videoUrl: null } : d)); recarregar(); }
-    } catch (e) { setErro(String(e)); }
-    finally { setTxtBusy(null); }
-  }, [txtBusy, recarregar]);
-
-  // VOZ (teste): gera a tua voz (ElevenLabs) a LER o texto, para ouvires se o
-  // sotaque sai fiel ANTES de usar. Guarda em vozUrl; ouves no player da modal.
-  const [vozBusy, setVozBusy] = useState<string | null>(null);
-  const gerarVozTeste = useCallback(async (slug: string) => {
-    if (vozBusy) return;
-    setVozBusy(slug); setErro(null); setMsg('A gerar a tua voz (ElevenLabs)…');
-    try {
-      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
-      const j = await r.json();
-      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
-      else { setMsg('Voz gerada. Ouve no player e vê se o sotaque sai fiel.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, vozUrl: j.vozUrl } : d)); recarregar(); }
-    } catch (e) { setErro(String(e)); setMsg(null); }
-    finally { setVozBusy(null); }
-  }, [vozBusy, recarregar]);
-
-  // SOM (ambiente dramático, ElevenLabs sound-generation): gera/regenera o som de
-  // fundo do post da tarde. Ouves no player. NÃO é a voz.
+  // SOM (ambiente, ElevenLabs sound-generation): gera/regenera o som de fundo do
+  // reel (só nos formatos que MEXEM). Ouves no player. NÃO é voz (não há voz).
   const [somBusy, setSomBusy] = useState<string | null>(null);
   const gerarSomTeste = useCallback(async (slug: string) => {
     if (somBusy) return;
@@ -427,16 +316,14 @@ export default function MetodoContaPage() {
 
   // tudo o que já foi gerado para esta conta (inclui os do lote/IA), para feedback e render.
   // ordem ESTÁVEL (data, depois slug): os cartões não saltam de sítio quando a
-  // lista recarrega após melhorar/descartar/gerar.
+  // lista recarrega após gerar/descartar/render.
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   // "falta clip" = tem imagem, não tem clip E não está a animar (pendente conta como já tratado).
   const faltamClip = geradosConta.filter((e) => (e.imageUrl && !e.clip && !e.clipPend) || (e.imageUrl2 && !e.clip2 && !e.clipPend2));
   const aAnimar = geradosConta.filter((e) => e.clipPend || e.clipPend2).length;
   const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
-  const ambiguas = geradosConta.filter((e) => e.tipo === 'reconhecimento' && AMBIG.test(e.texto)).length;
 
-  const semData = geradosConta.filter((e) => !e.agendadoEm).length;
   // PERÍODO de um post: tarde = motor (nbeats) ou hora >= 15h; senão manhã.
   const ehTardePost = (e: EstadoPost) => (e.hora ?? '') >= '13:00'; // por HORA (não por subtipo): manhã < 13h, tarde >= 13h
   const nManha = geradosConta.filter((e) => !ehTardePost(e)).length;
@@ -486,7 +373,6 @@ export default function MetodoContaPage() {
           <p className="mt-1 text-[0.68rem] opacity-50">1) Gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). 2) Revês e limpas. 3) Só então "gerar imagens em falta" (paga imagem só das que ficam). Podes sair que continua.</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
             <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
-            {semData > 0 && <button onClick={organizar} disabled={orgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{orgBusy ? 'a organizar…' : `organizar por dias (${semData})`}</button>}
             {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
             {geradosConta.length > 0 && <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
@@ -560,7 +446,7 @@ export default function MetodoContaPage() {
             )}
             {semDataList.length > 0 && (
               <div className="mt-4">
-                <p className="text-[0.7rem] opacity-60 mb-1.5">Sem data ({semDataList.length}): carrega &quot;organizar por dias&quot; no topo para as encaixar no calendário.</p>
+                <p className="text-[0.7rem] opacity-60 mb-1.5">Sem data ({semDataList.length}): posts antigos sem dia. Descarta-os e gera a semana de novo (já saem com a data certa).</p>
                 <div className="flex flex-wrap gap-1">
                   {semDataList.map((e) => (
                     <button key={e.slug} onClick={() => setDetalhe(e)} title={e.texto} className="text-[0.58rem] text-left rounded px-1.5 py-1 max-w-[160px] truncate" style={{ background: `${'#d8b25a'}26` }}>{e.texto}</button>
@@ -568,7 +454,7 @@ export default function MetodoContaPage() {
                 </div>
               </div>
             )}
-            <p className="mt-2 text-[0.62rem] opacity-40">Clica num post para ver grande e agir (renderizar · melhorar · descartar). Barra à esquerda: verde = MP4 pronto, vermelho = sem imagem.</p>
+            <p className="mt-2 text-[0.62rem] opacity-40">Clica num post para ver grande e agir (imagem · animar · renderizar · descartar). Barra à esquerda: verde = MP4 pronto, vermelho = sem imagem.</p>
           </section>
         )}
       </div>
@@ -593,10 +479,10 @@ export default function MetodoContaPage() {
               </div>
             )}
             {detalhe.subtipo === 'nbeats' ? (
-              // TARDE · motor dramático: formato PRÓPRIO (N beats sobre 1 cena), não 2 faces.
+              // formato PRÓPRIO de cada peça: N beats sobre 1 cena (não 2 faces).
               <div>
                 <div className="flex items-center justify-center gap-2 mb-1">
-                  <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">tarde · motor{detalhe.formato ? ` · ${detalhe.formato}` : ''}</span>
+                  <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.conceito ?? 'a cena'}</span>
                   <span className="text-[0.55rem] opacity-50">{detalhe.beats.length} beats sobre 1 cena</span>
                 </div>
                 <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={detalhe.clip ?? undefined} conta={conta} anim="reveal" prog={1} />
@@ -656,44 +542,29 @@ export default function MetodoContaPage() {
                 ); })()}
               </div>
             )}
+            {/* Botões POR FORMATO (cada um só o que serve a peça — regra da Vivianne).
+                imagem: todos os visuais (carta de renomear é tipográfica, não tem).
+                voz: nenhum (todos os formatos são "sem voz"). som: só os que mexem. */}
+            {(() => { const cap = capFormato(detalhe.tipo); return (
             <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
-              {(() => { const tarde = detalhe.subtipo === 'nbeats' || detalhe.subtipo === 'visual'; return <>
-              {detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima a imagem (Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : tarde ? '🎬 animar (a cena)' : '🎬 animar (clips das faces)'}</button>}
+              {cap.imagem && detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima a imagem (Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (a cena)'}</button>}
               {detalhe.videoUrl
                 ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
                 : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
-              {/* botões SÓ da manhã (na tarde criam confusão e não se aplicam) */}
-              {!tarde && (() => {
-                const faltaFace2 = !!detalhe.texto2 && (!detalhe.imageUrl || !detalhe.imageUrl2);
-                const label = !detalhe.imageUrl ? 'gerar imagem' : faltaFace2 ? 'gerar 2.ª imagem' : 'outra imagem';
-                return <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={faltaFace2 ? 'gera a imagem da face que falta (mantém a que já tens)' : detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : label}</button>;
-              })()}
-              {!tarde && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>}
-              {!tarde && <button onClick={() => textoNovo(detalhe.slug)} disabled={txtBusy === detalhe.slug} title="frase nova na voz da conta, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{txtBusy === detalhe.slug ? '…' : 'texto novo'}</button>}
-              {!tarde && <button onClick={() => melhorar(detalhe.slug)} disabled={melBusy === detalhe.slug} title="afina a frase atual, mantém a imagem" className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{melBusy === detalhe.slug ? '…' : 'melhorar'}</button>}
-              <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="gera a TUA voz (ElevenLabs) a ler o texto, para ouvires se o sotaque sai fiel" className="px-2.5 py-1 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{vozBusy === detalhe.slug ? '🎙️ a gerar voz…' : '🎙️ gerar voz (teste)'}</button>
-              <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="gera o som ambiente dramático (ElevenLabs) de fundo do reel" className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{somBusy === detalhe.slug ? '🔊 a gerar som…' : '🔊 gerar som'}</button>
-              </>; })()}
+              {cap.imagem && <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : !detalhe.imageUrl ? 'gerar imagem' : 'outra imagem'}</button>}
+              {cap.imagem && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>}
+              {cap.som && <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="gera o som ambiente (ElevenLabs) de fundo do reel" className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{somBusy === detalhe.slug ? '🔊 a gerar som…' : '🔊 gerar som'}</button>}
               <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
               <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
             </div>
-            {(detalhe.vozUrl || detalhe.som) && (
-              <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2 space-y-2">
-                {detalhe.vozUrl && (
-                  <div className="text-center">
-                    <p className="text-[0.58rem] uppercase tracking-wider text-sky-300/90 mb-1">🎙️ a tua voz (ouve o sotaque)</p>
-                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                    <audio src={detalhe.vozUrl} controls className="w-full" />
-                    <p className="text-[0.55rem] opacity-40 mt-1">se o sotaque variar, não uses — dizes-me e tiramos a voz.</p>
-                  </div>
-                )}
-                {detalhe.som && (
-                  <div className="text-center">
-                    <p className="text-[0.58rem] uppercase tracking-wider text-amber-300/90 mb-1">🔊 som da tarde (ambiente)</p>
-                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                    <audio src={detalhe.som} controls className="w-full" />
-                  </div>
-                )}
+            ); })()}
+            {detalhe.som && (
+              <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2">
+                <div className="text-center">
+                  <p className="text-[0.58rem] uppercase tracking-wider text-amber-300/90 mb-1">🔊 som ambiente</p>
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <audio src={detalhe.som} controls className="w-full" />
+                </div>
               </div>
             )}
             <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>

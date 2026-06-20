@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId } from '@/lib/metodo/contas';
+import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
@@ -47,6 +47,7 @@ export async function POST(req: Request) {
   const row = data as Row | null;
   const contaId = (row?.theme?.metodo?.conta ?? '') as ContaId;
   const conta = CONTAS[contaId];
+  const veu = ((row?.theme?.metodo as { veu?: string } | undefined)?.veu ?? undefined) as VeuNome | undefined; // a cor é a do véu do post
   if (!row || !conta) return NextResponse.json({ erro: 'post-desconhecido' }, { status: 404 });
   const slides = row.dias?.[0]?.slides ?? [];
   if (!slides.length) return NextResponse.json({ erro: 'sem-slide' }, { status: 400 });
@@ -84,7 +85,7 @@ export async function POST(req: Request) {
     if (slide.notaVisual) evitar.push(assuntoCurto(slide.notaVisual));
     // PREFERIDO: o Claude escreve um fundo que ENCARNA o texto desta face, diferente dos já usados.
     if (apiKey) {
-      try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto, estilo); }
+      try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto, estilo, veu); }
       catch { /* fica o fallback */ }
     }
     const { url: img, erro } = await fundoImagem(prompt, slug);

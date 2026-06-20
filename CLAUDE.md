@@ -21,6 +21,17 @@ motores diferentes. Não reframes a didática à luz do método nem o contrário
    tem a sua identidade; não achatar tudo a "post"/frase.
 3. **Cada formato no seu formato real** (ver abaixo).
 4. Fazer uma coisa de cada vez, com calma. Não empilhar mudanças.
+5. **LIMPEZA É NOS DOIS LADOS: código E frontend.** Zero tolerância a lixo.
+   Quando se abole um conceito/motor, apagar TAMBÉM os botões, cores, players e
+   UI que já não servem — não só as rotas/libs. Um botão que chama uma rota
+   apagada, ou que pertence a um conceito morto, é lixo igual a código morto.
+   Esta regra é PERMANENTE (a Vivianne teve de a repetir muitas vezes).
+6. **Os botões seguem o FORMATO, não se replicam às cegas.** Cada peça só mostra
+   o que serve aquele formato (ver `CAP_FORMATO` em `app/admin/metodo/[conta]`):
+   imagem em todos os visuais; **voz em nenhum** (todos os formatos são "sem
+   voz"); som ambiente só nos reels que MEXEM (cena · não normalizes · espelho),
+   nunca nas cartas que se LÊEM nem no sussurro do Repara; a carta de renomear é
+   tipográfica (não Flux) — nem imagem nem som.
 
 ## Os TRÊS perfis/produtos (NÃO misturar)
 

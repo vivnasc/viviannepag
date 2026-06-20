@@ -4,6 +4,7 @@
 // reconhecimento nova do véu, na voz dela, sem travessões.
 
 import { VeuNome, Conta } from './contas';
+import { VEU_COR } from './universo';
 import { VEU_SEMENTE } from './veus';
 import { SABER } from './saber';
 import { VEU_FACES } from './veu-faces';
@@ -36,9 +37,13 @@ const FUNDO_REGRAS_DRAMA =
 // conta como fio condutor. Recebe `evitar` = assuntos já usados, para não repetir.
 // É isto que mata a monotonia (substitui a lista fixa fundoDaConta). `estilo`:
 // 'contemplativo' (padrão, manhã) ou 'dramatico' (tarde, alcance).
-export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string, frase?: string, estilo: 'contemplativo' | 'dramatico' = 'contemplativo'): Promise<string> {
+export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string, frase?: string, estilo: 'contemplativo' | 'dramatico' = 'contemplativo', veu?: VeuNome): Promise<string> {
   const a = conta.atmosfera;
-  const corMundo = `${a.prompt}. Sensação: ${a.sensacao}`;
+  // A COR é a do VÉU do dia e SÓ essa (a cor por conta foi ABOLIDA). A conta entra
+  // com os símbolos e o mood, nunca com a cor. Sem véu, cai no mood da conta.
+  const corMundo = veu
+    ? `A COR é a do VÉU de hoje e SÓ essa: ${VEU_COR[veu].prompt} (${VEU_COR[veu].pt}). A conta dá os símbolos e o mood, NUNCA a cor. Mood: ${a.sensacao}`
+    : `${a.prompt}. Sensação: ${a.sensacao}`;
   const evita = evitar.length ? `NÃO repitas nem te aproximes destes assuntos JÁ usados: ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.` : '';
   const sys = estilo === 'dramatico'
     ? `És diretor de arte de uma marca de psicologia (Método VS, @${conta.handle}). Escreves UM prompt de imagem (em inglês) para um reel DRAMÁTICO que para o scroll — sofisticado, hipnótico, nunca clichê.
@@ -56,7 +61,7 @@ Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`
 
 ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
 
-MUNDO desta conta (a PALETA/luz, o fio condutor de identidade): ${a.prompt}. Sensação: ${a.sensacao}. Representa: ${conta.depois}
+PALETA E MUNDO: ${corMundo}. Os SÍMBOLOS são os da conta (mas a COR é a do véu). Representa: ${conta.depois}
 ${frase ? `A FRASE deste post é: «${frase}».
 CONEXÃO IMAGEM↔TEXTO (o mais importante, como nas séries VC Sabia / Hoje em Mim): a imagem tem de ENCARNAR esta frase — uma cena ou objeto concreto que representa o ESTADO ou a METÁFORA por trás dela, NÃO um fundo genérico. A FRASE manda o ASSUNTO; o mundo da conta dá só a PALETA, a luz e o tratamento. Ex.: uma frase sobre adiar a vida → algo que evoque espera/limiar; sobre o corpo → algo do corpo/casa; etc. Concreto, sensorial, sem pessoas.` : `ASSUNTO: cena real e concreta que encarne o significado da conta (interiores, objetos, janelas, água, paisagens, detalhes), variada, sem pessoas.`}
 MOVIMENTO (INVIOLÁVEL — a imagem vai ser ANIMADA depois): a cena TEM de conter, em destaque, pelo menos UM elemento que se mova sozinho de forma natural e contínua — água a ondular, chama/vela a tremer, fumo ou incenso a subir, névoa/neblina a derivar, vapor, mar/ondas, chuva, tecido/cortina ao vento, luz a tremeluzir, brasas, pó num raio de sol, ramos/folhagem ao vento, reflexos na água. É este elemento que dá vida ao vídeo. PROIBIDO uma cena que seja só um objeto parado sem nada vivo (ex.: um casaco pendurado, uma cadeira vazia, um copo de água pousado, um livro fechado): se a metáfora pedir um objeto assim, ENCENA-O sempre com um elemento em movimento à volta (a luz a tremer sobre ele, fumo a passar, a água ao lado a mexer, a cortina atrás ao vento). A metáfora da frase manda o assunto; o movimento é OBRIGATÓRIO na composição.
