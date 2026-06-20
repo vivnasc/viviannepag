@@ -26,7 +26,7 @@ const HORA_NAONORM = '16:00';
 
 type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: null; capa: boolean; conceito: string; contaId: 'mae' };
 
-function montarRow(slug: string, data: string, hora: string, tipo: string, conceito: string, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string) {
+function montarRow(slug: string, data: string, hora: string, tipo: string, conceito: string, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string, personagem?: string) {
   const conta = CONTAS.mae;
   const slides: SlideMetodo[] = beats.map((b, i) => ({
     tipo: 'metodo', texto: limparTravessoes(b.texto), destaque: [], notaVisual: b.imagem ?? '',
@@ -35,16 +35,16 @@ function montarRow(slug: string, data: string, hora: string, tipo: string, conce
   const corpo = slides.map((s) => s.texto).join('\n');
   const tags = hashtagsMetodo(veu);
   const legenda = limparTravessoes(`${corpo}${envio ? `\n\n${envio}` : ''}\n\nMétodo VS\n\n${tags.map((t) => `#${t}`).join(' ')}`);
-  const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? conceito).slice(0, 48), slides, legenda, hashtags: tags }];
+  const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? conceito ?? '').slice(0, 48), slides, legenda, hashtags: tags }];
   return {
     slug,
-    title: (slides[0]?.texto ?? conceito).slice(0, 48),
-    brief: slides[0]?.texto ?? conceito,
+    title: (slides[0]?.texto ?? conceito ?? '').slice(0, 48),
+    brief: slides[0]?.texto ?? conceito ?? '',
     dias,
     theme: {
       formato: 'reel', subtipo: 'nbeats', video: true, mundo: 'autora', marca: conta.marca,
       agendadoEm: data, hora,
-      metodo: { conta: 'mae', tipo, veu },
+      metodo: { conta: 'mae', tipo, veu, ...(personagem ? { personagem } : {}) },
     },
   };
 }
@@ -96,14 +96,22 @@ export async function POST(req: Request) {
     const slugCarta = `metodo-mae-carta-${d.data}`;
     if (fazer(slugCarta)) {
       // CARTA do baralho FIXO (a carta da personagem do dia) — texto travado, sem IA.
+      // conceito '' = o cartão NÃO mostra rótulo interno ("Carta · A Diretora…"); a
+      // FRENTE é a figura + a confissão. A personagem vai no theme para a imagem
+      // saber gerar a FIGURA (carta de baralho), não um fundo genérico.
       const linhas = cartaDoBaralho(personagem.id);
-      if (linhas.length) rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', `Carta · ${personagem.nome}`, veu, linhas.map((l) => ({ texto: l, imagem: '' })), ''));
+      if (linhas.length) rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, linhas.map((l) => ({ texto: l, imagem: '' })), '', personagem.nome));
     }
 
     const slugNN = `metodo-mae-naonorm-${d.data}`;
     if (fazer(slugNN)) {
       try {
-        const sb = await gerarStoryboard('mae', 'profundidade', veu, personagem, apiKey, evitar);
+        // o "não normalizes" TEM de ter vários beats (faca + volta). Se a IA vier
+        // curta (1-2 beats), tenta de novo e fica com a versão mais completa.
+        let sb = await gerarStoryboard('mae', 'profundidade', veu, personagem, apiKey, evitar);
+        if (sb.beats.length < 4) {
+          try { const sb2 = await gerarStoryboard('mae', 'profundidade', veu, personagem, apiKey, evitar); if (sb2.beats.length > sb.beats.length) sb = sb2; } catch { /* fica a 1.ª */ }
+        }
         if (sb.beats.length) { rows.push(montarRow(slugNN, d.data, HORA_NAONORM, 'naonormalizes', 'Não normalizes', veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }

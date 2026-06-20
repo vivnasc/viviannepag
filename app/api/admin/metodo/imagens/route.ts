@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
-import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
+import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -80,11 +80,24 @@ export async function POST(req: Request) {
 
   let feitas = 0;
   let ultimoErro = '';
+  const cartasFeitas = new Set<string>(); // carta = 1 figura por LINHA (todas as faces)
   // UMA de cada vez (NÃO em paralelo): a Replicate limita a ~6/min com burst 1;
   // pedir várias ao mesmo tempo dava 429 em todas. Sequencial respeita o limite.
   for (let i = 0; i < lote.length; i++) {
     const { row, slide } = lote[i];
-    const veu = ((row.theme?.metodo as { veu?: string } | undefined)?.veu ?? undefined) as VeuNome | undefined;
+    const meta = (row.theme?.metodo ?? {}) as { veu?: string; tipo?: string; personagem?: string };
+    // CARTA "Sou Aquela": gera UMA figura (carta de baralho) e usa-a em todas as faces.
+    if (meta.tipo === 'carta') {
+      if (cartasFeitas.has(row.slug)) continue;
+      const prompt = promptCartaFigura(meta.personagem);
+      const { url, erro } = await fundoImagem(prompt, row.slug);
+      if (!url) { if (erro) ultimoErro = erro; continue; }
+      for (const s of row.dias?.[0]?.slides ?? []) { s.imageUrl = url; s.notaVisual = prompt; }
+      const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', row.slug);
+      if (!e2) { feitas += 1; cartasFeitas.add(row.slug); }
+      continue;
+    }
+    const veu = (meta.veu ?? undefined) as VeuNome | undefined;
     const prompt = await promptDe(i, slide.texto, veu); // imagem encarna a FRASE; COR = véu do dia
     const { url, erro } = await fundoImagem(prompt, row.slug);
     if (!url) { if (erro) ultimoErro = erro; continue; }

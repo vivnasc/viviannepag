@@ -37,6 +37,22 @@ const FUNDO_REGRAS_DRAMA =
 // conta como fio condutor. Recebe `evitar` = assuntos já usados, para não repetir.
 // É isto que mata a monotonia (substitui a lista fixa fundoDaConta). `estilo`:
 // 'contemplativo' (padrão, manhã) ou 'dramatico' (tarde, alcance).
+// A FRENTE da carta "Sou Aquela": UMA figura de mulher (o arquétipo da personagem),
+// ilustração PINTADA, enquadramento de carta de oráculo, na veste da mãe (velas,
+// constelações, manuscritos; âmbar/ouro velho/negro estrelado). É uma FIGURA, NÃO um
+// fundo/cena — e SEM texto (as linhas da confissão entram por cima na composição).
+// Determinístico (não gasta IA): a carta tem de sair sempre como carta, não cena.
+export function promptCartaFigura(personagem?: string): string {
+  return [
+    'fine-art painterly illustrated oracle/tarot card, a single dignified woman as a timeless archetype',
+    personagem ? `embodying the figure of "${personagem}"` : '',
+    'serene contemplative portrait, symbolic and calm, elegant posture, seen slightly from afar',
+    'surrounded by lit candles, soft constellations and old manuscripts, warm amber and old-gold light on a deep starry near-black background',
+    'renaissance sfumato, visible painterly fine-grain texture, subtle ornate card framing, one single central female figure, timeless',
+    'NO text, NO letters, NO words, NO numbers, NO watermark, NO logo, NO caption',
+  ].filter(Boolean).join(', ');
+}
+
 export async function gerarFundoIA(conta: Conta, evitar: string[], apiKey: string, frase?: string, estilo: 'contemplativo' | 'dramatico' = 'contemplativo', veu?: VeuNome): Promise<string> {
   const a = conta.atmosfera;
   // A COR é a do VÉU do dia e SÓ essa (a cor por conta foi ABOLIDA). A conta entra

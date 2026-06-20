@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId, type VeuNome } from '@/lib/metodo/contas';
-import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
+import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -51,6 +51,21 @@ export async function POST(req: Request) {
   if (!row || !conta) return NextResponse.json({ erro: 'post-desconhecido' }, { status: 404 });
   const slides = row.dias?.[0]?.slides ?? [];
   if (!slides.length) return NextResponse.json({ erro: 'sem-slide' }, { status: 400 });
+
+  // CARTA "Sou Aquela": é uma carta de baralho, NÃO um fundo. Gera UMA figura da
+  // personagem (ilustração de carta de oráculo) e usa-a em TODAS as faces (as linhas
+  // da confissão revelam-se por cima da mesma figura). Determinístico, sem cena genérica.
+  const meta = (row.theme?.metodo ?? {}) as { tipo?: string; personagem?: string };
+  if (meta.tipo === 'carta') {
+    const prompt = promptCartaFigura(meta.personagem);
+    const { url, erro } = await fundoImagem(prompt, slug);
+    if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro }, { status: 502 });
+    for (const s of slides) { s.imageUrl = url; s.notaVisual = prompt; s.estilo = 'carta'; s.clipUrl = null; s.clipPredId = null; s.clipPend = false; }
+    if (row.dias?.[0]) row.dias[0].videoUrl = null;
+    const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', slug);
+    if (e2) return NextResponse.json({ erro: 'db-update', detalhe: e2.message }, { status: 500 });
+    return NextResponse.json({ ok: true, imageUrl: url, imageUrls: slides.map(() => url) });
+  }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   // evita os assuntos JÁ usados nos OUTROS posts desta conta (não só o deste) —
