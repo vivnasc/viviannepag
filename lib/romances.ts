@@ -130,6 +130,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: at the bottom of the frame, an open handwritten ledger resting on a worn wooden shop counter beside an old brass scale and a few coins, a weathered hand poised over a page with rows of names and figures; warm lamplight over the counter; behind and above, through a shop window, at blue dusk, a small village of terracotta rooftops between soft green mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the quiet weight of debts kept and worth never claimed, intimate and warm`,
   },
   {
+    slug: 'rom-despensa',
+    titulo: 'A Despensa Cheia',
+    tituloEn: 'The Full Pantry',
+    sub: 'um romance de Véspera · Estante III · A Mercearia',
+    estante: 'III · A Mercearia',
+    espelho: 'A mulher que herdou a escassez',
+    capitulos: 12,
+    palavras: 25000,
+    cena: `book cover illustration, vertical composition: a cool stone larder seen from within, wooden shelves rising full of jars of preserves and hanging cured sausages and cloth sacks of flour, dim and orderly; at the bottom, on the edge of a shelf, a single weathered older woman's hand resting half-closed beside one jar that stands open and faintly glowing; through a small doorway behind, at blue dusk, a small village of terracotta rooftops between soft green mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the quiet ache of plenty kept and never tasted, intimate, warm, painterly`,
+  },
+  {
     slug: 'rom-cheias',
     titulo: 'O Homem das Cheias',
     tituloEn: 'The Man the Floods Brought',
