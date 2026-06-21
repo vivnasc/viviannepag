@@ -196,6 +196,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: the interior of an old stone house seen from within, a single great wooden main beam crossing the ceiling, aged and bearing the whole roof, a thin shaft of golden morning light falling across it; below, a long empty family table set for many, and a lone older woman seen from behind standing in the doorway looking out at the bright valley; through the open door a small village of terracotta rooftops between mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the ache and relief of a beam at last setting down its weight, luminous, atmospheric, painterly`,
   },
   {
+    slug: 'rom-estrangeira',
+    titulo: 'A Estrangeira de Cá',
+    tituloEn: 'The Foreigner from Here',
+    sub: 'um romance de Véspera · Estante V · A Mesa Comprida',
+    estante: 'V · A Mesa Comprida',
+    espelho: 'A pessoa que não pertence em lado nenhum',
+    capitulos: 13,
+    palavras: 13000,
+    cena: `book cover illustration, vertical composition: a lone woman seen from behind standing at the edge of a village, one suitcase set down at her feet, looking out over a small village of terracotta rooftops between mountains and a quiet river at warm dawn light; behind her, faint and ghostly in the sky, the rooftops of a distant foreign city dissolving into cloud; two lands meeting in one image, one near and warm, one far and fading; warm lit windows; generous calm sky with empty space at the top third for a title; the ache and resolve of one who belongs to two places and none, choosing at last to take root, luminous, atmospheric, painterly`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',
