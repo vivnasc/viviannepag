@@ -159,20 +159,21 @@ export const CTA_FILOSOFIA = `CTA — o fecho leva UM produto, em tom GENEROSO e
 - VARIA muito: não repitas o mesmo produto na semana, não fiques só num tipo nem só no método, explora universos diferentes.
 - usa nome e link/URL EXACTOS (no campo destaque do slide cta põe a URL).`;
 
-// Brevidade e tom (partilhado): o reel é leitura BREVE e o método é VER E SOLTAR,
-// não só ver a dor. Contrapeso à densidade e à negatividade.
-export const BREVIDADE_E_TOM = `BREVIDADE E TOM (muito importante, o reel é leitura BREVE):
-- CURTO: cada slide lê-se num instante. A PROSA são 1 a 2 frases curtas, nunca um parágrafo denso. O POÉTICO, poucas linhas. Se uma frase se pode encurtar, encurta. Menos é mais.
-- LEVE, não denso: UMA ideia simples por carrossel, com ar à volta. Não empilhes conceitos nem peses a leitura.
-- EQUILÍBRIO luz e sombra: o método é VER E SOLTAR, não só ver a dor. Nomeia o padrão com ternura, mas abre para a luz, o respiro e o alívio. NÃO te afundes na dor nem acumules negatividade: a dor entra só o suficiente para a pessoa se reconhecer, e o carrossel caminha para a esperança e o que se solta. O fecho levanta, não pesa.`;
+// Substância e tom (partilhado): o reel é breve, mas tem de DIZER ALGO REAL.
+// Breve não é oco. Corrige a ronda anterior, em que a brevidade os esvaziou.
+export const BREVIDADE_E_TOM = `SUBSTÂNCIA E TOM (o coração do carrossel, ler com atenção):
+- CHEIO, nunca oco: cada slide tem de DIZER ALGO REAL e concreto, que apetece guardar. A PROSA DESENVOLVE uma ideia (2 a 4 frases), nunca a resume a uma frase vaga. FOGE dos aforismos abstratos que não tocam a vida (ex.: "o que foi visto pode ser nomeado" não diz nada); prefere a cena concreta, o exemplo do dia a dia, a verdade que a pessoa reconhece em si.
+- BREVE mas não esquelético: breve é não ter gordura nem repetição, NÃO é ficar magro até ao osso. Cada palavra puxa o seu peso. Se há para cortar, corta o vazio, nunca a substância. Densidade a mais é mau; vazio também.
+- CONCRETO acima de abstrato: a metáfora (véu, enxerto, raiz) SERVE a mensagem, nunca a esconde. Ancora sempre numa situação real (a voz da mãe que te sai da boca, o sim que devia ser não, a culpa ao deitar). Proibido o hermético, o que só a autora entende.
+- EQUILÍBRIO luz e sombra: o método é VER E SOLTAR, não só a dor. A dor entra só o suficiente para a pessoa se reconhecer, e o carrossel caminha para o respiro e o alívio. O fecho levanta, não pesa, e abre uma escolha, não fecha uma sentença.`;
 
-// Exemplo aprovado pela Vivianne: o NÍVEL de brevidade e de tom a atingir. Não
-// se copiam o tema nem as palavras, copia-se o REGISTO (curto, leve, equilibrado).
-export const EXEMPLO_TOM = `EXEMPLO do NÍVEL de brevidade e de tom (NÃO copies o tema nem as palavras deste exemplo, copia o REGISTO: curto, leve, a dor só o suficiente, a caminhar para o respiro; zero travessões):
-- palavra: COLO | subtitulo: o lugar onde pousas sem teres de merecer
-- gancho (capa): Carregas toda a gente ao colo. E o teu, quem o segura?
-- PROSA: Descansar não é desistir. É confiar que o mundo aguenta um instante sem ti.
-- POÉTICO: Pousa. / O chão já cá estava antes de ti.
-- PRÁTICA: Hoje, deixa uma coisa por fazer. Repara que ninguém cai.
-- POÉTICO (fecho): Há um colo à tua espera. Às vezes é só sentares-te.
-- CTA: Loranne, música contemplativa. "Para esta pausa, põe a tocar e deixa-te ficar." (music.seteveus.space)`;
+// Exemplo aprovado pela Vivianne (ENXERTO): o registo a atingir, breve mas CHEIO
+// e concreto. Não se copiam tema nem palavras, copia-se o REGISTO.
+export const EXEMPLO_TOM = `EXEMPLO do registo a atingir (breve mas CHEIO, concreto, com substância; NÃO copies o tema nem as palavras, copia o REGISTO; zero travessões):
+- palavra: ENXERTO | subtitulo: as vozes que cresceram em ti sem seres tu a plantá-las
+- gancho (capa): Abres a boca para ralhar e sai a voz da tua mãe, com tom e tudo.
+- PROSA: Há frases que dizes e nunca escolheste. Foram enxertadas cedo, por amor ou por medo, e cresceram contigo como se fossem tronco. Mas um enxerto não é a árvore. É um ramo que lhe colaram.
+- POÉTICO: Nem toda a voz que fala por dentro / nasceu dentro de ti.
+- PRÁTICA: Apanha hoje uma frase que repetes muito. Pergunta, sem pressa: de quem é mesmo esta voz? E queres continuar a dizê-la?
+- POÉTICO (fecho): Ver de quem é o enxerto não corta o ramo. / Só te devolve a escolha de o regar, ou não.
+- CTA: O que é meu, o que não é meu (guia). "Para separares, a preto e branco, o que carregas que nunca foi teu." (viviannedossantos.com/loja/guia-01-meu)`;

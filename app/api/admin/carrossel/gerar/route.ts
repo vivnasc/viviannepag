@@ -97,7 +97,7 @@ PALAVRA-DESTAQUE (a regra mais importante para ela):
 
 SLIDES DE CADA DIA (6 slides, nesta ordem):
 1) 'capa': a palavra-destaque do dia (texto = a palavra em maiusculas; titulo = o subtitulo poetico; destaque = O GANCHO que para o scroll nos primeiros segundos: uma verdade tensa e RECONHECIVEL do dia a dia, curta (1-2 linhas), que faz a pessoa pensar "isto sou eu" e querer ver mais. Concreta, do real, nunca abertura suave/abstrata que nao prende (ex.: "Deitas o corpo. A cabeca e que nao se deita." em vez de "Ha um escuro que e o inicio de tudo.")). Fundo escuro/editorial.
-2) 'conteudo' PROSA: reflexao em prosa CURTISSIMA e intima (1-2 frases curtas, nunca um paragrafo denso) (titulo = "PROSA"). Base clara.
+2) 'conteudo' PROSA: prosa que DESENVOLVE uma ideia concreta e intima (2 a 4 frases cheias, nunca um aforismo vago nem um resumo oco) (titulo = "PROSA"). Base clara.
 3) 'conteudo' POETICO: frase poetica espacada com quebras de linha (titulo = "POÉTICO"). Base clara.
 4) 'conteudo' PRATICA: um convite ou pergunta pratica (titulo = "PRÁTICA" ou "HÁBITO DA SEMANA"). Base clara.
 5) 'conteudo' POETICO: fecho poetico que volta a palavra (titulo = "POÉTICO"). Base clara.
