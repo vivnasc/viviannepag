@@ -1,0 +1,13 @@
+## Do livro dos assentos de Véspera
+
+E de tudo se fez registo.
+
+Fica assente que Fartura, filha de gente da vila, nascida no segundo dos anos da fome, abriu a despensa que guardara sessenta anos e fez, com o melhor que nela havia, uma festa em dia nenhum, a que veio a vila, e que se recordou muito depois de ela. Fica assente que comeu, à sua própria mesa, o melhor da sua própria casa, coisa que parece pequena e que lhe levou uma vida inteira, e que é, das que esta Guardiã regista, das mais difíceis que uma pessoa faz: não dar a quem tem fome, que isso o coração ensina, mas comer sem culpa o que se tem, quando se cresceu a aprender que ter é véspera de perder.
+
+Os assentos não costumam guardar festas, que festas há muitas e o livro é dos nascimentos e dos óbitos e dos casamentos, das entradas e das saídas da vida. Mas esta Guardiã, que viu a página da fome e os nomes pequenos que ela levou, entendeu que a festa de Fartura era, à sua maneira, um óbito e um nascimento: o óbito de um medo que entrara naquela casa há três gerações, por uma mão que se fechava à luz de uma lareira, e o nascimento de uma lei nova, a lei de uma casa que aprendeu, tarde mas a tempo, que a despensa é para se encher e esvaziar, e não para se guardar até apodrecer. Morreu, naquela festa, a fome que já não tinha barriga onde morar e que morava no medo; e nasceu, à mesa, uma menina chamada Alegria que há de crescer sem ela, porque a avó, em vez de lha pôr no corpo como lha tinham posto a ela, lhe disse, com pêssegos na mão, come o melhor, que é para hoje.
+
+Quem ler este assento e se reconhecer numa Fartura qualquer, numa despensa cheia diante de uma mesa pobre, numa mão que se fecha sobre o pouco que já é muito, fique a saber o que ela aprendeu e o que esta casa regista: que a abundância não foi feita para se ter, foi feita para se viver; que o melhor guardado para um dia perfeito apodrece à espera dele, porque os dias perfeitos não chegam, fazem-se; e que a coragem maior, para quem herdou o medo de não ter, não é guardar mais: é abrir a mão, pôr na mesa o que se andava a guardar para a desgraça, e fazer disso, entre os que se amam, num domingo igual a tantos, uma festa.
+
+Fartura passou à sua página. A da fome ficou para trás, lida e respeitada, mas para trás. E a fonte do largo continua seca, que as fontes têm o seu tempo e o seu mistério; mas em casa de Fartura, desde aquele domingo, quando se tem, dá-se, e quando se dá, come-se, e o que sobra não se tranca: guarda-se o pouco que há de guardar, e do muito faz-se mesa, que é o que o muito pede, e o que esta vila, livro a livro, vai devagar aprendendo.
+
+E de tudo se fez registo, pela mão da Guardiã, no livro dos assentos de Véspera.
