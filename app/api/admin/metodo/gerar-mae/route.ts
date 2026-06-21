@@ -25,13 +25,13 @@ export const maxDuration = 300;
 const HORA_CARTA = '10:30';
 const HORA_NAONORM = '16:00';
 
-type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: null; capa: boolean; conceito: string; contaId: 'mae' };
+type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: string | null; capa: boolean; conceito: string; contaId: 'mae' };
 
-function montarRow(slug: string, data: string, hora: string, tipo: string, conceito: string, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string, personagem?: string) {
+function montarRow(slug: string, data: string, hora: string, tipo: string, conceito: string, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string, personagem?: string, figuraUrl?: string) {
   const conta = CONTAS.mae;
   const slides: SlideMetodo[] = beats.map((b, i) => ({
-    tipo: 'metodo', texto: limparTravessoes(b.texto), destaque: [], notaVisual: b.imagem ?? '',
-    imageUrl: null, capa: i === 0, conceito: i === 0 ? conceito : '', contaId: 'mae',
+    tipo: 'metodo', texto: limparTravessoes(b.texto), destaque: [], notaVisual: figuraUrl ? 'figura definitiva do baralho' : (b.imagem ?? ''),
+    imageUrl: figuraUrl ?? null, capa: i === 0, conceito: i === 0 ? conceito : '', contaId: 'mae',
   }));
   const corpo = slides.map((s) => s.texto).join('\n');
   const tags = hashtagsMetodo(veu);
@@ -60,6 +60,14 @@ export async function POST(req: Request) {
   const offset = Math.max(-12, Math.min(12, body.offset ?? 0)); // 0 = esta semana
 
   const supabase = getSupabaseAdmin();
+
+  // figuras DEFINITIVAS escolhidas no baralho (por personagem). Se a personagem do dia
+  // já tem figura escolhida, a CARTA nasce já com ela (não é preciso "gerar imagem").
+  let figurasBaralho: Record<string, string> = {};
+  try {
+    const { data: br } = await supabase.from('carousel_collections').select('theme').eq('slug', 'metodo-baralho').maybeSingle();
+    figurasBaralho = ((br?.theme as { figuras?: Record<string, string> } | null)?.figuras) ?? {};
+  } catch { /* sem figuras escolhidas */ }
 
   // memória: anti-repetição (texto da 1.ª linha) + slugs já existentes + publicados.
   const evitar: string[] = [];
@@ -105,7 +113,7 @@ export async function POST(req: Request) {
         // dela (a voz curada), variando de cada vez. Personagem fixa, mensagem nova.
         const semente = cartaDoBaralho(personagem.id);
         const sb = await gerarStoryboard('mae', 'descoberta', veu, personagem, apiKey, evitar, false, semente);
-        if (sb.beats.length) { rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, sb.beats, sb.envio, personagem.nome)); evitar.push(sb.beats[0].texto); }
+        if (sb.beats.length) { rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, sb.beats, sb.envio, personagem.nome, figurasBaralho[personagem.id])); evitar.push(sb.beats[0].texto); }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
 
