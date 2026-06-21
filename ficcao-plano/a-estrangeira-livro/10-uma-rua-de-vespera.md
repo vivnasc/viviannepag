@@ -24,7 +24,11 @@ Soube o caminho, soube a casa, soube de quem era, soube a história da família 
 
 Mas não se ficou pelo caminho. Olhou para a Esperança, perdida no largo com a mala na mão, e viu-se a si própria, na camioneta das cinco e meia, e fez por ela o que a Guardiã fizera por si. Levou-a a tomar um café. Sentou-se com ela. E disse-lhe o que a Guardiã lhe dissera, e o que a fonte lhe ensinara, e o que ela própria aprendera, à força, em dois anos de mala meio feita:
 
-— Tu não és de cá, ainda. Eu também não era. Vais ouvir muita vez que és turista, que falas à estrangeira, que não podes perceber as coisas de cá. Vais ter vontade de fazer a mala à primeira desilusão. Não a faças. Metade desta vila é de gente que voltou, como tu, como eu. Tu não estás sozinha, ainda que te sintas. E a terra a que tu queres pertencer não te vai adotar, porque nenhuma terra adota ninguém. Mas tu podes vir a ser de cá, se ficares, se te deres, se construíres aqui uma vida. A casa não está à tua espera em lado nenhum. Faz-se. E faz-se onde a gente decide ficar.
+— Tu não és de cá, ainda. Eu também não era. Vais ouvir muita vez que és turista, que falas à estrangeira, que não podes perceber as coisas de cá. Vais ter vontade de fazer a mala à primeira desilusão.
+
+— E faço? — perguntou a Esperança, com a chávena nas mãos, a sério. — Volto para trás?
+
+— Não. Olha para mim. Eu quase voltei, três ou quatro vezes. Cada vez que voltava ia recomeçar de fora noutro lado, e noutro lado, à primeira pessoa que me dissesse uma coisa torta, voltava a partir. Andava assim há trinta e oito anos. — Peregrina pousou a mão na mesa, devagar. — Metade desta vila é de gente que voltou, como tu, como eu. Tu não estás sozinha, ainda que te sintas. A terra a que tu queres pertencer não te vai adotar, porque nenhuma terra adota ninguém. Mas tu podes vir a ser de cá, se ficares, se te deres, se construíres aqui uma vida. A casa não está à tua espera em lado nenhum. Faz-se. E faz-se onde a gente decide ficar.
 
 A Esperança ouviu-a com os olhos de quem ouve uma coisa que precisava de ouvir, e Peregrina, ao dizê-lo, percebeu que pertencia agora de uma maneira ainda mais funda, porque pertencer de verdade a uma terra é poder receber nela quem chega, é ser-se, para o que vem de fora, parte do de dentro que o acolhe. Ela, a que nunca pertencera a parte nenhuma, era agora, naquele largo de Véspera, uma raiz já firme onde outra, ainda solta, se podia segurar para começar a sua.
 
