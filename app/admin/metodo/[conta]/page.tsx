@@ -590,6 +590,19 @@ export default function MetodoContaPage() {
                 )}
                 <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a carta revela-se (papel + tipografia), sem imagem Flux</p>
               </div>
+            ) : detalhe.subtipo === 'nbeats' && detalhe.tipo === 'carta' ? (
+              // CARTA "Sou Aquela": UMA carta (a figura) com a confissão a revelar-se por
+              // cima — NÃO é um carrossel de slides separados (foi concebida como 1 carta).
+              <div>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">Carta · Sou Aquela</span>
+                  <span className="text-[0.55rem] opacity-50">1 carta · {detalhe.beats.length} linhas que se revelam</span>
+                </div>
+                <div className="max-w-[230px] mx-auto">
+                  <MetodoSlide texto={(detalhe.beats.length ? detalhe.beats.join('\n') : detalhe.texto)} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={detalhe.clip ?? undefined} conta={conta} anim="reveal" prog={1} />
+                </div>
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">é UMA carta (a figura da personagem); as linhas da confissão revelam-se por cima — não são slides separados.</p>
+              </div>
             ) : detalhe.subtipo === 'nbeats' ? (
               // CARROSSEL VISUAL: cada beat é um SLIDE (cartão), para se VEREM os slides
               // (não só uma lista de texto). Partilham a mesma cena/imagem do post.
