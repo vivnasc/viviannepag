@@ -13,6 +13,18 @@ import { cartaDoBaralho, CARTAS_ESPECIAIS } from '@/lib/metodo/baralho';
 const FONTS = 'font-[system-ui]';
 const COR = '#d8b25a';
 
+// O NOME da carta é escrito pela APP por cima da figura (tipografia fixa) — nunca
+// pelo Flux (que o escreve com erros e estilo variável). Lookup id -> nome.
+const NOMES: Record<string, string> = {
+  ...Object.fromEntries(FAMILIAS.flatMap((f) => f.personagens).map((p) => [p.id, p.nome])),
+  ...Object.fromEntries(CARTAS_ESPECIAIS.map((c) => [c.id, c.nome])),
+};
+function CardNome({ nome }: { nome: string }) {
+  return (
+    <span className="absolute left-1/2 -translate-x-1/2 bottom-[6%] px-2 py-0.5 rounded-sm text-center leading-tight pointer-events-none" style={{ background: 'rgba(15,15,26,0.92)', border: `1px solid ${COR}`, color: COR, fontFamily: 'var(--font-cormorant), serif', fontSize: '0.62rem', maxWidth: '84%' }}>{nome}</span>
+  );
+}
+
 export default function BaralhoPage() {
   const [figuras, setFiguras] = useState<Record<string, string>>({});
   const [cand, setCand] = useState<Record<string, string[]>>({});
@@ -95,7 +107,7 @@ export default function BaralhoPage() {
                     </div>
                     {/* a DEFINITIVA, grande (clica para ampliar) */}
                     {escolhida
-                      ? <button onClick={() => setZoom({ id: p.id, url: escolhida, def: true })} className="block w-[170px] mx-auto"><img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/50" /><span className="block text-center text-[0.55rem] text-emerald-200/80 mt-0.5">definitiva · clica p/ ampliar</span></button>
+                      ? <button onClick={() => setZoom({ id: p.id, url: escolhida, def: true })} className="block w-[170px] mx-auto"><div className="relative"><img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/50" /><CardNome nome={p.nome} /></div><span className="block text-center text-[0.55rem] text-emerald-200/80 mt-0.5">definitiva · clica p/ ampliar</span></button>
                       : <div className="w-[170px] mx-auto aspect-[9/16] rounded-lg border border-dashed border-white/15 grid place-items-center text-[0.6rem] opacity-40 text-center px-2">sem figura definitiva ainda</div>}
                     {/* CANDIDATAS geradas (grandes, scroll lateral; clica para ver/escolher) */}
                     {candidatas.length > 0 && (
@@ -104,7 +116,7 @@ export default function BaralhoPage() {
                         <div className="flex gap-2 overflow-x-auto pb-1">
                           {candidatas.map((u, i) => (
                             <button key={i} onClick={() => setZoom({ id: p.id, url: u })} title="ver grande e escolher" className="shrink-0 w-[110px]">
-                              <img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" />
+                              <div className="relative"><img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" /><CardNome nome={p.nome} /></div>
                             </button>
                           ))}
                         </div>
@@ -143,7 +155,7 @@ export default function BaralhoPage() {
                   </div>
                   <span className="block text-[0.55rem] uppercase tracking-wider opacity-50 mb-2">{p.papel === 'carta-coracao' ? 'carta-coração' : 'carta final'}</span>
                   {escolhida
-                    ? <button onClick={() => setZoom({ id: p.id, url: escolhida, def: true })} className="block w-[170px] mx-auto"><img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/50" /><span className="block text-center text-[0.55rem] text-emerald-200/80 mt-0.5">definitiva · clica p/ ampliar</span></button>
+                    ? <button onClick={() => setZoom({ id: p.id, url: escolhida, def: true })} className="block w-[170px] mx-auto"><div className="relative"><img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/50" /><CardNome nome={p.nome} /></div><span className="block text-center text-[0.55rem] text-emerald-200/80 mt-0.5">definitiva · clica p/ ampliar</span></button>
                     : <div className="w-[170px] mx-auto aspect-[9/16] rounded-lg border border-dashed border-white/15 grid place-items-center text-[0.6rem] opacity-40 text-center px-2">sem figura definitiva ainda</div>}
                   {candidatas.length > 0 && (
                     <div className="mt-3">
@@ -151,7 +163,7 @@ export default function BaralhoPage() {
                       <div className="flex gap-2 overflow-x-auto pb-1">
                         {candidatas.map((u, i) => (
                           <button key={i} onClick={() => setZoom({ id: p.id, url: u })} title="ver grande e escolher" className="shrink-0 w-[110px]">
-                            <img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" />
+                            <div className="relative"><img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" /><CardNome nome={p.nome} /></div>
                           </button>
                         ))}
                       </div>
@@ -173,7 +185,7 @@ export default function BaralhoPage() {
       {zoom && (
         <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
           <div onClick={(e) => e.stopPropagation()} className="w-full max-w-[420px] max-h-[92vh] overflow-y-auto text-center">
-            <img src={zoom.url} alt="figura" className="w-full rounded-xl border border-white/20 mb-3" />
+            <div className="relative mb-3"><img src={zoom.url} alt="figura" className="w-full rounded-xl border border-white/20" />{NOMES[zoom.id] && <CardNome nome={NOMES[zoom.id]} />}</div>
             <div className="flex items-center justify-center gap-2 text-[0.8rem]">
               {!zoom.def && <button onClick={() => { escolher(zoom.id, zoom.url); setZoom(null); }} disabled={busy === zoom.id} className="px-4 py-2 rounded-lg disabled:opacity-40" style={{ background: COR, color: '#0F0F1A' }}>{busy === zoom.id ? '…' : 'escolher esta como definitiva'}</button>}
               <button onClick={() => setZoom(null)} className="px-4 py-2 rounded-lg border border-white/25">fechar</button>
