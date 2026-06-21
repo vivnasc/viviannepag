@@ -21,7 +21,8 @@ import { PORTA_ENQUADRAMENTO } from '@/lib/metodo/lentes';
 const FONTS = 'font-[system-ui]';
 const DIA_SEMANA = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const NOME_TARDE: Record<ContaId, string> = { mae: 'Não normalizes', ver: 'O Espelho', vir: 'Carta de renomear', viver: 'Repara' };
-const NOME_MANHA: Record<ContaId, string> = { mae: 'Carta', ver: 'A cena', vir: 'A cena', viver: 'A cena' };
+// manhã = a mãe tem a Carta; as filhas têm o SEU formato em modo gancho (não "a cena").
+const NOME_MANHA: Record<ContaId, string> = { mae: 'Carta', ver: 'O Espelho · gancho', vir: 'Carta de renomear · gancho', viver: 'Repara' };
 
 type EstadoPost = { conta: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean };
 
@@ -164,7 +165,7 @@ function PlanoInner() {
                       <span className="text-[0.62rem] uppercase tracking-wider" style={{ color: conta.cor }}>{ehMae ? '10h30' : '11h00'} · {NOME_MANHA[sel]}{d.personagem ? ` · ${d.personagem.nome}` : ''}</span>
                       <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temM ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temM ? '✓ gerada' : 'por gerar'}</span>
                     </div>
-                    <p className="text-[0.82rem] opacity-60 leading-snug">{ehMae ? `A carta de ${d.personagem?.nome ?? 'a personagem do dia'} (vê o texto no baralho, em baixo).` : `A cena do dia (faca), na voz da @${conta.handle}, ancorada no véu ${d.veu}.`} <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
+                    <p className="text-[0.82rem] opacity-60 leading-snug">{ehMae ? `A carta de ${d.personagem?.nome ?? 'a personagem do dia'} (vê o texto no baralho, em baixo).` : `${NOME_TARDE[sel]} em modo gancho (curto), na voz da @${conta.handle}, ancorado no véu ${d.veu}.`} <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
                   </div>
                   {/* tarde */}
                   <div className="rounded-lg p-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>

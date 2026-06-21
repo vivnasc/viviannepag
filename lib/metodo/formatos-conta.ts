@@ -41,9 +41,10 @@ export interface FormatoConta {
 export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   vir: {
     descoberta: {
-      nome: 'A cena primeiro · quando foi que me perdi de mim',
-      beats: 3,
-      registo: 'A CENA PRIMEIRO (manhã, faca): a cena da DISPERSÃO ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies o véu): "Quando foi que me perdi de mim?". TRÊS TEMPOS: (1) a CENA concreta do dia a dia que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "regressar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca a que…" / "Envia a quem…"). MODELO (copia a FORMA, não o tema): "Entraste na cozinha para beber água. / Respondeste a uma mensagem. / Arrumaste uma gaveta. / E esqueceste-te da água. / regressar" + envio "Marca a que entra num sítio e já não sabe a que ia." SEM voz. Veste: bússolas, fios dourados, aves migratórias, rios de luz, constelações-guia (dourado, âmbar, azul nocturno, cobre); a imagem é o chamado, a cena é a dispersão.',
+      nome: 'Carta de renomear · a abertura (manhã)',
+      beats: 4,
+      cartaRenomear: true,
+      registo: 'CARTA DE RENOMEAR em versão CURTA (manhã, o gancho da conta — NÃO uma "cena" genérica): renomeia uma história antiga em MENOS passos, por esta ordem: (1) CENA concreta que para o scroll (uma fotografia/memória que se VÊ, nunca a identidade nem a tese); (2) o NOME antigo que a pessoa carregou a vida toda (madura, organizada, forte, responsável, prestável, sensata); (3) a RELEITURA, a viragem onde a carta acontece (o nome nunca foi um elogio, era a maneira bonita de dizer "precisávamos de ti"); (4) ABERTURA que não manda, só ABRE ("talvez já possas pousá-la"). É carta pessoal, 2.ª pessoa, íntima. Tipográfica, em papel, NÃO Flux, SEM travessões. A versão completa de 6 passos é a da tarde.',
     },
     profundidade: {
       nome: 'Carta de renomear (dá um nome novo a uma história antiga)',
@@ -54,9 +55,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   },
   ver: {
     descoberta: {
-      nome: 'A cena primeiro · porque faço isto sem reparar',
+      nome: 'O Espelho · o gancho (manhã)',
       beats: 3,
-      registo: 'A CENA PRIMEIRO (manhã, FACA, fura para estranhos): a cena ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies véu): "Porque faço isto sem reparar?". TRÊS TEMPOS: (1) a CENA concreta que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "revelar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda à amiga que…"). MODELO (copia a FORMA, não o tema): "O teu marido chega vinte minutos atrasado. / Na tua cabeça já houve uma discussão inteira. / revelar" + envio "Marca quem ensaia conversas que ainda não aconteceram." SEM voz. NADA a ver com a tarde (a tarde é a peça funda, O Espelho). Veste: prismas, espelhos, véus translúcidos (azul profundo, prata, violeta, branco lunar).',
+      espelho: true,
+      registo: 'O ESPELHO em modo GANCHO (manhã, FACA, fura para estranhos — NÃO uma "cena" genérica): a versão curta de O Espelho. (1) ABRE PARA FORA, aponta para uma pessoa concreta que vive na cabeça de quem vê (a colega, a mulher que segue, a cunhada): o murro que para o scroll; (2) o comportamento exato que a faz viver-lhe na cabeça; (3) UMA linha que começa a VIRAR para dentro (o outro mostra-te a ti) + a assinatura "revelar". Não despejes a peça inteira — o virar fundo é a tarde. MECANISMO em linguagem da vida, nunca teoria nem véu. LINHA VERMELHA: o outro mostra-te a ti, NUNCA "analisa os outros". Veste: prismas, espelhos, véus translúcidos (azul profundo, prata, violeta, branco lunar).',
     },
     profundidade: {
       nome: 'O Espelho (quem te vive na cabeça · fora → dentro)',
@@ -67,9 +69,10 @@ export const FORMATOS_CONTA: Record<ContaId, Record<TipoPeca, FormatoConta>> = {
   },
   viver: {
     descoberta: {
-      nome: 'A cena primeiro · o que estou à espera para começar',
-      beats: 3,
-      registo: 'A CENA PRIMEIRO (manhã, FACA, fura para estranhos): a cena da VIDA GUARDADA ilumina-se, não se explica. Pergunta-espinha (a mulher fá-la a si própria; NUNCA a digas nem nomeies véu): "O que estou à espera para começar?". TRÊS TEMPOS: (1) a CENA concreta de algo guardado para depois que fura no 1.º segundo, (2) a cena ADENSA-SE, (3) a ASSINATURA "encarnar" sozinha + o ENVIO que aponta para UMA pessoa ("Marca quem…" / "Manda a quem…"). MODELO (copia a FORMA, não o tema): "Guardaste a loiça boa para uma ocasião especial. / A ocasião especial nunca chegou. / encarnar" + envio "Marca quem tem a loiça boa a ganhar pó." SEM voz. NADA a ver com a tarde (a tarde é o colo, Repara). Veste: sementes, jardins, frutos dourados, auroras (verde esmeralda, ouro vivo, coral, branco solar).',
+      nome: 'Repara · o instante (manhã)',
+      beats: 2,
+      repara: true,
+      registo: 'REPARA em modo manhã (o gancho da conta — NÃO uma "cena" genérica): a imagem manda, a palavra serve (1 a 2 linhas, nunca mais). Aponta para um instante REAL e específico do presente a que não se dá atenção (uma luz a certa hora, um cheiro, um gesto, uma textura). Em 2026 o que se mete entre a pessoa e o instante é muitas vezes o ECRÃ (vive para o post, não para si). UMA linha que aponta + um fio de verdade leve, NUNCA moral, NUNCA lição, NUNCA "e é por isso que…". Assinatura "encarnar" ou nada. Veste: mãos, sementes, frutos dourados, auroras, flores, rodas solares (verde esmeralda, ouro vivo, coral, branco solar).',
     },
     profundidade: {
       nome: 'Repara · um instante, com um fio de verdade',
