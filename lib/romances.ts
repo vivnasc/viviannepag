@@ -163,6 +163,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: at the bottom of the frame, a lone man seen from behind standing at the edge of a swollen river beside an old stone bridge, the water risen and gleaming, a single small boat moored; behind and above, at blue dusk after rain, a small village of terracotta rooftops on the far bank between soft green mountains, warm lit windows, low clearing clouds; generous calm sky with empty space at the top third for a title; the unsettled hush after a flood, atmospheric and quietly hopeful`,
   },
   {
+    slug: 'rom-casa-acabar',
+    titulo: 'A Casa por Acabar',
+    tituloEn: 'The Unfinished House',
+    sub: 'um romance de Véspera · Estante IV · A Ponte',
+    estante: 'IV · A Ponte',
+    espelho: 'A mulher que ama o potencial',
+    capitulos: 12,
+    palavras: 20000,
+    cena: `book cover illustration, vertical composition: high on a green slope, an unfinished stone house with raised walls and a half-built roof, open windowless openings, golden in the morning sun, beautiful and empty like a skeleton, with the best view over the valley; a lone woman seen from behind standing at what would be the doorway, looking out; below and beyond, at soft dawn light, a small village of terracotta rooftops between mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the ache of a life walled up in a promise, luminous, atmospheric, painterly`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',

@@ -25,6 +25,7 @@ const PASTAS = {
   portas: { pt: 'as-portas-baixas-livro', en: 'as-portas-baixas-livro-en', capa: 'PORTAS-capa', outPt: 'AS-PORTAS-BAIXAS-pt.pdf', outEn: 'THE-LOW-DOORS-en.pdf' },
   despensa: { pt: 'a-despensa-cheia-livro', en: 'a-despensa-cheia-livro-en', capa: 'DESPENSA-capa', outPt: 'A-DESPENSA-CHEIA-pt.pdf', outEn: 'THE-FULL-PANTRY-en.pdf' },
   presente: { pt: 'o-presente-por-abrir-livro', en: 'o-presente-por-abrir-livro-en', capa: 'PRESENTE-capa', outPt: 'O-PRESENTE-POR-ABRIR-pt.pdf', outEn: 'THE-UNOPENED-GIFT-en.pdf' },
+  casa: { pt: 'a-casa-por-acabar-livro', en: 'a-casa-por-acabar-livro-en', capa: 'CASA-capa', outPt: 'A-CASA-POR-ACABAR-pt.pdf', outEn: 'THE-UNFINISHED-HOUSE-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -205,6 +206,34 @@ const T_PRESENTE = LANG==='pt' ? {
   ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Dádiva hurts you in real places, the name of what she carries is in “The Woman Who Is Afraid to Receive”, in the Prosperity collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
   finalTit:'For the reader',
   finalTxt1:'Thank you for crossing this year of Véspera with Dádiva. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T_CASA = LANG==='pt' ? {
+  tituloHtml:'A Casa<br>por Acabar', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante IV · A Ponte',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Esperança te doer em sítios reais, o nome do que ela carrega está em «A mulher que ama o potencial», na coleção SyncHim. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Esperança. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Unfinished<br>House', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf IV · The Bridge',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Esperança hurts you in real places, the name of what she carries is in “The Woman Who Loves Potential”, in the SyncHim collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Esperança. If the story touched you, pass it on, not as proof, but as seed.',
   finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
   copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
   registoLabel:'From the register of Véspera',
@@ -462,7 +491,7 @@ const T_PORTAS = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'despensa' ? T_DESPENSA : LIVRO === 'presente' ? T_PRESENTE : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'despensa' ? T_DESPENSA : LIVRO === 'presente' ? T_PRESENTE : LIVRO === 'casa' ? T_CASA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];

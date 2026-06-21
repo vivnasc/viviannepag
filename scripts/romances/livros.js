@@ -18,6 +18,7 @@ const LIVROS = {
   'rom-fabrica':   { key: 'fabrica',   capa: 'FABRICA-capa',      dirEn: 'fabrica-dorme-livro-en',   outPt: 'ENQUANTO-A-FABRICA-DORME-pt.pdf',  outEn: 'WHILE-THE-FACTORY-SLEEPS-en.pdf' },
   'rom-despensa':  { key: 'despensa',  capa: 'DESPENSA-capa',     dirEn: 'a-despensa-cheia-livro-en', outPt: 'A-DESPENSA-CHEIA-pt.pdf',          outEn: 'THE-FULL-PANTRY-en.pdf' },
   'rom-presente':  { key: 'presente',  capa: 'PRESENTE-capa',     dirEn: 'o-presente-por-abrir-livro-en', outPt: 'O-PRESENTE-POR-ABRIR-pt.pdf',     outEn: 'THE-UNOPENED-GIFT-en.pdf' },
+  'rom-casa-acabar': { key: 'casa',    capa: 'CASA-capa',         dirEn: 'a-casa-por-acabar-livro-en', outPt: 'A-CASA-POR-ACABAR-pt.pdf',         outEn: 'THE-UNFINISHED-HOUSE-en.pdf' },
 };
 
 module.exports = { LIVROS, SLUGS: Object.keys(LIVROS) };
