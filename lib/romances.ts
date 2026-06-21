@@ -240,6 +240,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: the interior of an old spinning mill at dawn, rows of looms and spindles in soft golden light, a large iron key hanging alone on a nail by the door, central and luminous; a lone older woman seen from behind standing among the silent machines, hand hovering near the key; tall factory windows letting in warm morning light over a small village of terracotta rooftops beyond; generous calm sky with empty space at the top third for a title; the ache of one bound to the key she made herself, learning to hand it over, luminous, atmospheric, painterly`,
   },
   {
+    slug: 'rom-manta',
+    titulo: 'A Manta Sem Nome',
+    tituloEn: 'The Unsigned Blanket',
+    sub: 'um romance de Véspera · Estante VII · A Fiandeira',
+    estante: 'VII · A Fiandeira',
+    espelho: 'A mulher que tem medo de ser vista',
+    capitulos: 13,
+    palavras: 10500,
+    cena: `book cover illustration, vertical composition: a stone weaver's room on a mountain at warm dusk, a wooden loom with a half-woven blanket of beautiful colours, folded finished blankets stacked nearby; a lone woman seen from behind at the loom, half in shadow, a single thread of light catching a tiny embroidered name in the corner of one blanket; through a small window a distant village of terracotta rooftops; generous calm sky with empty space at the top third for a title; the ache of beauty made in hiding and the first courage to sign it, luminous, atmospheric, painterly`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',
