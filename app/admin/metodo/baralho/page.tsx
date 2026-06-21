@@ -18,7 +18,21 @@ export default function BaralhoPage() {
   const [cand, setCand] = useState<Record<string, string[]>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [aplicarBusy, setAplicarBusy] = useState(false);
   const [zoom, setZoom] = useState<{ id: string; url: string; def?: boolean } | null>(null);
+
+  const aplicar = useCallback(async () => {
+    if (aplicarBusy) return;
+    setAplicarBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/aplicar-figuras', { method: 'POST' });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else setMsg(j.semFiguras ? 'Ainda não há figuras escolhidas.' : `${j.aplicadas ?? 0} carta(s) atualizada(s) com a figura escolhida.`);
+    } catch (e) { setErro(String(e)); }
+    finally { setAplicarBusy(false); }
+  }, [aplicarBusy]);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/baralho-figura').then((r) => (r.ok ? r.json() : { figuras: {}, candidatas: {} })).then((j) => { setFiguras(j.figuras ?? {}); setCand(j.candidatas ?? {}); }).catch(() => {});
@@ -58,6 +72,10 @@ export default function BaralhoPage() {
         <header className="mt-3 mb-6 rounded-2xl border border-white/10 p-5" style={{ background: '#1a1726' }}>
           <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: COR }}>Baralho · testar as figuras</h1>
           <p className="mt-2 text-[0.85rem] opacity-85">Como o testador de capas: por personagem, <b>gera figuras</b> de carta de baralho e <b>escolhe a definitiva</b>. A figura escolhida fica fixa dessa carta; a mensagem é gerada à parte (da semente). Figuras escolhidas: <b style={{ color: COR }}>{totalEscolhidas}</b>.</p>
+          <div className="mt-3 flex items-center gap-2 flex-wrap text-[0.75rem]">
+            <button onClick={aplicar} disabled={aplicarBusy} title="mete as figuras escolhidas nas cartas que já geraste (sem gerar imagem nova, sem custo)" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: COR, color: COR }}>{aplicarBusy ? 'a aplicar…' : '↪ aplicar figuras às cartas já geradas'}</button>
+            {msg && <span className="text-emerald-300">{msg}</span>}
+          </div>
           {erro && <p className="mt-2 text-[0.8rem] text-rose-300">{erro}</p>}
         </header>
 
