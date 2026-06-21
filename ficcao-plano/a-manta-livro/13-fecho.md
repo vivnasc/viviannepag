@@ -1,0 +1,13 @@
+## Do livro dos assentos de Véspera
+
+E de tudo se fez registo.
+
+Fica assente que Velada, dos Serranos, tecedeira, que fez as mantas mais belas da região e as escondeu a vida inteira, que vendia por interposta pessoa, recusava as feiras, não assinava, e que, quando a elogiavam, fugia do elogio com o coração aos saltos, aprendeu, aos quarenta e quatro, a coisa mais difícil para quem tem medo de ser vista: a bordar o nome no canto da manta, primeiro pequenino, depois menos pequenino, depois inteiro, e a mostrar-se, sem se perder. Fica assente que descobriu que o que criava merecia chegar ao mundo com ela presa ao nome, e que ser vista não era perder, era existir.
+
+Os assentos guardam quem faz as coisas belas da vila, e há trabalho que se conhece sem se conhecer quem o fez. Esta Guardiã teve, anos, uma manta de Velada sem saber de quem era, e viu, no livro, as mantas mais belas da serra sem nome; e viu, por fim, aparecer um nome ligado a elas, pequenino primeiro, depois maior, e a Velada sair do anonimato e tornar-se, de cara descoberta, a autora da beleza que tecia. E entendeu a Guardiã que Velada cumprira o nome ao contrário: chamava-se a coberta, a velada, e tirou o véu, e fez do nome não um destino de esconderijo, mas uma travessia, a de quem foi velada e se descobriu.
+
+Quem ler este assento e se reconhecer numa Velada qualquer que tem medo de ser vista, que faz coisas belas e as esconde, que não assina o que cria, que muda de assunto quando a elogiam com o coração aos saltos, que aprendeu, por uma ferida, que mostrar-se é perder, que saiba o que ela aprendeu e o que esta casa regista: que esconder-se não protege, empobrece, porque tira ao mundo o que criámos e a nós o direito de o termos criado; que ser vista não é perder, é existir; que a inveja de alguns não é razão para os grandes se apagarem, porque a inveja é problema de quem a tem; e que a coragem maior, para quem se velou a vida inteira, não é continuar coberta, é bordar o nome no canto do que fazemos, e mostrar-se, sem se perder, e descobrir que o que criamos, e nós com ele, merece chegar ao mundo de cara descoberta.
+
+Velada trocou o anonimato pelo nome, a manta sem dono pela manta assinada, o esconderijo pela existência visível. E nas casas de Véspera, desde aquela em que bordou o nome no canto da primeira manta, há mais uma mulher que já não confunde esconder-se com ser humilde, porque aprendeu que o que se cria merece o nome de quem o fez, e que tirar o véu, e mostrar-se, e assinar a própria beleza, não é gabar-se, é existir, e é a única maneira de não desperdiçar o dom que se tem.
+
+E de tudo se fez registo, pela mão da Guardiã, no livro dos assentos de Véspera.
