@@ -49,14 +49,15 @@ export async function POST(req: Request) {
   const { data, error } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodo-%');
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 
-  // unidade = SLIDE (um post de 2 faces tem 2 slides; ambos precisam de imagem).
-  // A "Carta de renomear" (vir) é TIPOGRÁFICA (papel, CartaSlide), NÃO leva imagem
-  // Flux — por isso salta-se (senão metia um fundo gerado por baixo do texto).
-  const pendentes: { row: Row; slide: Slide }[] = [];
+  // unidade = REEL (POST): cada reel tem UMA cena/imagem, usada em todos os momentos.
+  // NUNCA uma imagem por slide (pagava várias imagens iguais para o mesmo reel).
+  // A "Carta de renomear" (vir) é TIPOGRÁFICA (papel), NÃO leva imagem Flux — salta-se.
+  const pendentes: Row[] = [];
   for (const r of (data ?? []) as Row[]) {
     if (r.theme?.metodo?.conta !== contaId) continue;
     if ((r.theme?.metodo as { tipo?: string } | undefined)?.tipo === 'cartaRenomear') continue;
-    for (const s of r.dias?.[0]?.slides ?? []) if (!s.imageUrl) pendentes.push({ row: r, slide: s });
+    const sl = r.dias?.[0]?.slides ?? [];
+    if (sl.length && sl.some((s) => !s.imageUrl)) pendentes.push(r);
   }
   const total = pendentes.length;
   const lote = pendentes.slice(0, LIMITE);
@@ -83,29 +84,19 @@ export async function POST(req: Request) {
 
   let feitas = 0;
   let ultimoErro = '';
-  const cartasFeitas = new Set<string>(); // carta = 1 figura por LINHA (todas as faces)
-  // UMA de cada vez (NÃO em paralelo): a Replicate limita a ~6/min com burst 1;
-  // pedir várias ao mesmo tempo dava 429 em todas. Sequencial respeita o limite.
+  // UMA imagem por REEL (post), aplicada a todos os momentos. Sequencial (rate limit).
   for (let i = 0; i < lote.length; i++) {
-    const { row, slide } = lote[i];
+    const row = lote[i];
     const meta = (row.theme?.metodo ?? {}) as { veu?: string; tipo?: string; personagem?: string };
-    // CARTA "Sou Aquela": gera UMA figura (carta de baralho) e usa-a em todas as faces.
-    if (meta.tipo === 'carta') {
-      if (cartasFeitas.has(row.slug)) continue;
-      const prompt = promptCartaFigura(meta.personagem);
-      const { url, erro } = await fundoImagem(prompt, row.slug);
-      if (!url) { if (erro) ultimoErro = erro; continue; }
-      for (const s of row.dias?.[0]?.slides ?? []) { s.imageUrl = url; s.notaVisual = prompt; }
-      const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', row.slug);
-      if (!e2) { feitas += 1; cartasFeitas.add(row.slug); }
-      continue;
-    }
-    const veu = (meta.veu ?? undefined) as VeuNome | undefined;
-    const prompt = await promptDe(i, slide.texto, veu); // imagem encarna a FRASE; COR = véu do dia
+    const sl = row.dias?.[0]?.slides ?? [];
+    const capa = sl[0];
+    // carta "Sou Aquela" = figura da personagem; restantes = cena do véu (da capa).
+    const prompt = meta.tipo === 'carta'
+      ? promptCartaFigura(meta.personagem)
+      : await promptDe(i, capa?.texto, (meta.veu ?? undefined) as VeuNome | undefined);
     const { url, erro } = await fundoImagem(prompt, row.slug);
     if (!url) { if (erro) ultimoErro = erro; continue; }
-    slide.imageUrl = url;
-    slide.notaVisual = prompt;
+    for (const s of sl) { s.imageUrl = url; s.notaVisual = prompt; }
     const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', row.slug);
     if (!e2) feitas += 1;
   }

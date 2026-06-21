@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { CONTAS, fundoDaConta, indiceElementoAtual, ContaId, type VeuNome } from '@/lib/metodo/contas';
+import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
@@ -70,59 +70,23 @@ export async function POST(req: Request) {
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  // evita os assuntos JÁ usados nos OUTROS posts desta conta (não só o deste) —
-  // senão dois posts caem na mesma cena. Acumula também os desta geração para a
-  // face 1 e a face 2 NÃO saírem iguais.
+  // UM reel = UMA cena. Gera UMA imagem (a partir do texto da CAPA) e usa-a em TODOS
+  // os momentos do reel. NUNCA uma imagem por slide (isso pagava várias imagens para
+  // o mesmo reel). Evita os assuntos já usados nos outros posts da conta.
   const evitar: string[] = [];
   const { data: irmaos } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodo-%');
   for (const r of (irmaos ?? []) as Row[]) {
     if (r.slug === slug || r.theme?.metodo?.conta !== contaId) continue;
     for (const s of r.dias?.[0]?.slides ?? []) if (s.notaVisual) evitar.push(assuntoCurto(s.notaVisual));
   }
-
-  // assuntos JÁ neste post (para a face nova diferir da que já existe, ex.: a vela).
-  for (const s of slides) if (s.imageUrl && s.notaVisual) evitar.push(assuntoCurto(s.notaVisual));
-
-  const els = conta.atmosfera.elementos;
-  const imageUrls: (string | null)[] = slides.map((s) => s.imageUrl ?? null);
-  let ultimoErro = '';
-  // se FALTAM faces, preenche SÓ as que faltam (mantém as que já tens); se já
-  // estiverem todas, regenera todas (o caso "outra imagem", variação).
-  // No estilo DRAMÁTICO (teste de tarde) regenera TODAS — converte o post inteiro.
-  const faltam = slides.filter((s) => !s.imageUrl);
-  const alvo = estilo === 'dramatico' ? slides : (faltam.length ? faltam : slides);
-  // gera a imagem de cada face-alvo, em par com o texto da face (a dor / a revelação).
-  for (const slide of alvo) {
-    const i = slides.indexOf(slide);
-    // fallback: salta para outro elemento (variação), evitando o atual.
-    const atual = indiceElementoAtual(conta, slide.notaVisual);
-    let elIdx = Math.floor(Math.random() * els.length);
-    if (els.length > 1 && elIdx === atual) elIdx = (elIdx + 1) % els.length;
-    let prompt = fundoDaConta(conta, elIdx, Math.floor(Math.random() * 6));
-    if (slide.notaVisual) evitar.push(assuntoCurto(slide.notaVisual));
-    // PREFERIDO: o Claude escreve um fundo que ENCARNA o texto desta face, diferente dos já usados.
-    if (apiKey) {
-      try { prompt = await gerarFundoIA(conta, evitar, apiKey, slide.texto, estilo, veu); }
-      catch { /* fica o fallback */ }
-    }
-    const { url: img, erro } = await fundoImagem(prompt, slug);
-    if (img) {
-      slide.imageUrl = img;
-      slide.notaVisual = prompt;
-      slide.estilo = estilo; // marca a face (o animar usa a motion certa)
-      // a imagem mudou: o clip antigo deixa de servir, limpa-o (re-anima depois).
-      slide.clipUrl = null; slide.clipPredId = null; slide.clipPend = false;
-      evitar.push(assuntoCurto(prompt)); // a face seguinte evita esta cena
-      imageUrls[i] = img;
-    } else {
-      ultimoErro = erro ?? 'falhou';
-    }
-  }
-
-  if (!imageUrls.some(Boolean)) return NextResponse.json({ erro: 'flux-falhou', detalhe: ultimoErro }, { status: 502 });
-  // o MP4 já renderizado (se houver) fica desatualizado: invalida-o para re-render.
+  const capa = slides[0];
+  let prompt = fundoDaConta(conta, Math.floor(Math.random() * Math.max(1, conta.atmosfera.elementos.length)), Math.floor(Math.random() * 6));
+  if (apiKey) { try { prompt = await gerarFundoIA(conta, evitar, apiKey, capa?.texto, estilo, veu); } catch { /* fica o fallback */ } }
+  const { url, erro } = await fundoImagem(prompt, slug);
+  if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro ?? 'falhou' }, { status: 502 });
+  for (const s of slides) { s.imageUrl = url; s.notaVisual = prompt; s.estilo = estilo; s.clipUrl = null; s.clipPredId = null; s.clipPend = false; }
   if (row.dias?.[0]) row.dias[0].videoUrl = null;
   const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', slug);
   if (e2) return NextResponse.json({ erro: 'db-update', detalhe: e2.message }, { status: 500 });
-  return NextResponse.json({ ok: true, imageUrl: imageUrls[0] ?? null, imageUrls });
+  return NextResponse.json({ ok: true, imageUrl: url, imageUrls: slides.map(() => url), uma: true });
 }
