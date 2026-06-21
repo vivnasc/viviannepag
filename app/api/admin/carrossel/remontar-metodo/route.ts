@@ -73,7 +73,7 @@ ${[...METODO_VOZ, ...REGRAS_GLOBAIS].map((r) => `- ${r}`).join('\n')}
 
 O QUE REESCREVES em cada dia (na voz do Método, coerente com a palavra que se mantem):
 - gancho: a frase de abertura da capa. Verdade tensa e RECONHECIVEL do dia a dia ("isto sou eu"), curta (1-2 linhas), concreta.
-- prosa: reflexao em prosa CURTISSIMA e intima (1-2 frases curtas, nunca um paragrafo denso).
+- prosa: prosa que DESENVOLVE uma ideia concreta e intima (2 a 4 frases cheias, nunca um aforismo vago nem um resumo oco).
 - poetico1: frase poetica (pode ter quebras de linha).
 - pratica: um convite ou pergunta pratica.
 - poetico2: fecho poetico que volta a palavra do dia.
