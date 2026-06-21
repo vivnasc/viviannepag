@@ -79,7 +79,7 @@ export async function POST(req: Request) {
     dias,
     theme: {
       formato: 'reel', subtipo: 'carta', video: true, mundo: 'autora', marca: conta.marca,
-      agendadoEm: data, hora: '17:00',
+      agendadoEm: data, hora: '14:00',
       metodo: { conta: contaId, tipo: 'cartaRenomear', veu },
     },
   };

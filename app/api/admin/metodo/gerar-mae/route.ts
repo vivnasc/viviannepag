@@ -101,7 +101,10 @@ export async function POST(req: Request) {
       // e sai raso. conceito '' = sem rótulo no cartão. A personagem vai no theme para
       // a imagem gerar a FIGURA (carta de baralho). subtipo 'nbeats'.
       try {
-        const sb = await gerarStoryboard('mae', 'descoberta', veu, personagem, apiKey, evitar);
+        // a PERSONAGEM é fixa (baralho); a MENSAGEM gera-se a partir da carta-semente
+        // dela (a voz curada), variando de cada vez. Personagem fixa, mensagem nova.
+        const semente = cartaDoBaralho(personagem.id);
+        const sb = await gerarStoryboard('mae', 'descoberta', veu, personagem, apiKey, evitar, false, semente);
         if (sb.beats.length) { rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, sb.beats, sb.envio, personagem.nome)); evitar.push(sb.beats[0].texto); }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }

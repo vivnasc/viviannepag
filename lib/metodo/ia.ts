@@ -44,12 +44,15 @@ const FUNDO_REGRAS_DRAMA =
 // Determinístico (não gasta IA): a carta tem de sair sempre como carta, não cena.
 export function promptCartaFigura(personagem?: string): string {
   return [
-    'fine-art painterly illustrated oracle/tarot card, a single dignified woman as a timeless archetype',
+    // é uma CARTA DE BARALHO/ORÁCULO a sério — um OBJETO carta, com MOLDURA ornamentada,
+    // a figura dentro da carta, proporção de carta — não um retrato/imagem solto.
+    'an ornate illustrated tarot / oracle CARD, the whole image is a single trading-card object with a decorative ornate gold border and frame around it, card proportions',
+    'inside the frame, a single dignified woman as a timeless archetype',
     personagem ? `embodying the figure of "${personagem}"` : '',
-    'serene contemplative portrait, symbolic and calm, elegant posture, seen slightly from afar',
-    'surrounded by lit candles, soft constellations and old manuscripts, warm amber and old-gold light on a deep starry near-black background',
-    'renaissance sfumato, visible painterly fine-grain texture, subtle ornate card framing, one single central female figure, timeless',
-    'NO text, NO letters, NO words, NO numbers, NO watermark, NO logo, NO caption',
+    'serene contemplative figure centered within the card, symbolic and calm, elegant',
+    'painterly fine-art illustration, renaissance sfumato, candles, soft constellations and old manuscripts, warm amber and old-gold on deep starry near-black',
+    'clearly a card drawn from a deck, ornamental corners and inner border, intemporal',
+    'NO text, NO letters, NO words, NO numbers, NO title, NO watermark, NO logo',
   ].filter(Boolean).join(', ');
 }
 

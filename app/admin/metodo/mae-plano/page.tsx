@@ -166,7 +166,7 @@ function PlanoInner() {
                       <span className="text-[0.62rem] uppercase tracking-wider" style={{ color: conta.cor }}>10h30 · {NOME_MANHA[sel]}{d.personagem ? ` · ${d.personagem.nome}` : ''}</span>
                       <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temM ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temM ? '✓ gerada' : 'por gerar'}</span>
                     </div>
-                    <p className="text-[0.82rem] opacity-60 leading-snug">A carta de {d.personagem?.nome ?? 'a personagem do dia'} (vê o texto no baralho, em baixo). <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
+                    <p className="text-[0.82rem] opacity-60 leading-snug">Carta de {d.personagem?.nome ?? 'a personagem do dia'} — personagem fixa, mensagem gerada da semente dela. <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
                   </div>
                   )}
                   {/* tarde (filhas = único post, às 14h) */}
@@ -186,8 +186,8 @@ function PlanoInner() {
         {/* o baralho inteiro — só a mãe (é o material "Sou Aquela") */}
         {ehMae && (
           <section>
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">O baralho &quot;Sou Aquela&quot; · uma carta por personagem</h2>
-            <p className="text-[0.72rem] opacity-50 mb-4">Fixo e curado (vem do material real de cada personagem). Para afinar uma carta, diz-me qual e o que mudar.</p>
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">O baralho &quot;Sou Aquela&quot; · as personagens (fixas)</h2>
+            <p className="text-[0.72rem] opacity-50 mb-4">As PERSONAGENS do baralho são fixas; a MENSAGEM de cada carta NÃO é — gera-se a partir desta semente (a voz dela), variando de cada vez. Em baixo vês a semente curada de cada personagem.</p>
             <div className="space-y-5">
               {FAMILIAS.map((f) => (
                 <div key={f.id}>
