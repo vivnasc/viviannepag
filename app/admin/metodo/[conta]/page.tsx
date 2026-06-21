@@ -591,22 +591,22 @@ export default function MetodoContaPage() {
                 <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a carta revela-se (papel + tipografia), sem imagem Flux</p>
               </div>
             ) : detalhe.subtipo === 'nbeats' ? (
-              // formato PRÓPRIO de cada peça: N beats sobre 1 cena (não 2 faces).
+              // CARROSSEL VISUAL: cada beat é um SLIDE (cartão), para se VEREM os slides
+              // (não só uma lista de texto). Partilham a mesma cena/imagem do post.
               <div>
                 <div className="flex items-center justify-center gap-2 mb-1">
                   <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.conceito ?? 'a cena'}</span>
-                  <span className="text-[0.55rem] opacity-50">{detalhe.beats.length} beats sobre 1 cena</span>
+                  <span className="text-[0.55rem] opacity-50">{detalhe.beats.length} slides</span>
                 </div>
-                <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={detalhe.clip ?? undefined} conta={conta} anim="reveal" prog={1} />
-                <ol className="mt-2 space-y-1.5">
+                <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 snap-x">
                   {detalhe.beats.map((b, i) => (
-                    <li key={i} className="flex gap-2 text-[0.82rem] rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2">
-                      <span className="text-[0.6rem] opacity-40 mt-0.5">{i + 1}</span>
-                      <span className="whitespace-pre-line leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b}</span>
-                    </li>
+                    <div key={i} className="shrink-0 w-[150px] snap-start">
+                      <span className="block text-center text-[0.55rem] uppercase tracking-wider opacity-45 mb-0.5">slide {i + 1}/{detalhe.beats.length}</span>
+                      <MetodoSlide texto={b} conceito={i === 0 ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={i === 0 ? (detalhe.clip ?? undefined) : undefined} conta={conta} anim="reveal" prog={1} />
+                    </div>
                   ))}
-                </ol>
-                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a cena mexe e os beats aparecem em sequência (com som)</p>
+                </div>
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">cada cartão é um slide do reel (arrasta para o lado). A imagem é a mesma cena em todos; gera-a em &quot;gerar imagem&quot;.</p>
               </div>
             ) : detalhe.texto2 ? (
               <div>

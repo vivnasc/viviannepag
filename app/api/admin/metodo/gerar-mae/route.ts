@@ -96,20 +96,14 @@ export async function POST(req: Request) {
 
     const slugCarta = `metodo-mae-carta-${d.data}`;
     if (fazer(slugCarta)) {
-      // CARTA do baralho FIXO (a carta da personagem do dia) — texto travado, sem IA.
-      // conceito '' = o cartão NÃO mostra rótulo interno ("Carta · A Diretora…"); a
-      // FRENTE é a figura + a confissão. A personagem vai no theme para a imagem
-      // saber gerar a FIGURA (carta de baralho), não um fundo genérico.
-      // GARANTIA: nem todas as personagens têm carta no baralho. Se a do dia não tem,
-      // escolhe (de forma estável por dia) uma personagem do MESMO véu QUE TENHA carta,
-      // para não haver dias sem carta.
-      let pCarta = personagem;
-      if (!cartaDoBaralho(pCarta.id).length) {
-        const comCarta = personagensPorVeu(veu).filter((p) => cartaDoBaralho(p.id).length);
-        if (comCarta.length) pCarta = comCarta[(dt.getDate()) % comCarta.length];
-      }
-      const linhas = cartaDoBaralho(pCarta.id);
-      if (linhas.length) rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, linhas.map((l) => ({ texto: l, imagem: '' })), '', pCarta.nome));
+      // CARTA "Sou Aquela" GERADA (IA) a partir da ALMA da personagem (essência +
+      // sombra) e do SABER do véu — INFINITA e funda, não um baralho fixo que repete
+      // e sai raso. conceito '' = sem rótulo no cartão. A personagem vai no theme para
+      // a imagem gerar a FIGURA (carta de baralho). subtipo 'nbeats'.
+      try {
+        const sb = await gerarStoryboard('mae', 'descoberta', veu, personagem, apiKey, evitar);
+        if (sb.beats.length) { rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, sb.beats, sb.envio, personagem.nome)); evitar.push(sb.beats[0].texto); }
+      } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
 
     const slugNN = `metodo-mae-naonorm-${d.data}`;
