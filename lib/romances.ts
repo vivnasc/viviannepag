@@ -207,6 +207,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: a lone woman seen from behind standing at the edge of a village, one suitcase set down at her feet, looking out over a small village of terracotta rooftops between mountains and a quiet river at warm dawn light; behind her, faint and ghostly in the sky, the rooftops of a distant foreign city dissolving into cloud; two lands meeting in one image, one near and warm, one far and fading; warm lit windows; generous calm sky with empty space at the top third for a title; the ache and resolve of one who belongs to two places and none, choosing at last to take root, luminous, atmospheric, painterly`,
   },
   {
+    slug: 'rom-cisterna',
+    titulo: 'A Cisterna',
+    tituloEn: 'The Cistern',
+    sub: 'um romance de Véspera · Estante VI · A Serra',
+    estante: 'VI · A Serra',
+    espelho: 'A mulher que nunca pede',
+    capitulos: 13,
+    palavras: 12000,
+    cena: `book cover illustration, vertical composition: a lone stone house high on a mountain slope at dusk, set apart and above a small village of terracotta rooftops far below around a square with a fountain; the high house has its own stone cistern beside it; one small warm lit window; a faint thread of smoke rising from the chimney into a vast lonely sky; far below, the village fountain glows with gathered people, distant and warm; generous calm sky with empty space at the top third for a title; the ache of self-sufficiency and the longing to come down and connect, luminous, atmospheric, painterly`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',
