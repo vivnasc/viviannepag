@@ -26,7 +26,13 @@ Pensara, a vida inteira, que o problema era estar lá. Que bastava voltar, pôr 
 
 E ao primeiro almoço, ao primeiro copo de vinho, ao primeiro coitada, percebeu que se enganara de mapa.
 
-À tarde, quando o almoço se desfez e os primos se foram, e a tia Remédios ficou a lavar a loiça e a recusar ajuda, mulher, tu vieste de viagem, descansa, Peregrina saiu para o largo. Sentou-se na borda da fonte, ao sol que descia, e ficou a ouvir a água. A fonte de Véspera corria como corre há sempre, com aquele som certo, sem pressa, e à roda dela passava a vila ao fim do dia, uma mulher com o cântaro, um homem que vinha dos campos e molhava a cara, dois miúdos que se atiravam água e levavam um raspanete. Peregrina olhava-os e via o que nunca tivera: gente que pertencia a um sítio sem ter de pensar nisso, gente que estava numa terra como se está na própria pele, sem mala nenhuma meio feita.
+À tarde, quando o almoço se desfez e os primos se foram, a tia Remédios ficou a lavar a loiça e a recusar ajuda, mulher, tu vieste de viagem, descansa. Peregrina ficou na cozinha na mesma, a enxugar, porque enxugar a loiça ao lado de alguém é uma maneira de não estar sozinha, e a tia, de costas, com as mãos na água, falou-lhe do pai.
+
+— O teu pai, esse era de cá até à medula — disse a tia Remédios. — Por mais anos que andasse por fora, chegava aqui e era logo o Firmino, o da casa do alto, calçava as botas e ia para os campos como se nunca tivesse saído. A tua mãe é que nunca mais voltou, coitada. Tinha medo, acho eu. Há quem tenha medo de ver a terra mudada. — Esfregou um prato com força. — Tu sais mais à tua mãe ou ao teu pai, menina? Ainda não sei.
+
+E Peregrina não soube responder, porque a pergunta da tia era a pergunta da vida dela posta noutras palavras: de quem é que saíra, de que lado era, do que volta inteiro ou do que nunca mais volta. Disse só, não sei, tia, se calhar de nenhum dos dois, e a tia Remédios riu-se, achando que era graça, e não era.
+
+Peregrina saiu para o largo. Sentou-se na borda da fonte, ao sol que descia, e ficou a ouvir a água. A fonte de Véspera corria como corre há sempre, com aquele som certo, sem pressa, e à roda dela passava a vila ao fim do dia, uma mulher com o cântaro, um homem que vinha dos campos e molhava a cara, dois miúdos que se atiravam água e levavam um raspanete. Peregrina olhava-os e via o que nunca tivera: gente que pertencia a um sítio sem ter de pensar nisso, gente que estava numa terra como se está na própria pele, sem mala nenhuma meio feita.
 
 Passou por ela uma vizinha que não conhecia, uma mulher de idade, com um molho de couves, e parou, com a curiosidade boa das aldeias.
 
