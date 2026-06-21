@@ -16,6 +16,16 @@ const LIVROS = {
   'rom-incomodo':  { key: 'incomodo',  capa: 'INCOMODO-capa',     dirEn: 'nenhum-incomodo-livro-en', outPt: 'NENHUM-INCOMODO-pt.pdf',           outEn: 'NO-TROUBLE-AT-ALL-en.pdf' },
   'rom-frio':      { key: 'frio',      capa: 'FRIO-capa',         dirEn: 'mulher-frio-livro-en',     outPt: 'A-MULHER-QUE-NUNCA-TEVE-FRIO-pt.pdf', outEn: 'THE-WOMAN-WHO-NEVER-FELT-THE-COLD-en.pdf' },
   'rom-fabrica':   { key: 'fabrica',   capa: 'FABRICA-capa',      dirEn: 'fabrica-dorme-livro-en',   outPt: 'ENQUANTO-A-FABRICA-DORME-pt.pdf',  outEn: 'WHILE-THE-FACTORY-SLEEPS-en.pdf' },
+  'rom-despensa':  { key: 'despensa',  capa: 'DESPENSA-capa',     dirEn: 'a-despensa-cheia-livro-en', outPt: 'A-DESPENSA-CHEIA-pt.pdf',          outEn: 'THE-FULL-PANTRY-en.pdf' },
+  'rom-presente':  { key: 'presente',  capa: 'PRESENTE-capa',     dirEn: 'o-presente-por-abrir-livro-en', outPt: 'O-PRESENTE-POR-ABRIR-pt.pdf',     outEn: 'THE-UNOPENED-GIFT-en.pdf' },
+  'rom-casa-acabar': { key: 'casa',    capa: 'CASA-capa',         dirEn: 'a-casa-por-acabar-livro-en', outPt: 'A-CASA-POR-ACABAR-pt.pdf',         outEn: 'THE-UNFINISHED-HOUSE-en.pdf' },
+  'rom-trovoada':  { key: 'trovoada',  capa: 'TROVOADA-capa',     dirEn: 'a-trovoada-livro-en',      outPt: 'A-TROVOADA-pt.pdf',                outEn: 'THE-THUNDERSTORM-en.pdf' },
+  'rom-trave':     { key: 'trave',     capa: 'TRAVE-capa',        dirEn: 'a-trave-mestra-livro-en',  outPt: 'A-TRAVE-MESTRA-pt.pdf',            outEn: 'THE-MASTER-BEAM-en.pdf' },
+  'rom-estrangeira': { key: 'estrangeira', capa: 'ESTRANGEIRA-capa', dirEn: 'a-estrangeira-livro-en', outPt: 'A-ESTRANGEIRA-DE-CA-pt.pdf',     outEn: 'THE-FOREIGNER-FROM-HERE-en.pdf' },
+  'rom-cisterna':  { key: 'cisterna',  capa: 'CISTERNA-capa',     dirEn: 'a-cisterna-livro-en',      outPt: 'A-CISTERNA-pt.pdf',                outEn: 'THE-CISTERN-en.pdf' },
+  'rom-travessas': { key: 'travessas', capa: 'TRAVESSAS-capa',    dirEn: 'as-travessas-livro-en',    outPt: 'AS-TRAVESSAS-DEVOLVIDAS-pt.pdf',   outEn: 'THE-RETURNED-DISHES-en.pdf' },
+  'rom-chave':     { key: 'chave',     capa: 'CHAVE-capa',        dirEn: 'a-chave-livro-en',         outPt: 'A-CHAVE-DA-FABRICA-pt.pdf',        outEn: 'THE-KEY-TO-THE-MILL-en.pdf' },
+  'rom-manta':     { key: 'manta',     capa: 'MANTA-capa',        dirEn: 'a-manta-livro-en',         outPt: 'A-MANTA-SEM-NOME-pt.pdf',          outEn: 'THE-UNSIGNED-BLANKET-en.pdf' },
 };
 
 module.exports = { LIVROS, SLUGS: Object.keys(LIVROS) };
