@@ -5,6 +5,7 @@ import { limparTravessoes } from '@/lib/texto';
 import { CONTAS, type VeuNome } from '@/lib/metodo/contas';
 import { planoSemanaMae, type DiaSemanaMae } from '@/lib/metodo/semana';
 import { personagemDoDia } from '@/lib/metodo/peca';
+import { personagensPorVeu } from '@/lib/metodo/personagens';
 import { gerarStoryboard } from '@/lib/metodo/storyboard-ia';
 import { cartaDoBaralho } from '@/lib/metodo/baralho';
 import { hashtagsMetodo } from '@/lib/metodo/hashtags';
@@ -99,8 +100,16 @@ export async function POST(req: Request) {
       // conceito '' = o cartão NÃO mostra rótulo interno ("Carta · A Diretora…"); a
       // FRENTE é a figura + a confissão. A personagem vai no theme para a imagem
       // saber gerar a FIGURA (carta de baralho), não um fundo genérico.
-      const linhas = cartaDoBaralho(personagem.id);
-      if (linhas.length) rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, linhas.map((l) => ({ texto: l, imagem: '' })), '', personagem.nome));
+      // GARANTIA: nem todas as personagens têm carta no baralho. Se a do dia não tem,
+      // escolhe (de forma estável por dia) uma personagem do MESMO véu QUE TENHA carta,
+      // para não haver dias sem carta.
+      let pCarta = personagem;
+      if (!cartaDoBaralho(pCarta.id).length) {
+        const comCarta = personagensPorVeu(veu).filter((p) => cartaDoBaralho(p.id).length);
+        if (comCarta.length) pCarta = comCarta[(dt.getDate()) % comCarta.length];
+      }
+      const linhas = cartaDoBaralho(pCarta.id);
+      if (linhas.length) rows.push(montarRow(slugCarta, d.data, HORA_CARTA, 'carta', '', veu, linhas.map((l) => ({ texto: l, imagem: '' })), '', pCarta.nome));
     }
 
     const slugNN = `metodo-mae-naonorm-${d.data}`;
