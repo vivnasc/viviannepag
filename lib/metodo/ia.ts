@@ -42,15 +42,15 @@ const FUNDO_REGRAS_DRAMA =
 // mulher é CONTEMPORÂNEA — roupa atual, sem santa/halo/vela. CRITÉRIOS FIXOS para
 // SER CONSISTENTE (não deixar à mercê do modelo): mesmo estilo, mesma pose, mesma
 // paleta em todas as cartas; só muda a mulher/arquétipo. SEM texto.
-export function promptCartaFigura(personagem?: string, essencia?: string): string {
+export function promptCartaFigura(personagem?: string, essencia?: string, pose?: string): string {
   return [
     // formato CARTA = vem da MOLDURA, não de iconografia religiosa.
     'a modern oracle/tarot CARD: a single clean ornate thin GOLD border framing the whole image, deep matte near-black background, card proportions',
     // a mulher é de HOJE, roupa atual — NUNCA santa/medieval.
     'inside the frame, a single CONTEMPORARY woman of today (2026) in normal modern everyday clothes (simple knit / shirt / coat) — NOT robes, NOT a saint, NOT period or medieval costume',
     personagem ? `she IS the archetype "${personagem}"` : '',
-    // a POSE TRANSMITE a personagem (lê-se quem ela é) — varia por personagem.
-    essencia ? `her POSE, GESTURE and EXPRESSION must CONVEY this exact character at a glance — the pose tells who she is: ${essencia}` : 'her pose and gesture clearly convey her character',
+    // POSE: se a Vivianne ditou a pose exata, é ESSA (travada); senão, a pose encarna a essência.
+    pose ? `her EXACT pose, gesture and expression (follow this precisely): ${pose}` : essencia ? `her POSE, GESTURE and EXPRESSION must CONVEY this exact character at a glance — the pose tells who she is: ${essencia}` : 'her pose and gesture clearly convey her character',
     // o que é CONSISTENTE: estilo, moldura, paleta. O que MUDA: a pose/expressão.
     'the rendering STYLE, the gold frame and the palette stay IDENTICAL across the whole deck — ONLY the pose and expression change from woman to woman',
     'consistent modern editorial painterly illustration, soft matte gouache, restrained',

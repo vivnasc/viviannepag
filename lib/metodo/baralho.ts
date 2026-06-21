@@ -8,6 +8,14 @@
 //
 // Para afinar: edita as linhas aqui. Para travar: ficam aqui (não mudam sozinhas).
 
+// POSES TRAVADAS por personagem (ditadas pela Vivianne). Se uma personagem tem aqui
+// uma pose, a figura usa EXATAMENTE essa (o modelo não improvisa); senão, a pose
+// encarna a essência. Preenche personagemId: 'descrição da pose'. Editável à mão.
+export const POSE_BARALHO: Record<string, string> = {
+  // ex.: salvadora: 'de pé, a estender os braços para amparar alguém fora do enquadramento'
+};
+export const poseDoBaralho = (personagemId: string): string | undefined => POSE_BARALHO[personagemId];
+
 export const BARALHO: Record<string, string[]> = {
   // As que carregam
   salvadora: ['Resolvo o problema antes de mo pedirem.', 'Atiro-me ao fogo de toda a gente.', 'Chamo-lhe amor, mas é resgate.', 'Sou aquela.'],

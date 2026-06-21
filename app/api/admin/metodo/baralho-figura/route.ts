@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { getPersonagem } from '@/lib/metodo/personagens';
 import { promptCartaFigura } from '@/lib/metodo/ia';
+import { poseDoBaralho } from '@/lib/metodo/baralho';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -60,7 +61,7 @@ export async function POST(req: Request) {
   // (theme.candidatas[id]) para não se perder ao recarregar/deploy.
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
-  const prompt = promptCartaFigura(p.nome, p.essencia);
+  const prompt = promptCartaFigura(p.nome, p.essencia, poseDoBaralho(p.id));
   let ultimoErro = '';
   for (let t = 0; t < 3; t++) {
     try {

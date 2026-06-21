@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { PERSONAGENS } from '@/lib/metodo/personagens';
+import { poseDoBaralho } from '@/lib/metodo/baralho';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
@@ -65,7 +66,8 @@ export async function POST(req: Request) {
     const figuras = ((br?.theme as { figuras?: Record<string, string> } | null)?.figuras) ?? {};
     const pid = PERSONAGENS.find((p) => p.nome === meta.personagem)?.id;
     const escolhida = pid ? figuras[pid] : undefined;
-    let prompt = promptCartaFigura(meta.personagem, PERSONAGENS.find((p) => p.nome === meta.personagem)?.essencia);
+    const pc = PERSONAGENS.find((p) => p.nome === meta.personagem);
+    let prompt = promptCartaFigura(meta.personagem, pc?.essencia, pc ? poseDoBaralho(pc.id) : undefined);
     let url: string | null;
     if (escolhida) { url = escolhida; prompt = 'figura definitiva do baralho'; }
     else { const r = await fundoImagem(prompt, slug); url = r.url; if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: r.erro }, { status: 502 }); }
