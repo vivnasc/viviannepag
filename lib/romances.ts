@@ -141,6 +141,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: a cool stone larder seen from within, wooden shelves rising full of jars of preserves and hanging cured sausages and cloth sacks of flour, dim and orderly; at the bottom, on the edge of a shelf, a single weathered older woman's hand resting half-closed beside one jar that stands open and faintly glowing; through a small doorway behind, at blue dusk, a small village of terracotta rooftops between soft green mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the quiet ache of plenty kept and never tasted, intimate, warm, painterly`,
   },
   {
+    slug: 'rom-presente',
+    titulo: 'O Presente por Abrir',
+    tituloEn: 'The Unopened Gift',
+    sub: 'um romance de Véspera · Estante III · A Mercearia',
+    estante: 'III · A Mercearia',
+    espelho: 'A mulher que tem medo de receber',
+    capitulos: 12,
+    palavras: 22000,
+    cena: `book cover illustration, vertical composition: at the bottom of the frame, on top of a humble wooden sideboard against a wall, a small gift parcel wrapped in faded paper with a tied ribbon, gathering a little dust, untouched; a single weathered older woman's hand resting near it but not opening it; warm low lamplight; behind and above, through a window, at blue dusk, a small village of terracotta rooftops between soft green mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the quiet ache of love offered and never let in, intimate, tender, painterly`,
+  },
+  {
     slug: 'rom-cheias',
     titulo: 'O Homem das Cheias',
     tituloEn: 'The Man the Floods Brought',

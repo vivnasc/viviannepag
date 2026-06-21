@@ -17,6 +17,7 @@ const LIVROS = {
   'rom-frio':      { key: 'frio',      capa: 'FRIO-capa',         dirEn: 'mulher-frio-livro-en',     outPt: 'A-MULHER-QUE-NUNCA-TEVE-FRIO-pt.pdf', outEn: 'THE-WOMAN-WHO-NEVER-FELT-THE-COLD-en.pdf' },
   'rom-fabrica':   { key: 'fabrica',   capa: 'FABRICA-capa',      dirEn: 'fabrica-dorme-livro-en',   outPt: 'ENQUANTO-A-FABRICA-DORME-pt.pdf',  outEn: 'WHILE-THE-FACTORY-SLEEPS-en.pdf' },
   'rom-despensa':  { key: 'despensa',  capa: 'DESPENSA-capa',     dirEn: 'a-despensa-cheia-livro-en', outPt: 'A-DESPENSA-CHEIA-pt.pdf',          outEn: 'THE-FULL-PANTRY-en.pdf' },
+  'rom-presente':  { key: 'presente',  capa: 'PRESENTE-capa',     dirEn: 'o-presente-por-abrir-livro-en', outPt: 'O-PRESENTE-POR-ABRIR-pt.pdf',     outEn: 'THE-UNOPENED-GIFT-en.pdf' },
 };
 
 module.exports = { LIVROS, SLUGS: Object.keys(LIVROS) };
