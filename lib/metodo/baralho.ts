@@ -12,7 +12,26 @@
 // uma pose, a figura usa EXATAMENTE essa (o modelo não improvisa); senão, a pose
 // encarna a essência. Preenche personagemId: 'descrição da pose'. Editável à mão.
 export const POSE_BARALHO: Record<string, string> = {
-  // ex.: salvadora: 'de pé, a estender os braços para amparar alguém fora do enquadramento'
+  // Poses ditadas pela Vivianne — cada corpo conta a estratégia do arquétipo.
+  salvadora: 'de pé, braços a estender-se para amparar alguém fora do quadro, o corpo inclinado para a frente, desequilibrado',
+  diretora: 'sentada muito direita, olhar alerta a varrer tudo, dedos a tocar a têmpora como quem segura mil coisas na cabeça',
+  provedora: 'de pé à cabeceira de uma mesa, a oferecer com as duas mãos o prato cheio estendido, o prato dela vazio à frente',
+  heroina: 'de pé no meio do caos, ombros firmes, queixo erguido, calma estranha de quem só existe quando há crise',
+  indispensavel: 'de pé, rodeada de mãos que se estendem para ela de todos os lados, e ela a segurar todas',
+  peregrina: 'de costas, a caminhar para um horizonte distante, uma mala sempre na mão, a casa atrás já pequena',
+  navegadora: 'a olhar para cima, para as estrelas, a traçar um mapa no ar com o dedo, os pés sem assentar no chão',
+  invisivel: 'encostada à margem do quadro, meio fora dele, o corpo a fazer-se pequeno, o olhar baixo',
+  desaparecida: 'de frente, mas o rosto a esbater-se e desfocar-se, o contorno do corpo a dissolver-se no fundo',
+  orfa: 'sentada sozinha num espaço grande e vazio, os braços a abraçar os próprios joelhos',
+  adaptadora: 'o corpo meio-líquido, a tomar a forma do espaço à volta, sem contorno próprio definido',
+  tradutora: 'no meio de duas figuras de costas, a fazer a ponte entre elas com as mãos, ela própria sem lugar',
+  diplomata: 'de pé entre dois lados, as palmas abertas para ambos, um sorriso medido, o peso igual nos dois pés',
+  fiel: 'curvada perante algo (uma casa, um brasão, uma figura), a mão no peito, presa por um fio',
+  guardia: 'de pé à entrada de algo, postura de sentinela, o olhar para fora a vigiar a ameaça que não vem',
+  sentinela: 'agachada e alerta no escuro, todos os sentidos abertos, o corpo que nunca desarma',
+  perfeccionista: 'debruçada sobre um trabalho, a corrigir um detalhe minúsculo que mais ninguém vê, tensa',
+  observadora: 'afastada, ao canto ou no alto, a ver a sala inteira sem entrar nela, braços cruzados',
+  // A Exploradora Permanente (do baralho do UNIVERSO-VS) corresponde aqui à Peregrina.
 };
 export const poseDoBaralho = (personagemId: string): string | undefined => POSE_BARALHO[personagemId];
 
