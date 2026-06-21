@@ -22,6 +22,8 @@ export const POSE_BARALHO: Record<string, string> = {
   // AS QUE PROCURAM
   peregrina: 'de costas, a partir outra vez para um horizonte, mala na mão; e a resposta que procura está atrás dela, em casa, por ver',
   navegadora: 'a olhar tudo à procura de um significado oculto, a tecer fios de sentido no ar à volta de uma coisa simples',
+  'aluna-eterna': 'rodeada de livros abertos e empilhados, a ler um e já a alcançar o seguinte, nunca a fechar nenhum, sempre a preparar-se para começar',
+  'buscadora-casa': 'à porta de muitas portas, a mão pousada numa maçaneta, a olhar para dentro sem entrar, a casa que procura é a interior',
   // AS QUE DESAPARECEM
   invisivel: 'a fazer muito ao fundo do quadro, encostada à margem, o olhar a espreitar se alguém repara, e ninguém repara',
   desaparecida: 'de frente, o contorno do corpo a dissolver-se no fundo, a ver-se desaparecer e a continuar a desaparecer',
@@ -36,7 +38,10 @@ export const POSE_BARALHO: Record<string, string> = {
   sentinela: 'alerta no escuro, todos os sentidos abertos, a guarda nunca em baixo, vigilância que chama segurança',
   perfeccionista: 'debruçada a corrigir um detalhe mínimo que ninguém vê, e nunca a dar por terminado',
   observadora: 'afastada ao canto/alto, a ler a sala inteira, a ver tudo, e a não entrar em nada',
-  // SEM pose ditada (a figura cai na essência): aluna-eterna, buscadora-casa, rebelde-silenciosa.
+  // FALTA pose (cai na essência): rebelde-silenciosa = "A Insatisfeita" no código (cumpre
+  //   tudo, diz que está farta, NÃO larga nada). A pose "A Silenciosa" que ditaste é de OUTRO
+  //   arquétipo (palavra retida) — não encaixa aqui. Dá-me a pose da Insatisfeita (ou cria
+  //   "A Silenciosa" como personagem própria) e eu travo-a.
   // CARTAS ESPECIAIS por criar (personagem própria com essência + carta, escritas pela Vivianne):
   //   · A Leal (carta-coração) — 'sentada, a segurar no colo uma armadura/peso antigo que já podia pousar, a olhá-lo com ternura, não com medo'
   //   · Sou Aquela que Já Pode Viver (carta final) — 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz, sem nada a carregar'
