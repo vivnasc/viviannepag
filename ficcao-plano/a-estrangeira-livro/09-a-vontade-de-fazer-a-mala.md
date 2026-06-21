@@ -20,6 +20,16 @@ E percebeu mais, com a mala nas mãos, e foi o que a fez voltar a pô-la no alto
 
 Voltou a pôr a mala no alto. Desceu do escadote, guardou-o, e foi-se deitar, e foi-lhe difícil, e custou-lhe não fugir, porque fugir era o descanso conhecido. Mas ficou.
 
+No dia seguinte, a Graça reparou. Foi à casa levar uma costura e encontrou Peregrina calada, fechada, com a máquina parada à janela e a roupa por coser, e conheceu logo, que as amigas conhecem.
+
+— Tu estás com a cara de quem vai fugir — disse a Graça, a sentar-se sem ser convidada, que era do que mais Peregrina gostava nela. — Conheço essa cara. Já ta vi uma vez, quando chegaste. O que é que foi?
+
+— Nada. A Bonança não gostou de um vestido.
+
+— E tu, por causa de um vestido da Bonança, ias outra vez buscar a mala ao armário. — Não era pergunta. A Graça olhou-a, séria por uma vez. — Ó Peregrina, ouve. A Bonança é assim com toda a gente. Não gostou de um vestido meu há dois anos e eu não fui embora da terra por causa disso, fui buscar outro tecido. Tu não te podes ir embora à primeira pessoa que te diz uma coisa torta, senão andas a vida toda a ir-te embora. Aqui também há gente parva, como em todo o lado. Ficas é com a outra. Ficas comigo. — E, mais baixo, a apertar-lhe o braço: — Não me deixes, agora que já gosto de ti.
+
+E Peregrina, ao ouvir não me deixes agora que já gosto de ti, sentiu uma coisa que a mala nunca lhe dera em trinta anos: sentiu que havia, naquela terra, alguém a quem ela faria falta se partisse. E quem tem, num sítio, alguém a quem faz falta, já não está só de passagem nesse sítio. A Graça era uma raiz, e as raízes não se levam na mala.
+
 E no dia seguinte fez uma coisa que a mulher de antes nunca faria: em vez de fugir da Bonança, foi ter com ela. Encontrou-a no largo, e em vez de a evitar, chegou-se, e falou, e disseram as duas o que tinham a dizer, e a Bonança, vendo que Peregrina não levara a mal, abrandou, e disse que afinal o primeiro vestido até não era feio, era só diferente, e que se calhar para o próximo arriscava uma coisa mais à maneira de lá, que mal não fazia experimentar; e ficaram bem, como ficam os que se desentendem e se compõem, que às vezes até se aproximam mais do que antes.
 
 E Peregrina percebeu, ao compor o desentendimento em vez de fugir dele, que acabara de fazer uma coisa que nunca fizera em trinta e oito anos: atravessar a primeira desilusão de uma terra sem partir. E que isso, esse ficar apesar da dor, era a raiz mais funda de todas, a que só cresce a quem não foge. Cada desilusão atravessada sem fazer a mala, dali em diante, em vez de a pôr de fora, ia pô-la mais dentro. Porque pertencer, descobriu naquela noite, não é não ter feridas numa terra. É ter ali feridas e ficar, e curá-las ali. E é das feridas curadas numa terra, tanto como das alegrias, que se faz a pertença a ela.
