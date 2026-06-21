@@ -96,6 +96,13 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
+    titulo: 'soulab.studio',
+    cor: '#B9A8E0',
+    itens: [
+      { href: '/admin/soulab', label: 'laboratório · gerar' },
+    ],
+  },
+  {
     titulo: 'Véu a Véu · planear',
     cor: '#C9B6FA',
     itens: [

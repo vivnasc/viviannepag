@@ -18,6 +18,9 @@ export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   { id: 'versoltar', nome: 'ver.soltar', emoji: '🌊' }, // a margem
   { id: 'virsoltar', nome: 'vir.soltar', emoji: '🤲' }, // o colo
   { id: 'viversoltar', nome: 'viver.soltar', emoji: '🌅' }, // descalça (o limiar)
+  // Soulab · laboratório criativo da alma (motor PRÓPRIO, separado dos outros).
+  // Conteúdo gerado em /admin/soulab, distinguido por theme.marca. Ver lib/soulab/*.
+  { id: 'soulab', nome: 'soulab.studio', emoji: '🧪' },
 ];
 
 const IDS = new Set(CONTAS.map((c) => c.id));
