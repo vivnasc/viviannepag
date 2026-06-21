@@ -30,6 +30,12 @@ E para que Perpétua percebesse que não falava por falar, a Guardiã foi a outr
 
 Perpétua olhou aquele assento, o da Conceição, a trave que rachou e levou a casa, e viu-se nele, e arrepiou-se, porque era o seu futuro escrito numa letra de há trinta anos, se ela não mudasse.
 
+E a Guardiã, vendo-a arrepiar-se, virou a página, e mostrou-lhe outra casa, para que ela não saísse só com o medo.
+
+— E olha esta, Perpétua, que é o contrário, para veres que se pode. A casa dos Soares, ali de cima. Tinha também uma trave, a Bonança, uma mulher como tu, que segurava tudo. Mas a Bonança, a certa altura, adoeceu, e teve de pousar, e em vez de carregar até cair, repartiu o peso pela família, a custo, com ranger e tudo, e a casa, em vez de cair, aprendeu a aguentar-se. E quando a Bonança morreu, anos depois, velha, a casa dos Soares não caiu, porque já não dependia só dela; reorganizou-se, e seguiu, e ainda lá está, de pé, cheia de gente. O assento da Bonança, no meu livro, não diz caiu de repente e a casa com ela; diz pousou a tempo, e a casa ficou. — Bateu de leve na página. — Tu podes escolher de qual destas duas casas vais ser, Perpétua. A dos Ferreiros, que caiu, ou a dos Soares, que ficou. A diferença não é a sorte. É pousar a tempo.
+
+Perpétua olhou os dois assentos, lado a lado, a casa que caiu e a casa que ficou, a trave que rachou e a trave que pousou, e percebeu que tinha, ali, à frente, os dois futuros possíveis da Casa do Lagar, e que era ela a escolher qual.
+
 E a Guardiã, que era Guardiã e não só guarda-livros, mostrou-lhe ainda outra coisa, que foi a que mais lhe doeu e mais a libertou. Folheou o livro de novo, devagar, e disse:
 
 — E olha o teu nome, Perpétua. Aparece em todos os papéis da casa há quarenta anos. Nos dos velhos, nos das festas, nos dos óbitos. Mas vê uma coisa. — Passou as páginas. — Não aparece em nenhum que seja teu. Não há, em quarenta anos, um único assento que seja só da Perpétua. Não há casamento, que não casaste, que não tiveste tempo. Não há uma viagem, não há uma coisa tua. Tu estás neste livro inteira, mas sempre a segurar os outros, nunca a viver. És a única pessoa da Casa do Lagar que, no meu livro, em quarenta anos, nunca fez nada por si. E isso, Perpétua, não é assento de uma vida. É assento de uma coluna. E tu não és uma coluna. És uma mulher. E ainda vais a tempo de pôr no livro, antes do fim, um assento que seja teu.
