@@ -12,26 +12,34 @@
 // uma pose, a figura usa EXATAMENTE essa (o modelo não improvisa); senão, a pose
 // encarna a essência. Preenche personagemId: 'descrição da pose'. Editável à mão.
 export const POSE_BARALHO: Record<string, string> = {
-  // Poses ditadas pela Vivianne — cada corpo conta a estratégia do arquétipo.
-  salvadora: 'de pé, braços a estender-se para amparar alguém fora do quadro, o corpo inclinado para a frente, desequilibrado',
-  diretora: 'sentada muito direita, olhar alerta a varrer tudo, dedos a tocar a têmpora como quem segura mil coisas na cabeça',
-  provedora: 'de pé à cabeceira de uma mesa, a oferecer com as duas mãos o prato cheio estendido, o prato dela vazio à frente',
-  heroina: 'de pé no meio do caos, ombros firmes, queixo erguido, calma estranha de quem só existe quando há crise',
-  indispensavel: 'de pé, rodeada de mãos que se estendem para ela de todos os lados, e ela a segurar todas',
-  peregrina: 'de costas, a caminhar para um horizonte distante, uma mala sempre na mão, a casa atrás já pequena',
-  navegadora: 'a olhar para cima, para as estrelas, a traçar um mapa no ar com o dedo, os pés sem assentar no chão',
-  invisivel: 'encostada à margem do quadro, meio fora dele, o corpo a fazer-se pequeno, o olhar baixo',
-  desaparecida: 'de frente, mas o rosto a esbater-se e desfocar-se, o contorno do corpo a dissolver-se no fundo',
-  orfa: 'sentada sozinha num espaço grande e vazio, os braços a abraçar os próprios joelhos',
-  adaptadora: 'o corpo meio-líquido, a tomar a forma do espaço à volta, sem contorno próprio definido',
-  tradutora: 'no meio de duas figuras de costas, a fazer a ponte entre elas com as mãos, ela própria sem lugar',
-  diplomata: 'de pé entre dois lados, as palmas abertas para ambos, um sorriso medido, o peso igual nos dois pés',
-  fiel: 'curvada perante algo (uma casa, um brasão, uma figura), a mão no peito, presa por um fio',
-  guardia: 'de pé à entrada de algo, postura de sentinela, o olhar para fora a vigiar a ameaça que não vem',
-  sentinela: 'agachada e alerta no escuro, todos os sentidos abertos, o corpo que nunca desarma',
-  perfeccionista: 'debruçada sobre um trabalho, a corrigir um detalhe minúsculo que mais ninguém vê, tensa',
-  observadora: 'afastada, ao canto ou no alto, a ver a sala inteira sem entrar nela, braços cruzados',
-  // A Exploradora Permanente (do baralho do UNIVERSO-VS) corresponde aqui à Peregrina.
+  // Poses ditadas e afinadas pela Vivianne — cada corpo carrega a SOMBRA do arquétipo.
+  // AS QUE CARREGAM
+  salvadora: 'inclinada para a frente a agarrar o problema de alguém fora do quadro, antes de lho pedirem, o corpo a resgatar',
+  diretora: 'sentada muito direita, imóvel, a dirigir tudo só com o olhar e um gesto da mão (não faz, comanda); a têmpora tensa de quem não desliga',
+  provedora: 'a oferecer com as duas mãos um prato cheio, e a recuar o corpo quando algo lhe é oferecido de volta, como quem recusa uma dívida',
+  heroina: 'serena e firme no meio do caos à volta, viva no problema; e o vazio à frente, onde a paz a deixaria sem função',
+  indispensavel: 'rodeada de mãos que se estendem para ela, exausta, mas a segurar todas, sem conseguir largar nenhuma',
+  // AS QUE PROCURAM
+  peregrina: 'de costas, a partir outra vez para um horizonte, mala na mão; e a resposta que procura está atrás dela, em casa, por ver',
+  navegadora: 'a olhar tudo à procura de um significado oculto, a tecer fios de sentido no ar à volta de uma coisa simples',
+  // AS QUE DESAPARECEM
+  invisivel: 'a fazer muito ao fundo do quadro, encostada à margem, o olhar a espreitar se alguém repara, e ninguém repara',
+  desaparecida: 'de frente, o contorno do corpo a dissolver-se no fundo, a ver-se desaparecer e a continuar a desaparecer',
+  orfa: 'ao centro de uma sala cheia de gente de costas, sozinha no meio de todos, os braços a abraçar-se a si',
+  // AS QUE SE ADAPTAM
+  adaptadora: 'o corpo a tomar a forma do espaço à volta, sem contorno próprio, já sem saber qual é a sua forma',
+  tradutora: 'entre duas figuras, a dar voz às emoções delas com as mãos; e a sua própria boca calada, sem ninguém a traduzi-la',
+  diplomata: 'de pé entre dois lados, palmas abertas para ambos, o peso igual nos dois pés, e nunca virada para si',
+  fiel: 'curvada perante algo que ama (uma casa, uma figura), a mão no peito, presa por um fio que confunde com gratidão',
+  // AS QUE VIGIAM
+  guardia: 'postura de sentinela à entrada, a antecipar uma ameaça que não chega, o corpo que nunca pousa a tensão',
+  sentinela: 'alerta no escuro, todos os sentidos abertos, a guarda nunca em baixo, vigilância que chama segurança',
+  perfeccionista: 'debruçada a corrigir um detalhe mínimo que ninguém vê, e nunca a dar por terminado',
+  observadora: 'afastada ao canto/alto, a ler a sala inteira, a ver tudo, e a não entrar em nada',
+  // SEM pose ditada (a figura cai na essência): aluna-eterna, buscadora-casa, rebelde-silenciosa.
+  // CARTAS ESPECIAIS por criar (personagem própria com essência + carta, escritas pela Vivianne):
+  //   · A Leal (carta-coração) — 'sentada, a segurar no colo uma armadura/peso antigo que já podia pousar, a olhá-lo com ternura, não com medo'
+  //   · Sou Aquela que Já Pode Viver (carta final) — 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz, sem nada a carregar'
 };
 export const poseDoBaralho = (personagemId: string): string | undefined => POSE_BARALHO[personagemId];
 
