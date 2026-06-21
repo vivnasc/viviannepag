@@ -112,5 +112,15 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add ficcao-plano/*.pdf ficcao-plano/*-capa-*.png || true
-          git diff --cached --quiet || git commit -m 'Render romance: PDFs finais com a capa escolhida [skip ci]'
-          git push
+          if git diff --cached --quiet; then echo "nada a commitar"; exit 0; fi
+          git commit -m 'Render romance: PDFs finais com a capa escolhida [skip ci]'
+          # O main pode ter avancado durante o render (outro merge). Integra antes
+          # de empurrar e tenta varias vezes; so se mexe em ficheiros binarios de
+          # ficcao-plano/, por isso o rebase nao tem conflitos com codigo-fonte.
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && { echo "push ok"; exit 0; }
+            echo "push falhou (tentativa $i); a reintegrar e tentar de novo..."
+            sleep 5
+          done
+          echo "::error::nao foi possivel empurrar os artefactos do render apos varias tentativas"
+          exit 1
