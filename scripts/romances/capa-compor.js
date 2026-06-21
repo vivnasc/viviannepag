@@ -72,8 +72,53 @@ const TEXTOS = {
     pt: { serie: 'BIBLIOTECA DE VÉSPERA · II', t1: 'As Portas', t2: 'Baixas', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
     en: { serie: 'THE VÉSPERA LIBRARY · II', t1: 'The Low', t2: 'Doors', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
   },
+  despensa: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · III', t1: 'A Despensa', t2: 'Cheia', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · III', t1: 'The Full', t2: 'Pantry', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  presente: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · III', t1: 'O Presente', t2: 'por Abrir', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · III', t1: 'The Unopened', t2: 'Gift', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  casa: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · IV', t1: 'A Casa', t2: 'por Acabar', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · IV', t1: 'The Unfinished', t2: 'House', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  trovoada: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · IV', t1: 'A', t2: 'Trovoada', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · IV', t1: 'The', t2: 'Thunderstorm', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  trave: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · V', t1: 'A', t2: 'Trave-Mestra', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · V', t1: 'The Master', t2: 'Beam', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  estrangeira: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · V', t1: 'A Estrangeira', t2: 'de Cá', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · V', t1: 'The Foreigner', t2: 'from Here', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  cisterna: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · VI', t1: 'A', t2: 'Cisterna', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · VI', t1: 'The', t2: 'Cistern', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  travessas: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · VI', t1: 'As Travessas', t2: 'Devolvidas', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · VI', t1: 'The Returned', t2: 'Dishes', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  chave: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · VII', t1: 'A Chave', t2: 'da Fábrica', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · VII', t1: 'The Key', t2: 'to the Mill', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
+  manta: {
+    pt: { serie: 'BIBLIOTECA DE VÉSPERA · VII', t1: 'A Manta', t2: 'Sem Nome', sub: 'romance', autora: 'VIVIANNE DOS SANTOS' },
+    en: { serie: 'THE VÉSPERA LIBRARY · VII', t1: 'The Unsigned', t2: 'Blanket', sub: 'a novel', autora: 'VIVIANNE DOS SANTOS' },
+  },
 };
-const T = (TEXTOS[LIVRO] || TEXTOS.amparo)[LANG === 'en' ? 'en' : 'pt'];
+const entry = TEXTOS[LIVRO];
+if (!entry) {
+  console.error(`capa-compor: não há TEXTOS para o livro '${LIVRO}'. Adiciona-o ao mapa (senão a capa sairia com o título do Amparo).`);
+  process.exit(1);
+}
+const T = entry[LANG === 'en' ? 'en' : 'pt'];
 
 const imgB64 = fs.readFileSync(SRC).toString('base64');
 
