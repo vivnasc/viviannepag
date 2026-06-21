@@ -21,7 +21,7 @@ export default function BaralhoPage() {
   const [zoom, setZoom] = useState<{ id: string; url: string; def?: boolean } | null>(null);
 
   const recarregar = useCallback(() => {
-    fetch('/api/admin/metodo/baralho-figura').then((r) => (r.ok ? r.json() : { figuras: {} })).then((j) => setFiguras(j.figuras ?? {})).catch(() => {});
+    fetch('/api/admin/metodo/baralho-figura').then((r) => (r.ok ? r.json() : { figuras: {}, candidatas: {} })).then((j) => { setFiguras(j.figuras ?? {}); setCand(j.candidatas ?? {}); }).catch(() => {});
   }, []);
   useEffect(() => { recarregar(); }, [recarregar]);
 

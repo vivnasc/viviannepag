@@ -16,16 +16,23 @@ export const maxDuration = 120;
 
 const SLUG = 'metodo-baralho';
 
-async function lerFiguras(): Promise<Record<string, string>> {
+type Estado = { figuras: Record<string, string>; candidatas: Record<string, string[]> };
+async function lerEstado(): Promise<Estado> {
   const supabase = getSupabaseAdmin();
   const { data } = await supabase.from('carousel_collections').select('theme').eq('slug', SLUG).maybeSingle();
-  return ((data?.theme as { figuras?: Record<string, string> } | null)?.figuras) ?? {};
+  const t = (data?.theme as { figuras?: Record<string, string>; candidatas?: Record<string, string[]> } | null) ?? {};
+  return { figuras: t.figuras ?? {}, candidatas: t.candidatas ?? {} };
+}
+async function gravar(e: Estado) {
+  const supabase = getSupabaseAdmin();
+  return supabase.from('carousel_collections').upsert({ slug: SLUG, title: 'Baralho · figuras', theme: { figuras: e.figuras, candidatas: e.candidatas, metodo: { conta: 'mae', tipo: 'baralho-figuras' } } }, { onConflict: 'slug' });
 }
 
-// GET: devolve o mapa { personagemId: figuraUrl } das figuras já escolhidas.
+// GET: figuras escolhidas (definitivas) + candidatas geradas (persistidas, não se perdem).
 export async function GET() {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  return NextResponse.json({ ok: true, figuras: await lerFiguras() });
+  const e = await lerEstado();
+  return NextResponse.json({ ok: true, figuras: e.figuras, candidatas: e.candidatas });
 }
 
 // POST { personagemId } -> gera UMA figura candidata e devolve { url } (não fixa).
@@ -42,14 +49,15 @@ export async function POST(req: Request) {
     if (!body.url) return NextResponse.json({ erro: 'sem-url' }, { status: 400 });
     let canon = body.url;
     try { canon = await guardarImagem(body.url, `metodo/baralho/${p.id}/figura.jpg`); } catch { /* fica a url candidata */ }
-    const figuras = await lerFiguras();
-    figuras[p.id] = `${canon}?v=${Date.now()}`;
-    const { error } = await supabase.from('carousel_collections').upsert({ slug: SLUG, title: 'Baralho · figuras escolhidas', theme: { figuras, metodo: { conta: 'mae', tipo: 'baralho-figuras' } } }, { onConflict: 'slug' });
+    const e = await lerEstado();
+    e.figuras[p.id] = `${canon}?v=${Date.now()}`;
+    const { error } = await gravar(e);
     if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
-    return NextResponse.json({ ok: true, url: figuras[p.id] });
+    return NextResponse.json({ ok: true, url: e.figuras[p.id] });
   }
 
-  // GERAR candidata: figura de carta de baralho da personagem (Flux).
+  // GERAR candidata: figura de carta de baralho da personagem (Flux) — e PERSISTE-A
+  // (theme.candidatas[id]) para não se perder ao recarregar/deploy.
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
   const prompt = promptCartaFigura(p.nome);
@@ -59,7 +67,10 @@ export async function POST(req: Request) {
       const raw = await gerarImagemFlux(prompt, token, { raw: true });
       let url = raw;
       try { url = await guardarImagem(raw, `metodo/baralho/${p.id}/cand-${Date.now()}.jpg`); } catch { /* fica raw */ }
-      return NextResponse.json({ ok: true, url, prompt });
+      const e = await lerEstado();
+      e.candidatas[p.id] = [url, ...(e.candidatas[p.id] ?? [])].slice(0, 8);
+      await gravar(e);
+      return NextResponse.json({ ok: true, url, prompt, candidatas: e.candidatas[p.id] });
     } catch (e) {
       ultimoErro = e instanceof Error ? e.message : String(e);
       await new Promise((r) => setTimeout(r, /429|throttl/i.test(ultimoErro) ? 12000 : 1500 * (t + 1)));
