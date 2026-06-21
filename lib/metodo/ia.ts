@@ -37,22 +37,25 @@ const FUNDO_REGRAS_DRAMA =
 // conta como fio condutor. Recebe `evitar` = assuntos já usados, para não repetir.
 // É isto que mata a monotonia (substitui a lista fixa fundoDaConta). `estilo`:
 // 'contemplativo' (padrão, manhã) ou 'dramatico' (tarde, alcance).
-// A FRENTE da carta "Sou Aquela": UMA figura de mulher (o arquétipo da personagem),
-// ilustração PINTADA, enquadramento de carta de oráculo, na veste da mãe (velas,
-// constelações, manuscritos; âmbar/ouro velho/negro estrelado). É uma FIGURA, NÃO um
-// fundo/cena — e SEM texto (as linhas da confissão entram por cima na composição).
-// Determinístico (não gasta IA): a carta tem de sair sempre como carta, não cena.
-export function promptCartaFigura(personagem?: string): string {
+// A FRENTE da carta "Sou Aquela": UMA figura de mulher de HOJE (o arquétipo da
+// personagem), em estilo de CARTA de oráculo (moldura dourada sobre negro), mas a
+// mulher é CONTEMPORÂNEA — roupa atual, sem santa/halo/vela. CRITÉRIOS FIXOS para
+// SER CONSISTENTE (não deixar à mercê do modelo): mesmo estilo, mesma pose, mesma
+// paleta em todas as cartas; só muda a mulher/arquétipo. SEM texto.
+export function promptCartaFigura(personagem?: string, essencia?: string, pose?: string): string {
   return [
-    // é uma CARTA DE BARALHO/ORÁCULO a sério — um OBJETO carta, com MOLDURA ornamentada,
-    // a figura dentro da carta, proporção de carta — não um retrato/imagem solto.
-    'an ornate illustrated tarot / oracle CARD, the whole image is a single trading-card object with a decorative ornate gold border and frame around it, card proportions',
-    'inside the frame, a single dignified woman as a timeless archetype',
-    personagem ? `embodying the figure of "${personagem}"` : '',
-    'serene contemplative figure centered within the card, symbolic and calm, elegant',
-    'painterly fine-art illustration, renaissance sfumato, candles, soft constellations and old manuscripts, warm amber and old-gold on deep starry near-black',
-    'clearly a card drawn from a deck, ornamental corners and inner border, intemporal',
-    'NO text, NO letters, NO words, NO numbers, NO title, NO watermark, NO logo',
+    // formato CARTA = vem da MOLDURA, não de iconografia religiosa.
+    'a modern oracle/tarot CARD: a single clean ornate thin GOLD border framing the whole image, deep matte near-black background, card proportions',
+    // a mulher é de HOJE, roupa atual — NUNCA santa/medieval.
+    'inside the frame, a single CONTEMPORARY woman of today (2026) in normal modern everyday clothes (simple knit / shirt / coat) — NOT robes, NOT a saint, NOT period or medieval costume',
+    personagem ? `she IS the archetype "${personagem}"` : '',
+    // POSE: se a Vivianne ditou a pose exata, é ESSA (travada); senão, a pose encarna a essência.
+    pose ? `her EXACT pose, gesture and expression (follow this precisely): ${pose}` : essencia ? `her POSE, GESTURE and EXPRESSION must CONVEY this exact character at a glance — the pose tells who she is: ${essencia}` : 'her pose and gesture clearly convey her character',
+    // o que é CONSISTENTE: estilo, moldura, paleta. O que MUDA: a pose/expressão.
+    'the rendering STYLE, the gold frame and the palette stay IDENTICAL across the whole deck — ONLY the pose and expression change from woman to woman',
+    'consistent modern editorial painterly illustration, soft matte gouache, restrained',
+    'gold used only as subtle linework and a soft glow on the black; elegant, timeless yet current',
+    'NO halo, NO candle, NO flames, NO religious or sacred symbols, NO crown, NO wings, NO byzantine/icon look, NO ornate medieval gown, NO text, NO letters, NO numbers, NO watermark, NO logo',
   ].filter(Boolean).join(', ');
 }
 

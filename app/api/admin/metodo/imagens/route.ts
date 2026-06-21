@@ -5,6 +5,7 @@ import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
 import { PERSONAGENS } from '@/lib/metodo/personagens';
+import { poseDoBaralho } from '@/lib/metodo/baralho';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -101,7 +102,7 @@ export async function POST(req: Request) {
       const pid = PERSONAGENS.find((p) => p.nome === meta.personagem)?.id;
       const escolhida = pid ? figuras[pid] : undefined;
       if (escolhida) { url = escolhida; prompt = 'figura definitiva do baralho'; }
-      else { prompt = promptCartaFigura(meta.personagem); const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro; }
+      else { const pc = PERSONAGENS.find((pp) => pp.nome === meta.personagem); prompt = promptCartaFigura(meta.personagem, pc?.essencia, pc ? poseDoBaralho(pc.id) : undefined); const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro; }
     } else {
       prompt = await promptDe(i, capa?.texto, (meta.veu ?? undefined) as VeuNome | undefined);
       const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro;

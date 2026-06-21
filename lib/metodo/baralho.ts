@@ -8,6 +8,79 @@
 //
 // Para afinar: edita as linhas aqui. Para travar: ficam aqui (não mudam sozinhas).
 
+// POSES TRAVADAS por personagem (ditadas pela Vivianne). Se uma personagem tem aqui
+// uma pose, a figura usa EXATAMENTE essa (o modelo não improvisa); senão, a pose
+// encarna a essência. Preenche personagemId: 'descrição da pose'. Editável à mão.
+export const POSE_BARALHO: Record<string, string> = {
+  // Poses ditadas e afinadas pela Vivianne — cada corpo carrega a SOMBRA do arquétipo.
+  // AS QUE CARREGAM
+  salvadora: 'inclinada para a frente a agarrar o problema de alguém fora do quadro, antes de lho pedirem, o corpo a resgatar',
+  diretora: 'sentada muito direita, imóvel, a dirigir tudo só com o olhar e um gesto da mão (não faz, comanda); a têmpora tensa de quem não desliga',
+  provedora: 'a oferecer com as duas mãos um prato cheio, e a recuar o corpo quando algo lhe é oferecido de volta, como quem recusa uma dívida',
+  heroina: 'serena e firme no meio do caos à volta, viva no problema; e o vazio à frente, onde a paz a deixaria sem função',
+  indispensavel: 'rodeada de mãos que se estendem para ela, exausta, mas a segurar todas, sem conseguir largar nenhuma',
+  // AS QUE PROCURAM
+  peregrina: 'de costas, a partir outra vez para um horizonte, mala na mão; e a resposta que procura está atrás dela, em casa, por ver',
+  navegadora: 'a olhar tudo à procura de um significado oculto, a tecer fios de sentido no ar à volta de uma coisa simples',
+  'aluna-eterna': 'rodeada de livros abertos e empilhados, a ler um e já a alcançar o seguinte, nunca a fechar nenhum, sempre a preparar-se para começar',
+  'buscadora-casa': 'à porta de muitas portas, a mão pousada numa maçaneta, a olhar para dentro sem entrar, a casa que procura é a interior',
+  // AS QUE DESAPARECEM
+  invisivel: 'a fazer muito ao fundo do quadro, encostada à margem, o olhar a espreitar se alguém repara, e ninguém repara',
+  desaparecida: 'de frente, o contorno do corpo a dissolver-se no fundo, a ver-se desaparecer e a continuar a desaparecer',
+  orfa: 'ao centro de uma sala cheia de gente de costas, sozinha no meio de todos, os braços a abraçar-se a si',
+  'rebelde-silenciosa': 'de pé a carregar uma braçada de tarefas/peso, a boca aberta a protestar em voz alta, e as mãos a agarrar com força o que diz que quer largar; o corpo recusa o que a boca exige',
+  // AS QUE SE ADAPTAM
+  adaptadora: 'o corpo a tomar a forma do espaço à volta, sem contorno próprio, já sem saber qual é a sua forma',
+  tradutora: 'entre duas figuras, a dar voz às emoções delas com as mãos; e a sua própria boca calada, sem ninguém a traduzi-la',
+  diplomata: 'de pé entre dois lados, palmas abertas para ambos, o peso igual nos dois pés, e nunca virada para si',
+  fiel: 'curvada perante algo que ama (uma casa, uma figura), a mão no peito, presa por um fio que confunde com gratidão',
+  // AS QUE VIGIAM
+  guardia: 'postura de sentinela à entrada, a antecipar uma ameaça que não chega, o corpo que nunca pousa a tensão',
+  sentinela: 'alerta no escuro, todos os sentidos abertos, a guarda nunca em baixo, vigilância que chama segurança',
+  perfeccionista: 'debruçada a corrigir um detalhe mínimo que ninguém vê, e nunca a dar por terminado',
+  observadora: 'afastada ao canto/alto, a ler a sala inteira, a ver tudo, e a não entrar em nada',
+  // (A "Silenciosa" que chegou a ser ditada foi descartada — era outro arquétipo, não existe no baralho.)
+};
+export const poseDoBaralho = (personagemId: string): string | undefined => POSE_BARALHO[personagemId];
+
+// ── CARTAS ESPECIAIS (fecho do arco) ─────────────────────────────────────────
+// NÃO são personagens das 5 famílias nem entram no baralho diário. São o FECHO:
+// a carta-coração (a viragem) e a carta final (a chegada). Pose TRAVADA (ditada
+// pela Vivianne); as LINHAS (frente/verso) são escritas por ela — aqui ficam vazias
+// de propósito (nada inventado pelo assistente). Editável à mão.
+export interface CartaEspecial {
+  id: string;
+  nome: string;
+  papel: 'carta-coracao' | 'carta-final'; // o lugar no fecho do arco
+  pose: string;        // travada pela Vivianne
+  frente: string[];    // as linhas da frente — POR ESCREVER pela Vivianne
+  verso: string[];     // as linhas do verso — POR ESCREVER pela Vivianne
+}
+
+export const CARTAS_ESPECIAIS: CartaEspecial[] = [
+  {
+    id: 'leal',
+    nome: 'A Leal',
+    papel: 'carta-coracao',
+    pose: 'sentada, a segurar no colo uma armadura/peso antigo que já podia pousar, a olhá-lo com ternura, não com medo',
+    frente: [],
+    verso: [],
+  },
+  {
+    id: 'ja-pode-viver',
+    nome: 'Sou Aquela que Já Pode Viver',
+    papel: 'carta-final',
+    pose: 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz, sem nada a carregar',
+    frente: [],
+    verso: [],
+  },
+];
+
+export const cartaEspecial = (id: string): CartaEspecial | undefined =>
+  CARTAS_ESPECIAIS.find((c) => c.id === id);
+/** A pose travada de uma carta especial de fecho (Leal, Já Pode Viver). */
+export const poseEspecial = (id: string): string | undefined => cartaEspecial(id)?.pose;
+
 export const BARALHO: Record<string, string[]> = {
   // As que carregam
   salvadora: ['Resolvo o problema antes de mo pedirem.', 'Atiro-me ao fogo de toda a gente.', 'Chamo-lhe amor, mas é resgate.', 'Sou aquela.'],
