@@ -24,6 +24,7 @@ const LIVROS = {
   'rom-estrangeira': { key: 'estrangeira', capa: 'ESTRANGEIRA-capa', dirEn: 'a-estrangeira-livro-en', outPt: 'A-ESTRANGEIRA-DE-CA-pt.pdf',     outEn: 'THE-FOREIGNER-FROM-HERE-en.pdf' },
   'rom-cisterna':  { key: 'cisterna',  capa: 'CISTERNA-capa',     dirEn: 'a-cisterna-livro-en',      outPt: 'A-CISTERNA-pt.pdf',                outEn: 'THE-CISTERN-en.pdf' },
   'rom-travessas': { key: 'travessas', capa: 'TRAVESSAS-capa',    dirEn: 'as-travessas-livro-en',    outPt: 'AS-TRAVESSAS-DEVOLVIDAS-pt.pdf',   outEn: 'THE-RETURNED-DISHES-en.pdf' },
+  'rom-chave':     { key: 'chave',     capa: 'CHAVE-capa',        dirEn: 'a-chave-livro-en',         outPt: 'A-CHAVE-DA-FABRICA-pt.pdf',        outEn: 'THE-KEY-TO-THE-MILL-en.pdf' },
 };
 
 module.exports = { LIVROS, SLUGS: Object.keys(LIVROS) };

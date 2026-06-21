@@ -31,6 +31,7 @@ const PASTAS = {
   estrangeira: { pt: 'a-estrangeira-livro', en: 'a-estrangeira-livro-en', capa: 'ESTRANGEIRA-capa', outPt: 'A-ESTRANGEIRA-DE-CA-pt.pdf', outEn: 'THE-FOREIGNER-FROM-HERE-en.pdf' },
   cisterna: { pt: 'a-cisterna-livro', en: 'a-cisterna-livro-en', capa: 'CISTERNA-capa', outPt: 'A-CISTERNA-pt.pdf', outEn: 'THE-CISTERN-en.pdf' },
   travessas: { pt: 'as-travessas-livro', en: 'as-travessas-livro-en', capa: 'TRAVESSAS-capa', outPt: 'AS-TRAVESSAS-DEVOLVIDAS-pt.pdf', outEn: 'THE-RETURNED-DISHES-en.pdf' },
+  chave: { pt: 'a-chave-livro', en: 'a-chave-livro-en', capa: 'CHAVE-capa', outPt: 'A-CHAVE-DA-FABRICA-pt.pdf', outEn: 'THE-KEY-TO-THE-MILL-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -384,6 +385,34 @@ const T_TRAVESSAS = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
+const T_CHAVE = LANG==='pt' ? {
+  tituloHtml:'A Chave<br>da Fábrica', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante VII · A Fiandeira',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Preciosa te doer em sítios reais, o nome do que ela carrega está em «A mulher que se tornou indispensável», na coleção SyncHim. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Preciosa. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Key<br>to the Mill', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf VII · The Spinning Mill',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Preciosa hurts you in real places, the name of what she carries is in “The Woman Who Made Herself Indispensable”, in the SyncHim collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Preciosa. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
 const T_CHEIAS = LANG==='pt' ? {
   tituloHtml:'O Homem<br>das Cheias', autora:'Vivianne dos Santos',
   serie:'Biblioteca de Véspera · Estante IV · A Ponte',
@@ -636,7 +665,7 @@ const T_PORTAS = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'despensa' ? T_DESPENSA : LIVRO === 'presente' ? T_PRESENTE : LIVRO === 'casa' ? T_CASA : LIVRO === 'trovoada' ? T_TROVOADA : LIVRO === 'trave' ? T_TRAVE : LIVRO === 'estrangeira' ? T_ESTRANGEIRA : LIVRO === 'cisterna' ? T_CISTERNA : LIVRO === 'travessas' ? T_TRAVESSAS : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'despensa' ? T_DESPENSA : LIVRO === 'presente' ? T_PRESENTE : LIVRO === 'casa' ? T_CASA : LIVRO === 'trovoada' ? T_TROVOADA : LIVRO === 'trave' ? T_TRAVE : LIVRO === 'estrangeira' ? T_ESTRANGEIRA : LIVRO === 'cisterna' ? T_CISTERNA : LIVRO === 'travessas' ? T_TRAVESSAS : LIVRO === 'chave' ? T_CHAVE : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];

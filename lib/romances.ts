@@ -229,6 +229,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: a humble village doorstep at warm dusk seen from outside, several covered earthenware dishes of food left on the stone step by unseen neighbours, one dish carried away still full; a half-open wooden door with warm light within and the faint silhouette of a woman hesitating at the threshold; beyond, a small village of terracotta rooftops between mountains; generous calm sky with empty space at the top third for a title; the ache of one who cannot accept the care left at her door, luminous, atmospheric, painterly`,
   },
   {
+    slug: 'rom-chave',
+    titulo: 'A Chave da Fábrica',
+    tituloEn: 'The Key to the Mill',
+    sub: 'um romance de Véspera · Estante VII · A Fiandeira',
+    estante: 'VII · A Fiandeira',
+    espelho: 'A mulher que se tornou indispensável',
+    capitulos: 13,
+    palavras: 10500,
+    cena: `book cover illustration, vertical composition: the interior of an old spinning mill at dawn, rows of looms and spindles in soft golden light, a large iron key hanging alone on a nail by the door, central and luminous; a lone older woman seen from behind standing among the silent machines, hand hovering near the key; tall factory windows letting in warm morning light over a small village of terracotta rooftops beyond; generous calm sky with empty space at the top third for a title; the ache of one bound to the key she made herself, learning to hand it over, luminous, atmospheric, painterly`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',
