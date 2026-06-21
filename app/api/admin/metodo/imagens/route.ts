@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
+import { PERSONAGENS } from '@/lib/metodo/personagens';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -82,6 +83,10 @@ export async function POST(req: Request) {
     return fundoDaConta(conta, evitar.length + i);
   }
 
+  // figuras DEFINITIVAS escolhidas no baralho (por personagem) — a carta usa-as.
+  const { data: br } = await supabase.from('carousel_collections').select('theme').eq('slug', 'metodo-baralho').maybeSingle();
+  const figuras = ((br?.theme as { figuras?: Record<string, string> } | null)?.figuras) ?? {};
+
   let feitas = 0;
   let ultimoErro = '';
   // UMA imagem por REEL (post), aplicada a todos os momentos. Sequencial (rate limit).
@@ -90,12 +95,18 @@ export async function POST(req: Request) {
     const meta = (row.theme?.metodo ?? {}) as { veu?: string; tipo?: string; personagem?: string };
     const sl = row.dias?.[0]?.slides ?? [];
     const capa = sl[0];
-    // carta "Sou Aquela" = figura da personagem; restantes = cena do véu (da capa).
-    const prompt = meta.tipo === 'carta'
-      ? promptCartaFigura(meta.personagem)
-      : await promptDe(i, capa?.texto, (meta.veu ?? undefined) as VeuNome | undefined);
-    const { url, erro } = await fundoImagem(prompt, row.slug);
-    if (!url) { if (erro) ultimoErro = erro; continue; }
+    // carta "Sou Aquela": figura DEFINITIVA do baralho se existir; senão gera a figura.
+    let url: string | null; let prompt: string;
+    if (meta.tipo === 'carta') {
+      const pid = PERSONAGENS.find((p) => p.nome === meta.personagem)?.id;
+      const escolhida = pid ? figuras[pid] : undefined;
+      if (escolhida) { url = escolhida; prompt = 'figura definitiva do baralho'; }
+      else { prompt = promptCartaFigura(meta.personagem); const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro; }
+    } else {
+      prompt = await promptDe(i, capa?.texto, (meta.veu ?? undefined) as VeuNome | undefined);
+      const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro;
+    }
+    if (!url) continue;
     for (const s of sl) { s.imageUrl = url; s.notaVisual = prompt; }
     const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', row.slug);
     if (!e2) feitas += 1;
