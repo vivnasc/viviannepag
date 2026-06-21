@@ -52,6 +52,35 @@ export interface Conta {
   /** PORTAS: o verbo de CHEGADA do movimento, o que distingue o fim de cada porta
    *  (ver: testemunhar · vir: regressar · viver: participar). */
   chegada?: string;
+  /** FILHAS · "A CENA PRIMEIRO": a pergunta que a mulher se faz a si própria (a
+   *  espinha da conta), NUNCA o nome do véu. Só ver/vir/viver. */
+  perguntaEspinha?: string;
+  /** FILHAS · a assinatura discreta no fim da peça (revelar · regressar · encarnar). */
+  assinatura?: string;
+  /** FILHAS · MOLDE da forma "cena primeiro": exemplos de micro-cenas concretas do
+   *  dia a dia (a cena ilumina, não se explica; tão específica que a pessoa pensa
+   *  numa cara). É finito, por isso NÃO é a fonte de conteúdo: ensina só a FORMA. O
+   *  gerador escreve cenas NOVAS nesta forma a partir do SABER (que não acaba). */
+  bancoCenas?: string[];
+  /** VIR · "Carta de renomear": os NOMES ANTIGOS que a pessoa sempre acreditou ser
+   *  (madura, responsável, forte…). A carta pega num e renomeia a história. Molde. */
+  nomesAntigos?: string[];
+  /** VIR · "Carta de renomear": as FRASES DE VIRAGEM que mudam o significado de
+   *  tudo ("Precisávamos de ti.", "Estavas sozinha."). Molde, não lista fechada. */
+  frasesViragem?: string[];
+  /** VER · "O Espelho": banco de HOOKS — uma pessoa real que vive na cabeça de quem
+   *  vê (admira, inveja, detesta, não esquece, irrita, intimida). Abre para FORA;
+   *  o formato vira para DENTRO (porque a escolheste para espelho). Molde, não fechado. */
+  bancoEspelho?: string[];
+  /** VIVER · "Repara": INSTANTES concretos e pequenos do presente a que não se dá
+   *  atenção (uma luz a certa hora, um cheiro, um gesto, uma textura). Os instantes
+   *  não se inventam, lembram-se: é molde do registo, não lista para repetir. */
+  bancoRepara?: string[];
+  /** MÃE · "Não normalizes…" (tarde): linhas-molde da forma. O TERRITÓRIO NÃO é
+   *  "fazer muito"/tarefas: é RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
+   *  e GESTÃO EMOCIONAL (responsável pelas emoções de todos menos as dela). Estas
+   *  ensinam a FORMA e as 2 famílias; o gerador escreve linhas NOVAS dentro delas. */
+  bancoNaoNormalizes?: string[];
   /** Os dois véus que este movimento recolhe (o cacho). */
   veus: VeuNome[];
   /** Símbolo visual desta conta (família das capas). */
@@ -107,6 +136,50 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Estou sempre no que aí vem ou no que já passou, nunca no agora.',
     sensacoes: ['a cabeça que não desliga', 'pensar de mais, antecipar tudo', 'reviver o que já passou', 'ruído interno constante', 'nunca estar mesmo no presente'],
     chegada: 'testemunhar (ver a tempestade de fora)',
+    perguntaEspinha: 'Porque faço isto sem reparar?',
+    assinatura: 'revelar',
+    bancoCenas: [
+      'queixas-te da carga toda e no minuto seguinte estás a tratar de tudo outra vez',
+      'planeias a resposta antes de ouvir a pergunta',
+      'pesquisas os sintomas dos outros e ignoras os teus',
+      'adormeces a refazer o dia inteiro na cabeça',
+      'o teu marido chega vinte minutos atrasado e na tua cabeça já houve uma discussão inteira',
+      'ainda estás a reler uma mensagem que a outra pessoa já esqueceu',
+      'já estás zangada com uma conversa que ainda não aconteceu',
+      'ele demora a responder e tu já inventaste o motivo, o desfecho e a despedida',
+      'ensaias no chuveiro o que vais dizer numa reunião que é só para a semana',
+      'lês "podemos falar?" e o estômago cai antes de saberes do que se trata',
+      'acordas às quatro da manhã a resolver um problema que ainda não existe',
+      'alguém faz uma cara e tu passas o dia a decidir o que ela queria dizer',
+      'guardas as conversas más de cor e esqueces os elogios no mesmo dia',
+      'preparas-te para a pior versão de cada notícia, só para não seres apanhada',
+      'antes de uma festa já imaginaste três maneiras de a noite correr mal',
+      'relês a mensagem que enviaste à procura do que possa ter soado mal',
+      'decides que a amiga está chateada porque demorou a pôr gosto',
+      'fazes as contas todas de uma discussão antes de a teres com a pessoa',
+      'o telemóvel toca com um número desconhecido e já é uma desgraça',
+      'revives à noite uma coisa que disseste há dez anos e ainda te encolhes',
+      'no meio de um jantar bom já estás a pensar em quando vai acabar',
+      'percebes o tom de voz de toda a gente menos quando estás em paz',
+      'preparas o que vais dizer ao médico e esqueces-te de ouvir o que ele diz',
+      'estás de férias e a cabeça continua na caixa de entrada do trabalho',
+    ],
+    // "O Espelho" (tarde da ver): quem fica a viver na cabeça de quem vê. Abre para
+    // FORA (uma pessoa real), vira para DENTRO (porque a escolheste para espelho).
+    bancoEspelho: [
+      'há uma mulher que segues só para te irritares',
+      'aquela colega que te faz sentir pequena sem dizer nada',
+      'segues uma pessoa que dizes que não suportas',
+      'há uma conversa de há anos que ainda refazes na cabeça',
+      'vês o perfil dela mais vezes por dia do que vês quem amas',
+      'há uma frase que te disseram e que ainda te arde',
+      'há alguém cujo sucesso te tira o sono e não sabes bem porquê',
+      'detestas nela exatamente aquilo que não te deixas fazer',
+      'a cunhada que ocupa a sala toda sem pedir desculpa fica-te na cabeça',
+      'admiras tanto uma pessoa que ao pé dela te sentes menos',
+      'despediste-te mal de alguém e ainda lhe respondes por dentro',
+      'há uma influencer que te irrita e mesmo assim não a deixas de ver',
+    ],
     veus: ['Turbilhão', 'Memória'],
     simbolo: 'a margem',
     fundoBase:
@@ -153,21 +226,56 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Não paro porque não aguento o que sinto quando paro.',
     sensacoes: ['exaustão de quem faz tudo', 'culpa ao parar', 'não saber receber', 'medo do silêncio e do vazio', 'encher o tempo para não sentir'],
     chegada: 'regressar (voltar a casa, a si)',
+    perguntaEspinha: 'Quando foi que me perdi de mim?',
+    assinatura: 'regressar',
+    bancoCenas: [
+      'tens catorze separadores abertos e nem um és tu',
+      'planeaste as férias de todos e voltaste mais cansada',
+      'a tua lista tem trinta coisas e nenhuma é para ti',
+      'acordas já a resolver antes de pôr os pés no chão',
+      'entraste na cozinha para beber água, respondeste a uma mensagem, arrumaste uma gaveta, e esqueceste-te da água',
+      'tens cinco minutos livres, o corpo quer sentar-se e a cabeça inventa-te uma tarefa',
+      'sabes a marca do iogurte de toda a gente lá de casa e não sabes qual é o teu',
+      'sentas-te ao fim do dia e levantas-te logo porque te lembraste de uma coisa',
+      'quando alguém te pergunta o que te apetece, ficas em branco',
+      'marcas as consultas de todos e a tua está adiada há meses',
+      'marcas o spa para compensar a semana e passas a massagem a responder mensagens da família',
+      'dás-te um miminho para aguentares outra semana exatamente igual',
+      'alguém te oferece ajuda e dizes "não, eu trato" antes de pensar',
+      'o teu corpo dói e a tua resposta é "logo vejo isso"',
+      'mandas um áudio de dez minutos à amiga a desabafar e a seguir fazes tudo na mesma',
+      'tens fotografias de toda a gente e quase nenhuma tua',
+      'a casa fica em silêncio e tu vais procurar o que arrumar',
+      'sabes dizer "carga mental" e continuas a carregá-la inteira',
+      'lembras-te dos remédios e das chaves deles e perdes os teus óculos na cabeça',
+      'quando paras, vem uma culpa, como se descansar fosse roubar',
+      'tens uma massagem marcada e desmarca-la para levar alguém a algum lado',
+      'ao domingo à noite já estás a viver a segunda-feira de toda a gente',
+      'precisas de ajuda e, em vez de pedir, fazes tu mais depressa',
+      'és a que toda a gente liga quando está mal, e não sabes a quem ligas tu',
+      'acabas tudo o que tinhas a fazer e sentes-te estranha por não teres nada a fazer',
+    ],
+    // "Carta de renomear" (tarde da vir): pega num nome antigo e vira o significado.
+    nomesAntigos: ['madura', 'organizada', 'forte', 'independente', 'prestável', 'responsável', 'sensata', 'a que aguenta tudo'],
+    frasesViragem: ['Precisávamos de ti.', 'Estavas sozinha.', 'Isso não era maturidade.', 'Não era organização.', 'Não era independência.', 'Não era uma força tua para dar.', 'Ninguém te perguntou se querias.'],
     veus: ['Esforço', 'Desolação'],
     simbolo: 'o colo',
     fundoBase:
       'a soft cupped hollow of warm golden light cradled in deep shadow, ' +
       'like a held nest or a quiet hearth, tender and sheltering, abstract, no figure',
     cor: '#e8bd84',
-    paleta: { bg1: '#6a4838', bg2: '#322218', accent: '#e8bd84' }, // terracota, âmbar, castanho quente, dourado suave
+    paleta: { bg1: '#1b2742', bg2: '#0e1526', accent: '#e8bd84' }, // VIR (Chamamento): azul nocturno + dourado/cobre
     atmosfera: {
-      sensacao: 'finalmente pousar',
-      fraseVisual: 'o momento em que alguém larga o peso que carregava',
-      prompt: 'warm tender atmosphere, terracotta amber and warm brown, the feeling of coming home and being received after a long day, warm and sheltering, room to breathe',
-      elementos: ['a warm bed with soft rumpled blankets in low evening light', 'two hands cradling a warm cup of tea', 'a cat curled asleep in a pool of warm lamplight', 'a single armchair with a folded blanket in a softly lit room', 'a glowing hearth in a quiet dim room', 'a small table set for one by warm candlelight', 'a lit window seen from the cold outside, welcoming', 'soft pillows piled in warm lamplight', 'a warm bath drawn in a dim quiet bathroom', 'a worn sofa under a soft reading lamp', 'a doorway spilling warm light onto a cold step', 'a small harbour with warm lights at dusk'],
-      // luz/hora (dentro do mundo quente): varia a hora sem perder o acolhimento.
-      registos: ['a warm early dawn glow', 'low golden-hour light', 'warm interior daylight', 'firelit dusk', 'lantern-lit evening', 'soft warm overcast light'],
-      textura: 'analog film, warm grain, soft warm light',
+      // VESTE do universo VIR · o Chamamento (do documento mestre): dourado, âmbar,
+      // cobre, azul nocturno · símbolos: bússolas, portais, rios de luz, aves
+      // migratórias, fios dourados, constelações-guia, mapas celestes, espirais.
+      sensacao: 'algo antigo a chamar-te de volta ao teu centro',
+      fraseVisual: 'um fio de luz que te leva de volta a ti',
+      prompt: 'the Calling: warm gold, amber, copper over deep night-blue, the feeling of something ancient calling you back to your own centre, returning home from dispersion, intimate and vast at once',
+      elementos: ['an ancient compass with a glowing needle turning toward a still centre', 'a luminous golden spiral drawing inward to a calm point', 'a golden portal opening between slow drifting stars', 'a river of golden light winding across a deep night sky', 'migrating birds following a thread of light toward home', 'fine golden threads weaving a path through the dark', 'an old celestial map glowing with constellation lines', 'a guiding constellation pulsing softly over a dark horizon', 'a crescent moon above a quiet path between stars', 'a labyrinth of light seen from above, leading to its centre', 'a bridge of light arching across the dark between two points', 'a single warm star steady amid slow cosmic dust'],
+      // luz/hora dentro do mundo do Chamamento (ouro/cobre sobre azul nocturno).
+      registos: ['deep night-blue with warm gold light', 'amber glow against near-black', 'copper light through cosmic dust', 'soft distant starlight', 'golden hour fading into a night sky', 'warm light breaking the dark'],
+      textura: 'luminous flowing particles, cinematic depth, warm gold over deep dark, fine grain',
     },
     manifestoLinha: 'Não precisas de carregar tudo para mereceres o teu lugar.',
     manifestoLinhas: [
@@ -200,6 +308,58 @@ export const CONTAS: Record<ContaId, Conta> = {
     fraseMae: 'Adio a vida que quero porque mudar seria deixar de ser quem sempre fui.',
     sensacoes: ['adiar a vida para um quando', 'chegar e nunca chegar', 'agarrar-se a quem já se foi', 'medo de mudar e de expandir', 'viver na próxima ou na antiga versão de si'],
     chegada: 'participar (entrar na vida, agora)',
+    perguntaEspinha: 'O que estou à espera para começar?',
+    assinatura: 'encarnar',
+    bancoCenas: [
+      'o livro que vais ler "quando tiver tempo"',
+      'a viagem adiada para "quando der"',
+      'o curso comprado e nunca aberto',
+      '"começo na segunda" há trezentas segundas',
+      'guardaste a viagem dos teus sonhos num board que nunca marcaste',
+      'tens um vestido que adoras e esperas o corpo certo para o usar',
+      'o ginásio que pagas todos os meses e a que vais duas vezes por ano',
+      'dizes que vais ter o ateliê, a horta, as aulas de dança, depois',
+      'a app de meditação que abriste duas vezes e o livro parado na mesma página há meses',
+      'compraste a tinta para o quarto há dois anos e as latas continuam fechadas',
+      'adias a consulta, a viagem, a conversa, para um tempo com calma que nunca vem',
+      'guardas o melhor de ti para uma versão tua que está sempre a um passo',
+      'tens uma lista de sítios para visitar e vais sempre ao mesmo café',
+      'dizes "quando os miúdos crescerem" como se a tua vida viesse a seguir à deles',
+      'esperas estar pronta para começar, e a vida não espera que estejas',
+      'tens um caderno bonito demais para escreveres nele',
+      'fotografas tudo para ver depois e nunca abres a pasta',
+      'dizes "para o ano" há tantos anos que já é uma morada',
+      'guardas o melhor de ti para quando a casa estiver arrumada',
+      'tens planos para a reforma e nenhum para domingo',
+      'esperas o sinal certo para mudar, e o sinal és tu a decidires',
+      'ficas onde já não cabes porque sair dá mais medo do que ficar',
+      'dizes que mudavas tudo, e ao café pedes sempre o mesmo',
+      'tens a mala meio feita há anos para uma viagem que adias todos os verões',
+      // 2026: a vida não se guarda, performa-se. O ecrã entre ti e o instante.
+      'filmas o pôr do sol inteiro e nunca chegas a vê-lo',
+      'vês o aniversário do teu filho através do ecrã, a filmar',
+      'a melhor parte das férias foi escolher o que ias postar',
+      'pões a mesa para a foto e comem já frio, sem se olharem nos olhos',
+      'visitas o sítio para o postar, não para lá estares',
+      'tens mil fotos da viagem e quase nenhuma lembrança dela',
+      'paras o momento para o gravar e perde-lo enquanto o gravas',
+    ],
+    // "Repara" (a viver): a vida que já está aqui, a que não dás atenção. Instantes
+    // concretos e pequenos (lembram-se, não se inventam). A imagem manda, a palavra serve.
+    bancoRepara: [
+      'a luz das cinco da tarde a bater na parede da cozinha',
+      'o cheiro do café antes de o beberes',
+      'o peso do gato a assentar-te no colo',
+      'a primeira dentada na fruta quando está mesmo madura',
+      'o sol morno nas costas das mãos enquanto lavas a loiça',
+      'o som da chuva quando já estás em casa, quente',
+      'os pés descalços no chão fresco de manhã',
+      'o vapor a subir da chávena nas tuas mãos frias',
+      'a gargalhada do teu filho na outra divisão, sem saberes porquê',
+      'a roupa acabada de tirar do estendal, ainda quente do sol',
+      'o silêncio da casa às seis da manhã, só teu',
+      'a côdea ainda morna do pão acabado de cortar',
+    ],
     veus: ['Horizonte', 'Permanência'],
     simbolo: 'descalça',
     fundoBase:
@@ -281,6 +441,23 @@ export const CONTAS: Record<ContaId, Conta> = {
     manualNome: 'Os Sete Véus',
     manualPrecoEur: 19,
     manualFonte: 'OS-7-VEUS-v2.md',
+    // "Não normalizes…" (tarde da mãe). Duas famílias (o tema NÃO é tarefas):
+    bancoNaoNormalizes: [
+      // Família · RESPONSABILIDADE INVISÍVEL SEM AUTORIDADE EQUIVALENTE
+      'Não normalizes seres responsável por tudo e dona de quase nada.',
+      'Não normalizes que a gestão da casa seja tua obrigação e a participação dele seja ajuda.',
+      'Não normalizes seres a única pessoa que sabe o que falta antes de faltar.',
+      'Não normalizes teres de te lembrar por dois adultos.',
+      'Não normalizes que a tua lista seja obrigatória e a dele opcional.',
+      'Não normalizes seres a directora-geral da família sem nunca teres aceite o cargo.',
+      'Não normalizes que o trabalho mental da casa nem sequer conte como trabalho.',
+      'Não normalizes que a paz da casa dependa do teu estado emocional.',
+      // Família · GESTÃO EMOCIONAL
+      'Não normalizes seres responsável pelas emoções de toda a gente menos pelas tuas.',
+      'Não normalizes engolires o teu cansaço para não estragares o ambiente.',
+      'Não normalizes teres de parecer bem para que os outros fiquem bem.',
+      'Não normalizes que a tua irritação seja um problema e a tua exaustão uma expectativa.',
+    ],
     manifestoLinha: 'Vê o que te prende. Solta o que te faz repetir.',
     manifestoLinhas: [
       'Vê o que te prende. Solta o que te faz repetir.',

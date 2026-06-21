@@ -21,6 +21,17 @@ motores diferentes. Não reframes a didática à luz do método nem o contrário
    tem a sua identidade; não achatar tudo a "post"/frase.
 3. **Cada formato no seu formato real** (ver abaixo).
 4. Fazer uma coisa de cada vez, com calma. Não empilhar mudanças.
+5. **LIMPEZA É NOS DOIS LADOS: código E frontend.** Zero tolerância a lixo.
+   Quando se abole um conceito/motor, apagar TAMBÉM os botões, cores, players e
+   UI que já não servem — não só as rotas/libs. Um botão que chama uma rota
+   apagada, ou que pertence a um conceito morto, é lixo igual a código morto.
+   Esta regra é PERMANENTE (a Vivianne teve de a repetir muitas vezes).
+6. **Os botões seguem o FORMATO, não se replicam às cegas.** Cada peça só mostra
+   o que serve aquele formato (ver `CAP_FORMATO` em `app/admin/metodo/[conta]`):
+   imagem em todos os visuais; **voz em nenhum** (todos os formatos são "sem
+   voz"); som ambiente só nos reels que MEXEM (cena · não normalizes · espelho),
+   nunca nas cartas que se LÊEM nem no sussurro do Repara; a carta de renomear é
+   tipográfica (não Flux) — nem imagem nem som.
 
 ## Os TRÊS perfis/produtos (NÃO misturar)
 
@@ -129,9 +140,14 @@ conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
 **Regras de ouro do método (aprendidas à força):**
 - **Expandir, nunca refazer do zero** o definido. A visão é uma **vista por cima
   dos motores** (`semana.ts`/`contas.ts`), nunca estrutura paralela que contradiga.
-- **mãe = 1 véu por DIA** (7/semana, `planoSemanaMae`, reel 2 faces). Portas têm
-  os SEUS véus (ver: Turbilhão+Memória; vir: Esforço+Desolação; viver:
-  Horizonte+Permanência). **Véus sempre ALTERNADOS**, nunca em bloco.
+- **O VÉU É DNA PARTILHADO** (decisão FINAL da Vivianne — «já não há conta por
+  véu»): os 7 véus, **1 por dia, IGUAIS para TODAS as contas** (`planoSemanaMae`).
+  **NÃO há "véu por conta"** — atribuir véus a uma conta (ex. ver=Turbilhão+Memória)
+  é LIXO ABOLIDO, não ressuscitar. O que distingue as contas **NÃO é o véu nem a
+  cor**: é o **FORMATO + a VOZ + o ÂNGULO**. O mesmo véu do dia VIRA coisas
+  diferentes em cada conta (mãe: carta «Sou Aquela» + «Não normalizes» · ver: O
+  Espelho · vir: Carta de renomear · viver: Repara). A cor é por VÉU (chacras),
+  nunca por conta. [A nota histórica «portas têm os seus véus» fica revogada.]
 - **PORTAS = VOZ primeiro, arco depois** (decisão de produto, validada em equipa):
   no Instagram ninguém consome por ordem, por isso o que faz a identidade é a
   **sensação recorrente**, não um percurso de 12 semanas. Cada porta tem uma
@@ -163,6 +179,53 @@ conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
 - Commits de **squash-merge no `main`** aparecem "Unverified" (do GitHub) — NÃO é
   trabalho pendente, não reescrever o `main`.
 
+### DECISÕES TRAVADAS (jun 2026 · sessão dos formatos) — NÃO voltar a discutir
+
+Tomadas pela Vivianne à força, depois de muito atrito. São CANÓNICAS; ler antes de mexer:
+
+1. **Cada peça do método é UM REEL (vídeo 9:16).** Uma cena/figura + o texto a
+   aparecer EM SEQUÊNCIA por cima. NÃO é carrossel de imagens nem slides que se
+   arrastam. Os "beats/momentos/slides" = as linhas que aparecem dentro do vídeo.
+   O "carrossel" no admin é só a LUPA para ver os momentos, não é como publica.
+2. **1 IMAGEM por reel** (a "1 cena"), usada em TODOS os momentos. NUNCA uma imagem
+   por slide (gerava várias imagens iguais = desperdício). Ver `imagem-uma` e
+   `imagens` (geram por POST/row, não por slide).
+3. **Geração fiável = CAMPOS/ARRAYS NOMEADOS** (padrão do banda/heroi), nunca "dá-me
+   N beats" à solta (vinha 1). `storyboard-ia`: não normalizes = `facas[]`+`volta[]`;
+   carta de renomear = `cena/vida/nome/releitura/preco/abertura`; o código monta os
+   slides. Garante vários slides.
+4. **NADA escrito pelo Claude/assistente hardcoded** no conteúdo. Tudo gerado pela
+   API a partir das FONTES da Vivianne (SABER, referencias, personagens, faces).
+   Frases-exemplo no prompt = o modelo COPIA → PROIBIDO deixá-las (removidas).
+5. **Carta "Sou Aquela" (mãe, manhã):** a PERSONAGEM é FIXA (baralho); a MENSAGEM
+   NÃO — gera-se a partir da carta-SEMENTE da personagem (a voz curada em
+   `baralho.ts`), variando. A FIGURA é uma CARTA DE BARALHO a sério (moldura
+   ornamentada, figura dentro) via `promptCartaFigura` — não imagem qualquer.
+6. **Filhas (ver/vir/viver) = 1 post/dia, às 14h**, o formato-assinatura (ver=O
+   Espelho · vir=Carta de renomear · viver=Repara). SEM post de manhã enquanto não
+   houver "um formato digno". A mãe é que tem 2/dia (carta 10h30 + não normalizes 16h).
+7. **A CAPA (1.º momento) é uma FACA** (a linha mais afiada que para o scroll), nunca
+   arranque morno/descritivo. **CTA/envio forte e obrigatório** (marcar/guardar/
+   partilhar/seguir), nunca morno.
+8. **Carta de renomear (vir) = TIPOGRÁFICA** (papel, `CartaSlide`), NÃO leva imagem
+   Flux — excluída da geração de imagens.
+9. **Calendário trimestral** = mapa com 3 eixos: DNA (7 véus, 1/dia, iguais às 4
+   contas) × ESPIRAL (a FACE avança por semana: dor→fuga→culpa→custo→revelação→saída,
+   13 semanas) × TRATAMENTO (o que muda por conta: formato+voz+ângulo, não o véu).
+   A lente de cada véu vem de `lentes.ts` (de UNIVERSO-VS.md). NÃO há véu por conta.
+10. **Plano da semana** = comum às 4 contas (tabs), na secção do mapa (não repetido
+    por conta). Mostra o ESQUELETO + estado real (por gerar / ✓ gerada), nunca
+    conteúdo fixo a fingir. Arranca na próxima semana cheia, preso ao trimestre (13).
+11. **Estúdio (modal de cada post):** pipeline à vista — rascunho → imagem → som →
+    render — só com os botões que servem o formato (`CAP_FORMATO`). Sem voz (nenhum
+    formato usa voz). **NÃO fazer merge** sem ela pedir; "produção" = ela produzir
+    conteúdo no admin, não git merge.
+
+**Limite real do ambiente:** sem `ANTHROPIC_API_KEY`/Supabase no container de dev →
+NÃO se consegue testar a geração localmente; mudanças de prompt são "às cegas" até
+ela regenerar. Por isso: mudar prompts com cuidado, e dizer-lhe que só vê o resultado
+ao apagar+regenerar (o "gerar" SALTA o que já existe; "testar 1 dia" regenera o dia).
+
 **Próximos passos do método:** (1) ~~ligar calendário↔semanal~~ ✅ FEITO
 (plano de 3 meses = fonte; a semana desce dele com banner, como na veu.a.veu);
 (2) **formatos da tarde** (carrossel de profundidade: O Custo Escondido · O
@@ -173,16 +236,33 @@ secção A.2 — NÃO perder, é para construir.** Alimenta-se de `saber.ts` + `
 (`ELEVEN_VOICE_ID` PURA, `eleven_v3`, SEM voice_settings/language_code — ver
 `render-reels.js`); (4) anti-repetição entre contas + camada de análise (o que rende).
 
-## FOCO da próxima sessão: Cá em Casa
+## FOCO / HANDOFF (estado em jun 2026 · fim da sessão dos formatos)
 
-A Vivianne quer trabalhar o **Cá em Casa** (parece o mais elaborado e nunca
-gerou nada para ver). Pontos de partida:
-- Página: `/admin/banda` · gerador: `app/api/admin/banda/gerar/route.ts`
-- Componente visual: `components/admin/BandaSlide.tsx`
-- Personagens recorrentes: `lib/banda/personagens.ts` · tópicos:
-  `lib/banda/topicos.ts`
-- **Primeiro passo sugerido:** gerar UM Cá em Casa e mostrá-lo, para ela VER
-  antes de produzir em série. Não achatar nem simplificar a cena/personagens.
+**Onde estamos:** o motor e o estúdio do método estão construídos e a funcionar
+(ver "DECISÕES TRAVADAS" acima). A sessão foi MUITO difícil (4 dias, muito atrito):
+a Vivianne ficou esgotada e a duvidar de continuar. O que a esgotou foi o PROCESSO
+(eu a oscilar, a decidir por ela, a não entregar, sem testar por não ter chaves no
+dev), não a visão. Tom para a próxima sessão: **entregar, não questionar; decidir o
+técnico; um passo de cada vez; nunca mandar descansar; nada de merge sem ela pedir.**
+
+**Pronto e a funcionar (preview, PR #406, NÃO merged):**
+- mãe: carta "Sou Aquela" (personagem fixa + mensagem da semente + figura tipo carta
+  de baralho) 10h30 + não normalizes (faca+volta, multi-slide) 16h.
+- filhas: 1 post/dia 14h (O Espelho · Carta de renomear · Repara), por campos nomeados.
+- estúdio (modal): pipeline rascunho→imagem→som→render, botões por formato; carrossel
+  = lupa dos momentos; 1 imagem por reel; legendas com hashtags.
+- calendário trimestral (DNA × espiral × tratamento) + plano da semana (4 contas,
+  esqueleto + estado), ambos na secção "método vs · o mapa".
+
+**Por VALIDAR (ela tem de regenerar com a API real — não dá no dev):** a QUALIDADE do
+texto gerado (carta funda? não normalizes sem clichés? espelho/repara a furar?), e as
+imagens (figura da carta; cena dos reels). Caminho limpo: apagar dias antigos → testar
+1 dia → ver → afinar prompts em `storyboard-ia.ts`/`ia.ts` se ficar fraco.
+
+**Aberto / próximo:** (1) afinar a VOZ/profundidade dos textos com ela, peça a peça,
+sem a esgotar; (2) decidir o formato da MANHÃ das filhas (ficou por definir — "formato
+digno"); (3) o "Cá em Casa" (banda) continua por gerar/ver (`/admin/banda`,
+`app/api/admin/banda/gerar`, `BandaSlide.tsx`, `lib/banda/*`) — não achatar a cena.
 
 ## Notas técnicas (aprendidas à força)
 

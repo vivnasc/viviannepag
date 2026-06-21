@@ -16,10 +16,9 @@ import { personagensPorVeu, familiaDaPersonagem, type Personagem, type Familia }
 import { FACES_ORDEM, type FacesVeu } from './veu-faces';
 import { dataLocal, horaDoMetodo } from './agenda';
 
-// Âncora do método (2.ª-feira da semana 1). Fuso LOCAL, nunca UTC.
-const INICIO = Date.UTC(2026, 5, 15);
-
-const SEED_CONTA: Record<ContaId, number> = { mae: 0, ver: 1, vir: 2, viver: 3 };
+// Âncora do método (2.ª-feira da semana 1 = arranque do plano: 22 jun 2026; a de
+// 15 jun foi a semana de testes). Fuso LOCAL, nunca UTC. Ver UNIVERSO-VS.md.
+const INICIO = Date.UTC(2026, 5, 22);
 
 /** O véu de um dia da semana (1 véu/dia, partilhado pelas contas). */
 export function veuDoDia(d: Date): VeuNome {
@@ -61,11 +60,13 @@ export interface Peca {
   face: FaceEspiral;   // a face que a espiral aprofunda esta semana
 }
 
-/** A personagem (máscara) de um dia, rodada por (semana + dia + conta) para variar. */
-export function personagemDoDia(veu: VeuNome, conta: ContaId, d: Date): Personagem | undefined {
+/** A personagem (máscara) de um dia. É a MESMA para TODAS as contas no mesmo
+ *  dia/véu (alinhadas) — o que muda entre contas é o FORMATO/voz, não a
+ *  personagem. (Decisão da Vivianne: a mesma mulher, tratada por cada universo.) */
+export function personagemDoDia(veu: VeuNome, d: Date): Personagem | undefined {
   const pool = personagensPorVeu(veu);
   if (!pool.length) return undefined;
-  const seed = semanasDesdeInicio(d) + d.getDay() + (SEED_CONTA[conta] ?? 0);
+  const seed = semanasDesdeInicio(d) + d.getDay();
   return pool[((seed % pool.length) + pool.length) % pool.length];
 }
 
@@ -77,7 +78,7 @@ export function planoSemanaPecas(conta: ContaId, offset = 0): Peca[] {
   for (let i = 0; i < 7; i++) {
     const d = new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + i);
     const veu = veuDoDia(d);
-    const personagem = personagemDoDia(veu, conta, d);
+    const personagem = personagemDoDia(veu, d);
     if (!personagem) continue;
     dias.push({ data: dataLocal(d), hora: horaDoMetodo(conta), veu, personagem, familia: familiaDaPersonagem(personagem.id), face });
   }

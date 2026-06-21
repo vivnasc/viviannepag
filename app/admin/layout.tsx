@@ -53,23 +53,45 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/produtos', label: 'produtos' },
       { href: '/admin/compras', label: 'compras' },
       { href: '/admin/estudio', label: 'estúdio' },
-      { href: '/admin/carrossel', label: 'carrosséis' },
-      { href: '/admin/series-diaria', label: 'séries diárias' },
       { href: '/admin/lista', label: 'a lista · emails' },
     ],
   },
   {
-    titulo: 'Método VS · 4 níveis',
-    cor: '#C8A24A',
+    titulo: 'método vs · o mapa (4 contas)',
+    cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo', label: 'painel · 4 níveis' },
-      { href: '/admin/metodo/calendario', label: '1 · calendário trimestral' },
-      { href: '/admin/metodo/semana', label: '2 · calendário semanal' },
-      { href: '/admin/publicar', label: '3 · agenda diária' },
-      { href: '/admin/metodo/mae', label: '4 · por conta · mãe' },
-      { href: '/admin/metodo/ver', label: '4 · por conta · ver' },
-      { href: '/admin/metodo/vir', label: '4 · por conta · vir' },
-      { href: '/admin/metodo/viver', label: '4 · por conta · viver' },
+      { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
+      { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
+    ],
+  },
+  {
+    titulo: 'vivianne.dos.santos · a mãe',
+    cor: '#d8b25a',
+    itens: [
+      { href: '/admin/metodo/mae', label: 'cartas + não normalizes' },
+      { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
+      { href: '/admin/carrossel', label: 'carrosséis' },
+    ],
+  },
+  {
+    titulo: 'ver.soltar',
+    cor: '#cdd8df',
+    itens: [
+      { href: '/admin/metodo/ver', label: 'produzir · o Espelho' },
+    ],
+  },
+  {
+    titulo: 'vir.soltar',
+    cor: '#e8bd84',
+    itens: [
+      { href: '/admin/metodo/vir', label: 'produzir · a Carta' },
+    ],
+  },
+  {
+    titulo: 'viver.soltar',
+    cor: '#cfe0a0',
+    itens: [
+      { href: '/admin/metodo/viver', label: 'produzir · o Repara' },
     ],
   },
   {

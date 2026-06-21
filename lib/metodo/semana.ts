@@ -71,13 +71,13 @@ export function planoSemana(conta: ContaId, offset = 0, base: Date = segundaDest
 // do SABER) -> face 2 = a revelação (do cânone). Aqui o plano fixa o VÉU de cada
 // dia e a revelação (face 2); a dor (face 1) é gerada na rota com anti-repetição.
 export const VEUS_SEMANA_MAE: { wd: number; nome: string; veu: VeuNome }[] = [
-  { wd: 1, nome: 'segunda', veu: 'Dualidade' },
-  { wd: 2, nome: 'terça', veu: 'Turbilhão' },
+  { wd: 1, nome: 'segunda', veu: 'Esforço' },
+  { wd: 2, nome: 'terça', veu: 'Desolação' },
   { wd: 3, nome: 'quarta', veu: 'Memória' },
-  { wd: 4, nome: 'quinta', veu: 'Esforço' },
-  { wd: 5, nome: 'sexta', veu: 'Desolação' },
-  { wd: 6, nome: 'sábado', veu: 'Horizonte' },
-  { wd: 0, nome: 'domingo', veu: 'Permanência' },
+  { wd: 4, nome: 'quinta', veu: 'Turbilhão' },
+  { wd: 5, nome: 'sexta', veu: 'Horizonte' },
+  { wd: 6, nome: 'sábado', veu: 'Permanência' },
+  { wd: 0, nome: 'domingo', veu: 'Dualidade' },
 ];
 
 export interface DiaSemanaMae {

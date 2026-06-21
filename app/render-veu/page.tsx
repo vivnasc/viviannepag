@@ -14,6 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
+import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta, type Conta } from '@/lib/metodo/contas';
 import { SerieDiariaSlide, type SerieId } from '@/components/admin/SerieDiariaSlide';
 import { type PaletaId } from '@/lib/series/serie-design';
@@ -77,6 +78,30 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog 
         return (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
             <MetodoSlide semFundo semRodape={!isLast} texto={b} conta={conta} conceito={i === 0 ? conceito : undefined} veuReveal={isLast ? veuReveal : undefined} anim="reveal" prog={lp} />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// CARTA DE RENOMEAR (tarde da vir) · N beats em sequência, registo PRÓPRIO:
+// beat 0 = a CENA (capa, alto contraste); restantes = o corpo da carta (papel).
+function CartaSequencia({ beats, conta, prog }: { beats: string[]; conta: Conta; prog: number }) {
+  const n = Math.max(1, beats.length);
+  const w = 1 / n;
+  return (
+    <div style={{ position: 'relative', width: 1080, height: 1920, background: '#0d0a06', overflow: 'hidden' }}>
+      {beats.map((b, i) => {
+        const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
+        const isLast = i === n - 1;
+        const fin = Math.min(1, lp / 0.18);
+        const fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
+        const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+        if (op <= 0) return null;
+        return (
+          <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+            <CartaSlide texto={b} conta={conta} capa={i === 0} prog={lp} semRodape={!isLast} />
           </div>
         );
       })}
@@ -179,6 +204,7 @@ export default function RenderVeuPage() {
   const ehKinetic = tipoSlide === 'kinetico';
   const ehMetodo = tipoSlide === 'metodo'; // identidade própria das contas do Método VS
   const ehTarde = ehMetodo && subtipo === 'nbeats'; // reel da tarde: N beats sobre 1 cena
+  const ehCarta = ehMetodo && subtipo === 'carta'; // Carta de renomear (vir): capa cena + corpo papel
   const ehSerie = tipoSlide === 'serie-diaria'; // moldura das séries diárias, sobreposta ao motion no render
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
@@ -247,7 +273,14 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
-      {estado && ehMetodo && ehTarde && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && ehCarta && s && getConta(s.contaId ?? '') && (
+        <CartaSequencia
+          beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
+          conta={getConta(s.contaId ?? '')!}
+          prog={prog}
+        />
+      )}
+      {estado && ehMetodo && !ehCarta && ehTarde && s && getConta(s.contaId ?? '') && (
         <Sequencia
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
@@ -258,10 +291,10 @@ export default function RenderVeuPage() {
           prog={prog}
         />
       )}
-      {estado && ehMetodo && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && !ehCarta && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
         <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} />
       )}
-      {estado && ehMetodo && !ehTarde && !estado.slide2 && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && !ehCarta && !ehTarde && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}
