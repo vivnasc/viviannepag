@@ -28,6 +28,7 @@ export const POSE_BARALHO: Record<string, string> = {
   invisivel: 'a fazer muito ao fundo do quadro, encostada à margem, o olhar a espreitar se alguém repara, e ninguém repara',
   desaparecida: 'de frente, o contorno do corpo a dissolver-se no fundo, a ver-se desaparecer e a continuar a desaparecer',
   orfa: 'ao centro de uma sala cheia de gente de costas, sozinha no meio de todos, os braços a abraçar-se a si',
+  'rebelde-silenciosa': 'de pé a carregar uma braçada de tarefas/peso, a boca aberta a protestar em voz alta, e as mãos a agarrar com força o que diz que quer largar; o corpo recusa o que a boca exige',
   // AS QUE SE ADAPTAM
   adaptadora: 'o corpo a tomar a forma do espaço à volta, sem contorno próprio, já sem saber qual é a sua forma',
   tradutora: 'entre duas figuras, a dar voz às emoções delas com as mãos; e a sua própria boca calada, sem ninguém a traduzi-la',
@@ -38,15 +39,47 @@ export const POSE_BARALHO: Record<string, string> = {
   sentinela: 'alerta no escuro, todos os sentidos abertos, a guarda nunca em baixo, vigilância que chama segurança',
   perfeccionista: 'debruçada a corrigir um detalhe mínimo que ninguém vê, e nunca a dar por terminado',
   observadora: 'afastada ao canto/alto, a ler a sala inteira, a ver tudo, e a não entrar em nada',
-  // FALTA pose (cai na essência): rebelde-silenciosa = "A Insatisfeita" no código (cumpre
-  //   tudo, diz que está farta, NÃO larga nada). A pose "A Silenciosa" que ditaste é de OUTRO
-  //   arquétipo (palavra retida) — não encaixa aqui. Dá-me a pose da Insatisfeita (ou cria
-  //   "A Silenciosa" como personagem própria) e eu travo-a.
-  // CARTAS ESPECIAIS por criar (personagem própria com essência + carta, escritas pela Vivianne):
-  //   · A Leal (carta-coração) — 'sentada, a segurar no colo uma armadura/peso antigo que já podia pousar, a olhá-lo com ternura, não com medo'
-  //   · Sou Aquela que Já Pode Viver (carta final) — 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz, sem nada a carregar'
+  // (A "Silenciosa" que chegou a ser ditada foi descartada — era outro arquétipo, não existe no baralho.)
 };
 export const poseDoBaralho = (personagemId: string): string | undefined => POSE_BARALHO[personagemId];
+
+// ── CARTAS ESPECIAIS (fecho do arco) ─────────────────────────────────────────
+// NÃO são personagens das 5 famílias nem entram no baralho diário. São o FECHO:
+// a carta-coração (a viragem) e a carta final (a chegada). Pose TRAVADA (ditada
+// pela Vivianne); as LINHAS (frente/verso) são escritas por ela — aqui ficam vazias
+// de propósito (nada inventado pelo assistente). Editável à mão.
+export interface CartaEspecial {
+  id: string;
+  nome: string;
+  papel: 'carta-coracao' | 'carta-final'; // o lugar no fecho do arco
+  pose: string;        // travada pela Vivianne
+  frente: string[];    // as linhas da frente — POR ESCREVER pela Vivianne
+  verso: string[];     // as linhas do verso — POR ESCREVER pela Vivianne
+}
+
+export const CARTAS_ESPECIAIS: CartaEspecial[] = [
+  {
+    id: 'leal',
+    nome: 'A Leal',
+    papel: 'carta-coracao',
+    pose: 'sentada, a segurar no colo uma armadura/peso antigo que já podia pousar, a olhá-lo com ternura, não com medo',
+    frente: [],
+    verso: [],
+  },
+  {
+    id: 'ja-pode-viver',
+    nome: 'Sou Aquela que Já Pode Viver',
+    papel: 'carta-final',
+    pose: 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz, sem nada a carregar',
+    frente: [],
+    verso: [],
+  },
+];
+
+export const cartaEspecial = (id: string): CartaEspecial | undefined =>
+  CARTAS_ESPECIAIS.find((c) => c.id === id);
+/** A pose travada de uma carta especial de fecho (Leal, Já Pode Viver). */
+export const poseEspecial = (id: string): string | undefined => cartaEspecial(id)?.pose;
 
 export const BARALHO: Record<string, string[]> = {
   // As que carregam
