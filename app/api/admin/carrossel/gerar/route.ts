@@ -7,7 +7,7 @@ import { REGRAS_GLOBAIS, UNIVERSO_TO_MUNDO } from '@/lib/carrossel/overrides';
 import { directivaImagem } from '@/lib/carrossel/paletas';
 import { faixaParaCarrossel } from '@/lib/carrossel/musica';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM, EXEMPLO_TOM } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM, EXEMPLO_TOM, limparSeparadores } from '@/lib/carrossel/metodo';
 import { listarPoolImagens, atribuirPool, imagensUsadas } from '@/lib/carrossel/pool-server';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
@@ -178,6 +178,10 @@ Notas: 6 slides por dia. notaVisual APENAS nos slides 'capa' e 'cta' (os do meio
       palavra: typeof dia.palavra === 'string' ? (dia.palavra as string).toUpperCase() : undefined,
       subtitulo: typeof dia.subtitulo === 'string' ? dia.subtitulo : undefined,
       movimento: movimentoDoDia(diaNum), // arco Ver->Vir->Viver->o todo da semana
+      // rede de seguranca: limpa "/" e "|" que o modelo as vezes copia para o texto.
+      slides: Array.isArray(dia.slides)
+        ? (dia.slides as Record<string, unknown>[]).map((s) => (typeof s?.texto === 'string' ? { ...s, texto: limparSeparadores(s.texto) } : s))
+        : dia.slides,
       mundo,
       plataforma: dia.plataforma ?? 'ambas',
       horario: dia.horario ?? '13:00',

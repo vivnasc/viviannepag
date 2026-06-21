@@ -165,15 +165,27 @@ export const BREVIDADE_E_TOM = `SUBSTÂNCIA E TOM (o coração do carrossel, ler
 - CHEIO, nunca oco: cada slide tem de DIZER ALGO REAL e concreto, que apetece guardar. A PROSA DESENVOLVE uma ideia (2 a 4 frases), nunca a resume a uma frase vaga. FOGE dos aforismos abstratos que não tocam a vida (ex.: "o que foi visto pode ser nomeado" não diz nada); prefere a cena concreta, o exemplo do dia a dia, a verdade que a pessoa reconhece em si.
 - BREVE mas não esquelético: breve é não ter gordura nem repetição, NÃO é ficar magro até ao osso. Cada palavra puxa o seu peso. Se há para cortar, corta o vazio, nunca a substância. Densidade a mais é mau; vazio também.
 - CONCRETO acima de abstrato: a metáfora (véu, enxerto, raiz) SERVE a mensagem, nunca a esconde. Ancora sempre numa situação real (a voz da mãe que te sai da boca, o sim que devia ser não, a culpa ao deitar). Proibido o hermético, o que só a autora entende.
-- EQUILÍBRIO luz e sombra: o método é VER E SOLTAR, não só a dor. A dor entra só o suficiente para a pessoa se reconhecer, e o carrossel caminha para o respiro e o alívio. O fecho levanta, não pesa, e abre uma escolha, não fecha uma sentença.`;
+- EQUILÍBRIO luz e sombra: o método é VER E SOLTAR, não só a dor. A dor entra só o suficiente para a pessoa se reconhecer, e o carrossel caminha para o respiro e o alívio. O fecho levanta, não pesa, e abre uma escolha, não fecha uma sentença.
+- FORMATO do texto: escreve texto limpo, pronto a aparecer no ecrã. No POÉTICO, separa os versos com QUEBRAS DE LINHA REAIS. NUNCA uses os caracteres / ou | dentro do texto (não são separadores, saem impressos no slide).`;
+
+// Limpa separadores que o modelo às vezes copia do exemplo (/, |) e que sairiam
+// impressos no slide. Um " / " ou " | " isolado vira quebra de linha real.
+export function limparSeparadores(texto: string): string {
+  return texto.replace(/\s+[/|]\s+/g, '\n').trim();
+}
 
 // Exemplo aprovado pela Vivianne (ENXERTO): o registo a atingir, breve mas CHEIO
 // e concreto. Não se copiam tema nem palavras, copia-se o REGISTO.
-export const EXEMPLO_TOM = `EXEMPLO do registo a atingir (breve mas CHEIO, concreto, com substância; NÃO copies o tema nem as palavras, copia o REGISTO; zero travessões):
-- palavra: ENXERTO | subtitulo: as vozes que cresceram em ti sem seres tu a plantá-las
-- gancho (capa): Abres a boca para ralhar e sai a voz da tua mãe, com tom e tudo.
-- PROSA: Há frases que dizes e nunca escolheste. Foram enxertadas cedo, por amor ou por medo, e cresceram contigo como se fossem tronco. Mas um enxerto não é a árvore. É um ramo que lhe colaram.
-- POÉTICO: Nem toda a voz que fala por dentro / nasceu dentro de ti.
-- PRÁTICA: Apanha hoje uma frase que repetes muito. Pergunta, sem pressa: de quem é mesmo esta voz? E queres continuar a dizê-la?
-- POÉTICO (fecho): Ver de quem é o enxerto não corta o ramo. / Só te devolve a escolha de o regar, ou não.
-- CTA: O que é meu, o que não é meu (guia). "Para separares, a preto e branco, o que carregas que nunca foi teu." (viviannedossantos.com/loja/guia-01-meu)`;
+export const EXEMPLO_TOM = `EXEMPLO do registo a atingir (breve mas CHEIO, concreto, com substância; NÃO copies o tema nem as palavras, copia o REGISTO; zero travessões; e repara: no POÉTICO os versos vão em linhas separadas, sem qualquer / nem |):
+palavra: ENXERTO
+subtitulo: as vozes que cresceram em ti sem seres tu a plantá-las
+gancho (capa): Abres a boca para ralhar e sai a voz da tua mãe, com tom e tudo.
+PROSA: Há frases que dizes e nunca escolheste. Foram enxertadas cedo, por amor ou por medo, e cresceram contigo como se fossem tronco. Mas um enxerto não é a árvore. É um ramo que lhe colaram.
+POÉTICO:
+Nem toda a voz que fala por dentro
+nasceu dentro de ti.
+PRÁTICA: Apanha hoje uma frase que repetes muito. Pergunta, sem pressa: de quem é mesmo esta voz? E queres continuar a dizê-la?
+POÉTICO (fecho):
+Ver de quem é o enxerto não corta o ramo.
+Só te devolve a escolha de o regar, ou não.
+CTA: O que é meu, o que não é meu (guia). "Para separares, a preto e branco, o que carregas que nunca foi teu." (viviannedossantos.com/loja/guia-01-meu)`;

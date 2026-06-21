@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { getCatalogoProdutos, amostraEcossistema, ecossistemaPrompt } from '@/lib/carrossel/catalogo';
 import { ofertasAnterioresPrompt } from '@/lib/carrossel/ofertas';
 import { REGRAS_GLOBAIS } from '@/lib/carrossel/overrides';
-import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM, EXEMPLO_TOM } from '@/lib/carrossel/metodo';
+import { METODO_ESPINHA, METODO_VOZ, metodoOfertasPrompt, eixoSemanaPrompt, movimentoDoDia, CTA_FILOSOFIA, BREVIDADE_E_TOM, EXEMPLO_TOM, limparSeparadores } from '@/lib/carrossel/metodo';
 import { getColecao, type ColecaoId } from '@/lib/colecoes';
 
 export const runtime = 'nodejs';
@@ -138,19 +138,19 @@ DEVOLVE APENAS JSON valido, sem texto a volta:
     let mi = 0;
     const slides = (Array.isArray(d.slides) ? d.slides : []) as Rec[];
     const novosSlides = slides.map((s) => {
-      if (s.tipo === 'capa') return { ...s, destaque: String(n.gancho ?? s.destaque ?? '') };
+      if (s.tipo === 'capa') return { ...s, destaque: limparSeparadores(String(n.gancho ?? s.destaque ?? '')) };
       if (s.tipo === 'cta') {
         const cta = (n.cta ?? {}) as Rec;
         return {
           ...s,
           titulo: String(cta.nome ?? s.titulo ?? ''),
-          texto: String(cta.texto ?? s.texto ?? ''),
-          destaque: String(cta.url ?? s.destaque ?? ''),
+          texto: limparSeparadores(String(cta.texto ?? s.texto ?? '')),
+          destaque: String(cta.url ?? s.destaque ?? ''), // URL: não limpar (tem "/")
         };
       }
       const txt = mi < meio.length ? meio[mi] : undefined;
       mi++;
-      return { ...s, texto: String(txt ?? s.texto ?? '') };
+      return { ...s, texto: limparSeparadores(String(txt ?? s.texto ?? '')) };
     });
     return { ...d, movimento: movimentoDoDia(diaNum), slides: novosSlides };
   });
