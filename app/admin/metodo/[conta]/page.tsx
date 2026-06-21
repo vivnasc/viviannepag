@@ -654,20 +654,52 @@ export default function MetodoContaPage() {
                 ); })()}
               </div>
             )}
-            {/* Botões POR FORMATO (cada um só o que serve a peça — regra da Vivianne).
-                imagem: todos os visuais (carta de renomear é tipográfica, não tem).
-                voz: nenhum (todos os formatos são "sem voz"). som: só os que mexem. */}
-            {(() => { const cap = capFormato(detalhe.tipo); return (
-            <div className="mt-2 flex items-center justify-center gap-2 flex-wrap text-[0.72rem]">
-              {cap.imagem && detalhe.imageUrl && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="anima a imagem (Kling); o fundo passa a mexer no reel" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300 disabled:opacity-40">{animarBusy === detalhe.slug ? '🎬 a animar…' : '🎬 animar (a cena)'}</button>}
-              {detalhe.videoUrl
-                ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg border border-emerald-400/40 text-emerald-300">ver MP4</a>
-                : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="px-2.5 py-1 rounded-lg border border-white/25">renderizar</button>}
-              {cap.imagem && <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={detalhe.imageUrl ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem (fundo) deste post'} className="px-2.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : !detalhe.imageUrl ? 'gerar imagem' : 'outra imagem'}</button>}
-              {cap.imagem && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="TESTE: gera versão dramática/cinematográfica. Não muda o resto do feed." className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{novaImgBusy === detalhe.slug ? '…' : '⚡ versão dramática (teste)'}</button>}
-              {cap.som && <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="gera o som ambiente (ElevenLabs) de fundo do reel" className="px-2.5 py-1 rounded-lg border border-amber-400/50 text-amber-300 disabled:opacity-40">{somBusy === detalhe.slug ? '🔊 a gerar som…' : '🔊 gerar som'}</button>}
-              <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
-              <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
+            {/* PIPELINE DE PRODUÇÃO (estúdio): rascunho → imagem → som → render, com
+                ESTADO de cada fase e SÓ os botões que servem este formato. */}
+            {(() => { const cap = capFormato(detalhe.tipo); const temImg = !!detalhe.imageUrl; return (
+            <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.02] p-2.5">
+              <p className="text-[0.55rem] uppercase tracking-[0.16em] opacity-50 mb-2 text-center">produção · {TIPO_LABEL[detalhe.tipo ?? ''] ?? 'peça'}</p>
+              <div className="flex items-stretch justify-center gap-1.5 flex-wrap text-[0.7rem]">
+                {/* 1 · RASCUNHO (texto gerado pela IA, das tuas fontes) */}
+                <div className="rounded-lg border border-emerald-400/30 bg-emerald-500/5 px-2.5 py-1.5 text-center">
+                  <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">1 · rascunho</span>
+                  <span className="text-emerald-300">✓ {detalhe.beats.length || 1} slides</span>
+                </div>
+                {/* 2 · IMAGEM (só formatos visuais; carta de renomear é tipográfica) */}
+                {cap.imagem ? (
+                  <div className={`rounded-lg border px-2.5 py-1.5 text-center ${temImg ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
+                    <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">2 · imagem</span>
+                    <div className="flex items-center gap-1.5 justify-center">
+                      <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={temImg ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem deste post'} className={temImg ? 'text-amber-300' : 'text-emerald-300'}>{novaImgBusy === detalhe.slug ? '…' : temImg ? 'outra' : 'gerar imagem'}</button>
+                      {temImg && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="versão dramática (teste)" className="opacity-70">⚡</button>}
+                      {temImg && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="animar a imagem (Kling)" className="opacity-70">🎬</button>}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-white/10 px-2.5 py-1.5 text-center opacity-50">
+                    <span className="block text-[0.5rem] uppercase tracking-wider">2 · imagem</span>
+                    <span className="text-[0.62rem]">tipográfica</span>
+                  </div>
+                )}
+                {/* 3 · SOM (só os reels que mexem) */}
+                {cap.som && (
+                  <div className={`rounded-lg border px-2.5 py-1.5 text-center ${detalhe.som ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
+                    <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">3 · som</span>
+                    <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="som ambiente (ElevenLabs)" className={detalhe.som ? 'text-amber-300' : 'text-emerald-300'}>{somBusy === detalhe.slug ? '…' : detalhe.som ? 'outro' : 'gerar som'}</button>
+                  </div>
+                )}
+                {/* 4 · RENDER */}
+                <div className={`rounded-lg border px-2.5 py-1.5 text-center ${detalhe.videoUrl ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
+                  <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">4 · render</span>
+                  {detalhe.videoUrl
+                    ? <a href={detalhe.videoUrl} target="_blank" rel="noreferrer" className="text-emerald-300">ver MP4</a>
+                    : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="text-emerald-300">renderizar</button>}
+                </div>
+              </div>
+              <div className="mt-2 flex items-center justify-center gap-2 text-[0.68rem]">
+                <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
+                <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
+              </div>
             </div>
             ); })()}
             {detalhe.som && (
