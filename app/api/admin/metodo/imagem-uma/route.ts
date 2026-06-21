@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
+import { PERSONAGENS } from '@/lib/metodo/personagens';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
 
 export const runtime = 'nodejs';
@@ -59,9 +60,15 @@ export async function POST(req: Request) {
   // A "Carta de renomear" é TIPOGRÁFICA (papel, CartaSlide), não leva imagem Flux.
   if (meta.tipo === 'cartaRenomear') return NextResponse.json({ erro: 'carta-renomear-sem-flux', detalhe: 'A Carta de renomear é tipográfica (não tem imagem Flux).' }, { status: 400 });
   if (meta.tipo === 'carta') {
-    const prompt = promptCartaFigura(meta.personagem);
-    const { url, erro } = await fundoImagem(prompt, slug);
-    if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro }, { status: 502 });
+    // se a personagem já tem FIGURA DEFINITIVA escolhida no baralho, usa-a (não gera nova).
+    const { data: br } = await supabase.from('carousel_collections').select('theme').eq('slug', 'metodo-baralho').maybeSingle();
+    const figuras = ((br?.theme as { figuras?: Record<string, string> } | null)?.figuras) ?? {};
+    const pid = PERSONAGENS.find((p) => p.nome === meta.personagem)?.id;
+    const escolhida = pid ? figuras[pid] : undefined;
+    let prompt = promptCartaFigura(meta.personagem);
+    let url: string | null;
+    if (escolhida) { url = escolhida; prompt = 'figura definitiva do baralho'; }
+    else { const r = await fundoImagem(prompt, slug); url = r.url; if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: r.erro }, { status: 502 }); }
     for (const s of slides) { s.imageUrl = url; s.notaVisual = prompt; s.estilo = 'carta'; s.clipUrl = null; s.clipPredId = null; s.clipPend = false; }
     if (row.dias?.[0]) row.dias[0].videoUrl = null;
     const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', slug);
