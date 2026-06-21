@@ -101,7 +101,7 @@ export async function POST(req: Request) {
       const pid = PERSONAGENS.find((p) => p.nome === meta.personagem)?.id;
       const escolhida = pid ? figuras[pid] : undefined;
       if (escolhida) { url = escolhida; prompt = 'figura definitiva do baralho'; }
-      else { prompt = promptCartaFigura(meta.personagem); const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro; }
+      else { prompt = promptCartaFigura(meta.personagem, PERSONAGENS.find((pp) => pp.nome === meta.personagem)?.essencia); const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro; }
     } else {
       prompt = await promptDe(i, capa?.texto, (meta.veu ?? undefined) as VeuNome | undefined);
       const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro;

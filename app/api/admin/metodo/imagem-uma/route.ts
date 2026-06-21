@@ -65,7 +65,7 @@ export async function POST(req: Request) {
     const figuras = ((br?.theme as { figuras?: Record<string, string> } | null)?.figuras) ?? {};
     const pid = PERSONAGENS.find((p) => p.nome === meta.personagem)?.id;
     const escolhida = pid ? figuras[pid] : undefined;
-    let prompt = promptCartaFigura(meta.personagem);
+    let prompt = promptCartaFigura(meta.personagem, PERSONAGENS.find((p) => p.nome === meta.personagem)?.essencia);
     let url: string | null;
     if (escolhida) { url = escolhida; prompt = 'figura definitiva do baralho'; }
     else { const r = await fundoImagem(prompt, slug); url = r.url; if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: r.erro }, { status: 502 }); }

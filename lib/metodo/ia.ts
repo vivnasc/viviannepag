@@ -42,17 +42,18 @@ const FUNDO_REGRAS_DRAMA =
 // mulher é CONTEMPORÂNEA — roupa atual, sem santa/halo/vela. CRITÉRIOS FIXOS para
 // SER CONSISTENTE (não deixar à mercê do modelo): mesmo estilo, mesma pose, mesma
 // paleta em todas as cartas; só muda a mulher/arquétipo. SEM texto.
-export function promptCartaFigura(personagem?: string): string {
+export function promptCartaFigura(personagem?: string, essencia?: string): string {
   return [
     // formato CARTA = vem da MOLDURA, não de iconografia religiosa.
     'a modern oracle/tarot CARD: a single clean ornate thin GOLD border framing the whole image, deep matte near-black background, card proportions',
     // a mulher é de HOJE, roupa atual — NUNCA santa/medieval.
     'inside the frame, a single CONTEMPORARY woman of today (2026) in normal modern everyday clothes (simple knit / shirt / coat) — NOT robes, NOT a saint, NOT period or medieval costume',
-    personagem ? `she embodies the archetype "${personagem}" through her expression and posture, not through costume` : '',
-    // POSE e composição CONSISTENTES (sempre a mesma) — não poses ao calhas.
-    'always the SAME composition: calm dignified three-quarter portrait, centered, framed shoulders-to-waist, looking quietly toward the viewer, serene and grounded',
-    // ESTILO CONSISTENTE em todas as cartas.
-    'consistent modern editorial painterly illustration, soft matte gouache, restrained — the EXACT same rendering style for every card of the deck',
+    personagem ? `she IS the archetype "${personagem}"` : '',
+    // a POSE TRANSMITE a personagem (lê-se quem ela é) — varia por personagem.
+    essencia ? `her POSE, GESTURE and EXPRESSION must CONVEY this exact character at a glance — the pose tells who she is: ${essencia}` : 'her pose and gesture clearly convey her character',
+    // o que é CONSISTENTE: estilo, moldura, paleta. O que MUDA: a pose/expressão.
+    'the rendering STYLE, the gold frame and the palette stay IDENTICAL across the whole deck — ONLY the pose and expression change from woman to woman',
+    'consistent modern editorial painterly illustration, soft matte gouache, restrained',
     'gold used only as subtle linework and a soft glow on the black; elegant, timeless yet current',
     'NO halo, NO candle, NO flames, NO religious or sacred symbols, NO crown, NO wings, NO byzantine/icon look, NO ornate medieval gown, NO text, NO letters, NO numbers, NO watermark, NO logo',
   ].filter(Boolean).join(', ');

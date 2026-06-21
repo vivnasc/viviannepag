@@ -60,7 +60,7 @@ export async function POST(req: Request) {
   // (theme.candidatas[id]) para não se perder ao recarregar/deploy.
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
-  const prompt = promptCartaFigura(p.nome);
+  const prompt = promptCartaFigura(p.nome, p.essencia);
   let ultimoErro = '';
   for (let t = 0; t < 3; t++) {
     try {
