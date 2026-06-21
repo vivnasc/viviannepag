@@ -50,9 +50,9 @@ export function promptCartaFigura(personagem?: string, essencia?: string, pose?:
     'a flat 2D hand-painted tarot card ILLUSTRATION, editorial painterly artwork, matte gouache, clearly an illustration and NOT a photograph, NOT a 3D render, NOT photorealistic',
     // 2) sujeito: mulher de HOJE, roupa atual — NUNCA santa/medieval.
     'depicting a single CONTEMPORARY ordinary woman of 2026 in normal modern everyday clothes (simple knit, shirt or coat), a real woman of today, NOT a saint, NOT a goddess, NOT robes, NOT period or medieval costume',
-    // IDADE: adulta, com o peso da vida — NUNCA a miúda-modelo de 20 anos do Flux.
-    // RAÇA: AMBÍGUA, de propósito (representa TODAS as mulheres). NÃO fixar etnia nenhuma.
-    'a mature adult woman, around 45 years old (between 38 and 55), a real lived-in everyday face carrying the weight of life, of ambiguous and unspecified ethnicity with a warm medium-brown skin tone and mixed heritage so she can represent any woman and is never tied to one single race, NOT a young woman in her twenties, NOT a fashion model, NOT glamorous or airbrushed',
+    // IDADE: adulta mas NÃO idosa (o "peso da vida"/45-55 fazia-a velha demais).
+    // RAÇA: AMBÍGUA, de propósito (representa TODAS as mulheres). NÃO fixar etnia.
+    'an adult woman around 38 years old (between 32 and 45), a real natural everyday face, NOT elderly, NOT old, NOT wrinkled or weathered, yet also NOT a young woman in her twenties and NOT a fashion model; of ambiguous and unspecified ethnicity with a warm medium-brown skin tone and mixed heritage so she can represent any woman and is never tied to one single race, natural, not glamorous, not airbrushed',
     personagem ? `she embodies the archetype "${personagem}"` : '',
     // 3) POSE de CORPO visível (a pose conta o arquétipo): travada se ditada.
     'shown three-quarter or full body so her whole POSE and gesture read clearly at a glance (not just a face or bust), centered in the card',
