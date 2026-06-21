@@ -40,22 +40,30 @@ const FUNDO_REGRAS_DRAMA =
 // A FRENTE da carta "Sou Aquela": UMA figura de mulher de HOJE (o arquétipo da
 // personagem), em estilo de CARTA de oráculo (moldura dourada sobre negro), mas a
 // mulher é CONTEMPORÂNEA — roupa atual, sem santa/halo/vela. CRITÉRIOS FIXOS para
-// SER CONSISTENTE (não deixar à mercê do modelo): mesmo estilo, mesma pose, mesma
-// paleta em todas as cartas; só muda a mulher/arquétipo. SEM texto.
+// SER CONSISTENTE (não deixar à mercê do modelo): MEDIUM fixo (ilustração pintada,
+// nunca foto), moldura idêntica, paleta idêntica, a POSE visível de corpo (é a pose
+// que conta o arquétipo); só muda a mulher/pose. SEM TEXTO nenhum (o nome é escrito
+// pela app por cima, não pelo Flux — o texto do Flux sai sempre lixo e variável).
 export function promptCartaFigura(personagem?: string, essencia?: string, pose?: string): string {
   return [
-    // formato CARTA = vem da MOLDURA, não de iconografia religiosa.
-    'a modern oracle/tarot CARD: a single clean ornate thin GOLD border framing the whole image, deep matte near-black background, card proportions',
-    // a mulher é de HOJE, roupa atual — NUNCA santa/medieval.
-    'inside the frame, a single CONTEMPORARY woman of today (2026) in normal modern everyday clothes (simple knit / shirt / coat) — NOT robes, NOT a saint, NOT period or medieval costume',
-    personagem ? `she IS the archetype "${personagem}"` : '',
-    // POSE: se a Vivianne ditou a pose exata, é ESSA (travada); senão, a pose encarna a essência.
-    pose ? `her EXACT pose, gesture and expression (follow this precisely): ${pose}` : essencia ? `her POSE, GESTURE and EXPRESSION must CONVEY this exact character at a glance — the pose tells who she is: ${essencia}` : 'her pose and gesture clearly convey her character',
-    // o que é CONSISTENTE: estilo, moldura, paleta. O que MUDA: a pose/expressão.
-    'the rendering STYLE, the gold frame and the palette stay IDENTICAL across the whole deck — ONLY the pose and expression change from woman to woman',
-    'consistent modern editorial painterly illustration, soft matte gouache, restrained',
-    'gold used only as subtle linework and a soft glow on the black; elegant, timeless yet current',
-    'NO halo, NO candle, NO flames, NO religious or sacred symbols, NO crown, NO wings, NO byzantine/icon look, NO ornate medieval gown, NO text, NO letters, NO numbers, NO watermark, NO logo',
+    // 1) MEDIUM primeiro (o Flux pesa o início): ilustração PINTADA, nunca foto.
+    'a flat 2D hand-painted tarot card ILLUSTRATION, editorial painterly artwork, matte gouache, clearly an illustration and NOT a photograph, NOT a 3D render, NOT photorealistic',
+    // 2) sujeito: mulher de HOJE, roupa atual — NUNCA santa/medieval.
+    'depicting a single CONTEMPORARY ordinary woman of 2026 in normal modern everyday clothes (simple knit, shirt or coat), a real woman of today, NOT a saint, NOT a goddess, NOT robes, NOT period or medieval costume',
+    // IDADE e TIPO: a mulher do Método VS é adulta, portuguesa/sul-europeia, com o peso
+    // da vida — NUNCA a miúda-modelo asiática de 20 anos que o Flux mete por defeito.
+    'a mature Southern European / Portuguese woman, around 45 years old (between 38 and 55), a real lived-in adult face carrying the weight of life, warm Mediterranean features, NOT a young woman in her twenties, NOT a fashion model, NOT East-Asian, NOT glamorous or airbrushed',
+    personagem ? `she embodies the archetype "${personagem}"` : '',
+    // 3) POSE de CORPO visível (a pose conta o arquétipo): travada se ditada.
+    'shown three-quarter or full body so her whole POSE and gesture read clearly at a glance (not just a face or bust), centered in the card',
+    pose ? `her EXACT pose, gesture and expression, follow this precisely: ${pose}` : essencia ? `her pose, gesture and expression must convey this exact character at a glance: ${essencia}` : 'her pose and gesture clearly convey her character',
+    // 4) MOLDURA e PALETA idênticas em todo o deck (a consistência).
+    'framed by ONE identical thin gold double-line art-nouveau border with simple corner flourishes, the same frame on every card of the deck, deep matte near-black background, vertical card proportions 9:16',
+    'the illustration STYLE, the gold frame, the lighting and the palette stay IDENTICAL across the whole deck; ONLY the woman and her pose change',
+    'gold used only as subtle linework and a soft glow on the black; elegant, restrained, timeless yet current',
+    // 5) NEGATIVOS fortes e repetidos (o que estava a falhar: auréolas/santas/texto).
+    'ABSOLUTELY NO halo, NO glowing ring or disc behind the head, NO saint, NO religious or sacred iconography, NO candle, NO flames, NO crown, NO wings, NO byzantine or icon look, NO ornate medieval gown',
+    'leave a clean narrow empty band at the bottom for a title to be added later: NO text, NO title, NO name, NO letters, NO numbers, NO watermark, NO logo anywhere in the image',
   ].filter(Boolean).join(', ');
 }
 
