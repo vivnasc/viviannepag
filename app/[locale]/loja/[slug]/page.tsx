@@ -228,7 +228,11 @@ export default async function ProdutoPage({
   const isPack = isPackSlug(slug);
   const conteudoPack = isPack ? await getPackConteudo(slug, locale) : [];
   // Cross-sell: pack do universo deste produto (para sugerir levar tudo).
-  const packDoUniverso = !isPack ? PACKS.find((pk) => pk.colecao !== 'all' && pk.colecao === slugToColecao(slug)) : undefined;
+  // Os romances da Biblioteca de Véspera NÃO pertencem a nenhum pack: vendem-se
+  // sempre avulso, por isso nunca mostram o banner de coleção.
+  const packDoUniverso = (!isPack && !isRomanceSlug(slug))
+    ? PACKS.find((pk) => pk.colecao !== 'all' && pk.colecao === slugToColecao(slug))
+    : undefined;
   // Pack: mosaico das capas reais dos livros (ate 4) para o hero.
   const mosaicoPack = isPack
     ? conteudoPack.map((i) => i.capa).filter((c): c is string => Boolean(c)).slice(0, 4)

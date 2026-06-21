@@ -105,6 +105,11 @@ export function isPackSlug(slug: string): boolean {
 // Um produto pertence ao pack se o pack for 'all' ou se a colecao do produto
 // coincidir com a do pack.
 export function packIncluiProduto(pack: Pack, produtoSlug: string): boolean {
+  // Os romances da Biblioteca de Vespera nunca pertencem a nenhum pack (nem ao
+  // pack 'tudo'): sao produtos avulsos. Sem este guarda, slugToColecao() faz cair
+  // os slugs rom-* na colecao por omissao (freeme-mae), e o romance aparecia como
+  // "faz parte do pack" e no upsell do carrinho.
+  if (produtoSlug.startsWith('rom-')) return false;
   if (pack.colecao === 'all') return true;
   return slugToColecao(produtoSlug) === pack.colecao;
 }
