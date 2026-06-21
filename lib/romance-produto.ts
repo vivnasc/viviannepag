@@ -56,7 +56,7 @@ export function romanceSubtituloEn(r: Romance): string {
 }
 
 export function romanceDescricaoPt(r: Romance): string {
-  return `**Romance da Biblioteca de Véspera · ${r.capitulos} capítulos · ~${r.palavras.toLocaleString('pt-PT')} palavras · PDF imediato**
+  return `**Romance da Biblioteca de Véspera · ${r.capitulos} capítulos · ${r.palavras.toLocaleString('pt-PT')} palavras · PDF imediato**
 
 ${romanceSubtituloPt(r)}
 
@@ -66,7 +66,7 @@ Por Vivianne dos Santos.`;
 }
 
 export function romanceDescricaoEn(r: Romance): string {
-  return `**A novel from the Véspera Library · ${r.capitulos} chapters · ~${r.palavras.toLocaleString('en-US')} words · Immediate PDF**
+  return `**A novel from the Véspera Library · ${r.capitulos} chapters · ${r.palavrasEn.toLocaleString('en-US')} words · Immediate PDF**
 
 ${romanceSubtituloEn(r)}
 
