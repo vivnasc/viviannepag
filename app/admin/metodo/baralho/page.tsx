@@ -8,7 +8,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { FAMILIAS } from '@/lib/metodo/personagens';
-import { cartaDoBaralho } from '@/lib/metodo/baralho';
+import { cartaDoBaralho, CARTAS_ESPECIAIS } from '@/lib/metodo/baralho';
 
 const FONTS = 'font-[system-ui]';
 const COR = '#d8b25a';
@@ -125,6 +125,48 @@ export default function BaralhoPage() {
             </div>
           </section>
         ))}
+
+        {/* CARTAS DE FECHO (fora do baralho diário): a carta-coração e a carta final.
+            Pose travada, figura geram-se/escolhem-se aqui; as linhas escreves tu. */}
+        <section className="mb-8">
+          <h2 className="text-[0.78rem] uppercase tracking-widest mb-1" style={{ color: COR }}>Cartas de fecho · fora do baralho diário</h2>
+          <p className="text-[0.72rem] opacity-60 mb-3">A carta-coração (a viragem) e a carta final (a chegada). Pose travada; as linhas (frente/verso) escreves tu.</p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {CARTAS_ESPECIAIS.map((p) => {
+              const escolhida = figuras[p.id];
+              const candidatas = cand[p.id] ?? [];
+              return (
+                <div key={p.id} className="rounded-xl border border-white/10 p-3" style={{ background: 'rgba(216,178,90,0.05)' }}>
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="text-[0.9rem]" style={{ color: COR }}>{p.nome}</span>
+                    {escolhida && <span className="text-[0.55rem] px-1.5 py-0.5 rounded-full bg-emerald-600/30 text-emerald-200">✓ definitiva</span>}
+                  </div>
+                  <span className="block text-[0.55rem] uppercase tracking-wider opacity-50 mb-2">{p.papel === 'carta-coracao' ? 'carta-coração' : 'carta final'}</span>
+                  {escolhida
+                    ? <button onClick={() => setZoom({ id: p.id, url: escolhida, def: true })} className="block w-[170px] mx-auto"><img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/50" /><span className="block text-center text-[0.55rem] text-emerald-200/80 mt-0.5">definitiva · clica p/ ampliar</span></button>
+                    : <div className="w-[170px] mx-auto aspect-[9/16] rounded-lg border border-dashed border-white/15 grid place-items-center text-[0.6rem] opacity-40 text-center px-2">sem figura definitiva ainda</div>}
+                  {candidatas.length > 0 && (
+                    <div className="mt-3">
+                      <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1">candidatas (clica para ver grande)</p>
+                      <div className="flex gap-2 overflow-x-auto pb-1">
+                        {candidatas.map((u, i) => (
+                          <button key={i} onClick={() => setZoom({ id: p.id, url: u })} title="ver grande e escolher" className="shrink-0 w-[110px]">
+                            <img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  <button onClick={() => gerar(p.id)} disabled={busy === p.id} className="mt-3 w-full px-2.5 py-1.5 rounded-lg border border-white/25 text-[0.75rem] disabled:opacity-40">{busy === p.id ? 'a gerar…' : '+ gerar figura'}</button>
+                  <details className="mt-2">
+                    <summary className="text-[0.6rem] opacity-50 cursor-pointer">ver a pose travada</summary>
+                    <div className="mt-1 text-[0.75rem] opacity-70 leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{p.pose}</div>
+                  </details>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       </div>
 
       {/* LIGHTBOX: ver a figura GRANDE e escolher (não dá para escolher minúsculo) */}
