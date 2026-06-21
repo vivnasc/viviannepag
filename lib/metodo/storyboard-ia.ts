@@ -251,7 +251,9 @@ ${evitar.length ? `NÃO repitas estes ângulos/frases já usados (encontra outro
 
 ${naoNorm
   ? `Devolve SÓ JSON válido, sem texto à volta: {"facas":["Não normalizes …","Não normalizes …"],"volta":["…","…"],"envio":"…"}. As "facas" são EXATAMENTE ${Math.max(1, fmt.beats - 2)} frases (UMA por entrada do array), cada uma a começar por "Não normalizes" + UMA assimetria DIFERENTE e concreta de 2026 (nunca juntar duas numa frase, nunca repetir, nunca frase-feita). A "volta" são EXATAMENTE 2 frases sem "Não normalizes" (1.ª = a origem, no espírito de "foi como sobreviveste"; 2.ª = soltar, no espírito de "já podes pousar"). É OBRIGATÓRIO preencher os dois arrays por completo — é isto que faz os vários slides.`
-  : `Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com EXATAMENTE ${fmt.beats} beats (um por slide, NUNCA menos, NUNCA 1 só).${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${cartaRen ? ' O 1.º beat é a CAPA que PARA O SCROLL: uma CENA concreta (fotografia/memória que se vê), nunca identidade nem tese. Os beats seguintes são o CORPO da carta (papel, as palavras a revelarem-se), na ordem da arquitetura: vida por trás, nome antigo, releitura (a viragem onde a carta acontece), preço, abertura.' : ''}${espelho ? ' O 1.º beat ABRE PARA FORA (uma pessoa concreta que vive na cabeça, o murro que para o scroll); os do meio aprofundam; depois VIRA o vidro de fora para dentro (porque a escolheste para espelho); o último é o pouso que liberta (palavra final "revelar" ou nada).' : ''}${repara ? ' A imagem MANDA: no máximo 1 a 2 beats, cada um 1 linha curta que aponta (nunca texto longo nem palavra-a-palavra); um sussurro ao lado da imagem.' : ''}`}`;
+  : cartaRen
+  ? `Devolve SÓ JSON válido, sem texto à volta: {"cena":"…","vida":"…","nome":"…","releitura":"…","preco":"…","abertura":"…","envio":"…"}. Preenche TODOS os campos (cada um UMA frase, na ordem da carta de renomear): cena = a fotografia/memória concreta que PARA O SCROLL (a FACA; nunca identidade nem tese); vida = a realidade concreta por trás; nome = o nome antigo que carregou a vida toda (madura, forte, responsável, organizada…); releitura = a viragem onde a carta ACONTECE (o nome nunca foi um elogio); preco = uma SENSAÇÃO traduzida (ex.: "ainda hoje descansar sabe a dívida"); abertura = não manda nem ensina, só ABRE (ex.: "talvez já possas pousá-la"). Tom íntimo, 2.ª pessoa, SEM travessões. É OBRIGATÓRIO preencher todos os campos.`
+  : `Devolve SÓ JSON válido: {"beats":[{"tempo":"0-1s","imagem":"o que se vê (na veste, em movimento)","texto":"o que aparece no ecrã ou a voz-off"}, ...],"envio":"..."} com EXATAMENTE ${fmt.beats} beats (um por slide, NUNCA menos, NUNCA 1 só).${carta ? ' O texto do ÚLTIMO beat é exatamente "Sou aquela." sozinho.' : ''}${espelho ? ' O 1.º beat ABRE PARA FORA (uma pessoa concreta que vive na cabeça, o murro que para o scroll); os do meio aprofundam; depois VIRA o vidro de fora para dentro (porque a escolheste para espelho); o último é o pouso que liberta (palavra final "revelar" ou nada).' : ''}${repara ? ' A imagem MANDA: no máximo 1 a 2 beats, cada um 1 linha curta que aponta (nunca texto longo nem palavra-a-palavra); um sussurro ao lado da imagem.' : ''}`}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -260,13 +262,15 @@ ${naoNorm
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);
   const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
-  let o: { beats?: Array<{ tempo?: string; imagem?: string; texto?: string }>; facas?: string[]; volta?: string[]; envio?: string } = {};
+  let o: { beats?: Array<{ tempo?: string; imagem?: string; texto?: string }>; facas?: string[]; volta?: string[]; cena?: string; vida?: string; nome?: string; releitura?: string; preco?: string; abertura?: string; envio?: string } = {};
   try { const m = txt.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : txt); } catch { /* fallback */ }
-  // "Não normalizes" monta os slides a partir dos arrays nomeados facas[]+volta[]
-  // (como o banda monta ensino[]): garante vários slides, não depende de "beats".
+  // Formatos com VÁRIOS slides montam-se a partir de campos NOMEADOS (como o banda
+  // monta ensino[]): garante a estrutura, não depende de o modelo formatar "beats".
   let beats: BeatSB[];
   if (naoNorm && (Array.isArray(o.facas) || Array.isArray(o.volta))) {
     beats = [...(o.facas ?? []), ...(o.volta ?? [])].map((t) => lp(t)).filter(Boolean).map((texto) => ({ tempo: '', imagem: '', texto }));
+  } else if (cartaRen && (o.cena || o.abertura || o.releitura)) {
+    beats = [o.cena, o.vida, o.nome, o.releitura, o.preco, o.abertura].map((t) => lp(t)).filter(Boolean).map((texto) => ({ tempo: '', imagem: '', texto }));
   } else {
     beats = (o.beats ?? []).map((b) => ({ tempo: lp(b.tempo), imagem: lp(b.imagem), texto: lp(b.texto) })).filter((b) => b.texto || b.imagem);
   }
