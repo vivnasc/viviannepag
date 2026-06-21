@@ -392,7 +392,9 @@ export default function MetodoContaPage() {
   // lista recarrega após gerar/descartar/render.
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
-  const semImagem = geradosConta.filter((e) => !e.imageUrl).length;
+  // a Carta de renomear é TIPOGRÁFICA (não leva imagem Flux) — fora das contagens de imagem.
+  const levaImagem = (e: EstadoPost) => e.tipo !== 'cartaRenomear';
+  const semImagem = geradosConta.filter((e) => !e.imageUrl && levaImagem(e)).length;
   // posts de DIAS QUE JÁ PASSARAM e ainda não publicados (lixo das semanas de teste).
   const hojeISO = (() => { const h = new Date(); return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, '0')}-${String(h.getDate()).padStart(2, '0')}`; })();
   const passados = geradosConta.filter((e) => e.agendadoEm && e.agendadoEm < hojeISO && !e.publicado);
@@ -456,7 +458,7 @@ export default function MetodoContaPage() {
           <p className="mt-1 text-[0.68rem] opacity-50">Escolhe a semana (◀ ▶) e gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). Para longo prazo, gera semana a semana — vão-se empilhando no calendário em baixo. Depois revês, limpas e só então "gerar imagens em falta".</p>
           <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
             <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
-            {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
+            {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl && levaImagem(e)); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
             {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
             {geradosConta.length > 0 && <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
               {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
@@ -568,7 +570,27 @@ export default function MetodoContaPage() {
                 <p className="text-center text-[0.55rem] opacity-40 mt-1">é este que vai para o Publicar. Em baixo: as faces e os clips de origem.</p>
               </div>
             )}
-            {detalhe.subtipo === 'nbeats' ? (
+            {detalhe.subtipo === 'carta' ? (
+              // Carta de renomear (vir): TIPOGRÁFICA, em papel (CartaSlide), não Flux.
+              <div>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">{detalhe.conceito || 'Carta de renomear'}</span>
+                  <span className="text-[0.55rem] opacity-50">carta tipográfica (papel)</span>
+                </div>
+                <CartaSlide texto={detalhe.texto} conta={conta} capa prog={1} />
+                {detalhe.beats.length > 1 && (
+                  <ol className="mt-2 space-y-1.5">
+                    {detalhe.beats.map((b, i) => (
+                      <li key={i} className="flex gap-2 text-[0.82rem] rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2">
+                        <span className="text-[0.6rem] opacity-40 mt-0.5">{i + 1}</span>
+                        <span className="whitespace-pre-line leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{b}</span>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a carta revela-se (papel + tipografia), sem imagem Flux</p>
+              </div>
+            ) : detalhe.subtipo === 'nbeats' ? (
               // formato PRÓPRIO de cada peça: N beats sobre 1 cena (não 2 faces).
               <div>
                 <div className="flex items-center justify-center gap-2 mb-1">

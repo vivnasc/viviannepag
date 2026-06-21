@@ -56,6 +56,8 @@ export async function POST(req: Request) {
   // personagem (ilustração de carta de oráculo) e usa-a em TODAS as faces (as linhas
   // da confissão revelam-se por cima da mesma figura). Determinístico, sem cena genérica.
   const meta = (row.theme?.metodo ?? {}) as { tipo?: string; personagem?: string };
+  // A "Carta de renomear" é TIPOGRÁFICA (papel, CartaSlide), não leva imagem Flux.
+  if (meta.tipo === 'cartaRenomear') return NextResponse.json({ erro: 'carta-renomear-sem-flux', detalhe: 'A Carta de renomear é tipográfica (não tem imagem Flux).' }, { status: 400 });
   if (meta.tipo === 'carta') {
     const prompt = promptCartaFigura(meta.personagem);
     const { url, erro } = await fundoImagem(prompt, slug);

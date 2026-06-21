@@ -50,9 +50,12 @@ export async function POST(req: Request) {
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 
   // unidade = SLIDE (um post de 2 faces tem 2 slides; ambos precisam de imagem).
+  // A "Carta de renomear" (vir) é TIPOGRÁFICA (papel, CartaSlide), NÃO leva imagem
+  // Flux — por isso salta-se (senão metia um fundo gerado por baixo do texto).
   const pendentes: { row: Row; slide: Slide }[] = [];
   for (const r of (data ?? []) as Row[]) {
     if (r.theme?.metodo?.conta !== contaId) continue;
+    if ((r.theme?.metodo as { tipo?: string } | undefined)?.tipo === 'cartaRenomear') continue;
     for (const s of r.dias?.[0]?.slides ?? []) if (!s.imageUrl) pendentes.push({ row: r, slide: s });
   }
   const total = pendentes.length;
