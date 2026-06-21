@@ -174,6 +174,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: high on a green slope, an unfinished stone house with raised walls and a half-built roof, open windowless openings, golden in the morning sun, beautiful and empty like a skeleton, with the best view over the valley; a lone woman seen from behind standing at what would be the doorway, looking out; below and beyond, at soft dawn light, a small village of terracotta rooftops between mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the ache of a life walled up in a promise, luminous, atmospheric, painterly`,
   },
   {
+    slug: 'rom-trovoada',
+    titulo: 'A Trovoada',
+    tituloEn: 'The Thunderstorm',
+    sub: 'um romance de Véspera · Estante IV · A Ponte',
+    estante: 'IV · A Ponte',
+    espelho: 'A mulher que confunde intensidade com amor',
+    capitulos: 12,
+    palavras: 18000,
+    cena: `book cover illustration, vertical composition: a calm village house at night seen from across the square, one warm lit window with the silhouette of a couple sitting quietly together inside; overhead, the sky split between two halves, on one side a passing thunderstorm with distant lightning over the mountains, on the other a clear serene starry calm; a small village of terracotta rooftops, a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the hush of peace chosen over the storm, atmospheric, painterly, quietly luminous`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',
