@@ -18,6 +18,7 @@ export default function BaralhoPage() {
   const [cand, setCand] = useState<Record<string, string[]>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
+  const [zoom, setZoom] = useState<{ id: string; url: string; def?: boolean } | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo/baralho-figura').then((r) => (r.ok ? r.json() : { figuras: {} })).then((j) => setFiguras(j.figuras ?? {})).catch(() => {});
@@ -63,7 +64,7 @@ export default function BaralhoPage() {
         {FAMILIAS.map((f) => (
           <section key={f.id} className="mb-8">
             <h2 className="text-[0.78rem] uppercase tracking-widest mb-3" style={{ color: COR }}>{f.nome}</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid sm:grid-cols-2 gap-3">
               {f.personagens.map((p) => {
                 const escolhida = figuras[p.id];
                 const candidatas = cand[p.id] ?? [];
@@ -71,31 +72,31 @@ export default function BaralhoPage() {
                 return (
                   <div key={p.id} className="rounded-xl border border-white/10 p-3" style={{ background: 'rgba(255,255,255,0.02)' }}>
                     <div className="flex items-baseline justify-between mb-2">
-                      <span className="text-[0.85rem]" style={{ color: COR }}>{p.nome}</span>
+                      <span className="text-[0.9rem]" style={{ color: COR }}>{p.nome}</span>
                       {escolhida && <span className="text-[0.55rem] px-1.5 py-0.5 rounded-full bg-emerald-600/30 text-emerald-200">✓ definitiva</span>}
                     </div>
-                    <div className="flex gap-2 mb-2">
-                      {/* a definitiva (grande) */}
-                      <div className="w-[96px] shrink-0">
-                        {escolhida
-                          ? <img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/40" />
-                          : <div className="w-full aspect-[9/16] rounded-lg border border-dashed border-white/15 grid place-items-center text-[0.55rem] opacity-40 text-center px-1">sem figura definitiva</div>}
+                    {/* a DEFINITIVA, grande (clica para ampliar) */}
+                    {escolhida
+                      ? <button onClick={() => setZoom({ id: p.id, url: escolhida, def: true })} className="block w-[170px] mx-auto"><img src={escolhida} alt={p.nome} className="w-full aspect-[9/16] object-cover rounded-lg border border-emerald-400/50" /><span className="block text-center text-[0.55rem] text-emerald-200/80 mt-0.5">definitiva · clica p/ ampliar</span></button>
+                      : <div className="w-[170px] mx-auto aspect-[9/16] rounded-lg border border-dashed border-white/15 grid place-items-center text-[0.6rem] opacity-40 text-center px-2">sem figura definitiva ainda</div>}
+                    {/* CANDIDATAS geradas (grandes, scroll lateral; clica para ver/escolher) */}
+                    {candidatas.length > 0 && (
+                      <div className="mt-3">
+                        <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1">candidatas (clica para ver grande)</p>
+                        <div className="flex gap-2 overflow-x-auto pb-1">
+                          {candidatas.map((u, i) => (
+                            <button key={i} onClick={() => setZoom({ id: p.id, url: u })} title="ver grande e escolher" className="shrink-0 w-[110px]">
+                              <img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" />
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      {/* candidatas geradas nesta sessão */}
-                      <div className="flex-1 grid grid-cols-3 gap-1.5 content-start">
-                        {candidatas.map((u, i) => (
-                          <button key={i} onClick={() => escolher(p.id, u)} title="escolher esta como definitiva" className="block">
-                            <img src={u} alt="candidata" className="w-full aspect-[9/16] object-cover rounded-md border border-white/15 hover:border-[#d8b25a]" />
-                            <span className="block text-center text-[0.5rem] opacity-50 mt-0.5">escolher</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <button onClick={() => gerar(p.id)} disabled={busy === p.id} className="w-full px-2.5 py-1.5 rounded-lg border border-white/25 text-[0.72rem] disabled:opacity-40">{busy === p.id ? 'a gerar…' : '+ gerar figura'}</button>
+                    )}
+                    <button onClick={() => gerar(p.id)} disabled={busy === p.id} className="mt-3 w-full px-2.5 py-1.5 rounded-lg border border-white/25 text-[0.75rem] disabled:opacity-40">{busy === p.id ? 'a gerar…' : '+ gerar figura'}</button>
                     {semente.length > 0 && (
                       <details className="mt-2">
                         <summary className="text-[0.6rem] opacity-50 cursor-pointer">ver a semente (a voz dela)</summary>
-                        <div className="mt-1 text-[0.72rem] opacity-70 leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
+                        <div className="mt-1 text-[0.75rem] opacity-70 leading-snug" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
                           {semente.map((l, i) => <div key={i} className={i === semente.length - 1 ? 'italic' : ''}>{l}</div>)}
                         </div>
                       </details>
@@ -107,6 +108,19 @@ export default function BaralhoPage() {
           </section>
         ))}
       </div>
+
+      {/* LIGHTBOX: ver a figura GRANDE e escolher (não dá para escolher minúsculo) */}
+      {zoom && (
+        <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-[420px] max-h-[92vh] overflow-y-auto text-center">
+            <img src={zoom.url} alt="figura" className="w-full rounded-xl border border-white/20 mb-3" />
+            <div className="flex items-center justify-center gap-2 text-[0.8rem]">
+              {!zoom.def && <button onClick={() => { escolher(zoom.id, zoom.url); setZoom(null); }} disabled={busy === zoom.id} className="px-4 py-2 rounded-lg disabled:opacity-40" style={{ background: COR, color: '#0F0F1A' }}>{busy === zoom.id ? '…' : 'escolher esta como definitiva'}</button>}
+              <button onClick={() => setZoom(null)} className="px-4 py-2 rounded-lg border border-white/25">fechar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
