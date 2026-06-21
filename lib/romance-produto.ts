@@ -29,6 +29,7 @@ export const ROMANCE_ROTA: Record<string, string> = {
   'rom-presente': '/o-presente-por-abrir',
   'rom-casa-acabar': '/a-casa-por-acabar',
   'rom-trovoada': '/a-trovoada',
+  'rom-trave': '/a-trave-mestra',
 };
 
 export function isRomanceSlug(slug: string): boolean {

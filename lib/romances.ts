@@ -185,6 +185,17 @@ export const ROMANCES: Romance[] = [
     cena: `book cover illustration, vertical composition: a calm village house at night seen from across the square, one warm lit window with the silhouette of a couple sitting quietly together inside; overhead, the sky split between two halves, on one side a passing thunderstorm with distant lightning over the mountains, on the other a clear serene starry calm; a small village of terracotta rooftops, a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the hush of peace chosen over the storm, atmospheric, painterly, quietly luminous`,
   },
   {
+    slug: 'rom-trave',
+    titulo: 'A Trave-Mestra',
+    tituloEn: 'The Master Beam',
+    sub: 'um romance de Véspera · Estante V · A Mesa Comprida',
+    estante: 'V · A Mesa Comprida',
+    espelho: 'A mulher que segura toda a gente e a quem ninguém segura',
+    capitulos: 13,
+    palavras: 16000,
+    cena: `book cover illustration, vertical composition: the interior of an old stone house seen from within, a single great wooden main beam crossing the ceiling, aged and bearing the whole roof, a thin shaft of golden morning light falling across it; below, a long empty family table set for many, and a lone older woman seen from behind standing in the doorway looking out at the bright valley; through the open door a small village of terracotta rooftops between mountains and a quiet river, warm lit windows; generous calm sky with empty space at the top third for a title; the ache and relief of a beam at last setting down its weight, luminous, atmospheric, painterly`,
+  },
+  {
     slug: 'rom-incomodo',
     titulo: 'Nenhum Incómodo',
     tituloEn: 'No Trouble at All',

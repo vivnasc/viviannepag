@@ -27,6 +27,7 @@ const PASTAS = {
   presente: { pt: 'o-presente-por-abrir-livro', en: 'o-presente-por-abrir-livro-en', capa: 'PRESENTE-capa', outPt: 'O-PRESENTE-POR-ABRIR-pt.pdf', outEn: 'THE-UNOPENED-GIFT-en.pdf' },
   casa: { pt: 'a-casa-por-acabar-livro', en: 'a-casa-por-acabar-livro-en', capa: 'CASA-capa', outPt: 'A-CASA-POR-ACABAR-pt.pdf', outEn: 'THE-UNFINISHED-HOUSE-en.pdf' },
   trovoada: { pt: 'a-trovoada-livro', en: 'a-trovoada-livro-en', capa: 'TROVOADA-capa', outPt: 'A-TROVOADA-pt.pdf', outEn: 'THE-THUNDERSTORM-en.pdf' },
+  trave: { pt: 'a-trave-mestra-livro', en: 'a-trave-mestra-livro-en', capa: 'TRAVE-capa', outPt: 'A-TRAVE-MESTRA-pt.pdf', outEn: 'THE-MASTER-BEAM-en.pdf' },
 };
 const P = PASTAS[LIVRO] || PASTAS.amparo;
 const DIR = path.join(BASE, LANG === 'pt' ? P.pt : P.en);
@@ -263,6 +264,34 @@ const T_TROVOADA = LANG==='pt' ? {
   ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Tranquilina hurts you in real places, the name of what she carries is in “The Woman Who Confuses Intensity with Love”, in the SyncHim collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
   finalTit:'For the reader',
   finalTxt1:'Thank you for crossing this year of Véspera with Tranquilina. If the story touched you, pass it on, not as proof, but as seed.',
+  finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'From the register of Véspera',
+};
+
+const T_TRAVE = LANG==='pt' ? {
+  tituloHtml:'A Trave-Mestra', autora:'Vivianne dos Santos',
+  serie:'Biblioteca de Véspera · Estante V · A Mesa Comprida',
+  sub:'um romance de Véspera',
+  cap:'capítulo',
+  sumarioLabel:'Conteúdo', sumario:'Sumário',
+  fichaLabel:'Antes de começar',
+  ficha:`Esta é uma obra de ficção. Véspera, as suas casas e as suas gentes são imaginadas, e qualquer semelhança com pessoas reais é a semelhança que as histórias verdadeiras têm umas com as outras. Este romance tem um irmão de autoconhecimento: se a Perpétua te doer em sítios reais, o nome do que ela carrega está em «A mulher que segura toda a gente e a quem ninguém segura», na coleção SyncHim. Uma história compreende, mas não substitui acompanhamento: nos temas fundos, procura apoio. Mereces o mesmo cuidado que dás.`,
+  finalTit:'Para a leitora',
+  finalTxt1:'Obrigada por atravessares este ano de Véspera com a Perpétua. Se a história te tocou, partilha-a, não como prova, mas como semente.',
+  finalTxt2:'Encontras os ebooks, os guias e o resto da biblioteca em <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
+  copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
+  registoLabel:'Do registo de Véspera',
+} : {
+  tituloHtml:'The Master Beam', autora:'Vivianne dos Santos',
+  serie:'The Véspera Library · Shelf V · The Long Table',
+  sub:'a novel of Véspera',
+  cap:'chapter',
+  sumarioLabel:'Contents', sumario:'Contents',
+  fichaLabel:'Before you begin',
+  ficha:`This is a work of fiction. Véspera, its houses and its people are imagined, and any resemblance to real persons is the resemblance true stories bear to one another. This novel has a self-knowledge sibling: if Perpétua hurts you in real places, the name of what she carries is in “The Woman Who Holds Everyone and Whom No One Holds”, in the SyncHim collection. A story understands, but it does not replace care: in the deep matters, seek support. You deserve the same care you give.`,
+  finalTit:'For the reader',
+  finalTxt1:'Thank you for crossing this year of Véspera with Perpétua. If the story touched you, pass it on, not as proof, but as seed.',
   finalTxt2:'You will find the ebooks, the guides and the rest of the library at <a href="https://viviannedossantos.com">viviannedossantos.com</a>.',
   copy:'© 2026 Vivianne dos Santos · viviannedossantos.com',
   registoLabel:'From the register of Véspera',
@@ -520,7 +549,7 @@ const T_PORTAS = LANG==='pt' ? {
   registoLabel:'From the register of Véspera',
 };
 
-const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'despensa' ? T_DESPENSA : LIVRO === 'presente' ? T_PRESENTE : LIVRO === 'casa' ? T_CASA : LIVRO === 'trovoada' ? T_TROVOADA : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
+const T = LIVRO === 'irma' ? T_IRMA : LIVRO === 'despensa' ? T_DESPENSA : LIVRO === 'presente' ? T_PRESENTE : LIVRO === 'casa' ? T_CASA : LIVRO === 'trovoada' ? T_TROVOADA : LIVRO === 'trave' ? T_TRAVE : LIVRO === 'caderno' ? T_CADERNO : LIVRO === 'cheias' ? T_CHEIAS : LIVRO === 'incomodo' ? T_INCOMODO : LIVRO === 'frio' ? T_FRIO : LIVRO === 'fabrica' ? T_FABRICA : LIVRO === 'tradutora' ? T_TRADUTORA : LIVRO === 'sentinela' ? T_SENTINELA : LIVRO === 'ferrolho' ? T_FERROLHO : LIVRO === 'estrada' ? T_ESTRADA : LIVRO === 'portas' ? T_PORTAS : T_AMPARO;
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md')).sort();
 let sumarioItens = [];
