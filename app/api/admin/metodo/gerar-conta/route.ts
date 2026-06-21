@@ -89,22 +89,13 @@ export async function POST(req: Request) {
     // o subtipo do formato-assinatura desta conta (vir = carta tipográfica; resto = nbeats).
     const subtipo = conta === 'vir' ? 'carta' : 'nbeats';
 
-    // MANHÃ (11h00) = o FORMATO-ASSINATURA em modo GANCHO (descoberta), NÃO uma "cena"
-    // genérica. O mesmo formato da tarde, versão curta (o motor distingue manhã/tarde).
-    const slugManha = `metodo-${conta}-manha-${d.data}`;
-    if (fazer(slugManha)) {
-      try {
-        const sb = await gerarStoryboard(conta, 'descoberta', veu, personagem, apiKey, evitar);
-        if (sb.beats.length) { rows.push(montarRow(conta, slugManha, d.data, '11:00', subtipo, TIPO_TARDE[conta], `${NOME_TARDE[conta]} · gancho`, veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
-      } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
-    }
-
-    // TARDE (17h00) = o FORMATO-ASSINATURA na versão funda (profundidade).
+    // FILHAS = SÓ 1 post por dia: o FORMATO-ASSINATURA, às 14h. Não há post da manhã
+    // (decisão da Vivianne) enquanto não houver um formato digno para a manhã.
     const slugTarde = `metodo-${conta}-tarde-${d.data}`;
     if (fazer(slugTarde)) {
       try {
         const sb = await gerarStoryboard(conta, 'profundidade', veu, personagem, apiKey, evitar);
-        if (sb.beats.length) { rows.push(montarRow(conta, slugTarde, d.data, '17:00', subtipo, TIPO_TARDE[conta], NOME_TARDE[conta], veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
+        if (sb.beats.length) { rows.push(montarRow(conta, slugTarde, d.data, '14:00', subtipo, TIPO_TARDE[conta], NOME_TARDE[conta], veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
   }

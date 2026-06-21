@@ -158,19 +158,21 @@ function PlanoInner() {
             return (
               <div key={d.data} className="rounded-xl border border-white/10 p-3" style={{ background: 'rgba(255,255,255,0.02)' }}>
                 <div className="text-[0.7rem] uppercase tracking-wider opacity-50 mb-2">{d.wd} · {d.data.slice(8)}/{d.data.slice(5, 7)} · <span style={{ color: conta.cor }}>{d.veu}</span></div>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {/* manhã */}
+                <div className={`grid ${ehMae ? 'md:grid-cols-2' : 'grid-cols-1'} gap-3`}>
+                  {/* manhã — só a mãe (as filhas não têm post de manhã, por agora) */}
+                  {ehMae && (
                   <div className="rounded-lg p-3" style={{ background: `${conta.cor}10`, border: `1px solid ${conta.cor}33` }}>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[0.62rem] uppercase tracking-wider" style={{ color: conta.cor }}>{ehMae ? '10h30' : '11h00'} · {NOME_MANHA[sel]}{d.personagem ? ` · ${d.personagem.nome}` : ''}</span>
+                      <span className="text-[0.62rem] uppercase tracking-wider" style={{ color: conta.cor }}>10h30 · {NOME_MANHA[sel]}{d.personagem ? ` · ${d.personagem.nome}` : ''}</span>
                       <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temM ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temM ? '✓ gerada' : 'por gerar'}</span>
                     </div>
-                    <p className="text-[0.82rem] opacity-60 leading-snug">{ehMae ? `A carta de ${d.personagem?.nome ?? 'a personagem do dia'} (vê o texto no baralho, em baixo).` : `${NOME_TARDE[sel]} em modo gancho (curto), na voz da @${conta.handle}, ancorado no véu ${d.veu}.`} <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
+                    <p className="text-[0.82rem] opacity-60 leading-snug">A carta de {d.personagem?.nome ?? 'a personagem do dia'} (vê o texto no baralho, em baixo). <span className="italic">{temM ? 'já gerada (vê em produzir).' : 'escreve-se ao gerar.'}</span></p>
                   </div>
-                  {/* tarde */}
+                  )}
+                  {/* tarde (filhas = único post, às 14h) */}
                   <div className="rounded-lg p-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[0.62rem] uppercase tracking-wider opacity-70">{ehMae ? '16h00' : '17h00'} · {NOME_TARDE[sel]}</span>
+                      <span className="text-[0.62rem] uppercase tracking-wider opacity-70">{ehMae ? '16h00' : '14h00'} · {NOME_TARDE[sel]}</span>
                       <span className="text-[0.56rem] px-1.5 py-0.5 rounded-full" style={temT ? { background: 'rgba(126,155,142,0.25)', color: '#9ED8B8' } : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>{temT ? '✓ gerada' : 'por gerar'}</span>
                     </div>
                     <p className="text-[0.82rem] opacity-60 leading-snug">{ehMae ? 'A assimetria invisível (responsabilidade sem autoridade · gestão emocional), com a volta de sobrevivência.' : `${NOME_TARDE[sel]}, ancorado no véu ${d.veu}.`} <span className="italic">Escreve-se ao gerar.</span></p>
