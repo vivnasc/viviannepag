@@ -20,13 +20,16 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; legenda?: string | null; hashtags?: string[] | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null; destaque?: string[]; notaVisual?: string | null; efeito?: string | null; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string } | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null; somUrl?: string | null } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null; somUrl?: string | null; formato?: string } } | null;
     created_at?: string;
   };
 
   const pecas = ((data ?? []) as Row[]).map((row) => {
-    const slide = row.dias?.[0]?.slides?.[0];
+    const todosSlides = row.dias?.[0]?.slides ?? [];
+    const slide = todosSlides[0];
     return {
+      formato: row.theme?.soulab?.formato ?? 'frase',
+      momentos: todosSlides.length > 1 ? todosSlides.map((x) => x.texto ?? '').filter(Boolean) : null,
       slug: row.slug,
       tipo: row.theme?.soulab?.tipo ?? null,
       texto: slide?.texto ?? row.brief ?? '',

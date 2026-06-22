@@ -20,6 +20,7 @@ type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; legenda: string | null;
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
+  formato: string; momentos: string[] | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -205,11 +206,59 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
   );
 }
 
+// PRÉ-VISUALIZAÇÃO do reel (ver ANTES de renderizar): anima prog 0→1 em loop, com
+// o efeito + tipografia da peça. Se for "vários momentos", sequencia-os (crossfade),
+// como o render vai fazer. Assim ela vê como sai SEM gastar um render.
+function PreviewBox({ peca }: { peca: Peca }) {
+  const [prog, setProg] = useState(0);
+  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
+  const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
+  const tip = peca.tipografia ?? undefined;
+  useEffect(() => {
+    let raf = 0; let start: number | null = null;
+    const dur = Math.max(4200, (moms?.length ?? 1) * 2600), hold = 1200;
+    const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [moms]);
+  return (
+    <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · como vai sair no reel (ver antes de renderizar)</p>
+      {moms ? (
+        <div style={{ position: 'relative', aspectRatio: '1080 / 1920', borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+          {moms.map((m, i) => {
+            const n = moms.length, w = 1 / n;
+            const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
+            const isLast = i === n - 1;
+            const fin = Math.min(1, lp / 0.18), fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
+            const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+            if (op <= 0) return null;
+            return (
+              <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+                <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...SOULAB_SLIDE} />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="rounded-lg overflow-hidden border border-white/10">
+          <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tip} {...SOULAB_SLIDE} />
+        </div>
+      )}
+      {peca.clipUrl && <p className="text-[0.5rem] opacity-45">(o movimento vê-se no 🎬; aqui mostra-se a imagem + o texto a animar)</p>}
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
+  const [aba, setAba] = useState<'por-agendar' | 'agendadas' | 'publicadas' | 'todas'>('por-agendar');
+  const [filtroTipo, setFiltroTipo] = useState<string>('todos');
+  const [busca, setBusca] = useState('');
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
   const [tema, setTema] = useState('');
   const [quantos, setQuantos] = useState(1);
+  const [formato, setFormato] = useState<'frase' | 'momentos'>('frase');
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -220,6 +269,7 @@ export default function SoulabPage() {
   const [efeitoOpen, setEfeitoOpen] = useState<string | null>(null);
   const [somOpen, setSomOpen] = useState<string | null>(null);
   const [tipoOpen, setTipoOpen] = useState<string | null>(null);
+  const [previewOpen, setPreviewOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -231,14 +281,14 @@ export default function SoulabPage() {
     setBusy(true); setErro(null);
     setMsg('A explorar no laboratório (texto + imagem)… pode demorar até 1 min por peça. Volta e recarrega se fechares.');
     try {
-      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, tema: tema.trim() || undefined }) });
+      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, tema: tema.trim() || undefined }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} peça(s) gerada(s).${j.detalhe ? ` (aviso: ${j.detalhe})` : ''} Revê em baixo, regenera a imagem se quiseres, e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(false); }
-  }, [busy, tipo, quantos, tema, recarregar]);
+  }, [busy, tipo, quantos, formato, tema, recarregar]);
 
   const darMovimento = useCallback(async (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => {
     if (acaoSlug) return;
@@ -342,6 +392,8 @@ export default function SoulabPage() {
 
   const renderizar = useCallback(async (slug: string) => {
     if (acaoSlug) return;
+    // NÃO disparar por surpresa: o render gasta tempo (~minutos) e Actions. Confirma.
+    if (typeof window !== 'undefined' && !window.confirm('Disparar o RENDER FINAL (MP4)? Demora alguns minutos e corre nos GitHub Actions.\n\nDica: pré-vê primeiro com ▶ para veres como vai sair.')) return;
     setAcaoSlug(slug); setErro(null); setMsg('A disparar o render (GitHub Actions)…');
     try {
       const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
@@ -359,6 +411,28 @@ export default function SoulabPage() {
       if (r.ok) recarregar(); else { const j = await r.json().catch(() => ({})); setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); }
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
+
+  const estadoDe = (p: Peca): 'por-agendar' | 'agendadas' | 'publicadas' => p.publicado ? 'publicadas' : p.agendadoEm ? 'agendadas' : 'por-agendar';
+  const cont = {
+    'por-agendar': pecas.filter((p) => estadoDe(p) === 'por-agendar').length,
+    agendadas: pecas.filter((p) => estadoDe(p) === 'agendadas').length,
+    publicadas: pecas.filter((p) => estadoDe(p) === 'publicadas').length,
+    todas: pecas.length,
+  };
+  const buscaN = busca.trim().toLowerCase();
+  const pecasFiltradas = pecas
+    .filter((p) => aba === 'todas' || estadoDe(p) === aba)
+    .filter((p) => filtroTipo === 'todos' || p.tipo === filtroTipo)
+    .filter((p) => !buscaN || `${p.texto} ${p.conceito} ${(p.momentos ?? []).join(' ')}`.toLowerCase().includes(buscaN));
+  const pecasOrdenadas = aba === 'agendadas'
+    ? [...pecasFiltradas].sort((a, b) => `${a.agendadoEm ?? ''}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? ''}${b.hora ?? ''}`))
+    : pecasFiltradas;
+  const ABAS: { id: 'por-agendar' | 'agendadas' | 'publicadas' | 'todas'; label: string }[] = [
+    { id: 'por-agendar', label: 'por agendar' },
+    { id: 'agendadas', label: 'agendadas' },
+    { id: 'publicadas', label: 'publicadas' },
+    { id: 'todas', label: 'todas' },
+  ];
 
   return (
     <main className={`${FONTS} min-h-screen px-4 py-8 md:px-8`} style={{ background: SOULAB.paleta.bg2, color: SOULAB.paleta.texto }}>
@@ -388,6 +462,14 @@ export default function SoulabPage() {
             ))}
           </div>
           <p className="text-[0.72rem] opacity-60 mb-3">{TIPOS_SOULAB.find((t) => t.id === tipo)?.descricao}</p>
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
+            <span className="text-[0.7rem] opacity-55 mr-0.5">formato:</span>
+            {([['frase', '✶ 1 frase'], ['momentos', '❑ vários momentos']] as const).map(([id, label]) => (
+              <button key={id} type="button" onClick={() => setFormato(id)} title={id === 'momentos' ? 'um reel onde a ideia se desdobra em 3-5 linhas sobre a mesma cena' : 'um reel de uma só frase'}
+                className="text-[0.74rem] px-2.5 py-1 rounded-full border"
+                style={formato === id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.2)', color: SOULAB.paleta.texto }}>{label}</button>
+            ))}
+          </div>
           <div className="flex flex-wrap items-center gap-2">
             <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional) — ou deixa o acaso decidir 🎲"
               className="flex-1 min-w-[200px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
@@ -413,14 +495,38 @@ export default function SoulabPage() {
 
         {/* peças geradas */}
         <section>
-          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">peças <span className="opacity-40">· {pecas.length}</span></h2>
+          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-2">peças <span className="opacity-40">· {pecas.length}</span></h2>
+
+          {/* separadores por estado */}
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {ABAS.map((a) => (
+              <button key={a.id} onClick={() => setAba(a.id)} className="text-[0.72rem] px-2.5 py-1 rounded-full border"
+                style={aba === a.id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.18)', color: SOULAB.paleta.texto }}>
+                {a.label} <span className="opacity-60">· {cont[a.id]}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* filtro por ângulo + busca */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+            <button onClick={() => setFiltroTipo('todos')} className="text-[0.62rem] px-2 py-0.5 rounded-full border"
+              style={filtroTipo === 'todos' ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>todos</button>
+            {TIPOS_SOULAB.map((t) => (
+              <button key={t.id} onClick={() => setFiltroTipo(t.id)} title={t.label} className="text-[0.62rem] px-2 py-0.5 rounded-full border"
+                style={filtroTipo === t.id ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>{t.emoji}</button>
+            ))}
+            <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="procurar…"
+              className="ml-auto text-[0.7rem] px-2.5 py-1 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+          </div>
+
           {pecas.length === 0 && <p className="text-[0.78rem] opacity-50">Ainda nada. Escolhe um ângulo e carrega &quot;gerar&quot;.</p>}
+          {pecas.length > 0 && pecasOrdenadas.length === 0 && <p className="text-[0.76rem] opacity-50">Nada neste separador/filtro.</p>}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {pecas.map((p) => (
+            {pecasOrdenadas.map((p) => (
               <div key={p.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
                 <div className="relative">
                   <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...SOULAB_SLIDE} />
-                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}</span>
+                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}</span>
                   {p.publicado
                     ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
                     : p.clipUrl
@@ -437,6 +543,7 @@ export default function SoulabPage() {
                   </div>
                 )}
                 <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
+                  <button onClick={() => setPreviewOpen(previewOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver o reel a animar ANTES de renderizar" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>▶ pré-ver {previewOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
@@ -447,6 +554,7 @@ export default function SoulabPage() {
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
+                {previewOpen === p.slug && <PreviewBox peca={p} />}
                 {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}

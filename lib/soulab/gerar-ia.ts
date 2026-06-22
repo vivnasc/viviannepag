@@ -17,6 +17,7 @@ export interface PecaSoulab {
   legenda: string;      // legenda do Instagram (parágrafos curtos)
   hashtags: string[];   // hashtags
   conceito: string;     // selo curto (ex.: nome do arquétipo / do símbolo)
+  momentos?: string[];  // formato "vários momentos": 3-5 linhas que desdobram a ideia
 }
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
@@ -26,6 +27,7 @@ export async function gerarPecaSoulab(
   apiKey: string,
   evitar: string[] = [],
   tema?: string,
+  formato: 'frase' | 'momentos' = 'frase',
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
 
@@ -66,7 +68,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "destaque": ["1 a 3 palavras-chave da frase para realçar"],
   "fundoPrompt": "prompt em INGLÊS para a imagem simbólica de fundo (arte conceptual, fine art, evocativa do sentido), sem pessoas a posar, sem texto, a terminar com --ar 9:16 --style raw",
   "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n). Abre com o fragmento ou um gancho contemplativo; 1 a 2 parágrafos curtos que exploram a hipótese SEM a fechar. TERMINA SEMPRE (obrigatório) com um CTA LEVE numa linha à parte: um convite suave a ficar com a pergunta, a guardar, a partilhar com quem precisa, ou a seguir o laboratório. O CTA é gentil e contemplativo, NUNCA marketing, NUNCA 'compra/link na bio', NUNCA imperativo agressivo. Nunca vender, nunca nomear o formato.",
-  "hashtags": ["8 a 12 hashtags em português, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]
+  "hashtags": ["8 a 12 hashtags em português, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA só ideia, em sequência (cada uma uma respiração, aparecem uma a uma sobre a mesma cena). Não são frases soltas: constroem um arco (abre, aprofunda, vira, fecha em aberto). A 1.ª é uma faca que para o scroll; a última deixa uma pergunta ou um eco. Mesma voz de convite, sem travessões."]' : ''}
 }`;
 
   const pedido = tema?.trim()
@@ -92,7 +94,8 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   let o: Partial<Record<keyof PecaSoulab, unknown>> = {};
   try { const m = txt.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : txt); } catch { /* fallback abaixo */ }
 
-  const frase = lp(o.frase);
+  const momentos = Array.isArray(o.momentos) ? (o.momentos as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
+  const frase = lp(o.frase) || momentos[0] || '';
   if (!frase) throw new Error('sem frase');
   const destaque = Array.isArray(o.destaque) ? (o.destaque as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
   const hashtags = Array.isArray(o.hashtags)
@@ -106,5 +109,6 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
     fundoPrompt: lp(o.fundoPrompt),
     legenda: lp(o.legenda),
     hashtags,
+    momentos: formato === 'momentos' && momentos.length > 1 ? momentos : undefined,
   };
 }

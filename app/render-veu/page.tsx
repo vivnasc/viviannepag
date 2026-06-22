@@ -95,6 +95,36 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog,
   );
 }
 
+// SOULAB · VÁRIOS MOMENTOS · uma ideia que se desdobra em N linhas sobre a MESMA
+// cena (imagem partilhada). Cada momento aparece na sua janela de prog, com
+// crossfade — mesmo padrão da Sequencia, mas com o KineticSlide (marca Soulab) e
+// fundo de imagem (sem clip, para o seek do render se manter simples). O efeito e a
+// tipografia vêm do 1.º slide (onde a Vivianne os guarda) e aplicam-se a todos.
+function SoulabMomentos({ slides, prog, mundo }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo }) {
+  const n = Math.max(1, slides.length);
+  const w = 1 / n;
+  const s0 = slides[0] as (Slide & { efeito?: EfeitoTexto; tipografia?: Tipografia }) | undefined;
+  const efeito = s0?.efeito;
+  const tipografia = s0?.tipografia;
+  return (
+    <div style={{ position: 'relative', width: 1080, height: 1920, background: '#000', overflow: 'hidden' }}>
+      {slides.map((sl, i) => {
+        const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
+        const isLast = i === n - 1;
+        const fin = Math.min(1, lp / 0.18);
+        const fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
+        const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+        if (op <= 0) return null;
+        return (
+          <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...SOULAB_SLIDE} />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // CARTA DE RENOMEAR (tarde da vir) · N beats em sequência, registo PRÓPRIO:
 // beat 0 = a CENA (capa, alto contraste); restantes = o corpo da carta (papel).
 function CartaSequencia({ beats, conta, prog, capaImg }: { beats: string[]; conta: Conta; prog: number; capaImg?: string | null }) {
@@ -284,7 +314,11 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
-      {estado && ehKinetic && s && (
+      {/* SOULAB · vários momentos: peça Soulab com >1 slide => sequência sobre a cena */}
+      {estado && ehKinetic && (estado.dia.mundo as string) === 'soulab' && (estado.dia.slides?.length ?? 0) > 1 && (
+        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} />
+      )}
+      {estado && ehKinetic && s && !((estado.dia.mundo as string) === 'soulab' && (estado.dia.slides?.length ?? 0) > 1) && (
         <KineticSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}

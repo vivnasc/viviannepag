@@ -31,11 +31,12 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string };
+  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos' };
   const tipoId = (body.tipo ?? 'frase') as TipoSoulabId;
   if (!getTipoSoulab(tipoId)) return NextResponse.json({ erro: 'tipo-invalido' }, { status: 400 });
   const quantos = Math.min(4, Math.max(1, body.quantos ?? 1));
   const tema = body.tema?.trim() || undefined;
+  const formato = body.formato === 'momentos' ? 'momentos' : 'frase';
 
   const supabase = getSupabaseAdmin();
 
@@ -54,20 +55,23 @@ export async function POST(req: Request) {
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     try {
-      const peca = await gerarPecaSoulab(tipoId, apiKey, evitar, tema);
+      const peca = await gerarPecaSoulab(tipoId, apiKey, evitar, tema, formato);
       evitar.push(peca.frase); if (peca.conceito) evitar.push(peca.conceito);
 
       const slug = `soulab-${tipoId}-${Date.now()}-${i}`;
       const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
-      const slides = [{
+      // FORMATO: "vários momentos" => N slides (1 por linha), MESMA cena/imagem; o
+      // render sequencia-os sobre o fundo partilhado. "frase" => 1 slide (o de sempre).
+      const linhas = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.frase];
+      const slides = linhas.map((texto, idx) => ({
         tipo: 'kinetico',
-        texto: peca.frase,
+        texto,
         destaque: peca.destaque,
         notaVisual: peca.fundoPrompt,
         imageUrl,
-        capa: true,
-        conceito: peca.conceito,
-      }];
+        capa: idx === 0,
+        conceito: idx === 0 ? peca.conceito : undefined,
+      }));
       const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
       const legenda = limparTravessoes(`${peca.legenda}\n\nSoulab · @${SOULAB.handle}`);
@@ -77,7 +81,7 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
