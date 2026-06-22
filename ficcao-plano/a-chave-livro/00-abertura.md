@@ -4,6 +4,4 @@ No registo da vila, pela mão das Guardiãs que pelo livro passaram, encontra-se
 
 Preciosa, filha da vila, e o nome foi profecia e armadilha: chamaram-lhe Preciosa, a que vale, a de preço, e ela cumpriu o nome fazendo-se imprescindível, a que não se pode dispensar, a sem quem nada anda; mas o nome, que parecia uma bênção, foi uma armadilha, porque quem se faz indispensável fica preso à coisa que o torna indispensável, e Preciosa fez-se a chave de uma fábrica.
 
-Há, nos assentos de Véspera, nomes que aparecem ligados a um lugar como se fossem dele: a Preciosa aparece ligada à Fiandeira, a fábrica de fiar, há trinta anos, a que abre antes de todos e fecha depois de todos, a chave; e de tal maneira que já ninguém os pensa separados, a Preciosa e a Fiandeira, como se a fábrica fosse dela e ela fosse da fábrica, e o livro mal saberia escrever uma sem a outra.
-
 Os assentos guardam quem segura as casas e os ofícios da vila, e a que coisa cada nome se prendeu. Não dizem quem é uma pessoa sem o que faz, nem o que se descobre, do outro lado do medo, no dia em que se entrega a chave e se vê a fábrica andar sem nós. Para isso são precisos os livros como este.

@@ -6,6 +6,4 @@ Soledade — solitude — of the Highlanders, of the house up on the heights, th
 
 They called her Soledade, solitude, and she fulfilled the name to the letter, making of solitude not a misfortune that fell on her, but a fortress she raised, a house high on the mountain, with water of her own, that never needed to come down to the square, to ask of the fountain, to depend on anyone, and that had in this, her whole life, her pride and her sentence.
 
-The register keeps the houses and what each one has, and the house of the Highlanders is set down as a house of its own cistern, one of the few that gather their water and do not need the fountain of the square, which on the mountain was a sign of plenty and of independence; and Soledade was the owner of that house and that cistern, and she was herself, one sees on reading the book, a cistern in person, a woman who gathered everything of herself and never came down to ask anything of anyone.
-
 The register keeps the houses, and what each one has, and who comes down to the square to ask. It does not say what night it was, in childhood, that taught a girl that to ask was not safe, nor the price of the dryness of one who never lets in the water from outside, nor what it costs a cistern to knock, at last, at a door. For that, books such as this one are needed.
