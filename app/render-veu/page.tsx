@@ -96,7 +96,7 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog,
 
 // CARTA DE RENOMEAR (tarde da vir) · N beats em sequência, registo PRÓPRIO:
 // beat 0 = a CENA (capa, alto contraste); restantes = o corpo da carta (papel).
-function CartaSequencia({ beats, conta, prog }: { beats: string[]; conta: Conta; prog: number }) {
+function CartaSequencia({ beats, conta, prog, capaImg }: { beats: string[]; conta: Conta; prog: number; capaImg?: string | null }) {
   const n = Math.max(1, beats.length);
   const w = 1 / n;
   // TRANSIÇÃO DE ABERTURA DE PÁGINA (pedido da Vivianne): cada parte da carta entra a
@@ -115,7 +115,7 @@ function CartaSequencia({ beats, conta, prog }: { beats: string[]; conta: Conta;
         const aAbrir = i > 0 && ry < -0.5;
         return (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: op, transform: i > 0 ? `rotateY(${ry}deg)` : undefined, transformOrigin: 'left center', transformStyle: 'preserve-3d', boxShadow: aAbrir ? '0 0 120px rgba(0,0,0,0.7)' : 'none' }}>
-            <CartaSlide texto={b} conta={conta} capa={i === 0} prog={lp} semRodape={!isLast} />
+            <CartaSlide texto={b} conta={conta} capa={i === 0} prog={lp} semRodape={!isLast} imageUrl={i === 0 ? capaImg : undefined} />
           </div>
         );
       })}
@@ -300,6 +300,7 @@ export default function RenderVeuPage() {
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           conta={getConta(s.contaId ?? '')!}
           prog={prog}
+          capaImg={estado.dia.slides?.[0]?.imageUrl}
         />
       )}
       {estado && ehMetodo && !ehCarta && ehTarde && s && getConta(s.contaId ?? '') && (

@@ -58,8 +58,21 @@ export async function POST(req: Request) {
   // personagem (ilustração de carta de oráculo) e usa-a em TODAS as faces (as linhas
   // da confissão revelam-se por cima da mesma figura). Determinístico, sem cena genérica.
   const meta = (row.theme?.metodo ?? {}) as { tipo?: string; personagem?: string };
-  // A "Carta de renomear" é TIPOGRÁFICA (papel, CartaSlide), não leva imagem Flux.
-  if (meta.tipo === 'cartaRenomear') return NextResponse.json({ erro: 'carta-renomear-sem-flux', detalhe: 'A Carta de renomear é tipográfica (não tem imagem Flux).' }, { status: 400 });
+  // A "Carta de renomear": o CORPO é tipográfico (papel), mas a CAPA leva uma IMAGEM
+  // (a cena da memória) para ter identidade. Gera SÓ a imagem da capa (slide 0).
+  if (meta.tipo === 'cartaRenomear') {
+    const apiKeyC = process.env.ANTHROPIC_API_KEY;
+    const capaC = slides[0];
+    let prompt = fundoDaConta(conta, 0, 0);
+    if (apiKeyC) { try { prompt = await gerarFundoIA(conta, [], apiKeyC, capaC?.texto, estilo, veu); } catch { /* fica o fallback */ } }
+    const { url, erro } = await fundoImagem(prompt, slug);
+    if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro ?? 'falhou' }, { status: 502 });
+    if (slides[0]) { slides[0].imageUrl = url; slides[0].notaVisual = prompt; }
+    if (row.dias?.[0]) row.dias[0].videoUrl = null;
+    const { error: e0 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', slug);
+    if (e0) return NextResponse.json({ erro: 'db-update', detalhe: e0.message }, { status: 500 });
+    return NextResponse.json({ ok: true, imageUrl: url, imageUrls: slides.map((_, i) => (i === 0 ? url : null)), capaCarta: true });
+  }
   if (meta.tipo === 'carta') {
     // se a personagem já tem FIGURA DEFINITIVA escolhida no baralho, usa-a (não gera nova).
     const { data: br } = await supabase.from('carousel_collections').select('theme').eq('slug', 'metodo-baralho').maybeSingle();

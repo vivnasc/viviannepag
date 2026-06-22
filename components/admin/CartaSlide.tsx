@@ -18,7 +18,7 @@ const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 // grão de filme subtil (SVG turbulence) — dá textura e "lê como reel".
 const GRAIN = "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>\")";
 
-export function CartaSlide({ texto, conta, prog = 1, capa = false, semRodape = false }: { texto: string; conta: Conta; prog?: number; capa?: boolean; semRodape?: boolean }) {
+export function CartaSlide({ texto, conta, prog = 1, capa = false, semRodape = false, imageUrl }: { texto: string; conta: Conta; prog?: number; capa?: boolean; semRodape?: boolean; imageUrl?: string | null }) {
   const accent = conta.paleta.accent;
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -42,6 +42,9 @@ export function CartaSlide({ texto, conta, prog = 1, capa = false, semRodape = f
         {capa ? (
           // ── CAPA · a CENA, alto contraste, grande ──────────────────────────
           <div style={{ position: 'absolute', inset: 0, background: '#0d0a06' }}>
+            {/* IMAGEM da capa (a cena da memória) — dá identidade; só na capa, o corpo é papel */}
+            {imageUrl && <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${(1.05 + 0.07 * prog).toFixed(3)})` }} />}
+            {imageUrl && <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(13,10,6,0.5) 0%, rgba(13,10,6,0.32) 42%, rgba(13,10,6,0.86) 100%)' }} />}
             {/* brilho quente que respira (deriva lenta) */}
             <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(60% 45% at ${50 + 4 * Math.sin(prog * 6)}% ${40 + 3 * Math.cos(prog * 5)}%, ${accent}3a 0%, rgba(0,0,0,0) 60%)` }} />
             <div style={{ position: 'absolute', inset: 0, mixBlendMode: 'overlay', opacity: 0.07, backgroundImage: GRAIN }} />
