@@ -35,8 +35,8 @@ export interface SaberVeu {
   mapa: { pensa: string; sente: string; faz: string; paga: string };
 }
 
-// Começa só com UM véu a fundo (Turbilhão), para mostrar a profundidade antes de
-// fazer os 7. Partial de propósito: os outros entram um a um.
+// Os 7 véus estão preenchidos (cada um com as 10 dimensões). Cresce com as
+// cadeiras dela: aprofunda/acrescenta material a qualquer véu sem partir nada.
 export const SABER: Partial<Record<VeuNome, SaberVeu>> = {
   Turbilhão: {
     essencia: 'A cabeça que não pára. Pensar de mais para não sentir, viver em alerta, confundir ruminar com resolver.',

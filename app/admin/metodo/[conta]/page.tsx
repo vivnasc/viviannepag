@@ -30,6 +30,10 @@ const ESTAGIOS: { id: Estagio; label: string }[] = [
 const TIPO_LABEL: Record<string, string> = {
   carta: 'Carta · Sou Aquela', naonormalizes: 'Não normalizes', cena: 'A cena',
   espelho: 'O Espelho', cartaRenomear: 'Carta de renomear', repara: 'Repara',
+  // MÃE · autoridade (os 8 formatos da semana de autoridade)
+  veuDe: '🪞 O Véu de…', mecanismo: '⚙️ O Mecanismo Invisível', origem: '🌱 A Origem',
+  erro: '🔁 O Erro de Interpretação', custo: '💸 O Custo Escondido', mito: '⚔️ Mito vs Verdade',
+  mapa: '🗺️ O Mapa do Véu',
 };
 // O QUE CADA FORMATO PRECISA (não replicar botões sem pensar no formato — regra
 // da Vivianne): todos são texto-sobre-imagem, logo imagem SIM. Som ambiente nos reels
@@ -41,6 +45,11 @@ const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean; voz: boolean 
   carta: { imagem: true, som: false, voz: true }, naonormalizes: { imagem: true, som: true, voz: true },
   cena: { imagem: true, som: true, voz: true }, espelho: { imagem: true, som: true, voz: true },
   cartaRenomear: { imagem: true, som: true, voz: true }, repara: { imagem: true, som: false, voz: true },
+  // MÃE · autoridade: reels de texto sobre imagem (com som ambiente + voz)
+  veuDe: { imagem: true, som: true, voz: true }, mecanismo: { imagem: true, som: true, voz: true },
+  origem: { imagem: true, som: true, voz: true }, erro: { imagem: true, som: true, voz: true },
+  custo: { imagem: true, som: true, voz: true }, mito: { imagem: true, som: true, voz: true },
+  mapa: { imagem: true, som: true, voz: true },
 };
 const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false, voz: true };
 // 2.ª-feira (ISO) da semana a `offset` semanas de hoje — para testar/gerar 1 dia.
@@ -416,6 +425,25 @@ export default function MetodoContaPage() {
     finally { setCartaBusy(false); }
   }, [conta, cartaBusy, recarregar]);
 
+  const [autBusy, setAutBusy] = useState(false);
+  // MÃE · SEMANA DE AUTORIDADE (8 formatos, 1 véu/semana). `formato` = testar só um.
+  const gerarAutoridade = useCallback(async (opts: { formato?: string; semana?: boolean } = {}) => {
+    if (!conta || autBusy) return;
+    setAutBusy(true); setErro(null);
+    setMsg(opts.formato ? 'A gerar 1 formato de autoridade (teste)…' : 'A gerar a semana de autoridade (8 formatos)…');
+    try {
+      const body: Record<string, unknown> = { offset };
+      if (opts.formato) body.formato = opts.formato; // testa só esse formato, com o véu da semana
+      const r = await fetch('/api/admin/metodo/gerar-autoridade', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else if (j.gerados === 0) setErro(j.detalhe ? `Nada gerado: ${j.detalhe}` : 'Nada gerado (já existiam ou semana passada).');
+      else setMsg(`${j.gerados} peça(s) de autoridade gerada(s). Abre, vê o texto e gera as imagens em falta.`);
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setAutBusy(false); }
+  }, [conta, autBusy, offset, recarregar]);
+
   if (!conta) {
     return <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] p-8`}>
       <p>Conta desconhecida. <Link className="underline" href="/admin/metodo">Voltar</Link></p>
@@ -487,6 +515,8 @@ export default function MetodoContaPage() {
             <button onClick={() => gerarLote(1)} disabled={!!lote} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>gerar esta semana (texto)</button>
             {conta.id === 'mae' && <button onClick={() => correrQuatro('dia')} disabled={quatroBusy || !!lote} title="gera 1 dia (manhã + tarde) em TODAS as contas (mãe + ver + vir + viver) para testares as 4 de uma vez" className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{quatroBusy ? '…' : '🔍 testar 1 dia · 4 contas'}</button>}
             {conta.id === 'mae' && <button onClick={() => correrQuatro('semana')} disabled={quatroBusy || !!lote} title="gera a semana toda nas 4 contas de uma vez (só depois de testares)" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{quatroBusy ? '…' : 'gerar a semana · 4 contas'}</button>}
+            {conta.id === 'mae' && <button onClick={() => gerarAutoridade({ formato: 'mapa' })} disabled={autBusy} title="NOVO motor de autoridade: gera só O Mapa do Véu desta semana, para veres o texto" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#9b8cff', color: '#c9b6fa' }}>{autBusy ? 'a gerar…' : '🗺️ testar O Mapa do Véu'}</button>}
+            {conta.id === 'mae' && <button onClick={() => gerarAutoridade({ semana: true })} disabled={autBusy} title="NOVO: a semana de autoridade — 1 véu, os 8 formatos (seg→dom, quarta a dobrar). Substitui Sou Aquela/não normalizes." className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#9b8cff', background: '#9b8cff', color: '#0F0F1A' }}>{autBusy ? 'a gerar…' : '⚔️ gerar semana de autoridade'}</button>}
             {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
             <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
             {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>📅 Plano da semana (ver a ordem) →</Link>}
