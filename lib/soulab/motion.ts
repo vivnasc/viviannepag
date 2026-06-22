@@ -1,49 +1,96 @@
-// SOULAB · DAR MOVIMENTO — anima a imagem de uma peça com um push-in
-// cinematográfico (a CÂMARA a aproximar-se da cena), via Kling no Replicate.
+// SOULAB · DAR MOVIMENTO — anima a imagem de uma peça via Kling no Replicate.
 //
-// SEPARADO do lib/metodo/clip.ts de propósito: o motion do método é MÍNIMO e
-// proíbe movimento de câmara ("No camera movement, no zoom"); aqui é o OPOSTO —
-// a câmara MEXE, entra na cena, com realismo de cinema. Mesmo modelo (Kling), voz
-// diferente. NÃO importar deste ficheiro a partir do método.
+// AUTONOMIA (decisão da Vivianne): o movimento NÃO é decidido por mim no código.
+// É ELA que escolhe, na interface, o que mexe: a câmara a aproximar-se E/OU
+// elementos da cena (água, folhagem, pássaro, névoa, luz, chama, tecido, fumo),
+// ou descreve o movimento por palavras dela. Este ficheiro só traduz as escolhas
+// dela num prompt para o Kling. SEPARADO do lib/metodo/clip.ts.
 
 const MODEL = 'kwaivgi/kling-v2.5-turbo-pro';
 
-// SUAVE (defeito): push-in lento e elegante, baixo risco de deformar.
-const PROMPT_SUAVE =
-  'Cinematic, photorealistic, very slow and elegant camera push-in (a gentle dolly forward) moving deeper into this exact scene, as if quietly approaching it. Subtle parallax and a real sense of depth. Keep the exact same composition, subject, palette, lighting and contemplative mood. Premium fine-art film look. Calm, hypnotic, minimal. Do NOT add or invent anything new: no new objects, no people, no text, no particles.';
+// os INGREDIENTES de movimento (à escolha dela, multi-seleção). label = o que ela
+// vê; en = a frase real que vai para o Kling (inglês = melhor qualidade).
+export const MOTION_INGREDIENTES = [
+  { id: 'agua', label: '💧 água', en: 'water gently rippling, reflections shifting on the surface' },
+  { id: 'folhagem', label: '🌿 folhagem', en: 'foliage, plants and leaves swaying softly' },
+  { id: 'passaro', label: '🐦 pássaro', en: 'a single bird slowly flying across, far in the distance' },
+  { id: 'nevoa', label: '🌫️ névoa', en: 'mist and fog drifting slowly through the scene' },
+  { id: 'luz', label: '✨ luz', en: 'light, glow and reflections softly shifting and breathing' },
+  { id: 'chama', label: '🕯️ chama', en: 'a candle flame flickering gently' },
+  { id: 'tecido', label: '🌬️ tecido', en: 'fabric or a curtain swaying gently in a soft breeze' },
+  { id: 'fumo', label: '💨 fumo', en: 'thin smoke or steam drifting slowly upward' },
+] as const;
 
-// FORTE: aproximação mais pronunciada e dramática (mais imersiva, algum risco de warp).
-const PROMPT_FORTE =
-  'Cinematic, photorealistic camera move that travels forward INTO this exact scene, a confident dolly push-in approaching and entering the focal point (for example a doorway or a horizon), with strong depth and parallax. Keep the same composition, subject, palette, lighting and mood. Premium, dramatic, immersive film look, still smooth and controlled. Do NOT add or invent anything new: no new objects, no people, no text, no particles.';
+export type IngredienteId = (typeof MOTION_INGREDIENTES)[number]['id'];
 
-// NEGATIVO: NÃO proíbe o movimento de câmara (é o que queremos). Proíbe só o lixo
-// (inventar elementos, deformar, tremer) — nunca o push-in.
-const NEGATIVE_SOULAB =
-  'added objects, new elements not in the image, people appearing, a standing person, faces, hands, text, watermark, logo, morphing, warping, distortion, melting, body horror, glitch, extra limbs, deformed shapes, falling petals, sparkles, glitter confetti, floating particles, fast jittery motion, violent camera shake, strobing, flickering';
+// a CÂMARA (separada dos elementos): ela escolhe se a câmara mexe e quanto.
+export const CAMARA_OPCOES = [
+  { id: 'nenhuma', label: 'câmara parada' },
+  { id: 'suave', label: 'aproximar · suave' },
+  { id: 'forte', label: 'aproximar · forte' },
+] as const;
+export type CamaraId = (typeof CAMARA_OPCOES)[number]['id'];
+
+export interface MovimentoOpts {
+  ingredientes?: string[];      // ids de MOTION_INGREDIENTES
+  camara?: CamaraId;            // movimento de câmara
+  livre?: string;              // descrição livre, nas palavras dela
+  cena?: string;               // descrição da cena (para o "match real")
+}
+
+function fraseCamara(c: CamaraId): string {
+  if (c === 'suave') return 'a very slow, gentle and elegant cinematic camera push-in, moving softly into the scene';
+  if (c === 'forte') return 'a confident cinematic camera push-in traveling forward, entering deeper into the scene';
+  return '';
+}
+
+// Constrói o prompt + negativo a partir das ESCOLHAS dela. Se ela nomear elementos
+// (ou escrever movimento livre), o negativo NÃO proíbe "novos elementos" (ela quer
+// o pássaro/a água); se for só câmara/nada, mantém a regra "não inventes".
+export function construirMovimento(opts: MovimentoOpts): { prompt: string; negative: string } {
+  const ens = (opts.ingredientes ?? [])
+    .map((id) => MOTION_INGREDIENTES.find((x) => x.id === id)?.en)
+    .filter(Boolean) as string[];
+  const partes: string[] = [];
+  const cam = fraseCamara(opts.camara ?? 'suave');
+  if (cam) partes.push(cam);
+  partes.push(...ens);
+  if (opts.livre?.trim()) partes.push(opts.livre.trim());
+
+  const houveElementos = ens.length > 0 || !!opts.livre?.trim();
+  const movDesc = partes.length
+    ? partes.join('; ')
+    : 'very subtle, slow, natural motion of the elements that already exist in the image';
+  const cenaCurta = opts.cena?.trim()
+    ? ` Scene: ${opts.cena.trim().replace(/\s+/g, ' ').split(' ').slice(0, 16).join(' ')}.`
+    : '';
+
+  const prompt =
+    `Photorealistic, cinematic, premium fine-art film look. Animate THIS exact image with: ${movDesc}.${cenaCurta} ` +
+    'Keep the exact same composition, subject, palette, lighting and contemplative mood. Smooth, calm, controlled, realistic motion. ' +
+    'No warping, no morphing, no distortion, no camera shake.';
+
+  const negBase =
+    'text, watermark, logo, morphing, warping, distortion, melting, body horror, glitch, extra limbs, deformed face, deformed hands, fast jittery motion, violent camera shake, strobing, flickering, low quality, blurry';
+  const negative = houveElementos
+    ? negBase
+    : `added objects, invented new elements, people appearing, a standing person, falling petals, sparkles, glitter, floating particles, ${negBase}`;
+
+  return { prompt, negative };
+}
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
-// Anima `imageUrl` e devolve o URL do MP4 (remoto, do Replicate). Resiliente ao
-// nome do campo da imagem (start_image / image) entre versões do modelo. Espera o
-// resultado (a previsão demora ~1-3 min num clip de 5s).
-export async function gerarMotionSoulab(
-  imageUrl: string,
-  token: string,
-  intensidade: 'suave' | 'forte' = 'suave',
-  cena?: string,
-  duracao: 5 | 10 = 5,
-): Promise<string> {
-  // CIENTE DA CENA: dá ao Kling a descrição real para mexer só o que está lá (o
-  // "match real"). Curta — prompt longo demais faz o Kling falhar.
-  const cenaCurta = cena?.trim() ? cena.trim().replace(/\s+/g, ' ').split(' ').slice(0, 18).join(' ') : '';
-  const base = intensidade === 'forte' ? PROMPT_FORTE : PROMPT_SUAVE;
-  const prompt = cenaCurta ? `${base} Scene: ${cenaCurta}.` : base;
+// Anima `imageUrl` segundo as ESCOLHAS dela e devolve o URL do MP4 (do Replicate).
+// Espera o resultado (a previsão demora ~1-3 min num clip de 5s).
+export async function gerarMotionSoulab(imageUrl: string, token: string, opts: MovimentoOpts = {}, duracao: 5 | 10 = 5): Promise<string> {
+  const { prompt, negative } = construirMovimento(opts);
 
   const criar = (imgField: 'start_image' | 'image') =>
     fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
-      body: JSON.stringify({ input: { prompt, negative_prompt: NEGATIVE_SOULAB, duration: duracao, [imgField]: imageUrl } }),
+      body: JSON.stringify({ input: { prompt, negative_prompt: negative, duration: duracao, [imgField]: imageUrl } }),
     });
 
   let res = await criar('start_image');

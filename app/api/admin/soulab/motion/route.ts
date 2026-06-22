@@ -14,11 +14,11 @@ const BUCKET = 'viviannepag-assets';
 // URL do Replicate é temporário.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const { slug, intensidade } = (await req.json().catch(() => ({}))) as { slug?: string; intensidade?: 'suave' | 'forte' };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; ingredientes?: string[]; camara?: 'nenhuma' | 'suave' | 'forte'; livre?: string };
+  const { slug } = body;
   if (!slug) return NextResponse.json({ erro: 'falta slug' }, { status: 400 });
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
-  const forte = intensidade === 'forte';
 
   const supabase = getSupabaseAdmin();
   const { data: row, error } = await supabase.from('carousel_collections').select('dias, theme').eq('slug', slug).single();
@@ -30,10 +30,16 @@ export async function POST(req: Request) {
   if (!imageUrl) return NextResponse.json({ erro: 'sem-imagem', detalhe: 'A peça ainda não tem imagem. Gera a imagem primeiro.' }, { status: 400 });
 
   const cena = [slide?.conceito, slide?.texto].filter(Boolean).join('. ');
+  const opts = {
+    ingredientes: Array.isArray(body.ingredientes) ? body.ingredientes : [],
+    camara: body.camara ?? 'suave',
+    livre: typeof body.livre === 'string' ? body.livre : '',
+    cena,
+  };
 
   let replicateUrl: string;
   try {
-    replicateUrl = await gerarMotionSoulab(imageUrl, token, forte ? 'forte' : 'suave', cena);
+    replicateUrl = await gerarMotionSoulab(imageUrl, token, opts);
   } catch (e) {
     return NextResponse.json({ erro: 'kling-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });
   }
@@ -51,7 +57,7 @@ export async function POST(req: Request) {
   const theme = { ...((row.theme as Record<string, unknown>) ?? {}) };
   const soulab = { ...((theme.soulab as Record<string, unknown>) ?? {}) };
   soulab.clipUrl = clipUrl;
-  soulab.clipIntensidade = forte ? 'forte' : 'suave';
+  soulab.motion = { ingredientes: opts.ingredientes, camara: opts.camara, livre: opts.livre }; // o que ela escolheu
   theme.soulab = soulab;
   const { error: e2 } = await supabase.from('carousel_collections').update({ theme }).eq('slug', slug);
   if (e2) return NextResponse.json({ erro: 'db', detalhe: e2.message }, { status: 500 });

@@ -7,6 +7,7 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, SOULAB_SLIDE, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
+import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -21,6 +22,45 @@ type Peca = {
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
+// O COMPOSITOR DE MOVIMENTO (autonomia): ela escolhe o que mexe — câmara e/ou
+// elementos (água, folhagem, pássaro…) — ou descreve por palavras dela. Estado
+// local por cartão; só ao carregar "dar movimento" é que chama o Kling.
+function MotionBox({ disabled, busy, onGerar }: { disabled: boolean; busy: boolean; onGerar: (opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void }) {
+  const [ing, setIng] = useState<string[]>([]);
+  const [cam, setCam] = useState<CamaraId>('suave');
+  const [livre, setLivre] = useState('');
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  const toggle = (id: string) => setIng((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  return (
+    <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">o que mexe? (escolhe tu)</p>
+      <div className="flex flex-wrap gap-1">
+        {MOTION_INGREDIENTES.map((m) => {
+          const on = ing.includes(m.id);
+          return (
+            <button key={m.id} type="button" onClick={() => toggle(m.id)}
+              className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+              style={on ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{m.label}</button>
+          );
+        })}
+      </div>
+      <div className="flex flex-wrap items-center gap-1">
+        <span className="text-[0.55rem] opacity-50 mr-0.5">câmara:</span>
+        {CAMARA_OPCOES.map((c) => (
+          <button key={c.id} type="button" onClick={() => setCam(c.id)}
+            className="text-[0.56rem] px-1.5 py-0.5 rounded border"
+            style={cam === c.id ? { borderColor: dz, color: dz } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>{c.label}</button>
+        ))}
+      </div>
+      <input value={livre} onChange={(e) => setLivre(e.target.value)} placeholder="ou descreve tu o movimento…"
+        className="w-full text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+      <button type="button" onClick={() => onGerar({ ingredientes: ing, camara: cam, livre })} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
+        style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a dar vida…' : '🎬 dar movimento'}</button>
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -30,6 +70,7 @@ export default function SoulabPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
+  const [motionOpen, setMotionOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -50,15 +91,15 @@ export default function SoulabPage() {
     finally { setBusy(false); }
   }, [busy, tipo, quantos, tema, recarregar]);
 
-  const darMovimento = useCallback(async (slug: string, intensidade: 'suave' | 'forte') => {
+  const darMovimento = useCallback(async (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => {
     if (acaoSlug) return;
     setAcaoSlug(slug); setErro(null);
-    setMsg(`A dar vida à imagem (Kling · push-in ${intensidade})… pode demorar 1 a 3 min. Não feches.`);
+    setMsg('A dar vida à imagem (Kling)… pode demorar 1 a 3 min. Não feches.');
     try {
-      const r = await fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, intensidade }) });
+      const r = await fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...opts }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else { setMsg('Movimento gerado. Vê em baixo, no cartão. (É só o motion, sem texto; o texto entra no render.)'); recarregar(); }
+      else { setMsg('Movimento gerado. Vê em baixo, no cartão. (É só o motion, sem texto; o texto entra no render.)'); setMotionOpen(null); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -173,11 +214,11 @@ export default function SoulabPage() {
                 )}
                 <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
-                  <button onClick={() => darMovimento(p.slug, 'suave')} disabled={!!acaoSlug || !p.imageUrl} title="push-in lento e elegante (seguro)" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 suave</button>
-                  <button onClick={() => darMovimento(p.slug, 'forte')} disabled={!!acaoSlug || !p.imageUrl} title="entrada mais dramática na cena (mais imersivo)" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🎬 forte</button>
+                  <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
+                {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
               </div>
             ))}
           </div>
