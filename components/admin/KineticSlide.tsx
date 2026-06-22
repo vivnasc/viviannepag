@@ -15,8 +15,20 @@ const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
+// os EFEITOS de revelação do texto (à escolha da Vivianne; ver EFEITOS_TEXTO no admin).
+export type EfeitoTexto = 'maquina' | 'bloom' | 'fade' | 'surgir';
+export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
+  { id: 'maquina', label: '⌨︎ máquina de escrever' },
+  { id: 'surgir', label: '✶ surgir (palavra a palavra)' },
+  { id: 'fade', label: '◍ fade suave' },
+  { id: 'bloom', label: '✺ bloom luminoso' },
+];
+
+export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
+  // o EFEITO do texto (à escolha): máquina de escrever · bloom luminoso · fade
+  // suave · surgir (palavra a palavra, sem cursor). Back-compat: domingo => bloom.
+  const efeitoFinal: EfeitoTexto = efeito ?? (ehDomingo ? 'bloom' : 'maquina');
   const pal = PALETAS[mundo];
   const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
@@ -44,10 +56,11 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
       if (ok) for (let j = 0; j < pw.length; j++) goldIdx.add(i + j);
     }
   }
-  const revelar = Math.min(1, prog / (ehDomingo ? 0.85 : 0.72)); // domingo revela mais devagar
+  const velocidade = efeitoFinal === 'bloom' ? 0.85 : efeitoFinal === 'fade' ? 0.6 : efeitoFinal === 'surgir' ? 0.82 : 0.72;
+  const revelar = Math.min(1, prog / velocidade); // bloom/surgir revelam mais devagar; fade abre cedo
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
-  const accent = ehDomingo ? '#F0C6CF' : ACCENT; // Domingo de Luz: rosa luminoso (legível sobre fundo), sem dourado
+  const accent = (efeitoFinal === 'bloom' && ehDomingo) ? '#F0C6CF' : ACCENT; // Domingo de Luz: rosa; restante = destaque da paleta
   const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série (veu.a.veu)
   // a MARCA é parametrizável: por defeito a veu.a.veu, mas outra conta (ex. Soulab)
   // passa o seu selo/assinatura/site e pode esconder o selo e o rótulo do conceito.
@@ -86,24 +99,36 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
           <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 92, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: 'center', color: '#F4ECDD', textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
+              const sombra = imageUrl ? (dest ? '0 2px 24px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)') : 'none';
               let st: React.CSSProperties;
-              if (ehDomingo) {
+              if (efeitoFinal === 'bloom') {
                 // bloom luminoso: cada palavra surge de um desfoque com brilho suave (sem cursor)
                 const n = palavras.length;
                 const ini = n > 1 ? (i / (n - 1)) * 0.5 : 0;
                 const f = Math.max(0, Math.min(1, (revelar - ini) / 0.42));
                 st = { opacity: f, filter: `blur(${(1 - f) * 12}px)`, transform: `translateY(${(1 - f) * 8}px) scale(${0.96 + 0.04 * f})`, textShadow: `0 0 ${30 * (1 - f) + 10}px rgba(255,244,250,${0.45 * (1 - f) + 0.2}), 0 2px 20px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6)` };
+              } else if (efeitoFinal === 'fade') {
+                // a frase inteira surge junta, em fade suave com leve subida (sem stagger, sem cursor)
+                const f = Math.max(0, Math.min(1, revelar));
+                st = { opacity: f, transform: `translateY(${(1 - f) * 12}px)`, textShadow: sombra };
+              } else if (efeitoFinal === 'surgir') {
+                // palavra a palavra, mas em fade+subida suave, SEM cursor de máquina
+                const n = palavras.length;
+                const ini = n > 1 ? (i / (n - 1)) * 0.55 : 0;
+                const f = Math.max(0, Math.min(1, (revelar - ini) / 0.35));
+                st = { opacity: f, transform: `translateY(${(1 - f) * 11}px)`, textShadow: sombra };
               } else {
+                // máquina de escrever (default): palavra a palavra com cursor
                 let op = 0, dy = 14;
                 if (i < ultimoVisivel) { op = 1; dy = 0; }
                 else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
-                st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: imageUrl ? (dest ? '0 2px 24px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)') : 'none' };
+                st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: sombra };
               }
               return (
                 <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F8EFE9', fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>
                   {w}
                   {/* cursor DENTRO da última palavra visível — acompanha a escrita (antes ficava parado no fim da frase, porque as palavras invisíveis já reservam o espaço) */}
-                  {aindaEscreve && !ehDomingo && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
+                  {aindaEscreve && efeitoFinal === 'maquina' && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
                 </span>
               );
             })}

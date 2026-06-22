@@ -4,7 +4,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { KineticSlide } from '@/components/admin/KineticSlide';
+import { KineticSlide, EFEITOS_TEXTO, type EfeitoTexto } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, SOULAB_SLIDE, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
@@ -19,7 +19,7 @@ const MUNDO = SOULAB_MUNDO as Mundo; // a paleta 'soulab' vive em PALETAS (Recor
 type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; legenda: string | null;
-  hashtags: string[]; fundoPrompt: string | null;
+  hashtags: string[]; fundoPrompt: string | null; efeito: string | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -106,6 +106,44 @@ function AgendarBox({ agendadoEm, hora, disabled, busy, onAgendar, onDesagendar 
   );
 }
 
+// O EFEITO DO TEXTO (autonomia): ela escolhe como a frase se revela e VÊ-O a
+// animar em loop (a pré-visualização corre prog 0→1). O render usa o efeito guardado.
+function EfeitoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boolean; busy: boolean; onSave: (efeito: EfeitoTexto) => void }) {
+  const [efeito, setEfeito] = useState<EfeitoTexto>((peca.efeito as EfeitoTexto) ?? 'maquina');
+  const [prog, setProg] = useState(0);
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  useEffect(() => {
+    let raf = 0; let start: number | null = null;
+    const dur = 3800, hold = 1100; // anima e segura, depois repete
+    const tick = (t: number) => {
+      if (start === null) start = t;
+      const e = (t - start) % (dur + hold);
+      setProg(Math.min(1, e / dur));
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [efeito]);
+  return (
+    <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">efeito do texto (vê a animar)</p>
+      <div className="rounded-lg overflow-hidden border border-white/10">
+        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={efeito} {...SOULAB_SLIDE} />
+      </div>
+      <div className="flex flex-wrap gap-1">
+        {EFEITOS_TEXTO.map((ef) => (
+          <button key={ef.id} type="button" onClick={() => setEfeito(ef.id)}
+            className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+            style={efeito === ef.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{ef.label}</button>
+        ))}
+      </div>
+      <button type="button" onClick={() => onSave(efeito)} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
+        style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar efeito'}</button>
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -118,6 +156,7 @@ export default function SoulabPage() {
   const [motionOpen, setMotionOpen] = useState<string | null>(null);
   const [legendaOpen, setLegendaOpen] = useState<string | null>(null);
   const [agendaOpen, setAgendaOpen] = useState<string | null>(null);
+  const [efeitoOpen, setEfeitoOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -185,6 +224,18 @@ export default function SoulabPage() {
       const r = await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: null, aprovado: false }) });
       if (!r.ok) { const j = await r.json().catch(() => ({})); setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); }
       else { setMsg('Desagendada.'); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const salvarEfeito = useCallback(async (slug: string, efeito: EfeitoTexto) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar o efeito do texto…');
+    try {
+      const r = await fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, efeito }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Efeito guardado. O reel final usa-o no render.'); setEfeitoOpen(null); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -300,6 +351,7 @@ export default function SoulabPage() {
                 <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
@@ -308,6 +360,7 @@ export default function SoulabPage() {
                 {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
+                {efeitoOpen === p.slug && <EfeitoBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(ef) => salvarEfeito(p.slug, ef)} />}
               </div>
             ))}
           </div>
