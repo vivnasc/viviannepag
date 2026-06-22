@@ -100,7 +100,7 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog,
 // crossfade — mesmo padrão da Sequencia, mas com o KineticSlide (marca Soulab) e
 // fundo de imagem (sem clip, para o seek do render se manter simples). O efeito e a
 // tipografia vêm do 1.º slide (onde a Vivianne os guarda) e aplicam-se a todos.
-function SoulabMomentos({ slides, prog, mundo }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo }) {
+function SoulabMomentos({ slides, prog, mundo, clipUrl }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo; clipUrl?: string }) {
   const n = Math.max(1, slides.length);
   const w = 1 / n;
   const s0 = slides[0] as (Slide & { efeito?: EfeitoTexto; tipografia?: Tipografia }) | undefined;
@@ -117,7 +117,7 @@ function SoulabMomentos({ slides, prog, mundo }: { slides: (Slide & { imageUrl?:
         if (op <= 0) return null;
         return (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
-            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...SOULAB_SLIDE} />
+            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...SOULAB_SLIDE} />
           </div>
         );
       })}
@@ -318,7 +318,7 @@ export default function RenderVeuPage() {
       )}
       {/* SOULAB · vários momentos: peça Soulab com >1 slide => sequência sobre a cena */}
       {estado && ehKinetic && (estado.dia.mundo as string) === 'soulab' && (estado.dia.slides?.length ?? 0) > 1 && (
-        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} />
+        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} />
       )}
       {estado && ehKinetic && s && !((estado.dia.mundo as string) === 'soulab' && (estado.dia.slides?.length ?? 0) > 1) && (
         <KineticSlide
