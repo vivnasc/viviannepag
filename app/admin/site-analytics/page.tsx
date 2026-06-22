@@ -19,14 +19,27 @@ export default function SiteAnalyticsPage() {
   const [d, setD] = useState<Dados | null>(null);
   const [carregando, setCarregando] = useState(true);
 
-  useEffect(() => {
+  const [limpando, setLimpando] = useState(false);
+
+  function carregar() {
     setCarregando(true);
     fetch(`/api/admin/site-analytics?dias=${dias}`)
       .then((r) => r.json())
       .then((j) => setD(j))
       .catch((e) => setD({ erro: String(e) }))
       .finally(() => setCarregando(false));
-  }, [dias]);
+  }
+  useEffect(() => { carregar(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [dias]);
+
+  async function limparRuido() {
+    if (limpando || !window.confirm('Apagar as visitas de teste (previews .vercel.app)? Não toca nas visitas reais.')) return;
+    setLimpando(true);
+    try {
+      const r = await fetch('/api/admin/site-analytics', { method: 'POST' });
+      const j = await r.json();
+      if (j.ok) { carregar(); alert(`Limpo: ${j.apagadas} visita(s) de teste apagada(s).`); }
+    } catch { /* ignora */ } finally { setLimpando(false); }
+  }
 
   const maxDia = Math.max(1, ...((d?.serie ?? []).map((s) => s.n)));
   const maxFonte = Math.max(1, ...((d?.fontes ?? []).map((f) => f.n)));
@@ -39,11 +52,14 @@ export default function SiteAnalyticsPage() {
           <h1 className="text-2xl font-semibold text-white">Analytics · Site</h1>
           <p className="mt-1 text-sm text-stone-400">Visitas a viviannedossantos.com — e de onde vêm (Instagram, TikTok…).</p>
         </div>
-        <select value={dias} onChange={(e) => setDias(Number(e.target.value))} className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900">
-          <option value={7}>7 dias</option>
-          <option value={30}>30 dias</option>
-          <option value={90}>90 dias</option>
-        </select>
+        <div className="flex items-center gap-2">
+          <button onClick={limparRuido} disabled={limpando} className="rounded-lg border border-stone-600 px-3 py-2 text-xs text-stone-300 hover:bg-stone-800 disabled:opacity-40">{limpando ? 'a limpar…' : '🗑️ limpar ruído de testes'}</button>
+          <select value={dias} onChange={(e) => setDias(Number(e.target.value))} className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900">
+            <option value={7}>7 dias</option>
+            <option value={30}>30 dias</option>
+            <option value={90}>90 dias</option>
+          </select>
+        </div>
       </div>
 
       {carregando ? (
