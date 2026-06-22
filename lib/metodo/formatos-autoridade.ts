@@ -39,17 +39,17 @@ export const FORMATOS_AUTORIDADE: Record<FormatoAutoridadeId, FormatoAutoridade>
 };
 
 // A SEMANA da mãe: 1 formato por dia, QUARTA a dobrar (A Origem + O Erro). 8 slots
-// = 8 formatos. wd: getDay() (0=domingo). hora: o post principal de manhã (11:00);
-// o 2.º de quarta à tarde (17:00), para não competir.
+// = 8 formatos. wd: getDay() (0=domingo). hora: 21h (à noite, depois das séries das
+// 7h/13h/19h da conta vivianne.dos.santos); o 2.º de quarta às 17h, para não bater.
 export const SEMANA_AUTORIDADE: { wd: number; nome: string; formato: FormatoAutoridadeId; hora: string }[] = [
-  { wd: 1, nome: 'segunda', formato: 'veuDe', hora: '11:00' },
-  { wd: 2, nome: 'terça', formato: 'mecanismo', hora: '11:00' },
-  { wd: 3, nome: 'quarta', formato: 'origem', hora: '11:00' },
+  { wd: 1, nome: 'segunda', formato: 'veuDe', hora: '21:00' },
+  { wd: 2, nome: 'terça', formato: 'mecanismo', hora: '21:00' },
+  { wd: 3, nome: 'quarta', formato: 'origem', hora: '21:00' },
   { wd: 3, nome: 'quarta', formato: 'erro', hora: '17:00' }, // quarta a DOBRAR
-  { wd: 4, nome: 'quinta', formato: 'custo', hora: '11:00' },
-  { wd: 5, nome: 'sexta', formato: 'mito', hora: '11:00' },
-  { wd: 6, nome: 'sábado', formato: 'mapa', hora: '11:00' },
-  { wd: 0, nome: 'domingo', formato: 'cena', hora: '11:00' },
+  { wd: 4, nome: 'quinta', formato: 'custo', hora: '21:00' },
+  { wd: 5, nome: 'sexta', formato: 'mito', hora: '21:00' },
+  { wd: 6, nome: 'sábado', formato: 'mapa', hora: '21:00' },
+  { wd: 0, nome: 'domingo', formato: 'cena', hora: '21:00' },
 ];
 
 // os 7 véus, na ordem do método (1 por semana, à vez).
