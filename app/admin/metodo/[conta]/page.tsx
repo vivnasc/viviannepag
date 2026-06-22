@@ -14,7 +14,18 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null; estilo?: EstiloMetodo | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; aprovado: boolean; igStatus: string | null; criadoEm: string | null; estilo?: EstiloMetodo | null };
+
+// ESTÁGIO de um post (como no Soulab/Publicar): em edição (a trabalhar) · agendada
+// (aprovada, espera a hora) · publicada. Erro = uma publicação que falhou (badge).
+type Estagio = 'edicao' | 'agendadas' | 'publicadas' | 'todas';
+const estagioDe = (e: EstadoPost): Exclude<Estagio, 'todas'> => e.publicado ? 'publicadas' : e.aprovado ? 'agendadas' : 'edicao';
+const ESTAGIOS: { id: Estagio; label: string }[] = [
+  { id: 'edicao', label: '✎ em edição' },
+  { id: 'agendadas', label: '📅 agendadas' },
+  { id: 'publicadas', label: '✓ publicadas' },
+  { id: 'todas', label: 'todas' },
+];
 
 const TIPO_LABEL: Record<string, string> = {
   carta: 'Carta · Sou Aquela', naonormalizes: 'Não normalizes', cena: 'A cena',
@@ -45,10 +56,11 @@ export default function MetodoContaPage() {
   const [lote, setLote] = useState<{ feito: number; total: number } | null>(null);
   const [detalhe, setDetalhe] = useState<EstadoPost | null>(null);
   const [sel, setSel] = useState<Set<string>>(new Set());
-  // ORGANIZAÇÃO: o calendário mostra UM período de cada vez (manhã = frase 11h;
-  // tarde = motor 17h), nunca os dois amontoados. E esconde os publicados.
-  const [vista, setVista] = useState<'manha' | 'tarde'>('manha');
-  const [esconderPub, setEsconderPub] = useState(true);
+  // ORGANIZAÇÃO (pedido da Vivianne, como no Soulab): NÃO há abas manhã/tarde — os
+  // dois períodos aparecem juntos por dia (manhã em cima, tarde em baixo, por hora).
+  // As abas são por ESTÁGIO (em edição · agendadas · publicadas · todas), para ela
+  // ver logo no que está a trabalhar sem cliques extras.
+  const [estagio, setEstagio] = useState<Estagio>('edicao');
   // SEMANA a gerar (offset em semanas a partir de ESTA). Arranca na próxima semana
   // CHEIA: se hoje já passou a 2.ª-feira, não geramos meia-semana — começamos na
   // 2.ª que vem (ex.: hoje 20 jun -> semana de 22 jun). Assim nunca se gera passado.
@@ -423,13 +435,15 @@ export default function MetodoContaPage() {
   const hojeISO = (() => { const h = new Date(); return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, '0')}-${String(h.getDate()).padStart(2, '0')}`; })();
   const passados = geradosConta.filter((e) => e.agendadoEm && e.agendadoEm < hojeISO && !e.publicado);
 
-  // PERÍODO de um post: tarde = motor (nbeats) ou hora >= 15h; senão manhã.
-  const ehTardePost = (e: EstadoPost) => (e.hora ?? '') >= '13:00'; // por HORA (não por subtipo): manhã < 13h, tarde >= 13h
-  // o CALENDÁRIO mostra só o período escolhido e (se pedido) sem os publicados.
-  const geradosVista = geradosConta.filter((e) => (vista === 'tarde' ? ehTardePost(e) : !ehTardePost(e)) && (!esconderPub || !e.publicado));
+  // PERÍODO de um post (só para o badge ☀️/🌙 no cartão): tarde = hora >= 13h.
+  const ehTardePost = (e: EstadoPost) => (e.hora ?? '') >= '13:00';
+  // o CALENDÁRIO mostra o ESTÁGIO escolhido (não o período): em edição · agendadas ·
+  // publicadas · todas. Os dois períodos aparecem juntos por dia (ordenados por hora).
+  const geradosVista = geradosConta.filter((e) => estagio === 'todas' || estagioDe(e) === estagio);
   // por dia (a data é o plano): para a grelha de calendário.
   const porDia = new Map<string, EstadoPost[]>();
   for (const e of geradosVista) { const k = e.agendadoEm ?? 'sem data'; (porDia.get(k) ?? porDia.set(k, []).get(k)!).push(e); }
+  // manhã em cima, tarde em baixo: ordena por hora dentro de cada dia.
   for (const lista of porDia.values()) lista.sort((a, b) => (a.hora ?? '99').localeCompare(b.hora ?? '99'));
   const semDataList = porDia.get('sem data') ?? [];
 
@@ -440,10 +454,9 @@ export default function MetodoContaPage() {
   const fmtD = (dt: Date) => `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
   const semanaUnica: string[] = Array.from({ length: 7 }, (_, i) => { const d = new Date(segDaSemanaAlvo); d.setDate(segDaSemanaAlvo.getDate() + i); return fmtD(d); });
   const postsDaSemana = geradosVista.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm));
-  // contadores manhã/tarde DESTA semana (não do total) — para as abas baterem com a vista.
-  const daSemanaTudo = geradosConta.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm) && (!esconderPub || !e.publicado));
-  const nManhaSem = daSemanaTudo.filter((e) => !ehTardePost(e)).length;
-  const nTardeSem = daSemanaTudo.filter((e) => ehTardePost(e)).length;
+  // contadores por ESTÁGIO desta semana — para as abas mostrarem quanto há em cada.
+  const daSemanaTudo = geradosConta.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm));
+  const contaEstagio = (id: Estagio) => id === 'todas' ? daSemanaTudo.length : daSemanaTudo.filter((e) => estagioDe(e) === id).length;
   // quantas semanas é preciso empurrar os passados para a mais antiga cair na semana-alvo.
   const deltaParaAlvo = (() => {
     if (!passados.length) return 0;
@@ -505,20 +518,19 @@ export default function MetodoContaPage() {
 
         {geradosConta.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Semana de {fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)} <span className="opacity-40">· {postsDaSemana.length} {vista === 'tarde' ? 'à tarde' : 'de manhã'} (total {geradosConta.length})</span></h2>
+            <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">Semana de {fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)} <span className="opacity-40">· {postsDaSemana.length} nesta vista (total {geradosConta.length})</span></h2>
             <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem]">
               <span className="inline-flex items-center rounded-lg border border-white/15 overflow-hidden mr-1">
                 <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2 py-1.5 hover:bg-white/10">◀</button>
                 <button onClick={() => setOffset(() => { const h = new Date(); return h.getDay() === 1 ? 0 : 1; })} className="px-2 py-1.5 text-[0.66rem] opacity-70 hover:bg-white/10">hoje</button>
                 <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2 py-1.5 hover:bg-white/10">▶</button>
               </span>
-              <div className="inline-flex rounded-lg border border-white/15 overflow-hidden">
-                <button onClick={() => setVista('manha')} className="px-3 py-1.5" style={{ background: vista === 'manha' ? '#d8b25a' : 'transparent', color: vista === 'manha' ? '#0F0F1A' : '#F2E8DC' }}>☀️ Manhã · {nManhaSem}</button>
-                <button onClick={() => setVista('tarde')} className="px-3 py-1.5" style={{ background: vista === 'tarde' ? '#EBAE4A' : 'transparent', color: vista === 'tarde' ? '#0F0F1A' : '#F2E8DC' }}>🌙 Tarde · {nTardeSem}</button>
+              {/* ABAS POR ESTÁGIO (não por período): manhã e tarde aparecem JUNTAS por dia. */}
+              <div className="inline-flex rounded-lg border border-white/15 overflow-hidden flex-wrap">
+                {ESTAGIOS.map((s) => (
+                  <button key={s.id} onClick={() => setEstagio(s.id)} className="px-3 py-1.5" style={{ background: estagio === s.id ? '#d8b25a' : 'transparent', color: estagio === s.id ? '#0F0F1A' : '#F2E8DC' }}>{s.label} · {contaEstagio(s.id)}</button>
+                ))}
               </div>
-              <label className="inline-flex items-center gap-1.5 opacity-80 cursor-pointer">
-                <input type="checkbox" checked={esconderPub} onChange={(e) => setEsconderPub(e.target.checked)} className="cursor-pointer" /> esconder publicados
-              </label>
             </div>
             {sel.size > 0 && (
               <div className="mb-3 flex items-center gap-2 flex-wrap text-[0.78rem] rounded-lg border border-rose-400/30 bg-rose-500/5 px-3 py-2">
@@ -541,8 +553,11 @@ export default function MetodoContaPage() {
                         <div className="text-[0.55rem] opacity-40 mb-0.5">{d.slice(8)}{passou ? ' · passou' : ''}</div>
                         {posts.map((e) => (
                           <div key={e.slug} className={`relative mb-1 rounded-md ${sel.has(e.slug) ? 'ring-2 ring-rose-400' : ''}`}>
-                            {/* hora + período: manhã (frase) vs tarde (motor dramático), para não misturar */}
-                            <span className="absolute bottom-1 left-1 z-10 text-[0.5rem] px-1 py-0.5 rounded" style={{ background: (e.hora ?? '') >= '15:00' ? 'rgba(235,174,74,0.9)' : 'rgba(0,0,0,0.7)', color: (e.hora ?? '') >= '15:00' ? '#0F0F1A' : '#F2E8DC' }} title={(e.hora ?? '') >= '15:00' ? 'tarde · motor dramático' : 'manhã'}>{(e.hora ?? '').slice(0, 5) || '—'}</span>
+                            {/* hora + período (☀️ manhã / 🌙 tarde): agora aparecem juntos no mesmo dia */}
+                            <span className="absolute bottom-1 left-1 z-10 text-[0.5rem] px-1 py-0.5 rounded" style={{ background: ehTardePost(e) ? 'rgba(235,174,74,0.9)' : 'rgba(0,0,0,0.7)', color: ehTardePost(e) ? '#0F0F1A' : '#F2E8DC' }} title={ehTardePost(e) ? 'tarde' : 'manhã'}>{ehTardePost(e) ? '🌙' : '☀️'} {(e.hora ?? '').slice(0, 5) || '—'}</span>
+                            {/* badge de ESTÁGIO/erro no canto: agendada (📅) ou erro (⚠), para ver de relance */}
+                            {!e.publicado && e.igStatus?.startsWith('erro') ? <span className="absolute bottom-1 right-1 z-10 text-[0.5rem] px-1 py-0.5 rounded bg-rose-600/85 text-white" title={`erro: ${e.igStatus}`}>⚠ erro</span>
+                              : !e.publicado && e.aprovado ? <span className="absolute bottom-1 right-1 z-10 text-[0.5rem] px-1 py-0.5 rounded bg-[#C9B6FA]/85 text-[#0F0F1A]" title="agendada (espera a hora)">📅</span> : null}
                             <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${'#d8b25a'}66`}` }}>
                               {e.subtipo === 'carta'
                                 ? <CartaSlide texto={e.texto} conta={conta} capa prog={1} imageUrl={e.imageUrl ?? undefined} />
