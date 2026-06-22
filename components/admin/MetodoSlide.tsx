@@ -18,7 +18,7 @@ const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
 // INDEPENDÊNCIA (à escolha da Vivianne): controlo da tipografia por post — tamanho,
 // cor, cor de realce, fonte e itálico. Tudo opcional; sem isto, fica o estilo de sempre.
-export type EstiloMetodo = { tamanho?: number; cor?: string; corDestaque?: string; fonte?: 'serif' | 'sans' | 'mono'; italico?: boolean };
+export type EstiloMetodo = { tamanho?: number; cor?: string; corDestaque?: string; fonte?: 'serif' | 'sans' | 'mono'; italico?: boolean; animTexto?: 'reveal' | 'typewriter'; zoom?: boolean };
 const FONTE_MAP: Record<string, string> = { serif: FONT_SERIF, sans: FONT_SANS, mono: FONT_MONO };
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
@@ -68,10 +68,12 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
   // FUNDO A MEXER (clip): pan + zoom contínuos conduzidos por prog (não imagem
   // parada). A face 1 (typewriter) e a face 2 (reveal) derivam em sentidos
   // diferentes, para se distinguirem.
-  const isReveal = anim === 'reveal';
-  const bgScale = 1.12 + 0.12 * prog;            // zoom lento e visível
-  const bgX = (isReveal ? 1 : -1) * 34 * prog;   // deriva horizontal (sentido por face)
-  const bgY = (isReveal ? 12 : -16) * prog;      // deriva vertical
+  // MOTION à escolha (independência): texto (reveal/typewriter) e imagem (zoom on/off).
+  const isReveal = (estilo?.animTexto ?? anim) === 'reveal';
+  const semZoom = estilo?.zoom === false;        // imagem parada se a Vivianne quiser
+  const bgScale = semZoom ? 1.08 : 1.12 + 0.12 * prog;  // zoom lento e visível (ou parado)
+  const bgX = semZoom ? 0 : (isReveal ? 1 : -1) * 34 * prog;   // deriva horizontal
+  const bgY = semZoom ? 0 : (isReveal ? 12 : -16) * prog;      // deriva vertical
   // REVELAÇÃO do texto: typewriter = palavra a palavra com cursor; reveal = a
   // linha inteira aparece em bloco (fade + foco + subida), registo diferente.
   const revealOp = Math.min(1, prog / 0.55);

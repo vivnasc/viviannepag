@@ -747,6 +747,11 @@ export default function MetodoContaPage() {
                     <label className="flex items-center gap-1"><input type="checkbox" checked={!!est.italico} onChange={(e) => set({ italico: e.target.checked })} />itálico</label>
                     <label className="flex items-center gap-1">fonte<select value={est.fonte ?? 'serif'} onChange={(e) => set({ fonte: e.target.value as EstiloMetodo['fonte'] })} className="bg-transparent border border-white/20 rounded px-1"><option value="serif">serif</option><option value="sans">sans</option><option value="mono">mono</option></select></label>
                   </div>
+                  <div className="flex items-center gap-3 flex-wrap mt-1.5 pt-1.5 border-t border-white/10">
+                    <span className="uppercase tracking-wider opacity-50">motion</span>
+                    <label className="flex items-center gap-1">texto<select value={est.animTexto ?? 'reveal'} onChange={(e) => set({ animTexto: e.target.value as EstiloMetodo['animTexto'] })} className="bg-transparent border border-white/20 rounded px-1"><option value="reveal">aparece (bloco)</option><option value="typewriter">palavra a palavra</option></select></label>
+                    <label className="flex items-center gap-1"><input type="checkbox" checked={est.zoom !== false} onChange={(e) => set({ zoom: e.target.checked })} />zoom na imagem</label>
+                  </div>
                 </div>
               ); })()}
               <div className="mt-2 flex items-center justify-center gap-2 text-[0.68rem]">
