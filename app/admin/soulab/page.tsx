@@ -21,6 +21,7 @@ type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; somTipo: string | null; somEstilo: string | null; legenda: string | null;
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
+  segPorMomento: number | null;
   formato: string; momentos: string[] | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
@@ -235,18 +236,23 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
 // PRÉ-VISUALIZAÇÃO do reel (ver ANTES de renderizar): anima prog 0→1 em loop, com
 // o efeito + tipografia da peça. Se for "vários momentos", sequencia-os (crossfade),
 // como o render vai fazer. Assim ela vê como sai SEM gastar um render.
-function PreviewBox({ peca }: { peca: Peca }) {
+//
+// O TEMPO POR MOMENTO é ESCOLHA DELA (slider): o preview anima a esse ritmo E o
+// render usa o MESMO valor (slides[0].segPorMomento) — o que vê é o que sai.
+function PreviewBox({ peca, disabled, busy, onSaveTempo }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTempo: (seg: number) => void }) {
   const [prog, setProg] = useState(0);
   const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
   const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
   const tip = peca.tipografia ?? undefined;
+  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 6.5);
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
   useEffect(() => {
     let raf = 0; let start: number | null = null;
-    const dur = Math.max(5200, (moms?.length ?? 1) * 5200), hold = 1400;
+    const dur = (moms?.length ?? 1) * seg * 1000, hold = 1200; // MESMO ritmo do render (seg/momento)
     const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [moms]);
+  }, [moms, seg]);
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · como vai sair no reel (ver antes de renderizar)</p>
@@ -272,6 +278,21 @@ function PreviewBox({ peca }: { peca: Peca }) {
         </div>
       )}
       {peca.clipUrl && <p className="text-[0.5rem] opacity-45">(o movimento vê-se no 🎬; aqui mostra-se a imagem + o texto a animar)</p>}
+
+      {/* TEMPO POR MOMENTO — escolha dela; o preview acima já anima a este ritmo,
+          e o render usa o MESMO valor ao guardar. Só faz sentido com vários momentos. */}
+      {moms && (
+        <div className="space-y-1 pt-1">
+          <label className="flex items-center gap-2 text-[0.6rem] opacity-80">
+            <span className="opacity-60 whitespace-nowrap">tempo / momento</span>
+            <input type="range" min={3} max={12} step={0.5} value={seg} onChange={(e) => setSeg(Number(e.target.value))} className="flex-1 accent-current" style={{ color: dz }} />
+            <span className="tabular-nums w-9 text-right">{seg.toFixed(1)}s</span>
+          </label>
+          <p className="text-[0.5rem] opacity-45">{moms.length} momentos × {seg.toFixed(1)}s ≈ <b>{Math.round(seg * moms.length)}s</b> de reel. Arrasta e vê em cima; guarda para o render usar o mesmo.</p>
+          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 6.5)}
+            className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tempo'}</button>
+        </div>
+      )}
     </div>
   );
 }
@@ -391,6 +412,18 @@ export default function SoulabPage() {
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else { setMsg(remover ? 'Áudio removido (volta à música da loja no render).' : 'Áudio gerado. Ouve em baixo; o render usa-o como áudio do reel.'); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const salvarTempo = useCallback(async (slug: string, segPorMomento: number) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar o tempo por momento…');
+    try {
+      const r = await fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, segPorMomento }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Tempo guardado. O render usa este ritmo (o mesmo que vês na pré-visualização).'); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -583,7 +616,7 @@ export default function SoulabPage() {
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
-                {previewOpen === p.slug && <PreviewBox peca={p} />}
+                {previewOpen === p.slug && <PreviewBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSaveTempo={(seg) => salvarTempo(p.slug, seg)} />}
                 {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
