@@ -14,14 +14,26 @@ import { realceAuto } from '@/lib/metodo/reels';
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
+const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
+
+// INDEPENDÊNCIA (à escolha da Vivianne): controlo da tipografia por post — tamanho,
+// cor, cor de realce, fonte e itálico. Tudo opcional; sem isto, fica o estilo de sempre.
+export type EstiloMetodo = { tamanho?: number; cor?: string; corDestaque?: string; fonte?: 'serif' | 'sans' | 'mono'; italico?: boolean };
+const FONTE_MAP: Record<string, string> = { serif: FONT_SERIF, sans: FONT_SANS, mono: FONT_MONO };
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
 // `semFundo`: não desenha fundo (transparente) — para sobrepor um beat a um fundo
 // ÚNICO partilhado (reel da tarde, N beats sobre 1 cena). `semRodape`: esconde a
 // assinatura @conta (só o último beat a mostra).
-export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, conceito, veuReveal, anim = 'typewriter', prog = 1, ratio = '9:16', semFundo = false, semRodape = false }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; anim?: 'typewriter' | 'reveal'; prog?: number; ratio?: '9:16' | '4:5'; semFundo?: boolean; semRodape?: boolean }) {
+export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, conceito, veuReveal, anim = 'typewriter', prog = 1, ratio = '9:16', semFundo = false, semRodape = false, estilo }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; anim?: 'typewriter' | 'reveal'; prog?: number; ratio?: '9:16' | '4:5'; semFundo?: boolean; semRodape?: boolean; estilo?: EstiloMetodo }) {
   const { bg1, bg2, accent } = conta.paleta;
+  // tipografia à escolha (independência) — com os defaults de sempre.
+  const txtSize = estilo?.tamanho ?? 98;
+  const txtCor = estilo?.cor ?? '#F5EEE3';
+  const txtAccent = estilo?.corDestaque ?? accent;
+  const txtFont = estilo?.fonte ? (FONTE_MAP[estilo.fonte] ?? FONT_SERIF) : FONT_SERIF;
+  const txtItalico = estilo?.italico ?? false;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
   const H = ratio === '4:5' ? 1350 : 1920;
   const ar = ratio === '4:5' ? '1080 / 1350' : '1080 / 1920';
@@ -92,7 +104,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
 
         {/* a linha (uma só, no centro) */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 130px', zIndex: 2 }}>
-          <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 98, lineHeight: 1.16, letterSpacing: '-0.01em', textAlign: 'center', color: '#F5EEE3', textShadow: temFundo ? '0 2px 30px rgba(0,0,0,0.65)' : 'none', margin: 0, opacity: isReveal ? revealOp : 1, filter: isReveal ? `blur(${((1 - revealOp) * 4).toFixed(2)}px)` : 'none', transform: isReveal ? `translateY(${((1 - revealOp) * 22).toFixed(1)}px)` : 'none' }}>
+          <p style={{ fontFamily: txtFont, fontWeight: 300, fontSize: txtSize, fontStyle: txtItalico ? 'italic' : 'normal', lineHeight: 1.16, letterSpacing: '-0.01em', textAlign: 'center', color: txtCor, textShadow: temFundo ? '0 2px 30px rgba(0,0,0,0.65)' : 'none', margin: 0, opacity: isReveal ? revealOp : 1, filter: isReveal ? `blur(${((1 - revealOp) * 4).toFixed(2)}px)` : 'none', transform: isReveal ? `translateY(${((1 - revealOp) * 22).toFixed(1)}px)` : 'none' }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
               // reveal: a linha aparece em bloco (a animação está no <p>); typewriter: palavra a palavra.
@@ -103,7 +115,7 @@ export function MetodoSlide({ texto, destaque = [], imageUrl, clipUrl, conta, co
                 else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
               }
               return (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F7EFE6', fontStyle: dest ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: temFundo ? (dest ? '0 2px 22px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 26px rgba(0,0,0,0.82), 0 0 7px rgba(0,0,0,0.6)') : 'none' }}>
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? txtAccent : txtCor, fontStyle: (dest || txtItalico) ? 'italic' : 'normal', opacity: op, transform: `translateY(${dy}px)`, textShadow: temFundo ? (dest ? '0 2px 22px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 26px rgba(0,0,0,0.82), 0 0 7px rgba(0,0,0,0.6)') : 'none' }}>
                   {w}
                   {!isReveal && aindaEscreve && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
                 </span>
