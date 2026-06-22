@@ -39,6 +39,8 @@ export async function GET(req: NextRequest) {
   }
 
   const rows = (data ?? []) as { ts: string; path: string | null; source: string | null }[];
+
+  const ehInterno = (s: string | null) => !s || s === 'Interno' || s === 'Outro' || /vercel/i.test(s);
   const total = rows.length;
 
   const porDia = new Map<string, number>();
@@ -47,7 +49,8 @@ export async function GET(req: NextRequest) {
   for (const r of rows) {
     const dia = (r.ts || '').slice(0, 10);
     if (dia) porDia.set(dia, (porDia.get(dia) ?? 0) + 1);
-    const f = r.source || 'Outro'; porFonte.set(f, (porFonte.get(f) ?? 0) + 1);
+    // "de onde vêm" = só fontes EXTERNAS reais (sem Interno/Outro/vercel = ruído)
+    if (!ehInterno(r.source)) { const f = r.source as string; porFonte.set(f, (porFonte.get(f) ?? 0) + 1); }
     const p = r.path || '/'; porPagina.set(p, (porPagina.get(p) ?? 0) + 1);
   }
 
@@ -69,4 +72,16 @@ export async function GET(req: NextRequest) {
     fontes: ordenar(porFonte),
     paginas: ordenar(porPagina).slice(0, 12),
   });
+}
+
+// POST — apaga o lixo já gravado (visitas de teste dos previews .vercel.app).
+export async function POST() {
+  if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
+  const sb = getSupabaseAdmin();
+  const { error, count } = await sb
+    .from('site_views')
+    .delete({ count: 'exact' })
+    .or('source.ilike.%vercel%,referrer.ilike.%vercel%');
+  if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
+  return NextResponse.json({ ok: true, apagadas: count ?? 0 });
 }

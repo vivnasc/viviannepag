@@ -23,6 +23,7 @@ function classificar(ref: string, path: string): string {
 
   const nosso = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
   if (nosso && host.includes(nosso)) return 'Interno';
+  if (host.includes('vercel')) return 'Interno'; // previews/painel Vercel = ruído de teste
   if (host.includes('instagram')) return 'Instagram';
   if (host.includes('tiktok')) return 'TikTok';
   if (host.includes('facebook') || host.includes('l.facebook') || host === 'fb.com') return 'Facebook';
