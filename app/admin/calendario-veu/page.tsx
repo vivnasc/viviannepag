@@ -32,7 +32,7 @@ export default function CalendarioVeuPage() {
           <Link href="/admin/plano-semana" className="text-[0.7rem] opacity-60 hover:opacity-100">Plano da semana →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1">A jornada didática completa: <b>13 semanas</b>, as 4 matérias <b>entrelaçadas como um só caminho</b> — pertencer, a sombra, as heranças, o sentido. Sem repetir tema.</p>
-        <p className="text-[0.76rem] opacity-55 mb-6">Não escolhes nada: cada semana avança sozinha. Hoje estás na <b className="text-ambar">semana {atual}</b>. Toca numa semana para a abrir no Plano.</p>
+        <p className="text-[0.76rem] opacity-55 mb-6">Não escolhes nada: cada semana avança sozinha. Hoje estás na <b className="text-indigo">semana {atual}</b>. Toca numa semana para a abrir no Plano.</p>
 
         {/* legenda das matérias */}
         <div className="flex flex-wrap gap-3 mb-3">
@@ -66,12 +66,12 @@ export default function CalendarioVeuPage() {
                   const cor = COR_CURSO[s.curso] ?? '#C9B6FA';
                   const ehAtual = s.semana === atual;
                   return (
-                    <div key={s.semana} className={`rounded-xl border overflow-hidden ${ehAtual ? 'border-ambar/60' : 'border-ocre/12'}`} style={{ background: `linear-gradient(135deg, ${cor}12, transparent 60%)` }}>
+                    <div key={s.semana} className={`rounded-xl border overflow-hidden ${ehAtual ? 'border-indigo/60' : 'border-indigo/12'}`} style={{ background: `linear-gradient(135deg, ${cor}12, transparent 60%)` }}>
                       <div className="p-4">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-[0.58rem] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full" style={{ background: cor + '22', color: cor }}>sem. {s.semana}</span>
                           <span className="text-[0.62rem] opacity-55">{nomeCurso(s.curso)}</span>
-                          {ehAtual && <span className="ml-auto text-[0.58rem] px-2 py-0.5 rounded-full bg-ambar/20 text-ambar">esta semana</span>}
+                          {ehAtual && <span className="ml-auto text-[0.58rem] px-2 py-0.5 rounded-full bg-indigo/20 text-indigo">esta semana</span>}
                         </div>
                         <p className="font-serif text-lg leading-tight" style={{ color: cor }}>“{s.mote}”</p>
                         <p className="text-[0.76rem] opacity-65 mb-1.5">{s.tema}</p>
@@ -83,8 +83,8 @@ export default function CalendarioVeuPage() {
                           {s.arenas.length > 1 && <span className="text-[0.54rem] px-1.5 py-0.5 rounded-full opacity-50 self-center">semana multi-arena</span>}
                         </div>
                         <div className="flex flex-wrap items-center gap-2">
-                          <Link href="/admin/plano-semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ocre/25 text-creme-2/70 hover:border-ambar hover:text-ambar no-underline">abrir no Plano →</Link>
-                          <Link href={`/admin/heroi?tema=${encodeURIComponent(s.heroi)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10 no-underline" title={s.heroi}>🌅 I am a Hero</Link>
+                          <Link href="/admin/plano-semana" className="text-[0.62rem] px-2.5 py-1 rounded-full border border-indigo/25 text-creme-2/70 hover:border-indigo hover:text-indigo no-underline">abrir no Plano →</Link>
+                          <Link href={`/admin/heroi?tema=${encodeURIComponent(s.heroi)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-indigo/40 text-indigo hover:bg-indigo/10 no-underline" title={s.heroi}>🌅 I am a Hero</Link>
                           <Link href={`/admin/reels?formato=pensador&tema=${encodeURIComponent(s.tema)}`} className="text-[0.62rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/40 text-[#C9B6FA] hover:bg-[#C9B6FA]/10 no-underline" title={`Uma ideia de um pensador sobre: ${s.tema}`}>🕯️ Uma ideia de…</Link>
                         </div>
                       </div>

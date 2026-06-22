@@ -259,17 +259,17 @@ export default function PlanoSemanaPage() {
         <p className="text-[0.78rem] opacity-60 mb-4">Vês <b>as frases reais da semana</b> (8 posts, Seg→Dom, com 2 à quarta), editas à mão, e só depois crias cada post. Nunca às cegas.</p>
 
         {/* semana do plano trimestral — navega com ◀▶, o tema vem sozinho (não escolhes nada) */}
-        <div className="rounded-xl border border-ambar/25 bg-ambar/[0.05] p-4 mb-5">
+        <div className="rounded-xl border border-indigo/25 bg-indigo/[0.05] p-4 mb-5">
           <div className="flex items-center gap-2 mb-1">
-            <button onClick={() => irSemana(-1)} disabled={semOffset === 0} className="text-[0.85rem] px-2.5 py-0.5 rounded-full border border-ambar/30 text-ambar hover:bg-ambar/10 disabled:opacity-25">◀</button>
-            <span className="flex-1 text-center text-[0.6rem] uppercase tracking-[0.16em] text-ambar">{semOffset === 0 ? 'Esta semana' : semOffset === 1 ? 'Próxima semana' : `+${semOffset} semanas`} · semana {semEd.semana} de {PLANO_EDITORIAL.length}</span>
-            <button onClick={() => irSemana(1)} className="text-[0.85rem] px-2.5 py-0.5 rounded-full border border-ambar/30 text-ambar hover:bg-ambar/10">▶</button>
+            <button onClick={() => irSemana(-1)} disabled={semOffset === 0} className="text-[0.85rem] px-2.5 py-0.5 rounded-full border border-indigo/30 text-indigo hover:bg-indigo/10 disabled:opacity-25">◀</button>
+            <span className="flex-1 text-center text-[0.6rem] uppercase tracking-[0.16em] text-indigo">{semOffset === 0 ? 'Esta semana' : semOffset === 1 ? 'Próxima semana' : `+${semOffset} semanas`} · semana {semEd.semana} de {PLANO_EDITORIAL.length}</span>
+            <button onClick={() => irSemana(1)} className="text-[0.85rem] px-2.5 py-0.5 rounded-full border border-indigo/30 text-indigo hover:bg-indigo/10">▶</button>
           </div>
           <p className="font-serif text-xl leading-tight text-center">“{semEd.mote}”</p>
           <p className="text-[0.74rem] opacity-65 mt-0.5 text-center">{semEd.tema} · {(CURSOS.find((c) => c.id === semEd.curso) ?? CURSOS[0]).nome}</p>
 
           {/* arena(s) onde o conceito ATERRA — vem sozinha do plano; troca manual se a semana pedir */}
-          <div className="mt-3 pt-3 border-t border-ambar/15">
+          <div className="mt-3 pt-3 border-t border-indigo/15">
             <p className="text-[0.58rem] uppercase tracking-[0.15em] text-center opacity-50 mb-1.5">Arena · onde aterra (vem sozinha, troca se quiseres)</p>
             <div className="flex flex-wrap justify-center gap-1.5">
               {ARENAS.map((a) => {
@@ -284,9 +284,9 @@ export default function PlanoSemanaPage() {
 
           <div className="flex items-center justify-center gap-3 mt-3">
             {(curso !== semEd.curso || tema !== semEd.tema) && (
-              <button onClick={usarSemanaDoPlano} className="text-[0.66rem] px-3 py-1 rounded-full border border-ambar/40 text-ambar hover:bg-ambar/10">usar o tema desta semana</button>
+              <button onClick={usarSemanaDoPlano} className="text-[0.66rem] px-3 py-1 rounded-full border border-indigo/40 text-indigo hover:bg-indigo/10">usar o tema desta semana</button>
             )}
-            <Link href="/admin/calendario-veu" className="text-[0.66rem] text-ambar/80 hover:text-ambar">ver os 3 meses →</Link>
+            <Link href="/admin/calendario-veu" className="text-[0.66rem] text-indigo/80 hover:text-indigo">ver os 3 meses →</Link>
           </div>
         </div>
         <p className="text-[0.72rem] opacity-45 mb-3">O tema vem do plano trimestral. Usa ◀▶ para a semana que queres (esta, a próxima…) e carrega em <b>rascunhar a semana</b>. Não escolhes nada.</p>
@@ -296,16 +296,16 @@ export default function PlanoSemanaPage() {
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">Matéria</p>
           <div className="flex flex-wrap gap-2 mb-1">
             {CURSOS.map((c) => (
-              <button key={c.id} onClick={() => { setCurso(c.id); guardar({ curso: c.id }); }} className={`text-[0.72rem] px-3 py-1.5 rounded-full border ${curso === c.id ? 'border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/10' : 'border-ocre/25 text-creme-2/70 hover:border-[#C9B6FA]'}`}>{c.nome}</button>
+              <button key={c.id} onClick={() => { setCurso(c.id); guardar({ curso: c.id }); }} className={`text-[0.72rem] px-3 py-1.5 rounded-full border ${curso === c.id ? 'border-[#C9B6FA] text-[#C9B6FA] bg-[#C9B6FA]/10' : 'border-indigo/25 text-creme-2/70 hover:border-[#C9B6FA]'}`}>{c.nome}</button>
             ))}
           </div>
           <p className="text-[0.7rem] italic opacity-55 mb-3">{cursoAtual.descricao}</p>
 
           <p className="text-[0.6rem] uppercase tracking-[0.15em] opacity-50 mb-2">Tema da semana</p>
-          <input value={tema} onChange={(e) => { setTema(e.target.value); guardar({ tema: e.target.value }); }} placeholder="Escreve, ou escolhe um conceito em baixo…" className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.88rem] outline-none focus:border-ambar mb-2" />
+          <input value={tema} onChange={(e) => { setTema(e.target.value); guardar({ tema: e.target.value }); }} placeholder="Escreve, ou escolhe um conceito em baixo…" className="w-full bg-black/30 border border-indigo/25 rounded-lg px-3 py-2 text-[0.88rem] outline-none focus:border-indigo mb-2" />
           <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1 mb-3">
             {cursoAtual.conceitos.map((c) => (
-              <button key={c} onClick={() => { setTema(c); guardar({ tema: c }); }} className={`text-[0.64rem] px-2 py-0.5 rounded-full border ${tema === c ? 'border-ambar text-ambar bg-ambar/10' : 'border-ocre/20 text-creme-2/65 hover:border-ambar hover:text-ambar'}`}>{c}</button>
+              <button key={c} onClick={() => { setTema(c); guardar({ tema: c }); }} className={`text-[0.64rem] px-2 py-0.5 rounded-full border ${tema === c ? 'border-indigo text-indigo bg-indigo/10' : 'border-indigo/20 text-creme-2/65 hover:border-indigo hover:text-indigo'}`}>{c}</button>
             ))}
           </div>
 
@@ -331,12 +331,12 @@ export default function PlanoSemanaPage() {
             const ehKin = gen === 'kinetico';
             const info = GEN[gen];
             return (
-              <div key={i} className={`rounded-xl border border-ocre/12 bg-terra/15 overflow-hidden ${feito ? 'opacity-60' : ''}`}>
-                <div className="px-4 py-2 flex items-center gap-2 text-[0.7rem] border-b border-ocre/10">
+              <div key={i} className={`rounded-xl border border-indigo/12 bg-terra/15 overflow-hidden ${feito ? 'opacity-60' : ''}`}>
+                <div className="px-4 py-2 flex items-center gap-2 text-[0.7rem] border-b border-indigo/10">
                   <span className="text-base">{d.emoji}</span>
                   <span className="uppercase tracking-[0.14em] text-[#C9B6FA]">{d.dia}</span>
                   <span className="opacity-50">· {d.label}</span>
-                  <span className="ml-auto text-[0.56rem] px-2 py-0.5 rounded-full border border-ocre/25 opacity-70">{ehKin ? 'Post · frase controlada' : info?.badge}</span>
+                  <span className="ml-auto text-[0.56rem] px-2 py-0.5 rounded-full border border-indigo/25 opacity-70">{ehKin ? 'Post · frase controlada' : info?.badge}</span>
                   {feito && <span className="text-[0.6rem] px-2 py-0.5 rounded-full bg-salvia/15 text-salvia">✓ criado</span>}
                 </div>
 
@@ -350,11 +350,11 @@ export default function PlanoSemanaPage() {
                     </div>
                     <div className="p-4 space-y-2">
                       <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45">Frase no ecrã</label>
-                      <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-ambar" />
+                      <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-indigo/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-indigo" />
                       <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45 pt-1">Palavras a ouro (vírgulas)</label>
-                      <input value={d.destaque.join(', ')} onChange={(e) => editar(i, 'destaque', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-1.5 text-[0.8rem] outline-none focus:border-ambar" />
+                      <input value={d.destaque.join(', ')} onChange={(e) => editar(i, 'destaque', e.target.value)} className="w-full bg-black/30 border border-indigo/25 rounded-lg px-3 py-1.5 text-[0.8rem] outline-none focus:border-indigo" />
                       <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45 pt-1">Legenda do Instagram</label>
-                      <textarea value={d.legenda} onChange={(e) => editar(i, 'legenda', e.target.value)} rows={4} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.8rem] leading-relaxed outline-none focus:border-ambar" />
+                      <textarea value={d.legenda} onChange={(e) => editar(i, 'legenda', e.target.value)} rows={4} className="w-full bg-black/30 border border-indigo/25 rounded-lg px-3 py-2 text-[0.8rem] leading-relaxed outline-none focus:border-indigo" />
                       <div className="flex flex-wrap items-center gap-2 pt-1">
                         <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-40">{busy === i ? 'a criar…' : feito ? '↻ recriar post' : '✓ criar post com este texto'}</button>
                         <span className="text-[0.64rem] opacity-45">cria o post com o TEU texto. Fundo pões em Reels.</span>
@@ -365,11 +365,11 @@ export default function PlanoSemanaPage() {
                   // ── REEL / CÁ EM CASA / INFOGRÁFICO: gerador monta o formato ──
                   <div className="p-4 space-y-2">
                     <label className="block text-[0.58rem] uppercase tracking-[0.15em] opacity-45">A ideia / gancho deste dia</label>
-                    <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-ocre/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-ambar" />
+                    <input value={d.frase} onChange={(e) => editar(i, 'frase', e.target.value)} className="w-full bg-black/30 border border-indigo/25 rounded-lg px-3 py-2 text-[0.9rem] outline-none focus:border-indigo" />
                     <p className="text-[0.66rem] opacity-55 leading-relaxed">{info?.nota}</p>
                     <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === i ? 'a gerar…' : feito ? `↻ recriar` : `✓ ${info?.botao ?? 'criar'}`}</button>
-                      {feito && info && <Link href={info.destino} className="text-[0.66rem] px-3 py-1.5 rounded-full border border-ocre/30 text-creme-2/75 hover:border-ambar hover:text-ambar no-underline">{info.verLabel} →</Link>}
+                      <button onClick={() => criarPost(i)} disabled={busy !== null} className="text-[0.7rem] px-3 py-1.5 rounded-full border border-indigo/45 bg-indigo/10 text-indigo hover:bg-indigo/20 disabled:opacity-40">{busy === i ? 'a gerar…' : feito ? `↻ recriar` : `✓ ${info?.botao ?? 'criar'}`}</button>
+                      {feito && info && <Link href={info.destino} className="text-[0.66rem] px-3 py-1.5 rounded-full border border-indigo/30 text-creme-2/75 hover:border-indigo hover:text-indigo no-underline">{info.verLabel} →</Link>}
                     </div>
                   </div>
                 )}

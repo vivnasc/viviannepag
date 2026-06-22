@@ -42,7 +42,7 @@ export const SOULAB = {
   ],
   // identidade visual própria (escuro, elegante, lunar) — não é a paleta de
   // nenhum dos outros motores. Registada em PALETAS como mundo 'soulab'.
-  paleta: { bg: '#1B1726', bg2: '#0E0B16', texto: '#ECE6F2', destaque: '#B9A8E0', nome: 'Soulab' },
+  paleta: { bg: '#1B1726', bg2: '#0E0B16', texto: '#ECE6F2', destaque: '#C9A2E6', nome: 'Soulab' },
   hashtagsBase: ['#soulab', '#almahumana', '#simbolismo', '#arquetipos', '#contemplacao', '#imaginacao'],
   // A VOZ (decisão da Vivianne): CONVITE contemplativo, NÃO confissão. Impessoal
   // e aberto ("o que está vivo aqui?"), nunca o "isto és tu" do Método VS.

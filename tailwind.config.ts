@@ -21,6 +21,9 @@ const config: Config = {
         ocre: '#B8843D',
         ambar: '#EBAE4A',
         ouro: '#D49A3A',
+        // índigo · a cor da veu.a.veu no admin (planear + criar) — decisão da Vivianne,
+        // para não partilhar a família roxa da Soulab (que é lilás).
+        indigo: '#818CF8',
         bordeaux: {
           DEFAULT: '#8B2235',
           // versão legível como texto sobre o castanho escuro

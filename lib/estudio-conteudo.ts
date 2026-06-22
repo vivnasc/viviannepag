@@ -56,7 +56,7 @@ export const PALETAS: Record<string, { bg: string; bg2: string; texto: string; d
   carvao: { bg: '#2A2825', bg2: '#141312', texto: '#EDE8DE', destaque: '#B9B2A6', nome: 'Carvão' },
   creme: { bg: '#F3ECE0', bg2: '#E7DCC9', texto: '#2C2622', destaque: '#6E5A44', nome: 'Creme' },
   // Soulab · escuro, elegante, lunar (identidade própria; ver lib/soulab/marca.ts)
-  soulab: { bg: '#1B1726', bg2: '#0E0B16', texto: '#ECE6F2', destaque: '#B9A8E0', nome: 'Soulab' },
+  soulab: { bg: '#1B1726', bg2: '#0E0B16', texto: '#ECE6F2', destaque: '#C9A2E6', nome: 'Soulab' },
 };
 
 export const TIPO_LABELS: Record<TipoConteudo, { label: string; emoji: string; cor: string }> = {
