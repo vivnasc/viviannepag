@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
 // texto do post sem depender de mim). Guarda em dias[0] — o mesmo que o cron lê.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { slug?: string; legenda?: string; hashtags?: string[] | string; efeito?: string; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string } };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; legenda?: string; hashtags?: string[] | string; efeito?: string; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string }; segPorMomento?: number };
   if (!body.slug) return NextResponse.json({ erro: 'falta slug' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -23,12 +23,15 @@ export async function POST(req: Request) {
     const tags = Array.isArray(body.hashtags) ? body.hashtags : String(body.hashtags).split(/[\s,]+/);
     dias[0].hashtags = tags.map((t) => String(t).trim()).filter(Boolean).map((t) => (t.startsWith('#') ? t : `#${t}`));
   }
-  // o EFEITO e a TIPOGRAFIA do texto vivem no slide (o render lê s.efeito / s.tipografia).
-  if (typeof body.efeito === 'string' || body.tipografia) {
+  // o EFEITO, a TIPOGRAFIA e o TEMPO POR MOMENTO vivem no slide[0] (o render e a
+  // pré-visualização leem daqui — assim o que ela vê é o que sai).
+  if (typeof body.efeito === 'string' || body.tipografia || typeof body.segPorMomento === 'number') {
     const slides = ((dias[0].slides as Array<Record<string, unknown>>) ?? []);
     if (slides[0]) {
       if (typeof body.efeito === 'string') slides[0].efeito = body.efeito;
       if (body.tipografia) slides[0].tipografia = body.tipografia;
+      // tempo por momento (segundos), à escolha dela; limitado a 3–12s por segurança.
+      if (typeof body.segPorMomento === 'number') slides[0].segPorMomento = Math.min(12, Math.max(3, body.segPorMomento));
       dias[0].slides = slides;
     }
   }
