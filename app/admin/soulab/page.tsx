@@ -8,6 +8,7 @@ import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type Fonte
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, SOULAB_SLIDE, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
+import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -18,7 +19,7 @@ const MUNDO = SOULAB_MUNDO as Mundo; // a paleta 'soulab' vive em PALETAS (Recor
 
 type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
-  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; legenda: string | null;
+  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; somTipo: string | null; somEstilo: string | null; legenda: string | null;
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
   formato: string; momentos: string[] | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
@@ -145,23 +146,56 @@ function EfeitoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boo
   );
 }
 
-// O SOM DA CENA (autonomia): gera som ambiente A PARTIR DA IMAGEM (a cena), como
-// nas séries. Ouve aqui; o render usa-o como áudio. "Remover" volta à música.
-function SomBox({ somUrl, disabled, busy, onGerar, onRemover }: { somUrl: string | null; disabled: boolean; busy: boolean; onGerar: () => void; onRemover: () => void }) {
+// O ÁUDIO DO REEL (autonomia): TRÊS fontes à escolha dela, todas viram o áudio do
+// render. (1) som ambiente FEITO DA CENA (a partir da imagem); (2) som de MÁQUINA
+// DE ESCREVER (acompanha o efeito teclado); (3) MÚSICA ambiente instrumental
+// (flauta/piano…). Ouve aqui; "remover" volta à música da loja.
+function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: (tipo: 'cena' | 'maquina' | 'musica', estilo?: string) => void; onRemover: () => void }) {
+  const [estilo, setEstilo] = useState<string>(peca.somEstilo ?? 'flauta');
   const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  const tipoAtual = peca.somUrl ? (peca.somTipo ?? 'cena') : null;
+  const nomeTipo = tipoAtual === 'maquina' ? 'máquina de escrever' : tipoAtual === 'musica' ? `música · ${peca.somEstilo ?? ''}` : tipoAtual === 'cena' ? 'som da cena' : '';
   return (
     <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
-      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">som ambiente da cena (a partir da imagem)</p>
-      {somUrl && (
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">áudio do reel {tipoAtual && <span style={{ color: dz }}>· {nomeTipo}</span>}</p>
+      {peca.somUrl && (
         // eslint-disable-next-line jsx-a11y/media-has-caption
-        <audio src={somUrl} controls className="w-full h-8" />
+        <audio src={peca.somUrl} controls className="w-full h-8" />
       )}
-      <div className="flex gap-1">
-        <button type="button" onClick={onGerar} disabled={disabled}
-          className="flex-1 text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a gerar…' : somUrl ? '↻ gerar de novo' : '🔊 gerar som da cena'}</button>
-        {somUrl && <button type="button" onClick={onRemover} disabled={disabled} className="text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/20 disabled:opacity-50">música</button>}
+
+      {/* 1 · som da cena (a partir da imagem) */}
+      <button type="button" onClick={() => onGerar('cena')} disabled={disabled || !peca.imageUrl}
+        className="w-full text-[0.64rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
+        style={tipoAtual === 'cena' ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>
+        {busy ? 'a gerar…' : '🌿 som ambiente da cena'}
+      </button>
+
+      {/* 2 · máquina de escrever (acompanha o efeito teclado) */}
+      <button type="button" onClick={() => onGerar('maquina')} disabled={disabled}
+        className="w-full text-[0.64rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
+        style={tipoAtual === 'maquina' ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>
+        {busy ? 'a gerar…' : '⌨️ máquina de escrever'}
+      </button>
+
+      {/* 3 · música ambiente (flauta/piano…) */}
+      <div className="rounded-lg border border-white/15 p-1.5 space-y-1">
+        <p className="text-[0.55rem] opacity-55">🎵 música ambiente (instrumental)</p>
+        <div className="flex flex-wrap gap-1">
+          {MUSICA_ESTILOS.map((m) => (
+            <button key={m.id} type="button" onClick={() => setEstilo(m.id)}
+              className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+              style={estilo === m.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{m.label}</button>
+          ))}
+        </div>
+        <button type="button" onClick={() => onGerar('musica', estilo)} disabled={disabled}
+          className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-50"
+          style={tipoAtual === 'musica' ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>
+          {busy ? 'a compor…' : `🎼 gerar música · ${MUSICA_ESTILOS.find((m) => m.id === estilo)?.label ?? estilo}`}
+        </button>
       </div>
-      <p className="text-[0.52rem] opacity-45 leading-snug">Sem som da cena, o render usa a música. O som é contemplativo (sem vozes, sem música), feito da própria cena.</p>
+
+      {peca.somUrl && <button type="button" onClick={onRemover} disabled={disabled} className="w-full text-[0.6rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-50">↩︎ voltar à música da loja</button>}
+      <p className="text-[0.52rem] opacity-45 leading-snug">Sem áudio próprio, o render usa a música da loja. A máquina de escrever combina com o efeito ⌨️ teclado. A música é instrumental (flauta, piano…), não a Ancient Ground.</p>
     </div>
   );
 }
@@ -353,15 +387,19 @@ export default function SoulabPage() {
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
 
-  const gerarSomPeca = useCallback(async (slug: string, remover: boolean) => {
+  const gerarSomPeca = useCallback(async (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'maquina' | 'musica'; estilo?: string }) => {
     if (acaoSlug) return;
+    const { remover, tipo, estilo } = opts;
     setAcaoSlug(slug); setErro(null);
-    setMsg(remover ? 'A remover o som (volta à música)…' : 'A gerar o som da cena (ElevenLabs)… ~20-40s.');
+    setMsg(remover ? 'A remover o áudio (volta à música da loja)…'
+      : tipo === 'musica' ? 'A compor a música ambiente (MusicGen)… ~30-60s.'
+      : tipo === 'maquina' ? 'A gerar o som de máquina de escrever (ElevenLabs)… ~20-40s.'
+      : 'A gerar o som da cena (ElevenLabs)… ~20-40s.');
     try {
-      const r = await fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover }) });
+      const r = await fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover, tipo, estilo }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
-      else { setMsg(remover ? 'Som removido (volta à música no render).' : 'Som da cena gerado. Ouve em baixo; o render usa-o como áudio.'); recarregar(); }
+      else { setMsg(remover ? 'Áudio removido (volta à música da loja no render).' : 'Áudio gerado. Ouve em baixo; o render usa-o como áudio do reel.'); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -547,7 +585,7 @@ export default function SoulabPage() {
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
-                  <button onClick={() => setSomOpen(somOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="gerar som ambiente a partir da cena" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 som {somOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => setSomOpen(somOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="áudio do reel: som da cena, máquina de escrever ou música ambiente" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 áudio {somOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setTipoOpen(tipoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="editor de tipografia: fonte, tamanho, cor" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras {tipoOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
@@ -559,7 +597,7 @@ export default function SoulabPage() {
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
                 {efeitoOpen === p.slug && <EfeitoBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(ef) => salvarEfeito(p.slug, ef)} />}
-                {somOpen === p.slug && <SomBox somUrl={p.somUrl} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={() => gerarSomPeca(p.slug, false)} onRemover={() => gerarSomPeca(p.slug, true)} />}
+                {somOpen === p.slug && <SomBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(tipo, estilo) => gerarSomPeca(p.slug, { tipo, estilo })} onRemover={() => gerarSomPeca(p.slug, { remover: true })} />}
                 {tipoOpen === p.slug && <TipografiaBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(t) => salvarTipografia(p.slug, t)} />}
               </div>
             ))}
