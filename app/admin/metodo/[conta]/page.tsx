@@ -282,7 +282,7 @@ export default function MetodoContaPage() {
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else {
         const urls = (j.imageUrls ?? [j.imageUrl]) as (string | null)[];
-        setMsg(estilo === 'dramatico' ? 'Imagem(ns) DRAMÁTICA(s) gerada(s). Agora "animar" para o movimento forte e compara com o contemplativo.' : urls.length > 1 ? 'Imagens geradas (as 2 faces). Se não gostares, carrega outra vez.' : 'Imagem gerada. Se não gostares, carrega outra vez.');
+        setMsg(estilo === 'dramatico' ? 'Imagem DRAMÁTICA gerada. Agora "animar" para o movimento.' : 'Imagem gerada. Se não gostares, carrega outra vez.');
         setDetalhe((d) => (d && d.slug === slug ? { ...d, imageUrl: urls[0] ?? d.imageUrl, imageUrl2: urls[1] ?? d.imageUrl2, clip: null, clip2: null, clipPend: false, clipPend2: false, videoUrl: null } : d));
         recarregar();
       }
@@ -410,7 +410,8 @@ export default function MetodoContaPage() {
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   // a Carta de renomear é TIPOGRÁFICA (não leva imagem Flux) — fora das contagens de imagem.
-  const levaImagem = (e: EstadoPost) => e.tipo !== 'cartaRenomear';
+  // a carta de renomear AGORA leva imagem (na CAPA) — por isso conta para "imagens em falta".
+  const levaImagem = (e: EstadoPost) => Boolean(e);
   const semImagem = geradosConta.filter((e) => !e.imageUrl && levaImagem(e)).length;
   // posts de DIAS QUE JÁ PASSARAM e ainda não publicados (lixo das semanas de teste).
   const hojeISO = (() => { const h = new Date(); return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, '0')}-${String(h.getDate()).padStart(2, '0')}`; })();
@@ -605,7 +606,7 @@ export default function MetodoContaPage() {
                     ))}
                   </ol>
                 )}
-                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a carta revela-se (papel + tipografia), sem imagem Flux</p>
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a CAPA é uma imagem (a cena da memória) e o corpo revela-se em papel tipográfico</p>
               </div>
             ) : detalhe.subtipo === 'nbeats' ? (
               // UMA REGRA para tudo: a peça é um REEL (uma cena/figura + texto em
