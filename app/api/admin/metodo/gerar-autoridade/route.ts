@@ -6,6 +6,8 @@ import { CONTAS, type VeuNome } from '@/lib/metodo/contas';
 import { planoSemanaAutoridade, diasAutoridadeDaData, FORMATOS_AUTORIDADE, type DiaAutoridade, type FormatoAutoridadeId } from '@/lib/metodo/formatos-autoridade';
 import { gerarAutoridade } from '@/lib/metodo/autoridade-ia';
 import { hashtagsMetodo } from '@/lib/metodo/hashtags';
+import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
+import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -13,10 +15,27 @@ export const maxDuration = 300;
 // MÃE · SEMANA DE AUTORIDADE — 1 véu por semana, dissecado pelos 8 formatos (1/dia,
 // quarta a dobrar). Cada peça é subtipo 'nbeats' (renderiza pela Sequencia, como os
 // outros formatos da mãe) e segue o mesmo pipeline (render-dispatch + agendar +
-// publicar). SÓ texto; a imagem gera-se depois. Salta o que já existe; nunca toca em
-// publicados; nunca gera para o passado. NÃO mexe em gerar-mae (carta/naonorm).
+// publicar). Salta o que já existe; nunca toca em publicados; nunca gera para o
+// passado. NÃO mexe em gerar-mae (carta/naonorm).
 
-type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: null; capa: boolean; conceito: string; contaId: 'mae' };
+type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: string | null; capa: boolean; conceito: string; contaId: 'mae' };
+
+// A peça NASCE COM IMAGEM (como no laboratório/filhas): fundo Flux com gerarFundoIA
+// (o mesmo das imagens lindas), a MESMA cena em todos os momentos. Best-effort: se
+// falhar, fica o prompt e o passo "imagens" preenche depois.
+async function aplicarImagem(row: { slug: string; dias: { slides: SlideMetodo[] }[] }, veu: VeuNome, apiKey: string, token: string | undefined, evitarImg: string[]): Promise<void> {
+  if (!token) return;
+  const slides = row.dias[0]?.slides ?? [];
+  if (!slides.length) return;
+  try {
+    const prompt = await gerarFundoIA(CONTAS.mae, evitarImg, apiKey, slides[0]?.texto, 'contemplativo', veu);
+    const raw = await gerarImagemFlux(prompt, token, { raw: true });
+    let url = raw;
+    try { url = await guardarImagem(raw, `metodo/${row.slug}/fundo-${Date.now()}.jpg`); } catch { /* fica o url do Replicate */ }
+    for (const s of slides) { s.imageUrl = url; s.notaVisual = prompt; }
+    evitarImg.push(assuntoCurto(prompt));
+  } catch { /* best-effort: a imagem fica para o passo "imagens" */ }
+}
 
 function montarRow(slug: string, data: string, hora: string, formato: FormatoAutoridadeId, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string) {
   const conta = CONTAS.mae;
@@ -69,6 +88,13 @@ export async function POST(req: Request) {
 
   const fazer = (slug: string) => !publicados.has(slug) && (!!body.dia || !existentes.has(slug));
 
+  // imagem inline (peça nasce com imagem) nos TESTES (1 dia / 1 formato) — rápido. Na
+  // semana toda (8 peças) a imagem fica para o passo "imagens em falta", para o pedido
+  // não estourar o tempo. token da Flux para a imagem nascer com a peça.
+  const inlineImg = !!(body.dia || body.formato);
+  const token = process.env.REPLICATE_API_TOKEN;
+  const evitarImg: string[] = [];
+
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
   for (const d of dias) {
@@ -76,7 +102,10 @@ export async function POST(req: Request) {
     if (!fazer(slug)) continue;
     try {
       const sb = await gerarAutoridade(d.formato, d.veu, apiKey, evitar);
-      if (sb.beats.length) { rows.push(montarRow(slug, d.data, d.hora, d.formato, d.veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
+      if (!sb.beats.length) continue;
+      const row = montarRow(slug, d.data, d.hora, d.formato, d.veu, sb.beats, sb.envio);
+      if (inlineImg) await aplicarImagem(row as unknown as { slug: string; dias: { slides: SlideMetodo[] }[] }, d.veu, apiKey, token, evitarImg);
+      rows.push(row); evitar.push(sb.beats[0].texto);
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
 
