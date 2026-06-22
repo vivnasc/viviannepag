@@ -5,15 +5,15 @@
 
 const MODEL = 'kwaivgi/kling-v2.5-turbo-pro';
 
-// movimento MÍNIMO e natural: anima SÓ o que JÁ EXISTE na imagem. SEM exemplos
-// fixos (era o "a chama treme" que punha o Kling a inventar fogo numa almofada!):
-// move só os elementos realmente presentes, e nunca acrescenta nada.
+// movimento MÍNIMO no CONTEÚDO + uma CÂMARA viva: anima SÓ o que JÁ EXISTE na imagem
+// E acrescenta um ZOOM/PUSH-IN lento e realístico (pedido da Vivianne: o que bomba no
+// "Hoje em Mim" é a câmara NÃO estar parada). Nunca inventa partículas/fogo.
 export const PROMPT_MOVIMENTO =
-  'Animate ONLY what is truly already present in this exact image, with very subtle, slow, natural motion of the elements that actually exist in it (water rippling, fabric or a curtain swaying, light and reflections shifting, steam or mist drifting, foliage moving) and ONLY if they are really there. Keep the exact same composition, objects, palette and framing. Extremely slow, calm, minimal, realistic. Do NOT invent or add ANYTHING that is not already in the image: no new flames, no fire, no falling petals, no sparkles, no glitter, no floating particles, no smoke or fog appearing. No camera movement, no zoom.';
+  'Animate ONLY what is truly already present in this exact image, with very subtle, slow, natural motion of the elements that actually exist in it (water rippling, fabric or a curtain swaying, light and reflections shifting, steam or mist drifting, foliage moving) and ONLY if they are really there. Keep the exact same composition, objects, palette and framing. Add a VERY SLOW, smooth, realistic cinematic CAMERA PUSH-IN (a gentle slow zoom in), continuous and subtle, the kind that makes a still image feel alive. Extremely slow, calm, realistic. Do NOT invent or add ANYTHING that is not already in the image: no new flames, no fire, no falling petals, no sparkles, no glitter, no floating particles, no smoke or fog appearing. No camera shake, no fast or jerky motion, no whip pans.';
 
-// o que o modelo NÃO deve fazer (evita inventar elementos que não estão na cena).
+// o que o modelo NÃO deve fazer (evita inventar elementos; o zoom/push-in lento É permitido).
 export const NEGATIVE_MOVIMENTO =
-  'added objects, new elements, invented fire, new flames, flying leaves, falling petals, sparkles, glitter, floating particles, gold flecks, smoke appearing, fog appearing, new curtains, birds, butterflies, text, watermark, fast motion, dramatic motion, camera shake, zoom, pan, morphing, warping, distortion, people appearing, faces, hands';
+  'added objects, new elements, invented fire, new flames, flying leaves, falling petals, sparkles, glitter, floating particles, gold flecks, smoke appearing, fog appearing, new curtains, birds, butterflies, text, watermark, fast motion, jerky motion, dramatic motion, camera shake, sudden zoom, whip pan, morphing, warping, distortion, people appearing, faces, hands';
 
 // movimento DRAMÁTICO (tarde): anima SÓ o que está na cena (a luz/energia/atmosfera
 // presentes), sem assumir objetos que podem não existir. FORTE mas sem inventar lixo

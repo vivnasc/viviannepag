@@ -4,16 +4,17 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { getPersonagem } from '@/lib/metodo/personagens';
 import { promptCartaFigura } from '@/lib/metodo/ia';
-import { poseDoBaralho, cartaEspecial } from '@/lib/metodo/baralho';
+import { figuraDescricao, cartaEspecial } from '@/lib/metodo/baralho';
 
 // Resolve um id para um ALVO de figura: ou uma personagem do baralho diário, ou uma
-// das CARTAS ESPECIAIS de fecho (Leal, Já Pode Viver). Ambas geram figura por pose.
+// das CARTAS ESPECIAIS de fecho (Leal, Já Pode Viver). A figura vem da ASSINATURA
+// visual (gesto+objeto+olhar+energia), não do nome — é o que faz a personagem.
 type Alvo = { id: string; nome: string; essencia?: string; pose?: string };
 function resolverAlvo(id: string): Alvo | undefined {
   const p = getPersonagem(id);
-  if (p) return { id: p.id, nome: p.nome, essencia: p.essencia, pose: poseDoBaralho(p.id) };
+  if (p) return { id: p.id, nome: p.nome, essencia: p.essencia, pose: figuraDescricao(p.id) };
   const ce = cartaEspecial(id);
-  if (ce) return { id: ce.id, nome: ce.nome, pose: ce.pose };
+  if (ce) return { id: ce.id, nome: ce.nome, pose: figuraDescricao(ce.id) ?? ce.pose };
   return undefined;
 }
 

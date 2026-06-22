@@ -21,7 +21,7 @@ const NOMES: Record<string, string> = {
 };
 function CardNome({ nome }: { nome: string }) {
   return (
-    <span className="absolute left-1/2 -translate-x-1/2 bottom-[6%] px-2 py-0.5 rounded-sm text-center leading-tight pointer-events-none" style={{ background: 'rgba(15,15,26,0.92)', border: `1px solid ${COR}`, color: COR, fontFamily: 'var(--font-cormorant), serif', fontSize: '0.62rem', maxWidth: '84%' }}>{nome}</span>
+    <span className="absolute left-[11%] right-[11%] bottom-[4%] px-2 py-1 rounded-sm text-center leading-tight pointer-events-none" style={{ background: '#0b0a12', border: `1px solid ${COR}`, color: COR, fontFamily: 'var(--font-cormorant), serif', fontSize: '0.66rem' }}>{nome}</span>
   );
 }
 

@@ -43,6 +43,55 @@ export const POSE_BARALHO: Record<string, string> = {
 };
 export const poseDoBaralho = (personagemId: string): string | undefined => POSE_BARALHO[personagemId];
 
+// ── BÍBLIA VISUAL DAS CARTAS (ideia da Vivianne) ─────────────────────────────
+// Define cada carta NÃO pelo nome (que o Flux só sabe escrever mal), mas por uma
+// ASSINATURA CORPORAL: gesto + objeto + olhar + energia. Assim qualquer gerador
+// desenha a PERSONAGEM, não uma modelo qualquer. 1.º rascunho (derivado das poses
+// ditadas + os 4 exemplos da Vivianne) — para AFINAR à mão, carta a carta.
+export interface Assinatura { gesto: string; objeto: string; olhar: string; energia: string }
+export const ASSINATURA: Record<string, Assinatura> = {
+  // As que carregam
+  salvadora: { gesto: 'inclinada para a frente a amparar/agarrar o problema de alguém fora do quadro', objeto: 'braços estendidos para fora do quadro', olhar: 'fixo em alguém fora da imagem', energia: 'resgate, corpo desequilibrado para a frente' },
+  diretora: { gesto: 'a gerir tudo só com o olhar e um gesto da mão (não faz, comanda)', objeto: 'telemóvel numa mão, agenda na outra', olhar: 'dividido, atento a algo fora da imagem', energia: 'alerta permanente, nunca relaxada' },
+  provedora: { gesto: 'a oferecer com as duas mãos um prato cheio e a recuar o corpo quando recebe', objeto: 'um prato cheio estendido (o dela vazio)', olhar: 'no outro, nunca em si', energia: 'dádiva; receber sabe a dívida' },
+  heroina: { gesto: 'serena e firme de pé no meio do caos à volta', objeto: 'destroços/caos em redor', olhar: 'calmo dentro da crise', energia: 'calma estranha que só existe na crise; vazio à frente' },
+  indispensavel: { gesto: 'a segurar muitas mãos que se estendem para ela de todos os lados', objeto: 'mãos a estenderem-se de todos os lados', olhar: 'exausto mas a não largar', energia: 'exaustão; não consegue largar nenhuma' },
+  // As que procuram
+  peregrina: { gesto: 'de costas, a partir outra vez para um horizonte, a casa atrás já pequena', objeto: 'uma mala na mão', olhar: 'para longe, para a frente', energia: 'partida eterna; a resposta ficou atrás' },
+  navegadora: { gesto: 'a tecer fios de sentido no ar à volta de uma coisa simples', objeto: 'fios/linhas de sentido no ar', olhar: 'para cima, à procura de significado', energia: 'busca de sentido; pés sem assentar' },
+  'aluna-eterna': { gesto: 'a ler um livro e já a alcançar o seguinte, nunca a fechar nenhum', objeto: 'livros abertos e empilhados', olhar: 'no próximo livro', energia: 'preparação infinita; adiar começar' },
+  'buscadora-casa': { gesto: 'à porta de muitas portas, a mão na maçaneta, a olhar para dentro sem entrar', objeto: 'muitas portas, uma maçaneta', olhar: 'para dentro, sem entrar', energia: 'procura de pertença/casa' },
+  // As que desaparecem
+  invisivel: { gesto: 'a fazer muito ao fundo do quadro, encostada à margem, a fazer-se pequena', objeto: 'nenhum', olhar: 'baixo, a espreitar se alguém repara', energia: 'à espera de ser vista; ninguém repara' },
+  desaparecida: { gesto: 'de frente, o contorno do corpo a dissolver-se no fundo', objeto: 'nenhum', olhar: 'a ver-se desaparecer', energia: 'a apagar-se e a continuar a apagar-se' },
+  orfa: { gesto: 'sozinha ao centro de uma sala cheia de gente de costas, os braços a abraçar-se', objeto: 'gente de costas à volta', olhar: 'para dentro, só', energia: 'só no meio de todos' },
+  'rebelde-silenciosa': { gesto: 'a carregar uma braçada de peso, a boca aberta a protestar, as mãos a agarrar com força o que diz querer largar', objeto: 'uma braçada de tarefas/peso', olhar: 'de revolta', energia: 'queixa e fidelidade no mesmo gesto; o corpo recusa o que a boca exige' },
+  // As que se adaptam
+  adaptadora: { gesto: 'o corpo a tomar a forma do espaço à volta, sem contorno próprio', objeto: 'nenhum (forma meio-líquida)', olhar: 'sem foco próprio', energia: 'sem forma própria; já não sabe o que quer' },
+  tradutora: { gesto: 'entre duas presenças, corpo inclinado para uma enquanto olha para a outra', objeto: 'duas figuras de costas ao seu lado', olhar: 'alternado entre as duas', energia: 'mediação; ela própria sem lugar' },
+  diplomata: { gesto: 'de pé entre dois lados, palmas abertas para ambos, peso igual nos dois pés', objeto: 'dois lados/duas presenças', olhar: 'medido, para ambos', energia: 'paz a todo o custo; nunca virada para si' },
+  fiel: { gesto: 'corpo virado para uma porta aberta, cabeça virada para trás, um pé quer avançar e o outro continua preso', objeto: 'uma porta aberta', olhar: 'para trás', energia: 'hesitação; presa por um fio que confunde com gratidão' },
+  // As que vigiam
+  guardia: { gesto: 'à entrada de algo, postura de sentinela, a antecipar uma ameaça', objeto: 'uma soleira/entrada', olhar: 'para fora, a vigiar a ameaça que não vem', energia: 'antecipação; o corpo que nunca pousa a tensão' },
+  sentinela: { gesto: 'imóvel, peito aberto, pronta para reagir', objeto: 'nenhum, mãos livres', olhar: 'distante, no horizonte', energia: 'prontidão; a guarda nunca em baixo' },
+  perfeccionista: { gesto: 'debruçada a corrigir um detalhe mínimo que ninguém vê', objeto: 'um trabalho com um pormenor minúsculo', olhar: 'fixo no detalhe', energia: 'tensão; nunca está terminado' },
+  observadora: { gesto: 'afastada ao canto ou no alto, braços cruzados, a ler a sala inteira', objeto: 'a sala/grupo ao longe', olhar: 'a ver tudo, de fora', energia: 'vê tudo e não entra em nada' },
+  // Cartas de fecho
+  leal: { gesto: 'sentada, a segurar no colo uma armadura/peso antigo que já podia pousar', objeto: 'uma armadura/peso antigo ao colo', olhar: 'para o peso, com ternura, não com medo', energia: 'a viragem: poder pousar' },
+  'ja-pode-viver': { gesto: 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz', objeto: 'nada (mãos vazias)', olhar: 'erguido para a luz', energia: 'chegada, leveza, nada a carregar' },
+};
+
+/** A descrição visual de uma carta para o gerador: a ASSINATURA (gesto+objeto+olhar
+ *  +energia) se existir; senão a pose ditada. É isto que faz a PERSONAGEM, não o nome. */
+export function figuraDescricao(id: string): string | undefined {
+  const a = ASSINATURA[id];
+  if (a) {
+    const obj = a.objeto && !/^nenhum/i.test(a.objeto) ? `, ${a.objeto}` : '';
+    return `${a.gesto}${obj}, olhar ${a.olhar}, energia de ${a.energia}`;
+  }
+  return POSE_BARALHO[id];
+}
+
 // ── CARTAS ESPECIAIS (fecho do arco) ─────────────────────────────────────────
 // NÃO são personagens das 5 famílias nem entram no baralho diário. São o FECHO:
 // a carta-coração (a viragem) e a carta final (a chegada). Pose TRAVADA (ditada

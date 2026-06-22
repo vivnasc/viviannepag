@@ -94,7 +94,37 @@ async function main() {
     // conduzindo window.__setKProg e monta MP4 a partir da sequencia. ──
     if (kinetic) {
       // TARDE (nbeats): ~3.4s por beat (tempo de leitura). 2 faces = 14s. Frase = 7s.
-      const FPS = 25, DUR = duasFaces ? 14 : nbeats ? Math.max(11, Math.round(3.4 * slides.length)) : visual ? 8 : 7, N = FPS * DUR;
+      const FPS = 25;
+      let DUR = duasFaces ? 14 : nbeats ? Math.max(11, Math.round(3.4 * slides.length)) : visual ? 8 : 7;
+      // VOZ (narração): se o post tem voz, ELA MANDA — a duração do reel passa a ser a
+      // da narração e os slides avançam ao ritmo dela (a frase no ecrã = a que é dita
+      // = karaokê ao nível da frase). Guardado por d.vozUrl (a loja não tem voz).
+      let vozOk = false;
+      if (d.vozUrl) {
+        try {
+          const vr = await fetch(d.vozUrl);
+          if (vr.ok) {
+            fs.writeFileSync(path.join(diaDir, 'voz.mp3'), Buffer.from(await vr.arrayBuffer()));
+            const dur = parseFloat(execSync('ffprobe -v error -show_entries format=duration -of csv=p=0 voz.mp3', { cwd: diaDir }).toString().trim());
+            if (dur && isFinite(dur) && dur > 1) { DUR = Math.ceil(dur) + 1; vozOk = true; }
+          }
+        } catch (e) { console.log(`[voz] ${e.message}`); }
+      }
+      const N = FPS * DUR;
+      // fronteiras de tempo por beat (proporcionais ao tamanho do texto ≈ tempo falado),
+      // para o slide certo estar no ecrã enquanto a sua linha é narrada.
+      const txts = (slides || []).map((s) => (s.texto || '').trim());
+      const nb = Math.max(1, txts.length);
+      const pesos = txts.map((t) => Math.max(8, t.length));
+      const somaP = pesos.reduce((a, b) => a + b, 0) || 1;
+      const fronteiras = [0]; let acc = 0;
+      for (const p of pesos) { acc += p / somaP; fronteiras.push(acc); }
+      const progKaraoke = (tf) => {
+        let k = 0; while (k < nb - 1 && tf >= fronteiras[k + 1]) k++;
+        const span = (fronteiras[k + 1] - fronteiras[k]) || 1;
+        const inner = Math.max(0, Math.min(1, (tf - fronteiras[k]) / span));
+        return Math.min(1, (k + inner) / nb);
+      };
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
@@ -103,25 +133,30 @@ async function main() {
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
       for (let i = 0; i < N; i++) {
-        const prog = i / (N - 1);
+        const tf = i / (N - 1);
+        const prog = vozOk ? progKaraoke(tf) : tf;
         await page.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
         await new Promise((r) => setTimeout(r, 35));
         await page.screenshot({ path: path.join(framesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
       }
       await page.close();
-      console.log(`[kinetic] dia ${d.dia}: ${N} frames`);
+      console.log(`[kinetic] dia ${d.dia}: ${N} frames${vozOk ? ' (voz)' : ''}`);
 
-      // audio
-      let temAudio = false;
-      const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
-      try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+      // audio: a VOZ (se houver) é o áudio principal e NÃO faz loop (é a duração);
+      // senão, o som ambiente faz loop como antes.
+      let temAudio = false; let vozAudio = false;
+      if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) { temAudio = true; vozAudio = true; }
+      else {
+        const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
+        try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+      }
 
-      // video da sequencia. O som da TARDE (ElevenLabs ~11s) faz LOOP para cobrir
-      // o reel inteiro (-stream_loop); -shortest corta no fim do vídeo. Para a mãe
-      // (faixa longa) o loop é inofensivo.
+      // video da sequencia. Voz = áudio direto (sem loop). Som ambiente = LOOP
+      // (-stream_loop) + -shortest corta no fim do vídeo.
       let videoUrl = null;
       try {
-        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ' -stream_loop -1 -i audio.mp3' : ''}`;
+        const audioArg = vozAudio ? '-i voz.mp3' : '-stream_loop -1 -i audio.mp3';
+        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ` ${audioArg}` : ''}`;
         const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
         execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;

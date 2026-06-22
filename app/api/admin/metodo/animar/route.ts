@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import { criarPredicaoClip, PROMPT_MOVIMENTO, NEGATIVE_MOVIMENTO, PROMPT_MOVIMENTO_DRAMA, NEGATIVE_MOVIMENTO_DRAMA } from '@/lib/metodo/clip';
+import { criarPredicaoClip, PROMPT_MOVIMENTO, NEGATIVE_MOVIMENTO } from '@/lib/metodo/clip';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -42,17 +42,18 @@ export async function POST(req: Request) {
   // dois clips processam à mesma em paralelo no Replicate depois de criados.
   for (const i of validos) {
     try {
-      const drama = slides[i]!.estilo === 'dramatico';
+      // SEMPRE movimento REAL do conteúdo da imagem (a decisão da Vivianne): animar
+      // o que JÁ existe na cena, nunca partículas/luz/fogo abstratos. Por isso usamos
+      // sempre PROMPT_MOVIMENTO (real) + a descrição da cena; o ramo "drama" (partículas)
+      // foi abolido — era o "foguinho que anda" que ela odeia.
       const predId = await criarPredicaoClip(
         slides[i]!.imageUrl!, token,
         // 5s para TODOS (a manhã e a tarde). O clip de 5s NÃO é lixo: no render
         // estica devagar ao longo do reel e cobre o texto sem loop. Mudar para 10s
         // tornaria inúteis os 5s já pagos — não fazemos isso.
-        drama ? PROMPT_MOVIMENTO_DRAMA : PROMPT_MOVIMENTO, 5,
-        drama ? NEGATIVE_MOVIMENTO_DRAMA : NEGATIVE_MOVIMENTO,
-        // CENA só no contemplativo (evita inventar objetos). No dramático NÃO — a
-        // imagem já é luz a fluir e um prompt longo pendura/falha o Kling.
-        drama ? undefined : (slides[i]!.notaVisual ?? undefined),
+        PROMPT_MOVIMENTO, 5,
+        NEGATIVE_MOVIMENTO,
+        slides[i]!.notaVisual ?? undefined,
       );
       slides[i]!.clipPredId = predId;
       slides[i]!.clipPend = true; // fica "a animar" até /colher trazer o MP4
