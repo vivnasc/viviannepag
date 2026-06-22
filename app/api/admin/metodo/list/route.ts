@@ -22,11 +22,11 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: { videoUrl?: string | null; vozUrl?: string | null; faixa?: { url?: string | null } | null; legenda?: string | null; slides?: { texto?: string; conceito?: string; imageUrl?: string | null; veuReveal?: string | null; clipUrl?: string | null; clipPend?: boolean; clipErro?: string | null }[] }[] | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; clipTeste?: string | null; subtipo?: string | null; estilo?: unknown; metodo?: { postId?: string; conta?: string; tipo?: string; formato?: string } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; aprovado?: boolean; igStatus?: string | null; clipTeste?: string | null; subtipo?: string | null; estilo?: unknown; metodo?: { postId?: string; conta?: string; tipo?: string; formato?: string } } | null;
     created_at?: string;
   };
 
-  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null; estilo: unknown }> = {};
+  const estado: Record<string, { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; aprovado: boolean; igStatus: string | null; criadoEm: string | null; estilo: unknown }> = {};
   for (const row of (data ?? []) as Row[]) {
     const postId = row.theme?.metodo?.postId ?? row.slug.replace(/^metodo-/, '');
     const slidesAll = row.dias?.[0]?.slides ?? [];
@@ -62,6 +62,8 @@ export async function GET() {
       agendadoEm: row.theme?.agendadoEm ?? null,
       hora: row.theme?.hora ?? null,
       publicado: Boolean(row.theme?.igPublicado),
+      aprovado: Boolean(row.theme?.aprovado),
+      igStatus: row.theme?.igStatus ?? null,
       criadoEm: row.created_at ?? null,
     };
   }
