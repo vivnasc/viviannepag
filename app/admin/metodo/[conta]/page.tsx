@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { MetodoSlide } from '@/components/admin/MetodoSlide';
+import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta } from '@/lib/metodo/contas';
 
@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'swap' });
 const FONTS = `${cormorant.variable} ${inter.variable} ${jetmono.variable}`;
 
-type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null };
+type EstadoPost = { slug: string; conta: string | null; tipo: string | null; subtipo: string | null; formato: string | null; beats: string[]; texto: string; conceito: string; imageUrl: string | null; texto2: string | null; conceito2: string | null; imageUrl2: string | null; veuReveal: string | null; veuReveal2: string | null; clip: string | null; clip2: string | null; clipPend: boolean; clipPend2: boolean; clipErro: string | null; vozUrl: string | null; som: string | null; clipTeste: string | null; videoUrl: string | null; legenda: string | null; agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null; estilo?: EstiloMetodo | null };
 
 const TIPO_LABEL: Record<string, string> = {
   carta: 'Carta · Sou Aquela', naonormalizes: 'Não normalizes', cena: 'A cena',
@@ -282,7 +282,7 @@ export default function MetodoContaPage() {
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else {
         const urls = (j.imageUrls ?? [j.imageUrl]) as (string | null)[];
-        setMsg(estilo === 'dramatico' ? 'Imagem(ns) DRAMÁTICA(s) gerada(s). Agora "animar" para o movimento forte e compara com o contemplativo.' : urls.length > 1 ? 'Imagens geradas (as 2 faces). Se não gostares, carrega outra vez.' : 'Imagem gerada. Se não gostares, carrega outra vez.');
+        setMsg(estilo === 'dramatico' ? 'Imagem DRAMÁTICA gerada. Agora "animar" para o movimento.' : 'Imagem gerada. Se não gostares, carrega outra vez.');
         setDetalhe((d) => (d && d.slug === slug ? { ...d, imageUrl: urls[0] ?? d.imageUrl, imageUrl2: urls[1] ?? d.imageUrl2, clip: null, clip2: null, clipPend: false, clipPend2: false, videoUrl: null } : d));
         recarregar();
       }
@@ -383,6 +383,12 @@ export default function MetodoContaPage() {
     finally { setVozBusy(null); }
   }, [vozBusy, recarregar]);
 
+  // ESTILO (independência): guarda a tipografia do post (theme.estilo) e atualiza já o preview.
+  const salvarEstilo = useCallback(async (slug: string, estilo: EstiloMetodo) => {
+    setDetalhe((d) => (d && d.slug === slug ? { ...d, estilo } : d));
+    try { await fetch('/api/admin/metodo/estilo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, estilo }) }); } catch { /* fica o preview local */ }
+  }, []);
+
   // CARTA DE RENOMEAR (vir): gera UMA carta (6 passos) e persiste-a (subtipo 'carta').
   const [cartaBusy, setCartaBusy] = useState(false);
   const gerarCarta = useCallback(async () => {
@@ -410,7 +416,8 @@ export default function MetodoContaPage() {
   const geradosConta = Object.values(estado).filter((e) => e.conta === conta.id).sort((a, b) => (a.agendadoEm ?? '~').localeCompare(b.agendadoEm ?? '~') || a.slug.localeCompare(b.slug));
   const faltamRender = geradosConta.filter((e) => !e.videoUrl);
   // a Carta de renomear é TIPOGRÁFICA (não leva imagem Flux) — fora das contagens de imagem.
-  const levaImagem = (e: EstadoPost) => e.tipo !== 'cartaRenomear';
+  // a carta de renomear AGORA leva imagem (na CAPA) — por isso conta para "imagens em falta".
+  const levaImagem = (e: EstadoPost) => Boolean(e);
   const semImagem = geradosConta.filter((e) => !e.imageUrl && levaImagem(e)).length;
   // posts de DIAS QUE JÁ PASSARAM e ainda não publicados (lixo das semanas de teste).
   const hojeISO = (() => { const h = new Date(); return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, '0')}-${String(h.getDate()).padStart(2, '0')}`; })();
@@ -605,7 +612,7 @@ export default function MetodoContaPage() {
                     ))}
                   </ol>
                 )}
-                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a carta revela-se (papel + tipografia), sem imagem Flux</p>
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a CAPA é uma imagem (a cena da memória) e o corpo revela-se em papel tipográfico</p>
               </div>
             ) : detalhe.subtipo === 'nbeats' ? (
               // UMA REGRA para tudo: a peça é um REEL (uma cena/figura + texto em
@@ -620,7 +627,7 @@ export default function MetodoContaPage() {
                   {detalhe.beats.map((b, i) => (
                     <button key={i} onClick={() => setGrande({ texto: b, capa: i === 0 })} title="ver grande" className="shrink-0 w-[150px] snap-start text-left">
                       <span className="block text-center text-[0.55rem] uppercase tracking-wider opacity-45 mb-0.5">slide {i + 1}/{detalhe.beats.length} · 🔍</span>
-                      <MetodoSlide texto={b} conceito={i === 0 ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={i === 0 ? (detalhe.clip ?? undefined) : undefined} conta={conta} anim="reveal" prog={1} />
+                      <MetodoSlide texto={b} conceito={i === 0 ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={i === 0 ? (detalhe.clip ?? undefined) : undefined} conta={conta} anim="reveal" prog={1} estilo={detalhe.estilo ?? undefined} />
                     </button>
                   ))}
                 </div>
@@ -631,17 +638,17 @@ export default function MetodoContaPage() {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1 text-center">face 1 · a dor</p>
-                    <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="typewriter" prog={1} />
+                    <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="typewriter" prog={1} estilo={detalhe.estilo ?? undefined} />
                   </div>
                   <div>
                     <p className="text-[0.55rem] uppercase tracking-wider opacity-50 mb-1 text-center">face 2 · revelação</p>
-                    <MetodoSlide texto={detalhe.texto2} conceito={detalhe.conceito2 ?? undefined} veuReveal={detalhe.veuReveal2 ?? undefined} imageUrl={detalhe.imageUrl2 ?? undefined} conta={conta} anim="reveal" prog={1} />
+                    <MetodoSlide texto={detalhe.texto2} conceito={detalhe.conceito2 ?? undefined} veuReveal={detalhe.veuReveal2 ?? undefined} imageUrl={detalhe.imageUrl2 ?? undefined} conta={conta} anim="reveal" prog={1} estilo={detalhe.estilo ?? undefined} />
                   </div>
                 </div>
                 <p className="text-center text-[0.6rem] opacity-50 mt-1">no reel: a face 1 escreve-se, depois a face 2</p>
               </div>
             ) : (
-              <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} />
+              <MetodoSlide texto={detalhe.texto} conceito={detalhe.conceito} veuReveal={detalhe.veuReveal ?? undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} prog={1} estilo={detalhe.estilo ?? undefined} />
             )}
             {(detalhe.clip || detalhe.clip2 || detalhe.clipPend || detalhe.clipPend2) && (
               <div className="mt-2">
@@ -728,6 +735,25 @@ export default function MetodoContaPage() {
                     : <button onClick={() => renderOne(detalhe.slug).then(() => setMsg('Render disparado. O vídeo aparece daqui a alguns minutos.')).catch((e) => setErro(String(e)))} className="text-emerald-300">renderizar</button>}
                 </div>
               </div>
+              {/* ESTILO (independência da Vivianne): controla a tipografia do post.
+                  Muda e o render/preview seguem — sem deploys. */}
+              {(() => { const est: EstiloMetodo = detalhe.estilo ?? {}; const set = (p: Partial<EstiloMetodo>) => salvarEstilo(detalhe.slug, { ...est, ...p }); return (
+                <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2 text-[0.66rem]">
+                  <div className="flex items-center justify-between mb-1.5"><span className="uppercase tracking-wider opacity-50">estilo do texto</span><button onClick={() => salvarEstilo(detalhe.slug, {})} className="opacity-60 hover:opacity-100">repor padrão</button></div>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <label className="flex items-center gap-1">tamanho<input type="range" min={60} max={150} value={est.tamanho ?? 98} onChange={(e) => set({ tamanho: Number(e.target.value) })} /><span className="opacity-60 w-6">{est.tamanho ?? 98}</span></label>
+                    <label className="flex items-center gap-1">cor<input type="color" value={est.cor ?? '#F5EEE3'} onChange={(e) => set({ cor: e.target.value })} /></label>
+                    <label className="flex items-center gap-1">realce<input type="color" value={est.corDestaque ?? conta.cor} onChange={(e) => set({ corDestaque: e.target.value })} /></label>
+                    <label className="flex items-center gap-1"><input type="checkbox" checked={!!est.italico} onChange={(e) => set({ italico: e.target.checked })} />itálico</label>
+                    <label className="flex items-center gap-1">fonte<select value={est.fonte ?? 'serif'} onChange={(e) => set({ fonte: e.target.value as EstiloMetodo['fonte'] })} className="bg-transparent border border-white/20 rounded px-1"><option value="serif">serif</option><option value="sans">sans</option><option value="mono">mono</option></select></label>
+                  </div>
+                  <div className="flex items-center gap-3 flex-wrap mt-1.5 pt-1.5 border-t border-white/10">
+                    <span className="uppercase tracking-wider opacity-50">motion</span>
+                    <label className="flex items-center gap-1">texto<select value={est.animTexto ?? 'reveal'} onChange={(e) => set({ animTexto: e.target.value as EstiloMetodo['animTexto'] })} className="bg-transparent border border-white/20 rounded px-1"><option value="reveal">aparece (bloco)</option><option value="typewriter">palavra a palavra</option></select></label>
+                    <label className="flex items-center gap-1"><input type="checkbox" checked={est.zoom !== false} onChange={(e) => set({ zoom: e.target.checked })} />zoom na imagem</label>
+                  </div>
+                </div>
+              ); })()}
               <div className="mt-2 flex items-center justify-center gap-2 text-[0.68rem]">
                 <button onClick={() => { descartar(detalhe.slug); setDetalhe(null); }} className="px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300/90">descartar</button>
                 <button onClick={() => setDetalhe(null)} className="px-2.5 py-1 rounded-lg border border-white/20">fechar</button>
@@ -769,7 +795,7 @@ export default function MetodoContaPage() {
         <div onClick={() => setGrande(null)} className="fixed inset-0 z-[60] flex items-center justify-center bg-black/92 p-4">
           <div onClick={(e) => e.stopPropagation()} className="w-full max-w-[360px] text-center">
             <div className="w-full" style={{ aspectRatio: '9 / 16' }}>
-              <MetodoSlide texto={grande.texto} conceito={grande.capa ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="reveal" prog={1} />
+              <MetodoSlide texto={grande.texto} conceito={grande.capa ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="reveal" prog={1} estilo={detalhe.estilo ?? undefined} />
             </div>
             <button onClick={() => setGrande(null)} className="mt-3 px-4 py-2 rounded-lg border border-white/25 text-[0.8rem]">fechar</button>
           </div>

@@ -116,6 +116,9 @@ async function main() {
         } catch (e) { console.log(`[voz] ${e.message}`); }
       }
       const N = FPS * DUR;
+      // KARAOKÊ palavra-a-palavra: se a voz traz timestamps de palavra, o prog é LINEAR
+      // (a página acende cada palavra pelo tempo real); senão, distribui por frase.
+      const temPalavras = Array.isArray(d.vozPalavras) && d.vozPalavras.length > 0;
       // fronteiras de tempo por beat (proporcionais ao tamanho do texto ≈ tempo falado),
       // para o slide certo estar no ecrã enquanto a sua linha é narrada.
       const txts = (slides || []).map((s) => (s.texto || '').trim());
@@ -139,7 +142,7 @@ async function main() {
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
       for (let i = 0; i < N; i++) {
         const tf = i / (N - 1);
-        const prog = vozOk ? progKaraoke(tf) : tf;
+        const prog = (vozOk && !temPalavras) ? progKaraoke(tf) : tf;
         await page.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
         await new Promise((r) => setTimeout(r, 35));
         await page.screenshot({ path: path.join(framesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });

@@ -14,8 +14,9 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
-import { MetodoSlide } from '@/components/admin/MetodoSlide';
+import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
+import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
 import { getConta, type Conta } from '@/lib/metodo/contas';
 import { SerieDiariaSlide, type SerieId } from '@/components/admin/SerieDiariaSlide';
 import { type PaletaId } from '@/lib/series/serie-design';
@@ -25,8 +26,8 @@ const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400'
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'block' });
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
-type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[] };
-type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string } } };
+type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[]; vozPalavras?: { w: string; t0: number; t1: number }[]; vozDur?: number };
+type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string }; estilo?: EstiloMetodo } };
 
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
@@ -34,7 +35,7 @@ const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te e
 type Face = { texto?: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conceito?: string; veuReveal?: string };
 // MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
 // (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
-function DuasFaces({ face1, face2, conta, prog, split }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number }) {
+function DuasFaces({ face1, face2, conta, prog, split, estilo }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number; estilo?: EstiloMetodo }) {
   // TEMPO DE LEITURA: a passagem entre faces é em `split` (não 50/50) — a face 2
   // (texto mais longo) fica com mais tempo. Crossfade LARGO e suave (smoothstep).
   const FADE = 0.1;
@@ -45,10 +46,10 @@ function DuasFaces({ face1, face2, conta, prog, split }: { face1: Face; face2: F
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
-        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} />
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} estilo={estilo} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
-        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} />
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} estilo={estilo} />
       </div>
     </div>
   );
@@ -58,7 +59,7 @@ function DuasFaces({ face1, face2, conta, prog, split }: { face1: Face; face2: F
 // sequência (cada um na sua janela de tempo), com crossfade. O fundo é único e
 // partilhado (1 só clip-bg, que o render faz seek por prog). O último beat mostra
 // a assinatura + o véu.
-function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog, nomeCarta }: { beats: string[]; clipUrl?: string; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog: number; nomeCarta?: string }) {
+function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog, nomeCarta, estilo }: { beats: string[]; clipUrl?: string; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog: number; nomeCarta?: string; estilo?: EstiloMetodo }) {
   const n = Math.max(1, beats.length);
   const w = 1 / n;
   const accent = conta.paleta.accent;
@@ -86,7 +87,7 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog,
         if (op <= 0) return null;
         return (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
-            <MetodoSlide semFundo semRodape={!isLast} texto={b} conta={conta} conceito={i === 0 ? conceito : undefined} veuReveal={isLast ? veuReveal : undefined} anim="reveal" prog={lp} />
+            <MetodoSlide semFundo semRodape={!isLast} texto={b} conta={conta} conceito={i === 0 ? conceito : undefined} veuReveal={isLast ? veuReveal : undefined} anim="reveal" prog={lp} estilo={estilo} />
           </div>
         );
       })}
@@ -126,7 +127,8 @@ function CartaSequencia({ beats, conta, prog, capaImg }: { beats: string[]; cont
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number; slide2?: Slide & { imageUrl?: string } } | null>(null);
   const [subtipo, setSubtipo] = useState<string>('');
-  const [nomeCarta, setNomeCarta] = useState<string>(''); // nome da personagem na carta "Sou Aquela"
+  const [nomeCarta, setNomeCarta] = useState<string>('');
+  const [estiloM, setEstiloM] = useState<EstiloMetodo | undefined>(undefined); // tipografia à escolha da Vivianne // nome da personagem na carta "Sou Aquela"
   const [clipBg, setClipBg] = useState<string | null>(null); // Soulab: o clip do Kling (fundo em movimento)
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
@@ -174,6 +176,7 @@ export default function RenderVeuPage() {
         setSubtipo(col.theme?.subtipo ?? '');
         // o NOME só na carta do baralho "Sou Aquela" (tipo 'carta'); nas outras nbeats não.
         setNomeCarta(col.theme?.metodo?.tipo === 'carta' ? (col.theme?.metodo?.personagem ?? '') : '');
+        setEstiloM(col.theme?.estilo ?? undefined);
         setClipBg(col.theme?.soulab?.clipUrl ?? null);
         const dia = col.dias.find((d) => d.dia === diaN);
         const slide = dia?.slides?.[idx];
@@ -304,7 +307,19 @@ export default function RenderVeuPage() {
           capaImg={estado.dia.slides?.[0]?.imageUrl}
         />
       )}
-      {estado && ehMetodo && !ehCarta && ehTarde && s && getConta(s.contaId ?? '') && (
+      {/* KARAOKÊ palavra-a-palavra: se o post tem voz com timestamps (vozPalavras),
+          mostra a linha com as palavras a acenderem-se à medida que são ditas. */}
+      {estado && ehMetodo && !ehCarta && ehTarde && (estado.dia.vozPalavras?.length ?? 0) > 0 && s && getConta(s.contaId ?? '') && (
+        <KaraokeMetodo
+          linhas={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
+          palavras={estado.dia.vozPalavras!}
+          timeS={prog * (estado.dia.vozDur ?? 0)}
+          imageUrl={estado.dia.slides?.[0]?.imageUrl}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          conta={getConta(s.contaId ?? '')!}
+        />
+      )}
+      {estado && ehMetodo && !ehCarta && ehTarde && !(estado.dia.vozPalavras?.length ?? 0) && s && getConta(s.contaId ?? '') && (
         <Sequencia
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
@@ -314,10 +329,11 @@ export default function RenderVeuPage() {
           veuReveal={(estado.dia.slides?.[(estado.dia.slides?.length ?? 1) - 1] as { veuReveal?: string } | undefined)?.veuReveal}
           prog={prog}
           nomeCarta={nomeCarta || undefined}
+          estilo={estiloM}
         />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
-        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} />
+        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} estilo={estiloM} />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
@@ -329,6 +345,7 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
           veuReveal={s.veuReveal}
           prog={prog}
+          estilo={estiloM}
         />
       )}
       {estado && ehSerie && sd && (

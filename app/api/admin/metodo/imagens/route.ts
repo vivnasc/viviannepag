@@ -53,13 +53,16 @@ export async function POST(req: Request) {
 
   // unidade = REEL (POST): cada reel tem UMA cena/imagem, usada em todos os momentos.
   // NUNCA uma imagem por slide (pagava várias imagens iguais para o mesmo reel).
-  // A "Carta de renomear" (vir) é TIPOGRÁFICA (papel), NÃO leva imagem Flux — salta-se.
+  // A "Carta de renomear" (vir): o corpo é tipográfico, mas a CAPA leva imagem — por
+  // isso ENTRA, mas só conta como pendente se a CAPA (slide 0) não tiver imagem.
+  const ehCartaRen = (r: Row) => (r.theme?.metodo as { tipo?: string } | undefined)?.tipo === 'cartaRenomear';
   const pendentes: Row[] = [];
   for (const r of (data ?? []) as Row[]) {
     if (r.theme?.metodo?.conta !== contaId) continue;
-    if ((r.theme?.metodo as { tipo?: string } | undefined)?.tipo === 'cartaRenomear') continue;
     const sl = r.dias?.[0]?.slides ?? [];
-    if (sl.length && sl.some((s) => !s.imageUrl)) pendentes.push(r);
+    if (!sl.length) continue;
+    if (ehCartaRen(r)) { if (!sl[0]?.imageUrl) pendentes.push(r); }
+    else if (sl.some((s) => !s.imageUrl)) pendentes.push(r);
   }
   const total = pendentes.length;
   const lote = pendentes.slice(0, LIMITE);
@@ -108,7 +111,9 @@ export async function POST(req: Request) {
       const r = await fundoImagem(prompt, row.slug); url = r.url; if (!url && r.erro) ultimoErro = r.erro;
     }
     if (!url) continue;
-    for (const s of sl) { s.imageUrl = url; s.notaVisual = prompt; }
+    // carta de renomear: a imagem é SÓ da capa (slide 0); o corpo fica papel.
+    if (meta.tipo === 'cartaRenomear') { if (sl[0]) { sl[0].imageUrl = url; sl[0].notaVisual = prompt; } }
+    else for (const s of sl) { s.imageUrl = url; s.notaVisual = prompt; }
     const { error: e2 } = await supabase.from('carousel_collections').update({ dias: row.dias }).eq('slug', row.slug);
     if (!e2) feitas += 1;
   }
