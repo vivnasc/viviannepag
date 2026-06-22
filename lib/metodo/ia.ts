@@ -11,13 +11,14 @@ import { VEU_FACES } from './veu-faces';
 import { REFERENCIAS } from './referencias';
 import { limparTravessoes } from '@/lib/texto';
 
-// Regras fixas do fundo (incluídas sempre). A ASSINATURA (pintura renascentista,
-// sfumato, luz de ouro) é o que torna o feed inconfundível e não genérico
-// (ver COVER-PROMPTS-METODO-VS.md). NÃO é fotografia.
+// Regras fixas do fundo (incluídas sempre). ASSINATURA (decisão da Vivianne: subir
+// ao nível do laboratório): arte conceptual MODERNA e cinematográfica, marcante,
+// que para o scroll — NÃO a pintura renascentista/antiga que envelhecia o feed.
 const FUNDO_REGRAS =
-  'fine-art painterly oil painting in a renaissance manner, sfumato, visible painterly brushwork and texture, ' +
-  'soft natural painterly light, contemplative and timeless, luminous and readable (never near-black), ' +
-  'NOT a photograph, NOT stock photography, generous calm empty space in the centre for an overlaid sentence, ' +
+  'cinematic conceptual fine-art image, modern and striking, atmospheric and evocative, rich depth, texture and detail, ' +
+  'dramatic yet natural light, contemporary and premium, scroll-stopping, ' +
+  'NOT an old painting, NOT renaissance, NOT a museum oil painting, NOT sfumato, NOT flat stock photography, ' +
+  'luminous and readable (never near-black), generous calm empty space in the centre for an overlaid sentence, ' +
   'NO people, NO faces, NO figures, NO hands, NO text, NO letters, NO watermark, vertical 9:16';
 
 // assunto curto de um prompt (para alimentar a lista "evita") — as primeiras palavras.
@@ -100,7 +101,7 @@ Termina sempre com: ${FUNDO_REGRAS_DRAMA}.
 Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`
     : `És diretor de arte. Escreves UM prompt de imagem (em inglês) para o FUNDO de um post do Método VS (@${conta.handle}).
 
-ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
+ASSINATURA VISUAL (qualidade do laboratório): arte conceptual cinematográfica MODERNA e marcante — atmosférica, com profundidade, textura e detalhe ricos, luz dramática mas natural, contemporânea e premium, que PARA O SCROLL. NÃO é pintura antiga/renascentista nem sfumato, NÃO é stock chapado. Luminoso e legível (nunca quase-preto).
 
 PALETA E MUNDO: ${corMundo}. Os SÍMBOLOS da conta entram SÓ ao serviço da frase (e a COR é a do véu). Representa: ${conta.depois}
 ${frase ? `A FRASE deste post é: «${frase}».
