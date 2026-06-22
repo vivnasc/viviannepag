@@ -20,6 +20,7 @@ type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; legenda: string | null;
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
+  formato: string; momentos: string[] | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -210,6 +211,7 @@ export default function SoulabPage() {
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
   const [tema, setTema] = useState('');
   const [quantos, setQuantos] = useState(1);
+  const [formato, setFormato] = useState<'frase' | 'momentos'>('frase');
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -231,14 +233,14 @@ export default function SoulabPage() {
     setBusy(true); setErro(null);
     setMsg('A explorar no laboratório (texto + imagem)… pode demorar até 1 min por peça. Volta e recarrega se fechares.');
     try {
-      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, tema: tema.trim() || undefined }) });
+      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, tema: tema.trim() || undefined }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} peça(s) gerada(s).${j.detalhe ? ` (aviso: ${j.detalhe})` : ''} Revê em baixo, regenera a imagem se quiseres, e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(false); }
-  }, [busy, tipo, quantos, tema, recarregar]);
+  }, [busy, tipo, quantos, formato, tema, recarregar]);
 
   const darMovimento = useCallback(async (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => {
     if (acaoSlug) return;
@@ -388,6 +390,14 @@ export default function SoulabPage() {
             ))}
           </div>
           <p className="text-[0.72rem] opacity-60 mb-3">{TIPOS_SOULAB.find((t) => t.id === tipo)?.descricao}</p>
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
+            <span className="text-[0.7rem] opacity-55 mr-0.5">formato:</span>
+            {([['frase', '✶ 1 frase'], ['momentos', '❑ vários momentos']] as const).map(([id, label]) => (
+              <button key={id} type="button" onClick={() => setFormato(id)} title={id === 'momentos' ? 'um reel onde a ideia se desdobra em 3-5 linhas sobre a mesma cena' : 'um reel de uma só frase'}
+                className="text-[0.74rem] px-2.5 py-1 rounded-full border"
+                style={formato === id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.2)', color: SOULAB.paleta.texto }}>{label}</button>
+            ))}
+          </div>
           <div className="flex flex-wrap items-center gap-2">
             <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional) — ou deixa o acaso decidir 🎲"
               className="flex-1 min-w-[200px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
@@ -420,7 +430,7 @@ export default function SoulabPage() {
               <div key={p.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
                 <div className="relative">
                   <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...SOULAB_SLIDE} />
-                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}</span>
+                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}</span>
                   {p.publicado
                     ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
                     : p.clipUrl
