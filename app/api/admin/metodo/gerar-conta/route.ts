@@ -7,6 +7,8 @@ import { planoSemanaMae } from '@/lib/metodo/semana';
 import { personagemDoDia } from '@/lib/metodo/peca';
 import { gerarStoryboard } from '@/lib/metodo/storyboard-ia';
 import { hashtagsMetodo } from '@/lib/metodo/hashtags';
+import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
+import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -23,7 +25,27 @@ export const maxDuration = 300;
 const NOME_TARDE: Record<string, string> = { ver: 'O Espelho', vir: 'Carta de renomear', viver: 'Repara' };
 const TIPO_TARDE: Record<string, string> = { ver: 'espelho', vir: 'cartaRenomear', viver: 'repara' };
 
-type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: null; capa: boolean; conceito: string; contaId: ContaId };
+type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisual: string; imageUrl: string | null; capa: boolean; conceito: string; contaId: ContaId };
+
+// A peça da filha NASCE COM IMAGEM (como no laboratório): gera o fundo (Flux) com um
+// prompt criativo e variado (gerarFundoIA, o mesmo que dá as imagens lindas), e aplica-o.
+// nbeats (ver/viver) = a mesma cena em todos os momentos; cartaRenomear (vir) = só a capa.
+// Best-effort: se a imagem falhar, a peça fica com o prompt e o passo "imagens" preenche depois.
+async function aplicarImagem(row: { slug: string; dias: { slides: SlideMetodo[] }[]; theme: { metodo?: { tipo?: string } } }, conta: typeof CONTAS[ContaId], veu: VeuNome, apiKey: string, token: string | undefined, evitarImg: string[]): Promise<void> {
+  if (!token) return;
+  const slides = row.dias[0]?.slides ?? [];
+  if (!slides.length) return;
+  const ehCarta = (row.theme.metodo?.tipo) === 'cartaRenomear';
+  try {
+    const prompt = await gerarFundoIA(conta, evitarImg, apiKey, slides[0]?.texto, 'contemplativo', veu);
+    const raw = await gerarImagemFlux(prompt, token, { raw: true });
+    let url = raw;
+    try { url = await guardarImagem(raw, `metodo/${row.slug}/fundo-${Date.now()}.jpg`); } catch { /* fica o url do Replicate */ }
+    if (ehCarta) { if (slides[0]) { slides[0].imageUrl = url; slides[0].notaVisual = prompt; } }
+    else for (const s of slides) { s.imageUrl = url; s.notaVisual = prompt; }
+    evitarImg.push(assuntoCurto(prompt));
+  } catch { /* best-effort: sem imagem agora; o passo "imagens" preenche depois */ }
+}
 
 function montarRow(conta: ContaId, slug: string, data: string, hora: string, subtipo: string, tipo: string, conceito: string, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string) {
   const c = CONTAS[conta];
@@ -42,6 +64,7 @@ export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
+  const token = process.env.REPLICATE_API_TOKEN; // para a imagem nascer com a peça
 
   const body = (await req.json().catch(() => ({}))) as { conta?: string; semanas?: number; offset?: number; dia?: string };
   const conta = (body.conta ?? '') as ContaId;
@@ -56,14 +79,18 @@ export async function POST(req: Request) {
   const hojeStr = `${ag.getFullYear()}-${String(ag.getMonth() + 1).padStart(2, '0')}-${String(ag.getDate()).padStart(2, '0')}`;
 
   const evitar: string[] = [];
+  const evitarImg: string[] = []; // assuntos de imagem já usados (não repetir cenas)
   const existentes = new Set<string>();
   const publicados = new Set<string>();
   try {
     const { data } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', `metodo-${conta}-%`);
-    for (const r of (data ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { igPublicado?: boolean; publicado?: boolean } }[]) {
+    for (const r of (data ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string; notaVisual?: string }> }>; theme?: { igPublicado?: boolean; publicado?: boolean } }[]) {
       existentes.add(r.slug);
       if (r.theme?.igPublicado || r.theme?.publicado) publicados.add(r.slug);
-      const t = r.dias?.[0]?.slides?.[0]?.texto; if (t) evitar.push(t);
+      const slides = r.dias?.[0]?.slides ?? [];
+      // anti-repetição sobre a PEÇA INTEIRA (não só a capa) — o corpo deixa de repetir.
+      const corpo = slides.map((s) => s.texto ?? '').filter(Boolean).join(' · '); if (corpo) evitar.push(corpo);
+      for (const s of slides) if (s.notaVisual) evitarImg.push(assuntoCurto(s.notaVisual));
     }
   } catch { /* sem memória */ }
 
@@ -95,12 +122,21 @@ export async function POST(req: Request) {
     if (fazer(slugTarde)) {
       try {
         const sb = await gerarStoryboard(conta, 'profundidade', veu, personagem, apiKey, evitar);
-        if (sb.beats.length) { rows.push(montarRow(conta, slugTarde, d.data, '14:00', subtipo, TIPO_TARDE[conta], NOME_TARDE[conta], veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
+        if (sb.beats.length) {
+          const row = montarRow(conta, slugTarde, d.data, '14:00', subtipo, TIPO_TARDE[conta], NOME_TARDE[conta], veu, sb.beats, sb.envio);
+          await aplicarImagem(row, c, veu, apiKey, token, evitarImg); // a peça nasce com a imagem
+          rows.push(row);
+          evitar.push(sb.beats.map((b) => b.texto).join(' · ')); // anti-repetição da peça toda
+        }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
   }
 
-  if (!rows.length) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: !ultimoErro, detalhe: ultimoErro || undefined });
+  // Não engolir o erro: se nada saiu E houve falha, mostrar o motivo real (não "0 mudo").
+  if (!rows.length) {
+    if (ultimoErro) return NextResponse.json({ erro: 'geracao-falhou', detalhe: ultimoErro }, { status: 502 });
+    return NextResponse.json({ ok: true, gerados: 0, jaExistiam: true });
+  }
   const { error } = await supabase.from('carousel_collections').upsert(rows, { onConflict: 'slug' });
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, gerados: rows.length });
