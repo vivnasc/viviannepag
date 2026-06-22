@@ -17,7 +17,7 @@ const MUNDO = SOULAB_MUNDO as Mundo; // a paleta 'soulab' vive em PALETAS (Recor
 
 type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
-  imageUrl: string | null; videoUrl: string | null; legenda: string | null;
+  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; legenda: string | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -49,6 +49,19 @@ export default function SoulabPage() {
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(false); }
   }, [busy, tipo, quantos, tema, recarregar]);
+
+  const darMovimento = useCallback(async (slug: string, intensidade: 'suave' | 'forte') => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null);
+    setMsg(`A dar vida à imagem (Kling · push-in ${intensidade})… pode demorar 1 a 3 min. Não feches.`);
+    try {
+      const r = await fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, intensidade }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Movimento gerado. Vê em baixo, no cartão. (É só o motion, sem texto; o texto entra no render.)'); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
 
   const novaImagem = useCallback(async (slug: string) => {
     if (acaoSlug) return;
@@ -145,12 +158,23 @@ export default function SoulabPage() {
                   <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}</span>
                   {p.publicado
                     ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
-                    : p.videoUrl
-                      ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">MP4</span>
-                      : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">sem MP4</span>}
+                    : p.clipUrl
+                      ? <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5 text-white" style={{ background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 }}>🎬 com vida</span>
+                      : p.videoUrl
+                        ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">MP4</span>
+                        : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem</span>}
                 </div>
+                {p.clipUrl && (
+                  <div className="px-2 pt-2">
+                    <p className="text-[0.55rem] uppercase tracking-widest opacity-50 mb-1">movimento (sem texto · o texto entra no render)</p>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <video src={p.clipUrl} controls loop muted playsInline className="w-full rounded-lg border border-white/10" />
+                  </div>
+                )}
                 <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
+                  <button onClick={() => darMovimento(p.slug, 'suave')} disabled={!!acaoSlug || !p.imageUrl} title="push-in lento e elegante (seguro)" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 suave</button>
+                  <button onClick={() => darMovimento(p.slug, 'forte')} disabled={!!acaoSlug || !p.imageUrl} title="entrada mais dramática na cena (mais imersivo)" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🎬 forte</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
