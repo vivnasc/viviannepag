@@ -72,7 +72,40 @@ export const SOULAB = {
     'o corpo como mensageiro',
     'a ilusão de separação',
   ],
+  // O ACASO (decisão da Vivianne: "vários temas aleatórios"): NÃO é um calendário
+  // nem série recorrente. É uma reserva de sementes amplas e contemplativas, do
+  // território dela, para o botão "surpreende-me". Sem véus, sem baralho, sem jargão.
+  sementes: [
+    'o limiar entre dois quartos',
+    'a memória da água',
+    'o que a sombra guarda quando ninguém olha',
+    'o peso que confundimos com identidade',
+    'o silêncio que vem depois da pergunta',
+    'a herança que ninguém chegou a nomear',
+    'o corpo que sabe antes da mente',
+    'a coincidência que parecia um sinal',
+    'o cansaço de carregar o que já não é nosso',
+    'a porta que só se abre para dentro',
+    'a fronteira ténue entre descansar e fugir',
+    'as vozes que herdámos e tomámos por nossas',
+    'o instante exato antes de adormecer',
+    'a beleza do que ficou inacabado',
+    'o espelho que devolve mais do que mostra',
+    'a solidão que não é falta de companhia',
+    'a parte de nós que ficou num lugar antigo',
+    'o que cresce no escuro sem pedir licença',
+    'a diferença entre estar presente e estar disponível',
+    'a vertigem de não ter nada a provar',
+    'o sagrado escondido num gesto pequeno',
+    'o mapa que desenhamos para não nos perdermos de nós',
+  ],
 } as const;
+
+/** Uma semente ampla ao acaso, para o laboratório (o botão "surpreende-me"). */
+export function sementeAleatoria(): string {
+  const s = SOULAB.sementes;
+  return s[Math.floor(Math.random() * s.length)];
+}
 
 // o mundo (palette key) que a Soulab usa no render dos reels — ver PALETAS em
 // lib/estudio-conteudo.ts (entrada 'soulab').

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
-import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, type TipoSoulabId } from '@/lib/soulab/marca';
+import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -111,8 +111,12 @@ export default function SoulabPage() {
           </div>
           <p className="text-[0.72rem] opacity-60 mb-3">{TIPOS_SOULAB.find((t) => t.id === tipo)?.descricao}</p>
           <div className="flex flex-wrap items-center gap-2">
-            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema/semente (opcional): ex. o limiar, a memória da água…"
-              className="flex-1 min-w-[220px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional) — ou deixa o acaso decidir 🎲"
+              className="flex-1 min-w-[200px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+            <button type="button" onClick={() => setTema(sementeAleatoria())} title="uma semente ampla ao acaso (rola outra vez se não te chamar)"
+              className="px-3 py-2 rounded-lg border text-[0.78rem] hover:bg-white/10" style={{ borderColor: 'rgba(255,255,255,0.25)', color: SOULAB.paleta.texto }}>
+              🎲 surpreende-me
+            </button>
             <label className="inline-flex items-center gap-1.5 text-[0.74rem] opacity-80">
               quantas:
               <select value={quantos} onChange={(e) => setQuantos(Number(e.target.value))} className="bg-black/20 border border-white/15 rounded-md px-2 py-1.5 [color-scheme:dark]">
