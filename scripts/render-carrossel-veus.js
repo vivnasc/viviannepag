@@ -48,7 +48,8 @@ async function main() {
   const duasFaces = col.theme?.subtipo === 'duasfaces'; // MÃE: 1 reel, 2 FACES (dor -> revelação) num só MP4
   const nbeats = col.theme?.subtipo === 'nbeats'; // TARDE: N beats sobre 1 cena dramática (1 só MP4)
   const visual = col.theme?.subtipo === 'visual'; // VISUAL (vir): 1 cena de luz + 1 linha
-  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual); // frase/beats com motion
+  const carta = col.theme?.subtipo === 'carta'; // CARTA DE RENOMEAR (vir): tipográfica, abre página a página
+  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual || carta); // frase/beats com motion
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
@@ -95,7 +96,7 @@ async function main() {
     if (kinetic) {
       // TARDE (nbeats): ~3.4s por beat (tempo de leitura). 2 faces = 14s. Frase = 7s.
       const FPS = 25;
-      let DUR = duasFaces ? 14 : nbeats ? Math.max(11, Math.round(3.4 * slides.length)) : visual ? 8 : 7;
+      let DUR = duasFaces ? 14 : nbeats ? Math.max(11, Math.round(3.4 * slides.length)) : carta ? Math.max(13, Math.round(3.6 * slides.length)) : visual ? 8 : 7;
       // VOZ (narração): se o post tem voz, ELA MANDA — a duração do reel passa a ser a
       // da narração e os slides avançam ao ritmo dela (a frase no ecrã = a que é dita
       // = karaokê ao nível da frase). Guardado por d.vozUrl (a loja não tem voz).

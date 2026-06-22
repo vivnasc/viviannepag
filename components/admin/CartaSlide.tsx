@@ -63,6 +63,9 @@ export function CartaSlide({ texto, conta, prog = 1, capa = false, semRodape = f
           <div style={{ position: 'absolute', inset: 0, padding: '150px 120px 130px', display: 'flex', flexDirection: 'column',
             background: 'radial-gradient(120% 80% at 30% 12%, rgba(255,250,235,0.9) 0%, rgba(0,0,0,0) 45%), radial-gradient(ellipse at 50% 50%, #f1e7d0 0%, #e8dabd 62%, #dcc9a4 100%)' }}>
             <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', boxShadow: 'inset 0 0 220px rgba(90,65,35,0.38), inset 0 0 60px rgba(90,65,35,0.18)' }} />
+            {/* moldura de papel timbrado (duplo filete) — para não ficar pobre */}
+            <div style={{ position: 'absolute', inset: '64px 72px', border: '2px solid rgba(156,122,63,0.38)', borderRadius: 6, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', inset: '78px 86px', border: '1px solid rgba(156,122,63,0.22)', borderRadius: 4, pointerEvents: 'none' }} />
             {/* timbre */}
             <div style={{ textAlign: 'center', marginBottom: 60 }}>
               <div style={{ fontFamily: FONT_SANS, fontWeight: 700, fontSize: 22, letterSpacing: '0.55em', textTransform: 'uppercase', color: '#9c7a3f' }}>vir · soltar</div>
