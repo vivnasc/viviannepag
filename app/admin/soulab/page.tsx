@@ -18,7 +18,7 @@ const MUNDO = SOULAB_MUNDO as Mundo; // a paleta 'soulab' vive em PALETAS (Recor
 
 type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
-  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; legenda: string | null;
+  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; legenda: string | null;
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
@@ -144,6 +144,27 @@ function EfeitoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boo
   );
 }
 
+// O SOM DA CENA (autonomia): gera som ambiente A PARTIR DA IMAGEM (a cena), como
+// nas séries. Ouve aqui; o render usa-o como áudio. "Remover" volta à música.
+function SomBox({ somUrl, disabled, busy, onGerar, onRemover }: { somUrl: string | null; disabled: boolean; busy: boolean; onGerar: () => void; onRemover: () => void }) {
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  return (
+    <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">som ambiente da cena (a partir da imagem)</p>
+      {somUrl && (
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        <audio src={somUrl} controls className="w-full h-8" />
+      )}
+      <div className="flex gap-1">
+        <button type="button" onClick={onGerar} disabled={disabled}
+          className="flex-1 text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a gerar…' : somUrl ? '↻ gerar de novo' : '🔊 gerar som da cena'}</button>
+        {somUrl && <button type="button" onClick={onRemover} disabled={disabled} className="text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/20 disabled:opacity-50">música</button>}
+      </div>
+      <p className="text-[0.52rem] opacity-45 leading-snug">Sem som da cena, o render usa a música. O som é contemplativo (sem vozes, sem música), feito da própria cena.</p>
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -157,6 +178,7 @@ export default function SoulabPage() {
   const [legendaOpen, setLegendaOpen] = useState<string | null>(null);
   const [agendaOpen, setAgendaOpen] = useState<string | null>(null);
   const [efeitoOpen, setEfeitoOpen] = useState<string | null>(null);
+  const [somOpen, setSomOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -236,6 +258,19 @@ export default function SoulabPage() {
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else { setMsg('Efeito guardado. O reel final usa-o no render.'); setEfeitoOpen(null); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const gerarSomPeca = useCallback(async (slug: string, remover: boolean) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null);
+    setMsg(remover ? 'A remover o som (volta à música)…' : 'A gerar o som da cena (ElevenLabs)… ~20-40s.');
+    try {
+      const r = await fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg(remover ? 'Som removido (volta à música no render).' : 'Som da cena gerado. Ouve em baixo; o render usa-o como áudio.'); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -352,6 +387,7 @@ export default function SoulabPage() {
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => setSomOpen(somOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="gerar som ambiente a partir da cena" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 som {somOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
@@ -361,6 +397,7 @@ export default function SoulabPage() {
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
                 {efeitoOpen === p.slug && <EfeitoBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(ef) => salvarEfeito(p.slug, ef)} />}
+                {somOpen === p.slug && <SomBox somUrl={p.somUrl} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={() => gerarSomPeca(p.slug, false)} onRemover={() => gerarSomPeca(p.slug, true)} />}
               </div>
             ))}
           </div>

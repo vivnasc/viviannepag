@@ -20,7 +20,7 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; legenda?: string | null; hashtags?: string[] | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null; destaque?: string[]; notaVisual?: string | null; efeito?: string | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null; somUrl?: string | null } } | null;
     created_at?: string;
   };
 
@@ -35,6 +35,7 @@ export async function GET() {
       imageUrl: slide?.imageUrl ?? null,
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       clipUrl: row.theme?.soulab?.clipUrl ?? null,
+      somUrl: row.theme?.soulab?.somUrl ?? null,
       legenda: row.dias?.[0]?.legenda ?? null,
       hashtags: row.dias?.[0]?.hashtags ?? [],
       fundoPrompt: slide?.notaVisual ?? null,

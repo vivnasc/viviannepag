@@ -50,6 +50,9 @@ async function main() {
   const visual = col.theme?.subtipo === 'visual'; // VISUAL (vir): 1 cena de luz + 1 linha
   const carta = col.theme?.subtipo === 'carta'; // CARTA DE RENOMEAR (vir): tipográfica, abre página a página
   const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual || carta); // frase/beats com motion
+  // SOULAB · som da cena (gerado a partir da imagem). Se existir, é o áudio do reel
+  // (em vez da música). Só afeta peças Soulab; os outros motores ficam iguais.
+  const somSoulab = (col.theme?.marca === 'soulab' && col.theme?.soulab?.somUrl) ? col.theme.soulab.somUrl : null;
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
@@ -149,7 +152,7 @@ async function main() {
       let temAudio = false; let vozAudio = false;
       if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) { temAudio = true; vozAudio = true; }
       else {
-        const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
+        const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
         try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
       }
 
@@ -221,7 +224,7 @@ async function main() {
       console.log(`[infografico] dia ${d.dia}: ${N} frames`);
 
       let temAudio = false;
-      const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
+      const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
       try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
 
       let videoUrl = null;
@@ -279,7 +282,7 @@ async function main() {
     let videoUrl = null;
     if (!soImagens) {
       // 2. audio do dia
-      const aUrl = d.faixa?.url || faixaUrl(semana, d.dia);
+      const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
       let temAudio = false;
       try {
         const ar = await fetch(aUrl);
