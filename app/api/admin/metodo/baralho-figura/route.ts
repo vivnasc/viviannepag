@@ -28,30 +28,49 @@ export const maxDuration = 120;
 
 const SLUG = 'metodo-baralho';
 
-type Estado = { figuras: Record<string, string>; candidatas: Record<string, string[]> };
+type Estado = { figuras: Record<string, string>; candidatas: Record<string, string[]>; referencia?: string };
 async function lerEstado(): Promise<Estado> {
   const supabase = getSupabaseAdmin();
   const { data } = await supabase.from('carousel_collections').select('theme').eq('slug', SLUG).maybeSingle();
-  const t = (data?.theme as { figuras?: Record<string, string>; candidatas?: Record<string, string[]> } | null) ?? {};
-  return { figuras: t.figuras ?? {}, candidatas: t.candidatas ?? {} };
+  const t = (data?.theme as { figuras?: Record<string, string>; candidatas?: Record<string, string[]>; referencia?: string } | null) ?? {};
+  return { figuras: t.figuras ?? {}, candidatas: t.candidatas ?? {}, referencia: t.referencia };
 }
 async function gravar(e: Estado) {
   const supabase = getSupabaseAdmin();
-  return supabase.from('carousel_collections').upsert({ slug: SLUG, title: 'Baralho · figuras', theme: { figuras: e.figuras, candidatas: e.candidatas, metodo: { conta: 'mae', tipo: 'baralho-figuras' } } }, { onConflict: 'slug' });
+  return supabase.from('carousel_collections').upsert({ slug: SLUG, title: 'Baralho · figuras', theme: { figuras: e.figuras, candidatas: e.candidatas, referencia: e.referencia, metodo: { conta: 'mae', tipo: 'baralho-figuras' } } }, { onConflict: 'slug' });
 }
 
-// GET: figuras escolhidas (definitivas) + candidatas geradas (persistidas, não se perdem).
+// GET: figuras escolhidas (definitivas) + candidatas geradas + a REFERÊNCIA de estilo do deck.
 export async function GET() {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const e = await lerEstado();
-  return NextResponse.json({ ok: true, figuras: e.figuras, candidatas: e.candidatas });
+  return NextResponse.json({ ok: true, figuras: e.figuras, candidatas: e.candidatas, referencia: e.referencia ?? null });
 }
 
 // POST { personagemId } -> gera UMA figura candidata e devolve { url } (não fixa).
 // POST { personagemId, url, escolher:true } -> fixa essa url como a figura definitiva.
+// POST { url, referencia:true } -> fixa essa imagem como a REFERÊNCIA de estilo do deck
+//   (todas as gerações seguintes copiam-lhe o look via image_prompt do Flux).
+// POST { referencia:true, limpar:true } -> tira a referência.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { personagemId?: string; url?: string; escolher?: boolean };
+  const body = (await req.json().catch(() => ({}))) as { personagemId?: string; url?: string; escolher?: boolean; referencia?: boolean; limpar?: boolean };
+
+  // REFERÊNCIA de estilo do deck (não precisa de personagem).
+  if (body.referencia) {
+    const e = await lerEstado();
+    if (body.limpar) { e.referencia = undefined; }
+    else {
+      if (!body.url) return NextResponse.json({ erro: 'sem-url' }, { status: 400 });
+      let canon = body.url;
+      try { canon = await guardarImagem(body.url, `metodo/baralho/_referencia.jpg`); } catch { /* fica a url */ }
+      e.referencia = `${canon}?v=${Date.now()}`;
+    }
+    const { error } = await gravar(e);
+    if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, referencia: e.referencia ?? null });
+  }
+
   const p = resolverAlvo(body.personagemId ?? '');
   if (!p) return NextResponse.json({ erro: 'personagem-desconhecida' }, { status: 400 });
   const supabase = getSupabaseAdmin();
@@ -69,14 +88,16 @@ export async function POST(req: Request) {
   }
 
   // GERAR candidata: figura de carta de baralho da personagem (Flux) — e PERSISTE-A
-  // (theme.candidatas[id]) para não se perder ao recarregar/deploy.
+  // (theme.candidatas[id]) para não se perder ao recarregar/deploy. Se houver REFERÊNCIA
+  // de estilo, passa-a como image_prompt (todas saem no mesmo look; só muda a pose).
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
+  const refEstado = await lerEstado();
   const prompt = promptCartaFigura(p.nome, p.essencia, p.pose);
   let ultimoErro = '';
   for (let t = 0; t < 3; t++) {
     try {
-      const raw = await gerarImagemFlux(prompt, token, { raw: true });
+      const raw = await gerarImagemFlux(prompt, token, { raw: true, imagePrompt: refEstado.referencia });
       let url = raw;
       try { url = await guardarImagem(raw, `metodo/baralho/${p.id}/cand-${Date.now()}.jpg`); } catch { /* fica raw */ }
       const e = await lerEstado();

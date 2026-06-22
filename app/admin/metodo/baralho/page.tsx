@@ -33,6 +33,22 @@ export default function BaralhoPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [aplicarBusy, setAplicarBusy] = useState(false);
   const [zoom, setZoom] = useState<{ id: string; url: string; def?: boolean } | null>(null);
+  const [referencia, setReferencia] = useState<string | null>(null);
+  const [refBusy, setRefBusy] = useState(false);
+
+  // REFERÊNCIA de estilo do deck: escolhes a figura que ADORAS e todas as gerações
+  // seguintes copiam-lhe o look (idade, moldura, estilo); só muda a pose.
+  const definirReferencia = useCallback(async (url: string | null) => {
+    if (refBusy) return;
+    setRefBusy(true); setErro(null); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo/baralho-figura', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(url ? { referencia: true, url } : { referencia: true, limpar: true }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setReferencia(j.referencia ?? null); setMsg(url ? 'Referência de estilo definida. As próximas figuras copiam este look.' : 'Referência removida.'); }
+    } catch (e) { setErro(String(e)); }
+    finally { setRefBusy(false); }
+  }, [refBusy]);
 
   const aplicar = useCallback(async () => {
     if (aplicarBusy) return;
@@ -47,7 +63,7 @@ export default function BaralhoPage() {
   }, [aplicarBusy]);
 
   const recarregar = useCallback(() => {
-    fetch('/api/admin/metodo/baralho-figura').then((r) => (r.ok ? r.json() : { figuras: {}, candidatas: {} })).then((j) => { setFiguras(j.figuras ?? {}); setCand(j.candidatas ?? {}); }).catch(() => {});
+    fetch('/api/admin/metodo/baralho-figura').then((r) => (r.ok ? r.json() : { figuras: {}, candidatas: {} })).then((j) => { setFiguras(j.figuras ?? {}); setCand(j.candidatas ?? {}); setReferencia(j.referencia ?? null); }).catch(() => {});
   }, []);
   useEffect(() => { recarregar(); }, [recarregar]);
 
@@ -87,6 +103,16 @@ export default function BaralhoPage() {
           <div className="mt-3 flex items-center gap-2 flex-wrap text-[0.75rem]">
             <button onClick={aplicar} disabled={aplicarBusy} title="mete as figuras escolhidas nas cartas que já geraste (sem gerar imagem nova, sem custo)" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: COR, color: COR }}>{aplicarBusy ? 'a aplicar…' : '↪ aplicar figuras às cartas já geradas'}</button>
             {msg && <span className="text-emerald-300">{msg}</span>}
+          </div>
+          {/* REFERÊNCIA de estilo: a chave da consistência. */}
+          <div className="mt-3 rounded-lg border border-white/10 p-3 flex items-start gap-3" style={{ background: 'rgba(216,178,90,0.06)' }}>
+            {referencia
+              ? <img src={referencia} alt="referência" className="w-[54px] aspect-[9/16] object-cover rounded-md border border-[#d8b25a]" />
+              : <div className="w-[54px] aspect-[9/16] rounded-md border border-dashed border-white/20 grid place-items-center text-[0.5rem] opacity-40 text-center">sem ref.</div>}
+            <div className="flex-1">
+              <p className="text-[0.72rem] opacity-85"><b style={{ color: COR }}>Referência de estilo do deck.</b> {referencia ? 'Está ativa: cada figura nova copia este look (idade, moldura, estilo); só muda a pose.' : 'Gera figuras, abre a que ADORAS e clica “usar como referência”. A partir daí todas saem nesse estilo.'}</p>
+              {referencia && <button onClick={() => definirReferencia(null)} disabled={refBusy} className="mt-1.5 text-[0.68rem] px-2 py-1 rounded border border-white/25 disabled:opacity-40">tirar referência</button>}
+            </div>
           </div>
           {erro && <p className="mt-2 text-[0.8rem] text-rose-300">{erro}</p>}
         </header>
@@ -186,8 +212,9 @@ export default function BaralhoPage() {
         <div onClick={() => setZoom(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
           <div onClick={(e) => e.stopPropagation()} className="w-full max-w-[420px] max-h-[92vh] overflow-y-auto text-center">
             <div className="relative mb-3"><img src={zoom.url} alt="figura" className="w-full rounded-xl border border-white/20" />{NOMES[zoom.id] && <CardNome nome={NOMES[zoom.id]} />}</div>
-            <div className="flex items-center justify-center gap-2 text-[0.8rem]">
+            <div className="flex items-center justify-center gap-2 text-[0.8rem] flex-wrap">
               {!zoom.def && <button onClick={() => { escolher(zoom.id, zoom.url); setZoom(null); }} disabled={busy === zoom.id} className="px-4 py-2 rounded-lg disabled:opacity-40" style={{ background: COR, color: '#0F0F1A' }}>{busy === zoom.id ? '…' : 'escolher esta como definitiva'}</button>}
+              <button onClick={() => { definirReferencia(zoom.url); setZoom(null); }} disabled={refBusy} title="usa esta figura como o LOOK do deck inteiro: as próximas figuras copiam-lhe o estilo/idade/moldura" className="px-4 py-2 rounded-lg border disabled:opacity-40" style={{ borderColor: COR, color: COR }}>{refBusy ? '…' : '★ usar como referência do estilo'}</button>
               <button onClick={() => setZoom(null)} className="px-4 py-2 rounded-lg border border-white/25">fechar</button>
             </div>
           </div>

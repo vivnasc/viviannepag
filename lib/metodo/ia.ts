@@ -46,25 +46,24 @@ const FUNDO_REGRAS_DRAMA =
 // pela app por cima, não pelo Flux — o texto do Flux sai sempre lixo e variável).
 export function promptCartaFigura(personagem?: string, essencia?: string, pose?: string): string {
   return [
-    // 1) MEDIUM primeiro (o Flux pesa o início): ilustração PINTADA, nunca foto.
-    'a flat 2D hand-painted tarot card ILLUSTRATION, editorial painterly artwork, matte gouache, clearly an illustration and NOT a photograph, NOT a 3D render, NOT photorealistic',
-    // 2) sujeito: mulher de HOJE, roupa atual — NUNCA santa/medieval.
-    'depicting a single CONTEMPORARY ordinary woman of 2026 in normal modern everyday clothes (simple knit, shirt or coat), a real woman of today, NOT a saint, NOT a goddess, NOT robes, NOT period or medieval costume',
-    // IDADE: adulta mas NÃO idosa (o "peso da vida"/45-55 fazia-a velha demais).
-    // RAÇA: AMBÍGUA, de propósito (representa TODAS as mulheres). NÃO fixar etnia.
-    'an adult woman around 38 years old (between 32 and 45), a real natural everyday face, NOT elderly, NOT old, NOT wrinkled or weathered, yet also NOT a young woman in her twenties and NOT a fashion model; of ambiguous and unspecified ethnicity with a warm medium-brown skin tone and mixed heritage so she can represent any woman and is never tied to one single race, natural, not glamorous, not airbrushed',
+    // 1) MOLDURA + CARTA primeiro (o Flux pesa o início; era o que se perdia).
+    'a vertical TAROT/ORACLE CARD with a thin ornate GOLD double-line border framing the whole image, deep matte near-black background, card composition with the gold frame clearly visible on all four sides',
+    // 2) MEDIUM: pintura, NUNCA foto/render glossy (o que a tornava foto de modelo).
+    'a flat hand-painted editorial ILLUSTRATION, matte gouache with visible brush texture, clearly a painting, NOT a photograph, NOT a 3D render, NOT a glossy beauty portrait',
+    // 3) a mulher: simples, comum, adulta — NUNCA modelo glamorosa nem miúda.
+    'inside the frame, one ORDINARY everyday adult woman around 38 years old (between 32 and 45), a plain natural look, NOT a glamorous fashion model, NOT a young girl, NOT heavily made-up, NOT airbrushed, NOT elderly or wrinkled',
+    'ambiguous unspecified ethnicity, warm medium-brown skin, mixed heritage, so she can represent any woman and is never tied to one single race',
     personagem ? `she embodies the archetype "${personagem}"` : '',
-    // 3) POSE de CORPO visível (a pose conta o arquétipo): travada se ditada.
-    'shown three-quarter or full body so her whole POSE and gesture read clearly at a glance (not just a face or bust), centered in the card',
-    pose ? `her EXACT pose, gesture and expression, follow this precisely: ${pose}` : essencia ? `her pose, gesture and expression must convey this exact character at a glance: ${essencia}` : 'her pose and gesture clearly convey her character',
-    // 4) MOLDURA e PALETA idênticas em todo o deck (a consistência).
-    'framed by ONE identical thin gold double-line art-nouveau border with simple corner flourishes, the same frame on every card of the deck, deep matte near-black background, vertical card proportions 9:16',
-    'the illustration STYLE, the gold frame, the lighting and the palette stay IDENTICAL across the whole deck; ONLY the woman and her pose change',
+    // 4) POSE de corpo (a pose conta o arquétipo): travada se ditada.
+    'shown three-quarter or full body so her whole pose and gesture read clearly at a glance (not just a face or bust), centered in the card',
+    pose ? `her exact pose, gesture and expression, follow this precisely: ${pose}` : essencia ? `her pose, gesture and expression must convey this exact character: ${essencia}` : 'her pose conveys her character',
+    // 5) consistência do deck.
+    'the gold frame, the painted illustration style, the lighting and the palette are IDENTICAL on every card of the deck; only the woman and her pose change',
     'gold used ONLY as fine linework on the matte black, never as a glow or light source',
-    // 5a) MATAR o disco/auréola atrás da cabeça (o erro que persistia: o círculo amarelo).
+    // 6) matar disco/auréola atrás da cabeça.
     'the background directly behind her head and body is plain empty matte black; ABSOLUTELY NO halo, NO sun, NO moon, NO large circle or ring, NO coloured disc, NO yellow circle, NO glowing orb or aura behind her, NO mandala, NO saint, NO religious or sacred iconography, NO candle, NO flames, NO crown, NO wings, NO byzantine or icon look, NO ornate medieval gown',
-    // 5b) ZERO texto: o nome é escrito pela APP por cima, nunca pelo Flux (sai com erros).
-    'a completely clean image with NO text anywhere: NO title, NO name, NO caption, NO title plate, NO cartouche, NO banner, NO label, NO letters, NO words, NO numbers, NO watermark, NO logo; leave the lower area as plain frame so the app can add the title separately',
+    // 7) zero texto (o nome é escrito pela app por cima).
+    'a completely clean image with NO text anywhere: NO title, NO name, NO caption, NO title plate, NO cartouche, NO banner, NO label, NO letters, NO words, NO numbers, NO watermark, NO logo',
   ].filter(Boolean).join(', ');
 }
 

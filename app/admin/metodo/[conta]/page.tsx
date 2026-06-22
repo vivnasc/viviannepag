@@ -21,14 +21,13 @@ const TIPO_LABEL: Record<string, string> = {
   espelho: 'O Espelho', cartaRenomear: 'Carta de renomear', repara: 'Repara',
 };
 // O QUE CADA FORMATO PRECISA (não replicar botões sem pensar no formato — regra
-// da Vivianne): todos são texto-sobre-imagem, logo imagem SIM; voz NÃO em nenhum
-// (todos os registos dizem "sem voz"). Som ambiente só nos reels que MEXEM (cena ·
-// não normalizes · espelho), nunca nas cartas que se LÊEM nem no sussurro do Repara.
-// A carta de renomear é tipográfica (não Flux): nem imagem nem som.
+// da Vivianne): todos são texto-sobre-imagem, logo imagem SIM. Som ambiente nos reels
+// que MEXEM (cena · não normalizes · espelho) E na CARTA DE RENOMEAR (decisão da
+// Vivianne: tipográfica pura ficava simplória; leva som por baixo, mesmo sem imagem).
 const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean }> = {
   carta: { imagem: true, som: false }, naonormalizes: { imagem: true, som: true },
   cena: { imagem: true, som: true }, espelho: { imagem: true, som: true },
-  cartaRenomear: { imagem: false, som: false }, repara: { imagem: true, som: false },
+  cartaRenomear: { imagem: false, som: true }, repara: { imagem: true, som: false },
 };
 const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false };
 // 2.ª-feira (ISO) da semana a `offset` semanas de hoje — para testar/gerar 1 dia.
