@@ -20,7 +20,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 
 type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string; motionUrl?: string | null; videoUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; capaRev?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string | null; capaRev?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -306,6 +306,8 @@ export default function PublicarPage() {
               <div onClick={(ev) => ev.stopPropagation()} className="flex items-center gap-1.5 mt-2 flex-wrap">
                 {e === 'rascunho' && <button onClick={() => setTheme(it.slug, { aprovado: true })} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/45 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20">✓ aprovar</button>}
                 {e === 'agendado' && <button onClick={() => setTheme(it.slug, { aprovado: false })} className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/60 hover:border-ambar">↩ desaprovar</button>}
+                {/* ERRO: recuperar — limpa o erro e volta a pôr na fila à mesma hora (self-heal no agendar). Para outra data/hora, muda no 📅 do laboratório ou na vista Feed. */}
+                {e === 'erro' && <button onClick={() => setTheme(it.slug, { aprovado: true, igStatus: null })} title="limpa o erro e tenta de novo à hora marcada" className="text-[0.64rem] px-2.5 py-1 rounded-full border border-[#C9B6FA]/45 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20">↻ reagendar</button>}
                 <button onClick={() => publicar(it)} disabled={busy === it.slug} className="text-[0.64rem] px-2.5 py-1 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{busy === it.slug ? '…' : '⚡ publicar já'}</button>
                 <button onClick={() => setLegenda(it)} className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/55 hover:border-ambar">👁 rever</button>
                 <button onClick={async () => { try { await navigator.clipboard.writeText(legendaDe(it)); setCopiado(it.slug); setTimeout(() => setCopiado(null), 1500); } catch {} }} title="copiar a legenda+hashtags" className="text-[0.6rem] px-2 py-1 rounded-full border border-ocre/25 text-creme-2/55 hover:border-ambar">{copiado === it.slug ? '✓ copiado' : '📋 legenda'}</button>
