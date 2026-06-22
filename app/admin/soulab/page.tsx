@@ -206,6 +206,50 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
   );
 }
 
+// PRÉ-VISUALIZAÇÃO do reel (ver ANTES de renderizar): anima prog 0→1 em loop, com
+// o efeito + tipografia da peça. Se for "vários momentos", sequencia-os (crossfade),
+// como o render vai fazer. Assim ela vê como sai SEM gastar um render.
+function PreviewBox({ peca }: { peca: Peca }) {
+  const [prog, setProg] = useState(0);
+  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
+  const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
+  const tip = peca.tipografia ?? undefined;
+  useEffect(() => {
+    let raf = 0; let start: number | null = null;
+    const dur = Math.max(4200, (moms?.length ?? 1) * 2600), hold = 1200;
+    const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [moms]);
+  return (
+    <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · como vai sair no reel (ver antes de renderizar)</p>
+      {moms ? (
+        <div style={{ position: 'relative', aspectRatio: '1080 / 1920', borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+          {moms.map((m, i) => {
+            const n = moms.length, w = 1 / n;
+            const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
+            const isLast = i === n - 1;
+            const fin = Math.min(1, lp / 0.18), fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
+            const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+            if (op <= 0) return null;
+            return (
+              <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+                <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...SOULAB_SLIDE} />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="rounded-lg overflow-hidden border border-white/10">
+          <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tip} {...SOULAB_SLIDE} />
+        </div>
+      )}
+      {peca.clipUrl && <p className="text-[0.5rem] opacity-45">(o movimento vê-se no 🎬; aqui mostra-se a imagem + o texto a animar)</p>}
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -222,6 +266,7 @@ export default function SoulabPage() {
   const [efeitoOpen, setEfeitoOpen] = useState<string | null>(null);
   const [somOpen, setSomOpen] = useState<string | null>(null);
   const [tipoOpen, setTipoOpen] = useState<string | null>(null);
+  const [previewOpen, setPreviewOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -344,6 +389,8 @@ export default function SoulabPage() {
 
   const renderizar = useCallback(async (slug: string) => {
     if (acaoSlug) return;
+    // NÃO disparar por surpresa: o render gasta tempo (~minutos) e Actions. Confirma.
+    if (typeof window !== 'undefined' && !window.confirm('Disparar o RENDER FINAL (MP4)? Demora alguns minutos e corre nos GitHub Actions.\n\nDica: pré-vê primeiro com ▶ para veres como vai sair.')) return;
     setAcaoSlug(slug); setErro(null); setMsg('A disparar o render (GitHub Actions)…');
     try {
       const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
@@ -447,6 +494,7 @@ export default function SoulabPage() {
                   </div>
                 )}
                 <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
+                  <button onClick={() => setPreviewOpen(previewOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver o reel a animar ANTES de renderizar" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>▶ pré-ver {previewOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
@@ -457,6 +505,7 @@ export default function SoulabPage() {
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
+                {previewOpen === p.slug && <PreviewBox peca={p} />}
                 {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
