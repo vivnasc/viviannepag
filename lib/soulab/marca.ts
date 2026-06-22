@@ -44,6 +44,34 @@ export const SOULAB = {
   // nenhum dos outros motores. Registada em PALETAS como mundo 'soulab'.
   paleta: { bg: '#1B1726', bg2: '#0E0B16', texto: '#ECE6F2', destaque: '#B9A8E0', nome: 'Soulab' },
   hashtagsBase: ['#soulab', '#almahumana', '#simbolismo', '#arquetipos', '#contemplacao', '#imaginacao'],
+  // A VOZ (decisão da Vivianne): CONVITE contemplativo, NÃO confissão. Impessoal
+  // e aberto ("o que está vivo aqui?"), nunca o "isto és tu" do Método VS.
+  voz: 'convite contemplativo: impessoal, aberto, "o que está vivo aqui?"; nunca confissão pessoal, nunca conselho, nunca "isto és tu"',
+  // AMPLA, ANCORADA EM TI (decisão da Vivianne): a Soulab explora a alma humana em
+  // geral, MAS o seu centro de gravidade é o território real da Vivianne. Estas
+  // correntes dão GRAVIDADE (não são tema fixo) — atravessam o que ela cria.
+  // NÃO incluem os 7 véus nem o baralho "Sou Aquela": isso é DNA do Método VS (mãe).
+  territorio: [
+    'transformação interior',
+    'heranças e o que se transmite entre gerações',
+    'a passagem da sobrevivência para a vida',
+    'arquétipos e estados internos',
+    'consciência e presença',
+    'sentido e travessia',
+    'a sombra e o que se esconde',
+    'descanso, entrega e receber',
+  ],
+  // ÂNCORAS académicas (das cadeiras dela): PROFUNDIDADE por baixo, NUNCA nomeadas
+  // no conteúdo (zero autores, zero jargão) — exatamente como as referências do
+  // método. Dão fundura sem virar aula.
+  ancoras: [
+    'individuação e a integração da sombra',
+    'sincronicidade e o numinoso',
+    'as ordens do amor e as lealdades invisíveis (sistémico)',
+    'o sentido que sustenta a dor, a noite escura da alma',
+    'o corpo como mensageiro',
+    'a ilusão de separação',
+  ],
 } as const;
 
 // o mundo (palette key) que a Soulab usa no render dos reels — ver PALETAS em
@@ -53,7 +81,7 @@ export const SOULAB_MUNDO = 'soulab';
 // TIPOS DE CONTEÚDO (a investigação da Soulab, sem achatar tudo a "frase"). Cada
 // tipo é um ÂNGULO de exploração; o vehículo do 1.º passo é um reel contemplativo
 // (um símbolo/imagem + um fragmento de texto), mas o ângulo muda a voz e a imagem.
-export type TipoSoulabId = 'arquetipo' | 'frase' | 'simbolo' | 'imagem' | 'experiencia';
+export type TipoSoulabId = 'arquetipo' | 'frase' | 'simbolo' | 'imagem' | 'experiencia' | 'conceito';
 
 export interface TipoSoulab {
   id: TipoSoulabId;
@@ -69,10 +97,20 @@ export const TIPOS_SOULAB: TipoSoulab[] = [
     id: 'arquetipo',
     label: 'Arquétipo',
     emoji: '🜂',
-    descricao: 'Uma personagem simbólica que representa um estado interno, um padrão humano ou uma fase da jornada.',
+    descricao: 'Uma figura simbólica UNIVERSAL que encarna um estado interno ou uma fase da jornada (arquétipo mítico, não o baralho do método).',
     angulo:
-      'Apresenta UM arquétipo (uma figura simbólica: o Eremita, a Guardiã do Limiar, o Viajante, a Sombra que pede luz…). ' +
-      'Nomeia-o e revela o estado interno que ele encarna, como uma observação de laboratório. NÃO o expliques como um manual de tarot: evoca-o. A imagem é a figura simbólica.',
+      'Apresenta UM arquétipo UNIVERSAL/mítico (o Eremita, a Guardiã do Limiar, o Viajante, a Sombra que pede luz, o Mensageiro…). ' +
+      'NÃO uses as personagens do método ("Sou Aquela": a Salvadora, a Provedora…) nem os 7 véus — isso é da conta mãe. ' +
+      'Evoca-o como uma observação de laboratório (não um manual de tarot) e deixa em aberto o estado interno que ele encarna. A imagem é a figura simbólica.',
+  },
+  {
+    id: 'conceito',
+    label: 'Conceito',
+    emoji: '⊚',
+    descricao: 'Uma ideia funda do estudo da alma (sombra, sentido, sincronicidade, separação) tornada poética e contemplativa — a lente ampla, ancorada.',
+    angulo:
+      'Pega numa ideia funda do estudo da alma (a sombra, a sincronicidade, o sentido que sustenta a dor, a individuação, a ilusão de separação, a noite escura) e torna-a uma OBSERVAÇÃO poética e aberta, nunca uma aula. ' +
+      'Zero autores, zero jargão: faz VER a ideia, não a expliques. A imagem é uma metáfora visual da ideia.',
   },
   {
     id: 'frase',
