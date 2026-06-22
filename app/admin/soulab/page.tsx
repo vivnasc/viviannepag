@@ -19,6 +19,7 @@ const MUNDO = SOULAB_MUNDO as Mundo; // a paleta 'soulab' vive em PALETAS (Recor
 type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; legenda: string | null;
+  hashtags: string[]; fundoPrompt: string | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -61,6 +62,27 @@ function MotionBox({ disabled, busy, onGerar }: { disabled: boolean; busy: boole
   );
 }
 
+// A LEGENDA + HASHTAGS à vista e editáveis (autonomia: ela mexe no texto do post).
+// O CTA leve vem já na legenda gerada; aqui ela afina à mão.
+function LegendaBox({ legenda, hashtags, disabled, busy, onSave }: { legenda: string; hashtags: string[]; disabled: boolean; busy: boolean; onSave: (legenda: string, hashtags: string) => void }) {
+  const [leg, setLeg] = useState(legenda);
+  const [tags, setTags] = useState((hashtags ?? []).join(' '));
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  return (
+    <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">legenda (o CTA leve está no fim)</p>
+      <textarea value={leg} onChange={(e) => setLeg(e.target.value)} rows={6}
+        className="w-full text-[0.64rem] leading-relaxed px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">hashtags</p>
+      <textarea value={tags} onChange={(e) => setTags(e.target.value)} rows={2}
+        className="w-full text-[0.6rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+      <button type="button" onClick={() => onSave(leg, tags)} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
+        style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar legenda'}</button>
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -71,6 +93,7 @@ export default function SoulabPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
   const [motionOpen, setMotionOpen] = useState<string | null>(null);
+  const [legendaOpen, setLegendaOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -100,6 +123,18 @@ export default function SoulabPage() {
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else { setMsg('Movimento gerado. Vê em baixo, no cartão. (É só o motion, sem texto; o texto entra no render.)'); setMotionOpen(null); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const salvarLegenda = useCallback(async (slug: string, legenda: string, hashtags: string) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar a legenda…');
+    try {
+      const r = await fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, legenda, hashtags }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Legenda guardada.'); setLegendaOpen(null); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -215,10 +250,12 @@ export default function SoulabPage() {
                 <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
                 {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
+                {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
               </div>
             ))}
           </div>

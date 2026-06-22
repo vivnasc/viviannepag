@@ -54,6 +54,7 @@ REGRAS DE VOZ (duras):
 - CONVITE, não confissão: impessoal e aberto. NUNCA "isto és tu", nunca um diagnóstico da pessoa que lê.
 - NÃO motivacional, NÃO conselho, NÃO autoajuda, NÃO "põe-te em primeiro". Explora, não convence.
 - Deixa a peça ABERTA: uma pergunta interessante vale mais que uma resposta fechada.
+- A legenda termina SEMPRE com um CTA, mas LEVE (um convite, não uma ordem): ficar com a pergunta, guardar para um momento de silêncio, partilhar com quem precisa, seguir o laboratório. NUNCA vender, NUNCA "link na bio", NUNCA imperativo agressivo.
 - A FRASE que aparece no ecrã é CURTA (cabe grande num reel 9:16): uma a três linhas, densa, com uma virada.
 - A IMAGEM é arte conceptual/simbólica/surrealista/contemplativa: SEM pessoas reconhecíveis a posar, SEM texto, SEM letras, SEM marcas de água. Original, não um postal genérico.
 
@@ -64,7 +65,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "frase": "o fragmento que aparece no reel (1 a 3 linhas curtas, sem aspas)",
   "destaque": ["1 a 3 palavras-chave da frase para realçar"],
   "fundoPrompt": "prompt em INGLÊS para a imagem simbólica de fundo (arte conceptual, fine art, evocativa do sentido), sem pessoas a posar, sem texto, a terminar com --ar 9:16 --style raw",
-  "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n entre cada). Abre com o fragmento ou um gancho contemplativo; 1 a 2 parágrafos curtos que exploram a hipótese (sem fechar); termina com um convite suave a contemplar, guardar ou partilhar. Nunca vender, nunca nomear o formato.",
+  "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n). Abre com o fragmento ou um gancho contemplativo; 1 a 2 parágrafos curtos que exploram a hipótese SEM a fechar. TERMINA SEMPRE (obrigatório) com um CTA LEVE numa linha à parte: um convite suave a ficar com a pergunta, a guardar, a partilhar com quem precisa, ou a seguir o laboratório. O CTA é gentil e contemplativo, NUNCA marketing, NUNCA 'compra/link na bio', NUNCA imperativo agressivo. Nunca vender, nunca nomear o formato.",
   "hashtags": ["8 a 12 hashtags em português, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]
 }`;
 
