@@ -26,7 +26,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
 type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[] };
-type Coleccao = { dias: Dia[]; theme?: { subtipo?: string } };
+type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string } } };
 
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
@@ -118,6 +118,7 @@ function CartaSequencia({ beats, conta, prog }: { beats: string[]; conta: Conta;
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number; slide2?: Slide & { imageUrl?: string } } | null>(null);
   const [subtipo, setSubtipo] = useState<string>('');
+  const [clipBg, setClipBg] = useState<string | null>(null); // Soulab: o clip do Kling (fundo em movimento)
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
@@ -162,6 +163,7 @@ export default function RenderVeuPage() {
         if (!r.ok) { setErro(`coleccao ${r.status}`); return; }
         const col = (await r.json()) as Coleccao;
         setSubtipo(col.theme?.subtipo ?? '');
+        setClipBg(col.theme?.soulab?.clipUrl ?? null);
         const dia = col.dias.find((d) => d.dia === diaN);
         const slide = dia?.slides?.[idx];
         if (!dia || !slide) { setErro('slide nao encontrado'); return; }
@@ -278,6 +280,7 @@ export default function RenderVeuPage() {
           variante={s.variante}
           efeito={(s as { efeito?: EfeitoTexto }).efeito}
           conceito={s.conceito}
+          clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
           {...((estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
         />
       )}

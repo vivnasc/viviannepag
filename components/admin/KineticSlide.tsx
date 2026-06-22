@@ -24,7 +24,7 @@ export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
   { id: 'bloom', label: '✺ bloom luminoso' },
 ];
 
-export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
+export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   // o EFEITO do texto (à escolha): máquina de escrever · bloom luminoso · fade
   // suave · surgir (palavra a palavra, sem cursor). Back-compat: domingo => bloom.
@@ -71,10 +71,14 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%', aspectRatio: ar, overflow: 'hidden', borderRadius: 16, background: BG2 }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: imageUrl ? '#000' : `radial-gradient(ellipse 110% 80% at 50% 35%, ${BG1} 0%, ${BG2} 80%)`, overflow: 'hidden' }}>
-        {imageUrl && (<>
-          <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', zIndex: 0 }} />
-          {/* véu vertical (topo/base) + scrim central ESCURO atrás da frase = contraste garantido sobre qualquer imagem */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: H, transform: `scale(${scale})`, transformOrigin: 'top left', visibility: scale ? 'visible' : 'hidden', background: (imageUrl || clipUrl) ? '#000' : `radial-gradient(ellipse 110% 80% at 50% 35%, ${BG1} 0%, ${BG2} 80%)`, overflow: 'hidden' }}>
+        {(imageUrl || clipUrl) && (<>
+          {clipUrl
+            // MOTION: o clip do Kling como fundo. class 'clip-bg' => o render faz seek
+            // por frame (window.__setKProg) e o texto compõe-se por cima. Sem ffmpeg.
+            ? <video className="clip-bg" src={clipUrl} muted playsInline preload="auto" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+            : <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: 'center', zIndex: 0 }} />}
+          {/* véu vertical (topo/base) + scrim central ESCURO atrás da frase = contraste garantido sobre qualquer imagem/motion */}
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, ${a(BG2, '66')} 0%, ${a(BG2, '38')} 36%, ${a(BG2, 'd9')} 100%)`, zIndex: 1 }} />
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 40% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 56%, transparent 76%)', zIndex: 1 }} />
         </>)}
