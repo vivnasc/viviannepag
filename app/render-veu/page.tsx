@@ -16,6 +16,7 @@ import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/ad
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
+import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
 import { getConta, type Conta } from '@/lib/metodo/contas';
 import { SerieDiariaSlide, type SerieId } from '@/components/admin/SerieDiariaSlide';
 import { type PaletaId } from '@/lib/series/serie-design';
@@ -25,7 +26,7 @@ const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400'
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'block' });
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
-type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[] };
+type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[]; vozPalavras?: { w: string; t0: number; t1: number }[]; vozDur?: number };
 type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string } } };
 
 // séries de reels com capa-assinatura (selo + carvão na capa)
@@ -304,7 +305,19 @@ export default function RenderVeuPage() {
           capaImg={estado.dia.slides?.[0]?.imageUrl}
         />
       )}
-      {estado && ehMetodo && !ehCarta && ehTarde && s && getConta(s.contaId ?? '') && (
+      {/* KARAOKÊ palavra-a-palavra: se o post tem voz com timestamps (vozPalavras),
+          mostra a linha com as palavras a acenderem-se à medida que são ditas. */}
+      {estado && ehMetodo && !ehCarta && ehTarde && (estado.dia.vozPalavras?.length ?? 0) > 0 && s && getConta(s.contaId ?? '') && (
+        <KaraokeMetodo
+          linhas={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
+          palavras={estado.dia.vozPalavras!}
+          timeS={prog * (estado.dia.vozDur ?? 0)}
+          imageUrl={estado.dia.slides?.[0]?.imageUrl}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          conta={getConta(s.contaId ?? '')!}
+        />
+      )}
+      {estado && ehMetodo && !ehCarta && ehTarde && !(estado.dia.vozPalavras?.length ?? 0) && s && getConta(s.contaId ?? '') && (
         <Sequencia
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
