@@ -26,7 +26,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
 type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[] };
-type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string } } };
+type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string } } };
 
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
@@ -58,11 +58,19 @@ function DuasFaces({ face1, face2, conta, prog, split }: { face1: Face; face2: F
 // sequência (cada um na sua janela de tempo), com crossfade. O fundo é único e
 // partilhado (1 só clip-bg, que o render faz seek por prog). O último beat mostra
 // a assinatura + o véu.
-function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog }: { beats: string[]; clipUrl?: string; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog: number }) {
+function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog, nomeCarta }: { beats: string[]; clipUrl?: string; imageUrl?: string; conta: Conta; conceito?: string; veuReveal?: string; prog: number; nomeCarta?: string }) {
   const n = Math.max(1, beats.length);
   const w = 1 / n;
+  const accent = conta.paleta.accent;
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920, background: '#000', overflow: 'hidden' }}>
+      {/* NOME da carta do baralho (ex.: "A Diretora Invisível") — rótulo fixo da app,
+          escrito por cima da figura (o Flux não escreve texto). Só na carta "Sou Aquela". */}
+      {nomeCarta && (
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 96, textAlign: 'center', zIndex: 5 }}>
+          <span style={{ display: 'inline-block', padding: '14px 40px', background: 'rgba(13,10,6,0.82)', border: `2px solid ${accent}`, borderRadius: 10, color: accent, fontFamily: '"Cormorant Garamond", var(--font-cormorant), serif', fontWeight: 600, fontSize: 50, letterSpacing: '0.02em' }}>{nomeCarta}</span>
+        </div>
+      )}
       {clipUrl
         // eslint-disable-next-line jsx-a11y/media-has-caption
         ? <video className="clip-bg" src={clipUrl} muted playsInline preload="auto" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.04)', filter: 'brightness(1.06) saturate(1.05)' }} />
@@ -118,6 +126,7 @@ function CartaSequencia({ beats, conta, prog }: { beats: string[]; conta: Conta;
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number; slide2?: Slide & { imageUrl?: string } } | null>(null);
   const [subtipo, setSubtipo] = useState<string>('');
+  const [nomeCarta, setNomeCarta] = useState<string>(''); // nome da personagem na carta "Sou Aquela"
   const [clipBg, setClipBg] = useState<string | null>(null); // Soulab: o clip do Kling (fundo em movimento)
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
@@ -163,6 +172,8 @@ export default function RenderVeuPage() {
         if (!r.ok) { setErro(`coleccao ${r.status}`); return; }
         const col = (await r.json()) as Coleccao;
         setSubtipo(col.theme?.subtipo ?? '');
+        // o NOME só na carta do baralho "Sou Aquela" (tipo 'carta'); nas outras nbeats não.
+        setNomeCarta(col.theme?.metodo?.tipo === 'carta' ? (col.theme?.metodo?.personagem ?? '') : '');
         setClipBg(col.theme?.soulab?.clipUrl ?? null);
         const dia = col.dias.find((d) => d.dia === diaN);
         const slide = dia?.slides?.[idx];
@@ -300,6 +311,7 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
           veuReveal={(estado.dia.slides?.[(estado.dia.slides?.length ?? 1) - 1] as { veuReveal?: string } | undefined)?.veuReveal}
           prog={prog}
+          nomeCarta={nomeCarta || undefined}
         />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
