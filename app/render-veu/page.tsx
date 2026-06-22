@@ -163,6 +163,7 @@ export default function RenderVeuPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
+  const [reelDur, setReelDur] = useState(0); // ?dur= => duração REAL do reel (s), para o karaoke sincronizar com a voz
   const splitRef = useRef(0.5); // passagem entre as 2 faces (proporcional ao texto)
 
   // o render conduz a animação frame a frame via window.__setKProg. Quando há
@@ -198,6 +199,7 @@ export default function RenderVeuPage() {
       const diaN = Number(p.get('dia'));
       const idx = Number(p.get('idx'));
       if (p.get('video') === '1') setVideo(true);
+      const durP = Number(p.get('dur')); if (durP > 0) setReelDur(durP); // duração real do reel (karaoke)
       if (!slug || !diaN || isNaN(idx)) { setErro('faltam params: slug, dia, idx'); return; }
       try {
         const r = await fetch(`/api/carrossel-veus/data?slug=${encodeURIComponent(slug)}`);
@@ -347,7 +349,10 @@ export default function RenderVeuPage() {
         <KaraokeMetodo
           linhas={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           palavras={estado.dia.vozPalavras!}
-          timeS={prog * (estado.dia.vozDur ?? 0)}
+          // SINCRONIA: o timeS tem de seguir o tempo REAL do reel (a duração dos frames),
+          // não a da voz — senão o karaoke arrasta-se atrás da voz (o +1s de respiro
+          // comprimia a linha do tempo). reelDur vem do render (&dur=).
+          timeS={prog * (reelDur || estado.dia.vozDur || 0)}
           imageUrl={estado.dia.slides?.[0]?.imageUrl}
           clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
           conta={getConta(s.contaId ?? '')!}
