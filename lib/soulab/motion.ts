@@ -68,10 +68,12 @@ export function construirMovimento(opts: MovimentoOpts): { prompt: string; negat
   const prompt =
     `Photorealistic, cinematic, premium fine-art film look. Animate THIS exact image with: ${movDesc}.${cenaCurta} ` +
     'Keep the exact same composition, subject, palette, lighting and contemplative mood. Smooth, calm, controlled, realistic motion. ' +
-    'No warping, no morphing, no distortion, no camera shake.';
+    'No warping, no morphing, no distortion, no camera shake. ' +
+    'CRITICAL: absolutely NO text, NO letters, NO words, NO writing, NO captions, NO subtitles, NO signage or labels anywhere in the frame; all surfaces, water and reflections stay completely clean and text-free.';
 
   const negBase =
-    'text, watermark, logo, morphing, warping, distortion, melting, body horror, glitch, extra limbs, deformed face, deformed hands, fast jittery motion, violent camera shake, strobing, flickering, low quality, blurry';
+    'text, letters, words, writing, handwriting, captions, subtitles, title, signage, labels, typography, fake text, gibberish text, garbled letters, characters, symbols, runes, numbers, watermark, logo, ' +
+    'morphing, warping, distortion, melting, body horror, glitch, extra limbs, deformed face, deformed hands, fast jittery motion, violent camera shake, strobing, flickering, low quality, blurry';
   const negative = houveElementos
     ? negBase
     : `added objects, invented new elements, people appearing, a standing person, falling petals, sparkles, glitter, floating particles, ${negBase}`;
