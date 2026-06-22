@@ -137,7 +137,9 @@ async function main() {
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
-      const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0`;
+      // &dur=DUR: a duração REAL do reel, para o karaoke acender as palavras pelo tempo
+      // do vídeo (e não pelo da voz, que é mais curta com o +1s de respiro).
+      const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0&dur=${DUR}`;
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
       for (let i = 0; i < N; i++) {
