@@ -95,6 +95,20 @@ function PlanoInner() {
 
   // AS 4 CONTAS de uma vez (o hub comum): testa 1 dia OU gera a semana de mãe + ver
   // + vir + viver, no offset visível. Cada chamada já persiste no servidor.
+  // MÃE: gerar SÓ um produto (Sou Aquela OU Não normalizes) — são produtos diferentes.
+  const gerarMaeUm = useCallback(async (only: 'carta' | 'naonorm') => {
+    if (busy) return;
+    const nome = only === 'carta' ? 'Sou Aquela' : 'Não normalizes';
+    setBusy(true); setMsg(`A gerar ${nome} · 1 dia…`);
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-mae', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: 'mae', dia: dias[0]?.data, offset: off, only }) });
+      const j = await r.json().catch(() => ({}));
+      setMsg(r.ok ? `${j.gerados ?? 0} post(s) de ${nome} gerados.` : `erro: ${j.erro ?? ''} ${j.detalhe ?? ''}`);
+      recarregar();
+    } catch (e) { setMsg(String(e)); }
+    finally { setBusy(false); }
+  }, [busy, dias, off, recarregar]);
+
   const correrQuatro = useCallback(async (modo: 'dia' | 'semana') => {
     if (busy) return;
     setBusy(true);
@@ -158,6 +172,10 @@ function PlanoInner() {
             <button onClick={() => correrQuatro('dia')} disabled={busy} title="gera 1 dia (manhã + tarde) nas 4 contas de uma vez" className="px-3 py-1.5 rounded-lg border border-white/20 opacity-80 disabled:opacity-50">testar 1 dia · 4 contas</button>
             <button onClick={() => correrQuatro('semana')} disabled={busy} title="gera a semana toda nas 4 contas de uma vez" className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: conta.cor, color: '#0F0F1A', background: conta.cor }}>{busy ? 'a gerar…' : '✦ gerar a semana · 4 contas'}</button>
             {ehMae && <>
+              <span className="opacity-30">·</span>
+              <button onClick={() => gerarMaeUm('carta')} disabled={busy} title="gera SÓ a carta Sou Aquela de 1 dia (sem a Não normalizes)" className="px-3 py-1.5 rounded-lg border border-amber-400/50 text-amber-200 disabled:opacity-50">📜 só Sou Aquela</button>
+              <button onClick={() => gerarMaeUm('naonorm')} disabled={busy} title="gera SÓ a Não normalizes de 1 dia (sem a carta)" className="px-3 py-1.5 rounded-lg border border-amber-400/50 text-amber-200 disabled:opacity-50">⚖️ só Não normalizes</button>
+              <span className="opacity-30">·</span>
               <button onClick={() => gerarSerie('vcsabia', 'vc sabia')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">vc sabia</button>
               <button onClick={() => gerarSerie('hojeemmim', 'hoje em mim')} disabled={busy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-50">hoje em mim</button>
               <Link href="/admin/carrossel" className="px-3 py-1.5 rounded-lg border border-white/25">carrosséis →</Link>

@@ -55,13 +55,16 @@ export function promptCartaFigura(personagem?: string, essencia?: string, pose?:
     'inside the frame, one ORDINARY everyday adult woman in her late thirties to early forties, a plain natural real look, carrying the quiet weight of everyday life',
     // VESTUÁRIO e TOM: vestida normal, ombros cobertos — NUNCA sensual nem de romance.
     'fully dressed in ordinary modern everyday clothes that cover her shoulders (a plain knit jumper, a shirt, a t-shirt, a coat); NEVER bare shoulders, NEVER off-the-shoulder, NEVER a gown or drapery, NEVER cleavage, NEVER lingerie',
-    'NOT sensual, NOT seductive, NOT sultry, NOT a romance-novel or fantasy heroine, NOT a muse, NOT a glamorous fashion model, NOT a young girl, NOT heavily made-up, NOT airbrushed, NOT elderly or wrinkled; the focus is her GESTURE and what it tells, never her beauty or her body',
+    'a CANDID woman ABSORBED IN HER ACTION (caught mid-gesture, doing something), NOT posing for the camera, NOT looking seductively at the viewer, NOT touching her own face, lips, hair or neck, no sultry, coy or come-hither expression; NOT sensual, NOT a muse, NOT a romance-novel heroine, NOT a glamorous fashion model, NOT a young girl, NOT heavily made-up, NOT airbrushed, NOT elderly; the focus is her ACTION, never her beauty or her body',
     'ambiguous unspecified ethnicity, warm medium-brown skin, mixed heritage, so she can represent any woman and is never tied to one single race',
-    // NÃO metemos o NOME do arquétipo no prompt: o Flux lia-o e carimbava-o como título
-    // (ex. "A Directora Invisábel"). É a POSE que diz quem ela é; o nome a app põe por cima.
-    // 4) POSE de corpo (a pose conta o arquétipo): travada se ditada.
-    'shown three-quarter or full body so her whole pose and gesture read clearly at a glance (not just a face or bust), centered in the card',
-    pose ? `her exact pose, gesture and expression, follow this precisely: ${pose}` : essencia ? `her pose, gesture and expression must convey this exact character: ${essencia}` : 'her pose conveys her character',
+    // NÃO metemos o NOME do arquétipo no prompt (o Flux carimbava-o como título). É a
+    // AÇÃO + o OBJETO que dizem quem ela é; o nome a app põe por cima.
+    // 4) A AÇÃO + O OBJETO são o ASSUNTO da carta (era o que faltava: identidade da função).
+    pose
+      ? `THE SUBJECT OF THE CARD IS WHAT SHE IS DOING — render this exactly and make it the focus: ${pose}. The OBJECT or element she handles/interacts with MUST be clearly visible and recognizable in the frame — it is what identifies her role; without it the card fails.`
+      : essencia ? `her action, the object she handles and her gesture must convey this exact character at a glance: ${essencia}` : 'her action and the object she handles tell her role',
+    // composição: corpo + mãos + objeto à vista, nunca retrato de rosto.
+    'composed as three-quarter or full body so her hands, her action AND the object are all visible together; NEVER a head-and-shoulders beauty portrait, never a face close-up',
     // 5) consistência do deck.
     'the gold frame, the painted illustration style, the lighting and the palette are IDENTICAL on every card of the deck; only the woman and her pose change',
     'gold used ONLY as fine linework on the matte black, never as a glow or light source',

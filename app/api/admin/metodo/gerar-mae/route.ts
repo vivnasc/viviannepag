@@ -55,9 +55,13 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { semanas?: number; offset?: number; dia?: string };
+  const body = (await req.json().catch(() => ({}))) as { semanas?: number; offset?: number; dia?: string; only?: 'carta' | 'naonorm' };
   const semanas = Math.min(2, Math.max(1, body.semanas ?? 1)); // mais pesado (2 IA/dia); cap a 2 semanas
   const offset = Math.max(-12, Math.min(12, body.offset ?? 0)); // 0 = esta semana
+  // Sou Aquela (carta) e Não normalizes são PRODUTOS DIFERENTES: dá para gerar só um.
+  // sem `only` = ambos (comportamento de sempre).
+  const fazCarta = body.only !== 'naonorm';
+  const fazNaonorm = body.only !== 'carta';
 
   const supabase = getSupabaseAdmin();
 
@@ -103,7 +107,7 @@ export async function POST(req: Request) {
     if (!personagem) continue;
 
     const slugCarta = `metodo-mae-carta-${d.data}`;
-    if (fazer(slugCarta)) {
+    if (fazCarta && fazer(slugCarta)) {
       // CARTA "Sou Aquela" GERADA (IA) a partir da ALMA da personagem (essência +
       // sombra) e do SABER do véu — INFINITA e funda, não um baralho fixo que repete
       // e sai raso. conceito '' = sem rótulo no cartão. A personagem vai no theme para
@@ -118,7 +122,7 @@ export async function POST(req: Request) {
     }
 
     const slugNN = `metodo-mae-naonorm-${d.data}`;
-    if (fazer(slugNN)) {
+    if (fazNaonorm && fazer(slugNN)) {
       try {
         // o "não normalizes" TEM de ter vários beats (faca + volta) E um CTA. Se a IA
         // vier curta (1-2 beats) OU sem envio/CTA, tenta de novo e fica com a melhor.
