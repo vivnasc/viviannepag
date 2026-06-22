@@ -12,7 +12,7 @@ import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
 import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
-import { KineticSlide, type EfeitoTexto } from '@/components/admin/KineticSlide';
+import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
@@ -290,6 +290,7 @@ export default function RenderVeuPage() {
           prog={prog}
           variante={s.variante}
           efeito={(s as { efeito?: EfeitoTexto }).efeito}
+          tipografia={(s as { tipografia?: Tipografia }).tipografia}
           conceito={s.conceito}
           clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
           {...((estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
