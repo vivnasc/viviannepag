@@ -68,8 +68,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo/mae', label: 'cartas + não normalizes' },
-      { href: '/admin/metodo/baralho', label: 'baralho · testar figuras' },
+      { href: '/admin/metodo/mae', label: 'produzir · autoridade' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
     ],
