@@ -10,7 +10,13 @@ const MODEL = 'kwaivgi/kling-v2.5-turbo-pro';
 
 // os INGREDIENTES de movimento (à escolha dela, multi-seleção). label = o que ela
 // vê; en = a frase real que vai para o Kling (inglês = melhor qualidade).
+//
+// 'natural' = anima O QUE A IMAGEM JÁ TEM, sem nomear nada (como no MJ: a taça
+// roda, o gelo mexe no copo, o líquido oscila, os reflexos respiram). NÃO inventa
+// elementos novos — por isso é tratado à parte do houveElementos (mantém a regra
+// estrita "não acrescentes"). É o modo "amplo" que ela pediu para não depender de mim.
 export const MOTION_INGREDIENTES = [
+  { id: 'natural', label: '🪄 o que está na imagem', en: 'bring THIS exact image to life with natural, lifelike motion of whatever truly exists in it — the main subject gently turning or settling, any liquid swirling and rippling, ice slowly shifting, reflections and highlights breathing, surfaces and fabric responding softly to gravity and air, gentle steam or condensation if present; animate only what is really there, add nothing new' },
   { id: 'agua', label: '💧 água', en: 'water gently rippling, reflections shifting on the surface' },
   { id: 'folhagem', label: '🌿 folhagem', en: 'foliage, plants and leaves swaying softly' },
   { id: 'passaro', label: '🐦 pássaro', en: 'a single bird slowly flying across, far in the distance' },
@@ -48,12 +54,20 @@ function fraseCamara(c: CamaraId): string {
 // (ou escrever movimento livre), o negativo NÃO proíbe "novos elementos" (ela quer
 // o pássaro/a água); se for só câmara/nada, mantém a regra "não inventes".
 export function construirMovimento(opts: MovimentoOpts): { prompt: string; negative: string } {
-  const ens = (opts.ingredientes ?? [])
+  const ids = opts.ingredientes ?? [];
+  // 'natural' anima só o que já existe → NÃO conta como "elemento novo" (mantém o
+  // negativo estrito). Os restantes (água, pássaro…) acrescentam algo à cena.
+  const idsElementos = ids.filter((id) => id !== 'natural');
+  const ens = idsElementos
     .map((id) => MOTION_INGREDIENTES.find((x) => x.id === id)?.en)
     .filter(Boolean) as string[];
+  const natural = ids.includes('natural')
+    ? MOTION_INGREDIENTES.find((x) => x.id === 'natural')?.en ?? null
+    : null;
   const partes: string[] = [];
   const cam = fraseCamara(opts.camara ?? 'suave');
   if (cam) partes.push(cam);
+  if (natural) partes.push(natural);
   partes.push(...ens);
   if (opts.livre?.trim()) partes.push(opts.livre.trim());
 
