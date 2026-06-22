@@ -83,6 +83,29 @@ function LegendaBox({ legenda, hashtags, disabled, busy, onSave }: { legenda: st
   );
 }
 
+// AGENDAR (autonomia): data + hora no próprio cartão. Ao agendar, marca aprovado
+// (a trava do cron) — depois publica-se sozinha à hora, e o vídeo prepara-se só.
+function AgendarBox({ agendadoEm, hora, disabled, busy, onAgendar, onDesagendar }: { agendadoEm: string | null; hora: string | null; disabled: boolean; busy: boolean; onAgendar: (data: string, hora: string) => void; onDesagendar: () => void }) {
+  const [data, setData] = useState(agendadoEm ?? '');
+  const [h, setH] = useState(hora ?? '13:00');
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  return (
+    <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">agendar publicação</p>
+      <div className="flex gap-1">
+        <input type="date" value={data} onChange={(e) => setData(e.target.value)} className="flex-1 text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none [color-scheme:dark]" style={{ color: SOULAB.paleta.texto }} />
+        <input type="time" value={h} onChange={(e) => setH(e.target.value)} className="text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none [color-scheme:dark]" style={{ color: SOULAB.paleta.texto }} />
+      </div>
+      <div className="flex gap-1">
+        <button type="button" onClick={() => onAgendar(data, h)} disabled={disabled || !data}
+          className="flex-1 text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a agendar…' : '📅 agendar'}</button>
+        {agendadoEm && <button type="button" onClick={onDesagendar} disabled={disabled} className="text-[0.62rem] px-2 py-1.5 rounded-lg border border-rose-400/40 text-rose-300 disabled:opacity-50">desagendar</button>}
+      </div>
+      <p className="text-[0.52rem] opacity-45 leading-snug">Publica-se sozinha à hora marcada; o vídeo é preparado automaticamente. A hora é no teu fuso.</p>
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -94,6 +117,7 @@ export default function SoulabPage() {
   const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
   const [motionOpen, setMotionOpen] = useState<string | null>(null);
   const [legendaOpen, setLegendaOpen] = useState<string | null>(null);
+  const [agendaOpen, setAgendaOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -135,6 +159,32 @@ export default function SoulabPage() {
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else { setMsg('Legenda guardada.'); setLegendaOpen(null); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const agendarPeca = useCallback(async (slug: string, agendadoEm: string, hora: string) => {
+    if (acaoSlug) return;
+    if (!agendadoEm) { setErro('Escolhe a data.'); return; }
+    setAcaoSlug(slug); setErro(null); setMsg('A agendar…');
+    try {
+      // agendadoEm vem do input date como 'YYYY-MM-DD' (local) — enviar tal e qual,
+      // NUNCA via toISOString (recuava um dia em PT). aprovado=true = a trava do cron.
+      const r = await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm, hora: hora || '13:00', aprovado: true }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Agendada. Publica-se sozinha à hora marcada (o vídeo é preparado automaticamente).'); setAgendaOpen(null); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const desagendarPeca = useCallback(async (slug: string) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A desagendar…');
+    try {
+      const r = await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: null, aprovado: false }) });
+      if (!r.ok) { const j = await r.json().catch(() => ({})); setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); }
+      else { setMsg('Desagendada.'); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -251,11 +301,13 @@ export default function SoulabPage() {
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
                 {motionOpen === p.slug && <MotionBox busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={(opts) => darMovimento(p.slug, opts)} />}
                 {legendaOpen === p.slug && <LegendaBox legenda={p.legenda ?? ''} hashtags={p.hashtags} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(leg, tags) => salvarLegenda(p.slug, leg, tags)} />}
+                {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
               </div>
             ))}
           </div>
