@@ -18,17 +18,18 @@ export async function POST(req: Request) {
   const { data: row, error } = await supabase.from('carousel_collections').select('dias').eq('slug', slug).maybeSingle();
   if (error || !row) return NextResponse.json({ erro: 'nao-encontrado' }, { status: 404 });
 
-  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ texto?: string }>; vozUrl?: string | null }>;
+  const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ texto?: string }>; vozUrl?: string | null; vozPalavras?: unknown; vozDur?: number }>;
   const slides = dias[0]?.slides ?? [];
   // a narração lê os slides por ordem (uma pausa entre eles para respirar).
   const texto = slides.map((s) => (s.texto ?? '').trim()).filter(Boolean).join('\n\n');
   if (!texto) return NextResponse.json({ erro: 'sem-texto', detalhe: 'este post não tem texto para narrar' }, { status: 409 });
 
-  let url: string;
-  try { url = await gerarVoz(texto, slug); }
+  let r: { url: string; palavras: unknown[]; dur: number };
+  try { r = await gerarVoz(texto, slug); }
   catch (e) { return NextResponse.json({ erro: 'voz', detalhe: e instanceof Error ? e.message : String(e) }, { status: 502 }); }
 
-  if (dias[0]) dias[0].vozUrl = url;
+  // guarda a voz + o tempo de cada PALAVRA (para o karaokê) + a duração.
+  if (dias[0]) { dias[0].vozUrl = r.url; dias[0].vozPalavras = r.palavras; dias[0].vozDur = r.dur; }
   await supabase.from('carousel_collections').update({ dias }).eq('slug', slug);
-  return NextResponse.json({ ok: true, voz: url });
+  return NextResponse.json({ ok: true, voz: r.url, palavras: r.palavras.length, dur: r.dur });
 }

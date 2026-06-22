@@ -50,6 +50,8 @@ export function promptCartaFigura(personagem?: string, essencia?: string, pose?:
     'a vertical TAROT/ORACLE CARD with a thin ornate GOLD double-line border framing the whole image, deep matte near-black background, card composition with the gold frame clearly visible on all four sides',
     // 2) MEDIUM: pintura, NUNCA foto/render glossy (o que a tornava foto de modelo).
     'a flat hand-painted editorial ILLUSTRATION, matte gouache with visible brush texture, clearly a painting, NOT a photograph, NOT a 3D render, NOT a glossy beauty portrait',
+    // 2b) ENQUADRAMENTO POSITIVO (os "NÃO" não bastam no Flux): descreve a cena certa.
+    'a FULL-LENGTH wide shot showing her from head to knees, her whole body and both hands busy with her task, her face plain, calm and ordinary, eyes turned DOWN to what her hands are doing (she is looking at her task, three-quarter away from the viewer), an everyday candid moment',
     // 3) a mulher: COMUM, vestida, real — NUNCA sensual/musa/modelo.
     // SEM DÍGITOS (um número no prompt, ex. "38", o Flux carimba-o como número da carta).
     'inside the frame, one ORDINARY everyday adult woman in her late thirties to early forties, a plain natural real look, carrying the quiet weight of everyday life',
