@@ -13,6 +13,17 @@ const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif'
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
 const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
+// EDITOR DE TIPOGRAFIA (à escolha da Vivianne): fonte, tamanho e cores das letras.
+// Só fontes que o render-veu carrega (senão o MP4 não as teria).
+export const FONTES_TEXTO = [
+  { id: 'serif', label: 'Serif' },
+  { id: 'sans', label: 'Sans' },
+  { id: 'mono', label: 'Mono' },
+] as const;
+export type FonteTexto = (typeof FONTES_TEXTO)[number]['id'];
+export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string }
+const FONT_MAP: Record<FonteTexto, string> = { serif: FONT_SERIF, sans: FONT_SANS, mono: FONT_MONO };
+
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
 // os EFEITOS de revelação do texto (à escolha da Vivianne; ver EFEITOS_TEXTO no admin).
@@ -24,7 +35,7 @@ export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
   { id: 'bloom', label: '✺ bloom luminoso' },
 ];
 
-export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
+export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   // o EFEITO do texto (à escolha): máquina de escrever · bloom luminoso · fade
   // suave · surgir (palavra a palavra, sem cursor). Back-compat: domingo => bloom.
@@ -61,6 +72,12 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
   const accent = (efeitoFinal === 'bloom' && ehDomingo) ? '#F0C6CF' : ACCENT; // Domingo de Luz: rosa; restante = destaque da paleta
+  // tipografia à escolha (com defaults = o de sempre)
+  const fontFam = FONT_MAP[tipografia?.fonte ?? 'serif'] ?? FONT_SERIF;
+  const tamFinal = tipografia?.tamanho ?? 92;
+  const corBase = tipografia?.cor ?? '#F4ECDD';     // a frase
+  const corPalavra = tipografia?.cor ?? '#F8EFE9';  // palavra normal
+  const accentTexto = tipografia?.corDestaque ?? accent; // palavra em realce + cursor
   const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série (veu.a.veu)
   // a MARCA é parametrizável: por defeito a veu.a.veu, mas outra conta (ex. Soulab)
   // passa o seu selo/assinatura/site e pode esconder o selo e o rótulo do conceito.
@@ -100,7 +117,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
 
         {/* frase */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 120px', zIndex: 2 }}>
-          <p style={{ fontFamily: FONT_SERIF, fontWeight: 300, fontSize: 92, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: 'center', color: '#F4ECDD', textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
+          <p style={{ fontFamily: fontFam, fontWeight: 300, fontSize: tamFinal, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: 'center', color: corBase, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
               const sombra = imageUrl ? (dest ? '0 2px 24px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)') : 'none';
@@ -129,10 +146,10 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
                 st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: sombra };
               }
               return (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accent : '#F8EFE9', fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>
+                <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accentTexto : corPalavra, fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>
                   {w}
                   {/* cursor DENTRO da última palavra visível — acompanha a escrita (antes ficava parado no fim da frase, porque as palavras invisíveis já reservam o espaço) */}
-                  {aindaEscreve && efeitoFinal === 'maquina' && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accent, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
+                  {aindaEscreve && efeitoFinal === 'maquina' && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accentTexto, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
                 </span>
               );
             })}

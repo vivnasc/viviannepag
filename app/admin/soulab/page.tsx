@@ -4,7 +4,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
-import { KineticSlide, EFEITOS_TEXTO, type EfeitoTexto } from '@/components/admin/KineticSlide';
+import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, SOULAB_SLIDE, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
@@ -19,7 +19,7 @@ const MUNDO = SOULAB_MUNDO as Mundo; // a paleta 'soulab' vive em PALETAS (Recor
 type Peca = {
   slug: string; tipo: string | null; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; somUrl: string | null; legenda: string | null;
-  hashtags: string[]; fundoPrompt: string | null; efeito: string | null;
+  hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -165,6 +165,46 @@ function SomBox({ somUrl, disabled, busy, onGerar, onRemover }: { somUrl: string
   );
 }
 
+// EDITOR DE TIPOGRAFIA (autonomia): fonte, tamanho e cores das letras, com
+// pré-visualização ao vivo (a frase completa). O render usa o que ela guardar.
+function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boolean; busy: boolean; onSave: (t: Tipografia) => void }) {
+  const t0 = peca.tipografia ?? {};
+  const [fonte, setFonte] = useState<FonteTexto>((t0.fonte as FonteTexto) ?? 'serif');
+  const [tamanho, setTamanho] = useState<number>(t0.tamanho ?? 92);
+  const [cor, setCor] = useState<string>(t0.cor ?? '#F4ECDD');
+  const [corDestaque, setCorDestaque] = useState<string>(t0.corDestaque ?? SOULAB.paleta.destaque);
+  const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
+  const tipo: Tipografia = { fonte, tamanho, cor, corDestaque };
+  return (
+    <div className="px-2 pb-2 space-y-2 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">tipografia (vê ao vivo)</p>
+      <div className="rounded-lg overflow-hidden border border-white/10">
+        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={1} tipografia={tipo} {...SOULAB_SLIDE} />
+      </div>
+      <div className="flex flex-wrap gap-1 items-center">
+        <span className="text-[0.55rem] opacity-50 mr-0.5">fonte:</span>
+        {FONTES_TEXTO.map((f) => (
+          <button key={f.id} type="button" onClick={() => setFonte(f.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+            style={fonte === f.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{f.label}</button>
+        ))}
+      </div>
+      <label className="flex items-center gap-2 text-[0.6rem] opacity-80">
+        <span className="opacity-60">tamanho</span>
+        <input type="range" min={56} max={128} step={2} value={tamanho} onChange={(e) => setTamanho(Number(e.target.value))} className="flex-1 accent-current" style={{ color: dz }} />
+        <span className="tabular-nums w-7 text-right">{tamanho}</span>
+      </label>
+      <div className="flex gap-3">
+        <label className="flex items-center gap-1.5 text-[0.6rem] opacity-80"><span className="opacity-60">texto</span>
+          <input type="color" value={cor} onChange={(e) => setCor(e.target.value)} className="w-7 h-6 rounded bg-transparent border border-white/15" /></label>
+        <label className="flex items-center gap-1.5 text-[0.6rem] opacity-80"><span className="opacity-60">realce</span>
+          <input type="color" value={corDestaque} onChange={(e) => setCorDestaque(e.target.value)} className="w-7 h-6 rounded bg-transparent border border-white/15" /></label>
+      </div>
+      <button type="button" onClick={() => onSave(tipo)} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tipografia'}</button>
+    </div>
+  );
+}
+
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
@@ -179,6 +219,7 @@ export default function SoulabPage() {
   const [agendaOpen, setAgendaOpen] = useState<string | null>(null);
   const [efeitoOpen, setEfeitoOpen] = useState<string | null>(null);
   const [somOpen, setSomOpen] = useState<string | null>(null);
+  const [tipoOpen, setTipoOpen] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -271,6 +312,18 @@ export default function SoulabPage() {
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else { setMsg(remover ? 'Som removido (volta à música no render).' : 'Som da cena gerado. Ouve em baixo; o render usa-o como áudio.'); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const salvarTipografia = useCallback(async (slug: string, tipografia: Tipografia) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar a tipografia…');
+    try {
+      const r = await fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipografia }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Tipografia guardada. O reel usa-a no render.'); setTipoOpen(null); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -388,6 +441,7 @@ export default function SoulabPage() {
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setSomOpen(somOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="gerar som ambiente a partir da cena" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 som {somOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => setTipoOpen(tipoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="editor de tipografia: fonte, tamanho, cor" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras {tipoOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
@@ -398,6 +452,7 @@ export default function SoulabPage() {
                 {agendaOpen === p.slug && <AgendarBox agendadoEm={p.agendadoEm} hora={p.hora} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onAgendar={(data, h) => agendarPeca(p.slug, data, h)} onDesagendar={() => desagendarPeca(p.slug)} />}
                 {efeitoOpen === p.slug && <EfeitoBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(ef) => salvarEfeito(p.slug, ef)} />}
                 {somOpen === p.slug && <SomBox somUrl={p.somUrl} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onGerar={() => gerarSomPeca(p.slug, false)} onRemover={() => gerarSomPeca(p.slug, true)} />}
+                {tipoOpen === p.slug && <TipografiaBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSave={(t) => salvarTipografia(p.slug, t)} />}
               </div>
             ))}
           </div>
