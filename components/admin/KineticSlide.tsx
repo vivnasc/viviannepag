@@ -27,10 +27,11 @@ const FONT_MAP: Record<FonteTexto, string> = { serif: FONT_SERIF, sans: FONT_SAN
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
 // os EFEITOS de revelação do texto (à escolha da Vivianne; ver EFEITOS_TEXTO no admin).
-export type EfeitoTexto = 'maquina' | 'bloom' | 'fade' | 'surgir';
+export type EfeitoTexto = 'maquina' | 'teclado' | 'bloom' | 'fade' | 'surgir';
 export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
-  { id: 'maquina', label: '⌨︎ máquina de escrever' },
-  { id: 'surgir', label: '✶ surgir (palavra a palavra)' },
+  { id: 'teclado', label: '⌨︎ teclado (letra a letra)' },
+  { id: 'maquina', label: '⌨︎ máquina (palavra a palavra)' },
+  { id: 'surgir', label: '✶ surgir' },
   { id: 'fade', label: '◍ fade suave' },
   { id: 'bloom', label: '✺ bloom luminoso' },
 ];
@@ -67,7 +68,13 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
       if (ok) for (let j = 0; j < pw.length; j++) goldIdx.add(i + j);
     }
   }
-  const velocidade = efeitoFinal === 'bloom' ? 0.85 : efeitoFinal === 'fade' ? 0.6 : efeitoFinal === 'surgir' ? 0.82 : 0.72;
+  const velocidade = efeitoFinal === 'bloom' ? 0.85 : efeitoFinal === 'fade' ? 0.6 : efeitoFinal === 'surgir' ? 0.82 : efeitoFinal === 'teclado' ? 0.74 : 0.72;
+  // TECLADO (letra a letra): offsets de caráter por palavra, para revelar carácter
+  // a carácter (mantendo o espaço reservado, sem reflow).
+  const ehTeclado = efeitoFinal === 'teclado';
+  const chOffsets: number[] = [];
+  let chTotal = 0;
+  if (ehTeclado) { let acc = 0; for (const w of palavras) { chOffsets.push(acc); acc += w.length + 1; } chTotal = Math.max(0, acc - 1); }
   const revelar = Math.min(1, prog / velocidade); // bloom/surgir revelam mais devagar; fade abre cedo
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
@@ -138,6 +145,9 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
                 const ini = n > 1 ? (i / (n - 1)) * 0.55 : 0;
                 const f = Math.max(0, Math.min(1, (revelar - ini) / 0.35));
                 st = { opacity: f, transform: `translateY(${(1 - f) * 11}px)`, textShadow: sombra };
+              } else if (efeitoFinal === 'teclado') {
+                // teclado: letra a letra; o espaço fica reservado (sem reflow)
+                st = { opacity: 1, textShadow: sombra };
               } else {
                 // máquina de escrever (default): palavra a palavra com cursor
                 let op = 0, dy = 14;
@@ -145,11 +155,18 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
                 else if (i === ultimoVisivel) { const f = Math.max(0, Math.min(1, mostradas - i)); op = f; dy = 14 * (1 - f); }
                 st = { opacity: op, transform: `translateY(${dy}px)`, textShadow: sombra };
               }
+              const cursor = <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accentTexto, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />;
+              const startCh = ehTeclado ? chOffsets[i] : 0;
+              const charRevel = revelar * chTotal;
+              const visCh = ehTeclado ? Math.max(0, Math.min(w.length, Math.round(charRevel - startCh))) : w.length;
+              const cursorTeclado = ehTeclado && aindaEscreve && charRevel >= startCh && charRevel < startCh + w.length + 1;
               return (
                 <span key={i} style={{ display: 'inline-block', marginRight: '0.28em', color: dest ? accentTexto : corPalavra, fontStyle: dest ? 'italic' : 'normal', transition: 'none', ...st }}>
-                  {w}
-                  {/* cursor DENTRO da última palavra visível — acompanha a escrita (antes ficava parado no fim da frase, porque as palavras invisíveis já reservam o espaço) */}
-                  {aindaEscreve && efeitoFinal === 'maquina' && i === ultimoVisivel && <span style={{ display: 'inline-block', width: 5, height: '0.92em', background: accentTexto, opacity: 0.9, transform: 'translateY(0.12em)', marginLeft: '0.08em' }} />}
+                  {ehTeclado
+                    // teclado: revela os carateres já escritos + cursor; o resto fica invisível (espaço reservado, sem reflow)
+                    ? (<>{w.slice(0, visCh)}{cursorTeclado && cursor}<span style={{ opacity: 0 }}>{w.slice(visCh)}</span></>)
+                    // palavra a palavra (cursor só no modo máquina, na última palavra visível)
+                    : (<>{w}{aindaEscreve && efeitoFinal === 'maquina' && i === ultimoVisivel && cursor}</>)}
                 </span>
               );
             })}

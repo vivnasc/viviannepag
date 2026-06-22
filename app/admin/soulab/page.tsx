@@ -252,6 +252,9 @@ function PreviewBox({ peca }: { peca: Peca }) {
 
 export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
+  const [aba, setAba] = useState<'por-agendar' | 'agendadas' | 'publicadas' | 'todas'>('por-agendar');
+  const [filtroTipo, setFiltroTipo] = useState<string>('todos');
+  const [busca, setBusca] = useState('');
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
   const [tema, setTema] = useState('');
   const [quantos, setQuantos] = useState(1);
@@ -409,6 +412,28 @@ export default function SoulabPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
+  const estadoDe = (p: Peca): 'por-agendar' | 'agendadas' | 'publicadas' => p.publicado ? 'publicadas' : p.agendadoEm ? 'agendadas' : 'por-agendar';
+  const cont = {
+    'por-agendar': pecas.filter((p) => estadoDe(p) === 'por-agendar').length,
+    agendadas: pecas.filter((p) => estadoDe(p) === 'agendadas').length,
+    publicadas: pecas.filter((p) => estadoDe(p) === 'publicadas').length,
+    todas: pecas.length,
+  };
+  const buscaN = busca.trim().toLowerCase();
+  const pecasFiltradas = pecas
+    .filter((p) => aba === 'todas' || estadoDe(p) === aba)
+    .filter((p) => filtroTipo === 'todos' || p.tipo === filtroTipo)
+    .filter((p) => !buscaN || `${p.texto} ${p.conceito} ${(p.momentos ?? []).join(' ')}`.toLowerCase().includes(buscaN));
+  const pecasOrdenadas = aba === 'agendadas'
+    ? [...pecasFiltradas].sort((a, b) => `${a.agendadoEm ?? ''}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? ''}${b.hora ?? ''}`))
+    : pecasFiltradas;
+  const ABAS: { id: 'por-agendar' | 'agendadas' | 'publicadas' | 'todas'; label: string }[] = [
+    { id: 'por-agendar', label: 'por agendar' },
+    { id: 'agendadas', label: 'agendadas' },
+    { id: 'publicadas', label: 'publicadas' },
+    { id: 'todas', label: 'todas' },
+  ];
+
   return (
     <main className={`${FONTS} min-h-screen px-4 py-8 md:px-8`} style={{ background: SOULAB.paleta.bg2, color: SOULAB.paleta.texto }}>
       <div className="max-w-4xl mx-auto">
@@ -470,10 +495,34 @@ export default function SoulabPage() {
 
         {/* peças geradas */}
         <section>
-          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">peças <span className="opacity-40">· {pecas.length}</span></h2>
+          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-2">peças <span className="opacity-40">· {pecas.length}</span></h2>
+
+          {/* separadores por estado */}
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {ABAS.map((a) => (
+              <button key={a.id} onClick={() => setAba(a.id)} className="text-[0.72rem] px-2.5 py-1 rounded-full border"
+                style={aba === a.id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.18)', color: SOULAB.paleta.texto }}>
+                {a.label} <span className="opacity-60">· {cont[a.id]}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* filtro por ângulo + busca */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+            <button onClick={() => setFiltroTipo('todos')} className="text-[0.62rem] px-2 py-0.5 rounded-full border"
+              style={filtroTipo === 'todos' ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>todos</button>
+            {TIPOS_SOULAB.map((t) => (
+              <button key={t.id} onClick={() => setFiltroTipo(t.id)} title={t.label} className="text-[0.62rem] px-2 py-0.5 rounded-full border"
+                style={filtroTipo === t.id ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>{t.emoji}</button>
+            ))}
+            <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="procurar…"
+              className="ml-auto text-[0.7rem] px-2.5 py-1 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
+          </div>
+
           {pecas.length === 0 && <p className="text-[0.78rem] opacity-50">Ainda nada. Escolhe um ângulo e carrega &quot;gerar&quot;.</p>}
+          {pecas.length > 0 && pecasOrdenadas.length === 0 && <p className="text-[0.76rem] opacity-50">Nada neste separador/filtro.</p>}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {pecas.map((p) => (
+            {pecasOrdenadas.map((p) => (
               <div key={p.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
                 <div className="relative">
                   <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...SOULAB_SLIDE} />
