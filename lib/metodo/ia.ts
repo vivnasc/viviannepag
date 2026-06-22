@@ -50,10 +50,15 @@ export function promptCartaFigura(personagem?: string, essencia?: string, pose?:
     'a vertical TAROT/ORACLE CARD with a thin ornate GOLD double-line border framing the whole image, deep matte near-black background, card composition with the gold frame clearly visible on all four sides',
     // 2) MEDIUM: pintura, NUNCA foto/render glossy (o que a tornava foto de modelo).
     'a flat hand-painted editorial ILLUSTRATION, matte gouache with visible brush texture, clearly a painting, NOT a photograph, NOT a 3D render, NOT a glossy beauty portrait',
-    // 3) a mulher: simples, comum, adulta — NUNCA modelo glamorosa nem miúda.
-    'inside the frame, one ORDINARY everyday adult woman around 38 years old (between 32 and 45), a plain natural look, NOT a glamorous fashion model, NOT a young girl, NOT heavily made-up, NOT airbrushed, NOT elderly or wrinkled',
+    // 3) a mulher: COMUM, vestida, real — NUNCA sensual/musa/modelo.
+    // SEM DÍGITOS (um número no prompt, ex. "38", o Flux carimba-o como número da carta).
+    'inside the frame, one ORDINARY everyday adult woman in her late thirties to early forties, a plain natural real look, carrying the quiet weight of everyday life',
+    // VESTUÁRIO e TOM: vestida normal, ombros cobertos — NUNCA sensual nem de romance.
+    'fully dressed in ordinary modern everyday clothes that cover her shoulders (a plain knit jumper, a shirt, a t-shirt, a coat); NEVER bare shoulders, NEVER off-the-shoulder, NEVER a gown or drapery, NEVER cleavage, NEVER lingerie',
+    'NOT sensual, NOT seductive, NOT sultry, NOT a romance-novel or fantasy heroine, NOT a muse, NOT a glamorous fashion model, NOT a young girl, NOT heavily made-up, NOT airbrushed, NOT elderly or wrinkled; the focus is her GESTURE and what it tells, never her beauty or her body',
     'ambiguous unspecified ethnicity, warm medium-brown skin, mixed heritage, so she can represent any woman and is never tied to one single race',
-    personagem ? `she embodies the archetype "${personagem}"` : '',
+    // NÃO metemos o NOME do arquétipo no prompt: o Flux lia-o e carimbava-o como título
+    // (ex. "A Directora Invisábel"). É a POSE que diz quem ela é; o nome a app põe por cima.
     // 4) POSE de corpo (a pose conta o arquétipo): travada se ditada.
     'shown three-quarter or full body so her whole pose and gesture read clearly at a glance (not just a face or bust), centered in the card',
     pose ? `her exact pose, gesture and expression, follow this precisely: ${pose}` : essencia ? `her pose, gesture and expression must convey this exact character: ${essencia}` : 'her pose conveys her character',
@@ -62,8 +67,8 @@ export function promptCartaFigura(personagem?: string, essencia?: string, pose?:
     'gold used ONLY as fine linework on the matte black, never as a glow or light source',
     // 6) matar disco/auréola atrás da cabeça.
     'the background directly behind her head and body is plain empty matte black; ABSOLUTELY NO halo, NO sun, NO moon, NO large circle or ring, NO coloured disc, NO yellow circle, NO glowing orb or aura behind her, NO mandala, NO saint, NO religious or sacred iconography, NO candle, NO flames, NO crown, NO wings, NO byzantine or icon look, NO ornate medieval gown',
-    // 7) zero texto (o nome é escrito pela app por cima).
-    'a completely clean image with NO text anywhere: NO title, NO name, NO caption, NO title plate, NO cartouche, NO banner, NO label, NO letters, NO words, NO numbers, NO watermark, NO logo',
+    // 7) zero texto (o nome é escrito pela app por cima). Reforço explícito do topo e fundo.
+    'a completely clean image with NO text, NO digits and NO numerals ANYWHERE: NO number at the top of the card, NO card number, NO roman numerals, NO title at the bottom, NO name, NO caption, NO title plate, NO cartouche, NO banner, NO label, NO letters, NO words, NO watermark, NO logo; the top and bottom inner areas are plain empty dark background',
   ].filter(Boolean).join(', ');
 }
 
@@ -91,9 +96,10 @@ Devolve SÓ o prompt, numa linha, em inglês, sem aspas e sem explicações.`
 
 ASSINATURA VISUAL (INVIOLÁVEL — é o que torna o feed inconfundivelmente desta marca): pintura fine-art à maneira RENASCENTISTA, sfumato, textura pictórica visível (NÃO é fotografia, NÃO é stock), contemplativo e intemporal. Luminoso e legível (nunca quase-preto).
 
-PALETA E MUNDO: ${corMundo}. Os SÍMBOLOS são os da conta (mas a COR é a do véu). Representa: ${conta.depois}
+PALETA E MUNDO: ${corMundo}. Os SÍMBOLOS da conta entram SÓ ao serviço da frase (e a COR é a do véu). Representa: ${conta.depois}
 ${frase ? `A FRASE deste post é: «${frase}».
-CONEXÃO IMAGEM↔TEXTO (o mais importante, como nas séries VC Sabia / Hoje em Mim): a imagem tem de ENCARNAR esta frase — uma cena ou objeto concreto que representa o ESTADO ou a METÁFORA por trás dela, NÃO um fundo genérico. A FRASE manda o ASSUNTO; o mundo da conta dá só a PALETA, a luz e o tratamento. Ex.: uma frase sobre adiar a vida → algo que evoque espera/limiar; sobre o corpo → algo do corpo/casa; etc. Concreto, sensorial, sem pessoas.` : `ASSUNTO: cena real e concreta que encarne o significado da conta (interiores, objetos, janelas, água, paisagens, detalhes), variada, sem pessoas.`}
+CONEXÃO IMAGEM↔TEXTO (o que MAIS importa, como no "Hoje em Mim" que rendeu): a imagem tem de ENCARNAR ESTA frase — o ASSUNTO é a SITUAÇÃO concreta que ela descreve (o sítio, o objeto, o momento), não os símbolos da conta. A conta dá só a PALETA, a luz e o tratamento; os seus símbolos entram apenas se servirem a frase, senão ignora-os.
+REGRA DURA (anti-desligado): é PROIBIDO um fundo bonito que NÃO tenha a ver com a frase — nada de barco no mar, paisagem, pôr do sol, água genérica, montanhas, quando a frase fala de outra coisa. Lê a frase e escolhe a cena DELA. Ex.: frase sobre uma colega que se expressa numa reunião → uma sala de reunião vazia ao fim do dia, uma cadeira à cabeceira, a luz de um escritório; frase sobre adiar a vida → um limiar, uma porta entreaberta; sobre carregar tudo → uma mesa cheia, uma lista interminável. Concreto, sensorial, SEM pessoas.` : `ASSUNTO: cena real e concreta que encarne o significado da conta (interiores, objetos, janelas, paisagens, detalhes), variada, sem pessoas.`}
 MOVIMENTO (INVIOLÁVEL — a imagem vai ser ANIMADA depois): a cena TEM de conter, em destaque, pelo menos UM elemento que se mova sozinho de forma natural e contínua — água a ondular, chama/vela a tremer, fumo ou incenso a subir, névoa/neblina a derivar, vapor, mar/ondas, chuva, tecido/cortina ao vento, luz a tremeluzir, brasas, pó num raio de sol, ramos/folhagem ao vento, reflexos na água. É este elemento que dá vida ao vídeo. PROIBIDO uma cena que seja só um objeto parado sem nada vivo (ex.: um casaco pendurado, uma cadeira vazia, um copo de água pousado, um livro fechado): se a metáfora pedir um objeto assim, ENCENA-O sempre com um elemento em movimento à volta (a luz a tremer sobre ele, fumo a passar, a água ao lado a mexer, a cortina atrás ao vento). A metáfora da frase manda o assunto; o movimento é OBRIGATÓRIO na composição.
 COMPOSIÇÃO: varia (plano largo / macro / interior / vista de cima / ao nível do olhar). LUZ: dentro da paleta da conta, varia a hora.
 ${evita}

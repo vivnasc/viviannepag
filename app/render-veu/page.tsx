@@ -90,17 +90,22 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog 
 function CartaSequencia({ beats, conta, prog }: { beats: string[]; conta: Conta; prog: number }) {
   const n = Math.max(1, beats.length);
   const w = 1 / n;
+  // TRANSIÇÃO DE ABERTURA DE PÁGINA (pedido da Vivianne): cada parte da carta entra a
+  // rodar a partir da margem esquerda, como uma página de livro a abrir. perspective no
+  // contentor + rotateY por beat (de -100º até 0 durante a entrada).
   return (
-    <div style={{ position: 'relative', width: 1080, height: 1920, background: '#0d0a06', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: 1080, height: 1920, background: '#0d0a06', overflow: 'hidden', perspective: 2200 }}>
       {beats.map((b, i) => {
         const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
         const isLast = i === n - 1;
-        const fin = Math.min(1, lp / 0.18);
+        const fin = Math.min(1, lp / 0.22);
         const fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
         const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
         if (op <= 0) return null;
+        const ry = (1 - fin) * -100; // a página abre: -100º → 0º
+        const aAbrir = i > 0 && ry < -0.5;
         return (
-          <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+          <div key={i} style={{ position: 'absolute', inset: 0, opacity: op, transform: i > 0 ? `rotateY(${ry}deg)` : undefined, transformOrigin: 'left center', transformStyle: 'preserve-3d', boxShadow: aAbrir ? '0 0 120px rgba(0,0,0,0.7)' : 'none' }}>
             <CartaSlide texto={b} conta={conta} capa={i === 0} prog={lp} semRodape={!isLast} />
           </div>
         );

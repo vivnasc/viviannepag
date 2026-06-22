@@ -120,11 +120,11 @@ export async function POST(req: Request) {
     const slugNN = `metodo-mae-naonorm-${d.data}`;
     if (fazer(slugNN)) {
       try {
-        // o "não normalizes" TEM de ter vários beats (faca + volta). Se a IA vier
-        // curta (1-2 beats), tenta de novo e fica com a versão mais completa.
+        // o "não normalizes" TEM de ter vários beats (faca + volta) E um CTA. Se a IA
+        // vier curta (1-2 beats) OU sem envio/CTA, tenta de novo e fica com a melhor.
         let sb = await gerarStoryboard('mae', 'profundidade', veu, personagem, apiKey, evitar);
-        if (sb.beats.length < 4) {
-          try { const sb2 = await gerarStoryboard('mae', 'profundidade', veu, personagem, apiKey, evitar); if (sb2.beats.length > sb.beats.length) sb = sb2; } catch { /* fica a 1.ª */ }
+        if (sb.beats.length < 4 || !sb.envio) {
+          try { const sb2 = await gerarStoryboard('mae', 'profundidade', veu, personagem, apiKey, evitar); if ((sb2.beats.length > sb.beats.length) || (!sb.envio && sb2.envio)) sb = sb2; } catch { /* fica a 1.ª */ }
         }
         if (sb.beats.length) { rows.push(montarRow(slugNN, d.data, HORA_NAONORM, 'naonormalizes', 'Não normalizes', veu, sb.beats, sb.envio)); evitar.push(sb.beats[0].texto); }
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }

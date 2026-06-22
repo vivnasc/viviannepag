@@ -24,12 +24,14 @@ const TIPO_LABEL: Record<string, string> = {
 // da Vivianne): todos são texto-sobre-imagem, logo imagem SIM. Som ambiente nos reels
 // que MEXEM (cena · não normalizes · espelho) E na CARTA DE RENOMEAR (decisão da
 // Vivianne: tipográfica pura ficava simplória; leva som por baixo, mesmo sem imagem).
-const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean }> = {
-  carta: { imagem: true, som: false }, naonormalizes: { imagem: true, som: true },
-  cena: { imagem: true, som: true }, espelho: { imagem: true, som: true },
-  cartaRenomear: { imagem: false, som: true }, repara: { imagem: true, som: false },
+// voz = narração (a voz da Vivianne, ElevenLabs) — decisão dela de a meter (reverte o
+// antigo "voz em nenhum"). Disponível em todos os formatos com texto.
+const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean; voz: boolean }> = {
+  carta: { imagem: true, som: false, voz: true }, naonormalizes: { imagem: true, som: true, voz: true },
+  cena: { imagem: true, som: true, voz: true }, espelho: { imagem: true, som: true, voz: true },
+  cartaRenomear: { imagem: false, som: true, voz: true }, repara: { imagem: true, som: false, voz: true },
 };
-const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false };
+const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false, voz: true };
 // 2.ª-feira (ISO) da semana a `offset` semanas de hoje — para testar/gerar 1 dia.
 const segISO = (offset: number) => { const x = new Date(); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd) + offset * 7); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };
 const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
@@ -241,6 +243,8 @@ export default function MetodoContaPage() {
 
   // dispara o render (GitHub Actions) de UM slug. O MP4 sai com o @conta.
   const [renderBusy, setRenderBusy] = useState(false);
+  // "ver grande": abre um slide do reel em tamanho real (a lupa é pequena demais).
+  const [grande, setGrande] = useState<{ texto: string; capa: boolean } | null>(null);
   const renderOne = useCallback(async (slug: string) => {
     const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
     if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); }
@@ -364,6 +368,20 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setSomBusy(null); }
   }, [somBusy, recarregar]);
+
+  // VOZ (narração, ElevenLabs TTS): a voz da Vivianne lê o texto do post. Ouves no player.
+  const [vozBusy, setVozBusy] = useState<string | null>(null);
+  const gerarVozTeste = useCallback(async (slug: string) => {
+    if (vozBusy) return;
+    setVozBusy(slug); setErro(null); setMsg('A gerar a voz (ElevenLabs)…');
+    try {
+      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg('Voz gerada. Ouve no player.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, vozUrl: j.voz } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setVozBusy(null); }
+  }, [vozBusy, recarregar]);
 
   // CARTA DE RENOMEAR (vir): gera UMA carta (6 passos) e persiste-a (subtipo 'carta').
   const [cartaBusy, setCartaBusy] = useState(false);
@@ -600,13 +618,13 @@ export default function MetodoContaPage() {
                 </div>
                 <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 snap-x">
                   {detalhe.beats.map((b, i) => (
-                    <div key={i} className="shrink-0 w-[150px] snap-start">
-                      <span className="block text-center text-[0.55rem] uppercase tracking-wider opacity-45 mb-0.5">slide {i + 1}/{detalhe.beats.length}</span>
+                    <button key={i} onClick={() => setGrande({ texto: b, capa: i === 0 })} title="ver grande" className="shrink-0 w-[150px] snap-start text-left">
+                      <span className="block text-center text-[0.55rem] uppercase tracking-wider opacity-45 mb-0.5">slide {i + 1}/{detalhe.beats.length} · 🔍</span>
                       <MetodoSlide texto={b} conceito={i === 0 ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} clipUrl={i === 0 ? (detalhe.clip ?? undefined) : undefined} conta={conta} anim="reveal" prog={1} />
-                    </div>
+                    </button>
                   ))}
                 </div>
-                <p className="text-center text-[0.6rem] opacity-50 mt-1">cada cartão é um slide do reel (arrasta para o lado). A imagem é a mesma cena em todos; gera-a em &quot;gerar imagem&quot;.</p>
+                <p className="text-center text-[0.6rem] opacity-50 mt-1">clica num cartão para o ver GRANDE. Cada cartão é um slide do reel; a imagem é a mesma cena em todos.</p>
               </div>
             ) : detalhe.texto2 ? (
               <div>
@@ -672,7 +690,6 @@ export default function MetodoContaPage() {
                     <div className="flex items-center gap-1.5 justify-center">
                       <button onClick={() => novaImagem(detalhe.slug)} disabled={novaImgBusy === detalhe.slug} title={temImg ? 'trocar por outra imagem (mantém o texto)' : 'gerar a imagem deste post'} className={temImg ? 'text-amber-300' : 'text-emerald-300'}>{novaImgBusy === detalhe.slug ? '…' : temImg ? 'outra' : 'gerar imagem'}</button>
                       {temImg && <button onClick={() => novaImagem(detalhe.slug, 'dramatico')} disabled={novaImgBusy === detalhe.slug} title="versão dramática (teste)" className="opacity-70">⚡</button>}
-                      {temImg && <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="animar a imagem (Kling)" className="opacity-70">🎬</button>}
                     </div>
                   </div>
                 ) : (
@@ -681,11 +698,26 @@ export default function MetodoContaPage() {
                     <span className="text-[0.62rem]">tipográfica</span>
                   </div>
                 )}
+                {/* MOTION (opção da Vivianne: ela decide por post se anima a imagem com
+                    movimento REAL + zoom lento). Só faz sentido com imagem gerada. */}
+                {cap.imagem && temImg && (
+                  <div className={`rounded-lg border px-2.5 py-1.5 text-center ${detalhe.clip ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
+                    <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">motion</span>
+                    <button onClick={() => animar(detalhe.slug)} disabled={animarBusy === detalhe.slug} title="animar a imagem: movimento real do que existe + zoom lento (tu decides se queres)" className={detalhe.clip ? 'text-amber-300' : 'text-emerald-300'}>{animarBusy === detalhe.slug ? '…' : detalhe.clip ? 'outro' : '🎬 animar'}</button>
+                  </div>
+                )}
                 {/* 3 · SOM (só os reels que mexem) */}
                 {cap.som && (
                   <div className={`rounded-lg border px-2.5 py-1.5 text-center ${detalhe.som ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
                     <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">3 · som</span>
                     <button onClick={() => gerarSomTeste(detalhe.slug)} disabled={somBusy === detalhe.slug} title="som ambiente (ElevenLabs)" className={detalhe.som ? 'text-amber-300' : 'text-emerald-300'}>{somBusy === detalhe.slug ? '…' : detalhe.som ? 'outro' : 'gerar som'}</button>
+                  </div>
+                )}
+                {/* 3b · VOZ (narração — a voz da Vivianne lê o texto) */}
+                {cap.voz && (
+                  <div className={`rounded-lg border px-2.5 py-1.5 text-center ${detalhe.vozUrl ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
+                    <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">voz</span>
+                    <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="narração (a tua voz, ElevenLabs)" className={detalhe.vozUrl ? 'text-amber-300' : 'text-emerald-300'}>{vozBusy === detalhe.slug ? '…' : detalhe.vozUrl ? 'outra' : 'gerar voz'}</button>
                   </div>
                 )}
                 {/* 4 · RENDER */}
@@ -711,6 +743,15 @@ export default function MetodoContaPage() {
                 </div>
               </div>
             )}
+            {detalhe.vozUrl && (
+              <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2">
+                <div className="text-center">
+                  <p className="text-[0.58rem] uppercase tracking-wider text-sky-300/90 mb-1">🎙️ voz (narração)</p>
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <audio src={detalhe.vozUrl} controls className="w-full" />
+                </div>
+              </div>
+            )}
             <p className="text-center text-[0.66rem] opacity-50 mt-2">{TIPO_LABEL[detalhe.tipo ?? ''] ?? detalhe.tipo} · {detalhe.agendadoEm ?? 'sem data'}</p>
             <div className="mt-3">
               <p className="text-[0.66rem] uppercase tracking-wider opacity-50 mb-1">Legenda (edita à mão)</p>
@@ -719,6 +760,18 @@ export default function MetodoContaPage() {
                 <button onClick={() => guardarLegenda(detalhe.slug)} disabled={legBusy || legendaTxt === (detalhe.legenda ?? '')} className="px-2.5 py-1 rounded-lg disabled:opacity-40 text-[0.72rem]" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{legBusy ? '…' : 'guardar legenda'}</button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* VER GRANDE: um slide do reel em tamanho real (a lupa era pequena demais). */}
+      {grande && detalhe && (
+        <div onClick={() => setGrande(null)} className="fixed inset-0 z-[60] flex items-center justify-center bg-black/92 p-4">
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-[360px] text-center">
+            <div className="w-full" style={{ aspectRatio: '9 / 16' }}>
+              <MetodoSlide texto={grande.texto} conceito={grande.capa ? (detalhe.conceito || undefined) : undefined} imageUrl={detalhe.imageUrl ?? undefined} conta={conta} anim="reveal" prog={1} />
+            </div>
+            <button onClick={() => setGrande(null)} className="mt-3 px-4 py-2 rounded-lg border border-white/25 text-[0.8rem]">fechar</button>
           </div>
         </div>
       )}
