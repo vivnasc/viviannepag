@@ -15,7 +15,7 @@ const FONT_MONO = '"JetBrains Mono", var(--font-jetmono), monospace';
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
 
-export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, conceito }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; conceito?: string }) {
+export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   const pal = PALETAS[mundo];
   const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque;
@@ -48,7 +48,10 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
   const mostradas = revelar * palavras.length;
   const aindaEscreve = revelar < 1;
   const accent = ehDomingo ? '#F0C6CF' : ACCENT; // Domingo de Luz: rosa luminoso (legível sobre fundo), sem dourado
-  const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série
+  const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série (veu.a.veu)
+  // a MARCA é parametrizável: por defeito a veu.a.veu, mas outra conta (ex. Soulab)
+  // passa o seu selo/assinatura/site e pode esconder o selo e o rótulo do conceito.
+  const seloTexto = selo === undefined ? serie : selo; // selo===null => esconde o selo
   const ultimoVisivel = Math.min(palavras.length - 1, Math.floor(mostradas));
   const zoom = 1 + 0.07 * prog;                        // leve Ken Burns
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.55) / 0.25));
@@ -63,15 +66,20 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 135% 40% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 56%, transparent 76%)', zIndex: 1 }} />
         </>)}
 
-        {/* cabeçalho/selo da série (como as outras coleções) + selo do conceito */}
-        <div style={{ position: 'absolute', top: 110, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '11px 26px', borderRadius: 999, border: `1px solid ${a('#F4ECDD', '3d')}`, background: 'rgba(18,16,22,0.32)' }}>
-            <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
-            <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.36em', textTransform: 'uppercase', color: '#F8F1E8' }}>{serie}</span>
-            <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
+        {/* cabeçalho/selo da série (como as outras coleções) + selo do conceito.
+            Soulab passa selo={null} e mostrarConceito={false} -> sem nenhum destes. */}
+        {(seloTexto || (mostrarConceito && conceito)) && (
+          <div style={{ position: 'absolute', top: 110, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
+            {seloTexto && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '11px 26px', borderRadius: 999, border: `1px solid ${a('#F4ECDD', '3d')}`, background: 'rgba(18,16,22,0.32)' }}>
+                <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
+                <span style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.36em', textTransform: 'uppercase', color: '#F8F1E8' }}>{seloTexto}</span>
+                <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
+              </div>
+            )}
+            {mostrarConceito && conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.82, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
           </div>
-          {conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.82, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
-        </div>
+        )}
 
         {/* frase */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 120px', zIndex: 2 }}>
@@ -104,8 +112,8 @@ export function KineticSlide({ texto, destaque = [], imageUrl, mundo = 'escola',
 
         {/* assinatura */}
         <div style={{ position: 'absolute', bottom: 130, left: 0, right: 0, textAlign: 'center', zIndex: 3, opacity: rodapeOp }}>
-          <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, color: '#F4ECDD', opacity: 0.85, margin: 0 }}>Véu a Véu</p>
-          <p style={{ fontFamily: FONT_MONO, fontSize: 22, letterSpacing: '0.04em', color: ACCENT, opacity: 0.85, margin: '6px 0 0' }}>viviannedossantos.com</p>
+          <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, color: '#F4ECDD', opacity: 0.85, margin: 0 }}>{assinatura}</p>
+          <p style={{ fontFamily: FONT_MONO, fontSize: 22, letterSpacing: '0.04em', color: ACCENT, opacity: 0.85, margin: '6px 0 0' }}>{site}</p>
         </div>
       </div>
     </div>

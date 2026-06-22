@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
-import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
+import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, SOULAB_SLIDE, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -141,7 +141,7 @@ export default function SoulabPage() {
             {pecas.map((p) => (
               <div key={p.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
                 <div className="relative">
-                  <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} conceito={p.conceito || undefined} />
+                  <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...SOULAB_SLIDE} />
                   <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}</span>
                   {p.publicado
                     ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>

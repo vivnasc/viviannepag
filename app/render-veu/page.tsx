@@ -13,6 +13,7 @@ import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide } from '@/components/admin/KineticSlide';
+import { SOULAB_SLIDE } from '@/lib/soulab/marca';
 import { MetodoSlide } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta, type Conta } from '@/lib/metodo/contas';
@@ -271,6 +272,7 @@ export default function RenderVeuPage() {
           prog={prog}
           variante={s.variante}
           conceito={s.conceito}
+          {...((estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
         />
       )}
       {estado && ehMetodo && ehCarta && s && getConta(s.contaId ?? '') && (

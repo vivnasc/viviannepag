@@ -107,6 +107,16 @@ export function sementeAleatoria(): string {
   return s[Math.floor(Math.random() * s.length)];
 }
 
+// A MARCA da Soulab no KineticSlide: SEM o selo "Ancorar" e SEM o rótulo do
+// conceito (são da veu.a.veu), com rodapé próprio (@soulab.studio). Usada tanto no
+// preview do admin como no render do MP4 (app/render-veu) — fonte única.
+export const SOULAB_SLIDE: { selo: string | null; mostrarConceito: boolean; assinatura: string; site: string } = {
+  selo: null,
+  mostrarConceito: false,
+  assinatura: `@${SOULAB.handle}`,
+  site: SOULAB.handle,
+};
+
 // o mundo (palette key) que a Soulab usa no render dos reels — ver PALETAS em
 // lib/estudio-conteudo.ts (entrada 'soulab').
 export const SOULAB_MUNDO = 'soulab';
