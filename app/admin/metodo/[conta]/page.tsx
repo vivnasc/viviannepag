@@ -29,7 +29,7 @@ const TIPO_LABEL: Record<string, string> = {
 const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean; voz: boolean }> = {
   carta: { imagem: true, som: false, voz: true }, naonormalizes: { imagem: true, som: true, voz: true },
   cena: { imagem: true, som: true, voz: true }, espelho: { imagem: true, som: true, voz: true },
-  cartaRenomear: { imagem: false, som: true, voz: true }, repara: { imagem: true, som: false, voz: true },
+  cartaRenomear: { imagem: true, som: true, voz: true }, repara: { imagem: true, som: false, voz: true },
 };
 const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false, voz: true };
 // 2.ª-feira (ISO) da semana a `offset` semanas de hoje — para testar/gerar 1 dia.
