@@ -81,15 +81,45 @@ export const ASSINATURA: Record<string, Assinatura> = {
   'ja-pode-viver': { gesto: 'de pé, leve, as mãos abertas e vazias viradas para cima, o rosto erguido para a luz', objeto: 'nada (mãos vazias)', olhar: 'erguido para a luz', energia: 'chegada, leveza, nada a carregar' },
 };
 
-/** A descrição visual de uma carta para o gerador: a ASSINATURA (gesto+objeto+olhar
- *  +energia) se existir; senão a pose ditada. É isto que faz a PERSONAGEM, não o nome. */
+// O SÍMBOLO de cada carta (a ideia da Vivianne: é o símbolo/arcano que distingue uma
+// carta de baralho, não a atividade). UM emblema claro e único por arquétipo — é o que
+// torna o deck reconhecível à primeira. Determinístico; afinável à mão.
+export const SIMBOLO: Record<string, string> = {
+  salvadora: 'uma bóia de salvação que ela estende a alguém fora do quadro',
+  diretora: 'um molho de chaves e um relógio nas mãos',
+  provedora: 'um prato cheio que ela oferece com as duas mãos',
+  heroina: 'uma única chama acesa que ela protege com a mão, no meio do escuro',
+  indispensavel: 'muitos fios e cordas que lhe saem das mãos, a segurar tudo',
+  peregrina: 'uma mala de viagem na mão',
+  navegadora: 'uma bússola antiga (ou um mapa de estrelas)',
+  'aluna-eterna': 'uma pilha alta de livros',
+  'buscadora-casa': 'uma chave grande de porta e uma casa em miniatura',
+  invisivel: 'um espelho para onde ninguém olha',
+  desaparecida: 'um retrato onde o rosto se apagou',
+  orfa: 'uma cadeira vazia ao lado dela',
+  'rebelde-silenciosa': 'uma braçada pesada de coisas que ela não larga',
+  adaptadora: 'água a tomar a forma de um copo',
+  tradutora: 'duas máscaras que ela segura, uma em cada mão',
+  diplomata: 'uma balança equilibrada nas mãos',
+  fiel: 'uma corrente com uma âncora presa ao pulso',
+  sentinela: 'uma lanterna acesa, na vigília do escuro',
+  guardia: 'um cadeado e uma chave à entrada de uma porta',
+  perfeccionista: 'uma lupa sobre um pormenor minúsculo',
+  observadora: 'uns binóculos, a observar de longe',
+  leal: 'uma armadura antiga pousada no colo',
+  'ja-pode-viver': 'as mãos abertas e vazias viradas para a luz',
+};
+export const simboloDe = (id: string): string | undefined => SIMBOLO[id];
+
+/** A descrição visual de uma carta para o gerador: o SÍMBOLO (o que distingue a carta)
+ *  + a ASSINATURA (postura/olhar/energia). É o símbolo que faz o deck reconhecível. */
 export function figuraDescricao(id: string): string | undefined {
+  const sim = SIMBOLO[id];
   const a = ASSINATURA[id];
-  if (a) {
-    const obj = a.objeto && !/^nenhum/i.test(a.objeto) ? `, ${a.objeto}` : '';
-    return `${a.gesto}${obj}, olhar ${a.olhar}, energia de ${a.energia}`;
-  }
-  return POSE_BARALHO[id];
+  const base = a ? `${a.gesto}, olhar ${a.olhar}, energia de ${a.energia}` : POSE_BARALHO[id];
+  if (!base && !sim) return undefined;
+  if (sim) return `o SÍMBOLO desta carta, grande e claro, é o que a identifica: ${sim}. A mulher: ${base ?? ''}`.trim();
+  return base;
 }
 
 // ── CARTAS ESPECIAIS (fecho do arco) ─────────────────────────────────────────
