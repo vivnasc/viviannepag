@@ -545,7 +545,7 @@ export default function MetodoContaPage() {
                             <span className="absolute bottom-1 left-1 z-10 text-[0.5rem] px-1 py-0.5 rounded" style={{ background: (e.hora ?? '') >= '15:00' ? 'rgba(235,174,74,0.9)' : 'rgba(0,0,0,0.7)', color: (e.hora ?? '') >= '15:00' ? '#0F0F1A' : '#F2E8DC' }} title={(e.hora ?? '') >= '15:00' ? 'tarde · motor dramático' : 'manhã'}>{(e.hora ?? '').slice(0, 5) || '—'}</span>
                             <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full rounded-md overflow-hidden" style={{ boxShadow: `0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : `${'#d8b25a'}66`}` }}>
                               {e.subtipo === 'carta'
-                                ? <CartaSlide texto={e.texto} conta={conta} capa prog={1} />
+                                ? <CartaSlide texto={e.texto} conta={conta} capa prog={1} imageUrl={e.imageUrl ?? undefined} />
                                 : <MetodoSlide texto={e.texto} conta={conta} conceito={e.conceito} veuReveal={e.veuReveal ?? undefined} imageUrl={e.imageUrl ?? undefined} prog={1} />}
                             </button>
                             {!e.publicado && <input type="checkbox" checked={sel.has(e.slug)} onClick={(ev) => ev.stopPropagation()} onChange={() => toggleSel(e.slug)} title="selecionar" className="absolute top-1 left-1 z-10 w-4 h-4 cursor-pointer" />}
@@ -601,7 +601,7 @@ export default function MetodoContaPage() {
                   <span className="text-[0.6rem] uppercase tracking-wider text-amber-300">{detalhe.conceito || 'Carta de renomear'}</span>
                   <span className="text-[0.55rem] opacity-50">carta tipográfica (papel)</span>
                 </div>
-                <CartaSlide texto={detalhe.texto} conta={conta} capa prog={1} />
+                <CartaSlide texto={detalhe.texto} conta={conta} capa prog={1} imageUrl={detalhe.imageUrl ?? undefined} />
                 {detalhe.beats.length > 1 && (
                   <ol className="mt-2 space-y-1.5">
                     {detalhe.beats.map((b, i) => (
