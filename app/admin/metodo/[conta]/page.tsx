@@ -433,7 +433,7 @@ export default function MetodoContaPage() {
     setMsg(opts.formato ? 'A gerar 1 formato de autoridade (teste)…' : 'A gerar a semana de autoridade (8 formatos)…');
     try {
       const body: Record<string, unknown> = { offset };
-      if (opts.formato) { body.formato = opts.formato; body.veu = 'Turbilhão'; } // teste com o véu que já tem SABER completo
+      if (opts.formato) body.formato = opts.formato; // testa só esse formato, com o véu da semana
       const r = await fetch('/api/admin/metodo/gerar-autoridade', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
