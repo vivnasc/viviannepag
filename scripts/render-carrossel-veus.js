@@ -100,7 +100,7 @@ async function main() {
       // TEMPO DE LEITURA (sem voz): ~4.8s por beat — dá tempo de LER cada linha
       // (3.4s era rápido demais). Com voz, a duração é a da narração (mais abaixo).
       const FPS = 25;
-      let DUR = duasFaces ? 17 : nbeats ? Math.max(16, Math.round(4.8 * slides.length)) : carta ? Math.max(16, Math.round(4.6 * slides.length)) : (col.theme?.marca === 'soulab' && slides.length > 1) ? Math.max(12, Math.round(4.2 * slides.length)) : visual ? 9 : 8;
+      let DUR = duasFaces ? 17 : nbeats ? Math.max(16, Math.round(4.8 * slides.length)) : carta ? Math.max(16, Math.round(4.6 * slides.length)) : (col.theme?.marca === 'soulab' && slides.length > 1) ? Math.max(16, Math.round(6.5 * slides.length)) : visual ? 9 : 8;
       // VOZ (narração): se o post tem voz, ELA MANDA — a duração do reel passa a ser a
       // da narração e os slides avançam ao ritmo dela (a frase no ecrã = a que é dita
       // = karaokê ao nível da frase). Guardado por d.vozUrl (a loja não tem voz).

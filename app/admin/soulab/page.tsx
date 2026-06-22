@@ -146,15 +146,14 @@ function EfeitoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boo
   );
 }
 
-// O ÁUDIO DO REEL (autonomia): TRÊS fontes à escolha dela, todas viram o áudio do
-// render. (1) som ambiente FEITO DA CENA (a partir da imagem); (2) som de MÁQUINA
-// DE ESCREVER (acompanha o efeito teclado); (3) MÚSICA ambiente instrumental
-// (flauta/piano…). Ouve aqui; "remover" volta à música da loja.
-function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: (tipo: 'cena' | 'maquina' | 'musica', estilo?: string) => void; onRemover: () => void }) {
+// O ÁUDIO DO REEL (autonomia): DUAS fontes à escolha dela, ambas viram o áudio do
+// render. (1) som ambiente FEITO DA CENA (a partir da imagem); (2) MÚSICA ambiente
+// instrumental (flauta/piano…). Ouve aqui; "remover" volta à música da loja.
+function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: (tipo: 'cena' | 'musica', estilo?: string) => void; onRemover: () => void }) {
   const [estilo, setEstilo] = useState<string>(peca.somEstilo ?? 'flauta');
   const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
   const tipoAtual = peca.somUrl ? (peca.somTipo ?? 'cena') : null;
-  const nomeTipo = tipoAtual === 'maquina' ? 'máquina de escrever' : tipoAtual === 'musica' ? `música · ${peca.somEstilo ?? ''}` : tipoAtual === 'cena' ? 'som da cena' : '';
+  const nomeTipo = tipoAtual === 'musica' ? `música · ${peca.somEstilo ?? ''}` : tipoAtual === 'cena' ? 'som da cena' : '';
   return (
     <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">áudio do reel {tipoAtual && <span style={{ color: dz }}>· {nomeTipo}</span>}</p>
@@ -170,14 +169,7 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
         {busy ? 'a gerar…' : '🌿 som ambiente da cena'}
       </button>
 
-      {/* 2 · máquina de escrever (acompanha o efeito teclado) */}
-      <button type="button" onClick={() => onGerar('maquina')} disabled={disabled}
-        className="w-full text-[0.64rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
-        style={tipoAtual === 'maquina' ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>
-        {busy ? 'a gerar…' : '⌨️ máquina de escrever'}
-      </button>
-
-      {/* 3 · música ambiente (flauta/piano…) */}
+      {/* 2 · música ambiente (flauta/piano…) */}
       <div className="rounded-lg border border-white/15 p-1.5 space-y-1">
         <p className="text-[0.55rem] opacity-55">🎵 música ambiente (instrumental)</p>
         <div className="flex flex-wrap gap-1">
@@ -195,7 +187,7 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
       </div>
 
       {peca.somUrl && <button type="button" onClick={onRemover} disabled={disabled} className="w-full text-[0.6rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-50">↩︎ voltar à música da loja</button>}
-      <p className="text-[0.52rem] opacity-45 leading-snug">Sem áudio próprio, o render usa a música da loja. A máquina de escrever combina com o efeito ⌨️ teclado. A música é instrumental (flauta, piano…), não a Ancient Ground.</p>
+      <p className="text-[0.52rem] opacity-45 leading-snug">Sem áudio próprio, o render usa a música da loja. A música é instrumental (flauta, piano…), não a Ancient Ground.</p>
     </div>
   );
 }
@@ -250,7 +242,7 @@ function PreviewBox({ peca }: { peca: Peca }) {
   const tip = peca.tipografia ?? undefined;
   useEffect(() => {
     let raf = 0; let start: number | null = null;
-    const dur = Math.max(4200, (moms?.length ?? 1) * 2600), hold = 1200;
+    const dur = Math.max(5200, (moms?.length ?? 1) * 5200), hold = 1400;
     const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
@@ -387,13 +379,12 @@ export default function SoulabPage() {
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
 
-  const gerarSomPeca = useCallback(async (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'maquina' | 'musica'; estilo?: string }) => {
+  const gerarSomPeca = useCallback(async (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'musica'; estilo?: string }) => {
     if (acaoSlug) return;
     const { remover, tipo, estilo } = opts;
     setAcaoSlug(slug); setErro(null);
     setMsg(remover ? 'A remover o áudio (volta à música da loja)…'
       : tipo === 'musica' ? 'A compor a música ambiente (MusicGen)… ~30-60s.'
-      : tipo === 'maquina' ? 'A gerar o som de máquina de escrever (ElevenLabs)… ~20-40s.'
       : 'A gerar o som da cena (ElevenLabs)… ~20-40s.');
     try {
       const r = await fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover, tipo, estilo }) });
