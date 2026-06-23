@@ -6,12 +6,12 @@ export type Ritual = { kicker: string; glifo: string; tema: string };
 
 // chaves = dia da semana em PT (com acentos), como vêm do preview/agenda
 export const ROTACAO: Record<string, Ritual> = {
-  segunda: { kicker: 'olha hoje', glifo: '✶', tema: 'introspeção: reparar numa verdade pequena que apareceu hoje, devagar' },
-  'terça': { kicker: 'hoje agradeço', glifo: '☉', tema: 'gratidão pelo que correu bem sem forçar; entrega e fé' },
-  quarta: { kicker: 'solto hoje', glifo: '◌', tema: 'soltar/deixar cair o que magoou ou não é teu para carregar' },
-  quinta: { kicker: 'hoje aprendi', glifo: '〜', tema: 'uma aprendizagem do dia sobre si própria' },
-  sexta: { kicker: 'celebro hoje', glifo: '♢', tema: 'celebrar quem te amou, quem és, pequenas vitórias que ninguém vê' },
-  'sábado': { kicker: 'hoje, no corpo', glifo: '◯', tema: 'o corpo, a presença, o descanso; aqui dentro também é templo' },
+  segunda: { kicker: 'hoje, reparo', glifo: '✶', tema: 'reparar numa verdade pequena que apareceu hoje, devagar' },
+  'terça': { kicker: 'hoje, agradeço', glifo: '☉', tema: 'agradecer o que correu bem sem forçar; entrega e fé' },
+  quarta: { kicker: 'hoje, solto', glifo: '◌', tema: 'soltar/deixar cair o que magoou ou não é teu para carregar' },
+  quinta: { kicker: 'hoje, entendo', glifo: '〜', tema: 'uma verdade sobre ti própria que hoje ficou clara' },
+  sexta: { kicker: 'hoje, celebro', glifo: '♢', tema: 'celebrar quem te amou, quem és, pequenas vitórias que ninguém vê' },
+  'sábado': { kicker: 'esta noite, deixo', glifo: '◯', tema: 'dar ao corpo licença para parar; descansar sem ter de merecer primeiro' },
   domingo: { kicker: 'amanhã, escolho', glifo: '→', tema: 'intenção: escolher e confiar para amanhã, mesmo sem ver o caminho inteiro' },
 };
 
