@@ -119,6 +119,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/heroi', label: 'i am a hero' },
       { href: '/admin/reels', label: 'reels' },
       { href: '/admin/infografico', label: 'infográficos' },
+      { href: '/admin/veu-demonstracoes', label: 'demonstrações físicas' },
       { href: '/admin/carrossel-veu', label: 'carrosséis' },
     ],
   },
