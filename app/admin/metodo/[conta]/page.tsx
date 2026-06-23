@@ -169,10 +169,28 @@ export default function MetodoContaPage() {
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else if (j.jaPassou) setMsg('Essa semana já passou — avança para a semana seguinte (▶) e gera essa.');
+      else if (!j.gerados && j.jaExistiam) setMsg('Esta semana JÁ está gerada — saltei os dias que já tens (não duplico). Para refazer: abre «⚙ ferramentas» e apaga, depois gera de novo. Ou clica num dia abaixo para gerar só esse.');
       else setMsg(`${j.gerados} posts gerados, com a data de cada dia. Revê e limpa; depois "gerar imagens em falta" só das que ficarem.`);
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setLote(null); recarregar(); }
   }, [conta, lote, offset, recarregar]);
+
+  // GERAR 1 SÓ (a Vivianne: "não tem como escolher e gerar 1"): gera o post de UM dia
+  // da semana-alvo (clicando no chip do esqueleto), sem ser a semana toda nem o teste.
+  const [umBusy, setUmBusy] = useState<string | null>(null);
+  const gerarUm = useCallback(async (formato: string) => {
+    if (!conta || umBusy || lote) return;
+    setUmBusy(formato); setErro(null); setMsg('A gerar 1 post…');
+    try {
+      const r = await fetch('/api/admin/metodo/gerar-autoridade', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ conta: conta.id, formato, offset }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else if (!j.gerados && j.jaExistiam) setMsg('Esse dia já está gerado. Apaga-o (✕ no cartão) e clica de novo para refazer.');
+      else setMsg('1 post gerado. Abre para ver.');
+      recarregar();
+    } catch (e) { setErro(String(e)); }
+    finally { setUmBusy(null); }
+  }, [conta, umBusy, lote, offset, recarregar]);
 
   // TESTAR 1 DIA (texto): gera SÓ a 2.ª-feira da semana-alvo (manhã + tarde) desta
   // conta, para a Vivianne VER o conteúdo antes de gastar créditos na semana toda.
@@ -399,6 +417,18 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setVozBusy(null); }
   }, [vozBusy, recarregar]);
+  // REMOVER a voz (saiu com sotaque errado): limpa-a; o reel volta a ser sem voz.
+  const removerVoz = useCallback(async (slug: string) => {
+    if (vozBusy) return;
+    setVozBusy(slug); setErro(null); setMsg('A remover a voz…');
+    try {
+      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover: true }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg('Voz removida. O reel fica sem voz.'); setDetalhe((d) => (d && d.slug === slug ? { ...d, vozUrl: null } : d)); recarregar(); }
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setVozBusy(null); }
+  }, [vozBusy, recarregar]);
 
   // ESTILO (independência): guarda a tipografia do post (theme.estilo) e atualiza já o preview.
   const salvarEstilo = useCallback(async (slug: string, estilo: EstiloMetodo) => {
@@ -511,16 +541,18 @@ export default function MetodoContaPage() {
               está feito. Responde a "onde estão os formatos / onde produzo os métodos". */}
           {conta.id === 'mae' && (
             <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.02] p-3">
-              <p className="text-[0.66rem] uppercase tracking-widest opacity-50 mb-2">esta semana · véu {veuDaSemana(segDaSemanaAlvo)} · um dia, um formato</p>
+              <p className="text-[0.66rem] uppercase tracking-widest opacity-50 mb-2">esta semana · véu {veuDaSemana(segDaSemanaAlvo)} · clica num dia para gerar só esse</p>
               <div className="flex flex-wrap gap-1.5">
                 {SEMANA_AUTORIDADE.map((d) => {
                   const feito = formatosNaSemana.has(d.formato);
+                  const aGerar = umBusy === d.formato;
                   return (
-                    <span key={`${d.wd}-${d.formato}`} className="inline-flex items-center gap-1 text-[0.64rem] px-2 py-1 rounded-lg border"
+                    <button key={`${d.wd}-${d.formato}`} onClick={() => gerarUm(d.formato)} disabled={!!umBusy || !!lote}
+                      className="inline-flex items-center gap-1 text-[0.64rem] px-2 py-1 rounded-lg border disabled:opacity-50 hover:border-ambar"
                       style={{ borderColor: feito ? '#d8b25a' : 'rgba(255,255,255,0.12)', background: feito ? 'rgba(216,178,90,0.14)' : 'transparent', color: feito ? '#d8b25a' : '#F2E8DC', opacity: feito ? 1 : 0.7 }}
-                      title={`${['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][d.wd]} · ${d.hora}`}>
-                      {feito ? '✓' : '·'} {TIPO_LABEL[d.formato] ?? d.formato}
-                    </span>
+                      title={`${['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][d.wd]} · ${d.hora} · clica para gerar`}>
+                      {aGerar ? '…' : feito ? '✓' : '+'} {TIPO_LABEL[d.formato] ?? d.formato}
+                    </button>
                   );
                 })}
               </div>
@@ -832,6 +864,7 @@ export default function MetodoContaPage() {
                   <div className={`rounded-lg border px-2.5 py-1.5 text-center ${detalhe.vozUrl ? 'border-emerald-400/30 bg-emerald-500/5' : 'border-white/15'}`}>
                     <span className="block text-[0.5rem] uppercase tracking-wider opacity-50">voz</span>
                     <button onClick={() => gerarVozTeste(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="narração (a tua voz, ElevenLabs)" className={detalhe.vozUrl ? 'text-amber-300' : 'text-emerald-300'}>{vozBusy === detalhe.slug ? '…' : detalhe.vozUrl ? 'outra' : 'gerar voz'}</button>
+                    {detalhe.vozUrl && <button onClick={() => removerVoz(detalhe.slug)} disabled={vozBusy === detalhe.slug} title="apagar a voz (o reel fica sem voz)" className="ml-2 text-rose-300/90">remover</button>}
                   </div>
                 )}
                 {/* 4 · RENDER */}
