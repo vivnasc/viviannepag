@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
-import { MapaSlide } from '@/components/admin/MapaSlide';
+import { AutoridadeSlide, ehFormatoAutoridade } from '@/components/admin/AutoridadeSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta, CONTAS_LISTA } from '@/lib/metodo/contas';
 
@@ -67,8 +67,9 @@ function MomentosPreview({ beats, conta, imageUrl, conceito, tipo }: { beats: st
   const [i, setI] = useState(0);
   const n = Math.max(1, beats.length);
   useEffect(() => { if (n <= 1) return; const t = setInterval(() => setI((x) => (x + 1) % n), 2600); return () => clearInterval(t); }, [n]);
-  // O Mapa do Véu tem cara própria: cartão-diagnóstico (não slides iguais a ciclar).
-  if (tipo === 'mapa') return <MapaSlide beats={beats} conta={conta} imageUrl={imageUrl ?? undefined} prog={1} />;
+  // Os formatos de autoridade têm cara PRÓPRIA (cada um o seu layout), não slides
+  // iguais a ciclar. prog fixo (1) revela tudo no cartão do feed.
+  if (ehFormatoAutoridade(tipo)) return <AutoridadeSlide formato={tipo} beats={beats} conta={conta} imageUrl={imageUrl ?? undefined} prog={1} />;
   const idx = Math.min(i, n - 1);
   return (
     <div className="relative">

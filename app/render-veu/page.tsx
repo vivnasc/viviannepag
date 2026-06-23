@@ -16,7 +16,7 @@ import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/ad
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
-import { MapaSlide } from '@/components/admin/MapaSlide';
+import { AutoridadeSlide, ehFormatoAutoridade } from '@/components/admin/AutoridadeSlide';
 import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
 import { getConta, type Conta } from '@/lib/metodo/contas';
 import { SerieDiariaSlide, type SerieId } from '@/components/admin/SerieDiariaSlide';
@@ -262,7 +262,7 @@ export default function RenderVeuPage() {
   const ehMetodo = tipoSlide === 'metodo'; // identidade própria das contas do Método VS
   const ehTarde = ehMetodo && subtipo === 'nbeats'; // reel da tarde: N beats sobre 1 cena
   const ehCarta = ehMetodo && subtipo === 'carta'; // Carta de renomear (vir): capa cena + corpo papel
-  const ehMapa = ehTarde && formatoM === 'mapa'; // "O Mapa do Véu": layout PRÓPRIO (cartão-diagnóstico), não slides iguais
+  const ehAutoridade = ehTarde && ehFormatoAutoridade(formatoM); // os 8 formatos de autoridade da mãe: cada um com layout PRÓPRIO
   const ehSerie = tipoSlide === 'serie-diaria'; // moldura das séries diárias, sobreposta ao motion no render
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
   const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
@@ -349,16 +349,17 @@ export default function RenderVeuPage() {
       )}
       {/* KARAOKÊ palavra-a-palavra: se o post tem voz com timestamps (vozPalavras),
           mostra a linha com as palavras a acenderem-se à medida que são ditas. */}
-      {/* O Mapa do Véu — cartão-diagnóstico composto (layout próprio do formato) */}
-      {estado && ehMetodo && ehMapa && s && getConta(s.contaId ?? '') && (
-        <MapaSlide
+      {/* Autoridade — cada formato com o seu layout próprio (mapa, mito, custo…) */}
+      {estado && ehMetodo && ehAutoridade && s && getConta(s.contaId ?? '') && ehFormatoAutoridade(formatoM) && (
+        <AutoridadeSlide
+          formato={formatoM}
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           conta={getConta(s.contaId ?? '')!}
           imageUrl={estado.dia.slides?.[0]?.imageUrl}
           prog={prog}
         />
       )}
-      {estado && ehMetodo && !ehCarta && ehTarde && !ehMapa && (estado.dia.vozPalavras?.length ?? 0) > 0 && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && !ehCarta && ehTarde && !ehAutoridade && (estado.dia.vozPalavras?.length ?? 0) > 0 && s && getConta(s.contaId ?? '') && (
         <KaraokeMetodo
           linhas={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           palavras={estado.dia.vozPalavras!}
@@ -371,7 +372,7 @@ export default function RenderVeuPage() {
           conta={getConta(s.contaId ?? '')!}
         />
       )}
-      {estado && ehMetodo && !ehCarta && ehTarde && !ehMapa && !(estado.dia.vozPalavras?.length ?? 0) && s && getConta(s.contaId ?? '') && (
+      {estado && ehMetodo && !ehCarta && ehTarde && !ehAutoridade && !(estado.dia.vozPalavras?.length ?? 0) && s && getConta(s.contaId ?? '') && (
         <Sequencia
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
           clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
