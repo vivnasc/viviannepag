@@ -37,12 +37,21 @@ async function aplicarImagem(row: { slug: string; dias: { slides: SlideMetodo[] 
   } catch { /* best-effort: a imagem fica para o passo "imagens" */ }
 }
 
-function montarRow(slug: string, data: string, hora: string, formato: FormatoAutoridadeId, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string) {
+function montarRow(slug: string, data: string, hora: string, formato: FormatoAutoridadeId, veu: VeuNome, beats: { texto: string; imagem: string }[], envio: string, porque: string) {
   const conta = CONTAS.mae;
   const slides: SlideMetodo[] = beats.map((b, i) => ({ tipo: 'metodo', texto: limparTravessoes(b.texto), destaque: [], notaVisual: b.imagem ?? '', imageUrl: null, capa: i === 0, conceito: '', contaId: 'mae' }));
   const corpo = slides.map((s) => s.texto).join('\n');
   const tags = hashtagsMetodo(veu);
-  const legenda = limparTravessoes(`${corpo}${envio ? `\n\n${envio}` : ''}\n\nMétodo VS\n\n${tags.map((t) => `#${t}`).join(' ')}`);
+  // a legenda traz MAIS que o reel: o corpo + o PORQUÊ (o mecanismo + o padrão, ligado
+  // ao método) + o CTA + a promessa da conta. O "porque" sai do gerador (do SABER), não
+  // é escrito aqui.
+  const legenda = limparTravessoes(
+    `${corpo}` +
+    `${porque ? `\n\n${porque}` : ''}` +
+    `${envio ? `\n\n${envio}` : ''}` +
+    `\n\nMétodo VS · ${conta.depois}` +
+    `\n\n${tags.map((t) => `#${t}`).join(' ')}`,
+  );
   const dias = [{ dia: 1, mundo: 'autora', palavra: (slides[0]?.texto ?? '').slice(0, 48), slides, legenda, hashtags: tags }];
   return {
     slug, title: (slides[0]?.texto ?? FORMATOS_AUTORIDADE[formato].nome).slice(0, 48), brief: slides[0]?.texto ?? '',
@@ -103,7 +112,7 @@ export async function POST(req: Request) {
     try {
       const sb = await gerarAutoridade(d.formato, d.veu, apiKey, evitar);
       if (!sb.beats.length) continue;
-      const row = montarRow(slug, d.data, d.hora, d.formato, d.veu, sb.beats, sb.envio);
+      const row = montarRow(slug, d.data, d.hora, d.formato, d.veu, sb.beats, sb.envio, sb.porque);
       if (inlineImg) await aplicarImagem(row as unknown as { slug: string; dias: { slides: SlideMetodo[] }[] }, d.veu, apiKey, token, evitarImg);
       rows.push(row); evitar.push(sb.beats[0].texto);
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }

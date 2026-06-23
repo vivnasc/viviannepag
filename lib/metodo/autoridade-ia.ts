@@ -10,7 +10,7 @@ import { SABER, type SaberVeu } from './saber';
 import { limparTravessoes } from '@/lib/texto';
 import { FORMATOS_AUTORIDADE, type FormatoAutoridadeId } from './formatos-autoridade';
 
-export interface StoryboardAut { beats: { texto: string; imagem: string }[]; envio: string }
+export interface StoryboardAut { beats: { texto: string; imagem: string }[]; envio: string; porque: string }
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
 const alguns = (arr?: string[], n = 5) => (arr ?? []).slice(0, n).map((x) => `· ${x}`).join('\n');
@@ -55,7 +55,8 @@ export async function gerarAutoridade(formato: FormatoAutoridadeId, veu: VeuNome
     `O padrão de fundo (para TI; nunca o nomeies no texto): ${k.essencia}\n\n` +
     `${arcoEmateria(formato, k)}\n\n${REGRAS}\n` +
     (evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-8).map((e) => `"${e}"`).join('; ')}.\n` : '') +
-    `\nDevolve APENAS JSON válido, sem texto à volta: {"momentos":["linha 1 (a faca)","linha 2","…"],"envio":"CTA forte"}. As linhas seguem o ARCO acima, curtas, uma ideia cada.`;
+    `\nLEGENDA (campo "porque"): 2 a 3 frases, mais explicativas que o reel (para quem quer perceber). Diz PORQUE é que isto acontece (o mecanismo, em linguagem da vida), que é um padrão antigo de proteção e não um defeito, e o que o método faz com ele: reconhecer o que te prende e largar o que te faz repetir. Sem jargão técnico, sem nomes de autores, sem travessões.\n` +
+    `\nDevolve APENAS JSON válido, sem texto à volta: {"momentos":["linha 1 (a faca)","linha 2","…"],"envio":"CTA forte","porque":"a explicação da legenda"}. As linhas seguem o ARCO acima, curtas, uma ideia cada.`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -64,11 +65,11 @@ export async function gerarAutoridade(formato: FormatoAutoridadeId, veu: VeuNome
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);
   const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
-  let o: { momentos?: unknown; envio?: unknown } = {};
+  let o: { momentos?: unknown; envio?: unknown; porque?: unknown } = {};
   try { const m = txt.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : txt); } catch { /* fallback */ }
 
   const momentos = Array.isArray(o.momentos) ? o.momentos.map((x) => lp(x)).filter(Boolean) : [];
   if (!momentos.length) throw new Error('sem storyboard de autoridade');
   const beats = momentos.map((texto) => ({ texto, imagem: '' }));
-  return { beats, envio: lp(o.envio) };
+  return { beats, envio: lp(o.envio), porque: lp(o.porque) };
 }
