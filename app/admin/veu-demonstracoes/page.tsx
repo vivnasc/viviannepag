@@ -22,7 +22,7 @@ export default function VeuDemonstracoesPage() {
     if (busy) return;
     setBusy(semana); setErro(null); setMsg(`A gerar a demonstração da semana ${semana} (Runway, ~1-3 min)… não feches.`);
     try {
-      const r = await fetch('/api/admin/veu/demonstracao', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ semana, duracao: 8 }) });
+      const r = await fetch('/api/admin/veu/demonstracao', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ semana, duracao: 10 }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
       else { setMsg(`Semana ${semana} gerada. Vê em baixo.`); recarregar(); }
