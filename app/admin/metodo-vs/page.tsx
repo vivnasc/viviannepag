@@ -1,22 +1,382 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { FORMATOS_LISTA, CALENDARIO } from '@/lib/metodo-vs/formatos';
+import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia } from '@/components/admin/KineticSlide';
+import { METODOVS_SLIDE, METODOVS_MUNDO } from '@/lib/metodo-vs/marca';
+import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
+import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
+import type { Mundo } from '@/lib/estudio-conteudo';
 
-// MÉTODO VS · do zero, simples como o laboratório do Soulab — mas com VÁRIOS FORMATOS
-// (ângulos de revelação) e um CALENDÁRIO (vários posts/dia, planeados). Sem 4 contas,
-// sem o motor velho. A voz é uma só: revelar (chamam-lhe X… mas é Y).
+// MÉTODO VS · a conta mãe, com o ESTÚDIO COMPLETO por peça (espelho do Soulab):
+// prever · texto · legenda · motion · som · tipografia · efeito · tempo · render ·
+// agendar. Reutiliza as rotas genéricas do Soulab (escrevem em theme.soulab.* por
+// slug) e a rota própria do método para a imagem. A geração (formatos + calendário)
+// mantém-se intacta. A voz é uma só: revelar (chamam-lhe X… mas é Y).
+
+const MUNDO = METODOVS_MUNDO as Mundo; // a paleta 'autora' (ouro) vive em PALETAS.
+// paleta da conta mãe (espelha SOULAB.paleta, mas em ouro/castanho — 'autora').
+const PAL = { bg: '#3A2818', bg2: '#2A1C12', texto: '#F2E8DC', destaque: '#EBAE4A' };
+const dz = PAL.destaque, bg2 = PAL.bg2;
 
 type Peca = {
   slug: string; veu: string | null; formato: string | null; hora: string | null;
-  momentos: string[]; conceito: string; imageUrl: string | null; videoUrl: string | null;
-  legenda: string | null; agendadoEm: string | null; publicado: boolean;
+  momentos: string[]; texto: string; conceito: string; destaque: string[];
+  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null;
+  somUrl: string | null; somTipo: string | null; somEstilo: string | null;
+  efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
+  legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
+  agendadoEm: string | null; publicado: boolean;
 };
 
 const NOME_FORMATO: Record<string, string> = Object.fromEntries(FORMATOS_LISTA.map((f) => [f.id, `${f.emoji} ${f.nome}`]));
+const SLIDE = { ...METODOVS_SLIDE };
 
-function Cartao({ p, onApagar, onImagem, onRender, ocupado }: { p: Peca; onApagar: (slug: string) => void; onImagem: (slug: string) => void; onRender: (slug: string) => void; ocupado: string | null }) {
+// PRÉ-VISUALIZAÇÃO do reel (ver ANTES de renderizar): anima prog 0→1 em loop, com o
+// efeito + tipografia da peça. Se for "vários momentos", sequencia-os (crossfade),
+// como o render vai fazer. O TEMPO POR MOMENTO é escolha dela (slider): o preview
+// anima a esse ritmo E o render usa o MESMO valor — o que vê é o que sai.
+function PreviewBox({ peca, disabled, busy, onSaveTempo }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTempo: (seg: number) => void }) {
+  const [prog, setProg] = useState(0);
+  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
+  const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
+  const tip = peca.tipografia ?? undefined;
+  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 6.5);
+  useEffect(() => {
+    let raf = 0; let start: number | null = null;
+    const dur = (moms?.length ?? 1) * seg * 1000, hold = 1200;
+    const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [moms, seg]);
+  return (
+    <div className="space-y-1">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · como vai sair no reel (ver antes de renderizar)</p>
+      {moms ? (
+        <div style={{ position: 'relative', aspectRatio: '1080 / 1920', borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+          {moms.map((m, i) => {
+            const n = moms.length, w = 1 / n;
+            const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
+            const isLast = i === n - 1;
+            const fin = Math.min(1, lp / 0.18), fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
+            const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+            if (op <= 0) return null;
+            return (
+              <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+                <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...SLIDE} />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="rounded-lg overflow-hidden border border-white/10">
+          <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tip} {...SLIDE} />
+        </div>
+      )}
+      {peca.clipUrl && <p className="text-[0.5rem] opacity-45">(o movimento vê-se no 🎬; aqui mostra-se a imagem mais o texto a animar)</p>}
+      {moms && (
+        <div className="space-y-1 pt-1">
+          <label className="flex items-center gap-2 text-[0.6rem] opacity-80">
+            <span className="opacity-60 whitespace-nowrap">tempo / momento</span>
+            <input type="range" min={3} max={12} step={0.5} value={seg} onChange={(e) => setSeg(Number(e.target.value))} className="flex-1 accent-current" style={{ color: dz }} />
+            <span className="tabular-nums w-9 text-right">{seg.toFixed(1)}s</span>
+          </label>
+          <p className="text-[0.5rem] opacity-45">{moms.length} momentos × {seg.toFixed(1)}s ≈ <b>{Math.round(seg * moms.length)}s</b> de reel. Arrasta e vê em cima; guarda para o render usar o mesmo.</p>
+          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 6.5)}
+            className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tempo'}</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// EDITAR O TEXTO de cada momento (autonomia): uma textarea por momento. Guarda via a
+// rota de edição do Soulab (texto dos momentos vive nos slides, o mesmo que o render lê).
+function TextoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boolean; busy: boolean; onSave: (momentos: string[]) => void }) {
+  const base = peca.momentos.length ? peca.momentos : [peca.texto];
+  const [moms, setMoms] = useState<string[]>(base);
+  const set = (i: number, v: string) => setMoms((s) => s.map((x, k) => (k === i ? v : x)));
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">texto {moms.length > 1 ? `· ${moms.length} momentos (o 1.º é a capa/faca)` : ''}</p>
+      {moms.map((m, i) => (
+        <textarea key={i} value={m} onChange={(e) => set(i, e.target.value)} rows={2}
+          className="w-full text-[0.66rem] leading-relaxed px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: PAL.texto }} />
+      ))}
+      <button type="button" onClick={() => onSave(moms.map((m) => m.trim()).filter(Boolean))} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar texto'}</button>
+    </div>
+  );
+}
+
+// A LEGENDA + HASHTAGS à vista e editáveis (autonomia: ela mexe no texto do post).
+function LegendaBox({ legenda, hashtags, disabled, busy, onSave }: { legenda: string; hashtags: string[]; disabled: boolean; busy: boolean; onSave: (legenda: string, hashtags: string) => void }) {
+  const [leg, setLeg] = useState(legenda);
+  const [tags, setTags] = useState((hashtags ?? []).join(' '));
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">legenda</p>
+      <textarea value={leg} onChange={(e) => setLeg(e.target.value)} rows={6}
+        className="w-full text-[0.64rem] leading-relaxed px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: PAL.texto }} />
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">hashtags</p>
+      <textarea value={tags} onChange={(e) => setTags(e.target.value)} rows={2}
+        className="w-full text-[0.6rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: PAL.texto }} />
+      <button type="button" onClick={() => onSave(leg, tags)} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar legenda'}</button>
+    </div>
+  );
+}
+
+// O COMPOSITOR DE MOVIMENTO: ela escolhe o que mexe (câmara e/ou elementos) ou descreve
+// por palavras dela. Só ao carregar "dar movimento" chama o Kling (rota do Soulab por slug).
+function MotionBox({ disabled, busy, clipUrl, onGerar }: { disabled: boolean; busy: boolean; clipUrl: string | null; onGerar: (opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void }) {
+  const [ing, setIng] = useState<string[]>([]);
+  const [cam, setCam] = useState<CamaraId>('suave');
+  const [livre, setLivre] = useState('');
+  const toggle = (id: string) => setIng((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  return (
+    <div className="space-y-1.5">
+      {clipUrl && (
+        <div>
+          <p className="text-[0.55rem] uppercase tracking-widest opacity-50 mb-1">movimento (sem texto · o texto entra no render)</p>
+          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+          <video src={clipUrl} controls loop muted playsInline className="w-full rounded-lg border border-white/10" />
+        </div>
+      )}
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">o que mexe? (escolhe tu)</p>
+      <div className="flex flex-wrap gap-1">
+        {MOTION_INGREDIENTES.map((m) => {
+          const on = ing.includes(m.id);
+          return (
+            <button key={m.id} type="button" onClick={() => toggle(m.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+              style={on ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{m.label}</button>
+          );
+        })}
+      </div>
+      <div className="flex flex-wrap items-center gap-1">
+        <span className="text-[0.55rem] opacity-50 mr-0.5">câmara:</span>
+        {CAMARA_OPCOES.map((c) => (
+          <button key={c.id} type="button" onClick={() => setCam(c.id)} className="text-[0.56rem] px-1.5 py-0.5 rounded border"
+            style={cam === c.id ? { borderColor: dz, color: dz } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>{c.label}</button>
+        ))}
+      </div>
+      <input value={livre} onChange={(e) => setLivre(e.target.value)} placeholder="ou descreve tu o movimento…"
+        className="w-full text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: PAL.texto }} />
+      <button type="button" onClick={() => onGerar({ ingredientes: ing, camara: cam, livre })} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a dar vida…' : '🎬 dar movimento'}</button>
+    </div>
+  );
+}
+
+// O ÁUDIO DO REEL: duas fontes à escolha (som da cena · música ambiente instrumental),
+// ambas viram o áudio do render (theme.soulab.somUrl). "Remover" volta à música da loja.
+function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: (tipo: 'cena' | 'musica', estilo?: string) => void; onRemover: () => void }) {
+  const [estilo, setEstilo] = useState<string>(peca.somEstilo ?? 'flauta');
+  const tipoAtual = peca.somUrl ? (peca.somTipo ?? 'cena') : null;
+  const nomeTipo = tipoAtual === 'musica' ? `música · ${peca.somEstilo ?? ''}` : tipoAtual === 'cena' ? 'som da cena' : '';
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">áudio do reel {tipoAtual && <span style={{ color: dz }}>· {nomeTipo}</span>}</p>
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      {peca.somUrl && <audio src={peca.somUrl} controls className="w-full h-8" />}
+      <button type="button" onClick={() => onGerar('cena')} disabled={disabled || !peca.imageUrl}
+        className="w-full text-[0.64rem] px-2 py-1.5 rounded-lg border disabled:opacity-50"
+        style={tipoAtual === 'cena' ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{busy ? 'a gerar…' : '🌿 som ambiente da cena'}</button>
+      <div className="rounded-lg border border-white/15 p-1.5 space-y-1">
+        <p className="text-[0.55rem] opacity-55">🎵 música ambiente (instrumental)</p>
+        <div className="flex flex-wrap gap-1">
+          {MUSICA_ESTILOS.map((m) => (
+            <button key={m.id} type="button" onClick={() => setEstilo(m.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+              style={estilo === m.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{m.label}</button>
+          ))}
+        </div>
+        <button type="button" onClick={() => onGerar('musica', estilo)} disabled={disabled}
+          className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-50"
+          style={tipoAtual === 'musica' ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{busy ? 'a compor…' : `🎼 gerar música · ${MUSICA_ESTILOS.find((m) => m.id === estilo)?.label ?? estilo}`}</button>
+      </div>
+      {peca.somUrl && <button type="button" onClick={onRemover} disabled={disabled} className="w-full text-[0.6rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-50">↩︎ voltar à música da loja</button>}
+      <p className="text-[0.52rem] opacity-45 leading-snug">Sem áudio próprio, o render usa a música da loja. A música é instrumental (flauta, piano…).</p>
+    </div>
+  );
+}
+
+// O EFEITO DO TEXTO: ela escolhe como a frase se revela e VÊ-O a animar em loop.
+function EfeitoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boolean; busy: boolean; onSave: (efeito: EfeitoTexto) => void }) {
+  const [efeito, setEfeito] = useState<EfeitoTexto>((peca.efeito as EfeitoTexto) ?? 'maquina');
+  const [prog, setProg] = useState(0);
+  useEffect(() => {
+    let raf = 0; let start: number | null = null;
+    const dur = 3800, hold = 1100;
+    const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [efeito]);
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">efeito do texto (vê a animar)</p>
+      <div className="rounded-lg overflow-hidden border border-white/10">
+        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={efeito} {...SLIDE} />
+      </div>
+      <div className="flex flex-wrap gap-1">
+        {EFEITOS_TEXTO.map((ef) => (
+          <button key={ef.id} type="button" onClick={() => setEfeito(ef.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+            style={efeito === ef.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{ef.label}</button>
+        ))}
+      </div>
+      <button type="button" onClick={() => onSave(efeito)} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar efeito'}</button>
+    </div>
+  );
+}
+
+// EDITOR DE TIPOGRAFIA: fonte, tamanho e cores das letras, com pré-visualização ao vivo.
+function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boolean; busy: boolean; onSave: (t: Tipografia) => void }) {
+  const t0 = peca.tipografia ?? {};
+  const [fonte, setFonte] = useState<FonteTexto>((t0.fonte as FonteTexto) ?? 'serif');
+  const [tamanho, setTamanho] = useState<number>(t0.tamanho ?? 92);
+  const [cor, setCor] = useState<string>(t0.cor ?? '#F4ECDD');
+  const [corDestaque, setCorDestaque] = useState<string>(t0.corDestaque ?? PAL.destaque);
+  const tipo: Tipografia = { fonte, tamanho, cor, corDestaque };
+  return (
+    <div className="space-y-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">tipografia (vê ao vivo)</p>
+      <div className="rounded-lg overflow-hidden border border-white/10">
+        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={1} tipografia={tipo} {...SLIDE} />
+      </div>
+      <div className="flex flex-wrap gap-1 items-center">
+        <span className="text-[0.55rem] opacity-50 mr-0.5">fonte:</span>
+        {FONTES_TEXTO.map((f) => (
+          <button key={f.id} type="button" onClick={() => setFonte(f.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+            style={fonte === f.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{f.label}</button>
+        ))}
+      </div>
+      <label className="flex items-center gap-2 text-[0.6rem] opacity-80">
+        <span className="opacity-60">tamanho</span>
+        <input type="range" min={56} max={128} step={2} value={tamanho} onChange={(e) => setTamanho(Number(e.target.value))} className="flex-1 accent-current" style={{ color: dz }} />
+        <span className="tabular-nums w-7 text-right">{tamanho}</span>
+      </label>
+      <div className="flex gap-3">
+        <label className="flex items-center gap-1.5 text-[0.6rem] opacity-80"><span className="opacity-60">texto</span>
+          <input type="color" value={cor} onChange={(e) => setCor(e.target.value)} className="w-7 h-6 rounded bg-transparent border border-white/15" /></label>
+        <label className="flex items-center gap-1.5 text-[0.6rem] opacity-80"><span className="opacity-60">realce</span>
+          <input type="color" value={corDestaque} onChange={(e) => setCorDestaque(e.target.value)} className="w-7 h-6 rounded bg-transparent border border-white/15" /></label>
+      </div>
+      <button type="button" onClick={() => onSave(tipo)} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tipografia'}</button>
+    </div>
+  );
+}
+
+// AGENDAR: data mais hora no estúdio. Ao agendar, marca aprovado (a trava do cron) —
+// publica-se sozinha à hora. A marca já é 'metodovs' (o Publicar mapeia para 'loja',
+// conta vivianne.dos.santos).
+function AgendarBox({ agendadoEm, hora, disabled, busy, onAgendar, onDesagendar }: { agendadoEm: string | null; hora: string | null; disabled: boolean; busy: boolean; onAgendar: (data: string, hora: string) => void; onDesagendar: () => void }) {
+  const [data, setData] = useState(agendadoEm ?? '');
+  const [h, setH] = useState(hora ?? '11:00');
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">agendar publicação</p>
+      <div className="flex gap-1">
+        <input type="date" value={data} onChange={(e) => setData(e.target.value)} className="flex-1 text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none [color-scheme:dark]" style={{ color: PAL.texto }} />
+        <input type="time" value={h} onChange={(e) => setH(e.target.value)} className="text-[0.62rem] px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none [color-scheme:dark]" style={{ color: PAL.texto }} />
+      </div>
+      <div className="flex gap-1">
+        <button type="button" onClick={() => onAgendar(data, h)} disabled={disabled || !data}
+          className="flex-1 text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a agendar…' : '📅 agendar'}</button>
+        {agendadoEm && <button type="button" onClick={onDesagendar} disabled={disabled} className="text-[0.62rem] px-2 py-1.5 rounded-lg border border-rose-400/40 text-rose-300 disabled:opacity-50">desagendar</button>}
+      </div>
+      <p className="text-[0.52rem] opacity-45 leading-snug">Publica-se sozinha na conta vivianne.dos.santos à hora marcada; o vídeo é preparado automaticamente. A hora é no teu fuso.</p>
+    </div>
+  );
+}
+
+// ESTÚDIO completo de UMA peça (modal). Espelha o Soulab: prever · texto · legenda ·
+// motion · som · letras · efeito · imagem · render · agendar.
+function Estudio({ peca, acaoSlug, onFechar, acoes }: {
+  peca: Peca; acaoSlug: string | null; onFechar: () => void;
+  acoes: {
+    salvarTexto: (slug: string, momentos: string[]) => void;
+    salvarLegenda: (slug: string, legenda: string, hashtags: string) => void;
+    darMovimento: (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void;
+    gerarSom: (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'musica'; estilo?: string }) => void;
+    salvarEfeito: (slug: string, efeito: EfeitoTexto) => void;
+    salvarTipografia: (slug: string, t: Tipografia) => void;
+    salvarTempo: (slug: string, seg: number) => void;
+    novaImagem: (slug: string) => void;
+    renderizar: (slug: string) => void;
+    agendar: (slug: string, data: string, hora: string) => void;
+    desagendar: (slug: string) => void;
+  };
+}) {
+  type Sec = 'prever' | 'texto' | 'legenda' | 'motion' | 'som' | 'letras' | 'efeito' | 'agendar';
+  const [sec, setSec] = useState<Sec>('prever');
+  const busy = acaoSlug === peca.slug;
+  const disabled = !!acaoSlug;
+  const SECS: { id: Sec; label: string }[] = [
+    { id: 'prever', label: '▶ prever' },
+    { id: 'texto', label: '✎ texto' },
+    { id: 'legenda', label: '📝 legenda' },
+    { id: 'motion', label: '🎬 motion' },
+    { id: 'som', label: '🔊 som' },
+    { id: 'letras', label: '🅰 letras' },
+    { id: 'efeito', label: '✶ efeito' },
+    { id: 'agendar', label: '📅 agendar' },
+  ];
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-3 md:p-6" onClick={onFechar}>
+      <div className="w-full max-w-md rounded-2xl border border-white/12 shadow-2xl" style={{ background: PAL.bg }} onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-white/10">
+          <div className="min-w-0">
+            <p className="text-[0.7rem] uppercase tracking-widest opacity-50">estúdio</p>
+            <p className="text-[0.8rem] truncate" style={{ color: dz }}>{NOME_FORMATO[peca.formato ?? ''] ?? peca.formato ?? 'revelação'} · véu {peca.veu ?? '—'}</p>
+          </div>
+          <button onClick={onFechar} className="text-[0.8rem] px-2 py-1 rounded-lg border border-white/20 hover:bg-white/10">fechar ✕</button>
+        </div>
+
+        {/* estado + render + imagem rápidos */}
+        <div className="px-4 pt-3 flex flex-wrap items-center gap-1.5 text-[0.62rem]">
+          {peca.publicado ? <span className="px-1.5 py-0.5 rounded bg-emerald-600/80 text-[#0F0F1A]">✓ publicada</span>
+            : peca.agendadoEm ? <span className="px-1.5 py-0.5 rounded text-[#0F0F1A]" style={{ background: dz }}>📅 {peca.agendadoEm.slice(5)} {(peca.hora ?? '').slice(0, 5)}</span>
+              : <span className="px-1.5 py-0.5 rounded bg-white/10">✎ por agendar</span>}
+          {peca.videoUrl && <span className="px-1.5 py-0.5 rounded bg-sky-600/80 text-white">MP4 pronto</span>}
+          {peca.clipUrl && <span className="px-1.5 py-0.5 rounded text-[#0F0F1A]" style={{ background: dz }}>🎬 com vida</span>}
+          <button onClick={() => acoes.novaImagem(peca.slug)} disabled={disabled} title="gerar outra imagem (mantém o texto)" className="ml-auto px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🖼 outra imagem'}</button>
+          <button onClick={() => acoes.renderizar(peca.slug)} disabled={disabled} title="renderizar o reel final (MP4)" className="px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🎬 render'}</button>
+        </div>
+
+        {peca.videoUrl && (
+          <div className="px-4 pt-3">
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video src={peca.videoUrl} controls playsInline className="w-full rounded-lg border border-white/10" />
+          </div>
+        )}
+
+        {/* separadores das secções do estúdio */}
+        <div className="px-4 pt-3 flex flex-wrap gap-1">
+          {SECS.map((s) => (
+            <button key={s.id} onClick={() => setSec(s.id)} className="text-[0.64rem] px-2 py-1 rounded-full border"
+              style={sec === s.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.18)', color: PAL.texto }}>{s.label}</button>
+          ))}
+        </div>
+
+        <div className="px-4 py-3">
+          {sec === 'prever' && <PreviewBox peca={peca} busy={busy} disabled={disabled} onSaveTempo={(seg) => acoes.salvarTempo(peca.slug, seg)} />}
+          {sec === 'texto' && <TextoBox peca={peca} busy={busy} disabled={disabled} onSave={(moms) => acoes.salvarTexto(peca.slug, moms)} />}
+          {sec === 'legenda' && <LegendaBox legenda={peca.legenda ?? ''} hashtags={peca.hashtags} busy={busy} disabled={disabled} onSave={(leg, tags) => acoes.salvarLegenda(peca.slug, leg, tags)} />}
+          {sec === 'motion' && <MotionBox clipUrl={peca.clipUrl} busy={busy} disabled={disabled || !peca.imageUrl} onGerar={(opts) => acoes.darMovimento(peca.slug, opts)} />}
+          {sec === 'som' && <SomBox peca={peca} busy={busy} disabled={disabled} onGerar={(tipo, estilo) => acoes.gerarSom(peca.slug, { tipo, estilo })} onRemover={() => acoes.gerarSom(peca.slug, { remover: true })} />}
+          {sec === 'letras' && <TipografiaBox peca={peca} busy={busy} disabled={disabled} onSave={(t) => acoes.salvarTipografia(peca.slug, t)} />}
+          {sec === 'efeito' && <EfeitoBox peca={peca} busy={busy} disabled={disabled} onSave={(ef) => acoes.salvarEfeito(peca.slug, ef)} />}
+          {sec === 'agendar' && <AgendarBox agendadoEm={peca.agendadoEm} hora={peca.hora} busy={busy} disabled={disabled} onAgendar={(d, h) => acoes.agendar(peca.slug, d, h)} onDesagendar={() => acoes.desagendar(peca.slug)} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Cartao({ p, onApagar, onAbrir }: { p: Peca; onApagar: (slug: string) => void; onAbrir: (slug: string) => void }) {
   const [i, setI] = useState(0);
   const n = Math.max(1, p.momentos.length);
   useEffect(() => { if (n <= 1) return; const t = setInterval(() => setI((x) => (x + 1) % n), 2400); return () => clearInterval(t); }, [n]);
@@ -33,7 +393,8 @@ function Cartao({ p, onApagar, onImagem, onRender, ocupado }: { p: Peca; onApaga
             {p.momentos.map((_, k) => <span key={k} className="w-1.5 h-1.5 rounded-full" style={{ background: k === idx ? '#EBAE4A' : 'rgba(255,255,255,0.35)' }} />)}
           </div>
         )}
-        {p.videoUrl && <span className="absolute top-2 right-2 text-[0.55rem] bg-emerald-600/85 text-white rounded px-1.5 py-0.5">MP4</span>}
+        {p.videoUrl ? <span className="absolute top-2 right-2 text-[0.55rem] bg-emerald-600/85 text-white rounded px-1.5 py-0.5">MP4</span>
+          : p.clipUrl ? <span className="absolute top-2 right-2 text-[0.55rem] rounded px-1.5 py-0.5 text-[#0F0F1A]" style={{ background: '#EBAE4A' }}>🎬</span> : null}
       </div>
       <div className="p-2.5 text-[0.64rem]">
         <p className="opacity-70 mb-1">{NOME_FORMATO[p.formato ?? ''] ?? p.formato ?? 'revelação'} · véu {p.veu ?? '—'}</p>
@@ -42,11 +403,8 @@ function Cartao({ p, onApagar, onImagem, onRender, ocupado }: { p: Peca; onApaga
             : p.agendadoEm ? <span className="px-1.5 py-0.5 rounded bg-[#C9B6FA]/80 text-[#0F0F1A]">📅 {p.agendadoEm.slice(5)} {(p.hora ?? '').slice(0, 5)}</span>
               : <span className="px-1.5 py-0.5 rounded bg-white/10">✎ por agendar</span>}
         </div>
-        {/* AUTONOMIA: trocar imagem · render · agendar · apagar — tudo à mão */}
         <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
-          <button onClick={() => onImagem(p.slug)} disabled={!!ocupado && ocupado.endsWith(p.slug)} title="gerar outra imagem (mantém o texto)" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar disabled:opacity-40">{ocupado === `img-${p.slug}` ? '🖼…' : '🖼 outra'}</button>
-          <button onClick={() => onRender(p.slug)} disabled={!!ocupado && ocupado.endsWith(p.slug)} title="renderizar o reel (MP4)" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar disabled:opacity-40">{ocupado === `rnd-${p.slug}` ? '🎬…' : '🎬 render'}</button>
-          <Link href="/admin/publicar?conta=loja&vista=semana" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar">agendar →</Link>
+          <button onClick={() => onAbrir(p.slug)} title="abrir o estúdio: prever, editar texto, legenda, motion, som, render, agendar" className="px-2 py-0.5 rounded border font-medium" style={{ borderColor: '#EBAE4A', color: '#EBAE4A' }}>✦ estúdio</button>
           {!p.publicado && <button onClick={() => onApagar(p.slug)} className="ml-auto px-2 py-0.5 rounded border border-rose-400/40 text-rose-300">✕</button>}
         </div>
       </div>
@@ -59,6 +417,8 @@ export default function MetodoVSPage() {
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
+  const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
+  const [estudioSlug, setEstudioSlug] = useState<string | null>(null);
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/metodo-vs/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -81,38 +441,120 @@ export default function MetodoVSPage() {
 
   const apagar = useCallback(async (slug: string) => {
     if (typeof window !== 'undefined' && !window.confirm('Apagar esta peça?')) return;
-    try { const r = await fetch('/api/admin/metodo-vs/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (r.ok) recarregar(); } catch { /* */ }
+    try { const r = await fetch('/api/admin/metodo-vs/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (r.ok) { setEstudioSlug((s) => (s === slug ? null : s)); recarregar(); } } catch { /* */ }
   }, [recarregar]);
 
-  // AUTONOMIA: trocar a imagem e renderizar, sem sair daqui.
-  const [ocupado, setOcupado] = useState<string | null>(null);
+  // estúdio: cada ação corre uma rota (do Soulab por slug, ou a própria do método para
+  // a imagem) e recarrega. acaoSlug trava o resto enquanto uma corre.
   const novaImagem = useCallback(async (slug: string) => {
-    if (ocupado) return;
-    setOcupado(`img-${slug}`); setErro(null); setMsg('A gerar outra imagem…');
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A gerar outra imagem (Flux)…');
     try {
       const r = await fetch('/api/admin/metodo-vs/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Imagem trocada.');
       recarregar();
-    } catch (e) { setErro(String(e)); } finally { setOcupado(null); }
-  }, [ocupado, recarregar]);
-  const renderUm = useCallback(async (slug: string) => {
-    if (ocupado) return;
-    setOcupado(`rnd-${slug}`); setErro(null); setMsg('A disparar o render (alguns minutos)…');
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const renderizar = useCallback(async (slug: string) => {
+    if (acaoSlug) return;
+    if (typeof window !== 'undefined' && !window.confirm('Disparar o RENDER FINAL (MP4)? Demora alguns minutos e corre nos GitHub Actions.\n\nDica: pré-vê primeiro com ▶ prever.')) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A disparar o render (alguns minutos)…');
     try {
       const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
       const j = await r.json().catch(() => ({}));
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Render disparado. O MP4 aparece daqui a alguns minutos (recarrega).');
-    } catch (e) { setErro(String(e)); } finally { setOcupado(null); }
-  }, [ocupado]);
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug]);
+
+  // editar (texto/legenda/efeito/tipografia/tempo) -> rota genérica do Soulab por slug.
+  const salvarEditar = useCallback(async (slug: string, corpo: Record<string, unknown>, ok: string) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar…');
+    try {
+      const r = await fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...corpo }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg(ok);
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  // o texto dos momentos vive nos slides; a rota editar do Soulab só mexe no slide[0].
+  // Para vários momentos, gravamos via a rota própria de edição de texto do método.
+  const salvarTexto = useCallback(async (slug: string, momentos: string[]) => {
+    if (acaoSlug || !momentos.length) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar o texto…');
+    try {
+      const r = await fetch('/api/admin/metodo-vs/texto', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, momentos }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Texto guardado.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const salvarLegenda = useCallback((slug: string, legenda: string, hashtags: string) => salvarEditar(slug, { legenda, hashtags }, 'Legenda guardada.'), [salvarEditar]);
+  const salvarEfeito = useCallback((slug: string, efeito: EfeitoTexto) => salvarEditar(slug, { efeito }, 'Efeito guardado. O reel usa-o no render.'), [salvarEditar]);
+  const salvarTipografia = useCallback((slug: string, tipografia: Tipografia) => salvarEditar(slug, { tipografia }, 'Tipografia guardada.'), [salvarEditar]);
+  const salvarTempo = useCallback((slug: string, segPorMomento: number) => salvarEditar(slug, { segPorMomento }, 'Tempo guardado. O render usa este ritmo.'), [salvarEditar]);
+
+  const darMovimento = useCallback(async (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A dar vida à imagem (Kling)… pode demorar 1 a 3 min. Não feches.');
+    try {
+      const r = await fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...opts }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Movimento gerado. Vê em cima (o texto entra no render).');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const gerarSom = useCallback(async (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'musica'; estilo?: string }) => {
+    if (acaoSlug) return;
+    const { remover, tipo, estilo } = opts;
+    setAcaoSlug(slug); setErro(null);
+    setMsg(remover ? 'A remover o áudio (volta à música da loja)…' : tipo === 'musica' ? 'A compor a música ambiente (~30-60s)…' : 'A gerar o som da cena (~20-40s)…');
+    try {
+      const r = await fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover, tipo, estilo }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg(remover ? 'Áudio removido.' : 'Áudio gerado. O render usa-o como áudio do reel.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const agendar = useCallback(async (slug: string, data: string, hora: string) => {
+    if (acaoSlug) return;
+    if (!data) { setErro('Escolhe a data.'); return; }
+    setAcaoSlug(slug); setErro(null); setMsg('A agendar…');
+    try {
+      // data vem do input 'YYYY-MM-DD' (local) — enviar tal e qual, NUNCA via
+      // toISOString. aprovado=true = a trava do cron. Publica na conta mãe (metodovs->loja).
+      const r = await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: data, hora: hora || '11:00', aprovado: true }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Agendada. Publica-se sozinha à hora marcada.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const desagendar = useCallback(async (slug: string) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A desagendar…');
+    try {
+      const r = await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: null, aprovado: false }) });
+      if (!r.ok) { const j = await r.json().catch(() => ({})); setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); } else setMsg('Desagendada.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  const pecaAberta = pecas.find((p) => p.slug === estudioSlug) ?? null;
 
   return (
     <main className="min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8">
       <div className="max-w-5xl mx-auto">
         <Link href="/admin" className="text-[0.75rem] opacity-60 hover:opacity-100">← admin</Link>
         <h1 className="text-2xl mt-3 mb-1" style={{ fontFamily: 'var(--font-serif), serif', color: '#EBAE4A' }}>Método VS · a conta mãe</h1>
-        <p className="text-[0.84rem] opacity-75 mb-1">Vários posts diferentes, voz de autoridade (revelar, não explicar), por um calendário. Cada formato é um ângulo do mesmo véu, na voz da revelação. Lê do teu SABER.</p>
-        <p className="text-[0.7rem] opacity-45 mb-5">Agendar/publicar é no Publicar.</p>
+        <p className="text-[0.84rem] opacity-75 mb-1">Vários posts diferentes, voz de autoridade (revelar, não explicar), por um calendário. Cada formato é um ângulo do mesmo véu. Cada peça tem o estúdio completo: prever, texto, legenda, motion, som, tempo, render, agendar.</p>
+        <p className="text-[0.7rem] opacity-45 mb-5">Carrega «✦ estúdio» num cartão para preparar e agendar a peça aqui mesmo.</p>
 
         {/* CALENDÁRIO · a semana toda de uma vez */}
         <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 mb-4">
@@ -143,10 +585,17 @@ export default function MetodoVSPage() {
           <p className="text-center text-[0.78rem] opacity-50 py-10">Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.</p>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {pecas.map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onImagem={novaImagem} onRender={renderUm} ocupado={ocupado} />)}
+            {pecas.map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onAbrir={setEstudioSlug} />)}
           </div>
         )}
       </div>
+
+      {pecaAberta && (
+        <Estudio
+          peca={pecaAberta} acaoSlug={acaoSlug} onFechar={() => setEstudioSlug(null)}
+          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, salvarEfeito, salvarTipografia, salvarTempo, novaImagem, renderizar, agendar, desagendar }}
+        />
+      )}
     </main>
   );
 }
