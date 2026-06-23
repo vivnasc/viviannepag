@@ -14,6 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
+import { METODOVS_SLIDE } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
@@ -27,7 +28,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
 type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[]; vozPalavras?: { w: string; t0: number; t1: number }[]; vozDur?: number };
-type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string }; estilo?: EstiloMetodo } };
+type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; marca?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string }; estilo?: EstiloMetodo } };
 
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
@@ -100,7 +101,7 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog,
 // crossfade — mesmo padrão da Sequencia, mas com o KineticSlide (marca Soulab) e
 // fundo de imagem (sem clip, para o seek do render se manter simples). O efeito e a
 // tipografia vêm do 1.º slide (onde a Vivianne os guarda) e aplicam-se a todos.
-function SoulabMomentos({ slides, prog, mundo, clipUrl }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo; clipUrl?: string }) {
+function SoulabMomentos({ slides, prog, mundo, clipUrl, slideProps = SOULAB_SLIDE }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo; clipUrl?: string; slideProps?: typeof SOULAB_SLIDE }) {
   const n = Math.max(1, slides.length);
   const w = 1 / n;
   const s0 = slides[0] as (Slide & { efeito?: EfeitoTexto; tipografia?: Tipografia }) | undefined;
@@ -117,7 +118,7 @@ function SoulabMomentos({ slides, prog, mundo, clipUrl }: { slides: (Slide & { i
         if (op <= 0) return null;
         return (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
-            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...SOULAB_SLIDE} />
+            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...slideProps} />
           </div>
         );
       })}
@@ -157,6 +158,7 @@ function CartaSequencia({ beats, conta, prog, capaImg }: { beats: string[]; cont
 export default function RenderVeuPage() {
   const [estado, setEstado] = useState<{ slide: Slide & { imageUrl?: string }; dia: Dia; idx: number; slide2?: Slide & { imageUrl?: string } } | null>(null);
   const [subtipo, setSubtipo] = useState<string>('');
+  const [marcaM, setMarcaM] = useState<string>(''); // marca da peça (metodovs usa o render kinético com a assinatura da Vivianne)
   const [nomeCarta, setNomeCarta] = useState<string>('');
   const [estiloM, setEstiloM] = useState<EstiloMetodo | undefined>(undefined); // tipografia à escolha da Vivianne // nome da personagem na carta "Sou Aquela"
   const [clipBg, setClipBg] = useState<string | null>(null); // Soulab: o clip do Kling (fundo em movimento)
@@ -206,6 +208,7 @@ export default function RenderVeuPage() {
         if (!r.ok) { setErro(`coleccao ${r.status}`); return; }
         const col = (await r.json()) as Coleccao;
         setSubtipo(col.theme?.subtipo ?? '');
+        setMarcaM(col.theme?.marca ?? '');
         // o NOME só na carta do baralho "Sou Aquela" (tipo 'carta'); nas outras nbeats não.
         setNomeCarta(col.theme?.metodo?.tipo === 'carta' ? (col.theme?.metodo?.personagem ?? '') : '');
         setEstiloM(col.theme?.estilo ?? undefined);
@@ -316,11 +319,12 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
-      {/* SOULAB · vários momentos: peça Soulab com >1 slide => sequência sobre a cena */}
-      {estado && ehKinetic && (estado.dia.mundo as string) === 'soulab' && (estado.dia.slides?.length ?? 0) > 1 && (
-        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} />
+      {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
+          que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
+      {estado && ehKinetic && (((estado.dia.mundo as string) === 'soulab') || marcaM === 'metodovs') && (estado.dia.slides?.length ?? 0) > 1 && (
+        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={marcaM === 'metodovs' ? METODOVS_SLIDE : SOULAB_SLIDE} />
       )}
-      {estado && ehKinetic && s && !((estado.dia.mundo as string) === 'soulab' && (estado.dia.slides?.length ?? 0) > 1) && (
+      {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || marcaM === 'metodovs') && (estado.dia.slides?.length ?? 0) > 1) && (
         <KineticSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}
@@ -332,7 +336,7 @@ export default function RenderVeuPage() {
           tipografia={(s as { tipografia?: Tipografia }).tipografia}
           conceito={s.conceito}
           clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
-          {...((estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
+          {...(marcaM === 'metodovs' ? METODOVS_SLIDE : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
         />
       )}
       {estado && ehMetodo && ehCarta && s && getConta(s.contaId ?? '') && (
