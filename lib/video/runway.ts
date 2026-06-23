@@ -12,9 +12,13 @@ type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'fai
 
 // duração: o Gen-4.5 no Replicate só aceita 5 ou 10 segundos (confirmado por 422).
 export async function gerarVideoDemonstracao(prompt: string, token: string, duracao: 5 | 10 = 5): Promise<string> {
+  // REALISMO (pedido da Vivianne: "nada atual, zero ambiente natural, algo mais
+  // realístico"). Prefixo autoritário: filmagem documental fotorrealista, luz natural,
+  // ambiente real e contemporâneo — NUNCA estúdio, fundo preto ou ar de CGI.
+  const REAL = 'Photorealistic documentary footage filmed handheld on a real camera in soft natural daylight, set in a real contemporary everyday environment, authentic real materials and textures, candid and natural, absolutely NOT a studio shot, NOT a black void background, NOT CGI, NOT a 3D render. ';
   // input no formato mais comum do Replicate; se a ficha do modelo usar outros nomes,
   // o 422 abaixo diz-nos quais (afinação de 1 linha).
-  const input: Record<string, unknown> = { prompt, duration: duracao, aspect_ratio: '9:16' };
+  const input: Record<string, unknown> = { prompt: `${REAL}${prompt}`, duration: duracao, aspect_ratio: '9:16' };
 
   const res = await fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
     method: 'POST',

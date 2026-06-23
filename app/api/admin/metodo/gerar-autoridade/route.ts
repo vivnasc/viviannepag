@@ -4,9 +4,9 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { limparTravessoes } from '@/lib/texto';
 import { CONTAS, type VeuNome } from '@/lib/metodo/contas';
 import { planoSemanaAutoridade, diasAutoridadeDaData, FORMATOS_AUTORIDADE, type DiaAutoridade, type FormatoAutoridadeId } from '@/lib/metodo/formatos-autoridade';
-import { gerarAutoridade } from '@/lib/metodo/autoridade-ia';
+import { gerarAutoridade, gerarFundoAutoridade } from '@/lib/metodo/autoridade-ia';
 import { hashtagsMetodo } from '@/lib/metodo/hashtags';
-import { gerarFundoIA, assuntoCurto } from '@/lib/metodo/ia';
+import { assuntoCurto } from '@/lib/metodo/ia';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 
 export const runtime = 'nodejs';
@@ -23,12 +23,12 @@ type SlideMetodo = { tipo: 'metodo'; texto: string; destaque: string[]; notaVisu
 // A peça NASCE COM IMAGEM (como no laboratório/filhas): fundo Flux com gerarFundoIA
 // (o mesmo das imagens lindas), a MESMA cena em todos os momentos. Best-effort: se
 // falhar, fica o prompt e o passo "imagens" preenche depois.
-async function aplicarImagem(row: { slug: string; dias: { slides: SlideMetodo[] }[] }, veu: VeuNome, apiKey: string, token: string | undefined, evitarImg: string[]): Promise<void> {
+async function aplicarImagem(row: { slug: string; dias: { slides: SlideMetodo[] }[] }, apiKey: string, token: string | undefined, evitarImg: string[]): Promise<void> {
   if (!token) return;
   const slides = row.dias[0]?.slides ?? [];
   if (!slides.length) return;
   try {
-    const prompt = await gerarFundoIA(CONTAS.mae, evitarImg, apiKey, slides[0]?.texto, 'contemplativo', veu);
+    const prompt = await gerarFundoAutoridade(slides[0]?.texto ?? '', apiKey, evitarImg);
     const raw = await gerarImagemFlux(prompt, token, { raw: true });
     let url = raw;
     try { url = await guardarImagem(raw, `metodo/${row.slug}/fundo-${Date.now()}.jpg`); } catch { /* fica o url do Replicate */ }
@@ -113,7 +113,7 @@ export async function POST(req: Request) {
       const sb = await gerarAutoridade(d.formato, d.veu, apiKey, evitar);
       if (!sb.beats.length) continue;
       const row = montarRow(slug, d.data, d.hora, d.formato, d.veu, sb.beats, sb.envio, sb.porque);
-      if (inlineImg) await aplicarImagem(row as unknown as { slug: string; dias: { slides: SlideMetodo[] }[] }, d.veu, apiKey, token, evitarImg);
+      if (inlineImg) await aplicarImagem(row as unknown as { slug: string; dias: { slides: SlideMetodo[] }[] }, apiKey, token, evitarImg);
       rows.push(row); evitar.push(sb.beats[0].texto);
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
