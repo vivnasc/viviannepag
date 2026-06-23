@@ -41,13 +41,17 @@ export async function POST(req: NextRequest) {
     const { path = '/', ref = '' } = (await req.json().catch(() => ({}))) as { path?: string; ref?: string };
     const source = classificar(ref, path);
     const pais = req.headers.get('x-vercel-ip-country') || null;
+    const cidade = (() => { try { return decodeURIComponent(req.headers.get('x-vercel-ip-city') || '') || null; } catch { return req.headers.get('x-vercel-ip-city') || null; } })();
+    const regiao = req.headers.get('x-vercel-ip-country-region') || null;
+    const ua = req.headers.get('user-agent') || '';
+    const dispositivo = /mobile|android|iphone|ipad|ipod/i.test(ua) ? 'Telemóvel' : 'Computador';
+
     const sb = getSupabaseAdmin();
-    await sb.from('site_views').insert({
-      path: String(path).slice(0, 300),
-      source,
-      referrer: ref ? String(ref).slice(0, 300) : null,
-      pais,
-    });
+    const base = { path: String(path).slice(0, 300), source, referrer: ref ? String(ref).slice(0, 300) : null, pais };
+    // tenta com os campos novos (cidade/região/dispositivo); se as colunas ainda
+    // não existirem, grava só o base — assim nunca se perde a visita.
+    const { error } = await sb.from('site_views').insert({ ...base, cidade, regiao, dispositivo });
+    if (error) await sb.from('site_views').insert(base);
   } catch { /* nunca falha para o utilizador */ }
   return new NextResponse(null, { status: 204 });
 }
