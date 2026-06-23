@@ -88,14 +88,13 @@ export async function POST(req: Request) {
 
   const fazer = (slug: string) => !publicados.has(slug) && (!!body.dia || !existentes.has(slug));
 
-  // imagem inline (peça nasce com imagem) nos TESTES (1 dia / 1 formato) — rápido. Na
-  // semana toda (8 peças) a imagem fica para o passo "imagens em falta", para o pedido
-  // não estourar o tempo. token da Flux para a imagem nascer com a peça.
-  const inlineImg = !!(body.dia || body.formato);
+  // A peça NASCE COM IMAGEM (1 passo só), também na semana toda — não é 2 passos.
+  // Guarda CADA peça assim que está pronta (texto + imagem): se o pedido estourar o
+  // tempo, o que já foi feito fica salvo e re-clicar continua (salta os existentes).
   const token = process.env.REPLICATE_API_TOKEN;
   const evitarImg: string[] = [];
 
-  const rows: Record<string, unknown>[] = [];
+  let gerados = 0;
   let ultimoErro = '';
   for (const d of dias) {
     const slug = `metodo-mae-${d.formato}-${d.data}`;
@@ -104,13 +103,13 @@ export async function POST(req: Request) {
       const sb = await gerarAutoridade(d.formato, d.veu, apiKey, evitar);
       if (!sb.beats.length) continue;
       const row = montarRow(slug, d.data, d.hora, d.formato, d.veu, sb.beats, sb.envio);
-      if (inlineImg) await aplicarImagem(row as unknown as { slug: string; dias: { slides: SlideMetodo[] }[] }, d.veu, apiKey, token, evitarImg);
-      rows.push(row); evitar.push(sb.beats[0].texto);
+      await aplicarImagem(row as unknown as { slug: string; dias: { slides: SlideMetodo[] }[] }, d.veu, apiKey, token, evitarImg);
+      const { error } = await supabase.from('carousel_collections').upsert(row, { onConflict: 'slug' });
+      if (error) { ultimoErro = error.message; continue; }
+      existentes.add(slug); evitar.push(sb.beats[0].texto); gerados++;
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
 
-  if (!rows.length) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: !ultimoErro, detalhe: ultimoErro || undefined });
-  const { error } = await supabase.from('carousel_collections').upsert(rows, { onConflict: 'slug' });
-  if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
-  return NextResponse.json({ ok: true, gerados: rows.length });
+  if (!gerados) return NextResponse.json({ ok: true, gerados: 0, jaExistiam: !ultimoErro, detalhe: ultimoErro || undefined });
+  return NextResponse.json({ ok: true, gerados });
 }
