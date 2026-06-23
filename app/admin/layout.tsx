@@ -57,41 +57,17 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    titulo: 'método vs · o mapa (4 contas)',
+    // método vs numa só secção (a Vivianne: "o sidebar fica longo demais, ambientes
+    // com coisas que não uso bloqueiam-me"). As 4 contas trocam-se por abas DENTRO da
+    // página "produzir", não por entradas separadas no menu.
+    titulo: 'método vs',
     cor: '#d8b25a',
     itens: [
+      { href: '/admin/metodo/mae', label: 'produzir · 4 contas' },
       { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
       { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
-    ],
-  },
-  {
-    titulo: 'vivianne.dos.santos · a mãe',
-    cor: '#d8b25a',
-    itens: [
-      { href: '/admin/metodo/mae', label: 'produzir · autoridade' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
-    ],
-  },
-  {
-    titulo: 'ver.soltar',
-    cor: '#cdd8df',
-    itens: [
-      { href: '/admin/metodo/ver', label: 'produzir · o Espelho' },
-    ],
-  },
-  {
-    titulo: 'vir.soltar',
-    cor: '#e8bd84',
-    itens: [
-      { href: '/admin/metodo/vir', label: 'produzir · a Carta' },
-    ],
-  },
-  {
-    titulo: 'viver.soltar',
-    cor: '#cfe0a0',
-    itens: [
-      { href: '/admin/metodo/viver', label: 'produzir · o Repara' },
     ],
   },
   {
