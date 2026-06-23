@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
+import { MapaSlide } from '@/components/admin/MapaSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta } from '@/lib/metodo/contas';
 
@@ -57,11 +58,14 @@ const segISO = (offset: number) => { const x = new Date(); const wd = x.getDay()
 const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
 // PRÉ-VER (feed da mãe): cicla os MOMENTOS da peça (cada beat), com pontinhos, como
-// no laboratório — para ela ver TODOS os slides no cartão, não só a capa.
-function MomentosPreview({ beats, conta, imageUrl, conceito }: { beats: string[]; conta: ComponentProps<typeof MetodoSlide>['conta']; imageUrl: string | null; conceito: string }) {
+// no laboratório — para ela ver TODOS os slides no cartão, não só a capa. EXCEÇÃO: os
+// formatos com layout PRÓPRIO (ex. O Mapa do Véu) mostram-se compostos, num só cartão.
+function MomentosPreview({ beats, conta, imageUrl, conceito, tipo }: { beats: string[]; conta: ComponentProps<typeof MetodoSlide>['conta']; imageUrl: string | null; conceito: string; tipo?: string | null }) {
   const [i, setI] = useState(0);
   const n = Math.max(1, beats.length);
   useEffect(() => { if (n <= 1) return; const t = setInterval(() => setI((x) => (x + 1) % n), 2600); return () => clearInterval(t); }, [n]);
+  // O Mapa do Véu tem cara própria: cartão-diagnóstico (não slides iguais a ciclar).
+  if (tipo === 'mapa') return <MapaSlide beats={beats} conta={conta} imageUrl={imageUrl ?? undefined} prog={1} />;
   const idx = Math.min(i, n - 1);
   return (
     <div className="relative">
@@ -580,7 +584,7 @@ export default function MetodoContaPage() {
                     return (
                       <div key={e.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
                         <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full" style={{ boxShadow: `inset 0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : '#d8b25a55'}` }}>
-                          <MomentosPreview beats={e.beats.length ? e.beats : [e.texto]} conta={conta} imageUrl={e.imageUrl} conceito={e.conceito} />
+                          <MomentosPreview beats={e.beats.length ? e.beats : [e.texto]} conta={conta} imageUrl={e.imageUrl} conceito={e.conceito} tipo={e.tipo} />
                         </button>
                         <div className="p-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.6rem]">
                           <span className="opacity-80">{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo ?? 'autoridade'}</span>
