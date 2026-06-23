@@ -12,11 +12,17 @@ type Post = {
 type FormatoResumo = { formato: string; n: number; mediaAlcance: number; mediaInteracoes: number };
 type Resumo = { mediaAlcance: number; mediaInteracoes: number; taxaInteracao: number; porFormato: FormatoResumo[]; melhorFormato?: string };
 type Crescimento = { novos30d?: number; porSemana?: number; alcanceDescobertaPct?: number; alcance30d?: number; visualizacoes30d?: number; alcanceVarPct?: number };
+type ParItem = { k: string; n: number };
+type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[] };
 type Analytics = {
   ok: boolean; username?: string; seguidores?: number; totalPosts?: number;
-  insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; crescimento?: Crescimento; erro?: string; detalhe?: string; avisoInsights?: string;
+  insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; crescimento?: Crescimento; demografia?: Demografia; erro?: string; detalhe?: string; avisoInsights?: string;
   consistenteDesde?: string | null;
 };
+
+const GENERO_PT: Record<string, string> = { M: 'Homens', F: 'Mulheres', U: 'Outro' };
+const PAIS_PT: Record<string, string> = { PT: 'Portugal', BR: 'Brasil', AO: 'Angola', MZ: 'Moçambique', CV: 'Cabo Verde', US: 'EUA', GB: 'Reino Unido', ES: 'Espanha', FR: 'França', CH: 'Suíça', LU: 'Luxemburgo', DE: 'Alemanha', BE: 'Bélgica', NL: 'Países Baixos', IT: 'Itália', CA: 'Canadá' };
+const paisNome = (c: string) => PAIS_PT[c] ?? c;
 
 const nf = (n?: number) => (n == null ? '—' : new Intl.NumberFormat('pt-PT').format(n));
 const FORMATO_PT: Record<string, string> = { REELS: 'Reels', CAROUSEL_ALBUM: 'Carrossel', VIDEO: 'Vídeo', IMAGE: 'Imagem', FEED: 'Imagem' };
@@ -218,6 +224,24 @@ function Hero({ big, label, extra, up }: { big: string; label: string; extra?: s
   );
 }
 
+function Mini({ titulo, itens, accent }: { titulo: string; itens: ParItem[]; accent: { text: string; bar: string } }) {
+  const max = Math.max(1, ...itens.map((i) => i.n));
+  const total = itens.reduce((a, i) => a + i.n, 0) || 1;
+  return (
+    <div className="text-xs">
+      <div className="text-stone-400">{titulo}</div>
+      <div className="mt-1 space-y-1">
+        {itens.map((i) => (
+          <div key={i.k}>
+            <div className="flex justify-between text-stone-300"><span className="truncate">{i.k}</span><span className="shrink-0">{Math.round((i.n / total) * 100)}%</span></div>
+            <div className="h-1 rounded-full bg-stone-800"><div className={`h-1 rounded-full ${accent.bar}`} style={{ width: `${Math.round((i.n / max) * 100)}%` }} /></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar: string } }) {
   const maxAlc = Math.max(1, ...(data.resumo?.porFormato ?? []).map((f) => f.mediaAlcance));
   const top = [...data.posts].sort((x, y) => (y.alcance ?? -1) - (x.alcance ?? -1)).slice(0, 4);
@@ -241,6 +265,20 @@ function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar
           {data.crescimento.alcanceDescobertaPct != null && <span className="ml-2">🧲 {data.crescimento.alcanceDescobertaPct}% a não-seguidores</span>}
         </div>
       )}
+
+      {/* QUEM TE SEGUE — idade, género, países (só com 100+ seguidores) */}
+      {data.demografia ? (
+        <div className="mt-5">
+          <div className="text-xs font-medium text-stone-300">Quem te segue (audiência)</div>
+          <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {data.demografia.idade && <Mini titulo="Idade" itens={data.demografia.idade.slice(0, 5)} accent={accent} />}
+            {data.demografia.genero && <Mini titulo="Género" itens={data.demografia.genero.map((g) => ({ k: GENERO_PT[g.k] ?? g.k, n: g.n }))} accent={accent} />}
+            {data.demografia.pais && <Mini titulo="Países" itens={data.demografia.pais.map((p) => ({ k: paisNome(p.k), n: p.n })).slice(0, 5)} accent={accent} />}
+          </div>
+        </div>
+      ) : (data.seguidores ?? 0) < 100 ? (
+        <div className="mt-4 rounded-lg bg-stone-800/40 p-3 text-xs text-stone-400">A demografia da audiência (idade, género, países) destrava a partir de <b>100 seguidores</b> — limite do Instagram.</div>
+      ) : null}
 
       {!data.insightsDisponiveis && (
         <div className="mt-3 rounded-lg bg-amber-950/40 p-3 text-xs text-amber-300">
@@ -277,7 +315,8 @@ function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar
                 <div className="flex aspect-square w-full items-center justify-center rounded bg-stone-800 text-2xl">{emojiFormato(p.formato)}</div>
               )}
               <div className="mt-1 line-clamp-2 text-[0.7rem] text-stone-400">{p.caption || '(sem legenda)'}</div>
-              <div className="mt-1 text-[0.7rem] text-stone-300">👁 {nf(p.alcance)} · ❤ {nf(p.gostos)} · 🔖 {nf(p.guardados)}</div>
+              <div className="mt-1 text-[0.7rem] text-stone-300">{p.views != null ? `👁 ${nf(p.views)} · ` : ''}🌍 {nf(p.alcance)}</div>
+              <div className="text-[0.68rem] text-stone-400">❤ {nf(p.gostos)} · 💬 {nf(p.comentarios)} · 🔖 {nf(p.guardados)}{p.partilhas != null ? ` · ↗ ${nf(p.partilhas)}` : ''}</div>
             </a>
           ))}
           {top.length === 0 && <div className="col-span-2 text-xs text-stone-600">Sem posts.</div>}
