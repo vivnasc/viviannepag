@@ -28,8 +28,8 @@ export const DEMONSTRACOES: Demonstracao[] = [
   },
   {
     semana: 3, materia: 'Desenvolvimento Pessoal', tema: 'Limites saudáveis',
-    objeto: 'água a abaular acima do rebordo (tensão superficial) que uma gota de sabão rebenta',
-    prompt: 'A glass filled to the very brim on a wooden kitchen table by a window in natural daylight, water doming and bulging above the rim held by surface tension, tiny coins gently added making the dome rise without spilling. Then a single drop of soap touches the surface and the whole dome collapses and floods over the table. Real water highlights, slow motion. No text, no people. Vertical 9:16.',
+    objeto: 'a água que se segura abaulada acima do copo por uma pele invisível, até ceder',
+    prompt: 'Extreme close-up of a glass filled past the very brim on a wooden kitchen table by a window in natural daylight. The water bulges into a clear trembling dome high above the rim, held up by an invisible skin, far higher than seems possible. It holds, and holds, trembling. Then it gives, and the water spills over the edge and runs across the wooden table. One continuous shot, real water, natural light, slow motion. No text, no people, no hands. Vertical 9:16.',
     beats: ['Achas que aguentas tudo.', 'E aguentas, muito além do que parece.', 'Há um limite invisível que te segura inteira.', 'Tira-o, e espalha-se tudo.'],
     envio: 'Guarda para o dia em que precisares de dizer não.',
     legenda: 'A água segura-se acima do copo por uma pele que não vês. Aguenta moedas e moedas. Até que uma gota a mais rompe a tensão, e entorna tudo de uma vez.\n\nUm limite não te isola. É a pele invisível que te mantém inteira.\n\nDiz não antes da gota a mais.',
