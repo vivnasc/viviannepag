@@ -13,7 +13,7 @@ type FormatoResumo = { formato: string; n: number; mediaAlcance: number; mediaIn
 type Resumo = { mediaAlcance: number; mediaInteracoes: number; taxaInteracao: number; porFormato: FormatoResumo[]; melhorFormato?: string };
 type Crescimento = { novos30d?: number; porSemana?: number; alcanceDescobertaPct?: number; alcance30d?: number; visualizacoes30d?: number; alcanceVarPct?: number };
 type ParItem = { k: string; n: number };
-type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[]; fonte?: string };
+type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[]; fonte?: string; nota?: string };
 type Analytics = {
   ok: boolean; username?: string; seguidores?: number; totalPosts?: number;
   insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; crescimento?: Crescimento; demografia?: Demografia; erro?: string; detalhe?: string; avisoInsights?: string;
@@ -275,6 +275,7 @@ function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar
             {data.demografia.genero && <Mini titulo="Género" itens={data.demografia.genero.map((g) => ({ k: GENERO_PT[g.k] ?? g.k, n: g.n }))} accent={accent} />}
             {data.demografia.pais && <Mini titulo="Países" itens={data.demografia.pais.map((p) => ({ k: paisNome(p.k), n: p.n })).slice(0, 5)} accent={accent} />}
           </div>
+          {data.demografia.nota && <p className="mt-2 text-[0.7rem] text-stone-500">{data.demografia.nota}</p>}
         </div>
       ) : (data.seguidores ?? 0) < 100 ? (
         <div className="mt-4 rounded-lg bg-stone-800/40 p-3 text-xs text-stone-400">A demografia da audiência (idade, género, países) destrava a partir de <b>100 seguidores</b> — limite do Instagram.</div>

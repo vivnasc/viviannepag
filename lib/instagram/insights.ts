@@ -88,16 +88,19 @@ export type ContaAnalytics = {
 };
 
 export type ParItem = { k: string; n: number };
-export type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[]; fonte?: string };
+export type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[]; fonte?: string; nota?: string };
 
 // DEMOGRAFIA de QUEM TE VÊ (contas alcançadas), não dos seguidores. Tenta, por
 // ordem: alcançadas → que interagem → seguidores (fallback). Idade, género, país.
 // Só com volume suficiente (100+); senão devolve undefined.
 async function getDemografia(token: string, igUserId: string): Promise<Demografia | undefined> {
+  // guarda o 1.º motivo pelo qual "quem te vê" falhou, para ser HONESTO no painel
+  let porqueNaoVer: string | undefined;
   const umBreakdown = async (metric: string, dim: string): Promise<ParItem[] | undefined> => {
     try {
       const j = await gget(`${igUserId}/insights`, { metric, period: 'lifetime', metric_type: 'total_value', timeframe: 'last_30_days', breakdown: dim, access_token: token });
-      if (erroDe(j)) return undefined;
+      const erro = erroDe(j);
+      if (erro) { if (!porqueNaoVer && metric !== 'follower_demographics') porqueNaoVer = erro; return undefined; }
       const results = ((j.data as { total_value?: { breakdowns?: { results?: { dimension_values?: string[]; value?: number }[] }[] } }[] | undefined)?.[0]?.total_value?.breakdowns?.[0]?.results) ?? [];
       const arr = results.map((r) => ({ k: r.dimension_values?.[0] ?? '?', n: r.value ?? 0 })).sort((a, b) => b.n - a.n);
       return arr.length ? arr : undefined;
@@ -110,7 +113,13 @@ async function getDemografia(token: string, igUserId: string): Promise<Demografi
   ];
   for (const { metric, fonte } of tentar) {
     const [idade, genero, pais] = await Promise.all([umBreakdown(metric, 'age'), umBreakdown(metric, 'gender'), umBreakdown(metric, 'country')]);
-    if (idade || genero || pais) return { idade, genero, pais: pais?.slice(0, 6), fonte };
+    if (idade || genero || pais) {
+      // se caímos nos seguidores, diz PORQUÊ não foi possível "quem te vê"
+      const nota = metric === 'follower_demographics'
+        ? (porqueNaoVer ? `o Instagram ainda não dá "quem te vê" nesta conta (${porqueNaoVer}) — mostro a dos seguidores` : 'demografia de "quem te vê" indisponível nesta conta — mostro a dos seguidores')
+        : undefined;
+      return { idade, genero, pais: pais?.slice(0, 6), fonte, nota };
+    }
   }
   return undefined;
 }
