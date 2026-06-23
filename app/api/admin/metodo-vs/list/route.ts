@@ -18,7 +18,7 @@ export async function GET() {
   type Row = {
     slug: string; brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; legenda?: string | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; metodovs?: { veu?: string } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; metodovs?: { veu?: string; formato?: string } } | null;
     created_at?: string;
   };
 
@@ -27,6 +27,8 @@ export async function GET() {
     return {
       slug: row.slug,
       veu: row.theme?.metodovs?.veu ?? null,
+      formato: row.theme?.metodovs?.formato ?? null,
+      hora: row.theme?.hora ?? null,
       momentos: slides.map((x) => x.texto ?? '').filter(Boolean),
       conceito: slides[0]?.conceito ?? '',
       imageUrl: slides[0]?.imageUrl ?? null,
