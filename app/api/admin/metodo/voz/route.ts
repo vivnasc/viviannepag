@@ -11,7 +11,7 @@ export const maxDuration = 120;
 // ouvires no player. NÃO é o som ambiente (isso é /som); é a voz por cima.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const { slug } = (await req.json().catch(() => ({}))) as { slug?: string };
+  const { slug, remover } = (await req.json().catch(() => ({}))) as { slug?: string; remover?: boolean };
   if (!slug) return NextResponse.json({ erro: 'slug' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -19,6 +19,15 @@ export async function POST(req: Request) {
   if (error || !row) return NextResponse.json({ erro: 'nao-encontrado' }, { status: 404 });
 
   const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ texto?: string }>; vozUrl?: string | null; vozPalavras?: unknown; vozDur?: number }>;
+
+  // REMOVER a voz (a Vivianne: saiu com sotaque errado, quero tirá-la): limpa a voz e
+  // os tempos do karaokê — o reel volta a ser sem voz (só motion + som).
+  if (remover) {
+    if (dias[0]) { dias[0].vozUrl = null; dias[0].vozPalavras = []; dias[0].vozDur = 0; }
+    await supabase.from('carousel_collections').update({ dias }).eq('slug', slug);
+    return NextResponse.json({ ok: true, removida: true });
+  }
+
   const slides = dias[0]?.slides ?? [];
   // a narração lê os slides por ordem (uma pausa entre eles para respirar).
   const texto = slides.map((s) => (s.texto ?? '').trim()).filter(Boolean).join('\n\n');

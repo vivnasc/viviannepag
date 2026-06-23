@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
+import { gerarFundoAutoridade } from '@/lib/metodo/autoridade-ia';
 import { PERSONAGENS } from '@/lib/metodo/personagens';
 import { figuraDescricao } from '@/lib/metodo/baralho';
 
@@ -81,7 +82,8 @@ export async function POST(req: Request) {
   }
   async function promptDe(i: number, frase?: string, veu?: VeuNome): Promise<string> {
     if (apiKey) {
-      try { const p = await gerarFundoIA(conta, evitar, apiKey, frase, 'contemplativo', veu); evitar.push(assuntoCurto(p)); return p; }
+      // A MÃE usa o gerador LIMPO (à Soulab, sem velas/sagrado); as filhas o seu.
+      try { const p = contaId === 'mae' ? await gerarFundoAutoridade(frase ?? '', apiKey, evitar) : await gerarFundoIA(conta, evitar, apiKey, frase, 'contemplativo', veu); evitar.push(assuntoCurto(p)); return p; }
       catch { /* cai no fallback abaixo */ }
     }
     return fundoDaConta(conta, evitar.length + i);

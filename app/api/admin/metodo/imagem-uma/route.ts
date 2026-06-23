@@ -6,6 +6,7 @@ import { CONTAS, fundoDaConta, ContaId, type VeuNome } from '@/lib/metodo/contas
 import { PERSONAGENS } from '@/lib/metodo/personagens';
 import { figuraDescricao } from '@/lib/metodo/baralho';
 import { gerarFundoIA, assuntoCurto, promptCartaFigura } from '@/lib/metodo/ia';
+import { gerarFundoAutoridade } from '@/lib/metodo/autoridade-ia';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -103,7 +104,8 @@ export async function POST(req: Request) {
   }
   const capa = slides[0];
   let prompt = fundoDaConta(conta, Math.floor(Math.random() * Math.max(1, conta.atmosfera.elementos.length)), Math.floor(Math.random() * 6));
-  if (apiKey) { try { prompt = await gerarFundoIA(conta, evitar, apiKey, capa?.texto, estilo, veu); } catch { /* fica o fallback */ } }
+  // A MÃE usa o gerador LIMPO (à Soulab, sem velas/sagrado); as filhas o seu.
+  if (apiKey) { try { prompt = contaId === 'mae' ? await gerarFundoAutoridade(capa?.texto ?? '', apiKey, evitar) : await gerarFundoIA(conta, evitar, apiKey, capa?.texto, estilo, veu); } catch { /* fica o fallback */ } }
   const { url, erro } = await fundoImagem(prompt, slug);
   if (!url) return NextResponse.json({ erro: 'flux-falhou', detalhe: erro ?? 'falhou' }, { status: 502 });
   for (const s of slides) { s.imageUrl = url; s.notaVisual = prompt; s.estilo = estilo; s.clipUrl = null; s.clipPredId = null; s.clipPend = false; }

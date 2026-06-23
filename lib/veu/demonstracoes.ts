@@ -28,8 +28,8 @@ export const DEMONSTRACOES: Demonstracao[] = [
   },
   {
     semana: 3, materia: 'Desenvolvimento Pessoal', tema: 'Limites saudáveis',
-    objeto: 'a água que se segura abaulada acima do copo por uma pele invisível, até ceder',
-    prompt: 'Extreme close-up of a glass filled past the very brim on a wooden kitchen table by a window in natural daylight. The water bulges into a clear trembling dome high above the rim, held up by an invisible skin, far higher than seems possible. It holds, and holds, trembling. Then it gives, and the water spills over the edge and runs across the wooden table. One continuous shot, real water, natural light, slow motion. No text, no people, no hands. Vertical 9:16.',
+    objeto: 'moedas que se vão pondo no copo cheio e a água sobe abaulada, segura por uma pele invisível, até transbordar',
+    prompt: 'Extreme close-up of a glass filled to the very brim on a wooden kitchen table by a window in natural daylight. A hand gently drops small coins into the full glass, one by one. With each coin the water rises and bulges higher into a clear trembling dome above the rim, held up by an invisible skin, far higher than seems possible, without spilling. After one coin too many the dome finally breaks and the water floods over the rim and runs across the wooden table. Real water and coins, natural light, slow motion. Vertical 9:16.',
     beats: ['Achas que aguentas tudo.', 'E aguentas, muito além do que parece.', 'Há um limite invisível que te segura inteira.', 'Tira-o, e espalha-se tudo.'],
     envio: 'Guarda para o dia em que precisares de dizer não.',
     legenda: 'A água segura-se acima do copo por uma pele que não vês. Aguenta moedas e moedas. Até que uma gota a mais rompe a tensão, e entorna tudo de uma vez.\n\nUm limite não te isola. É a pele invisível que te mantém inteira.\n\nDiz não antes da gota a mais.',
