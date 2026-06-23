@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { DEMONSTRACOES } from '@/lib/veu/demonstracoes';
+import { semanaEditorialAtual } from '@/lib/veu/planoEditorial';
 
 // veu.a.veu · DEMONSTRAÇÕES FÍSICAS — clica "gerar" e o Runway (via Replicate) cria o
 // vídeo do fenómeno; aparece aqui. O texto/legenda sobrepõe-se na fase 2 (já está
@@ -30,6 +31,15 @@ export default function VeuDemonstracoesPage() {
     finally { setBusy(null); }
   }, [busy, recarregar]);
 
+  // ANCORA à semana editorial de AGORA (o plano arranca a 8 jun = semana 1, dá a volta
+  // às 13). A semana atual aparece em destaque e primeiro; as passadas vão para o fim,
+  // marcadas, para a Vivianne não gerar (e postar) uma semana que já passou.
+  const atual = semanaEditorialAtual().semana;
+  const ordenadas = [...DEMONSTRACOES].sort((a, b) => {
+    const fa = a.semana >= atual ? 0 : 1; const fb = b.semana >= atual ? 0 : 1;
+    return fa - fb || a.semana - b.semana;
+  });
+
   return (
     <main className="min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8">
       <div className="max-w-3xl mx-auto">
@@ -41,12 +51,16 @@ export default function VeuDemonstracoesPage() {
         {erro && <p className="mb-3 text-[0.82rem] text-rose-300">{erro}</p>}
         {msg && !erro && <p className="mb-3 text-[0.82rem] text-emerald-300">{msg}</p>}
 
+        <p className="mb-4 text-[0.8rem]"><span className="opacity-60">esta semana é a</span> <b style={{ color: '#C9B6FA' }}>semana {atual}</b> <span className="opacity-60">do plano. Gera essa (ou as próximas). As passadas estão marcadas em baixo, não as postes.</span></p>
+
         <div className="space-y-4">
-          {DEMONSTRACOES.map((d) => (
-            <div key={d.semana} className="rounded-xl border border-white/10 p-4" style={{ background: 'rgba(255,255,255,0.02)' }}>
+          {ordenadas.map((d) => {
+            const estado = d.semana === atual ? 'agora' : d.semana < atual ? 'passou' : 'proxima';
+            return (
+            <div key={d.semana} className="rounded-xl border p-4" style={{ background: estado === 'agora' ? 'rgba(201,182,250,0.06)' : 'rgba(255,255,255,0.02)', borderColor: estado === 'agora' ? 'rgba(201,182,250,0.5)' : 'rgba(255,255,255,0.1)', opacity: estado === 'passou' ? 0.5 : 1 }}>
               <div className="flex items-baseline justify-between gap-3 flex-wrap">
                 <div>
-                  <span className="text-[0.62rem] uppercase tracking-widest opacity-45">semana {d.semana} · {d.materia}</span>
+                  <span className="text-[0.62rem] uppercase tracking-widest opacity-45">semana {d.semana} · {d.materia}{estado === 'agora' ? ' · ▶ esta semana' : estado === 'passou' ? ' · já passou' : ''}</span>
                   <h2 className="text-lg" style={{ fontFamily: 'serif' }}>{d.tema}</h2>
                   <p className="text-[0.78rem] opacity-70 italic">{d.objeto}</p>
                 </div>
@@ -67,7 +81,8 @@ export default function VeuDemonstracoesPage() {
                 <p className="mt-1 opacity-60">{d.envio}</p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </main>

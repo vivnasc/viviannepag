@@ -75,3 +75,29 @@ export async function gerarAutoridade(formato: FormatoAutoridadeId, veu: VeuNome
   const beats = momentos.map((texto) => ({ texto, imagem: '' }));
   return { beats, envio: lp(o.envio), porque: lp(o.porque) };
 }
+
+// IMAGEM (gerador NOVO, à maneira do Soulab) — substitui o gerarFundoIA antigo, que
+// enfiava velas/halos/sagrado (o ar do conteúdo abolido). Arte conceptual premium que
+// ENCARNA a frase concreta, luminosa e legível, com um elemento que se move (para
+// animar), e PROÍBE explicitamente o ar antigo. Devolve o prompt em inglês.
+export async function gerarFundoAutoridade(frase: string, apiKey: string, evitar: string[] = []): Promise<string> {
+  const evita = evitar.length ? `Evita repetir estes assuntos já usados: ${evitar.slice(-12).map((e) => `"${e}"`).join('; ')}.` : '';
+  const sys =
+    `És diretor de arte. Escreves UM prompt de imagem (em INGLÊS, uma linha) para o fundo de um reel 9:16 do Método VS.\n` +
+    `A FRASE do post é: «${frase}». A imagem ENCARNA a SITUAÇÃO concreta da frase (o sítio, o objeto, o momento da vida real de hoje), nunca um fundo decorativo desligado.\n` +
+    `ESTÉTICA (qualidade de laboratório, premium, como a Soulab): arte conceptual cinematográfica MODERNA e marcante, atmosférica, com profundidade e textura ricas, luz natural e elegante, contemporânea. Luminosa e legível, nunca lamacenta nem quase-preta.\n` +
+    `PROIBIDO (o ar antigo que já não se usa): velas, chamas, halos, auréolas, santos, ícones religiosos, mandalas, iconografia sagrada ou bizantina, roupa medieval, pinturas antigas ou renascentistas. Sem pessoas a posar, sem rostos, sem texto, sem letras, sem marca de água, sem logótipo.\n` +
+    `MOVIMENTO (a imagem vai ser animada depois): inclui um elemento que se mova sozinho de forma natural e contínua (água a ondular, fumo ou vapor a subir, névoa a derivar, cortina ou tecido ao vento, pó num raio de luz, reflexos a tremer, folhagem ao vento). NUNCA uses chama nem vela para isso.\n` +
+    `${evita}\n` +
+    `Termina com: cinematic conceptual fine-art, rich texture, atmospheric depth, premium, vertical 9:16. Devolve SÓ o prompt, numa linha, em inglês, sem aspas.`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 320, system: sys, messages: [{ role: 'user', content: 'Escreve o prompt da imagem, claramente diferente dos já usados.' }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}`);
+  let t = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["«»]+|["«»]+$/g, '');
+  if (!t) throw new Error('vazio');
+  if (!/9:16/.test(t)) t += ', vertical 9:16';
+  return limparTravessoes(t);
+}
