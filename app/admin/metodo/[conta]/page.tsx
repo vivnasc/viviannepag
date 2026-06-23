@@ -6,8 +6,10 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
+import { AutoridadeSlide, ehFormatoAutoridade } from '@/components/admin/AutoridadeSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
-import { getConta } from '@/lib/metodo/contas';
+import { getConta, CONTAS_LISTA } from '@/lib/metodo/contas';
+import { SEMANA_AUTORIDADE, veuDaSemana } from '@/lib/metodo/formatos-autoridade';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -32,7 +34,7 @@ const TIPO_LABEL: Record<string, string> = {
   espelho: 'O Espelho', cartaRenomear: 'Carta de renomear', repara: 'Repara',
   // MÃE · autoridade (os 8 formatos da semana de autoridade)
   veuDe: '🪞 O Véu de…', mecanismo: '⚙️ O Mecanismo Invisível', origem: '🌱 A Origem',
-  erro: '🔁 O Erro de Interpretação', custo: '💸 O Custo Escondido', mito: '⚔️ Mito vs Verdade',
+  erro: '🔁 O Erro de Interpretação', custo: '💸 O Custo Escondido', mito: '🌓 Mito vs Verdade',
   mapa: '🗺️ O Mapa do Véu',
 };
 // O QUE CADA FORMATO PRECISA (não replicar botões sem pensar no formato — regra
@@ -52,16 +54,23 @@ const CAP_FORMATO: Record<string, { imagem: boolean; som: boolean; voz: boolean 
   mapa: { imagem: true, som: true, voz: true },
 };
 const capFormato = (tipo?: string | null) => CAP_FORMATO[tipo ?? ''] ?? { imagem: true, som: false, voz: true };
+// ABAS INTERNAS das 4 contas (a Vivianne: "as filhas podiam ficar numa aba dentro
+// da mãe, o sidebar não ficava tão longo"). Uma só entrada no menu, troca-se aqui.
+const ABA_CONTA: Record<string, string> = { mae: '✨ a mãe', ver: '🌊 ver · o Espelho', vir: '🤲 vir · a Carta', viver: '🌅 viver · o Repara' };
 // 2.ª-feira (ISO) da semana a `offset` semanas de hoje — para testar/gerar 1 dia.
 const segISO = (offset: number) => { const x = new Date(); const wd = x.getDay(); x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd) + offset * 7); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };
 const DIAS_CAB = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
 // PRÉ-VER (feed da mãe): cicla os MOMENTOS da peça (cada beat), com pontinhos, como
-// no laboratório — para ela ver TODOS os slides no cartão, não só a capa.
-function MomentosPreview({ beats, conta, imageUrl, conceito }: { beats: string[]; conta: ComponentProps<typeof MetodoSlide>['conta']; imageUrl: string | null; conceito: string }) {
+// no laboratório — para ela ver TODOS os slides no cartão, não só a capa. EXCEÇÃO: os
+// formatos com layout PRÓPRIO (ex. O Mapa do Véu) mostram-se compostos, num só cartão.
+function MomentosPreview({ beats, conta, imageUrl, conceito, tipo }: { beats: string[]; conta: ComponentProps<typeof MetodoSlide>['conta']; imageUrl: string | null; conceito: string; tipo?: string | null }) {
   const [i, setI] = useState(0);
   const n = Math.max(1, beats.length);
   useEffect(() => { if (n <= 1) return; const t = setInterval(() => setI((x) => (x + 1) % n), 2600); return () => clearInterval(t); }, [n]);
+  // Os formatos de autoridade têm cara PRÓPRIA (cada um o seu layout), não slides
+  // iguais a ciclar. prog fixo (1) revela tudo no cartão do feed.
+  if (ehFormatoAutoridade(tipo)) return <AutoridadeSlide formato={tipo} beats={beats} conta={conta} imageUrl={imageUrl ?? undefined} prog={1} />;
   const idx = Math.min(i, n - 1);
   return (
     <div className="relative">
@@ -184,35 +193,6 @@ export default function MetodoContaPage() {
     } catch (e) { setErro(String(e)); }
     finally { setTesteBusy(false); }
   }, [conta, testeBusy, lote, offset, recarregar]);
-
-  // AS 4 CONTAS de uma vez (só na mãe): testa 1 dia OU gera a semana de mae+ver+
-  // vir+viver em sequência, para não entrar conta a conta. O dia/semana é o mesmo
-  // offset visível. Corre uma a uma (cada chamada já persiste no servidor).
-  const [quatroBusy, setQuatroBusy] = useState(false);
-  const correrQuatro = useCallback(async (modo: 'dia' | 'semana') => {
-    if (quatroBusy || lote) return;
-    setQuatroBusy(true); setErro(null);
-    const contas: { id: string; ep: string }[] = [
-      { id: 'mae', ep: '/api/admin/metodo/gerar-autoridade' },
-      { id: 'ver', ep: '/api/admin/metodo/gerar-conta' },
-      { id: 'vir', ep: '/api/admin/metodo/gerar-conta' },
-      { id: 'viver', ep: '/api/admin/metodo/gerar-conta' },
-    ];
-    let totais = 0;
-    try {
-      for (const c of contas) {
-        setMsg(`${modo === 'dia' ? 'A testar 1 dia' : 'A gerar a semana'} · ${c.id}…`);
-        const body = modo === 'dia' ? { conta: c.id, dia: segISO(offset), offset } : { conta: c.id, semanas: 1, offset };
-        const r = await fetch(c.ep, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
-        const j = await r.json().catch(() => ({}));
-        if (r.ok) totais += j.gerados ?? 0;
-        else setErro(`${c.id}: ${(j.erro ?? 'erro')}${j.detalhe ? ` (${j.detalhe})` : ''}`);
-        recarregar();
-      }
-      setMsg(`${modo === 'dia' ? 'Teste de 1 dia' : 'Semana'} das 4 contas: ${totais} posts no total. Revê cada conta na sua secção.`);
-    } catch (e) { setErro(String(e)); }
-    finally { setQuatroBusy(false); recarregar(); }
-  }, [quatroBusy, lote, offset, recarregar]);
 
   // gera a imagem (Flux) dos posts sem imagem desta conta (sem reescrever texto).
   const [imgBusy, setImgBusy] = useState(false);
@@ -485,6 +465,8 @@ export default function MetodoContaPage() {
   // contadores por ESTÁGIO desta semana — para as abas mostrarem quanto há em cada.
   const daSemanaTudo = geradosConta.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm));
   const contaEstagio = (id: Estagio) => id === 'todas' ? daSemanaTudo.length : daSemanaTudo.filter((e) => estagioDe(e) === id).length;
+  // que FORMATOS de autoridade já existem nesta semana (para o esqueleto dos 8 mostrar ✓).
+  const formatosNaSemana = new Set(daSemanaTudo.map((e) => e.tipo));
   // quantas semanas é preciso empurrar os passados para a mais antiga cair na semana-alvo.
   const deltaParaAlvo = (() => {
     if (!passados.length) return 0;
@@ -497,48 +479,78 @@ export default function MetodoContaPage() {
     <main className={`${FONTS} min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8`}>
       <div className="max-w-4xl mx-auto">
         <Link href="/admin/metodo" className="text-[0.75rem] opacity-60 hover:opacity-100">← Método VS</Link>
+        {/* ABAS das 4 contas: trocam a conta sem voltar ao menu (sidebar mais curta) */}
+        <div className="mt-3 flex gap-1.5 flex-wrap">
+          {CONTAS_LISTA.map((c) => {
+            const ativo = c.id === conta.id;
+            return (
+              <Link key={c.id} href={`/admin/metodo/${c.id}`} className="px-3 py-1.5 rounded-lg text-[0.78rem] border transition"
+                style={ativo ? { background: c.paleta.accent, color: '#0F0F1A', borderColor: c.paleta.accent } : { borderColor: 'rgba(255,255,255,0.15)', color: '#F2E8DC' }}>
+                {ABA_CONTA[c.id] ?? c.handle}
+              </Link>
+            );
+          })}
+        </div>
         <header className="mt-3 mb-6 rounded-2xl border border-white/10 p-5" style={{ background: `${conta.paleta.bg1}` }}>
           <h1 className="text-2xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: '#d8b25a' }}>
             @{conta.handle} <span className="opacity-70 text-base text-[#F2E8DC]">· {conta.movimento}, {conta.essencia}</span>
           </h1>
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
-          <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
-            {/* SEMANA-ALVO: ◀ ▶ escolhem que semana se gera; o rótulo mostra as datas
-                reais. Arranca na próxima semana CHEIA, por isso nunca gera passado. */}
+          {/* PRODUZIR · a ÚNICA ação principal, sozinha em cima, sem nada a competir. */}
+          <div className="mt-4 flex gap-2 flex-wrap items-center text-[0.78rem]">
             <span className="inline-flex items-center rounded-lg border border-white/15 overflow-hidden">
-              <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2 py-1.5 hover:bg-white/10">◀</button>
-              <span className="px-2 py-1.5 min-w-[150px] text-center">{offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : `+${offset} semanas`}<br /><span className="opacity-60 text-[0.62rem]">{fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}</span></span>
-              <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2 py-1.5 hover:bg-white/10">▶</button>
+              <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2.5 py-2 hover:bg-white/10">◀</button>
+              <span className="px-3 py-1.5 min-w-[150px] text-center">{offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : `+${offset} semanas`}<br /><span className="opacity-60 text-[0.62rem]">{fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}</span></span>
+              <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2.5 py-2 hover:bg-white/10">▶</button>
             </span>
-            <button onClick={testarUmDia} disabled={testeBusy || !!lote} title={conta.id === 'mae' ? 'gera SÓ a 2.ª-feira desta semana (🪞 O Véu de…) para veres o texto antes da semana toda' : 'gera SÓ a 2.ª-feira desta semana para veres o texto antes de gastar créditos na semana toda'} className="px-3 py-1.5 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{testeBusy ? 'a testar…' : '🔍 testar 1 dia (texto)'}</button>
-            <button onClick={() => gerarLote(1)} disabled={!!lote} title={conta.id === 'mae' ? 'gera a SEMANA DE AUTORIDADE: 1 véu, os 8 formatos (seg→dom, quarta a dobrar)' : 'gera o texto da semana, já com a data de cada dia'} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>{conta.id === 'mae' ? '⚔️ gerar semana de autoridade' : 'gerar esta semana (texto)'}</button>
-            {conta.id === 'mae' && <button onClick={() => correrQuatro('dia')} disabled={quatroBusy || !!lote} title="gera 1 dia (manhã + tarde) em TODAS as contas (mãe + ver + vir + viver) para testares as 4 de uma vez" className="px-3 py-1.5 rounded-lg border border-sky-400/40 text-sky-300 disabled:opacity-40">{quatroBusy ? '…' : '🔍 testar 1 dia · 4 contas'}</button>}
-            {conta.id === 'mae' && <button onClick={() => correrQuatro('semana')} disabled={quatroBusy || !!lote} title="gera a semana toda nas 4 contas de uma vez (só depois de testares)" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{quatroBusy ? '…' : 'gerar a semana · 4 contas'}</button>}
-            {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
-            <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
-            {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>📅 Plano da semana (ver a ordem) →</Link>}
-            {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
+            <button onClick={() => gerarLote(1)} disabled={!!lote} title={conta.id === 'mae' ? 'produz a semana da mãe: 1 véu, os 8 formatos (texto + imagem)' : 'produz o texto da semana, já com a data de cada dia'} className="px-4 py-2 rounded-lg font-medium disabled:opacity-50" style={{ color: '#0F0F1A', background: '#d8b25a' }}>{lote ? 'a produzir…' : conta.id === 'mae' ? '✦ produzir a semana · 8 formatos' : '✦ produzir a semana'}</button>
+            <button onClick={testarUmDia} disabled={testeBusy || !!lote} title="produz só a 2.ª-feira, para veres antes da semana toda" className="px-3 py-2 rounded-lg border border-white/20 opacity-80 hover:opacity-100 disabled:opacity-40">{testeBusy ? 'a testar…' : '🔍 testar 1 dia'}</button>
+            {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos)" className="px-3 py-2 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ Carta de renomear'}</button>}
+            {lote && <span className="opacity-80">a produzir no servidor… (~1 min)</span>}
           </div>
-          <p className="mt-1 text-[0.68rem] opacity-50">Escolhe a semana (◀ ▶) e gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). Para longo prazo, gera semana a semana — vão-se empilhando no calendário em baixo. Depois revês, limpas e só então "gerar imagens em falta".</p>
-          <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
-            <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
-            {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl && levaImagem(e)); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
-            {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
-            {geradosConta.length > 0 && <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
-              {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
-            </button>}
-            {geradosConta.length > 0 && (
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 px-2 py-1">
-                <span className="opacity-70">hora:</span>
-                <input type="time" value={horaInput} onChange={(e) => setHoraInput(e.target.value)} className="bg-transparent text-[#F2E8DC] outline-none [color-scheme:dark]" />
-                <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
-              </span>
-            )}
-            {passados.length > 0 && deltaParaAlvo >= 1 && <button onClick={() => moverPassados(deltaParaAlvo)} disabled={moverBusy} title="empurra os dias passados para esta semana (mantém o dia da semana e a hora) — não perde o trabalho" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>{moverBusy ? 'a mover…' : `↪ mover passados para ${fmtDM(segDaSemanaAlvo)} (${passados.length})`}</button>}
-            {passados.length > 0 && <button onClick={() => apagarPassados(passados.map((e) => e.slug))} disabled={limparPassadoBusy} title="apaga os posts de dias que já passaram (os publicados ficam)" className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{limparPassadoBusy ? 'a apagar…' : `apagar dias passados (${passados.length})`}</button>}
-            {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
-          </div>
+
+          {/* MÃE · OS 8 FORMATOS DA SEMANA (o esqueleto): um dia, um formato; ✓ no que já
+              está feito. Responde a "onde estão os formatos / onde produzo os métodos". */}
+          {conta.id === 'mae' && (
+            <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.02] p-3">
+              <p className="text-[0.66rem] uppercase tracking-widest opacity-50 mb-2">esta semana · véu {veuDaSemana(segDaSemanaAlvo)} · um dia, um formato</p>
+              <div className="flex flex-wrap gap-1.5">
+                {SEMANA_AUTORIDADE.map((d) => {
+                  const feito = formatosNaSemana.has(d.formato);
+                  return (
+                    <span key={`${d.wd}-${d.formato}`} className="inline-flex items-center gap-1 text-[0.64rem] px-2 py-1 rounded-lg border"
+                      style={{ borderColor: feito ? '#d8b25a' : 'rgba(255,255,255,0.12)', background: feito ? 'rgba(216,178,90,0.14)' : 'transparent', color: feito ? '#d8b25a' : '#F2E8DC', opacity: feito ? 1 : 0.7 }}
+                      title={`${['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][d.wd]} · ${d.hora}`}>
+                      {feito ? '✓' : '·'} {TIPO_LABEL[d.formato] ?? d.formato}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* FERRAMENTAS · escondidas por defeito, para não poluírem a produção. Só
+              abres quando precisas de imagens em falta, render, hora ou limpeza. */}
+          {geradosConta.length > 0 && (
+            <details className="mt-3 text-[0.72rem]">
+              <summary className="cursor-pointer opacity-55 hover:opacity-90 select-none">⚙ ferramentas · imagens · render · hora · limpeza</summary>
+              <div className="mt-2 flex gap-2 flex-wrap items-center border-t border-white/10 pt-3">
+                <span className="opacity-70">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
+                {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl && levaImagem(e)); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
+                {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
+                <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}</button>
+                <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 px-2 py-1">
+                  <span className="opacity-70">hora:</span>
+                  <input type="time" value={horaInput} onChange={(e) => setHoraInput(e.target.value)} className="bg-transparent text-[#F2E8DC] outline-none [color-scheme:dark]" />
+                  <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
+                </span>
+                {passados.length > 0 && deltaParaAlvo >= 1 && <button onClick={() => moverPassados(deltaParaAlvo)} disabled={moverBusy} title="empurra os dias passados para esta semana (mantém o dia da semana e a hora)" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>{moverBusy ? 'a mover…' : `↪ mover passados (${passados.length})`}</button>}
+                {passados.length > 0 && <button onClick={() => apagarPassados(passados.map((e) => e.slug))} disabled={limparPassadoBusy} title="apaga os posts de dias que já passaram (os publicados ficam)" className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{limparPassadoBusy ? 'a apagar…' : `apagar dias passados (${passados.length})`}</button>}
+                <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>
+              </div>
+            </details>
+          )}
         </header>
 
         {erro && <p className="mb-3 text-[0.8rem] text-rose-300">{erro}</p>}
@@ -569,34 +581,58 @@ export default function MetodoContaPage() {
               </div>
             )}
             {conta.id === 'mae' ? (
-              /* MÃE · FEED DE CARTÕES (como o laboratório): cartões grandes, pré-ver de
-                 todos os momentos, abrir para o estúdio. Sem a grelha apertada. */
-              <>
-                {geradosVista.length === 0 && <p className="text-center text-[0.74rem] opacity-50 py-8">Nada nesta vista. Carrega «🔍 testar 1 dia» ou «⚔️ gerar semana de autoridade» em cima.</p>}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[...geradosVista].sort((a, b) => `${a.agendadoEm ?? ''}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? ''}${b.hora ?? ''}`)).map((e) => {
-                    const est = estagioDe(e);
-                    const erro = !e.publicado && !!e.igStatus?.startsWith('erro');
-                    return (
-                      <div key={e.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
-                        <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full" style={{ boxShadow: `inset 0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : '#d8b25a55'}` }}>
-                          <MomentosPreview beats={e.beats.length ? e.beats : [e.texto]} conta={conta} imageUrl={e.imageUrl} conceito={e.conceito} />
-                        </button>
-                        <div className="p-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.6rem]">
-                          <span className="opacity-80">{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo ?? 'autoridade'}</span>
-                          <span className="font-mono opacity-45">{e.agendadoEm ? `${e.agendadoEm.slice(8)}/${e.agendadoEm.slice(5, 7)}` : 'sem data'} {(e.hora ?? '').slice(0, 5)}</span>
-                          <span className="px-1 py-0.5 rounded text-[0.5rem]" style={erro ? { background: '#C97373', color: '#fff' } : est === 'publicadas' ? { background: '#7E9B8E', color: '#0F0F1A' } : est === 'agendadas' ? { background: '#C9B6FA', color: '#0F0F1A' } : { background: 'rgba(255,255,255,0.12)' }}>{erro ? '⚠ erro' : est === 'publicadas' ? '✓ publicada' : est === 'agendadas' ? '📅 agendada' : '✎ edição'}</span>
-                          <div className="ml-auto flex gap-1">
-                            <button onClick={() => setDetalhe(e)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-ambar">abrir</button>
-                            {!e.imageUrl && <button onClick={() => novaImagem(e.slug)} disabled={!!novaImgBusy} title="gerar imagem" className="px-1.5 py-0.5 rounded border border-white/20 disabled:opacity-40">🖼</button>}
-                            {!e.publicado && <button onClick={() => descartar(e.slug)} title="descartar" className="px-1.5 py-0.5 rounded border border-rose-400/40 text-rose-300">✕</button>}
-                          </div>
+              /* MÃE · FEED POR DIA (a Vivianne: "gera tudo misturado, quero organização"):
+                 a semana em secções seg→dom, cada dia com o nome do formato à vista, os
+                 cartões por baixo. Mostra SÓ a semana escolhida (◀ ▶), nunca tudo de uma vez. */
+              (() => {
+                const cartao = (e: EstadoPost) => {
+                  const est = estagioDe(e);
+                  const erro = !e.publicado && !!e.igStatus?.startsWith('erro');
+                  return (
+                    <div key={e.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                      <button onClick={() => setDetalhe(e)} title={e.texto} className="block w-full" style={{ boxShadow: `inset 0 0 0 1.5px ${e.videoUrl ? '#7E9B8E' : !e.imageUrl ? '#C97373aa' : '#d8b25a55'}` }}>
+                        <MomentosPreview beats={e.beats.length ? e.beats : [e.texto]} conta={conta} imageUrl={e.imageUrl} conceito={e.conceito} tipo={e.tipo} />
+                      </button>
+                      <div className="p-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.6rem]">
+                        <span className="opacity-80">{TIPO_LABEL[e.tipo ?? ''] ?? e.tipo ?? 'formato'}</span>
+                        <span className="font-mono opacity-45">{(e.hora ?? '').slice(0, 5)}</span>
+                        <span className="px-1 py-0.5 rounded text-[0.5rem]" style={erro ? { background: '#C97373', color: '#fff' } : est === 'publicadas' ? { background: '#7E9B8E', color: '#0F0F1A' } : est === 'agendadas' ? { background: '#C9B6FA', color: '#0F0F1A' } : { background: 'rgba(255,255,255,0.12)' }}>{erro ? '⚠ erro' : est === 'publicadas' ? '✓ publicada' : est === 'agendadas' ? '📅 agendada' : '✎ edição'}</span>
+                        <div className="ml-auto flex gap-1">
+                          <button onClick={() => setDetalhe(e)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-ambar">abrir</button>
+                          {!e.imageUrl && <button onClick={() => novaImagem(e.slug)} disabled={!!novaImgBusy} title="gerar imagem" className="px-1.5 py-0.5 rounded border border-white/20 disabled:opacity-40">🖼</button>}
+                          {!e.publicado && <button onClick={() => descartar(e.slug)} title="descartar" className="px-1.5 py-0.5 rounded border border-rose-400/40 text-rose-300">✕</button>}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              </>
+                    </div>
+                  );
+                };
+                return (
+                  <>
+                    {postsDaSemana.length === 0 && <p className="text-center text-[0.74rem] opacity-50 py-8">Nada nesta semana. Carrega «🔍 testar 1 dia» ou «✦ gerar a semana» em cima, ou navega ◀ ▶.</p>}
+                    <div className="space-y-6">
+                      {semanaUnica.map((d) => {
+                        const posts = porDia.get(d) ?? [];
+                        if (!posts.length) return null;
+                        const wd = parse(d).getDay();
+                        const nomeDia = DIAS_CAB[wd === 0 ? 6 : wd - 1];
+                        const passou = d < hojeISO;
+                        return (
+                          <div key={d}>
+                            <h3 className={`text-[0.7rem] uppercase tracking-widest mb-2 ${passou ? 'opacity-30' : 'opacity-60'}`} style={{ color: passou ? undefined : '#d8b25a' }}>{nomeDia} · {d.slice(8)}/{d.slice(5, 7)}{passou ? ' · passou' : ''}</h3>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">{posts.map(cartao)}</div>
+                          </div>
+                        );
+                      })}
+                      {semDataList.length > 0 && (
+                        <div>
+                          <h3 className="text-[0.7rem] uppercase tracking-widest mb-2 opacity-50">sem data</h3>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">{semDataList.map(cartao)}</div>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                );
+              })()
             ) : (
             <div className="overflow-x-auto -mx-1 px-1">
                 <div className="grid grid-cols-7 gap-1 min-w-[700px]">

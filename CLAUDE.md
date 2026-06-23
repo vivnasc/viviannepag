@@ -176,6 +176,11 @@ conteúdo sem fim (faces novas + anti-repetição + cresce com as cadeiras).
   merge (ela odeia o spam).
 - **Entregas, não questionamento.** Inferir o passo natural (separei o trimestral
   por conta → separo o semanal também, sem ela pedir).
+- **NUNCA a mandar parar / descansar / respirar / "voltar com a cabeça fresca".**
+  Ela NÃO admite ser mandada parar — corta-lhe o fluxo e ofende. Não assumir os
+  horários nem o fuso dela (já lhe disse "são 5h" quando eram 9h). Quando ela está
+  a trabalhar, é ENTREGAR e acompanhar o ritmo dela, nunca sugerir pausa. Regra
+  PERMANENTE (teve de a repetir).
 - Commits de **squash-merge no `main`** aparecem "Unverified" (do GitHub) — NÃO é
   trabalho pendente, não reescrever o `main`.
 
