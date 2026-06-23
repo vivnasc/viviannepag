@@ -57,43 +57,23 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    titulo: 'método vs · o mapa (4 contas)',
-    cor: '#d8b25a',
-    itens: [
-      { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
-      { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
-    ],
-  },
-  {
-    // A MÃE (vivianne.dos.santos) tem a SUA secção: as séries e os carrosséis são
-    // DELA — não se misturam com as portas nem se "juntam" as 4 contas numa só.
+    // A MÃE (vivianne.dos.santos) tem a SUA secção: produzir (as 4 contas trocam-se
+    // por ABAS dentro da página — uma só entrada, sem sub-menus a irritar) + as séries
+    // e os carrosséis, que são DELA. O mapa (calendário/plano) fica logo a seguir.
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo/mae', label: 'produzir · autoridade' },
+      { href: '/admin/metodo/mae', label: 'produzir · método (4 contas)' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
     ],
   },
   {
-    titulo: 'ver.soltar',
-    cor: '#cdd8df',
+    titulo: 'método vs · o mapa',
+    cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo/ver', label: 'produzir · o Espelho' },
-    ],
-  },
-  {
-    titulo: 'vir.soltar',
-    cor: '#e8bd84',
-    itens: [
-      { href: '/admin/metodo/vir', label: 'produzir · a Carta' },
-    ],
-  },
-  {
-    titulo: 'viver.soltar',
-    cor: '#cfe0a0',
-    itens: [
-      { href: '/admin/metodo/viver', label: 'produzir · o Repara' },
+      { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
+      { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
     ],
   },
   {

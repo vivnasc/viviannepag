@@ -9,6 +9,7 @@ import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { AutoridadeSlide, ehFormatoAutoridade } from '@/components/admin/AutoridadeSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { getConta, CONTAS_LISTA } from '@/lib/metodo/contas';
+import { SEMANA_AUTORIDADE, veuDaSemana } from '@/lib/metodo/formatos-autoridade';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'], variable: '--font-cormorant', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-inter', display: 'swap' });
@@ -464,6 +465,8 @@ export default function MetodoContaPage() {
   // contadores por ESTÁGIO desta semana — para as abas mostrarem quanto há em cada.
   const daSemanaTudo = geradosConta.filter((e) => e.agendadoEm && semanaUnica.includes(e.agendadoEm));
   const contaEstagio = (id: Estagio) => id === 'todas' ? daSemanaTudo.length : daSemanaTudo.filter((e) => estagioDe(e) === id).length;
+  // que FORMATOS de autoridade já existem nesta semana (para o esqueleto dos 8 mostrar ✓).
+  const formatosNaSemana = new Set(daSemanaTudo.map((e) => e.tipo));
   // quantas semanas é preciso empurrar os passados para a mais antiga cair na semana-alvo.
   const deltaParaAlvo = (() => {
     if (!passados.length) return 0;
@@ -494,40 +497,60 @@ export default function MetodoContaPage() {
           </h1>
           <p className="mt-2 text-[0.9rem] opacity-90">{conta.depois}</p>
           <p className="mt-1 text-[0.78rem] opacity-70">Símbolo: {conta.simbolo} · Véus: {conta.veus.join(' + ')} · Vende: {conta.manualNome} (€{conta.manualPrecoEur})</p>
-          <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem]">
-            {/* SEMANA-ALVO: ◀ ▶ escolhem que semana se gera; o rótulo mostra as datas
-                reais. Arranca na próxima semana CHEIA, por isso nunca gera passado. */}
+          {/* PRODUZIR · a ÚNICA ação principal, sozinha em cima, sem nada a competir. */}
+          <div className="mt-4 flex gap-2 flex-wrap items-center text-[0.78rem]">
             <span className="inline-flex items-center rounded-lg border border-white/15 overflow-hidden">
-              <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2 py-1.5 hover:bg-white/10">◀</button>
-              <span className="px-2 py-1.5 min-w-[150px] text-center">{offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : `+${offset} semanas`}<br /><span className="opacity-60 text-[0.62rem]">{fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}</span></span>
-              <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2 py-1.5 hover:bg-white/10">▶</button>
+              <button onClick={() => setOffset((o) => o - 1)} title="semana anterior" className="px-2.5 py-2 hover:bg-white/10">◀</button>
+              <span className="px-3 py-1.5 min-w-[150px] text-center">{offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : `+${offset} semanas`}<br /><span className="opacity-60 text-[0.62rem]">{fmtDM(segDaSemanaAlvo)} a {fmtDM(domDaSemanaAlvo)}</span></span>
+              <button onClick={() => setOffset((o) => o + 1)} title="semana seguinte" className="px-2.5 py-2 hover:bg-white/10">▶</button>
             </span>
-            <button onClick={testarUmDia} disabled={testeBusy || !!lote} title={conta.id === 'mae' ? 'gera SÓ a 2.ª-feira desta semana (🪞 O Véu de…) para veres o texto antes da semana toda' : 'gera SÓ a 2.ª-feira desta semana para veres o texto antes de gastar créditos na semana toda'} className="px-3 py-1.5 rounded-lg border border-sky-400/50 text-sky-300 disabled:opacity-40">{testeBusy ? 'a testar…' : '🔍 testar 1 dia (texto)'}</button>
-            <button onClick={() => gerarLote(1)} disabled={!!lote} title={conta.id === 'mae' ? 'gera a semana da mãe: 1 véu, os 8 formatos (seg→dom, quarta a dobrar)' : 'gera o texto da semana, já com a data de cada dia'} className="px-3 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: '#d8b25a', color: '#0F0F1A', background: '#d8b25a' }}>{conta.id === 'mae' ? '✦ gerar a semana' : 'gerar esta semana (texto)'}</button>
-            {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos: cena → vida → nome → releitura → preço → abertura). Capa alto contraste + corpo papel." className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ gerar Carta de renomear'}</button>}
-            <Link href={`/admin/publicar?conta=${conta.marca}&vista=semana`} className="px-3 py-1.5 rounded-lg border border-white/20">abrir no Publicar (por dia) →</Link>
-            {conta.id === 'mae' && <Link href="/admin/metodo/mae-plano" className="px-3 py-1.5 rounded-lg border" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>📅 Plano da semana (ver a ordem) →</Link>}
-            {lote && <span className="opacity-80">a gerar no servidor… (~1 min)</span>}
+            <button onClick={() => gerarLote(1)} disabled={!!lote} title={conta.id === 'mae' ? 'produz a semana da mãe: 1 véu, os 8 formatos (texto + imagem)' : 'produz o texto da semana, já com a data de cada dia'} className="px-4 py-2 rounded-lg font-medium disabled:opacity-50" style={{ color: '#0F0F1A', background: '#d8b25a' }}>{lote ? 'a produzir…' : conta.id === 'mae' ? '✦ produzir a semana · 8 formatos' : '✦ produzir a semana'}</button>
+            <button onClick={testarUmDia} disabled={testeBusy || !!lote} title="produz só a 2.ª-feira, para veres antes da semana toda" className="px-3 py-2 rounded-lg border border-white/20 opacity-80 hover:opacity-100 disabled:opacity-40">{testeBusy ? 'a testar…' : '🔍 testar 1 dia'}</button>
+            {conta.id === 'vir' && <button onClick={gerarCarta} disabled={cartaBusy} title="gera UMA Carta de renomear (6 passos)" className="px-3 py-2 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{cartaBusy ? '✉️ a gerar…' : '✉️ Carta de renomear'}</button>}
+            {lote && <span className="opacity-80">a produzir no servidor… (~1 min)</span>}
           </div>
-          <p className="mt-1 text-[0.68rem] opacity-50">Escolhe a semana (◀ ▶) e gera só o TEXTO, já com a data de cada dia (não gasta créditos de imagem). Para longo prazo, gera semana a semana — vão-se empilhando no calendário em baixo. Depois revês, limpas e só então "gerar imagens em falta".</p>
-          <div className="mt-3 flex gap-2 flex-wrap items-center text-[0.72rem] border-t border-white/10 pt-3">
-            <span className="opacity-80">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
-            {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl && levaImagem(e)); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem — para veres se sai bem antes de gerar todas" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
-            {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
-            {geradosConta.length > 0 && <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">
-              {renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}
-            </button>}
-            {geradosConta.length > 0 && (
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 px-2 py-1">
-                <span className="opacity-70">hora:</span>
-                <input type="time" value={horaInput} onChange={(e) => setHoraInput(e.target.value)} className="bg-transparent text-[#F2E8DC] outline-none [color-scheme:dark]" />
-                <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
-              </span>
-            )}
-            {passados.length > 0 && deltaParaAlvo >= 1 && <button onClick={() => moverPassados(deltaParaAlvo)} disabled={moverBusy} title="empurra os dias passados para esta semana (mantém o dia da semana e a hora) — não perde o trabalho" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>{moverBusy ? 'a mover…' : `↪ mover passados para ${fmtDM(segDaSemanaAlvo)} (${passados.length})`}</button>}
-            {passados.length > 0 && <button onClick={() => apagarPassados(passados.map((e) => e.slug))} disabled={limparPassadoBusy} title="apaga os posts de dias que já passaram (os publicados ficam)" className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{limparPassadoBusy ? 'a apagar…' : `apagar dias passados (${passados.length})`}</button>}
-            {geradosConta.length > 0 && <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>}
-          </div>
+
+          {/* MÃE · OS 8 FORMATOS DA SEMANA (o esqueleto): um dia, um formato; ✓ no que já
+              está feito. Responde a "onde estão os formatos / onde produzo os métodos". */}
+          {conta.id === 'mae' && (
+            <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.02] p-3">
+              <p className="text-[0.66rem] uppercase tracking-widest opacity-50 mb-2">esta semana · véu {veuDaSemana(segDaSemanaAlvo)} · um dia, um formato</p>
+              <div className="flex flex-wrap gap-1.5">
+                {SEMANA_AUTORIDADE.map((d) => {
+                  const feito = formatosNaSemana.has(d.formato);
+                  return (
+                    <span key={`${d.wd}-${d.formato}`} className="inline-flex items-center gap-1 text-[0.64rem] px-2 py-1 rounded-lg border"
+                      style={{ borderColor: feito ? '#d8b25a' : 'rgba(255,255,255,0.12)', background: feito ? 'rgba(216,178,90,0.14)' : 'transparent', color: feito ? '#d8b25a' : '#F2E8DC', opacity: feito ? 1 : 0.7 }}
+                      title={`${['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][d.wd]} · ${d.hora}`}>
+                      {feito ? '✓' : '·'} {TIPO_LABEL[d.formato] ?? d.formato}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* FERRAMENTAS · escondidas por defeito, para não poluírem a produção. Só
+              abres quando precisas de imagens em falta, render, hora ou limpeza. */}
+          {geradosConta.length > 0 && (
+            <details className="mt-3 text-[0.72rem]">
+              <summary className="cursor-pointer opacity-55 hover:opacity-90 select-none">⚙ ferramentas · imagens · render · hora · limpeza</summary>
+              <div className="mt-2 flex gap-2 flex-wrap items-center border-t border-white/10 pt-3">
+                <span className="opacity-70">Gerados: <b style={{ color: '#d8b25a' }}>{geradosConta.length}</b> · com imagem: {geradosConta.length - semImagem} · com vídeo: {geradosConta.length - faltamRender.length}</span>
+                {semImagem > 0 && <button onClick={() => { const alvo = geradosConta.find((e) => !e.imageUrl && levaImagem(e)); if (alvo) novaImagem(alvo.slug); }} disabled={!!novaImgBusy} title="gera só a imagem do 1.º post sem imagem" className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{novaImgBusy ? 'a gerar 1…' : 'testar 1 imagem'}</button>}
+                {semImagem > 0 && <button onClick={gerarImagens} disabled={imgBusy} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{imgBusy ? 'a gerar imagens…' : `gerar imagens em falta (${semImagem})`}</button>}
+                <button onClick={() => renderFaltam(faltamRender)} disabled={renderBusy || !faltamRender.length} className="px-3 py-1.5 rounded-lg border border-white/25 disabled:opacity-40">{renderBusy ? 'a disparar render…' : `renderizar os que faltam (${faltamRender.length})`}</button>
+                <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 px-2 py-1">
+                  <span className="opacity-70">hora:</span>
+                  <input type="time" value={horaInput} onChange={(e) => setHoraInput(e.target.value)} className="bg-transparent text-[#F2E8DC] outline-none [color-scheme:dark]" />
+                  <button onClick={definirHora} disabled={horaBusy} className="rounded-md px-2 py-0.5 disabled:opacity-40" style={{ background: '#d8b25a', color: '#0F0F1A' }}>{horaBusy ? '…' : 'aplicar a todas'}</button>
+                </span>
+                {passados.length > 0 && deltaParaAlvo >= 1 && <button onClick={() => moverPassados(deltaParaAlvo)} disabled={moverBusy} title="empurra os dias passados para esta semana (mantém o dia da semana e a hora)" className="px-3 py-1.5 rounded-lg border disabled:opacity-40" style={{ borderColor: '#d8b25a', color: '#d8b25a' }}>{moverBusy ? 'a mover…' : `↪ mover passados (${passados.length})`}</button>}
+                {passados.length > 0 && <button onClick={() => apagarPassados(passados.map((e) => e.slug))} disabled={limparPassadoBusy} title="apaga os posts de dias que já passaram (os publicados ficam)" className="px-3 py-1.5 rounded-lg border border-amber-400/40 text-amber-300 disabled:opacity-40">{limparPassadoBusy ? 'a apagar…' : `apagar dias passados (${passados.length})`}</button>}
+                <button onClick={apagarTudo} disabled={apagarBusy} className="px-3 py-1.5 rounded-lg border border-rose-400/40 text-rose-300/90 disabled:opacity-40">{apagarBusy ? 'a apagar…' : 'apagar tudo'}</button>
+              </div>
+            </details>
+          )}
         </header>
 
         {erro && <p className="mb-3 text-[0.8rem] text-rose-300">{erro}</p>}
