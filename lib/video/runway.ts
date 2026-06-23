@@ -10,7 +10,8 @@ const MODEL = 'runwayml/gen-4.5';
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
 
-export async function gerarVideoDemonstracao(prompt: string, token: string, duracao: 5 | 8 | 10 = 5): Promise<string> {
+// duração: o Gen-4.5 no Replicate só aceita 5 ou 10 segundos (confirmado por 422).
+export async function gerarVideoDemonstracao(prompt: string, token: string, duracao: 5 | 10 = 5): Promise<string> {
   // input no formato mais comum do Replicate; se a ficha do modelo usar outros nomes,
   // o 422 abaixo diz-nos quais (afinação de 1 linha).
   const input: Record<string, unknown> = { prompt, duration: duracao, aspect_ratio: '9:16' };

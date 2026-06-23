@@ -30,14 +30,14 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { semana?: number; duracao?: 5 | 8 | 10 };
+  const body = (await req.json().catch(() => ({}))) as { semana?: number; duracao?: 5 | 10 };
   const demo = demonstracaoDaSemana(Number(body.semana));
   if (!demo) return NextResponse.json({ erro: 'sem-demonstracao', detalhe: `não há demonstração para a semana ${body.semana}` }, { status: 400 });
 
   // 1) gerar o vídeo no Replicate (Runway Gen-4.5)
   let replicateUrl: string;
   try {
-    replicateUrl = await gerarVideoDemonstracao(demo.prompt, token, body.duracao ?? 8);
+    replicateUrl = await gerarVideoDemonstracao(demo.prompt, token, body.duracao ?? 10);
   } catch (e) {
     return NextResponse.json({ erro: 'runway-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });
   }
