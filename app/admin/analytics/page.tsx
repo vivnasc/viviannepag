@@ -13,7 +13,7 @@ type FormatoResumo = { formato: string; n: number; mediaAlcance: number; mediaIn
 type Resumo = { mediaAlcance: number; mediaInteracoes: number; taxaInteracao: number; porFormato: FormatoResumo[]; melhorFormato?: string };
 type Crescimento = { novos30d?: number; porSemana?: number; alcanceDescobertaPct?: number; alcance30d?: number; visualizacoes30d?: number; alcanceVarPct?: number };
 type ParItem = { k: string; n: number };
-type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[] };
+type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[]; fonte?: string };
 type Analytics = {
   ok: boolean; username?: string; seguidores?: number; totalPosts?: number;
   insightsDisponiveis: boolean; posts: Post[]; resumo?: Resumo; crescimento?: Crescimento; demografia?: Demografia; erro?: string; detalhe?: string; avisoInsights?: string;
@@ -269,7 +269,7 @@ function Coluna({ data, accent }: { data: Analytics; accent: { text: string; bar
       {/* QUEM TE SEGUE — idade, género, países (só com 100+ seguidores) */}
       {data.demografia ? (
         <div className="mt-5">
-          <div className="text-xs font-medium text-stone-300">Quem te segue (audiência)</div>
+          <div className="text-xs font-medium text-stone-300">Quem te vê <span className="font-normal text-stone-500">· {data.demografia.fonte ?? 'audiência'}</span></div>
           <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {data.demografia.idade && <Mini titulo="Idade" itens={data.demografia.idade.slice(0, 5)} accent={accent} />}
             {data.demografia.genero && <Mini titulo="Género" itens={data.demografia.genero.map((g) => ({ k: GENERO_PT[g.k] ?? g.k, n: g.n }))} accent={accent} />}
