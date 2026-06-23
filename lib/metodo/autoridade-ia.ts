@@ -19,7 +19,7 @@ const alguns = (arr?: string[], n = 5) => (arr ?? []).slice(0, n).map((x) => `·
 function arcoEmateria(formato: FormatoAutoridadeId, k: SaberVeu): string {
   switch (formato) {
     case 'veuDe':
-      return `ARCO (O Véu de…): NÃO abras pelo nome nem por "conheces" — o scroll dura meio segundo, a 1.ª linha TEM de agarrar. 1.ª linha = o SINAL mais específico e peculiar (a faca, com um detalhe exato); depois 2 a 3 sinais igualmente específicos; a PENÚLTIMA revela que tudo isto tem nome ("Isto tem nome: …" + um nome do padrão); a última é o CTA/pergunta se é o dela.\nSINAIS (faz-os deste nível de detalhe concreto, nunca genéricos):\n${alguns(k.cenas, 4)}\n${alguns(k.comportamentos, 3)}\nNOME do padrão (só para a revelação do fim, NUNCA para abrir):\n${alguns(k.subtipos, 4)}`;
+      return `ARCO (O Véu de…): NÃO abras pelo nome nem por "conheces", e NUNCA inventes nem nomeies um "véu"/padrão com nome (ex.: "O Véu da Mente que Não Desliga" está PROIBIDO) — isso não é da Vivianne. O scroll dura meio segundo, a 1.ª linha TEM de agarrar. 1.ª linha = o SINAL mais específico e peculiar (a faca, com um detalhe exato); depois 3 a 4 sinais igualmente específicos; a última é a pergunta/CTA (se é o dela, guardar para si). Só os sinais e a pergunta, sem rótulo nenhum.\nSINAIS (a matéria-prima, para perceberes o padrão — NÃO copies, escreve fresco, deste nível de detalhe concreto):\n${alguns(k.cenas, 4)}\n${alguns(k.comportamentos, 3)}`;
     case 'mecanismo':
       return `ARCO (O Mecanismo Invisível): linha 1 = uma pergunta sobre um comportamento ("Porque verificas o telemóvel sem motivo?"); linha 2-3 = o que está MESMO a acontecer, em linguagem da vida; última = o que isso custa.\nCOMPORTAMENTOS:\n${alguns(k.comportamentos, 6)}\nO QUE ESTÁ POR BAIXO (traduz para a vida, nunca teoria):\n${alguns(k.mecanismos, 4)}`;
     case 'origem':
@@ -85,11 +85,11 @@ export async function gerarFundoAutoridade(frase: string, apiKey: string, evitar
   const sys =
     `És diretor de arte. Escreves UM prompt de imagem (em INGLÊS, uma linha) para o fundo de um reel 9:16 do Método VS.\n` +
     `A FRASE do post é: «${frase}». A imagem ENCARNA a SITUAÇÃO concreta da frase (o sítio, o objeto, o momento da vida real de hoje), nunca um fundo decorativo desligado.\n` +
-    `ESTÉTICA (qualidade de laboratório, premium, como a Soulab): arte conceptual cinematográfica MODERNA e marcante, atmosférica, com profundidade e textura ricas, luz natural e elegante, contemporânea. Luminosa e legível, nunca lamacenta nem quase-preta.\n` +
-    `PROIBIDO (o ar antigo que já não se usa): velas, chamas, halos, auréolas, santos, ícones religiosos, mandalas, iconografia sagrada ou bizantina, roupa medieval, pinturas antigas ou renascentistas. Sem pessoas a posar, sem rostos, sem texto, sem letras, sem marca de água, sem logótipo.\n` +
+    `ESTÉTICA (premium, editorial, como a Soulab): fotografia de arte conceptual de GAMA ALTA, nítida e marcante, contemporânea. CLARA E AREJADA, com luz de DIA abundante e tons claros e suaves, atmosfera leve. Parece uma foto editorial premium de revista, não um fundo escuro de stock.\n` +
+    `PROIBIDO (o ar do conteúdo abolido): NADA de escuro, soturno, nocturno, penumbra, quase-preto, sombrio nem atmosfera pesada ou amadora. NADA de velas, chamas, halos, auréolas, santos, ícones religiosos, mandalas, iconografia sagrada ou bizantina, roupa medieval, pinturas antigas ou renascentistas. Sem pessoas a posar, sem rostos, sem texto, sem letras, sem marca de água, sem logótipo.\n` +
     `MOVIMENTO (a imagem vai ser animada depois): inclui um elemento que se mova sozinho de forma natural e contínua (água a ondular, fumo ou vapor a subir, névoa a derivar, cortina ou tecido ao vento, pó num raio de luz, reflexos a tremer, folhagem ao vento). NUNCA uses chama nem vela para isso.\n` +
     `${evita}\n` +
-    `Termina com: cinematic conceptual fine-art, rich texture, atmospheric depth, premium, vertical 9:16. Devolve SÓ o prompt, numa linha, em inglês, sem aspas.`;
+    `Termina com: bright airy editorial fine-art photography, abundant natural daylight, soft light tones, premium and clean, NOT dark, vertical 9:16. Devolve SÓ o prompt, numa linha, em inglês, sem aspas.`;
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
