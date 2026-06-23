@@ -6,7 +6,7 @@
 
 import type { SaberVeu } from '@/lib/metodo/saber';
 
-export type FormatoId = 'nome' | 'heranca' | 'baixo' | 'custo' | 'mito' | 'cena' | 'corpo';
+export type FormatoId = 'dissolucao' | 'nome' | 'heranca' | 'baixo' | 'custo' | 'mito' | 'cena' | 'corpo';
 
 export interface FormatoVS {
   id: FormatoId;
@@ -19,6 +19,14 @@ export interface FormatoVS {
 const lista = (arr: string[] | undefined, n = 4) => (arr ?? []).slice(0, n).map((x) => `· ${x}`).join('\n');
 
 export const FORMATOS: Record<FormatoId, FormatoVS> = {
+  // A MANHÃ: NÃO um reel da revelação (isso é a tarde), mas UM frame, UMA frase — o
+  // sinal de um véu a dissolver-se. O lado do SOLTAR: nu, sereno, leve. Tratado à parte
+  // no gerador (frase única, não momentos).
+  dissolucao: {
+    id: 'dissolucao', nome: 'Sinal da manhã', emoji: '🌅',
+    angulo: 'Uma frase única, nua e serena: o sinal de um véu a dissolver-se. O lado do SOLTAR, não o diagnóstico. Uma verdade pequena que liberta (o peso que se pode pousar, a permissão de não merecer o cuidado, quem se é por baixo do que se aprendeu a ser).',
+    materia: (k) => `Verdades que libertam (a crença que solta):\n${lista(k.crencas?.map((c) => c.verdade))}\nLeitura transpessoal: ${k.lentes.transpessoal}`,
+  },
   nome: {
     id: 'nome', nome: 'O nome que te deram', emoji: '🔤',
     angulo: 'Pega no NOME COMUM que se dá a este padrão (uma palavra que a pessoa carrega como verdade sobre si) e RENOMEIA-o, vestido de vida. "Chamam-lhe X… mas é Y." A história inteira muda de significado.',
@@ -62,16 +70,20 @@ export const FORMATOS_LISTA = Object.values(FORMATOS);
 // (é o que distingue da Soulab: a mãe segue um plano). 2 por dia, manhã e fim de tarde.
 // wd: getDay() (0=domingo). A véu roda à parte (1 véu/dia), para variar ainda mais.
 export const CALENDARIO: { wd: number; nome: string; hora: string; formato: FormatoId }[] = [
-  { wd: 1, nome: 'segunda', hora: '11:00', formato: 'nome' },
-  { wd: 1, nome: 'segunda', hora: '19:00', formato: 'cena' },
-  { wd: 2, nome: 'terça', hora: '11:00', formato: 'heranca' },
-  { wd: 2, nome: 'terça', hora: '19:00', formato: 'baixo' },
-  { wd: 3, nome: 'quarta', hora: '11:00', formato: 'mito' },
-  { wd: 3, nome: 'quarta', hora: '19:00', formato: 'custo' },
-  { wd: 4, nome: 'quinta', hora: '11:00', formato: 'corpo' },
-  { wd: 4, nome: 'quinta', hora: '19:00', formato: 'nome' },
-  { wd: 5, nome: 'sexta', hora: '11:00', formato: 'cena' },
-  { wd: 5, nome: 'sexta', hora: '19:00', formato: 'heranca' },
-  { wd: 6, nome: 'sábado', hora: '11:00', formato: 'custo' },
-  { wd: 0, nome: 'domingo', hora: '19:00', formato: 'mito' },
+  // MANHÃ (11h) = o Sinal da manhã (um frame, uma frase, o soltar) todos os dias.
+  // FIM DE TARDE (19h) = o reel da revelação, ângulo a rodar pela semana.
+  { wd: 1, nome: 'segunda', hora: '11:00', formato: 'dissolucao' },
+  { wd: 1, nome: 'segunda', hora: '19:00', formato: 'nome' },
+  { wd: 2, nome: 'terça', hora: '11:00', formato: 'dissolucao' },
+  { wd: 2, nome: 'terça', hora: '19:00', formato: 'heranca' },
+  { wd: 3, nome: 'quarta', hora: '11:00', formato: 'dissolucao' },
+  { wd: 3, nome: 'quarta', hora: '19:00', formato: 'baixo' },
+  { wd: 4, nome: 'quinta', hora: '11:00', formato: 'dissolucao' },
+  { wd: 4, nome: 'quinta', hora: '19:00', formato: 'mito' },
+  { wd: 5, nome: 'sexta', hora: '11:00', formato: 'dissolucao' },
+  { wd: 5, nome: 'sexta', hora: '19:00', formato: 'custo' },
+  { wd: 6, nome: 'sábado', hora: '11:00', formato: 'dissolucao' },
+  { wd: 6, nome: 'sábado', hora: '19:00', formato: 'cena' },
+  { wd: 0, nome: 'domingo', hora: '11:00', formato: 'dissolucao' },
+  { wd: 0, nome: 'domingo', hora: '19:00', formato: 'corpo' },
 ];

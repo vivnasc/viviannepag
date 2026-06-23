@@ -40,9 +40,56 @@ REGRAS:
 - Português europeu, sem travessões, sem aspas.
 - TESTE: se a peça pudesse estar numa conta qualquer de ansiedade, psicologia ou desenvolvimento, está ERRADA.`;
 
+const lp_img = 'arte conceptual fotográfica de gama alta, CLARA E AREJADA, com luz de dia suave, contemporânea e premium (como uma foto editorial de revista), que evoca o SENTIDO da peça sem o ilustrar à letra. PROIBIDO: velas, chamas, halos, auréolas, santos, sagrado, escuro ou soturno, pessoas a posar, rostos, texto. Termina com: bright airy editorial fine-art photography, natural daylight, premium, vertical 9:16.';
+
+// A MANHÃ (formato 'dissolucao'): NÃO um reel da revelação, mas UM frame, UMA frase —
+// o sinal de um véu a dissolver-se. O lado do SOLTAR: nu, sereno, leve. Tratado à parte.
+async function gerarDissolucao(veu: VeuNome, apiKey: string, evitar: string[]): Promise<PecaVS> {
+  const k = SABER[veu];
+  if (!k) throw new Error(`sem SABER para o véu ${veu}`);
+  const f = FORMATOS.dissolucao;
+  const sys =
+`Escreves o SINAL DA MANHÃ da Vivianne dos Santos (Método VS · Ver e Soltar): UM frame, UMA frase, nada mais. É o lado do SOLTAR — um véu a dissolver-se ao acordar. Sereno e nu, não um diagnóstico.
+
+A MATÉRIA (só para TI; nunca a nomeies nem a copies):
+${f.materia(k)}
+
+REGRAS:
+- UMA frase só (1 a 2 linhas curtas, no máximo). Sem "chamam-lhe", sem listas, sem sequência.
+- Uma verdade pequena que liberta: o peso que se pode pousar, a permissão de não merecer o cuidado, quem se é por baixo do que se aprendeu a ser.
+- 3.ª pessoa ou universal ("nem todo o peso que sentes nasceu em ti"). Suave, "talvez", sem certeza fria.
+- PROIBIDO jargão de terapeuta (trauma, sobrevivência, padrão, mecanismo, véu, cura). Linguagem da vida.
+- Português europeu, sem travessões, sem aspas.
+${evitar.length ? `\nNÃO repitas estas já usadas: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
+
+IMAGEM (campo "fundoPrompt", em INGLÊS, luz de manhã): ${lp_img}
+
+Devolve APENAS JSON válido: {"frase":"a frase única","destaque":["1 a 2 palavras a realçar"],"conceito":"selo curto","fundoPrompt":"prompt da imagem em inglês","legenda":"legenda curta do Instagram na mesma voz serena, termina com um convite leve"}`;
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 500, system: sys, messages: [{ role: 'user', content: `O sinal da manhã, véu ${veu}.` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
+  let o: { frase?: unknown; destaque?: unknown; conceito?: unknown; fundoPrompt?: unknown; legenda?: unknown } = {};
+  try { const m = txt.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : txt); } catch { /* fallback */ }
+  const frase = lp(o.frase);
+  if (!frase) throw new Error('sem frase da manhã');
+  return {
+    veu, formato: 'dissolucao',
+    momentos: [frase],
+    destaque: Array.isArray(o.destaque) ? o.destaque.map(lp).filter(Boolean).slice(0, 2) : [],
+    fundoPrompt: lp(o.fundoPrompt), legenda: lp(o.legenda),
+    hashtags: hashtagsMetodo(veu), conceito: lp(o.conceito),
+  };
+}
+
 export async function gerarPecaVS(veu: VeuNome, formato: FormatoId, apiKey: string, evitar: string[] = []): Promise<PecaVS> {
   const k = SABER[veu];
   if (!k) throw new Error(`sem SABER para o véu ${veu}`);
+  if (formato === 'dissolucao') return gerarDissolucao(veu, apiKey, evitar);
   const f = FORMATOS[formato];
   if (!f) throw new Error(`formato desconhecido: ${formato}`);
 

@@ -16,7 +16,7 @@ type Peca = {
 
 const NOME_FORMATO: Record<string, string> = Object.fromEntries(FORMATOS_LISTA.map((f) => [f.id, `${f.emoji} ${f.nome}`]));
 
-function Cartao({ p, onApagar }: { p: Peca; onApagar: (slug: string) => void }) {
+function Cartao({ p, onApagar, onImagem, onRender, ocupado }: { p: Peca; onApagar: (slug: string) => void; onImagem: (slug: string) => void; onRender: (slug: string) => void; ocupado: string | null }) {
   const [i, setI] = useState(0);
   const n = Math.max(1, p.momentos.length);
   useEffect(() => { if (n <= 1) return; const t = setInterval(() => setI((x) => (x + 1) % n), 2400); return () => clearInterval(t); }, [n]);
@@ -41,10 +41,13 @@ function Cartao({ p, onApagar }: { p: Peca; onApagar: (slug: string) => void }) 
           {p.publicado ? <span className="px-1.5 py-0.5 rounded bg-emerald-600/80 text-[#0F0F1A]">✓ publicada</span>
             : p.agendadoEm ? <span className="px-1.5 py-0.5 rounded bg-[#C9B6FA]/80 text-[#0F0F1A]">📅 {p.agendadoEm.slice(5)} {(p.hora ?? '').slice(0, 5)}</span>
               : <span className="px-1.5 py-0.5 rounded bg-white/10">✎ por agendar</span>}
-          <div className="ml-auto flex gap-1.5">
-            <Link href="/admin/publicar?conta=metodovs&vista=semana" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar">agendar →</Link>
-            {!p.publicado && <button onClick={() => onApagar(p.slug)} className="px-2 py-0.5 rounded border border-rose-400/40 text-rose-300">✕</button>}
-          </div>
+        </div>
+        {/* AUTONOMIA: trocar imagem · render · agendar · apagar — tudo à mão */}
+        <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
+          <button onClick={() => onImagem(p.slug)} disabled={!!ocupado && ocupado.endsWith(p.slug)} title="gerar outra imagem (mantém o texto)" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar disabled:opacity-40">{ocupado === `img-${p.slug}` ? '🖼…' : '🖼 outra'}</button>
+          <button onClick={() => onRender(p.slug)} disabled={!!ocupado && ocupado.endsWith(p.slug)} title="renderizar o reel (MP4)" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar disabled:opacity-40">{ocupado === `rnd-${p.slug}` ? '🎬…' : '🎬 render'}</button>
+          <Link href="/admin/publicar?conta=loja&vista=semana" className="px-2 py-0.5 rounded border border-white/20 hover:border-ambar">agendar →</Link>
+          {!p.publicado && <button onClick={() => onApagar(p.slug)} className="ml-auto px-2 py-0.5 rounded border border-rose-400/40 text-rose-300">✕</button>}
         </div>
       </div>
     </div>
@@ -80,6 +83,28 @@ export default function MetodoVSPage() {
     if (typeof window !== 'undefined' && !window.confirm('Apagar esta peça?')) return;
     try { const r = await fetch('/api/admin/metodo-vs/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }); if (r.ok) recarregar(); } catch { /* */ }
   }, [recarregar]);
+
+  // AUTONOMIA: trocar a imagem e renderizar, sem sair daqui.
+  const [ocupado, setOcupado] = useState<string | null>(null);
+  const novaImagem = useCallback(async (slug: string) => {
+    if (ocupado) return;
+    setOcupado(`img-${slug}`); setErro(null); setMsg('A gerar outra imagem…');
+    try {
+      const r = await fetch('/api/admin/metodo-vs/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Imagem trocada.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setOcupado(null); }
+  }, [ocupado, recarregar]);
+  const renderUm = useCallback(async (slug: string) => {
+    if (ocupado) return;
+    setOcupado(`rnd-${slug}`); setErro(null); setMsg('A disparar o render (alguns minutos)…');
+    try {
+      const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Render disparado. O MP4 aparece daqui a alguns minutos (recarrega).');
+    } catch (e) { setErro(String(e)); } finally { setOcupado(null); }
+  }, [ocupado]);
 
   return (
     <main className="min-h-screen bg-[#0F0F1A] text-[#F2E8DC] px-4 py-8 md:px-8">
@@ -118,7 +143,7 @@ export default function MetodoVSPage() {
           <p className="text-center text-[0.78rem] opacity-50 py-10">Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.</p>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {pecas.map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} />)}
+            {pecas.map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onImagem={novaImagem} onRender={renderUm} ocupado={ocupado} />)}
           </div>
         )}
       </div>

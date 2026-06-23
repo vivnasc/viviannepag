@@ -28,6 +28,8 @@ const IDS = new Set(CONTAS.map((c) => c.id));
 // a que conta/marca pertence um conteúdo (pelo theme + slug).
 export function contaDe(theme: { marca?: string; universo?: string; curso?: string } | null | undefined, slug = ''): ContaId {
   if (theme?.marca && IDS.has(theme.marca)) return theme.marca; // marca explícita (ex.: importado por CSV)
+  // Método VS (conta-mãe): publica na conta vivianne.dos.santos (loja), como as séries.
+  if (theme?.marca === 'metodovs' || slug.startsWith('metodovs-')) return 'loja';
   if (theme?.universo || /^semana-\d+-/.test(slug)) return 'loja'; // carrosséis 7 Véus
   return 'veuaveu';
 }
