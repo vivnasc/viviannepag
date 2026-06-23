@@ -19,7 +19,7 @@ const alguns = (arr?: string[], n = 5) => (arr ?? []).slice(0, n).map((x) => `·
 function arcoEmateria(formato: FormatoAutoridadeId, k: SaberVeu): string {
   switch (formato) {
     case 'veuDe':
-      return `ARCO (O Véu de…): a 1.ª linha dá um NOME ao padrão ("O Véu da Que Prevê Tudo"); depois 3 sinais concretos; fecha com uma linha que pergunta se é o dela.\nNOMES possíveis:\n${alguns(k.subtipos, 4)}\nSINAIS possíveis:\n${alguns(k.comportamentos, 6)}`;
+      return `ARCO (O Véu de…): NÃO abras pelo nome nem por "conheces" — o scroll dura meio segundo, a 1.ª linha TEM de agarrar. 1.ª linha = o SINAL mais específico e peculiar (a faca, com um detalhe exato); depois 2 a 3 sinais igualmente específicos; a PENÚLTIMA revela que tudo isto tem nome ("Isto tem nome: …" + um nome do padrão); a última é o CTA/pergunta se é o dela.\nSINAIS (faz-os deste nível de detalhe concreto, nunca genéricos):\n${alguns(k.cenas, 4)}\n${alguns(k.comportamentos, 3)}\nNOME do padrão (só para a revelação do fim, NUNCA para abrir):\n${alguns(k.subtipos, 4)}`;
     case 'mecanismo':
       return `ARCO (O Mecanismo Invisível): linha 1 = uma pergunta sobre um comportamento ("Porque verificas o telemóvel sem motivo?"); linha 2-3 = o que está MESMO a acontecer, em linguagem da vida; última = o que isso custa.\nCOMPORTAMENTOS:\n${alguns(k.comportamentos, 6)}\nO QUE ESTÁ POR BAIXO (traduz para a vida, nunca teoria):\n${alguns(k.mecanismos, 4)}`;
     case 'origem':
@@ -41,8 +41,9 @@ function arcoEmateria(formato: FormatoAutoridadeId, k: SaberVeu): string {
 const REGRAS =
   `Voz: és a autora do Método VS, que reconheceu primeiro em si o padrão e o nomeia com calma e clareza. NÃO inventes biografia nem clientes. Revela a dor e aponta uma direção; não dás aula.\n` +
   `FORMA (o que mais importa): cada linha é UMA frase curta de UMA ideia (cabe grande num reel, lê-se num instante). NUNCA um parágrafo, nunca duas frases juntas. 3 a 6 linhas no total.\n` +
-  `Concreto e de HOJE (2026: telemóvel, mensagens, notificações, a casa de agora), tão específico que a mulher pensa "sou eu" em 1 segundo. Sem jargão (padrão, consciência, energia, cura, jornada, véu, mecanismo), sem travessões, sem aspas, sem metáforas. Português europeu.\n` +
-  `A 1.ª linha é a FACA (a mais afiada, o murro que para o scroll). O envio é um CTA forte (marca quem precisa / guarda / partilha), nunca morno.`;
+  `Concreto e de HOJE (2026: telemóvel, mensagens, notificações, a casa de agora). Sem jargão (padrão, consciência, energia, cura, jornada, véu, mecanismo), sem travessões, sem aspas, sem metáforas. Português europeu.\n` +
+  `ESPECIFICIDADE (o que faz a pessoa dizer "sou MESMO eu", e não "isso é toda a gente"): FOGE do que qualquer adulto faz ("verificas o telemóvel", "acordas com a lista na cabeça") — é morno e genérico. Cada linha leva um DETALHE exato (um número, um objeto, uma cena precisa): "a mensagem tinha três palavras e tu fizeste vinte cenas dela"; "o café arrefeceu enquanto planeavas um dia que ainda não tinha começado". É o detalhe peculiar que agarra; o genérico perde-se no scroll.\n` +
+  `A 1.ª linha é a FACA (a mais afiada e específica, o murro que para o scroll em meio segundo). O envio é um CTA forte (marca quem precisa / guarda / partilha), nunca morno.`;
 
 // Gera UM formato de autoridade para um véu. Lança se o véu ainda não tem SABER.
 export async function gerarAutoridade(formato: FormatoAutoridadeId, veu: VeuNome, apiKey: string, evitar: string[] = []): Promise<StoryboardAut> {

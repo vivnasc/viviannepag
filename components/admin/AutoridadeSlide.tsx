@@ -79,9 +79,8 @@ export function AutoridadeSlide({ formato, beats, conta, imageUrl, prog = 1, rat
       const sinais = L.slice(1, -1);
       return (
         <Stage conta={conta} imageUrl={imageUrl} prog={prog} ratio={ratio} nome={nome}>
-          <div style={{ position: 'absolute', top: 320, left: 90, right: 90, textAlign: 'center', zIndex: 2, opacity: op(0.04), transform: `translateY(${(1 - op(0.04)) * 14}px)` }}>
-            <p style={{ fontFamily: FONT_SANS, fontWeight: 600, fontSize: 24, letterSpacing: '0.3em', textTransform: 'uppercase', color: accent, opacity: 0.85, margin: '0 0 22px' }}>conheces…</p>
-            <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontWeight: 300, fontSize: 96, lineHeight: 1.08, color: '#F5EEE3', margin: 0, textShadow: sombra }}>{faca}</p>
+          <div style={{ position: 'absolute', top: 300, left: 90, right: 90, textAlign: 'center', zIndex: 2, opacity: op(0.04), transform: `translateY(${(1 - op(0.04)) * 14}px)` }}>
+            <p style={{ fontFamily: FONT_SERIF, fontWeight: 400, fontSize: 66, lineHeight: 1.14, color: '#F5EEE3', margin: 0, textShadow: sombra }}>{faca}</p>
           </div>
           <div style={{ position: 'absolute', top: 760, left: 150, right: 150, zIndex: 2, display: 'flex', flexDirection: 'column', gap: 34 }}>
             {sinais.map((s, i) => {
