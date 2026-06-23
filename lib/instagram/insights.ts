@@ -82,9 +82,30 @@ export type ContaAnalytics = {
   posts: PostAnalytics[];
   resumo?: Resumo;
   crescimento?: Crescimento;
+  demografia?: Demografia;
   erro?: string;
   avisoInsights?: string;
 };
+
+export type ParItem = { k: string; n: number };
+export type Demografia = { idade?: ParItem[]; genero?: ParItem[]; pais?: ParItem[] };
+
+// DEMOGRAFIA da audiência (quem te segue): idade, género, país. Só funciona com
+// 100+ seguidores (limite do Instagram); senão devolve undefined.
+async function getDemografia(token: string, igUserId: string): Promise<Demografia | undefined> {
+  const umBreakdown = async (dim: string): Promise<ParItem[] | undefined> => {
+    try {
+      const j = await gget(`${igUserId}/insights`, { metric: 'follower_demographics', period: 'lifetime', metric_type: 'total_value', timeframe: 'last_30_days', breakdown: dim, access_token: token });
+      if (erroDe(j)) return undefined;
+      const results = ((j.data as { total_value?: { breakdowns?: { results?: { dimension_values?: string[]; value?: number }[] }[] } }[] | undefined)?.[0]?.total_value?.breakdowns?.[0]?.results) ?? [];
+      const arr = results.map((r) => ({ k: r.dimension_values?.[0] ?? '?', n: r.value ?? 0 })).sort((a, b) => b.n - a.n);
+      return arr.length ? arr : undefined;
+    } catch { return undefined; }
+  };
+  const [idade, genero, pais] = await Promise.all([umBreakdown('age'), umBreakdown('gender'), umBreakdown('country')]);
+  if (!idade && !genero && !pais) return undefined;
+  return { idade, genero, pais: pais?.slice(0, 6) };
+}
 
 // métricas de CONTA (crescimento): novos seguidores (30d) + alcance a não-seguidores.
 // Cada parte é best-effort (degrada se a API recusar uma delas).
@@ -231,16 +252,20 @@ export async function getContaAnalytics(token: string, igUserId: string, limite 
   }));
 
   const crescimento = await getCrescimento(token, igUserId);
+  // demografia só a partir de 100 seguidores (limite do Instagram) — evita chamadas inúteis
+  const seguidores = perfil.followers_count as number | undefined;
+  const demografia = (seguidores ?? 0) >= 100 ? await getDemografia(token, igUserId) : undefined;
 
   return {
     ok: true,
     username: perfil.username as string | undefined,
-    seguidores: perfil.followers_count as number | undefined,
+    seguidores,
     totalPosts: perfil.media_count as number | undefined,
     insightsDisponiveis,
     avisoInsights: insightsDisponiveis ? undefined : avisoInsights,
     posts,
     resumo: calcResumo(posts),
     crescimento,
+    demografia,
   };
 }
