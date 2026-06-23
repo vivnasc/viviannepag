@@ -57,23 +57,32 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    // A MÃE (vivianne.dos.santos) tem a SUA secção: produzir (as 4 contas trocam-se
-    // por ABAS dentro da página — uma só entrada, sem sub-menus a irritar) + as séries
-    // e os carrosséis, que são DELA. O mapa (calendário/plano) fica logo a seguir.
-    titulo: 'vivianne.dos.santos · a mãe',
-    cor: '#d8b25a',
-    itens: [
-      { href: '/admin/metodo/mae', label: 'produzir · autoridade' },
-      { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
-      { href: '/admin/carrossel', label: 'carrosséis' },
-    ],
-  },
-  {
     titulo: 'método vs · o mapa',
     cor: '#d8b25a',
     itens: [
       { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
       { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
+    ],
+  },
+  {
+    // A MÃE (vivianne.dos.santos): o conteúdo VS (os 8 formatos) + as séries e os
+    // carrosséis, que são DELA.
+    titulo: 'vivianne.dos.santos · a mãe',
+    cor: '#d8b25a',
+    itens: [
+      { href: '/admin/metodo/mae', label: 'conteúdo VS' },
+      { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
+      { href: '/admin/carrossel', label: 'carrosséis' },
+    ],
+  },
+  {
+    // AS 3 FILHAS (as portas): ver · vir · viver, cada uma a sua linha.
+    titulo: 'método vs · 3 filhas',
+    cor: '#d8b25a',
+    itens: [
+      { href: '/admin/metodo/ver', label: 'ver' },
+      { href: '/admin/metodo/vir', label: 'vir' },
+      { href: '/admin/metodo/viver', label: 'viver' },
     ],
   },
   {
