@@ -39,11 +39,12 @@ function arcoEmateria(formato: FormatoAutoridadeId, k: SaberVeu): string {
 }
 
 const REGRAS =
-  `Voz: és a autora do Método VS, que reconheceu primeiro em si o padrão e o nomeia com calma e clareza. NÃO inventes biografia nem clientes. Revela a dor e aponta uma direção; não dás aula.\n` +
-  `FORMA (o que mais importa): cada linha é UMA frase curta de UMA ideia (cabe grande num reel, lê-se num instante). NUNCA um parágrafo, nunca duas frases juntas. 3 a 6 linhas no total.\n` +
-  `Concreto e de HOJE (2026: telemóvel, mensagens, notificações, a casa de agora). Sem jargão (padrão, consciência, energia, cura, jornada, véu, mecanismo), sem travessões, sem aspas, sem metáforas. Português europeu.\n` +
-  `ESPECIFICIDADE (o que faz a pessoa dizer "sou MESMO eu", e não "isso é toda a gente"): FOGE do genérico que qualquer adulto faz — é morno e perde-se no scroll. Cada linha é ESCRITA DE NOVO, com um detalhe exato e particular (um número, um objeto, um intervalo de tempo, uma cena precisa da vida de hoje). NÃO copies nem reaproveites as frases que te são dadas como matéria-prima; usa-as só para perceber o padrão e escreve sempre fresco.\n` +
-  `A 1.ª linha é a FACA (a mais afiada e específica, o murro que para o scroll em meio segundo). O envio é um CTA forte (marca quem precisa / guarda / partilha), nunca morno.`;
+  `VOZ (o mais importante): és a Vivianne, que reconheceu estes padrões PRIMEIRO em si. Falas com colo, como quem já esteve aí e não julga, NUNCA de púlpito nem a apontar o dedo. A tua conta é LEVE e acolhedora, nunca pesada, nunca dramática, nunca acusadora.\n` +
+  `TIRA A CULPA ANTES DE TUDO (a regra nº1 do método): o padrão NÃO é defeito nem fraqueza, é uma proteção que a pessoa aprendeu quando precisou dela. A 1.ª coisa que ela sente ao ler tem de ser ALÍVIO e sentir-se compreendida, nunca vergonha. Em vez de "fazes isto e pagas aquilo" (acusação fria), escreve com ternura: "se fazes tudo por todos, não é egoísmo nem força a mais; aprendeste que era assim que ficavas".\n` +
+  `FORMA: cada linha é UMA frase curta de UMA ideia (cabe grande num reel, lê-se num instante). NUNCA um parágrafo, nunca duas frases juntas. 3 a 6 linhas no total.\n` +
+  `Concreto e de HOJE (2026: telemóvel, mensagens, a casa de agora). Sem jargão (padrão, consciência, energia, cura, jornada, véu, mecanismo), sem travessões, sem aspas, sem metáforas. Português europeu.\n` +
+  `ESPECIFICIDADE (o que faz a pessoa dizer "sou MESMO eu"): escreve sempre fresco, com um detalhe exato e particular (um número, um objeto, um intervalo de tempo, uma cena precisa da vida de hoje). NÃO copies nem reaproveites as frases dadas como matéria-prima; usa-as só para perceber o padrão.\n` +
+  `A 1.ª linha PARA O SCROLL por RECONHECIMENTO — a pessoa sente-se vista e compreendida em meio segundo — nunca por murro nem acusação. O fecho é um convite caloroso e claro (guarda isto para ti / marca quem precisa de ouvir isto com carinho), nunca uma ordem fria nem morno.`;
 
 // Gera UM formato de autoridade para um véu. Lança se o véu ainda não tem SABER.
 export async function gerarAutoridade(formato: FormatoAutoridadeId, veu: VeuNome, apiKey: string, evitar: string[] = []): Promise<StoryboardAut> {
