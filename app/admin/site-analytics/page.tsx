@@ -8,11 +8,13 @@ type Dados = {
   ok?: boolean; erro?: string; sql?: string; detalhe?: string;
   dias?: number; total?: number; hoje?: number;
   serie?: { dia: string; n: number }[];
-  fontes?: Item[]; paginas?: Item[];
+  fontes?: Item[]; paginas?: Item[]; paises?: Item[]; cidades?: Item[]; dispositivos?: Item[];
 };
 
 const nf = (n?: number) => (n == null ? '—' : new Intl.NumberFormat('pt-PT').format(n));
 const emojiFonte = (f: string) => ({ Instagram: '📸', TikTok: '🎬', Google: '🔍', Facebook: '📘', Direto: '🔗', Interno: '↪️', YouTube: '▶️', Linktree: '🌳', WhatsApp: '💬', X: '✖️' } as Record<string, string>)[f] ?? '🌐';
+const PAIS_PT: Record<string, string> = { PT: 'Portugal', BR: 'Brasil', AO: 'Angola', MZ: 'Moçambique', CV: 'Cabo Verde', US: 'EUA', GB: 'Reino Unido', ES: 'Espanha', FR: 'França', CH: 'Suíça', LU: 'Luxemburgo', DE: 'Alemanha', BE: 'Bélgica', NL: 'Países Baixos', IT: 'Itália', CA: 'Canadá' };
+const paisNome = (c: string) => PAIS_PT[c] ?? c;
 
 export default function SiteAnalyticsPage() {
   const [dias, setDias] = useState(30);
@@ -120,9 +122,35 @@ export default function SiteAnalyticsPage() {
               </div>
             </div>
           </div>
+
+          {/* localização + dispositivo */}
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <ListaSimples titulo="🌍 Países" itens={(d.paises ?? []).map((p) => ({ k: paisNome(p.k), n: p.n }))} />
+            <ListaSimples titulo="🏙️ Cidades" itens={d.cidades ?? []} />
+            <ListaSimples titulo="📱 Dispositivo" itens={d.dispositivos ?? []} />
+          </div>
+          <p className="mt-2 text-xs text-stone-500">Localização e dispositivo vêm da própria visita (o site não consegue saber a idade de quem visita — isso só o Instagram, que conhece a pessoa).</p>
         </>
       )}
     </main>
+  );
+}
+
+function ListaSimples({ titulo, itens }: { titulo: string; itens: Item[] }) {
+  const max = Math.max(1, ...itens.map((i) => i.n));
+  return (
+    <div className="rounded-2xl border border-stone-700 p-5">
+      <div className="text-xs font-medium text-stone-300">{titulo}</div>
+      <div className="mt-3 space-y-2 text-sm">
+        {itens.map((i) => (
+          <div key={i.k}>
+            <div className="flex justify-between text-stone-300"><span className="truncate">{i.k}</span><span className="shrink-0 text-stone-400">{nf(i.n)}</span></div>
+            <div className="mt-1 h-1.5 rounded-full bg-stone-800"><div className="h-1.5 rounded-full bg-emerald-500" style={{ width: `${Math.round((i.n / max) * 100)}%` }} /></div>
+          </div>
+        ))}
+        {itens.length === 0 && <div className="text-xs text-stone-600">Sem dados ainda.</div>}
+      </div>
+    </div>
   );
 }
 
