@@ -50,9 +50,19 @@ async function main() {
   const visual = col.theme?.subtipo === 'visual'; // VISUAL (vir): 1 cena de luz + 1 linha
   const carta = col.theme?.subtipo === 'carta'; // CARTA DE RENOMEAR (vir): tipográfica, abre página a página
   const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual || carta); // frase/beats com motion
-  // SOULAB · som da cena (gerado a partir da imagem). Se existir, é o áudio do reel
-  // (em vez da música). Só afeta peças Soulab; os outros motores ficam iguais.
-  const somSoulab = (col.theme?.marca === 'soulab' && col.theme?.soulab?.somUrl) ? col.theme.soulab.somUrl : null;
+  // ÁUDIO PRÓPRIO da peça (som da cena OU música ambiente, gerado no estúdio e
+  // guardado em theme.soulab.somUrl). Se existir, é o áudio do reel — vale para o
+  // SOULAB E para o MÉTODO VS (partilham o mesmo estúdio de som). ANTES isto só lia
+  // o som das peças 'soulab', por isso o método caía no Ancient Ground mesmo com som
+  // gerado — era o bug do «Ancient Ground a sair no render». Agora lê sempre.
+  const somSoulab = col.theme?.soulab?.somUrl || null;
+  // A loja (Carrosséis dos 7 Véus) é a ÚNICA que usa o Ancient Ground por default.
+  // O método e o soulab NUNCA usam Ancient Ground: ou têm áudio próprio (somSoulab)
+  // ou ficam sem música (silêncio), nunca o Ancient Ground que ela já não quer.
+  const ehMetodoOuSoulab = ['soulab', 'metodovs', 'versoltar', 'virsoltar', 'viversoltar'].includes(col.theme?.marca);
+  // resolve o áudio de fundo de um dia: áudio próprio > (loja) faixa do dia / Ancient
+  // Ground > (método/soulab) nada. Devolve null quando não há áudio nenhum.
+  const audioDeFundo = (d) => somSoulab || (ehMetodoOuSoulab ? null : (d.faixa?.url || faixaUrl(semana, d.dia)));
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
@@ -101,9 +111,10 @@ async function main() {
       // (3.4s era rápido demais). Com voz, a duração é a da narração (mais abaixo).
       const FPS = 25;
       // SOULAB / MÉTODO VS · tempo POR MOMENTO à escolha dela (slides[0].segPorMomento,
-      // em segundos); sem escolha, 5.5s. A pré-visualização do admin lê o MESMO valor → o
-      // que vê é o que sai (vale para o Soulab E para o Método VS, que partilham a sequência).
-      const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 5.5));
+      // em segundos); sem escolha, 7s — 5.5s era rápido demais para LER cada momento (ela
+      // teve de re-renderizar imensos clips por isso). A pré-visualização do admin lê o
+      // MESMO valor → o que vê é o que sai (vale para o Soulab E para o Método VS).
+      const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 7));
       const seqPorMomento = (col.theme?.marca === 'soulab' || col.theme?.marca === 'metodovs') && slides.length > 1;
       // FRAME ÚNICO do Método VS (manhã = 1 só linha): com o movimento de câmara da
       // CameraVeu, precisa de ~6.5s para a câmara RESPIRAR e dar tempo de ler a frase
@@ -195,8 +206,8 @@ async function main() {
       let temAudio = false; let vozAudio = false;
       if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) { temAudio = true; vozAudio = true; }
       else {
-        const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
-        try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+        const aUrl = audioDeFundo(d);
+        if (aUrl) { try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); } }
       }
 
       // video da sequencia. Voz = áudio direto (sem loop). Som ambiente = LOOP
@@ -267,8 +278,8 @@ async function main() {
       console.log(`[infografico] dia ${d.dia}: ${N} frames`);
 
       let temAudio = false;
-      const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
-      try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+      const aUrl = audioDeFundo(d);
+      if (aUrl) { try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); } }
 
       let videoUrl = null;
       try {
@@ -325,9 +336,9 @@ async function main() {
     let videoUrl = null;
     if (!soImagens) {
       // 2. audio do dia
-      const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
+      const aUrl = audioDeFundo(d);
       let temAudio = false;
-      try {
+      if (aUrl) try {
         const ar = await fetch(aUrl);
         if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; }
         else console.log(`[audio] ${ar.status} ${aUrl}`);

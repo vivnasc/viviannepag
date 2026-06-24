@@ -82,7 +82,7 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo, onSaveTransicao 
   const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
   const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
   const tip = peca.tipografia ?? undefined;
-  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 5.5);
+  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 7);
   // a transição vê-se AO VIVO: muda aqui e o preview troca já (guarda para o render usar).
   const [trans, setTrans] = useState<Transicao>((peca.transicao as Transicao | null) ?? 'deslizar');
   useEffect(() => {
@@ -135,7 +135,7 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo, onSaveTransicao 
             <span className="tabular-nums w-9 text-right">{seg.toFixed(1)}s</span>
           </label>
           <p className="text-[0.5rem] opacity-45">{moms.length} momentos × {seg.toFixed(1)}s ≈ <b>{Math.round(seg * moms.length)}s</b> de reel. Arrasta e vê em cima; guarda para o render usar o mesmo.</p>
-          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 5.5)}
+          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 7)}
             className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tempo'}</button>
         </div>
       )}
@@ -879,6 +879,20 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     if (typeof window !== 'undefined' && !window.confirm(`Pôr música de fundo «${musicaLoteEstilo}» nas ${sel.size} selecionada(s)? (substitui o Ancient Ground)`)) return;
     return emLote((slug) => fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: musicaLoteEstilo }) }), 'A pôr música');
   }, [emLote, musicaLoteEstilo, sel]);
+  // ÁUDIO AUTOMÁTICO por horário (o default dela): PIANO nos posts da TARDE (revelação)
+  // e SOM DO AMBIENTE da cena nos posts da MANHÃ. Decide peça a peça pela hora (<12h =
+  // manhã). Salta as de manhã sem imagem (o som da cena precisa da imagem).
+  const audioAutoLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Pôr o ÁUDIO automático nas ${sel.size} selecionada(s)?\n\n• tarde → piano de fundo\n• manhã → som do ambiente da cena\n\n(substitui o Ancient Ground; salta as de manhã ainda sem imagem)`)) return;
+    return emLote((slug) => {
+      const p = pecas.find((x) => x.slug === slug);
+      const h = parseInt((p?.hora ?? '').replace(/h.*/, ''), 10);
+      const ehTarde = Number.isFinite(h) ? h >= 12 : true; // sem hora conhecida → trata como tarde (piano)
+      if (ehTarde) return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: 'piano' }) });
+      if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); // manhã sem imagem: salta
+      return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) });
+    }, 'A pôr áudio (piano/ambiente)');
+  }, [emLote, pecas, sel]);
 
   // RENDER em lote: dispara o MP4 final (GitHub Actions) de cada selecionada. O dispatch é
   // rápido; cada MP4 aparece daqui a alguns minutos. Salta as que ainda não têm imagem.
@@ -1063,6 +1077,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
               <span className="text-[0.55rem] opacity-45 w-12">gerar:</span>
               <button onClick={regerarTextoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="nova revelação + imagem (gasta geração; salta publicadas)">♻ texto</button>
               <button onClick={imagemLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="cena nova (barato)">🖼 imagem</button>
+              <button onClick={audioAutoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="o default: piano nos posts da tarde · som do ambiente da cena nos da manhã (substitui o Ancient Ground)">🎧 áudio auto</button>
               <button onClick={somLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="som ambiente da cena (salta sem imagem)">🔊 som</button>
               <span className="inline-flex items-center gap-0.5">
                 <select value={musicaLoteEstilo} onChange={(e) => setMusicaLoteEstilo(e.target.value)} className="text-[0.58rem] px-1 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }} title="música de fundo (instrumental)">
