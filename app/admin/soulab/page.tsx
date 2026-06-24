@@ -30,7 +30,7 @@ type Peca = {
 // elementos (água, folhagem, pássaro…) — ou descreve por palavras dela. Estado
 // local por cartão; só ao carregar "dar movimento" é que chama o Kling.
 function MotionBox({ disabled, busy, onGerar }: { disabled: boolean; busy: boolean; onGerar: (opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void }) {
-  const [ing, setIng] = useState<string[]>([]);
+  const [ing, setIng] = useState<string[]>(['natural']); // por defeito anima o que está na imagem (não só câmara)
   const [cam, setCam] = useState<CamaraId>('suave');
   const [livre, setLivre] = useState('');
   const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;

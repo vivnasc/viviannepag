@@ -183,7 +183,7 @@ function LegendaBox({ legenda, hashtags, disabled, busy, onSave }: { legenda: st
 // O COMPOSITOR DE MOVIMENTO: ela escolhe o que mexe (câmara e/ou elementos) ou descreve
 // por palavras dela. Só ao carregar "dar movimento" chama o Kling (rota do Soulab por slug).
 function MotionBox({ disabled, busy, clipUrl, onGerar }: { disabled: boolean; busy: boolean; clipUrl: string | null; onGerar: (opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void }) {
-  const [ing, setIng] = useState<string[]>([]);
+  const [ing, setIng] = useState<string[]>(['natural']); // por defeito anima o que está na imagem (não só câmara)
   const [cam, setCam] = useState<CamaraId>('suave');
   const [livre, setLivre] = useState('');
   const toggle = (id: string) => setIng((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
