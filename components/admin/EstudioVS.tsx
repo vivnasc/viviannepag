@@ -45,6 +45,13 @@ function segundaDaSemana(offset: number): Date {
 const ddmm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
 const dataLocalStr = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+// manhã / tarde a partir da hora ('10:30', '14h', '16:00'): < 12h = manhã. Sem hora
+// conhecida → tarde (o default de áudio dela é piano = tarde). Usado na seleção por
+// turno e no áudio automático em lote.
+function ehTardePeca(hora: string | null | undefined): boolean {
+  const h = parseInt((hora ?? '').replace(/h.*/, ''), 10);
+  return Number.isFinite(h) ? h >= 12 : true;
+}
 // rótulo do cabeçalho de dia no feed: "segunda · 24/06" (a partir de 'YYYY-MM-DD' local).
 function rotuloDoDia(chave: string): string {
   if (chave === 'sem-data') return 'sem data · rascunhos';
@@ -886,9 +893,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     if (typeof window !== 'undefined' && !window.confirm(`Pôr o ÁUDIO automático nas ${sel.size} selecionada(s)?\n\n• tarde → piano de fundo\n• manhã → som do ambiente da cena\n\n(substitui o Ancient Ground; salta as de manhã ainda sem imagem)`)) return;
     return emLote((slug) => {
       const p = pecas.find((x) => x.slug === slug);
-      const h = parseInt((p?.hora ?? '').replace(/h.*/, ''), 10);
-      const ehTarde = Number.isFinite(h) ? h >= 12 : true; // sem hora conhecida → trata como tarde (piano)
-      if (ehTarde) return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: 'piano' }) });
+      if (ehTardePeca(p?.hora)) return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: 'piano' }) });
       if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); // manhã sem imagem: salta
       return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) });
     }, 'A pôr áudio (piano/ambiente)');
@@ -1063,6 +1068,18 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
             ver todas as peças (todas as semanas)
           </label>
         </div>
+
+        {/* SELEÇÃO RÁPIDA: tudo / só manhã / só tarde (sobre as peças à vista). Some quando
+            não há peças. Some quando não há nada visível. */}
+        {pecasVistas.length > 0 && (
+          <div className="flex items-center gap-1.5 flex-wrap mb-3 text-[0.6rem]">
+            <span className="opacity-45 uppercase tracking-widest">selecionar:</span>
+            <button onClick={() => setSel(new Set(pecasVistas.map((p) => p.slug)))} className="px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }}>tudo ({pecasVistas.length})</button>
+            <button onClick={() => setSel(new Set(pecasVistas.filter((p) => !ehTardePeca(p.hora)).map((p) => p.slug)))} className="px-2 py-1 rounded-lg border border-white/25">🌅 manhã ({pecasVistas.filter((p) => !ehTardePeca(p.hora)).length})</button>
+            <button onClick={() => setSel(new Set(pecasVistas.filter((p) => ehTardePeca(p.hora)).map((p) => p.slug)))} className="px-2 py-1 rounded-lg border border-white/25">🌇 tarde ({pecasVistas.filter((p) => ehTardePeca(p.hora)).length})</button>
+            {sel.size > 0 && <button onClick={limparSel} className="px-2 py-1 rounded-lg border border-white/20 opacity-70">limpar</button>}
+          </div>
+        )}
 
         {/* BARRA DE FERRAMENTAS · seleção múltipla (edições em lote / apagar) */}
         {sel.size > 0 && (
