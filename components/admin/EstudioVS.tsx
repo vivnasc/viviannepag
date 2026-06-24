@@ -618,6 +618,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [sel, setSel] = useState<Set<string>>(new Set()); // seleção múltipla (barra de ferramentas)
   const [soDaSemana, setSoDaSemana] = useState(false);     // ver só a semana navegada
   const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
+  const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina'); // motion do texto a aplicar em lote
 
   const recarregar = useCallback(() => {
     fetch(`/api/admin/metodo-vs/list?conta=${cfg.id}`).then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -795,6 +796,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   }, [emLote, sel]);
 
   const transicaoLote = useCallback(() => emLote((slug) => fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, transicao: transLote }) }), 'A aplicar transição'), [emLote, transLote]);
+  const efeitoLoteAplicar = useCallback(() => emLote((slug) => fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, efeito: efeitoLote }) }), 'A aplicar o motion do texto'), [emLote, efeitoLote]);
 
   // agendar em lote: aprova cada peça na SUA data/hora já pré-datada (o passo final de
   // "produzir a próxima semana e deixar agendada"). Salta as que não têm data e as publicadas.
@@ -1001,6 +1003,10 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
                 {TRANSICOES.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
               </select>
               <button onClick={transicaoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aplicar a transição escolhida">transição</button>
+              <select value={efeitoLote} onChange={(e) => setEfeitoLote(e.target.value as EfeitoTexto)} className="text-[0.6rem] px-1 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }} title="motion do texto: como a frase aparece">
+                {EFEITOS_TEXTO.map((ef) => <option key={ef.id} value={ef.id}>{ef.label}</option>)}
+              </select>
+              <button onClick={efeitoLoteAplicar} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aplicar o motion do texto escolhido">✶ texto</button>
               <button onClick={renderLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="MP4 final (GitHub Actions; minutos)">🎞 render</button>
               <button onClick={agendarLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aprova cada peça na sua data (publica-se sozinha)">📅 agendar</button>
               <button onClick={apagarLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 apagar</button>
