@@ -165,7 +165,10 @@ async function main() {
         const inner = Math.max(0, Math.min(1, (ta - fronteirasV[k]) / span));
         return Math.min(1, (k + inner) / nb);
       };
-      const usaProgSeq = vozOk && (seqPorMomento || frameUnicoMetodoVS || col.theme?.marca === 'soulab');
+      // O Método VS com voz+palavras passa a usar KARAOKÊ (KaraokeMetodo), que precisa de prog
+      // LINEAR (timeS = tempo real). Por isso o progSeq (typewriter ao ritmo da voz) fica só
+      // para o Soulab; o método com voz vai linear.
+      const usaProgSeq = vozOk && !ehMetodoVS && (seqPorMomento || col.theme?.marca === 'soulab');
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
