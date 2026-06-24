@@ -26,42 +26,42 @@ export const FORMATOS: Record<FormatoId, FormatoVS> = {
   // no gerador (frase única, não momentos).
   dissolucao: {
     id: 'dissolucao', nome: 'Sinal da manhã', emoji: '🌅',
-    angulo: 'Uma frase única, nua e serena: o sinal de um véu a dissolver-se. O lado do SOLTAR, não o diagnóstico. Uma verdade pequena que liberta (o peso que se pode pousar, a permissão de não merecer o cuidado, quem se é por baixo do que se aprendeu a ser).',
+    angulo: 'Uma frase única, nua e serena: o lado do SOLTAR, não o diagnóstico. Uma verdade pequena que liberta, entendida à primeira leitura (o peso que se pode pousar, a permissão de não merecer o cuidado, quem se é por baixo do que se aprendeu a ser). A FORMA muda de dia para dia (constatação serena, permissão direta, imagem do quotidiano, pequena inversão de um adquirido, pergunta leve), nunca o mesmo molde dois dias seguidos.',
     materia: (k) => `Verdades que libertam (a crença que solta):\n${lista(k.crencas?.map((c) => c.verdade))}\nLeitura transpessoal: ${k.lentes.transpessoal}`,
   },
   nome: {
     id: 'nome', nome: 'O nome que te deram', emoji: '🔤',
-    angulo: 'Pega no NOME COMUM que se dá a este padrão (uma palavra que a pessoa carrega como verdade sobre si) e RENOMEIA-o, vestido de vida. "Chamam-lhe X… mas é Y." A história inteira muda de significado.',
+    angulo: 'O movimento é RENOMEAR. Há uma palavra que a pessoa carrega como se fosse a verdade sobre quem é (um rótulo que lhe deram cedo e ela aceitou). Pega nessa palavra e revela o que ela sempre tapou, vestido de vida, até a palavra deixar de a definir e a história inteira mudar de significado. O peso está na viragem do significado, não em provar nada.',
     materia: (k) => `Essência: ${k.essencia}\nLeitura transpessoal: ${k.lentes.transpessoal}`,
   },
   heranca: {
     id: 'heranca', nome: 'A herança', emoji: '🧬',
-    angulo: 'O ângulo SISTÉMICO: isto não começou nela. Revela, vestido de vida, que o que ela faz foi uma lealdade antiga, algo que veio de antes. Nunca uses as palavras "herança", "lealdade", "sistema" — mostra-o.',
+    angulo: 'O ângulo do que VEIO DE ANTES: isto não começou nela. Revela, vestido de vida, que o que ela faz hoje já se fazia antes dela, que está a cumprir um acordo que ninguém lhe explicou, a ser leal a alguém que nem conheceu. Mostra-o pela cena e pela linhagem, nunca pela teoria; nunca uses as palavras herança, lealdade ou sistema.',
     materia: (k) => `Leitura sistémica (constelação): ${k.lentes.constelacao}\nDe onde vem:\n${lista(k.origens)}`,
   },
   baixo: {
     id: 'baixo', nome: 'O que está por baixo', emoji: '🌊',
-    angulo: 'Pega num gesto comum e revela o que está MESMO por baixo dele, na linguagem da vida (nunca em teoria). Não descreves o gesto: reveles o que ele protege.',
+    angulo: 'Pega num gesto tão comum que ninguém repara nele e revela o que ele anda mesmo a proteger, na linguagem da vida (nunca em teoria). Não descreves o gesto nem o explicas: mostras o que ele guarda por baixo, aquilo que a pessoa nunca chamaria pelo nome. A revelação é a distância entre o gesto pequeno e o medo grande que ele esconde.',
     materia: (k) => `O que está por baixo (traduz para a vida, nunca teoria):\n${lista(k.mecanismos)}`,
   },
   custo: {
     id: 'custo', nome: 'O custo invisível', emoji: '🕯️',
-    angulo: 'Revela o preço silencioso que este padrão cobra, sem o nomear como custo. O que se perde sem se dar conta. Termina no eco, não num aviso.',
+    angulo: 'Revela o preço silencioso que este padrão cobra, sem o nomear como custo nem o transformar em aviso. O que se perde sem se dar conta, devagar, ao lado do que parecia uma virtude. Mostra a fatura escondida dentro do que toda a gente elogia. Termina no eco que fica, não na lição.',
     materia: (k) => `Custos (veste-os de vida):\n${lista(k.custos)}`,
   },
   mito: {
     id: 'mito', nome: 'Mito vs verdade', emoji: '🪞',
-    angulo: 'Pega numa crença comum que a pessoa tem como verdade e vira-a, suavemente ("talvez não fosse bem assim"). Não é "mito: X / verdade: Y" seco — é uma releitura que muda o chão.',
+    angulo: 'Há uma frase que a pessoa repete a si mesma há tanto tempo que já a tem como facto. Pega nessa certeza e abre-lhe uma fenda, com cuidado, até ela deixar de ter o peso de verdade. Não é mito contra verdade em duas colunas secas: é tirar o chão a uma crença antiga e pôr outra coisa no lugar, mais leve. Nunca abras com a palavra talvez.',
     materia: (k) => `Crenças (a comum -> a que liberta):\n${lista(k.crencas?.map((c) => `${c.pensa}  ->  ${c.verdade}`))}`,
   },
   cena: {
     id: 'cena', nome: 'A cena', emoji: '🎬',
-    angulo: 'Uma cena pequena do dia-a-dia que, relida, revela o padrão. Não interpretas a cena ("isto significa X"): mostras a cena e, ao lado, o que ela sempre foi. Em 3.ª pessoa.',
+    angulo: 'Uma cena pequena do dia a dia, mostrada como quem aponta para ela sem comentar. Não a interpretas (isto significa X): pousas a cena e, ao lado, deixas cair o que ela sempre foi por baixo, numa única viragem. A cena ilumina, não se explica. Em 3.ª pessoa, tão concreta que a pessoa vê a divisão da casa onde acontece.',
     materia: (k) => `Cenas (inspira-te, NÃO copies):\n${lista(k.cenas, 5)}`,
   },
   corpo: {
     id: 'corpo', nome: 'O que fica no corpo', emoji: '🫧',
-    angulo: 'O ângulo do corpo: o alarme antigo que continua ligado num presente que já é seguro. O corpo que não esqueceu. Revela, sem jargão, que a pessoa está leal a uma segurança que já não precisa.',
+    angulo: 'O ângulo do corpo: o alarme antigo que continua ligado num presente que já é seguro. O corpo lembra-se de um perigo que a vida já não tem, e continua de guarda por lealdade a um tempo que passou. Revela, sem jargão, que a pessoa está a proteger-se de algo que já não está cá. Mostra-o num gesto físico concreto, não numa explicação.',
     materia: (k) => `Leitura transpessoal: ${k.lentes.transpessoal}\nDe onde vem:\n${lista(k.origens, 3)}`,
   },
 };

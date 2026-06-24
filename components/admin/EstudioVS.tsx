@@ -42,6 +42,15 @@ function segundaDaSemana(offset: number): Date {
   return x;
 }
 const ddmm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+const dataLocalStr = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+// rótulo do cabeçalho de dia no feed: "segunda · 24/06" (a partir de 'YYYY-MM-DD' local).
+function rotuloDoDia(chave: string): string {
+  if (chave === 'sem-data') return 'sem data · rascunhos';
+  const [y, m, d] = chave.split('-').map(Number);
+  const dt = new Date(y, (m ?? 1) - 1, d ?? 1);
+  return `${DIAS_PT[dt.getDay()]} · ${ddmm(dt)}`;
+}
 function rotuloSemana(offset: number): string {
   const seg = segundaDaSemana(offset);
   const dom = new Date(seg); dom.setDate(seg.getDate() + 6);
@@ -403,18 +412,23 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
   );
 }
 
-function Cartao({ p, onApagar, onAbrir }: { p: Peca; onApagar: (slug: string) => void; onAbrir: (slug: string) => void }) {
+function Cartao({ p, onApagar, onAbrir, selecionado, onToggleSel }: { p: Peca; onApagar: (slug: string) => void; onAbrir: (slug: string) => void; selecionado: boolean; onToggleSel: (slug: string) => void }) {
   const [i, setI] = useState(0);
   const n = Math.max(1, p.momentos.length);
   useEffect(() => { if (n <= 1) return; const t = setInterval(() => setI((x) => (x + 1) % n), 2400); return () => clearInterval(t); }, [n]);
   const idx = Math.min(i, n - 1);
+  const transNome = TRANSICOES.find((t) => t.id === ((p.transicao as Transicao | null) ?? (p.momentos.length > 1 ? 'deslizar' : null)))?.label;
   return (
-    <div className="rounded-2xl border border-white/10 overflow-hidden" style={{ background: '#15131F' }}>
+    <div className="rounded-2xl border overflow-hidden transition-shadow" style={{ background: '#15131F', borderColor: selecionado ? dz : 'rgba(255,255,255,0.1)', boxShadow: selecionado ? `0 0 0 1px ${dz}` : 'none' }}>
       <div className="relative" style={{ aspectRatio: '1080 / 1920', background: '#0E0B16' }}>
         {p.imageUrl && <img src={p.imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: 'brightness(0.8)' }} />}
         <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
           <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: '1.3rem', lineHeight: 1.3, color: '#F4ECDD', textShadow: '0 2px 18px rgba(0,0,0,0.85)' }}>{p.momentos[idx] ?? p.momentos[0] ?? ''}</p>
         </div>
+        {/* caixa de seleção (canto superior esquerdo) — barra de ferramentas em lote */}
+        <button onClick={() => onToggleSel(p.slug)} title={selecionado ? 'tirar da seleção' : 'selecionar'}
+          className="absolute top-2 left-2 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10"
+          style={selecionado ? { background: dz, borderColor: dz, color: '#0F0F1A' } : { background: 'rgba(0,0,0,0.45)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
         {n > 1 && (
           <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
             {p.momentos.map((_, k) => <span key={k} className="w-1.5 h-1.5 rounded-full" style={{ background: k === idx ? '#EBAE4A' : 'rgba(255,255,255,0.35)' }} />)}
@@ -424,7 +438,8 @@ function Cartao({ p, onApagar, onAbrir }: { p: Peca; onApagar: (slug: string) =>
           : p.clipUrl ? <span className="absolute top-2 right-2 text-[0.55rem] rounded px-1.5 py-0.5 text-[#0F0F1A]" style={{ background: '#EBAE4A' }}>🎬</span> : null}
       </div>
       <div className="p-2.5 text-[0.64rem]">
-        <p className="opacity-70 mb-1">{NOME_FORMATO[p.formato ?? ''] ?? p.formato ?? 'revelação'} · véu {p.veu ?? '—'}</p>
+        <p className="truncate" style={{ fontFamily: 'var(--font-serif), serif', fontSize: '0.78rem', color: '#F4ECDD' }}>{NOME_FORMATO[p.formato ?? ''] ?? p.formato ?? 'revelação'}</p>
+        <p className="opacity-45 mb-1.5 text-[0.58rem]">véu {p.veu ?? '—'}{p.hora ? ` · ${p.hora.slice(0, 5)}` : ''}{n > 1 && transNome ? ` · ${transNome}` : ''}</p>
         <div className="flex items-center gap-2 flex-wrap">
           {p.publicado ? <span className="px-1.5 py-0.5 rounded bg-emerald-600/80 text-[#0F0F1A]">✓ publicada</span>
             : p.agendadoEm ? <span className="px-1.5 py-0.5 rounded bg-[#C9B6FA]/80 text-[#0F0F1A]">📅 {p.agendadoEm.slice(5)} {(p.hora ?? '').slice(0, 5)}</span>
@@ -455,6 +470,9 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
   const [estudioSlug, setEstudioSlug] = useState<string | null>(null);
   const [offset, setOffset] = useState(0); // 0 = esta semana; ▶ para semanas futuras (produzir e pré-datar)
+  const [sel, setSel] = useState<Set<string>>(new Set()); // seleção múltipla (barra de ferramentas)
+  const [soDaSemana, setSoDaSemana] = useState(false);     // ver só a semana navegada
+  const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
 
   const recarregar = useCallback(() => {
     fetch(`/api/admin/metodo-vs/list?conta=${cfg.id}`).then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -582,7 +600,56 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
 
+  // ── SELEÇÃO MÚLTIPLA + barra de ferramentas (edições em lote / apagar em lote) ──
+  const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
+  const limparSel = useCallback(() => setSel(new Set()), []);
+
+  // corre uma ação em CADA peça selecionada (sequencial, salta publicadas quando faz sentido).
+  const emLote = useCallback(async (faz: (slug: string) => Promise<Response>, etiqueta: string, podePublicada = true) => {
+    if (acaoSlug || busy || !sel.size) return;
+    const alvos = pecas.filter((p) => sel.has(p.slug) && (podePublicada || !p.publicado)).map((p) => p.slug);
+    if (!alvos.length) { setSel(new Set()); return; }
+    setBusy('lote'); setErro(null); setMsg(`${etiqueta} · 0/${alvos.length}…`);
+    let feitos = 0;
+    for (const slug of alvos) {
+      try { const r = await faz(slug); if (r.ok) feitos++; } catch { /* segue */ }
+      setMsg(`${etiqueta} · ${feitos}/${alvos.length}…`);
+    }
+    setMsg(`${etiqueta}: ${feitos}/${alvos.length} feito(s).`);
+    setSel(new Set()); setBusy(null); recarregar();
+  }, [acaoSlug, busy, sel, pecas, recarregar]);
+
+  const apagarLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar ${[...sel].length} peça(s) selecionada(s)? (as publicadas são saltadas)`)) return;
+    return emLote((slug) => fetch('/api/admin/metodo-vs/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A apagar', false);
+  }, [emLote, sel]);
+
+  const transicaoLote = useCallback(() => emLote((slug) => fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, transicao: transLote }) }), 'A aplicar transição'), [emLote, transLote]);
+
+  // agendar em lote: aprova cada peça na SUA data/hora já pré-datada (o passo final de
+  // "produzir a próxima semana e deixar agendada"). Salta as que não têm data e as publicadas.
+  const agendarLote = useCallback(() => emLote((slug) => {
+    const p = pecas.find((x) => x.slug === slug);
+    if (!p?.agendadoEm) return Promise.resolve(new Response(null, { status: 400 }));
+    return fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: p.agendadoEm.slice(0, 10), hora: p.hora || '11:00', aprovado: true }) });
+  }, 'A agendar', false), [emLote, pecas]);
+
   const pecaAberta = pecas.find((p) => p.slug === estudioSlug) ?? null;
+
+  // a semana navegada (seg→dom) para o filtro "ver só esta semana".
+  const semSeg = segundaDaSemana(offset);
+  const semDom = new Date(semSeg); semDom.setDate(semSeg.getDate() + 6);
+  const dentroDaSemana = (p: Peca) => { if (!p.agendadoEm) return false; const d = p.agendadoEm.slice(0, 10); return d >= dataLocalStr(semSeg) && d <= dataLocalStr(semDom); };
+  const pecasVistas = soDaSemana ? pecas.filter(dentroDaSemana) : pecas;
+  const ordenadas = [...pecasVistas].sort((a, b) => `${a.agendadoEm ?? '~'}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? '~'}${b.hora ?? ''}`));
+  // agrupar por DIA (hierarquia + ritmo): cabeçalho de dia, depois os cartões desse dia.
+  const grupos: { chave: string; rotulo: string; itens: Peca[] }[] = [];
+  for (const p of ordenadas) {
+    const chave = p.agendadoEm ? p.agendadoEm.slice(0, 10) : 'sem-data';
+    let g = grupos.find((x) => x.chave === chave);
+    if (!g) { g = { chave, rotulo: rotuloDoDia(chave), itens: [] }; grupos.push(g); }
+    g.itens.push(p);
+  }
 
   const titulo = ehMae ? 'Método VS · a conta mãe' : `Método VS · ${dados.movimento}`;
   const ancoraDesc = ehMae
@@ -643,11 +710,53 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         {erro && <p className="mb-3 text-[0.82rem] text-rose-300">{erro}</p>}
         {msg && !erro && <p className="mb-3 text-[0.82rem] text-emerald-300">{msg}</p>}
 
-        {pecas.length === 0 ? (
-          <p className="text-center text-[0.78rem] opacity-50 py-10">Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.</p>
+        {/* cabeçalho do feed: contagem + filtro "só a semana navegada" */}
+        <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
+          <p className="text-[0.66rem] uppercase tracking-widest opacity-50">{pecasVistas.length} peça(s){soDaSemana ? ` · ${rotuloSemana(offset)}` : ''}</p>
+          <label className="flex items-center gap-1.5 text-[0.66rem] opacity-80 cursor-pointer select-none">
+            <input type="checkbox" checked={soDaSemana} onChange={(e) => setSoDaSemana(e.target.checked)} className="accent-current" style={{ accentColor: cfg.cor }} />
+            ver só a semana navegada ({rotuloSemana(offset)})
+          </label>
+        </div>
+
+        {/* BARRA DE FERRAMENTAS · seleção múltipla (edições em lote / apagar) */}
+        {sel.size > 0 && (
+          <div className="sticky top-2 z-30 mb-3 rounded-xl border p-2.5 flex items-center gap-2 flex-wrap" style={{ borderColor: cfg.cor, background: '#1B1626', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+            <span className="text-[0.72rem] font-medium" style={{ color: cfg.cor }}>{sel.size} selecionada(s)</span>
+            <span className="opacity-30">·</span>
+            {/* aplicar transição a todas as selecionadas */}
+            <div className="flex items-center gap-1">
+              <span className="text-[0.6rem] opacity-55">transição:</span>
+              <select value={transLote} onChange={(e) => setTransLote(e.target.value as Transicao)} className="text-[0.62rem] px-1.5 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }}>
+                {TRANSICOES.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+              </select>
+              <button onClick={transicaoLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }}>aplicar</button>
+            </div>
+            <span className="opacity-30">·</span>
+            <button onClick={agendarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aprova cada peça na sua data já marcada (publica-se sozinha)">📅 agendar selecionadas</button>
+            <button onClick={apagarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 apagar selecionadas</button>
+            <button onClick={limparSel} className="ml-auto text-[0.62rem] px-2 py-1 rounded-lg border border-white/20 opacity-75">limpar seleção</button>
+          </div>
+        )}
+
+        {pecasVistas.length === 0 ? (
+          <p className="text-center text-[0.78rem] opacity-50 py-10">{soDaSemana ? 'Nada nesta semana. Produz a semana ou tira o filtro.' : 'Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.'}</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[...pecas].sort((a, b) => `${a.agendadoEm ?? '~'}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? '~'}${b.hora ?? ''}`)).map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onAbrir={setEstudioSlug} />)}
+          <div className="space-y-6">
+            {grupos.map((g) => (
+              <section key={g.chave}>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-[0.72rem] uppercase tracking-[0.18em]" style={{ color: cfg.cor }}>{g.rotulo}</h3>
+                  <span className="text-[0.58rem] opacity-40">{g.itens.length} post(s)</span>
+                  <button onClick={() => setSel((s) => { const n = new Set(s); const todas = g.itens.every((p) => n.has(p.slug)); g.itens.forEach((p) => (todas ? n.delete(p.slug) : n.add(p.slug))); return n; })}
+                    className="text-[0.55rem] px-1.5 py-0.5 rounded border border-white/15 opacity-60 hover:opacity-100">selecionar dia</button>
+                  <div className="flex-1 h-px bg-white/8" />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {g.itens.map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onAbrir={setEstudioSlug} selecionado={sel.has(p.slug)} onToggleSel={toggleSel} />)}
+                </div>
+              </section>
+            ))}
           </div>
         )}
       </div>

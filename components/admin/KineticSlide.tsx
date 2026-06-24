@@ -37,37 +37,79 @@ export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
 ];
 
 // a TRANSIÇÃO entre momentos (de uma frase para a seguinte). É DIFERENTE do efeito:
-// o efeito é COMO cada frase se revela; a transição é COMO se troca de frase. À
-// escolha da Vivianne, com descrição (para saber o que escolhe). 'deslizar' é o
-// novo padrão: a frase nova entra da DIREITA e a anterior sai pela esquerda.
-export type Transicao = 'deslizar' | 'fundir' | 'corte';
+// o efeito é COMO cada frase se revela; a transição é COMO se TROCA de frase. À
+// escolha da Vivianne (a "linguagem de movimento" da marca), com descrição clara.
+// Paleta completa: deslizar (←/→), empurrar, virar página, revelar, cortina, zoom,
+// fundir, corte. O padrão do método é 'deslizar' (esquerda); o Soulab fica em 'fundir'.
+export type Transicao =
+  | 'deslizar' | 'deslizar-dir' | 'empurrar' | 'virar'
+  | 'revelar' | 'cortina' | 'zoom' | 'fundir' | 'corte';
 export const TRANSICOES: { id: Transicao; label: string; desc: string }[] = [
-  { id: 'deslizar', label: '⇠ deslizar', desc: 'a frase nova entra a deslizar da direita; a anterior sai pela esquerda (como virar a página)' },
+  { id: 'deslizar', label: '⇠ deslizar (←)', desc: 'a frase nova entra da direita e a anterior sai pela esquerda (deslizar entre cartões)' },
+  { id: 'deslizar-dir', label: '⇢ deslizar (→)', desc: 'ao contrário: a frase nova entra da esquerda e a anterior sai pela direita' },
+  { id: 'empurrar', label: '⇥ empurrar', desc: 'a frase nova empurra a anterior para fora, sem fundido, com bordas nítidas (sensação física)' },
+  { id: 'virar', label: '⤵ virar página', desc: 'a frase nova vira como uma página de livro (rotação 3D a partir da margem)' },
+  { id: 'revelar', label: '◗ revelar', desc: 'a frase nova revela-se por cima da anterior, como um pano a abrir da esquerda para a direita' },
+  { id: 'cortina', label: '◫ cortina', desc: 'a frase nova abre do centro para cima e para baixo, como uma cortina a separar-se' },
+  { id: 'zoom', label: '⊙ zoom', desc: 'a frase nova aproxima-se suavemente (entra um pouco maior e assenta); a anterior afasta-se' },
   { id: 'fundir', label: '◍ fundir', desc: 'as frases cruzam-se num fundido suave (uma esmorece enquanto a outra acende)' },
-  { id: 'corte', label: '⇥ corte seco', desc: 'troca direta, sem fundido nem deslize: cada frase aparece de uma vez' },
+  { id: 'corte', label: '▮ corte seco', desc: 'troca direta, sem fundido nem deslize: cada frase aparece de uma vez' },
 ];
 
 // O ESTILO do CONTENTOR de cada momento numa sequência, dado o progresso DENTRO do
 // momento (lp 0..1), se é o último, e a transição escolhida. Centralizado aqui para
 // a pré-visualização (EstudioVS) e o render (render-veu) coincidirem ao pixel.
 // Devolve null quando o momento não deve aparecer. EDGE = largura da troca.
-export function estiloMomento(transicao: Transicao | undefined, lp: number, isLast: boolean): { opacity: number; transform?: string } | null {
+// (O momento que ENTRA tem índice maior => é pintado por cima, por isso revelar/
+// cortina/deslizar lêem-se como a frase nova a chegar sobre a anterior.)
+export function estiloMomento(transicao: Transicao | undefined, lp: number, isLast: boolean): React.CSSProperties | null {
   const t = transicao ?? 'fundir';
   const EDGE = 0.18;
   if (t === 'corte') {
     const visivel = lp > 0 && (lp < 1 || isLast);
     return visivel ? { opacity: 1 } : null;
   }
-  const fin = Math.min(1, lp / EDGE);                      // entrada
-  const fout = isLast ? 1 : Math.min(1, (1 - lp) / EDGE);  // saída (o último segura)
+  const fin = Math.min(1, lp / EDGE);                      // entrada: 0 -> 1
+  const fout = isLast ? 1 : Math.min(1, (1 - lp) / EDGE);  // saída: 1 -> 0 (o último segura)
   const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
   if (op <= 0) return null;
-  if (t === 'deslizar') {
-    // entra de +100% (direita) durante a entrada; sai para -100% (esquerda) na saída.
-    const x = fin < 1 ? (1 - fin) * 100 : (isLast ? 0 : (1 - fout) * -100);
-    return { opacity: op, transform: `translateX(${x.toFixed(2)}%)` };
+  const aEntrar = fin < 1;            // a chegar
+  const aSair = !aEntrar && fout < 1; // a partir
+  const sai = 1 - fout;              // 0 (ainda cá) -> 1 (foi-se), durante a saída
+  switch (t) {
+    case 'fundir':
+      return { opacity: op };
+    case 'deslizar': {               // entra da direita, sai pela esquerda
+      const x = aEntrar ? (1 - fin) * 100 : aSair ? sai * -100 : 0;
+      return { opacity: op, transform: `translateX(${x.toFixed(2)}%)` };
+    }
+    case 'deslizar-dir': {           // entra da esquerda, sai pela direita
+      const x = aEntrar ? (1 - fin) * -100 : aSair ? sai * 100 : 0;
+      return { opacity: op, transform: `translateX(${x.toFixed(2)}%)` };
+    }
+    case 'empurrar': {               // como deslizar, mas sólido (sem fundido)
+      const x = aEntrar ? (1 - fin) * 100 : aSair ? sai * -100 : 0;
+      return { opacity: 1, transform: `translateX(${x.toFixed(2)}%)` };
+    }
+    case 'virar': {                  // virar página: rotação 3D a partir da margem
+      const deg = aEntrar ? (1 - fin) * 88 : aSair ? sai * -88 : 0;
+      return { opacity: op, transform: `perspective(1600px) rotateY(${deg.toFixed(2)}deg)`, transformOrigin: deg >= 0 ? 'left center' : 'right center', backfaceVisibility: 'hidden' };
+    }
+    case 'zoom': {                   // entra maior e assenta; sai a afastar-se
+      const s = aEntrar ? 1.18 - 0.18 * fin : aSair ? 1 - 0.12 * sai : 1;
+      return { opacity: op, transform: `scale(${s.toFixed(3)})` };
+    }
+    case 'revelar': {                // pano a abrir da esquerda para a direita
+      // à entrada revela-se sólida por cima; à saída só esmorece (a nova cobre-a).
+      if (aEntrar) return { opacity: 1, clipPath: `inset(0 ${((1 - fin) * 100).toFixed(1)}% 0 0)` };
+      return { opacity: op };
+    }
+    case 'cortina': {                // abre do centro para cima e para baixo
+      if (aEntrar) { const h = ((1 - fin) * 50).toFixed(1); return { opacity: 1, clipPath: `inset(${h}% 0 ${h}% 0)` }; }
+      return { opacity: op };
+    }
   }
-  return { opacity: op }; // fundir
+  return { opacity: op };
 }
 
 export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
