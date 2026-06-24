@@ -20,6 +20,10 @@ export function RomanceGate({ locale }: { locale: string }) {
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.erro || 'erro');
+      // conversão do funil: evento Lead para o Meta Pixel (se configurado)
+      try {
+        (window as unknown as { fbq?: (...a: unknown[]) => void }).fbq?.('track', 'Lead', { content_name: 'As Mãos de Amparo' });
+      } catch { /* sem pixel, segue */ }
       setLinks({ pt: json.pt, en: json.en });
       setEstado('pronto');
     } catch {
