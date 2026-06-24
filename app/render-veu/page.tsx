@@ -381,11 +381,14 @@ export default function RenderVeuPage() {
               efeito={(s as { efeito?: EfeitoTexto }).efeito}
               tipografia={(s as { tipografia?: Tipografia }).tipografia}
               conceito={s.conceito}
-              clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
+              clipUrl={((estado.dia.mundo as string) === 'soulab' || ehMarcaMetodoVS(marcaM)) ? (clipBg ?? undefined) : undefined}
               {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
             />
           );
-          const temClip = (estado.dia.mundo as string) === 'soulab' && !!clipBg;
+          // o frame único do método (manhã/dissolução) é tipo:'kinetico' — passa por
+          // AQUI, não pelo ramo ehMetodo. Por isso o clip do Kling também tem de entrar
+          // aqui para o método, senão a manhã fica só com a câmara CSS (o bug do motion).
+          const temClip = ((estado.dia.mundo as string) === 'soulab' || ehMarcaMetodoVS(marcaM)) && !!clipBg;
           return (s.imageUrl && !temClip) ? <CameraVeu prog={prog}>{kin}</CameraVeu> : kin;
         })()
       )}
