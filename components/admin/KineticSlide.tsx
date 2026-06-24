@@ -36,6 +36,83 @@ export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
   { id: 'bloom', label: '✺ bloom luminoso' },
 ];
 
+// a TRANSIÇÃO entre momentos (de uma frase para a seguinte). É DIFERENTE do efeito:
+// o efeito é COMO cada frase se revela; a transição é COMO se TROCA de frase. À
+// escolha da Vivianne (a "linguagem de movimento" da marca), com descrição clara.
+// Paleta completa: deslizar (←/→), empurrar, virar página, revelar, cortina, zoom,
+// fundir, corte. O padrão do método é 'deslizar' (esquerda); o Soulab fica em 'fundir'.
+export type Transicao =
+  | 'deslizar' | 'deslizar-dir' | 'empurrar' | 'virar'
+  | 'revelar' | 'cortina' | 'zoom' | 'fundir' | 'corte';
+export const TRANSICOES: { id: Transicao; label: string; desc: string }[] = [
+  { id: 'deslizar', label: '⇠ deslizar (←)', desc: 'a frase nova entra da direita e a anterior sai pela esquerda (deslizar entre cartões)' },
+  { id: 'deslizar-dir', label: '⇢ deslizar (→)', desc: 'ao contrário: a frase nova entra da esquerda e a anterior sai pela direita' },
+  { id: 'empurrar', label: '⇥ empurrar', desc: 'a frase nova empurra a anterior para fora, sem fundido, com bordas nítidas (sensação física)' },
+  { id: 'virar', label: '⤵ virar página', desc: 'a frase nova vira como uma página de livro (rotação 3D a partir da margem)' },
+  { id: 'revelar', label: '◗ revelar', desc: 'a frase nova revela-se por cima da anterior, como um pano a abrir da esquerda para a direita' },
+  { id: 'cortina', label: '◫ cortina', desc: 'a frase nova abre do centro para cima e para baixo, como uma cortina a separar-se' },
+  { id: 'zoom', label: '⊙ zoom', desc: 'a frase nova aproxima-se suavemente (entra um pouco maior e assenta); a anterior afasta-se' },
+  { id: 'fundir', label: '◍ fundir', desc: 'as frases cruzam-se num fundido suave (uma esmorece enquanto a outra acende)' },
+  { id: 'corte', label: '▮ corte seco', desc: 'troca direta, sem fundido nem deslize: cada frase aparece de uma vez' },
+];
+
+// ── MODELO DE SEQUÊNCIA (o bom) ────────────────────────────────────────────────
+// A Vivianne: "a transição não pode ter espaço vazio nem apagar — as pessoas fogem".
+// Este modelo TROCA de frase SOBRE a fronteira, com as duas frases a sobrepor-se: há
+// SEMPRE uma frase a cobrir o ecrã inteiro (zero preto), e a família empurrão é SÓLIDA
+// (opacity 1, sem fundido). Recebe o prog GLOBAL (0..1), o índice i e o total n — é isso
+// que permite a sobreposição (o estiloMomento antigo, por lp local, deixava um buraco
+// na fronteira). A frase que ENTRA tem índice maior => é pintada por cima.
+export function estiloSequencia(transicao: Transicao | undefined, prog: number, i: number, n: number): React.CSSProperties | null {
+  const t = transicao ?? 'deslizar';
+  const N = Math.max(1, n);
+  const w = 1 / N;
+  const T = Math.min(w * 0.32, 0.055);   // duração da troca (curta), em unidades de prog
+  const isFirst = i === 0, isLast = i === N - 1;
+  const bIn = i * w;          // fronteira onde ESTE entra (= fim do anterior)
+  const bOut = (i + 1) * w;   // fronteira onde ESTE sai
+  const clamp = (x: number) => Math.max(0, Math.min(1, x));
+  // fora das suas janelas (com meia-troca de margem), não existe.
+  if (!isFirst && prog < bIn - T / 2) return null;
+  if (!isLast && prog > bOut + T / 2) return null;
+  // fase + progresso da fase (f: 0..1)
+  let fase: 'enter' | 'hold' | 'exit' = 'hold';
+  let f = 0;
+  if (!isFirst && prog < bIn + T / 2) { fase = 'enter'; f = clamp((prog - (bIn - T / 2)) / T); }
+  else if (!isLast && prog > bOut - T / 2) { fase = 'exit'; f = clamp((prog - (bOut - T / 2)) / T); }
+  // CORTE: troca seca, sem sobreposição (cada frase "possui" a sua janela).
+  if (t === 'corte') {
+    const vis = (isFirst || prog >= bIn) && (isLast || prog < bOut);
+    return vis ? { opacity: 1 } : null;
+  }
+  // FUNDIR: o ÚNICO com fundido (a Vivianne sabe-o; já não é o padrão).
+  if (t === 'fundir') {
+    const op = fase === 'enter' ? f : fase === 'exit' ? 1 - f : 1;
+    return op <= 0 ? null : { opacity: op };
+  }
+  // FAMÍLIA EMPURRÃO (deslizar ←/→, empurrar): SÓLIDA. As duas frases deslizam juntas
+  // sobre a fronteira -> cobertura contínua, zero preto, zero fade.
+  if (t === 'deslizar' || t === 'deslizar-dir' || t === 'empurrar') {
+    const dir = t === 'deslizar-dir' ? -1 : 1; // ← entra da direita(+); → entra da esquerda(-)
+    let x = 0;
+    if (fase === 'enter') x = (1 - f) * 100 * dir;   // de +100·dir a 0
+    else if (fase === 'exit') x = -f * 100 * dir;    // de 0 a -100·dir
+    return { opacity: 1, transform: `translateX(${x.toFixed(2)}%)` };
+  }
+  // FAMÍLIA COBERTURA (virar/revelar/cortina/zoom): a que SAI fica parada e cheia; a que
+  // ENTRA vem POR CIMA (índice maior). Nunca há preto por baixo.
+  if (fase === 'exit') return { opacity: 1 };
+  if (fase === 'enter') {
+    switch (t) {
+      case 'revelar': return { opacity: 1, clipPath: `inset(0 ${((1 - f) * 100).toFixed(1)}% 0 0)` };
+      case 'cortina': { const h = ((1 - f) * 50).toFixed(1); return { opacity: 1, clipPath: `inset(${h}% 0 ${h}% 0)` }; }
+      case 'virar': return { opacity: 1, transform: `perspective(1600px) rotateY(${((1 - f) * 90).toFixed(1)}deg)`, transformOrigin: 'left center', backfaceVisibility: 'hidden' };
+      case 'zoom': return { opacity: f, transform: `scale(${(1.12 - 0.12 * f).toFixed(3)})` };
+    }
+  }
+  return { opacity: 1 }; // hold
+}
+
 export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   // o EFEITO do texto (à escolha): máquina de escrever · bloom luminoso · fade

@@ -100,10 +100,17 @@ async function main() {
       // TEMPO DE LEITURA (sem voz): ~4.8s por beat — dá tempo de LER cada linha
       // (3.4s era rápido demais). Com voz, a duração é a da narração (mais abaixo).
       const FPS = 25;
-      // SOULAB · tempo POR MOMENTO à escolha dela (slides[0].segPorMomento, em segundos);
-      // sem escolha, 6.5s. A pré-visualização do admin lê o MESMO valor → o que vê é o que sai.
-      const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 6.5));
-      let DUR = duasFaces ? 17 : nbeats ? Math.max(16, Math.round(4.8 * slides.length)) : carta ? Math.max(16, Math.round(4.6 * slides.length)) : (col.theme?.marca === 'soulab' && slides.length > 1) ? Math.max(8, Math.round(soulabSeg * slides.length)) : visual ? 9 : 8;
+      // SOULAB / MÉTODO VS · tempo POR MOMENTO à escolha dela (slides[0].segPorMomento,
+      // em segundos); sem escolha, 5.5s. A pré-visualização do admin lê o MESMO valor → o
+      // que vê é o que sai (vale para o Soulab E para o Método VS, que partilham a sequência).
+      const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 5.5));
+      const seqPorMomento = (col.theme?.marca === 'soulab' || col.theme?.marca === 'metodovs') && slides.length > 1;
+      // FRAME ÚNICO do Método VS (manhã = 1 só linha): com o movimento de câmara da
+      // CameraVeu, precisa de ~6.5s para a câmara RESPIRAR e dar tempo de ler a frase
+      // (8s parados eram demais; 6-7s lê-se o movimento). Vale para a mãe e as filhas.
+      const ehMetodoVS = ['metodovs', 'versoltar', 'virsoltar', 'viversoltar'].includes(col.theme?.marca);
+      const frameUnicoMetodoVS = ehMetodoVS && slides.length <= 1 && !duasFaces && !nbeats && !carta && !visual;
+      let DUR = duasFaces ? 17 : nbeats ? Math.max(16, Math.round(4.8 * slides.length)) : carta ? Math.max(16, Math.round(4.6 * slides.length)) : seqPorMomento ? Math.max(8, Math.round(soulabSeg * slides.length)) : visual ? 9 : frameUnicoMetodoVS ? 6.5 : 8;
       // VOZ (narração): se o post tem voz, ELA MANDA — a duração do reel passa a ser a
       // da narração e os slides avançam ao ritmo dela (a frase no ecrã = a que é dita
       // = karaokê ao nível da frase). Guardado por d.vozUrl (a loja não tem voz).
@@ -118,7 +125,7 @@ async function main() {
           }
         } catch (e) { console.log(`[voz] ${e.message}`); }
       }
-      const N = FPS * DUR;
+      const N = Math.round(FPS * DUR);
       // KARAOKÊ palavra-a-palavra: se a voz traz timestamps de palavra, o prog é LINEAR
       // (a página acende cada palavra pelo tempo real); senão, distribui por frase.
       const temPalavras = Array.isArray(d.vozPalavras) && d.vozPalavras.length > 0;

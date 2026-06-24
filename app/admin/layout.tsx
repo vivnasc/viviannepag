@@ -58,32 +58,18 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
-    titulo: 'método vs · o mapa',
-    cor: '#d8b25a',
-    itens: [
-      { href: '/admin/metodo/calendario', label: 'calendário · 3 meses' },
-      { href: '/admin/metodo/mae-plano', label: 'plano da semana' },
-    ],
-  },
-  {
-    // A MÃE (vivianne.dos.santos): o conteúdo VS (os 8 formatos) + as séries e os
-    // carrosséis, que são DELA.
+    // MÉTODO VS · do ZERO (a Vivianne mandou apagar o motor antigo, ficou só o SABER).
+    // Uma página simples, como o laboratório do Soulab: a voz da revelação. Sem 4
+    // contas, sem semanas, sem formatos. As séries e os carrosséis são DELA.
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo/mae', label: 'conteúdo VS' },
+      { href: '/admin/metodo-vs', label: 'método vs · a mãe' },
+      { href: '/admin/metodo-vs/ver', label: 'método vs · ver' },
+      { href: '/admin/metodo-vs/vir', label: 'método vs · vir' },
+      { href: '/admin/metodo-vs/viver', label: 'método vs · viver' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
-    ],
-  },
-  {
-    // AS 3 FILHAS (as portas): ver · vir · viver, cada uma a sua linha.
-    titulo: 'método vs · 3 filhas',
-    cor: '#d8b25a',
-    itens: [
-      { href: '/admin/metodo/ver', label: 'ver' },
-      { href: '/admin/metodo/vir', label: 'vir' },
-      { href: '/admin/metodo/viver', label: 'viver' },
     ],
   },
   {
