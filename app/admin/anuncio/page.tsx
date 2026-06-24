@@ -1,10 +1,13 @@
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { GerarAnuncio } from '@/components/admin/GerarAnuncio';
+import { romanceCapaUrl } from '@/lib/romance-loja';
+import GUIOES from '@/lib/anuncio/guiao.json';
 
 export const dynamic = 'force-dynamic';
 
 type Anuncio = { nome: string; url: string; criado: string | null };
+type Guiao = { nome: string; intro: { texto: string; st: number; en: number }[]; introDur: number; falas: string[]; fim: { titulo: string; cta: string; site: string } };
 
 export default async function AnuncioAdmin() {
   if (!(await isAdmin())) {
@@ -28,19 +31,20 @@ export default async function AnuncioAdmin() {
     }));
 
   return (
-    <main className="max-w-[920px] mx-auto px-7 py-12">
+    <main className="max-w-[980px] mx-auto px-7 py-12">
       <header className="mb-8">
         <p className="text-[0.7rem] tracking-[0.32em] uppercase text-ocre mb-2">admin</p>
         <h1 className="font-serif font-light text-creme text-3xl">o anúncio</h1>
         <p className="text-creme-2/60 text-[0.85rem] mt-3 font-serif italic">
-          Gera o vídeo do anúncio do Amparo (voz + cena + texto + música) com um botão. Sai aqui, pronto a descarregar.
+          Vê o storyboard e ouve a tua voz primeiro. Só quando estiver do teu agrado é que mandas montar o vídeo. Sem surpresas.
         </p>
       </header>
 
-      <GerarAnuncio />
+      <GerarAnuncio guioes={GUIOES as Record<string, Guiao>} capaUrl={romanceCapaUrl('rom-01-amparo', 'pt')} />
 
+      <h2 className="font-serif font-light text-creme text-xl mb-4 mt-12">vídeos já montados</h2>
       {anuncios.length === 0 ? (
-        <p className="text-creme-2/50 italic font-serif">Ainda não há anúncios. Carrega num botão acima para gerar o primeiro.</p>
+        <p className="text-creme-2/50 italic font-serif">Ainda nenhum. Depois de "montar o vídeo final", aparece aqui.</p>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
           {anuncios.map((a) => (
