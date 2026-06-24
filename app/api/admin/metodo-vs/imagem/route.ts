@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
+import { promptImagemVS } from '@/lib/metodo-vs/gerar';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -27,7 +28,9 @@ export async function POST(req: Request) {
 
   let url: string;
   try {
-    const raw = await gerarImagemFlux(prompt, token, { raw: true });
+    // o prompt guardado (notaVisual) é só a CENA; o estilo + banimentos entram aqui. Assim
+    // mudar a estética NÃO custa Claude: a Vivianne carrega "outra imagem" e re-corre o Flux.
+    const raw = await gerarImagemFlux(promptImagemVS(prompt), token, { raw: true });
     try { url = await guardarImagem(raw, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { url = raw; }
   } catch (e) {
     return NextResponse.json({ erro: 'flux-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });

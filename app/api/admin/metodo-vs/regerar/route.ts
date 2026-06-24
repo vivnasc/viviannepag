@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { limparTravessoes } from '@/lib/texto';
 import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
-import { gerarPecaVS } from '@/lib/metodo-vs/gerar';
+import { gerarPecaVS, promptImagemVS } from '@/lib/metodo-vs/gerar';
 import { type FormatoId } from '@/lib/metodo-vs/formatos';
 import { METODOVS_CONTAS_LISTA } from '@/lib/metodo-vs/marca';
 
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (token && peca.fundoPrompt) {
     try {
-      const raw = await gerarImagemFlux(peca.fundoPrompt, token, { raw: true });
+      const raw = await gerarImagemFlux(promptImagemVS(peca.fundoPrompt), token, { raw: true });
       try { imageUrl = await guardarImagem(raw, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { imageUrl = raw; }
     } catch { imageUrl = null; }
   }

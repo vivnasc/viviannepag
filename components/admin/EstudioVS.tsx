@@ -875,19 +875,45 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
             </div>
             <button onClick={() => chamar({ semana: true, offset }, 'semana')} disabled={!!busy} className="px-3 py-1.5 rounded-lg font-medium text-[0.78rem] disabled:opacity-50" style={{ background: cfg.cor, color: '#0F0F1A' }}>{busy === 'semana' ? 'a produzir a semana…' : offset === 0 ? '✦ produzir a semana toda' : '✦ produzir e pré-datar'}</button>
           </div>
-          <p className="text-[0.55rem] opacity-45 mb-2">{CALENDARIO.length} posts · 1 véu por dia (os 7 tecidos na semana) · manhã = soltar · tarde = revelação. {offset > 0 ? 'Gera já a semana futura e pré-data cada post (depois agendas em lote).' : 'Salta os dias que já passaram e os que já existem.'}</p>
-          <div className="flex flex-wrap gap-1.5">
-            {CALENDARIO.map((s, i) => {
-              const veu = veuDoDia(dataDoSlot(offset, s.wd));
-              const manha = s.formato === 'dissolucao';
-              return (
-                <span key={i} className="text-[0.6rem] px-2 py-1 rounded-lg border flex items-center gap-1.5" style={{ borderColor: 'rgba(255,255,255,0.12)', opacity: 0.85 }} title={`${s.nome} · ${s.hora} · véu ${veu} · ${NOME_FORMATO[s.formato] ?? s.formato}`}>
-                  <span className="opacity-55">{['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][s.wd]} {s.hora.slice(0, 5)}</span>
-                  <span style={{ color: cfg.cor }}>{veu}</span>
-                  <span className="opacity-45">· {manha ? '🌅 manhã' : NOME_FORMATO[s.formato]?.replace(/^\S+\s/, '') ?? s.formato}</span>
-                </span>
-              );
-            })}
+          <p className="text-[0.55rem] opacity-45 mb-2">Cada dia: 1 véu (os 7 tecidos na semana), manhã = soltar · tarde = revelação. <b>Clica num post para o abrir</b>; os «por gerar» enchem-se com «produzir a semana».</p>
+          <div className="overflow-x-auto pb-1">
+            <div className="grid grid-cols-7 gap-1.5 min-w-[660px]">
+              {[1, 2, 3, 4, 5, 6, 0].map((wd) => {
+                const date = dataDoSlot(offset, wd);
+                const dstr = dataLocalStr(date);
+                const veu = veuDoDia(date);
+                const manha = CALENDARIO.find((s) => s.wd === wd && s.formato === 'dissolucao');
+                const tarde = CALENDARIO.find((s) => s.wd === wd && s.formato !== 'dissolucao');
+                const celula = (slot?: typeof CALENDARIO[number]) => {
+                  if (!slot) return null;
+                  const p = pecas.find((x) => (x.agendadoEm ?? '').slice(0, 10) === dstr && (x.hora ?? '').slice(0, 5) === slot.hora.slice(0, 5));
+                  const nome = slot.formato === 'dissolucao' ? '🌅 manhã' : (NOME_FORMATO[slot.formato]?.replace(/^\S+\s/, '') ?? slot.formato);
+                  const base = 'w-full text-left rounded-lg border px-1.5 py-1 text-[0.56rem] leading-tight min-h-[3.2rem]';
+                  if (p) return (
+                    <button key={slot.hora} onClick={() => setEstudioSlug(p.slug)} className={`${base} hover:brightness-125`} title={`abrir o estúdio · ${slot.hora}`}
+                      style={{ borderColor: `${cfg.cor}66`, background: p.publicado ? 'rgba(16,185,129,0.14)' : 'rgba(255,255,255,0.04)' }}>
+                      <span className="opacity-50">{slot.hora.slice(0, 5)}</span><br />{nome}<br />
+                      <span style={{ color: cfg.cor }}>{p.publicado ? '✓ publicada' : p.videoUrl ? '✓ com vídeo' : '✓ gerada'}</span>
+                    </button>
+                  );
+                  return (
+                    <div key={slot.hora} className={`${base} border-dashed opacity-45`} style={{ borderColor: 'rgba(255,255,255,0.18)' }} title="ainda por gerar">
+                      <span className="opacity-55">{slot.hora.slice(0, 5)}</span><br />{nome}<br /><span className="opacity-55">por gerar</span>
+                    </div>
+                  );
+                };
+                return (
+                  <div key={wd} className="flex flex-col gap-1">
+                    <div className="text-center pb-0.5 border-b border-white/10">
+                      <p className="text-[0.58rem] opacity-70">{['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][wd]} {ddmm(date)}</p>
+                      <p className="text-[0.55rem] truncate" style={{ color: cfg.cor }}>{veu}</p>
+                    </div>
+                    {celula(manha)}
+                    {celula(tarde)}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 

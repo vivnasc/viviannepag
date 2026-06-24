@@ -29,26 +29,18 @@ export interface PecaVS {
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
 
-// A IDENTIDADE VISUAL do Método VS — é isto que torna as imagens DELA e não stock.
-// Usa-se em TODAS as imagens (reel e manhã), por cima da conexão com a frase.
-// REESCRITA (jun 2026, pedido da Vivianne): a assinatura DEIXA de ser um catálogo de
-// objetos domésticos (chávenas, velas, cadeiras, mulheres à janela = clichés gastos de
-// stock de bem-estar) e passa a ser uma LINGUAGEM VISUAL ABSTRATA: a LUZ e a SOMBRA como
-// tema, o MATERIAL e a TEXTURA, o GESTO e o RASTO, o espaço VAZIO, o macro e o
-// enquadramento inesperado. A coerência (o "mesmo mundo") vem da PALETA quente
-// dessaturada + GRÃO de filme analógico, não de uma lista de adereços.
-const METODO_IDENTIDADE =
-`IDENTIDADE VISUAL DO MÉTODO VS (uma assinatura FIXA, repetível, obrigatória em TODA a imagem; é a MARCA. Duas peças sem relação têm de parecer o mesmo mundo, como páginas do mesmo lookbook. NÃO é "fine-art photography" genérico e NÃO é stock de bem-estar):
-
-O TEMA é abstrato, nunca um adereço bonito: a própria LUZ e a SOMBRA (um feixe que atravessa o ar, o pó suspenso na luz, a borda macia entre claro e escuro), o MATERIAL e a TEXTURA em grande plano (a trama do linho, o veio gasto da madeira, reboco e estuque, a fibra do papel, dobras e vincos de um tecido, a granulação de uma superfície), o GESTO e o RASTO (a marca que um corpo deixou, algo a meio de ser feito, a ausência de uma mão, uma forma impressa no que se deixou), o espaço VAZIO em volta de um único elemento. Macro e detalhe, enquadramentos invulgares e cortes inesperados. NUNCA um catálogo de objetos de casa.
-
-LUZ (sempre a mesma família): uma só luz natural, suave e direcional, que esculpe a textura e cria sombras longas e macias e muito espaço escuro à volta. Sem flash, sem luz de estúdio, sem luz de topo. A luz é o assunto, não a decoração.
-
-PALETA (apertada, sempre estas, é o que dá a coesão): linho, aveia, creme, areia, terracota desbotado, castanho-rúcula, um toque de ouro velho. Tons quentes e poeirentos, dessaturados, nunca cores berrantes nem frias nem digitais. Branco nunca puro: sempre creme.
-
-LENTE e GRÃO (sempre o mesmo tratamento, a outra metade da coesão): profundidade de campo curta, foco suave, grão de filme analógico fino e quente, leve halação na luz, como uma fotografia de filme dos anos 70. Nunca nítido e limpo como digital.
-
-É SEMPRE este mundo, reconhecível ao primeiro olhar pela luz, pela paleta e pelo grão, não por um objeto repetido. NUNCA stock limpo e polido, NUNCA imagem de bem-estar genérica.`;
+// A IMAGEM, em DUAS camadas separadas (decisão jun 2026, para parar de queimar dinheiro):
+//  1) a CENA — o QUE se vê — é o ÚNICO que o Claude escreve (uma frase curta que encarna a
+//     frase). Vive em fundoPrompt/notaVisual.
+//  2) o ESTILO + os BANIMENTOS — o COMO — são acrescentados AQUI, no servidor, na hora do
+//     Flux (promptImagemVS). Assim mudar a estética NÃO obriga a re-gerar texto/voz/vídeo:
+//     a Vivianne carrega só "outra imagem" e re-corre o Flux, barato.
+// Os clichés gastos (chávenas, velas, cadeiras, mulheres à janela) E o tecido/pano (que
+// virou o novo cliché) ficam BANIDOS aqui, num só sítio.
+export function promptImagemVS(cena: string): string {
+  const c = String(cena ?? '').trim().replace(/\s+/g, ' ');
+  return `${c}. A real, specific, concrete scene from everyday life that carries this feeling — never an abstract texture, never a flat backdrop. Style: warm, intimate, cinematic; a single soft directional natural light with long gentle shadows and dark space around one subject; consistent warm desaturated palette of amber, honey, ochre, cream, sand and warm brown; clear depth with a sharp foreground and a soft deep background built for parallax; analog 35mm film photography, fine warm grain, slight halation, 1970s film look, shallow focus. NEVER include, strictly banned: fabric, cloth, linen, textile, drapery, curtains, sheets, folds of cloth, or any fabric or fabric close-up; teacups, mugs, cups, candles, candle flames, any flame, chairs; people, faces, hands, a woman or anyone at a window, anyone gazing out of a window; generic wellness, spa or self-help stock imagery; halos, sacred iconography; any text or lettering. Vertical 9:16.`;
+}
 
 const REVELACAO =
 `O QUE ISTO É (o mais importante de tudo): isto é uma LEITURA, não um reconhecimento. Pegas numa coisa que a pessoa viveu a vida inteira sem nunca lhe ter dado um nome, e dás-lhe um nome novo, vestido de vida, até a história dela mudar de significado à frente dela. O objetivo não é que ela pense "isto acontece-me" (isso é reconhecimento, qualquer conta o faz). O objetivo é que ela pense "nunca tinha visto isto assim" (isso é revelação, só tu o fazes). Não explicas porque ela faz o que faz: mudas o que aquilo SIGNIFICA.
@@ -75,7 +67,8 @@ ANTI-SATURAÇÃO (a Vivianne gera isto todos os dias; ao fim de uma semana não 
 - Faz ROTAR a forma de abrir entre tipos bem diferentes: uma afirmação seca e direta · uma pergunta que vira por dentro · uma imagem ou cena concreta · uma inversão (pôr ao contrário o que se assume) · "há quem…" / "há pessoas que…" · um nome comum que se vira · uma constatação serena. Escolhe a forma que MENOS se parece com as recentes.
 - Varia também a ARQUITETURA da peça: umas vezes a faca abre e o resto desdobra; outras a peça constrói até uma viragem só no fim; outras é uma cena seguida do que ela sempre foi. Nunca o mesmo esqueleto dois dias seguidos.`;
 
-const lp_img = `A imagem ENCARNA a frase desta peça: lê a frase e traduz a sua emoção numa IMAGEM ABSTRATA da assinatura (um jogo de luz e sombra, uma textura em grande plano, um vinco, um rasto, um vazio), nunca num objeto bonito ao acaso (regra dura anti-desligado: um fundo bonito sem ligação à frase está ERRADO; mas a ligação faz-se pela sensação, não por ilustrar à letra). Luz suave de manhã. MOTIONÁVEL (obrigatório, a imagem nasce para se mover): compõe com PROFUNDIDADE e CAMADAS (um primeiro plano e um fundo bem distintos, nunca chapada/plana) e inclui um elemento atmosférico que pede movimento (pó suspenso num feixe de luz, uma sombra a deslizar, uma leve neblina, partículas no ar) — é isto que deixa o parallax e a respiração da imagem funcionarem. ${METODO_IDENTIDADE} PROIBIDO (banido, em qualquer imagem): teacups or mugs, cups, candles or candle flames or any flame, chairs, women or any person at a window, a person gazing out of a window, people posing, generic wellness or spa or self-help stock imagery, faces, text, halos, auréolas, santos, sacred iconography, dark or gloomy mood. Termina SEMPRE com este sufixo, exatamente: intimate analog film-grain photography, light and shadow and material texture as the subject, soft directional daylight, warm dusty desaturated palette of linen oat cream sand faded terracotta, clear depth with a distinct sharp foreground and a soft deep background built for parallax, an atmospheric motion cue such as dust motes drifting in a light beam or a slowly sliding shadow or faint haze, generous negative space, 1970s film look with fine warm grain, no people, no text, vertical 9:16.`;
+// SÓ a CENA (o estilo e os banimentos são acrescentados no servidor — promptImagemVS).
+const lp_img = `IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve uma CENA concreta e específica do dia-a-dia (um sítio, um momento, uma coisa real) que encarna o SENTIDO da frase. A ligação à frase é obrigatória (um fundo sem ligação está ERRADO; a ligação faz-se pela sensação, não por ilustrar à letra). VARIA muito de dia para dia e sê inesperada; NÃO recorras a tecido, pano, chávenas nem velas. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).`;
 
 // A MANHÃ (formato 'dissolucao'): NÃO um reel da revelação, mas UM frame, UMA frase —
 // o sinal de um véu a dissolver-se. O lado do SOLTAR: nu, sereno, leve. Tratado à parte.
@@ -115,9 +108,9 @@ REGRAS:
 - Português europeu, sem travessões, sem aspas.
 ${evitar.length ? `\nJÁ FORAM USADAS estas (NÃO repitas a frase nem o mesmo arranque/molde de nenhuma delas; faz diferente das mais recentes): ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
 
-IMAGEM (campo "fundoPrompt", em INGLÊS, luz de manhã): ${lp_img}
+${lp_img}
 
-Devolve APENAS JSON válido: {"frase":"a frase única","destaque":["1 a 2 palavras a realçar"],"conceito":"selo curto","fundoPrompt":"prompt da imagem em inglês","legenda":"legenda curta do Instagram na mesma voz serena, termina com um convite leve"}`;
+Devolve APENAS JSON válido: {"frase":"a frase única","destaque":["1 a 2 palavras a realçar"],"conceito":"selo curto","fundoPrompt":"a CENA da imagem em inglês, só a cena","legenda":"legenda curta do Instagram na mesma voz serena, termina com um convite leve"}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -157,11 +150,11 @@ ${f.materia(k)}
 ${ancora ? `\n${ancora}\n` : ''}
 ${REVELACAO}
 
-IMAGEM (campo "fundoPrompt", em INGLÊS): a imagem TEM de ENCARNAR a frase desta peça, nunca um objeto bonito ao acaso. Lê a 1.ª linha (a faca) e traduz a sua emoção numa IMAGEM ABSTRATA da assinatura: a luz e a sombra, uma textura ou um material em grande plano, um vinco ou uma dobra, um rasto ou uma marca deixada, algo a meio, um vazio. REGRA DURA (anti-desligado): um fundo bonito que NÃO tenha a ver com a frase está ERRADO; a ligação faz-se pela SENSAÇÃO, não por ilustrar à letra. Sensorial, SEM pessoas, SEM rostos, SEM um catálogo de objetos de casa. MOTIONÁVEL (obrigatório, a imagem nasce para se mover): compõe com PROFUNDIDADE e CAMADAS (um primeiro plano nítido e um fundo suave bem distintos, nunca chapada/plana) e inclui um elemento atmosférico que pede movimento (pó suspenso num feixe de luz, uma sombra a deslizar, uma leve neblina, partículas no ar) — é isto que deixa o parallax e a respiração da imagem funcionarem. ${METODO_IDENTIDADE} PROIBIDO (banido, em qualquer imagem): teacups or mugs, cups, candles or candle flames or any flame, chairs, women or any person at a window, a person gazing out of a window, people posing, generic wellness or spa or self-help stock imagery, faces, text, halos, auréolas, santos, sacred iconography, dark or gloomy mood. Termina SEMPRE com este sufixo, exatamente: intimate analog film-grain photography, light and shadow and material texture as the subject, soft directional daylight, warm dusty desaturated palette of linen oat cream sand faded terracotta, clear depth with a distinct sharp foreground and a soft deep background built for parallax, an atmospheric motion cue such as dust motes drifting in a light beam or a slowly sliding shadow or faint haze, generous negative space, 1970s film look with fine warm grain, no people, no text, vertical 9:16.
+IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve uma CENA concreta e específica do dia-a-dia (um sítio, um momento, uma coisa real) que encarna o SENTIDO da 1.ª linha (a faca). A ligação à frase é obrigatória (um fundo sem ligação está ERRADO; a ligação faz-se pela sensação, não por ilustrar à letra). VARIA muito de peça para peça e sê inesperada; NÃO recorras a tecido, pano, chávenas nem velas. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).
 ${evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 O array "momentos" tem 4 a 6 entradas, NUNCA mais (a 1.ª é a faca, a última é a viragem).
-Devolve APENAS JSON válido, sem texto à volta: {"momentos":["a faca","…","a viragem"],"destaque":["1 a 3 palavras-chave a realçar"],"conceito":"selo curto, 1 a 3 palavras","fundoPrompt":"prompt da imagem em inglês","legenda":"legenda do Instagram em parágrafos curtos separados por linha em branco, na mesma voz da revelação, sem explicar nem usar jargão; termina com um convite leve"}`;
+Devolve APENAS JSON válido, sem texto à volta: {"momentos":["a faca","…","a viragem"],"destaque":["1 a 3 palavras-chave a realçar"],"conceito":"selo curto, 1 a 3 palavras","fundoPrompt":"a CENA da imagem em inglês, só a cena","legenda":"legenda do Instagram em parágrafos curtos separados por linha em branco, na mesma voz da revelação, sem explicar nem usar jargão; termina com um convite leve"}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',

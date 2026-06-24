@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { limparTravessoes } from '@/lib/texto';
 import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
-import { gerarPecaVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
+import { gerarPecaVS, promptImagemVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
 import { FORMATOS_LISTA, CALENDARIO, type FormatoId } from '@/lib/metodo-vs/formatos';
 import { METODOVS_MUNDO, metodoVSConta } from '@/lib/metodo-vs/marca';
 import { SLUG_PADROES, mergePadroes, type PadroesVS, type PadroesPorConta } from '@/lib/metodo-vs/padroes';
@@ -22,7 +22,8 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token || !prompt) return null;
   try {
-    const url = await gerarImagemFlux(prompt, token, { raw: true });
+    // o prompt guardado é só a CENA; o estilo + banimentos entram aqui (promptImagemVS).
+    const url = await gerarImagemFlux(promptImagemVS(prompt), token, { raw: true });
     try { return await guardarImagem(url, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
   } catch { return null; }
 }
