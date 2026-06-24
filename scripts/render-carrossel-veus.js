@@ -466,9 +466,15 @@ async function main() {
 
   // 6. grava videoUrl de volta na coleccao
   if (resultados.length) {
+    // CACHE-BUSTING: o MP4 fica SEMPRE no mesmo URL (upsert), por isso o CDN servia
+    // o ficheiro antigo ~1h depois de re-renderizar — parecia que o render não tinha
+    // mudado nada. O ?v=carimbo muda o URL a cada render, e o player do admin mostra
+    // logo o MP4 novo. (O export para o Metricool já fazia isto à parte com semCache.)
+    const carimbo = Date.now();
+    const comCache = (u) => (u ? `${u.split('?')[0]}?v=${carimbo}` : u);
     const novosDias = (col.dias || []).map((d) => {
       const rsd = resultados.find((x) => x.dia === d.dia);
-      return rsd ? { ...d, videoUrl: rsd.videoUrl ?? d.videoUrl, imagens: rsd.imagens } : d;
+      return rsd ? { ...d, videoUrl: rsd.videoUrl ? comCache(rsd.videoUrl) : d.videoUrl, imagens: rsd.imagens } : d;
     });
     // carimba a capa como renderizada com a correção atual (ver CAPA_REV em
     // lib/render/dispatch.ts): o publicador só publica carrosséis com esta rev.

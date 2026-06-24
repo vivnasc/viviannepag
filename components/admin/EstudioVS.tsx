@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { FORMATOS_LISTA, CALENDARIO } from '@/lib/metodo-vs/formatos';
 import { KineticSlide, estiloSequencia, EFEITOS_TEXTO, FONTES_TEXTO, TRANSICOES, type EfeitoTexto, type FonteTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
@@ -442,6 +442,10 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     { id: 'efeito', label: '✶ efeito' },
     { id: 'agendar', label: '📅 agendar' },
   ];
+  // cache-busting do MP4: o ficheiro re-renderizado fica no MESMO URL e o CDN serve
+  // o antigo ~1h — parecia que o render não tinha mudado. Um token por URL força o
+  // player a buscar o ficheiro atual (recalcula quando o videoUrl muda).
+  const videoSrc = useMemo(() => peca.videoUrl ? `${peca.videoUrl}${peca.videoUrl.includes('?') ? '&' : '?'}cb=${Date.now()}` : null, [peca.videoUrl]);
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-3 md:p-6" onClick={onFechar}>
       <div className="w-full max-w-md rounded-2xl border border-white/12 shadow-2xl" style={{ background: PAL.bg }} onClick={(e) => e.stopPropagation()}>
@@ -468,7 +472,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
         {peca.videoUrl && (
           <div className="px-4 pt-3">
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-            <video src={peca.videoUrl} controls playsInline className="w-full rounded-lg border border-white/10" />
+            <video src={videoSrc ?? undefined} controls playsInline className="w-full rounded-lg border border-white/10" />
           </div>
         )}
 
