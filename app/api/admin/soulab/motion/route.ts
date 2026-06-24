@@ -59,7 +59,10 @@ export async function POST(req: Request) {
   soulab.clipUrl = clipUrl;
   soulab.motion = { ingredientes: opts.ingredientes, camara: opts.camara, livre: opts.livre }; // o que ela escolheu
   theme.soulab = soulab;
-  const { error: e2 } = await supabase.from('carousel_collections').update({ theme }).eq('slug', slug);
+  // motion novo => o MP4 já renderizado fica desatualizado; marca-o para re-render
+  // (igual à troca de imagem / aos padrões), senão ela continua a ver o reel antigo.
+  if (dias[0]) (dias[0] as { videoUrl?: string | null }).videoUrl = null;
+  const { error: e2 } = await supabase.from('carousel_collections').update({ theme, dias }).eq('slug', slug);
   if (e2) return NextResponse.json({ erro: 'db', detalhe: e2.message }, { status: 500 });
 
   return NextResponse.json({ ok: true, clipUrl });

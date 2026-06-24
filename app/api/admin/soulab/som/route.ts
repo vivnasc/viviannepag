@@ -39,14 +39,12 @@ export async function POST(req: Request) {
   let somEstilo: string | null = null;
 
   if (tipo === 'musica') {
-    // MÚSICA AMBIENTE (instrumental) via Replicate MusicGen.
-    const token = process.env.REPLICATE_API_TOKEN;
-    if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
+    // MÚSICA AMBIENTE (instrumental) via ElevenLabs Music (a mesma env do som da cena).
     somEstilo = body.estilo || 'flauta';
     try {
-      somUrl = await gerarMusica(somEstilo, body.slug, token);
+      somUrl = await gerarMusica(somEstilo, body.slug);
     } catch (e) {
-      return NextResponse.json({ erro: 'musicgen-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });
+      return NextResponse.json({ erro: 'musica-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });
     }
     somPrompt = `música ambiente · ${somEstilo}`;
   } else {

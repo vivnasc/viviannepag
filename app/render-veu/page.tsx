@@ -14,7 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, estiloSequencia, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
-import { slideDaMarca, ehMarcaMetodoVS } from '@/lib/metodo-vs/marca';
+import { slideDaMarca, ehMarcaMetodoVS, METODOVS_CONTAS_LISTA } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
@@ -36,7 +36,7 @@ const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te e
 type Face = { texto?: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conceito?: string; veuReveal?: string };
 // MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
 // (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
-function DuasFaces({ face1, face2, conta, prog, split, estilo }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number; estilo?: EstiloMetodo }) {
+function DuasFaces({ face1, face2, conta, prog, split, estilo, clipFallback }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number; estilo?: EstiloMetodo; clipFallback?: string }) {
   // TEMPO DE LEITURA: a passagem entre faces é em `split` (não 50/50) — a face 2
   // (texto mais longo) fica com mais tempo. Crossfade LARGO e suave (smoothstep).
   const FADE = 0.1;
@@ -44,13 +44,15 @@ function DuasFaces({ face1, face2, conta, prog, split, estilo }: { face1: Face; 
   const p2 = Math.min(1, Math.max(0, (prog - split) / (1 - split)));
   const tt = Math.max(0, Math.min(1, (prog - (split - FADE)) / (2 * FADE)));
   const op2 = tt * tt * (3 - 2 * tt); // smoothstep (ease-in-out), sem corte seco
+  // o motion (Kling) vive em theme.soulab.clipUrl (clipFallback) — 1 clip por reel;
+  // as faces caem nele se não tiverem clip próprio, senão o motion regenerado nunca sai.
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
-        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} estilo={estilo} />
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl ?? clipFallback} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} estilo={estilo} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
-        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} estilo={estilo} />
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl ?? clipFallback} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} estilo={estilo} />
       </div>
     </div>
   );
@@ -286,6 +288,9 @@ export default function RenderVeuPage() {
   const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string; clipUrl?: string; cta?: string }) | undefined;
 
+  // MÉTODO VS com VOZ (timestamps de palavra) => karaokê: a palavra falada acende-se.
+  const vozVS = ehMarcaMetodoVS(marcaM) && (estado?.dia.vozPalavras?.length ?? 0) > 0;
+
   // TEMPO DE LEITURA: a passagem entre faces (split) é proporcional ao texto — a
   // face 2 (revelação, mais longa) fica com MAIS tempo. Face 1 nunca > 50%.
   const split = useMemo(() => {
@@ -337,12 +342,29 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
+      {/* MÉTODO VS · KARAOKÊ: com voz, mostra a linha falada e ACENDE a palavra que está a
+          ser pronunciada (a Vivianne: a palavra dita devia ser destaque). Reutiliza o
+          KaraokeMetodo já provado. Conduzido por timeS (segundos) = prog * duração do reel. */}
+      {estado && ehKinetic && vozVS && (() => {
+        const conta = getConta(METODOVS_CONTAS_LISTA.find((c) => c.marca === marcaM)?.id ?? 'mae');
+        if (!conta) return null;
+        return (
+          <KaraokeMetodo
+            linhas={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
+            palavras={estado.dia.vozPalavras!}
+            timeS={prog * (reelDur || estado.dia.vozDur || 0)}
+            imageUrl={s?.imageUrl}
+            clipUrl={clipBg ?? undefined}
+            conta={conta}
+          />
+        );
+      })()}
       {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
           que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
-      {estado && ehKinetic && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
+      {estado && ehKinetic && !vozVS && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
         <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
       )}
-      {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
+      {estado && ehKinetic && !vozVS && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
         // FRAME ÚNICO com MOVIMENTO: o push-in + deriva da CameraVeu dá vida ao frame
         // parado da manhã (sem clip/motion). Só com imagem fixa (com clip o próprio
         // vídeo já mexe, não precisa). Beneficia a manhã do Método VS e outros kinéticos
@@ -359,11 +381,14 @@ export default function RenderVeuPage() {
               efeito={(s as { efeito?: EfeitoTexto }).efeito}
               tipografia={(s as { tipografia?: Tipografia }).tipografia}
               conceito={s.conceito}
-              clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
+              clipUrl={((estado.dia.mundo as string) === 'soulab' || ehMarcaMetodoVS(marcaM)) ? (clipBg ?? undefined) : undefined}
               {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
             />
           );
-          const temClip = (estado.dia.mundo as string) === 'soulab' && !!clipBg;
+          // o frame único do método (manhã/dissolução) é tipo:'kinetico' — passa por
+          // AQUI, não pelo ramo ehMetodo. Por isso o clip do Kling também tem de entrar
+          // aqui para o método, senão a manhã fica só com a câmara CSS (o bug do motion).
+          const temClip = ((estado.dia.mundo as string) === 'soulab' || ehMarcaMetodoVS(marcaM)) && !!clipBg;
           return (s.imageUrl && !temClip) ? <CameraVeu prog={prog}>{kin}</CameraVeu> : kin;
         })()
       )}
@@ -387,14 +412,14 @@ export default function RenderVeuPage() {
           // comprimia a linha do tempo). reelDur vem do render (&dur=).
           timeS={prog * (reelDur || estado.dia.vozDur || 0)}
           imageUrl={estado.dia.slides?.[0]?.imageUrl}
-          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl ?? clipBg ?? undefined}
           conta={getConta(s.contaId ?? '')!}
         />
       )}
       {estado && ehMetodo && !ehCarta && ehTarde && !(estado.dia.vozPalavras?.length ?? 0) && s && getConta(s.contaId ?? '') && (
         <Sequencia
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
-          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl ?? clipBg ?? undefined}
           imageUrl={estado.dia.slides?.[0]?.imageUrl}
           conta={getConta(s.contaId ?? '')!}
           conceito={s.conceito}
@@ -405,14 +430,14 @@ export default function RenderVeuPage() {
         />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
-        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} estilo={estiloM} />
+        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} estilo={estiloM} clipFallback={clipBg ?? undefined} />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}
           imageUrl={s.imageUrl}
-          clipUrl={s.clipUrl}
+          clipUrl={s.clipUrl ?? clipBg ?? undefined}
           conta={getConta(s.contaId ?? '')!}
           conceito={s.conceito}
           veuReveal={s.veuReveal}

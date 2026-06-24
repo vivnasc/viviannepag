@@ -43,7 +43,7 @@ export const SLUG_PADROES = 'vs-padroes-config';
 export function padroesDefault(conta: ContaId): PadroesVS {
   return {
     transicao: 'deslizar',
-    segPorMomento: 5.5,
+    segPorMomento: 7, // 5.5s era rápido demais para ler cada momento; 7s dá tempo.
     motionAuto: true,
     fonte: 'serif',
     tamanho: 92,

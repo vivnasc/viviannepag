@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { FORMATOS_LISTA, CALENDARIO } from '@/lib/metodo-vs/formatos';
 import { KineticSlide, estiloSequencia, EFEITOS_TEXTO, FONTES_TEXTO, TRANSICOES, type EfeitoTexto, type FonteTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
@@ -45,6 +45,13 @@ function segundaDaSemana(offset: number): Date {
 const ddmm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
 const dataLocalStr = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const DIAS_PT = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+// manhã / tarde a partir da hora ('10:30', '14h', '16:00'): < 12h = manhã. Sem hora
+// conhecida → tarde (o default de áudio dela é piano = tarde). Usado na seleção por
+// turno e no áudio automático em lote.
+function ehTardePeca(hora: string | null | undefined): boolean {
+  const h = parseInt((hora ?? '').replace(/h.*/, ''), 10);
+  return Number.isFinite(h) ? h >= 12 : true;
+}
 // rótulo do cabeçalho de dia no feed: "segunda · 24/06" (a partir de 'YYYY-MM-DD' local).
 function rotuloDoDia(chave: string): string {
   if (chave === 'sem-data') return 'sem data · rascunhos';
@@ -82,7 +89,7 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo, onSaveTransicao 
   const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
   const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
   const tip = peca.tipografia ?? undefined;
-  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 5.5);
+  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 7);
   // a transição vê-se AO VIVO: muda aqui e o preview troca já (guarda para o render usar).
   const [trans, setTrans] = useState<Transicao>((peca.transicao as Transicao | null) ?? 'deslizar');
   useEffect(() => {
@@ -135,7 +142,7 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo, onSaveTransicao 
             <span className="tabular-nums w-9 text-right">{seg.toFixed(1)}s</span>
           </label>
           <p className="text-[0.5rem] opacity-45">{moms.length} momentos × {seg.toFixed(1)}s ≈ <b>{Math.round(seg * moms.length)}s</b> de reel. Arrasta e vê em cima; guarda para o render usar o mesmo.</p>
-          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 5.5)}
+          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 7)}
             className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tempo'}</button>
         </div>
       )}
@@ -435,6 +442,10 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     { id: 'efeito', label: '✶ efeito' },
     { id: 'agendar', label: '📅 agendar' },
   ];
+  // cache-busting do MP4: o ficheiro re-renderizado fica no MESMO URL e o CDN serve
+  // o antigo ~1h — parecia que o render não tinha mudado. Um token por URL força o
+  // player a buscar o ficheiro atual (recalcula quando o videoUrl muda).
+  const videoSrc = useMemo(() => peca.videoUrl ? `${peca.videoUrl}${peca.videoUrl.includes('?') ? '&' : '?'}cb=${Date.now()}` : null, [peca.videoUrl]);
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-3 md:p-6" onClick={onFechar}>
       <div className="w-full max-w-md rounded-2xl border border-white/12 shadow-2xl" style={{ background: PAL.bg }} onClick={(e) => e.stopPropagation()}>
@@ -461,7 +472,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
         {peca.videoUrl && (
           <div className="px-4 pt-3">
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-            <video src={peca.videoUrl} controls playsInline className="w-full rounded-lg border border-white/10" />
+            <video src={videoSrc ?? undefined} controls playsInline className="w-full rounded-lg border border-white/10" />
           </div>
         )}
 
@@ -658,6 +669,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [verTodas, setVerTodas] = useState(false);         // por defeito mostra só a semana navegada
   const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
   const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina'); // motion do texto a aplicar em lote
+  const [musicaLoteEstilo, setMusicaLoteEstilo] = useState<string>(() => MUSICA_ESTILOS.find((m) => /piano/i.test(m.id) || /piano/i.test(m.label))?.id ?? MUSICA_ESTILOS[0]?.id ?? 'piano'); // música de fundo em lote (piano por defeito)
 
   const [igLigado, setIgLigado] = useState<boolean | null>(null); // o Instagram desta conta está ligado?
 
@@ -824,11 +836,17 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     if (!alvos.length) { setSel(new Set()); return; }
     setBusy('lote'); setErro(null); setMsg(`${etiqueta} · 0/${alvos.length}…`);
     let feitos = 0;
+    let primeiroErro = ''; // o motivo da 1.ª falha — senão "0/5" não diz nada
     for (const slug of alvos) {
-      try { const r = await faz(slug); if (r.ok) feitos++; } catch { /* segue */ }
+      try {
+        const r = await faz(slug);
+        if (r.ok) feitos++;
+        else if (!primeiroErro) { const j = await r.json().catch(() => null) as { erro?: string; detalhe?: string } | null; primeiroErro = j?.detalhe || j?.erro || `HTTP ${r.status}`; }
+      } catch (e) { if (!primeiroErro) primeiroErro = e instanceof Error ? e.message : String(e); }
       setMsg(`${etiqueta} · ${feitos}/${alvos.length}…`);
     }
     setMsg(`${etiqueta}: ${feitos}/${alvos.length} feito(s).`);
+    if (feitos < alvos.length && primeiroErro) setErro(`Falhou ${alvos.length - feitos}/${alvos.length} — ${primeiroErro}`);
     setSel(new Set()); setBusy(null); recarregar();
   }, [acaoSlug, busy, sel, pecas, recarregar]);
 
@@ -872,6 +890,23 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 }));
       return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) });
     }, 'A gerar som');
+  }, [emLote, pecas, sel]);
+  // MÚSICA de fundo (instrumental — piano, etc.) em lote: substitui o Ancient Ground.
+  const musicaLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Pôr música de fundo «${musicaLoteEstilo}» nas ${sel.size} selecionada(s)? (substitui o Ancient Ground)`)) return;
+    return emLote((slug) => fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: musicaLoteEstilo }) }), 'A pôr música');
+  }, [emLote, musicaLoteEstilo, sel]);
+  // ÁUDIO AUTOMÁTICO por horário (o default dela): PIANO nos posts da TARDE (revelação)
+  // e SOM DO AMBIENTE da cena nos posts da MANHÃ. Decide peça a peça pela hora (<12h =
+  // manhã). Salta as de manhã sem imagem (o som da cena precisa da imagem).
+  const audioAutoLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Pôr o ÁUDIO automático nas ${sel.size} selecionada(s)?\n\n• tarde → piano de fundo\n• manhã → som do ambiente da cena\n\n(substitui o Ancient Ground; salta as de manhã ainda sem imagem)`)) return;
+    return emLote((slug) => {
+      const p = pecas.find((x) => x.slug === slug);
+      if (ehTardePeca(p?.hora)) return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: 'piano' }) });
+      if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); // manhã sem imagem: salta
+      return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) });
+    }, 'A pôr áudio (piano/ambiente)');
   }, [emLote, pecas, sel]);
 
   // RENDER em lote: dispara o MP4 final (GitHub Actions) de cada selecionada. O dispatch é
@@ -1044,6 +1079,18 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
           </label>
         </div>
 
+        {/* SELEÇÃO RÁPIDA: tudo / só manhã / só tarde (sobre as peças à vista). Some quando
+            não há peças. Some quando não há nada visível. */}
+        {pecasVistas.length > 0 && (
+          <div className="flex items-center gap-1.5 flex-wrap mb-3 text-[0.6rem]">
+            <span className="opacity-45 uppercase tracking-widest">selecionar:</span>
+            <button onClick={() => setSel(new Set(pecasVistas.map((p) => p.slug)))} className="px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }}>tudo ({pecasVistas.length})</button>
+            <button onClick={() => setSel(new Set(pecasVistas.filter((p) => !ehTardePeca(p.hora)).map((p) => p.slug)))} className="px-2 py-1 rounded-lg border border-white/25">🌅 manhã ({pecasVistas.filter((p) => !ehTardePeca(p.hora)).length})</button>
+            <button onClick={() => setSel(new Set(pecasVistas.filter((p) => ehTardePeca(p.hora)).map((p) => p.slug)))} className="px-2 py-1 rounded-lg border border-white/25">🌇 tarde ({pecasVistas.filter((p) => ehTardePeca(p.hora)).length})</button>
+            {sel.size > 0 && <button onClick={limparSel} className="px-2 py-1 rounded-lg border border-white/20 opacity-70">limpar</button>}
+          </div>
+        )}
+
         {/* BARRA DE FERRAMENTAS · seleção múltipla (edições em lote / apagar) */}
         {sel.size > 0 && (
           <div className="sticky top-2 z-30 mb-3 rounded-xl border p-2.5 space-y-1.5" style={{ borderColor: cfg.cor, background: '#1B1626', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
@@ -1057,7 +1104,14 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
               <span className="text-[0.55rem] opacity-45 w-12">gerar:</span>
               <button onClick={regerarTextoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="nova revelação + imagem (gasta geração; salta publicadas)">♻ texto</button>
               <button onClick={imagemLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="cena nova (barato)">🖼 imagem</button>
+              <button onClick={audioAutoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="o default: piano nos posts da tarde · som do ambiente da cena nos da manhã (substitui o Ancient Ground)">🎧 áudio auto</button>
               <button onClick={somLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="som ambiente da cena (salta sem imagem)">🔊 som</button>
+              <span className="inline-flex items-center gap-0.5">
+                <select value={musicaLoteEstilo} onChange={(e) => setMusicaLoteEstilo(e.target.value)} className="text-[0.58rem] px-1 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }} title="música de fundo (instrumental)">
+                  {MUSICA_ESTILOS.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
+                </select>
+                <button onClick={musicaLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="música de fundo (substitui o Ancient Ground)">🎵 música</button>
+              </span>
               <button onClick={vozLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="a tua voz (v3 puro); salta publicadas">🎙 voz</button>
               <button onClick={motionLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (Kling); 1-3 min por peça">🎬 motion</button>
             </div>

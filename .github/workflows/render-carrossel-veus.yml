@@ -31,9 +31,16 @@ jobs:
           node-version: '22'
 
       - name: Install ffmpeg
+        timeout-minutes: 8
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          # o ubuntu-latest já traz ffmpeg; só instala se faltar (e com retries),
+          # senão o apt-get update às vezes pendura num mirror e prende o render.
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg já presente: $(ffmpeg -version | head -1)"
+          else
+            sudo apt-get update -o Acquire::Retries=3
+            sudo apt-get install -y ffmpeg
+          fi
 
       - name: Install npm packages
         run: npm install --no-save puppeteer @supabase/supabase-js

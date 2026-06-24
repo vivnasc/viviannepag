@@ -43,6 +43,8 @@ async function main() {
   let dias = Array.isArray(col.dias) ? col.dias : [];
   if (DIAS_FILTER.length) dias = dias.filter((d) => DIAS_FILTER.includes(String(d.dia)));
   console.log(`[data] ${dias.length} dias`);
+  // DIAGNÓSTICO do motion: a peça tem clip do Kling guardado? (theme.soulab.clipUrl)
+  console.log(`[clip] theme.soulab.clipUrl = ${col.theme?.soulab?.clipUrl ? col.theme.soulab.clipUrl.slice(-60) : 'NENHUM (a peça não tem motion → sai a imagem + câmara)'}`);
 
   const formato = col.theme?.formato;
   const duasFaces = col.theme?.subtipo === 'duasfaces'; // MÃE: 1 reel, 2 FACES (dor -> revelação) num só MP4
@@ -50,9 +52,19 @@ async function main() {
   const visual = col.theme?.subtipo === 'visual'; // VISUAL (vir): 1 cena de luz + 1 linha
   const carta = col.theme?.subtipo === 'carta'; // CARTA DE RENOMEAR (vir): tipográfica, abre página a página
   const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual || carta); // frase/beats com motion
-  // SOULAB · som da cena (gerado a partir da imagem). Se existir, é o áudio do reel
-  // (em vez da música). Só afeta peças Soulab; os outros motores ficam iguais.
-  const somSoulab = (col.theme?.marca === 'soulab' && col.theme?.soulab?.somUrl) ? col.theme.soulab.somUrl : null;
+  // ÁUDIO PRÓPRIO da peça (som da cena OU música ambiente, gerado no estúdio e
+  // guardado em theme.soulab.somUrl). Se existir, é o áudio do reel — vale para o
+  // SOULAB E para o MÉTODO VS (partilham o mesmo estúdio de som). ANTES isto só lia
+  // o som das peças 'soulab', por isso o método caía no Ancient Ground mesmo com som
+  // gerado — era o bug do «Ancient Ground a sair no render». Agora lê sempre.
+  const somSoulab = col.theme?.soulab?.somUrl || null;
+  // A loja (Carrosséis dos 7 Véus) é a ÚNICA que usa o Ancient Ground por default.
+  // O método e o soulab NUNCA usam Ancient Ground: ou têm áudio próprio (somSoulab)
+  // ou ficam sem música (silêncio), nunca o Ancient Ground que ela já não quer.
+  const ehMetodoOuSoulab = ['soulab', 'metodovs', 'versoltar', 'virsoltar', 'viversoltar'].includes(col.theme?.marca);
+  // resolve o áudio de fundo de um dia: áudio próprio > (loja) faixa do dia / Ancient
+  // Ground > (método/soulab) nada. Devolve null quando não há áudio nenhum.
+  const audioDeFundo = (d) => somSoulab || (ehMetodoOuSoulab ? null : (d.faixa?.url || faixaUrl(semana, d.dia)));
   const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
@@ -101,9 +113,10 @@ async function main() {
       // (3.4s era rápido demais). Com voz, a duração é a da narração (mais abaixo).
       const FPS = 25;
       // SOULAB / MÉTODO VS · tempo POR MOMENTO à escolha dela (slides[0].segPorMomento,
-      // em segundos); sem escolha, 5.5s. A pré-visualização do admin lê o MESMO valor → o
-      // que vê é o que sai (vale para o Soulab E para o Método VS, que partilham a sequência).
-      const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 5.5));
+      // em segundos); sem escolha, 7s — 5.5s era rápido demais para LER cada momento (ela
+      // teve de re-renderizar imensos clips por isso). A pré-visualização do admin lê o
+      // MESMO valor → o que vê é o que sai (vale para o Soulab E para o Método VS).
+      const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 7));
       const seqPorMomento = (col.theme?.marca === 'soulab' || col.theme?.marca === 'metodovs') && slides.length > 1;
       // FRAME ÚNICO do Método VS (manhã = 1 só linha): com o movimento de câmara da
       // CameraVeu, precisa de ~6.5s para a câmara RESPIRAR e dar tempo de ler a frase
@@ -165,7 +178,10 @@ async function main() {
         const inner = Math.max(0, Math.min(1, (ta - fronteirasV[k]) / span));
         return Math.min(1, (k + inner) / nb);
       };
-      const usaProgSeq = vozOk && (seqPorMomento || frameUnicoMetodoVS || col.theme?.marca === 'soulab');
+      // O Método VS com voz+palavras passa a usar KARAOKÊ (KaraokeMetodo), que precisa de prog
+      // LINEAR (timeS = tempo real). Por isso o progSeq (typewriter ao ritmo da voz) fica só
+      // para o Soulab; o método com voz vai linear.
+      const usaProgSeq = vozOk && !ehMetodoVS && (seqPorMomento || col.theme?.marca === 'soulab');
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
@@ -175,6 +191,15 @@ async function main() {
       const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0&dur=${DUR}`;
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+      // DIAGNÓSTICO: a página montou e CARREGOU o vídeo do clip? (readyState>=2 e vw>0 = ok)
+      try {
+        const ci = await page.evaluate(() => {
+          const v = document.querySelector('video.clip-bg');
+          if (!v) return 'SEM <video clip-bg> (saiu imagem + câmara, não o clip)';
+          return `video.clip-bg src=…${(v.currentSrc || v.src || '').slice(-32)} readyState=${v.readyState} vw=${v.videoWidth}`;
+        });
+        console.log(`[clip] ${ci}`);
+      } catch (e) { console.log(`[clip] diag falhou: ${e.message}`); }
       for (let i = 0; i < N; i++) {
         const tf = i / (N - 1);
         // sequência Soulab/Método VS com voz: move ao ritmo REAL das palavras (sincroniza);
@@ -187,23 +212,37 @@ async function main() {
       await page.close();
       console.log(`[kinetic] dia ${d.dia}: ${N} frames${vozOk ? ' (voz)' : ''}`);
 
-      // audio: a VOZ (se houver) é o áudio principal e NÃO faz loop (é a duração);
-      // senão, o som ambiente faz loop como antes.
-      let temAudio = false; let vozAudio = false;
-      if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) { temAudio = true; vozAudio = true; }
-      else {
-        const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
-        try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+      // audio: a VOZ (se houver) é o áudio principal e NÃO faz loop (é a duração).
+      // Decisão da Vivianne: quando HÁ voz, mistura-se por baixo o Ancient Ground
+      // baixinho (voz à frente, AG atrás) — em todas as contas com voz. Sem voz, o
+      // som ambiente próprio faz loop como antes (e o método nunca usa Ancient Ground).
+      let temAudio = false; let vozAudio = false; let agBed = false;
+      if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) {
+        temAudio = true; vozAudio = true;
+        try {
+          const agr = await fetch(faixaUrl(semana, d.dia)); // leito Ancient Ground (varia por dia)
+          if (agr.ok) { fs.writeFileSync(path.join(diaDir, 'ag.mp3'), Buffer.from(await agr.arrayBuffer())); agBed = true; }
+        } catch (e) { console.log(`[ag bed] ${e.message}`); }
+      } else {
+        const aUrl = audioDeFundo(d);
+        if (aUrl) { try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); } }
       }
 
       // video da sequencia. Voz = áudio direto (sem loop). Som ambiente = LOOP
       // (-stream_loop) + -shortest corta no fim do vídeo.
       let videoUrl = null;
       try {
-        const audioArg = vozAudio ? '-i voz.mp3' : '-stream_loop -1 -i audio.mp3';
-        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ` ${audioArg}` : ''}`;
-        const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p';
+        if (vozAudio && agBed) {
+          // VOZ à frente + Ancient Ground baixinho atrás (mix): voz (input 1) a cheio,
+          // AG (input 2) em loop a volume baixo; amix com normalize=0 para a voz não baixar.
+          execSync(`ffmpeg -y -framerate ${FPS} -i frames/f%04d.png -i voz.mp3 -stream_loop -1 -i ag.mp3 -filter_complex "[0:v]${vf}[vout];[2:a]volume=0.14[bed];[1:a][bed]amix=inputs=2:duration=first:normalize=0[aout]" -map "[vout]" -map "[aout]" -c:v libx264 -r 30 -pix_fmt yuv420p -c:a aac -b:a 160k -shortest -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        } else {
+          const audioArg = vozAudio ? '-i voz.mp3' : '-stream_loop -1 -i audio.mp3';
+          const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ` ${audioArg}` : ''}`;
+          const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
+          execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "${vf}" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        }
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
@@ -264,8 +303,8 @@ async function main() {
       console.log(`[infografico] dia ${d.dia}: ${N} frames`);
 
       let temAudio = false;
-      const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
-      try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); }
+      const aUrl = audioDeFundo(d);
+      if (aUrl) { try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); } }
 
       let videoUrl = null;
       try {
@@ -322,9 +361,9 @@ async function main() {
     let videoUrl = null;
     if (!soImagens) {
       // 2. audio do dia
-      const aUrl = somSoulab || d.faixa?.url || faixaUrl(semana, d.dia);
+      const aUrl = audioDeFundo(d);
       let temAudio = false;
-      try {
+      if (aUrl) try {
         const ar = await fetch(aUrl);
         if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; }
         else console.log(`[audio] ${ar.status} ${aUrl}`);
@@ -438,9 +477,15 @@ async function main() {
 
   // 6. grava videoUrl de volta na coleccao
   if (resultados.length) {
+    // CACHE-BUSTING: o MP4 fica SEMPRE no mesmo URL (upsert), por isso o CDN servia
+    // o ficheiro antigo ~1h depois de re-renderizar — parecia que o render não tinha
+    // mudado nada. O ?v=carimbo muda o URL a cada render, e o player do admin mostra
+    // logo o MP4 novo. (O export para o Metricool já fazia isto à parte com semCache.)
+    const carimbo = Date.now();
+    const comCache = (u) => (u ? `${u.split('?')[0]}?v=${carimbo}` : u);
     const novosDias = (col.dias || []).map((d) => {
       const rsd = resultados.find((x) => x.dia === d.dia);
-      return rsd ? { ...d, videoUrl: rsd.videoUrl ?? d.videoUrl, imagens: rsd.imagens } : d;
+      return rsd ? { ...d, videoUrl: rsd.videoUrl ? comCache(rsd.videoUrl) : d.videoUrl, imagens: rsd.imagens } : d;
     });
     // carimba a capa como renderizada com a correção atual (ver CAPA_REV em
     // lib/render/dispatch.ts): o publicador só publica carrosséis com esta rev.
