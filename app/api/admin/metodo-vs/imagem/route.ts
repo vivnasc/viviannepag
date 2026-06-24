@@ -3,6 +3,10 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { promptImagemVS, gerarCenaImagem } from '@/lib/metodo-vs/gerar';
+import { METODOVS_CONTAS_LISTA } from '@/lib/metodo-vs/marca';
+
+// a conta a partir do prefixo do slug (para o REGISTO visual da conta na imagem).
+const contaDoSlug = (slug: string) => METODOVS_CONTAS_LISTA.find((c) => slug.startsWith(`${c.prefixo}-`))?.id ?? 'mae';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -37,7 +41,7 @@ export async function POST(req: Request) {
 
   let url: string;
   try {
-    const raw = await gerarImagemFlux(promptImagemVS(cena), token, { raw: true });
+    const raw = await gerarImagemFlux(promptImagemVS(cena, contaDoSlug(slug)), token, { raw: true });
     try { url = await guardarImagem(raw, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { url = raw; }
   } catch (e) {
     return NextResponse.json({ erro: 'flux-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });

@@ -18,12 +18,12 @@ export const maxDuration = 300;
 //  - a semana: { semana:true, offset } — segue o CALENDÁRIO (vários posts/dia, datas
 //    e horas), salta os que já existem, nunca gera passado.
 
-async function fundoImagem(prompt: string, slug: string): Promise<string | null> {
+async function fundoImagem(prompt: string, slug: string, conta: ContaId): Promise<string | null> {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token || !prompt) return null;
   try {
-    // o prompt guardado é só a CENA; o estilo + banimentos entram aqui (promptImagemVS).
-    const url = await gerarImagemFlux(promptImagemVS(prompt), token, { raw: true });
+    // o prompt guardado é só a CENA; o estilo (registo da CONTA) entra aqui (promptImagemVS).
+    const url = await gerarImagemFlux(promptImagemVS(prompt, conta), token, { raw: true });
     try { return await guardarImagem(url, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
   } catch { return null; }
 }
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
       if (existentes.has(slug)) continue;
       try {
         const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitar, conta);
-        const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
+        const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
         rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, padroes, data, slot.hora));
         evitar.push(peca.momentos[0]); existentes.add(slug);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
@@ -119,7 +119,7 @@ export async function POST(req: Request) {
       try {
         const peca = await gerarPecaVS(veu, formato, apiKey, evitar, conta);
         const slug = `${PRE}-${veu}-${formato}-${Date.now()}-${i}`;
-        const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
+        const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
         rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl, padroes));
         evitar.push(peca.momentos[0]);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }

@@ -59,9 +59,20 @@ export async function gerarCenaImagem(texto: string, apiKey: string, evitar: str
 //  2) a Vivianne NÃO pediu estilo nenhum — pediu VIDA e VARIEDADE. Por isso NÃO impomos uma
 //     estética (nada de "muted/moody/film dos anos 70/desbotado"): só garantimos um sujeito
 //     claro, luz bonita, profundidade e que esteja VIVO. A variedade vem da cena (do Claude).
-export function promptImagemVS(cena: string): string {
+// O REGISTO VISUAL de cada conta — a IDENTIDADE (o que distingue as imagens das contas
+// umas das outras), LEVE e ligado à voz/chegada de cada uma, não um estilo rígido. Mantém
+// sempre a vida e a variedade; só inclina a luz/o ambiente para o mundo daquela conta.
+const REGISTO_CONTA: Record<ContaId, string> = {
+  mae: 'honest, grounded and alive, the warmth of something real and lived-in',
+  ver: 'lucid and luminous, lots of clear light and air, calm and present, a sense of seeing clearly, stillness',
+  vir: 'movement and thresholds, doorways, paths and in-between places, a restless gentle motion, the feeling of returning',
+  viver: 'vivid and full of life, rich present colour and warmth, energy and presence, fully in the moment',
+};
+
+export function promptImagemVS(cena: string, conta: ContaId = 'mae'): string {
   const c = String(cena ?? '').trim().replace(/\s+/g, ' ');
-  return `${c}. A single clear, specific subject, alive and full of atmosphere, in beautiful natural light with real depth and dimension; vivid, evocative and cinematic, high quality, with some breathing space around it. Vertical 9:16 portrait.`;
+  const reg = REGISTO_CONTA[conta] ?? REGISTO_CONTA.mae;
+  return `${c}. A single clear, specific subject, alive and full of atmosphere, in beautiful natural light with real depth and dimension; ${reg}; vivid, evocative and cinematic, high quality, with some breathing space around it. Vertical 9:16 portrait.`;
 }
 
 const REVELACAO =

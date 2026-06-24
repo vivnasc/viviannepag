@@ -52,7 +52,7 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (token && peca.fundoPrompt) {
     try {
-      const raw = await gerarImagemFlux(promptImagemVS(peca.fundoPrompt), token, { raw: true });
+      const raw = await gerarImagemFlux(promptImagemVS(peca.fundoPrompt, conta), token, { raw: true });
       try { imageUrl = await guardarImagem(raw, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { imageUrl = raw; }
     } catch { imageUrl = null; }
   }
