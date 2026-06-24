@@ -61,7 +61,7 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { conta?: ContaId; veu?: VeuNome; formato?: FormatoId; quantos?: number; semana?: boolean; offset?: number };
+  const body = (await req.json().catch(() => ({}))) as { conta?: ContaId; veu?: VeuNome; formato?: FormatoId; quantos?: number; semana?: boolean; offset?: number; soWd?: number; soHora?: string };
   const cfg = metodoVSConta(body.conta);
   const conta = cfg.id;
   const PRE = cfg.prefixo; // 'metodovs' (mãe) | 'versoltar' | 'virsoltar' | 'viversoltar'
@@ -94,6 +94,9 @@ export async function POST(req: Request) {
     const seg = segDaSemana(offset);
     const hoje = dataLocal(new Date());
     for (const slot of CALENDARIO) {
+      // gerar UM só slot (clicar numa célula do calendário): filtra por dia/hora.
+      if (typeof body.soWd === 'number' && slot.wd !== body.soWd) continue;
+      if (body.soHora && slot.hora !== body.soHora) continue;
       const d = new Date(seg); d.setDate(seg.getDate() + (slot.wd === 0 ? 6 : slot.wd - 1));
       const data = dataLocal(d);
       if (data < hoje) continue; // nunca gera passado

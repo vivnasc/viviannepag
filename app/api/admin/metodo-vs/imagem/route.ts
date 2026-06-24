@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { promptImagemVS } from '@/lib/metodo-vs/gerar';
+import { promptImagemVS, gerarCenaImagem } from '@/lib/metodo-vs/gerar';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -23,20 +23,28 @@ export async function POST(req: Request) {
 
   const dias = (Array.isArray(row.dias) ? row.dias : []) as Array<{ slides?: Array<{ texto?: string; notaVisual?: string; imageUrl?: string | null; videoUrl?: string | null; clipUrl?: string | null }>; videoUrl?: string | null }>;
   const slides = dias[0]?.slides ?? [];
-  const prompt = slides.find((s) => s.notaVisual)?.notaVisual;
-  if (!prompt) return NextResponse.json({ erro: 'sem-prompt', detalhe: 'esta peça não tem prompt de imagem guardado' }, { status: 409 });
+  const texto = slides.map((s) => (s.texto ?? '').trim()).filter(Boolean).join('. ');
+
+  // INVENTA uma cena NOVA a partir do texto (modelo barato), para escapar à cena guardada
+  // (peças antigas têm cenas de tecido lá dentro) e dar variedade. Sem Claude (sem chave),
+  // cai para a cena guardada. O estilo + banimentos entram sempre no promptImagemVS.
+  let cena = slides.find((s) => s.notaVisual)?.notaVisual ?? texto;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (apiKey && texto) {
+    try { cena = await gerarCenaImagem(texto, apiKey, cena ? [cena] : []); } catch { /* fica a cena guardada */ }
+  }
+  if (!cena) return NextResponse.json({ erro: 'sem-texto', detalhe: 'esta peça não tem texto nem prompt para a imagem' }, { status: 409 });
 
   let url: string;
   try {
-    // o prompt guardado (notaVisual) é só a CENA; o estilo + banimentos entram aqui. Assim
-    // mudar a estética NÃO custa Claude: a Vivianne carrega "outra imagem" e re-corre o Flux.
-    const raw = await gerarImagemFlux(promptImagemVS(prompt), token, { raw: true });
+    const raw = await gerarImagemFlux(promptImagemVS(cena), token, { raw: true });
     try { url = await guardarImagem(raw, `metodovs/${slug}/fundo-${Date.now()}.jpg`); } catch { url = raw; }
   } catch (e) {
     return NextResponse.json({ erro: 'flux-falhou', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 });
   }
 
-  for (const s of slides) { s.imageUrl = url; s.clipUrl = null; s.videoUrl = null; }
+  // guarda a cena NOVA como notaVisual (a partir de agora a peça tem uma cena limpa).
+  for (const s of slides) { s.imageUrl = url; s.clipUrl = null; s.videoUrl = null; s.notaVisual = cena; }
   if (dias[0]) dias[0].videoUrl = null; // a imagem mudou: tem de renderizar de novo
   const { error: e2 } = await supabase.from('carousel_collections').update({ dias }).eq('slug', slug);
   if (e2) return NextResponse.json({ erro: 'db', detalhe: e2.message }, { status: 500 });

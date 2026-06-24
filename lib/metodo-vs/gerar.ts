@@ -37,6 +37,21 @@ const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|[
 //     a Vivianne carrega só "outra imagem" e re-corre o Flux, barato.
 // Os clichés gastos (chávenas, velas, cadeiras, mulheres à janela) E o tecido/pano (que
 // virou o novo cliché) ficam BANIDOS aqui, num só sítio.
+// CENA NOVA a partir do TEXTO do post (modelo barato, haiku) — para o "outra imagem"
+// INVENTAR uma cena nova em vez de repetir a cena guardada (peças antigas têm cenas de
+// tecido lá gravadas). Devolve SÓ a cena (uma frase), sem estilo (isso é promptImagemVS).
+export async function gerarCenaImagem(texto: string, apiKey: string, evitar: string[] = []): Promise<string> {
+  const sys = `Dás UMA cena de imagem em INGLÊS, numa frase curta (no máximo 16 palavras), para acompanhar um post. A cena é CONCRETA, específica e do dia-a-dia (um sítio, um objeto, um momento real) e encarna o SENTIDO do texto, pela sensação, não à letra. Variada e inesperada. PROIBIDO: fabric, cloth, linen, textile, drapery, curtains, folds of cloth; teacups, mugs, cups, candles, flames; people, faces, a person at a window. Devolve SÓ a frase da cena, sem aspas, sem estilo, sem luz, sem câmara.${evitar.length ? ` Evita repetir estas cenas: ${evitar.slice(-6).map((e) => `"${e}"`).join('; ')}.` : ''}`;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-haiku-4-5', max_tokens: 80, system: sys, messages: [{ role: 'user', content: String(texto ?? '').slice(0, 400) }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const t = ((await res.json())?.content?.[0]?.text ?? '').trim();
+  return lp(t).replace(/^["'«»]+|["'«»]+$/g, '').trim();
+}
+
 export function promptImagemVS(cena: string): string {
   const c = String(cena ?? '').trim().replace(/\s+/g, ' ');
   return `${c}. A real, specific, concrete scene from everyday life that carries this feeling — never an abstract texture, never a flat backdrop. Style: warm, intimate, cinematic; a single soft directional natural light with long gentle shadows and dark space around one subject; consistent warm desaturated palette of amber, honey, ochre, cream, sand and warm brown; clear depth with a sharp foreground and a soft deep background built for parallax; analog 35mm film photography, fine warm grain, slight halation, 1970s film look, shallow focus. NEVER include, strictly banned: fabric, cloth, linen, textile, drapery, curtains, sheets, folds of cloth, or any fabric or fabric close-up; teacups, mugs, cups, candles, candle flames, any flame, chairs; people, faces, hands, a woman or anyone at a window, anyone gazing out of a window; generic wellness, spa or self-help stock imagery; halos, sacred iconography; any text or lettering. Vertical 9:16.`;

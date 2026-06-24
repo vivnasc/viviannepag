@@ -896,10 +896,12 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
                       <span style={{ color: cfg.cor }}>{p.publicado ? '✓ publicada' : p.videoUrl ? '✓ com vídeo' : '✓ gerada'}</span>
                     </button>
                   );
+                  const etiq = `slot-${wd}-${slot.hora}`;
                   return (
-                    <div key={slot.hora} className={`${base} border-dashed opacity-45`} style={{ borderColor: 'rgba(255,255,255,0.18)' }} title="ainda por gerar">
-                      <span className="opacity-55">{slot.hora.slice(0, 5)}</span><br />{nome}<br /><span className="opacity-55">por gerar</span>
-                    </div>
+                    <button key={slot.hora} onClick={() => chamar({ semana: true, offset, soWd: wd, soHora: slot.hora }, etiq)} disabled={!!busy}
+                      className={`${base} border-dashed opacity-60 hover:opacity-100 disabled:opacity-30`} style={{ borderColor: 'rgba(255,255,255,0.22)' }} title="clica para gerar este post">
+                      <span className="opacity-55">{slot.hora.slice(0, 5)}</span><br />{nome}<br /><span className="opacity-70">{busy === etiq ? 'a gerar…' : '+ gerar'}</span>
+                    </button>
                   );
                 };
                 return (
