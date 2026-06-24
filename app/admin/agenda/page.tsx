@@ -90,6 +90,17 @@ export default function AgendaPage() {
   }, []);
   useEffect(() => { carregar(); }, [carregar]);
   useEffect(() => { fetch('/api/admin/reels/capa-serie').then((r) => r.ok ? r.json() : { capas: {} }).then((j) => setCapasSerie(j.capas ?? {})).catch(() => {}); }, []);
+  // vindo do Plano da Semana com ?semana=YYYY-MM-DD (a 2.ª-feira) → abre nessa semana
+  useEffect(() => {
+    const s = new URLSearchParams(window.location.search).get('semana');
+    if (!s) return;
+    const [y, m, d] = s.split('-').map(Number);
+    if (!y || !m || !d) return;
+    const seg = new Date(y, m - 1, d); seg.setHours(0, 0, 0, 0);
+    const h = new Date(); h.setHours(0, 0, 0, 0); const dw = h.getDay();
+    const thisMon = new Date(h); thisMon.setDate(h.getDate() + (dw === 0 ? -6 : 1 - dw));
+    setSemanaOffset(Math.round((seg.getTime() - thisMon.getTime()) / (7 * 24 * 3600 * 1000)));
+  }, []);
 
   async function patch(slug: string, p: { agendadoEm?: string | null; publicado?: boolean }) {
     setItens((prev) => prev.map((it) => it.slug === slug ? { ...it, theme: { ...it.theme, ...p } } : it));
@@ -264,7 +275,7 @@ export default function AgendaPage() {
   // ── GERAR UMA SEMANA (por offset): rascunha o tema editorial DESSA semana,
   //    gera os 8 posts, agenda cada um no seu dia e dispara o render. Devolve
   //    o resumo. `prefixo` enfeita a mensagem de progresso no modo bulk. ──
-  async function gerarUmaSemana(offset: number, prefixo = ''): Promise<{ feito: number; mp4: number; erros: string[]; tema: string }> {
+  async function gerarUmaSemana(offset: number, prefixo = '', soFaltam = false): Promise<{ feito: number; mp4: number; erros: string[]; tema: string }> {
     const dias7 = diasDaSemana(offset);
     const semEdW = semanaEditorialAtual(dias7[0]);
     const cursoW = getCurso(semEdW.curso);
@@ -276,7 +287,17 @@ export default function AgendaPage() {
     const j = await r.json();
     if (!r.ok || !Array.isArray(j.plano)) { erros.push(`rascunho: ${j.erro ?? r.status}`); return { feito, mp4, erros, tema: semEdW.tema }; }
     const plano = j.plano as Array<{ wd: number; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string }>;
+    // COMPLETAR: lista fresca dos posts já agendados, para saltar os slots já feitos desta semana.
+    let existentes: Item[] = itens;
+    if (soFaltam) {
+      try { const fr = await fetch('/api/admin/conteudos/list', { cache: 'no-store' }); if (fr.ok) existentes = (((await fr.json()).contos ?? []) as Item[]).filter((x) => contaDe(x.theme, x.slug) === 'veuaveu'); } catch { /* usa o que há em memória */ }
+    }
     for (const d of plano) {
+      // no modo "completar", salta o dia se já houver um post desse formato agendado nesse dia
+      if (soFaltam) {
+        const isoDia = isoLocal(dias7[d.wd - 1]);
+        if (existentes.some((x) => x.theme?.agendadoEm === isoDia && tipoChave(x) === d.formato)) { feito++; continue; }
+      }
       setGerSemana({ feito, total: plano.length, msg: `${prefixo}a gerar ${feito + 1}/${plano.length}…` });
       const url = ROTA_GEN[d.gen] ?? ROTA_GEN.reel;
       let payload: Record<string, unknown> = {};
@@ -310,6 +331,18 @@ export default function AgendaPage() {
     try {
       const res = await gerarUmaSemana(semanaOffset);
       setGerSemana({ feito: res.feito, total: 8, msg: `Pronto: ${res.feito} posts gerados e agendados (“${res.tema}”), ${res.mp4} a preparar (~10 min).${res.erros.length ? ' Falhas: ' + res.erros.join('; ') : ''}` });
+    } catch (e) { setGerSemana({ feito: 0, total: 0, msg: 'Erro: ' + String(e) }); }
+    finally { setGerandoSemana(false); }
+  }
+
+  // COMPLETAR a semana mostrada: gera SÓ os slots que faltam (salta os já feitos),
+  // sem refazer nem duplicar. Para tapar buracos (ex.: um I am a Hero que falhou).
+  async function completarSemana() {
+    if (gerandoSemana) return;
+    setGerandoSemana(true);
+    try {
+      const res = await gerarUmaSemana(semanaOffset, '', true);
+      setGerSemana({ feito: res.feito, total: 8, msg: `Pronto: gerados só os que faltavam (“${res.tema}”), ${res.mp4} a preparar (~10 min).${res.erros.length ? ' Falhas: ' + res.erros.join('; ') : ''}` });
     } catch (e) { setGerSemana({ feito: 0, total: 0, msg: 'Erro: ' + String(e) }); }
     finally { setGerandoSemana(false); }
   }
@@ -356,6 +389,7 @@ export default function AgendaPage() {
             {semanaOffset !== 0 && <button onClick={() => setSemanaOffset(0)} className="text-[0.6rem] px-2 py-1 rounded-full border border-ambar/30 text-ambar/80 hover:bg-ambar/10">hoje</button>}
           </div>
           <button onClick={gerarSemana} disabled={gerandoSemana} className="w-full text-[0.82rem] py-2.5 rounded-lg border border-[#C9B6FA]/50 bg-[#C9B6FA]/10 text-[#C9B6FA] hover:bg-[#C9B6FA]/20 disabled:opacity-50">{gerandoSemana ? `⚡ ${gerSemana?.msg ?? 'a gerar…'}` : '⚡ gerar a semana toda (8 posts) e agendar'}</button>
+          <button onClick={completarSemana} disabled={gerandoSemana} className="w-full mt-2 text-[0.78rem] py-2 rounded-lg border border-salvia/45 bg-salvia/10 text-salvia hover:bg-salvia/20 disabled:opacity-50" title="Gera só os posts que faltam nesta semana, sem refazer nem duplicar os que já existem.">{gerandoSemana ? '…' : '✓ completar a semana · só os que faltam'}</button>
           {/* BULK: várias semanas de uma vez, a partir da semana mostrada */}
           <div className="mt-2 flex items-center justify-center gap-2 flex-wrap">
             <span className="text-[0.66rem] opacity-55">ou de uma vez:</span>
