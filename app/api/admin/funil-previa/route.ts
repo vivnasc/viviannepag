@@ -20,14 +20,16 @@ export async function GET(req: NextRequest) {
   const enviadas: string[] = [];
   for (const carta of SEQUENCIA) {
     const txt = lang === 'en' ? carta.en : carta.pt;
-    const html = envelopar(txt.corpo, urlSair(email), lang);
+    // o assunto é o REAL (o que a leitora vê); a etiqueta de prévia fica discreta no topo do corpo
+    const nota = `<p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C9B7A8;text-align:center;margin:0 0 18px">prévia · dia ${carta.dia}</p>`;
+    const html = envelopar(nota + txt.corpo, urlSair(email), lang);
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
       body: JSON.stringify({
         from: 'Vivianne dos Santos <noreply@viviannedossantos.com>',
         to: email,
-        subject: `[Prévia · dia ${carta.dia}] ${txt.assunto}`,
+        subject: txt.assunto,
         html,
       }),
     });

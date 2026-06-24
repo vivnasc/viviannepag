@@ -39,7 +39,7 @@ export const SEQUENCIA: Carta[] = [
   {
     dia: 9,
     pt: {
-      assunto: 'Se a Amparo te tocou, conhece a Socorro',
+      assunto: 'A que devolve as travessas cheias',
       corpo: `
   <p>Prometi escrever-te quando houvesse algo verdadeiro para dizer. Hoje há.</p>
   <p>Se a Amparo te tocou, a mãe que segura todos, há uma mulher na mesma vila que vais reconhecer: a Socorro. Chamaram-lhe assim, a que acode, e ela cumpriu o nome a vida inteira, sendo o socorro de toda a gente. Mas há uma coisa que a Socorro nunca aprendeu: receber. Quando lhe põem uma travessa de comida à porta, devolve-a cheia, com um bilhete a agradecer, porque uma vez, no ano em que mais precisou, contou com alguém e ficou a ver a porta vazia.</p>
@@ -47,7 +47,7 @@ export const SEQUENCIA: Carta[] = [
   ${btn(SITE + '/as-travessas-devolvidas', 'Ler o primeiro capítulo')}`,
     },
     en: {
-      assunto: 'If Amparo touched you, meet Socorro',
+      assunto: 'The one who returns the dishes full',
       corpo: `
   <p>I promised to write to you when there was something true to say. Today there is.</p>
   <p>If Amparo touched you, the mother who holds everyone, there is a woman in the same village you will recognise: Socorro. They named her so, the one who comes to the rescue, and she fulfilled the name her whole life, being everyone's help. But there is one thing Socorro never learned: to receive. When a dish of food is left at her door, she returns it full, with a note of thanks, because once, in the year she most needed it, she counted on someone and was left looking at an empty door.</p>
@@ -58,7 +58,7 @@ export const SEQUENCIA: Carta[] = [
   {
     dia: 16,
     pt: {
-      assunto: 'Sete estantes, sete perguntas',
+      assunto: 'Qual delas és tu?',
       corpo: `
   <p>A Biblioteca de Véspera é uma vila onde cada história é uma travessia, e cada estante faz uma pergunta.</p>
   <p>Há a mãe que salva e se esquece de si, a Amparo. Há a que dá tudo e não sabe receber, a Socorro. Há a que confunde intensidade com amor e tem medo do sossego, a Tranquilina, n'<em>A Trovoada</em>. Há a que se tornou indispensável e não sabe quem é sem o que faz, a Preciosa, n'<em>A Chave da Fábrica</em>.</p>
@@ -66,7 +66,7 @@ export const SEQUENCIA: Carta[] = [
   ${btn(SITE + '/biblioteca', 'Ver a biblioteca inteira')}`,
     },
     en: {
-      assunto: 'Seven shelves, seven questions',
+      assunto: 'Which of them is you?',
       corpo: `
   <p>The Véspera Library is a village where every story is a crossing, and every shelf asks a question.</p>
   <p>There is the mother who saves and forgets herself, Amparo. The one who gives everything and cannot receive, Socorro. The one who confuses intensity with love and fears the calm, Tranquilina, in <em>The Thunderstorm</em>. The one who made herself indispensable and does not know who she is without what she does, Preciosa, in <em>The Key to the Mill</em>.</p>
