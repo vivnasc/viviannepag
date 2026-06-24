@@ -36,7 +36,7 @@ const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te e
 type Face = { texto?: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; conceito?: string; veuReveal?: string };
 // MÃE · 2 FACES num só reel: a dor (face 1) na 1.ª metade do prog, a revelação
 // (face 2) na 2.ª, com crossfade. Conduzido pelo mesmo prog do render (um só MP4).
-function DuasFaces({ face1, face2, conta, prog, split, estilo }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number; estilo?: EstiloMetodo }) {
+function DuasFaces({ face1, face2, conta, prog, split, estilo, clipFallback }: { face1: Face; face2: Face; conta: Conta; prog: number; split: number; estilo?: EstiloMetodo; clipFallback?: string }) {
   // TEMPO DE LEITURA: a passagem entre faces é em `split` (não 50/50) — a face 2
   // (texto mais longo) fica com mais tempo. Crossfade LARGO e suave (smoothstep).
   const FADE = 0.1;
@@ -44,13 +44,15 @@ function DuasFaces({ face1, face2, conta, prog, split, estilo }: { face1: Face; 
   const p2 = Math.min(1, Math.max(0, (prog - split) / (1 - split)));
   const tt = Math.max(0, Math.min(1, (prog - (split - FADE)) / (2 * FADE)));
   const op2 = tt * tt * (3 - 2 * tt); // smoothstep (ease-in-out), sem corte seco
+  // o motion (Kling) vive em theme.soulab.clipUrl (clipFallback) — 1 clip por reel;
+  // as faces caem nele se não tiverem clip próprio, senão o motion regenerado nunca sai.
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920 }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - op2 }}>
-        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} estilo={estilo} />
+        <MetodoSlide texto={face1.texto ?? ''} destaque={face1.destaque} imageUrl={face1.imageUrl} clipUrl={face1.clipUrl ?? clipFallback} conta={conta} conceito={face1.conceito} veuReveal={face1.veuReveal} anim="typewriter" prog={p1} estilo={estilo} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: op2 }}>
-        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} estilo={estilo} />
+        <MetodoSlide texto={face2.texto ?? ''} destaque={face2.destaque} imageUrl={face2.imageUrl} clipUrl={face2.clipUrl ?? clipFallback} conta={conta} conceito={face2.conceito} veuReveal={face2.veuReveal} anim="reveal" prog={p2} estilo={estilo} />
       </div>
     </div>
   );
@@ -407,14 +409,14 @@ export default function RenderVeuPage() {
           // comprimia a linha do tempo). reelDur vem do render (&dur=).
           timeS={prog * (reelDur || estado.dia.vozDur || 0)}
           imageUrl={estado.dia.slides?.[0]?.imageUrl}
-          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl ?? clipBg ?? undefined}
           conta={getConta(s.contaId ?? '')!}
         />
       )}
       {estado && ehMetodo && !ehCarta && ehTarde && !(estado.dia.vozPalavras?.length ?? 0) && s && getConta(s.contaId ?? '') && (
         <Sequencia
           beats={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
-          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl}
+          clipUrl={(estado.dia.slides?.[0] as { clipUrl?: string } | undefined)?.clipUrl ?? clipBg ?? undefined}
           imageUrl={estado.dia.slides?.[0]?.imageUrl}
           conta={getConta(s.contaId ?? '')!}
           conceito={s.conceito}
@@ -425,14 +427,14 @@ export default function RenderVeuPage() {
         />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && estado.slide2 && s && getConta(s.contaId ?? '') && (
-        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} estilo={estiloM} />
+        <DuasFaces face1={s as Face} face2={estado.slide2 as unknown as Face} conta={getConta(s.contaId ?? '')!} prog={prog} split={split} estilo={estiloM} clipFallback={clipBg ?? undefined} />
       )}
       {estado && ehMetodo && !ehCarta && !ehTarde && !estado.slide2 && s && getConta(s.contaId ?? '') && (
         <MetodoSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}
           imageUrl={s.imageUrl}
-          clipUrl={s.clipUrl}
+          clipUrl={s.clipUrl ?? clipBg ?? undefined}
           conta={getConta(s.contaId ?? '')!}
           conceito={s.conceito}
           veuReveal={s.veuReveal}
