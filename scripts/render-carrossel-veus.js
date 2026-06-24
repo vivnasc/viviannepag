@@ -117,13 +117,16 @@ async function main() {
       // teve de re-renderizar imensos clips por isso). A pré-visualização do admin lê o
       // MESMO valor → o que vê é o que sai (vale para o Soulab E para o Método VS).
       const soulabSeg = Math.min(12, Math.max(3, Number(slides[0]?.segPorMomento) || 7));
-      const seqPorMomento = (col.theme?.marca === 'soulab' || col.theme?.marca === 'metodovs') && slides.length > 1;
-      // FRAME ÚNICO do Método VS (manhã = 1 só linha): com o movimento de câmara da
-      // CameraVeu, precisa de ~6.5s para a câmara RESPIRAR e dar tempo de ler a frase
-      // (8s parados eram demais; 6-7s lê-se o movimento). Vale para a mãe e as filhas.
       const ehMetodoVS = ['metodovs', 'versoltar', 'virsoltar', 'viversoltar'].includes(col.theme?.marca);
+      // o tempo POR MOMENTO vale para TODO o Método VS (mãe E filhas) e o Soulab —
+      // ANTES só 'metodovs' entrava aqui, por isso as FILHAS (versoltar/virsoltar/
+      // viversoltar) ignoravam o tempo e saíam sempre rápidas. Agora respeitam-no.
+      const seqPorMomento = (col.theme?.marca === 'soulab' || ehMetodoVS) && slides.length > 1;
+      // FRAME ÚNICO do Método VS (manhã/filhas = 1 só linha): a duração passa a ser o
+      // tempo escolhido por ela (soulabSeg, 7s por defeito), não 6.5s fixo — senão a
+      // frase única lia-se rápido demais e o slider não a controlava.
       const frameUnicoMetodoVS = ehMetodoVS && slides.length <= 1 && !duasFaces && !nbeats && !carta && !visual;
-      let DUR = duasFaces ? 17 : nbeats ? Math.max(16, Math.round(4.8 * slides.length)) : carta ? Math.max(16, Math.round(4.6 * slides.length)) : seqPorMomento ? Math.max(8, Math.round(soulabSeg * slides.length)) : visual ? 9 : frameUnicoMetodoVS ? 6.5 : 8;
+      let DUR = duasFaces ? 17 : nbeats ? Math.max(16, Math.round(4.8 * slides.length)) : carta ? Math.max(16, Math.round(4.6 * slides.length)) : seqPorMomento ? Math.max(8, Math.round(soulabSeg * slides.length)) : visual ? Math.max(9, Math.round(soulabSeg)) : frameUnicoMetodoVS ? soulabSeg : 8;
       // VOZ (narração): se o post tem voz, ELA MANDA — a duração do reel passa a ser a
       // da narração e os slides avançam ao ritmo dela (a frase no ecrã = a que é dita
       // = karaokê ao nível da frase). Guardado por d.vozUrl (a loja não tem voz).
