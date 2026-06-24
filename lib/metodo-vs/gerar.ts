@@ -41,7 +41,7 @@ const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|[
 // INVENTAR uma cena nova em vez de repetir a cena guardada (peças antigas têm cenas de
 // tecido lá gravadas). Devolve SÓ a cena (uma frase), sem estilo (isso é promptImagemVS).
 export async function gerarCenaImagem(texto: string, apiKey: string, evitar: string[] = []): Promise<string> {
-  const sys = `Dás UMA cena de imagem em INGLÊS, numa frase curta (no máximo 16 palavras), para acompanhar um post. A cena é CONCRETA, específica e do dia-a-dia (um sítio, um objeto, um momento real) e encarna o SENTIDO do texto, pela sensação, não à letra. Variada e inesperada. PROIBIDO: fabric, cloth, linen, textile, drapery, curtains, folds of cloth; teacups, mugs, cups, candles, flames; people, faces, a person at a window. Devolve SÓ a frase da cena, sem aspas, sem estilo, sem luz, sem câmara.${evitar.length ? ` Evita repetir estas cenas: ${evitar.slice(-6).map((e) => `"${e}"`).join('; ')}.` : ''}`;
+  const sys = `Dás UMA cena de imagem em INGLÊS, numa frase curta (no máximo 14 palavras), para acompanhar um post. UM sujeito concreto, específico e INESPERADO que encarne o SENTIDO do texto pela sensação (não à letra). Procura sítios e objetos fora do óbvio. EVITA por completo (e nem menciones estas palavras na resposta): interiores domésticos aconchegantes, salas, cozinhas, janelas, cortinas, panos ou tecidos, chávenas, velas, pessoas — escolhe outra coisa qualquer. Devolve SÓ a frase da cena (o sujeito + onde), sem aspas, sem estilo, sem luz.${evitar.length ? ` E diferente destas, que já saíram: ${evitar.slice(-6).map((e) => `"${e}"`).join('; ')}.` : ''}`;
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
@@ -52,9 +52,14 @@ export async function gerarCenaImagem(texto: string, apiKey: string, evitar: str
   return lp(t).replace(/^["'«»]+|["'«»]+$/g, '').trim();
 }
 
+// O ESTILO que vai ao FLUX. REGRA APRENDIDA À FORÇA: o Flux 1.1 Pro NÃO tem prompt
+// negativo; escrever "no fabric, no cups" no prompt INVOCA tecido e chávenas (o modelo
+// lê os nomes como o que deve desenhar). Por isso AQUI é tudo POSITIVO — nenhuma palavra
+// proibida. O que afasta os clichés é pedir UM só sujeito, minimalista e SEM TRALHA, e a
+// cena vem do Claude já limpa (é ao Claude, que percebe o "não", que se diz o que evitar).
 export function promptImagemVS(cena: string): string {
   const c = String(cena ?? '').trim().replace(/\s+/g, ' ');
-  return `${c}. A real, specific, concrete scene from everyday life that carries this feeling — never an abstract texture, never a flat backdrop. Style: warm, intimate, cinematic; a single soft directional natural light with long gentle shadows and dark space around one subject; consistent warm desaturated palette of amber, honey, ochre, cream, sand and warm brown; clear depth with a sharp foreground and a soft deep background built for parallax; analog 35mm film photography, fine warm grain, slight halation, 1970s film look, shallow focus. NEVER include, strictly banned: fabric, cloth, linen, textile, drapery, curtains, sheets, folds of cloth, or any fabric or fabric close-up; teacups, mugs, cups, candles, candle flames, any flame, chairs; people, faces, hands, a woman or anyone at a window, anyone gazing out of a window; generic wellness, spa or self-help stock imagery; halos, sacred iconography; any text or lettering. Vertical 9:16.`;
+  return `${c}. A single clear, specific subject, minimal and uncluttered, with generous empty space around it. Fine-art editorial photograph on warm analog 35mm film: soft natural directional light, gentle long shadows, muted warm desaturated tones of amber, honey, ochre, sand and warm brown; fine film grain and faint halation; shallow depth of field with a sharp foreground and a soft deep background. Calm, quiet, evocative, unexpected. Vertical 9:16 portrait.`;
 }
 
 const REVELACAO =
@@ -83,7 +88,7 @@ ANTI-SATURAÇÃO (a Vivianne gera isto todos os dias; ao fim de uma semana não 
 - Varia também a ARQUITETURA da peça: umas vezes a faca abre e o resto desdobra; outras a peça constrói até uma viragem só no fim; outras é uma cena seguida do que ela sempre foi. Nunca o mesmo esqueleto dois dias seguidos.`;
 
 // SÓ a CENA (o estilo e os banimentos são acrescentados no servidor — promptImagemVS).
-const lp_img = `IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve uma CENA concreta e específica do dia-a-dia (um sítio, um momento, uma coisa real) que encarna o SENTIDO da frase. A ligação à frase é obrigatória (um fundo sem ligação está ERRADO; a ligação faz-se pela sensação, não por ilustrar à letra). VARIA muito de dia para dia e sê inesperada; NÃO recorras a tecido, pano, chávenas nem velas. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).`;
+const lp_img = `IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve UM sujeito concreto, específico e INESPERADO que encarne o SENTIDO da frase (pela sensação, não à letra; um fundo sem ligação está ERRADO). VARIA muito de dia para dia. EVITA por completo e nem menciones: interiores domésticos aconchegantes, salas, cozinhas, janelas, cortinas, panos/tecidos, chávenas, velas, pessoas — procura outra coisa qualquer, fora do óbvio. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).`;
 
 // A MANHÃ (formato 'dissolucao'): NÃO um reel da revelação, mas UM frame, UMA frase —
 // o sinal de um véu a dissolver-se. O lado do SOLTAR: nu, sereno, leve. Tratado à parte.
@@ -165,7 +170,7 @@ ${f.materia(k)}
 ${ancora ? `\n${ancora}\n` : ''}
 ${REVELACAO}
 
-IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve uma CENA concreta e específica do dia-a-dia (um sítio, um momento, uma coisa real) que encarna o SENTIDO da 1.ª linha (a faca). A ligação à frase é obrigatória (um fundo sem ligação está ERRADO; a ligação faz-se pela sensação, não por ilustrar à letra). VARIA muito de peça para peça e sê inesperada; NÃO recorras a tecido, pano, chávenas nem velas. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).
+IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve UM sujeito concreto, específico e INESPERADO que encarne o SENTIDO da 1.ª linha (a faca), pela sensação (um fundo sem ligação está ERRADO). VARIA muito de peça para peça. EVITA por completo e nem menciones: interiores domésticos aconchegantes, salas, cozinhas, janelas, cortinas, panos/tecidos, chávenas, velas, pessoas — procura outra coisa qualquer, fora do óbvio. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).
 ${evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 O array "momentos" tem 4 a 6 entradas, NUNCA mais (a 1.ª é a faca, a última é a viragem).
