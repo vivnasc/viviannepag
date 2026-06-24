@@ -620,10 +620,13 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
   const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina'); // motion do texto a aplicar em lote
 
+  const [igLigado, setIgLigado] = useState<boolean | null>(null); // o Instagram desta conta está ligado?
+
   const recarregar = useCallback(() => {
     fetch(`/api/admin/metodo-vs/list?conta=${cfg.id}`).then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
   }, [cfg.id]);
   useEffect(() => { recarregar(); }, [recarregar]);
+  useEffect(() => { setIgLigado(null); fetch(`/api/admin/metodo-vs/ig-estado?conta=${cfg.id}`).then((r) => (r.ok ? r.json() : null)).then((j) => setIgLigado(j?.ligado ?? false)).catch(() => setIgLigado(false)); }, [cfg.id]);
 
   const chamar = useCallback(async (corpo: Record<string, unknown>, etiqueta: string) => {
     if (busy) return;
@@ -898,7 +901,25 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
 
         <h1 className="text-2xl mt-3 mb-1" style={{ fontFamily: 'var(--font-serif), serif', color: cfg.cor }}>{titulo}</h1>
         <p className="text-[0.84rem] opacity-75 mb-1">{ancoraDesc}</p>
-        <p className="text-[0.7rem] opacity-45 mb-5">Cada peça tem o estúdio completo: prever, texto, legenda, motion, som, tempo, render, agendar. Publica em <b>@{contaNome}</b>. Carrega «✦ estúdio» num cartão.</p>
+        <p className="text-[0.7rem] opacity-45 mb-2">Cada peça tem o estúdio completo: prever, texto, legenda, motion, som, tempo, render, agendar. Carrega «✦ estúdio» num cartão.</p>
+
+        {/* ESTADO DE PUBLICAÇÃO: o elo invisível (sem token, o cron salta a conta em silêncio) */}
+        {(() => {
+          const nAgendadas = pecas.filter((p) => p.agendadoEm && !p.publicado).length;
+          const nProntas = pecas.filter((p) => p.agendadoEm && !p.publicado && p.videoUrl).length;
+          return (
+            <div className="mb-5 rounded-lg border px-3 py-2 text-[0.66rem] flex items-center gap-2 flex-wrap"
+              style={{ borderColor: igLigado === false ? 'rgba(248,113,113,0.5)' : 'rgba(255,255,255,0.12)', background: igLigado === false ? 'rgba(248,113,113,0.08)' : 'rgba(255,255,255,0.02)' }}>
+              <span>📡 publica em <b>@{contaNome}</b>:</span>
+              {igLigado === null ? <span className="opacity-50">a verificar…</span>
+                : igLigado ? <span className="text-emerald-300">Instagram ligado ✓</span>
+                  : <><span className="text-rose-300 font-medium">Instagram NÃO ligado</span><Link href="/admin/instagram" className="underline" style={{ color: cfg.cor }}>ligar token →</Link><span className="opacity-55">(sem isto, o agendado não publica)</span></>}
+              <span className="opacity-30">·</span>
+              <span className="opacity-70">{nAgendadas} agendada(s){nAgendadas > 0 ? `, ${nProntas} com vídeo prontas` : ''}</span>
+              {nAgendadas > nProntas && <span className="opacity-50">· {nAgendadas - nProntas} por renderizar (o cron rende sozinho à hora)</span>}
+            </div>
+          );
+        })()}
 
         {/* PADRÕES GLOBAIS desta conta (o estúdio como sistema) */}
         <PadroesPanel conta={cfg.id} cor={cfg.cor} offset={offset} rotuloSem={rotuloSemana(offset)} onAplicado={recarregar} />

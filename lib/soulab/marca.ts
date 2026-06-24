@@ -114,7 +114,7 @@ export const SOULAB_SLIDE: { selo: string | null; mostrarConceito: boolean; assi
   selo: null,
   mostrarConceito: false,
   assinatura: `@${SOULAB.handle}`,
-  site: SOULAB.handle,
+  site: 'viviannedossantos.com', // o @ em cima, o site por baixo (não repetir o handle)
 };
 
 // o mundo (palette key) que a Soulab usa no render dos reels — ver PALETAS em
