@@ -75,13 +75,15 @@ function palavrasDeAlinhamento(a?: Alinhamento): PalavraVoz[] {
   return out;
 }
 
-export interface VozOpts { emocao?: EmocaoVoz; expressiva?: boolean; modelo?: 'v3' | 'v2' }
+export interface VozOpts { emocao?: EmocaoVoz; expressiva?: boolean; modelo?: 'v3' | 'v2'; voiceId?: string }
 
 export async function gerarVoz(texto: string, slug: string, opts: VozOpts = {}): Promise<VozResultado> {
   const key = process.env.ELEVENLABS_API_KEY || process.env.ELEVEN_API_KEY;
-  const voiceId = process.env.ELEVENLABS_VOICE_ID || process.env.ELEVEN_VOICE_ID;
+  // a VOZ é à escolha (opts.voiceId) — uma voz GENÉRICA da biblioteca; a Vivianne NÃO usa a
+  // voz dela (não aparece). Só cai no env se ela não tiver escolhido nenhuma.
+  const voiceId = opts.voiceId || process.env.ELEVENLABS_VOICE_ID || process.env.ELEVEN_VOICE_ID;
   if (!key) throw new Error('falta ELEVENLABS_API_KEY');
-  if (!voiceId) throw new Error('falta ELEVENLABS_VOICE_ID (a tua voz clonada)');
+  if (!voiceId) throw new Error('escolhe uma voz da biblioteca');
 
   // REGRA DA VIVIANNE (à força): a SUA voz natural (PT-PT) só sai bem com o eleven_v3 PURO,
   // SEM voice_settings, SEM language_code, sem mexer em NADA. QUALQUER parametrização
