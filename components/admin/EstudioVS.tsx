@@ -25,7 +25,7 @@ const dz = PAL.destaque, bg2 = PAL.bg2;
 type Peca = {
   slug: string; veu: string | null; formato: string | null; hora: string | null;
   momentos: string[]; texto: string; conceito: string; destaque: string[];
-  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null;
+  imageUrl: string | null; videoUrl: string | null; vozUrl: string | null; clipUrl: string | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
   efeito: string | null; transicao: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
@@ -50,6 +50,20 @@ function rotuloDoDia(chave: string): string {
   const [y, m, d] = chave.split('-').map(Number);
   const dt = new Date(y, (m ?? 1) - 1, d ?? 1);
   return `${DIAS_PT[dt.getDay()]} · ${ddmm(dt)}`;
+}
+// os 7 véus na ORDEM do SABER (lib/metodo/saber.ts) — espelha VEUS_VS da geração, para
+// mostrar no calendário QUE véu sai em cada dia (1 véu/dia, os 7 tecidos na semana).
+const VEUS_ORDEM = ['Turbilhão', 'Memória', 'Esforço', 'Desolação', 'Horizonte', 'Permanência', 'Dualidade'];
+// o véu de uma data, com a MESMA fórmula da rota de geração (nº do dia % 7).
+function veuDoDia(d: Date): string {
+  const n = Math.floor(d.getTime() / 864e5);
+  return VEUS_ORDEM[((n % VEUS_ORDEM.length) + VEUS_ORDEM.length) % VEUS_ORDEM.length];
+}
+// a data de um slot do calendário (wd) numa dada semana (offset).
+function dataDoSlot(offset: number, wd: number): Date {
+  const seg = segundaDaSemana(offset);
+  const d = new Date(seg); d.setDate(seg.getDate() + (wd === 0 ? 6 : wd - 1));
+  return d;
 }
 function rotuloSemana(offset: number): string {
   const seg = segundaDaSemana(offset);
@@ -238,6 +252,24 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
   );
 }
 
+// A VOZ (narração): a voz clonada da Vivianne LÊ o texto do post (eleven_multilingual_v2,
+// sotaque PT-PT estável). Gera/regera/remove. Se sair mal, é só «regerar voz». Quando há
+// voz, o render passa a durar o tempo da narração e acende a frase falada (karaokê).
+function VozBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: () => void; onRemover: () => void }) {
+  const tem = !!peca.vozUrl;
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">voz · narração {tem && <span style={{ color: dz }}>· gerada</span>}</p>
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      {tem && <audio src={peca.vozUrl ?? undefined} controls className="w-full h-8" />}
+      <button type="button" onClick={onGerar} disabled={disabled}
+        className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a dar voz…' : tem ? '🔁 regerar voz' : '🎙 dar voz (lê o texto)'}</button>
+      {tem && <button type="button" onClick={onRemover} disabled={disabled} className="w-full text-[0.6rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-50">↩︎ tirar a voz (reel sem narração)</button>}
+      <p className="text-[0.52rem] opacity-45 leading-snug">A voz clonada lê os momentos por ordem, em PT-PT. Com voz, o reel dura o tempo da narração e acende a frase falada. Se o sotaque sair mal, carrega «regerar voz».</p>
+    </div>
+  );
+}
+
 // O EFEITO DO TEXTO: ela escolhe como a frase se revela e VÊ-O a animar em loop.
 function EfeitoBox({ peca, slide, disabled, busy, onSave }: { peca: Peca; slide: typeof METODOVS_CONTAS_LISTA[number]['slide']; disabled: boolean; busy: boolean; onSave: (efeito: EfeitoTexto) => void }) {
   const [efeito, setEfeito] = useState<EfeitoTexto>((peca.efeito as EfeitoTexto) ?? 'maquina');
@@ -336,6 +368,8 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     salvarLegenda: (slug: string, legenda: string, hashtags: string) => void;
     darMovimento: (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void;
     gerarSom: (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'musica'; estilo?: string }) => void;
+    gerarVoz: (slug: string, remover?: boolean) => void;
+    regerarTexto: (slug: string) => void;
     salvarEfeito: (slug: string, efeito: EfeitoTexto) => void;
     salvarTransicao: (slug: string, t: Transicao) => void;
     salvarTipografia: (slug: string, t: Tipografia) => void;
@@ -346,7 +380,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     desagendar: (slug: string) => void;
   };
 }) {
-  type Sec = 'prever' | 'texto' | 'legenda' | 'motion' | 'som' | 'letras' | 'efeito' | 'agendar';
+  type Sec = 'prever' | 'texto' | 'legenda' | 'motion' | 'som' | 'voz' | 'letras' | 'efeito' | 'agendar';
   const [sec, setSec] = useState<Sec>('prever');
   const busy = acaoSlug === peca.slug;
   const disabled = !!acaoSlug;
@@ -356,6 +390,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     { id: 'legenda', label: '📝 legenda' },
     { id: 'motion', label: '🎬 motion' },
     { id: 'som', label: '🔊 som' },
+    { id: 'voz', label: '🎙 voz' },
     { id: 'letras', label: '🅰 letras' },
     { id: 'efeito', label: '✶ efeito' },
     { id: 'agendar', label: '📅 agendar' },
@@ -378,7 +413,8 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
               : <span className="px-1.5 py-0.5 rounded bg-white/10">✎ por agendar</span>}
           {peca.videoUrl && <span className="px-1.5 py-0.5 rounded bg-sky-600/80 text-white">MP4 pronto</span>}
           {peca.clipUrl && <span className="px-1.5 py-0.5 rounded text-[#0F0F1A]" style={{ background: dz }}>🎬 com vida</span>}
-          <button onClick={() => acoes.novaImagem(peca.slug)} disabled={disabled} title="gerar outra imagem (mantém o texto)" className="ml-auto px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🖼 outra imagem'}</button>
+          <button onClick={() => acoes.regerarTexto(peca.slug)} disabled={disabled} title="regerar o texto (nova revelação para este véu/formato; mantém a data)" className="ml-auto px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '♻ regerar texto'}</button>
+          <button onClick={() => acoes.novaImagem(peca.slug)} disabled={disabled} title="gerar outra imagem (mantém o texto)" className="px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🖼 outra imagem'}</button>
           <button onClick={() => acoes.renderizar(peca.slug)} disabled={disabled} title="renderizar o reel final (MP4)" className="px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🎬 render'}</button>
         </div>
 
@@ -403,6 +439,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
           {sec === 'legenda' && <LegendaBox legenda={peca.legenda ?? ''} hashtags={peca.hashtags} busy={busy} disabled={disabled} onSave={(leg, tags) => acoes.salvarLegenda(peca.slug, leg, tags)} />}
           {sec === 'motion' && <MotionBox clipUrl={peca.clipUrl} busy={busy} disabled={disabled || !peca.imageUrl} onGerar={(opts) => acoes.darMovimento(peca.slug, opts)} />}
           {sec === 'som' && <SomBox peca={peca} busy={busy} disabled={disabled} onGerar={(tipo, estilo) => acoes.gerarSom(peca.slug, { tipo, estilo })} onRemover={() => acoes.gerarSom(peca.slug, { remover: true })} />}
+          {sec === 'voz' && <VozBox peca={peca} busy={busy} disabled={disabled} onGerar={() => acoes.gerarVoz(peca.slug)} onRemover={() => acoes.gerarVoz(peca.slug, true)} />}
           {sec === 'letras' && <TipografiaBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(t) => acoes.salvarTipografia(peca.slug, t)} />}
           {sec === 'efeito' && <EfeitoBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(ef) => acoes.salvarEfeito(peca.slug, ef)} />}
           {sec === 'agendar' && <AgendarBox agendadoEm={peca.agendadoEm} hora={peca.hora} contaNome={contaNome} busy={busy} disabled={disabled} onAgendar={(d, h) => acoes.agendar(peca.slug, d, h)} onDesagendar={() => acoes.desagendar(peca.slug)} />}
@@ -507,6 +544,31 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       const r = await fetch('/api/admin/metodo-vs/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Imagem trocada.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  // regerar o TEXTO (nova revelação) em cima, mantendo a data; e gerar imagem nova.
+  const regerarTexto = useCallback(async (slug: string) => {
+    if (acaoSlug) return;
+    if (typeof window !== 'undefined' && !window.confirm('Regerar o texto desta peça? Escreve uma revelação nova (e imagem nova) para o mesmo véu/formato. Mantém a data.')) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A escrever uma revelação nova…');
+    try {
+      const r = await fetch('/api/admin/metodo-vs/regerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Texto novo gerado.');
+      recarregar();
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
+  // dar/regerar/remover a VOZ (narração). Rota genérica do método por slug (já existia).
+  const gerarVoz = useCallback(async (slug: string, remover = false) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg(remover ? 'A tirar a voz…' : 'A gerar a voz (lê o texto)…');
+    try {
+      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg(remover ? 'Voz removida.' : 'Voz gerada. Ouve aqui; se o sotaque sair mal, regera.');
       recarregar();
     } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
@@ -690,11 +752,19 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
             </div>
             <button onClick={() => chamar({ semana: true, offset }, 'semana')} disabled={!!busy} className="px-3 py-1.5 rounded-lg font-medium text-[0.78rem] disabled:opacity-50" style={{ background: cfg.cor, color: '#0F0F1A' }}>{busy === 'semana' ? 'a produzir a semana…' : offset === 0 ? '✦ produzir a semana toda' : '✦ produzir e pré-datar'}</button>
           </div>
-          <p className="text-[0.55rem] opacity-45 mb-2">{CALENDARIO.length} posts · {offset > 0 ? 'gera já a semana futura e deixa cada post com a data certa (depois é só agendar no estúdio).' : 'salta os dias que já passaram e os que já existem.'}</p>
+          <p className="text-[0.55rem] opacity-45 mb-2">{CALENDARIO.length} posts · 1 véu por dia (os 7 tecidos na semana) · manhã = soltar · tarde = revelação. {offset > 0 ? 'Gera já a semana futura e pré-data cada post (depois agendas em lote).' : 'Salta os dias que já passaram e os que já existem.'}</p>
           <div className="flex flex-wrap gap-1.5">
-            {CALENDARIO.map((s, i) => (
-              <span key={i} className="text-[0.6rem] px-2 py-1 rounded-lg border border-white/12 opacity-75" title={`${s.nome} · ${s.hora}`}>{['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][s.wd]} {s.hora.slice(0, 5)} · {NOME_FORMATO[s.formato] ?? s.formato}</span>
-            ))}
+            {CALENDARIO.map((s, i) => {
+              const veu = veuDoDia(dataDoSlot(offset, s.wd));
+              const manha = s.formato === 'dissolucao';
+              return (
+                <span key={i} className="text-[0.6rem] px-2 py-1 rounded-lg border flex items-center gap-1.5" style={{ borderColor: 'rgba(255,255,255,0.12)', opacity: 0.85 }} title={`${s.nome} · ${s.hora} · véu ${veu} · ${NOME_FORMATO[s.formato] ?? s.formato}`}>
+                  <span className="opacity-55">{['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][s.wd]} {s.hora.slice(0, 5)}</span>
+                  <span style={{ color: cfg.cor }}>{veu}</span>
+                  <span className="opacity-45">· {manha ? '🌅 manhã' : NOME_FORMATO[s.formato]?.replace(/^\S+\s/, '') ?? s.formato}</span>
+                </span>
+              );
+            })}
           </div>
         </div>
 
@@ -764,7 +834,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       {pecaAberta && (
         <Estudio
           peca={pecaAberta} slide={slide} contaNome={contaNome} acaoSlug={acaoSlug} onFechar={() => setEstudioSlug(null)}
-          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, salvarEfeito, salvarTransicao, salvarTipografia, salvarTempo, novaImagem, renderizar, agendar, desagendar }}
+          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, gerarVoz, regerarTexto, salvarEfeito, salvarTransicao, salvarTipografia, salvarTempo, novaImagem, renderizar, agendar, desagendar }}
         />
       )}
     </main>

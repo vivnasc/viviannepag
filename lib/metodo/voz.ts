@@ -1,6 +1,9 @@
 // Método VS · VOZ (ElevenLabs text-to-speech) a partir do TEXTO de um post.
-// Usa a voz clonada (ELEVEN_VOICE_ID) em eleven_v3, voz PURA: SEM voice_settings
-// e SEM language_code (isso corrompe o sotaque PT-PT).
+// Usa a voz clonada (ELEVEN_VOICE_ID) em eleven_multilingual_v2 (o modelo ESTÁVEL,
+// não o v3 alpha que oscilava para sotaque brasileiro). similarity_boost ALTO puxa
+// para o sotaque da própria voz clonada (PT-PT); stability mantém-no consistente
+// entre gerações. SEM language_code (o 'pt' do ElevenLabs tende a puxar p/ brasileiro;
+// é a voz clonada + similarity que seguram o PT-PT).
 // Endpoint COM TIMESTAMPS: devolve o tempo de cada caráter → derivamos o tempo de
 // cada PALAVRA, para o render fazer KARAOKÊ (acender a palavra no momento exato),
 // como um vídeo-lyrics. A Vivianne tinha razão: o texto já é conhecido, o que falta
@@ -42,7 +45,13 @@ export async function gerarVoz(texto: string, slug: string): Promise<VozResultad
   const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/with-timestamps`, {
     method: 'POST',
     headers: { 'xi-api-key': key, 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ text: texto, model_id: 'eleven_v3' }),
+    body: JSON.stringify({
+      text: texto,
+      model_id: 'eleven_multilingual_v2',
+      // similarity ALTO = agarra-se ao sotaque da voz clonada (PT-PT); stability médio-alto
+      // = consistente entre gerações (sem oscilar p/ brasileiro); style 0 = sem dramatizar.
+      voice_settings: { stability: 0.55, similarity_boost: 0.9, style: 0, use_speaker_boost: true },
+    }),
   });
   if (!res.ok) throw new Error(`elevenlabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
   const j = (await res.json()) as { audio_base64?: string; alignment?: Alinhamento; normalized_alignment?: Alinhamento };

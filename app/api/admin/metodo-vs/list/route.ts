@@ -28,7 +28,7 @@ export async function GET(req: Request) {
   };
   type Row = {
     slug: string; brief?: string | null;
-    dias?: Array<{ videoUrl?: string | null; legenda?: string | null; hashtags?: string[] | null; slides?: Slide[] }> | null;
+    dias?: Array<{ videoUrl?: string | null; legenda?: string | null; hashtags?: string[] | null; slides?: Slide[]; vozUrl?: string | null }> | null;
     theme?: {
       agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean;
       metodovs?: { veu?: string; formato?: string };
@@ -52,6 +52,7 @@ export async function GET(req: Request) {
       destaque: slide?.destaque ?? [],
       imageUrl: slide?.imageUrl ?? null,
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
+      vozUrl: row.dias?.[0]?.vozUrl ?? null,
       clipUrl: row.theme?.soulab?.clipUrl ?? null,
       somUrl: row.theme?.soulab?.somUrl ?? null,
       somTipo: row.theme?.soulab?.somTipo ?? null,
