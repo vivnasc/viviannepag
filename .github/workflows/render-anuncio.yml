@@ -1,0 +1,55 @@
+name: Render anúncio (Amparo)
+
+# Gera o MP4 do anúncio do Amparo com a IA da casa: voz (ElevenLabs) + cena
+# animada (Kling, ou Ken Burns se não houver REPLICATE_API_TOKEN) + tipografia
+# (Puppeteer/Fraunces) + música por baixo + montagem ffmpeg, e publica no
+# Supabase (viviannepag-assets/anuncios/). NÃO faz deploy no Vercel.
+#
+# Como usar: Actions -> "Render anúncio (Amparo)" -> Run workflow -> variante A ou B.
+on:
+  workflow_dispatch:
+    inputs:
+      variante:
+        description: 'Guião do anúncio: A (a ferida) ou B (reconhecimento)'
+        required: false
+        type: choice
+        options: ['A', 'B']
+        default: 'A'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+
+      - name: ffmpeg + deps do Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 \
+            libdrm2 libgbm1 libpango-1.0-0 libxcomposite1 libxdamage1 libxrandr2 libxfixes3 \
+            libxkbcommon0 libasound2t64 libxshmfence1 fonts-liberation libu2f-udev
+
+      - name: npm packages (puppeteer baixa o Chromium)
+        run: npm install --no-save puppeteer @supabase/supabase-js @fontsource/fraunces @fontsource/outfit
+
+      - name: Gerar o anúncio
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVEN_VOICE_ID: ${{ secrets.ELEVEN_VOICE_ID }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+          VARIANTE: ${{ github.event.inputs.variante }}
+        run: |
+          set -o pipefail
+          node scripts/anuncio/render-anuncio.js | tee saida.txt
+          URL=$(grep -oE 'https://[^ ]+\.mp4' saida.txt | tail -1)
+          echo "## Anúncio gerado" >> $GITHUB_STEP_SUMMARY
+          echo "Variante: ${VARIANTE:-A}" >> $GITHUB_STEP_SUMMARY
+          echo "MP4: ${URL:-(ver log)}" >> $GITHUB_STEP_SUMMARY
