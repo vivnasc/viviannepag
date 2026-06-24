@@ -4,10 +4,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { FORMATOS_LISTA, CALENDARIO } from '@/lib/metodo-vs/formatos';
-import { KineticSlide, estiloMomento, EFEITOS_TEXTO, FONTES_TEXTO, TRANSICOES, type EfeitoTexto, type FonteTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
+import { KineticSlide, estiloSequencia, EFEITOS_TEXTO, FONTES_TEXTO, TRANSICOES, type EfeitoTexto, type FonteTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { METODOVS_MUNDO, metodoVSConta, METODOVS_CONTAS_LISTA, type MetodoVSContaId } from '@/lib/metodo-vs/marca';
 import { CONTAS } from '@/lib/metodo/contas';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
+import { EMOCOES_VOZ, padroesDefault, mergePadroes, type PadroesVS } from '@/lib/metodo-vs/padroes';
 import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
 import type { Mundo } from '@/lib/estudio-conteudo';
 
@@ -99,10 +100,10 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo, onSaveTransicao 
           {moms.map((m, i) => {
             const n = moms.length, w = 1 / n;
             const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
-            const est = estiloMomento(trans, lp, i === n - 1);
+            const est = estiloSequencia(trans, prog, i, n);
             if (!est) return null;
             return (
-              <div key={i} style={{ position: 'absolute', inset: 0, ...est }}>
+              <div key={i} style={{ position: 'absolute', inset: 0, overflow: 'hidden', ...est }}>
                 <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...slide} />
               </div>
             );
@@ -491,6 +492,113 @@ function Cartao({ p, onApagar, onAbrir, selecionado, onToggleSel }: { p: Peca; o
   );
 }
 
+// PADRÕES GLOBAIS (o estúdio como SISTEMA): a Vivianne define UMA vez, por conta, o
+// movimento (transição/ritmo/motion), o texto (tipografia/cor) e a voz (emoção + voz
+// automática nas tardes) — e aplica a ESTA SEMANA, a ESTA CONTA ou a TODAS. As peças
+// novas já nascem com estes padrões; as existentes recebem-nos com "aplicar".
+function PadroesPanel({ conta, cor, offset, rotuloSem, onAplicado }: { conta: MetodoVSContaId; cor: string; offset: number; rotuloSem: string; onAplicado: () => void }) {
+  const [aberto, setAberto] = useState(false);
+  const [p, setP] = useState<PadroesVS>(() => padroesDefault(conta));
+  const [busy, setBusy] = useState<string | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const set = <K extends keyof PadroesVS>(k: K, v: PadroesVS[K]) => setP((s) => ({ ...s, [k]: v }));
+
+  useEffect(() => {
+    fetch('/api/admin/metodo-vs/padroes').then((r) => (r.ok ? r.json() : null)).then((j) => {
+      if (j?.padroes) setP(mergePadroes(conta, j.padroes[conta]));
+    }).catch(() => {});
+  }, [conta]);
+
+  const guardar = useCallback(async () => {
+    setBusy('guardar'); setMsg(null);
+    try {
+      const r = await fetch('/api/admin/metodo-vs/padroes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ acao: 'guardar', conta, padroes: p }) });
+      setMsg(r.ok ? 'Padrão guardado. As peças novas já nascem assim.' : 'Erro a guardar.');
+    } catch { setMsg('Erro a guardar.'); } finally { setBusy(null); }
+  }, [conta, p]);
+
+  const aplicar = useCallback(async (alvo: 'semana' | 'conta' | 'todas') => {
+    const onde = alvo === 'semana' ? `a ${rotuloSem}` : alvo === 'conta' ? 'a esta conta inteira' : 'a TODAS as contas';
+    if (typeof window !== 'undefined' && !window.confirm(`Aplicar estes padrões ${onde}? (re-renderiza as peças não publicadas; se "voz automática nas tardes" estiver ligada, gera voz — pode demorar.)`)) return;
+    setBusy(alvo); setMsg('A aplicar a centenas de conteúdos…');
+    try {
+      const r = await fetch('/api/admin/metodo-vs/padroes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ acao: 'aplicar', conta, alvo, offset, padroes: p }) });
+      const j = await r.json().catch(() => ({}));
+      setMsg(r.ok ? `Aplicado a ${j.tocadas ?? 0} peça(s)${j.vozes ? ` · ${j.vozes} com voz` : ''}.` : `Erro: ${j.detalhe ?? j.erro ?? ''}`);
+      if (r.ok) onAplicado();
+    } catch (e) { setMsg(String(e)); } finally { setBusy(null); }
+  }, [conta, p, offset, rotuloSem, onAplicado]);
+
+  const chip = (on: boolean) => (on ? { borderColor: cor, background: cor, color: '#0F0F1A' } : { borderColor: 'rgba(255,255,255,0.2)' });
+
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/[0.02] mb-4">
+      <button onClick={() => setAberto((a) => !a)} className="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left">
+        <span className="text-[0.7rem] uppercase tracking-widest opacity-70">⚙ padrões globais desta conta {aberto ? '▲' : '▼'}</span>
+        <span className="text-[0.56rem] opacity-45">define uma vez · aplica a centenas</span>
+      </button>
+      {aberto && (
+        <div className="px-3 pb-3 space-y-3 text-[0.66rem]">
+          {/* MOVIMENTO */}
+          <div className="space-y-1.5">
+            <p className="text-[0.55rem] uppercase tracking-widest opacity-45">movimento</p>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="opacity-55">transição:</span>
+              <select value={p.transicao} onChange={(e) => set('transicao', e.target.value as PadroesVS['transicao'])} className="text-[0.62rem] px-1.5 py-1 rounded-lg border border-white/15 bg-black/30 [color-scheme:dark]" style={{ color: PAL.texto }}>
+                {TRANSICOES.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+              </select>
+              <label className="flex items-center gap-1 ml-2"><input type="checkbox" checked={p.motionAuto} onChange={(e) => set('motionAuto', e.target.checked)} style={{ accentColor: cor }} /> motion automático nas imagens</label>
+            </div>
+            <label className="flex items-center gap-2 opacity-85">
+              <span className="opacity-55 whitespace-nowrap">tempo / frase</span>
+              <input type="range" min={3} max={12} step={0.5} value={p.segPorMomento} onChange={(e) => set('segPorMomento', Number(e.target.value))} className="flex-1" style={{ accentColor: cor }} />
+              <span className="tabular-nums w-9 text-right">{p.segPorMomento.toFixed(1)}s</span>
+            </label>
+          </div>
+          {/* TEXTO */}
+          <div className="space-y-1.5">
+            <p className="text-[0.55rem] uppercase tracking-widest opacity-45">texto</p>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="opacity-55">fonte:</span>
+              {FONTES_TEXTO.map((fo) => (
+                <button key={fo.id} type="button" onClick={() => set('fonte', fo.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border" style={chip(p.fonte === fo.id)}>{fo.label}</button>
+              ))}
+              <label className="flex items-center gap-1 ml-1"><span className="opacity-55">cor</span><input type="color" value={p.cor} onChange={(e) => set('cor', e.target.value)} className="w-6 h-5 rounded bg-transparent border border-white/15" /></label>
+              <label className="flex items-center gap-1"><span className="opacity-55">realce</span><input type="color" value={p.corDestaque} onChange={(e) => set('corDestaque', e.target.value)} className="w-6 h-5 rounded bg-transparent border border-white/15" /></label>
+            </div>
+            <label className="flex items-center gap-2 opacity-85">
+              <span className="opacity-55 whitespace-nowrap">tamanho</span>
+              <input type="range" min={56} max={128} step={2} value={p.tamanho} onChange={(e) => set('tamanho', Number(e.target.value))} className="flex-1" style={{ accentColor: cor }} />
+              <span className="tabular-nums w-7 text-right">{p.tamanho}</span>
+            </label>
+          </div>
+          {/* VOZ */}
+          <div className="space-y-1.5">
+            <p className="text-[0.55rem] uppercase tracking-widest opacity-45">voz</p>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <label className="flex items-center gap-1"><input type="checkbox" checked={p.vozExpressiva} onChange={(e) => set('vozExpressiva', e.target.checked)} style={{ accentColor: cor }} /> expressiva (humana, com emoção)</label>
+              <span className="opacity-55 ml-1">emoção:</span>
+              {EMOCOES_VOZ.map((em) => (
+                <button key={em.id} type="button" onClick={() => set('vozEmocao', em.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border" style={chip(p.vozEmocao === em.id)}>{em.label}</button>
+              ))}
+            </div>
+            <label className="flex items-center gap-1"><input type="checkbox" checked={p.vozTardeAuto} onChange={(e) => set('vozTardeAuto', e.target.checked)} style={{ accentColor: cor }} /> gerar voz automaticamente nos posts da tarde (revelação)</label>
+          </div>
+          {/* GUARDAR + APLICAR */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-white/8">
+            <button onClick={guardar} disabled={!!busy} className="text-[0.64rem] px-2.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cor, color: cor }}>{busy === 'guardar' ? '…' : '💾 guardar padrão'}</button>
+            <span className="opacity-40">aplicar a:</span>
+            <button onClick={() => aplicar('semana')} disabled={!!busy} className="text-[0.64rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-40">{busy === 'semana' ? '…' : 'esta semana'}</button>
+            <button onClick={() => aplicar('conta')} disabled={!!busy} className="text-[0.64rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-40">{busy === 'conta' ? '…' : 'esta conta'}</button>
+            <button onClick={() => aplicar('todas')} disabled={!!busy} className="text-[0.64rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-40" style={{ color: cor }}>{busy === 'todas' ? '…' : 'todas as contas'}</button>
+          </div>
+          {msg && <p className="text-[0.6rem]" style={{ color: cor }}>{msg}</p>}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // O ESTÚDIO da conta (mãe ou filha). conta = 'mae' | 'ver' | 'vir' | 'viver'.
 export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
@@ -740,6 +848,9 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         <h1 className="text-2xl mt-3 mb-1" style={{ fontFamily: 'var(--font-serif), serif', color: cfg.cor }}>{titulo}</h1>
         <p className="text-[0.84rem] opacity-75 mb-1">{ancoraDesc}</p>
         <p className="text-[0.7rem] opacity-45 mb-5">Cada peça tem o estúdio completo: prever, texto, legenda, motion, som, tempo, render, agendar. Publica em <b>@{contaNome}</b>. Carrega «✦ estúdio» num cartão.</p>
+
+        {/* PADRÕES GLOBAIS desta conta (o estúdio como sistema) */}
+        <PadroesPanel conta={cfg.id} cor={cfg.cor} offset={offset} rotuloSem={rotuloSemana(offset)} onAplicado={recarregar} />
 
         {/* CALENDÁRIO · a semana toda de uma vez, com navegação ◀▶ (produzir e pré-datar futuras) */}
         <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 mb-4">

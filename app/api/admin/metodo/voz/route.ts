@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import { gerarVoz } from '@/lib/metodo/voz';
+import { gerarVoz, type EmocaoVoz } from '@/lib/metodo/voz';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -11,7 +11,7 @@ export const maxDuration = 120;
 // ouvires no player. NÃO é o som ambiente (isso é /som); é a voz por cima.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const { slug, remover } = (await req.json().catch(() => ({}))) as { slug?: string; remover?: boolean };
+  const { slug, remover, emocao, expressiva } = (await req.json().catch(() => ({}))) as { slug?: string; remover?: boolean; emocao?: EmocaoVoz; expressiva?: boolean };
   if (!slug) return NextResponse.json({ erro: 'slug' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   if (!texto) return NextResponse.json({ erro: 'sem-texto', detalhe: 'este post não tem texto para narrar' }, { status: 409 });
 
   let r: { url: string; palavras: unknown[]; dur: number };
-  try { r = await gerarVoz(texto, slug); }
+  try { r = await gerarVoz(texto, slug, { emocao, expressiva }); }
   catch (e) { return NextResponse.json({ erro: 'voz', detalhe: e instanceof Error ? e.message : String(e) }, { status: 502 }); }
 
   // guarda a voz + o tempo de cada PALAVRA (para o karaokê) + a duração.

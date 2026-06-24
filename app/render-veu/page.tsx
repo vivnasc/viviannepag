@@ -12,7 +12,7 @@ import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
 import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
-import { KineticSlide, estiloMomento, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
+import { KineticSlide, estiloSequencia, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
 import { slideDaMarca, ehMarcaMetodoVS } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
@@ -112,11 +112,10 @@ function SoulabMomentos({ slides, prog, mundo, clipUrl, slideProps = SOULAB_SLID
     <div style={{ position: 'relative', width: 1080, height: 1920, background: '#000', overflow: 'hidden' }}>
       {slides.map((sl, i) => {
         const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
-        const isLast = i === n - 1;
-        const est = estiloMomento(transicao, lp, isLast);
+        const est = estiloSequencia(transicao, prog, i, n);
         if (!est) return null;
         return (
-          <div key={i} style={{ position: 'absolute', inset: 0, ...est }}>
+          <div key={i} style={{ position: 'absolute', inset: 0, overflow: 'hidden', ...est }}>
             <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...slideProps} />
           </div>
         );
@@ -150,6 +149,26 @@ function CartaSequencia({ beats, conta, prog, capaImg }: { beats: string[]; cont
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// MOVIMENTO AUTOMÁTICO no frame ÚNICO (manhã do Método VS e outros kinéticos de 1 só
+// frame): o KineticSlide já faz um Ken Burns muito ligeiro, mas um frame parado lê-se
+// MORTO. Aqui envolvemos o render num "movimento de câmara" mais forte, conduzido só
+// por prog (determinístico, sem tempo nem Math.random — o render captura frame a frame):
+// um push-in lento (escala ~1.06 -> ~1.14) + uma deriva direcional suave (uns %), para a
+// imagem respirar. A escala base > 1 garante que a deriva nunca mostra as bordas.
+function CameraVeu({ prog, children }: { prog: number; children: React.ReactNode }) {
+  const p = Math.max(0, Math.min(1, prog));
+  const scale = 1.06 + 0.08 * p;          // push-in: 1.06 -> 1.14
+  const tx = (-1.2 + 2.4 * p).toFixed(3);  // deriva horizontal suave: -1.2% -> +1.2%
+  const ty = (1.2 - 1.6 * p).toFixed(3);   // deriva vertical suave (sobe ao longo do tempo)
+  return (
+    <div style={{ position: 'relative', width: 1080, height: 1920, overflow: 'hidden', background: '#000' }}>
+      <div style={{ position: 'absolute', inset: 0, transform: `scale(${scale.toFixed(3)}) translate(${tx}%, ${ty}%)`, transformOrigin: 'center', willChange: 'transform' }}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -324,19 +343,29 @@ export default function RenderVeuPage() {
         <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
       )}
       {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
-        <KineticSlide
-          texto={s.texto ?? ''}
-          destaque={s.destaque}
-          imageUrl={s.imageUrl}
-          mundo={estado.dia.mundo}
-          prog={prog}
-          variante={s.variante}
-          efeito={(s as { efeito?: EfeitoTexto }).efeito}
-          tipografia={(s as { tipografia?: Tipografia }).tipografia}
-          conceito={s.conceito}
-          clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
-          {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
-        />
+        // FRAME ÚNICO com MOVIMENTO: o push-in + deriva da CameraVeu dá vida ao frame
+        // parado da manhã (sem clip/motion). Só com imagem fixa (com clip o próprio
+        // vídeo já mexe, não precisa). Beneficia a manhã do Método VS e outros kinéticos
+        // de 1 frame por imagem.
+        (() => {
+          const kin = (
+            <KineticSlide
+              texto={s.texto ?? ''}
+              destaque={s.destaque}
+              imageUrl={s.imageUrl}
+              mundo={estado.dia.mundo}
+              prog={prog}
+              variante={s.variante}
+              efeito={(s as { efeito?: EfeitoTexto }).efeito}
+              tipografia={(s as { tipografia?: Tipografia }).tipografia}
+              conceito={s.conceito}
+              clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
+              {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
+            />
+          );
+          const temClip = (estado.dia.mundo as string) === 'soulab' && !!clipBg;
+          return (s.imageUrl && !temClip) ? <CameraVeu prog={prog}>{kin}</CameraVeu> : kin;
+        })()
       )}
       {estado && ehMetodo && ehCarta && s && getConta(s.contaId ?? '') && (
         <CartaSequencia

@@ -7,6 +7,7 @@ import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
 import { gerarPecaVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
 import { FORMATOS_LISTA, CALENDARIO, type FormatoId } from '@/lib/metodo-vs/formatos';
 import { METODOVS_MUNDO, metodoVSConta } from '@/lib/metodo-vs/marca';
+import { SLUG_PADROES, mergePadroes, type PadroesVS, type PadroesPorConta } from '@/lib/metodo-vs/padroes';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -26,12 +27,18 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
   } catch { return null; }
 }
 
-function montarRow(marca: string, handle: string, slug: string, veu: VeuNome, formato: FormatoId, peca: Awaited<ReturnType<typeof gerarPecaVS>>, imageUrl: string | null, agendadoEm?: string, hora?: string) {
+function montarRow(marca: string, handle: string, slug: string, veu: VeuNome, formato: FormatoId, peca: Awaited<ReturnType<typeof gerarPecaVS>>, imageUrl: string | null, padroes: PadroesVS, agendadoEm?: string, hora?: string) {
+  // a peça NOVA herda os PADRÕES GLOBAIS da conta (transição, ritmo, tipografia, motion)
+  // — gravados no slide[0], de onde o preview e o render leem. (o estúdio como sistema.)
   const slides = peca.momentos.map((texto, idx) => ({
     tipo: 'kinetico', texto,
     destaque: idx === 0 ? peca.destaque : [],
     notaVisual: peca.fundoPrompt, imageUrl,
     capa: idx === 0, conceito: idx === 0 ? peca.conceito : undefined,
+    ...(idx === 0 ? {
+      transicao: padroes.transicao, segPorMomento: padroes.segPorMomento, motionAuto: padroes.motionAuto,
+      tipografia: { fonte: padroes.fonte, tamanho: padroes.tamanho, cor: padroes.cor, corDestaque: padroes.corDestaque },
+    } : {}),
   }));
   const legenda = limparTravessoes(`${peca.legenda}\n\nMétodo VS · @${handle}\n\n${peca.hashtags.map((t) => `#${t}`).join(' ')}`);
   const dias = [{ dia: 1, mundo: METODOVS_MUNDO, palavra: peca.momentos[0].slice(0, 48), slides, legenda, hashtags: peca.hashtags }];
@@ -58,6 +65,13 @@ export async function POST(req: Request) {
   const conta = cfg.id;
   const PRE = cfg.prefixo; // 'metodovs' (mãe) | 'versoltar' | 'virsoltar' | 'viversoltar'
   const supabase = getSupabaseAdmin();
+
+  // os PADRÕES GLOBAIS da conta (de onde as peças novas herdam transição/ritmo/tipografia).
+  let padroes: PadroesVS;
+  try {
+    const { data } = await supabase.from('carousel_collections').select('theme').eq('slug', SLUG_PADROES).maybeSingle();
+    padroes = mergePadroes(conta, ((data?.theme as { padroes?: PadroesPorConta })?.padroes ?? {})[conta]);
+  } catch { padroes = mergePadroes(conta); }
 
   // anti-repetição + slugs existentes (só desta conta).
   const evitar: string[] = [];
@@ -88,7 +102,7 @@ export async function POST(req: Request) {
       try {
         const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitar, conta);
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
-        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, data, slot.hora));
+        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, padroes, data, slot.hora));
         evitar.push(peca.momentos[0]); existentes.add(slug);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
@@ -102,7 +116,7 @@ export async function POST(req: Request) {
         const peca = await gerarPecaVS(veu, formato, apiKey, evitar, conta);
         const slug = `${PRE}-${veu}-${formato}-${Date.now()}-${i}`;
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
-        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl));
+        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl, padroes));
         evitar.push(peca.momentos[0]);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }

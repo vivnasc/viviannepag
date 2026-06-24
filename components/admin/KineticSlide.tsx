@@ -56,60 +56,61 @@ export const TRANSICOES: { id: Transicao; label: string; desc: string }[] = [
   { id: 'corte', label: '▮ corte seco', desc: 'troca direta, sem fundido nem deslize: cada frase aparece de uma vez' },
 ];
 
-// O ESTILO do CONTENTOR de cada momento numa sequência, dado o progresso DENTRO do
-// momento (lp 0..1), se é o último, e a transição escolhida. Centralizado aqui para
-// a pré-visualização (EstudioVS) e o render (render-veu) coincidirem ao pixel.
-// Devolve null quando o momento não deve aparecer. EDGE = largura da troca.
-// (O momento que ENTRA tem índice maior => é pintado por cima, por isso revelar/
-// cortina/deslizar lêem-se como a frase nova a chegar sobre a anterior.)
-export function estiloMomento(transicao: Transicao | undefined, lp: number, isLast: boolean): React.CSSProperties | null {
-  const t = transicao ?? 'fundir';
-  const EDGE = 0.18;
+// ── MODELO DE SEQUÊNCIA (o bom) ────────────────────────────────────────────────
+// A Vivianne: "a transição não pode ter espaço vazio nem apagar — as pessoas fogem".
+// Este modelo TROCA de frase SOBRE a fronteira, com as duas frases a sobrepor-se: há
+// SEMPRE uma frase a cobrir o ecrã inteiro (zero preto), e a família empurrão é SÓLIDA
+// (opacity 1, sem fundido). Recebe o prog GLOBAL (0..1), o índice i e o total n — é isso
+// que permite a sobreposição (o estiloMomento antigo, por lp local, deixava um buraco
+// na fronteira). A frase que ENTRA tem índice maior => é pintada por cima.
+export function estiloSequencia(transicao: Transicao | undefined, prog: number, i: number, n: number): React.CSSProperties | null {
+  const t = transicao ?? 'deslizar';
+  const N = Math.max(1, n);
+  const w = 1 / N;
+  const T = Math.min(w * 0.32, 0.055);   // duração da troca (curta), em unidades de prog
+  const isFirst = i === 0, isLast = i === N - 1;
+  const bIn = i * w;          // fronteira onde ESTE entra (= fim do anterior)
+  const bOut = (i + 1) * w;   // fronteira onde ESTE sai
+  const clamp = (x: number) => Math.max(0, Math.min(1, x));
+  // fora das suas janelas (com meia-troca de margem), não existe.
+  if (!isFirst && prog < bIn - T / 2) return null;
+  if (!isLast && prog > bOut + T / 2) return null;
+  // fase + progresso da fase (f: 0..1)
+  let fase: 'enter' | 'hold' | 'exit' = 'hold';
+  let f = 0;
+  if (!isFirst && prog < bIn + T / 2) { fase = 'enter'; f = clamp((prog - (bIn - T / 2)) / T); }
+  else if (!isLast && prog > bOut - T / 2) { fase = 'exit'; f = clamp((prog - (bOut - T / 2)) / T); }
+  // CORTE: troca seca, sem sobreposição (cada frase "possui" a sua janela).
   if (t === 'corte') {
-    const visivel = lp > 0 && (lp < 1 || isLast);
-    return visivel ? { opacity: 1 } : null;
+    const vis = (isFirst || prog >= bIn) && (isLast || prog < bOut);
+    return vis ? { opacity: 1 } : null;
   }
-  const fin = Math.min(1, lp / EDGE);                      // entrada: 0 -> 1
-  const fout = isLast ? 1 : Math.min(1, (1 - lp) / EDGE);  // saída: 1 -> 0 (o último segura)
-  const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
-  if (op <= 0) return null;
-  const aEntrar = fin < 1;            // a chegar
-  const aSair = !aEntrar && fout < 1; // a partir
-  const sai = 1 - fout;              // 0 (ainda cá) -> 1 (foi-se), durante a saída
-  switch (t) {
-    case 'fundir':
-      return { opacity: op };
-    case 'deslizar': {               // entra da direita, sai pela esquerda
-      const x = aEntrar ? (1 - fin) * 100 : aSair ? sai * -100 : 0;
-      return { opacity: op, transform: `translateX(${x.toFixed(2)}%)` };
-    }
-    case 'deslizar-dir': {           // entra da esquerda, sai pela direita
-      const x = aEntrar ? (1 - fin) * -100 : aSair ? sai * 100 : 0;
-      return { opacity: op, transform: `translateX(${x.toFixed(2)}%)` };
-    }
-    case 'empurrar': {               // como deslizar, mas sólido (sem fundido)
-      const x = aEntrar ? (1 - fin) * 100 : aSair ? sai * -100 : 0;
-      return { opacity: 1, transform: `translateX(${x.toFixed(2)}%)` };
-    }
-    case 'virar': {                  // virar página: rotação 3D a partir da margem
-      const deg = aEntrar ? (1 - fin) * 88 : aSair ? sai * -88 : 0;
-      return { opacity: op, transform: `perspective(1600px) rotateY(${deg.toFixed(2)}deg)`, transformOrigin: deg >= 0 ? 'left center' : 'right center', backfaceVisibility: 'hidden' };
-    }
-    case 'zoom': {                   // entra maior e assenta; sai a afastar-se
-      const s = aEntrar ? 1.18 - 0.18 * fin : aSair ? 1 - 0.12 * sai : 1;
-      return { opacity: op, transform: `scale(${s.toFixed(3)})` };
-    }
-    case 'revelar': {                // pano a abrir da esquerda para a direita
-      // à entrada revela-se sólida por cima; à saída só esmorece (a nova cobre-a).
-      if (aEntrar) return { opacity: 1, clipPath: `inset(0 ${((1 - fin) * 100).toFixed(1)}% 0 0)` };
-      return { opacity: op };
-    }
-    case 'cortina': {                // abre do centro para cima e para baixo
-      if (aEntrar) { const h = ((1 - fin) * 50).toFixed(1); return { opacity: 1, clipPath: `inset(${h}% 0 ${h}% 0)` }; }
-      return { opacity: op };
+  // FUNDIR: o ÚNICO com fundido (a Vivianne sabe-o; já não é o padrão).
+  if (t === 'fundir') {
+    const op = fase === 'enter' ? f : fase === 'exit' ? 1 - f : 1;
+    return op <= 0 ? null : { opacity: op };
+  }
+  // FAMÍLIA EMPURRÃO (deslizar ←/→, empurrar): SÓLIDA. As duas frases deslizam juntas
+  // sobre a fronteira -> cobertura contínua, zero preto, zero fade.
+  if (t === 'deslizar' || t === 'deslizar-dir' || t === 'empurrar') {
+    const dir = t === 'deslizar-dir' ? -1 : 1; // ← entra da direita(+); → entra da esquerda(-)
+    let x = 0;
+    if (fase === 'enter') x = (1 - f) * 100 * dir;   // de +100·dir a 0
+    else if (fase === 'exit') x = -f * 100 * dir;    // de 0 a -100·dir
+    return { opacity: 1, transform: `translateX(${x.toFixed(2)}%)` };
+  }
+  // FAMÍLIA COBERTURA (virar/revelar/cortina/zoom): a que SAI fica parada e cheia; a que
+  // ENTRA vem POR CIMA (índice maior). Nunca há preto por baixo.
+  if (fase === 'exit') return { opacity: 1 };
+  if (fase === 'enter') {
+    switch (t) {
+      case 'revelar': return { opacity: 1, clipPath: `inset(0 ${((1 - f) * 100).toFixed(1)}% 0 0)` };
+      case 'cortina': { const h = ((1 - f) * 50).toFixed(1); return { opacity: 1, clipPath: `inset(${h}% 0 ${h}% 0)` }; }
+      case 'virar': return { opacity: 1, transform: `perspective(1600px) rotateY(${((1 - f) * 90).toFixed(1)}deg)`, transformOrigin: 'left center', backfaceVisibility: 'hidden' };
+      case 'zoom': return { opacity: f, transform: `scale(${(1.12 - 0.12 * f).toFixed(3)})` };
     }
   }
-  return { opacity: op };
+  return { opacity: 1 }; // hold
 }
 
 export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
