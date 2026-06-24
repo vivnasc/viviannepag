@@ -445,14 +445,14 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
         </div>
 
         <div className="px-4 py-3">
-          {sec === 'prever' && <PreviewBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSaveTempo={(seg) => acoes.salvarTempo(peca.slug, seg)} onSaveTransicao={(t) => acoes.salvarTransicao(peca.slug, t)} />}
+          {sec === 'prever' && <PreviewBox key={`prev-${peca.transicao}-${peca.segPorMomento}`} peca={peca} slide={slide} busy={busy} disabled={disabled} onSaveTempo={(seg) => acoes.salvarTempo(peca.slug, seg)} onSaveTransicao={(t) => acoes.salvarTransicao(peca.slug, t)} />}
           {sec === 'texto' && <TextoBox peca={peca} busy={busy} disabled={disabled} onSave={(moms) => acoes.salvarTexto(peca.slug, moms)} />}
           {sec === 'legenda' && <LegendaBox legenda={peca.legenda ?? ''} hashtags={peca.hashtags} busy={busy} disabled={disabled} onSave={(leg, tags) => acoes.salvarLegenda(peca.slug, leg, tags)} />}
           {sec === 'motion' && <MotionBox clipUrl={peca.clipUrl} busy={busy} disabled={disabled || !peca.imageUrl} onGerar={(opts) => acoes.darMovimento(peca.slug, opts)} />}
           {sec === 'som' && <SomBox peca={peca} busy={busy} disabled={disabled} onGerar={(tipo, estilo) => acoes.gerarSom(peca.slug, { tipo, estilo })} onRemover={() => acoes.gerarSom(peca.slug, { remover: true })} />}
           {sec === 'voz' && <VozBox peca={peca} busy={busy} disabled={disabled} onGerar={(modelo) => acoes.gerarVoz(peca.slug, false, modelo)} onRemover={() => acoes.gerarVoz(peca.slug, true)} />}
-          {sec === 'letras' && <TipografiaBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(t) => acoes.salvarTipografia(peca.slug, t)} />}
-          {sec === 'efeito' && <EfeitoBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(ef) => acoes.salvarEfeito(peca.slug, ef)} />}
+          {sec === 'letras' && <TipografiaBox key={`tip-${JSON.stringify(peca.tipografia)}`} peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(t) => acoes.salvarTipografia(peca.slug, t)} />}
+          {sec === 'efeito' && <EfeitoBox key={`ef-${peca.efeito}`} peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(ef) => acoes.salvarEfeito(peca.slug, ef)} />}
           {sec === 'agendar' && <AgendarBox agendadoEm={peca.agendadoEm} hora={peca.hora} contaNome={contaNome} busy={busy} disabled={disabled} onAgendar={(d, h) => acoes.agendar(peca.slug, d, h)} onDesagendar={() => acoes.desagendar(peca.slug)} />}
         </div>
       </div>
