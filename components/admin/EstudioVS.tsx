@@ -4,7 +4,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { FORMATOS_LISTA, CALENDARIO } from '@/lib/metodo-vs/formatos';
-import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia } from '@/components/admin/KineticSlide';
+import { KineticSlide, estiloMomento, EFEITOS_TEXTO, FONTES_TEXTO, TRANSICOES, type EfeitoTexto, type FonteTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { METODOVS_MUNDO, metodoVSConta, METODOVS_CONTAS_LISTA, type MetodoVSContaId } from '@/lib/metodo-vs/marca';
 import { CONTAS } from '@/lib/metodo/contas';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
@@ -27,23 +27,40 @@ type Peca = {
   momentos: string[]; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
-  efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
+  efeito: string | null; transicao: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   agendadoEm: string | null; publicado: boolean;
 };
 
 const NOME_FORMATO: Record<string, string> = Object.fromEntries(FORMATOS_LISTA.map((f) => [f.id, `${f.emoji} ${f.nome}`]));
 
+// a segunda-feira da semana de um offset (0 = esta), em componentes LOCAIS (nunca
+// toISOString — em PT recua um dia). Espelha segDaSemana() da rota de geração.
+function segundaDaSemana(offset: number): Date {
+  const x = new Date(); const wd = x.getDay();
+  x.setDate(x.getDate() + (wd === 0 ? -6 : 1 - wd) + offset * 7); x.setHours(0, 0, 0, 0);
+  return x;
+}
+const ddmm = (d: Date) => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+function rotuloSemana(offset: number): string {
+  const seg = segundaDaSemana(offset);
+  const dom = new Date(seg); dom.setDate(seg.getDate() + 6);
+  const quando = offset === 0 ? 'esta semana' : offset === 1 ? 'próxima semana' : offset < 0 ? `há ${-offset} sem.` : `daqui a ${offset} sem.`;
+  return `${quando} · ${ddmm(seg)}–${ddmm(dom)}`;
+}
+
 // PRÉ-VISUALIZAÇÃO do reel (ver ANTES de renderizar): anima prog 0→1 em loop, com o
 // efeito + tipografia da peça. Se for "vários momentos", sequencia-os (crossfade),
 // como o render vai fazer. O TEMPO POR MOMENTO é escolha dela (slider): o preview
 // anima a esse ritmo E o render usa o MESMO valor — o que vê é o que sai.
-function PreviewBox({ peca, slide, disabled, busy, onSaveTempo }: { peca: Peca; slide: typeof METODOVS_CONTAS_LISTA[number]['slide']; disabled: boolean; busy: boolean; onSaveTempo: (seg: number) => void }) {
+function PreviewBox({ peca, slide, disabled, busy, onSaveTempo, onSaveTransicao }: { peca: Peca; slide: typeof METODOVS_CONTAS_LISTA[number]['slide']; disabled: boolean; busy: boolean; onSaveTempo: (seg: number) => void; onSaveTransicao: (t: Transicao) => void }) {
   const [prog, setProg] = useState(0);
   const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
   const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
   const tip = peca.tipografia ?? undefined;
-  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 6.5);
+  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 5.5);
+  // a transição vê-se AO VIVO: muda aqui e o preview troca já (guarda para o render usar).
+  const [trans, setTrans] = useState<Transicao>((peca.transicao as Transicao | null) ?? 'deslizar');
   useEffect(() => {
     let raf = 0; let start: number | null = null;
     const dur = (moms?.length ?? 1) * seg * 1000, hold = 1200;
@@ -59,12 +76,10 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo }: { peca: Peca; 
           {moms.map((m, i) => {
             const n = moms.length, w = 1 / n;
             const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
-            const isLast = i === n - 1;
-            const fin = Math.min(1, lp / 0.18), fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
-            const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
-            if (op <= 0) return null;
+            const est = estiloMomento(trans, lp, i === n - 1);
+            if (!est) return null;
             return (
-              <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+              <div key={i} style={{ position: 'absolute', inset: 0, ...est }}>
                 <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...slide} />
               </div>
             );
@@ -77,14 +92,26 @@ function PreviewBox({ peca, slide, disabled, busy, onSaveTempo }: { peca: Peca; 
       )}
       {peca.clipUrl && <p className="text-[0.5rem] opacity-45">(o movimento vê-se no 🎬; aqui mostra-se a imagem mais o texto a animar)</p>}
       {moms && (
-        <div className="space-y-1 pt-1">
-          <label className="flex items-center gap-2 text-[0.6rem] opacity-80">
+        <div className="space-y-1.5 pt-1">
+          {/* TRANSIÇÃO entre frases (à escolha, com explicação) — vê-se já em cima */}
+          <p className="text-[0.55rem] uppercase tracking-widest opacity-50 pt-0.5">transição entre frases</p>
+          <div className="flex flex-wrap gap-1">
+            {TRANSICOES.map((t) => (
+              <button key={t.id} type="button" onClick={() => setTrans(t.id)} title={t.desc} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border"
+                style={trans === t.id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{t.label}</button>
+            ))}
+          </div>
+          <p className="text-[0.5rem] opacity-50 leading-snug">{TRANSICOES.find((t) => t.id === trans)?.desc}</p>
+          <button type="button" onClick={() => onSaveTransicao(trans)} disabled={disabled || trans === ((peca.transicao as Transicao | null) ?? 'deslizar')}
+            className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar transição'}</button>
+
+          <label className="flex items-center gap-2 text-[0.6rem] opacity-80 pt-1">
             <span className="opacity-60 whitespace-nowrap">tempo / momento</span>
             <input type="range" min={3} max={12} step={0.5} value={seg} onChange={(e) => setSeg(Number(e.target.value))} className="flex-1 accent-current" style={{ color: dz }} />
             <span className="tabular-nums w-9 text-right">{seg.toFixed(1)}s</span>
           </label>
           <p className="text-[0.5rem] opacity-45">{moms.length} momentos × {seg.toFixed(1)}s ≈ <b>{Math.round(seg * moms.length)}s</b> de reel. Arrasta e vê em cima; guarda para o render usar o mesmo.</p>
-          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 6.5)}
+          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 5.5)}
             className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tempo'}</button>
         </div>
       )}
@@ -301,6 +328,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     darMovimento: (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void;
     gerarSom: (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'musica'; estilo?: string }) => void;
     salvarEfeito: (slug: string, efeito: EfeitoTexto) => void;
+    salvarTransicao: (slug: string, t: Transicao) => void;
     salvarTipografia: (slug: string, t: Tipografia) => void;
     salvarTempo: (slug: string, seg: number) => void;
     novaImagem: (slug: string) => void;
@@ -361,7 +389,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
         </div>
 
         <div className="px-4 py-3">
-          {sec === 'prever' && <PreviewBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSaveTempo={(seg) => acoes.salvarTempo(peca.slug, seg)} />}
+          {sec === 'prever' && <PreviewBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSaveTempo={(seg) => acoes.salvarTempo(peca.slug, seg)} onSaveTransicao={(t) => acoes.salvarTransicao(peca.slug, t)} />}
           {sec === 'texto' && <TextoBox peca={peca} busy={busy} disabled={disabled} onSave={(moms) => acoes.salvarTexto(peca.slug, moms)} />}
           {sec === 'legenda' && <LegendaBox legenda={peca.legenda ?? ''} hashtags={peca.hashtags} busy={busy} disabled={disabled} onSave={(leg, tags) => acoes.salvarLegenda(peca.slug, leg, tags)} />}
           {sec === 'motion' && <MotionBox clipUrl={peca.clipUrl} busy={busy} disabled={disabled || !peca.imageUrl} onGerar={(opts) => acoes.darMovimento(peca.slug, opts)} />}
@@ -426,6 +454,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [erro, setErro] = useState<string | null>(null);
   const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
   const [estudioSlug, setEstudioSlug] = useState<string | null>(null);
+  const [offset, setOffset] = useState(0); // 0 = esta semana; ▶ para semanas futuras (produzir e pré-datar)
 
   const recarregar = useCallback(() => {
     fetch(`/api/admin/metodo-vs/list?conta=${cfg.id}`).then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -501,6 +530,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
 
   const salvarLegenda = useCallback((slug: string, legenda: string, hashtags: string) => salvarEditar(slug, { legenda, hashtags }, 'Legenda guardada.'), [salvarEditar]);
   const salvarEfeito = useCallback((slug: string, efeito: EfeitoTexto) => salvarEditar(slug, { efeito }, 'Efeito guardado. O reel usa-o no render.'), [salvarEditar]);
+  const salvarTransicao = useCallback((slug: string, transicao: Transicao) => salvarEditar(slug, { transicao }, 'Transição guardada. O reel troca de frase assim.'), [salvarEditar]);
   const salvarTipografia = useCallback((slug: string, tipografia: Tipografia) => salvarEditar(slug, { tipografia }, 'Tipografia guardada.'), [salvarEditar]);
   const salvarTempo = useCallback((slug: string, segPorMomento: number) => salvarEditar(slug, { segPorMomento }, 'Tempo guardado. O render usa este ritmo.'), [salvarEditar]);
 
@@ -582,12 +612,18 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         <p className="text-[0.84rem] opacity-75 mb-1">{ancoraDesc}</p>
         <p className="text-[0.7rem] opacity-45 mb-5">Cada peça tem o estúdio completo: prever, texto, legenda, motion, som, tempo, render, agendar. Publica em <b>@{contaNome}</b>. Carrega «✦ estúdio» num cartão.</p>
 
-        {/* CALENDÁRIO · a semana toda de uma vez */}
+        {/* CALENDÁRIO · a semana toda de uma vez, com navegação ◀▶ (produzir e pré-datar futuras) */}
         <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 mb-4">
           <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
-            <p className="text-[0.66rem] uppercase tracking-widest opacity-50">o calendário da semana · {CALENDARIO.length} posts</p>
-            <button onClick={() => chamar({ semana: true, offset: 0 }, 'semana')} disabled={!!busy} className="px-3 py-1.5 rounded-lg font-medium text-[0.78rem] disabled:opacity-50" style={{ background: cfg.cor, color: '#0F0F1A' }}>{busy === 'semana' ? 'a produzir a semana…' : '✦ produzir a semana toda'}</button>
+            <div className="flex items-center gap-1.5">
+              <button onClick={() => setOffset((o) => Math.max(-8, o - 1))} disabled={!!busy || offset <= -8} className="w-6 h-6 rounded-lg border border-white/20 text-[0.7rem] disabled:opacity-30" title="semana anterior">◀</button>
+              <span className="text-[0.66rem] uppercase tracking-widest opacity-70 min-w-[11rem] text-center" style={{ color: offset === 0 ? undefined : cfg.cor }}>{rotuloSemana(offset)}</span>
+              <button onClick={() => setOffset((o) => Math.min(12, o + 1))} disabled={!!busy || offset >= 12} className="w-6 h-6 rounded-lg border border-white/20 text-[0.7rem] disabled:opacity-30" title="semana seguinte">▶</button>
+              {offset !== 0 && <button onClick={() => setOffset(0)} disabled={!!busy} className="text-[0.58rem] px-1.5 py-0.5 rounded border border-white/15 opacity-70">hoje</button>}
+            </div>
+            <button onClick={() => chamar({ semana: true, offset }, 'semana')} disabled={!!busy} className="px-3 py-1.5 rounded-lg font-medium text-[0.78rem] disabled:opacity-50" style={{ background: cfg.cor, color: '#0F0F1A' }}>{busy === 'semana' ? 'a produzir a semana…' : offset === 0 ? '✦ produzir a semana toda' : '✦ produzir e pré-datar'}</button>
           </div>
+          <p className="text-[0.55rem] opacity-45 mb-2">{CALENDARIO.length} posts · {offset > 0 ? 'gera já a semana futura e deixa cada post com a data certa (depois é só agendar no estúdio).' : 'salta os dias que já passaram e os que já existem.'}</p>
           <div className="flex flex-wrap gap-1.5">
             {CALENDARIO.map((s, i) => (
               <span key={i} className="text-[0.6rem] px-2 py-1 rounded-lg border border-white/12 opacity-75" title={`${s.nome} · ${s.hora}`}>{['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][s.wd]} {s.hora.slice(0, 5)} · {NOME_FORMATO[s.formato] ?? s.formato}</span>
@@ -619,7 +655,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       {pecaAberta && (
         <Estudio
           peca={pecaAberta} slide={slide} contaNome={contaNome} acaoSlug={acaoSlug} onFechar={() => setEstudioSlug(null)}
-          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, salvarEfeito, salvarTipografia, salvarTempo, novaImagem, renderizar, agendar, desagendar }}
+          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, salvarEfeito, salvarTransicao, salvarTipografia, salvarTempo, novaImagem, renderizar, agendar, desagendar }}
         />
       )}
     </main>

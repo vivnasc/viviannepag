@@ -22,7 +22,7 @@ export async function GET(req: Request) {
 
   type Slide = {
     texto?: string; conceito?: string; destaque?: string[]; notaVisual?: string | null;
-    imageUrl?: string | null; efeito?: string | null;
+    imageUrl?: string | null; efeito?: string | null; transicao?: string | null;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string } | null;
     segPorMomento?: number | null;
   };
@@ -57,6 +57,7 @@ export async function GET(req: Request) {
       somTipo: row.theme?.soulab?.somTipo ?? null,
       somEstilo: row.theme?.soulab?.somEstilo ?? null,
       efeito: slide?.efeito ?? null,
+      transicao: slide?.transicao ?? null,
       tipografia: slide?.tipografia ?? null,
       segPorMomento: slide?.segPorMomento ?? null,
       legenda: row.dias?.[0]?.legenda ?? null,

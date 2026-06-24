@@ -36,6 +36,40 @@ export const EFEITOS_TEXTO: { id: EfeitoTexto; label: string }[] = [
   { id: 'bloom', label: '✺ bloom luminoso' },
 ];
 
+// a TRANSIÇÃO entre momentos (de uma frase para a seguinte). É DIFERENTE do efeito:
+// o efeito é COMO cada frase se revela; a transição é COMO se troca de frase. À
+// escolha da Vivianne, com descrição (para saber o que escolhe). 'deslizar' é o
+// novo padrão: a frase nova entra da DIREITA e a anterior sai pela esquerda.
+export type Transicao = 'deslizar' | 'fundir' | 'corte';
+export const TRANSICOES: { id: Transicao; label: string; desc: string }[] = [
+  { id: 'deslizar', label: '⇠ deslizar', desc: 'a frase nova entra a deslizar da direita; a anterior sai pela esquerda (como virar a página)' },
+  { id: 'fundir', label: '◍ fundir', desc: 'as frases cruzam-se num fundido suave (uma esmorece enquanto a outra acende)' },
+  { id: 'corte', label: '⇥ corte seco', desc: 'troca direta, sem fundido nem deslize: cada frase aparece de uma vez' },
+];
+
+// O ESTILO do CONTENTOR de cada momento numa sequência, dado o progresso DENTRO do
+// momento (lp 0..1), se é o último, e a transição escolhida. Centralizado aqui para
+// a pré-visualização (EstudioVS) e o render (render-veu) coincidirem ao pixel.
+// Devolve null quando o momento não deve aparecer. EDGE = largura da troca.
+export function estiloMomento(transicao: Transicao | undefined, lp: number, isLast: boolean): { opacity: number; transform?: string } | null {
+  const t = transicao ?? 'fundir';
+  const EDGE = 0.18;
+  if (t === 'corte') {
+    const visivel = lp > 0 && (lp < 1 || isLast);
+    return visivel ? { opacity: 1 } : null;
+  }
+  const fin = Math.min(1, lp / EDGE);                      // entrada
+  const fout = isLast ? 1 : Math.min(1, (1 - lp) / EDGE);  // saída (o último segura)
+  const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
+  if (op <= 0) return null;
+  if (t === 'deslizar') {
+    // entra de +100% (direita) durante a entrada; sai para -100% (esquerda) na saída.
+    const x = fin < 1 ? (1 - fin) * 100 : (isLast ? 0 : (1 - fout) * -100);
+    return { opacity: op, transform: `translateX(${x.toFixed(2)}%)` };
+  }
+  return { opacity: op }; // fundir
+}
+
 export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   // o EFEITO do texto (à escolha): máquina de escrever · bloom luminoso · fade

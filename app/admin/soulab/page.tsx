@@ -244,7 +244,7 @@ function PreviewBox({ peca, disabled, busy, onSaveTempo }: { peca: Peca; disable
   const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
   const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
   const tip = peca.tipografia ?? undefined;
-  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 6.5);
+  const [seg, setSeg] = useState<number>(peca.segPorMomento ?? 5.5);
   const dz = SOULAB.paleta.destaque, bg2 = SOULAB.paleta.bg2;
   useEffect(() => {
     let raf = 0; let start: number | null = null;
@@ -289,7 +289,7 @@ function PreviewBox({ peca, disabled, busy, onSaveTempo }: { peca: Peca; disable
             <span className="tabular-nums w-9 text-right">{seg.toFixed(1)}s</span>
           </label>
           <p className="text-[0.5rem] opacity-45">{moms.length} momentos × {seg.toFixed(1)}s ≈ <b>{Math.round(seg * moms.length)}s</b> de reel. Arrasta e vê em cima; guarda para o render usar o mesmo.</p>
-          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 6.5)}
+          <button type="button" onClick={() => onSaveTempo(seg)} disabled={disabled || seg === (peca.segPorMomento ?? 5.5)}
             className="w-full text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a guardar…' : '💾 guardar tempo'}</button>
         </div>
       )}

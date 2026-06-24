@@ -12,7 +12,7 @@ import { InfograficoSlide } from '@/components/admin/InfograficoSlide';
 import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
-import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/admin/KineticSlide';
+import { KineticSlide, estiloMomento, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
 import { slideDaMarca, ehMarcaMetodoVS } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
@@ -101,23 +101,22 @@ function Sequencia({ beats, clipUrl, imageUrl, conta, conceito, veuReveal, prog,
 // crossfade — mesmo padrão da Sequencia, mas com o KineticSlide (marca Soulab) e
 // fundo de imagem (sem clip, para o seek do render se manter simples). O efeito e a
 // tipografia vêm do 1.º slide (onde a Vivianne os guarda) e aplicam-se a todos.
-function SoulabMomentos({ slides, prog, mundo, clipUrl, slideProps = SOULAB_SLIDE }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo; clipUrl?: string; slideProps?: typeof SOULAB_SLIDE }) {
+function SoulabMomentos({ slides, prog, mundo, clipUrl, slideProps = SOULAB_SLIDE, transicaoFallback = 'fundir' }: { slides: (Slide & { imageUrl?: string })[]; prog: number; mundo: Mundo; clipUrl?: string; slideProps?: typeof SOULAB_SLIDE; transicaoFallback?: Transicao }) {
   const n = Math.max(1, slides.length);
   const w = 1 / n;
-  const s0 = slides[0] as (Slide & { efeito?: EfeitoTexto; tipografia?: Tipografia }) | undefined;
+  const s0 = slides[0] as (Slide & { efeito?: EfeitoTexto; tipografia?: Tipografia; transicao?: Transicao }) | undefined;
   const efeito = s0?.efeito;
   const tipografia = s0?.tipografia;
+  const transicao = s0?.transicao ?? transicaoFallback; // método => 'deslizar'; Soulab => 'fundir' (inalterado)
   return (
     <div style={{ position: 'relative', width: 1080, height: 1920, background: '#000', overflow: 'hidden' }}>
       {slides.map((sl, i) => {
         const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
         const isLast = i === n - 1;
-        const fin = Math.min(1, lp / 0.18);
-        const fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
-        const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
-        if (op <= 0) return null;
+        const est = estiloMomento(transicao, lp, isLast);
+        if (!est) return null;
         return (
-          <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
+          <div key={i} style={{ position: 'absolute', inset: 0, ...est }}>
             <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...slideProps} />
           </div>
         );
@@ -322,7 +321,7 @@ export default function RenderVeuPage() {
       {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
           que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
       {estado && ehKinetic && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
-        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} />
+        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
       )}
       {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
         <KineticSlide

@@ -29,18 +29,24 @@ export interface PecaVS {
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
 
+// A IDENTIDADE VISUAL do Método VS — é isto que torna as imagens DELA e não stock.
+// Usa-se em TODAS as imagens (reel e manhã), por cima da conexão com a frase.
+const METODO_IDENTIDADE =
+`IDENTIDADE VISUAL DO MÉTODO VS (obrigatória em TODA a imagem; é a MARCA, é o que a distingue de stock genérico): luz natural suave e difusa, muitas vezes a atravessar cortinas finas, tecido leve ou um véu; paleta quente e neutra (linho, aveia, creme, areia, um toque de ouro velho); espaços íntimos do dia-a-dia (casa, quarto, mesa, janela, chão), vividos e imperfeitos, com história; a sensação de algo a ser suavemente desvelado; grão de filme subtil e calor analógico, com ALMA. NUNCA foto de stock limpa, polida e sem vida. É sempre este mundo, reconhecível.`;
+
 const REVELACAO =
 `O QUE ISTO É (o mais importante): revelas um padrão humano invisível. NÃO descreves comportamentos ("releste a mensagem"), NÃO interpretas um episódio, NÃO explicas ("é uma estratégia de sobrevivência"). Dás um NOME NOVO a algo que a pessoa viveu a vida inteira, vestido de vida, até a história mudar de significado. A pessoa pensa "nunca tinha visto isto assim", nunca "isto acontece-me".
 
 REGRAS:
 - 3.ª PESSOA ("há pessoas que…", "chamam-lhe…", "chamaram-te…"), NUNCA "tu fazes". O reconhecimento nasce de dentro de quem lê.
-- DESCOBERTA em vez de explicação. "Talvez", suavidade. Tira a vergonha: nunca é drama nem defeito.
+- DESCOBERTA em vez de explicação, com suavidade. VARIA os arranques: NÃO comeces sempre por "Talvez" nem repitas a mesma fórmula; abre de formas diferentes (uma afirmação serena, uma imagem, uma pergunta, "há quem…"). "Talvez" no máximo de longe a longe.
+- Tira a vergonha: nunca é drama nem defeito.
 - PROIBIDO o jargão de terapeuta: trauma, mecanismo, padrão, parentificação, sobrevivência, estratégia, hipervigilância, regulação, ego, consciência, cura, jornada, véu. Linguagem da vida, sempre.
 - Ritmo de RESPIRAÇÃO: linhas de 1 a 8 palavras. 6 a 10 linhas. A 1.ª linha agarra (o scroll dura meio segundo).
 - Português europeu, sem travessões, sem aspas.
 - TESTE: se a peça pudesse estar numa conta qualquer de ansiedade, psicologia ou desenvolvimento, está ERRADA.`;
 
-const lp_img = 'arte conceptual fotográfica de gama alta, CLARA E AREJADA, com luz de dia suave, contemporânea e premium (como uma foto editorial de revista), que evoca o SENTIDO da peça sem o ilustrar à letra. PROIBIDO: velas, chamas, halos, auréolas, santos, sagrado, escuro ou soturno, pessoas a posar, rostos, texto. Termina com: bright airy editorial fine-art photography, natural daylight, premium, vertical 9:16.';
+const lp_img = `A imagem ENCARNA a frase (a cena concreta que ela evoca: o sítio, o objeto, o momento), nunca um objeto bonito ao acaso. ${METODO_IDENTIDADE} PROIBIDO: velas, chamas, halos, auréolas, santos, sagrado, escuro ou soturno, pessoas a posar, rostos, texto, ar de stock. Termina com: intimate film-grain fine-art photography, soft natural daylight through sheer fabric, warm neutral palette, analog warmth, vertical 9:16.`;
 
 // A MANHÃ (formato 'dissolucao'): NÃO um reel da revelação, mas UM frame, UMA frase —
 // o sinal de um véu a dissolver-se. O lado do SOLTAR: nu, sereno, leve. Tratado à parte.
@@ -57,8 +63,10 @@ ${f.materia(k)}
 ${ancora ? `\n${ancora}\n` : ''}
 REGRAS:
 - UMA frase só (1 a 2 linhas curtas, no máximo). Sem "chamam-lhe", sem listas, sem sequência.
+- CLARA, não enigmática: a pessoa entende à primeira leitura. Concreta, da vida real. Se uma amiga perguntasse "isso quer dizer o quê?", a frase já se explicava sozinha. NADA de jogos de palavras vagos do tipo "estás de fora ou ainda não entraste", que ninguém percebe.
 - Uma verdade pequena que liberta: o peso que se pode pousar, a permissão de não merecer o cuidado, quem se é por baixo do que se aprendeu a ser.
-- 3.ª pessoa ou universal ("nem todo o peso que sentes nasceu em ti"). Suave, "talvez", sem certeza fria.
+- 3.ª pessoa ou universal, serena, sem certeza fria.
+- VARIA o arranque, é o mais importante: NÃO comeces por "Talvez" (gastou-se) e NUNCA uses "talvez" duas vezes na mesma frase. Cada dia abre de uma forma diferente: umas vezes uma afirmação calma, outras uma permissão direta ("podes…"), outras uma constatação serena, outras uma imagem do dia-a-dia, outras uma pergunta leve. "Talvez" só de longe a longe, no máximo.
 - PROIBIDO jargão de terapeuta (trauma, sobrevivência, padrão, mecanismo, véu, cura). Linguagem da vida.
 - Português europeu, sem travessões, sem aspas.
 ${evitar.length ? `\nNÃO repitas estas já usadas: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
@@ -105,7 +113,7 @@ ${f.materia(k)}
 ${ancora ? `\n${ancora}\n` : ''}
 ${REVELACAO}
 
-IMAGEM (campo "fundoPrompt", em INGLÊS): a imagem TEM de ENCARNAR a frase desta peça, nunca um objeto bonito ao acaso. Lê a 1.ª linha (a faca) e escolhe a CENA concreta que ela evoca: o sítio, o objeto, o momento de vida de hoje que vive por baixo da frase. REGRA DURA (anti-desligado): é PROIBIDO um fundo bonito que NÃO tenha a ver com a frase. Ex.: frase sobre não saber parar -> uma chávena de café a arrefecer numa secretária cheia ao fim do dia; sobre adiar a vida -> uma porta entreaberta, um limiar; sobre carregar tudo -> uma mesa por arrumar depois de todos saírem. Concreto e sensorial, SEM pessoas, SEM rostos. Estilo: arte conceptual fotográfica de gama alta, CLARA E AREJADA, luz de dia, contemporânea e premium (foto editorial de revista). PROIBIDO: velas, chamas, halos, auréolas, santos, sagrado, escuro ou soturno, texto. Termina com: bright airy editorial fine-art photography, natural daylight, premium, vertical 9:16.
+IMAGEM (campo "fundoPrompt", em INGLÊS): a imagem TEM de ENCARNAR a frase desta peça, nunca um objeto bonito ao acaso. Lê a 1.ª linha (a faca) e escolhe a CENA concreta que ela evoca: o sítio, o objeto, o momento de vida de hoje que vive por baixo da frase. REGRA DURA (anti-desligado): é PROIBIDO um fundo bonito que NÃO tenha a ver com a frase. Ex.: frase sobre não saber parar -> uma chávena de café a arrefecer numa secretária cheia ao fim do dia; sobre adiar a vida -> uma porta entreaberta, um limiar; sobre carregar tudo -> uma mesa por arrumar depois de todos saírem. Concreto e sensorial, SEM pessoas, SEM rostos. ${METODO_IDENTIDADE} PROIBIDO: velas, chamas, halos, auréolas, santos, sagrado, escuro ou soturno, texto, ar de stock. Termina com: intimate film-grain fine-art photography, soft natural daylight through sheer fabric, warm neutral palette, analog warmth, vertical 9:16.
 ${evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 Devolve APENAS JSON válido, sem texto à volta: {"momentos":["linha 1 (a faca)","linha 2","…"],"destaque":["1 a 3 palavras-chave a realçar"],"conceito":"selo curto, 1 a 3 palavras","fundoPrompt":"prompt da imagem em inglês","legenda":"legenda do Instagram em parágrafos curtos separados por linha em branco, na mesma voz da revelação, sem explicar nem usar jargão; termina com um convite leve"}`;
