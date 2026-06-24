@@ -83,28 +83,16 @@ export async function gerarVoz(texto: string, slug: string, opts: VozOpts = {}):
   if (!key) throw new Error('falta ELEVENLABS_API_KEY');
   if (!voiceId) throw new Error('falta ELEVENLABS_VOICE_ID (a tua voz clonada)');
 
-  // VOZ EXPRESSIVA: pedida com expressiva=true OU dando uma emoção. Usa o eleven_v3 e
-  // tece audio tags no texto FALADO (não no karaokê — esse vem dos slides). stability
-  // ALTO + similarity ALTO + speaker_boost = trava a deriva do v3 para o sotaque
-  // brasileiro. Default (sem expressiva): o caminho estável de sempre (v2).
+  // REGRA DA VIVIANNE (à força): a SUA voz natural (PT-PT) só sai bem com o eleven_v3 PURO,
+  // SEM voice_settings, SEM language_code, sem mexer em NADA. QUALQUER parametrização
+  // (stability/similarity/style/speaker_boost OU o multilingual_v2) puxa-a para o sotaque
+  // brasileiro. Por isso: v3 puro, texto tal e qual. NÃO voltar a meter voice_settings.
+  // A expressão (opcional, só se pedida) faz-se APENAS com audio tags no texto falado —
+  // nunca com settings; mantém o v3 puro.
   const expressiva = opts.expressiva === true || !!opts.emocao;
   const emocao: EmocaoVoz = opts.emocao ?? 'serena';
   const textoFalado = expressiva ? texComTags(texto, emocao) : texto;
-  const corpo = expressiva
-    ? {
-        text: textoFalado,
-        model_id: 'eleven_v3',
-        // stability alto = trava a deriva de sotaque do v3; similarity alto = agarra-se à
-        // voz clonada (PT-PT); speaker_boost reforça-a. SEM language_code (puxa p/ brasileiro).
-        voice_settings: { stability: 0.6, similarity_boost: 0.9, use_speaker_boost: true },
-      }
-    : {
-        text: textoFalado,
-        model_id: 'eleven_multilingual_v2',
-        // similarity ALTO = agarra-se ao sotaque da voz clonada (PT-PT); stability médio-alto
-        // = consistente entre gerações (sem oscilar p/ brasileiro); style 0 = sem dramatizar.
-        voice_settings: { stability: 0.55, similarity_boost: 0.9, style: 0, use_speaker_boost: true },
-      };
+  const corpo = { text: textoFalado, model_id: 'eleven_v3' };
 
   const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/with-timestamps`, {
     method: 'POST',

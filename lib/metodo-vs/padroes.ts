@@ -49,7 +49,7 @@ export function padroesDefault(conta: ContaId): PadroesVS {
     tamanho: 92,
     cor: '#F4ECDD',
     corDestaque: CONTAS[conta]?.cor ?? '#EBAE4A',
-    vozExpressiva: true,
+    vozExpressiva: false, // PURO por defeito (v3 sem nada) — é a voz natural da Vivianne.
     vozEmocao: 'serena',
     vozTardeAuto: false,
   };

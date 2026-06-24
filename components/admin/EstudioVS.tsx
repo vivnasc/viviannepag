@@ -576,7 +576,7 @@ function PadroesPanel({ conta, cor, offset, rotuloSem, onAplicado }: { conta: Me
           <div className="space-y-1.5">
             <p className="text-[0.55rem] uppercase tracking-widest opacity-45">voz</p>
             <div className="flex flex-wrap items-center gap-1.5">
-              <label className="flex items-center gap-1"><input type="checkbox" checked={p.vozExpressiva} onChange={(e) => set('vozExpressiva', e.target.checked)} style={{ accentColor: cor }} /> expressiva (humana, com emoção)</label>
+              <label className="flex items-center gap-1" title="DESLIGADO = v3 puro, a tua voz natural (recomendado). LIGADO = acrescenta marcação emocional via tags (pode oscilar o sotaque)."><input type="checkbox" checked={p.vozExpressiva} onChange={(e) => set('vozExpressiva', e.target.checked)} style={{ accentColor: cor }} /> expressiva (emoção) · desligado = voz pura</label>
               <span className="opacity-55 ml-1">emoção:</span>
               {EMOCOES_VOZ.map((em) => (
                 <button key={em.id} type="button" onClick={() => set('vozEmocao', em.id)} className="text-[0.58rem] px-1.5 py-0.5 rounded-full border" style={chip(p.vozEmocao === em.id)}>{em.label}</button>
