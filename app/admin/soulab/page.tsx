@@ -317,6 +317,8 @@ export default function SoulabPage() {
   const [somOpen, setSomOpen] = useState<string | null>(null);
   const [tipoOpen, setTipoOpen] = useState<string | null>(null);
   const [previewOpen, setPreviewOpen] = useState<string | null>(null);
+  const [sel, setSel] = useState<Set<string>>(new Set());
+  const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina');
 
   const recarregar = useCallback(() => {
     fetch('/api/admin/soulab/list').then((r) => (r.ok ? r.json() : { pecas: [] })).then((j) => setPecas(j.pecas ?? [])).catch(() => {});
@@ -474,6 +476,32 @@ export default function SoulabPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
+  // ── SELEÇÃO MÚLTIPLA + barra de ferramentas em lote (motion, efeito, som, render…) ──
+  const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
+  const emLote = useCallback(async (faz: (slug: string) => Promise<Response>, etiqueta: string, podePublicada = true) => {
+    if (acaoSlug || busy || !sel.size) return;
+    const alvos = pecas.filter((p) => sel.has(p.slug) && (podePublicada || !p.publicado)).map((p) => p.slug);
+    if (!alvos.length) { setSel(new Set()); return; }
+    setBusy(true); setErro(null); setMsg(`${etiqueta} · 0/${alvos.length}…`);
+    let feitos = 0;
+    for (const slug of alvos) {
+      try { const r = await faz(slug); if (r.ok) feitos++; } catch { /* segue */ }
+      setMsg(`${etiqueta} · ${feitos}/${alvos.length}…`);
+    }
+    setMsg(`${etiqueta}: ${feitos}/${alvos.length} feito(s).`);
+    setSel(new Set()); setBusy(false); recarregar();
+  }, [acaoSlug, busy, sel, pecas, recarregar]);
+
+  const motionLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Dar MOTION de vídeo (Kling) às ${sel.size} selecionada(s)? 1-3 min cada. Não feches. (salta sem imagem ou com vídeo.)`)) return;
+    return emLote((slug) => { const p = pecas.find((x) => x.slug === slug); if (!p?.imageUrl || p.clipUrl) return Promise.resolve(new Response(null, { status: 200 })); return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave' }) }); }, 'A dar motion');
+  }, [emLote, pecas, sel]);
+  const efeitoLoteAplicar = useCallback(() => emLote((slug) => fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, efeito: efeitoLote }) }), 'A aplicar efeito'), [emLote, efeitoLote]);
+  const somLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Gerar SOM da cena nas ${sel.size} selecionada(s)? (salta sem imagem)`)) return; return emLote((slug) => { const p = pecas.find((x) => x.slug === slug); if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) }); }, 'A gerar som'); }, [emLote, pecas, sel]);
+  const imagemLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Trocar a imagem das ${sel.size} selecionada(s)?`)) return; return emLote((slug) => fetch('/api/admin/soulab/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A trocar imagem'); }, [emLote, sel]);
+  const renderLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Renderizar (MP4) as ${sel.size} selecionada(s)? Corre nos GitHub Actions; minutos.`)) return; return emLote((slug) => fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) }), 'A disparar render'); }, [emLote, sel]);
+  const apagarLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Descartar ${sel.size} selecionada(s)? (salta publicadas)`)) return; return emLote((slug) => fetch('/api/admin/soulab/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A descartar', false); }, [emLote, sel]);
+
   const estadoDe = (p: Peca): 'por-agendar' | 'agendadas' | 'publicadas' => p.publicado ? 'publicadas' : p.agendadoEm ? 'agendadas' : 'por-agendar';
   const cont = {
     'por-agendar': pecas.filter((p) => estadoDe(p) === 'por-agendar').length,
@@ -583,11 +611,35 @@ export default function SoulabPage() {
 
           {pecas.length === 0 && <p className="text-[0.78rem] opacity-50">Ainda nada. Escolhe um ângulo e carrega &quot;gerar&quot;.</p>}
           {pecas.length > 0 && pecasOrdenadas.length === 0 && <p className="text-[0.76rem] opacity-50">Nada neste separador/filtro.</p>}
+
+          {/* BARRA DE FERRAMENTAS · seleção múltipla (motion, efeito, som, render… em lote) */}
+          {sel.size > 0 && (
+            <div className="sticky top-2 z-30 mb-3 rounded-xl border p-2.5 flex items-center gap-1.5 flex-wrap" style={{ borderColor: SOULAB.paleta.destaque, background: 'rgba(20,18,28,0.96)', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+              <span className="text-[0.72rem] font-medium" style={{ color: SOULAB.paleta.destaque }}>{sel.size} selecionada(s)</span>
+              <button onClick={() => setSel(new Set())} className="text-[0.58rem] px-1.5 py-0.5 rounded-lg border border-white/20 opacity-75">limpar</button>
+              <span className="opacity-30">·</span>
+              <button onClick={motionLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (Kling); 1-3 min cada">🎬 motion</button>
+              <button onClick={imagemLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">🖼 imagem</button>
+              <button onClick={somLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="som da cena (salta sem imagem)">🔊 som</button>
+              <span className="inline-flex items-center gap-1">
+                <select value={efeitoLote} onChange={(e) => setEfeitoLote(e.target.value as EfeitoTexto)} className="text-[0.6rem] px-1 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: SOULAB.paleta.texto }}>
+                  {EFEITOS_TEXTO.map((ef) => <option key={ef.id} value={ef.id}>{ef.label}</option>)}
+                </select>
+                <button onClick={efeitoLoteAplicar} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>✶ efeito</button>
+              </span>
+              <button onClick={renderLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">🎞 render</button>
+              <button onClick={apagarLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 descartar</button>
+            </div>
+          )}
+
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {pecasOrdenadas.map((p) => (
-              <div key={p.slug} className="rounded-xl border border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
+              <div key={p.slug} className="rounded-xl border overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', borderColor: sel.has(p.slug) ? SOULAB.paleta.destaque : 'rgba(255,255,255,0.1)' }}>
                 <div className="relative">
                   <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...SOULAB_SLIDE} />
+                  <button onClick={() => toggleSel(p.slug)} title={sel.has(p.slug) ? 'tirar da seleção' : 'selecionar'}
+                    className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10"
+                    style={sel.has(p.slug) ? { background: SOULAB.paleta.destaque, borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
                   <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}</span>
                   {p.publicado
                     ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
