@@ -52,14 +52,16 @@ export async function gerarCenaImagem(texto: string, apiKey: string, evitar: str
   return lp(t).replace(/^["'«»]+|["'«»]+$/g, '').trim();
 }
 
-// O ESTILO que vai ao FLUX. REGRA APRENDIDA À FORÇA: o Flux 1.1 Pro NÃO tem prompt
-// negativo; escrever "no fabric, no cups" no prompt INVOCA tecido e chávenas (o modelo
-// lê os nomes como o que deve desenhar). Por isso AQUI é tudo POSITIVO — nenhuma palavra
-// proibida. O que afasta os clichés é pedir UM só sujeito, minimalista e SEM TRALHA, e a
-// cena vem do Claude já limpa (é ao Claude, que percebe o "não", que se diz o que evitar).
+// O que vai ao FLUX. DUAS regras aprendidas à força:
+//  1) o Flux NÃO tem prompt negativo: escrever "no fabric/no cups" INVOCA tecido e chávenas
+//     (lê os nomes como o que deve desenhar). Por isso AQUI é tudo POSITIVO, zero proibições;
+//     o que evitar diz-se só ao Claude (que percebe o "não" e escreve outra cena).
+//  2) a Vivianne NÃO pediu estilo nenhum — pediu VIDA e VARIEDADE. Por isso NÃO impomos uma
+//     estética (nada de "muted/moody/film dos anos 70/desbotado"): só garantimos um sujeito
+//     claro, luz bonita, profundidade e que esteja VIVO. A variedade vem da cena (do Claude).
 export function promptImagemVS(cena: string): string {
   const c = String(cena ?? '').trim().replace(/\s+/g, ' ');
-  return `${c}. A single clear, specific subject, minimal and uncluttered, with generous empty space around it. Fine-art editorial photograph on warm analog 35mm film: soft natural directional light, gentle long shadows, muted warm desaturated tones of amber, honey, ochre, sand and warm brown; fine film grain and faint halation; shallow depth of field with a sharp foreground and a soft deep background. Calm, quiet, evocative, unexpected. Vertical 9:16 portrait.`;
+  return `${c}. A single clear, specific subject, alive and full of atmosphere, in beautiful natural light with real depth and dimension; vivid, evocative and cinematic, high quality, with some breathing space around it. Vertical 9:16 portrait.`;
 }
 
 const REVELACAO =

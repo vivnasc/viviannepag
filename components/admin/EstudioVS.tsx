@@ -804,6 +804,32 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     return fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: p.agendadoEm.slice(0, 10), hora: p.hora || '11:00', aprovado: true }) });
   }, 'A agendar', false), [emLote, pecas]);
 
+  // O ESTÚDIO INTEIRO em lote (a Vivianne: "todas as ações do estúdio cá fora p/ aplicar a
+  // vários"). Cada uma corre a sua rota por peça (emLote, sequencial no cliente).
+  const regerarTextoLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Regerar o TEXTO (revelação nova + imagem nova) das ${sel.size} selecionada(s)? Gasta geração. Salta publicadas.`)) return;
+    return emLote((slug) => fetch('/api/admin/metodo-vs/regerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A regerar texto', false);
+  }, [emLote, sel]);
+
+  const imagemLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Trocar a IMAGEM (cena nova) das ${sel.size} selecionada(s)?`)) return;
+    return emLote((slug) => fetch('/api/admin/metodo-vs/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A trocar imagem');
+  }, [emLote, sel]);
+
+  const vozLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Gerar VOZ (a tua, v3 puro) nas ${sel.size} selecionada(s)? Salta publicadas.`)) return;
+    return emLote((slug) => fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A gerar voz', false);
+  }, [emLote, sel]);
+
+  const somLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Gerar SOM ambiente da cena nas ${sel.size} selecionada(s)? (salta as que não têm imagem)`)) return;
+    return emLote((slug) => {
+      const p = pecas.find((x) => x.slug === slug);
+      if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 }));
+      return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) });
+    }, 'A gerar som');
+  }, [emLote, pecas, sel]);
+
   // RENDER em lote: dispara o MP4 final (GitHub Actions) de cada selecionada. O dispatch é
   // rápido; cada MP4 aparece daqui a alguns minutos. Salta as que ainda não têm imagem.
   const renderLote = useCallback(() => {
@@ -953,23 +979,32 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
 
         {/* BARRA DE FERRAMENTAS · seleção múltipla (edições em lote / apagar) */}
         {sel.size > 0 && (
-          <div className="sticky top-2 z-30 mb-3 rounded-xl border p-2.5 flex items-center gap-2 flex-wrap" style={{ borderColor: cfg.cor, background: '#1B1626', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
-            <span className="text-[0.72rem] font-medium" style={{ color: cfg.cor }}>{sel.size} selecionada(s)</span>
-            <span className="opacity-30">·</span>
-            {/* aplicar transição a todas as selecionadas */}
-            <div className="flex items-center gap-1">
-              <span className="text-[0.6rem] opacity-55">transição:</span>
-              <select value={transLote} onChange={(e) => setTransLote(e.target.value as Transicao)} className="text-[0.62rem] px-1.5 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }}>
+          <div className="sticky top-2 z-30 mb-3 rounded-xl border p-2.5 space-y-1.5" style={{ borderColor: cfg.cor, background: '#1B1626', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[0.72rem] font-medium" style={{ color: cfg.cor }}>{sel.size} selecionada(s)</span>
+              <button onClick={limparSel} className="text-[0.58rem] px-1.5 py-0.5 rounded-lg border border-white/20 opacity-75">limpar</button>
+              {busy === 'lote' && <span className="text-[0.6rem]" style={{ color: cfg.cor }}>{msg}</span>}
+            </div>
+            {/* GERAR / TROCAR (todo o estúdio, aplicado a vários) */}
+            <div className="flex items-center gap-1 flex-wrap">
+              <span className="text-[0.55rem] opacity-45 w-12">gerar:</span>
+              <button onClick={regerarTextoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="nova revelação + imagem (gasta geração; salta publicadas)">♻ texto</button>
+              <button onClick={imagemLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="cena nova (barato)">🖼 imagem</button>
+              <button onClick={somLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="som ambiente da cena (salta sem imagem)">🔊 som</button>
+              <button onClick={vozLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="a tua voz (v3 puro); salta publicadas">🎙 voz</button>
+              <button onClick={motionLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (Kling); 1-3 min por peça">🎬 motion</button>
+            </div>
+            {/* FAZER (transição · render · agendar · apagar) */}
+            <div className="flex items-center gap-1 flex-wrap">
+              <span className="text-[0.55rem] opacity-45 w-12">fazer:</span>
+              <select value={transLote} onChange={(e) => setTransLote(e.target.value as Transicao)} className="text-[0.6rem] px-1 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }}>
                 {TRANSICOES.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
               </select>
-              <button onClick={transicaoLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }}>aplicar</button>
+              <button onClick={transicaoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aplicar a transição escolhida">transição</button>
+              <button onClick={renderLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="MP4 final (GitHub Actions; minutos)">🎞 render</button>
+              <button onClick={agendarLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aprova cada peça na sua data (publica-se sozinha)">📅 agendar</button>
+              <button onClick={apagarLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 apagar</button>
             </div>
-            <span className="opacity-30">·</span>
-            <button onClick={renderLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="dispara o MP4 final de cada selecionada (GitHub Actions; minutos)">🎞 renderizar selecionadas</button>
-            <button onClick={motionLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (IA · Kling) a partir da imagem; 1-3 min por peça">🎬 dar motion (vídeo)</button>
-            <button onClick={agendarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aprova cada peça na sua data já marcada (publica-se sozinha)">📅 agendar selecionadas</button>
-            <button onClick={apagarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 apagar selecionadas</button>
-            <button onClick={limparSel} className="ml-auto text-[0.62rem] px-2 py-1 rounded-lg border border-white/20 opacity-75">limpar seleção</button>
           </div>
         )}
 
