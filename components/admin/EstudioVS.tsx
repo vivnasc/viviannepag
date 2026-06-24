@@ -611,7 +611,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
           <p className="text-center text-[0.78rem] opacity-50 py-10">Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.</p>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {pecas.map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onAbrir={setEstudioSlug} />)}
+            {[...pecas].sort((a, b) => `${a.agendadoEm ?? '~'}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? '~'}${b.hora ?? ''}`)).map((p) => <Cartao key={p.slug} p={p} onApagar={apagar} onAbrir={setEstudioSlug} />)}
           </div>
         )}
       </div>
