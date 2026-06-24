@@ -804,6 +804,17 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     return fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: p.agendadoEm.slice(0, 10), hora: p.hora || '11:00', aprovado: true }) });
   }, 'A agendar', false), [emLote, pecas]);
 
+  // RENDER em lote: dispara o MP4 final (GitHub Actions) de cada selecionada. O dispatch é
+  // rápido; cada MP4 aparece daqui a alguns minutos. Salta as que ainda não têm imagem.
+  const renderLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Renderizar (MP4) as ${sel.size} selecionada(s)?\n\nCorre nos GitHub Actions; cada vídeo aparece daqui a alguns minutos. (salta as que ainda não têm imagem.)`)) return;
+    return emLote((slug) => {
+      const p = pecas.find((x) => x.slug === slug);
+      if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); // salta
+      return fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
+    }, 'A disparar render');
+  }, [emLote, pecas, sel]);
+
   // MOTION em lote: vídeo REAL (image-to-video, Kling) em cada peça selecionada. Cada clip
   // demora 1-3 min, por isso corre no cliente, uma a uma (sem time-out de servidor). Salta
   // as que não têm imagem ou que já têm vídeo.
@@ -954,6 +965,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
               <button onClick={transicaoLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }}>aplicar</button>
             </div>
             <span className="opacity-30">·</span>
+            <button onClick={renderLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="dispara o MP4 final de cada selecionada (GitHub Actions; minutos)">🎞 renderizar selecionadas</button>
             <button onClick={motionLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (IA · Kling) a partir da imagem; 1-3 min por peça">🎬 dar motion (vídeo)</button>
             <button onClick={agendarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aprova cada peça na sua data já marcada (publica-se sozinha)">📅 agendar selecionadas</button>
             <button onClick={apagarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 apagar selecionadas</button>
