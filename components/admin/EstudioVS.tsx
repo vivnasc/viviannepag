@@ -257,32 +257,44 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
 // sotaque PT-PT estável). Gera/regera/remove. Se sair mal, é só «regerar voz». Quando há
 // voz, o render passa a durar o tempo da narração e acende a frase falada (karaokê).
 type VozLib = { id: string; nome: string; clonada: boolean; descricao: string };
+// a voz escolhida pela Vivianne fica FIXA por defeito (não vê a lista grande sempre).
+const VOZ_DEFAULT = 'J9p0YlQKWhgfYy0cxqWo';
 function VozBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: (modelo: 'v3' | 'v2', voiceId: string) => void; onRemover: () => void }) {
   const tem = !!peca.vozUrl;
   const [modelo, setModelo] = useState<'v3' | 'v2'>('v3');
   const [vozes, setVozes] = useState<VozLib[]>([]);
-  const [voiceId, setVoiceId] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('vs-voiceId') ?? '' : ''));
+  const [voiceId, setVoiceId] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('vs-voiceId') || VOZ_DEFAULT : VOZ_DEFAULT));
+  const [trocar, setTrocar] = useState(false); // a lista só aparece quando ela quer trocar
   useEffect(() => {
     fetch('/api/admin/metodo/vozes').then((r) => (r.ok ? r.json() : null)).then((j) => {
       const lista: VozLib[] = j?.vozes ?? [];
       setVozes(lista);
-      // por defeito uma voz GENÉRICA (não clonada); só usa a guardada se ainda existir.
-      setVoiceId((cur) => (cur && lista.some((v) => v.id === cur) ? cur : (lista.find((v) => !v.clonada)?.id ?? lista[0]?.id ?? '')));
+      // mantém a escolhida (default fixo) se existir; senão a 1.ª da lista.
+      setVoiceId((cur) => (cur && lista.some((v) => v.id === cur) ? cur : (lista.some((v) => v.id === VOZ_DEFAULT) ? VOZ_DEFAULT : lista[0]?.id ?? cur)));
     }).catch(() => {});
   }, []);
-  const escolher = (id: string) => { setVoiceId(id); if (typeof window !== 'undefined') localStorage.setItem('vs-voiceId', id); };
+  const escolher = (id: string) => { setVoiceId(id); setTrocar(false); if (typeof window !== 'undefined') localStorage.setItem('vs-voiceId', id); };
+  const vozAtual = vozes.find((v) => v.id === voiceId);
   return (
     <div className="space-y-1.5">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">voz · narração {tem && <span style={{ color: dz }}>· gerada</span>}</p>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       {tem && <audio src={peca.vozUrl ?? undefined} controls className="w-full h-8" />}
-      {/* VOZ genérica da biblioteca ElevenLabs (a Vivianne NÃO usa a voz dela). */}
-      <label className="block text-[0.58rem] opacity-70">voz (da biblioteca)
-        <select value={voiceId} onChange={(e) => escolher(e.target.value)} className="w-full mt-0.5 text-[0.62rem] px-1.5 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }}>
-          {!vozes.length && <option value="">a carregar vozes…</option>}
-          {vozes.map((v) => <option key={v.id} value={v.id}>{v.nome}{v.descricao ? ` · ${v.descricao}` : ''}{v.clonada ? ' · (clonada)' : ''}</option>)}
-        </select>
-      </label>
+      {/* VOZ FIXA por defeito; a lista só abre se ela carregar «trocar». */}
+      {!trocar ? (
+        <div className="flex items-center gap-2 text-[0.6rem]">
+          <span className="opacity-55">voz:</span>
+          <span className="flex-1 truncate" style={{ color: dz }}>{vozAtual ? `${vozAtual.nome}${vozAtual.descricao ? ` · ${vozAtual.descricao}` : ''}` : (voiceId ? 'voz fixada' : '—')}</span>
+          <button type="button" onClick={() => setTrocar(true)} className="text-[0.56rem] px-1.5 py-0.5 rounded border border-white/20 opacity-75">trocar</button>
+        </div>
+      ) : (
+        <label className="block text-[0.58rem] opacity-70">escolhe a voz (fica como default)
+          <select value={voiceId} onChange={(e) => escolher(e.target.value)} className="w-full mt-0.5 text-[0.62rem] px-1.5 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }}>
+            {!vozes.length && <option value="">a carregar vozes…</option>}
+            {vozes.map((v) => <option key={v.id} value={v.id}>{v.nome}{v.descricao ? ` · ${v.descricao}` : ''}{v.clonada ? ' · (clonada)' : ''}</option>)}
+          </select>
+        </label>
+      )}
       <div className="flex items-center gap-1 text-[0.58rem]">
         <span className="opacity-50">modelo:</span>
         {([['v3', 'v3 · expressivo'], ['v2', 'v2 · estável']] as const).map(([id, lbl]) => (
@@ -643,7 +655,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [estudioSlug, setEstudioSlug] = useState<string | null>(null);
   const [offset, setOffset] = useState(0); // 0 = esta semana; ▶ para semanas futuras (produzir e pré-datar)
   const [sel, setSel] = useState<Set<string>>(new Set()); // seleção múltipla (barra de ferramentas)
-  const [soDaSemana, setSoDaSemana] = useState(false);     // ver só a semana navegada
+  const [verTodas, setVerTodas] = useState(false);         // por defeito mostra só a semana navegada
   const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
   const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina'); // motion do texto a aplicar em lote
 
@@ -892,7 +904,11 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const semSeg = segundaDaSemana(offset);
   const semDom = new Date(semSeg); semDom.setDate(semSeg.getDate() + 6);
   const dentroDaSemana = (p: Peca) => { if (!p.agendadoEm) return false; const d = p.agendadoEm.slice(0, 10); return d >= dataLocalStr(semSeg) && d <= dataLocalStr(semDom); };
-  const pecasVistas = soDaSemana ? pecas.filter(dentroDaSemana) : pecas;
+  // o feed segue a semana navegada (◀▶). Nesta semana (offset 0) junta os rascunhos sem
+  // data (gerações avulsas); nas outras semanas, só os posts datados dessa semana. O toggle
+  // «ver todas» mostra tudo.
+  const daSemana = offset === 0 ? [...pecas.filter(dentroDaSemana), ...pecas.filter((p) => !p.agendadoEm)] : pecas.filter(dentroDaSemana);
+  const pecasVistas = verTodas ? pecas : daSemana;
   const ordenadas = [...pecasVistas].sort((a, b) => `${a.agendadoEm ?? '~'}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? '~'}${b.hora ?? ''}`));
   // agrupar por DIA (hierarquia + ritmo): cabeçalho de dia, depois os cartões desse dia.
   const grupos: { chave: string; rotulo: string; itens: Peca[] }[] = [];
@@ -1019,12 +1035,12 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         {erro && <p className="mb-3 text-[0.82rem] text-rose-300">{erro}</p>}
         {msg && !erro && <p className="mb-3 text-[0.82rem] text-emerald-300">{msg}</p>}
 
-        {/* cabeçalho do feed: contagem + filtro "só a semana navegada" */}
+        {/* cabeçalho do feed: segue a semana navegada; toggle para ver todas */}
         <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
-          <p className="text-[0.66rem] uppercase tracking-widest opacity-50">{pecasVistas.length} peça(s){soDaSemana ? ` · ${rotuloSemana(offset)}` : ''}</p>
+          <p className="text-[0.66rem] uppercase tracking-widest opacity-50">{pecasVistas.length} peça(s) · {verTodas ? 'todas as semanas' : rotuloSemana(offset)}</p>
           <label className="flex items-center gap-1.5 text-[0.66rem] opacity-80 cursor-pointer select-none">
-            <input type="checkbox" checked={soDaSemana} onChange={(e) => setSoDaSemana(e.target.checked)} className="accent-current" style={{ accentColor: cfg.cor }} />
-            ver só a semana navegada ({rotuloSemana(offset)})
+            <input type="checkbox" checked={verTodas} onChange={(e) => setVerTodas(e.target.checked)} className="accent-current" style={{ accentColor: cfg.cor }} />
+            ver todas as peças (todas as semanas)
           </label>
         </div>
 
@@ -1064,7 +1080,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         )}
 
         {pecasVistas.length === 0 ? (
-          <p className="text-center text-[0.78rem] opacity-50 py-10">{soDaSemana ? 'Nada nesta semana. Produz a semana ou tira o filtro.' : 'Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.'}</p>
+          <p className="text-center text-[0.78rem] opacity-50 py-10">{verTodas ? 'Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.' : `Nada em ${rotuloSemana(offset)}. Carrega «✦ produzir e pré-datar» ou ◀▶ para outra semana (ou «ver todas»).`}</p>
         ) : (
           <div className="space-y-6">
             {grupos.map((g) => (
