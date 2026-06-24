@@ -14,7 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, estiloSequencia, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
-import { slideDaMarca, ehMarcaMetodoVS } from '@/lib/metodo-vs/marca';
+import { slideDaMarca, ehMarcaMetodoVS, METODOVS_CONTAS_LISTA } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
@@ -286,6 +286,9 @@ export default function RenderVeuPage() {
   const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string; clipUrl?: string; cta?: string }) | undefined;
 
+  // MÉTODO VS com VOZ (timestamps de palavra) => karaokê: a palavra falada acende-se.
+  const vozVS = ehMarcaMetodoVS(marcaM) && (estado?.dia.vozPalavras?.length ?? 0) > 0;
+
   // TEMPO DE LEITURA: a passagem entre faces (split) é proporcional ao texto — a
   // face 2 (revelação, mais longa) fica com MAIS tempo. Face 1 nunca > 50%.
   const split = useMemo(() => {
@@ -337,12 +340,29 @@ export default function RenderVeuPage() {
           conceito={s.conceito}
         />
       )}
+      {/* MÉTODO VS · KARAOKÊ: com voz, mostra a linha falada e ACENDE a palavra que está a
+          ser pronunciada (a Vivianne: a palavra dita devia ser destaque). Reutiliza o
+          KaraokeMetodo já provado. Conduzido por timeS (segundos) = prog * duração do reel. */}
+      {estado && ehKinetic && vozVS && (() => {
+        const conta = getConta(METODOVS_CONTAS_LISTA.find((c) => c.marca === marcaM)?.id ?? 'mae');
+        if (!conta) return null;
+        return (
+          <KaraokeMetodo
+            linhas={(estado.dia.slides ?? []).map((x) => (x as { texto?: string }).texto ?? '').filter(Boolean)}
+            palavras={estado.dia.vozPalavras!}
+            timeS={prog * (reelDur || estado.dia.vozDur || 0)}
+            imageUrl={s?.imageUrl}
+            clipUrl={clipBg ?? undefined}
+            conta={conta}
+          />
+        );
+      })()}
       {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
           que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
-      {estado && ehKinetic && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
+      {estado && ehKinetic && !vozVS && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
         <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
       )}
-      {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
+      {estado && ehKinetic && !vozVS && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
         // FRAME ÚNICO com MOVIMENTO: o push-in + deriva da CameraVeu dá vida ao frame
         // parado da manhã (sem clip/motion). Só com imagem fixa (com clip o próprio
         // vídeo já mexe, não precisa). Beneficia a manhã do Método VS e outros kinéticos

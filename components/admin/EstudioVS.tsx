@@ -658,6 +658,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [verTodas, setVerTodas] = useState(false);         // por defeito mostra só a semana navegada
   const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
   const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina'); // motion do texto a aplicar em lote
+  const [musicaLoteEstilo, setMusicaLoteEstilo] = useState<string>(() => MUSICA_ESTILOS.find((m) => /piano/i.test(m.id) || /piano/i.test(m.label))?.id ?? MUSICA_ESTILOS[0]?.id ?? 'piano'); // música de fundo em lote (piano por defeito)
 
   const [igLigado, setIgLigado] = useState<boolean | null>(null); // o Instagram desta conta está ligado?
 
@@ -873,6 +874,11 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) });
     }, 'A gerar som');
   }, [emLote, pecas, sel]);
+  // MÚSICA de fundo (instrumental — piano, etc.) em lote: substitui o Ancient Ground.
+  const musicaLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm(`Pôr música de fundo «${musicaLoteEstilo}» nas ${sel.size} selecionada(s)? (substitui o Ancient Ground)`)) return;
+    return emLote((slug) => fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'musica', estilo: musicaLoteEstilo }) }), 'A pôr música');
+  }, [emLote, musicaLoteEstilo, sel]);
 
   // RENDER em lote: dispara o MP4 final (GitHub Actions) de cada selecionada. O dispatch é
   // rápido; cada MP4 aparece daqui a alguns minutos. Salta as que ainda não têm imagem.
@@ -1058,6 +1064,12 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
               <button onClick={regerarTextoLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="nova revelação + imagem (gasta geração; salta publicadas)">♻ texto</button>
               <button onClick={imagemLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="cena nova (barato)">🖼 imagem</button>
               <button onClick={somLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="som ambiente da cena (salta sem imagem)">🔊 som</button>
+              <span className="inline-flex items-center gap-0.5">
+                <select value={musicaLoteEstilo} onChange={(e) => setMusicaLoteEstilo(e.target.value)} className="text-[0.58rem] px-1 py-1 rounded-lg border border-white/15 bg-black/30 outline-none [color-scheme:dark]" style={{ color: PAL.texto }} title="música de fundo (instrumental)">
+                  {MUSICA_ESTILOS.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
+                </select>
+                <button onClick={musicaLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="música de fundo (substitui o Ancient Ground)">🎵 música</button>
+              </span>
               <button onClick={vozLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="a tua voz (v3 puro); salta publicadas">🎙 voz</button>
               <button onClick={motionLote} disabled={!!busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (Kling); 1-3 min por peça">🎬 motion</button>
             </div>
