@@ -1,13 +1,14 @@
 // SOULAB · MÚSICA AMBIENTE — gera uma faixa instrumental contemplativa (flauta,
-// piano, cordas…) via MusicGen no Replicate, e guarda-a no storage. NÃO é a
+// piano, cordas…) via ElevenLabs Music, e guarda-a no storage. NÃO é a
 // "Ancient Ground" (essa é a música da loja); é música ambiente de verdade, à
-// escolha dela, para o reel do laboratório. Mesmo token do motion (REPLICATE_API_TOKEN).
+// escolha dela, para o reel do laboratório. Mesma env do som da cena
+// (ELEVENLABS_API_KEY) — antes era o MusicGen do Replicate, que falhava.
 
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const BUCKET = 'viviannepag-assets';
-const MODEL = 'meta/musicgen';
 export const MUSICA_DURACAO_S = 12; // o render faz loop; chega para o reel
+const MUSICA_MIN_MS = 10000; // mínimo da API de música do ElevenLabs
 
 // os ESTILOS à escolha dela (multi-instrumento). label = o que vê; en = o prompt real.
 export const MUSICA_ESTILOS = [
@@ -26,36 +27,22 @@ export function promptDaMusica(estilo: string): string {
   return `${base}, instrumental only, no vocals, calm and emotional, seamless loop, high quality`;
 }
 
-type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
-
-// Gera a música no Replicate (MusicGen) e guarda no storage; devolve o URL público.
-export async function gerarMusica(estilo: string, slug: string, token: string): Promise<string> {
+// Gera a música no ElevenLabs (/v1/music) e guarda no storage; devolve o URL
+// público. Devolve o MP3 nos bytes da resposta, como o sound-generation.
+export async function gerarMusica(estilo: string, slug: string): Promise<string> {
+  const key = process.env.ELEVENLABS_API_KEY;
+  if (!key) throw new Error('falta a env ELEVENLABS_API_KEY (a mesma do som da cena)');
   const prompt = promptDaMusica(estilo);
+  const lengthMs = Math.max(MUSICA_MIN_MS, MUSICA_DURACAO_S * 1000);
 
-  const res = await fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
+  const res = await fetch('https://api.elevenlabs.io/v1/music', {
     method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
-    body: JSON.stringify({ input: { prompt, duration: MUSICA_DURACAO_S, output_format: 'mp3', normalization_strategy: 'loudness' } }),
+    headers: { 'xi-api-key': key, 'content-type': 'application/json' },
+    body: JSON.stringify({ prompt, music_length_ms: lengthMs, model_id: 'music_v1' }),
   });
-  if (!res.ok) throw new Error(`Replicate ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  if (!res.ok) throw new Error(`elevenlabs-music ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const audio = Buffer.from(await res.arrayBuffer());
 
-  let pred = (await res.json()) as Pred;
-  let polls = 0;
-  while (!['succeeded', 'failed', 'canceled'].includes(pred.status) && polls < 95) {
-    await new Promise((r) => setTimeout(r, 3000));
-    const pr = await fetch(`https://api.replicate.com/v1/predictions/${pred.id}`, { headers: { Authorization: `Bearer ${token}` } });
-    if (!pr.ok) throw new Error(`Replicate poll ${pr.status}`);
-    pred = (await pr.json()) as Pred;
-    polls++;
-  }
-  if (pred.status !== 'succeeded') throw new Error(`Replicate: ${pred.error ?? pred.status}`);
-  const out = Array.isArray(pred.output) ? pred.output[0] : pred.output;
-  if (!out) throw new Error('Replicate: sem output');
-
-  // baixa o MP3 e guarda no nosso storage (URL estável, com cache-busting no export)
-  const audioRes = await fetch(out);
-  if (!audioRes.ok) throw new Error(`download música ${audioRes.status}`);
-  const audio = Buffer.from(await audioRes.arrayBuffer());
   const sb = getSupabaseAdmin();
   const slugSeguro = slug.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9_-]/g, '-');
   const path = `soulab-musica/${slugSeguro}-${Date.now()}.mp3`;

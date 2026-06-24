@@ -832,11 +832,17 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     if (!alvos.length) { setSel(new Set()); return; }
     setBusy('lote'); setErro(null); setMsg(`${etiqueta} · 0/${alvos.length}…`);
     let feitos = 0;
+    let primeiroErro = ''; // o motivo da 1.ª falha — senão "0/5" não diz nada
     for (const slug of alvos) {
-      try { const r = await faz(slug); if (r.ok) feitos++; } catch { /* segue */ }
+      try {
+        const r = await faz(slug);
+        if (r.ok) feitos++;
+        else if (!primeiroErro) { const j = await r.json().catch(() => null) as { erro?: string; detalhe?: string } | null; primeiroErro = j?.detalhe || j?.erro || `HTTP ${r.status}`; }
+      } catch (e) { if (!primeiroErro) primeiroErro = e instanceof Error ? e.message : String(e); }
       setMsg(`${etiqueta} · ${feitos}/${alvos.length}…`);
     }
     setMsg(`${etiqueta}: ${feitos}/${alvos.length} feito(s).`);
+    if (feitos < alvos.length && primeiroErro) setErro(`Falhou ${alvos.length - feitos}/${alvos.length} — ${primeiroErro}`);
     setSel(new Set()); setBusy(null); recarregar();
   }, [acaoSlug, busy, sel, pecas, recarregar]);
 
