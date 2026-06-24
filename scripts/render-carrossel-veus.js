@@ -201,11 +201,18 @@ async function main() {
       await page.close();
       console.log(`[kinetic] dia ${d.dia}: ${N} frames${vozOk ? ' (voz)' : ''}`);
 
-      // audio: a VOZ (se houver) é o áudio principal e NÃO faz loop (é a duração);
-      // senão, o som ambiente faz loop como antes.
-      let temAudio = false; let vozAudio = false;
-      if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) { temAudio = true; vozAudio = true; }
-      else {
+      // audio: a VOZ (se houver) é o áudio principal e NÃO faz loop (é a duração).
+      // Decisão da Vivianne: quando HÁ voz, mistura-se por baixo o Ancient Ground
+      // baixinho (voz à frente, AG atrás) — em todas as contas com voz. Sem voz, o
+      // som ambiente próprio faz loop como antes (e o método nunca usa Ancient Ground).
+      let temAudio = false; let vozAudio = false; let agBed = false;
+      if (vozOk && fs.existsSync(path.join(diaDir, 'voz.mp3'))) {
+        temAudio = true; vozAudio = true;
+        try {
+          const agr = await fetch(faixaUrl(semana, d.dia)); // leito Ancient Ground (varia por dia)
+          if (agr.ok) { fs.writeFileSync(path.join(diaDir, 'ag.mp3'), Buffer.from(await agr.arrayBuffer())); agBed = true; }
+        } catch (e) { console.log(`[ag bed] ${e.message}`); }
+      } else {
         const aUrl = audioDeFundo(d);
         if (aUrl) { try { const ar = await fetch(aUrl); if (ar.ok) { fs.writeFileSync(path.join(diaDir, 'audio.mp3'), Buffer.from(await ar.arrayBuffer())); temAudio = true; } } catch (e) { console.log(`[audio] ${e.message}`); } }
       }
@@ -214,10 +221,17 @@ async function main() {
       // (-stream_loop) + -shortest corta no fim do vídeo.
       let videoUrl = null;
       try {
-        const audioArg = vozAudio ? '-i voz.mp3' : '-stream_loop -1 -i audio.mp3';
-        const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ` ${audioArg}` : ''}`;
-        const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
-        execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        const vf = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p';
+        if (vozAudio && agBed) {
+          // VOZ à frente + Ancient Ground baixinho atrás (mix): voz (input 1) a cheio,
+          // AG (input 2) em loop a volume baixo; amix com normalize=0 para a voz não baixar.
+          execSync(`ffmpeg -y -framerate ${FPS} -i frames/f%04d.png -i voz.mp3 -stream_loop -1 -i ag.mp3 -filter_complex "[0:v]${vf}[vout];[2:a]volume=0.14[bed];[1:a][bed]amix=inputs=2:duration=first:normalize=0[aout]" -map "[vout]" -map "[aout]" -c:v libx264 -r 30 -pix_fmt yuv420p -c:a aac -b:a 160k -shortest -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        } else {
+          const audioArg = vozAudio ? '-i voz.mp3' : '-stream_loop -1 -i audio.mp3';
+          const inputs = `-framerate ${FPS} -i frames/f%04d.png${temAudio ? ` ${audioArg}` : ''}`;
+          const maps = temAudio ? '-map 0:v -map 1:a -c:a aac -b:a 160k -shortest' : '-map 0:v';
+          execSync(`ffmpeg -y ${inputs} ${maps} -c:v libx264 -r 30 -pix_fmt yuv420p -vf "${vf}" -movflags +faststart out.mp4`, { cwd: diaDir, stdio: 'inherit' });
+        }
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
