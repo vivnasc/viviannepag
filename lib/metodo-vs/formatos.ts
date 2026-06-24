@@ -118,20 +118,20 @@ A frase é a permissão pequena que liberta ESTA dor, e só esta. Inconfundivelm
 // (é o que distingue da Soulab: a mãe segue um plano). 2 por dia, manhã e fim de tarde.
 // wd: getDay() (0=domingo). A véu roda à parte (1 véu/dia), para variar ainda mais.
 export const CALENDARIO: { wd: number; nome: string; hora: string; formato: FormatoId }[] = [
-  // MANHÃ (11h) = o Sinal da manhã (um frame, uma frase, o soltar) todos os dias.
-  // FIM DE TARDE (19h) = o reel da revelação, ângulo a rodar pela semana.
-  { wd: 1, nome: 'segunda', hora: '11:00', formato: 'dissolucao' },
-  { wd: 1, nome: 'segunda', hora: '19:00', formato: 'nome' },
-  { wd: 2, nome: 'terça', hora: '11:00', formato: 'dissolucao' },
-  { wd: 2, nome: 'terça', hora: '19:00', formato: 'heranca' },
-  { wd: 3, nome: 'quarta', hora: '11:00', formato: 'dissolucao' },
-  { wd: 3, nome: 'quarta', hora: '19:00', formato: 'baixo' },
-  { wd: 4, nome: 'quinta', hora: '11:00', formato: 'dissolucao' },
-  { wd: 4, nome: 'quinta', hora: '19:00', formato: 'mito' },
-  { wd: 5, nome: 'sexta', hora: '11:00', formato: 'dissolucao' },
-  { wd: 5, nome: 'sexta', hora: '19:00', formato: 'custo' },
-  { wd: 6, nome: 'sábado', hora: '11:00', formato: 'dissolucao' },
-  { wd: 6, nome: 'sábado', hora: '19:00', formato: 'cena' },
-  { wd: 0, nome: 'domingo', hora: '11:00', formato: 'dissolucao' },
-  { wd: 0, nome: 'domingo', hora: '19:00', formato: 'corpo' },
+  // MANHÃ (10h30) = o Sinal da manhã (um frame, uma frase, o soltar) todos os dias.
+  // TARDE (16h) = o reel da revelação, ângulo a rodar pela semana. Horas da mãe.
+  { wd: 1, nome: 'segunda', hora: '10:30', formato: 'dissolucao' },
+  { wd: 1, nome: 'segunda', hora: '16:00', formato: 'nome' },
+  { wd: 2, nome: 'terça', hora: '10:30', formato: 'dissolucao' },
+  { wd: 2, nome: 'terça', hora: '16:00', formato: 'heranca' },
+  { wd: 3, nome: 'quarta', hora: '10:30', formato: 'dissolucao' },
+  { wd: 3, nome: 'quarta', hora: '16:00', formato: 'baixo' },
+  { wd: 4, nome: 'quinta', hora: '10:30', formato: 'dissolucao' },
+  { wd: 4, nome: 'quinta', hora: '16:00', formato: 'mito' },
+  { wd: 5, nome: 'sexta', hora: '10:30', formato: 'dissolucao' },
+  { wd: 5, nome: 'sexta', hora: '16:00', formato: 'custo' },
+  { wd: 6, nome: 'sábado', hora: '10:30', formato: 'dissolucao' },
+  { wd: 6, nome: 'sábado', hora: '16:00', formato: 'cena' },
+  { wd: 0, nome: 'domingo', hora: '10:30', formato: 'dissolucao' },
+  { wd: 0, nome: 'domingo', hora: '16:00', formato: 'corpo' },
 ];
