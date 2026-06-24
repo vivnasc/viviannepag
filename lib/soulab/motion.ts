@@ -45,8 +45,10 @@ export interface MovimentoOpts {
 }
 
 function fraseCamara(c: CamaraId): string {
-  if (c === 'suave') return 'a very slow, gentle and elegant cinematic camera push-in, moving softly into the scene';
-  if (c === 'forte') return 'a confident cinematic camera push-in traveling forward, entering deeper into the scene';
+  // PARALLAX, não zoom chapado: a câmara viaja pela cena e revela profundidade (o primeiro
+  // plano e o fundo deslizam a ritmos diferentes), dando vida mesmo a cenas paradas.
+  if (c === 'suave') return 'a slow, gentle cinematic PARALLAX dolly move that travels gradually into the scene and reveals depth, the foreground and the background drifting at slightly different rates — a real three-dimensional move, NOT a flat zoom';
+  if (c === 'forte') return 'a confident cinematic parallax dolly traveling forward through the scene, foreground and background separating with clear depth, entering deeper into the space — not a flat zoom';
   return '';
 }
 
@@ -81,7 +83,7 @@ export function construirMovimento(opts: MovimentoOpts): { prompt: string; negat
 
   const prompt =
     `Photorealistic, cinematic, premium fine-art film look. Animate THIS exact image with: ${movDesc}.${cenaCurta} ` +
-    'Keep the exact same composition, subject, palette, lighting and contemplative mood. Smooth, calm, controlled, realistic motion. ' +
+    'Keep the same subject, palette, lighting and mood; the motion is a gentle parallax that reveals real depth, PLUS the natural life already present in the scene. Smooth, calm, controlled, realistic motion. ' +
     'No warping, no morphing, no distortion, no camera shake. ' +
     'CRITICAL: absolutely NO text, NO letters, NO words, NO writing, NO captions, NO subtitles, NO signage or labels anywhere in the frame; all surfaces, water and reflections stay completely clean and text-free.';
 
