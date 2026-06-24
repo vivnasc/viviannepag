@@ -43,6 +43,8 @@ async function main() {
   let dias = Array.isArray(col.dias) ? col.dias : [];
   if (DIAS_FILTER.length) dias = dias.filter((d) => DIAS_FILTER.includes(String(d.dia)));
   console.log(`[data] ${dias.length} dias`);
+  // DIAGNÓSTICO do motion: a peça tem clip do Kling guardado? (theme.soulab.clipUrl)
+  console.log(`[clip] theme.soulab.clipUrl = ${col.theme?.soulab?.clipUrl ? col.theme.soulab.clipUrl.slice(-60) : 'NENHUM (a peça não tem motion → sai a imagem + câmara)'}`);
 
   const formato = col.theme?.formato;
   const duasFaces = col.theme?.subtipo === 'duasfaces'; // MÃE: 1 reel, 2 FACES (dor -> revelação) num só MP4
@@ -189,6 +191,15 @@ async function main() {
       const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=0&dur=${DUR}`;
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
+      // DIAGNÓSTICO: a página montou e CARREGOU o vídeo do clip? (readyState>=2 e vw>0 = ok)
+      try {
+        const ci = await page.evaluate(() => {
+          const v = document.querySelector('video.clip-bg');
+          if (!v) return 'SEM <video clip-bg> (saiu imagem + câmara, não o clip)';
+          return `video.clip-bg src=…${(v.currentSrc || v.src || '').slice(-32)} readyState=${v.readyState} vw=${v.videoWidth}`;
+        });
+        console.log(`[clip] ${ci}`);
+      } catch (e) { console.log(`[clip] diag falhou: ${e.message}`); }
       for (let i = 0; i < N; i++) {
         const tf = i / (N - 1);
         // sequência Soulab/Método VS com voz: move ao ritmo REAL das palavras (sincroniza);
