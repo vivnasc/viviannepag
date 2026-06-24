@@ -87,6 +87,18 @@ ANTI-SATURAÇÃO (a Vivianne gera isto todos os dias; ao fim de uma semana não 
 - Faz ROTAR a forma de abrir entre tipos bem diferentes: uma afirmação seca e direta · uma pergunta que vira por dentro · uma imagem ou cena concreta · uma inversão (pôr ao contrário o que se assume) · "há quem…" / "há pessoas que…" · um nome comum que se vira · uma constatação serena. Escolhe a forma que MENOS se parece com as recentes.
 - Varia também a ARQUITETURA da peça: umas vezes a faca abre e o resto desdobra; outras a peça constrói até uma viragem só no fim; outras é uma cena seguida do que ela sempre foi. Nunca o mesmo esqueleto dois dias seguidos.`;
 
+// As FORMAS de abrir a faca (descritas pela FORMA, nunca por frase-exemplo, para o modelo
+// não copiar). Rotam-se por peça para nenhuma 1.ª linha se parecer com a anterior.
+const ABERTURAS_FACA = [
+  'uma AFIRMAÇÃO seca e direta, que nomeia o padrão de chofre, sem rodeios',
+  'um "há quem…" ou "há pessoas que…", a 3.ª pessoa que deixa quem lê reconhecer-se de dentro',
+  'um NOME COMUM virado ("chamam-lhe X…"), para o renomear logo a seguir',
+  'uma PERGUNTA que vira por dentro (não retórica nem vazia: uma que abre uma porta)',
+  'uma CENA mínima e concreta, pousada sem comentário, que só depois se revela',
+  'uma INVERSÃO: pega no que toda a gente assume como bom ou normal e põe-no ao contrário',
+  'uma CONSTATAÇÃO serena e inesperada, dita quase em voz baixa',
+];
+
 // SÓ a CENA (o estilo e os banimentos são acrescentados no servidor — promptImagemVS).
 const lp_img = `IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve UM sujeito concreto, específico e INESPERADO que encarne o SENTIDO da frase (pela sensação, não à letra; um fundo sem ligação está ERRADO). VARIA muito de dia para dia. EVITA por completo e nem menciones: interiores domésticos aconchegantes, salas, cozinhas, janelas, cortinas, panos/tecidos, chávenas, velas, pessoas — procura outra coisa qualquer, fora do óbvio. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).`;
 
@@ -159,6 +171,10 @@ export async function gerarPecaVS(veu: VeuNome, formato: FormatoId, apiKey: stri
   const f = FORMATOS[formato];
   if (!f) throw new Error(`formato desconhecido: ${formato}`);
   const ancora = ancoraConta(conta);
+  // A FACA (1.ª linha) é o que mais tende a virar fórmula. Rotamos a FORMA de abrir de
+  // peça para peça, determinístico (pelo nº de peças já feitas), para nunca soarem iguais
+  // — o mesmo mecanismo que funciona na manhã. NÃO muda a voz; só a forma do gancho.
+  const abertura = ABERTURAS_FACA[((evitar.length % ABERTURAS_FACA.length) + ABERTURAS_FACA.length) % ABERTURAS_FACA.length];
 
   const sys =
 `Escreves UMA peça (reel 9:16) da Vivianne dos Santos, criadora do Método VS (Ver e Soltar). A voz é a da REVELAÇÃO. O formato de hoje é "${f.nome}".
@@ -169,6 +185,8 @@ A MATÉRIA (só para TI perceberes o padrão; NUNCA a nomeies nem a copies no te
 ${f.materia(k)}
 ${ancora ? `\n${ancora}\n` : ''}
 ${REVELACAO}
+
+A ABERTURA DE HOJE (a 1.ª linha, a faca, abre ASSIM — é o que impede que as primeiras linhas se pareçam todas): ${abertura}. As linhas seguintes seguem a voz, sem repetir a forma da faca.
 
 IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve UM sujeito concreto, específico e INESPERADO que encarne o SENTIDO da 1.ª linha (a faca), pela sensação (um fundo sem ligação está ERRADO). VARIA muito de peça para peça. EVITA por completo e nem menciones: interiores domésticos aconchegantes, salas, cozinhas, janelas, cortinas, panos/tecidos, chávenas, velas, pessoas — procura outra coisa qualquer, fora do óbvio. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).
 ${evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
