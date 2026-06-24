@@ -547,7 +547,7 @@ function PadroesPanel({ conta, cor, offset, rotuloSem, onAplicado }: { conta: Me
               <select value={p.transicao} onChange={(e) => set('transicao', e.target.value as PadroesVS['transicao'])} className="text-[0.62rem] px-1.5 py-1 rounded-lg border border-white/15 bg-black/30 [color-scheme:dark]" style={{ color: PAL.texto }}>
                 {TRANSICOES.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
               </select>
-              <label className="flex items-center gap-1 ml-2"><input type="checkbox" checked={p.motionAuto} onChange={(e) => set('motionAuto', e.target.checked)} style={{ accentColor: cor }} /> motion automático nas imagens</label>
+              <label className="flex items-center gap-1 ml-2" title="respiração leve nas imagens AINDA sem vídeo. O motion a sério é o vídeo IA (botão 🎬 dar motion na seleção, ou o separador 🎬 motion)."><input type="checkbox" checked={p.motionAuto} onChange={(e) => set('motionAuto', e.target.checked)} style={{ accentColor: cor }} /> respiração de base (sem vídeo)</label>
             </div>
             <label className="flex items-center gap-2 opacity-85">
               <span className="opacity-55 whitespace-nowrap">tempo / frase</span>
@@ -804,6 +804,18 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     return fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, agendadoEm: p.agendadoEm.slice(0, 10), hora: p.hora || '11:00', aprovado: true }) });
   }, 'A agendar', false), [emLote, pecas]);
 
+  // MOTION em lote: vídeo REAL (image-to-video, Kling) em cada peça selecionada. Cada clip
+  // demora 1-3 min, por isso corre no cliente, uma a uma (sem time-out de servidor). Salta
+  // as que não têm imagem ou que já têm vídeo.
+  const motionLote = useCallback(() => {
+    if (typeof window !== 'undefined' && !window.confirm('Dar MOTION de vídeo (IA · Kling) às selecionadas?\n\nCada clip demora 1 a 3 min — várias peças podem levar bastante tempo. Não feches a página. (salta as que não têm imagem ou que já têm vídeo.)')) return;
+    return emLote((slug) => {
+      const p = pecas.find((x) => x.slug === slug);
+      if (!p?.imageUrl || p.clipUrl) return Promise.resolve(new Response(null, { status: 200 })); // salta
+      return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave' }) });
+    }, 'A dar motion de vídeo');
+  }, [emLote, pecas]);
+
   const pecaAberta = pecas.find((p) => p.slug === estudioSlug) ?? null;
 
   // a semana navegada (seg→dom) para o filtro "ver só esta semana".
@@ -914,6 +926,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
               <button onClick={transicaoLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }}>aplicar</button>
             </div>
             <span className="opacity-30">·</span>
+            <button onClick={motionLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-white/25 disabled:opacity-40" title="vídeo real (IA · Kling) a partir da imagem; 1-3 min por peça">🎬 dar motion (vídeo)</button>
             <button onClick={agendarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: cfg.cor, color: cfg.cor }} title="aprova cada peça na sua data já marcada (publica-se sozinha)">📅 agendar selecionadas</button>
             <button onClick={apagarLote} disabled={!!busy} className="text-[0.62rem] px-2 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 apagar selecionadas</button>
             <button onClick={limparSel} className="ml-auto text-[0.62rem] px-2 py-1 rounded-lg border border-white/20 opacity-75">limpar seleção</button>
