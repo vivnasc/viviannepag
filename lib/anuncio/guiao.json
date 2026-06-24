@@ -1,0 +1,36 @@
+{
+  "A": {
+    "nome": "A · a ferida",
+    "capaPng": "ficcao-plano/AMPARO-capa-pt.png",
+    "klingPrompt": "Gentle, very slow cinematic motion: thin chimney smoke rising and drifting over the terracotta rooftops, the single warm-lit window softly flickering, two or three swallows crossing the blue-dusk sky, a faint shimmer on the quiet river, a slow push-in. The hands stay perfectly still and intact. Warm, tender, painterly, calm. No people moving, no camera shake, no morphing.",
+    "intro": [
+      { "texto": "Há mulheres que seguram\ntoda a gente.", "st": 0.6, "en": 3.4 },
+      { "texto": "E que ninguém segura.", "st": 3.7, "en": 5.4 }
+    ],
+    "introDur": 5.6,
+    "falas": [
+      "A Amparo apanha o filho antes de cada queda há trinta e seis anos.",
+      "Este é o ano em que aprende que as mãos também se pousam.",
+      "Escrevi este romance de dentro. Hoje é oferta: o livro inteiro, sem pedir nada.",
+      "Lê o primeiro capítulo. Vê se te reconheces."
+    ],
+    "fim": { "titulo": "As Mãos de Amparo", "cta": "lê o primeiro capítulo · grátis", "site": "viviannedossantos.com" }
+  },
+  "B": {
+    "nome": "B · reconhecimento",
+    "capaPng": "ficcao-plano/AMPARO-capa-pt.png",
+    "klingPrompt": "Gentle, very slow cinematic motion: thin chimney smoke rising, the warm-lit window flickering, swallows crossing the dusk sky, slow push-in on the cupped hands holding the little house. Hands stay still and intact. Warm, painterly, calm. No people moving, no camera shake, no morphing.",
+    "intro": [
+      { "texto": "Se és a pessoa a quem todos\nligam quando precisam…", "st": 0.6, "en": 4.2 },
+      { "texto": "…e ninguém liga só para\nsaber de ti.", "st": 4.5, "en": 7.2 }
+    ],
+    "introDur": 7.4,
+    "falas": [
+      "Este livro é para ti.",
+      "As Mãos de Amparo é o meu primeiro romance, e é oferta.",
+      "O livro inteiro, sem pedir nada. Começa por um capítulo que lês sem pagar.",
+      "Talvez te reconheças."
+    ],
+    "fim": { "titulo": "As Mãos de Amparo", "cta": "um romance para quem carrega de mais · grátis", "site": "viviannedossantos.com" }
+  }
+}
