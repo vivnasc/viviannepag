@@ -2,7 +2,8 @@
   "A": {
     "nome": "A · a ferida",
     "capaPng": "ficcao-plano/AMPARO-capa-pt.png",
-    "klingPrompt": "Gentle, very slow cinematic motion: thin chimney smoke rising and drifting over the terracotta rooftops, the single warm-lit window softly flickering, two or three swallows crossing the blue-dusk sky, a faint shimmer on the quiet river, a slow push-in. The hands stay perfectly still and intact. Warm, tender, painterly, calm. No people moving, no camera shake, no morphing.",
+    "cenaPrompt": "Cinematic vertical 9:16 fine-art still, painterly and tender, no title, no book cover frame: a pair of weathered older mother's hands gently cupped together at the bottom of the frame, holding a tiny house with one warmly lit window; behind and above, at blue dusk, a small village of terracotta rooftops with thin chimney smoke between soft green mountains and a quiet river, a few warm lit windows, a low full moon, two or three swallows crossing the sky; generous calm sky; warm terracotta, sand, cream, sage green and dusk-blue palette; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves on both arms; intimate, quietly epic",
+    "klingPrompt": "thin chimney smoke rising and drifting slowly over the terracotta rooftops; the warm window softly flickering and breathing; two or three swallows slowly crossing the blue-dusk sky; a faint shimmer on the quiet river; the cupped hands and the little house stay perfectly still and intact",
     "intro": [
       { "texto": "Há mulheres que seguram\ntoda a gente.", "st": 0.6, "en": 3.4 },
       { "texto": "E que ninguém segura.", "st": 3.7, "en": 5.4 }
@@ -19,7 +20,8 @@
   "B": {
     "nome": "B · reconhecimento",
     "capaPng": "ficcao-plano/AMPARO-capa-pt.png",
-    "klingPrompt": "Gentle, very slow cinematic motion: thin chimney smoke rising, the warm-lit window flickering, swallows crossing the dusk sky, slow push-in on the cupped hands holding the little house. Hands stay still and intact. Warm, painterly, calm. No people moving, no camera shake, no morphing.",
+    "cenaPrompt": "Cinematic vertical 9:16 fine-art still, intimate close-up, painterly and tender, no title, no book cover frame: a pair of weathered older mother's hands gently cupped together, holding a tiny house with one single warmly lit window glowing softly; shallow depth of field, the dusk village of terracotta rooftops and soft green mountains blurred far behind in warm bokeh, a low full moon; warm terracotta, sand, cream, sage green and dusk-blue palette; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves on both arms; tender, hushed",
+    "klingPrompt": "the single warm window softly flickering and breathing; the faraway village bokeh shimmering gently; a barely-there drift of dusk haze across the background; the cupped hands and the little house stay perfectly still and intact",
     "intro": [
       { "texto": "Se és a pessoa a quem todos\nligam quando precisam…", "st": 0.6, "en": 4.2 },
       { "texto": "…e ninguém liga só para\nsaber de ti.", "st": 4.5, "en": 7.2 }

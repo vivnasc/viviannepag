@@ -1,46 +1,46 @@
 /* eslint-disable */
-// Gera o MP4 do ANÚNCIO do Amparo ponta a ponta, reusando a IA da casa:
-//   voz  → ElevenLabs eleven_v3 (a tua voz clonada)
-//   cena → Kling (anima a capa) via Replicate; se não houver token, Ken Burns
-//   texto→ Puppeteer + Fraunces/Outfit (tipografia da casa), molduras transparentes
-//   som  → música "Ancient Ground" por baixo da voz (amix)
-//   junta→ ffmpeg (espelha render-series.js)   ·   publica → Supabase Storage
+// MONTA o MP4 do ANÚNCIO do Amparo a partir das peças que a Vivianne JÁ viu/ouviu
+// no admin (sem surpresas):
+//   motion → o clip do Kling que ela pré-viu (manifesto.motionUrl); senão Ken Burns
+//   voz    → a voz dela (eleven_v3) que ela pré-ouviu (manifesto.voz, COM timestamps)
+//   texto  → KARAOKÊ: cada palavra acende no instante em que a voz a diz, frame a
+//            frame (Puppeteer + Fraunces embebida), como nos reels dela — NÃO texto
+//            parado, NÃO legenda chapada
+//   som    → música "Ancient Ground" por baixo da voz (amix)
+//   junta  → ffmpeg (molde do render-series.js)   ·   publica → Supabase Storage
 //
-// Uso (no GitHub Actions, ou local para testar os PNGs):
-//   node scripts/anuncio/render-anuncio.js            → render completo (precisa ffmpeg + chaves)
-//   node scripts/anuncio/render-anuncio.js --pngs     → só gera as molduras PNG (teste local)
-//   VARIANTE=B node ...                                → usa o guião B (reconhecimento)
+// O trabalho PESADO (cena Flux + motion Kling + voz) é feito no admin (Vercel, onde
+// existe a REPLICATE_API_TOKEN). Aqui só se MONTA — por isso não depende de Replicate.
+//
+// Uso: VARIANTE=A node scripts/anuncio/render-anuncio.js   (precisa ffmpeg + chaves)
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
-const crypto = require('crypto');
 
 const ROOT = path.join(__dirname, '..', '..');
 const TMP = path.join(ROOT, '.anuncio-tmp');
-const SO_PNGS = process.argv.includes('--pngs');
 const VAR = (process.env.VARIANTE || 'A').toUpperCase();
-
-// ───────────────────────── GUIÃO (edita aqui) ─────────────────────────
-// intro = molduras de gancho sobre a cena, SEM voz (só música).
-// falas = a tua narração (uma frase por entrada); cada uma vira voz + legenda.
-// fim   = cartão final com a capa e o convite.
 const GUIOES = require(path.join(ROOT, 'lib', 'anuncio', 'guiao.json'));
 const G = GUIOES[VAR] || GUIOES.A;
 
-const W = 1080, H = 1920, FPS = 30;
-const GAP = 0.28;       // pausa entre falas
-const FADE = 0.4;       // fade das molduras
+const W = 1080, H = 1920, FPS = 24;
+const FADE = 0.4;       // fade dos cartões de gancho
 const FIM_DUR = 5.5;    // duração do cartão final
+const TAIL = 0.6;       // respiração depois da última fala, antes do cartão final
 const MUSICA_VOL = 0.2; // música por baixo da voz
+const BUCKET = 'viviannepag-assets';
 
 // ───────────────────────── helpers ─────────────────────────
 const sh = (cmd) => cp.execSync(cmd, { stdio: 'inherit', cwd: ROOT });
 const sho = (cmd) => cp.execSync(cmd, { cwd: ROOT }).toString().trim();
-function probeDur(file) {
-  return parseFloat(sho(`ffprobe -v error -show_entries format=duration -of csv=p=0 "${file}"`)) || 0;
+const probeDur = (f) => parseFloat(sho(`ffprobe -v error -show_entries format=duration -of csv=p=0 "${f}"`)) || 0;
+async function baixar(url, dest) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`download ${r.status} ${url}`);
+  fs.writeFileSync(dest, Buffer.from(await r.arrayBuffer()));
 }
 
-// fontes da casa embebidas (molde do capa-compor.js)
+// fontes da casa embebidas (molde do capa-compor.js / render anterior)
 function fontFace(fam, w, st, file) {
   const dir = fam === 'Fraunces' ? 'fraunces' : 'outfit';
   const base = path.dirname(require.resolve(`@fontsource/${dir}/package.json`));
@@ -54,79 +54,74 @@ const FONTS = [
   ['Outfit', 500, 'normal', 'outfit-latin-500-normal'],
 ].map((a) => fontFace(...a)).join('\n');
 
-let _browser = null;
-async function pngDeHtml(html, out) {
-  const puppeteer = require('puppeteer');
-  if (!_browser) _browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-  const page = await _browser.newPage();
-  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
-  await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${FONTS}
-    *{margin:0;padding:0;box-sizing:border-box}html,body{width:${W}px;height:${H}px}</style></head><body>${html}</body></html>`, { waitUntil: 'load' });
-  await page.evaluateHandle('document.fonts.ready');
-  await page.screenshot({ path: out, omitBackground: true });
-  await page.close();
+// ───────────────────────── manifesto (o que ela aprovou no admin) ─────────────────────────
+const { createClient } = require('@supabase/supabase-js');
+function sb() {
+  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) throw new Error('faltam SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY');
+  return createClient(url, key, { auth: { persistSession: false } });
+}
+async function lerManifesto(client) {
+  try {
+    const { data, error } = await client.storage.from(BUCKET).download(`anuncios/_manifesto-${VAR.toLowerCase()}.json`);
+    if (error || !data) return {};
+    return JSON.parse(Buffer.from(await data.arrayBuffer()).toString('utf8'));
+  } catch { return {}; }
 }
 
-// moldura de texto grande, centrada (gancho)
-const htmlCartao = (texto) => `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 90px">
-  <p style="font-family:'Fraunces',serif;font-weight:300;color:#F6EDE0;font-size:78px;line-height:1.22;letter-spacing:-.01em;white-space:pre-line;text-shadow:0 3px 30px rgba(12,8,18,.85)">${texto}</p></div>`;
-
-// legenda (terço inferior), com um leve fundo para legibilidade
-const htmlLegenda = (texto) => `<div style="position:absolute;left:0;right:0;bottom:240px;display:flex;justify-content:center;padding:0 80px">
-  <p style="font-family:'Fraunces',serif;font-weight:300;color:#fff;font-size:52px;line-height:1.3;text-align:center;background:rgba(18,14,22,.42);padding:18px 30px;border-radius:18px;text-shadow:0 2px 16px rgba(12,8,18,.8)">${texto}</p></div>`;
-
-// cartão final: a capa + convite
-function htmlFim(capaB64, fim) {
-  return `<div style="width:${W}px;height:${H}px;background:#1b1612;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46px;padding:60px">
-    <img src="data:image/png;base64,${capaB64}" style="width:62%;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.5)"/>
-    <div style="text-align:center">
-      <p style="font-family:'Fraunces',serif;font-weight:600;color:#F6EDE0;font-size:62px;margin-bottom:18px">${fim.titulo}</p>
-      <p style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:#E9B98F;font-size:40px;margin-bottom:30px">${fim.cta}</p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:#C9A98E;font-size:26px">${fim.site}</p>
-    </div></div>`;
-}
-
-// ───────────────────────── voz (ElevenLabs) ─────────────────────────
+// ───────────────────────── voz (ElevenLabs, COM timestamps p/ karaokê) ─────────────────────────
 const ELEVEN_KEY = process.env.ELEVENLABS_API_KEY || process.env.ELEVEN_API_KEY || process.env.XI_API_KEY;
 const ELEVEN_VOICE = process.env.ELEVEN_VOICE_ID || process.env.ELEVENLABS_VOICE_ID || process.env.VOICE_ID;
-async function tts(texto, out) {
+function palavrasDeAlinhamento(a) {
+  if (!a || !a.characters || !a.characters.length) return [];
+  const out = []; let buf = '', t0 = 0, aberto = false;
+  const fechar = (tEnd) => { const w = buf.trim(); if (w && !w.includes('[') && !w.includes(']')) out.push({ w, t0, t1: tEnd }); buf = ''; aberto = false; };
+  for (let i = 0; i < a.characters.length; i++) {
+    const ch = a.characters[i];
+    const cs = a.character_start_times_seconds[i] ?? 0;
+    const ce = a.character_end_times_seconds[i] ?? cs;
+    if (/\s/.test(ch)) { if (aberto) fechar(ce); continue; }
+    if (!aberto) { t0 = cs; aberto = true; }
+    buf += ch;
+  }
+  if (aberto) fechar(a.character_end_times_seconds[a.character_end_times_seconds.length - 1] ?? t0);
+  return out;
+}
+async function ttsTimestamps(texto, out) {
   if (!ELEVEN_KEY || !ELEVEN_VOICE) throw new Error('faltam ELEVENLABS_API_KEY / ELEVEN_VOICE_ID');
-  const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELEVEN_VOICE}`, {
+  const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELEVEN_VOICE}/with-timestamps`, {
     method: 'POST',
-    headers: { 'xi-api-key': ELEVEN_KEY, 'Content-Type': 'application/json', Accept: 'audio/mpeg' },
+    headers: { 'xi-api-key': ELEVEN_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({ text: texto, model_id: 'eleven_v3' }),
   });
   if (!res.ok) throw new Error(`elevenlabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  fs.writeFileSync(out, Buffer.from(await res.arrayBuffer()));
+  const j = await res.json();
+  if (!j.audio_base64) throw new Error('elevenlabs: sem áudio');
+  fs.writeFileSync(out, Buffer.from(j.audio_base64, 'base64'));
+  const palavras = palavrasDeAlinhamento(j.alignment || j.normalized_alignment);
+  return { palavras, dur: palavras.length ? palavras[palavras.length - 1].t1 : probeDur(out) };
 }
 
-// ───────────────────────── cena (Kling via Replicate) ou Ken Burns ─────────────────────────
-const REPLICATE = process.env.REPLICATE_API_TOKEN;
-async function klingAnima(capaUrl, out) {
-  const MODEL = 'kwaivgi/kling-v2.5-turbo-pro';
-  const corpo = (campo) => ({ input: { prompt: G.klingPrompt, negative_prompt: 'text, watermark, distortion, morphing, extra fingers, fast motion, camera shake', duration: 10, [campo]: capaUrl } });
-  let r = await fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
-    method: 'POST', headers: { Authorization: `Bearer ${REPLICATE}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
-    body: JSON.stringify(corpo('start_image')),
-  });
-  if (r.status === 422) r = await fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
-    method: 'POST', headers: { Authorization: `Bearer ${REPLICATE}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
-    body: JSON.stringify(corpo('image')),
-  });
-  if (!r.ok) throw new Error(`kling ${r.status}: ${(await r.text()).slice(0, 160)}`);
-  let pred = await r.json();
-  for (let i = 0; i < 60 && pred.status !== 'succeeded' && pred.status !== 'failed'; i++) {
-    await new Promise((s) => setTimeout(s, 3000));
-    pred = await (await fetch(`https://api.replicate.com/v1/predictions/${pred.id}`, { headers: { Authorization: `Bearer ${REPLICATE}` } })).json();
+// agrupa as palavras (do stream contínuo) nas FALAS, por contagem de tokens, para o
+// karaokê mostrar uma fala de cada vez. Tempos relativos ao início da narração.
+function agruparEmFalas(palavras, falas) {
+  const grupos = []; let k = 0;
+  for (const fala of falas) {
+    const n = fala.trim().split(/\s+/).filter(Boolean).length;
+    const ws = palavras.slice(k, k + n); k += n;
+    if (ws.length) grupos.push({ words: ws.map((p) => ({ w: p.w, t0: p.t0, t1: p.t1 })) });
   }
-  if (pred.status !== 'succeeded') throw new Error('kling não terminou');
-  const url = Array.isArray(pred.output) ? pred.output[0] : pred.output;
-  fs.writeFileSync(out, Buffer.from(await (await fetch(url)).arrayBuffer()));
+  // sobras (se a tokenização divergir): junta à última fala
+  if (k < palavras.length && grupos.length) {
+    grupos[grupos.length - 1].words.push(...palavras.slice(k).map((p) => ({ w: p.w, t0: p.t0, t1: p.t1 })));
+  }
+  return grupos;
 }
-function kenBurns(capa, dur, out) {
-  // empurra-lente lento sobre a capa (fallback sem IA): 9:16, fps fixos
+
+// ───────────────────────── fundo: motion (pré-visto) ou Ken Burns ─────────────────────────
+function kenBurns(img, dur, out) {
   const frames = Math.ceil(dur * FPS);
-  sh(`ffmpeg -y -loop 1 -i "${capa}" -vf "scale=1400:-1,zoompan=z='min(zoom+0.0006,1.12)':d=${frames}:s=${W}x${H}:fps=${FPS},setsar=1" -t ${dur} -c:v libx264 -pix_fmt yuv420p "${out}"`);
+  sh(`ffmpeg -y -loop 1 -i "${img}" -vf "scale=1400:-1,zoompan=z='min(zoom+0.0006,1.12)':d=${frames}:s=${W}x${H}:fps=${FPS},setsar=1" -t ${dur} -c:v libx264 -pix_fmt yuv420p "${out}"`);
 }
 
 // ───────────────────────── música ─────────────────────────
@@ -135,108 +130,167 @@ function faixaUrl() {
   return `https://tdytdamtfillqyklgrmb.supabase.co/storage/v1/object/public/audios/albums/ancient-ground/faixa-${n}.mp3`;
 }
 
-// ───────────────────────── upload (Supabase) ─────────────────────────
-async function publicar(file) {
-  const { createClient } = require('@supabase/supabase-js');
-  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('faltam SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY');
-  const sb = createClient(url, key, { auth: { persistSession: false } });
+// ───────────────────────── a página do overlay (karaokê + ganchos + fim) ─────────────────────────
+// Uma só página; por cada frame chamamos window.__at(t) e fotografamos com fundo
+// transparente. O texto ACENDE palavra a palavra no tempo da voz (karaokê), os
+// ganchos entram/saem em fade, e o cartão final cobre o fim.
+function paginaOverlay(plano) {
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${FONTS}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:${W}px;height:${H}px;overflow:hidden}
+    #root{position:relative;width:${W}px;height:${H}px}
+    .gancho{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 90px}
+    .gancho p{font-family:'Fraunces',serif;font-weight:300;color:#F6EDE0;font-size:78px;line-height:1.22;letter-spacing:-.01em;white-space:pre-line;text-shadow:0 3px 30px rgba(12,8,18,.9)}
+    .kar{position:absolute;left:0;right:0;bottom:300px;padding:0 70px;text-align:center}
+    .kar span{font-family:'Fraunces',serif;font-weight:300;font-size:60px;line-height:1.32;text-shadow:0 2px 18px rgba(12,8,18,.92);transition:color .12s,opacity .12s}
+    .fim{position:absolute;inset:0;background:#1b1612;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46px;padding:60px}
+    .fim img{width:62%;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+    .fim .t{font-family:'Fraunces',serif;font-weight:600;color:#F6EDE0;font-size:62px;margin-bottom:18px;text-align:center}
+    .fim .c{font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:#E9B98F;font-size:40px;margin-bottom:30px;text-align:center}
+    .fim .s{font-family:'Outfit',sans-serif;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:#C9A98E;font-size:26px;text-align:center}
+  </style></head><body><div id="root"></div>
+  <script>
+    var P = ${JSON.stringify(plano)};
+    var root = document.getElementById('root');
+    function clamp(x){return x<0?0:(x>1?1:x);}
+    window.__at = function(t){
+      // cartão final cobre tudo
+      if (t >= P.fimStart){
+        var op = clamp((t - P.fimStart)/0.5);
+        root.innerHTML = '<div class="fim" style="opacity:'+op.toFixed(3)+'">'
+          + (P.capa ? '<img src="'+P.capa+'"/>' : '')
+          + '<div><div class="t">'+P.fim.titulo+'</div><div class="c">'+P.fim.cta+'</div><div class="s">'+P.fim.site+'</div></div></div>';
+        return;
+      }
+      // ganchos (intro)
+      for (var i=0;i<P.intro.length;i++){
+        var g = P.intro[i];
+        if (t >= g.st - ${FADE} && t <= g.en + ${FADE}){
+          var fin = clamp((t - g.st)/${FADE});
+          var fout = clamp((g.en - t)/${FADE});
+          var o = Math.min(fin, fout);
+          if (o > 0){ root.innerHTML = '<div class="gancho" style="opacity:'+o.toFixed(3)+'"><p>'+g.texto.replace(/\\n/g,'<br>')+'</p></div>'; return; }
+        }
+      }
+      // karaokê: a fala ativa (a última cujo início já passou)
+      var fala=null;
+      for (var j=0;j<P.falas.length;j++){ if (t >= P.falas[j].words[0].t0) fala = P.falas[j]; }
+      if (fala){
+        var last = fala.words[fala.words.length-1];
+        var vis = clamp((t - fala.words[0].t0 + ${FADE})/${FADE}) * clamp((last.t1 + ${TAIL} - t)/${FADE});
+        var html = '';
+        for (var w=0; w<fala.words.length; w++){
+          var p = fala.words[w];
+          var cor, op;
+          if (t >= p.t1){ cor='#F6EDE0'; op='1'; }            // já dita
+          else if (t >= p.t0){ cor='#E9B98F'; op='1'; }       // a dizer agora
+          else { cor='#F6EDE0'; op='0.34'; }                  // por dizer
+          html += '<span style="color:'+cor+';opacity:'+op+'">'+p.w+'</span> ';
+        }
+        root.innerHTML = '<div class="kar" style="opacity:'+clamp(vis).toFixed(3)+'">'+html+'</div>';
+        return;
+      }
+      root.innerHTML = '';
+    };
+  </script></body></html>`;
+}
+
+// ───────────────────────── upload ─────────────────────────
+async function publicar(client, file) {
   const dest = `anuncios/amparo-${VAR.toLowerCase()}-${Date.now()}.mp4`;
-  const { error } = await sb.storage.from('viviannepag-assets').upload(dest, fs.readFileSync(file), { contentType: 'video/mp4', upsert: true });
+  const { error } = await client.storage.from(BUCKET).upload(dest, fs.readFileSync(file), { contentType: 'video/mp4', upsert: true });
   if (error) throw new Error('upload: ' + error.message);
-  return sb.storage.from('viviannepag-assets').getPublicUrl(dest).data.publicUrl;
+  return client.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl;
 }
 
 // ───────────────────────── montagem ─────────────────────────
 async function main() {
   fs.rmSync(TMP, { recursive: true, force: true });
   fs.mkdirSync(TMP, { recursive: true });
-  const capaAbs = path.join(ROOT, G.capaPng);
-  const capaB64 = fs.readFileSync(capaAbs).toString('base64');
+  const client = sb();
+  const man = await lerManifesto(client);
 
-  // 1. molduras PNG (sempre — é o que valido localmente)
-  console.log('· molduras de texto…');
-  const overlays = []; // {png, st, en, fadeOut}
-  for (let i = 0; i < G.intro.length; i++) {
-    const o = G.intro[i], png = path.join(TMP, `intro${i}.png`);
-    await pngDeHtml(htmlCartao(o.texto), png);
-    overlays.push({ png, st: o.st, en: o.en, fadeOut: true });
-  }
-  const fimPng = path.join(TMP, 'fim.png');
-  await pngDeHtml(htmlFim(capaB64, G.fim), fimPng);
-
-  if (SO_PNGS) { console.log('✓ PNGs em', TMP, '(modo --pngs, sem ffmpeg/voz)'); await _browser?.close(); return; }
-
-  // 2. voz: uma fala por frase, para sincronizar a legenda
-  console.log('· voz (ElevenLabs)…');
-  const falas = [];
-  let tVoz = G.introDur;
-  for (let i = 0; i < G.falas.length; i++) {
-    const mp3 = path.join(TMP, `fala${i}.mp3`);
-    await tts(G.falas[i], mp3);
-    const d = probeDur(mp3);
-    const legenda = path.join(TMP, `leg${i}.png`);
-    await pngDeHtml(htmlLegenda(G.falas[i]), legenda);
-    overlays.push({ png: legenda, st: tVoz, en: tVoz + d, fadeOut: true });
-    falas.push({ mp3, st: tVoz, d });
-    tVoz += d + GAP;
-  }
-  await _browser?.close();
-  const TOTAL = Math.max(tVoz, G.introDur) + FIM_DUR;
-  // cartão final: cobre tudo no fim
-  overlays.push({ png: fimPng, st: TOTAL - FIM_DUR, en: TOTAL, fadeOut: false });
-
-  // 3. faixa de voz contínua: silêncio(intro) + falas com pausas
-  console.log('· junta a voz…');
-  const vozLista = path.join(TMP, 'voz.txt');
-  const partes = [`file 'sil.wav'`];
-  sh(`ffmpeg -y -f lavfi -i anullsrc=r=44100:cl=mono -t ${G.introDur} "${path.join(TMP, 'sil.wav')}"`);
-  for (let i = 0; i < falas.length; i++) {
-    sh(`ffmpeg -y -i "${falas[i].mp3}" -ar 44100 -ac 1 "${path.join(TMP, `f${i}.wav`)}"`);
-    partes.push(`file 'f${i}.wav'`);
-    if (i < falas.length - 1) { sh(`ffmpeg -y -f lavfi -i anullsrc=r=44100:cl=mono -t ${GAP} "${path.join(TMP, `g${i}.wav`)}"`); partes.push(`file 'g${i}.wav'`); }
-  }
-  fs.writeFileSync(vozLista, partes.join('\n'));
-  sh(`ffmpeg -y -f concat -safe 0 -i "${vozLista}" -c copy "${path.join(TMP, 'voz.wav')}"`);
-
-  // 4. cena de fundo (Kling ou Ken Burns), em loop até TOTAL
-  const bgRaw = path.join(TMP, 'bg-raw.mp4');
-  let temMotion = false;
-  if (REPLICATE) {
-    try {
-      console.log('· cena animada (Kling)…');
-      // a capa tem de ter URL pública; usa a capa-composta do Storage do Amparo
-      const capaUrl = `${(process.env.SUPABASE_URL || 'https://tdytdamtfillqyklgrmb.supabase.co').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/romances/rom-01-amparo/capa-composta-pt.png`;
-      await klingAnima(capaUrl, bgRaw); temMotion = true;
-    } catch (e) { console.log('  (Kling falhou, uso Ken Burns):', e.message); }
-  }
-  const bg = path.join(TMP, 'bg.mp4');
-  if (temMotion) {
-    sh(`ffmpeg -y -stream_loop -1 -t ${TOTAL} -i "${bgRaw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
+  // 1. VOZ + timing (a que ela pré-ouviu; senão gera agora)
+  const vozMp3 = path.join(TMP, 'voz-fala.mp3');
+  let palavras;
+  if (man.voz && man.voz.url && Array.isArray(man.voz.palavras) && man.voz.palavras.length) {
+    console.log('· voz: a usar a que foi pré-ouvida no admin');
+    await baixar(man.voz.url, vozMp3);
+    palavras = man.voz.palavras;
   } else {
-    console.log('· cena (Ken Burns sobre a capa)…');
-    kenBurns(capaAbs, TOTAL, bg);
+    console.log('· voz: a gerar agora (ElevenLabs, com timestamps)…');
+    const r = await ttsTimestamps(G.falas.join(' '), vozMp3);
+    palavras = r.palavras;
   }
+  const narrDur = probeDur(vozMp3);
+  const falasKar = agruparEmFalas(palavras, G.falas).map((f) => ({
+    words: f.words.map((p) => ({ w: p.w, t0: +(G.introDur + p.t0).toFixed(3), t1: +(G.introDur + p.t1).toFixed(3) })),
+  }));
+  const ultimoFim = falasKar.length ? falasKar[falasKar.length - 1].words.slice(-1)[0].t1 : G.introDur + narrDur;
+  const fimStart = ultimoFim + TAIL;
+  const TOTAL = +(fimStart + FIM_DUR).toFixed(2);
+
+  // 2. faixa de voz: silêncio(intro) + narração
+  console.log('· faixa de voz…');
+  sh(`ffmpeg -y -f lavfi -i anullsrc=r=44100:cl=mono -t ${G.introDur} "${path.join(TMP, 'sil.wav')}"`);
+  sh(`ffmpeg -y -i "${vozMp3}" -ar 44100 -ac 1 "${path.join(TMP, 'narr.wav')}"`);
+  fs.writeFileSync(path.join(TMP, 'voz.txt'), `file 'sil.wav'\nfile 'narr.wav'`);
+  sh(`ffmpeg -y -f concat -safe 0 -i "${path.join(TMP, 'voz.txt')}" -c copy "${path.join(TMP, 'voz.wav')}"`);
+
+  // 3. fundo: motion pré-visto (loop até TOTAL) ou Ken Burns sobre a cena/capa
+  const bg = path.join(TMP, 'bg.mp4');
+  if (man.motionUrl) {
+    console.log('· fundo: motion pré-visto (Kling)…');
+    const raw = path.join(TMP, 'motion.mp4');
+    await baixar(man.motionUrl, raw);
+    sh(`ffmpeg -y -stream_loop -1 -t ${TOTAL} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
+  } else {
+    const cena = path.join(TMP, 'cena.jpg');
+    if (man.cenaUrl) { console.log('· fundo: Ken Burns sobre a cena (sem motion ainda)…'); await baixar(man.cenaUrl, cena); }
+    else { console.log('· fundo: Ken Burns sobre a capa (sem cena/motion)…'); fs.copyFileSync(path.join(ROOT, G.capaPng), cena); }
+    kenBurns(cena, TOTAL, bg);
+  }
+
+  // 4. overlay: karaokê + ganchos + cartão final, frame a frame (Puppeteer)
+  console.log('· overlay (karaokê) frame a frame…');
+  const capaB64 = fs.readFileSync(path.join(ROOT, G.capaPng)).toString('base64');
+  const plano = {
+    introDur: G.introDur, fimStart, total: TOTAL,
+    intro: G.intro, falas: falasKar,
+    fim: G.fim, capa: `data:image/png;base64,${capaB64}`,
+  };
+  const ovDir = path.join(TMP, 'ov');
+  fs.mkdirSync(ovDir, { recursive: true });
+  const puppeteer = require('puppeteer');
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const page = await browser.newPage();
+  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
+  await page.setContent(paginaOverlay(plano), { waitUntil: 'load' });
+  await page.evaluateHandle('document.fonts.ready');
+  const N = Math.ceil(TOTAL * FPS);
+  for (let i = 0; i < N; i++) {
+    const t = i / FPS;
+    await page.evaluate((tt) => window.__at(tt), t);
+    await page.screenshot({ path: path.join(ovDir, `f${String(i).padStart(5, '0')}.png`), clip: { x: 0, y: 0, width: W, height: H }, omitBackground: true });
+  }
+  await browser.close();
+  console.log(`· ${N} frames de overlay`);
 
   // 5. música por baixo
   const mus = path.join(TMP, 'mus.mp3');
   let temMusica = false;
   try { const r = await fetch(faixaUrl()); if (r.ok) { fs.writeFileSync(mus, Buffer.from(await r.arrayBuffer())); temMusica = true; } } catch {}
 
-  // 6. ffmpeg final: bg + overlays (fade/enable) + voz (+música amix)
+  // 6. ffmpeg final: bg + overlay-seq + voz (+música amix)
   console.log('· montagem final…');
-  const ins = [`-i "${bg}"`, ...overlays.map((o) => `-loop 1 -t ${TOTAL} -i "${o.png}"`), `-i "${path.join(TMP, 'voz.wav')}"`];
+  const ins = [`-i "${bg}"`, `-framerate ${FPS} -i "${path.join(ovDir, 'f%05d.png')}"`, `-i "${path.join(TMP, 'voz.wav')}"`];
   if (temMusica) ins.push(`-i "${mus}"`);
-  const idxVoz = 1 + overlays.length;
-  const idxMus = idxVoz + 1;
-  const fc = [];
-  fc.push(`[0:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1[b]`);
-  overlays.forEach((o, i) => {
-    const fo = o.fadeOut ? `,fade=t=out:st=${(o.en - FADE).toFixed(2)}:d=${FADE}:alpha=1` : '';
-    fc.push(`[${i + 1}:v]format=rgba,fade=t=in:st=${o.st.toFixed(2)}:d=${FADE}:alpha=1${fo}[o${i}]`);
-  });
-  let prev = 'b';
-  overlays.forEach((o, i) => { const out = i === overlays.length - 1 ? 'v' : `c${i}`; fc.push(`[${prev}][o${i}]overlay=enable='between(t,${o.st.toFixed(2)},${o.en.toFixed(2)})'[${out}]`); prev = out; });
+  const idxVoz = 2, idxMus = 3;
+  const fc = [
+    `[0:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1[b]`,
+    `[1:v]format=rgba[ov]`,
+    `[b][ov]overlay=0:0:shortest=1,format=yuv420p[v]`,
+  ];
   let aMap;
   if (temMusica) { fc.push(`[${idxVoz}:a]apad[vz]`, `[${idxMus}:a]volume=${MUSICA_VOL},afade=t=out:st=${(TOTAL - 1.5).toFixed(2)}:d=1.5[mu]`, `[vz][mu]amix=inputs=2:duration=longest:dropout_transition=0[a]`); aMap = '[a]'; }
   else { fc.push(`[${idxVoz}:a]apad[a]`); aMap = '[a]'; }
@@ -245,7 +299,7 @@ async function main() {
 
   // 7. publicar
   console.log('· a publicar…');
-  const url = await publicar(out);
+  const url = await publicar(client, out);
   console.log('\n✓ ANÚNCIO PRONTO:', url);
 }
 
