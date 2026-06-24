@@ -655,7 +655,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const [estudioSlug, setEstudioSlug] = useState<string | null>(null);
   const [offset, setOffset] = useState(0); // 0 = esta semana; ▶ para semanas futuras (produzir e pré-datar)
   const [sel, setSel] = useState<Set<string>>(new Set()); // seleção múltipla (barra de ferramentas)
-  const [soDaSemana, setSoDaSemana] = useState(false);     // ver só a semana navegada
+  const [verTodas, setVerTodas] = useState(false);         // por defeito mostra só a semana navegada
   const [transLote, setTransLote] = useState<Transicao>('deslizar'); // transição a aplicar em lote
   const [efeitoLote, setEfeitoLote] = useState<EfeitoTexto>('maquina'); // motion do texto a aplicar em lote
 
@@ -904,7 +904,11 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   const semSeg = segundaDaSemana(offset);
   const semDom = new Date(semSeg); semDom.setDate(semSeg.getDate() + 6);
   const dentroDaSemana = (p: Peca) => { if (!p.agendadoEm) return false; const d = p.agendadoEm.slice(0, 10); return d >= dataLocalStr(semSeg) && d <= dataLocalStr(semDom); };
-  const pecasVistas = soDaSemana ? pecas.filter(dentroDaSemana) : pecas;
+  // o feed segue a semana navegada (◀▶). Nesta semana (offset 0) junta os rascunhos sem
+  // data (gerações avulsas); nas outras semanas, só os posts datados dessa semana. O toggle
+  // «ver todas» mostra tudo.
+  const daSemana = offset === 0 ? [...pecas.filter(dentroDaSemana), ...pecas.filter((p) => !p.agendadoEm)] : pecas.filter(dentroDaSemana);
+  const pecasVistas = verTodas ? pecas : daSemana;
   const ordenadas = [...pecasVistas].sort((a, b) => `${a.agendadoEm ?? '~'}${a.hora ?? ''}`.localeCompare(`${b.agendadoEm ?? '~'}${b.hora ?? ''}`));
   // agrupar por DIA (hierarquia + ritmo): cabeçalho de dia, depois os cartões desse dia.
   const grupos: { chave: string; rotulo: string; itens: Peca[] }[] = [];
@@ -1031,12 +1035,12 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         {erro && <p className="mb-3 text-[0.82rem] text-rose-300">{erro}</p>}
         {msg && !erro && <p className="mb-3 text-[0.82rem] text-emerald-300">{msg}</p>}
 
-        {/* cabeçalho do feed: contagem + filtro "só a semana navegada" */}
+        {/* cabeçalho do feed: segue a semana navegada; toggle para ver todas */}
         <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
-          <p className="text-[0.66rem] uppercase tracking-widest opacity-50">{pecasVistas.length} peça(s){soDaSemana ? ` · ${rotuloSemana(offset)}` : ''}</p>
+          <p className="text-[0.66rem] uppercase tracking-widest opacity-50">{pecasVistas.length} peça(s) · {verTodas ? 'todas as semanas' : rotuloSemana(offset)}</p>
           <label className="flex items-center gap-1.5 text-[0.66rem] opacity-80 cursor-pointer select-none">
-            <input type="checkbox" checked={soDaSemana} onChange={(e) => setSoDaSemana(e.target.checked)} className="accent-current" style={{ accentColor: cfg.cor }} />
-            ver só a semana navegada ({rotuloSemana(offset)})
+            <input type="checkbox" checked={verTodas} onChange={(e) => setVerTodas(e.target.checked)} className="accent-current" style={{ accentColor: cfg.cor }} />
+            ver todas as peças (todas as semanas)
           </label>
         </div>
 
@@ -1076,7 +1080,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         )}
 
         {pecasVistas.length === 0 ? (
-          <p className="text-center text-[0.78rem] opacity-50 py-10">{soDaSemana ? 'Nada nesta semana. Produz a semana ou tira o filtro.' : 'Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.'}</p>
+          <p className="text-center text-[0.78rem] opacity-50 py-10">{verTodas ? 'Ainda não há peças. Carrega «✦ produzir a semana toda» ou um formato.' : `Nada em ${rotuloSemana(offset)}. Carrega «✦ produzir e pré-datar» ou ◀▶ para outra semana (ou «ver todas»).`}</p>
         ) : (
           <div className="space-y-6">
             {grupos.map((g) => (
