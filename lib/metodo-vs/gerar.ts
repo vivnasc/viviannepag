@@ -63,16 +63,16 @@ export async function gerarCenaImagem(texto: string, apiKey: string, evitar: str
 // umas das outras), LEVE e ligado à voz/chegada de cada uma, não um estilo rígido. Mantém
 // sempre a vida e a variedade; só inclina a luz/o ambiente para o mundo daquela conta.
 const REGISTO_CONTA: Record<ContaId, string> = {
-  mae: 'honest, grounded and alive, the warmth of something real and lived-in',
-  ver: 'lucid and luminous, lots of clear light and air, calm and present, a sense of seeing clearly, stillness',
+  mae: 'honest, grounded and alive, real and lived-in',
+  ver: 'lucid and luminous, clear light and air, calm and present, a sense of seeing clearly, stillness',
   vir: 'movement and thresholds, doorways, paths and in-between places, a restless gentle motion, the feeling of returning',
-  viver: 'vivid and full of life, rich present colour and warmth, energy and presence, fully in the moment',
+  viver: 'vivid and full of life, present and energetic, fully in the moment',
 };
 
 export function promptImagemVS(cena: string, conta: ContaId = 'mae'): string {
   const c = String(cena ?? '').trim().replace(/\s+/g, ' ');
   const reg = REGISTO_CONTA[conta] ?? REGISTO_CONTA.mae;
-  return `${c}. A single clear, specific subject, alive and full of atmosphere, in beautiful natural light with real depth and dimension; ${reg}; vivid, evocative and cinematic, high quality, with some breathing space around it. Vertical 9:16 portrait.`;
+  return `${c}. A single clear, specific subject, alive and full of atmosphere, with real depth and dimension; ${reg}; the natural light, the time of day and the colours belong to THIS particular scene and moment, and vary freely from piece to piece (not one repeated tone across everything); cinematic, evocative, high quality, with some breathing space around it. Vertical 9:16 portrait.`;
 }
 
 const REVELACAO =
