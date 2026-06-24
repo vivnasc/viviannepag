@@ -854,7 +854,8 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
     return emLote((slug) => {
       const p = pecas.find((x) => x.slug === slug);
       if (!p?.imageUrl || p.clipUrl) return Promise.resolve(new Response(null, { status: 200 })); // salta
-      return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave' }) });
+      // 'natural' = ANIMA o que está na imagem (não só a câmara) + aproximação suave.
+      return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave', ingredientes: ['natural'] }) });
     }, 'A dar motion de vídeo');
   }, [emLote, pecas]);
 
