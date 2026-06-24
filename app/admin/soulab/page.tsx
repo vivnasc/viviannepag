@@ -493,8 +493,8 @@ export default function SoulabPage() {
   }, [acaoSlug, busy, sel, pecas, recarregar]);
 
   const motionLote = useCallback(() => {
-    if (typeof window !== 'undefined' && !window.confirm(`Dar MOTION de vídeo (Kling) às ${sel.size} selecionada(s)? 1-3 min cada. Não feches. (salta sem imagem ou com vídeo.)`)) return;
-    return emLote((slug) => { const p = pecas.find((x) => x.slug === slug); if (!p?.imageUrl || p.clipUrl) return Promise.resolve(new Response(null, { status: 200 })); return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave', ingredientes: ['natural'] }) }); }, 'A dar motion');
+    if (typeof window !== 'undefined' && !window.confirm(`Dar/REFAZER MOTION de vídeo (Kling) às ${sel.size} selecionada(s)? Refaz mesmo as que já têm vídeo (corrigir câmara estática). 1-3 min cada. Não feches. (só salta sem imagem.)`)) return;
+    return emLote((slug) => { const p = pecas.find((x) => x.slug === slug); if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave', ingredientes: ['natural'] }) }); }, 'A dar motion');
   }, [emLote, pecas, sel]);
   const efeitoLoteAplicar = useCallback(() => emLote((slug) => fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, efeito: efeitoLote }) }), 'A aplicar efeito'), [emLote, efeitoLote]);
   const somLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Gerar SOM da cena nas ${sel.size} selecionada(s)? (salta sem imagem)`)) return; return emLote((slug) => { const p = pecas.find((x) => x.slug === slug); if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); return fetch('/api/admin/soulab/som', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipo: 'cena' }) }); }, 'A gerar som'); }, [emLote, pecas, sel]);

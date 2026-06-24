@@ -7,11 +7,12 @@ export const METODOVS_MARCA = 'metodovs';
 export const METODOVS_MUNDO = 'autora'; // a paleta da Vivianne (ouro), em PALETAS.
 
 // props que o KineticSlide recebe para assinar como Método VS (não Soulab, não veu.a.veu).
+// Rodapé: o NOME da conta (@handle) em cima, o SITE por baixo — nunca "Ancorar/Véu a Véu".
 export const METODOVS_SLIDE: { selo: string | null; mostrarConceito: boolean; assinatura: string; site: string } = {
   selo: null,
   mostrarConceito: true,
   assinatura: '@vivianne.dos.santos',
-  site: 'Ver e Soltar',
+  site: 'viviannedossantos.com',
 };
 
 // A MÃE + as 3 FILHAS partilham o MESMO motor e o MESMO estúdio. O que muda por conta:
@@ -42,7 +43,7 @@ export interface MetodoVSContaCfg {
 function slideDe(id: MetodoVSContaId): typeof METODOVS_SLIDE {
   if (id === 'mae') return METODOVS_SLIDE;
   const c = CONTAS[id];
-  return { selo: null, mostrarConceito: true, assinatura: `@${c.handle}`, site: 'Ver e Soltar' };
+  return { selo: null, mostrarConceito: true, assinatura: `@${c.handle}`, site: 'viviannedossantos.com' };
 }
 
 export const METODOVS_CONTAS: Record<MetodoVSContaId, MetodoVSContaCfg> = {

@@ -877,10 +877,10 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   // demora 1-3 min, por isso corre no cliente, uma a uma (sem time-out de servidor). Salta
   // as que não têm imagem ou que já têm vídeo.
   const motionLote = useCallback(() => {
-    if (typeof window !== 'undefined' && !window.confirm('Dar MOTION de vídeo (IA · Kling) às selecionadas?\n\nCada clip demora 1 a 3 min — várias peças podem levar bastante tempo. Não feches a página. (salta as que não têm imagem ou que já têm vídeo.)')) return;
+    if (typeof window !== 'undefined' && !window.confirm('Dar/REFAZER MOTION de vídeo (IA · Kling) às selecionadas?\n\nRefaz mesmo as que já têm vídeo (para corrigir as de câmara estática). Cada clip demora 1 a 3 min — não feches a página. (só salta as que ainda não têm imagem.)')) return;
     return emLote((slug) => {
       const p = pecas.find((x) => x.slug === slug);
-      if (!p?.imageUrl || p.clipUrl) return Promise.resolve(new Response(null, { status: 200 })); // salta
+      if (!p?.imageUrl) return Promise.resolve(new Response(null, { status: 200 })); // só salta sem imagem
       // 'natural' = ANIMA o que está na imagem (não só a câmara) + aproximação suave.
       return fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, camara: 'suave', ingredientes: ['natural'] }) });
     }, 'A dar motion de vídeo');
