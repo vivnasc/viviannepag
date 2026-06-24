@@ -96,6 +96,14 @@ export default function AgendaPage() {
     await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...p }) }).catch(() => {});
   }
 
+  // APAGAR DE VEZ (≠ ✕ que só tira do dia): remove o post da biblioteca. Pede
+  // confirmação porque é destrutivo e não tem volta.
+  async function apagar(it: Item) {
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar DE VEZ este post?\n\n“${it.title}”\n\nNão tem volta (≠ ✕, que só o tira do dia).`)) return;
+    setItens((prev) => prev.filter((x) => x.slug !== it.slug));
+    await fetch('/api/admin/conteudos/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) }).catch(() => {});
+  }
+
   // a semana mostrada, de segunda a domingo. semanaOffset: 0 = esta, +1 = próxima…
   const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
   const dow = hoje.getDay(); // 0=domingo..6=sábado
@@ -445,7 +453,8 @@ export default function AgendaPage() {
                             </>)}
                         <button onClick={() => publicarAgora(it)} disabled={igBusy === it.slug || !!it.theme?.igPublicado} title={it.theme?.igPublicado ? 'já publicado no Instagram' : 'publicar JÁ no Instagram (teste — vai mesmo para o teu perfil)'} className="shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-40">{igBusy === it.slug ? '…' : it.theme?.igPublicado ? '✓ IG' : '🧪 publicar'}</button>
                         <button onClick={() => patch(it.slug, { publicado: !it.theme?.publicado })} className={`shrink-0 text-[0.6rem] px-2 py-0.5 rounded-full border ${it.theme?.publicado ? 'border-salvia/50 bg-salvia/15 text-salvia' : 'border-ocre/25 text-creme-2/60 hover:border-salvia'}`}>{it.theme?.publicado ? '✓ publicado' : 'marcar'}</button>
-                        <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia">✕</button>
+                        <button onClick={() => patch(it.slug, { agendadoEm: null })} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rosa/25 text-rosa/70 hover:bg-rosa/10" title="tirar deste dia (não apaga)">✕</button>
+                        <button onClick={() => apagar(it)} className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rose-500/40 text-rose-400/80 hover:bg-rose-500/15" title="apagar DE VEZ (não tem volta)">🗑</button>
                       </div>
                     );
                   };
