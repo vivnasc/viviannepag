@@ -143,6 +143,29 @@ async function main() {
         const inner = Math.max(0, Math.min(1, (tf - fronteiras[k]) / span));
         return Math.min(1, (k + inner) / nb);
       };
+      // SINCRONIA REAL texto<->voz: em vez de estimar pelo tamanho do texto, usa os TEMPOS
+      // REAIS das palavras (vozPalavras) para saber quando cada momento é FALADO, e move o
+      // prog (e o typewriter) a esse ritmo. Aplica-se aos reels de sequência (Soulab/Método
+      // VS) e ao frame único do método, que revelam por prog. fronteirasV em fração de ÁUDIO.
+      const audioDur = (temPalavras && d.vozPalavras.length) ? (Number(d.vozPalavras[d.vozPalavras.length - 1].t1) || DUR) : DUR;
+      let fronteirasV = fronteiras;
+      if (temPalavras) {
+        const wc = txts.map((t) => t.split(/\s+/).filter(Boolean).length);
+        const tot = wc.reduce((a, b) => a + b, 0);
+        if (tot > 0) {
+          const fr = [0]; let idx = 0;
+          for (let m = 0; m < wc.length; m++) { idx += wc[m]; const w = d.vozPalavras[Math.min(idx, d.vozPalavras.length) - 1]; fr.push(Math.min(1, (w ? Number(w.t1) : audioDur) / audioDur)); }
+          fronteirasV = fr;
+        }
+      }
+      const progSeq = (tf) => {
+        const ta = Math.min(1, (tf * DUR) / audioDur); // fração de vídeo -> fração de áudio
+        let k = 0; while (k < nb - 1 && ta >= fronteirasV[k + 1]) k++;
+        const span = (fronteirasV[k + 1] - fronteirasV[k]) || 1;
+        const inner = Math.max(0, Math.min(1, (ta - fronteirasV[k]) / span));
+        return Math.min(1, (k + inner) / nb);
+      };
+      const usaProgSeq = vozOk && (seqPorMomento || frameUnicoMetodoVS || col.theme?.marca === 'soulab');
       const framesDir = path.join(diaDir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
       const page = await browser.newPage();
@@ -154,7 +177,9 @@ async function main() {
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
       for (let i = 0; i < N; i++) {
         const tf = i / (N - 1);
-        const prog = (vozOk && !temPalavras) ? progKaraoke(tf) : tf;
+        // sequência Soulab/Método VS com voz: move ao ritmo REAL das palavras (sincroniza);
+        // KaraokeMetodo (a página acende as palavras sozinha) fica linear; sem palavras, estima.
+        const prog = usaProgSeq ? progSeq(tf) : (vozOk && !temPalavras) ? progKaraoke(tf) : tf;
         await page.evaluate((p) => window.__setKProg && window.__setKProg(p), prog);
         await new Promise((r) => setTimeout(r, 35));
         await page.screenshot({ path: path.join(framesDir, `f${String(i).padStart(4, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
