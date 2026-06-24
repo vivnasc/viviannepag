@@ -256,17 +256,27 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
 // A VOZ (narração): a voz clonada da Vivianne LÊ o texto do post (eleven_multilingual_v2,
 // sotaque PT-PT estável). Gera/regera/remove. Se sair mal, é só «regerar voz». Quando há
 // voz, o render passa a durar o tempo da narração e acende a frase falada (karaokê).
-function VozBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: () => void; onRemover: () => void }) {
+function VozBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disabled: boolean; busy: boolean; onGerar: (modelo: 'v3' | 'v2') => void; onRemover: () => void }) {
   const tem = !!peca.vozUrl;
+  const [modelo, setModelo] = useState<'v3' | 'v2'>('v3');
   return (
     <div className="space-y-1.5">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">voz · narração {tem && <span style={{ color: dz }}>· gerada</span>}</p>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       {tem && <audio src={peca.vozUrl ?? undefined} controls className="w-full h-8" />}
-      <button type="button" onClick={onGerar} disabled={disabled}
+      {/* o modelo da voz: SÓ TU ouves qual fica melhor. v3 = a tua voz (alpha, pode oscilar o
+          sotaque em texto longo); v2 = estável e consistente, mas menos "tua". */}
+      <div className="flex items-center gap-1 text-[0.58rem]">
+        <span className="opacity-50">modelo:</span>
+        {([['v3', 'v3 · a tua voz'], ['v2', 'v2 · estável']] as const).map(([id, lbl]) => (
+          <button key={id} type="button" onClick={() => setModelo(id)} className="px-1.5 py-0.5 rounded-full border"
+            style={modelo === id ? { borderColor: dz, background: dz, color: bg2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>{lbl}</button>
+        ))}
+      </div>
+      <button type="button" onClick={() => onGerar(modelo)} disabled={disabled}
         className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: dz, background: dz, color: bg2 }}>{busy ? 'a dar voz…' : tem ? '🔁 regerar voz' : '🎙 dar voz (lê o texto)'}</button>
       {tem && <button type="button" onClick={onRemover} disabled={disabled} className="w-full text-[0.6rem] px-2 py-1 rounded-lg border border-white/20 disabled:opacity-50">↩︎ tirar a voz (reel sem narração)</button>}
-      <p className="text-[0.52rem] opacity-45 leading-snug">A voz clonada lê os momentos por ordem, em PT-PT. Com voz, o reel dura o tempo da narração e acende a frase falada. Se o sotaque sair mal, carrega «regerar voz».</p>
+      <p className="text-[0.52rem] opacity-45 leading-snug">A tua voz clonada lê os momentos. O <b>v3</b> é a tua voz mas é alpha e pode misturar sotaques em texto longo; o <b>v2</b> é consistente. Só tu ouves qual fica melhor — alterna e regera.</p>
     </div>
   );
 }
@@ -369,7 +379,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     salvarLegenda: (slug: string, legenda: string, hashtags: string) => void;
     darMovimento: (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => void;
     gerarSom: (slug: string, opts: { remover?: boolean; tipo?: 'cena' | 'musica'; estilo?: string }) => void;
-    gerarVoz: (slug: string, remover?: boolean) => void;
+    gerarVoz: (slug: string, remover?: boolean, modelo?: 'v3' | 'v2') => void;
     regerarTexto: (slug: string) => void;
     salvarEfeito: (slug: string, efeito: EfeitoTexto) => void;
     salvarTransicao: (slug: string, t: Transicao) => void;
@@ -440,7 +450,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
           {sec === 'legenda' && <LegendaBox legenda={peca.legenda ?? ''} hashtags={peca.hashtags} busy={busy} disabled={disabled} onSave={(leg, tags) => acoes.salvarLegenda(peca.slug, leg, tags)} />}
           {sec === 'motion' && <MotionBox clipUrl={peca.clipUrl} busy={busy} disabled={disabled || !peca.imageUrl} onGerar={(opts) => acoes.darMovimento(peca.slug, opts)} />}
           {sec === 'som' && <SomBox peca={peca} busy={busy} disabled={disabled} onGerar={(tipo, estilo) => acoes.gerarSom(peca.slug, { tipo, estilo })} onRemover={() => acoes.gerarSom(peca.slug, { remover: true })} />}
-          {sec === 'voz' && <VozBox peca={peca} busy={busy} disabled={disabled} onGerar={() => acoes.gerarVoz(peca.slug)} onRemover={() => acoes.gerarVoz(peca.slug, true)} />}
+          {sec === 'voz' && <VozBox peca={peca} busy={busy} disabled={disabled} onGerar={(modelo) => acoes.gerarVoz(peca.slug, false, modelo)} onRemover={() => acoes.gerarVoz(peca.slug, true)} />}
           {sec === 'letras' && <TipografiaBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(t) => acoes.salvarTipografia(peca.slug, t)} />}
           {sec === 'efeito' && <EfeitoBox peca={peca} slide={slide} busy={busy} disabled={disabled} onSave={(ef) => acoes.salvarEfeito(peca.slug, ef)} />}
           {sec === 'agendar' && <AgendarBox agendadoEm={peca.agendadoEm} hora={peca.hora} contaNome={contaNome} busy={busy} disabled={disabled} onAgendar={(d, h) => acoes.agendar(peca.slug, d, h)} onDesagendar={() => acoes.desagendar(peca.slug)} />}
@@ -674,11 +684,11 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
   }, [acaoSlug, recarregar]);
 
   // dar/regerar/remover a VOZ (narração). Rota genérica do método por slug (já existia).
-  const gerarVoz = useCallback(async (slug: string, remover = false) => {
+  const gerarVoz = useCallback(async (slug: string, remover = false, modelo: 'v3' | 'v2' = 'v3') => {
     if (acaoSlug) return;
-    setAcaoSlug(slug); setErro(null); setMsg(remover ? 'A tirar a voz…' : 'A gerar a voz (lê o texto)…');
+    setAcaoSlug(slug); setErro(null); setMsg(remover ? 'A tirar a voz…' : `A gerar a voz (${modelo})…`);
     try {
-      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover }) });
+      const r = await fetch('/api/admin/metodo/voz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, remover, modelo }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg(remover ? 'Voz removida.' : 'Voz gerada. Ouve aqui; se o sotaque sair mal, regera.');
       recarregar();

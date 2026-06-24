@@ -75,7 +75,7 @@ function palavrasDeAlinhamento(a?: Alinhamento): PalavraVoz[] {
   return out;
 }
 
-export interface VozOpts { emocao?: EmocaoVoz; expressiva?: boolean }
+export interface VozOpts { emocao?: EmocaoVoz; expressiva?: boolean; modelo?: 'v3' | 'v2' }
 
 export async function gerarVoz(texto: string, slug: string, opts: VozOpts = {}): Promise<VozResultado> {
   const key = process.env.ELEVENLABS_API_KEY || process.env.ELEVEN_API_KEY;
@@ -89,10 +89,16 @@ export async function gerarVoz(texto: string, slug: string, opts: VozOpts = {}):
   // brasileiro. Por isso: v3 puro, texto tal e qual. NÃO voltar a meter voice_settings.
   // A expressão (opcional, só se pedida) faz-se APENAS com audio tags no texto falado —
   // nunca com settings; mantém o v3 puro.
-  const expressiva = opts.expressiva === true || !!opts.emocao;
+  // MODELO à escolha da Vivianne (só ela ouve qual fica melhor):
+  //  v3 = a SUA voz (puro, sem settings); é alpha e pode oscilar o sotaque em texto longo.
+  //  v2 = multilingual_v2 estável e consistente (similarity alto p/ se agarrar à voz dela).
+  const modelo = opts.modelo ?? 'v3';
+  const expressiva = (opts.expressiva === true || !!opts.emocao) && modelo === 'v3';
   const emocao: EmocaoVoz = opts.emocao ?? 'serena';
   const textoFalado = expressiva ? texComTags(texto, emocao) : texto;
-  const corpo = { text: textoFalado, model_id: 'eleven_v3' };
+  const corpo = modelo === 'v2'
+    ? { text: textoFalado, model_id: 'eleven_multilingual_v2', voice_settings: { stability: 0.5, similarity_boost: 0.95, style: 0, use_speaker_boost: true } }
+    : { text: textoFalado, model_id: 'eleven_v3' };
 
   const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/with-timestamps`, {
     method: 'POST',
