@@ -63,7 +63,10 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/metodo-vs', label: 'método vs · a revelação' },
+      { href: '/admin/metodo-vs', label: 'método vs · a mãe' },
+      { href: '/admin/metodo-vs/ver', label: 'método vs · ver' },
+      { href: '/admin/metodo-vs/vir', label: 'método vs · vir' },
+      { href: '/admin/metodo-vs/viver', label: 'método vs · viver' },
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },
     ],

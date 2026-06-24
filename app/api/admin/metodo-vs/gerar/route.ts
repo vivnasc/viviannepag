@@ -3,10 +3,10 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { limparTravessoes } from '@/lib/texto';
-import { type VeuNome } from '@/lib/metodo/contas';
+import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
 import { gerarPecaVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
 import { FORMATOS_LISTA, CALENDARIO, type FormatoId } from '@/lib/metodo-vs/formatos';
-import { METODOVS_MARCA, METODOVS_MUNDO } from '@/lib/metodo-vs/marca';
+import { METODOVS_MUNDO, metodoVSConta } from '@/lib/metodo-vs/marca';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -26,18 +26,18 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
   } catch { return null; }
 }
 
-function montarRow(slug: string, veu: VeuNome, formato: FormatoId, peca: Awaited<ReturnType<typeof gerarPecaVS>>, imageUrl: string | null, agendadoEm?: string, hora?: string) {
+function montarRow(marca: string, handle: string, slug: string, veu: VeuNome, formato: FormatoId, peca: Awaited<ReturnType<typeof gerarPecaVS>>, imageUrl: string | null, agendadoEm?: string, hora?: string) {
   const slides = peca.momentos.map((texto, idx) => ({
     tipo: 'kinetico', texto,
     destaque: idx === 0 ? peca.destaque : [],
     notaVisual: peca.fundoPrompt, imageUrl,
     capa: idx === 0, conceito: idx === 0 ? peca.conceito : undefined,
   }));
-  const legenda = limparTravessoes(`${peca.legenda}\n\nMétodo VS · @vivianne.dos.santos\n\n${peca.hashtags.map((t) => `#${t}`).join(' ')}`);
+  const legenda = limparTravessoes(`${peca.legenda}\n\nMétodo VS · @${handle}\n\n${peca.hashtags.map((t) => `#${t}`).join(' ')}`);
   const dias = [{ dia: 1, mundo: METODOVS_MUNDO, palavra: peca.momentos[0].slice(0, 48), slides, legenda, hashtags: peca.hashtags }];
   return {
     slug, title: peca.momentos[0].slice(0, 60), brief: peca.momentos[0], dias,
-    theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: METODOVS_MUNDO, marca: METODOVS_MARCA, agendadoEm, hora, metodovs: { veu, formato } },
+    theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: METODOVS_MUNDO, marca, agendadoEm, hora, metodovs: { veu, formato } },
   };
 }
 
@@ -53,14 +53,17 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { veu?: VeuNome; formato?: FormatoId; quantos?: number; semana?: boolean; offset?: number };
+  const body = (await req.json().catch(() => ({}))) as { conta?: ContaId; veu?: VeuNome; formato?: FormatoId; quantos?: number; semana?: boolean; offset?: number };
+  const cfg = metodoVSConta(body.conta);
+  const conta = cfg.id;
+  const PRE = cfg.prefixo; // 'metodovs' (mãe) | 'versoltar' | 'virsoltar' | 'viversoltar'
   const supabase = getSupabaseAdmin();
 
-  // anti-repetição + slugs existentes.
+  // anti-repetição + slugs existentes (só desta conta).
   const evitar: string[] = [];
   const existentes = new Set<string>();
   try {
-    const { data } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', 'metodovs-%');
+    const { data } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', `${PRE}-%`);
     for (const r of (data ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { igPublicado?: boolean; publicado?: boolean } }[]) {
       existentes.add(r.slug);
       const t = r.dias?.[0]?.slides?.[0]?.texto; if (t) evitar.push(t);
@@ -80,12 +83,12 @@ export async function POST(req: Request) {
       const data = dataLocal(d);
       if (data < hoje) continue; // nunca gera passado
       const veu = VEUS_VS[(Math.floor(d.getTime() / 864e5) % VEUS_VS.length + VEUS_VS.length) % VEUS_VS.length];
-      const slug = `metodovs-${data}-${slot.hora.replace(':', '')}-${slot.formato}`;
+      const slug = `${PRE}-${data}-${slot.hora.replace(':', '')}-${slot.formato}`;
       if (existentes.has(slug)) continue;
       try {
-        const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitar);
+        const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitar, conta);
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
-        rows.push(montarRow(slug, veu, slot.formato, peca, imageUrl, data, slot.hora));
+        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, data, slot.hora));
         evitar.push(peca.momentos[0]); existentes.add(slug);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
@@ -96,10 +99,10 @@ export async function POST(req: Request) {
       const formato = body.formato ?? FORMATOS_LISTA[Math.floor(Math.random() * FORMATOS_LISTA.length)].id;
       const veu = body.veu ?? VEUS_VS[(Math.floor(Date.now() / 1000) + i) % VEUS_VS.length];
       try {
-        const peca = await gerarPecaVS(veu, formato, apiKey, evitar);
-        const slug = `metodovs-${veu}-${formato}-${Date.now()}-${i}`;
+        const peca = await gerarPecaVS(veu, formato, apiKey, evitar, conta);
+        const slug = `${PRE}-${veu}-${formato}-${Date.now()}-${i}`;
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
-        rows.push(montarRow(slug, veu, formato, peca, imageUrl));
+        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl));
         evitar.push(peca.momentos[0]);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }

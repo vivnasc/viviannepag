@@ -9,10 +9,10 @@
 // diferentes. Lê SÓ a matéria da Vivianne (o SABER). Zero código do motor velho.
 
 import { SABER } from '@/lib/metodo/saber';
-import { type VeuNome } from '@/lib/metodo/contas';
+import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
 import { hashtagsMetodo } from '@/lib/metodo/hashtags';
 import { limparTravessoes } from '@/lib/texto';
-import { FORMATOS, type FormatoId } from './formatos';
+import { FORMATOS, type FormatoId, ancoraConta, ancoraContaManha } from './formatos';
 
 export const VEUS_VS = Object.keys(SABER) as VeuNome[];
 
@@ -44,16 +44,17 @@ const lp_img = 'arte conceptual fotográfica de gama alta, CLARA E AREJADA, com 
 
 // A MANHÃ (formato 'dissolucao'): NÃO um reel da revelação, mas UM frame, UMA frase —
 // o sinal de um véu a dissolver-se. O lado do SOLTAR: nu, sereno, leve. Tratado à parte.
-async function gerarDissolucao(veu: VeuNome, apiKey: string, evitar: string[]): Promise<PecaVS> {
+async function gerarDissolucao(veu: VeuNome, apiKey: string, evitar: string[], conta: ContaId): Promise<PecaVS> {
   const k = SABER[veu];
   if (!k) throw new Error(`sem SABER para o véu ${veu}`);
   const f = FORMATOS.dissolucao;
+  const ancora = ancoraContaManha(conta);
   const sys =
 `Escreves o SINAL DA MANHÃ da Vivianne dos Santos (Método VS · Ver e Soltar): UM frame, UMA frase, nada mais. É o lado do SOLTAR — um véu a dissolver-se ao acordar. Sereno e nu, não um diagnóstico.
 
 A MATÉRIA (só para TI; nunca a nomeies nem a copies):
 ${f.materia(k)}
-
+${ancora ? `\n${ancora}\n` : ''}
 REGRAS:
 - UMA frase só (1 a 2 linhas curtas, no máximo). Sem "chamam-lhe", sem listas, sem sequência.
 - Uma verdade pequena que liberta: o peso que se pode pousar, a permissão de não merecer o cuidado, quem se é por baixo do que se aprendeu a ser.
@@ -86,12 +87,13 @@ Devolve APENAS JSON válido: {"frase":"a frase única","destaque":["1 a 2 palavr
   };
 }
 
-export async function gerarPecaVS(veu: VeuNome, formato: FormatoId, apiKey: string, evitar: string[] = []): Promise<PecaVS> {
+export async function gerarPecaVS(veu: VeuNome, formato: FormatoId, apiKey: string, evitar: string[] = [], conta: ContaId = 'mae'): Promise<PecaVS> {
   const k = SABER[veu];
   if (!k) throw new Error(`sem SABER para o véu ${veu}`);
-  if (formato === 'dissolucao') return gerarDissolucao(veu, apiKey, evitar);
+  if (formato === 'dissolucao') return gerarDissolucao(veu, apiKey, evitar, conta);
   const f = FORMATOS[formato];
   if (!f) throw new Error(`formato desconhecido: ${formato}`);
+  const ancora = ancoraConta(conta);
 
   const sys =
 `Escreves UMA peça (reel 9:16) da Vivianne dos Santos, criadora do Método VS (Ver e Soltar). A voz é a da REVELAÇÃO. O formato de hoje é "${f.nome}".
@@ -100,7 +102,7 @@ O ÂNGULO de hoje (segue-o): ${f.angulo}
 
 A MATÉRIA (só para TI perceberes o padrão; NUNCA a nomeies nem a copies no texto):
 ${f.materia(k)}
-
+${ancora ? `\n${ancora}\n` : ''}
 ${REVELACAO}
 
 IMAGEM (campo "fundoPrompt", em INGLÊS): arte conceptual fotográfica de gama alta, CLARA E AREJADA, com luz de dia, contemporânea e premium (como uma foto editorial de revista), que evoca o SENTIDO da peça sem o ilustrar à letra. PROIBIDO: velas, chamas, halos, auréolas, santos, sagrado, escuro ou soturno, pessoas a posar, rostos, texto. Termina com: bright airy editorial fine-art photography, natural daylight, premium, vertical 9:16.

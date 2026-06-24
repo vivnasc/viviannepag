@@ -5,6 +5,8 @@
 // FACETA do SABER de onde cada um bebe.
 
 import type { SaberVeu } from '@/lib/metodo/saber';
+import { CONTAS, type ContaId } from '@/lib/metodo/contas';
+import { limparTravessoes } from '@/lib/texto';
 
 export type FormatoId = 'dissolucao' | 'nome' | 'heranca' | 'baixo' | 'custo' | 'mito' | 'cena' | 'corpo';
 
@@ -65,6 +67,52 @@ export const FORMATOS: Record<FormatoId, FormatoVS> = {
 };
 
 export const FORMATOS_LISTA = Object.values(FORMATOS);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// A ÂNCORA DE CADA FILHA (ver · vir · viver)
+//
+// O que distingue a MÃE das FILHAS (decisão de produto, ver CLAUDE.md):
+//  - a MÃE percorre os 7 véus e vários ângulos (roaming) — sem âncora.
+//  - cada FILHA tem UMA voz recorrente: TODO o post ancora a revelação na sua
+//    fraseMae e nas suas sensações. A pessoa reconhece sempre a mesma confissão,
+//    dita de formas diferentes. O véu/ângulo varia; a dor volta sempre à fraseMae.
+//  - o fecho/soltar de cada filha aponta para a sua CHEGADA
+//    (ver=testemunhar · vir=regressar · viver=participar).
+//
+// Isto é um BLOCO injetado no system prompt da geração (gerar.ts), por cima da
+// matéria do formato e da voz comum da revelação. NÃO substitui a voz: ancora-a.
+
+const lpx = (s: string) => limparTravessoes(s);
+
+/** O bloco-âncora da filha para o reel da revelação (a tarde). Vazio para a mãe. */
+export function ancoraConta(conta: ContaId): string {
+  if (conta === 'mae') return '';
+  const c = CONTAS[conta];
+  return lpx(
+`A VOZ DESTA CONTA (a âncora · inviolável): esta é a conta "${c.movimento}" (@${c.handle}). Tudo o que escreves, seja qual for o véu ou o ângulo de hoje, tem de fazer a pessoa reconhecer SEMPRE a MESMA confissão recorrente, dita de uma forma nova:
+
+A CONFISSÃO-MÃE (a dor que volta sempre, nunca a cites à letra, encarna-a): "${c.fraseMae}"
+
+As SENSAÇÕES que se repetem nesta conta (a textura emocional; a dor da peça nasce daqui):
+${(c.sensacoes ?? []).map((s) => `· ${s}`).join('\n')}
+
+O FECHO (a chegada desta conta): o último movimento da peça aponta para ${c.chegada}. Não como ordem nem promessa; como a direção do alívio, suave.
+
+Importante: o véu e o ângulo de hoje DÃO A IMAGEM E O ENQUADRAMENTO, mas a DOR reconhece-se sempre na confissão-mãe acima. Se a peça pudesse pertencer a outra das contas (Ver, Vir ou Viver), está ERRADA: tem de ser inconfundivelmente a voz de "${c.movimento}".`);
+}
+
+/** O bloco-âncora da filha para o sinal da manhã (frase única). Vazio para a mãe. */
+export function ancoraContaManha(conta: ContaId): string {
+  if (conta === 'mae') return '';
+  const c = CONTAS[conta];
+  return lpx(
+`A VOZ DESTA CONTA (a âncora): esta é a conta "${c.movimento}" (@${c.handle}). A frase única da manhã é o lado do SOLTAR desta dor recorrente:
+
+A CONFISSÃO-MÃE (não a cites à letra; é o que se solta): "${c.fraseMae}"
+A CHEGADA desta conta (para onde a frase aponta, em silêncio): ${c.chegada}.
+
+A frase é a permissão pequena que liberta ESTA dor, e só esta. Inconfundivelmente a voz de "${c.movimento}".`);
+}
 
 // O CALENDÁRIO da mãe: vários posts por dia, formatos diferentes, a rodar pela semana
 // (é o que distingue da Soulab: a mãe segue um plano). 2 por dia, manhã e fim de tarde.

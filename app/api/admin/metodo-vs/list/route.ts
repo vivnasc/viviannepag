@@ -1,20 +1,22 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { metodoVSConta } from '@/lib/metodo-vs/marca';
 
 export const runtime = 'nodejs';
 
-// MÉTODO VS · peças já geradas (slug 'metodovs-*'), para a página /admin/metodo-vs.
+// MÉTODO VS · peças já geradas (por conta: prefixo do slug), para /admin/metodo-vs[/conta].
 // Devolve TUDO o que o estúdio precisa (espelho do /api/admin/soulab/list): texto,
 // destaque, momentos, imagem, clip (motion), som (cena/música), efeito, tipografia,
 // tempo por momento, legenda, hashtags e o estado de agendamento.
-export async function GET() {
+export async function GET(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
+  const cfg = metodoVSConta(new URL(req.url).searchParams.get('conta'));
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
     .from('carousel_collections')
     .select('slug, brief, dias, theme, created_at')
-    .like('slug', 'metodovs-%')
+    .like('slug', `${cfg.prefixo}-%`)
     .order('created_at', { ascending: false });
   if (error) return NextResponse.json({ erro: 'db', detalhe: error.message }, { status: 500 });
 

@@ -14,7 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, type EfeitoTexto, type Tipografia } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
-import { METODOVS_SLIDE } from '@/lib/metodo-vs/marca';
+import { slideDaMarca, ehMarcaMetodoVS } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
 import { KaraokeMetodo } from '@/components/admin/KaraokeMetodo';
@@ -321,10 +321,10 @@ export default function RenderVeuPage() {
       )}
       {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
           que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
-      {estado && ehKinetic && (((estado.dia.mundo as string) === 'soulab') || marcaM === 'metodovs') && (estado.dia.slides?.length ?? 0) > 1 && (
-        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={marcaM === 'metodovs' ? METODOVS_SLIDE : SOULAB_SLIDE} />
+      {estado && ehKinetic && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
+        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} />
       )}
-      {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || marcaM === 'metodovs') && (estado.dia.slides?.length ?? 0) > 1) && (
+      {estado && ehKinetic && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
         <KineticSlide
           texto={s.texto ?? ''}
           destaque={s.destaque}
@@ -336,7 +336,7 @@ export default function RenderVeuPage() {
           tipografia={(s as { tipografia?: Tipografia }).tipografia}
           conceito={s.conceito}
           clipUrl={(estado.dia.mundo as string) === 'soulab' ? (clipBg ?? undefined) : undefined}
-          {...(marcaM === 'metodovs' ? METODOVS_SLIDE : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
+          {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
         />
       )}
       {estado && ehMetodo && ehCarta && s && getConta(s.contaId ?? '') && (
