@@ -185,6 +185,14 @@ export default function PublicarPage() {
     await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...patch }) }).catch(() => {});
   }
 
+  // APAGAR DE VEZ (posts antigos): remove o post da biblioteca, em qualquer estado.
+  // Destrutivo, pede confirmação. NÃO mexe no que já está publicado no Instagram.
+  async function apagar(it: Item) {
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar DE VEZ este post?\n\n“${it.title}”\n\nNão tem volta. (Se já está no Instagram, NÃO é removido de lá — só sai daqui.)`)) return;
+    setItens((prev) => prev.filter((x) => x.slug !== it.slug));
+    await fetch('/api/admin/conteudos/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: it.slug }) }).catch(() => {});
+  }
+
   async function publicar(it: Item) {
     if (busy) return;
     if (!confirm(`Publicar JÁ no Instagram (a sério):\n\n“${it.title}”\n\nSe não estiver pronto, preparo e publico sozinho (~10 min) — deixa a página aberta. Continuar?`)) return;
@@ -299,6 +307,7 @@ export default function PublicarPage() {
               <span className="text-[0.52rem] px-1.5 py-0.5 rounded-full" style={{ background: COR[e].bg, color: COR[e].fg }}>{COR[e].nome}</span>
               <span className="text-[0.58rem] font-mono opacity-55">{horaDe(it)}</span>
               {!pronto && e !== 'publicado' && <span className="text-[0.5rem] opacity-45">○ prepara ao publicar</span>}
+              <button onClick={(ev) => { ev.stopPropagation(); apagar(it); }} title="apagar de vez (não tem volta)" className="ml-auto shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full border border-rose-500/40 text-rose-400/80 hover:bg-rose-500/15">🗑</button>
             </div>
             <p className="text-[0.88rem] leading-tight mt-1 line-clamp-2" title={it.title}>{it.title}</p>
             <p className="text-[0.56rem] opacity-50 mt-0.5">{m.emoji} {m.label}</p>
