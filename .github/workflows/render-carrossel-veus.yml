@@ -31,16 +31,23 @@ jobs:
           node-version: '22'
 
       - name: Install ffmpeg
-        timeout-minutes: 8
+        timeout-minutes: 20
         run: |
-          # o ubuntu-latest já traz ffmpeg; só instala se faltar (e com retries),
-          # senão o apt-get update às vezes pendura num mirror e prende o render.
+          # se o runner já trouxer ffmpeg, não toca no apt. Senão instala com RETRIES
+          # (o mirror azure.archive às vezes fica lento) e --no-install-recommends
+          # (menos pacotes = menos hipótese de pendurar). 20 min de margem para não
+          # cortar um download lento mas a progredir (o timeout curto fazia falhar).
           if command -v ffmpeg >/dev/null 2>&1; then
             echo "ffmpeg já presente: $(ffmpeg -version | head -1)"
-          else
-            sudo apt-get update -o Acquire::Retries=3
-            sudo apt-get install -y ffmpeg
+            exit 0
           fi
+          for i in 1 2 3; do
+            echo "::group::tentativa $i de instalar ffmpeg"
+            sudo apt-get update -o Acquire::Retries=3 && \
+            sudo apt-get install -y --no-install-recommends ffmpeg && { echo "::endgroup::"; break; }
+            echo "::endgroup::"; echo "falhou a tentativa $i; espera e repete…"; sleep 20
+          done
+          command -v ffmpeg >/dev/null 2>&1 || { echo "ffmpeg não instalou após 3 tentativas"; exit 1; }
 
       - name: Install npm packages
         run: npm install --no-save puppeteer @supabase/supabase-js
