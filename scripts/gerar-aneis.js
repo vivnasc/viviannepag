@@ -6,6 +6,8 @@ const ANEIS = [
   { nome: 'EBOOKS', cor: '#1A1A2E', letra: 'E' },
   { nome: 'GUIAS', cor: '#2A1C12', letra: 'G' },
   { nome: 'ESCRITOS', cor: '#7D8A6A', letra: 'W' },
+  { nome: 'ROMANCES', cor: '#5B3326', letra: 'R' },
+  { nome: '7 VÉUS', cor: '#241B3A', letra: '7' },
 ];
 (async () => {
   const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
