@@ -122,7 +122,7 @@ function agruparEmFalas(palavras, falas) {
 // ───────────────────────── fundo: motion (pré-visto) ou Ken Burns ─────────────────────────
 function kenBurns(img, dur, out) {
   const frames = Math.ceil(dur * FPS);
-  sh(`ffmpeg -y -loop 1 -i "${img}" -vf "scale=1400:-1,zoompan=z='min(zoom+0.0006,1.12)':d=${frames}:s=${W}x${H}:fps=${FPS},setsar=1" -t ${dur} -c:v libx264 -pix_fmt yuv420p "${out}"`);
+  sh(`ffmpeg -y -loop 1 -i "${img}" -vf "scale=1400:-1,zoompan=z='min(zoom+0.0006,1.12)':d=${frames}:s=${W}x${H}:fps=${FPS},setsar=1" -t ${dur} -c:v libx264 -preset veryfast -pix_fmt yuv420p "${out}"`);
 }
 
 // ───────────────────────── música ─────────────────────────
@@ -266,7 +266,7 @@ async function main() {
     } else if (p.motionUrl) {
       const raw = out.replace(/\.mp4$/, '-raw.mp4');
       await baixar(p.motionUrl, raw);
-      sh(`ffmpeg -y -stream_loop -1 -t ${dur} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -pix_fmt yuv420p -t ${dur} "${out}"`);
+      sh(`ffmpeg -y -stream_loop -1 -t ${dur} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -preset veryfast -pix_fmt yuv420p -t ${dur} "${out}"`);
     } else {
       const img = out.replace(/\.mp4$/, '.jpg');
       await baixar(p.cenaUrl, img);
@@ -293,7 +293,7 @@ async function main() {
       segs.push(seg);
     }
     fs.writeFileSync(path.join(TMP, 'segs.txt'), segs.map((s) => `file '${s}'`).join('\n'));
-    sh(`ffmpeg -y -f concat -safe 0 -i "${path.join(TMP, 'segs.txt')}" -vf "fps=${FPS},setsar=1" -c:v libx264 -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
+    sh(`ffmpeg -y -f concat -safe 0 -i "${path.join(TMP, 'segs.txt')}" -vf "fps=${FPS},setsar=1" -c:v libx264 -preset veryfast -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
   }
 
   // 4. overlay: karaokê + ganchos + cartão final, frame a frame (Puppeteer)
@@ -321,26 +321,30 @@ async function main() {
   await browser.close();
   console.log(`· ${N} frames de overlay`);
 
-  // 5. música por baixo
-  const mus = path.join(TMP, 'mus.mp3');
+  // 5. ÁUDIO FINAL — um único ficheiro PCM com a duração EXATA (TOTAL), pronto a colar.
+  // É montado AQUI (fora do passe pesado): voz padada a TOTAL + música (se houver),
+  // mistura com duração=first (a voz, finita). Assim o passe final NÃO filtra áudio —
+  // evita o "Queue input is backward in time" do AAC que travava o ffmpeg a 0.017x.
+  console.log('· áudio final…');
+  const vozFull = path.join(TMP, 'voz-full.wav');
+  sh(`ffmpeg -y -i "${path.join(TMP, 'voz.wav')}" -af apad -t ${TOTAL} -ar 44100 -ac 2 "${vozFull}"`);
+  const audioFinal = path.join(TMP, 'audio.wav');
   let temMusica = false;
+  const mus = path.join(TMP, 'mus.mp3');
   try { const r = await fetch(faixaUrl()); if (r.ok) { fs.writeFileSync(mus, Buffer.from(await r.arrayBuffer())); temMusica = true; } } catch {}
+  if (temMusica) {
+    const musFull = path.join(TMP, 'mus-full.wav');
+    sh(`ffmpeg -y -i "${mus}" -af "volume=${MUSICA_VOL},apad,afade=t=out:st=${(TOTAL - 1.5).toFixed(2)}:d=1.5" -t ${TOTAL} -ar 44100 -ac 2 "${musFull}"`);
+    sh(`ffmpeg -y -i "${vozFull}" -i "${musFull}" -filter_complex "[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=0[a]" -map "[a]" -t ${TOTAL} -ar 44100 -ac 2 "${audioFinal}"`);
+  } else {
+    fs.copyFileSync(vozFull, audioFinal);
+  }
 
-  // 6. ffmpeg final: bg + overlay-seq + voz (+música amix)
+  // 6. ffmpeg final: bg + sequência de overlay + áudio já pronto (só colar, sem filtrar
+  //    áudio). bg já é W×H@FPS, por isso não se re-escala. -preset veryfast acelera o x264.
   console.log('· montagem final…');
-  const ins = [`-i "${bg}"`, `-framerate ${FPS} -i "${path.join(ovDir, 'f%05d.png')}"`, `-i "${path.join(TMP, 'voz.wav')}"`];
-  if (temMusica) ins.push(`-i "${mus}"`);
-  const idxVoz = 2, idxMus = 3;
-  const fc = [
-    `[0:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1[b]`,
-    `[1:v]format=rgba[ov]`,
-    `[b][ov]overlay=0:0:shortest=1,format=yuv420p[v]`,
-  ];
-  let aMap;
-  if (temMusica) { fc.push(`[${idxVoz}:a]apad[vz]`, `[${idxMus}:a]volume=${MUSICA_VOL},afade=t=out:st=${(TOTAL - 1.5).toFixed(2)}:d=1.5[mu]`, `[vz][mu]amix=inputs=2:duration=longest:dropout_transition=0[a]`); aMap = '[a]'; }
-  else { fc.push(`[${idxVoz}:a]apad[a]`); aMap = '[a]'; }
   const out = path.join(TMP, `anuncio-${VAR}.mp4`);
-  sh(`ffmpeg -y ${ins.join(' ')} -filter_complex "${fc.join(';')}" -map "[v]" -map "${aMap}" -r ${FPS} -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 192k -t ${TOTAL} -movflags +faststart "${out}"`);
+  sh(`ffmpeg -y -i "${bg}" -framerate ${FPS} -i "${path.join(ovDir, 'f%05d.png')}" -i "${audioFinal}" -filter_complex "[1:v]format=rgba[ov];[0:v][ov]overlay=0:0:shortest=1,format=yuv420p[v]" -map "[v]" -map 2:a -r ${FPS} -c:v libx264 -preset veryfast -pix_fmt yuv420p -c:a aac -b:a 192k -t ${TOTAL} -movflags +faststart "${out}"`);
 
   // 7. publicar
   console.log('· a publicar…');
