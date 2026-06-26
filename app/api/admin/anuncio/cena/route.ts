@@ -8,7 +8,7 @@ import GUIOES from '@/lib/anuncio/guiao.json';
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
-type Cena = { id: string; cenaPrompt: string };
+type Cena = { id: string; cenaPrompt?: string; usarCapa?: boolean };
 
 // PASSO 1 (por PLANO): gera a imagem de UMA cena do anúncio (9:16) com a IA da casa
 // (Flux). NÃO é a capa do livro chapada — é uma cena cinematográfica do mundo de
@@ -23,6 +23,8 @@ export async function POST(req: NextRequest) {
   try { const b = await req.json(); if (b?.variante === 'B') variante = 'B'; if (Number.isInteger(b?.idx)) idx = b.idx; } catch {}
   const g = (GUIOES as Record<string, { cenas?: Cena[] }>)[variante];
   const cena = g?.cenas?.[idx];
+  // plano que USA A CAPA do livro: não se gera nada (o render usa a capa real).
+  if (cena?.usarCapa) return NextResponse.json({ erro: 'usa-capa', detalhe: 'Este plano usa a capa do livro; não é preciso gerar.' }, { status: 400 });
   if (!cena?.cenaPrompt) return NextResponse.json({ erro: 'sem-cena-no-guiao' }, { status: 400 });
 
   try {

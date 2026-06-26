@@ -5,27 +5,26 @@
     "cenas": [
       {
         "id": "aparar",
-        "rotulo": "a amparar o filho adulto",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: an older mother in her sixties gently steadying her GROWN ADULT SON, a man in his mid-thirties, both her hands holding his arm as he falters, her face tender and quietly worried, protective; they are clearly a mother and her ADULT son — both grown adults, the son a tall grown man (not a child), this is NOT a grandmother with a grandchild, NOT a toddler, NOT a baby; soft domestic interior at dusk, a window with warm light; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate",
-        "klingPrompt": "the adult son sways very slightly as her hands steady him; the curtain and warm light breathing softly; a gentle slow cinematic push-in; the figures stay intact, no morphing"
+        "rotulo": "o peso que ela carrega",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: an older mother in her sixties holding up her GROWN ADULT SON, a man in his mid-thirties, who leans heavily and wearily against her with slumped shoulders and a tired downcast face turned away from her; she carries his weight, exhausted but unable to let go, her own face strained and worried; a heavy, bittersweet, tense mood — the quiet weight of a mother who has always caught him and cannot stop; this is NOT a happy embrace, they are NOT smiling at each other, NOT looking lovingly into each other's eyes, NOT a grandmother with a grandchild, NOT a child; soft domestic interior at dusk, a window with warm light; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate",
+        "klingPrompt": "the adult son leans and settles his weight against her very slightly; the curtain and warm light breathing softly; a gentle slow cinematic push-in; the figures stay intact, no morphing"
       },
       {
         "id": "pousar",
         "rotulo": "as mãos a pousar",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: the same weathered older hands now open and resting, palms up, on a worn wooden table by a window at blue dusk, finally letting go, calm and still; a cup of tea steaming softly beside them; warm terracotta, sand, cream, sage green and dusk-blue palette; generous soft negative space; quiet, tender",
-        "klingPrompt": "thin steam rising and drifting from the cup; the curtain breathing; warm light shifting softly; a gentle slow push-in; the hands stay perfectly still"
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: an older woman in her sixties sitting at a worn wooden table by a window at blue dusk, shown in three-quarter view from the chest down, HER OWN two hands open and resting palms-up on the table, finally letting go; the hands are clearly attached to her forearms and body, her arms and torso visible, a whole seated person — this is NOT disembodied hands, NOT floating hands without a body, NOT hands cut off; a cup of tea steaming softly beside her; warm terracotta, sand, cream, sage green and dusk-blue palette; quiet, tender",
+        "klingPrompt": "thin steam rising and drifting from the cup; the curtain breathing; warm light shifting softly; a gentle slow push-in; the woman and her hands stay perfectly still"
       },
       {
         "id": "livro",
-        "rotulo": "o livro",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters, no legible writing on the pages: an open book resting on a warm-lit wooden table by a window at blue dusk, a hand softly turning a page, a cup of tea and a small lit candle nearby, soft lamplight; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate, inviting",
-        "klingPrompt": "a single page softly turning; thin steam from the tea; the candle flame flickering gently; warm lamplight breathing; a gentle slow push-in"
+        "rotulo": "a ler o romance",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters, no legible writing on the pages: a woman curled up in a cosy armchair by a window at blue dusk, absorbed and quietly moved while reading a SINGLE novel held in her two hands, warm lamplight, a cup of tea beside her; ONLY ONE book in the entire frame, an intimate romantic reading mood; this is NOT two books, NOT a desk covered in study books, NOT a library, NOT an open textbook; warm terracotta, sand, cream, sage green and dusk-blue palette; tender, inviting",
+        "klingPrompt": "the woman breathes softly as she reads, a single page gently turning; warm lamplight flickering; thin steam from the tea; a gentle slow push-in"
       },
       {
-        "id": "vespera",
-        "rotulo": "o mundo de Véspera",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a pair of weathered older mother's cupped hands holding a tiny house with one warmly lit window; behind, at blue dusk, a small village of terracotta rooftops with thin chimney smoke between soft green mountains and a quiet river, a few warm lit windows, a low full moon, two or three swallows; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves on both arms; warm terracotta, sand, cream, sage green and dusk-blue palette; quietly epic",
-        "klingPrompt": "thin chimney smoke rising and drifting over the rooftops; the warm window softly flickering; two or three swallows slowly crossing the dusk sky; a faint shimmer on the river; the cupped hands and the little house stay perfectly still and intact"
+        "id": "capa",
+        "rotulo": "a capa do livro",
+        "usarCapa": true
       }
     ],
     "intro": [
@@ -54,20 +53,19 @@
       {
         "id": "maos",
         "rotulo": "as mãos com a casa",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, intimate close-up, no text, no letters: a pair of weathered older mother's cupped hands holding a tiny house with one single warmly lit window glowing softly; the dusk village blurred far behind in warm bokeh, a low full moon; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves; warm terracotta, sand, cream, sage green and dusk-blue palette; hushed",
-        "klingPrompt": "the single warm window softly flickering and breathing; the faraway village bokeh shimmering gently; a barely-there drift of dusk haze; the cupped hands stay perfectly still and intact"
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, intimate, no text, no letters: an older woman seen from the chest down holding a tiny house with one single warmly lit window cupped in HER OWN two hands, the hands clearly attached to her forearms and body (arms and torso visible), not floating; the dusk village blurred far behind in warm bokeh, a low full moon; warm terracotta, sand, cream, sage green and dusk-blue palette; hushed",
+        "klingPrompt": "the single warm window softly flickering and breathing; the faraway village bokeh shimmering gently; a barely-there drift of dusk haze; the woman and her hands stay perfectly still"
       },
       {
         "id": "livro",
-        "rotulo": "o livro ao colo",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters, no legible writing on the pages: an open book held open on a lap by warm lamplight at night, a blanket, a cup of tea nearby, cosy and quiet; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate, inviting",
-        "klingPrompt": "a page softly turning; the warm lamplight flickering gently; thin steam from the tea; a gentle slow push-in"
+        "rotulo": "a ler o romance",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters, no legible writing on the pages: a woman reading a SINGLE novel held in her two hands by warm lamplight at night, wrapped in a blanket, a cup of tea nearby, cosy and intimate; ONLY ONE book in the entire frame, a tender romantic reading mood; this is NOT two books, NOT a study desk, NOT a library; warm terracotta, sand, cream, sage green and dusk-blue palette; inviting",
+        "klingPrompt": "the woman breathes softly as she reads, a page gently turning; the warm lamplight flickering; thin steam from the tea; a gentle slow push-in"
       },
       {
-        "id": "vespera",
-        "rotulo": "o mundo de Véspera",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a small village of terracotta rooftops at blue dusk with thin chimney smoke between soft green mountains and a quiet river, warm lit windows, a low full moon, a few swallows; in the foreground a pair of weathered older cupped hands holding a tiny lit house; warm terracotta, sand, cream, sage green and dusk-blue palette; quietly epic",
-        "klingPrompt": "thin chimney smoke rising and drifting; the warm windows softly flickering; a few swallows slowly crossing the dusk sky; a faint shimmer on the river; the hands stay perfectly still"
+        "id": "capa",
+        "rotulo": "a capa do livro",
+        "usarCapa": true
       }
     ],
     "intro": [

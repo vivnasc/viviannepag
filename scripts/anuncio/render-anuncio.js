@@ -243,13 +243,25 @@ async function main() {
   // loop até ao seu tempo, ou Ken Burns se só tiver imagem). Junta os segmentos por
   // corte seco. Sem planos → cena única antiga / Ken Burns sobre a capa (retrocompat).
   const bg = path.join(TMP, 'bg.mp4');
-  const planos = (Array.isArray(man.cenas) ? man.cenas : [])
-    .map((c) => ({ motionUrl: c && c.motionUrl, cenaUrl: c && c.cenaUrl }))
-    .filter((c) => c.motionUrl || c.cenaUrl);
+  const capaAbs = path.join(ROOT, G.capaPng);
+  // planos pela ORDEM do guião: cada cena com motion/imagem entra; a cena com
+  // usarCapa usa SEMPRE a capa real do livro (Ken Burns, texto nítido). As que ela
+  // ainda não gerou ficam de fora da sequência.
+  const cenasG = Array.isArray(G.cenas) ? G.cenas : [];
+  const planos = [];
+  for (let i = 0; i < cenasG.length; i++) {
+    const m = (Array.isArray(man.cenas) && man.cenas[i]) || {};
+    if (cenasG[i] && cenasG[i].usarCapa) planos.push({ capa: true });
+    else if (m.motionUrl || m.cenaUrl) planos.push({ motionUrl: m.motionUrl, cenaUrl: m.cenaUrl });
+  }
   if (!planos.length && (man.motionUrl || man.cenaUrl)) planos.push({ motionUrl: man.motionUrl, cenaUrl: man.cenaUrl });
 
   async function segmentoDePlano(p, dur, out) {
-    if (p.motionUrl) {
+    if (p.capa) {
+      const img = out.replace(/\.mp4$/, '.jpg');
+      fs.copyFileSync(capaAbs, img);
+      kenBurns(img, dur, out);
+    } else if (p.motionUrl) {
       const raw = out.replace(/\.mp4$/, '-raw.mp4');
       await baixar(p.motionUrl, raw);
       sh(`ffmpeg -y -stream_loop -1 -t ${dur} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -pix_fmt yuv420p -t ${dur} "${out}"`);

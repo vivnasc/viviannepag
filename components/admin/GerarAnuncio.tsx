@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-type Cena = { id: string; rotulo: string; cenaPrompt: string; klingPrompt: string };
+type Cena = { id: string; rotulo: string; cenaPrompt?: string; klingPrompt?: string; usarCapa?: boolean };
 type Guiao = {
   nome: string;
   cenas: Cena[];
@@ -82,7 +82,7 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
     } catch (e) { setMontar('erro'); setErro((e as Error).message); }
   }
 
-  const prontas = cenas.filter((c) => c.motionUrl || c.cenaUrl).length;
+  const prontas = g.cenas.filter((c, i) => c.usarCapa || cenas[i]?.motionUrl || cenas[i]?.cenaUrl).length;
 
   return (
     <div className="rounded-[14px] border border-ocre/25 p-5">
@@ -105,6 +105,27 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
           {g.cenas.map((cena, idx) => {
             const est = cenas[idx] ?? {};
             const aGerar = ocupada === idx;
+            // plano que USA A CAPA do livro: mostra a capa, sem gerar nada.
+            if (cena.usarCapa) {
+              return (
+                <div key={cena.id} className="flex gap-3 items-start rounded-[10px] border border-ocre/15 p-2.5">
+                  <div className="w-[116px] shrink-0">
+                    {capaUrl ? (
+                      <a href={capaUrl} target="_blank" rel="noreferrer" title="abrir em grande">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={capaUrl} alt="" className="w-[116px] rounded-[6px] border border-ambar/30 aspect-[9/16] object-cover cursor-zoom-in" />
+                      </a>
+                    ) : (
+                      <div className="w-[116px] aspect-[9/16] rounded-[6px] border border-dashed border-ocre/25 grid place-items-center text-creme-2/30 text-[0.66rem]">capa</div>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-creme text-[0.8rem] mb-0.5">{idx + 1} · {cena.rotulo}</p>
+                    <p className="text-creme-2/45 text-[0.7rem]">usa a capa do livro ✓ — sempre incluída no fim, com um leve movimento. Não é preciso gerar.</p>
+                  </div>
+                </div>
+              );
+            }
             return (
               <div key={cena.id} className="flex gap-3 items-start rounded-[10px] border border-ocre/15 p-2.5">
                 <div className="w-[116px] shrink-0">
