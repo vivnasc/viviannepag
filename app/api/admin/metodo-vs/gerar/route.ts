@@ -6,7 +6,7 @@ import { limparTravessoes } from '@/lib/texto';
 import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
 import { gerarPecaVS, promptImagemVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
 import { gerarSeguir } from '@/lib/metodo-vs/seguir';
-import { FORMATOS_LISTA, CALENDARIO, type FormatoId } from '@/lib/metodo-vs/formatos';
+import { FORMATOS_LISTA, CALENDARIO, formatoTarde, type FormatoId } from '@/lib/metodo-vs/formatos';
 import { METODOVS_MUNDO, metodoVSConta } from '@/lib/metodo-vs/marca';
 import { SLUG_PADROES, mergePadroes, type PadroesVS, type PadroesPorConta } from '@/lib/metodo-vs/padroes';
 
@@ -80,16 +80,24 @@ export async function POST(req: Request) {
     padroes = mergePadroes(conta, ((data?.theme as { padroes?: PadroesPorConta })?.padroes ?? {})[conta]);
   } catch { padroes = mergePadroes(conta); }
 
-  // anti-repetição + slugs existentes (só desta conta).
+  // anti-repetição + slugs existentes (só desta conta). Guarda também as frases POR
+  // VÉU: a mesma combinação véu+formato calha de novo no ciclo de 7, e era aí que
+  // duplicava (os "últimos 10" gerais não chegavam a uma frase de há semanas).
   const evitar: string[] = [];
+  const porVeu: Record<string, string[]> = {};
   const existentes = new Set<string>();
   try {
     const { data } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', `${PRE}-%`);
-    for (const r of (data ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { igPublicado?: boolean; publicado?: boolean } }[]) {
+    for (const r of (data ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { metodovs?: { veu?: string } } }[]) {
       existentes.add(r.slug);
-      const t = r.dias?.[0]?.slides?.[0]?.texto; if (t) evitar.push(t);
+      const t = r.dias?.[0]?.slides?.[0]?.texto; if (!t) continue;
+      evitar.push(t);
+      const v = r.theme?.metodovs?.veu; if (v) (porVeu[v] = porVeu[v] || []).push(t);
     }
   } catch { /* sem memória */ }
+  // o que passar à geração: TODAS as frases já feitas deste véu + as gerais recentes.
+  const evitarDoVeu = (veu: string) => [...new Set([...(porVeu[veu] || []), ...evitar.slice(-12)])];
+  const lembrar = (veu: string, frase: string) => { evitar.push(frase); (porVeu[veu] = porVeu[veu] || []).push(frase); };
 
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
@@ -107,14 +115,17 @@ export async function POST(req: Request) {
       const data = dataLocal(d);
       if (data < hoje) continue; // nunca gera passado
       const veu = VEUS_VS[(Math.floor(d.getTime() / 864e5) % VEUS_VS.length + VEUS_VS.length) % VEUS_VS.length];
-      const slug = `${PRE}-${data}-${slot.hora.replace(':', '')}-${slot.formato}`;
+      // a tarde RODA o ângulo por semana (espiral), para o véu não ficar preso a um;
+      // a manhã é sempre o sinal (dissolução).
+      const formato = slot.formato === 'dissolucao' ? 'dissolucao' : formatoTarde(slot.wd, seg);
+      const slug = `${PRE}-${data}-${slot.hora.replace(':', '')}-${formato}`;
       if (existentes.has(slug)) continue;
       try {
-        const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitar, conta);
+        const peca = await gerarPecaVS(veu, formato, apiKey, evitarDoVeu(veu), conta);
         peca.seguir = await gerarSeguir(conta, veu, apiKey); // convite a seguir (gerado; '' se falhar)
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
-        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, padroes, data, slot.hora));
-        evitar.push(peca.momentos[0]); existentes.add(slug);
+        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl, padroes, data, slot.hora));
+        lembrar(veu, peca.momentos[0]); existentes.add(slug);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
   } else {
@@ -124,12 +135,12 @@ export async function POST(req: Request) {
       const formato = body.formato ?? FORMATOS_LISTA[Math.floor(Math.random() * FORMATOS_LISTA.length)].id;
       const veu = body.veu ?? VEUS_VS[(Math.floor(Date.now() / 1000) + i) % VEUS_VS.length];
       try {
-        const peca = await gerarPecaVS(veu, formato, apiKey, evitar, conta);
+        const peca = await gerarPecaVS(veu, formato, apiKey, evitarDoVeu(veu), conta);
         peca.seguir = await gerarSeguir(conta, veu, apiKey); // convite a seguir (gerado; '' se falhar)
         const slug = `${PRE}-${veu}-${formato}-${Date.now()}-${i}`;
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
         rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl, padroes));
-        evitar.push(peca.momentos[0]);
+        lembrar(veu, peca.momentos[0]);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
   }
