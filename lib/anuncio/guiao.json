@@ -2,8 +2,32 @@
   "A": {
     "nome": "A · a ferida",
     "capaPng": "ficcao-plano/AMPARO-capa-pt.png",
-    "cenaPrompt": "Cinematic vertical 9:16 fine-art still, painterly and tender, no title, no book cover frame: a pair of weathered older mother's hands gently cupped together at the bottom of the frame, holding a tiny house with one warmly lit window; behind and above, at blue dusk, a small village of terracotta rooftops with thin chimney smoke between soft green mountains and a quiet river, a few warm lit windows, a low full moon, two or three swallows crossing the sky; generous calm sky; warm terracotta, sand, cream, sage green and dusk-blue palette; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves on both arms; intimate, quietly epic",
-    "klingPrompt": "thin chimney smoke rising and drifting slowly over the terracotta rooftops; the warm window softly flickering and breathing; two or three swallows slowly crossing the blue-dusk sky; a faint shimmer on the quiet river; the cupped hands and the little house stay perfectly still and intact",
+    "cenas": [
+      {
+        "id": "aparar",
+        "rotulo": "a aparar o filho",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a weathered older mother's hands reaching down to gently steady a small child caught mid-stumble, the child's little hand reaching up to hers, protective and tender; soft domestic interior at dusk, a window with warm light; warm terracotta, sand, cream, sage green and dusk-blue palette; generous soft negative space; intimate",
+        "klingPrompt": "the child sways very slightly as the hands steady it; the curtain and warm light breathing softly; a gentle slow cinematic push-in; the figures stay intact, no morphing"
+      },
+      {
+        "id": "pousar",
+        "rotulo": "as mãos a pousar",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: the same weathered older hands now open and resting, palms up, on a worn wooden table by a window at blue dusk, finally letting go, calm and still; a cup of tea steaming softly beside them; warm terracotta, sand, cream, sage green and dusk-blue palette; generous soft negative space; quiet, tender",
+        "klingPrompt": "thin steam rising and drifting from the cup; the curtain breathing; warm light shifting softly; a gentle slow push-in; the hands stay perfectly still"
+      },
+      {
+        "id": "livro",
+        "rotulo": "o livro",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters, no legible writing on the pages: an open book resting on a warm-lit wooden table by a window at blue dusk, a hand softly turning a page, a cup of tea and a small lit candle nearby, soft lamplight; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate, inviting",
+        "klingPrompt": "a single page softly turning; thin steam from the tea; the candle flame flickering gently; warm lamplight breathing; a gentle slow push-in"
+      },
+      {
+        "id": "vespera",
+        "rotulo": "o mundo de Véspera",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a pair of weathered older mother's cupped hands holding a tiny house with one warmly lit window; behind, at blue dusk, a small village of terracotta rooftops with thin chimney smoke between soft green mountains and a quiet river, a few warm lit windows, a low full moon, two or three swallows; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves on both arms; warm terracotta, sand, cream, sage green and dusk-blue palette; quietly epic",
+        "klingPrompt": "thin chimney smoke rising and drifting over the rooftops; the warm window softly flickering; two or three swallows slowly crossing the dusk sky; a faint shimmer on the river; the cupped hands and the little house stay perfectly still and intact"
+      }
+    ],
     "intro": [
       { "texto": "Há mulheres que seguram\ntoda a gente.", "st": 0.6, "en": 3.4 },
       { "texto": "E que ninguém segura.", "st": 3.7, "en": 5.4 }
@@ -20,8 +44,32 @@
   "B": {
     "nome": "B · reconhecimento",
     "capaPng": "ficcao-plano/AMPARO-capa-pt.png",
-    "cenaPrompt": "Cinematic vertical 9:16 fine-art still, intimate close-up, painterly and tender, no title, no book cover frame: a pair of weathered older mother's hands gently cupped together, holding a tiny house with one single warmly lit window glowing softly; shallow depth of field, the dusk village of terracotta rooftops and soft green mountains blurred far behind in warm bokeh, a low full moon; warm terracotta, sand, cream, sage green and dusk-blue palette; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves on both arms; tender, hushed",
-    "klingPrompt": "the single warm window softly flickering and breathing; the faraway village bokeh shimmering gently; a barely-there drift of dusk haze across the background; the cupped hands and the little house stay perfectly still and intact",
+    "cenas": [
+      {
+        "id": "janela",
+        "rotulo": "a que segura todos",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a woman seen from behind, alone at a window at blue dusk, looking out over a small village where many other windows glow warm; she is the one who holds everyone, a quiet ache in the stillness; warm terracotta, sand, cream, sage green and dusk-blue palette; generous soft negative space; tender",
+        "klingPrompt": "the distant warm windows softly flickering; the curtain breathing; a barely-there drift of dusk haze; a gentle slow push-in; the figure stays still"
+      },
+      {
+        "id": "maos",
+        "rotulo": "as mãos com a casa",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, intimate close-up, no text, no letters: a pair of weathered older mother's cupped hands holding a tiny house with one single warmly lit window glowing softly; the dusk village blurred far behind in warm bokeh, a low full moon; the two hands belong to ONE person, identical skin tone and IDENTICAL matching sleeves; warm terracotta, sand, cream, sage green and dusk-blue palette; hushed",
+        "klingPrompt": "the single warm window softly flickering and breathing; the faraway village bokeh shimmering gently; a barely-there drift of dusk haze; the cupped hands stay perfectly still and intact"
+      },
+      {
+        "id": "livro",
+        "rotulo": "o livro ao colo",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters, no legible writing on the pages: an open book held open on a lap by warm lamplight at night, a blanket, a cup of tea nearby, cosy and quiet; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate, inviting",
+        "klingPrompt": "a page softly turning; the warm lamplight flickering gently; thin steam from the tea; a gentle slow push-in"
+      },
+      {
+        "id": "vespera",
+        "rotulo": "o mundo de Véspera",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a small village of terracotta rooftops at blue dusk with thin chimney smoke between soft green mountains and a quiet river, warm lit windows, a low full moon, a few swallows; in the foreground a pair of weathered older cupped hands holding a tiny lit house; warm terracotta, sand, cream, sage green and dusk-blue palette; quietly epic",
+        "klingPrompt": "thin chimney smoke rising and drifting; the warm windows softly flickering; a few swallows slowly crossing the dusk sky; a faint shimmer on the river; the hands stay perfectly still"
+      }
+    ],
     "intro": [
       { "texto": "Se és a pessoa a quem todos\nligam quando precisam…", "st": 0.6, "en": 4.2 },
       { "texto": "…e ninguém liga só para\nsaber de ti.", "st": 4.5, "en": 7.2 }

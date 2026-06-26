@@ -7,7 +7,8 @@ import GUIOES from '@/lib/anuncio/guiao.json';
 export const dynamic = 'force-dynamic';
 
 type Anuncio = { nome: string; url: string; criado: string | null };
-type Guiao = { nome: string; intro: { texto: string; st: number; en: number }[]; introDur: number; falas: string[]; fim: { titulo: string; cta: string; site: string } };
+type Cena = { id: string; rotulo: string; cenaPrompt: string; klingPrompt: string };
+type Guiao = { nome: string; cenas: Cena[]; intro: { texto: string; st: number; en: number }[]; introDur: number; falas: string[]; fim: { titulo: string; cta: string; site: string } };
 
 export default async function AnuncioAdmin() {
   if (!(await isAdmin())) {

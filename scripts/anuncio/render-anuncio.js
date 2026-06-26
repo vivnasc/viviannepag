@@ -1,7 +1,8 @@
 /* eslint-disable */
 // MONTA o MP4 do ANÚNCIO do Amparo a partir das peças que a Vivianne JÁ viu/ouviu
 // no admin (sem surpresas):
-//   motion → o clip do Kling que ela pré-viu (manifesto.motionUrl); senão Ken Burns
+//   planos → as VÁRIAS cenas do Kling que ela pré-viu (manifesto.cenas[]), a cortar
+//            ao longo do vídeo; senão Ken Burns
 //   voz    → a voz dela (eleven_v3) que ela pré-ouviu (manifesto.voz, COM timestamps)
 //   texto  → KARAOKÊ: cada palavra acende no instante em que a voz a diz, frame a
 //            frame (Puppeteer + Fraunces embebida), como nos reels dela — NÃO texto
@@ -237,18 +238,48 @@ async function main() {
   fs.writeFileSync(path.join(TMP, 'voz.txt'), `file 'sil.wav'\nfile 'narr.wav'`);
   sh(`ffmpeg -y -f concat -safe 0 -i "${path.join(TMP, 'voz.txt')}" -c copy "${path.join(TMP, 'voz.wav')}"`);
 
-  // 3. fundo: motion pré-visto (loop até TOTAL) ou Ken Burns sobre a cena/capa
+  // 3. fundo: SEQUÊNCIA de planos (cada cena um plano que CORTA ao longo do vídeo).
+  // Divide o tempo total pelos planos prontos; cada plano vira um segmento (motion em
+  // loop até ao seu tempo, ou Ken Burns se só tiver imagem). Junta os segmentos por
+  // corte seco. Sem planos → cena única antiga / Ken Burns sobre a capa (retrocompat).
   const bg = path.join(TMP, 'bg.mp4');
-  if (man.motionUrl) {
-    console.log('· fundo: motion pré-visto (Kling)…');
-    const raw = path.join(TMP, 'motion.mp4');
-    await baixar(man.motionUrl, raw);
-    sh(`ffmpeg -y -stream_loop -1 -t ${TOTAL} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
-  } else {
+  const planos = (Array.isArray(man.cenas) ? man.cenas : [])
+    .map((c) => ({ motionUrl: c && c.motionUrl, cenaUrl: c && c.cenaUrl }))
+    .filter((c) => c.motionUrl || c.cenaUrl);
+  if (!planos.length && (man.motionUrl || man.cenaUrl)) planos.push({ motionUrl: man.motionUrl, cenaUrl: man.cenaUrl });
+
+  async function segmentoDePlano(p, dur, out) {
+    if (p.motionUrl) {
+      const raw = out.replace(/\.mp4$/, '-raw.mp4');
+      await baixar(p.motionUrl, raw);
+      sh(`ffmpeg -y -stream_loop -1 -t ${dur} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -pix_fmt yuv420p -t ${dur} "${out}"`);
+    } else {
+      const img = out.replace(/\.mp4$/, '.jpg');
+      await baixar(p.cenaUrl, img);
+      kenBurns(img, dur, out);
+    }
+  }
+
+  if (planos.length === 0) {
+    console.log('· fundo: Ken Burns sobre a capa (sem planos gerados)…');
     const cena = path.join(TMP, 'cena.jpg');
-    if (man.cenaUrl) { console.log('· fundo: Ken Burns sobre a cena (sem motion ainda)…'); await baixar(man.cenaUrl, cena); }
-    else { console.log('· fundo: Ken Burns sobre a capa (sem cena/motion)…'); fs.copyFileSync(path.join(ROOT, G.capaPng), cena); }
+    fs.copyFileSync(path.join(ROOT, G.capaPng), cena);
     kenBurns(cena, TOTAL, bg);
+  } else if (planos.length === 1) {
+    console.log('· fundo: 1 plano (em loop)…');
+    await segmentoDePlano(planos[0], TOTAL, bg);
+  } else {
+    console.log(`· fundo: ${planos.length} planos a cortar ao longo do vídeo…`);
+    const segBase = TOTAL / planos.length;
+    const segs = [];
+    for (let i = 0; i < planos.length; i++) {
+      const dur = +((i === planos.length - 1 ? TOTAL - segBase * (planos.length - 1) : segBase)).toFixed(2);
+      const seg = path.join(TMP, `seg${i}.mp4`);
+      await segmentoDePlano(planos[i], dur, seg);
+      segs.push(seg);
+    }
+    fs.writeFileSync(path.join(TMP, 'segs.txt'), segs.map((s) => `file '${s}'`).join('\n'));
+    sh(`ffmpeg -y -f concat -safe 0 -i "${path.join(TMP, 'segs.txt')}" -vf "fps=${FPS},setsar=1" -c:v libx264 -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
   }
 
   // 4. overlay: karaokê + ganchos + cartão final, frame a frame (Puppeteer)
