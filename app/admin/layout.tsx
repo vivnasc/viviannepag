@@ -55,6 +55,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/estudio', label: 'estúdio' },
       { href: '/admin/lista', label: 'a lista · emails' },
       { href: '/admin/anuncio', label: 'o anúncio · vídeo' },
+      { href: '/admin/romances-redes', label: 'romances · capas & links' },
     ],
   },
   {
