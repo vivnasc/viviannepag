@@ -25,6 +25,7 @@ export interface PecaVS {
   legenda: string;
   hashtags: string[];
   conceito: string;     // selo curto
+  seguir?: string;      // o convite a seguir (gerado à parte; legenda sempre, frame só se multi)
 }
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
