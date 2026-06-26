@@ -135,3 +135,16 @@ export const CALENDARIO: { wd: number; nome: string; hora: string; formato: Form
   { wd: 0, nome: 'domingo', hora: '10:30', formato: 'dissolucao' },
   { wd: 0, nome: 'domingo', hora: '16:00', formato: 'corpo' },
 ];
+
+// ROTAÇÃO DOS ÂNGULOS DA TARDE POR SEMANA (a "espiral" da decisão #9). O véu roda
+// 1/dia em ciclo de 7 e fica PRESO ao dia da semana — sem isto, cada véu via sempre
+// o MESMO ângulo (o Turbilhão só "mito"/pensar). Aqui o ângulo da tarde avança uma
+// casa por semana: dentro de cada semana saem os 7 ângulos à mesma, mas ao longo de
+// 7 semanas cada véu passa por TODAS as faces (mito, custo, cena, corpo, origem…).
+const ANGULOS_TARDE: FormatoId[] = ['nome', 'heranca', 'baixo', 'mito', 'custo', 'cena', 'corpo'];
+const BASE_WD: Record<number, number> = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 0: 6 };
+export function formatoTarde(wd: number, segunda: Date): FormatoId {
+  const semana = Math.floor(segunda.getTime() / (7 * 864e5)); // nº de semanas desde a época
+  const base = BASE_WD[wd] ?? 0;
+  return ANGULOS_TARDE[(base + semana) % ANGULOS_TARDE.length];
+}

@@ -641,13 +641,16 @@ export default function SoulabPage() {
                     className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10"
                     style={sel.has(p.slug) ? { background: SOULAB.paleta.destaque, borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
                   <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}</span>
+                  {/* O estado que importa primeiro é "está renderizada?" (videoUrl). O clip
+                      do motion vinha à frente e ESCONDIA o sinal de MP4 — agora o MP4 ganha,
+                      e o "🎬 com vida" mostra-se só quando tem motion mas AINDA não renderizou. */}
                   {p.publicado
                     ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
-                    : p.clipUrl
-                      ? <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5 text-white" style={{ background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 }}>🎬 com vida</span>
-                      : p.videoUrl
-                        ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">MP4</span>
-                        : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem</span>}
+                    : p.videoUrl
+                      ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">✅ MP4 pronto{p.clipUrl ? ' · vida' : ''}</span>
+                      : p.clipUrl
+                        ? <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5" style={{ background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 }}>🎬 com vida · por renderizar</span>
+                        : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem · por renderizar</span>}
                 </div>
                 {p.clipUrl && (
                   <div className="px-2 pt-2">
