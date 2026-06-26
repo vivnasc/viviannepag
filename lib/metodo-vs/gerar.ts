@@ -152,7 +152,7 @@ REGRAS:
 - PROIBIDO abrir com "Talvez" (gastou-se até ao osso). E NUNCA uses "talvez" duas vezes na mesma frase. Segue a estrutura de hoje, não a muleta do "talvez".
 - PROIBIDO jargão de terapeuta (trauma, sobrevivência, padrão, mecanismo, véu, cura). Linguagem da vida.
 - Português europeu, sem travessões, sem aspas.
-${evitar.length ? `\nJÁ FORAM USADAS estas (NÃO repitas a frase nem o mesmo arranque/molde de nenhuma delas; faz diferente das mais recentes): ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
+${evitar.length ? `\nJÁ FORAM USADAS estas (NÃO repitas a frase nem o mesmo arranque/molde de nenhuma delas; faz diferente das mais recentes): ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 ${lp_img}
 
@@ -203,7 +203,7 @@ ${REVELACAO}
 A ABERTURA DE HOJE (a 1.ª linha, a faca, abre ASSIM — é o que impede que as primeiras linhas se pareçam todas): ${abertura}. As linhas seguintes seguem a voz, sem repetir a forma da faca.
 
 IMAGEM (campo "fundoPrompt", em INGLÊS, UMA frase curta): descreve UM sujeito concreto, específico e INESPERADO que encarne o SENTIDO da 1.ª linha (a faca), pela sensação (um fundo sem ligação está ERRADO). VARIA muito de peça para peça. SEMPRE QUE SERVIR, prefere uma cena com movimento natural (água, chuva, vento na erva/árvores, fumo/vapor/névoa, luz a tremeluzir) para a imagem ganhar vida em vídeo. EVITA por completo e nem menciones: interiores domésticos aconchegantes, salas, cozinhas, janelas, cortinas, panos/tecidos, chávenas, velas, pessoas — procura outra coisa qualquer, fora do óbvio. Escreve SÓ a cena, em poucas palavras, SEM estilo, SEM luz, SEM câmara (isso é acrescentado automaticamente).
-${evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-10).map((e) => `"${e}"`).join('; ')}.` : ''}
+${evitar.length ? `\nNÃO repitas estes arranques já usados: ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.` : ''}
 
 O array "momentos" tem 4 a 6 entradas, NUNCA mais (a 1.ª é a faca, a última é a viragem).
 Devolve APENAS JSON válido, sem texto à volta: {"momentos":["a faca","…","a viragem"],"destaque":["1 a 3 palavras-chave a realçar"],"conceito":"selo curto, 1 a 3 palavras","fundoPrompt":"a CENA da imagem em inglês, só a cena","legenda":"legenda do Instagram em parágrafos curtos separados por linha em branco, na mesma voz da revelação, sem explicar nem usar jargão; termina com um convite leve"}`;
