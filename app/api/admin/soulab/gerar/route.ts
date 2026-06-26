@@ -40,23 +40,32 @@ export async function POST(req: Request) {
 
   const supabase = getSupabaseAdmin();
 
-  // memória anti-repetição: frases/conceitos já usados na Soulab.
+  // memória anti-repetição: frases/conceitos E cenas de imagem já usadas na Soulab.
+  // Por TIPO (o mesmo tipo repetia-se) + as imagens (portas/objetos partidos a mais).
   const evitar: string[] = [];
+  const porTipo: Record<string, string[]> = {};
+  const evitarImg: string[] = [];
   try {
-    const { data } = await supabase.from('carousel_collections').select('dias').like('slug', 'soulab-%');
-    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string; conceito?: string }> }> }[]) {
+    const { data } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'soulab-%');
+    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string }> }>; theme?: { soulab?: { tipo?: string } } }[]) {
       const s = r.dias?.[0]?.slides?.[0];
-      if (s?.texto) evitar.push(s.texto);
+      const tp = r.theme?.soulab?.tipo;
+      if (s?.texto) { evitar.push(s.texto); if (tp) (porTipo[tp] = porTipo[tp] || []).push(s.texto); }
       if (s?.conceito) evitar.push(s.conceito);
+      if (s?.notaVisual) evitarImg.push(s.notaVisual);
     }
   } catch { /* sem memória */ }
+  // ao gerar um tipo, vê TODAS as frases já feitas desse tipo + as gerais recentes.
+  const evitarDoTipo = () => [...new Set([...(porTipo[tipoId] || []), ...evitar.slice(-20)])];
 
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     try {
-      const peca = await gerarPecaSoulab(tipoId, apiKey, evitar, tema, formato);
-      evitar.push(peca.frase); if (peca.conceito) evitar.push(peca.conceito);
+      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg);
+      evitar.push(peca.frase); (porTipo[tipoId] = porTipo[tipoId] || []).push(peca.frase);
+      if (peca.conceito) evitar.push(peca.conceito);
+      if (peca.fundoPrompt) evitarImg.push(peca.fundoPrompt); // não repetir a cena nas seguintes
 
       const slug = `soulab-${tipoId}-${Date.now()}-${i}`;
       const imageUrl = await fundoImagem(peca.fundoPrompt, slug);

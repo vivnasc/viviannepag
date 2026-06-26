@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia } from '@/components/admin/KineticSlide';
@@ -304,6 +304,7 @@ export default function SoulabPage() {
   const [busca, setBusca] = useState('');
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
   const [tema, setTema] = useState('');
+  const sementesRecentes = useRef<string[]>([]); // últimas sementes do "surpreende-me", para não repetir
   const [quantos, setQuantos] = useState(1);
   const [formato, setFormato] = useState<'frase' | 'momentos'>('frase');
   const [busy, setBusy] = useState(false);
@@ -563,7 +564,7 @@ export default function SoulabPage() {
           <div className="flex flex-wrap items-center gap-2">
             <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional) — ou deixa o acaso decidir 🎲"
               className="flex-1 min-w-[200px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
-            <button type="button" onClick={() => setTema(sementeAleatoria())} title="uma semente ampla ao acaso (rola outra vez se não te chamar)"
+            <button type="button" onClick={() => { const s = sementeAleatoria(sementesRecentes.current); sementesRecentes.current = [s, ...sementesRecentes.current].slice(0, 8); setTema(s); }} title="uma semente ampla ao acaso (rola outra vez se não te chamar)"
               className="px-3 py-2 rounded-lg border text-[0.78rem] hover:bg-white/10" style={{ borderColor: 'rgba(255,255,255,0.25)', color: SOULAB.paleta.texto }}>
               🎲 surpreende-me
             </button>

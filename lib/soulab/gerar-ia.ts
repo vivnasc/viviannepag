@@ -28,6 +28,7 @@ export async function gerarPecaSoulab(
   evitar: string[] = [],
   tema?: string,
   formato: 'frase' | 'momentos' = 'frase',
+  evitarImg: string[] = [], // CENAS de imagem já usadas (para não repetir portas/objetos partidos)
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
 
@@ -75,8 +76,12 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
     ? `Uma peça Soulab no ângulo ${tipo.label}, a partir de: "${tema.trim()}".`
     : `Uma peça Soulab no ângulo ${tipo.label}.`;
   const naoRepetir = evitar.length
-    ? `\n\nNÃO repitas estes ângulos/frases/símbolos já usados (encontra outro): ${evitar.slice(-14).map((e) => `"${e}"`).join('; ')}.`
+    ? `\n\nNÃO repitas estes ângulos/frases/símbolos já usados (encontra outro): ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.`
     : '';
+  // ALARGAR O MUNDO IMAGÉTICO (pedido da Vivianne) sem perder a identidade: o
+  // imaginário andava preso em portas e objetos partidos. Damos REGISTOS amplos
+  // (não cenas prontas) e as cenas recentes a evitar, mantendo o fine art contemplativo.
+  const naoRepetirImg = `\n\nIMAGEM, AMPLIA O IMAGINÁRIO mantendo a identidade (fine art, contemplativo, simbólico, sem pessoas a posar, sem texto): NÃO recaias sempre em portas, soleiras e objetos partidos. Há mundo por explorar no natural e cósmico (água, neblina, fogo, céu, pedra, deserto, oceano, raízes, sementes, constelações), no líquido e no têxtil, no mineral e no botânico, na arquitetura do vazio, na luz e na sombra, no microscópico e no imenso. Que cada imagem traga um SUJEITO inesperado.${evitarImg.length ? ` E foge destas cenas recentes: ${evitarImg.slice(-10).map((e) => `"${String(e).slice(0, 90)}"`).join('; ')}.` : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -85,7 +90,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       model: 'claude-sonnet-4-6',
       max_tokens: 1100,
       system: sys,
-      messages: [{ role: 'user', content: pedido + naoRepetir }],
+      messages: [{ role: 'user', content: pedido + naoRepetir + naoRepetirImg }],
     }),
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);
