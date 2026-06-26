@@ -251,8 +251,10 @@ async function main() {
   const planos = [];
   for (let i = 0; i < cenasG.length; i++) {
     const m = (Array.isArray(man.cenas) && man.cenas[i]) || {};
-    if (cenasG[i] && cenasG[i].usarCapa) planos.push({ capa: true });
-    else if (m.motionUrl || m.cenaUrl) planos.push({ motionUrl: m.motionUrl, cenaUrl: m.cenaUrl });
+    // um clip escolhido/gerado MANDA sobre a capa por defeito (ela pode pôr uma
+    // animação da biblioteca no plano da capa).
+    if (m.motionUrl || m.cenaUrl) planos.push({ motionUrl: m.motionUrl, cenaUrl: m.cenaUrl });
+    else if (cenasG[i] && cenasG[i].usarCapa) planos.push({ capa: true });
   }
   if (!planos.length && (man.motionUrl || man.cenaUrl)) planos.push({ motionUrl: man.motionUrl, cenaUrl: man.cenaUrl });
 
