@@ -5,6 +5,7 @@ import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { limparTravessoes } from '@/lib/texto';
 import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
 import { gerarPecaVS, promptImagemVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
+import { gerarSeguir } from '@/lib/metodo-vs/seguir';
 import { FORMATOS_LISTA, CALENDARIO, type FormatoId } from '@/lib/metodo-vs/formatos';
 import { METODOVS_MUNDO, metodoVSConta } from '@/lib/metodo-vs/marca';
 import { SLUG_PADROES, mergePadroes, type PadroesVS, type PadroesPorConta } from '@/lib/metodo-vs/padroes';
@@ -31,7 +32,7 @@ async function fundoImagem(prompt: string, slug: string, conta: ContaId): Promis
 function montarRow(marca: string, handle: string, slug: string, veu: VeuNome, formato: FormatoId, peca: Awaited<ReturnType<typeof gerarPecaVS>>, imageUrl: string | null, padroes: PadroesVS, agendadoEm?: string, hora?: string) {
   // a peça NOVA herda os PADRÕES GLOBAIS da conta (transição, ritmo, tipografia, motion)
   // — gravados no slide[0], de onde o preview e o render leem. (o estúdio como sistema.)
-  const slides = peca.momentos.map((texto, idx) => ({
+  const slides: Record<string, unknown>[] = peca.momentos.map((texto, idx) => ({
     tipo: 'kinetico', texto,
     destaque: idx === 0 ? peca.destaque : [],
     notaVisual: peca.fundoPrompt, imageUrl,
@@ -41,7 +42,12 @@ function montarRow(marca: string, handle: string, slug: string, veu: VeuNome, fo
       tipografia: { fonte: padroes.fonte, tamanho: padroes.tamanho, cor: padroes.cor, corDestaque: padroes.corDestaque },
     } : {}),
   }));
-  const legenda = limparTravessoes(`${peca.legenda}\n\nMétodo VS · @${handle}\n\n${peca.hashtags.map((t) => `#${t}`).join(' ')}`);
+  // CONVITE A SEGUIR (decisão da Vivianne): nas peças de VÁRIOS frames entra também
+  // como ÚLTIMO frame; nas de 1 frame (manhã/dissolução) fica só na legenda.
+  if (peca.seguir && peca.momentos.length > 1) {
+    slides.push({ tipo: 'kinetico', texto: peca.seguir, destaque: [], notaVisual: peca.fundoPrompt, imageUrl, capa: false, seguir: true });
+  }
+  const legenda = limparTravessoes(`${peca.legenda}${peca.seguir ? `\n\n${peca.seguir}` : ''}\n\nMétodo VS · @${handle}\n\n${peca.hashtags.map((t) => `#${t}`).join(' ')}`);
   const dias = [{ dia: 1, mundo: METODOVS_MUNDO, palavra: peca.momentos[0].slice(0, 48), slides, legenda, hashtags: peca.hashtags }];
   return {
     slug, title: peca.momentos[0].slice(0, 60), brief: peca.momentos[0], dias,
@@ -105,6 +111,7 @@ export async function POST(req: Request) {
       if (existentes.has(slug)) continue;
       try {
         const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitar, conta);
+        peca.seguir = await gerarSeguir(conta, veu, apiKey); // convite a seguir (gerado; '' se falhar)
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
         rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, padroes, data, slot.hora));
         evitar.push(peca.momentos[0]); existentes.add(slug);
@@ -118,6 +125,7 @@ export async function POST(req: Request) {
       const veu = body.veu ?? VEUS_VS[(Math.floor(Date.now() / 1000) + i) % VEUS_VS.length];
       try {
         const peca = await gerarPecaVS(veu, formato, apiKey, evitar, conta);
+        peca.seguir = await gerarSeguir(conta, veu, apiKey); // convite a seguir (gerado; '' se falhar)
         const slug = `${PRE}-${veu}-${formato}-${Date.now()}-${i}`;
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
         rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl, padroes));
