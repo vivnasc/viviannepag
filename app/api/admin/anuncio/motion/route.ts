@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarMotionSoulab } from '@/lib/soulab/motion';
-import { lerManifesto, definirCena } from '@/lib/anuncio/manifest';
+import { lerManifesto, definirCena, apagarFicheiros } from '@/lib/anuncio/manifest';
 import GUIOES from '@/lib/anuncio/guiao.json';
 
 export const runtime = 'nodejs';
@@ -46,7 +46,10 @@ export async function POST(req: NextRequest) {
       const { error } = await sb.storage.from(BUCKET).upload(path, buf, { contentType: 'video/mp4', upsert: true });
       if (!error) motionUrl = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
     } catch { /* fica o URL temporário se a persistência falhar */ }
+    const motionAntigo = man.cenas?.[idx]?.motionUrl;
     await definirCena(sb, variante, idx, { motionUrl });
+    // zero lixo: apaga o motion anterior deste plano (se houver e for diferente).
+    if (motionAntigo && motionAntigo !== motionUrl) await apagarFicheiros(sb, [motionAntigo]);
     return NextResponse.json({ ok: true, url: motionUrl, idx });
   } catch (e) {
     return NextResponse.json({ erro: (e as Error).message }, { status: 500 });

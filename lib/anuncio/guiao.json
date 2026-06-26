@@ -5,9 +5,9 @@
     "cenas": [
       {
         "id": "aparar",
-        "rotulo": "a aparar o filho",
-        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: a weathered older mother's hands reaching down to gently steady a small child caught mid-stumble, the child's little hand reaching up to hers, protective and tender; soft domestic interior at dusk, a window with warm light; warm terracotta, sand, cream, sage green and dusk-blue palette; generous soft negative space; intimate",
-        "klingPrompt": "the child sways very slightly as the hands steady it; the curtain and warm light breathing softly; a gentle slow cinematic push-in; the figures stay intact, no morphing"
+        "rotulo": "a amparar o filho adulto",
+        "cenaPrompt": "Warm painterly fine-art illustration, confident ink line-and-wash with soft watercolour, vertical 9:16, no text, no letters: an older mother in her sixties gently steadying her GROWN ADULT SON, a man in his mid-thirties, both her hands holding his arm as he falters, her face tender and quietly worried, protective; they are clearly a mother and her ADULT son — both grown adults, the son a tall grown man (not a child), this is NOT a grandmother with a grandchild, NOT a toddler, NOT a baby; soft domestic interior at dusk, a window with warm light; warm terracotta, sand, cream, sage green and dusk-blue palette; intimate",
+        "klingPrompt": "the adult son sways very slightly as her hands steady him; the curtain and warm light breathing softly; a gentle slow cinematic push-in; the figures stay intact, no morphing"
       },
       {
         "id": "pousar",

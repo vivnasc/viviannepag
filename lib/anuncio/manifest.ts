@@ -24,6 +24,22 @@ export function caminhoManifesto(variante: string): string {
   return `anuncios/_manifesto-${variante.toLowerCase()}.json`;
 }
 
+// Extrai a CHAVE do Storage a partir de um URL público (para apagar o ficheiro).
+// .../object/public/viviannepag-assets/anuncios/cena-a-0-123.jpg → anuncios/cena-a-0-123.jpg
+export function caminhoStorage(publicUrl?: string): string | null {
+  if (!publicUrl) return null;
+  const m = publicUrl.split(`/public/${BUCKET}/`)[1];
+  return m ? decodeURIComponent(m.split('?')[0]) : null;
+}
+
+// Apaga ficheiros órfãos do Storage (regra de ouro da Vivianne: zero lixo). Recebe
+// URLs públicos; ignora os que não são deste bucket. Nunca rebenta (best-effort).
+export async function apagarFicheiros(sb: SupabaseClient, urls: Array<string | undefined>): Promise<void> {
+  const chaves = urls.map(caminhoStorage).filter((k): k is string => !!k);
+  if (!chaves.length) return;
+  try { await sb.storage.from(BUCKET).remove(chaves); } catch { /* best-effort */ }
+}
+
 export async function lerManifesto(sb: SupabaseClient, variante: string): Promise<ManifestoAnuncio> {
   try {
     const { data, error } = await sb.storage.from(BUCKET).download(caminhoManifesto(variante));

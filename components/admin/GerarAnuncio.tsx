@@ -107,16 +107,21 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
             const aGerar = ocupada === idx;
             return (
               <div key={cena.id} className="flex gap-3 items-start rounded-[10px] border border-ocre/15 p-2.5">
-                <div className="w-[84px] shrink-0">
+                <div className="w-[116px] shrink-0">
                   {est.motionUrl ? (
-                    // eslint-disable-next-line jsx-a11y/media-has-caption
-                    <video src={est.motionUrl} muted loop autoPlay playsInline className="w-[84px] rounded-[6px] border border-ambar/30 aspect-[9/16] object-cover bg-black" />
+                    <a href={est.motionUrl} target="_blank" rel="noreferrer" title="abrir em grande">
+                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                      <video src={est.motionUrl} muted loop autoPlay playsInline className="w-[116px] rounded-[6px] border border-ambar/30 aspect-[9/16] object-cover bg-black cursor-zoom-in" />
+                    </a>
                   ) : est.cenaUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={est.cenaUrl} alt="" className="w-[84px] rounded-[6px] border border-ocre/20 aspect-[9/16] object-cover" />
+                    <a href={est.cenaUrl} target="_blank" rel="noreferrer" title="abrir em grande">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={est.cenaUrl} alt="" className="w-[116px] rounded-[6px] border border-ocre/20 aspect-[9/16] object-cover cursor-zoom-in" />
+                    </a>
                   ) : (
-                    <div className="w-[84px] aspect-[9/16] rounded-[6px] border border-dashed border-ocre/25 grid place-items-center text-creme-2/30 text-[0.66rem]">plano {idx + 1}</div>
+                    <div className="w-[116px] aspect-[9/16] rounded-[6px] border border-dashed border-ocre/25 grid place-items-center text-creme-2/30 text-[0.66rem]">plano {idx + 1}</div>
                   )}
+                  {(est.motionUrl || est.cenaUrl) && <p className="text-creme-2/40 text-[0.64rem] mt-1 text-center">clica → ver grande</p>}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-creme text-[0.8rem] mb-0.5">{idx + 1} · {cena.rotulo}</p>
