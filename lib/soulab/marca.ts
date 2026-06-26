@@ -101,10 +101,14 @@ export const SOULAB = {
   ],
 } as const;
 
-/** Uma semente ampla ao acaso, para o laboratório (o botão "surpreende-me"). */
-export function sementeAleatoria(): string {
-  const s = SOULAB.sementes;
-  return s[Math.floor(Math.random() * s.length)];
+/** Uma semente ampla ao acaso, para o laboratório (o botão "surpreende-me").
+ *  Pool ALARGADO: as sementes curadas + as correntes do território (mais variedade,
+ *  sem sair do mundo dela). `evitar` salta as últimas que já saíram, para não repetir. */
+export function sementeAleatoria(evitar: string[] = []): string {
+  const pool = [...SOULAB.sementes, ...SOULAB.territorio];
+  const livres = pool.filter((s) => !evitar.includes(s));
+  const fonte = livres.length ? livres : pool;
+  return fonte[Math.floor(Math.random() * fonte.length)];
 }
 
 // A MARCA da Soulab no KineticSlide: SEM o selo "Ancorar" e SEM o rótulo do
