@@ -2,36 +2,37 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { escreverManifesto } from '@/lib/anuncio/manifest';
+import { definirCena } from '@/lib/anuncio/manifest';
 import GUIOES from '@/lib/anuncio/guiao.json';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
-// PASSO 1 da prévia: gera a CENA do anúncio (imagem 9:16) com a IA da casa (Flux).
-// NÃO é a capa do livro chapada — é uma cena cinematográfica do mundo de Véspera
-// (as mãos em concha a segurar a casinha iluminada, a aldeia ao crepúsculo). A e B
-// têm cenas DIFERENTES (ver cenaPrompt no guião), por isso os anúncios não saem
-// iguais. Ela vê a imagem ANTES de a pôr a mexer.
+type Cena = { id: string; cenaPrompt: string };
+
+// PASSO 1 (por PLANO): gera a imagem de UMA cena do anúncio (9:16) com a IA da casa
+// (Flux). NÃO é a capa do livro chapada — é uma cena cinematográfica do mundo de
+// Véspera. O anúncio tem VÁRIOS planos (4), que vão trocando ao longo do vídeo; cada
+// um gera-se aqui, um de cada vez. A e B têm planos diferentes (ver cenas[] no guião).
 export async function POST(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'falta REPLICATE_API_TOKEN' }, { status: 500 });
 
-  let variante = 'A';
-  try { const b = await req.json(); if (b?.variante === 'B') variante = 'B'; } catch {}
-  const g = (GUIOES as Record<string, { cenaPrompt?: string }>)[variante];
-  if (!g?.cenaPrompt) return NextResponse.json({ erro: 'sem-cena-no-guiao' }, { status: 400 });
+  let variante = 'A', idx = 0;
+  try { const b = await req.json(); if (b?.variante === 'B') variante = 'B'; if (Number.isInteger(b?.idx)) idx = b.idx; } catch {}
+  const g = (GUIOES as Record<string, { cenas?: Cena[] }>)[variante];
+  const cena = g?.cenas?.[idx];
+  if (!cena?.cenaPrompt) return NextResponse.json({ erro: 'sem-cena-no-guiao' }, { status: 400 });
 
   try {
-    // raw = o prompt é a cena completa; só as regras de segurança por cima (sem o
-    // estilo/tema da banda). A cena já traz a paleta e o mood de Véspera.
-    const replicateUrl = await gerarImagemFlux(g.cenaPrompt, token, { raw: true });
-    const cenaUrl = await guardarImagem(replicateUrl, `anuncios/cena-${variante.toLowerCase()}-${Date.now()}.jpg`);
-    const sb = getSupabaseAdmin();
-    // a cena MUDOU → o motion antigo deixa de servir; limpa-o para ela regerar.
-    await escreverManifesto(sb, variante, { cenaUrl, motionUrl: undefined });
-    return NextResponse.json({ ok: true, url: cenaUrl });
+    // raw = o prompt é a cena completa; só as regras de segurança por cima (a cena já
+    // traz o estilo painterly, a paleta e o mood de Véspera).
+    const replicateUrl = await gerarImagemFlux(cena.cenaPrompt, token, { raw: true });
+    const cenaUrl = await guardarImagem(replicateUrl, `anuncios/cena-${variante.toLowerCase()}-${idx}-${Date.now()}.jpg`);
+    // a imagem MUDOU → o motion antigo deste plano deixa de servir; limpa-o.
+    await definirCena(getSupabaseAdmin(), variante, idx, { cenaUrl, motionUrl: undefined });
+    return NextResponse.json({ ok: true, url: cenaUrl, idx });
   } catch (e) {
     return NextResponse.json({ erro: (e as Error).message }, { status: 500 });
   }

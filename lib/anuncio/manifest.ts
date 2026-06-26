@@ -11,9 +11,11 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 const BUCKET = 'viviannepag-assets';
 
 export interface PalavraVoz { w: string; t0: number; t1: number }
+export interface CenaAnuncio { cenaUrl?: string; motionUrl?: string } // imagem (Flux) + clip (Kling)
 export interface ManifestoAnuncio {
-  cenaUrl?: string;                                  // imagem da cena (Flux)
-  motionUrl?: string;                                // clip com movimento (Kling)
+  cenas?: CenaAnuncio[];                              // os PLANOS do anúncio, por ordem
+  cenaUrl?: string;                                  // (retrocompat) cena única antiga
+  motionUrl?: string;                                // (retrocompat) motion único antigo
   voz?: { url: string; dur: number; palavras: PalavraVoz[] }; // voz + timing p/ karaokê
   atualizadoEm?: number;
 }
@@ -41,4 +43,14 @@ export async function escreverManifesto(sb: SupabaseClient, variante: string, pa
   });
   if (error) throw new Error(`manifesto: ${error.message}`);
   return novo;
+}
+
+// Define (merge) UM plano (cena) por índice, sem mexer nos outros — para gerar a
+// imagem/o motion de cada cena uma de cada vez.
+export async function definirCena(sb: SupabaseClient, variante: string, idx: number, patch: Partial<CenaAnuncio>): Promise<ManifestoAnuncio> {
+  const atual = await lerManifesto(sb, variante);
+  const cenas = Array.isArray(atual.cenas) ? [...atual.cenas] : [];
+  while (cenas.length <= idx) cenas.push({});
+  cenas[idx] = { ...cenas[idx], ...patch };
+  return escreverManifesto(sb, variante, { cenas });
 }
