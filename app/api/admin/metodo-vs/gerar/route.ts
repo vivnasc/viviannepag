@@ -6,7 +6,7 @@ import { limparTravessoes } from '@/lib/texto';
 import { type VeuNome, type ContaId } from '@/lib/metodo/contas';
 import { gerarPecaVS, promptImagemVS, VEUS_VS } from '@/lib/metodo-vs/gerar';
 import { gerarSeguir } from '@/lib/metodo-vs/seguir';
-import { FORMATOS_LISTA, CALENDARIO, type FormatoId } from '@/lib/metodo-vs/formatos';
+import { FORMATOS_LISTA, CALENDARIO, formatoTarde, type FormatoId } from '@/lib/metodo-vs/formatos';
 import { METODOVS_MUNDO, metodoVSConta } from '@/lib/metodo-vs/marca';
 import { SLUG_PADROES, mergePadroes, type PadroesVS, type PadroesPorConta } from '@/lib/metodo-vs/padroes';
 
@@ -115,13 +115,16 @@ export async function POST(req: Request) {
       const data = dataLocal(d);
       if (data < hoje) continue; // nunca gera passado
       const veu = VEUS_VS[(Math.floor(d.getTime() / 864e5) % VEUS_VS.length + VEUS_VS.length) % VEUS_VS.length];
-      const slug = `${PRE}-${data}-${slot.hora.replace(':', '')}-${slot.formato}`;
+      // a tarde RODA o ângulo por semana (espiral), para o véu não ficar preso a um;
+      // a manhã é sempre o sinal (dissolução).
+      const formato = slot.formato === 'dissolucao' ? 'dissolucao' : formatoTarde(slot.wd, seg);
+      const slug = `${PRE}-${data}-${slot.hora.replace(':', '')}-${formato}`;
       if (existentes.has(slug)) continue;
       try {
-        const peca = await gerarPecaVS(veu, slot.formato, apiKey, evitarDoVeu(veu), conta);
+        const peca = await gerarPecaVS(veu, formato, apiKey, evitarDoVeu(veu), conta);
         peca.seguir = await gerarSeguir(conta, veu, apiKey); // convite a seguir (gerado; '' se falhar)
         const imageUrl = await fundoImagem(peca.fundoPrompt, slug, conta);
-        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, slot.formato, peca, imageUrl, padroes, data, slot.hora));
+        rows.push(montarRow(cfg.marca, cfg.slide.assinatura.replace(/^@/, ''), slug, veu, formato, peca, imageUrl, padroes, data, slot.hora));
         lembrar(veu, peca.momentos[0]); existentes.add(slug);
       } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
     }
