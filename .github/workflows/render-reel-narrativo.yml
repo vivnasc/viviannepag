@@ -1,0 +1,65 @@
+name: Reel narrativo (protótipo · clips contínuos)
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Slug da peça (mãe) com imagem já gerada'
+        required: true
+        type: string
+      siteUrl:
+        description: 'URL pública do site'
+        required: true
+        type: string
+      nClips:
+        description: 'Nº de clips a encadear (custo!). Default 4'
+        required: false
+        type: string
+        default: '4'
+      dur:
+        description: 'Duração de cada clip: 5 ou 10. Default 10'
+        required: false
+        type: string
+        default: '10'
+
+jobs:
+  narrativo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install ffmpeg
+        timeout-minutes: 20
+        run: |
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg já presente: $(ffmpeg -version | head -1)"
+            exit 0
+          fi
+          for i in 1 2 3; do
+            echo "::group::tentativa $i de instalar ffmpeg"
+            sudo apt-get update -o Acquire::Retries=3 && \
+            sudo apt-get install -y --no-install-recommends ffmpeg && { echo "::endgroup::"; break; }
+            echo "::endgroup::"; echo "falhou a tentativa $i; espera e repete…"; sleep 20
+          done
+          command -v ffmpeg >/dev/null 2>&1 || { echo "ffmpeg não instalou após 3 tentativas"; exit 1; }
+
+      - name: Install npm packages
+        run: npm install --no-save @supabase/supabase-js
+
+      - name: Reel narrativo
+        env:
+          SITE_URL: ${{ github.event.inputs.siteUrl }}
+          SLUG: ${{ github.event.inputs.slug }}
+          N_CLIPS: ${{ github.event.inputs.nClips }}
+          DUR: ${{ github.event.inputs.dur }}
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+        run: node scripts/render-reel-narrativo.js
