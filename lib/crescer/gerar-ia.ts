@@ -72,9 +72,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
   "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS para a imagem (${visual.label}): ${visual.promptBase}"`},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
-  "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? `,\n  "momentos": ${formato.id === 'ensaio'
-    ? '["A 1.ª linha é a frase-capa (a faca curta). Depois 4 a 7 PARÁGRAFOS longos e densos, cada um uma verdade auto-contida (3 a 6 linhas) que nomeia uma experiência vivida e a vira num reconhecimento. O ÚLTIMO começa por \\"E para fechar\\" e entrega a verdade mais funda. Sem travessões."]'
-    : '["3 a 5 linhas curtas em sequência (a 1.ª é a frase da capa). Constroem um arco: abre numa faca, aprofunda, vira, fecha em aberto. Cada linha uma respiração."]'}` : ''}
+  "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? `,\n  "momentos": ["A 1.ª é a CAPA: o título-faca curto e forte (igual à frase da capa). A 2.ª abre o tema, começa por \\"Para refletir:\\" e 1 a 2 frases. Depois 6 a 11 MANIFESTAÇÕES, cada uma um parágrafo (3 a 6 linhas) sobre UMA forma concreta e reconhecível do tema na vida real, todas diferentes, sem repetir a ideia. A ÚLTIMA é o FECHO: reconhece (\\"todos já caímos nisto\\") e convida a guardar/partilhar/rolar. Sem travessões, leitura clara do princípio ao fim."]` : ''}
 }`;
 
   const pedido = tema?.trim()
@@ -89,7 +87,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
     headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
-      max_tokens: 1200,
+      max_tokens: formato.multi ? 2800 : 1200, // o carrossel pode ter 8-13 slides de texto
       system: sys,
       messages: [{ role: 'user', content: pedido + naoRepetir }],
     }),

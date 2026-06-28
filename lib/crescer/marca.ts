@@ -159,7 +159,11 @@ export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find(
 // FORMATOS — cada um sai diferente ao olho e na estrutura (validados).
 // `multi` = produz vários momentos (carrossel/reel de várias linhas).
 // ---------------------------------------------------------------------------
-export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio';
+// ENXUGADO (decisão da Vivianne, jun 2026): só dois pilares fortes, sem conteúdos
+// difusos e sem motion (baratos). 'frase' = a voz dela, de aproximação; 'ensaio' =
+// o carrossel de texto temático, o formato de alcance. Os reciclados (momentos,
+// pergunta, lista, reflexão, cena) foram ABOLIDOS por não terem mecanismo próprio.
+export type FormatoId = 'frase' | 'ensaio';
 
 export interface FormatoCrescer {
   id: FormatoId;
@@ -174,40 +178,19 @@ export interface FormatoCrescer {
 export const FORMATOS: FormatoCrescer[] = [
   {
     id: 'frase', label: 'Frase única', emoji: '✶', multi: false,
-    descricao: '1 imagem forte + 1 frase que para o scroll.',
-    estrutura: 'UMA frase curta (1 a 3 linhas), direta, que para o scroll porque a pessoa se reconhece. Densa, com uma virada. Cabe grande num reel 9:16.',
+    descricao: '1 imagem + 1 frase que para o scroll. Para a tua voz, de aproximação.',
+    estrutura: 'UMA frase curta (1 a 3 linhas), que para o scroll porque a pessoa se reconhece. Densa, com uma virada. Cabe grande no ecrã.',
   },
   {
-    id: 'momentos', label: 'Momentos', emoji: '🎞', multi: true,
-    descricao: 'Várias linhas num arco (reel/carrossel).',
-    estrutura: '3 a 5 linhas curtas que constroem UM arco (abre com uma faca que para o scroll, aprofunda, vira, fecha em aberto). Aparecem uma a uma sobre a mesma cena.',
-  },
-  {
-    id: 'pergunta', label: 'Pergunta que fica', emoji: '❓', multi: false,
-    descricao: 'Abre com uma pergunta, não responde.',
-    estrutura: 'UMA pergunta que a pessoa leva consigo o dia todo. Não respondas. Concreta, sobre a vida dela, nunca retórica vazia.',
-  },
-  {
-    id: 'lista', label: 'Lista', emoji: '📍', multi: true,
-    descricao: '"3 sinais de…", "o que ninguém te diz sobre…".',
-    estrutura: 'Uma capa-faca ("3 sinais de que…", "o que ninguém te diz sobre…") seguida de 3 a 4 pontos curtos, concretos e reconhecíveis. Cada ponto numa linha. Fecha com uma linha que abre, não que conclui.',
-  },
-  {
-    id: 'reflexao', label: 'Reflexão funda', emoji: '🕯', multi: false,
-    descricao: 'Texto mais longo, fundamentado (a tua autoridade).',
-    estrutura: 'Uma frase-capa forte para o ecrã, e na legenda uma reflexão mais longa (2 a 3 parágrafos) com a profundidade dela, sempre concreta e na vida real, nunca aula.',
-  },
-  {
-    id: 'cena', label: 'Cena', emoji: '🎬', multi: false,
-    descricao: 'Uma situação que se reconhece, e a seguir o alívio.',
-    estrutura: 'DOIS tempos: 1) a cena concreta que a pessoa vive AGORA (uma faca que ela reconhece como a vida dela); 2) o virar que a solta. A imagem mostra a cena, não um símbolo a decifrar.',
-  },
-  {
-    id: 'ensaio', label: 'Ensaio em carrossel', emoji: '📜', multi: true,
-    descricao: 'Capa-faca + várias verdades longas (texto), como um ensaio que se desliza.',
+    id: 'ensaio', label: 'Carrossel de texto', emoji: '📜', multi: true,
+    descricao: 'Capa-faca + um tema desdobrado em verdades concretas + fecho. O formato de alcance.',
     estrutura:
-      'Uma CAPA que é uma faca curta (1 linha, pára o scroll, provoca, quase contra-corrente). Depois 4 a 7 VERDADES, cada uma um PARÁGRAFO longo e denso (3 a 6 linhas) que nomeia com precisão uma experiência vivida e a vira num reconhecimento (responsabilidade, lucidez, o custo de crescer). A última é o FECHO: começa por "E para fechar" e entrega a verdade mais funda. ' +
-      'Registo AFIADO mas digno: a faca aponta ao PADRÃO e à verdade, NUNCA com desprezo pelas pessoas (PROIBIDO "massa histérica", "egos infantis", "babaca" e afins). Nomeia a dor de quem lê, não um inimigo lá fora.',
+      'Um CARROSSEL sobre UM tema só (ex.: "as armadilhas do ego", "o que a terapia não te conta", "as heranças que carregas sem saber"). A estrutura que aguenta a leitura até ao fim: ' +
+      '1) CAPA: um título-faca curto e forte que pára o scroll (ex.: "As armadilhas do ego"); ' +
+      '2) ABERTURA: um slide curto que monta o tema (começa por "Para refletir:" e 1 a 2 frases); ' +
+      '3) 6 a 11 MANIFESTAÇÕES: cada uma um parágrafo (3 a 6 linhas) que nomeia UMA forma concreta e reconhecível do tema na vida real (uma cena que a pessoa vive), TODAS diferentes, nunca a repetir a mesma ideia; ' +
+      '4) FECHO: um slide que reconhece ("todos já caímos nisto") e convida a guardar, partilhar ou rolar. ' +
+      'A leitura tem de ser clara e interessante do princípio ao fim (8 fortes valem mais que 13 esticados). Registo afiado mas digno: a faca aponta ao padrão, NUNCA despreza pessoas (proibido "massa histérica", "babaca" e afins).',
   },
 ];
 
