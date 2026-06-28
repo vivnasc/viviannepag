@@ -159,11 +159,10 @@ export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find(
 // FORMATOS — cada um sai diferente ao olho e na estrutura (validados).
 // `multi` = produz vários momentos (carrossel/reel de várias linhas).
 // ---------------------------------------------------------------------------
-// ENXUGADO (decisão da Vivianne, jun 2026): só dois pilares fortes, sem conteúdos
-// difusos e sem motion (baratos). 'frase' = a voz dela, de aproximação; 'ensaio' =
-// o carrossel de texto temático, o formato de alcance. Os reciclados (momentos,
-// pergunta, lista, reflexão, cena) foram ABOLIDOS por não terem mecanismo próprio.
-export type FormatoId = 'frase' | 'ensaio';
+// DECISÃO da Vivianne (jun 2026): manter TODOS os formatos, mas garantir que cada
+// um sai DIGNO, na voz e no visual (ver a régua de DIGNIDADE no gerador). Cada
+// formato abre sempre com uma FACA e é forte e claro, nunca difuso nem encheção.
+export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio';
 
 export interface FormatoCrescer {
   id: FormatoId;
@@ -180,6 +179,31 @@ export const FORMATOS: FormatoCrescer[] = [
     id: 'frase', label: 'Frase única', emoji: '✶', multi: false,
     descricao: '1 imagem + 1 frase que para o scroll. Para a tua voz, de aproximação.',
     estrutura: 'UMA frase curta (1 a 3 linhas), que para o scroll porque a pessoa se reconhece. Densa, com uma virada. Cabe grande no ecrã.',
+  },
+  {
+    id: 'momentos', label: 'Momentos', emoji: '🎞', multi: true,
+    descricao: 'Uma ideia que se desdobra em poucas linhas (reel).',
+    estrutura: 'A 1.ª tela é uma FACA (pára o scroll). Depois 3 a 5 linhas curtas que constroem UM arco sobre a mesma ideia (aprofunda, vira, fecha em aberto), cada uma uma respiração.',
+  },
+  {
+    id: 'pergunta', label: 'Pergunta que fica', emoji: '❓', multi: false,
+    descricao: 'Abre com uma pergunta-faca, não responde.',
+    estrutura: 'UMA pergunta-faca que a pessoa leva consigo o dia todo. Concreta, sobre a vida dela, nunca retórica vazia. Não respondas.',
+  },
+  {
+    id: 'lista', label: 'Lista', emoji: '📍', multi: true,
+    descricao: '"3 sinais de…", "o que ninguém te diz sobre…".',
+    estrutura: 'CAPA-faca ("3 sinais de que…", "o que ninguém te diz sobre…"). Depois 3 a 5 pontos curtos, concretos e reconhecíveis (cada um uma cena real, todos diferentes). Fecho que abre, não conclui.',
+  },
+  {
+    id: 'reflexao', label: 'Reflexão funda', emoji: '🕯', multi: false,
+    descricao: 'Capa-faca + uma reflexão fundamentada na legenda.',
+    estrutura: 'Uma frase-CAPA forte (faca) no ecrã; na legenda, 2 a 3 parágrafos com a profundidade dela, sempre concretos e na vida real, nunca aula.',
+  },
+  {
+    id: 'cena', label: 'Cena', emoji: '🎬', multi: false,
+    descricao: 'Uma situação que se reconhece, e a seguir o alívio.',
+    estrutura: 'DOIS tempos: 1) a cena concreta que a pessoa vive AGORA (uma faca que ela reconhece como a vida dela); 2) o virar que a solta. A imagem mostra a cena, não um símbolo a decifrar.',
   },
   {
     id: 'ensaio', label: 'Carrossel de texto', emoji: '📜', multi: true,

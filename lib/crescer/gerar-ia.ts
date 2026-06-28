@@ -55,6 +55,7 @@ O FORMATO, ${formato.label}: ${formato.estrutura}
 A VOZ DE HOJE (${voz.label}): ${voz.instrucao}
 
 REGRAS DE VOZ (duras):
+- DIGNIDADE (inviolável): a peça abre SEMPRE com uma FACA (a 1.ª linha pára o scroll), nunca um arranque morno ou descritivo. O texto é forte e claro do princípio ao fim, nunca difuso, nunca encheção para ocupar slides. Se não houver uma faca e uma verdade que valham, escreve menos, nunca enches.
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
 - SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
 - DIRETA: nomeia a cena concreta que a pessoa vive. A pessoa tem de pensar "isto sou eu". Nada de enigmas a decifrar, nada de títulos-conceito herméticos, nada de metáfora obscura.
@@ -72,7 +73,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
   "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS para a imagem (${visual.label}): ${visual.promptBase}"`},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
-  "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? `,\n  "momentos": ["A 1.ª é a CAPA: o título-faca curto e forte (igual à frase da capa). A 2.ª abre o tema, começa por \\"Para refletir:\\" e 1 a 2 frases. Depois 6 a 11 MANIFESTAÇÕES, cada uma um parágrafo (3 a 6 linhas) sobre UMA forma concreta e reconhecível do tema na vida real, todas diferentes, sem repetir a ideia. A ÚLTIMA é o FECHO: reconhece (\\"todos já caímos nisto\\") e convida a guardar/partilhar/rolar. Sem travessões, leitura clara do princípio ao fim."]` : ''}
+  "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["As telas em sequência, EXATAMENTE conforme a estrutura do formato indicada acima. A 1.ª tela é a CAPA (igual ao campo frase). Cada tela é uma respiração/parágrafo conforme o formato, todas diferentes, sem repetir a ideia. Sem travessões, leitura clara e interessante do princípio ao fim."]' : ''}
 }`;
 
   const pedido = tema?.trim()
