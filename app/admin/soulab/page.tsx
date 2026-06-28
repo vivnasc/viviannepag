@@ -477,6 +477,17 @@ export default function SoulabPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
+  // CONTINUAR O FIO: gera a PARTE 2 de um reel que resultou (mesmo registo/voz).
+  const continuar = useCallback(async (slug: string) => {
+    setAcaoSlug(slug); setErro(null); setMsg('A continuar o fio (parte 2 na mesma voz)…');
+    try {
+      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ continuarDe: slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Seguimento gerado. Está em baixo, no topo da lista.'); recarregar(); }
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [recarregar]);
+
   // ── SELEÇÃO MÚLTIPLA + barra de ferramentas em lote (motion, efeito, som, render…) ──
   const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
   const emLote = useCallback(async (faz: (slug: string) => Promise<Response>, etiqueta: string, podePublicada = true) => {
@@ -670,6 +681,7 @@ export default function SoulabPage() {
                   <button onClick={() => setLegendaOpen(legendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver e editar a legenda, hashtags e CTA" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda {legendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
+                  <button onClick={() => continuar(p.slug)} disabled={!!acaoSlug} title="gerar a parte 2 deste reel, na mesma voz e registo (para reels que resultaram)" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>↪ continuar</button>
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
                 {previewOpen === p.slug && <PreviewBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSaveTempo={(seg) => salvarTempo(p.slug, seg)} />}
