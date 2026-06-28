@@ -14,12 +14,13 @@ export async function POST(req: Request) {
   const ref = process.env.GITHUB_DISPATCH_REF ?? 'main';
   if (!token) return NextResponse.json({ erro: 'sem-github-token' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { slug?: string; dias?: string };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; dias?: string; modo?: string };
   if (!body.slug) return NextResponse.json({ erro: 'slug' }, { status: 400 });
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://viviannedossantos.com';
   const inputs: Record<string, string> = { slug: body.slug, siteUrl };
   if (body.dias) inputs.dias = body.dias;
+  if (body.modo) inputs.modo = body.modo; // 'carrossel' = imagens 4:5 (sem MP4)
 
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/actions/workflows/render-carrossel-veus.yml/dispatches`,

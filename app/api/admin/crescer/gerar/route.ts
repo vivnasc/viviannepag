@@ -110,8 +110,13 @@ export async function POST(req: Request) {
       // ENSAIO = carrossel tipográfico (texto longo, sem imagem, editorial: serif
       // menor, alinhado à esquerda, mais tempo por momento). Os outros levam imagem.
       const ehEnsaio = job.formato === 'ensaio';
-      const imageUrl = ehEnsaio ? null : await fundoImagem(peca.fundoPrompt, slug);
+      // imagem: nos formatos normais é partilhada por todos os slides; no ENSAIO
+      // (carrossel de texto) a imagem fica SÓ na capa e os slides seguintes são
+      // tipográficos limpos (como o modelo "As armadilhas do ego").
+      const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
       const linhas = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.frase];
+      // ENSAIO = editorial (serif menor, alinhado à esquerda) em TODOS os slides,
+      // para o texto longo caber e ler-se bem (a tipografia tem de estar em cada slide).
       const tipografia = ehEnsaio
         ? { fonte: body.tipografia?.fonte ?? 'serif', tamanho: 46, cor: body.tipografia?.cor, corDestaque: body.tipografia?.corDestaque, alinhV: 'centro', alinhH: 'esq' }
         : (body.tipografia && Object.keys(body.tipografia).length ? body.tipografia : undefined);
@@ -120,10 +125,10 @@ export async function POST(req: Request) {
         texto,
         destaque: idx === 0 ? peca.destaque : [],
         notaVisual: peca.fundoPrompt,
-        imageUrl,
+        imageUrl: ehEnsaio ? (idx === 0 ? imageUrl : null) : imageUrl,
         capa: idx === 0,
         conceito: idx === 0 ? peca.conceito : undefined,
-        ...(idx === 0 && tipografia ? { tipografia } : {}),
+        ...(ehEnsaio ? { tipografia } : (idx === 0 && tipografia ? { tipografia } : {})),
         ...(idx === 0 && ehEnsaio ? { segPorMomento: 8 } : {}),
         ...(idx === 0 && body.efeito ? { efeito: body.efeito } : {}),
       }));

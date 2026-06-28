@@ -21,7 +21,7 @@ const DZ = CRESCER.paleta.destaque, BG2 = CRESCER.paleta.bg2, TX = CRESCER.palet
 type Peca = {
   tematica: string | null; formato: string; visual: string | null;
   slug: string; texto: string; conceito: string; destaque: string[];
-  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null;
+  imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
@@ -297,6 +297,12 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Descartar esta peça?')) return;
     acao(slug, '/api/admin/crescer/apagar', {}, 'A descartar…', 'Descartada.');
   }, [acao]);
+  // CARROSSEL DE IMAGENS: gera cada slide como tela 4:5 (sem MP4), para publicar à
+  // mão como carrossel (capa com imagem + telas de texto que se deslizam).
+  const carrossel = useCallback((slug: string) => {
+    if (typeof window !== 'undefined' && !window.confirm('Gerar o CARROSSEL de imagens (telas 4:5, sem motion)? Corre nos GitHub Actions, uns minutos.')) return;
+    acao(slug, '/api/admin/carrossel/render-dispatch', { dias: '1', modo: 'carrossel' }, 'A gerar o carrossel de imagens…', 'Carrossel disparado. As imagens aparecem daqui a uns minutos (recarrega).', false);
+  }, [acao]);
 
   // ── seleção múltipla + lote ──
   const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
@@ -418,6 +424,18 @@ export default function CrescerPage() {
                       <video src={p.clipUrl} controls loop muted playsInline className="w-full rounded-lg border border-white/10" />
                     </div>
                   )}
+                  {p.imagens && p.imagens.length > 0 && (
+                    <div className="px-2 pt-2">
+                      <p className="text-[0.55rem] uppercase tracking-widest opacity-50 mb-1">carrossel · {p.imagens.length} imagens (publica à mão)</p>
+                      <div className="flex gap-1 overflow-x-auto pb-1">
+                        {p.imagens.map((u, i) => (
+                          <a key={i} href={u} target="_blank" rel="noreferrer" className="shrink-0" title={`tela ${i + 1} · abrir/baixar`}>
+                            <img src={u} alt="" className="h-28 rounded border border-white/10" />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                     <button onClick={() => abrir(p.slug, 'preview')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>▶ pré-ver</button>
                     <button onClick={() => acao(p.slug, '/api/admin/crescer/imagem', {}, 'A trocar a imagem (Flux)…', 'Imagem nova.', false)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
@@ -427,7 +445,8 @@ export default function CrescerPage() {
                     <button onClick={() => abrir(p.slug, 'letras')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras</button>
                     <button onClick={() => abrir(p.slug, 'legenda')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda</button>
                     <button onClick={() => abrir(p.slug, 'agenda')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'}</button>
-                    <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
+                    {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
+                    <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
                   {ab === 'preview' && <PreviewBox peca={p} />}
