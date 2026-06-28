@@ -31,7 +31,8 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string };
+  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string; modo?: 'abre' | 'encaminha' };
+  const modo = body.modo === 'encaminha' ? 'encaminha' : 'abre';
   let tipoId = (body.tipo ?? 'frase') as TipoSoulabId;
 
   // CONTINUAR O FIO: parte 2 de um reel que resultou. Lê a peça-mãe (frase, conceito,
@@ -75,7 +76,7 @@ export async function POST(req: Request) {
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     try {
-      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe);
+      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe, modo);
       evitar.push(peca.frase); (porTipo[tipoId] = porTipo[tipoId] || []).push(peca.frase);
       if (peca.conceito) evitar.push(peca.conceito);
       if (peca.fundoPrompt) evitarImg.push(peca.fundoPrompt); // não repetir a cena nas seguintes
