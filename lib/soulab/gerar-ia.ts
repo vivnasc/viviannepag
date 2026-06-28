@@ -29,6 +29,7 @@ export async function gerarPecaSoulab(
   tema?: string,
   formato: 'frase' | 'momentos' = 'frase',
   evitarImg: string[] = [], // CENAS de imagem já usadas (para não repetir portas/objetos partidos)
+  continuarDe?: { frase: string; conceito?: string } | null, // PARTE 2 de um reel que resultou
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
 
@@ -75,6 +76,11 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   const pedido = tema?.trim()
     ? `Uma peça Soulab no ângulo ${tipo.label}, a partir de: "${tema.trim()}".`
     : `Uma peça Soulab no ângulo ${tipo.label}.`;
+  // CONTINUAR O FIO: parte 2 de um reel que resultou. Mantém a voz e a atmosfera,
+  // aprofunda ou vira a ideia, NÃO repete a frase nem diz "parte 2".
+  const seguimento = continuarDe?.frase
+    ? `\n\nISTO É UM REEL DE SEGUIMENTO. Um reel anterior resultou muito: "${continuarDe.frase}"${continuarDe.conceito ? ` (tema: ${continuarDe.conceito})` : ''}. Escreve a CONTINUAÇÃO desse fio, no MESMO registo e voz: aprofunda ou vira a ideia para um ângulo novo. Aguenta-se sozinha, mas quem viu a primeira sente-a como o passo seguinte. NÃO repitas a frase nem anuncies "parte 2".`
+    : '';
   const naoRepetir = evitar.length
     ? `\n\nNÃO repitas estes ângulos/frases/símbolos já usados (encontra outro): ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.`
     : '';
@@ -90,7 +96,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       model: 'claude-sonnet-4-6',
       max_tokens: 1100,
       system: sys,
-      messages: [{ role: 'user', content: pedido + naoRepetir + naoRepetirImg }],
+      messages: [{ role: 'user', content: pedido + seguimento + naoRepetir + naoRepetirImg }],
     }),
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);
