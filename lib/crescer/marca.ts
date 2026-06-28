@@ -58,7 +58,7 @@ export const CRESCER = {
 // (validadas pela Vivianne). NÃO são os 7 véus.
 // ---------------------------------------------------------------------------
 export type TematicaId =
-  | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos';
+  | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo';
 
 export interface Tematica {
   id: TematicaId;
@@ -109,6 +109,15 @@ export const TEMATICAS: Tematica[] = [
     id: 'ciclos', label: 'Ciclos', emoji: '🌗',
     descricao: 'Fins, lutos, recomeços.',
     foco: 'Os fins que não escolhemos, o luto do que acabou, a coragem de recomeçar. O tempo entre o que morreu e o que ainda não nasceu.',
+  },
+  {
+    // RESPONSABILIDADE ESPIRITUAL × CURA ANCESTRAL — do livro "Os 7 Véus do
+    // Despertar" (Véu da Dualidade, cap. 26; e Permanência cap. 3). A cura que
+    // não fica em ti: expande-se ao redor e solta a linha de trás. NUNCA o clichê
+    // da "vibração" solto — sempre o concreto dos vínculos e das gerações.
+    id: 'campo', label: 'Não te curas só a ti', emoji: '🪢',
+    descricao: 'Responsabilidade espiritual e cura ancestral: o que sara em ti não fica em ti.',
+    foco: 'A cura que não fica em ti (do Véu da Dualidade): quando deixas de repetir um padrão, alivias quem vem depois e soltas a linha que vem de trás (a herança involuntária, inscrita no corpo). Expandir é responsabilidade, não vaidade: a dor de um repercute no corpo de todos, a cura de um espalha alívio à volta (sou porque somos). PROIBIDO o clichê "aumenta a tua vibração"; sempre no concreto dos vínculos, da família e das gerações.',
   },
 ];
 
