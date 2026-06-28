@@ -7,7 +7,7 @@
 //
 // Só devolve texto/indicações; a imagem gera-se a seguir, no route, com Flux.
 
-import { CRESCER, getTematica, getFormato, getVisual, type TematicaId, type FormatoId, type VisualId } from './marca';
+import { CRESCER, LIVRO, getTematica, getFormato, getVisual, type TematicaId, type FormatoId, type VisualId } from './marca';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaCrescer {
@@ -40,7 +40,11 @@ export async function gerarPecaCrescer(
 
 A VOZ (decisão de marca, inviolável): ${CRESCER.voz}
 
-FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomeá-lo, citar autores, áreas ou usar jargão no texto): a Vivianne vem destas áreas, ${CRESCER.areas.join(', ')}. Âncoras: ${CRESCER.ancoras.join(' · ')}. O que SAI é a vida real, na linguagem das dores e passagens de qualquer pessoa, NUNCA a teoria.
+FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomeá-lo, citar autores, áreas, véus ou usar jargão no texto): a Vivianne vem destas áreas, ${CRESCER.areas.join(', ')}. Âncoras: ${CRESCER.ancoras.join(' · ')}.
+
+A FONTE PROFUNDA é o livro DELA, "${LIVRO.titulo}". O arco dos sete movimentos (o que cada um ENCOBRE e o que REVELA, NUNCA nomear no texto): ${LIVRO.veus.map((v) => `${v.nome} (encobre ${v.encobre}; revela que ${v.revela})`).join(' · ')}. As correntes que atravessam tudo: ${LIVRO.correntes.join(' · ')}.
+
+O que SAI é a vida real, na linguagem das dores e passagens de qualquer pessoa, NUNCA a teoria, NUNCA o nome de um véu, autor ou tradição.
 
 A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}
 

@@ -54,6 +54,38 @@ export const CRESCER = {
 } as const;
 
 // ---------------------------------------------------------------------------
+// LIVRO — "Os 7 Véus do Despertar" (livro-7-veus.json), o livro da Vivianne.
+// É o FUNDAMENTO real do gerador (a espinha e as correntes do livro), não âncoras
+// inventadas. Serve só de PROFUNDIDADE por baixo: NUNCA nomear véus, autores,
+// tradições ou jargão na frase que sai (o que sai é a vida real, na 1.ª pessoa das
+// dores e passagens). NÃO é "1 véu por post" nem trazer os véus de volta como
+// rótulos (isso foi abolido) — é a fonte de onde vem a fundura.
+// ---------------------------------------------------------------------------
+export const LIVRO = {
+  titulo: 'Os 7 Véus do Despertar',
+  // os 7 véus pelo que ENCOBREM → o que REVELAM (o arco do livro).
+  veus: [
+    { nome: 'Permanência', encobre: 'o "eu" fixo que precisa de ser defendido', revela: 'a identidade é fluxo, somos presença e não forma' },
+    { nome: 'Memória', encobre: 'as narrativas do passado que nos definem', revela: 'não somos a narrativa, somos um agora vivo' },
+    { nome: 'Turbilhão', encobre: 'a fusão com os pensamentos e as emoções', revela: 'há em nós uma presença que observa sem se prender' },
+    { nome: 'Esforço', encobre: 'a crença de que é preciso fazer, conquistar e merecer', revela: 'é no repouso, não na corrida, que a verdade se revela' },
+    { nome: 'Desolação', encobre: 'o medo do vazio como ausência', revela: 'o vazio é campo fértil, a noite que gera' },
+    { nome: 'Horizonte', encobre: 'a ilusão de uma chegada ou fim', revela: 'não há fim, há fluxo contínuo, presença no agora' },
+    { nome: 'Dualidade', encobre: 'a separação entre eu e o mundo, espírito e matéria', revela: 'o centro indiviso: a cura individual é também presença comunitária' },
+  ],
+  // as correntes que atravessam o livro inteiro (o que dá gravidade a tudo).
+  correntes: [
+    'Ubuntu, sou porque somos: a dor de um repercute no corpo de todos, a cura de um espalha alívio à volta',
+    'a herança involuntária inscrita no corpo, e a ancestralidade como presença contínua (a linha que vem de trás e segue à frente)',
+    'o corpo guardião: recorda, retrai-se e diz a verdade que a mente nega; a cura passa pelo corpo',
+    'a sombra que se integra em vez de se combater, e o "ego vestido de luz" (a falsa espiritualidade que vira máscara)',
+    'a criança interior, o perdão e o autoperdão, o vitimismo que aprisiona',
+    'universalista: muitas tradições, uma só luz, sem bandeira nem dogma',
+    'a voz do caminho ainda em curso: nunca de púlpito, "não te convido a seguir-me, mas a caminharmos juntos"',
+  ],
+} as const;
+
+// ---------------------------------------------------------------------------
 // TEMÁTICAS — os ângulos de crescimento/evolução, com a base dela por baixo.
 // (validadas pela Vivianne). NÃO são os 7 véus.
 // ---------------------------------------------------------------------------
