@@ -65,6 +65,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
+      { href: '/admin/crescer', label: '🌱 crescer · crescimento & evolução' },
       { href: '/admin/metodo-vs', label: 'método vs · a mãe' },
       { href: '/admin/metodo-vs/ver', label: 'método vs · ver' },
       { href: '/admin/metodo-vs/vir', label: 'método vs · vir' },
