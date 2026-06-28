@@ -159,7 +159,7 @@ export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find(
 // FORMATOS — cada um sai diferente ao olho e na estrutura (validados).
 // `multi` = produz vários momentos (carrossel/reel de várias linhas).
 // ---------------------------------------------------------------------------
-export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena';
+export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio';
 
 export interface FormatoCrescer {
   id: FormatoId;
@@ -201,6 +201,13 @@ export const FORMATOS: FormatoCrescer[] = [
     id: 'cena', label: 'Cena', emoji: '🎬', multi: false,
     descricao: 'Uma situação que se reconhece, e a seguir o alívio.',
     estrutura: 'DOIS tempos: 1) a cena concreta que a pessoa vive AGORA (uma faca que ela reconhece como a vida dela); 2) o virar que a solta. A imagem mostra a cena, não um símbolo a decifrar.',
+  },
+  {
+    id: 'ensaio', label: 'Ensaio em carrossel', emoji: '📜', multi: true,
+    descricao: 'Capa-faca + várias verdades longas (texto), como um ensaio que se desliza.',
+    estrutura:
+      'Uma CAPA que é uma faca curta (1 linha, pára o scroll, provoca, quase contra-corrente). Depois 4 a 7 VERDADES, cada uma um PARÁGRAFO longo e denso (3 a 6 linhas) que nomeia com precisão uma experiência vivida e a vira num reconhecimento (responsabilidade, lucidez, o custo de crescer). A última é o FECHO: começa por "E para fechar" e entrega a verdade mais funda. ' +
+      'Registo AFIADO mas digno: a faca aponta ao PADRÃO e à verdade, NUNCA com desprezo pelas pessoas (PROIBIDO "massa histérica", "egos infantis", "babaca" e afins). Nomeia a dor de quem lê, não um inimigo lá fora.',
   },
 ];
 
@@ -253,6 +260,30 @@ export const VISUAIS: VisualCrescer[] = [
 ];
 
 export const getVisual = (id: string): VisualCrescer | undefined => VISUAIS.find((v) => v.id === id);
+
+// ---------------------------------------------------------------------------
+// VOZ — a Vivianne não é só poética (decisão dela, jun 2026): a escrita poética
+// é linda mas trava o alcance. Ela QUER escrever normal, direto, para chegar às
+// pessoas, E pode ser as duas vozes. A DIRETA é o default (o alcance); a poética
+// é a do livro. O fundamento (o livro) fica por baixo nas duas, só muda o estilo.
+// ---------------------------------------------------------------------------
+export type VozId = 'direta' | 'poetica';
+export interface VozCrescer { id: VozId; label: string; emoji: string; descricao: string; instrucao: string }
+export const VOZES: VozCrescer[] = [
+  {
+    id: 'direta', label: 'Direta', emoji: '🎯', descricao: 'Escrita normal e clara, para chegar e ser partilhada (alcance).',
+    instrucao:
+      'Escreve NORMALMENTE, como uma pessoa real escreve para ser entendida à primeira e partilhada. Frases claras, diretas, prosa acessível, palavras do dia a dia. ' +
+      'PROIBIDO o registo poético/contemplativo de "manual de despertar" (nada de "véu que se desfaz", "o silêncio que sustenta", "sopro", "presença que pulsa", "fluxo", "o ser"). ' +
+      'A profundidade está no QUE dizes (a verdade que ninguém diz), não no floreado. É a voz do alcance.',
+  },
+  {
+    id: 'poetica', label: 'Poética', emoji: '🌙', descricao: 'A voz contemplativa do livro: imagem, ritmo, beleza.',
+    instrucao:
+      'Voz contemplativa e poética, como no livro: imagem, ritmo, beleza, serenidade. Mais identidade, menos alcance. Mesmo assim, clara: a beleza serve o sentido, não o esconde.',
+  },
+];
+export const getVoz = (id: string): VozCrescer | undefined => VOZES.find((v) => v.id === id);
 
 // o mundo (palette key) que o render usa — registado em PALETAS (lib/estudio-conteudo.ts).
 export const CRESCER_MUNDO = 'crescer';

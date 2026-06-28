@@ -6,8 +6,8 @@ import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import {
   CRESCER_MUNDO, TEMATICAS, FORMATOS, VISUAIS,
-  getTematica, getFormato, getVisual,
-  type TematicaId, type FormatoId, type VisualId,
+  getTematica, getFormato, getVisual, getVoz,
+  type TematicaId, type FormatoId, type VisualId, type VozId,
 } from '@/lib/crescer/marca';
 import { gerarPecaCrescer } from '@/lib/crescer/gerar-ia';
 
@@ -39,10 +39,11 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => ({}))) as {
     tematicas?: string[]; formatos?: string[]; visuais?: string[];
-    quantos?: number; surpreender?: boolean; tema?: string;
+    quantos?: number; surpreender?: boolean; tema?: string; voz?: string;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string };
     efeito?: string;
   };
+  const voz = (getVoz(body.voz ?? '') ? body.voz : 'direta') as VozId;
 
   const temasSel = (body.tematicas ?? []).filter((t) => getTematica(t)) as TematicaId[];
   const fmtsSel = (body.formatos ?? []).filter((f) => getFormato(f)) as FormatoId[];
@@ -102,13 +103,18 @@ export async function POST(req: Request) {
   for (let i = 0; i < jobs.length; i++) {
     const job = jobs[i];
     try {
-      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema);
+      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz);
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
       const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;
-      const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
+      // ENSAIO = carrossel tipográfico (texto longo, sem imagem, editorial: serif
+      // menor, alinhado à esquerda, mais tempo por momento). Os outros levam imagem.
+      const ehEnsaio = job.formato === 'ensaio';
+      const imageUrl = ehEnsaio ? null : await fundoImagem(peca.fundoPrompt, slug);
       const linhas = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.frase];
-      const tipografia = body.tipografia && Object.keys(body.tipografia).length ? body.tipografia : undefined;
+      const tipografia = ehEnsaio
+        ? { fonte: body.tipografia?.fonte ?? 'serif', tamanho: 46, cor: body.tipografia?.cor, corDestaque: body.tipografia?.corDestaque, alinhV: 'centro', alinhH: 'esq' }
+        : (body.tipografia && Object.keys(body.tipografia).length ? body.tipografia : undefined);
       const slides = linhas.map((texto, idx) => ({
         tipo: 'kinetico',
         texto,
@@ -118,6 +124,7 @@ export async function POST(req: Request) {
         capa: idx === 0,
         conceito: idx === 0 ? peca.conceito : undefined,
         ...(idx === 0 && tipografia ? { tipografia } : {}),
+        ...(idx === 0 && ehEnsaio ? { segPorMomento: 8 } : {}),
         ...(idx === 0 && body.efeito ? { efeito: body.efeito } : {}),
       }));
       const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
@@ -129,7 +136,7 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

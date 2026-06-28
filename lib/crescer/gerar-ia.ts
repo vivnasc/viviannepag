@@ -7,7 +7,7 @@
 //
 // Só devolve texto/indicações; a imagem gera-se a seguir, no route, com Flux.
 
-import { CRESCER, LIVRO, getTematica, getFormato, getVisual, type TematicaId, type FormatoId, type VisualId } from './marca';
+import { CRESCER, LIVRO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaCrescer {
@@ -30,10 +30,12 @@ export async function gerarPecaCrescer(
   apiKey: string,
   evitar: string[] = [],
   tema?: string,
+  vozId: VozId = 'direta',
 ): Promise<PecaCrescer> {
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
+  const voz = getVoz(vozId) ?? getVoz('direta')!;
   const semImagem = !visual.promptBase;
 
   const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${CRESCER.handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}
@@ -49,6 +51,8 @@ O que SAI é a vida real, na linguagem das dores e passagens de qualquer pessoa,
 A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}
 
 O FORMATO, ${formato.label}: ${formato.estrutura}
+
+A VOZ DE HOJE (${voz.label}): ${voz.instrucao}
 
 REGRAS DE VOZ (duras):
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
@@ -68,7 +72,9 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
   "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS para a imagem (${visual.label}): ${visual.promptBase}"`},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
-  "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["3 a 5 linhas curtas em sequência (a 1.ª é a frase da capa). Constroem um arco: abre numa faca, aprofunda, vira, fecha em aberto. Cada linha uma respiração."]' : ''}
+  "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? `,\n  "momentos": ${formato.id === 'ensaio'
+    ? '["A 1.ª linha é a frase-capa (a faca curta). Depois 4 a 7 PARÁGRAFOS longos e densos, cada um uma verdade auto-contida (3 a 6 linhas) que nomeia uma experiência vivida e a vira num reconhecimento. O ÚLTIMO começa por \\"E para fechar\\" e entrega a verdade mais funda. Sem travessões."]'
+    : '["3 a 5 linhas curtas em sequência (a 1.ª é a frase da capa). Constroem um arco: abre numa faca, aprofunda, vira, fecha em aberto. Cada linha uma respiração."]'}` : ''}
 }`;
 
   const pedido = tema?.trim()
