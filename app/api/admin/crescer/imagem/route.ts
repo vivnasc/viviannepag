@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
-import { getVisual } from '@/lib/crescer/marca';
+import { getVisual, reforcoVisual } from '@/lib/crescer/marca';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -38,14 +38,16 @@ export async function POST(req: Request) {
 
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
-  // PROMPT da imagem, com fallback robusto para nunca dar "sem-prompt":
-  // body.prompt > (pessoas: o prompt NOVO, figura visível) > o guardado > o prompt
-  // do visual da peça > conceptual. As peças antigas (silhueta) corrigem-se assim.
+  // PROMPT da imagem: PRIMEIRO a CENA própria da peça (notaVisual, que liga a imagem
+  // ao texto), só depois o estilo genérico do visual como recuo. Antes forçava-se a
+  // base genérica do "pessoas" por cima da cena (saíam sempre rostos, sem ligação ao
+  // texto). O reforço de estilo (luminoso, figura visível) entra SEMPRE por cima, para
+  // peças antigas com prompt fraco não saírem escuras/silhueta.
   const visual = (row.theme as { crescer?: { visual?: string } } | null)?.crescer?.visual;
-  const baseNova = visual === 'pessoas' ? getVisual('pessoas')?.promptBase : undefined;
   const baseVisual = getVisual(visual ?? '')?.promptBase || getVisual('conceptual')!.promptBase;
-  const prompt = body.prompt?.trim() || baseNova || (slides[idx ?? 0]?.notaVisual as string) || (slides[0]?.notaVisual as string) || baseVisual;
-  if (!prompt) return NextResponse.json({ erro: 'sem-prompt' }, { status: 400 });
+  const cena = body.prompt?.trim() || (slides[idx ?? 0]?.notaVisual as string) || (slides[0]?.notaVisual as string) || baseVisual;
+  if (!cena) return NextResponse.json({ erro: 'sem-prompt' }, { status: 400 });
+  const prompt = `${reforcoVisual(visual ?? '')} ${cena}`;
 
   let imageUrl: string;
   try {
