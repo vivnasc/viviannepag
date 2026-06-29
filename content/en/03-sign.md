@@ -26,6 +26,14 @@ Let me bring this down to earth, because said like this it hovers, and what hove
 
 Look closely at what she said. Longing for a woman I could have been. Not for a man she did not meet, not for a journey she did not take, not for another life in another place with other people. For a version of herself. For an Inês who existed in potential and who, at each fork in life, was left behind for good reasons, always for good reasons, never for any bad reason. It is here that we need to stop, because it is here that the heart of this sign lies and its difference from every other book you have read about lack and desire. That woman who was left behind was not left behind because someone stopped you. There is no villain in this story. There is no father who clipped your wings, no husband who diminished you, no unjust circumstance that robbed you. There was a good table. There was a life you chose and that went on being good, choice after choice, all of them loving, all of them right at the moment they were made. The other, the one not made, stayed alive inside you, waiting. The longing for what you never lived is the mourning of a life that was not taken from you. It is the mourning of a life you said no to, again and again, out of love for this one, and that never quite left you.
 
+::: pausa
+**Stay here a moment.**
+Do not leave this page quickly. You have just read that your lack is the mourning of a life no one took from you. That asks for a still moment.
+> Close your eyes and let an image come of the woman you could have been. Do not judge her, do not explain her. Only notice what she is doing.
+- What does she have that you, in the life of now, have not yet let yourself have?
+- And if that were not a betrayal of this life, but an addition to it?
+:::
+
 There is a confusion here that needs to be undone with care, because it is from it that the greatest mistakes come. When you feel this lack, the mind hurries to translate it into a plan. I am missing something, therefore I must change my life. I must leave this, set off for that, start over, do the great irreversible thing that will finally bring me what I am missing. Here is the trap, because the longing for what you never lived is almost never a request for flight. It is a request for presence. The life it points to is rarely on another continent. It is, most of the time, inside your own, a gesture away, shrunk for lack of courage and not for lack of space. Inês did not need to leave the house, the son, the work. She needed to let in the woman who folded laundry weeping, instead of putting her away in the drawer. They are very different things, and to confuse them costs dearly. There are those who destroy a whole life fleeing a lack that only wanted to be looked at.
 
 So where does it come from, this lack? I am going to tell you what I have understood, and I am going to tell it in layers, from the simplest to the deepest, because each is true and none alone is enough.
@@ -65,6 +73,14 @@ This brings me to the gesture I want to leave you, because we have reached the p
 The gesture is this: to let the lack exist without explaining it.
 
 The next time it visits you, and it will visit you, probably in a good hour, do not rush to call it names. Do not say, there I go, ungrateful. Do not say, it is romanticism, away with it. Do not put it away in the drawer with the rest of what you put away. Stay with it. Sit beside it the way you would sit beside a friend who arrived without warning and whom you were not expecting but in fact wanted to see. Ask it a single question, without haste for an answer, without needing to resolve it today. The question is, what do you long for? Not to act now. Not to change anything tomorrow. Only to listen. Because a lack that is listened to begins to speak, and a lack that is silenced only knows how to shout louder.
+
+::: pausa
+**Try it, with whatever lack you have.**
+This is not an exercise to do well. It is only a question left open.
+> The next time the nameless longing visits you, do not call it names. Sit beside it and ask it, without haste for an answer: what do you long for?
+- What thread-end appears first, however small, even with no context?
+- What would change if you treated that lack as a compass, and not as a defect?
+:::
 
 Notice what I am and what I am not asking of you. I am not asking you to change your life. Whoever changes her life fleeing a lack carries the lack with her, because the lack was not in the life, it was in not having listened to it. Nor am I asking you to resign yourself, to accept that this is how it is, to bury the compass and smile. That would be self-abandonment, it would be to do exactly what they have been asking of you, to stop wanting so as not to be a bother. The gesture I ask of you is neither flight nor resignation. It is fidelity. It is to be faithful to the part of you that knows there is more, without your yet having to know what. It is to let that part breathe inside your life as it is, instead of expelling it to have peace or demolishing the whole house to lodge it.
 

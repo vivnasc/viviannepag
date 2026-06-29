@@ -10,6 +10,13 @@ type SeedProduto = {
   ficheiro_path?: string;
 };
 
+// capa de Os 7 Sinais: a imagem composta gerada no admin (Supabase), a mesma que
+// a home e a página do pilar usam. Recuo p/ a capa local se ainda não foi gerada.
+const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
+const CAPA_SINAIS = SUPA
+  ? `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-sinais/capa-composta.png`
+  : '/produtos/os-7-sinais-capa.png';
+
 const PRODUTOS: SeedProduto[] = [
   {
     slug: 'os-7-sinais',
@@ -35,7 +42,7 @@ Não é um livro sobre aprender a encaixar. É sobre pertencer sem precisares de
 Por Vivianne dos Santos.`,
     preco: '€14',
     preco_original: '€19',
-    capa: '/produtos/os-7-sinais-capa.png',
+    capa: CAPA_SINAIS,
     ficheiro_path: 'produtos/os-7-sinais.pdf',
     badge: 'livro · novo',
     destaque: true,

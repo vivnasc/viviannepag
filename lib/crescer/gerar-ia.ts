@@ -59,11 +59,12 @@ REGRAS DE VOZ (duras):
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
 - SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
 - DIRETA: nomeia a cena concreta que a pessoa vive. A pessoa tem de pensar "isto sou eu". Nada de enigmas a decifrar, nada de títulos-conceito herméticos, nada de metáfora obscura.
+- VARIA SEMPRE a FORMA de abrir (anti-padrão, importante): NUNCA comeces sempre com "Há...", "Às vezes...", "Talvez...". Roda entre arranques bem diferentes: uma afirmação seca e direta · uma pergunta que vira por dentro · uma cena/imagem concreta · uma inversão (pôr ao contrário o que se assume) · "há quem..." · uma constatação serena · uma 2.ª pessoa suave. Escolhe a forma que MENOS se parece com as frases recentes.
 - Profunda mas leve. Nunca pregadora, nunca académica, nunca clichê de autoajuda ("acredite em si", "você merece").
 - NUNCA inventes biografia, marcos, clientes ou histórias pessoais da Vivianne. A autoridade vem do caminho ("reconheci primeiro em mim"), não de factos inventados.
 - NUNCA táticas de "viralizar" nem isco de engagement vazio. Verdade, não espetáculo da dor.
 - A LEGENDA nunca repete nem reformula a frase da capa (quem lê já a viu no ecrã): começa onde a frase acaba, aprofunda ou abre. Parágrafos curtos separados por linha em branco (\\n\\n). Termina com um convite leve (refletir, guardar, partilhar com quem precisa), nunca uma ordem nem venda.
-${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM tem de TRADUZIR VISUALMENTE o sentimento da FRASE da capa (ligação imagem↔texto óbvia), nunca decorativa, genérica ou um símbolo a decifrar. A LIGAÇÃO ao texto manda SEMPRE; o estilo (luminoso, moderno, elevado, fine-art) serve a mensagem, nunca ao contrário. NÃO forces ficção científica, néon, cyberpunk nem cosmos se isso não servir a frase (ex.: "a dor não começou em ti" pede heranças/raízes/gerações, não uma cidade néon com silhuetas distantes). Inventa uma cena concreta e ORIGINAL, diferente de tudo o que já saiu, e VARIA o enquadramento (não saiam sempre rostos nem figuras distantes).'}
+${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM vive no MUNDO PÓS-SOBREVIVÊNCIA (consciência evoluída materializada em arquitetura, paisagem e ESCALA; nunca néon, sci-fi, robôs, doméstico, terapia literal). TRADUZ o sentimento da FRASE pela TENSÃO entre o mundo antigo (pesado, o encaixe forçado) e o que emerge (orgânico, luminoso, escala impossível). REGRA DE OURO: mostra o LIMIAR e a tensão, NUNCA a chegada como solução; o novo mundo vislumbra-se ao longe, por uma fenda, no horizonte. Inventa uma cena concreta e ORIGINAL (segue o estilo do visual), diferente das anteriores, com escala que provoca admiração em 5 segundos.'}
 
 DEVOLVE APENAS JSON válido, sem texto à volta:
 {
@@ -82,6 +83,12 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   const naoRepetir = evitar.length
     ? `\n\nNÃO repitas estas frases/ângulos já usados (encontra outro): ${evitar.slice(-20).map((e) => `"${e}"`).join('; ')}.`
     : '';
+  // ANTI-PADRÃO de ABERTURA: junta os primeiros 2 termos das frases recentes para o
+  // modelo NÃO começar sempre igual (ex.: "Há...", "Há...", "Às vezes...").
+  const aberturas = [...new Set(evitar.map((e) => e.split(/\s+/).slice(0, 2).join(' ').trim().toLowerCase()).filter(Boolean))].slice(-14);
+  const evitarAberturas = aberturas.length
+    ? `\n\nABERTURAS recentes (começa de forma DIFERENTE, NUNCA repitas o mesmo arranque, sobretudo "Há..." e "Às vezes..."): ${aberturas.map((a) => `"${a}…"`).join('; ')}.`
+    : '';
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -90,7 +97,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       model: 'claude-sonnet-4-6',
       max_tokens: formato.multi ? 2800 : 1200, // o carrossel pode ter 8-13 slides de texto
       system: sys,
-      messages: [{ role: 'user', content: pedido + naoRepetir }],
+      messages: [{ role: 'user', content: pedido + naoRepetir + evitarAberturas }],
     }),
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);

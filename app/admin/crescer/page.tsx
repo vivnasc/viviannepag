@@ -269,6 +269,9 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
   const [tams, setTams] = useState<number[]>(iniciais.map((_, i) => tips[i]?.tamanho ?? base.tamanho ?? (i === 0 ? 80 : 46)));
   const [cores, setCores] = useState<string[]>(ini('cor', CRESCER.paleta.texto) as string[]);
   const [fundos, setFundos] = useState<string[]>(iniciais.map((_, i) => tips[i]?.corFundo ?? ''));
+  const [alinhHs, setAlinhHs] = useState<AlinhH[]>(ini('alinhH', 'centro') as AlinhH[]);
+  const [alinhVs, setAlinhVs] = useState<AlinhV[]>(ini('alinhV', 'centro') as AlinhV[]);
+  const [entres, setEntres] = useState<number[]>(iniciais.map((_, i) => tips[i]?.entrelinha ?? base.entrelinha ?? 1.18));
   const setT = (i: number, v: string) => setTextos((s) => s.map((x, k) => (k === i ? v : x)));
   const set1 = <T,>(setS: React.Dispatch<React.SetStateAction<T[]>>, i: number, v: T) => setS((s) => s.map((x, k) => (k === i ? v : x)));
   const muitos = textos.length > 1;
@@ -278,6 +281,9 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
   const [gTam, setGTam] = useState<number>(tips[1]?.tamanho ?? 46);
   const [gCor, setGCor] = useState<string>(CRESCER.paleta.texto);
   const [gFundo, setGFundo] = useState<string>('');
+  const [gAlinhH, setGAlinhH] = useState<AlinhH>('centro');
+  const [gAlinhV, setGAlinhV] = useState<AlinhV>('centro');
+  const [gEntre, setGEntre] = useState<number>(1.18);
   const [incluirCapa, setIncluirCapa] = useState(false);
   const aplicarTudo = () => {
     const de = incluirCapa ? 0 : 1; // a capa fica de fora por defeito (é especial)
@@ -285,8 +291,14 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
     setTams((s) => s.map((x, i) => (i >= de ? gTam : x)));
     setCores((s) => s.map((x, i) => (i >= de ? gCor : x)));
     setFundos((s) => s.map((x, i) => (i >= de ? gFundo : x)));
-    onEstiloTodos({ fonte: gFonte, tamanho: gTam, cor: gCor, corFundo: gFundo || undefined }, incluirCapa);
+    setAlinhHs((s) => s.map((x, i) => (i >= de ? gAlinhH : x)));
+    setAlinhVs((s) => s.map((x, i) => (i >= de ? gAlinhV : x)));
+    setEntres((s) => s.map((x, i) => (i >= de ? gEntre : x)));
+    onEstiloTodos({ fonte: gFonte, tamanho: gTam, cor: gCor, corFundo: gFundo || undefined, alinhH: gAlinhH, alinhV: gAlinhV, entrelinha: gEntre }, incluirCapa);
   };
+  // botõezinhos de opção (alinhamento, etc.)
+  const opcoes = <T,>(lista: { id: T; label: string }[], val: T, on: (id: T) => void) =>
+    lista.map((o) => <Chip key={String(o.id)} on={val === o.id} onClick={() => on(o.id)}>{o.label}</Chip>);
 
   const swatches = (lista: { id: string; nome: string }[], val: string, on: (id: string) => void) =>
     lista.map((c) => (
@@ -309,6 +321,12 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
             <input type="range" min={36} max={120} step={2} value={gTam} onChange={(e) => setGTam(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
             <span className="tabular-nums w-7 text-right">{gTam}</span>
           </label>
+          <label className="flex items-center gap-2 text-[0.62rem]"><span className="opacity-60 w-14">espaço</span>
+            <input type="range" min={1} max={2} step={0.02} value={gEntre} onChange={(e) => setGEntre(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <span className="tabular-nums w-7 text-right">{gEntre.toFixed(2)}</span>
+          </label>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↔</span>{opcoes(ALINH_H, gAlinhH, setGAlinhH)}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↕</span>{opcoes(ALINH_V, gAlinhV, setGAlinhV)}</div>
           <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor texto</span>{swatches(CORES_TEXTO, gCor, setGCor)}</div>
           <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor pág.</span>{swatches(CORES_PAGINA, gFundo, setGFundo)}</div>
           <div className="flex items-center justify-between gap-2 pt-0.5">
@@ -324,7 +342,7 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
 
       {textos.map((t, i) => {
         const ehCapa = i === 0;
-        const tipLive = { ...base, fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined } as Tipografia;
+        const tipLive = { ...base, fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined, alinhH: alinhHs[i], alinhV: alinhVs[i], entrelinha: entres[i] } as Tipografia;
         return (
         <div key={i} className="rounded-lg border border-white/10 p-2 space-y-1.5">
           <div className="flex items-center justify-between">
@@ -345,10 +363,16 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
             <input type="range" min={36} max={120} step={2} value={tams[i]} onChange={(e) => set1(setTams, i, Number(e.target.value))} className="accent-current flex-1 min-w-[70px]" style={{ color: DZ }} />
             <span className="tabular-nums w-6 text-right">{tams[i]}</span>
           </div>
+          <div className="flex items-center gap-1.5 flex-wrap text-[0.56rem]">
+            <span className="opacity-55">espaço</span>
+            <input type="range" min={1} max={2} step={0.02} value={entres[i]} onChange={(e) => set1(setEntres, i, Number(e.target.value))} className="accent-current flex-1 min-w-[60px]" style={{ color: DZ }} />
+            {opcoes(ALINH_H, alinhHs[i], (v) => set1(setAlinhHs, i, v))}
+            {opcoes(ALINH_V, alinhVs[i], (v) => set1(setAlinhVs, i, v))}
+          </div>
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-[0.56rem] opacity-55">texto</span>{swatches(CORES_TEXTO, cores[i], (id) => set1(setCores, i, id))}
             <span className="text-[0.56rem] opacity-55 ml-1">pág.</span>{swatches(CORES_PAGINA, fundos[i] || '', (id) => set1(setFundos, i, id))}
-            <button type="button" onClick={() => onEstilo(i, { fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined })} disabled={disabled} className="ml-auto text-[0.58rem] px-2 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>aplicar a este</button>
+            <button type="button" onClick={() => onEstilo(i, { fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined, alinhH: alinhHs[i], alinhV: alinhVs[i], entrelinha: entres[i] })} disabled={disabled} className="ml-auto text-[0.58rem] px-2 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>aplicar a este</button>
           </div>
         </div>
         );
@@ -379,6 +403,8 @@ export default function CrescerPage() {
   const [slidesSlug, setSlidesSlug] = useState<string | null>(null); // editor GRANDE de slides
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [filtroTema, setFiltroTema] = useState<string>('todos');
+  const [filtroTipo, setFiltroTipo] = useState<'todos' | 'carrossel' | 'reel'>('todos');
+  const [filtroEstado, setFiltroEstado] = useState<'todos' | 'por-fazer' | 'pronto' | 'agendada' | 'publicada'>('todos');
   const [padrao, setPadrao] = useState<Padrao>(PADRAO_DEFAULT);
   const [padraoOpen, setPadraoOpen] = useState(false);
   // agendar em lote ESPAÇADO (não encher o feed): 1 post a cada N dias, à hora.
@@ -506,7 +532,20 @@ export default function CrescerPage() {
     setSel(new Set()); setBusy(false); recarregar();
   }, [acaoSlug, busy, agData, agHora, agCad, pecas, sel, recarregar]);
 
-  const pecasFiltradas = pecas.filter((p) => filtroTema === 'todos' || p.tematica === filtroTema);
+  // TIPO da peça: CARROSSEL (formato ensaio, publica telas) vs REEL (vídeo). ESTADO de
+  // produção: por fazer / pronto (renderizado) / agendada / publicada.
+  const tipoDe = (p: Peca): 'carrossel' | 'reel' => (p.formato === 'ensaio' ? 'carrossel' : 'reel');
+  const estadoDe = (p: Peca): 'por-fazer' | 'pronto' | 'agendada' | 'publicada' => {
+    if (p.publicado) return 'publicada';
+    const renderizado = tipoDe(p) === 'carrossel' ? (p.imagens?.length ?? 0) >= 2 : !!p.videoUrl;
+    if (p.agendadoEm) return 'agendada';
+    return renderizado ? 'pronto' : 'por-fazer';
+  };
+  const ESTADO_LABEL: Record<string, string> = { 'por-fazer': 'por renderizar', pronto: 'pronto', agendada: 'agendada', publicada: 'publicada' };
+  const pecasFiltradas = pecas.filter((p) =>
+    (filtroTema === 'todos' || p.tematica === filtroTema) &&
+    (filtroTipo === 'todos' || tipoDe(p) === filtroTipo) &&
+    (filtroEstado === 'todos' || estadoDe(p) === filtroEstado));
 
   return (
     <main className={`${FONTS} min-h-screen px-4 py-8 md:px-8`} style={{ background: BG2, color: TX }}>
@@ -559,16 +598,42 @@ export default function CrescerPage() {
           </div>
         </section>
 
-        {erro && <p className="mb-3 text-[0.8rem] text-rose-300">{erro}</p>}
         {msg && !erro && <p className="mb-3 text-[0.8rem] text-emerald-300">{msg}</p>}
+        {/* AVISO FIXO de erro: visível em qualquer ponto da página (não falha em silêncio).
+            Mostra a causa (ex.: limite do GitHub) e só sai quando a Vivianne fecha. */}
+        {erro && (
+          <div className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-lg rounded-xl border p-3 shadow-2xl flex items-start gap-2" style={{ borderColor: '#f87171', background: 'rgba(40,12,12,0.97)' }}>
+            <span className="text-[0.9rem]">⚠️</span>
+            <div className="flex-1 text-[0.78rem] text-rose-200 break-words">
+              <p className="font-medium text-rose-300">Falhou (não publiquei nem disparei nada):</p>
+              <p className="opacity-90">{erro}</p>
+              {/rate limit|github-dispatch|429|403/i.test(erro) && <p className="opacity-70 mt-1 text-[0.7rem]">É o limite da API do GitHub (a tua conta). Espera uns minutos e tenta outra vez.</p>}
+            </div>
+            <button onClick={() => setErro(null)} className="text-[0.7rem] px-2 py-0.5 rounded border border-rose-400/50 text-rose-200">fechar ✕</button>
+          </div>
+        )}
 
         {/* peças */}
         <section>
           <h2 className="text-sm uppercase tracking-widest opacity-60 mb-2">peças <span className="opacity-40">· {pecas.length}</span></h2>
 
-          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
             <Chip on={filtroTema === 'todos'} onClick={() => setFiltroTema('todos')}>todas</Chip>
             {TEMATICAS.map((t) => <Chip key={t.id} on={filtroTema === t.id} onClick={() => setFiltroTema(t.id)} title={t.label}>{t.emoji}</Chip>)}
+          </div>
+          {/* filtros por TIPO e por ESTADO de produção */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+            <span className="text-[0.56rem] uppercase tracking-widest opacity-40 mr-0.5">tipo</span>
+            <Chip on={filtroTipo === 'todos'} onClick={() => setFiltroTipo('todos')}>todos</Chip>
+            <Chip on={filtroTipo === 'carrossel'} onClick={() => setFiltroTipo('carrossel')}>🎠 carrossel</Chip>
+            <Chip on={filtroTipo === 'reel'} onClick={() => setFiltroTipo('reel')}>🎬 reel</Chip>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+            <span className="text-[0.56rem] uppercase tracking-widest opacity-40 mr-0.5">estado</span>
+            {(['todos', 'por-fazer', 'pronto', 'agendada', 'publicada'] as const).map((e) => (
+              <Chip key={e} on={filtroEstado === e} onClick={() => setFiltroEstado(e)}>{e === 'todos' ? 'todos' : ESTADO_LABEL[e]}</Chip>
+            ))}
+            <span className="text-[0.56rem] opacity-40 ml-1">{pecasFiltradas.length} de {pecas.length}</span>
           </div>
 
           {pecas.length === 0 && <p className="text-[0.78rem] opacity-50">Ainda nada. Escolhe temáticas e formatos e carrega &quot;gerar&quot;.</p>}
@@ -606,7 +671,10 @@ export default function CrescerPage() {
                   <div className="relative">
                     <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} tipografia={p.tipografia ?? undefined} {...CRESCER_SLIDE} />
                     <button onClick={() => toggleSel(p.slug)} className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10" style={sel.has(p.slug) ? { background: DZ, borderColor: DZ, color: BG2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
-                    <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}{p.momentos && p.momentos.length > 1 ? ` · ${p.momentos.length}❑` : ''}</span>
+                    <span className="absolute top-1 left-1 flex flex-col gap-0.5 items-start">
+                      <span className="text-[0.5rem] px-1 py-0.5 rounded" style={{ background: DZ, color: BG2 }}>{tipoDe(p) === 'carrossel' ? `🎠 carrossel · ${p.momentos?.length ?? 0} telas` : '🎬 reel'}</span>
+                      <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}</span>
+                    </span>
                     {p.publicado
                       ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
                       : p.videoUrl

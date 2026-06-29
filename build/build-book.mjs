@@ -87,12 +87,33 @@ const CHAP_COLOR = [VIOLETA,'#7C4A4A','#9A6A3A','#8A7A2E','#4F6E55','#3C6E72','#
 const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const inl = (s) => esc(s).replace(/\*([^*]+)\*/g,'<em>$1</em>');
 
+// Bloco "pausa" (respiro para o leitor): título em **negrito**, intro, um
+// exercício (linha a começar por "> ") e perguntas (linhas a começar por "- ").
+function parsePausa(lines){
+  let titulo='', exercicio=''; const perguntas=[]; const intro=[];
+  for(const l of lines){
+    const t=l.trim(); if(!t) continue;
+    const mb=t.match(/^\*\*(.+?)\*\*$/);
+    if(mb){ titulo=mb[1].trim(); continue; }
+    if(t.startsWith('> ')){ exercicio=t.slice(2).trim(); continue; }
+    if(t.startsWith('- ')){ perguntas.push(t.slice(2).trim()); continue; }
+    intro.push(t);
+  }
+  return { t:'pausa', titulo, intro:intro.join(' ').trim(), exercicio, perguntas };
+}
+
 function parseChapter(file){
   const raw = readFileSync(C(file),'utf8').replace(/\r/g,'');
-  let label='', title='', epigraph=''; const paras=[]; let buf=[];
-  const flush=()=>{ if(buf.length){ paras.push(buf.join(' ').trim()); buf=[]; } };
+  let label='', title='', epigraph=''; const blocks=[]; let buf=[]; let pausa=null;
+  const flush=()=>{ if(buf.length){ blocks.push({ t:'p', s:buf.join(' ').trim() }); buf=[]; } };
   for(const line of raw.split('\n')){
     const t=line.trim();
+    if(pausa!==null){
+      if(t===':::'){ blocks.push(parsePausa(pausa)); pausa=null; }
+      else pausa.push(t);
+      continue;
+    }
+    if(t===':::pausa' || t==='::: pausa'){ flush(); pausa=[]; continue; }
     if(!t){ flush(); continue; }
     if(t.startsWith('# ')){
       const h=t.slice(2).trim(), i=h.indexOf(',');
@@ -100,24 +121,28 @@ function parseChapter(file){
       else { label=''; title=h; }
       continue;
     }
-    if(/^\*[^*].*\*$/.test(t) && !epigraph && !paras.length){ epigraph=t.slice(1,-1).trim(); continue; }
+    if(/^\*[^*].*\*$/.test(t) && !epigraph && !blocks.length){ epigraph=t.slice(1,-1).trim(); continue; }
     buf.push(t);
   }
+  if(pausa!==null) blocks.push(parsePausa(pausa));
   flush();
-  return { label, title, epigraph, paras };
+  return { label, title, epigraph, blocks };
 }
-// parte parágrafos muito longos (>190 palavras) na frase mais perto do meio
-function splitLong(paras){
+// parte parágrafos muito longos (>190 palavras) na frase mais perto do meio.
+// Só mexe em blocos de prosa; as pausas passam intactas.
+function splitLong(blocks){
   const out=[];
-  for(const p of paras){
+  for(const b of blocks){
+    if(b.t!=='p'){ out.push(b); continue; }
+    const p=b.s;
     const words=p.split(/\s+/).length;
-    if(words<=190){ out.push(p); continue; }
+    if(words<=190){ out.push(b); continue; }
     const sents=p.split(/(?<=[.!?])\s+/);
-    if(sents.length<4){ out.push(p); continue; }
+    if(sents.length<4){ out.push(b); continue; }
     let best=1, bestd=1e9, run=0; const half=words/2;
     for(let i=0;i<sents.length-1;i++){ run+=sents[i].split(/\s+/).length; const d=Math.abs(run-half); if(d<bestd){bestd=d;best=i+1;} }
-    out.push(sents.slice(0,best).join(' ').trim());
-    out.push(sents.slice(best).join(' ').trim());
+    out.push({ t:'p', s:sents.slice(0,best).join(' ').trim() });
+    out.push({ t:'p', s:sents.slice(best).join(' ').trim() });
   }
   return out;
 }
@@ -130,9 +155,21 @@ const VEU = (c)=>`<svg class="veu" viewBox="0 0 512 512" width="60" height="60" 
   <path d="M166 392 C166 270 204 200 256 200 C308 200 346 270 346 392" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
   <circle cx="256" cy="98" r="8" fill="${c}"/></svg>`;
 
+function pausaHTML(b, c){
+  let h = `<section class="pausa" style="--c:${c}">`;
+  if(b.titulo) h += `<p class="pa-tit">${inl(b.titulo)}</p>`;
+  if(b.intro) h += `<p class="pa-intro">${inl(b.intro)}</p>`;
+  if(b.exercicio) h += `<p class="pa-ex">${inl(b.exercicio)}</p>`;
+  if(b.perguntas && b.perguntas.length){
+    h += `<ul class="pa-q">${b.perguntas.map(q=>`<li>${inl(q)}</li>`).join('')}</ul>`;
+  }
+  h += `</section>`;
+  return h;
+}
+
 function chapter(file, idx){
   const { label, title, epigraph } = parseChapter(file);
-  let paras = splitLong(parseChapter(file).paras);
+  const blocks = splitLong(parseChapter(file).blocks);
   const c = CHAP_COLOR[idx] || VIOLETA;
   let h = `<section class="opener" style="--c:${c}">`;
   h += `<div class="fl-wrap">${FLOURISH(c)}</div>`;
@@ -141,16 +178,23 @@ function chapter(file, idx){
   if(epigraph) h += `<p class="op-epi"><em>${inl(epigraph)}</em></p>`;
   h += `<div class="op-orn">${VEU(c)}</div>`;
   h += `</section>`;
-  // respiros: ornamento "· · ·" nos pontos de viragem (3 movimentos)
+  // respiros: ornamento "· · ·" nos pontos de viragem (contados só na prosa).
+  // Não se põe respiro logo antes/depois de uma pausa (já é um respiro).
+  const proseIdx = blocks.map((b,i)=>b.t==='p'?i:-1).filter(i=>i>=0);
+  const np = proseIdx.length;
   const nBreaks = file===cfg.epilogueFile ? 1 : 2;
-  const n = paras.length;
   const pos = new Set();
-  if(nBreaks===1) pos.add(Math.max(2, Math.min(n-1, Math.round(n/2))));
-  if(nBreaks===2){ pos.add(Math.max(2, Math.round(n/3))); pos.add(Math.min(n-1, Math.round(2*n/3))); }
+  if(nBreaks===1) pos.add(proseIdx[Math.max(1, Math.min(np-2, Math.round(np/2)))]);
+  if(nBreaks===2){ pos.add(proseIdx[Math.max(1, Math.round(np/3))]); pos.add(proseIdx[Math.min(np-2, Math.round(2*np/3))]); }
   h += `<section class="body" style="--c:${c}">`;
-  paras.forEach((p,i)=>{
-    if(pos.has(i) && i>0) h += `<div class="movbreak" style="--c:${c}">· · ·</div>`;
-    h += `<p${i===0?' class="first"':''}>${inl(p)}</p>`;
+  let first=true;
+  blocks.forEach((b,i)=>{
+    if(b.t==='pausa'){ h += pausaHTML(b,c); return; }
+    const prevPausa = i>0 && blocks[i-1].t==='pausa';
+    const nextPausa = i<blocks.length-1 && blocks[i+1].t==='pausa';
+    if(pos.has(i) && !first && !prevPausa && !nextPausa) h += `<div class="movbreak" style="--c:${c}">· · ·</div>`;
+    h += `<p${first?' class="first"':''}>${inl(b.s)}</p>`;
+    first=false;
   });
   h += `</section>`;
   return h;
@@ -171,7 +215,8 @@ const dedicationHTML = (()=>{
 })();
 
 const nota = (()=>{
-  const { title, paras } = parseChapter(cfg.notaFile);
+  const { title, blocks } = parseChapter(cfg.notaFile);
+  const paras = blocks.filter(b=>b.t==='p').map(b=>b.s);
   return `<section class="front nota"><h2 class="fm-title">${esc(title||cfg.notaTitleFallback)}</h2>${paras.map(p=>`<p>${inl(p)}</p>`).join('')}</section>`;
 })();
 
@@ -224,6 +269,15 @@ section.body{ break-before:page; }
 .body p.first::first-letter{ font-family:'Fraunces',serif; font-weight:400; font-size:40pt; line-height:0.82; color:${GOLD}; float:left; margin:1mm 2.4mm -1mm 0; }
 .body em{ font-style:italic; }
 .movbreak{ text-align:center; margin:8mm auto 7mm; color:var(--c); letter-spacing:.45em; font-size:11pt; opacity:.65; break-after:avoid; break-before:avoid; }
+
+/* ---- pausa (respiro do leitor): caixa serena, mais clara, não se parte ---- */
+.pausa{ break-inside:avoid; margin:9mm 1mm; padding:7mm 8mm; border:0.4pt solid var(--c); border-radius:2mm; background:rgba(184,141,62,0.05); }
+.pausa .pa-tit{ font-family:'Outfit',sans-serif; font-weight:500; font-size:8pt; letter-spacing:.26em; text-transform:uppercase; color:var(--c); text-align:center; margin:0 0 4mm; }
+.pausa .pa-intro{ text-align:center; font-style:italic; font-size:10.5pt; line-height:1.6; color:${SOFT}; margin:0 0 4mm; }
+.pausa .pa-ex{ text-align:left; font-size:10.5pt; line-height:1.7; color:${INK}; margin:0 0 4mm; }
+.pausa .pa-q{ list-style:none; margin:0; padding:0; }
+.pausa .pa-q li{ font-style:italic; font-size:10.5pt; line-height:1.55; color:${INK}; text-align:center; margin:0 0 2.4mm; }
+.pausa .pa-q li::before{ content:"·"; color:var(--c); margin-right:2mm; }
 
 /* ---- página de abertura ---- */
 .opener{ position:relative; height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }

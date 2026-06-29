@@ -28,6 +28,14 @@ I know the second peace. You know that one too, and it is with that one I have t
 
 I will give it a simple name, without theories. There is a withdrawal that is meeting, and there is an isolation that is flight. The difference between the two is not seen in the act. It is seen in the direction.
 
+::: pausa
+**Stay in the silence a moment.**
+Without filling it, without explaining it. Only notice how it tastes to you now.
+> Remember the last night you turned down going out and stayed home. Do not judge the choice. Only notice: the next day, did the world become larger or smaller?
+- Does your silence usually leave you with more desire for people, or less?
+- What name have you been giving it, and is that really the right name?
+:::
+
 Let me show you the mechanics, because they are precise and almost invisible, and until you see them you will go on confusing the two.
 
 Imagine that every time you are with people there is a cost. I am not talking about bad people, nor toxic relationships, nor anything that deserves to be cut off. I am talking about the normal cost, the cost all relationships have, the cost of being with others: you have to translate yourself. There is always a translation. When you are alone, your inner experience and your expression are the same thing, there is no gap. You feel and you are that, without mediation. But the moment another person enters, a gap opens between what you feel and what you show, and that gap has to be filled with work. You have to choose words. You have to calculate what the other person can bear to hear today. You have to manage your face. You have to sustain an expectation they have of you, even if that expectation is only that you are reasonably well. You have to perform, even minimally, a continuity, the continuity of being the person they know. All of this is the cost of company. It is a real cost. You are not being weak for feeling it. You are being human.
@@ -79,6 +87,14 @@ Let me stop a moment on what this is not, because without this paragraph the res
 That is why the gesture I am going to ask of you is so small. Because it does not take the silence from you. It does not push you out of the house. It does not force you into a single Friday you do not want. It happens entirely inside your own withdrawal, without your having to interrupt it. It is only a question, and it is the question this whole chapter is made of.
 
 After this silence, did I have more desire to live, or less?
+
+::: pausa
+**This is the question of this chapter.**
+Do not answer it by interrogating yourself. Answer it by listening to yourself, tomorrow morning, before you think.
+> The next time you withdraw, the next day, before anything, only notice which way the body leans: toward the world, or away from it.
+- Do you have more hunger for life after the silence, or less?
+- Did you inhale, and now feel like exhaling? Or only like going on inhaling?
+:::
 
 That is all. You do not have to change your Friday. You have to learn to listen to your Sunday morning. Withdraw. Withdraw as much as you need. But, the next day, before anything else, ask the question of the after. After this night alone, did the world become larger or smaller. Did people, at a distance, seem people to me again, or seem to me even more of an effort. Do I feel like, even from afar, even without doing it today, returning to something, or do I feel only like not having to. Do I have more hunger, or less. Did I inhale, and now feel like exhaling, or did I inhale and want only to go on inhaling until there is no air left.
 

@@ -28,6 +28,14 @@ Conheço a segunda paz. Essa também a conheces, e é com essa que tenho de ser 
 
 Vou dar-lhe um nome simples, sem teorias. Há um recolhimento que é encontro, e há um isolamento que é fuga. A diferença entre os dois não se vê no acto. Vê-se na direcção.
 
+::: pausa
+**Fica no silêncio um instante.**
+Sem o encher, sem o explicar. Só repara como ele te sabe agora.
+> Lembra-te da última noite em que recusaste sair e ficaste em casa. Não julgues a escolha. Só repara: no dia seguinte, o mundo ficou maior ou mais pequeno?
+- O teu silêncio costuma deixar-te com mais vontade de gente, ou com menos?
+- Que nome lhe tens dado, e será mesmo esse o nome certo?
+:::
+
 Deixa-me mostrar-te a mecânica, porque ela é precisa e quase invisível, e enquanto não a vires vais continuar a confundir as duas.
 
 Imagina que cada vez que estás com pessoas há um custo. Não falo de pessoas más, nem de relações tóxicas, nem de nada que mereça ser cortado. Falo do custo normal, o custo que todas as relações têm, o custo de seres com outros: tens de te traduzir. Há sempre uma tradução. Quando estás sozinha, a tua experiência interior e a tua expressão são a mesma coisa, não há intervalo. Sentes e és isso, sem mediação. Mas no momento em que entra outra pessoa, abre-se um intervalo entre o que sentes e o que mostras, e esse intervalo tem de ser preenchido com trabalho. Tens de escolher palavras. Tens de calcular o que a outra pessoa aguenta ouvir hoje. Tens de gerir o teu rosto. Tens de sustentar uma expectativa que ela tem de ti, ainda que essa expectativa seja só a de que estejas razoavelmente bem. Tens de desempenhar, ainda que minimamente, uma continuidade, a continuidade de seres a pessoa que ela conhece. Tudo isto é o custo da companhia. É um custo real. Não estás a ser fraca por o sentires. Estás a ser humana.
@@ -79,6 +87,14 @@ Deixa-me parar um instante no que isto não é, porque sem este parágrafo o res
 É por isso que o gesto que te vou pedir é tão pequeno. Porque ele não te tira o silêncio. Não te empurra para fora de casa. Não te obriga a uma única sexta-feira que não queiras. Ele acontece todo dentro do teu próprio recolhimento, sem que tenhas de o interromper. É só uma pergunta, e é a pergunta de que este capítulo todo é feito.
 
 Depois deste silêncio, fiquei com mais vontade de viver, ou com menos?
+
+::: pausa
+**Esta é a pergunta deste capítulo.**
+Não a respondas a interrogar-te. Responde-a a escutar-te, amanhã de manhã, antes de pensares.
+> Da próxima vez que te recolheres, no dia seguinte, antes de tudo, repara só para que lado o corpo se inclina: para o mundo, ou para longe dele.
+- Tens mais fome de vida depois do silêncio, ou menos?
+- Inspiraste, e agora apetece-te expirar? Ou só continuar a inspirar?
+:::
 
 É só isto. Não tens de mudar a tua sexta-feira. Tens de aprender a ouvir o teu domingo de manhã. Recolhe-te. Recolhe-te quanto precisares. Mas, no dia seguinte, antes de qualquer outra coisa, faz a pergunta do depois. Depois desta noite sozinha, o mundo ficou maior ou mais pequeno. As pessoas, à distância, voltaram a parecer-me pessoas, ou pareceram-me ainda mais um esforço. Apetece-me, ainda que de longe, ainda que sem o fazer hoje, voltar a alguma coisa, ou apetece-me só não ter de. Tenho mais fome, ou tenho menos. Inspirei, e agora apetece-me expirar, ou inspirei e quero só continuar a inspirar até não haver mais ar.
 

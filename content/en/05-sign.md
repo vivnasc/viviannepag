@@ -32,6 +32,14 @@ Here is the test, the only one you need to know. Overload is resolved with sleep
 
 Sleep a whole night after a room that diminished you. Sleep ten hours. Wake up. Look. The tiredness of that room is still there. Not in the body, which rested. It is still in another place, a place for which we have no simple word, somewhere between the chest and the throat, a kind of dull weight the sleep did not touch. Because sleep does not heal incoherence. Sleep heals muscular effort. Incoherence is healed only one way, and that way is not rest, it is truth. That is why so many people sleep and sleep and sleep and go on exhausted from a life that looks, from outside, perfectly comfortable. They do not need more rest. They need less shrinking. They are things that live on different planets, though they both dress as tiredness.
 
+::: pausa
+**Set down here, and notice.**
+You have just read that there are two tirednesses that dress in the same clothes. Before you go on, let the body answer, not the head.
+> Remember the last place you came away exhausted from. Ask only this, deciding nothing: did that tiredness pass with one night's sleep, or was it still there the next day?
+- If it stayed, where did it lodge, in the body or somewhere between the chest and the throat?
+- What part of you was left outside so that you could be inside?
+:::
+
 I am going to give you the signs by name, because recognising them one by one is half the work.
 
 The tightening at the door. That instant, before going in, when the body braces. It is not fear. You fear nothing concrete. It is the anticipation of effort, your system assembling the armour it will need to spend the next hours being a version of you more tidied, more fittable, more pleasant than what you are when no one is asking you to be convenient.
@@ -107,6 +115,14 @@ For years you treated your body like a badly behaved pupil you had to put in ord
 To listen to the body is not a mystical or complicated thing. It is almost boring for being so concrete. It is to notice, at the door of a house, that your shoulders rose, and instead of ordering them down, to ask quietly, what do you know that I do not yet want to know. It is to notice, halfway through a dinner, that you are breathing up high, at the tip of the lungs, and instead of forcing yourself to breathe deeply to disguise it, to let that short breath tell you what it has to say. The body speaks in a language of small gestures, and you spent your life translating those gestures into the language of self-accusation. The shoulders rise and you translate I am tense, what a bother I am. The breath shortens and you translate I am anxious, I should relax. You are translating badly. The right translation of the shoulders that rise is here I brace to defend myself. The right translation of the short breath is here I do not let myself be taken up whole. The body is not failing the translation. It is you who made it into the wrong language.
 
 The question is this, and it is the whole turn: after you leave an environment, in the car, in the silence, before the head begins to negotiate, you ask yourself, did I come away tired or did I come away diminished?
+
+::: pausa
+**The question is yours from now on.**
+Not to answer it now with the head. To have it at hand, in the car, in the silence, next time.
+> The next time you leave a room, before the head begins to negotiate, ask the body: did I come away tired or did I come away diminished? And wait for it to answer, not you.
+- Which environments leave you tired and never diminished? Those are home.
+- Which is the room where you bend the most, and what does it ask of you that you no longer are?
+:::
 
 It is a small question and almost no one asks it, because no one taught us that there were two different things there. We think tiredness is tiredness. It is not. Ask. Learn to feel the difference, because the difference is felt, not thought. The tiredness of overload is clean, almost sweet, it is the tiredness of one who spent herself living. You lay your head down and it dissolves. The tiredness of incoherence is dull, it stays lodged in you, and you already recognise it, because it is the same one that is still there the next day after you sleep. When you notice it, you already know. It was not the amount of people. It was the amount of you that was left outside.
 

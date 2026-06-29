@@ -20,6 +20,14 @@ Now let me tell you what it is to remain, because this is the word I want to lea
 
 To remain is a verb in the present continuous. It has no form of arrival. There is no point at which one has remained once and for all and after which one no longer needs to remain again. It is not like climbing a staircase and staying on the upper floor. It is more like breathing. You breathe now, and that does not excuse you from breathing a moment from now. No one breathed enough. No one finished breathing and was done. You remain today, at today's table, and that is whole and it is enough, and tomorrow there will be another table, and you will remain again, anew, from the start, and that is not failure, that is being alive.
 
+::: pausa
+**There is no arrival. Rest in that.**
+If there is no destination, you are excused from arriving. This page asks nothing of you. Only that you breathe once, like someone remaining.
+> Notice that you are here, at the end of the book, incomplete and walking, and that it is all fine. You do not have to solve anything today.
+- What would change if you stopped waiting for the cured version of you to have the right to be well now?
+- Which table, this week, can you go back to inhabiting already knowing what you learned?
+:::
+
 I know part of you wanted the other thing. You wanted the cure. You wanted to be able to say, on a day marked in the calendar, there, I am healed, I no longer fail to fit, I closed the cycle, the method is over, here is the diploma. The whole industry of human repair promised you that date. I cannot promise it to you, and I refuse to, because it would be lying to you with the pretty smile of someone selling peace in instalments. There is no final version of you that stays cured and never again feels the cold of being outside. You will feel it again. At a Christmas table, in a group conversation, at a dinner of old friends, you will feel that old tightening again, the temptation to shrink in order to fit, the longing for the easy person you were before you woke. This is not the method failing. This is life going on being life.
 
 Here is the relief, because I promised you this would be a relief and not a disappointment, and I am going to keep that. If there is no arrival, then you are excused from arriving. The demand falls off you. That weight you carried the whole book, the weight of having to finally manage it, of having to be healed before you could rest, of having to deserve peace with more effort, that weight settles on the ground. You do not have to arrive anywhere to have the right to be well now. There is no improved you up ahead who deserves the life that today's you does not yet deserve. The right to belong without diminishing yourself is not earned at the end. It is exercised on the way. Today. Now. Even incomplete. Above all incomplete, because that is how one is alive, incomplete and walking, and it is all fine.

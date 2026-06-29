@@ -20,6 +20,14 @@ Agora deixa que te diga o que é permanecer, porque esta é a palavra que eu que
 
 Permanecer é um verbo no presente contínuo. Não tem forma de chegada. Não existe o ponto em que se permaneceu de uma vez por todas e a partir do qual já não é preciso voltar a permanecer. Não é como subir uma escada e ficar no andar de cima. É mais como respirar. Respiras agora, e isso não te dispensa de respirar daqui a um instante. Ninguém respirou o suficiente. Ninguém acabou de respirar e ficou feito. Permaneces hoje, à mesa de hoje, e isso é inteiro e basta, e amanhã haverá outra mesa, e permanecerás outra vez, de novo, do princípio, e isso não é fracasso, isso é estar viva.
 
+::: pausa
+**Não há chegada. Descansa nisso.**
+Se não há destino, estás dispensada de chegar. Esta página não te pede nada. Só que respires uma vez, como quem permanece.
+> Repara que estás aqui, no fim do livro, incompleta e a caminhar, e que está tudo bem assim. Não tens de resolver nada hoje.
+- O que mudaria se deixasses de esperar a versão curada de ti para teres direito a estar bem agora?
+- Que mesa, esta semana, podes voltar a habitar sabendo já o que aprendeste?
+:::
+
 Eu sei que parte de ti queria a outra coisa. Queria a cura. Queria poder dizer, num dia marcado no calendário, pronto, sarei, já não me desencaixo, fechei o ciclo, o método terminou, está aqui o diploma. Toda a indústria do conserto humano te prometeu essa data. Eu não ta posso prometer, e recuso-me a fazê-lo, porque seria mentir-te com o sorriso bonito de quem vende a paz em prestações. Não há a versão final de ti que fica curada e nunca mais sente o frio de estar fora. Vais voltar a senti-lo. Numa mesa de Natal, numa conversa de grupo, num jantar de antigos amigos, vais voltar a sentir aquele aperto velho, a tentação de te encolher para caber, a saudade da pessoa fácil que eras antes de teres acordado. Isto não é o método a falhar. Isto é a vida a continuar a ser vida.
 
 Aqui está o alívio, porque eu prometi-te que isto seria um alívio e não uma desilusão, e vou cumprir. Se não há chegada, então estás dispensada de chegar. Cai-te de cima a exigência. Aquele peso que carregaste o livro inteiro, o peso de ter de finalmente conseguir, de ter de estar curada antes de poderes descansar, de ter de merecer a paz com mais esforço, esse peso pousa no chão. Não tens de chegar a lado nenhum para teres direito a estar bem agora. Não há um tu melhorado lá à frente que merece a vida que o tu de hoje ainda não merece. O direito a pertencer sem te diminuíres não se ganha no fim. Exerce-se no caminho. Hoje. Já. Mesmo incompleta. Sobretudo incompleta, porque é assim que se está vivo, incompleto e a caminhar, e está tudo bem.
