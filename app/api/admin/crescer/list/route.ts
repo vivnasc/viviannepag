@@ -33,6 +33,7 @@ export async function GET() {
       formato: row.theme?.crescer?.formato ?? 'frase',
       visual: row.theme?.crescer?.visual ?? null,
       momentos: todosSlides.length > 1 ? todosSlides.map((x) => x.texto ?? '').filter(Boolean) : null,
+      slidesImgs: todosSlides.map((x) => x.imageUrl ?? null),
       slug: row.slug,
       texto: slide?.texto ?? row.brief ?? '',
       conceito: slide?.conceito ?? '',
