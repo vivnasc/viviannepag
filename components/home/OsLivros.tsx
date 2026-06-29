@@ -51,7 +51,7 @@ export function OsLivros({ locale }: { locale: string }) {
       desc: isEn
         ? 'The quiet moment when you stop fitting a place that was good, without anything in it having changed, and without anyone having done anything wrong. Not a book about learning to fit in.'
         : 'O momento calado em que deixas de caber num lugar que foi bom, sem que nada nele tenha mudado, e sem que ninguém tenha feito nada de errado. Não é um livro sobre aprender a encaixar.',
-      capa: '/produtos/os-7-sinais-capa.png',
+      capa: isEn ? '/produtos/os-7-sinais-capa-en.png' : '/produtos/os-7-sinais-capa.png',
       capaRatio: '1600 / 2560',
       href: isEn ? '/en/loja/os-7-sinais' : '/loja/os-7-sinais',
       cta: isEn ? 'Read the book' : 'Ler o livro',
