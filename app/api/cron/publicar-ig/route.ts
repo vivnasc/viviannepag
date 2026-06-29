@@ -25,15 +25,16 @@ type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
 type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; crescer?: { formato?: string } | null };
 
-// CRESCER · o "ensaio" é um CARROSSEL DE IMAGENS (telas 4:5), não um reel: prepara-se
-// com modo=carrossel e publica-se como carrossel (não MP4). Os outros crescer seguem
-// o caminho normal (reel). Assim "estar agendado" basta — publica-se sozinho.
-const ehCrescerCarrossel = (t: Theme) => t.marca === 'crescer' && t.crescer?.formato === 'ensaio';
+// CRESCER · QUALQUER peça com VÁRIAS telas é um CARROSSEL DE IMAGENS (telas 4:5), nunca
+// um reel — o texto de carrossel é estático e lê-se; um reel de várias linhas sai rápido
+// e ilegível (o bug que a fez apagar um post). Só a peça de 1 tela (frase) é reel/motion.
+// Publica-se como carrossel quando as telas estão renderizadas.
+const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1;
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)
 function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
-  if (ehCrescerCarrossel(t)) return (d?.imagens?.length ?? 0) >= 2; // carrossel de imagens pronto
+  if (ehCrescerCarrossel(t, d)) return (d?.imagens?.length ?? 0) >= 2; // carrossel de imagens pronto
   if (t.externo) return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1; // CSV: media já pronta
   if (conta === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(chave)) return !!d?.videoUrl;
@@ -121,7 +122,7 @@ export async function GET(req: NextRequest) {
       // CRESCER: a Vivianne renderiza e VÊ antes de publicar. O publicador NUNCA
       // renderiza o carrossel sozinho nem publica algo por ver — espera que ela
       // renderize (🖼) e só depois, à hora, publica o que já está renderizado.
-      if (ehCrescerCarrossel(t)) { resultados.push({ slug: row.slug, estado: 'à espera que renderizes o carrossel (não publico por ver)' }); continue; }
+      if (ehCrescerCarrossel(t, d)) { resultados.push({ slug: row.slug, estado: 'à espera que renderizes o carrossel (não publico por ver)' }); continue; }
       const pedido = t.renderPedidoEm ?? 0;
       const haPouco = Date.now() - pedido < 20 * 60 * 1000; // já pedido nos últimos 20 min?
       if (!haPouco) {
@@ -140,7 +141,7 @@ export async function GET(req: NextRequest) {
 
     // que media publicar?
     let r: { ok: boolean; id?: string; erro?: string };
-    if (ehCrescerCarrossel(t)) {
+    if (ehCrescerCarrossel(t, d)) {
       // CRESCER · carrossel de imagens (telas 4:5), publicado como carrossel.
       r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
     } else if (t.externo) {
