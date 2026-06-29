@@ -54,6 +54,7 @@ ${tipo.angulo}
 
 REGRAS DE VOZ (duras):
 - Português europeu, elegante e límpido. SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
+- Português europeu NATURAL, falado por uma pessoa real, nunca traduzido nem "de manual". PROIBIDO decalques: escreve "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução e listas-enumeração artificiais. Lê em voz alta: se soar a máquina, reescreve.
 - Profundo mas leve; nunca pesado, nunca pregador, nunca académico, nunca kitsch místico.
 - CONVITE, não confissão: impessoal e aberto. NUNCA "isto és tu", nunca um diagnóstico da pessoa que lê.
 - NÃO motivacional, NÃO conselho, NÃO autoajuda, NÃO "põe-te em primeiro". Explora, não convence.
@@ -69,7 +70,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "frase": "o fragmento que aparece no reel (1 a 3 linhas curtas, sem aspas)",
   "destaque": ["1 a 3 palavras-chave da frase para realçar"],
   "fundoPrompt": "prompt em INGLÊS para a imagem simbólica de fundo (arte conceptual, fine art, evocativa do sentido), sem pessoas a posar, sem texto, a terminar com --ar 9:16 --style raw",
-  "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n). Abre com o fragmento ou um gancho contemplativo; 1 a 2 parágrafos curtos que exploram a hipótese SEM a fechar. TERMINA SEMPRE (obrigatório) com um CTA LEVE numa linha à parte: um convite suave a ficar com a pergunta, a guardar, a partilhar com quem precisa, ou a seguir o laboratório. O CTA é gentil e contemplativo, NUNCA marketing, NUNCA 'compra/link na bio', NUNCA imperativo agressivo. Nunca vender, nunca nomear o formato.",
+  "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n). NUNCA repete nem reformula a frase que está na imagem (quem lê já a viu): começa ONDE essa frase acaba, continua o pensamento ou abre um ângulo lateral. 1 a 2 parágrafos curtos que aprofundam SEM fechar. TERMINA SEMPRE (obrigatório) com um CTA LEVE numa linha à parte: um convite suave a ficar com a pergunta, a guardar, a partilhar com quem precisa, ou a seguir o laboratório. O CTA é gentil e contemplativo, NUNCA marketing, NUNCA 'compra/link na bio', NUNCA imperativo agressivo. Nunca vender, nunca nomear o formato.",
   "hashtags": ["8 a 12 hashtags em português, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA só ideia, em sequência (cada uma uma respiração, aparecem uma a uma sobre a mesma cena). Não são frases soltas: constroem um arco (abre, aprofunda, vira, fecha em aberto). A 1.ª é uma faca que para o scroll; a última deixa uma pergunta ou um eco. Mesma voz de convite, sem travessões."]' : ''}
 }`;
 
