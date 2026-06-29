@@ -62,7 +62,11 @@ const rotuloFmt = (k: string): string => k === 'vcsabia' ? 'VC Sabia' : k === 'h
 // ficheiros descarregáveis de um post (vídeo ou imagens), com nome amigável
 const mediaDe = (it: Item): { url: string; nome: string }[] => {
   const d = it.dias?.[0];
-  if (d?.videoUrl) return [{ url: d.videoUrl, nome: `${it.slug}.mp4` }];
+  // CRESCER multi-tela = CARROSSEL de imagens, mesmo que ainda exista um MP4 antigo
+  // colado (renderizado como reel noutra altura). Nunca usar o MP4 nestas peças.
+  const crescerCarrossel = it.theme?.marca === 'crescer' && (d?.slides?.length ?? 0) > 1;
+  if (crescerCarrossel && d?.imagens?.length) return d.imagens.map((u, i) => ({ url: u, nome: `${it.slug}-${i + 1}.jpg` }));
+  if (d?.videoUrl && !crescerCarrossel) return [{ url: d.videoUrl, nome: `${it.slug}.mp4` }];
   if (d?.imagens?.length) return d.imagens.map((u, i) => ({ url: u, nome: `${it.slug}-${i + 1}.jpg` }));
   const motion = videoDe(it);
   if (motion) return [{ url: motion, nome: `${it.slug}-motion.mp4` }];
@@ -547,7 +551,9 @@ export default function PublicarPage() {
               {/* CONTEÚDO REAL do post: vídeo, imagens renderizadas, ou os textos dos slides */}
               {(() => {
                 const dia = it.dias?.[0];
-                if (dia?.videoUrl) return (
+                // CRESCER multi-tela = carrossel; ignora um MP4 antigo colado (mostra as telas).
+                const crescerCarrossel = it.theme?.marca === 'crescer' && (dia?.slides?.length ?? 0) > 1;
+                if (dia?.videoUrl && !crescerCarrossel) return (
                   <div className="mt-4">
                     <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo (vídeo)</p>
                     <video src={dia.videoUrl} controls className="w-full max-h-[55vh] rounded-lg bg-black" />

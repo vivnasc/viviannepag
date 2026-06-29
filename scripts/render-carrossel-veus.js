@@ -496,7 +496,11 @@ async function main() {
     const comCache = (u) => (u ? `${u.split('?')[0]}?v=${carimbo}` : u);
     const novosDias = (col.dias || []).map((d) => {
       const rsd = resultados.find((x) => x.dia === d.dia);
-      return rsd ? { ...d, videoUrl: rsd.videoUrl ? comCache(rsd.videoUrl) : d.videoUrl, imagens: rsd.imagens } : d;
+      if (!rsd) return d;
+      // MODO=carrossel: a peça passa a ser CARROSSEL de imagens — APAGA o MP4 antigo
+      // (renderizado como reel noutra altura), para não ficar colado nem ser publicado.
+      const novoVideo = modoCarrossel ? null : (rsd.videoUrl ? comCache(rsd.videoUrl) : d.videoUrl);
+      return { ...d, videoUrl: novoVideo, imagens: rsd.imagens };
     });
     // carimba a capa como renderizada com a correção atual (ver CAPA_REV em
     // lib/render/dispatch.ts): o publicador só publica carrosséis com esta rev.

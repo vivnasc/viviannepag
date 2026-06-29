@@ -675,13 +675,14 @@ export default function CrescerPage() {
                       <span className="text-[0.5rem] px-1 py-0.5 rounded" style={{ background: DZ, color: BG2 }}>{tipoDe(p) === 'carrossel' ? `🎠 carrossel · ${p.momentos?.length ?? 0} telas` : '🎬 reel'}</span>
                       <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}</span>
                     </span>
-                    {p.publicado
-                      ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
-                      : p.videoUrl
-                        ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">✅ MP4</span>
-                        : p.clipUrl
-                          ? <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5" style={{ background: DZ, color: BG2 }}>🎬 por renderizar</span>
-                          : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">por renderizar</span>}
+                    {(() => {
+                      // estado coerente com o TIPO: um carrossel "pronto" são as telas, não o MP4.
+                      const est = estadoDe(p), carr = tipoDe(p) === 'carrossel';
+                      if (est === 'publicada') return <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>;
+                      if (est === 'agendada') return <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5" style={{ background: DZ, color: BG2 }}>📅 agendada</span>;
+                      if (est === 'pronto') return <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">{carr ? '🖼 telas prontas' : '✅ MP4'}</span>;
+                      return <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">por renderizar</span>;
+                    })()}
                   </div>
                   {p.clipUrl && (
                     <div className="px-2 pt-2">
