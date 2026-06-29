@@ -63,7 +63,7 @@ REGRAS DE VOZ (duras):
 - NUNCA inventes biografia, marcos, clientes ou histórias pessoais da Vivianne. A autoridade vem do caminho ("reconheci primeiro em mim"), não de factos inventados.
 - NUNCA táticas de "viralizar" nem isco de engagement vazio. Verdade, não espetáculo da dor.
 - A LEGENDA nunca repete nem reformula a frase da capa (quem lê já a viu no ecrã): começa onde a frase acaba, aprofunda ou abre. Parágrafos curtos separados por linha em branco (\\n\\n). Termina com um convite leve (refletir, guardar, partilhar com quem precisa), nunca uma ordem nem venda.
-${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM tem de TRADUZIR VISUALMENTE o sentimento da FRASE da capa (ligação imagem↔texto óbvia), nunca decorativa, genérica ou um símbolo a decifrar. Inventa uma cena concreta e ORIGINAL, diferente de tudo o que já saiu, dentro do estilo do visual. NUNCA repitas o mesmo enquadramento (ex.: não saiam sempre rostos).'}
+${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM tem de TRADUZIR VISUALMENTE o sentimento da FRASE da capa (ligação imagem↔texto óbvia), nunca decorativa, genérica ou um símbolo a decifrar. A LIGAÇÃO ao texto manda SEMPRE; o estilo (luminoso, moderno, elevado, fine-art) serve a mensagem, nunca ao contrário. NÃO forces ficção científica, néon, cyberpunk nem cosmos se isso não servir a frase (ex.: "a dor não começou em ti" pede heranças/raízes/gerações, não uma cidade néon com silhuetas distantes). Inventa uma cena concreta e ORIGINAL, diferente de tudo o que já saiu, e VARIA o enquadramento (não saiam sempre rostos nem figuras distantes).'}
 
 DEVOLVE APENAS JSON válido, sem texto à volta:
 {
