@@ -95,7 +95,7 @@ async function main() {
       for (let i = 0; i < slides.length; i++) {
         const page = await browser.newPage();
         await page.setViewport({ width: 1080, height: 1350, deviceScaleFactor: 1 });
-        const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=${i}`;
+        const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=${i}&solo=1`;
         await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
         await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
         const pngPath = path.join(diaDir, `c${i}.png`);
@@ -335,7 +335,7 @@ async function main() {
     for (let i = 0; i < slides.length; i++) {
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: H, deviceScaleFactor: 1 });
-      const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=${i}`;
+      const url = `${SITE_URL}/render-veu?slug=${encodeURIComponent(SLUG)}&dia=${d.dia}&idx=${i}&solo=1`;
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
       await page.waitForSelector('body[data-slide-ready="true"]', { timeout: 30000 }).catch(() => {});
       const pngPath = path.join(diaDir, `s${i}.png`);

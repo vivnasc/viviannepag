@@ -189,6 +189,7 @@ export default function RenderVeuPage() {
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
   const [reelDur, setReelDur] = useState(0); // ?dur= => duração REAL do reel (s), para o karaoke sincronizar com a voz
+  const [solo, setSolo] = useState(false); // ?solo=1 => renderiza SÓ este slide (telas do carrossel), não a sequência
   const splitRef = useRef(0.5); // passagem entre as 2 faces (proporcional ao texto)
 
   // o render conduz a animação frame a frame via window.__setKProg. Quando há
@@ -224,6 +225,7 @@ export default function RenderVeuPage() {
       const diaN = Number(p.get('dia'));
       const idx = Number(p.get('idx'));
       if (p.get('video') === '1') setVideo(true);
+      if (p.get('solo') === '1') setSolo(true); // tela única do carrossel (não a sequência)
       const durP = Number(p.get('dur')); if (durP > 0) setReelDur(durP); // duração real do reel (karaoke)
       if (!slug || !diaN || isNaN(idx)) { setErro('faltam params: slug, dia, idx'); return; }
       try {
@@ -370,10 +372,11 @@ export default function RenderVeuPage() {
       })()}
       {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
           que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
-      {estado && ehKinetic && !vozVS && ehSeqSobreClip && (estado.dia.slides?.length ?? 0) > 1 && (
+      {/* SEQUÊNCIA só no vídeo/reel; com ?solo=1 (telas do carrossel) renderiza o frame único deste idx. */}
+      {estado && ehKinetic && !vozVS && !solo && ehSeqSobreClip && (estado.dia.slides?.length ?? 0) > 1 && (
         <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={slidePropsCena} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
       )}
-      {estado && ehKinetic && !vozVS && s && !(ehSeqSobreClip && (estado.dia.slides?.length ?? 0) > 1) && (
+      {estado && ehKinetic && !vozVS && s && (solo || !(ehSeqSobreClip && (estado.dia.slides?.length ?? 0) > 1)) && (
         // FRAME ÚNICO com MOVIMENTO: o push-in + deriva da CameraVeu dá vida ao frame
         // parado da manhã (sem clip/motion). Só com imagem fixa (com clip o próprio
         // vídeo já mexe, não precisa). Beneficia a manhã do Método VS e outros kinéticos
@@ -390,7 +393,7 @@ export default function RenderVeuPage() {
               efeito={(s as { efeito?: EfeitoTexto }).efeito}
               tipografia={(s as { tipografia?: Tipografia }).tipografia}
               conceito={s.conceito}
-              clipUrl={ehSeqSobreClip ? (clipBg ?? undefined) : undefined}
+              clipUrl={!solo && ehSeqSobreClip ? (clipBg ?? undefined) : undefined}
               {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
             />
           );
