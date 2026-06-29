@@ -18,11 +18,13 @@ export const CAPA_BASE =
 export const CAPA_SAFETY =
   'NO people, NO person, NO faces, NO figures, NO hands, NO text, NO words, NO letters, NO logos, NO watermarks';
 
-// NOTA: Os 7 Sinais de Desencaixe NÃO está aqui de propósito. A sua capa é
-// TIPOGRÁFICA e clara (build/make-capa.mjs → public/produtos/os-7-sinais-capa.png),
-// não uma imagem gerada. Este gerador IA pinta sempre fundo escuro de noite
-// (CAPA_BASE), por isso não serve para esse livro e foi retirado dele.
 export const LIVROS_CAPA: LivroCapa[] = [
+  {
+    slug: 'os-7-sinais', marca: 'Os 7 Sinais de Desencaixe', sub: 'o livro · pertença e autenticidade',
+    simbolo: 'seven small luminous points arranged in a single horizontal row, six aligned and glowing, one lifted out of the line and dimmer, minimal and symbolic, generous empty space, a quiet constellation of belonging and one apart',
+    comp: { selo: 'IRMÃO DE OS SETE VÉUS', t1: 'Os 7 Sinais', t2: 'de Desencaixe', sub: 'O equilíbrio entre pertença\ne autenticidade', autora: 'VIVIANNE DOS SANTOS' },
+    compEn: { selo: 'A COMPANION TO THE SEVEN VEILS', t1: 'The 7 Signs', t2: 'of Not Belonging', sub: 'On belonging without\nmaking yourself smaller', autora: 'VIVIANNE DOS SANTOS' },
+  },
   {
     slug: 'os-7-veus', marca: 'Os Sete Véus', sub: 'o pilar · o limiar',
     simbolo: 'a single ornate ancient stone archway standing alone, empty, opening onto warm radiant golden light, seen straight on, a threshold',

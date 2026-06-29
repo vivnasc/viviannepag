@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import { CapaImg } from '@/components/home/CapaImg';
 
 // Destaque na home: os DOIS livros, com o mesmo peso.
 // O pilar (Os Sete Véus, do Método VS) primeiro, o irmão (Os 7 Sinais de
@@ -9,6 +9,11 @@ import Link from 'next/link';
 const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
 const capaPilar = (isEn: boolean) =>
   `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa-composta${isEn ? '-en' : ''}.png`;
+// capa de Os 7 Sinais: a guardada no Supabase pelo gerador do admin, com recuo
+// para a capa local commitada (assim "usar no site" reflete-se e nada quebra).
+const capaSinais = (isEn: boolean) =>
+  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-sinais/capa${isEn ? '-en' : ''}.png`;
+const capaSinaisLocal = (isEn: boolean) => `/produtos/os-7-sinais-capa${isEn ? '-en' : ''}.png`;
 
 type Livro = {
   selo: string;
@@ -16,6 +21,7 @@ type Livro = {
   sub: string;
   desc: string;
   capa: string;
+  capaFallback?: string;
   capaRatio: string;
   href: string;
   cta: string;
@@ -51,7 +57,8 @@ export function OsLivros({ locale }: { locale: string }) {
       desc: isEn
         ? 'The quiet moment when you stop fitting a place that was good, without anything in it having changed, and without anyone having done anything wrong. Not a book about learning to fit in.'
         : 'O momento calado em que deixas de caber num lugar que foi bom, sem que nada nele tenha mudado, e sem que ninguém tenha feito nada de errado. Não é um livro sobre aprender a encaixar.',
-      capa: isEn ? '/produtos/os-7-sinais-capa-en.png' : '/produtos/os-7-sinais-capa.png',
+      capa: capaSinais(isEn),
+      capaFallback: capaSinaisLocal(isEn),
       capaRatio: '1600 / 2560',
       href: isEn ? '/en/loja/os-7-sinais' : '/loja/os-7-sinais',
       cta: isEn ? 'Read the book' : 'Ler o livro',
@@ -85,8 +92,9 @@ export function OsLivros({ locale }: { locale: string }) {
               href={l.href}
               className={`block no-underline mx-auto ${idx % 2 === 1 ? 'sm:order-2' : ''}`}
             >
-              <img
+              <CapaImg
                 src={l.capa}
+                fallback={l.capaFallback}
                 alt={l.titulo}
                 className="w-[210px] h-auto rounded-[10px] border border-ocre/30 block"
                 style={{ boxShadow: '0 22px 60px -28px rgba(0,0,0,0.7)', aspectRatio: l.capaRatio }}
