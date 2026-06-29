@@ -18,7 +18,8 @@ export async function POST(req: Request) {
   if (!token) return NextResponse.json({ erro: 'sem-github-token' }, { status: 500 });
 
   let variante = 'A';
-  try { const b = await req.json(); if (b?.variante === 'B') variante = 'B'; } catch {}
+  let modo = 'continuo';
+  try { const b = await req.json(); if (b?.variante === 'B') variante = 'B'; if (b?.modo === 'cortes') modo = 'cortes'; } catch {}
 
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/actions/workflows/render-anuncio.yml/dispatches`,
@@ -30,13 +31,13 @@ export async function POST(req: Request) {
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ref, inputs: { variante } }),
+      body: JSON.stringify({ ref, inputs: { variante, modo } }),
     },
   );
   if (!res.ok) {
     return NextResponse.json({ erro: 'github-dispatch', status: res.status, detalhe: (await res.text()).slice(0, 300) }, { status: 500 });
   }
-  return NextResponse.json({ ok: true, variante });
+  return NextResponse.json({ ok: true, variante, modo });
 }
 
 // GET — lista os anúncios já gerados (para a página os mostrar com player).

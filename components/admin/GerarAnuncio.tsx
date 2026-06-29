@@ -32,6 +32,7 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
   const [voz, setVoz] = useState<string | null>(null);
   const [vozEstado, setVozEstado] = useState<Estado>('inicio');
   const [montar, setMontar] = useState<'inicio' | 'a-enviar' | 'enviado' | 'erro'>('inicio');
+  const [modo, setModo] = useState<'continuo' | 'cortes'>('continuo');
   const [erro, setErro] = useState('');
   const [bibAberta, setBibAberta] = useState<number | null>(null);
   const [bib, setBib] = useState<{ url: string; nome: string }[]>([]);
@@ -78,7 +79,7 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
   async function montarVideo() {
     setMontar('a-enviar');
     try {
-      const r = await fetch('/api/admin/anuncio', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ variante }) });
+      const r = await fetch('/api/admin/anuncio', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ variante, modo }) });
       const j = await r.json();
       if (!r.ok) throw new Error(j.detalhe || j.erro || 'erro');
       setMontar('enviado');
@@ -201,11 +202,22 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
 
       {/* MONTAR */}
       <div className="mt-5 pt-4 border-t border-ocre/15">
+        <p className="text-creme-2/55 text-[0.72rem] mb-2">movimento entre planos</p>
+        <div className="flex gap-2 mb-3">
+          <button onClick={() => setModo('continuo')}
+            className={`rounded-full px-3 py-1.5 text-[0.76rem] border transition-colors ${modo === 'continuo' ? 'bg-ambar/20 border-ambar text-ambar' : 'border-ocre/30 text-creme-2/60 hover:bg-ambar/10'}`}>
+            🎞 contínuo (fundido)
+          </button>
+          <button onClick={() => setModo('cortes')}
+            className={`rounded-full px-3 py-1.5 text-[0.76rem] border transition-colors ${modo === 'cortes' ? 'bg-ambar/20 border-ambar text-ambar' : 'border-ocre/30 text-creme-2/60 hover:bg-ambar/10'}`}>
+            ✂ cortes secos
+          </button>
+        </div>
         <button onClick={montarVideo} disabled={montar === 'a-enviar' || prontas === 0}
           className="rounded-full bg-ambar text-[#2A1C12] px-5 py-2.5 text-[0.85rem] font-medium hover:opacity-90 transition-opacity disabled:opacity-50">
           {montar === 'a-enviar' ? 'a enviar…' : 'montar o vídeo final →'}
         </button>
-        <p className="text-creme-2/45 text-[0.72rem] mt-2">monta com os planos prontos (cortam ao longo do vídeo) + a tua voz. Karaokê + música ficam no render. {prontas === 0 && 'Gera pelo menos um plano primeiro.'}</p>
+        <p className="text-creme-2/45 text-[0.72rem] mt-2">monta os planos prontos no modo <em className="text-creme-2/70">{modo === 'continuo' ? 'contínuo (cinematográfico, sem cortes)' : 'cortes secos'}</em> + a tua voz. Cada plano corre sem loop; karaokê + música ficam no render. {prontas === 0 && 'Gera pelo menos um plano primeiro.'}</p>
         {montar === 'enviado' && <p className="text-salvia text-[0.8rem] mt-3 font-serif italic">A montar (~5-10 min). Atualiza a página e o vídeo aparece em baixo.</p>}
         {(vozEstado === 'erro' || montar === 'erro' || erro) && <p className="text-rosa/90 text-[0.8rem] mt-3">Algo correu mal: {erro}</p>}
       </div>
