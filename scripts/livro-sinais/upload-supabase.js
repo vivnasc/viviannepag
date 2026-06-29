@@ -15,10 +15,13 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
-// [ficheiro local na raiz, caminho remoto, mime]
+// [ficheiro local (relativo à raiz), caminho remoto, mime]
 const FICHEIROS = [
   ['Os-7-Sinais-de-Desencaixe.pdf', `produtos/${SLUG}.pdf`, 'application/pdf'],
   ['The-Seven-Signs-of-Not-Belonging.pdf', `produtos/${SLUG}-en.pdf`, 'application/pdf'],
+  // a capa titulada (a imagem da Vivianne + título) também vai para o site
+  ['sinais-capa/capa-composta.png', `livro-pilar/${SLUG}/capa-composta.png`, 'image/png'],
+  ['sinais-capa/capa-composta-en.png', `livro-pilar/${SLUG}/capa-composta-en.png`, 'image/png'],
 ];
 
 (async () => {
