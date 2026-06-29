@@ -22,7 +22,9 @@ export async function POST(req: Request) {
   const livro = getLivroCapa(slug ?? '');
   if (!livro) return NextResponse.json({ erro: 'livro-desconhecido' }, { status: 400 });
 
-  const prompt = `${CAPA_BASE}\n\n${livro.simbolo}\n\n${PALETA}\n\n${CAPA_SAFETY}`;
+  // cada livro pode ter base/paleta próprias (ex.: Os 7 Sinais = clara e digna);
+  // os do método usam a base comum da família.
+  const prompt = `${livro.base ?? CAPA_BASE}\n\n${livro.simbolo}\n\n${livro.paleta ?? PALETA}\n\n${CAPA_SAFETY}`;
 
   const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
     method: 'POST',

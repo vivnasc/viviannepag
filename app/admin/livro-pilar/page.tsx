@@ -14,6 +14,7 @@ export default function LivrosAdmin() {
           <Link href="/admin/editora" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">ebooks</Link>
           <Link href="/admin/editora/romances" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">romances</Link>
           <span className="text-ambar border-b border-ambar/60 pb-1">método</span>
+          <Link href="/admin/capa-sinais" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">capa · os 7 sinais</Link>
         </nav>
         <p className="text-creme-2/60 text-[0.85rem] mt-4 font-serif italic">
           Um só sítio para as capas dos 4 livros (pilar + ver/vir/viver): gera o símbolo de cada um (mesma família), escolhe a tua, e depois rende para compor a tipografia e publicar.
