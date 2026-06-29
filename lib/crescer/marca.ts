@@ -235,30 +235,38 @@ export interface VisualCrescer {
   promptBase: string;
 }
 
-const FIM_PROMPT = 'cinematic, fine art photography, evocative, depth, no text, no letters, no watermark, no logos --ar 9:16 --style raw';
+// RÉGUA DE IMAGEM (decisão da Vivianne, jun 2026): imagens que PARAM O SCROLL e
+// justificam pagar. SEMPRE futuristas, LUMINOSAS e vívidas. PROIBIDO escuro,
+// terroso, sépia, vintage, rústico, doméstico ou antiquado. Boa qualidade para
+// poderem ser animadas (motion) se ela quiser.
+const FIM_PROMPT =
+  'futuristic, luminous and vivid, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
+  'radiant dynamic light, bold iridescent color, sharp focus, modern and otherworldly. ' +
+  'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated. ' +
+  'no text, no letters, no watermark, no logos --ar 9:16 --style raw';
 
 export const VISUAIS: VisualCrescer[] = [
   {
     id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑‍🚀',
-    descricao: 'A assinatura dela: figura humana visível, serena, com um toque futurista.',
+    descricao: 'A assinatura dela: figura humana futurista, visível e luminosa.',
     promptBase:
-      'a futuristic human figure CLEARLY VISIBLE and softly FRONT-LIT, face and features visible (never a dark silhouette, never pure backlight), ' +
-      'serene timeless presence, elegant subtle-futuristic styling, cinematic fine-art portrait, shallow depth of field, ' +
-      'soft iridescent light with warm earth tones, an emotionally evocative scene that embodies the idea, ' + FIM_PROMPT,
+      'a luminous futuristic human figure CLEARLY VISIBLE and FRONT-LIT, face and features visible (never a dark silhouette, never backlit), ' +
+      'serene and timeless, sleek modern-futuristic styling, radiant glowing light, vivid iridescent colors, cinematic fine-art portrait, ' +
+      'an emotionally striking scene that embodies the idea, ' + FIM_PROMPT,
   },
   {
     id: 'conceptual', label: 'Conceptual / abstrato', emoji: '◍',
-    descricao: 'Arte conceptual, simbólica, sem figuras.',
+    descricao: 'Arte conceptual futurista, ousada e luminosa.',
     promptBase:
-      'conceptual abstract fine-art image, a single evocative metaphor for the idea, symbolic, minimal, ' +
-      'soft light and shadow, earth and gold tones, no people, ' + FIM_PROMPT,
+      'a striking futuristic conceptual fine-art image, ONE bold luminous metaphor for the idea, surreal and elevated, ' +
+      'glowing iridescent light, vivid saturated color, glass and light and energy, premium and modern, no people, ' + FIM_PROMPT,
   },
   {
     id: 'natureza', label: 'Natureza / cósmico', emoji: '🌌',
-    descricao: 'Água, neblina, céu, raízes, constelações.',
+    descricao: 'Paisagens futuristas e cósmicas, radiantes.',
     promptBase:
-      'natural or cosmic fine-art scene (water, mist, sky, stone, roots, seeds, constellations, dawn light), ' +
-      'vast and intimate at once, warm earth and gold palette, no people, ' + FIM_PROMPT,
+      'a breathtaking futuristic and cosmic scene (luminous skies, radiant water and light, stardust and nebulae, aurora, ' +
+      'crystalline and otherworldly landscapes), vivid and radiant, awe-inspiring and scroll-stopping, no people, ' + FIM_PROMPT,
   },
   {
     id: 'minimal', label: 'Minimal / tipográfico', emoji: '𝐀',
