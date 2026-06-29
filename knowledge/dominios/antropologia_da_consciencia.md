@@ -3,7 +3,7 @@ projecto: Ciências da Consciência Emergente
 obra: A Grande Transição
 dominio: Antropologia da Consciência
 codigo: D12
-estado: esboço-desenvolvido
+estado: desenvolvido
 versao: 0.1
 autor: Vivianne Saraiva
 relacionados: [D08, D11, D13]
@@ -98,3 +98,301 @@ Já cantaste em conjunto e sentiste, por minutos, que deixavas de ser só tu? E 
 Quem te disse que o tempo corre só para a frente? E se houvesse uma parte de ti que sabe esperar pelo que volta?
 
 A solidão que sentes é tua, ou é a forma de uma cultura que te entregou um eu fechado e chamou liberdade à cela?
+
+## Conceitos · desenvolvimento completo
+
+### As Cosmovisões da Consciência
+Relações: [O Eu Poroso e o Eu Fechado, As Cartografias Indígenas, O Tempo Cultural]
+
+1. **Definição** Uma cosmovisão da consciência é a configuração de fundo, anterior a qualquer crença consciente, a partir da qual uma cultura constitui o que a consciência é e pode fazer. Não se trata de povos diferentes a terem opiniões diferentes sobre a mesma mente universal, mas de mentes diferentes, montadas a partir de imagens distintas do real, do tempo e da pessoa. A cosmovisão decide, antes de qualquer escolha individual, onde acaba o eu, quem mais participa do acto de perceber, e que tipo de presenças o mundo admite. É o solo invisível em que a experiência se torna a experiência que é.
+
+2. **Origem provável** Surge da necessidade de qualquer grupo humano herdar uma forma estável de habitar o mundo, transmissível de uma geração à seguinte sem ter de a reinventar. A criação das crianças, a língua e os ritos de passagem cristalizam, ao longo de muitas gerações, uma maneira de dividir o real que dá vantagem de sobrevivência ao grupo que a partilha. A configuração fechada da modernidade tem origem provável numa longa fase em que separar-se, medir e controlar deram domínio sobre o mundo, e em que essa vantagem se converteu, lentamente, em evidência interior.
+
+3. **Mecanismo** A cosmovisão opera por sedimentação silenciosa: instala-se na língua que se aprende antes de pensar, nos gestos quotidianos que ninguém explica, nas histórias que dizem quem habita a casa e o que acontece aos mortos. Funciona porque é invisível a quem a habita, que a toma por realidade e não por configuração. Reproduz-se cada vez que um adulto responde a uma criança sobre se está sozinha quando está sozinha, ou se a terra repara nela. O mecanismo mais profundo é a naturalização: a cosmovisão apaga os seus próprios rastos e apresenta-se como o modo evidente de as coisas serem.
+
+4. **Indicadores** Reconhece-se uma cosmovisão pela surpresa que sente perante outra: o que numa configuração é óbvio, noutra é impensável. Indicam-na as perguntas que uma cultura nunca faz porque a resposta lhe parece dada, e os mal-entendidos persistentes entre tradições que partilham as palavras mas não o solo. Indica-a a dificuldade de traduzir certos termos sem os deformar. E indica-a a reacção de incompreensão, e por vezes de patologização, diante de quem habita um desenho diferente da fronteira do eu.
+
+5. **Equivalentes históricos** As grandes viragens documentadas de imagem do mundo, da percepção mítica e participativa para a perspectiva distanciada que separa observador de observado, são equivalentes de mudança de cosmovisão da consciência. A passagem de um mundo povoado de presenças para um mundo desencantado, descrita por Charles Taylor como passagem do eu poroso ao eu fechado, é o equivalente histórico mais próximo da viragem que esta obra examina.
+
+6. **Contra-exemplos** Não é cosmovisão uma simples crença que se pode adoptar ou abandonar sem mudar a textura da experiência: trocar de opinião sobre os mortos não é trocar de cosmovisão. Não é cosmovisão o estilo de vida, a moda ou a ideologia política, que se vestem por cima de uma configuração que permanece. E não é cosmovisão o exotismo: tomar adereços de outra tradição mantendo intacto o eu fechado é mudar de decoração, não de solo.
+
+7. **Manifestações culturais** Manifesta-se nas línguas e nas suas gramáticas da pessoa, nas formas de narrar que dizem quem age no mundo, nas artes que tornam visível o que cada cultura considera real. Manifesta-se no modo como uma sociedade trata os seus loucos, os seus sonhadores e os seus videntes, conforme os lê como doentes, como mensageiros ou como ambos.
+
+8. **Manifestações religiosas** Manifesta-se na imagem do divino, próximo e participante ou distante e separado, e na fronteira que cada religião traça entre o humano e o sagrado. Uma cosmovisão de presenças torna a oração um diálogo com quem está; uma cosmovisão fechada torna-a, por vezes, monólogo dirigido a uma transcendência muda.
+
+9. **Manifestações económicas** Manifesta-se na forma como se concebe a propriedade, o trabalho e a riqueza: uma cosmovisão de pertença mútua entre pessoas, terra e gerações dificulta a redução de tudo a recurso transaccionável; uma cosmovisão de indivíduos separados é o solo em que a economia de mercado se torna evidente e total.
+
+10. **Manifestações familiares** Manifesta-se em quem conta como família, se só os vivos ou também os mortos e os que ainda não nasceram, e no peso que cada um carrega sozinho ou em conjunto. Na configuração fechada, a família encolhe ao núcleo presente; na porosa, alarga-se a uma linhagem que participa nas decisões.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, a cosmovisão deixaria de ser herdada cegamente e tornar-se-ia, pela primeira vez, objecto de escolha lúcida: uma cultura capaz de ver a sua própria configuração poderia conservar a lucidez moderna sem ficar refém da sua cegueira, e reabrir a fronteira do eu sem regredir. A hipótese é a de uma cosmovisão deliberada, que sabe ser uma entre várias e por isso pode integrar.
+
+12. **Ancoragem** Ancora-se em Gebser, na ideia de estruturas da consciência como mutações e não degraus, e em Taylor, na descrição da viragem do eu poroso ao fechado. A leitura comparada destes contributos na chave da Grande Transição é construção original.
+
+13. **Bloco visual**
+- Símbolos: lentes sobrepostas que filtram a mesma paisagem em luzes distintas; limiares de pedra entre dois ares; o mesmo vale visto de duas janelas que dão cores diferentes ao real.
+- Escala: uma figura humana minúscula à entrada de salões de proporção impossível, cada salão com a sua qualidade de luz, sem que ela saiba ainda em qual entra.
+- Arquitectura: o eu fechado como sala murada sem janelas, de luz própria e fria; ao longe, por uma fenda na parede, cidades-templo de luz da própria matéria que ela ainda não habita.
+- Fenómeno físico impossível: a própria luz muda de natureza ao atravessar o limiar, e o ar de um lado mostra camadas de tempo que o ar do outro não deixa ver.
+- Emoção dominante: admiração contida e leve vertigem, a de descobrir que o evidente era apenas um quarto.
+- Relação com o mundo pós-sobrevivência: o limiar entre a sala murada e a cidade de luz, com a figura parada na soleira, o novo entrevisto pela fenda e ainda não habitado.
+
+14. **Perguntas para conteúdos** O que é que tu nunca perguntas porque já te deram a resposta antes de saberes perguntar? Repara no instante em que algo de outra cultura te parece impensável, e segura-te aí: e se o impensável fosse só o teu quarto a falar?
+
+### O Tempo Cultural
+Relações: [A Consciência Ancestral, Os Estados Rituais, As Cosmovisões da Consciência]
+
+1. **Definição** O Tempo Cultural é a forma do tempo vivido, anterior ao tempo medido pelo relógio, que cada cosmovisão entrega à consciência como o leito em que a experiência corre. Pode ser linear e irreversível, uma flecha que só vai para a frente e deixa o passado para trás; pode ser cíclico, um retorno das estações e das gerações; pode ser um presente espesso onde os antepassados ainda agem e o passado nunca termina de passar. A forma do tempo decide o que a consciência pode segurar, esperar e recordar, e que tipo de memória e de esperança são sequer possíveis.
+
+2. **Origem provável** Tem origem provável na inscrição da vida nos ciclos do mundo, o dia, as estações, as colheitas, os nascimentos e as mortes, que dão à consciência primeira uma forma de retorno. O tempo linear e escasso da modernidade tem origem provável na combinação do relógio, do calendário de produção e da promessa de progresso, que converteram o tempo de leito da vida em recurso a gastar, e instalaram a sensação de uma corrida sem regresso.
+
+3. **Mecanismo** Opera pelos calendários, festas, ciclos agrícolas e ritos de passagem que dão à consciência o seu compasso, e pela posição que cada cultura atribui aos mortos no tempo. Funciona porque o tempo vivido é sentido como propriedade do mundo e não como construção: ninguém escolhe sentir o tempo a escassear, sente-se. Um tempo onde o passado regressa produz uma memória que espera, e uma expectativa que confia no retorno; um tempo que só avança produz a urgência e o medo da perda definitiva.
+
+4. **Indicadores** Indica-o a maneira como uma cultura fala do futuro e do passado, se com nostalgia de algo perdido para sempre ou com a calma de quem sabe que volta. Indica-o a presença ou ausência da sensação de não ter tempo, e o estatuto dos mortos, deixados num passado fechado ou activos no presente. Indica-o o lugar da espera: tida como desperdício a eliminar, ou como forma justa de habitar o que ainda não chegou.
+
+5. **Equivalentes históricos** A passagem do tempo agrícola e litúrgico, ritmado pelas estações e pelas festas, para o tempo abstracto e homogéneo da hora mecânica e do calendário de trabalho é o equivalente histórico mais documentado: a mesma sucessão de instantes deixou de ser leito da vida para se tornar recurso medido. As concepções cíclicas do tempo em cosmovisões agrárias e ancestrais são o seu contraponto histórico.
+
+6. **Contra-exemplos** Não é Tempo Cultural a mera medição do tempo, o relógio enquanto instrumento, que pode coexistir com qualquer forma vivida. Não é Tempo Cultural a gestão da agenda nem o calendário administrativo. E não é Tempo Cultural a nostalgia individual de quem sente saudade de um passado pessoal, que ocorre dentro de uma forma de tempo, mas não é a forma.
+
+7. **Manifestações culturais** Manifesta-se nas festas e nos seus regressos anuais, na narrativa, que ora caminha para um fim único ora roda em retorno, e na relação com a história, vista como progresso, como queda ou como retorno. Manifesta-se na arquitectura das celebrações que repõem, todos os anos, um mesmo tempo sagrado.
+
+8. **Manifestações religiosas** Manifesta-se na forma do tempo sagrado: o eterno retorno do mito que se repõe na liturgia, a salvação que aponta para um fim, o tempo dos antepassados que nunca termina de passar. A própria ideia de eternidade muda de sentido conforme o tempo vivido seja flecha ou ciclo.
+
+9. **Manifestações económicas** Manifesta-se na conversão do tempo em dinheiro, possível apenas onde o tempo é recurso linear e escasso, e na lógica do crescimento sem fim, que pressupõe uma flecha que nunca regressa. Uma cosmovisão de retorno dificulta a transformação do tempo em mercadoria.
+
+10. **Manifestações familiares** Manifesta-se no modo como uma família situa os seus mortos e os seus por nascer, se num passado e num futuro fechados ou num presente alargado em que ambos participam. Manifesta-se na herança, vivida como transmissão viva de uma linha ou como simples passagem de bens.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, libertada da urgência da escassez, a consciência poderia recuperar a espessura do presente sem perder a lucidez histórica: um tempo que avança e regressa ao mesmo tempo, capaz de planear sem terror e de esperar sem desperdício. A hipótese é a de uma forma de tempo em que o passado volta a agir sem deixar de haver futuro.
+
+12. **Ancoragem** Ancora-se em Gebser, na pluralidade das estruturas temporais da consciência, e na concepção do tempo ancestral como presente espesso, central no pilar africano. A leitura comparada e a sua articulação com a Grande Transição é construção original.
+
+13. **Bloco visual**
+- Símbolos: estações sobrepostas no mesmo lugar; uma flecha de luz que, ao avançar, se curva e regressa; camadas de tempo visíveis como estratos translúcidos no ar.
+- Escala: uma figura minúscula sob colunas de luz que são, cada uma, uma geração, e que se erguem para lá do que o olhar alcança.
+- Arquitectura: salas sem janelas onde o tempo corre numa só direcção, fria; lá fora, jardins suspensos e rios no céu onde o tempo se vê em camadas e o passado ainda brilha.
+- Fenómeno físico impossível: o tempo torna-se visível como sedimento de luz, e um instante guarda dentro de si todos os que o precederam, sobrepostos e legíveis.
+- Emoção dominante: a calma de quem sabe esperar, e o mistério de um presente que tem fundo.
+- Relação com o mundo pós-sobrevivência: por uma fenda, o rio no céu onde passado e futuro correm juntos, entrevisto de uma sala onde o tempo só sabia fugir.
+
+14. **Perguntas para conteúdos** A quem é que pertence o teu tempo, e quem te disse que ele só corre para a frente? Repara, agora, se há em ti uma parte que sabe esperar pelo que volta, ou se aprendeste a sentir cada hora a fugir.
+
+### Os Estados Rituais
+Relações: [As Tecnologias do Sagrado, A Consciência Colectiva, O Tempo Cultural]
+
+1. **Definição** Os Estados Rituais são estados de consciência cultivados e enquadrados pelo ritual, em que a atenção, a percepção e a fronteira do eu se reorganizam dentro de uma forma partilhada que os torna legíveis e seguros. Não são acidentes nem perturbações: são transformações deliberadas da consciência, com entrada e saída regradas, sustentadas por uma comunidade que sabe o que está a acontecer. O ritual é a moldura que distingue a transformação da consciência da sua mera desordem, e que permite a uma pessoa atravessar um estado intenso sem se perder nele.
+
+2. **Origem provável** Têm origem provável na descoberta, muito antiga, de que certos estados de consciência, úteis para o luto, a cura, a passagem e a coesão, são demasiado intensos para serem atravessados sozinho ou ao acaso. A cultura desenvolveu então formas estáveis para entrar e sair desses estados em segurança, transmissíveis e repetíveis. O ritual nasce, em parte, como tecnologia de protecção da consciência que se abre.
+
+3. **Mecanismo** Opera por enquadramento: um tempo e um lugar separados, papéis definidos, gestos repetidos, uma comunidade presente que ampara. Funciona porque a forma é conhecida de todos, e por isso o estado, por mais fora do comum, permanece legível e tem regresso garantido. O ritmo, o canto, o jejum e o gesto modulam o corpo até a fronteira do eu se afrouxar, e a moldura assegura que esse afrouxamento seja passagem e não queda. A entrada e a saída são tão cuidadas quanto o estado em si.
+
+4. **Indicadores** Indica-os a existência de formas reguladas de alterar a consciência que a cultura não patologiza, com guardiães que sabem conduzir a entrada e a saída. Indica-os a diferença sentida entre quem atravessa um estado dentro de uma forma e sai inteiro, e quem cai num estado sem moldura e se perde. Indica-os o estatuto de conhecimento, e não de doença, atribuído ao que se vê nesses estados.
+
+5. **Equivalentes históricos** Os ritos de passagem documentados na sua estrutura de separação, limiar e reintegração são o equivalente histórico mais claro: o estado intenso vive na fase do limiar, entre o que se deixou de ser e o que ainda não se é, sempre dentro de uma forma. As liturgias, os cantos partilhados e os lutos comunitários funcionam como molduras equivalentes de estados rituais.
+
+6. **Contra-exemplos** Não é estado ritual a perturbação sem moldura, o surto que não tem entrada nem saída regradas e em que a comunidade não sabe o que fazer. Não é estado ritual o consumo solitário e desenquadrado em busca de sensação, sem comunidade nem regresso garantido. E não é estado ritual o mero entretenimento que imita a forma sem a função, esvaziado do trabalho que o ritual fazia.
+
+7. **Manifestações culturais** Manifestam-se nas festas, nos lutos colectivos, nos cantos e danças que reordenam a atenção de um grupo inteiro, e nas formas de teatro e celebração em que os participantes deixam, por momentos, de ser apenas eles. Manifestam-se nos lugares consagrados onde se sabe que a consciência se altera.
+
+8. **Manifestações religiosas** Manifestam-se na liturgia, na peregrinação, no jejum e no silêncio organizado, técnicas religiosas de modular a consciência de forma fiável. Manifestam-se nas formas reguladas de transe e de visão que muitas tradições mantêm como caminho de conhecimento e não como desvio.
+
+9. **Manifestações económicas** Manifestam-se no custo que as sociedades de eu fechado pagam por terem perdido estas formas: refazem por vias caras e privadas, clínicas e de consumo, o trabalho que o estado ritual fazia em comum. O tempo e os recursos antes investidos no ritual partilhado reaparecem como despesa individual.
+
+10. **Manifestações familiares** Manifestam-se nos ritos de família, o nascimento, o casamento, o luto, que conduzem uma passagem dentro de uma forma partilhada. Onde estas formas se perderam, a família atravessa as suas passagens sem moldura, e o que era trabalho comum torna-se queda solitária.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, a consciência poderia reaprender, com lucidez moderna, a abrir e fechar estados intensos dentro de formas seguras, sem os patologizar nem os entregar ao acaso. A hipótese é a de uma cultura que recupera a tecnologia da passagem, ampara de novo a consciência que se abre, e devolve à comunidade o trabalho que tinha privatizado.
+
+12. **Ancoragem** Ancora-se na estrutura dos ritos de passagem e na dimensão colectiva da consciência, esta retida com cautela a partir de Jung. A articulação destes estados como tecnologia de protecção da consciência na chave da Grande Transição é construção original.
+
+13. **Bloco visual**
+- Símbolos: limiares de luz com guardiães de pé; círculos de presenças à volta de uma só figura; portas de entrada e de saída sempre aos pares.
+- Escala: a figura minúscula no centro de uma estrutura colossal de luz que a rodeia e ampara, nunca sozinha no vasto.
+- Arquitectura: a sala murada onde quem se altera cai sem amparo; a cidade-templo onde a alteração é conduzida por arquitecturas que respiram e seguram.
+- Fenómeno físico impossível: a fronteira do corpo torna-se permeável à luz durante o estado, e a estrutura à volta pulsa devagar, sustentando a respiração de quem atravessa.
+- Emoção dominante: segurança no meio do intenso, e a admiração de ser atravessado sem se perder.
+- Relação com o mundo pós-sobrevivência: por uma fenda, o templo de luz onde a passagem é conduzida e segura, entrevisto de uma sala onde só havia queda.
+
+14. **Perguntas para conteúdos** Quando algo intenso te atravessa, quem está contigo, e haverá uma forma que te traga de volta inteiro? Repara se aprendeste a passar sozinho o que antes se passava em conjunto, e a chamar doença ao que talvez fosse passagem.
+
+### A Consciência Colectiva
+Relações: [Os Estados Rituais, A Consciência Ancestral, As Tecnologias do Sagrado]
+
+1. **Definição** A Consciência Colectiva é a parte da consciência que não é propriedade do indivíduo mas se vive em comum, no canto, no luto, no trabalho da comunidade, onde o sujeito da experiência é um nós antes de ser um eu. Não designa uma mente de grupo abstracta sobreposta às pessoas, mas a experiência concreta, atestável, de momentos em que a fronteira entre os sujeitos se afrouxa e a atenção, o afecto e o ritmo se sincronizam, de modo que quem vive já não é cada um separadamente. É a consciência no plural, anterior ao isolamento do eu fechado.
+
+2. **Origem provável** Tem origem provável na vantagem de sobrevivência da sincronia: grupos capazes de cantar, lutar, trabalhar e sentir em comum coordenavam-se melhor, suportavam melhor a perda e mantinham-se unidos. A capacidade de a consciência se viver em plural é, nesta hipótese, anterior e mais antiga do que o eu separado, que terá emergido depois, com a configuração fechada da modernidade.
+
+3. **Mecanismo** Opera pela sincronização de corpos: o ritmo partilhado do canto e da dança, o gesto comum do trabalho, o pranto conjunto do luto alinham a atenção e o afecto de muitos num só compasso. Funciona porque o corpo humano se afina com os corpos próximos, e porque a forma partilhada dá a cada um um lugar dentro de um todo. Por minutos, a pessoa deixa de carregar sozinha a sua experiência, e ao sair estranha ter de voltar a ser apenas ela.
+
+4. **Indicadores** Indica-a a existência de cantos, lutos e trabalhos feitos em conjunto, e a sensação reconhecível de deixar de ser só um eu durante eles. Indica-a a presença de formas em que a comunidade sente em uníssono uma perda ou uma alegria. Indica a sua ausência o isolamento do sofrimento, a privatização do luto e a estranheza, na modernidade, perante a ideia de que a consciência possa ser plural.
+
+5. **Equivalentes históricos** Os lutos comunitários prolongados, os cantos de trabalho e as celebrações de uníssono documentadas em muitas culturas são equivalentes históricos da consciência vivida em comum. A dimensão colectiva intuída por Jung, retida aqui com cautela, é o ponto de ancoragem teórica, e não uma tese assente sobre uma mente partilhada.
+
+6. **Contra-exemplos** Não é Consciência Colectiva a multidão anónima cuja proximidade física não sincroniza nem une, e em que cada um permanece fechado. Não é Consciência Colectiva o conformismo ou a opinião pública, que padronizam crenças sem afrouxar a fronteira do eu. E não é Consciência Colectiva a dissolução da pessoa numa massa que apaga o indivíduo: o nós de que se fala não anula o eu, ampara-o.
+
+7. **Manifestações culturais** Manifesta-se nos cantos e danças em conjunto, nas festas que fazem de muitos um corpo, e nas formas de arte feitas para serem vividas em comum e não consumidas em privado. Manifesta-se no estranhamento, ao fim de cantar com outros, de ter de voltar a ser apenas um.
+
+8. **Manifestações religiosas** Manifesta-se na assembleia que reza ou canta como um só corpo, na liturgia partilhada e na experiência de comunhão. A própria ideia de comunhão pressupõe que a consciência se possa viver em plural, e não apenas justapor crentes isolados.
+
+9. **Manifestações económicas** Manifesta-se no trabalho comum, em que o esforço partilhado é também experiência partilhada, e no entreajuda das economias de pertença. A sua perda manifesta-se na solidão do trabalho individualizado e na necessidade de comprar, em separado, o amparo que a comunidade dava.
+
+10. **Manifestações familiares** Manifesta-se no luto vivido em conjunto, com gestos, datas e refeições partilhadas, que faz da família, por dias, um só sujeito de dor. A sua ausência manifesta-se na perda sentida como queda solitária, que depois se procura refazer, mais frágil, por outras vias.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, a consciência poderia recuperar a sua dimensão plural sem sacrificar o indivíduo que a modernidade conquistou: um nós que ampara sem dissolver, e um eu que pode, por momentos, deixar de carregar sozinho o peso da existência. A hipótese é a de uma consciência que sabe ser plural e singular conforme o momento o pede.
+
+12. **Ancoragem** Ancora-se, com cautela, na intuição junguiana de uma dimensão colectiva da consciência, marcada como ponto a manejar e não como tese fechada. A sua leitura como experiência atestável de sincronia, na chave da Grande Transição, é construção original.
+
+13. **Bloco visual**
+- Símbolos: muitas linhas de luz que convergem num só fio mais brilhante; um coro de figuras cuja respiração se vê como uma só onda; vozes representadas como luz que se funde sem apagar cada fonte.
+- Escala: figuras minúsculas que, juntas, compõem uma estrutura de luz maior do que a soma delas, sem que nenhuma se perca.
+- Arquitectura: salas onde cada um está só na sua cela de luz; cidades-templo onde as paredes são feitas das presenças reunidas e respiram em conjunto.
+- Fenómeno físico impossível: as fronteiras dos corpos tornam-se translúcidas durante o canto, e a luz passa de um para o outro como uma maré, sem que ninguém deixe de existir.
+- Emoção dominante: a segurança de não estar só, e a admiração de ser parte de uma voz maior.
+- Relação com o mundo pós-sobrevivência: por uma fenda, o coro de luz onde os corpos se atravessam, entrevisto de uma cela onde cada um cantava em silêncio.
+
+14. **Perguntas para conteúdos** Já sentiste a tua dor deixar de ser só tua, por estar a ser carregada em conjunto? Repara em quanto do que sofres carregas sozinho, e pergunta se foi sempre assim, ou se alguém te entregou esse peso e lhe chamou independência.
+
+### As Tecnologias do Sagrado
+Relações: [Os Estados Rituais, O Tempo Cultural, A Consciência Colectiva]
+
+1. **Definição** As Tecnologias do Sagrado são os meios disciplinados, canto, dança, jejum, silêncio, gesto, narrativa, lugar consagrado, com que uma cultura modula a consciência de forma fiável e transmissível. São tratadas aqui como técnicas, com a mesma seriedade com que se tratam as técnicas materiais, e não como exotismo nem superstição. O termo tecnologia é usado sem ironia: são saberes operacionais, repetíveis, ensináveis, que produzem efeitos verificáveis sobre a atenção, a percepção e a fronteira do eu.
+
+2. **Origem provável** Têm origem provável na descoberta acumulada, ao longo de muitas gerações, de que certos gestos do corpo, o jejum, o ritmo, a privação de sono, o silêncio prolongado, alteram a consciência de modos previsíveis. O que funcionava foi sendo retido, refinado e transmitido, até constituir um corpo de saber tão real, na sua ordem, quanto o saber de fazer fogo ou de cultivar a terra.
+
+3. **Mecanismo** Operam sobre o corpo para chegar à consciência: o ritmo do tambor e do canto arrasta a atenção, o jejum e a privação alteram o estado, o silêncio esvazia o ruído interior, o gesto repetido instala um modo de atenção. Funcionam porque a consciência está ancorada no corpo, e modular o corpo com disciplina é modular a consciência com fiabilidade. A disciplina é o que separa a técnica do acaso: a mesma forma, repetida, produz o mesmo efeito.
+
+4. **Indicadores** Indica-as a existência de práticas corporais transmitidas com precisão, com mestres que sabem o que cada passo produz, e a fiabilidade dos seus efeitos. Indica-as a transmissibilidade, o facto de poderem ser ensinadas e reproduzidas, e a sua eficácia atestada por quem as pratica. Indica-as o respeito de uma cultura por estes saberes como conhecimento, e não como mero costume pitoresco.
+
+5. **Equivalentes históricos** As disciplinas de oração, jejum e silêncio das tradições contemplativas, transmitidas com método ao longo de séculos, são equivalentes históricos claros: técnicas fiáveis de modular a consciência. Os cantos, ritmos e privações de muitas tradições funcionam como tecnologias equivalentes, com a mesma estrutura de disciplina, transmissão e efeito.
+
+6. **Contra-exemplos** Não é Tecnologia do Sagrado o adereço esvaziado, a prática extraída da sua tradição e usada como decoração sem disciplina nem função. Não é Tecnologia do Sagrado a técnica material sem ligação à consciência, nem a sensação obtida ao acaso sem forma transmissível. E não é Tecnologia do Sagrado a sua versão de consumo, esvaziada do trabalho que a tornava eficaz.
+
+7. **Manifestações culturais** Manifestam-se nas tradições de canto, dança e narrativa que uma cultura ensina com método, e nos lugares consagrados construídos para alterar a consciência de quem neles entra. Manifestam-se na figura do mestre que transmite a técnica e responde por ela.
+
+8. **Manifestações religiosas** Manifestam-se nas disciplinas de oração, jejum, silêncio e peregrinação, núcleo técnico das tradições religiosas. A religião, lida por esta lente, é também um repositório de tecnologias da consciência refinadas ao longo de séculos.
+
+9. **Manifestações económicas** Manifestam-se no custo da sua perda: onde se esqueceram, a modernidade compra, em mercados de bem-estar, versões fragmentadas e esvaziadas do que eram saberes gratuitos e comuns. O que era património transmitido torna-se serviço transaccionável.
+
+10. **Manifestações familiares** Manifestam-se nos gestos do sagrado doméstico, as bênçãos, os silêncios, os cantos de embalar, técnicas mínimas de modular a consciência transmitidas de uma geração à seguinte. A sua perda manifesta-se em casas sem qualquer forma partilhada de acalmar ou de atravessar.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, a consciência poderia reaprender estas técnicas com lucidez moderna, estudá-las sem as desfazer e praticá-las sem as esvaziar, recuperando saberes operacionais sobre si mesma que tinha posto de lado. A hipótese é a de uma cultura que trata o sagrado como conhecimento técnico real, sem o reduzir nem o exotizar.
+
+12. **Ancoragem** Ancora-se na leitura das práticas contemplativas e rituais como técnicas fiáveis da consciência, e articula-se com Os Estados Rituais e com o Tempo Cultural. O tratamento destes meios como tecnologias, na chave da Grande Transição, é construção original.
+
+13. **Bloco visual**
+- Símbolos: instrumentos de luz, um tambor, um fio de silêncio, uma soleira, dispostos como ferramentas de um ofício; mãos que repetem um mesmo gesto preciso.
+- Escala: a figura minúscula numa oficina colossal de luz, cercada de instrumentos cuja escala excede o humano.
+- Arquitectura: a sala murada onde estes saberes se perderam e o ar é mudo; a cidade-templo onde as próprias paredes são instrumentos e a luz se trabalha como matéria.
+- Fenómeno físico impossível: um gesto repetido faz a luz adensar-se e tomar forma, como se a disciplina esculpisse o ar.
+- Emoção dominante: a admiração perante um ofício antigo, e o mistério de uma técnica que age sobre o invisível.
+- Relação com o mundo pós-sobrevivência: por uma fenda, a oficina de luz onde o sagrado é trabalhado com método, entrevista de uma sala que esquecera o ofício.
+
+14. **Perguntas para conteúdos** Que técnica antiga de te acalmares ou de te abrires perdeste, e tens agora de comprar de volta aos bocados? Repara se o que tomas por dom raro ou por sorte não era, antes, um saber que se ensinava de avó para neto.
+
+### O Eu Poroso e o Eu Fechado
+Relações: [As Cosmovisões da Consciência, A Consciência Ancestral, A Consciência Colectiva]
+
+1. **Definição** O Eu Poroso e o Eu Fechado são dois desenhos da fronteira do sujeito. O eu poroso é permeável ao mundo, às presenças e às forças: o que está fora pode entrar, agir sobre ele, habitá-lo, e a fronteira entre o interior e o exterior é porosa por natureza. O eu fechado, configuração da modernidade, é vedado e protegido: dono dos seus estados interiores, situado atrás dos olhos, único proprietário dos seus pensamentos, com uma fronteira que coincide com a pele e barra o que vem de fora. São duas arquitecturas do sujeito, não duas crenças sobre o mesmo sujeito.
+
+2. **Origem provável** O eu poroso tem origem provável na condição mais antiga da consciência humana, num mundo povoado de presenças com as quais era preciso negociar. O eu fechado tem origem provável numa longa fase em que vedar-se deu vantagem: separar-se do mundo permitiu medi-lo, controlá-lo e dominá-lo, e essa vedação converteu-se, ao longo de séculos, na evidência interior de um eu soberano e separado.
+
+3. **Mecanismo** A fronteira do eu é desenhada cedo, na língua, na criação das crianças, no modo como se fala dos mortos, dos sonhos e do que habita a casa. Funciona porque é instalada antes de qualquer escolha e sentida depois como dado, e não como desenho. O eu fechado mantém-se vedando: trata o que vem de fora como projecção interior; o eu poroso mantém-se abrindo: trata o que vem de fora como presença real com que se lida. Cada configuração se reforça pela maneira como interpreta a mesma experiência.
+
+4. **Indicadores** Indica o eu poroso a língua que atribui agência a lugares, coisas e mortos sem soar a figura de estilo, e a sensação de não estar só quando se está só. Indica o eu fechado a descrição do interior como propriedade privada e única, a fronteira coincidente com a pele, e a leitura como doença de quase tudo o que abre essa fronteira. Indica-os, sobretudo, a reacção de cada um perante o outro: o que num é evidente, no outro é perturbação.
+
+5. **Equivalentes históricos** A passagem do eu poroso ao eu fechado descrita por Charles Taylor é o equivalente histórico exacto, e a fonte da distinção: a viragem de um mundo encantado, em que o sujeito era permeável a forças e espíritos, para um mundo desencantado de sujeitos vedados. As cosmovisões ancestrais e indígenas que mantêm a porosidade são o seu contraponto vivo.
+
+6. **Contra-exemplos** Não é eu poroso a mera empatia ou sensibilidade dentro de um eu que permanece fechado: sentir muito não é ter a fronteira aberta. Não é eu fechado a simples reserva ou timidez, que ocorrem dentro de qualquer configuração. E não é distinção entre estes dois desenhos a diferença entre extroversão e introversão, que é traço de carácter e não arquitectura da fronteira.
+
+7. **Manifestações culturais** Manifestam-se na maneira como uma cultura representa a pessoa, vedada e autónoma ou atravessada por forças, e no estatuto que dá ao sonho e à visão. Manifestam-se no tratamento dos que vivem a fronteira de outro modo, lidos como doentes, como videntes, ou como ambos.
+
+8. **Manifestações religiosas** Manifestam-se na relação com o divino: o eu poroso reza a quem está presente e pode entrar nele; o eu fechado dirige-se, por vezes, a uma transcendência que não atravessa a sua pele. A própria possibilidade de possessão, inspiração ou habitação pressupõe a porosidade.
+
+9. **Manifestações económicas** Manifestam-se no facto de o eu fechado ser o solo do indivíduo proprietário, separado, responsável só por si, sobre o qual assenta a economia moderna. Uma cosmovisão de eu poroso, ligado por dívidas e dádivas a pessoas, terra e mortos, resiste à redução de tudo a transacção entre indivíduos isolados.
+
+10. **Manifestações familiares** Manifestam-se em quem habita a casa: para o eu poroso, também os mortos e os por nascer; para o eu fechado, só os vivos presentes. Manifestam-se no peso da existência, carregado em conjunto pelo eu amparado por uma linhagem, ou sozinho pelo eu soberano.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, a hipótese central da obra é a de uma reconfiguração da fronteira do eu: não regredir ao eu poroso anterior, nem manter o eu fechado, mas integrar a lucidez moderna com a porosidade que ela tinha posto de lado. Um eu que escolhe quando abrir e quando vedar, amparado de novo sem perder a autoria de si.
+
+12. **Ancoragem** Ancora-se directamente na distinção de Charles Taylor entre eu poroso e eu fechado, e em Gebser, na recusa de a tratar como degrau de um progresso. A sua articulação como núcleo da Grande Transição, como fronteira que a história desenhou e pode redesenhar, é construção original.
+
+13. **Bloco visual**
+- Símbolos: uma figura vedada, de contorno nítido e fechado, e outra figura atravessada por luz, de contorno que deixa o mundo entrar; uma parede que se torna membrana.
+- Escala: as duas figuras minúsculas diante de estruturas colossais, uma protegida por muros, a outra aberta a uma cidade de luz que a percorre.
+- Arquitectura: a sala sem janelas onde o eu fechado é dono e prisioneiro de si; a cidade-templo onde as presenças são arquitectura e não fantasmas, e atravessam o eu poroso como luz.
+- Fenómeno físico impossível: a luz atravessa o corpo da figura porosa sem o desfazer, enquanto bate e pára na superfície da figura fechada.
+- Emoção dominante: para o fechado, a solidão segura de uma cela; para o poroso, a admiração e o leve risco de ser atravessado.
+- Relação com o mundo pós-sobrevivência: o limiar entre a sala murada e a cidade que atravessa quem nela entra, com a figura parada na soleira, ainda fechada, a luz a entrar pela fenda.
+
+14. **Perguntas para conteúdos** Onde é que termina o teu corpo, na pele ou um pouco para lá dela, onde ainda chega o que te toca? Repara se a soberania de seres só teu te trouxe liberdade, ou se a fronteira que te protege também é a parede de uma cela.
+
+### As Cartografias Indígenas
+Relações: [As Cosmovisões da Consciência, A Consciência Ancestral, O Eu Poroso e o Eu Fechado]
+
+1. **Definição** As Cartografias Indígenas são os mapas próprios, terra a terra, com que tradições concretas situam a pessoa entre seres, lugares e gerações, sem os reduzir a uma única sabedoria genérica. Cada uma é o desenho particular, de um povo particular, do lugar do humano entre os outros seres, os lugares, os mortos e os por nascer. O plural é essencial e é uma exigência de rigor: não há uma sabedoria indígena, há cartografias distintas, cada uma ancorada na sua terra, e fundi-las numa só é já desfazê-las.
+
+2. **Origem provável** Têm origem provável na inscrição longa e atenta de cada povo na sua terra concreta: a observação acumulada, ao longo de gerações, das relações entre pessoas, animais, lugares e mortos de um território específico produziu mapas precisos do real, válidos para aquele chão. São saberes situados, nascidos da relação demorada com um lugar, e não doutrinas universais transportáveis para qualquer parte.
+
+3. **Mecanismo** Operam por situar: cada ser, lugar e geração recebe um lugar no mapa, e a pessoa sabe-se entre eles, com deveres e relações precisas. Funcionam pela transmissão minuciosa, na língua, na história e na prática, deste mapa terra a terra. O mecanismo recusa a abstracção: o saber é deste rio, deste monte, destes antepassados, e perde-se quando se arranca do chão onde nasceu para ser servido como sabedoria geral.
+
+4. **Indicadores** Indica-as a precisão local do saber, ligado a lugares e seres concretos, e a resistência desse saber a ser traduzido para uma linguagem universal sem se deformar. Indica-as a recusa, por parte de quem o detém, de o reduzir a uma fórmula transportável. Indica a sua deturpação a tendência externa para as fundir todas numa só sabedoria indígena genérica, sinal de que se está a olhar de fora e de cima.
+
+5. **Equivalentes históricos** Os saberes ecológicos e cosmológicos de povos concretos, documentados na sua especificidade e ligados a territórios precisos, são o equivalente histórico: mapas do real válidos para um chão, e não doutrinas universais. O respeito crescente, ainda que tardio, por estes saberes como conhecimento vivo, e não como peça de museu, é um sinal histórico recente.
+
+6. **Contra-exemplos** Não é Cartografia Indígena a sabedoria indígena genérica, a massa indistinta que apaga as diferenças entre tradições e é já uma deformação. Não é Cartografia Indígena o adereço extraído e descontextualizado para consumo, nem a projecção romântica de quem procura, em povos concretos, um espelho para o seu próprio cansaço. E não é Cartografia Indígena qualquer mapa abstracto que se diga válido em toda a parte.
+
+7. **Manifestações culturais** Manifestam-se nas línguas, nas narrativas e nas práticas que ligam um povo à sua terra, e no saber preciso sobre os seres e os lugares desse território. Manifestam-se na arte e na toponímia que inscrevem o mapa do real na própria paisagem.
+
+8. **Manifestações religiosas** Manifestam-se na relação sagrada com lugares concretos, com seres concretos e com os mortos de um território, e não numa religião abstracta destacável do chão. O sagrado, aqui, está nos lugares e nas relações, e perde-se quando se arranca deles.
+
+9. **Manifestações económicas** Manifestam-se numa relação com a terra que não a reduz a recurso, porque a terra é parte do mapa de seres a que se pertence e perante quem se tem deveres. A sua destruição acompanha, historicamente, a conversão da terra em mercadoria e a perda do chão que sustinha o saber.
+
+10. **Manifestações familiares** Manifestam-se na inclusão das gerações, mortos e por nascer, no mapa da pessoa, e na pertença a uma linhagem ligada a um lugar. A família alarga-se aqui à terra e aos antepassados, e não se separa do território a que pertence.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, estas cartografias seriam respeitadas como saberes vivos sobre a consciência e o real, sem serem apropriadas nem fundidas, e a sua existência lembraria que o eu fechado é uma configuração entre muitas. A hipótese não é adoptá-las, é aprender com elas que outra fronteira do eu é possível, e fazer a Emergência com elas e não sobre elas.
+
+12. **Ancoragem** Ancora-se na exigência metodológica de distinguir tradições concretas de qualquer generalização, e articula-se com a Consciência Ancestral e com a recusa da escada herdada de Gebser. O seu desenvolvimento como pluralidade irredutível de mapas situados é construção original.
+
+13. **Bloco visual**
+- Símbolos: muitos mapas de luz distintos, cada um com a sua forma e a sua cor, recusando fundir-se num só; rios, montes e soleiras de luz inscritos no chão.
+- Escala: figuras minúsculas, cada uma no seu território de luz, parte de um mapa que excede em muito a sua medida e a situa entre seres maiores.
+- Arquitectura: a sala murada onde não há terra nem lugar, só interior vedado; cidades-templo que crescem da própria terra, com jardins suspensos e rios no céu, indissociáveis do chão que as gera.
+- Fenómeno físico impossível: o mapa de relações torna-se visível como linhas de luz que ligam a figura aos lugares, aos seres e aos mortos do seu território.
+- Emoção dominante: a admiração perante a precisão de um saber ligado à terra, e o respeito que recusa o exotismo.
+- Relação com o mundo pós-sobrevivência: por uma fenda, um território de luz onde a pessoa se sabe entre seres, entrevisto de uma sala sem chão nem lugar.
+
+14. **Perguntas para conteúdos** Entre que seres, lugares e gerações te situas tu, ou aprendeste a viver sem mapa, sozinho no meio? Repara se, ao ouvir falar de outros povos, os juntas todos numa só sabedoria, e pergunta de onde vem esse hábito de olhar de cima.
+
+### A Consciência Ancestral
+Relações: [O Eu Poroso e o Eu Fechado, O Tempo Cultural, A Consciência Colectiva]
+
+1. **Definição** A Consciência Ancestral é a configuração, central em muitas cosmovisões africanas, em que os antepassados são parte de quem percebe, e em que o tempo, a comunidade e o sagrado se entrelaçam, de modo que perceber é sempre perceber com os que vieram antes. Não designa um culto dos mortos sobreposto a um eu que permanece moderno, mas uma fronteira do eu que inclui os antepassados no próprio acto de percepção: quem percebe não é um indivíduo isolado, é uma pessoa que traz consigo, activos no presente, os que a precederam. É um pilar próprio da obra, tratado com vocabulário de terra e distinguindo tradições concretas de qualquer generalização.
+
+2. **Origem provável** Tem origem provável na continuidade vivida entre as gerações em cosmovisões onde a morte não fecha o passado: os antepassados, alimentados, saudados e consultados, permanecem activos na vida da comunidade, e a pessoa constitui-se desde cedo como elo de uma linha que não termina. Esta configuração é, nesta hipótese, anterior e mais antiga do que o eu fechado da modernidade, que isolou o sujeito da sua linhagem.
+
+3. **Mecanismo** Opera por incluir os antepassados no acto de perceber, e por entrelaçar tempo, comunidade e sagrado num só tecido. Funciona porque a criança é criada a saber-se elo de uma linha, e porque os mortos têm lugar e voz no presente, em decisões correntes. O tempo é aqui o presente espesso onde os antepassados ainda agem; a comunidade alarga-se para lá dos vivos; o sagrado não está à parte da vida mas atravessa-a. Perceber, neste mecanismo, é nunca perceber sozinho.
+
+4. **Indicadores** Indica-a a presença activa dos antepassados na vida corrente, consultados, alimentados, saudados, e a sua entrada em decisões do presente. Indica-a um tempo vivido como presente espesso, em que o passado nunca termina de passar, e uma comunidade que inclui os mortos. Indica-a a constituição da pessoa como elo de uma linha, e não como indivíduo destacado dela.
+
+5. **Equivalentes históricos** A continuidade entre vivos e mortos atestada em muitas cosmovisões, com os antepassados mantidos presentes e activos na vida da comunidade, é o equivalente histórico desta configuração. A descrição da porosidade do eu por Charles Taylor e da pluralidade das estruturas da consciência por Gebser dão-lhe a ancoragem teórica, sem a nomear nem a reduzir.
+
+6. **Contra-exemplos** Não é Consciência Ancestral a simples memória dos mortos dentro de um eu fechado, que os recorda mas os deixa num passado de onde não regressam. Não é Consciência Ancestral a árvore genealógica como registo, nem o culto privado da saudade. E não é Consciência Ancestral qualquer versão exotizada ou esotérica que a arranque das tradições concretas e a sirva como sabedoria genérica, deformação que esta obra recusa expressamente.
+
+7. **Manifestações culturais** Manifestam-se nas formas de saudar, alimentar e consultar os antepassados, nas narrativas que mantêm viva a linha, e na constituição da pessoa como elo de uma geração. Manifestam-se no estatuto de presença, e não de mera lembrança, que os mortos guardam na vida quotidiana.
+
+8. **Manifestações religiosas** Manifestam-se no entrelaçamento do sagrado com a vida, sem o separar num domínio à parte, e na relação activa com os antepassados como parte da relação com o sagrado. O divino, a comunidade e os mortos vivem aqui num só tecido, e não em compartimentos.
+
+9. **Manifestações económicas** Manifestam-se numa relação com os bens e com a terra atravessada por deveres para com a linha, os que vieram antes e os que virão, que resiste à redução de tudo a transacção entre indivíduos isolados. A herança é aqui transmissão viva de uma linha, e não simples passagem de propriedade.
+
+10. **Manifestações familiares** Manifestam-se na família alargada à linhagem inteira, mortos e por nascer incluídos, e no peso da existência distribuído por essa linha e não carregado sozinho. A pessoa sabe-se sustentada por quem a precedeu, e responsável perante quem a seguirá.
+
+11. **Hipótese pós-sobrevivência** Numa fase pós-sobrevivência, esta configuração é, nesta obra, a prova de que outra fronteira do eu é possível, e o lembrete de que a Emergência se faz com ela e não sobre ela. A hipótese não é que a modernidade a adopte, é que reconheça nela uma forma real de consciência incluída e amparada, e que a sua reconfiguração se faça com respeito e sem apropriação. As cosmovisões ancestrais não são o destino da transição, são a prova de que ela é possível.
+
+12. **Ancoragem** Ancora-se em Taylor, na porosidade do eu, e em Gebser, na pluralidade das estruturas da consciência, retidas como gramática e não como nome. O pilar africano da Consciência Ancestral, tal como aqui se desenvolve, tratando os antepassados como parte de quem percebe e distinguindo tradições concretas de qualquer generalização, é construção original.
+
+13. **Bloco visual**
+- Símbolos: colunas de luz que se erguem para lá do olhar, cada uma uma geração, sustentando a figura presente; estruturas de luz que são presença e amparo, nunca figuras de família nem avós desfocadas.
+- Escala: a figura humana minúscula diante de uma arquitectura colossal feita das gerações que a precederam, sustentada por elas e não esmagada.
+- Arquitectura: a sala murada onde os mortos ficaram num passado fechado, e o presente é raso; a cidade-templo onde as presenças são arquitectura de luz, e o passado se ergue como estrutura que ampara o agora.
+- Fenómeno físico impossível: o tempo torna-se visível como camadas de luz sob os pés da figura, e dela sobe, atravessando-a, a luz das gerações que a sustentam, sem nunca tomar forma de pessoas.
+- Emoção dominante: a segurança de ser sustentado, o mistério de não estar só no acto de perceber, o fim e o nascimento juntos.
+- Relação com o mundo pós-sobrevivência: por uma fenda, a cidade de luz erguida sobre as camadas do tempo, entrevista de uma sala onde os mortos não regressavam e o presente era raso e solitário.
+
+14. **Perguntas para conteúdos** Quando percebes o mundo, percebe-lo sozinho, ou trazes contigo, sem saber, os que vieram antes de ti? Repara se aprendeste a deixar os teus mortos num passado fechado, e pergunta o que mudaria em ti se eles fossem ainda parte de quem vê.
