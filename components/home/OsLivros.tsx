@@ -9,10 +9,11 @@ import { CapaImg } from '@/components/home/CapaImg';
 const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
 const capaPilar = (isEn: boolean) =>
   `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa-composta${isEn ? '-en' : ''}.png`;
-// capa de Os 7 Sinais: a guardada no Supabase pelo gerador do admin, com recuo
-// para a capa local commitada (assim "usar no site" reflete-se e nada quebra).
+// capa de Os 7 Sinais: a imagem composta gerada no admin (mesma via do pilar),
+// com recuo para a capa local commitada (assim, quando geras, a home reflete e
+// nada quebra antes disso).
 const capaSinais = (isEn: boolean) =>
-  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-sinais/capa${isEn ? '-en' : ''}.png`;
+  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-sinais/capa-composta${isEn ? '-en' : ''}.png`;
 const capaSinaisLocal = (isEn: boolean) => `/produtos/os-7-sinais-capa${isEn ? '-en' : ''}.png`;
 
 type Livro = {

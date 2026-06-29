@@ -7,6 +7,8 @@ export type LivroCapa = {
   marca: string;       // Os Sete Véus | ver.soltar
   sub: string;         // movimento / promessa curta
   simbolo: string;     // o símbolo (prompt) próprio do livro
+  base?: string;       // base do prompt própria (default = CAPA_BASE da família)
+  paleta?: string;     // paleta própria (default = PALETA da família)
   // textos da composição (tipografia por cima da imagem)
   comp: { selo: string; t1: string; t2: string; sub: string; autora: string };
   compEn: { selo: string; t1: string; t2: string; sub: string; autora: string };
@@ -21,7 +23,11 @@ export const CAPA_SAFETY =
 export const LIVROS_CAPA: LivroCapa[] = [
   {
     slug: 'os-7-sinais', marca: 'Os 7 Sinais de Desencaixe', sub: 'o livro · pertença e autenticidade',
-    simbolo: 'seven small luminous points arranged in a single horizontal row, six aligned and glowing, one lifted out of the line and dimmer, minimal and symbolic, generous empty space, a quiet constellation of belonging and one apart',
+    // base PRÓPRIA e luminosa (não a noite escura da família) — a Vivianne quer
+    // imagem digna e clara para este livro.
+    base: 'fine-art book cover painting, soft warm ivory and pale dawn background, gentle radiant gold light, delicate luminous painterly texture, elegant and dignified, contemplative and timeless, a single central symbol, generous calm space in the upper third for a title',
+    paleta: 'warm ivory, pale rose-gold, soft dawn light, gentle amber palette',
+    simbolo: 'seven slender upright candle flames in a gentle row on a calm surface, six glowing warm and golden and aligned, one set slightly apart and softly dimmer, fine-art, elegant, luminous and minimal, generous empty space, a quiet image of belonging and one apart',
     comp: { selo: 'IRMÃO DE OS SETE VÉUS', t1: 'Os 7 Sinais', t2: 'de Desencaixe', sub: 'O equilíbrio entre pertença\ne autenticidade', autora: 'VIVIANNE DOS SANTOS' },
     compEn: { selo: 'A COMPANION TO THE SEVEN VEILS', t1: 'The 7 Signs', t2: 'of Not Belonging', sub: 'On belonging without\nmaking yourself smaller', autora: 'VIVIANNE DOS SANTOS' },
   },
