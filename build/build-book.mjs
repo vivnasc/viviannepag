@@ -1,9 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+const require = createRequire(import.meta.url);
+const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -14,88 +14,101 @@ const TITLE = 'Os 7 Sinais de Desencaixe';
 const SUBTITLE = 'O equilíbrio entre pertença e autenticidade';
 const AUTHOR = 'Vivianne dos Santos';
 
-// ---------- tiny markdown ----------
-function esc(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-function inline(s) {
-  s = esc(s);
-  // *italic*
-  s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  return s;
-}
-// Parse a chapter markdown file into { label, title, epigraph, paragraphs[] }
-function parseChapter(file) {
-  const raw = readFileSync(C(file), 'utf8').replace(/\r/g, '');
-  const lines = raw.split('\n');
-  let label = '', title = '', epigraph = '';
-  const paras = [];
-  let buf = [];
-  const flush = () => { if (buf.length) { paras.push(buf.join(' ').trim()); buf = []; } };
-  for (const line of lines) {
-    const t = line.trim();
-    if (!t) { flush(); continue; }
-    if (t.startsWith('# ')) {
-      const h = t.slice(2).trim();
-      const idx = h.indexOf(',');
-      if (idx > 0 && /^(Sinal|Introdução|Epílogo)/i.test(h)) {
-        label = h.slice(0, idx).trim();
-        title = h.slice(idx + 1).trim();
-      } else {
-        label = ''; title = h;
-      }
+// paleta
+const INK = '#2A2536', SOFT = '#5A5468', GOLD = '#B98D3E', VIOLETA = '#3A3357', SALVIA = '#8A8FA3';
+// cor por capítulo (muda o título/ornamento; o drop-cap é sempre ouro)
+const COLOR = {
+  '00-introducao.md': VIOLETA,
+  '01-sinal.md': '#7C4A4A', '02-sinal.md': '#9A6A3A', '03-sinal.md': '#8A7A2E',
+  '04-sinal.md': '#4F6E55', '05-sinal.md': '#3C6E72', '06-sinal.md': '#3A4A7A',
+  '07-sinal.md': '#5A3A6A', '08-epilogo.md': '#3C6E72',
+};
+
+const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const inl = (s) => esc(s).replace(/\*([^*]+)\*/g,'<em>$1</em>');
+
+function parseChapter(file){
+  const raw = readFileSync(C(file),'utf8').replace(/\r/g,'');
+  let label='', title='', epigraph=''; const paras=[]; let buf=[];
+  const flush=()=>{ if(buf.length){ paras.push(buf.join(' ').trim()); buf=[]; } };
+  for(const line of raw.split('\n')){
+    const t=line.trim();
+    if(!t){ flush(); continue; }
+    if(t.startsWith('# ')){
+      const h=t.slice(2).trim(), i=h.indexOf(',');
+      if(i>0 && /^(Sinal|Introdução|Epílogo)/i.test(h)){ label=h.slice(0,i).trim(); title=h.slice(i+1).trim(); }
+      else { label=''; title=h; }
       continue;
     }
-    if (/^\*[^*].*\*$/.test(t) && epigraph === '' && paras.length === 0) {
-      epigraph = t.slice(1, -1).trim();
-      continue;
-    }
+    if(/^\*[^*].*\*$/.test(t) && !epigraph && !paras.length){ epigraph=t.slice(1,-1).trim(); continue; }
     buf.push(t);
   }
   flush();
   return { label, title, epigraph, paras };
 }
+// parte parágrafos muito longos (>190 palavras) na frase mais perto do meio
+function splitLong(paras){
+  const out=[];
+  for(const p of paras){
+    const words=p.split(/\s+/).length;
+    if(words<=190){ out.push(p); continue; }
+    const sents=p.split(/(?<=[.!?])\s+/);
+    if(sents.length<4){ out.push(p); continue; }
+    let best=1, bestd=1e9, run=0; const half=words/2;
+    for(let i=0;i<sents.length-1;i++){ run+=sents[i].split(/\s+/).length; const d=Math.abs(run-half); if(d<bestd){bestd=d;best=i+1;} }
+    out.push(sents.slice(0,best).join(' ').trim());
+    out.push(sents.slice(best).join(' ').trim());
+  }
+  return out;
+}
 
-function chapterHTML(file, { roman = false } = {}) {
-  const { label, title, epigraph, paras } = parseChapter(file);
-  let h = '<section class="chapter">';
-  h += '<header class="chap-head">';
-  if (label) h += `<p class="chap-label">${esc(label)}</p>`;
-  h += `<h1 class="chap-title">${inline(title)}</h1>`;
-  if (epigraph) h += `<p class="epigraph"><em>${inline(epigraph)}</em></p>`;
-  h += '</header>';
-  paras.forEach((p, i) => {
-    const cls = i === 0 ? 'first' : '';
-    h += `<p class="${cls}">${inline(p)}</p>`;
-  });
-  h += '</section>';
+const FLOURISH = (c)=>`<svg class="fl" viewBox="0 0 60 360" width="34" height="200" aria-hidden="true">
+  <path d="M44 6 C20 70 20 150 38 210 C50 250 50 300 26 354" fill="none" stroke="${c}" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
+</svg>`;
+const VEU = (c)=>`<svg class="veu" viewBox="0 0 512 512" width="60" height="60" aria-hidden="true">
+  <path d="M118 384 C118 224 178 124 256 124 C334 124 394 224 394 384" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round"/>
+  <path d="M166 392 C166 270 204 200 256 200 C308 200 346 270 346 392" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="256" cy="98" r="8" fill="${c}"/></svg>`;
+
+function chapter(file){
+  const { label, title, epigraph } = parseChapter(file);
+  let paras = splitLong(parseChapter(file).paras);
+  const c = COLOR[file] || VIOLETA;
+  let h = `<section class="opener" style="--c:${c}">`;
+  h += `<div class="fl-wrap">${FLOURISH(c)}</div>`;
+  if(label) h += `<p class="op-label">${esc(label)}</p>`;
+  h += `<h1 class="op-title">${inl(title)}</h1>`;
+  if(epigraph) h += `<p class="op-epi"><em>${inl(epigraph)}</em></p>`;
+  h += `<div class="op-orn">${VEU(c)}</div>`;
+  h += `</section>`;
+  h += `<section class="body" style="--c:${c}">`;
+  paras.forEach((p,i)=> h += `<p${i===0?' class="first"':''}>${inl(p)}</p>`);
+  h += `</section>`;
   return h;
 }
 
-// Dedication: plain paragraphs, no header, centered page
-function dedicationHTML(file) {
-  const raw = readFileSync(C(file), 'utf8').replace(/\r/g, '');
-  const paras = raw.split('\n').map(s => s.trim()).filter(Boolean);
-  let h = '<section class="dedication">';
-  for (const p of paras) h += `<p>${inline(p)}</p>`;
-  h += '</section>';
-  return h;
-}
-
-// ---------- assemble ----------
-const titlePage = `
-<section class="title-page">
-  <div class="tp-inner">
-    <p class="tp-numeral">7</p>
-    <h1 class="tp-title">Os Sinais<br>de Desencaixe</h1>
-    <p class="tp-sub">${esc(SUBTITLE)}</p>
-    <p class="tp-author">${esc(AUTHOR)}</p>
-  </div>
+const cover = `
+<section class="front cover">
+  <div class="cv-num">7</div>
+  <h1 class="cv-title">Os Sinais<br>de Desencaixe</h1>
+  <div class="cv-rule"></div>
+  <p class="cv-sub">${esc(SUBTITLE)}</p>
+  <p class="cv-author">${esc(AUTHOR)}</p>
 </section>`;
 
-const indexHTML = `
-<section class="toc">
-  <h2>Índice</h2>
+const dedicationHTML = (()=>{
+  const paras = readFileSync(C('00a-dedicatoria.md'),'utf8').replace(/\r/g,'').split('\n').map(s=>s.trim()).filter(Boolean);
+  return `<section class="front dedication">${paras.map((p,i)=>`<p${i===0?' class="d-head"':''}>${inl(p)}</p>`).join('')}</section>`;
+})();
+
+const nota = (()=>{
+  const { title, paras } = parseChapter('00b-nota-de-abertura.md');
+  return `<section class="front nota"><h2 class="fm-title">${esc(title)}</h2>${paras.map(p=>`<p>${inl(p)}</p>`).join('')}</section>`;
+})();
+
+const toc = `
+<section class="front toc">
+  <h2 class="fm-title">Índice</h2>
   <ul>
     <li><span class="t">Nota de abertura</span></li>
     <li><span class="t">Introdução</span><span class="s">Porque este não é um livro sobre aprender a encaixar</span></li>
@@ -110,89 +123,103 @@ const indexHTML = `
   </ul>
 </section>`;
 
+const colophon = `
+<section class="front colophon">
+  <div class="cl-orn">${VEU(GOLD)}</div>
+  <h3>Para ti, que leste</h3>
+  <p>O que acabou foi um lugar. Nenhum dos amores acabou. Se algum destes sinais te reconheceu, fica com ele, sem pressa, e continua a permanecer.</p>
+  <p class="cl-credit">© 2026 ${esc(AUTHOR)}</p>
+</section>`;
+
 const body =
-  titlePage +
-  dedicationHTML('00a-dedicatoria.md') +
-  chapterHTML('00b-nota-de-abertura.md') +
-  indexHTML +
-  chapterHTML('00-introducao.md') +
-  chapterHTML('01-sinal.md') +
-  chapterHTML('02-sinal.md') +
-  chapterHTML('03-sinal.md') +
-  chapterHTML('04-sinal.md') +
-  chapterHTML('05-sinal.md') +
-  chapterHTML('06-sinal.md') +
-  chapterHTML('07-sinal.md') +
-  chapterHTML('08-epilogo.md');
+  cover + dedicationHTML + nota + toc +
+  ['00-introducao.md','01-sinal.md','02-sinal.md','03-sinal.md','04-sinal.md',
+   '05-sinal.md','06-sinal.md','07-sinal.md','08-epilogo.md'].map(chapter).join('') +
+  colophon;
 
 const css = `
-@font-face{font-family:'EBG';src:url('${FONT('EBGaramond-var.ttf')}') format('truetype');font-weight:400 800;font-style:normal;font-display:block;}
-@font-face{font-family:'EBG';src:url('${FONT('EBGaramond-Italic-var.ttf')}') format('truetype');font-weight:400 800;font-style:italic;font-display:block;}
-*{box-sizing:border-box;}
-html{font-family:'EBG',Georgia,serif;}
-body{margin:0;color:#1a1714;font-size:12.6pt;line-height:1.52;text-rendering:optimizeLegibility;font-kerning:normal;font-feature-settings:"liga" 1,"onum" 1,"kern" 1;}
-.chapter,.title-page,.dedication,.toc{page-break-before:always;break-before:page;}
-p{margin:0;orphans:2;widows:2;}
+@font-face{font-family:'Fraunces';src:url('${FONT('Fraunces-var.ttf')}') format('truetype');font-weight:300 600;font-style:normal;}
+@font-face{font-family:'Fraunces';src:url('${FONT('Fraunces-Italic-var.ttf')}') format('truetype');font-weight:300 600;font-style:italic;}
+@font-face{font-family:'Outfit';src:url('${FONT('Outfit-var.ttf')}') format('truetype');font-weight:300 700;font-style:normal;}
 
-/* ---- body paragraphs ---- */
-.chapter p{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-indent:1.5em;margin:0;}
-.chapter p.first{text-indent:0;}
-.chapter p.first::first-letter{
-  float:left;font-size:3.1em;line-height:0.82;padding:0.02em 0.09em 0 0;font-weight:600;
+@page{ size:148mm 210mm; margin:17mm 16mm 18mm 16mm;
+  @top-center{ content:"${TITLE}"; font-family:'Outfit',sans-serif; font-weight:400; font-size:6.7pt; letter-spacing:.24em; text-transform:uppercase; color:${SALVIA}; }
+  @bottom-center{ content:counter(page); font-family:'Outfit',sans-serif; font-size:8pt; color:${SOFT}; }
 }
+@page front{ @top-center{content:none} @bottom-center{content:none} }
+@page opener{ @top-center{content:none} @bottom-center{content:none} }
 
-/* ---- chapter head ---- */
-.chap-head{margin:2.6em 0 2.1em;text-align:center;}
-.chap-label{font-variant:small-caps;letter-spacing:.32em;font-size:11pt;color:#8a6a3a;margin:0 0 .9em;text-indent:0;font-weight:600;}
-.chap-title{font-weight:600;font-size:21pt;line-height:1.18;margin:0 auto;max-width:90%;letter-spacing:.01em;}
-.epigraph{margin:1.5em auto 0;max-width:78%;text-align:center;font-size:12.5pt;color:#3c352e;text-indent:0;}
-.epigraph em{font-style:italic;}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{font-family:'Fraunces',Georgia,serif;}
+body{font-weight:300; font-size:10.8pt; line-height:1.8; color:${INK}; -webkit-hyphens:auto; hyphens:auto;}
 
-/* nota de abertura uses chapter styling but no drop cap label color tweak handled above */
+.front{ page:front; break-before:page; }
+.cover{ break-before:avoid; }
+.opener{ page:opener; break-before:page; break-after:page; }
+.body{ break-before:avoid; }
+section.body{ break-before:page; }
 
-/* ---- title page ---- */
-.title-page{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;}
-.tp-inner{padding:0 8mm;}
-.tp-numeral{font-size:64pt;line-height:1;color:#b08d57;margin:0 0 .15em;font-weight:500;}
-.tp-title{font-size:33pt;font-weight:600;line-height:1.1;margin:0 0 .6em;letter-spacing:.01em;}
-.tp-sub{font-style:italic;font-size:14.5pt;color:#4a4038;margin:0 0 3.2em;}
-.tp-author{font-variant:small-caps;letter-spacing:.26em;font-size:13pt;color:#26221d;margin:0;}
+/* ---- corpo ---- */
+.body p{ text-align:justify; hyphens:auto; -webkit-hyphens:auto; orphans:2; widows:2; margin:0 0 3.2mm; }
+.body p.first{ }
+.body p.first::first-letter{ font-family:'Fraunces',serif; font-weight:400; font-size:40pt; line-height:0.82; color:${GOLD}; float:left; margin:1mm 2.4mm -1mm 0; }
+.body em{ font-style:italic; }
 
-/* ---- dedication ---- */
-.dedication{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-.dedication p{font-style:italic;font-size:13pt;color:#332d27;max-width:72%;margin:0 0 1.1em;line-height:1.6;text-indent:0;}
-.dedication p:first-child{font-style:normal;font-variant:small-caps;letter-spacing:.18em;font-size:13.5pt;color:#8a6a3a;margin-bottom:2em;}
+/* ---- página de abertura ---- */
+.opener{ position:relative; height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.opener .fl-wrap{ position:absolute; left:-4mm; top:50%; transform:translateY(-50%); }
+.op-label{ font-family:'Outfit',sans-serif; font-weight:500; font-size:8.5pt; letter-spacing:.34em; text-transform:uppercase; color:var(--c); margin-bottom:8mm; }
+.op-title{ font-family:'Fraunces',serif; font-weight:400; font-size:24pt; line-height:1.18; color:var(--c); max-width:84%; letter-spacing:-.01em; }
+.op-epi{ font-style:italic; font-size:12pt; color:${GOLD}; margin-top:9mm; max-width:74%; }
+.op-orn{ margin-top:11mm; opacity:.92; }
 
-/* ---- toc ---- */
-.toc h2{text-align:center;font-variant:small-caps;letter-spacing:.26em;font-weight:600;font-size:16pt;color:#26221d;margin:.4em 0 1.4em;}
-.toc ul{list-style:none;margin:0 auto;padding:0;max-width:88%;}
-.toc li{margin:0 0 .62em;text-align:center;line-height:1.18;}
-.toc .n,.toc .t{display:block;font-variant:small-caps;letter-spacing:.2em;font-size:10.5pt;color:#8a6a3a;}
-.toc .s{display:block;font-style:italic;font-size:11.5pt;color:#2b2620;margin-top:.08em;}
+/* ---- rosto ---- */
+.cover{ height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.cv-num{ font-family:'Fraunces',serif; font-weight:300; font-size:52pt; color:${GOLD}; line-height:1; margin-bottom:3mm; }
+.cv-title{ font-family:'Fraunces',serif; font-weight:300; font-size:33pt; line-height:1.1; color:${VIOLETA}; letter-spacing:-.015em; }
+.cv-rule{ width:22mm; height:1px; background:${GOLD}; opacity:.7; margin:7mm 0; }
+.cv-sub{ font-style:italic; font-size:12pt; color:${SOFT}; max-width:80%; margin-bottom:14mm; }
+.cv-author{ font-family:'Outfit',sans-serif; font-weight:400; font-size:9.5pt; letter-spacing:.26em; text-transform:uppercase; color:${INK}; }
+
+/* ---- dedicatória ---- */
+.dedication{ height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.dedication p{ font-style:italic; font-size:12pt; color:${INK}; max-width:74%; margin-bottom:6mm; line-height:1.7; }
+.dedication .d-head{ font-style:normal; font-family:'Outfit',sans-serif; font-weight:500; letter-spacing:.2em; text-transform:uppercase; font-size:10pt; color:${GOLD}; margin-bottom:11mm; }
+
+/* ---- nota / front titles ---- */
+.fm-title{ font-family:'Fraunces',serif; font-weight:300; font-size:21pt; color:${VIOLETA}; text-align:center; margin:6mm 0 9mm; }
+.nota p{ text-align:justify; margin:0 0 3.2mm; }
+.nota p::first-letter{ }
+
+/* ---- índice ---- */
+.toc ul{ list-style:none; max-width:90%; margin:0 auto; }
+.toc li{ text-align:center; margin:0 0 4.4mm; line-height:1.2; }
+.toc .n,.toc .t{ display:block; font-family:'Outfit',sans-serif; font-weight:500; font-size:8.5pt; letter-spacing:.2em; text-transform:uppercase; color:${GOLD}; }
+.toc .s{ display:block; font-style:italic; font-size:11pt; color:${INK}; margin-top:.5mm; }
+
+/* ---- colofão ---- */
+.colophon{ height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.colophon .cl-orn{ margin-bottom:9mm; }
+.colophon h3{ font-style:italic; font-weight:300; font-size:16pt; color:${VIOLETA}; margin-bottom:7mm; }
+.colophon p{ font-size:10.5pt; color:${SOFT}; max-width:78%; margin-bottom:4mm; line-height:1.7; }
+.colophon .cl-credit{ font-family:'Outfit',sans-serif; font-size:7.5pt; letter-spacing:.26em; text-transform:uppercase; color:${SALVIA}; margin-top:10mm; }
 `;
 
-const html = `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><title>${esc(TITLE)}</title><style>${css}</style></head><body>${body}</body></html>`;
+const html = `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8">
+<title>${esc(TITLE)}</title>
+<script>window.PagedConfig={auto:false};</script>
+<script src="${'file://'+path.join(__dirname,'paged.polyfill.js')}"></script>
+<style>${css}</style></head><body>${body}</body></html>`;
 
-const htmlPath = path.join(__dirname, 'book.html');
+const htmlPath = path.join(__dirname,'book.html');
 writeFileSync(htmlPath, html);
-
-const footer = `<div style="width:100%;font-family:'EBG',serif;font-size:9pt;color:#7a7068;text-align:center;"><span class="pageNumber"></span></div>`;
-const emptyHeader = `<div></div>`;
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
-await page.goto('file://' + htmlPath, { waitUntil: 'networkidle' });
-await page.emulateMedia({ media: 'print' });
-const outPath = path.join(ROOT, 'Os-7-Sinais-de-Desencaixe.pdf');
-await page.pdf({
-  path: outPath,
-  width: '152mm',
-  height: '229mm',
-  printBackground: true,
-  displayHeaderFooter: true,
-  headerTemplate: emptyHeader,
-  footerTemplate: footer,
-  margin: { top: '20mm', bottom: '20mm', left: '19mm', right: '19mm' },
-});
+await page.goto('file://'+htmlPath, { waitUntil:'load', timeout:120000 });
+const total = await page.evaluate(async ()=>{ await document.fonts.ready; const r=await window.PagedPolyfill.preview(); return r.total; });
+console.log('Paged.js paginou:', total, 'páginas');
+const outPath = path.join(ROOT,'Os-7-Sinais-de-Desencaixe.pdf');
+await page.pdf({ path:outPath, preferCSSPageSize:true, printBackground:true, margin:{top:'0',right:'0',bottom:'0',left:'0'} });
 await browser.close();
-console.log('PDF written to', outPath);
+console.log('PDF:', outPath);

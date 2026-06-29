@@ -2,7 +2,7 @@
 
 Escrevi este livro a partir de dentro, não de cima.
 
-Não te escrevo do alto de quem resolveu a vida e desce para te ensinar. Escrevo-te do meio do caminho, do mesmo chão onde tu estás agora, porque o que aqui vais ler reconheci-o primeiro em mim. As sensações que este livro nomeia não as fui buscar a manuais. Conheci-as à mesa, em salas cheias de gente que amo, em silêncios que não sabia explicar. E foi de as ter atravessado, não de as ter estudado, que veio a coragem de lhes dar palavras.
+Não te escrevo do alto de quem resolveu a vida e desce para te ensinar. Escrevo-te do meio do caminho, do mesmo chão onde tu estás agora, porque o que aqui vais ler reconheci-o primeiro em mim. As sensações que este livro nomeia não as fui buscar a manuais. Conheci-as à mesa, em salas cheias de gente que amo, em silêncios que não sabia explicar. Foi de as ter atravessado, não de as ter estudado, que veio a coragem de lhes dar palavras.
 
 Este livro vive ao lado de outro, Os 7 Véus do Despertar. São irmãos, e cruzam-se no vocabulário, mas têm cada um a sua casa. Aquele fala dos véus que pomos entre nós e a vida. Este fala de uma coisa mais quieta e mais difícil de confessar: o momento em que deixamos de caber num lugar que foi bom, sem que nada nesse lugar tenha mudado, e sem que ninguém tenha feito nada de errado.
 
@@ -16,4 +16,4 @@ A terceira é que podes entrar por onde quiseres. Os sete sinais não são degra
 
 Não te prometo um lugar de chegada. Prometo-te companhia honesta no caminho, e a única coisa que descobri que vale mesmo a pena: que se pode pertencer sem deixar de se ser inteiro. Que há uma forma de permanecer.
 
-Vejo-te. E há mais para ti do que aquilo a que te ensinaram a encolher.
+Vejo-te. Há mais para ti do que aquilo a que te ensinaram a encolher.
