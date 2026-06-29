@@ -22,8 +22,13 @@ type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: st
 const tipoChave = (t: Theme) => (t?.formato === 'reel' ? (t?.subtipo ?? 'reel') : (t?.formato ?? ''));
 const legendaDe = (d?: Dia) => !d ? '' : [d.legenda?.trim(), (d.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
 
+// CRESCER · qualquer peça com VÁRIAS telas é CARROSSEL de imagens, nunca reel (texto
+// estático lê-se; reel de várias linhas sai rápido e ilegível). Só 1 tela = reel/frase.
+const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1;
+
 // a loja é sempre REEL (MP4 com música); a veu varia conforme o formato.
 function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
+  if (ehCrescerCarrossel(t, d)) return (d?.imagens?.length ?? 0) >= 2; // carrossel de imagens pronto
   if (t.externo) return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1; // CSV: media já pronta
   if (conta === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(chave)) return !!d?.videoUrl;
@@ -63,7 +68,7 @@ export async function POST(req: Request) {
     const haPouco = Date.now() - pedido < 20 * 60 * 1000;
     let ok = true;
     if (!haPouco) {
-      ok = await dispararRender(slug);
+      ok = await dispararRender(slug, ehCrescerCarrossel(t, d) ? 'carrossel' : undefined);
       await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', slug);
     }
     return NextResponse.json({
@@ -75,7 +80,9 @@ export async function POST(req: Request) {
   }
 
   let r: { ok: boolean; id?: string; erro?: string };
-  if (t.externo) {
+  if (ehCrescerCarrossel(t, d)) {
+    r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
+  } else if (t.externo) {
     if (d?.videoUrl) r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
     else if ((d?.imagens?.length ?? 0) >= 2) r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d!.imagens! });
     else r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d?.imagens ?? [] });
