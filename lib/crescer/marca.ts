@@ -237,46 +237,50 @@ export interface VisualCrescer {
   variar: string;
 }
 
-// RÉGUA DE IMAGEM (decisão da Vivianne, jun 2026): imagens que PARAM O SCROLL e
-// justificam pagar. SEMPRE futuristas, LUMINOSAS e vívidas. PROIBIDO escuro,
-// terroso, sépia, vintage, rústico, doméstico ou antiquado. Boa qualidade para
-// poderem ser animadas (motion) se ela quiser.
+// RÉGUA DE IMAGEM (decisão da Vivianne, jun 2026, reequilibrada): a LIGAÇÃO ao
+// texto é o que MAIS importa. O "futurista" NÃO é conteúdo obrigatório (néon,
+// sci-fi, cosmos) — é só uma QUALIDADE: luminosa, moderna, elevada, fine-art.
+// O estilo serve a mensagem, nunca ao contrário. PROIBIDO escuro, sépia, vintage,
+// rústico, doméstico, antiquado, e o cliché néon/cyberpunk quando não serve a frase.
 export const FIM_PROMPT =
-  'futuristic, luminous and vivid, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
-  'radiant dynamic light, bold iridescent color, sharp focus, modern and otherworldly. ' +
-  'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated. ' +
+  'luminous and vivid, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
+  'radiant natural light, rich evocative color, sharp focus, modern, elegant and timeless. ' +
+  'The image must CARRY the meaning of the words above everything else; style serves the message. ' +
+  'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated, ' +
+  'NOT cheesy sci-fi, NOT neon cyberpunk unless it genuinely fits the words. ' +
   'no text, no letters, no watermark, no logos --ar 9:16 --style raw';
 
 export const VISUAIS: VisualCrescer[] = [
   {
-    id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑‍🚀',
-    descricao: 'A assinatura dela: pessoas futuristas, visíveis e luminosas, em cenas variadas.',
+    id: 'pessoas', label: 'Pessoas', emoji: '🧑',
+    descricao: 'Pessoas visíveis e luminosas, em cenas que carregam o sentimento da frase.',
     promptBase:
-      'a luminous futuristic human presence, CLEARLY VISIBLE and FRONT-LIT (never a dark silhouette, never backlit), ' +
-      'serene and timeless, sleek modern-futuristic styling, radiant glowing light, vivid iridescent colors, cinematic fine-art, ' + FIM_PROMPT,
+      'a luminous human presence that CARRIES THE FEELING OF THE WORDS, the person CLEARLY VISIBLE and FRONT-LIT ' +
+      '(never a dark or distant silhouette, never backlit), serene and timeless, modern and elegant, radiant light, ' +
+      'rich evocative color, cinematic fine-art, ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE o enquadramento e a cena, NUNCA só rostos em grande plano: ora uma figura inteira, ora uma pessoa de costas a caminhar para uma luz radiante, ' +
-      'mãos que se estendem, uma silhueta luminosa (mas iluminada de frente, nunca escura) pequena numa paisagem futurista imensa, alguém em movimento, duas figuras, um perfil, ' +
-      'uma pessoa feita de luz e partículas, alguém suspenso entre estrelas. Pessoas de idades e traços diferentes. A pessoa e o cenário CARREGAM o sentimento da frase.',
+      'VARIA SEMPRE o enquadramento, NUNCA só rostos em grande plano nem figuras distantes numa cidade néon: ora uma figura inteira num cenário que diz a frase, ' +
+      'ora uma pessoa de costas a caminhar para a luz, mãos que se estendem, alguém em movimento, duas figuras, um perfil, uma pessoa banhada de luz. ' +
+      'Pessoas de idades e traços diferentes, sempre VISÍVEIS e iluminadas de frente. A pessoa e o cenário traduzem o SENTIMENTO da frase (a ligação ao texto manda).',
   },
   {
     id: 'conceptual', label: 'Conceptual / abstrato', emoji: '◍',
-    descricao: 'Arte conceptual futurista, ousada e luminosa.',
+    descricao: 'Arte conceptual luminosa: uma metáfora que traduz a frase.',
     promptBase:
-      'a striking futuristic conceptual fine-art image, ONE bold luminous metaphor, surreal and elevated, ' +
-      'glowing iridescent light, vivid saturated color, glass and light and energy, premium and modern, no people, ' + FIM_PROMPT,
+      'a striking conceptual fine-art image, ONE bold luminous metaphor that TRANSLATES THE WORDS, evocative and meaningful, ' +
+      'radiant light, rich evocative color, premium and modern, no people, ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE a metáfora e os objetos: luz, vidro, energia, geometria, água, fio/linha, portas, espelhos, esferas, fendas que se abrem. ' +
-      'Nunca repitas o mesmo motivo. A metáfora tem de ser uma tradução VISUAL do sentimento da frase, não decoração.',
+      'VARIA SEMPRE a metáfora e os objetos (luz, vidro, água, fio/linha, portas, espelhos, raízes, pedras, sementes, pontes). ' +
+      'Nunca repitas o motivo. A metáfora TEM de ser uma tradução visual do sentimento da frase, não decoração nem sci-fi gratuito.',
   },
   {
     id: 'natureza', label: 'Natureza / cósmico', emoji: '🌌',
-    descricao: 'Paisagens futuristas e cósmicas, radiantes.',
+    descricao: 'Paisagens luminosas (naturais ou cósmicas) que espelham a frase.',
     promptBase:
-      'a breathtaking futuristic and cosmic scene, vivid and radiant, awe-inspiring and scroll-stopping, no people, ' + FIM_PROMPT,
+      'a breathtaking luminous natural or cosmic scene that MIRRORS THE FEELING OF THE WORDS, vivid and radiant, awe-inspiring, no people, ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE a cena: nebulosas, auroras, oceanos de luz, montanhas cristalinas, desertos de poeira estelar, água suspensa, céus radiantes. ' +
-      'Nunca repitas. A paisagem tem de espelhar o sentimento da frase (vastidão, recomeço, travessia, etc.).',
+      'VARIA SEMPRE a cena (oceanos de luz, montanhas, florestas radiantes, amanheceres, auroras, nebulosas, desertos, água suspensa). ' +
+      'Nunca repitas. A paisagem espelha o sentimento da frase (vastidão, recomeço, travessia, raiz, etc.), não é cosmos por moda.',
   },
   {
     id: 'minimal', label: 'Minimal / tipográfico', emoji: '𝐀',
@@ -288,11 +292,11 @@ export const VISUAIS: VisualCrescer[] = [
 
 export const getVisual = (id: string): VisualCrescer | undefined => VISUAIS.find((v) => v.id === id);
 
-// reforço de segurança ao gerar/regenerar a imagem por slide: garante o estilo
-// (luminoso, futurista, não escuro) mesmo em peças antigas com prompt fraco, e
-// que as PESSOAS saem visíveis e iluminadas (nunca silhueta escura).
+// reforço de segurança ao gerar/regenerar a imagem por slide: garante a QUALIDADE
+// (luminosa, não escura) mesmo em peças antigas com prompt fraco, e que as PESSOAS
+// saem visíveis e iluminadas (nunca silhueta escura). NÃO impõe sci-fi.
 export function reforcoVisual(id: string): string {
-  const visivel = id === 'pessoas' ? 'human figure CLEARLY VISIBLE and front-lit, luminous, not a dark silhouette. ' : '';
+  const visivel = id === 'pessoas' ? 'human figure CLEARLY VISIBLE and front-lit, luminous, not a dark or distant silhouette. ' : '';
   return visivel + FIM_PROMPT;
 }
 
