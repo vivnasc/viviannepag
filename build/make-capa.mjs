@@ -43,7 +43,7 @@ function html(v){
     <div class="rule"></div>
     <div class="sub">${SUB}</div>
     <div class="orn">${VEU(v.orn)}</div>
-    <div class="author">irmão de Os 7 Véus do Despertar</div>
+    <div class="author">irmão de Os Sete Véus</div>
     <div class="site">viviannedossantos.com</div>
   </div></body></html>`;
 }
