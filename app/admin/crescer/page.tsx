@@ -25,7 +25,7 @@ type Peca = {
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
-  momentos: string[] | null; slidesImgs: (string | null)[] | null; agendadoEm: string | null; hora: string | null;
+  momentos: string[] | null; slidesImgs: (string | null)[] | null; slidesTip: (Tipografia | null)[] | null; agendadoEm: string | null; hora: string | null;
   publicado: boolean; criadoEm: string | null;
 };
 
@@ -222,16 +222,19 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
 
 // EDITOR DE SLIDES (autonomia total): vê todos os slides, edita o TEXTO de cada um
 // e põe/tira IMAGEM em cada slide (capa sim ou não, slides sim ou não).
-function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTextos: (textos: string[]) => void; onImagem: (idx: number, remover: boolean) => void }) {
+function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTextos: (textos: string[]) => void; onImagem: (idx: number, remover: boolean) => void; onEstilo: (idx: number, tip: { tamanho?: number; corFundo?: string }) => void }) {
   const iniciais = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto];
   const [textos, setTextos] = useState<string[]>(iniciais);
   const imgs = peca.slidesImgs ?? [];
+  const tips = peca.slidesTip ?? [];
+  const [tams, setTams] = useState<number[]>(iniciais.map((_, i) => tips[i]?.tamanho ?? (i === 0 ? 80 : 46)));
+  const [fundos, setFundos] = useState<string[]>(iniciais.map((_, i) => tips[i]?.corFundo ?? ''));
   const setT = (i: number, v: string) => setTextos((s) => s.map((x, k) => (k === i ? v : x)));
   return (
     <div className="px-2 pb-2 space-y-2 border-t border-white/5 pt-2">
-      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">slides · edita o texto e a imagem de cada um</p>
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">slides · texto, imagem, tamanho e cor da página de cada um</p>
       {textos.map((t, i) => (
-        <div key={i} className="rounded-lg border border-white/10 p-1.5 space-y-1">
+        <div key={i} className="rounded-lg border border-white/10 p-1.5 space-y-1.5">
           <div className="flex items-center justify-between">
             <span className="text-[0.55rem] opacity-50">{i === 0 ? 'capa' : `slide ${i + 1}`}</span>
             <span className="flex gap-1">
@@ -241,6 +244,17 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem }: { peca: Pec
           </div>
           {imgs[i] && <img src={imgs[i] as string} alt="" className="h-16 rounded border border-white/10" />}
           <textarea value={t} onChange={(e) => setT(i, e.target.value)} rows={i === 0 ? 2 : 4} className="w-full text-[0.64rem] leading-relaxed px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="flex items-center gap-1 text-[0.55rem] opacity-75">
+              <span className="opacity-60">tamanho</span>
+              <input type="range" min={40} max={120} step={2} value={tams[i]} onChange={(e) => setTams((s) => s.map((x, k) => (k === i ? Number(e.target.value) : x)))} className="accent-current" style={{ color: DZ, width: 90 }} />
+              <span className="tabular-nums w-6 text-right">{tams[i]}</span>
+            </label>
+            <label className="flex items-center gap-1 text-[0.55rem] opacity-75"><span className="opacity-60">cor da página</span>
+              <input type="color" value={fundos[i] || '#171310'} onChange={(e) => setFundos((s) => s.map((x, k) => (k === i ? e.target.value : x)))} className="w-6 h-5 rounded bg-transparent border border-white/15" /></label>
+            {fundos[i] && <button type="button" onClick={() => setFundos((s) => s.map((x, k) => (k === i ? '' : x)))} className="text-[0.52rem] opacity-60 underline">limpar cor</button>}
+            <button type="button" onClick={() => onEstilo(i, { tamanho: tams[i], corFundo: fundos[i] || undefined })} disabled={disabled} className="text-[0.55rem] px-1.5 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>aplicar estilo</button>
+          </div>
         </div>
       ))}
       <button type="button" onClick={() => onSaveTextos(textos)} disabled={disabled} className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: DZ, background: DZ, color: BG2 }}>{busy ? 'a guardar…' : '💾 guardar textos'}</button>
@@ -334,6 +348,7 @@ export default function CrescerPage() {
   // editor de slides: guardar os textos de todos os slides + imagem por slide.
   const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
   const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
+  const salvarEstilo = useCallback((slug: string, idx: number, tip: { tamanho?: number; corFundo?: string }) => acao(slug, '/api/admin/crescer/slide-estilo', { idx, tipografia: tip }, 'A aplicar o estilo do slide…', 'Estilo do slide aplicado.', false), [acao]);
 
   // ── seleção múltipla + lote ──
   const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
@@ -482,7 +497,7 @@ export default function CrescerPage() {
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
                   {ab === 'preview' && <PreviewBox peca={p} />}
-                  {ab === 'slides' && <SlidesBox peca={p} busy={tBusy} disabled={tBusy} onSaveTextos={(t) => salvarTextos(p.slug, t)} onImagem={(idx, rem) => imagemSlide(p.slug, idx, rem)} />}
+                  {ab === 'slides' && <SlidesBox peca={p} busy={tBusy} disabled={tBusy} onSaveTextos={(t) => salvarTextos(p.slug, t)} onImagem={(idx, rem) => imagemSlide(p.slug, idx, rem)} onEstilo={(idx, tip) => salvarEstilo(p.slug, idx, tip)} />}
                   {ab === 'motion' && <MotionBox busy={tBusy} disabled={tBusy} onGerar={(opts) => acao(p.slug, '/api/admin/soulab/motion', opts, 'A dar vida à imagem (Kling)… 1-3 min.', 'Movimento gerado.')} />}
                   {ab === 'efeito' && <EfeitoBox peca={p} busy={tBusy} disabled={tBusy} onSave={(ef) => acao(p.slug, '/api/admin/soulab/editar', { efeito: ef }, 'A guardar o efeito…', 'Efeito guardado.')} />}
                   {ab === 'som' && <SomBox peca={p} busy={tBusy} disabled={tBusy} onGerar={(tipo, estilo) => acao(p.slug, '/api/admin/soulab/som', { tipo, estilo }, 'A gerar o áudio…', 'Áudio gerado.', false)} onRemover={() => acao(p.slug, '/api/admin/soulab/som', { remover: true }, 'A remover o áudio…', 'Áudio removido.', false)} />}

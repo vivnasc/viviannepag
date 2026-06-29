@@ -24,7 +24,7 @@ export type FonteTexto = (typeof FONTES_TEXTO)[number]['id'];
 // alinhV/alinhH: posição do texto sobre a imagem (à escolha; default centro/centro).
 export type AlinhV = 'cima' | 'centro' | 'baixo';
 export type AlinhH = 'esq' | 'centro' | 'dir';
-export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: AlinhV; alinhH?: AlinhH }
+export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: AlinhV; alinhH?: AlinhH; corFundo?: string }
 const FONT_MAP: Record<FonteTexto, string> = { serif: FONT_SERIF, sans: FONT_SANS, mono: FONT_MONO };
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
@@ -122,7 +122,8 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
   // suave · surgir (palavra a palavra, sem cursor). Back-compat: domingo => bloom.
   const efeitoFinal: EfeitoTexto = efeito ?? (ehDomingo ? 'bloom' : 'maquina');
   const pal = PALETAS[mundo];
-  const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque;
+  // cor da PÁGINA à escolha (tipografia.corFundo): substitui a paleta do mundo.
+  const BG1 = tipografia?.corFundo || pal.bg, BG2 = tipografia?.corFundo || pal.bg2, ACCENT = pal.destaque;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
   const H = ratio === '4:5' ? 1350 : 1920;
   const ar = ratio === '4:5' ? '1080 / 1350' : '1080 / 1920';
