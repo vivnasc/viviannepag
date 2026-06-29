@@ -68,7 +68,7 @@ Há sinais de que uma lealdade começa a afrouxar. O primeiro é a nomeação: q
 
 ## 13. Questões em aberto
 
-Permanecem por resolver questões de fundo. Até que ponto uma lealdade invisível é informação transmitida e até que ponto é reconstrução do presente que se projecta sobre o passado? Como distinguir a lealdade herdada da semelhança de circunstâncias, quando descendentes repetem porque herdam ou porque vivem as mesmas condições? Existe libertação sem perda de pertença, ou toda a diferenciação cobra um preço de solidão? A consciência de uma lealdade chega a desfazê-la, ou apenas a torna mais suportável? E haverá lealdades que não devem ser soltas, vínculos cuja fidelidade é, de facto, a forma justa de existir? O domínio não fecha estas perguntas. Mantém-nas abertas como condição da sua honestidade, porque uma disciplina que estuda a fidelidade não pode trair a complexidade do seu objecto em nome de respostas confortáveis.
+Permanecem por resolver questões de fundo. Até que ponto uma lealdade invisível é informação transmitida e até que ponto é reconstrução do presente que se projecta sobre o passado? Como distinguir a lealdade herdada da semelhança de circunstâncias, quando descendentes repetem porque herdam ou porque vivem as mesmas condições? Existe libertação sem perda de pertença, ou toda a diferenciação cobra um preço de solidão? A consciência de uma lealdade chega a desfazê-la, ou apenas a torna mais suportável? Haverá ainda lealdades que não devem ser soltas, vínculos cuja fidelidade é, de facto, a forma justa de existir? O domínio não fecha estas perguntas. Mantém-nas abertas como condição da sua honestidade, porque uma disciplina que estuda a fidelidade não pode trair a complexidade do seu objecto em nome de respostas confortáveis.
 
 ## 14. Relação com A Grande Transição
 
@@ -80,7 +80,7 @@ O conceito de lealdades invisíveis tem origem reconhecida na obra de Ivan Boszo
 
 ## 16. Perguntas geradoras de conteúdo
 
-A que é que eu continuo a ser fiel sem nunca o ter decidido? Se este cansaço não fosse meu, de quem seria, e que tarefa antiga estarei a tentar concluir por outro? O que aconteceria, exactamente, se eu deixasse de me esforçar para provar que mereço, e por que razão essa imagem assusta mais do que devia? Quando sinto alívio e logo a seguir culpa, a quem estarei a parecer que traio? Que escassez é que eu guardo dentro de casa cheia, e quem ma deixou para guardar? Se eu fosse mais livre do que os que vieram antes de mim, isso seria deslealdade ou seria, no fundo, o que eles não puderam ser? Onde acaba honrar e começa repetir, e como é que se sente, no corpo, a diferença? Há alguma lealdade minha que não deva ser solta, um fio que largar seria perder-me em vez de libertar-me? E se aquilo a que chamo a minha maneira de ser for apenas a forma final de um medo que já não me pertence, o que é que fica de mim quando esse medo se cala?
+A que é que eu continuo a ser fiel sem nunca o ter decidido? Se este cansaço não fosse meu, de quem seria, e que tarefa antiga estarei a tentar concluir por outro? O que aconteceria, exactamente, se eu deixasse de me esforçar para provar que mereço, e por que razão essa imagem assusta mais do que devia? Quando sinto alívio e logo a seguir culpa, a quem estarei a parecer que traio? Que escassez é que eu guardo dentro de casa cheia, e quem ma deixou para guardar? Se eu fosse mais livre do que os que vieram antes de mim, isso seria deslealdade ou seria, no fundo, o que eles não puderam ser? Onde acaba honrar e começa repetir, e como é que se sente, no corpo, a diferença? Há alguma lealdade minha que não deva ser solta, um fio que largar seria perder-me em vez de libertar-me? Se aquilo a que chamo a minha maneira de ser for apenas a forma final de um medo que já não me pertence, o que é que fica de mim quando esse medo se cala?
 
 ## Conceitos · desenvolvimento completo
 
@@ -418,4 +418,4 @@ Relações: [Lealdade ao Sofrimento, Lealdade à Invisibilidade, D14]
 - Onde é que acaba quem eu sou e começa quem me ensinaram a ser?
 - Que parte de mim acredita que mudar é deixar de ser dos meus?
 - A quem é que eu seria desleal se me tornasse, finalmente, eu próprio?
-- E se diferenciar-me fosse a forma mais funda de continuar a linhagem?
+- Seria diferenciar-me a forma mais funda de continuar a linhagem?

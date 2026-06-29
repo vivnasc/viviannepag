@@ -79,11 +79,11 @@ Quem mais obedece à regra é quem menos a vê. As regras invisíveis governam c
 
 Vê-se um sistema vivo nos seus retornos: na rapidez com que repõe o estado habitual depois de uma perturbação, na previsibilidade com que cada gesto recebe a mesma resposta, no modo como uma tentativa de mudança é seguida de uma pressão suave que a desfaz.
 
-Vê-se na existência de um membro que carrega: aquele de quem se fala, que está sempre em crise, que parece concentrar os problemas de todos, e cujo alívio coincide misteriosamente com o aparecimento de uma crise noutro lugar.
+Nota-se na existência de um membro que carrega: aquele de quem se fala, que está sempre em crise, que parece concentrar os problemas de todos, e cujo alívio coincide misteriosamente com o aparecimento de uma crise noutro lugar.
 
 Vê-se nos silêncios: nos assuntos que ninguém aborda, nas frases que se interrompem, no frio que desce quando alguém se aproxima do interdito. As regras invisíveis tornam-se observáveis precisamente onde a fala pára.
 
-Vê-se no campo que apanha quem chega: na facilidade com que um recém-chegado começa a ocupar uma posição que existia antes dele, e na sensação, que muitos descrevem, de se comportarem dentro daquele grupo de um modo que não reconhecem como seu.
+Sente-se no campo que apanha quem chega: na facilidade com que um recém-chegado começa a ocupar uma posição que existia antes dele, e na sensação, que muitos descrevem, de se comportarem dentro daquele grupo de um modo que não reconhecem como seu.
 
 Vê-se nas propriedades do todo: um clima, um humor, uma cultura que se sente ao entrar e que não corresponde à soma das pessoas presentes.
 
@@ -127,13 +127,13 @@ Há transição, enfim, quando a perturbação deixa de ser tratada como ameaça
 
 ## 13. Questões em aberto
 
-Até que ponto um sistema pode mudar de forma a partir de dentro, sem perturbação que venha de fora? E quanto da diferenciação de um membro é mérito desse membro e quanto é permissão que o próprio campo já abria?
+Até que ponto um sistema pode mudar de forma a partir de dentro, sem perturbação que venha de fora? Quanto da diferenciação de um membro é mérito desse membro e quanto é permissão que o próprio campo já abria?
 
 Como distinguir, na prática, o membro que carrega a tensão do sistema daquele cuja perturbação tem causa própria? A leitura sistémica pode, mal usada, dissolver toda a responsabilidade individual num campo anónimo; onde fica a fronteira?
 
 A noção de campo, útil para descrever o que se sente antes das palavras, descreve um mecanismo real ou é metáfora de processos relacionais que se poderiam explicar de outro modo? A pergunta fica em aberto e pede honestidade.
 
-E à escala da sociedade: serão os mecanismos da família transponíveis sem perda para sistemas de milhões, ou há, na grande escala, propriedades que a escala pequena não deixa ver?
+À escala da sociedade, fica ainda por saber: serão os mecanismos da família transponíveis sem perda para sistemas de milhões, ou há, na grande escala, propriedades que a escala pequena não deixa ver?
 
 ## 14. Relação com A Grande Transição
 
@@ -153,17 +153,17 @@ Apoia-se ainda em Murray Bowen, autor real, e na sua teoria dos sistemas familia
 
 ## 16. Perguntas geradoras de conteúdo
 
-Quem é, na tua família, a pessoa de quem mais se fala? E se aquilo que ela carrega não fosse dela, mas de todos?
+Quem é, na tua família, a pessoa de quem mais se fala? Imagina que aquilo que ela carrega não era dela, mas de todos.
 
 Há um assunto que ninguém aborda à tua mesa. Não a opinião que se cala: o frio que desce quando alguém se aproxima dele. Quando foi a primeira vez que sentiste esse frio?
 
 Reparaste que regressas a certas pessoas e em minutos voltas a falar e a sentir como há vinte anos? Não escolheste isso. Que lugar estava aberto à tua espera?
 
-Há uma regra que cumpres sem nunca a teres lido. Não a que te ensinaram com palavras: a outra, a que aprendeste sem ninguém dizer. Consegues nomeá-la? E o que sentes ao tentar?
+Há uma regra que cumpres sem nunca a teres lido. Não a que te ensinaram com palavras: a outra, a que aprendeste sem ninguém dizer. Consegues nomeá-la? O que sentes ao tentar?
 
 Quando o teu grupo finalmente ia mudar, alguma coisa se mexeu e tudo voltou ao mesmo. Olha bem para esse momento. O que é que, dentro do conjunto, não deixou a mudança passar?
 
-E se aquilo que sempre tomaste como o teu defeito fosse, afinal, uma posição que um sistema precisou que alguém ocupasse? Fica aqui. É só ver de quem é a tensão que carregas.
+Imagina que aquilo que sempre tomaste como o teu defeito fosse, afinal, uma posição que um sistema precisou que alguém ocupasse. Fica aqui. É só ver de quem é a tensão que carregas.
 
 ## Conceitos · desenvolvimento completo
 
@@ -180,7 +180,7 @@ Relações: [A Homeostase do Grupo, A Emergência Colectiva, Os Laços de Realim
 
 **Equivalentes históricos:** A formação espontânea dos costumes de uma aldeia, anteriores e mais fortes do que qualquer lei escrita. A emergência de hierarquias informais em grupos sem chefe nomeado. A maneira como as línguas se organizam em gramáticas que ninguém legislou e todos obedecem. Em todas estas, vê-se a mesma assinatura: uma ordem real, vinculativa, sem autor identificável, nascida do uso.
 
-**Contra-exemplos:** Nem toda a ordem humana é auto-organizada. A burocracia imposta de cima, a regra que vem do regulamento e não do uso, a coordenação que exige um maestro a marcar cada compasso, são ordens heterónomas, montadas de fora. E há sistemas que perderam a capacidade de se auto-organizar e só funcionam sob comando externo permanente; quando o comando falha, dispersam-se, sinal de que a ordem nunca lhes nasceu de dentro.
+**Contra-exemplos:** Nem toda a ordem humana é auto-organizada. A burocracia imposta de cima, a regra que vem do regulamento e não do uso, a coordenação que exige um maestro a marcar cada compasso, são ordens heterónomas, montadas de fora. Há também sistemas que perderam a capacidade de se auto-organizar e só funcionam sob comando externo permanente; quando o comando falha, dispersam-se, sinal de que a ordem nunca lhes nasceu de dentro.
 
 **Manifestações culturais:** Aparece nas tradições que se transmitem sem que ninguém as ensine formalmente, nos modos de fazer de uma terra, nas estéticas partilhadas de uma geração que ninguém coordenou. Uma cultura é, em larga medida, um sistema auto-organizado de sentidos: ninguém decidiu o que é belo ou decente, e contudo há um acordo tácito e forte sobre isso, gerado pela repetição das mesmas escolhas.
 
@@ -217,7 +217,7 @@ Relações: [O Sistema que se Auto-Organiza, Os Laços de Realimentação, O Bod
 
 **Equivalentes históricos:** As instituições que absorvem toda a reforma e permanecem iguais. As famílias que atravessam mortes, mudanças, fortunas, e mantêm intacta a sua forma de funcionar. As comunidades que reabsorvem o membro que tinha rompido, devolvendo-lhe o antigo lugar como se nada fosse. Em toda a parte onde se vê uma forma humana persistir contra a evidência de que devia ter mudado, está a homeostase a trabalhar.
 
-**Contra-exemplos:** Há sistemas com homeostase frouxa, que se deixam desorganizar por qualquer perturbação e nunca encontram forma estável, o oposto da rigidez. E há momentos em que a homeostase falha de vez, em que uma perturbação ultrapassa a capacidade de correcção e o sistema salta para uma forma nova sem regresso, prova de que a tendência conservadora tem limites e que nem tudo o que se perturba se repõe.
+**Contra-exemplos:** Há sistemas com homeostase frouxa, que se deixam desorganizar por qualquer perturbação e nunca encontram forma estável, o oposto da rigidez. Há ainda momentos em que a homeostase falha de vez, em que uma perturbação ultrapassa a capacidade de correcção e o sistema salta para uma forma nova sem regresso, prova de que a tendência conservadora tem limites e que nem tudo o que se perturba se repõe.
 
 **Manifestações culturais:** Aparece no conservadorismo dos costumes, na maneira como uma cultura reabsorve o que é novo traduzindo-o no antigo, esvaziando-o da sua novidade. As modas que prometiam romper e acabam recicladas no mesmo, as vanguardas que se tornam decoração: é a homeostase cultural a digerir a diferença até ela deixar de incomodar.
 
@@ -254,7 +254,7 @@ Relações: [A Homeostase do Grupo, O Campo do Sistema, A Emergência Colectiva]
 
 **Equivalentes históricos:** O ritual do bode emissário, sobre quem se carregavam as faltas de todos antes de o expulsar para o deserto. A figura do pária e do exilado que carrega a impureza da cidade. A caça às bruxas, em que a comunidade descarregava num corpo a sua tensão acumulada. Em todos, o mesmo movimento: um corpo escolhido para receber o que pertencia a todos, e a paz comprada com a sua expulsão.
 
-**Contra-exemplos:** Nem todo o membro em crise é bode expiatório; há sofrimento de causa própria que nada deve à economia do conjunto, e confundi-los seria dissolver injustamente a responsabilidade individual num campo anónimo. E há sistemas que metabolizam a sua tensão sem a despejar em ninguém, que a repartem e a falam, prova de que a designação de um portador único não é destino mas falta de um meio melhor.
+**Contra-exemplos:** Nem todo o membro em crise é bode expiatório; há sofrimento de causa própria que nada deve à economia do conjunto, e confundi-los seria dissolver injustamente a responsabilidade individual num campo anónimo. Há também sistemas que metabolizam a sua tensão sem a despejar em ninguém, que a repartem e a falam, prova de que a designação de um portador único não é destino mas falta de um meio melhor.
 
 **Manifestações culturais:** Aparece na figura do desviante de quem a sociedade precisa para se definir por contraste, no marginal que carrega a má fama de uma comunidade que assim se sente boa. Aparece nas narrativas que precisam de um culpado para fazer sentido, no grupo que se une contra um inimigo interno e recicla um quando o anterior desaparece.
 
@@ -262,7 +262,7 @@ Relações: [A Homeostase do Grupo, O Campo do Sistema, A Emergência Colectiva]
 
 **Manifestações económicas:** Aparece no funcionário a quem se atribui o fracasso de uma decisão colectiva, no departamento que carrega a culpa de uma estrutura inteira, no trabalhador despedido como sacrifício que poupa a chefia de olhar para o sistema. Quando uma organização precisa de um responsável para não mudar, fabrica um bode, e o seu afastamento alivia a tensão sem tocar na causa.
 
-**Manifestações familiares:** É na família que o bode expiatório se forma mais cedo e mais fundo. A criança problemática que adoece sempre que o casal se aproxima do conflito, e cuja crise devolve a paz à mesa. O filho de quem se diz que é a cruz da família, que carrega, sem o saber, a tensão de todos os outros. O membro tido por difícil, em quem o sistema deposita o que não consegue olhar em si. E o terrível alívio que percorre o grupo quando esse membro recai, porque assim o equilíbrio se mantém e ninguém tem de mudar.
+**Manifestações familiares:** É na família que o bode expiatório se forma mais cedo e mais fundo. A criança problemática que adoece sempre que o casal se aproxima do conflito, e cuja crise devolve a paz à mesa. O filho de quem se diz que é a cruz da família, que carrega, sem o saber, a tensão de todos os outros. O membro tido por difícil, em quem o sistema deposita o que não consegue olhar em si. Por fim, o terrível alívio que percorre o grupo quando esse membro recai, porque assim o equilíbrio se mantém e ninguém tem de mudar.
 
 **Hipótese pós-sobrevivência:** Na Emergência, o bode expiatório deixa de existir como função, porque o sistema aprende a metabolizar a sua tensão sem a concentrar num corpo. A carga que antes se despejava num membro passa a circular, falada e repartida, e o que era doença de um revela-se informação de todos. O grupo, em vez de expulsar quem capta a sua tensão, agradece-lhe o aviso e usa-o para se transformar. Onde havia um pára-raios solitário, passa a haver um sistema que conduz a sua própria carga sem queimar ninguém.
 
@@ -276,7 +276,7 @@ Relações: [A Homeostase do Grupo, O Campo do Sistema, A Emergência Colectiva]
 - Emoção dominante: o mistério grave do sacrifício silencioso, compaixão e fim, nunca adrenalina; o peso de um que sustém muitos.
 - Relação com o mundo pós-sobrevivência: por uma fenda, a carga já não escoa para um só, distribui-se por pontes de luz entre todas as figuras.
 
-**Perguntas para conteúdos:** Há, na tua família, a pessoa de quem mais se fala, sempre em crise, sempre o problema. E se aquilo que ela carrega não fosse dela, mas de todos vós? Repara só numa coisa, sem te apressares a julgar: quando ela melhora, quem é que adoece a seguir? De quem é, afinal, a tensão que ela leva às costas?
+**Perguntas para conteúdos:** Há, na tua família, a pessoa de quem mais se fala, sempre em crise, sempre o problema. Imagina que aquilo que ela carrega não era dela, mas de todos vós. Repara só numa coisa, sem te apressares a julgar: quando ela melhora, quem é que adoece a seguir? De quem é, afinal, a tensão que ela leva às costas?
 
 ### Os Laços de Realimentação
 Relações: [A Homeostase do Grupo, A Emergência Colectiva, O Sistema que se Auto-Organiza]
@@ -291,7 +291,7 @@ Relações: [A Homeostase do Grupo, A Emergência Colectiva, O Sistema que se Au
 
 **Equivalentes históricos:** A maneira como uma reputação se forma por reforço, cada acto a confirmar a fama que gera o acto seguinte. As corridas ao banco, em que o medo de uns gera o medo de outros até derrubar o que se temia. As revoluções, em que cada acto de coragem torna o seguinte mais provável, até a forma antiga ceder. Sempre que algo humano cresce ou se repõe sozinho, está um laço a trabalhar.
 
-**Contra-exemplos:** Acontecimentos verdadeiramente lineares, em que uma causa produz um efeito que não reentra, são raros mas existem, e tomá-los por circuitos seria erro. E há sistemas em que os laços positivos disparam sem freio, levando à destruição por escalada sem regresso, prova de que a realimentação não garante por si nem equilíbrio nem vida, apenas amplifica o que já lá está.
+**Contra-exemplos:** Acontecimentos verdadeiramente lineares, em que uma causa produz um efeito que não reentra, são raros mas existem, e tomá-los por circuitos seria erro. Há também sistemas em que os laços positivos disparam sem freio, levando à destruição por escalada sem regresso, prova de que a realimentação não garante por si nem equilíbrio nem vida, apenas amplifica o que já lá está.
 
 **Manifestações culturais:** Aparece nas modas que se reforçam a si próprias, cada adesão a tornar a seguinte mais provável, até ao ponto de saturação em que o laço se inverte. Aparece nos cânones que se consolidam por citação, na fama que gera fama, no esquecimento que gera esquecimento. Uma cultura é um tecido de laços, uns que conservam os seus valores, outros que os fazem crescer ou ruir.
 
@@ -313,7 +313,7 @@ Relações: [A Homeostase do Grupo, A Emergência Colectiva, O Sistema que se Au
 - Emoção dominante: o mistério de uma força que regressa transformada, expansão quando o laço cresce a vida, gravidade quando ele repõe a forma.
 - Relação com o mundo pós-sobrevivência: por uma fenda, os laços de luz já não amortecem só, amplificam o que faz nascer, espirais abertas em vez de círculos fechados.
 
-**Perguntas para conteúdos:** Repara na última discussão que cresceu sozinha em tua casa: ninguém quis que chegasse ali, e chegou. O que é que, em cada resposta, fazia subir a seguinte? E ao contrário: alguma vez uma só verdade dita abriu espaço a outra, e a outra a outra, até a casa mudar? O que tornou esse laço possível?
+**Perguntas para conteúdos:** Repara na última discussão que cresceu sozinha em tua casa: ninguém quis que chegasse ali, e chegou. O que é que, em cada resposta, fazia subir a seguinte? Ao contrário, agora: alguma vez uma só verdade dita abriu espaço a outra, e a outra a outra, até a casa mudar? O que tornou esse laço possível?
 
 ### A Emergência Colectiva
 Relações: [O Sistema que se Auto-Organiza, Os Laços de Realimentação, O Campo do Sistema]
@@ -328,7 +328,7 @@ Relações: [O Sistema que se Auto-Organiza, Os Laços de Realimentação, O Cam
 
 **Equivalentes históricos:** O espírito de uma época, que ninguém produziu e que a todos atravessa. A alma de um povo de que falam as línguas antigas, sentida como real e irredutível aos indivíduos. A sabedoria das assembleias e a loucura das multidões, ambas propriedades emergentes do mesmo princípio. Sempre que se atribuiu a um colectivo um carácter próprio, reconheceu-se, sem o nome, a emergência.
 
-**Contra-exemplos:** Há agregados que são meras somas, em que o conjunto não produz nada que as partes não tenham, uma fila de desconhecidos, uma estatística; chamar-lhes emergência seria abuso. E há propriedades atribuídas ao colectivo que são apenas projecção, traços que pomos no grupo sem que nada de novo aí emerja; distinguir a emergência real da projecção é trabalho de honestidade que o conceito exige.
+**Contra-exemplos:** Há agregados que são meras somas, em que o conjunto não produz nada que as partes não tenham, uma fila de desconhecidos, uma estatística; chamar-lhes emergência seria abuso. Há ainda propriedades atribuídas ao colectivo que são apenas projecção, traços que pomos no grupo sem que nada de novo aí emerja; distinguir a emergência real da projecção é trabalho de honestidade que o conceito exige.
 
 **Manifestações culturais:** Aparece na cultura mesma, a maior propriedade emergente humana: sentidos, gostos, valores partilhados que nenhum indivíduo contém e que a todos formam. Aparece no estilo de uma geração, no humor de uma época, na atmosfera de uma cidade. Tudo o que se sente como carácter de um lugar ou de um tempo é emergência colectiva tornada quase tangível.
 
@@ -365,7 +365,7 @@ Relações: [A Emergência Colectiva, As Regras Invisíveis, O Bode Expiatório]
 
 **Equivalentes históricos:** A noção de ambiente de um lugar, de génio de um sítio, sentido como real e formador de quem nele vive. As atmosferas de corte, de quartel, de convento, que moldavam quem nelas entrava sem precisar de regras explícitas. A ideia, em muitas culturas, de uma carga ou de um sopro que paira entre as pessoas e as liga. Sempre que se reconheceu que um lugar faz as pessoas, reconheceu-se o campo.
 
-**Contra-exemplos:** Há a tentação de tornar o campo uma entidade mágica que explica tudo e não se deixa verificar; o conceito exige a honestidade de admitir que pode ser metáfora de processos relacionais explicáveis de outro modo. E há pessoas e momentos em que o campo não pega, em que alguém atravessa um sistema sem ser apanhado pelo seu tom, prova de que o campo condiciona mas não determina, e de que a diferenciação lhe resiste.
+**Contra-exemplos:** Há a tentação de tornar o campo uma entidade mágica que explica tudo e não se deixa verificar; o conceito exige a honestidade de admitir que pode ser metáfora de processos relacionais explicáveis de outro modo. Há também pessoas e momentos em que o campo não pega, em que alguém atravessa um sistema sem ser apanhado pelo seu tom, prova de que o campo condiciona mas não determina, e de que a diferenciação lhe resiste.
 
 **Manifestações culturais:** Aparece na atmosfera de um lugar, de uma cidade, de uma época, que molda a sensibilidade de quem nela vive antes de qualquer ideia. Aparece no tom de um meio, artístico, académico, profissional, que apanha quem chega e o faz pensar e sentir segundo o seu clima. A cultura age, em boa parte, como campo: por contágio de tom, não por ensino de regras.
 
@@ -373,7 +373,7 @@ Relações: [A Emergência Colectiva, As Regras Invisíveis, O Bode Expiatório]
 
 **Manifestações económicas:** Aparece na cultura de um local de trabalho, esse campo que faz o recém-chegado adoptar em semanas posturas que não eram suas. Aparece no clima de medo ou de confiança que governa uma organização por baixo das regras. Aparece na atmosfera de um mercado, eufórica ou aterrada, que apanha os agentes e os faz sentir como o conjunto sente, antes de qualquer cálculo.
 
-**Manifestações familiares:** É na família que o campo é mais formador, porque é o primeiro que apanha o corpo ainda criança. A casa tem um tom, e a criança aprende a ser quem o campo da casa precisa, antes de qualquer escolha. As posições, o forte, o frágil, o mediador, o difícil, estavam abertas e o campo distribuiu-as. E o adulto que regressa a casa e em minutos volta a falar e a sentir como aos quinze anos descobre, no corpo, que o campo guardou a sua antiga posição à espera dele.
+**Manifestações familiares:** É na família que o campo é mais formador, porque é o primeiro que apanha o corpo ainda criança. A casa tem um tom, e a criança aprende a ser quem o campo da casa precisa, antes de qualquer escolha. As posições, o forte, o frágil, o mediador, o difícil, estavam abertas e o campo distribuiu-as. Por isso o adulto que regressa a casa e em minutos volta a falar e a sentir como aos quinze anos descobre, no corpo, que o campo guardou a sua antiga posição à espera dele.
 
 **Hipótese pós-sobrevivência:** Na Emergência, o campo deixa de distribuir posições rígidas de sobrevivência e passa a transportar um tom que liberta em vez de prender. Quem entra já não é apanhado por um lugar fixo que o sistema precisa de preencher, é acolhido por uma atmosfera que o convida a trazer o seu centro próprio. O campo continua a preceder a pessoa, mas o que precede deixa de ser uma posição-prisão e passa a ser um clima de segurança que torna possível a diferenciação. O meio entre os corpos torna-se um meio que faz crescer.
 
@@ -402,7 +402,7 @@ Relações: [O Campo do Sistema, A Homeostase do Grupo, A Diferenciação]
 
 **Equivalentes históricos:** Os interditos e tabus, regras de força absoluta cuja origem ninguém recorda e cuja transgressão dá horror. As convenções não escritas que governavam a vida social com mais rigor do que as leis. O sentido tácito do que se faz e não se faz, que cada cultura transmite sem o ensinar. Sempre que houve uma proibição forte sem texto que a fundasse, estavam a operar regras invisíveis.
 
-**Contra-exemplos:** Há regras explícitas, ditas, negociadas, discutíveis, que são o oposto das invisíveis e que um sistema saudável sabe tornar visíveis. E há sistemas em que muito do que governa foi posto em palavras e pode ser revisto; nesses, o domínio do não-dito recua. A existência destes casos prova que a invisibilidade da regra não é destino, é estado, e que nomear é já começar a libertar.
+**Contra-exemplos:** Há regras explícitas, ditas, negociadas, discutíveis, que são o oposto das invisíveis e que um sistema saudável sabe tornar visíveis. Há ainda sistemas em que muito do que governa foi posto em palavras e pode ser revisto; nesses, o domínio do não-dito recua. A existência destes casos prova que a invisibilidade da regra não é destino, é estado, e que nomear é já começar a libertar.
 
 **Manifestações culturais:** Aparecem no que cada cultura considera indizível, intocável, óbvio sem explicação. Aparecem no decoro, naquilo de que não se fala, nos limites do exprimível que ninguém legislou. Uma cultura é tanto o que diz como o que cala, e o seu não-dito governa-a por baixo, transmitido de corpo a corpo na sensação do que provoca o frio.
 
@@ -424,7 +424,7 @@ Relações: [O Campo do Sistema, A Homeostase do Grupo, A Diferenciação]
 - Emoção dominante: o mistério grave do interdito sem autor, o peso do que governa sem se mostrar, alívio quando a linha enfim se vê.
 - Relação com o mundo pós-sobrevivência: por uma fenda, as fronteiras invisíveis acendem-se como linhas de luz que se podem ver, discutir e deslocar.
 
-**Perguntas para conteúdos:** Há uma regra que cumpres sem nunca a teres lido. Não a que te ensinaram com palavras: a outra, a que aprendeste sem ninguém dizer, na primeira vez que sentiste o frio descer à mesa. Consegues nomeá-la, agora, em voz alta? E repara no que te acontece no corpo só por tentares.
+**Perguntas para conteúdos:** Há uma regra que cumpres sem nunca a teres lido. Não a que te ensinaram com palavras: a outra, a que aprendeste sem ninguém dizer, na primeira vez que sentiste o frio descer à mesa. Consegues nomeá-la, agora, em voz alta? Repara no que te acontece no corpo só por tentares.
 
 ### A Diferenciação
 Relações: [As Regras Invisíveis, O Sistema que se Auto-Organiza, O Campo do Sistema]
@@ -439,7 +439,7 @@ Relações: [As Regras Invisíveis, O Sistema que se Auto-Organiza, O Campo do S
 
 **Equivalentes históricos:** A figura do que permanece fiel a si no meio da pressão de todos, sem se exilar nem se render. As tradições de interioridade que ensinavam a manter um centro próprio em presença do mundo. A consciência que sabe distinguir a sua voz da voz do grupo sem por isso o abandonar. Sempre que se louvou a integridade que não se isola, reconheceu-se, sem o nome técnico, a diferenciação.
 
-**Contra-exemplos:** A diferenciação confunde-se com facilidade com a sua imitação fria, o afastamento defensivo de quem corta o vínculo e chama a isso autonomia; mas cortar não é diferenciar-se, é fugir. Confunde-se também com a teimosia de quem se opõe por reacção, ainda preso ao grupo pela negação. E há quem julgue diferenciar-se quando apenas se submeteu a outro sistema. Estes contra-exemplos mostram que a diferenciação verdadeira exige ao mesmo tempo ligação e centro, e que falhar um dos dois a desfaz.
+**Contra-exemplos:** A diferenciação confunde-se com facilidade com a sua imitação fria, o afastamento defensivo de quem corta o vínculo e chama a isso autonomia; mas cortar não é diferenciar-se, é fugir. Confunde-se também com a teimosia de quem se opõe por reacção, ainda preso ao grupo pela negação. Há também quem julgue diferenciar-se quando apenas se submeteu a outro sistema. Estes contra-exemplos mostram que a diferenciação verdadeira exige ao mesmo tempo ligação e centro, e que falhar um dos dois a desfaz.
 
 **Manifestações culturais:** Aparece na voz original que não se isola da sua cultura nem se dissolve nela, que a herda e a transforma de dentro. Aparece em quem traz ao seu meio uma diferença que o alarga em vez de o trair. A renovação fecunda de uma cultura vem, quase sempre, de membros diferenciados, ligados o bastante para serem ouvidos e distintos o bastante para terem algo novo a dizer.
 
@@ -461,4 +461,4 @@ Relações: [As Regras Invisíveis, O Sistema que se Auto-Organiza, O Campo do S
 - Emoção dominante: o mistério sereno de ficar inteiro sem se isolar, segurança e expansão, o nascimento de uma forma nova a partir de uma presença que resistiu.
 - Relação com o mundo pós-sobrevivência: por uma fenda, muitos centros próprios em ligação, pontes de luz entre figuras inteiras, um sistema que cria por diferenciação e não por fusão.
 
-**Perguntas para conteúdos:** Quando estás com os teus e discordas, o que fazes: cortas, ou cedes? Repara que há sempre só essas duas saídas à mão. E se houvesse uma terceira, ficar ligado e inteiro ao mesmo tempo, sem fugir e sem te apagares? O que é que, dentro de ti, ainda não acredita que isso é possível com aquelas pessoas?
+**Perguntas para conteúdos:** Quando estás com os teus e discordas, o que fazes: cortas, ou cedes? Repara que há sempre só essas duas saídas à mão. Imagina uma terceira, ficar ligado e inteiro ao mesmo tempo, sem fugir e sem te apagares? O que é que, dentro de ti, ainda não acredita que isso é possível com aquelas pessoas?

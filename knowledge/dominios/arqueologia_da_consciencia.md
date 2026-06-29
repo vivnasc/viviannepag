@@ -25,7 +25,7 @@ Importa distinguir duas coisas. Há aqui leitura de autores reais, que se parafr
 
 Que pensará uma civilização futura ao estudar a nossa relação com o trabalho e a urgência?
 
-A pergunta não pede uma profecia. Pede que troquemos de cadeira: que nos sentemos, por um momento, no lugar de quem nos há-de estudar, e que olhemos para os nossos dias com a curiosidade fria e o afecto de um arqueólogo perante um povo que já não pode explicar-se. O que lhes parecerá natural em nós? O que lhes parecerá doença? E que sinais terão de procurar, nos nossos restos, para perceber a diferença entre uma coisa e outra, sabendo que nós próprios já não conseguíamos distingui-las?
+A pergunta não pede uma profecia. Pede que troquemos de cadeira: que nos sentemos, por um momento, no lugar de quem nos há-de estudar, e que olhemos para os nossos dias com a curiosidade fria e o afecto de um arqueólogo perante um povo que já não pode explicar-se. O que lhes parecerá natural em nós? O que lhes parecerá doença? Que sinais terão de procurar, nos nossos restos, para perceber a diferença entre uma coisa e outra, sabendo que nós próprios já não conseguíamos distingui-las?
 
 ## 3. Hipótese principal
 
@@ -79,7 +79,7 @@ Quanto mais provamos disponibilidade, menos presentes estamos. Estar acessível 
 
 Quanto mais medimos o que importa, mais o esvaziamos. O número que devia proteger o valor acaba por o substituir, e passa-se a perseguir o indicador, esquecendo a coisa que o indicador apenas apontava.
 
-E o maior de todos: trabalhamos para um descanso que adiamos sem fim. A vida fica guardada para depois, para quando houver tempo, e o depois é construído de tal modo que nunca chega, porque chegar exigiria parar, e parar é precisamente o que não se aprendeu a fazer.
+Há, por fim, o maior de todos: trabalhamos para um descanso que adiamos sem fim. A vida fica guardada para depois, para quando houver tempo, e o depois é construído de tal modo que nunca chega, porque chegar exigiria parar, e parar é precisamente o que não se aprendeu a fazer.
 
 ## 8. Indicadores observáveis
 
@@ -103,7 +103,7 @@ Ao nível da pessoa, a urgência crónica desgasta o corpo de um modo que ele n�
 
 Há um empobrecimento da experiência. Quando tudo é meio para o passo seguinte, nada chega a ser saboreado por si. A refeição, o passeio, a conversa, tudo se faz a caminho de outra coisa, e a vida atravessa-se em vez de se habitar. A pessoa pode chegar ao fim de um ano cheio sem se lembrar de quase nada, porque viveu sempre adiante de si mesma.
 
-E há a fragilidade da identidade construída sobre o fazer. Quem é só o que produz fica exposto quando o produzir falha, por doença, idade ou simples mudança. O vazio, adiado durante anos, regressa de uma vez, e descobre-se que não se aprendeu a estar com ele, porque toda a vida foi organizada para o evitar.
+Há ainda a fragilidade da identidade construída sobre o fazer. Quem é só o que produz fica exposto quando o produzir falha, por doença, idade ou simples mudança. O vazio, adiado durante anos, regressa de uma vez, e descobre-se que não se aprendeu a estar com ele, porque toda a vida foi organizada para o evitar.
 
 ## 11. Consequências colectivas
 
@@ -119,7 +119,7 @@ Apesar de tudo, há fissuras por onde a Emergência se anuncia. Cresce o desconf
 
 Surgem práticas de recusa: limites ao correio fora de horas, fins de semana protegidos, o gesto deliberado de não responder logo. Não são ainda uma cultura, mas são vestígios de outra a formar-se, do mesmo modo que os primeiros artefactos de um povo novo aparecem misturados nos restos do antigo.
 
-E reaparece, em zonas inesperadas, o interesse pelo tempo lento, pela demora, pela vida medida por acontecimento e relação. Não como nostalgia, mas como pressentimento de que a velocidade não era o destino, apenas uma fase, e de que a saída dela não é parar de fazer, mas deixar de ser feito pela pressa.
+Reaparece também, em zonas inesperadas, o interesse pelo tempo lento, pela demora, pela vida medida por acontecimento e relação. Não como nostalgia, mas como pressentimento de que a velocidade não era o destino, apenas uma fase, e de que a saída dela não é parar de fazer, mas deixar de ser feito pela pressa.
 
 ## 13. Questões em aberto
 
@@ -127,7 +127,7 @@ Não está resolvido como distinguir, na prática e no momento, a urgência que 
 
 Não está claro se é possível desmoralizar a produtividade sem cair no seu contrário, a recusa do esforço como nova virtude, igualmente rígida e igualmente cega. A saída da era da Sobrevivência arrisca-se a inventar novos cultos, e o estudo desta época deve aprender a reconhecê-los antes que se solidifiquem.
 
-E permanece a questão do tempo medido por relação, que algumas culturas conservaram. Será um modo a recuperar, um contraste que ajuda a ver, ou um lugar de onde temos pouco a dizer e muito a escutar? A resposta exige humildade, e ela própria não cabe num número.
+Permanece ainda a questão do tempo medido por relação, que algumas culturas conservaram. Será um modo a recuperar, um contraste que ajuda a ver, ou um lugar de onde temos pouco a dizer e muito a escutar? A resposta exige humildade, e ela própria não cabe num número.
 
 ## 14. Relação com A Grande Transição
 
@@ -153,9 +153,9 @@ Se um arqueólogo do futuro encontrasse o teu telemóvel, que culto julgaria que
 
 Quando dizes que não tens tempo, o que é exactamente que esse tempo está a fazer, e a quem pertence?
 
-Que sentirias se, durante um dia inteiro, não medisses nada: nem passos, nem horas, nem tarefas concluídas? E de que terias medo, nessa não-medida?
+Que sentirias se, durante um dia inteiro, não medisses nada: nem passos, nem horas, nem tarefas concluídas? De que terias medo, nessa não-medida?
 
-Se o teu valor não estivesse no que produzes, sobraria quem? E porque é tão difícil ficar sozinho com essa pergunta sem a tapar com trabalho?
+Se o teu valor não estivesse no que produzes, sobraria quem? Porque é tão difícil ficar sozinho com essa pergunta sem a tapar com trabalho?
 
 Quem foi que te ensinou que parar é perigoso, e que perigo é esse que o teu corpo ainda procura quando a vida já não o tem?
 
@@ -176,7 +176,7 @@ Relações: [A Doença do Tempo, Os Rituais da Disponibilidade, A Religião da P
 
 **Contra-exemplos:** Há culturas e ofícios onde a urgência permanece o que sempre foi, uma resposta breve a um perigo real, sem se infiltrar no resto da vida. O agricultor que acelera perante a tempestade iminente e regressa à calma quando ela passa não vive no culto, usa a urgência e devolve-a. Há também o domínio próprio de certas profissões de emergência, onde a pressa é instrumento exacto e finito, e onde os melhores são justamente os que sabem desligá-la depois. O contra-exemplo mostra a fronteira: o problema não é a urgência, é a urgência que não sabe acabar.
 
-**Manifestações culturais:** A cultura celebra a urgência em quase tudo o que enaltece. O herói é o que não dorme, o que sacrifica, o que está sempre disponível. As histórias de sucesso contam-se em horas roubadas ao sono, e a lentidão fica reservada aos personagens que não chegam a lado nenhum. Até o lazer se contamina: descansa-se com pressa, otimiza-se a folga, transforma-se a pausa em mais uma tarefa a cumprir bem. A urgência tornou-se um valor estético, uma forma de se apresentar ao mundo como pessoa séria.
+**Manifestações culturais:** A cultura celebra a urgência em quase tudo o que enaltece. O herói é o que não dorme, o que sacrifica, o que está sempre disponível. As histórias de sucesso contam-se em horas roubadas ao sono, e a lentidão fica reservada aos personagens que não chegam a lado nenhum. Até o lazer se contamina: descansa-se com pressa, optimiza-se a folga, transforma-se a pausa em mais uma tarefa a cumprir bem. A urgência tornou-se um valor estético, uma forma de se apresentar ao mundo como pessoa séria.
 
 **Manifestações religiosas:** Nas suas formas devotas, a urgência veste-se de chamada. Há sempre mais a fazer, mais almas a salvar, mais bem a praticar, e o repouso aparece como tentação ou egoísmo. O zelo permanente confunde-se com a virtude, e a serenidade, que algumas tradições contemplativas guardaram como o mais alto dos estados, é vista com suspeita pelas formas activistas da fé, que precisam de movimento para se sentirem fiéis. Deus, nessas versões, parece ter pressa, e quem o serve não tem licença para parar.
 
@@ -205,7 +205,7 @@ Relações: [O Trabalho como Identidade, A Métrica de Tudo, O Culto da Urgênci
 
 **Origem provável:** A sua origem cruza a necessidade material com a herança moral. Durante milénios, produzir foi literalmente sobreviver, e quem não trabalhava punha em risco o grupo. A esse fundo prático juntou-se, em certas tradições, uma camada religiosa que transformou o trabalho metódico em dever sagrado e em sinal de eleição. Quando a fé que dava sentido a essa moral se afastou, a moral ficou, agora sem o seu fundamento, a operar por hábito. O dever sobreviveu à crença que o explicava, e tornou-se uma religião sem deus declarado.
 
-**Mecanismo:** Funciona pela transferência da salvação para o desempenho. Onde antes se era salvo pela graça, é-se agora absolvido pela produção: o dia justifica-se pela lista cumprida, a pessoa sente-se em paz quando rendeu e em pecado quando não. A culpa é o motor central, sempre disponível, sempre pronta a transformar o repouso em dívida. E há a promessa diferida, o descanso merecido lá adiante, que mantém todos a produzir hoje à conta de um amanhã que a própria lógica do sistema garante que não chega.
+**Mecanismo:** Funciona pela transferência da salvação para o desempenho. Onde antes se era salvo pela graça, é-se agora absolvido pela produção: o dia justifica-se pela lista cumprida, a pessoa sente-se em paz quando rendeu e em pecado quando não. A culpa é o motor central, sempre disponível, sempre pronta a transformar o repouso em dívida. Há também a promessa diferida, o descanso merecido lá adiante, que mantém todos a produzir hoje à conta de um amanhã que a própria lógica do sistema garante que não chega.
 
 **Indicadores:** Reconhece-se na incapacidade de descansar sem culpa, no domingo já roubado pela segunda-feira, na justificação interior de cada pausa como se fosse preciso autorização. Reconhece-se na pergunta, feita a uma pessoa que se conhece, sobre o que ela faz, antes de qualquer outra, como se a profissão dissesse o essencial. Reconhece-se na palavra produtivo usada como elogio moral, e improdutivo como leve acusação, mesmo aplicada a horas que não deviam render nada, como as de um domingo de Verão.
 
@@ -217,7 +217,7 @@ Relações: [O Trabalho como Identidade, A Métrica de Tudo, O Culto da Urgênci
 
 **Manifestações religiosas:** Nas suas formas devotas, a produtividade infiltra-se na fé como activismo sem fim, em que servir se mede pela quantidade de obra e o repouso se confunde com tibieza. Mas as mesmas tradições guardam, por baixo, o antídoto: a noção de um descanso sagrado, de um dia que se subtrai à produção precisamente para lembrar que a pessoa não é o que produz. Esse descanso, hoje quase esvaziado, era uma declaração: há um valor anterior ao trabalho, e é dele que o trabalho deve viver, não o contrário.
 
-**Manifestações económicas:** Na economia, esta religião é a teologia oficial. O crescimento é o bem supremo, a eficiência a virtude cardeal, o desperdício o pecado capital. Cada hora deve render, cada recurso deve ser aproveitado, e o que não produz mensuravelmente cai sob suspeita. Os indicadores de produtividade funcionam como sacramentos: medem a graça de cada um perante o sistema. E o trabalhador interioriza o juízo a ponto de se cobrar a si mesmo mais do que qualquer patrão o cobraria, tornando-se, ao mesmo tempo, fiel e inquisidor de si.
+**Manifestações económicas:** Na economia, esta religião é a teologia oficial. O crescimento é o bem supremo, a eficiência a virtude cardeal, o desperdício o pecado capital. Cada hora deve render, cada recurso deve ser aproveitado, e o que não produz mensuravelmente cai sob suspeita. Os indicadores de produtividade funcionam como sacramentos: medem a graça de cada um perante o sistema. Por isso o trabalhador interioriza o juízo a ponto de se cobrar a si mesmo mais do que qualquer patrão o cobraria, tornando-se, ao mesmo tempo, fiel e inquisidor de si.
 
 **Manifestações familiares:** Em casa, a religião transmite-se pela aprovação. A criança que faz muito é elogiada, a que demora é apressada, e cedo se aprende que o afecto vem na esteira do desempenho. Os pais, eles próprios fiéis, medem o sucesso dos filhos pela ocupação e enchem-lhes os dias para que não fiquem ociosos. Herda-se assim a equação fundamental, faço logo valho, e com ela a culpa que a acompanha, de modo que o adulto continua a procurar, no rendimento, uma aprovação que talvez nunca lhe tenha sido dada por simplesmente existir.
 
@@ -287,7 +287,7 @@ Relações: [O Culto da Urgência, Consequências individuais, A Ocupação Perm
 
 **Contra-exemplos:** Há quem viva sem esta doença, e a sua existência prova que ela não é inevitável. A criança absorta numa brincadeira, para quem uma tarde dura um mundo. O artesão concentrado no gesto, que não conta o tempo porque está dentro dele. As culturas onde o tempo se conta por acontecimento e por relação, em que a pergunta não é quanto tempo resta mas o que aconteceu, e onde por isso o tempo não foge, dura. Estes contra-exemplos mostram que a escassez do tempo é uma forma de o habitar, não uma propriedade do tempo.
 
-**Manifestações culturais:** A cultura está saturada de tempo que falta. Promete-se poupá-lo em tudo, e tudo o que o promete poupar acaba por o consumir. Os métodos de gestão do tempo são best-sellers perpétuos, sintoma da doença que dizem curar. A própria linguagem está doente: gasta-se tempo, perde-se tempo, ganha-se tempo, mata-se tempo, como se ele fosse dinheiro ou inimigo. E a velocidade é vendida como virtude, o rápido como bom, de modo que abrandar parece, na cultura, um defeito a corrigir e não um direito a exercer.
+**Manifestações culturais:** A cultura está saturada de tempo que falta. Promete-se poupá-lo em tudo, e tudo o que o promete poupar acaba por o consumir. Os métodos de gestão do tempo são best-sellers perpétuos, sintoma da doença que dizem curar. A própria linguagem está doente: gasta-se tempo, perde-se tempo, ganha-se tempo, mata-se tempo, como se ele fosse dinheiro ou inimigo. A velocidade, por sua vez, é vendida como virtude, o rápido como bom, de modo que abrandar parece, na cultura, um defeito a corrigir e não um direito a exercer.
 
 **Manifestações religiosas:** Nas suas formas devotas, a doença do tempo manifesta-se na pressa de salvar, na agenda espiritual cheia, no descanso sagrado esvaziado pela antecipação do que vem a seguir. Mas as tradições guardam, contra ela, o tempo litúrgico, cíclico e lento, que volta sobre si, e a ideia de eternidade que retira ao tempo a urgência de ser tudo. O dia de descanso, a hora de oração, o silêncio do retiro, eram formas de devolver ao tempo a sua espessura, de o tirar da contabilidade e o entregar à duração.
 
@@ -328,7 +328,7 @@ Relações: [A Religião da Produtividade, A Ocupação Permanente, A Doença do
 
 **Manifestações religiosas:** Nas suas formas devotas, o trabalho como identidade aparece como vocação absoluta, em que servir é tudo e a pessoa se esgota na missão. Mas as tradições guardam, contra esta fusão, a afirmação de um valor anterior e independente: a pessoa vale por ser, não por fazer, e é amada antes de produzir nada. O descanso sagrado é, neste sentido, uma declaração de identidade, lembra que o ser humano não é a sua obra, que há nele algo que nenhum trabalho cria nem nenhum fracasso destrói, e que esse algo é o seu fundamento verdadeiro.
 
-**Manifestações económicas:** Na economia, esta fusão é extraordinariamente útil e por isso encorajada. O trabalhador que é o seu trabalho dá-se inteiro, sem reservas, porque defender o seu tempo lhe pareceria trair-se a si próprio. A própria linguagem das organizações alimenta a fusão, falando de pertença, de família, de missão, de modo que sair se sente como exílio. E quando o vínculo se quebra, do lado da empresa, o trabalhador descobre, na dor desproporcionada da perda, quanto da sua identidade tinha depositado num lugar que a tratava como recurso.
+**Manifestações económicas:** Na economia, esta fusão é extraordinariamente útil e por isso encorajada. O trabalhador que é o seu trabalho dá-se inteiro, sem reservas, porque defender o seu tempo lhe pareceria trair-se a si próprio. A própria linguagem das organizações alimenta a fusão, falando de pertença, de família, de missão, de modo que sair se sente como exílio. Depois, quando o vínculo se quebra, do lado da empresa, o trabalhador descobre, na dor desproporcionada da perda, quanto da sua identidade tinha depositado num lugar que a tratava como recurso.
 
 **Manifestações familiares:** Em casa, a fusão transmite-se pelo exemplo e pela aprovação condicionada. A criança vê o pai ou a mãe definir-se pelo trabalho, ausente em corpo ou em alma por causa dele, e aprende que é ali que reside o valor. Cresce a ser elogiada pelo que faz e não pelo que é, e interioriza que o amor se ganha produzindo. Torna-se adulta a procurar, no desempenho, uma confirmação do seu direito a existir, e herda assim a equação mais frágil de todas, valho porque faço, com a sombra que a acompanha, se deixo de fazer, deixo de valer.
 
@@ -398,7 +398,7 @@ Relações: [O Culto da Urgência, Os Artefactos da Pressa, A Métrica de Tudo]
 
 **Contra-exemplos:** Há quem mantenha vínculos fortes sem disponibilidade total, e a sua existência prova que uma coisa não exige a outra. A amizade que sobrevive a longos silêncios e se reencontra inteira, sem cobrar a ausência. As culturas onde a presença se deve em momentos densos, a visita, a refeição partilhada, e onde entre eles a ausência é natural e respeitada. O gesto deliberado de proteger horas sem rede, e a descoberta de que os vínculos verdadeiros não se quebram com ele. Estes contra-exemplos mostram que a disponibilidade permanente não é prova de afecto, é apenas um rito, e um rito que se pode dispensar.
 
-**Manifestações culturais:** A cultura ensina os rituais como boas maneiras e pune a sua transgressão como descortesia. Responder logo é educado, demorar é suspeito, desligar é quase ofensa. A própria arquitectura das ferramentas, com os seus sinais de visto, de a escrever, de em linha, foi desenhada para tornar a ausência visível e a disponibilidade verificável, transformando cada um em testemunha da presença dos outros. E a cultura celebra quem está sempre lá, sempre a responder, sempre acessível, como se isso fosse uma forma de generosidade, escondendo que é, antes, uma forma de servidão consentida.
+**Manifestações culturais:** A cultura ensina os rituais como boas maneiras e pune a sua transgressão como descortesia. Responder logo é educado, demorar é suspeito, desligar é quase ofensa. A própria arquitectura das ferramentas, com os seus sinais de visto, de a escrever, de em linha, foi desenhada para tornar a ausência visível e a disponibilidade verificável, transformando cada um em testemunha da presença dos outros. Além disso, a cultura celebra quem está sempre lá, sempre a responder, sempre acessível, como se isso fosse uma forma de generosidade, escondendo que é, antes, uma forma de servidão consentida.
 
 **Manifestações religiosas:** Nas suas formas devotas, os rituais da disponibilidade aparecem como entrega sem limites, estar sempre disponível para todos como prova de caridade, sem direito ao recolhimento. Mas as tradições guardam, contra esta dispersão, o valor da retirada: o retiro, o deserto, a clausura, o silêncio guardado, formas de se ausentar do mundo para se estar inteiro noutro lugar. Os mestres espirituais ausentavam-se das multidões para rezar, e essa ausência não era falta de amor, era a sua condição, porque só quem se recolhe tem depois algo inteiro para dar.
 
@@ -435,7 +435,7 @@ Relações: [A Religião da Produtividade, Os Artefactos da Pressa, A Doença do
 
 **Contra-exemplos:** Há domínios inteiros que resistem ao número, e a sua existência prova que nem tudo se deixa contar sem se perder. O valor de uma amizade, a qualidade de uma tarde, a profundidade de um silêncio partilhado, não têm unidade nem somam. As culturas onde o que conta se conta por relação e por acontecimento, e não por quantidade. O gesto de quem recusa medir o que ama, sabendo que medir o esvaziaria. Estes contra-exemplos mostram que há uma forma de valorizar que não pesa, e que talvez seja ela a que protege o essencial precisamente por não o reduzir a número.
 
-**Manifestações culturais:** A cultura mede e exibe a medida sem cessar. O sucesso conta-se em números, o valor de uma pessoa traduz-se em indicadores visíveis, e até a vida íntima se quantifica, em seguidores, em reacções, em tempo de uso. A própria experiência se mede enquanto se vive, contada antes de ser sentida. E o que não se deixa medir, a contemplação, a demora, o cuidado lento, fica sem lugar na conversa pública, como se não existisse, porque não tem número para se mostrar, e o que não se mostra, na cultura da métrica, quase não chega a contar como real.
+**Manifestações culturais:** A cultura mede e exibe a medida sem cessar. O sucesso conta-se em números, o valor de uma pessoa traduz-se em indicadores visíveis, e até a vida íntima se quantifica, em seguidores, em reacções, em tempo de uso. A própria experiência se mede enquanto se vive, contada antes de ser sentida. Já o que não se deixa medir, a contemplação, a demora, o cuidado lento, fica sem lugar na conversa pública, como se não existisse, porque não tem número para se mostrar, e o que não se mostra, na cultura da métrica, quase não chega a contar como real.
 
 **Manifestações religiosas:** Nas suas formas devotas, a métrica entra como contabilidade da virtude, contar orações, pesar boas obras, medir o progresso espiritual como quem segue um indicador. Mas as tradições guardam, contra esta redução, a afirmação do incomensurável: o amor que não se pesa, a graça que não se merece por acumulação, o valor de uma alma que nenhum número exprime. As parábolas que invertem a contabilidade, em que o último vale tanto como o primeiro, são protestos antigos contra a métrica de tudo, lembretes de que o essencial, justamente, não se conta.
 

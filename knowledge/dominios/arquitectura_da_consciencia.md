@@ -109,7 +109,7 @@ A arquitectura comunal de muitas culturas, e de modo forte a tradição africana
 
 Até que ponto as respostas humanas ao espaço são universais, herdadas da longa sobrevivência da espécie, e até que ponto são moldadas pela cultura particular de cada povo? Onde acaba a gramática comum e começa o dialecto? Não está resolvido como distinguir, num dado caso, o que vem do corpo da espécie e o que vem do hábito aprendido.
 
-Permanece em aberto se é possível construir deliberadamente para estados de consciência ainda raros, ou se a arquitectura só pode preparar o terreno e esperar. E permanece a questão de como medir o efeito de um espaço sobre a consciência sem o reduzir a indicadores que lhe traem a natureza, isto é, como conhecer este domínio sem o achatar ao que se deixa contar.
+Permanece em aberto se é possível construir deliberadamente para estados de consciência ainda raros, ou se a arquitectura só pode preparar o terreno e esperar. Permanece também a questão de como medir o efeito de um espaço sobre a consciência sem o reduzir a indicadores que lhe traem a natureza, isto é, como conhecer este domínio sem o achatar ao que se deixa contar.
 
 ## 14. Relação com A Grande Transição
 
@@ -129,9 +129,9 @@ São construção original desta obra: a leitura da arquitectura como produtora 
 
 Em que espaço da tua vida é que o teu corpo respira fundo sem que tu lho peças, e em que espaço é que ele se aperta? Repara onde te sentas numa sala cheia: porque escolhes aquele lugar e não outro, o que é que esse lugar te dá que os outros não dão?
 
-Há um sítio onde te demoras mais do que pretendias, sem saber bem porquê. O que é que a luz, a forma ou a escala desse sítio estão a fazer-te? E há um sítio que atravessas sempre depressa, onde nunca paras: o que é que esse sítio te diz que ali não podes ficar?
+Há um sítio onde te demoras mais do que pretendias, sem saber bem porquê. O que é que a luz, a forma ou a escala desse sítio estão a fazer-te? Há também um sítio que atravessas sempre depressa, onde nunca paras: o que é que esse sítio te diz que ali não podes ficar?
 
-A casa onde cresceste tinha um centro, um lugar onde a vida se juntava? E agora, na tua, há um centro assim, ou a vida dispersou-se por divisões que não se olham? Quando entras num lugar e algo em ti se fecha antes de pensares, e ficas sem saber se é o lugar ou se és tu, é exactamente aí, nessa dúvida, que isto começa.
+A casa onde cresceste tinha um centro, um lugar onde a vida se juntava? Agora, na tua, há um centro assim, ou a vida dispersou-se por divisões que não se olham? Quando entras num lugar e algo em ti se fecha antes de pensares, e ficas sem saber se é o lugar ou se és tu, é exactamente aí, nessa dúvida, que isto começa.
 
 ## Conceitos · desenvolvimento completo
 
@@ -148,7 +148,7 @@ Relações: [A Luz que Organiza, A Escala e o Eu, O Limiar Construído]
 
 **Equivalentes históricos:** A noção antiga de génio do lugar, o espírito próprio que cada sítio teria. As tradições de orientação e disposição que organizavam a casa para produzir certos estados, presentes em muitas culturas sob nomes diferentes. A consciência, nas arquitecturas sagradas de quase todas as épocas, de que o nártex, o pátio, a nave produzem registos interiores distintos e calculados.
 
-**Contra-exemplos:** A indiferença genuína de quem atravessa centenas de lugares por dia sem que nenhum o desloque: pode haver saturação que embota a leitura. Há também espaços tão neutros, tão calculadamente sem carácter, que parecem não produzir estado nenhum, e essa ausência é, ela própria, um estado, o da suspensão anestesiada. E há pessoas cujo estado interior é tão dominante que o espaço pouco lhes altera, sinal não de que o princípio falha, mas de que outra força o sobrepõe.
+**Contra-exemplos:** A indiferença genuína de quem atravessa centenas de lugares por dia sem que nenhum o desloque: pode haver saturação que embota a leitura. Há também espaços tão neutros, tão calculadamente sem carácter, que parecem não produzir estado nenhum, e essa ausência é, ela própria, um estado, o da suspensão anestesiada. Há ainda pessoas cujo estado interior é tão dominante que o espaço pouco lhes altera, sinal não de que o princípio falha, mas de que outra força o sobrepõe.
 
 **Manifestações culturais:** O cinema, que sabe que um plano de um espaço fixa o estado de uma cena antes de qualquer personagem falar. A literatura que abre um capítulo pela descrição de um lugar para afinar o leitor. O teatro e a cenografia, que trabalham o espaço como primeira fala. O turismo de atmosferas, em que se viaja menos para ver objectos e mais para entrar em estados que certos lugares dão.
 
@@ -170,7 +170,7 @@ Relações: [A Luz que Organiza, A Escala e o Eu, O Limiar Construído]
 - Emoção dominante: a expectativa imóvel do limiar, a segurança que ainda não se atreve a acreditar no que vê adiante.
 - Relação com o mundo pós-sobrevivência: o estado novo mostra-se ao longe, por uma fresta na construção antiga; vê-se que ali se respira de outra maneira, mas ainda se está deste lado, no corpo que aprende a confiar no que ainda não habitou.
 
-**Perguntas para conteúdos:** Pensa no último lugar onde, mal entraste, algo em ti mudou de afinação antes de pensares. Não foi o que viste, foi o que sentiste de imediato. E se esse estado, que tomas por teu, fosse em parte o que aquela divisão te fez, todos os dias da tua vida sem teres reparado?
+**Perguntas para conteúdos:** Pensa no último lugar onde, mal entraste, algo em ti mudou de afinação antes de pensares. Não foi o que viste, foi o que sentiste de imediato. Ora, e se esse estado, que tomas por teu, fosse em parte o que aquela divisão te fez, todos os dias da tua vida sem teres reparado?
 
 ### A Luz que Organiza
 Relações: [O Espaço como Estado, O Limiar Construído, A Escala e o Eu]
@@ -185,7 +185,7 @@ Relações: [O Espaço como Estado, O Limiar Construído, A Escala e o Eu]
 
 **Equivalentes históricos:** A ciência das vidraças nas catedrais, que transformava a luz em matéria de elevação. As arquitecturas que recortavam aberturas precisas para que o sol marcasse uma data, um altar, um instante. As tradições de habitação que organizavam as divisões pela passagem do sol ao longo do dia, dando a cada hora o seu lugar. A pintura que fez da luz o seu verdadeiro tema antes de qualquer objecto.
 
-**Contra-exemplos:** Os espaços concebidos para abolir a luz natural e a sua hierarquia, salas de jogo, certos locais de trabalho, onde a iluminação uniforme e perpétua serve precisamente para desorientar e reter. Há também quem prefira a penumbra e nela se organize melhor, mostrando que a hierarquia da luz não impõe um único sentido. E há a cegueira, que reorganiza toda a leitura do espaço por outras vias, prova de que a luz organiza mas não é a única gramática.
+**Contra-exemplos:** Os espaços concebidos para abolir a luz natural e a sua hierarquia, salas de jogo, certos locais de trabalho, onde a iluminação uniforme e perpétua serve precisamente para desorientar e reter. Há também quem prefira a penumbra e nela se organize melhor, mostrando que a hierarquia da luz não impõe um único sentido. Há ainda a cegueira, que reorganiza toda a leitura do espaço por outras vias, prova de que a luz organiza mas não é a única gramática.
 
 **Manifestações culturais:** A fotografia e o cinema, artes inteiras feitas da decisão sobre onde pôr a luz e onde deixar a sombra. A pintura de interiores que sabe que o tema é a janela. A cenografia teatral, em que a luz cria o espaço a cada cena. O culto contemporâneo da hora dourada, em que multidões procuram um certo estado que só aquela luz dá.
 
@@ -207,7 +207,7 @@ Relações: [O Espaço como Estado, O Limiar Construído, A Escala e o Eu]
 - Emoção dominante: o mistério sereno de uma claridade que convida sem ofuscar, e a expansão contida de quem vê adiante uma luz que não fere.
 - Relação com o mundo pós-sobrevivência: a luz nova vê-se por uma abertura no muro antigo; é quente, lenta, emitida pela própria matéria, e mostra um modo de iluminar que já não defende do escuro mas compõe estados, ainda do lado de cá da soleira.
 
-**Perguntas para conteúdos:** Repara para que luz, em tua casa, o teu corpo se move sem tu lhe mandares, e de que penumbra ele foge. E se a inquietação que sentes em certas divisões não fosse tua, mas da luz que ali não te deixa pousar a atenção em lado nenhum?
+**Perguntas para conteúdos:** Repara para que luz, em tua casa, o teu corpo se move sem tu lhe mandares, e de que penumbra ele foge. Pergunta-te ainda se a inquietação que sentes em certas divisões não seria tua, mas da luz que ali não te deixa pousar a atenção em lado nenhum.
 
 ### O Limiar Construído
 Relações: [A Luz que Organiza, O Abrigo e o Horizonte, O Espaço como Estado]
@@ -222,7 +222,7 @@ Relações: [A Luz que Organiza, O Abrigo e o Horizonte, O Espaço como Estado]
 
 **Equivalentes históricos:** O nártex das igrejas, zona de passagem entre o mundo e o sagrado. O genkan das casas japonesas, onde se deixa o exterior antes de pisar o interior. Os pátios sucessivos das arquitecturas que faziam chegar ao centro por graus. Os ritos de passagem de quase todas as culturas, que dão tempo e forma às transições da própria vida, e de que o limiar construído é o eco no espaço.
 
-**Contra-exemplos:** As arquitecturas que aboliram propositadamente o limiar em nome da fluidez e da transparência, e em que a ausência de transição é programa, não esquecimento. Há também quem precise de transições rápidas e ache os limiares demorados um entrave, sobretudo em estados de pressa. E há a urgência genuína, a fuga, o socorro, em que o limiar que retém se torna obstáculo, lembrando que a sua dádiva supõe que há tempo para a receber.
+**Contra-exemplos:** As arquitecturas que aboliram propositadamente o limiar em nome da fluidez e da transparência, e em que a ausência de transição é programa, não esquecimento. Há também quem precise de transições rápidas e ache os limiares demorados um entrave, sobretudo em estados de pressa. Há ainda a urgência genuína, a fuga, o socorro, em que o limiar que retém se torna obstáculo, lembrando que a sua dádiva supõe que há tempo para a receber.
 
 **Manifestações culturais:** A dramaturgia da entrada, no teatro e no cinema, em que fazer uma personagem atravessar um limiar é fazê-la mudar de estado à vista. A literatura dos umbrais, das portas que separam mundos. A arquitectura de aproximação dos grandes edifícios, em que a sequência de antecâmaras prepara a chegada. O ritual social de receber à porta, vestígio do cuidado com a passagem.
 
@@ -244,7 +244,7 @@ Relações: [A Luz que Organiza, O Abrigo e o Horizonte, O Espaço como Estado]
 - Emoção dominante: a expectativa serena de quem atravessa devagar, a segurança de uma passagem que não atira mas conduz.
 - Relação com o mundo pós-sobrevivência: o mundo novo abre-se ao fundo de um limiar longo; vê-se que para lá chegar é preciso atravessar com tempo, e a própria travessia, ainda inacabada, já começou a aligeirar o corpo do peso do mundo antigo.
 
-**Perguntas para conteúdos:** Lembra-te de uma porta que atravessas todos os dias sem reparar, e do que ela te exige por dentro nesse instante sem nome. E se o cansaço com que chegas a certos lugares viesse de não te darem soleira nenhuma, de te atirarem de um estado para outro sem te deixarem mudar de pele?
+**Perguntas para conteúdos:** Lembra-te de uma porta que atravessas todos os dias sem reparar, e do que ela te exige por dentro nesse instante sem nome. Pergunta-te se o cansaço com que chegas a certos lugares não viria de não te darem soleira nenhuma, de te atirarem de um estado para outro sem te deixarem mudar de pele?
 
 ### A Escala e o Eu
 Relações: [O Espaço como Estado, O Vazio Habitável, A Luz que Organiza]
@@ -259,7 +259,7 @@ Relações: [O Espaço como Estado, O Vazio Habitável, A Luz que Organiza]
 
 **Equivalentes históricos:** A escala monumental do poder, dos templos colossais aos palácios, feita para reduzir o indivíduo diante da divindade ou do soberano. As proporções harmónicas das arquitecturas clássicas, calibradas pela medida do corpo humano. As casas vernáculas de tectos baixos e divisões à medida, que devolvem intimidade. A escala deliberadamente esmagadora de certas arquitecturas de Estado, que falam pela dimensão antes de qualquer palavra.
 
-**Contra-exemplos:** A habituação dos que vivem permanentemente em grande escala e deixam de a sentir como esmagamento. O prazer genuíno de certas pessoas no imenso, que vivem como liberdade o que outras vivem como exposição. E há a escala íntima que para uns conforta e para outros sufoca, claustrofobia contra agorafobia, lembrando que a leitura da escala, embora ancorada no corpo da espécie, se inflecte por história e temperamento.
+**Contra-exemplos:** A habituação dos que vivem permanentemente em grande escala e deixam de a sentir como esmagamento. O prazer genuíno de certas pessoas no imenso, que vivem como liberdade o que outras vivem como exposição. Há ainda a escala íntima que para uns conforta e para outros sufoca, claustrofobia contra agorafobia, lembrando que a leitura da escala, embora ancorada no corpo da espécie, se inflecte por história e temperamento.
 
 **Manifestações culturais:** A pintura e a fotografia que usam a figura humana minúscula para dar a sentir o sublime do imenso. O cinema que esmaga ou liberta a personagem pela escala do plano. A literatura do colossal, das catedrais e das montanhas que reduzem o homem. O turismo do grandioso, em que se viaja para a sensação de pequenez admirada diante do que excede a medida humana.
 
@@ -281,7 +281,7 @@ Relações: [O Espaço como Estado, O Vazio Habitável, A Luz que Organiza]
 - Emoção dominante: a admiração imediata diante do colossal, mas uma admiração que expande em vez de reduzir, segurança na própria pequenez.
 - Relação com o mundo pós-sobrevivência: a escala nova vê-se ao longe, igualmente imensa mas sem esmagar; mostra que o colossal pode dilatar o eu em vez de o submeter, e quem o contempla do mundo antigo sente, pela primeira vez, grandeza sem ameaça.
 
-**Perguntas para conteúdos:** Repara em que espaço o teu corpo se faz grande e em que espaço se faz pequeno, e se isso é por tua conta ou por conta da altura do tecto. E se o tamanho que sentes ter no mundo viesse, em parte, das proporções das salas onde passas os teus dias sem nunca as teres escolhido?
+**Perguntas para conteúdos:** Repara em que espaço o teu corpo se faz grande e em que espaço se faz pequeno, e se isso é por tua conta ou por conta da altura do tecto. Pergunta-te se o tamanho que sentes ter no mundo não viria, em parte, das proporções das salas onde passas os teus dias sem nunca as teres escolhido.
 
 ### O Vazio Habitável
 Relações: [A Escala e o Eu, A Forma que Acalma, O Espaço como Estado]
@@ -296,7 +296,7 @@ Relações: [A Escala e o Eu, A Forma que Acalma, O Espaço como Estado]
 
 **Equivalentes históricos:** A estética do vazio das tradições orientais, em que o espaço por preencher é a própria matéria da beleza e da serenidade. O claustro e o pátio interior, vazios centrais em torno dos quais a vida se organiza. A sobriedade das arquitecturas monásticas, em que o despojamento é condição de recolhimento. A praça, vazio público guardado no centro das cidades para que a vida comum tenha onde acontecer.
 
-**Contra-exemplos:** O conforto genuíno de quem vive bem rodeado de coisas amadas e para quem o cheio é aconchego, não opressão. As culturas do horror ao vazio, em que o preenchimento ornamental é riqueza e o vazio é pobreza. E o vazio imposto pela penúria, que não é oferta mas privação, lembrando que o vazio só é habitável quando é escolha e não falta, e que a sua bondade depende de quem o vive e de como nasceu.
+**Contra-exemplos:** O conforto genuíno de quem vive bem rodeado de coisas amadas e para quem o cheio é aconchego, não opressão. As culturas do horror ao vazio, em que o preenchimento ornamental é riqueza e o vazio é pobreza. Há também o vazio imposto pela penúria, que não é oferta mas privação, lembrando que o vazio só é habitável quando é escolha e não falta, e que a sua bondade depende de quem o vive e de como nasceu.
 
 **Manifestações culturais:** A música, que vive tanto das pausas como das notas, e em que o silêncio é estrutura. A pintura que deixa respirar o branco do suporte. A poesia do espaço em branco, do não dito. O design que faz do despojamento um valor, por vezes mercantilizado, mas que reconhece no vazio uma qualidade e não apenas uma ausência.
 
@@ -318,7 +318,7 @@ Relações: [A Escala e o Eu, A Forma que Acalma, O Espaço como Estado]
 - Emoção dominante: o respiro profundo e sereno de quem entra num espaço que não pede nada à atenção, a expansão tranquila do silêncio habitado.
 - Relação com o mundo pós-sobrevivência: o vazio novo vê-se por uma abertura no amontoado do mundo antigo; mostra um espaço que não foi enchido por medo da falta, e quem o contempla sente, pela primeira vez, que o pouco pode ser oferta e não privação.
 
-**Perguntas para conteúdos:** Olha para a divisão mais cheia da tua casa e pergunta o que enches tu, ao enchê-la, e que falta tens medo que ela revele se ficar vazia. E se o cansaço que sentes em casa não viesse do que te falta, mas de não haver um único lugar por preencher onde a tua atenção pudesse, enfim, pousar?
+**Perguntas para conteúdos:** Olha para a divisão mais cheia da tua casa e pergunta o que enches tu, ao enchê-la, e que falta tens medo que ela revele se ficar vazia. Pergunta-te se o cansaço que sentes em casa não viria do que te falta, mas de não haver um único lugar por preencher onde a tua atenção pudesse, enfim, pousar.
 
 ### A Forma que Acalma
 Relações: [O Vazio Habitável, A Geometria da Pertença, O Espaço como Estado]
@@ -333,7 +333,7 @@ Relações: [O Vazio Habitável, A Geometria da Pertença, O Espaço como Estado
 
 **Equivalentes históricos:** As proporções harmónicas das arquitecturas clássicas, calibradas para o equilíbrio sentido. As cúpulas e abóbadas que envolvem em vez de cortar. As arcadas e colunatas, ritmos regulares que acompanham o passo. As arquitecturas vernáculas de formas arredondadas e orgânicas, da choça à casa de terra, que dispensam o ângulo agressivo. A tradição que associou certas proporções à serenidade muito antes de qualquer explicação fisiológica.
 
-**Contra-exemplos:** A energia e a excitação que certas formas agudas e instáveis produzem de propósito, e que para alguns é estímulo desejado e não desconforto. As arquitecturas que buscam a tensão e o alarme como valor estético ou expressivo. A habituação que torna invisível o efeito das formas em quem com elas vive sempre. E a variação cultural do que se lê como acolhedor, que mostra que a forma que acalma tem raiz no corpo mas dialecto na cultura.
+**Contra-exemplos:** A energia e a excitação que certas formas agudas e instáveis produzem de propósito, e que para alguns é estímulo desejado e não desconforto. As arquitecturas que buscam a tensão e o alarme como valor estético ou expressivo. A habituação que torna invisível o efeito das formas em quem com elas vive sempre. Há, por fim, a variação cultural do que se lê como acolhedor, que mostra que a forma que acalma tem raiz no corpo mas dialecto na cultura.
 
 **Manifestações culturais:** O design de objectos que arredonda os ângulos para confortar a mão e o olho. A música e a sua dependência de cadências e ritmos regulares que sossegam. As artes decorativas que repetem motivos numa cadência que acalma. A preferência transversal, em quase todas as culturas, pelas formas orgânicas nos objectos do conforto íntimo, do berço à loiça.
 
@@ -355,7 +355,7 @@ Relações: [O Vazio Habitável, A Geometria da Pertença, O Espaço como Estado
 - Emoção dominante: o sossego profundo de quem se sente envolvido sem ser cercado, o repouso vigilante de um corpo que finalmente baixou a guarda.
 - Relação com o mundo pós-sobrevivência: as formas novas vêem-se por uma fenda entre as arestas do mundo antigo; são curvas, rítmicas, respirantes, e quem as contempla sente o corpo soltar uma tensão que tinha sem saber, ainda do lado de cá das formas que cortam.
 
-**Perguntas para conteúdos:** Repara que objectos e que cantos da tua casa o teu corpo procura tocar, e quais evita, e vê se há curva no que procura e ângulo no que evita. E se a tensão que carregas em certos espaços não fosse tua, mas das arestas que ali te mantêm, sem o saberes, em guarda?
+**Perguntas para conteúdos:** Repara que objectos e que cantos da tua casa o teu corpo procura tocar, e quais evita, e vê se há curva no que procura e ângulo no que evita. Pergunta-te se a tensão que carregas em certos espaços não seria tua, mas das arestas que ali te mantêm, sem o saberes, em guarda.
 
 ### A Geometria da Pertença
 Relações: [A Forma que Acalma, O Abrigo e o Horizonte, O Espaço como Estado]
@@ -370,7 +370,7 @@ Relações: [A Forma que Acalma, O Abrigo e o Horizonte, O Espaço como Estado]
 
 **Equivalentes históricos:** A aldeia africana organizada em torno do centro comum e do fogo, geometria de pertença que precede o indivíduo isolado, e a casa de terra que respira com o clima e reúne. O claustro e o pátio das tradições mediterrânicas, centros vazios em torno dos quais a comunidade se ordena. A praça como coração da cidade. As disposições circulares de assembleia de muitas culturas, em que decidir em conjunto exige ver-se em roda.
 
-**Contra-exemplos:** As disposições deliberadamente hierárquicas, o trono, a cabeceira, o púlpito, que produzem ordem e poder e não pertença horizontal, e que para certos fins são necessárias. O recinto que une por dentro excluindo por fora, mostrando que a mesma geometria que faz pertencer pode fazer murar. E o gosto genuíno de muitos pela disposição que protege a privacidade contra a reunião, lembrando que nem toda a vida pede o círculo.
+**Contra-exemplos:** As disposições deliberadamente hierárquicas, o trono, a cabeceira, o púlpito, que produzem ordem e poder e não pertença horizontal, e que para certos fins são necessárias. O recinto que une por dentro excluindo por fora, mostrando que a mesma geometria que faz pertencer pode fazer murar. Há ainda o gosto genuíno de muitos pela disposição que protege a privacidade contra a reunião, lembrando que nem toda a vida pede o círculo.
 
 **Manifestações culturais:** A mesa redonda como símbolo de igualdade e de reunião sem cabeceira. A disposição em roda das músicas, das danças e das rodas de conversa de inúmeras culturas. O anfiteatro e a sua geometria de comunhão em torno de um centro. A nostalgia contemporânea da praça e do café como lugares de pertença que a cidade dispersa fez rarear.
 
@@ -392,7 +392,7 @@ Relações: [A Forma que Acalma, O Abrigo e o Horizonte, O Espaço como Estado]
 - Emoção dominante: a pertença serena de fazer parte sem ser cercado, o calor de um centro comum que reúne sem mandar.
 - Relação com o mundo pós-sobrevivência: o recinto novo vê-se por uma abertura entre as filas do mundo antigo; mostra um modo de reunir em torno de um centro que já não precisa de muro para unir, e quem o contempla da dispersão reconhece, com saudade de algo nunca vivido, a forma da pertença.
 
-**Perguntas para conteúdos:** Vê em torno de quê a vida da tua casa se junta, se há um centro para onde todos gravitam, ou se cada um vive na sua divisão sem se olharem. E se a solidão que às vezes sentes mesmo rodeado dos teus viesse de a tua casa não ter já nenhum lugar em roda do qual estarem juntos faça parte?
+**Perguntas para conteúdos:** Vê em torno de quê a vida da tua casa se junta, se há um centro para onde todos gravitam, ou se cada um vive na sua divisão sem se olharem. Pergunta-te se a solidão que às vezes sentes mesmo rodeado dos teus não viria de a tua casa não ter já nenhum lugar em roda do qual estarem juntos faça parte.
 
 ### O Abrigo e o Horizonte
 Relações: [A Geometria da Pertença, O Limiar Construído, A Escala e o Eu]
@@ -429,4 +429,4 @@ Relações: [A Geometria da Pertença, O Limiar Construído, A Escala e o Eu]
 - Emoção dominante: a segurança absoluta de quem tem as costas guardadas conjugada com a expansão serena de quem vê longe, repouso e amplitude no mesmo instante.
 - Relação com o mundo pós-sobrevivência: o mundo emergente vê-se inteiro do interior de um refúgio aberto sobre ele; o corpo está protegido deste lado e o olhar já habita o horizonte do outro, e nessa posição, abrigo aqui e vista lá, condensa-se toda a promessa da transição, ainda contemplada do limiar.
 
-**Perguntas para conteúdos:** Repara qual é, em cada sala, o teu lugar, e vê se não é sempre o que te dá parede atrás e vista em frente, e o que sentes quando te falta. E se a inquietação que tens em certos espaços, sem saberes nomeá-la, fosse apenas o teu corpo a dizer-te que ali ou não vês chegar quem chega, ou não tens onde guardar as costas?
+**Perguntas para conteúdos:** Repara qual é, em cada sala, o teu lugar, e vê se não é sempre o que te dá parede atrás e vista em frente, e o que sentes quando te falta. Pergunta-te se a inquietação que tens em certos espaços, sem saberes nomeá-la, não seria apenas o teu corpo a dizer-te que ali ou não vês chegar quem chega, ou não tens onde guardar as costas.

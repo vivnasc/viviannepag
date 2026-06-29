@@ -135,7 +135,7 @@ Há fissuras que não se reorganizam, e o que fazer com elas, sem as embelezar n
 
 Qual é o papel exacto de quem segura, e onde está a fronteira entre segurar quem atravessa e atravessar por ele, retirando-lhe o passo que só ele pode dar?
 
-E à escala da cultura: pode uma sociedade atravessar conscientemente uma transição, ou a fissura colectiva é sempre vivida como acaso e só nomeada depois?
+Já à escala da cultura: pode uma sociedade atravessar conscientemente uma transição, ou a fissura colectiva é sempre vivida como acaso e só nomeada depois?
 
 ## 14. Relação com A Grande Transição
 
@@ -167,7 +167,7 @@ Há uma lealdade a quem foste que te protege, e há uma que te prende: sabes, ne
 
 O que estás a chamar de fim poderá ser uma soleira que ainda não sabes pisar?
 
-E se o vazio que tentas preencher depressa fosse, exactamente, o lugar onde a forma nova está a nascer, e cada pressa fosse um aborto?
+Que farias se o vazio que tentas preencher depressa fosse, exactamente, o lugar onde a forma nova está a nascer, e cada pressa fosse um aborto?
 
 Quem é que te segura enquanto atravessas, e que parte do atravessamento só tu podes dar?
 
@@ -471,4 +471,4 @@ Relações: [O Reconhecimento, A Fissura, A Identidade Provisória]
 - Emoção dominante: a serenidade ampla de quem chegou a uma forma maior, atravessada pelo mistério de saber que também esta cederá; gravidade e gratidão, sem felicidade fácil.
 - Relação com o mundo pós-sobrevivência: o emergente está constituído mas a imagem honra o limiar mostrando a próxima fissura já presente nele; a forma nova vive-se, e não se fixa como chegada final.
 
-**Perguntas para conteúdos:** Que forma maior é que, depois de uma fissura, passou a conter o que antes te partia? Onde é que olhas para quem foste com gratidão e sem regresso? Consegues sentir a tua identidade como algo que tens e atravessas, e não como algo que és para sempre? E onde é que, nesta forma nova, já adivinhas a próxima rachadura?
+**Perguntas para conteúdos:** Que forma maior é que, depois de uma fissura, passou a conter o que antes te partia? Onde é que olhas para quem foste com gratidão e sem regresso? Consegues sentir a tua identidade como algo que tens e atravessas, e não como algo que és para sempre? Onde é que, nesta forma nova, já adivinhas a próxima rachadura?

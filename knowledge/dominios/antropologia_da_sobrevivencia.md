@@ -70,19 +70,19 @@ A pessoa que tem casa, comida e trabalho e ainda assim acorda com a sensação d
 
 ## 10. Consequências individuais
 
-Ao nível da pessoa, a sobrevivência prolongada produz um eu encolhido. A energia gasta a vigiar não fica disponível para criar; o medo de perder torna-se maior do que o desejo de viver. A Identidade de Escassez instala uma relação de défice consigo próprio, em que nunca se é suficiente porque nunca há suficiente. A vida adia-se: trabalha-se para a segurança que permitirá, um dia, começar a viver. O corpo paga em desgaste, em sono interrompido, em prazer suspenso. E forma-se uma intimidade estranha com a ameaça, ao ponto de a paz parecer vazia ou suspeita.
+Ao nível da pessoa, a sobrevivência prolongada produz um eu encolhido. A energia gasta a vigiar não fica disponível para criar; o medo de perder torna-se maior do que o desejo de viver. A Identidade de Escassez instala uma relação de défice consigo próprio, em que nunca se é suficiente porque nunca há suficiente. A vida adia-se: trabalha-se para a segurança que permitirá, um dia, começar a viver. O corpo paga em desgaste, em sono interrompido, em prazer suspenso. Forma-se, por fim, uma intimidade estranha com a ameaça, ao ponto de a paz parecer vazia ou suspeita.
 
 ## 11. Consequências colectivas
 
-À escala dos grupos, a Economia do Medo organiza instituições inteiras. Políticas constroem-se sobre a ameaça do outro; mercados movem-se a medo e a urgência; o poder legitima-se prometendo protecção contra perigos que ajuda a manter vivos. A Tribo e Fronteira gera muros, suspeitas e guerras de pertença, e transforma a diferença em combustível de conflito. A Hierarquia de Dominância naturaliza desigualdades como se fossem ordem da vida. A Competição como Destino tornada doutrina faz parecer ingénua qualquer forma de cooperação ampla. E a escassez, mesmo quando deixou de ser material, persiste como gramática partilhada: continuamos a desenhar mundos para corpos com fome num planeta que, em parte, já não a tem.
+À escala dos grupos, a Economia do Medo organiza instituições inteiras. Políticas constroem-se sobre a ameaça do outro; mercados movem-se a medo e a urgência; o poder legitima-se prometendo protecção contra perigos que ajuda a manter vivos. A Tribo e Fronteira gera muros, suspeitas e guerras de pertença, e transforma a diferença em combustível de conflito. A Hierarquia de Dominância naturaliza desigualdades como se fossem ordem da vida. A Competição como Destino tornada doutrina faz parecer ingénua qualquer forma de cooperação ampla. Por fim, a escassez, mesmo quando deixou de ser material, persiste como gramática partilhada: continuamos a desenhar mundos para corpos com fome num planeta que, em parte, já não a tem.
 
 ## 12. Sinais de transição
 
-A passagem da sobrevivência para a emergência anuncia-se quando a segurança deixa de ser o fim último e se torna apenas o chão de algo maior. Vê-se em quem, tendo o necessário, escolhe libertar em vez de acumular, e descobre que partilhar não esvazia. Vê-se quando a vigilância afrouxa o suficiente para a curiosidade entrar, e o estranho deixa de ser ameaça para se tornar possibilidade. Vê-se na lenta dissolução da fronteira rígida do nós, alargando o círculo de pertença sem o anular. Vê-se quando a competição deixa de parecer destino e a cooperação deixa de parecer ingenuidade. O sinal mais subtil é fisiológico: um corpo que aprende, pela primeira vez em muitas gerações, a estar seguro sem estar em guarda, e a descansar sem culpa.
+A passagem da sobrevivência para a emergência anuncia-se quando a segurança deixa de ser o fim último e se torna apenas o chão de algo maior. Vê-se em quem, tendo o necessário, escolhe libertar em vez de acumular, e descobre que partilhar não esvazia. Vê-se quando a vigilância afrouxa o suficiente para a curiosidade entrar, e o estranho deixa de ser ameaça para se tornar possibilidade. Há também a lenta dissolução da fronteira rígida do nós, alargando o círculo de pertença sem o anular. Reconhece-se ainda quando a competição deixa de parecer destino e a cooperação deixa de parecer ingenuidade. O sinal mais subtil é fisiológico: um corpo que aprende, pela primeira vez em muitas gerações, a estar seguro sem estar em guarda, e a descansar sem culpa.
 
 ## 13. Questões em aberto
 
-Até que ponto estas estruturas são realmente plásticas ao longo de uma vida, e até que ponto exigem gerações para mudar? Será possível desactivar a Vigilância Permanente sem perder a capacidade legítima de detectar perigo real? A escassez interior dissolve-se com a abundância material, ou são processos independentes? Quanto da Memória da Fome se transmite por cultura e quanto por outras vias mais profundas? Pode um colectivo atravessar esta transição sem que os indivíduos a atravessem primeiro, ou é o caminho inverso? E haverá um custo na travessia, uma vulnerabilidade nova que a saída da guarda permanente nos exponha, que ainda não sabemos nomear?
+Até que ponto estas estruturas são realmente plásticas ao longo de uma vida, e até que ponto exigem gerações para mudar? Será possível desactivar a Vigilância Permanente sem perder a capacidade legítima de detectar perigo real? A escassez interior dissolve-se com a abundância material, ou são processos independentes? Quanto da Memória da Fome se transmite por cultura e quanto por outras vias mais profundas? Pode um colectivo atravessar esta transição sem que os indivíduos a atravessem primeiro, ou é o caminho inverso? Resta perguntar se haverá um custo na travessia, uma vulnerabilidade nova que a saída da guarda permanente nos exponha, que ainda não sabemos nomear.
 
 ## 14. Relação com A Grande Transição
 
@@ -98,7 +98,7 @@ O que acima se constrói (os oito conceitos nucleares com estes nomes, a tese da
 
 ## 16. Perguntas geradoras de conteúdo
 
-E se a tua dureza não fosse tua, mas emprestada por quem teve fome antes de ti?
+Se a tua dureza não fosse tua, mas emprestada por quem teve fome antes de ti?
 
 O que é que o teu corpo continua a defender, num mundo onde a ameaça já mudou de forma?
 
@@ -112,7 +112,7 @@ O que ganharia a tua vida se a segurança deixasse de ser o fim e passasse a ser
 
 A quem é que o teu nós precisa de chamar eles para se manter de pé?
 
-E se a competição que te parece destino fosse só a memória de um tempo em que os recursos não chegavam para todos?
+Será a competição que te parece destino só a memória de um tempo em que os recursos não chegavam para todos?
 
 Que parte de ti ainda vive como se a fome estivesse à porta, num lugar onde já não está?
 
@@ -160,7 +160,7 @@ Se tirasses a falta do centro, o que é que sobrava de ti para te reconheceres?
 
 Quando foi a primeira vez que aprendeste a medir-te pelo que te faltava, e quem te ensinou a régua?
 
-E se o suficiente não estivesse mais à frente, mas atrás do hábito de o procurar?
+Talvez o suficiente não estivesse mais à frente, mas atrás do hábito de o procurar?
 
 ### Vigilância Permanente
 Relações: [Economia do Medo; Competição como Destino]
@@ -253,7 +253,7 @@ Relações: [Hierarquia de Dominância; Competição como Destino; D04]
 
 **Origem provável:** nasce de ambientes onde os recursos eram finitos e a cooperação dentro do grupo, combinada com a desconfiança fora dele, foram ambas vantajosas. O grupo que cooperava internamente e se defendia do exterior sobrevivia melhor do que o grupo aberto a todos. A lealdade ao nós e a suspeita do eles foram, durante a maior parte da história, condições de continuar vivo, e sedimentaram-se em estrutura mental antes de qualquer escolha.
 
-**Mecanismo:** opera por categorização rápida e por amputação. O sistema classifica em instantes quem é dos nossos e quem é dos outros, a partir de sinais mínimos de sotaque, nome, aparência ou pertença. A categoria precede o conhecimento: decide-se antes de conhecer. E a fronteira exige amputação, porque para pertencer ao nós é preciso recusar a parte de si que se reconheceria no outro. Pertence-se pela exclusão, e a coesão interna alimenta-se da diferença externa.
+**Mecanismo:** opera por categorização rápida e por amputação. O sistema classifica em instantes quem é dos nossos e quem é dos outros, a partir de sinais mínimos de sotaque, nome, aparência ou pertença. A categoria precede o conhecimento: decide-se antes de conhecer. A fronteira exige também amputação, porque para pertencer ao nós é preciso recusar a parte de si que se reconheceria no outro. Pertence-se pela exclusão, e a coesão interna alimenta-se da diferença externa.
 
 **Indicadores:** conforto na pertença ao grupo combinado com suspeita perante quem está fora; leitura imediata da diferença como perigo; coesão que se intensifica contra um inimigo comum; dificuldade em reconhecer humanidade plena fora da fronteira; sensação de que alargar o círculo é trair o grupo.
 
@@ -427,7 +427,7 @@ Relações: [Tribo e Fronteira; Vigilância Permanente; D04]
 
 **Equivalentes históricos:** a antropologia evolutiva (leitura partilhada, sem autor único) sustenta a competição como adaptação a recursos finitos, ao lado da cooperação intra-grupo. Em contraponto, a tradição africana e ancestral de que uma pessoa só o é através das outras (enraizada em povos concretos, marcada como tal) e as práticas de partilha e celeiro comum mostram que a resposta à escassez não foi sempre a competição. A formulação da Competição como Destino, crença generalizada para além do seu contexto, é própria.
 
-**Contra-exemplos:** nem toda a competição é Competição como Destino. A competição pontual em contextos de recursos genuinamente finitos é realismo e não crença distorcida. E há contextos vastos de cooperação, de ganhos partilhados, de criação que multiplica em vez de dividir, que desmentem a soma zero como lei da vida. As tradições de partilha mostram que a escassez pôde gerar vínculo e não só rivalidade. O conceito nomeia a crença que vê arena em toda a parte, não a competição quando ela é real.
+**Contra-exemplos:** nem toda a competição é Competição como Destino. A competição pontual em contextos de recursos genuinamente finitos é realismo e não crença distorcida. Há também contextos vastos de cooperação, de ganhos partilhados, de criação que multiplica em vez de dividir, que desmentem a soma zero como lei da vida. As tradições de partilha mostram que a escassez pôde gerar vínculo e não só rivalidade. O conceito nomeia a crença que vê arena em toda a parte, não a competição quando ela é real.
 
 **Manifestações culturais:** a cultura que celebra o vencedor e desvaloriza quem não compete; a comparação erigida em motor; narrativas em que a vida é corrida e quem coopera fica para trás; o realismo da rivalidade contra a ingenuidade da partilha.
 

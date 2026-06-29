@@ -17,7 +17,7 @@ A Antropologia da Consciência estuda como as formas de consciência variam entr
 
 ## 2. Pergunta central
 
-Como variam as formas de consciência entre culturas, épocas e cosmovisões? Mais precisamente: se a consciência não é uma só, mas muitas, o que está a variar quando ela varia? A capacidade de atenção, a textura íntima da experiência, a fronteira do eu, o tipo de presenças que o mundo admite, a forma do tempo vivido? E se aquilo a que chamamos natureza humana for, em boa parte, a configuração de consciência produzida por uma fase muito longa de sobrevivência, então o que é que nos parece eterno e é apenas demorado?
+Como variam as formas de consciência entre culturas, épocas e cosmovisões? Mais precisamente: se a consciência não é uma só, mas muitas, o que está a variar quando ela varia? A capacidade de atenção, a textura íntima da experiência, a fronteira do eu, o tipo de presenças que o mundo admite, a forma do tempo vivido? Por fim, se aquilo a que chamamos natureza humana for, em boa parte, a configuração de consciência produzida por uma fase muito longa de sobrevivência, então o que é que nos parece eterno e é apenas demorado?
 
 ## 3. Hipótese principal
 
@@ -47,7 +47,7 @@ A variação da consciência não acontece no vácuo: passa por mecanismos concr
 
 ## 6. Tensões
 
-Há uma tensão entre rigor e respeito: descrever cosmovisões alheias com seriedade científica sem as traduzir para fora de si mesmas, sem as forçar à grelha que diz que isto é metáfora, aquilo é crença, aquilo é superstição. Há a tensão entre o universal e o local: existem invariantes da consciência humana, ou é tudo cultura? Este domínio sustenta que há plasticidade real sem cair no relativismo que nega qualquer chão comum. Há a tensão entre comparar e generalizar: comparar tradições é necessário, mas há o risco constante de fundir tradições distintas numa massa indistinta, sobretudo quando se fala de África ou dos povos indígenas como se fossem um só. Há a tensão entre a admiração e o exotismo: reconhecer a profundidade de outras cosmovisões sem as transformar em adereço para o cansaço ocidental. E há a tensão interna à própria obra: ao propor uma transição, corre-se o risco de fazer das outras cosmovisões um destino para o qual a modernidade caminha, repetindo a velha escada por outras palavras. Este domínio tem de a resistir.
+Há uma tensão entre rigor e respeito: descrever cosmovisões alheias com seriedade científica sem as traduzir para fora de si mesmas, sem as forçar à grelha que diz que isto é metáfora, aquilo é crença, aquilo é superstição. Há a tensão entre o universal e o local: existem invariantes da consciência humana, ou é tudo cultura? Este domínio sustenta que há plasticidade real sem cair no relativismo que nega qualquer chão comum. Há a tensão entre comparar e generalizar: comparar tradições é necessário, mas há o risco constante de fundir tradições distintas numa massa indistinta, sobretudo quando se fala de África ou dos povos indígenas como se fossem um só. Há a tensão entre a admiração e o exotismo: reconhecer a profundidade de outras cosmovisões sem as transformar em adereço para o cansaço ocidental. Há, por fim, a tensão interna à própria obra: ao propor uma transição, corre-se o risco de fazer das outras cosmovisões um destino para o qual a modernidade caminha, repetindo a velha escada por outras palavras. Este domínio tem de a resistir.
 
 ## 7. Paradoxos
 
@@ -59,7 +59,7 @@ Indicadores de que se está perante uma configuração mais porosa: a língua at
 
 ## 9. Exemplos do quotidiano
 
-Uma pessoa abre a porta de casa e fala em voz baixa para os que já morreram, não como recordação mas como saudação a quem está; outra pessoa, na mesma cidade, sentiria isso como sinal de perturbação. Uma família que faz um luto longo, com gestos partilhados, datas e refeições, atravessa a perda dentro de uma forma; outra família, sem essa forma, sente a perda como queda solitária e procura depois, no terapeuta, algo que faça o que o ritual fazia. Há quem peça licença à terra antes de a trabalhar, e quem nunca tenha pensado que a terra pudesse reparar em ser pedido. Há a sensação, comum na modernidade, de não ter tempo, como se o tempo fosse uma coisa que escasseia, contra a experiência de um tempo que volta com as estações e com os mortos. E há o gesto simples de cantar em conjunto, num funeral, numa festa, onde por minutos a pessoa deixa de ser só um eu e se sente parte de uma voz maior, e estranha, ao sair, ter de voltar a ser apenas ela.
+Uma pessoa abre a porta de casa e fala em voz baixa para os que já morreram, não como recordação mas como saudação a quem está; outra pessoa, na mesma cidade, sentiria isso como sinal de perturbação. Uma família que faz um luto longo, com gestos partilhados, datas e refeições, atravessa a perda dentro de uma forma; outra família, sem essa forma, sente a perda como queda solitária e procura depois, no terapeuta, algo que faça o que o ritual fazia. Há quem peça licença à terra antes de a trabalhar, e quem nunca tenha pensado que a terra pudesse reparar em ser pedido. Há a sensação, comum na modernidade, de não ter tempo, como se o tempo fosse uma coisa que escasseia, contra a experiência de um tempo que volta com as estações e com os mortos. Há ainda o gesto simples de cantar em conjunto, num funeral, numa festa, onde por minutos a pessoa deixa de ser só um eu e se sente parte de uma voz maior, e estranha, ao sair, ter de voltar a ser apenas ela.
 
 ## 10. Consequências individuais
 
@@ -75,7 +75,7 @@ Os sinais de transição aparecem onde a configuração fechada começa a sentir
 
 ## 13. Questões em aberto
 
-Permanece em aberto se há um núcleo invariável da consciência humana sob toda a variação cultural, ou se a variação vai até ao fundo. Permanece em aberto se uma configuração pode ser deliberadamente escolhida ou se só se herda, e o que significa, para alguém de uma cultura, recuperar porosidade sem apropriar indevidamente a cosmovisão de outra. Permanece em aberto como descrever cientificamente a consciência ancestral sem a traduzir para uma linguagem que a desfaz. Permanece em aberto se a Grande Transição é uma possibilidade real da espécie ou uma esperança projectada sobre cosmovisões alheias. E permanece em aberto, no plano do método, como comparar formas de consciência sem o ponto de vista de nenhuma delas, sabendo que esse ponto de vista de lado nenhum é, ele próprio, um produto da configuração fechada.
+Permanece em aberto se há um núcleo invariável da consciência humana sob toda a variação cultural, ou se a variação vai até ao fundo. Permanece em aberto se uma configuração pode ser deliberadamente escolhida ou se só se herda, e o que significa, para alguém de uma cultura, recuperar porosidade sem apropriar indevidamente a cosmovisão de outra. Permanece em aberto como descrever cientificamente a consciência ancestral sem a traduzir para uma linguagem que a desfaz. Permanece em aberto se a Grande Transição é uma possibilidade real da espécie ou uma esperança projectada sobre cosmovisões alheias. Permanece em aberto, ainda, no plano do método, como comparar formas de consciência sem o ponto de vista de nenhuma delas, sabendo que esse ponto de vista de lado nenhum é, ele próprio, um produto da configuração fechada.
 
 ## 14. Relação com A Grande Transição
 
@@ -93,9 +93,9 @@ Quando estás sozinho num quarto, estás mesmo sozinho? Quem te ensinou a respos
 
 Os teus mortos foram-se, ou continuam a interessar-se pela tua casa? Repara no que sentes ao ler isto, antes de decidires que é só uma figura de estilo.
 
-Já cantaste em conjunto e sentiste, por minutos, que deixavas de ser só tu? E reparaste no instante exacto em que tiveste de voltar a ser apenas tu?
+Já cantaste em conjunto e sentiste, por minutos, que deixavas de ser só tu? Reparaste no instante exacto em que tiveste de voltar a ser apenas tu?
 
-Quem te disse que o tempo corre só para a frente? E se houvesse uma parte de ti que sabe esperar pelo que volta?
+Quem te disse que o tempo corre só para a frente? Haverá em ti uma parte que sabe esperar pelo que volta?
 
 A solidão que sentes é tua, ou é a forma de uma cultura que te entregou um eu fechado e chamou liberdade à cela?
 
@@ -110,11 +110,11 @@ Relações: [O Eu Poroso e o Eu Fechado, As Cartografias Indígenas, O Tempo Cul
 
 **Mecanismo:** A cosmovisão opera por sedimentação silenciosa: instala-se na língua que se aprende antes de pensar, nos gestos quotidianos que ninguém explica, nas histórias que dizem quem habita a casa e o que acontece aos mortos. Funciona porque é invisível a quem a habita, que a toma por realidade e não por configuração. Reproduz-se cada vez que um adulto responde a uma criança sobre se está sozinha quando está sozinha, ou se a terra repara nela. O mecanismo mais profundo é a naturalização: a cosmovisão apaga os seus próprios rastos e apresenta-se como o modo evidente de as coisas serem.
 
-**Indicadores:** Reconhece-se uma cosmovisão pela surpresa que sente perante outra: o que numa configuração é óbvio, noutra é impensável. Indicam-na as perguntas que uma cultura nunca faz porque a resposta lhe parece dada, e os mal-entendidos persistentes entre tradições que partilham as palavras mas não o solo. Indica-a a dificuldade de traduzir certos termos sem os deformar. E indica-a a reacção de incompreensão, e por vezes de patologização, diante de quem habita um desenho diferente da fronteira do eu.
+**Indicadores:** Reconhece-se uma cosmovisão pela surpresa que sente perante outra: o que numa configuração é óbvio, noutra é impensável. Indicam-na as perguntas que uma cultura nunca faz porque a resposta lhe parece dada, e os mal-entendidos persistentes entre tradições que partilham as palavras mas não o solo. Indica-a a dificuldade de traduzir certos termos sem os deformar. Indica-a também a reacção de incompreensão, e por vezes de patologização, diante de quem habita um desenho diferente da fronteira do eu.
 
 **Equivalentes históricos:** As grandes viragens documentadas de imagem do mundo, da percepção mítica e participativa para a perspectiva distanciada que separa observador de observado, são equivalentes de mudança de cosmovisão da consciência. A passagem de um mundo povoado de presenças para um mundo desencantado, descrita por Charles Taylor como passagem do eu poroso ao eu fechado, é o equivalente histórico mais próximo da viragem que esta obra examina.
 
-**Contra-exemplos:** Não é cosmovisão uma simples crença que se pode adoptar ou abandonar sem mudar a textura da experiência: trocar de opinião sobre os mortos não é trocar de cosmovisão. Não é cosmovisão o estilo de vida, a moda ou a ideologia política, que se vestem por cima de uma configuração que permanece. E não é cosmovisão o exotismo: tomar adereços de outra tradição mantendo intacto o eu fechado é mudar de decoração, não de solo.
+**Contra-exemplos:** Não é cosmovisão uma simples crença que se pode adoptar ou abandonar sem mudar a textura da experiência: trocar de opinião sobre os mortos não é trocar de cosmovisão. Não é cosmovisão o estilo de vida, a moda ou a ideologia política, que se vestem por cima de uma configuração que permanece. Tão-pouco é cosmovisão o exotismo: tomar adereços de outra tradição mantendo intacto o eu fechado é mudar de decoração, não de solo.
 
 **Manifestações culturais:** Manifesta-se nas línguas e nas suas gramáticas da pessoa, nas formas de narrar que dizem quem age no mundo, nas artes que tornam visível o que cada cultura considera real. Manifesta-se no modo como uma sociedade trata os seus loucos, os seus sonhadores e os seus videntes, conforme os lê como doentes, como mensageiros ou como ambos.
 
@@ -151,7 +151,7 @@ Relações: [A Consciência Ancestral, Os Estados Rituais, As Cosmovisões da Co
 
 **Equivalentes históricos:** A passagem do tempo agrícola e litúrgico, ritmado pelas estações e pelas festas, para o tempo abstracto e homogéneo da hora mecânica e do calendário de trabalho é o equivalente histórico mais documentado: a mesma sucessão de instantes deixou de ser leito da vida para se tornar recurso medido. As concepções cíclicas do tempo em cosmovisões agrárias e ancestrais são o seu contraponto histórico.
 
-**Contra-exemplos:** Não é Tempo Cultural a mera medição do tempo, o relógio enquanto instrumento, que pode coexistir com qualquer forma vivida. Não é Tempo Cultural a gestão da agenda nem o calendário administrativo. E não é Tempo Cultural a nostalgia individual de quem sente saudade de um passado pessoal, que ocorre dentro de uma forma de tempo, mas não é a forma.
+**Contra-exemplos:** Não é Tempo Cultural a mera medição do tempo, o relógio enquanto instrumento, que pode coexistir com qualquer forma vivida. Não é Tempo Cultural a gestão da agenda nem o calendário administrativo. Também não é Tempo Cultural a nostalgia individual de quem sente saudade de um passado pessoal, que ocorre dentro de uma forma de tempo, mas não é a forma.
 
 **Manifestações culturais:** Manifesta-se nas festas e nos seus regressos anuais, na narrativa, que ora caminha para um fim único ora roda em retorno, e na relação com a história, vista como progresso, como queda ou como retorno. Manifesta-se na arquitectura das celebrações que repõem, todos os anos, um mesmo tempo sagrado.
 
@@ -188,7 +188,7 @@ Relações: [As Tecnologias do Sagrado, A Consciência Colectiva, O Tempo Cultur
 
 **Equivalentes históricos:** Os ritos de passagem documentados na sua estrutura de separação, limiar e reintegração são o equivalente histórico mais claro: o estado intenso vive na fase do limiar, entre o que se deixou de ser e o que ainda não se é, sempre dentro de uma forma. As liturgias, os cantos partilhados e os lutos comunitários funcionam como molduras equivalentes de estados rituais.
 
-**Contra-exemplos:** Não é estado ritual a perturbação sem moldura, o surto que não tem entrada nem saída regradas e em que a comunidade não sabe o que fazer. Não é estado ritual o consumo solitário e desenquadrado em busca de sensação, sem comunidade nem regresso garantido. E não é estado ritual o mero entretenimento que imita a forma sem a função, esvaziado do trabalho que o ritual fazia.
+**Contra-exemplos:** Não é estado ritual a perturbação sem moldura, o surto que não tem entrada nem saída regradas e em que a comunidade não sabe o que fazer. Não é estado ritual o consumo solitário e desenquadrado em busca de sensação, sem comunidade nem regresso garantido. Tão-pouco é estado ritual o mero entretenimento que imita a forma sem a função, esvaziado do trabalho que o ritual fazia.
 
 **Manifestações culturais:** Manifestam-se nas festas, nos lutos colectivos, nos cantos e danças que reordenam a atenção de um grupo inteiro, e nas formas de teatro e celebração em que os participantes deixam, por momentos, de ser apenas eles. Manifestam-se nos lugares consagrados onde se sabe que a consciência se altera.
 
@@ -225,7 +225,7 @@ Relações: [Os Estados Rituais, A Consciência Ancestral, As Tecnologias do Sag
 
 **Equivalentes históricos:** Os lutos comunitários prolongados, os cantos de trabalho e as celebrações de uníssono documentadas em muitas culturas são equivalentes históricos da consciência vivida em comum. A dimensão colectiva intuída por Jung, retida aqui com cautela, é o ponto de ancoragem teórica, e não uma tese assente sobre uma mente partilhada.
 
-**Contra-exemplos:** Não é Consciência Colectiva a multidão anónima cuja proximidade física não sincroniza nem une, e em que cada um permanece fechado. Não é Consciência Colectiva o conformismo ou a opinião pública, que padronizam crenças sem afrouxar a fronteira do eu. E não é Consciência Colectiva a dissolução da pessoa numa massa que apaga o indivíduo: o nós de que se fala não anula o eu, ampara-o.
+**Contra-exemplos:** Não é Consciência Colectiva a multidão anónima cuja proximidade física não sincroniza nem une, e em que cada um permanece fechado. Não é Consciência Colectiva o conformismo ou a opinião pública, que padronizam crenças sem afrouxar a fronteira do eu. Também não é Consciência Colectiva a dissolução da pessoa numa massa que apaga o indivíduo: o nós de que se fala não anula o eu, ampara-o.
 
 **Manifestações culturais:** Manifesta-se nos cantos e danças em conjunto, nas festas que fazem de muitos um corpo, e nas formas de arte feitas para serem vividas em comum e não consumidas em privado. Manifesta-se no estranhamento, ao fim de cantar com outros, de ter de voltar a ser apenas um.
 
@@ -262,7 +262,7 @@ Relações: [Os Estados Rituais, O Tempo Cultural, A Consciência Colectiva]
 
 **Equivalentes históricos:** As disciplinas de oração, jejum e silêncio das tradições contemplativas, transmitidas com método ao longo de séculos, são equivalentes históricos claros: técnicas fiáveis de modular a consciência. Os cantos, ritmos e privações de muitas tradições funcionam como tecnologias equivalentes, com a mesma estrutura de disciplina, transmissão e efeito.
 
-**Contra-exemplos:** Não é Tecnologia do Sagrado o adereço esvaziado, a prática extraída da sua tradição e usada como decoração sem disciplina nem função. Não é Tecnologia do Sagrado a técnica material sem ligação à consciência, nem a sensação obtida ao acaso sem forma transmissível. E não é Tecnologia do Sagrado a sua versão de consumo, esvaziada do trabalho que a tornava eficaz.
+**Contra-exemplos:** Não é Tecnologia do Sagrado o adereço esvaziado, a prática extraída da sua tradição e usada como decoração sem disciplina nem função. Não é Tecnologia do Sagrado a técnica material sem ligação à consciência, nem a sensação obtida ao acaso sem forma transmissível. Tão-pouco é Tecnologia do Sagrado a sua versão de consumo, esvaziada do trabalho que a tornava eficaz.
 
 **Manifestações culturais:** Manifestam-se nas tradições de canto, dança e narrativa que uma cultura ensina com método, e nos lugares consagrados construídos para alterar a consciência de quem neles entra. Manifestam-se na figura do mestre que transmite a técnica e responde por ela.
 
@@ -299,7 +299,7 @@ Relações: [As Cosmovisões da Consciência, A Consciência Ancestral, A Consci
 
 **Equivalentes históricos:** A passagem do eu poroso ao eu fechado descrita por Charles Taylor é o equivalente histórico exacto, e a fonte da distinção: a viragem de um mundo encantado, em que o sujeito era permeável a forças e espíritos, para um mundo desencantado de sujeitos vedados. As cosmovisões ancestrais e indígenas que mantêm a porosidade são o seu contraponto vivo.
 
-**Contra-exemplos:** Não é eu poroso a mera empatia ou sensibilidade dentro de um eu que permanece fechado: sentir muito não é ter a fronteira aberta. Não é eu fechado a simples reserva ou timidez, que ocorrem dentro de qualquer configuração. E não é distinção entre estes dois desenhos a diferença entre extroversão e introversão, que é traço de carácter e não arquitectura da fronteira.
+**Contra-exemplos:** Não é eu poroso a mera empatia ou sensibilidade dentro de um eu que permanece fechado: sentir muito não é ter a fronteira aberta. Não é eu fechado a simples reserva ou timidez, que ocorrem dentro de qualquer configuração. Nem é distinção entre estes dois desenhos a diferença entre extroversão e introversão, que é traço de carácter e não arquitectura da fronteira.
 
 **Manifestações culturais:** Manifestam-se na maneira como uma cultura representa a pessoa, vedada e autónoma ou atravessada por forças, e no estatuto que dá ao sonho e à visão. Manifestam-se no tratamento dos que vivem a fronteira de outro modo, lidos como doentes, como videntes, ou como ambos.
 
@@ -336,7 +336,7 @@ Relações: [As Cosmovisões da Consciência, A Consciência Ancestral, O Eu Por
 
 **Equivalentes históricos:** Os saberes ecológicos e cosmológicos de povos concretos, documentados na sua especificidade e ligados a territórios precisos, são o equivalente histórico: mapas do real válidos para um chão, e não doutrinas universais. O respeito crescente, ainda que tardio, por estes saberes como conhecimento vivo, e não como peça de museu, é um sinal histórico recente.
 
-**Contra-exemplos:** Não é Cartografia Indígena a sabedoria indígena genérica, a massa indistinta que apaga as diferenças entre tradições e é já uma deformação. Não é Cartografia Indígena o adereço extraído e descontextualizado para consumo, nem a projecção romântica de quem procura, em povos concretos, um espelho para o seu próprio cansaço. E não é Cartografia Indígena qualquer mapa abstracto que se diga válido em toda a parte.
+**Contra-exemplos:** Não é Cartografia Indígena a sabedoria indígena genérica, a massa indistinta que apaga as diferenças entre tradições e é já uma deformação. Não é Cartografia Indígena o adereço extraído e descontextualizado para consumo, nem a projecção romântica de quem procura, em povos concretos, um espelho para o seu próprio cansaço. Também não é Cartografia Indígena qualquer mapa abstracto que se diga válido em toda a parte.
 
 **Manifestações culturais:** Manifestam-se nas línguas, nas narrativas e nas práticas que ligam um povo à sua terra, e no saber preciso sobre os seres e os lugares desse território. Manifestam-se na arte e na toponímia que inscrevem o mapa do real na própria paisagem.
 
@@ -373,7 +373,7 @@ Relações: [O Eu Poroso e o Eu Fechado, O Tempo Cultural, A Consciência Colect
 
 **Equivalentes históricos:** A continuidade entre vivos e mortos atestada em muitas cosmovisões, com os antepassados mantidos presentes e activos na vida da comunidade, é o equivalente histórico desta configuração. A descrição da porosidade do eu por Charles Taylor e da pluralidade das estruturas da consciência por Gebser dão-lhe a ancoragem teórica, sem a nomear nem a reduzir.
 
-**Contra-exemplos:** Não é Consciência Ancestral a simples memória dos mortos dentro de um eu fechado, que os recorda mas os deixa num passado de onde não regressam. Não é Consciência Ancestral a árvore genealógica como registo, nem o culto privado da saudade. E não é Consciência Ancestral qualquer versão exotizada ou esotérica que a arranque das tradições concretas e a sirva como sabedoria genérica, deformação que esta obra recusa expressamente.
+**Contra-exemplos:** Não é Consciência Ancestral a simples memória dos mortos dentro de um eu fechado, que os recorda mas os deixa num passado de onde não regressam. Não é Consciência Ancestral a árvore genealógica como registo, nem o culto privado da saudade. Tão-pouco é Consciência Ancestral qualquer versão exotizada ou esotérica que a arranque das tradições concretas e a sirva como sabedoria genérica, deformação que esta obra recusa expressamente.
 
 **Manifestações culturais:** Manifestam-se nas formas de saudar, alimentar e consultar os antepassados, nas narrativas que mantêm viva a linha, e na constituição da pessoa como elo de uma geração. Manifestam-se no estatuto de presença, e não de mera lembrança, que os mortos guardam na vida quotidiana.
 

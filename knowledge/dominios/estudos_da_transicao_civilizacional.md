@@ -15,7 +15,7 @@ relacionados: [D06, D10, D14]
 
 Os Estudos da Transição Civilizacional ocupam-se de uma única coisa: a passagem em si. Não a civilização da sobrevivência que ficou para trás, nem a civilização da emergência que ainda não existe, mas o intervalo entre as duas, o tempo em que uma forma de habitar o mundo já não basta e a forma seguinte ainda não tem chão. Este é o domínio que fecha o território porque é o domínio do entre. Estuda-se aqui o terreno mais instável e o mais decisivo: o limiar.
 
-Define-se transição civilizacional como a reconfiguração profunda dos pressupostos que organizam uma cultura, ao ponto de o que era considerado natureza humana deixar de operar como dado e passar a revelar-se como adaptação. Aquilo a que chamamos natureza humana, a desconfiança, a acumulação, o esforço como prova de valor, a identidade defendida como uma fronteira, a pertença tribal que separa os nossos dos outros, poderá ser a sedimentação de milénios de sobrevivência. Não é falso. É antigo. E o que é antigo numa espécie ganha o estatuto de inevitável. A transição é o momento em que esse estatuto vacila.
+Define-se transição civilizacional como a reconfiguração profunda dos pressupostos que organizam uma cultura, ao ponto de o que era considerado natureza humana deixar de operar como dado e passar a revelar-se como adaptação. Aquilo a que chamamos natureza humana, a desconfiança, a acumulação, o esforço como prova de valor, a identidade defendida como uma fronteira, a pertença tribal que separa os nossos dos outros, poderá ser a sedimentação de milénios de sobrevivência. Não é falso. É antigo, e o que é antigo numa espécie ganha o estatuto de inevitável. A transição é o momento em que esse estatuto vacila.
 
 O domínio não promete a outra margem. Descreve a travessia. Estuda como um sistema vivo, individual ou colectivo, atravessa um intervalo em que perdeu a antiga estabilidade e ainda não encontrou a nova, sem se desfazer no processo. Trabalha com física de sistemas por analogia, com antropologia do limiar por herança directa, e com uma leitura original que toma a transição civilizacional como rito de passagem em escala. A unidade de análise não é o indivíduo nem a instituição: é a passagem que os atravessa a ambos.
 
@@ -23,7 +23,7 @@ O domínio não promete a outra margem. Descreve a travessia. Estuda como um sis
 
 Como se atravessa, em segurança, a passagem entre a civilização da sobrevivência e a da emergência?
 
-A pergunta carrega o peso de cada palavra. Atravessar implica que há um lado de cá e um de lá, e um meio sem nome. Em segurança não significa sem dor nem sem perda, significa sem ruptura que destrua quem atravessa. E passagem é a categoria-chave: não estado, não destino, mas movimento entre dois estados, com a sua própria duração, as suas próprias regras, a sua própria fragilidade. A pergunta não é se chegamos. É se aguentamos o caminho.
+A pergunta carrega o peso de cada palavra. Atravessar implica que há um lado de cá e um de lá, e um meio sem nome. Em segurança não significa sem dor nem sem perda, significa sem ruptura que destrua quem atravessa. Já passagem é a categoria-chave: não estado, não destino, mas movimento entre dois estados, com a sua própria duração, as suas próprias regras, a sua própria fragilidade. A pergunta não é se chegamos. É se aguentamos o caminho.
 
 ## 3. Hipótese principal
 
@@ -65,7 +65,7 @@ A primeira tensão é entre pressa e tempo do limiar. A passagem tem uma duraç�
 
 A segunda tensão é entre o que se larga e o que ainda protege. A forma antiga não é só prisão; é também abrigo que funcionou durante milénios. Largar cedo demais o que ainda nos segura é imprudência disfarçada de coragem. Mas agarrar o abrigo depois de ele se ter tornado peso é recusar a passagem. Saber a hora é a tensão central, e não há régua para ela.
 
-A terceira tensão é entre o indivíduo que atravessa e a comunidade que o segura. Ninguém atravessa pelo outro; a passagem é sempre interior e solitária no seu núcleo. E no entanto ninguém atravessa sozinho; sem quem segure, a perda de chão é queda. A travessia é simultaneamente intransferível e impossível em isolamento. As duas coisas, ao mesmo tempo.
+A terceira tensão é entre o indivíduo que atravessa e a comunidade que o segura. Ninguém atravessa pelo outro; a passagem é sempre interior e solitária no seu núcleo. No entanto, ninguém atravessa sozinho; sem quem segure, a perda de chão é queda. A travessia é simultaneamente intransferível e impossível em isolamento. As duas coisas, ao mesmo tempo.
 
 ## 7. Paradoxos
 
@@ -91,7 +91,7 @@ Observa-se a aproximação da massa crítica quando atravessar deixa de provocar
 
 Quem deixa um trabalho que esvaziava antes de ter o seguinte, e vive os meses do meio sem saber quem é sem aquele crachá. A perda de chão é literal: a identidade que vinha da função desfez-se e a nova ainda não chegou. Quem aguenta esse meio sem correr de volta para qualquer função que tape o vazio está a fazer a passagem.
 
-Quem foi educado a desconfiar e a defender-se, e começa a perceber que a desconfiança que o protegeu o está agora a isolar. Largar a guarda não é traição da prudência: é descobrir que a guarda já não defende nada, só separa. E entre a guarda velha e a confiança nova há um intervalo desconfortável em que se está exposto.
+Quem foi educado a desconfiar e a defender-se, e começa a perceber que a desconfiança que o protegeu o está agora a isolar. Largar a guarda não é traição da prudência: é descobrir que a guarda já não defende nada, só separa. Entre a guarda velha e a confiança nova há um intervalo desconfortável em que se está exposto.
 
 Uma família que organizava tudo à volta de uma regra antiga, sacrifício, silêncio, aparências, e em que alguém deixa de cumprir a regra. A casa entra no entre: o velho deixou de servir, o novo ainda não foi acordado por ninguém. É a janela de tolerância colectiva a ser testada, a ver se a família aguenta a instabilidade sem se fechar de novo.
 
@@ -151,15 +151,15 @@ O pilar africano é estrutural e não decorativo. Nas culturas que ritualizaram 
 
 ## 16. Perguntas geradoras de conteúdo
 
-O que é que, na tua vida, deixou de funcionar por mais força que lhe metas? E se o cansaço não fosse falha tua, mas o sinal de que a forma antiga se saturou?
+O que é que, na tua vida, deixou de funcionar por mais força que lhe metas? Imagina se o cansaço não fosse falha tua, mas o sinal de que a forma antiga se saturou?
 
 Já estiveste alguma vez no meio, sem ser já quem eras nem ainda quem ias ser? Lembras-te do que sentias quando o chão velho tinha desaparecido e o novo ainda não tinha chegado?
 
-Da última vez que atravessaste uma passagem difícil, quem é que ficou à beira sem resolver nada? E o que mudou, em ti, por essa pessoa não ter atravessado por ti mas ter ficado enquanto atravessavas?
+Da última vez que atravessaste uma passagem difícil, quem é que ficou à beira sem resolver nada? Que mudou, em ti, por essa pessoa não ter atravessado por ti mas ter ficado enquanto atravessavas?
 
 O que é que ainda não largaste porque, no fundo, ainda te protege? Onde acaba a prudência de ficar e onde começa o medo de avançar?
 
-Que parte de ti, defendida como se fosse a tua natureza, talvez seja só o que aprendeste para sobreviver? E o que ficaria livre se essa parte deixasse de precisar de defender-te?
+Que parte de ti, defendida como se fosse a tua natureza, talvez seja só o que aprendeste para sobreviver? Que ficaria livre se essa parte deixasse de precisar de defender-te?
 
 Já reparaste que o caminho só aparece a quem já anda? O que estás à espera de ver pronto, antes de dares o primeiro passo, que só vai aparecer depois de o dares?
 
@@ -200,7 +200,7 @@ Relações: [O Ponto de Bifurcação, O Luto da Forma Antiga, A Segurança na Tr
 - Emoção dominante: o silêncio do limiar, luto e possibilidade ao mesmo tempo, mistério sem adrenalina, fim de um ciclo e abertura de outro.
 - Relação com o mundo pós-sobrevivência: a cidade emergente aparece só ao longe, nunca habitada nem explicada; mostra-se que existe e que não está ainda ao alcance, vislumbre por uma fenda, não chegada.
 
-**Perguntas para conteúdos:** Em que parte da tua vida estás agora no entre, sem seres já quem eras nem ainda quem vais ser? Reparaste que já não tens palavras para te descrever, e que ainda não chegaram as novas? E se esse vão sem chão não fosse erro do caminho, mas o próprio caminho a pedir para ser habitado em vez de saltado?
+**Perguntas para conteúdos:** Em que parte da tua vida estás agora no entre, sem seres já quem eras nem ainda quem vais ser? Reparaste que já não tens palavras para te descrever, e que ainda não chegaram as novas? Imagina se esse vão sem chão não fosse erro do caminho, mas o próprio caminho a pedir para ser habitado em vez de saltado?
 
 ### O Ponto de Bifurcação
 Relações: [A Passagem, A Massa Crítica, Os Guardiões do Limiar]
@@ -237,7 +237,7 @@ Relações: [A Passagem, A Massa Crítica, Os Guardiões do Limiar]
 - Emoção dominante: vertigem serena, o fim de um ciclo sem regresso e a abertura mistério de outro; gravidade e possibilidade, nunca euforia.
 - Relação com o mundo pós-sobrevivência: a cidade emergente surge num dos ramos, ao longe, por uma fenda, mostrando que é um futuro possível e não garantido, nunca habitada nem explicada.
 
-**Perguntas para conteúdos:** Houve um momento na tua vida a partir do qual já não dava para voltar atrás? Reconheces a vertigem de quando o passado deixa de te segurar e o futuro ainda não está escrito? E se nesse instante, em que um gesto pequeno parece decidir tudo, o que mais importasse fosse não descer, de medo, pelo ramo do regresso?
+**Perguntas para conteúdos:** Houve um momento na tua vida a partir do qual já não dava para voltar atrás? Reconheces a vertigem de quando o passado deixa de te segurar e o futuro ainda não está escrito? Será que, nesse instante, em que um gesto pequeno parece decidir tudo, o que mais importa é não descer, de medo, pelo ramo do regresso?
 
 ### A Janela de Tolerância Colectiva
 Relações: [A Segurança na Travessia, A Massa Crítica, O Luto da Forma Antiga]
@@ -274,7 +274,7 @@ Relações: [A Segurança na Travessia, A Massa Crítica, O Luto da Forma Antiga
 - Emoção dominante: a serenidade tensa de quem aguenta o não-saber em conjunto; segurança com mistério, sem alívio fácil nem euforia.
 - Relação com o mundo pós-sobrevivência: a cidade emergente vislumbra-se ao fundo, mostrando que a travessia em conjunto a aproxima sem a alcançar; nunca habitada, nunca explicada.
 
-**Perguntas para conteúdos:** Quanta incerteza aguenta o teu grupo, a tua família, o teu meio, antes de fechar a porta ou de se partir? Reparaste como, perante o que não se controla, a tentação é exigir ordem a qualquer preço? E se a tarefa não fosse acabar com a instabilidade, mas aprender a contê-la juntos para caber dentro do que se aguenta?
+**Perguntas para conteúdos:** Quanta incerteza aguenta o teu grupo, a tua família, o teu meio, antes de fechar a porta ou de se partir? Reparaste como, perante o que não se controla, a tentação é exigir ordem a qualquer preço? Será que a tarefa não é acabar com a instabilidade, mas aprender a contê-la juntos para caber dentro do que se aguenta?
 
 ### As Pontes que Nascem ao Avançar
 Relações: [A Passagem, O Ponto de Bifurcação]
@@ -311,7 +311,7 @@ Relações: [A Passagem, O Ponto de Bifurcação]
 - Emoção dominante: a confiança grave de quem avança sem ver o fim; mistério e possibilidade, fim de um ciclo, sem adrenalina.
 - Relação com o mundo pós-sobrevivência: a cidade emergente brilha ao longe como destino possível, mas o caminho até ela nunca se mostra inteiro; vislumbre, não chegada.
 
-**Perguntas para conteúdos:** O que estás à espera de ver pronto antes de dares o primeiro passo, que talvez só apareça depois de o dares? Lembras-te de uma vez em que o caminho só se desenhou por teres começado a andar sem o ver? E se a garantia que pedes não puder vir antes, porque é o passo que a constrói, e não o contrário?
+**Perguntas para conteúdos:** O que estás à espera de ver pronto antes de dares o primeiro passo, que talvez só apareça depois de o dares? Lembras-te de uma vez em que o caminho só se desenhou por teres começado a andar sem o ver? Imagina se a garantia que pedes não puder vir antes, porque é o passo que a constrói, e não o contrário?
 
 ### O Luto da Forma Antiga
 Relações: [A Passagem, A Janela de Tolerância Colectiva]
@@ -348,7 +348,7 @@ Relações: [A Passagem, A Janela de Tolerância Colectiva]
 - Emoção dominante: o luto sereno do limiar, perda real e possibilidade ao mesmo tempo; ternura pela casa que se deixa, sem amargura nem euforia.
 - Relação com o mundo pós-sobrevivência: a cidade emergente vislumbra-se ao fundo, mas o olhar está, neste instante, na despedida do mundo antigo; o novo espera, não se habita.
 
-**Perguntas para conteúdos:** O que é que estás a deixar que, no fundo, também te protegeu durante muito tempo? Reconheces a tristeza inesperada de largar algo que querias largar, como se uma casa ficasse para trás? E se entrar no novo sem chorar o velho fosse levá-lo inteiro contigo, por despedir, em vez de te soltares dele?
+**Perguntas para conteúdos:** O que é que estás a deixar que, no fundo, também te protegeu durante muito tempo? Reconheces a tristeza inesperada de largar algo que querias largar, como se uma casa ficasse para trás? Será que entrar no novo sem chorar o velho é levá-lo inteiro contigo, por despedir, em vez de te soltares dele?
 
 ### A Massa Crítica
 Relações: [O Ponto de Bifurcação, A Janela de Tolerância Colectiva]
@@ -385,7 +385,7 @@ Relações: [O Ponto de Bifurcação, A Janela de Tolerância Colectiva]
 - Emoção dominante: o reconhecimento sereno de já não se estar só; mistério e possibilidade do limiar, sem triunfalismo nem euforia.
 - Relação com o mundo pós-sobrevivência: a cidade emergente brilha ao fundo como possibilidade que a suficiência aproxima, nunca habitada nem explicada; mostra-se que está mais perto, não que se chegou.
 
-**Perguntas para conteúdos:** Já sentiste o alívio de descobrir que não és o único a atravessar, que há outros que já o fizeram? Reparaste como o teu próprio passo fica mais possível quando deixa de parecer loucura isolada? E se a mudança que esperas não precisasse da maioria, mas só dos suficientes, firmes, a segurar o limiar aberto?
+**Perguntas para conteúdos:** Já sentiste o alívio de descobrir que não és o único a atravessar, que há outros que já o fizeram? Reparaste como o teu próprio passo fica mais possível quando deixa de parecer loucura isolada? Mas e se a mudança que esperas não precisasse da maioria, mas só dos suficientes, firmes, a segurar o limiar aberto?
 
 ### Os Guardiões do Limiar
 Relações: [O Ponto de Bifurcação, A Segurança na Travessia]
@@ -422,7 +422,7 @@ Relações: [O Ponto de Bifurcação, A Segurança na Travessia]
 - Emoção dominante: a segurança grave de não se estar só no limiar; presença, mistério, o cuidado sereno de quem fica sem resolver, nunca alívio fácil.
 - Relação com o mundo pós-sobrevivência: a cidade emergente vislumbra-se ao fundo, e os guardiões ficam de costas para ela, voltados para quem atravessa; o novo espera, ninguém o habita, a função é segurar a passagem.
 
-**Perguntas para conteúdos:** Quem é que ficou à beira numa passagem tua sem resolver nada, só sem te deixar cair? Reconheces a diferença entre quem atravessou por ti, tirando-te a travessia, e quem ficou enquanto atravessavas? E se a tua própria travessia feita te tivesse tornado capaz de seres, agora, esse chão para outro que atravessa?
+**Perguntas para conteúdos:** Quem é que ficou à beira numa passagem tua sem resolver nada, só sem te deixar cair? Reconheces a diferença entre quem atravessou por ti, tirando-te a travessia, e quem ficou enquanto atravessavas? Imagina se a tua própria travessia feita te tivesse tornado capaz de seres, agora, esse chão para outro que atravessa?
 
 ### A Segurança na Travessia
 Relações: [A Janela de Tolerância Colectiva, Os Guardiões do Limiar, O Luto da Forma Antiga]
@@ -431,7 +431,7 @@ Relações: [A Janela de Tolerância Colectiva, Os Guardiões do Limiar, O Luto 
 
 **Origem provável:** Nasce da descoberta, feita pelas culturas do limiar, de que a travessia solitária é insuportável e a travessia segurada é possível. Onde se ritualizou a passagem em comunidade, percebeu-se que o que tornava o intervalo sem chão atravessável não era torná-lo firme, era haver quem o segurasse. A segurança como presença, e não como solidez, é uma inversão da herança que procurava sempre terreno verificado: aqui, a base não é o chão, é o outro.
 
-**Mecanismo:** O mecanismo é a sustituição da firmeza pela presença. Em vez de tapar o vão com piso, o que devolveria a forma antiga, mantém-se o vão aberto e põe-se por baixo dele a presença de quem segura. A perda de chão, em vez de queda, torna-se suspensão. A travessia torna-se suportável não por se tornar firme, mas por se tornar acompanhada. O risco mantém-se; o que muda é que deixa de ser solitário. É a presença, não a solidez, que segura.
+**Mecanismo:** O mecanismo é a substituição da firmeza pela presença. Em vez de tapar o vão com piso, o que devolveria a forma antiga, mantém-se o vão aberto e põe-se por baixo dele a presença de quem segura. A perda de chão, em vez de queda, torna-se suspensão. A travessia torna-se suportável não por se tornar firme, mas por se tornar acompanhada. O risco mantém-se; o que muda é que deixa de ser solitário. É a presença, não a solidez, que segura.
 
 **Indicadores:** Sente-se que se aguenta mais do que se julgava, desde que haja quem segure; descobre-se que não era chão firme que faltava, era presença. Observa-se que, onde há quem fique, quem atravessa não recua, e que a travessia, antes impossível em isolamento, se torna possível em conjunto. O indicador é o desfasamento entre o risco, que permanece, e o pânico, que desaparece quando há sustentação.
 
@@ -459,4 +459,4 @@ Relações: [A Janela de Tolerância Colectiva, Os Guardiões do Limiar, O Luto 
 - Emoção dominante: a segurança serena de se aguentar o sem-chão por se estar acompanhado; mistério, fim de um ciclo e início de outro, calor sem alívio fácil.
 - Relação com o mundo pós-sobrevivência: a cidade emergente vislumbra-se ao fundo como destino possível que a presença torna atravessável, nunca habitada nem explicada; mostra-se que se pode ir, não que se chegou.
 
-**Perguntas para conteúdos:** Da última vez que atravessaste algo duro, o que te segurou foi terreno firme ou foi a presença de alguém que ficou? Reparaste que aguentas mais do que julgas, desde que não estejas só? E se a segurança que procuras não estiver no chão que não há, mas no calor de quem fica à beira enquanto atravessas?
+**Perguntas para conteúdos:** Da última vez que atravessaste algo duro, o que te segurou foi terreno firme ou foi a presença de alguém que ficou? Reparaste que aguentas mais do que julgas, desde que não estejas só? Será que a segurança que procuras não está no chão que não há, mas no calor de quem fica à beira enquanto atravessas?

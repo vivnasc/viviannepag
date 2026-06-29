@@ -69,7 +69,7 @@ Há, por fim, o paradoxo da sabedoria que sabe quanto não sabe. O estádio que 
 
 Reconhece-se a maturação menos pelo que uma pessoa diz e mais por como responde quando contrariada. Indicadores plausíveis: a capacidade de sustentar pontos de vista opostos sem precisar de os resolver à pressa; a diminuição da reactividade defensiva quando a própria imagem é posta em causa; a aptidão para reconhecer em si o que se condena no outro; a presença de compaixão que não se converte em condescendência.
 
-Observa-se também o desfasamento entre linhas: alguém brilhante a raciocinar e tosco a relacionar-se, ou o inverso, sinal de que a maturação não avança em bloco. E observa-se a serenidade activa, distinta da passividade, que age sem a urgência ansiosa de quem precisa que o resultado confirme o seu valor.
+Observa-se também o desfasamento entre linhas: alguém brilhante a raciocinar e tosco a relacionar-se, ou o inverso, sinal de que a maturação não avança em bloco. Observa-se ainda a serenidade activa, distinta da passividade, que age sem a urgência ansiosa de quem precisa que o resultado confirme o seu valor.
 
 ## 9. Exemplos do quotidiano
 
@@ -146,7 +146,7 @@ Relações: [A Sabedoria como Estádio, As Linhas de Desenvolvimento, O Ego e o 
 
 **Equivalentes históricos:** As tradições contemplativas falaram de moradas, graus ou passos da vida interior, descrevendo um percurso ordenado de maturação. As filosofias da virtude apontaram para um amadurecimento do carácter que não era mera acumulação de hábitos. O conceito de iniciação, em culturas diversas, codifica a intuição de que se atravessam patamares e que cada um se ganha e não se decreta.
 
-**Contra-exemplos:** Não é estádio a mudança de opinião, por mais radical, se a estrutura a partir da qual a pessoa pensa permanece a mesma. Não é estádio o desempenho de maturidade aprendido para agradar, que cede à primeira ameaça real. E confunde-se com estádio, erradamente, a competência técnica: alguém pode ser exímio numa disciplina e operar, na relação com os outros, a partir de uma estrutura bastante inicial.
+**Contra-exemplos:** Não é estádio a mudança de opinião, por mais radical, se a estrutura a partir da qual a pessoa pensa permanece a mesma. Não é estádio o desempenho de maturidade aprendido para agradar, que cede à primeira ameaça real. Confunde-se com estádio, erradamente, a competência técnica: alguém pode ser exímio numa disciplina e operar, na relação com os outros, a partir de uma estrutura bastante inicial.
 
 **Manifestações culturais:** Culturas que reconhecem estádios constroem ritos de passagem, distinguem fases da vida com tarefas próprias e tratam o amadurecimento como percurso, não como acaso. Culturas que os ignoram tendem a tratar o adulto como produto acabado e a maturidade como um planalto, deixando sem nome o desenvolvimento que continua para além da idade activa.
 
@@ -168,7 +168,7 @@ Fenómeno físico impossível: o edifício cresce um andar enquanto a figura sob
 Emoção dominante: segurança e expansão, a sensação sóbria de que há sempre mais altura habitável por cima.
 Relação com o mundo pós-sobrevivência: o mundo antigo morava nos pisos baixos murados; o emergente vê-se ao longe, nas varandas altas ainda por habitar, alcançáveis só pela escada.
 
-**Perguntas para conteúdos:** Lembras-te de um dia em que algo que era simplesmente a realidade, para ti, se tornou de repente uma coisa que conseguias olhar de fora? E percebes que, no momento em que isso aconteceu, deixaste de poder voltar a ver o mundo exactamente como o vias antes?
+**Perguntas para conteúdos:** Lembras-te de um dia em que algo que era simplesmente a realidade, para ti, se tornou de repente uma coisa que conseguias olhar de fora? Percebes que, no momento em que isso aconteceu, deixaste de poder voltar a ver o mundo exactamente como o vias antes?
 
 ### A Compaixão que se Desenvolve
 Relações: [Os Estádios da Maturação, O Ego e o que o Excede, A Integração das Sombras]
@@ -183,7 +183,7 @@ Relações: [Os Estádios da Maturação, O Ego e o que o Excede, A Integração
 
 **Equivalentes históricos:** As tradições que cultivam a benevolência sem fronteira, estendendo o cuidado para além do próximo e do semelhante, codificam esta amplitude crescente. As éticas que distinguem a compaixão da pena fazem-no para marcar que a primeira inclui de igual para igual e a segunda mantém distância. A figura do justo que sofre com o sofrimento alheio sem dele se servir é equivalente cultural antigo.
 
-**Contra-exemplos:** Não é esta compaixão a identificação que se afunda no sofrimento do outro e perde a capacidade de agir, confundindo fusão com cuidado. Não o é a generosidade selectiva que se estende aos dos seus e se fecha aos de fora. E não o é a bondade exibida, calibrada para o efeito que produz em quem a vê, que cede assim que ninguém olha.
+**Contra-exemplos:** Não é esta compaixão a identificação que se afunda no sofrimento do outro e perde a capacidade de agir, confundindo fusão com cuidado. Não o é a generosidade selectiva que se estende aos dos seus e se fecha aos de fora, nem a bondade exibida, calibrada para o efeito que produz em quem a vê, que cede assim que ninguém olha.
 
 **Manifestações culturais:** Culturas alargam ou estreitam o círculo da compaixão segundo definem quem conta como plenamente humano. Os avanços civilizacionais que estenderam direitos a quem antes era excluído são, em parte, a história desta amplitude a crescer à escala colectiva. Os retrocessos são o círculo a fechar-se de novo sob pressão de medo ou escassez.
 
@@ -205,7 +205,7 @@ Fenómeno físico impossível: o círculo de luz alarga-se sem perder intensidad
 Emoção dominante: expansão calorosa e firme, segurança sem fechamento.
 Relação com o mundo pós-sobrevivência: o mundo antigo era o pátio murado que só acolhia os seus; o emergente é o mesmo pátio com os muros caídos, visível por uma fenda entre os jardins, ainda não habitado por todos.
 
-**Perguntas para conteúdos:** Quem é que, neste momento da tua vida, está fora do círculo dentro do qual o sofrimento te obriga a fazer alguma coisa? E o que mudaria em ti, e não no mundo, se essa pessoa passasse para dentro?
+**Perguntas para conteúdos:** Quem é que, neste momento da tua vida, está fora do círculo dentro do qual o sofrimento te obriga a fazer alguma coisa? O que mudaria em ti, e não no mundo, se essa pessoa passasse para dentro?
 
 ### A Percepção Treinável
 Relações: [As Linhas de Desenvolvimento, A Integração das Sombras, A Espiritualidade Sem Crença]
@@ -220,7 +220,7 @@ Relações: [As Linhas de Desenvolvimento, A Integração das Sombras, A Espirit
 
 **Equivalentes históricos:** As práticas de atenção das várias tradições contemplativas codificam o treino da percepção, ainda que envoltas em doutrina. As disciplinas do exame de si, presentes em filosofias antigas, treinavam a observação dos próprios movimentos internos. A figura do observador que se observa, recorrente em muitas culturas, é o equivalente histórico desta faculdade.
 
-**Contra-exemplos:** Não é percepção treinada a hipervigilância ansiosa, que vê ameaça em tudo e confunde reactividade aumentada com clareza. Não o é a introspecção que rumina sem distância, presa ao conteúdo e incapaz de o ver de fora. E não o é o conhecimento teórico das próprias reacções, que descreve mas não nota a tempo, sabendo de cor o que continua a não ver no instante.
+**Contra-exemplos:** Não é percepção treinada a hipervigilância ansiosa, que vê ameaça em tudo e confunde reactividade aumentada com clareza. Não o é a introspecção que rumina sem distância, presa ao conteúdo e incapaz de o ver de fora. Também não o é o conhecimento teórico das próprias reacções, que descreve mas não nota a tempo, sabendo de cor o que continua a não ver no instante.
 
 **Manifestações culturais:** Culturas que valorizam a percepção treinada cultivam o silêncio, a pausa e a atenção como bens, e desconfiam da reactividade exibida. Culturas saturadas de estímulo e velocidade atrofiam esta faculdade, premiando a resposta rápida sobre a percepção fina e produzindo pessoas que sentem muito e percebem pouco.
 
@@ -242,7 +242,7 @@ Fenómeno físico impossível: a água clareia de dentro para fora, sem que nada
 Emoção dominante: mistério a dissipar-se em clareza, serenidade atenta.
 Relação com o mundo pós-sobrevivência: o mundo antigo via na superfície turva e reagia a vultos; o emergente vê o fundo límpido por uma fenda de luz, ainda longe de o habitar por inteiro.
 
-**Perguntas para conteúdos:** Qual foi a última vez em que reparaste num impulso teu enquanto ele ainda era só impulso, antes de te levar? E o que te custaria treinar essa pausa, sabendo que ninguém ta pode dar feita?
+**Perguntas para conteúdos:** Qual foi a última vez em que reparaste num impulso teu enquanto ele ainda era só impulso, antes de te levar? O que te custaria treinar essa pausa, sabendo que ninguém ta pode dar feita?
 
 ### O Ego e o que o Excede
 Relações: [Os Estádios da Maturação, A Compaixão que se Desenvolve, A Integração das Sombras]
@@ -257,7 +257,7 @@ Relações: [Os Estádios da Maturação, A Compaixão que se Desenvolve, A Inte
 
 **Equivalentes históricos:** As tradições que falam de morrer para si, de esvaziamento, ou de descentramento do eu, apontam para este excesso, ainda que arrisquem confundi-lo com aniquilação. As filosofias que distinguem o eu empírico do que o observa codificam a mesma estrutura. A figura do sábio que age sem se servir do que faz para se engrandecer é o equivalente cultural.
 
-**Contra-exemplos:** Não é exceder o ego a sua dissolução precoce, a fuga de quem nunca construiu um centro firme e chama transcendência à incapacidade de se afirmar. Não o é a humildade exibida, que é vaidade ao contrário. E não o é a anulação de si ao serviço de outro, que troca uma prisão por outra em vez de ganhar a distância que liberta.
+**Contra-exemplos:** Não é exceder o ego a sua dissolução precoce, a fuga de quem nunca construiu um centro firme e chama transcendência à incapacidade de se afirmar. Não o é a humildade exibida, que é vaidade ao contrário. Tão-pouco o é a anulação de si ao serviço de outro, que troca uma prisão por outra em vez de ganhar a distância que liberta.
 
 **Manifestações culturais:** Culturas que confundem ego com egoísmo pregam a sua destruição e produzem ou hipocrisia ou pessoas frágeis sem centro. Culturas que o idolatram fazem da afirmação ilimitada de si um valor e produzem maturidade impossível. As que distinguem o ego necessário do ego absolutizado abrem espaço para um desenvolvimento que constrói o centro e depois o relativiza.
 
@@ -279,7 +279,7 @@ Fenómeno físico impossível: as muralhas permanecem inteiras e firmes, mas dei
 Emoção dominante: segurança que se abre, fim de uma clausura sem perda da estrutura.
 Relação com o mundo pós-sobrevivência: o mundo antigo era a fortaleza de tecto fechado; o emergente vê-se pela abertura no alto, a luz de uma vastidão ainda por habitar entrando na cidadela firme.
 
-**Perguntas para conteúdos:** Em que situação é que precisas, ainda hoje, de ter razão ao ponto de a tua imagem valer mais do que a verdade? E conseguirias notar o teu próprio ego a defender-se, sem o destruir e sem te deixares governar por ele?
+**Perguntas para conteúdos:** Em que situação é que precisas, ainda hoje, de ter razão ao ponto de a tua imagem valer mais do que a verdade? Conseguirias notar o teu próprio ego a defender-se, sem o destruir e sem te deixares governar por ele?
 
 ### As Linhas de Desenvolvimento
 Relações: [Os Estádios da Maturação, A Sabedoria como Estádio, A Percepção Treinável]
@@ -294,7 +294,7 @@ Relações: [Os Estádios da Maturação, A Sabedoria como Estádio, A Percepç�
 
 **Equivalentes históricos:** As tradições que distinguem tipos de saber, o do intelecto, o do coração, o das mãos, intuem que estes crescem por vias separadas. A observação clássica de que a virtude é múltipla e de que se pode ter uma e faltar outra codifica a mesma desigualdade. A figura do erudito sem prudência, recorrente na literatura, é o equivalente cultural mais antigo.
 
-**Contra-exemplos:** Não confirma linhas a mera diferença de talento, que é dom e não maturação. Não as confirma a incompetência geral, que é falta de desenvolvimento em todas as linhas e não desfasamento entre elas. E não as ilustra quem finge maturidade numa dimensão para esconder atraso noutra, porque aí não há linha madura, há disfarce.
+**Contra-exemplos:** Não confirma linhas a mera diferença de talento, que é dom e não maturação. Não as confirma a incompetência geral, que é falta de desenvolvimento em todas as linhas e não desfasamento entre elas. Também não as ilustra quem finge maturidade numa dimensão para esconder atraso noutra, porque aí não há linha madura, há disfarce.
 
 **Manifestações culturais:** Culturas que premeiam uma só linha, a cognitiva, por exemplo, produzem pessoas hipertrofiadas numa dimensão e atrofiadas nas outras, e chamam-lhes inteligentes. Culturas que reconhecem várias linhas educam para várias e desconfiam de quem brilha só numa. O equilíbrio entre linhas é, em parte, herança do que cada cultura decidiu cultivar.
 
@@ -316,7 +316,7 @@ Fenómeno físico impossível: as torres crescem a velocidades visivelmente dife
 Emoção dominante: mistério da desigualdade, a expansão sóbria de quem vê o que ainda falta erguer.
 Relação com o mundo pós-sobrevivência: o mundo antigo erguia uma só torre e deixava o resto baixo; o emergente vê-se pela fenda entre as torres, uma cidade de alturas equilibradas ainda por construir.
 
-**Perguntas para conteúdos:** Em que linha da tua vida és claramente adulto, e em qual continuas a responder como respondias em criança? E o que te impede de olhar para a torre mais baixa em ti sem a esconder atrás da mais alta?
+**Perguntas para conteúdos:** Em que linha da tua vida és claramente adulto, e em qual continuas a responder como respondias em criança? O que te impede de olhar para a torre mais baixa em ti sem a esconder atrás da mais alta?
 
 ### A Espiritualidade Sem Crença
 Relações: [A Percepção Treinável, A Sabedoria como Estádio, Os Estádios da Maturação]
@@ -331,7 +331,7 @@ Relações: [A Percepção Treinável, A Sabedoria como Estádio, Os Estádios d
 
 **Equivalentes históricos:** As correntes que separaram a prática contemplativa da doutrina, oferecendo o treino sem exigir a fé, são equivalentes históricos. As filosofias antigas que tratavam a maturação interior como exercício e não como dogma codificam a mesma separação. A figura do sábio sem religião, presente em várias culturas, é o equivalente cultural mais claro.
 
-**Contra-exemplos:** Não é espiritualidade sem crença o ateísmo militante que, ao recusar a metafísica, deita fora também a profundidade, confundindo uma com a outra. Não o é a apropriação superficial de práticas esvaziadas de exigência, que retém o vocabulário e perde o trabalho. E não o é a substituição de uma crença por outra disfarçada de não-crença, que troca o dogma religioso por um dogma de outro tipo.
+**Contra-exemplos:** Não é espiritualidade sem crença o ateísmo militante que, ao recusar a metafísica, deita fora também a profundidade, confundindo uma com a outra. Não o é a apropriação superficial de práticas esvaziadas de exigência, que retém o vocabulário e perde o trabalho, nem a substituição de uma crença por outra disfarçada de não-crença, que troca o dogma religioso por um dogma de outro tipo.
 
 **Manifestações culturais:** Culturas secularizadas que descartam a profundidade junto com a religião deixam um vazio que se enche de sucedâneos. Culturas que conseguem manter a profundidade sem a crença obrigatória oferecem práticas de atenção e maturação a todos, crentes e não crentes, sem exigir adesão. A procura crescente de práticas despidas de doutrina é sinal cultural desta separação a acontecer.
 
@@ -353,7 +353,7 @@ Fenómeno físico impossível: a luz emana do próprio pavimento e das colunas, 
 Emoção dominante: mistério sereno, a segurança de uma profundidade que não pede que se acredite em nada.
 Relação com o mundo pós-sobrevivência: o mundo antigo amarrava a profundidade ao templo e ao dogma; o emergente vê-se pela fenda entre as colunas abertas, uma profundidade sem crença ainda por habitar.
 
-**Perguntas para conteúdos:** O que é que, na tua vida, ganhou profundidade sem que precisasses de acreditar em nada para o sentir? E reconheces a diferença entre a profundidade que treinaste e a crença que herdaste?
+**Perguntas para conteúdos:** O que é que, na tua vida, ganhou profundidade sem que precisasses de acreditar em nada para o sentir? Reconheces a diferença entre a profundidade que treinaste e a crença que herdaste?
 
 ### A Sabedoria como Estádio
 Relações: [Os Estádios da Maturação, A Espiritualidade Sem Crença, A Compaixão que se Desenvolve]
@@ -368,7 +368,7 @@ Relações: [Os Estádios da Maturação, A Espiritualidade Sem Crença, A Compa
 
 **Equivalentes históricos:** As figuras do ancião sábio, do mestre que ensina pela presença mais do que pela palavra, do justo que vê fundo, são equivalentes culturais antigos e quase universais. As tradições que distinguem a sabedoria do conhecimento, tratando-a como modo de estar e não como soma de saberes, codificam o mesmo. O respeito pelos mais velhos como guardiões de percepção é a sua institucionalização.
 
-**Contra-exemplos:** Não é sabedoria a erudição, a acumulação de saber sem o modo de estar que o integra. Não o é a idade por si só, pois envelhecer não garante amadurecer e há velhos que repetem aos oitenta o que respondiam aos vinte. E não o é a certeza serena de quem não duvida, que é o oposto da sabedoria que reconhece os seus limites.
+**Contra-exemplos:** Não é sabedoria a erudição, a acumulação de saber sem o modo de estar que o integra. Não o é a idade por si só, pois envelhecer não garante amadurecer e há velhos que repetem aos oitenta o que respondiam aos vinte. Tão-pouco o é a certeza serena de quem não duvida, que é o oposto da sabedoria que reconhece os seus limites.
 
 **Manifestações culturais:** Culturas que reconhecem a sabedoria como estádio criam lugares para os mais velhos, ouvem-nos e preservam a sua percepção. Culturas que a confundem com produtividade descartam os seus anciãos e perdem, com eles, um repositório de percepção que levou uma vida a constituir-se. O tratamento dos mais velhos é, neste sentido, um indicador da maturidade de uma cultura.
 
@@ -390,7 +390,7 @@ Fenómeno físico impossível: do mesmo ponto vê-se com nitidez o pormenor min�
 Emoção dominante: serenidade vasta, segurança e mistério, o fim de um percurso que é também a vista mais aberta.
 Relação com o mundo pós-sobrevivência: o mundo antigo guardava o sábio no alto e descartava-o quando deixava de produzir; o emergente vê o terraço mais alto por uma fenda de luz, a sabedoria reconhecida como estádio ainda por instituir.
 
-**Perguntas para conteúdos:** A quem, na tua vida, reconheces uma percepção que só o tempo vivido constituiu, e que tu ainda não tens? E o que perdes, sem dar por isso, quando deixas de a ouvir por a julgares ultrapassada?
+**Perguntas para conteúdos:** A quem, na tua vida, reconheces uma percepção que só o tempo vivido constituiu, e que tu ainda não tens? O que perdes, sem dar por isso, quando deixas de a ouvir por a julgares ultrapassada?
 
 ### A Integração das Sombras
 Relações: [A Percepção Treinável, O Ego e o que o Excede, A Compaixão que se Desenvolve]
@@ -405,7 +405,7 @@ Relações: [A Percepção Treinável, O Ego e o que o Excede, A Compaixão que 
 
 **Equivalentes históricos:** As tradições que falam de confrontar os próprios demónios, de enfrentar o que em si se teme, codificam a integração da sombra em linguagem mítica. As práticas de exame de consciência que procuram o que se esconde de si codificam-na em linguagem moral. A figura do herói que tem de descer ao seu próprio subterrâneo antes de poder subir é o equivalente cultural mais difundido.
 
-**Contra-exemplos:** Não é integração da sombra a complacência com os próprios defeitos, que os reconhece para os desculpar em vez de os assumir. Não o é a fascinação pela própria escuridão, que troca a negação por um culto. E não o é a confissão exibida, que diz os seus defeitos em voz alta para se livrar de os mudar, fazendo da própria sombra mais um número da imagem.
+**Contra-exemplos:** Não é integração da sombra a complacência com os próprios defeitos, que os reconhece para os desculpar em vez de os assumir. Não o é a fascinação pela própria escuridão, que troca a negação por um culto, nem a confissão exibida, que diz os seus defeitos em voz alta para se livrar de os mudar, fazendo da própria sombra mais um número da imagem.
 
 **Manifestações culturais:** Culturas projectam colectivamente a sua sombra em grupos que carregam tudo o que recusam de si, e por aí se explicam muitas das perseguições da história: o que um povo não suporta em si vê-o no outro e ataca-o. A integração da sombra à escala cultural seria reconhecer como próprio o que se projecta no estrangeiro, no diferente, no bode expiatório.
 
@@ -427,4 +427,4 @@ Fenómeno físico impossível: a parte às escuras acende-se sem que nenhuma luz
 Emoção dominante: o fim de uma clausura e o nascimento de uma inteireza, mistério que se torna segurança.
 Relação com o mundo pós-sobrevivência: o mundo antigo mantinha a ala da sombra vedada e às escuras; o emergente vê-a, por uma fenda, a acender-se e a reintegrar-se no edifício, uma inteireza ainda em curso e por habitar.
 
-**Perguntas para conteúdos:** O que é que te irrita no outro com uma força que parece desproporcionada ao que ele realmente faz? E aguentarias suspeitar, só por um momento, que aquilo que mais condenas lá fora é o que recusas ver em ti?
+**Perguntas para conteúdos:** O que é que te irrita no outro com uma força que parece desproporcionada ao que ele realmente faz? Aguentarias suspeitar, só por um momento, que aquilo que mais condenas lá fora é o que recusas ver em ti?

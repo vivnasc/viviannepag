@@ -135,13 +135,13 @@ A metáfora cartográfica que organiza este domínio, a dos continentes não map
 
 ## 16. Perguntas geradoras de conteúdo
 
-Que estado sentes com frequência e nunca soubeste nomear? Repara nele agora, sem o resolver. Onde fica? Tem peso, tem temperatura, tem bordas? E se a falta não fosse do estado, mas da palavra que ainda não tens para ele?
+Que estado sentes com frequência e nunca soubeste nomear? Repara nele agora, sem o resolver. Onde fica? Tem peso, tem temperatura, tem bordas? Pergunta-te se a falta não seria do estado, mas da palavra que ainda não tens para ele.
 
-Quantos modos de atenção conheces de verdade? Lembra-te do último em que o tempo se dilatou e o esforço desapareceu. Quando foi? E porque é que voltas tão raramente a esse modo, se ele estava ao teu alcance o tempo todo?
+Quantos modos de atenção conheces de verdade? Lembra-te do último em que o tempo se dilatou e o esforço desapareceu. Quando foi, e porque é que voltas tão raramente a esse modo, se ele estava ao teu alcance o tempo todo?
 
-O que acontece nos primeiros minutos em que desligas tudo e ficas em silêncio? Não o silêncio bonito, o outro, o que incomoda. O que é exactamente aquela inquietação? E se ela fosse apenas o limiar, a passagem para uma região que ainda não atravessaste porque recuas sempre antes de chegar?
+O que acontece nos primeiros minutos em que desligas tudo e ficas em silêncio? Não o silêncio bonito, o outro, o que incomoda. O que é exactamente aquela inquietação? Talvez ela fosse apenas o limiar, a passagem para uma região que ainda não atravessaste porque recuas sempre antes de chegar.
 
-O teu corpo já soube algo antes de ti? Procura uma vez em que a sensação chegou primeiro e a explicação só depois. Acreditaste nela, ou tratá-la como ruído? E o que terias decidido diferente se soubesses ler aquele continente?
+O teu corpo já soube algo antes de ti? Procura uma vez em que a sensação chegou primeiro e a explicação só depois. Acreditaste nela, ou trataste-a como ruído? O que terias decidido diferente se soubesses ler aquele continente?
 
 ## Conceitos · desenvolvimento completo
 
@@ -180,7 +180,7 @@ Relações: [O Espectro da Atenção, Os Limiares Internos, As Camadas do Eu]
     - Emoção dominante: o alívio sério de quem descobre que o que parecia falta era apenas território por desenhar; mistério e expansão, nunca euforia.
     - Relação com o mundo pós-sobrevivência: o branco que se ilumina é o continente dos estados que a sobrevivência nunca precisou de nomear, mostrado ao longe, a abrir-se, ainda por habitar.
 
-**Perguntas para conteúdos:** Há um estado que sentes muitas vezes e nunca soubeste explicar a ninguém. Para um instante e procura-o. Onde fica, no corpo, e o que faria a primeira palavra que o nomeasse de verdade? E se aquilo que chamas confusão fosse só uma região que ainda ninguém te ensinou a desenhar?
+**Perguntas para conteúdos:** Há um estado que sentes muitas vezes e nunca soubeste explicar a ninguém. Pára um instante e procura-o. Onde fica, no corpo, e o que faria a primeira palavra que o nomeasse de verdade? Imagina que aquilo a que chamas confusão fosse só uma região que ainda ninguém te ensinou a desenhar.
 
 ### O Espectro da Atenção
 Relações: [Os Estados Não Cartografados, As Fronteiras da Percepção, Os Limiares Internos]
@@ -217,7 +217,7 @@ Relações: [Os Estados Não Cartografados, As Fronteiras da Percepção, Os Lim
     - Emoção dominante: a expansão serena de quem descobre que dispõe de muitos olhares onde julgava ter só um; mistério calmo, nunca excitação.
     - Relação com o mundo pós-sobrevivência: o vale que se abre em graduações é o continente dos modos de atenção que a sobrevivência nunca cultivou, entrevisto de uma varanda, ainda por percorrer.
 
-**Perguntas para conteúdos:** Lembra-te do último momento em que o tempo se dilatou e o esforço desapareceu, em que estavas inteiro no que fazias. Quando foi, e porque voltas tão pouco a esse modo, se ele esteve sempre ao teu alcance? E se a tua vida coubesse num leque de atenções de que só usas duas?
+**Perguntas para conteúdos:** Lembra-te do último momento em que o tempo se dilatou e o esforço desapareceu, em que estavas inteiro no que fazias. Quando foi, e porque voltas tão pouco a esse modo, se ele esteve sempre ao teu alcance? Pensa que a tua vida talvez coubesse num leque de atenções de que só usas duas.
 
 ### As Camadas do Eu
 Relações: [O Continente do Corpo, O Território do Silêncio, As Fronteiras da Percepção]
@@ -254,7 +254,7 @@ Relações: [O Continente do Corpo, O Território do Silêncio, As Fronteiras da
     - Emoção dominante: a segurança espessa de quem descobre ter fundo onde se julgava raso; mistério e nascimento, nunca vertigem.
     - Relação com o mundo pós-sobrevivência: os estratos luminosos por baixo da crosta são as camadas do eu que a sobrevivência abafou em favor da superfície, mostradas a abrir-se, ainda por descer.
 
-**Perguntas para conteúdos:** Houve uma vez em que disseste uma coisa e, por baixo, soubeste outra. Onde, no corpo, estava esse saber mais lento que a tua fala atropelou? E se aquilo a que chamas tu fosse só a camada que fala mais alto, e houvesse por baixo um continente que nunca aprendeste a escutar?
+**Perguntas para conteúdos:** Houve uma vez em que disseste uma coisa e, por baixo, soubeste outra. Onde, no corpo, estava esse saber mais lento que a tua fala atropelou? Pergunta-te se aquilo a que chamas tu não será só a camada que fala mais alto, havendo por baixo um continente que nunca aprendeste a escutar.
 
 ### Os Limiares Internos
 Relações: [Os Estados Não Cartografados, As Geografias do Sonho, O Espectro da Atenção]
@@ -291,7 +291,7 @@ Relações: [Os Estados Não Cartografados, As Geografias do Sonho, O Espectro d
     - Emoção dominante: a expansão atenta de quem descobre que entre dois estados há um lugar onde se pode estar e escolher; mistério e fim e nascimento, nunca sobressalto.
     - Relação com o mundo pós-sobrevivência: o limiar dilatado é a faixa de passagem que a sobrevivência aprendeu a saltar, mostrada agora habitável, entrevista entre o mundo fechado e o que se abre.
 
-**Perguntas para conteúdos:** Pensa na última vez em que deste por ti irritado ou em baixo sem saber como lá chegaste. Houve um instante, antes disso, em que a passagem começou e tu não a viste. Onde estaria esse degrau? E se pudesses demorar-te no fio das tuas passagens, em que região escolherias aterrar?
+**Perguntas para conteúdos:** Pensa na última vez em que deste por ti irritado ou em baixo sem saber como lá chegaste. Houve um instante, antes disso, em que a passagem começou e tu não a viste. Onde estaria esse degrau? Se pudesses demorar-te no fio das tuas passagens, em que região escolherias aterrar?
 
 ### O Território do Silêncio
 Relações: [As Camadas do Eu, O Continente do Corpo, Os Estados Não Cartografados]
@@ -328,7 +328,7 @@ Relações: [As Camadas do Eu, O Continente do Corpo, Os Estados Não Cartografa
     - Emoção dominante: a segurança funda de quem descobre que o vazio temido era um lugar; mistério e expansão, depois do desconforto do limiar, nunca felicidade fácil.
     - Relação com o mundo pós-sobrevivência: a amplidão silenciosa e luminosa é o continente do silêncio que a sobrevivência marginalizou como falta, mostrado para lá de um limiar de inquietação, ainda por atravessar.
 
-**Perguntas para conteúdos:** O que acontece nos primeiros minutos em que desligas tudo e ficas em silêncio, não o silêncio bonito, o outro, o que incomoda? O que é, ao certo, aquela inquietação? E se ela fosse só o limiar, a passagem para uma região que ainda não atravessaste porque recuas sempre antes de chegar?
+**Perguntas para conteúdos:** O que acontece nos primeiros minutos em que desligas tudo e ficas em silêncio, não o silêncio bonito, o outro, o que incomoda? O que é, ao certo, aquela inquietação? Talvez ela fosse só o limiar, a passagem para uma região que ainda não atravessaste porque recuas sempre antes de chegar.
 
 ### As Geografias do Sonho
 Relações: [Os Limiares Internos, As Fronteiras da Percepção, O Continente do Corpo]
@@ -365,14 +365,14 @@ Relações: [Os Limiares Internos, As Fronteiras da Percepção, O Continente do
     - Emoção dominante: o mistério sereno de reconhecer terra onde se julgava haver caos; expansão e fim e nascimento, nunca a agitação do pesadelo.
     - Relação com o mundo pós-sobrevivência: o continente nocturno luminoso é a geografia do sonho que a sobrevivência declarou resíduo, entrevista no limiar do despertar, ainda por cartografar.
 
-**Perguntas para conteúdos:** Há uma paisagem que volta nos teus sonhos, ou voltava, antes de aprenderes a esquecê-los de manhã. Onde fica esse lugar, e o que se perde de ti quando o declaras nada? E se um terço da tua vida fosse um continente que toda a noite habitas e que ensinaste o teu olhar a tratar como lixo?
+**Perguntas para conteúdos:** Há uma paisagem que volta nos teus sonhos, ou voltava, antes de aprenderes a esquecê-los de manhã. Onde fica esse lugar, e o que se perde de ti quando o declaras nada? Pensa que um terço da tua vida talvez seja um continente que toda a noite habitas e que ensinaste o teu olhar a tratar como lixo.
 
 ### O Continente do Corpo
 Relações: [As Camadas do Eu, O Território do Silêncio, As Fronteiras da Percepção]
 
 **Definição:** O Continente do Corpo é a tese de que o corpo é um saber cartografado por dentro, com sensações que informam, antecipam e decidem antes da palavra, e não apenas uma máquina que transporta a cabeça. Há no corpo uma inteligência que sabe sem formular, que chega primeiro à conclusão e que comunica por uma língua de sensações que raramente aprendemos a ler. O conceito designa este continente e a tese de que ignorar a sua fala é viver sobre uma região vasta que se declarou muda, perdendo um saber que chegava antes da razão e por vezes mais certeiro do que ela.
 
-**Origem provável:** A sobrevivência precisava do corpo como instrumento, e a cultura que dela nasceu acabou por o reduzir a isso, a um veículo a controlar e otimizar, separando-o de uma cabeça que decide. O saber corporal, mais lento a traduzir-se e mais difícil de justificar, foi subordinado à razão verbal que coordenava a acção. Herdámos por isso uma cisão que trata o corpo como exterior à inteligência, como aquilo que se usa e não como aquilo que sabe. O continente ficou por ler não por ser mudo, mas por o termos ensurdecido.
+**Origem provável:** A sobrevivência precisava do corpo como instrumento, e a cultura que dela nasceu acabou por o reduzir a isso, a um veículo a controlar e optimizar, separando-o de uma cabeça que decide. O saber corporal, mais lento a traduzir-se e mais difícil de justificar, foi subordinado à razão verbal que coordenava a acção. Herdámos por isso uma cisão que trata o corpo como exterior à inteligência, como aquilo que se usa e não como aquilo que sabe. O continente ficou por ler não por ser mudo, mas por o termos ensurdecido.
 
 **Mecanismo:** O mecanismo é a primazia da sensação sobre a palavra. O corpo regista e integra mais depressa do que a consciência verbal, e por isso a sua conclusão, uma tensão, um aperto, um alívio, chega antes da explicação. Mas, por não vir em palavras, essa conclusão é descartada como ruído por quem só dá crédito ao que se justifica. O segundo movimento é a leitura recuperada: aprender a consultar a sensação antes de decidir, a deixá-la informar a razão em vez de a calar, devolve ao corpo o estatuto de narrador e não de mero veículo.
 
@@ -382,11 +382,11 @@ Relações: [As Camadas do Eu, O Território do Silêncio, As Fronteiras da Perc
 
 **Contra-exemplos:** Não é Continente do Corpo o culto da imagem física que trata o corpo como objecto a exibir, mais surdo ainda à sua fala. Não o é a reacção fisiológica bruta de pânico, que é alarme e não saber. Não o é tão-pouco a sensação tomada por oráculo infalível, pois o corpo informa, não dita. O conceito aponta para uma inteligência corporal a escutar e a integrar com a razão, não para a idolatria do corpo nem para a sua tirania.
 
-**Manifestações culturais:** Uma cultura que separa cabeça de corpo e premeia só a justificação verbal ensina a desconfiar do saber corporal e produz pessoas surdas ao que sentem antes de pensar. A redução do corpo a desempenho, a imagem ou a máquina a otimizar fecha o continente por todos os lados. A procura crescente de práticas que devolvem a escuta da sensação é o sintoma de uma região que a cultura calou e de que se sente a falta.
+**Manifestações culturais:** Uma cultura que separa cabeça de corpo e premeia só a justificação verbal ensina a desconfiar do saber corporal e produz pessoas surdas ao que sentem antes de pensar. A redução do corpo a desempenho, a imagem ou a máquina a optimizar fecha o continente por todos os lados. A procura crescente de práticas que devolvem a escuta da sensação é o sintoma de uma região que a cultura calou e de que se sente a falta.
 
 **Manifestações religiosas:** As tradições dividiram-se: algumas suspeitaram do corpo como obstáculo e calaram-no, outras o trataram como via de saber e cultivaram a sua escuta. Destas últimas aprende-se que o corpo pode ser território de conhecimento e não inimigo. O risco está nas primeiras, que ao moralizarem o corpo como baixo reforçaram a surdez que a sobrevivência já trazia. Retém-se a tradição que escuta o corpo; larga-se a que o condena.
 
-**Manifestações económicas:** A economia tem interesse no corpo surdo, porque um corpo que não é escutado é mais facilmente vendido a imagem, otimização e remédio, e uma decisão de compra que ignora o saber corporal é mais fácil de induzir. Vende-se o corpo como objecto e como problema, nunca como narrador a consultar. Recuperar a sua escuta é subtrair uma região da vida ao mercado que lucra com a sua mudez, e nessa medida é um gesto de soberania.
+**Manifestações económicas:** A economia tem interesse no corpo surdo, porque um corpo que não é escutado é mais facilmente vendido a imagem, optimização e remédio, e uma decisão de compra que ignora o saber corporal é mais fácil de induzir. Vende-se o corpo como objecto e como problema, nunca como narrador a consultar. Recuperar a sua escuta é subtrair uma região da vida ao mercado que lucra com a sua mudez, e nessa medida é um gesto de soberania.
 
 **Manifestações familiares:** As famílias ensinam se o corpo conta. Onde a sensação é desvalorizada, não tens nada, é só impressão, as crianças aprendem a calar o que o corpo lhes diz e a coincidir só com os argumentos. Onde se respeita o que o corpo sinaliza, o cansaço, o desconforto, a recusa que vem antes da palavra, transmite-se o acesso ao continente. O modo como em casa se trata a fala do corpo decide se essa língua será aprendida ou desaprendida.
 
@@ -402,7 +402,7 @@ Relações: [As Camadas do Eu, O Território do Silêncio, As Fronteiras da Perc
     - Emoção dominante: a segurança calorosa de reconhecer inteligência onde se julgava haver só veículo; expansão e mistério, nunca a frieza do diagnóstico.
     - Relação com o mundo pós-sobrevivência: a paisagem corporal luminosa é o continente do corpo que a sobrevivência reduziu a instrumento, mostrado como saber a habitar, ainda por ler.
 
-**Perguntas para conteúdos:** Houve uma vez em que o teu corpo soube algo antes de ti, em que a sensação chegou primeiro e a explicação só depois. Acreditaste nela, ou trataste-a como ruído? E o que terias decidido diferente se soubesses ler o continente que carregas e ensinaste a calar?
+**Perguntas para conteúdos:** Houve uma vez em que o teu corpo soube algo antes de ti, em que a sensação chegou primeiro e a explicação só depois. Acreditaste nela, ou trataste-a como ruído? O que terias decidido diferente se soubesses ler o continente que carregas e ensinaste a calar?
 
 ### As Fronteiras da Percepção
 Relações: [O Espectro da Atenção, As Geografias do Sonho, Os Estados Não Cartografados]
@@ -439,4 +439,4 @@ Relações: [O Espectro da Atenção, As Geografias do Sonho, Os Estados Não Ca
     - Emoção dominante: a expansão libertadora de descobrir que a parede tinha uma fenda e que o mundo era maior que a sala; mistério e fim e nascimento, nunca o pânico da perda de chão.
     - Relação com o mundo pós-sobrevivência: a vastidão entrevista pela fenda é o que a percepção da sobrevivência recortava para fora, mostrada para lá de uma fronteira que começa a ceder, ainda por habitar.
 
-**Perguntas para conteúdos:** Algo que esteve sempre à tua frente e que só um dia, de repente, viste pela primeira vez. Quanto mais haverá assim, a poucos centímetros, que o teu olhar aprendeu a não destacar? E se aquilo a que chamas o mundo fosse só a faixa que coube na fenda por onde foste ensinado a olhar?
+**Perguntas para conteúdos:** Algo que esteve sempre à tua frente e que só um dia, de repente, viste pela primeira vez. Quanto mais haverá assim, a poucos centímetros, que o teu olhar aprendeu a não destacar? Pergunta-te se aquilo a que chamas o mundo não será só a faixa que coube na fenda por onde foste ensinado a olhar.

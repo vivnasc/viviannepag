@@ -15,7 +15,7 @@ relacionados: [D03, D09, D14]
 
 Chama-se Biologia da Pertença ao campo que estuda o modo como o corpo humano, e em particular o seu sistema nervoso, foi construído ao longo de uma história longuíssima para detectar, procurar e manter o laço com outros corpos. A pertença, neste enquadramento, não é um sentimento que se acrescenta à vida já feita, é uma condição prévia da própria vida: o organismo regula-se, acalma-se e prospera na presença de outros organismos seguros, e desorganiza-se na sua ausência. O domínio trata, portanto, da pertença como facto fisiológico antes de ser facto psicológico ou cultural, e propõe que muito do que tomamos por traços fixos da natureza humana sejam, na verdade, marcas de um corpo afinado para não ficar sozinho.
 
-Operacionalmente, o domínio descreve três planos que se atravessam. Um plano interno, o do sistema nervoso que mede a cada instante se há ou não segurança em redor. Um plano relacional, o dos dois ou mais corpos que se afinam um ao outro, se acalmam ou se inflamam mutuamente. E um plano colectivo, o das tradições e estruturas que decidem quem pertence e quem fica de fora. A tese que percorre os três planos é simples de enunciar e difícil de habitar: o sistema nervoso humano serve a pertença antes de servir a felicidade.
+Operacionalmente, o domínio descreve três planos que se atravessam. Um plano interno, o do sistema nervoso que mede a cada instante se há ou não segurança em redor. Um plano relacional, o dos dois ou mais corpos que se afinam um ao outro, se acalmam ou se inflamam mutuamente. Há ainda um plano colectivo, o das tradições e estruturas que decidem quem pertence e quem fica de fora. A tese que percorre os três planos é simples de enunciar e difícil de habitar: o sistema nervoso humano serve a pertença antes de servir a felicidade.
 
 ## 2. Pergunta central
 
@@ -75,13 +75,13 @@ O terceiro paradoxo: o eu mais singular é o mais profundamente tecido de outros
 
 Observa-se a biologia da pertença no modo como o corpo responde à presença e à ausência. Na descida da tensão quando entra alguém de confiança, na subida quando entra alguém que ameaça, na respiração que se sincroniza numa conversa que corre bem. Observa-se na rapidez com que a vergonha aquece o rosto perante o risco de ser posto de fora, sinal de quanto a exclusão pesa.
 
-Observa-se também ao longo do tempo. Em quem cresceu sem co-regulação suficiente e mantém um sistema mais alarmado, mais pronto à defesa, mais difícil de acalmar. Em quem, isolado durante muito tempo, perde a calma facilmente e lê ameaça em rostos neutros. E observa-se no contrário: na serenidade de fundo de quem tem laços seguros, na disponibilidade que liberta para a curiosidade e para o trabalho.
+Observa-se também ao longo do tempo. Em quem cresceu sem co-regulação suficiente e mantém um sistema mais alarmado, mais pronto à defesa, mais difícil de acalmar. Em quem, isolado durante muito tempo, perde a calma facilmente e lê ameaça em rostos neutros. Observa-se também no contrário: na serenidade de fundo de quem tem laços seguros, na disponibilidade que liberta para a curiosidade e para o trabalho.
 
 ## 9. Exemplos do quotidiano
 
 A reunião em que toda a gente concorda com uma ideia que ninguém defende a sós, porque discordar custa o lugar no grupo, é a pertença a vencer a verdade em directo. O calar de uma objecção justa diante de um superior, com o coração a bater mais depressa, é o medo da exclusão a fazer o seu trabalho antigo.
 
-A criança que só dorme quando sente a respiração de quem a segura, e o adulto que só adormece bem ao lado de alguém, mostram a co-regulação a operar do berço ao fim da vida. A conversa que acalma um dia inteiro, sem que nada de prático se tenha resolvido, mostra que o que se trocou foi regulação, não informação. E a fadiga estranha de uma semana sem ninguém com quem falar a sério, mesmo com tudo resolvido, é a solidão a soar como alarme num corpo que ainda a lê como perigo.
+A criança que só dorme quando sente a respiração de quem a segura, e o adulto que só adormece bem ao lado de alguém, mostram a co-regulação a operar do berço ao fim da vida. A conversa que acalma um dia inteiro, sem que nada de prático se tenha resolvido, mostra que o que se trocou foi regulação, não informação. Por fim, a fadiga estranha de uma semana sem ninguém com quem falar a sério, mesmo com tudo resolvido, é a solidão a soar como alarme num corpo que ainda a lê como perigo.
 
 ## 10. Consequências individuais
 
@@ -99,7 +99,7 @@ Por isso a qualidade de uma comunidade mede-se pelo modo como trata a pertença.
 
 Há transição quando a pertença deixa de servir sobretudo a defesa e passa a servir a criação. Reconhece-se nos grupos onde se pode discordar sem perder o lugar, onde a verdade já não custa o laço, e onde a segurança partilhada se torna a base de que se trabalha junto em vez do prémio de quem obedece.
 
-Reconhece-se também na mudança da relação com a solidão. Quando o corpo deixa de a ler apenas como alarme e começa a poder habitá-la sem pânico, sinal de que interiorizou regulação suficiente, a pertença passa a ser escolha e não fome. E reconhece-se numa cultura que começa a falar de interdependência sem vergonha, que já não confunde precisar de outros com fraqueza, e que assume o laço como matéria-prima da emergência e não como sintoma a curar.
+Reconhece-se também na mudança da relação com a solidão. Quando o corpo deixa de a ler apenas como alarme e começa a poder habitá-la sem pânico, sinal de que interiorizou regulação suficiente, a pertença passa a ser escolha e não fome. Reconhece-se ainda numa cultura que começa a falar de interdependência sem vergonha, que já não confunde precisar de outros com fraqueza, e que assume o laço como matéria-prima da emergência e não como sintoma a curar.
 
 ## 13. Questões em aberto
 
@@ -119,7 +119,7 @@ Há uma leitura de autor real na raiz deste domínio. A teoria da vinculação, 
 
 Acolhe-se, com cautela, uma leitura contemporânea que descreve o sistema nervoso como órgão social e propõe a co-regulação como mecanismo pelo qual um corpo acalma outro. Toma-se como leitura e hipótese de trabalho, não como facto fechado, porque o domínio se serve dela pela sua fecundidade descritiva e não pela sua certeza. Acolhe-se também a investigação que entende a solidão prolongada como sinal biológico de ameaça, um estado que põe o corpo em vigilância, e que dá fundamento ao conceito de solidão como alarme.
 
-A construção original começa onde estas leituras se reúnem numa tese: a de que o sistema nervoso serve a pertença antes da felicidade. São originais, com estes nomes, os oito conceitos nucleares e o arco que os liga. E é aqui que entra o pilar que é o coração deste domínio, uma filosofia da pessoa relacional enraizada no sul de África, que se pode traduzir, por aproximação e sempre de forma imperfeita, na fórmula de que uma pessoa é pessoa através de outras pessoas. Não é um slogan nem um adorno, é uma tradição com vocabulário de terra, de aldeia, de gerações e de chão partilhado, em que ninguém se torna humano em separado e a pertença antecede e constitui o eu. Esta tradição é a ancoragem central do conceito do pertencer antes do eu, e dá-lhe uma raiz que a ciência do laço, por si só, não daria: a de que a pessoa não é primeiro indivíduo e depois membro, mas membro de uma teia desde o início, e é dessa teia que recebe o seu rosto.
+A construção original começa onde estas leituras se reúnem numa tese: a de que o sistema nervoso serve a pertença antes da felicidade. São originais, com estes nomes, os oito conceitos nucleares e o arco que os liga, e é aqui que entra o pilar que é o coração deste domínio, uma filosofia da pessoa relacional enraizada no sul de África, que se pode traduzir, por aproximação e sempre de forma imperfeita, na fórmula de que uma pessoa é pessoa através de outras pessoas. Não é um slogan nem um adorno, é uma tradição com vocabulário de terra, de aldeia, de gerações e de chão partilhado, em que ninguém se torna humano em separado e a pertença antecede e constitui o eu. Esta tradição é a ancoragem central do conceito do pertencer antes do eu, e dá-lhe uma raiz que a ciência do laço, por si só, não daria: a de que a pessoa não é primeiro indivíduo e depois membro, mas membro de uma teia desde o início, e é dessa teia que recebe o seu rosto.
 
 ## 16. Perguntas geradoras de conteúdo
 
@@ -133,7 +133,7 @@ Que laço continuas a segurar não porque te protege, mas porque largá-lo te de
 
 Se a tua serenidade não foi mérito teu mas algo que recebeste do colo de alguém, o que é que isso muda na clemência com quem não a recebeu.
 
-E se aquilo a que chamas a tua independência for só o nome bonito de uma teia de corpos que te regularam e que aprendeste a esquecer.
+Que acontece se aquilo a que chamas a tua independência for só o nome bonito de uma teia de corpos que te regularam e que aprendeste a esquecer.
 
 ## Conceitos · desenvolvimento completo
 
@@ -142,7 +142,7 @@ Relações: [A Co-Regulação, A Segurança Relacional, O Medo da Exclusão]
 
 **Definição:** Designa o entendimento do sistema nervoso humano como um órgão orientado para o outro, que dedica uma parte considerável da sua actividade a ler o ambiente humano em redor e a comutar, com base nessa leitura, entre estados de abertura e estados de defesa. Não é uma máquina neutra de processar o mundo, é um detector de segurança que pergunta, antes de qualquer outra coisa, se os corpos à volta são de confiança. A presença de outros é a variável que mais decide se ele relaxa ou se arma.
 
-**Origem provável:** Vem de uma história em que o maior recurso e o maior perigo de um ser humano eram outros seres humanos. Um corpo que soubesse distinguir depressa, e abaixo da consciência, o aliado do agressor, o acolhimento da ameaça, sobrevivia mais e melhor. Selecionou-se, ao longo dessa história, não tanto a capacidade de pensar sobre os outros, mas a de os sentir num instante, de baixar a guarda diante do rosto seguro e de a levantar diante do rosto fechado.
+**Origem provável:** Vem de uma história em que o maior recurso e o maior perigo de um ser humano eram outros seres humanos. Um corpo que soubesse distinguir depressa, e abaixo da consciência, o aliado do agressor, o acolhimento da ameaça, sobrevivia mais e melhor. Seleccionou-se, ao longo dessa história, não tanto a capacidade de pensar sobre os outros, mas a de os sentir num instante, de baixar a guarda diante do rosto seguro e de a levantar diante do rosto fechado.
 
 **Mecanismo:** Funciona por avaliação contínua e pré-consciente. O sistema lê o tom da voz, a expressão do rosto, o ritmo do movimento, a direcção do olhar, e classifica o ambiente em fracções de segundo como seguro, arriscado ou perigoso. Conforme a leitura, redistribui a energia do corpo: para a ligação e a calma quando há segurança, para a defesa e a fuga quando há ameaça. A leitura é tão rápida e tão de fundo que a pessoa raramente sabe que está a fazê-la, sente apenas o resultado, conforto ou tensão.
 
@@ -150,7 +150,7 @@ Relações: [A Co-Regulação, A Segurança Relacional, O Medo da Exclusão]
 
 **Equivalentes históricos:** A antiga arte de ler a sala antes de falar, conhecida em todas as cortes e mercados. A sabedoria popular do faro para as pessoas, do pressentimento que avisa antes da razão. As convenções de cortesia que serviam, no fundo, para enviar ao corpo do outro sinais legíveis de não-ameaça, a vénia, o aperto de mão de palma aberta, o tom baixado.
 
-**Contra-exemplos:** Há quem leia mal o ambiente de forma persistente, sentindo segurança onde há perigo ou perigo onde há segurança, sinal de que o detector pode desafinar. Há também culturas e papéis que treinam a supressão da leitura, em que se exige permanecer calmo num ambiente que o corpo gritaria como hostil. E há a leitura puramente racional, fria, que decide confiar contra o que o corpo sente, e que mostra que o sistema social pode ser contrariado, ainda que a custo.
+**Contra-exemplos:** Há quem leia mal o ambiente de forma persistente, sentindo segurança onde há perigo ou perigo onde há segurança, sinal de que o detector pode desafinar. Há também culturas e papéis que treinam a supressão da leitura, em que se exige permanecer calmo num ambiente que o corpo gritaria como hostil. Há, por fim, a leitura puramente racional, fria, que decide confiar contra o que o corpo sente, e que mostra que o sistema social pode ser contrariado, ainda que a custo.
 
 **Manifestações culturais:** Os rituais de saudação, com que cada cultura ensina o corpo a anunciar paz. As regras de hospitalidade, que convertem o estranho em hóspede e desarmam a vigilância mútua. O peso dado ao olhar, à voz e à postura nas artes da convivência, do teatro à diplomacia, todas formas de trabalhar a leitura que um corpo faz do outro.
 
@@ -187,7 +187,7 @@ Relações: [O Sistema Nervoso Social, A Sincronia dos Corpos, A Segurança Rela
 
 **Equivalentes históricos:** A canção de embalar, instrumento universal de regulação de um corpo por outro. O velar dos doentes e dos moribundos, em que a presença serena valia mais que o remédio. As mãos que se davam nos momentos de medo colectivo, e o costume antigo de não deixar ninguém atravessar a dor inteiramente só.
 
-**Contra-exemplos:** Há a auto-regulação genuína de quem, tendo recebido muito, se acalma já sem ninguém, e que não contradiz a co-regulação mas a corona. Há a regulação substituída por mecanismos, a substância, o ecrã, o trabalho compulsivo, que descem a tensão sem laço e deixam o corpo mais só. E há a falsa calma imposta de fora pela força, que silencia o corpo sem o regular, e que é o seu contrário disfarçado.
+**Contra-exemplos:** Há a auto-regulação genuína de quem, tendo recebido muito, se acalma já sem ninguém, e que não contradiz a co-regulação mas a corona. Há a regulação substituída por mecanismos, a substância, o ecrã, o trabalho compulsivo, que descem a tensão sem laço e deixam o corpo mais só. Há ainda a falsa calma imposta de fora pela força, que silencia o corpo sem o regular, e que é o seu contrário disfarçado.
 
 **Manifestações culturais:** A roda de tambores em que muitos corpos batem o mesmo ritmo até se acalmarem juntos. As danças lentas e os cantos de trabalho que afinavam grupos inteiros. O hábito de comer devagar à mesa, que é, no fundo, uma regulação partilhada, corpos que descem juntos a guarda em torno do alimento.
 
@@ -216,7 +216,7 @@ Relações: [A Solidão como Alarme, O Vínculo como Necessidade, O Sistema Nerv
 
 **Definição:** É a forma como a ameaça de ficar fora do grupo é processada pelo corpo com a urgência de um perigo de vida, e o modo como esse processamento organiza grande parte do comportamento social, da vergonha à obediência. Não é um receio entre outros, é um alarme de fundo que antecipa a exclusão e a evita à custa de quase tudo. O medo da exclusão é o preço que o corpo paga, em verdade e em autonomia, pelo seguro contra o abandono.
 
-**Origem provável:** Vem de uma história em que ser expulso do grupo equivalia a morrer, por falta de protecção, de partilha e de alimento. Um corpo que temesse a exclusão com a mesma força com que temia o predador, e que por isso se ajustasse ao grupo antes de ser posto fora, sobrevivia. Selecionou-se a antecipação: temer a rejeição antes de ela acontecer, e evitá-la dobrando-se a tempo.
+**Origem provável:** Vem de uma história em que ser expulso do grupo equivalia a morrer, por falta de protecção, de partilha e de alimento. Um corpo que temesse a exclusão com a mesma força com que temia o predador, e que por isso se ajustasse ao grupo antes de ser posto fora, sobrevivia. Seleccionou-se a antecipação: temer a rejeição antes de ela acontecer, e evitá-la dobrando-se a tempo.
 
 **Mecanismo:** O corpo trata o risco de exclusão com o mesmo aparelho com que trata a ameaça física. Ao primeiro sinal de desaprovação, a pulsação sobe, o rosto aquece, o estômago aperta, e a atenção fixa-se em recuperar o lugar. A vergonha é a face deste alarme: uma dor social que sinaliza ter-se ficado em risco de ser posto de fora. A antecipação faz o resto, e a pessoa cala-se, conforma-se e concorda antes mesmo de ser ameaçada.
 
@@ -224,7 +224,7 @@ Relações: [A Solidão como Alarme, O Vínculo como Necessidade, O Sistema Nerv
 
 **Equivalentes históricos:** O banimento e o exílio, as penas que muitas culturas temiam mais que a morte. A excomunhão, a expulsão da comunidade de salvação. O ostracismo das cidades antigas, a votação para pôr alguém fora. A desonra, marca que arrancava o lugar sem precisar de tocar no corpo.
 
-**Contra-exemplos:** Há quem suporte a exclusão pela verdade, o que mostra que o medo, por mais antigo, pode ser vencido. Há culturas que ritualizaram a saída temporária do grupo, o retiro, o ermitério, em que ficar de fora era escolha e não castigo. E há o desligamento patológico, de quem deixou de sentir o alarme e já não se importa de ser posto fora, contrário tão revelador quanto o excesso.
+**Contra-exemplos:** Há quem suporte a exclusão pela verdade, o que mostra que o medo, por mais antigo, pode ser vencido. Há culturas que ritualizaram a saída temporária do grupo, o retiro, o ermitério, em que ficar de fora era escolha e não castigo. No extremo oposto está o desligamento patológico, de quem deixou de sentir o alarme e já não se importa de ser posto fora, contrário tão revelador quanto o excesso.
 
 **Manifestações culturais:** A pressão do que dirão, motor silencioso de condutas inteiras. A moda como mecanismo de pertença, em que vestir certo é não ficar de fora. O peso da reputação, e a vergonha pública como a mais antiga das polícias, que dispensa guardas porque vigia por dentro.
 
@@ -253,7 +253,7 @@ Relações: [O Medo da Exclusão, O Pertencer Antes do Eu, A Co-Regulação]
 
 **Definição:** É o reconhecimento de que o laço não é um luxo afectivo mas uma necessidade primária, da mesma ordem do alimento, sem a qual o organismo, sobretudo no início da vida, não se desenvolve nem se mantém inteiro. O vínculo não se acrescenta a um ser já feito que depois decidiria ligar-se; é condição de o ser se fazer. Privar um corpo de laço, em especial no começo, não é deixá-lo carente, é deixá-lo incompleto.
 
-**Origem provável:** Vem da extrema dependência da cria humana e da longa janela em que só sobrevivia quem mantinha o laço com quem o cuidava. Selecionou-se um corpo que procurasse o vínculo com a urgência com que procura o alimento, que chorasse a ausência, que se agarrasse à presença, porque o que não procurava o laço não chegava a crescer. A necessidade do laço ficou inscrita tão fundo como a fome.
+**Origem provável:** Vem da extrema dependência da cria humana e da longa janela em que só sobrevivia quem mantinha o laço com quem o cuidava. Seleccionou-se um corpo que procurasse o vínculo com a urgência com que procura o alimento, que chorasse a ausência, que se agarrasse à presença, porque o que não procurava o laço não chegava a crescer. A necessidade do laço ficou inscrita tão fundo como a fome.
 
 **Mecanismo:** Desde o início, o organismo emite sinais para chamar e manter o outro, o choro, o sorriso, o agarrar, e organiza-se em torno da resposta que recebe. Quando o laço é fiável, o corpo desenvolve-se com um fundo de segurança; quando falta ou é errático, o desenvolvimento faz-se com um sistema mais alarmado, sempre a vigiar a presença. O vínculo não é, assim, um conteúdo da vida, é a estrutura sobre a qual a vida se monta.
 
@@ -261,7 +261,7 @@ Relações: [O Medo da Exclusão, O Pertencer Antes do Eu, A Co-Regulação]
 
 **Equivalentes históricos:** A intuição antiga, anterior a qualquer ciência, de que a criança sem afecto não vinga. O luto codificado em todas as culturas, sinal de que a perda do laço sempre foi tratada como ferida, não como contrariedade. A adopção e o acolhimento como reconhecimento de que o vínculo, e não só o sangue, faz crescer.
 
-**Contra-exemplos:** Há quem viva muito tempo isolado e funcione, o que mostra que a necessidade, sendo profunda, comporta margens. Há tradições de solidão escolhida, o eremita, em que a ausência de laço humano se preenche com outra forma de vínculo, ao sagrado, à terra. E há quem confunda necessidade de laço com posse do outro, deformação que prende em nome de uma fome legítima.
+**Contra-exemplos:** Há quem viva muito tempo isolado e funcione, o que mostra que a necessidade, sendo profunda, comporta margens. Há tradições de solidão escolhida, o eremita, em que a ausência de laço humano se preenche com outra forma de vínculo, ao sagrado, à terra. Há também quem confunda necessidade de laço com posse do outro, deformação que prende em nome de uma fome legítima.
 
 **Manifestações culturais:** As cerimónias que reconhecem e selam vínculos, o casamento, o apadrinhamento, os pactos de amizade. A literatura inteira tecida em torno do laço e da sua perda, sinal de quanto a cultura sabe que aí está o essencial. O valor universal dado à hospitalidade, que oferece laço temporário a quem está sem ele.
 
@@ -290,7 +290,7 @@ Relações: [A Co-Regulação, A Segurança Relacional, O Sistema Nervoso Social
 
 **Definição:** É o facto de que, em presença um do outro, os corpos afinam ritmos, respirações, tons e gestos, e a constatação de que essa afinação silenciosa é uma das formas mais antigas de pertencer. Pertencer não começa por declarações nem por contratos, começa por corpos que entram, sem o decidir, no mesmo compasso. A sincronia é a pertença a operar abaixo das palavras, o sinal mais primário de que dois corpos se reconhecem do mesmo lado.
 
-**Origem provável:** Vem da vantagem de grupos cujos corpos se coordenavam sem precisar de ordens, na caça, na fuga, no trabalho, na defesa. Um conjunto de corpos que apanhassem o ritmo uns dos outros agia como um só, mais depressa e melhor que uma soma de corpos isolados. Selecionou-se a tendência a entrar em compasso com quem está perto, porque o corpo afinado ao grupo era um corpo protegido e eficaz.
+**Origem provável:** Vem da vantagem de grupos cujos corpos se coordenavam sem precisar de ordens, na caça, na fuga, no trabalho, na defesa. Um conjunto de corpos que apanhassem o ritmo uns dos outros agia como um só, mais depressa e melhor que uma soma de corpos isolados. Seleccionou-se a tendência a entrar em compasso com quem está perto, porque o corpo afinado ao grupo era um corpo protegido e eficaz.
 
 **Mecanismo:** Em presença, os corpos imitam-se e ajustam-se sem intenção: as respirações aproximam-se, os tons de voz convergem, os gestos espelham-se, o passo iguala-se. Essa afinação dá a cada um a sensação de estar com, de pertencer àquele momento. Quando os corpos não conseguem sincronizar-se, ou quando um quebra deliberadamente o compasso do outro, instala-se um desconforto que assinala, abaixo da consciência, que ali não há pertença.
 
@@ -298,7 +298,7 @@ Relações: [A Co-Regulação, A Segurança Relacional, O Sistema Nervoso Social
 
 **Equivalentes históricos:** O cantar a uma só voz nos trabalhos do campo e do mar, que acertava os corpos à tarefa. A marcha e a dança colectivas, tecnologias antigas de fazer de muitos um. O bater de palmas e de pés em uníssono nas festas, a forma mais simples de sentir, no corpo, que se pertence ao mesmo grupo.
 
-**Contra-exemplos:** Há a sincronia imposta, a marcha forçada dos exércitos, que afina corpos sem pertença verdadeira, só obediência. Há quem permaneça dessincronizado por defesa, mantendo o seu ritmo como muro. E há a falsa sincronia da imitação calculada, de quem copia o outro para o manipular, casca de afinação sem o seu conteúdo.
+**Contra-exemplos:** Há a sincronia imposta, a marcha forçada dos exércitos, que afina corpos sem pertença verdadeira, só obediência. Há quem permaneça dessincronizado por defesa, mantendo o seu ritmo como muro. Há, por fim, a falsa sincronia da imitação calculada, de quem copia o outro para o manipular, casca de afinação sem o seu conteúdo.
 
 **Manifestações culturais:** A dança como celebração da pertença feita corpo. A música partilhada, do coro à multidão de um concerto, que afina milhares numa só pulsação. Os rituais de saudação ritmados, as palmas, os cânticos de estádio, todos modos de sentir, em conjunto, que se é do mesmo lado.
 
@@ -327,7 +327,7 @@ Relações: [O Medo da Exclusão, O Sistema Nervoso Social, O Vínculo como Nece
 
 **Definição:** É o entendimento de que a solidão prolongada não é apenas tristeza, mas um sinal biológico de ameaça que põe o corpo em estado de vigilância, como se o isolamento fosse, ainda hoje, um risco de morte. A solidão não pesa por ser desagradável, pesa por ser, para o corpo, um aviso de perigo. O organismo lê o estar só como o estar exposto, e arma-se em conformidade, mesmo quando nenhum perigo real existe.
 
-**Origem provável:** Vem de uma história em que estar só era, de facto, estar em perigo, sem protecção, sem partilha, sem alerta de outros. Um corpo que tratasse a solidão como ameaça, e que por isso se mantivesse vigilante e procurasse o regresso ao grupo, sobrevivia. Selecionou-se um alarme que torna o isolamento desconfortável de propósito, para que o corpo não se acomodasse a ele e voltasse para junto dos seus.
+**Origem provável:** Vem de uma história em que estar só era, de facto, estar em perigo, sem protecção, sem partilha, sem alerta de outros. Um corpo que tratasse a solidão como ameaça, e que por isso se mantivesse vigilante e procurasse o regresso ao grupo, sobrevivia. Seleccionou-se um alarme que torna o isolamento desconfortável de propósito, para que o corpo não se acomodasse a ele e voltasse para junto dos seus.
 
 **Mecanismo:** Na ausência prolongada de laço seguro, o sistema nervoso passa a estado de vigilância elevada. Sobe a atenção à ameaça, lê-se perigo em rostos neutros, perde-se a calma com facilidade, dorme-se pior. O corpo, sentindo-se desprotegido, prepara-se para o pior, e essa mesma preparação, ao tornar a pessoa mais defensiva e desconfiada, afasta os outros e aprofunda o isolamento, fechando o ciclo do alarme.
 
@@ -335,7 +335,7 @@ Relações: [O Medo da Exclusão, O Sistema Nervoso Social, O Vínculo como Nece
 
 **Equivalentes históricos:** O confinamento solitário, tido em muitas culturas como o pior dos castigos, pior que a dor física. O degredo e o exílio, penas que matavam pela solidão. O medo antigo da noite passada longe do fogo dos outros. A intuição, em toda a parte, de que abandonar alguém à solidão era uma forma de o condenar.
 
-**Contra-exemplos:** Há a solidão escolhida e fértil, o recolhimento que serena em vez de alarmar, sinal de que o alarme depende de a solidão ser ou não vivida como ameaça. Há quem, tendo interiorizado regulação suficiente, habite o estar só sem pânico. E há o isolamento entorpecido de quem deixou de sentir o alarme, perigoso justamente porque já não soa.
+**Contra-exemplos:** Há a solidão escolhida e fértil, o recolhimento que serena em vez de alarmar, sinal de que o alarme depende de a solidão ser ou não vivida como ameaça. Há quem, tendo interiorizado regulação suficiente, habite o estar só sem pânico. No reverso, há o isolamento entorpecido de quem deixou de sentir o alarme, perigoso justamente porque já não soa.
 
 **Manifestações culturais:** O valor universal dado à companhia, e o cuidado de não deixar ninguém comer, viajar ou morrer só. As redes de visita aos isolados, os velhos, os doentes, os presos. A figura recorrente do solitário como alguém a quem falta algo de vital, que a cultura olha com pena ou com receio.
 
@@ -364,7 +364,7 @@ Relações: [O Sistema Nervoso Social, A Co-Regulação, A Sincronia dos Corpos]
 
 **Definição:** É o estado em que o corpo, lido o ambiente como seguro porque há outros de confiança por perto, baixa a guarda e liberta a energia que estava reservada à defesa para a exploração e a criação. Não é a ausência de problemas, é a presença de um chão de laço fiável sobre o qual se pode arriscar. A segurança relacional é a base de que se parte, e não o prémio que se alcança, e é dela que nasce a audácia.
 
-**Origem provável:** Vem da vantagem dos que, sentindo-se protegidos pelo grupo, podiam afastar-se um pouco do alerta permanente e dedicar energia a explorar, a inventar, a aprender. Um corpo seguro na retaguarda do laço ousava mais e descobria mais, e o grupo que oferecia esse chão aos seus colhia o que eles descobriam. Selecionou-se a ligação entre sentir-se seguro no laço e libertar-se para o que está para lá da mera defesa.
+**Origem provável:** Vem da vantagem dos que, sentindo-se protegidos pelo grupo, podiam afastar-se um pouco do alerta permanente e dedicar energia a explorar, a inventar, a aprender. Um corpo seguro na retaguarda do laço ousava mais e descobria mais, e o grupo que oferecia esse chão aos seus colhia o que eles descobriam. Seleccionou-se a ligação entre sentir-se seguro no laço e libertar-se para o que está para lá da mera defesa.
 
 **Mecanismo:** Lido o ambiente humano como seguro, o sistema nervoso sai do estado de defesa e entra no de abertura. A energia que estava presa à vigilância liberta-se para a curiosidade, a aprendizagem, a criação e o cuidado dos outros. Com a retaguarda do laço firme, o corpo aguenta o risco, a falha e o desconhecido sem se desorganizar, porque sabe que tem para onde voltar. A segurança não adormece, é ela que permite ousar.
 
@@ -372,7 +372,7 @@ Relações: [O Sistema Nervoso Social, A Co-Regulação, A Sincronia dos Corpos]
 
 **Equivalentes históricos:** A casa e o lar como retaguarda de onde se partia para o mundo. As alianças e os pactos que davam às pessoas o chão estável de que ousavam empreender. As tréguas e as zonas de paz, em que, suspensa a ameaça, se podia construir. A figura do porto seguro, antiga em todas as línguas, donde se larga e aonde se torna.
 
-**Contra-exemplos:** Há a falsa segurança da estagnação, em que o conforto adormece em vez de libertar, e que não é segurança relacional mas o seu contrário. Há a segurança comprada com submissão, que pacifica o corpo à custa da verdade. E há quem, sem nunca ter tido chão, ouse na mesma, por necessidade ou desespero, audácia sem base que costuma custar caro.
+**Contra-exemplos:** Há a falsa segurança da estagnação, em que o conforto adormece em vez de libertar, e que não é segurança relacional mas o seu contrário. Há a segurança comprada com submissão, que pacifica o corpo à custa da verdade. Há ainda quem, sem nunca ter tido chão, ouse na mesma, por necessidade ou desespero, audácia sem base que costuma custar caro.
 
 **Manifestações culturais:** As instituições de hospitalidade que ofereciam abrigo seguro ao viajante. As tradições de confiança comunitária que deixavam portas abertas. Os espaços francos onde se podia falar sem represália, condição de toda a cultura viva. A figura do círculo de confiança, em que se diz o que fora dele se cala.
 
@@ -401,7 +401,7 @@ Relações: [O Vínculo como Necessidade, A Sincronia dos Corpos, A Co-Regulaç�
 
 **Definição:** É a afirmação de que a pertença antecede e constitui o eu, de modo que não nos juntamos a outros depois de sermos quem somos, antes nos tornamos quem somos por estarmos já dentro de uma teia de outros. A pessoa não é primeiro indivíduo e depois membro, é membro de uma teia desde o início, e é dessa teia que recebe o seu rosto. O eu mais singular não é o que se fez sozinho, é o que foi mais bem tecido pelos seus.
 
-**Origem provável:** Vem do facto de o ser humano se formar, literalmente, na relação: o corpo que nos regulou, a voz que nos nomeou, os ritmos que apanhámos, tudo isso nos fez antes de termos um eu para escolher. Selecionou-se uma espécie cujos indivíduos não chegam prontos e depois se associam, mas se constituem dentro do laço, de tal modo que a pertença não é um acréscimo à pessoa, é a sua matéria de origem.
+**Origem provável:** Vem do facto de o ser humano se formar, literalmente, na relação: o corpo que nos regulou, a voz que nos nomeou, os ritmos que apanhámos, tudo isso nos fez antes de termos um eu para escolher. Seleccionou-se uma espécie cujos indivíduos não chegam prontos e depois se associam, mas se constituem dentro do laço, de tal modo que a pertença não é um acréscimo à pessoa, é a sua matéria de origem.
 
 **Mecanismo:** O eu monta-se de fora para dentro. Recebemos primeiro a regulação, a língua, os gestos, os modos de sentir, e só sobre essa base recebida emerge algo a que chamamos eu. A teia dos outros não rodeia um centro já feito, ela forma o centro. Por isso a individualidade mais inteira é a que mais reconhece e integra os que a teceram, e a que se julga feita sozinha costuma estar apenas a esquecer os corpos que a fizeram.
 
@@ -409,7 +409,7 @@ Relações: [O Vínculo como Necessidade, A Sincronia dos Corpos, A Co-Regulaç�
 
 **Equivalentes históricos:** A pessoa pensada, em muitas tradições, como nó de relações e não como átomo: filho de, da casa de, da terra de. O nome que dizia, antes de tudo, a quem se pertencia. A genealogia e a linhagem como modo de saber quem se é a partir de quem se veio. A identidade dada pela aldeia, pela tribo, pela casa, anterior a qualquer escolha individual.
 
-**Contra-exemplos:** Há a ideologia do indivíduo soberano, que se imagina origem de si, e que este conceito contesta. Há, no extremo oposto, a dissolução do eu no grupo, em que a pertença esmaga em vez de constituir, e que é o seu reverso doente. E há a singularidade que floresce mais quanto mais pertence, contra-exemplo da falsa oposição entre ser-se único e ser-se de muitos.
+**Contra-exemplos:** Há a ideologia do indivíduo soberano, que se imagina origem de si, e que este conceito contesta. Há, no extremo oposto, a dissolução do eu no grupo, em que a pertença esmaga em vez de constituir, e que é o seu reverso doente. Há, por outro lado, a singularidade que floresce mais quanto mais pertence, contra-exemplo da falsa oposição entre ser-se único e ser-se de muitos.
 
 **Manifestações culturais:** As línguas que dizem a pessoa pela sua rede de pertenças antes de a dizerem pelo nome próprio. As narrativas de origem, em que saber quem se é começa por saber de onde se vem. O peso dado, em quase todas as culturas, ao pertencer a uma casa, a uma terra, a um povo, como dado anterior à pessoa individual.
 

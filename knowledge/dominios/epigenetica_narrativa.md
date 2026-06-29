@@ -81,7 +81,7 @@ O sinal mais claro de transição é a passagem do destino à legibilidade: quan
 
 ## 13. Questões em aberto
 
-Onde traçar, com rigor, a fronteira entre a metáfora epigenética e a investigação biológica, sem confundir inspiração com prova? Quanto da repetição transgeracional se transmite por narrativa e quanto por outras vias, e como distingui-las na prática? Que faz com que numa linhagem alguém se torne aquele que lê e reescreve a história, enquanto outros a continuam? Pode uma reparação ser feita por um único descendente, ou exige a participação do sistema? E à escala colectiva: que condições permitem a um povo elaborar um trauma histórico, em vez de o repetir transformado? Estas perguntas ficam abertas de propósito; o domínio existe para as habitar, não para as fechar.
+Onde traçar, com rigor, a fronteira entre a metáfora epigenética e a investigação biológica, sem confundir inspiração com prova? Quanto da repetição transgeracional se transmite por narrativa e quanto por outras vias, e como distingui-las na prática? Que faz com que numa linhagem alguém se torne aquele que lê e reescreve a história, enquanto outros a continuam? Pode uma reparação ser feita por um único descendente, ou exige a participação do sistema? Já à escala colectiva: que condições permitem a um povo elaborar um trauma histórico, em vez de o repetir transformado? Estas perguntas ficam abertas de propósito; o domínio existe para as habitar, não para as fechar.
 
 ## 14. Relação com A Grande Transição
 
@@ -130,7 +130,7 @@ Relações: [O Guião Familiar, A Lealdade Narrativa, O Não-Dito]
 
 **Equivalentes históricos:** As crónicas régias que faziam dos vencedores justos e dos vencidos traidores. As genealogias míticas que ligavam um povo a um fundador heróico. As histórias nacionais ensinadas na escola com os seus santos e os seus vilões. Em todas, o mesmo gesto à escala do grupo: transformar o acontecido numa versão que dá identidade e oculta o que a perturbaria.
 
-**Contra-exemplos:** Nem toda a narração familiar aprisiona. Há famílias que contam a sua história com margem, que admitem que havia outra versão, que deixam as personagens humanas e contraditórias. Uma história que se sabe história, e não verdade, transmite pertença sem fechar o descendente. E o silêncio total também não é alternativa: uma linhagem sem qualquer relato deixa o descendente sem chão. O problema não é haver versão, é a versão impor-se como única.
+**Contra-exemplos:** Nem toda a narração familiar aprisiona. Há famílias que contam a sua história com margem, que admitem que havia outra versão, que deixam as personagens humanas e contraditórias. Uma história que se sabe história, e não verdade, transmite pertença sem fechar o descendente. O silêncio total também não é alternativa: uma linhagem sem qualquer relato deixa o descendente sem chão. O problema não é haver versão, é a versão impor-se como única.
 
 **Manifestações culturais:** Mitos fundadores, sagas familiares na literatura, álbuns que só guardam os dias bons, biografias que apagam as zonas escuras. A cultura está cheia de histórias que se herdam como verdades, e a arte que mais perturba é, muitas vezes, a que reabre uma versão tida por fechada e mostra o que ela tinha calado.
 
@@ -152,7 +152,7 @@ Relações: [O Guião Familiar, A Lealdade Narrativa, O Não-Dito]
 - Emoção dominante: mistério e pertença grave, a segurança de pisar algo construído por muitos antes.
 - Relação com o mundo pós-sobrevivência: ao longe, uma das camadas começa a tornar-se translúcida e a soltar luz, sinal de que a versão pode ser lida e atravessada; jardins suspensos brilham ao fundo, ainda por habitar.
 
-**Perguntas para conteúdos:** Qual é a frase com que a tua família se conta a si mesma, e quem é o herói e quem é o culpado nessa versão? Que pessoa, nessa história, te foi dada pronta, sem matiz, antes de a poderes conhecer? E se a versão que herdaste tivesse servido para proteger alguém de algo que ainda não vês?
+**Perguntas para conteúdos:** Qual é a frase com que a tua família se conta a si mesma, e quem é o herói e quem é o culpado nessa versão? Que pessoa, nessa história, te foi dada pronta, sem matiz, antes de a poderes conhecer? Imagina que a versão que herdaste tivesse servido para proteger alguém de algo que ainda não vês: o que mudaria?
 
 ### O Segredo Transmitido
 Relações: [O Não-Dito, O Trauma Geracional, A História que se Herda]
@@ -189,7 +189,7 @@ Relações: [O Não-Dito, O Trauma Geracional, A História que se Herda]
 - Emoção dominante: mistério grave, a tensão de uma presença sem nome.
 - Relação com o mundo pós-sobrevivência: ao fundo, uma fissura abre-se na vedação e deixa entrar um fio de luz quente; a camada começa a tornar-se translúcida, e o desvio das ruas acima afrouxa.
 
-**Perguntas para conteúdos:** Qual é o assunto que, em tua casa, faz toda a gente endurecer sem ninguém dizer porquê? Que pergunta aprendeste a não fazer antes de saberes que havia o que esconder? E se aquilo que evitas sem razão fosse o contorno de algo que outra pessoa guardou para te poupar?
+**Perguntas para conteúdos:** Qual é o assunto que, em tua casa, faz toda a gente endurecer sem ninguém dizer porquê? Que pergunta aprendeste a não fazer antes de saberes que havia o que esconder? Aquilo que evitas sem razão, e se fosse o contorno de algo que outra pessoa guardou para te poupar?
 
 ### O Trauma Geracional
 Relações: [O Segredo Transmitido, A Reparação Transgeracional, A Lealdade Narrativa]
@@ -226,7 +226,7 @@ Relações: [O Segredo Transmitido, A Reparação Transgeracional, A Lealdade Na
 - Emoção dominante: gravidade e mistério, a presença de uma dor que vem de longe.
 - Relação com o mundo pós-sobrevivência: ao longe, a falha começa a preencher-se de luz quente e a fechar de baixo para cima; a camada antiga torna-se translúcida e a vibração que subia esvai-se, libertando a figura sem apagar a marca.
 
-**Perguntas para conteúdos:** Que dor carregas que parece grande demais para a tua vida, e pequena demais para o teu tempo? Que repetição na tua linhagem acontece sempre na mesma idade ou na mesma data? E se aquilo que sentes sem saber porquê estivesse à espera, há gerações, de finalmente ser sentido por alguém?
+**Perguntas para conteúdos:** Que dor carregas que parece grande demais para a tua vida, e pequena demais para o teu tempo? Que repetição na tua linhagem acontece sempre na mesma idade ou na mesma data? Aquilo que sentes sem saber porquê, e se estivesse à espera, há gerações, de finalmente ser sentido por alguém?
 
 ### O Guião Familiar
 Relações: [A História que se Herda, A Lealdade Narrativa, O Trauma Geracional]
@@ -241,7 +241,7 @@ Relações: [A História que se Herda, A Lealdade Narrativa, O Trauma Geracional
 
 **Equivalentes históricos:** Os papéis hereditários nas sociedades de ordens, onde se nascia já destinado a uma função. As castas, os ofícios passados de pai para filho, os lugares sociais fixados pelo nascimento. À escala do grupo, o mesmo gesto: a estrutura atribui a personagem antes de o indivíduo poder escolher quem é.
 
-**Contra-exemplos:** Há famílias cujos papéis são móveis, em que o forte pode fraquejar e ser amparado, em que o que parte pode voltar e o que fica pode sair. Quando a função se sabe função, e não essência, ela organiza sem aprisionar. E há sistemas que reescrevem o guião quando alguém o quebra, em vez de o punir. O problema não é haver papéis, é serem rígidos e atribuídos sem retorno.
+**Contra-exemplos:** Há famílias cujos papéis são móveis, em que o forte pode fraquejar e ser amparado, em que o que parte pode voltar e o que fica pode sair. Quando a função se sabe função, e não essência, ela organiza sem aprisionar. Há também sistemas que reescrevem o guião quando alguém o quebra, em vez de o punir. O problema não é haver papéis, é serem rígidos e atribuídos sem retorno.
 
 **Manifestações culturais:** A própria forma do drama, com as suas personagens e funções, espelha o guião familiar. As sagas e as telenovelas vivem de papéis fixos transmitidos entre gerações de personagens. A arte que comove é, muitas vezes, a que mostra alguém a quebrar o papel que lhe foi dado.
 
@@ -263,7 +263,7 @@ Relações: [A História que se Herda, A Lealdade Narrativa, O Trauma Geracional
 - Emoção dominante: mistério grave e a estranha segurança de um lugar feito à medida.
 - Relação com o mundo pós-sobrevivência: ao longe, as paredes de um nicho começam a dissolver-se em luz, libertando a sua figura sem a empurrar para fora da estrutura; ela passa a poder mover-se entre as camadas em vez de ficar contida.
 
-**Perguntas para conteúdos:** Que papel te foi dado em casa antes de o poderes escolher, e o que acontecia se o largasses? Qual o lugar que ficou vago na tua família e que alguém foi puxado a ocupar? E se a função que carregas tivesse servido para manter todos de pé num tempo que já passou?
+**Perguntas para conteúdos:** Que papel te foi dado em casa antes de o poderes escolher, e o que acontecia se o largasses? Qual o lugar que ficou vago na tua família e que alguém foi puxado a ocupar? Imagina que a função que carregas tivesse servido para manter todos de pé num tempo que já passou: ainda a deverias?
 
 ### A Lealdade Narrativa
 Relações: [O Guião Familiar, A Reparação Transgeracional, A História que se Herda]
@@ -278,7 +278,7 @@ Relações: [O Guião Familiar, A Reparação Transgeracional, A História que s
 
 **Equivalentes históricos:** Os juramentos de fidelidade que ligavam alguém à sorte de um senhor ou de uma causa para além da própria conveniência. As vinganças e as honras de família transmitidas como obrigação. À escala dos grupos, a lealdade que exige a um descendente continuar uma inimizade ou um luto que ele próprio já não viveu.
 
-**Contra-exemplos:** Há lealdade que não aprisiona: a fidelidade que se sabe fidelidade, que se pode discutir e redireccionar, mantém a pertença sem cobrar a felicidade. Pertencer não tem de exigir repetir. E há linhagens em que ser feliz é tido como honra aos que sofreram, e não como traição. O problema não é o laço, é o laço operar cego, a cobrar uma fidelidade que ninguém pode nomear nem recusar.
+**Contra-exemplos:** Há lealdade que não aprisiona: a fidelidade que se sabe fidelidade, que se pode discutir e redireccionar, mantém a pertença sem cobrar a felicidade. Pertencer não tem de exigir repetir. Há ainda linhagens em que ser feliz é tido como honra aos que sofreram, e não como traição. O problema não é o laço, é o laço operar cego, a cobrar uma fidelidade que ninguém pode nomear nem recusar.
 
 **Manifestações culturais:** As tragédias da lealdade, em que um filho se destrói para não trair os seus. A literatura dos que não conseguem partir, dos que ficam por fidelidade a um lugar ou a uma dor. A arte que mostra o conflito entre pertencer e existir toca um nervo que todos reconhecem.
 
@@ -300,7 +300,7 @@ Relações: [O Guião Familiar, A Reparação Transgeracional, A História que s
 - Emoção dominante: mistério e gravidade, a tensão entre pertencer e erguer-se.
 - Relação com o mundo pós-sobrevivência: ao longe, os fios não se cortam, mudam de direcção, deixando de puxar para baixo e passando a guiar a figura em direcção à luz; a teia mantém-se, agora a orientar em vez de prender.
 
-**Perguntas para conteúdos:** Se a tua infelicidade fosse uma lealdade, a quem estarias a ser fiel ao continuar a sofrer? Que felicidade te parece, sem saberes porquê, uma traição aos teus? E se a mesma fidelidade que te prende pudesse, voltada para o desejo deles, libertar-te?
+**Perguntas para conteúdos:** Se a tua infelicidade fosse uma lealdade, a quem estarias a ser fiel ao continuar a sofrer? Que felicidade te parece, sem saberes porquê, uma traição aos teus? A mesma fidelidade que te prende, e se pudesse, voltada para o desejo deles, libertar-te?
 
 ### O Não-Dito
 Relações: [O Segredo Transmitido, A Ancestralidade Viva, O Trauma Geracional]
@@ -337,7 +337,7 @@ Relações: [O Segredo Transmitido, A Ancestralidade Viva, O Trauma Geracional]
 - Emoção dominante: mistério, a presença grave de algo que falta.
 - Relação com o mundo pós-sobrevivência: ao longe, o contorno vazio começa a encher-se devagar de luz quente, como se a falta recebesse finalmente um nome, e a dobra que ela impunha à luz em redor se desfaz.
 
-**Perguntas para conteúdos:** Qual é o nome que na tua família não se pronuncia, e como muda o ar da sala quando alguém se aproxima dele? Que ausência ocupa, em tua casa, mais espaço do que muitas presenças? E se dar palavra ao que faltava fosse devolver a voz a quem nunca a pôde ter?
+**Perguntas para conteúdos:** Qual é o nome que na tua família não se pronuncia, e como muda o ar da sala quando alguém se aproxima dele? Que ausência ocupa, em tua casa, mais espaço do que muitas presenças? Dar palavra ao que faltava, e se fosse devolver a voz a quem nunca a pôde ter?
 
 ### A Reparação Transgeracional
 Relações: [O Trauma Geracional, A Lealdade Narrativa, A Ancestralidade Viva]
@@ -352,7 +352,7 @@ Relações: [O Trauma Geracional, A Lealdade Narrativa, A Ancestralidade Viva]
 
 **Equivalentes históricos:** Os processos de reparação histórica, o reconhecimento de injustiças colectivas, a restituição de dignidade às vítimas de uma opressão. À escala dos povos, nomear o que foi calado, devolver às vítimas o seu lugar e libertar os descendentes de todos os lados é a mesma operação que, em pequena escala, repara uma linhagem.
 
-**Contra-exemplos:** Nem todo o gesto sobre o passado repara. Acusar os antepassados não é reparar, é continuar a dívida com os sinais trocados. Esquecer também não repara, deixa o desequilíbrio activo por baixo. E a reparação imposta sem leitura, sem reconhecer o que se passou, é gesto vazio. A reparação verdadeira exige ver primeiro, e honra mesmo quem aponta a falta. O que a distingue é restituir lugar, não cobrar vingança.
+**Contra-exemplos:** Nem todo o gesto sobre o passado repara. Acusar os antepassados não é reparar, é continuar a dívida com os sinais trocados. Esquecer também não repara, deixa o desequilíbrio activo por baixo. Tão-pouco a reparação imposta sem leitura, sem reconhecer o que se passou, repara: é gesto vazio. A reparação verdadeira exige ver primeiro, e honra mesmo quem aponta a falta. O que a distingue é restituir lugar, não cobrar vingança.
 
 **Manifestações culturais:** As obras que dão finalmente voz a quem a história silenciou, os testemunhos que repõem dignidade, a arte que nomeia uma injustiça antiga e, ao nomeá-la, começa a repará-la. A cultura reparadora não apaga o passado: dá-lhe a palavra que lhe faltou.
 
@@ -374,7 +374,7 @@ Relações: [O Trauma Geracional, A Lealdade Narrativa, A Ancestralidade Viva]
 - Emoção dominante: segurança e mistério, o sentimento simultâneo de um fim e de um nascimento.
 - Relação com o mundo pós-sobrevivência: a dissolução da camada é já o mundo emergente a acontecer; ao fundo, jardins suspensos brilham com a luz da própria matéria, ainda por habitar, sinal do que se torna possível quando a dívida antiga é finalmente acertada.
 
-**Perguntas para conteúdos:** Que dívida andas a pagar que não contraíste, e a quem ela pertence de facto? Que lugar, na tua linhagem, ficou por devolver a alguém que foi apagado? E se reparar não fosse acusar nem esquecer, mas pôr finalmente cada geração no seu sítio?
+**Perguntas para conteúdos:** Que dívida andas a pagar que não contraíste, e a quem ela pertence de facto? Que lugar, na tua linhagem, ficou por devolver a alguém que foi apagado? Imagina que reparar não fosse acusar nem esquecer, mas pôr finalmente cada geração no seu sítio.
 
 ### A Ancestralidade Viva
 Relações: [O Não-Dito, A Reparação Transgeracional, A História que se Herda]
@@ -389,7 +389,7 @@ Relações: [O Não-Dito, A Reparação Transgeracional, A História que se Herd
 
 **Equivalentes históricos:** As tradições, em muitos povos, em que os antepassados pertencem à comunidade, têm voz nas decisões e lugar nas refeições. Importa distinguir tradição específica de generalização: as tradições africanas abrangem uma pluralidade vastíssima de povos, línguas e cosmologias, e não há uma única doutrina dos antepassados. O que se retém, com respeito e sem amalgamar, é o princípio da continuidade vivida como pertença.
 
-**Contra-exemplos:** A ancestralidade viva não é idealização da linhagem nem submissão ao passado. Quando o vínculo se torna obrigação cega, deixa de ser pertença e passa a ser guião que prende. E quando os que vieram antes são vividos só como assombração ou só como sintoma, perde-se a face que este conceito recupera. O que o distingue não é a intensidade do laço, é a sua qualidade: relação, e não captura.
+**Contra-exemplos:** A ancestralidade viva não é idealização da linhagem nem submissão ao passado. Quando o vínculo se torna obrigação cega, deixa de ser pertença e passa a ser guião que prende. Do mesmo modo, quando os que vieram antes são vividos só como assombração ou só como sintoma, perde-se a face que este conceito recupera. O que o distingue não é a intensidade do laço, é a sua qualidade: relação, e não captura.
 
 **Manifestações culturais:** A literatura e a música que celebram a linhagem como pertença e não como peso, as histórias contadas para situar alguém entre os seus, as artes da memória que mantêm vivos os que vieram antes pela palavra. A cultura que vive a ancestralidade como tecido transmite continuidade sem aprisionar.
 
@@ -411,4 +411,4 @@ Relações: [O Não-Dito, A Reparação Transgeracional, A História que se Herd
 - Emoção dominante: segurança e mistério, a serenidade de pertencer a algo vasto e de não estar só.
 - Relação com o mundo pós-sobrevivência: a estrutura inteira é já mundo emergente, luz da própria matéria; ao longe, jardins suspensos brilham ao longo das camadas, ainda por habitar, sinal de uma linhagem que se continua em vez de se repetir.
 
-**Perguntas para conteúdos:** A quem, na tua linhagem, ainda respondes, e que palavra ficou por cumprir com quem veio antes? O que mudaria se sentires os que vieram antes não como peso, mas como a prova de que não estás só? E se pertencer a algo muito mais antigo do que tu fosse, afinal, uma forma de seres mais livre?
+**Perguntas para conteúdos:** A quem, na tua linhagem, ainda respondes, e que palavra ficou por cumprir com quem veio antes? O que mudaria se sentires os que vieram antes não como peso, mas como a prova de que não estás só? Pertencer a algo muito mais antigo do que tu, e se fosse, afinal, uma forma de seres mais livre?

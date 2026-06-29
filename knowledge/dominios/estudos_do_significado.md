@@ -55,7 +55,7 @@ O primeiro mecanismo é a atribuição. Diante de um acontecimento, a mente não
 
 O segundo mecanismo é a integração narrativa. Os acontecimentos isolados pesam mais do que os acontecimentos inseridos numa história. Ao colocar uma dor dentro de um arco, antes disto, por causa disto, para isto, a mente reduz-lhe o carácter absurdo e devolve-lhe lugar. A narrativa não apaga o sofrimento: dá-lhe forma, e o que tem forma pode ser carregado. O colapso de sentido é muitas vezes, no fundo, o colapso da história capaz de integrar o que aconteceu.
 
-O terceiro mecanismo é a ancoragem no comum. O sentido individual repousa sobre um sentido que o precede e o excede. As palavras com que cada um interpreta a sua vida, as causas que reconhece como dignas, as figuras maiores a que recorre, nada disto é inventado de raiz: é recebido de uma comunidade e de uma linhagem. Por isso o significado mais resistente é aquele que não depende só do indivíduo: quando a história pessoal vacila, a teia comum segura. E por isso a erosão dos laços e das pertenças não é só perda de companhia: é perda de uma das fábricas do sentido.
+O terceiro mecanismo é a ancoragem no comum. O sentido individual repousa sobre um sentido que o precede e o excede. As palavras com que cada um interpreta a sua vida, as causas que reconhece como dignas, as figuras maiores a que recorre, nada disto é inventado de raiz: é recebido de uma comunidade e de uma linhagem. Por isso o significado mais resistente é aquele que não depende só do indivíduo: quando a história pessoal vacila, a teia comum segura. Por isso a erosão dos laços e das pertenças não é só perda de companhia: é perda de uma das fábricas do sentido.
 
 ## 6. Tensões
 
@@ -121,7 +121,7 @@ Como se transmite o sentido partilhado quando as formas que o sustentavam, ritos
 
 Até que ponto a evolução do sentido ao longo de uma vida segue passagens reconhecíveis, e até que ponto é singular e imprevisível? A tensão entre o que há de comum nas transformações do significado e o que há de irredutivelmente próprio em cada vida permanece por resolver.
 
-E, à escala da Grande Transição, de que sentido precisa uma Humanidade que deixe de se organizar em torno da sobrevivência? Se grande parte das nossas fontes de significado foram talhadas pela necessidade de durar, não se sabe ainda que sentido sustentará uma existência libertada dessa urgência, nem se essa libertação não trará consigo o seu próprio vazio.
+Por fim, à escala da Grande Transição, de que sentido precisa uma Humanidade que deixe de se organizar em torno da sobrevivência? Se grande parte das nossas fontes de significado foram talhadas pela necessidade de durar, não se sabe ainda que sentido sustentará uma existência libertada dessa urgência, nem se essa libertação não trará consigo o seu próprio vazio.
 
 ## 14. Relação com A Grande Transição
 
@@ -151,9 +151,9 @@ Já te aconteceu chegares ao que tanto querias e sentires, no lugar do descanso,
 
 Que história contas sobre a tua vida quando alguém te pergunta quem és, e o que é que essa história deixa de fora? Onde é que ela tem um fio, e onde é que se desfaz em acontecimentos soltos?
 
-Houve uma dor que, com o tempo, passou de peso a eixo, que em vez de te destruir se tornou parte do que és? E houve outra que ficou apenas como ferida, sem nunca encontrar lugar? O que distinguiu uma da outra não foi a dor.
+Houve uma dor que, com o tempo, passou de peso a eixo, que em vez de te destruir se tornou parte do que és? Houve também outra que ficou apenas como ferida, sem nunca encontrar lugar? O que distinguiu uma da outra não foi a dor.
 
-De onde vem, afinal, o sentido que te sustenta nas horas más: do que tu próprio construíste, ou de algo que herdaste e que te segura quando a tua própria história vacila? E o que acontece quando essa teia, a que recebeste dos teus, começa a desfazer-se?
+De onde vem, afinal, o sentido que te sustenta nas horas más: do que tu próprio construíste, ou de algo que herdaste e que te segura quando a tua própria história vacila? O que acontece, então, quando essa teia, a que recebeste dos teus, começa a desfazer-se?
 
 O que é que, na tua vida, ultrapassa o teu próprio fim, aquilo a que te entregas sabendo que não o verás completo? Repara se não é justamente aí, no que excede o teu eu, que a tua vida te parece mais tua.
 
@@ -172,7 +172,7 @@ Relações: [O Significado como Sobrevivência, O Vazio de Significado, As Fonte
 
 **Equivalentes históricos:** Em todas as épocas se nomeou esta pressão. As religiões falaram de uma sede que nenhuma coisa criada sacia; a filosofia antiga procurou o fim último que organiza todos os outros; a teologia falou de um vazio com a forma do que falta. Diferentes vocabulários, a mesma observação: o ser humano não se satisfaz com a satisfação das necessidades, e procura uma razão por baixo das razões.
 
-**Contra-exemplos:** Nem toda a falta de sentido aparente é necessidade de sentido em acção. Há estados de absorção total, na criação, no cuidado, no jogo, em que a pergunta sobre o sentido simplesmente não se levanta, não por estar respondida mas por se estar demasiado dentro da vida para a interrogar; isto não é ausência de necessidade, é a sua satisfação silenciosa. E há culturas que organizam a vida sem nunca tematizar o sentido, o que não significa que dele não dependam, apenas que o respondem por defeito, sem o nomear.
+**Contra-exemplos:** Nem toda a falta de sentido aparente é necessidade de sentido em acção. Há estados de absorção total, na criação, no cuidado, no jogo, em que a pergunta sobre o sentido simplesmente não se levanta, não por estar respondida mas por se estar demasiado dentro da vida para a interrogar; isto não é ausência de necessidade, é a sua satisfação silenciosa. Há também culturas que organizam a vida sem nunca tematizar o sentido, o que não significa que dele não dependam, apenas que o respondem por defeito, sem o nomear.
 
 **Manifestações culturais:** A necessidade de sentido manifesta-se na produção incessante de narrativas, mitos, romances, biografias, histórias de origem, que não respondem a nenhuma necessidade material e que, no entanto, nenhuma cultura dispensa. Manifesta-se na exigência, hoje aguda, de que o trabalho, o consumo e o lazer signifiquem alguma coisa, e no mal-estar que se instala quando se revelam meios sem fim.
 
@@ -195,7 +195,7 @@ Relações: [O Significado como Sobrevivência, O Vazio de Significado, As Fonte
 - Relação com o mundo pós-sobrevivência: o mundo emergente aparece só como fenda ao fundo, nunca habitado; é o limiar daquilo que a necessidade ainda procura, não a chegada.
 
 **Perguntas para conteúdos:**
-O que é que continua a faltar-te depois de teres aquilo de que precisavas? Repara que essa falta não se enche com mais nenhuma coisa. E se essa falta não fosse um defeito teu, mas o sinal de um órgão que ainda está vivo dentro de ti, à procura de algo que nenhuma prateleira contém?
+O que é que continua a faltar-te depois de teres aquilo de que precisavas? Repara que essa falta não se enche com mais nenhuma coisa. Imagina que essa falta não fosse um defeito teu, mas o sinal de um órgão que ainda está vivo dentro de ti, à procura de algo que nenhuma prateleira contém.
 
 ### O Significado como Sobrevivência
 Relações: [A Necessidade de Sentido, O Significado Partilhado, O Vazio de Significado]
@@ -210,7 +210,7 @@ Relações: [A Necessidade de Sentido, O Significado Partilhado, O Vazio de Sign
 
 **Equivalentes históricos:** A intuição é antiga. Sempre se soube que quem tem por quê suporta quase qualquer como, que os povos com fé resistiam ao que dispersava os outros, que as causas davam aos seus uma resistência inexplicável. O que a leitura actual acrescenta é a moldura, ler estas observações dispersas como manifestações de uma única função, o significado como órgão de sobrevivência, e não como acidentes morais ou consolos.
 
-**Contra-exemplos:** Nem todo o sentido que sustenta é benigno, e a função não garante a verdade nem o bem. Significados falsos, fanáticos ou cruéis também sustentam, também dão resistência e coesão, por vezes contra a vida de outros. A tese não diz que o sentido é bom, diz que é vital, o que obriga a distinguir, à parte, entre o significado que sustenta a vida e o que a consome. E há sobreviventes sem sentido aparente, que duram por pura inércia ou medo, prova de que a função tem graus e substitutos pobres.
+**Contra-exemplos:** Nem todo o sentido que sustenta é benigno, e a função não garante a verdade nem o bem. Significados falsos, fanáticos ou cruéis também sustentam, também dão resistência e coesão, por vezes contra a vida de outros. A tese não diz que o sentido é bom, diz que é vital, o que obriga a distinguir, à parte, entre o significado que sustenta a vida e o que a consome. Há ainda sobreviventes sem sentido aparente, que duram por pura inércia ou medo, prova de que a função tem graus e substitutos pobres.
 
 **Manifestações culturais:** Culturas inteiras se organizaram em torno de significados que pediam sacrifício e sustentavam povos durante séculos, fundações, missões, destinos colectivos. A força destas culturas mediu-se menos pelos seus recursos do que pela solidez do sentido que partilhavam, e o seu declínio acompanhou quase sempre a erosão desse sentido, antes de qualquer derrota material.
 
@@ -233,7 +233,7 @@ Relações: [A Necessidade de Sentido, O Significado Partilhado, O Vazio de Sign
 - Relação com o mundo pós-sobrevivência: a margem de chegada não se vê, só se pressente pela inclinação da luz; o emergente é o destino que mantém a ponte de pé, nunca um lugar já pisado.
 
 **Perguntas para conteúdos:**
-O que é que te tem mantido de pé numa altura em que, por todas as contas, devias ter caído? Olha bem, não foi a força, foi uma razão. E se essa razão, no dia em que se desfizer, levar contigo mais do que imaginas, o que estás a fazer, hoje, para que ela aguente?
+O que é que te tem mantido de pé numa altura em que, por todas as contas, devias ter caído? Olha bem, não foi a força, foi uma razão. Se essa razão, no dia em que se desfizer, levar contigo mais do que imaginas, o que estás a fazer, hoje, para que ela aguente?
 
 ### As Fontes do Sentido
 Relações: [A Necessidade de Sentido, O Sentido que Evolui, O Sentido para Além do Eu]
@@ -244,11 +244,11 @@ Relações: [A Necessidade de Sentido, O Sentido que Evolui, O Sentido para Alé
 
 **Mecanismo:** O mecanismo é o da deslocação entre fontes. Enquanto a fonte dominante de uma pessoa, a obra, o amor, a causa, está acessível e viva, o sentido flui dela sem se notar; quando essa fonte se fecha, o significado só não colapsa se outra puder assumir o lugar. A saúde do sentido mede-se menos pela força de uma fonte do que pela capacidade de circular entre elas. A fonte mais radical, a postura perante o que não se pode mudar, mantém-se disponível mesmo quando todas as outras se fecham, e é por isso a última reserva de sentido.
 
-**Indicadores:** Reconhece-se pela diversidade ou pela monocultura das fontes de alguém, há quem retire sentido de muitos lugares e quem o tenha investido todo num só. Reconhece-se na fragilidade de quem depende de uma fonte única, que desaba inteiro quando ela falha, e na resiliência de quem, perdida uma, encontra noutra de que ir viver. Reconhece-se, sobretudo, na rara capacidade de extrair sentido da própria forma de suportar, quando já não há nada a fazer nem ninguém a quem se agarrar.
+**Indicadores:** Reconhece-se pela diversidade ou pela monocultura das fontes de alguém, há quem retire sentido de muitos lugares e quem o tenha investido todo num só. Vê-se na fragilidade de quem depende de uma fonte única, que desaba inteiro quando ela falha, e na resiliência de quem, perdida uma, encontra noutra de que ir viver. Mas o sinal mais nítido está na rara capacidade de extrair sentido da própria forma de suportar, quando já não há nada a fazer nem ninguém a quem se agarrar.
 
 **Equivalentes históricos:** A tripla fonte é uma intuição antiga, vida activa, vida do afecto e dos laços, e a sabedoria de aceitar o que não se domina. A filosofia antiga distinguiu o que está e o que não está em nosso poder, e ensinou que, no que não se pode mudar, resta o modo de o receber. A devoção, ao longo dos séculos, fez do sofrimento sem remédio uma fonte de sentido. São formulações dispersas do mesmo reconhecimento, o significado mora em mais do que um lugar.
 
-**Contra-exemplos:** Há vidas que retiram sentido de fontes que destroem, o poder, a vingança, a pertença a um grupo que se afirma contra outro; o conceito descreve de onde vem o sentido, não certifica que toda a fonte sustente a vida. E há a ilusão da fonte infinita, a crença de que uma só, o trabalho, um amor, uma causa, pode bastar para sempre; esta concentração, frequente, é precisamente o que torna uma vida vulnerável, e o seu desmentido costuma chegar de golpe.
+**Contra-exemplos:** Há vidas que retiram sentido de fontes que destroem, o poder, a vingança, a pertença a um grupo que se afirma contra outro; o conceito descreve de onde vem o sentido, não certifica que toda a fonte sustente a vida. Há ainda a ilusão da fonte infinita, a crença de que uma só, o trabalho, um amor, uma causa, pode bastar para sempre; esta concentração, frequente, é precisamente o que torna uma vida vulnerável, e o seu desmentido costuma chegar de golpe.
 
 **Manifestações culturais:** As culturas privilegiam fontes diferentes e organizam-se em torno delas, umas exaltam a obra e o feito, outras o laço e a comunidade, outras a aceitação e a serenidade perante o destino. As suas crises de sentido aparecem quando a fonte que privilegiavam se torna inacessível a muitos e nenhuma outra é cultivada para a substituir.
 
@@ -271,7 +271,7 @@ Relações: [A Necessidade de Sentido, O Sentido que Evolui, O Sentido para Alé
 - Relação com o mundo pós-sobrevivência: as nascentes mais distantes, mal visíveis na névoa, são as fontes que só a Emergência abrirá; mostram-se ao longe, nunca já bebidas.
 
 **Perguntas para conteúdos:**
-De quantos lugares diferentes vem o sentido da tua vida, ou puseste-o todo num só? Repara no que acontece em ti quando imaginas esse único lugar a fechar-se. E se houvesse, mesmo no que não podes mudar, uma fonte que ninguém te pode tirar, terás aprendido a ir lá beber?
+De quantos lugares diferentes vem o sentido da tua vida, ou puseste-o todo num só? Repara no que acontece em ti quando imaginas esse único lugar a fechar-se. Se houvesse, mesmo no que não podes mudar, uma fonte que ninguém te pode tirar, terás aprendido a ir lá beber?
 
 ### O Sentido que Evolui
 Relações: [As Fontes do Sentido, A Narrativa que Organiza, O Vazio de Significado]
@@ -282,11 +282,11 @@ Relações: [As Fontes do Sentido, A Narrativa que Organiza, O Vazio de Signific
 
 **Mecanismo:** O mecanismo é o da passagem por desencaixe. Uma organização do sentido serve enquanto a vida cabe dentro dela; quando a vida cresce ou muda e deixa de caber, instala-se um desconforto que não é só dor, é o sinal de uma estrutura que ficou pequena. A passagem dá-se quando aquilo que era o sujeito que via, a forma como se fazia sentido sem se notar, se torna objecto visto, e uma nova organização, mais ampla, o integra. Cada passagem reorganiza a relação entre o eu e o que o excede, e nenhuma é garantida, pode ser feita, adiada ou recusada.
 
-**Indicadores:** Reconhece-se pela presença ou ausência de transformações estruturais na biografia de alguém, pessoas que, aos sessenta, fazem sentido como faziam aos vinte, e outras que atravessaram reorganizações profundas. Reconhece-se nas crises de meio de vida que não são patologia mas pressão de passagem, a antiga organização a tornar-se estreita. Reconhece-se na diferença entre quem, perante uma perda, apenas sofre, e quem dela emerge com uma forma maior de fazer sentido.
+**Indicadores:** Reconhece-se pela presença ou ausência de transformações estruturais na biografia de alguém, pessoas que, aos sessenta, fazem sentido como faziam aos vinte, e outras que atravessaram reorganizações profundas. Aparece nas crises de meio de vida que não são patologia mas pressão de passagem, a antiga organização a tornar-se estreita. Nota-se ainda na diferença entre quem, perante uma perda, apenas sofre, e quem dela emerge com uma forma maior de fazer sentido.
 
 **Equivalentes históricos:** A intuição de que a vida tem idades do sentido é antiga, as fases da existência, as travessias, as segundas metades da vida com tarefas próprias. Falou-se de morrer para uma forma de ser e renascer noutra, de etapas que pedem cada uma a sua sabedoria. São figuras antigas do mesmo reconhecimento, o sentido que basta a uma fase não basta à seguinte, e há que o deixar transformar-se.
 
-**Contra-exemplos:** Nem toda a mudança de sentido é evolução; há regressões, simplificações defensivas, fugas para significados mais estreitos que dão alívio à custa de amplitude. E há a falsa evolução, a troca de vocabulário sem mudança de estrutura, quem muda de discurso e continua a fazer sentido exactamente da mesma maneira. O conceito exige distinguir a passagem real, que reorganiza a relação entre o eu e o que o excede, da mera substituição de conteúdos.
+**Contra-exemplos:** Nem toda a mudança de sentido é evolução; há regressões, simplificações defensivas, fugas para significados mais estreitos que dão alívio à custa de amplitude. Há também a falsa evolução, a troca de vocabulário sem mudança de estrutura, quem muda de discurso e continua a fazer sentido exactamente da mesma maneira. O conceito exige distinguir a passagem real, que reorganiza a relação entre o eu e o que o excede, da mera substituição de conteúdos.
 
 **Manifestações culturais:** As culturas marcam as passagens com ritos, iniciações, lutos, cerimónias que ajudam a deixar uma forma de fazer sentido e a assumir outra. Onde estes ritos enfraquecem, as passagens não desaparecem, ficam sem moldura, e atravessam-se às escuras, o que torna mais frequente o encalhe numa organização do sentido que a vida já ultrapassou.
 
@@ -309,7 +309,7 @@ Relações: [As Fontes do Sentido, A Narrativa que Organiza, O Vazio de Signific
 - Relação com o mundo pós-sobrevivência: a paisagem mais ampla, vista pela última fenda lá no alto, é o sentido que só a Emergência permitirá; mostra-se ao longe, nunca alcançado.
 
 **Perguntas para conteúdos:**
-O que é que te organizava a vida há vinte anos e hoje te parece estreito, sem que saibas bem quando deixou de servir? Repara que não mudaste de ideias, mudaste de forma de fazer sentido. E se o desconforto que sentes agora não for um problema a resolver, mas um degrau que já ficou pequeno?
+O que é que te organizava a vida há vinte anos e hoje te parece estreito, sem que saibas bem quando deixou de servir? Repara que não mudaste de ideias, mudaste de forma de fazer sentido. Pergunta-te se o desconforto que sentes agora não será um problema a resolver, mas um degrau que já ficou pequeno.
 
 ### O Vazio de Significado
 Relações: [A Necessidade de Sentido, A Narrativa que Organiza, O Sentido que Evolui]
@@ -324,7 +324,7 @@ Relações: [A Necessidade de Sentido, A Narrativa que Organiza, O Sentido que E
 
 **Equivalentes históricos:** O estado foi nomeado em muitas épocas, a acídia que tomava os solitários, o tédio profundo dos que tinham tudo, o desânimo sem causa que a tradição reconhecia como uma das mais perigosas provações. Falou-se de uma melancolia que não é tristeza, de um peso de nada. São nomes antigos para o mesmo, o vazio que vem não do que falta às coisas, mas do sentido que se retirou delas.
 
-**Contra-exemplos:** O vazio de significado não é toda a depressão nem todo o repouso. Há quietude sem vazio, estados de paz em que as coisas não pesam porque já não é preciso que pesem, e que são plenitude e não esvaziamento. E há tristezas e lutos cheios de sentido, dolorosos mas não vazios, em que as coisas continuam a importar, e muito. O conceito visa especificamente a retirada do peso, não a dor nem o descanso, e exige distinguir o esvaziamento da serenidade que se lhe parece por fora.
+**Contra-exemplos:** O vazio de significado não é toda a depressão nem todo o repouso. Há quietude sem vazio, estados de paz em que as coisas não pesam porque já não é preciso que pesem, e que são plenitude e não esvaziamento. Há também tristezas e lutos cheios de sentido, dolorosos mas não vazios, em que as coisas continuam a importar, e muito. O conceito visa especificamente a retirada do peso, não a dor nem o descanso, e exige distinguir o esvaziamento da serenidade que se lhe parece por fora.
 
 **Manifestações culturais:** Culturas em transição, que perderam as suas histórias partilhadas sem ainda terem outras, manifestam vazio colectivo, ruído, agitação, consumo de estímulos cada vez mais fortes para tapar a ausência de peso. A multiplicação das distracções é, muitas vezes, sintoma de vazio, tenta-se encher de intensidade o que só o sentido encheria de peso.
 
@@ -332,7 +332,7 @@ Relações: [A Necessidade de Sentido, A Narrativa que Organiza, O Sentido que E
 
 **Manifestações económicas:** A economia oferece ao vazio um remédio que o agrava, o consumo, que dá intensidade momentânea e devolve a indiferença mais funda. Prospera, em parte, sobre o vazio que ajuda a manter, vende sucedâneos de sentido a quem perdeu o sentido, e tem interesse em que o intervalo se prolongue. O vazio de significado é, assim, ao mesmo tempo, um problema humano e um recurso de mercado.
 
-**Manifestações familiares:** Na família, o vazio aparece quando tudo funciona e mesmo assim os seus membros se sentem oco, presentes e ausentes, juntos e suspensos. Aparece, agudo, depois de uma fase cumprida, os filhos criados, a casa feita, e nada que assuma o lugar do que organizava os dias. É o vazio mais difícil de nomear, porque não há nada de errado a apontar.
+**Manifestações familiares:** Na família, o vazio aparece quando tudo funciona e mesmo assim os seus membros se sentem ocos, presentes e ausentes, juntos e suspensos. Aparece, agudo, depois de uma fase cumprida, os filhos criados, a casa feita, e nada que assuma o lugar do que organizava os dias. É o vazio mais difícil de nomear, porque não há nada de errado a apontar.
 
 **Hipótese pós-sobrevivência:** O vazio de significado é o risco próprio da pós-sobrevivência. Enquanto a urgência de durar fornecia peso por defeito, o vazio era contido pela necessidade; aliviada a necessidade, ele expõe-se em toda a sua extensão, e a fartura sem destino torna-se o seu terreno fértil. A hipótese é que a grande prova da Humanidade da Emergência não será a escassez, mas o vazio, e que reconhecê-lo como problema real e comum, e não como fraqueza individual, é já um sinal da própria transição.
 
@@ -347,7 +347,7 @@ Relações: [A Necessidade de Sentido, A Narrativa que Organiza, O Sentido que E
 - Relação com o mundo pós-sobrevivência: o fio de luz quente que entra pela fenda é o sentido que ainda não chegou; mostra-se como limiar distante, nunca como sala já habitada.
 
 **Perguntas para conteúdos:**
-Já te sentaste no meio de tudo o que querias e não sentiste nada, sem haver desgraça nenhuma a explicá-lo? Repara que não é tristeza, é peso a faltar nas coisas. E se esse vazio não fosse um defeito teu, mas o alarme de algo que ainda procura para onde se voltar?
+Já te sentaste no meio de tudo o que querias e não sentiste nada, sem haver desgraça nenhuma a explicá-lo? Repara que não é tristeza, é peso a faltar nas coisas. Imagina que esse vazio não fosse um defeito teu, mas o alarme de algo que ainda procura para onde se voltar.
 
 ### A Narrativa que Organiza
 Relações: [O Sentido que Evolui, O Vazio de Significado, As Fontes do Sentido]
@@ -362,7 +362,7 @@ Relações: [O Sentido que Evolui, O Vazio de Significado, As Fontes do Sentido]
 
 **Equivalentes históricos:** Toda a cultura é, em parte, um conjunto de histórias que organizam, mitos de origem, relatos de povo, vidas exemplares, parábolas. Sempre se soube que se ensina, se consola e se ordena através de narrativas, e que dar a alguém uma história em que inscrever a sua dor é dar-lhe uma forma de a suportar. A confissão, o testemunho, a memória contada são técnicas antigas de integração narrativa, formas de pôr a vida em ordem dizendo-a.
 
-**Contra-exemplos:** Nem toda a narrativa que organiza diz a verdade; há histórias coerentes e falsas, que integram a vida à custa de a falsificar, e que sustentam enquanto não são desmentidas. E há o excesso de narrativa, a vida tão fechada num enredo que já não admite o que não cabe, rígida e cega ao real. O conceito não diz que toda a história é boa, exige distinguir a narrativa que integra honestamente o que aconteceu da que apenas o arruma a custo da verdade.
+**Contra-exemplos:** Nem toda a narrativa que organiza diz a verdade; há histórias coerentes e falsas, que integram a vida à custa de a falsificar, e que sustentam enquanto não são desmentidas. Há ainda o excesso de narrativa, a vida tão fechada num enredo que já não admite o que não cabe, rígida e cega ao real. O conceito não diz que toda a história é boa, exige distinguir a narrativa que integra honestamente o que aconteceu da que apenas o arruma a custo da verdade.
 
 **Manifestações culturais:** As culturas vivem das suas grandes narrativas, histórias de fundação, de destino, de pertença, que dão aos seus membros um arco partilhado em que inscrever a vida individual. Quando estas narrativas enfraquecem, os indivíduos ficam encarregados de construir sozinhos a sua história, sem moldura comum, e a tarefa, antes repartida, torna-se um peso solitário, uma das raízes do vazio contemporâneo.
 
@@ -385,7 +385,7 @@ Relações: [O Sentido que Evolui, O Vazio de Significado, As Fontes do Sentido]
 - Relação com o mundo pós-sobrevivência: o ponto luminoso para onde o fio se dirige, ainda na fenda ao fundo, é o sentido por fazer; mostra-se como direcção, nunca como destino já tocado.
 
 **Perguntas para conteúdos:**
-Que história contas quando te perguntam quem és, e quais são os acontecimentos da tua vida que nunca entram nela? Repara que o que mais te dói talvez seja justamente o que ficou de fora do fio. E se houvesse uma forma de o trazer para dentro da história, sem o renegar nem o falsear?
+Que história contas quando te perguntam quem és, e quais são os acontecimentos da tua vida que nunca entram nela? Repara que o que mais te dói talvez seja justamente o que ficou de fora do fio. Pergunta-te se haveria uma forma de o trazer para dentro da história, sem o renegar nem o falsear.
 
 ### O Significado Partilhado
 Relações: [O Significado como Sobrevivência, O Sentido para Além do Eu, As Fontes do Sentido]
@@ -400,7 +400,7 @@ Relações: [O Significado como Sobrevivência, O Sentido para Além do Eu, As F
 
 **Equivalentes históricos:** Todas as comunidades duradouras tiveram um sentido partilhado, povos com um destino comum, ordens com uma missão, tradições com uma memória. Sempre se soube que o que liga um grupo não é só o interesse, é uma história e um propósito que os seus membros reconhecem como seus. A pertença, ao longo da história, deu aos indivíduos uma resistência e uma orientação que o isolamento nunca deu.
 
-**Contra-exemplos:** Nem todo o significado partilhado liga à vida; há sentidos comuns que coesionam um grupo contra outro, que sustentam à custa da exclusão ou da crueldade. O conceito descreve a partilha como fábrica de sentido, não a certifica como boa. E há a falsa partilha, a multidão que vibra junta sem nada partilhar de fundo, intensidade comum sem sentido comum, que se dispersa assim que o estímulo cessa. Há que distinguir o significado tecido, que dura e sustenta, do mero agrupamento de sentidos privados.
+**Contra-exemplos:** Nem todo o significado partilhado liga à vida; há sentidos comuns que coesionam um grupo contra outro, que sustentam à custa da exclusão ou da crueldade. O conceito descreve a partilha como fábrica de sentido, não a certifica como boa. Há ainda a falsa partilha, a multidão que vibra junta sem nada partilhar de fundo, intensidade comum sem sentido comum, que se dispersa assim que o estímulo cessa. Há que distinguir o significado tecido, que dura e sustenta, do mero agrupamento de sentidos privados.
 
 **Manifestações culturais:** A cultura é, em larga medida, significado partilhado em acto, língua, ritos, memórias, obras que os membros de uma comunidade reconhecem como suas e em que inscrevem a vida. A sua vitalidade mede-se pela força com que estas formas comuns ainda seguram os indivíduos, e a sua crise anuncia-se quando cada um passa a ter de fazer sentido por conta própria, sem a teia que antes o sustentava.
 
@@ -423,7 +423,7 @@ Relações: [O Significado como Sobrevivência, O Sentido para Além do Eu, As F
 - Relação com o mundo pós-sobrevivência: a teia que se prolonga para lá da fenda, ligando figuras que ainda não se veem, é o significado partilhado por refazer na Emergência; mostra-se como promessa ao longe, nunca habitada.
 
 **Perguntas para conteúdos:**
-De onde vieram, afinal, as palavras com que dás sentido à tua vida, e quem to segura quando a tua própria história vacila? Repara que talvez nunca tenhas feito sentido sozinho. E o que acontece à tua vida quando essa teia, que recebeste sem reparar, começa a desfazer-se à tua volta?
+De onde vieram, afinal, as palavras com que dás sentido à tua vida, e quem to segura quando a tua própria história vacila? Repara que talvez nunca tenhas feito sentido sozinho. O que acontece, então, à tua vida quando essa teia, que recebeste sem reparar, começa a desfazer-se à tua volta?
 
 ### O Sentido para Além do Eu
 Relações: [O Significado Partilhado, As Fontes do Sentido, O Sentido que Evolui]
@@ -434,11 +434,11 @@ Relações: [O Significado Partilhado, As Fontes do Sentido, O Sentido que Evolu
 
 **Mecanismo:** O mecanismo é o da abertura do centro. Enquanto o sentido se organiza em torno do eu e da sua realização, tende a esvaziar-se, quanto mais se fecha, menos consistência ganha; quando o centro se desloca para algo maior, uma causa, os que vêm, o que se pressente, o sentido adensa-se. A entrega ao que excede o eu não tira à vida a sua singularidade, dá-lha, é ao voltar-se para algo maior do que si que uma vida parece mais sua. É a forma madura do sentido, para a qual a obra, o laço e a postura tendem quando deixam de servir só o indivíduo.
 
-**Indicadores:** Reconhece-se na presença, numa vida, de algo a que ela se entrega sabendo que não o verá completo, uma obra, uma causa, uma continuidade. Reconhece-se na serenidade particular de quem fez sentido para lá de si e por isso não teme tanto o próprio fim, porque o seu sentido não termina nele. Reconhece-se, pela negativa, no esvaziamento de quem investiu todo o significado na própria realização e descobre, ao chegar ao limite, que um sentido fechado no eu não chega para sustentar o fim de um eu.
+**Indicadores:** Reconhece-se na presença, numa vida, de algo a que ela se entrega sabendo que não o verá completo, uma obra, uma causa, uma continuidade. Mostra-se na serenidade particular de quem fez sentido para lá de si e por isso não teme tanto o próprio fim, porque o seu sentido não termina nele. Pela negativa, denuncia-se no esvaziamento de quem investiu todo o significado na própria realização e descobre, ao chegar ao limite, que um sentido fechado no eu não chega para sustentar o fim de um eu.
 
 **Equivalentes históricos:** Todas as tradições reconheceram que a vida ganha sentido ao ligar-se ao que a excede, a transcendência, o bem comum, a posteridade, a obra que sobrevive ao autor. Falou-se de viver para algo maior, de plantar árvores à sombra das quais não se há-de descansar, de uma segunda metade da vida voltada para o que ultrapassa os fins imediatos. São formulações dispersas do mesmo reconhecimento, o sentido mais pleno não cabe dentro do indivíduo.
 
-**Contra-exemplos:** Nem toda a entrega a algo maior liberta, há causas que devoram, totalidades que esmagam o indivíduo em nome do todo, abandonos do eu que não são abertura mas dissolução. O conceito não santifica todo o para além do eu, distingue a entrega que dá consistência à vida da que a aniquila. E há o falso transcender, o uso de uma causa maior para fugir de si, que não é abertura do centro mas evitamento, e que se denuncia por não tornar a vida mais sua, mas menos.
+**Contra-exemplos:** Nem toda a entrega a algo maior liberta, há causas que devoram, totalidades que esmagam o indivíduo em nome do todo, abandonos do eu que não são abertura mas dissolução. O conceito não santifica todo o para além do eu, distingue a entrega que dá consistência à vida da que a aniquila. Há ainda o falso transcender, o uso de uma causa maior para fugir de si, que não é abertura do centro mas evitamento, e que se denuncia por não tornar a vida mais sua, mas menos.
 
 **Manifestações culturais:** As culturas mais fundas organizam-se em torno de um sentido que excede cada geração, uma obra colectiva, uma herança a transmitir, uma continuidade a servir. A sua grandeza mede-se pela capacidade de fazer com que indivíduos se entreguem ao que não verão completo, e a sua decadência anuncia-se quando o sentido se encolhe ao horizonte de cada vida individual e ninguém planta já para os que vêm.
 
@@ -461,4 +461,4 @@ Relações: [O Significado Partilhado, As Fontes do Sentido, O Sentido que Evolu
 - Relação com o mundo pós-sobrevivência: o todo luminoso para o qual a figura se volta, visível apenas pela fenda ao fundo, é o sentido da Emergência por nascer; mostra-se como limiar para onde a figura se inclina, nunca como mundo já habitado.
 
 **Perguntas para conteúdos:**
-A que é que te entregas sabendo que não o verás completo, e que continuará depois de ti? Repara se não é justamente aí, no que excede o teu eu, que a tua vida te parece mais tua. E se o sentido que procuras dentro de ti só se acendesse no instante em que te voltas para algo maior do que tu?
+A que é que te entregas sabendo que não o verás completo, e que continuará depois de ti? Repara se não é justamente aí, no que excede o teu eu, que a tua vida te parece mais tua. Imagina que o sentido que procuras dentro de ti só se acendesse no instante em que te voltas para algo maior do que tu.
