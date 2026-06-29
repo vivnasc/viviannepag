@@ -249,9 +249,12 @@ export const FIM_PROMPT =
   'an image like a memory from the future of a POST-SURVIVAL human civilization: not advanced technology but advanced CONSCIOUSNESS ' +
   'materialized in architecture, landscape and scale (evolved, not merely advanced). Monumental, impossible architecture that looks GROWN, not built; ' +
   'living organic structures, suspended gardens, rivers in the sky, bridges of light, colossal scale with tiny human beings; ' +
-  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, soft and responsive; nature and architecture fused; physics set free. ' +
-  'Palette: warm whites, soft golds, pearl, champagne, pale sand, sage green, misty rose, matte silver, nothing oversaturated. ' +
-  'Feeling: absolute safety, expansion, possibility, mystery and awe, the end of the old world and the birth of a new human paradigm. Tone of Dune, Arrival, Interstellar, Avatar, Moebius. ' +
+  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, abundant and luminous; nature and architecture fused; physics set free. ' +
+  'BRIGHT, sunlit and LUMINOUS, crystal-clear ultra-high resolution, razor-sharp fine detail, deep clarity and dimension. ' +
+  'Palette: luminous and clear, warm whites and soft golds with RADIANT SKY BLUES, lush living GREENS, turquoise water and champagne light, rich and beautiful NATURAL color (vivid yet natural, never neon, never washed-out, never muted). ' +
+  'Feeling: absolute safety, expansion, possibility, mystery and awe, the end of the old world and the birth of a new human paradigm. ' +
+  'The monumental scale of Dune and Interstellar and the organic luminosity of Avatar and Moebius, BUT much brighter, more colourful, sharper and higher-resolution than those films. ' +
+  'ABSOLUTELY NO haze, NO fog, NO mist, NO heavy shadows, NO murky penumbra, NO dim or desaturated look. ' +
   'NEVER neon, NEVER cyberpunk, no robots, no spaceships, no screens or holograms, no crystals, no chakras, no esoteric symbols, ' +
   'no post-apocalyptic decay, no dried flowers, no family corridors, no family trees, no blurry grandmothers, no literal therapy metaphors, not a plain everyday photo. ' +
   'no text, no letters, no watermark, no logos --ar 9:16 --style raw';
