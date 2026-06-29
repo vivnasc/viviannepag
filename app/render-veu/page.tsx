@@ -289,7 +289,10 @@ export default function RenderVeuPage() {
   const ehCarta = ehMetodo && subtipo === 'carta'; // Carta de renomear (vir): capa cena + corpo papel
   const ehSerie = tipoSlide === 'serie-diaria'; // moldura das séries diárias, sobreposta ao motion no render
   const ehCarrosselReel = false; // sinais/ninguem/pensador passaram a reels 9:16 (MP4); já não há carrossel de imagens
-  const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : ehCarrosselReel ? 1350 : 1920;
+  // TELA DE CARROSSEL (solo): sai em 4:5 (1080x1350), não 9:16 — o feed do Instagram
+  // recusa 9:16 no carrossel (mete barras pretas). O reel/sequência continua 9:16.
+  const telaCarrossel = solo && ehKinetic;
+  const H = ehAnel ? 1080 : ehInfo ? (video ? 1920 : 1350) : telaCarrossel ? 1350 : 1920;
   const sd = estado?.slide as unknown as { serie?: SerieId; frase?: string; dia?: string; paleta?: PaletaId } | undefined;
   const s = estado?.slide as unknown as (Slide & { imageUrl?: string; padrao?: string; rotulo?: string; subtitulo?: string; tipoDiagrama?: 'ciclo' | 'espectro' | 'herdado' | 'camadas' | 'travessia'; diagrama?: import('@/components/admin/InfograficoSlide').Diagrama; ciclo?: string[]; custoTi?: string; custoOutros?: string; virada?: string; url?: string; label?: string; perfil?: boolean; kicker?: string; nota?: string; capa?: boolean; cenario?: string; licao?: string; gancho?: string; serie?: string; titulo?: string; pontos?: string[]; motivo?: string; selo?: string; pal?: string; variante?: string; personagens?: import('@/components/admin/BandaSlide').Fala[]; destaque?: string[]; conceito?: string; contaId?: string; veuReveal?: string; clipUrl?: string; cta?: string }) | undefined;
 
@@ -389,6 +392,7 @@ export default function RenderVeuPage() {
               imageUrl={s.imageUrl}
               mundo={estado.dia.mundo}
               prog={prog}
+              ratio={telaCarrossel ? '4:5' : '9:16'}
               variante={s.variante}
               efeito={(s as { efeito?: EfeitoTexto }).efeito}
               tipografia={(s as { tipografia?: Tipografia }).tipografia}
@@ -401,7 +405,8 @@ export default function RenderVeuPage() {
           // AQUI, não pelo ramo ehMetodo. Por isso o clip do Kling também tem de entrar
           // aqui para o método, senão a manhã fica só com a câmara CSS (o bug do motion).
           const temClip = ehSeqSobreClip && !!clipBg;
-          return (s.imageUrl && !temClip) ? <CameraVeu prog={prog}>{kin}</CameraVeu> : kin;
+          // tela de carrossel = imagem ESTÁTICA 4:5; sem CameraVeu (que assume 9:16).
+          return (s.imageUrl && !temClip && !telaCarrossel) ? <CameraVeu prog={prog}>{kin}</CameraVeu> : kin;
         })()
       )}
       {estado && ehMetodo && ehCarta && s && getConta(s.contaId ?? '') && (

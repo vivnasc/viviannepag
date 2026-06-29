@@ -76,7 +76,9 @@ async function main() {
   const carrossel = false;
   // MODO=carrossel => só imagens (cada slide um PNG 4:5), sem MP4. (como os aneis)
   const soImagens = modoCarrossel || formato === 'aneis';
-  const H = formato === 'aneis' ? 1080 : (formato === 'infografico' || carrossel) ? 1350 : 1920;
+  // MODO=carrossel: as telas saem NATIVAS em 4:5 (1080x1350) — o feed do Instagram
+  // recusa 9:16 no carrossel (barras pretas). Antes saíam 1920 e eram "encaixadas".
+  const H = formato === 'aneis' ? 1080 : (formato === 'infografico' || carrossel || modoCarrossel) ? 1350 : 1920;
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'veu-'));
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
