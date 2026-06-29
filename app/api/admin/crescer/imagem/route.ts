@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
+import { getVisual } from '@/lib/crescer/marca';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -17,7 +18,7 @@ export async function POST(req: Request) {
   if (!body.slug || !body.slug.startsWith('crescer-')) return NextResponse.json({ erro: 'slug-invalido' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
-  const { data: row, error } = await supabase.from('carousel_collections').select('dias').eq('slug', body.slug).single();
+  const { data: row, error } = await supabase.from('carousel_collections').select('dias, theme').eq('slug', body.slug).single();
   if (error || !row) return NextResponse.json({ erro: 'db', detalhe: error?.message }, { status: 500 });
   const dias = ((row.dias as Array<Record<string, unknown>>) ?? []);
   const slides = (dias[0]?.slides as Array<Record<string, unknown>>) ?? [];
@@ -37,7 +38,13 @@ export async function POST(req: Request) {
 
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
-  const prompt = body.prompt?.trim() || (slides[idx ?? 0]?.notaVisual as string) || (slides[0]?.notaVisual as string) || '';
+  // PROMPT da imagem, com fallback robusto para nunca dar "sem-prompt":
+  // body.prompt > (pessoas: o prompt NOVO, figura visível) > o guardado > o prompt
+  // do visual da peça > conceptual. As peças antigas (silhueta) corrigem-se assim.
+  const visual = (row.theme as { crescer?: { visual?: string } } | null)?.crescer?.visual;
+  const baseNova = visual === 'pessoas' ? getVisual('pessoas')?.promptBase : undefined;
+  const baseVisual = getVisual(visual ?? '')?.promptBase || getVisual('conceptual')!.promptBase;
+  const prompt = body.prompt?.trim() || baseNova || (slides[idx ?? 0]?.notaVisual as string) || (slides[0]?.notaVisual as string) || baseVisual;
   if (!prompt) return NextResponse.json({ erro: 'sem-prompt' }, { status: 400 });
 
   let imageUrl: string;
