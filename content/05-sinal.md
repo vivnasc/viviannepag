@@ -32,6 +32,14 @@ Aqui está o teste, o único que precisas de saber. A sobrecarga resolve-se com 
 
 Dorme uma noite inteira depois de uma sala que te diminuiu. Dorme dez horas. Acorda. Vê. O cansaço daquela sala continua lá. Não no corpo, que descansou. Continua noutro sítio, num sítio para o qual não temos uma palavra simples, algures entre o peito e a garganta, uma espécie de peso baço que o sono não tocou. Porque o sono não cura incoerência. O sono cura esforço de músculo. A incoerência só se cura de uma maneira, e essa maneira não é descanso, é verdade. É por isso que tanta gente dorme e dorme e dorme e continua exausta de uma vida que parece, vista de fora, perfeitamente confortável. Não estão a precisar de mais descanso. Estão a precisar de menos encolhimento. São coisas que vivem em planetas diferentes, embora se vistam as duas de cansaço.
 
+::: pausa
+**Pousa aqui, e repara.**
+Acabaste de ler que há dois cansaços que se vestem da mesma roupa. Antes de seguires, deixa o corpo responder, não a cabeça.
+> Lembra-te do último sítio de onde saíste exausta. Pergunta só isto, sem decidir nada: aquele cansaço passou com uma noite de sono, ou continuou lá no dia seguinte?
+- Se continuou, onde é que ficou alojado, no corpo ou algures entre o peito e a garganta?
+- Que parte de ti ficou de fora para tu poderes estar dentro?
+:::
+
 Vou dar-te os sinais pelo nome, porque reconhecê-los um a um é metade do trabalho.
 
 O aperto à porta. Aquele instante, antes de entrar, em que o corpo se prepara. Não é medo. Não temes nada concreto. É antecipação de esforço, o teu sistema a montar a armadura de que vai precisar para passar as próximas horas a ser uma versão tua mais arrumada, mais cabível, mais simpática do que aquilo que és quando ninguém te está a pedir para seres conveniente.
@@ -107,6 +115,14 @@ Durante anos trataste o teu corpo como um aluno mal comportado que tinhas de pô
 Ouvir o corpo não é uma coisa mística nem complicada. É quase aborrecido de tão concreto. É reparar, à porta de uma casa, que os teus ombros subiram, e em vez de os mandar descer, perguntar baixinho, o que é que tu sabes que eu ainda não quero saber. É notar, a meio de um jantar, que estás a respirar lá em cima, na ponta dos pulmões, e em vez de te obrigares a respirar fundo para disfarçar, deixar essa respiração curta dizer-te o que tem a dizer. O corpo fala numa língua de gestos pequenos, e tu passaste a vida a traduzir esses gestos para a língua da auto-acusação. Os ombros sobem e tu traduzes estou tensa, que chata que eu sou. A respiração encurta e tu traduzes estou ansiosa, devia relaxar. Estás a traduzir mal. A tradução certa dos ombros que sobem é aqui eu preparo-me para me defender. A tradução certa da respiração curta é aqui eu não me deixo ocupar inteira. O corpo não está a falhar a tradução. Tu é que a fazias para a língua errada.
 
 A pergunta é esta, e é toda a viragem: depois de saíres de um ambiente, no carro, no silêncio, antes de a cabeça começar a negociar, perguntas a ti mesma, saí cansada ou saí diminuída?
+
+::: pausa
+**A pergunta é tua a partir de agora.**
+Não para a responderes já com a cabeça. Para a teres à mão, no carro, no silêncio, da próxima vez.
+> Da próxima vez que saíres de uma sala, antes de a cabeça começar a negociar, pergunta ao corpo: saí cansada ou saí diminuída? E espera que ele responda, não tu.
+- Que ambientes te saem sempre cansada e nunca diminuída? Esses são casa.
+- Qual é a sala onde mais te dobras, e o que é que ela te pede que tu já não és?
+:::
 
 É uma pergunta pequena e quase ninguém a faz, porque ninguém nos ensinou que havia ali duas coisas diferentes. Achamos que cansaço é cansaço. Não é. Pergunta. Aprende a sentir a diferença, porque a diferença sente-se, não se pensa. O cansaço de sobrecarga é limpo, quase doce, é o cansaço de quem se gastou a viver. Pousas a cabeça e ele dissolve-se. O cansaço de incoerência é baço, fica-te entalado, e tu já o reconheces, porque é o mesmo que continua lá no dia seguinte depois de dormires. Quando dás por ele, já sabes. Não foi a quantidade de gente. Foi a quantidade de ti que ficou de fora.
 

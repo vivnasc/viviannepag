@@ -16,6 +16,14 @@ Reparas que o escondes. Porque dizê-lo em voz alta, ali, naquele momento, seria
 
 Quero dizer-te já, antes de qualquer outra coisa, que não há nada de errado contigo. O que sentes tem um nome, e tem uma forma, e tem até uma certa beleza áspera quando se aprende a olhar para ele. A esse desalinhamento, a essa sensação de estar dentro de um lugar e já não pertencer ao lugar de dentro, chamo eu desencaixe. Os modos como ele aparece, as suas caras, os seus disfarces, os sítios da vida onde se esconde, são aquilo a que chamo sinais. São sete. Vamos atravessá-los um a um. Mas antes de entrarmos, há uma coisa que tens de saber sobre este livro, porque vai poupar-te muito tempo e alguma desilusão: este não é um livro sobre aprender a encaixar.
 
+::: pausa
+**Uma pausa, antes de entrarmos.**
+Não tens de decidir nada nesta página. Só pousar o livro um instante e deixar assentar uma coisa: aquilo que sentes tem nome, e o nome não é defeito teu.
+> Lembra-te de uma mesa onde te sentiste presente e ao lado ao mesmo tempo. Não a expliques. Só repara onde é que o corpo guardou essa noite, nos ombros, no peito, na garganta.
+- Que palavra costumas usar contra ti quando isto acontece?
+- E se, só por hoje, trocasses essa palavra por desencaixe?
+:::
+
 Digo-o assim, cru, porque é precisamente para isso que quase tudo te vai empurrar. Quando começas a sentir o desencaixe, a primeira coisa que o mundo te oferece, e que tu própria te ofereces, são duas respostas. Parecem opostas. Parecem ser as únicas duas saídas possíveis. Ambas falham, cada uma à sua maneira, e este livro existe em parte para te poupar aos anos que se perdem a tentá-las.
 
 A primeira resposta é voltar a caber. É recuar. É olhar para a versão antiga de ti, aquela com quem todos sabiam falar, aquela que ria nas alturas certas e concordava nos sítios certos e cabia sem esforço, e tentar vesti-la outra vez. Encolher os ombros que cresceram. Engolir as frases novas antes de as dizeres. Fingir interesse onde já não há, fingir acordo onde já há dúvida, baixar a voz, baixar-te. Funciona, durante algum tempo. Compras de novo o teu lugar à mesa, e a mesa devolve-te o calor de sempre, e por uns meses sentes alívio, porque o alívio de pertencer é real e não se deve menosprezar. O problema não é que não funcione. O problema é o preço. Para voltar a caber tiveste de ficar mais pequena, e há uma parte de ti que sabe contar, e ela faz a conta todos os dias. Cada vez que te diminuis para caber, a fenda não desaparece. Apenas vai para dentro. O que vai para dentro não se cala, fermenta.
@@ -43,6 +51,14 @@ Lê outra vez, devagar, se for preciso. Não está lá escrito que tens de escol
 É por causa disto que precisas de entender o que este livro vai pedir-te a ti, e o que vai pedir, sobretudo, à tua maneira de olhar para quem amas. Porque a tentação, quando se sente o desencaixe, é procurar um culpado. É dizer mudaram, ou tornaram-se pequenos, ou nunca me viram de verdade. Dá uma raiva limpa, e a raiva é confortável, porque transforma a tristeza, que é vaga, num alvo, que é nítido. Mas a verdade do desencaixe é mais dura, e é mais terna, e é mais difícil de carregar do que qualquer culpa: ninguém falhou. A mesa foi boa. Continua boa para quem lá está. Deixou de ser tua sem que nada nela mude. As pessoas que amas não te traíram ao continuarem as mesmas. Tu não as traíste ao deixares de ser a mesma junto delas. As duas coisas são verdade ao mesmo tempo, e é por serem verdade ao mesmo tempo que isto não é uma história de vítimas e vilões. É um luto. O luto de um lugar que foi bom. O que torna este luto tão estranho, tão sem forma, é que se chora um lugar sem se poder culpar ninguém por o ter tirado, porque ninguém o tirou, ele apenas deixou de te servir, como uma casa de infância que continua de pé e habitada e onde já não cabe o teu corpo de adulta.
 
 É um luto sem rituais, repara, e talvez seja por isso que custa tanto reconhecê-lo como luto. Quando morre alguém, há um velório, há quem te abrace, há uma data, há flores, há uma forma socialmente aprovada de chorar. Quando te despedes de uma versão tua à mesa de quem amas, não há nada disso. Ninguém te dá os pêsames por uma perda que nem se vê. Continuas a ir aos jantares, continuas a abraçar a mesma gente, e por fora não morreu coisa nenhuma. Por dentro, despediste-te de um lugar inteiro, e tens de fazer esse luto às escondidas, sem testemunhas, sem ninguém que te diga eu sei, deve doer. Por isso te digo eu, aqui, antes de mais nada: eu sei. Deve doer. Não estás a exagerar, nem a inventar uma dor que não existe. Existe. Só não tinha, até agora, quem lhe chamasse pelo nome.
+
+::: pausa
+**Respira aqui.**
+Acabaste de ler que isto é um luto, e os lutos pedem que se pare um pouco. Não tens de chegar a nenhuma conclusão.
+> Pensa num lugar que foi bom e que deixou de ser teu sem que ninguém o tenha tirado. Em silêncio, diz-lhe obrigada. Só isso, e volta à respiração.
+- O que é que esse lugar te deu, no tempo em que ainda cabias nele?
+- O que mudou foi em ti, e não nele. Custa-te admiti-lo, ou alivia-te?
+:::
 
 Vais aprender, ao longo destas páginas, a fazer uma coisa que parece impossível quando se ouve pela primeira vez: amar as mesmas pessoas e deixar de ser a mesma pessoa junto delas. As duas ao mesmo tempo, sem que uma cancele a outra. Vais aprender a despedir-te de uma versão tua sem teres de te despedir de uma única pessoa. Porque é disso que se trata. Não morreu ninguém. Não há que cortar com ninguém. O que tem de ser deixado ir não é a tua gente, é uma forma antiga de estares com a tua gente, e fazer esse luto sem o transformar numa guerra é a aprendizagem inteira deste livro.
 

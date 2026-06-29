@@ -18,6 +18,14 @@ Um bocadinho aqui. Um bocadinho ali. A opinião que não disseste. O sonho de qu
 
 Isto é o que estiveste a pagar. Hoje, neste sinal, não venho dizer-te que pagaste a quem não devias, nem que te roubaram, nem que foste enganada. Não venho dar-te um vilão. Não há vilão. As pessoas a essas mesas não te tiraram nada. A maioria delas nem sabe que pagaste. Algumas teriam ficado horrorizadas se soubessem. Tu é que, por amor e por medo, e os dois costumam vir de mãos dadas, decidiste que era esse o valor de um lugar entre quem amavas. Pagaste-o com a tua moeda mais cara, que não era o teu tempo, nem a tua energia, nem o teu trabalho. Era tu. Eras tu inteira, a fingires-te um pouco menos para caberes.
 
+::: pausa
+**Pousa o livro, e olha a conta.**
+Não para a pagares nem para a cobrares a ninguém. Só para a veres pela primeira vez.
+> Lembra-te de uma mesa que amas onde te tornas um bocadinho mais pequena à porta. Repara, sem culpar ninguém, qual é a moeda que costumas estender ali sem ninguém ta pedir.
+- O que é que tu pagas, em cada mesa, antes ainda de te cobrarem?
+- E se a maioria dessas mesas nunca te tivesse pedido para pagar?
+:::
+
 Há uma frase que talvez já tenhas dito a alguém, ou ouvido alguém dizer-te, e que parece de bom senso e é, na verdade, o nome exacto da ferida. É esta: tens de ceder um bocado, é assim que funciona. É verdade. Toda a relação tem cedência. Toda a pertença pede que abdiques de qualquer coisa, que faças espaço, que não sejas só tu e a tua vontade. Isto é justo e é bom. Mas houve um momento, algures, em que tu deixaste de ceder coisas e começaste a ceder-te a ti. Ninguém te avisou de que a fronteira tinha sido atravessada, porque a fronteira não tem placa. Cedeste a hora do jantar e está bem. Cedeste o filme que querias ver e está bem. Depois, sem aviso, cedeste a tua opinião, a tua estranheza, o teu modo de sentir as coisas, e isso já não estava bem, mas a essa altura já tinhas cedido tanto que cedeste também a capacidade de notar que estavas a ceder o que não devia ser cedido.
 
 É isso que dói. Não é a cedência. É a cedência sem chão, a cedência que não sabe onde parar porque perdeu de vista o que estava a proteger.
@@ -83,6 +91,14 @@ Durante seis sinais, e provavelmente durante muito mais tempo do que seis sinais
 Agora, neste limiar onde a guerra amoleceu, ouves uma pergunta diferente a formar-se. Não a procuraste. Ela veio sozinha, do mesmo lugar de onde veio o amolecer. A pergunta nova é esta, e quero que a leias devagar, porque ela vai ficar contigo muito depois de fechares este livro.
 
 Onde é que eu posso permanecer inteira enquanto pertenço.
+
+::: pausa
+**Fica com a pergunta nova.**
+Não tentes respondê-la hoje. Deixa-a viver em ti como uma luz que entra por uma porta aberta.
+> Repete-a devagar, uma vez: onde é que eu posso permanecer inteira enquanto pertenço? E repara o que muda no corpo só por trocares "onde caibo" por "onde permaneço inteira".
+- Em que mesa é que já podes estar inteira sem pagar?
+- E numa onde te custa: o que é que ainda estendes à porta que afinal podias guardar?
+:::
 
 Sente a diferença. Não é onde caibo. É onde permaneço inteira. Não é se há lugar para mim. É se há lugar para mim sem que eu tenha de deixar partes de mim à porta. A pergunta antiga procurava um lugar. A pergunta nova procura uma condição. Essa condição é a única coisa que faz a pertença valer o nome. Porque uma pertença que te custa pedaços de ti não é pertença, é hospedagem. Estás alojada, não pertences. Pertencer, pertencer mesmo, é poder permanecer inteira enquanto estás. É a presença sem peça em falta.
 
