@@ -532,9 +532,12 @@ export default function CrescerPage() {
     setSel(new Set()); setBusy(false); recarregar();
   }, [acaoSlug, busy, agData, agHora, agCad, pecas, sel, recarregar]);
 
-  // TIPO da peça: CARROSSEL (formato ensaio, publica telas) vs REEL (vídeo). ESTADO de
-  // produção: por fazer / pronto (renderizado) / agendada / publicada.
-  const tipoDe = (p: Peca): 'carrossel' | 'reel' => (p.formato === 'ensaio' ? 'carrossel' : 'reel');
+  // TIPO da peça: REEL = 1 tela (frase/motion) OU várias telas COM clip contínuo (o reel
+  // que cresce, texto ritmado sobre o vídeo). CARROSSEL = várias telas SEM clip (telas 4:5
+  // estáticas que se leem). É a MESMA regra do publicador, por isso o que vês = o que sai.
+  // ESTADO de produção: por fazer / pronto (renderizado) / agendada / publicada.
+  const tipoDe = (p: Peca): 'carrossel' | 'reel' =>
+    ((p.momentos?.length ?? 0) > 1 && !p.clipUrl) ? 'carrossel' : 'reel';
   const estadoDe = (p: Peca): 'por-fazer' | 'pronto' | 'agendada' | 'publicada' => {
     if (p.publicado) return 'publicada';
     const renderizado = tipoDe(p) === 'carrossel' ? (p.imagens?.length ?? 0) >= 2 : !!p.videoUrl;

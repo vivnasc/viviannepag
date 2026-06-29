@@ -23,13 +23,14 @@ const VIDEO = ['kinetico', 'domingo', 'duasfaces', 'nbeats', 'carta', 'visual', 
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; crescer?: { formato?: string } | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; crescer?: { formato?: string } | null; soulab?: { clipUrl?: string | null } | null };
 
-// CRESCER · QUALQUER peça com VÁRIAS telas é um CARROSSEL DE IMAGENS (telas 4:5), nunca
-// um reel — o texto de carrossel é estático e lê-se; um reel de várias linhas sai rápido
-// e ilegível (o bug que a fez apagar um post). Só a peça de 1 tela (frase) é reel/motion.
-// Publica-se como carrossel quando as telas estão renderizadas.
-const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1;
+// CRESCER · uma peça de VÁRIAS telas é um CARROSSEL DE IMAGENS (telas 4:5) — EXCETO quando
+// tem um CLIP contínuo (theme.soulab.clipUrl): aí é o REEL QUE CRESCE (texto ritmado por
+// cima do vídeo de ~40s, legível). Sem clip, o texto de várias linhas num reel sai rápido e
+// ilegível (o bug que a fez apagar um post), por isso vira carrossel estático. Com clip, o
+// clip é que dá o ritmo e a legibilidade, por isso publica-se como reel.
+const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1 && !t.soulab?.clipUrl;
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)

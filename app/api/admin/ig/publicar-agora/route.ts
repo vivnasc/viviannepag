@@ -17,14 +17,15 @@ const VIDEO = ['kinetico', 'domingo', 'duasfaces', 'nbeats', 'carta', 'visual', 
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; publicado?: boolean; capaRev?: number; renderPedidoEm?: number };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; publicado?: boolean; capaRev?: number; renderPedidoEm?: number; soulab?: { clipUrl?: string | null } | null };
 
 const tipoChave = (t: Theme) => (t?.formato === 'reel' ? (t?.subtipo ?? 'reel') : (t?.formato ?? ''));
 const legendaDe = (d?: Dia) => !d ? '' : [d.legenda?.trim(), (d.hashtags ?? []).join(' ')].filter(Boolean).join('\n\n');
 
-// CRESCER · qualquer peça com VÁRIAS telas é CARROSSEL de imagens, nunca reel (texto
-// estático lê-se; reel de várias linhas sai rápido e ilegível). Só 1 tela = reel/frase.
-const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1;
+// CRESCER · peça de VÁRIAS telas é CARROSSEL de imagens — EXCETO com CLIP contínuo
+// (theme.soulab.clipUrl): aí é o REEL QUE CRESCE (texto ritmado por cima do vídeo,
+// legível). Sem clip, reel de várias linhas sai rápido e ilegível, por isso carrossel.
+const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1 && !t.soulab?.clipUrl;
 
 // a loja é sempre REEL (MP4 com música); a veu varia conforme o formato.
 function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {

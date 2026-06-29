@@ -20,7 +20,7 @@ const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 
 type Slide = { tipo?: string; imageUrl?: string | null; kicker?: string; texto?: string; titulo?: string; nota?: string; pontos?: string[]; selo?: string; pal?: string; motionUrl?: string | null; videoUrl?: string | null };
 type Dia = { mundo?: Mundo; slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string | null; capaRev?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; serie?: string; mundo?: Mundo; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string | null; capaRev?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; soulab?: { clipUrl?: string | null } | null };
 type Item = { slug: string; title: string; dias: Dia[]; theme: Theme; created_at?: string };
 
 const CAPA_REV = 2;
@@ -62,9 +62,9 @@ const rotuloFmt = (k: string): string => k === 'vcsabia' ? 'VC Sabia' : k === 'h
 // ficheiros descarregáveis de um post (vídeo ou imagens), com nome amigável
 const mediaDe = (it: Item): { url: string; nome: string }[] => {
   const d = it.dias?.[0];
-  // CRESCER multi-tela = CARROSSEL de imagens, mesmo que ainda exista um MP4 antigo
-  // colado (renderizado como reel noutra altura). Nunca usar o MP4 nestas peças.
-  const crescerCarrossel = it.theme?.marca === 'crescer' && (d?.slides?.length ?? 0) > 1;
+  // CRESCER multi-tela = CARROSSEL de imagens (ignora MP4 antigo colado), EXCETO com clip
+  // contínuo (soulab.clipUrl): aí é o REEL QUE CRESCE e o MP4 é mesmo o que vai sair.
+  const crescerCarrossel = it.theme?.marca === 'crescer' && (d?.slides?.length ?? 0) > 1 && !it.theme?.soulab?.clipUrl;
   if (crescerCarrossel && d?.imagens?.length) return d.imagens.map((u, i) => ({ url: u, nome: `${it.slug}-${i + 1}.jpg` }));
   if (d?.videoUrl && !crescerCarrossel) return [{ url: d.videoUrl, nome: `${it.slug}.mp4` }];
   if (d?.imagens?.length) return d.imagens.map((u, i) => ({ url: u, nome: `${it.slug}-${i + 1}.jpg` }));
@@ -551,8 +551,9 @@ export default function PublicarPage() {
               {/* CONTEÚDO REAL do post: vídeo, imagens renderizadas, ou os textos dos slides */}
               {(() => {
                 const dia = it.dias?.[0];
-                // CRESCER multi-tela = carrossel; ignora um MP4 antigo colado (mostra as telas).
-                const crescerCarrossel = it.theme?.marca === 'crescer' && (dia?.slides?.length ?? 0) > 1;
+                // CRESCER multi-tela = carrossel (ignora MP4 antigo), EXCETO com clip contínuo
+                // (soulab.clipUrl) = o REEL QUE CRESCE: aí mostra o MP4, é o que vai sair.
+                const crescerCarrossel = it.theme?.marca === 'crescer' && (dia?.slides?.length ?? 0) > 1 && !it.theme?.soulab?.clipUrl;
                 if (dia?.videoUrl && !crescerCarrossel) return (
                   <div className="mt-4">
                     <p className="text-[0.62rem] uppercase tracking-wider opacity-50 mb-1">Conteúdo (vídeo)</p>
