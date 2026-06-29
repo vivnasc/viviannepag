@@ -117,9 +117,11 @@ function SoulabMomentos({ slides, prog, mundo, clipUrl, slideProps = SOULAB_SLID
         const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
         const est = estiloSequencia(transicao, prog, i, n);
         if (!est) return null;
+        // tipografia POR SLIDE (o que a Vivianne editou em cada um); recua ao do 1.º slide.
+        const tipSlide = (sl as { tipografia?: Tipografia }).tipografia ?? tipografia;
         return (
           <div key={i} style={{ position: 'absolute', inset: 0, overflow: 'hidden', ...est }}>
-            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipografia} {...slideProps} />
+            <KineticSlide texto={sl.texto ?? ''} destaque={(sl as { destaque?: string[] }).destaque} imageUrl={sl.imageUrl} clipUrl={clipUrl} mundo={mundo} prog={lp} efeito={efeito} tipografia={tipSlide} {...slideProps} />
           </div>
         );
       })}

@@ -598,8 +598,20 @@ export default function CrescerPage() {
           </div>
         </section>
 
-        {erro && <p className="mb-3 text-[0.8rem] text-rose-300">{erro}</p>}
         {msg && !erro && <p className="mb-3 text-[0.8rem] text-emerald-300">{msg}</p>}
+        {/* AVISO FIXO de erro: visível em qualquer ponto da página (não falha em silêncio).
+            Mostra a causa (ex.: limite do GitHub) e só sai quando a Vivianne fecha. */}
+        {erro && (
+          <div className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-lg rounded-xl border p-3 shadow-2xl flex items-start gap-2" style={{ borderColor: '#f87171', background: 'rgba(40,12,12,0.97)' }}>
+            <span className="text-[0.9rem]">⚠️</span>
+            <div className="flex-1 text-[0.78rem] text-rose-200 break-words">
+              <p className="font-medium text-rose-300">Falhou (não publiquei nem disparei nada):</p>
+              <p className="opacity-90">{erro}</p>
+              {/rate limit|github-dispatch|429|403/i.test(erro) && <p className="opacity-70 mt-1 text-[0.7rem]">É o limite da API do GitHub (a tua conta). Espera uns minutos e tenta outra vez.</p>}
+            </div>
+            <button onClick={() => setErro(null)} className="text-[0.7rem] px-2 py-0.5 rounded border border-rose-400/50 text-rose-200">fechar ✕</button>
+          </div>
+        )}
 
         {/* peças */}
         <section>
