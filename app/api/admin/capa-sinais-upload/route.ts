@@ -23,16 +23,25 @@ export async function POST(req: Request) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const tipo = file.type && file.type.startsWith('image/') ? file.type : 'image/png';
-    const path = `livro-pilar/${slug}/capa-composta${lang === 'en' ? '-en' : ''}.png`;
+    const suf = lang === 'en' ? '-en' : '';
+    // capa-composta: a que o site mostra (vê logo). capa-propria: a MARCA de que
+    // esta capa foi carregada pela Vivianne, para o render do pilar a respeitar e
+    // NÃO a recompor a partir da imagem do Flux.
+    const paths = [
+      `livro-pilar/${slug}/capa-composta${suf}.png`,
+      `livro-pilar/${slug}/capa-propria${suf}.png`,
+    ];
 
     const sb = getSupabaseAdmin();
     const { data: existing } = await sb.storage.getBucket(BUCKET);
     if (!existing) await sb.storage.createBucket(BUCKET, { public: true });
 
-    const { error } = await sb.storage.from(BUCKET).upload(path, buffer, { contentType: tipo, upsert: true });
-    if (error) return NextResponse.json({ erro: `upload: ${error.message}` }, { status: 502 });
+    for (const path of paths) {
+      const { error } = await sb.storage.from(BUCKET).upload(path, buffer, { contentType: tipo, upsert: true });
+      if (error) return NextResponse.json({ erro: `upload: ${error.message}` }, { status: 502 });
+    }
 
-    const url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+    const url = sb.storage.from(BUCKET).getPublicUrl(paths[0]).data.publicUrl;
     return NextResponse.json({ url: `${url}?v=${Date.now()}` });
   } catch (e) {
     return NextResponse.json({ erro: (e as Error).message }, { status: 500 });

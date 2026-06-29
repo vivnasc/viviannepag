@@ -42,18 +42,22 @@ jobs:
             @fontsource/fraunces \
             @fontsource/outfit
 
-      - name: Download capa escolhida
+      - name: Capa — o upload da Vivianne vence; só compõe do Flux se não houver
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
         run: |
           mkdir -p livro-pilar
-          curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus/capa.jpg" -o /tmp/capa-escolhida.jpg
-          ls -la /tmp/capa-escolhida.jpg
-
-      - name: Compor capas (PT e EN)
-        run: |
-          node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta.png pt
-          node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta-en.png en
+          B="$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-veus"
+          if curl -fsS "$B/capa-propria.png" -o livro-pilar/capa-composta.png; then
+            echo "capa própria (upload) — uso tal e qual, NÃO recomponho do Flux"
+            curl -fsS "$B/capa-propria-en.png" -o livro-pilar/capa-composta-en.png \
+              || cp livro-pilar/capa-composta.png livro-pilar/capa-composta-en.png
+          else
+            echo "sem capa própria — componho a partir da imagem escolhida (Flux)"
+            curl -fsS "$B/capa.jpg" -o /tmp/capa-escolhida.jpg
+            node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta.png pt
+            node scripts/livro-pilar/capa-compor.js /tmp/capa-escolhida.jpg livro-pilar/capa-composta-en.png en
+          fi
 
       - name: Render do livro (PT e, se houver tradução, EN)
         run: |
