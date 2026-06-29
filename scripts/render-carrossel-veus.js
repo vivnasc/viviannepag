@@ -65,7 +65,7 @@ async function main() {
   // A loja (Carrosséis dos 7 Véus) é a ÚNICA que usa o Ancient Ground por default.
   // O método e o soulab NUNCA usam Ancient Ground: ou têm áudio próprio (somSoulab)
   // ou ficam sem música (silêncio), nunca o Ancient Ground que ela já não quer.
-  const ehMetodoOuSoulab = ['soulab', 'metodovs', 'versoltar', 'virsoltar', 'viversoltar'].includes(col.theme?.marca);
+  const ehMetodoOuSoulab = ['soulab', 'metodovs', 'versoltar', 'virsoltar', 'viversoltar', 'crescer'].includes(col.theme?.marca);
   // resolve o áudio de fundo de um dia: áudio próprio > (loja) faixa do dia / Ancient
   // Ground > (método/soulab) nada. Devolve null quando não há áudio nenhum.
   const audioDeFundo = (d) => somSoulab || (ehMetodoOuSoulab ? null : (d.faixa?.url || faixaUrl(semana, d.dia)));
