@@ -237,51 +237,60 @@ export interface VisualCrescer {
   variar: string;
 }
 
-// RÉGUA DE IMAGEM (decisão da Vivianne, jun 2026, reequilibrada): a LIGAÇÃO ao
-// texto é o que MAIS importa. O "futurista" NÃO é conteúdo obrigatório (néon,
-// sci-fi, cosmos) — é só uma QUALIDADE: luminosa, moderna, elevada, fine-art.
-// O estilo serve a mensagem, nunca ao contrário. PROIBIDO escuro, sépia, vintage,
-// rústico, doméstico, antiquado, e o cliché néon/cyberpunk quando não serve a frase.
+// MUNDO VISUAL · PÓS-SOBREVIVÊNCIA (decisão e manifesto da Vivianne, jun 2026).
+// NÃO é o futuro tecnológico (néon, cyberpunk, 5D, videojogo) — é o futuro
+// ANTROPOLÓGICO: uma civilização humana que saiu da consciência de SOBREVIVÊNCIA
+// e entrou na consciência de CRIAÇÃO. Evoluído, não avançado. A tensão entre o
+// mundo antigo (pesado, industrial, o encaixe forçado) e o que emerge (orgânico,
+// luminoso, escala impossível) É, em imagem, o trabalho dos véus: ver, depois soltar.
+// REGRA DE OURO: a imagem mostra o LIMIAR e a tensão; nunca a chegada como
+// instrução. O novo mundo vislumbra-se ao longe / por uma fenda / no horizonte.
 export const FIM_PROMPT =
-  'FUTURISTIC, modern, sleek and elevated, luminous, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
-  'clean radiant light, refined elegant color (rich and beautiful but NEVER neon), sharp focus, contemporary and otherworldly yet tasteful. ' +
-  'The image CARRIES the meaning of the words; style serves the message. ' +
-  'NO neon, NO cyberpunk, NO garish or oversaturated colors, NO RGB / laser / club lights. ' +
-  'AND NOT dark, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT earthy, NOT a home/house interior, NOT a domestic scene, NOT dried flowers, NOT antiquated, NOT a plain everyday photo. ' +
+  'an image like a memory from the future of a POST-SURVIVAL human civilization: not advanced technology but advanced CONSCIOUSNESS ' +
+  'materialized in architecture, landscape and scale (evolved, not merely advanced). Monumental, impossible architecture that looks GROWN, not built; ' +
+  'living organic structures, suspended gardens, rivers in the sky, bridges of light, colossal scale with tiny human beings; ' +
+  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, soft and responsive; nature and architecture fused; physics set free. ' +
+  'Palette: warm whites, soft golds, pearl, champagne, pale sand, sage green, misty rose, matte silver, nothing oversaturated. ' +
+  'Feeling: absolute safety, expansion, possibility, mystery and awe, the end of the old world and the birth of a new human paradigm. Tone of Dune, Arrival, Interstellar, Avatar, Moebius. ' +
+  'NEVER neon, NEVER cyberpunk, no robots, no spaceships, no screens or holograms, no crystals, no chakras, no esoteric symbols, ' +
+  'no post-apocalyptic decay, no dried flowers, no family corridors, no family trees, no blurry grandmothers, no literal therapy metaphors, not a plain everyday photo. ' +
   'no text, no letters, no watermark, no logos --ar 9:16 --style raw';
 
 export const VISUAIS: VisualCrescer[] = [
   {
-    id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑',
-    descricao: 'Pessoas reais e visíveis, num mundo FUTURISTA e luminoso (sem néon, sem silhuetas, sem doméstico).',
+    id: 'pessoas', label: 'Pessoas (escala)', emoji: '🧑',
+    descricao: 'Uma figura humana minúscula perante uma estrutura colossal: a pessoa diante do que herdou e ainda não largou.',
     promptBase:
-      'a FUTURISTIC, modern and elegant human figure CLEARLY VISIBLE and FRONT-LIT, face and body lit and visible ' +
-      '(NEVER a dark or distant silhouette, NEVER backlit, NEVER just a face close-up), sleek contemporary-futuristic styling, ' +
-      'set in a luminous modern, futuristic or otherworldly environment (never a home interior, never an ordinary everyday scene), ' +
-      'refined elegant color, cinematic fine-art that carries the feeling of the words, ' + FIM_PROMPT,
+      'a TINY human figure, clearly visible and softly lit (never a dark silhouette), small but present and dignified, ' +
+      'standing before or within a COLOSSAL post-survival structure, the person facing what they inherited and have not yet released; ' +
+      'the scale provokes awe; the image carries the feeling of the words. ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE o enquadramento, NUNCA só rostos em grande plano nem figuras distantes: ora uma figura inteira num cenário que diz a frase, ' +
-      'ora uma pessoa de costas a caminhar para a luz, mãos que se estendem, alguém em movimento, duas figuras, um perfil sereno. ' +
-      'Pessoas de idades e traços diferentes, sempre REAIS, VISÍVEIS e iluminadas de frente, em luz suave e elegante (nunca néon). A pessoa e o cenário traduzem o SENTIMENTO da frase.',
+      'VARIA a estrutura colossal e o enquadramento: uma cidade de milhares de camadas transparentes de cidades antigas suspensas; uma ponte de luz entre megacidades ' +
+      '(à frente, arquitetura orgânica luminosa; atrás, uma estrutura monumental de pedra e aço); uma estrutura circular gigante no céu com milhões de lugares iluminados e um só vazio; ' +
+      'uma muralha industrial colossal com a figura de costas a olhar jardins suspensos ao longe; uma planície vasta sob um céu enorme; uma estrada de luz que nasce só uns metros à frente dos passos. ' +
+      'A figura é sempre minúscula perante a escala; a tensão entre o mundo antigo (pesado) e o que emerge (orgânico, luminoso) traduz o sentimento da frase.',
   },
   {
-    id: 'conceptual', label: 'Conceptual / abstrato', emoji: '◍',
-    descricao: 'Arte conceptual sóbria: uma metáfora elegante que traduz a frase.',
+    id: 'conceptual', label: 'Os dois mundos', emoji: '◍',
+    descricao: 'A tensão entre o mundo antigo (pesado) e o que emerge (orgânico, luminoso), em escala monumental, sem pessoas.',
     promptBase:
-      'a refined conceptual fine-art image, ONE elegant luminous metaphor that TRANSLATES THE WORDS, evocative and meaningful, ' +
-      'soft radiant light, harmonious restrained color, premium and modern, no people, ' + FIM_PROMPT,
+      'a monumental post-survival scene with NO people that holds the TENSION of two worlds as ONE image translating the words: ' +
+      'the old heavy world (industrial, built to survive) and the world that emerges (organic, luminous, impossible scale); ' +
+      'show the threshold / a crack of warm light / the horizon, never the arrival fully inhabited. ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE a metáfora e os objetos (luz, vidro, água, fio/linha, portas, espelhos, raízes, pedras, sementes, pontes). ' +
-      'Nunca repitas o motivo. A metáfora TEM de ser uma tradução visual sóbria do sentimento da frase, não decoração, não sci-fi, não néon.',
+      'VARIA a metáfora em escala: uma cidade escura e densa de engrenagens e contrafortes vista de muito longe, bela e exausta; um interior monumental intacto mas vazio de luz própria, ' +
+      'com uma fenda por onde entra a luz quente do outro mundo; oceanos verticais, bibliotecas flutuantes, portais colossais, árvores do tamanho de continentes. Mostra o limiar, nunca a solução.',
   },
   {
-    id: 'natureza', label: 'Natureza / cósmico', emoji: '🌌',
-    descricao: 'Paisagens luminosas e serenas que espelham a frase.',
+    id: 'natureza', label: 'O mundo que emerge', emoji: '🌌',
+    descricao: 'Vislumbre do mundo orgânico e luminoso que nasce depois da sobrevivência (ao longe, por uma fenda).',
     promptBase:
-      'a breathtaking FUTURISTIC luminous cosmic or otherworldly scene that MIRRORS THE FEELING OF THE WORDS (radiant skies, light, water, stardust, crystalline landscapes), elegant and awe-inspiring, no people, ' + FIM_PROMPT,
+      'the WORLD THAT EMERGES after survival, NO people: organic luminous architecture and landscape at impossible scale ' +
+      '(suspended gardens, rivers in the sky, bridges of light, continent-sized trees, vertical oceans, light that is the matter itself), ' +
+      'glimpsed from afar / through a crack / on the horizon, never explained nor fully inhabited; it mirrors the feeling of the words. ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE a cena (oceanos de luz, montanhas, florestas radiantes, amanheceres, auroras, nebulosas, desertos, água suspensa). ' +
-      'Nunca repitas. A paisagem espelha o sentimento da frase (vastidão, recomeço, travessia, raiz, etc.), não é cosmos por moda.',
+      'VARIA a paisagem do novo mundo, sempre vislumbrada (não habitada por completo): jardins suspensos, rios no céu, pontes de luz, montanhas habitadas, escadas que terminam nas nuvens. ' +
+      'Espelha o sentimento da frase (expansão, recomeço, pertença em escala), sempre com segurança, mistério e admiração.',
   },
   {
     id: 'minimal', label: 'Minimal / tipográfico', emoji: '𝐀',
