@@ -7,15 +7,38 @@ export interface ConceitoSaber { nome: string; def: string }
 export interface DominioSaber { codigo: string; nome: string; conceitos: ConceitoSaber[] }
 
 // Os 7 Sinais de Desencaixe (livro "Os 7 Sinais de Desencaixe"): a experiência
-// SENTIDA de pertencer sem deixar de se ser inteiro. Profundidade da MÃE.
-export const SINAIS_DESENCAIXE: string[] = [
-  "Estás presente mas não te sentes pertencente",
-  "Começas a diminuir-te para caber",
-  "Sentes saudades de algo que nunca viveste",
-  "Oscilas entre hiper-adaptação e isolamento",
-  "O teu sistema nervoso começa a rejeitar certos ambientes",
-  "Começas a confundir paz com ausência de pessoas",
-  "Percebes que o problema nunca foi pertencer, mas o preço da pertença"
+// SENTIDA de pertencer sem deixar de se ser inteiro. Cada sinal traz a sua
+// EPÍGRAFE (a frase sentida, palavras do livro). Profundidade da MÃE.
+export interface SinalDesencaixe { nome: string; essencia: string }
+export const SINAIS_DESENCAIXE: SinalDesencaixe[] = [
+  {
+    "nome": "Estás presente mas não te sentes pertencente",
+    "essencia": "Estou aqui mas não estou em casa."
+  },
+  {
+    "nome": "Começas a diminuir-te para caber",
+    "essencia": "Talvez esteja a exagerar."
+  },
+  {
+    "nome": "Sentes saudades de algo que nunca viveste",
+    "essencia": "Há qualquer coisa que me falta mas não sei o quê."
+  },
+  {
+    "nome": "Oscilas entre hiper-adaptação e isolamento",
+    "essencia": "Ou pertenço ou sou eu."
+  },
+  {
+    "nome": "O teu sistema nervoso começa a rejeitar certos ambientes",
+    "essencia": "Não consigo mais."
+  },
+  {
+    "nome": "Começas a confundir paz com ausência de pessoas",
+    "essencia": "Talvez seja melhor sozinho."
+  },
+  {
+    "nome": "Percebes que o problema nunca foi pertencer, mas o preço da pertença",
+    "essencia": "Talvez eu só estivesse a pagar demasiado caro pela pertença."
+  }
 ];
 
 export const DOMINIOS: DominioSaber[] = [

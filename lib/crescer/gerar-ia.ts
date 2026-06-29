@@ -51,7 +51,7 @@ FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomeá-lo, citar a
 
 A FONTE PROFUNDA é o livro DELA, "${LIVRO.titulo}". O arco dos sete movimentos (o que cada um ENCOBRE e o que REVELA, NUNCA nomear no texto): ${LIVRO.veus.map((v) => `${v.nome} (encobre ${v.encobre}; revela que ${v.revela})`).join(' · ')}. As correntes que atravessam tudo: ${LIVRO.correntes.join(' · ')}.
 
-O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser inteiro; a dor de deixar de caber num lugar que foi bom, sem que ninguém tenha feito nada de errado). Os sinais (não os nomeies como lista; vive-os): ${SINAIS_DESENCAIXE.join(' · ')}.
+O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser inteiro; a dor de deixar de caber num lugar que foi bom, sem que ninguém tenha feito nada de errado). Os sinais, cada um com a sua confissão sentida (não os nomeies como lista; vive-os): ${SINAIS_DESENCAIXE.map((s) => `${s.nome} ("${s.essencia}")`).join(' · ')}.
 
 PROFUNDIDADE (a base de conhecimento dela, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 3)}
 
