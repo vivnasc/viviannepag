@@ -12,7 +12,7 @@ export const runtime = 'nodejs';
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const body = (await req.json().catch(() => ({}))) as {
-    slug?: string; idx?: number;
+    slug?: string; idx?: number; excetoCapa?: boolean;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string; corFundo?: string };
   };
   if (!body.slug || !body.slug.startsWith('crescer-')) return NextResponse.json({ erro: 'slug-invalido' }, { status: 400 });
@@ -25,8 +25,10 @@ export async function POST(req: Request) {
   const slides = (dias[0]?.slides as Array<Record<string, unknown>>) ?? [];
   if (!slides.length) return NextResponse.json({ erro: 'sem-slides' }, { status: 400 });
 
-  // os slides-alvo: o idx pedido, ou TODOS se idx não vier.
-  const alvos = typeof body.idx === 'number' ? (slides[body.idx] ? [body.idx] : []) : slides.map((_, i) => i);
+  // os slides-alvo: o idx pedido · TODOS menos a capa (excetoCapa) · TODOS.
+  const alvos = typeof body.idx === 'number' ? (slides[body.idx] ? [body.idx] : [])
+    : body.excetoCapa ? slides.map((_, i) => i).filter((i) => i > 0)
+    : slides.map((_, i) => i);
   if (!alvos.length) return NextResponse.json({ erro: 'slide-invalido' }, { status: 400 });
 
   // funde com a tipografia que já existe em cada slide (não apaga o que não vem)

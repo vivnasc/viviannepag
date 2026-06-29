@@ -14,7 +14,7 @@ export const maxDuration = 300;
 // O prompt vem do body ou do notaVisual guardado. Anula o vídeo (re-render).
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { slug?: string; idx?: number; prompt?: string; remover?: boolean };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; idx?: number; prompt?: string; remover?: boolean; excetoCapa?: boolean };
   if (!body.slug || !body.slug.startsWith('crescer-')) return NextResponse.json({ erro: 'slug-invalido' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -24,7 +24,10 @@ export async function POST(req: Request) {
   const slides = (dias[0]?.slides as Array<Record<string, unknown>>) ?? [];
   if (!slides.length) return NextResponse.json({ erro: 'sem-slides' }, { status: 400 });
   const idx = typeof body.idx === 'number' ? body.idx : null;
-  const alvos = idx !== null ? (slides[idx] ? [idx] : []) : slides.map((_, i) => i);
+  // alvos: 1 slide (idx) · todos menos a capa (excetoCapa, p/ tirar imagem do corpo) · todos.
+  const alvos = idx !== null ? (slides[idx] ? [idx] : [])
+    : body.excetoCapa ? slides.map((_, i) => i).filter((i) => i > 0)
+    : slides.map((_, i) => i);
   if (!alvos.length) return NextResponse.json({ erro: 'slide-invalido' }, { status: 400 });
 
   // TIRAR a imagem (não chama o Flux): limpa o imageUrl dos slides-alvo.
