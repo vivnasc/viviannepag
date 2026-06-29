@@ -30,6 +30,7 @@ export async function gerarPecaSoulab(
   formato: 'frase' | 'momentos' = 'frase',
   evitarImg: string[] = [], // CENAS de imagem já usadas (para não repetir portas/objetos partidos)
   continuarDe?: { frase: string; conceito?: string } | null, // PARTE 2 de um reel que resultou
+  modo: 'abre' | 'encaminha' = 'abre', // 'abre' = deixa em aberto; 'encaminha' = desdobra e pousa
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
 
@@ -79,6 +80,11 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
     : `Uma peça Soulab no ângulo ${tipo.label}.`;
   // CONTINUAR O FIO: parte 2 de um reel que resultou. Mantém a voz e a atmosfera,
   // aprofunda ou vira a ideia, NÃO repete a frase nem diz "parte 2".
+  // MODO ENCAMINHA: o terceiro tempo que falta. Não deixa a peça só aberta; desdobra
+  // e pousa num movimento. Continua a NÃO ser conselho/ordem/autoajuda (regra da marca).
+  const encaminhar = modo === 'encaminha'
+    ? `\n\nMODO ENCAMINHA (importante nesta peça): NÃO a deixes totalmente aberta. Depois de abrir, DESDOBRA mais uma volta (o mecanismo por baixo, o que a maioria não vê) e POUSA num movimento sentido: uma direção pequena e concreta onde a pessoa pode descansar, o alívio a que o método chama "soltar". NÃO é resposta fechada, NÃO é conselho, NÃO é ordem nem autoajuda; é o terceiro tempo. Vale para a frase/momentos E para a legenda (a legenda desdobra e POUSA, em vez de só perguntar).`
+    : '';
   const seguimento = continuarDe?.frase
     ? `\n\nISTO É UM REEL DE SEGUIMENTO. Um reel anterior resultou muito: "${continuarDe.frase}"${continuarDe.conceito ? ` (tema: ${continuarDe.conceito})` : ''}. Escreve a CONTINUAÇÃO desse fio, no MESMO registo e voz: aprofunda ou vira a ideia para um ângulo novo. Aguenta-se sozinha, mas quem viu a primeira sente-a como o passo seguinte. NÃO repitas a frase nem anuncies "parte 2".`
     : '';
@@ -97,7 +103,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       model: 'claude-sonnet-4-6',
       max_tokens: 1100,
       system: sys,
-      messages: [{ role: 'user', content: pedido + seguimento + naoRepetir + naoRepetirImg }],
+      messages: [{ role: 'user', content: pedido + encaminhar + seguimento + naoRepetir + naoRepetirImg }],
     }),
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);

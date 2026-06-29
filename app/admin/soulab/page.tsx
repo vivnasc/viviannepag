@@ -307,6 +307,7 @@ export default function SoulabPage() {
   const sementesRecentes = useRef<string[]>([]); // últimas sementes do "surpreende-me", para não repetir
   const [quantos, setQuantos] = useState(1);
   const [formato, setFormato] = useState<'frase' | 'momentos'>('frase');
+  const [modo, setModo] = useState<'abre' | 'encaminha'>('abre'); // abre = deixa em aberto; encaminha = desdobra e pousa
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -331,7 +332,7 @@ export default function SoulabPage() {
     setBusy(true); setErro(null);
     setMsg('A explorar no laboratório (texto + imagem)… pode demorar até 1 min por peça. Volta e recarrega se fechares.');
     try {
-      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, tema: tema.trim() || undefined }) });
+      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, modo, tema: tema.trim() || undefined }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} peça(s) gerada(s).${j.detalhe ? ` (aviso: ${j.detalhe})` : ''} Revê em baixo, regenera a imagem se quiseres, e renderiza.`);
@@ -570,6 +571,14 @@ export default function SoulabPage() {
               <button key={id} type="button" onClick={() => setFormato(id)} title={id === 'momentos' ? 'um reel onde a ideia se desdobra em 3-5 linhas sobre a mesma cena' : 'um reel de uma só frase'}
                 className="text-[0.74rem] px-2.5 py-1 rounded-full border"
                 style={formato === id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.2)', color: SOULAB.paleta.texto }}>{label}</button>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
+            <span className="text-[0.7rem] opacity-55 mr-0.5">voz:</span>
+            {([['abre', '◌ abre (deixa a refletir)'], ['encaminha', '➜ encaminha (desdobra e pousa)']] as const).map(([id, label]) => (
+              <button key={id} type="button" onClick={() => setModo(id)} title={id === 'encaminha' ? 'além de abrir, desdobra mais uma volta e pousa num movimento (sem conselho); para quem não fecha sozinho' : 'acende a reflexão e deixa em aberto (o registo atual)'}
+                className="text-[0.74rem] px-2.5 py-1 rounded-full border"
+                style={modo === id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.2)', color: SOULAB.paleta.texto }}>{label}</button>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
