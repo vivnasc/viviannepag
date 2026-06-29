@@ -6,15 +6,24 @@
 // o estilo do prompt), de forma forte e com exemplos.
 export const REGRA_ACENTOS = `ACENTUAÇÃO (OBRIGATÓRIO, SEM EXCEÇÕES): escreve em português europeu com TODOS os acentos, til (~) e cedilha (ç) corretos, segundo o Acordo Ortográfico de 1990. Texto sem acentos é um ERRO GRAVE e não é aceitável. Nunca devolvas palavras como "nao", "religiao", "dimensoes", "voce", "memoria", "constelacao", "irmao", "avo", "tras", "espiritualidade" mal acentuadas: o correto é "não", "religião", "dimensões", "você", "memória", "constelação", "irmão", "avó", "trás". Relê CADA palavra antes de responder e confirma que está acentuada. Usa o AO1990 (ex.: "ato", não "acto"; "ação", não "acção").`;
 
+// CORRETOR de artefactos comuns do português gerado (typos que NUNCA são a voz
+// dela). Só correções SEGURAS, com fronteira de palavra (não toca em palavras
+// legítimas). Ex.: "té" (extra 't') quase sempre quer dizer "é".
+function corrigirPtPt(s: string): string {
+  return s
+    // "té" / "Té" isolado -> "é" / "É" (o "carregas té teu" devia ser "é teu")
+    .replace(/(^|[^0-9A-Za-zÀ-ÿ])([tT]é)(?=[^0-9A-Za-zÀ-ÿ]|$)/g, (_m, pre, w) => pre + (w[0] === 'T' ? 'É' : 'é'));
+}
+
 export function limparTravessoes<T>(v: T): T {
   if (typeof v === 'string') {
-    return v
+    return corrigirPtPt(v
       .replace(/\s*[—–]\s*/g, ', ')   // travessão entre espaços -> vírgula
       .replace(/[—–]/g, ', ')           // qualquer travessão restante
       .replace(/\s+,/g, ',')            // espaço antes de vírgula
       .replace(/,\s*,/g, ',')           // vírgulas duplicadas
       .replace(/ {2,}/g, ' ')           // espaços a mais
-      .trim() as unknown as T;
+      .trim()) as unknown as T;
   }
   if (Array.isArray(v)) return v.map((x) => limparTravessoes(x)) as unknown as T;
   if (v && typeof v === 'object') {

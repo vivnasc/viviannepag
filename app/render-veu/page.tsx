@@ -14,6 +14,7 @@ import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, estiloSequencia, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
 import { SOULAB_SLIDE } from '@/lib/soulab/marca';
+import { CRESCER_SLIDE } from '@/lib/crescer/marca';
 import { slideDaMarca, ehMarcaMetodoVS, METODOVS_CONTAS_LISTA } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
 import { CartaSlide } from '@/components/admin/CartaSlide';
@@ -290,6 +291,12 @@ export default function RenderVeuPage() {
 
   // MÉTODO VS com VOZ (timestamps de palavra) => karaokê: a palavra falada acende-se.
   const vozVS = ehMarcaMetodoVS(marcaM) && (estado?.dia.vozPalavras?.length ?? 0) > 0;
+  // CRESCER: a conta dela. Entra na MESMA sequência de momentos sobre o clip (Soulab/
+  // Método), para a continuidade do texto sobre o reel que cresce: cada momento sai e
+  // o complementar entra, sobre o vídeo contínuo. A assinatura é a CRESCER_SLIDE.
+  const ehCrescer = (estado?.dia.mundo as string) === 'crescer';
+  const ehSeqSobreClip = (estado?.dia.mundo as string) === 'soulab' || ehCrescer || ehMarcaMetodoVS(marcaM);
+  const slidePropsCena = ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : SOULAB_SLIDE;
 
   // TEMPO DE LEITURA: a passagem entre faces (split) é proporcional ao texto — a
   // face 2 (revelação, mais longa) fica com MAIS tempo. Face 1 nunca > 50%.
@@ -361,10 +368,10 @@ export default function RenderVeuPage() {
       })()}
       {/* RESPIRAÇÃO (vários momentos): Soulab OU Método VS com >1 linha => sequência
           que respira sobre a cena. A assinatura muda pela marca (slideProps). */}
-      {estado && ehKinetic && !vozVS && (((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1 && (
-        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : SOULAB_SLIDE} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
+      {estado && ehKinetic && !vozVS && ehSeqSobreClip && (estado.dia.slides?.length ?? 0) > 1 && (
+        <SoulabMomentos slides={estado.dia.slides ?? []} prog={prog} mundo={estado.dia.mundo} clipUrl={clipBg ?? undefined} slideProps={slidePropsCena} transicaoFallback={ehMarcaMetodoVS(marcaM) ? 'deslizar' : 'fundir'} />
       )}
-      {estado && ehKinetic && !vozVS && s && !((((estado.dia.mundo as string) === 'soulab') || ehMarcaMetodoVS(marcaM)) && (estado.dia.slides?.length ?? 0) > 1) && (
+      {estado && ehKinetic && !vozVS && s && !(ehSeqSobreClip && (estado.dia.slides?.length ?? 0) > 1) && (
         // FRAME ÚNICO com MOVIMENTO: o push-in + deriva da CameraVeu dá vida ao frame
         // parado da manhã (sem clip/motion). Só com imagem fixa (com clip o próprio
         // vídeo já mexe, não precisa). Beneficia a manhã do Método VS e outros kinéticos
@@ -381,14 +388,14 @@ export default function RenderVeuPage() {
               efeito={(s as { efeito?: EfeitoTexto }).efeito}
               tipografia={(s as { tipografia?: Tipografia }).tipografia}
               conceito={s.conceito}
-              clipUrl={((estado.dia.mundo as string) === 'soulab' || ehMarcaMetodoVS(marcaM)) ? (clipBg ?? undefined) : undefined}
-              {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
+              clipUrl={ehSeqSobreClip ? (clipBg ?? undefined) : undefined}
+              {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
             />
           );
           // o frame único do método (manhã/dissolução) é tipo:'kinetico' — passa por
           // AQUI, não pelo ramo ehMetodo. Por isso o clip do Kling também tem de entrar
           // aqui para o método, senão a manhã fica só com a câmara CSS (o bug do motion).
-          const temClip = ((estado.dia.mundo as string) === 'soulab' || ehMarcaMetodoVS(marcaM)) && !!clipBg;
+          const temClip = ehSeqSobreClip && !!clipBg;
           return (s.imageUrl && !temClip) ? <CameraVeu prog={prog}>{kin}</CameraVeu> : kin;
         })()
       )}

@@ -125,12 +125,15 @@ export async function POST(req: Request) {
       const tipBody = ehEnsaio
         ? { fonte: body.tipografia?.fonte ?? 'serif', tamanho: 46, cor: body.tipografia?.cor, corDestaque: body.tipografia?.corDestaque, alinhV: 'centro', alinhH: 'esq' }
         : undefined;
+      // REGRA (Vivianne): num CARROSSEL (várias telas), a IMAGEM é SÓ na CAPA; os
+      // outros slides são texto. Só as peças de 1 tela (frase) levam imagem no slide.
+      const carrossel = linhas.length > 1;
       const slides = linhas.map((texto, idx) => ({
         tipo: 'kinetico',
         texto,
         destaque: idx === 0 ? peca.destaque : [],
         notaVisual: peca.fundoPrompt,
-        imageUrl: ehEnsaio ? (idx === 0 ? imageUrl : null) : imageUrl,
+        imageUrl: carrossel ? (idx === 0 ? imageUrl : null) : imageUrl,
         capa: idx === 0,
         conceito: idx === 0 ? peca.conceito : undefined,
         // capa: tipografia de capa; ensaio (slides de texto): editorial; outros formatos: só a capa leva o padrão

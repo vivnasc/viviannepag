@@ -243,41 +243,41 @@ export interface VisualCrescer {
 // O estilo serve a mensagem, nunca ao contrário. PROIBIDO escuro, sépia, vintage,
 // rústico, doméstico, antiquado, e o cliché néon/cyberpunk quando não serve a frase.
 export const FIM_PROMPT =
-  'luminous and vivid, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
-  'radiant natural light, rich evocative color, sharp focus, modern, elegant and timeless. ' +
-  'The image must CARRY the meaning of the words above everything else; style serves the message. ' +
-  'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated, ' +
-  'NOT cheesy sci-fi, NOT neon cyberpunk unless it genuinely fits the words. ' +
+  'luminous but SOBER, refined and elegant, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
+  'soft radiant natural light, harmonious and RESTRAINED color (muted, sophisticated, tasteful), sharp focus, modern, elegant and timeless. ' +
+  'The image CARRIES the meaning of the words; style serves the message. ' +
+  'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated. ' +
+  'ABSOLUTELY NO neon, NO cyberpunk, NO garish or oversaturated colors, NO glowing electric / RGB / laser / club lights. ' +
   'no text, no letters, no watermark, no logos --ar 9:16 --style raw';
 
 export const VISUAIS: VisualCrescer[] = [
   {
-    id: 'pessoas', label: 'Pessoas', emoji: '🧑',
-    descricao: 'Pessoas visíveis e luminosas, em cenas que carregam o sentimento da frase.',
+    id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑',
+    descricao: 'Pessoas reais, visíveis e elegantes (sem silhuetas, sem néon), na cena da frase.',
     promptBase:
-      'a luminous human presence that CARRIES THE FEELING OF THE WORDS, the person CLEARLY VISIBLE and FRONT-LIT ' +
-      '(never a dark or distant silhouette, never backlit), serene and timeless, modern and elegant, radiant light, ' +
-      'rich evocative color, cinematic fine-art, ' + FIM_PROMPT,
+      'a real, present human figure CLEARLY VISIBLE and FRONT-LIT, the face and body lit and visible ' +
+      '(NEVER a dark or distant silhouette, NEVER backlit, NEVER just an extreme face close-up), graceful and timeless, ' +
+      'modern and elegant, soft refined light, cinematic fine-art portrait that carries the feeling of the words, ' + FIM_PROMPT,
     variar:
-      'VARIA SEMPRE o enquadramento, NUNCA só rostos em grande plano nem figuras distantes numa cidade néon: ora uma figura inteira num cenário que diz a frase, ' +
-      'ora uma pessoa de costas a caminhar para a luz, mãos que se estendem, alguém em movimento, duas figuras, um perfil, uma pessoa banhada de luz. ' +
-      'Pessoas de idades e traços diferentes, sempre VISÍVEIS e iluminadas de frente. A pessoa e o cenário traduzem o SENTIMENTO da frase (a ligação ao texto manda).',
+      'VARIA SEMPRE o enquadramento, NUNCA só rostos em grande plano nem figuras distantes: ora uma figura inteira num cenário que diz a frase, ' +
+      'ora uma pessoa de costas a caminhar para a luz, mãos que se estendem, alguém em movimento, duas figuras, um perfil sereno. ' +
+      'Pessoas de idades e traços diferentes, sempre REAIS, VISÍVEIS e iluminadas de frente, em luz suave e elegante (nunca néon). A pessoa e o cenário traduzem o SENTIMENTO da frase.',
   },
   {
     id: 'conceptual', label: 'Conceptual / abstrato', emoji: '◍',
-    descricao: 'Arte conceptual luminosa: uma metáfora que traduz a frase.',
+    descricao: 'Arte conceptual sóbria: uma metáfora elegante que traduz a frase.',
     promptBase:
-      'a striking conceptual fine-art image, ONE bold luminous metaphor that TRANSLATES THE WORDS, evocative and meaningful, ' +
-      'radiant light, rich evocative color, premium and modern, no people, ' + FIM_PROMPT,
+      'a refined conceptual fine-art image, ONE elegant luminous metaphor that TRANSLATES THE WORDS, evocative and meaningful, ' +
+      'soft radiant light, harmonious restrained color, premium and modern, no people, ' + FIM_PROMPT,
     variar:
       'VARIA SEMPRE a metáfora e os objetos (luz, vidro, água, fio/linha, portas, espelhos, raízes, pedras, sementes, pontes). ' +
-      'Nunca repitas o motivo. A metáfora TEM de ser uma tradução visual do sentimento da frase, não decoração nem sci-fi gratuito.',
+      'Nunca repitas o motivo. A metáfora TEM de ser uma tradução visual sóbria do sentimento da frase, não decoração, não sci-fi, não néon.',
   },
   {
     id: 'natureza', label: 'Natureza / cósmico', emoji: '🌌',
-    descricao: 'Paisagens luminosas (naturais ou cósmicas) que espelham a frase.',
+    descricao: 'Paisagens luminosas e serenas que espelham a frase.',
     promptBase:
-      'a breathtaking luminous natural or cosmic scene that MIRRORS THE FEELING OF THE WORDS, vivid and radiant, awe-inspiring, no people, ' + FIM_PROMPT,
+      'a breathtaking luminous and SERENE natural or cosmic scene that MIRRORS THE FEELING OF THE WORDS, elegant and awe-inspiring, no people, ' + FIM_PROMPT,
     variar:
       'VARIA SEMPRE a cena (oceanos de luz, montanhas, florestas radiantes, amanheceres, auroras, nebulosas, desertos, água suspensa). ' +
       'Nunca repitas. A paisagem espelha o sentimento da frase (vastidão, recomeço, travessia, raiz, etc.), não é cosmos por moda.',
