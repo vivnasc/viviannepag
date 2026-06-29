@@ -426,7 +426,7 @@ export default function CrescerPage() {
                   )}
                   {p.imagens && p.imagens.length > 0 && (
                     <div className="px-2 pt-2">
-                      <p className="text-[0.55rem] uppercase tracking-widest opacity-50 mb-1">carrossel · {p.imagens.length} imagens (publica à mão)</p>
+                      <p className="text-[0.55rem] uppercase tracking-widest opacity-50 mb-1">carrossel · {p.imagens.length} telas (agenda e publica-se sozinho)</p>
                       <div className="flex gap-1 overflow-x-auto pb-1">
                         {p.imagens.map((u, i) => (
                           <a key={i} href={u} target="_blank" rel="noreferrer" className="shrink-0" title={`tela ${i + 1} · abrir/baixar`}>
