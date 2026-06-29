@@ -81,8 +81,17 @@ function chapter(file){
   if(epigraph) h += `<p class="op-epi"><em>${inl(epigraph)}</em></p>`;
   h += `<div class="op-orn">${VEU(c)}</div>`;
   h += `</section>`;
+  // respiros: ornamento "· · ·" nos pontos de viragem (3 movimentos)
+  const nBreaks = file==='00b-nota-de-abertura.md' ? 0 : file==='08-epilogo.md' ? 1 : 2;
+  const n = paras.length;
+  const pos = new Set();
+  if(nBreaks===1) pos.add(Math.max(2, Math.min(n-1, Math.round(n/2))));
+  if(nBreaks===2){ pos.add(Math.max(2, Math.round(n/3))); pos.add(Math.min(n-1, Math.round(2*n/3))); }
   h += `<section class="body" style="--c:${c}">`;
-  paras.forEach((p,i)=> h += `<p${i===0?' class="first"':''}>${inl(p)}</p>`);
+  paras.forEach((p,i)=>{
+    if(pos.has(i) && i>0) h += `<div class="movbreak" style="--c:${c}">· · ·</div>`;
+    h += `<p${i===0?' class="first"':''}>${inl(p)}</p>`;
+  });
   h += `</section>`;
   return h;
 }
@@ -164,6 +173,7 @@ section.body{ break-before:page; }
 .body p.first{ }
 .body p.first::first-letter{ font-family:'Fraunces',serif; font-weight:400; font-size:40pt; line-height:0.82; color:${GOLD}; float:left; margin:1mm 2.4mm -1mm 0; }
 .body em{ font-style:italic; }
+.movbreak{ text-align:center; margin:8mm auto 7mm; color:var(--c); letter-spacing:.45em; font-size:11pt; opacity:.65; break-after:avoid; break-before:avoid; }
 
 /* ---- página de abertura ---- */
 .opener{ position:relative; height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
