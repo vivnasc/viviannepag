@@ -233,13 +233,15 @@ export interface VisualCrescer {
   descricao: string;
   // base do prompt da imagem (inglês). '' = sem imagem (fundo tipográfico).
   promptBase: string;
+  // como VARIAR a composição (para não sair sempre a mesma coisa, ex. só caras).
+  variar: string;
 }
 
 // RÉGUA DE IMAGEM (decisão da Vivianne, jun 2026): imagens que PARAM O SCROLL e
 // justificam pagar. SEMPRE futuristas, LUMINOSAS e vívidas. PROIBIDO escuro,
 // terroso, sépia, vintage, rústico, doméstico ou antiquado. Boa qualidade para
 // poderem ser animadas (motion) se ela quiser.
-const FIM_PROMPT =
+export const FIM_PROMPT =
   'futuristic, luminous and vivid, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
   'radiant dynamic light, bold iridescent color, sharp focus, modern and otherworldly. ' +
   'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated. ' +
@@ -248,34 +250,51 @@ const FIM_PROMPT =
 export const VISUAIS: VisualCrescer[] = [
   {
     id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑‍🚀',
-    descricao: 'A assinatura dela: figura humana futurista, visível e luminosa.',
+    descricao: 'A assinatura dela: pessoas futuristas, visíveis e luminosas, em cenas variadas.',
     promptBase:
-      'a luminous futuristic human figure CLEARLY VISIBLE and FRONT-LIT, face and features visible (never a dark silhouette, never backlit), ' +
-      'serene and timeless, sleek modern-futuristic styling, radiant glowing light, vivid iridescent colors, cinematic fine-art portrait, ' +
-      'an emotionally striking scene that embodies the idea, ' + FIM_PROMPT,
+      'a luminous futuristic human presence, CLEARLY VISIBLE and FRONT-LIT (never a dark silhouette, never backlit), ' +
+      'serene and timeless, sleek modern-futuristic styling, radiant glowing light, vivid iridescent colors, cinematic fine-art, ' + FIM_PROMPT,
+    variar:
+      'VARIA SEMPRE o enquadramento e a cena, NUNCA só rostos em grande plano: ora uma figura inteira, ora uma pessoa de costas a caminhar para uma luz radiante, ' +
+      'mãos que se estendem, uma silhueta luminosa (mas iluminada de frente, nunca escura) pequena numa paisagem futurista imensa, alguém em movimento, duas figuras, um perfil, ' +
+      'uma pessoa feita de luz e partículas, alguém suspenso entre estrelas. Pessoas de idades e traços diferentes. A pessoa e o cenário CARREGAM o sentimento da frase.',
   },
   {
     id: 'conceptual', label: 'Conceptual / abstrato', emoji: '◍',
     descricao: 'Arte conceptual futurista, ousada e luminosa.',
     promptBase:
-      'a striking futuristic conceptual fine-art image, ONE bold luminous metaphor for the idea, surreal and elevated, ' +
+      'a striking futuristic conceptual fine-art image, ONE bold luminous metaphor, surreal and elevated, ' +
       'glowing iridescent light, vivid saturated color, glass and light and energy, premium and modern, no people, ' + FIM_PROMPT,
+    variar:
+      'VARIA SEMPRE a metáfora e os objetos: luz, vidro, energia, geometria, água, fio/linha, portas, espelhos, esferas, fendas que se abrem. ' +
+      'Nunca repitas o mesmo motivo. A metáfora tem de ser uma tradução VISUAL do sentimento da frase, não decoração.',
   },
   {
     id: 'natureza', label: 'Natureza / cósmico', emoji: '🌌',
     descricao: 'Paisagens futuristas e cósmicas, radiantes.',
     promptBase:
-      'a breathtaking futuristic and cosmic scene (luminous skies, radiant water and light, stardust and nebulae, aurora, ' +
-      'crystalline and otherworldly landscapes), vivid and radiant, awe-inspiring and scroll-stopping, no people, ' + FIM_PROMPT,
+      'a breathtaking futuristic and cosmic scene, vivid and radiant, awe-inspiring and scroll-stopping, no people, ' + FIM_PROMPT,
+    variar:
+      'VARIA SEMPRE a cena: nebulosas, auroras, oceanos de luz, montanhas cristalinas, desertos de poeira estelar, água suspensa, céus radiantes. ' +
+      'Nunca repitas. A paisagem tem de espelhar o sentimento da frase (vastidão, recomeço, travessia, etc.).',
   },
   {
     id: 'minimal', label: 'Minimal / tipográfico', emoji: '𝐀',
     descricao: 'Só texto, fundo limpo (sem imagem).',
     promptBase: '',
+    variar: '',
   },
 ];
 
 export const getVisual = (id: string): VisualCrescer | undefined => VISUAIS.find((v) => v.id === id);
+
+// reforço de segurança ao gerar/regenerar a imagem por slide: garante o estilo
+// (luminoso, futurista, não escuro) mesmo em peças antigas com prompt fraco, e
+// que as PESSOAS saem visíveis e iluminadas (nunca silhueta escura).
+export function reforcoVisual(id: string): string {
+  const visivel = id === 'pessoas' ? 'human figure CLEARLY VISIBLE and front-lit, luminous, not a dark silhouette. ' : '';
+  return visivel + FIM_PROMPT;
+}
 
 // ---------------------------------------------------------------------------
 // VOZ — a Vivianne não é só poética (decisão dela, jun 2026): a escrita poética

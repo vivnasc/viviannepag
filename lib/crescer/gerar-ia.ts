@@ -63,7 +63,7 @@ REGRAS DE VOZ (duras):
 - NUNCA inventes biografia, marcos, clientes ou histórias pessoais da Vivianne. A autoridade vem do caminho ("reconheci primeiro em mim"), não de factos inventados.
 - NUNCA táticas de "viralizar" nem isco de engagement vazio. Verdade, não espetáculo da dor.
 - A LEGENDA nunca repete nem reformula a frase da capa (quem lê já a viu no ecrã): começa onde a frase acaba, aprofunda ou abre. Parágrafos curtos separados por linha em branco (\\n\\n). Termina com um convite leve (refletir, guardar, partilhar com quem precisa), nunca uma ordem nem venda.
-${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM mostra a cena/ideia de forma direta e bonita, nunca um símbolo a decifrar.'}
+${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM tem de TRADUZIR VISUALMENTE o sentimento da FRASE da capa (ligação imagem↔texto óbvia), nunca decorativa, genérica ou um símbolo a decifrar. Inventa uma cena concreta e ORIGINAL, diferente de tudo o que já saiu, dentro do estilo do visual. NUNCA repitas o mesmo enquadramento (ex.: não saiam sempre rostos).'}
 
 DEVOLVE APENAS JSON válido, sem texto à volta:
 {
@@ -71,7 +71,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "conceito": "o tema em 1 a 3 palavras (selo da capa)",
   "frase": "o texto da CAPA: ${formato.multi ? 'a 1.ª linha/faca que para o scroll' : 'a frase única (1 a 3 linhas curtas)'}, sem aspas",
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
-  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS para a imagem (${visual.label}): ${visual.promptBase}"`},
+  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS: UMA cena concreta e original que TRADUZA VISUALMENTE o sentimento da frase que escreveste acima (ligação imagem↔texto). Estilo ${visual.label}. ${visual.variar} Escreve a cena específica e termina com este estilo/qualidade: ${visual.promptBase}"`},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
   "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["As telas em sequência, EXATAMENTE conforme a estrutura do formato indicada acima. A 1.ª tela é a CAPA (igual ao campo frase). Cada tela é uma respiração/parágrafo conforme o formato, todas diferentes, sem repetir a ideia. Sem travessões, leitura clara e interessante do princípio ao fim."]' : ''}
 }`;
