@@ -8,13 +8,16 @@
 // publica carrosséis com esta revisão; os antigos são re-renderizados sozinhos.
 export const CAPA_REV = 2;
 
-export async function dispararRender(slug: string): Promise<boolean> {
+export async function dispararRender(slug: string, modo?: string): Promise<boolean> {
   const token = process.env.GITHUB_DISPATCH_TOKEN;
   const owner = process.env.GITHUB_REPO_OWNER ?? 'vivnasc';
   const repo = process.env.GITHUB_REPO_NAME ?? 'viviannepag';
   const ref = process.env.GITHUB_DISPATCH_REF ?? 'main';
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://viviannedossantos.com';
   if (!token) return false;
+  // modo='carrossel' => gera imagens 4:5 (sem MP4), para o carrossel de imagens.
+  const inputs: Record<string, string> = { slug, siteUrl };
+  if (modo) inputs.modo = modo;
   try {
     const res = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/actions/workflows/render-carrossel-veus.yml/dispatches`,
@@ -26,7 +29,7 @@ export async function dispararRender(slug: string): Promise<boolean> {
           'X-GitHub-Api-Version': '2022-11-28',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ref, inputs: { slug, siteUrl } }),
+        body: JSON.stringify({ ref, inputs }),
       },
     );
     return res.ok;
