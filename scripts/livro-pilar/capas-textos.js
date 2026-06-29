@@ -4,6 +4,11 @@
 // TypeScript. O pilar leva título em duas linhas; os manuais levam a marca numa
 // só linha (com o ponto) e o movimento por baixo.
 module.exports = {
+  'os-7-sinais': {
+    px: 104,
+    pt: { selo: 'IRMÃO DE OS SETE VÉUS', t1: 'Os 7 Sinais', t2: 'de Desencaixe', sub: 'O equilíbrio entre pertença e autenticidade', autora: 'VIVIANNE DOS SANTOS' },
+    en: { selo: 'A COMPANION TO THE SEVEN VEILS', t1: 'The 7 Signs', t2: 'of Not Belonging', sub: 'On belonging without making yourself smaller', autora: 'VIVIANNE DOS SANTOS' },
+  },
   'os-7-veus': {
     px: 142,
     pt: { selo: 'MÉTODO VS · VER E SOLTAR', t1: 'Os Sete', t2: 'Véus', sub: 'Vê o que te prende.\nSolta o que te faz repetir.', autora: 'VIVIANNE DOS SANTOS' },

@@ -17,6 +17,10 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const SLUG = process.env.SLUG;
 const DIAS_FILTER = (process.env.DIAS_FILTER || '').split(',').map((s) => s.trim()).filter(Boolean);
+// MODO=carrossel: em vez de MP4, gera cada slide como IMAGEM 4:5 (carrossel de
+// imagens a deslizar, como o da Crescer). Vazio = comportamento de sempre (MP4).
+const MODO = (process.env.MODO || '').trim();
+const modoCarrossel = MODO === 'carrossel';
 const BUCKET = 'viviannepag-assets';
 const SEG = 5.5; // segundos por slide (tempo de leitura; 3.5 era rapido demais nos reels de varios slides)
 const AUDIO_BASE = 'https://tdytdamtfillqyklgrmb.supabase.co/storage/v1/object/public/audios/albums/ancient-ground';
@@ -51,7 +55,7 @@ async function main() {
   const nbeats = col.theme?.subtipo === 'nbeats'; // TARDE: N beats sobre 1 cena dramática (1 só MP4)
   const visual = col.theme?.subtipo === 'visual'; // VISUAL (vir): 1 cena de luz + 1 linha
   const carta = col.theme?.subtipo === 'carta'; // CARTA DE RENOMEAR (vir): tipográfica, abre página a página
-  const kinetic = formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual || carta); // frase/beats com motion
+  const kinetic = !modoCarrossel && formato === 'reel' && (col.theme?.subtipo === 'kinetico' || col.theme?.subtipo === 'domingo' || duasFaces || nbeats || visual || carta); // frase/beats com motion
   // ÁUDIO PRÓPRIO da peça (som da cena OU música ambiente, gerado no estúdio e
   // guardado em theme.soulab.somUrl). Se existir, é o áudio do reel — vale para o
   // SOULAB E para o MÉTODO VS (partilham o mesmo estúdio de som). ANTES isto só lia
@@ -65,12 +69,13 @@ async function main() {
   // resolve o áudio de fundo de um dia: áudio próprio > (loja) faixa do dia / Ancient
   // Ground > (método/soulab) nada. Devolve null quando não há áudio nenhum.
   const audioDeFundo = (d) => somSoulab || (ehMetodoOuSoulab ? null : (d.faixa?.url || faixaUrl(semana, d.dia)));
-  const infografico = formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
+  const infografico = !modoCarrossel && formato === 'infografico'; // passa a ter MP4 animado (camada a camada)
   // sinais / o que ninguem / uma ideia: passaram a REELS MP4 (usam o ramo
   // generico Ken Burns + musica, como Ca em Casa e I am a Hero). Ja nao ha
   // carrossel de imagens nesta conta (o carrossel quase nao gera alcance).
   const carrossel = false;
-  const soImagens = formato === 'aneis'; // so os aneis ficam so imagem
+  // MODO=carrossel => só imagens (cada slide um PNG 4:5), sem MP4. (como os aneis)
+  const soImagens = modoCarrossel || formato === 'aneis';
   const H = formato === 'aneis' ? 1080 : (formato === 'infografico' || carrossel) ? 1350 : 1920;
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'veu-'));

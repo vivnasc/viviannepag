@@ -12,6 +12,37 @@ type SeedProduto = {
 
 const PRODUTOS: SeedProduto[] = [
   {
+    slug: 'os-7-sinais',
+    titulo: 'Os 7 Sinais de Desencaixe',
+    subtitulo: 'O equilíbrio entre pertença e autenticidade',
+    descricao: `**Livro · ~50.000 palavras · PDF imediato**
+
+O livro irmão de Os Sete Véus. Sobre o momento, calado e difícil de confessar, em que deixas de caber num lugar que foi bom, sem que nada nele tenha mudado, e sem que ninguém tenha feito nada de errado.
+
+**Os sete sinais:**
+1. Estás presente mas não te sentes pertencente.
+2. Começas a diminuir-te para caber.
+3. Sentes saudades de algo que nunca viveste.
+4. Oscilas entre hiper-adaptação e isolamento.
+5. O teu sistema nervoso começa a rejeitar certos ambientes.
+6. Começas a confundir paz com ausência de pessoas.
+7. Percebes que o problema nunca foi pertencer, mas o preço da pertença.
+
+Cada sinal em três movimentos: reconhecimento, aprofundamento e a viragem mais pequena e verdadeira. No fim, o véu do horizonte: não há um lugar de chegada, há uma forma de permanecer.
+
+Não é um livro sobre aprender a encaixar. É sobre pertencer sem precisares de te diminuíres.
+
+Por Vivianne dos Santos.`,
+    preco: '€14',
+    preco_original: '€19',
+    capa: '/produtos/os-7-sinais-capa.png',
+    ficheiro_path: 'produtos/os-7-sinais.pdf',
+    badge: 'livro · novo',
+    destaque: true,
+    publicado: true,
+    ordem: 0,
+  },
+  {
     slug: 'os-7-veus',
     titulo: 'Os Sete Véus',
     subtitulo: 'Vê o que te prende. Solta o que te faz repetir.',

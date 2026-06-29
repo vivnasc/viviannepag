@@ -8,7 +8,7 @@ import type { SaberVeu } from '@/lib/metodo/saber';
 import { CONTAS, type ContaId } from '@/lib/metodo/contas';
 import { limparTravessoes } from '@/lib/texto';
 
-export type FormatoId = 'dissolucao' | 'nome' | 'heranca' | 'baixo' | 'custo' | 'mito' | 'cena' | 'corpo';
+export type FormatoId = 'dissolucao' | 'nome' | 'heranca' | 'baixo' | 'custo' | 'mito' | 'cena' | 'corpo' | 'cenacine';
 
 export interface FormatoVS {
   id: FormatoId;
@@ -63,6 +63,14 @@ export const FORMATOS: Record<FormatoId, FormatoVS> = {
     id: 'corpo', nome: 'O que fica no corpo', emoji: '🫧',
     angulo: 'O ângulo do corpo: o alarme antigo que continua ligado num presente que já é seguro. O corpo lembra-se de um perigo que a vida já não tem, e continua de guarda por lealdade a um tempo que passou. Revela, sem jargão, que a pessoa está a proteger-se de algo que já não está cá. Mostra-o num gesto físico concreto, não numa explicação.',
     materia: (k) => `Leitura transpessoal: ${k.lentes.transpessoal}\nDe onde vem:\n${lista(k.origens, 3)}`,
+  },
+  // CENA CINEMATOGRÁFICA (formato PRÓPRIO, autónomo · NÃO entra na rotação do
+  // calendário): uma cena onde a IMAGEM manda, pensada para ganhar VIDA em vídeo
+  // (cenas sequenciadas). Texto mínimo e forte; a cena tem movimento natural.
+  cenacine: {
+    id: 'cenacine', nome: 'Cena cinematográfica', emoji: '🎬',
+    angulo: 'Uma CENA cinematográfica onde a IMAGEM manda e o texto é mínimo (3 a 4 momentos curtos, fortes). Uma cena com MOVIMENTO natural (água, vento, fumo, luz, areia, nuvens) que vai ganhar vida em vídeo. A revelação entra em poucas linhas afiadas, pousadas sobre a cena, nunca a explicar. A 1.ª linha é a faca; a última, a viragem. A cena (fundoPrompt) é vívida e ampla, feita para se mover.',
+    materia: (k) => `Cenas (inspira-te, NÃO copies):\n${lista(k.cenas, 5)}\nLeitura transpessoal: ${k.lentes.transpessoal}`,
   },
 };
 

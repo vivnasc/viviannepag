@@ -31,8 +31,22 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos' };
-  const tipoId = (body.tipo ?? 'frase') as TipoSoulabId;
+  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string; modo?: 'abre' | 'encaminha' };
+  const modo = body.modo === 'encaminha' ? 'encaminha' : 'abre';
+  let tipoId = (body.tipo ?? 'frase') as TipoSoulabId;
+
+  // CONTINUAR O FIO: parte 2 de um reel que resultou. Lê a peça-mãe (frase, conceito,
+  // tipo) e herda o tipo dela, para o seguimento sair no mesmo registo.
+  let continuarDe: { frase: string; conceito?: string } | null = null;
+  if (body.continuarDe) {
+    const supabaseC = getSupabaseAdmin();
+    const { data } = await supabaseC.from('carousel_collections').select('dias, theme').eq('slug', body.continuarDe).maybeSingle();
+    const s = (data?.dias as Array<{ slides?: Array<{ texto?: string; conceito?: string }> }> | undefined)?.[0]?.slides?.[0];
+    if (s?.texto) continuarDe = { frase: s.texto, conceito: s.conceito };
+    const tp = (data?.theme as { soulab?: { tipo?: string } } | undefined)?.soulab?.tipo;
+    if (tp && getTipoSoulab(tp)) tipoId = tp as TipoSoulabId;
+  }
+
   if (!getTipoSoulab(tipoId)) return NextResponse.json({ erro: 'tipo-invalido' }, { status: 400 });
   const quantos = Math.min(4, Math.max(1, body.quantos ?? 1));
   const tema = body.tema?.trim() || undefined;
@@ -62,7 +76,7 @@ export async function POST(req: Request) {
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     try {
-      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg);
+      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe, modo);
       evitar.push(peca.frase); (porTipo[tipoId] = porTipo[tipoId] || []).push(peca.frase);
       if (peca.conceito) evitar.push(peca.conceito);
       if (peca.fundoPrompt) evitarImg.push(peca.fundoPrompt); // não repetir a cena nas seguintes

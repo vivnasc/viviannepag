@@ -21,7 +21,10 @@ export const FONTES_TEXTO = [
   { id: 'mono', label: 'Mono' },
 ] as const;
 export type FonteTexto = (typeof FONTES_TEXTO)[number]['id'];
-export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string }
+// alinhV/alinhH: posição do texto sobre a imagem (à escolha; default centro/centro).
+export type AlinhV = 'cima' | 'centro' | 'baixo';
+export type AlinhH = 'esq' | 'centro' | 'dir';
+export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: AlinhV; alinhH?: AlinhH; corFundo?: string }
 const FONT_MAP: Record<FonteTexto, string> = { serif: FONT_SERIF, sans: FONT_SANS, mono: FONT_MONO };
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
@@ -119,7 +122,8 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
   // suave · surgir (palavra a palavra, sem cursor). Back-compat: domingo => bloom.
   const efeitoFinal: EfeitoTexto = efeito ?? (ehDomingo ? 'bloom' : 'maquina');
   const pal = PALETAS[mundo];
-  const BG1 = pal.bg, BG2 = pal.bg2, ACCENT = pal.destaque;
+  // cor da PÁGINA à escolha (tipografia.corFundo): substitui a paleta do mundo.
+  const BG1 = tipografia?.corFundo || pal.bg, BG2 = tipografia?.corFundo || pal.bg2, ACCENT = pal.destaque;
   const a = (hex: string, alpha: string) => `${hex}${alpha}`;
   const H = ratio === '4:5' ? 1350 : 1920;
   const ar = ratio === '4:5' ? '1080 / 1350' : '1080 / 1920';
@@ -162,6 +166,10 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
   const corBase = tipografia?.cor ?? '#F4ECDD';     // a frase
   const corPalavra = tipografia?.cor ?? '#F8EFE9';  // palavra normal
   const accentTexto = tipografia?.corDestaque ?? accent; // palavra em realce + cursor
+  // alinhamento/posição do texto sobre a imagem (à escolha; default centro/centro)
+  const alignV = tipografia?.alinhV === 'cima' ? 'flex-start' : tipografia?.alinhV === 'baixo' ? 'flex-end' : 'center';
+  const alignText: 'left' | 'center' | 'right' = tipografia?.alinhH === 'esq' ? 'left' : tipografia?.alinhH === 'dir' ? 'right' : 'center';
+  const alignFlexH = alignText === 'left' ? 'flex-start' : alignText === 'right' ? 'flex-end' : 'center';
   const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série (veu.a.veu)
   // a MARCA é parametrizável: por defeito a veu.a.veu, mas outra conta (ex. Soulab)
   // passa o seu selo/assinatura/site e pode esconder o selo e o rótulo do conceito.
@@ -199,9 +207,11 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
           </div>
         )}
 
-        {/* frase */}
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 120px', zIndex: 2 }}>
-          <p style={{ fontFamily: fontFam, fontWeight: 300, fontSize: tamFinal, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: 'center', color: corBase, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
+        {/* frase — alinhamento/posição à escolha (default centro/centro). Quando o texto
+            assenta EM BAIXO, recua mais (250) para NÃO tapar o rodapé (assinatura+site,
+            em bottom:130). Em cima, o padrão chega (não há cabeçalho na Crescer). */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: alignV, justifyContent: alignFlexH, padding: tipografia?.alinhV === 'baixo' ? '170px 120px 250px' : '170px 120px', zIndex: 2 }}>
+          <p style={{ fontFamily: fontFam, fontWeight: 300, fontSize: tamFinal, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: alignText, color: corBase, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
               const sombra = imageUrl ? (dest ? '0 2px 24px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)') : 'none';

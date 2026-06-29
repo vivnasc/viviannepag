@@ -32,6 +32,13 @@ motores diferentes. Não reframes a didática à luz do método nem o contrário
    voz"); som ambiente só nos reels que MEXEM (cena · não normalizes · espelho),
    nunca nas cartas que se LÊEM nem no sussurro do Repara; a carta de renomear é
    tipográfica (não Flux) — nem imagem nem som.
+7. **A Vivianne NÃO é "testemunha" de nada, e NÃO vende a alma para crescer.**
+   Regra PERMANENTE e inviolável (ela está farta de a repetir). NUNCA propor
+   crescimento à custa da autenticidade: nada de táticas de "viralizar", fórmulas
+   de engagement, ou posicioná-la como "testemunha"/caso pessoal performático para
+   ganhar alcance. O alcance, se vier, vem da verdade da voz, nunca de a trair.
+   Antes de sugerir qualquer coisa de "crescer/impacto", passar este filtro: isto
+   é fiel à alma dela, ou é vender a alma? Se for o segundo, não se propõe.
 
 ## Os TRÊS perfis/produtos (NÃO misturar)
 

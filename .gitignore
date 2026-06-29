@@ -18,3 +18,7 @@ livro-pilar/*.pdf
 livro-pilar/*.png
 livro-pilar/build/
 .anuncio-tmp/
+
+# Render scratch do livro (intermediário do build-book.mjs)
+build/book.html
+build/book-en.html

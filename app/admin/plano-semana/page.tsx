@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 // as 6 frases EM TEXTO; tu lês, editas, e só depois crias os posts.
 
 type Dia = { dia: string; wd?: number; emoji: string; label: string; gen: string; formato: string; frase: string; destaque: string[]; legenda: string; fundoPrompt?: string };
-type Estado = { curso: string; tema: string; arenas?: string[]; plano: Dia[]; criados: Record<number, boolean> };
+type Estado = { curso: string; tema: string; arenas?: string[]; plano: Dia[]; criados: Record<number, boolean>; semSeg?: string };
 
 const CHAVE = 'veu-plano-atual';
 
@@ -56,6 +56,10 @@ function segundaComOffset(off: number): Date {
 }
 // data real do dia "wd" (1=2ª…7=dom) na semana mostrada
 const dataDoDiaNaSemana = (seg: Date, wd: number) => { const d = new Date(seg); d.setDate(seg.getDate() + (wd - 1)); return isoLocal(d); };
+// ISO local (YYYY-MM-DD) -> Date local (sem o desvio do toISOString/UTC)
+const parseISOLocal = (s: string) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+// quantas semanas separam uma 2.ª-feira da 2.ª-feira desta semana (para alinhar o navegador ◀▶)
+const offsetDeSegunda = (seg: Date) => Math.round((seg.getTime() - segundaComOffset(0).getTime()) / (7 * 24 * 3600 * 1000));
 
 function realcar(frase: string, destaque: string[]) {
   if (!destaque.length) return <>{frase}</>;
@@ -76,12 +80,20 @@ export default function PlanoSemanaPage() {
   const [msg, setMsg] = useState<string | null>(null);
 
   const [semOffset, setSemOffset] = useState(0); // 0 = esta semana, +1 = próxima…
+  // semSeg = a 2.ª-feira (ISO) da semana a que o RASCUNHO pertence. É a fonte de
+  // verdade do agendamento: enquanto houver rascunho, agenda-se SEMPRE nesta
+  // semana, mesmo depois de recarregar (antes, o semOffset voltava a 0 e os
+  // posts caíam na semana errada).
+  const [semSeg, setSemSeg] = useState<string | null>(null);
   const cursoAtual = CURSOS.find((c) => c.id === curso) ?? CURSOS[0];
-  const targetSeg = segundaComOffset(semOffset);
+  const targetSeg = semSeg ? parseISOLocal(semSeg) : segundaComOffset(semOffset);
   const semEd = semanaEditorialAtual(targetSeg); // tema do plano trimestral DESSA semana
 
   const aplicar = useCallback((e: Estado) => {
     setCurso(e.curso ?? 'transpessoal'); setTema(e.tema ?? ''); setArenas(e.arenas?.length ? e.arenas : ['pessoal']); setPlano(e.plano ?? []); setCriados(e.criados ?? {});
+    // restaura a semana do rascunho (para "criar" agendar SEMPRE na semana certa)
+    if (e.semSeg) { setSemSeg(e.semSeg); setSemOffset(Math.max(0, offsetDeSegunda(parseISOLocal(e.semSeg)))); }
+    else setSemSeg(null);
   }, []);
 
   // grava no servidor (cross-device) com debounce, para não disparar a cada tecla
@@ -119,16 +131,16 @@ export default function PlanoSemanaPage() {
 
   function usarSemanaDoPlano() {
     const ar = semEd.arenas?.length ? semEd.arenas : ['pessoal'];
-    setCurso(semEd.curso); setTema(semEd.tema); setArenas(ar); setPlano([]); setCriados({});
-    guardar({ curso: semEd.curso, tema: semEd.tema, arenas: ar, plano: [], criados: {} });
+    setCurso(semEd.curso); setTema(semEd.tema); setArenas(ar); setPlano([]); setCriados({}); setSemSeg(null);
+    guardar({ curso: semEd.curso, tema: semEd.tema, arenas: ar, plano: [], criados: {}, semSeg: undefined });
   }
   // navega pelas semanas do plano trimestral (carrega o tema e a arena sozinhos, não escolhes nada)
   function irSemana(delta: number) {
     const no = semOffset + delta; if (no < 0) return; // não planear o passado
     const se = semanaEditorialAtual(segundaComOffset(no));
     const ar = se.arenas?.length ? se.arenas : ['pessoal'];
-    setSemOffset(no); setCurso(se.curso); setTema(se.tema); setArenas(ar); setPlano([]); setCriados({});
-    guardar({ curso: se.curso, tema: se.tema, arenas: ar, plano: [], criados: {} });
+    setSemOffset(no); setCurso(se.curso); setTema(se.tema); setArenas(ar); setPlano([]); setCriados({}); setSemSeg(null);
+    guardar({ curso: se.curso, tema: se.tema, arenas: ar, plano: [], criados: {}, semSeg: undefined });
   }
   // troca MANUAL da arena (a base vem sozinha; aqui ajustas se a semana pedir outra)
   function toggleArena(id: string) {
@@ -140,10 +152,10 @@ export default function PlanoSemanaPage() {
     });
   }
   const guardar = useCallback((next: Partial<Estado>) => {
-    const merged: Estado = { curso, tema, arenas, plano, criados, ...next };
+    const merged: Estado = { curso, tema, arenas, plano, criados, semSeg: semSeg ?? undefined, ...next };
     try { localStorage.setItem(CHAVE, JSON.stringify(merged)); } catch {}
     salvarServidor(merged);
-  }, [curso, tema, arenas, plano, criados, salvarServidor]);
+  }, [curso, tema, arenas, plano, criados, semSeg, salvarServidor]);
 
   async function rascunhar() {
     const t = tema.trim();
@@ -161,7 +173,10 @@ export default function PlanoSemanaPage() {
         return;
       }
       if (!r.ok) { setErro((j.erro ?? '') + (j.detalhe ? `: ${j.detalhe}` : '')); return; }
-      setPlano(j.plano ?? []); setCriados({}); guardar({ plano: j.plano ?? [], criados: {} });
+      // liga o rascunho à semana atual: a partir daqui, "criar" agenda SEMPRE aqui
+      const seg = isoLocal(segundaComOffset(semOffset));
+      setSemSeg(seg);
+      setPlano(j.plano ?? []); setCriados({}); guardar({ plano: j.plano ?? [], criados: {}, semSeg: seg });
       setMsg('Rascunho pronto. Lê, ajusta o que quiseres, e depois cria cada post.');
     } catch (e) { setErro(String(e)); }
     finally { setRascunhando(false); }
@@ -253,7 +268,7 @@ export default function PlanoSemanaPage() {
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-2xl font-semibold">Plano da Semana · Véu a Véu</h1>
-          <Link href="/admin/agenda" className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
+          <Link href={`/admin/agenda?semana=${isoLocal(targetSeg)}`} className="text-[0.7rem] opacity-60 hover:opacity-100">Agenda →</Link>
         </div>
         <p className="text-[0.82rem] opacity-70 mb-1">Conta <b>didática</b>. Âmbito: psicologia transpessoal, constelação familiar (heranças sistémicas), espiritualidade e desenvolvimento.</p>
         <p className="text-[0.78rem] opacity-60 mb-4">Vês <b>as frases reais da semana</b> (8 posts, Seg→Dom, com 2 à quarta), editas à mão, e só depois crias cada post. Nunca às cegas.</p>
@@ -314,6 +329,9 @@ export default function PlanoSemanaPage() {
 
         {erro && <p className="mb-3 text-[0.75rem] text-red-300">{erro}</p>}
         {msg && <p className="mb-3 text-[0.75rem] text-salvia">{msg}</p>}
+        {plano.length > 0 && (
+          <Link href={`/admin/agenda?semana=${isoLocal(targetSeg)}`} className="inline-block mb-3 text-[0.74rem] text-ambar/85 hover:text-ambar no-underline">→ ver na Agenda · semana de {isoLocal(targetSeg).split('-').reverse().slice(0, 2).join('/')}</Link>
+        )}
 
         {plano.length === 0 && !rascunhando && (
           <p className="text-[0.8rem] opacity-50 text-center py-10">Escolhe a matéria e o tema, depois carrega <b>✍️ rascunhar a semana</b> para veres as frases.</p>

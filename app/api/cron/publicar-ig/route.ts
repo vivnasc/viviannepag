@@ -23,11 +23,17 @@ const VIDEO = ['kinetico', 'domingo', 'duasfaces', 'nbeats', 'carta', 'visual', 
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; crescer?: { formato?: string } | null };
+
+// CRESCER · o "ensaio" é um CARROSSEL DE IMAGENS (telas 4:5), não um reel: prepara-se
+// com modo=carrossel e publica-se como carrossel (não MP4). Os outros crescer seguem
+// o caminho normal (reel). Assim "estar agendado" basta — publica-se sozinho.
+const ehCrescerCarrossel = (t: Theme) => t.marca === 'crescer' && t.crescer?.formato === 'ensaio';
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)
 function mediaPronta(conta: string, chave: string, t: Theme, d?: Dia): boolean {
+  if (ehCrescerCarrossel(t)) return (d?.imagens?.length ?? 0) >= 2; // carrossel de imagens pronto
   if (t.externo) return !!d?.videoUrl || (d?.imagens?.length ?? 0) >= 1; // CSV: media já pronta
   if (conta === 'loja') return !!d?.videoUrl;
   if (VIDEO.includes(chave)) return !!d?.videoUrl;
@@ -107,6 +113,10 @@ export async function GET(req: NextRequest) {
     // No ciclo seguinte (~15 min) já está pronta e publica-se. Assim, estar
     // na Agenda basta — a Vivianne não carrega em nada. ──
     if (!mediaPronta(conta, chave, t, d)) {
+      // CRESCER: a Vivianne renderiza e VÊ antes de publicar. O publicador NUNCA
+      // renderiza o carrossel sozinho nem publica algo por ver — espera que ela
+      // renderize (🖼) e só depois, à hora, publica o que já está renderizado.
+      if (ehCrescerCarrossel(t)) { resultados.push({ slug: row.slug, estado: 'à espera que renderizes o carrossel (não publico por ver)' }); continue; }
       const pedido = t.renderPedidoEm ?? 0;
       const haPouco = Date.now() - pedido < 20 * 60 * 1000; // já pedido nos últimos 20 min?
       if (!haPouco) {
@@ -121,7 +131,10 @@ export async function GET(req: NextRequest) {
 
     // que media publicar?
     let r: { ok: boolean; id?: string; erro?: string };
-    if (t.externo) {
+    if (ehCrescerCarrossel(t)) {
+      // CRESCER · carrossel de imagens (telas 4:5), publicado como carrossel.
+      r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d?.imagens ?? [] });
+    } else if (t.externo) {
       if (d?.videoUrl) r = await publicarInstagram({ token, igUserId, caption, tipo: 'reel', videoUrl: d.videoUrl });
       else if ((d?.imagens?.length ?? 0) >= 2) r = await publicarInstagram({ token, igUserId, caption, tipo: 'carrossel', imageUrls: d!.imagens! });
       else r = await publicarInstagram({ token, igUserId, caption, tipo: 'imagem', imageUrls: d?.imagens ?? [] });

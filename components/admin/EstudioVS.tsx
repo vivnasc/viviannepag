@@ -423,6 +423,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
     salvarTempo: (slug: string, seg: number) => void;
     novaImagem: (slug: string) => void;
     renderizar: (slug: string) => void;
+    gerarCenas: (slug: string) => void;
     agendar: (slug: string, data: string, hora: string) => void;
     desagendar: (slug: string) => void;
   };
@@ -466,6 +467,7 @@ function Estudio({ peca, slide, contaNome, acaoSlug, onFechar, acoes }: {
           {peca.clipUrl && <span className="px-1.5 py-0.5 rounded text-[#0F0F1A]" style={{ background: dz }}>🎬 com vida</span>}
           <button onClick={() => acoes.regerarTexto(peca.slug)} disabled={disabled} title="regerar o texto (nova revelação para este véu/formato; mantém a data)" className="ml-auto px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '♻ regerar texto'}</button>
           <button onClick={() => acoes.novaImagem(peca.slug)} disabled={disabled} title="gerar outra imagem (mantém o texto)" className="px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🖼 outra imagem'}</button>
+          {peca.formato === 'cenacine' && <button onClick={() => acoes.gerarCenas(peca.slug)} disabled={disabled || !peca.imageUrl} title={peca.imageUrl ? 'trazer a cena a movimento cinematográfico (vídeo contínuo). Depois carrega 🎬 render para o texto por cima.' : 'gera a imagem primeiro'} className="px-2 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: dz, color: dz }}>{busy ? '…' : '🎞 trazer a cena a movimento'}</button>}
           <button onClick={() => acoes.renderizar(peca.slug)} disabled={disabled} title="renderizar o reel final (MP4)" className="px-2 py-0.5 rounded border border-white/20 disabled:opacity-40">{busy ? '…' : '🎬 render'}</button>
         </div>
 
@@ -744,6 +746,21 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       const r = await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) });
       const j = await r.json().catch(() => ({}));
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Render disparado. O MP4 aparece daqui a alguns minutos (recarrega).');
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug]);
+
+  // CENA CINEMATOGRÁFICA (só formato 'cenacine'): traz a IMAGEM a movimento contínuo
+  // (Kling, ~40s) — gera N clips encadeados pelo último frame e cola num só MP4 sem
+  // cortes (theme.soulab.clipUrl). Depois RE-RENDERIZA (🎬 render) para pôr o texto por
+  // cima. Pré-requisito: a peça tem de ter imagem. Ver CENAS-ANUNCIO.md.
+  const gerarCenas = useCallback(async (slug: string) => {
+    if (acaoSlug) return;
+    if (typeof window !== 'undefined' && !window.confirm('Trazer esta CENA a movimento cinematográfico (vídeo contínuo ~40s)?\n\nGera vários clips Kling encadeados a partir da imagem — corre nos GitHub Actions, demora alguns minutos e tem custo. Depois carrega 🎬 render para pôr o texto por cima.')) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A trazer a cena a movimento (alguns minutos)…');
+    try {
+      const r = await fetch('/api/admin/metodo-vs/reel-narrativo-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, nClips: 4, dur: 10 }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); else setMsg('Cena a ganhar vida. O vídeo contínuo aparece daqui a alguns minutos; depois carrega 🎬 render para pôr o texto por cima.');
     } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
   }, [acaoSlug]);
 
@@ -1062,7 +1079,11 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
         <div className="flex flex-wrap items-center gap-2 mb-5">
           <button onClick={() => chamar({}, 'sorte')} disabled={!!busy} className="px-3 py-2 rounded-lg border border-white/20 text-[0.78rem] hover:border-ambar disabled:opacity-40">{busy === 'sorte' ? '…' : '✦ surpreende-me'}</button>
           <span className="opacity-40 text-[0.7rem]">ou um formato:</span>
-          {FORMATOS_LISTA.map((f) => (
+          {FORMATOS_LISTA
+            // a Cena cinematográfica é um formato PRÓPRIO da MÃE (vídeo de cenas
+            // sequenciadas), não das filhas — só aparece na mãe, sem se colar aos outros.
+            .filter((f) => f.id !== 'cenacine' || cfg.id === 'mae')
+            .map((f) => (
             <button key={f.id} onClick={() => chamar({ formato: f.id }, f.id)} disabled={!!busy} className="px-2.5 py-1.5 rounded-lg border border-white/15 text-[0.74rem] hover:border-ambar disabled:opacity-40">{busy === f.id ? '…' : `${f.emoji} ${f.nome}`}</button>
           ))}
         </div>
@@ -1158,7 +1179,7 @@ export default function EstudioVS({ conta }: { conta: MetodoVSContaId }) {
       {pecaAberta && (
         <Estudio
           peca={pecaAberta} slide={slide} contaNome={contaNome} acaoSlug={acaoSlug} onFechar={() => setEstudioSlug(null)}
-          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, gerarVoz, regerarTexto, salvarEfeito, salvarTransicao, salvarTipografia, salvarTempo, novaImagem, renderizar, agendar, desagendar }}
+          acoes={{ salvarTexto, salvarLegenda, darMovimento, gerarSom, gerarVoz, regerarTexto, salvarEfeito, salvarTransicao, salvarTipografia, salvarTempo, novaImagem, renderizar, gerarCenas, agendar, desagendar }}
         />
       )}
     </main>

@@ -30,6 +30,8 @@ export function contaDe(theme: { marca?: string; universo?: string; curso?: stri
   if (theme?.marca && IDS.has(theme.marca)) return theme.marca; // marca explícita (ex.: importado por CSV)
   // Método VS (conta-mãe): publica na conta vivianne.dos.santos (loja), como as séries.
   if (theme?.marca === 'metodovs' || slug.startsWith('metodovs-')) return 'loja';
+  // Crescer (crescimento & evolução): conteúdo da Vivianne, publica em vivianne.dos.santos.
+  if (theme?.marca === 'crescer' || slug.startsWith('crescer-')) return 'loja';
   if (theme?.universo || /^semana-\d+-/.test(slug)) return 'loja'; // carrosséis 7 Véus
   return 'veuaveu';
 }

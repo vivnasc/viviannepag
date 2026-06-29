@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
 // texto do post sem depender de mim). Guarda em dias[0] — o mesmo que o cron lê.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { slug?: string; legenda?: string; hashtags?: string[] | string; efeito?: string; transicao?: string; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string }; segPorMomento?: number };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; legenda?: string; hashtags?: string[] | string; efeito?: string; transicao?: string; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string }; segPorMomento?: number };
   if (!body.slug) return NextResponse.json({ erro: 'falta slug' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
