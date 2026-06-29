@@ -103,7 +103,7 @@ async function main() {
         await page.close();
         const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-${i}.png`;
         const { error: pe } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(pngPath), { contentType: 'image/png', upsert: true });
-        if (!pe) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+        if (!pe) imagensDia.push(`${supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl}?v=${Date.now()}`);
         console.log(`[carrossel] dia ${d.dia} slide ${i}`);
       }
       resultados.push({ dia: d.dia, videoUrl: null, imagens: imagensDia });
@@ -254,7 +254,7 @@ async function main() {
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
-        else videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
+        else videoUrl = `${supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl}?v=${Date.now()}`;
       } catch (e) { console.error(`[kinetic mp4] ${e.message}`); }
 
       // poster: ultimo frame (frase completa) como imagem
@@ -266,7 +266,7 @@ async function main() {
         const last = path.join(framesDir, `f${String(coverIdx).padStart(4, '0')}.png`);
         const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/cover.png`;
         const { error: ce } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(last), { contentType: 'image/png', upsert: true });
-        if (!ce) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+        if (!ce) imagensDia.push(`${supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl}?v=${Date.now()}`);
       } catch (e) { console.log(`[poster] ${e.message}`); }
 
       resultados.push({ dia: d.dia, videoUrl, imagens: imagensDia });
@@ -290,7 +290,7 @@ async function main() {
         await p0.close();
         const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-0.png`;
         const { error: pe } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(feedPng), { contentType: 'image/png', upsert: true });
-        if (!pe) imagensInfo.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+        if (!pe) imagensInfo.push(`${supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl}?v=${Date.now()}`);
       } catch (e) { console.log(`[info feed] ${e.message}`); }
 
       // (b) MP4 9:16 animado (camada a camada). Mais longo = tempo de leitura.
@@ -322,7 +322,7 @@ async function main() {
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
-        else videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
+        else videoUrl = `${supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl}?v=${Date.now()}`;
       } catch (e) { console.error(`[info mp4] ${e.message}`); }
 
       resultados.push({ dia: d.dia, videoUrl, imagens: imagensInfo });
@@ -361,7 +361,10 @@ async function main() {
       // upload da imagem do slide (versao 4:5 para o carrossel de feed)
       const dest = `carrossel-veus/${SLUG}/dia-${d.dia}/slide-${i}.png`;
       const { error: pngErr } = await supabase.storage.from(BUCKET).upload(dest, fs.readFileSync(uploadPath), { contentType: 'image/png', upsert: true });
-      if (!pngErr) imagensDia.push(supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl);
+      // CACHE-BUSTING: o ficheiro fica no MESMO caminho (upsert), mas o CDN serve a
+      // versao antiga ~1h pelo URL. Um ?v=timestamp por render forca a versao nova
+      // (senao re-renderizar nao muda nada no admin/feed). Ver CLAUDE.md.
+      if (!pngErr) imagensDia.push(`${supabase.storage.from(BUCKET).getPublicUrl(dest).data.publicUrl}?v=${Date.now()}`);
       console.log(`[shot] dia ${d.dia} slide ${i}`);
     }
 
@@ -473,7 +476,7 @@ async function main() {
         const filePath = `carrossel-veus/${SLUG}/dia-${d.dia}.mp4`;
         const { error: upErr } = await supabase.storage.from(BUCKET).upload(filePath, fs.readFileSync(path.join(diaDir, 'out.mp4')), { contentType: 'video/mp4', upsert: true });
         if (upErr) console.error(`[upload mp4] ${upErr.message}`);
-        else videoUrl = supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl;
+        else videoUrl = `${supabase.storage.from(BUCKET).getPublicUrl(filePath).data.publicUrl}?v=${Date.now()}`;
       } catch (e) { console.error(`[mp4] ${e.message}`); }
     }
 
