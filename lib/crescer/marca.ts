@@ -243,21 +243,22 @@ export interface VisualCrescer {
 // O estilo serve a mensagem, nunca ao contrário. PROIBIDO escuro, sépia, vintage,
 // rústico, doméstico, antiquado, e o cliché néon/cyberpunk quando não serve a frase.
 export const FIM_PROMPT =
-  'luminous but SOBER, refined and elegant, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
-  'soft radiant natural light, harmonious and RESTRAINED color (muted, sophisticated, tasteful), sharp focus, modern, elegant and timeless. ' +
+  'FUTURISTIC, modern, sleek and elevated, luminous, scroll-stopping, ultra high quality, premium cinematic fine-art, ' +
+  'clean radiant light, refined elegant color (rich and beautiful but NEVER neon), sharp focus, contemporary and otherworldly yet tasteful. ' +
   'The image CARRIES the meaning of the words; style serves the message. ' +
-  'NOT dark, NOT dim, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT domestic, NOT antiquated. ' +
-  'ABSOLUTELY NO neon, NO cyberpunk, NO garish or oversaturated colors, NO glowing electric / RGB / laser / club lights. ' +
+  'NO neon, NO cyberpunk, NO garish or oversaturated colors, NO RGB / laser / club lights. ' +
+  'AND NOT dark, NOT muddy, NOT sepia, NOT vintage, NOT rustic, NOT earthy, NOT a home/house interior, NOT a domestic scene, NOT dried flowers, NOT antiquated, NOT a plain everyday photo. ' +
   'no text, no letters, no watermark, no logos --ar 9:16 --style raw';
 
 export const VISUAIS: VisualCrescer[] = [
   {
     id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑',
-    descricao: 'Pessoas reais, visíveis e elegantes (sem silhuetas, sem néon), na cena da frase.',
+    descricao: 'Pessoas reais e visíveis, num mundo FUTURISTA e luminoso (sem néon, sem silhuetas, sem doméstico).',
     promptBase:
-      'a real, present human figure CLEARLY VISIBLE and FRONT-LIT, the face and body lit and visible ' +
-      '(NEVER a dark or distant silhouette, NEVER backlit, NEVER just an extreme face close-up), graceful and timeless, ' +
-      'modern and elegant, soft refined light, cinematic fine-art portrait that carries the feeling of the words, ' + FIM_PROMPT,
+      'a FUTURISTIC, modern and elegant human figure CLEARLY VISIBLE and FRONT-LIT, face and body lit and visible ' +
+      '(NEVER a dark or distant silhouette, NEVER backlit, NEVER just a face close-up), sleek contemporary-futuristic styling, ' +
+      'set in a luminous modern, futuristic or otherworldly environment (never a home interior, never an ordinary everyday scene), ' +
+      'refined elegant color, cinematic fine-art that carries the feeling of the words, ' + FIM_PROMPT,
     variar:
       'VARIA SEMPRE o enquadramento, NUNCA só rostos em grande plano nem figuras distantes: ora uma figura inteira num cenário que diz a frase, ' +
       'ora uma pessoa de costas a caminhar para a luz, mãos que se estendem, alguém em movimento, duas figuras, um perfil sereno. ' +
@@ -277,7 +278,7 @@ export const VISUAIS: VisualCrescer[] = [
     id: 'natureza', label: 'Natureza / cósmico', emoji: '🌌',
     descricao: 'Paisagens luminosas e serenas que espelham a frase.',
     promptBase:
-      'a breathtaking luminous and SERENE natural or cosmic scene that MIRRORS THE FEELING OF THE WORDS, elegant and awe-inspiring, no people, ' + FIM_PROMPT,
+      'a breathtaking FUTURISTIC luminous cosmic or otherworldly scene that MIRRORS THE FEELING OF THE WORDS (radiant skies, light, water, stardust, crystalline landscapes), elegant and awe-inspiring, no people, ' + FIM_PROMPT,
     variar:
       'VARIA SEMPRE a cena (oceanos de luz, montanhas, florestas radiantes, amanheceres, auroras, nebulosas, desertos, água suspensa). ' +
       'Nunca repitas. A paisagem espelha o sentimento da frase (vastidão, recomeço, travessia, raiz, etc.), não é cosmos por moda.',

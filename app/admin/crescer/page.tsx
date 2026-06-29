@@ -269,6 +269,9 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
   const [tams, setTams] = useState<number[]>(iniciais.map((_, i) => tips[i]?.tamanho ?? base.tamanho ?? (i === 0 ? 80 : 46)));
   const [cores, setCores] = useState<string[]>(ini('cor', CRESCER.paleta.texto) as string[]);
   const [fundos, setFundos] = useState<string[]>(iniciais.map((_, i) => tips[i]?.corFundo ?? ''));
+  const [alinhHs, setAlinhHs] = useState<AlinhH[]>(ini('alinhH', 'centro') as AlinhH[]);
+  const [alinhVs, setAlinhVs] = useState<AlinhV[]>(ini('alinhV', 'centro') as AlinhV[]);
+  const [entres, setEntres] = useState<number[]>(iniciais.map((_, i) => tips[i]?.entrelinha ?? base.entrelinha ?? 1.18));
   const setT = (i: number, v: string) => setTextos((s) => s.map((x, k) => (k === i ? v : x)));
   const set1 = <T,>(setS: React.Dispatch<React.SetStateAction<T[]>>, i: number, v: T) => setS((s) => s.map((x, k) => (k === i ? v : x)));
   const muitos = textos.length > 1;
@@ -278,6 +281,9 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
   const [gTam, setGTam] = useState<number>(tips[1]?.tamanho ?? 46);
   const [gCor, setGCor] = useState<string>(CRESCER.paleta.texto);
   const [gFundo, setGFundo] = useState<string>('');
+  const [gAlinhH, setGAlinhH] = useState<AlinhH>('centro');
+  const [gAlinhV, setGAlinhV] = useState<AlinhV>('centro');
+  const [gEntre, setGEntre] = useState<number>(1.18);
   const [incluirCapa, setIncluirCapa] = useState(false);
   const aplicarTudo = () => {
     const de = incluirCapa ? 0 : 1; // a capa fica de fora por defeito (é especial)
@@ -285,8 +291,14 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
     setTams((s) => s.map((x, i) => (i >= de ? gTam : x)));
     setCores((s) => s.map((x, i) => (i >= de ? gCor : x)));
     setFundos((s) => s.map((x, i) => (i >= de ? gFundo : x)));
-    onEstiloTodos({ fonte: gFonte, tamanho: gTam, cor: gCor, corFundo: gFundo || undefined }, incluirCapa);
+    setAlinhHs((s) => s.map((x, i) => (i >= de ? gAlinhH : x)));
+    setAlinhVs((s) => s.map((x, i) => (i >= de ? gAlinhV : x)));
+    setEntres((s) => s.map((x, i) => (i >= de ? gEntre : x)));
+    onEstiloTodos({ fonte: gFonte, tamanho: gTam, cor: gCor, corFundo: gFundo || undefined, alinhH: gAlinhH, alinhV: gAlinhV, entrelinha: gEntre }, incluirCapa);
   };
+  // botõezinhos de opção (alinhamento, etc.)
+  const opcoes = <T,>(lista: { id: T; label: string }[], val: T, on: (id: T) => void) =>
+    lista.map((o) => <Chip key={String(o.id)} on={val === o.id} onClick={() => on(o.id)}>{o.label}</Chip>);
 
   const swatches = (lista: { id: string; nome: string }[], val: string, on: (id: string) => void) =>
     lista.map((c) => (
@@ -309,6 +321,12 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
             <input type="range" min={36} max={120} step={2} value={gTam} onChange={(e) => setGTam(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
             <span className="tabular-nums w-7 text-right">{gTam}</span>
           </label>
+          <label className="flex items-center gap-2 text-[0.62rem]"><span className="opacity-60 w-14">espaço</span>
+            <input type="range" min={1} max={2} step={0.02} value={gEntre} onChange={(e) => setGEntre(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <span className="tabular-nums w-7 text-right">{gEntre.toFixed(2)}</span>
+          </label>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↔</span>{opcoes(ALINH_H, gAlinhH, setGAlinhH)}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↕</span>{opcoes(ALINH_V, gAlinhV, setGAlinhV)}</div>
           <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor texto</span>{swatches(CORES_TEXTO, gCor, setGCor)}</div>
           <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor pág.</span>{swatches(CORES_PAGINA, gFundo, setGFundo)}</div>
           <div className="flex items-center justify-between gap-2 pt-0.5">
@@ -324,7 +342,7 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
 
       {textos.map((t, i) => {
         const ehCapa = i === 0;
-        const tipLive = { ...base, fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined } as Tipografia;
+        const tipLive = { ...base, fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined, alinhH: alinhHs[i], alinhV: alinhVs[i], entrelinha: entres[i] } as Tipografia;
         return (
         <div key={i} className="rounded-lg border border-white/10 p-2 space-y-1.5">
           <div className="flex items-center justify-between">
@@ -345,10 +363,16 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
             <input type="range" min={36} max={120} step={2} value={tams[i]} onChange={(e) => set1(setTams, i, Number(e.target.value))} className="accent-current flex-1 min-w-[70px]" style={{ color: DZ }} />
             <span className="tabular-nums w-6 text-right">{tams[i]}</span>
           </div>
+          <div className="flex items-center gap-1.5 flex-wrap text-[0.56rem]">
+            <span className="opacity-55">espaço</span>
+            <input type="range" min={1} max={2} step={0.02} value={entres[i]} onChange={(e) => set1(setEntres, i, Number(e.target.value))} className="accent-current flex-1 min-w-[60px]" style={{ color: DZ }} />
+            {opcoes(ALINH_H, alinhHs[i], (v) => set1(setAlinhHs, i, v))}
+            {opcoes(ALINH_V, alinhVs[i], (v) => set1(setAlinhVs, i, v))}
+          </div>
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-[0.56rem] opacity-55">texto</span>{swatches(CORES_TEXTO, cores[i], (id) => set1(setCores, i, id))}
             <span className="text-[0.56rem] opacity-55 ml-1">pág.</span>{swatches(CORES_PAGINA, fundos[i] || '', (id) => set1(setFundos, i, id))}
-            <button type="button" onClick={() => onEstilo(i, { fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined })} disabled={disabled} className="ml-auto text-[0.58rem] px-2 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>aplicar a este</button>
+            <button type="button" onClick={() => onEstilo(i, { fonte: fontes[i], tamanho: tams[i], cor: cores[i], corFundo: fundos[i] || undefined, alinhH: alinhHs[i], alinhV: alinhVs[i], entrelinha: entres[i] })} disabled={disabled} className="ml-auto text-[0.58rem] px-2 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>aplicar a este</button>
           </div>
         </div>
         );
