@@ -207,8 +207,10 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
           </div>
         )}
 
-        {/* frase — alinhamento/posição à escolha (default centro/centro) */}
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: alignV, justifyContent: alignFlexH, padding: '170px 120px', zIndex: 2 }}>
+        {/* frase — alinhamento/posição à escolha (default centro/centro). Quando o texto
+            assenta EM BAIXO, recua mais (250) para NÃO tapar o rodapé (assinatura+site,
+            em bottom:130). Em cima, o padrão chega (não há cabeçalho na Crescer). */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: alignV, justifyContent: alignFlexH, padding: tipografia?.alinhV === 'baixo' ? '170px 120px 250px' : '170px 120px', zIndex: 2 }}>
           <p style={{ fontFamily: fontFam, fontWeight: 300, fontSize: tamFinal, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: alignText, color: corBase, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);

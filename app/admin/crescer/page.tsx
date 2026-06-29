@@ -85,41 +85,50 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
   );
 }
 
+// PRÉ-VISUALIZAÇÃO · navega o carrossel TODO, slide a slide (‹ N/total ›). Cada tela
+// 4:5 sai EXATAMENTE como vai publicar: com a SUA imagem (capa sim/não, slide sim/não),
+// a SUA cor de página e o SEU tamanho de letra (lê-se de slidesImgs/slidesTip). O texto
+// anima (efeito) no slide aberto para ela ver o movimento. Resolve o "só vejo a capa":
+// agora abre-se o interior 1 a 1.
 function PreviewBox({ peca }: { peca: Peca }) {
+  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto];
+  const n = moms.length;
+  const [idx, setIdx] = useState(0);
   const [prog, setProg] = useState(0);
-  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : null;
   const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
-  const tip = peca.tipografia ?? undefined;
-  const seg = peca.segPorMomento ?? 5.5;
+  const cur = Math.min(idx, n - 1);
+  // imagem e tipografia DESTE slide (per-slide), com recuo ao global da peça.
+  const imgSlide = peca.slidesImgs?.[cur] ?? (cur === 0 ? peca.imageUrl : null) ?? undefined;
+  const tipSlide = { ...(peca.tipografia ?? {}), ...(peca.slidesTip?.[cur] ?? {}) } as Tipografia;
+  // o texto do slide aberto anima do início ao fim, em loop, para ver o efeito.
   useEffect(() => {
     let raf = 0; let start: number | null = null;
-    const dur = (moms?.length ?? 1) * seg * 1000, hold = 1200;
+    const dur = 3800, hold = 1100;
     const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [moms, seg]);
+  }, [cur]);
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
-      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · como vai sair</p>
-      {moms ? (
-        <div style={{ position: 'relative', aspectRatio: '1080 / 1920', borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
-          {moms.map((m, i) => {
-            const n = moms.length, w = 1 / n;
-            const lp = Math.max(0, Math.min(1, (prog - i * w) / w));
-            const isLast = i === n - 1;
-            const fin = Math.min(1, lp / 0.18), fout = isLast ? 1 : Math.min(1, (1 - lp) / 0.18);
-            const op = (lp <= 0 || lp >= 1) ? (lp >= 1 && isLast ? 1 : 0) : Math.min(fin, fout);
-            if (op <= 0) return null;
-            return (
-              <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
-                <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...CRESCER_SLIDE} />
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="rounded-lg overflow-hidden border border-white/10">
-          <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tip} {...CRESCER_SLIDE} />
+      <div className="flex items-center justify-between">
+        <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · {n > 1 ? 'o carrossel todo, slide a slide' : 'como vai sair'}</p>
+        {n > 1 && (
+          <span className="flex items-center gap-1.5 text-[0.6rem]">
+            <button type="button" onClick={() => setIdx((i) => (i - 1 + n) % n)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-current" style={{ color: DZ }}>‹</button>
+            <span className="tabular-nums opacity-70">{cur === 0 ? 'capa' : `slide ${cur + 1}`} · {cur + 1}/{n}</span>
+            <button type="button" onClick={() => setIdx((i) => (i + 1) % n)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-current" style={{ color: DZ }}>›</button>
+          </span>
+        )}
+      </div>
+      <div className="rounded-lg overflow-hidden border border-white/10">
+        <KineticSlide texto={moms[cur]} destaque={cur === 0 ? peca.destaque : []} imageUrl={imgSlide} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tipSlide} {...CRESCER_SLIDE} />
+      </div>
+      {n > 1 && (
+        <div className="flex flex-wrap gap-1 pt-0.5">
+          {moms.map((_, i) => (
+            <button key={i} type="button" onClick={() => setIdx(i)} title={i === 0 ? 'capa' : `slide ${i + 1}`}
+              className="w-5 h-5 text-[0.5rem] rounded border tabular-nums" style={i === cur ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)', color: TX }}>{i + 1}</button>
+          ))}
         </div>
       )}
     </div>
