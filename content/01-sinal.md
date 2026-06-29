@@ -30,6 +30,14 @@ Olha bem para essa oscilação, porque é nela que se perde mais tempo de vida. 
 
 É precisamente por amares que custa tanto. Se não amasses, irias embora e pronto, sem este aperto, sem este segredo, sem esta divisão que te esgota. O desencaixe entre estranhos resolve-se com um adeus que não dói. É o desencaixe dentro do amor que não tem saída fácil, porque qualquer movimento parece uma traição: ficar a fingir trai-te a ti, sair a sério parece trair quem amas. Ficas presa no meio, e o meio é um sítio cansativo de habitar, e a única forma de ali respirar, durante o tempo que ali tiveres de estar, é parar de te exigir uma resposta que ainda não tens. Não tens de resolver hoje o nó entre o amor por eles e a verdade sobre ti. Só tens de parar de fingir que o nó não existe. Reconhecê-lo já é descansar um pouco, porque metade do peso vinha de o negares.
 
+::: pausa
+**Descansa o nó, só por um instante.**
+Não tens de o desatar hoje. Metade do peso vinha de fingires que ele não existe.
+> Pensa numa mesa que amas e onde, mesmo assim, te sentes um passo de lado. Não procures o culpado. Repara só: é rejeição (alguém te quer fora) ou desalinhamento (mudaste de casa por dentro)?
+- O que te custa mais admitir: que mudaste, ou que ninguém fez nada de errado?
+- Onde é que sentes esse nó no corpo quando ele aperta?
+:::
+
 Por isso isto não é o que tantas vezes lhe chamamos. Não é arrogância, ainda que te apanhes a perguntar se te estás a achar acima dos outros. Não é falta de amor, e essa é a confusão mais cruel de todas, porque tu amas aquelas pessoas, e é precisamente por as amares que dói não te sentires inteira ao pé delas. O desencaixe mais difícil de carregar não acontece entre estranhos. Acontece dentro do que te é mais querido, e é por isso que se vive quase sempre em segredo. Não há a quem o contar sem parecer que estás a desfazer aquilo que toda a gente à tua volta ainda acredita estar inteiro.
 
 Pensa num Natal. Há poucos sítios onde este segredo aperte mais do que num Natal, porque o Natal é a mesa elevada à máxima potência, a mesa com luzes, a mesa com memória de todas as outras mesas. Há a árvore no mesmo canto. Há os pratos que só saem do armário uma vez por ano. Há a ausência de alguém que já partiu, sentida no lugar que ninguém ocupa. Há ti, no meio de tudo isto, a abrir um presente escolhido com cuidado por quem te ama, a dizer obrigada, é lindo, era mesmo isto que eu queria, e a sentir ao mesmo tempo, por baixo da gratidão verdadeira, aquela distância fina a apertar. Porque o presente foi pensado para a pessoa que ainda julgam que és. É um presente para a versão anterior. Não há como dizer isto. Não há como devolver um afecto tão genuíno com a notícia de que já não é dirigido a quem aqui está. Por isso guardas o presente, e guardas a verdade, e o segredo cresce mais um ano dentro de ti, entre as luzes.
