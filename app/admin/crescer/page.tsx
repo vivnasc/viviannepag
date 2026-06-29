@@ -403,6 +403,8 @@ export default function CrescerPage() {
   const [slidesSlug, setSlidesSlug] = useState<string | null>(null); // editor GRANDE de slides
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [filtroTema, setFiltroTema] = useState<string>('todos');
+  const [filtroTipo, setFiltroTipo] = useState<'todos' | 'carrossel' | 'reel'>('todos');
+  const [filtroEstado, setFiltroEstado] = useState<'todos' | 'por-fazer' | 'pronto' | 'agendada' | 'publicada'>('todos');
   const [padrao, setPadrao] = useState<Padrao>(PADRAO_DEFAULT);
   const [padraoOpen, setPadraoOpen] = useState(false);
   // agendar em lote ESPAÇADO (não encher o feed): 1 post a cada N dias, à hora.
@@ -530,7 +532,20 @@ export default function CrescerPage() {
     setSel(new Set()); setBusy(false); recarregar();
   }, [acaoSlug, busy, agData, agHora, agCad, pecas, sel, recarregar]);
 
-  const pecasFiltradas = pecas.filter((p) => filtroTema === 'todos' || p.tematica === filtroTema);
+  // TIPO da peça: CARROSSEL (formato ensaio, publica telas) vs REEL (vídeo). ESTADO de
+  // produção: por fazer / pronto (renderizado) / agendada / publicada.
+  const tipoDe = (p: Peca): 'carrossel' | 'reel' => (p.formato === 'ensaio' ? 'carrossel' : 'reel');
+  const estadoDe = (p: Peca): 'por-fazer' | 'pronto' | 'agendada' | 'publicada' => {
+    if (p.publicado) return 'publicada';
+    const renderizado = tipoDe(p) === 'carrossel' ? (p.imagens?.length ?? 0) >= 2 : !!p.videoUrl;
+    if (p.agendadoEm) return 'agendada';
+    return renderizado ? 'pronto' : 'por-fazer';
+  };
+  const ESTADO_LABEL: Record<string, string> = { 'por-fazer': 'por renderizar', pronto: 'pronto', agendada: 'agendada', publicada: 'publicada' };
+  const pecasFiltradas = pecas.filter((p) =>
+    (filtroTema === 'todos' || p.tematica === filtroTema) &&
+    (filtroTipo === 'todos' || tipoDe(p) === filtroTipo) &&
+    (filtroEstado === 'todos' || estadoDe(p) === filtroEstado));
 
   return (
     <main className={`${FONTS} min-h-screen px-4 py-8 md:px-8`} style={{ background: BG2, color: TX }}>
@@ -590,9 +605,23 @@ export default function CrescerPage() {
         <section>
           <h2 className="text-sm uppercase tracking-widest opacity-60 mb-2">peças <span className="opacity-40">· {pecas.length}</span></h2>
 
-          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
             <Chip on={filtroTema === 'todos'} onClick={() => setFiltroTema('todos')}>todas</Chip>
             {TEMATICAS.map((t) => <Chip key={t.id} on={filtroTema === t.id} onClick={() => setFiltroTema(t.id)} title={t.label}>{t.emoji}</Chip>)}
+          </div>
+          {/* filtros por TIPO e por ESTADO de produção */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+            <span className="text-[0.56rem] uppercase tracking-widest opacity-40 mr-0.5">tipo</span>
+            <Chip on={filtroTipo === 'todos'} onClick={() => setFiltroTipo('todos')}>todos</Chip>
+            <Chip on={filtroTipo === 'carrossel'} onClick={() => setFiltroTipo('carrossel')}>🎠 carrossel</Chip>
+            <Chip on={filtroTipo === 'reel'} onClick={() => setFiltroTipo('reel')}>🎬 reel</Chip>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+            <span className="text-[0.56rem] uppercase tracking-widest opacity-40 mr-0.5">estado</span>
+            {(['todos', 'por-fazer', 'pronto', 'agendada', 'publicada'] as const).map((e) => (
+              <Chip key={e} on={filtroEstado === e} onClick={() => setFiltroEstado(e)}>{e === 'todos' ? 'todos' : ESTADO_LABEL[e]}</Chip>
+            ))}
+            <span className="text-[0.56rem] opacity-40 ml-1">{pecasFiltradas.length} de {pecas.length}</span>
           </div>
 
           {pecas.length === 0 && <p className="text-[0.78rem] opacity-50">Ainda nada. Escolhe temáticas e formatos e carrega &quot;gerar&quot;.</p>}
@@ -630,7 +659,10 @@ export default function CrescerPage() {
                   <div className="relative">
                     <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} tipografia={p.tipografia ?? undefined} {...CRESCER_SLIDE} />
                     <button onClick={() => toggleSel(p.slug)} className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10" style={sel.has(p.slug) ? { background: DZ, borderColor: DZ, color: BG2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
-                    <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}{p.momentos && p.momentos.length > 1 ? ` · ${p.momentos.length}❑` : ''}</span>
+                    <span className="absolute top-1 left-1 flex flex-col gap-0.5 items-start">
+                      <span className="text-[0.5rem] px-1 py-0.5 rounded" style={{ background: DZ, color: BG2 }}>{tipoDe(p) === 'carrossel' ? `🎠 carrossel · ${p.momentos?.length ?? 0} telas` : '🎬 reel'}</span>
+                      <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}</span>
+                    </span>
                     {p.publicado
                       ? <span className="absolute top-1 right-1 text-[0.5rem] bg-emerald-600/85 text-white rounded px-1 py-0.5">✓ publicado</span>
                       : p.videoUrl
