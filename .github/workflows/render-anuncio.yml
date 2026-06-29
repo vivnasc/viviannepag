@@ -15,6 +15,12 @@ on:
         type: choice
         options: ['A', 'B']
         default: 'A'
+      modo:
+        description: 'Junção dos planos: continuo (fundidos) ou cortes (corte seco)'
+        required: false
+        type: choice
+        options: ['continuo', 'cortes']
+        default: 'continuo'
 
 permissions:
   contents: read
@@ -47,6 +53,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
           VARIANTE: ${{ github.event.inputs.variante }}
+          MODO_ANUNCIO: ${{ github.event.inputs.modo }}
         run: |
           set -o pipefail
           node scripts/anuncio/render-anuncio.js | tee saida.txt

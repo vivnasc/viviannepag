@@ -21,10 +21,14 @@ const cp = require('child_process');
 const ROOT = path.join(__dirname, '..', '..');
 const TMP = path.join(ROOT, '.anuncio-tmp');
 const VAR = (process.env.VARIANTE || 'A').toUpperCase();
+// MODO de junção dos planos: 'continuo' = fundidos (cinematográfico, sem cortes)
+// · 'cortes' = corte seco entre cenas. As duas opções ficam à escolha dela.
+const MODO = (process.env.MODO_ANUNCIO || 'continuo').toLowerCase() === 'cortes' ? 'cortes' : 'continuo';
 const GUIOES = require(path.join(ROOT, 'lib', 'anuncio', 'guiao.json'));
 const G = GUIOES[VAR] || GUIOES.A;
 
 const W = 1080, H = 1920, FPS = 24;
+const XFADE = 0.7;      // duração do fundido entre planos (modo contínuo)
 const FADE = 0.4;       // fade dos cartões de gancho
 const FIM_DUR = 5.5;    // duração do cartão final
 const TAIL = 0.6;       // respiração depois da última fala, antes do cartão final
@@ -266,7 +270,12 @@ async function main() {
     } else if (p.motionUrl) {
       const raw = out.replace(/\.mp4$/, '-raw.mp4');
       await baixar(p.motionUrl, raw);
-      sh(`ffmpeg -y -stream_loop -1 -t ${dur} -i "${raw}" -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1" -an -c:v libx264 -preset veryfast -pix_fmt yuv420p -t ${dur} "${out}"`);
+      // movimento CONTÍNUO (cinematográfico), NUNCA em loop: se o clip chega ao tempo
+      // do plano, corta-se; se for curto, ABRANDA-SE (setpts) para encher — nunca repete.
+      const cd = probeDur(raw) || dur;
+      const corte = `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=${FPS},setsar=1`;
+      const vf = cd >= dur ? corte : `setpts=${(dur / cd).toFixed(4)}*PTS,${corte}`;
+      sh(`ffmpeg -y -i "${raw}" -vf "${vf}" -an -c:v libx264 -preset veryfast -pix_fmt yuv420p -t ${dur} "${out}"`);
     } else {
       const img = out.replace(/\.mp4$/, '.jpg');
       await baixar(p.cenaUrl, img);
@@ -280,10 +289,11 @@ async function main() {
     fs.copyFileSync(path.join(ROOT, G.capaPng), cena);
     kenBurns(cena, TOTAL, bg);
   } else if (planos.length === 1) {
-    console.log('· fundo: 1 plano (em loop)…');
+    console.log('· fundo: 1 plano (movimento contínuo)…');
     await segmentoDePlano(planos[0], TOTAL, bg);
-  } else {
-    console.log(`· fundo: ${planos.length} planos a cortar ao longo do vídeo…`);
+  } else if (MODO === 'cortes') {
+    // CORTES: cada plano é um segmento; junta-se por corte seco.
+    console.log(`· fundo: ${planos.length} planos · CORTES secos…`);
     const segBase = TOTAL / planos.length;
     const segs = [];
     for (let i = 0; i < planos.length; i++) {
@@ -294,6 +304,27 @@ async function main() {
     }
     fs.writeFileSync(path.join(TMP, 'segs.txt'), segs.map((s) => `file '${s}'`).join('\n'));
     sh(`ffmpeg -y -f concat -safe 0 -i "${path.join(TMP, 'segs.txt')}" -vf "fps=${FPS},setsar=1" -c:v libx264 -preset veryfast -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
+  } else {
+    // CONTÍNUO (cinematográfico): planos FUNDIDOS uns nos outros (xfade), sem cortes.
+    // Cada segmento é maior XFADE para o tempo total bater certo depois dos fundidos.
+    const n = planos.length;
+    const seg = +(((TOTAL + (n - 1) * XFADE) / n)).toFixed(3);
+    console.log(`· fundo: ${n} planos · CONTÍNUO (fundidos)…`);
+    const segs = [];
+    for (let i = 0; i < n; i++) {
+      const s = path.join(TMP, `seg${i}.mp4`);
+      await segmentoDePlano(planos[i], seg, s);
+      segs.push(s);
+    }
+    const ins = segs.map((s) => `-i "${s}"`).join(' ');
+    const fc = [];
+    let prev = '[0:v]'; let off = seg - XFADE;
+    for (let i = 1; i < n; i++) {
+      const lbl = i === n - 1 ? '[vbg]' : `[x${i}]`;
+      fc.push(`${prev}[${i}:v]xfade=transition=fade:duration=${XFADE}:offset=${off.toFixed(3)}${lbl}`);
+      prev = lbl; off += seg - XFADE;
+    }
+    sh(`ffmpeg -y ${ins} -filter_complex "${fc.join(';')}" -map "[vbg]" -r ${FPS} -c:v libx264 -preset veryfast -pix_fmt yuv420p -t ${TOTAL} "${bg}"`);
   }
 
   // 4. overlay: karaokê + ganchos + cartão final, frame a frame (Puppeteer)
