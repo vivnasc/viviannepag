@@ -131,8 +131,11 @@ export async function POST(req: Request) {
   } else {
     // 1 peça: o formato/véu pedido, ou à sorte (para variar).
     const quantos = Math.min(4, Math.max(1, body.quantos ?? 1));
+    // a Cena cinematográfica é um formato DELIBERADO (gera-se a pedido, não à sorte):
+    // fica de fora do "surpreende-me" e do calendário.
+    const aleatorios = FORMATOS_LISTA.filter((f) => f.id !== 'cenacine');
     for (let i = 0; i < quantos; i++) {
-      const formato = body.formato ?? FORMATOS_LISTA[Math.floor(Math.random() * FORMATOS_LISTA.length)].id;
+      const formato = body.formato ?? aleatorios[Math.floor(Math.random() * aleatorios.length)].id;
       const veu = body.veu ?? VEUS_VS[(Math.floor(Date.now() / 1000) + i) % VEUS_VS.length];
       try {
         const peca = await gerarPecaVS(veu, formato, apiKey, evitarDoVeu(veu), conta);
