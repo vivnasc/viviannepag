@@ -44,12 +44,23 @@ if (dominios.length !== 15 || total < 110) {
 // os 7 SINAIS DE DESENCAIXE (do livro irmão de Os Sete Véus) — a experiência sentida
 // de pertença vs autenticidade. Profundidade da MÃE (a sua autoridade ampla).
 const livro = fs.readFileSync(path.join(root, 'content', 'LIVRO-SINAIS-completo.md'), 'utf8');
+const llin = livro.split('\n');
 const sinais = [];
-for (const raw of livro.split('\n')) {
-  const m = raw.match(/^#\s+Sinal\s+\d+\s*,\s*(.+?)\s*$/);
-  if (m) sinais.push(m[1].trim());
+for (let i = 0; i < llin.length; i++) {
+  const m = llin[i].match(/^#\s+Sinal\s+\d+\s*,\s*(.+?)\s*$/);
+  if (!m) continue;
+  // a epígrafe em itálico (*...*) logo a seguir = a essência sentida (palavras dela).
+  let essencia = '';
+  for (let j = i + 1; j < Math.min(i + 5, llin.length); j++) {
+    const e = llin[j].match(/^\*(.+?)\*\s*$/);
+    if (e) { essencia = e[1].trim(); break; }
+  }
+  sinais.push({ nome: m[1].trim(), essencia });
 }
-if (sinais.length !== 7) { console.error(`[erro] esperava 7 sinais; obtive ${sinais.length}`); process.exit(1); }
+if (sinais.length !== 7 || sinais.some((s) => !s.essencia)) {
+  console.error(`[erro] esperava 7 sinais com epígrafe; obtive ${sinais.length} (${sinais.filter((s) => !s.essencia).length} sem epígrafe)`);
+  process.exit(1);
+}
 
 const header = `// GERADO por scripts/gen-knowledge.js a partir de knowledge/GLOSSARIO.md — NÃO editar à mão.
 // Os 15 domínios das Ciências da Consciência Emergente (as palavras da Vivianne).
@@ -61,8 +72,10 @@ const body =
   `export interface ConceitoSaber { nome: string; def: string }\n` +
   `export interface DominioSaber { codigo: string; nome: string; conceitos: ConceitoSaber[] }\n\n` +
   `// Os 7 Sinais de Desencaixe (livro "Os 7 Sinais de Desencaixe"): a experiência\n` +
-  `// SENTIDA de pertencer sem deixar de se ser inteiro. Profundidade da MÃE.\n` +
-  `export const SINAIS_DESENCAIXE: string[] = ${JSON.stringify(sinais, null, 2)};\n\n` +
+  `// SENTIDA de pertencer sem deixar de se ser inteiro. Cada sinal traz a sua\n` +
+  `// EPÍGRAFE (a frase sentida, palavras do livro). Profundidade da MÃE.\n` +
+  `export interface SinalDesencaixe { nome: string; essencia: string }\n` +
+  `export const SINAIS_DESENCAIXE: SinalDesencaixe[] = ${JSON.stringify(sinais, null, 2)};\n\n` +
   `export const DOMINIOS: DominioSaber[] = ${JSON.stringify(dominios, null, 2)};\n\n` +
   `// uma FATIA rotativa de domínios (por seed) -> profundidade variada por peça, sem
 // encher o prompt nem repetir. n = quantos domínios; devolve um bloco de texto pronto
