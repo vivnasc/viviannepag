@@ -246,7 +246,7 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
 // EDITOR DE SLIDES (autonomia total): vê CADA slide interno RENDERIZADO (preview ao
 // vivo, muda enquanto editas), edita o TEXTO, põe/tira IMAGEM, e muda tamanho e cor
 // da página de cada um. Tudo num só sítio (capa + todos os slides do carrossel).
-function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTextos: (textos: string[]) => void; onImagem: (idx: number, remover: boolean) => void; onEstilo: (idx: number, tip: { tamanho?: number; corFundo?: string }) => void }) {
+function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onEstiloTodos }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTextos: (textos: string[]) => void; onImagem: (idx: number, remover: boolean) => void; onEstilo: (idx: number, tip: { tamanho?: number; corFundo?: string }) => void; onEstiloTodos: (tip: { tamanho?: number; corFundo?: string }) => void }) {
   const iniciais = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto];
   const [textos, setTextos] = useState<string[]>(iniciais);
   const imgs = peca.slidesImgs ?? [];
@@ -254,9 +254,34 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo }: {
   const [tams, setTams] = useState<number[]>(iniciais.map((_, i) => tips[i]?.tamanho ?? (i === 0 ? 80 : 46)));
   const [fundos, setFundos] = useState<string[]>(iniciais.map((_, i) => tips[i]?.corFundo ?? ''));
   const setT = (i: number, v: string) => setTextos((s) => s.map((x, k) => (k === i ? v : x)));
+  // controlo GLOBAL: aplicar tamanho/cor a TODOS os slides de uma vez.
+  const [gTam, setGTam] = useState<number>(tips[0]?.tamanho ?? 70);
+  const [gFundo, setGFundo] = useState<string>('');
+  const muitos = textos.length > 1;
   return (
     <div className="px-2 pb-2 space-y-2 border-t border-white/5 pt-2">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">slides · vê cada um, edita texto/imagem/tamanho/cor (preview ao vivo)</p>
+
+      {/* APLICAR A TODOS de uma vez (tamanho + cor da página) */}
+      {muitos && (
+        <div className="rounded-lg border p-2 space-y-1.5" style={{ borderColor: DZ, background: 'rgba(224,177,90,0.06)' }}>
+          <p className="text-[0.55rem] uppercase tracking-widest" style={{ color: DZ }}>aplicar a TODOS os {textos.length} slides</p>
+          <label className="flex items-center gap-1 text-[0.58rem] opacity-85"><span className="opacity-60 w-12">tamanho</span>
+            <input type="range" min={40} max={120} step={2} value={gTam} onChange={(e) => setGTam(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <span className="tabular-nums w-6 text-right">{gTam}</span>
+            <button type="button" disabled={disabled} onClick={() => { setTams((s) => s.map(() => gTam)); onEstiloTodos({ tamanho: gTam }); }} className="text-[0.56rem] px-1.5 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>aplicar</button>
+          </label>
+          <div className="flex items-center gap-1.5 flex-wrap text-[0.58rem]">
+            <span className="opacity-60 w-12">cor pág.</span>
+            {CORES_PAGINA.map((c) => (
+              <button key={c.id || 'def'} type="button" title={c.nome} onClick={() => setGFundo(c.id)}
+                className="w-5 h-5 rounded-full border flex items-center justify-center text-[0.5rem]"
+                style={{ background: c.id || CRESCER.paleta.bg, borderColor: gFundo === c.id ? DZ : 'rgba(255,255,255,0.25)', borderWidth: gFundo === c.id ? 2 : 1, color: DZ }}>{c.id === '' ? '○' : ''}</button>
+            ))}
+            <button type="button" disabled={disabled} onClick={() => { setFundos((s) => s.map(() => gFundo)); onEstiloTodos({ corFundo: gFundo || undefined }); }} className="text-[0.56rem] px-1.5 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>aplicar</button>
+          </div>
+        </div>
+      )}
       {textos.map((t, i) => {
         // tipografia DESTE slide ao vivo (global da peça + por-slide + o que estás a mexer agora)
         const tipLive = { ...(peca.tipografia ?? {}), ...((tips[i] ?? {}) as object), tamanho: tams[i], corFundo: fundos[i] || undefined } as Tipografia;
@@ -397,6 +422,8 @@ export default function CrescerPage() {
   const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
   const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
   const salvarEstilo = useCallback((slug: string, idx: number, tip: { tamanho?: number; corFundo?: string }) => acao(slug, '/api/admin/crescer/slide-estilo', { idx, tipografia: tip }, 'A aplicar o estilo do slide…', 'Estilo do slide aplicado.', false), [acao]);
+  // aplicar tamanho/cor a TODOS os slides de uma vez (sem idx = todos).
+  const salvarEstiloTodos = useCallback((slug: string, tip: { tamanho?: number; corFundo?: string }) => acao(slug, '/api/admin/crescer/slide-estilo', { tipografia: tip }, 'A aplicar a todos os slides…', 'Aplicado a todos os slides.', false), [acao]);
 
   // ── seleção múltipla + lote ──
   const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
@@ -613,7 +640,7 @@ export default function CrescerPage() {
                 </div>
                 <button onClick={() => setSlidesSlug(null)} className="text-[0.8rem] px-2 py-1 rounded-lg border border-white/20 hover:bg-white/10">fechar ✕</button>
               </div>
-              <SlidesBox peca={p} busy={tBusy} disabled={tBusy} onSaveTextos={(t) => salvarTextos(p.slug, t)} onImagem={(idx, rem) => imagemSlide(p.slug, idx, rem)} onEstilo={(idx, tip) => salvarEstilo(p.slug, idx, tip)} />
+              <SlidesBox peca={p} busy={tBusy} disabled={tBusy} onSaveTextos={(t) => salvarTextos(p.slug, t)} onImagem={(idx, rem) => imagemSlide(p.slug, idx, rem)} onEstilo={(idx, tip) => salvarEstilo(p.slug, idx, tip)} onEstiloTodos={(tip) => salvarEstiloTodos(p.slug, tip)} />
             </div>
           </div>
         );
