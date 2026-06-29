@@ -159,6 +159,16 @@ async function getRomanceProduto(slug: string, locale: string): Promise<Produto 
   };
 }
 
+// Livros do Método VS (pilar + irmão + manuais): a capa vem da imagem da
+// Vivianne no Supabase (livro-pilar/<slug>/capa-composta.png), a mesma da home;
+// e NÃO pertencem ao pack FreeMe Mãe (não mostram banner de coleção).
+const LIVROS_METODO = ['os-7-sinais', 'os-7-veus', 'ver-soltar', 'vir-soltar', 'viver-soltar'];
+const SUPA_LOJA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
+const capaLivroMetodo = (slug: string): string | null =>
+  LIVROS_METODO.includes(slug) && SUPA_LOJA
+    ? `${SUPA_LOJA}/storage/v1/object/public/viviannepag-assets/livro-pilar/${slug}/capa-composta.png`
+    : null;
+
 async function getProduto(slug: string, locale: string): Promise<Produto | null> {
   if (isPackSlug(slug)) return getPack(slug, locale);
   if (isRomanceSlug(slug)) return getRomanceProduto(slug, locale);
@@ -230,14 +240,14 @@ export default async function ProdutoPage({
   // Cross-sell: pack do universo deste produto (para sugerir levar tudo).
   // Os romances da Biblioteca de Véspera NÃO pertencem a nenhum pack: vendem-se
   // sempre avulso, por isso nunca mostram o banner de coleção.
-  const packDoUniverso = (!isPack && !isRomanceSlug(slug))
+  const packDoUniverso = (!isPack && !isRomanceSlug(slug) && !LIVROS_METODO.includes(slug))
     ? PACKS.find((pk) => pk.colecao !== 'all' && pk.colecao === slugToColecao(slug))
     : undefined;
   // Pack: mosaico das capas reais dos livros (ate 4) para o hero.
   const mosaicoPack = isPack
     ? conteudoPack.map((i) => i.capa).filter((c): c is string => Boolean(c)).slice(0, 4)
     : [];
-  const capaExibida = mosaicoPack[0] ?? p.capa;
+  const capaExibida = capaLivroMetodo(slug) ?? mosaicoPack[0] ?? p.capa;
   // Poupanca (preco original riscado vs preco).
   const precoN = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
   const poupanca = p.preco_original ? Math.round(precoN(p.preco_original) - precoN(p.preco)) : 0;
