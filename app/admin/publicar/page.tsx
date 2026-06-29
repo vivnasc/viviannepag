@@ -82,6 +82,21 @@ async function baixarFicheiro(url: string, nome: string) {
     window.open(url, '_blank');
   }
 }
+// baixar TUDO num ZIP: todas as imagens/vídeo + a legenda (legenda.txt). Para publicar
+// à mão sem andar a baixar ficheiro a ficheiro. JSZip carregado dinamicamente (cliente).
+async function baixarZip(nomeBase: string, media: { url: string; nome: string }[], legenda: string) {
+  const JSZip = (await import('jszip')).default;
+  const zip = new JSZip();
+  if (legenda) zip.file('legenda.txt', legenda);
+  await Promise.all(media.map(async (m) => {
+    try { const r = await fetch(m.url); if (r.ok) zip.file(m.nome, await r.blob()); } catch { /* salta o que falhar */ }
+  }));
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const u = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = u; a.download = `${nomeBase}.zip`; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(u), 4000);
+}
 // thumbnail de vídeo FIÁVEL: preload=metadata + seek a 0.1s no onLoadedMetadata
 // força o browser (Edge/Chrome) a decodificar e PINTAR a 1.ª frame — o truque
 // só com "#t=0.1" no src não pinta de forma consistente.
@@ -147,6 +162,7 @@ export default function PublicarPage() {
   const [expFmt, setExpFmt] = useState('tudo'); // filtro de formato no export (tudo | vcsabia | hojeemmim | veus | …)
   const [expPlat, setExpPlat] = useState<'tiktok' | 'instagram' | 'ambas'>('tiktok');
   const [copiado, setCopiado] = useState<string | null>(null); // slug do post cuja legenda foi copiada
+  const [zipSlug, setZipSlug] = useState<string | null>(null); // slug a preparar o ZIP
 
   const carregar = useCallback(async () => {
     const r = await fetch('/api/admin/conteudos/list', { cache: 'no-store' });
@@ -579,6 +595,9 @@ export default function PublicarPage() {
                 {mediaDe(it).map((mm, i, arr) => (
                   <button key={i} onClick={() => baixarFicheiro(mm.url, mm.nome)} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-[#7E9B8E]/45 bg-[#7E9B8E]/10 text-[#9DB6A9] hover:bg-[#7E9B8E]/20">⬇ baixar {arr.length > 1 ? `imagem ${i + 1}` : (it.dias?.[0]?.videoUrl || videoDe(it) ? 'vídeo' : 'imagem')}</button>
                 ))}
+                {mediaDe(it).length > 1 && (
+                  <button onClick={async () => { setZipSlug(it.slug); try { await baixarZip(it.slug, mediaDe(it), legendaDe(it)); } finally { setZipSlug(null); } }} disabled={zipSlug === it.slug} className="text-[0.74rem] px-3 py-1.5 rounded-lg border border-ambar/45 bg-ambar/10 text-ambar hover:bg-ambar/20 disabled:opacity-50">📦 {zipSlug === it.slug ? 'a preparar…' : 'baixar tudo (ZIP) + legenda'}</button>
+                )}
                 {mediaDe(it).length === 0 && <span className="text-[0.66rem] opacity-40">(este post ainda não tem ficheiro pronto)</span>}
               </div>
 
