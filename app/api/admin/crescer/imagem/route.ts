@@ -24,9 +24,12 @@ export async function POST(req: Request) {
   const slides = (dias[0]?.slides as Array<Record<string, unknown>>) ?? [];
   if (!slides.length) return NextResponse.json({ erro: 'sem-slides' }, { status: 400 });
   const idx = typeof body.idx === 'number' ? body.idx : null;
-  // alvos: 1 slide (idx) · todos menos a capa (excetoCapa, p/ tirar imagem do corpo) · todos.
+  const carrossel = slides.length > 1; // várias telas = a imagem é SÓ na capa
+  // alvos: 1 slide (idx) · todos menos a capa (excetoCapa) · GERAR sem idx num
+  // carrossel = SÓ a capa (não repor imagem no corpo, que é texto) · senão todos.
   const alvos = idx !== null ? (slides[idx] ? [idx] : [])
     : body.excetoCapa ? slides.map((_, i) => i).filter((i) => i > 0)
+    : (!body.remover && carrossel) ? [0]
     : slides.map((_, i) => i);
   if (!alvos.length) return NextResponse.json({ erro: 'slide-invalido' }, { status: 400 });
 
