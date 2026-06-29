@@ -8,17 +8,31 @@ const FONT = (f)=> 'file://'+path.join(__dirname,'fonts',f);
 
 const LANG = (process.argv[2] || process.env.LANG_BOOK || 'pt').toLowerCase().startsWith('en') ? 'en' : 'pt';
 const STR = {
-  pt: { title:'Os Sinais<br>de Desencaixe', sub:'O equilíbrio entre pertença e autenticidade', sibling:'irmão de Os Sete Véus' },
-  en: { title:'The Signs<br>of Not Belonging', sub:'The balance between belonging and authenticity', sibling:'sibling of The Seven Veils' },
+  pt: { title:'Os 7 Sinais<br>de Desencaixe', sub:'O equilíbrio entre pertença e autenticidade', sibling:'irmão de Os Sete Véus' },
+  en: { title:'The Seven Signs<br>of Not Belonging', sub:'The balance between belonging and authenticity', sibling:'a companion to The Seven Veils' },
 }[LANG];
 const TITLE=STR.title;
 const SUB=STR.sub;
 const AUTHOR='Vivianne dos Santos';
-const VEU=(c)=>`<svg viewBox="0 0 512 512" width="150" height="150"><path d="M118 384 C118 224 178 124 256 124 C334 124 394 224 394 384" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round"/><path d="M166 392 C166 270 204 200 256 200 C308 200 346 270 346 392" fill="none" stroke="${c}" stroke-width="6.5" stroke-linecap="round" opacity="0.55"/><circle cx="256" cy="98" r="7" fill="${c}"/></svg>`;
 
+// O símbolo do livro: sete sinais em fila. Seis assentam na linha, cheios; um
+// está fora da linha e vazado — pertence ao conjunto e mesmo assim não encaixa.
+// É o desencaixe social, legível num instante, sem pintura nem cena.
+const MARCA = (dot,odd)=>{
+  const c = [0,1,2,3,4,5,6].map(i=>{
+    const cx = 24 + i*72;
+    return i===4
+      ? `<circle cx="${cx}" cy="32" r="15" fill="none" stroke="${odd}" stroke-width="3"/>`
+      : `<circle cx="${cx}" cy="64" r="15" fill="${dot}"/>`;
+  }).join('');
+  return `<svg viewBox="0 0 480 96" width="500" height="100" aria-hidden="true">${c}</svg>`;
+};
+
+// Capa a sério, fundo claro (a Vivianne abortou o escuro). Noite fica como
+// alternativa, mas marfim é a escolhida.
 const variants = {
-  noite: { bg:'#1B2A2B', frame:'#B98D3E', num:'#C9A24B', title:'#F4ECDD', rule:'#B98D3E', subc:'#C9B79A', author:'#E7DCC8', orn:'#B98D3E' },
-  marfim:{ bg:'#F5EEE2', frame:'#B98D3E', num:'#B98D3E', title:'#3A3357', rule:'#B98D3E', subc:'#6A6075', author:'#3A3357', orn:'#B98D3E' },
+  marfim: { bg:'#EFE6D4', ink:'#33304A', accent:'#B5823B', rule:'#B5823B', sub:'#6E6578', meta:'#33304A', dot:'#B5823B', odd:'#C7A36A' },
+  noite:  { bg:'#1E2526', ink:'#F2E9D8', accent:'#C29A4D', rule:'#B5823B', sub:'#C7B79C', meta:'#E7DCC8', dot:'#C29A4D', odd:'#8FA08C' },
 };
 
 function html(v){
@@ -28,27 +42,27 @@ function html(v){
   @font-face{font-family:'Outfit';src:url('${FONT('Outfit-var.ttf')}') format('truetype');font-weight:300 600;font-style:normal;}
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{width:1600px;height:2560px;}
-  .cv{width:1600px;height:2560px;background:${v.bg};position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:'Fraunces',serif;}
-  .frame{position:absolute;inset:70px;border:2px solid ${v.frame};opacity:.5;}
-  .frame2{position:absolute;inset:84px;border:1px solid ${v.frame};opacity:.32;}
-  .seal{position:absolute;top:150px;left:0;right:0;font-family:'Outfit';font-weight:400;font-size:30px;letter-spacing:.42em;text-transform:uppercase;color:${v.author};opacity:.8;}
-  .num{font-weight:300;font-size:210px;line-height:.9;color:${v.num};margin-bottom:20px;}
-  h1{font-weight:300;font-size:120px;line-height:1.06;color:${v.title};letter-spacing:-.01em;padding:0 60px;}
-  .rule{width:230px;height:2px;background:${v.rule};opacity:.8;margin:54px 0;}
-  .sub{font-style:italic;font-weight:400;font-size:46px;color:${v.subc};max-width:1040px;line-height:1.4;}
-  .orn{margin-top:70px;}
-  .author{position:absolute;bottom:235px;left:0;right:0;font-family:'Outfit';font-weight:400;font-size:32px;letter-spacing:.2em;text-transform:uppercase;color:${v.author};}
-  .site{position:absolute;bottom:160px;left:0;right:0;font-family:'Outfit';font-weight:300;font-size:26px;letter-spacing:.28em;text-transform:uppercase;color:${v.author};opacity:.6;}
+  .cv{width:1600px;height:2560px;background:${v.bg};position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;font-family:'Fraunces',serif;padding:0 150px;}
+  .key{position:absolute;inset:54px;border:1px solid ${v.accent};opacity:.28;}
+  .author{position:absolute;top:210px;left:0;right:0;font-family:'Outfit';font-weight:400;font-size:31px;letter-spacing:.4em;text-transform:uppercase;color:${v.meta};}
+  .mid{margin-top:auto;margin-bottom:auto;display:flex;flex-direction:column;align-items:center;}
+  .mark{opacity:.95;margin-bottom:96px;}
+  h1{font-weight:340;font-size:118px;line-height:1.08;color:${v.ink};letter-spacing:-.012em;}
+  .rule{width:120px;height:1px;background:${v.rule};opacity:.75;margin:68px 0;}
+  .sub{font-style:italic;font-weight:400;font-size:44px;color:${v.sub};max-width:980px;line-height:1.42;}
+  .foot{position:absolute;bottom:206px;left:0;right:0;font-family:'Outfit';font-weight:400;font-size:28px;letter-spacing:.26em;text-transform:uppercase;color:${v.meta};opacity:.85;}
+  .site{position:absolute;bottom:150px;left:0;right:0;font-family:'Outfit';font-weight:300;font-size:25px;letter-spacing:.3em;text-transform:uppercase;color:${v.meta};opacity:.5;}
   </style></head><body>
   <div class="cv">
-    <div class="frame"></div><div class="frame2"></div>
-    <div class="seal">Vivianne dos Santos</div>
-    <div class="num">7</div>
-    <h1>${TITLE}</h1>
-    <div class="rule"></div>
-    <div class="sub">${SUB}</div>
-    <div class="orn">${VEU(v.orn)}</div>
-    <div class="author">${STR.sibling}</div>
+    <div class="key"></div>
+    <div class="author">${AUTHOR}</div>
+    <div class="mid">
+      <div class="mark">${MARCA(v.dot,v.odd)}</div>
+      <h1>${TITLE}</h1>
+      <div class="rule"></div>
+      <div class="sub">${SUB}</div>
+    </div>
+    <div class="foot">${STR.sibling}</div>
     <div class="site">viviannedossantos.com</div>
   </div></body></html>`;
 }
