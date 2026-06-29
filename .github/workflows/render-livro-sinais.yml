@@ -21,18 +21,35 @@ jobs:
           node-version: '22'
 
       - name: Install npm packages
-        run: npm install --no-save playwright @supabase/supabase-js
+        run: npm install --no-save playwright puppeteer @supabase/supabase-js @fontsource/fraunces @fontsource/outfit
 
       - name: Install Chromium (Playwright)
         run: npx playwright install --with-deps chromium
 
-      - name: Render do livro (PT e EN)
+      - name: Download capa escolhida (a imagem da Vivianne)
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
         run: |
-          node build/build-book.mjs pt
-          node build/build-book.mjs en
+          mkdir -p sinais-capa
+          curl -fsS "$SUPABASE_URL/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-sinais/capa.jpg" -o /tmp/sinais-capa.jpg \
+            && echo "capa escolhida descarregada" || echo "sem capa escolhida; o PDF usa a capa tipografica"
+
+      - name: Compor capa titulada (PT e EN), se houver imagem
+        run: |
+          if [ -f /tmp/sinais-capa.jpg ]; then
+            node scripts/livro-pilar/capa-compor.js /tmp/sinais-capa.jpg sinais-capa/capa-composta.png pt os-7-sinais
+            node scripts/livro-pilar/capa-compor.js /tmp/sinais-capa.jpg sinais-capa/capa-composta-en.png en os-7-sinais
+          else
+            echo "sem imagem; salto a composicao"
+          fi
+
+      - name: Render do livro (PT e EN) com a tua capa
+        run: |
+          SINAIS_COVER=sinais-capa/capa-composta.png node build/build-book.mjs pt
+          SINAIS_COVER=sinais-capa/capa-composta-en.png node build/build-book.mjs en
           ls -la Os-7-Sinais-de-Desencaixe.pdf The-Seven-Signs-of-Not-Belonging.pdf
 
-      - name: Publicar na entrega da loja (Supabase)
+      - name: Publicar (PDFs na entrega + capa titulada no site)
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}

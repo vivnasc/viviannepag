@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -204,7 +204,13 @@ function chapter(file, idx){
   return h;
 }
 
-const cover = `
+// Capa: se houver imagem da Vivianne (env SINAIS_COVER = caminho do PNG/JPG dela,
+// ex. a capa gerada no admin), usa-a como 1.ª página, a preencher; senão, a capa
+// tipográfica interna.
+const COVER_IMG = process.env.SINAIS_COVER && existsSync(process.env.SINAIS_COVER)
+  ? 'file://' + path.resolve(process.env.SINAIS_COVER) : null;
+const cover = COVER_IMG ? `
+<section class="front cover cover-img"><img src="${COVER_IMG}" alt=""></section>` : `
 <section class="front cover">
   <div class="cv-num">7</div>
   <h1 class="cv-title">${cfg.coverTitle}</h1>
@@ -293,6 +299,8 @@ section.body{ break-before:page; }
 
 /* ---- rosto ---- */
 .cover{ height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.cover-img{ height:176mm; padding:0; }
+.cover-img img{ width:100%; height:176mm; object-fit:cover; border-radius:1mm; }
 .cv-num{ font-family:'Fraunces',serif; font-weight:300; font-size:52pt; color:${GOLD}; line-height:1; margin-bottom:3mm; }
 .cv-title{ font-family:'Fraunces',serif; font-weight:300; font-size:33pt; line-height:1.1; color:${VIOLETA}; letter-spacing:-.015em; }
 .cv-rule{ width:22mm; height:1px; background:${GOLD}; opacity:.7; margin:7mm 0; }
