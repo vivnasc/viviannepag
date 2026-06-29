@@ -24,7 +24,7 @@ export type FonteTexto = (typeof FONTES_TEXTO)[number]['id'];
 // alinhV/alinhH: posição do texto sobre a imagem (à escolha; default centro/centro).
 export type AlinhV = 'cima' | 'centro' | 'baixo';
 export type AlinhH = 'esq' | 'centro' | 'dir';
-export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: AlinhV; alinhH?: AlinhH; corFundo?: string }
+export interface Tipografia { fonte?: FonteTexto; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: AlinhV; alinhH?: AlinhH; corFundo?: string; entrelinha?: number }
 const FONT_MAP: Record<FonteTexto, string> = { serif: FONT_SERIF, sans: FONT_SANS, mono: FONT_MONO };
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
@@ -211,7 +211,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
             assenta EM BAIXO, recua mais (250) para NÃO tapar o rodapé (assinatura+site,
             em bottom:130). Em cima, o padrão chega (não há cabeçalho na Crescer). */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: alignV, justifyContent: alignFlexH, padding: tipografia?.alinhV === 'baixo' ? '170px 120px 250px' : '170px 120px', zIndex: 2 }}>
-          <p style={{ fontFamily: fontFam, fontWeight: 300, fontSize: tamFinal, lineHeight: 1.18, letterSpacing: '-0.01em', textAlign: alignText, color: corBase, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
+          <p style={{ fontFamily: fontFam, fontWeight: 300, fontSize: tamFinal, lineHeight: tipografia?.entrelinha ?? 1.18, letterSpacing: '-0.01em', textAlign: alignText, color: corBase, textShadow: imageUrl ? '0 2px 28px rgba(0,0,0,0.6)' : 'none', margin: 0 }}>
             {palavras.map((w, i) => {
               const dest = goldIdx.has(i);
               const sombra = imageUrl ? (dest ? '0 2px 24px rgba(0,0,0,0.85), 0 0 7px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95)' : '0 2px 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.55)') : 'none';
