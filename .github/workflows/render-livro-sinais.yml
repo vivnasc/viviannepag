@@ -21,7 +21,7 @@ jobs:
           node-version: '22'
 
       - name: Install npm packages
-        run: npm install --no-save playwright @supabase/supabase-js
+        run: npm install --no-save playwright @supabase/supabase-js pdf-lib
 
       - name: Install Chromium (Playwright)
         run: npx playwright install --with-deps chromium

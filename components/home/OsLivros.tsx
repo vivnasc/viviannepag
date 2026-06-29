@@ -50,7 +50,7 @@ export function OsLivros({ locale }: { locale: string }) {
         ? 'The pillar book of Method VS. A crossing through the seven veils that stand between you and who you are, and the simple way to lift them: see, and release.'
         : 'O livro-pilar do Método VS. Uma travessia pelos sete véus que se põem entre ti e quem és, e o caminho simples para os erguer: ver, e soltar.',
       capa: cb(capaPilar(isEn)),
-      capaRatio: '1400 / 1873',
+      capaRatio: '1600 / 2560',
       href: `${base}/os-sete-veus`,
       cta: isEn ? 'Discover the book' : 'Conhecer o livro',
       preco: <span className="text-creme">€19</span>,
@@ -103,7 +103,7 @@ export function OsLivros({ locale }: { locale: string }) {
                 src={l.capa}
                 fallback={l.capaFallback}
                 alt={l.titulo}
-                className="w-[210px] h-auto rounded-[10px] border border-ocre/30 block"
+                className="w-[210px] h-auto rounded-[10px] border border-ocre/30 block object-cover"
                 style={{ boxShadow: '0 22px 60px -28px rgba(0,0,0,0.7)', aspectRatio: l.capaRatio }}
               />
             </Link>
