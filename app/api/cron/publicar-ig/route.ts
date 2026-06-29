@@ -88,6 +88,11 @@ export async function GET(req: NextRequest) {
 
   const agora = agoraNum();
   const resultados: { slug: string; estado: string }[] = [];
+  // LIMITE de renders DISPARADOS por execução (cada disparo = 1 chamada à API do
+  // GitHub, na conta dela). Sem isto, uma vaga de agendadas estoura o rate limit
+  // todas de uma vez. Espaça pelos ciclos de 15 min (cada render leva ~10 min).
+  const MAX_RENDERS_POR_CICLO = 4;
+  let rendersDisparados = 0;
 
   for (const row of (data ?? []) as Row[]) {
     const t = row.theme ?? {};
@@ -120,6 +125,10 @@ export async function GET(req: NextRequest) {
       const pedido = t.renderPedidoEm ?? 0;
       const haPouco = Date.now() - pedido < 20 * 60 * 1000; // já pedido nos últimos 20 min?
       if (!haPouco) {
+        // trava de RAJADA: no máximo MAX_RENDERS_POR_CICLO disparos por execução; as
+        // restantes esperam o próximo ciclo (15 min). Poupa a API do GitHub.
+        if (rendersDisparados >= MAX_RENDERS_POR_CICLO) { resultados.push({ slug: row.slug, estado: 'na fila (render no próximo ciclo)' }); continue; }
+        rendersDisparados++;
         const ok = await dispararRender(row.slug);
         await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', row.slug);
         resultados.push({ slug: row.slug, estado: ok ? 'a preparar (render disparado)' : 'falha ao disparar render' });
