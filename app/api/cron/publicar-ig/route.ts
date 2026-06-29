@@ -113,10 +113,14 @@ export async function GET(req: NextRequest) {
     // No ciclo seguinte (~15 min) já está pronta e publica-se. Assim, estar
     // na Agenda basta — a Vivianne não carrega em nada. ──
     if (!mediaPronta(conta, chave, t, d)) {
+      // CRESCER: a Vivianne renderiza e VÊ antes de publicar. O publicador NUNCA
+      // renderiza o carrossel sozinho nem publica algo por ver — espera que ela
+      // renderize (🖼) e só depois, à hora, publica o que já está renderizado.
+      if (ehCrescerCarrossel(t)) { resultados.push({ slug: row.slug, estado: 'à espera que renderizes o carrossel (não publico por ver)' }); continue; }
       const pedido = t.renderPedidoEm ?? 0;
       const haPouco = Date.now() - pedido < 20 * 60 * 1000; // já pedido nos últimos 20 min?
       if (!haPouco) {
-        const ok = await dispararRender(row.slug, ehCrescerCarrossel(t) ? 'carrossel' : undefined);
+        const ok = await dispararRender(row.slug);
         await supabase.from('carousel_collections').update({ theme: { ...t, renderPedidoEm: Date.now(), igStatus: ok ? 'a preparar imagens no servidor (~10 min)' : 'falha ao pedir render' } }).eq('slug', row.slug);
         resultados.push({ slug: row.slug, estado: ok ? 'a preparar (render disparado)' : 'falha ao disparar render' });
       } else {
