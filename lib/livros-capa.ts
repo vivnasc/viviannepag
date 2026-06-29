@@ -21,7 +21,7 @@ export const CAPA_SAFETY =
 export const LIVROS_CAPA: LivroCapa[] = [
   {
     slug: 'os-7-sinais', marca: 'Os 7 Sinais de Desencaixe', sub: 'o livro · pertença e autenticidade',
-    simbolo: 'a single empty wooden chair drawn slightly back from a long table set for a meal, one place left unoccupied while the others fade into soft shadow, warm candlelight, intimate and quietly melancholic, the table seen from the side, no people',
+    simbolo: 'a warm candlelit gathering of several soft painterly human figures seated close together, glowing in golden light and turned toward one another in conversation, and a single figure among them set slightly apart, turned a little outward and rendered in cooler dimmer light, present in the same warm room yet quietly outside its warmth, atmospheric and intimate, faces undetailed, the feeling of being among others and still not belonging',
     comp: { selo: 'IRMÃO DE OS SETE VÉUS', t1: 'Os 7 Sinais', t2: 'de Desencaixe', sub: 'O equilíbrio entre pertença\ne autenticidade', autora: 'VIVIANNE DOS SANTOS' },
     compEn: { selo: 'A COMPANION TO THE SEVEN VEILS', t1: 'The 7 Signs', t2: 'of Not Belonging', sub: 'On belonging without\nmaking yourself smaller', autora: 'VIVIANNE DOS SANTOS' },
   },
