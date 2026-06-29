@@ -18,6 +18,14 @@ A little here. A little there. The opinion you did not voice. The dream you spok
 
 This is what you have been paying. Today, in this sign, I do not come to tell you that you paid to those who did not deserve it, nor that you were robbed, nor that you were deceived. I do not come to give you a villain. There is no villain. The people at those tables took nothing from you. Most of them do not even know you paid. Some would have been horrified if they had known. It was you who, out of love and out of fear, and the two usually come hand in hand, decided that was the value of a place among those you loved. You paid it with your dearest currency, which was not your time, nor your energy, nor your work. It was you. It was you whole, pretending to be a little less in order to fit.
 
+::: pausa
+**Set the book down, and look at the bill.**
+Not to pay it, nor to charge anyone with it. Only to see it for the first time.
+> Remember a table you love where you become a little smaller at the door. Notice, without blaming anyone, what currency you usually hold out there without anyone asking for it.
+- What do you pay, at each table, before they even charge you?
+- And if most of those tables had never asked you to pay?
+:::
+
 There is a sentence you may already have said to someone, or heard someone say to you, and that seems like good sense and is, in truth, the exact name of the wound. It is this: you have to give a little, that is how it works. It is true. Every relationship has giving. Every belonging asks you to give something up, to make room, to be not only yourself and your will. This is just and it is good. But there was a moment, somewhere, when you stopped giving things up and began to give up yourself. No one warned you the border had been crossed, because the border has no sign. You gave up the dinner hour and that is fine. You gave up the film you wanted to watch and that is fine. Then, without warning, you gave up your opinion, your strangeness, your way of feeling things, and that was no longer fine, but by then you had given up so much that you also gave up the capacity to notice you were giving up what should not be given up.
 
 That is what hurts. It is not the giving. It is the giving without ground, the giving that does not know where to stop because it lost sight of what it was protecting.
@@ -83,6 +91,14 @@ For six signs, and probably for far longer than six signs, for almost your whole
 Now, at this threshold where the war has softened, you hear a different question forming. You did not look for it. It came on its own, from the same place the softening came from. The new question is this, and I want you to read it slowly, because it will stay with you long after you close this book.
 
 Where can I remain whole while I belong.
+
+::: pausa
+**Stay with the new question.**
+Do not try to answer it today. Let it live in you like light coming through an open door.
+> Repeat it slowly, once: where can I remain whole while I belong? And notice what changes in the body just from trading "where do I fit" for "where do I remain whole".
+- At which table can you already be whole without paying?
+- And at one where it costs you: what do you still hold out at the door that you could after all keep?
+:::
 
 Feel the difference. It is not where do I fit. It is where do I remain whole. It is not whether there is room for me. It is whether there is room for me without my having to leave parts of myself at the door. The old question looked for a place. The new question looks for a condition. That condition is the only thing that makes belonging worth the name. Because a belonging that costs you pieces of yourself is not belonging, it is lodging. You are housed, you do not belong. To belong, really to belong, is to be able to remain whole while you are there. It is presence with no piece missing.
 
