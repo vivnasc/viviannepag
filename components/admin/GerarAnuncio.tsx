@@ -103,6 +103,8 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
   }
 
   const prontas = g.cenas.filter((c, i) => c.usarCapa || cenas[i]?.motionUrl || cenas[i]?.cenaUrl).length;
+  const comMov = g.cenas.filter((c, i) => c.usarCapa || cenas[i]?.motionUrl).length; // planos que MEXEM no vídeo
+  const soImagem = g.cenas.filter((c, i) => !c.usarCapa && cenas[i]?.cenaUrl && !cenas[i]?.motionUrl).length; // imagem sem motion
 
   return (
     <div className="rounded-[14px] border border-ocre/25 p-5">
@@ -218,6 +220,8 @@ function Painel({ variante, g, capaUrl }: { variante: string; g: Guiao; capaUrl:
           {montar === 'a-enviar' ? 'a enviar…' : 'montar o vídeo final →'}
         </button>
         <p className="text-creme-2/45 text-[0.72rem] mt-2">monta os planos prontos no modo <em className="text-creme-2/70">{modo === 'continuo' ? 'contínuo (cinematográfico, sem cortes)' : 'cortes secos'}</em> + a tua voz. Cada plano corre sem loop; karaokê + música ficam no render. {prontas === 0 && 'Gera pelo menos um plano primeiro.'}</p>
+        {soImagem > 0 && <p className="text-rosa/90 text-[0.74rem] mt-2">⚠ {soImagem} plano(s) com imagem mas <strong>sem movimento</strong> — saem como imagem fixa no vídeo. Carrega <em>🎬 pôr a mexer</em> nesses antes de montar. (Atenção: regerar a imagem de um plano apaga o seu movimento.)</p>}
+        <p className="text-creme-2/40 text-[0.7rem] mt-1">{comMov} de {g.cenas.length} planos com movimento.</p>
         {montar === 'enviado' && <p className="text-salvia text-[0.8rem] mt-3 font-serif italic">A montar (~5-10 min). Atualiza a página e o vídeo aparece em baixo.</p>}
         {(vozEstado === 'erro' || montar === 'erro' || erro) && <p className="text-rosa/90 text-[0.8rem] mt-3">Algo correu mal: {erro}</p>}
       </div>

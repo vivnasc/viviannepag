@@ -146,8 +146,9 @@ function paginaOverlay(plano) {
     #root{position:relative;width:${W}px;height:${H}px}
     .gancho{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 90px}
     .gancho p{font-family:'Fraunces',serif;font-weight:300;color:#F6EDE0;font-size:78px;line-height:1.22;letter-spacing:-.01em;white-space:pre-line;text-shadow:0 3px 30px rgba(12,8,18,.9)}
-    .kar{position:absolute;left:0;right:0;bottom:300px;padding:0 70px;text-align:center}
-    .kar span{font-family:'Fraunces',serif;font-weight:300;font-size:60px;line-height:1.32;text-shadow:0 2px 18px rgba(12,8,18,.92);transition:color .12s,opacity .12s}
+    .kar{position:absolute;left:0;right:0;bottom:300px;display:flex;justify-content:center;padding:0 70px}
+    .kar .box{max-width:900px;background:rgba(16,12,20,.62);padding:22px 36px;border-radius:24px;text-align:center}
+    .kar span{font-family:'Fraunces','Georgia','Times New Roman',serif;font-weight:600;font-size:62px;line-height:1.3;text-shadow:0 2px 12px rgba(0,0,0,.95)}
     .fim{position:absolute;inset:0;background:#1b1612;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46px;padding:60px}
     .fim img{width:62%;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
     .fim .t{font-family:'Fraunces',serif;font-weight:600;color:#F6EDE0;font-size:62px;margin-bottom:18px;text-align:center}
@@ -189,10 +190,10 @@ function paginaOverlay(plano) {
           var cor, op;
           if (t >= p.t1){ cor='#F6EDE0'; op='1'; }            // já dita
           else if (t >= p.t0){ cor='#E9B98F'; op='1'; }       // a dizer agora
-          else { cor='#F6EDE0'; op='0.34'; }                  // por dizer
+          else { cor='#F6EDE0'; op='0.5'; }                   // por dizer
           html += '<span style="color:'+cor+';opacity:'+op+'">'+p.w+'</span> ';
         }
-        root.innerHTML = '<div class="kar" style="opacity:'+clamp(vis).toFixed(3)+'">'+html+'</div>';
+        root.innerHTML = '<div class="kar" style="opacity:'+clamp(vis).toFixed(3)+'"><div class="box">'+html+'</div></div>';
         return;
       }
       root.innerHTML = '';
@@ -261,6 +262,10 @@ async function main() {
     else if (cenasG[i] && cenasG[i].usarCapa) planos.push({ capa: true });
   }
   if (!planos.length && (man.motionUrl || man.cenaUrl)) planos.push({ motionUrl: man.motionUrl, cenaUrl: man.cenaUrl });
+  // diagnóstico claro: que tem cada plano (MOTION = mexe · imagem-fixa = Ken Burns)
+  console.log('· planos:', planos.length ? planos.map((p, i) => `${i + 1}:${p.capa ? 'capa' : (p.motionUrl ? 'MOTION' : 'imagem-fixa')}`).join(' · ') : 'nenhum');
+  const semMotion = planos.filter((p) => !p.capa && !p.motionUrl && p.cenaUrl).length;
+  if (semMotion) console.log(`· AVISO: ${semMotion} plano(s) sem motion → saem como imagem fixa. Gera o motion (🎬 pôr a mexer) ANTES de montar.`);
 
   async function segmentoDePlano(p, dur, out) {
     if (p.capa) {
