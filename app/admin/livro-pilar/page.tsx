@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { LivrosCapas } from '@/components/admin/LivrosCapas';
 import { RenderLivros } from '@/components/admin/RenderLivros';
+import { CapaSinaisUpload } from '@/components/admin/CapaSinaisUpload';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +23,15 @@ export default function LivrosAdmin() {
       </header>
 
       <LivrosCapas />
+
+      <section className="border border-ocre/15 rounded-[14px] p-6 mt-8">
+        <h3 className="font-serif text-creme text-[1.05rem] mb-1">Carregar capa própria · Os Sete Véus</h3>
+        <p className="text-creme-2/60 text-[0.82rem] font-serif italic mb-5">
+          Se fizeste a capa fora do site, carrega-a aqui (PT e EN). Fica a capa na home e na loja, sem gerar nada.
+        </p>
+        <CapaSinaisUpload slug="os-7-veus" />
+      </section>
+
       <RenderLivros />
     </main>
   );

@@ -7,21 +7,23 @@ export const maxDuration = 60;
 
 const BUCKET = 'viviannepag-assets';
 
-// POST (multipart) { ficheiro: imagem, lang: 'pt'|'en' } — a Vivianne faz upload
-// da capa que fez FORA do site (imagem final, já com título). Guarda-a como a
-// capa do livro: livro-pilar/os-7-sinais/capa-composta(-en).png. A home, a loja
-// e o render do PDF passam a usar esta imagem.
+// POST (multipart) { ficheiro: imagem, lang: 'pt'|'en', slug } — a Vivianne faz
+// upload da capa que fez FORA do site (imagem final, já com título). Guarda-a
+// como a capa do livro: livro-pilar/<slug>/capa-composta(-en).png. A home, a
+// loja e o render do PDF passam a usar esta imagem. slug: os-7-sinais | os-7-veus.
+const SLUGS = ['os-7-sinais', 'os-7-veus'];
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   try {
     const form = await req.formData();
     const file = form.get('ficheiro');
     const lang = (form.get('lang') as string) === 'en' ? 'en' : 'pt';
+    const slug = SLUGS.includes(form.get('slug') as string) ? (form.get('slug') as string) : 'os-7-sinais';
     if (!(file instanceof Blob)) return NextResponse.json({ erro: 'sem-ficheiro' }, { status: 400 });
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const tipo = file.type && file.type.startsWith('image/') ? file.type : 'image/png';
-    const path = `livro-pilar/os-7-sinais/capa-composta${lang === 'en' ? '-en' : ''}.png`;
+    const path = `livro-pilar/${slug}/capa-composta${lang === 'en' ? '-en' : ''}.png`;
 
     const sb = getSupabaseAdmin();
     const { data: existing } = await sb.storage.getBucket(BUCKET);

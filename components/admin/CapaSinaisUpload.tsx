@@ -6,11 +6,11 @@ import { useState } from 'react';
 // Sobe para o Supabase como a capa do livro (capa-composta). A home, a loja e o
 // render do PDF passam a usar esta imagem.
 const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
-const capaUrl = (en?: boolean) =>
-  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/os-7-sinais/capa-composta${en ? '-en' : ''}.png`;
+const capaUrl = (slug: string, en?: boolean) =>
+  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-pilar/${slug}/capa-composta${en ? '-en' : ''}.png`;
 
-function Slot({ lang, titulo }: { lang: 'pt' | 'en'; titulo: string }) {
-  const [preview, setPreview] = useState(`${capaUrl(lang === 'en')}?t=1`);
+function Slot({ slug, lang, titulo }: { slug: string; lang: 'pt' | 'en'; titulo: string }) {
+  const [preview, setPreview] = useState(`${capaUrl(slug, lang === 'en')}?t=1`);
   const [estado, setEstado] = useState('');
   const [a, setA] = useState(false);
 
@@ -21,6 +21,7 @@ function Slot({ lang, titulo }: { lang: 'pt' | 'en'; titulo: string }) {
       const fd = new FormData();
       fd.append('ficheiro', file);
       fd.append('lang', lang);
+      fd.append('slug', slug);
       const res = await fetch('/api/admin/capa-sinais-upload', { method: 'POST', body: fd });
       const j = await res.json();
       if (res.ok) { setEstado('capa guardada ✓'); setPreview(j.url); }
@@ -50,15 +51,15 @@ function Slot({ lang, titulo }: { lang: 'pt' | 'en'; titulo: string }) {
   );
 }
 
-export function CapaSinaisUpload() {
+export function CapaSinaisUpload({ slug = 'os-7-sinais' }: { slug?: string }) {
   return (
     <section>
       <p className="text-creme-2/75 text-[0.9rem] leading-[1.7] mb-5 max-w-[60ch]">
         Carrega a tua imagem da capa (a que fizeste fora do site, já com o título). Fica logo a capa na home e na loja. Para o PDF, carrega depois &quot;renderizar livro + publicar&quot;.
       </p>
       <div className="flex gap-8 flex-wrap">
-        <Slot lang="pt" titulo="capa · PT" />
-        <Slot lang="en" titulo="capa · EN (opcional)" />
+        <Slot slug={slug} lang="pt" titulo="capa · PT" />
+        <Slot slug={slug} lang="en" titulo="capa · EN (opcional)" />
       </div>
     </section>
   );
