@@ -25,7 +25,7 @@ type Peca = {
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
-  momentos: string[] | null; agendadoEm: string | null; hora: string | null;
+  momentos: string[] | null; slidesImgs: (string | null)[] | null; agendadoEm: string | null; hora: string | null;
   publicado: boolean; criadoEm: string | null;
 };
 
@@ -220,6 +220,34 @@ function SomBox({ peca, disabled, busy, onGerar, onRemover }: { peca: Peca; disa
   );
 }
 
+// EDITOR DE SLIDES (autonomia total): vê todos os slides, edita o TEXTO de cada um
+// e põe/tira IMAGEM em cada slide (capa sim ou não, slides sim ou não).
+function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem }: { peca: Peca; disabled: boolean; busy: boolean; onSaveTextos: (textos: string[]) => void; onImagem: (idx: number, remover: boolean) => void }) {
+  const iniciais = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto];
+  const [textos, setTextos] = useState<string[]>(iniciais);
+  const imgs = peca.slidesImgs ?? [];
+  const setT = (i: number, v: string) => setTextos((s) => s.map((x, k) => (k === i ? v : x)));
+  return (
+    <div className="px-2 pb-2 space-y-2 border-t border-white/5 pt-2">
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">slides · edita o texto e a imagem de cada um</p>
+      {textos.map((t, i) => (
+        <div key={i} className="rounded-lg border border-white/10 p-1.5 space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-[0.55rem] opacity-50">{i === 0 ? 'capa' : `slide ${i + 1}`}</span>
+            <span className="flex gap-1">
+              <button type="button" onClick={() => onImagem(i, false)} disabled={disabled} className="text-[0.56rem] px-1.5 py-0.5 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>{imgs[i] ? '🔁 imagem' : '🖼 pôr imagem'}</button>
+              {imgs[i] && <button type="button" onClick={() => onImagem(i, true)} disabled={disabled} className="text-[0.56rem] px-1.5 py-0.5 rounded border border-rose-400/40 text-rose-300 disabled:opacity-40">✕ tirar</button>}
+            </span>
+          </div>
+          {imgs[i] && <img src={imgs[i] as string} alt="" className="h-16 rounded border border-white/10" />}
+          <textarea value={t} onChange={(e) => setT(i, e.target.value)} rows={i === 0 ? 2 : 4} className="w-full text-[0.64rem] leading-relaxed px-2 py-1.5 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />
+        </div>
+      ))}
+      <button type="button" onClick={() => onSaveTextos(textos)} disabled={disabled} className="w-full text-[0.66rem] px-2 py-1.5 rounded-lg border disabled:opacity-50" style={{ borderColor: DZ, background: DZ, color: BG2 }}>{busy ? 'a guardar…' : '💾 guardar textos'}</button>
+    </div>
+  );
+}
+
 // PADRÃO (fixável): defaults aplicados a TODAS as peças novas + "aplicar aos selecionados".
 type Padrao = { tipografia: Tipografia; efeito: EfeitoTexto };
 const PADRAO_DEFAULT: Padrao = { tipografia: { fonte: 'serif', tamanho: 92, cor: '#F4ECDD', corDestaque: DZ, alinhV: 'centro', alinhH: 'centro' }, efeito: 'maquina' };
@@ -303,12 +331,9 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Gerar o CARROSSEL de imagens (telas 4:5, sem motion)? Corre nos GitHub Actions, uns minutos.')) return;
     acao(slug, '/api/admin/carrossel/render-dispatch', { dias: '1', modo: 'carrossel' }, 'A gerar o carrossel de imagens…', 'Carrossel disparado. As imagens aparecem daqui a uns minutos (recarrega).', false);
   }, [acao]);
-  // VÍDEO DE CENAS SEQUENCIADAS (reel narrativo: clips Kling encadeados num vídeo
-  // contínuo). USA MOTION (mais caro) — para peças cinematográficas, tipo o anúncio.
-  const cenasSequenciadas = useCallback((slug: string) => {
-    if (typeof window !== 'undefined' && !window.confirm('Gerar VÍDEO de CENAS SEQUENCIADAS (clips encadeados, com motion Kling)? É o formato cinematográfico, mais caro, e corre nos GitHub Actions (alguns minutos).')) return;
-    acao(slug, '/api/admin/metodo-vs/reel-narrativo-dispatch', { nClips: 4, dur: 10 }, 'A gerar o vídeo de cenas sequenciadas (Kling)…', 'Vídeo de cenas disparado. Aparece daqui a uns minutos (recarrega).', false);
-  }, [acao]);
+  // editor de slides: guardar os textos de todos os slides + imagem por slide.
+  const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
+  const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
 
   // ── seleção múltipla + lote ──
   const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
@@ -444,6 +469,7 @@ export default function CrescerPage() {
                   )}
                   <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                     <button onClick={() => abrir(p.slug, 'preview')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>▶ pré-ver</button>
+                    <button onClick={() => abrir(p.slug, 'slides')} disabled={tBusy} title="ver todos os slides, editar o texto e pôr/tirar imagem em cada um" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>📝 slides</button>
                     <button onClick={() => acao(p.slug, '/api/admin/crescer/imagem', {}, 'A trocar a imagem (Flux)…', 'Imagem nova.', false)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                     <button onClick={() => abrir(p.slug, 'motion')} disabled={tBusy || !p.imageUrl} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🎬 mov.</button>
                     <button onClick={() => abrir(p.slug, 'efeito')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito</button>
@@ -453,10 +479,10 @@ export default function CrescerPage() {
                     <button onClick={() => abrir(p.slug, 'agenda')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'}</button>
                     {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
                     <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
-                    <button onClick={() => cenasSequenciadas(p.slug)} disabled={tBusy} title="vídeo de cenas sequenciadas (clips encadeados, com motion) — para peças cinematográficas, tipo o anúncio" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🎬 cenas</button>
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
                   {ab === 'preview' && <PreviewBox peca={p} />}
+                  {ab === 'slides' && <SlidesBox peca={p} busy={tBusy} disabled={tBusy} onSaveTextos={(t) => salvarTextos(p.slug, t)} onImagem={(idx, rem) => imagemSlide(p.slug, idx, rem)} />}
                   {ab === 'motion' && <MotionBox busy={tBusy} disabled={tBusy} onGerar={(opts) => acao(p.slug, '/api/admin/soulab/motion', opts, 'A dar vida à imagem (Kling)… 1-3 min.', 'Movimento gerado.')} />}
                   {ab === 'efeito' && <EfeitoBox peca={p} busy={tBusy} disabled={tBusy} onSave={(ef) => acao(p.slug, '/api/admin/soulab/editar', { efeito: ef }, 'A guardar o efeito…', 'Efeito guardado.')} />}
                   {ab === 'som' && <SomBox peca={p} busy={tBusy} disabled={tBusy} onGerar={(tipo, estilo) => acao(p.slug, '/api/admin/soulab/som', { tipo, estilo }, 'A gerar o áudio…', 'Áudio gerado.', false)} onRemover={() => acao(p.slug, '/api/admin/soulab/som', { remover: true }, 'A remover o áudio…', 'Áudio removido.', false)} />}
