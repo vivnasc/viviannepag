@@ -235,6 +235,9 @@ export interface VisualCrescer {
   promptBase: string;
   // como VARIAR a composição (para não sair sempre a mesma coisa, ex. só caras).
   variar: string;
+  // ARQUÉTIPOS de cena distintos — rodam por peça para as imagens NÃO repetirem
+  // (ex.: não saírem todas o mesmo desfiladeiro verde). [] = sem rotação.
+  arquetipos: string[];
 }
 
 // MUNDO VISUAL · PÓS-SOBREVIVÊNCIA (decisão e manifesto da Vivianne, jun 2026).
@@ -272,6 +275,16 @@ export const VISUAIS: VisualCrescer[] = [
       '(à frente, arquitetura orgânica luminosa; atrás, uma estrutura monumental de pedra e aço); uma estrutura circular gigante no céu com milhões de lugares iluminados e um só vazio; ' +
       'uma muralha industrial colossal com a figura de costas a olhar jardins suspensos ao longe; uma planície vasta sob um céu enorme; uma estrada de luz que nasce só uns metros à frente dos passos. ' +
       'A figura é sempre minúscula perante a escala; a tensão entre o mundo antigo (pesado) e o que emerge (orgânico, luminoso) traduz o sentimento da frase.',
+    arquetipos: [
+      'a figure tiny atop a city of thousands of transparent layers of ancient cities suspended over one another',
+      'a figure crossing a bridge of light between two megacities (organic luminous architecture ahead, monumental stone-and-steel behind)',
+      'a tiny figure before a giant circular structure in the sky with millions of lit places and a single empty one',
+      'a figure with their back to a colossal industrial wall, looking at suspended gardens far in the distance',
+      'a single figure at the centre of a vast silent plain under an enormous sky, no structures',
+      'a figure on a road of light that builds itself only a few metres ahead of their steps',
+      'a tiny figure inside an immense floating library of volumes of light',
+      'a figure climbing a vast stairway that ends in the clouds',
+    ],
   },
   {
     id: 'conceptual', label: 'Os dois mundos', emoji: '◍',
@@ -283,6 +296,14 @@ export const VISUAIS: VisualCrescer[] = [
     variar:
       'VARIA a metáfora em escala: uma cidade escura e densa de engrenagens e contrafortes vista de muito longe, bela e exausta; um interior monumental intacto mas vazio de luz própria, ' +
       'com uma fenda por onde entra a luz quente do outro mundo; oceanos verticais, bibliotecas flutuantes, portais colossais, árvores do tamanho de continentes. Mostra o limiar, nunca a solução.',
+    arquetipos: [
+      'a vast dark dense city of gears and buttresses seen from very far, beautiful and exhausted',
+      'a monumental interior, intact but with no light of its own, a crack letting in warm light from the other world',
+      'colossal vertical oceans of suspended water catching the light',
+      'enormous open portals onto a luminous horizon',
+      'continent-sized living trees rising over an old world',
+      'bridges of light between inhabited floating mountains',
+    ],
   },
   {
     id: 'natureza', label: 'O mundo que emerge', emoji: '🌌',
@@ -294,12 +315,21 @@ export const VISUAIS: VisualCrescer[] = [
     variar:
       'VARIA a paisagem do novo mundo, sempre vislumbrada (não habitada por completo): jardins suspensos, rios no céu, pontes de luz, montanhas habitadas, escadas que terminam nas nuvens. ' +
       'Espelha o sentimento da frase (expansão, recomeço, pertença em escala), sempre com segurança, mistério e admiração.',
+    arquetipos: [
+      'endless suspended gardens cascading with greenery and light',
+      'rivers in the sky falling as cascades of luminous water',
+      'inhabited crystalline mountains glowing softly',
+      'a sunrise over a vast ocean of light',
+      'forests growing inside luminous architecture',
+      'auroras over a serene radiant plain',
+    ],
   },
   {
     id: 'minimal', label: 'Minimal / tipográfico', emoji: '𝐀',
     descricao: 'Só texto, fundo limpo (sem imagem).',
     promptBase: '',
     variar: '',
+    arquetipos: [],
   },
 ];
 
