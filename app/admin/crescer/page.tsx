@@ -303,6 +303,12 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Gerar o CARROSSEL de imagens (telas 4:5, sem motion)? Corre nos GitHub Actions, uns minutos.')) return;
     acao(slug, '/api/admin/carrossel/render-dispatch', { dias: '1', modo: 'carrossel' }, 'A gerar o carrossel de imagens…', 'Carrossel disparado. As imagens aparecem daqui a uns minutos (recarrega).', false);
   }, [acao]);
+  // VÍDEO DE CENAS SEQUENCIADAS (reel narrativo: clips Kling encadeados num vídeo
+  // contínuo). USA MOTION (mais caro) — para peças cinematográficas, tipo o anúncio.
+  const cenasSequenciadas = useCallback((slug: string) => {
+    if (typeof window !== 'undefined' && !window.confirm('Gerar VÍDEO de CENAS SEQUENCIADAS (clips encadeados, com motion Kling)? É o formato cinematográfico, mais caro, e corre nos GitHub Actions (alguns minutos).')) return;
+    acao(slug, '/api/admin/metodo-vs/reel-narrativo-dispatch', { nClips: 4, dur: 10 }, 'A gerar o vídeo de cenas sequenciadas (Kling)…', 'Vídeo de cenas disparado. Aparece daqui a uns minutos (recarrega).', false);
+  }, [acao]);
 
   // ── seleção múltipla + lote ──
   const toggleSel = useCallback((slug: string) => setSel((s) => { const n = new Set(s); if (n.has(slug)) n.delete(slug); else n.add(slug); return n; }), []);
@@ -447,6 +453,7 @@ export default function CrescerPage() {
                     <button onClick={() => abrir(p.slug, 'agenda')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'}</button>
                     {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
                     <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
+                    <button onClick={() => cenasSequenciadas(p.slug)} disabled={tBusy} title="vídeo de cenas sequenciadas (clips encadeados, com motion) — para peças cinematográficas, tipo o anúncio" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🎬 cenas</button>
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
                   {ab === 'preview' && <PreviewBox peca={p} />}

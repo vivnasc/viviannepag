@@ -240,10 +240,11 @@ const FIM_PROMPT = 'cinematic, fine art photography, evocative, depth, no text, 
 export const VISUAIS: VisualCrescer[] = [
   {
     id: 'pessoas', label: 'Pessoas futuristas', emoji: '🧑‍🚀',
-    descricao: 'A assinatura dela: figuras humanas, etéreas, futuristas.',
+    descricao: 'A assinatura dela: figura humana visível, serena, com um toque futurista.',
     promptBase:
-      'a solitary ethereal futuristic human figure (androgynous, serene, timeless), soft volumetric light, ' +
-      'subtle iridescent and earth tones, a quiet emotional scene that embodies the idea, painterly and otherworldly, ' + FIM_PROMPT,
+      'a futuristic human figure CLEARLY VISIBLE and softly FRONT-LIT, face and features visible (never a dark silhouette, never pure backlight), ' +
+      'serene timeless presence, elegant subtle-futuristic styling, cinematic fine-art portrait, shallow depth of field, ' +
+      'soft iridescent light with warm earth tones, an emotionally evocative scene that embodies the idea, ' + FIM_PROMPT,
   },
   {
     id: 'conceptual', label: 'Conceptual / abstrato', emoji: '◍',
