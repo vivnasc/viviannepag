@@ -33,21 +33,21 @@ Disto decorre a hipótese desenvolvimental. O sentido evolui porque a vida coloc
 
 ## 4. Conceitos nucleares
 
-**A Necessidade de Sentido** (Relações: [O Significado como Sobrevivência, O Vazio de Significado]): a constatação de que o ser humano não tolera por muito tempo uma existência percebida como sem sentido, e que dessa intolerância nasce o trabalho psíquico de atribuir sentido, queira ele ou não.
+1. **A Necessidade de Sentido** (Relações: [O Significado como Sobrevivência, O Vazio de Significado]): a constatação de que o ser humano não tolera por muito tempo uma existência percebida como sem sentido, e que dessa intolerância nasce o trabalho psíquico de atribuir sentido, queira ele ou não.
 
-**O Significado como Sobrevivência** (Relações: [A Necessidade de Sentido, O Significado Partilhado]): a tese de que o sentido cumpriu e continua a cumprir uma função vital, mantendo o organismo orientado, coeso e capaz de suportar a dor presente em nome de algo, e não apenas confortando-o.
+2. **O Significado como Sobrevivência** (Relações: [A Necessidade de Sentido, O Significado Partilhado]): a tese de que o sentido cumpriu e continua a cumprir uma função vital, mantendo o organismo orientado, coeso e capaz de suportar a dor presente em nome de algo, e não apenas confortando-o.
 
-**As Fontes do Sentido** (Relações: [A Necessidade de Sentido, O Sentido que Evolui]): os lugares de onde o significado pode brotar, o que se faz, quem se ama, a postura que se assume perante aquilo que não se pode mudar, sabendo que a fonte privilegiada varia com a pessoa e o momento.
+3. **As Fontes do Sentido** (Relações: [A Necessidade de Sentido, O Sentido que Evolui]): os lugares de onde o significado pode brotar, o que se faz, quem se ama, a postura que se assume perante aquilo que não se pode mudar, sabendo que a fonte privilegiada varia com a pessoa e o momento.
 
-**O Sentido que Evolui** (Relações: [As Fontes do Sentido, A Narrativa que Organiza]): o reconhecimento de que a forma de fazer sentido se transforma ao longo do desenvolvimento, de modo que aquilo que organizava uma vida pode tornar-se estreito e exigir ser refeito.
+4. **O Sentido que Evolui** (Relações: [As Fontes do Sentido, A Narrativa que Organiza]): o reconhecimento de que a forma de fazer sentido se transforma ao longo do desenvolvimento, de modo que aquilo que organizava uma vida pode tornar-se estreito e exigir ser refeito.
 
-**O Vazio de Significado** (Relações: [A Necessidade de Sentido, A Narrativa que Organiza]): o estado em que as fontes secaram ou a antiga organização do sentido caiu sem que outra a substituísse, vivido não como dor aguda mas como esvaziamento, indiferença e suspensão.
+5. **O Vazio de Significado** (Relações: [A Necessidade de Sentido, A Narrativa que Organiza]): o estado em que as fontes secaram ou a antiga organização do sentido caiu sem que outra a substituísse, vivido não como dor aguda mas como esvaziamento, indiferença e suspensão.
 
-**A Narrativa que Organiza** (Relações: [O Sentido que Evolui, O Vazio de Significado]): a história que cada pessoa conta sobre a própria vida e que liga os acontecimentos numa ordem, tornando-os parte de algo, sendo o sentido em grande medida a coerência dessa história.
+6. **A Narrativa que Organiza** (Relações: [O Sentido que Evolui, O Vazio de Significado]): a história que cada pessoa conta sobre a própria vida e que liga os acontecimentos numa ordem, tornando-os parte de algo, sendo o sentido em grande medida a coerência dessa história.
 
-**O Significado Partilhado** (Relações: [O Significado como Sobrevivência, O Sentido para Além do Eu]): o sentido tecido em comum, que não se inventa sozinho mas se herda, se sustenta e se transmite dentro de um colectivo e de uma linhagem.
+7. **O Significado Partilhado** (Relações: [O Significado como Sobrevivência, O Sentido para Além do Eu]): o sentido tecido em comum, que não se inventa sozinho mas se herda, se sustenta e se transmite dentro de um colectivo e de uma linhagem.
 
-**O Sentido para Além do Eu** (Relações: [O Significado Partilhado, As Fontes do Sentido]): a forma de significado que excede os limites do indivíduo, ligando a vida a algo maior, à comunidade, à continuidade dos que vêm, ao que se pressente sem se possuir.
+8. **O Sentido para Além do Eu** (Relações: [O Significado Partilhado, As Fontes do Sentido]): a forma de significado que excede os limites do indivíduo, ligando a vida a algo maior, à comunidade, à continuidade dos que vêm, ao que se pressente sem se possuir.
 
 ## 5. Mecanismos
 

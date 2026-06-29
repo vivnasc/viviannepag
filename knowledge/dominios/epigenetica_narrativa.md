@@ -29,21 +29,21 @@ A epigenética molecular, na sua investigação emergente sobre trauma transgera
 
 ## 4. Conceitos nucleares
 
-**A História que se Herda** (Relações: [O Guião Familiar, A Lealdade Narrativa]): a versão dos acontecimentos que uma família passa adiante, com os seus heróis, culpados e omissões, e que o descendente recebe antes de poder questionar.
+1. **A História que se Herda** (Relações: [O Guião Familiar, A Lealdade Narrativa]): a versão dos acontecimentos que uma família passa adiante, com os seus heróis, culpados e omissões, e que o descendente recebe antes de poder questionar.
 
-**O Segredo Transmitido** (Relações: [O Não-Dito, O Trauma Geracional]): aquilo que se guarda com tanto cuidado que se transmite na própria forma de o guardar, organizando a vida de quem nem sabe que existe.
+2. **O Segredo Transmitido** (Relações: [O Não-Dito, O Trauma Geracional]): aquilo que se guarda com tanto cuidado que se transmite na própria forma de o guardar, organizando a vida de quem nem sabe que existe.
 
-**O Trauma Geracional** (Relações: [O Segredo Transmitido, A Reparação Transgeracional]): a ferida que não foi elaborada numa geração e que reaparece, transformada, nas seguintes, como sintoma, repetição ou ausência inexplicável.
+3. **O Trauma Geracional** (Relações: [O Segredo Transmitido, A Reparação Transgeracional]): a ferida que não foi elaborada numa geração e que reaparece, transformada, nas seguintes, como sintoma, repetição ou ausência inexplicável.
 
-**O Guião Familiar** (Relações: [A História que se Herda, A Lealdade Narrativa]): o enredo implícito que atribui papéis (o forte, o doente, o que parte, o que fica) e dentro do qual cada membro encontra o seu lugar antes de o escolher.
+4. **O Guião Familiar** (Relações: [A História que se Herda, A Lealdade Narrativa]): o enredo implícito que atribui papéis (o forte, o doente, o que parte, o que fica) e dentro do qual cada membro encontra o seu lugar antes de o escolher.
 
-**A Lealdade Narrativa** (Relações: [O Guião Familiar, A Reparação Transgeracional]): a fidelidade invisível que prende um descendente à história dos seus, ao ponto de o impedir de ser feliz, livre ou diferente, por isso parecer uma traição.
+5. **A Lealdade Narrativa** (Relações: [O Guião Familiar, A Reparação Transgeracional]): a fidelidade invisível que prende um descendente à história dos seus, ao ponto de o impedir de ser feliz, livre ou diferente, por isso parecer uma traição.
 
-**O Não-Dito** (Relações: [O Segredo Transmitido, A Ancestralidade Viva]): o que existe na família pela sua falta, o nome que ninguém pronuncia, o assunto que faz o silêncio mudar de textura, e que pesa precisamente por não ter palavras.
+6. **O Não-Dito** (Relações: [O Segredo Transmitido, A Ancestralidade Viva]): o que existe na família pela sua falta, o nome que ninguém pronuncia, o assunto que faz o silêncio mudar de textura, e que pesa precisamente por não ter palavras.
 
-**A Reparação Transgeracional** (Relações: [O Trauma Geracional, A Lealdade Narrativa]): o trabalho de devolver a cada geração a sua dívida e o seu lugar, de modo que o descendente deixe de pagar o que não contraiu e possa honrar sem repetir.
+7. **A Reparação Transgeracional** (Relações: [O Trauma Geracional, A Lealdade Narrativa]): o trabalho de devolver a cada geração a sua dívida e o seu lugar, de modo que o descendente deixe de pagar o que não contraiu e possa honrar sem repetir.
 
-**A Ancestralidade Viva** (Relações: [O Não-Dito, A Reparação Transgeracional]): a presença activa de quem veio antes, não como recordação nem como sintoma, mas como pertença e relação, a linhagem entendida como tecido vivo ao qual ainda se responde.
+8. **A Ancestralidade Viva** (Relações: [O Não-Dito, A Reparação Transgeracional]): a presença activa de quem veio antes, não como recordação nem como sintoma, mas como pertença e relação, a linhagem entendida como tecido vivo ao qual ainda se responde.
 
 ## 5. Mecanismos
 

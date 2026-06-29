@@ -31,21 +31,21 @@ A Grande Transição, neste domínio, significa o levantamento dos continentes q
 
 ## 4. Conceitos nucleares
 
-**Os Estados Não Cartografados** (Relações: [O Espectro da Atenção, Os Limiares Internos]): as configurações da consciência que ocorrem em todos nós, mas que nunca recebem nome e por isso passam sem ser reconhecidas nem repetidas com intenção.
+1. **Os Estados Não Cartografados** (Relações: [O Espectro da Atenção, Os Limiares Internos]): as configurações da consciência que ocorrem em todos nós, mas que nunca recebem nome e por isso passam sem ser reconhecidas nem repetidas com intenção.
 
-**O Espectro da Atenção** (Relações: [Os Estados Não Cartografados, As Fronteiras da Percepção]): a atenção não é interruptor que liga e desliga, mas um espectro contínuo de modos, da dispersão à absorção, cada qual abrindo um mundo diferente do que pode ser percebido.
+2. **O Espectro da Atenção** (Relações: [Os Estados Não Cartografados, As Fronteiras da Percepção]): a atenção não é interruptor que liga e desliga, mas um espectro contínuo de modos, da dispersão à absorção, cada qual abrindo um mundo diferente do que pode ser percebido.
 
-**As Camadas do Eu** (Relações: [O Continente do Corpo, O Território do Silêncio]): o eu não é um ponto único mas uma sobreposição de níveis simultâneos, e a voz verbal de superfície é apenas a mais barulhenta, não a mais profunda.
+3. **As Camadas do Eu** (Relações: [O Continente do Corpo, O Território do Silêncio]): o eu não é um ponto único mas uma sobreposição de níveis simultâneos, e a voz verbal de superfície é apenas a mais barulhenta, não a mais profunda.
 
-**Os Limiares Internos** (Relações: [Os Estados Não Cartografados, As Geografias do Sonho]): as zonas de passagem onde a experiência muda de natureza, momentos de transição que atravessamos sem perceber, e que decidem em que região vamos parar.
+4. **Os Limiares Internos** (Relações: [Os Estados Não Cartografados, As Geografias do Sonho]): as zonas de passagem onde a experiência muda de natureza, momentos de transição que atravessamos sem perceber, e que decidem em que região vamos parar.
 
-**O Território do Silêncio** (Relações: [As Camadas do Eu, O Continente do Corpo]): o silêncio não é ausência de estímulo mas um lugar com relevo próprio, um continente onde, retirado o ruído, se revela o que estava por baixo dele.
+5. **O Território do Silêncio** (Relações: [As Camadas do Eu, O Continente do Corpo]): o silêncio não é ausência de estímulo mas um lugar com relevo próprio, um continente onde, retirado o ruído, se revela o que estava por baixo dele.
 
-**As Geografias do Sonho** (Relações: [Os Limiares Internos, As Fronteiras da Percepção]): o sonho é território estruturado, com lógicas e paisagens recorrentes, e não o resíduo desordenado da vigília que a cultura da sobrevivência o reduziu a ser.
+6. **As Geografias do Sonho** (Relações: [Os Limiares Internos, As Fronteiras da Percepção]): o sonho é território estruturado, com lógicas e paisagens recorrentes, e não o resíduo desordenado da vigília que a cultura da sobrevivência o reduziu a ser.
 
-**O Continente do Corpo** (Relações: [As Camadas do Eu, O Território do Silêncio]): o corpo é um saber cartografado por dentro, com sensações que informam, antecipam e decidem antes da palavra, e que raramente aprendemos a ler.
+7. **O Continente do Corpo** (Relações: [As Camadas do Eu, O Território do Silêncio]): o corpo é um saber cartografado por dentro, com sensações que informam, antecipam e decidem antes da palavra, e que raramente aprendemos a ler.
 
-**As Fronteiras da Percepção** (Relações: [O Espectro da Atenção, As Geografias do Sonho]): aquilo que percebemos não é o que há, mas o que o nosso aparelho foi treinado a destacar, e as fronteiras desse recorte podem deslocar-se quando deixamos de as confundir com o mundo.
+8. **As Fronteiras da Percepção** (Relações: [O Espectro da Atenção, As Geografias do Sonho]): aquilo que percebemos não é o que há, mas o que o nosso aparelho foi treinado a destacar, e as fronteiras desse recorte podem deslocar-se quando deixamos de as confundir com o mundo.
 
 ## 5. Mecanismos
 

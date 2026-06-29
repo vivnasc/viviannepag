@@ -31,21 +31,21 @@ A Grande Transição introduz aqui uma inflexão. Se a arquitectura da sobreviv�
 
 ## 4. Conceitos nucleares
 
-**O Espaço como Estado** (Relações: [A Luz que Organiza, A Escala e o Eu]): cada configuração espacial induz um estado de consciência antes de qualquer pensamento, de modo que entrar num lugar é já entrar num registo de atenção, de abertura ou de fecho.
+1. **O Espaço como Estado** (Relações: [A Luz que Organiza, A Escala e o Eu]): cada configuração espacial induz um estado de consciência antes de qualquer pensamento, de modo que entrar num lugar é já entrar num registo de atenção, de abertura ou de fecho.
 
-**A Luz que Organiza** (Relações: [O Espaço como Estado, O Limiar Construído]): a luz não ilumina apenas o espaço, hierarquiza-o, dizendo ao corpo onde se deter, para onde ir e o que merece ser visto, e por essa via organiza a própria experiência interior do lugar.
+2. **A Luz que Organiza** (Relações: [O Espaço como Estado, O Limiar Construído]): a luz não ilumina apenas o espaço, hierarquiza-o, dizendo ao corpo onde se deter, para onde ir e o que merece ser visto, e por essa via organiza a própria experiência interior do lugar.
 
-**O Limiar Construído** (Relações: [A Luz que Organiza, O Abrigo e o Horizonte]): a passagem de um espaço a outro, a soleira, a porta, o estreitamento, é o momento em que a consciência muda de regime, e construir bem um limiar é dar ao corpo o tempo de transitar entre estados.
+3. **O Limiar Construído** (Relações: [A Luz que Organiza, O Abrigo e o Horizonte]): a passagem de um espaço a outro, a soleira, a porta, o estreitamento, é o momento em que a consciência muda de regime, e construir bem um limiar é dar ao corpo o tempo de transitar entre estados.
 
-**A Escala e o Eu** (Relações: [O Espaço como Estado, O Vazio Habitável]): a relação entre o tamanho do espaço e o tamanho do corpo regula o sentido de si, ora dilatando-o sob uma abóbada alta, ora recolhendo-o numa alcova, e nessa medida a escala é uma escrita sobre a dimensão que nos atribuímos.
+4. **A Escala e o Eu** (Relações: [O Espaço como Estado, O Vazio Habitável]): a relação entre o tamanho do espaço e o tamanho do corpo regula o sentido de si, ora dilatando-o sob uma abóbada alta, ora recolhendo-o numa alcova, e nessa medida a escala é uma escrita sobre a dimensão que nos atribuímos.
 
-**O Vazio Habitável** (Relações: [A Escala e o Eu, A Forma que Acalma]): o espaço deixado por preencher não é falta, é oferta, pois o vazio dá lugar ao movimento, ao silêncio e ao próprio, e um interior sem vazio é um interior que não deixa respirar a consciência.
+5. **O Vazio Habitável** (Relações: [A Escala e o Eu, A Forma que Acalma]): o espaço deixado por preencher não é falta, é oferta, pois o vazio dá lugar ao movimento, ao silêncio e ao próprio, e um interior sem vazio é um interior que não deixa respirar a consciência.
 
-**A Forma que Acalma** (Relações: [O Vazio Habitável, A Geometria da Pertença]): há formas que descem o nível de alarme do corpo, a curva que acolhe, a proporção que se equilibra, o ritmo que se repete sem se impor, e essas formas trabalham por baixo da atenção a favor de um estado de repouso vigilante e sereno.
+6. **A Forma que Acalma** (Relações: [O Vazio Habitável, A Geometria da Pertença]): há formas que descem o nível de alarme do corpo, a curva que acolhe, a proporção que se equilibra, o ritmo que se repete sem se impor, e essas formas trabalham por baixo da atenção a favor de um estado de repouso vigilante e sereno.
 
-**A Geometria da Pertença** (Relações: [A Forma que Acalma, O Abrigo e o Horizonte]): certas disposições do espaço dizem ao corpo que ele faz parte, o círculo que não tem costas, o centro comum em torno do qual a vida se organiza, o recinto que reúne, e essa geometria produz pertença antes de qualquer palavra de acolhimento.
+7. **A Geometria da Pertença** (Relações: [A Forma que Acalma, O Abrigo e o Horizonte]): certas disposições do espaço dizem ao corpo que ele faz parte, o círculo que não tem costas, o centro comum em torno do qual a vida se organiza, o recinto que reúne, e essa geometria produz pertença antes de qualquer palavra de acolhimento.
 
-**O Abrigo e o Horizonte** (Relações: [A Geometria da Pertença, O Limiar Construído]): o bem-estar profundo num lugar nasce da dupla resposta a duas necessidades antigas, ter as costas guardadas e ter a vista aberta, de modo que o espaço que conjuga refúgio e prospecto satisfaz ao mesmo tempo o que em nós quer proteger-se e o que em nós quer expandir-se.
+8. **O Abrigo e o Horizonte** (Relações: [A Geometria da Pertença, O Limiar Construído]): o bem-estar profundo num lugar nasce da dupla resposta a duas necessidades antigas, ter as costas guardadas e ter a vista aberta, de modo que o espaço que conjuga refúgio e prospecto satisfaz ao mesmo tempo o que em nós quer proteger-se e o que em nós quer expandir-se.
 
 ## 5. Mecanismos
 

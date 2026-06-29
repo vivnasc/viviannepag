@@ -25,21 +25,21 @@ A hipótese deste domínio é que a consciência é plástica em profundidade, e
 
 ## 4. Conceitos nucleares
 
-**As Cosmovisões da Consciência** (Relações: [O Eu Poroso e o Eu Fechado, As Cartografias Indígenas]): cada cultura não vive a mesma consciência com crenças diferentes, mas constitui consciências diferentes a partir da sua imagem do real, do tempo e da pessoa.
+1. **As Cosmovisões da Consciência** (Relações: [O Eu Poroso e o Eu Fechado, As Cartografias Indígenas]): cada cultura não vive a mesma consciência com crenças diferentes, mas constitui consciências diferentes a partir da sua imagem do real, do tempo e da pessoa.
 
-**O Tempo Cultural** (Relações: [A Consciência Ancestral, Os Estados Rituais]): a forma do tempo vivido (linear e irreversível, cíclico, presente espesso onde os antepassados ainda agem) molda o que a consciência pode segurar, esperar e recordar.
+2. **O Tempo Cultural** (Relações: [A Consciência Ancestral, Os Estados Rituais]): a forma do tempo vivido (linear e irreversível, cíclico, presente espesso onde os antepassados ainda agem) molda o que a consciência pode segurar, esperar e recordar.
 
-**Os Estados Rituais** (Relações: [As Tecnologias do Sagrado, A Consciência Colectiva]): estados de consciência cultivados e enquadrados pelo ritual, em que a atenção, a percepção e a fronteira do eu se reorganizam dentro de uma forma partilhada que os torna legíveis e seguros.
+3. **Os Estados Rituais** (Relações: [As Tecnologias do Sagrado, A Consciência Colectiva]): estados de consciência cultivados e enquadrados pelo ritual, em que a atenção, a percepção e a fronteira do eu se reorganizam dentro de uma forma partilhada que os torna legíveis e seguros.
 
-**A Consciência Colectiva** (Relações: [Os Estados Rituais, A Consciência Ancestral]): a parte da consciência que não é propriedade do indivíduo mas se vive em comum, no canto, no luto, no trabalho da comunidade, onde o sujeito da experiência é um nós antes de ser um eu.
+4. **A Consciência Colectiva** (Relações: [Os Estados Rituais, A Consciência Ancestral]): a parte da consciência que não é propriedade do indivíduo mas se vive em comum, no canto, no luto, no trabalho da comunidade, onde o sujeito da experiência é um nós antes de ser um eu.
 
-**As Tecnologias do Sagrado** (Relações: [Os Estados Rituais, O Tempo Cultural]): os meios disciplinados (canto, dança, jejum, silêncio, gesto, narrativa, lugar consagrado) com que uma cultura modula a consciência de forma fiável e transmissível, tratados aqui como técnicas, não como exotismo.
+5. **As Tecnologias do Sagrado** (Relações: [Os Estados Rituais, O Tempo Cultural]): os meios disciplinados (canto, dança, jejum, silêncio, gesto, narrativa, lugar consagrado) com que uma cultura modula a consciência de forma fiável e transmissível, tratados aqui como técnicas, não como exotismo.
 
-**O Eu Poroso e o Eu Fechado** (Relações: [As Cosmovisões da Consciência, A Consciência Ancestral]): dois desenhos da fronteira do sujeito, o eu permeável ao mundo, às presenças e às forças, e o eu vedado e protegido da modernidade, dono dos seus estados interiores.
+6. **O Eu Poroso e o Eu Fechado** (Relações: [As Cosmovisões da Consciência, A Consciência Ancestral]): dois desenhos da fronteira do sujeito, o eu permeável ao mundo, às presenças e às forças, e o eu vedado e protegido da modernidade, dono dos seus estados interiores.
 
-**As Cartografias Indígenas** (Relações: [As Cosmovisões da Consciência, A Consciência Ancestral]): os mapas próprios, terra a terra, com que tradições concretas situam a pessoa entre seres, lugares e gerações, sem os reduzir a uma única sabedoria genérica.
+7. **As Cartografias Indígenas** (Relações: [As Cosmovisões da Consciência, A Consciência Ancestral]): os mapas próprios, terra a terra, com que tradições concretas situam a pessoa entre seres, lugares e gerações, sem os reduzir a uma única sabedoria genérica.
 
-**A Consciência Ancestral** (Relações: [O Eu Poroso e o Eu Fechado, O Tempo Cultural]): a configuração, central em muitas cosmovisões africanas, em que os antepassados são parte de quem percebe, e em que o tempo, a comunidade e o sagrado se entrelaçam, de modo que perceber é sempre perceber com os que vieram antes.
+8. **A Consciência Ancestral** (Relações: [O Eu Poroso e o Eu Fechado, O Tempo Cultural]): a configuração, central em muitas cosmovisões africanas, em que os antepassados são parte de quem percebe, e em que o tempo, a comunidade e o sagrado se entrelaçam, de modo que perceber é sempre perceber com os que vieram antes.
 
 ## 5. Mecanismos
 

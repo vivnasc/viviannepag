@@ -31,21 +31,21 @@ Daqui decorre a tese de fundo da obra. O que chamamos natureza humana, a tendên
 
 ## 4. Conceitos nucleares
 
-**O Sistema Nervoso Social** (Relações: [A Co-Regulação, A Segurança Relacional]): o sistema nervoso lê continuamente o ambiente humano em busca de sinais de segurança ou de ameaça, e a presença de outros corpos é a variável que mais decide se ele relaxa ou se arma.
+1. **O Sistema Nervoso Social** (Relações: [A Co-Regulação, A Segurança Relacional]): o sistema nervoso lê continuamente o ambiente humano em busca de sinais de segurança ou de ameaça, e a presença de outros corpos é a variável que mais decide se ele relaxa ou se arma.
 
-**A Co-Regulação** (Relações: [O Sistema Nervoso Social, A Sincronia dos Corpos]): a capacidade de um corpo acalmar outro corpo, de modo que a regulação interna não se aprende sozinha mas se recebe primeiro de fora, de quem nos segura.
+2. **A Co-Regulação** (Relações: [O Sistema Nervoso Social, A Sincronia dos Corpos]): a capacidade de um corpo acalmar outro corpo, de modo que a regulação interna não se aprende sozinha mas se recebe primeiro de fora, de quem nos segura.
 
-**O Medo da Exclusão** (Relações: [A Solidão como Alarme, O Vínculo como Necessidade]): a ameaça de ficar fora do grupo é processada com a urgência de um perigo de vida, e organiza grande parte do comportamento social, da vergonha à obediência.
+3. **O Medo da Exclusão** (Relações: [A Solidão como Alarme, O Vínculo como Necessidade]): a ameaça de ficar fora do grupo é processada com a urgência de um perigo de vida, e organiza grande parte do comportamento social, da vergonha à obediência.
 
-**O Vínculo como Necessidade** (Relações: [O Medo da Exclusão, O Pertencer Antes do Eu]): o laço não é um luxo afectivo mas uma necessidade primária, da mesma ordem do alimento, sem a qual o organismo, sobretudo no início da vida, não se desenvolve nem se mantém inteiro.
+4. **O Vínculo como Necessidade** (Relações: [O Medo da Exclusão, O Pertencer Antes do Eu]): o laço não é um luxo afectivo mas uma necessidade primária, da mesma ordem do alimento, sem a qual o organismo, sobretudo no início da vida, não se desenvolve nem se mantém inteiro.
 
-**A Sincronia dos Corpos** (Relações: [A Co-Regulação, A Segurança Relacional]): em presença um do outro, os corpos afinam ritmos, respirações, tons e gestos, e essa afinação silenciosa é uma das formas mais antigas de pertencer.
+5. **A Sincronia dos Corpos** (Relações: [A Co-Regulação, A Segurança Relacional]): em presença um do outro, os corpos afinam ritmos, respirações, tons e gestos, e essa afinação silenciosa é uma das formas mais antigas de pertencer.
 
-**A Solidão como Alarme** (Relações: [O Medo da Exclusão, O Sistema Nervoso Social]): a solidão prolongada não é só tristeza, é um sinal biológico de ameaça que põe o corpo em estado de vigilância, como se o isolamento fosse, ainda hoje, um risco de morte.
+6. **A Solidão como Alarme** (Relações: [O Medo da Exclusão, O Sistema Nervoso Social]): a solidão prolongada não é só tristeza, é um sinal biológico de ameaça que põe o corpo em estado de vigilância, como se o isolamento fosse, ainda hoje, um risco de morte.
 
-**A Segurança Relacional** (Relações: [O Sistema Nervoso Social, A Co-Regulação]): o estado em que o corpo, lido o ambiente como seguro porque há outros de confiança por perto, baixa a guarda e liberta a energia que estava reservada à defesa para a exploração e a criação.
+7. **A Segurança Relacional** (Relações: [O Sistema Nervoso Social, A Co-Regulação]): o estado em que o corpo, lido o ambiente como seguro porque há outros de confiança por perto, baixa a guarda e liberta a energia que estava reservada à defesa para a exploração e a criação.
 
-**O Pertencer Antes do Eu** (Relações: [O Vínculo como Necessidade, A Sincronia dos Corpos]): a pertença antecede e constitui o eu, de modo que não nos juntamos a outros depois de sermos quem somos, antes nos tornamos quem somos por estarmos já dentro de uma teia de outros.
+8. **O Pertencer Antes do Eu** (Relações: [O Vínculo como Necessidade, A Sincronia dos Corpos]): a pertença antecede e constitui o eu, de modo que não nos juntamos a outros depois de sermos quem somos, antes nos tornamos quem somos por estarmos já dentro de uma teia de outros.
 
 ## 5. Mecanismos
 

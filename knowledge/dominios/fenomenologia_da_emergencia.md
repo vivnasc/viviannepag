@@ -35,21 +35,21 @@ A hipótese sustenta-se sobre uma terceira: a de que o vazio que se abre na fiss
 
 ## 4. Conceitos nucleares
 
-**A Fissura** (Relações: [O Colapso Organizador, O Vazio Fértil]): a rachadura primeira na forma que organizava a experiência, o instante em que o real deixa de caber no sentido e algo cede sem se ter ainda partido.
+1. **A Fissura** (Relações: [O Colapso Organizador, O Vazio Fértil]): a rachadura primeira na forma que organizava a experiência, o instante em que o real deixa de caber no sentido e algo cede sem se ter ainda partido.
 
-**O Colapso Organizador** (Relações: [A Fissura, A Desorientação Necessária]): o momento em que a estrutura que dava ordem à experiência perde a capacidade de a ordenar, e o que era moldura passa a peso, deixando a vida sem o seu princípio de arrumação.
+2. **O Colapso Organizador** (Relações: [A Fissura, A Desorientação Necessária]): o momento em que a estrutura que dava ordem à experiência perde a capacidade de a ordenar, e o que era moldura passa a peso, deixando a vida sem o seu princípio de arrumação.
 
-**O Vazio Fértil** (Relações: [O Colapso Organizador, A Reorganização]): o espaço aberto pela queda da forma antiga, vivido como falta mas carregado de possibilidade não formada, gestação que parece ausência.
+3. **O Vazio Fértil** (Relações: [O Colapso Organizador, A Reorganização]): o espaço aberto pela queda da forma antiga, vivido como falta mas carregado de possibilidade não formada, gestação que parece ausência.
 
-**A Desorientação Necessária** (Relações: [O Vazio Fértil, O Limiar Sem Mapa]): a perda dos pontos cardeais interiores que não é defeito do processo mas sua condição, porque sem perder o norte velho não se encontra um chão novo.
+4. **A Desorientação Necessária** (Relações: [O Vazio Fértil, O Limiar Sem Mapa]): a perda dos pontos cardeais interiores que não é defeito do processo mas sua condição, porque sem perder o norte velho não se encontra um chão novo.
 
-**O Limiar Sem Mapa** (Relações: [A Desorientação Necessária, A Identidade Provisória]): a faixa de travessia em que já não se é o que se era e ainda não se é o que se virá a ser, terreno sem cartografia onde nenhum saber anterior orienta.
+5. **O Limiar Sem Mapa** (Relações: [A Desorientação Necessária, A Identidade Provisória]): a faixa de travessia em que já não se é o que se era e ainda não se é o que se virá a ser, terreno sem cartografia onde nenhum saber anterior orienta.
 
-**A Identidade Provisória** (Relações: [O Limiar Sem Mapa, O Reconhecimento]): a forma frágil e assumidamente temporária que se habita no limiar, não para se fixar mas para se poder caminhar enquanto a forma definitiva ainda não se sabe.
+6. **A Identidade Provisória** (Relações: [O Limiar Sem Mapa, O Reconhecimento]): a forma frágil e assumidamente temporária que se habita no limiar, não para se fixar mas para se poder caminhar enquanto a forma definitiva ainda não se sabe.
 
-**O Reconhecimento** (Relações: [A Identidade Provisória, A Reorganização]): o instante em que, no meio do informe, se reconhece uma forma a tomar consistência, e quem atravessa percebe, sem ainda poder explicar, que aquilo que está a nascer é seu.
+7. **O Reconhecimento** (Relações: [A Identidade Provisória, A Reorganização]): o instante em que, no meio do informe, se reconhece uma forma a tomar consistência, e quem atravessa percebe, sem ainda poder explicar, que aquilo que está a nascer é seu.
 
-**A Reorganização** (Relações: [O Reconhecimento, A Fissura]): a constituição de uma ordem nova, mais ampla que a anterior, que integra o que a fissura abriu e que, sendo viva, traz já em si a possibilidade da próxima fissura.
+8. **A Reorganização** (Relações: [O Reconhecimento, A Fissura]): a constituição de uma ordem nova, mais ampla que a anterior, que integra o que a fissura abriu e que, sendo viva, traz já em si a possibilidade da próxima fissura.
 
 ## 5. Mecanismos
 

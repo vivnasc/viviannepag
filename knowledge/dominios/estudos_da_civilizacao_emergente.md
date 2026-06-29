@@ -25,21 +25,21 @@ A hipótese de fundo deste domínio, e da obra que o sustenta, é que aquilo a q
 
 ## 4. Conceitos nucleares
 
-**As Instituições Pós-Escassez** (Relações: [A Economia do Significado, A Governação da Interdependência]): as estruturas que deixam de existir para racionar e passam a existir para cultivar, e que por isso têm de reinventar a sua própria legitimidade quando o argumento da falta já não as justifica.
+1. **As Instituições Pós-Escassez** (Relações: [A Economia do Significado, A Governação da Interdependência]): as estruturas que deixam de existir para racionar e passam a existir para cultivar, e que por isso têm de reinventar a sua própria legitimidade quando o argumento da falta já não as justifica.
 
-**A Economia do Significado** (Relações: [O Trabalho Recriado, A Cultura da Criação]): a economia em que o valor se desloca da posse do escasso para a produção de sentido, e que enfrenta o problema, ainda por resolver, de medir e distribuir aquilo que não se esgota quando se partilha.
+2. **A Economia do Significado** (Relações: [O Trabalho Recriado, A Cultura da Criação]): a economia em que o valor se desloca da posse do escasso para a produção de sentido, e que enfrenta o problema, ainda por resolver, de medir e distribuir aquilo que não se esgota quando se partilha.
 
-**O Conhecimento Cooperativo** (Relações: [A Educação da Consciência, A Cultura da Criação]): a forma de saber que deixa de ser propriedade defendida e passa a ser tecido comum, crescendo por contribuição em vez de por acumulação, com a tensão que isso traz para a autoria e o reconhecimento.
+3. **O Conhecimento Cooperativo** (Relações: [A Educação da Consciência, A Cultura da Criação]): a forma de saber que deixa de ser propriedade defendida e passa a ser tecido comum, crescendo por contribuição em vez de por acumulação, com a tensão que isso traz para a autoria e o reconhecimento.
 
-**A Governação da Interdependência** (Relações: [As Instituições Pós-Escassez, As Novas Formas de Pertença]): a arte de decidir em conjunto partindo do reconhecimento de que ninguém é separável da teia, e que substitui o controlo do centro pela responsabilidade distribuída, sem garantir que a teia não se enrede.
+4. **A Governação da Interdependência** (Relações: [As Instituições Pós-Escassez, As Novas Formas de Pertença]): a arte de decidir em conjunto partindo do reconhecimento de que ninguém é separável da teia, e que substitui o controlo do centro pela responsabilidade distribuída, sem garantir que a teia não se enrede.
 
-**O Trabalho Recriado** (Relações: [A Economia do Significado, A Cultura da Criação]): o trabalho que deixa de ser troca de tempo por sobrevivência e se torna contributo, exposição e criação, com o risco novo de que a falta de necessidade exterior deixe a pessoa sem chão.
+5. **O Trabalho Recriado** (Relações: [A Economia do Significado, A Cultura da Criação]): o trabalho que deixa de ser troca de tempo por sobrevivência e se torna contributo, exposição e criação, com o risco novo de que a falta de necessidade exterior deixe a pessoa sem chão.
 
-**A Educação da Consciência** (Relações: [O Conhecimento Cooperativo, As Novas Formas de Pertença]): a formação que já não prepara para ocupar um lugar na cadeia produtiva, mas para habitar a incerteza, conhecer-se e participar, e que ainda não tem instituições à altura do que promete.
+6. **A Educação da Consciência** (Relações: [O Conhecimento Cooperativo, As Novas Formas de Pertença]): a formação que já não prepara para ocupar um lugar na cadeia produtiva, mas para habitar a incerteza, conhecer-se e participar, e que ainda não tem instituições à altura do que promete.
 
-**As Novas Formas de Pertença** (Relações: [A Governação da Interdependência, A Cultura da Criação]): os modos de pertencer que sucedem à tribo defensiva, escolhidos e abertos em vez de herdados e fechados, e que pagam essa liberdade com a fragilidade do laço.
+7. **As Novas Formas de Pertença** (Relações: [A Governação da Interdependência, A Cultura da Criação]): os modos de pertencer que sucedem à tribo defensiva, escolhidos e abertos em vez de herdados e fechados, e que pagam essa liberdade com a fragilidade do laço.
 
-**A Cultura da Criação** (Relações: [A Economia do Significado, O Trabalho Recriado]): a cultura que deixa de celebrar a conservação e a defesa e passa a valorizar a abertura, a experiência e o que ainda não existe, sem deixar de carregar o medo antigo de que criar é expor-se à perda.
+8. **A Cultura da Criação** (Relações: [A Economia do Significado, O Trabalho Recriado]): a cultura que deixa de celebrar a conservação e a defesa e passa a valorizar a abertura, a experiência e o que ainda não existe, sem deixar de carregar o medo antigo de que criar é expor-se à perda.
 
 ## 5. Mecanismos
 

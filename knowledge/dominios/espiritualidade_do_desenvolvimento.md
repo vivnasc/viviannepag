@@ -27,21 +27,21 @@ A hipótese deste domínio é que a maturação da consciência segue um movimen
 
 ## 4. Conceitos nucleares
 
-**Os Estádios da Maturação** (Relações: [A Sabedoria como Estádio, As Linhas de Desenvolvimento]): sequências reconhecíveis em que aquilo que era o sujeito que organiza a experiência se torna objecto que a pessoa pode ver e sustentar, alargando o que cabe na consciência sem ruptura.
+1. **Os Estádios da Maturação** (Relações: [A Sabedoria como Estádio, As Linhas de Desenvolvimento]): sequências reconhecíveis em que aquilo que era o sujeito que organiza a experiência se torna objecto que a pessoa pode ver e sustentar, alargando o que cabe na consciência sem ruptura.
 
-**A Compaixão que se Desenvolve** (Relações: [Os Estádios da Maturação, O Ego e o que o Excede]): a capacidade de incluir o outro no campo da própria preocupação, que não é virtude inata fixa mas amplitude que cresce à medida que o centro deixa de coincidir apenas com o próprio eu.
+2. **A Compaixão que se Desenvolve** (Relações: [Os Estádios da Maturação, O Ego e o que o Excede]): a capacidade de incluir o outro no campo da própria preocupação, que não é virtude inata fixa mas amplitude que cresce à medida que o centro deixa de coincidir apenas com o próprio eu.
 
-**A Percepção Treinável** (Relações: [As Linhas de Desenvolvimento, A Integração das Sombras]): a constatação de que a finura com que se percebe o real, a própria reactividade incluída, se afina com a atenção exercitada, deixando de ser um dado e tornando-se uma faculdade educável.
+3. **A Percepção Treinável** (Relações: [As Linhas de Desenvolvimento, A Integração das Sombras]): a constatação de que a finura com que se percebe o real, a própria reactividade incluída, se afina com a atenção exercitada, deixando de ser um dado e tornando-se uma faculdade educável.
 
-**O Ego e o que o Excede** (Relações: [Os Estádios da Maturação, A Compaixão que se Desenvolve]): o ego como centro organizador necessário e o reconhecimento de que há perspectivas que o contêm sem o anular, de modo que excedê-lo não é destruí-lo mas deixar de ser apenas ele.
+4. **O Ego e o que o Excede** (Relações: [Os Estádios da Maturação, A Compaixão que se Desenvolve]): o ego como centro organizador necessário e o reconhecimento de que há perspectivas que o contêm sem o anular, de modo que excedê-lo não é destruí-lo mas deixar de ser apenas ele.
 
-**As Linhas de Desenvolvimento** (Relações: [Os Estádios da Maturação, A Sabedoria como Estádio]): a observação de que não se cresce em bloco, que a maturação cognitiva, moral, emocional e relacional avançam a ritmos próprios, e que uma pessoa pode estar madura numa linha e infantil noutra.
+5. **As Linhas de Desenvolvimento** (Relações: [Os Estádios da Maturação, A Sabedoria como Estádio]): a observação de que não se cresce em bloco, que a maturação cognitiva, moral, emocional e relacional avançam a ritmos próprios, e que uma pessoa pode estar madura numa linha e infantil noutra.
 
-**A Espiritualidade Sem Crença** (Relações: [A Percepção Treinável, A Sabedoria como Estádio]): a tese de que o essencial deste percurso, a inclusão crescente, a clareza, a serenidade activa, não depende de qualquer afirmação metafísica e pode ser descrito em linguagem de desenvolvimento adulto.
+6. **A Espiritualidade Sem Crença** (Relações: [A Percepção Treinável, A Sabedoria como Estádio]): a tese de que o essencial deste percurso, a inclusão crescente, a clareza, a serenidade activa, não depende de qualquer afirmação metafísica e pode ser descrito em linguagem de desenvolvimento adulto.
 
-**A Sabedoria como Estádio** (Relações: [Os Estádios da Maturação, A Espiritualidade Sem Crença]): a sabedoria entendida não como acumulação de conhecimento nem como traço de feitio, mas como um modo amadurecido de estar a partir do qual se vê o particular e o conjunto ao mesmo tempo.
+7. **A Sabedoria como Estádio** (Relações: [Os Estádios da Maturação, A Espiritualidade Sem Crença]): a sabedoria entendida não como acumulação de conhecimento nem como traço de feitio, mas como um modo amadurecido de estar a partir do qual se vê o particular e o conjunto ao mesmo tempo.
 
-**A Integração das Sombras** (Relações: [A Percepção Treinável, O Ego e o que o Excede]): o trabalho de reconhecer e acolher aquilo que se excluiu da própria imagem, devolvendo à consciência o que dela foi expulso, sem o qual nenhum estádio se sustenta de verdade.
+8. **A Integração das Sombras** (Relações: [A Percepção Treinável, O Ego e o que o Excede]): o trabalho de reconhecer e acolher aquilo que se excluiu da própria imagem, devolvendo à consciência o que dela foi expulso, sem o qual nenhum estádio se sustenta de verdade.
 
 ## 5. Mecanismos
 

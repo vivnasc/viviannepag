@@ -37,21 +37,21 @@ A hipótese não é que o trabalho seja um mal nem que a pressa seja sempre ilus
 
 ## 4. Conceitos nucleares
 
-**O Culto da Urgência** (Relações: [A Doença do Tempo, Os Rituais da Disponibilidade]): a transformação da pressa de um estado ocasional, ligado a perigo real, num clima permanente que se vive como prova de importância, onde estar sob pressão deixou de ser sintoma e passou a ser estatuto.
+1. **O Culto da Urgência** (Relações: [A Doença do Tempo, Os Rituais da Disponibilidade]): a transformação da pressa de um estado ocasional, ligado a perigo real, num clima permanente que se vive como prova de importância, onde estar sob pressão deixou de ser sintoma e passou a ser estatuto.
 
-**A Religião da Produtividade** (Relações: [O Trabalho como Identidade, A Métrica de Tudo]): o sistema de crenças, ritos e culpas em que ser útil se tornou a forma moderna de ser bom, com os seus mandamentos não escritos, os seus pecados de ociosidade e a sua promessa de salvação pelo rendimento.
+2. **A Religião da Produtividade** (Relações: [O Trabalho como Identidade, A Métrica de Tudo]): o sistema de crenças, ritos e culpas em que ser útil se tornou a forma moderna de ser bom, com os seus mandamentos não escritos, os seus pecados de ociosidade e a sua promessa de salvação pelo rendimento.
 
-**Os Artefactos da Pressa** (Relações: [A Métrica de Tudo, A Ocupação Permanente]): os objectos e interfaces que materializam a urgência, do relógio à notificação, lidos como ferramentas mas funcionando como altares, peças que organizam o tempo e, ao organizá-lo, decidem o que nele cabe.
+3. **Os Artefactos da Pressa** (Relações: [A Métrica de Tudo, A Ocupação Permanente]): os objectos e interfaces que materializam a urgência, do relógio à notificação, lidos como ferramentas mas funcionando como altares, peças que organizam o tempo e, ao organizá-lo, decidem o que nele cabe.
 
-**A Doença do Tempo** (Relações: [O Culto da Urgência, As Consequências individuais]): a percepção crónica de que o tempo escasseia, de que se está sempre atrasado para uma vida que nunca começa, condição tão difundida que deixou de parecer condição e passou a parecer realismo.
+4. **A Doença do Tempo** (Relações: [O Culto da Urgência, As Consequências individuais]): a percepção crónica de que o tempo escasseia, de que se está sempre atrasado para uma vida que nunca começa, condição tão difundida que deixou de parecer condição e passou a parecer realismo.
 
-**O Trabalho como Identidade** (Relações: [A Religião da Produtividade, A Ocupação Permanente]): a fusão entre o que se faz e o que se é, de tal modo que a pergunta sobre quem somos se responde com a profissão, e a pausa no trabalho ameaça não o rendimento, mas o próprio sentido de existir.
+5. **O Trabalho como Identidade** (Relações: [A Religião da Produtividade, A Ocupação Permanente]): a fusão entre o que se faz e o que se é, de tal modo que a pergunta sobre quem somos se responde com a profissão, e a pausa no trabalho ameaça não o rendimento, mas o próprio sentido de existir.
 
-**A Ocupação Permanente** (Relações: [O Trabalho como Identidade, A Doença do Tempo]): o hábito de manter a agenda e a atenção sempre cheias, não por necessidade da tarefa, mas pelo desconforto do vazio, onde estar ocupado funciona como anestésico de algo que o silêncio traria à superfície.
+6. **A Ocupação Permanente** (Relações: [O Trabalho como Identidade, A Doença do Tempo]): o hábito de manter a agenda e a atenção sempre cheias, não por necessidade da tarefa, mas pelo desconforto do vazio, onde estar ocupado funciona como anestésico de algo que o silêncio traria à superfície.
 
-**Os Rituais da Disponibilidade** (Relações: [O Culto da Urgência, Os Artefactos da Pressa]): o conjunto de comportamentos que provam que se está sempre acessível, a resposta imediata, o sinal de visto, a presença permanente, gestos lidos como cortesia e funcionando como lealdade exigida a uma tribo dispersa.
+7. **Os Rituais da Disponibilidade** (Relações: [O Culto da Urgência, Os Artefactos da Pressa]): o conjunto de comportamentos que provam que se está sempre acessível, a resposta imediata, o sinal de visto, a presença permanente, gestos lidos como cortesia e funcionando como lealdade exigida a uma tribo dispersa.
 
-**A Métrica de Tudo** (Relações: [A Religião da Produtividade, Os Artefactos da Pressa]): a tendência para converter em número aquilo que se valoriza, do tempo às relações ao descanso, na convicção de que o que não se mede não conta, e na consequência de que o que não cabe no número desaparece.
+8. **A Métrica de Tudo** (Relações: [A Religião da Produtividade, Os Artefactos da Pressa]): a tendência para converter em número aquilo que se valoriza, do tempo às relações ao descanso, na convicção de que o que não se mede não conta, e na consequência de que o que não cabe no número desaparece.
 
 ## 5. Mecanismos
 
