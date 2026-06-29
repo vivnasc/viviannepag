@@ -209,8 +209,38 @@ function chapter(file, idx){
 // tipográfica interna.
 const COVER_IMG = process.env.SINAIS_COVER && existsSync(process.env.SINAIS_COVER)
   ? 'file://' + path.resolve(process.env.SINAIS_COVER) : null;
-const cover = COVER_IMG ? `
-<section class="front cover cover-img"><img src="${COVER_IMG}" alt=""></section>` : `
+
+// A capa da Vivianne enche a PÁGINA TODA, sem moldura branca e sem cortar o
+// título nem o nome dela: a 1.ª página passa a ter exatamente a proporção da
+// imagem (largura A5 = 148mm, altura = 148 * h/l). Lê as dimensões do ficheiro
+// (PNG ou JPEG); se falhar, recua para 5:8 (1600x2560), o formato da capa atual.
+const coverDims = (() => {
+  let w = 1600, h = 2560, png = true;
+  if (COVER_IMG) {
+    try {
+      const buf = readFileSync(path.resolve(process.env.SINAIS_COVER));
+      if (buf.length > 24 && buf[0] === 0x89 && buf.toString('ascii', 1, 4) === 'PNG') {
+        png = true; w = buf.readUInt32BE(16); h = buf.readUInt32BE(20);
+      } else if (buf[0] === 0xFF && buf[1] === 0xD8) { // JPEG: procura o marcador SOF
+        png = false; let o = 2;
+        while (o + 9 < buf.length) {
+          if (buf[o] !== 0xFF) { o++; continue; }
+          const m = buf[o + 1];
+          if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC) {
+            h = buf.readUInt16BE(o + 5); w = buf.readUInt16BE(o + 7); break;
+          }
+          o += 2 + buf.readUInt16BE(o + 2);
+        }
+      }
+    } catch { /* fica no 5:8 */ }
+  }
+  return { w: w || 1600, h: h || 2560, png };
+})();
+// Com imagem: a capa NÃO entra no miolo (o Paged.js força A5 em todas as
+// páginas); é composta depois com pdf-lib, numa página do tamanho exato da
+// imagem (enche a página toda, sem branco, sem esticar, sem cortar). Sem
+// imagem: a capa tipográfica interna, como antes.
+const cover = COVER_IMG ? '' : `
 <section class="front cover">
   <div class="cv-num">7</div>
   <h1 class="cv-title">${cfg.coverTitle}</h1>
@@ -299,8 +329,6 @@ section.body{ break-before:page; }
 
 /* ---- rosto ---- */
 .cover{ height:176mm; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-.cover-img{ height:176mm; padding:0; }
-.cover-img img{ width:100%; height:176mm; object-fit:cover; border-radius:1mm; }
 .cv-num{ font-family:'Fraunces',serif; font-weight:300; font-size:52pt; color:${GOLD}; line-height:1; margin-bottom:3mm; }
 .cv-title{ font-family:'Fraunces',serif; font-weight:300; font-size:33pt; line-height:1.1; color:${VIOLETA}; letter-spacing:-.015em; }
 .cv-rule{ width:22mm; height:1px; background:${GOLD}; opacity:.7; margin:7mm 0; }
@@ -346,6 +374,26 @@ await page.goto('file://'+htmlPath, { waitUntil:'load', timeout:120000 });
 const total = await page.evaluate(async ()=>{ await document.fonts.ready; const r=await window.PagedPolyfill.preview(); return r.total; });
 console.log('['+LANG+'] Paged.js paginou:', total, 'páginas');
 const outPath = path.join(ROOT, cfg.out);
-await page.pdf({ path:outPath, preferCSSPageSize:true, printBackground:true, margin:{top:'0',right:'0',bottom:'0',left:'0'} });
+const mioloBuf = await page.pdf({ preferCSSPageSize:true, printBackground:true, margin:{top:'0',right:'0',bottom:'0',left:'0'} });
 await browser.close();
+
+if (COVER_IMG) {
+  // Capa a sangrar a página toda, como em Os Sete Véus: uma página própria do
+  // tamanho exato da imagem (largura A5, altura pela proporção), desenhada de
+  // canto a canto. Sem moldura branca, sem esticar, sem cortar. O Paged.js não
+  // deixa páginas de tamanhos diferentes, por isso compõe-se aqui com pdf-lib.
+  const { PDFDocument } = require('pdf-lib');
+  const A5W = 419.53; // 148mm em pt
+  const coverH = +(A5W * coverDims.h / coverDims.w).toFixed(2);
+  const out = await PDFDocument.create();
+  const imgBytes = readFileSync(path.resolve(process.env.SINAIS_COVER));
+  const img = coverDims.png ? await out.embedPng(imgBytes) : await out.embedJpg(imgBytes);
+  const cp = out.addPage([A5W, coverH]);
+  cp.drawImage(img, { x:0, y:0, width:A5W, height:coverH });
+  const miolo = await PDFDocument.load(mioloBuf);
+  (await out.copyPages(miolo, miolo.getPageIndices())).forEach((p)=>out.addPage(p));
+  writeFileSync(outPath, await out.save());
+} else {
+  writeFileSync(outPath, mioloBuf);
+}
 console.log('PDF:', outPath);
