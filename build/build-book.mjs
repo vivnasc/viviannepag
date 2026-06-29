@@ -164,11 +164,11 @@ p{margin:0;orphans:2;widows:2;}
 .dedication p:first-child{font-style:normal;font-variant:small-caps;letter-spacing:.18em;font-size:13.5pt;color:#8a6a3a;margin-bottom:2em;}
 
 /* ---- toc ---- */
-.toc h2{text-align:center;font-variant:small-caps;letter-spacing:.26em;font-weight:600;font-size:17pt;color:#26221d;margin:1.5em 0 2.4em;}
-.toc ul{list-style:none;margin:0 auto;padding:0;max-width:85%;}
-.toc li{margin:0 0 1.25em;text-align:center;line-height:1.3;}
-.toc .n,.toc .t{display:block;font-variant:small-caps;letter-spacing:.2em;font-size:11.5pt;color:#8a6a3a;}
-.toc .s{display:block;font-style:italic;font-size:12.5pt;color:#2b2620;margin-top:.15em;}
+.toc h2{text-align:center;font-variant:small-caps;letter-spacing:.26em;font-weight:600;font-size:16pt;color:#26221d;margin:.4em 0 1.4em;}
+.toc ul{list-style:none;margin:0 auto;padding:0;max-width:88%;}
+.toc li{margin:0 0 .62em;text-align:center;line-height:1.18;}
+.toc .n,.toc .t{display:block;font-variant:small-caps;letter-spacing:.2em;font-size:10.5pt;color:#8a6a3a;}
+.toc .s{display:block;font-style:italic;font-size:11.5pt;color:#2b2620;margin-top:.08em;}
 `;
 
 const html = `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><title>${esc(TITLE)}</title><style>${css}</style></head><body>${body}</body></html>`;
