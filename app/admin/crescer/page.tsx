@@ -293,6 +293,10 @@ export default function CrescerPage() {
   const [filtroTema, setFiltroTema] = useState<string>('todos');
   const [padrao, setPadrao] = useState<Padrao>(PADRAO_DEFAULT);
   const [padraoOpen, setPadraoOpen] = useState(false);
+  // agendar em lote ESPAÇADO (não encher o feed): 1 post a cada N dias, à hora.
+  const [agData, setAgData] = useState('');
+  const [agHora, setAgHora] = useState('20:00');
+  const [agCad, setAgCad] = useState(1);
 
   // padrão guardado no browser dela (fixável).
   useEffect(() => {
@@ -354,6 +358,15 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Gerar o CARROSSEL de imagens (telas 4:5, sem motion)? Corre nos GitHub Actions, uns minutos.')) return;
     acao(slug, '/api/admin/carrossel/render-dispatch', { dias: '1', modo: 'carrossel' }, 'A gerar o carrossel de imagens…', 'Carrossel disparado. As imagens aparecem daqui a uns minutos (recarrega).', false);
   }, [acao]);
+  // VÍDEO CINEMATOGRÁFICO (cenas sequenciadas): traz a IMAGEM a movimento contínuo
+  // (~40s, clips Kling encadeados pelo último frame). Precisa de imagem. Depois é
+  // "render (reel)" para pôr o texto por cima. Usa o disparo partilhado do reel
+  // narrativo (slug-agnóstico). Resultado em theme.soulab.clipUrl (o player mostra-o).
+  const cenaVideo = useCallback((slug: string, temImagem: boolean) => {
+    if (!temImagem) { setErro('A cena precisa de imagem. Gera a imagem primeiro.'); return; }
+    if (typeof window !== 'undefined' && !window.confirm('Trazer a imagem a MOVIMENTO cinematográfico (vídeo contínuo ~40s)? Corre nos GitHub Actions, uns minutos, e tem custo. Depois carrega "render (reel)" para pôr o texto por cima.')) return;
+    acao(slug, '/api/admin/metodo-vs/reel-narrativo-dispatch', { nClips: 4, dur: 10 }, 'A trazer a cena a movimento (uns minutos)…', 'Cena a ganhar vida. O vídeo aparece daqui a uns minutos (recarrega); depois "render (reel)" para o texto por cima.', false);
+  }, [acao]);
   // editor de slides: guardar os textos de todos os slides + imagem por slide.
   const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
   const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
@@ -375,6 +388,31 @@ export default function CrescerPage() {
   const imagemLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Trocar a imagem das ${sel.size} selecionada(s)?`)) return; return emLote((slug) => fetch('/api/admin/crescer/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A trocar imagem'); }, [emLote, sel]);
   const renderLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Renderizar (MP4) as ${sel.size} selecionada(s)? Minutos, GitHub Actions.`)) return; return emLote((slug) => fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) }), 'A disparar render'); }, [emLote, sel]);
   const apagarLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Descartar ${sel.size} selecionada(s)? (salta publicadas)`)) return; return emLote((slug) => fetch('/api/admin/crescer/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A descartar', false); }, [emLote, sel]);
+  // AGENDAR ESPAÇADO: distribui as selecionadas 1 a cada N dias, desde a data, à
+  // hora, e aprova (publica-se sozinho à hora, como na Soulab). Assim o feed NÃO
+  // enche: filtra por temática e agenda cada categoria no seu ritmo. Datas em
+  // componentes LOCAIS (nunca toISOString, que recua um dia em PT).
+  const agendarEspacado = useCallback(async () => {
+    if (acaoSlug || busy) return;
+    if (!agData) { setErro('Escolhe a data de início do agendamento espaçado.'); return; }
+    const alvos = pecas.filter((p) => sel.has(p.slug) && !p.publicado).map((p) => p.slug);
+    if (!alvos.length) { setSel(new Set()); return; }
+    const [Y, M, D] = agData.split('-').map(Number);
+    const passo = Math.max(1, agCad);
+    setBusy(true); setErro(null);
+    let feitos = 0;
+    for (let i = 0; i < alvos.length; i++) {
+      const dt = new Date(Y, (M ?? 1) - 1, D ?? 1); dt.setDate(dt.getDate() + i * passo);
+      const data = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+      setMsg(`A agendar espaçado · ${feitos}/${alvos.length}…`);
+      try {
+        const r = await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: alvos[i], agendadoEm: data, hora: agHora || '20:00', aprovado: true }) });
+        if (r.ok) feitos++;
+      } catch { /* segue */ }
+    }
+    setMsg(`Agendado espaçado: ${feitos}/${alvos.length} (1 a cada ${passo} dia(s) desde ${agData}, às ${agHora}). Publica-se sozinho à hora.`);
+    setSel(new Set()); setBusy(false); recarregar();
+  }, [acaoSlug, busy, agData, agHora, agCad, pecas, sel, recarregar]);
 
   const pecasFiltradas = pecas.filter((p) => filtroTema === 'todos' || p.tematica === filtroTema);
 
@@ -452,6 +490,18 @@ export default function CrescerPage() {
               <button onClick={imagemLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">🖼 imagem</button>
               <button onClick={renderLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">🎞 render</button>
               <button onClick={apagarLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 descartar</button>
+              <span className="w-full h-px bg-white/10 my-0.5" />
+              {/* agendar espaçado: 1 a cada N dias (não encher o feed) */}
+              <span className="text-[0.58rem] opacity-60">agendar espaçado:</span>
+              <input type="date" value={agData} onChange={(e) => setAgData(e.target.value)} className="text-[0.58rem] px-1 py-0.5 rounded border border-white/20 bg-black/30 [color-scheme:dark]" style={{ color: TX }} />
+              <input type="time" value={agHora} onChange={(e) => setAgHora(e.target.value)} className="text-[0.58rem] px-1 py-0.5 rounded border border-white/20 bg-black/30 [color-scheme:dark]" style={{ color: TX }} />
+              <label className="text-[0.58rem] opacity-75 flex items-center gap-1">1 a cada
+                <select value={agCad} onChange={(e) => setAgCad(Number(e.target.value))} className="bg-black/30 border border-white/20 rounded px-1 py-0.5 [color-scheme:dark]">
+                  {[1, 2, 3, 4, 7].map((n) => <option key={n} value={n}>{n}</option>)}
+                </select>
+                dia(s)
+              </label>
+              <button onClick={agendarEspacado} disabled={busy || !agData} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }} title="distribui as selecionadas 1 a cada N dias e aprova; publica-se sozinho à hora (filtra por temática para espaçar cada categoria)">📅 agendar espaçado</button>
             </div>
           )}
 
@@ -496,6 +546,7 @@ export default function CrescerPage() {
                     <button onClick={() => abrir(p.slug, 'slides')} disabled={tBusy} title="ver todos os slides, editar o texto e pôr/tirar imagem em cada um" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>📝 slides</button>
                     <button onClick={() => acao(p.slug, '/api/admin/crescer/imagem', {}, 'A trocar a imagem (Flux)…', 'Imagem nova.', false)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                     <button onClick={() => abrir(p.slug, 'motion')} disabled={tBusy || !p.imageUrl} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🎬 mov.</button>
+                    <button onClick={() => cenaVideo(p.slug, !!p.imageUrl)} disabled={tBusy || !p.imageUrl} title="vídeo cinematográfico: traz a imagem a movimento contínuo (~40s). Depois render (reel) para o texto por cima." className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🎞 cena</button>
                     <button onClick={() => abrir(p.slug, 'efeito')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito</button>
                     <button onClick={() => abrir(p.slug, 'som')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 áudio</button>
                     <button onClick={() => abrir(p.slug, 'letras')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras</button>
