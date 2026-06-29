@@ -27,7 +27,7 @@ export const LIVROS_CAPA: LivroCapa[] = [
     // imagem digna e clara para este livro.
     base: 'fine-art book cover painting, soft warm ivory and pale dawn background, gentle radiant gold light, delicate luminous painterly texture, elegant and dignified, contemplative and timeless, a single central symbol, generous calm space in the upper third for a title',
     paleta: 'warm ivory, pale rose-gold, soft dawn light, gentle amber palette',
-    simbolo: 'seven slender upright candle flames in a gentle row on a calm surface, six glowing warm and golden and aligned, one set slightly apart and softly dimmer, fine-art, elegant, luminous and minimal, generous empty space, a quiet image of belonging and one apart',
+    simbolo: 'a row of small birds perched on a single fine wire, several gathered close together, one bird set apart at the end and turned the other way, soft warm light, elegant fine-art, minimal, serene, generous empty space, a quiet image of belonging and one apart',
     comp: { selo: 'IRMÃO DE OS SETE VÉUS', t1: 'Os 7 Sinais', t2: 'de Desencaixe', sub: 'O equilíbrio entre pertença\ne autenticidade', autora: 'VIVIANNE DOS SANTOS' },
     compEn: { selo: 'A COMPANION TO THE SEVEN VEILS', t1: 'The 7 Signs', t2: 'of Not Belonging', sub: 'On belonging without\nmaking yourself smaller', autora: 'VIVIANNE DOS SANTOS' },
   },
