@@ -7,22 +7,82 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const C = (p) => path.join(ROOT, 'content', p);
 const FONT = (f) => 'file://' + path.join(__dirname, 'fonts', f);
 
-const TITLE = 'Os 7 Sinais de Desencaixe';
-const SUBTITLE = 'O equilíbrio entre pertença e autenticidade';
-const AUTHOR = 'Vivianne dos Santos';
+// idioma: `node build-book.mjs en` ou LANG_BOOK=en
+const LANG = (process.argv[2] || process.env.LANG_BOOK || 'pt').toLowerCase().startsWith('en') ? 'en' : 'pt';
+
+// ---- configuração por idioma (a veu.a.veu e o método não se misturam com isto) ----
+const CFG = {
+  pt: {
+    dir: 'content',
+    title: 'Os 7 Sinais de Desencaixe',
+    subtitle: 'O equilíbrio entre pertença e autenticidade',
+    coverTitle: 'Os Sinais<br>de Desencaixe',
+    htmlLang: 'pt-PT',
+    out: 'Os-7-Sinais-de-Desencaixe.pdf',
+    headRe: /^(Sinal|Introdução|Epílogo)/i,
+    dedicationFile: '00a-dedicatoria.md',
+    notaFile: '00b-nota-de-abertura.md',
+    chapters: ['00-introducao.md','01-sinal.md','02-sinal.md','03-sinal.md','04-sinal.md',
+               '05-sinal.md','06-sinal.md','07-sinal.md','08-epilogo.md'],
+    epilogueFile: '08-epilogo.md',
+    notaTitleFallback: 'Nota de abertura',
+    tocTitle: 'Índice',
+    toc: [
+      { t:'Nota de abertura' },
+      { t:'Introdução', s:'Porque este não é um livro sobre aprender a encaixar' },
+      { n:'Sinal 1', s:'Estás presente mas não te sentes pertencente' },
+      { n:'Sinal 2', s:'Começas a diminuir-te para caber' },
+      { n:'Sinal 3', s:'Sentes saudades de algo que nunca viveste' },
+      { n:'Sinal 4', s:'Oscilas entre hiper-adaptação e isolamento' },
+      { n:'Sinal 5', s:'O teu sistema nervoso começa a rejeitar certos ambientes' },
+      { n:'Sinal 6', s:'Começas a confundir paz com ausência de pessoas' },
+      { n:'Sinal 7', s:'Percebes que o problema nunca foi pertencer, mas o preço da pertença' },
+      { t:'Epílogo', s:'O véu do horizonte' },
+    ],
+    colophonHead: 'Para ti, que leste',
+    colophonBody: 'O que acabou foi um lugar. Nenhum dos amores acabou. Se algum destes sinais te reconheceu, fica com ele, sem pressa, e continua a permanecer.',
+  },
+  en: {
+    dir: 'content/en',
+    title: 'The Seven Signs of Not Belonging',
+    subtitle: 'The balance between belonging and authenticity',
+    coverTitle: 'The Signs<br>of Not Belonging',
+    htmlLang: 'en',
+    out: 'The-Seven-Signs-of-Not-Belonging.pdf',
+    headRe: /^(Sign|Introduction|Epilogue)/i,
+    dedicationFile: '00a-dedication.md',
+    notaFile: '00b-opening-note.md',
+    chapters: ['00-introduction.md','01-sign.md','02-sign.md','03-sign.md','04-sign.md',
+               '05-sign.md','06-sign.md','07-sign.md','08-epilogue.md'],
+    epilogueFile: '08-epilogue.md',
+    notaTitleFallback: 'Opening note',
+    tocTitle: 'Contents',
+    toc: [
+      { t:'Opening note' },
+      { t:'Introduction', s:'Why this is not a book about learning to fit in' },
+      { n:'Sign 1', s:'You are present but you do not feel you belong' },
+      { n:'Sign 2', s:'You begin to diminish yourself in order to fit' },
+      { n:'Sign 3', s:'You feel homesick for something you never lived' },
+      { n:'Sign 4', s:'You swing between over-adaptation and isolation' },
+      { n:'Sign 5', s:'Your nervous system begins to reject certain environments' },
+      { n:'Sign 6', s:'You begin to confuse peace with the absence of people' },
+      { n:'Sign 7', s:'You realise the problem was never belonging, but the price of belonging' },
+      { t:'Epilogue', s:'The veil of the horizon' },
+    ],
+    colophonHead: 'For you, who read',
+    colophonBody: 'What ended was a place. None of the loves ended. If any of these signs recognised you, stay with it, without hurry, and go on remaining.',
+  },
+};
+const cfg = CFG[LANG];
+const TITLE = cfg.title, SUBTITLE = cfg.subtitle, AUTHOR = 'Vivianne dos Santos';
+const C = (p) => path.join(ROOT, cfg.dir, p);
 
 // paleta
 const INK = '#2A2536', SOFT = '#5A5468', GOLD = '#B98D3E', VIOLETA = '#3A3357', SALVIA = '#8A8FA3';
-// cor por capítulo (muda o título/ornamento; o drop-cap é sempre ouro)
-const COLOR = {
-  '00-introducao.md': VIOLETA,
-  '01-sinal.md': '#7C4A4A', '02-sinal.md': '#9A6A3A', '03-sinal.md': '#8A7A2E',
-  '04-sinal.md': '#4F6E55', '05-sinal.md': '#3C6E72', '06-sinal.md': '#3A4A7A',
-  '07-sinal.md': '#5A3A6A', '08-epilogo.md': '#3C6E72',
-};
+// cor por capítulo (muda o título/ornamento; o drop-cap é sempre ouro). chave = índice no array chapters
+const CHAP_COLOR = [VIOLETA,'#7C4A4A','#9A6A3A','#8A7A2E','#4F6E55','#3C6E72','#3A4A7A','#5A3A6A','#3C6E72'];
 
 const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const inl = (s) => esc(s).replace(/\*([^*]+)\*/g,'<em>$1</em>');
@@ -36,7 +96,7 @@ function parseChapter(file){
     if(!t){ flush(); continue; }
     if(t.startsWith('# ')){
       const h=t.slice(2).trim(), i=h.indexOf(',');
-      if(i>0 && /^(Sinal|Introdução|Epílogo)/i.test(h)){ label=h.slice(0,i).trim(); title=h.slice(i+1).trim(); }
+      if(i>0 && cfg.headRe.test(h)){ label=h.slice(0,i).trim(); title=h.slice(i+1).trim(); }
       else { label=''; title=h; }
       continue;
     }
@@ -70,10 +130,10 @@ const VEU = (c)=>`<svg class="veu" viewBox="0 0 512 512" width="60" height="60" 
   <path d="M166 392 C166 270 204 200 256 200 C308 200 346 270 346 392" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
   <circle cx="256" cy="98" r="8" fill="${c}"/></svg>`;
 
-function chapter(file){
+function chapter(file, idx){
   const { label, title, epigraph } = parseChapter(file);
   let paras = splitLong(parseChapter(file).paras);
-  const c = COLOR[file] || VIOLETA;
+  const c = CHAP_COLOR[idx] || VIOLETA;
   let h = `<section class="opener" style="--c:${c}">`;
   h += `<div class="fl-wrap">${FLOURISH(c)}</div>`;
   if(label) h += `<p class="op-label">${esc(label)}</p>`;
@@ -82,7 +142,7 @@ function chapter(file){
   h += `<div class="op-orn">${VEU(c)}</div>`;
   h += `</section>`;
   // respiros: ornamento "· · ·" nos pontos de viragem (3 movimentos)
-  const nBreaks = file==='00b-nota-de-abertura.md' ? 0 : file==='08-epilogo.md' ? 1 : 2;
+  const nBreaks = file===cfg.epilogueFile ? 1 : 2;
   const n = paras.length;
   const pos = new Set();
   if(nBreaks===1) pos.add(Math.max(2, Math.min(n-1, Math.round(n/2))));
@@ -99,51 +159,41 @@ function chapter(file){
 const cover = `
 <section class="front cover">
   <div class="cv-num">7</div>
-  <h1 class="cv-title">Os Sinais<br>de Desencaixe</h1>
+  <h1 class="cv-title">${cfg.coverTitle}</h1>
   <div class="cv-rule"></div>
   <p class="cv-sub">${esc(SUBTITLE)}</p>
   <p class="cv-author">${esc(AUTHOR)}</p>
 </section>`;
 
 const dedicationHTML = (()=>{
-  const paras = readFileSync(C('00a-dedicatoria.md'),'utf8').replace(/\r/g,'').split('\n').map(s=>s.trim()).filter(Boolean);
+  const paras = readFileSync(C(cfg.dedicationFile),'utf8').replace(/\r/g,'').split('\n').map(s=>s.trim()).filter(Boolean);
   return `<section class="front dedication">${paras.map((p,i)=>`<p${i===0?' class="d-head"':''}>${inl(p)}</p>`).join('')}</section>`;
 })();
 
 const nota = (()=>{
-  const { title, paras } = parseChapter('00b-nota-de-abertura.md');
-  return `<section class="front nota"><h2 class="fm-title">${esc(title)}</h2>${paras.map(p=>`<p>${inl(p)}</p>`).join('')}</section>`;
+  const { title, paras } = parseChapter(cfg.notaFile);
+  return `<section class="front nota"><h2 class="fm-title">${esc(title||cfg.notaTitleFallback)}</h2>${paras.map(p=>`<p>${inl(p)}</p>`).join('')}</section>`;
 })();
 
 const toc = `
 <section class="front toc">
-  <h2 class="fm-title">Índice</h2>
+  <h2 class="fm-title">${esc(cfg.tocTitle)}</h2>
   <ul>
-    <li><span class="t">Nota de abertura</span></li>
-    <li><span class="t">Introdução</span><span class="s">Porque este não é um livro sobre aprender a encaixar</span></li>
-    <li><span class="n">Sinal 1</span><span class="s">Estás presente mas não te sentes pertencente</span></li>
-    <li><span class="n">Sinal 2</span><span class="s">Começas a diminuir-te para caber</span></li>
-    <li><span class="n">Sinal 3</span><span class="s">Sentes saudades de algo que nunca viveste</span></li>
-    <li><span class="n">Sinal 4</span><span class="s">Oscilas entre hiper-adaptação e isolamento</span></li>
-    <li><span class="n">Sinal 5</span><span class="s">O teu sistema nervoso começa a rejeitar certos ambientes</span></li>
-    <li><span class="n">Sinal 6</span><span class="s">Começas a confundir paz com ausência de pessoas</span></li>
-    <li><span class="n">Sinal 7</span><span class="s">Percebes que o problema nunca foi pertencer, mas o preço da pertença</span></li>
-    <li><span class="t">Epílogo</span><span class="s">O véu do horizonte</span></li>
+    ${cfg.toc.map(e=>`<li>${e.t?`<span class="t">${esc(e.t)}</span>`:''}${e.n?`<span class="n">${esc(e.n)}</span>`:''}${e.s?`<span class="s">${esc(e.s)}</span>`:''}</li>`).join('\n    ')}
   </ul>
 </section>`;
 
 const colophon = `
 <section class="front colophon">
   <div class="cl-orn">${VEU(GOLD)}</div>
-  <h3>Para ti, que leste</h3>
-  <p>O que acabou foi um lugar. Nenhum dos amores acabou. Se algum destes sinais te reconheceu, fica com ele, sem pressa, e continua a permanecer.</p>
+  <h3>${esc(cfg.colophonHead)}</h3>
+  <p>${esc(cfg.colophonBody)}</p>
   <p class="cl-credit">© 2026 ${esc(AUTHOR)}</p>
 </section>`;
 
 const body =
   cover + dedicationHTML + nota + toc +
-  ['00-introducao.md','01-sinal.md','02-sinal.md','03-sinal.md','04-sinal.md',
-   '05-sinal.md','06-sinal.md','07-sinal.md','08-epilogo.md'].map(chapter).join('') +
+  cfg.chapters.map((f,i)=>chapter(f,i)).join('') +
   colophon;
 
 const css = `
@@ -215,21 +265,21 @@ section.body{ break-before:page; }
 .colophon .cl-credit{ font-family:'Outfit',sans-serif; font-size:7.5pt; letter-spacing:.26em; text-transform:uppercase; color:${SALVIA}; margin-top:10mm; }
 `;
 
-const html = `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8">
+const html = `<!doctype html><html lang="${cfg.htmlLang}"><head><meta charset="utf-8">
 <title>${esc(TITLE)}</title>
 <script>window.PagedConfig={auto:false};</script>
 <script src="${'file://'+path.join(__dirname,'paged.polyfill.js')}"></script>
 <style>${css}</style></head><body>${body}</body></html>`;
 
-const htmlPath = path.join(__dirname,'book.html');
+const htmlPath = path.join(__dirname, LANG==='en' ? 'book-en.html' : 'book.html');
 writeFileSync(htmlPath, html);
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
 await page.goto('file://'+htmlPath, { waitUntil:'load', timeout:120000 });
 const total = await page.evaluate(async ()=>{ await document.fonts.ready; const r=await window.PagedPolyfill.preview(); return r.total; });
-console.log('Paged.js paginou:', total, 'páginas');
-const outPath = path.join(ROOT,'Os-7-Sinais-de-Desencaixe.pdf');
+console.log('['+LANG+'] Paged.js paginou:', total, 'páginas');
+const outPath = path.join(ROOT, cfg.out);
 await page.pdf({ path:outPath, preferCSSPageSize:true, printBackground:true, margin:{top:'0',right:'0',bottom:'0',left:'0'} });
 await browser.close();
 console.log('PDF:', outPath);

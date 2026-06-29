@@ -6,8 +6,13 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FONT = (f)=> 'file://'+path.join(__dirname,'fonts',f);
 
-const TITLE='Os Sinais<br>de Desencaixe';
-const SUB='O equilíbrio entre pertença e autenticidade';
+const LANG = (process.argv[2] || process.env.LANG_BOOK || 'pt').toLowerCase().startsWith('en') ? 'en' : 'pt';
+const STR = {
+  pt: { title:'Os Sinais<br>de Desencaixe', sub:'O equilíbrio entre pertença e autenticidade', sibling:'irmão de Os Sete Véus' },
+  en: { title:'The Signs<br>of Not Belonging', sub:'The balance between belonging and authenticity', sibling:'sibling of The Seven Veils' },
+}[LANG];
+const TITLE=STR.title;
+const SUB=STR.sub;
 const AUTHOR='Vivianne dos Santos';
 const VEU=(c)=>`<svg viewBox="0 0 512 512" width="150" height="150"><path d="M118 384 C118 224 178 124 256 124 C334 124 394 224 394 384" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round"/><path d="M166 392 C166 270 204 200 256 200 C308 200 346 270 346 392" fill="none" stroke="${c}" stroke-width="6.5" stroke-linecap="round" opacity="0.55"/><circle cx="256" cy="98" r="7" fill="${c}"/></svg>`;
 
@@ -43,7 +48,7 @@ function html(v){
     <div class="rule"></div>
     <div class="sub">${SUB}</div>
     <div class="orn">${VEU(v.orn)}</div>
-    <div class="author">irmão de Os Sete Véus</div>
+    <div class="author">${STR.sibling}</div>
     <div class="site">viviannedossantos.com</div>
   </div></body></html>`;
 }
@@ -53,8 +58,9 @@ for (const [name,v] of Object.entries(variants)){
   const p = await b.newPage({ viewport:{width:1600,height:2560}, deviceScaleFactor:1 });
   await p.setContent(html(v), { waitUntil:'load' });
   await p.evaluate(async()=>{ await document.fonts.ready; });
-  await p.screenshot({ path: path.join(__dirname,`capa-${name}.png`), clip:{x:0,y:0,width:1600,height:2560} });
+  const suffix = LANG==='en' ? '-en' : '';
+  await p.screenshot({ path: path.join(__dirname,`capa-${name}${suffix}.png`), clip:{x:0,y:0,width:1600,height:2560} });
   await p.close();
-  console.log('capa-'+name+'.png');
+  console.log('capa-'+name+suffix+'.png');
 }
 await b.close();
