@@ -16,12 +16,11 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
 });
 
 // [ficheiro local (relativo à raiz), caminho remoto, mime]
+// só os PDFs: a capa é a imagem que a Vivianne carregou (já está no Supabase),
+// não a tocamos aqui.
 const FICHEIROS = [
   ['Os-7-Sinais-de-Desencaixe.pdf', `produtos/${SLUG}.pdf`, 'application/pdf'],
   ['The-Seven-Signs-of-Not-Belonging.pdf', `produtos/${SLUG}-en.pdf`, 'application/pdf'],
-  // a capa titulada (a imagem da Vivianne + título) também vai para o site
-  ['sinais-capa/capa-composta.png', `livro-pilar/${SLUG}/capa-composta.png`, 'image/png'],
-  ['sinais-capa/capa-composta-en.png', `livro-pilar/${SLUG}/capa-composta-en.png`, 'image/png'],
 ];
 
 (async () => {
