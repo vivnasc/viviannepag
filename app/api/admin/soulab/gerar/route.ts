@@ -35,22 +35,33 @@ export async function POST(req: Request) {
   const modo = body.modo === 'encaminha' ? 'encaminha' : 'abre';
   let tipoId = (body.tipo ?? 'frase') as TipoSoulabId;
 
-  // CONTINUAR O FIO: parte 2 de um reel que resultou. Lê a peça-mãe (frase, conceito,
-  // tipo) e herda o tipo dela, para o seguimento sair no mesmo registo.
-  let continuarDe: { frase: string; conceito?: string } | null = null;
+  // CONTINUAR O FIO (1+3): a parte seguinte de um reel que resultou. Herda da peça-mãe
+  // a VOZ (frase/conceito), a CENA (evolui-a, não troca de sujeito), o FORMATO e a
+  // TIPOGRAFIA, e LIGA-as como série (parteDe/parte) — para se sentir o passo seguinte
+  // do MESMO reel, não outro do mesmo ângulo.
+  let continuarDe: { frase: string; conceito?: string; cena?: string } | null = null;
+  let formatoHerdado: 'frase' | 'momentos' | undefined;
+  let tipografiaHerdada: Record<string, unknown> | undefined;
+  let parteDe: string | undefined;
+  let parteNum: number | undefined;
   if (body.continuarDe) {
     const supabaseC = getSupabaseAdmin();
     const { data } = await supabaseC.from('carousel_collections').select('dias, theme').eq('slug', body.continuarDe).maybeSingle();
-    const s = (data?.dias as Array<{ slides?: Array<{ texto?: string; conceito?: string }> }> | undefined)?.[0]?.slides?.[0];
-    if (s?.texto) continuarDe = { frase: s.texto, conceito: s.conceito };
-    const tp = (data?.theme as { soulab?: { tipo?: string } } | undefined)?.soulab?.tipo;
-    if (tp && getTipoSoulab(tp)) tipoId = tp as TipoSoulabId;
+    const s = (data?.dias as Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string; tipografia?: Record<string, unknown> | null }> }> | undefined)?.[0]?.slides?.[0];
+    if (s?.texto) continuarDe = { frase: s.texto, conceito: s.conceito, cena: s.notaVisual ?? undefined };
+    if (s?.tipografia) tipografiaHerdada = s.tipografia;
+    const sl = (data?.theme as { soulab?: { tipo?: string; formato?: 'frase' | 'momentos'; parte?: number } } | undefined)?.soulab;
+    if (sl?.tipo && getTipoSoulab(sl.tipo)) tipoId = sl.tipo as TipoSoulabId;
+    if (sl?.formato === 'momentos' || sl?.formato === 'frase') formatoHerdado = sl.formato;
+    parteDe = body.continuarDe;
+    parteNum = (sl?.parte ?? 1) + 1;
   }
 
   if (!getTipoSoulab(tipoId)) return NextResponse.json({ erro: 'tipo-invalido' }, { status: 400 });
   const quantos = Math.min(4, Math.max(1, body.quantos ?? 1));
   const tema = body.tema?.trim() || undefined;
-  const formato = body.formato === 'momentos' ? 'momentos' : 'frase';
+  // ao continuar, herda o formato da peça-mãe (se era "vários momentos", a parte 2 também).
+  const formato = formatoHerdado ?? (body.formato === 'momentos' ? 'momentos' : 'frase');
 
   const supabase = getSupabaseAdmin();
 
@@ -94,6 +105,8 @@ export async function POST(req: Request) {
         imageUrl,
         capa: idx === 0,
         conceito: idx === 0 ? peca.conceito : undefined,
+        // ao continuar, herda o LOOK (tipografia) da peça-mãe, para a série ser coerente.
+        ...(tipografiaHerdada ? { tipografia: tipografiaHerdada } : {}),
       }));
       const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
@@ -104,7 +117,7 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato, ...(parteDe ? { parteDe, parte: parteNum } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

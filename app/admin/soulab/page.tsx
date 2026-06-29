@@ -23,6 +23,7 @@ type Peca = {
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
   segPorMomento: number | null;
   formato: string; momentos: string[] | null;
+  parteDe: string | null; parte: number | null; // série: continuação de um fio
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -661,7 +662,7 @@ export default function SoulabPage() {
                   <button onClick={() => toggleSel(p.slug)} title={sel.has(p.slug) ? 'tirar da seleção' : 'selecionar'}
                     className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10"
                     style={sel.has(p.slug) ? { background: SOULAB.paleta.destaque, borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
-                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}</span>
+                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}{p.parte ? ` · ↪ parte ${p.parte}` : ''}</span>
                   {/* O estado que importa primeiro é "está renderizada?" (videoUrl). O clip
                       do motion vinha à frente e ESCONDIA o sinal de MP4 — agora o MP4 ganha,
                       e o "🎬 com vida" mostra-se só quando tem motion mas AINDA não renderizou. */}

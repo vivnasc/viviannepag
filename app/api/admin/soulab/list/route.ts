@@ -20,7 +20,7 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; legenda?: string | null; hashtags?: string[] | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null; destaque?: string[]; notaVisual?: string | null; efeito?: string | null; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string } | null; segPorMomento?: number | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null; formato?: string } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null; formato?: string; parteDe?: string | null; parte?: number | null } } | null;
     created_at?: string;
   };
 
@@ -47,6 +47,8 @@ export async function GET() {
       efeito: slide?.efeito ?? null,
       tipografia: slide?.tipografia ?? null,
       segPorMomento: slide?.segPorMomento ?? null,
+      parteDe: row.theme?.soulab?.parteDe ?? null, // série: o slug da parte anterior
+      parte: row.theme?.soulab?.parte ?? null,     // número da parte no fio (2, 3…)
       agendadoEm: row.theme?.agendadoEm ?? null,
       hora: row.theme?.hora ?? null,
       publicado: Boolean(row.theme?.igPublicado || row.theme?.publicado),
