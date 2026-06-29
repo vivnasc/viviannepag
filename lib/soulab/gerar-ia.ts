@@ -7,6 +7,7 @@
 // Só devolve texto/indicações (a imagem gera-se a seguir, no route, com Flux).
 
 import { SOULAB, getTipoSoulab, type TipoSoulabId } from './marca';
+import { profundidadePorBaixo } from '@/lib/knowledge/saber';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaSoulab {
@@ -48,6 +49,7 @@ A VOZ DA SOULAB (decisão de marca, inviolável): ${SOULAB.voz}.
 
 AMPLA, ANCORADA: a Soulab explora a alma humana em geral, mas o seu centro de gravidade é o território real desta curadoria. Estas correntes dão GRAVIDADE (não são o tema obrigatório, são o que atravessa tudo): ${SOULAB.territorio.join(' · ')}.
 ÂNCORAS DE PROFUNDIDADE (só para pensares mais fundo; PROIBIDO nomeá-las, citar autores ou usar jargão no texto): ${SOULAB.ancoras.join(' · ')}.
+PROFUNDIDADE (a base de conhecimento da curadoria, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto): ${profundidadePorBaixo(evitar.length, 3)}.
 NÃO uses os 7 véus nem o baralho de personagens "Sou Aquela" (Salvadora, Provedora, Órfã…): isso pertence a outra conta. A Soulab é mais ampla e mais impessoal.
 
 ESTE ÂNGULO DE HOJE — ${tipo.label}: ${tipo.descricao}
