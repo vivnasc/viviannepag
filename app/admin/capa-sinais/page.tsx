@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CapaSinaisGerador } from '@/components/admin/CapaSinaisGerador';
+import { RenderLivroSinais } from '@/components/admin/RenderLivroSinais';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,6 +20,7 @@ export default function CapaSinaisAdmin() {
       </header>
 
       <CapaSinaisGerador />
+      <RenderLivroSinais />
     </main>
   );
 }

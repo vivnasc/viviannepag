@@ -3,7 +3,11 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 const require = createRequire(import.meta.url);
-const { chromium } = require('/opt/node22/lib/node_modules/playwright');
+// playwright: no dev container está no caminho global; no CI (GitHub Actions)
+// é instalado via npm. Tenta o global, recua para o normal.
+let chromium;
+try { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
+catch { ({ chromium } = require('playwright')); }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
