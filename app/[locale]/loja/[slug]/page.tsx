@@ -335,6 +335,10 @@ export default async function ProdutoPage({
     ? conteudoPack.map((i) => i.capa).filter((c): c is string => Boolean(c)).slice(0, 4)
     : [];
   const capaExibida = capaLivroMetodo(slug, locale) ?? mosaicoPack[0] ?? p.capa;
+  // Os livros do Metodo VS tem capa em formato de livro (5:8); os ebooks/guias
+  // tem capa ~quadrada (3:4). A moldura segue o formato real, senao a capa de
+  // livro era esmagada/cortada na caixa quadrada (mesmo problema da home).
+  const aspectCapa = LIVROS_METODO.includes(slug) ? 'aspect-[5/8]' : 'aspect-[3/4]';
   // Poupanca (preco original riscado vs preco).
   const precoN = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
   const poupanca = p.preco_original ? Math.round(precoN(p.preco_original) - precoN(p.preco)) : 0;
@@ -379,7 +383,7 @@ export default async function ProdutoPage({
                   )}
                 </div>
               ) : capaExibida ? (
-                <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden border border-ocre/20 shadow-2xl shadow-black/30">
+                <div className={`relative ${aspectCapa} rounded-[20px] overflow-hidden border border-ocre/20 shadow-2xl shadow-black/30`}>
                   <Image
                     src={capaExibida}
                     alt={p.titulo}
@@ -395,7 +399,7 @@ export default async function ProdutoPage({
                   )}
                 </div>
               ) : (
-                <div className="aspect-[3/4] rounded-[20px] bg-terra-2/60 border border-ocre/20 flex items-center justify-center">
+                <div className={`${aspectCapa} rounded-[20px] bg-terra-2/60 border border-ocre/20 flex items-center justify-center`}>
                   <span className="text-creme-2/30 italic">sem capa</span>
                 </div>
               )}
