@@ -8,6 +8,7 @@
 // Só devolve texto/indicações; a imagem gera-se a seguir, no route, com Flux.
 
 import { CRESCER, LIVRO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
+import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaCrescer {
@@ -49,6 +50,10 @@ A VOZ (decisão de marca, inviolável): ${CRESCER.voz}
 FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomeá-lo, citar autores, áreas, véus ou usar jargão no texto): a Vivianne vem destas áreas, ${CRESCER.areas.join(', ')}. Âncoras: ${CRESCER.ancoras.join(' · ')}.
 
 A FONTE PROFUNDA é o livro DELA, "${LIVRO.titulo}". O arco dos sete movimentos (o que cada um ENCOBRE e o que REVELA, NUNCA nomear no texto): ${LIVRO.veus.map((v) => `${v.nome} (encobre ${v.encobre}; revela que ${v.revela})`).join(' · ')}. As correntes que atravessam tudo: ${LIVRO.correntes.join(' · ')}.
+
+O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser inteiro; a dor de deixar de caber num lugar que foi bom, sem que ninguém tenha feito nada de errado). Os sinais (não os nomeies como lista; vive-os): ${SINAIS_DESENCAIXE.join(' · ')}.
+
+PROFUNDIDADE (a base de conhecimento dela, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 3)}
 
 O que SAI é a vida real, na linguagem das dores e passagens de qualquer pessoa, NUNCA a teoria, NUNCA o nome de um véu, autor ou tradição.
 
