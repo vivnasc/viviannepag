@@ -34,6 +34,7 @@ export async function GET() {
       visual: row.theme?.crescer?.visual ?? null,
       momentos: todosSlides.length > 1 ? todosSlides.map((x) => x.texto ?? '').filter(Boolean) : null,
       slidesImgs: todosSlides.map((x) => x.imageUrl ?? null),
+      slidesTip: todosSlides.map((x) => x.tipografia ?? null),
       slug: row.slug,
       texto: slide?.texto ?? row.brief ?? '',
       conceito: slide?.conceito ?? '',
