@@ -5,6 +5,7 @@ import { LangToggle } from '@/components/LangToggle';
 import { TopNav } from '@/components/TopNav';
 import { MetodoHero } from '@/components/home/MetodoHero';
 import { MetodoMovimentos } from '@/components/home/MetodoMovimentos';
+import { LivroSinais } from '@/components/home/LivroSinais';
 import { Sobre } from '@/components/home/Sobre';
 import { EscritosRecentes } from '@/components/home/EscritosRecentes';
 import { Newsletter } from '@/components/home/Newsletter';
@@ -29,6 +30,9 @@ export default async function HomePage({
         <div className="veu my-16" />
         {/* O método em três movimentos (ver/vir/viver), apresentado, não só citado */}
         <MetodoMovimentos locale={locale} />
+        <div className="veu my-16" />
+        {/* O livro novo: Os 7 Sinais de Desencaixe (irmão de Os Sete Véus) */}
+        <LivroSinais locale={locale} />
         <div className="veu my-16" />
         {/* Quem está por trás do método */}
         <Sobre />
