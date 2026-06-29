@@ -26,6 +26,14 @@ Deixa-me aterrar isto, porque dito assim paira, e o que paira não te serve. Con
 
 Olha bem para o que ela disse. Saudades de uma mulher que eu podia ter sido. Não de um homem que não conheceu, não de uma viagem que não fez, não de outra vida noutro sítio com outras pessoas. De uma versão dela. De uma Inês que existia em potência e que, a cada bifurcação da vida, ficou para trás por boas razões, sempre por boas razões, nunca por nenhuma razão má. É aqui que precisamos de parar, porque é aqui que está o coração deste sinal e a sua diferença de todos os outros livros que já leste sobre falta e desejo. Aquela mulher que ficou para trás não ficou porque alguém te impediu. Não há vilão nesta história. Não há um pai que te cortou as asas, um marido que te diminuiu, uma circunstância injusta que te roubou. Houve uma mesa boa. Houve uma vida que escolheste e que continuou a ser boa, escolha após escolha, todas elas amorosas, todas elas certas no momento em que foram feitas. A outra, a que não foi feita, ficou viva dentro de ti à espera. A saudade do que não viveste é o luto de uma vida que não foi tirada de ti. É o luto de uma vida a que disseste que não, uma e outra vez, por amor a esta, e que nunca te deixou de todo.
 
+::: pausa
+**Fica aqui um instante.**
+Não saias desta página depressa. Acabaste de ler que a tua falta é o luto de uma vida que ninguém te tirou. Isso pede um momento parado.
+> Fecha os olhos e deixa vir uma imagem da mulher que podias ter sido. Não a julgues, não a expliques. Só repara o que ela está a fazer.
+- O que é que ela tem, que tu, na vida de agora, ainda não te deixaste ter?
+- E se isso não fosse traição a esta vida, mas um acrescento a ela?
+:::
+
 Há aqui uma confusão que precisa de ser desfeita com cuidado, porque é dela que vêm os maiores erros. Quando sentes esta falta, a mente apressa-se a traduzi-la num plano. Falta-me alguma coisa, logo tenho de mudar de vida. Tenho de largar isto, partir para ali, recomeçar, fazer a coisa grande e irreversível que finalmente me traga aquilo que me falta. Aqui está a armadilha, porque a saudade do que não viveste quase nunca é um pedido de fuga. É um pedido de presença. A vida que ela aponta raramente está noutro continente. Está, na maior parte das vezes, dentro da tua, a um gesto de distância, encolhida por falta de coragem e não por falta de espaço. A Inês não precisava de deixar a casa, o filho, o trabalho. Precisava de deixar entrar a mulher que dobrava a roupa a chorar, em vez de a arrumar na gaveta. São coisas muito diferentes, e confundi-las custa caro. Há quem destrua uma vida inteira a fugir de uma falta que só queria ser olhada.
 
 Então de onde vem, esta falta? Vou contar-te o que percebi, e vou contá-lo em camadas, da mais simples à mais funda, porque cada uma é verdadeira e nenhuma sozinha chega.
@@ -65,6 +73,14 @@ Isto leva-me ao gesto que te quero deixar, porque chegámos à parte em que não
 O gesto é este: deixar a falta existir sem a explicar.
 
 Da próxima vez que ela te visitar, e vai visitar-te, provavelmente numa hora boa, não corras a chamar-lhe nomes. Não digas, lá estou eu, ingrata. Não digas, é romantismo, passa-me já. Não a arrumes na gaveta com o resto que arrumas. Fica com ela. Senta-te ao lado dela como te sentarias ao lado de uma amiga que chegou sem avisar e que tu não esperavas mas que afinal querias ver. Faz-lhe uma única pergunta, sem pressa de resposta, sem necessidade de a resolver hoje. A pergunta é, do que é que tu tens saudades? Não para agir já. Não para mudar nada amanhã. Só para ouvir. Porque uma falta que é ouvida começa a falar, e uma falta que é calada só sabe gritar mais alto.
+
+::: pausa
+**Experimenta, com a falta que tiveres.**
+Não é exercício para fazer bem. É só uma pergunta deixada em aberto.
+> Da próxima vez que a saudade sem nome te visitar, não lhe chames nomes. Senta-te ao lado dela e pergunta-lhe, sem pressa de resposta: do que é que tu tens saudades?
+- Que ponta de fio te aparece primeiro, mesmo pequena, mesmo sem contexto?
+- O que mudaria se tratasses essa falta como bússola, e não como defeito?
+:::
 
 Repara no que estou e no que não estou a pedir-te. Não te estou a pedir que mudes de vida. Quem muda de vida a fugir de uma falta leva a falta consigo, porque a falta não estava na vida, estava no não a ter ouvido. Também não te estou a pedir que te resignes, que aceites que é assim, que enterres a bússola e sorrias. Isso seria autoabandono, seria fazeres exactamente o que te andaram a pedir, parar de querer para não incomodar. O gesto que te peço não é fuga nem é resignação. É fidelidade. É seres fiel à parte de ti que sabe que há mais, sem teres ainda de saber o quê. É deixares essa parte respirar dentro da tua vida tal como ela é, em vez de a expulsares para teres paz ou de demolires a casa toda para a alojar.
 
