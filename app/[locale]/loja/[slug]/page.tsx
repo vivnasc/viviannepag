@@ -13,7 +13,7 @@ import { semTravessoes } from '@/lib/escritos-sanitize';
 import { slugToColecao } from '@/lib/colecoes';
 import { AdicionarCarrinho } from '@/components/AdicionarCarrinho';
 import { BarraCompraMobile } from '@/components/BarraCompraMobile';
-import { PRODUTOS_EN } from '@/lib/produtos-en';
+import { PRODUTOS_EN, type ProdutoEN } from '@/lib/produtos-en';
 import { getRomance } from '@/lib/romances';
 import {
   isRomanceSlug,
@@ -164,10 +164,95 @@ async function getRomanceProduto(slug: string, locale: string): Promise<Produto 
 // e NÃO pertencem ao pack FreeMe Mãe (não mostram banner de coleção).
 const LIVROS_METODO = ['os-7-sinais', 'os-7-veus', 'ver-soltar', 'vir-soltar', 'viver-soltar'];
 const SUPA_LOJA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
-const capaLivroMetodo = (slug: string): string | null =>
+// A capa segue o idioma (capa-composta-en.png em EN) e leva quebra de cache: a
+// Vivianne carrega a capa nova no mesmo URL e o CDN do Supabase serve a antiga
+// (~1h). Esta pagina e force-dynamic, por isso o ?v muda a cada pedido e a capa
+// nova aparece logo. (Ver nota do cache no CLAUDE.md.)
+const capaLivroMetodo = (slug: string, locale: string): string | null =>
   LIVROS_METODO.includes(slug) && SUPA_LOJA
-    ? `${SUPA_LOJA}/storage/v1/object/public/viviannepag-assets/livro-pilar/${slug}/capa-composta.png`
+    ? `${SUPA_LOJA}/storage/v1/object/public/viviannepag-assets/livro-pilar/${slug}/capa-composta${locale === 'en' ? '-en' : ''}.png?v=${Date.now()}`
     : null;
+
+// Texto EN dos livros do Metodo VS (a DB so guarda PT). Sem isto, a pagina EN
+// mostrava titulo/subtitulo/descricao em portugues. Voz da Vivianne: sem
+// travessoes, sem abrir frases com "And".
+const LIVROS_METODO_EN: Record<string, ProdutoEN> = {
+  'os-7-sinais': {
+    titulo: 'The Seven Signs of Not Belonging',
+    subtitulo: 'On belonging without making yourself smaller',
+    descricao: `**Book · ~50,000 words · Immediate PDF**
+
+The companion book to The Seven Veils. About the quiet moment, hard to confess, when you stop fitting a place that was good, without anything in it having changed, and without anyone having done anything wrong.
+
+**The seven signs:**
+1. You are present but you do not feel you belong.
+2. You begin to make yourself smaller in order to fit.
+3. You miss something you never lived.
+4. You swing between over-adapting and isolating.
+5. Your nervous system begins to reject certain places.
+6. You start to mistake peace for the absence of people.
+7. You realize the problem was never belonging, but the price of belonging.
+
+Each sign in three movements: recognition, deepening, and the smallest, truest turn. At the end, the veil of the horizon: there is no place of arrival, there is a way of staying.
+
+It is not a book about learning to fit in. It is about belonging without needing to make yourself smaller.
+
+By Vivianne dos Santos.`,
+  },
+  'os-7-veus': {
+    titulo: 'The Seven Veils',
+    subtitulo: 'See what binds you. Release what makes you repeat.',
+    descricao: `**Book · ~22,000 words · Immediate PDF**
+
+The pillar book of Method VS. A crossing through the seven veils that stand between you and who you are, and the simple way to lift them: see what binds you, release what makes you repeat.
+
+**The seven veils:**
+1. Permanence, defending who you no longer are.
+2. Memory, living bound to your story.
+3. The Whirlwind, drowning inside your own head.
+4. Effort, striving to be loved.
+5. Desolation, the fear of the void.
+6. The Horizon, living in wait for a someday.
+7. Duality, the separation at the root of them all.
+
+Each veil with its root (childhood, inheritances, family constellation), what changes when it lifts, and a practice. At the end, an eight-week workbook to bring the method into your life.
+
+By Vivianne dos Santos, from the path of transpersonal psychology and systemic family constellation.`,
+  },
+  'ver-soltar': {
+    titulo: 'ver.soltar',
+    subtitulo: 'awareness: stepping out of the storm',
+    descricao: `**Method child · ~12,000 words · Immediate PDF**
+
+The first movement of Method VS: to see. A method for stepping out of your own head (the whirlwind and memory) and watching the storm pass from solid ground. With its 5-step protocol, practices, and a seven-day path.
+
+**Includes the pocket draft (bonus)**, to keep the method close.
+
+By Vivianne dos Santos, from the path of transpersonal psychology and systemic family constellation.`,
+  },
+  'vir-soltar': {
+    titulo: 'vir.soltar',
+    subtitulo: 'the return: coming back to yourself',
+    descricao: `**Method child · ~11,000 words · Immediate PDF**
+
+The second movement of Method VS: to come. A method for stopping the pushing and coming back to yourself (effort and desolation), and letting yourself, at last, be held. With its 5-step protocol, practices, and a seven-day path.
+
+**Includes the pocket draft (bonus)**, to keep the method close.
+
+By Vivianne dos Santos, from the path of transpersonal psychology and systemic family constellation.`,
+  },
+  'viver-soltar': {
+    titulo: 'viver.soltar',
+    subtitulo: 'integration: stepping into your life',
+    descricao: `**Method child · ~12,000 words · Immediate PDF**
+
+The third movement of Method VS: to live. A method for leaving the waiting room and taking off the armor of your roles (the horizon and permanence), and stepping into your own life, now. With its 5-step protocol, practices, and a seven-day path.
+
+**Includes the pocket draft (bonus)**, to keep the method close.
+
+By Vivianne dos Santos, from the path of transpersonal psychology and systemic family constellation.`,
+  },
+};
 
 async function getProduto(slug: string, locale: string): Promise<Produto | null> {
   if (isPackSlug(slug)) return getPack(slug, locale);
@@ -184,6 +269,8 @@ async function getProduto(slug: string, locale: string): Promise<Produto | null>
     if (!row) return getFallback(slug, locale);
     // A DB so guarda PT. Em EN, sobrepoe so o texto. A capa e a mesma (so foto).
     if (locale === 'en') {
+      const metodo = LIVROS_METODO_EN[slug];
+      if (metodo) return { ...row, titulo: metodo.titulo, subtitulo: metodo.subtitulo, descricao: metodo.descricao };
       const en = PRODUTOS_EN[slug];
       if (en) return { ...row, titulo: en.titulo, subtitulo: en.subtitulo, descricao: en.descricao };
       const c = CATALOGO[slug];
@@ -247,7 +334,7 @@ export default async function ProdutoPage({
   const mosaicoPack = isPack
     ? conteudoPack.map((i) => i.capa).filter((c): c is string => Boolean(c)).slice(0, 4)
     : [];
-  const capaExibida = capaLivroMetodo(slug) ?? mosaicoPack[0] ?? p.capa;
+  const capaExibida = capaLivroMetodo(slug, locale) ?? mosaicoPack[0] ?? p.capa;
   // Poupanca (preco original riscado vs preco).
   const precoN = (s: string | null) => parseFloat((s ?? '').replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
   const poupanca = p.preco_original ? Math.round(precoN(p.preco_original) - precoN(p.preco)) : 0;
