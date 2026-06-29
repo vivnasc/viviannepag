@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
+import { githubDispatchToken } from '@/lib/github/dispatch-token';
 import { ROMANCES } from '@/lib/romances';
 
 export const runtime = 'nodejs';
@@ -14,7 +15,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'auth' }, { status: 401 });
   }
 
-  const token = process.env.GITHUB_DISPATCH_TOKEN;
+  const token = await githubDispatchToken();
   const owner = process.env.GITHUB_REPO_OWNER ?? 'vivnasc';
   const repo = process.env.GITHUB_REPO_NAME ?? 'viviannepag';
   const ref = process.env.GITHUB_DISPATCH_REF ?? 'main';

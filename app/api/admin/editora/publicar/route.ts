@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
+import { githubDispatchToken } from '@/lib/github/dispatch-token';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { lerLivro } from '@/lib/editora';
 
@@ -81,7 +82,7 @@ Por Vivianne dos Santos.`;
   }
 
   // 2. dispara o render editorial no GitHub Actions
-  const token = process.env.GITHUB_DISPATCH_TOKEN;
+  const token = await githubDispatchToken();
   const owner = process.env.GITHUB_REPO_OWNER ?? 'vivnasc';
   const repo = process.env.GITHUB_REPO_NAME ?? 'viviannepag';
   const ref = process.env.EDITORA_RENDER_REF ?? process.env.GITHUB_DISPATCH_REF ?? 'main';

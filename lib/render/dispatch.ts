@@ -3,13 +3,15 @@
 // Usado pelo publicador automático para PREPARAR sozinho a media que falta —
 // para que "estar na Agenda" baste para se publicar (sem passos à mão).
 
+import { githubDispatchToken } from '@/lib/github/dispatch-token';
+
 // Revisão atual da capa. Sobe quando mudamos algo que obriga a re-render
 // (ex.: a correção que mete a imagem-assinatura na capa). O publicador só
 // publica carrosséis com esta revisão; os antigos são re-renderizados sozinhos.
 export const CAPA_REV = 2;
 
 export async function dispararRender(slug: string, modo?: string): Promise<boolean> {
-  const token = process.env.GITHUB_DISPATCH_TOKEN;
+  const token = await githubDispatchToken();
   const owner = process.env.GITHUB_REPO_OWNER ?? 'vivnasc';
   const repo = process.env.GITHUB_REPO_NAME ?? 'viviannepag';
   const ref = process.env.GITHUB_DISPATCH_REF ?? 'main';
