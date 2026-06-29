@@ -31,12 +31,16 @@ export async function gerarPecaCrescer(
   evitar: string[] = [],
   tema?: string,
   vozId: VozId = 'direta',
+  seed = 0,
 ): Promise<PecaCrescer> {
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
   const voz = getVoz(vozId) ?? getVoz('direta')!;
   const semImagem = !visual.promptBase;
+  // ARQUÉTIPO de cena desta peça (roda por seed) — para as imagens NÃO repetirem.
+  const arqs = visual.arquetipos ?? [];
+  const arquetipo = arqs.length ? arqs[((seed % arqs.length) + arqs.length) % arqs.length] : '';
 
   const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${CRESCER.handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}
 
@@ -72,7 +76,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "conceito": "o tema em 1 a 3 palavras (selo da capa)",
   "frase": "o texto da CAPA: ${formato.multi ? 'a 1.ª linha/faca que para o scroll' : 'a frase única (1 a 3 linhas curtas)'}, sem aspas",
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
-  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS: UMA cena concreta e original que TRADUZA VISUALMENTE o sentimento da frase que escreveste acima (ligação imagem↔texto). Estilo ${visual.label}. ${visual.variar} Escreve a cena específica e termina com este estilo/qualidade: ${visual.promptBase}"`},
+  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS: UMA cena concreta e original que TRADUZA VISUALMENTE o sentimento da frase que escreveste acima (ligação imagem↔texto).${arquetipo ? ` PARTE OBRIGATORIAMENTE deste arquétipo de cena (compõe-o à tua maneira, ligado à frase, NUNCA um desfiladeiro/garganta verde): ${arquetipo}.` : ''} Estilo ${visual.label}. ${visual.variar} Escreve a cena específica e termina com este estilo/qualidade: ${visual.promptBase}"`},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
   "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["As telas em sequência, EXATAMENTE conforme a estrutura do formato indicada acima. A 1.ª tela é a CAPA (igual ao campo frase). Cada tela é uma respiração/parágrafo conforme o formato, todas diferentes, sem repetir a ideia. Sem travessões, leitura clara e interessante do princípio ao fim."]' : ''}
 }`;

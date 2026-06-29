@@ -103,7 +103,10 @@ export async function POST(req: Request) {
   for (let i = 0; i < jobs.length; i++) {
     const job = jobs[i];
     try {
-      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz);
+      // seed roda o ARQUÉTIPO de cena por peça (anti-repetição das imagens): conta
+      // o que já existe + a posição no lote, para cada imagem sair de um arquétipo diferente.
+      const seed = evitar.length + i;
+      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed);
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
       const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;
