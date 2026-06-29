@@ -82,7 +82,7 @@ Durante seis sinais, e provavelmente durante muito mais tempo do que seis sinais
 
 E agora, neste limiar onde a guerra amoleceu, ouves uma pergunta diferente a formar-se. Não a procuraste. Ela veio sozinha, do mesmo lugar de onde veio o amolecer. E a pergunta nova é esta, e quero que a leias devagar, porque ela vai ficar contigo muito depois de fechares este livro.
 
-Onde é que eu posso permanecer inteira enquanto perteço.
+Onde é que eu posso permanecer inteira enquanto pertenço.
 
 Sente a diferença. Não é onde caibo. É onde permaneço inteira. Não é se há lugar para mim. É se há lugar para mim sem que eu tenha de deixar partes de mim à porta. A pergunta antiga procurava um lugar. A pergunta nova procura uma condição. E essa condição é a única coisa que faz a pertença valer o nome. Porque uma pertença que te custa pedaços de ti não é pertença, é hospedagem. Estás alojada, não pertences. Pertencer, pertencer mesmo, é poder permanecer inteira enquanto estás. É a presença sem peça em falta.
 
