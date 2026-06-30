@@ -65,7 +65,7 @@ if (fs.existsSync(APARATO)) {
 }
 
 const inl = (s) => marked.parseInline(s.trim());
-const ARCH = `<svg class="arch" viewBox="0 0 600 250" preserveAspectRatio="xMidYMin meet"><path d="M60 250 L60 120 C60 35 540 35 540 120 L540 250" fill="none" stroke="#b9842f" stroke-width="1.4"/><path d="M78 250 L78 122 C78 52 522 52 522 122 L522 250" fill="none" stroke="#b9842f" stroke-width="0.7" opacity="0.55"/><circle cx="60" cy="120" r="4" fill="#b9842f"/><circle cx="540" cy="120" r="4" fill="#b9842f"/><circle cx="300" cy="47" r="4.5" fill="#b9842f"/></svg>`;
+const ARCH = `<svg class="arch" viewBox="0 0 600 250" preserveAspectRatio="xMidYMin meet"><path d="M60 250 L60 120 C60 35 540 35 540 120 L540 250" fill="none" stroke="#b9842f" stroke-width="1.1"/><path d="M78 250 L78 122 C78 52 522 52 522 122 L522 250" fill="none" stroke="#b9842f" stroke-width="0.7" opacity="0.55"/><circle cx="60" cy="120" r="4" fill="#b9842f"/><circle cx="540" cy="120" r="4" fill="#b9842f"/><circle cx="300" cy="47" r="4.5" fill="#b9842f"/></svg>`;
 const ORN = `<svg class="orn" viewBox="0 0 240 18"><line x1="20" y1="9" x2="108" y2="9" stroke="#b9842f" stroke-width="1"/><line x1="132" y1="9" x2="220" y2="9" stroke="#b9842f" stroke-width="1"/><circle cx="120" cy="9" r="4" fill="none" stroke="#b9842f" stroke-width="1"/><circle cx="120" cy="9" r="1.4" fill="#b9842f"/></svg>`;
 const EYE = `<svg class="eye" viewBox="0 0 64 36"><path d="M4 18 C18 2 46 2 60 18 C46 34 18 34 4 18 Z" fill="none" stroke="#9c6a2c" stroke-width="1.4"/><circle cx="32" cy="18" r="7" fill="none" stroke="#9c6a2c" stroke-width="1.4"/><circle cx="32" cy="18" r="2.4" fill="#9c6a2c"/></svg>`;
 
@@ -73,7 +73,7 @@ function mapaFig() {
   return `<section class="mapfig"><div class="ch-kicker">O mapa</div><h2 class="ch-title">Mapa da Transição</h2>${ORN}
   <div class="venn"><div class="circ c1"><span class="cl">Sobrevivência</span><span class="cs">viver<br>para não morrer</span></div>
   <div class="circ c2"><span class="cl">Fissura</span><span class="cs">entre-mundos<br>perda e possibilidade</span></div>
-  <div class="circ c3"><span class="cl">Emergência</span><span class="cs">viver<br>para criar e significar</span></div></div>
+  <div class="circ c3"><span class="cl">Emergência</span><span class="cs">viver<br>para criar e significar</span></div><div class="lk l1"></div><div class="lk l2"></div><div class="lk l3"></div></div>
   <div class="cols"><div><h4>Mecanismos</h4><p>medo<br>escassez<br>controlo<br>identidade defensiva<br>esforço</p></div>
   <div><h4>Experiência</h4><p>crise de sentido<br>luto do antigo<br>deslocamento<br>busca<br>pergunta</p></div>
   <div><h4>Emergências</h4><p>criação<br>cooperação<br>consciência<br>identidade fluida<br>significado</p></div></div></section>`;
@@ -167,7 +167,7 @@ svg.orn{display:block;width:40mm;height:3mm;margin:5mm auto 6mm;}
 .epigraph{font-family:Fraunces;font-style:italic;font-weight:300;color:#7a5e38;font-size:11.5pt;text-align:center;margin:0 auto 7mm;max-width:78%;}
 .opener>p.lead{text-indent:0;}
 .opener>p.lead::first-letter{float:left;font-family:Fraunces;font-weight:400;font-size:3.5em;line-height:.78;padding:1mm 2mm 0 0;color:#9c6a2c;}
-.box{border:1px solid rgba(156,106,44,.45);border-radius:3mm;padding:5mm 6mm;margin:6mm auto 7mm;max-width:92%;background:rgba(185,132,47,.05);text-align:center;page-break-inside:avoid;}
+.box{border:0.8px solid rgba(185,132,47,.4);border-radius:1.5mm;padding:6mm 9mm;margin:7mm auto 8mm;max-width:88%;background:rgba(185,132,47,.035);text-align:center;page-break-inside:avoid;}
 .boxlabel{font-family:Outfit;font-weight:500;font-size:7.5pt;letter-spacing:.28em;text-transform:uppercase;color:#9c6a2c;margin-bottom:2.5mm;}
 .box.idea p{font-family:Fraunces;font-weight:300;font-size:11pt;line-height:1.55;color:#3a2c18;text-align:center;margin:0;}
 .box.ask svg.eye{width:13mm;height:7.5mm;display:block;margin:0 auto 2mm;}
@@ -184,17 +184,18 @@ blockquote{font-family:Fraunces;font-style:italic;color:#7d5320;text-align:cente
 .part-title{font-family:Fraunces;font-weight:300;font-size:27pt;line-height:1.14;color:#f3ead9;margin:6mm 0 0;}
 .partorn{margin-top:7mm;}.partorn svg.orn line{stroke:#d3a85e;}.partorn svg.orn circle{stroke:#d3a85e;fill:#d3a85e;}
 .mapfig{page-break-before:always;page-break-after:always;text-align:center;padding-top:6mm;}
-.venn{position:relative;height:62mm;margin:8mm auto 4mm;width:150mm;}
-.venn .circ{position:absolute;top:0;width:74mm;height:62mm;border-radius:50%;border:1px solid rgba(156,106,44,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.venn .c1{left:0;background:rgba(42,33,20,.86);color:#efe4d2;border-color:rgba(42,33,20,.5);}
-.venn .c2{left:38mm;background:rgba(185,132,47,.10);}.venn .c3{left:76mm;background:rgba(185,132,47,.05);}
-.venn .cl{font-family:Outfit;font-weight:500;font-size:8pt;letter-spacing:.18em;text-transform:uppercase;}
-.venn .c1 .cl{color:#efe4d2;}.venn .c2 .cl,.venn .c3 .cl{color:#7d5320;}
-.venn .cs{font-family:Fraunces;font-style:italic;font-size:8.5pt;margin-top:2mm;line-height:1.3;}
-.venn .c1 .cs{color:#cdbfa8;}.venn .c2 .cs,.venn .c3 .cs{color:#5a4a33;}
-.cols{display:flex;justify-content:center;gap:14mm;margin-top:6mm;}
-.cols h4{font-family:Outfit;font-weight:500;font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#9c6a2c;margin-bottom:2mm;}
-.cols p{font-family:Fraunces;font-weight:300;font-size:9pt;line-height:1.7;color:#4f4231;text-align:center;}
+.venn{position:relative;height:52mm;margin:11mm auto 6mm;width:156mm;}
+.venn .circ{position:absolute;top:0;width:60mm;height:52mm;border-radius:50%;border:0.8px solid rgba(185,132,47,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.venn .c1{left:0;background:rgba(124,83,32,.07);}
+.venn .c2{left:48mm;background:rgba(156,106,44,.05);}.venn .c3{left:96mm;background:rgba(140,128,92,.09);}
+.venn .cl{font-family:Outfit;font-weight:500;font-size:7pt;letter-spacing:.24em;text-transform:uppercase;color:#8a5d28;}
+.venn .cs{font-family:Fraunces;font-style:italic;font-size:7.5pt;margin-top:1.4mm;line-height:1.32;color:#6b5a3f;}
+.venn .lk{position:absolute;bottom:-7mm;width:0.8px;height:7mm;background:rgba(185,132,47,.5);}
+.venn .lk.l1{left:30mm;}.venn .lk.l2{left:78mm;}.venn .lk.l3{left:126mm;}
+.cols{display:flex;justify-content:center;gap:0;margin-top:3mm;}
+.cols > div{width:52mm;padding:0 4mm;}
+.cols h4{font-family:Outfit;font-weight:500;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:#9c6a2c;margin-bottom:2.5mm;padding-bottom:2mm;border-bottom:0.6px solid rgba(185,132,47,.35);}
+.cols p{font-family:Fraunces;font-weight:300;font-size:8.5pt;line-height:1.85;color:#4f4231;text-align:center;}
 .annex{page-break-before:always;font-size:9.4pt;line-height:1.6;}
 .annex h1{font-family:Fraunces;font-weight:300;font-size:16pt;color:#332512;margin:0 0 1mm;}
 .annex h2{font-family:Outfit;font-weight:500;font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#9c6a2c;margin:5mm 0 2mm;}
