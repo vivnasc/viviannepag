@@ -25,3 +25,7 @@ build/book-en.html
 
 # PDFs do livro gerados localmente (o render publica no bucket)
 livro/*.pdf
+
+build/transicao.html
+/A-Grande-Transicao.pdf
+/A-Grande-Transicao-typst.pdf
