@@ -12,34 +12,6 @@ const PASTA_ANCHORS = 'crescer/_anchors';
 const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase() || 'cena';
 const desslug = (s: string) => s.replace(/\.jpg$/i, '').replace(/-/g, ' ').trim();
 
-// ATLAS por cena (m de cenaAncorada): que ASPECTOS do mundo cada cena HERDA como
-// referência (roupa + objetos + a atividade). Cada geração puxa uma imagem de cada.
-const ATLAS_POR_CENA: string[][] = [
-  ['roupa', 'objectos', 'infancia', 'aprendizagem'],  // 0 — crianças a aprender
-  ['roupa', 'objectos', 'refeicoes', 'interior'],     // 1 — refeição em família
-  ['roupa', 'objectos', 'animais', 'aprendizagem'],   // 2 — estudar organismos
-  ['roupa', 'objectos', 'arquitectura', 'interior'],  // 3 — oficina/artesãos
-  ['roupa', 'objectos', 'mercado', 'pessoas'],        // 4 — mercado
-  ['animais', 'roupa', 'objectos'],                   // 5 — criatura + pessoas
-  ['animais', 'natureza', 'objectos'],                // 6 — mundo vivo
-  ['animais', 'infancia', 'roupa'],                   // 7 — crianças + criaturas
-  ['transportes', 'roupa', 'natureza'],               // 8 — barco no rio
-  ['festival', 'roupa', 'pessoas'],                   // 9 — festa
-  ['pessoas', 'roupa', 'objectos'],                   // 10 — músicos
-  ['animais', 'natureza', 'roupa'],                   // 11 — guardião + criaturas no campo
-  ['interior', 'roupa', 'objectos'],                  // 12 — cuidado
-  ['animais', 'natureza'],                            // 13 — criatura ao perto
-  ['cidade', 'arquitectura', 'transportes'],          // 14 — cidade de canais
-  ['biblioteca', 'arquitectura', 'interior'],         // 15 — biblioteca viva
-  ['oceano', 'transportes', 'arquitectura'],          // 16 — porto oceânico
-  ['cidade', 'pessoas', 'arquitectura'],              // 17 — praça pública
-  ['noite', 'ciencia', 'arquitectura'],               // 18 — observatório / noite
-  ['animais', 'oceano', 'natureza'],                  // 19 — fauna grande / baleias
-  ['ciencia', 'interior', 'objectos'],                // 20 — laboratório adulto
-  ['transportes', 'cidade', 'pessoas'],               // 21 — transporte
-  ['arquitectura', 'cidade', 'pessoas'],              // 22 — infraestrutura
-];
-
 type Anchor = { url: string; categoria: string };
 async function listarAnchors(): Promise<Anchor[]> {
   try {
@@ -51,11 +23,11 @@ async function listarAnchors(): Promise<Anchor[]> {
     }));
   } catch { return []; }
 }
-// herda VÁRIAS âncoras (uma por aspeto da cena). Se a cena não tiver atlas, qualquer.
-function herdarAtlas(anchors: Anchor[], m: number, seed: number): string[] {
+// herda VÁRIAS âncoras (uma por aspeto que a CENA pede). Se não houver dessas, qualquer.
+function herdarAtlas(anchors: Anchor[], cats: string[], seed: number): string[] {
   if (!anchors.length) return [];
   const urls: string[] = [];
-  for (const cat of (ATLAS_POR_CENA[m] ?? [])) {
+  for (const cat of cats) {
     const c = anchors.filter((a) => a.categoria === cat);
     if (c.length) urls.push(c[(((Math.floor(seed) % c.length) + c.length) % c.length)].url);
   }
@@ -92,7 +64,7 @@ export async function POST(req: Request) {
       briefing = cena.briefing; categoria = cena.categoria;
       // só usa âncoras se a Vivianne JÁ as carregou; senão gera por TEXTO (livre, sem a
       // estufa embebida a prender). Ela depois promove as boas a âncora (⭐).
-      inputImgs = herdarAtlas(anchors, cena.m, seed);
+      inputImgs = herdarAtlas(anchors, cena.atlas, seed);
     }
     const url = await gerarImagemGptImage2(briefing, inputImgs, token, openaiKey, qualidade);
     let saved = url;

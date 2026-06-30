@@ -94,50 +94,50 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
 const BASE_MUNDO =
   'Documentary photography from an existing civilization. The civilization is real, inhabited and ordinary to its inhabitants. The image must feel OBSERVED rather than designed. ' +
   'The focus is everyday life, material culture and ordinary interactions of a COMPLETE civilization. The scale VARIES: sometimes an intimate human-scale moment (a table, a workshop, a small group), sometimes a WIDE view of a whole city, a port, an ocean, a public square or great infrastructure of this civilization — the full society, not only gardens, terrariums and children. ' +
-  'People are BUSY in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading), never contemplating, posing, meditating or admiring technology. ' +
+  'People are mostly busy in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading); a person may ALSO be alone, paused, apart, or in quiet relationship with another — but NEVER in a spiritual meditation pose and never reverently admiring technology. ' +
   'The people are ETHNICALLY DIVERSE — varied skin tones, features and hair, clearly different peoples together, NEVER all the same ethnicity. ' +
   'Their clothing and materials are REFINED, clean and dignified, beautiful and well-made — NEVER rustic, primitive, poor, ragged, tribal or peasant. ' +
   'Include UNFAMILIAR objects, materials or lifeforms being USED naturally in daily activities (transparent living vessels, seed-lamps, grown materials, cultivated tools, organisms used as tools) rather than displayed or admired. ' +
   'Architecture is only background, not the subject. Vegetation is integrated into the human space, never a forest or botanical garden. Beauty exists as INFRASTRUCTURE rather than decoration; abundance without luxury; technology without machinery; nature without wilderness. ' +
-  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No shrine. No altar. No sacred or central venerated object. No monument. No monumentality. No ritual veneration. No one person contemplating or admiring. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. No Venice, no Singapore. No Montessori-greenhouse cliché, not only horticulture and terrariums. ' +
+  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No shrine. No altar. No sacred or central venerated object. No monument. No monumentality. No ritual veneration. No spiritual meditation pose. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. No Venice, no Singapore. No Montessori-greenhouse cliché, not only horticulture and terrariums. ' +
   'no text, no letters, no watermark, no logos.';
 
-// As 5 cenas fundadoras dela (todas escala humana, gente ocupada, objeto em uso).
-const CENAS_FUNDADORAS: { cena: string; categoria: string }[] = [
-  { cena: 'children learning to cultivate living vessels inside a public learning space', categoria: 'crianças a aprender' },
-  { cena: 'a family sharing a meal using unfamiliar biological objects and materials', categoria: 'refeição em família' },
-  { cena: 'researchers and children studying living organisms inside a public library', categoria: 'estudar organismos' },
-  { cena: 'craftspeople building everyday objects from cultivated materials in a workshop', categoria: 'oficina' },
-  { cena: 'citizens trading goods and knowledge in a crowded public market', categoria: 'mercado' },
-  // o MUNDO VIVO (não só pessoas): criaturas simbióticas, biodiversidade, crianças com seres.
-  { cena: 'a woman and a child gently feeding a large calm gentle herbivore creature with plants and flowers growing along its back, beside a pond of lilies', categoria: 'animais' },
-  { cena: 'the living world of this civilization up close: strange beautiful plants, clear water and small gentle creatures, with only a few people among them', categoria: 'animais' },
-  { cena: 'children playing and discovering together with small gentle creatures and luminous plants of this world, outdoors', categoria: 'infancia' },
-  // VARIEDADE (para não ser tudo estufa + mesa): água, festa, música, campo, cuidado, criatura.
-  { cena: 'people navigating a small living boat along a calm river of this civilization, carrying goods and plants, open sky', categoria: 'transportes' },
-  { cena: 'a joyful outdoor FESTIVAL of this civilization with music, colour, food and many people of all ages dancing and celebrating', categoria: 'festival' },
-  { cena: 'musicians of this civilization playing unfamiliar instruments for a small gathering outdoors', categoria: 'pessoas' },
-  { cena: 'a keeper walking with several large gentle creatures of this world across an open sunlit meadow, wide open landscape', categoria: 'animais' },
-  { cena: 'a healer caring for another person with gentle living instruments, in a calm bright room', categoria: 'interior' },
-  { cena: 'a single extraordinary creature of this biosphere up close, a nature-documentary portrait, few or no people', categoria: 'animais' },
-  // A CIVILIZAÇÃO COMPLETA (escala maior, vida adulta, urbano) — sai do ciclo estufa/infância.
-  { cena: 'a great coastal CITY of canals and navigable waterways of this civilization, seen wide at human level from a bridge, living boats and many people going about urban life', categoria: 'cidade' },
-  { cena: 'a vast LIVING LIBRARY of this civilization, adults consulting living archives among tall living shelves', categoria: 'biblioteca' },
-  { cena: 'a busy OCEAN PORT of this civilization, large living vessels at the quay, the open sea, people loading and unloading goods', categoria: 'oceano' },
-  { cena: 'a crowded PUBLIC SQUARE / plaza of this civilization at midday, urban daily life, many adults of all kinds', categoria: 'cidade' },
-  { cena: 'astronomers of this civilization at an OBSERVATORY studying the night sky and several moons, luminous instruments, a clear starry night', categoria: 'noite' },
-  { cena: 'enormous gentle migrating creatures of this world, like whales of the sea or sky, witnessed from a distance by a few people', categoria: 'oceano' },
-  { cena: 'adult researchers of this civilization at work in a LABORATORY, using living scientific instruments, focused and busy', categoria: 'ciencia' },
-  { cena: 'a TRANSPORT hub of this civilization, living vehicles and boats, people travelling and moving goods', categoria: 'transportes' },
-  { cena: 'great public INFRASTRUCTURE of this world in everyday use — a living bridge or aqueduct of grown material — with people crossing', categoria: 'arquitectura' },
+// CENAS pelos TEMAS que a Vivianne DE FACTO aborda (não worldbuilding genérico): a
+// pessoa só, o desencaixe, as linhagens/heranças, os ciclos/fins, a sombra, os
+// vínculos, a transformação, o corpo, o sentido, a emergência. Cada cena é uma JANELA
+// do mundo dela que carrega UM tema seu (sem ilustrar a frase). `tema` = a temática
+// que serve; `atlas` = que aspetos herda da bíblia visual.
+interface CenaFund { cena: string; categoria: string; tema: string; atlas: string[] }
+const CENAS_FUNDADORAS: CenaFund[] = [
+  // ── OS TEMAS DELA ───────────────────────────────────────────────────────────
+  { cena: 'a single person of this world sitting a little apart at the edge of a busy gathering, present but not quite belonging, the others continuing warmly behind', categoria: 'desencaixe · à beira', tema: 'desencaixe', atlas: ['pessoas', 'roupa', 'interior'] },
+  { cena: 'one person of this world alone for a quiet moment in the middle of ordinary daily life, the world still moving around them — paused, not meditating', categoria: 'o eu · pausa', tema: 'corpo', atlas: ['pessoas', 'roupa', 'cidade'] },
+  { cena: 'an elder of this world placing a living heirloom object into the hands of a young person, three generations present and watching', categoria: 'herança · linhagem', tema: 'raizes', atlas: ['pessoas', 'objectos', 'roupa'] },
+  { cena: 'several generations of one family of this world together in a line, the very old and the very young, hands connected, a quiet continuity', categoria: 'gerações · cura ancestral', tema: 'campo', atlas: ['pessoas', 'roupa', 'interior'] },
+  { cena: 'a small group of this world gently releasing a luminous living thing onto bright water, a farewell that is also a beginning', categoria: 'ciclos · despedida', tema: 'ciclos', atlas: ['oceano', 'pessoas', 'roupa'] },
+  { cena: 'two people of this world in close quiet company, the bond and the small space they keep between them, a real human moment', categoria: 'vínculos', tema: 'vinculos', atlas: ['pessoas', 'roupa', 'interior'] },
+  { cena: 'a person of this world caught mid-passage crossing a threshold between two living spaces of different light, leaving one for the other', categoria: 'transformação · limiar', tema: 'transformacao', atlas: ['arquitectura', 'roupa', 'interior'] },
+  { cena: 'a healer of this world caring for another person with gentle living instruments, both fully present, in a calm bright room', categoria: 'corpo · cuidado', tema: 'corpo', atlas: ['interior', 'roupa', 'pessoas'] },
+  { cena: 'a person of this world standing half in clear light and half in soft shadow, fine detail visible in BOTH the lit and the shadowed side, the shown self and the hidden self', categoria: 'sombra', tema: 'sombra', atlas: ['interior', 'roupa', 'pessoas'] },
+  { cena: 'a person of this world setting out alone along a bright waterway toward an open horizon, the wide world ahead', categoria: 'sentido · caminho', tema: 'sentido', atlas: ['oceano', 'natureza', 'roupa'] },
+  { cena: 'people of this world together looking up at a migration of enormous gentle creatures crossing the bright sky or sea, wonder and openness', categoria: 'emergência · para onde vamos', tema: 'emergencia', atlas: ['oceano', 'animais', 'pessoas'] },
+  { cena: 'a warm communal meal of this world, many people of different ages and peoples together, belonging', categoria: 'pertença · refeição', tema: 'vinculos', atlas: ['refeicoes', 'pessoas', 'roupa'] },
+  // ── TEXTURA DO MUNDO (variedade) ────────────────────────────────────────────
+  { cena: 'a crowded bright market of this world, many people trading goods and knowledge, dense material culture', categoria: 'mercado', tema: 'comunidade', atlas: ['mercado', 'pessoas', 'objectos'] },
+  { cena: 'a living library of this world, adults consulting living archives among tall living shelves', categoria: 'biblioteca', tema: 'aprendizagem', atlas: ['biblioteca', 'interior', 'pessoas'] },
+  { cena: 'a woman and a child gently feeding a large calm herbivore creature with plants and flowers growing along its back, beside a pond of lilies', categoria: 'criatura · lago', tema: 'ciclos', atlas: ['animais', 'pessoas', 'roupa'] },
+  { cena: 'an extraordinary creature or plant of this biosphere up close, a nature-documentary portrait, few or no people', categoria: 'biodiversidade', tema: 'mundo', atlas: ['animais', 'natureza'] },
+  { cena: 'a coastal city of canals and navigable waterways of this world, wide at human level from a bridge, living boats and people in urban life', categoria: 'cidade', tema: 'comunidade', atlas: ['cidade', 'arquitectura', 'transportes'] },
+  { cena: 'an ocean port of this world, large living vessels at the quay, the open sea, people loading goods', categoria: 'porto', tema: 'comunidade', atlas: ['oceano', 'transportes', 'cidade'] },
+  { cena: 'astronomers of this world at an observatory studying a clear starry night and several moons, luminous instruments', categoria: 'observatório · noite', tema: 'emergencia', atlas: ['noite', 'ciencia', 'arquitectura'] },
+  { cena: 'children of this world learning together, busy and curious, among the living instruments of their world', categoria: 'infância · aprender', tema: 'aprendizagem', atlas: ['infancia', 'aprendizagem', 'pessoas'] },
 ];
 
 // Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.
-// `m` = índice da cena (para o route escolher a âncora da categoria certa).
-export function cenaAncorada(seed = 0): { briefing: string; categoria: string; m: number } {
-  const m = idx(seed, CENAS_FUNDADORAS.length);
-  const { cena, categoria } = CENAS_FUNDADORAS[m];
-  return { briefing: `${cena}. ${BASE_MUNDO}`, categoria, m };
+// devolve `atlas` (aspetos a herdar) e `tema` (a matéria que serve).
+export function cenaAncorada(seed = 0): { briefing: string; categoria: string; atlas: string[]; tema: string } {
+  const c = CENAS_FUNDADORAS[idx(seed, CENAS_FUNDADORAS.length)];
+  return { briefing: `${c.cena}. ${BASE_MUNDO}`, categoria: c.categoria, atlas: c.atlas, tema: c.tema };
 }
 
 // ── MODO OBJETOS · o "IKEA do mundo" (a cultura material PRIMEIRO) ──────────────
