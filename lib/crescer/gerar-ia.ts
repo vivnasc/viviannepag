@@ -72,6 +72,7 @@ FONTE PRIMÁRIA DESTA PEÇA (obrigatória) — um EXCERTO REAL do livro dela "${
 ${veia.texto}
 --- FIM DO EXCERTO ---
 Escreve ${formato.multi ? 'a sequência' : 'a frase'} a partir de UMA ideia funda deste excerto, na voz dela, SEM nomear o livro, autores, domínios nem jargão (a ideia sai em linguagem de vida).
+COMO SE LIGAM (importante, não são dois pedidos a competir): a ESPINHA dá a DIREÇÃO (o movimento) e este excerto dá a MATÉRIA viva. Lê a ideia minerada COMO uma cena desse movimento: o excerto mostra o pólo antigo a agarrar; o movimento abre a frincha do novo. Um só texto, as duas coisas na mesma frase.
 ` : `
 A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}`}
 
