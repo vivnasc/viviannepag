@@ -28,29 +28,31 @@ const BIOLOGIA = [
 ];
 const VERBOS = (mundo.VERBOS_CIVILIZACIONAIS ?? []) as string[];
 
-// ── O MUNDO: um LUGAR que existe, não um ethos psicológico ──────────────────────
+// ── O MUNDO: uma biocivilização REFINADA e SOFISTICADA (não aldeia rústica) ─────
 const MUNDO =
-  'A BIODIVERSE PARALLEL EARTH where evolution selected for BEAUTY, ABUNDANCE, COMPLEXITY, COOPERATION and BIOLOGICAL SOPHISTICATION. ' +
-  'It is ALIVE, POPULATED, technologically MATURE (biological technology, instruments, workshops, laboratories, libraries, vessels, navigation, craft — NOT iPhones/screens, and NOT a neolithic village), ecologically integrated and culturally RICH: many cultures, clothes, objects, materials and ways of living. ' +
-  'Recognisably Earth-life yet clearly another branch of the tree of life. Civilisational luxury is the everyday norm (organic living architecture, sophistication, impossible-yet-habitable materials), never capitalist bling. ';
-// ── VIDA EM MOVIMENTO: substitui o "ethos sereno" que gerava retiro espiritual ──
+  'A BIODIVERSE, ABUNDANT, ADVANCED PARALLEL EARTH where evolution and culture selected for BEAUTY, ABUNDANCE, COMPLEXITY, COOPERATION and BIOLOGICAL SOPHISTICATION. ' +
+  'A REFINED, SOPHISTICATED, ELEGANT biocivilization, technologically MATURE through LIVING biotechnology: luminous glass vessels that hold living plants, delicate biological instruments, ornate grown tools, living libraries and laboratories — NOT screens/iPhones, and ABSOLUTELY NOT a rustic, poor, dusty or neolithic village. ' +
+  'GRAND, sophisticated ORGANIC LIVING ARCHITECTURE: vine-draped marble-and-glass cathedrals, luminous ornate halls, suspended gardens, water running through the structures. Civilisational ELEGANCE and abundance are the everyday norm. ' +
+  'Recognisably Earth-life yet clearly another, more beautiful branch of the tree of life. ';
+// ── REFINAMENTO: roupa elegante + cultura material densa (a chave que faltava) ──
+const REFINAMENTO =
+  'THE PEOPLE: ethnically diverse humans with NORMAL bodies, wearing ELEGANT, FLOWING, INTRICATELY PATTERNED garments with fine jewellery, beads and adornments — REFINED and sophisticated, NEVER rustic peasant cloth, NEVER shirtless poor villagers, NEVER ragged or dusty. ' +
+  'The frame is DENSE with exquisite material culture: luminous glass vessels holding living plants, delicate ornate instruments, refined organic objects in daily use — the signs of an advanced, abundant, beautiful culture. ';
+// ── VIDA EM MOVIMENTO: curiosa, criativa, viva (mas refinada, não pobre) ─────────
 const VIDA =
-  'THIS WORLD IS PLAYFUL, CURIOUS, CREATIVE, BUSY AND ALIVE. People laugh and argue and talk; children explore and play; teenagers mess about; scientists are fascinated; artists build; animals interfere; weather happens; festivals and markets overflow; food is cooked; boats travel; music, sport, craft, trade and discovery everywhere. ' +
-  'Abundance is normal here, so life expands into CURIOSITY and WONDER, never into survival or serenity. There is friction, movement, noise, the mess of real use, many things happening at once. ';
-// ── FOTOGRAFIA: só luz / lente / composição. Penumbra LUMINOSA, tudo visível, NADA moody ──
+  'THIS WORLD IS CURIOUS, CREATIVE, BUSY, JOYFUL AND ALIVE: people study fascinated, make, build, gather and celebrate; children explore; animals interfere; markets and gatherings overflow with abundance; music, craft, science and discovery everywhere. ' +
+  'Abundance is normal here, so life expands into CURIOSITY and WONDER, never into survival or empty serenity. Movement, abundance and many things happening at once. ';
+// ── FOTOGRAFIA: cinematográfica, fotorrealista, luminosa, NÍTIDA, ornada ────────
 const FOTOGRAFIA =
-  'A NATURE-DOCUMENTARY / ANTHROPOLOGY PHOTOGRAPH (BBC Planet Earth, National Geographic): a photographer visited a REAL place that existed before any caption and keeps existing after it. ' +
-  'BRIGHT BUT SOFT diffuse daylight (like soft light after rain), CLEAR visibility, high LOCAL contrast, LUMINOUS penumbra WITHOUT darkness, every detail visible, rich texture. ' +
-  'TACK-SHARP, DEEP FOCUS, crisp fine detail edge to edge, ultra-high resolution; NOT soft, NOT blurry, NOT a shallow depth-of-field bokeh blur, NOT dreamy. ' +
-  'HIGH DENSITY OF VISUAL INFORMATION per square metre: objects, materials, tools, species, architecture, people busy, signs of use. ' +
-  'ETHNICALLY DIVERSE real humans with NORMAL bodies (no mutation, no alien features); what differs is their cultures, clothes, tools and ways of living, never their anatomy. ' +
-  'NOT moody, NOT atmospheric gloom, NOT dramatic deep shadows, NOT crushed blacks, NOT golden-hour spirituality, NOT god-rays, NOT a wellness/retreat/ashram look. ';
+  'A richly detailed, LUMINOUS, ORNATE, CINEMATIC PHOTOREAL image — believable and real, like a frame from a high-budget film about an advanced peaceful biocivilization; exquisite fine detail throughout. ' +
+  'CLEAR, BRIGHT, LUMINOUS DAYLIGHT, jewel-like clarity, every detail visible, high LOCAL contrast, luminous WITHOUT darkness; TACK-SHARP, deep focus, crisp edge to edge; NOT soft, NOT blurry, NOT dreamy, NOT moody, NOT golden-hour haze, NOT god-rays. ' +
+  'HIGH DENSITY of visual information: objects, materials, instruments, species, ornate architecture, people busy. ';
 const REGRA =
   'GENERATE FROM PLACE, NEVER FROM MEANING: the WORLD is the subject of the photo, not any idea or metaphor. no text, no letters, no watermark, no logos.';
 const BAN =
-  'BANNED: a lone person sitting or kneeling in foliage looking pensive; an empty quiet contemplative scene; serene calm emptiness; spiritual/wellness/retreat aesthetic; golden spiritual glow; penumbra-as-darkness; scarcity, poverty, ragged clothes, primitive survival; cyberpunk, neon, robots, screens. ';
+  'BANNED: a rustic / Mediterranean / Moroccan / North-African / tropical / adobe village; dusty mud paths; peasant, poor or ragged people; shirtless boys; a National-Geographic ethnographic village; a lone pensive person in foliage; empty contemplative serenity; spiritual/wellness/retreat/ashram aesthetic; golden spiritual glow; penumbra-as-darkness; scarcity, poverty, primitive survival; cyberpunk, neon, robots, screens. ';
 
-const ABERTURA = `${FOTOGRAFIA}${MUNDO}${VIDA}${BAN}`;
+const ABERTURA = `${FOTOGRAFIA}${MUNDO}${REFINAMENTO}${VIDA}${BAN}`;
 
 // 5 modos, TODOS povoados/vivos/em movimento. O lugar vem dos bancos; o ADN daqui.
 export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string } {
