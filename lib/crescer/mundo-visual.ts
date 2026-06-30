@@ -16,7 +16,12 @@ export const ESTILO_FOTO =
   'ANTHROPOLOGICAL DOCUMENTARY FIELD PHOTOGRAPHY / photojournalism of a real, lived-in civilization — cinematic realism, shot on medium format, shallow depth of field, ultra-detailed, candid, believable; ' +
   'ETHNICALLY DIVERSE real people (Black, East Asian, Arab, Latino, mixed, all ages), integrated INTO the environment, not posed on it; natural daylight; real materials (stone, wood, water, woven fibre, living tissue) alongside biological technologies';
 export const ANTI_ESTETICA =
-  'NOT concept art, NOT fantasy art, NOT sci-fi illustration, NOT a spiritual or meditation aesthetic, NOT an eco-utopia temple, NOT people in matching white or beige robes, NOT crystals, NOT glowing orbs or spheres, NOT golden divine light, NOT a wellness/yoga advertisement, NOT an all-white-and-gold palette, NOT a calm person contemplating something luminous, NOT an "ecological premium ashram"';
+  'NOT concept art, NOT fantasy art, NOT sci-fi illustration, NOT a spiritual or meditation aesthetic, NOT an eco-utopia temple, NOT people in matching white or beige robes, NOT crystals, NOT glowing orbs or spheres, NOT golden divine light, NOT a wellness/yoga advertisement, NOT an all-white-and-gold palette, NOT a calm person contemplating something luminous, NOT an "ecological premium ashram"; ' +
+  'AND NOT the opposite trap either: NOT a rural or pre-industrial artisanal village, NOT a Mediterranean / Maghreb / Himalayan / Andean / UNESCO-heritage village, NOT the past, NOT historical, NOT primitive, NOT only handmade clay-and-wood crafts, NOT a poor 1930s community';
+// O IMPOSSÍVEL (o que se perdeu ao tirar o espiritual): a civilização é BIOLOGICAMENTE
+// MAIS AVANÇADA que a nossa — pós-industrial, não pré-industrial. Habitável E impossível.
+export const BIOTECH =
+  'CRUCIAL — this civilization is BIOLOGICALLY MORE ADVANCED than ours (post-industrial, not pre-industrial): advanced LIVING technology and biological machines, instruments and tools we do NOT recognize, ENGINEERED living architecture (grown and designed, never rustic), new species used as living tools, translucent biological vessels and living tables, materials that do not exist on Earth, engineered ecosystems woven into daily life. It must be at once HABITABLE and IMPOSSIBLE — clearly another civilization, never present-day Earth.';
 // O MANIFESTO que muda o comportamento do modelo (insistência da Vivianne+ChatGPT):
 // fotografia OBSERVADA, evidência de vida, não símbolo desenhado.
 export const MANIFESTO_FOTO =
@@ -154,7 +159,7 @@ export function cenaConstituicao(seed = 0): CenaVisual {
   const pergunta = exemplar?.pergunta || PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
 
   const briefing =
-    `${MANIFESTO_FOTO}${ESTILO_FOTO}. ETHNOGRAPHY of a civilization that NEVER existed — a field-documentary photograph of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
+    `${MANIFESTO_FOTO}${ESTILO_FOTO}. ${BIOTECH} ETHNOGRAPHY of a civilization that NEVER existed — a field-documentary photograph of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
     `Build the image strictly as a CHAIN, never sentence->metaphor->image: SENTENCE -> HUMAN DOMAIN -> CIVILIZATIONAL FUNCTION -> CONCRETE SUBJECT -> EVENT -> image. ` +
     `CIVILIZATIONAL FUNCTION: ${funcao}${catAntropo ? ` (${catAntropo})` : ''}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
     `THE SUBJECT (fills the frame, intimate and close; the place is NEVER the subject): ${sujeito}. ` +
@@ -194,7 +199,7 @@ const FRAGMENTOS: ItemMundo[] = ['INSTITUICOES', 'PROFISSOES', 'ESPECIES', 'ESPA
 const pick = <T,>(arr: T[], n: number): T | null => (arr.length ? arr[idx(n, arr.length)] : null);
 
 const ABERTURA =
-  `${MANIFESTO_FOTO}${ESTILO_FOTO}. A field-documentary photo of a NORMAL DAY in a civilization that NEVER existed — a world that is NOT Earth (the functional equivalent, never the future of Earth). `;
+  `${MANIFESTO_FOTO}${ESTILO_FOTO}. ${BIOTECH} A field-documentary photo of a NORMAL DAY in a civilization that NEVER existed — a world that is NOT Earth (the functional equivalent, never the future of Earth). `;
 const FIM_WB =
   ` ${PALETA_MUNDO}. ${ANTI_ESTETICA}. NEVER Earth nor a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, no text, no letters, no watermark, no logos. ` +
   `It must NOT look like a spiritual retreat: this is a FULL society with work, science, building, navigation, care, mess and use. ` +
