@@ -28,7 +28,7 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
   if (!token || !prompt) return null;
   try {
     const url = await gerarImagemFlux(LUZ_PREFIXO + prompt, token, { raw: true });
-    try { return await guardarImagem(url, `crescer/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
+    try { return await guardarImagem(url, `crescer/${slug}/fundo-${Date.now()}.jpg`, { clarear: true }); } catch { return url; }
   } catch { return null; }
 }
 

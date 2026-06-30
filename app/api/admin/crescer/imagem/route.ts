@@ -67,7 +67,7 @@ export async function POST(req: Request) {
   let imageUrl: string;
   try {
     const url = await gerarImagemFlux(LUZ_PREFIXO + prompt, token, { raw: true });
-    try { imageUrl = await guardarImagem(url, `crescer/${body.slug}/fundo-${Date.now()}.jpg`); } catch { imageUrl = url; }
+    try { imageUrl = await guardarImagem(url, `crescer/${body.slug}/fundo-${Date.now()}.jpg`, { clarear: true }); } catch { imageUrl = url; }
   } catch (e) { return NextResponse.json({ erro: 'flux', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 }); }
 
   for (const i of alvos) { slides[i].imageUrl = imageUrl; slides[i].notaVisual = prompt; }
