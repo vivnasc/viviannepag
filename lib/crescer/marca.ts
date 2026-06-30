@@ -90,7 +90,8 @@ export const LIVRO = {
 // (validadas pela Vivianne). NÃO são os 7 véus.
 // ---------------------------------------------------------------------------
 export type TematicaId =
-  | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo';
+  | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo'
+  | 'desencaixe' | 'consciencia';
 
 export interface Tematica {
   id: TematicaId;
@@ -150,6 +151,18 @@ export const TEMATICAS: Tematica[] = [
     id: 'campo', label: 'Não te curas só a ti', emoji: '🪢',
     descricao: 'Responsabilidade espiritual e cura ancestral: o que sara em ti não fica em ti.',
     foco: 'A cura que não fica em ti (do Véu da Dualidade): quando deixas de repetir um padrão, alivias quem vem depois e soltas a linha que vem de trás (a herança involuntária, inscrita no corpo). Expandir é responsabilidade, não vaidade: a dor de um repercute no corpo de todos, a cura de um espalha alívio à volta (sou porque somos). PROIBIDO o clichê "aumenta a tua vibração"; sempre no concreto dos vínculos, da família e das gerações.',
+  },
+  {
+    // FONTE: o livro "Os 7 Sinais de Desencaixe" (a base de conhecimento dela).
+    id: 'desencaixe', label: 'Desencaixe (7 Sinais)', emoji: '🧩',
+    descricao: 'Pertencer sem deixar de se ser inteiro.',
+    foco: 'A dor de deixar de caber num lugar que já foi bom, sem que ninguém tenha feito nada de errado. Parte de UM destes sinais de cada vez e traz a cena concreta de quem o vive: estar presente sem se sentir pertencente; diminuir-se para caber; a saudade de algo que nunca se viveu; oscilar entre adaptar-se de mais e isolar-se; o corpo a rejeitar certos ambientes; confundir paz com ausência de pessoas; perceber que o problema nunca foi pertencer, foi o preço da pertença. NUNCA nomeies o sinal nem digas "desencaixe"; nomeia a cena.',
+  },
+  {
+    // FONTE: o glossário das Ciências da Consciência Emergente (a base dela).
+    id: 'consciencia', label: 'Consciência emergente', emoji: '🌀',
+    descricao: 'A vida vista para além da sobrevivência.',
+    foco: 'O que se vê quando a sobrevivência deixa de mandar: a identidade construída sobre a falta, a vigilância herdada que continua a varrer o ambiente muito depois de o perigo passar, a vida gerida como defesa, e o que se abre quando se larga isso. Parte de UM destes mecanismos e traz a cena concreta de quem o vive, sempre em linguagem de vida real. PROIBIDO nomear conceitos, domínios ou termos técnicos; só a vida.',
   },
 ];
 
