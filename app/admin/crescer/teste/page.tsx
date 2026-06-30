@@ -68,11 +68,43 @@ export default function TesteMundoPage() {
 
   const [aGerar, setAGerar] = useState(0); // quantas ainda a sair (progresso)
 
-  // ── TESTAR COM CONTEÚDO · a ponte para os posts: frase + matéria (tema) ────────
+  // ── TESTAR COM O CONTEÚDO DA MÃE · NÃO se cria nada: puxa-se uma frase JÁ gerada
+  // no crescer (com a sua matéria) e o mundo dá-lhe a imagem. A matéria vem do conteúdo.
   const [frase, setFrase] = useState('');
   const [temaSel, setTemaSel] = useState('emergencia');
+  const [materiaLabel, setMateriaLabel] = useState('');
+  const [frasesMae, setFrasesMae] = useState<{ frase: string; tematica: string }[]>([]);
+  const [idxMae, setIdxMae] = useState(0);
   const [testes, setTestes] = useState<{ url: string; tema: string; frase: string; ts: number }[]>([]);
   const [aTestar, setATestar] = useState(0);
+
+  // matéria da mãe → tema do mundo (partilham o vocabulário; só 'eumaior' precisa de mapa).
+  const aoTema = (t: string) => {
+    if (t === 'eumaior') return 'consciencia';
+    return TEMAS_CENA.some((x) => x.tema === t) ? t : 'emergencia';
+  };
+  const labelTema = (t: string) => TEMAS_CENA.find((x) => x.tema === t)?.nome ?? t;
+
+  // PUXA uma frase REAL da mãe (cicla pela lista). Carrega a lista na 1.ª vez.
+  const puxarMae = async () => {
+    setErro('');
+    let lista = frasesMae;
+    if (!lista.length) {
+      try {
+        const d = await fetch('/api/admin/crescer/frases-reais').then((r) => r.json());
+        lista = Array.isArray(d.frases) ? d.frases : [];
+        setFrasesMae(lista);
+      } catch { setErro('não consegui ler o conteúdo da mãe'); return; }
+    }
+    if (!lista.length) { setErro('ainda não há conteúdo gerado no crescer para testar'); return; }
+    const i = idxMae % lista.length;
+    const item = lista[i];
+    setIdxMae(i + 1);
+    setFrase(item.frase);
+    const tema = aoTema(item.tematica);
+    setTemaSel(tema);
+    setMateriaLabel(labelTema(tema));
+  };
 
   // gera N imagens do mundo PARA o tema escolhido, com a frase por cima (mock do post).
   const gerarTeste = async () => {
@@ -139,19 +171,19 @@ export default function TesteMundoPage() {
         acontecimentos do mundo <strong>ancorado nelas</strong>, sem tocar nos teus posts nem no gerador a sério.
       </p>
 
-      {/* TESTAR COM CONTEÚDO — a ponte para os posts: frase + matéria */}
+      {/* TESTAR COM O CONTEÚDO DA MÃE — frase REAL já gerada + a sua matéria */}
       <section style={{ border: '1px solid #3a5a88', borderRadius: 12, padding: 16, marginBottom: 20, background: '#10192a' }}>
-        <h2 style={{ fontSize: 15, margin: '0 0 4px' }}>✍️ Testar com o teu conteúdo</h2>
+        <h2 style={{ fontSize: 15, margin: '0 0 4px' }}>🪢 Testar com o conteúdo da mãe</h2>
         <p style={{ opacity: 0.65, fontSize: 12, margin: '0 0 10px', lineHeight: 1.4 }}>
-          Escreve a frase do post e escolhe a <strong>matéria</strong>. Ele gera 4 imagens do mundo PARA esse tema, com a tua frase por cima — para veres o post real (imagem + texto juntos).
+          Não se cria nada novo. Puxa uma frase que <strong>já geraste</strong> no crescer; a <strong>matéria vem do próprio conteúdo</strong>; o mundo só lhe dá a imagem. Vês o post real (imagem + texto da mãe).
         </p>
-        <textarea value={frase} onChange={(e) => setFrase(e.target.value)} rows={2} placeholder="a frase do post (ex.: «não é o mundo que muda, és tu que deixas de caber no antigo»)"
-          style={{ width: '100%', boxSizing: 'border-box', borderRadius: 8, border: '1px solid #345', background: '#0b1118', color: '#eee', padding: 10, fontSize: 14, fontFamily: 'inherit', resize: 'vertical' }} />
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 8 }}>
-          <select value={temaSel} onChange={(e) => setTemaSel(e.target.value)} style={{ ...btn, padding: '7px 10px' }}>
-            {TEMAS_CENA.map((t) => <option key={t.tema} value={t.tema}>{t.nome}</option>)}
-          </select>
-          <button onClick={gerarTeste} disabled={busy} style={{ ...btn, background: busy ? '#333' : '#1d3a66', borderColor: '#3a5a88' }}>
+        <div style={{ minHeight: 56, borderRadius: 8, border: '1px solid #345', background: '#0b1118', padding: '12px 14px', fontSize: 15, lineHeight: 1.4, color: frase ? '#eee' : '#667' }}>
+          {frase || 'carrega «puxar conteúdo da mãe» para trazer uma frase real…'}
+        </div>
+        {materiaLabel && <p style={{ fontSize: 12, opacity: 0.75, margin: '8px 0 0' }}>matéria: <strong style={{ color: '#9ec5ff' }}>{materiaLabel}</strong></p>}
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 10 }}>
+          <button onClick={puxarMae} disabled={busy} style={{ ...btn, padding: '8px 14px' }}>🪢 puxar conteúdo da mãe</button>
+          <button onClick={gerarTeste} disabled={busy || !frase} style={{ ...btn, background: busy ? '#333' : '#1d3a66', borderColor: '#3a5a88', opacity: !frase ? 0.5 : 1 }}>
             {busy && aTestar > 0 ? `a gerar… (${aTestar} a sair)` : 'gerar 4 para esta matéria'}
           </button>
           {testes.length > 0 && <button onClick={() => setTestes([])} disabled={busy} style={{ padding: '6px 12px', borderRadius: 10, border: '1px solid #644', background: 'transparent', color: '#d99', cursor: 'pointer', fontSize: 12 }}>limpar testes</button>}
