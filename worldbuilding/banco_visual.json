@@ -1,0 +1,50 @@
+{
+  "_nota": "O CORAÇÃO do universo visual. Constituição: worldbuilding/CONSTITUICAO.md. A geração segue SEMPRE a cadeia: frase -> função civilizacional -> artefacto/organismo -> evento -> imagem (NUNCA frase->imagem). Enriquecer com o ChatGPT (e validar gerando). Campos prompt_en vazios = por calibrar.",
+
+  "FUNCOES_CIVILIZACIONAIS": [
+    "memória", "identidade", "aprendizagem", "luto", "pertença", "cuidado",
+    "transmissão de conhecimento", "orientação", "decisão colectiva", "celebração",
+    "reconciliação", "passagem para a idade adulta", "protecção", "significado", "criatividade"
+  ],
+
+  "ARTEFACTOS": [
+    { "nome": "Organismo de Identidade", "funcao": "identidade", "descricao": "organismo translúcido vivo que acompanha cada pessoa e materializa a identidade social actual", "quando_falha": "quando a identidade deixa de corresponder à experiência vivida", "evento_visual": "desfaz-se lentamente nas mãos em fios de luz orgânica", "emocao_associada": "transição" },
+    { "nome": "Coral de Memória Ancestral", "funcao": "memória", "descricao": "coral vivo que cada família cultiva, cada ramo luminoso uma experiência guardada", "quando_falha": "quando se continua a alimentar um ramo de algo que já morreu", "evento_visual": "um ramo apaga-se enquanto os outros permanecem luminosos", "emocao_associada": "herança" },
+    { "nome": "Escudo Simbiótico de Ameaça", "funcao": "protecção", "descricao": "organismo que se ergue à volta da pessoa quando deteta perigo real", "quando_falha": "quando continua activo apesar de já não haver perigo há anos", "evento_visual": "mantém-se tenso e erguido sobre uma cena inteiramente calma", "emocao_associada": "vigilância herdada" },
+    { "nome": "Instrumento de Nomeação", "funcao": "pertença", "descricao": "objecto vivo usado para reconhecer e nomear quem alguém é perante a comunidade", "quando_falha": "quando deixa de reconhecer a pessoa que sempre nomeou", "evento_visual": "fica escuro e inerte nas mãos de quem o aproxima", "emocao_associada": "deixar de caber" },
+    { "nome": "Bússola de Possibilidade", "funcao": "orientação", "descricao": "aponta para possibilidades por viver, não para o norte", "quando_falha": "quando a pessoa só consegue olhar para trás", "evento_visual": "a sua agulha de luz hesita e gira sem pousar", "emocao_associada": "encruzilhada" },
+    { "nome": "Cristal de Significado", "funcao": "significado", "descricao": "só revela o que guarda quando o observador formula a pergunta certa", "quando_falha": "quando se pede resposta sem ter feito a pergunta", "evento_visual": "permanece opaco entre mãos que esperam", "emocao_associada": "procura" },
+    { "nome": "Taça de Escuta", "funcao": "reconciliação", "descricao": "amplia a compreensão entre duas pessoas em conversa difícil", "quando_falha": "quando uma das partes deixou de querer ouvir", "evento_visual": "a sua água luminosa divide-se em duas correntes que não se tocam", "emocao_associada": "ruptura" },
+    { "nome": "Tecido de Regulação", "funcao": "cuidado", "descricao": "material vivo junto ao corpo que responde aos estados internos", "quando_falha": "quando o corpo já não sabe descansar", "evento_visual": "muda de cor devagar enquanto um estado interior se acalma", "emocao_associada": "regresso à segurança" },
+    { "nome": "Semente de Possibilidade", "funcao": "passagem para a idade adulta", "descricao": "representa um futuro ainda não escolhido, entregue numa passagem", "quando_falha": "quando a escolha é adiada por medo", "evento_visual": "é entregue de mãos mais velhas para mãos mais novas", "emocao_associada": "limiar" },
+    { "nome": "Jardim de Transição", "funcao": "luto", "descricao": "pequeno organismo-jardim onde se vive a despedida de alguém", "quando_falha": "quando não se deixa o que acabou partir", "evento_visual": "uma flor de luz fecha-se devagar e baixa", "emocao_associada": "luto" }
+  ],
+
+  "ORGANISMOS": [
+    { "nome": "Animal Cartográfico", "reino": "fauna relacional", "funcao": "mapeamento emocional colectivo", "comportamento": "migra através de estados culturais e não territórios físicos", "equivalente_terrestre": "aves migratórias" },
+    { "nome": "Baleia Atmosférica", "reino": "fauna", "funcao": "marcação do tempo cultural", "comportamento": "vive nas camadas altas do céu; as suas migrações marcam mudanças de época", "equivalente_terrestre": "baleias" },
+    { "nome": "Planta Temporal", "reino": "flora", "funcao": "memória do tempo vivido", "comportamento": "floresce em ritmos emocionais, não sazonais", "equivalente_terrestre": "plantas de floração" },
+    { "nome": "Animal de Ligação", "reino": "relatossfera", "funcao": "pertença", "comportamento": "aparece entre duas pessoas em compreensão mútua profunda; não pertence a nenhuma", "equivalente_terrestre": "nenhum" },
+    { "nome": "Polinizador de Ideias", "reino": "noosfera", "funcao": "criatividade", "comportamento": "circula criatividade entre regiões e pessoas", "equivalente_terrestre": "abelhas/borboletas" },
+    { "nome": "Animal Simbiótico de Companhia", "reino": "relatossfera", "funcao": "identidade", "comportamento": "acompanha cada indivíduo desde a infância", "equivalente_terrestre": "nenhum" }
+  ],
+
+  "EVENTOS": [
+    { "evento": "deixa de responder à presença da pessoa", "significado": "uma estrutura psicológica antiga deixou de organizar a experiência", "categoria": "identidade" },
+    { "evento": "desfaz-se nas mãos", "significado": "a identidade antiga deixou de responder", "categoria": "identidade" },
+    { "evento": "um ramo apaga-se entre os que ficam luminosos", "significado": "uma herança que já não é nossa", "categoria": "memória" },
+    { "evento": "continua activo sem haver perigo", "significado": "vigilância herdada que sobrevive à ameaça", "categoria": "protecção" },
+    { "evento": "abandona o hospedeiro / afasta-se pela primeira vez", "significado": "uma forma antiga de pertencer terminou", "categoria": "pertença" },
+    { "evento": "fica escuro e inerte", "significado": "deixou de reconhecer quem éramos", "categoria": "identidade" },
+    { "evento": "abre-se / desenrola-se pela primeira vez", "significado": "algo novo aceita nascer", "categoria": "emergência" },
+    { "evento": "é entregue de mãos velhas para mãos novas", "significado": "transmissão entre gerações", "categoria": "passagem" }
+  ],
+
+  "EXEMPLARES": [
+    { "funcao": "identidade", "pergunta": "como esta civilização representa quem alguém é?", "prompt_en": "intimate close shot: a woman holds with both hands a small translucent living identity-organism of this civilization; it is slowly coming apart into fine threads of organic light, no longer responding to her presence; her face is calm and present, without vigilance; warm whites, soft gold, pearl and sage palette, light emitted by the matter itself; not Earth, not a landscape, the artifact fills the frame" },
+    { "funcao": "memória", "pergunta": "como guardam as memórias entre gerações?", "prompt_en": "close shot: a person tends a small living memory-coral their family cultivates, each luminous branch a kept experience; one single branch has gone dark while the others glow; the person keeps feeding the dead branch; intimate, warm pearl-and-gold light from the coral itself; another civilization, no landscape" },
+    { "funcao": "protecção", "pergunta": "como esta civilização se protege da ameaça?", "prompt_en": "a symbiotic threat-shield organism stays raised and tense around a person who sits in a completely calm, safe place; it has not detected danger in years yet will not lower; close and intimate; the contrast between the alert organism and the serene surroundings is the point; warm muted palette, living light, not Earth" },
+    { "funcao": "pertença", "pergunta": "como se reconhece quem pertence?", "prompt_en": "" },
+    { "funcao": "luto", "pergunta": "como vivem o luto?", "prompt_en": "" }
+  ]
+}

@@ -62,8 +62,21 @@ export const PERGUNTAS = [
 
 // roda ponderada das categorias (replica peso/5) -> proporções do Axioma 6. Só a
 // 'arquitectura' (10%) usa escala ampla, por isso ~90% sai à distância íntima/média.
-const RODA: CategoriaVisual[] = CATEGORIAS.flatMap((c) => Array.from({ length: Math.max(1, Math.round(c.peso / 5)) }, () => c));
 const idx = (n: number, len: number) => ((n % len) + len) % len;
+
+// ─── BANCO VISUAL (worldbuilding/banco_visual.json) — o coração do universo. A
+// geração segue a CADEIA: frase -> função -> artefacto/organismo -> evento -> imagem.
+// O ficheiro é enriquecido/calibrado fora (ChatGPT + geração); aqui só se lê. ───
+import banco from '@/worldbuilding/banco_visual.json';
+interface Artefacto { nome: string; funcao: string; descricao: string; quando_falha: string; evento_visual: string; emocao_associada: string }
+interface Organismo { nome: string; reino: string; funcao: string; comportamento: string; equivalente_terrestre: string }
+interface Evento { evento: string; significado: string; categoria: string }
+interface Exemplar { funcao: string; pergunta: string; prompt_en: string }
+const ARTEFACTOS = (banco.ARTEFACTOS ?? []) as Artefacto[];
+const ORGANISMOS = (banco.ORGANISMOS ?? []) as Organismo[];
+const EVENTOS_BANCO = (banco.EVENTOS ?? []) as Evento[];
+const EXEMPLARES = (banco.EXEMPLARES ?? []) as Exemplar[];
+const FUNCOES_CIV = (banco.FUNCOES_CIVILIZACIONAIS ?? FUNCOES) as string[];
 
 export interface CenaVisual { escala: Escala; funcao: string; pergunta: string; categoria: string; evento: string; briefing: string }
 
@@ -72,20 +85,37 @@ export interface CenaVisual { escala: Escala; funcao: string; pergunta: string; 
 // paisagem. A frase traduz-se no evento (não num cenário/humor). É a resposta à pergunta
 // "como tornar isto antropologicamente impossível", não "como tornar isto mais bonito".
 export function cenaConstituicao(seed = 0): CenaVisual {
-  const cat = RODA[idx(seed, RODA.length)];
-  const escala = cat.escalas[idx(seed, cat.escalas.length)];
-  const funcao = FUNCOES[idx(seed * 3 + 1, FUNCOES.length)];
-  const pergunta = PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
-  const evento = EVENTOS[idx(seed * 5 + 3, EVENTOS.length)];
+  // CADEIA: função -> artefacto/organismo (do banco, da mesma função) -> evento -> imagem.
+  const funcao = FUNCOES_CIV[idx(seed, FUNCOES_CIV.length)];
+  // sujeito: ~70% artefacto (cultura material), ~30% organismo (biologia). Da mesma
+  // função quando há; senão, de todo o banco. É o sujeito que enche a imagem.
+  const arteF = ARTEFACTOS.filter((a) => a.funcao === funcao);
+  const orgF = ORGANISMOS.filter((o) => o.funcao === funcao);
+  const usarOrg = seed % 10 >= 7 && (orgF.length || ORGANISMOS.length);
+  let sujeito: string, evento: string, categoria: string;
+  if (usarOrg) {
+    const o = (orgF.length ? orgF : ORGANISMOS)[idx(seed, (orgF.length ? orgF : ORGANISMOS).length)];
+    sujeito = `the "${o.nome}" — ${o.comportamento}, a living being of this world (${o.reino}), NOT a terrestrial animal`;
+    const ev = EVENTOS_BANCO[idx(seed * 5 + 3, EVENTOS_BANCO.length)];
+    evento = ev ? `${ev.evento} (${ev.significado})` : 'behaves in a way that mirrors the sentence';
+    categoria = 'especie';
+  } else {
+    const a = (arteF.length ? arteF : ARTEFACTOS)[idx(seed, (arteF.length ? arteF : ARTEFACTOS).length)] as Artefacto | undefined;
+    sujeito = a ? `the "${a.nome}" — ${a.descricao}, an item of this civilization's MATERIAL CULTURE (functional equivalent, never a terrestrial object)` : 'a single living instrument of this civilization';
+    evento = a ? `${a.evento_visual} (${a.quando_falha})` : 'undergoes the event that mirrors the sentence';
+    categoria = 'objecto';
+  }
+  const exemplar = EXEMPLARES.find((e) => e.funcao === funcao && e.prompt_en?.trim());
+  const pergunta = exemplar?.pergunta || PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
   const briefing =
     `ETHNOGRAPHY of a civilization that NEVER existed — a National Geographic photograph from the year 2300 of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
-    `This image answers an ANTHROPOLOGICAL QUESTION through MATERIAL CULTURE, never through scenery. ` +
-    `SCALE: ${escala} (intimate and close; the place is never the subject). CIVILIZATIONAL FUNCTION: ${funcao}. QUESTION it answers: ${pergunta} nesta civilização. ` +
-    `THE SUBJECT (this is the whole image, framed close): ${cat.dica}. ` +
-    `THE EVENT (the point of the image, the civilizational equivalent of the sentence's emotional movement): the subject ${evento} — but choose the precise event that mirrors the sentence. ` +
-    `If a person appears, they are in RELATION with this artifact/organism, which stays the true subject; people live WITH this world, not upon it. ` +
-    `Translate the FEELING of the sentence into THIS event on the artifact/organism, not into a mood or a landscape. ` +
+    `Build the image as a CHAIN, never sentence->image: SENTENCE -> CIVILIZATIONAL FUNCTION -> ARTIFACT/ORGANISM -> EVENT -> image. ` +
+    `CIVILIZATIONAL FUNCTION: ${funcao}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
+    `THE SUBJECT (fills the frame, intimate and close, the place is NEVER the subject): ${sujeito}. ` +
+    `THE EVENT (the whole point — the civilizational equivalent of the sentence's emotional movement): it ${evento}. Choose/adjust the event so it mirrors THIS exact sentence. ` +
+    `If a person appears they are in RELATION with this artifact/organism, which stays the true subject. Translate the sentence into THIS EVENT, never into a mood or a landscape. ` +
+    (exemplar ? `REFERENCE of the right level for this function (compose in this spirit, do not copy literally): ${exemplar.prompt_en} ` : '') +
     `${PALETA_MUNDO}. ${EVITAR_MUNDO}. ` +
-    `TEST: without any caption the image must make someone ask "what happened here, in what civilization?", never "where is this place?".`;
-  return { escala, funcao, pergunta, categoria: cat.id, evento, briefing };
+    `TEST: without a caption the image must make someone ask "what happened here, in what civilization?", never "where is this place?".`;
+  return { escala: usarOrg ? 'ecologica' : 'intima', funcao, pergunta, categoria, evento, briefing };
 }
