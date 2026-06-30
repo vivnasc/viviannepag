@@ -129,6 +129,8 @@ A vossa época perdeu quase essa arte. Mandaram cada um atravessar a sua fissura
 
 Reparem no que isto faz à ideia que tínheis de força. Tratáveis a autonomia como o cume da maturidade: chegar a não precisar de ninguém. Daqui, isso parece-nos um sintoma do inverno, não um sinal de saúde. A maturidade que aprendemos a reconhecer não é deixar de precisar; é saber pedir, e saber ficar à porta de outro quando é a vez dele. Quem segura o limiar não é mais forte do que quem atravessa. É alguém que já atravessou, e que voltou para trás de propósito.
 
+Notai que ninguém nasce a saber esta arte. Aprende-se a segurar tendo sido segurado primeiro, do mesmo modo que só consola bem quem já foi consolado alguma vez. Por isso as vossas travessias solitárias eram tão duras: não era só faltar quem vos segurasse no momento, faltava-vos também a memória de alguma vez o terem sido. Onde essa memória existe, mesmo antiga, mesmo de uma só pessoa, o limiar deixa de ser abismo e passa a ser passagem.
+
 O que vem a seguir, no livro, é a parte luminosa, a humanidade que talvez emerja do outro lado. Lede-a com um aviso nosso: nada do que aí se descreve acontece a sós. Não há sistema nervoso que encontre segurança sem outro sistema nervoso por perto, não há significado que se sustente inteiramente dentro de uma só pessoa, não há consciência que amadureça no isolamento que a vossa época confundiu com liberdade. Se há uma coisa que gostaríamos que levassem destas páginas, é que o novo mundo não se conquista. Segura-se, a vários, à porta um do outro.
 
 

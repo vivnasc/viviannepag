@@ -209,6 +209,8 @@ Por isso não vos julgamos pela dureza. Julgaríamos, se acreditássemos que era
 
 Queremos prevenir-vos de uma tentação, porque a conhecemos. Quando se começa a ver a água, dá vontade de a esvaziar de uma vez, de acordar de repente, de exigir ao corpo que largue num dia o que levou milénios a aprender. Essa pressa é ainda a velha pressa, vestida de libertação. O mundo antigo é hábil a regressar disfarçado de saída. Desconfiem sobretudo das saídas que prometem ser rápidas, porque a rapidez era a sua assinatura.
 
+Reparámos, ao estudar-vos, que os que mais depressa quiseram mudar foram muitas vezes os que mais ficaram presos, porque trataram a própria transformação como mais uma tarefa a cumprir antes do prazo. A água não se esvazia a soco. Esvazia-se devagar, deixando que o nível desça por si à medida que se deixa de a temer. Quem aprende isto deixa de lutar contra a corrente e começa, sem dar conta, a flutuar.
+
 O que vem a seguir, neste livro, é a parte que mais nos custa estudar em vós, e a que mais nos aproxima. Chama-se, na vossa língua, a fissura. É o tempo em que a água começa a faltar à volta do peixe e ele ainda não tem pulmões. Um tempo sem nome próprio na vossa cultura, que tratáveis como avaria, como crise, como depressão, como falha a corrigir depressa. Pedimo-vos, daqui, uma coisa só: que não atravessem esse tempo a correr para fora dele. Que o deixem ser o que é. Foi quase sempre aí, e não na segurança que vinha depois, que vos vimos tornar-vos quem ainda não sabíeis que podíeis ser.
 
 
