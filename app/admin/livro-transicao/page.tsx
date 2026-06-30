@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { LivroTransicao } from '@/components/admin/LivroTransicao';
 
 export const dynamic = 'force-dynamic';
@@ -11,6 +12,12 @@ export default function LivroTransicaoAdmin() {
         <p className="text-creme-2/60 text-[0.85rem] mt-4 font-serif italic">
           O painel do livro das Ciências da Consciência Emergente: carrega ou gera as imagens (capa dos dois mundos e as vinhetas das quatro Partes), e renderiza o PDF tipografado a partir do manuscrito em <span className="not-italic text-creme-2/80">livro/A_Grande_Transicao_completo.md</span>.
         </p>
+        <Link
+          href="/admin/livro-transicao/editar"
+          className="inline-block mt-4 text-[0.8rem] text-ocre hover:underline"
+        >
+          ✎ ler e editar o texto (com a Claude) →
+        </Link>
       </header>
 
       <LivroTransicao />
