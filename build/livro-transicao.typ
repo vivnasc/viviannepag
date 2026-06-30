@@ -35,7 +35,7 @@
 #let hairline(w: 30mm, c: GOLD, t: 0.4pt) = line(length: w, stroke: t + c)
 #let ring(d: 6mm, c: GOLD, t: 0.5pt) = circle(radius: d / 2, stroke: t + c)
 // A MARCA da Vivianne (o véu) — o símbolo do livro, da própria marca dela
-#let marca(h: 12mm) = box(height: h, image("vendor/marca/veu.svg", height: h))
+#let marca(h: 12mm) = box(height: h, image("vendor/marca/simbolo.svg", height: h))
 // brilho suave (a luz que emana da matéria, do manifesto)
 #let glow(d: 100mm, c: GOLD, op: 86%) = circle(radius: d / 2, stroke: none,
   fill: gradient.radial(c.transparentize(op), c.transparentize(100%)))
@@ -152,8 +152,8 @@
   pagebreak()
   set align(center)
   place(top + center, dy: 18mm, glow(d: 92mm, op: 88%))
-  v(26mm)
-  marca(h: 26mm)
+  v(30mm)
+  marca(h: 11mm)
   v(11mm)
   {
     set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
