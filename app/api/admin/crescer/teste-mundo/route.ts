@@ -9,8 +9,39 @@ export const runtime = 'nodejs';
 export const maxDuration = 300;
 
 const PASTA = 'crescer/_teste';
+const PASTA_ANCHORS = 'crescer/_anchors';
 const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase() || 'cena';
 const desslug = (s: string) => s.replace(/\.jpg$/i, '').replace(/-/g, ' ').trim();
+
+// categorias preferidas por cada modo de cena (m de cenaMundoTeste/cenaAncorada).
+const PREF_ANCHOR: string[][] = [
+  ['mercado', 'festival', 'cidade'],     // 0 — mercado/festa/comunidade
+  ['biblioteca', 'profissao', 'interior'], // 1 — instituição/laboratório
+  ['fauna', 'natureza', 'oceano'],       // 2 — biodiversidade
+  ['cidade', 'oceano', 'interior'],      // 3 — cidade viva
+  ['pessoas', 'festival', 'interior'],   // 4 — crianças/descoberta
+];
+
+type Anchor = { url: string; categoria: string };
+async function listarAnchors(): Promise<Anchor[]> {
+  try {
+    const supabase = getSupabaseAdmin();
+    const { data } = await supabase.storage.from(BUCKET).list(PASTA_ANCHORS, { limit: 500 });
+    return (data ?? []).filter((f) => f.name.toLowerCase().endsWith('.jpg')).map((f) => ({
+      url: supabase.storage.from(BUCKET).getPublicUrl(`${PASTA_ANCHORS}/${f.name}`).data.publicUrl,
+      categoria: f.name.split('__')[0] || '',
+    }));
+  } catch { return []; }
+}
+// escolhe a âncora da categoria certa para a cena; senão qualquer; null se não houver.
+function escolherAnchor(anchors: Anchor[], m: number, seed: number): string | null {
+  if (!anchors.length) return null;
+  for (const cat of (PREF_ANCHOR[m] ?? [])) {
+    const c = anchors.filter((a) => a.categoria === cat);
+    if (c.length) return c[(((Math.floor(seed) % c.length) + c.length) % c.length)].url;
+  }
+  return anchors[(((Math.floor(seed) % anchors.length) + anchors.length) % anchors.length)].url;
+}
 
 // SANDBOX · gera AMOSTRAS do mundo a partir do motor de TESTE (mundo-teste.ts), com
 // ÂNCORA nas referências DELA (image_prompt). NÃO cria posts. As amostras ficam em
@@ -22,17 +53,22 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; ancorar?: boolean; forca?: number };
   const quantos = Math.max(1, Math.min(6, body.quantos ?? 4));
   const base = typeof body.seed === 'number' ? body.seed : Math.floor(Date.now() / 1000);
-  const ancorar = body.ancorar !== false && REFS_MUNDO.length > 0;
+  const ancorar = body.ancorar !== false;
   // FORÇA da referência (0-1): quanto maior, mais a imagem dela manda sobre o texto.
-  // 0.5 = forte mas ainda deixa a cena (gente/mercado) entrar. Afinável por aqui.
-  const forca = typeof body.forca === 'number' ? Math.max(0, Math.min(1, body.forca)) : 0.5;
+  // 0.7 ≈ "imagem 75% / texto 25%" (o que a Vivianne pediu). Afinável por aqui.
+  const forca = typeof body.forca === 'number' ? Math.max(0, Math.min(1, body.forca)) : 0.7;
+
+  // BÍBLIA VISUAL: carrega as âncoras dela (por categoria). Cada cena usa a âncora da
+  // categoria certa. Se ainda não carregou nenhuma, cai para as 3 referências embebidas.
+  const anchors = await listarAnchors();
 
   const amostras: { url: string; categoria: string }[] = [];
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     const seed = base + i * 7;
     const { briefing, categoria } = ancorar ? cenaAncorada(seed) : cenaMundoTeste(seed);
-    const ref = ancorar ? REFS_MUNDO[i % REFS_MUNDO.length] : undefined; // roda pelas 3 referências
+    const m = ((Math.floor(seed) % 5) + 5) % 5;
+    const ref = ancorar ? (escolherAnchor(anchors, m, seed) ?? REFS_MUNDO[i % REFS_MUNDO.length]) : undefined;
     try {
       const url = await gerarImagemFlux(briefing, token, { raw: true, ultra: ancorar, imagePrompt: ref, imagePromptStrength: forca });
       let saved = url;
