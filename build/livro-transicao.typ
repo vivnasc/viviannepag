@@ -29,57 +29,46 @@
 #let display = "Fraunces Display"
 #let sans = "Outfit"
 
-// ---- ornamentos: FLEURONS tipográficos (Cardo) + olho VECTORIAL ----
-// Nada é desenhado à mão com linhas/círculos: usam-se ornamentos de tipógrafo.
-#let orn-font = "Cardo"
-#let fleuron(sz: 12pt, c: GOLD) = text(font: orn-font, fill: c, size: sz)[\u{2767}]
-#let lozenge(s: 1.5mm, c: GOLD) = rotate(45deg, square(size: s, stroke: 0.45pt + c))
-
-#let rule-orn(w: 44mm, c: GOLD) = box(width: w, height: 6mm)[
-  #place(horizon, line(start: (0%, 50%), end: (36%, 50%), stroke: 0.4pt + c))
-  #place(horizon, line(start: (64%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, fleuron(sz: 12pt, c: c))
+// ---- linguagem MODERNA / FUTURISTA (sem olho, caixa, arco, fleurons) ----
+// Motivo recorrente: o ANEL (consciência, totalidade, o anel de luz da Parte IV,
+// o sinal de 2150). Linhas finíssimas, brilho suave, muito espaço.
+#let hairline(w: 30mm, c: GOLD, t: 0.4pt) = line(length: w, stroke: t + c)
+#let ring(d: 6mm, c: GOLD, t: 0.5pt) = circle(radius: d / 2, stroke: t + c)
+// anéis concêntricos: um sinal / uma onda de luz (futurista)
+#let rings(d: 18mm, n: 3, c: GOLD) = box(width: d, height: d)[
+  #for i in range(n) {
+    place(center + horizon, circle(radius: (d / 2) * (1 - i / n) + (d / (2 * n)) * 0, stroke: (0.6pt - i * 0.12pt) + c.transparentize(i * 22%)))
+  }
+  #place(center + horizon, circle(radius: 0.7mm, fill: c, stroke: none))
 ]
-#let mini-rule(w: 24mm, c: GOLD) = box(width: w, height: 4.5mm)[
-  #place(horizon, line(start: (0%, 50%), end: (38%, 50%), stroke: 0.4pt + c))
-  #place(horizon, line(start: (62%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, fleuron(sz: 9pt, c: c))
+// brilho suave (a luz que emana da matéria, do manifesto)
+#let glow(d: 100mm, c: GOLD, op: 86%) = circle(radius: d / 2, stroke: none,
+  fill: gradient.radial(c.transparentize(op), c.transparentize(100%)))
+// divisória moderna: hairline — anel fino — hairline
+#let divisoria(w: 44mm, c: GOLD) = box(width: w, height: 6mm)[
+  #place(horizon, line(start: (0%, 50%), end: (40%, 50%), stroke: 0.4pt + c))
+  #place(horizon, line(start: (60%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
+  #place(center + horizon, ring(d: 2.6mm, c: c))
 ]
-// quebra de movimento: um fleuron ao centro, a respirar. sticky (nunca órfão).
-#let movbreak() = block(above: 10mm, below: 10mm, width: 100%, breakable: false, sticky: true,
-  align(center, fleuron(sz: 13pt)))
-
-// destaque (pull-quote): frase forte do capítulo, com fleurons em cima e baixo
-#let destaque(frase) = block(above: 12mm, below: 12mm, width: 100%, breakable: false, sticky: true)[
+#let mini-rule(w: 26mm, c: GOLD) = box(width: w, height: 5mm)[
+  #place(horizon, line(start: (0%, 50%), end: (42%, 50%), stroke: 0.4pt + c))
+  #place(horizon, line(start: (58%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
+  #place(center + horizon, ring(d: 2mm, c: c))
+]
+// compat.: rule-orn passa a ser a divisória moderna
+#let rule-orn(w: 44mm, c: GOLD) = divisoria(w: w, c: c)
+// quebra de movimento: um anel fino ao centro. sticky (nunca órfão).
+#let movbreak() = block(above: 11mm, below: 11mm, width: 100%, breakable: false, sticky: true,
+  align(center, ring(d: 3mm)))
+// destaque (pull-quote): frase forte do capítulo, entre hairlines finas
+#let destaque(frase) = block(above: 13mm, below: 13mm, width: 100%, breakable: false, sticky: true)[
   #set align(center)
-  #set par(justify: false, first-line-indent: 0pt, leading: 0.96em)
-  #fleuron(sz: 10pt)
-  #v(4mm)
-  #block(width: 82%, text(font: display, style: "italic", fill: GOLDSOFT, size: 15.5pt, weight: 300)[#frase])
-  #v(4mm)
-  #fleuron(sz: 10pt)
-]
-// olho VECTORIAL (desenho profissional, lucide), dourado
-#let eye(h: 7.5mm) = box(height: h, image("vendor/orn/eye.svg", height: h))
-// arco delicado (SÓ na voz da carta): três fios finos + SÍMBOLOS (losangos),
-// nunca bolas. Emoldura a coluna da carta.
-#let arch(w, h) = box(width: w, height: h)[
-  #let lx = 0.085 * w
-  #let rx = 0.915 * w
-  #let sy = 0.30 * h
-  #place(curve(stroke: 0.8pt + GOLD,
-    curve.move((lx, h)), curve.line((lx, sy)),
-    curve.cubic((lx, 0pt), (rx, 0pt), (rx, sy)), curve.line((rx, h))))
-  #place(curve(stroke: 0.45pt + GOLD.transparentize(15%),
-    curve.move((lx + 2.4mm, h)), curve.line((lx + 2.4mm, sy + 1.7mm)),
-    curve.cubic((lx + 2.4mm, 2.4mm), (rx - 2.4mm, 2.4mm), (rx - 2.4mm, sy + 1.7mm)),
-    curve.line((rx - 2.4mm, h))))
-  #place(curve(stroke: 0.3pt + GOLD.transparentize(45%),
-    curve.move((lx + 4.6mm, h)), curve.line((lx + 4.6mm, sy + 3.2mm)),
-    curve.cubic((lx + 4.6mm, 4.6mm), (rx - 4.6mm, 4.6mm), (rx - 4.6mm, sy + 3.2mm)),
-    curve.line((rx - 4.6mm, h))))
-  // só o fleuron-chave no ápice (os arranques ficam limpos)
-  #place(dx: w / 2 - 6mm, dy: 0.012 * h, box(width: 12mm, align(center, fleuron(sz: 17pt))))
+  #set par(justify: false, first-line-indent: 0pt, leading: 1.0em)
+  #hairline(w: 16mm)
+  #v(5mm)
+  #block(width: 84%, text(font: display, style: "italic", fill: GOLDSOFT, size: 16pt, weight: 300)[#frase])
+  #v(5mm)
+  #hairline(w: 16mm)
 ]
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
@@ -162,24 +151,27 @@
 // ---- voz (carta de 2150 / interlúdios): a CARTA vai DENTRO do arco ----
 // O arco delicado emoldura a coluna da carta na 1.ª página; o texto desce por
 // dentro dele. Nas páginas seguintes a coluna continua, sem repetir o arco.
-#let abre-voz(u, tam: 26pt) = {
+// a carta de 2150: um SINAL (anéis concêntricos) com um brilho suave; sem arco.
+#let abre-voz(u, tam: 28pt) = {
   setsect(u.kicker)
   pagebreak()
   set align(center)
-  place(top + center, dy: 0mm, arch(114mm, 176mm))
-  v(48mm) // desce até ao nível dos arranques do arco
+  place(top + center, dy: 18mm, glow(d: 92mm, op: 88%))
+  v(26mm)
+  rings(d: 22mm)
+  v(11mm)
   {
     set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
     set text(hyphenate: false)
-    text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(u.kicker)]
-    v(3mm)
-    mini-rule()
-    v(6mm)
+    text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.36em)[#upper(u.kicker)]
+    v(5mm)
     text(font: display, fill: TITLEINK, size: tam, weight: 300)[#u.titulo]
-    if "epigrafe" in u { v(7mm); block(width: 70%, text(font: serif, style: "italic", fill: BROWN, size: 11pt)[#u.epigrafe]) }
+    if "epigrafe" in u { v(7mm); block(width: 72%, text(font: serif, style: "italic", fill: BROWN, size: 11pt)[#u.epigrafe]) }
   }
   v(9mm)
-  block(width: 80mm)[
+  hairline(w: 20mm)
+  v(10mm)
+  block(width: 92mm)[
     #set align(left)
     #set par(justify: false, first-line-indent: 0pt, leading: 0.92em, spacing: 1.5em)
     #set text(size: 10.5pt, fill: INK)
@@ -203,10 +195,7 @@
       v(3.5mm)
       text(font: display, fill: TITLEINK, size: 19pt, weight: 300)[#upper(partU.titulo)]
       v(7mm)
-      box(width: 26mm, height: 3mm)[
-        #place(horizon, line(start: (0%, 50%), end: (72%, 50%), stroke: 0.45pt + GOLD))
-        #place(left + horizon, dx: 80%, lozenge())
-      ]
+      hairline(w: 24mm)
       v(9mm)
     }
     #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(u.kicker)]
@@ -251,41 +240,37 @@
   corpo-paras(u.texto, dropcap-on: true, destaques: norm-dest(u))
 }
 
-// ---- aparato inline (no fim do capítulo) ----
-// CAIXA só na Ideia central; a Pergunta fica aberta; a dica é nota discreta.
-// caixa de moldura DUPLA com cantos em bracket e fleuron a quebrar a base
-#let caixa-ideia(corpo) = block(breakable: false, width: 100%, above: 11mm, below: 4mm)[
-  #align(center, block(width: 118mm, stroke: 0.6pt + GOLD, inset: 1.8mm)[
-    #block(width: 100%, stroke: 0.4pt + GOLD.transparentize(15%), inset: (x: 11mm, y: 9mm))[
-      #align(center, text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
-      #v(4.5mm)
-      #set align(left)
-      #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
-      #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
-    ]
-    // fleurons a quebrar a moldura, em cima e em baixo (cartouche)
-    #place(top + center, dy: -1.8mm, box(fill: PAPER, inset: (x: 2.6mm), fleuron(sz: 11pt)))
-    #place(bottom + center, dy: 1.8mm, box(fill: PAPER, inset: (x: 2.6mm), fleuron(sz: 11pt)))
-  ])
+// ---- aparato inline (no fim do capítulo) — linguagem moderna, sem molduras ----
+// IDEIA CENTRAL: banda luminosa subtil (a luz que emana da matéria) + anel + rótulo
+#let caixa-ideia(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 4mm)[
+  #block(width: 100%, fill: GOLD.transparentize(93%), inset: (x: 11mm, y: 9mm))[
+    #grid(columns: (auto, 1fr), column-gutter: 4mm, align: (horizon, horizon),
+      ring(d: 4.5mm),
+      text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
+    #v(5mm)
+    #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
+    #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
+  ]
 ]
+// A DICA: nota discreta, linha fina à esquerda
 #let nota-dica(corpo) = block(breakable: false, width: 100%, above: 9mm, below: 3mm)[
-  #block(width: 100%, inset: (left: 5mm), stroke: (left: 0.8pt + GOLD.transparentize(30%)))[
+  #block(width: 100%, inset: (left: 6mm), stroke: (left: 0.6pt + GOLD.transparentize(20%)))[
     #set par(justify: false, first-line-indent: 0pt, leading: 0.84em)
     #text(font: sans, fill: GOLDSOFT, size: 7.4pt, weight: 500, tracking: 0.28em)[A DICA]
     #v(2.5mm)
     #text(fill: INK, size: 10pt)[#fmt(corpo)]
   ]
 ]
-// pergunta SEM caixa: o olho à esquerda, rótulo + pergunta à direita (à esquerda)
+// PERGUNTA: aberta, com um ANEL como marca (sem olho)
 #let bloco-pergunta(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 2mm)[
   #set par(justify: false, first-line-indent: 0pt, leading: 0.86em)
-  // rótulo por cima, alinhado sobre a pergunta (a coluna do olho mede 18+6mm)
-  #pad(left: 24mm, text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR])
-  #v(3mm)
-  #grid(columns: (18mm, 1fr), column-gutter: 6mm,
-    align(center + horizon, eye(h: 9.5mm)),
-    align(horizon, text(font: serif, style: "italic", fill: BROWN, size: 12.5pt)[#fmt(corpo)]),
-  )
+  #grid(columns: (auto, 1fr), column-gutter: 6mm, align: (top, top),
+    pad(top: 1mm, ring(d: 6.5mm)),
+    [
+      #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR]
+      #v(3mm)
+      #text(font: serif, style: "italic", fill: BROWN, size: 13pt)[#fmt(corpo)]
+    ])
 ]
 #let aparato(u) = {
   if "ideia" in u { caixa-ideia(u.ideia) }
