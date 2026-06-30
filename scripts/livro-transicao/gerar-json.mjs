@@ -66,6 +66,7 @@ const unidades = parseManuscrito().map((u) => {
   if (a.epigrafe) o.epigrafe = a.epigrafe;
   if (u.texto && u.texto.length) o.texto = u.texto;
   if (a.ideia) o.ideia = a.ideia;
+  if (a.dica) o.dica = a.dica; // nota prática (opcional, por capítulo)
   if (a.pergunta) o.pergunta = a.pergunta;
   return o;
 });
