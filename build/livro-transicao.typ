@@ -254,6 +254,14 @@
       block(width: 100%, inset: (x: 12mm, top: 14mm, bottom: 11mm), stroke: 0.6pt + c)[
         #place(top + center, dy: -18mm, no("arquivo-no", 7.5mm))
         #cabecalho #v(5mm) #corpo-txt]
+    } else if s.moldura == "olho" {
+      // a PERGUNTA: o olho de 2150 que fica a olhar para ela, ao centro
+      set align(center)
+      box(width: 30mm, image("vendor/marca/olho.svg", width: 30mm))
+      v(7mm)
+      text(font: sans, fill: c, size: 7.6pt, weight: 500, tracking: 0.3em)[#upper(s.rotulo)]
+      v(4mm)
+      block(width: 86%, corpo-txt)
     } else if s.moldura == "nota" {
       block(width: 100%, inset: (left: 6mm), stroke: (left: 0.6pt + c.transparentize(20%)))[
         #cabecalho #v(3mm) #corpo-txt]
