@@ -70,17 +70,24 @@ type ReplicatePrediction = {
   error?: string;
 };
 
-export type GerarOpts = { estilo?: string; tema?: string; extra?: string; raw?: boolean; imagePrompt?: string };
+export type GerarOpts = { estilo?: string; tema?: string; extra?: string; raw?: boolean; imagePrompt?: string; ultra?: boolean; imagePromptStrength?: number };
 
 export async function gerarImagemFlux(scene: string, token: string, opts: GerarOpts = {}): Promise<string> {
   // raw = usa o prompt tal e qual (já é um prompt completo, ex.: fundo do cinético),
   // só com as regras de segurança; sem estilo/tema da banda por cima.
   const fullPrompt = opts.raw ? `${scene}\n\n${SAFETY}` : construirPrompt(scene, opts.estilo, opts.tema, opts.extra);
-  // image_prompt (opcional): uma imagem de REFERÊNCIA de estilo/figura. O Flux 1.1 Pro
-  // mistura-a, forçando consistência (mesmo estilo/idade/moldura) entre gerações.
-  const input: Record<string, unknown> = { prompt: fullPrompt, aspect_ratio: '9:16', output_format: 'jpg', output_quality: 90, safety_tolerance: 5 };
-  if (opts.imagePrompt) input.image_prompt = opts.imagePrompt;
-  const createRes = await fetch('https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions', {
+  // ultra = flux-1.1-pro-ultra: tem image_prompt_strength (peso da referência, 0-1),
+  // que adere MUITO mais à imagem de referência. Usado pelo sandbox para chegar ao
+  // mundo dela. O image_prompt é a imagem de REFERÊNCIA (estilo/mundo/figura).
+  const modelo = opts.ultra ? 'flux-1.1-pro-ultra' : 'flux-1.1-pro';
+  const input: Record<string, unknown> = opts.ultra
+    ? { prompt: fullPrompt, aspect_ratio: '9:16', output_format: 'jpg', raw: true, safety_tolerance: opts.imagePrompt ? 2 : 6 }
+    : { prompt: fullPrompt, aspect_ratio: '9:16', output_format: 'jpg', output_quality: 90, safety_tolerance: 5 };
+  if (opts.imagePrompt) {
+    input.image_prompt = opts.imagePrompt;
+    if (opts.ultra && typeof opts.imagePromptStrength === 'number') input.image_prompt_strength = opts.imagePromptStrength;
+  }
+  const createRes = await fetch(`https://api.replicate.com/v1/models/black-forest-labs/${modelo}/predictions`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
     body: JSON.stringify({ input }),

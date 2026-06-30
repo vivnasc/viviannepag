@@ -19,10 +19,13 @@ export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
-  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; ancorar?: boolean };
+  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; ancorar?: boolean; forca?: number };
   const quantos = Math.max(1, Math.min(6, body.quantos ?? 4));
   const base = typeof body.seed === 'number' ? body.seed : Math.floor(Date.now() / 1000);
   const ancorar = body.ancorar !== false && REFS_MUNDO.length > 0;
+  // FORÇA da referência (0-1): quanto maior, mais a imagem dela manda sobre o texto.
+  // 0.5 = forte mas ainda deixa a cena (gente/mercado) entrar. Afinável por aqui.
+  const forca = typeof body.forca === 'number' ? Math.max(0, Math.min(1, body.forca)) : 0.5;
 
   const amostras: { url: string; categoria: string }[] = [];
   let ultimoErro = '';
@@ -31,7 +34,7 @@ export async function POST(req: Request) {
     const { briefing, categoria } = ancorar ? cenaAncorada(seed) : cenaMundoTeste(seed);
     const ref = ancorar ? REFS_MUNDO[i % REFS_MUNDO.length] : undefined; // roda pelas 3 referências
     try {
-      const url = await gerarImagemFlux(briefing, token, { raw: true, imagePrompt: ref });
+      const url = await gerarImagemFlux(briefing, token, { raw: true, ultra: ancorar, imagePrompt: ref, imagePromptStrength: forca });
       let saved = url;
       try { saved = await guardarImagem(url, `${PASTA}/${Date.now()}-${i}__${slug(categoria)}.jpg`); } catch { /* fica o url cru */ }
       amostras.push({ url: saved, categoria });
