@@ -25,6 +25,7 @@ type Peca = {
   formato: string; momentos: string[] | null;
   parteDe: string | null; parte: number | null; // série: continuação de um fio
   veiaTitulo?: string | null; veiaLivro?: string | null; // de que secção do livro foi minerada
+  motionPendente?: boolean; // movimento a gerar (verifica-se sozinho)
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -344,6 +345,22 @@ export default function SoulabPage() {
     finally { setBusy(false); }
   }, [busy, tipo, quantos, formato, modo, fonte, tema, recarregar]);
 
+  // COLAR URL DO CLIP — resgate: se o movimento foi gerado fora (ou a geração passou
+  // do limite e não guardou), cola-se aqui o URL do MP4 e ele persiste na peça.
+  const colarClip = useCallback(async (slug: string) => {
+    if (acaoSlug || typeof window === 'undefined') return;
+    const url = window.prompt('Cola o URL do MP4 do movimento (do Replicate/playground). Vai ficar guardado na peça.');
+    if (!url || !/^https?:\/\//.test(url.trim())) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar o clip na peça…');
+    try {
+      const r = await fetch('/api/admin/soulab/clip-url', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, url: url.trim() }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Clip guardado. Vê em baixo; depois "render (reel)" põe o texto por cima.'); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
   const darMovimento = useCallback(async (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => {
     if (acaoSlug) return;
     setAcaoSlug(slug); setErro(null);
@@ -352,10 +369,31 @@ export default function SoulabPage() {
       const r = await fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...opts }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else if (j.preparando) { setMsg(j.detalhe ?? 'O movimento está a ser gerado (uns minutos). A página verifica sozinha.'); setMotionOpen(null); recarregar(); }
       else { setMsg('Movimento gerado. Vê em baixo, no cartão. (É só o motion, sem texto; o texto entra no render.)'); setMotionOpen(null); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
+
+  // VERIFICAÇÃO AUTOMÁTICA do movimento: enquanto houver peças com motion pendente,
+  // pergunta ao /motion-check de 12 em 12s; quando ficar pronto, recarrega e aparece.
+  useEffect(() => {
+    const pend = pecas.filter((p) => p.motionPendente).map((p) => p.slug);
+    if (!pend.length) return;
+    const t = setTimeout(async () => {
+      let mudou = false;
+      for (const slug of pend) {
+        try {
+          const r = await fetch('/api/admin/soulab/motion-check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+          const j = await r.json();
+          if (j.status === 'pronto' || j.status === 'falhou') mudou = true;
+        } catch { /* tenta no próximo ciclo */ }
+      }
+      if (mudou) setMsg('Movimento pronto. Vê no cartão.');
+      recarregar();
+    }, 12000);
+    return () => clearTimeout(t);
+  }, [pecas, recarregar]);
 
   const salvarLegenda = useCallback(async (slug: string, legenda: string, hashtags: string) => {
     if (acaoSlug) return;
@@ -684,7 +722,9 @@ export default function SoulabPage() {
                       ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">✅ MP4 pronto{p.clipUrl ? ' · vida' : ''}</span>
                       : p.clipUrl
                         ? <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5" style={{ background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 }}>🎬 com vida · por renderizar</span>
-                        : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem · por renderizar</span>}
+                        : p.motionPendente
+                          ? <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-500/85 text-white rounded px-1 py-0.5">⏳ movimento a preparar…</span>
+                          : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem · por renderizar</span>}
                 </div>
                 {p.clipUrl && (
                   <div className="px-2 pt-2">
@@ -697,6 +737,7 @@ export default function SoulabPage() {
                   <button onClick={() => setPreviewOpen(previewOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver o reel a animar ANTES de renderizar" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>▶ pré-ver {previewOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => colarClip(p.slug)} disabled={!!acaoSlug} title="colar o URL de um MP4 já gerado (resgate, se a geração demorou demais ou foi feita fora)" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📎 colar clip</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setSomOpen(somOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="áudio do reel: som da cena, máquina de escrever ou música ambiente" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 áudio {somOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setTipoOpen(tipoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="editor de tipografia: fonte, tamanho, cor" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras {tipoOpen === p.slug ? '▴' : '▾'}</button>
