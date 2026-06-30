@@ -87,22 +87,32 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
   return { briefing, categoria };
 }
 
-// Briefing LEVE para quando há ÂNCORA (image_prompt das referências dela): a imagem
-// define o LOOK (arquitetura, roupa, materiais, paleta, luz); o texto só diz O QUE
-// ACONTECE. Sem isto, o texto pesado ("catedral/jardim ornado") competia com a
-// referência e ganhava (saía estufa de gala). Aqui o texto recua e a imagem manda.
-export function cenaAncorada(seed = 0): { briefing: string; categoria: string } {
-  const m = idx(seed, 5);
-  const { categoria } = cenaMundoTeste(seed);
-  const comGente = m !== 2;
-  const acao = m === 0 ? 'a crowded, busy, joyful market or festival — many people of this world trading, cooking, playing and gathering'
-    : m === 1 ? 'a working institution, laboratory or workshop — many people busy studying, building and handling living instruments and material culture'
-    : m === 2 ? 'the living world up close — an astonishing plant, animal or symbiotic creature of this biosphere, rich fine detail'
-    : m === 3 ? 'a busy living city street or plaza thronged with people — daily life, trade, movement'
-    : 'children and young people playing, exploring and discovering together with curiosity and laughter';
-  const briefing =
-    'A real documentary PHOTOGRAPH set in the EXACT same world as the reference image: KEEP its architecture, clothing, fabrics, materials, instruments, creatures, palette, light and overall look — change ONLY what is happening. ' +
-    `SCENE: ${acao}. ${comGente ? 'People are present and PROMINENT in the foreground, doing things; NOT an empty space. ' : ''}` +
-    'Bright, clear, luminous, tack-sharp, every detail visible; a real photograph, NOT a painting, NOT concept art, NOT a gala/ballgown scene. no text, no letters, no watermark, no logos.';
-  return { briefing, categoria };
+// ADN PERMANENTE recuperado pela Vivianne (as imagens que funcionaram): escala
+// HUMANA, gente ocupada, objeto impossível EM USO, arquitetura só de fundo, natureza
+// integrada — e a lista dura de negativos. Quando se passou a macro-escala/cidade,
+// fugiu para Veneza/solarpunk. Por isso: só cenas humanas, nunca cidade vista de cima.
+const BASE_MUNDO =
+  'Documentary photography from an existing civilization. The civilization is real, inhabited and ordinary to its inhabitants. The image must feel OBSERVED rather than designed. ' +
+  'The focus is everyday life, material culture and ordinary interactions at HUMAN SCALE (a table, a workshop, a room, a market, a small group) — never a city seen from above, never macro infrastructure. ' +
+  'People are BUSY in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading), never contemplating, posing, meditating or admiring technology. ' +
+  'Include UNFAMILIAR objects, materials or lifeforms being USED naturally in daily activities (transparent living vessels, seed-lamps, grown materials, cultivated tools, organisms used as tools) rather than displayed or admired. ' +
+  'Architecture is only background, not the subject. Vegetation is integrated into the human space, never a forest or botanical garden. Beauty exists as INFRASTRUCTURE rather than decoration; abundance without luxury; technology without machinery; nature without wilderness. ' +
+  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. ' +
+  'no text, no letters, no watermark, no logos.';
+
+// As 5 cenas fundadoras dela (todas escala humana, gente ocupada, objeto em uso).
+const CENAS_FUNDADORAS: { cena: string; categoria: string }[] = [
+  { cena: 'children learning to cultivate living vessels inside a public learning space', categoria: 'crianças a aprender' },
+  { cena: 'a family sharing a meal using unfamiliar biological objects and materials', categoria: 'refeição em família' },
+  { cena: 'researchers and children studying living organisms inside a public library', categoria: 'estudar organismos' },
+  { cena: 'craftspeople building everyday objects from cultivated materials in a workshop', categoria: 'oficina' },
+  { cena: 'citizens trading goods and knowledge in a crowded public market', categoria: 'mercado' },
+];
+
+// Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.
+// `m` = índice da cena (para o route escolher a âncora da categoria certa).
+export function cenaAncorada(seed = 0): { briefing: string; categoria: string; m: number } {
+  const m = idx(seed, CENAS_FUNDADORAS.length);
+  const { cena, categoria } = CENAS_FUNDADORAS[m];
+  return { briefing: `${cena}. ${BASE_MUNDO}`, categoria, m };
 }

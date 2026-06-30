@@ -108,6 +108,34 @@ export async function gerarImagemFlux(scene: string, token: string, opts: GerarO
   return out;
 }
 
+// gpt-image-2 (OpenAI via Replicate) — o modelo do ChatGPT. Aceita input_images como
+// REFERÊNCIAS (alta fidelidade automática) e a chave OpenAI dela. É o que faz o mundo
+// dela. Devolve o URL da imagem. Só o sandbox o usa.
+export async function gerarImagemGptImage2(prompt: string, inputImages: string[], replicateToken: string, openaiKey?: string): Promise<string> {
+  const input: Record<string, unknown> = { prompt, aspect_ratio: '2:3', number_of_images: 1, quality: 'high', output_format: 'jpeg' };
+  if (inputImages.length) input.input_images = inputImages.slice(0, 8);
+  if (openaiKey) input.openai_api_key = openaiKey;
+  const createRes = await fetch('https://api.replicate.com/v1/models/openai/gpt-image-2/predictions', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${replicateToken}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
+    body: JSON.stringify({ input }),
+  });
+  if (!createRes.ok) throw new Error(`Replicate ${createRes.status}: ${(await createRes.text()).slice(0, 220)}`);
+  let pred = (await createRes.json()) as ReplicatePrediction;
+  let polls = 0;
+  while (!['succeeded', 'failed', 'canceled'].includes(pred.status) && polls < 90) {
+    await new Promise((r) => setTimeout(r, 2000));
+    const pr = await fetch(`https://api.replicate.com/v1/predictions/${pred.id}`, { headers: { Authorization: `Bearer ${replicateToken}` } });
+    if (!pr.ok) throw new Error(`Replicate poll ${pr.status}`);
+    pred = (await pr.json()) as ReplicatePrediction;
+    polls++;
+  }
+  if (pred.status !== 'succeeded') throw new Error(`gpt-image-2: ${pred.error ?? pred.status}`);
+  const out = Array.isArray(pred.output) ? pred.output[0] : pred.output;
+  if (!out) throw new Error('gpt-image-2: sem output');
+  return out;
+}
+
 // Guarda a imagem no Storage e devolve o URL público. `path` é a chave no bucket.
 export async function guardarImagem(imageUrl: string, path: string, opts?: { editorial?: boolean }): Promise<string> {
   const supabase = getSupabaseAdmin();
