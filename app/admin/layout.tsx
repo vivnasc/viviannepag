@@ -102,6 +102,13 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     ],
   },
   {
+    titulo: 'Ciências da Consciência Emergente',
+    cor: '#C9A24B',
+    itens: [
+      { href: '/admin/livro-transicao', label: 'a grande transição · livro' },
+    ],
+  },
+  {
     titulo: 'geral',
     cor: '#9aa39a',
     itens: [
