@@ -97,7 +97,7 @@ const BASE_MUNDO =
   'People are BUSY in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading), never contemplating, posing, meditating or admiring technology. ' +
   'Include UNFAMILIAR objects, materials or lifeforms being USED naturally in daily activities (transparent living vessels, seed-lamps, grown materials, cultivated tools, organisms used as tools) rather than displayed or admired. ' +
   'Architecture is only background, not the subject. Vegetation is integrated into the human space, never a forest or botanical garden. Beauty exists as INFRASTRUCTURE rather than decoration; abundance without luxury; technology without machinery; nature without wilderness. ' +
-  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. ' +
+  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No shrine. No altar. No sacred or central venerated object. No monument. No monumentality. No ritual veneration. No one person contemplating or admiring. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. ' +
   'no text, no letters, no watermark, no logos.';
 
 // As 5 cenas fundadoras dela (todas escala humana, gente ocupada, objeto em uso).
@@ -115,4 +115,41 @@ export function cenaAncorada(seed = 0): { briefing: string; categoria: string; m
   const m = idx(seed, CENAS_FUNDADORAS.length);
   const { cena, categoria } = CENAS_FUNDADORAS[m];
   return { briefing: `${cena}. ${BASE_MUNDO}`, categoria, m };
+}
+
+// ── MODO OBJETOS · o "IKEA do mundo" (a cultura material PRIMEIRO) ──────────────
+// A descoberta da Vivianne: o mundo não se define pela arquitetura (que colapsa para
+// templo/sagrado), define-se pela CULTURA MATERIAL. Gerar objetos SOZINHOS, sem
+// arquitetura/templo/cena, é o que constrói o vocabulário do mundo.
+const OBJETO_BASE =
+  'isolated PRODUCT / CATALOG photograph of ONE single everyday object, on a plain neutral seamless studio background. ' +
+  'The object is made of grown / cultivated / living materials, unfamiliar yet clearly FUNCTIONAL and ORDINARY (a real tool people use every day), with signs of everyday use; a hand using it is allowed. ' +
+  'It is NOT precious, NOT venerated, NOT displayed reverently, NOT a relic. ' +
+  'NO architecture, NO building, NO interior, NO temple, NO shrine, NO altar, NO ritual, NO garden, NO plants around it, NO landscape, NO crowd, NO person contemplating, NO sacred or spiritual mood, NO glow of worship. ' +
+  'Documentary product photography, observed and ordinary. No Earth objects, no recognisable historical objects. no text, no letters, no watermark, no logos.';
+
+const OBJETOS_FUNDADORES: { obj: string; categoria: string }[] = [
+  { obj: 'a family meal vessel of this civilization', categoria: 'refeicoes' },
+  { obj: 'an everyday drinking cup of this civilization', categoria: 'refeicoes' },
+  { obj: 'a cooking utensil of this civilization', categoria: 'refeicoes' },
+  { obj: 'a food-preservation container of this civilization', categoria: 'objectos' },
+  { obj: "a child's learning toy of this civilization", categoria: 'infancia' },
+  { obj: 'a writing / note-taking instrument of this civilization', categoria: 'aprendizagem' },
+  { obj: 'a portable book or library object of this civilization', categoria: 'aprendizagem' },
+  { obj: 'a scientific observation instrument of this civilization', categoria: 'objectos' },
+  { obj: 'a measuring instrument of this civilization', categoria: 'objectos' },
+  { obj: 'an agricultural hand tool of this civilization', categoria: 'objectos' },
+  { obj: 'a building / construction hand tool of this civilization', categoria: 'objectos' },
+  { obj: 'a garment of this civilization laid out', categoria: 'roupa' },
+  { obj: 'a gift object exchanged between friends in this civilization', categoria: 'objectos' },
+  { obj: 'a small personal boat or watercraft of this civilization', categoria: 'transportes' },
+  { obj: 'a light source / everyday lamp of this civilization', categoria: 'objectos' },
+  { obj: 'a musical instrument of this civilization', categoria: 'objectos' },
+  { obj: 'a piece of everyday furniture (a chair or a low table) of this civilization', categoria: 'interior' },
+  { obj: 'a childcare object of this civilization', categoria: 'infancia' },
+];
+
+export function cenaObjeto(seed = 0): { briefing: string; categoria: string } {
+  const o = OBJETOS_FUNDADORES[idx(seed, OBJETOS_FUNDADORES.length)];
+  return { briefing: `${o.obj}. ${OBJETO_BASE}`, categoria: o.categoria };
 }

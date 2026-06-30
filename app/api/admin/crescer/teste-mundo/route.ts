@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemGptImage2, guardarImagem, BUCKET } from '@/lib/banda/flux';
-import { cenaAncorada } from '@/lib/crescer/mundo-teste';
+import { cenaAncorada, cenaObjeto } from '@/lib/crescer/mundo-teste';
 import { REFS_MUNDO } from '@/lib/crescer/refs-mundo';
 
 export const runtime = 'nodejs';
@@ -54,17 +54,27 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
   const openaiKey = process.env.OPENAI_API_KEY;
-  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number };
-  const quantos = Math.max(1, Math.min(6, body.quantos ?? 4));
+  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas' };
+  const modo = body.modo === 'objetos' ? 'objetos' : 'cenas';
+  const quantos = Math.max(1, Math.min(8, body.quantos ?? (modo === 'objetos' ? 6 : 4)));
   const base = typeof body.seed === 'number' ? body.seed : Math.floor(Date.now() / 1000);
   const anchors = await listarAnchors();
 
   // em PARALELO (gpt-image-2 a alta qualidade é lento; sequencial estouraria o tempo).
   const tarefas = Array.from({ length: quantos }, (_, i) => async (): Promise<{ url: string; categoria: string }> => {
     const seed = base + i * 7;
-    const { briefing, categoria, m } = cenaAncorada(seed);
-    const refs = herdarAtlas(anchors, m, seed);
-    const inputImgs = refs.length ? refs : [REFS_MUNDO[i % REFS_MUNDO.length]];
+    // MODO OBJETOS: cultura material sozinha (sem cena, sem arquitetura, sem âncora —
+    // o vocabulário do mundo nasce aqui). MODO CENAS: cena humana + herança do atlas.
+    let briefing: string, categoria: string, inputImgs: string[];
+    if (modo === 'objetos') {
+      ({ briefing, categoria } = cenaObjeto(seed));
+      inputImgs = []; // os objetos fundadores nascem do prompt, sem referência que os puxe para cena
+    } else {
+      const cena = cenaAncorada(seed);
+      briefing = cena.briefing; categoria = cena.categoria;
+      const refs = herdarAtlas(anchors, cena.m, seed);
+      inputImgs = refs.length ? refs : [REFS_MUNDO[i % REFS_MUNDO.length]];
+    }
     const url = await gerarImagemGptImage2(briefing, inputImgs, token, openaiKey);
     let saved = url;
     try { saved = await guardarImagem(url, `${PASTA}/${Date.now()}-${i}__${slug(categoria)}.jpg`, { editorial: false }); } catch { /* fica o url cru */ }

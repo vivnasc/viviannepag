@@ -45,10 +45,10 @@ export default function TesteMundoPage() {
     finally { setBusy(false); }
   };
 
-  const gerar = async () => {
+  const gerar = async (modo: 'objetos' | 'cenas') => {
     setBusy(true); setErro('');
     try {
-      const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ quantos: 4 }) });
+      const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo }) });
       const d = await r.json();
       if (d.amostras?.length) await carregar(); else setErro(d.detalhe || d.erro || 'falhou');
     } catch (e) { setErro(String(e)); } finally { setBusy(false); }
@@ -97,8 +97,11 @@ export default function TesteMundoPage() {
 
       {/* GERAR */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-        <button onClick={gerar} disabled={busy} style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
-          {busy ? 'a trabalhar…' : 'gerar 4 amostras'}
+        <button onClick={() => gerar('objetos')} disabled={busy} title="o IKEA do mundo: objetos sozinhos, sem arquitetura nem templo. Constrói a cultura material primeiro." style={{ ...btn, background: busy ? '#333' : '#26201a' }}>
+          {busy ? 'a trabalhar…' : '① gerar objetos (cultura material)'}
+        </button>
+        <button onClick={() => gerar('cenas')} disabled={busy} title="cenas humanas que herdam o atlas de objetos/roupa" style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
+          ② gerar cenas
         </button>
         {historico.length > 0 && (
           <>
