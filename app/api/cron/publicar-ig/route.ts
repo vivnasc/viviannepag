@@ -23,14 +23,13 @@ const VIDEO = ['kinetico', 'domingo', 'duasfaces', 'nbeats', 'carta', 'visual', 
 
 type Slide = { imageUrl?: string | null };
 type Dia = { slides?: Slide[]; legenda?: string; hashtags?: string[]; videoUrl?: string; imagens?: string[] };
-type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; crescer?: { formato?: string } | null; soulab?: { clipUrl?: string | null } | null };
+type Theme = { formato?: string; subtipo?: string; marca?: string; universo?: string; externo?: boolean; agendadoEm?: string | null; publicado?: boolean; igPublicado?: boolean; igStatus?: string; igTentativas?: number; capaRev?: number; renderPedidoEm?: number; aprovado?: boolean; hora?: string | null; metodo?: { conta?: string } | null; crescer?: { formato?: string; reel?: boolean } | null; soulab?: { clipUrl?: string | null } | null };
 
-// CRESCER · uma peça de VÁRIAS telas é um CARROSSEL DE IMAGENS (telas 4:5) — EXCETO quando
-// tem um CLIP contínuo (theme.soulab.clipUrl): aí é o REEL QUE CRESCE (texto ritmado por
-// cima do vídeo de ~40s, legível). Sem clip, o texto de várias linhas num reel sai rápido e
-// ilegível (o bug que a fez apagar um post), por isso vira carrossel estático. Com clip, o
-// clip é que dá o ritmo e a legibilidade, por isso publica-se como reel.
-const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1 && !t.soulab?.clipUrl;
+// CRESCER · peças NOVAS (theme.crescer.reel) saem sempre como REEL (decisão jun 2026:
+// carrosséis têm menos alcance), com o texto ritmado e legível. Só as peças ANTIGAS de
+// várias telas (sem essa marca e sem clip contínuo) é que ficam carrossel de imagens, como
+// estavam. Com clip contínuo é sempre o reel que cresce.
+const ehCrescerCarrossel = (t: Theme, d?: Dia) => t.marca === 'crescer' && (d?.slides?.length ?? 0) > 1 && !t.soulab?.clipUrl && !t.crescer?.reel;
 type Row = { slug: string; title: string; dias: Dia[]; theme: Theme };
 
 // a media de um post está pronta a publicar? (loja = sempre MP4; carrossel exige capa corrigida)

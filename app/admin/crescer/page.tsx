@@ -37,7 +37,7 @@ const CORES_TEXTO: { id: string; nome: string }[] = [
 ];
 
 type Peca = {
-  tematica: string | null; formato: string; visual: string | null;
+  tematica: string | null; formato: string; visual: string | null; reel?: boolean;
   slug: string; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
@@ -532,12 +532,12 @@ export default function CrescerPage() {
     setSel(new Set()); setBusy(false); recarregar();
   }, [acaoSlug, busy, agData, agHora, agCad, pecas, sel, recarregar]);
 
-  // TIPO da peça: REEL = 1 tela (frase/motion) OU várias telas COM clip contínuo (o reel
-  // que cresce, texto ritmado sobre o vídeo). CARROSSEL = várias telas SEM clip (telas 4:5
-  // estáticas que se leem). É a MESMA regra do publicador, por isso o que vês = o que sai.
+  // TIPO da peça (MESMA regra do publicador, por isso o que vês = o que sai): REEL = peça
+  // nova (reel) OU 1 tela OU com clip contínuo. CARROSSEL = só as multi-tela ANTIGAS (sem
+  // marca reel e sem clip), que ficam como estavam. Daqui pra frente é tudo reel.
   // ESTADO de produção: por fazer / pronto (renderizado) / agendada / publicada.
   const tipoDe = (p: Peca): 'carrossel' | 'reel' =>
-    ((p.momentos?.length ?? 0) > 1 && !p.clipUrl) ? 'carrossel' : 'reel';
+    ((p.momentos?.length ?? 0) > 1 && !p.clipUrl && !p.reel) ? 'carrossel' : 'reel';
   const estadoDe = (p: Peca): 'por-fazer' | 'pronto' | 'agendada' | 'publicada' => {
     if (p.publicado) return 'publicada';
     const renderizado = tipoDe(p) === 'carrossel' ? (p.imagens?.length ?? 0) >= 2 : !!p.videoUrl;

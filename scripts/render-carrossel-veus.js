@@ -128,7 +128,10 @@ async function main() {
       // o tempo POR MOMENTO vale para TODO o Método VS (mãe E filhas) e o Soulab —
       // ANTES só 'metodovs' entrava aqui, por isso as FILHAS (versoltar/virsoltar/
       // viversoltar) ignoravam o tempo e saíam sempre rápidas. Agora respeitam-no.
-      const seqPorMomento = (col.theme?.marca === 'soulab' || ehMetodoVS) && slides.length > 1;
+      // CRESCER entra aqui também: as peças novas saem como REEL de vários momentos e, sem
+      // este ritmo, o texto passava rápido demais e ilegível (o bug que a fez apagar um post).
+      // Agora cada momento segura ~7s (ou o que ela escolher), legível, como no Soulab.
+      const seqPorMomento = (col.theme?.marca === 'soulab' || ehMetodoVS || col.theme?.marca === 'crescer') && slides.length > 1;
       // FRAME ÚNICO do Método VS (manhã/filhas = 1 só linha): a duração passa a ser o
       // tempo escolhido por ela (soulabSeg, 7s por defeito), não 6.5s fixo — senão a
       // frase única lia-se rápido demais e o slider não a controlava.

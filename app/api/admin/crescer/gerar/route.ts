@@ -153,7 +153,9 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz } },
+        // reel:true => peça NOVA sai sempre como REEL (decisão jun 2026: carrosséis têm
+        // menos alcance). As peças antigas, sem esta marca, ficam como estão (carrossel).
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz, reel: true } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
