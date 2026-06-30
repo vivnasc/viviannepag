@@ -145,10 +145,32 @@ const CENAS_FUNDADORAS: CenaFund[] = [
   { cena: 'children of this world learning together, busy and curious, among the living instruments of their world', categoria: 'infância · aprender', tema: 'aprendizagem', atlas: ['infancia', 'aprendizagem', 'pessoas'] },
 ];
 
+// As MATÉRIAS (temas) que a Vivianne aborda — para escolher ao testar com conteúdo.
+// label PT amigável → o `tema` interno das cenas. É a ponte para os posts reais.
+export const TEMAS_CENA: { tema: string; nome: string }[] = [
+  { tema: 'desencaixe', nome: 'desencaixe · não pertencer' },
+  { tema: 'corpo', nome: 'o corpo · o eu · pausa' },
+  { tema: 'raizes', nome: 'heranças · linhagens' },
+  { tema: 'campo', nome: 'Ubuntu · propósito · cuidado' },
+  { tema: 'ciclos', nome: 'ciclos · fins · despedidas' },
+  { tema: 'vinculos', nome: 'vínculos · pertença' },
+  { tema: 'transformacao', nome: 'transformação · padrões · fissuras' },
+  { tema: 'sombra', nome: 'sombra' },
+  { tema: 'sentido', nome: 'sentido · caminho' },
+  { tema: 'emergencia', nome: 'emergência · despertar · para onde vamos' },
+  { tema: 'consciencia', nome: 'consciência · presença' },
+  { tema: 'comunidade', nome: 'comunidade · cidade · mercado' },
+  { tema: 'aprendizagem', nome: 'aprendizagem · biblioteca' },
+  { tema: 'mundo', nome: 'biodiversidade · o mundo vivo' },
+];
+
 // Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.
-// devolve `atlas` (aspetos a herdar) e `tema` (a matéria que serve).
-export function cenaAncorada(seed = 0): { briefing: string; categoria: string; atlas: string[]; tema: string } {
-  const c = CENAS_FUNDADORAS[idx(seed, CENAS_FUNDADORAS.length)];
+// devolve `atlas` (aspetos a herdar) e `tema` (a matéria que serve). Se `tema` for dado,
+// escolhe só entre as cenas dessa matéria (a ponte: post de tema X → imagem de tema X).
+export function cenaAncorada(seed = 0, tema?: string): { briefing: string; categoria: string; atlas: string[]; tema: string } {
+  const pool = tema ? CENAS_FUNDADORAS.filter((c) => c.tema === tema) : CENAS_FUNDADORAS;
+  const lista = pool.length ? pool : CENAS_FUNDADORAS;
+  const c = lista[idx(seed, lista.length)];
   return { briefing: `${c.cena}. ${BASE_MUNDO}`, categoria: c.categoria, atlas: c.atlas, tema: c.tema };
 }
 

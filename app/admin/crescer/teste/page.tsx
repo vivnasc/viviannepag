@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { TEMAS_CENA } from '@/lib/crescer/mundo-teste';
 
 // SANDBOX · a BÍBLIA VISUAL do mundo dela. Ela carrega as imagens fundadoras (feitas
 // no MidJourney/ChatGPT) por categoria; o gerador fotografa acontecimentos ancorado
@@ -67,6 +68,34 @@ export default function TesteMundoPage() {
 
   const [aGerar, setAGerar] = useState(0); // quantas ainda a sair (progresso)
 
+  // ── TESTAR COM CONTEÚDO · a ponte para os posts: frase + matéria (tema) ────────
+  const [frase, setFrase] = useState('');
+  const [temaSel, setTemaSel] = useState('emergencia');
+  const [testes, setTestes] = useState<{ url: string; tema: string; frase: string; ts: number }[]>([]);
+  const [aTestar, setATestar] = useState(0);
+
+  // gera N imagens do mundo PARA o tema escolhido, com a frase por cima (mock do post).
+  const gerarTeste = async () => {
+    const N = 4;
+    setErro(''); setBusy(true); setATestar(N);
+    let fail = 0;
+    const f = frase, tema = temaSel;
+    const baseSeed = Math.floor(Date.now() / 1000);
+    const uma = async (k: number) => {
+      await new Promise((r) => setTimeout(r, k * 1800));
+      try {
+        const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo: 'cenas', quantos: 1, seed: baseSeed + k * 37, ancoras: false, tema }) });
+        const d = await r.json();
+        if (d.amostras?.length) setTestes((t) => [{ url: d.amostras[0].url, tema, frase: f, ts: Date.now() }, ...t]);
+        else { fail++; if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); }
+      } catch { fail++; }
+      finally { setATestar((n) => Math.max(0, n - 1)); }
+    };
+    await Promise.allSettled(Array.from({ length: N }, (_, k) => uma(k)));
+    setBusy(false); setATestar(0);
+    if (fail > 0) setErro(`saíram ${N - fail} de ${N} (${fail} falharam)`);
+  };
+
   // EFICIENTE: dispara N gerações EM PARALELO (cada uma curta e independente, 1 imagem),
   // e cada uma entra no ecrã assim que fica pronta — sem esperar pelo lote todo.
   // ancoras=false → gera só por TEXTO (o ADN respira, sem o look das âncoras a prender).
@@ -109,6 +138,37 @@ export default function TesteMundoPage() {
         Carrega as tuas imagens FUNDADORAS por categoria (a bíblia visual). O gerador fotografa
         acontecimentos do mundo <strong>ancorado nelas</strong>, sem tocar nos teus posts nem no gerador a sério.
       </p>
+
+      {/* TESTAR COM CONTEÚDO — a ponte para os posts: frase + matéria */}
+      <section style={{ border: '1px solid #3a5a88', borderRadius: 12, padding: 16, marginBottom: 20, background: '#10192a' }}>
+        <h2 style={{ fontSize: 15, margin: '0 0 4px' }}>✍️ Testar com o teu conteúdo</h2>
+        <p style={{ opacity: 0.65, fontSize: 12, margin: '0 0 10px', lineHeight: 1.4 }}>
+          Escreve a frase do post e escolhe a <strong>matéria</strong>. Ele gera 4 imagens do mundo PARA esse tema, com a tua frase por cima — para veres o post real (imagem + texto juntos).
+        </p>
+        <textarea value={frase} onChange={(e) => setFrase(e.target.value)} rows={2} placeholder="a frase do post (ex.: «não é o mundo que muda, és tu que deixas de caber no antigo»)"
+          style={{ width: '100%', boxSizing: 'border-box', borderRadius: 8, border: '1px solid #345', background: '#0b1118', color: '#eee', padding: 10, fontSize: 14, fontFamily: 'inherit', resize: 'vertical' }} />
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 8 }}>
+          <select value={temaSel} onChange={(e) => setTemaSel(e.target.value)} style={{ ...btn, padding: '7px 10px' }}>
+            {TEMAS_CENA.map((t) => <option key={t.tema} value={t.tema}>{t.nome}</option>)}
+          </select>
+          <button onClick={gerarTeste} disabled={busy} style={{ ...btn, background: busy ? '#333' : '#1d3a66', borderColor: '#3a5a88' }}>
+            {busy && aTestar > 0 ? `a gerar… (${aTestar} a sair)` : 'gerar 4 para esta matéria'}
+          </button>
+          {testes.length > 0 && <button onClick={() => setTestes([])} disabled={busy} style={{ padding: '6px 12px', borderRadius: 10, border: '1px solid #644', background: 'transparent', color: '#d99', cursor: 'pointer', fontSize: 12 }}>limpar testes</button>}
+        </div>
+        {testes.length > 0 && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12, marginTop: 14 }}>
+            {testes.map((t, i) => (
+              <figure key={`${t.ts}-${i}`} style={{ margin: 0, position: 'relative', borderRadius: 10, overflow: 'hidden' }}>
+                <img src={t.url} alt={t.tema} loading="lazy" style={{ width: '100%', display: 'block', aspectRatio: '9/16', objectFit: 'cover' }} />
+                {t.frase && (
+                  <figcaption style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '40px 14px 14px', background: 'linear-gradient(transparent, rgba(0,0,0,.78))', color: '#fff', fontSize: 15, lineHeight: 1.3, fontWeight: 600, textShadow: '0 1px 6px rgba(0,0,0,.6)' }}>{t.frase}</figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        )}
+      </section>
 
       {/* BÍBLIA VISUAL — upload de âncoras */}
       <section style={{ border: '1px solid #333', borderRadius: 12, padding: 16, marginBottom: 20 }}>

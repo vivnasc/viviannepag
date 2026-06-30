@@ -58,8 +58,9 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
   const openaiKey = process.env.OPENAI_API_KEY;
-  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas'; qualidade?: 'low' | 'medium' | 'high'; ancoras?: boolean };
+  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas'; qualidade?: 'low' | 'medium' | 'high'; ancoras?: boolean; tema?: string };
   const modo = body.modo === 'objetos' ? 'objetos' : 'cenas';
+  const tema = typeof body.tema === 'string' && body.tema ? body.tema : undefined;
   // ancoras !== false → usa a bíblia visual (look fechado). false → gera só por TEXTO,
   // deixa o ADN respirar (as âncoras dominam o gpt-image-2 e prendem tudo ao mesmo look).
   const usarAncoras = body.ancoras !== false;
@@ -78,7 +79,7 @@ export async function POST(req: Request) {
       ({ briefing, categoria } = cenaObjeto(seed));
       inputImgs = []; // os objetos fundadores nascem do prompt, sem referência que os puxe para cena
     } else {
-      const cena = cenaAncorada(seed);
+      const cena = cenaAncorada(seed, tema);
       briefing = cena.briefing; categoria = cena.categoria;
       // âncoras só se a Vivianne pedir (usarAncoras) E já as tiver carregado; senão gera
       // por TEXTO (livre), para o ADN respirar sem o look das âncoras a prender tudo.
