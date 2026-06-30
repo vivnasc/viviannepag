@@ -296,6 +296,10 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
     setEntres((s) => s.map((x, i) => (i >= de ? gEntre : x)));
     onEstiloTodos({ fonte: gFonte, tamanho: gTam, cor: gCor, corFundo: gFundo || undefined, alinhH: gAlinhH, alinhV: gAlinhV, entrelinha: gEntre }, incluirCapa);
   };
+  // LIVE: mexer um controlo do painel "aplica a todos" muda JÁ o preview (sem ter de
+  // carregar em "aplicar"). Atualiza o estado global E o por-slide (corpo; capa só se incluída).
+  const live = <T,>(setG: React.Dispatch<React.SetStateAction<T>>, setArr: React.Dispatch<React.SetStateAction<T[]>>) =>
+    (v: T) => { setG(v); const de = incluirCapa ? 0 : 1; setArr((s) => s.map((x, i) => (i >= de ? v : x))); };
   // botõezinhos de opção (alinhamento, etc.)
   const opcoes = <T,>(lista: { id: T; label: string }[], val: T, on: (id: T) => void) =>
     lista.map((o) => <Chip key={String(o.id)} on={val === o.id} onClick={() => on(o.id)}>{o.label}</Chip>);
@@ -315,20 +319,20 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
           <p className="text-[0.6rem] uppercase tracking-widest" style={{ color: DZ }}>estilo do carrossel · aplica a todos</p>
           <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap">
             <span className="opacity-60 w-14">fonte</span>
-            {FONTES_TEXTO.map((f) => <Chip key={f.id} on={gFonte === f.id} onClick={() => setGFonte(f.id)}>{f.label}</Chip>)}
+            {FONTES_TEXTO.map((f) => <Chip key={f.id} on={gFonte === f.id} onClick={() => live(setGFonte, setFontes)(f.id)}>{f.label}</Chip>)}
           </div>
           <label className="flex items-center gap-2 text-[0.62rem]"><span className="opacity-60 w-14">tamanho</span>
-            <input type="range" min={36} max={120} step={2} value={gTam} onChange={(e) => setGTam(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <input type="range" min={36} max={120} step={2} value={gTam} onChange={(e) => live(setGTam, setTams)(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
             <span className="tabular-nums w-7 text-right">{gTam}</span>
           </label>
           <label className="flex items-center gap-2 text-[0.62rem]"><span className="opacity-60 w-14">espaço</span>
-            <input type="range" min={1} max={2} step={0.02} value={gEntre} onChange={(e) => setGEntre(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <input type="range" min={1} max={2} step={0.02} value={gEntre} onChange={(e) => live(setGEntre, setEntres)(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
             <span className="tabular-nums w-7 text-right">{gEntre.toFixed(2)}</span>
           </label>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↔</span>{opcoes(ALINH_H, gAlinhH, setGAlinhH)}</div>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↕</span>{opcoes(ALINH_V, gAlinhV, setGAlinhV)}</div>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor texto</span>{swatches(CORES_TEXTO, gCor, setGCor)}</div>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor pág.</span>{swatches(CORES_PAGINA, gFundo, setGFundo)}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↔</span>{opcoes(ALINH_H, gAlinhH, live(setGAlinhH, setAlinhHs))}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↕</span>{opcoes(ALINH_V, gAlinhV, live(setGAlinhV, setAlinhVs))}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor texto</span>{swatches(CORES_TEXTO, gCor, live(setGCor, setCores))}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor pág.</span>{swatches(CORES_PAGINA, gFundo, live(setGFundo, setFundos))}</div>
           <div className="flex items-center justify-between gap-2 pt-0.5">
             <label className="flex items-center gap-1.5 text-[0.62rem] opacity-85 cursor-pointer">
               <input type="checkbox" checked={incluirCapa} onChange={(e) => setIncluirCapa(e.target.checked)} className="accent-current" style={{ color: DZ }} />

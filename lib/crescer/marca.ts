@@ -274,14 +274,14 @@ export interface VisualCrescer {
 // instrução. O novo mundo vislumbra-se ao longe / por uma fenda / no horizonte.
 export const FIM_PROMPT =
   'an image like a memory from the future of a POST-SURVIVAL human civilization: not advanced technology but advanced CONSCIOUSNESS ' +
-  'materialized in architecture, landscape and scale (evolved, not merely advanced). Monumental, impossible architecture that looks GROWN, not built; ' +
-  'living organic structures, suspended gardens, rivers in the sky, bridges of light, colossal scale with tiny human beings; ' +
-  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, abundant and luminous; nature and architecture fused; physics set free. ' +
+  'made visible in this world (evolved, not merely advanced); organic and luminous, GROWN not built. ' +
+  'SCALE IS ONE REGISTER, NOT THE RULE: sometimes vast (living architecture, suspended gardens, rivers in the sky), but JUST AS OFTEN CLOSE, INTIMATE AND ALIVE — a single object of that world, a LIVING BEING (a bird, an animal, an insect, a creature, a flowering or unfurling plant), a pair of hands, a face softly lit, food, cloth, water, a small detail full of life and texture. A different world from ours, but a WORLD that is lived in, not only contemplated from afar. ' +
+  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, abundant and luminous; nature and life and architecture fused; physics gently set free. ' +
   'BRIGHT, sunlit and LUMINOUS, crystal-clear ultra-high resolution, razor-sharp fine detail, deep clarity and dimension. ' +
   'Palette: luminous and clear, warm whites and soft golds with RADIANT SKY BLUES, lush living GREENS, turquoise water and champagne light, rich and beautiful NATURAL color (vivid yet natural, never neon, never washed-out, never muted). ' +
   'Feeling: absolute safety, expansion, possibility, mystery and awe, the end of the old world and the birth of a new human paradigm. ' +
-  'The monumental scale of Dune and Interstellar and the organic luminosity of Avatar and Moebius, BUT much brighter, more colourful, sharper and higher-resolution than those films. ' +
-  'VARY THE COMPOSITION AND VANTAGE WIDELY across images: sometimes a wide distant vista, sometimes an INTIMATE INTERIOR seen FROM WITHIN the inhabited world, sometimes looking up, sometimes an aerial view, sometimes a close human-scale detail. ' +
+  'The awe of Dune and Interstellar AND the intimate organic life of Avatar and Moebius, BUT much brighter, more colourful, sharper and higher-resolution than those films. ' +
+  'VARY THE SUBJECT AND SCALE WIDELY across images and LEAN CLOSE: often a single object, a living being, a plant, an animal, hands, a face, a small alive detail — not always a wide vista. Avoid making most images vast and empty of life. ' +
   'Do NOT default to archways, arches, doorways, portals or arched stone openings framing the view; that composition is overused, avoid it unless truly needed. ' +
   'ABSOLUTELY NO haze, NO fog, NO mist, NO heavy shadows, NO murky penumbra, NO dim or desaturated look. ' +
   'NEVER neon, NEVER cyberpunk, no robots, no spaceships, no screens or holograms, no crystals, no chakras, no esoteric symbols, ' +
@@ -293,9 +293,9 @@ export const VISUAIS: VisualCrescer[] = [
     id: 'pessoas', label: 'Pessoas (escala)', emoji: '🧑',
     descricao: 'Uma figura humana minúscula perante uma estrutura colossal: a pessoa diante do que herdou e ainda não largou.',
     promptBase:
-      'a TINY human figure, clearly visible and softly lit (never a dark silhouette), small but present and dignified, ' +
-      'standing before or within a COLOSSAL post-survival structure, the person facing what they inherited and have not yet released; ' +
-      'the scale provokes awe; the image carries the feeling of the words. ' + FIM_PROMPT,
+      'a human presence in the post-survival world, clearly visible and softly lit (never a dark silhouette), present and dignified — ' +
+      'SOMETIMES tiny before a colossal structure (the awe of scale), but JUST AS OFTEN CLOSE: a calm face, a pair of hands, a person resting or tending a living thing; ' +
+      'the image carries the feeling of the words. ' + FIM_PROMPT,
     variar:
       'VARIA a estrutura colossal e o enquadramento: uma cidade de milhares de camadas transparentes de cidades antigas suspensas; uma ponte de luz entre megacidades ' +
       '(à frente, arquitetura orgânica luminosa; atrás, uma estrutura monumental de pedra e aço); uma estrutura circular gigante no céu com milhões de lugares iluminados e um só vazio; ' +
@@ -314,6 +314,9 @@ export const VISUAIS: VisualCrescer[] = [
       'a person at a sunlit table in an interior of grown living architecture, plants and light around them',
       'two people in quiet company in a warm radiant room open to a green horizon',
       'a person standing close at a vast open window, the new luminous world spread softly below',
+      'a CLOSE-UP of a calm face softly lit by the warm light of the new world',
+      'a pair of open hands holding a small living light or a luminous seed, very close',
+      'a person seen close, resting, a luminous plant or a small gentle creature beside them',
     ],
   },
   {
@@ -334,6 +337,9 @@ export const VISUAIS: VisualCrescer[] = [
       'continent-sized living trees rising over an old world',
       'bridges of light between inhabited floating mountains',
       'a luminous organic interior growing out of cracked industrial stone, life reclaiming it',
+      'a CLOSE-UP of a single luminous seed sprouting from cold grey machinery',
+      'a close object of the new world resting on cracked industrial stone, two worlds in one small thing',
+      'a close detail of living moss and light spreading over an old iron beam',
     ],
   },
   {
@@ -357,6 +363,11 @@ export const VISUAIS: VisualCrescer[] = [
       'a calm communal gathering hall bathed in golden light, no crowd, just warmth',
       'a luminous greenhouse interior overflowing with green life',
       'a quiet reading nook of light high inside a continent-sized tree',
+      'a CLOSE-UP of an unfamiliar luminous flower unfurling, dew and light on its petals',
+      'a small glowing bird of this world perched close, alive and curious',
+      'a close still life of strange beautiful fruit, bread and water on a table of light',
+      'cupped hands holding luminous water, very close, warm light',
+      'a gentle unknown animal resting in warm sunlit grass, close and alive',
     ],
   },
   {
