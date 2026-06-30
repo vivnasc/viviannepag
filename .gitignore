@@ -22,3 +22,6 @@ livro-pilar/build/
 # Render scratch do livro (intermediário do build-book.mjs)
 build/book.html
 build/book-en.html
+
+# PDFs do livro gerados localmente (o render publica no bucket)
+livro/*.pdf
