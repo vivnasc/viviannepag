@@ -69,20 +69,23 @@ export default function TesteMundoPage() {
 
   // EFICIENTE: dispara N gerações EM PARALELO (cada uma curta e independente, 1 imagem),
   // e cada uma entra no ecrã assim que fica pronta — sem esperar pelo lote todo.
-  const gerar = async (modo: 'objetos' | 'cenas') => {
+  // ancoras=false → gera só por TEXTO (o ADN respira, sem o look das âncoras a prender).
+  const gerar = async (ancoras: boolean) => {
     const N = 8;
     setErro(''); setBusy(true); setAGerar(N);
+    let ok = 0, fail = 0;
     const baseSeed = Math.floor(Date.now() / 1000);
     const reqs = Array.from({ length: N }, (_, k) =>
-      fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo, quantos: 1, seed: baseSeed + k * 37 }) })
+      fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo: 'cenas', quantos: 1, seed: baseSeed + k * 37, ancoras }) })
         .then((r) => r.json())
-        .then((d) => { if (d.amostras?.length) setHistorico((h) => [{ ...d.amostras[0], ts: Date.now() }, ...h]); else if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); })
-        .catch(() => { /* uma falhou; as outras seguem */ })
+        .then((d) => { if (d.amostras?.length) { ok++; setHistorico((h) => [{ ...d.amostras[0], ts: Date.now() }, ...h]); } else { fail++; if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); } })
+        .catch(() => { fail++; /* uma falhou; as outras seguem */ })
         .finally(() => setAGerar((n) => Math.max(0, n - 1))),
     );
     await Promise.allSettled(reqs);
     await carregar(); // sincroniza com o servidor (fonte da verdade)
     setBusy(false); setAGerar(0);
+    if (fail > 0) setErro(`saíram ${ok} de ${N} (${fail} falharam — carrega outra vez para completar)`);
   };
 
   const limpar = async () => {
@@ -132,8 +135,11 @@ export default function TesteMundoPage() {
 
       {/* GERAR */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-        <button onClick={() => gerar('cenas')} disabled={busy} title="gera 8 imagens do mundo EM PARALELO no gpt-image-2; aparecem à medida que ficam prontas" style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
-          {busy ? `a gerar… (${aGerar} a sair)` : 'gerar 8 imagens do mundo'}
+        <button onClick={() => gerar(false)} disabled={busy} title="gera 8 imagens SÓ pelo ADN do mundo (sem âncoras a prender o look) — para o mundo poder mudar e respirar" style={{ ...btn, background: busy ? '#333' : '#15233a', borderColor: '#3a5a88' }}>
+          {busy ? `a gerar… (${aGerar} a sair)` : '✦ gerar 8 livre (sem âncoras)'}
+        </button>
+        <button onClick={() => gerar(true)} disabled={busy || anchors.length === 0} title={anchors.length === 0 ? 'ainda não tens âncoras guardadas' : 'gera 8 ancorado na tua bíblia visual (look fechado às âncoras que guardaste)'} style={{ ...btn, background: busy ? '#333' : '#1a1a1a', opacity: anchors.length === 0 ? 0.5 : 1 }}>
+          gerar 8 com o teu mundo ({anchors.length})
         </button>
         {historico.length > 0 && (
           <>
@@ -142,6 +148,10 @@ export default function TesteMundoPage() {
           </>
         )}
       </div>
+      <p style={{ opacity: 0.6, fontSize: 12, marginTop: 8, marginBottom: 0, lineHeight: 1.5 }}>
+        <strong>Livre</strong> = só o ADN do mundo, sem as âncoras a puxar o look (usa isto para o mundo poder MUDAR).
+        <strong> Com o teu mundo</strong> = ancorado nas fundadoras que guardaste (fecha o look). As âncoras todas iguais prendem tudo ao mesmo sítio — por isso, se «não muda nada», gera <strong>livre</strong> e só guarda ★ as que forem mesmo novas.
+      </p>
       {erro && <p style={{ color: '#f88', marginTop: 12, fontSize: 13 }}>erro: {erro}</p>}
       {historico.length > 0 && (
         <p style={{ opacity: 0.6, fontSize: 12, marginTop: 16, marginBottom: 0 }}>

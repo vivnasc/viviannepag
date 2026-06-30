@@ -23,6 +23,14 @@ async function listarAnchors(): Promise<Anchor[]> {
     }));
   } catch { return []; }
 }
+// repete uma chamada falhada (timeout/erro transitório do Replicate) antes de desistir.
+async function comRetry<T>(fn: () => Promise<T>, tentativas = 2): Promise<T> {
+  let ultimo: unknown;
+  for (let t = 0; t < tentativas; t++) {
+    try { return await fn(); } catch (e) { ultimo = e; }
+  }
+  throw ultimo;
+}
 // herda VÁRIAS âncoras (uma por aspeto que a CENA pede). Se não houver dessas, qualquer.
 function herdarAtlas(anchors: Anchor[], cats: string[], seed: number): string[] {
   if (!anchors.length) return [];
@@ -43,8 +51,11 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
   const openaiKey = process.env.OPENAI_API_KEY;
-  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas'; qualidade?: 'low' | 'medium' | 'high' };
+  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas'; qualidade?: 'low' | 'medium' | 'high'; ancoras?: boolean };
   const modo = body.modo === 'objetos' ? 'objetos' : 'cenas';
+  // ancoras !== false → usa a bíblia visual (look fechado). false → gera só por TEXTO,
+  // deixa o ADN respirar (as âncoras dominam o gpt-image-2 e prendem tudo ao mesmo look).
+  const usarAncoras = body.ancoras !== false;
   const qualidade = body.qualidade === 'high' || body.qualidade === 'low' ? body.qualidade : 'medium';
   const quantos = Math.max(1, Math.min(8, body.quantos ?? (modo === 'objetos' ? 6 : 4)));
   const base = typeof body.seed === 'number' ? body.seed : Math.floor(Date.now() / 1000);
@@ -62,11 +73,12 @@ export async function POST(req: Request) {
     } else {
       const cena = cenaAncorada(seed);
       briefing = cena.briefing; categoria = cena.categoria;
-      // só usa âncoras se a Vivianne JÁ as carregou; senão gera por TEXTO (livre, sem a
-      // estufa embebida a prender). Ela depois promove as boas a âncora (⭐).
-      inputImgs = herdarAtlas(anchors, cena.atlas, seed);
+      // âncoras só se a Vivianne pedir (usarAncoras) E já as tiver carregado; senão gera
+      // por TEXTO (livre), para o ADN respirar sem o look das âncoras a prender tudo.
+      inputImgs = usarAncoras ? herdarAtlas(anchors, cena.atlas, seed) : [];
     }
-    const url = await gerarImagemGptImage2(briefing, inputImgs, token, openaiKey, qualidade);
+    // tenta duas vezes (o gpt-image-2 falha/expira por timeout às vezes — evita "saíram 4 de 8").
+    const url = await comRetry(() => gerarImagemGptImage2(briefing, inputImgs, token, openaiKey, qualidade));
     let saved = url;
     try { saved = await guardarImagem(url, `${PASTA}/${Date.now()}-${i}__${slug(categoria)}.jpg`, { editorial: false }); } catch { /* fica o url cru */ }
     return { url: saved, categoria };
