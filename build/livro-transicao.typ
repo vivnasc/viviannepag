@@ -65,6 +65,12 @@
   #v(5mm)
   #hairline(w: 14mm)
 ]
+// ---- SISTEMA SEMÂNTICO de símbolos (livro/sistema.json) ----
+// cada TIPO de conteúdo tem ícone + cor + moldura; o template gera tudo daqui.
+#let sistema = json("/livro/sistema.json")
+// SEM ícones desenhados: cada bloco distingue-se pela COR + MOLDURA + rótulo.
+// (o lugar de uma marca tua, se quiseres, é a SVG em vendor/marca/simbolo.svg.)
+
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
   fill: gradient.linear(rgb("#c9bda4"), rgb("#b1a589"), rgb("#9c9078"), angle: 118deg))[
@@ -151,10 +157,7 @@
   setsect(u.kicker)
   pagebreak()
   set align(center)
-  place(top + center, dy: 18mm, glow(d: 92mm, op: 88%))
-  v(30mm)
-  marca(h: 11mm)
-  v(11mm)
+  v(46mm)
   {
     set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
     set text(hyphenate: false)
@@ -235,42 +238,44 @@
   corpo-paras(u.texto, dropcap-on: true, destaques: norm-dest(u))
 }
 
-// ---- aparato inline (no fim do capítulo) — linguagem moderna, sem molduras ----
-// IDEIA CENTRAL: banda luminosa subtil (a luz que emana da matéria) + anel + rótulo
-#let caixa-ideia(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 4mm)[
-  #block(width: 100%, fill: GOLD.transparentize(93%), inset: (x: 11mm, y: 9mm))[
-    #grid(columns: (auto, 1fr), column-gutter: 4mm, align: (horizon, horizon),
-      marca(h: 7mm),
-      text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
-    #v(5mm)
+// SISTEMA SEMÂNTICO — sistema/icone definidos no topo; aqui só os blocos.
+// um BLOCO de qualquer tipo do sistema (hipótese, pergunta, dica, arquivo…)
+#let bloco(chave, corpo, italico: false) = {
+  let s = sistema.at(chave)
+  let c = rgb(s.cor)
+  let cabecalho = grid(columns: (auto, auto), column-gutter: 3.5mm, align: (horizon, horizon),
+    box(width: 7mm, line(length: 7mm, stroke: 0.8pt + c)),
+    text(font: sans, fill: c, size: 7.6pt, weight: 500, tracking: 0.3em)[#upper(s.rotulo)])
+  let corpo-txt = if italico {
+    text(font: serif, style: "italic", fill: BROWN, size: 13pt)[#fmt(corpo)]
+  } else { text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)] }
+  block(breakable: false, width: 100%, above: 11mm, below: 3mm)[
     #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
-    #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
+    #if s.moldura == "orbital" {
+      block(width: 100%, fill: c.transparentize(93%), inset: (x: 11mm, y: 9mm))[
+        #cabecalho #v(5mm) #corpo-txt]
+    } else if s.moldura == "nota" {
+      block(width: 100%, inset: (left: 6mm), stroke: (left: 0.6pt + c.transparentize(20%)))[
+        #cabecalho #v(3mm) #corpo-txt]
+    } else if s.moldura == "arquivo" {
+      block(width: 100%, inset: (y: 6mm), stroke: (top: 0.5pt + c.transparentize(15%), bottom: 0.5pt + c.transparentize(15%)))[
+        #cabecalho #v(4mm) #corpo-txt]
+    } else { // aberta
+      cabecalho; v(3mm); block(width: 88%, corpo-txt)
+    }
   ]
-]
-// A DICA: nota discreta, linha fina à esquerda
-#let nota-dica(corpo) = block(breakable: false, width: 100%, above: 9mm, below: 3mm)[
-  #block(width: 100%, inset: (left: 6mm), stroke: (left: 0.6pt + GOLD.transparentize(20%)))[
-    #set par(justify: false, first-line-indent: 0pt, leading: 0.84em)
-    #text(font: sans, fill: GOLDSOFT, size: 7.4pt, weight: 500, tracking: 0.28em)[A DICA]
-    #v(2.5mm)
-    #text(fill: INK, size: 10pt)[#fmt(corpo)]
-  ]
-]
-// PERGUNTA: aberta, com um ANEL como marca (sem olho)
-#let bloco-pergunta(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 2mm)[
-  #set par(justify: false, first-line-indent: 0pt, leading: 0.86em)
-  #grid(columns: (auto, 1fr), column-gutter: 6mm, align: (top, top),
-    pad(top: 0.5mm, marca(h: 9mm)),
-    [
-      #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR]
-      #v(3mm)
-      #text(font: serif, style: "italic", fill: BROWN, size: 13pt)[#fmt(corpo)]
-    ])
-]
+}
+
+// fecho do capítulo em página própria, CENTRADO na vertical (ar à volta).
 #let aparato(u) = {
-  if "ideia" in u { caixa-ideia(u.ideia) }
-  if "dica" in u { nota-dica(u.dica) }
-  if "pergunta" in u { bloco-pergunta(u.pergunta) }
+  if ("ideia" in u) or ("dica" in u) or ("pergunta" in u) {
+    pagebreak()
+    v(1fr)
+    if "ideia" in u { bloco("hipotese", u.ideia) }
+    if "dica" in u { bloco("dica", u.dica) }
+    if "pergunta" in u { bloco("pergunta", u.pergunta, italico: true) }
+    v(1.05fr)
+  }
 }
 
 // ---- mapa (diagrama alinhado: colunas sob os círculos) ----
