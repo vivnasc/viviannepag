@@ -95,6 +95,8 @@ const BASE_MUNDO =
   'Documentary photography from an existing civilization. The civilization is real, inhabited and ordinary to its inhabitants. The image must feel OBSERVED rather than designed. ' +
   'The focus is everyday life, material culture and ordinary interactions at HUMAN SCALE (a table, a workshop, a room, a market, a small group) — never a city seen from above, never macro infrastructure. ' +
   'People are BUSY in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading), never contemplating, posing, meditating or admiring technology. ' +
+  'The people are ETHNICALLY DIVERSE — varied skin tones, features and hair, clearly different peoples together, NEVER all the same ethnicity. ' +
+  'Their clothing and materials are REFINED, clean and dignified, beautiful and well-made — NEVER rustic, primitive, poor, ragged, tribal or peasant. ' +
   'Include UNFAMILIAR objects, materials or lifeforms being USED naturally in daily activities (transparent living vessels, seed-lamps, grown materials, cultivated tools, organisms used as tools) rather than displayed or admired. ' +
   'Architecture is only background, not the subject. Vegetation is integrated into the human space, never a forest or botanical garden. Beauty exists as INFRASTRUCTURE rather than decoration; abundance without luxury; technology without machinery; nature without wilderness. ' +
   'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No shrine. No altar. No sacred or central venerated object. No monument. No monumentality. No ritual veneration. No one person contemplating or admiring. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. ' +
@@ -107,6 +109,10 @@ const CENAS_FUNDADORAS: { cena: string; categoria: string }[] = [
   { cena: 'researchers and children studying living organisms inside a public library', categoria: 'estudar organismos' },
   { cena: 'craftspeople building everyday objects from cultivated materials in a workshop', categoria: 'oficina' },
   { cena: 'citizens trading goods and knowledge in a crowded public market', categoria: 'mercado' },
+  // o MUNDO VIVO (não só pessoas): criaturas simbióticas, biodiversidade, crianças com seres.
+  { cena: 'a woman and a child gently feeding a large calm gentle herbivore creature with plants and flowers growing along its back, beside a pond of lilies', categoria: 'animais' },
+  { cena: 'the living world of this civilization up close: strange beautiful plants, clear water and small gentle creatures, with only a few people among them', categoria: 'animais' },
+  { cena: 'children playing and discovering together with small gentle creatures and luminous plants of this world, outdoors', categoria: 'infancia' },
 ];
 
 // Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.

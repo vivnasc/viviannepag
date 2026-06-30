@@ -21,6 +21,9 @@ const ATLAS_POR_CENA: string[][] = [
   ['roupa', 'objectos', 'animais', 'aprendizagem'],   // 2 — estudar organismos
   ['roupa', 'objectos', 'arquitectura', 'interior'],  // 3 — oficina/artesãos
   ['roupa', 'objectos', 'mercado', 'pessoas'],        // 4 — mercado
+  ['animais', 'roupa', 'objectos'],                   // 5 — criatura + pessoas
+  ['animais', 'natureza', 'objectos'],                // 6 — mundo vivo
+  ['animais', 'infancia', 'roupa'],                   // 7 — crianças + criaturas
 ];
 
 type Anchor = { url: string; categoria: string };
