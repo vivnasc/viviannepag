@@ -13,7 +13,7 @@ export type Escala = 'micro' | 'intima' | 'social' | 'ecologica' | 'civilizacion
 // fotografia documental/antropológica, gente diversa, realismo cinematográfico — e
 // NÃO com "consciência/transcendência/luz da própria matéria".
 export const ESTILO_FOTO =
-  'NATURE & FIELD DOCUMENTARY PHOTOGRAPHY of a PARALLEL BIOSPHERE, shot BY DAY in BRIGHT CLEAR NATURAL DAYLIGHT — cinematic realism, medium format, SHARP focus and crisp fine detail throughout (NOT blurry, NOT a heavy shallow-depth blur), ultra-detailed, candid, believable, OBSERVED not designed; ' +
+  'NATURE & FIELD DOCUMENTARY PHOTOGRAPHY of a PARALLEL BIOSPHERE, in SOFT INDIRECT DAYLIGHT, luminous rather than bright, penumbra with PRESERVED shadow detail (never underexposed, never crushed blacks) — cinematic realism, medium format, SHARP focus and crisp fine detail throughout (NOT blurry, NOT a heavy shallow-depth blur), ultra-detailed, candid, believable, OBSERVED not designed; ' +
   'when people appear: ETHNICALLY DIVERSE real humans with NORMAL human bodies — NO physical mutation, NO alien features, NO vegetal hair, NO strange eyes, NO skin patterns. ' +
   'What is DIFFERENT is NEVER their anatomy but their WAY OF BEING: the calm presence of a nervous system that is not in survival, an unfamiliar posture and body language, their own customs and gestures, and above all WHAT THEY WEAR (garments that are grown/cultivated rather than woven, unfamiliar yet clearly human clothing, adornments worn naturally) and WHAT THEY ARE DOING; natural daylight, real shadow';
 export const ANTI_ESTETICA =
@@ -29,7 +29,7 @@ export const BIOTECH =
   'translucent trees, flexible crystalline leaves, flowers that release luminous pollen, architectural lichens, suspended aquatic gardens; iridescent-membrane birds, bioluminescent migrating whales, giant pollinators, translucent tree-amphibians; rivers of translucent water carrying living seeds, seas under several moons. ' +
   'Rivers, seas, forests, moons, animals and people are all part of the SAME evolutionary language. Recognizable as Earth-life, yet clearly another branch of the tree of life. It must be at once HABITABLE and IMPOSSIBLE. ' +
   'These named examples are only the SPIRIT/register, NOT a fixed menu: INVENT new plants, animals, rivers, skies and forms freely in this register; never limit yourself to a list. ' +
-  'Photograph this world BY DAY in bright clear light — even the luminous/iridescent biology is seen in DAYLIGHT, not at night; a daytime scene, not a dark one.';
+  'Photograph this world in soft indirect DAYLIGHT (a daytime scene, never night) — even the luminous/iridescent biology is seen by day, in penumbra with PRESERVED detail, never crushed into black.';
 // O MANIFESTO que muda o comportamento do modelo (insistência da Vivianne+ChatGPT):
 // fotografia OBSERVADA, evidência de vida, não símbolo desenhado.
 export const MANIFESTO_FOTO =
@@ -40,12 +40,17 @@ export const MANIFESTO_FOTO =
 // (desfiladeiros, grutas, floresta densa, crepúsculo, bioluminescência) puxam para
 // escuro. Este prefixo curto e duro força DIA, claro e nítido, sempre.
 export const LUZ_PREFIXO =
-  'Bright sunlit DAYTIME photograph, high-key natural light, well-exposed and CLEAR, sharp crisp focus, vivid natural colour; NOT dark, NOT moody, NOT murky, NOT a night scene. ';
+  'PENUMBRA, NOT DARKNESS. The world exists in penumbra, not darkness: shadows contain information, nothing important disappears into black. The image should feel LUMINOUS rather than bright. ' +
+  'Soft indirect daylight, diffuse ambient illumination, natural bounce light, high dynamic range, visible texture in shadows, deep shadows WITHOUT crushed blacks, readable faces and environments, film-grade exposure. ' +
+  'Cinematic penumbra with PRESERVED DETAIL — clothing, faces, plant texture, objects, architecture and biodiversity all clearly visible and explorable. Tack-sharp focus, crisp, high-resolution, NOT blurry. ' +
+  'Reference exposure quality: Blade Runner 2049 interiors, Dune interior readability, National Geographic rainforest photography. ' +
+  'AVOID: underexposure, silhouettes, crushed blacks, missing facial information, loss of texture in shadows; oversaturated, garish, rainbow or neon colour. ';
 
 export const PALETA_MUNDO =
-  'BRIGHT NATURAL DAYLIGHT, well-exposed and CLEAR (like a real outdoor or skylit photograph), rich VIVID natural colour including blues, greens and water; ' +
+  'SOFT INDIRECT DAYLIGHT, luminous rather than bright; high dynamic range with visible texture in shadows, deep shadows WITHOUT crushed blacks, readable faces and environments; ' +
+  'natural REALISTIC colour (never oversaturated, never garish, never rainbow or neon); ' +
   'crisp ULTRA-HIGH RESOLUTION, sharp focus, fine detail; ' +
-  'NOT dark, NOT murky, NOT underexposed, NOT foggy, NOT hazy; avoid a uniform white-and-gold or beige look and avoid a golden spiritual glow';
+  'NOT underexposed, NOT murky, NOT a silhouette, NOT foggy, NOT hazy; avoid a uniform white-and-gold or beige look and avoid a golden spiritual glow';
 
 export const EVITAR_MUNDO =
   'Rivers, seas, birds, plants, animals and people are WELCOME and important — but NEVER the ordinary Earth ones: they must clearly belong to THIS other biosphere (evolved differently). ' +
