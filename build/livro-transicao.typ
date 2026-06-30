@@ -78,10 +78,8 @@
     curve.move((lx + 4.6mm, h)), curve.line((lx + 4.6mm, sy + 3.2mm)),
     curve.cubic((lx + 4.6mm, 4.6mm), (rx - 4.6mm, 4.6mm), (rx - 4.6mm, sy + 3.2mm)),
     curve.line((rx - 4.6mm, h))))
-  // fleuron-chave no ápice + fleurons discretos nos arranques (ornamentos a sério)
-  #place(dx: w / 2 - 5mm, dy: 0.018 * h, box(width: 10mm, align(center, fleuron(sz: 15pt))))
-  #place(dx: lx - 4mm, dy: sy - 4.5mm, box(width: 8mm, align(center, fleuron(sz: 8.5pt))))
-  #place(dx: rx - 4mm, dy: sy - 4.5mm, box(width: 8mm, align(center, fleuron(sz: 8.5pt))))
+  // só o fleuron-chave no ápice (os arranques ficam limpos)
+  #place(dx: w / 2 - 6mm, dy: 0.012 * h, box(width: 12mm, align(center, fleuron(sz: 17pt))))
 ]
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
@@ -260,9 +258,7 @@
   #align(center, block(width: 118mm, stroke: 0.6pt + GOLD, inset: 1.8mm)[
     #block(width: 100%, stroke: 0.4pt + GOLD.transparentize(15%), inset: (x: 11mm, y: 9mm))[
       #align(center, text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
-      #v(2.5mm)
-      #align(center, fleuron(sz: 9pt))
-      #v(3.5mm)
+      #v(4.5mm)
       #set align(left)
       #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
       #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
@@ -282,14 +278,13 @@
 ]
 // pergunta SEM caixa: o olho à esquerda, rótulo + pergunta à direita (à esquerda)
 #let bloco-pergunta(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 2mm)[
-  #grid(columns: (16mm, 1fr), column-gutter: 6mm,
-    align(center + horizon, eye()),
-    block(align(left)[
-      #set par(justify: false, first-line-indent: 0pt, leading: 0.86em)
-      #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR]
-      #v(2.5mm)
-      #text(font: serif, style: "italic", fill: BROWN, size: 12.5pt)[#fmt(corpo)]
-    ]),
+  #set par(justify: false, first-line-indent: 0pt, leading: 0.86em)
+  // rótulo por cima, alinhado sobre a pergunta (a coluna do olho mede 18+6mm)
+  #pad(left: 24mm, text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR])
+  #v(3mm)
+  #grid(columns: (18mm, 1fr), column-gutter: 6mm,
+    align(center + horizon, eye(h: 9.5mm)),
+    align(horizon, text(font: serif, style: "italic", fill: BROWN, size: 12.5pt)[#fmt(corpo)]),
   )
 ]
 #let aparato(u) = {
