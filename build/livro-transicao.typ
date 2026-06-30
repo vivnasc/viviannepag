@@ -175,11 +175,11 @@
 
 // ---- caixa (geometria sagrada: moldura fina + losangos nos cantos) ----
 #let caixa(rotulo, corpo, italico: false, com-olho: false, larg: 116mm) = block(
-  breakable: false, width: 100%, above: 9mm, below: 4mm,
+  breakable: false, width: 100%, above: 6mm, below: 3mm,
 )[
   #set align(center)
   #set par(justify: false, first-line-indent: 0pt, leading: 0.82em)
-  #block(width: larg, inset: (x: 11mm, y: 9mm), stroke: 0.5pt + GOLD.transparentize(20%))[
+  #block(width: larg, inset: (x: 11mm, y: 6.5mm), stroke: 0.5pt + GOLD.transparentize(20%))[
     #place(top + left, dx: -1.5mm, dy: -1.5mm, lozenge(s: 1.3mm))
     #place(top + right, dx: 1.5mm, dy: -1.5mm, lozenge(s: 1.3mm))
     #place(bottom + left, dx: -1.5mm, dy: 1.5mm, lozenge(s: 1.3mm))
