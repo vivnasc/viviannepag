@@ -9,6 +9,7 @@
 
 import { CRESCER, LIVRO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
 import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
+import { cenaConstituicao } from './mundo-visual';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaCrescer {
@@ -40,9 +41,11 @@ export async function gerarPecaCrescer(
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
   const voz = getVoz(vozId) ?? getVoz('direta')!;
   const semImagem = !visual.promptBase;
-  // ARQUÉTIPO de cena desta peça (roda por seed) — para as imagens NÃO repetirem.
-  const arqs = visual.arquetipos ?? [];
-  const arquetipo = arqs.length ? arqs[((seed % arqs.length) + arqs.length) % arqs.length] : '';
+  // CENA segundo a CONSTITUIÇÃO VISUAL (worldbuilding/CONSTITUICAO.md): etnografia de
+  // uma civilização que nunca existiu — categoria/escala/função/pergunta por seed,
+  // respeitando as proporções (Axioma 6) e o equivalente funcional. Substitui os
+  // arquétipos antigos (presos na monumentalidade).
+  const cena = semImagem ? null : cenaConstituicao(seed);
 
   const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${CRESCER.handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}
 
@@ -81,7 +84,7 @@ REGRAS DE VOZ (duras):
 - NUNCA inventes biografia, marcos, clientes ou histórias pessoais da Vivianne. A autoridade vem do caminho ("reconheci primeiro em mim"), não de factos inventados.
 - NUNCA táticas de "viralizar" nem isco de engagement vazio. Verdade, não espetáculo da dor.
 - A LEGENDA nunca repete nem reformula a frase da capa (quem lê já a viu no ecrã): começa onde a frase acaba, aprofunda ou abre. Parágrafos curtos separados por linha em branco (\\n\\n). Termina com um convite leve (refletir, guardar, partilhar com quem precisa), nunca uma ordem nem venda.
-${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM vive no MUNDO PÓS-SOBREVIVÊNCIA (consciência evoluída materializada em arquitetura, paisagem e ESCALA; nunca néon, sci-fi, robôs, doméstico, terapia literal). TRADUZ o sentimento da FRASE pela TENSÃO entre o mundo antigo (pesado, o encaixe forçado) e o que emerge (orgânico, luminoso, escala impossível). REGRA DE OURO: mostra o LIMIAR e a tensão, NUNCA a chegada como solução; o novo mundo vislumbra-se ao longe, por uma fenda, no horizonte. Inventa uma cena concreta e ORIGINAL (segue o estilo do visual), diferente das anteriores, com escala que provoca admiração em 5 segundos.'}
+${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM segue a CONSTITUIÇÃO VISUAL: etnografia de uma civilização que NUNCA existiu (não o futuro da Terra, mas o equivalente funcional). NÃO é monumentalidade nem paisagem ampla por defeito; é o objeto, o ser, o rosto, o ritual desse mundo, à distância íntima. TRADUZ o sentimento da FRASE numa cena concreta desse mundo. O briefing da cena (escala, função, pergunta antropológica, taxonomia) está no campo fundoPrompt abaixo.'}
 
 DEVOLVE APENAS JSON válido, sem texto à volta:
 {
@@ -89,7 +92,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "conceito": "o tema em 1 a 3 palavras (selo da capa)",
   "frase": "o texto da CAPA: ${formato.multi ? 'a 1.ª linha/faca que para o scroll' : 'a frase única (1 a 3 linhas curtas)'}, sem aspas",
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
-  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS: UMA cena concreta e original que TRADUZA VISUALMENTE o sentimento da frase que escreveste acima (ligação imagem↔texto).${arquetipo ? ` PARTE OBRIGATORIAMENTE deste arquétipo de cena (compõe-o à tua maneira, ligado à frase, NUNCA um desfiladeiro/garganta verde): ${arquetipo}.` : ''} Estilo ${visual.label}. ${visual.variar} Escreve a cena específica e termina com este estilo/qualidade: ${visual.promptBase}"`},
+  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS, composto a partir deste BRIEFING da constituição visual (segue-o à risca: a escala, a função, a pergunta antropológica, a categoria e o equivalente funcional), traduzindo VISUALMENTE o sentimento da frase que escreveste (ligação imagem↔texto). NÃO uses objetos terrestres, versões futuristas, nem monumentalidade por defeito. BRIEFING: ${cena!.briefing}"`},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
   "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["As telas em sequência, EXATAMENTE conforme a estrutura do formato indicada acima. A 1.ª tela é a CAPA (igual ao campo frase). Cada tela é uma respiração/parágrafo conforme o formato, todas diferentes, sem repetir a ideia. Sem travessões, leitura clara e interessante do princípio ao fim."]' : ''}
 }`;
