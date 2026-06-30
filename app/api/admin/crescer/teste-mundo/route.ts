@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { cenaMundoTeste } from '@/lib/crescer/mundo-teste';
+import { REFS_MUNDO } from '@/lib/crescer/refs-mundo';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -13,17 +14,21 @@ export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
-  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number };
+  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; ancorar?: boolean };
   const quantos = Math.max(1, Math.min(6, body.quantos ?? 4));
   const base = typeof body.seed === 'number' ? body.seed : Math.floor(Date.now() / 1000);
+  // ÂNCORA visual: as 3 imagens de referência DELA (image_prompt do Flux). Ligada por
+  // defeito — é o que faz o Flux ir ao mundo dela em vez de inventar estufas de gala.
+  const ancorar = body.ancorar !== false && REFS_MUNDO.length > 0;
 
   const amostras: { url: string; categoria: string }[] = [];
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     const seed = base + i * 7;
     const { briefing, categoria } = cenaMundoTeste(seed);
+    const ref = ancorar ? REFS_MUNDO[i % REFS_MUNDO.length] : undefined; // roda pelas 3
     try {
-      const url = await gerarImagemFlux(briefing, token, { raw: true });
+      const url = await gerarImagemFlux(briefing, token, { raw: true, imagePrompt: ref });
       let saved = url;
       try { saved = await guardarImagem(url, `crescer/_teste/${Date.now()}-${i}.jpg`); } catch { /* fica o url cru */ }
       amostras.push({ url: saved, categoria });
