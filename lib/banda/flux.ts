@@ -111,8 +111,8 @@ export async function gerarImagemFlux(scene: string, token: string, opts: GerarO
 // gpt-image-2 (OpenAI via Replicate) — o modelo do ChatGPT. Aceita input_images como
 // REFERÊNCIAS (alta fidelidade automática) e a chave OpenAI dela. É o que faz o mundo
 // dela. Devolve o URL da imagem. Só o sandbox o usa.
-export async function gerarImagemGptImage2(prompt: string, inputImages: string[], replicateToken: string, openaiKey?: string): Promise<string> {
-  const input: Record<string, unknown> = { prompt, aspect_ratio: '2:3', number_of_images: 1, quality: 'high', output_format: 'jpeg' };
+export async function gerarImagemGptImage2(prompt: string, inputImages: string[], replicateToken: string, openaiKey?: string, quality: 'low' | 'medium' | 'high' = 'medium'): Promise<string> {
+  const input: Record<string, unknown> = { prompt, aspect_ratio: '2:3', number_of_images: 1, quality, output_format: 'jpeg' };
   if (inputImages.length) input.input_images = inputImages.slice(0, 8);
   if (openaiKey) input.openai_api_key = openaiKey;
   const createRes = await fetch('https://api.replicate.com/v1/models/openai/gpt-image-2/predictions', {
