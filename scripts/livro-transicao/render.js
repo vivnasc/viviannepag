@@ -65,7 +65,7 @@ if (fs.existsSync(APARATO)) {
 }
 
 const inl = (s) => marked.parseInline(s.trim());
-const ARCH = `<svg class="arch" viewBox="0 0 600 250" preserveAspectRatio="xMidYMin meet"><path d="M60 250 L60 120 C60 35 540 35 540 120 L540 250" fill="none" stroke="#b9842f" stroke-width="1.1"/><path d="M78 250 L78 122 C78 52 522 52 522 122 L522 250" fill="none" stroke="#b9842f" stroke-width="0.7" opacity="0.55"/><circle cx="60" cy="120" r="4" fill="#b9842f"/><circle cx="540" cy="120" r="4" fill="#b9842f"/><circle cx="300" cy="47" r="4.5" fill="#b9842f"/></svg>`;
+const ARCH = `<svg class="arch" viewBox="0 0 600 270" preserveAspectRatio="xMidYMid meet"><path d="M55 270 L55 150 A248 122 0 0 1 545 150 L545 270" fill="none" stroke="#b9842f" stroke-width="1.6" stroke-linecap="round"/><circle cx="55" cy="150" r="4" fill="#b9842f"/><circle cx="545" cy="150" r="4" fill="#b9842f"/><circle cx="300" cy="29" r="4.5" fill="#b9842f"/></svg>`;
 const ORN = `<svg class="orn" viewBox="0 0 240 18"><line x1="20" y1="9" x2="108" y2="9" stroke="#b9842f" stroke-width="1"/><line x1="132" y1="9" x2="220" y2="9" stroke="#b9842f" stroke-width="1"/><circle cx="120" cy="9" r="4" fill="none" stroke="#b9842f" stroke-width="1"/><circle cx="120" cy="9" r="1.4" fill="#b9842f"/></svg>`;
 const EYE = `<svg class="eye" viewBox="0 0 64 36"><path d="M4 18 C18 2 46 2 60 18 C46 34 18 34 4 18 Z" fill="none" stroke="#9c6a2c" stroke-width="1.4"/><circle cx="32" cy="18" r="7" fill="none" stroke="#9c6a2c" stroke-width="1.4"/><circle cx="32" cy="18" r="2.4" fill="#9c6a2c"/></svg>`;
 
@@ -160,7 +160,7 @@ body{color:#2a2114;background:#F4ECDD;font-family:Fraunces,Georgia,serif;font-we
 p{margin:0 0 .9em;}em{font-style:italic;}strong{font-weight:500;color:#7d5320;}
 .opener{page-break-before:always;text-align:center;}
 .opener>p,.annex p{text-align:justify;}
-svg.arch{display:block;width:64mm;height:27mm;margin:0 auto 4mm;}
+svg.arch{display:block;width:62mm;height:29mm;margin:0 auto 5mm;}
 .ch-kicker{font-family:Outfit;font-weight:500;font-size:8pt;letter-spacing:.32em;text-transform:uppercase;color:#9c6a2c;}
 .ch-title{font-family:Fraunces;font-weight:300;font-size:21pt;line-height:1.16;color:#332512;margin:2mm 0 0;}
 svg.orn{display:block;width:40mm;height:3mm;margin:5mm auto 6mm;}
