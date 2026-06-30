@@ -50,6 +50,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     itens: [
       { href: '/admin', label: 'escritos' },
       { href: '/admin/editora', label: 'editora' },
+      { href: '/admin/livro-transicao', label: 'a grande transição · livro' },
       { href: '/admin/produtos', label: 'produtos' },
       { href: '/admin/compras', label: 'compras' },
       { href: '/admin/estudio', label: 'estúdio' },
@@ -99,13 +100,6 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin/infografico', label: 'infográficos' },
       { href: '/admin/veu-demonstracoes', label: 'demonstrações físicas' },
       { href: '/admin/carrossel-veu', label: 'carrosséis' },
-    ],
-  },
-  {
-    titulo: 'Ciências da Consciência Emergente',
-    cor: '#C9A24B',
-    itens: [
-      { href: '/admin/livro-transicao', label: 'a grande transição · livro' },
     ],
   },
   {
