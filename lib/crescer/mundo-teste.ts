@@ -86,3 +86,23 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
   }
   return { briefing, categoria };
 }
+
+// Briefing LEVE para quando há ÂNCORA (image_prompt das referências dela): a imagem
+// define o LOOK (arquitetura, roupa, materiais, paleta, luz); o texto só diz O QUE
+// ACONTECE. Sem isto, o texto pesado ("catedral/jardim ornado") competia com a
+// referência e ganhava (saía estufa de gala). Aqui o texto recua e a imagem manda.
+export function cenaAncorada(seed = 0): { briefing: string; categoria: string } {
+  const m = idx(seed, 5);
+  const { categoria } = cenaMundoTeste(seed);
+  const comGente = m !== 2;
+  const acao = m === 0 ? 'a crowded, busy, joyful market or festival — many people of this world trading, cooking, playing and gathering'
+    : m === 1 ? 'a working institution, laboratory or workshop — many people busy studying, building and handling living instruments and material culture'
+    : m === 2 ? 'the living world up close — an astonishing plant, animal or symbiotic creature of this biosphere, rich fine detail'
+    : m === 3 ? 'a busy living city street or plaza thronged with people — daily life, trade, movement'
+    : 'children and young people playing, exploring and discovering together with curiosity and laughter';
+  const briefing =
+    'A real documentary PHOTOGRAPH set in the EXACT same world as the reference image: KEEP its architecture, clothing, fabrics, materials, instruments, creatures, palette, light and overall look — change ONLY what is happening. ' +
+    `SCENE: ${acao}. ${comGente ? 'People are present and PROMINENT in the foreground, doing things; NOT an empty space. ' : ''}` +
+    'Bright, clear, luminous, tack-sharp, every detail visible; a real photograph, NOT a painting, NOT concept art, NOT a gala/ballgown scene. no text, no letters, no watermark, no logos.';
+  return { briefing, categoria };
+}

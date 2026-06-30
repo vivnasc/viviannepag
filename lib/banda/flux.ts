@@ -5,7 +5,7 @@
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import sharp from 'sharp';
 
-const BUCKET = 'viviannepag-assets';
+export const BUCKET = 'viviannepag-assets';
 
 // GRADE EDITORIAL (todas as contas) — o Flux entrega muitas fotos subexpostas, com
 // as sombras esmagadas; o detalhe que se paga fica escondido no escuro. Isto NÃO
