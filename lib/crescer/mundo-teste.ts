@@ -113,6 +113,13 @@ const CENAS_FUNDADORAS: { cena: string; categoria: string }[] = [
   { cena: 'a woman and a child gently feeding a large calm gentle herbivore creature with plants and flowers growing along its back, beside a pond of lilies', categoria: 'animais' },
   { cena: 'the living world of this civilization up close: strange beautiful plants, clear water and small gentle creatures, with only a few people among them', categoria: 'animais' },
   { cena: 'children playing and discovering together with small gentle creatures and luminous plants of this world, outdoors', categoria: 'infancia' },
+  // VARIEDADE (para não ser tudo estufa + mesa): água, festa, música, campo, cuidado, criatura.
+  { cena: 'people navigating a small living boat along a calm river of this civilization, carrying goods and plants, open sky', categoria: 'transportes' },
+  { cena: 'a joyful outdoor FESTIVAL of this civilization with music, colour, food and many people of all ages dancing and celebrating', categoria: 'festival' },
+  { cena: 'musicians of this civilization playing unfamiliar instruments for a small gathering outdoors', categoria: 'pessoas' },
+  { cena: 'a keeper walking with several large gentle creatures of this world across an open sunlit meadow, wide open landscape', categoria: 'animais' },
+  { cena: 'a healer caring for another person with gentle living instruments, in a calm bright room', categoria: 'interior' },
+  { cena: 'a single extraordinary creature of this biosphere up close, a nature-documentary portrait, few or no people', categoria: 'animais' },
 ];
 
 // Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.

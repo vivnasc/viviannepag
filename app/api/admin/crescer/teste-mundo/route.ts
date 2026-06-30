@@ -24,6 +24,12 @@ const ATLAS_POR_CENA: string[][] = [
   ['animais', 'roupa', 'objectos'],                   // 5 — criatura + pessoas
   ['animais', 'natureza', 'objectos'],                // 6 — mundo vivo
   ['animais', 'infancia', 'roupa'],                   // 7 — crianças + criaturas
+  ['transportes', 'roupa', 'natureza'],               // 8 — barco no rio
+  ['festival', 'roupa', 'pessoas'],                   // 9 — festa
+  ['pessoas', 'roupa', 'objectos'],                   // 10 — músicos
+  ['animais', 'natureza', 'roupa'],                   // 11 — guardião + criaturas no campo
+  ['interior', 'roupa', 'objectos'],                  // 12 — cuidado
+  ['animais', 'natureza'],                            // 13 — criatura ao perto
 ];
 
 type Anchor = { url: string; categoria: string };
