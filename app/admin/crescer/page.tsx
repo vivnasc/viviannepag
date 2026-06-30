@@ -393,7 +393,7 @@ export default function CrescerPage() {
   const [vis, setVis] = useState<Set<VisualId>>(new Set(['pessoas']));
   const [voz, setVoz] = useState<VozId>('direta'); // a voz do alcance, por defeito
   const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
-  const [quantos, setQuantos] = useState(2);
+  const [quantos, setQuantos] = useState(1); // 1 por defeito: uma de cada vez, sem ser obrigada a lote
   const [surpreender, setSurpreender] = useState(false);
   const [tema, setTema] = useState('');
   const [busy, setBusy] = useState(false);
@@ -564,7 +564,8 @@ export default function CrescerPage() {
 
         {/* gerar */}
         <section className="mb-6 rounded-2xl border border-white/10 p-5" style={{ background: 'rgba(255,255,255,0.03)' }}>
-          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">gerar um lote</h2>
+          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-1">gerar</h2>
+          <p className="text-[0.62rem] opacity-50 mb-3">uma peça de cada vez (deixa "quantas" em 1) ou várias num lote. Com "tema livre" sai exatamente a tua ideia.</p>
 
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">temáticas <span className="opacity-50">(escolhe várias)</span></p>
           <div className="flex flex-wrap gap-1.5 mb-3">{TEMATICAS.map((t) => <Chip key={t.id} on={temas.has(t.id)} onClick={() => toggle(setTemas, t.id)} title={t.descricao}><span className="mr-1">{t.emoji}</span>{t.label}</Chip>)}</div>
