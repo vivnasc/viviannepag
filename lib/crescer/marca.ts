@@ -175,7 +175,7 @@ export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find(
 // DECISÃO da Vivianne (jun 2026): manter TODOS os formatos, mas garantir que cada
 // um sai DIGNO, na voz e no visual (ver a régua de DIGNIDADE no gerador). Cada
 // formato abre sempre com uma FACA e é forte e claro, nunca difuso nem encheção.
-export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio';
+export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio' | 'pordetras';
 
 export interface FormatoCrescer {
   id: FormatoId;
@@ -228,6 +228,17 @@ export const FORMATOS: FormatoCrescer[] = [
       '3) 6 a 11 MANIFESTAÇÕES: cada uma um parágrafo (3 a 6 linhas) que nomeia UMA forma concreta e reconhecível do tema na vida real (uma cena que a pessoa vive), TODAS diferentes, nunca a repetir a mesma ideia; ' +
       '4) FECHO: um slide que reconhece ("todos já caímos nisto") e convida a guardar, partilhar ou rolar. ' +
       'A leitura tem de ser clara e interessante do princípio ao fim (8 fortes valem mais que 13 esticados). Registo afiado mas digno: a faca aponta ao padrão, NUNCA despreza pessoas (proibido "massa histérica", "babaca" e afins).',
+  },
+  {
+    id: 'pordetras', label: 'O que está por detrás', emoji: '🪞', multi: true,
+    descricao: 'Série: um comportamento do dia a dia → o que está mesmo por baixo.',
+    estrutura:
+      'Uma SÉRIE que pega num comportamento ou desejo concreto e reconhecível do dia a dia e revela o que está MESMO por baixo (a necessidade, a ferida, o mecanismo herdado), com alívio e sem julgamento. ' +
+      '1) CAPA-faca: começa por "O que está por detrás de" + UMA cena concreta, específica e quotidiana (ex.: a tua vontade de agradar, a tua raiva pelo vizinho, a roupa cara que usas, chegares sempre atrasado, dizeres sempre que sim, arrumares quando estás ansiosa). Escolhe uma inesperada, nunca abstrata; ' +
+      '2) a explicação fácil, a que damos a nós próprios (a da superfície); ' +
+      '3) a CAMADA por baixo: o que aquilo está mesmo a proteger ou a pedir (a necessidade real, o medo, a herança), em linguagem de vida, NUNCA o conceito nem o nome técnico; ' +
+      '4) o ALÍVIO: o que muda quando se vê isto, sem ordem nem "deixa de" (mais "quando vês, já não te comanda às escuras"). ' +
+      'Tom: revela, não acusa; a pessoa sente-se compreendida, nunca apanhada. Cada tela uma respiração, todas diferentes, sem travessões.',
   },
 ];
 
