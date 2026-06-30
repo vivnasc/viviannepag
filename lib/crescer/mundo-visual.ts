@@ -35,6 +35,13 @@ export const BIOTECH =
 export const MANIFESTO_FOTO =
   'This is NOT concept art. This is DOCUMENTARY PHOTOGRAPHY from an EXISTING civilization: the photographer is visiting a real place where real people live and work. The image must feel OBSERVED, not designed — evidence of life, not a symbol. In the spirit of National Geographic photography, the ecological richness of Studio Ghibli, and the cinematic realism of Denis Villeneuve (people busy, material culture, tools, professions, ecosystems, activities). ';
 // paleta GROUNDED (cor natural e variada, com sombra e contraste reais), não o branco-e-dourado.
+// PREFIXO DE LUZ — vai à FRENTE do prompt do Flux (os primeiros tokens pesam mais).
+// As cenas saíam escuras porque o pedido de luz vinha no fim e os TIPOS de cena
+// (desfiladeiros, grutas, floresta densa, crepúsculo, bioluminescência) puxam para
+// escuro. Este prefixo curto e duro força DIA, claro e nítido, sempre.
+export const LUZ_PREFIXO =
+  'Bright sunlit DAYTIME photograph, high-key natural light, well-exposed and CLEAR, sharp crisp focus, vivid natural colour; NOT dark, NOT moody, NOT murky, NOT a night scene. ';
+
 export const PALETA_MUNDO =
   'BRIGHT NATURAL DAYLIGHT, well-exposed and CLEAR (like a real outdoor or skylit photograph), rich VIVID natural colour including blues, greens and water; ' +
   'crisp ULTRA-HIGH RESOLUTION, sharp focus, fine detail; ' +

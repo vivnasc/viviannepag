@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
+import { LUZ_PREFIXO } from '@/lib/crescer/mundo-visual';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import {
@@ -26,7 +27,7 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token || !prompt) return null;
   try {
-    const url = await gerarImagemFlux(prompt, token, { raw: true });
+    const url = await gerarImagemFlux(LUZ_PREFIXO + prompt, token, { raw: true });
     try { return await guardarImagem(url, `crescer/${slug}/fundo-${Date.now()}.jpg`); } catch { return url; }
   } catch { return null; }
 }
