@@ -13,13 +13,14 @@ const PASTA_ANCHORS = 'crescer/_anchors';
 const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase() || 'cena';
 const desslug = (s: string) => s.replace(/\.jpg$/i, '').replace(/-/g, ' ').trim();
 
-// categorias preferidas por cada cena fundadora (m de cenaAncorada) — escala humana.
-const PREF_ANCHOR: string[][] = [
-  ['biblioteca', 'pessoas', 'interior'],   // 0 — crianças a aprender
-  ['interior', 'pessoas', 'festival'],     // 1 — refeição em família
-  ['biblioteca', 'pessoas', 'interior'],   // 2 — estudar organismos
-  ['profissao', 'interior', 'pessoas'],    // 3 — oficina/artesãos
-  ['mercado', 'festival', 'pessoas'],      // 4 — mercado
+// ATLAS por cena (m de cenaAncorada): que ASPECTOS do mundo cada cena HERDA como
+// referência (roupa + objetos + a atividade). Cada geração puxa uma imagem de cada.
+const ATLAS_POR_CENA: string[][] = [
+  ['roupa', 'objectos', 'infancia', 'aprendizagem'],  // 0 — crianças a aprender
+  ['roupa', 'objectos', 'refeicoes', 'interior'],     // 1 — refeição em família
+  ['roupa', 'objectos', 'animais', 'aprendizagem'],   // 2 — estudar organismos
+  ['roupa', 'objectos', 'arquitectura', 'interior'],  // 3 — oficina/artesãos
+  ['roupa', 'objectos', 'mercado', 'pessoas'],        // 4 — mercado
 ];
 
 type Anchor = { url: string; categoria: string };
@@ -33,13 +34,16 @@ async function listarAnchors(): Promise<Anchor[]> {
     }));
   } catch { return []; }
 }
-function escolherAnchor(anchors: Anchor[], m: number, seed: number): string | null {
-  if (!anchors.length) return null;
-  for (const cat of (PREF_ANCHOR[m] ?? [])) {
+// herda VÁRIAS âncoras (uma por aspeto da cena). Se a cena não tiver atlas, qualquer.
+function herdarAtlas(anchors: Anchor[], m: number, seed: number): string[] {
+  if (!anchors.length) return [];
+  const urls: string[] = [];
+  for (const cat of (ATLAS_POR_CENA[m] ?? [])) {
     const c = anchors.filter((a) => a.categoria === cat);
-    if (c.length) return c[(((Math.floor(seed) % c.length) + c.length) % c.length)].url;
+    if (c.length) urls.push(c[(((Math.floor(seed) % c.length) + c.length) % c.length)].url);
   }
-  return anchors[(((Math.floor(seed) % anchors.length) + anchors.length) % anchors.length)].url;
+  if (!urls.length) urls.push(anchors[(((Math.floor(seed) % anchors.length) + anchors.length) % anchors.length)].url);
+  return [...new Set(urls)].slice(0, 6);
 }
 
 // SANDBOX · gera AMOSTRAS com gpt-image-2 (o modelo do ChatGPT), ancorado nas imagens
@@ -59,8 +63,9 @@ export async function POST(req: Request) {
   const tarefas = Array.from({ length: quantos }, (_, i) => async (): Promise<{ url: string; categoria: string }> => {
     const seed = base + i * 7;
     const { briefing, categoria, m } = cenaAncorada(seed);
-    const ref = escolherAnchor(anchors, m, seed) ?? REFS_MUNDO[i % REFS_MUNDO.length];
-    const url = await gerarImagemGptImage2(briefing, ref ? [ref] : [], token, openaiKey);
+    const refs = herdarAtlas(anchors, m, seed);
+    const inputImgs = refs.length ? refs : [REFS_MUNDO[i % REFS_MUNDO.length]];
+    const url = await gerarImagemGptImage2(briefing, inputImgs, token, openaiKey);
     let saved = url;
     try { saved = await guardarImagem(url, `${PASTA}/${Date.now()}-${i}__${slug(categoria)}.jpg`, { editorial: false }); } catch { /* fica o url cru */ }
     return { url: saved, categoria };
