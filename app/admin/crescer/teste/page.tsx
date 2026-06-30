@@ -97,11 +97,8 @@ export default function TesteMundoPage() {
 
       {/* GERAR */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-        <button onClick={() => gerar('objetos')} disabled={busy} title="o IKEA do mundo: objetos sozinhos, sem arquitetura nem templo. Constrói a cultura material primeiro." style={{ ...btn, background: busy ? '#333' : '#26201a' }}>
-          {busy ? 'a trabalhar…' : '① gerar objetos (cultura material)'}
-        </button>
-        <button onClick={() => gerar('cenas')} disabled={busy} title="cenas humanas que herdam o atlas de objetos/roupa" style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
-          ② gerar cenas
+        <button onClick={() => gerar('cenas')} disabled={busy} title="gera imagens do mundo (cenas humanas) no gpt-image-2, ancoradas nas tuas referências" style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
+          {busy ? 'a gerar imagens do mundo…' : 'gerar imagens do mundo'}
         </button>
         {historico.length > 0 && (
           <>

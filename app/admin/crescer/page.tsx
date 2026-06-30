@@ -567,7 +567,10 @@ export default function CrescerPage() {
             <span>{CRESCER.emoji}</span> {CRESCER.nome} <span className="opacity-70 text-base" style={{ color: TX }}>· @{CRESCER.handle}</span>
           </h1>
           <p className="mt-2 text-[0.92rem] italic opacity-90" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{CRESCER.posicionamento}</p>
-          <Link href="/admin/publicar?conta=loja" className="mt-3 inline-block px-3 py-1.5 rounded-lg border border-white/20 text-[0.74rem] hover:bg-white/10">abrir no Publicar →</Link>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link href="/admin/publicar?conta=loja" className="inline-block px-3 py-1.5 rounded-lg border border-white/20 text-[0.74rem] hover:bg-white/10">abrir no Publicar →</Link>
+            <Link href="/admin/crescer/teste" className="inline-block px-3 py-1.5 rounded-lg border text-[0.74rem] hover:bg-white/10" style={{ borderColor: DZ, color: DZ }}>🧪 testar o mundo (sandbox) →</Link>
+          </div>
         </header>
 
         {/* gerar */}
