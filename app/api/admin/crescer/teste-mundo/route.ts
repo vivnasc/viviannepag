@@ -30,6 +30,15 @@ const ATLAS_POR_CENA: string[][] = [
   ['animais', 'natureza', 'roupa'],                   // 11 — guardião + criaturas no campo
   ['interior', 'roupa', 'objectos'],                  // 12 — cuidado
   ['animais', 'natureza'],                            // 13 — criatura ao perto
+  ['cidade', 'arquitectura', 'transportes'],          // 14 — cidade de canais
+  ['biblioteca', 'arquitectura', 'interior'],         // 15 — biblioteca viva
+  ['oceano', 'transportes', 'arquitectura'],          // 16 — porto oceânico
+  ['cidade', 'pessoas', 'arquitectura'],              // 17 — praça pública
+  ['noite', 'ciencia', 'arquitectura'],               // 18 — observatório / noite
+  ['animais', 'oceano', 'natureza'],                  // 19 — fauna grande / baleias
+  ['ciencia', 'interior', 'objectos'],                // 20 — laboratório adulto
+  ['transportes', 'cidade', 'pessoas'],               // 21 — transporte
+  ['arquitectura', 'cidade', 'pessoas'],              // 22 — infraestrutura
 ];
 
 type Anchor = { url: string; categoria: string };

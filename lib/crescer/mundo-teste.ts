@@ -93,13 +93,13 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
 // fugiu para Veneza/solarpunk. Por isso: só cenas humanas, nunca cidade vista de cima.
 const BASE_MUNDO =
   'Documentary photography from an existing civilization. The civilization is real, inhabited and ordinary to its inhabitants. The image must feel OBSERVED rather than designed. ' +
-  'The focus is everyday life, material culture and ordinary interactions at HUMAN SCALE (a table, a workshop, a room, a market, a small group) — never a city seen from above, never macro infrastructure. ' +
+  'The focus is everyday life, material culture and ordinary interactions of a COMPLETE civilization. The scale VARIES: sometimes an intimate human-scale moment (a table, a workshop, a small group), sometimes a WIDE view of a whole city, a port, an ocean, a public square or great infrastructure of this civilization — the full society, not only gardens, terrariums and children. ' +
   'People are BUSY in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading), never contemplating, posing, meditating or admiring technology. ' +
   'The people are ETHNICALLY DIVERSE — varied skin tones, features and hair, clearly different peoples together, NEVER all the same ethnicity. ' +
   'Their clothing and materials are REFINED, clean and dignified, beautiful and well-made — NEVER rustic, primitive, poor, ragged, tribal or peasant. ' +
   'Include UNFAMILIAR objects, materials or lifeforms being USED naturally in daily activities (transparent living vessels, seed-lamps, grown materials, cultivated tools, organisms used as tools) rather than displayed or admired. ' +
   'Architecture is only background, not the subject. Vegetation is integrated into the human space, never a forest or botanical garden. Beauty exists as INFRASTRUCTURE rather than decoration; abundance without luxury; technology without machinery; nature without wilderness. ' +
-  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No shrine. No altar. No sacred or central venerated object. No monument. No monumentality. No ritual veneration. No one person contemplating or admiring. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. ' +
+  'No dystopia. No cyberpunk. No post-apocalypse. No medieval village. No luxury resort. No spiritual retreat. No temples. No shrine. No altar. No sacred or central venerated object. No monument. No monumentality. No ritual veneration. No one person contemplating or admiring. No robes. No crystals. No scarcity. No survival aesthetics. No Earth cultures. No recognisable historical civilizations. No solarpunk, no eco-city, no futuristic Earth. No Venice, no Singapore. No Montessori-greenhouse cliché, not only horticulture and terrariums. ' +
   'no text, no letters, no watermark, no logos.';
 
 // As 5 cenas fundadoras dela (todas escala humana, gente ocupada, objeto em uso).
@@ -120,6 +120,16 @@ const CENAS_FUNDADORAS: { cena: string; categoria: string }[] = [
   { cena: 'a keeper walking with several large gentle creatures of this world across an open sunlit meadow, wide open landscape', categoria: 'animais' },
   { cena: 'a healer caring for another person with gentle living instruments, in a calm bright room', categoria: 'interior' },
   { cena: 'a single extraordinary creature of this biosphere up close, a nature-documentary portrait, few or no people', categoria: 'animais' },
+  // A CIVILIZAÇÃO COMPLETA (escala maior, vida adulta, urbano) — sai do ciclo estufa/infância.
+  { cena: 'a great coastal CITY of canals and navigable waterways of this civilization, seen wide at human level from a bridge, living boats and many people going about urban life', categoria: 'cidade' },
+  { cena: 'a vast LIVING LIBRARY of this civilization, adults consulting living archives among tall living shelves', categoria: 'biblioteca' },
+  { cena: 'a busy OCEAN PORT of this civilization, large living vessels at the quay, the open sea, people loading and unloading goods', categoria: 'oceano' },
+  { cena: 'a crowded PUBLIC SQUARE / plaza of this civilization at midday, urban daily life, many adults of all kinds', categoria: 'cidade' },
+  { cena: 'astronomers of this civilization at an OBSERVATORY studying the night sky and several moons, luminous instruments, a clear starry night', categoria: 'noite' },
+  { cena: 'enormous gentle migrating creatures of this world, like whales of the sea or sky, witnessed from a distance by a few people', categoria: 'oceano' },
+  { cena: 'adult researchers of this civilization at work in a LABORATORY, using living scientific instruments, focused and busy', categoria: 'ciencia' },
+  { cena: 'a TRANSPORT hub of this civilization, living vehicles and boats, people travelling and moving goods', categoria: 'transportes' },
+  { cena: 'great public INFRASTRUCTURE of this world in everyday use — a living bridge or aqueduct of grown material — with people crossing', categoria: 'arquitectura' },
 ];
 
 // Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.

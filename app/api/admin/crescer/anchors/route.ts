@@ -13,7 +13,7 @@ export const maxDuration = 60;
 const PASTA = 'crescer/_anchors';
 // ATLAS VISUAL · categorias por ASPECTO (não por sítio): cada geração herda várias
 // (roupa + objetos + atividade) como referência. É a "língua" do mundo dela.
-const CATEGORIAS_ANCORA = ['arquitectura', 'roupa', 'objectos', 'infancia', 'aprendizagem', 'animais', 'refeicoes', 'mercado', 'pessoas', 'interior'] as const;
+const CATEGORIAS_ANCORA = ['cidade', 'oceano', 'arquitectura', 'biblioteca', 'ciencia', 'transportes', 'noite', 'roupa', 'objectos', 'infancia', 'aprendizagem', 'animais', 'refeicoes', 'mercado', 'pessoas', 'interior'] as const;
 const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
 
 // POST { dataUrl, categoria } — carrega uma âncora (reduz a 1024px, guarda).
