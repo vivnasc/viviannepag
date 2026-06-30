@@ -4,6 +4,7 @@ import { LangToggle } from '@/components/LangToggle';
 import { Footer } from '@/components/home/Footer';
 import { BotaoCompra } from '@/components/BotaoCompra';
 import { GotaAssina, GotaMini } from '@/components/icons/GotaAssina';
+import { CapaImg } from '@/components/home/CapaImg';
 import type { Metadata } from 'next';
 
 // Landing dedicada de Os 7 Sinais de Desencaixe (irmão de Os Sete Véus).
@@ -59,11 +60,10 @@ export default async function Os7Sinais({ params }: { params: Promise<{ locale: 
 
         {/* HERO */}
         <header className="pt-24 pb-12 text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <CapaImg
             src={capa}
+            fallback={capaLocal(locale)}
             alt={isEn ? 'The Seven Signs of Not Belonging' : 'Os 7 Sinais de Desencaixe'}
-            onError={(e) => { const t = e.currentTarget; if (!t.src.endsWith(capaLocal(locale))) t.src = capaLocal(locale); }}
             className="w-[260px] h-auto rounded-[18px] mx-auto mb-10 block border border-ocre"
             style={{ boxShadow: '0 0 0 6px rgba(184,132,61,0.10), 0 24px 70px -24px rgba(0,0,0,0.7)', aspectRatio: '1600 / 2560' }}
           />
