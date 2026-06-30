@@ -29,63 +29,38 @@
 #let display = "Fraunces Display"
 #let sans = "Outfit"
 
-// ---- ornamentos ----
+// ---- ornamentos: FLEURONS tipográficos (Cardo) + olho VECTORIAL ----
+// Nada é desenhado à mão com linhas/círculos: usam-se ornamentos de tipógrafo.
+#let orn-font = "Cardo"
+#let fleuron(sz: 12pt, c: GOLD) = text(font: orn-font, fill: c, size: sz)[\u{2767}]
 #let lozenge(s: 1.5mm, c: GOLD) = rotate(45deg, square(size: s, stroke: 0.45pt + c))
-#let rule-orn(w: 34mm, c: GOLD) = box(width: w, height: 3mm)[
-  #place(horizon, line(start: (0%, 50%), end: (40%, 50%), stroke: 0.45pt + c))
-  #place(horizon, line(start: (60%, 50%), end: (100%, 50%), stroke: 0.45pt + c))
-  #place(center + horizon, lozenge())
-]
-// quebra de movimento: o RESPIRO dentro do capítulo (espaço branco + losango).
-// sticky: nunca fica órfã no fundo da página — desce com o que vem a seguir.
-#let movbreak() = block(above: 9mm, below: 9mm, width: 100%, breakable: false, sticky: true,
-  align(center, box(width: 22mm, height: 3mm)[
-    #place(horizon, line(start: (0%, 50%), end: (36%, 50%), stroke: 0.4pt + GOLD.transparentize(15%)))
-    #place(horizon, line(start: (64%, 50%), end: (100%, 50%), stroke: 0.4pt + GOLD.transparentize(15%)))
-    #place(center + horizon, lozenge(s: 1.3mm))
-  ]))
 
-// destaque (pull-quote): uma frase forte, tirada do próprio capítulo, posta a
-// respirar ao centro. Dá ritmo visual e respiro, como nas edições de luxo.
+#let rule-orn(w: 44mm, c: GOLD) = box(width: w, height: 6mm)[
+  #place(horizon, line(start: (0%, 50%), end: (36%, 50%), stroke: 0.4pt + c))
+  #place(horizon, line(start: (64%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
+  #place(center + horizon, fleuron(sz: 12pt, c: c))
+]
+#let mini-rule(w: 24mm, c: GOLD) = box(width: w, height: 4.5mm)[
+  #place(horizon, line(start: (0%, 50%), end: (38%, 50%), stroke: 0.4pt + c))
+  #place(horizon, line(start: (62%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
+  #place(center + horizon, fleuron(sz: 9pt, c: c))
+]
+// quebra de movimento: um fleuron ao centro, a respirar. sticky (nunca órfão).
+#let movbreak() = block(above: 10mm, below: 10mm, width: 100%, breakable: false, sticky: true,
+  align(center, fleuron(sz: 13pt)))
+
+// destaque (pull-quote): frase forte do capítulo, com fleurons em cima e baixo
 #let destaque(frase) = block(above: 12mm, below: 12mm, width: 100%, breakable: false, sticky: true)[
   #set align(center)
   #set par(justify: false, first-line-indent: 0pt, leading: 0.96em)
-  #lozenge(s: 1.4mm)
-  #v(4.5mm)
+  #fleuron(sz: 10pt)
+  #v(4mm)
   #block(width: 82%, text(font: display, style: "italic", fill: GOLDSOFT, size: 15.5pt, weight: 300)[#frase])
-  #v(4.5mm)
-  #lozenge(s: 1.4mm)
+  #v(4mm)
+  #fleuron(sz: 10pt)
 ]
-// olho com pestanas (esotérico, delicado) — nada de elipse simples
-#let eye() = box(width: 16mm, height: 12mm)[
-  // pestanas a irradiar por cima
-  #for a in (-54, -36, -18, 0, 18, 36, 54) {
-    place(center + bottom, dx: 0mm, dy: -5.2mm,
-      rotate(a * 1deg, origin: bottom + center,
-        line(start: (0mm, 0mm), end: (0mm, -3.2mm), stroke: 0.5pt + GOLDSOFT)))
-  }
-  // amêndoa do olho (duas curvas)
-  #place(center + bottom, dy: -1mm, curve(
-    stroke: 0.55pt + GOLDSOFT,
-    curve.move((0mm, 0mm)),
-    curve.cubic((4.3mm, -4.6mm), (8.7mm, -4.6mm), (13mm, 0mm)),
-    curve.cubic((8.7mm, 4.6mm), (4.3mm, 4.6mm), (0mm, 0mm)),
-  ))
-  #place(center + bottom, dy: -3.1mm, circle(radius: 2.1mm, stroke: 0.5pt + GOLDSOFT))
-  #place(center + bottom, dy: -3.1mm, circle(radius: 0.8mm, fill: GOLDSOFT, stroke: none))
-]
-// cantos ornamentados da caixa (bracket em L), um por canto, bem encostados
-#let _cs = 0.5pt + GOLD
-#let cTL = box(width: 3.2mm, height: 3.2mm)[#place(top + left, line(start: (0mm, 0mm), end: (3mm, 0mm), stroke: _cs))#place(top + left, line(start: (0mm, 0mm), end: (0mm, 3mm), stroke: _cs))]
-#let cTR = box(width: 3.2mm, height: 3.2mm)[#place(top + right, line(start: (0mm, 0mm), end: (-3mm, 0mm), stroke: _cs))#place(top + right, line(start: (0mm, 0mm), end: (0mm, 3mm), stroke: _cs))]
-#let cBR = box(width: 3.2mm, height: 3.2mm)[#place(bottom + right, line(start: (0mm, 0mm), end: (-3mm, 0mm), stroke: _cs))#place(bottom + right, line(start: (0mm, 0mm), end: (0mm, -3mm), stroke: _cs))]
-#let cBL = box(width: 3.2mm, height: 3.2mm)[#place(bottom + left, line(start: (0mm, 0mm), end: (3mm, 0mm), stroke: _cs))#place(bottom + left, line(start: (0mm, 0mm), end: (0mm, -3mm), stroke: _cs))]
-// rulezinha com ponto (vai por baixo de PRÓLOGO, etc.)
-#let mini-rule(w: 18mm, c: GOLD) = box(width: w, height: 2.6mm)[
-  #place(horizon, line(start: (0%, 50%), end: (42%, 50%), stroke: 0.4pt + c))
-  #place(horizon, line(start: (58%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, circle(radius: 0.6mm, fill: c, stroke: none))
-]
+// olho VECTORIAL (desenho profissional, lucide), dourado
+#let eye(h: 7.5mm) = box(height: h, image("vendor/orn/eye.svg", height: h))
 // arco delicado (SÓ na voz da carta): três fios finos + SÍMBOLOS (losangos),
 // nunca bolas. Emoldura a coluna da carta.
 #let arch(w, h) = box(width: w, height: h)[
@@ -103,11 +78,10 @@
     curve.move((lx + 4.6mm, h)), curve.line((lx + 4.6mm, sy + 3.2mm)),
     curve.cubic((lx + 4.6mm, 4.6mm), (rx - 4.6mm, 4.6mm), (rx - 4.6mm, sy + 3.2mm)),
     curve.line((rx - 4.6mm, h))))
-  // símbolos nos arranques e no ápice (losangos, não bolas)
-  #place(dx: lx - 1.4mm, dy: sy - 1.4mm, lozenge(s: 2mm))
-  #place(dx: rx - 1.4mm, dy: sy - 1.4mm, lozenge(s: 2mm))
-  #place(dx: w / 2 - 1.6mm, dy: 0.075 * h - 1.6mm, lozenge(s: 2.3mm))
-  #place(dx: w / 2 - 0.55mm, dy: 0.075 * h - 0.55mm, circle(radius: 0.55mm, fill: GOLD, stroke: none))
+  // fleuron-chave no ápice + fleurons discretos nos arranques (ornamentos a sério)
+  #place(dx: w / 2 - 5mm, dy: 0.018 * h, box(width: 10mm, align(center, fleuron(sz: 15pt))))
+  #place(dx: lx - 4mm, dy: sy - 4.5mm, box(width: 8mm, align(center, fleuron(sz: 8.5pt))))
+  #place(dx: rx - 4mm, dy: sy - 4.5mm, box(width: 8mm, align(center, fleuron(sz: 8.5pt))))
 ]
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
@@ -286,19 +260,16 @@
   #align(center, block(width: 118mm, stroke: 0.6pt + GOLD, inset: 1.8mm)[
     #block(width: 100%, stroke: 0.4pt + GOLD.transparentize(15%), inset: (x: 11mm, y: 9mm))[
       #align(center, text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
-      #v(5mm)
+      #v(2.5mm)
+      #align(center, fleuron(sz: 9pt))
+      #v(3.5mm)
       #set align(left)
       #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
       #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
     ]
-    // cantos e fleuron ao nível da moldura interna
-    #place(top + left, dx: 1.2mm, dy: 1.2mm, cTL)
-    #place(top + right, dx: -1.2mm, dy: 1.2mm, cTR)
-    #place(bottom + right, dx: -1.2mm, dy: -1.2mm, cBR)
-    #place(bottom + left, dx: 1.2mm, dy: -1.2mm, cBL)
-    #place(bottom + center, dy: 1.8mm, box(fill: PAPER, inset: (x: 2.2mm))[
-      #box(height: 3.2mm)[#place(center + horizon, lozenge(s: 1.7mm))#place(center + horizon, circle(radius: 0.55mm, fill: GOLD, stroke: none))]
-    ])
+    // fleurons a quebrar a moldura, em cima e em baixo (cartouche)
+    #place(top + center, dy: -1.8mm, box(fill: PAPER, inset: (x: 2.6mm), fleuron(sz: 11pt)))
+    #place(bottom + center, dy: 1.8mm, box(fill: PAPER, inset: (x: 2.6mm), fleuron(sz: 11pt)))
   ])
 ]
 #let nota-dica(corpo) = block(breakable: false, width: 100%, above: 9mm, below: 3mm)[
