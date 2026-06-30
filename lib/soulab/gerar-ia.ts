@@ -124,7 +124,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       messages: [{ role: 'user', content: pedido + mineracao + encaminhar + seguimento + evoluirCena + naoRepetir + naoRepetirImg }],
     }),
   });
-  if (!res.ok) throw new Error(`claude ${res.status}`);
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
 
   let o: Partial<Record<keyof PecaSoulab, unknown>> = {};
