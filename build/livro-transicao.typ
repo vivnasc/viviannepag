@@ -34,42 +34,32 @@
 // o sinal de 2150). Linhas finíssimas, brilho suave, muito espaço.
 #let hairline(w: 30mm, c: GOLD, t: 0.4pt) = line(length: w, stroke: t + c)
 #let ring(d: 6mm, c: GOLD, t: 0.5pt) = circle(radius: d / 2, stroke: t + c)
-// A MARCA da Vivianne (o véu) — o símbolo do livro, da própria marca dela
-#let marca(h: 12mm) = box(height: h, image("vendor/marca/simbolo.svg", height: h))
 // brilho suave (a luz que emana da matéria, do manifesto)
 #let glow(d: 100mm, c: GOLD, op: 86%) = circle(radius: d / 2, stroke: none,
   fill: gradient.radial(c.transparentize(op), c.transparentize(100%)))
-// divisória moderna: hairline — anel fino — hairline
-#let divisoria(w: 44mm, c: GOLD) = box(width: w, height: 6mm)[
-  #place(horizon, line(start: (0%, 50%), end: (40%, 50%), stroke: 0.4pt + c))
-  #place(horizon, line(start: (60%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, marca(h: 4.5mm))
-]
-#let mini-rule(w: 26mm, c: GOLD) = box(width: w, height: 5mm)[
-  #place(horizon, line(start: (0%, 50%), end: (42%, 50%), stroke: 0.4pt + c))
-  #place(horizon, line(start: (58%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, marca(h: 4mm))
-]
-// compat.: rule-orn passa a ser a divisória moderna
-#let rule-orn(w: 44mm, c: GOLD) = divisoria(w: w, c: c)
-// quebra de movimento: um anel fino ao centro. sticky (nunca órfão).
-#let movbreak() = block(above: 11mm, below: 11mm, width: 100%, breakable: false, sticky: true,
-  align(center, marca(h: 6mm)))
-// destaque (pull-quote): frase forte do capítulo, entre hairlines finas
+// ---- SEPARADORES da Vivianne (SVGs próprios, vendor/marca/*.svg) ----
+// fissura · emergência · carta de 2150 · transição (sobrevivência→fissura→emergência)
+#let sep(nome, w) = box(width: w, image("vendor/marca/" + nome + ".svg", width: w))
+#let divisoria(w: 56mm, c: GOLD) = sep("emergencia", w)
+#let mini-rule(w: 22mm, c: GOLD) = line(length: w, stroke: 0.4pt + c)
+#let rule-orn(w: 56mm, c: GOLD) = divisoria(w: w, c: c)
+// quebra de movimento: a FISSURA (a quebra na própria página). sticky (nunca órfã).
+#let movbreak() = block(above: 12mm, below: 12mm, width: 100%, breakable: false, sticky: true,
+  align(center, sep("fissura", 62mm)))
+// destaque (pull-quote): frase forte do capítulo, entre filetes finos
 #let destaque(frase) = block(above: 13mm, below: 13mm, width: 100%, breakable: false, sticky: true)[
   #set align(center)
   #set par(justify: false, first-line-indent: 0pt, leading: 1.0em)
-  #marca(h: 6mm)
-  #v(5mm)
+  #hairline(w: 12mm)
+  #v(6mm)
   #block(width: 84%, text(font: display, style: "italic", fill: GOLDSOFT, size: 16pt, weight: 300)[#frase])
-  #v(5mm)
-  #hairline(w: 14mm)
+  #v(6mm)
+  #hairline(w: 12mm)
 ]
-// ---- SISTEMA SEMÂNTICO de símbolos (livro/sistema.json) ----
-// cada TIPO de conteúdo tem ícone + cor + moldura; o template gera tudo daqui.
+// ---- SISTEMA SEMÂNTICO (livro/sistema.json) ----
+// cada TIPO de conteúdo tem rótulo + cor + moldura; o template gera tudo daqui.
+// As molduras "caixa"/"caixa-arquivo" usam os SVGs da Vivianne (vendor/marca/).
 #let sistema = json("/livro/sistema.json")
-// SEM ícones desenhados: cada bloco distingue-se pela COR + MOLDURA + rótulo.
-// (o lugar de uma marca tua, se quiseres, é a SVG em vendor/marca/simbolo.svg.)
 
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
@@ -167,7 +157,7 @@
     if "epigrafe" in u { v(7mm); block(width: 72%, text(font: serif, style: "italic", fill: BROWN, size: 11pt)[#u.epigrafe]) }
   }
   v(9mm)
-  hairline(w: 20mm)
+  sep("carta", 64mm)
   v(10mm)
   block(width: 92mm)[
     #set align(left)
@@ -249,17 +239,24 @@
   let corpo-txt = if italico {
     text(font: serif, style: "italic", fill: BROWN, size: 13pt)[#fmt(corpo)]
   } else { text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)] }
+  let no = (nome, h) => box(height: h, image("vendor/marca/" + nome + ".svg", height: h))
   block(breakable: false, width: 100%, above: 11mm, below: 3mm)[
     #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
-    #if s.moldura == "orbital" {
-      block(width: 100%, fill: c.transparentize(93%), inset: (x: 11mm, y: 9mm))[
+    #if s.moldura == "caixa" {
+      // Caixa Hipótese: rectângulo de cantos suaves + nó «+» a cortar a moldura
+      block(width: 100%, radius: 5mm, inset: (x: 12mm, top: 11mm, bottom: 11mm),
+        stroke: 0.6pt + c)[
+        #place(top + center, dy: -13.5mm, no("hipotese-no", 5mm))
+        #place(bottom + center, dy: 13.5mm, no("hipotese-no", 5mm))
+        #cabecalho #v(5mm) #corpo-txt]
+    } else if s.moldura == "caixa-arquivo" {
+      // Caixa Arquivo 2150: rectângulo recto + alvo a cortar a moldura de cima
+      block(width: 100%, inset: (x: 12mm, top: 14mm, bottom: 11mm), stroke: 0.6pt + c)[
+        #place(top + center, dy: -18mm, no("arquivo-no", 7.5mm))
         #cabecalho #v(5mm) #corpo-txt]
     } else if s.moldura == "nota" {
       block(width: 100%, inset: (left: 6mm), stroke: (left: 0.6pt + c.transparentize(20%)))[
         #cabecalho #v(3mm) #corpo-txt]
-    } else if s.moldura == "arquivo" {
-      block(width: 100%, inset: (y: 6mm), stroke: (top: 0.5pt + c.transparentize(15%), bottom: 0.5pt + c.transparentize(15%)))[
-        #cabecalho #v(4mm) #corpo-txt]
     } else { // aberta
       cabecalho; v(3mm); block(width: 88%, corpo-txt)
     }
@@ -299,7 +296,7 @@
       O caminho que este livro percorre: da sobrevivência, pela fissura, à emergência.
     ])
     #v(7mm)
-    #rule-orn()
+    #sep("transicao", 70mm)
     #v(10mm)
     #box(width: W, height: 2 * R)[
       #let circ(cx, fill) = place(dx: cx - R, dy: 0mm, circle(radius: R, fill: fill, stroke: 0.5pt + GOLD.transparentize(45%)))

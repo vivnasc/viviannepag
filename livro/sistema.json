@@ -1,32 +1,27 @@
 {
   "hipotese": {
     "rotulo": "Hipótese",
-    "icone": "fisheye",
-    "cor": "#9c7a3c",
-    "moldura": "orbital"
+    "cor": "#B08A4A",
+    "moldura": "caixa"
   },
   "pergunta": {
     "rotulo": "Pergunta para ficar",
-    "icone": "aberto",
     "cor": "#7c8aa5",
     "moldura": "aberta"
   },
   "dica": {
     "rotulo": "A dica",
-    "icone": "losango",
     "cor": "#87693a",
     "moldura": "nota"
   },
   "arquivo": {
     "rotulo": "Arquivo histórico · 2150",
-    "icone": "alvo",
-    "cor": "#8a8478",
-    "moldura": "arquivo"
+    "cor": "#B08A4A",
+    "moldura": "caixa-arquivo"
   },
   "emergencia": {
     "rotulo": "Sinal de emergência",
-    "icone": "diamante",
-    "cor": "#b8965a",
-    "moldura": "expansao"
+    "cor": "#B08A4A",
+    "moldura": "aberta"
   }
 }
