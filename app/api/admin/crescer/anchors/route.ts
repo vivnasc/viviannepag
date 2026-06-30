@@ -62,12 +62,18 @@ export async function GET() {
   return NextResponse.json({ ok: true, anchors, categorias: CATEGORIAS_ANCORA });
 }
 
-// DELETE { path } — apaga uma âncora.
+// DELETE { path } — apaga uma âncora; { todas:true } — apaga TODAS.
 export async function DELETE(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { path?: string };
-  if (!body.path || !body.path.startsWith(PASTA + '/')) return NextResponse.json({ erro: 'path-invalido' }, { status: 400 });
+  const body = (await req.json().catch(() => ({}))) as { path?: string; todas?: boolean };
   const supabase = getSupabaseAdmin();
+  if (body.todas) {
+    const { data } = await supabase.storage.from(BUCKET).list(PASTA, { limit: 1000 });
+    const paths = (data ?? []).map((f) => `${PASTA}/${f.name}`);
+    if (paths.length) await supabase.storage.from(BUCKET).remove(paths);
+    return NextResponse.json({ ok: true, apagadas: paths.length });
+  }
+  if (!body.path || !body.path.startsWith(PASTA + '/')) return NextResponse.json({ erro: 'path-invalido' }, { status: 400 });
   await supabase.storage.from(BUCKET).remove([body.path]);
   return NextResponse.json({ ok: true });
 }

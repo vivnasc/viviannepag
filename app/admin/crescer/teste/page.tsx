@@ -14,6 +14,7 @@ export default function TesteMundoPage() {
   const [cats, setCats] = useState<string[]>([]);
   const [cat, setCat] = useState('cidade');
   const [erro, setErro] = useState('');
+  const [promovidas, setPromovidas] = useState<Set<string>>(new Set()); // urls já guardadas (anti-duplicado)
   const fileRef = useRef<HTMLInputElement>(null);
 
   const carregar = useCallback(async () => {
@@ -41,12 +42,21 @@ export default function TesteMundoPage() {
 
   // promove uma imagem GERADA a fundadora (âncora) na categoria escolhida no dropdown.
   const promover = async (url: string) => {
+    if (promovidas.has(url)) return; // anti-duplicado
     setBusy(true); setErro('');
     try {
       const r = await fetch('/api/admin/crescer/anchors', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ fromUrl: url, categoria: cat }) });
       const d = await r.json();
-      if (!d.ok) setErro(d.detalhe || d.erro || 'falhou'); else await carregar();
+      if (!d.ok) setErro(d.detalhe || d.erro || 'falhou');
+      else { setPromovidas((s) => new Set(s).add(url)); await carregar(); }
     } catch (e) { setErro(String(e)); } finally { setBusy(false); }
+  };
+
+  const limparAncoras = async () => {
+    if (typeof window !== 'undefined' && !window.confirm('Apagar TODAS as âncoras da bíblia visual?')) return;
+    setBusy(true);
+    try { await fetch('/api/admin/crescer/anchors', { method: 'DELETE', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ todas: true }) }); setPromovidas(new Set()); await carregar(); }
+    finally { setBusy(false); }
   };
 
   const apagarAncora = async (path: string) => {
@@ -89,7 +99,10 @@ export default function TesteMundoPage() {
 
       {/* BÍBLIA VISUAL — upload de âncoras */}
       <section style={{ border: '1px solid #333', borderRadius: 12, padding: 16, marginBottom: 20 }}>
-        <h2 style={{ fontSize: 15, margin: '0 0 8px' }}>📚 Bíblia visual ({anchors.length} âncoras)</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8, flexWrap: 'wrap' }}>
+          <h2 style={{ fontSize: 15, margin: 0 }}>📚 Bíblia visual ({anchors.length} âncoras)</h2>
+          {anchors.length > 0 && <button onClick={limparAncoras} disabled={busy} style={{ padding: '4px 10px', borderRadius: 8, border: '1px solid #644', background: 'transparent', color: '#d99', cursor: 'pointer', fontSize: 12 }}>limpar âncoras</button>}
+        </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <select value={cat} onChange={(e) => setCat(e.target.value)} style={{ ...btn, padding: '7px 10px' }}>
             {(cats.length ? cats : [cat]).map((c) => <option key={c} value={c}>{c}</option>)}
@@ -104,7 +117,8 @@ export default function TesteMundoPage() {
               <figure key={a.path} style={{ margin: 0, position: 'relative' }}>
                 <img src={a.url} alt={a.categoria} loading="lazy" style={{ width: '100%', borderRadius: 8, display: 'block', aspectRatio: '1', objectFit: 'cover' }} />
                 <figcaption style={{ fontSize: 10, opacity: 0.7, marginTop: 2 }}>{a.categoria}</figcaption>
-                <button onClick={() => apagarAncora(a.path)} disabled={busy} title="apagar" style={{ position: 'absolute', top: 4, right: 4, border: 'none', borderRadius: 6, background: 'rgba(0,0,0,.6)', color: '#f99', cursor: 'pointer', fontSize: 11, padding: '2px 6px' }}>✕</button>
+                <button onClick={() => apagarAncora(a.path)} disabled={busy} title="remover esta âncora"
+                  style={{ position: 'absolute', top: 5, right: 5, border: 'none', borderRadius: 8, background: 'rgba(180,30,30,.92)', color: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 700, padding: '4px 9px' }}>✕ remover</button>
               </figure>
             ))}
           </div>
@@ -135,10 +149,12 @@ export default function TesteMundoPage() {
             <img src={a.url} alt={a.categoria} loading="lazy" style={{ width: '100%', borderRadius: 10, display: 'block', aspectRatio: '9/16', objectFit: 'cover' }} />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginTop: 4 }}>
               <figcaption style={{ fontSize: 11, opacity: 0.6, margin: 0 }}>{a.categoria || '·'}<span style={{ opacity: 0.7 }}> · {fmt(a.ts)}</span></figcaption>
-              <button onClick={() => promover(a.url)} disabled={busy} title={`guardar esta imagem como fundadora na categoria "${cat}" (muda a categoria em cima)`}
-                style={{ flexShrink: 0, border: '1px solid #6a5a2a', borderRadius: 8, background: '#2a2415', color: '#ffd479', cursor: 'pointer', fontSize: 11, padding: '3px 8px' }}>
-                ★ guardar em «{cat}»
-              </button>
+              {promovidas.has(a.url)
+                ? <span style={{ flexShrink: 0, fontSize: 11, color: '#8fd98f', padding: '3px 8px' }}>✓ guardada</span>
+                : <button onClick={() => promover(a.url)} disabled={busy} title={`guardar esta imagem como fundadora na categoria "${cat}" (muda a categoria em cima)`}
+                    style={{ flexShrink: 0, border: '1px solid #6a5a2a', borderRadius: 8, background: '#2a2415', color: '#ffd479', cursor: 'pointer', fontSize: 11, padding: '3px 8px' }}>
+                    ★ guardar em «{cat}»
+                  </button>}
             </div>
           </figure>
         ))}
