@@ -93,6 +93,8 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
 // fugiu para Veneza/solarpunk. Por isso: só cenas humanas, nunca cidade vista de cima.
 const BASE_MUNDO =
   'Documentary photography from an existing civilization. The civilization is real, inhabited and ordinary to its inhabitants. The image must feel OBSERVED rather than designed. ' +
+  'THE PURPOSE OF THIS WORLD: it is a glimpse of a humanity that has AWAKENED beyond survival. Its feeling is UBUNTU — "I am because we are": interdependence, mutual care, people holding and helping one another, responsibility to each other and to the generations still to come; cooperation, creation and shared meaning instead of fear and scarcity. The healing of one person ripples to all. ' +
+  'Show this ONLY through REAL, ORDINARY acts of care and cooperation between people — NEVER as a slogan, a symbol, a glow, a halo or a spiritual pose. ' +
   'The focus is everyday life, material culture and ordinary interactions of a COMPLETE civilization. The scale VARIES: sometimes an intimate human-scale moment (a table, a workshop, a small group), sometimes a WIDE view of a whole city, a port, an ocean, a public square or great infrastructure of this civilization — the full society, not only gardens, terrariums and children. ' +
   'People are mostly busy in ordinary activity (studying, teaching, cultivating, cooking, caring, building, learning, trading); a person may ALSO be alone, paused, apart, or in quiet relationship with another — but NEVER in a spiritual meditation pose and never reverently admiring technology. ' +
   'The people are ETHNICALLY DIVERSE — varied skin tones, features and hair, clearly different peoples together, NEVER all the same ethnicity. ' +
@@ -127,6 +129,11 @@ const CENAS_FUNDADORAS: CenaFund[] = [
   { cena: 'something new EMERGING in this world — a luminous living form rising from clear water, or a grown structure unfurling — witnessed up close by a few people', categoria: 'emergente', tema: 'emergencia', atlas: ['oceano', 'animais', 'natureza'] },
   { cena: 'a person of this world quietly present and awake in the middle of ordinary life — alert and aware, simply observing what is around them (not asleep, not meditating)', categoria: 'consciência · presença', tema: 'consciencia', atlas: ['pessoas', 'roupa', 'cidade'] },
   { cena: 'a person of this world quietly making themselves smaller to fit into a group, shrinking to belong while the group carries on', categoria: 'desencaixe · diminuir-se', tema: 'desencaixe', atlas: ['pessoas', 'roupa', 'interior'] },
+  // ── O PROPÓSITO · Ubuntu, responsabilidade social, despertar coletivo ────────
+  { cena: 'the people of this world gathered around one person in a hard moment, holding and helping them, mutual care, no one left alone', categoria: 'ubuntu · sustentar', tema: 'campo', atlas: ['pessoas', 'roupa', 'interior'] },
+  { cena: 'the community of this world deciding together in a wide circle, many voices becoming one, no one placed above another', categoria: 'decisão em comum', tema: 'campo', atlas: ['pessoas', 'roupa', 'arquitectura'] },
+  { cena: 'one person of this world who has clearly changed now helping and steadying another, the change passing outward from person to person', categoria: 'a cura que não fica · ondas', tema: 'campo', atlas: ['pessoas', 'roupa', 'interior'] },
+  { cena: 'adults of this world tending and planting something living for people not yet born, an act of care for the generations to come', categoria: 'responsabilidade · futuro', tema: 'campo', atlas: ['pessoas', 'natureza', 'roupa'] },
   // ── TEXTURA DO MUNDO (variedade) ────────────────────────────────────────────
   { cena: 'a crowded bright market of this world, many people trading goods and knowledge, dense material culture', categoria: 'mercado', tema: 'comunidade', atlas: ['mercado', 'pessoas', 'objectos'] },
   { cena: 'a living library of this world, adults consulting living archives among tall living shelves', categoria: 'biblioteca', tema: 'aprendizagem', atlas: ['biblioteca', 'interior', 'pessoas'] },
