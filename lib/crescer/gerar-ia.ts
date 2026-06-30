@@ -9,6 +9,7 @@
 
 import { CRESCER, LIVRO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
 import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
+import { lenteDaTransicao } from '@/lib/knowledge/transicao';
 import { cenaConstituicao, cenaWorldbuilding } from './mundo-visual';
 import { limparTravessoes } from '@/lib/texto';
 
@@ -54,13 +55,15 @@ export async function gerarPecaCrescer(
 
 A VOZ (decisão de marca, inviolável): ${CRESCER.voz}
 
+A ESPINHA DESTA CONTA (a lente que organiza TUDO, mais importante do que qualquer fonte abaixo; PROIBIDO nomeá-la no texto): ${lenteDaTransicao(seed)} Esta peça é uma janela para ESSE movimento. Tudo o resto (livro, sinais, profundidade) serve para o tornar concreto e sentido; nunca o substitui.
+
 FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomeá-lo, citar autores, áreas, véus ou usar jargão no texto): a Vivianne vem destas áreas, ${CRESCER.areas.join(', ')}. Âncoras: ${CRESCER.ancoras.join(' · ')}.
 
 A FONTE PROFUNDA é o livro DELA, "${LIVRO.titulo}". O arco dos sete movimentos (o que cada um ENCOBRE e o que REVELA, NUNCA nomear no texto): ${LIVRO.veus.map((v) => `${v.nome} (encobre ${v.encobre}; revela que ${v.revela})`).join(' · ')}. As correntes que atravessam tudo: ${LIVRO.correntes.join(' · ')}.
 
 O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser inteiro; a dor de deixar de caber num lugar que foi bom, sem que ninguém tenha feito nada de errado). Os sinais, cada um com a sua confissão sentida (não os nomeies como lista; vive-os): ${SINAIS_DESENCAIXE.map((s) => `${s.nome} ("${s.essencia}")`).join(' · ')}.
 
-PROFUNDIDADE (a base de conhecimento dela, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 3)}
+PROFUNDIDADE (UM foco só, ao serviço do movimento acima, para não diluir; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 1)}
 
 O que SAI é a vida real, em linguagem de toda a gente (NUNCA teoria, NUNCA o nome de um véu, autor ou tradição), MAS tem de CARREGAR a ideia ESPECÍFICA e não-óbvia deste saber: um insight com textura e profundidade, que a maioria nunca articulou assim, que SÓ este mundo vê. PROIBIDA a frase genérica de autoajuda que poderia vir de qualquer página motivacional sem este conhecimento: se o que escreveste serviria a qualquer conta, deita fora e vai mais fundo (ao mecanismo concreto, à camada por baixo, ao detalhe que ninguém diz). Específico e fundo, nunca universal e raso.
 ${veia ? `
@@ -79,6 +82,7 @@ A VOZ DE HOJE (${voz.label}): ${voz.instrucao}
 REGRAS DE VOZ (duras):
 - DIGNIDADE (inviolável): a peça abre SEMPRE com uma FACA (a 1.ª linha pára o scroll), nunca um arranque morno ou descritivo. O texto é forte e claro do princípio ao fim, nunca difuso, nunca encheção para ocupar slides. Se não houver uma faca e uma verdade que valham, escreve menos, nunca enches.
 - NÃO-GENÉRICO (teste obrigatório antes de devolver): lê a frase e pergunta "isto poderia estar em qualquer página de autoajuda, sem o conhecimento dela?". Se sim, FALHOU: reescreve com a especificidade e a profundidade do saber (o mecanismo concreto, a camada por baixo, a verdade exata que a maioria não vê). A peça tem de ser inconfundivelmente DESTE mundo, não um truísmo bonito.
+- O MOVIMENTO (teste obrigatório): a peça tem de fazer SENTIR a passagem indicada na ESPINHA (o pólo antigo a agarrar, a frincha do novo a abrir). Se a peça não carrega esse movimento, FALHOU: não é um conselho nem uma frase bonita solta, é uma janela para essa travessia. NUNCA nomeies os pólos nem a teoria; sai em cena de vida.
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
 - SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
 - DIRETA: nomeia a cena concreta que a pessoa vive. A pessoa tem de pensar "isto sou eu". Nada de enigmas a decifrar, nada de títulos-conceito herméticos, nada de metáfora obscura.

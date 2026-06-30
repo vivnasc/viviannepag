@@ -13,7 +13,7 @@ export type Escala = 'micro' | 'intima' | 'social' | 'ecologica' | 'civilizacion
 // fotografia documental/antropológica, gente diversa, realismo cinematográfico — e
 // NÃO com "consciência/transcendência/luz da própria matéria".
 export const ESTILO_FOTO =
-  'NATURE & FIELD DOCUMENTARY PHOTOGRAPHY of a PARALLEL BIOSPHERE — cinematic realism, shot on medium format, shallow depth of field, ultra-detailed, candid, believable, OBSERVED not designed; ' +
+  'NATURE & FIELD DOCUMENTARY PHOTOGRAPHY of a PARALLEL BIOSPHERE, shot BY DAY in BRIGHT CLEAR NATURAL DAYLIGHT — cinematic realism, medium format, SHARP focus and crisp fine detail throughout (NOT blurry, NOT a heavy shallow-depth blur), ultra-detailed, candid, believable, OBSERVED not designed; ' +
   'when people appear: ETHNICALLY DIVERSE real humans with NORMAL human bodies — NO physical mutation, NO alien features, NO vegetal hair, NO strange eyes, NO skin patterns. ' +
   'What is DIFFERENT is NEVER their anatomy but their WAY OF BEING: the calm presence of a nervous system that is not in survival, an unfamiliar posture and body language, their own customs and gestures, and above all WHAT THEY WEAR (garments that are grown/cultivated rather than woven, unfamiliar yet clearly human clothing, adornments worn naturally) and WHAT THEY ARE DOING; natural daylight, real shadow';
 export const ANTI_ESTETICA =
@@ -28,15 +28,17 @@ export const BIOTECH =
   'THE TRUTH OF THIS WORLD: it is NOT an industrial civilization and NOT advanced machine technology. It is a PARALLEL BIOSPHERE — Earth after millions of years of evolution in ANOTHER DIRECTION, where evolution selected for BEAUTY, DIVERSITY and SYMBIOSIS as survival strategies. EVOLVED BIOLOGY, not machines: ' +
   'translucent trees, flexible crystalline leaves, flowers that release luminous pollen, architectural lichens, suspended aquatic gardens; iridescent-membrane birds, bioluminescent migrating whales, giant pollinators, translucent tree-amphibians; rivers of translucent water carrying living seeds, seas under several moons. ' +
   'Rivers, seas, forests, moons, animals and people are all part of the SAME evolutionary language. Recognizable as Earth-life, yet clearly another branch of the tree of life. It must be at once HABITABLE and IMPOSSIBLE. ' +
-  'These named examples are only the SPIRIT/register, NOT a fixed menu: INVENT new plants, animals, rivers, skies and forms freely in this register; never limit yourself to a list.';
+  'These named examples are only the SPIRIT/register, NOT a fixed menu: INVENT new plants, animals, rivers, skies and forms freely in this register; never limit yourself to a list. ' +
+  'Photograph this world BY DAY in bright clear light — even the luminous/iridescent biology is seen in DAYLIGHT, not at night; a daytime scene, not a dark one.';
 // O MANIFESTO que muda o comportamento do modelo (insistência da Vivianne+ChatGPT):
 // fotografia OBSERVADA, evidência de vida, não símbolo desenhado.
 export const MANIFESTO_FOTO =
   'This is NOT concept art. This is DOCUMENTARY PHOTOGRAPHY from an EXISTING civilization: the photographer is visiting a real place where real people live and work. The image must feel OBSERVED, not designed — evidence of life, not a symbol. In the spirit of National Geographic photography, the ecological richness of Studio Ghibli, and the cinematic realism of Denis Villeneuve (people busy, material culture, tools, professions, ecosystems, activities). ';
 // paleta GROUNDED (cor natural e variada, com sombra e contraste reais), não o branco-e-dourado.
 export const PALETA_MUNDO =
-  'rich NATURAL colour with real daylight and real shadow and contrast, varied materials and surfaces; ' +
-  'avoid a uniform white-and-gold or all-beige look; not washed out, not glowing, ultra-high resolution and sharp';
+  'BRIGHT NATURAL DAYLIGHT, well-exposed and CLEAR (like a real outdoor or skylit photograph), rich VIVID natural colour including blues, greens and water; ' +
+  'crisp ULTRA-HIGH RESOLUTION, sharp focus, fine detail; ' +
+  'NOT dark, NOT murky, NOT underexposed, NOT foggy, NOT hazy; avoid a uniform white-and-gold or beige look and avoid a golden spiritual glow';
 
 export const EVITAR_MUNDO =
   'Rivers, seas, birds, plants, animals and people are WELCOME and important — but NEVER the ordinary Earth ones: they must clearly belong to THIS other biosphere (evolved differently). ' +
