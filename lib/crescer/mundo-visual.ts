@@ -68,62 +68,82 @@ const idx = (n: number, len: number) => ((n % len) + len) % len;
 // geração segue a CADEIA: frase -> função -> artefacto/organismo -> evento -> imagem.
 // O ficheiro é enriquecido/calibrado fora (ChatGPT + geração); aqui só se lê. ───
 import banco from '@/worldbuilding/banco_visual.json';
-interface Artefacto { nome: string; funcao: string; descricao: string; quando_falha: string; evento_visual: string; emocao_associada?: string; emocao_predominante?: string; simbolo_visual?: string; escala_preferencial?: string }
-interface Organismo { nome: string; reino: string; funcao: string; comportamento: string; equivalente_terrestre: string; simbolo_visual?: string; escala_preferencial?: string; emocao_predominante?: string }
+interface Sujeito {
+  nome: string; funcao: string; descricao?: string; comportamento?: string; reino?: string;
+  evento_visual?: string; quando_falha?: string; simbolo_visual?: string; escala_preferencial?: string;
+  emocao_predominante?: string; emocao_associada?: string; equivalente_terrestre?: string; categoria_antropologica?: string;
+  nao_e?: string[];
+}
 interface Evento { evento: string; significado: string; categoria: string }
 interface Exemplar { funcao: string; pergunta: string; prompt_en: string }
-const ARTEFACTOS = (banco.ARTEFACTOS ?? []) as Artefacto[];
-const ORGANISMOS = (banco.ORGANISMOS ?? []) as Organismo[];
+// As coleções por TIPO (uma civilização vive de artefactos, seres, rituais, instituições,
+// profissões, tecnologias e espaços — não só de objectos). tipo_en alimenta o prompt.
+const TIPOS: { chave: string; tipo_en: string }[] = [
+  { chave: 'ARTEFACTOS', tipo_en: 'a personal ARTIFACT / piece of material culture' },
+  { chave: 'ORGANISMOS', tipo_en: 'a LIVING ORGANISM of this world' },
+  { chave: 'RITUAIS', tipo_en: 'a RITUAL / social practice' },
+  { chave: 'INSTITUICOES', tipo_en: 'an INSTITUTION / communal place' },
+  { chave: 'PROFISSOES', tipo_en: 'a PROFESSION / someone at their civilizational work' },
+  { chave: 'TECNOLOGIAS', tipo_en: 'a living social TECHNOLOGY' },
+  { chave: 'ESPACOS', tipo_en: 'a SPACE of this civilization' },
+];
+type SujeitoTipado = Sujeito & { tipo_en: string };
+const SUJEITOS: SujeitoTipado[] = TIPOS.flatMap(({ chave, tipo_en }) =>
+  (((banco as Record<string, unknown>)[chave] ?? []) as Sujeito[]).map((s) => ({ ...s, tipo_en })),
+);
 const EVENTOS_BANCO = (banco.EVENTOS ?? []) as Evento[];
 const EXEMPLARES = (banco.EXEMPLARES ?? []) as Exemplar[];
 const FUNCOES_CIV = (banco.FUNCOES_CIVILIZACIONAIS ?? FUNCOES) as string[];
 
+// PROIBIDO o vocabulário visual da auto-ajuda/publicidade (metáfora). É o que faz o
+// motor regredir para luz/portal/canyon/névoa. Global, sempre no prompt.
+const NAO_E_GLOBAL =
+  'STRICTLY FORBIDDEN (this is self-help / advertising / sci-fi visual language, it destroys the world): abstract light, glow, energy, particles, sparkles, ' +
+  'a portal, a doorway, a vortex, mist, fog, a canyon, a glowing horizon, a vertical light beam, a tiny person before a giant abstract phenomenon, ' +
+  'a beautiful landscape, a forest/valley/river vista, a metaphor of any kind. If the image reads as a METAPHOR ("what does this mean?"), it FAILED. ' +
+  'It must read as an OBJECT/BEING/RITUAL of a real civilization ("what is this? why does it exist? who uses it? what happened here?").';
+
 export interface CenaVisual { escala: Escala; funcao: string; pergunta: string; categoria: string; evento: string; briefing: string }
 
-// Escolhe a cena segundo a constituição (o seed roda categoria/escala/função/pergunta/evento).
-// O SUJEITO é cultura material (artefacto/organismo) + o EVENTO que lhe acontece — NUNCA a
-// paisagem. A frase traduz-se no evento (não num cenário/humor). É a resposta à pergunta
-// "como tornar isto antropologicamente impossível", não "como tornar isto mais bonito".
+// CADEIA OBRIGATÓRIA (decisão da Vivianne): frase -> domínio humano -> função civilizacional
+// -> SUJEITO CONCRETO (artefacto|organismo|ritual|instituição|profissão|tecnologia|espaço)
+// -> evento -> imagem. NUNCA frase->metáfora->paisagem. O equivalente_terrestre força o
+// modelo a pensar "que problema humano resolve" em vez de "o que simboliza".
 export function cenaConstituicao(seed = 0): CenaVisual {
-  // CADEIA: função -> artefacto/organismo (do banco, da mesma função) -> evento -> imagem.
   const funcao = FUNCOES_CIV[idx(seed, FUNCOES_CIV.length)];
-  // sujeito: ~70% artefacto (cultura material), ~30% organismo (biologia). Da mesma
-  // função quando há; senão, de todo o banco. É o sujeito que enche a imagem.
-  const arteF = ARTEFACTOS.filter((a) => a.funcao === funcao);
-  const orgF = ORGANISMOS.filter((o) => o.funcao === funcao);
-  const usarOrg = seed % 10 >= 7 && (orgF.length || ORGANISMOS.length);
-  let sujeito: string, evento: string, categoria: string, escala: Escala, emocao = '', enquadramento = '';
-  if (usarOrg) {
-    const o = (orgF.length ? orgF : ORGANISMOS)[idx(seed, (orgF.length ? orgF : ORGANISMOS).length)];
-    const simbolo = o.simbolo_visual ?? '';
-    sujeito = `the "${o.nome}"${simbolo ? ` (visual form: ${simbolo})` : ''} — ${o.comportamento}, a living being of this world [reino: ${o.reino}], NOT a terrestrial animal`;
-    const ev = EVENTOS_BANCO[idx(seed * 5 + 3, EVENTOS_BANCO.length)];
-    evento = ev ? `${ev.evento} (${ev.significado})` : 'behaves in a way that mirrors the sentence';
-    emocao = o.emocao_predominante ?? '';
-    enquadramento = o.escala_preferencial ?? '';
-    escala = 'ecologica'; categoria = 'especie';
-  } else {
-    const a = (arteF.length ? arteF : ARTEFACTOS)[idx(seed, (arteF.length ? arteF : ARTEFACTOS).length)] as Artefacto | undefined;
-    const simbolo = a?.simbolo_visual ?? '';
-    sujeito = a ? `the "${a.nome}"${simbolo ? ` (visual form: ${simbolo})` : ''} — ${a.descricao}, an item of this civilization's MATERIAL CULTURE (functional equivalent, never a terrestrial object)` : 'a single living instrument of this civilization';
-    evento = a ? `${a.evento_visual} (${a.quando_falha})` : 'undergoes the event that mirrors the sentence';
-    emocao = a?.emocao_predominante ?? a?.emocao_associada ?? '';
-    enquadramento = a?.escala_preferencial ?? '';
-    escala = 'intima'; categoria = 'objecto';
-  }
+  const daFuncao = SUJEITOS.filter((s) => s.funcao === funcao);
+  const pool = daFuncao.length ? daFuncao : SUJEITOS;
+  const s = pool.length ? pool[idx(seed, pool.length)] : null;
+
+  const simbolo = s?.simbolo_visual ?? '';
+  const corpo = s?.descricao ?? s?.comportamento ?? '';
+  const sujeito = s
+    ? `${s.tipo_en} of this civilization: the "${s.nome}"${simbolo ? ` (visual form: ${simbolo})` : ''} — ${corpo}${s.reino ? ` [reino: ${s.reino}]` : ''}`
+    : 'a concrete artifact, organism or ritual of this civilization';
+  const evDoBanco = EVENTOS_BANCO[idx(seed * 5 + 3, EVENTOS_BANCO.length)];
+  const evento = s?.evento_visual
+    ? `${s.evento_visual}${s.quando_falha ? ` (${s.quando_falha})` : ''}`
+    : evDoBanco ? `${evDoBanco.evento} (${evDoBanco.significado})` : 'undergoes the event that mirrors the sentence';
+  const emocao = s?.emocao_predominante ?? s?.emocao_associada ?? '';
+  const enquadramento = s?.escala_preferencial ?? '';
+  const equivalente = s?.equivalente_terrestre ?? '';
+  const catAntropo = s?.categoria_antropologica ?? '';
+  const naoEItem = s?.nao_e?.length ? ` Also avoid: ${s.nao_e.join(', ')}.` : '';
   const exemplar = EXEMPLARES.find((e) => e.funcao === funcao && e.prompt_en?.trim());
   const pergunta = exemplar?.pergunta || PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
+
   const briefing =
     `ETHNOGRAPHY of a civilization that NEVER existed — a National Geographic photograph from the year 2300 of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
-    `Build the image as a CHAIN, never sentence->image: SENTENCE -> CIVILIZATIONAL FUNCTION -> ARTIFACT/ORGANISM -> EVENT -> image. ` +
-    `CIVILIZATIONAL FUNCTION: ${funcao}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
-    `THE SUBJECT (fills the frame, intimate and close, the place is NEVER the subject): ${sujeito}. ` +
-    `THE EVENT (the whole point — the civilizational equivalent of the sentence's emotional movement): it ${evento}. Choose/adjust the event so it mirrors THIS exact sentence. ` +
+    `Build the image strictly as a CHAIN, never sentence->metaphor->image: SENTENCE -> HUMAN DOMAIN -> CIVILIZATIONAL FUNCTION -> CONCRETE SUBJECT -> EVENT -> image. ` +
+    `CIVILIZATIONAL FUNCTION: ${funcao}${catAntropo ? ` (${catAntropo})` : ''}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
+    `THE SUBJECT (fills the frame, intimate and close; the place is NEVER the subject): ${sujeito}. ` +
+    (equivalente ? `IT IS THE CIVILIZATIONAL EQUIVALENT OF: ${equivalente} — i.e. it solves that exact HUMAN PROBLEM (think "what need does this meet", never "what does this symbolize"). ` : '') +
+    `THE EVENT (the whole point — this civilization's equivalent of the sentence's emotional movement): it ${evento}. Adjust the event so it mirrors THIS exact sentence. ` +
     (enquadramento ? `FRAMING/SCALE: ${enquadramento}. ` : '') +
-    (emocao ? `PREDOMINANT EMOTION (let it shape the composition and light): ${emocao}. ` : '') +
-    `If a person appears they are in RELATION with this artifact/organism, which stays the true subject. Translate the sentence into THIS EVENT, never into a mood or a landscape. ` +
-    (exemplar ? `REFERENCE of the right level for this function (compose in this spirit, do not copy literally): ${exemplar.prompt_en} ` : '') +
-    `${PALETA_MUNDO}. ${EVITAR_MUNDO}. ` +
-    `TEST: without a caption the image must make someone ask "what happened here, in what civilization?", never "where is this place?".`;
-  return { escala, funcao, pergunta, categoria, evento, briefing };
+    (emocao ? `PREDOMINANT EMOTION (shapes composition and light): ${emocao}. ` : '') +
+    `If a person appears they are in RELATION with this subject, which stays the true subject. ` +
+    (exemplar ? `REFERENCE of the right level (compose in this spirit, do not copy literally): ${exemplar.prompt_en} ` : '') +
+    `${PALETA_MUNDO}. ${EVITAR_MUNDO} ${NAO_E_GLOBAL}${naoEItem} ` +
+    `BRUTAL TEST before you finish: if the caption were removed, would someone ask "what does this MEAN?" (FAIL) or "what IS this object/being/ritual, who uses it, what happened?" (PASS)? Only the second is acceptable.`;
+  return { escala: s?.reino ? 'ecologica' : 'intima', funcao, pergunta, categoria: s?.tipo_en ?? 'objecto', evento, briefing };
 }
