@@ -13,8 +13,28 @@ export const PALETA_MUNDO =
   'bright, luminous, crystal-clear, razor-sharp ultra-high resolution; no haze, no fog, no murk, no heavy shadows';
 
 export const EVITAR_MUNDO =
+  'The SUBJECT is NEVER a landscape and NEVER a lone human silhouette standing in scenery; ' +
+  'NO tropical valley / forest / river / canyon vista, NO Avatar / fantasy / resort / book-cover look; the place is NEVER the point. ' +
   'NEVER a terrestrial object nor a futuristic version of our things; NEVER ordinary trees, birds, flowers, dogs, hands, houses, rivers or cities; ' +
   'NEVER cyberpunk, neon, robots, holograms, ships, screens; NEVER monumentality as the default; no text, no letters, no watermark, no logos';
+
+// EVENTOS — o que ACONTECE ao artefacto/organismo. É o evento (não a paisagem) que
+// conta a ideia: o equivalente civilizacional do movimento da frase. O modelo escolhe
+// o que melhor espelha a frase; estes são sementes/exemplos.
+export const EVENTOS = [
+  'is dissolving and coming apart in the hands',
+  'one of its lights has gone dark while all the others stay luminous',
+  'no longer responds to or recognizes the person it belonged to',
+  'is sealing and closing shut',
+  'is unfurling and opening for the first time',
+  'is being gently set down and released',
+  'has gone quiet and stopped glowing',
+  'is splitting along a living seam',
+  'is being passed from older hands to younger hands',
+  'is drifting and stepping away for the first time',
+  'is changing colour as an inner state shifts',
+  'is being slowly rewoven and regrown',
+];
 
 export interface CategoriaVisual { id: string; peso: number; escalas: Escala[]; dica: string }
 
@@ -45,19 +65,27 @@ export const PERGUNTAS = [
 const RODA: CategoriaVisual[] = CATEGORIAS.flatMap((c) => Array.from({ length: Math.max(1, Math.round(c.peso / 5)) }, () => c));
 const idx = (n: number, len: number) => ((n % len) + len) % len;
 
-export interface CenaVisual { escala: Escala; funcao: string; pergunta: string; categoria: string; briefing: string }
+export interface CenaVisual { escala: Escala; funcao: string; pergunta: string; categoria: string; evento: string; briefing: string }
 
-// Escolhe a cena segundo a constituição (o seed roda categoria/escala/função/pergunta).
+// Escolhe a cena segundo a constituição (o seed roda categoria/escala/função/pergunta/evento).
+// O SUJEITO é cultura material (artefacto/organismo) + o EVENTO que lhe acontece — NUNCA a
+// paisagem. A frase traduz-se no evento (não num cenário/humor). É a resposta à pergunta
+// "como tornar isto antropologicamente impossível", não "como tornar isto mais bonito".
 export function cenaConstituicao(seed = 0): CenaVisual {
   const cat = RODA[idx(seed, RODA.length)];
   const escala = cat.escalas[idx(seed, cat.escalas.length)];
   const funcao = FUNCOES[idx(seed * 3 + 1, FUNCOES.length)];
   const pergunta = PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
+  const evento = EVENTOS[idx(seed * 5 + 3, EVENTOS.length)];
   const briefing =
-    `ETHNOGRAPHY of a civilization that NEVER existed — like a National Geographic photograph from the year 2300 of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
-    `SCALE: ${escala} (keep it intimate and close unless civilizational). CIVILIZATIONAL FUNCTION: ${funcao}. THE ANTHROPOLOGICAL QUESTION it answers: ${pergunta} nesta civilização. ` +
-    `SUBJECT: ${cat.dica}. People live WITH this world, not upon it (symbiotic relations, living instruments, conscious materials). ` +
+    `ETHNOGRAPHY of a civilization that NEVER existed — a National Geographic photograph from the year 2300 of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
+    `This image answers an ANTHROPOLOGICAL QUESTION through MATERIAL CULTURE, never through scenery. ` +
+    `SCALE: ${escala} (intimate and close; the place is never the subject). CIVILIZATIONAL FUNCTION: ${funcao}. QUESTION it answers: ${pergunta} nesta civilização. ` +
+    `THE SUBJECT (this is the whole image, framed close): ${cat.dica}. ` +
+    `THE EVENT (the point of the image, the civilizational equivalent of the sentence's emotional movement): the subject ${evento} — but choose the precise event that mirrors the sentence. ` +
+    `If a person appears, they are in RELATION with this artifact/organism, which stays the true subject; people live WITH this world, not upon it. ` +
+    `Translate the FEELING of the sentence into THIS event on the artifact/organism, not into a mood or a landscape. ` +
     `${PALETA_MUNDO}. ${EVITAR_MUNDO}. ` +
-    `TEST: without any caption the image must make someone ask "what civilization is this?", never "where is this place?".`;
-  return { escala, funcao, pergunta, categoria: cat.id, briefing };
+    `TEST: without any caption the image must make someone ask "what happened here, in what civilization?", never "where is this place?".`;
+  return { escala, funcao, pergunta, categoria: cat.id, evento, briefing };
 }
