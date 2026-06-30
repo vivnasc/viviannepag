@@ -60,11 +60,33 @@ function chaveAparato(u) {
   return u.titulo;
 }
 
+// Respiro: parte parágrafos muito longos ("rio sem fim") em dois, na fronteira
+// de frase mais próxima do meio. Não muda uma palavra; só dá ar à leitura.
+function respirar(paras, limite = 105) {
+  const out = [];
+  for (const p of paras) {
+    const palavras = p.split(/\s+/).length;
+    if (palavras <= limite) { out.push(p); continue; }
+    const frases = p.split(/(?<=[.!?])\s+/);
+    if (frases.length < 4) { out.push(p); continue; }
+    let melhor = 1, dist = 1e9, corre = 0; const meio = palavras / 2;
+    for (let i = 0; i < frases.length - 1; i++) {
+      corre += frases[i].split(/\s+/).length;
+      const d = Math.abs(corre - meio);
+      if (d < dist) { dist = d; melhor = i + 1; }
+    }
+    out.push(frases.slice(0, melhor).join(' ').trim());
+    // a 2.ª metade pode ainda ser longa: parte recursivamente
+    respirar([frases.slice(melhor).join(' ').trim()], limite).forEach((q) => out.push(q));
+  }
+  return out;
+}
+
 const unidades = parseManuscrito().map((u) => {
   const a = aparato[chaveAparato(u)] || {};
   const o = { tipo: u.tipo, kicker: u.kicker, titulo: u.titulo };
   if (a.epigrafe) o.epigrafe = a.epigrafe;
-  if (u.texto && u.texto.length) o.texto = u.texto;
+  if (u.texto && u.texto.length) o.texto = respirar(u.texto);
   if (a.ideia) o.ideia = a.ideia;
   if (a.dica) o.dica = a.dica; // nota prática (opcional, por capítulo)
   if (a.pergunta) o.pergunta = a.pergunta;
@@ -75,7 +97,7 @@ const livro = {
   titulo: 'A Grande Transição',
   subtitulo: 'Introdução às Ciências da Consciência Emergente',
   selo: 'Ciências da Consciência Emergente',
-  autora: 'Vivianne Saraiva',
+  autora: 'Vivianne dos Santos',
   unidades,
 };
 

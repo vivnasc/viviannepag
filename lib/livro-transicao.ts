@@ -9,7 +9,7 @@ export const LIVRO_TRANSICAO = {
   titulo: 'A Grande Transição',
   sub: 'Introdução às Ciências da Consciência Emergente',
   selo: 'Ciências da Consciência Emergente',
-  autora: 'Vivianne Saraiva',
+  autora: 'Vivianne dos Santos',
 };
 
 // Estética comum (do manifesto: Dune, Arrival, Interstellar, Avatar, Moebius).

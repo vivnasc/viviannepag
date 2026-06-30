@@ -3,13 +3,13 @@ projecto: Ciências da Consciência Emergente
 obra: A Grande Transição
 parte: Prólogo e Introdução
 versao: 0.1
-autor: Vivianne Saraiva
+autor: Vivianne dos Santos
 ---
 
 # A Grande Transição
 ## Introdução às Ciências da Consciência Emergente
 
-*Vivianne Saraiva*
+*Vivianne dos Santos*
 
 ---
 
