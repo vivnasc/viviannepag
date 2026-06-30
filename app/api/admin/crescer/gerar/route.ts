@@ -41,9 +41,11 @@ export async function POST(req: Request) {
     tematicas?: string[]; formatos?: string[]; visuais?: string[];
     quantos?: number; surpreender?: boolean; tema?: string; voz?: string;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string };
-    efeito?: string;
+    efeito?: string; saida?: 'reel' | 'carrossel';
   };
   const voz = (getVoz(body.voz ?? '') ? body.voz : 'direta') as VozId;
+  // ela escolhe COMO sai: reel (defeito, mais alcance) ou carrossel. reel=true => sempre reel.
+  const ehReel = body.saida !== 'carrossel';
 
   const temasSel = (body.tematicas ?? []).filter((t) => getTematica(t)) as TematicaId[];
   const fmtsSel = (body.formatos ?? []).filter((f) => getFormato(f)) as FormatoId[];
@@ -153,9 +155,8 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        // reel:true => peça NOVA sai sempre como REEL (decisão jun 2026: carrosséis têm
-        // menos alcance). As peças antigas, sem esta marca, ficam como estão (carrossel).
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz, reel: true } },
+        // reel: escolha dela ao gerar (reel por defeito = mais alcance; carrossel quando quiser).
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz, reel: ehReel } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

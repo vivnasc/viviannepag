@@ -392,6 +392,7 @@ export default function CrescerPage() {
   const [fmts, setFmts] = useState<Set<FormatoId>>(new Set(['frase']));
   const [vis, setVis] = useState<Set<VisualId>>(new Set(['pessoas']));
   const [voz, setVoz] = useState<VozId>('direta'); // a voz do alcance, por defeito
+  const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
   const [quantos, setQuantos] = useState(2);
   const [surpreender, setSurpreender] = useState(false);
   const [tema, setTema] = useState('');
@@ -435,7 +436,7 @@ export default function CrescerPage() {
       const r = await fetch('/api/admin/crescer/gerar', {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz,
+          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida,
           tema: tema.trim() || undefined, tipografia: padrao.tipografia, efeito: padrao.efeito,
         }),
       });
@@ -444,7 +445,7 @@ export default function CrescerPage() {
       else setMsg(`${j.gerados} peça(s) gerada(s)${j.detalhe ? ` (aviso: ${j.detalhe})` : ''}. Revê em baixo, afina e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); } finally { setBusy(false); }
-  }, [busy, surpreender, temas, fmts, vis, voz, quantos, tema, padrao, recarregar]);
+  }, [busy, surpreender, temas, fmts, vis, voz, saida, quantos, tema, padrao, recarregar]);
 
   // acção numa peça (rota genérica)
   const acao = useCallback(async (slug: string, url: string, body: Record<string, unknown>, aviso: string, ok: string, fechar = true) => {
@@ -576,6 +577,12 @@ export default function CrescerPage() {
 
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">voz <span className="opacity-50">(a direta é a do alcance)</span></p>
           <div className="flex flex-wrap gap-1.5 mb-3">{VOZES.map((v) => <Chip key={v.id} on={voz === v.id} onClick={() => setVoz(v.id)} title={v.descricao}><span className="mr-1">{v.emoji}</span>{v.label}</Chip>)}</div>
+
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">como sai <span className="opacity-50">(o reel espalha-se mais)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <Chip on={saida === 'reel'} onClick={() => setSaida('reel')} title="vídeo vertical, o texto aparece ritmado por cima da imagem (mais alcance)"><span className="mr-1">🎬</span>reel</Chip>
+            <Chip on={saida === 'carrossel'} onClick={() => setSaida('carrossel')} title="telas 4:5 que se deslizam, texto estático que se lê"><span className="mr-1">🎠</span>carrossel</Chip>
+          </div>
 
           <div className="flex flex-wrap items-center gap-2">
             <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional)" className="flex-1 min-w-[180px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />
