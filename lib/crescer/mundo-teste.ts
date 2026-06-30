@@ -44,7 +44,7 @@ const VIDA =
   'Abundance is normal here, so life expands into CURIOSITY and WONDER, never into survival or empty serenity. Movement, abundance and many things happening at once. ';
 // ── FOTOGRAFIA: cinematográfica, fotorrealista, luminosa, NÍTIDA, ornada ────────
 const FOTOGRAFIA =
-  'A richly detailed, LUMINOUS, ORNATE, CINEMATIC PHOTOREAL image — believable and real, like a frame from a high-budget film about an advanced peaceful biocivilization; exquisite fine detail throughout. ' +
+  'A richly detailed, LUMINOUS, ORNATE, CINEMATIC PHOTOREAL image — a REAL PHOTOGRAPH (NOT a painting, NOT concept art, NOT a matte painting, NOT fantasy art), believable and real, like a documentary frame of an advanced peaceful biocivilization; exquisite fine detail throughout. ' +
   'CLEAR, BRIGHT, LUMINOUS DAYLIGHT, jewel-like clarity, every detail visible, high LOCAL contrast, luminous WITHOUT darkness; TACK-SHARP, deep focus, crisp edge to edge; NOT soft, NOT blurry, NOT dreamy, NOT moody, NOT golden-hour haze, NOT god-rays. ' +
   'HIGH DENSITY of visual information: objects, materials, instruments, species, ornate architecture, people busy. ';
 const REGRA =
@@ -52,7 +52,12 @@ const REGRA =
 const BAN =
   'BANNED: a rustic / Mediterranean / Moroccan / North-African / tropical / adobe village; dusty mud paths; peasant, poor or ragged people; shirtless boys; a National-Geographic ethnographic village; a lone pensive person in foliage; empty contemplative serenity; spiritual/wellness/retreat/ashram aesthetic; golden spiritual glow; penumbra-as-darkness; scarcity, poverty, primitive survival; cyberpunk, neon, robots, screens. ';
 
-const ABERTURA = `${FOTOGRAFIA}${MUNDO}${REFINAMENTO}${VIDA}${BAN}`;
+// PESSOAS — a correção do "jardim paradisíaco vazio": gente é o SUJEITO, não o cenário.
+const PESSOAS =
+  'THIS IMAGE IS FULL OF PEOPLE — the FOREGROUND is filled with MANY people of this world, close, prominent and clearly visible, busy doing things together; PEOPLE ARE THE SUBJECT, not the scenery. ' +
+  'An empty landscape, an empty garden or a beautiful scene with NO people is WRONG and BANNED for this image. ';
+
+const ABERTURA = `${FOTOGRAFIA}${PESSOAS}${MUNDO}${REFINAMENTO}${VIDA}${BAN}`;
 
 // 5 modos, TODOS povoados/vivos/em movimento. O lugar vem dos bancos; o ADN daqui.
 export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string } {
@@ -62,11 +67,11 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
     const cena = pick(CENAS, seed);
     const verbo = cena?.acao || pick(VERBOS, seed * 7 + 1) || 'trade, play and gather';
     categoria = cena?.nome ?? 'vida em comunidade';
-    briefing = `${ABERTURA}SCENE — a CROWDED, BUSY, JOYFUL public place of this world (a market, a festival, a gathering) full of MANY people of many cultures doing many things at once: ${cena?.descricao ?? 'trading, cooking, playing, making music'}, busy to ${verbo}. Movement, noise, abundance, children and animals, depth of activity. ${REGRA}`;
+    briefing = `${ABERTURA}SCENE — FOREGROUND FILLED WITH PEOPLE: a CROWDED, BUSY, JOYFUL public place of this world (a market, a festival, a gathering), MANY people of many cultures close in the foreground doing many things at once: ${cena?.descricao ?? 'trading, cooking, playing, making music'}, busy to ${verbo}. Movement, noise, abundance, children and animals; NOT an empty garden. ${REGRA}`;
   } else if (m === 1) { // instituição / laboratório / oficina em plena atividade
     const inst = pick(INSTITUICOES, seed) ?? pick(PROFISSOES, seed);
     categoria = inst?.nome ?? 'instituição em uso';
-    briefing = `${ABERTURA}SCENE — a working INSTITUTION / LAB / WORKSHOP of this world in FULL busy activity: the "${inst?.nome ?? 'institution'}"${inst?.equivalente_terrestre ? ` (their ${inst.equivalente_terrestre})` : ''} — ${inst?.descricao ?? 'a living library, a laboratory, a workshop'}. Many people working, fascinated, building, studying; instruments, tools and biological technology IN USE; dense with material culture. ${REGRA}`;
+    briefing = `${ABERTURA}SCENE — FOREGROUND FILLED WITH PEOPLE working: a working INSTITUTION / LAB / WORKSHOP of this world in FULL busy activity: the "${inst?.nome ?? 'institution'}"${inst?.equivalente_terrestre ? ` (their ${inst.equivalente_terrestre})` : ''} — ${inst?.descricao ?? 'a living library, a laboratory, a workshop'}. MANY people close in the foreground working, fascinated, building, studying, handling instruments and biological technology IN USE; dense with material culture; NOT an empty room. ${REGRA}`;
   } else if (m === 2) { // biodiversidade ESPANTOSA ao perto
     const bio = pick(BIOLOGIA, seed) ?? 'a life-form of this world';
     categoria = 'biodiversidade';
@@ -74,10 +79,10 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
   } else if (m === 3) { // cidade / arquitetura viva HABITADA
     const esp = pick(ESPACOS, seed) ?? pick(INSTITUICOES, seed);
     categoria = esp?.nome ?? 'cidade viva';
-    briefing = `${ABERTURA}SCENE — a wide view of a LIVING CITY of this world, inhabited and busy: ${esp?.descricao ?? 'organic living architecture, suspended gardens, navigable roots, water running through the structures'}${esp?.equivalente_terrestre ? ` (like ${esp.equivalente_terrestre})` : ''}. Many people across the scene, transport, trade, daily life; abundant, sophisticated, ALIVE. ${REGRA}`;
+    briefing = `${ABERTURA}SCENE — a busy LIVING CITY street/plaza of this world THRONGED WITH PEOPLE: ${esp?.descricao ?? 'organic living architecture, suspended gardens, navigable roots, water running through the structures'}${esp?.equivalente_terrestre ? ` (like ${esp.equivalente_terrestre})` : ''}. MANY people in the foreground and across the scene, transport, trade, daily life; abundant, sophisticated, ALIVE; NOT an empty city. ${REGRA}`;
   } else { // crianças / jogo / descoberta
     categoria = 'crianças e descoberta';
-    briefing = `${ABERTURA}SCENE — CHILDREN and young people of this world PLAYING, exploring and DISCOVERING together with curiosity and laughter, among the species, plants and instruments of their world; movement, joy, mess, wonder. ${REGRA}`;
+    briefing = `${ABERTURA}SCENE — FOREGROUND FILLED WITH CHILDREN: MANY children and young people of this world, close and prominent, PLAYING, exploring and DISCOVERING together with curiosity and laughter, among the species, plants and instruments of their world; movement, joy, faces visible, wonder; NOT an empty garden. ${REGRA}`;
   }
   return { briefing, categoria };
 }
