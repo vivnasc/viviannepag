@@ -36,13 +36,26 @@
   #place(horizon, line(start: (60%, 50%), end: (100%, 50%), stroke: 0.45pt + c))
   #place(center + horizon, lozenge())
 ]
-// quebra de movimento: o RESPIRO dentro do capítulo (espaço branco + losango)
-#let movbreak() = block(above: 9mm, below: 9mm, width: 100%, breakable: false,
+// quebra de movimento: o RESPIRO dentro do capítulo (espaço branco + losango).
+// sticky: nunca fica órfã no fundo da página — desce com o que vem a seguir.
+#let movbreak() = block(above: 9mm, below: 9mm, width: 100%, breakable: false, sticky: true,
   align(center, box(width: 22mm, height: 3mm)[
     #place(horizon, line(start: (0%, 50%), end: (36%, 50%), stroke: 0.4pt + GOLD.transparentize(15%)))
     #place(horizon, line(start: (64%, 50%), end: (100%, 50%), stroke: 0.4pt + GOLD.transparentize(15%)))
     #place(center + horizon, lozenge(s: 1.3mm))
   ]))
+
+// destaque (pull-quote): uma frase forte, tirada do próprio capítulo, posta a
+// respirar ao centro. Dá ritmo visual e respiro, como nas edições de luxo.
+#let destaque(frase) = block(above: 12mm, below: 12mm, width: 100%, breakable: false, sticky: true)[
+  #set align(center)
+  #set par(justify: false, first-line-indent: 0pt, leading: 0.96em)
+  #lozenge(s: 1.4mm)
+  #v(4.5mm)
+  #block(width: 82%, text(font: display, style: "italic", fill: GOLDSOFT, size: 15.5pt, weight: 300)[#frase])
+  #v(4.5mm)
+  #lozenge(s: 1.4mm)
+]
 #let eye() = box(width: 9.5mm, height: 5.6mm)[
   #place(center + horizon, ellipse(width: 9.5mm, height: 5.2mm, stroke: 0.45pt + GOLDSOFT))
   #place(center + horizon, circle(radius: 2mm, stroke: 0.45pt + GOLDSOFT))
@@ -67,8 +80,8 @@
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
   fill: gradient.linear(rgb("#c9bda4"), rgb("#b1a589"), rgb("#9c9078"), angle: 118deg))[
-  #place(center + horizon, rotate(-90deg,
-    text(font: sans, fill: rgb("#efe7d6"), size: 6.6pt, tracking: 0.34em)[IMAGEM · #upper(kicker)]))
+  #place(center + horizon, rotate(-90deg, reflow: false,
+    box(width: 180mm, align(center, text(font: sans, fill: rgb("#efe7d6"), size: 6.6pt, tracking: 0.34em)[IMAGEM · #upper(kicker)]))))
 ]
 
 // ---- página ----
@@ -107,16 +120,21 @@
   acc
 }
 
-// corpo que RESPIRA: capitular opcional + quebras de movimento nas viragens
-#let corpo-paras(paras, dropcap-on: true) = {
+// corpo que RESPIRA: capitular opcional + quebras de movimento nas viragens +
+// um destaque (pull-quote) na 1.ª viragem, se o capítulo o trouxer.
+#let corpo-paras(paras, dropcap-on: true, destaque-frase: none) = {
   set par(first-line-indent: (amount: 5mm, all: true))
   let n = paras.len()
-  // pontos de respiro ~ a cada 6 parágrafos, nunca no início nem no fim
   let breaks = ()
   let k = 6
   while k <= n - 3 { breaks.push(k); k += 6 }
+  // garante uma viragem se houver destaque mas o capítulo for curto
+  if destaque-frase != none and breaks.len() == 0 and n >= 4 { breaks.push(calc.floor(n / 2)) }
   for (i, p) in paras.enumerate() {
-    if breaks.contains(i) { movbreak() }
+    if breaks.contains(i) {
+      if destaque-frase != none and i == breaks.first() { destaque(destaque-frase) }
+      else { movbreak() }
+    }
     if i == 0 and dropcap-on {
       set par(first-line-indent: 0pt)
       [#dropcap(height: 3, gap: 2.6mm, justify: true, font: display, fill: TITLEINK, weight: 400)[#fmt(p)]#parbreak()]
@@ -150,23 +168,28 @@
   ]
 }
 
-// ---- abertura de PARTE + 1.º capítulo, com IMAGEM vertical a sangrar ----
-#let abre-parte-cap(partU, u) = {
-  setsect(partU.titulo)
+// ---- abertura com IMAGEM vertical a sangrar pela margem ----
+// partU != none => abre também a Parte por cima do capítulo. Serve a abertura de
+// Parte (1.º capítulo) e a Introdução (sem Parte, mas com imagem própria).
+#let abre-imagem(u, partU: none) = {
+  let etiqueta = if partU != none { partU.kicker } else { u.kicker }
+  setsect(if partU != none { partU.titulo } else { u.kicker })
   page(margin: (left: 50mm, right: 16mm, top: 22mm, bottom: 18mm), header: none, footer: footer-num)[
-    #place(top + left, dx: -50mm, dy: -22mm, vinheta-vertical(partU.kicker))
+    #place(top + left, dx: -50mm, dy: -22mm, vinheta-vertical(etiqueta))
     #set align(left)
     #set text(hyphenate: false)
     #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
-    #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(partU.kicker)]
-    #v(3.5mm)
-    #text(font: display, fill: TITLEINK, size: 19pt, weight: 300)[#upper(partU.titulo)]
-    #v(7mm)
-    #box(width: 26mm, height: 3mm)[
-      #place(horizon, line(start: (0%, 50%), end: (72%, 50%), stroke: 0.45pt + GOLD))
-      #place(left + horizon, dx: 80%, lozenge())
-    ]
-    #v(9mm)
+    #if partU != none {
+      text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(partU.kicker)]
+      v(3.5mm)
+      text(font: display, fill: TITLEINK, size: 19pt, weight: 300)[#upper(partU.titulo)]
+      v(7mm)
+      box(width: 26mm, height: 3mm)[
+        #place(horizon, line(start: (0%, 50%), end: (72%, 50%), stroke: 0.45pt + GOLD))
+        #place(left + horizon, dx: 80%, lozenge())
+      ]
+      v(9mm)
+    }
     #text(font: serif, fill: TITLEINK, size: 10.5pt, weight: 400)[#u.kicker]
     #v(2.5mm)
     #text(font: display, fill: TITLEINK, size: 16pt, weight: 300)[#u.titulo]
@@ -179,7 +202,7 @@
     #dropcap(height: 3, gap: 2.6mm, justify: true, font: display, fill: TITLEINK, weight: 400)[#fmt(u.texto.first())]
   ]
   // o resto do capítulo, largura plena, a respirar
-  corpo-paras(u.texto.slice(1), dropcap-on: false)
+  corpo-paras(u.texto.slice(1), dropcap-on: false, destaque-frase: u.at("destaque", default: none))
 }
 
 // ---- capítulo seguinte (não abre Parte): sem imagem, sem arco ----
@@ -201,7 +224,7 @@
       block(width: 76%, text(font: serif, style: "italic", fill: BROWN, size: 10.5pt)[#u.epigrafe])
     }
   ]
-  corpo-paras(u.texto, dropcap-on: true)
+  corpo-paras(u.texto, dropcap-on: true, destaque-frase: u.at("destaque", default: none))
 }
 
 // ---- aparato inline (no fim do capítulo) ----
@@ -258,9 +281,13 @@
     #text(font: sans, fill: GOLDSOFT, size: 8pt, weight: 500, tracking: 0.32em)[CARTOGRAFIA DA CONSCIÊNCIA]
     #v(3mm)
     #text(font: display, fill: TITLEINK, size: 22pt, weight: 300)[Mapa da Transição]
-    #v(5mm)
+    #v(4mm)
+    #block(width: 92mm, text(font: serif, style: "italic", fill: SOFT, size: 10pt)[
+      O caminho que este livro percorre: da sobrevivência, pela fissura, à emergência.
+    ])
+    #v(7mm)
     #rule-orn()
-    #v(11mm)
+    #v(10mm)
     #box(width: W, height: 2 * R)[
       #let circ(cx, fill) = place(dx: cx - R, dy: 0mm, circle(radius: R, fill: fill, stroke: 0.5pt + GOLD.transparentize(45%)))
       #let lab(cx, t, sub, tc, sc) = place(dx: cx - 18mm, dy: 0mm, box(width: 36mm, height: 2 * R, align(center + horizon, stack(spacing: 1.6mm,
@@ -313,11 +340,11 @@
     abre-voz(u)          // a carta de 2150 — único sítio com arco
     aparato(u)
   } else if u.tipo == "introducao" {
-    abre-cap(u, sect: u.kicker)   // voz da autora: abertura limpa, sem arco
+    abre-imagem(u)               // voz da autora, com imagem própria (sem Parte)
     aparato(u)
   } else if u.tipo == "capitulo" {
     if pendente-parte != none {
-      abre-parte-cap(pendente-parte, u)
+      abre-imagem(u, partU: pendente-parte)
       pendente-parte = none
     } else {
       abre-cap(u)

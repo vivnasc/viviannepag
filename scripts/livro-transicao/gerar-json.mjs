@@ -87,6 +87,7 @@ const unidades = parseManuscrito().map((u) => {
   const o = { tipo: u.tipo, kicker: u.kicker, titulo: u.titulo };
   if (a.epigrafe) o.epigrafe = a.epigrafe;
   if (u.texto && u.texto.length) o.texto = respirar(u.texto);
+  if (a.destaque) o.destaque = a.destaque; // pull-quote (frase forte do capítulo)
   if (a.ideia) o.ideia = a.ideia;
   if (a.dica) o.dica = a.dica; // nota prática (opcional, por capítulo)
   if (a.pergunta) o.pergunta = a.pergunta;
