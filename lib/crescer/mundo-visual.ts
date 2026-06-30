@@ -73,6 +73,10 @@ interface Sujeito {
   evento_visual?: string; quando_falha?: string; simbolo_visual?: string; escala_preferencial?: string;
   emocao_predominante?: string; emocao_associada?: string; equivalente_terrestre?: string; categoria_antropologica?: string;
   nao_e?: string[];
+  // EMBEBIMENTO CULTURAL (campos da Vivianne) — forçam objecto ESPECÍFICO da civilização,
+  // não símbolo universal: quem usa, quando, o que faz, o que acontece se falhar, etc.
+  utilizador?: string; momento_de_uso?: string; o_que_faz?: string;
+  o_que_acontece_se_falhar?: string; quem_aprende_a_usar?: string; quem_nao_pode_usar?: string;
 }
 interface Evento { evento: string; significado: string; categoria: string }
 interface Exemplar { funcao: string; pergunta: string; prompt_en: string }
@@ -98,10 +102,12 @@ const FUNCOES_CIV = (banco.FUNCOES_CIVILIZACIONAIS ?? FUNCOES) as string[];
 // PROIBIDO o vocabulário visual da auto-ajuda/publicidade (metáfora). É o que faz o
 // motor regredir para luz/portal/canyon/névoa. Global, sempre no prompt.
 const NAO_E_GLOBAL =
-  'STRICTLY FORBIDDEN (this is self-help / advertising / sci-fi visual language, it destroys the world): abstract light, glow, energy, particles, sparkles, ' +
+  'STRICTLY FORBIDDEN (self-help / advertising / sci-fi visual language — it destroys the world): abstract light, glow, energy, particles, sparkles, ' +
   'a portal, a doorway, a vortex, mist, fog, a canyon, a glowing horizon, a vertical light beam, a tiny person before a giant abstract phenomenon, ' +
-  'a beautiful landscape, a forest/valley/river vista, a metaphor of any kind. If the image reads as a METAPHOR ("what does this mean?"), it FAILED. ' +
-  'It must read as an OBJECT/BEING/RITUAL of a real civilization ("what is this? why does it exist? who uses it? what happened here?").';
+  'a beautiful landscape, a forest/valley/river vista, AND the UNIVERSAL SYMBOL trap: a glowing golden sphere/orb, a lotus or flower in cupped hands, a glowing seed, a mandala, ' +
+  'cupped hands holding light as a symbol, a mindfulness/coaching/wellness branding look. The subject is NEVER a symbol; it is a SPECIFIC FUNCTIONAL THING of this society, ' +
+  'engineered or grown for one exact job, showing its MECHANISM and signs of real use/wear. If the image reads as a METAPHOR or a pretty symbol ("what does this mean?" / "how beautiful"), it FAILED. ' +
+  'It must read as an OBJECT/BEING/RITUAL/INSTITUTION of a real civilization ("what IS this? why does it exist? who uses it? what happened here?").';
 
 export interface CenaVisual { escala: Escala; funcao: string; pergunta: string; categoria: string; evento: string; briefing: string }
 
@@ -138,6 +144,9 @@ export function cenaConstituicao(seed = 0): CenaVisual {
     `CIVILIZATIONAL FUNCTION: ${funcao}${catAntropo ? ` (${catAntropo})` : ''}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
     `THE SUBJECT (fills the frame, intimate and close; the place is NEVER the subject): ${sujeito}. ` +
     (equivalente ? `IT IS THE CIVILIZATIONAL EQUIVALENT OF: ${equivalente} — i.e. it solves that exact HUMAN PROBLEM (think "what need does this meet", never "what does this symbolize"). ` : '') +
+    // EMBEBIMENTO CULTURAL: quem usa, quando, o que faz, o que falha — torna o objecto específico daquela sociedade.
+    ([s?.utilizador && `used by ${s.utilizador}`, s?.momento_de_uso && `used when ${s.momento_de_uso}`, s?.o_que_faz && `it does this: ${s.o_que_faz}`, s?.o_que_acontece_se_falhar && `if it fails: ${s.o_que_acontece_se_falhar}`].filter(Boolean).length
+      ? `CULTURAL EMBEDDING (show it as a real used thing of this society, with mechanism and wear): ${[s?.utilizador && `used by ${s.utilizador}`, s?.momento_de_uso && `used when ${s.momento_de_uso}`, s?.o_que_faz && `it does this: ${s.o_que_faz}`, s?.o_que_acontece_se_falhar && `if it fails: ${s.o_que_acontece_se_falhar}`].filter(Boolean).join('; ')}. ` : '') +
     `THE EVENT (the whole point — this civilization's equivalent of the sentence's emotional movement): it ${evento}. Adjust the event so it mirrors THIS exact sentence. ` +
     (enquadramento ? `FRAMING/SCALE: ${enquadramento}. ` : '') +
     (emocao ? `PREDOMINANT EMOTION (shapes composition and light): ${emocao}. ` : '') +
