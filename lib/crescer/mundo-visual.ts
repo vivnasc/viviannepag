@@ -7,10 +7,24 @@
 
 export type Escala = 'micro' | 'intima' | 'social' | 'ecologica' | 'civilizacional';
 
+// ESTILO — a CHAVE (diagnóstico da Vivianne+ChatGPT): o que faz a diferença entre
+// "documentário de outra civilização" (o que ela quer) e "retiro espiritual dourado"
+// (o atalho em que o modelo cai) é o VOCABULÁRIO. Por isso o prompt lidera com
+// fotografia documental/antropológica, gente diversa, realismo cinematográfico — e
+// NÃO com "consciência/transcendência/luz da própria matéria".
+export const ESTILO_FOTO =
+  'ANTHROPOLOGICAL DOCUMENTARY FIELD PHOTOGRAPHY / photojournalism of a real, lived-in civilization — cinematic realism, shot on medium format, shallow depth of field, ultra-detailed, candid, believable; ' +
+  'ETHNICALLY DIVERSE real people (Black, East Asian, Arab, Latino, mixed, all ages), integrated INTO the environment, not posed on it; natural daylight; real materials (stone, wood, water, woven fibre, living tissue) alongside biological technologies';
+export const ANTI_ESTETICA =
+  'NOT concept art, NOT fantasy art, NOT sci-fi illustration, NOT a spiritual or meditation aesthetic, NOT an eco-utopia temple, NOT people in matching white or beige robes, NOT crystals, NOT glowing orbs or spheres, NOT golden divine light, NOT a wellness/yoga advertisement, NOT an all-white-and-gold palette, NOT a calm person contemplating something luminous, NOT an "ecological premium ashram"';
+// O MANIFESTO que muda o comportamento do modelo (insistência da Vivianne+ChatGPT):
+// fotografia OBSERVADA, evidência de vida, não símbolo desenhado.
+export const MANIFESTO_FOTO =
+  'This is NOT concept art. This is DOCUMENTARY PHOTOGRAPHY from an EXISTING civilization: the photographer is visiting a real place where real people live and work. The image must feel OBSERVED, not designed — evidence of life, not a symbol. In the spirit of National Geographic photography, the ecological richness of Studio Ghibli, and the cinematic realism of Denis Villeneuve (people busy, material culture, tools, professions, ecosystems, activities). ';
+// paleta GROUNDED (cor natural e variada, com sombra e contraste reais), não o branco-e-dourado.
 export const PALETA_MUNDO =
-  'palette of warm whites, soft gold, pearl, champagne, pale sand, sage green, mist rose, matte silver; nothing saturated; ' +
-  'light emitted by the matter itself; technology invisible and fully integrated into living ecology; ' +
-  'bright, luminous, crystal-clear, razor-sharp ultra-high resolution; no haze, no fog, no murk, no heavy shadows';
+  'rich NATURAL colour with real daylight and real shadow and contrast, varied materials and surfaces; ' +
+  'avoid a uniform white-and-gold or all-beige look; not washed out, not glowing, ultra-high resolution and sharp';
 
 export const EVITAR_MUNDO =
   'The SUBJECT is NEVER a landscape and NEVER a lone human silhouette standing in scenery; ' +
@@ -140,7 +154,7 @@ export function cenaConstituicao(seed = 0): CenaVisual {
   const pergunta = exemplar?.pergunta || PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
 
   const briefing =
-    `ETHNOGRAPHY of a civilization that NEVER existed — a National Geographic photograph from the year 2300 of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
+    `${MANIFESTO_FOTO}${ESTILO_FOTO}. ETHNOGRAPHY of a civilization that NEVER existed — a field-documentary photograph of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
     `Build the image strictly as a CHAIN, never sentence->metaphor->image: SENTENCE -> HUMAN DOMAIN -> CIVILIZATIONAL FUNCTION -> CONCRETE SUBJECT -> EVENT -> image. ` +
     `CIVILIZATIONAL FUNCTION: ${funcao}${catAntropo ? ` (${catAntropo})` : ''}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
     `THE SUBJECT (fills the frame, intimate and close; the place is NEVER the subject): ${sujeito}. ` +
@@ -153,7 +167,7 @@ export function cenaConstituicao(seed = 0): CenaVisual {
     (emocao ? `PREDOMINANT EMOTION (shapes composition and light): ${emocao}. ` : '') +
     `If a person appears they are in RELATION with this subject, which stays the true subject. ` +
     (exemplar ? `REFERENCE of the right level (compose in this spirit, do not copy literally): ${exemplar.prompt_en} ` : '') +
-    `${PALETA_MUNDO}. ${EVITAR_MUNDO} ${NAO_E_GLOBAL}${naoEItem} ` +
+    `${PALETA_MUNDO}. ${ANTI_ESTETICA}. ${EVITAR_MUNDO} ${NAO_E_GLOBAL}${naoEItem} ` +
     `BRUTAL TEST before you finish: if the caption were removed, would someone ask "what does this MEAN?" (FAIL) or "what IS this object/being/ritual, who uses it, what happened?" (PASS)? Only the second is acceptable.`;
   return { escala: s?.reino ? 'ecologica' : 'intima', funcao, pergunta, categoria: s?.tipo_en ?? 'objecto', evento, briefing };
 }
@@ -180,10 +194,10 @@ const FRAGMENTOS: ItemMundo[] = ['INSTITUICOES', 'PROFISSOES', 'ESPECIES', 'ESPA
 const pick = <T,>(arr: T[], n: number): T | null => (arr.length ? arr[idx(n, arr.length)] : null);
 
 const ABERTURA =
-  'DOCUMENTARY photograph an anthropologist would take in a civilization that NEVER existed — a National Geographic photo of a world that is NOT Earth (the functional equivalent, never the future of Earth). ';
+  `${MANIFESTO_FOTO}${ESTILO_FOTO}. A field-documentary photo of a NORMAL DAY in a civilization that NEVER existed — a world that is NOT Earth (the functional equivalent, never the future of Earth). `;
 const FIM_WB =
-  ` ${PALETA_MUNDO}. NEVER Earth, NEVER a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, NEVER self-help symbolism (a glowing orb, a flower or single object floating in cupped hands as a symbol), no text, no letters, no watermark, no logos. ` +
-  `It must NOT look like a spiritual retreat: this is a full society with work, science, building, navigation, care. ` +
+  ` ${PALETA_MUNDO}. ${ANTI_ESTETICA}. NEVER Earth nor a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, no text, no letters, no watermark, no logos. ` +
+  `It must NOT look like a spiritual retreat: this is a FULL society with work, science, building, navigation, care, mess and use. ` +
   `TEST: without a caption someone must think "this is clearly NOT Earth, yet I could imagine living here" and ask "what is happening / what world is this?", never "what does this mean?".`;
 
 // MOTOR 2 · WORLDBUILDING. Proporção (decisão da Vivianne): ~30% pessoas em ACÇÃO,
