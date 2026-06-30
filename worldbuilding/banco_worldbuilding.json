@@ -71,9 +71,54 @@
 
   "CENAS_QUOTIDIANAS": [
     { "categoria": "infância", "descricao": "uma criança aprende com um organismo mentor", "participantes": ["criança", "organismo mentor"], "acao": "iniciar", "escala": "íntima" },
-    { "categoria": "investigação", "descricao": "um curador cultiva conhecimento como quem faz horticultura, sobre uma mesa viva", "participantes": ["curador de memória"], "acao": "cultivar", "escala": "íntima" },
-    { "categoria": "família", "descricao": "pais e filhos transmitem memória à volta de um arquivo vivo", "participantes": ["pais", "filhos"], "acao": "transmitir", "escala": "íntima" },
-    { "categoria": "oceano", "descricao": "uma baleia migratória de memória transporta saber entre regiões", "participantes": ["baleia migratória de memória"], "acao": "transmitir", "escala": "ecológica" },
-    { "categoria": "biblioteca", "descricao": "pessoas leem de perto o conhecimento que cresce em estruturas orgânicas", "participantes": ["leitores", "curador"], "acao": "cultivar", "escala": "social" }
+    { "categoria": "investigação", "descricao": "uma equipa de biólogos acompanha a migração das baleias de memória, a mapear as rotas", "participantes": ["biólogos da consciência"], "acao": "mapear", "escala": "ecológica" },
+    { "categoria": "agricultura", "descricao": "agricultores marinhos cultivam organismos de alimento numa baía viva", "participantes": ["agricultores marinhos"], "acao": "cultivar", "escala": "social" },
+    { "categoria": "arquitectura", "descricao": "construtores fazem crescer um habitat vivo, guiando as suas fibras", "participantes": ["construtores de habitats vivos"], "acao": "construir", "escala": "social" },
+    { "categoria": "medicina", "descricao": "uma cuidadora restaura um organismo de regulação ferido", "participantes": ["cuidadora"], "acao": "restaurar", "escala": "íntima" },
+    { "categoria": "oceano", "descricao": "navegadores conduzem uma embarcação viva guiados por animais cartográficos", "participantes": ["navegadores"], "acao": "navegar", "escala": "ecológica" },
+    { "categoria": "biblioteca", "descricao": "bibliotecários biológicos cuidam dos corais de conhecimento e ajudam quem lê", "participantes": ["bibliotecários biológicos", "leitores"], "acao": "preservar", "escala": "social" }
+  ],
+
+  "DOMINIOS_DA_VIDA": [
+    "educação", "ciência", "arte", "medicina", "agricultura", "oceano", "astronomia",
+    "arquitectura", "família", "governação", "comércio", "exploração", "engenharia", "ecologia", "música"
+  ],
+
+  "VERBOS_CIVILIZACIONAIS": [
+    "cultivar", "construir", "mapear", "investigar", "navegar", "restaurar", "compor",
+    "ensinar", "preservar", "transportar", "traduzir", "cuidar", "negociar", "celebrar", "reparar", "explorar"
+  ],
+
+  "BIOLOGIA_DO_MUNDO": [
+    "plantas temporais que florescem em ritmos emocionais", "arquitectura viva que cresce com quem a habita",
+    "organismos translúcidos de luz própria", "recipientes biológicos que guardam saber", "ecossistemas híbridos de planta e luz",
+    "corais de conhecimento", "fungos de tradução entre espécies"
+  ],
+
+  "FENOMENOS_DO_MUNDO": [
+    "migração anual das baleias de memória", "floração dos arquivos vivos", "marés de bioluminescência narrativa",
+    "chuvas de sementes de conhecimento", "sincronização das árvores relacionais", "aurora de significado numa grande mudança"
+  ],
+
+  "PAISAGENS_FUNCIONAIS": [
+    "rios que transportam memória", "florestas que armazenam histórias", "montanhas usadas para observação colectiva",
+    "lagos que funcionam como arquivos acústicos", "pontes de coerência que só se mantêm enquanto há confiança"
+  ],
+
+  "VESTIGIOS_DA_CIVILIZACAO": [
+    { "nome": "arquivo de memória em floração", "estado": "aguarda consulta", "equivalente_terrestre": "livro aberto numa biblioteca" },
+    { "nome": "organismos de navegação em repouso", "estado": "fim do ciclo migratório", "equivalente_terrestre": "barcos ancorados" },
+    { "nome": "jardins de aprendizagem vazios", "estado": "entre gerações", "equivalente_terrestre": "escola vazia nas férias" },
+    { "nome": "corais de memória a cantar ao luar", "estado": "sincronização colectiva", "equivalente_terrestre": "sinos ao entardecer" },
+    { "nome": "porto biológico antes das embarcações", "estado": "antes da chegada", "equivalente_terrestre": "cais ao amanhecer" }
+  ],
+
+  "CENAS_SEM_HUMANOS": [
+    "uma biblioteca viva durante a noite, sem ninguém, os corais de conhecimento a brilhar baixo",
+    "organismos de aprendizagem à espera das crianças num jardim vazio",
+    "um porto biológico antes da chegada das embarcações vivas",
+    "jardins de memória depois de a cerimónia ter terminado",
+    "baleias de memória a atravessar um mar iluminado por duas luas",
+    "uma cidade adormecida sob árvores arquitectónicas gigantes"
   ]
 }

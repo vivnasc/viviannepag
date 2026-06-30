@@ -165,35 +165,71 @@ export function cenaConstituicao(seed = 0): CenaVisual {
 // PODE variar (de íntima a uma vista da cidade). A imagem partilha a civilização com o
 // texto, mas não o ilustra. "Que fotografia tiraria um antropólogo num dia normal?"
 interface CenaQ { categoria?: string; nome?: string; descricao?: string; escala?: string; instituicao?: string; participantes?: string[]; acao?: string; equivalente_terrestre?: string }
-interface ItemMundo { nome: string; funcao?: string; descricao?: string; equivalente_terrestre?: string }
-interface Accao { verbo: string; significado: string }
-// CENAS (de acção, com participantes+verbo) primeiro; depois as quotidianas. É a ACÇÃO,
-// não o objecto, que faz a civilização — "civilizações vivem em verbos".
+interface ItemMundo { nome: string; funcao?: string; descricao?: string; equivalente_terrestre?: string; estado?: string }
 const CENAS_ACCAO = [ ...((mundo.CENAS ?? []) as CenaQ[]), ...((mundo.CENAS_QUOTIDIANAS ?? []) as CenaQ[]) ];
-const ACCOES = (mundo.ACCOES ?? []) as Accao[];
+const VERBOS = (mundo.VERBOS_CIVILIZACIONAIS ?? []) as string[];
+const DOMINIOS_VIDA = (mundo.DOMINIOS_DA_VIDA ?? []) as string[];
+const INSTITUICOES = (mundo.INSTITUICOES ?? []) as ItemMundo[];
+const BIOLOGIA = (mundo.BIOLOGIA_DO_MUNDO ?? []) as string[];
+const FENOMENOS = (mundo.FENOMENOS_DO_MUNDO ?? []) as string[];
+const PAISAGENS_F = (mundo.PAISAGENS_FUNCIONAIS ?? []) as string[];
+const VESTIGIOS = (mundo.VESTIGIOS_DA_CIVILIZACAO ?? []) as ItemMundo[];
+const CENAS_VAZIAS = (mundo.CENAS_SEM_HUMANOS ?? []) as string[];
 const FRAGMENTOS: ItemMundo[] = ['INSTITUICOES', 'PROFISSOES', 'ESPECIES', 'ESPACOS', 'OBJETOS', 'RITUAIS']
   .flatMap((k) => ((mundo as Record<string, unknown>)[k] ?? []) as ItemMundo[]);
+const pick = <T,>(arr: T[], n: number): T | null => (arr.length ? arr[idx(n, arr.length)] : null);
 
+const ABERTURA =
+  'DOCUMENTARY photograph an anthropologist would take in a civilization that NEVER existed — a National Geographic photo of a world that is NOT Earth (the functional equivalent, never the future of Earth). ';
+const FIM_WB =
+  ` ${PALETA_MUNDO}. NEVER Earth, NEVER a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, NEVER self-help symbolism (a glowing orb, a flower or single object floating in cupped hands as a symbol), no text, no letters, no watermark, no logos. ` +
+  `It must NOT look like a spiritual retreat: this is a full society with work, science, building, navigation, care. ` +
+  `TEST: without a caption someone must think "this is clearly NOT Earth, yet I could imagine living here" and ask "what is happening / what world is this?", never "what does this mean?".`;
+
+// MOTOR 2 · WORLDBUILDING. Proporção (decisão da Vivianne): ~30% pessoas em ACÇÃO,
+// ~30% instituição em funcionamento, ~20% biologia/ecologia do mundo, ~20% cenas SEM
+// humanos (o mundo a existir sozinho, vestígios). Às vezes com pessoas, às vezes só o mundo.
 export function cenaWorldbuilding(seed = 0): CenaVisual {
-  const cena = CENAS_ACCAO.length ? CENAS_ACCAO[idx(seed, CENAS_ACCAO.length)] : null;
-  const frag = FRAGMENTOS.length ? FRAGMENTOS[idx(seed * 5 + 2, FRAGMENTOS.length)] : null;
-  const categoria = cena?.nome ?? cena?.categoria ?? 'vida quotidiana';
-  const descricao = cena?.descricao ?? 'um momento de um dia normal desta civilização';
-  const enquadramento = cena?.escala ?? 'íntima ou média';
-  // A ACÇÃO (o verbo) é o coração da cena. Da cena, ou rodada do vocabulário.
-  const accaoObj = ACCOES.find((a) => a.verbo === cena?.acao) ?? (ACCOES.length ? ACCOES[idx(seed * 3 + 1, ACCOES.length)] : null);
-  const verbo = cena?.acao ?? accaoObj?.verbo ?? '';
-  const participantes = cena?.participantes?.length ? cena.participantes.join(' + ') : 'people of this civilization';
-  const instituicao = cena?.instituicao ? ` at the "${cena.instituicao}"` : '';
-  const equivalente = cena?.equivalente_terrestre ? ` (the civilizational equivalent of: ${cena.equivalente_terrestre})` : '';
-  const briefing =
-    `DOCUMENTARY photograph an anthropologist would take on a NORMAL DAY in a civilization that NEVER existed — a National Geographic photo of a world that is NOT Earth (the functional equivalent, never the future of Earth). ` +
-    `Start from the CIVILIZATION, not from a phrase. THE SCENE IS AN ACTION, NEVER a still poetic object: ${participantes} ${verbo ? `are doing this (the VERB is the point): to ${verbo}${accaoObj ? ` — ${accaoObj.significado}` : ''}` : 'are in the middle of a real daily activity'}${instituicao}. CONTEXT: ${descricao}${equivalente}. ` +
-    (frag ? `An object/being of this world is IN USE in the scene (not displayed): the "${frag.nome}"${frag.descricao ? ` (${frag.descricao})` : ''}. ` : '') +
-    `Show WHO, doing WHAT, with WHAT, and WHY — people USING the world, mid-gesture, caught in the act; faces present, without vigilance; relations, not isolated individuals; living instruments and architecture. ` +
-    `FRAMING: ${enquadramento} (scale may vary). Candid, lived-in, real, NOT staged, NOT an advertisement, NOT a poetic still life of one beautiful object. ` +
-    `${PALETA_MUNDO}. NEVER Earth, NEVER a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, NEVER self-help symbolism (a glowing orb or a flower in cupped hands, a single object floating in hands as a symbol), no text, no letters, no watermark, no logos. ` +
-    `TEST: without a caption the image must make someone ask "what are these people DOING? what civilization is this?", never "what does this mean?" nor "what a beautiful object".`;
-  const escala: Escala = enquadramento.includes('civiliz') ? 'civilizacional' : enquadramento.includes('eco') ? 'ecologica' : enquadramento.includes('social') ? 'social' : 'intima';
-  return { escala, funcao: categoria, pergunta: `como ${verbo || 'vivem'}: ${categoria}`, categoria, evento: descricao, briefing };
+  const m = idx(seed, 10);
+  let categoria: string, descricao: string, escalaTxt: string, briefing: string;
+
+  if (m <= 2) { // 30% — pessoas DAQUELE mundo em acção (verbo activo)
+    const cena = pick(CENAS_ACCAO, seed);
+    const dominio = pick(DOMINIOS_VIDA, seed * 3 + 1) ?? 'vida quotidiana';
+    const verbo = cena?.acao || pick(VERBOS, seed * 7 + 2) || 'work';
+    const participantes = cena?.participantes?.length ? cena.participantes.join(' + ') : `people of this civilization (domain: ${dominio})`;
+    const frag = pick(FRAGMENTOS, seed * 5 + 2);
+    categoria = cena?.nome ?? cena?.categoria ?? dominio;
+    descricao = cena?.descricao ?? `people busy in the domain of ${dominio}`;
+    escalaTxt = cena?.escala ?? 'social';
+    briefing = ABERTURA + `PEOPLE OF THIS WORLD IN ACTION (active verb, not passive sitting/looking): ${participantes} are busy to ${verbo} — ${descricao}${cena?.instituicao ? ` at the "${cena.instituicao}"` : ''}${cena?.equivalente_terrestre ? ` (like ${cena.equivalente_terrestre})` : ''}. ` +
+      (frag ? `A being/object of this world is IN USE (not displayed): the "${frag.nome}"${frag.descricao ? ` (${frag.descricao})` : ''}. ` : '') +
+      `Caught mid-gesture, candid, lived-in; faces present; relations not isolated individuals.` + FIM_WB;
+  } else if (m <= 5) { // 30% — uma instituição/espaço em FUNCIONAMENTO
+    const inst = pick(INSTITUICOES, seed) ?? pick(FRAGMENTOS, seed);
+    const verbo = pick(VERBOS, seed * 7 + 2) || 'function';
+    categoria = inst?.nome ?? 'instituição';
+    descricao = inst?.descricao ?? 'an institution of this civilization in full daily function';
+    escalaTxt = 'social';
+    briefing = ABERTURA + `AN INSTITUTION OF THIS WORLD IN FULL FUNCTION: the "${inst?.nome ?? 'institution'}"${inst?.equivalente_terrestre ? ` (their equivalent of a ${inst.equivalente_terrestre})` : ''} — ${descricao}. People at work inside it, to ${verbo}, going about real business; the living architecture and instruments in use.` + FIM_WB;
+  } else if (m <= 7) { // 20% — biologia/ecologia do mundo (pode ser sem pessoas)
+    const bio = pick(BIOLOGIA, seed) ?? 'living architecture of this world';
+    const fen = pick(FENOMENOS, seed * 3 + 1);
+    categoria = 'biologia do mundo';
+    descricao = bio + (fen ? `, during ${fen}` : '');
+    escalaTxt = 'ecológica';
+    briefing = ABERTURA + `THE BIOLOGY/ECOLOGY OF THIS WORLD itself (people optional and small if present): ${bio}${fen ? `, during the phenomenon of ${fen}` : ''}. Strange life and living architecture that clearly do not exist on Earth, observed up close like a nature documentary.` + FIM_WB;
+  } else { // 20% — o mundo SEM humanos (vestígios / paisagem funcional / cena vazia)
+    const vazia = pick(CENAS_VAZIAS, seed);
+    const vest = pick(VESTIGIOS, seed * 3 + 1);
+    const pais = pick(PAISAGENS_F, seed * 5 + 2);
+    const alvo = vazia || (vest ? `${vest.nome} (${vest.estado}${vest.equivalente_terrestre ? `, like ${vest.equivalente_terrestre}` : ''})` : pais || 'the world existing on its own');
+    categoria = 'cena sem humanos';
+    descricao = alvo;
+    escalaTxt = 'ecológica';
+    briefing = ABERTURA + `NO PEOPLE AT ALL — the world existing on its own, a trace that someone lives here without any human in frame: ${alvo}. Like an empty market at dawn or a library at night on Earth: no humans needed to feel that a civilization lives here.` + FIM_WB;
+  }
+
+  const escala: Escala = escalaTxt.includes('civiliz') ? 'civilizacional' : escalaTxt.includes('eco') ? 'ecologica' : escalaTxt.includes('social') ? 'social' : 'intima';
+  return { escala, funcao: categoria, pergunta: `que mundo é este: ${categoria}`, categoria, evento: descricao, briefing };
 }
