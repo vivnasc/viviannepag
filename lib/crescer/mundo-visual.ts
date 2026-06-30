@@ -14,7 +14,8 @@ export type Escala = 'micro' | 'intima' | 'social' | 'ecologica' | 'civilizacion
 // NÃO com "consciência/transcendência/luz da própria matéria".
 export const ESTILO_FOTO =
   'NATURE & FIELD DOCUMENTARY PHOTOGRAPHY of a PARALLEL BIOSPHERE — cinematic realism, shot on medium format, shallow depth of field, ultra-detailed, candid, believable, OBSERVED not designed; ' +
-  'when people appear: ETHNICALLY DIVERSE real humans of this other biosphere (varied skin with subtle living patterns, varied hair sometimes partly vegetal or mineral, eyes adapted to a different sky, clothing that is GROWN/cultivated not woven, living adornments) — recognizably human yet clearly of another evolution; natural daylight, real shadow';
+  'when people appear: ETHNICALLY DIVERSE real humans with NORMAL human bodies — NO physical mutation, NO alien features, NO vegetal hair, NO strange eyes, NO skin patterns. ' +
+  'What is DIFFERENT is NEVER their anatomy but their WAY OF BEING: the calm presence of a nervous system that is not in survival, an unfamiliar posture and body language, their own customs and gestures, and above all WHAT THEY WEAR (garments that are grown/cultivated rather than woven, unfamiliar yet clearly human clothing, adornments worn naturally) and WHAT THEY ARE DOING; natural daylight, real shadow';
 export const ANTI_ESTETICA =
   'NOT concept art, NOT fantasy art, NOT sci-fi illustration, NOT a spiritual or meditation aesthetic, NOT an eco-utopia temple, NOT people in matching white/beige robes, NOT crystals, NOT glowing orbs or spheres, NOT golden divine light, NOT a wellness/yoga advertisement, NOT an all-white-and-gold palette, NOT a calm person contemplating something luminous, NOT an "ecological premium ashram"; ' +
   'NOT a rural/pre-industrial/Mediterranean/UNESCO-heritage village, NOT the past, NOT primitive, NOT only clay-and-wood crafts; ' +
@@ -26,7 +27,8 @@ export const ANTI_ESTETICA =
 export const BIOTECH =
   'THE TRUTH OF THIS WORLD: it is NOT an industrial civilization and NOT advanced machine technology. It is a PARALLEL BIOSPHERE — Earth after millions of years of evolution in ANOTHER DIRECTION, where evolution selected for BEAUTY, DIVERSITY and SYMBIOSIS as survival strategies. EVOLVED BIOLOGY, not machines: ' +
   'translucent trees, flexible crystalline leaves, flowers that release luminous pollen, architectural lichens, suspended aquatic gardens; iridescent-membrane birds, bioluminescent migrating whales, giant pollinators, translucent tree-amphibians; rivers of translucent water carrying living seeds, seas under several moons. ' +
-  'Rivers, seas, forests, moons, animals and people are all part of the SAME evolutionary language. Recognizable as Earth-life, yet clearly another branch of the tree of life. It must be at once HABITABLE and IMPOSSIBLE.';
+  'Rivers, seas, forests, moons, animals and people are all part of the SAME evolutionary language. Recognizable as Earth-life, yet clearly another branch of the tree of life. It must be at once HABITABLE and IMPOSSIBLE. ' +
+  'These named examples are only the SPIRIT/register, NOT a fixed menu: INVENT new plants, animals, rivers, skies and forms freely in this register; never limit yourself to a list.';
 // O MANIFESTO que muda o comportamento do modelo (insistência da Vivianne+ChatGPT):
 // fotografia OBSERVADA, evidência de vida, não símbolo desenhado.
 export const MANIFESTO_FOTO =
@@ -235,13 +237,13 @@ export function cenaWorldbuilding(seed = 0): CenaVisual {
     descricao = inst?.descricao ?? 'an institution of this civilization in full daily function';
     escalaTxt = 'social';
     briefing = ABERTURA + `AN INSTITUTION OF THIS WORLD IN FULL FUNCTION: the "${inst?.nome ?? 'institution'}"${inst?.equivalente_terrestre ? ` (their equivalent of a ${inst.equivalente_terrestre})` : ''} — ${descricao}. People at work inside it, to ${verbo}, going about real business; the living architecture and instruments in use.` + FIM_WB;
-  } else if (m <= 7) { // 20% — biologia/ecologia do mundo (pode ser sem pessoas)
-    const bio = pick(BIOLOGIA, seed) ?? 'living architecture of this world';
+  } else if (m <= 7) { // 30% — biologia/ecologia do mundo (flora, fauna, rios, mares; pode ser sem pessoas)
+    const bio = pick(BIOLOGIA, seed) ?? 'a life-form of this world';
     const fen = pick(FENOMENOS, seed * 3 + 1);
     categoria = 'biologia do mundo';
     descricao = bio + (fen ? `, during ${fen}` : '');
     escalaTxt = 'ecológica';
-    briefing = ABERTURA + `THE BIOLOGY/ECOLOGY OF THIS WORLD itself (people optional and small if present): ${bio}${fen ? `, during the phenomenon of ${fen}` : ''}. Strange life and living architecture that clearly do not exist on Earth, observed up close like a nature documentary.` + FIM_WB;
+    briefing = ABERTURA + `THE LIVING WORLD ITSELF — flora, fauna, a river or a sea of this biosphere (people optional and small if present). INVENT a plant / animal / river / sky of this world FREELY, in the SPIRIT of examples like "${bio}" (do NOT copy it literally, and do NOT limit yourself to it; invent something new in the same register)${fen ? `, during the phenomenon of ${fen}` : ''}. Evolved Earth-life of another branch, observed up close like a nature documentary.` + FIM_WB;
   } else { // 20% — o mundo SEM humanos (vestígios / paisagem funcional / cena vazia)
     const vazia = pick(CENAS_VAZIAS, seed);
     const vest = pick(VESTIGIOS, seed * 3 + 1);
