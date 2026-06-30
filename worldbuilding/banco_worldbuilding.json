@@ -43,18 +43,37 @@
     { "nome": "refeição", "funcao": "vínculo", "descricao": "uma refeição partilhada, à volta de organismos de luz" }
   ],
 
+  "ACCOES": [
+    { "verbo": "entregar", "significado": "passar algo importante a alguém" },
+    { "verbo": "separar", "significado": "distinguir o que estava fundido" },
+    { "verbo": "iniciar", "significado": "introduzir alguém a uma prática pela primeira vez" },
+    { "verbo": "cultivar", "significado": "cuidar de algo vivo que cresce devagar" },
+    { "verbo": "transmitir", "significado": "passar saber entre gerações" },
+    { "verbo": "partilhar", "significado": "repartir entre pessoas" },
+    { "verbo": "libertar", "significado": "deixar algo partir" },
+    { "verbo": "herdar", "significado": "receber o que vem de trás" },
+    { "verbo": "devolver", "significado": "restituir o que não era nosso" },
+    { "verbo": "integrar", "significado": "acolher como parte do todo" },
+    { "verbo": "diagnosticar", "significado": "ler e nomear um estado interno" },
+    { "verbo": "reconciliar", "significado": "voltar a tecer um laço quebrado" }
+  ],
+
+  "CENAS": [
+    { "nome": "primeira leitura da memória familiar", "instituicao": "arquivo de memórias migratórias", "participantes": ["criança", "guardião de memória"], "acao": "entregar", "equivalente_terrestre": "herança / abrir o álbum de família", "escala": "íntima" },
+    { "nome": "separação das três fontes do cansaço", "instituicao": "casa de diferenciação emocional", "participantes": ["cartógrafo de estados internos", "adulto"], "acao": "separar", "equivalente_terrestre": "terapia", "escala": "íntima" },
+    { "nome": "primeiro contacto com o organismo de identidade", "instituicao": "jardim de aprendizagem", "participantes": ["adolescente", "mentor"], "acao": "iniciar", "equivalente_terrestre": "rito de passagem", "escala": "íntima" },
+    { "nome": "cultivo do conhecimento", "instituicao": "biblioteca biológica", "participantes": ["curador de memória", "aprendizes"], "acao": "cultivar", "equivalente_terrestre": "investigação / estudo", "escala": "social" },
+    { "nome": "acolhimento do recém-nascido", "instituicao": "câmara de ressonância", "participantes": ["família", "comunidade"], "acao": "integrar", "equivalente_terrestre": "baptismo / registo", "escala": "social" },
+    { "nome": "troca de experiências no mercado", "instituicao": "mercado de experiências", "participantes": ["duas pessoas"], "acao": "partilhar", "equivalente_terrestre": "mercado / conversa", "escala": "social" },
+    { "nome": "despedida no jardim de transição", "instituicao": "jardim de transição", "participantes": ["pessoa em luto", "acompanhante"], "acao": "libertar", "equivalente_terrestre": "funeral", "escala": "íntima" },
+    { "nome": "reconciliação de duas comunidades", "instituicao": "câmara de ressonância", "participantes": ["representantes de duas comunidades"], "acao": "reconciliar", "equivalente_terrestre": "mediação", "escala": "social" }
+  ],
+
   "CENAS_QUOTIDIANAS": [
-    { "categoria": "infância", "descricao": "crianças exploram e aprendem com organismos vivos que guardam conhecimento", "escala": "social" },
-    { "categoria": "investigação", "descricao": "cientistas cultivam conhecimento como quem faz horticultura, sobre uma mesa viva", "escala": "íntima" },
-    { "categoria": "família", "descricao": "pais e filhos cuidam de um arquivo vivo de memórias", "escala": "íntima" },
-    { "categoria": "oceano", "descricao": "uma baleia migratória de memória atravessa, transportando saber entre regiões", "escala": "ecológica" },
-    { "categoria": "biblioteca", "descricao": "o conhecimento cresce em estruturas orgânicas translúcidas e as pessoas leem-no de perto", "escala": "social" },
-    { "categoria": "mercado", "descricao": "pessoas trocam experiências vividas num mercado de organismos de luz", "escala": "social" },
-    { "categoria": "maternidade", "descricao": "uma mãe segura um recém-nascido num acolhimento da comunidade", "escala": "íntima" },
-    { "categoria": "profissão", "descricao": "um curador de memória trabalha, inclinado sobre um arquivo vivo", "escala": "íntima" },
-    { "categoria": "refeição", "descricao": "uma família partilha uma refeição à volta de organismos de luz", "escala": "social" },
-    { "categoria": "animais", "descricao": "uma criança e um organismo mentor em relação, de perto", "escala": "íntima" },
-    { "categoria": "cidade", "descricao": "uma vista de um dia normal de uma cidade-organismo que respira", "escala": "civilizacional" },
-    { "categoria": "astronomia", "descricao": "pessoas observam, de um observatório emocional, as marés de consciência no céu", "escala": "ecológica" }
+    { "categoria": "infância", "descricao": "uma criança aprende com um organismo mentor", "participantes": ["criança", "organismo mentor"], "acao": "iniciar", "escala": "íntima" },
+    { "categoria": "investigação", "descricao": "um curador cultiva conhecimento como quem faz horticultura, sobre uma mesa viva", "participantes": ["curador de memória"], "acao": "cultivar", "escala": "íntima" },
+    { "categoria": "família", "descricao": "pais e filhos transmitem memória à volta de um arquivo vivo", "participantes": ["pais", "filhos"], "acao": "transmitir", "escala": "íntima" },
+    { "categoria": "oceano", "descricao": "uma baleia migratória de memória transporta saber entre regiões", "participantes": ["baleia migratória de memória"], "acao": "transmitir", "escala": "ecológica" },
+    { "categoria": "biblioteca", "descricao": "pessoas leem de perto o conhecimento que cresce em estruturas orgânicas", "participantes": ["leitores", "curador"], "acao": "cultivar", "escala": "social" }
   ]
 }

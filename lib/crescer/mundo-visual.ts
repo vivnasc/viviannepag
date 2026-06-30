@@ -164,27 +164,36 @@ export function cenaConstituicao(seed = 0): CenaVisual {
 // fotográfico de um dia normal" — a lógica que gerou as imagens fortes. Aqui a escala
 // PODE variar (de íntima a uma vista da cidade). A imagem partilha a civilização com o
 // texto, mas não o ilustra. "Que fotografia tiraria um antropólogo num dia normal?"
-interface CenaQ { categoria: string; descricao: string; escala?: string }
+interface CenaQ { categoria?: string; nome?: string; descricao?: string; escala?: string; instituicao?: string; participantes?: string[]; acao?: string; equivalente_terrestre?: string }
 interface ItemMundo { nome: string; funcao?: string; descricao?: string; equivalente_terrestre?: string }
-const CENAS_Q = (mundo.CENAS_QUOTIDIANAS ?? []) as CenaQ[];
+interface Accao { verbo: string; significado: string }
+// CENAS (de acção, com participantes+verbo) primeiro; depois as quotidianas. É a ACÇÃO,
+// não o objecto, que faz a civilização — "civilizações vivem em verbos".
+const CENAS_ACCAO = [ ...((mundo.CENAS ?? []) as CenaQ[]), ...((mundo.CENAS_QUOTIDIANAS ?? []) as CenaQ[]) ];
+const ACCOES = (mundo.ACCOES ?? []) as Accao[];
 const FRAGMENTOS: ItemMundo[] = ['INSTITUICOES', 'PROFISSOES', 'ESPECIES', 'ESPACOS', 'OBJETOS', 'RITUAIS']
   .flatMap((k) => ((mundo as Record<string, unknown>)[k] ?? []) as ItemMundo[]);
 
 export function cenaWorldbuilding(seed = 0): CenaVisual {
-  const cena = CENAS_Q.length ? CENAS_Q[idx(seed, CENAS_Q.length)] : null;
-  // um fragmento concreto para ancorar (objecto/ser/instituição desta civilização).
+  const cena = CENAS_ACCAO.length ? CENAS_ACCAO[idx(seed, CENAS_ACCAO.length)] : null;
   const frag = FRAGMENTOS.length ? FRAGMENTOS[idx(seed * 5 + 2, FRAGMENTOS.length)] : null;
-  const categoria = cena?.categoria ?? 'vida quotidiana';
+  const categoria = cena?.nome ?? cena?.categoria ?? 'vida quotidiana';
   const descricao = cena?.descricao ?? 'um momento de um dia normal desta civilização';
   const enquadramento = cena?.escala ?? 'íntima ou média';
+  // A ACÇÃO (o verbo) é o coração da cena. Da cena, ou rodada do vocabulário.
+  const accaoObj = ACCOES.find((a) => a.verbo === cena?.acao) ?? (ACCOES.length ? ACCOES[idx(seed * 3 + 1, ACCOES.length)] : null);
+  const verbo = cena?.acao ?? accaoObj?.verbo ?? '';
+  const participantes = cena?.participantes?.length ? cena.participantes.join(' + ') : 'people of this civilization';
+  const instituicao = cena?.instituicao ? ` at the "${cena.instituicao}"` : '';
+  const equivalente = cena?.equivalente_terrestre ? ` (the civilizational equivalent of: ${cena.equivalente_terrestre})` : '';
   const briefing =
     `DOCUMENTARY photograph an anthropologist would take on a NORMAL DAY in a civilization that NEVER existed — a National Geographic photo of a world that is NOT Earth (the functional equivalent, never the future of Earth). ` +
-    `Start from the CIVILIZATION, not from a phrase. DAILY-LIFE CATEGORY: ${categoria}. THE SCENE: ${descricao}. ` +
-    (frag ? `You may anchor it with a concrete element of this world: the "${frag.nome}"${frag.descricao ? ` (${frag.descricao})` : ''}. ` : '') +
-    `Real people of this civilization, living WITH the world (symbiotic relations, living instruments, conscious materials, living architecture); faces present, without vigilance; relations rather than isolated individuals. ` +
-    `FRAMING: ${enquadramento} (scale may vary, from a close detail to a city seen breathing). Candid, lived-in, real, NOT staged, NOT an advertisement. ` +
-    `${PALETA_MUNDO}. NEVER Earth, NEVER a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, NEVER self-help symbolism (a glowing orb or a flower in cupped hands), no text, no letters, no watermark, no logos. ` +
-    `TEST: without a caption the image must make someone ask "what civilization is this? how do they live?", never "where is this place?" nor "what does this mean?".`;
+    `Start from the CIVILIZATION, not from a phrase. THE SCENE IS AN ACTION, NEVER a still poetic object: ${participantes} ${verbo ? `are doing this (the VERB is the point): to ${verbo}${accaoObj ? ` — ${accaoObj.significado}` : ''}` : 'are in the middle of a real daily activity'}${instituicao}. CONTEXT: ${descricao}${equivalente}. ` +
+    (frag ? `An object/being of this world is IN USE in the scene (not displayed): the "${frag.nome}"${frag.descricao ? ` (${frag.descricao})` : ''}. ` : '') +
+    `Show WHO, doing WHAT, with WHAT, and WHY — people USING the world, mid-gesture, caught in the act; faces present, without vigilance; relations, not isolated individuals; living instruments and architecture. ` +
+    `FRAMING: ${enquadramento} (scale may vary). Candid, lived-in, real, NOT staged, NOT an advertisement, NOT a poetic still life of one beautiful object. ` +
+    `${PALETA_MUNDO}. NEVER Earth, NEVER a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, NEVER self-help symbolism (a glowing orb or a flower in cupped hands, a single object floating in hands as a symbol), no text, no letters, no watermark, no logos. ` +
+    `TEST: without a caption the image must make someone ask "what are these people DOING? what civilization is this?", never "what does this mean?" nor "what a beautiful object".`;
   const escala: Escala = enquadramento.includes('civiliz') ? 'civilizacional' : enquadramento.includes('eco') ? 'ecologica' : enquadramento.includes('social') ? 'social' : 'intima';
-  return { escala, funcao: categoria, pergunta: `como vivem: ${categoria}`, categoria, evento: descricao, briefing };
+  return { escala, funcao: categoria, pergunta: `como ${verbo || 'vivem'}: ${categoria}`, categoria, evento: descricao, briefing };
 }
