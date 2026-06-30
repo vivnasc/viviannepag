@@ -109,7 +109,11 @@
         "Não há aqui um plano de melhoria nem uma sequência de passos. Há uma travessia a acompanhar, e a única bússola que ofereço é a recusa de chamar natureza ao que talvez seja apenas hábito antigo. Tudo o que se segue é, no fundo, uma tentativa de devolver ao leitor a distinção entre as duas coisas, para que a possa fazer por si próprio, diante da sua própria vida.",
         "Fica, então, a pergunta que abre tudo o que se segue. Se uma parte tão grande daquilo que chamamos nós foi estação e não essência, adaptação e não destino, fica por responder a coisa mais simples e mais difícil de todas: quem somos quando o inverno acaba? Não a respondo neste capítulo. Este livro não promete chegada. Promete acompanhar a pergunta até onde ela for capaz de nos levar."
       ],
-      "destaque": "Grande parte daquilo a que chamamos natureza humana talvez não seja natureza nenhuma. Talvez seja história.",
+      "destaque": [
+        "Grande parte daquilo a que chamamos natureza humana talvez não seja natureza nenhuma. Talvez seja história.",
+        "Compreender de onde vem a nossa dureza não nos torna duros para com quem a carrega.",
+        "Nada disto começou em ti. Chegou a ti, herdado."
+      ],
       "ideia": "Muito do que vivemos como natureza humana imutável, a vigilância, a pressa, a fome de acumular, a culpa de descansar, é história sedimentada, adaptação a milhares de gerações de escassez que durou tanto que passou a parecer essência. **O que foi aprendido pode, com tempo e condições, ser reaprendido de outro modo.**",
       "dica": "Quando, ao longo deste capítulo, sentires a tentação de dizer «mas isto sou mesmo eu», experimenta trocar a frase por «isto foi-me ensinado». Repara no que muda em ti quando a dizes.",
       "pergunta": "Quem somos quando o inverno acaba?"
@@ -169,6 +173,10 @@
         "A tarefa, então, nunca foi tornar-se independente, fantasia que esvazia quem a persegue; é tornar-se interdependente com lucidez, procurar a pertença que liberta e largar a que apenas prende, sabendo que largar de todo não é opção nem desejo, porque um corpo que se corta da teia não se torna livre, torna-se translúcido.",
         "Fica então a pergunta, maior do que aquela com que entrámos. Se não podemos, nem devemos, deixar de pertencer, e se a parte de nós que escolhe o laço é mais antiga e mais forte do que a parte que escolhe a verdade, o que é que herdámos exactamente com a pertença? A quem é que o nosso corpo aprendeu a ser fiel, e a que preço? Não é o medo, afinal, o último herdeiro.",
         "Por baixo do medo de ficar de fora há a longa cadeia de quem nos antecedeu, e as lealdades que nos passaram sem nos pedirem licença. Antes de podermos escolher melhor os laços a que pertencemos, falta perceber os laços que já nos foram dados, e que continuamos a honrar muito depois de quem nos prendeu a eles ter desaparecido. É para essas lealdades herdadas que o próximo capítulo se volta."
+      ],
+      "destaque": [
+        "A obediência tem o sabor da protecção.",
+        "O medo não compra apenas comportamento: compra lealdade."
       ],
       "ideia": "O alarme que nos manteve vivos tornou-se um estado permanente e, multiplicado entre corpos, fez-se moeda que organiza mercados, instituições e afectos; mas no fundo de tudo não está o medo da morte e sim o medo de ficar de fora, porque para um animal de pertença a exclusão sempre foi uma forma de morrer.",
       "pergunta": "O que herdámos, ao certo, com a pertença, e a quem aprendeu o nosso corpo a ser fiel, e a que preço?"

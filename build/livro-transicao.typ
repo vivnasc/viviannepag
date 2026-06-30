@@ -56,26 +56,58 @@
   #v(4.5mm)
   #lozenge(s: 1.4mm)
 ]
-#let eye() = box(width: 9.5mm, height: 5.6mm)[
-  #place(center + horizon, ellipse(width: 9.5mm, height: 5.2mm, stroke: 0.45pt + GOLDSOFT))
-  #place(center + horizon, circle(radius: 2mm, stroke: 0.45pt + GOLDSOFT))
-  #place(center + horizon, circle(radius: 0.7mm, fill: GOLDSOFT, stroke: none))
+// olho com pestanas (esotérico, delicado) — nada de elipse simples
+#let eye() = box(width: 16mm, height: 12mm)[
+  // pestanas a irradiar por cima
+  #for a in (-54, -36, -18, 0, 18, 36, 54) {
+    place(center + bottom, dx: 0mm, dy: -5.2mm,
+      rotate(a * 1deg, origin: bottom + center,
+        line(start: (0mm, 0mm), end: (0mm, -3.2mm), stroke: 0.5pt + GOLDSOFT)))
+  }
+  // amêndoa do olho (duas curvas)
+  #place(center + bottom, dy: -1mm, curve(
+    stroke: 0.55pt + GOLDSOFT,
+    curve.move((0mm, 0mm)),
+    curve.cubic((4.3mm, -4.6mm), (8.7mm, -4.6mm), (13mm, 0mm)),
+    curve.cubic((8.7mm, 4.6mm), (4.3mm, 4.6mm), (0mm, 0mm)),
+  ))
+  #place(center + bottom, dy: -3.1mm, circle(radius: 2.1mm, stroke: 0.5pt + GOLDSOFT))
+  #place(center + bottom, dy: -3.1mm, circle(radius: 0.8mm, fill: GOLDSOFT, stroke: none))
 ]
-// arco (SÓ na voz da carta)
+// cantos ornamentados da caixa (bracket em L), um por canto, bem encostados
+#let _cs = 0.5pt + GOLD
+#let cTL = box(width: 3.2mm, height: 3.2mm)[#place(top + left, line(start: (0mm, 0mm), end: (3mm, 0mm), stroke: _cs))#place(top + left, line(start: (0mm, 0mm), end: (0mm, 3mm), stroke: _cs))]
+#let cTR = box(width: 3.2mm, height: 3.2mm)[#place(top + right, line(start: (0mm, 0mm), end: (-3mm, 0mm), stroke: _cs))#place(top + right, line(start: (0mm, 0mm), end: (0mm, 3mm), stroke: _cs))]
+#let cBR = box(width: 3.2mm, height: 3.2mm)[#place(bottom + right, line(start: (0mm, 0mm), end: (-3mm, 0mm), stroke: _cs))#place(bottom + right, line(start: (0mm, 0mm), end: (0mm, -3mm), stroke: _cs))]
+#let cBL = box(width: 3.2mm, height: 3.2mm)[#place(bottom + left, line(start: (0mm, 0mm), end: (3mm, 0mm), stroke: _cs))#place(bottom + left, line(start: (0mm, 0mm), end: (0mm, -3mm), stroke: _cs))]
+// rulezinha com ponto (vai por baixo de PRÓLOGO, etc.)
+#let mini-rule(w: 18mm, c: GOLD) = box(width: w, height: 2.6mm)[
+  #place(horizon, line(start: (0%, 50%), end: (42%, 50%), stroke: 0.4pt + c))
+  #place(horizon, line(start: (58%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
+  #place(center + horizon, circle(radius: 0.6mm, fill: c, stroke: none))
+]
+// arco delicado (SÓ na voz da carta): três fios finos + SÍMBOLOS (losangos),
+// nunca bolas. Emoldura a coluna da carta.
 #let arch(w, h) = box(width: w, height: h)[
-  #let lx = 0.10 * w
-  #let rx = 0.90 * w
-  #let sy = 0.34 * h
-  #place(curve(stroke: 1.2pt + GOLD,
+  #let lx = 0.085 * w
+  #let rx = 0.915 * w
+  #let sy = 0.30 * h
+  #place(curve(stroke: 0.8pt + GOLD,
     curve.move((lx, h)), curve.line((lx, sy)),
     curve.cubic((lx, 0pt), (rx, 0pt), (rx, sy)), curve.line((rx, h))))
-  #place(curve(stroke: 0.6pt + GOLD.transparentize(45%),
-    curve.move((lx + 0.032 * w, h)), curve.line((lx + 0.032 * w, sy + 0.02 * h)),
-    curve.cubic((lx + 0.032 * w, 0.03 * h), (rx - 0.032 * w, 0.03 * h), (rx - 0.032 * w, sy + 0.02 * h)),
-    curve.line((rx - 0.032 * w, h))))
-  #place(dx: lx - 1.6mm, dy: sy - 1.6mm, circle(radius: 1.6mm, fill: GOLD, stroke: none))
-  #place(dx: rx - 1.6mm, dy: sy - 1.6mm, circle(radius: 1.6mm, fill: GOLD, stroke: none))
-  #place(dx: w / 2 - 1mm, dy: 0.115 * h - 1mm, circle(radius: 1.9mm, fill: GOLD, stroke: none))
+  #place(curve(stroke: 0.45pt + GOLD.transparentize(15%),
+    curve.move((lx + 2.4mm, h)), curve.line((lx + 2.4mm, sy + 1.7mm)),
+    curve.cubic((lx + 2.4mm, 2.4mm), (rx - 2.4mm, 2.4mm), (rx - 2.4mm, sy + 1.7mm)),
+    curve.line((rx - 2.4mm, h))))
+  #place(curve(stroke: 0.3pt + GOLD.transparentize(45%),
+    curve.move((lx + 4.6mm, h)), curve.line((lx + 4.6mm, sy + 3.2mm)),
+    curve.cubic((lx + 4.6mm, 4.6mm), (rx - 4.6mm, 4.6mm), (rx - 4.6mm, sy + 3.2mm)),
+    curve.line((rx - 4.6mm, h))))
+  // símbolos nos arranques e no ápice (losangos, não bolas)
+  #place(dx: lx - 1.4mm, dy: sy - 1.4mm, lozenge(s: 2mm))
+  #place(dx: rx - 1.4mm, dy: sy - 1.4mm, lozenge(s: 2mm))
+  #place(dx: w / 2 - 1.6mm, dy: 0.075 * h - 1.6mm, lozenge(s: 2.3mm))
+  #place(dx: w / 2 - 0.55mm, dy: 0.075 * h - 0.55mm, circle(radius: 0.55mm, fill: GOLD, stroke: none))
 ]
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
@@ -120,19 +152,32 @@
   acc
 }
 
-// corpo que RESPIRA: capitular opcional + quebras de movimento nas viragens +
-// um destaque (pull-quote) na 1.ª viragem, se o capítulo o trouxer.
-#let corpo-paras(paras, dropcap-on: true, destaque-frase: none) = {
+// normaliza o campo destaque (string ou lista) numa lista de pull-quotes
+#let norm-dest(u) = {
+  if "destaque" not in u { return () }
+  let d = u.destaque
+  if type(d) == array { d } else { (d,) }
+}
+
+// corpo que RESPIRA: capitular opcional + quebras de movimento nas viragens.
+// Em cada viragem entra um DESTAQUE (pull-quote), enquanto houver; as restantes
+// viragens ficam só com o losango. Assim os destaques aparecem VÁRIAS vezes.
+#let corpo-paras(paras, dropcap-on: true, destaques: ()) = {
   set par(first-line-indent: (amount: 5mm, all: true))
   let n = paras.len()
   let breaks = ()
   let k = 6
   while k <= n - 3 { breaks.push(k); k += 6 }
-  // garante uma viragem se houver destaque mas o capítulo for curto
-  if destaque-frase != none and breaks.len() == 0 and n >= 4 { breaks.push(calc.floor(n / 2)) }
+  // garante viragens suficientes para os destaques, mesmo em capítulos curtos
+  while breaks.len() < destaques.len() and breaks.len() + 1 <= n - 2 {
+    let pos = calc.floor(n * (breaks.len() + 1) / (destaques.len() + 1))
+    if not breaks.contains(pos) and pos >= 2 { breaks.push(pos) } else { break }
+  }
+  breaks = breaks.sorted()
+  let di = 0
   for (i, p) in paras.enumerate() {
     if breaks.contains(i) {
-      if destaque-frase != none and i == breaks.first() { destaque(destaque-frase) }
+      if di < destaques.len() { destaque(destaques.at(di)); di += 1 }
       else { movbreak() }
     }
     if i == 0 and dropcap-on {
@@ -142,28 +187,30 @@
   }
 }
 
-// ---- voz (carta de 2150 / interlúdios / epílogo): ARCO + corpo a respirar ----
-#let abre-voz(u, tam: 24pt) = {
+// ---- voz (carta de 2150 / interlúdios): a CARTA vai DENTRO do arco ----
+// O arco delicado emoldura a coluna da carta na 1.ª página; o texto desce por
+// dentro dele. Nas páginas seguintes a coluna continua, sem repetir o arco.
+#let abre-voz(u, tam: 26pt) = {
   setsect(u.kicker)
-  page(header: none, footer: none)[
-    #set align(center)
-    #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
-    #set text(hyphenate: false)
-    #box(width: 100%, height: 100%)[
-      #place(center + top, dy: 9mm, arch(112mm, 150mm))
-      #place(center + horizon, dy: -3mm, block(width: 72%)[
-        #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(u.kicker)]
-        #v(7mm)
-        #text(font: display, fill: TITLEINK, size: tam, weight: 300)[#u.titulo]
-        #if "epigrafe" in u { v(8mm); text(font: serif, style: "italic", fill: BROWN, size: 11.5pt)[#u.epigrafe] }
-        #v(9mm)
-        #rule-orn()
-      ])
-    ]
-  ]
-  block(width: 100%, inset: (x: 11mm))[
-    #set par(justify: false, first-line-indent: 0pt, leading: 0.92em, spacing: 1.7em)
-    #set text(size: 10.8pt, fill: INK)
+  pagebreak()
+  set align(center)
+  place(top + center, dy: 0mm, arch(114mm, 176mm))
+  v(48mm) // desce até ao nível dos arranques do arco
+  {
+    set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+    set text(hyphenate: false)
+    text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(u.kicker)]
+    v(3mm)
+    mini-rule()
+    v(6mm)
+    text(font: display, fill: TITLEINK, size: tam, weight: 300)[#u.titulo]
+    if "epigrafe" in u { v(7mm); block(width: 70%, text(font: serif, style: "italic", fill: BROWN, size: 11pt)[#u.epigrafe]) }
+  }
+  v(9mm)
+  block(width: 80mm)[
+    #set align(left)
+    #set par(justify: false, first-line-indent: 0pt, leading: 0.92em, spacing: 1.5em)
+    #set text(size: 10.5pt, fill: INK)
     #for p in u.texto [#fmt(p)#parbreak()]
   ]
 }
@@ -190,11 +237,13 @@
       ]
       v(9mm)
     }
-    #text(font: serif, fill: TITLEINK, size: 10.5pt, weight: 400)[#u.kicker]
-    #v(2.5mm)
-    #text(font: display, fill: TITLEINK, size: 16pt, weight: 300)[#u.titulo]
+    #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(u.kicker)]
+    #v(3.5mm)
+    #text(font: display, fill: TITLEINK, size: 18pt, weight: 300)[#u.titulo]
     #if "epigrafe" in u {
       v(5mm)
+      mini-rule(w: 14mm)
+      v(2.5mm)
       text(font: serif, style: "italic", fill: BROWN, size: 10.5pt)[#u.epigrafe]
     }
     #v(8mm)
@@ -202,7 +251,7 @@
     #dropcap(height: 3, gap: 2.6mm, justify: true, font: display, fill: TITLEINK, weight: 400)[#fmt(u.texto.first())]
   ]
   // o resto do capítulo, largura plena, a respirar
-  corpo-paras(u.texto.slice(1), dropcap-on: false, destaque-frase: u.at("destaque", default: none))
+  corpo-paras(u.texto.slice(1), dropcap-on: false, destaques: norm-dest(u))
 }
 
 // ---- capítulo seguinte (não abre Parte): sem imagem, sem arco ----
@@ -210,37 +259,47 @@
 #let abre-cap(u, sect: none) = {
   pagebreak()
   if sect != none { setsect(sect) }
-  block(above: 0pt, below: 7mm)[
+  v(46mm) // RESPIRO: o título começa bem abaixo do topo
+  block(below: 11mm)[
     #set align(left)
     #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
     #set text(hyphenate: false)
-    #text(font: serif, fill: TITLEINK, size: 10.5pt, weight: 400)[#u.kicker]
-    #v(2.5mm)
-    #text(font: display, fill: TITLEINK, size: 17pt, weight: 300)[#u.titulo]
+    // etiqueta pequena, em sans + ouro (hierarquia clara face ao título)
+    #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.36em)[#upper(u.kicker)]
+    #v(5mm)
+    // título grande, em display (claramente diferente da etiqueta)
+    #text(font: display, fill: TITLEINK, size: 24pt, weight: 300)[#u.titulo]
     #if "epigrafe" in u {
-      v(5mm)
-      box(width: 14mm, height: 3mm, place(horizon, line(start: (0%, 50%), end: (100%, 50%), stroke: 0.4pt + GOLD)))
-      v(2mm)
-      block(width: 76%, text(font: serif, style: "italic", fill: BROWN, size: 10.5pt)[#u.epigrafe])
+      v(6mm)
+      mini-rule(w: 16mm)
+      v(3.5mm)
+      block(width: 78%, text(font: serif, style: "italic", fill: BROWN, size: 10.5pt)[#u.epigrafe])
     }
   ]
-  corpo-paras(u.texto, dropcap-on: true, destaque-frase: u.at("destaque", default: none))
+  corpo-paras(u.texto, dropcap-on: true, destaques: norm-dest(u))
 }
 
 // ---- aparato inline (no fim do capítulo) ----
 // CAIXA só na Ideia central; a Pergunta fica aberta; a dica é nota discreta.
+// caixa de moldura DUPLA com cantos em bracket e fleuron a quebrar a base
 #let caixa-ideia(corpo) = block(breakable: false, width: 100%, above: 11mm, below: 4mm)[
-  #set align(center)
-  #set par(justify: false, first-line-indent: 0pt, leading: 0.84em)
-  #block(width: 114mm, inset: (x: 11mm, y: 8mm), stroke: 0.5pt + GOLD.transparentize(20%))[
-    #place(top + left, dx: -1.5mm, dy: -1.5mm, lozenge(s: 1.3mm))
-    #place(top + right, dx: 1.5mm, dy: -1.5mm, lozenge(s: 1.3mm))
-    #place(bottom + left, dx: -1.5mm, dy: 1.5mm, lozenge(s: 1.3mm))
-    #place(bottom + right, dx: 1.5mm, dy: 1.5mm, lozenge(s: 1.3mm))
-    #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL]
-    #v(2mm); #line(length: 15mm, stroke: 0.4pt + GOLD); #v(3.5mm)
-    #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
-  ]
+  #align(center, block(width: 118mm, stroke: 0.6pt + GOLD, inset: 1.8mm)[
+    #block(width: 100%, stroke: 0.4pt + GOLD.transparentize(15%), inset: (x: 11mm, y: 9mm))[
+      #align(center, text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
+      #v(5mm)
+      #set align(left)
+      #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
+      #text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)]
+    ]
+    // cantos e fleuron ao nível da moldura interna
+    #place(top + left, dx: 1.2mm, dy: 1.2mm, cTL)
+    #place(top + right, dx: -1.2mm, dy: 1.2mm, cTR)
+    #place(bottom + right, dx: -1.2mm, dy: -1.2mm, cBR)
+    #place(bottom + left, dx: 1.2mm, dy: -1.2mm, cBL)
+    #place(bottom + center, dy: 1.8mm, box(fill: PAPER, inset: (x: 2.2mm))[
+      #box(height: 3.2mm)[#place(center + horizon, lozenge(s: 1.7mm))#place(center + horizon, circle(radius: 0.55mm, fill: GOLD, stroke: none))]
+    ])
+  ])
 ]
 #let nota-dica(corpo) = block(breakable: false, width: 100%, above: 9mm, below: 3mm)[
   #block(width: 100%, inset: (left: 5mm), stroke: (left: 0.8pt + GOLD.transparentize(30%)))[
@@ -250,14 +309,17 @@
     #text(fill: INK, size: 10pt)[#fmt(corpo)]
   ]
 ]
-#let bloco-pergunta(corpo) = block(breakable: false, width: 100%, above: 11mm, below: 2mm)[
-  #set align(center)
-  #set par(justify: false, first-line-indent: 0pt, leading: 0.82em)
-  #eye()
-  #v(2.5mm)
-  #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR]
-  #v(3.5mm)
-  #block(width: 80%, text(font: serif, style: "italic", fill: BROWN, size: 12.5pt)[#fmt(corpo)])
+// pergunta SEM caixa: o olho à esquerda, rótulo + pergunta à direita (à esquerda)
+#let bloco-pergunta(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 2mm)[
+  #grid(columns: (16mm, 1fr), column-gutter: 6mm,
+    align(center + horizon, eye()),
+    block(align(left)[
+      #set par(justify: false, first-line-indent: 0pt, leading: 0.86em)
+      #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR]
+      #v(2.5mm)
+      #text(font: serif, style: "italic", fill: BROWN, size: 12.5pt)[#fmt(corpo)]
+    ]),
+  )
 ]
 #let aparato(u) = {
   if "ideia" in u { caixa-ideia(u.ideia) }

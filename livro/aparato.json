@@ -11,13 +11,21 @@
   },
   "A natureza que afinal era história": {
     "epigrafe": "Aquilo que uma cultura toma por evidente é quase sempre a última coisa que ela consegue ver.",
-    "destaque": "Grande parte daquilo a que chamamos natureza humana talvez não seja natureza nenhuma. Talvez seja história.",
+    "destaque": [
+      "Grande parte daquilo a que chamamos natureza humana talvez não seja natureza nenhuma. Talvez seja história.",
+      "Compreender de onde vem a nossa dureza não nos torna duros para com quem a carrega.",
+      "Nada disto começou em ti. Chegou a ti, herdado."
+    ],
     "ideia": "Muito do que vivemos como natureza humana imutável, a vigilância, a pressa, a fome de acumular, a culpa de descansar, é história sedimentada, adaptação a milhares de gerações de escassez que durou tanto que passou a parecer essência. **O que foi aprendido pode, com tempo e condições, ser reaprendido de outro modo.**",
     "dica": "Quando, ao longo deste capítulo, sentires a tentação de dizer «mas isto sou mesmo eu», experimenta trocar a frase por «isto foi-me ensinado». Repara no que muda em ti quando a dizes.",
     "pergunta": "Quem somos quando o inverno acaba?"
   },
   "A economia do medo": {
     "epigrafe": "Não há prisões mais eficazes do que as que vigiam por dentro.",
+    "destaque": [
+      "A obediência tem o sabor da protecção.",
+      "O medo não compra apenas comportamento: compra lealdade."
+    ],
     "ideia": "O alarme que nos manteve vivos tornou-se um estado permanente e, multiplicado entre corpos, fez-se moeda que organiza mercados, instituições e afectos; mas no fundo de tudo não está o medo da morte e sim o medo de ficar de fora, porque para um animal de pertença a exclusão sempre foi uma forma de morrer.",
     "pergunta": "O que herdámos, ao certo, com a pertença, e a quem aprendeu o nosso corpo a ser fiel, e a que preço?"
   },
