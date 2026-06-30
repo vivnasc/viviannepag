@@ -15,7 +15,15 @@ const BUCKET = 'viviannepag-assets';
 // afinável aqui num número. Ligado por defeito em guardarImagem (editorial !== false).
 async function gradeEditorial(buffer: Buffer): Promise<Buffer> {
   try {
-    return await sharp(buffer).linear(1.06, 20).modulate({ brightness: 1.14 }).jpeg({ quality: 92 }).toBuffer();
+    // clarear (linear lift das sombras + brightness) E AFIAR (unsharp mask = nitidez,
+    // contraste local, detalhe fino). Clarear não é nitidez: o sharpen é o que dá a
+    // sensação de foto editorial nítida. Tudo afinável aqui (sigma do sharpen).
+    return await sharp(buffer)
+      .linear(1.06, 20)
+      .modulate({ brightness: 1.14 })
+      .sharpen({ sigma: 1.3 })
+      .jpeg({ quality: 94 })
+      .toBuffer();
   } catch { return buffer; }
 }
 

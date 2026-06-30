@@ -40,7 +40,8 @@ const VIDA =
 // ── FOTOGRAFIA: só luz / lente / composição. Penumbra LUMINOSA, tudo visível, NADA moody ──
 const FOTOGRAFIA =
   'A NATURE-DOCUMENTARY / ANTHROPOLOGY PHOTOGRAPH (BBC Planet Earth, National Geographic): a photographer visited a REAL place that existed before any caption and keeps existing after it. ' +
-  'BRIGHT BUT SOFT diffuse daylight (like soft light after rain), CLEAR visibility, high LOCAL contrast, LUMINOUS penumbra WITHOUT darkness, every detail visible, rich texture, deep field with activity in the background. ' +
+  'BRIGHT BUT SOFT diffuse daylight (like soft light after rain), CLEAR visibility, high LOCAL contrast, LUMINOUS penumbra WITHOUT darkness, every detail visible, rich texture. ' +
+  'TACK-SHARP, DEEP FOCUS, crisp fine detail edge to edge, ultra-high resolution; NOT soft, NOT blurry, NOT a shallow depth-of-field bokeh blur, NOT dreamy. ' +
   'HIGH DENSITY OF VISUAL INFORMATION per square metre: objects, materials, tools, species, architecture, people busy, signs of use. ' +
   'ETHNICALLY DIVERSE real humans with NORMAL bodies (no mutation, no alien features); what differs is their cultures, clothes, tools and ways of living, never their anatomy. ' +
   'NOT moody, NOT atmospheric gloom, NOT dramatic deep shadows, NOT crushed blacks, NOT golden-hour spirituality, NOT god-rays, NOT a wellness/retreat/ashram look. ';

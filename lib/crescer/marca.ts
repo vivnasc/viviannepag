@@ -91,7 +91,7 @@ export const LIVRO = {
 // ---------------------------------------------------------------------------
 export type TematicaId =
   | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo'
-  | 'desencaixe' | 'consciencia';
+  | 'desencaixe' | 'consciencia' | 'emergencia';
 
 export interface Tematica {
   id: TematicaId;
@@ -163,6 +163,15 @@ export const TEMATICAS: Tematica[] = [
     id: 'consciencia', label: 'Consciência emergente', emoji: '🌀',
     descricao: 'A vida vista para além da sobrevivência.',
     foco: 'O que se vê quando a sobrevivência deixa de mandar: a identidade construída sobre a falta, a vigilância herdada que continua a varrer o ambiente muito depois de o perigo passar, a vida gerida como defesa, e o que se abre quando se larga isso. Parte de UM destes mecanismos e traz a cena concreta de quem o vive, sempre em linguagem de vida real. PROIBIDO nomear conceitos, domínios ou termos técnicos; só a vida.',
+  },
+  {
+    // O POLO POSITIVO da Grande Transição (Consciência Emergente em positivo): não a
+    // dor da sobrevivência (isso é 'consciencia'), mas o que se ABRE e PARA ONDE vamos,
+    // como pessoa e como humanidade, quando a abundância (de presença, sentido, vínculo)
+    // passa a ser o normal. Acordar, evoluir, expandir, e o que isso FAZ numa vida.
+    id: 'emergencia', label: 'Para onde vamos', emoji: '🌅',
+    descricao: 'Acordar, evoluir, expandir: o que se abre e para onde vamos.',
+    foco: 'Acordar, evoluir, expandir, e o que isso FAZ em concreto numa vida e à volta dela: o que se torna possível quando a mente deixa de viver em defesa e começa a criar, cooperar e dar sentido. NÃO a dor da sobrevivência, mas o que se ABRE depois: relações mais inteiras, o tempo que deixa de ser corrida, presença, criação, pertença sem preço. Olha também para onde vamos COMO HUMANIDADE quando a abundância de presença, de sentido e de vínculo passa a ser o normal (não a abundância de coisas). Concreto e encarnado, na 1.ª pessoa da vida real; PROIBIDO jargão, utopia fofa e clichés ("eleva a tua vibração", "novo paradigma", "consciência coletiva"); nomeia sempre a cena concreta onde isso se sente.',
   },
 ];
 
