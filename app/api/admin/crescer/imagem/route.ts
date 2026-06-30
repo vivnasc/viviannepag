@@ -3,7 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { getVisual, reforcoVisual } from '@/lib/crescer/marca';
-import { cenaWorldbuilding, cenaConstituicao, LUZ_PREFIXO } from '@/lib/crescer/mundo-visual';
+import { cenaWorldbuilding, cenaConstituicao } from '@/lib/crescer/mundo-visual';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -66,8 +66,8 @@ export async function POST(req: Request) {
 
   let imageUrl: string;
   try {
-    const url = await gerarImagemFlux(LUZ_PREFIXO + prompt, token, { raw: true });
-    try { imageUrl = await guardarImagem(url, `crescer/${body.slug}/fundo-${Date.now()}.jpg`, { clarear: true }); } catch { imageUrl = url; }
+    const url = await gerarImagemFlux(prompt, token, { raw: true });
+    try { imageUrl = await guardarImagem(url, `crescer/${body.slug}/fundo-${Date.now()}.jpg`); } catch { imageUrl = url; }
   } catch (e) { return NextResponse.json({ erro: 'flux', detalhe: String(e instanceof Error ? e.message : e) }, { status: 502 }); }
 
   for (const i of alvos) { slides[i].imageUrl = imageUrl; slides[i].notaVisual = prompt; }
