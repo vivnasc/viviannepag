@@ -68,8 +68,8 @@ const idx = (n: number, len: number) => ((n % len) + len) % len;
 // geração segue a CADEIA: frase -> função -> artefacto/organismo -> evento -> imagem.
 // O ficheiro é enriquecido/calibrado fora (ChatGPT + geração); aqui só se lê. ───
 import banco from '@/worldbuilding/banco_visual.json';
-interface Artefacto { nome: string; funcao: string; descricao: string; quando_falha: string; evento_visual: string; emocao_associada: string }
-interface Organismo { nome: string; reino: string; funcao: string; comportamento: string; equivalente_terrestre: string }
+interface Artefacto { nome: string; funcao: string; descricao: string; quando_falha: string; evento_visual: string; emocao_associada?: string; emocao_predominante?: string; simbolo_visual?: string; escala_preferencial?: string }
+interface Organismo { nome: string; reino: string; funcao: string; comportamento: string; equivalente_terrestre: string; simbolo_visual?: string; escala_preferencial?: string; emocao_predominante?: string }
 interface Evento { evento: string; significado: string; categoria: string }
 interface Exemplar { funcao: string; pergunta: string; prompt_en: string }
 const ARTEFACTOS = (banco.ARTEFACTOS ?? []) as Artefacto[];
@@ -92,18 +92,24 @@ export function cenaConstituicao(seed = 0): CenaVisual {
   const arteF = ARTEFACTOS.filter((a) => a.funcao === funcao);
   const orgF = ORGANISMOS.filter((o) => o.funcao === funcao);
   const usarOrg = seed % 10 >= 7 && (orgF.length || ORGANISMOS.length);
-  let sujeito: string, evento: string, categoria: string;
+  let sujeito: string, evento: string, categoria: string, escala: Escala, emocao = '', enquadramento = '';
   if (usarOrg) {
     const o = (orgF.length ? orgF : ORGANISMOS)[idx(seed, (orgF.length ? orgF : ORGANISMOS).length)];
-    sujeito = `the "${o.nome}" — ${o.comportamento}, a living being of this world (${o.reino}), NOT a terrestrial animal`;
+    const simbolo = o.simbolo_visual ?? '';
+    sujeito = `the "${o.nome}"${simbolo ? ` (visual form: ${simbolo})` : ''} — ${o.comportamento}, a living being of this world [reino: ${o.reino}], NOT a terrestrial animal`;
     const ev = EVENTOS_BANCO[idx(seed * 5 + 3, EVENTOS_BANCO.length)];
     evento = ev ? `${ev.evento} (${ev.significado})` : 'behaves in a way that mirrors the sentence';
-    categoria = 'especie';
+    emocao = o.emocao_predominante ?? '';
+    enquadramento = o.escala_preferencial ?? '';
+    escala = 'ecologica'; categoria = 'especie';
   } else {
     const a = (arteF.length ? arteF : ARTEFACTOS)[idx(seed, (arteF.length ? arteF : ARTEFACTOS).length)] as Artefacto | undefined;
-    sujeito = a ? `the "${a.nome}" — ${a.descricao}, an item of this civilization's MATERIAL CULTURE (functional equivalent, never a terrestrial object)` : 'a single living instrument of this civilization';
+    const simbolo = a?.simbolo_visual ?? '';
+    sujeito = a ? `the "${a.nome}"${simbolo ? ` (visual form: ${simbolo})` : ''} — ${a.descricao}, an item of this civilization's MATERIAL CULTURE (functional equivalent, never a terrestrial object)` : 'a single living instrument of this civilization';
     evento = a ? `${a.evento_visual} (${a.quando_falha})` : 'undergoes the event that mirrors the sentence';
-    categoria = 'objecto';
+    emocao = a?.emocao_predominante ?? a?.emocao_associada ?? '';
+    enquadramento = a?.escala_preferencial ?? '';
+    escala = 'intima'; categoria = 'objecto';
   }
   const exemplar = EXEMPLARES.find((e) => e.funcao === funcao && e.prompt_en?.trim());
   const pergunta = exemplar?.pergunta || PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
@@ -113,9 +119,11 @@ export function cenaConstituicao(seed = 0): CenaVisual {
     `CIVILIZATIONAL FUNCTION: ${funcao}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
     `THE SUBJECT (fills the frame, intimate and close, the place is NEVER the subject): ${sujeito}. ` +
     `THE EVENT (the whole point — the civilizational equivalent of the sentence's emotional movement): it ${evento}. Choose/adjust the event so it mirrors THIS exact sentence. ` +
+    (enquadramento ? `FRAMING/SCALE: ${enquadramento}. ` : '') +
+    (emocao ? `PREDOMINANT EMOTION (let it shape the composition and light): ${emocao}. ` : '') +
     `If a person appears they are in RELATION with this artifact/organism, which stays the true subject. Translate the sentence into THIS EVENT, never into a mood or a landscape. ` +
     (exemplar ? `REFERENCE of the right level for this function (compose in this spirit, do not copy literally): ${exemplar.prompt_en} ` : '') +
     `${PALETA_MUNDO}. ${EVITAR_MUNDO}. ` +
     `TEST: without a caption the image must make someone ask "what happened here, in what civilization?", never "where is this place?".`;
-  return { escala: usarOrg ? 'ecologica' : 'intima', funcao, pergunta, categoria, evento, briefing };
+  return { escala, funcao, pergunta, categoria, evento, briefing };
 }
