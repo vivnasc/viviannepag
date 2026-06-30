@@ -9,7 +9,7 @@
 
 import { CRESCER, LIVRO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
 import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
-import { cenaConstituicao } from './mundo-visual';
+import { cenaConstituicao, cenaWorldbuilding } from './mundo-visual';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaCrescer {
@@ -35,6 +35,7 @@ export async function gerarPecaCrescer(
   vozId: VozId = 'direta',
   seed = 0,
   veia?: { titulo: string; texto: string; livroTitulo: string } | null, // MINERAÇÃO: excerto real do livro = fonte primária
+  imagemModo: 'cena' | 'ilustrar' = 'cena', // 'cena' = documentário da civilização (defeito); 'ilustrar' = ilustrar a frase
 ): Promise<PecaCrescer> {
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
@@ -45,7 +46,9 @@ export async function gerarPecaCrescer(
   // uma civilização que nunca existiu — categoria/escala/função/pergunta por seed,
   // respeitando as proporções (Axioma 6) e o equivalente funcional. Substitui os
   // arquétipos antigos (presos na monumentalidade).
-  const cena = semImagem ? null : cenaConstituicao(seed);
+  // MOTOR 2 (cena): documentário da civilização (as imagens fortes, não ilustram a frase).
+  // MOTOR 1 (ilustrar): ilustra a frase via cultura material. 'cena' por defeito.
+  const cena = semImagem ? null : (imagemModo === 'ilustrar' ? cenaConstituicao(seed) : cenaWorldbuilding(seed));
 
   const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${CRESCER.handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}
 
@@ -92,7 +95,9 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "conceito": "o tema em 1 a 3 palavras (selo da capa)",
   "frase": "o texto da CAPA: ${formato.multi ? 'a 1.ª linha/faca que para o scroll' : 'a frase única (1 a 3 linhas curtas)'}, sem aspas",
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
-  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS, composto a partir deste BRIEFING da constituição visual (segue-o à risca: a escala, a função, a pergunta antropológica, a categoria e o equivalente funcional), traduzindo VISUALMENTE o sentimento da frase que escreveste (ligação imagem↔texto). NÃO uses objetos terrestres, versões futuristas, nem monumentalidade por defeito. BRIEFING: ${cena!.briefing}"`},
+  "fundoPrompt": ${semImagem ? '""' : (imagemModo === 'ilustrar'
+    ? `"prompt em INGLÊS, composto a partir deste BRIEFING (segue-o à risca), traduzindo VISUALMENTE o sentimento da frase que escreveste (ligação imagem↔texto). NÃO uses objetos terrestres, versões futuristas, nem monumentalidade. BRIEFING: ${cena!.briefing}"`
+    : `"prompt em INGLÊS, composto a partir deste BRIEFING (segue-o à risca). É um DOCUMENTÁRIO da civilização, NÃO ilustra a frase: NÃO tentes traduzir a frase, mostra uma cena real de um dia normal deste mundo (partilha a civilização com o texto, não o ilustra). BRIEFING: ${cena!.briefing}"`)},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
   "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["As telas em sequência, EXATAMENTE conforme a estrutura do formato indicada acima. A 1.ª tela é a CAPA (igual ao campo frase). Cada tela é uma respiração/parágrafo conforme o formato, todas diferentes, sem repetir a ideia. Sem travessões, leitura clara e interessante do princípio ao fim."]' : ''}
 }`;

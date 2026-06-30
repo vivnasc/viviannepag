@@ -68,6 +68,7 @@ const idx = (n: number, len: number) => ((n % len) + len) % len;
 // geração segue a CADEIA: frase -> função -> artefacto/organismo -> evento -> imagem.
 // O ficheiro é enriquecido/calibrado fora (ChatGPT + geração); aqui só se lê. ───
 import banco from '@/worldbuilding/banco_visual.json';
+import mundo from '@/worldbuilding/banco_worldbuilding.json';
 interface Sujeito {
   nome: string; funcao: string; descricao?: string; comportamento?: string; reino?: string;
   evento_visual?: string; quando_falha?: string; simbolo_visual?: string; escala_preferencial?: string;
@@ -155,4 +156,35 @@ export function cenaConstituicao(seed = 0): CenaVisual {
     `${PALETA_MUNDO}. ${EVITAR_MUNDO} ${NAO_E_GLOBAL}${naoEItem} ` +
     `BRUTAL TEST before you finish: if the caption were removed, would someone ask "what does this MEAN?" (FAIL) or "what IS this object/being/ritual, who uses it, what happened?" (PASS)? Only the second is acceptable.`;
   return { escala: s?.reino ? 'ecologica' : 'intima', funcao, pergunta, categoria: s?.tipo_en ?? 'objecto', evento, briefing };
+}
+
+// ─── MOTOR 2 · WORLDBUILDING (worldbuilding/banco_worldbuilding.json) ───────────────
+// NÃO parte da frase. Parte da CIVILIZAÇÃO: escolhe uma CENA QUOTIDIANA (e, se houver,
+// um fragmento concreto: instituição/profissão/espécie/espaço) e compõe o "documentário
+// fotográfico de um dia normal" — a lógica que gerou as imagens fortes. Aqui a escala
+// PODE variar (de íntima a uma vista da cidade). A imagem partilha a civilização com o
+// texto, mas não o ilustra. "Que fotografia tiraria um antropólogo num dia normal?"
+interface CenaQ { categoria: string; descricao: string; escala?: string }
+interface ItemMundo { nome: string; funcao?: string; descricao?: string; equivalente_terrestre?: string }
+const CENAS_Q = (mundo.CENAS_QUOTIDIANAS ?? []) as CenaQ[];
+const FRAGMENTOS: ItemMundo[] = ['INSTITUICOES', 'PROFISSOES', 'ESPECIES', 'ESPACOS', 'OBJETOS', 'RITUAIS']
+  .flatMap((k) => ((mundo as Record<string, unknown>)[k] ?? []) as ItemMundo[]);
+
+export function cenaWorldbuilding(seed = 0): CenaVisual {
+  const cena = CENAS_Q.length ? CENAS_Q[idx(seed, CENAS_Q.length)] : null;
+  // um fragmento concreto para ancorar (objecto/ser/instituição desta civilização).
+  const frag = FRAGMENTOS.length ? FRAGMENTOS[idx(seed * 5 + 2, FRAGMENTOS.length)] : null;
+  const categoria = cena?.categoria ?? 'vida quotidiana';
+  const descricao = cena?.descricao ?? 'um momento de um dia normal desta civilização';
+  const enquadramento = cena?.escala ?? 'íntima ou média';
+  const briefing =
+    `DOCUMENTARY photograph an anthropologist would take on a NORMAL DAY in a civilization that NEVER existed — a National Geographic photo of a world that is NOT Earth (the functional equivalent, never the future of Earth). ` +
+    `Start from the CIVILIZATION, not from a phrase. DAILY-LIFE CATEGORY: ${categoria}. THE SCENE: ${descricao}. ` +
+    (frag ? `You may anchor it with a concrete element of this world: the "${frag.nome}"${frag.descricao ? ` (${frag.descricao})` : ''}. ` : '') +
+    `Real people of this civilization, living WITH the world (symbiotic relations, living instruments, conscious materials, living architecture); faces present, without vigilance; relations rather than isolated individuals. ` +
+    `FRAMING: ${enquadramento} (scale may vary, from a close detail to a city seen breathing). Candid, lived-in, real, NOT staged, NOT an advertisement. ` +
+    `${PALETA_MUNDO}. NEVER Earth, NEVER a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, NEVER self-help symbolism (a glowing orb or a flower in cupped hands), no text, no letters, no watermark, no logos. ` +
+    `TEST: without a caption the image must make someone ask "what civilization is this? how do they live?", never "where is this place?" nor "what does this mean?".`;
+  const escala: Escala = enquadramento.includes('civiliz') ? 'civilizacional' : enquadramento.includes('eco') ? 'ecologica' : enquadramento.includes('social') ? 'social' : 'intima';
+  return { escala, funcao: categoria, pergunta: `como vivem: ${categoria}`, categoria, evento: descricao, briefing };
 }

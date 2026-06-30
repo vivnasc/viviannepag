@@ -42,8 +42,9 @@ export async function POST(req: Request) {
     tematicas?: string[]; formatos?: string[]; visuais?: string[];
     quantos?: number; surpreender?: boolean; tema?: string; voz?: string;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string };
-    efeito?: string; saida?: 'reel' | 'carrossel'; fonte?: 'livro' | 'tema';
+    efeito?: string; saida?: 'reel' | 'carrossel'; fonte?: 'livro' | 'tema'; imagemModo?: 'cena' | 'ilustrar';
   };
+  const imagemModo = body.imagemModo === 'ilustrar' ? 'ilustrar' : 'cena';
   const voz = (getVoz(body.voz ?? '') ? body.voz : 'direta') as VozId;
   // ela escolhe COMO sai: reel (defeito, mais alcance) ou carrossel. reel=true => sempre reel.
   const ehReel = body.saida !== 'carrossel';
@@ -127,7 +128,7 @@ export async function POST(req: Request) {
       // MINERAÇÃO: no modo livro, escolhe uma veia ainda não usada e passa-a como fonte.
       const veia: Veia | null = fonte === 'livro' ? escolherVeia(veiasUsadas, seed) : null;
       if (veia) veiasUsadas.push(veia.id);
-      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed, veia);
+      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed, veia, imagemModo);
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
       const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;

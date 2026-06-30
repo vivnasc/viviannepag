@@ -1,0 +1,60 @@
+{
+  "_nota": "MOTOR 2 · WORLDBUILDING. NÃO começa pela frase — começa pela CIVILIZAÇÃO. Cadeia: categoria -> cena quotidiana -> imagem. É o documentário fotográfico de um mundo que existe algures e que estamos a visitar: 'que fotografia tiraria um antropólogo num dia normal desta civilização?'. Foi esta lógica que gerou as imagens fortes (biblioteca viva, mercado de experiências, criança a aprender com um organismo, baleia-arquivo). Aqui a escala pode variar (íntima a civilizacional). Constituição/paleta: worldbuilding/CONSTITUICAO.md. Enriquecer com o ChatGPT.",
+
+  "INSTITUICOES": [
+    { "nome": "biblioteca biológica", "funcao": "armazenar conhecimento", "equivalente_terrestre": "biblioteca", "descricao": "organismo translúcido onde o conhecimento cresce biologicamente e se abre a quem chega com curiosidade verdadeira" },
+    { "nome": "jardim de aprendizagem", "funcao": "educação", "equivalente_terrestre": "escola", "descricao": "as crianças aprendem com seres vivos e não com manuais" },
+    { "nome": "arquivo de memórias migratórias", "funcao": "história colectiva", "equivalente_terrestre": "arquivo nacional", "descricao": "guarda as experiências de gerações em filamentos vivos" },
+    { "nome": "câmara de ressonância", "funcao": "decisão colectiva", "equivalente_terrestre": "assembleia", "descricao": "a comunidade decide em comum, as vozes convergem numa luz" },
+    { "nome": "mercado de experiências", "funcao": "troca social", "equivalente_terrestre": "mercado", "descricao": "as pessoas trocam experiências vividas em vez de objectos" }
+  ],
+
+  "PROFISSOES": [
+    { "nome": "curador de memória", "funcao": "preservação cultural", "descricao": "cuida dos arquivos vivos das famílias e da comunidade" },
+    { "nome": "cartógrafo da consciência", "funcao": "orientação existencial", "descricao": "ajuda a mapear estados internos colectivos" },
+    { "nome": "jardineiro de significado", "funcao": "crescimento cultural", "descricao": "cultiva os organismos onde cresce o sentido comum" },
+    { "nome": "tradutor interespécies", "funcao": "comunicação", "descricao": "faz a ponte entre humanos e os organismos do mundo" }
+  ],
+
+  "ESPECIES": [
+    { "nome": "baleia migratória de memória", "funcao": "transportar conhecimento entre regiões", "descricao": "as suas rotas no alto céu ou no oceano levam memória de continente a continente" },
+    { "nome": "organismo mentor", "funcao": "aprendizagem", "descricao": "ser vivo que acompanha a criança a aprender" },
+    { "nome": "animal cartográfico", "funcao": "orientação emocional colectiva", "descricao": "migra através de estados psicológicos colectivos" },
+    { "nome": "polinizador de ideias", "funcao": "criatividade", "descricao": "circula criatividade entre pessoas e regiões" }
+  ],
+
+  "ESPACOS": [
+    { "nome": "observatório emocional", "funcao": "compreensão colectiva", "descricao": "espaço onde se observam os estados internos da comunidade" },
+    { "nome": "rio de memória", "funcao": "transmissão cultural", "descricao": "corrente viva por onde passa a memória de uma região" },
+    { "nome": "casa simbiótica", "funcao": "habitar", "descricao": "casa-organismo que cresce com a família e muda quando nasce ou parte alguém" },
+    { "nome": "jardim de transição", "funcao": "luto", "descricao": "lugar vivo onde se acompanha uma despedida" }
+  ],
+
+  "OBJETOS": [
+    { "nome": "cápsula de conhecimento", "funcao": "guardar saber", "descricao": "pequeno organismo que guarda uma experiência ou um saber" },
+    { "nome": "taça de escuta", "funcao": "reconciliação", "descricao": "amplia a compreensão entre pessoas em conversa difícil" },
+    { "nome": "tecido vivo", "funcao": "vestir/regular", "descricao": "roupa-ecologia que muda devagar com a pessoa" }
+  ],
+
+  "RITUAIS": [
+    { "nome": "acolhimento do recém-nascido", "funcao": "celebração", "descricao": "a comunidade reconhece e nomeia um recém-chegado" },
+    { "nome": "partilha de memória familiar", "funcao": "transmissão", "descricao": "uma família reúne-se à volta do seu arquivo vivo" },
+    { "nome": "decisão em comum", "funcao": "decisão colectiva", "descricao": "a comunidade decide em círculo, em ressonância" },
+    { "nome": "refeição", "funcao": "vínculo", "descricao": "uma refeição partilhada, à volta de organismos de luz" }
+  ],
+
+  "CENAS_QUOTIDIANAS": [
+    { "categoria": "infância", "descricao": "crianças exploram e aprendem com organismos vivos que guardam conhecimento", "escala": "social" },
+    { "categoria": "investigação", "descricao": "cientistas cultivam conhecimento como quem faz horticultura, sobre uma mesa viva", "escala": "íntima" },
+    { "categoria": "família", "descricao": "pais e filhos cuidam de um arquivo vivo de memórias", "escala": "íntima" },
+    { "categoria": "oceano", "descricao": "uma baleia migratória de memória atravessa, transportando saber entre regiões", "escala": "ecológica" },
+    { "categoria": "biblioteca", "descricao": "o conhecimento cresce em estruturas orgânicas translúcidas e as pessoas leem-no de perto", "escala": "social" },
+    { "categoria": "mercado", "descricao": "pessoas trocam experiências vividas num mercado de organismos de luz", "escala": "social" },
+    { "categoria": "maternidade", "descricao": "uma mãe segura um recém-nascido num acolhimento da comunidade", "escala": "íntima" },
+    { "categoria": "profissão", "descricao": "um curador de memória trabalha, inclinado sobre um arquivo vivo", "escala": "íntima" },
+    { "categoria": "refeição", "descricao": "uma família partilha uma refeição à volta de organismos de luz", "escala": "social" },
+    { "categoria": "animais", "descricao": "uma criança e um organismo mentor em relação, de perto", "escala": "íntima" },
+    { "categoria": "cidade", "descricao": "uma vista de um dia normal de uma cidade-organismo que respira", "escala": "civilizacional" },
+    { "categoria": "astronomia", "descricao": "pessoas observam, de um observatório emocional, as marés de consciência no céu", "escala": "ecológica" }
+  ]
+}

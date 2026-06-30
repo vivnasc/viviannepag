@@ -398,6 +398,7 @@ export default function CrescerPage() {
   const [voz, setVoz] = useState<VozId>('direta'); // a voz do alcance, por defeito
   const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
   const [fonte, setFonte] = useState<'livro' | 'tema'>('livro'); // minerar os livros (defeito) vs partir de uma temática
+  const [imagemModo, setImagemModo] = useState<'cena' | 'ilustrar'>('cena'); // cena da civilização (defeito) vs ilustrar a frase
   const [quantos, setQuantos] = useState(1); // 1 por defeito: uma de cada vez, sem ser obrigada a lote
   const [surpreender, setSurpreender] = useState(false);
   const [tema, setTema] = useState('');
@@ -441,7 +442,7 @@ export default function CrescerPage() {
       const r = await fetch('/api/admin/crescer/gerar', {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida, fonte,
+          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida, fonte, imagemModo,
           tema: tema.trim() || undefined, tipografia: padrao.tipografia, efeito: padrao.efeito,
         }),
       });
@@ -450,7 +451,7 @@ export default function CrescerPage() {
       else setMsg(`${j.gerados} peça(s) gerada(s)${j.detalhe ? ` (aviso: ${j.detalhe})` : ''}. Revê em baixo, afina e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); } finally { setBusy(false); }
-  }, [busy, surpreender, temas, fmts, vis, voz, saida, fonte, quantos, tema, padrao, recarregar]);
+  }, [busy, surpreender, temas, fmts, vis, voz, saida, fonte, imagemModo, quantos, tema, padrao, recarregar]);
 
   // acção numa peça (rota genérica)
   const acao = useCallback(async (slug: string, url: string, body: Record<string, unknown>, aviso: string, ok: string, fechar = true) => {
@@ -597,6 +598,12 @@ export default function CrescerPage() {
           <div className="flex flex-wrap gap-1.5 mb-3">
             <Chip on={saida === 'reel'} onClick={() => setSaida('reel')} title="vídeo vertical, o texto aparece ritmado por cima da imagem (mais alcance)"><span className="mr-1">🎬</span>reel</Chip>
             <Chip on={saida === 'carrossel'} onClick={() => setSaida('carrossel')} title="telas 4:5 que se deslizam, texto estático que se lê"><span className="mr-1">🎠</span>carrossel</Chip>
+          </div>
+
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">imagem <span className="opacity-50">(a cena é o documentário do mundo)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <Chip on={imagemModo === 'cena'} onClick={() => setImagemModo('cena')} title="fotografia de um dia normal desta civilização (biblioteca viva, mercado, criança a aprender). NÃO ilustra a frase: partilha o mundo com ela. São as imagens fortes."><span className="mr-1">🌍</span>cena da civilização</Chip>
+            <Chip on={imagemModo === 'ilustrar'} onClick={() => setImagemModo('ilustrar')} title="ilustra a frase via cultura material (artefacto + evento). Mais conceptual, mais arriscado a virar símbolo."><span className="mr-1">💬</span>ilustrar a frase</Chip>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
