@@ -34,13 +34,8 @@
 // o sinal de 2150). Linhas finíssimas, brilho suave, muito espaço.
 #let hairline(w: 30mm, c: GOLD, t: 0.4pt) = line(length: w, stroke: t + c)
 #let ring(d: 6mm, c: GOLD, t: 0.5pt) = circle(radius: d / 2, stroke: t + c)
-// anéis concêntricos: um sinal / uma onda de luz (futurista)
-#let rings(d: 18mm, n: 3, c: GOLD) = box(width: d, height: d)[
-  #for i in range(n) {
-    place(center + horizon, circle(radius: (d / 2) * (1 - i / n) + (d / (2 * n)) * 0, stroke: (0.6pt - i * 0.12pt) + c.transparentize(i * 22%)))
-  }
-  #place(center + horizon, circle(radius: 0.7mm, fill: c, stroke: none))
-]
+// A MARCA da Vivianne (o véu) — o símbolo do livro, da própria marca dela
+#let marca(h: 12mm) = box(height: h, image("vendor/marca/veu.svg", height: h))
 // brilho suave (a luz que emana da matéria, do manifesto)
 #let glow(d: 100mm, c: GOLD, op: 86%) = circle(radius: d / 2, stroke: none,
   fill: gradient.radial(c.transparentize(op), c.transparentize(100%)))
@@ -48,27 +43,27 @@
 #let divisoria(w: 44mm, c: GOLD) = box(width: w, height: 6mm)[
   #place(horizon, line(start: (0%, 50%), end: (40%, 50%), stroke: 0.4pt + c))
   #place(horizon, line(start: (60%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, ring(d: 2.6mm, c: c))
+  #place(center + horizon, marca(h: 4.5mm))
 ]
 #let mini-rule(w: 26mm, c: GOLD) = box(width: w, height: 5mm)[
   #place(horizon, line(start: (0%, 50%), end: (42%, 50%), stroke: 0.4pt + c))
   #place(horizon, line(start: (58%, 50%), end: (100%, 50%), stroke: 0.4pt + c))
-  #place(center + horizon, ring(d: 2mm, c: c))
+  #place(center + horizon, marca(h: 4mm))
 ]
 // compat.: rule-orn passa a ser a divisória moderna
 #let rule-orn(w: 44mm, c: GOLD) = divisoria(w: w, c: c)
 // quebra de movimento: um anel fino ao centro. sticky (nunca órfão).
 #let movbreak() = block(above: 11mm, below: 11mm, width: 100%, breakable: false, sticky: true,
-  align(center, ring(d: 3mm)))
+  align(center, marca(h: 6mm)))
 // destaque (pull-quote): frase forte do capítulo, entre hairlines finas
 #let destaque(frase) = block(above: 13mm, below: 13mm, width: 100%, breakable: false, sticky: true)[
   #set align(center)
   #set par(justify: false, first-line-indent: 0pt, leading: 1.0em)
-  #hairline(w: 16mm)
+  #marca(h: 6mm)
   #v(5mm)
   #block(width: 84%, text(font: display, style: "italic", fill: GOLDSOFT, size: 16pt, weight: 300)[#frase])
   #v(5mm)
-  #hairline(w: 16mm)
+  #hairline(w: 14mm)
 ]
 // vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
 #let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
@@ -158,7 +153,7 @@
   set align(center)
   place(top + center, dy: 18mm, glow(d: 92mm, op: 88%))
   v(26mm)
-  rings(d: 22mm)
+  marca(h: 26mm)
   v(11mm)
   {
     set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
@@ -245,7 +240,7 @@
 #let caixa-ideia(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 4mm)[
   #block(width: 100%, fill: GOLD.transparentize(93%), inset: (x: 11mm, y: 9mm))[
     #grid(columns: (auto, 1fr), column-gutter: 4mm, align: (horizon, horizon),
-      ring(d: 4.5mm),
+      marca(h: 7mm),
       text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[IDEIA CENTRAL])
     #v(5mm)
     #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
@@ -265,7 +260,7 @@
 #let bloco-pergunta(corpo) = block(breakable: false, width: 100%, above: 12mm, below: 2mm)[
   #set par(justify: false, first-line-indent: 0pt, leading: 0.86em)
   #grid(columns: (auto, 1fr), column-gutter: 6mm, align: (top, top),
-    pad(top: 1mm, ring(d: 6.5mm)),
+    pad(top: 0.5mm, marca(h: 9mm)),
     [
       #text(font: sans, fill: GOLDSOFT, size: 7.6pt, weight: 500, tracking: 0.3em)[PERGUNTA PARA FICAR]
       #v(3mm)
