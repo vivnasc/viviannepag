@@ -65,19 +65,24 @@ export default function TesteMundoPage() {
     finally { setBusy(false); }
   };
 
+  const [aGerar, setAGerar] = useState(0); // quantas ainda a sair (progresso)
+
+  // EFICIENTE: dispara N gerações EM PARALELO (cada uma curta e independente, 1 imagem),
+  // e cada uma entra no ecrã assim que fica pronta — sem esperar pelo lote todo.
   const gerar = async (modo: 'objetos' | 'cenas') => {
-    setBusy(true); setErro('');
-    try {
-      const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo }) });
-      const d = await r.json();
-      if (d.amostras?.length) await carregar(); else setErro(d.detalhe || d.erro || 'falhou');
-    } catch (e) {
-      // "Load failed" = o navegador largou o pedido longo, mas o servidor pode ter
-      // continuado e guardado as imagens. Recarrega o histórico para as apanhar.
-      setErro(`${e} — (a verificar se as imagens chegaram a sair…)`);
-      setTimeout(() => carregar(), 8000);
-      setTimeout(() => carregar(), 25000);
-    } finally { setBusy(false); }
+    const N = 8;
+    setErro(''); setBusy(true); setAGerar(N);
+    const baseSeed = Math.floor(Date.now() / 1000);
+    const reqs = Array.from({ length: N }, (_, k) =>
+      fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo, quantos: 1, seed: baseSeed + k * 37 }) })
+        .then((r) => r.json())
+        .then((d) => { if (d.amostras?.length) setHistorico((h) => [{ ...d.amostras[0], ts: Date.now() }, ...h]); else if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); })
+        .catch(() => { /* uma falhou; as outras seguem */ })
+        .finally(() => setAGerar((n) => Math.max(0, n - 1))),
+    );
+    await Promise.allSettled(reqs);
+    await carregar(); // sincroniza com o servidor (fonte da verdade)
+    setBusy(false); setAGerar(0);
   };
 
   const limpar = async () => {
@@ -127,8 +132,8 @@ export default function TesteMundoPage() {
 
       {/* GERAR */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-        <button onClick={() => gerar('cenas')} disabled={busy} title="gera imagens do mundo (cenas humanas) no gpt-image-2, ancoradas nas tuas referências" style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
-          {busy ? 'a gerar imagens do mundo…' : 'gerar imagens do mundo'}
+        <button onClick={() => gerar('cenas')} disabled={busy} title="gera 8 imagens do mundo EM PARALELO no gpt-image-2; aparecem à medida que ficam prontas" style={{ ...btn, background: busy ? '#333' : '#1a1a1a' }}>
+          {busy ? `a gerar… (${aGerar} a sair)` : 'gerar 8 imagens do mundo'}
         </button>
         {historico.length > 0 && (
           <>
