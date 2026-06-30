@@ -3,6 +3,7 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { getVisual, reforcoVisual } from '@/lib/crescer/marca';
+import { cenaWorldbuilding, cenaConstituicao } from '@/lib/crescer/mundo-visual';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -14,7 +15,7 @@ export const maxDuration = 300;
 // O prompt vem do body ou do notaVisual guardado. Anula o vídeo (re-render).
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { slug?: string; idx?: number; prompt?: string; remover?: boolean; excetoCapa?: boolean };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; idx?: number; prompt?: string; remover?: boolean; excetoCapa?: boolean; mundo?: boolean; imagemModo?: 'cena' | 'ilustrar' };
   if (!body.slug || !body.slug.startsWith('crescer-')) return NextResponse.json({ erro: 'slug-invalido' }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
@@ -51,9 +52,17 @@ export async function POST(req: Request) {
   // peças antigas com prompt fraco não saírem escuras/silhueta.
   const visual = (row.theme as { crescer?: { visual?: string } } | null)?.crescer?.visual;
   const baseVisual = getVisual(visual ?? '')?.promptBase || getVisual('conceptual')!.promptBase;
-  const cena = body.prompt?.trim() || (slides[idx ?? 0]?.notaVisual as string) || (slides[0]?.notaVisual as string) || baseVisual;
-  if (!cena) return NextResponse.json({ erro: 'sem-prompt' }, { status: 400 });
-  const prompt = `${reforcoVisual(visual ?? '')} ${cena}`;
+  // MUNDO: regenera com o MOTOR NOVO (documentário da civilização / ilustrar), em vez
+  // do prompt antigo guardado na peça — para ATUALIZAR posts bons sem os descartar.
+  let prompt: string;
+  if (body.mundo) {
+    const seed = Math.floor(Date.now() / 1000) + (idx ?? 0);
+    prompt = (body.imagemModo === 'ilustrar' ? cenaConstituicao(seed) : cenaWorldbuilding(seed)).briefing;
+  } else {
+    const cena = body.prompt?.trim() || (slides[idx ?? 0]?.notaVisual as string) || (slides[0]?.notaVisual as string) || baseVisual;
+    if (!cena) return NextResponse.json({ erro: 'sem-prompt' }, { status: 400 });
+    prompt = `${reforcoVisual(visual ?? '')} ${cena}`;
+  }
 
   let imageUrl: string;
   try {

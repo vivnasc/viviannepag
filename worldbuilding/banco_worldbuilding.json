@@ -95,6 +95,25 @@
     "corais de conhecimento", "fungos de tradução entre espécies"
   ],
 
+  "FLORA": [
+    "árvores translúcidas de tronco fibroso", "folhas cristalinas flexíveis que tilintam ao vento", "flores que libertam pólen luminoso ao entardecer",
+    "líquenes arquitectónicos que formam abrigos", "jardins aquáticos suspensos no ar húmido", "plantas que recolhem água da névoa",
+    "florestas que mudam lentamente de forma ao longo das gerações", "flores que só abrem sob certas luas"
+  ],
+
+  "FAUNA": [
+    "aves de plumagem quase vegetal, iridescente", "baleias migratórias bioluminescentes com padrões únicos", "polinizadores gigantes de asas membranosas",
+    "anfíbios arborícolas translúcidos", "herbívoros semi-aquáticos de pele musgosa", "aves que polinizam as árvores-arquitectura",
+    "animais que comunicam por padrões de luz na pele", "animais cartográficos que migram por estados colectivos"
+  ],
+
+  "RIOS_E_MARES": [
+    "um rio de água translúcida que transporta sementes vivas, com organismos luminosos na corrente",
+    "margens onde as plantas mudam com as estações emocionais da comunidade",
+    "um mar sob várias luas, com recifes que guardam histórias migratórias",
+    "um arquipélago vivo que se move devagar", "marés influenciadas por múltiplas luas"
+  ],
+
   "FENOMENOS_DO_MUNDO": [
     "migração anual das baleias de memória", "floração dos arquivos vivos", "marés de bioluminescência narrativa",
     "chuvas de sementes de conhecimento", "sincronização das árvores relacionais", "aurora de significado numa grande mudança"

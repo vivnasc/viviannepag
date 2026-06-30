@@ -13,15 +13,20 @@ export type Escala = 'micro' | 'intima' | 'social' | 'ecologica' | 'civilizacion
 // fotografia documental/antropológica, gente diversa, realismo cinematográfico — e
 // NÃO com "consciência/transcendência/luz da própria matéria".
 export const ESTILO_FOTO =
-  'ANTHROPOLOGICAL DOCUMENTARY FIELD PHOTOGRAPHY / photojournalism of a real, lived-in civilization — cinematic realism, shot on medium format, shallow depth of field, ultra-detailed, candid, believable; ' +
-  'ETHNICALLY DIVERSE real people (Black, East Asian, Arab, Latino, mixed, all ages), integrated INTO the environment, not posed on it; natural daylight; real materials (stone, wood, water, woven fibre, living tissue) alongside biological technologies';
+  'NATURE & FIELD DOCUMENTARY PHOTOGRAPHY of a PARALLEL BIOSPHERE — cinematic realism, shot on medium format, shallow depth of field, ultra-detailed, candid, believable, OBSERVED not designed; ' +
+  'when people appear: ETHNICALLY DIVERSE real humans of this other biosphere (varied skin with subtle living patterns, varied hair sometimes partly vegetal or mineral, eyes adapted to a different sky, clothing that is GROWN/cultivated not woven, living adornments) — recognizably human yet clearly of another evolution; natural daylight, real shadow';
 export const ANTI_ESTETICA =
-  'NOT concept art, NOT fantasy art, NOT sci-fi illustration, NOT a spiritual or meditation aesthetic, NOT an eco-utopia temple, NOT people in matching white or beige robes, NOT crystals, NOT glowing orbs or spheres, NOT golden divine light, NOT a wellness/yoga advertisement, NOT an all-white-and-gold palette, NOT a calm person contemplating something luminous, NOT an "ecological premium ashram"; ' +
-  'AND NOT the opposite trap either: NOT a rural or pre-industrial artisanal village, NOT a Mediterranean / Maghreb / Himalayan / Andean / UNESCO-heritage village, NOT the past, NOT historical, NOT primitive, NOT only handmade clay-and-wood crafts, NOT a poor 1930s community';
-// O IMPOSSÍVEL (o que se perdeu ao tirar o espiritual): a civilização é BIOLOGICAMENTE
-// MAIS AVANÇADA que a nossa — pós-industrial, não pré-industrial. Habitável E impossível.
+  'NOT concept art, NOT fantasy art, NOT sci-fi illustration, NOT a spiritual or meditation aesthetic, NOT an eco-utopia temple, NOT people in matching white/beige robes, NOT crystals, NOT glowing orbs or spheres, NOT golden divine light, NOT a wellness/yoga advertisement, NOT an all-white-and-gold palette, NOT a calm person contemplating something luminous, NOT an "ecological premium ashram"; ' +
+  'NOT a rural/pre-industrial/Mediterranean/UNESCO-heritage village, NOT the past, NOT primitive, NOT only clay-and-wood crafts; ' +
+  'AND NOT industrial/urban/port/functionalist, NOT machines, NOT devices/glass/interfaces/gadgets, NOT minimalism, NOT luxury organic architecture. The beauty here is BIOLOGICAL (abundance, diversity, symbiosis), never decorative/design/luxury.';
+// A VERDADE do mundo dela (correção mais funda, Vivianne+ChatGPT): NÃO é uma civilização
+// industrial nem tecnologia avançada — é uma BIOSFERA PARALELA. A Terra depois de milhões
+// de anos de evolução noutra direcção, onde a evolução escolheu BELEZA, DIVERSIDADE e
+// SIMBIOSE em vez da escassez. Beleza = ecologia, não decoração.
 export const BIOTECH =
-  'CRUCIAL — this civilization is BIOLOGICALLY MORE ADVANCED than ours (post-industrial, not pre-industrial): advanced LIVING technology and biological machines, instruments and tools we do NOT recognize, ENGINEERED living architecture (grown and designed, never rustic), new species used as living tools, translucent biological vessels and living tables, materials that do not exist on Earth, engineered ecosystems woven into daily life. It must be at once HABITABLE and IMPOSSIBLE — clearly another civilization, never present-day Earth.';
+  'THE TRUTH OF THIS WORLD: it is NOT an industrial civilization and NOT advanced machine technology. It is a PARALLEL BIOSPHERE — Earth after millions of years of evolution in ANOTHER DIRECTION, where evolution selected for BEAUTY, DIVERSITY and SYMBIOSIS as survival strategies. EVOLVED BIOLOGY, not machines: ' +
+  'translucent trees, flexible crystalline leaves, flowers that release luminous pollen, architectural lichens, suspended aquatic gardens; iridescent-membrane birds, bioluminescent migrating whales, giant pollinators, translucent tree-amphibians; rivers of translucent water carrying living seeds, seas under several moons. ' +
+  'Rivers, seas, forests, moons, animals and people are all part of the SAME evolutionary language. Recognizable as Earth-life, yet clearly another branch of the tree of life. It must be at once HABITABLE and IMPOSSIBLE.';
 // O MANIFESTO que muda o comportamento do modelo (insistência da Vivianne+ChatGPT):
 // fotografia OBSERVADA, evidência de vida, não símbolo desenhado.
 export const MANIFESTO_FOTO =
@@ -32,10 +37,9 @@ export const PALETA_MUNDO =
   'avoid a uniform white-and-gold or all-beige look; not washed out, not glowing, ultra-high resolution and sharp';
 
 export const EVITAR_MUNDO =
-  'The SUBJECT is NEVER a landscape and NEVER a lone human silhouette standing in scenery; ' +
-  'NO tropical valley / forest / river / canyon vista, NO Avatar / fantasy / resort / book-cover look; the place is NEVER the point. ' +
-  'NEVER a terrestrial object nor a futuristic version of our things; NEVER ordinary trees, birds, flowers, dogs, hands, houses, rivers or cities; ' +
-  'NEVER cyberpunk, neon, robots, holograms, ships, screens; NEVER monumentality as the default; no text, no letters, no watermark, no logos';
+  'Rivers, seas, birds, plants, animals and people are WELCOME and important — but NEVER the ordinary Earth ones: they must clearly belong to THIS other biosphere (evolved differently). ' +
+  'NO generic tropical valley / Avatar / fantasy / resort / book-cover look; NO present-day Earth animals or plants; ' +
+  'NEVER cyberpunk, neon, robots, holograms, ships, screens, devices; no text, no letters, no watermark, no logos';
 
 // EVENTOS — o que ACONTECE ao artefacto/organismo. É o evento (não a paisagem) que
 // conta a ideia: o equivalente civilizacional do movimento da frase. O modelo escolhe
@@ -159,7 +163,7 @@ export function cenaConstituicao(seed = 0): CenaVisual {
   const pergunta = exemplar?.pergunta || PERGUNTAS[idx(seed * 7 + 2, PERGUNTAS.length)];
 
   const briefing =
-    `${MANIFESTO_FOTO}${ESTILO_FOTO}. ${BIOTECH} ETHNOGRAPHY of a civilization that NEVER existed — a field-documentary photograph of a world that is NOT Earth, the FUNCTIONAL EQUIVALENT, never the future of Earth. ` +
+    `${MANIFESTO_FOTO}${ESTILO_FOTO}. ${BIOTECH} A field-documentary photograph from this PARALLEL BIOSPHERE — Earth after evolution took another direction, never the industrial future of Earth. ` +
     `Build the image strictly as a CHAIN, never sentence->metaphor->image: SENTENCE -> HUMAN DOMAIN -> CIVILIZATIONAL FUNCTION -> CONCRETE SUBJECT -> EVENT -> image. ` +
     `CIVILIZATIONAL FUNCTION: ${funcao}${catAntropo ? ` (${catAntropo})` : ''}. ANTHROPOLOGICAL QUESTION: ${pergunta} ` +
     `THE SUBJECT (fills the frame, intimate and close; the place is NEVER the subject): ${sujeito}. ` +
@@ -189,7 +193,7 @@ const CENAS_ACCAO = [ ...((mundo.CENAS ?? []) as CenaQ[]), ...((mundo.CENAS_QUOT
 const VERBOS = (mundo.VERBOS_CIVILIZACIONAIS ?? []) as string[];
 const DOMINIOS_VIDA = (mundo.DOMINIOS_DA_VIDA ?? []) as string[];
 const INSTITUICOES = (mundo.INSTITUICOES ?? []) as ItemMundo[];
-const BIOLOGIA = (mundo.BIOLOGIA_DO_MUNDO ?? []) as string[];
+const BIOLOGIA = [ ...((mundo.BIOLOGIA_DO_MUNDO ?? []) as string[]), ...((mundo.FLORA ?? []) as string[]), ...((mundo.FAUNA ?? []) as string[]), ...((mundo.RIOS_E_MARES ?? []) as string[]) ];
 const FENOMENOS = (mundo.FENOMENOS_DO_MUNDO ?? []) as string[];
 const PAISAGENS_F = (mundo.PAISAGENS_FUNCIONAIS ?? []) as string[];
 const VESTIGIOS = (mundo.VESTIGIOS_DA_CIVILIZACAO ?? []) as ItemMundo[];
@@ -199,7 +203,7 @@ const FRAGMENTOS: ItemMundo[] = ['INSTITUICOES', 'PROFISSOES', 'ESPECIES', 'ESPA
 const pick = <T,>(arr: T[], n: number): T | null => (arr.length ? arr[idx(n, arr.length)] : null);
 
 const ABERTURA =
-  `${MANIFESTO_FOTO}${ESTILO_FOTO}. ${BIOTECH} A field-documentary photo of a NORMAL DAY in a civilization that NEVER existed — a world that is NOT Earth (the functional equivalent, never the future of Earth). `;
+  `${MANIFESTO_FOTO}${ESTILO_FOTO}. ${BIOTECH} A field-documentary photo of a NORMAL DAY in this PARALLEL BIOSPHERE — Earth after evolution took another direction, never the industrial future of Earth. `;
 const FIM_WB =
   ` ${PALETA_MUNDO}. ${ANTI_ESTETICA}. NEVER Earth nor a futuristic version of Earth, NEVER cyberpunk/neon/robots/ships/screens, no text, no letters, no watermark, no logos. ` +
   `It must NOT look like a spiritual retreat: this is a FULL society with work, science, building, navigation, care, mess and use. ` +
@@ -224,7 +228,7 @@ export function cenaWorldbuilding(seed = 0): CenaVisual {
     briefing = ABERTURA + `PEOPLE OF THIS WORLD IN ACTION (active verb, not passive sitting/looking): ${participantes} are busy to ${verbo} — ${descricao}${cena?.instituicao ? ` at the "${cena.instituicao}"` : ''}${cena?.equivalente_terrestre ? ` (like ${cena.equivalente_terrestre})` : ''}. ` +
       (frag ? `A being/object of this world is IN USE (not displayed): the "${frag.nome}"${frag.descricao ? ` (${frag.descricao})` : ''}. ` : '') +
       `Caught mid-gesture, candid, lived-in; faces present; relations not isolated individuals.` + FIM_WB;
-  } else if (m <= 5) { // 30% — uma instituição/espaço em FUNCIONAMENTO
+  } else if (m <= 4) { // 20% — um lugar comum/instituição CULTIVADA (nunca industrial) em uso
     const inst = pick(INSTITUICOES, seed) ?? pick(FRAGMENTOS, seed);
     const verbo = pick(VERBOS, seed * 7 + 2) || 'function';
     categoria = inst?.nome ?? 'instituição';
