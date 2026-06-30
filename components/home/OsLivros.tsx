@@ -67,7 +67,7 @@ export function OsLivros({ locale }: { locale: string }) {
       capa: cb(capaSinais(isEn)),
       capaFallback: capaSinaisLocal(isEn),
       capaRatio: '1600 / 2560',
-      href: isEn ? '/en/loja/os-7-sinais' : '/loja/os-7-sinais',
+      href: isEn ? '/en/os-7-sinais' : '/os-7-sinais',
       cta: isEn ? 'Read the book' : 'Ler o livro',
       preco: (
         <>
