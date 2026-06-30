@@ -82,12 +82,47 @@ function respirar(paras, limite = 105) {
   return out;
 }
 
+// Destaques automáticos: quando a Vivianne não curou frases para um capítulo,
+// escolhe (NÃO inventa) 1-2 frases curtas e aforísticas do PRÓPRIO texto dela,
+// para o livro ter destaques COERENTES em todos os capítulos. Os manuais ganham.
+function extrairDestaques(paras, n = 2) {
+  const cand = [];
+  // salta o 1.º parágrafo (abertura) para não repetir a primeira linha
+  paras.slice(1).forEach((p, pi) => {
+    if (p.includes('*')) return; // evita marcadores de negrito/itálico partidos
+    p.split(/(?<=[.!?])\s+/).forEach((s) => {
+      const f = s.trim();
+      const palavras = f.split(/\s+/).length;
+      if (f.length < 35 || f.length > 115) return;
+      if (palavras < 6 || palavras > 20) return;
+      if (/[?;:]/.test(f)) return; // perguntas/listas não são aforismo
+      if (!/^[A-ZÀ-Ý«"]/.test(f)) return; // começa em maiúscula
+      if (!/[.!]$/.test(f)) return; // frase inteira
+      cand.push({ f, pi, dist: Math.abs(f.length - 72) });
+    });
+  });
+  cand.sort((a, b) => a.dist - b.dist);
+  const out = [];
+  for (const c of cand) {
+    if (out.length >= n) break;
+    if (out.some((o) => o.pi === c.pi)) continue; // de parágrafos diferentes
+    out.push(c);
+  }
+  return out.sort((a, b) => a.pi - b.pi).map((c) => c.f);
+}
+
+const COM_DESTAQUE = new Set(['capitulo', 'introducao', 'epilogo']);
+
 const unidades = parseManuscrito().map((u) => {
   const a = aparato[chaveAparato(u)] || {};
   const o = { tipo: u.tipo, kicker: u.kicker, titulo: u.titulo };
   if (a.epigrafe) o.epigrafe = a.epigrafe;
   if (u.texto && u.texto.length) o.texto = respirar(u.texto);
-  if (a.destaque) o.destaque = a.destaque; // pull-quote (frase forte do capítulo)
+  if (a.destaque) o.destaque = a.destaque; // curado pela Vivianne (ganha sempre)
+  else if (o.texto && COM_DESTAQUE.has(u.tipo)) {
+    const d = extrairDestaques(o.texto);
+    if (d.length) o.destaque = d; // fallback: frases dela, escolhidas (não inventadas)
+  }
   if (a.ideia) o.ideia = a.ideia;
   if (a.dica) o.dica = a.dica; // nota prática (opcional, por capítulo)
   if (a.pergunta) o.pergunta = a.pergunta;

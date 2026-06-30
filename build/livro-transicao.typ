@@ -115,7 +115,7 @@
 // Em cada viragem entra um DESTAQUE (pull-quote), enquanto houver; as restantes
 // viragens ficam só com o losango. Assim os destaques aparecem VÁRIAS vezes.
 #let corpo-paras(paras, dropcap-on: true, destaques: ()) = {
-  set par(first-line-indent: (amount: 5mm, all: true))
+  set par(first-line-indent: (amount: 5mm, all: true), spacing: 1.32em)
   let n = paras.len()
   let breaks = ()
   let k = 6
@@ -147,7 +147,7 @@
   setsect(u.kicker)
   pagebreak()
   set align(center)
-  v(46mm)
+  v(56mm)
   {
     set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
     set text(hyphenate: false)
@@ -167,48 +167,32 @@
   ]
 }
 
-// ---- abertura com IMAGEM vertical a sangrar pela margem ----
-// partU != none => abre também a Parte por cima do capítulo. Serve a abertura de
-// Parte (1.º capítulo) e a Introdução (sem Parte, mas com imagem própria).
-#let abre-imagem(u, partU: none) = {
-  let etiqueta = if partU != none { partU.kicker } else { u.kicker }
-  setsect(if partU != none { partU.titulo } else { u.kicker })
-  page(margin: (left: 50mm, right: 16mm, top: 22mm, bottom: 18mm), header: none, footer: footer-num)[
-    #place(top + left, dx: -50mm, dy: -22mm, vinheta-vertical(etiqueta))
+// ---- PARTE: página SÓ dela, com a imagem vertical a sangrar pela margem ----
+// A Parte fica sozinha; o título a meio da página. O capítulo abre na seguinte.
+#let abre-parte(partU) = {
+  setsect(partU.titulo)
+  page(margin: (left: 50mm, right: 16mm, top: 20mm, bottom: 18mm), header: none, footer: footer-num)[
+    #place(top + left, dx: -50mm, dy: -20mm, vinheta-vertical(partU.kicker))
     #set align(left)
     #set text(hyphenate: false)
     #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
-    #if partU != none {
-      text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(partU.kicker)]
-      v(3.5mm)
-      text(font: display, fill: TITLEINK, size: 19pt, weight: 300)[#upper(partU.titulo)]
-      v(7mm)
-      hairline(w: 24mm)
-      v(9mm)
-    }
-    #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.34em)[#upper(u.kicker)]
-    #v(3.5mm)
-    #text(font: display, fill: TITLEINK, size: 18pt, weight: 300)[#u.titulo]
-    #if "epigrafe" in u {
-      v(5mm)
-      mini-rule(w: 14mm)
-      v(2.5mm)
-      text(font: serif, style: "italic", fill: BROWN, size: 10.5pt)[#u.epigrafe]
-    }
+    #v(1fr)
+    #text(font: sans, fill: GOLDSOFT, size: 9pt, weight: 500, tracking: 0.36em)[#upper(partU.kicker)]
+    #v(6mm)
+    #text(font: display, fill: TITLEINK, size: 27pt, weight: 300)[#upper(partU.titulo)]
     #v(8mm)
-    #set par(justify: true, first-line-indent: 0pt)
-    #dropcap(height: 3, gap: 2.6mm, justify: true, font: display, fill: TITLEINK, weight: 400)[#fmt(u.texto.first())]
+    #hairline(w: 28mm)
+    #v(1.45fr)
   ]
-  // o resto do capítulo, largura plena, a respirar
-  corpo-paras(u.texto.slice(1), dropcap-on: false, destaques: norm-dest(u))
 }
 
-// ---- capítulo seguinte (não abre Parte): sem imagem, sem arco ----
+// ---- abertura de capítulo: UNIFORME para todos (intro/capítulos/epílogo) ----
+// Começa bem abaixo do topo (ar por cima), etiqueta + título + epígrafe, capitular.
 // sect: nome para o cabeçalho corrente (Introdução/Epílogo); none => herda a Parte.
 #let abre-cap(u, sect: none) = {
   pagebreak()
   if sect != none { setsect(sect) }
-  v(46mm) // RESPIRO: o título começa bem abaixo do topo
+  v(60mm) // RESPIRO: o título começa bem abaixo do topo (a meio da mancha)
   block(below: 11mm)[
     #set align(left)
     #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
@@ -271,15 +255,16 @@
   ]
 }
 
-// fecho do capítulo em página própria, CENTRADO na vertical (ar à volta).
+// fecho do capítulo: FLUI a seguir ao texto e preenche o espaço que sobra (sem
+// desperdiçar uma página). Hipótese + dica + Pergunta seguem juntas; se não
+// couberem, descem inteiras para a página seguinte.
 #let aparato(u) = {
   if ("ideia" in u) or ("dica" in u) or ("pergunta" in u) {
-    pagebreak()
-    v(1fr)
-    if "ideia" in u { bloco("hipotese", u.ideia) }
-    if "dica" in u { bloco("dica", u.dica) }
-    if "pergunta" in u { bloco("pergunta", u.pergunta, italico: true) }
-    v(1.05fr)
+    block(breakable: false, above: 16mm)[
+      #if "ideia" in u { bloco("hipotese", u.ideia) }
+      #if "dica" in u { bloco("dica", u.dica) }
+      #if "pergunta" in u { bloco("pergunta", u.pergunta, italico: true) }
+    ]
   }
 }
 
@@ -348,30 +333,24 @@
 ]
 
 // ============================ corpo do livro =================================
-#let pendente-parte = none
 #let mapa-posta = false
 #for u in livro.unidades {
   if u.tipo == "parte" {
     if not mapa-posta { mapa(); mapa-posta = true }
-    pendente-parte = u
+    abre-parte(u)                // Parte SOZINHA na sua página, com a imagem
   } else if u.tipo == "prologo" {
-    abre-voz(u)          // a carta de 2150 — único sítio com arco
+    abre-voz(u)                  // a carta de 2150 — único sítio com o sinal
     aparato(u)
   } else if u.tipo == "introducao" {
-    abre-imagem(u)               // voz da autora, com imagem própria (sem Parte)
+    abre-cap(u, sect: "Introdução")  // abertura UNIFORME (como os capítulos)
     aparato(u)
   } else if u.tipo == "capitulo" {
-    if pendente-parte != none {
-      abre-imagem(u, partU: pendente-parte)
-      pendente-parte = none
-    } else {
-      abre-cap(u)
-    }
+    abre-cap(u)                  // abertura UNIFORME, na página a seguir à Parte
     aparato(u)
   } else if u.tipo == "interludio" {
-    abre-voz(u, tam: 20pt)   // carta de 2150 — com arco
+    abre-voz(u, tam: 20pt)       // carta de 2150
   } else if u.tipo == "epilogo" {
-    abre-cap(u, sect: u.kicker)  // voz da autora: abertura limpa, sem arco
+    abre-cap(u, sect: u.kicker)
     aparato(u)
   }
 }
