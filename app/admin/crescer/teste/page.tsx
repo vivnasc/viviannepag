@@ -51,7 +51,13 @@ export default function TesteMundoPage() {
       const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo }) });
       const d = await r.json();
       if (d.amostras?.length) await carregar(); else setErro(d.detalhe || d.erro || 'falhou');
-    } catch (e) { setErro(String(e)); } finally { setBusy(false); }
+    } catch (e) {
+      // "Load failed" = o navegador largou o pedido longo, mas o servidor pode ter
+      // continuado e guardado as imagens. Recarrega o histórico para as apanhar.
+      setErro(`${e} — (a verificar se as imagens chegaram a sair…)`);
+      setTimeout(() => carregar(), 8000);
+      setTimeout(() => carregar(), 25000);
+    } finally { setBusy(false); }
   };
 
   const limpar = async () => {
