@@ -39,6 +39,16 @@ export default function TesteMundoPage() {
     } catch (e) { setErro(String(e)); } finally { setBusy(false); if (fileRef.current) fileRef.current.value = ''; }
   };
 
+  // promove uma imagem GERADA a fundadora (âncora) na categoria escolhida no dropdown.
+  const promover = async (url: string) => {
+    setBusy(true); setErro('');
+    try {
+      const r = await fetch('/api/admin/crescer/anchors', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ fromUrl: url, categoria: cat }) });
+      const d = await r.json();
+      if (!d.ok) setErro(d.detalhe || d.erro || 'falhou'); else await carregar();
+    } catch (e) { setErro(String(e)); } finally { setBusy(false); }
+  };
+
   const apagarAncora = async (path: string) => {
     setBusy(true);
     try { await fetch('/api/admin/crescer/anchors', { method: 'DELETE', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ path }) }); await carregar(); }
@@ -116,8 +126,12 @@ export default function TesteMundoPage() {
       {erro && <p style={{ color: '#f88', marginTop: 12, fontSize: 13 }}>erro: {erro}</p>}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginTop: 20 }}>
         {historico.map((a, i) => (
-          <figure key={`${a.ts}-${i}`} style={{ margin: 0 }}>
+          <figure key={`${a.ts}-${i}`} style={{ margin: 0, position: 'relative' }}>
             <img src={a.url} alt={a.categoria} loading="lazy" style={{ width: '100%', borderRadius: 10, display: 'block', aspectRatio: '9/16', objectFit: 'cover' }} />
+            <button onClick={() => promover(a.url)} disabled={busy} title={`guardar como fundadora na categoria "${cat}"`}
+              style={{ position: 'absolute', top: 6, right: 6, border: 'none', borderRadius: 8, background: 'rgba(0,0,0,.6)', color: '#ffd479', cursor: 'pointer', fontSize: 11, padding: '3px 7px' }}>
+              ⭐ {cat}
+            </button>
             <figcaption style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{a.categoria || '·'}<span style={{ opacity: 0.5 }}> · {fmt(a.ts)}</span></figcaption>
           </figure>
         ))}

@@ -3,7 +3,6 @@ import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemGptImage2, guardarImagem, BUCKET } from '@/lib/banda/flux';
 import { cenaAncorada, cenaObjeto } from '@/lib/crescer/mundo-teste';
-import { REFS_MUNDO } from '@/lib/crescer/refs-mundo';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -91,8 +90,9 @@ export async function POST(req: Request) {
     } else {
       const cena = cenaAncorada(seed);
       briefing = cena.briefing; categoria = cena.categoria;
-      const refs = herdarAtlas(anchors, cena.m, seed);
-      inputImgs = refs.length ? refs : [REFS_MUNDO[i % REFS_MUNDO.length]];
+      // só usa âncoras se a Vivianne JÁ as carregou; senão gera por TEXTO (livre, sem a
+      // estufa embebida a prender). Ela depois promove as boas a âncora (⭐).
+      inputImgs = herdarAtlas(anchors, cena.m, seed);
     }
     const url = await gerarImagemGptImage2(briefing, inputImgs, token, openaiKey, qualidade);
     let saved = url;

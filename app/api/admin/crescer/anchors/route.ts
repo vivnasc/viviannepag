@@ -16,16 +16,27 @@ const PASTA = 'crescer/_anchors';
 const CATEGORIAS_ANCORA = ['cidade', 'oceano', 'arquitectura', 'biblioteca', 'ciencia', 'transportes', 'noite', 'roupa', 'objectos', 'infancia', 'aprendizagem', 'animais', 'refeicoes', 'mercado', 'pessoas', 'interior'] as const;
 const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
 
-// POST { dataUrl, categoria } — carrega uma âncora (reduz a 1024px, guarda).
+// POST { categoria, dataUrl? | fromUrl? } — carrega uma âncora (upload de ficheiro)
+// ou PROMOVE uma imagem já gerada (fromUrl = URL da amostra) a fundadora. Reduz a 1024.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
-  const body = (await req.json().catch(() => ({}))) as { dataUrl?: string; categoria?: string };
+  const body = (await req.json().catch(() => ({}))) as { dataUrl?: string; fromUrl?: string; categoria?: string };
   const cat = slug(body.categoria ?? '');
-  if (!body.dataUrl || !cat) return NextResponse.json({ erro: 'falta dataUrl/categoria' }, { status: 400 });
-  const m = body.dataUrl.match(/^data:image\/\w+;base64,(.+)$/);
-  if (!m) return NextResponse.json({ erro: 'dataUrl-invalido' }, { status: 400 });
+  if (!cat || (!body.dataUrl && !body.fromUrl)) return NextResponse.json({ erro: 'falta categoria/imagem' }, { status: 400 });
+  let origem: Buffer;
+  try {
+    if (body.dataUrl) {
+      const m = body.dataUrl.match(/^data:image\/\w+;base64,(.+)$/);
+      if (!m) return NextResponse.json({ erro: 'dataUrl-invalido' }, { status: 400 });
+      origem = Buffer.from(m[1], 'base64');
+    } else {
+      const r = await fetch(body.fromUrl as string);
+      if (!r.ok) return NextResponse.json({ erro: 'fromUrl-inacessivel' }, { status: 400 });
+      origem = Buffer.from(await r.arrayBuffer());
+    }
+  } catch { return NextResponse.json({ erro: 'imagem-inacessivel' }, { status: 400 }); }
   let buf: Buffer;
-  try { buf = await sharp(Buffer.from(m[1], 'base64')).resize({ width: 1024, withoutEnlargement: true }).jpeg({ quality: 84 }).toBuffer(); }
+  try { buf = await sharp(origem).resize({ width: 1024, withoutEnlargement: true }).jpeg({ quality: 84 }).toBuffer(); }
   catch { return NextResponse.json({ erro: 'imagem-invalida' }, { status: 400 }); }
   const supabase = getSupabaseAdmin();
   const path = `${PASTA}/${cat}__${Date.now()}.jpg`;
