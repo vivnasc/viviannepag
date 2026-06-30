@@ -3,8 +3,21 @@
 // servir o "Cá em Casa" (vinho, quotidiano) e o "I am a Hero" (dourado,
 // ancestral) com o mesmo motor.
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import sharp from 'sharp';
 
 const BUCKET = 'viviannepag-assets';
+
+// GRADE EDITORIAL (todas as contas) — o Flux entrega muitas fotos subexpostas, com
+// as sombras esmagadas; o detalhe que se paga fica escondido no escuro. Isto NÃO
+// mexe no conteúdo: só "revela" o ficheiro final como um laboratório editorial —
+// linear(ganho, offset) levanta o chão do preto (recupera detalhe nas sombras, fim
+// das silhuetas) e brightness sobe o geral, sem lavar nem saturar. Determinístico e
+// afinável aqui num número. Ligado por defeito em guardarImagem (editorial !== false).
+async function gradeEditorial(buffer: Buffer): Promise<Buffer> {
+  try {
+    return await sharp(buffer).linear(1.06, 20).modulate({ brightness: 1.14 }).jpeg({ quality: 92 }).toBuffer();
+  } catch { return buffer; }
+}
 
 // Segurança comum a todas as séries (dignidade + sem texto/logos).
 const SAFETY = `people portrayed with warmth and dignity, NEVER associating any ethnicity with a negative, blaming or villain role; faces never glued to camera; NO text, NO words, NO letters, NO logos, NO watermarks, NO speech bubbles, NO captions, NO clickbait, NO exaggerated acting`;
@@ -81,7 +94,7 @@ export async function gerarImagemFlux(scene: string, token: string, opts: GerarO
 }
 
 // Guarda a imagem no Storage e devolve o URL público. `path` é a chave no bucket.
-export async function guardarImagem(imageUrl: string, path: string): Promise<string> {
+export async function guardarImagem(imageUrl: string, path: string, opts?: { editorial?: boolean }): Promise<string> {
   const supabase = getSupabaseAdmin();
   const { data: existing } = await supabase.storage.getBucket(BUCKET);
   if (!existing) {
@@ -90,7 +103,9 @@ export async function guardarImagem(imageUrl: string, path: string): Promise<str
   }
   const imgRes = await fetch(imageUrl);
   if (!imgRes.ok) throw new Error(`download img ${imgRes.status}`);
-  const buffer = Buffer.from(await (await imgRes.blob()).arrayBuffer());
+  let buffer: Buffer = Buffer.from(await (await imgRes.blob()).arrayBuffer());
+  // grade editorial por defeito (todas as contas); passar { editorial: false } para sair cru.
+  if (opts?.editorial !== false) buffer = await gradeEditorial(buffer);
   const { error } = await supabase.storage.from(BUCKET).upload(path, buffer, { contentType: 'image/jpeg', upsert: true });
   if (error) throw new Error(`upload: ${error.message}`);
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
