@@ -32,6 +32,7 @@ export async function gerarPecaSoulab(
   evitarImg: string[] = [], // CENAS de imagem já usadas (para não repetir portas/objetos partidos)
   continuarDe?: { frase: string; conceito?: string; cena?: string } | null, // PARTE 2 de um reel que resultou (cena = fundoPrompt da parte 1, para evoluir a MESMA imagem)
   modo: 'abre' | 'encaminha' = 'abre', // 'abre' = deixa em aberto; 'encaminha' = desdobra e pousa
+  veia?: { titulo: string; texto: string; livroTitulo: string } | null, // MINERAÇÃO: excerto real do livro = fonte primária
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
 
@@ -86,6 +87,10 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   // aprofunda ou vira a ideia, NÃO repete a frase nem diz "parte 2".
   // MODO ENCAMINHA: o terceiro tempo que falta. Não deixa a peça só aberta; desdobra
   // e pousa num movimento. Continua a NÃO ser conselho/ordem/autoajuda (regra da marca).
+  // MINERAÇÃO: a fonte primária é um excerto REAL do livro dela (impessoal, à maneira da Soulab).
+  const mineracao = veia?.texto
+    ? `\n\nFONTE PRIMÁRIA DESTA PEÇA (obrigatória): MINERA este EXCERTO REAL do livro dela "${veia.livroTitulo}" (secção "${veia.titulo}"). NÃO partas de um tema genérico nem de comportamentos: encontra DAQUI uma ideia, hipótese ou metáfora ainda não dita, a mais forte, e transforma-a numa OBSERVAÇÃO contemplativa da Soulab (impessoal, convite, nunca "isto és tu", nunca nomear o livro/autores/jargão). TESTE: tem de ser impossível sem este livro.\n--- EXCERTO DO LIVRO ---\n${veia.texto}\n--- FIM DO EXCERTO ---`
+    : '';
   const encaminhar = modo === 'encaminha'
     ? `\n\nMODO ENCAMINHA (importante nesta peça): NÃO a deixes totalmente aberta. Depois de abrir, DESDOBRA mais uma volta (o mecanismo por baixo, o que a maioria não vê) e POUSA num movimento sentido: uma direção pequena e concreta onde a pessoa pode descansar, o alívio a que o método chama "soltar". NÃO é resposta fechada, NÃO é conselho, NÃO é ordem nem autoajuda; é o terceiro tempo. Vale para a frase/momentos E para a legenda (a legenda desdobra e POUSA, em vez de só perguntar).`
     : '';
@@ -116,7 +121,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       model: 'claude-sonnet-4-6',
       max_tokens: 1100,
       system: sys,
-      messages: [{ role: 'user', content: pedido + encaminhar + seguimento + evoluirCena + naoRepetir + naoRepetirImg }],
+      messages: [{ role: 'user', content: pedido + mineracao + encaminhar + seguimento + evoluirCena + naoRepetir + naoRepetirImg }],
     }),
   });
   if (!res.ok) throw new Error(`claude ${res.status}`);

@@ -10,6 +10,7 @@ import {
   type TematicaId, type FormatoId, type VisualId, type VozId,
 } from '@/lib/crescer/marca';
 import { gerarPecaCrescer } from '@/lib/crescer/gerar-ia';
+import { escolherVeia, type Veia } from '@/lib/knowledge/veias';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -41,23 +42,36 @@ export async function POST(req: Request) {
     tematicas?: string[]; formatos?: string[]; visuais?: string[];
     quantos?: number; surpreender?: boolean; tema?: string; voz?: string;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string };
-    efeito?: string; saida?: 'reel' | 'carrossel';
+    efeito?: string; saida?: 'reel' | 'carrossel'; fonte?: 'livro' | 'tema';
   };
   const voz = (getVoz(body.voz ?? '') ? body.voz : 'direta') as VozId;
   // ela escolhe COMO sai: reel (defeito, mais alcance) ou carrossel. reel=true => sempre reel.
   const ehReel = body.saida !== 'carrossel';
+  // FONTE da peça: 'livro' (defeito) = MINERA os livros dela (a fonte de descoberta);
+  // 'tema' = a partir das temáticas/tema livre (o modo antigo). A regra dela: minerar
+  // primeiro os livros, não os comportamentos do quotidiano.
+  const fonte = body.fonte === 'tema' ? 'tema' : 'livro';
 
   const temasSel = (body.tematicas ?? []).filter((t) => getTematica(t)) as TematicaId[];
   const fmtsSel = (body.formatos ?? []).filter((f) => getFormato(f)) as FormatoId[];
   const visSel = (body.visuais ?? []).filter((v) => getVisual(v)) as VisualId[];
   const quantos = Math.max(1, Math.min(TOTAL_MAX, body.quantos ?? 1));
   const tema = body.tema?.trim() || undefined;
-  const surpreender = !!body.surpreender || (!temasSel.length && !fmtsSel.length);
+  // a "surpresa" (acaso) só vale no modo TEMA; no modo LIVRO a fonte é a veia.
+  const surpreender = fonte === 'tema' && (!!body.surpreender || (!temasSel.length && !fmtsSel.length));
 
   // monta a lista de "trabalhos" (temática × formato × visual), até ao teto.
   type Job = { tematica: TematicaId; formato: FormatoId; visual: VisualId };
   const jobs: Job[] = [];
-  if (surpreender) {
+  if (fonte === 'livro') {
+    // MINERAÇÃO: a fonte é o livro (a veia escolhe-se no loop); aqui só rodam o
+    // FORMATO e o VISUAL pelas seleções dela (ou defaults). A temática é ignorada.
+    const fPool = fmtsSel.length ? fmtsSel : (['frase'] as FormatoId[]);
+    const vPool = visSel.length ? visSel : (VISUAIS.filter((v) => v.id !== 'minimal').map((v) => v.id) as VisualId[]);
+    for (let i = 0; i < quantos && jobs.length < TOTAL_MAX; i++) {
+      jobs.push({ tematica: 'transformacao', formato: pick(fPool, i), visual: pick(vPool, i) });
+    }
+  } else if (surpreender) {
     // acaso: quantos peças, cada uma com combinação aleatória (das selecionadas, ou de todas).
     const tPool = temasSel.length ? temasSel : (TEMATICAS.map((t) => t.id) as TematicaId[]);
     const fPool = fmtsSel.length ? fmtsSel : (FORMATOS.map((f) => f.id) as FormatoId[]);
@@ -90,12 +104,14 @@ export async function POST(req: Request) {
   // memória anti-repetição: frases já usadas (por temática + recentes gerais).
   const evitar: string[] = [];
   const porTema: Record<string, string[]> = {};
+  const veiasUsadas: string[] = []; // veias do livro já mineradas (anti-repetição)
   try {
     const { data } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'crescer-%');
-    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { crescer?: { tematica?: string } } }[]) {
+    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { crescer?: { tematica?: string; veiaId?: string } } }[]) {
       const t = r.dias?.[0]?.slides?.[0]?.texto;
       const tm = r.theme?.crescer?.tematica;
       if (t) { evitar.push(t); if (tm) (porTema[tm] = porTema[tm] || []).push(t); }
+      if (r.theme?.crescer?.veiaId) veiasUsadas.push(r.theme.crescer.veiaId);
     }
   } catch { /* sem memória */ }
   const evitarDoTema = (t: string) => [...new Set([...(porTema[t] || []), ...evitar.slice(-20)])];
@@ -108,7 +124,10 @@ export async function POST(req: Request) {
       // seed roda o ARQUÉTIPO de cena por peça (anti-repetição das imagens): conta
       // o que já existe + a posição no lote, para cada imagem sair de um arquétipo diferente.
       const seed = evitar.length + i;
-      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed);
+      // MINERAÇÃO: no modo livro, escolhe uma veia ainda não usada e passa-a como fonte.
+      const veia: Veia | null = fonte === 'livro' ? escolherVeia(veiasUsadas, seed) : null;
+      if (veia) veiasUsadas.push(veia.id);
+      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed, veia);
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
       const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;
@@ -155,8 +174,8 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        // reel: escolha dela ao gerar (reel por defeito = mais alcance; carrossel quando quiser).
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz, reel: ehReel } },
+        // reel: escolha dela; veia*: a fonte minerada do livro (para ver a cobertura e não repetir).
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz, reel: ehReel, ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

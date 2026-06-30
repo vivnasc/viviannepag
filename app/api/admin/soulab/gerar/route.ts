@@ -6,6 +6,7 @@ import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import { SOULAB, SOULAB_MUNDO, getTipoSoulab, type TipoSoulabId } from '@/lib/soulab/marca';
 import { gerarPecaSoulab } from '@/lib/soulab/gerar-ia';
+import { escolherVeia, type Veia } from '@/lib/knowledge/veias';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -31,8 +32,11 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string; modo?: 'abre' | 'encaminha' };
+  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string; modo?: 'abre' | 'encaminha'; fonte?: 'livro' | 'tema' };
   const modo = body.modo === 'encaminha' ? 'encaminha' : 'abre';
+  // FONTE: 'livro' (defeito) = minera os livros dela; 'tema' = a partir do ângulo/tema.
+  // ao continuar um fio, não se minera (segue o fio da peça-mãe).
+  const fonte = body.continuarDe ? 'tema' : (body.fonte === 'tema' ? 'tema' : 'livro');
   let tipoId = (body.tipo ?? 'frase') as TipoSoulabId;
 
   // CONTINUAR O FIO (1+3): a parte seguinte de um reel que resultou. Herda da peça-mãe
@@ -70,14 +74,16 @@ export async function POST(req: Request) {
   const evitar: string[] = [];
   const porTipo: Record<string, string[]> = {};
   const evitarImg: string[] = [];
+  const veiasUsadas: string[] = []; // veias do livro já mineradas (anti-repetição)
   try {
     const { data } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'soulab-%');
-    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string }> }>; theme?: { soulab?: { tipo?: string } } }[]) {
+    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string }> }>; theme?: { soulab?: { tipo?: string; veiaId?: string } } }[]) {
       const s = r.dias?.[0]?.slides?.[0];
       const tp = r.theme?.soulab?.tipo;
       if (s?.texto) { evitar.push(s.texto); if (tp) (porTipo[tp] = porTipo[tp] || []).push(s.texto); }
       if (s?.conceito) evitar.push(s.conceito);
       if (s?.notaVisual) evitarImg.push(s.notaVisual);
+      if (r.theme?.soulab?.veiaId) veiasUsadas.push(r.theme.soulab.veiaId);
     }
   } catch { /* sem memória */ }
   // ao gerar um tipo, vê TODAS as frases já feitas desse tipo + as gerais recentes.
@@ -87,7 +93,10 @@ export async function POST(req: Request) {
   let ultimoErro = '';
   for (let i = 0; i < quantos; i++) {
     try {
-      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe, modo);
+      // MINERAÇÃO: no modo livro (e não a continuar), escolhe uma veia ainda não usada.
+      const veia: Veia | null = fonte === 'livro' ? escolherVeia(veiasUsadas, evitar.length + i) : null;
+      if (veia) veiasUsadas.push(veia.id);
+      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe, modo, veia);
       evitar.push(peca.frase); (porTipo[tipoId] = porTipo[tipoId] || []).push(peca.frase);
       if (peca.conceito) evitar.push(peca.conceito);
       if (peca.fundoPrompt) evitarImg.push(peca.fundoPrompt); // não repetir a cena nas seguintes
@@ -117,7 +126,7 @@ export async function POST(req: Request) {
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato, ...(parteDe ? { parteDe, parte: parteNum } : {}) } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato, ...(parteDe ? { parteDe, parte: parteNum } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

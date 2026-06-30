@@ -33,6 +33,7 @@ export async function gerarPecaCrescer(
   tema?: string,
   vozId: VozId = 'direta',
   seed = 0,
+  veia?: { titulo: string; texto: string; livroTitulo: string } | null, // MINERAÇÃO: excerto real do livro = fonte primária
 ): Promise<PecaCrescer> {
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
@@ -56,8 +57,14 @@ O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser 
 PROFUNDIDADE (a base de conhecimento dela, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 3)}
 
 O que SAI é a vida real, em linguagem de toda a gente (NUNCA teoria, NUNCA o nome de um véu, autor ou tradição), MAS tem de CARREGAR a ideia ESPECÍFICA e não-óbvia deste saber: um insight com textura e profundidade, que a maioria nunca articulou assim, que SÓ este mundo vê. PROIBIDA a frase genérica de autoajuda que poderia vir de qualquer página motivacional sem este conhecimento: se o que escreveste serviria a qualquer conta, deita fora e vai mais fundo (ao mecanismo concreto, à camada por baixo, ao detalhe que ninguém diz). Específico e fundo, nunca universal e raso.
-
-A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}
+${veia ? `
+FONTE PRIMÁRIA DESTA PEÇA (obrigatória) — um EXCERTO REAL do livro dela "${veia.livroTitulo}", da secção "${veia.titulo}". NÃO partas de comportamentos genéricos do quotidiano (reler mensagens, pensar demais e afins): MINERA ESTE EXCERTO. Encontra UMA ideia, metáfora ou hipótese DAQUI ainda não dita num post — a mais forte, a que reorganiza o modo de ver a vida — e revela-a, fiel ao pensamento dela. TESTE: o conteúdo tem de ser impossível sem este livro; se pudesse existir sem ele, falhou e tens de ir mais fundo ao excerto.
+--- EXCERTO DO LIVRO ---
+${veia.texto}
+--- FIM DO EXCERTO ---
+Escreve ${formato.multi ? 'a sequência' : 'a frase'} a partir de UMA ideia funda deste excerto, na voz dela, SEM nomear o livro, autores, domínios nem jargão (a ideia sai em linguagem de vida).
+` : `
+A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}`}
 
 O FORMATO, ${formato.label}: ${formato.estrutura}
 

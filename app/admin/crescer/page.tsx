@@ -37,7 +37,7 @@ const CORES_TEXTO: { id: string; nome: string }[] = [
 ];
 
 type Peca = {
-  tematica: string | null; formato: string; visual: string | null; reel?: boolean;
+  tematica: string | null; formato: string; visual: string | null; reel?: boolean; veiaTitulo?: string | null; veiaLivro?: string | null;
   slug: string; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null;
@@ -393,6 +393,7 @@ export default function CrescerPage() {
   const [vis, setVis] = useState<Set<VisualId>>(new Set(['pessoas']));
   const [voz, setVoz] = useState<VozId>('direta'); // a voz do alcance, por defeito
   const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
+  const [fonte, setFonte] = useState<'livro' | 'tema'>('livro'); // minerar os livros (defeito) vs partir de uma temática
   const [quantos, setQuantos] = useState(1); // 1 por defeito: uma de cada vez, sem ser obrigada a lote
   const [surpreender, setSurpreender] = useState(false);
   const [tema, setTema] = useState('');
@@ -429,14 +430,14 @@ export default function CrescerPage() {
 
   const gerar = useCallback(async () => {
     if (busy) return;
-    if (!surpreender && !temas.size) { setErro('Escolhe pelo menos uma temática (ou liga o "surpreende-me").'); return; }
+    if (fonte === 'tema' && !surpreender && !temas.size) { setErro('Escolhe pelo menos uma temática (ou liga o "surpreende-me"), ou volta a "minerar o livro".'); return; }
     setBusy(true); setErro(null);
     setMsg('A gerar o lote (texto + imagem)… pode demorar. Não feches; recarrega se precisares.');
     try {
       const r = await fetch('/api/admin/crescer/gerar', {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida,
+          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida, fonte,
           tema: tema.trim() || undefined, tipografia: padrao.tipografia, efeito: padrao.efeito,
         }),
       });
@@ -445,7 +446,7 @@ export default function CrescerPage() {
       else setMsg(`${j.gerados} peça(s) gerada(s)${j.detalhe ? ` (aviso: ${j.detalhe})` : ''}. Revê em baixo, afina e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); } finally { setBusy(false); }
-  }, [busy, surpreender, temas, fmts, vis, voz, saida, quantos, tema, padrao, recarregar]);
+  }, [busy, surpreender, temas, fmts, vis, voz, saida, fonte, quantos, tema, padrao, recarregar]);
 
   // acção numa peça (rota genérica)
   const acao = useCallback(async (slug: string, url: string, body: Record<string, unknown>, aviso: string, ok: string, fechar = true) => {
@@ -565,10 +566,19 @@ export default function CrescerPage() {
         {/* gerar */}
         <section className="mb-6 rounded-2xl border border-white/10 p-5" style={{ background: 'rgba(255,255,255,0.03)' }}>
           <h2 className="text-sm uppercase tracking-widest opacity-60 mb-1">gerar</h2>
-          <p className="text-[0.62rem] opacity-50 mb-3">uma peça de cada vez (deixa "quantas" em 1) ou várias num lote. Com "tema livre" sai exatamente a tua ideia.</p>
+          <p className="text-[0.62rem] opacity-50 mb-3">uma peça de cada vez (deixa "quantas" em 1) ou várias num lote.</p>
 
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">fonte <span className="opacity-50">(de onde nasce a peça)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-1">
+            <Chip on={fonte === 'livro'} onClick={() => setFonte('livro')} title="mina os teus livros: cada peça nasce de uma ideia/metáfora de um capítulo ainda não usado (A Grande Transição · Os 7 Sinais)"><span className="mr-1">📖</span>minerar o livro</Chip>
+            <Chip on={fonte === 'tema'} onClick={() => setFonte('tema')} title="parte de uma temática ou de um tema livre (o modo antigo)"><span className="mr-1">💭</span>tema</Chip>
+          </div>
+          <p className="text-[0.58rem] opacity-45 mb-3">{fonte === 'livro' ? 'Cada peça é minerada de um capítulo ainda não usado dos teus livros (anti-repetição). O conteúdo não existe sem o livro.' : 'A peça parte das temáticas/tema livre abaixo.'}</p>
+
+          {fonte === 'tema' && <>
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">temáticas <span className="opacity-50">(escolhe várias)</span></p>
           <div className="flex flex-wrap gap-1.5 mb-3">{TEMATICAS.map((t) => <Chip key={t.id} on={temas.has(t.id)} onClick={() => toggle(setTemas, t.id)} title={t.descricao}><span className="mr-1">{t.emoji}</span>{t.label}</Chip>)}</div>
+          </>}
 
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">formatos</p>
           <div className="flex flex-wrap gap-1.5 mb-3">{FORMATOS.map((f) => <Chip key={f.id} on={fmts.has(f.id)} onClick={() => toggle(setFmts, f.id)} title={f.descricao}><span className="mr-1">{f.emoji}</span>{f.label}</Chip>)}</div>
@@ -586,8 +596,8 @@ export default function CrescerPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional)" className="flex-1 min-w-[180px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />
-            <Chip on={surpreender} onClick={() => setSurpreender((s) => !s)} title="ignora as escolhas e combina ao acaso">🎲 surpreende-me</Chip>
+            {fonte === 'tema' && <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional)" className="flex-1 min-w-[180px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />}
+            {fonte === 'tema' && <Chip on={surpreender} onClick={() => setSurpreender((s) => !s)} title="ignora as escolhas e combina ao acaso">🎲 surpreende-me</Chip>}
             <label className="inline-flex items-center gap-1.5 text-[0.74rem] opacity-80">quantas:
               <select value={quantos} onChange={(e) => setQuantos(Number(e.target.value))} className="bg-black/20 border border-white/15 rounded-md px-2 py-1.5 [color-scheme:dark]">
                 {[1, 2, 3, 4, 5, 6, 8].map((n) => <option key={n} value={n}>{n}</option>)}
@@ -684,7 +694,7 @@ export default function CrescerPage() {
                     <button onClick={() => toggleSel(p.slug)} className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10" style={sel.has(p.slug) ? { background: DZ, borderColor: DZ, color: BG2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
                     <span className="absolute top-1 left-1 flex flex-col gap-0.5 items-start">
                       <span className="text-[0.5rem] px-1 py-0.5 rounded" style={{ background: DZ, color: BG2 }}>{tipoDe(p) === 'carrossel' ? `🎠 carrossel · ${p.momentos?.length ?? 0} telas` : '🎬 reel'}</span>
-                      <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}</span>
+                      <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.veiaTitulo ? `📖 ${p.veiaTitulo}` : (p.tematica ?? 'crescer')}</span>
                     </span>
                     {(() => {
                       // estado coerente com o TIPO: um carrossel "pronto" são as telas, não o MP4.
