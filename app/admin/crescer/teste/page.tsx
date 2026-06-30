@@ -75,14 +75,19 @@ export default function TesteMundoPage() {
     setErro(''); setBusy(true); setAGerar(N);
     let ok = 0, fail = 0;
     const baseSeed = Math.floor(Date.now() / 1000);
-    const reqs = Array.from({ length: N }, (_, k) =>
-      fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo: 'cenas', quantos: 1, seed: baseSeed + k * 37, ancoras }) })
-        .then((r) => r.json())
-        .then((d) => { if (d.amostras?.length) { ok++; setHistorico((h) => [{ ...d.amostras[0], ts: Date.now() }, ...h]); } else { fail++; if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); } })
-        .catch(() => { fail++; /* uma falhou; as outras seguem */ })
-        .finally(() => setAGerar((n) => Math.max(0, n - 1))),
-    );
-    await Promise.allSettled(reqs);
+    // ESPAÇA os pedidos (a Replicate trava em rajada de 5 quando há pouco crédito):
+    // um a cada ~1,8s em vez de 8 de uma vez. Cada um entra no ecrã assim que sai.
+    const dispararUma = async (k: number) => {
+      await new Promise((r) => setTimeout(r, k * 1800));
+      try {
+        const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo: 'cenas', quantos: 1, seed: baseSeed + k * 37, ancoras }) });
+        const d = await r.json();
+        if (d.amostras?.length) { ok++; setHistorico((h) => [{ ...d.amostras[0], ts: Date.now() }, ...h]); }
+        else { fail++; if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); }
+      } catch { fail++; /* uma falhou; as outras seguem */ }
+      finally { setAGerar((n) => Math.max(0, n - 1)); }
+    };
+    await Promise.allSettled(Array.from({ length: N }, (_, k) => dispararUma(k)));
     await carregar(); // sincroniza com o servidor (fonte da verdade)
     setBusy(false); setAGerar(0);
     if (fail > 0) setErro(`saíram ${ok} de ${N} (${fail} falharam — carrega outra vez para completar)`);

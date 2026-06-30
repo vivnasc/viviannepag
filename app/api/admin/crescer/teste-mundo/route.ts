@@ -23,11 +23,18 @@ async function listarAnchors(): Promise<Anchor[]> {
     }));
   } catch { return []; }
 }
-// repete uma chamada falhada (timeout/erro transitório do Replicate) antes de desistir.
-async function comRetry<T>(fn: () => Promise<T>, tentativas = 2): Promise<T> {
+// repete uma chamada falhada antes de desistir. Em 429 (throttle do Replicate, quando
+// há pouco crédito: rajada de 5/min) ESPERA ~6s (o erro diz "reset em ~5s"); noutros
+// erros, espera pouco. Assim a geração sobrevive ao limite sem dar erro à Vivianne.
+async function comRetry<T>(fn: () => Promise<T>, tentativas = 3): Promise<T> {
   let ultimo: unknown;
   for (let t = 0; t < tentativas; t++) {
-    try { return await fn(); } catch (e) { ultimo = e; }
+    try { return await fn(); }
+    catch (e) {
+      ultimo = e;
+      const throttled = /429|throttl|rate limit/i.test(String((e as Error)?.message ?? e));
+      if (t < tentativas - 1) await new Promise((r) => setTimeout(r, throttled ? 6500 : 1500));
+    }
   }
   throw ultimo;
 }
