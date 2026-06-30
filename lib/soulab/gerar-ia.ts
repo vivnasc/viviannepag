@@ -62,6 +62,7 @@ REGRAS DE VOZ (duras):
 - Profundo mas leve; nunca pesado, nunca pregador, nunca académico, nunca kitsch místico.
 - CONVITE, não confissão: impessoal e aberto. NUNCA "isto és tu", nunca um diagnóstico da pessoa que lê.
 - NÃO motivacional, NÃO conselho, NÃO autoajuda, NÃO "põe-te em primeiro". Explora, não convence.
+- NÃO-GENÉRICO (teste obrigatório antes de devolver): pergunta "isto poderia estar em qualquer página espiritual/de citações, sem o conhecimento desta curadoria?". Se sim, FALHOU: reescreve com a especificidade e a profundidade do saber (a observação exata, a camada que ninguém vê), inconfundivelmente DESTE laboratório. Nunca um truísmo bonito.
 - Deixa a peça ABERTA: uma pergunta interessante vale mais que uma resposta fechada.
 - A legenda termina SEMPRE com um CTA, mas LEVE (um convite, não uma ordem): ficar com a pergunta, guardar para um momento de silêncio, partilhar com quem precisa, seguir o laboratório. NUNCA vender, NUNCA "link na bio", NUNCA imperativo agressivo.
 - A FRASE que aparece no ecrã é CURTA (cabe grande num reel 9:16): uma a três linhas, densa, com uma virada.

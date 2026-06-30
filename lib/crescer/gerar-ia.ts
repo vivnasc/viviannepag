@@ -55,7 +55,7 @@ O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser 
 
 PROFUNDIDADE (a base de conhecimento dela, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 3)}
 
-O que SAI é a vida real, na linguagem das dores e passagens de qualquer pessoa, NUNCA a teoria, NUNCA o nome de um véu, autor ou tradição.
+O que SAI é a vida real, em linguagem de toda a gente (NUNCA teoria, NUNCA o nome de um véu, autor ou tradição), MAS tem de CARREGAR a ideia ESPECÍFICA e não-óbvia deste saber: um insight com textura e profundidade, que a maioria nunca articulou assim, que SÓ este mundo vê. PROIBIDA a frase genérica de autoajuda que poderia vir de qualquer página motivacional sem este conhecimento: se o que escreveste serviria a qualquer conta, deita fora e vai mais fundo (ao mecanismo concreto, à camada por baixo, ao detalhe que ninguém diz). Específico e fundo, nunca universal e raso.
 
 A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}
 
@@ -65,6 +65,7 @@ A VOZ DE HOJE (${voz.label}): ${voz.instrucao}
 
 REGRAS DE VOZ (duras):
 - DIGNIDADE (inviolável): a peça abre SEMPRE com uma FACA (a 1.ª linha pára o scroll), nunca um arranque morno ou descritivo. O texto é forte e claro do princípio ao fim, nunca difuso, nunca encheção para ocupar slides. Se não houver uma faca e uma verdade que valham, escreve menos, nunca enches.
+- NÃO-GENÉRICO (teste obrigatório antes de devolver): lê a frase e pergunta "isto poderia estar em qualquer página de autoajuda, sem o conhecimento dela?". Se sim, FALHOU: reescreve com a especificidade e a profundidade do saber (o mecanismo concreto, a camada por baixo, a verdade exata que a maioria não vê). A peça tem de ser inconfundivelmente DESTE mundo, não um truísmo bonito.
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
 - SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
 - DIRETA: nomeia a cena concreta que a pessoa vive. A pessoa tem de pensar "isto sou eu". Nada de enigmas a decifrar, nada de títulos-conceito herméticos, nada de metáfora obscura.

@@ -281,6 +281,8 @@ export const FIM_PROMPT =
   'Palette: luminous and clear, warm whites and soft golds with RADIANT SKY BLUES, lush living GREENS, turquoise water and champagne light, rich and beautiful NATURAL color (vivid yet natural, never neon, never washed-out, never muted). ' +
   'Feeling: absolute safety, expansion, possibility, mystery and awe, the end of the old world and the birth of a new human paradigm. ' +
   'The monumental scale of Dune and Interstellar and the organic luminosity of Avatar and Moebius, BUT much brighter, more colourful, sharper and higher-resolution than those films. ' +
+  'VARY THE COMPOSITION AND VANTAGE WIDELY across images: sometimes a wide distant vista, sometimes an INTIMATE INTERIOR seen FROM WITHIN the inhabited world, sometimes looking up, sometimes an aerial view, sometimes a close human-scale detail. ' +
+  'Do NOT default to archways, arches, doorways, portals or arched stone openings framing the view; that composition is overused, avoid it unless truly needed. ' +
   'ABSOLUTELY NO haze, NO fog, NO mist, NO heavy shadows, NO murky penumbra, NO dim or desaturated look. ' +
   'NEVER neon, NEVER cyberpunk, no robots, no spaceships, no screens or holograms, no crystals, no chakras, no esoteric symbols, ' +
   'no post-apocalyptic decay, no dried flowers, no family corridors, no family trees, no blurry grandmothers, no literal therapy metaphors, not a plain everyday photo. ' +
@@ -308,6 +310,10 @@ export const VISUAIS: VisualCrescer[] = [
       'a figure on a road of light that builds itself only a few metres ahead of their steps',
       'a tiny figure inside an immense floating library of volumes of light',
       'a figure climbing a vast stairway that ends in the clouds',
+      'a person resting calmly inside a warm luminous organic home, soft daylight, gardens beyond the wide window',
+      'a person at a sunlit table in an interior of grown living architecture, plants and light around them',
+      'two people in quiet company in a warm radiant room open to a green horizon',
+      'a person standing close at a vast open window, the new luminous world spread softly below',
     ],
   },
   {
@@ -318,34 +324,39 @@ export const VISUAIS: VisualCrescer[] = [
       'the old heavy world (industrial, built to survive) and the world that emerges (organic, luminous, impossible scale); ' +
       'show the threshold / a crack of warm light / the horizon, never the arrival fully inhabited. ' + FIM_PROMPT,
     variar:
-      'VARIA a metáfora em escala: uma cidade escura e densa de engrenagens e contrafortes vista de muito longe, bela e exausta; um interior monumental intacto mas vazio de luz própria, ' +
-      'com uma fenda por onde entra a luz quente do outro mundo; oceanos verticais, bibliotecas flutuantes, portais colossais, árvores do tamanho de continentes. Mostra o limiar, nunca a solução.',
+      'VARIA a metáfora em escala E o ponto de vista: uma cidade escura e densa de engrenagens vista de muito longe, bela e exausta; um interior monumental que passa de sem luz própria a inundado pela luz quente do outro mundo; ' +
+      'oceanos verticais, bibliotecas flutuantes, árvores do tamanho de continentes, um interior íntimo onde os dois mundos se tocam. Mostra a TENSÃO dos dois mundos; nem sempre um portal nem sempre só de fora.',
     arquetipos: [
       'a vast dark dense city of gears and buttresses seen from very far, beautiful and exhausted',
-      'a monumental interior, intact but with no light of its own, a crack letting in warm light from the other world',
+      'a monumental interior shifting from no light of its own to being flooded with warm light from the other world',
       'colossal vertical oceans of suspended water catching the light',
-      'enormous open portals onto a luminous horizon',
+      'an intimate warm interior where the heavy old world and the luminous new one meet in one room',
       'continent-sized living trees rising over an old world',
       'bridges of light between inhabited floating mountains',
+      'a luminous organic interior growing out of cracked industrial stone, life reclaiming it',
     ],
   },
   {
     id: 'natureza', label: 'O mundo que emerge', emoji: '🌌',
     descricao: 'Vislumbre do mundo orgânico e luminoso que nasce depois da sobrevivência (ao longe, por uma fenda).',
     promptBase:
-      'the WORLD THAT EMERGES after survival, NO people: organic luminous architecture and landscape at impossible scale ' +
-      '(suspended gardens, rivers in the sky, bridges of light, continent-sized trees, vertical oceans, light that is the matter itself), ' +
-      'glimpsed from afar / through a crack / on the horizon, never explained nor fully inhabited; it mirrors the feeling of the words. ' + FIM_PROMPT,
+      'the WORLD THAT EMERGES after survival: organic luminous architecture and landscape at impossible scale ' +
+      '(suspended gardens, rivers in the sky, bridges of light, continent-sized trees, vertical oceans, light that is the matter itself). ' +
+      'VARY THE VANTAGE: sometimes glimpsed from afar / on the horizon, sometimes seen FROM WITHIN as a warm inhabited interior, sometimes an intimate human-scale corner of that world; it mirrors the feeling of the words. ' + FIM_PROMPT,
     variar:
-      'VARIA a paisagem do novo mundo, sempre vislumbrada (não habitada por completo): jardins suspensos, rios no céu, pontes de luz, montanhas habitadas, escadas que terminam nas nuvens. ' +
-      'Espelha o sentimento da frase (expansão, recomeço, pertença em escala), sempre com segurança, mistério e admiração.',
+      'VARIA a paisagem E o ponto de vista do novo mundo: ora ao longe (jardins suspensos, rios no céu, pontes de luz, montanhas habitadas, escadas nas nuvens), ora POR DENTRO ' +
+      '(o interior luminoso de uma casa aberta para os jardins, um atelier cheio de luz, um quarto quente e sereno, uma estufa, uma sala de encontro). Espelha o sentimento da frase (expansão, recomeço, pertença), sempre com segurança, mistério e admiração.',
     arquetipos: [
       'endless suspended gardens cascading with greenery and light',
       'rivers in the sky falling as cascades of luminous water',
       'inhabited crystalline mountains glowing softly',
       'a sunrise over a vast ocean of light',
-      'forests growing inside luminous architecture',
-      'auroras over a serene radiant plain',
+      'the warm luminous INTERIOR of an organic home opening onto suspended gardens',
+      'an artist\'s sunlit atelier inside the living architecture, plants and light everywhere',
+      'a serene warm bedroom of grown organic walls, soft daylight, open to a green horizon',
+      'a calm communal gathering hall bathed in golden light, no crowd, just warmth',
+      'a luminous greenhouse interior overflowing with green life',
+      'a quiet reading nook of light high inside a continent-sized tree',
     ],
   },
   {
