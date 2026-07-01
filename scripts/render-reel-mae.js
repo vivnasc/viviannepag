@@ -105,8 +105,9 @@ async function main() {
       const D = temVoz ? await ffprobeDuration(vozMp3) : Math.max(6, linhas.length * 3.2);
       const N = Math.min(1200, Math.max(120, Math.round((D + 1.4) * FPS)));
 
-      // frames
-      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}`;
+      // frames (com o LAYOUT dela, para o MP4 sair igual ao pre-ver, sem surpresas)
+      const layoutQ = (process.env.LAYOUT || '').trim();
+      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${layoutQ ? '&' + layoutQ : ''}`;
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });

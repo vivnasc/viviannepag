@@ -117,11 +117,16 @@ function PreviewBox({ peca }: { peca: Peca }) {
   const tema = peca.tematica || 'consciencia';
   const segs = linhas.flatMap(segmentar).slice(0, 12);
   const total = Math.max(1, segs.length);
-  const [modo, setModo] = useState<'reel' | 'multi' | 'carrossel'>('reel');
+  const [modo, setModoS] = useState<'reel' | 'multi' | 'carrossel'>('reel');
   const [slide, setSlide] = useState(0);
   const cur = Math.min(slide, total - 1);
   const bt = (on: boolean) => (on ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' });
-  const [estatico, setEstatico] = useState(true); // pré-ver PARADO (texto sempre visível, para posicionar) vs a mexer
+  const [estatico, setEstaticoS] = useState(true); // pré-ver PARADO (texto visível, para posicionar) vs a entrar por tempos
+  const [guardado, setGuardado] = useState(false);
+  // TUDO o que ela escolhe FICA (mesmo ao recarregar): formato e parado/a-mexer guardam-se.
+  useEffect(() => { try { const m = localStorage.getItem('crescer-modo'); if (m === 'reel' || m === 'multi' || m === 'carrossel') setModoS(m); const e = localStorage.getItem('crescer-estatico'); if (e != null) setEstaticoS(e === '1'); } catch { /* */ } }, []);
+  const setModo = (m: 'reel' | 'multi' | 'carrossel') => { setModoS(m); try { localStorage.setItem('crescer-modo', m); } catch { /* */ } };
+  const setEstatico = (e: boolean) => { setEstaticoS(e); try { localStorage.setItem('crescer-estatico', e ? '1' : '0'); } catch { /* */ } };
   // LAYOUT ajustável por ela, guardado no browser e aplicado a tudo. Posição por OPÇÕES
   // (vertical: topo/centro/baixo · horizontal: esq/centro/dir), como ela editava antes.
   const LAY0 = { av: 'baixo', ah: 'centro', dist: 12, txtSize: 5.6, geoTop: 15, geoW: 66 };
@@ -169,9 +174,11 @@ function PreviewBox({ peca }: { peca: Peca }) {
           </div>
         </div>
       )}
-      {/* POSIÇÃO e AJUSTES (guardam-se, valem para todos os posts) */}
+      {/* POSIÇÃO e AJUSTES (guardam-se sozinhos; o 💾 confirma e vale para todos + o render) */}
       <div className="mx-auto mt-1.5 space-y-1" style={{ width: 240 }}>
-        <div className="flex items-center justify-between"><span className="text-[0.5rem] uppercase tracking-widest opacity-40">posição do texto</span>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[0.5rem] uppercase tracking-widest opacity-40 flex-1">posição do texto</span>
+          <button onClick={() => { try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(lay)); } catch { /* */ } setGuardado(true); setTimeout(() => setGuardado(false), 1800); }} className="text-[0.56rem] px-2 py-0.5 rounded border" style={{ borderColor: DZ, background: DZ, color: BG2 }}>{guardado ? '✓ guardado' : '💾 guardar'}</button>
           <button onClick={() => { setLay(LAY0); try { localStorage.removeItem('crescer-assinatura-layout'); } catch { /* */ } }} className="text-[0.5rem] opacity-60 underline">repor</button></div>
         <div className="flex items-center gap-1"><span className="w-14 text-[0.54rem] opacity-70">vertical</span>
           <Op k="av" val="topo">↑ topo</Op><Op k="av" val="centro">centro</Op><Op k="av" val="baixo">baixo ↓</Op></div>
@@ -540,7 +547,10 @@ export default function CrescerPage() {
   // custo de imagem. É o formato novo da mãe.
   const reelAssinatura = useCallback((slug: string) => {
     if (typeof window !== 'undefined' && !window.confirm('Gerar o REEL DE ASSINATURA (geometria VDS + a tua voz clonada)? Corre nos GitHub Actions, uns minutos.')) return;
-    acao(slug, '/api/admin/crescer/render-reel', {}, 'A gravar o reel de assinatura (uns minutos)…', 'Reel de assinatura disparado. Aparece daqui a uns minutos (recarrega).', false);
+    // leva o TEU layout (posição, distância, tamanho) para o render sair igual ao pré-ver.
+    let layout: Record<string, unknown> = {};
+    try { layout = JSON.parse(localStorage.getItem('crescer-assinatura-layout') || '{}'); } catch { /* */ }
+    acao(slug, '/api/admin/crescer/render-reel', { layout }, 'A gravar o reel de assinatura (uns minutos)…', 'Reel de assinatura disparado. Aparece daqui a uns minutos (recarrega).', false);
   }, [acao]);
   // VOZ ANTES DO RENDER (regra da Vivianne): gera a voz clonada da frase agora, para
   // ela OUVIR no admin; o render so cola esta voz, sem surpresas.

@@ -16,6 +16,11 @@ on:
         required: false
         type: string
         default: ''
+      layout:
+        description: 'query string do layout dela (av/ah/dist/txtSize/geoTop/geoW)'
+        required: false
+        type: string
+        default: ''
 
 jobs:
   render:
@@ -43,6 +48,7 @@ jobs:
           SITE_URL: ${{ github.event.inputs.siteUrl }}
           SLUG: ${{ github.event.inputs.slug }}
           JOB_ID: ${{ github.event.inputs.jobId }}
+          LAYOUT: ${{ github.event.inputs.layout }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}

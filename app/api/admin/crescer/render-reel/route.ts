@@ -16,10 +16,16 @@ export async function POST(req: Request) {
   const ref = process.env.GITHUB_DISPATCH_REF ?? 'main';
   if (!token) return NextResponse.json({ erro: 'sem-github-token' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { slug?: string };
+  const body = (await req.json().catch(() => ({}))) as { slug?: string; layout?: Record<string, string | number> };
   if (!body.slug) return NextResponse.json({ erro: 'slug' }, { status: 400 });
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://viviannedossantos.com';
   const jobId = `reel-mae-${Date.now()}`;
+  // o layout dela (av/ah/dist/txtSize/geoTop/geoW) vai como query string para o render
+  // sair IGUAL ao pré-ver (sem surpresas).
+  const CHAVES = ['av', 'ah', 'dist', 'txtSize', 'geoTop', 'geoW'];
+  const layout = body.layout && typeof body.layout === 'object'
+    ? new URLSearchParams(Object.fromEntries(CHAVES.filter((k) => body.layout![k] != null).map((k) => [k, String(body.layout![k])]))).toString()
+    : '';
 
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/actions/workflows/render-reel-mae.yml/dispatches`,
@@ -31,7 +37,7 @@ export async function POST(req: Request) {
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ref, inputs: { jobId, siteUrl, slug: body.slug } }),
+      body: JSON.stringify({ ref, inputs: { jobId, siteUrl, slug: body.slug, layout } }),
     },
   );
   if (!res.ok) {
