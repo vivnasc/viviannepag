@@ -13,11 +13,12 @@ export type ContaId = string;
 export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   { id: 'loja', nome: 'vivianne.dos.santos', emoji: '🛍️' }, // conta-mãe
   { id: 'veuaveu', nome: 'veu.a.veu', emoji: '🌿' }, // didática
-  // Método VS · as 3 portas (Ver, Vir, Viver). Conteúdo gerado em /admin/metodo,
-  // distinguido por theme.marca. Ver lib/metodo/contas.ts.
-  { id: 'versoltar', nome: 'ver.soltar', emoji: '🌊' }, // a margem
-  { id: 'virsoltar', nome: 'vir.soltar', emoji: '🤲' }, // o colo
-  { id: 'viversoltar', nome: 'viver.soltar', emoji: '🌅' }, // descalça (o limiar)
+  // As 3 portas novas (livros). Método VS foi abolido: ver/vir/viver saíram do
+  // Publicar e são substituídos por estas. Motor no molde da Soulab, distinguido
+  // por theme.marca. Ver lib/portas/marca.ts.
+  { id: 'medo', nome: 'assetefacesdomedo', emoji: '🕯️' }, // As Sete Faces do Medo
+  { id: 'sinais', nome: 'os7sinaisdedesencaixe', emoji: '🚪' }, // Os 7 Sinais de Desencaixe
+  { id: 'transicao', nome: 'agrandetransicao', emoji: '🌗' }, // A Grande Transição
   // Soulab · laboratório criativo da alma (motor PRÓPRIO, separado dos outros).
   // Conteúdo gerado em /admin/soulab, distinguido por theme.marca. Ver lib/soulab/*.
   { id: 'soulab', nome: 'soulab.studio', emoji: '🧪' },

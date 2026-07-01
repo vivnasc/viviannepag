@@ -1,115 +1,89 @@
-# Kit de lancamento · Instagram das tres portas
+# Contas de Instagram das tres portas · indice
 
-Comecar do zero: nome, @handle, bio, foto de perfil e primeiro post por porta. Texto de marca em portugues pre-AO90, sem travessoes. Voz: autoridade com calor, tocar a pessoa antes de explicar o sistema, terminar na fissura e numa pergunta.
+Comecar do zero, uma conta por livro. Cada conta tem a sua branding (paleta e assinatura em `../<porta>/`), a sua voz e o seu motor proprio. O que as une e o nome da autora, nao um tema.
 
-Nota sobre os @handle: nao consigo verificar disponibilidade no Instagram a partir daqui. Cada porta leva uma recomendacao e duas alternativas. Confirma qual esta livre antes de registar.
+O MOTOR de conteudo das tres contas vive no codigo, no molde limpo da Soulab:
+- `lib/portas/marca.ts` · as tres portas como marcas, cada uma com o SEU motor
+  (as 7 faces / os 7 sinais / as tensoes), voz, paleta e regras de imagem.
 
-Foto de perfil de cada porta: `avatares/faces.png`, `avatares/sinais.png`, `avatares/grande.png` (400x400, geradas a partir da assinatura da porta, seguras para o recorte circular). Os `.svg` ao lado sao a versao editavel.
+O Metodo VS foi abolido: as contas ver/vir/viver saem do Publicar e sao
+substituidas por estas tres (`lib/instagram/contas.ts`).
+
+Nota sobre os @handle: nao consigo confirmar disponibilidade no Instagram daqui. Cada conta leva um recomendado e alternativas. Confirma antes de registar.
+
+Foto de perfil: geras onde preferires. Deixo um prompt por conta, fiel a assinatura da porta (as versoes SVG foram abolidas).
 
 ---
 
-## Porta I · As Sete Faces do Medo
+## Como cada peca se estrutura (molde da Soulab)
 
-- **Nome da conta (campo Nome):** As Sete Faces do Medo
-- **@handle recomendado:** `assetefacesdomedo`
-  - alternativas: `setefacesdomedo` · `asfaces.domedo`
-- **Foto de perfil:** `avatares/faces.png` (a fenda luminosa, ouro sobre carvao)
-- **Pergunta da porta:** o que estou a proteger?
+Como na Soulab, cada porta tem ANGULOS de exploracao (os `tipos` em `lib/portas/marca.ts`); o gerador pega num angulo e produz uma peca (um reel 9:16: uma imagem simbolica + um fragmento de texto), com legenda e hashtags, e grava com `theme.marca` = id da porta, aparecendo no Publicar.
 
-**Bio (colar):**
+O que muda de porta para porta e a VOZ, a paleta, a assinatura visual e o motor:
+- **Faces do Medo:** as 7 faces (o medo por baixo de um comportamento quotidiano, nunca nomeado; termina na fissura). Reconhecimento sem envergonhar.
+- **Sinais de Desencaixe:** os 7 sinais (o Limiar; nunca ilustrar literalmente; transicao serena; fecho variado).
+- **Grande Transicao:** as tensoes x dominios (nunca nomear a tensao; comeca numa cena de hoje; dois tempos na imagem; termina em reconhecimento).
+
+Voz (das constituicoes): autoridade com calor, tocar a pessoa antes do sistema, portugues pre-AO90, sem travessoes, sem os tiques da lista de revisao (nao abrir com E/Mas, sem regra de tres, sem "nao X e Y", etc.).
+
+---
+
+## As tres contas
+
+### As Sete Faces do Medo
+- **Nome:** As Sete Faces do Medo
+- **@handle:** `assetefacesdomedo` (alt: `setefacesdomedo` · `asfaces.domedo`)
+- **Pergunta:** o que estou a proteger?
+- **Palavra de comentario:** MEDO
+- **Bio:**
 ```
 As sete formas que o medo veste para nao ser reconhecido.
 O que estas a proteger?
 Uma porta de Vivianne dos Santos
 ```
-
-**Destaques sugeridos (capas com os icones em `../faces-do-medo/motivos/`):**
-comeca aqui · O Espelho · O Punho · O Inverno · A Fortaleza · A Luz · O Apagamento · O Abismo
-
-**Primeiro post (fixar):**
+- **Prompt da foto de perfil:**
 ```
-Ninguem acorda a decidir ter medo.
-
-Ele aprende a vestir-se de outra coisa. Umas vezes de simpatia a mais, outras de uma agenda cheia ate nao sobrar espaco para sentir.
-
-Sao sete as formas que veste para continuar a passar por vida normal. Aqui reconhece-se cada uma sem a envergonhar.
-
-O que estou, afinal, a proteger?
+Extreme close-up of cracked black porcelain with a single seam of warm golden light glowing from inside the fracture, kintsugi, charcoal #0F0F10 background, minimal, centered, luxurious matte finish, fine grain, no text, no people, square
 ```
-Legenda curta / hashtags: #medo #autoconhecimento #psicologia #ViviannedosSantos
 
----
-
-## Porta II · Os 7 Sinais de Desencaixe
-
-- **Nome da conta (campo Nome):** Os 7 Sinais de Desencaixe
-- **@handle recomendado:** `os7sinaisdedesencaixe`
-  - alternativas: `os7sinais` · `sinaisdedesencaixe`
-- **Foto de perfil:** `avatares/sinais.png` (o Limiar, luz quente)
-- **Pergunta da porta:** onde fica casa agora?
-
-**Bio (colar):**
+### Os 7 Sinais de Desencaixe
+- **Nome:** Os 7 Sinais de Desencaixe
+- **@handle:** `os7sinaisdedesencaixe` (alt: `os7sinais` · `sinaisdedesencaixe`)
+- **Pergunta:** onde fica casa agora?
+- **Palavra de comentario:** CASA
+- **Bio:**
 ```
 Continuar a amar um lugar enquanto deixas de morar nele.
 Onde fica casa agora?
 Uma porta de Vivianne dos Santos
 ```
-
-**Destaques sugeridos (capas com os icones em `../sinais-de-desencaixe/motivos/`):**
-comeca aqui · A Mesa · A Mascara · O Horizonte · O Eremita · O Corpo · O Refugio · A Casa
-
-**Primeiro post (fixar):**
+- **Prompt da foto de perfil:**
 ```
-Ha uma despedida que acontece sem que ninguem saia da sala.
-
-Continuas a por a mesa, a ir aos jantares, a sorrir nas fotografias, e por dentro foste deixando de morar no lugar que ainda amas.
-
-Este e o mapa dessa travessia silenciosa, a de quem ja nao cabe no sistema antigo e ainda nao encontrou o novo. Sete sinais.
-
-Onde fica casa agora?
+A doorway ajar in a warm sunlit interior at late afternoon, soft golden light spilling across a wooden threshold, quiet domestic scene, warm palette #F4EFE8 #E8D5B5 #C7A96B, cinematic, minimal, centered, no text, no people, square
 ```
-Legenda curta / hashtags: #pertenca #desencaixe #casa #ViviannedosSantos
 
----
-
-## Porta III · A Grande Transicao
-
-- **Nome da conta (campo Nome):** A Grande Transicao
-- **@handle recomendado:** `agrandetransicao`
-  - alternativas: `grande.transicao` · `agrande.transicao`
-- **Foto de perfil:** `avatares/grande.png` (o limiar entre dois tempos)
-- **Pergunta da porta:** que mundo esta a nascer?
-
-**Bio (colar):**
+### A Grande Transicao
+- **Nome:** A Grande Transicao
+- **@handle:** `agrandetransicao` (alt: `grande.transicao` · `agrande.transicao`)
+- **Pergunta:** que mundo esta a nascer?
+- **Palavra de comentario:** NOME
+- **Bio:**
 ```
 O futuro ja esta aqui, escondido numa cozinha de hoje.
 O que estas a viver que ainda nao recebeu nome?
 Uma porta de Vivianne dos Santos
 ```
-
-**Destaques sugeridos (capas com os motivos em `../grande-transicao/motivos/`):**
-comeca aqui · Caderno e IA · Crianca e algoritmo · Relogio e planta · Lista e pausa · Telemovel e silencio
-
-**Primeiro post (fixar):**
+- **Prompt da foto de perfil:**
 ```
-A mudanca de epoca nao vai chegar. Ja esta aqui, sentada a tua mesa.
-
-Aparece na culpa de descansar, ou no telemovel que pousas com o ecra virado para baixo so para ganhar um minuto de silencio.
-
-Vivemos entre dois sistemas, um feito para sobreviver e outro que ainda estamos a aprender a habitar. Este e o lugar para o ver com lucidez.
-
-O que estas a viver que ainda nao recebeu nome?
+A kitchen table at golden hour with an open handwritten notebook beside a softly glowing device, two eras in one still life, warm neutral palette #F5F1EA #E8DDCB #CDB79E, documentary realism, calm and lucid, no text, no people, square
 ```
-Legenda curta / hashtags: #grandetransicao #presenca #epoca #ViviannedosSantos
 
 ---
 
-## Ordem de arranque, por conta
+## Estado do codigo
 
-1. Registar o @handle (confirmar disponibilidade), por o Nome e a Bio acima.
-2. Carregar a foto de perfil (`avatares/<porta>.png`).
-3. Publicar o primeiro post e fixa-lo.
-4. Preparar as capas dos destaques a partir dos ficheiros em `motivos/` (mesma cor, mesmo fundo da porta).
-5. Alimentar o feed com os bancos de imagem (`../<porta>/prompts.md`) e a voz de cada constituicao. Um so tema por peca, terminar na fissura.
+Ja feito:
+- `lib/portas/marca.ts` · as tres portas como marcas no molde da Soulab (motor proprio de cada uma).
+- `lib/instagram/contas.ts` · ver/vir/viver saem do Publicar, as tres portas entram.
 
-Cada conta e a sua propria casa: paleta, assinatura e voz so dela. Nada de as fazer parecerem uma serie. O que as une e o nome da autora.
+A seguir (o estudio de geracao, como o `/admin/soulab`): o gerador por porta e as rotas/pagina de admin, para carregares em "gerar" e sair conteudo. So se testa com as chaves reais (ANTHROPIC + REPLICATE + Supabase), que nao existem no ambiente de desenvolvimento.
