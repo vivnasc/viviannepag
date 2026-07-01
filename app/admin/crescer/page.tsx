@@ -608,7 +608,9 @@ export default function CrescerPage() {
           </>}
 
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">formatos</p>
-          <div className="flex flex-wrap gap-1.5 mb-3">{FORMATOS.map((f) => <Chip key={f.id} on={fmts.has(f.id)} onClick={() => toggle(setFmts, f.id)} title={f.descricao}><span className="mr-1">{f.emoji}</span>{f.label}</Chip>)}</div>
+          {/* 'lista' (listicle "3 sinais de…") cortada a pedido da Vivianne: nunca usada e é o
+              registo diagnóstico, o oposto do íntimo/editorial. Repor = tirar o filtro. */}
+          <div className="flex flex-wrap gap-1.5 mb-3">{FORMATOS.filter((f) => f.id !== 'lista').map((f) => <Chip key={f.id} on={fmts.has(f.id)} onClick={() => toggle(setFmts, f.id)} title={f.descricao}><span className="mr-1">{f.emoji}</span>{f.label}</Chip>)}</div>
 
           {/* voz sempre DIRETA (a poética saiu) · visual sempre MINIMAL/tipográfico (sem imagem
               por agora; a imagem, se voltar, será símbolos/desenhos, a estudar). Por isso as
