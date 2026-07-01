@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { receitaDe, motivoSVG, motivosDoTema, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
+import { motivoSVG, motivosDoTema, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
 
 // RENDER do reel da mãe, dirigido por progresso (window.__setKProg para o recorder).
 // ?multi=1 = REEL MULTI-FRAME (cada segmento é uma CENA com a sua geometria, que se
@@ -90,9 +90,6 @@ export default function RenderReelMae() {
           <g key={motivo} dangerouslySetInnerHTML={{ __html: motivoHTML }} />
         </svg>
       </div>
-      <div style={{ position: 'absolute', top: '6.5%', left: '8%', right: '8%', display: 'flex', justifyContent: 'space-between', fontFamily: 'system-ui, sans-serif', fontSize: '2.6vw', letterSpacing: '.32em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.72 }}>
-        <span>a mãe</span><span>{params.label || receitaDe(params.tema).label}</span>
-      </div>
       <div style={{ position: 'absolute', left: '8%', right: '8%', bottom: `${params.txtY}%`, textAlign: 'center' }}>
         <div style={{ width: `${ruleW}%`, height: 1, margin: '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
         <div style={{ position: 'relative', minHeight: '22vh' }}>
@@ -107,8 +104,8 @@ export default function RenderReelMae() {
         </div>
       </div>
       <div style={{ position: 'absolute', bottom: '6.5%', left: 0, right: 0, textAlign: 'center', fontSize: '3vw', letterSpacing: '.42em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.6 }}>
-        vivianne dos santos
-        <small style={{ display: 'block', fontFamily: 'system-ui, sans-serif', fontSize: '1.9vw', letterSpacing: '.34em', opacity: 0.6, marginTop: '1.4%' }}>a vantagem de crescer</small>
+        @vivianne.dos.santos
+        <small style={{ display: 'block', fontFamily: 'system-ui, sans-serif', fontSize: '1.9vw', letterSpacing: '.34em', opacity: 0.6, marginTop: '1.4%' }}>viviannedossantos.com</small>
       </div>
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(120% 90% at 50% 34%, transparent 52%, rgba(16,12,9,.9) 100%)' }} />
     </div>
