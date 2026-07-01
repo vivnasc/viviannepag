@@ -29,7 +29,8 @@ export default function RenderReelMae() {
 
   useEffect(() => {
     (window as unknown as { __setKProg?: (v: number) => void }).__setKProg = (v: number) => { externo.current = true; setP(clamp(v)); };
-    if (params?.estatico) { setP(1); return; } // ESTÁTICO: texto e geometria sempre visíveis (para posicionar)
+    // a GEOMETRIA anima SEMPRE (respira, desenha, orbita), mesmo no modo de posicionar;
+    // o 'estatico' só mantém o TEXTO sempre visível. Um não exclui o outro.
     let raf = 0, t0 = 0;
     const LOOP = params ? Math.max(9000, params.segs.length * 3000) : 9000;
     const tick = (t: number) => { if (externo.current) return; if (!t0) t0 = t; setP((((t - t0) % LOOP) / LOOP)); raf = requestAnimationFrame(tick); };
@@ -49,13 +50,14 @@ export default function RenderReelMae() {
   const motivoHTML = useMemo(() => motivoSVG(motivo), [motivo]);
 
   const estatico = !!params?.estatico;
-  // opacidade da CENA (multi): entra e sai; a última fica. (single/estático: sempre 1)
+  // opacidade da CENA (multi): entra e sai; a última fica. No estático (texto parado) a
+  // geometria fica estável (sem fade de cena) mas continua a animar por dentro.
   const sceneOp = estatico ? 1 : (multi ? clamp(localP / 0.12) * (scene === N - 1 ? 1 : 1 - clamp((localP - 0.86) / 0.12)) : 1);
 
-  // aplica o progresso à geometria
+  // aplica o progresso à geometria (anima SEMPRE)
   useEffect(() => {
     const g = geoRef.current; if (!g || !params) return;
-    const dp = estatico ? 1 : (multi ? localP : p);
+    const dp = multi ? localP : p;
     const draws = g.querySelectorAll<SVGGeometryElement>('.ring, .drawpath, .cnet line');
     draws.forEach((el, i) => {
       // multi: todos desenham juntos no arranque da cena. single: escalonado ao longo do reel.

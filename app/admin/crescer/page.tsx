@@ -151,9 +151,10 @@ function PreviewBox({ peca }: { peca: Peca }) {
           <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
             <iframe src={`/render-reel-mae?${q}${modo === 'multi' ? '&multi=1' : ''}${estatico ? '&static=1' : ''}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
           </div>
-          <div className="flex items-center justify-center gap-2 mt-1"><span className="text-[0.5rem] opacity-40">pré-ver:</span>
+          <div className="flex items-center justify-center gap-2 mt-1"><span className="text-[0.5rem] opacity-40">texto:</span>
             <button onClick={() => setEstatico(true)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(estatico)}>⏸ parado (posicionar)</button>
-            <button onClick={() => setEstatico(false)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(!estatico)}>▶ a mexer</button>
+            <button onClick={() => setEstatico(false)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(!estatico)}>▶ a entrar por tempos</button>
+            <span className="text-[0.48rem] opacity-35">(a forma mexe sempre)</span>
           </div>
         </>
       ) : (
