@@ -35,7 +35,7 @@
 )
 
 // muito ar antes de cada secção — nova sala, novo movimento
-#let secao(t) = align(center, block(above: 3.2em, below: 2em,
+#let secao(t) = align(center, block(above: 4.6em, below: 2.1em,
   text(fill: acento, size: 8.5pt, tracking: 3pt)[#upper(t)]))
 #let capitular(txt) = {
   let cl = txt.clusters()
