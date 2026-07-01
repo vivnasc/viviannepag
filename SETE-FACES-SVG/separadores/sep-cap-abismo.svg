@@ -1,0 +1,9 @@
+<svg viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <line x1="46" y1="30" x2="112" y2="30"/>
+    <line x1="188" y1="30" x2="254" y2="30"/>
+  </g>
+  <g transform="translate(130,10) scale(0.4)">
+  <path id="abismo" d="M50 50 Q54 50 54 46 Q54 40 47 40 Q37 40 37 51 Q37 65 52 65 Q71 65 71 47 Q71 25 47 25 Q21 25 21 51"
+        fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+</g></svg>
