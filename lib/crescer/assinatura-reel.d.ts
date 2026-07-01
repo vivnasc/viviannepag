@@ -11,4 +11,5 @@ export interface ReelOpts {
 export function reelHTML(opts: ReelOpts): string;
 export const RECEITAS: Record<string, { motivo: string; label: string }>;
 export function receitaDe(tema: string): { motivo: string; label: string };
+export function motivoSVG(motivo: string): string;
 export const TOK: Record<string, string>;

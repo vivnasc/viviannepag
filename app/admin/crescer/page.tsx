@@ -505,6 +505,13 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Trazer a imagem a MOVIMENTO cinematográfico (vídeo contínuo ~40s)? Corre nos GitHub Actions, uns minutos, e tem custo. Depois carrega "render (reel)" para pôr o texto por cima.')) return;
     acao(slug, '/api/admin/metodo-vs/reel-narrativo-dispatch', { nClips: 4, dur: 10 }, 'A trazer a cena a movimento (uns minutos)…', 'Cena a ganhar vida. O vídeo aparece daqui a uns minutos (recarrega); depois "render (reel)" para o texto por cima.', false);
   }, [acao]);
+  // REEL DE ASSINATURA (VDS): geometria da assinatura + a frase real + a tua voz,
+  // gravado nos GitHub Actions (Puppeteer + ElevenLabs + ffmpeg). Zero imagem, zero
+  // custo de imagem. É o formato novo da mãe.
+  const reelAssinatura = useCallback((slug: string) => {
+    if (typeof window !== 'undefined' && !window.confirm('Gerar o REEL DE ASSINATURA (geometria VDS + a tua voz clonada)? Corre nos GitHub Actions, uns minutos.')) return;
+    acao(slug, '/api/admin/crescer/render-reel', {}, 'A gravar o reel de assinatura (uns minutos)…', 'Reel de assinatura disparado. Aparece daqui a uns minutos (recarrega).', false);
+  }, [acao]);
   // editor de slides: guardar os textos de todos os slides + imagem por slide.
   const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
   const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
@@ -767,6 +774,7 @@ export default function CrescerPage() {
                     <button onClick={() => abrir(p.slug, 'legenda')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda</button>
                     <button onClick={() => abrir(p.slug, 'agenda')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'}</button>
                     {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
+                    <button onClick={() => reelAssinatura(p.slug)} disabled={tBusy} title="grava o REEL DE ASSINATURA: geometria VDS + a frase + a tua voz clonada (sem imagem, sem custo). Corre nos Actions." className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>✦ reel assinatura</button>
                     <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
