@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { motivoSVG, motivosDoTema, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
+import { motivoSVG, motivosDoTema, receitaDe, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
 
 // RENDER do reel da mãe, dirigido por progresso (window.__setKProg para o recorder).
 // ?multi=1 = REEL MULTI-FRAME (cada segmento é uma CENA com a sua geometria, que se
@@ -38,54 +38,53 @@ export default function RenderReelMae() {
     return () => cancelAnimationFrame(raf);
   }, [params]);
 
-  const N = params ? Math.max(1, params.segs.length) : 1;
-  const multi = !!params?.multi;
-  const scene = multi ? Math.min(N - 1, Math.floor(p * N)) : 0;
-  const localP = multi ? clamp(p * N - scene) : p;
+  const estatico = !!params?.estatico;
   const seq = useMemo(() => (params ? motivosDoTema(params.tema) : []), [params]);
-  // single: o motivo varia POR POST (seed do slug) para 2 posts saírem diferentes.
-  // multi: o motivo varia por CENA. Ambos partem da sequência do tema.
+  // o motivo varia POR POST (seed do slug) para 2 posts saírem diferentes.
   const base = params ? hashStr(params.seed) : 0;
-  const motivo = params && seq.length ? (multi ? seq[(base + scene) % seq.length] : seq[base % seq.length]) : 'rings';
+  const motivo = params && seq.length ? seq[base % seq.length] : 'rings-concentric-05';
   const motivoHTML = useMemo(() => motivoSVG(motivo), [motivo]);
 
-  const estatico = !!params?.estatico;
-  // opacidade da CENA (multi): entra e sai; a última fica. No estático (texto parado) a
-  // geometria fica estável (sem fade de cena) mas continua a animar por dentro.
-  const sceneOp = estatico ? 1 : (multi ? clamp(localP / 0.12) * (scene === N - 1 ? 1 : 1 - clamp((localP - 0.86) / 0.12)) : 1);
-
-  // aplica o progresso à geometria (anima SEMPRE)
+  // desenha a geometria conforme o progresso (SEMPRE anima): pathLength desenha-se
+  // escalonado; os brilhos e o halo pulsam. Cobre os componentes da biblioteca VDS.
   useEffect(() => {
     const g = geoRef.current; if (!g || !params) return;
-    const dp = multi ? localP : p;
-    // GENERICO para a biblioteca VDS: tudo o que tem pathLength DESENHA-SE (escalonado);
-    // os brilhos (fills com gradiente) e o halo PULSAM. Cobre os 59 componentes.
-    const draws = g.querySelectorAll<SVGGeometryElement>('[pathLength]');
-    draws.forEach((el, i) => {
-      const start = multi ? 0.04 : 0.02 + i * 0.05;
-      const frac = clamp((dp - start) / (multi ? 0.34 : 0.22));
+    g.querySelectorAll<SVGGeometryElement>('[pathLength]').forEach((el, i) => {
+      const frac = clamp((p - (0.03 + i * 0.05)) / 0.24);
       el.style.strokeDasharray = '1'; el.style.strokeDashoffset = String(1 - frac);
     });
-    const br = 0.4 + 0.6 * (0.5 - 0.5 * Math.cos(dp * Math.PI * (multi ? 2 : 4)));
+    const br = 0.4 + 0.6 * (0.5 - 0.5 * Math.cos(p * Math.PI * 4));
     g.querySelectorAll<SVGElement>('.halo, .core, .focus').forEach((el) => (el.style.opacity = String(0.7 + 0.3 * br)));
     g.querySelectorAll<SVGElement>('[fill^="url"]').forEach((el) => (el.style.opacity = String(0.55 + 0.45 * br)));
-    g.querySelectorAll<SVGElement>('.orbit').forEach((el) => { el.style.transformBox = 'fill-box'; el.style.transformOrigin = '50px 50px'; el.style.transform = `rotate(${dp * (multi ? 300 : 720)}deg)`; });
-    g.querySelectorAll<SVGElement>('.cnode').forEach((el, i) => (el.style.opacity = String(0.3 + 0.7 * clamp((dp - 0.15 - i * 0.05) / 0.15))));
-  }, [p, localP, multi, motivoHTML, params]);
+  }, [p, motivoHTML, params]);
 
   useEffect(() => { if (params) document.body.dataset.slideReady = 'true'; }, [params]);
   if (!params) return null;
 
-  const ruleW = clamp(((multi ? localP : p) - 0.02) / 0.12) * 56;
+  // LAYOUT EDITORIAL VDS (docs/referencias/DESENHO-EDITORIAL-VDS.md): título=FACA à
+  // esquerda + régua + corpo (a viragem, entra por tempos); geometria à direita.
+  const titulo = params.segs[0] || '';
+  const corpo = params.segs.slice(1);
+  const M = Math.max(1, corpo.length);
+  const label = String(params.label || receitaDe(params.tema).label || '').toUpperCase();
+  const titOp = estatico ? 1 : clamp(p / 0.08);
+  const ruleW = estatico ? 60 : clamp((p - 0.06) / 0.1) * 60;
+  const HEADp = 0.14, TAILp = 0.92, slotW = (TAILp - HEADp) / M;
 
   return (
-    <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', fontFamily: 'Georgia, serif', color: TOK.light,
-      background: 'radial-gradient(120% 80% at 50% 30%, #241c13 0%, #1c1610 52%, #100c09 100%)' }}>
-      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.1, mixBlendMode: 'screen' }} viewBox="0 0 100 178" preserveAspectRatio="none">
+    <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', fontFamily: 'Georgia, "Times New Roman", serif', color: TOK.light,
+      background: 'radial-gradient(130% 90% at 64% 34%, #241c13 0%, #1a140e 55%, #0e0a07 100%)' }}>
+      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.09, mixBlendMode: 'screen' }} viewBox="0 0 100 178" preserveAspectRatio="none">
         <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter>
         <rect width="100" height="178" filter="url(#g)" />
       </svg>
-      <div ref={geoRef} style={{ position: 'absolute', top: `${params.geoTop}%`, left: '50%', transform: 'translateX(-50%)', width: `${params.geoW}%`, opacity: sceneOp, transition: 'opacity 80ms linear' }}>
+      {/* cabeçalho: marca */}
+      <div style={{ position: 'absolute', top: '6.2%', left: '9%', right: '9%', display: 'flex', justifyContent: 'space-between',
+        fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.68 }}>
+        <span>@vivianne.dos.santos</span><span />
+      </div>
+      {/* geometria à DIREITA */}
+      <div ref={geoRef} style={{ position: 'absolute', right: '3.5%', top: '50%', transform: 'translateY(-50%)', width: '41%' }}>
         <svg viewBox="0 0 100 100" style={{ width: '100%', fill: 'none', stroke: TOK.gold, strokeLinecap: 'round' }}>
           <defs>
             <radialGradient id="halo"><stop offset="58%" stopColor={TOK.goldSoft} stopOpacity="0" /><stop offset="80%" stopColor={TOK.goldSoft} stopOpacity=".5" /><stop offset="100%" stopColor={TOK.goldSoft} stopOpacity="0" /></radialGradient>
@@ -95,28 +94,25 @@ export default function RenderReelMae() {
           <g key={motivo} dangerouslySetInnerHTML={{ __html: motivoHTML }} />
         </svg>
       </div>
-      <div style={{ position: 'absolute', left: '8%', right: '8%',
-        ...(params.av === 'topo' ? { top: `${params.dist}%` } : params.av === 'centro' ? { top: '50%', transform: 'translateY(-50%)' } : { bottom: `${params.dist}%` }),
-        textAlign: params.ah === 'esq' ? 'left' : params.ah === 'dir' ? 'right' : 'center' }}>
-        <div style={{ width: `${ruleW}%`, height: 1, margin: params.ah === 'esq' ? '0 auto 4.5% 0' : params.ah === 'dir' ? '0 0 4.5% auto' : '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
-        <div style={{ position: 'relative', minHeight: estatico ? undefined : '11vh' }}>
+      {/* coluna de TEXTO à esquerda */}
+      <div style={{ position: 'absolute', left: '9%', width: '47%', top: '50%', transform: 'translateY(-50%)' }}>
+        <div style={{ fontSize: '6.3vw', lineHeight: 1.14, textTransform: 'uppercase', letterSpacing: '.012em',
+          opacity: titOp, transform: `translateY(${(1 - titOp) * 10}px)` }}>{titulo}</div>
+        <div style={{ width: `${ruleW}%`, height: 1, margin: '6.5% 0 6%', background: TOK.gold, opacity: 0.85 }} />
+        <div style={{ position: 'relative', minHeight: estatico ? undefined : '22vh', fontSize: '3.4vw', lineHeight: 1.56, fontStyle: 'italic', color: '#cbb691' }}>
           {estatico ? (
-            <div style={{ fontSize: `${params.txtSize}vw`, lineHeight: 1.4 }}>{params.segs.join(' ')}</div>
-          ) : multi ? (
-            <div style={{ opacity: sceneOp, fontSize: `${params.txtSize}vw`, lineHeight: 1.4, transform: `translateY(${9 * (1 - clamp(localP / 0.12))}px)` }}>{params.segs[scene]}</div>
-          ) : params.segs.map((t, i) => {
-            const slot = 1 / N, s = i * slot, ultimo = i === N - 1;
-            const aparece = clamp((p - s) / (slot * 0.28));
-            const some = ultimo ? 0 : clamp((p - (s + slot * 0.9)) / (slot * 0.12));
-            return <div key={i} style={{ position: 'absolute', left: 0, right: 0, top: 0, opacity: aparece * (1 - some), transform: `translateY(${9 * (1 - aparece)}px)`, fontSize: `${params.txtSize}vw`, lineHeight: 1.4 }}>{t}</div>;
+            <div>{corpo.join(' ')}</div>
+          ) : corpo.map((t, i) => {
+            const s = HEADp + i * slotW, ultimo = i === M - 1;
+            const aparece = clamp((p - s) / (slotW * 0.32));
+            const some = ultimo ? 0 : clamp((p - (s + slotW * 0.88)) / (slotW * 0.12));
+            return <div key={i} style={{ position: 'absolute', left: 0, right: 0, top: 0, opacity: aparece * (1 - some), transform: `translateY(${8 * (1 - aparece)}px)` }}>{t}</div>;
           })}
         </div>
       </div>
-      <div style={{ position: 'absolute', bottom: '6.5%', left: 0, right: 0, textAlign: 'center', fontSize: '3vw', letterSpacing: '.42em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.6 }}>
-        @vivianne.dos.santos
-        <small style={{ display: 'block', fontFamily: 'system-ui, sans-serif', fontSize: '1.9vw', letterSpacing: '.34em', opacity: 0.6, marginTop: '1.4%' }}>viviannedossantos.com</small>
-      </div>
-      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(120% 90% at 50% 34%, transparent 52%, rgba(16,12,9,.9) 100%)' }} />
+      {/* rodapé: etiqueta */}
+      <div style={{ position: 'absolute', bottom: '6.2%', left: '9%', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.6 }}>{label}</div>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(135% 95% at 58% 42%, transparent 48%, rgba(12,9,6,.92) 100%)' }} />
     </div>
   );
 }
