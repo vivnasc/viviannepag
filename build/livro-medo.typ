@@ -13,6 +13,12 @@
 #let tIndice  = if en { "Contents" } else { "Índice" }
 #let rotuloDe = (kind) => if kind == "prologo" { if en { "Prologue" } else { "Prólogo" } } else if kind == "intro" { if en { "Introduction" } else { "Introdução" } } else { if en { "Epilogue" } else { "Epílogo" } }
 
+// capa própria (imagem carregada no admin). O CI baixa-a do bucket para
+// build/medo-imagens/ e escreve o manifesto; sem capa, o manifesto é {}.
+#let capaman = json("/build/medo-imagens/manifest.json")
+#let temCapa = (k) => k in capaman
+#let capaChave = if en and temCapa("capa-en") { "capa-en" } else { "capa" }
+
 #let ouro   = rgb("#C6A150")
 #let marfim = rgb("#ECE4D2")
 #let evento = rgb("#0C0A07")            // preto mais fundo — eventos
@@ -124,6 +130,15 @@
     #line(length: 15mm, stroke: 0.6pt + acento)
   ]
   v(14mm)
+}
+
+// ---------- capa (imagem carregada, se existir) ----------
+// sangra a página inteira; a seguir repõe o contador para a página de título
+// ser a 1 (índice e fólios ficam iguais aos da versão sem capa).
+#if temCapa(capaChave) {
+  page(margin: 0pt, header: none, footer: none,
+    image("/build/medo-imagens/" + capaman.at(capaChave), width: 100%, height: 100%, fit: "cover"))
+  counter(page).update(1)
 }
 
 // ---------- página de título ----------
