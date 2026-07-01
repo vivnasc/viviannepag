@@ -21,7 +21,7 @@ O que esta face faz de ti é isto: um espelho. Passas a viver no reflexo. Antes 
 
 Aqui está a viragem que quero que faças comigo, porque muda a natureza do problema. Enquanto pensas que és simpática, atenciosa, fácil de conviver, estás a olhar para o resultado e a chamar-lhe carácter. No instante em que percebes que grande parte dessa simpatia é vigilância, o retrato inteiro treme. Ser atenta ao outro é uma coisa. Estar permanentemente a monitorizar o humor do outro para saberes se ainda estás dentro é outra, e é trabalho, é um trabalho exausto que fazes desde criança e que ninguém te paga nem te agradece, porque ninguém o vê. Nem tu o vias, até agora.
 
-O espelho tem um preço que só se nota ao fim de anos. Uma pessoa que passou a vida a refletir os outros chega a certa idade e descobre que não sabe o que gosta. Levaram-na a restaurantes onde comeu o que a companhia comia. Viu os filmes que se comentavam. Teve opiniões que eram sempre uma versão morna da opinião mais forte da mesa. E quando, sozinha, se pergunta o que quer mesmo, encontra um silêncio. Não porque não haja lá ninguém. Porque a pessoa que lá está passou tanto tempo virada para fora que perdeu o hábito de se ouvir.
+O espelho tem um preço que só se nota ao fim de anos. Uma pessoa que passou a vida a reflectir os outros chega a certa idade e descobre que não sabe o que gosta. Levaram-na a restaurantes onde comeu o que a companhia comia. Viu os filmes que se comentavam. Teve opiniões que eram sempre uma versão morna da opinião mais forte da mesa. E quando, sozinha, se pergunta o que quer mesmo, encontra um silêncio. Não porque não haja lá ninguém. Porque a pessoa que lá está passou tanto tempo virada para fora que perdeu o hábito de se ouvir.
 
 ### Como opera por dentro
 
