@@ -58,16 +58,17 @@ export default function RenderReelMae() {
   useEffect(() => {
     const g = geoRef.current; if (!g || !params) return;
     const dp = multi ? localP : p;
-    const draws = g.querySelectorAll<SVGGeometryElement>('.ring, .drawpath, .cnet line');
+    // GENERICO para a biblioteca VDS: tudo o que tem pathLength DESENHA-SE (escalonado);
+    // os brilhos (fills com gradiente) e o halo PULSAM. Cobre os 59 componentes.
+    const draws = g.querySelectorAll<SVGGeometryElement>('[pathLength]');
     draws.forEach((el, i) => {
-      // multi: todos desenham juntos no arranque da cena. single: escalonado ao longo do reel.
-      const start = multi ? 0.04 : 0.02 + i * 0.04;
-      const frac = clamp((dp - start) / (multi ? 0.34 : 0.2));
+      const start = multi ? 0.04 : 0.02 + i * 0.05;
+      const frac = clamp((dp - start) / (multi ? 0.34 : 0.22));
       el.style.strokeDasharray = '1'; el.style.strokeDashoffset = String(1 - frac);
     });
     const br = 0.4 + 0.6 * (0.5 - 0.5 * Math.cos(dp * Math.PI * (multi ? 2 : 4)));
-    g.querySelectorAll<SVGElement>('.halo').forEach((el) => (el.style.opacity = String(br)));
-    g.querySelectorAll<SVGElement>('.core, .focus').forEach((el) => (el.style.opacity = String(0.7 + 0.3 * br)));
+    g.querySelectorAll<SVGElement>('.halo, .core, .focus').forEach((el) => (el.style.opacity = String(0.7 + 0.3 * br)));
+    g.querySelectorAll<SVGElement>('[fill^="url"]').forEach((el) => (el.style.opacity = String(0.55 + 0.45 * br)));
     g.querySelectorAll<SVGElement>('.orbit').forEach((el) => { el.style.transformBox = 'fill-box'; el.style.transformOrigin = '50px 50px'; el.style.transform = `rotate(${dp * (multi ? 300 : 720)}deg)`; });
     g.querySelectorAll<SVGElement>('.cnode').forEach((el, i) => (el.style.opacity = String(0.3 + 0.7 * clamp((dp - 0.15 - i * 0.05) / 0.15))));
   }, [p, localP, multi, motivoHTML, params]);
