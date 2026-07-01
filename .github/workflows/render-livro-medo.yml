@@ -1,0 +1,61 @@
+name: Render livro As Sete Faces do Medo
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'livro_medo/**.md'
+      - 'build/livro-medo.typ'
+      - 'build/medo-assets/**'
+      - 'scripts/livro-medo/**'
+
+permissions:
+  contents: read
+
+env:
+  TYPST_VERSION: v0.13.1
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar Typst
+        run: |
+          curl -fsSL "https://github.com/typst/typst/releases/download/${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" -o typst.tar.xz
+          tar -xf typst.tar.xz
+          echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+
+      - name: Gerar o JSON a partir do manuscrito
+        run: node scripts/livro-medo/gerar-json.mjs
+
+      - name: Compilar o PDF PT
+        run: |
+          mkdir -p livro-medo-out
+          typst compile --font-path build/fonts-medo --root . \
+            build/livro-medo.typ livro-medo-out/As-Sete-Faces-do-Medo.pdf
+
+      - name: Compilar o PDF EN (se houver tradução)
+        run: |
+          if [ -f livro_medo/livro-medo_en.json ]; then
+            typst compile --font-path build/fonts-medo --root . --input lang=en \
+              build/livro-medo.typ livro-medo-out/The-Seven-Faces-of-Fear.pdf
+          else
+            echo "sem livro-medo_en.json — PDF inglês não gerado (ainda)"
+          fi
+
+      - name: Publicar o PDF como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: livro-medo-pdf
+          path: livro-medo-out/*.pdf
+          if-no-files-found: error
