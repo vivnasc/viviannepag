@@ -43,13 +43,6 @@ jobs:
       - name: Gerar livro.json a partir do manuscrito
         run: node scripts/livro-transicao/gerar-json.mjs
 
-      - name: Baixar tradução EN do bucket (se existir)
-        env:
-          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        run: |
-          curl -fsSL "${SUPABASE_URL%/}/storage/v1/object/public/viviannepag-assets/livro-transicao/livro_en.json?v=$(date +%s)" \
-            -o livro/livro_en.json && echo "tradução EN encontrada" || echo "sem tradução EN ainda (só sai o PT)"
-
       - name: Compilar o PDF PT (Typst)
         run: |
           mkdir -p livro-transicao
