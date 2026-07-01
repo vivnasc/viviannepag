@@ -107,7 +107,11 @@ async function main() {
 
       // frames (com o LAYOUT dela, para o MP4 sair igual ao pre-ver, sem surpresas)
       const layoutQ = (process.env.LAYOUT || '').trim();
-      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${layoutQ ? '&' + layoutQ : ''}`;
+      // imagem do banco (ou Flux) escolhida na geração: o MP4 sai igual ao pre-ver.
+      const img = row.theme?.crescer?.img || '';
+      const imgModo = row.theme?.crescer?.imgModo || '';
+      const imgQ = img ? `&img=${encodeURIComponent(img)}${imgModo ? `&imgmodo=${encodeURIComponent(imgModo)}` : ''}` : '';
+      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${imgQ}${layoutQ ? '&' + layoutQ : ''}`;
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });

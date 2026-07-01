@@ -11,6 +11,8 @@ import {
 } from '@/lib/crescer/marca';
 import { gerarPecaCrescer } from '@/lib/crescer/gerar-ia';
 import { VEIAS, type Veia } from '@/lib/knowledge/veias';
+import { imagemDoTema } from '@/lib/crescer/imagens-mae';
+import { listarBanco } from '@/lib/crescer/banco-server';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -129,6 +131,10 @@ export async function POST(req: Request) {
   } catch { /* sem memória */ }
   const evitarDoTema = (t: string) => [...new Set([...(porTema[t] || []), ...evitar.slice(-20)])];
 
+  // BANCO de imagens da Vivianne (as MJ que ela arrastou, por família). Cada peça escolhe
+  // daqui pela sua temática visual; se o cesto estiver vazio, a peça sai em geometria.
+  const banco = await listarBanco().catch(() => ({} as Record<string, string[]>));
+
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
   for (let i = 0; i < jobs.length; i++) {
@@ -147,6 +153,10 @@ export async function POST(req: Request) {
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
       const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;
+      // TEMÁTICA VISUAL: no modo livro o texto vem da veia; a temática VISUAL (geometria +
+      // imagem) roda por seed, para as peças não saírem todas iguais. A imagem sai do BANCO.
+      const visualTema = (fonte === 'livro' ? TEMATICAS[seed % TEMATICAS.length].id : job.tematica) as TematicaId;
+      const escolha = imagemDoTema(visualTema, slug, banco);
       // ENSAIO = carrossel tipográfico (texto longo, sem imagem, editorial: serif
       // menor, alinhado à esquerda, mais tempo por momento). Os outros levam imagem.
       const ehEnsaio = job.formato === 'ensaio';
@@ -191,7 +201,7 @@ export async function POST(req: Request) {
         brief: peca.frase,
         dias,
         // reel: escolha dela; veia*: a fonte minerada do livro (para ver a cobertura e não repetir).
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz, reel: ehReel, ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: visualTema, formato: job.formato, visual: job.visual, voz, reel: ehReel, ...(escolha ? { img: escolha.url, imgModo: escolha.modo, imgFamilia: escolha.familia } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

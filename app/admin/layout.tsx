@@ -66,7 +66,9 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/crescer', label: '🌱 crescer · crescimento & evolução' },
+      { href: '/admin/crescer', label: '🌱 crescer · crescimento & evolução', filhos: [
+        { href: '/admin/crescer/banco', label: 'banco de imagens' },
+      ] },
       // 'método vs · a mãe' ocultado a pedido da Vivianne (o motor VS fica, só sai da sidebar).
       // filhas (ver/vir/viver) escondidas a pedido da Vivianne: abandonadas, sem impacto.
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
