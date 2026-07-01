@@ -138,3 +138,23 @@ Todas as contas ao mesmo tempo, o véu roda por dia. Começa pela **vir**, mas a
 
 ---
 *Um só documento. Substitui todos os anteriores. Estratégias de Sobrevivência em baixo, Lealdades à superfície — do sobreviver ao viver.*
+
+---
+
+# INSIGHTS DA VIVIANNE (vai crescendo — o que ela vai deixando)
+
+## jul/2026 · A trilogia dos "Sete" (a mesma gramática, três perguntas)
+
+Três livros diferentes, **construídos sobre a mesma gramática narrativa**: sete elementos · linguagem simbólica · universos visuais fortes · motores conceptuais reutilizáveis · capacidade quase infinita de gerar conteúdo consistente.
+
+| Livro | Título | Pergunta central |
+|---|---|---|
+| 1 | **Os Sete Véus** | O que me prende? |
+| 2 | **Os Sete Sinais de Desencaixe** | Como pertenço sem me perder? |
+| 3 | **As Sete Faces do Medo** | O que estou realmente a proteger? |
+
+(A Grande Transição é a **teoria/território** por baixo — as Ciências da Consciência Emergente; a mãe segura isso. A trilogia dos "Sete" é a aplicação com a gramática partilhada.)
+
+**Isto já não é uma colecção de livros. É um SISTEMA que gera conteúdos durante anos** (como as marcas de media e criadores de referência: não constroem conteúdos, constroem sistemas que os geram).
+
+**O único risco — a regra que ordena tudo:** *não transformar a ontologia no produto.* O leitor compra **transformação, reconhecimento e linguagem para a própria vida**. A ontologia (os sete elementos, os motores conceptuais) existe para **servir** isso, não para o substituir. Manter esta ordem = potencial enorme. (Isto confirma a lente da mãe: o que SAI é transformação em linguagem de vida, nunca o jargão/a teoria.)
