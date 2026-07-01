@@ -15,11 +15,11 @@
 
 #let faceState = state("face", "")
 
-#set text(font: "EB Garamond", fill: textoCor, size: 11pt, lang: "pt", region: "pt")
-#set par(justify: true, leading: 0.85em, spacing: 0.95em)
+#set text(font: "EB Garamond", fill: textoCor, size: 11.5pt, lang: "pt", region: "pt")
+#set par(justify: false, leading: 1.02em, spacing: 1.5em)
 #set page(
   width: 148mm, height: 210mm, fill: corpoFill,
-  margin: (inside: 22mm, outside: 19mm, top: 24mm, bottom: 22mm),
+  margin: (inside: 26mm, outside: 24mm, top: 26mm, bottom: 24mm),
   header: none,
   footer: context {
     let n = counter(page).at(here()).first()
@@ -36,7 +36,7 @@
   let cl = txt.clusters()
   grid(columns: (auto, 1fr), gutter: 2.6mm,
     text(font: "Cormorant", fill: acento, size: 42pt, baseline: 8pt)[#cl.first()],
-    par(justify: true)[#cl.slice(1).join()])
+    par(justify: false)[#cl.slice(1).join()])
 }
 // linhas separadas por ¦
 #let multilinha(frase) = {
@@ -91,7 +91,7 @@
       secao(b.texto)
     } else {
       if first { first = false; v(26mm); capitular(b.texto) }
-      else { par(justify: true)[#b.texto] }
+      else { par(justify: false)[#b.texto] }
     }
   }
   if temFrase and (not destDone) { paginaFrase(p.glyph, "", p.destaque, true) }

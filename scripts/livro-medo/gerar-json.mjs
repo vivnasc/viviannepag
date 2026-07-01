@@ -19,6 +19,20 @@ const PECAS = [
   { file: '09-epilogo.md',                    kind: 'epilogo' },
 ];
 
+
+// parte parágrafos-parede em fronteiras de frase (respiração), sem cortar frases
+function partir(texto, max = 360) {
+  if (texto.length <= max) return [texto];
+  const frases = texto.match(/[^.!?]+[.!?]+(?=\s|$)\s*/g) || [texto];
+  const out = []; let cur = '';
+  for (const f of frases) {
+    if (cur && (cur.length + f.length) > max) { out.push(cur.trim()); cur = f; }
+    else cur += f;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+}
+
 function parse(file) {
   const raw = readFileSync(L(file), 'utf8').replace(/\r/g, '');
   const lines = raw.split('\n');
@@ -31,7 +45,7 @@ function parse(file) {
     if (t.startsWith('### ')) { blocos.push({ t: 'sec', texto: t.slice(4).trim() }); continue; }
     if (t.startsWith('## ')) { titulo = t.slice(3).trim(); continue; }
     if (t.startsWith('# ')) { continue; } // o kicker (PRÓLOGO/CAPÍTULO N) vem da meta
-    blocos.push({ t: 'par', texto: t });
+    for (const sub of partir(t)) blocos.push({ t: 'par', texto: sub });
   }
   // faces: "A Rejeição · O Espelho" -> nome é depois do ·; senão o titulo é subtítulo
   if (titulo.includes('·')) nome = titulo.split('·').pop().trim();
