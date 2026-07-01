@@ -23,8 +23,8 @@
   header: context {
     let n = counter(page).at(here()).first()
     if n <= 2 { return }
-    set text(fill: mut, size: 7.5pt, tracking: 2.5pt)
-    if calc.even(n) [ AS SETE FACES DO MEDO #h(1fr) ] else [ #h(1fr) #upper(faceState.at(here())) ]
+    set text(fill: mut, size: 8.5pt, style: "italic")
+    if calc.even(n) [ As Sete Faces do Medo #h(1fr) ] else [ #h(1fr) #faceState.at(here()) ]
   },
   footer: context {
     let n = counter(page).at(here()).first()
@@ -62,8 +62,8 @@
 ]
 
 #let abertura-face(p) = page(fill: evento, header: none, footer: context {
-  set text(fill: mut, size: 7.5pt, tracking: 2.5pt)
-  align(center)[#(str(counter(page).at(here()).first()) + "   ·   " + upper(p.nome))]
+  set text(fill: mut, size: 8pt)
+  align(center)[#str(counter(page).at(here()).first())]
 })[
   #metadata((titulo: p.nome, sub: p.medo, cap: p.cap)) <peca>
   #set text(fill: marfim)
@@ -120,39 +120,43 @@
 // ---------- página de título ----------
 #page(fill: evento, header: none, footer: none)[
   #set text(fill: marfim)
-  #v(42mm)
-  #align(center)[
-    #text(font: "Cormorant", fill: ouro, size: 46pt, weight: "medium")[As Sete\ Faces\ do Medo]
-    #v(6mm)
+  #align(center + horizon)[
+    #block[
+      #set par(leading: 0.3em, spacing: 0pt)
+      #text(font: "Cormorant", fill: ouro, size: 44pt, weight: "medium")[As Sete\ Faces\ do Medo]
+    ]
+    #v(10mm)
     #line(length: 24mm, stroke: 0.6pt + ouro)
-    #v(6mm)
-    #text(fill: marfim, style: "italic", size: 12.5pt)[Como o medo construiu as nossas\ escolhas, relações e vidas]
+    #v(8mm)
+    #block[
+      #set par(leading: 0.6em)
+      #text(fill: marfim, style: "italic", size: 12.5pt)[Como o medo construiu as nossas\ escolhas, relações e vidas]
+    ]
   ]
-  #place(bottom + center, dy: -6mm, text(fill: ouro, size: 11pt, tracking: 3pt)[VIVIANNE DOS SANTOS])
+  #place(bottom + center, dy: -16mm, text(fill: ouro, size: 11pt, tracking: 3pt)[VIVIANNE DOS SANTOS])
 ]
-
 
 // ---------- índice ----------
 #page(fill: evento, header: none, footer: none)[
   #set text(fill: marfim)
-  #v(24mm)
+  #v(15mm)
   #align(center)[
-    #text(font: "Cormorant", fill: ouro, size: 30pt, weight: "medium")[Índice]
-    #v(3mm)
-    #line(length: 15mm, stroke: 0.6pt + ouro)
+    #text(font: "Cormorant", fill: ouro, size: 27pt, weight: "medium")[Índice]
+    #v(2.5mm)
+    #line(length: 14mm, stroke: 0.6pt + ouro)
   ]
-  #v(16mm)
+  #v(11mm)
   #context {
     let items = query(<peca>)
     for it in items {
       let m = it.value
       let pg = counter(page).at(it.location()).first()
-      block(below: 1.35em, width: 100%, grid(columns: (1fr, auto), column-gutter: 6mm,
+      block(below: 0.75em, width: 100%, grid(columns: (1fr, auto), column-gutter: 6mm,
         {
-          text(font: "Cormorant", fill: marfim, size: 15pt)[#m.titulo]
-          if m.sub != "" { text(fill: mut, style: "italic", size: 10pt)[  ·  #m.sub] }
+          text(font: "Cormorant", fill: marfim, size: 13.5pt)[#m.titulo]
+          if m.sub != "" { text(fill: mut, style: "italic", size: 9pt)[  ·  #m.sub] }
         },
-        align(right + bottom, text(fill: ouro, size: 11pt)[#pg]),
+        align(right + bottom, text(fill: ouro, size: 10.5pt)[#pg]),
       ))
     }
   }
