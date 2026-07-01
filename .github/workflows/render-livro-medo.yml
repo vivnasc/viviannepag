@@ -35,8 +35,10 @@ jobs:
           tar -xf typst.tar.xz
           echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
 
-      - name: Gerar o JSON a partir do manuscrito
-        run: node scripts/livro-medo/gerar-json.mjs
+      - name: Gerar o JSON a partir do manuscrito (PT e EN)
+        run: |
+          node scripts/livro-medo/gerar-json.mjs
+          if [ -d livro_medo/en ]; then node scripts/livro-medo/gerar-json.mjs en; fi
 
       - name: Compilar o PDF PT
         run: |

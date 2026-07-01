@@ -1,8 +1,17 @@
 // As Sete Faces do Medo — livro completo. Ritmo contemplativo, escuro.
-// Fonte: livro_medo/livro-medo.json. Flag `modo`: "escuro" | "claro".
-#let livro = json("/livro_medo/livro-medo.json")
-#let modo = "claro"
+// Fonte: livro_medo/livro-medo.json (PT) ou livro-medo_en.json (EN).
+// Flags de entrada: --input modo=claro|escuro  --input lang=pt|en
+#let lang = sys.inputs.at("lang", default: "pt")
+#let en = lang == "en"
+#let livro = json(if en { "/livro_medo/livro-medo_en.json" } else { "/livro_medo/livro-medo.json" })
+#let modo = sys.inputs.at("modo", default: "claro")
 #let escuro = modo == "escuro"
+
+// rótulos da interface (bilingue)
+#let tLivro   = if en { "The Seven Faces of Fear" } else { "As Sete Faces do Medo" }
+#let tPergunta = if en { "THE QUESTION THAT REMAINS" } else { "A PERGUNTA QUE FICA" }
+#let tIndice  = if en { "Contents" } else { "Índice" }
+#let rotuloDe = (kind) => if kind == "prologo" { if en { "Prologue" } else { "Prólogo" } } else if kind == "intro" { if en { "Introduction" } else { "Introdução" } } else { if en { "Epilogue" } else { "Epílogo" } }
 
 #let ouro   = rgb("#C6A150")
 #let marfim = rgb("#ECE4D2")
@@ -15,7 +24,7 @@
 
 #let faceState = state("face", "")
 
-#set text(font: "EB Garamond", fill: textoCor, size: 11.5pt, lang: "pt", region: "pt")
+#set text(font: "EB Garamond", fill: textoCor, size: 11.5pt, lang: lang, region: if en { "us" } else { "pt" })
 #set par(justify: false, leading: 1.02em, spacing: 1.5em)
 #set page(
   width: 148mm, height: 210mm, fill: corpoFill,
@@ -24,7 +33,7 @@
     let n = counter(page).at(here()).first()
     if n <= 2 { return }
     set text(fill: mut, size: 8.5pt, style: "italic")
-    if calc.even(n) [ As Sete Faces do Medo #h(1fr) ] else [ #h(1fr) #faceState.at(here()) ]
+    if calc.even(n) [ #tLivro #h(1fr) ] else [ #h(1fr) #faceState.at(here()) ]
   },
   footer: context {
     let n = counter(page).at(here()).first()
@@ -101,7 +110,7 @@
     }
   }
   if temFrase and (not destDone) { paginaFrase(p.glyph, "", p.destaque, true) }
-  if p.kind == "face" { paginaFrase(p.glyph, "A PERGUNTA QUE FICA", p.pergunta, false) }
+  if p.kind == "face" { paginaFrase(p.glyph, tPergunta, p.pergunta, false) }
 }
 
 #let abertura-clara(rotulo, sub) = {
@@ -123,14 +132,14 @@
   #align(center + horizon)[
     #block[
       #set par(leading: 0.3em, spacing: 0pt)
-      #text(font: "Cormorant", fill: ouro, size: 44pt, weight: "medium")[As Sete\ Faces\ do Medo]
+      #text(font: "Cormorant", fill: ouro, size: 44pt, weight: "medium")[#if en [The Seven\ Faces\ of Fear] else [As Sete\ Faces\ do Medo]]
     ]
     #v(10mm)
     #line(length: 24mm, stroke: 0.6pt + ouro)
     #v(8mm)
     #block[
       #set par(leading: 0.6em)
-      #text(fill: marfim, style: "italic", size: 12.5pt)[Como o medo construiu as nossas\ escolhas, relações e vidas]
+      #text(fill: marfim, style: "italic", size: 12.5pt)[#if en [How fear built our choices,\ our relationships and our lives] else [Como o medo construiu as nossas\ escolhas, relações e vidas]]
     ]
   ]
   #place(bottom + center, dy: -16mm, text(fill: ouro, size: 11pt, tracking: 3pt)[VIVIANNE DOS SANTOS])
@@ -141,7 +150,7 @@
   #set text(fill: marfim)
   #v(15mm)
   #align(center)[
-    #text(font: "Cormorant", fill: ouro, size: 27pt, weight: "medium")[Índice]
+    #text(font: "Cormorant", fill: ouro, size: 27pt, weight: "medium")[#tIndice]
     #v(2.5mm)
     #line(length: 14mm, stroke: 0.6pt + ouro)
   ]
@@ -167,14 +176,14 @@
   if p.kind == "face" {
     faceState.update(p.nome); abertura-face(p); corpo(p)
   } else {
-    let rot = if p.kind == "prologo" { "Prólogo" } else if p.kind == "intro" { "Introdução" } else { "Epílogo" }
+    let rot = rotuloDe(p.kind)
     faceState.update(rot)
     if p.kind == "prologo" {
       page(fill: evento, header: none, footer: none)[
-        #metadata((titulo: "Prólogo", sub: p.subtitulo, cap: "")) <peca>
+        #metadata((titulo: rot, sub: p.subtitulo, cap: "")) <peca>
         #set text(fill: marfim)
         #align(center + horizon)[
-          #text(fill: ouro, size: 9pt, tracking: 4pt)[PRÓLOGO]
+          #text(fill: ouro, size: 9pt, tracking: 4pt)[#upper(rot)]
           #v(8mm)
           #text(font: "Cormorant", fill: ouro, size: 34pt, weight: "medium")[#p.subtitulo]
           #v(3mm)

@@ -1,12 +1,18 @@
-// Lê livro_medo/*.md (as 10 peças) e escreve livro_medo/livro-medo.json,
-// a fonte única que o template Typst (build/livro-medo.typ) consome.
+// Lê as 10 peças do livro e escreve o JSON que o template Typst
+// (build/livro-medo.typ) consome. Bilingue:
+//   node gerar-json.mjs        → PT: livro_medo/*.md        → livro-medo.json
+//   node gerar-json.mjs en     → EN: livro_medo/en/*.md     → livro-medo_en.json
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-const L = (f) => path.join(ROOT, 'livro_medo', f);
 
-const PECAS = [
+const lang = (process.argv[2] || process.env.LANG_LIVRO || 'pt').toLowerCase() === 'en' ? 'en' : 'pt';
+const SRC = lang === 'en' ? path.join(ROOT, 'livro_medo', 'en') : path.join(ROOT, 'livro_medo');
+const OUT = path.join(ROOT, 'livro_medo', lang === 'en' ? 'livro-medo_en.json' : 'livro-medo.json');
+const L = (f) => path.join(SRC, f);
+
+const PECAS_PT = [
   { file: '00-prologo.md',                    kind: 'prologo' },
   { file: '01-introducao.md',                 kind: 'intro' },
   { file: '02-rejeicao-o-espelho.md',         kind: 'face', cap: 'Capítulo um',   ord: 'a primeira face do medo',        medo: 'A Rejeição',       glyph: 'espelho' , pergunta: "de quantos dos teus sim é que gostas mesmo, e quantos foram só a forma de continuares dentro da sala?", destaque: "Não é exagero.¦É memória." },
@@ -19,6 +25,21 @@ const PECAS = [
   { file: '09-epilogo.md',                    kind: 'epilogo' },
 ];
 
+// EN: mesmos ficheiros (em livro_medo/en/), mesmos glyphs; rótulos curados em inglês.
+const PECAS_EN = [
+  { file: '00-prologo.md',                    kind: 'prologo' },
+  { file: '01-introducao.md',                 kind: 'intro' },
+  { file: '02-rejeicao-o-espelho.md',         kind: 'face', cap: 'Chapter One',   ord: 'the first face of fear',          medo: 'Rejection',       glyph: 'espelho' , pergunta: "how many of your yeses do you actually like, and how many were only the way you stayed inside the room?", destaque: "It is not an overreaction.¦It is memory." },
+  { file: '03-perda-o-punho.md',              kind: 'face', cap: 'Chapter Two',   ord: 'the second face of fear',         medo: 'Loss',            glyph: 'punho' , pergunta: "does your love, today, make the one you love larger or smaller?", destaque: "It grips so as not to lose,¦and it is the grip that makes it lose." },
+  { file: '04-escassez-o-inverno.md',         kind: 'face', cap: 'Chapter Three', ord: 'the third face of fear',          medo: 'Scarcity',        glyph: 'inverno' , pergunta: "what are you postponing living, waiting for a security that, when it arrives, you will find is still one step ahead of you?", destaque: "It is always winter inside,¦whatever the weather outside." },
+  { file: '05-incerteza-a-fortaleza.md',      kind: 'face', cap: 'Chapter Four',  ord: 'the fourth face of fear',         medo: 'Uncertainty',     glyph: 'fortaleza' , pergunta: "how much life are you depriving yourself of, so as not to feel that you do not know what comes next?", destaque: "Life is not mastered.¦It is accompanied." },
+  { file: '06-exposicao-a-luz.md',            kind: 'face', cap: 'Chapter Five',  ord: 'the fifth face of fear',          medo: 'Exposure',        glyph: 'luz' , pergunta: "what does the world lose by never seeing what only you had to give, and who, in truth, is served by your staying hidden?", destaque: "The perfect façade isolates.¦The imperfect truth connects." },
+  { file: '07-insignificancia-o-apagamento.md', kind: 'face', cap: 'Chapter Six', ord: 'the sixth face of fear',          medo: 'Insignificance',  glyph: 'apagamento' , pergunta: "would you still do the good you do if you were certain that no one would ever know it was you?", destaque: "Life offers the mark,¦without the name." },
+  { file: '08-separacao-o-abismo.md',         kind: 'face', cap: 'Chapter Seven', ord: 'the seventh face of fear, the root', medo: 'Separation',   glyph: 'abismo' , pergunta: "what would you still be afraid of, and what would you do with the life that fear had been saving for nothing?", destaque: "The wave does not die when it falls.¦It returns to what it was always made of." },
+  { file: '09-epilogo.md',                    kind: 'epilogo' },
+];
+
+const PECAS = lang === 'en' ? PECAS_EN : PECAS_PT;
 
 // parte parágrafos-parede em fronteiras de frase (respiração), sem cortar frases
 function partir(texto, max = 360) {
@@ -47,7 +68,7 @@ function parse(file) {
     if (t.startsWith('# ')) { continue; } // o kicker (PRÓLOGO/CAPÍTULO N) vem da meta
     for (const sub of partir(t)) blocos.push({ t: 'par', texto: sub });
   }
-  // faces: "A Rejeição · O Espelho" -> nome é depois do ·; senão o titulo é subtítulo
+  // faces: "A Rejeição · O Espelho" / "Rejection · The Mirror" -> nome é depois do ·
   if (titulo.includes('·')) nome = titulo.split('·').pop().trim();
   else subtitulo = titulo;
   return { nome, subtitulo, blocos };
@@ -58,6 +79,6 @@ const livro = PECAS.map((p) => {
   return { ...p, nome: p.kind === 'face' ? nome : '', subtitulo, blocos };
 });
 
-writeFileSync(L('livro-medo.json'), JSON.stringify(livro, null, 1), 'utf8');
+writeFileSync(OUT, JSON.stringify(livro, null, 1), 'utf8');
 const nb = livro.reduce((s, p) => s + p.blocos.length, 0);
-console.log(`livro-medo.json: ${livro.length} peças, ${nb} blocos`);
+console.log(`${path.basename(OUT)}: ${livro.length} peças, ${nb} blocos (${lang})`);
