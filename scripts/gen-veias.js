@@ -80,7 +80,18 @@ const vS = seccoes(sinaisMd, {
   parteRe: null,
 });
 
-const todas = [...vT, ...vS];
+// --- Os 7 Véus (o livro do método; alimenta a mineração da mãe, NÃO o motor VS).
+// Minera os 7 véus e os capítulos conceptuais; pára no Apêndice (o caderno de
+// exercícios não é veia de ideia). ---
+const veusMd = fs.readFileSync(path.join(ROOT, 'OS-7-VEUS-v2.md'), 'utf8');
+const vV = seccoes(veusMd, {
+  livro: 'veus',
+  inicioRe: /^(Véu\s+\d+|Quando os véus se cruzam|O chamado do centro|Por onde começar)/i,
+  fimRe: /^(Apêndice|As palavras deste livro)/i,
+  parteRe: null,
+});
+
+const todas = [...vT, ...vS, ...vV];
 const usados = new Set();
 for (const v of todas) {
   let s = slug(`${v.livro}-${v.titulo}`) || slug(v.livro);
@@ -88,7 +99,7 @@ for (const v of todas) {
   usados.add(n); v.id = n;
 }
 
-const LIVROS = { transicao: 'A Grande Transição', sinais: 'Os 7 Sinais de Desencaixe' };
+const LIVROS = { transicao: 'A Grande Transição', sinais: 'Os 7 Sinais de Desencaixe', veus: 'Os 7 Véus' };
 
 const ts = `// GERADO por scripts/gen-veias.js a partir dos LIVROS dela — NÃO editar à mão.
 // As VEIAS são as secções reais dos livros (capítulos, interlúdios, sinais), com
@@ -117,5 +128,5 @@ export function escolherVeia(usadas: string[] = [], seed = 0): Veia {
 
 const dest = path.join(ROOT, 'lib/knowledge/veias.ts');
 fs.writeFileSync(dest, ts);
-console.log(`veias.ts gerado: ${todas.length} veias (${vT.length} de A Grande Transição, ${vS.length} dos 7 Sinais)`);
+console.log(`veias.ts gerado: ${todas.length} veias (${vT.length} de A Grande Transição, ${vS.length} dos 7 Sinais, ${vV.length} dos 7 Véus)`);
 for (const v of todas) console.log(`  [${v.livro}] ${v.titulo}  (${v.texto.length} chars)`);
