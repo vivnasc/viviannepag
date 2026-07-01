@@ -9,6 +9,7 @@ export interface ReelOpts {
   assinatura?: string;
 }
 export function reelHTML(opts: ReelOpts): string;
+export function slideHTML(opts: { tema?: string; label?: string; texto?: string; idx?: number; total?: number }): string;
 export const RECEITAS: Record<string, { motivo: string; label: string }>;
 export function receitaDe(tema: string): { motivo: string; label: string };
 export function motivoSVG(motivo: string): string;

@@ -7,6 +7,7 @@ import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia, type AlinhV, type AlinhH } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
 import { CRESCER, TEMATICAS, FORMATOS, CRESCER_MUNDO, CRESCER_SLIDE, type TematicaId, type FormatoId, type VisualId, type VozId } from '@/lib/crescer/marca';
+import { segmentar } from '@/lib/crescer/assinatura-reel';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
 import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
 
@@ -109,18 +110,40 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
 // anima (efeito) no slide aberto para ela ver o movimento. Resolve o "só vejo a capa":
 // agora abre-se o interior 1 a 1.
 function PreviewBox({ peca }: { peca: Peca }) {
-  // PRÉ-VER = o REEL DE ASSINATURA ao vivo (geometria VDS pelo tema + a frase + movimento),
-  // SEM render e SEM custo. O que ela vê aqui é o que vai sair. O render (✦) é só para o
-  // MP4 final com a voz. tema define o motivo; as linhas são a frase (ou os momentos).
+  // PRÉ-VER ao vivo (sem render, sem custo): REEL (vídeo 9:16, geometria + texto por
+  // tempos) ou CARROSSEL (as telas: cada segmento uma tela 4:5 para deslizar). O que
+  // se vê é o que sai. O render (✦) é só o MP4 final com a voz.
   const linhas = (peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto]).filter(Boolean);
   const tema = peca.tematica || 'consciencia';
-  const url = `/api/admin/crescer/reel?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}`;
+  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}`;
+  const segs = linhas.flatMap(segmentar).slice(0, 12);
+  const total = Math.max(1, segs.length);
+  const [modo, setModo] = useState<'reel' | 'carrossel'>('reel');
+  const [slide, setSlide] = useState(0);
+  const cur = Math.min(slide, total - 1);
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
-      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · o reel de assinatura (ao vivo, sem render)</p>
-      <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
-        <iframe src={url} title="reel de assinatura" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
+      <div className="flex items-center gap-1.5 mb-1">
+        <p className="text-[0.55rem] uppercase tracking-widest opacity-50 flex-1">pré-visualização (ao vivo)</p>
+        <button onClick={() => setModo('reel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={modo === 'reel' ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎬 reel</button>
+        <button onClick={() => setModo('carrossel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={modo === 'carrossel' ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>🖼 carrossel ({total})</button>
       </div>
+      {modo === 'reel' ? (
+        <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
+          <iframe src={`/api/admin/crescer/reel?${q}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
+        </div>
+      ) : (
+        <div className="mx-auto" style={{ width: 240 }}>
+          <div className="rounded-lg overflow-hidden border border-white/10">
+            <iframe src={`/api/admin/crescer/reel?${q}&slide=${cur}`} title={`tela ${cur + 1}`} style={{ width: '100%', aspectRatio: '4 / 5', border: 0, display: 'block' }} />
+          </div>
+          <div className="flex items-center justify-center gap-2 mt-1 text-[0.6rem]">
+            <button onClick={() => setSlide((i) => (i - 1 + total) % total)} className="px-1.5 py-0.5 rounded border border-white/20" style={{ color: DZ }}>‹</button>
+            <span className="tabular-nums opacity-70">tela {cur + 1}/{total}</span>
+            <button onClick={() => setSlide((i) => (i + 1) % total)} className="px-1.5 py-0.5 rounded border border-white/20" style={{ color: DZ }}>›</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
