@@ -1,0 +1,14 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- corner-brackets-01 | molduras | cantos | animar: cantos a aparecer -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g id="brackets" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 20 L10 10 L20 10" pathLength="1"/>
+    <path d="M90 20 L90 10 L80 10" pathLength="1"/>
+    <path d="M10 80 L10 90 L20 90" pathLength="1"/>
+    <path d="M90 80 L90 90 L80 90" pathLength="1"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- breath-line-01 | fios | respiratoria | animar: oscila, sobe e desce em ciclo -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path id="breath" d="M 30 0 L33.32 4.32 L36.05 8.64 L37.68 12.95 L37.92 17.27 L36.73 21.59 L34.33 25.91 L31.14 30.23 L27.75 34.55 L24.76 38.86 L22.72 43.18 L22 47.5 L22.72 51.82 L24.76 56.14 L27.75 60.45 L31.14 64.77 L34.33 69.09 L36.73 73.41 L37.92 77.73 L37.68 82.05 L36.05 86.36 L33.32 90.68 L30 95 L26.68 99.32 L23.95 103.64 L22.32 107.95 L22.08 112.27 L23.27 116.59 L25.67 120.91 L28.86 125.23 L32.25 129.55 L35.24 133.86 L37.28 138.18 L38 142.5 L37.28 146.82 L35.24 151.14 L32.25 155.45 L28.86 159.77 L25.67 164.09 L23.27 168.41 L22.08 172.73 L22.32 177.05 L23.95 181.36 L26.68 185.68 L30 190" pathLength="1"/>
+  </g>
+</svg>

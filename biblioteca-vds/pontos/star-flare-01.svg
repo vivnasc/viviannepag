@@ -1,0 +1,14 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- star-flare-01 | pontos | flare | animar: raios a expandir -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+    <radialGradient id="fg"><stop offset="0%" stop-color="var(--vds-gold-soft, #d9bd8a)"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="20" fill="url(#fg)"/>
+  <path id="star" d="M50 14 C 53 45, 55 47, 86 50 C 55 53, 53 55, 50 86 C 47 55, 45 53, 14 50 C 45 47, 47 45, 50 14 Z" fill="var(--vds-gold-soft, #d9bd8a)"/>
+  <g id="rays" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+    <line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/>
+  </g>
+</svg>

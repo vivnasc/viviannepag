@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- frame-editorial-01 | molduras | frame | animar: perimetro a desenhar-se -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round">
+    <rect id="frame" x="8" y="8" width="84" height="84" rx="2" pathLength="1"/>
+  </g>
+</svg>

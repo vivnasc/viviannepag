@@ -1,0 +1,11 @@
+<svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- destiny-line-01 | fios | linha de destino | animar: traco longo a desenhar-se -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path id="destiny" d="M14 6 C 48 40, 6 70, 34 100 C 56 124, 10 150, 40 176 C 48 184, 40 194, 30 196" pathLength="1"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- star-4-01 | pontos | 4 pontas | animar: brilho a acender -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <path id="star" d="M50 14 C 53 45, 55 47, 86 50 C 55 53, 53 55, 50 86 C 47 55, 45 53, 14 50 C 45 47, 47 45, 50 14 Z" pathLength="1"/>
+  </g>
+</svg>

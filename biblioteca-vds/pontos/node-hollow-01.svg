@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- node-hollow-01 | pontos | vazio | animar: traco a fechar -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="node" cx="50" cy="50" r="6" pathLength="1"/>
+  </g>
+</svg>

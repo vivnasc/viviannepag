@@ -1,0 +1,10 @@
+<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- beam-horizontal-01 | luz | feixe horizontal | animar: feixe a atravessar -->
+  <defs>
+    <style>
+      :root { --vds-gold-soft: #d9bd8a; --vds-light: #f4ede1; }
+    </style>
+    <linearGradient id="bg"><stop offset="0%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/><stop offset="50%" stop-color="var(--vds-light, #f4ede1)" stop-opacity="0.85"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect id="beam" x="0" y="27" width="200" height="6" fill="url(#bg)"/>
+</svg>

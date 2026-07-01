@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- eclipse-central-01 | geometria | central | animar: brilho no bordo a pulsar -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; --vds-bg: #1c1610; }
+    </style>
+    <radialGradient id="corona">
+      <stop offset="52%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/>
+      <stop offset="72%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle id="corona-glow" cx="50" cy="50" r="30" fill="url(#corona)"/>
+  <circle id="disc" cx="50" cy="50" r="20" fill="var(--vds-bg, #1c1610)" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.1"/>
+</svg>

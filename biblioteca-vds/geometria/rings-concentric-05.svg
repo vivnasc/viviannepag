@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- rings-concentric-05 | geometria | 5 aneis | animar: expansao radial escalonada -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g id="rings" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="ring-1" cx="50" cy="50" r="8" pathLength="1"/>
+    <circle id="ring-2" cx="50" cy="50" r="16" pathLength="1"/>
+    <circle id="ring-3" cx="50" cy="50" r="24" pathLength="1"/>
+    <circle id="ring-4" cx="50" cy="50" r="32" pathLength="1"/>
+    <circle id="ring-5" cx="50" cy="50" r="40" pathLength="1"/>
+  </g>
+</svg>

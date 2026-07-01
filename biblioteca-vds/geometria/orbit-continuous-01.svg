@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- orbit-continuous-01 | geometria | continuo | animar: rotacao suave, no a orbitar -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+  </defs>
+  <g id="orbit-g" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="orbit" cx="50" cy="50" r="36" pathLength="1"/>
+  </g>
+  <circle id="node" cx="86" cy="50" r="2.4" fill="var(--vds-gold-soft, #d9bd8a)"/>
+</svg>

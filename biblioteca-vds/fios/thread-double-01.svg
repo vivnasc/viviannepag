@@ -1,0 +1,12 @@
+<svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- thread-double-01 | fios | duplo | animar: desenho desfasado dos dois -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path id="t1" d="M30 10 C 40 55, 20 105, 30 150 S 36 188, 30 192" pathLength="1"/>
+    <path id="t2" d="M30 10 C 20 55, 40 105, 30 150 S 24 188, 30 192" pathLength="1" opacity="0.55"/>
+  </g>
+</svg>

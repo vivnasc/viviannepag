@@ -1,0 +1,20 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- flow-convergent-01 | topografia | convergentes | animar: convergencia para o ponto -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+  </defs>
+  <g id="flow" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+    <path id="l-1" d="M6 12 Q60 31 92 50" pathLength="1"/>
+    <path id="l-2" d="M6 21.5 Q60 35.75 92 50" pathLength="1"/>
+    <path id="l-3" d="M6 31 Q60 40.5 92 50" pathLength="1"/>
+    <path id="l-4" d="M6 40.5 Q60 45.25 92 50" pathLength="1"/>
+    <path id="l-5" d="M6 50 Q60 50 92 50" pathLength="1"/>
+    <path id="l-6" d="M6 59.5 Q60 54.75 92 50" pathLength="1"/>
+    <path id="l-7" d="M6 69 Q60 59.5 92 50" pathLength="1"/>
+    <path id="l-8" d="M6 78.5 Q60 64.25 92 50" pathLength="1"/>
+    <path id="l-9" d="M6 88 Q60 69 92 50" pathLength="1"/>
+  </g>
+  <circle cx="92" cy="50" r="2.2" fill="var(--vds-gold-soft, #d9bd8a)"/>
+</svg>

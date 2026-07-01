@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- star-cross-01 | pontos | cruz luminosa | animar: cruz a crescer do centro -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+  </defs>
+  <g id="cross" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="50" y1="20" x2="50" y2="80"/><line x1="20" y1="50" x2="80" y2="50"/>
+  </g>
+  <circle cx="50" cy="50" r="2.4" fill="var(--vds-gold-soft, #d9bd8a)"/>
+</svg>

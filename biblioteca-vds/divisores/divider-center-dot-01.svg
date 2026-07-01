@@ -1,0 +1,13 @@
+<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- divider-center-dot-01 | divisores | ponto central | animar: linhas a crescer do centro -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <line id="line-left" x1="20" y1="30" x2="92" y2="30" pathLength="1"/>
+    <line id="line-right" x1="108" y1="30" x2="180" y2="30" pathLength="1"/>
+  </g>
+  <circle id="dot" cx="100" cy="30" r="3" fill="var(--vds-gold, #c9a15e)"/>
+</svg>
