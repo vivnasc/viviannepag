@@ -9,10 +9,13 @@ on:
 permissions:
   contents: read
 
+env:
+  TYPST_VERSION: v0.13.1
+
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -23,28 +26,28 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Chromium deps
+      - name: Instalar Typst
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
-            libgbm1 libpango-1.0-0 libxcomposite1 libxdamage1 \
-            libxrandr2 libxfixes3 libxkbcommon0 libasound2t64 \
-            libxshmfence1 fonts-liberation libu2f-udev
+          curl -fsSL "https://github.com/typst/typst/releases/download/${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" -o typst.tar.xz
+          tar -xf typst.tar.xz
+          echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
 
-      - name: Install npm packages
-        run: |
-          npm install --no-save \
-            puppeteer \
-            marked \
-            @supabase/supabase-js \
-            @fontsource/fraunces \
-            @fontsource/outfit
+      - name: Instalar pacotes npm
+        run: npm install --no-save @supabase/supabase-js
 
-      - name: Render do livro (miolo + capa + vinhetas do bucket)
+      - name: Baixar imagens do bucket (capa + vinhetas das Partes)
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        run: node scripts/livro-transicao/render.js
+        run: node scripts/livro-transicao/baixar-imagens.mjs
+
+      - name: Gerar livro.json a partir do manuscrito
+        run: node scripts/livro-transicao/gerar-json.mjs
+
+      - name: Compilar o PDF (Typst)
+        run: |
+          mkdir -p livro-transicao
+          typst compile --font-path build/fonts/static --root . \
+            build/livro-transicao.typ livro-transicao/A-GRANDE-TRANSICAO.pdf
 
       - name: Publicar o PDF no bucket
         env:

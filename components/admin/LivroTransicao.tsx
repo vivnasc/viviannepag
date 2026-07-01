@@ -70,7 +70,7 @@ export function LivroTransicao() {
       const res = await fetch('/api/admin/livro-transicao/render-dispatch', { method: 'POST' });
       const json = await res.json();
       if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
-      setAviso('A renderizar no GitHub Actions (Puppeteer). O PDF aparece em ~2 a 4 minutos no link abaixo.');
+      setAviso('A renderizar no GitHub Actions (Typst), com as tuas imagens. O PDF aparece em ~2 a 3 minutos no link abaixo.');
     } catch (e) {
       setErro(e instanceof Error ? e.message : String(e));
     } finally {
@@ -150,7 +150,7 @@ export function LivroTransicao() {
       <section className="border border-ocre/15 rounded-[14px] p-6">
         <h3 className="font-serif text-creme text-[1.05rem] mb-1">Renderizar o livro (PDF)</h3>
         <p className="text-creme-2/60 text-[0.82rem] font-serif italic mb-5">
-          Compõe o miolo tipografado (arco, capitular, ornamentos, caixas, diagrama, vinhetas das Partes) com a capa, e publica o PDF. Corre no GitHub Actions.
+          Compõe o miolo tipografado em Typst (aberturas uniformes, capitular, destaques, caixas do sistema, mapa, vinhetas das Partes) com a capa, e publica o PDF. Corre no GitHub Actions.
         </p>
         <div className="flex items-center gap-5 flex-wrap">
           <button

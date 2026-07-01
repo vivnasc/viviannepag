@@ -2,7 +2,7 @@
 // Metadados e PROMPTS das imagens do livro (capa + vinhetas das 4 Partes),
 // ancorados no manifesto visual Pós-Sobrevivência. Servem a página de admin
 // /admin/livro-transicao para gerar no Replicate (Flux 1.1 pro) e o render
-// scripts/livro-transicao/render.js, que as vai buscar ao bucket por chave.
+// Typst (scripts/livro-transicao/baixar-imagens.mjs vai buscá-las ao bucket).
 
 export const LIVRO_TRANSICAO = {
   slug: 'a-grande-transicao',

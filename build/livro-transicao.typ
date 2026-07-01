@@ -61,12 +61,25 @@
 // As molduras "caixa"/"caixa-arquivo" usam os SVGs da Vivianne (vendor/marca/).
 #let sistema = json("/livro/sistema.json")
 
-// vinheta vertical a sangrar (placeholder; a produção substitui pela imagem)
-#let vinheta-vertical(kicker) = box(width: 34mm, height: 210mm,
-  fill: gradient.linear(rgb("#c9bda4"), rgb("#b1a589"), rgb("#9c9078"), angle: 118deg))[
-  #place(center + horizon, rotate(-90deg, reflow: false,
-    box(width: 180mm, align(center, text(font: sans, fill: rgb("#efe7d6"), size: 6.6pt, tracking: 0.34em)[IMAGEM · #upper(kicker)]))))
-]
+// MANIFESTO das imagens (capa + vinhetas das Partes). O CI baixa-as do bucket e
+// preenche este JSON (chave -> ficheiro). Em dev fica vazio -> placeholders.
+#let imgman = json("/build/imagens/manifest.json")
+#let tem-img(k) = k in imgman
+#let caminho-img(k) = "/build/imagens/" + imgman.at(k)
+
+// vinheta vertical a sangrar: a IMAGEM da Parte se existir; senão placeholder.
+#let vinheta-vertical(kicker, chave: none) = {
+  if chave != none and tem-img(chave) {
+    box(width: 34mm, height: 210mm, clip: true,
+      image(caminho-img(chave), width: 34mm, height: 210mm, fit: "cover"))
+  } else {
+    box(width: 34mm, height: 210mm,
+      fill: gradient.linear(rgb("#c9bda4"), rgb("#b1a589"), rgb("#9c9078"), angle: 118deg))[
+      #place(center + horizon, rotate(-90deg, reflow: false,
+        box(width: 180mm, align(center, text(font: sans, fill: rgb("#efe7d6"), size: 6.6pt, tracking: 0.34em)[IMAGEM · #upper(kicker)]))))
+    ]
+  }
+}
 
 // ---- página ----
 #set page(
@@ -169,10 +182,10 @@
 
 // ---- PARTE: página SÓ dela, com a imagem vertical a sangrar pela margem ----
 // A Parte fica sozinha; o título a meio da página. O capítulo abre na seguinte.
-#let abre-parte(partU) = {
+#let abre-parte(partU, n: 0) = {
   setsect(partU.titulo)
   page(margin: (left: 50mm, right: 16mm, top: 20mm, bottom: 18mm), header: none, footer: footer-num)[
-    #place(top + left, dx: -50mm, dy: -20mm, vinheta-vertical(partU.kicker))
+    #place(top + left, dx: -50mm, dy: -20mm, vinheta-vertical(partU.kicker, chave: "parte-" + str(n)))
     #set align(left)
     #set text(hyphenate: false)
     #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
@@ -318,6 +331,12 @@
   ]
 }
 
+// ============================ capa (imagem, se existir) ======================
+#if tem-img("capa") {
+  set page(margin: 0pt, header: none, footer: none)
+  image(caminho-img("capa"), width: 100%, height: 100%, fit: "cover")
+}
+
 // ============================ rosto ==========================================
 #page(header: none, footer: none)[
   #set align(center + horizon)
@@ -334,10 +353,12 @@
 
 // ============================ corpo do livro =================================
 #let mapa-posta = false
+#let parteN = 0
 #for u in livro.unidades {
   if u.tipo == "parte" {
     if not mapa-posta { mapa(); mapa-posta = true }
-    abre-parte(u)                // Parte SOZINHA na sua página, com a imagem
+    parteN += 1
+    abre-parte(u, n: parteN)     // Parte SOZINHA na sua página, com a imagem
   } else if u.tipo == "prologo" {
     abre-voz(u)                  // a carta de 2150 — único sítio com o sinal
     aparato(u)

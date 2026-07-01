@@ -5,9 +5,9 @@ import { githubDispatchToken } from '@/lib/github/dispatch-token';
 export const runtime = 'nodejs';
 export const maxDuration = 30;
 
-// POST — dispara o workflow render-livro-transicao.yml (Puppeteer + pdf-lib) que
-// compõe o livro tipografado (capa + miolo A4 com arco, capitular, ornamentos,
-// caixas, diagrama e vinhetas das Partes) e publica o PDF no bucket.
+// POST — dispara o workflow render-livro-transicao.yml (Typst) que compõe o
+// livro tipografado (capa + miolo A5: aberturas uniformes, capitular, destaques,
+// caixas do sistema, mapa, vinhetas das Partes) e publica o PDF no bucket.
 export async function POST() {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const token = await githubDispatchToken();
