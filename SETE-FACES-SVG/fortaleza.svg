@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g id="fortaleza" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M36 82 L36 42 L64 42 L64 82"/>
+    <line x1="30" y1="82" x2="70" y2="82"/>
+    <path d="M36 42 L36 34 L43 34 L43 42 M46 42 L46 34 L54 34 L54 42 M57 42 L57 34 L64 34 L64 42"/>
+    <path d="M46 82 L46 60 Q50 55 54 60 L54 82"/>
+    <line x1="50" y1="34" x2="50" y2="22"/>
+    <path d="M50 22 L61 25 L50 29"/>
+  </g>
+</svg>
