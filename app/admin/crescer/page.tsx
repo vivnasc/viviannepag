@@ -115,22 +115,35 @@ function PreviewBox({ peca }: { peca: Peca }) {
   // se vê é o que sai. O render (✦) é só o MP4 final com a voz.
   const linhas = (peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto]).filter(Boolean);
   const tema = peca.tematica || 'consciencia';
-  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}`;
   const segs = linhas.flatMap(segmentar).slice(0, 12);
   const total = Math.max(1, segs.length);
-  const [modo, setModo] = useState<'reel' | 'carrossel'>('reel');
+  const [modo, setModo] = useState<'reel' | 'multi' | 'carrossel'>('reel');
   const [slide, setSlide] = useState(0);
   const cur = Math.min(slide, total - 1);
+  const bt = (on: boolean) => (on ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' });
+  // LAYOUT ajustável por ela (autonomia), guardado no browser e aplicado a tudo.
+  const LAY0 = { txtY: 19, txtSize: 5.6, geoTop: 15, geoW: 66 };
+  const [lay, setLay] = useState(LAY0);
+  useEffect(() => { try { const s = localStorage.getItem('crescer-assinatura-layout'); if (s) setLay({ ...LAY0, ...JSON.parse(s) }); } catch { /* */ } }, []);
+  const setL = (k: keyof typeof LAY0, v: number) => setLay((l) => { const n = { ...l, [k]: v }; try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(n)); } catch { /* */ } return n; });
+  const layQ = `txtY=${lay.txtY}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
+  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}&${layQ}`;
+  const Slider = ({ k, label, min, max, step }: { k: keyof typeof LAY0; label: string; min: number; max: number; step: number }) => (
+    <label className="flex items-center gap-1.5 text-[0.56rem]"><span className="w-14 opacity-70">{label}</span>
+      <input type="range" min={min} max={max} step={step} value={lay[k]} onChange={(e) => setL(k, Number(e.target.value))} className="flex-1" />
+      <span className="w-7 tabular-nums opacity-60 text-right">{lay[k]}</span></label>
+  );
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
-      <div className="flex items-center gap-1.5 mb-1">
+      <div className="flex items-center gap-1.5 mb-1 flex-wrap">
         <p className="text-[0.55rem] uppercase tracking-widest opacity-50 flex-1">pré-visualização (ao vivo)</p>
-        <button onClick={() => setModo('reel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={modo === 'reel' ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎬 reel</button>
-        <button onClick={() => setModo('carrossel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={modo === 'carrossel' ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' }}>🖼 carrossel ({total})</button>
+        <button onClick={() => setModo('reel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'reel')}>🎬 reel 1 frame</button>
+        <button onClick={() => setModo('multi')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'multi')}>🎞 multi-frame</button>
+        <button onClick={() => setModo('carrossel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'carrossel')}>🖼 carrossel ({total})</button>
       </div>
-      {modo === 'reel' ? (
+      {modo === 'reel' || modo === 'multi' ? (
         <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
-          <iframe src={`/api/admin/crescer/reel?${q}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
+          <iframe src={`/render-reel-mae?${q}${modo === 'multi' ? '&multi=1' : ''}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
         </div>
       ) : (
         <div className="mx-auto" style={{ width: 240 }}>
@@ -144,6 +157,15 @@ function PreviewBox({ peca }: { peca: Peca }) {
           </div>
         </div>
       )}
+      {/* AJUSTES (autonomia): mexe tu, guarda sozinho, vale para todos os posts */}
+      <div className="mx-auto mt-1.5 space-y-0.5" style={{ width: 240 }}>
+        <div className="flex items-center justify-between"><span className="text-[0.5rem] uppercase tracking-widest opacity-40">ajustes (guardam-se)</span>
+          <button onClick={() => { setLay(LAY0); try { localStorage.removeItem('crescer-assinatura-layout'); } catch { /* */ } }} className="text-[0.5rem] opacity-60 underline">repor</button></div>
+        <Slider k="txtY" label="texto ↑↓" min={6} max={42} step={1} />
+        <Slider k="txtSize" label="texto tam" min={3.6} max={8} step={0.2} />
+        <Slider k="geoTop" label="forma ↑↓" min={4} max={40} step={1} />
+        <Slider k="geoW" label="forma tam" min={36} max={86} step={2} />
+      </div>
     </div>
   );
 }
