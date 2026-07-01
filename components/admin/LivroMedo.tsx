@@ -58,9 +58,11 @@ export function LivroMedo() {
               <div className="aspect-[2/3] w-full overflow-hidden rounded-[12px] border border-ocre/20 bg-[#100d09] grid place-items-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
+                  key={`${chaveDe(lg)}-${vers[chaveDe(lg)] ?? 0}`}
                   src={urlCapa(lg)}
                   alt={lg === 'en' ? 'The Seven Faces of Fear' : 'As Sete Faces do Medo'}
                   className="h-full w-full object-cover"
+                  onLoad={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = 'visible'; }}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = 'hidden'; }}
                 />
               </div>
