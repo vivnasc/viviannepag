@@ -11,7 +11,7 @@ const clamp = (x: number) => Math.max(0, Math.min(1, x));
 export default function RenderReelMae() {
   const [p, setP] = useState(0);
   // layout ajustável pela Vivianne (autonomia): posição/tamanho do texto e da geometria.
-  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number } | null>(null);
+  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number; img?: string; imgModo?: string } | null>(null);
   const geoRef = useRef<HTMLDivElement>(null);
   const externo = useRef(false);
 
@@ -23,7 +23,8 @@ export default function RenderReelMae() {
     const segs = linhas.flatMap(segmentar).slice(0, 12);
     const num = (k: string, d: number) => { const v = parseFloat(q.get(k) || ''); return Number.isFinite(v) ? v : d; };
     setParams({ tema, segs: segs.length ? segs : linhas, label: q.get('label') || undefined, multi: q.get('multi') === '1', estatico: q.get('static') === '1',
-      seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', dist: num('dist', 12), txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66) });
+      seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', dist: num('dist', 12), txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66),
+      img: q.get('img') || undefined, imgModo: q.get('imgmodo') || undefined });
   }, []);
 
   useEffect(() => {
@@ -66,6 +67,11 @@ export default function RenderReelMae() {
   const titOp = estatico ? 1 : clamp(p / 0.08);
   const ruleW = estatico ? 60 : clamp((p - 0.06) / 0.1) * 60;
   const HEADp = 0.14, TAILp = 0.92, slotW = (TAILp - HEADp) / M;
+  // FONTE VISUAL: imagem (Flux/Replicate ou MJ) OU geometria VDS. 'fundo' = cena inteira
+  // (imagem cobre o cartão, véu à esquerda); 'acento' = elemento em preto à direita (screen).
+  const img = params.img;
+  const fundo = !!img && params.imgModo !== 'acento';
+  const acento = !!img && params.imgModo === 'acento';
 
   return (
     <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', fontFamily: 'Georgia, "Times New Roman", serif', color: TOK.light,
@@ -74,14 +80,20 @@ export default function RenderReelMae() {
         <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter>
         <rect width="100" height="178" filter="url(#g)" />
       </svg>
+      {/* CENA INTEIRA: imagem de fundo (Flux/Replicate ou MJ) + véu à esquerda para o texto */}
+      {fundo && (<>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(90deg, rgba(10,7,5,.94) 28%, rgba(10,7,5,.4) 58%, rgba(10,7,5,.05) 82%)' }} />
+      </>)}
       {/* cabeçalho: marca */}
       <div style={{ position: 'absolute', top: '6.2%', left: '9%', right: '9%', display: 'flex', justifyContent: 'space-between',
-        fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.68 }}>
+        fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.68, zIndex: 3 }}>
         <span>@vivianne.dos.santos</span><span />
       </div>
       {/* geometria à DIREITA — linha FINA e nítida, como a referência */}
       <style>{`.mgeo{--vds-gold:${TOK.gold};--vds-gold-soft:${TOK.goldSoft};--vds-bg:${TOK.bg}}.mgeo circle,.mgeo path,.mgeo ellipse,.mgeo line{stroke-width:.7}`}</style>
-      <div ref={geoRef} style={{ position: 'absolute', right: '3.5%', top: '50%', transform: 'translateY(-50%)', width: '41%' }}>
+      {!img && (<div ref={geoRef} style={{ position: 'absolute', right: '3.5%', top: '50%', transform: 'translateY(-50%)', width: '41%' }}>
         <svg className="mgeo" viewBox="0 0 100 100" style={{ width: '100%', fill: 'none', stroke: TOK.gold, strokeLinecap: 'round' }}>
           <defs>
             <radialGradient id="halo"><stop offset="58%" stopColor={TOK.goldSoft} stopOpacity="0" /><stop offset="80%" stopColor={TOK.goldSoft} stopOpacity=".5" /><stop offset="100%" stopColor={TOK.goldSoft} stopOpacity="0" /></radialGradient>
@@ -90,9 +102,14 @@ export default function RenderReelMae() {
           </defs>
           <g key={params.tema + params.seed} dangerouslySetInnerHTML={{ __html: motivoHTML }} />
         </svg>
-      </div>
+      </div>)}
+      {/* ACENTO botânico à direita (imagem em preto puro, mistura screen tira o preto) */}
+      {acento && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={img} alt="" style={{ position: 'absolute', right: '-4%', top: '50%', transform: 'translateY(-50%)', width: '52%', mixBlendMode: 'screen', zIndex: 1 }} />
+      )}
       {/* coluna de TEXTO à esquerda */}
-      <div style={{ position: 'absolute', left: '9%', width: '47%', top: '50%', transform: 'translateY(-50%)' }}>
+      <div style={{ position: 'absolute', left: '9%', width: '47%', top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
         <div style={{ fontSize: '6.3vw', lineHeight: 1.14, textTransform: 'uppercase', letterSpacing: '.012em',
           opacity: titOp, transform: `translateY(${(1 - titOp) * 10}px)` }}>{titulo}</div>
         <div style={{ width: `${ruleW}%`, height: 1, margin: '6.5% 0 6%', background: TOK.gold, opacity: 0.85 }} />
@@ -108,7 +125,7 @@ export default function RenderReelMae() {
         </div>
       </div>
       {/* rodapé: etiqueta */}
-      <div style={{ position: 'absolute', bottom: '6.2%', left: '9%', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.6 }}>{label}</div>
+      <div style={{ position: 'absolute', bottom: '6.2%', left: '9%', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.6, zIndex: 3 }}>{label}</div>
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(135% 95% at 58% 42%, transparent 48%, rgba(12,9,6,.92) 100%)' }} />
     </div>
   );
