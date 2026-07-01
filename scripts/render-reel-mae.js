@@ -117,12 +117,26 @@ async function main() {
       }
       await page.close();
 
-      // mp4
+      // DRONE por baixo (biblioteca): a Vivianne aplica-o no admin (theme.soulab.somUrl).
+      // Vem em loop e baixinho (0.16) por baixo da voz. Ambos ja foram ouvidos por ela.
+      const dronMp3 = path.join(dir, 'drone.mp3');
+      const somUrl = row.theme?.soulab?.somUrl || null;
+      let temDrone = false;
+      if (somUrl) { try { const r = await fetch(somUrl); if (r.ok) { fs.writeFileSync(dronMp3, Buffer.from(await r.arrayBuffer())); temDrone = true; } } catch { /* segue sem drone */ } }
+
+      // mp4 (video 0:v; voz 1:a; drone 2:a em loop). Mistura conforme o que existe.
       const outMp4 = path.join(dir, 'out.mp4');
       const args = ['-y', '-framerate', String(FPS), '-i', path.join(framesDir, 'f%04d.png')];
       if (temVoz) args.push('-i', vozMp3);
+      if (temDrone) args.push('-stream_loop', '-1', '-i', dronMp3);
       args.push('-c:v', 'libx264', '-r', '30', '-pix_fmt', 'yuv420p', '-movflags', '+faststart');
-      if (temVoz) args.push('-c:a', 'aac', '-b:a', '160k', '-shortest');
+      if (temVoz && temDrone) {
+        args.push('-filter_complex', '[2:a]volume=0.16[bed];[1:a][bed]amix=inputs=2:duration=first:normalize=0[aout]', '-map', '0:v', '-map', '[aout]', '-c:a', 'aac', '-b:a', '160k', '-shortest');
+      } else if (temVoz) {
+        args.push('-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '160k', '-shortest');
+      } else if (temDrone) {
+        args.push('-filter_complex', '[1:a]volume=0.5[aout]', '-map', '0:v', '-map', '[aout]', '-c:a', 'aac', '-b:a', '160k', '-shortest');
+      }
       args.push(outMp4);
       await run('ffmpeg', args, { cwd: dir, stdio: 'inherit' });
 

@@ -485,6 +485,9 @@ export default function CrescerPage() {
   // ela OUVIR no admin; o render so cola esta voz, sem surpresas.
   const gerarVozPeca = useCallback((slug: string) =>
     acao(slug, '/api/admin/crescer/voz', {}, 'A gerar a tua voz (uns segundos)…', 'Voz gerada. Ouve-a aqui antes de renderizar.', false), [acao]);
+  // DRONE do tema por baixo da voz (biblioteca reutilizada; ouve-se antes do render).
+  const aplicarDrone = useCallback((slug: string) =>
+    acao(slug, '/api/admin/crescer/drone', {}, 'A pôr o drone do tema…', 'Drone aplicado. Ouve-o aqui (vai por baixo da voz no render).', false), [acao]);
   // arquivar/desarquivar UMA peça (sem apagar).
   const arquivarPeca = useCallback((slug: string, arquivar: boolean) =>
     acao(slug, '/api/admin/crescer/arquivar', { arquivar }, arquivar ? 'A arquivar…' : 'A desarquivar…', arquivar ? 'Arquivada (na aba «arquivados»).' : 'Desarquivada.', false), [acao]);
@@ -754,6 +757,8 @@ export default function CrescerPage() {
                     {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
                     <button onClick={() => gerarVozPeca(p.slug)} disabled={tBusy} title="gera a TUA voz (clonada) a ler a frase, para ouvires AGORA. O render usa esta voz, sem surpresas." className="px-2 py-1 rounded border disabled:opacity-40" style={p.vozUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎙 {p.vozUrl ? 'refazer voz' : 'gerar voz'}</button>
                     {p.vozUrl && <audio controls preload="none" src={p.vozUrl} className="h-6 align-middle" style={{ height: 26, maxWidth: 168 }} />}
+                    <button onClick={() => aplicarDrone(p.slug)} disabled={tBusy} title="põe o DRONE do tema por baixo da voz (biblioteca de sons; ouve-o antes de renderizar)" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎚 {p.somUrl ? 'trocar drone' : 'drone'}</button>
+                    {p.somUrl && <audio controls preload="none" src={p.somUrl} className="h-6 align-middle" style={{ height: 26, maxWidth: 168 }} />}
                     <button onClick={() => reelAssinatura(p.slug)} disabled={tBusy || !p.vozUrl} title={p.vozUrl ? 'grava o REEL DE ASSINATURA: geometria VDS + a frase + a tua voz JA gerada (sem imagem, sem custo). Corre nos Actions.' : 'gera a voz primeiro (🎙), para o render não trazer surpresas'} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: p.vozUrl ? DZ : 'transparent', color: p.vozUrl ? BG2 : DZ }}>✦ reel assinatura</button>
                     <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
                     {!p.publicado && (p.arquivado
