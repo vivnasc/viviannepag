@@ -18,3 +18,17 @@ Amostra da expressão editorial **própria** do livro (não imita A Grande Trans
 usos claros) no passo de build, porque o `image()` do Typst não herda a cor do texto.
 
 Nome canónico da autora: **Vivianne dos Santos**.
+
+## Sistema de abertura das 7 faces
+Cada face abre com: **glifo · «Capítulo N» · título (o símbolo) · subtítulo ordinal · capitular**.
+O subtítulo ecoa o título do livro e marca a progressão; o nome do medo vai no cabeçalho.
+
+| Cap | Título | Subtítulo | Cabeçalho (o medo) |
+|-----|--------|-----------|--------------------|
+| 1 | O Espelho | a primeira face do medo | A Rejeição |
+| 2 | O Punho | a segunda face do medo | A Perda |
+| 3 | O Inverno | a terceira face do medo | A Escassez |
+| 4 | A Fortaleza | a quarta face do medo | A Incerteza |
+| 5 | A Luz | a quinta face do medo | A Exposição |
+| 6 | O Apagamento | a sexta face do medo | A Insignificância |
+| 7 | O Abismo | a sétima face do medo, a raiz | A Separação |
