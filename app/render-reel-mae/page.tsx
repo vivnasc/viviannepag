@@ -93,10 +93,10 @@ export default function RenderReelMae() {
         </svg>
       </div>
       <div style={{ position: 'absolute', left: '8%', right: '8%',
-        ...(params.av === 'topo' ? { top: '14%' } : params.av === 'centro' ? { top: '50%', transform: 'translateY(-50%)' } : { bottom: '15%' }),
+        ...(params.av === 'topo' ? { top: '14%' } : params.av === 'centro' ? { top: '50%', transform: 'translateY(-50%)' } : { bottom: '12%' }),
         textAlign: params.ah === 'esq' ? 'left' : params.ah === 'dir' ? 'right' : 'center' }}>
         <div style={{ width: `${ruleW}%`, height: 1, margin: params.ah === 'esq' ? '0 auto 4.5% 0' : params.ah === 'dir' ? '0 0 4.5% auto' : '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
-        <div style={{ position: 'relative', minHeight: '22vh' }}>
+        <div style={{ position: 'relative', minHeight: estatico ? undefined : '11vh' }}>
           {estatico ? (
             <div style={{ fontSize: `${params.txtSize}vw`, lineHeight: 1.4 }}>{params.segs.join(' ')}</div>
           ) : multi ? (
