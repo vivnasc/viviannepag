@@ -12,7 +12,7 @@ const hashStr = (s: string) => { let h = 0; for (let i = 0; i < s.length; i++) h
 export default function RenderReelMae() {
   const [p, setP] = useState(0);
   // layout ajustável pela Vivianne (autonomia): posição/tamanho do texto e da geometria.
-  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; seed: string; txtY: number; txtSize: number; geoTop: number; geoW: number } | null>(null);
+  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; txtSize: number; geoTop: number; geoW: number } | null>(null);
   const geoRef = useRef<HTMLDivElement>(null);
   const externo = useRef(false);
 
@@ -23,12 +23,13 @@ export default function RenderReelMae() {
     const linhas = raw.split('|').map((s) => s.trim()).filter(Boolean);
     const segs = linhas.flatMap(segmentar).slice(0, 12);
     const num = (k: string, d: number) => { const v = parseFloat(q.get(k) || ''); return Number.isFinite(v) ? v : d; };
-    setParams({ tema, segs: segs.length ? segs : linhas, label: q.get('label') || undefined, multi: q.get('multi') === '1',
-      seed: q.get('seed') || raw, txtY: num('txtY', 19), txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66) });
+    setParams({ tema, segs: segs.length ? segs : linhas, label: q.get('label') || undefined, multi: q.get('multi') === '1', estatico: q.get('static') === '1',
+      seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66) });
   }, []);
 
   useEffect(() => {
     (window as unknown as { __setKProg?: (v: number) => void }).__setKProg = (v: number) => { externo.current = true; setP(clamp(v)); };
+    if (params?.estatico) { setP(1); return; } // ESTÁTICO: texto e geometria sempre visíveis (para posicionar)
     let raf = 0, t0 = 0;
     const LOOP = params ? Math.max(9000, params.segs.length * 3000) : 9000;
     const tick = (t: number) => { if (externo.current) return; if (!t0) t0 = t; setP((((t - t0) % LOOP) / LOOP)); raf = requestAnimationFrame(tick); };
@@ -47,13 +48,14 @@ export default function RenderReelMae() {
   const motivo = params && seq.length ? (multi ? seq[(base + scene) % seq.length] : seq[base % seq.length]) : 'rings';
   const motivoHTML = useMemo(() => motivoSVG(motivo), [motivo]);
 
-  // opacidade da CENA (multi): entra e sai; a última fica. (single: sempre 1)
-  const sceneOp = multi ? clamp(localP / 0.12) * (scene === N - 1 ? 1 : 1 - clamp((localP - 0.86) / 0.12)) : 1;
+  const estatico = !!params?.estatico;
+  // opacidade da CENA (multi): entra e sai; a última fica. (single/estático: sempre 1)
+  const sceneOp = estatico ? 1 : (multi ? clamp(localP / 0.12) * (scene === N - 1 ? 1 : 1 - clamp((localP - 0.86) / 0.12)) : 1);
 
   // aplica o progresso à geometria
   useEffect(() => {
     const g = geoRef.current; if (!g || !params) return;
-    const dp = multi ? localP : p;
+    const dp = estatico ? 1 : (multi ? localP : p);
     const draws = g.querySelectorAll<SVGGeometryElement>('.ring, .drawpath, .cnet line');
     draws.forEach((el, i) => {
       // multi: todos desenham juntos no arranque da cena. single: escalonado ao longo do reel.
@@ -90,10 +92,14 @@ export default function RenderReelMae() {
           <g key={motivo} dangerouslySetInnerHTML={{ __html: motivoHTML }} />
         </svg>
       </div>
-      <div style={{ position: 'absolute', left: '8%', right: '8%', bottom: `${params.txtY}%`, textAlign: 'center' }}>
-        <div style={{ width: `${ruleW}%`, height: 1, margin: '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
+      <div style={{ position: 'absolute', left: '8%', right: '8%',
+        ...(params.av === 'topo' ? { top: '14%' } : params.av === 'centro' ? { top: '50%', transform: 'translateY(-50%)' } : { bottom: '15%' }),
+        textAlign: params.ah === 'esq' ? 'left' : params.ah === 'dir' ? 'right' : 'center' }}>
+        <div style={{ width: `${ruleW}%`, height: 1, margin: params.ah === 'esq' ? '0 auto 4.5% 0' : params.ah === 'dir' ? '0 0 4.5% auto' : '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
         <div style={{ position: 'relative', minHeight: '22vh' }}>
-          {multi ? (
+          {estatico ? (
+            <div style={{ fontSize: `${params.txtSize}vw`, lineHeight: 1.4 }}>{params.segs.join(' ')}</div>
+          ) : multi ? (
             <div style={{ opacity: sceneOp, fontSize: `${params.txtSize}vw`, lineHeight: 1.4, transform: `translateY(${9 * (1 - clamp(localP / 0.12))}px)` }}>{params.segs[scene]}</div>
           ) : params.segs.map((t, i) => {
             const slot = 1 / N, s = i * slot, ultimo = i === N - 1;

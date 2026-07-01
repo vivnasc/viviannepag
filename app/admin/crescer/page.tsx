@@ -121,14 +121,19 @@ function PreviewBox({ peca }: { peca: Peca }) {
   const [slide, setSlide] = useState(0);
   const cur = Math.min(slide, total - 1);
   const bt = (on: boolean) => (on ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' });
-  // LAYOUT ajustável por ela (autonomia), guardado no browser e aplicado a tudo.
-  const LAY0 = { txtY: 19, txtSize: 5.6, geoTop: 15, geoW: 66 };
+  const [estatico, setEstatico] = useState(true); // pré-ver PARADO (texto sempre visível, para posicionar) vs a mexer
+  // LAYOUT ajustável por ela, guardado no browser e aplicado a tudo. Posição por OPÇÕES
+  // (vertical: topo/centro/baixo · horizontal: esq/centro/dir), como ela editava antes.
+  const LAY0 = { av: 'baixo', ah: 'centro', txtSize: 5.6, geoTop: 15, geoW: 66 };
   const [lay, setLay] = useState(LAY0);
   useEffect(() => { try { const s = localStorage.getItem('crescer-assinatura-layout'); if (s) setLay({ ...LAY0, ...JSON.parse(s) }); } catch { /* */ } }, []);
-  const setL = (k: keyof typeof LAY0, v: number) => setLay((l) => { const n = { ...l, [k]: v }; try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(n)); } catch { /* */ } return n; });
-  const layQ = `txtY=${lay.txtY}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
+  const setL = (k: keyof typeof LAY0, v: string | number) => setLay((l) => { const n = { ...l, [k]: v }; try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(n)); } catch { /* */ } return n; });
+  const layQ = `av=${lay.av}&ah=${lay.ah}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
   const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}&${layQ}`;
-  const Slider = ({ k, label, min, max, step }: { k: keyof typeof LAY0; label: string; min: number; max: number; step: number }) => (
+  const Op = ({ k, val, children }: { k: keyof typeof LAY0; val: string; children: React.ReactNode }) => (
+    <button onClick={() => setL(k, val)} className="text-[0.56rem] px-1.5 py-0.5 rounded border" style={bt(lay[k] === val)}>{children}</button>
+  );
+  const Slider = ({ k, label, min, max, step }: { k: 'txtSize' | 'geoTop' | 'geoW'; label: string; min: number; max: number; step: number }) => (
     <label className="flex items-center gap-1.5 text-[0.56rem]"><span className="w-14 opacity-70">{label}</span>
       <input type="range" min={min} max={max} step={step} value={lay[k]} onChange={(e) => setL(k, Number(e.target.value))} className="flex-1" />
       <span className="w-7 tabular-nums opacity-60 text-right">{lay[k]}</span></label>
@@ -136,15 +141,21 @@ function PreviewBox({ peca }: { peca: Peca }) {
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
       <div className="flex items-center gap-1.5 mb-1 flex-wrap">
-        <p className="text-[0.55rem] uppercase tracking-widest opacity-50 flex-1">pré-visualização (ao vivo)</p>
+        <p className="text-[0.55rem] uppercase tracking-widest opacity-50 flex-1">pré-visualização</p>
         <button onClick={() => setModo('reel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'reel')}>🎬 reel 1 frame</button>
         <button onClick={() => setModo('multi')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'multi')}>🎞 multi-frame</button>
         <button onClick={() => setModo('carrossel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'carrossel')}>🖼 carrossel ({total})</button>
       </div>
       {modo === 'reel' || modo === 'multi' ? (
-        <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
-          <iframe src={`/render-reel-mae?${q}${modo === 'multi' ? '&multi=1' : ''}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
-        </div>
+        <>
+          <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
+            <iframe src={`/render-reel-mae?${q}${modo === 'multi' ? '&multi=1' : ''}${estatico ? '&static=1' : ''}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
+          </div>
+          <div className="flex items-center justify-center gap-2 mt-1"><span className="text-[0.5rem] opacity-40">pré-ver:</span>
+            <button onClick={() => setEstatico(true)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(estatico)}>⏸ parado (posicionar)</button>
+            <button onClick={() => setEstatico(false)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(!estatico)}>▶ a mexer</button>
+          </div>
+        </>
       ) : (
         <div className="mx-auto" style={{ width: 240 }}>
           <div className="rounded-lg overflow-hidden border border-white/10">
@@ -157,11 +168,14 @@ function PreviewBox({ peca }: { peca: Peca }) {
           </div>
         </div>
       )}
-      {/* AJUSTES (autonomia): mexe tu, guarda sozinho, vale para todos os posts */}
-      <div className="mx-auto mt-1.5 space-y-0.5" style={{ width: 240 }}>
-        <div className="flex items-center justify-between"><span className="text-[0.5rem] uppercase tracking-widest opacity-40">ajustes (guardam-se)</span>
+      {/* POSIÇÃO e AJUSTES (guardam-se, valem para todos os posts) */}
+      <div className="mx-auto mt-1.5 space-y-1" style={{ width: 240 }}>
+        <div className="flex items-center justify-between"><span className="text-[0.5rem] uppercase tracking-widest opacity-40">posição do texto</span>
           <button onClick={() => { setLay(LAY0); try { localStorage.removeItem('crescer-assinatura-layout'); } catch { /* */ } }} className="text-[0.5rem] opacity-60 underline">repor</button></div>
-        <Slider k="txtY" label="texto ↑↓" min={6} max={42} step={1} />
+        <div className="flex items-center gap-1"><span className="w-14 text-[0.54rem] opacity-70">vertical</span>
+          <Op k="av" val="topo">↑ topo</Op><Op k="av" val="centro">centro</Op><Op k="av" val="baixo">baixo ↓</Op></div>
+        <div className="flex items-center gap-1"><span className="w-14 text-[0.54rem] opacity-70">horizontal</span>
+          <Op k="ah" val="esq">esq</Op><Op k="ah" val="centro">centro</Op><Op k="ah" val="dir">dir</Op></div>
         <Slider k="txtSize" label="texto tam" min={3.6} max={8} step={0.2} />
         <Slider k="geoTop" label="forma ↑↓" min={4} max={40} step={1} />
         <Slider k="geoW" label="forma tam" min={36} max={86} step={2} />
