@@ -39,6 +39,15 @@ motores diferentes. Não reframes a didática à luz do método nem o contrário
    ganhar alcance. O alcance, se vier, vem da verdade da voz, nunca de a trair.
    Antes de sugerir qualquer coisa de "crescer/impacto", passar este filtro: isto
    é fiel à alma dela, ou é vender a alma? Se for o segundo, não se propõe.
+8. **NUNCA entregar nada a meio. TERMINAR TUDO antes de entregar.** Regra
+   PERMANENTE e inviolável (pedida com todas as letras). Não existe "primeiro
+   rascunho parcial", "uma parte agora e o resto depois", nem entregar a um terço
+   do tamanho e prometer expandir a seguir. Se o alvo é 6000-7500 palavras por
+   capítulo, entrega-se 6000-7500, não 2000. Se é um livro inteiro, entrega-se o
+   livro inteiro. Validar-a-peça-antes-de-escalar NÃO é desculpa para entregar
+   incompleto: se ela quiser validar, valida sobre a coisa ACABADA. Acabar é o
+   trabalho, não metade dele. (A Vivianne teve de repetir isto: nada de meias
+   entregas, nunca.)
 
 ## Os TRÊS perfis/produtos (NÃO misturar)
 
