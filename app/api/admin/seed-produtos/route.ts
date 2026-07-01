@@ -78,6 +78,28 @@ Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelaçã
     ordem: 0,
   },
   {
+    slug: 'a-grande-transicao',
+    titulo: 'A Grande Transição',
+    subtitulo: 'Introdução às Ciências da Consciência Emergente',
+    descricao: `**Livro · PDF imediato**
+
+Uma civilização futura olha para o nosso tempo e devolve-nos aquilo que não conseguíamos ver de dentro: que a dureza com que tratávamos a vida não era a nossa natureza, era a estação em que vivíamos.
+
+Não é um livro de melhoria pessoal. É a investigação de uma hipótese à escala da espécie: grande parte daquilo a que chamamos natureza humana talvez seja história, adaptação a milénios de escassez, e não destino.
+
+A Grande Transição é a passagem entre organizar a vida em torno do medo e organizá-la em torno da criação e da pertença.
+
+Por Vivianne dos Santos.`,
+    preco: '€19',
+    preco_original: null,
+    capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-transicao/capa-propria.png`,
+    badge: 'livro',
+    destaque: true,
+    publicado: true,
+    ordem: 0,
+    ficheiro_path: 'produtos/a-grande-transicao.pdf',
+  },
+  {
     slug: 'ver-soltar',
     titulo: 'ver.soltar',
     subtitulo: 'a consciência: sair de dentro da tempestade',
