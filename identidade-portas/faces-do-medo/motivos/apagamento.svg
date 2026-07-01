@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- as sete faces do medo | o apagamento | a insignificancia | perfil a dissolver-se -->
+  <path id="apagamento" d="M56 80 L56 62 L62 60 L58 52 L64 48 L60 42 Q58 28 44 30 Q34 32 34 46 L34 80"
+        fill="none" stroke="var(--porta-gold, #C8A86B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+  <g id="apagamento-particulas" fill="var(--porta-gold-aged, #9E7B47)">
+    <circle id="apagamento-p1" cx="30" cy="40" r="2.5"/>
+    <circle id="apagamento-p2" cx="24" cy="50" r="2.5"/>
+    <circle id="apagamento-p3" cx="28" cy="62" r="2.5"/>
+    <circle id="apagamento-p4" cx="22" cy="72" r="2.5"/>
+  </g>
+</svg>

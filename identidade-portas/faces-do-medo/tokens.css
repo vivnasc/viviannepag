@@ -1,0 +1,17 @@
+/* As Sete Faces do Medo
+   Tokens de cor da porta. Paleta exacta da ficha de identidade visual.
+   Temperatura: grave e mineral. Carvao e bronze, com a luz da fenda.
+   Cores propria desta porta. Nunca partilhar paleta entre portas. */
+
+:root {
+  /* Fundo, carvao */
+  --porta-bg: #0F0F10;
+  /* Dourado principal */
+  --porta-gold: #C8A86B;
+  /* Dourado envelhecido */
+  --porta-gold-aged: #9E7B47;
+  /* Texto claro, marfim */
+  --porta-ivory: #EAE4D8;
+  /* Luz da fenda */
+  --porta-fissure: #F1D7A3;
+}

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- as sete faces do medo | o punho | a perda | punho cerrado -->
+  <g id="punho" fill="none" stroke="var(--porta-gold, #C8A86B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path id="punho-dedo-1" d="M36 50 L36 44 Q36 40 40 40 Q44 40 44 44 L44 50" pathLength="1"/>
+    <path id="punho-dedo-2" d="M44 50 L44 42 Q44 38 48 38 Q52 38 52 42 L52 50" pathLength="1"/>
+    <path id="punho-dedo-3" d="M52 50 L52 42 Q52 38 56 38 Q60 38 60 42 L60 50" pathLength="1"/>
+    <path id="punho-dedo-4" d="M60 50 L60 44 Q60 40 64 40 Q68 40 68 44 L68 56" pathLength="1"/>
+    <path id="punho-mao" d="M36 50 L36 68 Q36 80 50 80 Q68 80 68 66 L68 56" pathLength="1"/>
+    <path id="punho-polegar" d="M36 58 Q28 56 28 64 Q29 71 38 70" pathLength="1"/>
+  </g>
+</svg>

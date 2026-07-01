@@ -1,0 +1,22 @@
+/* Os 7 Sinais de Desencaixe
+   Tokens de cor da porta. Paleta exacta da ficha de identidade visual.
+   Temperatura: suave e domestica. A luz que entra pela janela ao fim da tarde.
+   O azul residual e pouco, mas faz a ponte com os Veus.
+   Cores propria desta porta. Nunca partilhar paleta entre portas. */
+
+:root {
+  /* Fundo quente */
+  --porta-bg: #F4EFE8;
+  /* Luz de interior */
+  --porta-interior: #E8D5B5;
+  /* Dourado VS */
+  --porta-gold: #C7A96B;
+  /* Madeira quente */
+  --porta-wood: #A67C52;
+  /* Sombra suave */
+  --porta-shadow: #6E6256;
+  /* Horizonte */
+  --porta-horizon: #D8B07C;
+  /* Azul residual do entardecer */
+  --porta-blue: #7D8797;
+}

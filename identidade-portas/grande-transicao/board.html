@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- A Grande Transicao | board de revisao da porta. Fundo, paleta dos dois registos, motivos, tipografia, frase e prompt. -->
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Grande Transicao · identidade da porta</title>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    :root { --serif: Georgia, "Times New Roman", "Iowan Old Style", serif; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 56px 40px 80px;
+      background: var(--porta-bg, #F5F1EA);
+      color: var(--porta-ink, #4D433A);
+      font-family: var(--serif);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    .eyebrow { letter-spacing: .34em; text-transform: uppercase; font-size: 12px; color: var(--porta-wood, #9B866C); margin: 0 0 14px; }
+    h1 { font-size: 46px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; margin: 0 0 10px; color: var(--porta-ink, #4D433A); }
+    .pergunta { font-style: italic; font-size: 20px; color: var(--porta-wood, #9B866C); margin: 0 0 6px; }
+    .frase { font-size: 20px; max-width: 740px; margin: 22px 0 0; color: var(--porta-ink, #4D433A); }
+    h2 { font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--porta-wood, #9B866C); font-weight: 400; margin: 64px 0 20px; border-top: 1px solid rgba(77,67,58,.2); padding-top: 22px; }
+    .regA, .regB { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 14px; }
+    .regA { color: var(--porta-wood, #9B866C); }
+    .regB { color: var(--porta-b-teal, #718F84); margin-top: 34px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+    .sw { border: 1px solid rgba(77,67,58,.16); border-radius: 8px; overflow: hidden; background:#fff6; }
+    .sw .chip { height: 78px; }
+    .sw .meta { padding: 10px 12px; font-size: 12px; letter-spacing: .04em; }
+    .sw .name { display: block; opacity: .85; }
+    .sw .hex { display: block; font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--porta-ink, #4D433A); margin-top: 3px; }
+    .assinatura { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .assinatura .art { width: 220px; height: 220px; background: var(--porta-sand, #E8DDCB); border: 1px solid rgba(77,67,58,.22); border-radius: 12px; padding: 22px; }
+    .assinatura .art img { width: 100%; height: 100%; display: block; }
+    .assinatura p { max-width: 520px; margin: 0; }
+    .icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 18px; }
+    .icon { text-align: center; }
+    .icon .cell { background: var(--porta-sand, #E8DDCB); border: 1px solid rgba(77,67,58,.18); border-radius: 10px; padding: 20px; }
+    .icon img { width: 100%; height: 90px; display: block; }
+    .icon .lbl { display: block; margin-top: 10px; font-size: 13.5px; letter-spacing: .04em; color: var(--porta-ink, #4D433A); }
+    .legend { font-size: 12px; opacity: .7; margin: 6px 0 0; }
+    .legend b { color: var(--porta-b-teal, #718F84); font-weight: 400; }
+    .type-sample .big { font-size: 60px; letter-spacing: .08em; text-transform: uppercase; color: var(--porta-ink, #4D433A); margin: 0; }
+    .type-sample .caps { letter-spacing: .34em; text-transform: uppercase; font-size: 15px; margin: 14px 0 0; color: var(--porta-wood, #9B866C); }
+    .type-sample .note { font-size: 13px; opacity: .65; margin-top: 8px; }
+    pre { background: var(--porta-sand, #E8DDCB); border: 1px solid rgba(77,67,58,.18); border-radius: 10px; padding: 22px; overflow-x: auto; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--porta-ink, #4D433A); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Vivianne dos Santos · uma porta</p>
+    <h1>A Grande Transicao</h1>
+    <p class="pergunta">o que acontece quando a humanidade muda de sistema operativo sem ainda saber viver no novo?</p>
+    <p class="frase">A Grande Transicao nao mostra o futuro ao longe. Mostra o futuro ja escondido dentro de uma cozinha de hoje, a espera de nome.</p>
+
+    <h2>Paleta · dois registos</h2>
+    <p class="regA">Registo A · antropologia do presente (85%)</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F5F1EA; border-bottom:1px solid rgba(77,67,58,.16)"></div><div class="meta"><span class="name">Fundo, luz domestica</span><span class="hex">#F5F1EA</span></div></div>
+      <div class="sw"><div class="chip" style="background:#E8DDCB"></div><div class="meta"><span class="name">Areia clara</span><span class="hex">#E8DDCB</span></div></div>
+      <div class="sw"><div class="chip" style="background:#CDB79E"></div><div class="meta"><span class="name">Argila</span><span class="hex">#CDB79E</span></div></div>
+      <div class="sw"><div class="chip" style="background:#9B866C"></div><div class="meta"><span class="name">Madeira</span><span class="hex">#9B866C</span></div></div>
+      <div class="sw"><div class="chip" style="background:#4D433A"></div><div class="meta"><span class="name">Tinta</span><span class="hex">#4D433A</span></div></div>
+    </div>
+    <p class="regB">Registo B · etnografia pos-sobrevivencia (15%)</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F6F2E8; border-bottom:1px solid rgba(77,67,58,.16)"></div><div class="meta"><span class="name">Branco quente</span><span class="hex">#F6F2E8</span></div></div>
+      <div class="sw"><div class="chip" style="background:#D9C49A"></div><div class="meta"><span class="name">Dourado suave</span><span class="hex">#D9C49A</span></div></div>
+      <div class="sw"><div class="chip" style="background:#A9C4B0"></div><div class="meta"><span class="name">Salvia</span><span class="hex">#A9C4B0</span></div></div>
+      <div class="sw"><div class="chip" style="background:#718F84"></div><div class="meta"><span class="name">Verde-agua</span><span class="hex">#718F84</span></div></div>
+      <div class="sw"><div class="chip" style="background:#3A4D4A"></div><div class="meta"><span class="name">Profundo</span><span class="hex">#3A4D4A</span></div></div>
+    </div>
+
+    <h2>Assinatura · o limiar entre dois tempos</h2>
+    <div class="assinatura">
+      <div class="art"><img src="motivos/limiar-dois-tempos.svg" alt="o limiar entre dois tempos"></div>
+      <p>Duas temporalidades dentro da mesma imagem: o hoje e o que esta a nascer. A tinta e o gesto herdado, a salvia e o que emerge. A sensacao: isto pertence a hoje e a amanha ao mesmo tempo.</p>
+    </div>
+
+    <h2>Motivos de dois tempos</h2>
+    <div class="icons">
+      <div class="icon"><div class="cell"><img src="motivos/mesa-caderno-ia.svg" alt="a mesa com caderno e IA"></div><span class="lbl">Caderno e IA</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/crianca-algoritmo.svg" alt="a crianca e o algoritmo"></div><span class="lbl">Crianca e algoritmo</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/relogio-planta.svg" alt="o relogio e a planta"></div><span class="lbl">Relogio e planta</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/lista-pausa.svg" alt="a lista e a pausa"></div><span class="lbl">Lista e pausa</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/telemovel-silencio.svg" alt="o telemovel e o silencio"></div><span class="lbl">Telemovel e silencio</span></div>
+    </div>
+    <p class="legend">Tinta <b>#4D433A</b> = o hoje &nbsp;·&nbsp; salvia <b>#A9C4B0</b> = o que nasce. A cor separa as duas temporalidades.</p>
+
+    <h2>Tipografia · serifada classica, maiusculas, respiracao editorial</h2>
+    <div class="type-sample">
+      <p class="big">A Grande Transicao</p>
+      <p class="caps">Vivianne dos Santos</p>
+      <p class="note">Diferencia de imediato do universo da produtividade e do coaching.</p>
+    </div>
+
+    <h2>Modelo de prompt · registo A</h2>
+    <pre>Universo: A Grande Transicao
+Tensao e dominio: &lt;ex. O Controlo vs A Confianca, Maternidade&gt;
+Manifestacao: &lt;ex. culpa ao descansar&gt;
+Cena: quotidiano de hoje, cozinha, mesa, telemovel, crianca, janela
+Assinatura: duas temporalidades na mesma imagem, o hoje e o que esta a nascer
+Paleta: #F5F1EA, #E8DDCB, #CDB79E, #9B866C, #4D433A
+Proibido: robos, cidades futuristas, hologramas, cyberpunk, IA antropomorfica, sci-fi
+Emocao: lucidez, o futuro escondido dentro do presente
+Registo: fotografia realista, luz domestica, materiais reais</pre>
+  </div>
+</body>
+</html>

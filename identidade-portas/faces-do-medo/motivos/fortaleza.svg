@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- as sete faces do medo | a fortaleza | a incerteza | torre com bandeira -->
+  <g id="fortaleza" fill="none" stroke="var(--porta-gold, #C8A86B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path id="fortaleza-corpo" d="M36 82 L36 42 L64 42 L64 82" pathLength="1"/>
+    <line id="fortaleza-base" x1="30" y1="82" x2="70" y2="82" pathLength="1"/>
+    <path id="fortaleza-ameias" d="M36 42 L36 34 L43 34 L43 42 M46 42 L46 34 L54 34 L54 42 M57 42 L57 34 L64 34 L64 42" pathLength="1"/>
+    <path id="fortaleza-porta" d="M46 82 L46 60 Q50 55 54 60 L54 82" pathLength="1"/>
+    <line id="fortaleza-mastro" x1="50" y1="34" x2="50" y2="22" pathLength="1"/>
+    <path id="fortaleza-bandeira" d="M50 22 L61 25 L50 29" pathLength="1"/>
+  </g>
+</svg>

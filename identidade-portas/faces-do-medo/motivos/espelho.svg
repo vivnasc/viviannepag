@@ -1,0 +1,9 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- as sete faces do medo | o espelho | a rejeicao | espelho de mao oval -->
+  <g id="espelho" fill="none" stroke="var(--porta-gold, #C8A86B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse id="espelho-aro" cx="50" cy="38" rx="20" ry="24" pathLength="1"/>
+    <ellipse id="espelho-reflexo" cx="50" cy="38" rx="12" ry="15" pathLength="1"/>
+    <line id="espelho-cabo" x1="50" y1="62" x2="50" y2="84" pathLength="1"/>
+    <line id="espelho-base" x1="43" y1="84" x2="57" y2="84" pathLength="1"/>
+  </g>
+</svg>

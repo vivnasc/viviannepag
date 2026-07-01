@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- as sete faces do medo | o inverno | a escassez | floco de neve de seis bracos -->
+  <g id="inverno" fill="none" stroke="var(--porta-gold, #C8A86B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <g id="inverno-braco">
+      <line id="inverno-haste" x1="50" y1="50" x2="50" y2="16" pathLength="1"/>
+      <line id="inverno-ramo-esq" x1="50" y1="26" x2="43" y2="19" pathLength="1"/>
+      <line id="inverno-ramo-dir" x1="50" y1="26" x2="57" y2="19" pathLength="1"/>
+    </g>
+    <use href="#inverno-braco" transform="rotate(60 50 50)"/>
+    <use href="#inverno-braco" transform="rotate(120 50 50)"/>
+    <use href="#inverno-braco" transform="rotate(180 50 50)"/>
+    <use href="#inverno-braco" transform="rotate(240 50 50)"/>
+    <use href="#inverno-braco" transform="rotate(300 50 50)"/>
+  </g>
+</svg>

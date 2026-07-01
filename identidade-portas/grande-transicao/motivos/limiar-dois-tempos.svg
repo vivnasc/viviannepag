@@ -1,0 +1,14 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- a grande transicao | assinatura da porta: o limiar entre dois tempos | duas temporalidades na mesma imagem, o hoje e o que nasce -->
+  <g id="dt-hoje" fill="none" stroke="var(--porta-ink, #4D433A)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line id="dt-linha-1" x1="18" y1="38" x2="42" y2="38" pathLength="1"/>
+    <line id="dt-linha-2" x1="18" y1="50" x2="42" y2="50" pathLength="1"/>
+    <line id="dt-linha-3" x1="18" y1="62" x2="42" y2="62" pathLength="1"/>
+  </g>
+  <line id="dt-costura" x1="50" y1="16" x2="50" y2="84" fill="none" stroke="var(--porta-clay, #CDB79E)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+  <g id="dt-nasce" fill="none" stroke="var(--porta-b-sage, #A9C4B0)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path id="dt-caule" d="M58 80 C62 62 76 60 70 42" pathLength="1"/>
+    <path id="dt-folha-1" d="M70 52 C77 50 80 44 75 39" pathLength="1"/>
+    <path id="dt-folha-2" d="M63 66 C68 65 72 68 71 61" pathLength="1"/>
+  </g>
+</svg>

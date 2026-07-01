@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!-- Os 7 Sinais de Desencaixe | board de revisao da porta. Fundo, paleta, motivos, tipografia, frase e prompt. -->
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Os 7 Sinais de Desencaixe · identidade da porta</title>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    :root { --serif: Georgia, "Times New Roman", "Iowan Old Style", serif; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 56px 40px 80px;
+      background: var(--porta-bg, #F4EFE8);
+      color: var(--porta-shadow, #6E6256);
+      font-family: var(--serif);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    .eyebrow { letter-spacing: .34em; text-transform: uppercase; font-size: 12px; color: var(--porta-wood, #A67C52); margin: 0 0 14px; }
+    h1 { font-size: 46px; font-weight: 400; letter-spacing: .04em; margin: 0 0 10px; color: var(--porta-wood, #A67C52); }
+    .pergunta { font-style: italic; font-size: 20px; color: var(--porta-shadow, #6E6256); margin: 0 0 6px; }
+    .frase { font-size: 20px; max-width: 720px; margin: 22px 0 0; color: var(--porta-wood, #A67C52); }
+    h2 { font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--porta-wood, #A67C52); font-weight: 400; margin: 64px 0 20px; border-top: 1px solid rgba(110,98,86,.22); padding-top: 22px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+    .sw { border: 1px solid rgba(110,98,86,.18); border-radius: 8px; overflow: hidden; background:#fff6; }
+    .sw .chip { height: 78px; }
+    .sw .meta { padding: 10px 12px; font-size: 12px; letter-spacing: .04em; }
+    .sw .name { display: block; opacity: .85; }
+    .sw .hex { display: block; font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--porta-wood, #A67C52); margin-top: 3px; }
+    .assinatura { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .assinatura .art { width: 220px; height: 220px; background: var(--porta-interior, #E8D5B5); border: 1px solid rgba(110,98,86,.25); border-radius: 12px; padding: 22px; }
+    .assinatura .art img { width: 100%; height: 100%; display: block; }
+    .assinatura p { max-width: 520px; margin: 0; }
+    .icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px; }
+    .icon { text-align: center; }
+    .icon .cell { background: var(--porta-interior, #E8D5B5); border: 1px solid rgba(110,98,86,.2); border-radius: 10px; padding: 20px; }
+    .icon img { width: 100%; height: 90px; display: block; }
+    .icon .lbl { display: block; margin-top: 10px; font-size: 14px; letter-spacing: .05em; color: var(--porta-shadow, #6E6256); }
+    .icon .sub { display: block; font-size: 11px; letter-spacing: .1em; color: var(--porta-wood, #A67C52); margin-top: 3px; font-style: italic; }
+    .type-sample .big { font-size: 96px; letter-spacing: .04em; color: var(--porta-gold, #C7A96B); margin: 0; line-height: 1; }
+    .type-sample .caps { letter-spacing: .34em; text-transform: uppercase; font-size: 15px; margin: 16px 0 0; color: var(--porta-wood, #A67C52); }
+    .type-sample .note { font-size: 13px; opacity: .7; margin-top: 8px; }
+    pre { background: var(--porta-interior, #E8D5B5); border: 1px solid rgba(110,98,86,.2); border-radius: 10px; padding: 22px; overflow-x: auto; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--porta-shadow, #6E6256); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Vivianne dos Santos · uma porta</p>
+    <h1>Os 7 Sinais de Desencaixe</h1>
+    <p class="pergunta">como continuo a pertencer sem me abandonar?</p>
+    <p class="frase">Os Sinais sao a unica porta que cheira a casa. Falam do lugar para onde regressas quando deixas de te proteger.</p>
+
+    <h2>Paleta · quentes domesticos, a luz da tarde</h2>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F4EFE8; border-bottom:1px solid rgba(110,98,86,.18)"></div><div class="meta"><span class="name">Fundo quente</span><span class="hex">#F4EFE8</span></div></div>
+      <div class="sw"><div class="chip" style="background:#E8D5B5"></div><div class="meta"><span class="name">Luz de interior</span><span class="hex">#E8D5B5</span></div></div>
+      <div class="sw"><div class="chip" style="background:#C7A96B"></div><div class="meta"><span class="name">Dourado VS</span><span class="hex">#C7A96B</span></div></div>
+      <div class="sw"><div class="chip" style="background:#A67C52"></div><div class="meta"><span class="name">Madeira quente</span><span class="hex">#A67C52</span></div></div>
+      <div class="sw"><div class="chip" style="background:#6E6256"></div><div class="meta"><span class="name">Sombra suave</span><span class="hex">#6E6256</span></div></div>
+      <div class="sw"><div class="chip" style="background:#D8B07C"></div><div class="meta"><span class="name">Horizonte</span><span class="hex">#D8B07C</span></div></div>
+      <div class="sw"><div class="chip" style="background:#7D8797"></div><div class="meta"><span class="name">Azul residual</span><span class="hex">#7D8797</span></div></div>
+    </div>
+
+    <h2>Assinatura · o Limiar</h2>
+    <div class="assinatura">
+      <div class="art"><img src="motivos/limiar.svg" alt="o Limiar"></div>
+      <p>Nem dentro, nem fora. Portas, janelas, escadas, varandas, soleiras, corredores, entardecer, amanhecer, luz que entra e luz que sai. Nunca chegada, nunca partida, sempre travessia. E a geografia propria do desencaixe.</p>
+    </div>
+
+    <h2>Os sete sinais</h2>
+    <div class="icons">
+      <div class="icon"><div class="cell"><img src="motivos/mesa.svg" alt="A Mesa"></div><span class="lbl">A Mesa</span><span class="sub">estou aqui mas nao estou em casa</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/mascara.svg" alt="A Mascara"></div><span class="lbl">A Mascara</span><span class="sub">estou a ficar mais pequena para caber</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/horizonte.svg" alt="O Horizonte"></div><span class="lbl">O Horizonte</span><span class="sub">saudades de algo que nunca vivi</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/eremita.svg" alt="O Eremita"></div><span class="lbl">O Eremita</span><span class="sub">ou pertenco ou sou eu</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/corpo.svg" alt="O Corpo"></div><span class="lbl">O Corpo</span><span class="sub">ja nao consigo</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/refugio.svg" alt="O Refugio"></div><span class="lbl">O Refugio</span><span class="sub">talvez seja melhor sozinha</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/casa.svg" alt="A Casa"></div><span class="lbl">A Casa</span><span class="sub">o preco da pertenca</span></div>
+    </div>
+
+    <h2>Tipografia · serifada e o grande 7 dourado</h2>
+    <div class="type-sample">
+      <p class="big">7</p>
+      <p class="caps">Vivianne dos Santos</p>
+      <p class="note">Maturidade, lentidao, literatura, permanencia. Sem tipografias manuscritas, nunca.</p>
+    </div>
+
+    <h2>Modelo de prompt</h2>
+    <pre>Universo: Os 7 Sinais de Desencaixe
+Sinal: &lt;nome&gt;
+Cena: interior habitado ou limiar, luz de fim de tarde a atravessar um vazio
+Assinatura: o Limiar, porta, janela, escada, varanda, soleira, sempre travessia
+Objectos possiveis: &lt;motivo do sinal&gt;, chavena, manta, cadeira, planta, cortina
+Paleta: fundo #F4EFE8, luz #E8D5B5, dourado #C7A96B, madeira #A67C52, azul residual #7D8797
+Proibido: partida, ruptura, malas, comboios, aeroportos, passaros, tempestade, ilustracao literal
+Emocao: transicao serena, nunca nostalgia dramatica
+Registo: fotografia cinematografica de interiores e luz natural</pre>
+  </div>
+</body>
+</html>
