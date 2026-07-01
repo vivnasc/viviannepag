@@ -86,8 +86,64 @@ export const LIVRO = {
 } as const;
 
 // ---------------------------------------------------------------------------
+// A VISÃO — a ESPINHA de TODA a conta da mãe. É "A Grande Transição" (o livro-teoria
+// dela) aplicada a uma VIDA: a missão é mostrar a VANTAGEM de evoluir e elevar a
+// vibração de todos. NÃO são frases para copiar (o modelo NUNCA as cita): é a DIREÇÃO
+// que cada peça serve, o destino para onde toda a travessia sobe.
+// ---------------------------------------------------------------------------
+export const VISAO = {
+  // 1) o reconhecimento visto pela lente certa: o "sou assim" é HISTÓRIA, não essência.
+  espinha:
+    'aquilo a que uma pessoa chama "sou assim" (a vigilância que não desliga, a pressa, ' +
+    'a culpa de descansar, a fome de provar que vale, a fidelidade a dores antigas) é em ' +
+    'boa parte HERANÇA da sobrevivência, não a natureza fixa dela: é a falta e a ameaça a ' +
+    'falar pela boca dela muito depois de o perigo ter passado. Não está avariada, está ' +
+    'atrasada em relação a um mundo que mudou depressa demais.',
+  // 2) a virada: isto não é quem és, é a estação que viveste; há uma passagem a abrir-se.
+  limiar:
+    'isso não é quem ela é, é a estação em que viveu; e está num limiar, um tempo em que ' +
+    'pela primeira vez se pode organizar a vida à volta da criação, do vínculo e do sentido, ' +
+    'e não da defesa. A mesma inteligência que aprendeu a temer com precisão é a que agora ' +
+    'lhe permite reconhecer o medo e perguntar se ele ainda serve.',
+  // 3) a vantagem (onde cai o peso da peça): o que se abre ao atravessar.
+  vantagem:
+    'o que se abre ao atravessar: um corpo que larga a guarda, uma leveza que não se comprou ' +
+    'com esforço, mais presença, mais liberdade para amar sem apertar, para descansar sem ' +
+    'culpa, para receber o que chega fácil, para viver a partir do que se quer e não do que ' +
+    'se teme.',
+  // 4) o coletivo: não se atravessa sozinho (a vibração planetária da missão).
+  coletivo:
+    'não se atravessa sozinho: quando uma pessoa larga o medo antigo, isso alivia quem está ' +
+    'à volta e eleva o todo (somos porque somos, a cura de um espalha alívio); a evolução de ' +
+    'uma é, em silêncio, um bem de todos.',
+} as const;
+
+// O ARCO da travessia (o arco do próprio livro dela: "primeiro olhamos o mundo antigo,
+// depois entramos na fissura, por fim perguntamos o que emerge"). Cada peça é uma
+// MICRO-TRAVESSIA por estes tempos; o PESO cai sempre no que se ABRE (3/4), nunca na ferida.
+export const ARCO = [
+  { id: 'ver', nome: 'Vê o antigo', papel: 'a FACA: o padrão que a pessoa vive agora, o "isto sou eu" que pára o scroll' },
+  { id: 'limiar', nome: 'O limiar', papel: 'a VIRADA: isto não é quem és, é a estação que viveste; há uma passagem' },
+  { id: 'abre', nome: 'O que se abre', papel: 'a VANTAGEM: mais leve, livre, viva, presente, ligada (aqui cai o peso)' },
+  { id: 'juntos', nome: 'Não atravessas sozinha', papel: 'o COLETIVO: quando um desperta, eleva o todo (nem sempre, só quando serve)' },
+] as const;
+
+// PAPÉIS das fontes (livros) na travessia. Os livros NÃO são poços iguais:
+// - 'visao' = A Grande Transição: o DESTINO, a voz de evolução (o limiar e a vantagem).
+// - 'reconhecimento' = a ferida/o padrão onde a pessoa está presa (a FACA, o "isto sou eu").
+// (o `livro` das veias: 'transicao' | 'medo' | 'desencaixe' | 'veus'.)
+export type PapelFonte = 'visao' | 'reconhecimento';
+export const PAPEL_LIVRO: Record<string, PapelFonte> = {
+  transicao: 'visao',
+  medo: 'reconhecimento',
+  desencaixe: 'reconhecimento',
+  veus: 'reconhecimento',
+};
+
+// ---------------------------------------------------------------------------
 // TEMÁTICAS — os ângulos de crescimento/evolução, com a base dela por baixo.
-// (validadas pela Vivianne). NÃO são os 7 véus.
+// (validadas pela Vivianne). NÃO são os 7 véus. Passam a ser as ENTRADAS do "Vê o
+// antigo": cada temática é uma porta diferente para a MESMA travessia.
 // ---------------------------------------------------------------------------
 export type TematicaId =
   | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo'
