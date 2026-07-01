@@ -116,7 +116,8 @@ export default function TesteMundoPage() {
     const uma = async (k: number) => {
       await new Promise((r) => setTimeout(r, k * 1800));
       try {
-        const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo: 'cenas', quantos: 1, seed: baseSeed + k * 37, ancoras: false, tema }) });
+        // a CENA nasce da FRASE real (infinito); tema vai só como reserva.
+        const r = await fetch('/api/admin/crescer/teste-mundo', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ modo: 'cenas', quantos: 1, seed: baseSeed + k * 37, ancoras: false, tema, frase: f }) });
         const d = await r.json();
         if (d.amostras?.length) setTestes((t) => [{ url: d.amostras[0].url, tema, frase: f, ts: Date.now() }, ...t]);
         else { fail++; if (d.detalhe || d.erro) setErro(d.detalhe || d.erro); }
@@ -175,7 +176,7 @@ export default function TesteMundoPage() {
       <section style={{ border: '1px solid #3a5a88', borderRadius: 12, padding: 16, marginBottom: 20, background: '#10192a' }}>
         <h2 style={{ fontSize: 15, margin: '0 0 4px' }}>🪢 Testar com o conteúdo da mãe</h2>
         <p style={{ opacity: 0.65, fontSize: 12, margin: '0 0 10px', lineHeight: 1.4 }}>
-          Não se cria nada novo. Puxa uma frase que <strong>já geraste</strong> no crescer; a <strong>matéria vem do próprio conteúdo</strong>; o mundo só lhe dá a imagem. Vês o post real (imagem + texto da mãe).
+          Não se cria nada novo. Puxa uma frase que <strong>já geraste</strong> no crescer; a <strong>cena da imagem nasce dessa frase</strong> (a IA inventa uma cena do mundo com o mesmo sentimento, infinito, sem lista fixa). Vês o post real (imagem + texto da mãe).
         </p>
         <div style={{ minHeight: 56, borderRadius: 8, border: '1px solid #345', background: '#0b1118', padding: '12px 14px', fontSize: 15, lineHeight: 1.4, color: frase ? '#eee' : '#667' }}>
           {frase || 'carrega «puxar conteúdo da mãe» para trazer uma frase real…'}

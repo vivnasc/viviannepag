@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemGptImage2, guardarImagem, BUCKET } from '@/lib/banda/flux';
-import { cenaAncorada, cenaObjeto } from '@/lib/crescer/mundo-teste';
+import { cenaAncorada, cenaObjeto, cenaDoConteudo, FACETS_CONTEUDO, BASE_MUNDO } from '@/lib/crescer/mundo-teste';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -58,9 +58,12 @@ export async function POST(req: Request) {
   const token = process.env.REPLICATE_API_TOKEN;
   if (!token) return NextResponse.json({ erro: 'sem-replicate' }, { status: 500 });
   const openaiKey = process.env.OPENAI_API_KEY;
-  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas'; qualidade?: 'low' | 'medium' | 'high'; ancoras?: boolean; tema?: string };
+  const anthropicKey = process.env.ANTHROPIC_API_KEY;
+  const body = (await req.json().catch(() => ({}))) as { quantos?: number; seed?: number; modo?: 'objetos' | 'cenas'; qualidade?: 'low' | 'medium' | 'high'; ancoras?: boolean; tema?: string; frase?: string };
   const modo = body.modo === 'objetos' ? 'objetos' : 'cenas';
   const tema = typeof body.tema === 'string' && body.tema ? body.tema : undefined;
+  // frase real da mãe: a cena da imagem NASCE dela (infinito), não de lista fixa.
+  const frase = typeof body.frase === 'string' && body.frase.trim() ? body.frase.trim() : undefined;
   // ancoras !== false → usa a bíblia visual (look fechado). false → gera só por TEXTO,
   // deixa o ADN respirar (as âncoras dominam o gpt-image-2 e prendem tudo ao mesmo look).
   const usarAncoras = body.ancoras !== false;
@@ -78,6 +81,12 @@ export async function POST(req: Request) {
     if (modo === 'objetos') {
       ({ briefing, categoria } = cenaObjeto(seed));
       inputImgs = []; // os objetos fundadores nascem do prompt, sem referência que os puxe para cena
+    } else if (frase && anthropicKey) {
+      // CONTEÚDO DA MÃE: a cena NASCE da frase (infinito). Cada imagem explora uma faceta.
+      const facet = FACETS_CONTEUDO[(((seed % FACETS_CONTEUDO.length) + FACETS_CONTEUDO.length) % FACETS_CONTEUDO.length)];
+      const cena = await comRetry(() => cenaDoConteudo(frase, anthropicKey, facet));
+      briefing = `${cena}. ${BASE_MUNDO}`; categoria = 'conteúdo';
+      inputImgs = usarAncoras ? herdarAtlas(anchors, ['pessoas', 'roupa'], seed) : [];
     } else {
       const cena = cenaAncorada(seed, tema);
       briefing = cena.briefing; categoria = cena.categoria;

@@ -91,7 +91,7 @@ export function cenaMundoTeste(seed = 0): { briefing: string; categoria: string 
 // HUMANA, gente ocupada, objeto impossível EM USO, arquitetura só de fundo, natureza
 // integrada — e a lista dura de negativos. Quando se passou a macro-escala/cidade,
 // fugiu para Veneza/solarpunk. Por isso: só cenas humanas, nunca cidade vista de cima.
-const BASE_MUNDO =
+export const BASE_MUNDO =
   'Documentary photography from an existing civilization. The civilization is real, inhabited and ordinary to its inhabitants. The image must feel OBSERVED rather than designed. ' +
   'THE PURPOSE OF THIS WORLD: it is a glimpse of a humanity that has AWAKENED beyond survival. Its feeling is UBUNTU — "I am because we are": interdependence, mutual care, people holding and helping one another, responsibility to each other and to the generations still to come; cooperation, creation and shared meaning instead of fear and scarcity. The healing of one person ripples to all. ' +
   'Show this ONLY through REAL, ORDINARY acts of care and cooperation between people — NEVER as a slogan, a symbol, a glow, a halo or a spiritual pose. ' +
@@ -195,6 +195,37 @@ export function cenaAncorada(seed = 0, tema?: string): { briefing: string; categ
   const v = VARIACOES[idx(seed, VARIACOES.length)];
   return { briefing: `${c.cena}. ${v} ${BASE_MUNDO}`, categoria: c.categoria, atlas: c.atlas, tema: c.tema };
 }
+
+// CENA A PARTIR DO CONTEÚDO (infinito, não uma lista fixa): a IA lê a FRASE real da
+// mãe e inventa UMA cena concreta e comum deste mundo que carrega o mesmo SENTIMENTO,
+// sem ilustrar as palavras. `facet` faz variar o ângulo (para 4 imagens ≠ da mesma frase).
+// É o mesmo princípio do gerador dela (fundoPrompt), mas no ADN do novo mundo.
+export async function cenaDoConteudo(frase: string, apiKey: string, facet = ''): Promise<string> {
+  const sys =
+    'You are the visual director of a fictional world. ' + BASE_MUNDO + '\n\n' +
+    'TASK: read a short piece of writing (in Portuguese) and describe ONE single concrete, ordinary, everyday SCENE inside THIS world that carries the SAME FEELING as the writing, WITHOUT literally illustrating its words, symbols or metaphors. Real people doing real ordinary things; the meaning is FELT, never spelled out, never a symbol. ' +
+    (facet ? `Frame this particular scene as: ${facet}. ` : '') +
+    'Reply with ONE vivid English sentence describing ONLY the scene (who, doing what, where) — no preamble, no quotes, no explanation.';
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 220, system: sys, messages: [{ role: 'user', content: `The writing:\n"${frase}"\n\nThe scene:` }] }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const txt = ((await res.json())?.content?.[0]?.text ?? '').trim().replace(/^["']|["']$/g, '');
+  if (!txt) throw new Error('sem cena');
+  return txt;
+}
+
+// ângulos para variar as várias imagens da MESMA frase (a IA explora facetas diferentes).
+export const FACETS_CONTEUDO = [
+  'a wide, communal moment with many people around',
+  'an intimate close moment between two or three people',
+  'a solitary quiet moment of one person, the world still moving nearby',
+  'an ordinary moment of work, making or learning',
+  'a moment of care or help passing between people',
+  'a moment out in the wider world of the civilization (a street, water, nature)',
+];
 
 // ── MODO OBJETOS · o "IKEA do mundo" (a cultura material PRIMEIRO) ──────────────
 // A descoberta da Vivianne: o mundo não se define pela arquitetura (que colapsa para
