@@ -1,0 +1,5 @@
+# imagens do livro baixadas no CI (não versionar os binários)
+*.jpg
+*.jpeg
+*.png
+!.gitkeep

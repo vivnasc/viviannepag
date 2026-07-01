@@ -1,0 +1,419 @@
+// =============================================================================
+// A Grande Transição · template tipográfico (Typst)
+// Conteúdo de livro/livro.json; aqui só a FORMA. Conceito (Vivianne):
+// um livro delicado, moderno, imponente e valioso. Geometria sagrada (alinhado,
+// simétrico). O ARCO pertence só à voz da carta de 2150 (prólogo/interlúdios/
+// epílogo). A PARTE abre COM o seu primeiro capítulo, com a IMAGEM a sangrar na
+// vertical pela margem. Cada CAPÍTULO RESPIRA: tem quebras de movimento (espaço
+// branco + ornamento discreto) nas viragens do argumento. Uma só CAIXA — a Ideia
+// central; a Pergunta fica aberta (olho + itálico); a dica é uma nota discreta.
+//   typst compile build/livro-transicao.typ A-Grande-Transicao.pdf \
+//     --font-path build/fonts/static --root .
+// =============================================================================
+
+#import "vendor/droplet/droplet.typ": dropcap
+
+// idioma: `typst compile --input lang=en ...` (default pt). Escolhe o conteúdo
+// e as strings fixas (mapa, colofão, sistema) na língua certa.
+#let lang = sys.inputs.at("lang", default: "pt")
+#let livro = json(if lang == "en" { "/livro/livro_en.json" } else { "/livro/livro.json" })
+
+// ---- paleta ----
+#let PAPER = rgb("#f4f1ea")
+#let INK = rgb("#2c271f")
+#let TITLEINK = rgb("#242019")
+#let SOFT = rgb("#6b6151")
+#let GOLD = rgb("#9c7a3c")
+#let GOLDSOFT = rgb("#87693a")
+#let BROWN = rgb("#6d5836")
+#let FAINT = rgb("#9a8f7d")
+
+#let serif = "Fraunces"
+#let display = "Fraunces Display"
+#let sans = "Outfit"
+
+// ---- linguagem MODERNA / FUTURISTA (sem olho, caixa, arco, fleurons) ----
+// Motivo recorrente: o ANEL (consciência, totalidade, o anel de luz da Parte IV,
+// o sinal de 2150). Linhas finíssimas, brilho suave, muito espaço.
+#let hairline(w: 30mm, c: GOLD, t: 0.4pt) = line(length: w, stroke: t + c)
+#let ring(d: 6mm, c: GOLD, t: 0.5pt) = circle(radius: d / 2, stroke: t + c)
+// brilho suave (a luz que emana da matéria, do manifesto)
+#let glow(d: 100mm, c: GOLD, op: 86%) = circle(radius: d / 2, stroke: none,
+  fill: gradient.radial(c.transparentize(op), c.transparentize(100%)))
+// ---- SEPARADORES da Vivianne (SVGs próprios, vendor/marca/*.svg) ----
+// fissura · emergência · carta de 2150 · transição (sobrevivência→fissura→emergência)
+#let sep(nome, w) = box(width: w, image("vendor/marca/" + nome + ".svg", width: w))
+#let divisoria(w: 56mm, c: GOLD) = sep("emergencia", w)
+#let mini-rule(w: 22mm, c: GOLD) = line(length: w, stroke: 0.4pt + c)
+#let rule-orn(w: 56mm, c: GOLD) = divisoria(w: w, c: c)
+// quebra de movimento: a FISSURA (a quebra na própria página). sticky (nunca órfã).
+#let movbreak() = block(above: 12mm, below: 12mm, width: 100%, breakable: false, sticky: true,
+  align(center, sep("fissura", 62mm)))
+// destaque (pull-quote): frase forte do capítulo, entre filetes finos
+#let destaque(frase) = block(above: 13mm, below: 13mm, width: 100%, breakable: false, sticky: true)[
+  #set align(center)
+  #set par(justify: false, first-line-indent: 0pt, leading: 1.0em)
+  #hairline(w: 12mm)
+  #v(6mm)
+  #block(width: 84%, text(font: display, style: "italic", fill: GOLDSOFT, size: 16pt, weight: 300)[#frase])
+  #v(6mm)
+  #hairline(w: 12mm)
+]
+// ---- SISTEMA SEMÂNTICO (livro/sistema.json) ----
+// cada TIPO de conteúdo tem rótulo + cor + moldura; o template gera tudo daqui.
+// As molduras "caixa"/"caixa-arquivo" usam os SVGs da Vivianne (vendor/marca/).
+#let sistema = json(if lang == "en" { "/livro/sistema_en.json" } else { "/livro/sistema.json" })
+
+// strings fixas do template (mapa, colofão) por idioma
+#let T = if lang == "en" {(
+  cartografia: "CARTOGRAPHY OF CONSCIOUSNESS",
+  mapa: "Map of the Transition",
+  caminho: "The path this book travels: from survival, through the fissure, to emergence.",
+  sobrev: "Survival", fissura: "Fissure", emerg: "Emergence",
+  sobrev_s: "living not to die", fissura_s: "loss and possibility", emerg_s: "to create and to mean",
+  mecanismos: "Mechanisms", experiencia: "Experience", emergencias: "Emergences",
+  col1: ("fear", "scarcity", "control", "defensive identity", "striving"),
+  col2: ("crisis of meaning", "mourning the old", "displacement", "searching", "the question"),
+  col3: ("creation", "cooperation", "consciousness", "fluid identity", "meaning"),
+  colofao: "The harshness with which we treat life is not who we are, it is the season we live in.",
+)} else {(
+  cartografia: "CARTOGRAFIA DA CONSCIÊNCIA",
+  mapa: "Mapa da Transição",
+  caminho: "O caminho que este livro percorre: da sobrevivência, pela fissura, à emergência.",
+  sobrev: "Sobrevivência", fissura: "Fissura", emerg: "Emergência",
+  sobrev_s: "viver para não morrer", fissura_s: "perda e possibilidade", emerg_s: "criar e significar",
+  mecanismos: "Mecanismos", experiencia: "Experiência", emergencias: "Emergências",
+  col1: ("medo", "escassez", "controlo", "identidade defensiva", "esforço"),
+  col2: ("crise de sentido", "luto do antigo", "deslocamento", "busca", "pergunta"),
+  col3: ("criação", "cooperação", "consciência", "identidade fluida", "significado"),
+  colofao: "A dureza com que tratamos a vida não é quem somos, é a estação em que vivemos.",
+)}
+
+// MANIFESTO das imagens (capa + vinhetas das Partes). O CI baixa-as do bucket e
+// preenche este JSON (chave -> ficheiro). Em dev fica vazio -> placeholders.
+#let imgman = json("/build/imagens/manifest.json")
+#let tem-img(k) = k in imgman
+#let caminho-img(k) = "/build/imagens/" + imgman.at(k)
+
+// vinheta vertical a sangrar: a IMAGEM da Parte se existir; senão placeholder.
+#let vinheta-vertical(kicker, chave: none) = {
+  if chave != none and tem-img(chave) {
+    box(width: 34mm, height: 210mm, clip: true,
+      image(caminho-img(chave), width: 34mm, height: 210mm, fit: "cover"))
+  } else {
+    box(width: 34mm, height: 210mm,
+      fill: gradient.linear(rgb("#c9bda4"), rgb("#b1a589"), rgb("#9c9078"), angle: 118deg))[
+      #place(center + horizon, rotate(-90deg, reflow: false,
+        box(width: 180mm, align(center, text(font: sans, fill: rgb("#efe7d6"), size: 6.6pt, tracking: 0.34em)[IMAGEM · #upper(kicker)]))))
+    ]
+  }
+}
+
+// ---- página ----
+#set page(
+  width: 148mm, height: 210mm,
+  margin: (top: 20mm, bottom: 18mm, inside: 18mm, outside: 16mm),
+  fill: PAPER,
+  header: context {
+    let cur = here().page()
+    let past = query(<sect>).filter(m => m.location().page() <= cur)
+    if past.len() > 0 and past.last().location().page() != cur and past.last().value != "" {
+      set text(font: sans, size: 6.4pt, fill: FAINT, weight: 400)
+      align(center, upper(text(tracking: 0.3em, past.last().value)))
+    }
+  },
+  footer: context {
+    set text(font: sans, size: 7.6pt, fill: SOFT)
+    align(center, counter(page).display())
+  },
+)
+#set text(font: serif, size: 10.5pt, fill: INK, weight: 300, lang: "pt", hyphenate: true)
+#set par(justify: true, leading: 0.84em, spacing: 1.05em, first-line-indent: (amount: 5mm, all: false))
+
+#let setsect(name) = [#metadata(name)<sect>]
+#let footer-num = context { set text(font: sans, size: 7.6pt, fill: SOFT); align(center, counter(page).display()) }
+
+#let fmt(s) = {
+  let acc = []
+  for (i, seg) in s.split("**").enumerate() {
+    let inner = []
+    for (j, t) in seg.split("*").enumerate() {
+      if calc.even(j) { inner += [#t] } else { inner += emph[#t] }
+    }
+    if calc.even(i) { acc += inner } else { acc += strong(inner) }
+  }
+  acc
+}
+
+// normaliza o campo destaque (string ou lista) numa lista de pull-quotes
+#let norm-dest(u) = {
+  if "destaque" not in u { return () }
+  let d = u.destaque
+  if type(d) == array { d } else { (d,) }
+}
+
+// corpo que RESPIRA: capitular opcional + quebras de movimento nas viragens.
+// Em cada viragem entra um DESTAQUE (pull-quote), enquanto houver; as restantes
+// viragens ficam só com o losango. Assim os destaques aparecem VÁRIAS vezes.
+#let corpo-paras(paras, dropcap-on: true, destaques: ()) = {
+  set par(first-line-indent: (amount: 5mm, all: true), spacing: 1.32em)
+  let n = paras.len()
+  let breaks = ()
+  let k = 6
+  while k <= n - 3 { breaks.push(k); k += 6 }
+  // garante viragens suficientes para os destaques, mesmo em capítulos curtos
+  while breaks.len() < destaques.len() and breaks.len() + 1 <= n - 2 {
+    let pos = calc.floor(n * (breaks.len() + 1) / (destaques.len() + 1))
+    if not breaks.contains(pos) and pos >= 2 { breaks.push(pos) } else { break }
+  }
+  breaks = breaks.sorted()
+  let di = 0
+  for (i, p) in paras.enumerate() {
+    if breaks.contains(i) {
+      if di < destaques.len() { destaque(destaques.at(di)); di += 1 }
+      else { movbreak() }
+    }
+    if i == 0 and dropcap-on {
+      set par(first-line-indent: 0pt)
+      [#dropcap(height: 3, gap: 2.6mm, justify: true, font: display, fill: TITLEINK, weight: 400)[#fmt(p)]#parbreak()]
+    } else [#fmt(p)#parbreak()]
+  }
+}
+
+// ---- voz (carta de 2150 / interlúdios): a CARTA vai DENTRO do arco ----
+// O arco delicado emoldura a coluna da carta na 1.ª página; o texto desce por
+// dentro dele. Nas páginas seguintes a coluna continua, sem repetir o arco.
+// a carta de 2150: um SINAL (anéis concêntricos) com um brilho suave; sem arco.
+#let abre-voz(u, tam: 28pt) = {
+  setsect(u.kicker)
+  pagebreak()
+  set align(center)
+  v(56mm)
+  {
+    set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+    set text(hyphenate: false)
+    text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.36em)[#upper(u.kicker)]
+    v(5mm)
+    text(font: display, fill: TITLEINK, size: tam, weight: 300)[#u.titulo]
+    if "epigrafe" in u { v(7mm); block(width: 72%, text(font: serif, style: "italic", fill: BROWN, size: 11pt)[#u.epigrafe]) }
+  }
+  v(9mm)
+  sep("carta", 64mm)
+  v(10mm)
+  block(width: 92mm)[
+    #set align(left)
+    #set par(justify: false, first-line-indent: 0pt, leading: 0.92em, spacing: 1.5em)
+    #set text(size: 10.5pt, fill: INK)
+    #for p in u.texto [#fmt(p)#parbreak()]
+  ]
+}
+
+// ---- PARTE: página SÓ dela, com a imagem vertical a sangrar pela margem ----
+// A Parte fica sozinha; o título a meio da página. O capítulo abre na seguinte.
+#let abre-parte(partU, n: 0) = {
+  setsect(partU.titulo)
+  page(margin: (left: 50mm, right: 16mm, top: 20mm, bottom: 18mm), header: none, footer: footer-num)[
+    #place(top + left, dx: -50mm, dy: -20mm, vinheta-vertical(partU.kicker, chave: "parte-" + str(n)))
+    #set align(left)
+    #set text(hyphenate: false)
+    #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+    #v(1fr)
+    #text(font: sans, fill: GOLDSOFT, size: 9pt, weight: 500, tracking: 0.36em)[#upper(partU.kicker)]
+    #v(6mm)
+    #text(font: display, fill: TITLEINK, size: 27pt, weight: 300)[#upper(partU.titulo)]
+    #v(8mm)
+    #hairline(w: 28mm)
+    #v(1.45fr)
+  ]
+}
+
+// ---- abertura de capítulo: UNIFORME para todos (intro/capítulos/epílogo) ----
+// Começa bem abaixo do topo (ar por cima), etiqueta + título + epígrafe, capitular.
+// sect: nome para o cabeçalho corrente (Introdução/Epílogo); none => herda a Parte.
+#let abre-cap(u, sect: none) = {
+  pagebreak()
+  if sect != none { setsect(sect) }
+  v(60mm) // RESPIRO: o título começa bem abaixo do topo (a meio da mancha)
+  block(below: 11mm)[
+    #set align(left)
+    #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+    #set text(hyphenate: false)
+    // etiqueta pequena, em sans + ouro (hierarquia clara face ao título)
+    #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.36em)[#upper(u.kicker)]
+    #v(5mm)
+    // título grande, em display (claramente diferente da etiqueta)
+    #text(font: display, fill: TITLEINK, size: 24pt, weight: 300)[#u.titulo]
+    #if "epigrafe" in u {
+      v(6mm)
+      mini-rule(w: 16mm)
+      v(3.5mm)
+      block(width: 78%, text(font: serif, style: "italic", fill: BROWN, size: 10.5pt)[#u.epigrafe])
+    }
+  ]
+  corpo-paras(u.texto, dropcap-on: true, destaques: norm-dest(u))
+}
+
+// SISTEMA SEMÂNTICO — sistema/icone definidos no topo; aqui só os blocos.
+// um BLOCO de qualquer tipo do sistema (hipótese, pergunta, dica, arquivo…)
+#let bloco(chave, corpo, italico: false) = {
+  let s = sistema.at(chave)
+  let c = rgb(s.cor)
+  let cabecalho = grid(columns: (auto, auto), column-gutter: 3.5mm, align: (horizon, horizon),
+    box(width: 7mm, line(length: 7mm, stroke: 0.8pt + c)),
+    text(font: sans, fill: c, size: 7.6pt, weight: 500, tracking: 0.3em)[#upper(s.rotulo)])
+  let corpo-txt = if italico {
+    text(font: serif, style: "italic", fill: BROWN, size: 13pt)[#fmt(corpo)]
+  } else { text(fill: TITLEINK, size: 10.5pt)[#fmt(corpo)] }
+  let no = (nome, h) => box(height: h, image("vendor/marca/" + nome + ".svg", height: h))
+  block(breakable: false, width: 100%, above: 11mm, below: 3mm)[
+    #set par(justify: false, first-line-indent: 0pt, leading: 0.9em, spacing: 1.0em)
+    #if s.moldura == "caixa" {
+      // Caixa Hipótese: rectângulo de cantos suaves + nó «+» a cortar a moldura
+      block(width: 100%, radius: 5mm, inset: (x: 12mm, top: 11mm, bottom: 11mm),
+        stroke: 0.6pt + c)[
+        #place(top + center, dy: -13.5mm, no("hipotese-no", 5mm))
+        #place(bottom + center, dy: 13.5mm, no("hipotese-no", 5mm))
+        #cabecalho #v(5mm) #corpo-txt]
+    } else if s.moldura == "caixa-arquivo" {
+      // Caixa Arquivo 2150: rectângulo recto + alvo a cortar a moldura de cima
+      block(width: 100%, inset: (x: 12mm, top: 14mm, bottom: 11mm), stroke: 0.6pt + c)[
+        #place(top + center, dy: -18mm, no("arquivo-no", 7.5mm))
+        #cabecalho #v(5mm) #corpo-txt]
+    } else if s.moldura == "olho" {
+      // a PERGUNTA: o olho de 2150 que fica a olhar para ela, ao centro
+      set align(center)
+      box(width: 30mm, image("vendor/marca/olho.svg", width: 30mm))
+      v(7mm)
+      text(font: sans, fill: c, size: 7.6pt, weight: 500, tracking: 0.3em)[#upper(s.rotulo)]
+      v(4mm)
+      block(width: 86%, corpo-txt)
+    } else if s.moldura == "nota" {
+      block(width: 100%, inset: (left: 6mm), stroke: (left: 0.6pt + c.transparentize(20%)))[
+        #cabecalho #v(3mm) #corpo-txt]
+    } else { // aberta
+      cabecalho; v(3mm); block(width: 88%, corpo-txt)
+    }
+  ]
+}
+
+// fecho do capítulo: FLUI a seguir ao texto e preenche o espaço que sobra (sem
+// desperdiçar uma página). Hipótese + dica + Pergunta seguem juntas; se não
+// couberem, descem inteiras para a página seguinte.
+#let aparato(u) = {
+  if ("ideia" in u) or ("dica" in u) or ("pergunta" in u) {
+    block(breakable: false, above: 16mm)[
+      #if "ideia" in u { bloco("hipotese", u.ideia) }
+      #if "dica" in u { bloco("dica", u.dica) }
+      #if "pergunta" in u { bloco("pergunta", u.pergunta, italico: true) }
+    ]
+  }
+}
+
+// ---- mapa (diagrama alinhado: colunas sob os círculos) ----
+#let mapa() = {
+  setsect("Cartografia da consciência")
+  page(header: none, footer: footer-num, margin: (x: 14mm, y: 16mm))[
+    #set align(center)
+    #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+    #set text(hyphenate: false)
+    #let W = 120mm
+    #let c1 = 24mm
+    #let c2 = 60mm
+    #let c3 = 96mm
+    #let R = 22mm
+    #v(4mm)
+    #text(font: sans, fill: GOLDSOFT, size: 8pt, weight: 500, tracking: 0.32em)[#T.cartografia]
+    #v(3mm)
+    #text(font: display, fill: TITLEINK, size: 22pt, weight: 300)[#T.mapa]
+    #v(4mm)
+    #block(width: 92mm, text(font: serif, style: "italic", fill: SOFT, size: 10pt)[
+      #T.caminho
+    ])
+    #v(7mm)
+    #sep("transicao", 70mm)
+    #v(10mm)
+    #box(width: W, height: 2 * R)[
+      #let circ(cx, fill) = place(dx: cx - R, dy: 0mm, circle(radius: R, fill: fill, stroke: 0.5pt + GOLD.transparentize(45%)))
+      #let lab(cx, t, sub, tc, sc) = place(dx: cx - 18mm, dy: 0mm, box(width: 36mm, height: 2 * R, align(center + horizon, stack(spacing: 1.6mm,
+        text(font: sans, size: 7pt, weight: 500, tracking: 0.18em, fill: tc)[#upper(t)],
+        text(style: "italic", size: 7.5pt, fill: sc)[#sub]))))
+      #circ(c1, rgb(48, 40, 28).transparentize(42%))
+      #circ(c2, GOLD.transparentize(93%))
+      #circ(c3, rgb(135, 120, 86).transparentize(90%))
+      #lab(c1, T.sobrev, T.sobrev_s, rgb("#f6f2ea"), rgb("#e7dfce"))
+      #lab(c2, T.fissura, T.fissura_s, GOLDSOFT, SOFT)
+      #lab(c3, T.emerg, T.emerg_s, GOLDSOFT, SOFT)
+    ]
+    #v(9mm)
+    #line(length: W, stroke: 0.5pt + GOLD.transparentize(45%))
+    #v(7mm)
+    #let col(cx, h, items) = place(dx: cx - 18mm, box(width: 36mm, align(center, stack(spacing: 2.2mm,
+      text(font: sans, size: 7.3pt, weight: 500, tracking: 0.16em, fill: GOLDSOFT)[#upper(h)],
+      line(length: 30mm, stroke: 0.4pt + GOLD.transparentize(55%)),
+      block(above: 1mm, { set text(size: 8.2pt, fill: SOFT); set par(leading: 0.85em); items.join(linebreak()) })))))
+    #box(width: W, height: 38mm)[
+      #col(c1, T.mecanismos, T.col1)
+      #col(c2, T.experiencia, T.col2)
+      #col(c3, T.emergencias, T.col3)
+    ]
+  ]
+}
+
+// ============================ capa (imagem, se existir) ======================
+// em EN usa a capa inglesa (capa-en) se existir; senão a capa PT.
+#let capa-chave = if lang == "en" and tem-img("capa-en") { "capa-en" } else { "capa" }
+#if tem-img(capa-chave) {
+  set page(margin: 0pt, header: none, footer: none)
+  image(caminho-img(capa-chave), width: 100%, height: 100%, fit: "cover")
+}
+
+// ============================ rosto ==========================================
+#page(header: none, footer: none)[
+  #set align(center + horizon)
+  #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+  #set text(hyphenate: false)
+  #text(font: sans, fill: GOLDSOFT, size: 8.5pt, weight: 500, tracking: 0.32em)[#upper(livro.selo)]
+  #v(7mm); #rule-orn(); #v(13mm)
+  #text(font: display, fill: TITLEINK, size: 40pt, weight: 300)[#livro.titulo]
+  #v(8mm)
+  #text(font: serif, style: "italic", fill: SOFT, size: 12.5pt)[#livro.subtitulo]
+  #v(13mm); #rule-orn(); #v(8mm)
+  #text(font: sans, fill: INK, size: 10pt, tracking: 0.32em)[#upper(livro.autora)]
+]
+
+// ============================ corpo do livro =================================
+#let mapa-posta = false
+#let parteN = 0
+#for u in livro.unidades {
+  if u.tipo == "parte" {
+    if not mapa-posta { mapa(); mapa-posta = true }
+    parteN += 1
+    abre-parte(u, n: parteN)     // Parte SOZINHA na sua página, com a imagem
+  } else if u.tipo == "prologo" {
+    abre-voz(u)                  // a carta de 2150 — único sítio com o sinal
+    aparato(u)
+  } else if u.tipo == "introducao" {
+    abre-cap(u, sect: "Introdução")  // abertura UNIFORME (como os capítulos)
+    aparato(u)
+  } else if u.tipo == "capitulo" {
+    abre-cap(u)                  // abertura UNIFORME, na página a seguir à Parte
+    aparato(u)
+  } else if u.tipo == "interludio" {
+    abre-voz(u, tam: 20pt)       // carta de 2150
+  } else if u.tipo == "epilogo" {
+    abre-cap(u, sect: u.kicker)
+    aparato(u)
+  }
+}
+
+// ============================ colofão ========================================
+#page(header: none, footer: none)[
+  #set align(center + horizon)
+  #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
+  #rule-orn(); #v(10mm)
+  #block(width: 76%, text(font: serif, style: "italic", fill: TITLEINK, size: 14.5pt, weight: 300)[
+    #T.colofao
+  ])
+  #v(10mm)
+  #text(font: sans, fill: FAINT, size: 7.4pt, tracking: 0.26em)[#upper[© 2026 #livro.autora · #livro.selo]]
+]

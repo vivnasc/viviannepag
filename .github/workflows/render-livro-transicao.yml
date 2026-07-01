@@ -1,0 +1,65 @@
+name: Render livro A Grande Transição
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/livro-transicao/.disparar']
+
+permissions:
+  contents: read
+
+env:
+  TYPST_VERSION: v0.13.1
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar Typst
+        run: |
+          curl -fsSL "https://github.com/typst/typst/releases/download/${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" -o typst.tar.xz
+          tar -xf typst.tar.xz
+          echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+
+      - name: Instalar pacotes npm
+        run: npm install --no-save @supabase/supabase-js
+
+      - name: Baixar imagens do bucket (capa + vinhetas das Partes)
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        run: node scripts/livro-transicao/baixar-imagens.mjs
+
+      - name: Gerar livro.json a partir do manuscrito
+        run: node scripts/livro-transicao/gerar-json.mjs
+
+      - name: Compilar o PDF PT (Typst)
+        run: |
+          mkdir -p livro-transicao
+          typst compile --font-path build/fonts/static --root . \
+            build/livro-transicao.typ livro-transicao/A-GRANDE-TRANSICAO.pdf
+
+      - name: Compilar o PDF EN (Typst, se houver tradução)
+        run: |
+          if [ -f livro/livro_en.json ]; then
+            typst compile --input lang=en --font-path build/fonts/static --root . \
+              build/livro-transicao.typ livro-transicao/A-GRANDE-TRANSICAO-EN.pdf
+          else
+            echo "sem livro_en.json — PDF inglês não gerado"
+          fi
+
+      - name: Publicar o PDF no bucket
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.VIVIANNEPAG_SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/livro-transicao/upload-supabase.js

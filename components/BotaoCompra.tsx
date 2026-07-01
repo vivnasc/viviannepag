@@ -17,6 +17,7 @@ export function BotaoCompra({
   preco,
   checkoutUrl,
   pack = false,
+  moeda = 'EUR',
 }: {
   slug: string;
   locale: string;
@@ -24,6 +25,7 @@ export function BotaoCompra({
   preco: string;
   checkoutUrl?: string | null;
   pack?: boolean;
+  moeda?: 'EUR' | 'USD';
 }) {
   const [email, setEmail] = useState('');
   const [licenca, setLicenca] = useState<string | null>(null);
@@ -220,7 +222,7 @@ export function BotaoCompra({
           <PayPalScriptProvider
             options={{
               clientId: clientId!,
-              currency: 'EUR',
+              currency: moeda,
               intent: 'capture',
             }}
           >
@@ -240,7 +242,7 @@ export function BotaoCompra({
                     {
                       description: titulo,
                       amount: {
-                      currency_code: 'EUR',
+                      currency_code: moeda,
                       value: precoNum.toFixed(2),
                     },
                     custom_id: slug,
@@ -266,7 +268,7 @@ export function BotaoCompra({
           />
           </PayPalScriptProvider>
           <a
-            href={`https://www.paypal.com/paypalme/viviannedossantos/${precoNum}EUR`}
+            href={`https://www.paypal.com/paypalme/viviannedossantos/${precoNum}${moeda}`}
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-4 text-center text-ocre/60 text-[0.75rem] hover:text-ambar transition-colors no-underline"

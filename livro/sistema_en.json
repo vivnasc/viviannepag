@@ -1,0 +1,27 @@
+{
+  "hipotese": {
+    "rotulo": "Hypothesis",
+    "cor": "#B08A4A",
+    "moldura": "caixa"
+  },
+  "pergunta": {
+    "rotulo": "A question to keep",
+    "cor": "#B08A4A",
+    "moldura": "olho"
+  },
+  "dica": {
+    "rotulo": "The hint",
+    "cor": "#87693a",
+    "moldura": "nota"
+  },
+  "arquivo": {
+    "rotulo": "Historical archive · 2150",
+    "cor": "#B08A4A",
+    "moldura": "caixa-arquivo"
+  },
+  "emergencia": {
+    "rotulo": "Sign of emergence",
+    "cor": "#B08A4A",
+    "moldura": "aberta"
+  }
+}
