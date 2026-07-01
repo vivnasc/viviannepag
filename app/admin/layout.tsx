@@ -51,6 +51,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
       { href: '/admin', label: 'escritos' },
       { href: '/admin/editora', label: 'editora' },
       { href: '/admin/livro-transicao', label: 'a grande transição · livro' },
+      { href: '/admin/livro-medo', label: 'as sete faces do medo · livro' },
       { href: '/admin/produtos', label: 'produtos' },
       { href: '/admin/compras', label: 'compras' },
       { href: '/admin/estudio', label: 'estúdio' },
