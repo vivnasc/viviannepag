@@ -42,6 +42,10 @@ export async function gerarPecaCrescer(
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
   const voz = getVoz(vozId) ?? getVoz('direta')!;
   const semImagem = !visual.promptBase;
+  // CARROSSEL LONGO vs REEL CURTO: só o ensaio e o "por detrás" são carrosséis que se
+  // desenvolvem (8-13 telas). TUDO o resto é REEL — tem de ser CURTO (a faca + poucas
+  // batidas), nunca um parágrafo. Um reel diz UMA coisa.
+  const carrosselLongo = formato.id === 'ensaio' || formato.id === 'pordetras';
   // CENA segundo a CONSTITUIÇÃO VISUAL (worldbuilding/CONSTITUICAO.md): etnografia de
   // uma civilização que nunca existiu — categoria/escala/função/pergunta por seed,
   // respeitando as proporções (Axioma 6) e o equivalente funcional. Substitui os
@@ -82,9 +86,12 @@ A VOZ DE HOJE (${voz.label}): ${voz.instrucao}
 
 REGRAS DE VOZ (duras):
 - DIGNIDADE (inviolável): a peça abre SEMPRE com uma FACA (a 1.ª linha pára o scroll), nunca um arranque morno ou descritivo. O texto é forte e claro do princípio ao fim, nunca difuso, nunca encheção para ocupar slides. Se não houver uma faca e uma verdade que valham, escreve menos, nunca enches.
+${carrosselLongo
+  ? '- CARROSSEL: aqui SIM podes desenvolver ao longo das telas, cada tela uma respiração; mas cada tela continua curta e clara.'
+  : '- REEL CURTO (regra dura, o mais importante): isto é um REEL, NÃO um texto. UMA ideia só, do princípio ao fim. No TOTAL, no MÁXIMO 4 batidas muito curtas (a faca + até 3), cada uma uma frase curtíssima que cabe grande no ecrã e se lê num fôlego. PROIBIDO parágrafo, PROIBIDO 5+ frases, PROIBIDO desenvolver um raciocínio em vários passos (sintoma→causa→exemplo→metáfora é carrossel, não reel). Se tens mais a dizer, corta: escolhe A frase que fica. Um reel não explica, atinge.'}
 - NÃO-GENÉRICO (teste obrigatório antes de devolver): lê a frase e pergunta "isto poderia estar em qualquer página de autoajuda, sem o conhecimento dela?". Se sim, FALHOU: reescreve com a especificidade e a profundidade do saber (o mecanismo concreto, a camada por baixo, a verdade exata que a maioria não vê). A peça tem de ser inconfundivelmente DESTE mundo, não um truísmo bonito.
 - CLARO, NUNCA HERMÉTICO (teste obrigatório): lê a frase como se fosses uma pessoa qualquer no Instagram. Se precisas de a DECIFRAR, ou usa palavras-enigma ("soleira", "fluidez", "limiar", "frincha") ou metáfora obscura, FALHOU: reescreve em linguagem de vida real, simples e direta, que se entende à primeira. A profundidade está na VERDADE, não em soar misterioso.
-- PROIBIDA A METÁFORA QUE PRECISA DE EXPLICAÇÃO (regra dura): nada de imagens de jardim/natureza a fingir profundidade (cortar ramos, ir à raiz, podar, semear, colher, regar, florescer e afins) nem qualquer metáfora que a pessoa tenha de traduzir para perceber. Se a frase usa uma imagem, essa imagem tem de ser transparente à PRIMEIRA leitura; se não for, NOMEIA a coisa concreta em vez da metáfora (o comportamento real, o mecanismo real, na linguagem da vida). Teste: se alguém pode perguntar "isso quer dizer o quê?", reescreve.
+- PROIBIDA A METÁFORA QUE PRECISA DE EXPLICAÇÃO (regra dura): nada de imagens de jardim/natureza a fingir profundidade (cortar ramos, ir à raiz, podar, semear, colher, regar, florescer e afins), NEM de canalização/hidráulica (tapar uma fuga na parede, a água que arranja outro sítio por onde sair, o cano, o esgoto, a torneira), NEM sintoma-versus-causa como imagem "médica" que se explica; nem qualquer metáfora que a pessoa tenha de traduzir para perceber. Se a frase usa uma imagem, essa imagem tem de ser transparente à PRIMEIRA leitura; se não for, NOMEIA a coisa concreta em vez da metáfora (o comportamento real, o mecanismo real, na linguagem da vida). Teste: se alguém pode perguntar "isso quer dizer o quê?", reescreve.
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
 - SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
 - DIRETA: nomeia a cena concreta que a pessoa vive. A pessoa tem de pensar "isto sou eu". Nada de enigmas a decifrar, nada de títulos-conceito herméticos, nada de metáfora obscura.
