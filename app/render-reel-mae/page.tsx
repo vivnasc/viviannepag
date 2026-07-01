@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { receitaDe, motivoSVG, TOK } from '@/lib/crescer/assinatura-reel';
+import { receitaDe, motivoSVG, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
 
 // PAGINA DE RENDER do reel da mae (assinatura VDS), DIRIGIDA POR PROGRESSO. O recorder
 // (scripts/render-reel-mae.js) chama window.__setKProg(p) por frame para gravar o
@@ -69,7 +69,10 @@ export default function RenderReelMae() {
   useEffect(() => { if (params) document.body.dataset.slideReady = 'true'; }, [params]);
 
   if (!params || !rec) return null;
-  const N = Math.max(1, params.linhas.length);
+  // SEGMENTOS (entram por tempos, sincronia): parte a frase em pedacos legiveis.
+  const segsRaw = params.linhas.flatMap(segmentar).slice(0, 12);
+  const linhasV = segsRaw.length ? segsRaw : params.linhas;
+  const N = Math.max(1, linhasV.length);
   const clamp = (x: number) => Math.max(0, Math.min(1, x));
   // revelacao das linhas em sequencia ao longo do progresso
   const ruleW = clamp((p - 0.02) / 0.12) * 56;
@@ -101,10 +104,13 @@ export default function RenderReelMae() {
       <div style={{ position: 'absolute', left: '8%', right: '8%', bottom: '19%', textAlign: 'center' }}>
         <div style={{ width: `${ruleW}%`, height: 1, margin: '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
         <div style={{ position: 'relative', minHeight: '22vh' }}>
-          {params.linhas.map((t, i) => {
+          {linhasV.map((t, i) => {
             const slot = 1 / N, s = i * slot;
-            const op = clamp((p - s) / (slot * 0.28)) * (1 - clamp((p - (s + slot * 0.9)) / (slot * 0.15)));
-            const y = 10 * (1 - clamp((p - s) / (slot * 0.28)));
+            const ultimo = i === N - 1; // o ultimo fica ate ao fim (sem geometria sozinha)
+            const aparece = clamp((p - s) / (slot * 0.28));
+            const some = ultimo ? 0 : clamp((p - (s + slot * 0.9)) / (slot * 0.12));
+            const op = aparece * (1 - some);
+            const y = 9 * (1 - aparece);
             return <div key={i} style={{ position: 'absolute', left: 0, right: 0, top: 0, opacity: op, transform: `translateY(${y}px)`, fontSize: '5.6vw', lineHeight: 1.4 }}>{t}</div>;
           })}
         </div>
