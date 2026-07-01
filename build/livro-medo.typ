@@ -1,7 +1,7 @@
 // As Sete Faces do Medo — livro completo. Ritmo contemplativo, escuro.
 // Fonte: livro_medo/livro-medo.json. Flag `modo`: "escuro" | "claro".
 #let livro = json("/livro_medo/livro-medo.json")
-#let modo = "escuro"
+#let modo = "claro"
 #let escuro = modo == "escuro"
 
 #let ouro   = rgb("#C6A150")
