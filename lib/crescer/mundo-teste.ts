@@ -203,9 +203,12 @@ export function cenaAncorada(seed = 0, tema?: string): { briefing: string; categ
 export async function cenaDoConteudo(frase: string, apiKey: string, facet = ''): Promise<string> {
   const sys =
     'You are the visual director of a fictional world. ' + BASE_MUNDO + '\n\n' +
-    'TASK: read a short piece of writing (in Portuguese) and describe ONE single concrete, ordinary, everyday SCENE inside THIS world that carries the SAME FEELING as the writing, WITHOUT literally illustrating its words, symbols or metaphors. Real people doing real ordinary things; the meaning is FELT, never spelled out, never a symbol. ' +
-    (facet ? `Frame this particular scene as: ${facet}. ` : '') +
-    'Reply with ONE vivid English sentence describing ONLY the scene (who, doing what, where) — no preamble, no quotes, no explanation.';
+    'TASK: you are given a short piece of writing in Portuguese about an INNER human experience. ' +
+    '1) First, silently find its SPECIFIC emotional core: the exact human moment, tension or turning-point it names, not just its broad topic. ' +
+    '2) Then describe ONE concrete, ordinary, everyday SCENE inside THIS world where a person is visibly LIVING that exact feeling, so that the feeling is READABLE in their face, posture, gesture, situation or relationship. ' +
+    'Do NOT illustrate the words, symbols or metaphors literally. Do NOT default to generic pretty scenes (markets, communal meals, people crafting) unless the writing is truly about them: let the SPECIFIC feeling drive the scene, even if it is quiet, awkward, tense or solitary. ' +
+    (facet ? `Compose it as: ${facet}. ` : '') +
+    'Real people, real ordinary life, the meaning FELT and never spelled out. Reply with ONE vivid English sentence describing ONLY the scene (who, doing what, where, and the visible feeling) — no preamble, no quotes, no explanation.';
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
@@ -217,14 +220,15 @@ export async function cenaDoConteudo(frase: string, apiKey: string, facet = ''):
   return txt;
 }
 
-// ângulos para variar as várias imagens da MESMA frase (a IA explora facetas diferentes).
+// facetas de COMPOSIÇÃO/registo (não de género social) — variam as imagens da mesma
+// frase mantendo-as agarradas ao SENTIMENTO, não a cenas-género (feira/oficina).
 export const FACETS_CONTEUDO = [
-  'a wide, communal moment with many people around',
-  'an intimate close moment between two or three people',
-  'a solitary quiet moment of one person, the world still moving nearby',
-  'an ordinary moment of work, making or learning',
-  'a moment of care or help passing between people',
-  'a moment out in the wider world of the civilization (a street, water, nature)',
+  'centred on ONE person, their face and posture carrying the feeling, others blurred or out of frame',
+  'the exact instant of one small revealing gesture, caught close',
+  'the person among others yet visibly apart inside themselves',
+  'a quiet aftermath, the moment just after something shifted inside them',
+  'an in-between threshold moment, one state ending and another beginning',
+  'a wider view where the person is small within their world, the feeling held in the space around them',
 ];
 
 // ── MODO OBJETOS · o "IKEA do mundo" (a cultura material PRIMEIRO) ──────────────
