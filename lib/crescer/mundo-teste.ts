@@ -115,19 +115,26 @@ const CENAS_FUNDADORAS: CenaFund[] = [
   { cena: 'a single person of this world sitting a little apart at the edge of a busy gathering, present but not quite belonging, the others continuing warmly behind', categoria: 'desencaixe · à beira', tema: 'desencaixe', atlas: ['pessoas', 'roupa', 'interior'] },
   { cena: 'one person of this world alone for a quiet moment in the middle of ordinary daily life, the world still moving around them — paused, not meditating', categoria: 'o eu · pausa', tema: 'corpo', atlas: ['pessoas', 'roupa', 'cidade'] },
   { cena: 'an elder of this world placing a living heirloom object into the hands of a young person, three generations present and watching', categoria: 'herança · linhagem', tema: 'raizes', atlas: ['pessoas', 'objectos', 'roupa'] },
+  { cena: 'a grandmother of this world teaching a grandchild a family craft hand to hand, other kin nearby, a skill passing down the line', categoria: 'herança · ofício', tema: 'raizes', atlas: ['pessoas', 'interior', 'objectos'] },
+  { cena: 'a person of this world alone holding an old family object, feeling the weight of all who carried it before them', categoria: 'herança · o que se carrega', tema: 'raizes', atlas: ['pessoas', 'objectos', 'interior'] },
   { cena: 'several generations of one family of this world together in a line, the very old and the very young, hands connected, a quiet continuity', categoria: 'gerações · cura ancestral', tema: 'campo', atlas: ['pessoas', 'roupa', 'interior'] },
   { cena: 'a small group of this world gently releasing a luminous living thing onto bright water, a farewell that is also a beginning', categoria: 'ciclos · despedida', tema: 'ciclos', atlas: ['oceano', 'pessoas', 'roupa'] },
   { cena: 'two people of this world in close quiet company, the bond and the small space they keep between them, a real human moment', categoria: 'vínculos', tema: 'vinculos', atlas: ['pessoas', 'roupa', 'interior'] },
   { cena: 'a person of this world caught mid-passage crossing a threshold between two living spaces of different light, leaving one for the other', categoria: 'transformação · limiar', tema: 'transformacao', atlas: ['arquitectura', 'roupa', 'interior'] },
   { cena: 'a healer of this world caring for another person with gentle living instruments, both fully present, in a calm bright room', categoria: 'corpo · cuidado', tema: 'corpo', atlas: ['interior', 'roupa', 'pessoas'] },
   { cena: 'a person of this world standing half in clear light and half in soft shadow, fine detail visible in BOTH the lit and the shadowed side, the shown self and the hidden self', categoria: 'sombra', tema: 'sombra', atlas: ['interior', 'roupa', 'pessoas'] },
+  { cena: 'a person of this world quietly noticing their own reflection in still dark water, meeting the part of themselves they usually look away from', categoria: 'sombra · reflexo', tema: 'sombra', atlas: ['oceano', 'pessoas', 'interior'] },
+  { cena: 'a person of this world in a bright space that opens into one deeper unlit doorway behind them, the unentered room of the self', categoria: 'sombra · a porta', tema: 'sombra', atlas: ['arquitectura', 'interior', 'pessoas'] },
   { cena: 'a person of this world setting out alone along a bright waterway toward an open horizon, the wide world ahead', categoria: 'sentido · caminho', tema: 'sentido', atlas: ['oceano', 'natureza', 'roupa'] },
+  { cena: 'a person of this world pausing where several paths or waterways diverge, choosing a direction, the open world around them', categoria: 'sentido · encruzilhada', tema: 'sentido', atlas: ['natureza', 'cidade', 'roupa'] },
   { cena: 'people of this world together looking up at a migration of enormous gentle creatures crossing the bright sky or sea, wonder and openness', categoria: 'emergência · para onde vamos', tema: 'emergencia', atlas: ['oceano', 'animais', 'pessoas'] },
   { cena: 'a warm communal meal of this world, many people of different ages and peoples together, belonging', categoria: 'pertença · refeição', tema: 'vinculos', atlas: ['refeicoes', 'pessoas', 'roupa'] },
   { cena: 'a person of this world pausing before a vast repeating living pattern — rows, spirals or repeating grown structures — recognising a pattern they keep returning to', categoria: 'padrões', tema: 'transformacao', atlas: ['arquitectura', 'pessoas', 'natureza'] },
   { cena: 'a person of this world looking through a narrow fissure or crack in a living wall, glimpsing a different bright everyday space of their own world on the other side', categoria: 'fissuras · a fenda', tema: 'transformacao', atlas: ['arquitectura', 'roupa', 'interior'] },
   { cena: 'something new EMERGING in this world — a luminous living form rising from clear water, or a grown structure unfurling — witnessed up close by a few people', categoria: 'emergente', tema: 'emergencia', atlas: ['oceano', 'animais', 'natureza'] },
   { cena: 'a person of this world quietly present and awake in the middle of ordinary life — alert and aware, simply observing what is around them (not asleep, not meditating)', categoria: 'consciência · presença', tema: 'consciencia', atlas: ['pessoas', 'roupa', 'cidade'] },
+  { cena: 'a person of this world stopping to truly SEE one small ordinary thing for the first time — really looking, awake to it, life carrying on around them', categoria: 'consciência · reparar', tema: 'consciencia', atlas: ['pessoas', 'objectos', 'natureza'] },
+  { cena: 'one person of this world who has clearly woken up to something, still among a crowd that has not yet, present and clear-eyed while others move on autopilot', categoria: 'consciência · o que desperta', tema: 'consciencia', atlas: ['pessoas', 'cidade', 'roupa'] },
   { cena: 'a person of this world quietly making themselves smaller to fit into a group, shrinking to belong while the group carries on', categoria: 'desencaixe · diminuir-se', tema: 'desencaixe', atlas: ['pessoas', 'roupa', 'interior'] },
   // ── O PROPÓSITO · Ubuntu, responsabilidade social, despertar coletivo ────────
   { cena: 'the people of this world gathered around one person in a hard moment, holding and helping them, mutual care, no one left alone', categoria: 'ubuntu · sustentar', tema: 'campo', atlas: ['pessoas', 'roupa', 'interior'] },
@@ -164,6 +171,19 @@ export const TEMAS_CENA: { tema: string; nome: string }[] = [
   { tema: 'mundo', nome: 'biodiversidade · o mundo vivo' },
 ];
 
+// VARIAÇÃO de enquadramento/momento por imagem — para que várias imagens da MESMA
+// cena (ex.: uma matéria com só uma cena) saiam DIFERENTES, e não 4 clones.
+const VARIACOES = [
+  'Wide establishing shot: the whole scene and its surroundings, many people around.',
+  'Intimate close framing on the hands and faces, shallow depth of field, the gesture up close.',
+  'Seen from behind or over a shoulder, the moment unfolding ahead of us.',
+  'A candid side view, caught mid-movement, others continuing their day in the background.',
+  'A low, ground-level angle among the people.',
+  'A slightly elevated view looking gently down over the group.',
+  'A quiet wider moment with air and space around a few people, the rest of life further off.',
+  'Bright clear daylight from the side, soft long shadows, a different group of people than usual.',
+];
+
 // Briefing ANCORADO: a IMAGEM de referência define o look; o texto traz a CENA + o ADN.
 // devolve `atlas` (aspetos a herdar) e `tema` (a matéria que serve). Se `tema` for dado,
 // escolhe só entre as cenas dessa matéria (a ponte: post de tema X → imagem de tema X).
@@ -171,7 +191,9 @@ export function cenaAncorada(seed = 0, tema?: string): { briefing: string; categ
   const pool = tema ? CENAS_FUNDADORAS.filter((c) => c.tema === tema) : CENAS_FUNDADORAS;
   const lista = pool.length ? pool : CENAS_FUNDADORAS;
   const c = lista[idx(seed, lista.length)];
-  return { briefing: `${c.cena}. ${BASE_MUNDO}`, categoria: c.categoria, atlas: c.atlas, tema: c.tema };
+  // a variação muda a cada imagem (seed anda de 37 em 37 → índices distintos), mesmo com 1 só cena.
+  const v = VARIACOES[idx(seed, VARIACOES.length)];
+  return { briefing: `${c.cena}. ${v} ${BASE_MUNDO}`, categoria: c.categoria, atlas: c.atlas, tema: c.tema };
 }
 
 // ── MODO OBJETOS · o "IKEA do mundo" (a cultura material PRIMEIRO) ──────────────
