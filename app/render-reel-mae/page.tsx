@@ -1,13 +1,12 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { motivoSVG, motivosDoTema, receitaDe, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
+import { geometriaVDS, receitaDe, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
 
 // RENDER do reel da mãe, dirigido por progresso (window.__setKProg para o recorder).
 // ?multi=1 = REEL MULTI-FRAME (cada segmento é uma CENA com a sua geometria, que se
 // redesenha e troca). Sem multi = REEL de 1 frame (uma geometria, o texto entra por
 // tempos). Params: ?tema=&linhas=a|b&label=&multi=1. Sem recorder, faz preview em loop.
 const clamp = (x: number) => Math.max(0, Math.min(1, x));
-const hashStr = (s: string) => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
 
 export default function RenderReelMae() {
   const [p, setP] = useState(0);
@@ -39,11 +38,8 @@ export default function RenderReelMae() {
   }, [params]);
 
   const estatico = !!params?.estatico;
-  const seq = useMemo(() => (params ? motivosDoTema(params.tema) : []), [params]);
-  // o motivo varia POR POST (seed do slug) para 2 posts saírem diferentes.
-  const base = params ? hashStr(params.seed) : 0;
-  const motivo = params && seq.length ? seq[base % seq.length] : 'rings-concentric-05';
-  const motivoHTML = useMemo(() => motivoSVG(motivo), [motivo]);
+  // a COMPOSIÇÃO VDS do tema (anéis+eixo+nós+foco, ondas, vesica…), varia por seed.
+  const motivoHTML = useMemo(() => (params ? geometriaVDS(params.tema, params.seed) : ''), [params]);
 
   // desenha a geometria conforme o progresso (SEMPRE anima): pathLength desenha-se
   // escalonado; os brilhos e o halo pulsam. Cobre os componentes da biblioteca VDS.
@@ -92,7 +88,7 @@ export default function RenderReelMae() {
             <radialGradient id="corona"><stop offset="52%" stopColor={TOK.goldSoft} stopOpacity="0" /><stop offset="72%" stopColor={TOK.goldSoft} stopOpacity=".9" /><stop offset="100%" stopColor={TOK.goldSoft} stopOpacity="0" /></radialGradient>
             <radialGradient id="cg"><stop offset="0%" stopColor={TOK.light} /><stop offset="100%" stopColor={TOK.goldSoft} stopOpacity="0" /></radialGradient>
           </defs>
-          <g key={motivo} dangerouslySetInnerHTML={{ __html: motivoHTML }} />
+          <g key={params.tema + params.seed} dangerouslySetInnerHTML={{ __html: motivoHTML }} />
         </svg>
       </div>
       {/* coluna de TEXTO à esquerda */}
