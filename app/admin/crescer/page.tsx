@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia, type AlinhV, type AlinhH } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
-import { CRESCER, TEMATICAS, FORMATOS, VISUAIS, VOZES, CRESCER_MUNDO, CRESCER_SLIDE, type TematicaId, type FormatoId, type VisualId, type VozId } from '@/lib/crescer/marca';
+import { CRESCER, TEMATICAS, FORMATOS, CRESCER_MUNDO, CRESCER_SLIDE, type TematicaId, type FormatoId, type VisualId, type VozId } from '@/lib/crescer/marca';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
 import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
 
@@ -394,11 +394,11 @@ export default function CrescerPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [temas, setTemas] = useState<Set<TematicaId>>(new Set());
   const [fmts, setFmts] = useState<Set<FormatoId>>(new Set(['frase']));
-  const [vis, setVis] = useState<Set<VisualId>>(new Set(['pessoas']));
-  const [voz, setVoz] = useState<VozId>('direta'); // a voz do alcance, por defeito
+  const [vis] = useState<Set<VisualId>>(new Set(['minimal'])); // minimalista/tipográfico: sem imagem por agora (a imagem, se voltar, será símbolos/desenhos, a estudar)
+  const [voz] = useState<VozId>('direta'); // sempre DIRETA (a poética saiu)
   const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
   const [fonte, setFonte] = useState<'livro' | 'tema'>('livro'); // minerar os livros (defeito) vs partir de uma temática
-  const [imagemModo, setImagemModo] = useState<'cena' | 'ilustrar'>('cena'); // cena da civilização (defeito) vs ilustrar a frase
+  const [imagemModo] = useState<'cena' | 'ilustrar'>('cena'); // sem imagem por agora (minimal); mantido só para o payload
   const [quantos, setQuantos] = useState(1); // 1 por defeito: uma de cada vez, sem ser obrigada a lote
   const [surpreender, setSurpreender] = useState(false);
   const [tema, setTema] = useState('');
@@ -610,22 +610,14 @@ export default function CrescerPage() {
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">formatos</p>
           <div className="flex flex-wrap gap-1.5 mb-3">{FORMATOS.map((f) => <Chip key={f.id} on={fmts.has(f.id)} onClick={() => toggle(setFmts, f.id)} title={f.descricao}><span className="mr-1">{f.emoji}</span>{f.label}</Chip>)}</div>
 
-          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">visuais</p>
-          <div className="flex flex-wrap gap-1.5 mb-3">{VISUAIS.map((v) => <Chip key={v.id} on={vis.has(v.id)} onClick={() => toggle(setVis, v.id)} title={v.descricao}><span className="mr-1">{v.emoji}</span>{v.label}</Chip>)}</div>
-
-          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">voz <span className="opacity-50">(a direta é a do alcance)</span></p>
-          <div className="flex flex-wrap gap-1.5 mb-3">{VOZES.map((v) => <Chip key={v.id} on={voz === v.id} onClick={() => setVoz(v.id)} title={v.descricao}><span className="mr-1">{v.emoji}</span>{v.label}</Chip>)}</div>
+          {/* voz sempre DIRETA (a poética saiu) · visual sempre MINIMAL/tipográfico (sem imagem
+              por agora; a imagem, se voltar, será símbolos/desenhos, a estudar). Por isso as
+              linhas de visuais/voz/imagem saíram daqui: fica só o que se usa. */}
 
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">como sai <span className="opacity-50">(o reel espalha-se mais)</span></p>
           <div className="flex flex-wrap gap-1.5 mb-3">
-            <Chip on={saida === 'reel'} onClick={() => setSaida('reel')} title="vídeo vertical, o texto aparece ritmado por cima da imagem (mais alcance)"><span className="mr-1">🎬</span>reel</Chip>
+            <Chip on={saida === 'reel'} onClick={() => setSaida('reel')} title="vídeo vertical, o texto aparece ritmado (mais alcance)"><span className="mr-1">🎬</span>reel</Chip>
             <Chip on={saida === 'carrossel'} onClick={() => setSaida('carrossel')} title="telas 4:5 que se deslizam, texto estático que se lê"><span className="mr-1">🎠</span>carrossel</Chip>
-          </div>
-
-          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">imagem <span className="opacity-50">(a cena é o documentário do mundo)</span></p>
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            <Chip on={imagemModo === 'cena'} onClick={() => setImagemModo('cena')} title="fotografia de um dia normal desta civilização (biblioteca viva, mercado, criança a aprender). NÃO ilustra a frase: partilha o mundo com ela. São as imagens fortes."><span className="mr-1">🌍</span>cena da civilização</Chip>
-            <Chip on={imagemModo === 'ilustrar'} onClick={() => setImagemModo('ilustrar')} title="ilustra a frase via cultura material (artefacto + evento). Mais conceptual, mais arriscado a virar símbolo."><span className="mr-1">💬</span>ilustrar a frase</Chip>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
