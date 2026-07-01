@@ -11,6 +11,37 @@ export function LivroMedo() {
   const [aCarregar, setACarregar] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
+  const [testEmail, setTestEmail] = useState('');
+  const [aTestar, setATestar] = useState<string | null>(null);
+  const [testMsg, setTestMsg] = useState<{ ok: boolean; texto: string; url?: string } | null>(null);
+
+  async function testarCompra(lang: 'pt' | 'en') {
+    setTestMsg(null);
+    const email = testEmail.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      setTestMsg({ ok: false, texto: 'Escreve um email válido para receber o teste.' });
+      return;
+    }
+    setATestar(lang);
+    try {
+      const res = await fetch('/api/admin/livro-medo/teste-compra', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, lang }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      const partes = [
+        json.compraOk ? 'recibo + licença ao cliente e aviso à Vivianne ✓' : 'recibo/aviso falhou ✗',
+        json.emailOk ? 'email com o link de descarga ✓' : 'email de descarga falhou ✗',
+      ];
+      setTestMsg({ ok: json.compraOk && json.emailOk, texto: `Enviado para ${email}: ${partes.join(' · ')}`, url: json.downloadUrl });
+    } catch (e) {
+      setTestMsg({ ok: false, texto: e instanceof Error ? e.message : String(e) });
+    } finally {
+      setATestar(null);
+    }
+  }
 
   const chaveDe = (lg: 'pt' | 'en') => (lg === 'en' ? 'capa-propria-en' : 'capa-propria');
   const urlCapa = (lg: 'pt' | 'en') => {
@@ -81,6 +112,45 @@ export function LivroMedo() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="border border-ocre/15 rounded-[14px] p-6">
+        <h3 className="font-serif text-creme text-[1.05rem] mb-1">Testar a compra</h3>
+        <p className="text-creme-2/60 text-[0.82rem] font-serif italic mb-5">
+          Dispara uma compra de teste (sem PayPal) para veres exatamente o que o cliente recebe:
+          o email de recibo com a licença, o email com o link de descarga do PDF, e a notificação
+          que te chega a ti. Escolhe português ou inglês.
+        </p>
+        <input
+          type="email"
+          value={testEmail}
+          onChange={(e) => setTestEmail(e.target.value)}
+          placeholder="o teu email para receber o teste"
+          className="w-full max-w-[360px] bg-transparent border border-ocre/40 rounded-[12px] py-2.5 px-4 text-creme font-sans text-[0.9rem] outline-none placeholder:text-creme/40 placeholder:italic focus:border-ambar transition-colors mb-4"
+        />
+        <div className="flex flex-wrap gap-3">
+          {(['pt', 'en'] as const).map((lg) => (
+            <button
+              key={lg}
+              type="button"
+              onClick={() => testarCompra(lg)}
+              disabled={aTestar !== null}
+              className="inline-flex items-center gap-2 bg-ambar text-terra font-sans text-[0.82rem] font-medium rounded-[12px] px-4 py-2.5 hover:bg-ocre transition-colors disabled:opacity-50 whitespace-nowrap"
+            >
+              {aTestar === lg ? 'a enviar…' : lg === 'en' ? 'testar compra · inglês' : 'testar compra · português'}
+            </button>
+          ))}
+        </div>
+        {testMsg && (
+          <div className={`mt-4 text-[0.85rem] rounded-lg px-4 py-3 border ${testMsg.ok ? 'text-ambar bg-ambar/10 border-ambar/30' : 'text-rose-300 bg-rose-900/20 border-rose-500/30'}`}>
+            <p>{testMsg.texto}</p>
+            {testMsg.url && (
+              <a href={testMsg.url} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-ocre hover:text-ambar underline">
+                abrir o download que o cliente recebe →
+              </a>
+            )}
+          </div>
+        )}
       </section>
     </div>
   );
