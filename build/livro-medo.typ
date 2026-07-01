@@ -20,12 +20,17 @@
 #set page(
   width: 148mm, height: 210mm, fill: corpoFill,
   margin: (inside: 26mm, outside: 24mm, top: 26mm, bottom: 24mm),
-  header: none,
+  header: context {
+    let n = counter(page).at(here()).first()
+    if n <= 2 { return }
+    set text(fill: mut, size: 7.5pt, tracking: 2.5pt)
+    if calc.even(n) [ AS SETE FACES DO MEDO #h(1fr) ] else [ #h(1fr) #upper(faceState.at(here())) ]
+  },
   footer: context {
     let n = counter(page).at(here()).first()
-    if n <= 1 { return }
+    if n <= 2 { return }
     set text(fill: mut, size: 7.5pt, tracking: 2.5pt)
-    align(center)[#(str(n) + "   ·   " + upper(faceState.at(here())))]
+    align(center)[#str(n)]
   },
 )
 
@@ -43,7 +48,7 @@
   for (i, part) in frase.split("¦").enumerate() { if i > 0 { linebreak() }; part }
 }
 // página-evento (preta) com uma frase ao centro
-#let paginaFrase(glyph, rotulo, frase, grande) = page(fill: evento, footer: none)[
+#let paginaFrase(glyph, rotulo, frase, grande) = page(fill: evento, header: none, footer: none)[
   #set text(fill: marfim)
   #align(center + horizon)[
     #image("/build/medo-assets/faces/" + glyph + ".svg", width: 11mm)
@@ -56,10 +61,11 @@
   ]
 ]
 
-#let abertura-face(p) = page(fill: evento, footer: context {
+#let abertura-face(p) = page(fill: evento, header: none, footer: context {
   set text(fill: mut, size: 7.5pt, tracking: 2.5pt)
   align(center)[#(str(counter(page).at(here()).first()) + "   ·   " + upper(p.nome))]
 })[
+  #metadata((titulo: p.nome, sub: p.medo, cap: p.cap)) <peca>
   #set text(fill: marfim)
   #align(center)[
     #v(30mm)
@@ -99,6 +105,7 @@
 }
 
 #let abertura-clara(rotulo, sub) = {
+  [#metadata((titulo: rotulo, sub: sub, cap: "")) <peca>]
   v(20mm)
   align(center)[
     #text(fill: acento, size: 9pt, tracking: 4pt)[#upper(rotulo)]
@@ -111,17 +118,44 @@
 }
 
 // ---------- página de título ----------
-#page(fill: evento, footer: none)[
+#page(fill: evento, header: none, footer: none)[
   #set text(fill: marfim)
-  #align(center + horizon)[
-    #text(font: "Cormorant", fill: ouro, size: 48pt, weight: "medium")[As Sete\ Faces\ do Medo]
-    #v(7mm)
-    #line(length: 26mm, stroke: 0.6pt + ouro)
-    #v(7mm)
-    #text(fill: marfim, style: "italic", size: 13pt)[Como o medo construiu as nossas\ escolhas, relações e vidas]
-    #v(30mm)
-    #text(fill: ouro, size: 11pt, tracking: 3pt)[VIVIANNE DOS SANTOS]
+  #v(42mm)
+  #align(center)[
+    #text(font: "Cormorant", fill: ouro, size: 46pt, weight: "medium")[As Sete\ Faces\ do Medo]
+    #v(6mm)
+    #line(length: 24mm, stroke: 0.6pt + ouro)
+    #v(6mm)
+    #text(fill: marfim, style: "italic", size: 12.5pt)[Como o medo construiu as nossas\ escolhas, relações e vidas]
   ]
+  #place(bottom + center, dy: -6mm, text(fill: ouro, size: 11pt, tracking: 3pt)[VIVIANNE DOS SANTOS])
+]
+
+
+// ---------- índice ----------
+#page(fill: evento, header: none, footer: none)[
+  #set text(fill: marfim)
+  #v(24mm)
+  #align(center)[
+    #text(font: "Cormorant", fill: ouro, size: 30pt, weight: "medium")[Índice]
+    #v(3mm)
+    #line(length: 15mm, stroke: 0.6pt + ouro)
+  ]
+  #v(16mm)
+  #context {
+    let items = query(<peca>)
+    for it in items {
+      let m = it.value
+      let pg = counter(page).at(it.location()).first()
+      block(below: 1.35em, width: 100%, grid(columns: (1fr, auto), column-gutter: 6mm,
+        {
+          text(font: "Cormorant", fill: marfim, size: 15pt)[#m.titulo]
+          if m.sub != "" { text(fill: mut, style: "italic", size: 10pt)[  ·  #m.sub] }
+        },
+        align(right + bottom, text(fill: ouro, size: 11pt)[#pg]),
+      ))
+    }
+  }
 ]
 
 // ---------- corpo do livro ----------
@@ -132,7 +166,8 @@
     let rot = if p.kind == "prologo" { "Prólogo" } else if p.kind == "intro" { "Introdução" } else { "Epílogo" }
     faceState.update(rot)
     if p.kind == "prologo" {
-      page(fill: evento, footer: none)[
+      page(fill: evento, header: none, footer: none)[
+        #metadata((titulo: "Prólogo", sub: p.subtitulo, cap: "")) <peca>
         #set text(fill: marfim)
         #align(center + horizon)[
           #text(fill: ouro, size: 9pt, tracking: 4pt)[PRÓLOGO]
