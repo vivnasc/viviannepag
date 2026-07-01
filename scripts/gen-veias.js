@@ -91,7 +91,16 @@ const vV = seccoes(veusMd, {
   parteRe: null,
 });
 
-const todas = [...vT, ...vS, ...vV];
+// --- As Sete Faces do Medo (prólogo, introdução, as faces/capítulos, epílogo). ---
+const medoMd = fs.readFileSync(path.join(ROOT, 'livro_medo/As_Sete_Faces_do_Medo_completo.md'), 'utf8');
+const vM = seccoes(medoMd, {
+  livro: 'medo',
+  inicioRe: /^(PRÓLOGO|INTRODUÇÃO|CAPÍTULO\s+\d+|EPÍLOGO)/i,
+  fimRe: /^(As palavras deste livro|Glossário|ANEXOS)/i,
+  parteRe: null,
+});
+
+const todas = [...vT, ...vS, ...vV, ...vM];
 const usados = new Set();
 for (const v of todas) {
   let s = slug(`${v.livro}-${v.titulo}`) || slug(v.livro);
@@ -99,7 +108,7 @@ for (const v of todas) {
   usados.add(n); v.id = n;
 }
 
-const LIVROS = { transicao: 'A Grande Transição', sinais: 'Os 7 Sinais de Desencaixe', veus: 'Os 7 Véus' };
+const LIVROS = { transicao: 'A Grande Transição', sinais: 'Os 7 Sinais de Desencaixe', veus: 'Os 7 Véus', medo: 'As Sete Faces do Medo' };
 
 const ts = `// GERADO por scripts/gen-veias.js a partir dos LIVROS dela — NÃO editar à mão.
 // As VEIAS são as secções reais dos livros (capítulos, interlúdios, sinais), com
@@ -128,5 +137,5 @@ export function escolherVeia(usadas: string[] = [], seed = 0): Veia {
 
 const dest = path.join(ROOT, 'lib/knowledge/veias.ts');
 fs.writeFileSync(dest, ts);
-console.log(`veias.ts gerado: ${todas.length} veias (${vT.length} de A Grande Transição, ${vS.length} dos 7 Sinais, ${vV.length} dos 7 Véus)`);
+console.log(`veias.ts gerado: ${todas.length} veias (${vT.length} A Grande Transição, ${vS.length} 7 Sinais, ${vV.length} 7 Véus, ${vM.length} Sete Faces do Medo)`);
 for (const v of todas) console.log(`  [${v.livro}] ${v.titulo}  (${v.texto.length} chars)`);
