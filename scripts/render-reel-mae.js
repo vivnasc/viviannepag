@@ -92,9 +92,16 @@ async function main() {
       const dir = path.join(TMP, row.slug); const framesDir = path.join(dir, 'frames');
       fs.mkdirSync(framesDir, { recursive: true });
 
-      // voz
+      // VOZ: usa a que a Vivianne JA gerou e aprovou no admin (theme.soulab.vozUrl).
+      // Regra dela: o render nao gera voz nem traz surpresas; so cola o que ja existe.
+      // (fallback a TTS so se, por acaso, nao houver voz pre-gerada.)
       const vozMp3 = path.join(dir, 'voz.mp3');
-      const temVoz = await tts(linhas.join('. '), vozMp3).catch(() => false);
+      const vozUrl = row.theme?.soulab?.vozUrl || null;
+      let temVoz = false;
+      if (vozUrl) {
+        try { const r = await fetch(vozUrl); if (r.ok) { fs.writeFileSync(vozMp3, Buffer.from(await r.arrayBuffer())); temVoz = true; } } catch { /* segue sem voz */ }
+      }
+      if (!temVoz) temVoz = await tts(linhas.join('. '), vozMp3).catch(() => false);
       const D = temVoz ? await ffprobeDuration(vozMp3) : Math.max(6, linhas.length * 3.2);
       const N = Math.min(1200, Math.max(120, Math.round((D + 1.4) * FPS)));
 

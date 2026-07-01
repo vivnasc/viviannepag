@@ -46,6 +46,7 @@ export async function GET() {
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       imagens: row.dias?.[0]?.imagens ?? null,
       clipUrl: row.theme?.soulab?.clipUrl ?? null,
+      vozUrl: (row.theme?.soulab as { vozUrl?: string | null } | undefined)?.vozUrl ?? null,
       somUrl: row.theme?.soulab?.somUrl ?? null,
       somTipo: row.theme?.soulab?.somTipo ?? null,
       somEstilo: row.theme?.soulab?.somEstilo ?? null,

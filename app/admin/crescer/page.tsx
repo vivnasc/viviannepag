@@ -40,7 +40,7 @@ type Peca = {
   tematica: string | null; formato: string; visual: string | null; reel?: boolean; veiaTitulo?: string | null; veiaLivro?: string | null;
   slug: string; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
-  somUrl: string | null; somTipo: string | null; somEstilo: string | null;
+  somUrl: string | null; somTipo: string | null; somEstilo: string | null; vozUrl?: string | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
   momentos: string[] | null; slidesImgs: (string | null)[] | null; slidesTip: (Tipografia | null)[] | null; agendadoEm: string | null; hora: string | null;
@@ -481,6 +481,10 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Gerar o REEL DE ASSINATURA (geometria VDS + a tua voz clonada)? Corre nos GitHub Actions, uns minutos.')) return;
     acao(slug, '/api/admin/crescer/render-reel', {}, 'A gravar o reel de assinatura (uns minutos)…', 'Reel de assinatura disparado. Aparece daqui a uns minutos (recarrega).', false);
   }, [acao]);
+  // VOZ ANTES DO RENDER (regra da Vivianne): gera a voz clonada da frase agora, para
+  // ela OUVIR no admin; o render so cola esta voz, sem surpresas.
+  const gerarVozPeca = useCallback((slug: string) =>
+    acao(slug, '/api/admin/crescer/voz', {}, 'A gerar a tua voz (uns segundos)…', 'Voz gerada. Ouve-a aqui antes de renderizar.', false), [acao]);
   // arquivar/desarquivar UMA peça (sem apagar).
   const arquivarPeca = useCallback((slug: string, arquivar: boolean) =>
     acao(slug, '/api/admin/crescer/arquivar', { arquivar }, arquivar ? 'A arquivar…' : 'A desarquivar…', arquivar ? 'Arquivada (na aba «arquivados»).' : 'Desarquivada.', false), [acao]);
@@ -748,7 +752,9 @@ export default function CrescerPage() {
                     <button onClick={() => abrir(p.slug, 'legenda')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda</button>
                     <button onClick={() => abrir(p.slug, 'agenda')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'}</button>
                     {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
-                    <button onClick={() => reelAssinatura(p.slug)} disabled={tBusy} title="grava o REEL DE ASSINATURA: geometria VDS + a frase + a tua voz clonada (sem imagem, sem custo). Corre nos Actions." className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>✦ reel assinatura</button>
+                    <button onClick={() => gerarVozPeca(p.slug)} disabled={tBusy} title="gera a TUA voz (clonada) a ler a frase, para ouvires AGORA. O render usa esta voz, sem surpresas." className="px-2 py-1 rounded border disabled:opacity-40" style={p.vozUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎙 {p.vozUrl ? 'refazer voz' : 'gerar voz'}</button>
+                    {p.vozUrl && <audio controls preload="none" src={p.vozUrl} className="h-6 align-middle" style={{ height: 26, maxWidth: 168 }} />}
+                    <button onClick={() => reelAssinatura(p.slug)} disabled={tBusy || !p.vozUrl} title={p.vozUrl ? 'grava o REEL DE ASSINATURA: geometria VDS + a frase + a tua voz JA gerada (sem imagem, sem custo). Corre nos Actions.' : 'gera a voz primeiro (🎙), para o render não trazer surpresas'} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: p.vozUrl ? DZ : 'transparent', color: p.vozUrl ? BG2 : DZ }}>✦ reel assinatura</button>
                     <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
                     {!p.publicado && (p.arquivado
                       ? <button onClick={() => arquivarPeca(p.slug, false)} disabled={tBusy} title="tirar do arquivo e voltar a mostrar na lista" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>↩ desarquivar</button>
