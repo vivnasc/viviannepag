@@ -80,7 +80,7 @@ export default function RenderReelMae() {
         <span>@vivianne.dos.santos</span><span />
       </div>
       {/* geometria à DIREITA — linha FINA e nítida, como a referência */}
-      <style>{`.mgeo circle,.mgeo path,.mgeo ellipse,.mgeo line{stroke-width:.7}`}</style>
+      <style>{`.mgeo{--vds-gold:${TOK.gold};--vds-gold-soft:${TOK.goldSoft};--vds-bg:${TOK.bg}}.mgeo circle,.mgeo path,.mgeo ellipse,.mgeo line{stroke-width:.7}`}</style>
       <div ref={geoRef} style={{ position: 'absolute', right: '3.5%', top: '50%', transform: 'translateY(-50%)', width: '41%' }}>
         <svg className="mgeo" viewBox="0 0 100 100" style={{ width: '100%', fill: 'none', stroke: TOK.gold, strokeLinecap: 'round' }}>
           <defs>
