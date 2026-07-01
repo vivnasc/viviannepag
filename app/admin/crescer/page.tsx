@@ -109,49 +109,18 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
 // anima (efeito) no slide aberto para ela ver o movimento. Resolve o "só vejo a capa":
 // agora abre-se o interior 1 a 1.
 function PreviewBox({ peca }: { peca: Peca }) {
-  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto];
-  const n = moms.length;
-  const ehCarrossel = n > 1; // carrossel = telas que se deslizam: texto ESTÁTICO, sem motion
-  const [idx, setIdx] = useState(0);
-  const [prog, setProg] = useState(ehCarrossel ? 1 : 0);
-  const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
-  const cur = Math.min(idx, n - 1);
-  // imagem e tipografia DESTE slide (per-slide), com recuo ao global da peça.
-  const imgSlide = peca.slidesImgs?.[cur] ?? (cur === 0 ? peca.imageUrl : null) ?? undefined;
-  const tipSlide = { ...(peca.tipografia ?? {}), ...(peca.slidesTip?.[cur] ?? {}) } as Tipografia;
-  // CARROSSEL: texto sempre ESTÁTICO (prog=1), nunca motion. REEL (1 imagem): o texto
-  // anima em loop para ela ver o efeito.
-  useEffect(() => {
-    if (ehCarrossel) { setProg(1); return; }
-    let raf = 0; let start: number | null = null;
-    const dur = 3800, hold = 1100;
-    const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [cur, ehCarrossel]);
+  // PRÉ-VER = o REEL DE ASSINATURA ao vivo (geometria VDS pelo tema + a frase + movimento),
+  // SEM render e SEM custo. O que ela vê aqui é o que vai sair. O render (✦) é só para o
+  // MP4 final com a voz. tema define o motivo; as linhas são a frase (ou os momentos).
+  const linhas = (peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto]).filter(Boolean);
+  const tema = peca.tematica || 'consciencia';
+  const url = `/api/admin/crescer/reel?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}`;
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
-      <div className="flex items-center justify-between">
-        <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · {ehCarrossel ? 'carrossel, slide a slide (texto estático)' : 'como vai sair'}</p>
-        {n > 1 && (
-          <span className="flex items-center gap-1.5 text-[0.6rem]">
-            <button type="button" onClick={() => setIdx((i) => (i - 1 + n) % n)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-current" style={{ color: DZ }}>‹</button>
-            <span className="tabular-nums opacity-70">{cur === 0 ? 'capa' : `slide ${cur + 1}`} · {cur + 1}/{n}</span>
-            <button type="button" onClick={() => setIdx((i) => (i + 1) % n)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-current" style={{ color: DZ }}>›</button>
-          </span>
-        )}
+      <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · o reel de assinatura (ao vivo, sem render)</p>
+      <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
+        <iframe src={url} title="reel de assinatura" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
       </div>
-      <div className="rounded-lg overflow-hidden border border-white/10">
-        <KineticSlide texto={moms[cur]} destaque={cur === 0 ? peca.destaque : []} imageUrl={imgSlide} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tipSlide} {...CRESCER_SLIDE} />
-      </div>
-      {n > 1 && (
-        <div className="flex flex-wrap gap-1 pt-0.5">
-          {moms.map((_, i) => (
-            <button key={i} type="button" onClick={() => setIdx(i)} title={i === 0 ? 'capa' : `slide ${i + 1}`}
-              className="w-5 h-5 text-[0.5rem] rounded border tabular-nums" style={i === cur ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)', color: TX }}>{i + 1}</button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
