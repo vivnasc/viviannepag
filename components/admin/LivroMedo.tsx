@@ -14,6 +14,23 @@ export function LivroMedo() {
   const [testEmail, setTestEmail] = useState('');
   const [aTestar, setATestar] = useState<string | null>(null);
   const [testMsg, setTestMsg] = useState<{ ok: boolean; texto: string; url?: string } | null>(null);
+  const [aRenderizar, setARenderizar] = useState(false);
+  const [renderMsg, setRenderMsg] = useState<{ ok: boolean; texto: string } | null>(null);
+
+  async function renderizar() {
+    setRenderMsg(null);
+    setARenderizar(true);
+    try {
+      const res = await fetch('/api/admin/livro-medo/render-dispatch', { method: 'POST' });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      setRenderMsg({ ok: true, texto: 'Render disparado (≈3-5 min). A tua capa entra na 1.ª página e os PDF (PT e EN) são publicados na loja. Recarrega mais logo.' });
+    } catch (e) {
+      setRenderMsg({ ok: false, texto: e instanceof Error ? e.message : String(e) });
+    } finally {
+      setARenderizar(false);
+    }
+  }
 
   async function testarCompra(lang: 'pt' | 'en') {
     setTestMsg(null);
@@ -112,6 +129,28 @@ export function LivroMedo() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="border border-ocre/15 rounded-[14px] p-6">
+        <h3 className="font-serif text-creme text-[1.05rem] mb-1">Renderizar o livro</h3>
+        <p className="text-creme-2/60 text-[0.82rem] font-serif italic mb-5">
+          Depois de carregares a capa acima, carrega aqui para compor o PDF. O render mete a tua
+          capa na 1.ª página, compõe o miolo (PT e EN) e publica os ficheiros na loja, que passam a
+          ser o que o cliente descarrega. Demora poucos minutos.
+        </p>
+        <button
+          type="button"
+          onClick={renderizar}
+          disabled={aRenderizar}
+          className="inline-flex items-center gap-2 rounded-full border border-ambar/60 bg-ambar/10 text-ambar px-6 py-2.5 text-[0.85rem] hover:bg-ambar/20 transition-colors disabled:opacity-50"
+        >
+          {aRenderizar ? 'a disparar…' : 'renderizar o livro (PT + EN)'}
+        </button>
+        {renderMsg && (
+          <p className={`mt-4 text-[0.85rem] rounded-lg px-4 py-3 border ${renderMsg.ok ? 'text-ambar bg-ambar/10 border-ambar/30' : 'text-rose-300 bg-rose-900/20 border-rose-500/30'}`}>
+            {renderMsg.texto}
+          </p>
+        )}
       </section>
 
       <section className="border border-ocre/15 rounded-[14px] p-6">
