@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- espelho | rejeicao | hero/mystic (reflexo fragmentado) | abre o capitulo O Espelho -->
+  <g id="espelho-fracturado" fill="none" stroke="#C6A150" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="50" cy="38" rx="20" ry="24"/>
+    <path d="M52 16 L44 33 L55 44 L46 59"/>
+    <path d="M61 29 Q65 38 60 47"/>
+    <line x1="50" y1="62" x2="50" y2="84"/>
+    <line x1="43" y1="84" x2="57" y2="84"/>
+  </g>
+</svg>
