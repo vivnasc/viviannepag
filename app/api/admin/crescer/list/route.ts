@@ -58,6 +58,7 @@ export async function GET() {
       agendadoEm: row.theme?.agendadoEm ?? null,
       hora: row.theme?.hora ?? null,
       publicado: Boolean(row.theme?.igPublicado || row.theme?.publicado),
+      arquivado: Boolean((row.theme as { arquivado?: boolean } | null | undefined)?.arquivado),
       criadoEm: row.created_at ?? null,
     };
   }).sort((a, b) => (b.criadoEm ?? '').localeCompare(a.criadoEm ?? ''));

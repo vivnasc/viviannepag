@@ -44,7 +44,7 @@ type Peca = {
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
   momentos: string[] | null; slidesImgs: (string | null)[] | null; slidesTip: (Tipografia | null)[] | null; agendadoEm: string | null; hora: string | null;
-  publicado: boolean; criadoEm: string | null;
+  publicado: boolean; criadoEm: string | null; arquivado?: boolean;
 };
 
 const ALINH_V: { id: AlinhV; label: string }[] = [{ id: 'cima', label: '↑ cima' }, { id: 'centro', label: '· centro' }, { id: 'baixo', label: '↓ baixo' }];
@@ -411,7 +411,7 @@ export default function CrescerPage() {
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [filtroTema, setFiltroTema] = useState<string>('todos');
   const [filtroTipo, setFiltroTipo] = useState<'todos' | 'carrossel' | 'reel'>('todos');
-  const [filtroEstado, setFiltroEstado] = useState<'todos' | 'por-fazer' | 'pronto' | 'agendada' | 'publicada'>('todos');
+  const [filtroEstado, setFiltroEstado] = useState<'todos' | 'por-fazer' | 'pronto' | 'agendada' | 'publicada' | 'arquivada'>('todos');
   const [padrao, setPadrao] = useState<Padrao>(PADRAO_DEFAULT);
   const [padraoOpen, setPadraoOpen] = useState(false);
   // agendar em lote ESPAÇADO (não encher o feed): 1 post a cada N dias, à hora.
@@ -433,19 +433,19 @@ export default function CrescerPage() {
   const toggle = <T,>(setS: React.Dispatch<React.SetStateAction<Set<T>>>, id: T) => setS((s) => { const n = new Set(s); if (n.has(id)) n.delete(id); else n.add(id); return n; });
   const abrir = (slug: string, tab: string) => setAberto((a) => (a && a.slug === slug && a.tab === tab ? null : { slug, tab }));
 
-  // LIMPAR a mesa: apaga os rascunhos que NUNCA foram usados (não publicados nem
-  // agendados). Conta primeiro, pede confirmação, protege tudo o que está em uso.
-  const limparNaoUsados = useCallback(async () => {
+  // ARQUIVAR a mesa (NÃO apaga): manda para "arquivados" os rascunhos que nunca foram
+  // usados (não publicados nem agendados). Conta primeiro, protege o que está em uso.
+  const arquivarNaoUsados = useCallback(async () => {
     if (busy) return;
-    let info: { aApagar?: number; protegidos?: number } = {};
+    let info: { aArquivar?: number; protegidos?: number } = {};
     try { info = await fetch('/api/admin/crescer/limpar').then((r) => r.json()); } catch { setErro('não consegui contar os rascunhos'); return; }
-    const n = info.aApagar ?? 0;
-    if (!n) { setMsg('Não há rascunhos por usar para limpar (publicados e agendados ficam sempre).'); return; }
-    if (typeof window !== 'undefined' && !window.confirm(`Apagar ${n} rascunho(s) do crescer que NUNCA foram usados?\n\nOs publicados e agendados (${info.protegidos ?? 0}) ficam intactos.`)) return;
-    setBusy(true); setErro(null); setMsg('A limpar os rascunhos por usar…');
+    const n = info.aArquivar ?? 0;
+    if (!n) { setMsg('Não há rascunhos por usar para arquivar (publicados e agendados ficam sempre).'); return; }
+    if (typeof window !== 'undefined' && !window.confirm(`Arquivar ${n} rascunho(s) que nunca foram usados?\n\nNÃO se apaga nada: ficam na aba "arquivados". Os publicados e agendados (${info.protegidos ?? 0}) não se tocam.`)) return;
+    setBusy(true); setErro(null); setMsg('A arquivar os rascunhos por usar…');
     try {
       const d = await fetch('/api/admin/crescer/limpar', { method: 'DELETE' }).then((r) => r.json());
-      if (d.ok) { setMsg(`Limpos ${d.apagados} rascunho(s). Protegidos ${d.protegidos} (publicados/agendados).`); recarregar(); }
+      if (d.ok) { setMsg(`Arquivados ${d.arquivados}. Vê-os na aba "arquivados". (${d.protegidos} em uso, intactos.)`); recarregar(); }
       else setErro(d.detalhe || d.erro || 'falhou');
     } catch (e) { setErro(String(e)); } finally { setBusy(false); }
   }, [busy, recarregar]);
@@ -512,6 +512,9 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Gerar o REEL DE ASSINATURA (geometria VDS + a tua voz clonada)? Corre nos GitHub Actions, uns minutos.')) return;
     acao(slug, '/api/admin/crescer/render-reel', {}, 'A gravar o reel de assinatura (uns minutos)…', 'Reel de assinatura disparado. Aparece daqui a uns minutos (recarrega).', false);
   }, [acao]);
+  // arquivar/desarquivar UMA peça (sem apagar).
+  const arquivarPeca = useCallback((slug: string, arquivar: boolean) =>
+    acao(slug, '/api/admin/crescer/arquivar', { arquivar }, arquivar ? 'A arquivar…' : 'A desarquivar…', arquivar ? 'Arquivada (na aba «arquivados»).' : 'Desarquivada.', false), [acao]);
   // editor de slides: guardar os textos de todos os slides + imagem por slide.
   const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
   const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
@@ -577,11 +580,13 @@ export default function CrescerPage() {
     if (p.agendadoEm) return 'agendada';
     return renderizado ? 'pronto' : 'por-fazer';
   };
-  const ESTADO_LABEL: Record<string, string> = { 'por-fazer': 'por renderizar', pronto: 'pronto', agendada: 'agendada', publicada: 'publicada' };
+  const ESTADO_LABEL: Record<string, string> = { 'por-fazer': 'por renderizar', pronto: 'pronto', agendada: 'agendada', publicada: 'publicada', arquivada: '🗄 arquivados' };
   const pecasFiltradas = pecas.filter((p) =>
+    // arquivadas só aparecem na aba "arquivados"; ficam fora de todas as outras vistas.
+    (filtroEstado === 'arquivada' ? p.arquivado : !p.arquivado) &&
     (filtroTema === 'todos' || p.tematica === filtroTema) &&
     (filtroTipo === 'todos' || tipoDe(p) === filtroTipo) &&
-    (filtroEstado === 'todos' || estadoDe(p) === filtroEstado));
+    (filtroEstado === 'todos' || filtroEstado === 'arquivada' || estadoDe(p) === filtroEstado));
 
   return (
     <main className={`${FONTS} min-h-screen px-4 py-8 md:px-8`} style={{ background: BG2, color: TX }}>
@@ -641,7 +646,7 @@ export default function CrescerPage() {
           </div>
           <p className="text-[0.6rem] opacity-45 mt-2">Sem seleção, escolhe combinações ao acaso. Máximo 8 peças por lote (carrega outra vez para mais).</p>
           <div className="mt-3">
-            <button onClick={limparNaoUsados} disabled={busy} className="text-[0.7rem] px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300 disabled:opacity-50" title="apaga os rascunhos que nunca foram publicados nem agendados; os que estão em uso ficam">🧹 limpar rascunhos por usar</button>
+            <button onClick={arquivarNaoUsados} disabled={busy} className="text-[0.7rem] px-2.5 py-1 rounded-lg border border-white/25 text-creme-2/80 disabled:opacity-50" title="ARQUIVA (não apaga) os rascunhos que nunca foram publicados nem agendados; ficam na aba «arquivados»; os que estão em uso não se tocam">🗄 arquivar rascunhos por usar</button>
           </div>
 
           {/* PADRÃO fixável */}
@@ -688,7 +693,7 @@ export default function CrescerPage() {
           </div>
           <div className="flex flex-wrap items-center gap-1.5 mb-3">
             <span className="text-[0.56rem] uppercase tracking-widest opacity-40 mr-0.5">estado</span>
-            {(['todos', 'por-fazer', 'pronto', 'agendada', 'publicada'] as const).map((e) => (
+            {(['todos', 'por-fazer', 'pronto', 'agendada', 'publicada', 'arquivada'] as const).map((e) => (
               <Chip key={e} on={filtroEstado === e} onClick={() => setFiltroEstado(e)}>{e === 'todos' ? 'todos' : ESTADO_LABEL[e]}</Chip>
             ))}
             <span className="text-[0.56rem] opacity-40 ml-1">{pecasFiltradas.length} de {pecas.length}</span>
@@ -776,6 +781,9 @@ export default function CrescerPage() {
                     {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
                     <button onClick={() => reelAssinatura(p.slug)} disabled={tBusy} title="grava o REEL DE ASSINATURA: geometria VDS + a frase + a tua voz clonada (sem imagem, sem custo). Corre nos Actions." className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: DZ, color: BG2 }}>✦ reel assinatura</button>
                     <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
+                    {!p.publicado && (p.arquivado
+                      ? <button onClick={() => arquivarPeca(p.slug, false)} disabled={tBusy} title="tirar do arquivo e voltar a mostrar na lista" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>↩ desarquivar</button>
+                      : <button onClick={() => arquivarPeca(p.slug, true)} disabled={tBusy} title="guardar no arquivo (não apaga); vê na aba «arquivados»" className="px-2 py-1 rounded border border-white/25 disabled:opacity-40">🗄 arquivar</button>)}
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
                   {ab === 'preview' && <PreviewBox peca={p} />}
