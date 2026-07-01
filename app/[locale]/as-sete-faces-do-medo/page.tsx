@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { TopNav } from '@/components/TopNav';
 import { LangToggle } from '@/components/LangToggle';
 import { Footer } from '@/components/home/Footer';
+import { BotaoCompra } from '@/components/BotaoCompra';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -48,6 +49,21 @@ function SeteFaces({ className }: { className?: string }) {
 
 const Sep = () => <div className="h-px bg-ocre/20 max-w-[110px] mx-auto my-16" />;
 
+// Preço (promoção de lançamento).
+const PRECO = '$17';
+const PRECO_ORIGINAL = '$25';
+
+// O preço, mostrado sempre da mesma forma (real riscado + promoção).
+function Preco({ isEn, size = 'md' }: { isEn: boolean; size?: 'md' | 'lg' }) {
+  return (
+    <span className="font-sans text-creme-2">
+      <span className={`line-through opacity-55 mr-2 ${size === 'lg' ? 'text-[1rem]' : 'text-[0.85rem]'}`}>{PRECO_ORIGINAL}</span>
+      <span className={`text-ambar font-medium ${size === 'lg' ? 'text-[1.35rem]' : 'text-[1rem]'}`}>{PRECO}</span>
+      <span className="text-creme-2/45 text-[0.8rem] ml-2">{isEn ? 'launch price' : 'preço de lançamento'}</span>
+    </span>
+  );
+}
+
 // As sete faces: [medo, símbolo] em PT e EN; a 7.ª é a raiz.
 const FACES: { pt: [string, string]; en: [string, string] }[] = [
   { pt: ['A Rejeição', 'O Espelho'], en: ['Rejection', 'The Mirror'] },
@@ -57,6 +73,14 @@ const FACES: { pt: [string, string]; en: [string, string] }[] = [
   { pt: ['A Exposição', 'A Luz'], en: ['Exposure', 'The Light'] },
   { pt: ['A Insignificância', 'O Apagamento'], en: ['Insignificance', 'The Erasure'] },
   { pt: ['A Separação', 'O Abismo'], en: ['Separation', 'The Abyss'] },
+];
+
+// Para quem é (honesto, sem promessas de cura nem táticas).
+const PARA_QUEM: { pt: string; en: string }[] = [
+  { pt: 'Escolhes quase sempre o seguro, e chamas-lhe bom senso.', en: 'You almost always choose the safe thing, and you call it good sense.' },
+  { pt: 'Estás cansada de ser forte, de segurar tudo sozinha.', en: 'You are tired of being strong, of holding everything on your own.' },
+  { pt: 'Repetes padrões que reconheces mas não sabes de onde vêm.', en: 'You repeat patterns you recognise but cannot trace to their source.' },
+  { pt: 'Dizes "eu sou assim" e já não sabes quanto disso és mesmo tu.', en: 'You say "this is just how I am" and no longer know how much of it is really you.' },
 ];
 
 export default async function AsSeteFacesDoMedo({ params }: { params: Promise<{ locale: string }> }) {
@@ -77,7 +101,7 @@ export default async function AsSeteFacesDoMedo({ params }: { params: Promise<{ 
           <img
             src={capa}
             alt={isEn ? 'The Seven Faces of Fear' : 'As Sete Faces do Medo'}
-            className="w-[270px] h-auto rounded-[16px] mx-auto mb-10 block border border-ocre"
+            className="w-[280px] h-auto rounded-[16px] mx-auto mb-10 block border border-ocre"
             style={{ boxShadow: '0 0 0 6px rgba(184,132,61,0.10), 0 24px 70px -24px rgba(0,0,0,0.7)', aspectRatio: '2 / 3' }}
           />
           <p className="font-sans text-[0.7rem] tracking-[0.34em] uppercase text-salvia mb-5">
@@ -97,6 +121,18 @@ export default async function AsSeteFacesDoMedo({ params }: { params: Promise<{ 
               ? 'There is a force you never see and that, even so, bends almost everything you do. You do not feel it as fear. You feel it as good sense when you do not risk, as responsibility when you stay, as love when you sacrifice yourself. It always has a beautiful name, and that is its greatest talent: passing for virtue so as never to be recognised.'
               : 'Há uma força que nunca vês e que, mesmo assim, curva quase tudo o que fazes. Não a sentes como medo. Sentes-la como bom senso quando não arriscas, como responsabilidade quando ficas, como amor quando te sacrificas. Tem sempre um nome bonito, e é esse o seu maior talento: fazer-se passar por virtude para não ser reconhecida.'}
           </p>
+          <div className="mt-9 flex flex-col items-center gap-3">
+            <a
+              href="#levar"
+              className="inline-block bg-ambar text-[#2A1C12] no-underline rounded-full px-9 py-3.5 text-[0.95rem] font-sans tracking-[0.02em] hover:bg-ocre transition-colors"
+            >
+              {isEn ? 'Read the book' : 'Ler o livro'}
+            </a>
+            <p className="font-sans text-[0.82rem]">
+              {isEn ? 'Immediate PDF · ' : 'PDF imediato · '}
+              <Preco isEn={isEn} />
+            </p>
+          </div>
         </header>
 
         <Sep />
@@ -170,6 +206,23 @@ export default async function AsSeteFacesDoMedo({ params }: { params: Promise<{ 
 
         <Sep />
 
+        {/* PARA QUEM É */}
+        <section className="max-w-[600px] mx-auto my-12">
+          <p className="font-sans text-[0.7rem] tracking-[0.32em] uppercase text-salvia mb-8 text-center">
+            {isEn ? 'This book is for you if' : 'Este livro é para ti se'}
+          </p>
+          <ul className="space-y-4">
+            {PARA_QUEM.map((q, i) => (
+              <li key={i} className="flex items-start gap-3.5">
+                <SeteFaces className="w-4 h-4 mt-1 shrink-0 text-ocre/70" />
+                <span className="text-creme-2 text-[1.02rem] leading-[1.7]">{isEn ? q.en : q.pt}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <Sep />
+
         {/* AMOSTRA */}
         <section className="max-w-[620px] mx-auto my-12 text-center">
           <p className="font-sans text-[0.7rem] tracking-[0.32em] uppercase text-salvia mb-8">
@@ -189,17 +242,35 @@ export default async function AsSeteFacesDoMedo({ params }: { params: Promise<{ 
 
         <Sep />
 
-        {/* FECHO (sem preço: o lançamento é dela) */}
-        <section className="max-w-[480px] mx-auto my-12 text-center">
-          <p className="font-sans text-[0.7rem] tracking-[0.28em] uppercase text-salvia/80 mb-4">
-            {isEn ? 'Coming soon' : 'Brevemente'}
-          </p>
-          <p className="max-w-[600px] mx-auto text-center text-creme-2/60 text-[0.95rem] italic font-serif leading-relaxed">
+        {/* LEVAR O LIVRO (compra) */}
+        <section id="levar" className="max-w-[460px] mx-auto my-12 text-center scroll-mt-24">
+          <h2 className="font-serif font-light text-creme text-[clamp(1.7rem,5vw,2.2rem)] leading-tight mb-3">
+            {isEn ? 'Take the book home' : 'Leva o livro contigo'}
+          </h2>
+          <p className="text-creme-2/70 text-[0.98rem] leading-relaxed mb-2">
             {isEn
-              ? 'These pages promise you no courage. They offer you sight. Do not read to correct yourself. Read to see yourself. By Vivianne dos Santos.'
-              : 'Estas páginas não te prometem coragem. Propõem-te ver. Não leias para te corrigires. Lê para te veres. Por Vivianne dos Santos.'}
+              ? 'The seven faces and the root, about sixty thousand words. Immediate PDF, yours to keep and to return to.'
+              : 'As sete faces e a raiz, cerca de sessenta mil palavras. PDF imediato, teu para guardar e voltar.'}
           </p>
+          <p className="mb-8">
+            <Preco isEn={isEn} size="lg" />
+          </p>
+          <div className="flex justify-center">
+            <BotaoCompra
+              slug="as-sete-faces-do-medo"
+              locale={locale}
+              titulo={isEn ? 'The Seven Faces of Fear' : 'As Sete Faces do Medo'}
+              preco={PRECO}
+              moeda="USD"
+            />
+          </div>
         </section>
+
+        <p className="max-w-[600px] mx-auto pb-4 text-center text-creme-2/50 text-[0.88rem] italic font-serif leading-relaxed">
+          {isEn
+            ? 'These pages promise you no courage. They offer you sight. Do not read to correct yourself. Read to see yourself. By Vivianne dos Santos.'
+            : 'Estas páginas não te prometem coragem. Propõem-te ver. Não leias para te corrigires. Lê para te veres. Por Vivianne dos Santos.'}
+        </p>
 
         <Sep />
         <Footer />

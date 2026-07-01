@@ -100,6 +100,37 @@ Por Vivianne dos Santos.`,
     ficheiro_path: 'produtos/a-grande-transicao.pdf',
   },
   {
+    slug: 'as-sete-faces-do-medo',
+    titulo: 'As Sete Faces do Medo',
+    subtitulo: 'Como o medo construiu as nossas escolhas, relações e vidas',
+    descricao: `**Livro · ~60.000 palavras · PDF imediato**
+
+Há uma força que nunca vês e que, mesmo assim, curva quase tudo o que fazes. Não a sentes como medo: sentes-la como bom senso quando não arriscas, como responsabilidade quando ficas, como amor quando te sacrificas. Tem sempre um nome bonito, e é esse o seu maior talento.
+
+Não é um livro para venceres o medo. Vencer pressupõe um inimigo lá fora, e o medo está por baixo de ti, como o chão, tão presente que deixaste de o notar. É um livro para o veres, que é a única coisa que o medo não sabe fazer de si próprio.
+
+**As sete faces do medo:**
+1. A Rejeição · O Espelho
+2. A Perda · O Punho
+3. A Escassez · O Inverno
+4. A Incerteza · A Fortaleza
+5. A Exposição · A Luz
+6. A Insignificância · O Apagamento
+7. A Separação · O Abismo, a raiz que gera as outras
+
+Seis faces que aprendeste a chamar por outros nomes, e uma sétima que as gera a todas: o receio de te separares, de deixares de pertencer, de deixares de ser.
+
+Por Vivianne dos Santos.`,
+    preco: '$17',
+    preco_original: '$25',
+    capa: `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-medo/capa-propria.png`,
+    ficheiro_path: 'produtos/as-sete-faces-do-medo.pdf',
+    badge: 'livro · novo',
+    destaque: true,
+    publicado: true,
+    ordem: 0,
+  },
+  {
     slug: 'ver-soltar',
     titulo: 'ver.soltar',
     subtitulo: 'a consciência: sair de dentro da tempestade',
