@@ -433,6 +433,23 @@ export default function CrescerPage() {
   const toggle = <T,>(setS: React.Dispatch<React.SetStateAction<Set<T>>>, id: T) => setS((s) => { const n = new Set(s); if (n.has(id)) n.delete(id); else n.add(id); return n; });
   const abrir = (slug: string, tab: string) => setAberto((a) => (a && a.slug === slug && a.tab === tab ? null : { slug, tab }));
 
+  // LIMPAR a mesa: apaga os rascunhos que NUNCA foram usados (não publicados nem
+  // agendados). Conta primeiro, pede confirmação, protege tudo o que está em uso.
+  const limparNaoUsados = useCallback(async () => {
+    if (busy) return;
+    let info: { aApagar?: number; protegidos?: number } = {};
+    try { info = await fetch('/api/admin/crescer/limpar').then((r) => r.json()); } catch { setErro('não consegui contar os rascunhos'); return; }
+    const n = info.aApagar ?? 0;
+    if (!n) { setMsg('Não há rascunhos por usar para limpar (publicados e agendados ficam sempre).'); return; }
+    if (typeof window !== 'undefined' && !window.confirm(`Apagar ${n} rascunho(s) do crescer que NUNCA foram usados?\n\nOs publicados e agendados (${info.protegidos ?? 0}) ficam intactos.`)) return;
+    setBusy(true); setErro(null); setMsg('A limpar os rascunhos por usar…');
+    try {
+      const d = await fetch('/api/admin/crescer/limpar', { method: 'DELETE' }).then((r) => r.json());
+      if (d.ok) { setMsg(`Limpos ${d.apagados} rascunho(s). Protegidos ${d.protegidos} (publicados/agendados).`); recarregar(); }
+      else setErro(d.detalhe || d.erro || 'falhou');
+    } catch (e) { setErro(String(e)); } finally { setBusy(false); }
+  }, [busy, recarregar]);
+
   const gerar = useCallback(async () => {
     if (busy) return;
     if (fonte === 'tema' && !surpreender && !temas.size) { setErro('Escolhe pelo menos uma temática (ou liga o "surpreende-me"), ou volta a "minerar o livro".'); return; }
@@ -622,6 +639,9 @@ export default function CrescerPage() {
             <button onClick={gerar} disabled={busy} className="px-4 py-2 rounded-lg border disabled:opacity-50 text-[0.84rem]" style={{ borderColor: DZ, background: DZ, color: BG2 }}>{busy ? 'a gerar…' : '🌱 gerar'}</button>
           </div>
           <p className="text-[0.6rem] opacity-45 mt-2">Sem seleção, escolhe combinações ao acaso. Máximo 8 peças por lote (carrega outra vez para mais).</p>
+          <div className="mt-3">
+            <button onClick={limparNaoUsados} disabled={busy} className="text-[0.7rem] px-2.5 py-1 rounded-lg border border-rose-400/40 text-rose-300 disabled:opacity-50" title="apaga os rascunhos que nunca foram publicados nem agendados; os que estão em uso ficam">🧹 limpar rascunhos por usar</button>
+          </div>
 
           {/* PADRÃO fixável */}
           <div className="mt-4 border-t border-white/10 pt-3">
