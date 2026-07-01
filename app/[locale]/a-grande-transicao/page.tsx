@@ -8,7 +8,8 @@ import type { Metadata } from 'next';
 export const dynamic = 'force-dynamic';
 
 const SUPA = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/+$/, '');
-const CAPA = `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-transicao/capa-propria.png`;
+const capaUrl = (locale: string) =>
+  `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-transicao/capa-propria${locale === 'en' ? '-en' : ''}.png`;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'What if much of what you call "human nature" is only the season you live in? An introduction to the Sciences of Emerging Consciousness.'
       : 'E se grande parte do que chamas "natureza humana" for só a estação em que vives? Introdução às Ciências da Consciência Emergente.',
-    openGraph: { images: [CAPA] },
+    openGraph: { images: [capaUrl(locale)] },
   };
 }
 
@@ -59,7 +60,7 @@ export default async function AGrandeTransicao({ params }: { params: Promise<{ l
   const { locale } = await params;
   setRequestLocale(locale);
   const isEn = locale === 'en';
-  const capa = `${CAPA}?v=${Date.now()}`;
+  const capa = `${capaUrl(locale)}?v=${Date.now()}`;
 
   return (
     <>
@@ -94,7 +95,9 @@ export default async function AGrandeTransicao({ params }: { params: Promise<{ l
               : 'Uma civilização futura olha para o nosso tempo e devolve-nos aquilo que não conseguíamos ver de dentro: que a dureza com que tratávamos a vida não era a nossa natureza, era a estação em que vivíamos, e que, sem o sabermos, já tínhamos começado a atravessar um limiar.'}
           </p>
           <p className="font-sans text-[0.78rem] tracking-[0.12em] text-creme-2/45 mt-6">
-            {isEn ? 'Immediate PDF · €19' : 'PDF imediato · €19'}
+            {isEn ? 'Immediate PDF · ' : 'PDF imediato · '}
+            <span className="line-through opacity-60">$35</span>{' '}
+            <span className="text-ambar/80">$27</span>
           </p>
         </header>
 
@@ -177,14 +180,20 @@ export default async function AGrandeTransicao({ params }: { params: Promise<{ l
           <h2 className="font-serif font-light text-creme text-[clamp(1.6rem,5vw,2.1rem)] leading-tight mb-3">
             {isEn ? 'Take the book home' : 'Leva o livro contigo'}
           </h2>
-          <p className="text-creme-2/65 text-[0.95rem] leading-relaxed mb-8">
-            {isEn ? 'Immediate PDF, yours to keep and return to. €19.' : 'PDF imediato, teu para guardar e voltar. €19.'}
+          <p className="text-creme-2/65 text-[0.95rem] leading-relaxed mb-2">
+            {isEn ? 'Immediate PDF, yours to keep and return to.' : 'PDF imediato, teu para guardar e voltar.'}
+          </p>
+          <p className="text-creme-2/80 text-[1rem] mb-8">
+            <span className="line-through opacity-55 mr-2">$35</span>
+            <span className="text-ambar font-medium">$27</span>
+            <span className="text-creme-2/45 text-[0.82rem] ml-2">{isEn ? 'launch price' : 'preço de lançamento'}</span>
           </p>
           <BotaoCompra
             slug="a-grande-transicao"
             locale={locale}
             titulo={isEn ? 'The Great Transition' : 'A Grande Transição'}
-            preco="€19"
+            preco="$27"
+            moeda="USD"
           />
         </section>
 

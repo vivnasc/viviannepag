@@ -42,19 +42,21 @@ export function LivroTransicao() {
     }
   }
 
-  async function carregarCapa(file: File) {
+  async function carregarCapa(file: File, lang: 'pt' | 'en' = 'pt') {
     setErro(null);
     setAviso(null);
     setACarregar(true);
     try {
       const fd = new FormData();
       fd.append('file', file);
+      fd.append('lang', lang);
       const res = await fetch('/api/admin/livro-transicao/upload-capa', { method: 'POST', body: fd });
       const json = await res.json();
       if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
-      if (json.url) setUrls((u) => ({ ...u, 'capa-propria': json.url as string }));
-      bust('capa-propria');
-      setAviso('Capa carregada. No render, a tua capa vence a gerada.');
+      const chave = lang === 'en' ? 'capa-propria-en' : 'capa-propria';
+      if (json.url) setUrls((u) => ({ ...u, [chave]: json.url as string }));
+      bust(chave);
+      setAviso(lang === 'en' ? 'Capa inglesa carregada. O render EN usa-a.' : 'Capa carregada. No render PT, a tua capa vence a gerada.');
     } catch (e) {
       setErro(e instanceof Error ? e.message : String(e));
     } finally {
@@ -87,29 +89,36 @@ export function LivroTransicao() {
       <section className="border border-ocre/15 rounded-[14px] p-6">
         <h3 className="font-serif text-creme text-[1.05rem] mb-1">Capa própria</h3>
         <p className="text-creme-2/60 text-[0.82rem] font-serif italic mb-4">
-          Se fizeste a capa fora do site (a imagem dos dois mundos), carrega-a aqui. Vence sempre a capa gerada no render.
+          Se fizeste a capa fora do site, carrega-a aqui. Uma para o livro português, outra para o inglês (com o nome «The Great Transition»). Cada uma vence a gerada no render respetivo.
         </p>
-        <div className="flex items-center gap-4">
-          <label className="inline-flex items-center gap-2 cursor-pointer bg-ambar text-terra font-sans text-[0.85rem] font-medium rounded-[12px] px-4 py-2.5 hover:bg-ocre transition-colors">
-            {aCarregar ? 'a carregar…' : 'carregar capa'}
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f) carregarCapa(f);
-              }}
-            />
-          </label>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            key={`capa-propria-${vers['capa-propria'] ?? 0}`}
-            src={urlImg('capa-propria', 'png')}
-            alt="capa própria"
-            className="w-[78px] h-[104px] object-cover rounded-[8px] border border-ocre/20 bg-terra/40"
-            onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {(['pt', 'en'] as const).map((lg) => {
+            const chave = lg === 'en' ? 'capa-propria-en' : 'capa-propria';
+            return (
+              <div key={lg} className="flex items-center gap-4">
+                <label className="inline-flex items-center gap-2 cursor-pointer bg-ambar text-terra font-sans text-[0.82rem] font-medium rounded-[12px] px-4 py-2.5 hover:bg-ocre transition-colors whitespace-nowrap">
+                  {aCarregar ? 'a carregar…' : lg === 'en' ? 'capa · inglês' : 'capa · português'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f) carregarCapa(f, lg);
+                    }}
+                  />
+                </label>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={`${chave}-${vers[chave] ?? 0}`}
+                  src={urlImg(chave, 'png')}
+                  alt={`capa ${lg}`}
+                  className="w-[74px] h-[99px] object-cover rounded-[8px] border border-ocre/20 bg-terra/40"
+                  onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
+                />
+              </div>
+            );
+          })}
         </div>
       </section>
 

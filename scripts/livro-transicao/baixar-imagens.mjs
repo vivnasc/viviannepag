@@ -32,9 +32,13 @@ async function baixar(ficheiro) {
 
 const manifesto = {};
 
-// capa: a própria (png) vence a gerada (jpg)
+// capa PT: a própria (png) vence a gerada (jpg)
 if (await baixar('capa-propria.png')) manifesto['capa'] = 'capa-propria.png';
 else if (await baixar('capa.jpg')) manifesto['capa'] = 'capa.jpg';
+
+// capa EN: a própria inglesa (png) vence a gerada inglesa (jpg)
+if (await baixar('capa-propria-en.png')) manifesto['capa-en'] = 'capa-propria-en.png';
+else if (await baixar('capa-en.jpg')) manifesto['capa-en'] = 'capa-en.jpg';
 
 // vinhetas das Partes
 for (let n = 1; n <= 4; n++) {

@@ -360,9 +360,11 @@
 }
 
 // ============================ capa (imagem, se existir) ======================
-#if tem-img("capa") {
+// em EN usa a capa inglesa (capa-en) se existir; senão a capa PT.
+#let capa-chave = if lang == "en" and tem-img("capa-en") { "capa-en" } else { "capa" }
+#if tem-img(capa-chave) {
   set page(margin: 0pt, header: none, footer: none)
-  image(caminho-img("capa"), width: 100%, height: 100%, fit: "cover")
+  image(caminho-img(capa-chave), width: 100%, height: 100%, fit: "cover")
 }
 
 // ============================ rosto ==========================================

@@ -7,14 +7,15 @@ export const maxDuration = 60;
 
 const BUCKET = 'viviannepag-assets';
 
-// POST (multipart/form-data) { file } — a Vivianne carrega a sua própria capa
-// (a imagem dos dois mundos que gerou onde quiser). Guarda em
-// livro-transicao/capa-propria.png e essa vence sempre o render.
+// POST (multipart/form-data) { file, lang? } — a Vivianne carrega a sua própria
+// capa (a imagem dos dois mundos). Guarda em livro-transicao/capa-propria.png
+// (PT) ou capa-propria-en.png (EN); essa vence sempre o render respetivo.
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
 
   const form = await req.formData().catch(() => null);
   const file = form?.get('file');
+  const lang = String(form?.get('lang') ?? 'pt');
   if (!(file instanceof Blob) || file.size === 0) {
     return NextResponse.json({ erro: 'sem-ficheiro' }, { status: 400 });
   }
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
 
   const supabase = getSupabaseAdmin();
   const buffer = Buffer.from(await file.arrayBuffer());
-  const path = 'livro-transicao/capa-propria.png';
+  const path = lang === 'en' ? 'livro-transicao/capa-propria-en.png' : 'livro-transicao/capa-propria.png';
   const { error } = await supabase.storage.from(BUCKET).upload(path, buffer, {
     contentType: file.type,
     upsert: true,

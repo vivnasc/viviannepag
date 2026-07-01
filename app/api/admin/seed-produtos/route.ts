@@ -90,8 +90,8 @@ Não é um livro de melhoria pessoal. É a investigação de uma hipótese à es
 A Grande Transição é a passagem entre organizar a vida em torno do medo e organizá-la em torno da criação e da pertença.
 
 Por Vivianne dos Santos.`,
-    preco: '€19',
-    preco_original: null,
+    preco: '$27',
+    preco_original: '$35',
     capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-transicao/capa-propria.png`,
     badge: 'livro',
     destaque: true,
