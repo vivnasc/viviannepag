@@ -13,7 +13,10 @@
 
 #import "vendor/droplet/droplet.typ": dropcap
 
-#let livro = json("/livro/livro.json")
+// idioma: `typst compile --input lang=en ...` (default pt). Escolhe o conteúdo
+// e as strings fixas (mapa, colofão, sistema) na língua certa.
+#let lang = sys.inputs.at("lang", default: "pt")
+#let livro = json(if lang == "en" { "/livro/livro_en.json" } else { "/livro/livro.json" })
 
 // ---- paleta ----
 #let PAPER = rgb("#f4f1ea")
@@ -59,7 +62,32 @@
 // ---- SISTEMA SEMÂNTICO (livro/sistema.json) ----
 // cada TIPO de conteúdo tem rótulo + cor + moldura; o template gera tudo daqui.
 // As molduras "caixa"/"caixa-arquivo" usam os SVGs da Vivianne (vendor/marca/).
-#let sistema = json("/livro/sistema.json")
+#let sistema = json(if lang == "en" { "/livro/sistema_en.json" } else { "/livro/sistema.json" })
+
+// strings fixas do template (mapa, colofão) por idioma
+#let T = if lang == "en" {(
+  cartografia: "CARTOGRAPHY OF CONSCIOUSNESS",
+  mapa: "Map of the Transition",
+  caminho: "The path this book travels: from survival, through the fissure, to emergence.",
+  sobrev: "Survival", fissura: "Fissure", emerg: "Emergence",
+  sobrev_s: "living not to die", fissura_s: "loss and possibility", emerg_s: "to create and to mean",
+  mecanismos: "Mechanisms", experiencia: "Experience", emergencias: "Emergences",
+  col1: ("fear", "scarcity", "control", "defensive identity", "striving"),
+  col2: ("crisis of meaning", "mourning the old", "displacement", "searching", "the question"),
+  col3: ("creation", "cooperation", "consciousness", "fluid identity", "meaning"),
+  colofao: "The harshness with which we treat life is not who we are, it is the season we live in.",
+)} else {(
+  cartografia: "CARTOGRAFIA DA CONSCIÊNCIA",
+  mapa: "Mapa da Transição",
+  caminho: "O caminho que este livro percorre: da sobrevivência, pela fissura, à emergência.",
+  sobrev: "Sobrevivência", fissura: "Fissura", emerg: "Emergência",
+  sobrev_s: "viver para não morrer", fissura_s: "perda e possibilidade", emerg_s: "criar e significar",
+  mecanismos: "Mecanismos", experiencia: "Experiência", emergencias: "Emergências",
+  col1: ("medo", "escassez", "controlo", "identidade defensiva", "esforço"),
+  col2: ("crise de sentido", "luto do antigo", "deslocamento", "busca", "pergunta"),
+  col3: ("criação", "cooperação", "consciência", "identidade fluida", "significado"),
+  colofao: "A dureza com que tratamos a vida não é quem somos, é a estação em que vivemos.",
+)}
 
 // MANIFESTO das imagens (capa + vinhetas das Partes). O CI baixa-as do bucket e
 // preenche este JSON (chave -> ficheiro). Em dev fica vazio -> placeholders.
@@ -294,12 +322,12 @@
     #let c3 = 96mm
     #let R = 22mm
     #v(4mm)
-    #text(font: sans, fill: GOLDSOFT, size: 8pt, weight: 500, tracking: 0.32em)[CARTOGRAFIA DA CONSCIÊNCIA]
+    #text(font: sans, fill: GOLDSOFT, size: 8pt, weight: 500, tracking: 0.32em)[#T.cartografia]
     #v(3mm)
-    #text(font: display, fill: TITLEINK, size: 22pt, weight: 300)[Mapa da Transição]
+    #text(font: display, fill: TITLEINK, size: 22pt, weight: 300)[#T.mapa]
     #v(4mm)
     #block(width: 92mm, text(font: serif, style: "italic", fill: SOFT, size: 10pt)[
-      O caminho que este livro percorre: da sobrevivência, pela fissura, à emergência.
+      #T.caminho
     ])
     #v(7mm)
     #sep("transicao", 70mm)
@@ -312,9 +340,9 @@
       #circ(c1, rgb(48, 40, 28).transparentize(42%))
       #circ(c2, GOLD.transparentize(93%))
       #circ(c3, rgb(135, 120, 86).transparentize(90%))
-      #lab(c1, "Sobrevivência", [viver para não morrer], rgb("#f6f2ea"), rgb("#e7dfce"))
-      #lab(c2, "Fissura", [perda e possibilidade], GOLDSOFT, SOFT)
-      #lab(c3, "Emergência", [criar e significar], GOLDSOFT, SOFT)
+      #lab(c1, T.sobrev, T.sobrev_s, rgb("#f6f2ea"), rgb("#e7dfce"))
+      #lab(c2, T.fissura, T.fissura_s, GOLDSOFT, SOFT)
+      #lab(c3, T.emerg, T.emerg_s, GOLDSOFT, SOFT)
     ]
     #v(9mm)
     #line(length: W, stroke: 0.5pt + GOLD.transparentize(45%))
@@ -324,9 +352,9 @@
       line(length: 30mm, stroke: 0.4pt + GOLD.transparentize(55%)),
       block(above: 1mm, { set text(size: 8.2pt, fill: SOFT); set par(leading: 0.85em); items.join(linebreak()) })))))
     #box(width: W, height: 38mm)[
-      #col(c1, "Mecanismos", ("medo", "escassez", "controlo", "identidade defensiva", "esforço"))
-      #col(c2, "Experiência", ("crise de sentido", "luto do antigo", "deslocamento", "busca", "pergunta"))
-      #col(c3, "Emergências", ("criação", "cooperação", "consciência", "identidade fluida", "significado"))
+      #col(c1, T.mecanismos, T.col1)
+      #col(c2, T.experiencia, T.col2)
+      #col(c3, T.emergencias, T.col3)
     ]
   ]
 }
@@ -382,7 +410,7 @@
   #set par(justify: false, first-line-indent: 0pt, spacing: 0pt)
   #rule-orn(); #v(10mm)
   #block(width: 76%, text(font: serif, style: "italic", fill: TITLEINK, size: 14.5pt, weight: 300)[
-    A dureza com que tratamos a vida não é quem somos, é a estação em que vivemos.
+    #T.colofao
   ])
   #v(10mm)
   #text(font: sans, fill: FAINT, size: 7.4pt, tracking: 0.26em)[#upper[© 2026 #livro.autora · #livro.selo]]

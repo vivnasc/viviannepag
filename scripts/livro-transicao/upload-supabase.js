@@ -15,6 +15,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
 
 const FICHEIROS = [
   ['A-GRANDE-TRANSICAO.pdf', 'produtos/a-grande-transicao.pdf', 'application/pdf'],
+  ['A-GRANDE-TRANSICAO-EN.pdf', 'produtos/a-grande-transicao-en.pdf', 'application/pdf'],
 ];
 
 (async () => {

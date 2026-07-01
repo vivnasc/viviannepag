@@ -13,6 +13,8 @@ export function LivroTransicao() {
   const [aGerar, setAGerar] = useState<string | null>(null);
   const [aCarregar, setACarregar] = useState(false);
   const [aRender, setARender] = useState(false);
+  const [aTraduzir, setATraduzir] = useState(false);
+  const [progTrad, setProgTrad] = useState<{ feitas: number; total: number } | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
 
@@ -59,6 +61,29 @@ export function LivroTransicao() {
       setErro(e instanceof Error ? e.message : String(e));
     } finally {
       setACarregar(false);
+    }
+  }
+
+  async function traduzir() {
+    setErro(null);
+    setAviso(null);
+    setATraduzir(true);
+    try {
+      let terminado = false;
+      let guarda = 0;
+      while (!terminado && guarda < 40) {
+        guarda++;
+        const res = await fetch('/api/admin/livro-transicao/traduzir', { method: 'POST' });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.detalhe || json.erro || `erro ${res.status}`);
+        setProgTrad({ feitas: json.feitas, total: json.total });
+        terminado = json.terminado;
+      }
+      setAviso('Tradução completa. Já podes renderizar o PDF inglês.');
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : String(e));
+    } finally {
+      setATraduzir(false);
     }
   }
 
@@ -143,6 +168,28 @@ export function LivroTransicao() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Tradução EN */}
+      <section className="border border-ocre/15 rounded-[14px] p-6">
+        <h3 className="font-serif text-creme text-[1.05rem] mb-1">Tradução · inglês</h3>
+        <p className="text-creme-2/60 text-[0.82rem] font-serif italic mb-5">
+          Traduz o livro para inglês pela Claude, com a tua voz (sem tiques de IA, sem travessões). Corre em lotes e podes voltar a carregar para continuar. Depois, o render faz o PDF inglês próprio.
+        </p>
+        <div className="flex items-center gap-5 flex-wrap">
+          <button
+            onClick={traduzir}
+            disabled={aTraduzir}
+            className="bg-ambar/90 text-terra font-sans text-[0.85rem] font-medium rounded-[12px] px-5 py-3 hover:bg-ocre transition-colors disabled:opacity-50"
+          >
+            {aTraduzir ? 'a traduzir…' : 'traduzir para inglês'}
+          </button>
+          {progTrad && (
+            <span className="text-creme-2/70 text-[0.82rem]">
+              {progTrad.feitas}/{progTrad.total} unidades
+            </span>
+          )}
         </div>
       </section>
 

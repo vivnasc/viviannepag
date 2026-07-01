@@ -43,11 +43,27 @@ jobs:
       - name: Gerar livro.json a partir do manuscrito
         run: node scripts/livro-transicao/gerar-json.mjs
 
-      - name: Compilar o PDF (Typst)
+      - name: Baixar tradução EN do bucket (se existir)
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        run: |
+          curl -fsSL "${SUPABASE_URL%/}/storage/v1/object/public/viviannepag-assets/livro-transicao/livro_en.json?v=$(date +%s)" \
+            -o livro/livro_en.json && echo "tradução EN encontrada" || echo "sem tradução EN ainda (só sai o PT)"
+
+      - name: Compilar o PDF PT (Typst)
         run: |
           mkdir -p livro-transicao
           typst compile --font-path build/fonts/static --root . \
             build/livro-transicao.typ livro-transicao/A-GRANDE-TRANSICAO.pdf
+
+      - name: Compilar o PDF EN (Typst, se houver tradução)
+        run: |
+          if [ -f livro/livro_en.json ]; then
+            typst compile --input lang=en --font-path build/fonts/static --root . \
+              build/livro-transicao.typ livro-transicao/A-GRANDE-TRANSICAO-EN.pdf
+          else
+            echo "sem livro_en.json — PDF inglês não gerado"
+          fi
 
       - name: Publicar o PDF no bucket
         env:

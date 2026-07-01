@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
+import { VOZ_REGRAS } from '@/lib/livro-voz';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
@@ -9,11 +10,10 @@ const SYSTEM = `És o editor literário de Vivianne dos Santos para o livro "A G
 
 A tua tarefa: reescrever UMA passagem do livro seguindo o COMENTÁRIO dela, sem trair a voz dela.
 
-Regras invioláveis:
+${VOZ_REGRAS}
+
+Mais:
 - Português europeu (PT-PT). Nunca português do Brasil.
-- NUNCA uses travessões (— ou –). Usa vírgulas, dois pontos ou pontos.
-- Preserva a VOZ da autora: ensaística, serena, densa mas que respira, sem auto-ajuda, sem jargão académico, sem nomear autores.
-- Não inventes factos, biografia, marcos nem citações.
 - Mantém o sentido e o argumento da passagem, a não ser que o comentário peça outra coisa.
 - Faz exatamente o que o comentário pede (encurtar, aclarar, dar mais força, mudar o tom, etc.).
 - Devolve APENAS a passagem reescrita, em prosa corrida. Sem aspas, sem títulos, sem explicações, sem "Aqui está", sem opções.`;

@@ -29,3 +29,6 @@ livro/*.pdf
 build/transicao.html
 /A-Grande-Transicao.pdf
 /A-Grande-Transicao-typst.pdf
+
+# tradução gerada do livro (vem do bucket no render)
+livro/livro_en.json
