@@ -9,6 +9,7 @@ const PDF_URL = `${SUPA}/storage/v1/object/public/viviannepag-assets/produtos/a-
 
 export function LivroTransicao() {
   const [vers, setVers] = useState<Record<string, number>>({});
+  const [urls, setUrls] = useState<Record<string, string>>({});
   const [aGerar, setAGerar] = useState<string | null>(null);
   const [aCarregar, setACarregar] = useState(false);
   const [aRender, setARender] = useState(false);
@@ -16,8 +17,9 @@ export function LivroTransicao() {
   const [aviso, setAviso] = useState<string | null>(null);
 
   const bust = (chave: string) => setVers((v) => ({ ...v, [chave]: Date.now() }));
+  // usa o URL exato devolvido pela geração (se houver); senão o do bucket público
   const urlImg = (chave: string, ext = 'jpg') =>
-    `${BUCKET}/${chave}.${ext}${vers[chave] ? `?v=${vers[chave]}` : ''}`;
+    urls[chave] ?? `${BUCKET}/${chave}.${ext}${vers[chave] ? `?v=${vers[chave]}` : ''}`;
 
   async function gerar(chave: string) {
     setErro(null);
@@ -31,6 +33,7 @@ export function LivroTransicao() {
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      if (json.imageUrl) setUrls((u) => ({ ...u, [chave]: json.imageUrl as string }));
       bust(chave);
     } catch (e) {
       setErro(e instanceof Error ? e.message : String(e));
@@ -49,6 +52,7 @@ export function LivroTransicao() {
       const res = await fetch('/api/admin/livro-transicao/upload-capa', { method: 'POST', body: fd });
       const json = await res.json();
       if (!res.ok) throw new Error(json.erro || `erro ${res.status}`);
+      if (json.url) setUrls((u) => ({ ...u, 'capa-propria': json.url as string }));
       bust('capa-propria');
       setAviso('Capa carregada. No render, a tua capa vence a gerada.');
     } catch (e) {
@@ -100,10 +104,11 @@ export function LivroTransicao() {
           </label>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            key={`capa-propria-${vers['capa-propria'] ?? 0}`}
             src={urlImg('capa-propria', 'png')}
             alt="capa própria"
-            className="w-[78px] h-[104px] object-cover rounded-[8px] border border-ocre/20"
-            onError={(e) => ((e.currentTarget.style.display = 'none'))}
+            className="w-[78px] h-[104px] object-cover rounded-[8px] border border-ocre/20 bg-terra/40"
+            onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
           />
         </div>
       </section>
@@ -119,10 +124,11 @@ export function LivroTransicao() {
             <div key={img.chave} className="flex gap-4 border border-ocre/10 rounded-[12px] p-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                key={`${img.chave}-${vers[img.chave] ?? 0}`}
                 src={urlImg(img.chave)}
                 alt={img.nome}
                 className="w-[88px] h-[120px] object-cover rounded-[8px] border border-ocre/20 bg-terra/40 shrink-0"
-                onError={(e) => ((e.currentTarget.style.visibility = 'hidden'))}
+                onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
               />
               <div className="flex flex-col">
                 <p className="font-serif text-creme text-[0.95rem] leading-tight">{img.nome}</p>
