@@ -1,0 +1,58 @@
+# CAPÍTULO 2
+## A Perda · O Punho
+
+Há um gesto que fazes com as mãos sem reparares, e ele conta a tua história melhor do que qualquer palavra. Quando algo te é precioso, fechas a mão. Uma criança faz isto com um brinquedo à frente de outra. Um adulto faz o mesmo com uma pessoa, só que a mão que fecha é invisível e chama-se de mil maneiras. Ligação a mais. Ciúme. Precisar de saber onde ela está. Ficar mal quando ela tem uma vida que não te inclui. Chamamos-lhe amor intenso, e às vezes o amor é intenso. Mas há uma intensidade que é amor e outra que é punho, e este capítulo é sobre a segunda.
+
+### O que se protege
+
+A rejeição temia perder o grupo. Esta face teme perder uma pessoa só, aquela em quem depositaste tanto que a sua ausência te parece o fim de ti. É um medo mais concentrado e por isso mais violento. O grupo é difuso, dilui-se, sempre houve outro grupo. A pessoa amada é única, insubstituível, e o corpo sabe-o. Quando amas a sério, o outro deixa de ser alguém lá fora e passa a ser uma parte de dentro. Perdê-lo deixa de parecer uma tristeza e passa a parecer uma amputação. É por isso que o luto dói no corpo, não só no peito: porque uma parte de ti, que morava naquela ligação, ficou de repente sem lugar onde estar.
+
+Vale a pena não envergonhares este medo, porque ele nasce do que tens de melhor. Só teme perder quem sabe amar. As pessoas que se protegem de amar demais nunca conhecem este punho, e também nunca conhecem a coisa de que ele é a sombra. Não te proponho amares menos. Proponho-te olhares para o que acontece quando o amor, com medo de acabar, se transforma na própria coisa que apressa o fim.
+
+### A viragem
+
+O que parecia a prova máxima do teu amor revela-se, muitas vezes, a prova máxima do teu medo. Este é o capítulo mais difícil de aceitar, porque toca no ponto em que estamos mais convencidos da nossa nobreza. Achamos que quanto mais apertamos, mais amamos. Que o ciúme mede a paixão. Que querer saber tudo é cuidar. Que sofrer muito por alguém é a medida de o querermos bem.
+
+Olha para o que o punho faz de verdade, quando o abres à luz. O ciúme não protege a relação, corrói-a. O controlo não segura o outro, afasta-o. A vigilância não te dá certeza, dá-te uma dose que precisa de ser renovada de hora a hora, como qualquer vício. E a pessoa que amas, dentro desse punho, não se sente amada. Sente-se agarrada, o que é uma coisa muito diferente e muito mais solitária, porque estar agarrado é estar preso à ansiedade de outra pessoa, e ninguém floresce preso à ansiedade de outra pessoa. O amor que fecha a mão obtém sempre o contrário do que quer. Aperta para não perder, e é o aperto que o faz perder.
+
+### Como opera por dentro
+
+O mecanismo desta face vive de uma ilusão de que talvez nunca tenhas suspeitado: a ilusão de que é possível garantir o outro. De que existe uma quantidade suficiente de saber, de presença, de prova de amor, que te ponha finalmente a salvo da perda. O punho passa a vida a tentar chegar a essa quantidade, e nunca chega, porque ela não existe. O outro é livre. Foi essa liberdade que te fez apaixonar por ele, e é essa mesma liberdade que nunca poderás abolir sem matar aquilo que amas.
+
+Repara na mecânica do ciúme, que é a expressão mais pura desta face. Não começa no outro. Começa numa imagem que a tua cabeça produz, uma cena inventada de perda, e o teu corpo reage à cena como se ela fosse real. A partir daí, procuras no mundo provas que confirmem a cena, e a cabeça, generosa, encontra-as sempre, porque uma cabeça assustada encontra o que procura. Um atraso vira sinal. Um telefone virado para baixo vira confissão. Uma alegria que não veio de ti vira ameaça. Não estás a reagir à vida do outro. Estás a reagir ao filme que a tua própria mente projecta, e depois castigas o outro pelo argumento de um filme que ele nem sabe que está a passar.
+
+O controlo é o ciúme sem o rosto do rival. É o mesmo medo aplicado a tudo o que possa mudar. Precisas de saber os planos, de aprovar as decisões, de que nada se mova sem passar por ti, e chamas a isto seres organizada, seres presente, cuidares da casa e da família. Uma parte disso é competência, e voltaremos a ela na aresta. Mas há uma parte que é o punho a fechar-se sobre a incerteza, porque tudo o que não controlas é uma porta por onde a perda pode entrar. Viver assim é exaustivo, e não só para ti. É exaustivo para quem vive contigo, que sente que respira dentro dos limites do teu medo e que qualquer novidade que traz é primeiro filtrada pelo alarme, antes de poder ser simplesmente uma coisa boa.
+
+### A galeria de máscaras
+
+No amor, já viste o punho de frente. Mas ele mora em mais sítios da tua vida do que julgas, e é preciso abrir cada porta.
+
+Na maternidade, esta face tem o seu disfarce mais poderoso, porque a proximidade entre o amor de mãe e o medo de perder o filho é tão grande que quase não há fresta entre eles. Uma mãe que teme perder o filho pode passar a vida a protegê-lo daquilo de que ele precisa. Da queda que lhe ensinaria a levantar-se. Do não que lhe daria estrutura. Do mundo que lhe daria mundo. O punho materno chama-se sempre amor, e é amor, mas um amor contaminado por um medo que não é do filho, é da mãe, o medo de o ver sofrer, que ela transforma em não o deixar viver. A criança criada dentro de um punho aprende duas coisas ao mesmo tempo: que é muito amada, e que o mundo é perigoso demais para ela. Cresce a precisar de amor e a ter medo de tudo, exactamente como a pessoa que a criou, e o punho passa de geração em geração vestido de dedicação.
+
+Nas amizades, o punho aparece como a mágoa desproporcionada quando a outra pessoa tem uma vida sem ti. A amiga que fez um plano e não te chamou. O grupo que se juntou e tu soubeste depois. A dor que isto te dá, quando é grande demais para o tamanho do facto, não é sobre a amizade. É o punho a apertar-se, a ler a autonomia do outro como abandono, incapaz de suportar que quem amas exista fora do teu campo de visão. As amizades saudáveis respiram. Entram e saem, ausentam-se e voltam, e a confiança é justamente aguentar a ausência sem a ler como fim. O punho não confia. O punho precisa de estar sempre a ver, porque para ele o que não vê está a desaparecer.
+
+No trabalho e no dinheiro, a mesma face veste-se de dificuldade em delegar, em largar um projecto, em confiar que os outros façam à maneira deles. Agarras-te ao controlo do processo com a mesma mão com que te agarras às pessoas, porque também ali, por baixo, mora o medo de que se soltares se perca. É a chefe que refaz o trabalho da equipa toda e depois se queixa de estar sobrecarregada, sem ver que a sobrecarga é o preço do punho, o custo de nunca conseguir confiar o suficiente para abrir a mão.
+
+E há o punho virado para o passado, que é o mais silencioso de todos. É a incapacidade de deixar partir o que já partiu. A relação que acabou há anos e que ainda ocupa o melhor quarto da tua cabeça. A pessoa que morreu e cujo lugar mantens intacto, não pela memória, que é sagrada, mas por uma recusa de continuar a viver que confundes com fidelidade. Há uma diferença enorme entre honrar quem se foi e ficar agarrada à dor da perda como quem se agarra à última coisa que ainda o liga a ti. A primeira liberta-te para amar de novo sem traíres ninguém. A segunda mantém o punho fechado sobre uma ausência, e uma mão fechada sobre o vazio não pode receber mais nada.
+
+### A aresta
+
+Agora a honestidade, sem a qual esta lente se torna cruel. Nem toda a proximidade é punho. Nem todo o cuidado é controlo. Nem toda a dor de perder é medo doentio.
+
+O amor liga de verdade, e essa ligação verdadeira faz com que a perda doa. Isso não é o punho, é o preço justo de ter amado, e quem nunca quer pagar esse preço acaba a não amar nada com peso. Querer estar perto de quem amas é são. Sentir a falta é são. Chorar uma perda com uma dor que parece não caber no corpo é são, é a coisa mais são que há, é o amor a mostrar o seu tamanho depois do fim. Não confundas o luto com o punho. O luto é a mão a abrir-se devagar, a doer porque se abre. O punho é a mão que se recusa a abrir e chama fidelidade à sua rigidez.
+
+Há também um cuidado que segura sem prender, e é preciso saber vê-lo para não o envergonhar. A mãe que protege o filho de um perigo real não é o punho, é o trabalho de ser mãe. Quem cuida de alguém doente e organiza tudo à volta dele não é controlo, é amor em acção. O sinal, mais uma vez, está no efeito. O cuidado que é amor deixa o outro maior, mais capaz, mais livre com o tempo. O cuidado que é punho deixa-o menor, mais dependente, mais pequeno de ano para ano. Olha para quem cuidas e pergunta em que direcção essa pessoa está a crescer ao teu lado. A resposta diz-te qual das duas mãos tens usado.
+
+### O que desarma esta face
+
+A ontologia relacional que já encontrámos tem, sobre esta face, uma palavra particularmente libertadora, e é preciso dizê-la com cuidado para não a tornar consolo barato. Onde se entende que sou porque somos, a pessoa que amas não é uma posse que podes perder. É uma parte do tecido de que também tu és feita, e esse tecido não se desfaz por ela ter uma vida própria. Pelo contrário, é a vida própria dela que mantém vivo o fio que vos liga. Nessa forma de ver, ninguém pertence a ninguém, e no entanto todos se pertencem, porque o pertencer não é agarrar, é ser feito do mesmo. O punho aperta porque acredita que o outro é seu e lhe pode fugir. Onde o laço é entendido como tecido e não como posse, não há de onde fugir, porque não há a separação que o punho passa a vida a tentar impedir.
+
+Há ainda uma verdade mais nua, que estas culturas nunca esconderam e que nós passamos a vida a esconder de nós próprios: tudo o que amas, vais perder. Não como ameaça, como facto. As pessoas partem, as fases acabam, os filhos crescem e vão, os corpos morrem, incluindo o teu. O punho vive a fugir desta verdade, e é essa fuga que o cansa. No dia em que a olhas de frente, sem drama, como quem aceita a lei da casa, uma coisa estranha acontece. A mão começa a abrir-se, não de desespero, mas de sabedoria. Amas melhor o que sabes que vais perder, porque paras de tentar guardá-lo e começas a estar presente enquanto ele dura. A consciência da perda, olhada sem terror, é a maior professora de presença que existe. O punho rouba-te o presente a tentar segurar o futuro. Abre-o, e o presente devolve-se-te inteiro.
+
+### A viragem final
+
+Não te vou pedir que ames menos, seria pedir-te para viveres menos. A pergunta com que fechas este capítulo é outra, e mais delicada: o teu amor, hoje, faz a pessoa amada maior ou mais pequena? Deixa-a respirar e crescer e ter uma vida que não passa toda por ti, ou aperta-a devagar em nome de a não perder?
+
+E se a resposta te doer, não a uses contra ti. Usa-a para reparares, da próxima vez que sentires a mão a fechar, no medo que está por baixo do gesto. Não é preciso combatê-lo. É preciso vê-lo, chamá-lo pelo nome certo, e saber que aquilo a que estás prestes a chamar amor é, naquele instante, receio de perder. Só isso já muda a temperatura da mão. Ver o punho é o começo de o poder abrir.
+
+Há mais para ti do que este aperto. Há uma forma de amar que não vive assombrada pelo fim, que segura sem prender, que se alegra com a vida do outro em vez de a vigiar. Essa forma não te é estranha. Já a sentiste, em momentos raros, quando o medo baixou a guarda e amaste alguém sem contas nem condições, só pela alegria de ele existir. Vejo essa capacidade em ti. Está debaixo do punho, à espera que abras a mão. E quando a abrires, vais descobrir que a face seguinte do medo não teme perder uma pessoa, mas perder o próprio chão de que precisas para viver, o pão, o sustento, o que te mantém de pé quando ninguém está a olhar.

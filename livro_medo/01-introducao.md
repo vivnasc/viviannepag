@@ -1,0 +1,36 @@
+# INTRODUÇÃO
+## Isto não é um livro sobre vencer o medo
+
+Quero começar por te tirar uma coisa das mãos, para que a leitura te fique mais leve. Não vais encontrar aqui um método para deixares de ter medo. Não porque isso seja difícil, mas porque seria mentira, e uma mentira que já te venderam muitas vezes. O medo não é uma doença que se cura nem um inimigo que se derrota. É uma das coisas mais antigas que trazes contigo, mais antiga do que a tua língua, mais antiga do que o teu nome. Um corpo sem medo nenhum não é um corpo livre. É um corpo que não chega ao fim do dia.
+
+O que te proponho é diferente, e mais interessante. Não vamos tentar apagar o medo. Vamos aprender a reconhecê-lo quando ele se disfarça de outra coisa, que é quase sempre. Porque o medo que te trava a vida não costuma aparecer a tremer. Aparece calmo, sensato, bem vestido. Chega com a cara da prudência, da lealdade, da humildade, do amor. Senta-se à tua mesa como se fosse da família, e tu passas-lhe o pão sem desconfiar, porque ele tem o rosto de uma virtude que aprendeste a admirar.
+
+### A tese, em voz baixa
+
+Aqui está a ideia que sustenta tudo o que vem a seguir, e prefiro dizer-ta cedo, sem cerimónia, para que a possas ir testando contra a tua própria vida enquanto lês.
+
+Grande parte daquilo a que chamas a tua personalidade não é o teu feitio. É a tua defesa. É a forma que encontraste, muito nova, quando ainda não tinhas palavras para o que sentias, de te protegeres de uma coisa que te parecia insuportável. Essa forma resultou. Manteve-te dentro, manteve-te segura, manteve-te de pé. Por isso ficou. Cresceste à volta dela como uma árvore cresce à volta de um arame que lhe apertaram no tronco em pequena, e hoje já não sabes onde acaba a madeira e começa o metal.
+
+O conformismo, o perfeccionismo, o controlo, a pressa de agradar, a dificuldade em parar, a necessidade de te tornares importante. Costumamos ler estas coisas como traços de carácter, umas boas, outras más. Este livro lê-as de outra maneira: como estratégias. Cada uma respondeu, um dia, a uma pergunta que o teu corpo fez sem te consultar. E a pergunta era sempre uma variação da mesma: como é que eu faço para não me separarem daquilo de que preciso para existir?
+
+Repara na palavra, porque é a chave de todo o livro. Separação. Vamos ver que o medo, por baixo de todos os seus disfarces, teme uma só coisa, declinada de sete maneiras. Teme perder o grupo. Teme perder quem ama. Teme perder o sustento. Teme perder o chão firme dos dias. Teme ser visto e julgado. Teme desaparecer sem deixar marca. E, no fundo de tudo isto, num quarto que quase nunca abrimos, teme simplesmente deixar de ser. A separação última, aquela de que todas as outras são ensaio, é a que nos espera a todos e que passamos a vida a fingir que não existe.
+
+### Seis faces e uma raiz
+
+Escolhi organizar o medo em sete faces, e há uma razão para não serem oito nem quatro. As primeiras seis são as que reconheces no dia a dia, as que te mexem os fios sem saberes que estão a ser puxados. A rejeição, a perda, a escassez, a incerteza, a exposição, a insignificância. Cada uma tem o seu capítulo, a sua forma de operar, os seus esconderijos preferidos na tua casa, no teu trabalho, na tua cama, na tua relação com Deus e com o dinheiro.
+
+A sétima não está ao lado das outras. Está por baixo. É a raiz de onde as seis brotam, e por isso o seu capítulo vem no fim, quando já reconheceste as máscaras uma a uma e estás pronta para ver que todas escondiam o mesmo rosto. Essa raiz é o medo da separação levado ao limite, o medo de deixares de existir. Chamo-lhe o Abismo, e peço-te que tenhas paciência com ele até lá, porque é ele que dá sentido a tudo o resto. Um livro sobre as folhas que nunca fala da raiz é um livro que te entretém. Quero que este te sirva.
+
+Há quem tenha andado por aqui antes, e não seria honesto fingir que cheguei sozinha. Fritz Riemann, num livro de 1961 sobre as formas básicas da angústia, propôs que havia quatro medos essenciais, ligados a quatro tipos de personalidade. Era um psiquiatra, e a sua leitura é clínica, feita para o consultório e para o seu tempo. Karen Horney, antes dele, falou de uma angústia básica que nasce na criança quando o mundo à volta deixa de ser de fiar. Ernest Becker, mais tarde, teve a coragem de olhar para toda a civilização humana e ver nela uma resposta gigantesca ao terror de morrer. Devo alguma coisa aos três, e digo-o de peito aberto. Aqui vais encontrar outra coisa, no entanto. Não uma tipologia que te arruma numa gaveta, mas um mapa das faces que todos partilhamos. Não uma leitura clínica da doença, mas uma leitura relacional da vida comum. Não o passado da criança que foste, mas o presente da mulher que hoje escolhe, adia, cede e insiste. Onde estes autores me iluminam, digo-o. Onde sigo por outro caminho, também.
+
+### O que este livro te promete, e o que não
+
+Sê justa comigo e eu sê-lo-ei contigo. Não te prometo paz. Não te prometo que, fechado o livro, o medo largue os teus tornozelos. O que te prometo é ver. No fim de cada capítulo, vais reconhecer melhor uma das faces, e vais reconhecê-la primeiro em ti, depois nas pessoas de quem gostas, e a certa altura no mundo inteiro, porque uma vez que aprendes a ver esta gravidade já não a consegues deixar de ver. Isso muda tudo, ainda que não te dê descanso. Ver não é o mesmo que resolver. É o princípio de outra relação com aquilo que te move.
+
+Há aqui também uma disciplina de honestidade que quero que notes, porque é ela que separa este livro de um sermão. Vou mostrar-te, mais do que uma vez, os lugares onde a minha própria lente não serve. Onde a generosidade é mesmo generosidade e não medo de desagradar. Onde ficar é fidelidade e não incapacidade de partir. Onde parar é descanso e não fuga disfarçada. Se eu te dissesse que tudo o que fazes é medo, estaria a fazer contigo aquilo de que acuso o próprio medo: a reduzir-te, a encolher-te, a explicar-te por baixo. Não é isso que quero. Um instrumento que corta tudo por igual não é uma lente, é uma lâmina cega. Prefiro dar-te uma lente com arestas, que mostra onde vê e admite onde não alcança.
+
+### Como ler isto
+
+Podes ler os capítulos por ordem, e é assim que os escrevi, porque cada face prepara a seguinte e todas preparam a raiz. Podes também, se uma delas te chamar mais alto, começar por essa, porque cada uma se aguenta de pé sozinha. Só te peço uma coisa, a mesma que te pedi no prólogo e que te vou pedir vezes sem conta, porque é a única instrução verdadeira deste livro. Não leias para te consertares. Não sublinhes os teus defeitos com uma caneta severa. Lê como quem se aproxima de alguém de quem gosta e a quem quer finalmente compreender. Essa pessoa és tu, e tem levado a vida a defender-se de fantasmas que já não a podem magoar como magoavam a criança que os inventou por necessidade.
+
+Uma última coisa, antes de virarmos para a primeira face. Vais ler muitas frases sobre medo, e o teu instinto talvez seja assustares-te com a quantidade de medo que vais reconhecer em ti. Não te assustes. A quantidade de medo que consegues ver é exactamente a medida da coragem que já tens para o olhar. Ninguém que não fosse forte teria aberto este livro. Agora vem comigo até à primeira sala, a mais antiga de todas, aquela onde o medo aprendeu a chamar-se pertencer.
