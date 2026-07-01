@@ -23,3 +23,27 @@ Regras: sempre quente, escuro, dourado, silencioso. Figuras humanas **só anóni
 **Categorias de imagem a juntar** (para o banco): celestes (eclipse, luas, horizonte, estrelas) · botânicos em preto (folhas, ramos, flores secas, raízes, trigo — para acento *screen*) · água/paisagem (água parada com luz, bruma, mar ao amanhecer) · interiores quietos (janela, vaso, linho, sombra de folhas na parede) · texturas (pó de ouro, feixes de luz, fumo, ondulações) · figuras anónimas de costas num limiar.
 
 **A imagem-coroa** é o *limiar*: a figura minúscula de costas entre o mundo antigo (pesado, penumbra) e o novo (orgânico, luminoso). É a missão inteira numa imagem — reservar para *para onde vamos* e para as peças-manifesto.
+
+---
+
+## Famílias fotográficas MJ (o gémeo fotográfico da geometria) → tema
+
+A Vivianne gerou em Midjourney o **gémeo fotográfico de cada motivo VDS** (mesma linguagem,
+dark+ouro). Todas em fundo escuro (não preto) → modo **cena inteira (full-bleed + véu)**.
+Assim cada tema alterna, por seed, entre a geometria e a sua foto gémea.
+
+| Família fotográfica MJ | Tema(s) |
+|---|---|
+| **porta / portal de luz · portal circular sobre água · sol meio-submerso** | **para onde vamos** (imagem-coroa do limiar) · o eu maior |
+| feixe vertical de luz âmbar | sentido · consciência |
+| órbita luminosa com um nó | sentido · ciclos |
+| espiral dourada (foto — NÃO o SVG) | transformação · ciclos |
+| constelação de linhas finas + nós de luz | campo · não te curas só a ti |
+| círculos que se cruzam (vesica) | vínculos |
+| água escura com reflexos âmbar / ondas | não te curas só a ti · consciência · sentido |
+| poeira dourada a flutuar num raio | consciência |
+| cortinas de linho / interior quente à janela | corpo e presença · desencaixe |
+| névoa âmbar / fenda de luz na escuridão | sombra · transformação |
+| luas / eclipse sobre água | sombra · ciclos |
+
+Nota: a espiral **fotográfica** é linda e entra; a espiral **desenhada (SVG)** continua abolida.
