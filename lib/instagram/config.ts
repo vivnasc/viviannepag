@@ -54,6 +54,16 @@ export async function setIgConfig(patch: Partial<IgConfig>): Promise<void> {
   });
 }
 
+// As 3 portas novas (livros) reutilizam as credenciais das 3 contas antigas
+// (ver/vir/viver): a Vivianne so muda o @handle no Instagram, o token e o
+// IG_USER_ID mantem-se validos. Enquanto a porta nao tiver token proprio, usa o
+// slot antigo. Na primeira renovacao do cron o token migra para o slot da porta.
+const PORTA_LEGADO: Partial<Record<ContaId, ContaId>> = {
+  medo: 'versoltar',
+  sinais: 'virsoltar',
+  transicao: 'viversoltar',
+};
+
 // Credenciais a usar para publicar NUMA conta. Primeiro a config privada da
 // conta (token já renovado); para a veu.a.veu há fallback ao legado/env do
 // Vercel (arranque). A loja só funciona depois de colares o token dela.
@@ -65,6 +75,12 @@ export async function getIgCredenciais(conta: ContaId = 'veuaveu'): Promise<{ to
       token: c?.token || cfg.token || process.env.INSTAGRAM_TOKEN,
       igUserId: c?.igUserId || cfg.igUserId || process.env.INSTAGRAM_IG_ID,
     };
+  }
+  // porta sem token proprio ainda: usa as credenciais da conta antiga que herdou.
+  const legado = PORTA_LEGADO[conta];
+  if (!c?.token && legado) {
+    const leg = cfg.contas?.[legado];
+    if (leg?.token) return { token: leg.token, igUserId: leg.igUserId };
   }
   return { token: c?.token, igUserId: c?.igUserId };
 }
