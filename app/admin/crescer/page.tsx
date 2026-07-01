@@ -124,16 +124,16 @@ function PreviewBox({ peca }: { peca: Peca }) {
   const [estatico, setEstatico] = useState(true); // pré-ver PARADO (texto sempre visível, para posicionar) vs a mexer
   // LAYOUT ajustável por ela, guardado no browser e aplicado a tudo. Posição por OPÇÕES
   // (vertical: topo/centro/baixo · horizontal: esq/centro/dir), como ela editava antes.
-  const LAY0 = { av: 'baixo', ah: 'centro', txtSize: 5.6, geoTop: 15, geoW: 66 };
+  const LAY0 = { av: 'baixo', ah: 'centro', dist: 12, txtSize: 5.6, geoTop: 15, geoW: 66 };
   const [lay, setLay] = useState(LAY0);
   useEffect(() => { try { const s = localStorage.getItem('crescer-assinatura-layout'); if (s) setLay({ ...LAY0, ...JSON.parse(s) }); } catch { /* */ } }, []);
   const setL = (k: keyof typeof LAY0, v: string | number) => setLay((l) => { const n = { ...l, [k]: v }; try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(n)); } catch { /* */ } return n; });
-  const layQ = `av=${lay.av}&ah=${lay.ah}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
+  const layQ = `av=${lay.av}&ah=${lay.ah}&dist=${lay.dist}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
   const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}&${layQ}`;
   const Op = ({ k, val, children }: { k: keyof typeof LAY0; val: string; children: React.ReactNode }) => (
     <button onClick={() => setL(k, val)} className="text-[0.56rem] px-1.5 py-0.5 rounded border" style={bt(lay[k] === val)}>{children}</button>
   );
-  const Slider = ({ k, label, min, max, step }: { k: 'txtSize' | 'geoTop' | 'geoW'; label: string; min: number; max: number; step: number }) => (
+  const Slider = ({ k, label, min, max, step }: { k: 'dist' | 'txtSize' | 'geoTop' | 'geoW'; label: string; min: number; max: number; step: number }) => (
     <label className="flex items-center gap-1.5 text-[0.56rem]"><span className="w-14 opacity-70">{label}</span>
       <input type="range" min={min} max={max} step={step} value={lay[k]} onChange={(e) => setL(k, Number(e.target.value))} className="flex-1" />
       <span className="w-7 tabular-nums opacity-60 text-right">{lay[k]}</span></label>
@@ -176,6 +176,7 @@ function PreviewBox({ peca }: { peca: Peca }) {
           <Op k="av" val="topo">↑ topo</Op><Op k="av" val="centro">centro</Op><Op k="av" val="baixo">baixo ↓</Op></div>
         <div className="flex items-center gap-1"><span className="w-14 text-[0.54rem] opacity-70">horizontal</span>
           <Op k="ah" val="esq">esq</Op><Op k="ah" val="centro">centro</Op><Op k="ah" val="dir">dir</Op></div>
+        <Slider k="dist" label="distância" min={4} max={44} step={1} />
         <Slider k="txtSize" label="texto tam" min={3.6} max={8} step={0.2} />
         <Slider k="geoTop" label="forma ↑↓" min={4} max={40} step={1} />
         <Slider k="geoW" label="forma tam" min={36} max={86} step={2} />

@@ -12,7 +12,7 @@ const hashStr = (s: string) => { let h = 0; for (let i = 0; i < s.length; i++) h
 export default function RenderReelMae() {
   const [p, setP] = useState(0);
   // layout ajustável pela Vivianne (autonomia): posição/tamanho do texto e da geometria.
-  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; txtSize: number; geoTop: number; geoW: number } | null>(null);
+  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number } | null>(null);
   const geoRef = useRef<HTMLDivElement>(null);
   const externo = useRef(false);
 
@@ -24,7 +24,7 @@ export default function RenderReelMae() {
     const segs = linhas.flatMap(segmentar).slice(0, 12);
     const num = (k: string, d: number) => { const v = parseFloat(q.get(k) || ''); return Number.isFinite(v) ? v : d; };
     setParams({ tema, segs: segs.length ? segs : linhas, label: q.get('label') || undefined, multi: q.get('multi') === '1', estatico: q.get('static') === '1',
-      seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66) });
+      seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', dist: num('dist', 12), txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66) });
   }, []);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function RenderReelMae() {
         </svg>
       </div>
       <div style={{ position: 'absolute', left: '8%', right: '8%',
-        ...(params.av === 'topo' ? { top: '14%' } : params.av === 'centro' ? { top: '50%', transform: 'translateY(-50%)' } : { bottom: '12%' }),
+        ...(params.av === 'topo' ? { top: `${params.dist}%` } : params.av === 'centro' ? { top: '50%', transform: 'translateY(-50%)' } : { bottom: `${params.dist}%` }),
         textAlign: params.ah === 'esq' ? 'left' : params.ah === 'dir' ? 'right' : 'center' }}>
         <div style={{ width: `${ruleW}%`, height: 1, margin: params.ah === 'esq' ? '0 auto 4.5% 0' : params.ah === 'dir' ? '0 0 4.5% auto' : '0 auto 4.5%', background: `linear-gradient(90deg,transparent,${TOK.gold},transparent)` }} />
         <div style={{ position: 'relative', minHeight: estatico ? undefined : '11vh' }}>

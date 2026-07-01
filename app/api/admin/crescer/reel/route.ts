@@ -19,7 +19,7 @@ export async function GET(req: Request) {
     const idx = Math.max(0, Math.min(total - 1, parseInt(slideParam, 10) || 0));
     const num = (k: string) => { const v = parseFloat(u.searchParams.get(k) || ''); return Number.isFinite(v) ? v : undefined; };
     const html = slideHTML({ tema, label, texto: segs[idx] || linhas.join(' '), idx: idx + 1, total,
-      seed: u.searchParams.get('seed') || raw, av: u.searchParams.get('av') || undefined, ah: u.searchParams.get('ah') || undefined, txtSize: num('txtSize'), geoTop: num('geoTop'), geoW: num('geoW') });
+      seed: u.searchParams.get('seed') || raw, av: u.searchParams.get('av') || undefined, ah: u.searchParams.get('ah') || undefined, dist: num('dist'), txtSize: num('txtSize'), geoTop: num('geoTop'), geoW: num('geoW') });
     return new Response(html, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
   }
   const html = reelHTML({ tema, linhas: linhas.length ? linhas : undefined, label });
