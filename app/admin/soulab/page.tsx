@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
-import { SOULAB, TIPOS_SOULAB, SOULAB_MUNDO, SOULAB_SLIDE, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
+import { SOULAB, SOULAB_EN, TIPOS_SOULAB, SOULAB_MUNDO, soulabSlide, sementeAleatoria, type TipoSoulabId } from '@/lib/soulab/marca';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
 import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
 
@@ -23,6 +23,7 @@ type Peca = {
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
   segPorMomento: number | null;
   formato: string; momentos: string[] | null;
+  lingua: 'pt' | 'en'; // pt = @soulab.studio · en = a conta internacional
   parteDe: string | null; parte: number | null; // série: continuação de um fio
   veiaTitulo?: string | null; veiaLivro?: string | null; // de que secção do livro foi minerada
   motionPendente?: boolean; // movimento a gerar (verifica-se sozinho)
@@ -134,7 +135,7 @@ function EfeitoBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled: boo
     <div className="px-2 pb-2 space-y-1.5 border-t border-white/5 pt-2">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">efeito do texto (vê a animar)</p>
       <div className="rounded-lg overflow-hidden border border-white/10">
-        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={efeito} {...SOULAB_SLIDE} />
+        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={efeito} {...soulabSlide(peca.lingua)} />
       </div>
       <div className="flex flex-wrap gap-1">
         {EFEITOS_TEXTO.map((ef) => (
@@ -210,7 +211,7 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
     <div className="px-2 pb-2 space-y-2 border-t border-white/5 pt-2">
       <p className="text-[0.55rem] uppercase tracking-widest opacity-50">tipografia (vê ao vivo)</p>
       <div className="rounded-lg overflow-hidden border border-white/10">
-        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={1} tipografia={tipo} {...SOULAB_SLIDE} />
+        <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={1} tipografia={tipo} {...soulabSlide(peca.lingua)} />
       </div>
       <div className="flex flex-wrap gap-1 items-center">
         <span className="text-[0.55rem] opacity-50 mr-0.5">fonte:</span>
@@ -270,14 +271,14 @@ function PreviewBox({ peca, disabled, busy, onSaveTempo }: { peca: Peca; disable
             if (op <= 0) return null;
             return (
               <div key={i} style={{ position: 'absolute', inset: 0, opacity: op }}>
-                <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...SOULAB_SLIDE} />
+                <KineticSlide texto={m} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={lp} efeito={ef} tipografia={tip} {...soulabSlide(peca.lingua)} />
               </div>
             );
           })}
         </div>
       ) : (
         <div className="rounded-lg overflow-hidden border border-white/10">
-          <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tip} {...SOULAB_SLIDE} />
+          <KineticSlide texto={peca.texto} destaque={peca.destaque} imageUrl={peca.imageUrl ?? undefined} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tip} {...soulabSlide(peca.lingua)} />
         </div>
       )}
       {peca.clipUrl && <p className="text-[0.5rem] opacity-45">(o movimento vê-se no 🎬; aqui mostra-se a imagem + o texto a animar)</p>}
@@ -304,8 +305,10 @@ export default function SoulabPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [aba, setAba] = useState<'por-agendar' | 'agendadas' | 'publicadas' | 'todas'>('por-agendar');
   const [filtroTipo, setFiltroTipo] = useState<string>('todos');
+  const [filtroLingua, setFiltroLingua] = useState<'todas' | 'pt' | 'en'>('todas');
   const [busca, setBusca] = useState('');
   const [tipo, setTipo] = useState<TipoSoulabId>('frase');
+  const [lingua, setLingua] = useState<'pt' | 'en'>('pt'); // pt = @soulab.studio · en = a conta internacional
   const [tema, setTema] = useState('');
   const sementesRecentes = useRef<string[]>([]); // últimas sementes do "surpreende-me", para não repetir
   const [quantos, setQuantos] = useState(1);
@@ -336,14 +339,14 @@ export default function SoulabPage() {
     setBusy(true); setErro(null);
     setMsg('A explorar no laboratório (texto + imagem)… pode demorar até 1 min por peça. Volta e recarrega se fechares.');
     try {
-      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, modo, fonte, tema: tema.trim() || undefined }) });
+      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, modo, fonte, lingua, tema: tema.trim() || undefined }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} peça(s) gerada(s).${j.detalhe ? ` (aviso: ${j.detalhe})` : ''} Revê em baixo, regenera a imagem se quiseres, e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(false); }
-  }, [busy, tipo, quantos, formato, modo, fonte, tema, recarregar]);
+  }, [busy, tipo, quantos, formato, modo, fonte, lingua, tema, recarregar]);
 
   // COLAR URL DO CLIP — resgate: se o movimento foi gerado fora (ou a geração passou
   // do limite e não guardou), cola-se aqui o URL do MP4 e ele persiste na peça.
@@ -566,6 +569,7 @@ export default function SoulabPage() {
   const buscaN = busca.trim().toLowerCase();
   const pecasFiltradas = pecas
     .filter((p) => aba === 'todas' || estadoDe(p) === aba)
+    .filter((p) => filtroLingua === 'todas' || p.lingua === filtroLingua)
     .filter((p) => filtroTipo === 'todos' || p.tipo === filtroTipo)
     .filter((p) => !buscaN || `${p.texto} ${p.conceito} ${(p.momentos ?? []).join(' ')}`.toLowerCase().includes(buscaN));
   const pecasOrdenadas = aba === 'agendadas'
@@ -603,6 +607,15 @@ export default function SoulabPage() {
             ))}
           </div>
           <p className="text-[0.58rem] opacity-45 mb-3">{fonte === 'livro' ? 'Minerado de um capítulo ainda não usado (anti-repetição). Impossível sem o livro.' : 'Parte do ângulo/tema abaixo.'}</p>
+          <p className="text-[0.6rem] uppercase tracking-widest opacity-50 mb-1.5">língua / conta</p>
+          <div className="flex flex-wrap gap-2 mb-1">
+            {([['pt', `🇵🇹 português · @${SOULAB.handle}`], ['en', `🇬🇧 english · @${SOULAB_EN.handle}`]] as const).map(([id, label]) => (
+              <button key={id} onClick={() => setLingua(id)} title={id === 'en' ? 'gera o MESMO tipo de peça em inglês, para a conta internacional (publica-se noutra conta)' : 'português, na conta @soulab.studio'}
+                className="px-3 py-1.5 rounded-lg border text-[0.78rem]"
+                style={lingua === id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.18)', color: SOULAB.paleta.texto }}>{label}</button>
+            ))}
+          </div>
+          <p className="text-[0.58rem] opacity-45 mb-3">{lingua === 'en' ? 'Mesmo laboratório, em inglês. A peça vai para a conta internacional (liga o token em 🔑 Instagram).' : 'A conta portuguesa de sempre.'}</p>
           <p className="text-[0.6rem] uppercase tracking-widest opacity-50 mb-1.5">ângulo</p>
           <div className="flex flex-wrap gap-2 mb-3">
             {TIPOS_SOULAB.map((t) => (
@@ -671,6 +684,11 @@ export default function SoulabPage() {
 
           {/* filtro por ângulo + busca */}
           <div className="flex flex-wrap items-center gap-1.5 mb-3">
+            {([['todas', 'todas'], ['pt', '🇵🇹 pt'], ['en', '🇬🇧 en']] as const).map(([id, label]) => (
+              <button key={id} onClick={() => setFiltroLingua(id)} className="text-[0.62rem] px-2 py-0.5 rounded-full border"
+                style={filtroLingua === id ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>{label}</button>
+            ))}
+            <span className="opacity-25">·</span>
             <button onClick={() => setFiltroTipo('todos')} className="text-[0.62rem] px-2 py-0.5 rounded-full border"
               style={filtroTipo === 'todos' ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.15)', opacity: 0.7 }}>todos</button>
             {TIPOS_SOULAB.map((t) => (
@@ -708,11 +726,11 @@ export default function SoulabPage() {
             {pecasOrdenadas.map((p) => (
               <div key={p.slug} className="rounded-xl border overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', borderColor: sel.has(p.slug) ? SOULAB.paleta.destaque : 'rgba(255,255,255,0.1)' }}>
                 <div className="relative">
-                  <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...SOULAB_SLIDE} />
+                  <KineticSlide texto={p.texto} destaque={p.destaque} imageUrl={p.imageUrl ?? undefined} mundo={MUNDO} prog={1} {...soulabSlide(p.lingua)} />
                   <button onClick={() => toggleSel(p.slug)} title={sel.has(p.slug) ? 'tirar da seleção' : 'selecionar'}
                     className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10"
                     style={sel.has(p.slug) ? { background: SOULAB.paleta.destaque, borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
-                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.veiaTitulo ? `📖 ${p.veiaTitulo}` : (p.tipo ?? 'soulab')}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}{p.parte ? ` · ↪ parte ${p.parte}` : ''}</span>
+                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.lingua === 'en' ? '🇬🇧 EN · ' : ''}{p.veiaTitulo ? `📖 ${p.veiaTitulo}` : (p.tipo ?? 'soulab')}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}{p.parte ? ` · ↪ parte ${p.parte}` : ''}</span>
                   {/* O estado que importa primeiro é "está renderizada?" (videoUrl). O clip
                       do motion vinha à frente e ESCONDIA o sinal de MP4 — agora o MP4 ganha,
                       e o "🎬 com vida" mostra-se só quando tem motion mas AINDA não renderizou. */}

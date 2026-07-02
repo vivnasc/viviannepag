@@ -13,7 +13,7 @@ import { AnelCover } from '@/components/admin/AnelCover';
 import { ReelSlide } from '@/components/admin/ReelSlide';
 import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide, estiloSequencia, type EfeitoTexto, type Tipografia, type Transicao } from '@/components/admin/KineticSlide';
-import { SOULAB_SLIDE } from '@/lib/soulab/marca';
+import { SOULAB_SLIDE, soulabSlide } from '@/lib/soulab/marca';
 import { CRESCER_SLIDE } from '@/lib/crescer/marca';
 import { slideDaMarca, ehMarcaMetodoVS, METODOVS_CONTAS_LISTA } from '@/lib/metodo-vs/marca';
 import { MetodoSlide, type EstiloMetodo } from '@/components/admin/MetodoSlide';
@@ -29,7 +29,7 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'], variabl
 const jetmono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jetmono', display: 'block' });
 
 type Dia = { dia: number; mundo: Mundo; palavra?: string; subtitulo?: string; slides?: (Slide & { imageUrl?: string })[]; vozPalavras?: { w: string; t0: number; t1: number }[]; vozDur?: number };
-type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; marca?: string; soulab?: { clipUrl?: string }; metodo?: { tipo?: string; personagem?: string }; estilo?: EstiloMetodo } };
+type Coleccao = { dias: Dia[]; theme?: { subtipo?: string; marca?: string; soulab?: { clipUrl?: string; lingua?: 'pt' | 'en' }; metodo?: { tipo?: string; personagem?: string }; estilo?: EstiloMetodo } };
 
 // séries de reels com capa-assinatura (selo + carvão na capa)
 const SERIE_ASSINATURA: Record<string, string> = { ninguem: 'O que ninguém te explica', sinais: 'Sinais de que…', pensador: 'Uma ideia de…' };
@@ -185,6 +185,7 @@ export default function RenderVeuPage() {
   const [nomeCarta, setNomeCarta] = useState<string>('');
   const [estiloM, setEstiloM] = useState<EstiloMetodo | undefined>(undefined); // tipografia à escolha da Vivianne // nome da personagem na carta "Sou Aquela"
   const [clipBg, setClipBg] = useState<string | null>(null); // Soulab: o clip do Kling (fundo em movimento)
+  const [soulabLingua, setSoulabLingua] = useState<'pt' | 'en'>('pt'); // Soulab: PT ou EN (muda o @ do rodapé)
   const [erro, setErro] = useState<string | null>(null);
   const [prog, setProg] = useState(1); // progresso do cinético/infográfico (0..1), conduzido pelo render
   const [video, setVideo] = useState(false); // ?video=1 => modo MP4 (infográfico animado 9:16)
@@ -238,6 +239,7 @@ export default function RenderVeuPage() {
         setNomeCarta(col.theme?.metodo?.tipo === 'carta' ? (col.theme?.metodo?.personagem ?? '') : '');
         setEstiloM(col.theme?.estilo ?? undefined);
         setClipBg(col.theme?.soulab?.clipUrl ?? null);
+        setSoulabLingua(col.theme?.soulab?.lingua === 'en' ? 'en' : 'pt');
         const dia = col.dias.find((d) => d.dia === diaN);
         const slide = dia?.slides?.[idx];
         if (!dia || !slide) { setErro('slide nao encontrado'); return; }
@@ -303,7 +305,7 @@ export default function RenderVeuPage() {
   // o complementar entra, sobre o vídeo contínuo. A assinatura é a CRESCER_SLIDE.
   const ehCrescer = (estado?.dia.mundo as string) === 'crescer';
   const ehSeqSobreClip = (estado?.dia.mundo as string) === 'soulab' || ehCrescer || ehMarcaMetodoVS(marcaM);
-  const slidePropsCena = ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : SOULAB_SLIDE;
+  const slidePropsCena = ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : soulabSlide(soulabLingua);
 
   // TEMPO DE LEITURA: a passagem entre faces (split) é proporcional ao texto — a
   // face 2 (revelação, mais longa) fica com MAIS tempo. Face 1 nunca > 50%.
@@ -398,7 +400,7 @@ export default function RenderVeuPage() {
               tipografia={(s as { tipografia?: Tipografia }).tipografia}
               conceito={s.conceito}
               clipUrl={!solo && ehSeqSobreClip ? (clipBg ?? undefined) : undefined}
-              {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : (estado.dia.mundo as string) === 'soulab' ? SOULAB_SLIDE : {})}
+              {...(ehMarcaMetodoVS(marcaM) ? slideDaMarca(marcaM) : ehCrescer ? CRESCER_SLIDE : (estado.dia.mundo as string) === 'soulab' ? soulabSlide(soulabLingua) : {})}
             />
           );
           // o frame único do método (manhã/dissolução) é tipo:'kinetico' — passa por

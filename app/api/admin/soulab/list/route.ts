@@ -20,7 +20,7 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; legenda?: string | null; hashtags?: string[] | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null; destaque?: string[]; notaVisual?: string | null; efeito?: string | null; tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string } | null; segPorMomento?: number | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null; formato?: string; parteDe?: string | null; parte?: number | null; veiaTitulo?: string | null; veiaLivro?: string | null; motionPredId?: string | null } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; soulab?: { tipo?: string; lingua?: 'pt' | 'en'; clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null; formato?: string; parteDe?: string | null; parte?: number | null; veiaTitulo?: string | null; veiaLivro?: string | null; motionPredId?: string | null } } | null;
     created_at?: string;
   };
 
@@ -32,6 +32,8 @@ export async function GET() {
       momentos: todosSlides.length > 1 ? todosSlides.map((x) => x.texto ?? '').filter(Boolean) : null,
       slug: row.slug,
       tipo: row.theme?.soulab?.tipo ?? null,
+      // língua da peça (pt = @soulab.studio · en = conta internacional). Fallback pelo slug.
+      lingua: (row.theme?.soulab?.lingua ?? (row.slug.startsWith('soulab-en-') ? 'en' : 'pt')) as 'pt' | 'en',
       texto: slide?.texto ?? row.brief ?? '',
       conceito: slide?.conceito ?? '',
       destaque: slide?.destaque ?? [],

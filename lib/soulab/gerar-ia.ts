@@ -6,7 +6,7 @@
 //
 // Só devolve texto/indicações (a imagem gera-se a seguir, no route, com Flux).
 
-import { SOULAB, getTipoSoulab, type TipoSoulabId } from './marca';
+import { SOULAB, getTipoSoulab, soulabHandle, soulabHashtags, type TipoSoulabId } from './marca';
 import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
 import { limparTravessoes } from '@/lib/texto';
 
@@ -33,10 +33,17 @@ export async function gerarPecaSoulab(
   continuarDe?: { frase: string; conceito?: string; cena?: string } | null, // PARTE 2 de um reel que resultou (cena = fundoPrompt da parte 1, para evoluir a MESMA imagem)
   modo: 'abre' | 'encaminha' = 'abre', // 'abre' = deixa em aberto; 'encaminha' = desdobra e pousa
   veia?: { titulo: string; texto: string; livroTitulo: string } | null, // MINERAÇÃO: excerto real do livro = fonte primária
+  lingua: 'pt' | 'en' = 'pt', // 'pt' = @soulab.studio · 'en' = a Soulab em inglês, na conta internacional
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
+  const handle = soulabHandle(lingua);
+  // regra de LÍNGUA (só EN): MESMA missão, voz, território e âncoras — mas o OUTPUT
+  // sai em inglês natural (a Soulab a falar inglês, não uma tradução à letra).
+  const regraLingua = lingua === 'en'
+    ? `\n\n⚑ LÍNGUA (regra dura, prioritária): escreve TODO o output (titulo, conceito, frase, momentos, legenda, hashtags) em INGLÊS natural e fluente, NUNCA traduzido à letra, para a conta internacional @${handle}. As regras específicas de "português europeu" abaixo NÃO se aplicam; em vez delas: inglês limpo, elegante e contemplativo, SEM em-dashes (—/–), sem clichés de self-help. A missão, o tom, a voz de convite e o território são EXATAMENTE os mesmos.`
+    : '';
 
-  const sys = `És a curadoria criativa da SOULAB (@${SOULAB.handle}) — ${SOULAB.posicionamento}
+  const sys = `És a curadoria criativa da SOULAB (@${handle}) — ${SOULAB.posicionamento}${regraLingua}
 
 A MISSÃO: ${SOULAB.missao}
 
@@ -77,7 +84,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "destaque": ["1 a 3 palavras-chave da frase para realçar"],
   "fundoPrompt": "prompt em INGLÊS para a imagem simbólica de fundo (arte conceptual, fine art, evocativa do sentido), sem pessoas a posar, sem texto, a terminar com --ar 9:16 --style raw",
   "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n). NUNCA repete nem reformula a frase que está na imagem (quem lê já a viu): começa ONDE essa frase acaba, continua o pensamento ou abre um ângulo lateral. 1 a 2 parágrafos curtos que aprofundam SEM fechar. TERMINA SEMPRE (obrigatório) com um CTA LEVE numa linha à parte: um convite suave a ficar com a pergunta, a guardar, a partilhar com quem precisa, ou a seguir o laboratório. O CTA é gentil e contemplativo, NUNCA marketing, NUNCA 'compra/link na bio', NUNCA imperativo agressivo. Nunca vender, nunca nomear o formato.",
-  "hashtags": ["8 a 12 hashtags em português, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA só ideia, em sequência (cada uma uma respiração, aparecem uma a uma sobre a mesma cena). Não são frases soltas: constroem um arco (abre, aprofunda, vira, fecha em aberto). A 1.ª é uma faca que para o scroll; a última deixa uma pergunta ou um eco. Mesma voz de convite, sem travessões."]' : ''}
+  "hashtags": ["8 a 12 hashtags em ${lingua === 'en' ? 'INGLÊS' : 'português'}, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA só ideia, em sequência (cada uma uma respiração, aparecem uma a uma sobre a mesma cena). Não são frases soltas: constroem um arco (abre, aprofunda, vira, fecha em aberto). A 1.ª é uma faca que para o scroll; a última deixa uma pergunta ou um eco. Mesma voz de convite, sem travessões."]' : ''}
 }`;
 
   const pedido = tema?.trim()
@@ -136,7 +143,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   const destaque = Array.isArray(o.destaque) ? (o.destaque as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
   const hashtags = Array.isArray(o.hashtags)
     ? (o.hashtags as unknown[]).map((x) => String(x).trim()).filter(Boolean)
-    : [...SOULAB.hashtagsBase];
+    : soulabHashtags(lingua);
   return {
     titulo: lp(o.titulo) || frase.slice(0, 40),
     conceito: lp(o.conceito),

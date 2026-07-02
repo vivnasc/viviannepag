@@ -101,6 +101,32 @@ export const SOULAB = {
   ],
 } as const;
 
+// ---------------------------------------------------------------------------
+// A CONTA EN da Soulab (o "gémeo internacional"): MESMO motor, MESMO conteúdo, em
+// INGLÊS, publicado NOUTRA conta de Instagram (tal como @viviannewrites é a mãe em
+// inglês). Não é uma marca nova: é a Soulab a falar inglês. Só muda o HANDLE (o que
+// aparece no rodapé do reel e na legenda) e as hashtags-base (inglês). O resto (voz,
+// território, âncoras, tipos, paleta, render) é partilhado — a fonte é sempre esta.
+//
+// ⚑ Quando a conta EN existir: troca o `handle` abaixo pelo @ real e liga o token em
+//    /admin/instagram (a conta chama-se 'soulaben' em lib/instagram/contas.ts). É a
+//    ÚNICA linha a mudar — como se fez em lib/crescer/contas-mae.ts para a mãe EN.
+// ---------------------------------------------------------------------------
+export type LinguaSoulab = 'pt' | 'en';
+
+export const SOULAB_EN = {
+  id: 'soulaben',
+  handle: 'soullab', // ⚑ placeholder — trocar pelo @ real da conta EN quando existir
+  nome: 'Soul Lab',
+  bioEN: 'A space to explore the human soul through images, symbols, words, music and imagination.',
+  hashtagsBase: ['#soullab', '#humansoul', '#symbolism', '#archetypes', '#contemplation', '#imagination'],
+} as const;
+
+/** O @ da conta (pt = @soulab.studio · en = a conta internacional) — para legenda/rodapé. */
+export const soulabHandle = (lingua?: string): string => (lingua === 'en' ? SOULAB_EN.handle : SOULAB.handle);
+/** As hashtags-base por língua (PT vs EN), usadas como fallback na geração. */
+export const soulabHashtags = (lingua?: string): string[] => (lingua === 'en' ? [...SOULAB_EN.hashtagsBase] : [...SOULAB.hashtagsBase]);
+
 /** Uma semente ampla ao acaso, para o laboratório (o botão "surpreende-me").
  *  Pool ALARGADO: as sementes curadas + as correntes do território (mais variedade,
  *  sem sair do mundo dela). `evitar` salta as últimas que já saíram, para não repetir. */
@@ -120,6 +146,18 @@ export const SOULAB_SLIDE: { selo: string | null; mostrarConceito: boolean; assi
   assinatura: `@${SOULAB.handle}`,
   site: 'viviannedossantos.com', // o @ em cima, o site por baixo (não repetir o handle)
 };
+
+// A MESMA marca no KineticSlide, mas com o rodapé da conta EN (@ internacional).
+// O render (app/render-veu) escolhe entre os dois pela língua da peça.
+export const SOULAB_SLIDE_EN: typeof SOULAB_SLIDE = {
+  selo: null,
+  mostrarConceito: false,
+  assinatura: `@${SOULAB_EN.handle}`,
+  site: 'viviannedossantos.com',
+};
+
+/** A assinatura do slide por língua (PT = @soulab.studio · EN = a conta internacional). */
+export const soulabSlide = (lingua?: string): typeof SOULAB_SLIDE => (lingua === 'en' ? SOULAB_SLIDE_EN : SOULAB_SLIDE);
 
 // o mundo (palette key) que a Soulab usa no render dos reels — ver PALETAS em
 // lib/estudio-conteudo.ts (entrada 'soulab').

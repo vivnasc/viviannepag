@@ -22,12 +22,19 @@ export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   // Soulab · laboratório criativo da alma (motor PRÓPRIO, separado dos outros).
   // Conteúdo gerado em /admin/soulab, distinguido por theme.marca. Ver lib/soulab/*.
   { id: 'soulab', nome: 'soulab.studio', emoji: '🧪' },
+  // Soulab EN · o mesmo laboratório em inglês, noutra conta (como @viviannewrites
+  // é a mãe em inglês). Detecta-se pelo slug 'soulab-en-'. O @ real fica em
+  // lib/soulab/marca.ts (SOULAB_EN.handle); liga o token em /admin/instagram.
+  { id: 'soulaben', nome: 'soulab (EN)', emoji: '🧪' },
 ];
 
 const IDS = new Set(CONTAS.map((c) => c.id));
 
 // a que conta/marca pertence um conteúdo (pelo theme + slug).
 export function contaDe(theme: { marca?: string; universo?: string; curso?: string } | null | undefined, slug = ''): ContaId {
+  // Soulab EN (@ internacional): tem de vir ANTES da marca explícita — a marca é
+  // 'soulab' (=conta id da PT) nas duas línguas, por isso é o slug que distingue.
+  if (slug.startsWith('soulab-en-')) return 'soulaben';
   if (theme?.marca && IDS.has(theme.marca)) return theme.marca; // marca explícita (ex.: importado por CSV)
   // Método VS (conta-mãe): publica na conta vivianne.dos.santos (loja), como as séries.
   if (theme?.marca === 'metodovs' || slug.startsWith('metodovs-')) return 'loja';
