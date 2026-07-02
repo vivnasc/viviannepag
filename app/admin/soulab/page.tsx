@@ -23,6 +23,9 @@ type Peca = {
   hashtags: string[]; fundoPrompt: string | null; efeito: string | null; tipografia: Tipografia | null;
   segPorMomento: number | null;
   formato: string; momentos: string[] | null;
+  parteDe: string | null; parte: number | null; // série: continuação de um fio
+  veiaTitulo?: string | null; veiaLivro?: string | null; // de que secção do livro foi minerada
+  motionPendente?: boolean; // movimento a gerar (verifica-se sozinho)
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
 };
 
@@ -308,6 +311,7 @@ export default function SoulabPage() {
   const [quantos, setQuantos] = useState(1);
   const [formato, setFormato] = useState<'frase' | 'momentos'>('frase');
   const [modo, setModo] = useState<'abre' | 'encaminha'>('abre'); // abre = deixa em aberto; encaminha = desdobra e pousa
+  const [fonte, setFonte] = useState<'livro' | 'tema'>('livro'); // minerar os livros (defeito) vs partir do ângulo/tema
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -332,14 +336,30 @@ export default function SoulabPage() {
     setBusy(true); setErro(null);
     setMsg('A explorar no laboratório (texto + imagem)… pode demorar até 1 min por peça. Volta e recarrega se fechares.');
     try {
-      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, modo, tema: tema.trim() || undefined }) });
+      const r = await fetch('/api/admin/soulab/gerar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tipo, quantos, formato, modo, fonte, tema: tema.trim() || undefined }) });
       const j = await r.json();
       if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
       else setMsg(`${j.gerados} peça(s) gerada(s).${j.detalhe ? ` (aviso: ${j.detalhe})` : ''} Revê em baixo, regenera a imagem se quiseres, e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(false); }
-  }, [busy, tipo, quantos, formato, tema, recarregar]);
+  }, [busy, tipo, quantos, formato, modo, fonte, tema, recarregar]);
+
+  // COLAR URL DO CLIP — resgate: se o movimento foi gerado fora (ou a geração passou
+  // do limite e não guardou), cola-se aqui o URL do MP4 e ele persiste na peça.
+  const colarClip = useCallback(async (slug: string) => {
+    if (acaoSlug || typeof window === 'undefined') return;
+    const url = window.prompt('Cola o URL do MP4 do movimento (do Replicate/playground). Vai ficar guardado na peça.');
+    if (!url || !/^https?:\/\//.test(url.trim())) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A guardar o clip na peça…');
+    try {
+      const r = await fetch('/api/admin/soulab/clip-url', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, url: url.trim() }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else { setMsg('Clip guardado. Vê em baixo; depois "render (reel)" põe o texto por cima.'); recarregar(); }
+    } catch (e) { setErro(String(e)); }
+    finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
 
   const darMovimento = useCallback(async (slug: string, opts: { ingredientes: string[]; camara: CamaraId; livre: string }) => {
     if (acaoSlug) return;
@@ -349,10 +369,31 @@ export default function SoulabPage() {
       const r = await fetch('/api/admin/soulab/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, ...opts }) });
       const j = await r.json();
       if (!r.ok) setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : ''));
+      else if (j.preparando) { setMsg(j.detalhe ?? 'O movimento está a ser gerado (uns minutos). A página verifica sozinha.'); setMotionOpen(null); recarregar(); }
       else { setMsg('Movimento gerado. Vê em baixo, no cartão. (É só o motion, sem texto; o texto entra no render.)'); setMotionOpen(null); recarregar(); }
     } catch (e) { setErro(String(e)); }
     finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
+
+  // VERIFICAÇÃO AUTOMÁTICA do movimento: enquanto houver peças com motion pendente,
+  // pergunta ao /motion-check de 12 em 12s; quando ficar pronto, recarrega e aparece.
+  useEffect(() => {
+    const pend = pecas.filter((p) => p.motionPendente).map((p) => p.slug);
+    if (!pend.length) return;
+    const t = setTimeout(async () => {
+      let mudou = false;
+      for (const slug of pend) {
+        try {
+          const r = await fetch('/api/admin/soulab/motion-check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+          const j = await r.json();
+          if (j.status === 'pronto' || j.status === 'falhou') mudou = true;
+        } catch { /* tenta no próximo ciclo */ }
+      }
+      if (mudou) setMsg('Movimento pronto. Vê no cartão.');
+      recarregar();
+    }, 12000);
+    return () => clearTimeout(t);
+  }, [pecas, recarregar]);
 
   const salvarLegenda = useCallback(async (slug: string, legenda: string, hashtags: string) => {
     if (acaoSlug) return;
@@ -553,6 +594,16 @@ export default function SoulabPage() {
         {/* gerar */}
         <section className="mb-6 rounded-2xl border border-white/10 p-5" style={{ background: 'rgba(255,255,255,0.03)' }}>
           <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">nova experiência</h2>
+          <p className="text-[0.6rem] uppercase tracking-widest opacity-50 mb-1.5">fonte</p>
+          <div className="flex flex-wrap gap-2 mb-1">
+            {([['livro', '📖 minerar o livro'], ['tema', '💭 ângulo / tema']] as const).map(([id, label]) => (
+              <button key={id} onClick={() => setFonte(id)} title={id === 'livro' ? 'cada peça nasce de uma ideia de um capítulo ainda não usado dos livros dela' : 'parte do ângulo escolhido ou de um tema livre'}
+                className="px-3 py-1.5 rounded-lg border text-[0.78rem]"
+                style={fonte === id ? { borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { borderColor: 'rgba(255,255,255,0.18)', color: SOULAB.paleta.texto }}>{label}</button>
+            ))}
+          </div>
+          <p className="text-[0.58rem] opacity-45 mb-3">{fonte === 'livro' ? 'Minerado de um capítulo ainda não usado (anti-repetição). Impossível sem o livro.' : 'Parte do ângulo/tema abaixo.'}</p>
+          <p className="text-[0.6rem] uppercase tracking-widest opacity-50 mb-1.5">ângulo</p>
           <div className="flex flex-wrap gap-2 mb-3">
             {TIPOS_SOULAB.map((t) => (
               <button key={t.id} onClick={() => setTipo(t.id)} title={t.descricao}
@@ -661,7 +712,7 @@ export default function SoulabPage() {
                   <button onClick={() => toggleSel(p.slug)} title={sel.has(p.slug) ? 'tirar da seleção' : 'selecionar'}
                     className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10"
                     style={sel.has(p.slug) ? { background: SOULAB.paleta.destaque, borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
-                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tipo ?? 'soulab'}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}</span>
+                  <span className="absolute top-1 left-1 text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.veiaTitulo ? `📖 ${p.veiaTitulo}` : (p.tipo ?? 'soulab')}{p.momentos && p.momentos.length > 1 ? ` · ❑ ${p.momentos.length} momentos` : ''}{p.parte ? ` · ↪ parte ${p.parte}` : ''}</span>
                   {/* O estado que importa primeiro é "está renderizada?" (videoUrl). O clip
                       do motion vinha à frente e ESCONDIA o sinal de MP4 — agora o MP4 ganha,
                       e o "🎬 com vida" mostra-se só quando tem motion mas AINDA não renderizou. */}
@@ -671,7 +722,9 @@ export default function SoulabPage() {
                       ? <span className="absolute top-1 right-1 text-[0.5rem] bg-sky-600/80 text-white rounded px-1 py-0.5">✅ MP4 pronto{p.clipUrl ? ' · vida' : ''}</span>
                       : p.clipUrl
                         ? <span className="absolute top-1 right-1 text-[0.5rem] rounded px-1 py-0.5" style={{ background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 }}>🎬 com vida · por renderizar</span>
-                        : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem · por renderizar</span>}
+                        : p.motionPendente
+                          ? <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-500/85 text-white rounded px-1 py-0.5">⏳ movimento a preparar…</span>
+                          : <span className="absolute top-1 right-1 text-[0.5rem] bg-amber-600/80 text-white rounded px-1 py-0.5">imagem · por renderizar</span>}
                 </div>
                 {p.clipUrl && (
                   <div className="px-2 pt-2">
@@ -684,6 +737,7 @@ export default function SoulabPage() {
                   <button onClick={() => setPreviewOpen(previewOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="ver o reel a animar ANTES de renderizar" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>▶ pré-ver {previewOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => novaImagem(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">imagem</button>
                   <button onClick={() => setMotionOpen(motionOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug || !p.imageUrl} title="escolhe o que mexe e dá vida à imagem" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🎬 movimento {motionOpen === p.slug ? '▴' : '▾'}</button>
+                  <button onClick={() => colarClip(p.slug)} disabled={!!acaoSlug} title="colar o URL de um MP4 já gerado (resgate, se a geração demorou demais ou foi feita fora)" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📎 colar clip</button>
                   <button onClick={() => setEfeitoOpen(efeitoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="escolhe e vê o efeito do texto a animar" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito {efeitoOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setSomOpen(somOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="áudio do reel: som da cena, máquina de escrever ou música ambiente" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 áudio {somOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => setTipoOpen(tipoOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="editor de tipografia: fonte, tamanho, cor" className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras {tipoOpen === p.slug ? '▴' : '▾'}</button>

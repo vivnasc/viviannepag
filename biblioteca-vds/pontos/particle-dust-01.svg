@@ -1,0 +1,44 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- particle-dust-01 | pontos | poeira | animar: cintilar aleatorio -->
+  <defs>
+    <style>
+      :root { --vds-gold-soft: #d9bd8a; }
+    </style>
+  </defs>
+  <g id="dust">
+    <circle cx="59.71" cy="29.93" r="1.1" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.84"/>
+    <circle cx="67.22" cy="52.92" r="1.53" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.8"/>
+    <circle cx="7.46" cy="99.74" r="0.67" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.37"/>
+    <circle cx="99.28" cy="5.9" r="0.9" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.27"/>
+    <circle cx="7.2" cy="67.37" r="1.6" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.74"/>
+    <circle cx="74.12" cy="6.37" r="1.2" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.55"/>
+    <circle cx="20.39" cy="89.23" r="0.49" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.73"/>
+    <circle cx="14.63" cy="2.72" r="1.33" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.69"/>
+    <circle cx="86.32" cy="81.76" r="1.49" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.7"/>
+    <circle cx="3.62" cy="33.9" r="0.6" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.65"/>
+    <circle cx="38.31" cy="29.94" r="1.43" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.44"/>
+    <circle cx="87.44" cy="55.81" r="0.66" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.53"/>
+    <circle cx="57.41" cy="41.51" r="0.79" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.75"/>
+    <circle cx="60.08" cy="35.33" r="1.33" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.6"/>
+    <circle cx="39.95" cy="57.37" r="0.71" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.3"/>
+    <circle cx="59.13" cy="52.51" r="0.99" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.43"/>
+    <circle cx="45.19" cy="7.96" r="1.4" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.37"/>
+    <circle cx="12.07" cy="85.02" r="1.19" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.62"/>
+    <circle cx="93.22" cy="24.87" r="1.02" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.49"/>
+    <circle cx="63.16" cy="68.02" r="0.7" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.37"/>
+    <circle cx="61.73" cy="0.04" r="0.77" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.72"/>
+    <circle cx="76.63" cy="43.21" r="0.88" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.56"/>
+    <circle cx="25.39" cy="29.24" r="1.5" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.42"/>
+    <circle cx="59.47" cy="5.89" r="1.54" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.66"/>
+    <circle cx="44.85" cy="17.42" r="1.48" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.42"/>
+    <circle cx="22.14" cy="45.51" r="1.41" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.47"/>
+    <circle cx="0.1" cy="42.11" r="0.54" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.84"/>
+    <circle cx="27.77" cy="57.6" r="1.17" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.79"/>
+    <circle cx="72.11" cy="97.44" r="0.73" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.39"/>
+    <circle cx="49.54" cy="39.43" r="1.42" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.55"/>
+    <circle cx="94.4" cy="77.88" r="1.06" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.8"/>
+    <circle cx="38.96" cy="58.43" r="1.56" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.53"/>
+    <circle cx="33.77" cy="74.41" r="1.57" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.77"/>
+    <circle cx="18.04" cy="24.59" r="0.84" fill="var(--vds-gold-soft, #d9bd8a)" opacity="0.28"/>
+  </g>
+</svg>

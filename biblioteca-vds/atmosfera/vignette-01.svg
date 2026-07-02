@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- vignette-01 | atmosfera | vinheta | animar: estatico -->
+  <defs>
+    <style>
+      :root { --vds-bg: #1c1610; }
+    </style>
+    <radialGradient id="vg"><stop offset="55%" stop-color="var(--vds-bg, #1c1610)" stop-opacity="0"/><stop offset="100%" stop-color="var(--vds-bg, #1c1610)" stop-opacity="0.9"/></radialGradient>
+  </defs>
+  <rect width="100" height="100" fill="url(#vg)"/>
+</svg>

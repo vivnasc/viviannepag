@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- vesica-triple-01 | geometria | tripla | animar: tres focos a acender -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g id="vesica" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="c-1" cx="39" cy="44" r="22" pathLength="1"/>
+    <circle id="c-2" cx="61" cy="44" r="22" pathLength="1"/>
+    <circle id="c-3" cx="50" cy="61.6" r="22" pathLength="1"/>
+  </g>
+</svg>

@@ -98,34 +98,48 @@ export function construirMovimento(opts: MovimentoOpts): { prompt: string; negat
 }
 
 type Pred = { id: string; status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled'; output?: string | string[]; error?: string };
+const saida = (p: Pred): string | null => (Array.isArray(p.output) ? p.output[0] : p.output) ?? null;
 
-// Anima `imageUrl` segundo as ESCOLHAS dela e devolve o URL do MP4 (do Replicate).
-// Espera o resultado (a previsão demora ~1-3 min num clip de 5s).
-export async function gerarMotionSoulab(imageUrl: string, token: string, opts: MovimentoOpts = {}, duracao: 5 | 10 = 5): Promise<string> {
+// INICIA a geração (Kling) e devolve o estado. Com Prefer wait=60, os clips rápidos
+// já vêm prontos (output); os lentos voltam 'processing' com um id para verificar
+// MAIS TARDE — assim a rota NUNCA bloqueia até ao limite do servidor (o bug dos
+// motions de ~10 min que expiravam e não guardavam). Verifica-se depois com verificarMotion.
+export async function iniciarMotionSoulab(imageUrl: string, token: string, opts: MovimentoOpts = {}, duracao: 5 | 10 = 5): Promise<{ id: string; status: Pred['status']; output: string | null }> {
   const { prompt, negative } = construirMovimento(opts);
-
   const criar = (imgField: 'start_image' | 'image') =>
     fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'wait=60' },
       body: JSON.stringify({ input: { prompt, negative_prompt: negative, duration: duracao, [imgField]: imageUrl } }),
     });
-
   let res = await criar('start_image');
-  if (res.status === 422) res = await criar('image'); // algumas versões usam 'image'
+  if (res.status === 422) res = await criar('image');
   if (!res.ok) throw new Error(`Replicate ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const pred = (await res.json()) as Pred;
+  return { id: pred.id, status: pred.status, output: saida(pred) };
+}
 
-  let pred = (await res.json()) as Pred;
+// VERIFICA uma previsão já iniciada (sem bloquear): devolve estado e, se pronto, o URL.
+export async function verificarMotion(id: string, token: string): Promise<{ status: Pred['status']; output: string | null; error?: string }> {
+  const pr = await fetch(`https://api.replicate.com/v1/predictions/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+  if (!pr.ok) throw new Error(`Replicate poll ${pr.status}`);
+  const pred = (await pr.json()) as Pred;
+  return { status: pred.status, output: saida(pred), error: pred.error };
+}
+
+// BLOQUEANTE (compatibilidade, ex. anúncios): inicia e espera o resultado, com um teto
+// de poll. Para clips curtos chega; para os longos do Soulab usa-se antes o par
+// iniciar/verificar (assíncrono) para não expirar.
+export async function gerarMotionSoulab(imageUrl: string, token: string, opts: MovimentoOpts = {}, duracao: 5 | 10 = 5): Promise<string> {
+  const ini = await iniciarMotionSoulab(imageUrl, token, opts, duracao);
+  if (ini.output) return ini.output;
   let polls = 0;
-  while (!['succeeded', 'failed', 'canceled'].includes(pred.status) && polls < 95) {
+  while (polls < 90) {
     await new Promise((r) => setTimeout(r, 3000));
-    const pr = await fetch(`https://api.replicate.com/v1/predictions/${pred.id}`, { headers: { Authorization: `Bearer ${token}` } });
-    if (!pr.ok) throw new Error(`Replicate poll ${pr.status}`);
-    pred = (await pr.json()) as Pred;
+    const v = await verificarMotion(ini.id, token);
+    if (v.status === 'succeeded' && v.output) return v.output;
+    if (v.status === 'failed' || v.status === 'canceled') throw new Error(`Replicate: ${v.error ?? v.status}`);
     polls++;
   }
-  if (pred.status !== 'succeeded') throw new Error(`Replicate: ${pred.error ?? pred.status}`);
-  const out = Array.isArray(pred.output) ? pred.output[0] : pred.output;
-  if (!out) throw new Error('Replicate: sem output');
-  return out;
+  throw new Error('Replicate: tempo esgotado');
 }

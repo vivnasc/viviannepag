@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import { KineticSlide, EFEITOS_TEXTO, FONTES_TEXTO, type EfeitoTexto, type FonteTexto, type Tipografia, type AlinhV, type AlinhH } from '@/components/admin/KineticSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
-import { CRESCER, TEMATICAS, FORMATOS, VISUAIS, VOZES, CRESCER_MUNDO, CRESCER_SLIDE, type TematicaId, type FormatoId, type VisualId, type VozId } from '@/lib/crescer/marca';
+import { CRESCER, TEMATICAS, FORMATOS, CRESCER_MUNDO, CRESCER_SLIDE, type TematicaId, type FormatoId, type VisualId, type VozId } from '@/lib/crescer/marca';
+import { segmentar } from '@/lib/crescer/assinatura-reel';
 import { MOTION_INGREDIENTES, CAMARA_OPCOES, type CamaraId } from '@/lib/soulab/motion';
 import { MUSICA_ESTILOS } from '@/lib/soulab/musica';
 
@@ -37,14 +38,16 @@ const CORES_TEXTO: { id: string; nome: string }[] = [
 ];
 
 type Peca = {
-  tematica: string | null; formato: string; visual: string | null;
+  tematica: string | null; formato: string; visual: string | null; reel?: boolean; veiaTitulo?: string | null; veiaLivro?: string | null;
+  img?: string | null; imgModo?: string | null; lingua?: string | null; marca?: string | null;
+  formatoRender?: string | null; citacao?: string | null; fonte?: string | null;
   slug: string; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
-  somUrl: string | null; somTipo: string | null; somEstilo: string | null;
+  somUrl: string | null; somTipo: string | null; somEstilo: string | null; vozUrl?: string | null;
   legenda: string | null; hashtags: string[]; fundoPrompt: string | null;
   efeito: string | null; tipografia: Tipografia | null; segPorMomento: number | null;
   momentos: string[] | null; slidesImgs: (string | null)[] | null; slidesTip: (Tipografia | null)[] | null; agendadoEm: string | null; hora: string | null;
-  publicado: boolean; criadoEm: string | null;
+  publicado: boolean; criadoEm: string | null; arquivado?: boolean;
 };
 
 const ALINH_V: { id: AlinhV; label: string }[] = [{ id: 'cima', label: '↑ cima' }, { id: 'centro', label: '· centro' }, { id: 'baixo', label: '↓ baixo' }];
@@ -109,49 +112,91 @@ function TipografiaBox({ peca, disabled, busy, onSave }: { peca: Peca; disabled:
 // anima (efeito) no slide aberto para ela ver o movimento. Resolve o "só vejo a capa":
 // agora abre-se o interior 1 a 1.
 function PreviewBox({ peca }: { peca: Peca }) {
-  const moms = peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto];
-  const n = moms.length;
-  const ehCarrossel = n > 1; // carrossel = telas que se deslizam: texto ESTÁTICO, sem motion
-  const [idx, setIdx] = useState(0);
-  const [prog, setProg] = useState(ehCarrossel ? 1 : 0);
-  const ef = (peca.efeito as EfeitoTexto | null) ?? undefined;
-  const cur = Math.min(idx, n - 1);
-  // imagem e tipografia DESTE slide (per-slide), com recuo ao global da peça.
-  const imgSlide = peca.slidesImgs?.[cur] ?? (cur === 0 ? peca.imageUrl : null) ?? undefined;
-  const tipSlide = { ...(peca.tipografia ?? {}), ...(peca.slidesTip?.[cur] ?? {}) } as Tipografia;
-  // CARROSSEL: texto sempre ESTÁTICO (prog=1), nunca motion. REEL (1 imagem): o texto
-  // anima em loop para ela ver o efeito.
-  useEffect(() => {
-    if (ehCarrossel) { setProg(1); return; }
-    let raf = 0; let start: number | null = null;
-    const dur = 3800, hold = 1100;
-    const tick = (t: number) => { if (start === null) start = t; const e = (t - start) % (dur + hold); setProg(Math.min(1, e / dur)); raf = requestAnimationFrame(tick); };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [cur, ehCarrossel]);
+  // PRÉ-VER ao vivo (sem render, sem custo): REEL (vídeo 9:16, geometria + texto por
+  // tempos) ou CARROSSEL (as telas: cada segmento uma tela 4:5 para deslizar). O que
+  // se vê é o que sai. O render (✦) é só o MP4 final com a voz.
+  const linhas = (peca.momentos && peca.momentos.length > 1 ? peca.momentos : [peca.texto]).filter(Boolean);
+  const tema = peca.tematica || 'consciencia';
+  const segs = linhas.flatMap(segmentar).slice(0, 12);
+  const total = Math.max(1, segs.length);
+  const [modo, setModoS] = useState<'reel' | 'multi' | 'carrossel'>('reel');
+  const [slide, setSlide] = useState(0);
+  const cur = Math.min(slide, total - 1);
+  const bt = (on: boolean) => (on ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)' });
+  const [estatico, setEstaticoS] = useState(true); // pré-ver PARADO (texto visível, para posicionar) vs a entrar por tempos
+  const [guardado, setGuardado] = useState(false);
+  // TUDO o que ela escolhe FICA (mesmo ao recarregar): formato e parado/a-mexer guardam-se.
+  useEffect(() => { try { const m = localStorage.getItem('crescer-modo'); if (m === 'reel' || m === 'multi' || m === 'carrossel') setModoS(m); const e = localStorage.getItem('crescer-estatico'); if (e != null) setEstaticoS(e === '1'); } catch { /* */ } }, []);
+  const setModo = (m: 'reel' | 'multi' | 'carrossel') => { setModoS(m); try { localStorage.setItem('crescer-modo', m); } catch { /* */ } };
+  const setEstatico = (e: boolean) => { setEstaticoS(e); try { localStorage.setItem('crescer-estatico', e ? '1' : '0'); } catch { /* */ } };
+  // LAYOUT ajustável por ela, guardado no browser e aplicado a tudo. Posição por OPÇÕES
+  // (vertical: topo/centro/baixo · horizontal: esq/centro/dir), como ela editava antes.
+  const LAY0 = { av: 'baixo', ah: 'centro', dist: 12, txtSize: 5.6, geoTop: 15, geoW: 66 };
+  const [lay, setLay] = useState(LAY0);
+  useEffect(() => { try { const s = localStorage.getItem('crescer-assinatura-layout'); if (s) setLay({ ...LAY0, ...JSON.parse(s) }); } catch { /* */ } }, []);
+  const setL = (k: keyof typeof LAY0, v: string | number) => setLay((l) => { const n = { ...l, [k]: v }; try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(n)); } catch { /* */ } return n; });
+  const layQ = `av=${lay.av}&ah=${lay.ah}&dist=${lay.dist}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
+  // imagem do banco escolhida na geração (cena inteira ou acento); sem ela, sai geometria.
+  const imgQ = peca.img ? `&img=${encodeURIComponent(peca.img)}${peca.imgModo ? `&imgmodo=${encodeURIComponent(peca.imgModo)}` : ''}` : '';
+  // língua/handle: PT = @vivianne.dos.santos · EN = @viviannewrites (o pré-ver mostra o certo).
+  const marcaQ = `${peca.lingua === 'en' ? '&lingua=en' : ''}${peca.marca ? `&marca=${encodeURIComponent(peca.marca)}` : ''}`;
+  // excerto: manuscrito/quote sobre foto (citação fiel do livro + a fonte).
+  const excertoQ = peca.formatoRender ? `&formato=${encodeURIComponent(peca.formatoRender)}${peca.citacao ? `&citacao=${encodeURIComponent(peca.citacao)}` : ''}${peca.fonte ? `&fonte=${encodeURIComponent(peca.fonte)}` : ''}` : '';
+  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}${imgQ}${marcaQ}${excertoQ}&${layQ}`;
+  const Op = ({ k, val, children }: { k: keyof typeof LAY0; val: string; children: React.ReactNode }) => (
+    <button onClick={() => setL(k, val)} className="text-[0.56rem] px-1.5 py-0.5 rounded border" style={bt(lay[k] === val)}>{children}</button>
+  );
+  const Slider = ({ k, label, min, max, step }: { k: 'dist' | 'txtSize' | 'geoTop' | 'geoW'; label: string; min: number; max: number; step: number }) => (
+    <label className="flex items-center gap-1.5 text-[0.56rem]"><span className="w-14 opacity-70">{label}</span>
+      <input type="range" min={min} max={max} step={step} value={lay[k]} onChange={(e) => setL(k, Number(e.target.value))} className="flex-1" />
+      <span className="w-7 tabular-nums opacity-60 text-right">{lay[k]}</span></label>
+  );
   return (
     <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
-      <div className="flex items-center justify-between">
-        <p className="text-[0.55rem] uppercase tracking-widest opacity-50">pré-visualização · {ehCarrossel ? 'carrossel, slide a slide (texto estático)' : 'como vai sair'}</p>
-        {n > 1 && (
-          <span className="flex items-center gap-1.5 text-[0.6rem]">
-            <button type="button" onClick={() => setIdx((i) => (i - 1 + n) % n)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-current" style={{ color: DZ }}>‹</button>
-            <span className="tabular-nums opacity-70">{cur === 0 ? 'capa' : `slide ${cur + 1}`} · {cur + 1}/{n}</span>
-            <button type="button" onClick={() => setIdx((i) => (i + 1) % n)} className="px-1.5 py-0.5 rounded border border-white/20 hover:border-current" style={{ color: DZ }}>›</button>
-          </span>
-        )}
+      <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+        <p className="text-[0.55rem] uppercase tracking-widest opacity-50 flex-1">pré-visualização</p>
+        <button onClick={() => setModo('reel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'reel')}>🎬 reel 1 frame</button>
+        <button onClick={() => setModo('multi')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'multi')}>🎞 multi-frame</button>
+        <button onClick={() => setModo('carrossel')} className="text-[0.56rem] px-2 py-0.5 rounded border" style={bt(modo === 'carrossel')}>🖼 carrossel ({total})</button>
       </div>
-      <div className="rounded-lg overflow-hidden border border-white/10">
-        <KineticSlide texto={moms[cur]} destaque={cur === 0 ? peca.destaque : []} imageUrl={imgSlide} mundo={MUNDO} prog={prog} efeito={ef} tipografia={tipSlide} {...CRESCER_SLIDE} />
-      </div>
-      {n > 1 && (
-        <div className="flex flex-wrap gap-1 pt-0.5">
-          {moms.map((_, i) => (
-            <button key={i} type="button" onClick={() => setIdx(i)} title={i === 0 ? 'capa' : `slide ${i + 1}`}
-              className="w-5 h-5 text-[0.5rem] rounded border tabular-nums" style={i === cur ? { borderColor: DZ, background: DZ, color: BG2 } : { borderColor: 'rgba(255,255,255,0.2)', color: TX }}>{i + 1}</button>
-          ))}
+      {modo === 'reel' || modo === 'multi' ? (
+        <>
+          <div className="rounded-lg overflow-hidden border border-white/10 mx-auto" style={{ width: 240 }}>
+            <iframe src={`/render-reel-mae?${q}${modo === 'multi' ? '&multi=1' : ''}${estatico ? '&static=1' : ''}`} title="reel" style={{ width: '100%', aspectRatio: '9 / 16', border: 0, display: 'block' }} />
+          </div>
+          <div className="flex items-center justify-center gap-2 mt-1"><span className="text-[0.5rem] opacity-40">texto:</span>
+            <button onClick={() => setEstatico(true)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(estatico)}>⏸ parado (posicionar)</button>
+            <button onClick={() => setEstatico(false)} className="text-[0.54rem] px-1.5 py-0.5 rounded border" style={bt(!estatico)}>▶ a entrar por tempos</button>
+            <span className="text-[0.48rem] opacity-35">(a forma mexe sempre)</span>
+          </div>
+        </>
+      ) : (
+        <div className="mx-auto" style={{ width: 240 }}>
+          <div className="rounded-lg overflow-hidden border border-white/10">
+            <iframe src={`/api/admin/crescer/reel?${q}&slide=${cur}`} title={`tela ${cur + 1}`} style={{ width: '100%', aspectRatio: '4 / 5', border: 0, display: 'block' }} />
+          </div>
+          <div className="flex items-center justify-center gap-2 mt-1 text-[0.6rem]">
+            <button onClick={() => setSlide((i) => (i - 1 + total) % total)} className="px-1.5 py-0.5 rounded border border-white/20" style={{ color: DZ }}>‹</button>
+            <span className="tabular-nums opacity-70">tela {cur + 1}/{total}</span>
+            <button onClick={() => setSlide((i) => (i + 1) % total)} className="px-1.5 py-0.5 rounded border border-white/20" style={{ color: DZ }}>›</button>
+          </div>
         </div>
       )}
+      {/* POSIÇÃO e AJUSTES (guardam-se sozinhos; o 💾 confirma e vale para todos + o render) */}
+      <div className="mx-auto mt-1.5 space-y-1" style={{ width: 240 }}>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[0.5rem] uppercase tracking-widest opacity-40 flex-1">posição do texto</span>
+          <button onClick={() => { try { localStorage.setItem('crescer-assinatura-layout', JSON.stringify(lay)); } catch { /* */ } setGuardado(true); setTimeout(() => setGuardado(false), 1800); }} className="text-[0.56rem] px-2 py-0.5 rounded border" style={{ borderColor: DZ, background: DZ, color: BG2 }}>{guardado ? '✓ guardado' : '💾 guardar'}</button>
+          <button onClick={() => { setLay(LAY0); try { localStorage.removeItem('crescer-assinatura-layout'); } catch { /* */ } }} className="text-[0.5rem] opacity-60 underline">repor</button></div>
+        <div className="flex items-center gap-1"><span className="w-14 text-[0.54rem] opacity-70">vertical</span>
+          <Op k="av" val="topo">↑ topo</Op><Op k="av" val="centro">centro</Op><Op k="av" val="baixo">baixo ↓</Op></div>
+        <div className="flex items-center gap-1"><span className="w-14 text-[0.54rem] opacity-70">horizontal</span>
+          <Op k="ah" val="esq">esq</Op><Op k="ah" val="centro">centro</Op><Op k="ah" val="dir">dir</Op></div>
+        <Slider k="dist" label="distância" min={4} max={44} step={1} />
+        <Slider k="txtSize" label="texto tam" min={3.6} max={8} step={0.2} />
+        <Slider k="geoTop" label="forma ↑↓" min={4} max={40} step={1} />
+        <Slider k="geoW" label="forma tam" min={36} max={86} step={2} />
+      </div>
     </div>
   );
 }
@@ -296,6 +341,10 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
     setEntres((s) => s.map((x, i) => (i >= de ? gEntre : x)));
     onEstiloTodos({ fonte: gFonte, tamanho: gTam, cor: gCor, corFundo: gFundo || undefined, alinhH: gAlinhH, alinhV: gAlinhV, entrelinha: gEntre }, incluirCapa);
   };
+  // LIVE: mexer um controlo do painel "aplica a todos" muda JÁ o preview (sem ter de
+  // carregar em "aplicar"). Atualiza o estado global E o por-slide (corpo; capa só se incluída).
+  const live = <T,>(setG: React.Dispatch<React.SetStateAction<T>>, setArr: React.Dispatch<React.SetStateAction<T[]>>) =>
+    (v: T) => { setG(v); const de = incluirCapa ? 0 : 1; setArr((s) => s.map((x, i) => (i >= de ? v : x))); };
   // botõezinhos de opção (alinhamento, etc.)
   const opcoes = <T,>(lista: { id: T; label: string }[], val: T, on: (id: T) => void) =>
     lista.map((o) => <Chip key={String(o.id)} on={val === o.id} onClick={() => on(o.id)}>{o.label}</Chip>);
@@ -315,20 +364,20 @@ function SlidesBox({ peca, disabled, busy, onSaveTextos, onImagem, onEstilo, onE
           <p className="text-[0.6rem] uppercase tracking-widest" style={{ color: DZ }}>estilo do carrossel · aplica a todos</p>
           <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap">
             <span className="opacity-60 w-14">fonte</span>
-            {FONTES_TEXTO.map((f) => <Chip key={f.id} on={gFonte === f.id} onClick={() => setGFonte(f.id)}>{f.label}</Chip>)}
+            {FONTES_TEXTO.map((f) => <Chip key={f.id} on={gFonte === f.id} onClick={() => live(setGFonte, setFontes)(f.id)}>{f.label}</Chip>)}
           </div>
           <label className="flex items-center gap-2 text-[0.62rem]"><span className="opacity-60 w-14">tamanho</span>
-            <input type="range" min={36} max={120} step={2} value={gTam} onChange={(e) => setGTam(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <input type="range" min={36} max={120} step={2} value={gTam} onChange={(e) => live(setGTam, setTams)(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
             <span className="tabular-nums w-7 text-right">{gTam}</span>
           </label>
           <label className="flex items-center gap-2 text-[0.62rem]"><span className="opacity-60 w-14">espaço</span>
-            <input type="range" min={1} max={2} step={0.02} value={gEntre} onChange={(e) => setGEntre(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
+            <input type="range" min={1} max={2} step={0.02} value={gEntre} onChange={(e) => live(setGEntre, setEntres)(Number(e.target.value))} className="flex-1 accent-current" style={{ color: DZ }} />
             <span className="tabular-nums w-7 text-right">{gEntre.toFixed(2)}</span>
           </label>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↔</span>{opcoes(ALINH_H, gAlinhH, setGAlinhH)}</div>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↕</span>{opcoes(ALINH_V, gAlinhV, setGAlinhV)}</div>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor texto</span>{swatches(CORES_TEXTO, gCor, setGCor)}</div>
-          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor pág.</span>{swatches(CORES_PAGINA, gFundo, setGFundo)}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↔</span>{opcoes(ALINH_H, gAlinhH, live(setGAlinhH, setAlinhHs))}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">alinh. ↕</span>{opcoes(ALINH_V, gAlinhV, live(setGAlinhV, setAlinhVs))}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor texto</span>{swatches(CORES_TEXTO, gCor, live(setGCor, setCores))}</div>
+          <div className="flex items-center gap-1.5 text-[0.62rem] flex-wrap"><span className="opacity-60 w-14">cor pág.</span>{swatches(CORES_PAGINA, gFundo, live(setGFundo, setFundos))}</div>
           <div className="flex items-center justify-between gap-2 pt-0.5">
             <label className="flex items-center gap-1.5 text-[0.62rem] opacity-85 cursor-pointer">
               <input type="checkbox" checked={incluirCapa} onChange={(e) => setIncluirCapa(e.target.checked)} className="accent-current" style={{ color: DZ }} />
@@ -390,9 +439,13 @@ export default function CrescerPage() {
   const [pecas, setPecas] = useState<Peca[]>([]);
   const [temas, setTemas] = useState<Set<TematicaId>>(new Set());
   const [fmts, setFmts] = useState<Set<FormatoId>>(new Set(['frase']));
-  const [vis, setVis] = useState<Set<VisualId>>(new Set(['pessoas']));
-  const [voz, setVoz] = useState<VozId>('direta'); // a voz do alcance, por defeito
-  const [quantos, setQuantos] = useState(2);
+  const [vis] = useState<Set<VisualId>>(new Set(['minimal'])); // minimalista/tipográfico: sem imagem por agora (a imagem, se voltar, será símbolos/desenhos, a estudar)
+  const [voz] = useState<VozId>('direta'); // sempre DIRETA (a poética saiu)
+  const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
+  const [lingua, setLingua] = useState<'pt' | 'en'>('pt'); // PT = @vivianne.dos.santos · EN = @viviannewrites (selo internacional)
+  const [fonte, setFonte] = useState<'livro' | 'tema'>('livro'); // minerar os livros (defeito) vs partir de uma temática
+  const [imagemModo] = useState<'cena' | 'ilustrar'>('cena'); // sem imagem por agora (minimal); mantido só para o payload
+  const [quantos, setQuantos] = useState(1); // 1 por defeito: uma de cada vez, sem ser obrigada a lote
   const [surpreender, setSurpreender] = useState(false);
   const [tema, setTema] = useState('');
   const [busy, setBusy] = useState(false);
@@ -404,7 +457,7 @@ export default function CrescerPage() {
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [filtroTema, setFiltroTema] = useState<string>('todos');
   const [filtroTipo, setFiltroTipo] = useState<'todos' | 'carrossel' | 'reel'>('todos');
-  const [filtroEstado, setFiltroEstado] = useState<'todos' | 'por-fazer' | 'pronto' | 'agendada' | 'publicada'>('todos');
+  const [filtroEstado, setFiltroEstado] = useState<'todos' | 'por-fazer' | 'pronto' | 'agendada' | 'publicada' | 'arquivada'>('todos');
   const [padrao, setPadrao] = useState<Padrao>(PADRAO_DEFAULT);
   const [padraoOpen, setPadraoOpen] = useState(false);
   // agendar em lote ESPAÇADO (não encher o feed): 1 post a cada N dias, à hora.
@@ -426,16 +479,33 @@ export default function CrescerPage() {
   const toggle = <T,>(setS: React.Dispatch<React.SetStateAction<Set<T>>>, id: T) => setS((s) => { const n = new Set(s); if (n.has(id)) n.delete(id); else n.add(id); return n; });
   const abrir = (slug: string, tab: string) => setAberto((a) => (a && a.slug === slug && a.tab === tab ? null : { slug, tab }));
 
+  // ARQUIVAR a mesa (NÃO apaga): manda para "arquivados" os rascunhos que nunca foram
+  // usados (não publicados nem agendados). Conta primeiro, protege o que está em uso.
+  const arquivarNaoUsados = useCallback(async () => {
+    if (busy) return;
+    let info: { aArquivar?: number; protegidos?: number } = {};
+    try { info = await fetch('/api/admin/crescer/limpar').then((r) => r.json()); } catch { setErro('não consegui contar os rascunhos'); return; }
+    const n = info.aArquivar ?? 0;
+    if (!n) { setMsg('Não há rascunhos por usar para arquivar (publicados e agendados ficam sempre).'); return; }
+    if (typeof window !== 'undefined' && !window.confirm(`Arquivar ${n} rascunho(s) que nunca foram usados?\n\nNÃO se apaga nada: ficam na aba "arquivados". Os publicados e agendados (${info.protegidos ?? 0}) não se tocam.`)) return;
+    setBusy(true); setErro(null); setMsg('A arquivar os rascunhos por usar…');
+    try {
+      const d = await fetch('/api/admin/crescer/limpar', { method: 'DELETE' }).then((r) => r.json());
+      if (d.ok) { setMsg(`Arquivados ${d.arquivados}. Vê-os na aba "arquivados". (${d.protegidos} em uso, intactos.)`); recarregar(); }
+      else setErro(d.detalhe || d.erro || 'falhou');
+    } catch (e) { setErro(String(e)); } finally { setBusy(false); }
+  }, [busy, recarregar]);
+
   const gerar = useCallback(async () => {
     if (busy) return;
-    if (!surpreender && !temas.size) { setErro('Escolhe pelo menos uma temática (ou liga o "surpreende-me").'); return; }
+    if (fonte === 'tema' && !surpreender && !temas.size) { setErro('Escolhe pelo menos uma temática (ou liga o "surpreende-me"), ou volta a "minerar o livro".'); return; }
     setBusy(true); setErro(null);
     setMsg('A gerar o lote (texto + imagem)… pode demorar. Não feches; recarrega se precisares.');
     try {
       const r = await fetch('/api/admin/crescer/gerar', {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz,
+          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida, fonte, imagemModo, lingua,
           tema: tema.trim() || undefined, tipografia: padrao.tipografia, efeito: padrao.efeito,
         }),
       });
@@ -444,7 +514,7 @@ export default function CrescerPage() {
       else setMsg(`${j.gerados} peça(s) gerada(s)${j.detalhe ? ` (aviso: ${j.detalhe})` : ''}. Revê em baixo, afina e renderiza.`);
       recarregar();
     } catch (e) { setErro(String(e)); setMsg(null); } finally { setBusy(false); }
-  }, [busy, surpreender, temas, fmts, vis, voz, quantos, tema, padrao, recarregar]);
+  }, [busy, surpreender, temas, fmts, vis, voz, saida, fonte, imagemModo, quantos, tema, padrao, recarregar]);
 
   // acção numa peça (rota genérica)
   const acao = useCallback(async (slug: string, url: string, body: Record<string, unknown>, aviso: string, ok: string, fechar = true) => {
@@ -481,6 +551,26 @@ export default function CrescerPage() {
     if (typeof window !== 'undefined' && !window.confirm('Trazer a imagem a MOVIMENTO cinematográfico (vídeo contínuo ~40s)? Corre nos GitHub Actions, uns minutos, e tem custo. Depois carrega "render (reel)" para pôr o texto por cima.')) return;
     acao(slug, '/api/admin/metodo-vs/reel-narrativo-dispatch', { nClips: 4, dur: 10 }, 'A trazer a cena a movimento (uns minutos)…', 'Cena a ganhar vida. O vídeo aparece daqui a uns minutos (recarrega); depois "render (reel)" para o texto por cima.', false);
   }, [acao]);
+  // REEL DE ASSINATURA (VDS): geometria da assinatura + a frase real + a tua voz,
+  // gravado nos GitHub Actions (Puppeteer + ElevenLabs + ffmpeg). Zero imagem, zero
+  // custo de imagem. É o formato novo da mãe.
+  const reelAssinatura = useCallback((slug: string) => {
+    if (typeof window !== 'undefined' && !window.confirm('Gerar o REEL DE ASSINATURA (geometria VDS + a tua voz clonada)? Corre nos GitHub Actions, uns minutos.')) return;
+    // leva o TEU layout (posição, distância, tamanho) para o render sair igual ao pré-ver.
+    let layout: Record<string, unknown> = {};
+    try { layout = JSON.parse(localStorage.getItem('crescer-assinatura-layout') || '{}'); } catch { /* */ }
+    acao(slug, '/api/admin/crescer/render-reel', { layout }, 'A gravar o reel de assinatura (uns minutos)…', 'Reel de assinatura disparado. Aparece daqui a uns minutos (recarrega).', false);
+  }, [acao]);
+  // VOZ ANTES DO RENDER (regra da Vivianne): gera a voz clonada da frase agora, para
+  // ela OUVIR no admin; o render so cola esta voz, sem surpresas.
+  const gerarVozPeca = useCallback((slug: string) =>
+    acao(slug, '/api/admin/crescer/voz', {}, 'A gerar a tua voz (uns segundos)…', 'Voz gerada. Ouve-a aqui antes de renderizar.', false), [acao]);
+  // DRONE do tema por baixo da voz (biblioteca reutilizada; ouve-se antes do render).
+  const aplicarDrone = useCallback((slug: string) =>
+    acao(slug, '/api/admin/crescer/drone', {}, 'A pôr o drone do tema…', 'Drone aplicado. Ouve-o aqui (vai por baixo da voz no render).', false), [acao]);
+  // arquivar/desarquivar UMA peça (sem apagar).
+  const arquivarPeca = useCallback((slug: string, arquivar: boolean) =>
+    acao(slug, '/api/admin/crescer/arquivar', { arquivar }, arquivar ? 'A arquivar…' : 'A desarquivar…', arquivar ? 'Arquivada (na aba «arquivados»).' : 'Desarquivada.', false), [acao]);
   // editor de slides: guardar os textos de todos os slides + imagem por slide.
   const salvarTextos = useCallback((slug: string, textos: string[]) => acao(slug, '/api/admin/crescer/texto', { textos }, 'A guardar os textos…', 'Textos guardados. Re-renderiza para os veres no carrossel/vídeo.', false), [acao]);
   const imagemSlide = useCallback((slug: string, idx: number, remover: boolean) => acao(slug, '/api/admin/crescer/imagem', { idx, remover }, remover ? 'A tirar a imagem do slide…' : 'A gerar a imagem do slide (Flux)…', remover ? 'Imagem tirada do slide.' : 'Imagem do slide gerada.', false), [acao]);
@@ -504,6 +594,8 @@ export default function CrescerPage() {
 
   const padraoLote = useCallback(() => emLote((slug) => fetch('/api/admin/soulab/editar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, tipografia: padrao.tipografia, efeito: padrao.efeito }) }), 'A aplicar o padrão'), [emLote, padrao]);
   const imagemLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Trocar a imagem das ${sel.size} selecionada(s)?`)) return; return emLote((slug) => fetch('/api/admin/crescer/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A trocar imagem'); }, [emLote, sel]);
+  // ATUALIZAR as imagens dos posts bons para o MUNDO novo (sem mexer no texto).
+  const imagemMundoLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Atualizar a imagem das ${sel.size} selecionada(s) pelo MUNDO novo (cena da civilização)? Não mexe no texto.`)) return; return emLote((slug) => fetch('/api/admin/crescer/imagem', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, mundo: true, imagemModo: 'cena' }) }), 'A atualizar imagens (mundo)'); }, [emLote, sel]);
   const renderLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Renderizar (MP4) as ${sel.size} selecionada(s)? Minutos, GitHub Actions.`)) return; return emLote((slug) => fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug, dias: '1' }) }), 'A disparar render'); }, [emLote, sel]);
   const apagarLote = useCallback(() => { if (typeof window !== 'undefined' && !window.confirm(`Descartar ${sel.size} selecionada(s)? (salta publicadas)`)) return; return emLote((slug) => fetch('/api/admin/crescer/apagar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) }), 'A descartar', false); }, [emLote, sel]);
   // AGENDAR ESPAÇADO: distribui as selecionadas 1 a cada N dias, desde a data, à
@@ -532,20 +624,25 @@ export default function CrescerPage() {
     setSel(new Set()); setBusy(false); recarregar();
   }, [acaoSlug, busy, agData, agHora, agCad, pecas, sel, recarregar]);
 
-  // TIPO da peça: CARROSSEL (formato ensaio, publica telas) vs REEL (vídeo). ESTADO de
-  // produção: por fazer / pronto (renderizado) / agendada / publicada.
-  const tipoDe = (p: Peca): 'carrossel' | 'reel' => (p.formato === 'ensaio' ? 'carrossel' : 'reel');
+  // TIPO da peça (MESMA regra do publicador, por isso o que vês = o que sai): REEL = peça
+  // nova (reel) OU 1 tela OU com clip contínuo. CARROSSEL = só as multi-tela ANTIGAS (sem
+  // marca reel e sem clip), que ficam como estavam. Daqui pra frente é tudo reel.
+  // ESTADO de produção: por fazer / pronto (renderizado) / agendada / publicada.
+  const tipoDe = (p: Peca): 'carrossel' | 'reel' =>
+    ((p.momentos?.length ?? 0) > 1 && !p.clipUrl && !p.reel) ? 'carrossel' : 'reel';
   const estadoDe = (p: Peca): 'por-fazer' | 'pronto' | 'agendada' | 'publicada' => {
     if (p.publicado) return 'publicada';
     const renderizado = tipoDe(p) === 'carrossel' ? (p.imagens?.length ?? 0) >= 2 : !!p.videoUrl;
     if (p.agendadoEm) return 'agendada';
     return renderizado ? 'pronto' : 'por-fazer';
   };
-  const ESTADO_LABEL: Record<string, string> = { 'por-fazer': 'por renderizar', pronto: 'pronto', agendada: 'agendada', publicada: 'publicada' };
+  const ESTADO_LABEL: Record<string, string> = { 'por-fazer': 'por renderizar', pronto: 'pronto', agendada: 'agendada', publicada: 'publicada', arquivada: '🗄 arquivados' };
   const pecasFiltradas = pecas.filter((p) =>
+    // arquivadas só aparecem na aba "arquivados"; ficam fora de todas as outras vistas.
+    (filtroEstado === 'arquivada' ? p.arquivado : !p.arquivado) &&
     (filtroTema === 'todos' || p.tematica === filtroTema) &&
     (filtroTipo === 'todos' || tipoDe(p) === filtroTipo) &&
-    (filtroEstado === 'todos' || estadoDe(p) === filtroEstado));
+    (filtroEstado === 'todos' || filtroEstado === 'arquivada' || estadoDe(p) === filtroEstado));
 
   return (
     <main className={`${FONTS} min-h-screen px-4 py-8 md:px-8`} style={{ background: BG2, color: TX }}>
@@ -555,28 +652,53 @@ export default function CrescerPage() {
             <span>{CRESCER.emoji}</span> {CRESCER.nome} <span className="opacity-70 text-base" style={{ color: TX }}>· @{CRESCER.handle}</span>
           </h1>
           <p className="mt-2 text-[0.92rem] italic opacity-90" style={{ fontFamily: 'var(--font-cormorant), serif' }}>{CRESCER.posicionamento}</p>
-          <Link href="/admin/publicar?conta=loja" className="mt-3 inline-block px-3 py-1.5 rounded-lg border border-white/20 text-[0.74rem] hover:bg-white/10">abrir no Publicar →</Link>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link href="/admin/publicar?conta=loja" className="inline-block px-3 py-1.5 rounded-lg border border-white/20 text-[0.74rem] hover:bg-white/10">abrir no Publicar →</Link>
+            <Link href="/admin/crescer/teste" className="inline-block px-3 py-1.5 rounded-lg border text-[0.74rem] hover:bg-white/10" style={{ borderColor: DZ, color: DZ }}>🧪 testar o mundo (sandbox) →</Link>
+          </div>
         </header>
 
         {/* gerar */}
         <section className="mb-6 rounded-2xl border border-white/10 p-5" style={{ background: 'rgba(255,255,255,0.03)' }}>
-          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-3">gerar um lote</h2>
+          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-1">gerar</h2>
+          <p className="text-[0.62rem] opacity-50 mb-3">uma peça de cada vez (deixa "quantas" em 1) ou várias num lote.</p>
 
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">fonte <span className="opacity-50">(de onde nasce a peça)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-1">
+            <Chip on={fonte === 'livro'} onClick={() => setFonte('livro')} title="mina os teus livros: cada peça nasce de uma ideia/metáfora de um capítulo ainda não usado (A Grande Transição · Os 7 Sinais)"><span className="mr-1">📖</span>minerar o livro</Chip>
+            <Chip on={fonte === 'tema'} onClick={() => setFonte('tema')} title="parte de uma temática ou de um tema livre (o modo antigo)"><span className="mr-1">💭</span>tema</Chip>
+          </div>
+          <p className="text-[0.58rem] opacity-45 mb-3">{fonte === 'livro' ? 'Cada peça é minerada de um capítulo ainda não usado dos teus livros (anti-repetição). O conteúdo não existe sem o livro.' : 'A peça parte das temáticas/tema livre abaixo.'}</p>
+
+          {fonte === 'tema' && <>
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">temáticas <span className="opacity-50">(escolhe várias)</span></p>
           <div className="flex flex-wrap gap-1.5 mb-3">{TEMATICAS.map((t) => <Chip key={t.id} on={temas.has(t.id)} onClick={() => toggle(setTemas, t.id)} title={t.descricao}><span className="mr-1">{t.emoji}</span>{t.label}</Chip>)}</div>
+          </>}
 
           <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">formatos</p>
-          <div className="flex flex-wrap gap-1.5 mb-3">{FORMATOS.map((f) => <Chip key={f.id} on={fmts.has(f.id)} onClick={() => toggle(setFmts, f.id)} title={f.descricao}><span className="mr-1">{f.emoji}</span>{f.label}</Chip>)}</div>
+          {/* 'lista' (listicle "3 sinais de…") cortada a pedido da Vivianne: nunca usada e é o
+              registo diagnóstico, o oposto do íntimo/editorial. Repor = tirar o filtro. */}
+          <div className="flex flex-wrap gap-1.5 mb-3">{FORMATOS.filter((f) => f.id !== 'lista').map((f) => <Chip key={f.id} on={fmts.has(f.id)} onClick={() => toggle(setFmts, f.id)} title={f.descricao}><span className="mr-1">{f.emoji}</span>{f.label}</Chip>)}</div>
 
-          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">visuais</p>
-          <div className="flex flex-wrap gap-1.5 mb-3">{VISUAIS.map((v) => <Chip key={v.id} on={vis.has(v.id)} onClick={() => toggle(setVis, v.id)} title={v.descricao}><span className="mr-1">{v.emoji}</span>{v.label}</Chip>)}</div>
+          {/* voz sempre DIRETA (a poética saiu) · visual sempre MINIMAL/tipográfico (sem imagem
+              por agora; a imagem, se voltar, será símbolos/desenhos, a estudar). Por isso as
+              linhas de visuais/voz/imagem saíram daqui: fica só o que se usa. */}
 
-          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">voz <span className="opacity-50">(a direta é a do alcance)</span></p>
-          <div className="flex flex-wrap gap-1.5 mb-3">{VOZES.map((v) => <Chip key={v.id} on={voz === v.id} onClick={() => setVoz(v.id)} title={v.descricao}><span className="mr-1">{v.emoji}</span>{v.label}</Chip>)}</div>
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">como sai <span className="opacity-50">(o reel espalha-se mais)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <Chip on={saida === 'reel'} onClick={() => setSaida('reel')} title="vídeo vertical, o texto aparece ritmado (mais alcance)"><span className="mr-1">🎬</span>reel</Chip>
+            <Chip on={saida === 'carrossel'} onClick={() => setSaida('carrossel')} title="telas 4:5 que se deslizam, texto estático que se lê"><span className="mr-1">🎠</span>carrossel</Chip>
+          </div>
+
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">língua <span className="opacity-50">(o EN sai sob @viviannewrites)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <Chip on={lingua === 'pt'} onClick={() => setLingua('pt')} title="conta-mãe portuguesa · @vivianne.dos.santos"><span className="mr-1">🇵🇹</span>português</Chip>
+            <Chip on={lingua === 'en'} onClick={() => setLingua('en')} title="selo internacional · @viviannewrites"><span className="mr-1">🇬🇧</span>english</Chip>
+          </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional)" className="flex-1 min-w-[180px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />
-            <Chip on={surpreender} onClick={() => setSurpreender((s) => !s)} title="ignora as escolhas e combina ao acaso">🎲 surpreende-me</Chip>
+            {fonte === 'tema' && <input value={tema} onChange={(e) => setTema(e.target.value)} placeholder="tema livre (opcional)" className="flex-1 min-w-[180px] text-[0.82rem] px-3 py-2 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: TX }} />}
+            {fonte === 'tema' && <Chip on={surpreender} onClick={() => setSurpreender((s) => !s)} title="ignora as escolhas e combina ao acaso">🎲 surpreende-me</Chip>}
             <label className="inline-flex items-center gap-1.5 text-[0.74rem] opacity-80">quantas:
               <select value={quantos} onChange={(e) => setQuantos(Number(e.target.value))} className="bg-black/20 border border-white/15 rounded-md px-2 py-1.5 [color-scheme:dark]">
                 {[1, 2, 3, 4, 5, 6, 8].map((n) => <option key={n} value={n}>{n}</option>)}
@@ -585,6 +707,9 @@ export default function CrescerPage() {
             <button onClick={gerar} disabled={busy} className="px-4 py-2 rounded-lg border disabled:opacity-50 text-[0.84rem]" style={{ borderColor: DZ, background: DZ, color: BG2 }}>{busy ? 'a gerar…' : '🌱 gerar'}</button>
           </div>
           <p className="text-[0.6rem] opacity-45 mt-2">Sem seleção, escolhe combinações ao acaso. Máximo 8 peças por lote (carrega outra vez para mais).</p>
+          <div className="mt-3">
+            <button onClick={arquivarNaoUsados} disabled={busy} className="text-[0.7rem] px-2.5 py-1 rounded-lg border border-white/25 text-creme-2/80 disabled:opacity-50" title="ARQUIVA (não apaga) os rascunhos que nunca foram publicados nem agendados; ficam na aba «arquivados»; os que estão em uso não se tocam">🗄 arquivar rascunhos por usar</button>
+          </div>
 
           {/* PADRÃO fixável */}
           <div className="mt-4 border-t border-white/10 pt-3">
@@ -630,7 +755,7 @@ export default function CrescerPage() {
           </div>
           <div className="flex flex-wrap items-center gap-1.5 mb-3">
             <span className="text-[0.56rem] uppercase tracking-widest opacity-40 mr-0.5">estado</span>
-            {(['todos', 'por-fazer', 'pronto', 'agendada', 'publicada'] as const).map((e) => (
+            {(['todos', 'por-fazer', 'pronto', 'agendada', 'publicada', 'arquivada'] as const).map((e) => (
               <Chip key={e} on={filtroEstado === e} onClick={() => setFiltroEstado(e)}>{e === 'todos' ? 'todos' : ESTADO_LABEL[e]}</Chip>
             ))}
             <span className="text-[0.56rem] opacity-40 ml-1">{pecasFiltradas.length} de {pecas.length}</span>
@@ -645,6 +770,7 @@ export default function CrescerPage() {
               <span className="opacity-30">·</span>
               <button onClick={padraoLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }} title="aplica as letras/posição/efeito do padrão">⚙ aplicar padrão</button>
               <button onClick={imagemLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">🖼 imagem</button>
+              <button onClick={imagemMundoLote} disabled={busy} title="atualiza as imagens das selecionadas pelo motor novo (mundo), mantendo o texto" className="text-[0.6rem] px-1.5 py-1 rounded-lg border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🌍 imagens (mundo)</button>
               <button onClick={renderLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-white/25 disabled:opacity-40">🎞 render</button>
               <button onClick={apagarLote} disabled={busy} className="text-[0.6rem] px-1.5 py-1 rounded-lg border border-rose-400/50 text-rose-300 disabled:opacity-40">🗑 descartar</button>
               <span className="w-full h-px bg-white/10 my-0.5" />
@@ -673,7 +799,7 @@ export default function CrescerPage() {
                     <button onClick={() => toggleSel(p.slug)} className="absolute bottom-1 left-1 w-6 h-6 rounded-md border flex items-center justify-center text-[0.7rem] z-10" style={sel.has(p.slug) ? { background: DZ, borderColor: DZ, color: BG2 } : { background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.5)', color: 'transparent' }}>✓</button>
                     <span className="absolute top-1 left-1 flex flex-col gap-0.5 items-start">
                       <span className="text-[0.5rem] px-1 py-0.5 rounded" style={{ background: DZ, color: BG2 }}>{tipoDe(p) === 'carrossel' ? `🎠 carrossel · ${p.momentos?.length ?? 0} telas` : '🎬 reel'}</span>
-                      <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.tematica ?? 'crescer'}</span>
+                      <span className="text-[0.5rem] px-1 py-0.5 rounded bg-black/60">{p.veiaTitulo ? `📖 ${p.veiaTitulo}` : (p.tematica ?? 'crescer')}</span>
                     </span>
                     {(() => {
                       // estado coerente com o TIPO: um carrossel "pronto" são as telas, não o MP4.
@@ -705,16 +831,19 @@ export default function CrescerPage() {
                   <div className="p-2 flex flex-wrap gap-1 text-[0.62rem]">
                     <button onClick={() => abrir(p.slug, 'preview')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>▶ pré-ver</button>
                     <button onClick={() => setSlidesSlug(p.slug)} disabled={tBusy} title="abrir GRANDE: ver e editar todos os slides, percorrendo (texto/imagem/tamanho/cor por slide)" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>📝 slides</button>
-                    <button onClick={() => acao(p.slug, '/api/admin/crescer/imagem', {}, 'A trocar a imagem da capa (Flux)…', (p.momentos && p.momentos.length > 1) ? 'Capa nova (no carrossel a imagem é só na capa; os slides ficam como estavam).' : 'Imagem nova.', false)} disabled={tBusy} title={(p.momentos && p.momentos.length > 1) ? 'troca a imagem da CAPA (não mexe nos slides do corpo nem nas tuas edições)' : 'troca a imagem'} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">{(p.momentos && p.momentos.length > 1) ? 'imagem capa' : 'imagem'}</button>
-                    <button onClick={() => abrir(p.slug, 'motion')} disabled={tBusy || !p.imageUrl} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🎬 mov.</button>
-                    <button onClick={() => cenaVideo(p.slug, !!p.imageUrl)} disabled={tBusy || !p.imageUrl} title="vídeo cinematográfico: traz a imagem a movimento contínuo (~40s). Depois render (reel) para o texto por cima." className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🎞 cena</button>
                     <button onClick={() => abrir(p.slug, 'efeito')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">✶ efeito</button>
                     <button onClick={() => abrir(p.slug, 'som')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🔊 áudio</button>
                     <button onClick={() => abrir(p.slug, 'letras')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">🅰 letras</button>
                     <button onClick={() => abrir(p.slug, 'legenda')} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">📝 legenda</button>
                     <button onClick={() => abrir(p.slug, 'agenda')} disabled={tBusy} className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'}</button>
-                    {p.momentos && p.momentos.length > 1 && <button onClick={() => carrossel(p.slug)} disabled={tBusy} title="gera as telas 4:5 para publicar como carrossel de imagens" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>🖼 carrossel</button>}
-                    <button onClick={() => renderizar(p.slug)} disabled={tBusy} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render (reel)</button>
+                    <button onClick={() => gerarVozPeca(p.slug)} disabled={tBusy} title="gera a TUA voz (clonada) a ler a frase, para ouvires AGORA. O render usa esta voz, sem surpresas." className="px-2 py-1 rounded border disabled:opacity-40" style={p.vozUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎙 {p.vozUrl ? 'refazer voz' : 'gerar voz'}</button>
+                    {p.vozUrl && <audio controls preload="none" src={p.vozUrl} className="h-6 align-middle" style={{ height: 26, maxWidth: 168 }} />}
+                    <button onClick={() => aplicarDrone(p.slug)} disabled={tBusy} title="põe o DRONE do tema por baixo da voz (biblioteca de sons; ouve-o antes de renderizar)" className="px-2 py-1 rounded border disabled:opacity-40" style={p.somUrl ? { borderColor: DZ, color: DZ } : { borderColor: 'rgba(255,255,255,0.2)' }}>🎚 {p.somUrl ? 'trocar drone' : 'drone'}</button>
+                    {p.somUrl && <audio controls preload="none" src={p.somUrl} className="h-6 align-middle" style={{ height: 26, maxWidth: 168 }} />}
+                    <button onClick={() => reelAssinatura(p.slug)} disabled={tBusy || !p.vozUrl} title={p.vozUrl ? 'grava o REEL DE ASSINATURA: geometria VDS + a frase + a tua voz JA gerada (sem imagem, sem custo). Corre nos Actions.' : 'gera a voz primeiro (🎙), para o render não trazer surpresas'} className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, background: p.vozUrl ? DZ : 'transparent', color: p.vozUrl ? BG2 : DZ }}>✦ reel assinatura</button>
+                    {!p.publicado && (p.arquivado
+                      ? <button onClick={() => arquivarPeca(p.slug, false)} disabled={tBusy} title="tirar do arquivo e voltar a mostrar na lista" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: DZ, color: DZ }}>↩ desarquivar</button>
+                      : <button onClick={() => arquivarPeca(p.slug, true)} disabled={tBusy} title="guardar no arquivo (não apaga); vê na aba «arquivados»" className="px-2 py-1 rounded border border-white/25 disabled:opacity-40">🗄 arquivar</button>)}
                     {!p.publicado && <button onClick={() => apagar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                   </div>
                   {ab === 'preview' && <PreviewBox peca={p} />}

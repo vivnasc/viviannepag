@@ -7,8 +7,14 @@
 //
 // Só devolve texto/indicações; a imagem gera-se a seguir, no route, com Flux.
 
-import { CRESCER, LIVRO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
+import { CRESCER, VISAO, getTematica, getFormato, getVisual, getVoz, type TematicaId, type FormatoId, type VisualId, type VozId } from './marca';
 import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
+import { REFERENCIAS } from '@/lib/metodo/referencias';
+
+// LINHAGEM: os conceitos reais das cadeiras dela (transpessoal, sistémica, existencial).
+// Só dão DENSIDADE por baixo; PROIBIDO nomeá-los no texto (como as âncoras).
+const LINHAGEM_POOL: string[] = [...new Set(Object.values(REFERENCIAS).flatMap((r) => r?.conceitos ?? []))];
+import { cenaConstituicao, cenaWorldbuilding } from './mundo-visual';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaCrescer {
@@ -33,31 +39,74 @@ export async function gerarPecaCrescer(
   tema?: string,
   vozId: VozId = 'direta',
   seed = 0,
+  veia?: { titulo: string; texto: string; livroTitulo: string } | null, // A FERIDA: excerto real de um livro de reconhecimento (Medo/Sinais/Véus) = a FACA
+  imagemModo: 'cena' | 'ilustrar' = 'cena', // 'cena' = documentário da civilização (defeito); 'ilustrar' = ilustrar a frase
+  veiaVisao?: { titulo: string; texto: string; livroTitulo: string } | null, // A TRAVESSIA: excerto real de "A Grande Transição" = o destino (limiar + vantagem)
+  lingua: 'pt' | 'en' = 'pt', // 'pt' = conta-mãe (@vivianne.dos.santos); 'en' = selo internacional (@viviannewrites)
 ): Promise<PecaCrescer> {
+  const handle = lingua === 'en' ? 'viviannewrites' : CRESCER.handle;
+  // regra de LÍNGUA (só EN): mesma missão/voz/travessia, mas o OUTPUT sai em inglês natural.
+  const regraLingua = lingua === 'en'
+    ? `\n\n⚑ LÍNGUA (regra dura, prioritária): escreve TODO o output (titulo, conceito, frase, momentos, legenda, hashtags) em INGLÊS natural e fluente, NUNCA traduzido à letra, para a conta @viviannewrites. As regras específicas de "português europeu" abaixo NÃO se aplicam; em vez delas: inglês limpo e natural, SEM em-dashes (—/–), sem clichés de self-help. A missão, a voz de companheira, a lente da mãe e a TRAVESSIA são EXATAMENTE as mesmas.`
+    : '';
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
+  // EXCERTO: é uma CITAÇÃO fiel ao livro, NÃO uma travessia. Override que desliga a estrutura
+  // faca→viragem→vantagem e pede só o excerto forte que se sustenta sozinho.
+  const regraExcerto = formato.id === 'excerto'
+    ? `\n\n⚑ FORMATO EXCERTO (regra dura, prioritária): esta peça é uma CITAÇÃO fiel, quase à letra, de um livro dela — NÃO uma travessia. IGNORA a estrutura faca→limiar→vantagem. Devolve em "frase" UM excerto curto (1 a 2 frases), o mais forte e citável da fonte, que se sustém sozinho como citação de autora; sem explicar, sem CTA, sem desenvolver. "momentos" vazio.`
+    : '';
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
   const voz = getVoz(vozId) ?? getVoz('direta')!;
   const semImagem = !visual.promptBase;
-  // ARQUÉTIPO de cena desta peça (roda por seed) — para as imagens NÃO repetirem.
-  const arqs = visual.arquetipos ?? [];
-  const arquetipo = arqs.length ? arqs[((seed % arqs.length) + arqs.length) % arqs.length] : '';
+  // CARROSSEL LONGO vs REEL CURTO: só o ensaio e o "por detrás" são carrosséis que se
+  // desenvolvem (8-13 telas). TUDO o resto é REEL — tem de ser CURTO (a faca + poucas
+  // batidas), nunca um parágrafo. Um reel diz UMA coisa.
+  const carrosselLongo = formato.id === 'ensaio' || formato.id === 'pordetras';
+  // CENA segundo a CONSTITUIÇÃO VISUAL (worldbuilding/CONSTITUICAO.md): etnografia de
+  // uma civilização que nunca existiu — categoria/escala/função/pergunta por seed,
+  // respeitando as proporções (Axioma 6) e o equivalente funcional. Substitui os
+  // arquétipos antigos (presos na monumentalidade).
+  // MOTOR 2 (cena): documentário da civilização (as imagens fortes, não ilustram a frase).
+  // MOTOR 1 (ilustrar): ilustra a frase via cultura material. 'cena' por defeito.
+  const cena = semImagem ? null : (imagemModo === 'ilustrar' ? cenaConstituicao(seed) : cenaWorldbuilding(seed));
 
-  const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${CRESCER.handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}
+  // AS FONTES, com PAPÉIS: a FERIDA (reconhecimento, a faca) e a TRAVESSIA (a visão,
+  // o destino). A peça SOBE de uma para a outra. + linhagem das cadeiras, só por baixo.
+  const excertoFerida = veia ? `
+--- A FERIDA (excerto REAL do livro dela "${veia.livroTitulo}", secção "${veia.titulo}") — daqui sai a FACA, o "isto sou eu" ---
+${veia.texto}
+--- FIM DA FERIDA ---` : '';
+  const excertoTravessia = veiaVisao ? `
+--- A TRAVESSIA (excerto REAL de "${veiaVisao.livroTitulo}", secção "${veiaVisao.titulo}") — daqui sai a VIRADA e a VANTAGEM ---
+${veiaVisao.texto}
+--- FIM DA TRAVESSIA ---` : '';
+  const linhagem = LINHAGEM_POOL.length ? [LINHAGEM_POOL[seed % LINHAGEM_POOL.length], LINHAGEM_POOL[(seed * 7 + 3) % LINHAGEM_POOL.length]].filter(Boolean).join(' · ') : '';
+
+  const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}${regraLingua}${regraExcerto}
 
 A VOZ (decisão de marca, inviolável): ${CRESCER.voz}
 
-FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomeá-lo, citar autores, áreas, véus ou usar jargão no texto): a Vivianne vem destas áreas, ${CRESCER.areas.join(', ')}. Âncoras: ${CRESCER.ancoras.join(' · ')}.
+A MISSÃO (a ESPINHA de tudo, o que faz esta conta ser esta conta): mostrar a VANTAGEM de evoluir e, com isso, elevar a vibração de todos. Há UMA ideia dela por baixo de cada peça, aplicada à vida de quem lê: ${VISAO.espinha} Depois, a virada: ${VISAO.limiar} O que se abre do outro lado: ${VISAO.vantagem} E, no fim, o alcance: ${VISAO.coletivo} Isto NÃO se nomeia nem se explica como teoria; VIVE-SE dentro de uma cena concreta da vida real.
 
-A FONTE PROFUNDA é o livro DELA, "${LIVRO.titulo}". O arco dos sete movimentos (o que cada um ENCOBRE e o que REVELA, NUNCA nomear no texto): ${LIVRO.veus.map((v) => `${v.nome} (encobre ${v.encobre}; revela que ${v.revela})`).join(' · ')}. As correntes que atravessam tudo: ${LIVRO.correntes.join(' · ')}.
+A LENTE DA MÃE (a direção mais importante, aplica-se a TUDO o que escreves): esta conta mostra a VANTAGEM de crescer, evoluir e expandir; NÃO fica a diagnosticar a ferida. Podes partir de uma dor reconhecível (o "isto sou eu" que agarra), mas o PESO da peça cai no que se ABRE quando a pessoa acorda: o que fica mais leve, mais livre, mais vivo do outro lado. Nunca prometas nem dês receita; mostras a possibilidade com verdade, como quem já a viu abrir-se. E o efeito não fica só na pessoa: quando alguém desperta, isso chega aos que estão à volta e eleva o todo (interdependência, cuidado mútuo, a vibração de todos). Traz este alcance coletivo sem slogan, sem pregar, dentro da vida concreta.
 
-O OUTRO LIVRO DELA, "Os 7 Sinais de Desencaixe" (pertencer sem deixar de se ser inteiro; a dor de deixar de caber num lugar que foi bom, sem que ninguém tenha feito nada de errado). Os sinais, cada um com a sua confissão sentida (não os nomeies como lista; vive-os): ${SINAIS_DESENCAIXE.map((s) => `${s.nome} ("${s.essencia}")`).join(' · ')}.
+O REGISTO: íntimo, próximo, de COMPANHEIRA de caminho, NUNCA de púlpito nem de quem já chegou. A Vivianne está também no processo. Fala baixo, como quem confia um entendimento a alguém ao lado, não como quem ensina do alto.
 
-PROFUNDIDADE (a base de conhecimento dela, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto, que sai sempre em linguagem de vida real): ${profundidadePorBaixo(seed, 3)}
+A TRAVESSIA (a ESTRUTURA de TODA a peça, obrigatória, o que a torna desta conta): cada peça é uma MICRO-TRAVESSIA. 1) VÊ O ANTIGO: abre com a FACA, o padrão concreto que a pessoa vive AGORA ("isto sou eu", pára o scroll). 2) O LIMIAR: vira, mostra que isso não é quem ela é, é a estação que viveu, a herança da sobrevivência, e que há uma passagem. 3) O QUE SE ABRE: mostra a VANTAGEM de atravessar (mais leve, livre, viva, presente, ligada) — é AQUI que cai o PESO da peça, nunca na ferida. 4) (só quando serve, sem forçar) alarga: não atravessas sozinha, isso eleva quem está à volta. REGRA DURA: NUNCA fiques no diagnóstico da ferida (nomear o padrão e parar); a ferida é só a PORTA, a peça vive do que se ABRE.
+${excertoFerida ? `
+DE ONDE TIRAS A FACA (o "vê o antigo") — MINERA esta ferida real dela, não partas de comportamentos genéricos do quotidiano:${excertoFerida}
+Encontra AQUI a UMA cena/padrão mais forte, ainda não dito, e faz dele a faca.` : `
+DE ONDE TIRAS A FACA: das dores reconhecíveis da vida (a herança da sobrevivência: a vigilância, a pressa, a culpa de parar, a fome de provar valor, as lealdades invisíveis). Confissões sentidas para viver (nunca nomear como lista): ${SINAIS_DESENCAIXE.map((s) => `"${s.essencia}"`).join(' · ')}.`}
+${excertoTravessia ? `
+DE ONDE TIRAS A VIRADA E A VANTAGEM (o "limiar" e "o que se abre") — SOBE para a visão dela, minerando este excerto de "A Grande Transição":${excertoTravessia}
+Puxa daqui a passagem: o que se aligeira, o que se liberta, o que fica possível do outro lado.` : `
+DE ONDE TIRAS A VIRADA E A VANTAGEM: da visão dela (a espinha, acima): o "sou assim" é história, não essência; há um limiar; do outro lado a vida organiza-se à volta da criação e do vínculo, não da defesa.`}
+TESTE: a peça tem de ser IMPOSSÍVEL sem estas fontes, e tem de SUBIR da ferida para a vantagem (não pode ficar na ferida).
 
-O que SAI é a vida real, na linguagem das dores e passagens de qualquer pessoa, NUNCA a teoria, NUNCA o nome de um véu, autor ou tradição.
+FUNDAMENTO (só por baixo, para pensares mais fundo; PROIBIDO nomear no texto — sem autores, áreas, véus, domínios, conceitos ou jargão): a Vivianne vem de ${CRESCER.areas.join(', ')}. Âncoras: ${CRESCER.ancoras.join(' · ')}. Um foco de profundidade: ${profundidadePorBaixo(seed, 1)}.${linhagem ? ` Linhagem das cadeiras dela (só para densidade, NUNCA citar): ${linhagem}.` : ''}
 
-A TEMÁTICA DE HOJE, ${tematica.label}: ${tematica.foco}
+O que SAI é a vida real, em linguagem de toda a gente (NUNCA teoria, NUNCA o nome de um véu, autor ou tradição), MAS tem de CARREGAR a ideia ESPECÍFICA e não-óbvia deste saber: um insight com textura e profundidade, que a maioria nunca articulou assim, que SÓ este mundo vê. PROIBIDA a frase genérica de autoajuda que poderia vir de qualquer página motivacional sem este conhecimento: se o que escreveste serviria a qualquer conta, deita fora e vai mais fundo (ao mecanismo concreto, à camada por baixo, ao detalhe que ninguém diz). Específico e fundo, nunca universal e raso.
 
 O FORMATO, ${formato.label}: ${formato.estrutura}
 
@@ -65,6 +114,12 @@ A VOZ DE HOJE (${voz.label}): ${voz.instrucao}
 
 REGRAS DE VOZ (duras):
 - DIGNIDADE (inviolável): a peça abre SEMPRE com uma FACA (a 1.ª linha pára o scroll), nunca um arranque morno ou descritivo. O texto é forte e claro do princípio ao fim, nunca difuso, nunca encheção para ocupar slides. Se não houver uma faca e uma verdade que valham, escreve menos, nunca enches.
+${carrosselLongo
+  ? '- CARROSSEL: aqui SIM podes desenvolver ao longo das telas, cada tela uma respiração; mas cada tela continua curta e clara.'
+  : '- REEL CURTO (regra dura, o mais importante): isto é um REEL, NÃO um texto. UMA ideia só, do princípio ao fim. No TOTAL, no MÁXIMO 4 batidas muito curtas (a faca + até 3), cada uma uma frase curtíssima que cabe grande no ecrã e se lê num fôlego. PROIBIDO parágrafo, PROIBIDO 5+ frases, PROIBIDO desenvolver um raciocínio em vários passos (sintoma→causa→exemplo→metáfora é carrossel, não reel). Se tens mais a dizer, corta: escolhe A frase que fica. Um reel não explica, atinge.'}
+- NÃO-GENÉRICO (teste obrigatório antes de devolver): lê a frase e pergunta "isto poderia estar em qualquer página de autoajuda, sem o conhecimento dela?". Se sim, FALHOU: reescreve com a especificidade e a profundidade do saber (o mecanismo concreto, a camada por baixo, a verdade exata que a maioria não vê). A peça tem de ser inconfundivelmente DESTE mundo, não um truísmo bonito.
+- CLARO, NUNCA HERMÉTICO (teste obrigatório): lê a frase como se fosses uma pessoa qualquer no Instagram. Se precisas de a DECIFRAR, ou usa palavras-enigma ("soleira", "fluidez", "limiar", "frincha") ou metáfora obscura, FALHOU: reescreve em linguagem de vida real, simples e direta, que se entende à primeira. A profundidade está na VERDADE, não em soar misterioso.
+- PROIBIDA A METÁFORA QUE PRECISA DE EXPLICAÇÃO (regra dura): nada de imagens de jardim/natureza a fingir profundidade (cortar ramos, ir à raiz, podar, semear, colher, regar, florescer e afins), NEM de canalização/hidráulica (tapar uma fuga na parede, a água que arranja outro sítio por onde sair, o cano, o esgoto, a torneira), NEM sintoma-versus-causa como imagem "médica" que se explica; nem qualquer metáfora que a pessoa tenha de traduzir para perceber. Se a frase usa uma imagem, essa imagem tem de ser transparente à PRIMEIRA leitura; se não for, NOMEIA a coisa concreta em vez da metáfora (o comportamento real, o mecanismo real, na linguagem da vida). Teste: se alguém pode perguntar "isso quer dizer o quê?", reescreve.
 - Português europeu NATURAL, falado por uma pessoa real, NUNCA traduzido nem "de manual". PROIBIDO decalques: "nem todo" (nunca "não todo"), "cada" (nunca "a cada"); evita gerúndios de tradução. Lê em voz alta: se soar a máquina, reescreve.
 - SEM travessões (— nem –): usa vírgulas, pontos ou parênteses.
 - DIRETA: nomeia a cena concreta que a pessoa vive. A pessoa tem de pensar "isto sou eu". Nada de enigmas a decifrar, nada de títulos-conceito herméticos, nada de metáfora obscura.
@@ -72,8 +127,9 @@ REGRAS DE VOZ (duras):
 - Profunda mas leve. Nunca pregadora, nunca académica, nunca clichê de autoajuda ("acredite em si", "você merece").
 - NUNCA inventes biografia, marcos, clientes ou histórias pessoais da Vivianne. A autoridade vem do caminho ("reconheci primeiro em mim"), não de factos inventados.
 - NUNCA táticas de "viralizar" nem isco de engagement vazio. Verdade, não espetáculo da dor.
+- BENEFÍCIO, NÃO DIAGNÓSTICO (a lente da mãe, obrigatória): não deixes a peça a apontar a ferida. Faz sempre a viragem para o que se ABRE ao crescer, para o próprio e para os outros. A FACA de abertura pode ser já essa viragem (o que se ganha), não só a dor. Sem promessa, sem receita, sem púlpito.
 - A LEGENDA nunca repete nem reformula a frase da capa (quem lê já a viu no ecrã): começa onde a frase acaba, aprofunda ou abre. Parágrafos curtos separados por linha em branco (\\n\\n). Termina com um convite leve (refletir, guardar, partilhar com quem precisa), nunca uma ordem nem venda.
-${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM vive no MUNDO PÓS-SOBREVIVÊNCIA (consciência evoluída materializada em arquitetura, paisagem e ESCALA; nunca néon, sci-fi, robôs, doméstico, terapia literal). TRADUZ o sentimento da FRASE pela TENSÃO entre o mundo antigo (pesado, o encaixe forçado) e o que emerge (orgânico, luminoso, escala impossível). REGRA DE OURO: mostra o LIMIAR e a tensão, NUNCA a chegada como solução; o novo mundo vislumbra-se ao longe, por uma fenda, no horizonte. Inventa uma cena concreta e ORIGINAL (segue o estilo do visual), diferente das anteriores, com escala que provoca admiração em 5 segundos.'}
+${semImagem ? '- ESTA peça é TIPOGRÁFICA (sem imagem): devolve fundoPrompt como string vazia "".' : '- A IMAGEM segue a CONSTITUIÇÃO VISUAL: etnografia de uma civilização que NUNCA existiu (não o futuro da Terra, mas o equivalente funcional). NÃO é monumentalidade nem paisagem ampla por defeito; é o objeto, o ser, o rosto, o ritual desse mundo, à distância íntima. TRADUZ o sentimento da FRASE numa cena concreta desse mundo. O briefing da cena (escala, função, pergunta antropológica, taxonomia) está no campo fundoPrompt abaixo.'}
 
 DEVOLVE APENAS JSON válido, sem texto à volta:
 {
@@ -81,7 +137,9 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "conceito": "o tema em 1 a 3 palavras (selo da capa)",
   "frase": "o texto da CAPA: ${formato.multi ? 'a 1.ª linha/faca que para o scroll' : 'a frase única (1 a 3 linhas curtas)'}, sem aspas",
   "destaque": ["1 a 3 palavras ou expressões EXATAS da frase para realçar"],
-  "fundoPrompt": ${semImagem ? '""' : `"prompt em INGLÊS: UMA cena concreta e original que TRADUZA VISUALMENTE o sentimento da frase que escreveste acima (ligação imagem↔texto).${arquetipo ? ` PARTE OBRIGATORIAMENTE deste arquétipo de cena (compõe-o à tua maneira, ligado à frase, NUNCA um desfiladeiro/garganta verde): ${arquetipo}.` : ''} Estilo ${visual.label}. ${visual.variar} Escreve a cena específica e termina com este estilo/qualidade: ${visual.promptBase}"`},
+  "fundoPrompt": ${semImagem ? '""' : (imagemModo === 'ilustrar'
+    ? `"prompt em INGLÊS, composto a partir deste BRIEFING (segue-o à risca), traduzindo VISUALMENTE o sentimento da frase que escreveste (ligação imagem↔texto). NÃO uses objetos terrestres, versões futuristas, nem monumentalidade. BRIEFING: ${cena!.briefing}"`
+    : `"prompt em INGLÊS, composto a partir deste BRIEFING (segue-o à risca). É um DOCUMENTÁRIO da civilização, NÃO ilustra a frase: NÃO tentes traduzir a frase, mostra uma cena real de um dia normal deste mundo (partilha a civilização com o texto, não o ilustra). BRIEFING: ${cena!.briefing}"`)},
   "legenda": "legenda para Instagram, parágrafos curtos separados por \\n\\n, SEM repetir a frase da capa, a terminar num convite leve",
   "hashtags": ["8 a 12 hashtags em português, de crescimento/autoconhecimento/evolução, sem repetir"]${formato.multi ? ',\n  "momentos": ["As telas em sequência, EXATAMENTE conforme a estrutura do formato indicada acima. A 1.ª tela é a CAPA (igual ao campo frase). Cada tela é uma respiração/parágrafo conforme o formato, todas diferentes, sem repetir a ideia. Sem travessões, leitura clara e interessante do princípio ao fim."]' : ''}
 }`;
@@ -109,7 +167,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       messages: [{ role: 'user', content: pedido + naoRepetir + evitarAberturas }],
     }),
   });
-  if (!res.ok) throw new Error(`claude ${res.status}`);
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
 
   let o: Partial<Record<keyof PecaCrescer, unknown>> = {};

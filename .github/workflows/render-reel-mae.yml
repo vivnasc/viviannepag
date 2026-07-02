@@ -1,0 +1,60 @@
+name: Render reel da mae (VDS + voz + FFmpeg)
+
+on:
+  workflow_dispatch:
+    inputs:
+      jobId:
+        description: 'ID unico do job'
+        required: true
+        type: string
+      siteUrl:
+        description: 'URL publica do site (render page)'
+        required: true
+        type: string
+      slug:
+        description: 'slug da peca (vazio = todas as pecas da mae sem video)'
+        required: false
+        type: string
+        default: ''
+      layout:
+        description: 'query string do layout dela (av/ah/dist/txtSize/geoTop/geoW)'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-liberation
+
+      - name: Install npm packages
+        run: npm install --no-save @supabase/supabase-js puppeteer
+
+      - name: Render reels da mae
+        env:
+          SITE_URL: ${{ github.event.inputs.siteUrl }}
+          SLUG: ${{ github.event.inputs.slug }}
+          JOB_ID: ${{ github.event.inputs.jobId }}
+          LAYOUT: ${{ github.event.inputs.layout }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVEN_API_KEY: ${{ secrets.ELEVEN_API_KEY }}
+          XI_API_KEY: ${{ secrets.XI_API_KEY }}
+          ELEVEN_VOICE_ID: ${{ secrets.ELEVEN_VOICE_ID }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          VOICE_ID: ${{ secrets.VOICE_ID }}
+        run: node scripts/render-reel-mae.js

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- node-glow-01 | pontos | brilhante | animar: brilho a respirar -->
+  <defs>
+    <style>
+      :root { --vds-gold-soft: #d9bd8a; }
+    </style>
+    <radialGradient id="ng"><stop offset="0%" stop-color="var(--vds-gold-soft, #d9bd8a)"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle id="glow" cx="50" cy="50" r="22" fill="url(#ng)"/>
+  <circle id="node" cx="50" cy="50" r="4" fill="var(--vds-gold-soft, #d9bd8a)"/>
+</svg>

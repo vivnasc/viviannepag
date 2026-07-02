@@ -21,7 +21,7 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; imagens?: string[] | null; legenda?: string | null; hashtags?: string[] | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null; destaque?: string[]; notaVisual?: string | null; efeito?: string | null; tipografia?: Record<string, unknown> | null; segPorMomento?: number | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; crescer?: { tematica?: string; formato?: string; visual?: string }; soulab?: { clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; crescer?: { tematica?: string; formato?: string; visual?: string; reel?: boolean; veiaTitulo?: string; veiaLivro?: string; img?: string; imgModo?: string; lingua?: string; marca?: string; formatoRender?: string; citacao?: string; fonte?: string }; soulab?: { clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null } } | null;
     created_at?: string;
   };
 
@@ -32,6 +32,16 @@ export async function GET() {
       tematica: row.theme?.crescer?.tematica ?? null,
       formato: row.theme?.crescer?.formato ?? 'frase',
       visual: row.theme?.crescer?.visual ?? null,
+      reel: row.theme?.crescer?.reel ?? false, // peça nova = sai sempre como reel
+      veiaTitulo: row.theme?.crescer?.veiaTitulo ?? null, // de que secção do livro foi minerada
+      veiaLivro: row.theme?.crescer?.veiaLivro ?? null,
+      img: row.theme?.crescer?.img ?? null, // imagem do banco (cena/acento) escolhida na geração
+      imgModo: row.theme?.crescer?.imgModo ?? null,
+      lingua: row.theme?.crescer?.lingua ?? 'pt', // pt = @vivianne.dos.santos · en = @viviannewrites
+      marca: row.theme?.crescer?.marca ?? null,
+      formatoRender: row.theme?.crescer?.formatoRender ?? null, // excerto: 'manuscrito' | 'quotefoto'
+      citacao: row.theme?.crescer?.citacao ?? null,
+      fonte: row.theme?.crescer?.fonte ?? null,
       momentos: todosSlides.length > 1 ? todosSlides.map((x) => x.texto ?? '').filter(Boolean) : null,
       slidesImgs: todosSlides.map((x) => x.imageUrl ?? null),
       slidesTip: todosSlides.map((x) => x.tipografia ?? null),
@@ -43,6 +53,7 @@ export async function GET() {
       videoUrl: row.dias?.[0]?.videoUrl ?? null,
       imagens: row.dias?.[0]?.imagens ?? null,
       clipUrl: row.theme?.soulab?.clipUrl ?? null,
+      vozUrl: (row.theme?.soulab as { vozUrl?: string | null } | undefined)?.vozUrl ?? null,
       somUrl: row.theme?.soulab?.somUrl ?? null,
       somTipo: row.theme?.soulab?.somTipo ?? null,
       somEstilo: row.theme?.soulab?.somEstilo ?? null,
@@ -55,6 +66,7 @@ export async function GET() {
       agendadoEm: row.theme?.agendadoEm ?? null,
       hora: row.theme?.hora ?? null,
       publicado: Boolean(row.theme?.igPublicado || row.theme?.publicado),
+      arquivado: Boolean((row.theme as { arquivado?: boolean } | null | undefined)?.arquivado),
       criadoEm: row.created_at ?? null,
     };
   }).sort((a, b) => (b.criadoEm ?? '').localeCompare(a.criadoEm ?? ''));

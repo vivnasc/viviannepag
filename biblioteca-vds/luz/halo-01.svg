@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- halo-01 | luz | halo | animar: halo a respirar -->
+  <defs>
+    <style>
+      :root { --vds-gold-soft: #d9bd8a; }
+    </style>
+    <radialGradient id="hg"><stop offset="60%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/><stop offset="82%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0.7"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle id="halo" cx="50" cy="50" r="40" fill="url(#hg)"/>
+</svg>

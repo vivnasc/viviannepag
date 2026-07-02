@@ -7,7 +7,7 @@
 // Só devolve texto/indicações (a imagem gera-se a seguir, no route, com Flux).
 
 import { SOULAB, getTipoSoulab, type TipoSoulabId } from './marca';
-import { profundidadePorBaixo } from '@/lib/knowledge/saber';
+import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
 import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaSoulab {
@@ -30,8 +30,9 @@ export async function gerarPecaSoulab(
   tema?: string,
   formato: 'frase' | 'momentos' = 'frase',
   evitarImg: string[] = [], // CENAS de imagem já usadas (para não repetir portas/objetos partidos)
-  continuarDe?: { frase: string; conceito?: string } | null, // PARTE 2 de um reel que resultou
+  continuarDe?: { frase: string; conceito?: string; cena?: string } | null, // PARTE 2 de um reel que resultou (cena = fundoPrompt da parte 1, para evoluir a MESMA imagem)
   modo: 'abre' | 'encaminha' = 'abre', // 'abre' = deixa em aberto; 'encaminha' = desdobra e pousa
+  veia?: { titulo: string; texto: string; livroTitulo: string } | null, // MINERAÇÃO: excerto real do livro = fonte primária
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
 
@@ -50,6 +51,7 @@ A VOZ DA SOULAB (decisão de marca, inviolável): ${SOULAB.voz}.
 AMPLA, ANCORADA: a Soulab explora a alma humana em geral, mas o seu centro de gravidade é o território real desta curadoria. Estas correntes dão GRAVIDADE (não são o tema obrigatório, são o que atravessa tudo): ${SOULAB.territorio.join(' · ')}.
 ÂNCORAS DE PROFUNDIDADE (só para pensares mais fundo; PROIBIDO nomeá-las, citar autores ou usar jargão no texto): ${SOULAB.ancoras.join(' · ')}.
 PROFUNDIDADE (a base de conhecimento da curadoria, só para PENSARES com mais densidade; PROIBIDO nomear conceitos, domínios ou autores no texto): ${profundidadePorBaixo(evitar.length, 3)}.
+EXPERIÊNCIAS DE DESENCAIXE (do livro "Os 7 Sinais de Desencaixe"; só para PENSARES mais fundo, nunca as nomeies nem as transformes em diagnóstico da pessoa que lê): ${SINAIS_DESENCAIXE.map((s) => `${s.nome} ("${s.essencia}")`).join(' · ')}. Pensa a partir delas de forma IMPESSOAL e ampla (a Soulab é convite, não confissão), como observações da alma humana, não como "isto és tu".
 NÃO uses os 7 véus nem o baralho de personagens "Sou Aquela" (Salvadora, Provedora, Órfã…): isso pertence a outra conta. A Soulab é mais ampla e mais impessoal.
 
 ESTE ÂNGULO DE HOJE — ${tipo.label}: ${tipo.descricao}
@@ -61,6 +63,7 @@ REGRAS DE VOZ (duras):
 - Profundo mas leve; nunca pesado, nunca pregador, nunca académico, nunca kitsch místico.
 - CONVITE, não confissão: impessoal e aberto. NUNCA "isto és tu", nunca um diagnóstico da pessoa que lê.
 - NÃO motivacional, NÃO conselho, NÃO autoajuda, NÃO "põe-te em primeiro". Explora, não convence.
+- NÃO-GENÉRICO (teste obrigatório antes de devolver): pergunta "isto poderia estar em qualquer página espiritual/de citações, sem o conhecimento desta curadoria?". Se sim, FALHOU: reescreve com a especificidade e a profundidade do saber (a observação exata, a camada que ninguém vê), inconfundivelmente DESTE laboratório. Nunca um truísmo bonito.
 - Deixa a peça ABERTA: uma pergunta interessante vale mais que uma resposta fechada.
 - A legenda termina SEMPRE com um CTA, mas LEVE (um convite, não uma ordem): ficar com a pergunta, guardar para um momento de silêncio, partilhar com quem precisa, seguir o laboratório. NUNCA vender, NUNCA "link na bio", NUNCA imperativo agressivo.
 - A FRASE que aparece no ecrã é CURTA (cabe grande num reel 9:16): uma a três linhas, densa, com uma virada.
@@ -84,11 +87,23 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   // aprofunda ou vira a ideia, NÃO repete a frase nem diz "parte 2".
   // MODO ENCAMINHA: o terceiro tempo que falta. Não deixa a peça só aberta; desdobra
   // e pousa num movimento. Continua a NÃO ser conselho/ordem/autoajuda (regra da marca).
+  // MINERAÇÃO: a fonte primária é um excerto REAL do livro dela (impessoal, à maneira da Soulab).
+  const mineracao = veia?.texto
+    ? `\n\nFONTE PRIMÁRIA DESTA PEÇA (obrigatória): MINERA este EXCERTO REAL do livro dela "${veia.livroTitulo}" (secção "${veia.titulo}"). NÃO partas de um tema genérico nem de comportamentos: encontra DAQUI uma ideia, hipótese ou metáfora ainda não dita, a mais forte, e transforma-a numa OBSERVAÇÃO contemplativa da Soulab (impessoal, convite, nunca "isto és tu", nunca nomear o livro/autores/jargão). TESTE: tem de ser impossível sem este livro.\n--- EXCERTO DO LIVRO ---\n${veia.texto}\n--- FIM DO EXCERTO ---`
+    : '';
   const encaminhar = modo === 'encaminha'
     ? `\n\nMODO ENCAMINHA (importante nesta peça): NÃO a deixes totalmente aberta. Depois de abrir, DESDOBRA mais uma volta (o mecanismo por baixo, o que a maioria não vê) e POUSA num movimento sentido: uma direção pequena e concreta onde a pessoa pode descansar, o alívio a que o método chama "soltar". NÃO é resposta fechada, NÃO é conselho, NÃO é ordem nem autoajuda; é o terceiro tempo. Vale para a frase/momentos E para a legenda (a legenda desdobra e POUSA, em vez de só perguntar).`
     : '';
-  const seguimento = continuarDe?.frase
-    ? `\n\nISTO É UM REEL DE SEGUIMENTO. Um reel anterior resultou muito: "${continuarDe.frase}"${continuarDe.conceito ? ` (tema: ${continuarDe.conceito})` : ''}. Escreve a CONTINUAÇÃO desse fio, no MESMO registo e voz: aprofunda ou vira a ideia para um ângulo novo. Aguenta-se sozinha, mas quem viu a primeira sente-a como o passo seguinte. NÃO repitas a frase nem anuncies "parte 2".`
+  const continuando = !!continuarDe?.frase;
+  const seguimento = continuando
+    ? `\n\nISTO É UM REEL DE SEGUIMENTO (o PASSO SEGUINTE de um fio que resultou, não outro reel do mesmo ângulo). O reel anterior: "${continuarDe!.frase}"${continuarDe!.conceito ? ` (tema: ${continuarDe!.conceito})` : ''}. Escreve a CONTINUAÇÃO desse fio, no MESMO registo e voz: aprofunda ou vira a ideia mais uma volta. Aguenta-se sozinha, mas quem viu a primeira sente-a como a respiração seguinte. NÃO repitas a frase nem anuncies "parte 2".`
+    : '';
+  // CONTINUAÇÃO = MESMA CENA QUE EVOLUI (decisão da Vivianne, 1+3): a imagem da parte 2
+  // é a MESMA cena da parte 1 um passo adiante (mesma atmosfera/sujeito/paleta, a luz ou
+  // o tempo a mudar), NUNCA um sujeito novo. Por isso, ao continuar, a imagem NÃO segue a
+  // regra de "ampliar o imaginário" (que puxaria para outra cena) nem a anti-repetição.
+  const evoluirCena = continuando && continuarDe!.cena
+    ? `\n\nIMAGEM (continuidade visual, OBRIGATÓRIO): a cena é a MESMA do reel anterior, um passo adiante. Mantém o mesmo sujeito, a mesma atmosfera e a mesma paleta; muda só o tempo, a luz ou o ângulo, como o fotograma seguinte da mesma cena. NUNCA um sujeito ou um mundo novo. Cena anterior a EVOLUIR (não a substituir): "${continuarDe!.cena}". Devolve em fundoPrompt essa cena evoluída, em INGLÊS, a terminar com --ar 9:16 --style raw.`
     : '';
   const naoRepetir = evitar.length
     ? `\n\nNÃO repitas estes ângulos/frases/símbolos já usados (encontra outro): ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.`
@@ -96,7 +111,8 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   // ALARGAR O MUNDO IMAGÉTICO (pedido da Vivianne) sem perder a identidade: o
   // imaginário andava preso em portas e objetos partidos. Damos REGISTOS amplos
   // (não cenas prontas) e as cenas recentes a evitar, mantendo o fine art contemplativo.
-  const naoRepetirImg = `\n\nIMAGEM, AMPLIA O IMAGINÁRIO mantendo a identidade (fine art, contemplativo, simbólico, sem pessoas a posar, sem texto): NÃO recaias sempre em portas, soleiras e objetos partidos. Há mundo por explorar no natural e cósmico (água, neblina, fogo, céu, pedra, deserto, oceano, raízes, sementes, constelações), no líquido e no têxtil, no mineral e no botânico, na arquitetura do vazio, na luz e na sombra, no microscópico e no imenso. Que cada imagem traga um SUJEITO inesperado.${evitarImg.length ? ` E foge destas cenas recentes: ${evitarImg.slice(-10).map((e) => `"${String(e).slice(0, 90)}"`).join('; ')}.` : ''}`;
+  // NÃO se aplica ao seguimento: aí a imagem tem de MANTER a cena, não ampliá-la.
+  const naoRepetirImg = continuando ? '' : `\n\nIMAGEM, AMPLIA O IMAGINÁRIO mantendo a identidade (fine art, contemplativo, simbólico, sem pessoas a posar, sem texto): NÃO recaias sempre em portas, soleiras e objetos partidos. Há mundo por explorar no natural e cósmico (água, neblina, fogo, céu, pedra, deserto, oceano, raízes, sementes, constelações), no líquido e no têxtil, no mineral e no botânico, na arquitetura do vazio, na luz e na sombra, no microscópico e no imenso. Que cada imagem traga um SUJEITO inesperado.${evitarImg.length ? ` E foge destas cenas recentes: ${evitarImg.slice(-10).map((e) => `"${String(e).slice(0, 90)}"`).join('; ')}.` : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -105,10 +121,10 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
       model: 'claude-sonnet-4-6',
       max_tokens: 1100,
       system: sys,
-      messages: [{ role: 'user', content: pedido + encaminhar + seguimento + naoRepetir + naoRepetirImg }],
+      messages: [{ role: 'user', content: pedido + mineracao + encaminhar + seguimento + evoluirCena + naoRepetir + naoRepetirImg }],
     }),
   });
-  if (!res.ok) throw new Error(`claude ${res.status}`);
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
 
   let o: Partial<Record<keyof PecaSoulab, unknown>> = {};

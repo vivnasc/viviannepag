@@ -86,11 +86,68 @@ export const LIVRO = {
 } as const;
 
 // ---------------------------------------------------------------------------
+// A VISÃO — a ESPINHA de TODA a conta da mãe. É "A Grande Transição" (o livro-teoria
+// dela) aplicada a uma VIDA: a missão é mostrar a VANTAGEM de evoluir e elevar a
+// vibração de todos. NÃO são frases para copiar (o modelo NUNCA as cita): é a DIREÇÃO
+// que cada peça serve, o destino para onde toda a travessia sobe.
+// ---------------------------------------------------------------------------
+export const VISAO = {
+  // 1) o reconhecimento visto pela lente certa: o "sou assim" é HISTÓRIA, não essência.
+  espinha:
+    'aquilo a que uma pessoa chama "sou assim" (a vigilância que não desliga, a pressa, ' +
+    'a culpa de descansar, a fome de provar que vale, a fidelidade a dores antigas) é em ' +
+    'boa parte HERANÇA da sobrevivência, não a natureza fixa dela: é a falta e a ameaça a ' +
+    'falar pela boca dela muito depois de o perigo ter passado. Não está avariada, está ' +
+    'atrasada em relação a um mundo que mudou depressa demais.',
+  // 2) a virada: isto não é quem és, é a estação que viveste; há uma passagem a abrir-se.
+  limiar:
+    'isso não é quem ela é, é a estação em que viveu; e está num limiar, um tempo em que ' +
+    'pela primeira vez se pode organizar a vida à volta da criação, do vínculo e do sentido, ' +
+    'e não da defesa. A mesma inteligência que aprendeu a temer com precisão é a que agora ' +
+    'lhe permite reconhecer o medo e perguntar se ele ainda serve.',
+  // 3) a vantagem (onde cai o peso da peça): o que se abre ao atravessar.
+  vantagem:
+    'o que se abre ao atravessar: um corpo que larga a guarda, uma leveza que não se comprou ' +
+    'com esforço, mais presença, mais liberdade para amar sem apertar, para descansar sem ' +
+    'culpa, para receber o que chega fácil, para viver a partir do que se quer e não do que ' +
+    'se teme.',
+  // 4) o coletivo: não se atravessa sozinho (a vibração planetária da missão).
+  coletivo:
+    'não se atravessa sozinho: quando uma pessoa larga o medo antigo, isso alivia quem está ' +
+    'à volta e eleva o todo (somos porque somos, a cura de um espalha alívio); a evolução de ' +
+    'uma é, em silêncio, um bem de todos.',
+} as const;
+
+// O ARCO da travessia (o arco do próprio livro dela: "primeiro olhamos o mundo antigo,
+// depois entramos na fissura, por fim perguntamos o que emerge"). Cada peça é uma
+// MICRO-TRAVESSIA por estes tempos; o PESO cai sempre no que se ABRE (3/4), nunca na ferida.
+export const ARCO = [
+  { id: 'ver', nome: 'Vê o antigo', papel: 'a FACA: o padrão que a pessoa vive agora, o "isto sou eu" que pára o scroll' },
+  { id: 'limiar', nome: 'O limiar', papel: 'a VIRADA: isto não é quem és, é a estação que viveste; há uma passagem' },
+  { id: 'abre', nome: 'O que se abre', papel: 'a VANTAGEM: mais leve, livre, viva, presente, ligada (aqui cai o peso)' },
+  { id: 'juntos', nome: 'Não atravessas sozinha', papel: 'o COLETIVO: quando um desperta, eleva o todo (nem sempre, só quando serve)' },
+] as const;
+
+// PAPÉIS das fontes (livros) na travessia. Os livros NÃO são poços iguais:
+// - 'visao' = A Grande Transição: o DESTINO, a voz de evolução (o limiar e a vantagem).
+// - 'reconhecimento' = a ferida/o padrão onde a pessoa está presa (a FACA, o "isto sou eu").
+// (o `livro` das veias: 'transicao' | 'medo' | 'desencaixe' | 'veus'.)
+export type PapelFonte = 'visao' | 'reconhecimento';
+export const PAPEL_LIVRO: Record<string, PapelFonte> = {
+  transicao: 'visao',
+  medo: 'reconhecimento',
+  desencaixe: 'reconhecimento',
+  veus: 'reconhecimento',
+};
+
+// ---------------------------------------------------------------------------
 // TEMÁTICAS — os ângulos de crescimento/evolução, com a base dela por baixo.
-// (validadas pela Vivianne). NÃO são os 7 véus.
+// (validadas pela Vivianne). NÃO são os 7 véus. Passam a ser as ENTRADAS do "Vê o
+// antigo": cada temática é uma porta diferente para a MESMA travessia.
 // ---------------------------------------------------------------------------
 export type TematicaId =
-  | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo';
+  | 'transformacao' | 'raizes' | 'eumaior' | 'sombra' | 'vinculos' | 'sentido' | 'corpo' | 'ciclos' | 'campo'
+  | 'desencaixe' | 'consciencia' | 'emergencia';
 
 export interface Tematica {
   id: TematicaId;
@@ -151,6 +208,27 @@ export const TEMATICAS: Tematica[] = [
     descricao: 'Responsabilidade espiritual e cura ancestral: o que sara em ti não fica em ti.',
     foco: 'A cura que não fica em ti (do Véu da Dualidade): quando deixas de repetir um padrão, alivias quem vem depois e soltas a linha que vem de trás (a herança involuntária, inscrita no corpo). Expandir é responsabilidade, não vaidade: a dor de um repercute no corpo de todos, a cura de um espalha alívio à volta (sou porque somos). PROIBIDO o clichê "aumenta a tua vibração"; sempre no concreto dos vínculos, da família e das gerações.',
   },
+  {
+    // FONTE: o livro "Os 7 Sinais de Desencaixe" (a base de conhecimento dela).
+    id: 'desencaixe', label: 'Desencaixe (7 Sinais)', emoji: '🧩',
+    descricao: 'Pertencer sem deixar de se ser inteiro.',
+    foco: 'A dor de deixar de caber num lugar que já foi bom, sem que ninguém tenha feito nada de errado. Parte de UM destes sinais de cada vez e traz a cena concreta de quem o vive: estar presente sem se sentir pertencente; diminuir-se para caber; a saudade de algo que nunca se viveu; oscilar entre adaptar-se de mais e isolar-se; o corpo a rejeitar certos ambientes; confundir paz com ausência de pessoas; perceber que o problema nunca foi pertencer, foi o preço da pertença. NUNCA nomeies o sinal nem digas "desencaixe"; nomeia a cena.',
+  },
+  {
+    // FONTE: o glossário das Ciências da Consciência Emergente (a base dela).
+    id: 'consciencia', label: 'Consciência emergente', emoji: '🌀',
+    descricao: 'A vida vista para além da sobrevivência.',
+    foco: 'O que se vê quando a sobrevivência deixa de mandar: a identidade construída sobre a falta, a vigilância herdada que continua a varrer o ambiente muito depois de o perigo passar, a vida gerida como defesa, e o que se abre quando se larga isso. Parte de UM destes mecanismos e traz a cena concreta de quem o vive, sempre em linguagem de vida real. PROIBIDO nomear conceitos, domínios ou termos técnicos; só a vida.',
+  },
+  {
+    // O POLO POSITIVO da Grande Transição (Consciência Emergente em positivo): não a
+    // dor da sobrevivência (isso é 'consciencia'), mas o que se ABRE e PARA ONDE vamos,
+    // como pessoa e como humanidade, quando a abundância (de presença, sentido, vínculo)
+    // passa a ser o normal. Acordar, evoluir, expandir, e o que isso FAZ numa vida.
+    id: 'emergencia', label: 'Para onde vamos', emoji: '🌅',
+    descricao: 'Acordar, evoluir, expandir: o que se abre e para onde vamos.',
+    foco: 'Acordar, evoluir, expandir, e o que isso FAZ em concreto numa vida e à volta dela: o que se torna possível quando a mente deixa de viver em defesa e começa a criar, cooperar e dar sentido. NÃO a dor da sobrevivência, mas o que se ABRE depois: relações mais inteiras, o tempo que deixa de ser corrida, presença, criação, pertença sem preço. Olha também para onde vamos COMO HUMANIDADE quando a abundância de presença, de sentido e de vínculo passa a ser o normal (não a abundância de coisas). Concreto e encarnado, na 1.ª pessoa da vida real; PROIBIDO jargão, utopia fofa e clichés ("eleva a tua vibração", "novo paradigma", "consciência coletiva"); nomeia sempre a cena concreta onde isso se sente.',
+  },
 ];
 
 export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find((t) => t.id === id);
@@ -162,7 +240,7 @@ export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find(
 // DECISÃO da Vivianne (jun 2026): manter TODOS os formatos, mas garantir que cada
 // um sai DIGNO, na voz e no visual (ver a régua de DIGNIDADE no gerador). Cada
 // formato abre sempre com uma FACA e é forte e claro, nunca difuso nem encheção.
-export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio';
+export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio' | 'pordetras' | 'excerto';
 
 export interface FormatoCrescer {
   id: FormatoId;
@@ -216,6 +294,23 @@ export const FORMATOS: FormatoCrescer[] = [
       '4) FECHO: um slide que reconhece ("todos já caímos nisto") e convida a guardar, partilhar ou rolar. ' +
       'A leitura tem de ser clara e interessante do princípio ao fim (8 fortes valem mais que 13 esticados). Registo afiado mas digno: a faca aponta ao padrão, NUNCA despreza pessoas (proibido "massa histérica", "babaca" e afins).',
   },
+  {
+    id: 'pordetras', label: 'O que está por detrás', emoji: '🪞', multi: true,
+    descricao: 'Série: um comportamento do dia a dia → o que está mesmo por baixo.',
+    estrutura:
+      'Uma SÉRIE que pega num comportamento ou desejo concreto e reconhecível do dia a dia e revela o que está MESMO por baixo (a necessidade, a ferida, o mecanismo herdado), com alívio e sem julgamento. ' +
+      '1) CAPA-faca: começa por "O que está por detrás de" + UMA cena concreta, específica e quotidiana (ex.: a tua vontade de agradar, a tua raiva pelo vizinho, a roupa cara que usas, chegares sempre atrasado, dizeres sempre que sim, arrumares quando estás ansiosa). Escolhe uma inesperada, nunca abstrata; ' +
+      '2) a explicação fácil, a que damos a nós próprios (a da superfície); ' +
+      '3) a CAMADA por baixo: o que aquilo está mesmo a proteger ou a pedir (a necessidade real, o medo, a herança), em linguagem de vida, NUNCA o conceito nem o nome técnico; ' +
+      '4) o ALÍVIO: o que muda quando se vê isto, sem ordem nem "deixa de" (mais "quando vês, já não te comanda às escuras"). ' +
+      'Tom: revela, não acusa; a pessoa sente-se compreendida, nunca apanhada. Cada tela uma respiração, todas diferentes, sem travessões.',
+  },
+  {
+    id: 'excerto', label: 'Excerto (livro)', emoji: '📖', multi: false,
+    descricao: 'Uma frase quase textual de um livro dela + o título do livro. Sai em manuscrito ou sobre foto.',
+    estrutura:
+      'UM excerto CURTO (1 a 2 frases), FIEL quase à letra à veia/livro, a linha mais forte e citável, que se sustenta sozinha como uma citação de autora. Não explica, não desenvolve, não faz travessia: é a frase que fica. Nada de "capa-faca" nem CTA; é uma citação, funda e limpa.',
+  },
 ];
 
 export const getFormato = (id: string): FormatoCrescer | undefined => FORMATOS.find((f) => f.id === id);
@@ -250,13 +345,15 @@ export interface VisualCrescer {
 // instrução. O novo mundo vislumbra-se ao longe / por uma fenda / no horizonte.
 export const FIM_PROMPT =
   'an image like a memory from the future of a POST-SURVIVAL human civilization: not advanced technology but advanced CONSCIOUSNESS ' +
-  'materialized in architecture, landscape and scale (evolved, not merely advanced). Monumental, impossible architecture that looks GROWN, not built; ' +
-  'living organic structures, suspended gardens, rivers in the sky, bridges of light, colossal scale with tiny human beings; ' +
-  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, abundant and luminous; nature and architecture fused; physics set free. ' +
+  'made visible in this world (evolved, not merely advanced); organic and luminous, GROWN not built. ' +
+  'SCALE IS ONE REGISTER, NOT THE RULE: sometimes vast (living architecture, suspended gardens, rivers in the sky), but JUST AS OFTEN CLOSE, INTIMATE AND ALIVE — a single object of that world, a LIVING BEING (a bird, an animal, an insect, a creature, a flowering or unfurling plant), a pair of hands, a face softly lit, food, cloth, water, a small detail full of life and texture. A different world from ours, but a WORLD that is lived in, not only contemplated from afar. ' +
+  'INVISIBLE technology (no screens, robots, ships, gadgets); light emitted by the matter itself, abundant and luminous; nature and life and architecture fused; physics gently set free. ' +
   'BRIGHT, sunlit and LUMINOUS, crystal-clear ultra-high resolution, razor-sharp fine detail, deep clarity and dimension. ' +
   'Palette: luminous and clear, warm whites and soft golds with RADIANT SKY BLUES, lush living GREENS, turquoise water and champagne light, rich and beautiful NATURAL color (vivid yet natural, never neon, never washed-out, never muted). ' +
   'Feeling: absolute safety, expansion, possibility, mystery and awe, the end of the old world and the birth of a new human paradigm. ' +
-  'The monumental scale of Dune and Interstellar and the organic luminosity of Avatar and Moebius, BUT much brighter, more colourful, sharper and higher-resolution than those films. ' +
+  'The awe of Dune and Interstellar AND the intimate organic life of Avatar and Moebius, BUT much brighter, more colourful, sharper and higher-resolution than those films. ' +
+  'VARY THE SUBJECT AND SCALE WIDELY across images and LEAN CLOSE: often a single object, a living being, a plant, an animal, hands, a face, a small alive detail — not always a wide vista. Avoid making most images vast and empty of life. ' +
+  'Do NOT default to archways, arches, doorways, portals or arched stone openings framing the view; that composition is overused, avoid it unless truly needed. ' +
   'ABSOLUTELY NO haze, NO fog, NO mist, NO heavy shadows, NO murky penumbra, NO dim or desaturated look. ' +
   'NEVER neon, NEVER cyberpunk, no robots, no spaceships, no screens or holograms, no crystals, no chakras, no esoteric symbols, ' +
   'no post-apocalyptic decay, no dried flowers, no family corridors, no family trees, no blurry grandmothers, no literal therapy metaphors, not a plain everyday photo. ' +
@@ -267,9 +364,9 @@ export const VISUAIS: VisualCrescer[] = [
     id: 'pessoas', label: 'Pessoas (escala)', emoji: '🧑',
     descricao: 'Uma figura humana minúscula perante uma estrutura colossal: a pessoa diante do que herdou e ainda não largou.',
     promptBase:
-      'a TINY human figure, clearly visible and softly lit (never a dark silhouette), small but present and dignified, ' +
-      'standing before or within a COLOSSAL post-survival structure, the person facing what they inherited and have not yet released; ' +
-      'the scale provokes awe; the image carries the feeling of the words. ' + FIM_PROMPT,
+      'a human presence in the post-survival world, clearly visible and softly lit (never a dark silhouette), present and dignified — ' +
+      'SOMETIMES tiny before a colossal structure (the awe of scale), but JUST AS OFTEN CLOSE: a calm face, a pair of hands, a person resting or tending a living thing; ' +
+      'the image carries the feeling of the words. ' + FIM_PROMPT,
     variar:
       'VARIA a estrutura colossal e o enquadramento: uma cidade de milhares de camadas transparentes de cidades antigas suspensas; uma ponte de luz entre megacidades ' +
       '(à frente, arquitetura orgânica luminosa; atrás, uma estrutura monumental de pedra e aço); uma estrutura circular gigante no céu com milhões de lugares iluminados e um só vazio; ' +
@@ -284,6 +381,13 @@ export const VISUAIS: VisualCrescer[] = [
       'a figure on a road of light that builds itself only a few metres ahead of their steps',
       'a tiny figure inside an immense floating library of volumes of light',
       'a figure climbing a vast stairway that ends in the clouds',
+      'a person resting calmly inside a warm luminous organic home, soft daylight, gardens beyond the wide window',
+      'a person at a sunlit table in an interior of grown living architecture, plants and light around them',
+      'two people in quiet company in a warm radiant room open to a green horizon',
+      'a person standing close at a vast open window, the new luminous world spread softly below',
+      'a CLOSE-UP of a calm face softly lit by the warm light of the new world',
+      'a pair of open hands holding a small living light or a luminous seed, very close',
+      'a person seen close, resting, a luminous plant or a small gentle creature beside them',
     ],
   },
   {
@@ -294,34 +398,47 @@ export const VISUAIS: VisualCrescer[] = [
       'the old heavy world (industrial, built to survive) and the world that emerges (organic, luminous, impossible scale); ' +
       'show the threshold / a crack of warm light / the horizon, never the arrival fully inhabited. ' + FIM_PROMPT,
     variar:
-      'VARIA a metáfora em escala: uma cidade escura e densa de engrenagens e contrafortes vista de muito longe, bela e exausta; um interior monumental intacto mas vazio de luz própria, ' +
-      'com uma fenda por onde entra a luz quente do outro mundo; oceanos verticais, bibliotecas flutuantes, portais colossais, árvores do tamanho de continentes. Mostra o limiar, nunca a solução.',
+      'VARIA a metáfora em escala E o ponto de vista: uma cidade escura e densa de engrenagens vista de muito longe, bela e exausta; um interior monumental que passa de sem luz própria a inundado pela luz quente do outro mundo; ' +
+      'oceanos verticais, bibliotecas flutuantes, árvores do tamanho de continentes, um interior íntimo onde os dois mundos se tocam. Mostra a TENSÃO dos dois mundos; nem sempre um portal nem sempre só de fora.',
     arquetipos: [
       'a vast dark dense city of gears and buttresses seen from very far, beautiful and exhausted',
-      'a monumental interior, intact but with no light of its own, a crack letting in warm light from the other world',
+      'a monumental interior shifting from no light of its own to being flooded with warm light from the other world',
       'colossal vertical oceans of suspended water catching the light',
-      'enormous open portals onto a luminous horizon',
+      'an intimate warm interior where the heavy old world and the luminous new one meet in one room',
       'continent-sized living trees rising over an old world',
       'bridges of light between inhabited floating mountains',
+      'a luminous organic interior growing out of cracked industrial stone, life reclaiming it',
+      'a CLOSE-UP of a single luminous seed sprouting from cold grey machinery',
+      'a close object of the new world resting on cracked industrial stone, two worlds in one small thing',
+      'a close detail of living moss and light spreading over an old iron beam',
     ],
   },
   {
     id: 'natureza', label: 'O mundo que emerge', emoji: '🌌',
     descricao: 'Vislumbre do mundo orgânico e luminoso que nasce depois da sobrevivência (ao longe, por uma fenda).',
     promptBase:
-      'the WORLD THAT EMERGES after survival, NO people: organic luminous architecture and landscape at impossible scale ' +
-      '(suspended gardens, rivers in the sky, bridges of light, continent-sized trees, vertical oceans, light that is the matter itself), ' +
-      'glimpsed from afar / through a crack / on the horizon, never explained nor fully inhabited; it mirrors the feeling of the words. ' + FIM_PROMPT,
+      'the WORLD THAT EMERGES after survival: organic luminous architecture and landscape at impossible scale ' +
+      '(suspended gardens, rivers in the sky, bridges of light, continent-sized trees, vertical oceans, light that is the matter itself). ' +
+      'VARY THE VANTAGE: sometimes glimpsed from afar / on the horizon, sometimes seen FROM WITHIN as a warm inhabited interior, sometimes an intimate human-scale corner of that world; it mirrors the feeling of the words. ' + FIM_PROMPT,
     variar:
-      'VARIA a paisagem do novo mundo, sempre vislumbrada (não habitada por completo): jardins suspensos, rios no céu, pontes de luz, montanhas habitadas, escadas que terminam nas nuvens. ' +
-      'Espelha o sentimento da frase (expansão, recomeço, pertença em escala), sempre com segurança, mistério e admiração.',
+      'VARIA a paisagem E o ponto de vista do novo mundo: ora ao longe (jardins suspensos, rios no céu, pontes de luz, montanhas habitadas, escadas nas nuvens), ora POR DENTRO ' +
+      '(o interior luminoso de uma casa aberta para os jardins, um atelier cheio de luz, um quarto quente e sereno, uma estufa, uma sala de encontro). Espelha o sentimento da frase (expansão, recomeço, pertença), sempre com segurança, mistério e admiração.',
     arquetipos: [
       'endless suspended gardens cascading with greenery and light',
       'rivers in the sky falling as cascades of luminous water',
       'inhabited crystalline mountains glowing softly',
       'a sunrise over a vast ocean of light',
-      'forests growing inside luminous architecture',
-      'auroras over a serene radiant plain',
+      'the warm luminous INTERIOR of an organic home opening onto suspended gardens',
+      'an artist\'s sunlit atelier inside the living architecture, plants and light everywhere',
+      'a serene warm bedroom of grown organic walls, soft daylight, open to a green horizon',
+      'a calm communal gathering hall bathed in golden light, no crowd, just warmth',
+      'a luminous greenhouse interior overflowing with green life',
+      'a quiet reading nook of light high inside a continent-sized tree',
+      'a CLOSE-UP of an unfamiliar luminous flower unfurling, dew and light on its petals',
+      'a small glowing bird of this world perched close, alive and curious',
+      'a close still life of strange beautiful fruit, bread and water on a table of light',
+      'cupped hands holding luminous water, very close, warm light',
+      'a gentle unknown animal resting in warm sunlit grass, close and alive',
     ],
   },
   {

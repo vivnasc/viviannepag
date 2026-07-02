@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SECOES: { titulo: string; cor: string; itens: { href: string; label: string }[] }[] = [
+const SECOES: { titulo: string; cor: string; itens: { href: string; label: string; filhos?: { href: string; label: string }[] }[] }[] = [
   {
     titulo: 'publicar · todas as contas',
     cor: '#7E9B8E',
@@ -48,14 +48,15 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'viviannedossantos · loja',
     cor: '#EBAE4A',
     itens: [
-      { href: '/admin', label: 'escritos' },
-      { href: '/admin/editora', label: 'editora' },
-      { href: '/admin/produtos', label: 'produtos' },
-      { href: '/admin/compras', label: 'compras' },
-      { href: '/admin/estudio', label: 'estúdio' },
+      { href: '/admin/editora', label: 'editora', filhos: [
+        { href: '/admin', label: 'escritos' },
+        { href: '/admin/romances-redes', label: 'romances · capas & links' },
+      ] },
+      { href: '/admin/produtos', label: 'produtos · compras', filhos: [
+        { href: '/admin/compras', label: 'compras' },
+      ] },
       { href: '/admin/lista', label: 'a lista · emails' },
       { href: '/admin/anuncio', label: 'o anúncio · vídeo' },
-      { href: '/admin/romances-redes', label: 'romances · capas & links' },
     ],
   },
   {
@@ -65,8 +66,10 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     titulo: 'vivianne.dos.santos · a mãe',
     cor: '#d8b25a',
     itens: [
-      { href: '/admin/crescer', label: '🌱 crescer · crescimento & evolução' },
-      { href: '/admin/metodo-vs', label: 'método vs · a mãe' },
+      { href: '/admin/crescer', label: '🌱 crescer · crescimento & evolução', filhos: [
+        { href: '/admin/crescer/banco', label: 'banco de imagens' },
+      ] },
+      // 'método vs · a mãe' ocultado a pedido da Vivianne (o motor VS fica, só sai da sidebar).
       // filhas (ver/vir/viver) escondidas a pedido da Vivianne: abandonadas, sem impacto.
       { href: '/admin/series-diaria', label: 'vc sabia · hoje em mim' },
       { href: '/admin/carrossel', label: 'carrosséis' },

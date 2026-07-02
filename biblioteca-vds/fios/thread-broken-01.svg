@@ -1,0 +1,11 @@
+<svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- thread-broken-01 | fios | interrompido | animar: segmentos a acender em sequencia -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; }
+    </style>
+  </defs>
+  <g fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path id="thread" d="M30 10 C 40 55, 20 105, 30 150 S 36 188, 30 192" pathLength="1" stroke-dasharray="0.14 0.06"/>
+  </g>
+</svg>

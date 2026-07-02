@@ -1,0 +1,143 @@
+{
+  "_nota": "MOTOR 2 · WORLDBUILDING. NÃO começa pela frase — começa pela CIVILIZAÇÃO. Cadeia: categoria -> cena quotidiana -> imagem. É o documentário fotográfico de um mundo que existe algures e que estamos a visitar: 'que fotografia tiraria um antropólogo num dia normal desta civilização?'. Foi esta lógica que gerou as imagens fortes (biblioteca viva, mercado de experiências, criança a aprender com um organismo, baleia-arquivo). Aqui a escala pode variar (íntima a civilizacional). Constituição/paleta: worldbuilding/CONSTITUICAO.md. Enriquecer com o ChatGPT.",
+
+  "INSTITUICOES": [
+    { "nome": "biblioteca biológica", "funcao": "armazenar conhecimento", "equivalente_terrestre": "biblioteca", "descricao": "organismo translúcido onde o conhecimento cresce biologicamente e se abre a quem chega com curiosidade verdadeira" },
+    { "nome": "jardim de aprendizagem", "funcao": "educação", "equivalente_terrestre": "escola", "descricao": "as crianças aprendem com seres vivos e não com manuais" },
+    { "nome": "arquivo de memórias migratórias", "funcao": "história colectiva", "equivalente_terrestre": "arquivo nacional", "descricao": "guarda as experiências de gerações em filamentos vivos" },
+    { "nome": "câmara de ressonância", "funcao": "decisão colectiva", "equivalente_terrestre": "assembleia", "descricao": "a comunidade decide em comum, as vozes convergem numa luz" },
+    { "nome": "mercado de experiências", "funcao": "troca social", "equivalente_terrestre": "mercado", "descricao": "as pessoas trocam experiências vividas em vez de objectos" }
+  ],
+
+  "PROFISSOES": [
+    { "nome": "curador de memória", "funcao": "preservação cultural", "descricao": "cuida dos arquivos vivos das famílias e da comunidade" },
+    { "nome": "cartógrafo da consciência", "funcao": "orientação existencial", "descricao": "ajuda a mapear estados internos colectivos" },
+    { "nome": "jardineiro de significado", "funcao": "crescimento cultural", "descricao": "cultiva os organismos onde cresce o sentido comum" },
+    { "nome": "tradutor interespécies", "funcao": "comunicação", "descricao": "faz a ponte entre humanos e os organismos do mundo" }
+  ],
+
+  "ESPECIES": [
+    { "nome": "baleia migratória de memória", "funcao": "transportar conhecimento entre regiões", "descricao": "as suas rotas no alto céu ou no oceano levam memória de continente a continente" },
+    { "nome": "organismo mentor", "funcao": "aprendizagem", "descricao": "ser vivo que acompanha a criança a aprender" },
+    { "nome": "animal cartográfico", "funcao": "orientação emocional colectiva", "descricao": "migra através de estados psicológicos colectivos" },
+    { "nome": "polinizador de ideias", "funcao": "criatividade", "descricao": "circula criatividade entre pessoas e regiões" }
+  ],
+
+  "ESPACOS": [
+    { "nome": "observatório emocional", "funcao": "compreensão colectiva", "descricao": "espaço onde se observam os estados internos da comunidade" },
+    { "nome": "rio de memória", "funcao": "transmissão cultural", "descricao": "corrente viva por onde passa a memória de uma região" },
+    { "nome": "casa simbiótica", "funcao": "habitar", "descricao": "casa-organismo que cresce com a família e muda quando nasce ou parte alguém" },
+    { "nome": "jardim de transição", "funcao": "luto", "descricao": "lugar vivo onde se acompanha uma despedida" }
+  ],
+
+  "OBJETOS": [
+    { "nome": "cápsula de conhecimento", "funcao": "guardar saber", "descricao": "pequeno organismo que guarda uma experiência ou um saber" },
+    { "nome": "taça de escuta", "funcao": "reconciliação", "descricao": "amplia a compreensão entre pessoas em conversa difícil" },
+    { "nome": "tecido vivo", "funcao": "vestir/regular", "descricao": "roupa-ecologia que muda devagar com a pessoa" }
+  ],
+
+  "RITUAIS": [
+    { "nome": "acolhimento do recém-nascido", "funcao": "celebração", "descricao": "a comunidade reconhece e nomeia um recém-chegado" },
+    { "nome": "partilha de memória familiar", "funcao": "transmissão", "descricao": "uma família reúne-se à volta do seu arquivo vivo" },
+    { "nome": "decisão em comum", "funcao": "decisão colectiva", "descricao": "a comunidade decide em círculo, em ressonância" },
+    { "nome": "refeição", "funcao": "vínculo", "descricao": "uma refeição partilhada, à volta de organismos de luz" }
+  ],
+
+  "ACCOES": [
+    { "verbo": "entregar", "significado": "passar algo importante a alguém" },
+    { "verbo": "separar", "significado": "distinguir o que estava fundido" },
+    { "verbo": "iniciar", "significado": "introduzir alguém a uma prática pela primeira vez" },
+    { "verbo": "cultivar", "significado": "cuidar de algo vivo que cresce devagar" },
+    { "verbo": "transmitir", "significado": "passar saber entre gerações" },
+    { "verbo": "partilhar", "significado": "repartir entre pessoas" },
+    { "verbo": "libertar", "significado": "deixar algo partir" },
+    { "verbo": "herdar", "significado": "receber o que vem de trás" },
+    { "verbo": "devolver", "significado": "restituir o que não era nosso" },
+    { "verbo": "integrar", "significado": "acolher como parte do todo" },
+    { "verbo": "diagnosticar", "significado": "ler e nomear um estado interno" },
+    { "verbo": "reconciliar", "significado": "voltar a tecer um laço quebrado" }
+  ],
+
+  "CENAS": [
+    { "nome": "primeira leitura da memória familiar", "instituicao": "arquivo de memórias migratórias", "participantes": ["criança", "guardião de memória"], "acao": "entregar", "equivalente_terrestre": "herança / abrir o álbum de família", "escala": "íntima" },
+    { "nome": "separação das três fontes do cansaço", "instituicao": "casa de diferenciação emocional", "participantes": ["cartógrafo de estados internos", "adulto"], "acao": "separar", "equivalente_terrestre": "terapia", "escala": "íntima" },
+    { "nome": "primeiro contacto com o organismo de identidade", "instituicao": "jardim de aprendizagem", "participantes": ["adolescente", "mentor"], "acao": "iniciar", "equivalente_terrestre": "rito de passagem", "escala": "íntima" },
+    { "nome": "cultivo do conhecimento", "instituicao": "biblioteca biológica", "participantes": ["curador de memória", "aprendizes"], "acao": "cultivar", "equivalente_terrestre": "investigação / estudo", "escala": "social" },
+    { "nome": "acolhimento do recém-nascido", "instituicao": "câmara de ressonância", "participantes": ["família", "comunidade"], "acao": "integrar", "equivalente_terrestre": "baptismo / registo", "escala": "social" },
+    { "nome": "troca de experiências no mercado", "instituicao": "mercado de experiências", "participantes": ["duas pessoas"], "acao": "partilhar", "equivalente_terrestre": "mercado / conversa", "escala": "social" },
+    { "nome": "despedida no jardim de transição", "instituicao": "jardim de transição", "participantes": ["pessoa em luto", "acompanhante"], "acao": "libertar", "equivalente_terrestre": "funeral", "escala": "íntima" },
+    { "nome": "reconciliação de duas comunidades", "instituicao": "câmara de ressonância", "participantes": ["representantes de duas comunidades"], "acao": "reconciliar", "equivalente_terrestre": "mediação", "escala": "social" }
+  ],
+
+  "CENAS_QUOTIDIANAS": [
+    { "categoria": "infância", "descricao": "uma criança aprende com um organismo mentor", "participantes": ["criança", "organismo mentor"], "acao": "iniciar", "escala": "íntima" },
+    { "categoria": "investigação", "descricao": "uma equipa de biólogos acompanha a migração das baleias de memória, a mapear as rotas", "participantes": ["biólogos da consciência"], "acao": "mapear", "escala": "ecológica" },
+    { "categoria": "agricultura", "descricao": "agricultores marinhos cultivam organismos de alimento numa baía viva", "participantes": ["agricultores marinhos"], "acao": "cultivar", "escala": "social" },
+    { "categoria": "arquitectura", "descricao": "construtores fazem crescer um habitat vivo, guiando as suas fibras", "participantes": ["construtores de habitats vivos"], "acao": "construir", "escala": "social" },
+    { "categoria": "medicina", "descricao": "uma cuidadora restaura um organismo de regulação ferido", "participantes": ["cuidadora"], "acao": "restaurar", "escala": "íntima" },
+    { "categoria": "oceano", "descricao": "navegadores conduzem uma embarcação viva guiados por animais cartográficos", "participantes": ["navegadores"], "acao": "navegar", "escala": "ecológica" },
+    { "categoria": "biblioteca", "descricao": "bibliotecários biológicos cuidam dos corais de conhecimento e ajudam quem lê", "participantes": ["bibliotecários biológicos", "leitores"], "acao": "preservar", "escala": "social" }
+  ],
+
+  "DOMINIOS_DA_VIDA": [
+    "educação", "ciência", "arte", "medicina", "agricultura", "oceano", "astronomia",
+    "arquitectura", "família", "governação", "comércio", "exploração", "engenharia", "ecologia", "música"
+  ],
+
+  "VERBOS_CIVILIZACIONAIS": [
+    "cultivar", "construir", "mapear", "investigar", "navegar", "restaurar", "compor",
+    "ensinar", "preservar", "transportar", "traduzir", "cuidar", "negociar", "celebrar", "reparar", "explorar"
+  ],
+
+  "BIOLOGIA_DO_MUNDO": [
+    "plantas temporais que florescem em ritmos emocionais", "arquitectura viva que cresce com quem a habita",
+    "organismos translúcidos de luz própria", "recipientes biológicos que guardam saber", "ecossistemas híbridos de planta e luz",
+    "corais de conhecimento", "fungos de tradução entre espécies"
+  ],
+
+  "FLORA": [
+    "árvores translúcidas de tronco fibroso", "folhas cristalinas flexíveis que tilintam ao vento", "flores que libertam pólen luminoso ao entardecer",
+    "líquenes arquitectónicos que formam abrigos", "jardins aquáticos suspensos no ar húmido", "plantas que recolhem água da névoa",
+    "florestas que mudam lentamente de forma ao longo das gerações", "flores que só abrem sob certas luas"
+  ],
+
+  "FAUNA": [
+    "aves de plumagem quase vegetal, iridescente", "baleias migratórias bioluminescentes com padrões únicos", "polinizadores gigantes de asas membranosas",
+    "anfíbios arborícolas translúcidos", "herbívoros semi-aquáticos de pele musgosa", "aves que polinizam as árvores-arquitectura",
+    "animais que comunicam por padrões de luz na pele", "animais cartográficos que migram por estados colectivos"
+  ],
+
+  "RIOS_E_MARES": [
+    "um rio de água translúcida que transporta sementes vivas, com organismos luminosos na corrente",
+    "margens onde as plantas mudam com as estações emocionais da comunidade",
+    "um mar sob várias luas, com recifes que guardam histórias migratórias",
+    "um arquipélago vivo que se move devagar", "marés influenciadas por múltiplas luas"
+  ],
+
+  "FENOMENOS_DO_MUNDO": [
+    "migração anual das baleias de memória", "floração dos arquivos vivos", "marés de bioluminescência narrativa",
+    "chuvas de sementes de conhecimento", "sincronização das árvores relacionais", "aurora de significado numa grande mudança"
+  ],
+
+  "PAISAGENS_FUNCIONAIS": [
+    "rios que transportam memória", "florestas que armazenam histórias", "montanhas usadas para observação colectiva",
+    "lagos que funcionam como arquivos acústicos", "pontes de coerência que só se mantêm enquanto há confiança"
+  ],
+
+  "VESTIGIOS_DA_CIVILIZACAO": [
+    { "nome": "arquivo de memória em floração", "estado": "aguarda consulta", "equivalente_terrestre": "livro aberto numa biblioteca" },
+    { "nome": "organismos de navegação em repouso", "estado": "fim do ciclo migratório", "equivalente_terrestre": "barcos ancorados" },
+    { "nome": "jardins de aprendizagem vazios", "estado": "entre gerações", "equivalente_terrestre": "escola vazia nas férias" },
+    { "nome": "corais de memória a cantar ao luar", "estado": "sincronização colectiva", "equivalente_terrestre": "sinos ao entardecer" },
+    { "nome": "porto biológico antes das embarcações", "estado": "antes da chegada", "equivalente_terrestre": "cais ao amanhecer" }
+  ],
+
+  "CENAS_SEM_HUMANOS": [
+    "uma biblioteca viva durante a noite, sem ninguém, os corais de conhecimento a brilhar baixo",
+    "organismos de aprendizagem à espera das crianças num jardim vazio",
+    "um porto biológico antes da chegada das embarcações vivas",
+    "jardins de memória depois de a cerimónia ter terminado",
+    "baleias de memória a atravessar um mar iluminado por duas luas",
+    "uma cidade adormecida sob árvores arquitectónicas gigantes"
+  ]
+}

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- thread-glow-tip-01 | fios | brilho terminal | animar: desenho de cima para baixo, brilho a descer -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+    <radialGradient id="tip-glow"><stop offset="0%" stop-color="var(--vds-gold-soft, #d9bd8a)"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path id="thread" d="M30 10 C 38 60, 22 110, 30 160 S 34 185, 30 190" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" pathLength="1"/>
+  <circle id="tip" cx="30" cy="190" r="10" fill="url(#tip-glow)"/>
+  <circle cx="30" cy="190" r="2" fill="var(--vds-gold-soft, #d9bd8a)"/>
+</svg>

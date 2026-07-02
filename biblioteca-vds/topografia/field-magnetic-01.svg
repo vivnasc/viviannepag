@@ -1,0 +1,21 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- field-magnetic-01 | topografia | campo | animar: linhas a pulsar em torno do centro -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+  </defs>
+  <g id="field" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round">
+    <path id="f-1" d="M50 8 C 64.4 30, 64.4 70, 50 92" pathLength="1"/>
+    <path id="fm-1" d="M50 8 C 35.6 30, 35.6 70, 50 92" pathLength="1"/>
+    <path id="f-2" d="M50 8 C 78.8 30, 78.8 70, 50 92" pathLength="1"/>
+    <path id="fm-2" d="M50 8 C 21.2 30, 21.2 70, 50 92" pathLength="1"/>
+    <path id="f-3" d="M50 8 C 93.2 30, 93.2 70, 50 92" pathLength="1"/>
+    <path id="fm-3" d="M50 8 C 6.799999999999997 30, 6.799999999999997 70, 50 92" pathLength="1"/>
+    <path id="f-4" d="M50 8 C 107.6 30, 107.6 70, 50 92" pathLength="1"/>
+    <path id="fm-4" d="M50 8 C -7.600000000000001 30, -7.600000000000001 70, 50 92" pathLength="1"/>
+    <path id="f-5" d="M50 8 C 122 30, 122 70, 50 92" pathLength="1"/>
+    <path id="fm-5" d="M50 8 C -22 30, -22 70, 50 92" pathLength="1"/>
+  </g>
+  <circle cx="50" cy="50" r="1.8" fill="var(--vds-gold-soft, #d9bd8a)"/>
+</svg>

@@ -8,9 +8,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
-type Sec = { titulo: string; cor: string; itens: { href: string; label: string }[] };
+type Item = { href: string; label: string; filhos?: { href: string; label: string }[] };
+type Sec = { titulo: string; cor: string; itens: Item[] };
 
-const naSecao = (sec: Sec, path: string | null) => sec.itens.some((i) => path === i.href || (path?.startsWith(i.href + '/') ?? false));
+const casa = (href: string, path: string | null) => path === href || (path?.startsWith(href + '/') ?? false);
+const naSecao = (sec: Sec, path: string | null) =>
+  sec.itens.some((i) => casa(i.href, path) || (i.filhos?.some((f) => casa(f.href, path)) ?? false));
 
 export function AdminNav({ secoes }: { secoes: Sec[] }) {
   const path = usePathname();
@@ -42,13 +45,23 @@ export function AdminNav({ secoes }: { secoes: Sec[] }) {
               <span className="opacity-50 text-[0.7rem]">{aberto ? '−' : '+'}</span>
             </button>
             {aberto && sec.itens.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className={`block py-1 px-3 rounded-[10px] text-[0.82rem] no-underline transition-colors ${path === n.href ? 'text-ambar bg-terra-2/40' : 'text-creme-2/80 hover:bg-terra-2/50 hover:text-ambar'}`}
-              >
-                {n.label}
-              </Link>
+              <div key={n.href}>
+                <Link
+                  href={n.href}
+                  className={`block py-1 px-3 rounded-[10px] text-[0.82rem] no-underline transition-colors ${path === n.href ? 'text-ambar bg-terra-2/40' : 'text-creme-2/80 hover:bg-terra-2/50 hover:text-ambar'}`}
+                >
+                  {n.label}
+                </Link>
+                {n.filhos?.map((f) => (
+                  <Link
+                    key={f.href}
+                    href={f.href}
+                    className={`block py-1 pl-6 pr-3 rounded-[10px] text-[0.76rem] no-underline transition-colors ${path === f.href ? 'text-ambar bg-terra-2/40' : 'text-creme-2/65 hover:bg-terra-2/50 hover:text-ambar'}`}
+                  >
+                    <span className="opacity-40 mr-1">↳</span>{f.label}
+                  </Link>
+                ))}
+              </div>
             ))}
           </div>
         );

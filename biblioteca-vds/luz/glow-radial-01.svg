@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- glow-radial-01 | luz | glow radial | animar: brilho a pulsar -->
+  <defs>
+    <style>
+      :root { --vds-gold-soft: #d9bd8a; --vds-light: #f4ede1; }
+    </style>
+    <radialGradient id="gr"><stop offset="0%" stop-color="var(--vds-light, #f4ede1)" stop-opacity="0.9"/><stop offset="45%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0.4"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle id="glow" cx="50" cy="50" r="46" fill="url(#gr)"/>
+</svg>

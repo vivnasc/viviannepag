@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- sun-rays-01 | atmosfera | raios solares | animar: raios a respirar -->
+  <defs>
+    <style>
+      :root { --vds-light: #f4ede1; }
+    </style>
+    <radialGradient id="sr"><stop offset="0%" stop-color="var(--vds-light, #f4ede1)" stop-opacity="0.5"/><stop offset="100%" stop-color="var(--vds-light, #f4ede1)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g transform="translate(6 6)">
+    <polygon points="0,0 93.97,-38.2 93.97,-30.2" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <polygon points="0,0 99.45,-14.45 99.45,-6.45" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <polygon points="0,0 99.03,9.92 99.03,17.92" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <polygon points="0,0 92.72,33.46 92.72,41.46" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <polygon points="0,0 80.9,54.78 80.9,62.78" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <polygon points="0,0 64.28,72.6 64.28,80.6" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <polygon points="0,0 43.84,85.88 43.84,93.88" fill="var(--vds-light, #f4ede1)" opacity="0.10"/>
+    <circle cx="0" cy="0" r="14" fill="url(#sr)"/>
+  </g>
+</svg>

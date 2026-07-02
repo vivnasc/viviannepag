@@ -8,6 +8,20 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import { PALETAS, type Mundo } from '@/lib/estudio-conteudo';
+import { CRESCER_SLIDE } from '@/lib/crescer/marca';
+import { SOULAB_SLIDE } from '@/lib/soulab/marca';
+
+// MARCA por MUNDO — a fonte ÚNICA da verdade da assinatura/selo do reel. Antes a
+// marca "Véu a Véu" estava escondida como default e CADA caminho (PostSlide, render,
+// preview) tinha de a corrigir, e qualquer caminho novo reabria o furo. Agora o
+// KineticSlide decide pelo mundo: crescer/soulab têm a SUA assinatura, sem selo; o
+// resto fica a veu.a.veu. Quem chamar pode na mesma sobrepor por prop (ex. método).
+type MarcaReel = { selo: string | null | undefined; mostrarConceito: boolean; assinatura: string; site: string };
+const MARCA_VEU: MarcaReel = { selo: undefined, mostrarConceito: true, assinatura: 'Véu a Véu', site: 'viviannedossantos.com' };
+const MARCA_POR_MUNDO: Record<string, MarcaReel> = {
+  crescer: { ...CRESCER_SLIDE },
+  soulab: { ...SOULAB_SLIDE },
+};
 
 const FONT_SERIF = '"Cormorant Garamond", var(--font-cormorant), Georgia, serif';
 const FONT_SANS = '"Inter", var(--font-inter), system-ui, sans-serif';
@@ -116,7 +130,9 @@ export function estiloSequencia(transicao: Transicao | undefined, prog: number, 
   return { opacity: 1 }; // hold
 }
 
-export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito = true, assinatura = 'Véu a Véu', site = 'viviannedossantos.com' }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
+export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 'escola', prog = 1, ratio = '9:16', variante, efeito, tipografia, conceito, selo, mostrarConceito, assinatura, site }: { texto: string; destaque?: string[]; imageUrl?: string; clipUrl?: string; mundo?: Mundo; prog?: number; ratio?: '9:16' | '4:5'; variante?: string; efeito?: EfeitoTexto; tipografia?: Tipografia; conceito?: string; selo?: string | null; mostrarConceito?: boolean; assinatura?: string; site?: string }) {
+  // marca derivada do MUNDO (default seguro); cada prop explícita sobrepõe-se.
+  const marca = MARCA_POR_MUNDO[mundo as string] ?? MARCA_VEU;
   const ehDomingo = variante === 'domingo'; // motion luminoso (bloom), distinto do typewriter
   // o EFEITO do texto (à escolha): máquina de escrever · bloom luminoso · fade
   // suave · surgir (palavra a palavra, sem cursor). Back-compat: domingo => bloom.
@@ -171,9 +187,12 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
   const alignText: 'left' | 'center' | 'right' = tipografia?.alinhH === 'esq' ? 'left' : tipografia?.alinhH === 'dir' ? 'right' : 'center';
   const alignFlexH = alignText === 'left' ? 'flex-start' : alignText === 'right' ? 'flex-end' : 'center';
   const serie = ehDomingo ? 'Domingo de Luz' : 'Ancorar'; // cabeçalho da série (veu.a.veu)
-  // a MARCA é parametrizável: por defeito a veu.a.veu, mas outra conta (ex. Soulab)
-  // passa o seu selo/assinatura/site e pode esconder o selo e o rótulo do conceito.
-  const seloTexto = selo === undefined ? serie : selo; // selo===null => esconde o selo
+  // MARCA: prop explícita > marca do mundo > veu.a.veu. selo===null esconde; undefined => série.
+  const seloBase = selo !== undefined ? selo : marca.selo;
+  const seloTexto = seloBase === undefined ? serie : seloBase;
+  const mostrarConceitoEff = mostrarConceito ?? marca.mostrarConceito;
+  const assinaturaEff = assinatura ?? marca.assinatura;
+  const siteEff = site ?? marca.site;
   const ultimoVisivel = Math.min(palavras.length - 1, Math.floor(mostradas));
   const zoom = 1 + 0.07 * prog;                        // leve Ken Burns
   const rodapeOp = Math.max(0, Math.min(1, (prog - 0.55) / 0.25));
@@ -194,7 +213,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
 
         {/* cabeçalho/selo da série (como as outras coleções) + selo do conceito.
             Soulab passa selo={null} e mostrarConceito={false} -> sem nenhum destes. */}
-        {(seloTexto || (mostrarConceito && conceito)) && (
+        {(seloTexto || (mostrarConceitoEff && conceito)) && (
           <div style={{ position: 'absolute', top: 110, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, zIndex: 3 }}>
             {seloTexto && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '11px 26px', borderRadius: 999, border: `1px solid ${a('#F4ECDD', '3d')}`, background: 'rgba(18,16,22,0.32)' }}>
@@ -203,7 +222,7 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
                 <span style={{ width: 18, height: 1, background: accent, opacity: 0.75 }} />
               </div>
             )}
-            {mostrarConceito && conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.82, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
+            {mostrarConceitoEff && conceito && <span style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: 21, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent, opacity: 0.82, textAlign: 'center', padding: '0 90px' }}>{conceito}</span>}
           </div>
         )}
 
@@ -262,8 +281,8 @@ export function KineticSlide({ texto, destaque = [], imageUrl, clipUrl, mundo = 
 
         {/* assinatura */}
         <div style={{ position: 'absolute', bottom: 130, left: 0, right: 0, textAlign: 'center', zIndex: 3, opacity: rodapeOp }}>
-          <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, color: '#F4ECDD', opacity: 0.85, margin: 0 }}>{assinatura}</p>
-          <p style={{ fontFamily: FONT_MONO, fontSize: 22, letterSpacing: '0.04em', color: ACCENT, opacity: 0.85, margin: '6px 0 0' }}>{site}</p>
+          <p style={{ fontFamily: FONT_SERIF, fontStyle: 'italic', fontSize: 34, color: '#F4ECDD', opacity: 0.85, margin: 0 }}>{assinaturaEff}</p>
+          <p style={{ fontFamily: FONT_MONO, fontSize: 22, letterSpacing: '0.04em', color: ACCENT, opacity: 0.85, margin: '6px 0 0' }}>{siteEff}</p>
         </div>
       </div>
     </div>

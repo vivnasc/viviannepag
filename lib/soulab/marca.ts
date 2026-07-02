@@ -128,7 +128,7 @@ export const SOULAB_MUNDO = 'soulab';
 // TIPOS DE CONTEÚDO (a investigação da Soulab, sem achatar tudo a "frase"). Cada
 // tipo é um ÂNGULO de exploração; o vehículo do 1.º passo é um reel contemplativo
 // (um símbolo/imagem + um fragmento de texto), mas o ângulo muda a voz e a imagem.
-export type TipoSoulabId = 'arquetipo' | 'frase' | 'simbolo' | 'imagem' | 'experiencia' | 'conceito';
+export type TipoSoulabId = 'arquetipo' | 'frase' | 'simbolo' | 'imagem' | 'experiencia' | 'conceito' | 'desencaixe' | 'consciencia';
 
 export interface TipoSoulab {
   id: TipoSoulabId;
@@ -194,6 +194,26 @@ export const TIPOS_SOULAB: TipoSoulab[] = [
     angulo:
       'Propõe uma pequena EXPERIÊNCIA ao espectador: uma pergunta para contemplar, um exercício de imaginação, uma observação para fazer hoje. ' +
       'Convida a explorar, nunca a obedecer. Termina aberto. A imagem é um convite visual contemplativo.',
+  },
+  {
+    // FONTE: o livro "Os 7 Sinais de Desencaixe" (a base de conhecimento dela).
+    id: 'desencaixe',
+    label: 'Desencaixe',
+    emoji: '🧩',
+    descricao: 'A experiência de pertencer sem deixar de se ser inteiro — observada de forma ampla e impessoal.',
+    angulo:
+      'Parte de UMA das experiências de desencaixe (estar presente sem se sentir pertencente, diminuir-se para caber, a saudade de algo nunca vivido, oscilar entre adaptar-se e isolar-se, o corpo a rejeitar ambientes, confundir paz com ausência de pessoas, o preço da pertença) e abre uma observação contemplativa sobre ela. ' +
+      'IMPESSOAL e aberto, nunca "isto és tu", nunca diagnóstico: a Soulab observa a alma humana, não aponta. Não nomeies o sinal nem digas "desencaixe". A imagem é um símbolo contemplativo do limiar/da pertença.',
+  },
+  {
+    // FONTE: o glossário das Ciências da Consciência Emergente (a base dela).
+    id: 'consciencia',
+    label: 'Consciência emergente',
+    emoji: '🌀',
+    descricao: 'A vida vista para além da sobrevivência — a lente ampla das ciências da consciência, tornada contemplativa.',
+    angulo:
+      'Parte de UM mecanismo da vida vivida em sobrevivência (a identidade construída sobre a falta, a vigilância herdada, a vida gerida como defesa) e do que se abre quando ele se solta. Torna-o uma OBSERVAÇÃO poética e aberta, nunca uma aula. ' +
+      'Zero autores, zero jargão, zero nomes de domínios: faz VER, não expliques. A imagem é uma metáfora visual do mecanismo e da sua passagem.',
   },
 ];
 

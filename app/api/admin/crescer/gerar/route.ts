@@ -5,14 +5,28 @@ import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
 import {
-  CRESCER_MUNDO, TEMATICAS, FORMATOS, VISUAIS,
+  CRESCER_MUNDO, TEMATICAS, FORMATOS, VISUAIS, PAPEL_LIVRO,
   getTematica, getFormato, getVisual, getVoz,
-  type TematicaId, type FormatoId, type VisualId, type VozId,
+  type TematicaId, type FormatoId, type VisualId, type VozId, type PapelFonte,
 } from '@/lib/crescer/marca';
 import { gerarPecaCrescer } from '@/lib/crescer/gerar-ia';
+import { VEIAS, type Veia } from '@/lib/knowledge/veias';
+import { imagemDoTema } from '@/lib/crescer/imagens-mae';
+import { listarBanco } from '@/lib/crescer/banco-server';
+import { contaMae } from '@/lib/crescer/contas-mae';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
+
+// escolhe uma veia do PAPEL pedido (visao = A Grande Transição · reconhecimento =
+// Medo/Sinais/Véus), ainda não usada; se todas já foram, recomeça pelas menos usadas.
+function escolherPorPapel(papel: PapelFonte, usadas: string[], seed: number): Veia | null {
+  const pool = VEIAS.filter((v) => (PAPEL_LIVRO[v.livro] ?? 'reconhecimento') === papel);
+  if (!pool.length) return null;
+  const livres = pool.filter((v) => !usadas.includes(v.id));
+  const use = livres.length ? livres : pool;
+  return use[((seed % use.length) + use.length) % use.length];
+}
 
 // CRESCER · gera um LOTE de peças escolhendo VÁRIAS temáticas × formatos × visuais
 // (ou "surpreende-me"), com a base das áreas da Vivianne. Grava em
@@ -32,6 +46,14 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
 
 const pick = <T,>(arr: T[], i: number) => arr[i % arr.length];
 
+// título do livro em EN (para o excerto do @viviannewrites citar a fonte em inglês).
+const LIVRO_EN: Record<string, string> = {
+  'A Grande Transição': 'The Great Transition',
+  'As Sete Faces do Medo': 'The Seven Faces of Fear',
+  'Os 7 Sinais de Desencaixe': 'The Seven Signs of Not Belonging',
+  'Os 7 Véus do Despertar': 'The Seven Veils of Awakening',
+};
+
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -41,21 +63,40 @@ export async function POST(req: Request) {
     tematicas?: string[]; formatos?: string[]; visuais?: string[];
     quantos?: number; surpreender?: boolean; tema?: string; voz?: string;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string };
-    efeito?: string;
+    efeito?: string; saida?: 'reel' | 'carrossel'; fonte?: 'livro' | 'tema'; imagemModo?: 'cena' | 'ilustrar'; lingua?: 'pt' | 'en';
   };
+  const imagemModo = body.imagemModo === 'ilustrar' ? 'ilustrar' : 'cena';
+  // LÍNGUA: 'pt' = conta-mãe (@vivianne.dos.santos) · 'en' = selo internacional (@viviannewrites).
+  const lingua: 'pt' | 'en' = body.lingua === 'en' ? 'en' : 'pt';
+  const marcaHandle = contaMae(lingua).handle;
   const voz = (getVoz(body.voz ?? '') ? body.voz : 'direta') as VozId;
+  // ela escolhe COMO sai: reel (defeito, mais alcance) ou carrossel. reel=true => sempre reel.
+  const ehReel = body.saida !== 'carrossel';
+  // FONTE da peça: 'livro' (defeito) = MINERA os livros dela (a fonte de descoberta);
+  // 'tema' = a partir das temáticas/tema livre (o modo antigo). A regra dela: minerar
+  // primeiro os livros, não os comportamentos do quotidiano.
+  const fonte = body.fonte === 'tema' ? 'tema' : 'livro';
 
   const temasSel = (body.tematicas ?? []).filter((t) => getTematica(t)) as TematicaId[];
   const fmtsSel = (body.formatos ?? []).filter((f) => getFormato(f)) as FormatoId[];
   const visSel = (body.visuais ?? []).filter((v) => getVisual(v)) as VisualId[];
   const quantos = Math.max(1, Math.min(TOTAL_MAX, body.quantos ?? 1));
   const tema = body.tema?.trim() || undefined;
-  const surpreender = !!body.surpreender || (!temasSel.length && !fmtsSel.length);
+  // a "surpresa" (acaso) só vale no modo TEMA; no modo LIVRO a fonte é a veia.
+  const surpreender = fonte === 'tema' && (!!body.surpreender || (!temasSel.length && !fmtsSel.length));
 
   // monta a lista de "trabalhos" (temática × formato × visual), até ao teto.
   type Job = { tematica: TematicaId; formato: FormatoId; visual: VisualId };
   const jobs: Job[] = [];
-  if (surpreender) {
+  if (fonte === 'livro') {
+    // MINERAÇÃO: a fonte é o livro (a veia escolhe-se no loop); aqui só rodam o
+    // FORMATO e o VISUAL pelas seleções dela (ou defaults). A temática é ignorada.
+    const fPool = fmtsSel.length ? fmtsSel : (['frase'] as FormatoId[]);
+    const vPool = visSel.length ? visSel : (VISUAIS.filter((v) => v.id !== 'minimal').map((v) => v.id) as VisualId[]);
+    for (let i = 0; i < quantos && jobs.length < TOTAL_MAX; i++) {
+      jobs.push({ tematica: 'transformacao', formato: pick(fPool, i), visual: pick(vPool, i) });
+    }
+  } else if (surpreender) {
     // acaso: quantos peças, cada uma com combinação aleatória (das selecionadas, ou de todas).
     const tPool = temasSel.length ? temasSel : (TEMATICAS.map((t) => t.id) as TematicaId[]);
     const fPool = fmtsSel.length ? fmtsSel : (FORMATOS.map((f) => f.id) as FormatoId[]);
@@ -88,15 +129,23 @@ export async function POST(req: Request) {
   // memória anti-repetição: frases já usadas (por temática + recentes gerais).
   const evitar: string[] = [];
   const porTema: Record<string, string[]> = {};
+  const feridasUsadas: string[] = []; // veias de reconhecimento já mineradas (anti-repetição)
+  const travessiasUsadas: string[] = []; // veias da visão (A Grande Transição) já usadas
   try {
     const { data } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'crescer-%');
-    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { crescer?: { tematica?: string } } }[]) {
+    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string }> }>; theme?: { crescer?: { tematica?: string; veiaId?: string; veiaVisaoId?: string } } }[]) {
       const t = r.dias?.[0]?.slides?.[0]?.texto;
       const tm = r.theme?.crescer?.tematica;
       if (t) { evitar.push(t); if (tm) (porTema[tm] = porTema[tm] || []).push(t); }
+      if (r.theme?.crescer?.veiaId) feridasUsadas.push(r.theme.crescer.veiaId);
+      if (r.theme?.crescer?.veiaVisaoId) travessiasUsadas.push(r.theme.crescer.veiaVisaoId);
     }
   } catch { /* sem memória */ }
   const evitarDoTema = (t: string) => [...new Set([...(porTema[t] || []), ...evitar.slice(-20)])];
+
+  // BANCO de imagens da Vivianne (as MJ que ela arrastou, por família). Cada peça escolhe
+  // daqui pela sua temática visual; se o cesto estiver vazio, a peça sai em geometria.
+  const banco = await listarBanco().catch(() => ({} as Record<string, string[]>));
 
   const rows: Record<string, unknown>[] = [];
   let ultimoErro = '';
@@ -106,10 +155,25 @@ export async function POST(req: Request) {
       // seed roda o ARQUÉTIPO de cena por peça (anti-repetição das imagens): conta
       // o que já existe + a posição no lote, para cada imagem sair de um arquétipo diferente.
       const seed = evitar.length + i;
-      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed);
+      // MINERAÇÃO com PAPÉIS: a FERIDA (reconhecimento, a faca) + a TRAVESSIA (a visão,
+      // A Grande Transição, o destino). A peça sobe de uma para a outra (micro-travessia).
+      const veia: Veia | null = fonte === 'livro' ? escolherPorPapel('reconhecimento', feridasUsadas, seed) : null;
+      if (veia) feridasUsadas.push(veia.id);
+      const veiaVisao: Veia | null = fonte === 'livro' ? escolherPorPapel('visao', travessiasUsadas, seed) : null;
+      if (veiaVisao) travessiasUsadas.push(veiaVisao.id);
+      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed, veia, imagemModo, veiaVisao, lingua);
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
-      const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;
+      const slug = `crescer-${lingua === 'en' ? 'en-' : ''}${job.tematica}-${job.formato}-${Date.now()}-${i}`;
+      // TEMÁTICA VISUAL: no modo livro o texto vem da veia; a temática VISUAL (geometria +
+      // imagem) roda por seed, para as peças não saírem todas iguais. A imagem sai do BANCO.
+      const visualTema = (fonte === 'livro' ? TEMATICAS[seed % TEMATICAS.length].id : job.tematica) as TematicaId;
+      const escolha = imagemDoTema(visualTema, slug, banco);
+      // EXCERTO: sai como CITAÇÃO — manuscrito (papel) ou quote sobre foto (se houver imagem).
+      // A citação = a frase minerada; a fonte = o livro da veia (título traduzido em EN).
+      const ehExcerto = job.formato === 'excerto' && !!veia;
+      const formatoRender = ehExcerto ? (escolha ? 'quotefoto' : 'manuscrito') : undefined;
+      const fonteLivro = ehExcerto && veia ? (lingua === 'en' ? (LIVRO_EN[veia.livroTitulo] || veia.livroTitulo) : veia.livroTitulo) : undefined;
       // ENSAIO = carrossel tipográfico (texto longo, sem imagem, editorial: serif
       // menor, alinhado à esquerda, mais tempo por momento). Os outros levam imagem.
       const ehEnsaio = job.formato === 'ensaio';
@@ -146,14 +210,15 @@ export async function POST(req: Request) {
       }));
       const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
-      const legenda = limparTravessoes(`${peca.legenda}\n\n@vivianne.dos.santos`);
+      const legenda = limparTravessoes(`${peca.legenda}\n\n${marcaHandle}`);
       const dias = [{ dia: 1, mundo: CRESCER_MUNDO, palavra: peca.frase.slice(0, 48), slides, faixa, legenda, hashtags: peca.hashtags }];
       rows.push({
         slug,
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: job.tematica, formato: job.formato, visual: job.visual, voz } },
+        // reel: escolha dela; veia*: a fonte minerada do livro (para ver a cobertura e não repetir).
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: visualTema, formato: job.formato, visual: job.visual, voz, reel: ehReel, lingua, marca: marcaHandle, ...(escolha ? { img: escolha.url, imgModo: escolha.modo, imgFamilia: escolha.familia } : {}), ...(ehExcerto ? { formatoRender, citacao: peca.frase, fonte: fonteLivro } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

@@ -10,6 +10,13 @@ import { BandaSlide } from '@/components/admin/BandaSlide';
 import { KineticSlide } from '@/components/admin/KineticSlide';
 import { InfograficoSlide, type Diagrama } from '@/components/admin/InfograficoSlide';
 import type { Mundo } from '@/lib/estudio-conteudo';
+import { CRESCER_SLIDE } from '@/lib/crescer/marca';
+import { SOULAB_SLIDE } from '@/lib/soulab/marca';
+
+// MARCA do reel kinético por conta: a crescer e a Soulab têm a SUA assinatura
+// (@conta, sem o selo "Ancorar"); as outras ficam com o default da veu.a.veu.
+const marcaKinetica = (mundo: Mundo) =>
+  (mundo as string) === 'crescer' ? CRESCER_SLIDE : (mundo as string) === 'soulab' ? SOULAB_SLIDE : {};
 
 // Slide generico tal como vem guardado (campos opcionais conforme o formato).
 export type PostSlideT = {
@@ -61,7 +68,7 @@ export function PostSlide({ slide, mundo = 'escola', numero, total, ratio = '9:1
   }
   if (tipo === 'kinetico') {
     return (
-      <KineticSlide texto={slide.texto ?? ''} destaque={slide.destaque} imageUrl={slide.imageUrl} mundo={mundo} prog={1} variante={slide.variante} conceito={slide.conceito} />
+      <KineticSlide texto={slide.texto ?? ''} destaque={slide.destaque} imageUrl={slide.imageUrl} mundo={mundo} prog={1} variante={slide.variante} conceito={slide.conceito} {...marcaKinetica(mundo)} />
     );
   }
   // reel (sinais, ninguem, heroi, etc.) — o caso por defeito

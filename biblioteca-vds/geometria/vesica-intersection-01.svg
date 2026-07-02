@@ -1,0 +1,14 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- vesica-intersection-01 | geometria | intersecao iluminada | animar: foco de luz a crescer -->
+  <defs>
+    <style>
+      :root { --vds-gold: #c9a15e; --vds-gold-soft: #d9bd8a; }
+    </style>
+    <radialGradient id="lens"><stop offset="0%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0.85"/><stop offset="100%" stop-color="var(--vds-gold-soft, #d9bd8a)" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g id="vesica" fill="none" stroke="var(--vds-gold, #c9a15e)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="c-1" cx="39" cy="50" r="22" pathLength="1"/>
+    <circle id="c-2" cx="61" cy="50" r="22" pathLength="1"/>
+  </g>
+  <ellipse id="focus" cx="50" cy="50" rx="6" ry="11" fill="url(#lens)"/>
+</svg>
