@@ -67,6 +67,7 @@ const SECOES: { titulo: string; cor: string; itens: { href: string; label: strin
     cor: '#d8b25a',
     itens: [
       { href: '/admin/crescer', label: '🌱 crescer · crescimento & evolução', filhos: [
+        { href: '/admin/crescer/planeador', label: 'planeador · 3/dia' },
         { href: '/admin/crescer/banco', label: 'banco de imagens' },
       ] },
       // 'método vs · a mãe' ocultado a pedido da Vivianne (o motor VS fica, só sai da sidebar).
