@@ -7,7 +7,7 @@
 // NUNCA expor este bucket publicamente. Só o service-role o lê/escreve.
 
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
-import type { ContaId } from '@/lib/instagram/contas';
+import { IG_ID_CONHECIDO, type ContaId } from '@/lib/instagram/contas';
 
 const BUCKET = 'config-privado';
 const PATH = 'instagram.json';
@@ -66,7 +66,7 @@ export async function getIgCredenciais(conta: ContaId = 'veuaveu'): Promise<{ to
       igUserId: c?.igUserId || cfg.igUserId || process.env.INSTAGRAM_IG_ID,
     };
   }
-  return { token: c?.token, igUserId: c?.igUserId };
+  return { token: c?.token, igUserId: c?.igUserId || IG_ID_CONHECIDO[conta] };
 }
 
 // guarda token/igUserId de UMA conta (sem mexer nas outras).

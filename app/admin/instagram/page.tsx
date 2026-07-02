@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
-import { CONTAS, nomeConta, type ContaId } from '@/lib/instagram/contas';
+import { CONTAS, nomeConta, IG_ID_CONHECIDO, type ContaId } from '@/lib/instagram/contas';
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-cormorant' });
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-inter' });
@@ -39,6 +39,7 @@ function InstagramInner() {
       const j = await r.json();
       setEstado(j);
       if (j?.igUserId) setIgId(j.igUserId); // pré-preenche o ID guardado (não muda)
+      else if (IG_ID_CONHECIDO[c]) setIgId(IG_ID_CONHECIDO[c]!); // ou o ID já conhecido (ex.: soulab_en)
     } catch (e) { setEstado({ ligado: false, erro: String(e) }); }
     setAVerificar(false);
   }, []);
