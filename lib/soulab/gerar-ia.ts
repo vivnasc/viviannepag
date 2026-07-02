@@ -23,6 +23,72 @@ export interface PecaSoulab {
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
 
+// TRADUZIR uma peça JÁ EXISTENTE (PT → EN) para a conta internacional. NÃO gera
+// conteúdo novo: pega no texto real da peça e verte-o para inglês natural, com a
+// MESMA voz de convite contemplativo (não literal, não self-help), preservando o
+// número e a ordem dos momentos. A imagem/movimento/som reaproveitam-se no route
+// (é o MESMO conteúdo, só noutra língua). Devolve só os campos de texto.
+export interface TextosSoulab {
+  frase: string;
+  momentos?: string[];
+  conceito?: string;
+  legenda?: string;
+  hashtags?: string[];
+  destaque?: string[];
+}
+export async function traduzirPecaSoulab(apiKey: string, campos: TextosSoulab): Promise<TextosSoulab> {
+  const temMomentos = Array.isArray(campos.momentos) && campos.momentos.length > 1;
+  const sys = `És a curadoria da SOULAB a verter uma peça sua para INGLÊS, para a conta internacional (@${soulabHandle('en')}).
+NÃO é uma nova peça: é a MESMA, noutra língua. Traduz o SENTIDO e a voz (convite contemplativo, impessoal, aberto, nunca "isto és tu", nunca self-help), não à letra.
+REGRAS: inglês natural, elegante e límpido; SEM em-dashes (—/–), usa vírgulas, pontos ou parênteses; preserva o número e a ordem dos momentos/parágrafos; mantém o registo breve e afiado da frase; NUNCA acrescentes nem cortes ideias.
+DEVOLVE APENAS JSON válido, sem texto à volta:
+{
+  "frase": "a frase da capa em inglês (mesmo comprimento aproximado, mesma virada)",
+  "conceito": "o selo curto em inglês (1 a 3 palavras)",
+  "destaque": ["1 a 3 palavras EXATAS da frase traduzida, para realçar"],
+  "legenda": "a legenda em inglês, MESMOS parágrafos separados por \\n\\n, mesmo CTA leve no fim (não repetir a frase da capa)",
+  "hashtags": ["as hashtags equivalentes em inglês, o mesmo número"]${temMomentos ? ',\n  "momentos": ["cada momento traduzido, na MESMA ordem e número; o 1.º é a capa (igual a frase)"]' : ''}
+}`;
+  const payload = {
+    frase: campos.frase,
+    conceito: campos.conceito ?? '',
+    destaque: campos.destaque ?? [],
+    legenda: campos.legenda ?? '',
+    hashtags: campos.hashtags ?? [],
+    ...(temMomentos ? { momentos: campos.momentos } : {}),
+  };
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1600,
+      system: sys,
+      messages: [{ role: 'user', content: `Verte esta peça para inglês (JSON):\n${JSON.stringify(payload, null, 2)}` }],
+    }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
+  let o: Partial<Record<keyof TextosSoulab, unknown>> = {};
+  try { const m = txt.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : txt); } catch { /* fallback abaixo */ }
+
+  const momentos = Array.isArray(o.momentos) ? (o.momentos as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
+  const frase = lp(o.frase) || momentos[0] || '';
+  if (!frase) throw new Error('sem frase traduzida');
+  const destaque = Array.isArray(o.destaque) ? (o.destaque as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
+  const hashtags = Array.isArray(o.hashtags)
+    ? (o.hashtags as unknown[]).map((x) => String(x).trim()).filter(Boolean)
+    : soulabHashtags('en');
+  return {
+    frase,
+    conceito: lp(o.conceito),
+    destaque,
+    legenda: lp(o.legenda),
+    hashtags,
+    momentos: temMomentos && momentos.length > 1 ? momentos : undefined,
+  };
+}
+
 export async function gerarPecaSoulab(
   tipoId: TipoSoulabId,
   apiKey: string,

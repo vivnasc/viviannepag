@@ -522,6 +522,19 @@ export default function SoulabPage() {
     } catch (e) { setErro(String(e)); }
   }, [recarregar]);
 
+  // TRADUZIR PARA EN: clona uma peça PT em inglês (mesma imagem/movimento/som, texto
+  // vertido) para a conta internacional. Fica por agendar, como qualquer peça.
+  const traduzir = useCallback(async (slug: string) => {
+    if (acaoSlug) return;
+    setAcaoSlug(slug); setErro(null); setMsg('A verter para inglês (mesma imagem, texto traduzido)…');
+    try {
+      const r = await fetch('/api/admin/soulab/traduzir', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug }) });
+      const j = await r.json();
+      if (!r.ok) setErro((j.erro === 'ja-en' ? 'Esta peça já é a versão inglesa.' : (j.erro ?? 'erro')) + (j.detalhe && j.erro !== 'ja-en' ? `: ${j.detalhe}` : ''));
+      else { setMsg('Versão inglesa criada (🇬🇧 EN). Está em baixo: revê, renderiza e agenda como qualquer outra.'); setFiltroLingua('en'); recarregar(); }
+    } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
+  }, [acaoSlug, recarregar]);
+
   // CONTINUAR O FIO: gera a PARTE 2 de um reel que resultou (mesmo registo/voz).
   const continuar = useCallback(async (slug: string) => {
     setAcaoSlug(slug); setErro(null); setMsg('A continuar o fio (parte 2 na mesma voz)…');
@@ -763,6 +776,7 @@ export default function SoulabPage() {
                   <button onClick={() => setAgendaOpen(agendaOpen === p.slug ? null : p.slug)} disabled={!!acaoSlug} title="meter data e hora para publicar" className="px-2 py-1 rounded border disabled:opacity-40" style={p.agendadoEm ? { borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque } : { borderColor: 'rgba(255,255,255,0.2)' }}>📅 {p.agendadoEm ? p.agendadoEm.slice(5) : 'agendar'} {agendaOpen === p.slug ? '▴' : '▾'}</button>
                   <button onClick={() => renderizar(p.slug)} disabled={!!acaoSlug} className="px-2 py-1 rounded border border-white/20 disabled:opacity-40">render</button>
                   <button onClick={() => continuar(p.slug)} disabled={!!acaoSlug} title="gerar a parte 2 deste reel, na mesma voz e registo (para reels que resultaram)" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>↪ continuar</button>
+                  {p.lingua !== 'en' && <button onClick={() => traduzir(p.slug)} disabled={!!acaoSlug} title="criar a versão inglesa desta peça (mesma imagem, texto traduzido) para a conta internacional; depois agenda-se como qualquer outra" className="px-2 py-1 rounded border disabled:opacity-40" style={{ borderColor: SOULAB.paleta.destaque, color: SOULAB.paleta.destaque }}>🌐 traduzir EN</button>}
                   {!p.publicado && <button onClick={() => descartar(p.slug)} className="px-2 py-1 rounded border border-rose-400/40 text-rose-300">descartar</button>}
                 </div>
                 {previewOpen === p.slug && <PreviewBox peca={p} busy={acaoSlug === p.slug} disabled={!!acaoSlug} onSaveTempo={(seg) => salvarTempo(p.slug, seg)} />}
