@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { geometriaVDS, receitaDe, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
+import { geometriaVDS, rotuloTema, segmentar, TOK } from '@/lib/crescer/assinatura-reel';
 
 // RENDER do reel da mãe, dirigido por progresso (window.__setKProg para o recorder).
 // ?multi=1 = REEL MULTI-FRAME (cada segmento é uma CENA com a sua geometria, que se
@@ -11,7 +11,7 @@ const clamp = (x: number) => Math.max(0, Math.min(1, x));
 export default function RenderReelMae() {
   const [p, setP] = useState(0);
   // layout ajustável pela Vivianne (autonomia): posição/tamanho do texto e da geometria.
-  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number; img?: string; imgModo?: string } | null>(null);
+  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number; img?: string; imgModo?: string; marca?: string; lingua?: string } | null>(null);
   const geoRef = useRef<HTMLDivElement>(null);
   const externo = useRef(false);
 
@@ -24,7 +24,8 @@ export default function RenderReelMae() {
     const num = (k: string, d: number) => { const v = parseFloat(q.get(k) || ''); return Number.isFinite(v) ? v : d; };
     setParams({ tema, segs: segs.length ? segs : linhas, label: q.get('label') || undefined, multi: q.get('multi') === '1', estatico: q.get('static') === '1',
       seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', dist: num('dist', 12), txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66),
-      img: q.get('img') || undefined, imgModo: q.get('imgmodo') || undefined });
+      img: q.get('img') || undefined, imgModo: q.get('imgmodo') || undefined,
+      marca: q.get('marca') || undefined, lingua: q.get('lingua') || undefined });
   }, []);
 
   useEffect(() => {
@@ -63,7 +64,8 @@ export default function RenderReelMae() {
   const titulo = params.segs[0] || '';
   const corpo = params.segs.slice(1);
   const M = Math.max(1, corpo.length);
-  const label = String(params.label || receitaDe(params.tema).label || '').toUpperCase();
+  const label = String(params.label || rotuloTema(params.tema, params.lingua) || '').toUpperCase();
+  const marca = params.marca || '@vivianne.dos.santos';
   const titOp = estatico ? 1 : clamp(p / 0.08);
   const ruleW = estatico ? 60 : clamp((p - 0.06) / 0.1) * 60;
   const HEADp = 0.14, TAILp = 0.92, slotW = (TAILp - HEADp) / M;
@@ -89,7 +91,7 @@ export default function RenderReelMae() {
       {/* cabeçalho: marca */}
       <div style={{ position: 'absolute', top: '6.2%', left: '9%', right: '9%', display: 'flex', justifyContent: 'space-between',
         fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.68, zIndex: 3 }}>
-        <span>@vivianne.dos.santos</span><span />
+        <span>{marca}</span><span />
       </div>
       {/* geometria à DIREITA — linha FINA e nítida, como a referência */}
       <style>{`.mgeo{--vds-gold:${TOK.gold};--vds-gold-soft:${TOK.goldSoft};--vds-bg:${TOK.bg}}.mgeo circle,.mgeo path,.mgeo ellipse,.mgeo line{stroke-width:.7}`}</style>

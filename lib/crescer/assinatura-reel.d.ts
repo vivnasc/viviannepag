@@ -16,4 +16,6 @@ export function motivosDoTema(tema: string): string[];
 export function motivoSVG(tema: string, seed?: string | number): string;
 export function geometriaVDS(tema: string, seed?: string | number): string;
 export function segmentar(texto: string): string[];
+export function rotuloTema(tema: string, lingua?: string): string;
+export const HANDLES: Record<string, string>;
 export const TOK: Record<string, string>;

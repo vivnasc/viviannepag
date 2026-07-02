@@ -39,7 +39,7 @@ const CORES_TEXTO: { id: string; nome: string }[] = [
 
 type Peca = {
   tematica: string | null; formato: string; visual: string | null; reel?: boolean; veiaTitulo?: string | null; veiaLivro?: string | null;
-  img?: string | null; imgModo?: string | null;
+  img?: string | null; imgModo?: string | null; lingua?: string | null; marca?: string | null;
   slug: string; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null; vozUrl?: string | null;
@@ -137,7 +137,9 @@ function PreviewBox({ peca }: { peca: Peca }) {
   const layQ = `av=${lay.av}&ah=${lay.ah}&dist=${lay.dist}&txtSize=${lay.txtSize}&geoTop=${lay.geoTop}&geoW=${lay.geoW}`;
   // imagem do banco escolhida na geração (cena inteira ou acento); sem ela, sai geometria.
   const imgQ = peca.img ? `&img=${encodeURIComponent(peca.img)}${peca.imgModo ? `&imgmodo=${encodeURIComponent(peca.imgModo)}` : ''}` : '';
-  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}${imgQ}&${layQ}`;
+  // língua/handle: PT = @vivianne.dos.santos · EN = @viviannewrites (o pré-ver mostra o certo).
+  const marcaQ = `${peca.lingua === 'en' ? '&lingua=en' : ''}${peca.marca ? `&marca=${encodeURIComponent(peca.marca)}` : ''}`;
+  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}${imgQ}${marcaQ}&${layQ}`;
   const Op = ({ k, val, children }: { k: keyof typeof LAY0; val: string; children: React.ReactNode }) => (
     <button onClick={() => setL(k, val)} className="text-[0.56rem] px-1.5 py-0.5 rounded border" style={bt(lay[k] === val)}>{children}</button>
   );

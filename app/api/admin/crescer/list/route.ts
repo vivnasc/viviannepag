@@ -21,7 +21,7 @@ export async function GET() {
     slug: string;
     brief?: string | null;
     dias?: Array<{ videoUrl?: string | null; imagens?: string[] | null; legenda?: string | null; hashtags?: string[] | null; slides?: Array<{ texto?: string; conceito?: string; imageUrl?: string | null; destaque?: string[]; notaVisual?: string | null; efeito?: string | null; tipografia?: Record<string, unknown> | null; segPorMomento?: number | null }> }> | null;
-    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; crescer?: { tematica?: string; formato?: string; visual?: string; reel?: boolean; veiaTitulo?: string; veiaLivro?: string; img?: string; imgModo?: string }; soulab?: { clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null } } | null;
+    theme?: { agendadoEm?: string | null; hora?: string | null; igPublicado?: boolean; publicado?: boolean; crescer?: { tematica?: string; formato?: string; visual?: string; reel?: boolean; veiaTitulo?: string; veiaLivro?: string; img?: string; imgModo?: string; lingua?: string; marca?: string }; soulab?: { clipUrl?: string | null; somUrl?: string | null; somTipo?: string | null; somEstilo?: string | null } } | null;
     created_at?: string;
   };
 
@@ -37,6 +37,8 @@ export async function GET() {
       veiaLivro: row.theme?.crescer?.veiaLivro ?? null,
       img: row.theme?.crescer?.img ?? null, // imagem do banco (cena/acento) escolhida na geração
       imgModo: row.theme?.crescer?.imgModo ?? null,
+      lingua: row.theme?.crescer?.lingua ?? 'pt', // pt = @vivianne.dos.santos · en = @viviannewrites
+      marca: row.theme?.crescer?.marca ?? null,
       momentos: todosSlides.length > 1 ? todosSlides.map((x) => x.texto ?? '').filter(Boolean) : null,
       slidesImgs: todosSlides.map((x) => x.imageUrl ?? null),
       slidesTip: todosSlides.map((x) => x.tipografia ?? null),

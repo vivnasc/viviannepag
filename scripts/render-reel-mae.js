@@ -111,7 +111,11 @@ async function main() {
       const img = row.theme?.crescer?.img || '';
       const imgModo = row.theme?.crescer?.imgModo || '';
       const imgQ = img ? `&img=${encodeURIComponent(img)}${imgModo ? `&imgmodo=${encodeURIComponent(imgModo)}` : ''}` : '';
-      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${imgQ}${layoutQ ? '&' + layoutQ : ''}`;
+      // handle/língua: PT (@vivianne.dos.santos) ou EN (@viviannewrites) — o MP4 sai igual ao pré-ver.
+      const marca = row.theme?.crescer?.marca || '';
+      const lingua = row.theme?.crescer?.lingua || '';
+      const marcaQ = `${lingua === 'en' ? '&lingua=en' : ''}${marca ? `&marca=${encodeURIComponent(marca)}` : ''}`;
+      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${imgQ}${marcaQ}${layoutQ ? '&' + layoutQ : ''}`;
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });

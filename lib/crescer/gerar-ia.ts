@@ -42,7 +42,13 @@ export async function gerarPecaCrescer(
   veia?: { titulo: string; texto: string; livroTitulo: string } | null, // A FERIDA: excerto real de um livro de reconhecimento (Medo/Sinais/Véus) = a FACA
   imagemModo: 'cena' | 'ilustrar' = 'cena', // 'cena' = documentário da civilização (defeito); 'ilustrar' = ilustrar a frase
   veiaVisao?: { titulo: string; texto: string; livroTitulo: string } | null, // A TRAVESSIA: excerto real de "A Grande Transição" = o destino (limiar + vantagem)
+  lingua: 'pt' | 'en' = 'pt', // 'pt' = conta-mãe (@vivianne.dos.santos); 'en' = selo internacional (@viviannewrites)
 ): Promise<PecaCrescer> {
+  const handle = lingua === 'en' ? 'viviannewrites' : CRESCER.handle;
+  // regra de LÍNGUA (só EN): mesma missão/voz/travessia, mas o OUTPUT sai em inglês natural.
+  const regraLingua = lingua === 'en'
+    ? `\n\n⚑ LÍNGUA (regra dura, prioritária): escreve TODO o output (titulo, conceito, frase, momentos, legenda, hashtags) em INGLÊS natural e fluente, NUNCA traduzido à letra, para a conta @viviannewrites. As regras específicas de "português europeu" abaixo NÃO se aplicam; em vez delas: inglês limpo e natural, SEM em-dashes (—/–), sem clichés de self-help. A missão, a voz de companheira, a lente da mãe e a TRAVESSIA são EXATAMENTE as mesmas.`
+    : '';
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
@@ -72,7 +78,7 @@ ${veiaVisao.texto}
 --- FIM DA TRAVESSIA ---` : '';
   const linhagem = LINHAGEM_POOL.length ? [LINHAGEM_POOL[seed % LINHAGEM_POOL.length], LINHAGEM_POOL[(seed * 7 + 3) % LINHAGEM_POOL.length]].filter(Boolean).join(' · ') : '';
 
-  const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${CRESCER.handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}
+  const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}${regraLingua}
 
 A VOZ (decisão de marca, inviolável): ${CRESCER.voz}
 

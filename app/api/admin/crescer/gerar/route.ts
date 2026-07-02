@@ -13,6 +13,7 @@ import { gerarPecaCrescer } from '@/lib/crescer/gerar-ia';
 import { VEIAS, type Veia } from '@/lib/knowledge/veias';
 import { imagemDoTema } from '@/lib/crescer/imagens-mae';
 import { listarBanco } from '@/lib/crescer/banco-server';
+import { contaMae } from '@/lib/crescer/contas-mae';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -54,9 +55,12 @@ export async function POST(req: Request) {
     tematicas?: string[]; formatos?: string[]; visuais?: string[];
     quantos?: number; surpreender?: boolean; tema?: string; voz?: string;
     tipografia?: { fonte?: string; tamanho?: number; cor?: string; corDestaque?: string; alinhV?: string; alinhH?: string };
-    efeito?: string; saida?: 'reel' | 'carrossel'; fonte?: 'livro' | 'tema'; imagemModo?: 'cena' | 'ilustrar';
+    efeito?: string; saida?: 'reel' | 'carrossel'; fonte?: 'livro' | 'tema'; imagemModo?: 'cena' | 'ilustrar'; lingua?: 'pt' | 'en';
   };
   const imagemModo = body.imagemModo === 'ilustrar' ? 'ilustrar' : 'cena';
+  // LÍNGUA: 'pt' = conta-mãe (@vivianne.dos.santos) · 'en' = selo internacional (@viviannewrites).
+  const lingua: 'pt' | 'en' = body.lingua === 'en' ? 'en' : 'pt';
+  const marcaHandle = contaMae(lingua).handle;
   const voz = (getVoz(body.voz ?? '') ? body.voz : 'direta') as VozId;
   // ela escolhe COMO sai: reel (defeito, mais alcance) ou carrossel. reel=true => sempre reel.
   const ehReel = body.saida !== 'carrossel';
@@ -149,10 +153,10 @@ export async function POST(req: Request) {
       if (veia) feridasUsadas.push(veia.id);
       const veiaVisao: Veia | null = fonte === 'livro' ? escolherPorPapel('visao', travessiasUsadas, seed) : null;
       if (veiaVisao) travessiasUsadas.push(veiaVisao.id);
-      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed, veia, imagemModo, veiaVisao);
+      const peca = await gerarPecaCrescer(job.tematica, job.formato, job.visual, apiKey, evitarDoTema(job.tematica), tema, voz, seed, veia, imagemModo, veiaVisao, lingua);
       evitar.push(peca.frase); (porTema[job.tematica] = porTema[job.tematica] || []).push(peca.frase);
 
-      const slug = `crescer-${job.tematica}-${job.formato}-${Date.now()}-${i}`;
+      const slug = `crescer-${lingua === 'en' ? 'en-' : ''}${job.tematica}-${job.formato}-${Date.now()}-${i}`;
       // TEMÁTICA VISUAL: no modo livro o texto vem da veia; a temática VISUAL (geometria +
       // imagem) roda por seed, para as peças não saírem todas iguais. A imagem sai do BANCO.
       const visualTema = (fonte === 'livro' ? TEMATICAS[seed % TEMATICAS.length].id : job.tematica) as TematicaId;
@@ -193,7 +197,7 @@ export async function POST(req: Request) {
       }));
       const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
-      const legenda = limparTravessoes(`${peca.legenda}\n\n@vivianne.dos.santos`);
+      const legenda = limparTravessoes(`${peca.legenda}\n\n${marcaHandle}`);
       const dias = [{ dia: 1, mundo: CRESCER_MUNDO, palavra: peca.frase.slice(0, 48), slides, faixa, legenda, hashtags: peca.hashtags }];
       rows.push({
         slug,
@@ -201,7 +205,7 @@ export async function POST(req: Request) {
         brief: peca.frase,
         dias,
         // reel: escolha dela; veia*: a fonte minerada do livro (para ver a cobertura e não repetir).
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: visualTema, formato: job.formato, visual: job.visual, voz, reel: ehReel, ...(escolha ? { img: escolha.url, imgModo: escolha.modo, imgFamilia: escolha.familia } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: visualTema, formato: job.formato, visual: job.visual, voz, reel: ehReel, lingua, marca: marcaHandle, ...(escolha ? { img: escolha.url, imgModo: escolha.modo, imgFamilia: escolha.familia } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
