@@ -50,8 +50,9 @@ const pick = <T,>(arr: T[], i: number) => arr[i % arr.length];
 const LIVRO_EN: Record<string, string> = {
   'A Grande Transição': 'The Great Transition',
   'As Sete Faces do Medo': 'The Seven Faces of Fear',
-  'Os 7 Sinais de Desencaixe': 'The Seven Signs of Not Belonging',
-  'Os 7 Véus do Despertar': 'The Seven Veils of Awakening',
+  'Os 7 Sinais de Desencaixe': 'The 7 Signs of Misalignment',
+  'Os 7 Véus do Despertar': 'The Seven Veils',
+  'Os 7 Véus': 'The Seven Veils',
 };
 
 export async function POST(req: Request) {

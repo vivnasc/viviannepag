@@ -11,7 +11,8 @@ export type ContaId = string;
 // As 5 contas reais (as antigas synchim/freeme/infonte/loranne/ancient/escola
 // foram removidas a pedido da Vivianne: já não existem).
 export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
-  { id: 'loja', nome: 'vivianne.dos.santos', emoji: '🛍️' }, // conta-mãe
+  { id: 'loja', nome: 'vivianne.dos.santos', emoji: '🛍️' }, // conta-mãe (PT)
+  { id: 'viviannewrites', nome: 'viviannewrites', emoji: '🕯️' }, // selo internacional (EN): a mãe em inglês
   { id: 'veuaveu', nome: 'veu.a.veu', emoji: '🌿' }, // didática
   // Método VS · as 3 portas (Ver, Vir, Viver). Conteúdo gerado em /admin/metodo,
   // distinguido por theme.marca. Ver lib/metodo/contas.ts.
@@ -30,7 +31,9 @@ export function contaDe(theme: { marca?: string; universo?: string; curso?: stri
   if (theme?.marca && IDS.has(theme.marca)) return theme.marca; // marca explícita (ex.: importado por CSV)
   // Método VS (conta-mãe): publica na conta vivianne.dos.santos (loja), como as séries.
   if (theme?.marca === 'metodovs' || slug.startsWith('metodovs-')) return 'loja';
-  // Crescer (crescimento & evolução): conteúdo da Vivianne, publica em vivianne.dos.santos.
+  // Crescer (crescimento & evolução): PT publica em vivianne.dos.santos; EN (@viviannewrites)
+  // detecta-se pelo slug 'crescer-en-' (a geração prefixa a língua).
+  if (slug.startsWith('crescer-en-')) return 'viviannewrites';
   if (theme?.marca === 'crescer' || slug.startsWith('crescer-')) return 'loja';
   if (theme?.universo || /^semana-\d+-/.test(slug)) return 'loja'; // carrosséis 7 Véus
   return 'veuaveu';
