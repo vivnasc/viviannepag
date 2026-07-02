@@ -25,10 +25,17 @@ export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   // Soulab EN · o mesmo laboratório em inglês, noutra conta (como @viviannewrites
   // é a mãe em inglês). Detecta-se pelo slug 'soulab-en-'. O @ real fica em
   // lib/soulab/marca.ts (SOULAB_EN.handle); liga o token em /admin/instagram.
-  { id: 'soulaben', nome: 'soulab (EN)', emoji: '🧪' },
+  { id: 'soulaben', nome: 'soulab_en', emoji: '🧪' },
 ];
 
 const IDS = new Set(CONTAS.map((c) => c.id));
+
+// IG_USER_ID já conhecidos por conta — para PRÉ-PREENCHER o campo em /admin/instagram
+// (a Vivianne só cola o token) e como rede de segurança na publicação. A verdade
+// final vive na config privada depois de a conta ser ligada.
+export const IG_ID_CONHECIDO: Partial<Record<ContaId, string>> = {
+  soulaben: '1106738169200002', // @soulab_en
+};
 
 // a que conta/marca pertence um conteúdo (pelo theme + slug).
 export function contaDe(theme: { marca?: string; universo?: string; curso?: string } | null | undefined, slug = ''): ContaId {

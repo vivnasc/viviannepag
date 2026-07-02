@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { renovarToken } from '@/lib/instagram/publish';
 import { setIgConfig, setContaCredenciais } from '@/lib/instagram/config';
-import type { ContaId } from '@/lib/instagram/contas';
+import { IG_ID_CONHECIDO, type ContaId } from '@/lib/instagram/contas';
 
 export const runtime = 'nodejs';
 
@@ -14,7 +14,9 @@ export async function POST(req: Request) {
 
   const { token, igUserId, conta = 'veuaveu' } = (await req.json().catch(() => ({}))) as { token?: string; igUserId?: string; conta?: ContaId };
   if (!token || token.length < 20) return NextResponse.json({ erro: 'token-invalido', detalhe: 'cola o token completo' }, { status: 400 });
-  if (conta !== 'veuaveu' && !igUserId?.trim()) return NextResponse.json({ erro: 'falta-igid', detalhe: 'indica também o IG_USER_ID dessa conta.' }, { status: 400 });
+  // id efetivo: o que ela colou, senão o já conhecido desta conta (ex.: soulaben).
+  const idEfetivo = igUserId?.trim() || IG_ID_CONHECIDO[conta];
+  if (conta !== 'veuaveu' && !idEfetivo) return NextResponse.json({ erro: 'falta-igid', detalhe: 'indica também o IG_USER_ID dessa conta.' }, { status: 400 });
 
   const appId = process.env.META_APP_ID;
   const appSecret = process.env.META_APP_SECRET;
@@ -30,7 +32,7 @@ export async function POST(req: Request) {
   await setIgConfig({ appId, appSecret });
   await setContaCredenciais(conta, {
     token: longo,
-    igUserId: igUserId?.trim() || (conta === 'veuaveu' ? process.env.INSTAGRAM_IG_ID : undefined),
+    igUserId: idEfetivo || (conta === 'veuaveu' ? process.env.INSTAGRAM_IG_ID : undefined),
     renovadoEm: new Date().toISOString(),
   });
 

@@ -108,15 +108,14 @@ export const SOULAB = {
 // aparece no rodapé do reel e na legenda) e as hashtags-base (inglês). O resto (voz,
 // território, âncoras, tipos, paleta, render) é partilhado — a fonte é sempre esta.
 //
-// ⚑ Quando a conta EN existir: troca o `handle` abaixo pelo @ real e liga o token em
-//    /admin/instagram (a conta chama-se 'soulaben' em lib/instagram/contas.ts). É a
-//    ÚNICA linha a mudar — como se fez em lib/crescer/contas-mae.ts para a mãe EN.
+// A conta EN é a @soulab_en (IG id em `igBusinessId`). Liga o token em
+//    /admin/instagram (a conta chama-se 'soulaben'; o id já vai pré-preenchido).
 // ---------------------------------------------------------------------------
 export type LinguaSoulab = 'pt' | 'en';
 
 export const SOULAB_EN = {
   id: 'soulaben',
-  handle: 'soullab', // ⚑ placeholder — trocar pelo @ real da conta EN quando existir
+  handle: 'soulab_en', // o @ real da conta internacional (o IG id vive em lib/instagram/contas.ts)
   nome: 'Soul Lab',
   bioEN: 'A space to explore the human soul through images, symbols, words, music and imagination.',
   hashtagsBase: ['#soullab', '#humansoul', '#symbolism', '#archetypes', '#contemplation', '#imagination'],
