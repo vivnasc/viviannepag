@@ -5,6 +5,7 @@
 // 'kinetico', o mesmo render ja testado). O que muda por PORTA e a VOZ, a paleta,
 // a assinatura visual e o motor (as faces / os sinais / as tensoes).
 //
+// As 3 contas publicam em INGLES: o texto que sai e ingles nativo, escrito de raiz.
 // So devolve texto/indicacoes; a imagem gera-se a seguir, no route, com Flux.
 
 import { getPorta, getTipoPorta, DOMINIOS_TRANSICAO, type PortaId } from './marca';
@@ -12,10 +13,10 @@ import { limparTravessoes } from '@/lib/texto';
 
 export interface PecaPorta {
   titulo: string;      // titulo interno curto (nao vai para o feed)
-  frase: string;       // o texto que aparece no reel (o fragmento / a faca)
+  frase: string;       // o texto que aparece no reel (a faca)
   destaque: string[];  // 1-3 palavras a realcar
   fundoPrompt: string; // prompt da imagem simbolica (Flux), em ingles
-  legenda: string;     // legenda do Instagram (paragrafos curtos)
+  legenda: string;     // legenda do Instagram
   hashtags: string[];  // hashtags
   conceito: string;    // selo curto (ex.: o nome da face / do sinal)
   momentos?: string[]; // formato "varios momentos": 3-5 linhas que desdobram a ideia
@@ -37,56 +38,58 @@ export async function gerarPecaPorta(
   const tipo = getTipoPorta(portaId, tipoId) ?? porta.tipos[0];
 
   const dominios = portaId === 'transicao'
-    ? `\nDOMINIOS possiveis (escolhe UM, para variar a cena): ${DOMINIOS_TRANSICAO.join(' · ')}.`
+    ? `\nDOMAINS to choose from (pick ONE, to vary the scene): ${DOMINIOS_TRANSICAO.join(' · ')}.`
     : '';
 
-  const sys = `Es a voz de ${porta.nome} (@${porta.handle}), uma porta do territorio de Vivianne dos Santos.
+  const sys = `You are the voice of ${porta.nome} (@${porta.handle}), a door of the world of Vivianne dos Santos.
 
-O QUE ESTA PORTA E: ${porta.posicionamento}
-A TESE: ${porta.tese}
-A PERGUNTA DA PORTA (o que toda a peca serve, sem a citar): ${porta.pergunta}
+LANGUAGE: write EVERYTHING that reaches the reader (the on-screen line, the caption, the hashtags, the concept label) in natural, literary British English, as a native writer. Never a translation, never machine-sounding. No dashes anywhere (no em dash, no en dash): use commas, colons, parentheses, full stops.
 
-A VOZ (inviolavel): ${porta.voz}
-A EMOCAO nos primeiros segundos: ${porta.emocao}
-O TOM (a regua de cada peca): ${porta.tom.join(' · ')}.
+WHAT THIS DOOR IS: ${porta.posicionamento}
+THE THESIS: ${porta.tese}
+THE DOOR'S QUESTION (what every piece serves, without quoting it): ${porta.pergunta}
 
-REGRAS DE VOZ (duras):
+THE VOICE (inviolable): ${porta.voz}
+THE EMOTION in the first seconds: ${porta.emocao}
+THE TONE (the ruler for every piece): ${porta.tom.join(' · ')}.
+
+HARD VOICE RULES:
 - ${porta.regrasVoz.join('\n- ')}
 
-ESTE ANGULO DE HOJE, ${tipo.label}: ${tipo.descricao}
+TODAY'S ANGLE, ${tipo.label}: ${tipo.descricao}
 ${tipo.angulo}${dominios}
 
-A IMAGEM:
-- Assinatura visual desta porta (entra em TODA a imagem): ${porta.assinaturaVisual}.
-- Arte fine art, cinematografica, simbolica, evocativa. SEM pessoas a posar, SEM texto, SEM letras, SEM marcas de agua.
-- NUNCA mostrar: ${porta.proibidoImg.join(', ')}.
+THE IMAGE:
+- This door's visual signature (present in EVERY image): ${porta.assinaturaVisual}.
+- Fine art, cinematic, symbolic, evocative. NO posing people, NO text, NO letters, NO watermark.
+- NEVER show: ${porta.proibidoImg.join(', ')}.
 
-A LEGENDA (a anatomia desta porta):
-- Comeca pela DOR na primeira pessoa (o reconhecimento): a pessoa pensa "isto sou eu".
-- Depois a REVELACAO (a viragem de significado), sem fechar em solucao.
-- Termina na FISSURA e numa PERGUNTA (ou, quando a porta pede, numa cena aberta).
-- Fecha com um CTA LEVE (guardar para reler, seguir a porta, ficar com a pergunta), NUNCA vender, NUNCA "link na bio", NUNCA imperativo agressivo.
-- NUNCA repete a frase que ja esta na imagem: comeca onde ela acaba.
+THE CAPTION (this door's anatomy):
+- Begin with the PAIN in the first person (the recognition): the reader thinks "this is me".
+- Then the REVELATION (the turn of meaning), without closing into a solution.
+- End on the FISSURE and a QUESTION (or, when the door calls for it, on an open scene).
+- Close with a LIGHT call to action (save it to reread, follow the door, sit with the question), NEVER selling, NEVER "link in bio", NEVER an aggressive imperative.
+- NEVER repeat the line already on the image: begin where it ends.
 
-DEVOLVE APENAS JSON valido, sem texto a volta:
+RETURN ONLY valid JSON, no text around it:
 {
-  "titulo": "titulo interno curto (2-4 palavras)",
-  "conceito": "selo curto para a capa (o nome da face / do sinal / do tema), 1 a 3 palavras",
-  "frase": "o fragmento que aparece no reel (a FACA que para o scroll, 1 a 3 linhas curtas, sem aspas)",
-  "destaque": ["1 a 3 palavras-chave da frase para realcar"],
-  "fundoPrompt": "prompt em INGLES para a imagem simbolica de fundo, fine art, com a assinatura visual da porta, sem pessoas a posar, sem texto, a terminar com --ar 9:16 --style raw",
-  "legenda": "legenda para Instagram em paragrafos curtos separados por LINHA EM BRANCO (\\n\\n), na anatomia acima (dor, revelacao, fissura com pergunta, CTA leve numa linha a parte)",
-  "hashtags": ["8 a 12 hashtags em portugues, do mundo desta porta, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA so ideia em sequencia (aparecem uma a uma sobre a mesma cena). A 1.a e a FACA que para o scroll; a ultima deixa a pergunta ou o eco. Mesma voz, sem travessoes."]' : ''}
+  "titulo": "short internal title (2-4 words)",
+  "conceito": "short cover label (the name of the face / sign / theme), 1 to 3 words",
+  "frase": "the fragment that appears in the reel (the KNIFE that stops the scroll, 1 to 3 short lines, no quotes)",
+  "destaque": ["1 to 3 keywords from the line to highlight"],
+  "fundoPrompt": "prompt in ENGLISH for the symbolic background image, fine art, carrying this door's visual signature, no posing people, no text, ending with --ar 9:16 --style raw",
+  "legenda": "Instagram caption in short paragraphs separated by a BLANK LINE (\\n\\n), in the anatomy above (pain, revelation, fissure with a question, light CTA on its own line)",
+  "hashtags": ["8 to 12 hashtags in English, from this door's world, no repeats"]${formato === 'momentos' ? ',\n  "momentos": ["3 to 5 short LINES unfolding ONE idea in sequence (they appear one by one over the same scene). The 1st is the KNIFE that stops the scroll; the last leaves the question or an echo. Same voice, no dashes."]' : ''}
 }`;
 
   const pedido = tema?.trim()
-    ? `Uma peca de ${porta.nome} no angulo ${tipo.label}, a partir de: "${tema.trim()}".`
-    : `Uma peca de ${porta.nome} no angulo ${tipo.label}.`;
+    ? `A piece for ${porta.nome} in the angle ${tipo.label}, from: "${tema.trim()}".`
+    : `A piece for ${porta.nome} in the angle ${tipo.label}.`;
   const naoRepetir = evitar.length
-    ? `\n\nNAO repitas estas frases/cenas ja usadas (encontra outra): ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.`
+    ? `\n\nDo NOT repeat these lines/scenes already used (find another): ${evitar.slice(-40).map((e) => `"${e}"`).join('; ')}.`
     : '';
   const naoRepetirImg = evitarImg.length
-    ? `\n\nIMAGEM: foge destas cenas recentes (traz um sujeito novo, dentro da assinatura da porta): ${evitarImg.slice(-10).map((e) => `"${String(e).slice(0, 90)}"`).join('; ')}.`
+    ? `\n\nIMAGE: avoid these recent scenes (bring a new subject, within the door's signature): ${evitarImg.slice(-10).map((e) => `"${String(e).slice(0, 90)}"`).join('; ')}.`
     : '';
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {

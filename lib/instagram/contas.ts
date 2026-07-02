@@ -16,9 +16,9 @@ export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   // As 3 portas novas (livros). Método VS foi abolido: ver/vir/viver saíram do
   // Publicar e são substituídos por estas. Motor no molde da Soulab, distinguido
   // por theme.marca. Ver lib/portas/marca.ts.
-  { id: 'medo', nome: 'assetefacesdomedo', emoji: '🕯️' }, // As Sete Faces do Medo
-  { id: 'sinais', nome: 'os7sinaisdedesencaixe', emoji: '🚪' }, // Os 7 Sinais de Desencaixe
-  { id: 'transicao', nome: 'agrandetransicao', emoji: '🌗' }, // A Grande Transição
+  { id: 'medo', nome: 'thesevenfacesoffear', emoji: '🕯️' }, // The Seven Faces of Fear
+  { id: 'sinais', nome: 'signsofnotbelonging', emoji: '🚪' }, // The Signs of Not Belonging
+  { id: 'transicao', nome: 'thegreattransition', emoji: '🌗' }, // The Great Transition
   // Soulab · laboratório criativo da alma (motor PRÓPRIO, separado dos outros).
   // Conteúdo gerado em /admin/soulab, distinguido por theme.marca. Ver lib/soulab/*.
   { id: 'soulab', nome: 'soulab.studio', emoji: '🧪' },

@@ -30,48 +30,47 @@ Voz (das constituicoes): autoridade com calor, tocar a pessoa antes do sistema, 
 
 ## As tres contas
 
-### As Sete Faces do Medo
-- **Nome:** As Sete Faces do Medo
-- **@handle:** `assetefacesdomedo` (alt: `setefacesdomedo` · `asfaces.domedo`)
-- **Pergunta:** o que estou a proteger?
-- **Palavra de comentario:** MEDO
+As 3 contas publicam em INGLES (decisao da Vivianne). Nomes, handles e bios em ingles; o conteudo sai em ingles nativo, escrito de raiz.
+
+### The Seven Faces of Fear
+- **Nome:** The Seven Faces of Fear
+- **@handle:** `thesevenfacesoffear` (alt: `sevenfacesoffear` · `the7facesoffear`)
+- **Pergunta:** what am I protecting?
 - **Bio:**
 ```
-As sete formas que o medo veste para nao ser reconhecido.
-O que estas a proteger?
-Uma porta de Vivianne dos Santos
+The seven shapes fear wears so you will not recognise it as fear.
+What are you protecting?
+A door by Vivianne dos Santos
 ```
 - **Prompt da foto de perfil:**
 ```
 Extreme close-up of cracked black porcelain with a single seam of warm golden light glowing from inside the fracture, kintsugi, charcoal #0F0F10 background, minimal, centered, luxurious matte finish, fine grain, no text, no people, square
 ```
 
-### Os 7 Sinais de Desencaixe
-- **Nome:** Os 7 Sinais de Desencaixe
-- **@handle:** `os7sinaisdedesencaixe` (alt: `os7sinais` · `sinaisdedesencaixe`)
-- **Pergunta:** onde fica casa agora?
-- **Palavra de comentario:** CASA
+### The Signs of Not Belonging
+- **Nome:** The Signs of Not Belonging
+- **@handle:** `signsofnotbelonging` (alt: `signsofdisplacement` · `the7signs`)
+- **Pergunta:** where is home now?
 - **Bio:**
 ```
-Continuar a amar um lugar enquanto deixas de morar nele.
-Onde fica casa agora?
-Uma porta de Vivianne dos Santos
+Still loving a place while you slowly stop living in it.
+Where is home now?
+A door by Vivianne dos Santos
 ```
 - **Prompt da foto de perfil:**
 ```
 A doorway ajar in a warm sunlit interior at late afternoon, soft golden light spilling across a wooden threshold, quiet domestic scene, warm palette #F4EFE8 #E8D5B5 #C7A96B, cinematic, minimal, centered, no text, no people, square
 ```
 
-### A Grande Transicao
-- **Nome:** A Grande Transicao
-- **@handle:** `agrandetransicao` (alt: `grande.transicao` · `agrande.transicao`)
-- **Pergunta:** que mundo esta a nascer?
-- **Palavra de comentario:** NOME
+### The Great Transition
+- **Nome:** The Great Transition
+- **@handle:** `thegreattransition` (alt: `greattransition` · `the.great.transition`)
+- **Pergunta:** what world is being born?
 - **Bio:**
 ```
-O futuro ja esta aqui, escondido numa cozinha de hoje.
-O que estas a viver que ainda nao recebeu nome?
-Uma porta de Vivianne dos Santos
+The future is already here, hidden in a kitchen of today.
+What are you living that has no name yet?
+A door by Vivianne dos Santos
 ```
 - **Prompt da foto de perfil:**
 ```
