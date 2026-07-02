@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- a grande transicao | dois tempos: o relogio e a planta | o tempo que se mede e o tempo que cresce -->
+  <g id="relogio" fill="none" stroke="var(--porta-ink, #4D433A)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="relogio-mostrador" cx="36" cy="46" r="18" pathLength="1"/>
+    <line id="relogio-ponteiro-h" x1="36" y1="46" x2="36" y2="34" pathLength="1"/>
+    <line id="relogio-ponteiro-m" x1="36" y1="46" x2="46" y2="50" pathLength="1"/>
+  </g>
+  <circle id="relogio-centro" cx="36" cy="46" r="2" fill="var(--porta-ink, #4D433A)"/>
+  <g id="planta" fill="none" stroke="var(--porta-b-sage, #A9C4B0)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path id="planta-vaso" d="M62 74 L64 84 L76 84 L78 74 Z" pathLength="1"/>
+    <path id="planta-caule" d="M70 74 C70 60 80 58 76 46" pathLength="1"/>
+    <path id="planta-folha-1" d="M76 54 C82 52 84 46 79 42" pathLength="1"/>
+    <path id="planta-folha-2" d="M70 62 C64 60 62 54 66 51" pathLength="1"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- os 7 sinais de desencaixe | assinatura da porta: o limiar | porta entreaberta, luz que atravessa, sempre travessia -->
+  <g id="limiar-estrutura" fill="none" stroke="var(--porta-wood, #A67C52)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line id="limiar-chao" x1="12" y1="84" x2="88" y2="84" pathLength="1"/>
+    <path id="limiar-batente" d="M36 84 L36 26 Q36 24 38 24 L60 24 Q62 24 62 26 L62 84" pathLength="1"/>
+    <path id="limiar-folha" d="M36 24 L22 31 L22 79 L36 84" pathLength="1"/>
+  </g>
+  <g id="limiar-luz" fill="none" stroke="var(--porta-horizon, #D8B07C)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <line id="limiar-raio-1" x1="56" y1="27" x2="49" y2="84" pathLength="1"/>
+    <line id="limiar-raio-2" x1="60" y1="30" x2="76" y2="84" pathLength="1"/>
+  </g>
+</svg>

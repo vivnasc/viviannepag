@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- As Sete Faces do Medo | board de revisao da porta. Fundo, paleta, motivos, tipografia, frase e prompt. -->
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>As Sete Faces do Medo · identidade da porta</title>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    :root { --serif: Georgia, "Times New Roman", "Iowan Old Style", serif; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 56px 40px 80px;
+      background: var(--porta-bg, #0F0F10);
+      color: var(--porta-ivory, #EAE4D8);
+      font-family: var(--serif);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    .eyebrow { letter-spacing: .34em; text-transform: uppercase; font-size: 12px; color: var(--porta-gold-aged, #9E7B47); margin: 0 0 14px; }
+    h1 { font-size: 46px; font-weight: 400; letter-spacing: .04em; margin: 0 0 10px; color: var(--porta-gold, #C8A86B); }
+    .pergunta { font-style: italic; font-size: 20px; color: var(--porta-ivory, #EAE4D8); opacity: .85; margin: 0 0 6px; }
+    .frase { font-size: 20px; max-width: 720px; margin: 22px 0 0; color: var(--porta-fissure, #F1D7A3); }
+    h2 { font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--porta-gold-aged, #9E7B47); font-weight: 400; margin: 64px 0 20px; border-top: 1px solid rgba(200,168,107,.22); padding-top: 22px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+    .sw { border: 1px solid rgba(234,228,216,.14); border-radius: 8px; overflow: hidden; }
+    .sw .chip { height: 78px; }
+    .sw .meta { padding: 10px 12px; font-size: 12px; letter-spacing: .04em; }
+    .sw .name { display: block; opacity: .8; }
+    .sw .hex { display: block; font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--porta-gold, #C8A86B); margin-top: 3px; }
+    .assinatura { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .assinatura .art { width: 220px; height: 220px; background: #000; border: 1px solid rgba(200,168,107,.25); border-radius: 12px; padding: 22px; }
+    .assinatura .art img { width: 100%; height: 100%; display: block; }
+    .assinatura p { max-width: 520px; margin: 0; opacity: .88; }
+    .icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px; }
+    .icon { text-align: center; }
+    .icon .cell { background: #000; border: 1px solid rgba(200,168,107,.22); border-radius: 10px; padding: 20px; }
+    .icon img { width: 100%; height: 90px; display: block; }
+    .icon .lbl { display: block; margin-top: 10px; font-size: 14px; letter-spacing: .05em; color: var(--porta-ivory, #EAE4D8); }
+    .icon .sub { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--porta-gold-aged, #9E7B47); margin-top: 3px; }
+    .type-sample .big { font-size: 72px; letter-spacing: .06em; color: var(--porta-gold, #C8A86B); margin: 0; }
+    .type-sample .caps { letter-spacing: .34em; text-transform: uppercase; font-size: 15px; margin: 12px 0 0; opacity: .8; }
+    .type-sample .note { font-size: 13px; opacity: .55; margin-top: 8px; }
+    pre { background: #000; border: 1px solid rgba(200,168,107,.22); border-radius: 10px; padding: 22px; overflow-x: auto; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--porta-ivory, #EAE4D8); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Vivianne dos Santos · uma porta</p>
+    <h1>As Sete Faces do Medo</h1>
+    <p class="pergunta">o que estou realmente a proteger?</p>
+    <p class="frase">As Sete Faces do Medo nao mostram monstros. Mostram as pequenas fracturas por onde o medo aprendeu a vestir-se de vida normal.</p>
+
+    <h2>Paleta · carvao e bronze, com a luz da fenda</h2>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#0F0F10; border-bottom:1px solid rgba(234,228,216,.14)"></div><div class="meta"><span class="name">Fundo, carvao</span><span class="hex">#0F0F10</span></div></div>
+      <div class="sw"><div class="chip" style="background:#C8A86B"></div><div class="meta"><span class="name">Dourado principal</span><span class="hex">#C8A86B</span></div></div>
+      <div class="sw"><div class="chip" style="background:#9E7B47"></div><div class="meta"><span class="name">Dourado envelhecido</span><span class="hex">#9E7B47</span></div></div>
+      <div class="sw"><div class="chip" style="background:#EAE4D8"></div><div class="meta"><span class="name">Marfim, texto claro</span><span class="hex">#EAE4D8</span></div></div>
+      <div class="sw"><div class="chip" style="background:#F1D7A3"></div><div class="meta"><span class="name">Luz da fenda</span><span class="hex">#F1D7A3</span></div></div>
+    </div>
+
+    <h2>Assinatura · a fenda luminosa</h2>
+    <div class="assinatura">
+      <div class="art"><img src="motivos/fenda-luminosa.svg" alt="a fenda luminosa"></div>
+      <p>A fissura e a forma, a luz de dentro e o que a fissura faz. Kintsugi: a fractura nao e dano, e por onde a luz passa. A fissura e o medo, a luz e o "ha mais para ti". A luz nunca ilumina a cena, vem de dentro da racha.</p>
+    </div>
+
+    <h2>Os sete icones</h2>
+    <div class="icons">
+      <div class="icon"><div class="cell"><img src="motivos/espelho.svg" alt="O Espelho"></div><span class="lbl">O Espelho</span><span class="sub">a Rejeicao</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/punho.svg" alt="O Punho"></div><span class="lbl">O Punho</span><span class="sub">a Perda</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/inverno.svg" alt="O Inverno"></div><span class="lbl">O Inverno</span><span class="sub">a Escassez</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/fortaleza.svg" alt="A Fortaleza"></div><span class="lbl">A Fortaleza</span><span class="sub">a Incerteza</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/luz.svg" alt="A Luz"></div><span class="lbl">A Luz</span><span class="sub">a Exposicao</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/apagamento.svg" alt="O Apagamento"></div><span class="lbl">O Apagamento</span><span class="sub">a Insignificancia</span></div>
+      <div class="icon"><div class="cell"><img src="motivos/abismo.svg" alt="O Abismo"></div><span class="lbl">O Abismo</span><span class="sub">a Separacao, a raiz</span></div>
+    </div>
+
+    <h2>Tipografia · serifada classica, capitulares, dourado envelhecido</h2>
+    <div class="type-sample">
+      <p class="big">As Sete Faces</p>
+      <p class="caps">Vivianne dos Santos</p>
+      <p class="note">Permanencia, autoridade, livro serio, quase filosofia. Sem sans-serif moderna, sem manuscritas.</p>
+    </div>
+
+    <h2>Modelo de prompt</h2>
+    <pre>Universo: As Sete Faces do Medo
+Face: &lt;nome&gt;
+Cena: comportamento quotidiano com o medo por baixo, nunca nomeado
+Assinatura: uma fissura na cena, com luz a vir de dentro da fractura
+Objectos possiveis: chavena rachada, vidro, espelho, parede, porta entreaberta, mao a abrir
+Material: pedra, porcelana, ouro kintsugi, pele mineral
+Paleta: fundo carvao #0F0F10, dourado #C8A86B e #9E7B47, luz da fenda #F1D7A3
+Proibido: terror, sobrenatural, sangue, corvos, gotico, olhos vazios, nevoa pesada
+Emocao: reconhecimento, depois curiosidade, nunca medo
+Registo: 80% fotografia humana cinematografica</pre>
+  </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- a grande transicao | dois tempos: o telemovel e o silencio | o ruido que herdamos e a quietude que se abre a seguir -->
+  <g id="telemovel" fill="none" stroke="var(--porta-ink, #4D433A)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect id="telemovel-corpo" x="26" y="24" width="22" height="52" rx="4" pathLength="1"/>
+    <line id="telemovel-altifalante" x1="33" y1="30" x2="41" y2="30" pathLength="1"/>
+    <line id="telemovel-botao" x1="34" y1="70" x2="40" y2="70" pathLength="1"/>
+  </g>
+  <g id="silencio" fill="none" stroke="var(--porta-b-sage, #A9C4B0)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path id="silencio-onda-1" d="M58 40 Q64 50 58 60" pathLength="1"/>
+    <path id="silencio-onda-2" d="M66 34 Q76 50 66 66" pathLength="1"/>
+    <path id="silencio-onda-3" d="M74 30 Q86 50 74 70" pathLength="1"/>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- a grande transicao | dois tempos: a lista e a pausa | o fazer que herdamos e o estar que ainda aprendemos -->
+  <g id="lista" fill="none" stroke="var(--porta-ink, #4D433A)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect id="lista-caixa-1" x="18" y="34" width="8" height="8" rx="1.5" pathLength="1"/>
+    <line id="lista-linha-1" x1="32" y1="38" x2="48" y2="38" pathLength="1"/>
+    <rect id="lista-caixa-2" x="18" y="48" width="8" height="8" rx="1.5" pathLength="1"/>
+    <line id="lista-linha-2" x1="32" y1="52" x2="48" y2="52" pathLength="1"/>
+    <rect id="lista-caixa-3" x="18" y="62" width="8" height="8" rx="1.5" pathLength="1"/>
+    <line id="lista-linha-3" x1="32" y1="66" x2="48" y2="66" pathLength="1"/>
+  </g>
+  <circle id="pausa-anel" cx="68" cy="52" r="14" fill="none" stroke="var(--porta-b-sage, #A9C4B0)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+  <circle id="pausa-centro" cx="68" cy="52" r="2.5" fill="var(--porta-b-sage, #A9C4B0)"/>
+</svg>

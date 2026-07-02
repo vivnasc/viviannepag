@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- os 7 sinais de desencaixe | o refugio | mantas, chavenas, chuva | a chavena quente enquanto la fora chove -->
+  <g id="refugio-chavena" fill="none" stroke="var(--porta-wood, #A67C52)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path id="refugio-corpo" d="M38 56 L38 68 Q38 78 50 78 Q62 78 62 68 L62 56 Z" pathLength="1"/>
+    <path id="refugio-asa" d="M62 60 Q72 60 72 66 Q72 72 63 72" pathLength="1"/>
+    <line id="refugio-pires" x1="32" y1="84" x2="68" y2="84" pathLength="1"/>
+  </g>
+  <g id="refugio-vapor" fill="none" stroke="var(--porta-horizon, #D8B07C)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path id="refugio-fumo-1" d="M46 52 C43 46 49 42 46 36" pathLength="1"/>
+    <path id="refugio-fumo-2" d="M54 52 C57 46 51 42 54 36" pathLength="1"/>
+  </g>
+  <g id="refugio-chuva" fill="none" stroke="var(--porta-blue, #7D8797)" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
+    <line id="refugio-gota-1" x1="26" y1="18" x2="22" y2="28" pathLength="1"/>
+    <line id="refugio-gota-2" x1="38" y1="16" x2="34" y2="26" pathLength="1"/>
+    <line id="refugio-gota-3" x1="74" y1="18" x2="70" y2="28" pathLength="1"/>
+  </g>
+</svg>

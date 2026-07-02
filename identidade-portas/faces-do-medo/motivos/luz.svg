@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- as sete faces do medo | a luz | a exposicao | lanterna com particulas -->
+  <g id="luz" fill="none" stroke="var(--porta-gold, #C8A86B)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <line id="luz-argola" x1="50" y1="20" x2="50" y2="26" pathLength="1"/>
+    <path id="luz-corpo" d="M42 34 Q50 26 58 34 L58 64 L42 64 Z" pathLength="1"/>
+    <line id="luz-vidro" x1="42" y1="46" x2="58" y2="46" pathLength="1"/>
+    <line id="luz-base" x1="37" y1="64" x2="63" y2="64" pathLength="1"/>
+  </g>
+  <g id="luz-particulas" fill="var(--porta-fissure, #F1D7A3)">
+    <circle id="luz-p1" cx="30" cy="42" r="2"/>
+    <circle id="luz-p2" cx="70" cy="42" r="2"/>
+    <circle id="luz-p3" cx="28" cy="56" r="2"/>
+    <circle id="luz-p4" cx="72" cy="56" r="2"/>
+    <circle id="luz-p5" cx="34" cy="30" r="2"/>
+    <circle id="luz-p6" cx="66" cy="30" r="2"/>
+  </g>
+</svg>

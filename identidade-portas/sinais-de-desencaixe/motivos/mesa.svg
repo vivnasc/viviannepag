@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- os 7 sinais de desencaixe | a mesa | cadeiras, lugares vazios, cozinhas | a cadeira afastada, o lugar por ocupar -->
+  <g id="mesa" fill="none" stroke="var(--porta-wood, #A67C52)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line id="mesa-tampo" x1="16" y1="50" x2="60" y2="50" pathLength="1"/>
+    <line id="mesa-perna-1" x1="22" y1="50" x2="22" y2="80" pathLength="1"/>
+    <line id="mesa-perna-2" x1="54" y1="50" x2="54" y2="80" pathLength="1"/>
+    <path id="cadeira-costas" d="M74 30 L74 60" pathLength="1"/>
+    <line id="cadeira-assento" x1="66" y1="60" x2="86" y2="60" pathLength="1"/>
+    <line id="cadeira-perna-1" x1="68" y1="60" x2="68" y2="82" pathLength="1"/>
+    <line id="cadeira-perna-2" x1="84" y1="60" x2="84" y2="82" pathLength="1"/>
+  </g>
+</svg>

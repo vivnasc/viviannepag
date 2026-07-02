@@ -1,0 +1,20 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- a grande transicao | dois tempos: a crianca e o algoritmo | quem cresce agora e o sistema que ja a rodeia -->
+  <g id="crianca" fill="none" stroke="var(--porta-ink, #4D433A)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="crianca-cabeca" cx="30" cy="38" r="7" pathLength="1"/>
+    <line id="crianca-tronco" x1="30" y1="45" x2="30" y2="66" pathLength="1"/>
+    <line id="crianca-bracos" x1="21" y1="54" x2="39" y2="54" pathLength="1"/>
+    <line id="crianca-perna-1" x1="30" y1="66" x2="24" y2="80" pathLength="1"/>
+    <line id="crianca-perna-2" x1="30" y1="66" x2="36" y2="80" pathLength="1"/>
+  </g>
+  <g id="algoritmo" fill="none" stroke="var(--porta-b-sage, #A9C4B0)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line id="algoritmo-aresta-1" x1="62" y1="34" x2="74" y2="52" pathLength="1"/>
+    <line id="algoritmo-aresta-2" x1="74" y1="52" x2="58" y2="62" pathLength="1"/>
+    <line id="algoritmo-aresta-3" x1="62" y1="34" x2="58" y2="62" pathLength="1"/>
+  </g>
+  <g id="algoritmo-nos" fill="var(--porta-b-sage, #A9C4B0)">
+    <circle id="algoritmo-no-1" cx="62" cy="34" r="3.5"/>
+    <circle id="algoritmo-no-2" cx="74" cy="52" r="3.5"/>
+    <circle id="algoritmo-no-3" cx="58" cy="62" r="3.5"/>
+  </g>
+</svg>

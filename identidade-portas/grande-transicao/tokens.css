@@ -1,0 +1,22 @@
+/* A Grande Transicao
+   Tokens de cor da porta. Paleta exacta da ficha de identidade visual.
+   Temperatura: lucida e do presente. Dois registos.
+   Registo A (85 por cento): antropologia do presente, luz domestica, ceramica, madeira.
+   Registo B (15 por cento): etnografia pos-sobrevivencia, agua, vegetacao, mineral.
+   Cores propria desta porta. Nunca partilhar paleta entre portas. */
+
+:root {
+  /* Registo A, antropologia do presente */
+  --porta-bg: #F5F1EA;
+  --porta-sand: #E8DDCB;
+  --porta-clay: #CDB79E;
+  --porta-wood: #9B866C;
+  --porta-ink: #4D433A;
+
+  /* Registo B, etnografia pos-sobrevivencia */
+  --porta-b-bg: #F6F2E8;
+  --porta-b-gold: #D9C49A;
+  --porta-b-sage: #A9C4B0;
+  --porta-b-teal: #718F84;
+  --porta-b-deep: #3A4D4A;
+}

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- a grande transicao | dois tempos: a mesa com caderno e IA aberta | o gesto de hoje e a materia que nasce, na mesma mesa -->
+  <g id="mesa-estrutura" fill="none" stroke="var(--porta-ink, #4D433A)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line id="mesa-tampo" x1="14" y1="62" x2="86" y2="62" pathLength="1"/>
+    <line id="mesa-perna-1" x1="22" y1="62" x2="22" y2="82" pathLength="1"/>
+    <line id="mesa-perna-2" x1="78" y1="62" x2="78" y2="82" pathLength="1"/>
+    <path id="caderno-pag-esq" d="M26 60 L28 48 L40 48 L40 60" pathLength="1"/>
+    <path id="caderno-pag-dir" d="M40 48 L52 48 L54 60 L40 60" pathLength="1"/>
+    <line id="caderno-lombada" x1="40" y1="48" x2="40" y2="60" pathLength="1"/>
+  </g>
+  <g id="ia-painel" fill="none" stroke="var(--porta-b-sage, #A9C4B0)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect id="ia-ecra" x="58" y="42" width="20" height="18" rx="4" pathLength="1"/>
+  </g>
+  <circle id="ia-luz" cx="68" cy="51" r="3" fill="var(--porta-b-sage, #A9C4B0)"/>
+</svg>

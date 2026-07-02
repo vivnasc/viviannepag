@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- identidade-portas | as tres portas de Vivianne dos Santos, lado a lado. Cada cartao com o fundo da sua porta. -->
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>As tres portas · Vivianne dos Santos</title>
+  <style>
+    :root { --serif: Georgia, "Times New Roman", "Iowan Old Style", serif; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 64px 40px 90px;
+      background: #16130F;
+      color: #EAE4D8;
+      font-family: var(--serif);
+      line-height: 1.55;
+    }
+    .head { max-width: 1180px; margin: 0 auto 44px; }
+    .eyebrow { letter-spacing: .36em; text-transform: uppercase; font-size: 12px; color: #9E7B47; margin: 0 0 14px; }
+    h1 { font-size: 40px; font-weight: 400; letter-spacing: .04em; margin: 0 0 12px; }
+    .lede { max-width: 760px; font-size: 17px; opacity: .82; margin: 0; }
+    .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .card { border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; min-height: 460px; border: 1px solid rgba(255,255,255,.08); transition: transform .18s ease, box-shadow .18s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.4); }
+    .card .body { padding: 34px 30px 30px; flex: 1; display: flex; flex-direction: column; }
+    .card .num { font-size: 13px; letter-spacing: .3em; text-transform: uppercase; opacity: .7; }
+    .card h2 { font-size: 30px; font-weight: 400; letter-spacing: .03em; margin: 12px 0 4px; }
+    .card .pergunta { font-style: italic; font-size: 16px; opacity: .82; margin: 0 0 18px; }
+    .card .frase { font-size: 16px; margin: 0; flex: 1; }
+    .card .temp { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin: 22px 0 16px; opacity: .7; }
+    .card .cta { display: inline-block; font-size: 14px; letter-spacing: .06em; padding: 11px 18px; border-radius: 999px; align-self: flex-start; }
+    .art { height: 150px; display: flex; align-items: center; justify-content: center; }
+    .art img { width: 108px; height: 108px; }
+
+    /* Faces do Medo */
+    .faces { background: #0F0F10; color: #EAE4D8; }
+    .faces .num, .faces .temp { color: #9E7B47; }
+    .faces h2 { color: #C8A86B; }
+    .faces .frase { color: #F1D7A3; }
+    .faces .art { background: #000; }
+    .faces .cta { background: #C8A86B; color: #0F0F10; }
+
+    /* Sinais de Desencaixe */
+    .sinais { background: #F4EFE8; color: #6E6256; }
+    .sinais .num, .sinais .temp { color: #A67C52; }
+    .sinais h2 { color: #A67C52; }
+    .sinais .pergunta { color: #6E6256; }
+    .sinais .frase { color: #8a6a49; }
+    .sinais .art { background: #E8D5B5; }
+    .sinais .cta { background: #A67C52; color: #F4EFE8; }
+
+    /* Grande Transicao */
+    .grande { background: #F5F1EA; color: #4D433A; }
+    .grande .num, .grande .temp { color: #9B866C; }
+    .grande h2 { color: #4D433A; }
+    .grande .pergunta { color: #9B866C; }
+    .grande .frase { color: #4D433A; }
+    .grande .art { background: #E8DDCB; }
+    .grande .cta { background: #4D433A; color: #F5F1EA; }
+
+    footer { max-width: 1180px; margin: 54px auto 0; font-size: 13px; opacity: .5; }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <p class="eyebrow">Vivianne dos Santos · sistema de identidade visual</p>
+    <h1>As tres portas</h1>
+    <p class="lede">Tres portas do mesmo territorio, cada uma com a sua cara. Nao ha serie: o que as une e o nome da autora, nao um tema partilhado. Cada porta tem a sua paleta e a sua assinatura, e nao se parece com as outras nem com a conta mae.</p>
+  </div>
+
+  <div class="grid">
+    <a class="card faces" href="faces-do-medo/board.html">
+      <div class="art"><img src="faces-do-medo/motivos/fenda-luminosa.svg" alt="a fenda luminosa"></div>
+      <div class="body">
+        <span class="num">Porta I</span>
+        <h2>As Sete Faces do Medo</h2>
+        <p class="pergunta">o que estou a proteger?</p>
+        <p class="frase">Nao mostram monstros. Mostram as pequenas fracturas por onde o medo aprendeu a vestir-se de vida normal.</p>
+        <p class="temp">grave e mineral · assinatura: a fenda luminosa</p>
+        <span class="cta">ver o board &rarr;</span>
+      </div>
+    </a>
+
+    <a class="card sinais" href="sinais-de-desencaixe/board.html">
+      <div class="art"><img src="sinais-de-desencaixe/motivos/limiar.svg" alt="o Limiar"></div>
+      <div class="body">
+        <span class="num">Porta II</span>
+        <h2>Os 7 Sinais de Desencaixe</h2>
+        <p class="pergunta">onde fica casa agora?</p>
+        <p class="frase">A unica porta que cheira a casa. Falam do lugar para onde regressas quando deixas de te proteger.</p>
+        <p class="temp">suave e domestica · assinatura: o Limiar</p>
+        <span class="cta">ver o board &rarr;</span>
+      </div>
+    </a>
+
+    <a class="card grande" href="grande-transicao/board.html">
+      <div class="art"><img src="grande-transicao/motivos/limiar-dois-tempos.svg" alt="o limiar entre dois tempos"></div>
+      <div class="body">
+        <span class="num">Porta III</span>
+        <h2>A Grande Transicao</h2>
+        <p class="pergunta">que mundo esta a nascer?</p>
+        <p class="frase">Nao mostra o futuro ao longe. Mostra o futuro ja escondido dentro de uma cozinha de hoje, a espera de nome.</p>
+        <p class="temp">lucida e do presente · assinatura: dois tempos</p>
+        <span class="cta">ver o board &rarr;</span>
+      </div>
+    </a>
+  </div>
+
+  <footer>identidade-portas · portugues pre-AO90 no texto de marca, sem travessoes. Motivos SVG com o contrato tecnico da Biblioteca VDS.</footer>
+</body>
+</html>

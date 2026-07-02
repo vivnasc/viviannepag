@@ -1,0 +1,16 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- os 7 sinais de desencaixe | a casa | portas abertas, jardins, luz | a porta aberta, a luz a sair, o jardim -->
+  <g id="casa-porta" fill="none" stroke="var(--porta-wood, #A67C52)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path id="casa-batente" d="M34 84 L34 22 L60 22 L60 84" pathLength="1"/>
+    <path id="casa-folha" d="M60 22 L74 28 L74 78 L60 84" pathLength="1"/>
+  </g>
+  <g id="casa-luz" fill="none" stroke="var(--porta-horizon, #D8B07C)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <line id="casa-raio-1" x1="46" y1="26" x2="40" y2="84" pathLength="1"/>
+    <line id="casa-raio-2" x1="54" y1="26" x2="58" y2="84" pathLength="1"/>
+  </g>
+  <g id="casa-jardim" fill="none" stroke="var(--porta-wood, #A67C52)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line id="casa-caule" x1="22" y1="84" x2="22" y2="70" pathLength="1"/>
+    <path id="casa-folha-esq" d="M22 74 C16 72 14 66 18 62" pathLength="1"/>
+    <path id="casa-folha-dir" d="M22 74 C28 72 30 66 26 62" pathLength="1"/>
+  </g>
+</svg>
