@@ -162,7 +162,10 @@ export default function EstudioPorta({ porta: portaId }: { porta: PortaId }) {
           <h1 className="text-2xl flex items-center gap-2" style={{ color: dz }}><span>{porta.emoji}</span> {porta.nome}</h1>
           <p className="mt-1 text-[0.95rem] italic opacity-90">{porta.pergunta}</p>
           <p className="mt-2 text-[0.8rem] opacity-70">{porta.tese}</p>
-          <Link href={`/admin/publicar?conta=${portaId}`} className="mt-3 inline-block px-3 py-1.5 rounded-lg border text-[0.74rem]" style={btnOff}>abrir no Publicar &rarr;</Link>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link href={`/admin/publicar?conta=${portaId}`} className="inline-block px-3 py-1.5 rounded-lg border text-[0.74rem]" style={btnOff}>abrir no Publicar &rarr;</Link>
+            <Link href="/admin/portas/desempenho" className="inline-block px-3 py-1.5 rounded-lg border text-[0.74rem]" style={btnOff}>desempenho das 3 &rarr;</Link>
+          </div>
         </header>
 
         {/* gerar */}
