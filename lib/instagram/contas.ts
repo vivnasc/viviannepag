@@ -33,10 +33,13 @@ const IDS = new Set(CONTAS.map((c) => c.id));
 // IG_USER_ID já conhecidos por conta — para PRÉ-PREENCHER o campo em /admin/instagram
 // (a Vivianne só cola o token) e como rede de segurança na publicação. A verdade
 // final vive na config privada depois de a conta ser ligada.
-// NOTA soulab_en: o 1106738169200002 era o ID da PÁGINA do Facebook, não da conta de
-// Instagram (dava erro nº100 ao publicar). O ID certo do IG descobre-se no "testar"
-// da página /admin/instagram (botão "usar este ID"); por isso já não se pré-preenche.
-export const IG_ID_CONHECIDO: Partial<Record<ContaId, string>> = {};
+// NOTA soulab_en: o 1106738169200002 era o ID da PÁGINA do Facebook (dava erro nº100
+// ao publicar). O ID CERTO do Instagram é o instagram_business_account: 17841479683528007
+// (@soulab_en). Se já ligaste com o ID errado, tens de RE-GUARDAR com este (a config
+// guardada tem prioridade sobre isto); o "testar" também o sugere (botão "usar este ID").
+export const IG_ID_CONHECIDO: Partial<Record<ContaId, string>> = {
+  soulaben: '17841479683528007', // @soulab_en (instagram_business_account, não a Página)
+};
 
 // a que conta/marca pertence um conteúdo (pelo theme + slug).
 export function contaDe(theme: { marca?: string; universo?: string; curso?: string } | null | undefined, slug = ''): ContaId {
