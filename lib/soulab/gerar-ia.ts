@@ -6,7 +6,7 @@
 //
 // Só devolve texto/indicações (a imagem gera-se a seguir, no route, com Flux).
 
-import { SOULAB, getTipoSoulab, type TipoSoulabId } from './marca';
+import { SOULAB, getTipoSoulab, soulabHandle, soulabHashtags, type TipoSoulabId } from './marca';
 import { profundidadePorBaixo, SINAIS_DESENCAIXE } from '@/lib/knowledge/saber';
 import { limparTravessoes } from '@/lib/texto';
 
@@ -23,6 +23,72 @@ export interface PecaSoulab {
 
 const lp = (s: unknown) => limparTravessoes(String(s ?? '').replace(/^["«»]+|["«»]+$/g, '').trim());
 
+// TRADUZIR uma peça JÁ EXISTENTE (PT → EN) para a conta internacional. NÃO gera
+// conteúdo novo: pega no texto real da peça e verte-o para inglês natural, com a
+// MESMA voz de convite contemplativo (não literal, não self-help), preservando o
+// número e a ordem dos momentos. A imagem/movimento/som reaproveitam-se no route
+// (é o MESMO conteúdo, só noutra língua). Devolve só os campos de texto.
+export interface TextosSoulab {
+  frase: string;
+  momentos?: string[];
+  conceito?: string;
+  legenda?: string;
+  hashtags?: string[];
+  destaque?: string[];
+}
+export async function traduzirPecaSoulab(apiKey: string, campos: TextosSoulab): Promise<TextosSoulab> {
+  const temMomentos = Array.isArray(campos.momentos) && campos.momentos.length > 1;
+  const sys = `És a curadoria da SOULAB a verter uma peça sua para INGLÊS, para a conta internacional (@${soulabHandle('en')}).
+NÃO é uma nova peça: é a MESMA, noutra língua. Traduz o SENTIDO e a voz (convite contemplativo, impessoal, aberto, nunca "isto és tu", nunca self-help), não à letra.
+REGRAS: inglês natural, elegante e límpido; SEM em-dashes (—/–), usa vírgulas, pontos ou parênteses; preserva o número e a ordem dos momentos/parágrafos; mantém o registo breve e afiado da frase; NUNCA acrescentes nem cortes ideias.
+DEVOLVE APENAS JSON válido, sem texto à volta:
+{
+  "frase": "a frase da capa em inglês (mesmo comprimento aproximado, mesma virada)",
+  "conceito": "o selo curto em inglês (1 a 3 palavras)",
+  "destaque": ["1 a 3 palavras EXATAS da frase traduzida, para realçar"],
+  "legenda": "a legenda em inglês, MESMOS parágrafos separados por \\n\\n, mesmo CTA leve no fim (não repetir a frase da capa)",
+  "hashtags": ["as hashtags equivalentes em inglês, o mesmo número"]${temMomentos ? ',\n  "momentos": ["cada momento traduzido, na MESMA ordem e número; o 1.º é a capa (igual a frase)"]' : ''}
+}`;
+  const payload = {
+    frase: campos.frase,
+    conceito: campos.conceito ?? '',
+    destaque: campos.destaque ?? [],
+    legenda: campos.legenda ?? '',
+    hashtags: campos.hashtags ?? [],
+    ...(temMomentos ? { momentos: campos.momentos } : {}),
+  };
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1600,
+      system: sys,
+      messages: [{ role: 'user', content: `Verte esta peça para inglês (JSON):\n${JSON.stringify(payload, null, 2)}` }],
+    }),
+  });
+  if (!res.ok) throw new Error(`claude ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  const txt = ((await res.json())?.content?.[0]?.text ?? '').trim();
+  let o: Partial<Record<keyof TextosSoulab, unknown>> = {};
+  try { const m = txt.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : txt); } catch { /* fallback abaixo */ }
+
+  const momentos = Array.isArray(o.momentos) ? (o.momentos as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
+  const frase = lp(o.frase) || momentos[0] || '';
+  if (!frase) throw new Error('sem frase traduzida');
+  const destaque = Array.isArray(o.destaque) ? (o.destaque as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
+  const hashtags = Array.isArray(o.hashtags)
+    ? (o.hashtags as unknown[]).map((x) => String(x).trim()).filter(Boolean)
+    : soulabHashtags('en');
+  return {
+    frase,
+    conceito: lp(o.conceito),
+    destaque,
+    legenda: lp(o.legenda),
+    hashtags,
+    momentos: temMomentos && momentos.length > 1 ? momentos : undefined,
+  };
+}
+
 export async function gerarPecaSoulab(
   tipoId: TipoSoulabId,
   apiKey: string,
@@ -33,10 +99,17 @@ export async function gerarPecaSoulab(
   continuarDe?: { frase: string; conceito?: string; cena?: string } | null, // PARTE 2 de um reel que resultou (cena = fundoPrompt da parte 1, para evoluir a MESMA imagem)
   modo: 'abre' | 'encaminha' = 'abre', // 'abre' = deixa em aberto; 'encaminha' = desdobra e pousa
   veia?: { titulo: string; texto: string; livroTitulo: string } | null, // MINERAÇÃO: excerto real do livro = fonte primária
+  lingua: 'pt' | 'en' = 'pt', // 'pt' = @soulab.studio · 'en' = a Soulab em inglês, na conta internacional
 ): Promise<PecaSoulab> {
   const tipo = getTipoSoulab(tipoId) ?? getTipoSoulab('frase')!;
+  const handle = soulabHandle(lingua);
+  // regra de LÍNGUA (só EN): MESMA missão, voz, território e âncoras — mas o OUTPUT
+  // sai em inglês natural (a Soulab a falar inglês, não uma tradução à letra).
+  const regraLingua = lingua === 'en'
+    ? `\n\n⚑ LÍNGUA (regra dura, prioritária): escreve TODO o output (titulo, conceito, frase, momentos, legenda, hashtags) em INGLÊS natural e fluente, NUNCA traduzido à letra, para a conta internacional @${handle}. As regras específicas de "português europeu" abaixo NÃO se aplicam; em vez delas: inglês limpo, elegante e contemplativo, SEM em-dashes (—/–), sem clichés de self-help. A missão, o tom, a voz de convite e o território são EXATAMENTE os mesmos.`
+    : '';
 
-  const sys = `És a curadoria criativa da SOULAB (@${SOULAB.handle}) — ${SOULAB.posicionamento}
+  const sys = `És a curadoria criativa da SOULAB (@${handle}) — ${SOULAB.posicionamento}${regraLingua}
 
 A MISSÃO: ${SOULAB.missao}
 
@@ -77,7 +150,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   "destaque": ["1 a 3 palavras-chave da frase para realçar"],
   "fundoPrompt": "prompt em INGLÊS para a imagem simbólica de fundo (arte conceptual, fine art, evocativa do sentido), sem pessoas a posar, sem texto, a terminar com --ar 9:16 --style raw",
   "legenda": "legenda para Instagram em parágrafos curtos separados por LINHA EM BRANCO (\\n\\n). NUNCA repete nem reformula a frase que está na imagem (quem lê já a viu): começa ONDE essa frase acaba, continua o pensamento ou abre um ângulo lateral. 1 a 2 parágrafos curtos que aprofundam SEM fechar. TERMINA SEMPRE (obrigatório) com um CTA LEVE numa linha à parte: um convite suave a ficar com a pergunta, a guardar, a partilhar com quem precisa, ou a seguir o laboratório. O CTA é gentil e contemplativo, NUNCA marketing, NUNCA 'compra/link na bio', NUNCA imperativo agressivo. Nunca vender, nunca nomear o formato.",
-  "hashtags": ["8 a 12 hashtags em português, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA só ideia, em sequência (cada uma uma respiração, aparecem uma a uma sobre a mesma cena). Não são frases soltas: constroem um arco (abre, aprofunda, vira, fecha em aberto). A 1.ª é uma faca que para o scroll; a última deixa uma pergunta ou um eco. Mesma voz de convite, sem travessões."]' : ''}
+  "hashtags": ["8 a 12 hashtags em ${lingua === 'en' ? 'INGLÊS' : 'português'}, simbólicas e de nicho da alma/arte/arquétipos, sem repetir"]${formato === 'momentos' ? ',\n  "momentos": ["3 a 5 LINHAS curtas que desdobram UMA só ideia, em sequência (cada uma uma respiração, aparecem uma a uma sobre a mesma cena). Não são frases soltas: constroem um arco (abre, aprofunda, vira, fecha em aberto). A 1.ª é uma faca que para o scroll; a última deixa uma pergunta ou um eco. Mesma voz de convite, sem travessões."]' : ''}
 }`;
 
   const pedido = tema?.trim()
@@ -136,7 +209,7 @@ DEVOLVE APENAS JSON válido, sem texto à volta:
   const destaque = Array.isArray(o.destaque) ? (o.destaque as unknown[]).map((x) => lp(x)).filter(Boolean) : [];
   const hashtags = Array.isArray(o.hashtags)
     ? (o.hashtags as unknown[]).map((x) => String(x).trim()).filter(Boolean)
-    : [...SOULAB.hashtagsBase];
+    : soulabHashtags(lingua);
   return {
     titulo: lp(o.titulo) || frase.slice(0, 40),
     conceito: lp(o.conceito),

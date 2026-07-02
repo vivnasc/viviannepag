@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { gerarImagemFlux, guardarImagem } from '@/lib/banda/flux';
 import { faixaUrl } from '@/lib/carrossel/musica';
 import { limparTravessoes } from '@/lib/texto';
-import { SOULAB, SOULAB_MUNDO, getTipoSoulab, type TipoSoulabId } from '@/lib/soulab/marca';
+import { SOULAB_MUNDO, getTipoSoulab, soulabHandle, type TipoSoulabId } from '@/lib/soulab/marca';
 import { gerarPecaSoulab } from '@/lib/soulab/gerar-ia';
 import { escolherVeia, type Veia } from '@/lib/knowledge/veias';
 
@@ -32,8 +32,11 @@ export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return NextResponse.json({ erro: 'sem-api-key' }, { status: 500 });
 
-  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string; modo?: 'abre' | 'encaminha'; fonte?: 'livro' | 'tema' };
+  const body = (await req.json().catch(() => ({}))) as { tipo?: string; quantos?: number; tema?: string; formato?: 'frase' | 'momentos'; continuarDe?: string; modo?: 'abre' | 'encaminha'; fonte?: 'livro' | 'tema'; lingua?: 'pt' | 'en' };
   const modo = body.modo === 'encaminha' ? 'encaminha' : 'abre';
+  // LÍNGUA: 'pt' = @soulab.studio · 'en' = a Soulab em inglês, na conta internacional.
+  // Ao continuar um fio, herda-se a língua da peça-mãe (mais abaixo).
+  let lingua: 'pt' | 'en' = body.lingua === 'en' ? 'en' : 'pt';
   // FONTE: 'livro' (defeito) = minera os livros dela; 'tema' = a partir do ângulo/tema.
   // ao continuar um fio, não se minera (segue o fio da peça-mãe).
   const fonte = body.continuarDe ? 'tema' : (body.fonte === 'tema' ? 'tema' : 'livro');
@@ -54,9 +57,10 @@ export async function POST(req: Request) {
     const s = (data?.dias as Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string; tipografia?: Record<string, unknown> | null }> }> | undefined)?.[0]?.slides?.[0];
     if (s?.texto) continuarDe = { frase: s.texto, conceito: s.conceito, cena: s.notaVisual ?? undefined };
     if (s?.tipografia) tipografiaHerdada = s.tipografia;
-    const sl = (data?.theme as { soulab?: { tipo?: string; formato?: 'frase' | 'momentos'; parte?: number } } | undefined)?.soulab;
+    const sl = (data?.theme as { soulab?: { tipo?: string; formato?: 'frase' | 'momentos'; parte?: number; lingua?: 'pt' | 'en' } } | undefined)?.soulab;
     if (sl?.tipo && getTipoSoulab(sl.tipo)) tipoId = sl.tipo as TipoSoulabId;
     if (sl?.formato === 'momentos' || sl?.formato === 'frase') formatoHerdado = sl.formato;
+    if (sl?.lingua === 'en' || sl?.lingua === 'pt') lingua = sl.lingua; // a parte 2 fica na língua da peça-mãe
     parteDe = body.continuarDe;
     parteNum = (sl?.parte ?? 1) + 1;
   }
@@ -76,8 +80,14 @@ export async function POST(req: Request) {
   const evitarImg: string[] = [];
   const veiasUsadas: string[] = []; // veias do livro já mineradas (anti-repetição)
   try {
-    const { data } = await supabase.from('carousel_collections').select('dias, theme').like('slug', 'soulab-%');
-    for (const r of (data ?? []) as { dias?: Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string }> }>; theme?: { soulab?: { tipo?: string; veiaId?: string } } }[]) {
+    // MEMÓRIA POR LÍNGUA: as peças EN vivem em slugs 'soulab-en-*' e as PT em
+    // 'soulab-<tipo>-*'. Cada língua tem a sua anti-repetição (comparar texto EN
+    // com texto PT não faz sentido; e a EN pode cobrir os mesmos capítulos em inglês).
+    const prefixo = lingua === 'en' ? 'soulab-en-%' : 'soulab-%';
+    const { data } = await supabase.from('carousel_collections').select('slug, dias, theme').like('slug', prefixo);
+    for (const r of (data ?? []) as { slug: string; dias?: Array<{ slides?: Array<{ texto?: string; conceito?: string; notaVisual?: string }> }>; theme?: { soulab?: { tipo?: string; veiaId?: string } } }[]) {
+      // no modo PT, o 'soulab-%' também apanha as EN — salta-as (só conta a mesma língua).
+      if (lingua === 'pt' && r.slug.startsWith('soulab-en-')) continue;
       const s = r.dias?.[0]?.slides?.[0];
       const tp = r.theme?.soulab?.tipo;
       if (s?.texto) { evitar.push(s.texto); if (tp) (porTipo[tp] = porTipo[tp] || []).push(s.texto); }
@@ -96,12 +106,14 @@ export async function POST(req: Request) {
       // MINERAÇÃO: no modo livro (e não a continuar), escolhe uma veia ainda não usada.
       const veia: Veia | null = fonte === 'livro' ? escolherVeia(veiasUsadas, evitar.length + i) : null;
       if (veia) veiasUsadas.push(veia.id);
-      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe, modo, veia);
+      const peca = await gerarPecaSoulab(tipoId, apiKey, evitarDoTipo(), tema, formato, evitarImg, continuarDe, modo, veia, lingua);
       evitar.push(peca.frase); (porTipo[tipoId] = porTipo[tipoId] || []).push(peca.frase);
       if (peca.conceito) evitar.push(peca.conceito);
       if (peca.fundoPrompt) evitarImg.push(peca.fundoPrompt); // não repetir a cena nas seguintes
 
-      const slug = `soulab-${tipoId}-${Date.now()}-${i}`;
+      // slug com prefixo de língua (EN: 'soulab-en-…') — é por aqui que o publicador
+      // sabe que a peça vai para a conta internacional (ver lib/instagram/contas.ts).
+      const slug = `soulab-${lingua === 'en' ? 'en-' : ''}${tipoId}-${Date.now()}-${i}`;
       const imageUrl = await fundoImagem(peca.fundoPrompt, slug);
       // FORMATO: "vários momentos" => N slides (1 por linha), MESMA cena/imagem; o
       // render sequencia-os sobre o fundo partilhado. "frase" => 1 slide (o de sempre).
@@ -119,14 +131,14 @@ export async function POST(req: Request) {
       }));
       const numeroFaixa = (Math.floor(Date.now() / 1000) % 100) + 1;
       const faixa = { numero: numeroFaixa, titulo: `Faixa ${String(numeroFaixa).padStart(2, '0')}`, url: faixaUrl(numeroFaixa) };
-      const legenda = limparTravessoes(`${peca.legenda}\n\nSoulab · @${SOULAB.handle}`);
+      const legenda = limparTravessoes(`${peca.legenda}\n\nSoulab · @${soulabHandle(lingua)}`);
       const dias = [{ dia: 1, mundo: SOULAB_MUNDO, palavra: peca.frase.slice(0, 48), slides, faixa, legenda, hashtags: peca.hashtags }];
       rows.push({
         slug,
         title: peca.titulo.slice(0, 60),
         brief: peca.frase,
         dias,
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato, ...(parteDe ? { parteDe, parte: parteNum } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}) } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: SOULAB_MUNDO, marca: 'soulab', soulab: { tipo: tipoId, formato, lingua, ...(parteDe ? { parteDe, parte: parteNum } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }
