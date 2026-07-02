@@ -26,6 +26,9 @@ export default function EstudioPorta({ porta: portaId }: { porta: PortaId }) {
   const [formato, setFormato] = useState<'frase' | 'momentos'>('frase');
   const [tema, setTema] = useState('');
   const [quantos, setQuantos] = useState(1);
+  const [semInicio, setSemInicio] = useState('');
+  const [semHora, setSemHora] = useState('13:00');
+  const [semDias, setSemDias] = useState(6);
   const [aba, setAba] = useState<'por-agendar' | 'agendadas' | 'publicadas' | 'todas'>('por-agendar');
   const [busy, setBusy] = useState(false);
   const [acaoSlug, setAcaoSlug] = useState<string | null>(null);
@@ -50,6 +53,21 @@ export default function EstudioPorta({ porta: portaId }: { porta: PortaId }) {
     } catch (e) { setErro(String(e)); setMsg(null); }
     finally { setBusy(false); }
   }, [busy, portaId, tipo, quantos, formato, tema, recarregar]);
+
+  const rascunharSemana = useCallback(async () => {
+    if (busy) return;
+    if (!semInicio) { setErro('Escolhe a data de inicio da semana.'); return; }
+    setBusy(true); setErro(null);
+    setMsg('A rascunhar a semana (um post por dia, ja agendado)... pode demorar alguns minutos. Nao feches.');
+    try {
+      const r = await fetch('/api/admin/portas/semana', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ porta: portaId, inicio: semInicio, hora: semHora, dias: semDias }) });
+      const j = await r.json();
+      if (!r.ok) { setErro((j.erro ?? 'erro') + (j.detalhe ? `: ${j.detalhe}` : '')); setMsg(null); }
+      else { setMsg(`Semana rascunhada: ${j.gerados} post(s) agendados. Reve na aba agendadas, ajusta o que quiseres.`); setAba('agendadas'); }
+      recarregar();
+    } catch (e) { setErro(String(e)); setMsg(null); }
+    finally { setBusy(false); }
+  }, [busy, portaId, semInicio, semHora, semDias, recarregar]);
 
   const salvarLegenda = useCallback(async (slug: string, legenda: string, hashtags: string) => {
     if (acaoSlug) return;
@@ -129,6 +147,7 @@ export default function EstudioPorta({ porta: portaId }: { porta: PortaId }) {
   const btnOff = { borderColor: claro ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)', color: txt };
   const cardBg = claro ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)';
   const linha = claro ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.12)';
+  const campoTop: CSSProperties = { borderColor: linha, background: claro ? 'rgba(0,0,0,0.03)' : 'rgba(0,0,0,0.2)', color: txt };
 
   return (
     <main className="min-h-screen px-4 py-8 md:px-8" style={{ background: bg2, color: txt, fontFamily: 'Georgia, serif' }}>
@@ -177,6 +196,23 @@ export default function EstudioPorta({ porta: portaId }: { porta: PortaId }) {
           </div>
           {erro && <p className="mt-3 text-[0.78rem]" style={{ color: '#d66' }}>{erro}</p>}
           {msg && <p className="mt-3 text-[0.78rem] opacity-80">{msg}</p>}
+        </section>
+
+        {/* plano da semana (autonomo) */}
+        <section className="mb-6 rounded-2xl border p-5" style={{ background: cardBg, borderColor: linha }}>
+          <h2 className="text-sm uppercase tracking-widest opacity-60 mb-2">plano da semana (autonomo)</h2>
+          <p className="text-[0.72rem] opacity-60 mb-3">Um post por dia, cada dia um angulo diferente em rotacao (sem repetir, cobre o motor ao longo das semanas), ja agendado no calendario. Depois so reves e ajustas.</p>
+          <div className="flex flex-wrap items-center gap-2">
+            <label className="text-[0.7rem] opacity-55">inicio:</label>
+            <input type="date" value={semInicio} onChange={(e) => setSemInicio(e.target.value)} className="text-[0.72rem] px-2 py-1.5 rounded-lg border outline-none [color-scheme:light]" style={campoTop} />
+            <label className="text-[0.7rem] opacity-55">hora:</label>
+            <input type="time" value={semHora} onChange={(e) => setSemHora(e.target.value)} className="text-[0.72rem] px-2 py-1.5 rounded-lg border outline-none" style={campoTop} />
+            <label className="text-[0.7rem] opacity-55">dias:</label>
+            <select value={semDias} onChange={(e) => setSemDias(Number(e.target.value))} className="rounded-md px-2 py-1.5 border" style={campoTop}>
+              {[3, 4, 5, 6, 7].map((n) => <option key={n} value={n}>{n}</option>)}
+            </select>
+            <button type="button" onClick={rascunharSemana} disabled={busy} className="px-4 py-2 rounded-lg border text-[0.82rem] disabled:opacity-50" style={btnOn}>{busy ? 'a rascunhar...' : 'rascunhar a semana'}</button>
+          </div>
         </section>
 
         {/* abas */}
