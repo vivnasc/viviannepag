@@ -25,6 +25,7 @@ type Peca = {
   formato: string; momentos: string[] | null;
   lingua: 'pt' | 'en'; // pt = @soulab.studio · en = a conta internacional
   parteDe: string | null; parte: number | null; // série: continuação de um fio
+  traduzidoDe?: string | null; // (EN) o slug PT de onde foi traduzida
   veiaTitulo?: string | null; veiaLivro?: string | null; // de que secção do livro foi minerada
   motionPendente?: boolean; // movimento a gerar (verifica-se sozinho)
   agendadoEm: string | null; hora: string | null; publicado: boolean; criadoEm: string | null;
@@ -535,6 +536,37 @@ export default function SoulabPage() {
     } catch (e) { setErro(String(e)); } finally { setAcaoSlug(null); }
   }, [acaoSlug, recarregar]);
 
+  // EM MASSA · traduzir + renderizar + agendar TUDO o que já está agendado na conta
+  // PT, na @soulab_en, à MESMA data/hora (posta em paralelo, noutra conta). Salta as
+  // que já têm versão EN (não duplica) e as que não estão agendadas. O render dispara
+  // aqui; se falhar, o publicador rende sozinho antes da hora.
+  const traduzirAgendadasEN = useCallback(async () => {
+    if (acaoSlug || busy) return;
+    const jaTraduzidas = new Set(pecas.filter((p) => p.lingua === 'en' && p.traduzidoDe).map((p) => p.traduzidoDe));
+    const alvos = pecas.filter((p) => p.lingua === 'pt' && p.agendadoEm && !jaTraduzidas.has(p.slug));
+    if (!alvos.length) { setMsg('Não há agendadas PT por traduzir (ou já têm versão EN).'); return; }
+    if (typeof window !== 'undefined' && !window.confirm(`Traduzir, renderizar e agendar ${alvos.length} peça(s) PT agendada(s) em @${SOULAB_EN.handle}, à MESMA data/hora? Demora um bocado (uma a uma). Não feches.`)) return;
+    setBusy(true); setErro(null);
+    let feitos = 0, falhas = 0;
+    for (const p of alvos) {
+      setMsg(`A traduzir + agendar EN · ${feitos}/${alvos.length}…`);
+      try {
+        // 1) traduzir (cria a peça EN, reaproveita imagem/movimento/som)
+        const rt = await fetch('/api/admin/soulab/traduzir', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: p.slug }) });
+        const jt = await rt.json();
+        if (!rt.ok || !jt.slug) { falhas++; continue; }
+        const novo = jt.slug as string;
+        // 2) agendar à MESMA data/hora da PT (aprovado = trava do cron)
+        await fetch('/api/admin/conteudos/agendar', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: novo, agendadoEm: p.agendadoEm, hora: p.hora || '13:00', aprovado: true }) });
+        // 3) disparar o render (MP4 EN); se falhar, o publicador rende antes da hora
+        await fetch('/api/admin/carrossel/render-dispatch', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: novo, dias: '1' }) });
+        feitos++;
+      } catch { falhas++; }
+    }
+    setMsg(`${feitos}/${alvos.length} traduzida(s), agendada(s) e a renderizar em @${SOULAB_EN.handle}${falhas ? ` · ${falhas} falha(s)` : ''}. O MP4 demora uns minutos.`);
+    setBusy(false); setFiltroLingua('en'); setAba('agendadas'); recarregar();
+  }, [acaoSlug, busy, pecas, recarregar]);
+
   // CONTINUAR O FIO: gera a PARTE 2 de um reel que resultou (mesmo registo/voz).
   const continuar = useCallback(async (slug: string) => {
     setAcaoSlug(slug); setErro(null); setMsg('A continuar o fio (parte 2 na mesma voz)…');
@@ -579,6 +611,11 @@ export default function SoulabPage() {
     publicadas: pecas.filter((p) => estadoDe(p) === 'publicadas').length,
     todas: pecas.length,
   };
+  // PT agendadas que ainda não têm gémea EN (o alvo do botão em massa).
+  const agendadasPtPorTraduzir = (() => {
+    const jaTraduzidas = new Set(pecas.filter((p) => p.lingua === 'en' && p.traduzidoDe).map((p) => p.traduzidoDe));
+    return pecas.filter((p) => p.lingua === 'pt' && p.agendadoEm && !jaTraduzidas.has(p.slug)).length;
+  })();
   const buscaN = busca.trim().toLowerCase();
   const pecasFiltradas = pecas
     .filter((p) => aba === 'todas' || estadoDe(p) === aba)
@@ -711,6 +748,20 @@ export default function SoulabPage() {
             <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="procurar…"
               className="ml-auto text-[0.7rem] px-2.5 py-1 rounded-lg border border-white/15 bg-black/20 outline-none" style={{ color: SOULAB.paleta.texto }} />
           </div>
+
+          {/* EM MASSA · traduzir + renderizar + agendar tudo o que já está agendado na
+              conta PT, na @soulab_en, à mesma data/hora. Só aparece se houver o que fazer. */}
+          {agendadasPtPorTraduzir > 0 && (
+            <div className="mb-3 rounded-xl border p-2.5 flex items-center gap-2 flex-wrap" style={{ borderColor: SOULAB.paleta.destaque, background: 'rgba(255,255,255,0.03)' }}>
+              <span className="text-[0.72rem]" style={{ color: SOULAB.paleta.destaque }}>🌐 {agendadasPtPorTraduzir} agendada(s) PT sem versão EN</span>
+              <button onClick={traduzirAgendadasEN} disabled={busy || !!acaoSlug}
+                className="text-[0.72rem] px-3 py-1.5 rounded-lg border disabled:opacity-40"
+                style={{ borderColor: SOULAB.paleta.destaque, background: SOULAB.paleta.destaque, color: SOULAB.paleta.bg2 }}>
+                {busy ? 'a processar…' : `traduzir + renderizar + agendar em @${SOULAB_EN.handle}`}
+              </button>
+              <span className="text-[0.55rem] opacity-45 w-full">Cria a versão inglesa de cada uma (mesma imagem/movimento/som), agenda à MESMA data/hora e dispara o render. Salta as que já têm EN.</span>
+            </div>
+          )}
 
           {pecas.length === 0 && <p className="text-[0.78rem] opacity-50">Ainda nada. Escolhe um ângulo e carrega &quot;gerar&quot;.</p>}
           {pecas.length > 0 && pecasOrdenadas.length === 0 && <p className="text-[0.76rem] opacity-50">Nada neste separador/filtro.</p>}
