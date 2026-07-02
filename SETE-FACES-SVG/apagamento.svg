@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path id="apagamento" d="M56 80 L56 62 L62 60 L58 52 L64 48 L60 42 Q58 28 44 30 Q34 32 34 46 L34 80"
+        fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="currentColor">
+    <circle cx="30" cy="40" r="2.5"/>
+    <circle cx="24" cy="50" r="2.5"/>
+    <circle cx="28" cy="62" r="2.5"/>
+    <circle cx="22" cy="72" r="2.5"/>
+  </g>
+</svg>

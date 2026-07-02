@@ -32,6 +32,12 @@ type Livro = {
 export function OsLivros({ locale }: { locale: string }) {
   const isEn = locale === 'en';
   const base = isEn ? '/en' : '';
+  // Quebra de cache: quando a Vivianne carrega uma capa nova, o ficheiro fica no
+  // mesmo URL e o CDN do Supabase serve a versao antiga (~1h). Esta home tem
+  // revalidate=60, por isso o ?v muda a cada regeneracao e a capa nova aparece
+  // logo, sem esperar pelo CDN. (Ver nota do cache no CLAUDE.md.)
+  const v = Date.now();
+  const cb = (u: string) => `${u}?v=${v}`;
 
   const livros: Livro[] = [
     {
@@ -43,8 +49,8 @@ export function OsLivros({ locale }: { locale: string }) {
       desc: isEn
         ? 'The pillar book of Method VS. A crossing through the seven veils that stand between you and who you are, and the simple way to lift them: see, and release.'
         : 'O livro-pilar do Método VS. Uma travessia pelos sete véus que se põem entre ti e quem és, e o caminho simples para os erguer: ver, e soltar.',
-      capa: capaPilar(isEn),
-      capaRatio: '1400 / 1873',
+      capa: cb(capaPilar(isEn)),
+      capaRatio: '1600 / 2560',
       href: `${base}/os-sete-veus`,
       cta: isEn ? 'Discover the book' : 'Conhecer o livro',
       preco: <span className="text-creme">€19</span>,
@@ -58,7 +64,7 @@ export function OsLivros({ locale }: { locale: string }) {
       desc: isEn
         ? 'The quiet moment when you stop fitting a place that was good, without anything in it having changed, and without anyone having done anything wrong. Not a book about learning to fit in.'
         : 'O momento calado em que deixas de caber num lugar que foi bom, sem que nada nele tenha mudado, e sem que ninguém tenha feito nada de errado. Não é um livro sobre aprender a encaixar.',
-      capa: capaSinais(isEn),
+      capa: cb(capaSinais(isEn)),
       capaFallback: capaSinaisLocal(isEn),
       capaRatio: '1600 / 2560',
       href: isEn ? '/en/loja/os-7-sinais' : '/loja/os-7-sinais',
@@ -97,7 +103,7 @@ export function OsLivros({ locale }: { locale: string }) {
                 src={l.capa}
                 fallback={l.capaFallback}
                 alt={l.titulo}
-                className="w-[210px] h-auto rounded-[10px] border border-ocre/30 block"
+                className="w-[210px] h-auto rounded-[10px] border border-ocre/30 block object-cover"
                 style={{ boxShadow: '0 22px 60px -28px rgba(0,0,0,0.7)', aspectRatio: l.capaRatio }}
               />
             </Link>

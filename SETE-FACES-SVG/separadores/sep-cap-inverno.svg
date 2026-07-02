@@ -1,0 +1,19 @@
+<svg viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <line x1="46" y1="30" x2="112" y2="30"/>
+    <line x1="188" y1="30" x2="254" y2="30"/>
+  </g>
+  <g transform="translate(130,10) scale(0.4)">
+  <g id="inverno" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <g id="arm">
+      <line x1="50" y1="50" x2="50" y2="16"/>
+      <line x1="50" y1="26" x2="43" y2="19"/>
+      <line x1="50" y1="26" x2="57" y2="19"/>
+    </g>
+    <use href="#arm" transform="rotate(60 50 50)"/>
+    <use href="#arm" transform="rotate(120 50 50)"/>
+    <use href="#arm" transform="rotate(180 50 50)"/>
+    <use href="#arm" transform="rotate(240 50 50)"/>
+    <use href="#arm" transform="rotate(300 50 50)"/>
+  </g>
+</g></svg>

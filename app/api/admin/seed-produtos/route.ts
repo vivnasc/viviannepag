@@ -78,6 +78,59 @@ Por Vivianne dos Santos, do caminho da psicologia transpessoal e da constelaçã
     ordem: 0,
   },
   {
+    slug: 'a-grande-transicao',
+    titulo: 'A Grande Transição',
+    subtitulo: 'Introdução às Ciências da Consciência Emergente',
+    descricao: `**Livro · PDF imediato**
+
+Uma civilização futura olha para o nosso tempo e devolve-nos aquilo que não conseguíamos ver de dentro: que a dureza com que tratávamos a vida não era a nossa natureza, era a estação em que vivíamos.
+
+Não é um livro de melhoria pessoal. É a investigação de uma hipótese à escala da espécie: grande parte daquilo a que chamamos natureza humana talvez seja história, adaptação a milénios de escassez, e não destino.
+
+A Grande Transição é a passagem entre organizar a vida em torno do medo e organizá-la em torno da criação e da pertença.
+
+Por Vivianne dos Santos.`,
+    preco: '$27',
+    preco_original: '$35',
+    capa: `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')}/storage/v1/object/public/viviannepag-assets/livro-transicao/capa-propria.png`,
+    badge: 'livro',
+    destaque: true,
+    publicado: true,
+    ordem: 0,
+    ficheiro_path: 'produtos/a-grande-transicao.pdf',
+  },
+  {
+    slug: 'as-sete-faces-do-medo',
+    titulo: 'As Sete Faces do Medo',
+    subtitulo: 'Como o medo construiu as nossas escolhas, relações e vidas',
+    descricao: `**Livro · ~60.000 palavras · PDF imediato**
+
+Há uma força que nunca vês e que, mesmo assim, curva quase tudo o que fazes. Não a sentes como medo: sentes-la como bom senso quando não arriscas, como responsabilidade quando ficas, como amor quando te sacrificas. Tem sempre um nome bonito, e é esse o seu maior talento.
+
+Não é um livro para venceres o medo. Vencer pressupõe um inimigo lá fora, e o medo está por baixo de ti, como o chão, tão presente que deixaste de o notar. É um livro para o veres, que é a única coisa que o medo não sabe fazer de si próprio.
+
+**As sete faces do medo:**
+1. A Rejeição · O Espelho
+2. A Perda · O Punho
+3. A Escassez · O Inverno
+4. A Incerteza · A Fortaleza
+5. A Exposição · A Luz
+6. A Insignificância · O Apagamento
+7. A Separação · O Abismo, a raiz que gera as outras
+
+Seis faces que aprendeste a chamar por outros nomes, e uma sétima que as gera a todas: o receio de te separares, de deixares de pertencer, de deixares de ser.
+
+Por Vivianne dos Santos.`,
+    preco: '$17',
+    preco_original: '$25',
+    capa: `${SUPA}/storage/v1/object/public/viviannepag-assets/livro-medo/capa-propria.png`,
+    ficheiro_path: 'produtos/as-sete-faces-do-medo.pdf',
+    badge: 'livro · novo',
+    destaque: true,
+    publicado: true,
+    ordem: 0,
+  },
+  {
     slug: 'ver-soltar',
     titulo: 'ver.soltar',
     subtitulo: 'a consciência: sair de dentro da tempestade',

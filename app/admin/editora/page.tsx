@@ -30,6 +30,12 @@ export default function EditoraAdmin() {
           <Link href="/admin/livro-pilar" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
             pilar
           </Link>
+          <Link href="/admin/livro-transicao" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
+            a grande transição
+          </Link>
+          <Link href="/admin/livro-medo" className="text-creme-2/50 hover:text-creme transition-colors no-underline pb-1">
+            as sete faces do medo
+          </Link>
         </nav>
         <p className="text-creme-2/60 text-[0.85rem] mt-3 font-serif italic">
           {livros.length} livros · {totalPalavras.toLocaleString('pt-PT')} palavras · tudo publicado — marca o que já leste

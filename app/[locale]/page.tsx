@@ -6,6 +6,8 @@ import { TopNav } from '@/components/TopNav';
 import { MetodoHero } from '@/components/home/MetodoHero';
 import { MetodoMovimentos } from '@/components/home/MetodoMovimentos';
 import { OsLivros } from '@/components/home/OsLivros';
+import { LivroTransicaoHome } from '@/components/home/LivroTransicaoHome';
+import { LivroMedoHome } from '@/components/home/LivroMedoHome';
 import { Sobre } from '@/components/home/Sobre';
 import { EscritosRecentes } from '@/components/home/EscritosRecentes';
 import { Newsletter } from '@/components/home/Newsletter';
@@ -34,6 +36,14 @@ export default async function HomePage({
         {/* Os dois livros, com o mesmo peso: o pilar (Os Sete Véus) e o irmão
             (Os 7 Sinais de Desencaixe). O pilar não perde destaque. */}
         <OsLivros locale={locale} />
+        <div className="veu my-16" />
+        {/* Livro à parte: A Grande Transição (Ciências da Consciência Emergente),
+            fora do Método VS, com secção e identidade próprias */}
+        <LivroTransicaoHome locale={locale} />
+        <div className="veu my-16" />
+        {/* Livro à parte: As Sete Faces do Medo, também fora do Método VS,
+            com secção e identidade próprias */}
+        <LivroMedoHome locale={locale} />
         <div className="veu my-16" />
         {/* Quem está por trás do método */}
         <Sobre />

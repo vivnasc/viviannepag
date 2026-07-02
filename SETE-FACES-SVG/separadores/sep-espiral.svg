@@ -1,0 +1,7 @@
+<svg viewBox="0 0 240 40" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none">
+    <line x1="40" y1="20" x2="100" y2="20"/>
+    <line x1="140" y1="20" x2="200" y2="20"/>
+    <path d="M120 20 Q123 20 123 17 Q123 13 118 13 Q111 13 111 20 Q111 29 121 29 Q133 29 133 17"
+          transform="translate(0,0)"/>
+  </g></svg>

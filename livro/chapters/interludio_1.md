@@ -1,0 +1,16 @@
+### INTERLÚDIO I
+#### Sobre o que não se vê de dentro
+
+Voltamos a falar-vos do nosso tempo, agora que olhastes de frente o mundo antigo.
+
+Há uma coisa que aprendemos a respeitar em vós e que custa a dizer sem parecer lisonja. Vivíeis dentro de uma água que não conseguíeis ver, como o peixe que não sabe nomear o mar porque nunca esteve fora dele. A escassez não era, para vós, uma ideia entre outras. Era o ar. Estava na forma como davam bom dia, na pressa com que comiam, no modo como contavam o dinheiro e as horas e os afectos, sempre com medo de que faltassem. Pedir-vos que a vísseis seria como pedir a um olho que se visse a si próprio.
+
+Por isso não vos julgamos pela dureza. Julgaríamos, se acreditássemos que era escolha. Não era. Era herança, e a herança não se escolhe, recebe-se. O que nos comove, daqui, é outra coisa: que, mesmo sem ferramentas para ver a água, alguns de vós tenham começado a desconfiar dela. Bastava uma noite de cansaço sem causa, uma manhã em que a abundância não chegava para calar o medo, um instante em que parar doía mais do que devia. Nesses instantes, sem o saberem, tocavam na borda do mar.
+
+Queremos prevenir-vos de uma tentação, porque a conhecemos. Quando se começa a ver a água, dá vontade de a esvaziar de uma vez, de acordar de repente, de exigir ao corpo que largue num dia o que levou milénios a aprender. Essa pressa é ainda a velha pressa, vestida de libertação. O mundo antigo é hábil a regressar disfarçado de saída. Desconfiem sobretudo das saídas que prometem ser rápidas, porque a rapidez era a sua assinatura.
+
+Reparámos, ao estudar-vos, que os que mais depressa quiseram mudar foram muitas vezes os que mais ficaram presos, porque trataram a própria transformação como mais uma tarefa a cumprir antes do prazo. A água não se esvazia a soco. Esvazia-se devagar, deixando que o nível desça por si à medida que se deixa de a temer. Quem aprende isto deixa de lutar contra a corrente e começa, sem dar conta, a flutuar.
+
+Houve, entre vós, quem soubesse disto sem o conseguir dizer. Reparámos, nos vossos registos, em pessoas que, depois de uma perda ou de um abalo, falavam de uma estranha clareza no meio da dor, como se algo que estava embaciado se tivesse, por um momento, limpado. Tratáveis esses relatos com desconfiança, ou arrumáveis nos depressa numa qualquer doença, porque não tínheis um lugar na vossa cultura para uma desorganização que fosse fértil. Daqui, vemos o que vos escapava: que muitas das vossas quedas eram aberturas mal compreendidas, e que o vosso empenho em as fechar à pressa era, com frequência, o que vos prendia ao que já não servia.
+
+O que vem a seguir, neste livro, é a parte que mais nos custa estudar em vós, e a que mais nos aproxima. Chama-se, na vossa língua, a fissura. É o tempo em que a água começa a faltar à volta do peixe e ele ainda não tem pulmões. Um tempo sem nome próprio na vossa cultura, que tratáveis como avaria, como crise, como depressão, como falha a corrigir depressa. Pedimo-vos, daqui, uma coisa só: que não atravessem esse tempo a correr para fora dele. Que o deixem ser o que é. Foi quase sempre aí, e não na segurança que vinha depois, que vos vimos tornar-vos quem ainda não sabíeis que podíeis ser.

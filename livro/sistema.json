@@ -1,0 +1,27 @@
+{
+  "hipotese": {
+    "rotulo": "Hipótese",
+    "cor": "#B08A4A",
+    "moldura": "caixa"
+  },
+  "pergunta": {
+    "rotulo": "Pergunta para ficar",
+    "cor": "#B08A4A",
+    "moldura": "olho"
+  },
+  "dica": {
+    "rotulo": "A dica",
+    "cor": "#87693a",
+    "moldura": "nota"
+  },
+  "arquivo": {
+    "rotulo": "Arquivo histórico · 2150",
+    "cor": "#B08A4A",
+    "moldura": "caixa-arquivo"
+  },
+  "emergencia": {
+    "rotulo": "Sinal de emergência",
+    "cor": "#B08A4A",
+    "moldura": "aberta"
+  }
+}
