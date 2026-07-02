@@ -102,7 +102,7 @@ export const PORTAS: Record<PortaId, PortaMarca> = {
     paleta: { bg: '#161518', bg2: '#0F0F10', texto: '#EAE4D8', destaque: '#C8A86B', nome: 'Faces of Fear' },
     hashtagsBase: ['#fear', '#selfawareness', '#psychology', '#emotionalpatterns', '#innerwork', '#mentalhealth', '#viviannedossantos'],
     fraseIdentidade: 'The Seven Faces of Fear show no monsters. They show the small fractures where fear learned to dress as ordinary life.',
-    bioEN: 'The seven shapes fear wears so you will not recognise it as fear.\nWhat are you protecting?\nA door by Vivianne dos Santos',
+    bioEN: 'Fear rarely looks like fear.\nIt looks like control, perfectionism, scarcity and silence.\nSeven faces. One root.\n📖 By Vivianne dos Santos',
     tipos: [
       { id: 'espelho', label: 'The Mirror', emoji: '🪞', descricao: 'Rejection. The fear of separation from belonging, disguised as approval.',
         angulo: 'Face: The Mirror, Rejection. Fears separation from belonging. Disguises itself as approval, conformity, the inability to say no. Symbolic world: mirrors, reflections, rooms, glances, portraits. Begin from an everyday scene of someone who agrees so as not to be left out, and leave the fear of displeasing underneath. Possible question: how many of your yeses do you actually like?' },
@@ -123,18 +123,18 @@ export const PORTAS: Record<PortaId, PortaMarca> = {
     ],
   },
 
-  // ── THE SIGNS OF NOT BELONGING ────────────────────────────────────────────
+  // ── THE OPEN THRESHOLD ────────────────────────────────────────────────────
   sinais: {
     id: 'sinais',
     lingua: 'en',
-    handle: 'signsofnotbelonging',
-    nome: 'The Signs of Not Belonging',
+    handle: 'theopenthreshold',
+    nome: 'The Open Threshold',
     emoji: '🚪',
-    pergunta: 'where is home now?',
+    pergunta: 'how do I belong without leaving myself behind?',
     posicionamento:
-      'The Signs of Not Belonging: the one door that smells of home (the inner home, not the physical one). It speaks of the place you return to when you stop protecting yourself.',
+      'The Open Threshold: the crossing between belonging and authenticity. Learning how to belong without leaving ourselves behind. The one door that smells of home, the inner home, not the physical one.',
     tese:
-      'There is a quiet leaving that happens between no longer fitting the old world and not yet having found the new one. Seven signs mark it.',
+      'There is a quiet leaving that happens between no longer fitting the old world and not yet having found the new one. Seven signs mark that threshold.',
     voz: 'soft, domestic, human. Longing exists but does not lead. The feeling that defines everything: I am not fully on the other side, yet I am no longer exactly here.',
     emocao: 'transition, belonging, serenity, longing (in that order). Never dramatic nostalgia, never rupture.',
     tom: ['soft and domestic', 'slow, literary, mature', 'late afternoon light', 'serene transition'],
@@ -148,10 +148,10 @@ export const PORTAS: Record<PortaId, PortaMarca> = {
     assinaturaVisual:
       'the Threshold: a door, a window, stairs, a balcony, a doorstep, a corridor, dusk, light crossing an empty space; always a crossing, never an arrival nor a departure',
     proibidoImg: ['departure', 'rupture', 'suitcases', 'trains', 'airports', 'endless roads', 'flying birds', 'lone silhouettes on cliffs', 'puzzle pieces', 'butterflies', 'wings', 'broken compasses', 'dramatic storms', 'literal illustration', 'futuristic cities', 'neon', 'visible technology'],
-    paleta: { bg: '#EFE7DA', bg2: '#F4EFE8', texto: '#5A4E42', destaque: '#A67C52', nome: 'Signs of Not Belonging' },
-    hashtagsBase: ['#belonging', '#notbelonging', '#home', '#selfawareness', '#presence', '#transition', '#viviannedossantos'],
-    fraseIdentidade: 'The Signs are the one door that smells of home. They speak of the place you return to when you stop protecting yourself.',
-    bioEN: 'Still loving a place while you slowly stop living in it.\nWhere is home now?\nA door by Vivianne dos Santos',
+    paleta: { bg: '#EFE7DA', bg2: '#F4EFE8', texto: '#5A4E42', destaque: '#A67C52', nome: 'The Open Threshold' },
+    hashtagsBase: ['#belonging', '#authenticity', '#threshold', '#selfawareness', '#presence', '#innerwork', '#viviannedossantos'],
+    fraseIdentidade: 'The Open Threshold is the one door that smells of home. It is where we learn to belong without leaving ourselves behind.',
+    bioEN: 'Learning how to belong\nwithout leaving ourselves behind.\nThe threshold between belonging and authenticity.',
     tipos: [
       { id: 'mesa', label: 'The Table', emoji: '🍽️', descricao: 'Presence without belonging: I am here but I am not home.',
         angulo: 'Sign: The Table. Recognition: I am here but I am not home. Theme: presence without belonging. Motif (never literal): chairs, empty places, kitchens, a chair pulled slightly back from the table. A domestic scene where someone is present and absent at once.' },
@@ -199,7 +199,7 @@ export const PORTAS: Record<PortaId, PortaMarca> = {
     paleta: { bg: '#EBE4D8', bg2: '#F5F1EA', texto: '#4D433A', destaque: '#9B866C', nome: 'The Great Transition' },
     hashtagsBase: ['#thegreattransition', '#presence', '#ourtimes', '#anthropology', '#lucidity', '#consciousness', '#viviannedossantos'],
     fraseIdentidade: 'The Great Transition does not show the future far away. It shows the future already hidden inside a kitchen of today, waiting for a name.',
-    bioEN: 'The future is already here, hidden in a kitchen of today.\nWhat are you living that has no name yet?\nA door by Vivianne dos Santos',
+    bioEN: 'Making sense of life as old systems fade and new ways of being begin to emerge.',
     tipos: [
       { id: 'esforco', label: 'Effort and Energy', emoji: '🔋', descricao: 'The tension between pushing and flowing, in a scene of today.',
         angulo: 'Tension (never named to the reader): Effort vs Energy. Show it through an everyday scene in one domain (body, work, time): someone who only knows how to move forward by pushing and feels that to stop is to fall. Two timescales in the scene. End in recognition.' },

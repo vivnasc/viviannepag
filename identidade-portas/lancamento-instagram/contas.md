@@ -34,28 +34,29 @@ As 3 contas publicam em INGLES (decisao da Vivianne). Nomes, handles e bios em i
 
 ### The Seven Faces of Fear
 - **Nome:** The Seven Faces of Fear
-- **@handle:** `thesevenfacesoffear` (alt: `sevenfacesoffear` · `the7facesoffear`)
+- **@handle:** `thesevenfacesoffear`
 - **Pergunta:** what am I protecting?
 - **Bio:**
 ```
-The seven shapes fear wears so you will not recognise it as fear.
-What are you protecting?
-A door by Vivianne dos Santos
+Fear rarely looks like fear.
+It looks like control, perfectionism, scarcity and silence.
+Seven faces. One root.
+📖 By Vivianne dos Santos
 ```
 - **Prompt da foto de perfil:**
 ```
 Extreme close-up of cracked black porcelain with a single seam of warm golden light glowing from inside the fracture, kintsugi, charcoal #0F0F10 background, minimal, centered, luxurious matte finish, fine grain, no text, no people, square
 ```
 
-### The Signs of Not Belonging
-- **Nome:** The Signs of Not Belonging
-- **@handle:** `signsofnotbelonging` (alt: `signsofdisplacement` · `the7signs`)
-- **Pergunta:** where is home now?
+### The Open Threshold
+- **Nome:** The Open Threshold
+- **@handle:** `theopenthreshold`
+- **Pergunta:** how do I belong without leaving myself behind?
 - **Bio:**
 ```
-Still loving a place while you slowly stop living in it.
-Where is home now?
-A door by Vivianne dos Santos
+Learning how to belong
+without leaving ourselves behind.
+The threshold between belonging and authenticity.
 ```
 - **Prompt da foto de perfil:**
 ```
@@ -64,13 +65,11 @@ A doorway ajar in a warm sunlit interior at late afternoon, soft golden light sp
 
 ### The Great Transition
 - **Nome:** The Great Transition
-- **@handle:** `thegreattransition` (alt: `greattransition` · `the.great.transition`)
+- **@handle:** `thegreattransition`
 - **Pergunta:** what world is being born?
 - **Bio:**
 ```
-The future is already here, hidden in a kitchen of today.
-What are you living that has no name yet?
-A door by Vivianne dos Santos
+Making sense of life as old systems fade and new ways of being begin to emerge.
 ```
 - **Prompt da foto de perfil:**
 ```

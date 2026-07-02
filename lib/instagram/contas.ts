@@ -17,7 +17,7 @@ export const CONTAS: { id: ContaId; nome: string; emoji: string }[] = [
   // Publicar e são substituídos por estas. Motor no molde da Soulab, distinguido
   // por theme.marca. Ver lib/portas/marca.ts.
   { id: 'medo', nome: 'thesevenfacesoffear', emoji: '🕯️' }, // The Seven Faces of Fear
-  { id: 'sinais', nome: 'signsofnotbelonging', emoji: '🚪' }, // The Signs of Not Belonging
+  { id: 'sinais', nome: 'theopenthreshold', emoji: '🚪' }, // The Open Threshold
   { id: 'transicao', nome: 'thegreattransition', emoji: '🌗' }, // The Great Transition
   // Soulab · laboratório criativo da alma (motor PRÓPRIO, separado dos outros).
   // Conteúdo gerado em /admin/soulab, distinguido por theme.marca. Ver lib/soulab/*.

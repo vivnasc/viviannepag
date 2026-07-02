@@ -61,7 +61,7 @@ export const PALETAS: Record<string, { bg: string; bg2: string; texto: string; d
   crescer: { bg: '#171310', bg2: '#0C0A08', texto: '#F4ECDD', destaque: '#E0B15A', nome: 'Crescer' },
   // As 3 portas novas (livros) · motor proprio, ver lib/portas/marca.ts
   medo: { bg: '#161518', bg2: '#0F0F10', texto: '#EAE4D8', destaque: '#C8A86B', nome: 'Faces of Fear' },
-  sinais: { bg: '#EFE7DA', bg2: '#F4EFE8', texto: '#5A4E42', destaque: '#A67C52', nome: 'Signs of Not Belonging' },
+  sinais: { bg: '#EFE7DA', bg2: '#F4EFE8', texto: '#5A4E42', destaque: '#A67C52', nome: 'The Open Threshold' },
   transicao: { bg: '#EBE4D8', bg2: '#F5F1EA', texto: '#4D433A', destaque: '#9B866C', nome: 'The Great Transition' },
 };
 
