@@ -11,7 +11,7 @@ const clamp = (x: number) => Math.max(0, Math.min(1, x));
 export default function RenderReelMae() {
   const [p, setP] = useState(0);
   // layout ajustável pela Vivianne (autonomia): posição/tamanho do texto e da geometria.
-  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number; img?: string; imgModo?: string; marca?: string; lingua?: string } | null>(null);
+  const [params, setParams] = useState<{ tema: string; segs: string[]; label?: string; multi: boolean; estatico: boolean; seed: string; av: string; ah: string; dist: number; txtSize: number; geoTop: number; geoW: number; img?: string; imgModo?: string; marca?: string; lingua?: string; formato?: string; citacao?: string; fonte?: string } | null>(null);
   const geoRef = useRef<HTMLDivElement>(null);
   const externo = useRef(false);
 
@@ -25,7 +25,8 @@ export default function RenderReelMae() {
     setParams({ tema, segs: segs.length ? segs : linhas, label: q.get('label') || undefined, multi: q.get('multi') === '1', estatico: q.get('static') === '1',
       seed: q.get('seed') || raw, av: q.get('av') || 'baixo', ah: q.get('ah') || 'centro', dist: num('dist', 12), txtSize: num('txtSize', 5.6), geoTop: num('geoTop', 15), geoW: num('geoW', 66),
       img: q.get('img') || undefined, imgModo: q.get('imgmodo') || undefined,
-      marca: q.get('marca') || undefined, lingua: q.get('lingua') || undefined });
+      marca: q.get('marca') || undefined, lingua: q.get('lingua') || undefined,
+      formato: q.get('formato') || undefined, citacao: q.get('citacao') || undefined, fonte: q.get('fonte') || undefined });
   }, []);
 
   useEffect(() => {
@@ -74,6 +75,54 @@ export default function RenderReelMae() {
   const img = params.img;
   const fundo = !!img && params.imgModo !== 'acento';
   const acento = !!img && params.imgModo === 'acento';
+  const sombra = fundo ? '0 2px 16px rgba(0,0,0,.92)' : undefined; // contraste do texto sobre imagem
+
+  // FORMATOS DE EXCERTO (@viviannewrites): manuscrito (papel premium) · quote sobre
+  // fotografia. Contraste forte de origem: véu local atrás do texto + sombra.
+  const grainSvg = (
+    <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.08, mixBlendMode: 'screen', zIndex: 4 }} viewBox="0 0 100 178" preserveAspectRatio="none">
+      <filter id="gq"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter>
+      <rect width="100" height="178" filter="url(#gq)" />
+    </svg>
+  );
+  if (params.formato === 'manuscrito' || params.formato === 'quotefoto') {
+    const cit = (params.citacao || params.segs.join(' ')).trim();
+    const src = String(params.fonte || '').toUpperCase();
+    if (params.formato === 'manuscrito') {
+      return (
+        <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', fontFamily: 'Georgia, "Times New Roman", serif',
+          background: 'radial-gradient(120% 80% at 50% 30%, #2a2013 0%, #17110b 55%, #0c0a08 100%)' }}>
+          <div style={{ position: 'absolute', top: '-10%', left: '50%', transform: 'translateX(-50%)', width: '120%', height: '70%', background: 'radial-gradient(60% 70% at 50% 0%, rgba(216,168,90,.28), transparent 70%)', zIndex: 1 }} />
+          {grainSvg}
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%) rotate(-2.2deg)', width: '76%', padding: '12% 9%', zIndex: 2,
+            background: 'linear-gradient(180deg,#f3ead8,#e9dcc2)', borderRadius: 6, color: '#2a2118', boxShadow: '0 30px 80px rgba(0,0,0,.6), inset 0 0 60px rgba(180,150,100,.15)' }}>
+            <div style={{ fontSize: '5vw', lineHeight: 1.5, fontStyle: 'italic' }}>{cit}</div>
+            <div style={{ width: '32%', height: 2, background: TOK.gold, margin: '8% 0 5%' }} />
+            {src && <div style={{ fontFamily: 'system-ui, sans-serif', fontSize: '2.4vw', letterSpacing: '.18em', color: '#8a6f45' }}>From {params.fonte}</div>}
+          </div>
+          <div style={{ position: 'absolute', bottom: '6%', left: 0, right: 0, textAlign: 'center', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.72, zIndex: 3 }}>{marca}</div>
+        </div>
+      );
+    }
+    // quote sobre fotografia — véu local escuro atrás do texto + sombra para contraste.
+    return (
+      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', fontFamily: 'Georgia, "Times New Roman", serif', color: TOK.light, background: '#0c0a08' }}>
+        {img && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+        )}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'radial-gradient(90% 42% at 50% 52%, rgba(8,6,4,.86), rgba(8,6,4,.34) 60%, transparent 78%)' }} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(180deg, rgba(8,6,4,.5), transparent 22%, transparent 78%, rgba(8,6,4,.6))' }} />
+        {grainSvg}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 12%' }}>
+          <div style={{ fontSize: '5.4vw', lineHeight: 1.42, textAlign: 'center', fontStyle: 'italic', textShadow: '0 2px 22px rgba(0,0,0,.85)' }}>{cit}</div>
+          <div style={{ width: '22%', height: 1, background: TOK.gold, margin: '7% 0 4%' }} />
+          {src && <div style={{ fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.3em', color: TOK.light, opacity: 0.92, textShadow: '0 1px 12px rgba(0,0,0,.9)' }}>From {params.fonte}</div>}
+        </div>
+        <div style={{ position: 'absolute', bottom: '6%', left: 0, right: 0, textAlign: 'center', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.light, opacity: 0.8, textShadow: '0 1px 12px rgba(0,0,0,.9)', zIndex: 3 }}>{marca}</div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', fontFamily: 'Georgia, "Times New Roman", serif', color: TOK.light,
@@ -86,11 +135,11 @@ export default function RenderReelMae() {
       {fundo && (<>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
-        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(90deg, rgba(10,7,5,.94) 28%, rgba(10,7,5,.4) 58%, rgba(10,7,5,.05) 82%)' }} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(90deg, rgba(9,6,4,.97) 30%, rgba(9,6,4,.66) 55%, rgba(9,6,4,.18) 82%, transparent 100%)' }} />
       </>)}
       {/* cabeçalho: marca */}
       <div style={{ position: 'absolute', top: '6.2%', left: '9%', right: '9%', display: 'flex', justifyContent: 'space-between',
-        fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.68, zIndex: 3 }}>
+        fontFamily: 'system-ui, sans-serif', fontSize: '2.2vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: fundo ? 0.85 : 0.7, textShadow: sombra, zIndex: 3 }}>
         <span>{marca}</span><span />
       </div>
       {/* geometria à DIREITA — linha FINA e nítida, como a referência */}
@@ -112,10 +161,10 @@ export default function RenderReelMae() {
       )}
       {/* coluna de TEXTO à esquerda */}
       <div style={{ position: 'absolute', left: '9%', width: '47%', top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
-        <div style={{ fontSize: '6.3vw', lineHeight: 1.14, textTransform: 'uppercase', letterSpacing: '.012em',
+        <div style={{ fontSize: '6.3vw', lineHeight: 1.14, textTransform: 'uppercase', letterSpacing: '.012em', textShadow: sombra,
           opacity: titOp, transform: `translateY(${(1 - titOp) * 10}px)` }}>{titulo}</div>
-        <div style={{ width: `${ruleW}%`, height: 1, margin: '6.5% 0 6%', background: TOK.gold, opacity: 0.85 }} />
-        <div style={{ position: 'relative', minHeight: estatico ? undefined : '22vh', fontSize: '3.4vw', lineHeight: 1.56, fontStyle: 'italic', color: '#cbb691' }}>
+        <div style={{ width: `${ruleW}%`, height: 1, margin: '6.5% 0 6%', background: TOK.gold, opacity: 0.9 }} />
+        <div style={{ position: 'relative', minHeight: estatico ? undefined : '22vh', fontSize: '3.4vw', lineHeight: 1.56, fontStyle: 'italic', color: fundo ? '#ece1cb' : '#cbb691', textShadow: sombra }}>
           {estatico ? (
             <div>{corpo.join(' ')}</div>
           ) : corpo.map((t, i) => {
@@ -127,7 +176,7 @@ export default function RenderReelMae() {
         </div>
       </div>
       {/* rodapé: etiqueta */}
-      <div style={{ position: 'absolute', bottom: '6.2%', left: '9%', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: 0.6, zIndex: 3 }}>{label}</div>
+      <div style={{ position: 'absolute', bottom: '6.2%', left: '9%', fontFamily: 'system-ui, sans-serif', fontSize: '2.1vw', letterSpacing: '.34em', textTransform: 'uppercase', color: TOK.goldSoft, opacity: fundo ? 0.82 : 0.62, textShadow: sombra, zIndex: 3 }}>{label}</div>
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(135% 95% at 58% 42%, transparent 48%, rgba(12,9,6,.92) 100%)' }} />
     </div>
   );
