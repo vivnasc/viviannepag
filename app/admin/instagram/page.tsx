@@ -17,7 +17,7 @@ function InstagramInner() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
-  const [estado, setEstado] = useState<{ ligado: boolean; username?: string; erro?: string; igUserId?: string } | null>(null);
+  const [estado, setEstado] = useState<{ ligado: boolean; username?: string; erro?: string; igUserId?: string; aviso?: string; igCorreto?: string; igCorretoUser?: string } | null>(null);
   const [aVerificar, setAVerificar] = useState(false);
   const [perms, setPerms] = useState<string[] | null>(null);
   const [permsBusy, setPermsBusy] = useState(false);
@@ -84,6 +84,17 @@ function InstagramInner() {
               {perms.length === 0 ? <span className="text-[0.7rem] opacity-60">sem permissões (ou token inválido)</span> : perms.map((p) => (
                 <span key={p} className="text-[0.62rem] px-2 py-0.5 rounded-full border border-ocre/25 text-creme-2/70">{p}</span>
               ))}
+            </div>
+          )}
+          {/* AVISO de diagnóstico: ID de Página em vez de IG, ou conta não-Business.
+              O erro nº100 ao publicar vem daqui. Se houver um ID certo, oferece trocá-lo. */}
+          {estado?.aviso && (
+            <div className="mt-2 p-2 rounded-lg border" style={{ borderColor: '#D9A55755', background: '#D9A55714' }}>
+              <p className="text-[0.74rem] text-ambar">⚠︎ {estado.aviso}</p>
+              {estado.igCorreto && (
+                <button onClick={() => { setIgId(estado.igCorreto!); setMsg(`ID do Instagram preenchido (${estado.igCorreto}${estado.igCorretoUser ? ` · @${estado.igCorretoUser}` : ''}). Cola um token e guarda.`); }}
+                  className="mt-1.5 text-[0.68rem] px-2.5 py-1 rounded-full border border-ambar/50 bg-ambar/10 text-ambar hover:bg-ambar/20">usar este ID → {estado.igCorreto}</button>
+              )}
             </div>
           )}
         </div>
