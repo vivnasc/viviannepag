@@ -51,6 +51,11 @@ export async function gerarPecaCrescer(
     : '';
   const tematica = getTematica(tematicaId) ?? getTematica('transformacao')!;
   const formato = getFormato(formatoId) ?? getFormato('frase')!;
+  // EXCERTO: é uma CITAÇÃO fiel ao livro, NÃO uma travessia. Override que desliga a estrutura
+  // faca→viragem→vantagem e pede só o excerto forte que se sustenta sozinho.
+  const regraExcerto = formato.id === 'excerto'
+    ? `\n\n⚑ FORMATO EXCERTO (regra dura, prioritária): esta peça é uma CITAÇÃO fiel, quase à letra, de um livro dela — NÃO uma travessia. IGNORA a estrutura faca→limiar→vantagem. Devolve em "frase" UM excerto curto (1 a 2 frases), o mais forte e citável da fonte, que se sustém sozinho como citação de autora; sem explicar, sem CTA, sem desenvolver. "momentos" vazio.`
+    : '';
   const visual = getVisual(visualId) ?? getVisual('conceptual')!;
   const voz = getVoz(vozId) ?? getVoz('direta')!;
   const semImagem = !visual.promptBase;
@@ -78,7 +83,7 @@ ${veiaVisao.texto}
 --- FIM DA TRAVESSIA ---` : '';
   const linhagem = LINHAGEM_POOL.length ? [LINHAGEM_POOL[seed % LINHAGEM_POOL.length], LINHAGEM_POOL[(seed * 7 + 3) % LINHAGEM_POOL.length]].filter(Boolean).join(' · ') : '';
 
-  const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}${regraLingua}
+  const sys = `És a voz da conta de Instagram da Vivianne dos Santos (@${handle}) sobre CRESCIMENTO e EVOLUÇÃO. ${CRESCER.posicionamento}${regraLingua}${regraExcerto}
 
 A VOZ (decisão de marca, inviolável): ${CRESCER.voz}
 

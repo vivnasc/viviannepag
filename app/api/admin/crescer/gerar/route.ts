@@ -46,6 +46,14 @@ async function fundoImagem(prompt: string, slug: string): Promise<string | null>
 
 const pick = <T,>(arr: T[], i: number) => arr[i % arr.length];
 
+// título do livro em EN (para o excerto do @viviannewrites citar a fonte em inglês).
+const LIVRO_EN: Record<string, string> = {
+  'A Grande Transição': 'The Great Transition',
+  'As Sete Faces do Medo': 'The Seven Faces of Fear',
+  'Os 7 Sinais de Desencaixe': 'The Seven Signs of Not Belonging',
+  'Os 7 Véus do Despertar': 'The Seven Veils of Awakening',
+};
+
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ erro: 'auth' }, { status: 401 });
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -161,6 +169,11 @@ export async function POST(req: Request) {
       // imagem) roda por seed, para as peças não saírem todas iguais. A imagem sai do BANCO.
       const visualTema = (fonte === 'livro' ? TEMATICAS[seed % TEMATICAS.length].id : job.tematica) as TematicaId;
       const escolha = imagemDoTema(visualTema, slug, banco);
+      // EXCERTO: sai como CITAÇÃO — manuscrito (papel) ou quote sobre foto (se houver imagem).
+      // A citação = a frase minerada; a fonte = o livro da veia (título traduzido em EN).
+      const ehExcerto = job.formato === 'excerto' && !!veia;
+      const formatoRender = ehExcerto ? (escolha ? 'quotefoto' : 'manuscrito') : undefined;
+      const fonteLivro = ehExcerto && veia ? (lingua === 'en' ? (LIVRO_EN[veia.livroTitulo] || veia.livroTitulo) : veia.livroTitulo) : undefined;
       // ENSAIO = carrossel tipográfico (texto longo, sem imagem, editorial: serif
       // menor, alinhado à esquerda, mais tempo por momento). Os outros levam imagem.
       const ehEnsaio = job.formato === 'ensaio';
@@ -205,7 +218,7 @@ export async function POST(req: Request) {
         brief: peca.frase,
         dias,
         // reel: escolha dela; veia*: a fonte minerada do livro (para ver a cobertura e não repetir).
-        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: visualTema, formato: job.formato, visual: job.visual, voz, reel: ehReel, lingua, marca: marcaHandle, ...(escolha ? { img: escolha.url, imgModo: escolha.modo, imgFamilia: escolha.familia } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
+        theme: { formato: 'reel', subtipo: 'kinetico', video: true, mundo: CRESCER_MUNDO, marca: 'crescer', crescer: { tematica: visualTema, formato: job.formato, visual: job.visual, voz, reel: ehReel, lingua, marca: marcaHandle, ...(escolha ? { img: escolha.url, imgModo: escolha.modo, imgFamilia: escolha.familia } : {}), ...(ehExcerto ? { formatoRender, citacao: peca.frase, fonte: fonteLivro } : {}), ...(veia ? { veiaId: veia.id, veiaTitulo: veia.titulo, veiaLivro: veia.livroTitulo } : {}), ...(veiaVisao ? { veiaVisaoId: veiaVisao.id, veiaVisaoTitulo: veiaVisao.titulo } : {}) } },
       });
     } catch (e) { ultimoErro = e instanceof Error ? e.message : String(e); }
   }

@@ -240,7 +240,7 @@ export const getTematica = (id: string): Tematica | undefined => TEMATICAS.find(
 // DECISÃO da Vivianne (jun 2026): manter TODOS os formatos, mas garantir que cada
 // um sai DIGNO, na voz e no visual (ver a régua de DIGNIDADE no gerador). Cada
 // formato abre sempre com uma FACA e é forte e claro, nunca difuso nem encheção.
-export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio' | 'pordetras';
+export type FormatoId = 'frase' | 'momentos' | 'pergunta' | 'lista' | 'reflexao' | 'cena' | 'ensaio' | 'pordetras' | 'excerto';
 
 export interface FormatoCrescer {
   id: FormatoId;
@@ -304,6 +304,12 @@ export const FORMATOS: FormatoCrescer[] = [
       '3) a CAMADA por baixo: o que aquilo está mesmo a proteger ou a pedir (a necessidade real, o medo, a herança), em linguagem de vida, NUNCA o conceito nem o nome técnico; ' +
       '4) o ALÍVIO: o que muda quando se vê isto, sem ordem nem "deixa de" (mais "quando vês, já não te comanda às escuras"). ' +
       'Tom: revela, não acusa; a pessoa sente-se compreendida, nunca apanhada. Cada tela uma respiração, todas diferentes, sem travessões.',
+  },
+  {
+    id: 'excerto', label: 'Excerto (livro)', emoji: '📖', multi: false,
+    descricao: 'Uma frase quase textual de um livro dela + o título do livro. Sai em manuscrito ou sobre foto.',
+    estrutura:
+      'UM excerto CURTO (1 a 2 frases), FIEL quase à letra à veia/livro, a linha mais forte e citável, que se sustenta sozinha como uma citação de autora. Não explica, não desenvolve, não faz travessia: é a frase que fica. Nada de "capa-faca" nem CTA; é uma citação, funda e limpa.',
   },
 ];
 

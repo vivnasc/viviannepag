@@ -115,7 +115,10 @@ async function main() {
       const marca = row.theme?.crescer?.marca || '';
       const lingua = row.theme?.crescer?.lingua || '';
       const marcaQ = `${lingua === 'en' ? '&lingua=en' : ''}${marca ? `&marca=${encodeURIComponent(marca)}` : ''}`;
-      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${imgQ}${marcaQ}${layoutQ ? '&' + layoutQ : ''}`;
+      // excerto (manuscrito/quote sobre foto): citação fiel do livro + a fonte.
+      const cr = row.theme?.crescer || {};
+      const excertoQ = cr.formatoRender ? `&formato=${encodeURIComponent(cr.formatoRender)}${cr.citacao ? `&citacao=${encodeURIComponent(cr.citacao)}` : ''}${cr.fonte ? `&fonte=${encodeURIComponent(cr.fonte)}` : ''}` : '';
+      const url = `${SITE_URL}/render-reel-mae?tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(row.slug)}${imgQ}${marcaQ}${excertoQ}${layoutQ ? '&' + layoutQ : ''}`;
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });

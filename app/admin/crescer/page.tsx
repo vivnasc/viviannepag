@@ -40,6 +40,7 @@ const CORES_TEXTO: { id: string; nome: string }[] = [
 type Peca = {
   tematica: string | null; formato: string; visual: string | null; reel?: boolean; veiaTitulo?: string | null; veiaLivro?: string | null;
   img?: string | null; imgModo?: string | null; lingua?: string | null; marca?: string | null;
+  formatoRender?: string | null; citacao?: string | null; fonte?: string | null;
   slug: string; texto: string; conceito: string; destaque: string[];
   imageUrl: string | null; videoUrl: string | null; clipUrl: string | null; imagens: string[] | null;
   somUrl: string | null; somTipo: string | null; somEstilo: string | null; vozUrl?: string | null;
@@ -139,7 +140,9 @@ function PreviewBox({ peca }: { peca: Peca }) {
   const imgQ = peca.img ? `&img=${encodeURIComponent(peca.img)}${peca.imgModo ? `&imgmodo=${encodeURIComponent(peca.imgModo)}` : ''}` : '';
   // língua/handle: PT = @vivianne.dos.santos · EN = @viviannewrites (o pré-ver mostra o certo).
   const marcaQ = `${peca.lingua === 'en' ? '&lingua=en' : ''}${peca.marca ? `&marca=${encodeURIComponent(peca.marca)}` : ''}`;
-  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}${imgQ}${marcaQ}&${layQ}`;
+  // excerto: manuscrito/quote sobre foto (citação fiel do livro + a fonte).
+  const excertoQ = peca.formatoRender ? `&formato=${encodeURIComponent(peca.formatoRender)}${peca.citacao ? `&citacao=${encodeURIComponent(peca.citacao)}` : ''}${peca.fonte ? `&fonte=${encodeURIComponent(peca.fonte)}` : ''}` : '';
+  const q = `tema=${encodeURIComponent(tema)}&linhas=${encodeURIComponent(linhas.join('|'))}&seed=${encodeURIComponent(peca.slug)}${imgQ}${marcaQ}${excertoQ}&${layQ}`;
   const Op = ({ k, val, children }: { k: keyof typeof LAY0; val: string; children: React.ReactNode }) => (
     <button onClick={() => setL(k, val)} className="text-[0.56rem] px-1.5 py-0.5 rounded border" style={bt(lay[k] === val)}>{children}</button>
   );
@@ -439,6 +442,7 @@ export default function CrescerPage() {
   const [vis] = useState<Set<VisualId>>(new Set(['minimal'])); // minimalista/tipográfico: sem imagem por agora (a imagem, se voltar, será símbolos/desenhos, a estudar)
   const [voz] = useState<VozId>('direta'); // sempre DIRETA (a poética saiu)
   const [saida, setSaida] = useState<'reel' | 'carrossel'>('reel'); // reel por defeito (mais alcance); carrossel quando ela quiser
+  const [lingua, setLingua] = useState<'pt' | 'en'>('pt'); // PT = @vivianne.dos.santos · EN = @viviannewrites (selo internacional)
   const [fonte, setFonte] = useState<'livro' | 'tema'>('livro'); // minerar os livros (defeito) vs partir de uma temática
   const [imagemModo] = useState<'cena' | 'ilustrar'>('cena'); // sem imagem por agora (minimal); mantido só para o payload
   const [quantos, setQuantos] = useState(1); // 1 por defeito: uma de cada vez, sem ser obrigada a lote
@@ -501,7 +505,7 @@ export default function CrescerPage() {
       const r = await fetch('/api/admin/crescer/gerar', {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida, fonte, imagemModo,
+          tematicas: [...temas], formatos: [...fmts], visuais: [...vis], quantos, surpreender, voz, saida, fonte, imagemModo, lingua,
           tema: tema.trim() || undefined, tipografia: padrao.tipografia, efeito: padrao.efeito,
         }),
       });
@@ -684,6 +688,12 @@ export default function CrescerPage() {
           <div className="flex flex-wrap gap-1.5 mb-3">
             <Chip on={saida === 'reel'} onClick={() => setSaida('reel')} title="vídeo vertical, o texto aparece ritmado (mais alcance)"><span className="mr-1">🎬</span>reel</Chip>
             <Chip on={saida === 'carrossel'} onClick={() => setSaida('carrossel')} title="telas 4:5 que se deslizam, texto estático que se lê"><span className="mr-1">🎠</span>carrossel</Chip>
+          </div>
+
+          <p className="text-[0.62rem] uppercase tracking-widest opacity-50 mb-1.5">língua <span className="opacity-50">(o EN sai sob @viviannewrites)</span></p>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <Chip on={lingua === 'pt'} onClick={() => setLingua('pt')} title="conta-mãe portuguesa · @vivianne.dos.santos"><span className="mr-1">🇵🇹</span>português</Chip>
+            <Chip on={lingua === 'en'} onClick={() => setLingua('en')} title="selo internacional · @viviannewrites"><span className="mr-1">🇬🇧</span>english</Chip>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
